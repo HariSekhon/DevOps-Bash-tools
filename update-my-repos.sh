@@ -21,8 +21,8 @@ for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
         pushd "$repo"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
         git pull
-        if [ "$1" = "quick" ]; then
-            make update-no-recompile || make update
+        if [ "${1:-}" = "quick" ]; then
+            make update-no-recompile || exit 1
         else
             make update
         fi
