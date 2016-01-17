@@ -18,5 +18,5 @@ set -euo pipefail
 #if [ -z "${TRAVIS:-}" ]; then
     which travis &>/dev/null ||
         gem install travis --no-rdoc --no-ri
-    travis lint
+    yes "" | travis lint
 #fi
