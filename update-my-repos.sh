@@ -21,7 +21,11 @@ for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
         pushd "$repo"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
         git pull
-        make update
+        if [ "$1" = "quick" ]; then
+            make update2 || make update
+        else
+            make update
+        fi
         popd
     else
         git clone "https://github.com/harisekhon/$repo"
