@@ -26,3 +26,6 @@ update:
 .PHONY: update-no-recompile
 update-no-recompile:
 	git pull
+
+clean:
+	@echo Nothing to clean
