@@ -14,6 +14,7 @@
 
 # Repos to git clone or update, one per line
 
+bash-tools
 nagios-plugins
 pytools
 tools
