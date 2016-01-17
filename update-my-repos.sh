@@ -19,6 +19,7 @@ srcdir="`dirname $0`"
 for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
     if [ -d "$repo" ]; then
         pushd "$repo"
+        git pull
         make update
         popd
     else
