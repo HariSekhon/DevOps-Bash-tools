@@ -1,0 +1,15 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2014-11-29 01:02:47 +0000 (Sat, 29 Nov 2014)
+#
+#  vim:ts=4:sts=4:sw=4:et
+
+language: python
+python:
+  - "2.6"
+
+install:
+  - make
+
+script:
+  - make test
