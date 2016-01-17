@@ -13,3 +13,6 @@
 
 make:
 	echo Nothing to build	
+
+update:
+	git pull
