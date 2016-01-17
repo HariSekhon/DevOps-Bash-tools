@@ -14,12 +14,18 @@
 
 # Repos to git clone or update, one per line
 
+# always do this one first
 bash-tools
-nagios-plugins
-pytools
-tools
+
+# libraries first - if these don't work then the dependent repos beneath them won't work
 lib
-spotify
-spark-apps
 lib-java
 pylib
+
+pytools
+tools
+spotify
+spark-apps
+
+# biggest repo last
+nagios-plugins
