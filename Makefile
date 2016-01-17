@@ -11,8 +11,14 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
+.PHONY: make
 make:
 	echo Nothing to build	
 
+.PHONY: update
 update:
+	git pull
+
+.PHONY: update-no-recompile
+update-no-recompile:
 	git pull
