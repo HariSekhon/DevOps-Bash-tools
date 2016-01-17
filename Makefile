@@ -15,6 +15,10 @@
 make:
 	echo Nothing to build	
 
+.PHONY: test
+test:
+	./all.sh
+
 .PHONY: update
 update:
 	git pull
