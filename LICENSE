@@ -1,0 +1,45 @@
+=======================================
+HARI SEKHON LICENSE Revision 2013112300
+=======================================
+
+Copyright (c) 2006 onwards, Hari Sekhon
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, is permitted provided that the following conditions are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. All advertising materials mentioning features or use of this software
+   must display the following acknowledgement:
+   This product includes software developed by Hari Sekhon.
+4. Neither the name Hari Sekhon nor any affiliates may be used to endorse or
+   promote products derived from this software without specific prior written
+   permission.
+5. Modifications may be released to the public only with prior written permission
+   from Hari Sekhon. Forking on GitHub is permitted for the purpose of creating
+   patch pull requests back to the original repository.
+6. Private modifications may be made to suit requirements, but any modifications
+   to this work, whether publicly disclosed or not, must be sent back to
+   Hari Sekhon via GitHub (https://github.com/harisekhon/nagios-plugins) or
+                   LinkedIn (https://www.linkedin.com/in/harisekhon)
+   and must come under this same license. Any such modifications may be
+   reincorporated for the improvement of this software.
+7. This work may not be sold without prior written permission from Hari Sekhon
+8. This license may change at any time and the latest revision supersedes
+   all prior revisions.
+9. Alternative licensing must be agreed in writing with Hari Sekhon prior
+   to public availability.
+
+THIS SOFTWARE IS PROVIDED BY Hari Sekhon ''AS IS'' AND ANY
+EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL Hari Sekhon OR ANY AFFILIATED BODY BE LIABLE FOR ANY
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
