@@ -11,8 +11,8 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
-.PHONY: make
-make:
+.PHONY: build
+build:
 	echo Nothing to build	
 
 .PHONY: test
