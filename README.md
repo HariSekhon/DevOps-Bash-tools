@@ -1,4 +1,4 @@
 Bash Tools
 ==========
 
-Utilities library for my other repos.
+Bash utility library used by my other repos.
