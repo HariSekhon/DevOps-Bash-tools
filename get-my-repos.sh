@@ -18,4 +18,7 @@ srcdir="`dirname $0`"
 
 for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
     [ -d "$repo" ] || git clone "https://github.com/harisekhon/$repo"
+    pushd "$repo"
+    make
+    popd
 done
