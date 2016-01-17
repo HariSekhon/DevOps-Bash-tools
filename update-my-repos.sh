@@ -19,6 +19,7 @@ srcdir="`dirname $0`"
 for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
     if [ -d "$repo" ]; then
         pushd "$repo"
+        # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
         git pull
         make update
         popd
