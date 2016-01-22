@@ -16,7 +16,7 @@
 set -euo pipefail
 
 for x in $(find "${1:-.}" -type f -iname '*.sh'); do
-    echo -n "checking $x"
+    echo -n "checking shell syntax: $x"
     bash -n "$x"
     echo " => OK"
 done
