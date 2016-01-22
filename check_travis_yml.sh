@@ -21,3 +21,5 @@ if [ -z "${TRAVIS:-}" ]; then
         gem install travis --no-rdoc --no-ri
     yes "y" | travis lint
 fi
+echo "Travis validation succeeded"
+echo
