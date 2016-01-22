@@ -15,8 +15,14 @@
 
 set -euo pipefail
 
-for target in $(grep '^[[:alpha:]]\+:' Makefile | sort -u | sed 's/:$//'); do
-    make --warn-undefined-variables -n $target >/dev/null ||
-        { echo "Makefile validation FAILED"; exit 1; }
+grep '^[[:alpha:]]\+:' Makefile |
+sort -u |
+sed 's/:$//' |
+while read target; do
+    if ! make --warn-undefined-variables -n $target >/dev/null; then
+        echo "Makefile validation FAILED"
+        exit 1
+    fi
 done
 echo "Makefile validation SUCCEEDED"
+echo
