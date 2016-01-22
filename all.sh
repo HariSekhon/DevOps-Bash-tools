@@ -39,4 +39,5 @@ echo "
 #"$srcdir/help.sh"
 
 "$srcdir/check_makefile.sh"
+"$srcdir/check_shell_syntax.sh"
 "$srcdir/check_travis_yml.sh"
