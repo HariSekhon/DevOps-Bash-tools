@@ -18,6 +18,7 @@
 # split from utils.sh as this is specific to this repo
 
 set -eu
+[ -n "${DEBUG:-}" ] && set -x
 
 isExcluded(){
     local prog="$1"

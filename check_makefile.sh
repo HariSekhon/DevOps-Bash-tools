@@ -14,6 +14,7 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
 
 grep '^[[:alpha:]]\+:' Makefile |
 sort -u |

@@ -14,6 +14,7 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
 srcdir="`dirname $0`"
 
 for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do

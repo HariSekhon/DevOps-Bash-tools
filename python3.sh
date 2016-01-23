@@ -14,6 +14,7 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
 
 pip install caniusepython3
 echo "Testing module dependencies for Python 3 compatibility"

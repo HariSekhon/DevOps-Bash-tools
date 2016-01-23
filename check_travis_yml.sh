@@ -14,6 +14,7 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
 
 exit 0
 if [ -z "${TRAVIS:-}" ]; then
