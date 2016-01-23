@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$srcdir/utils.sh"
 
 hr
-./center80.sh "Compiling all Python / Jython files"
+"$srcdir/center80.sh" "Compiling all Python / Jython files"
 hr
 echo
 
