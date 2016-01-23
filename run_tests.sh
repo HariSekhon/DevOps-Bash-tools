@@ -16,15 +16,13 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-scripts="$(find . -iname 'test*.sh' | sort -f)"
-
 echo "
 # ==================== #
 # Running Test Scripts
 # ==================== #
 "
 
-scripts="$(find "${1:-}" -iname 'test*.sh' | sort -f)"
+scripts="$(find "${1:-.}" -iname 'test*.sh' | sort -f)"
 
 for script in $scripts; do
     ./$script -vvv
