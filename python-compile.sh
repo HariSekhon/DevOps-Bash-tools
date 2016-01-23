@@ -24,7 +24,7 @@ hr
 echo
 
 for x in $(find . -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
-    [ -n "${isExcluded:-}" ] && isExcluded "$x" && continue
+    type isExcluded &>/dev/null && isExcluded "$x" && continue
     echo "compiling $x"
     python -m py_compile $x
 done
