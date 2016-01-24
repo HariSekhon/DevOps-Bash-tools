@@ -13,6 +13,10 @@ sudo: false
 notifications:
   email: false
 
+branches:
+  only:
+    - master
+
 install:
   - make
 
