@@ -21,7 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Perl Syntax Checks"
 
-for x in $(find . -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm'); do
+for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm'); do
     isExcluded "$x" && continue
     #printf "%-50s" "$x:"
     #$perl -Tc $I_lib ./$x
