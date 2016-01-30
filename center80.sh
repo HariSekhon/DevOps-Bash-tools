@@ -13,6 +13,10 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
+# This is only for local use, there is a much better Python version in my PyTools repo:
+#
+#  https://github.com/harisekhon/pytools
+
 # borrowed from here:
 # 
 # http://codereview.stackexchange.com/questions/94449/text-centering-function-in-bash
