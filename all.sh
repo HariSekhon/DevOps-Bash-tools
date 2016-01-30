@@ -32,7 +32,7 @@ section "Running Bash Tools ALL"
 
 "$srcdir/perl_syntax.sh"
 
-"$srcdir/python-compile.sh"
+"$srcdir/python_compile.sh"
 
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
