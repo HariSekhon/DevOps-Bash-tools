@@ -30,9 +30,9 @@ section "Running Bash Tools ALL"
 
 #"$srcdir/python3.sh"
 
-"$srcdir/perl_syntax.sh"
+#"$srcdir/perl_syntax.sh"
 
-"$srcdir/python_compile.sh"
+#"$srcdir/python_compile.sh"
 
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
