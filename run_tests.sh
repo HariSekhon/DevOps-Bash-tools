@@ -15,15 +15,18 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "
-# ==================== #
-# Running Test Scripts
-# ==================== #
-"
+. "$srcdir/utils.sh"
+
+section "Running Test Scripts"
 
 scripts="$(find "${1:-.}" -iname 'test*.sh' | sort -f)"
 
 for script in $scripts; do
     ./$script -vvv
 done
+
+section "Test Scripts Completed"
+echo
+echo

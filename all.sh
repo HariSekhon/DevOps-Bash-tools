@@ -17,11 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "
-# ====================== #
-# Running Bash Tools ALL
-# ====================== #
-"
+. "$srcdir/utils.sh"
+
+section "Running Bash Tools ALL"
 
 #"$srcdir/whitespace.sh"
 
@@ -31,6 +29,10 @@ echo "
 #"$srcdir/pylint.sh"
 
 #"$srcdir/python3.sh"
+
+#"$srcdir/perl_syntax.sh"
+
+#"$srcdir/python_compile.sh"
 
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
@@ -42,3 +44,5 @@ echo "
 "$srcdir/check_makefile.sh"
 "$srcdir/check_shell_syntax.sh"
 "$srcdir/check_travis_yml.sh"
+
+section "Bash Tools All Checks Completed"
