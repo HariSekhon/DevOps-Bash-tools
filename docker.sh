@@ -18,10 +18,10 @@
 is_docker_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
     if which docker &>/dev/null; then
-        if docker ps &>/dev/null; then
+        if docker info &>/dev/null; then
             return 0
         fi
     fi
-    echo "Docker not available"
+    #echo "Docker not available"
     return 1
 }
