@@ -24,9 +24,9 @@ section "Perl Syntax Checks"
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
     isExcluded "$x" && continue
     #printf "%-50s" "$x:"
-    #$perl -Tc $I_lib ./$x
+    #$perl -Tc $I_lib $x
     # -W too noisy
-    perl -Tc ./$x
+    perl -Tc $x
 done
 section "All Perl programs passed syntax check"
 echo
