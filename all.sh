@@ -21,7 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Running Bash Tools ALL"
 
-#"$srcdir/whitespace.sh"
+"$srcdir/whitespace.sh"
 
 #"$srcdir/compile.sh"
 
@@ -42,7 +42,9 @@ section "Running Bash Tools ALL"
 #"$srcdir/help.sh"
 
 "$srcdir/check_makefile.sh"
+
 "$srcdir/check_shell_syntax.sh"
+
 "$srcdir/check_travis_yml.sh"
 
 section "Bash Tools All Checks Completed"
