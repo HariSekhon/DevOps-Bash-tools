@@ -21,7 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Running Bash Tools ALL"
 
-"$srcdir/whitespace.sh"
+#"$srcdir/whitespace.sh"
 
 #"$srcdir/compile.sh"
 
