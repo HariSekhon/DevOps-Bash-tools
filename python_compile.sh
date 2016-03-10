@@ -25,7 +25,7 @@ echo
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     type isExcluded &>/dev/null && isExcluded "$x" && continue
     echo "compiling $x"
-    python -m py_compile $x
+    python -m py_compile "$x"
 done
 section "Python Compile Completed Successfully"
 echo
