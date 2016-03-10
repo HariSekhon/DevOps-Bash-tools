@@ -25,3 +25,13 @@ is_docker_available(){
     #echo "Docker not available"
     return 1
 }
+
+is_docker_container_running(){
+    local containers="$(docker ps)"
+    [ -n "${DEBUG:-}" ] &&
+        echo "Containers Running:
+$containers
+"
+    grep -q "[[:space:]]$1$" <<< "$containers" && return 0
+    return 1
+}
