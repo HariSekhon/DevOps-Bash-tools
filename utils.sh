@@ -62,4 +62,4 @@ is_travis(){
     fi
 }
 
-, "$srcdir/docker.sh"
+. "$srcdir/docker.sh"
