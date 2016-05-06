@@ -53,3 +53,11 @@ is_mac(){
         return 1
     fi
 }
+
+is_travis(){
+    if [ -n "${TRAVIS:-}" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
