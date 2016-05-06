@@ -61,3 +61,5 @@ is_travis(){
         return 1
     fi
 }
+
+, "$srcdir/docker.sh"
