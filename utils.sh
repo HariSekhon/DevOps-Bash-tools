@@ -37,3 +37,19 @@ fi
 #export SPARK_HOME="$(ls -d tests/spark-*-bin-hadoop* | head -n 1)"
 
 type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
+
+is_linux(){
+    if [ "$(uname -s)" = "Linux" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+is_mac(){
+    if [ "$(uname -s)" = "Darwin" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
