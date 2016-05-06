@@ -20,7 +20,7 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if ! type isExcluded; then
+if ! type isExcluded &>/dev/null; then
     isExcluded(){
         local prog="$1"
         [[ "$prog" =~ ^\* ]] && return 0
