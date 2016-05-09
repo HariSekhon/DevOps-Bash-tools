@@ -35,3 +35,7 @@ $containers
     grep -q "[[:space:]]$1$" <<< "$containers" && return 0
     return 1
 }
+
+external_docker(){
+    return [ -n "${EXTERNAL_DOCKER:-}" ]
+}
