@@ -67,7 +67,7 @@ launch_container(){
         #docker rm -f "$container" &>/dev/null
         #sleep 1
         if ! is_docker_container_running "$container"; then
-            if [[ "$container" =~ *test* ]]; then
+            if [[ "$container" = *test* ]]; then
                 docker rm -f "$container" &>/dev/null || :
             fi
             port_mappings=""
