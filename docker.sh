@@ -37,5 +37,5 @@ $containers
 }
 
 external_docker(){
-    return [ -n "${EXTERNAL_DOCKER:-}" ]
+    [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
 }
