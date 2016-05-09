@@ -75,7 +75,7 @@ launch_container(){
                 port_mappings="$port_mappings -p $port:$port"
             done
             echo -n "starting container: "
-            # need tty for sudo which hadoop-start.sh / hbase-start.sh / mesos-start.sh use while SSH'ing localhost
+            # need tty for sudo which hadoop-start.sh / hbase-start.sh / mesos-start.sh / spark-start.sh use while SSH'ing localhost
             docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings $image ${DOCKER_CMD:-}
             hr
             echo "Running containers:"
