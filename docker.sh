@@ -74,7 +74,7 @@ launch_container(){
             done
             echo -n "starting container: "
             # need tty for sudo which hbase-start.sh local uses while ssh'ing localhost
-            docker run -d -t --name "$container" $port_mappings $image
+            docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings $image ${DOCKER_CMD:-}
             hr
             echo "Running containers:"
             docker ps
