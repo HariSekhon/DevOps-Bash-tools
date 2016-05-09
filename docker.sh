@@ -13,7 +13,12 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 is_docker_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
@@ -28,10 +33,67 @@ is_docker_available(){
 
 is_docker_container_running(){
     local containers="$(docker ps)"
-    [ -n "${DEBUG:-}" ] &&
+    if [ -n "${DEBUG:-}" ]; then
         echo "Containers Running:
 $containers
 "
-    grep -q "[[:space:]]$1$" <<< "$containers" && return 0
+    fi
+    if grep -q "[[:space:]]$1$" <<< "$containers"; then
+        return 0
+    fi
     return 1
+}
+
+external_docker(){
+    [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
+}
+
+launch_container(){
+    local image="${1:-${DOCKER_IMAGE}}"
+    local container="${2:-${DOCKER_CONTAINER}}"
+    local ports="${@:3}"
+    local startupwait2="${startupwait:-30}"
+    is_travis && let startupwait2*=2
+    if external_docker; then
+        echo "External Docker detected, skipping container creation..."
+        return 0
+    else
+        echo "using docker address '$DOCKER_HOST'"
+        if ! is_docker_available; then
+            echo "WARNING: Docker not found, cannot launch container $container"
+            return 1
+        fi
+        # reuse container it's faster
+        #docker rm -f "$container" &>/dev/null
+        #sleep 1
+        if ! is_docker_container_running "$container"; then
+            if [[ "$container" = *test* ]]; then
+                docker rm -f "$container" &>/dev/null || :
+            fi
+            port_mappings=""
+            for port in $ports; do
+                port_mappings="$port_mappings -p $port:$port"
+            done
+            echo -n "starting container: "
+            # need tty for sudo which hadoop-start.sh / hbase-start.sh / mesos-start.sh use while SSH'ing localhost
+            docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings $image ${DOCKER_CMD:-}
+            hr
+            echo "Running containers:"
+            docker ps
+            hr
+            echo "waiting $startupwait2 seconds for container to fully initialize..."
+            sleep $startupwait2
+        else
+            echo "Docker container '$container' already running"
+        fi
+    fi
+}
+
+delete_container(){
+    local container="${1:-$DOCKER_CONTAINER}"
+    echo
+    if [ -z "${NODELETE:-}" ] && ! external_docker; then
+        echo -n "Deleting container "
+        docker rm -f "$container"
+    fi
 }
