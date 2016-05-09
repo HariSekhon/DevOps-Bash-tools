@@ -67,13 +67,15 @@ launch_container(){
         #docker rm -f "$container" &>/dev/null
         #sleep 1
         if ! is_docker_container_running "$container"; then
-            [ -n "${DELETE_IF_RUNNING:-}" ] && docker rm -f "$container" &>/dev/null || :
+            if [[ "$container" =~ *test* ]]; then
+                docker rm -f "$container" &>/dev/null || :
+            fi
             port_mappings=""
             for port in $ports; do
                 port_mappings="$port_mappings -p $port:$port"
             done
             echo -n "starting container: "
-            # need tty for sudo which hbase-start.sh local uses while ssh'ing localhost
+            # need tty for sudo which hadoop-start.sh / hbase-start.sh use while ssh'ing localhost
             docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings $image ${DOCKER_CMD:-}
             hr
             echo "Running containers:"
