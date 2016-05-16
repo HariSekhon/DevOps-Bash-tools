@@ -30,3 +30,8 @@ install:
 
 script:
   - make test
+
+after_success:
+  - curl --data {build:true} -X POST https://registry.hub.docker.com/u/harisekhon/centos-github/trigger/316d1158-7ffb-49a4-a7bd-8e5456ba2d15/
+  - curl --data {build:true} -X POST https://registry.hub.docker.com/u/harisekhon/ubuntu-github/trigger/abd4dbf0-14bc-454f-9cde-081ec014bc48/
+  - curl --data {build:true} -X POST https://registry.hub.docker.com/u/harisekhon/debian-github/trigger/0cfb3fe7-2028-494b-a43b-068435e6a2b3/
