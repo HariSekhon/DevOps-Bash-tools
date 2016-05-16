@@ -63,6 +63,5 @@ is_travis(){
 }
 
 if is_travis; then
-    cat ~/.docker/config.json
     export DOCKER_HOST="${DOCKER_HOST:-localhost}"
 fi
