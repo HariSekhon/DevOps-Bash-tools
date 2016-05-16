@@ -63,5 +63,6 @@ is_travis(){
 }
 
 if is_travis; then
-    export DOCKER_HOST="${DOCKER_HOST:-localhost}"
+    #export DOCKER_HOST="${DOCKER_HOST:-localhost}"
+    HOST="${HOST:-localhost}"
 fi
