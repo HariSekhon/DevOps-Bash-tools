@@ -61,3 +61,7 @@ is_travis(){
         return 1
     fi
 }
+
+if is_travis; then
+    export DOCKER_HOST=localhost
+fi
