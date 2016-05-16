@@ -58,7 +58,7 @@ launch_container(){
         echo "External Docker detected, skipping container creation..."
         return 0
     else
-        echo "using docker address '$DOCKER_HOST'"
+        echo "using docker address '${DOCKER_HOST:-}'"
         if ! is_docker_available; then
             echo "WARNING: Docker not found, cannot launch container $container"
             return 1
