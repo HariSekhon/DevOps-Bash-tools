@@ -16,7 +16,7 @@
 # there's no 'language: bash'
 language: generic
 
-sudo: required
+sudo: false
 
 notifications:
   email: false
