@@ -13,10 +13,8 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
-# because there is no language bash
-language: python
-python:
-  - "2.6"
+# there's no 'language: bash'
+language: generic
 
 sudo: required
 
