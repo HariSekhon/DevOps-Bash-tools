@@ -63,5 +63,8 @@ is_travis(){
 }
 
 if is_travis; then
+    echo "Travis Docker config.json:"
+    cat ~/.docker/config.json
+    echo ============
     export DOCKER_HOST=localhost
 fi
