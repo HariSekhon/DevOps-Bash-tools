@@ -17,7 +17,7 @@ language: python
 python:
   - "2.6"
 
-sudo: false
+sudo: required
 
 notifications:
   email: false
