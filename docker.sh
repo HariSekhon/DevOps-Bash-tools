@@ -66,10 +66,10 @@ launch_container(){
         # reuse container it's faster
         #docker rm -f "$container" &>/dev/null
         #sleep 1
+        if [[ "$container" = *test* ]]; then
+            docker rm -f "$container" &>/dev/null || :
+        fi
         if ! is_docker_container_running "$container"; then
-            if [[ "$container" = *test* ]]; then
-                docker rm -f "$container" &>/dev/null || :
-            fi
             port_mappings=""
             for port in $ports; do
                 port_mappings="$port_mappings -p $port:$port"
