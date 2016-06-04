@@ -27,12 +27,6 @@ section(){
     hr
 }
 
-if [ -n "${TRAVIS:-}" ]; then
-    sudo=sudo
-else
-    sudo=""
-fi
-
 # TODO:
 #export SPARK_HOME="$(ls -d tests/spark-*-bin-hadoop* | head -n 1)"
 
@@ -65,4 +59,10 @@ is_travis(){
 if is_travis; then
     #export DOCKER_HOST="${DOCKER_HOST:-localhost}"
     HOST="${HOST:-localhost}"
+fi
+
+if is_travis; then
+    sudo=sudo
+else
+    sudo=""
 fi
