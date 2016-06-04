@@ -66,3 +66,14 @@ if is_travis; then
 else
     sudo=""
 fi
+
+# useful for cutting down on number of noisy docker tests which take a long time but more importantly
+# cause the CI builds to fail with job logs > 4MB
+travis_sample(){
+    if is_travis; then
+        if [ "$(($RANDOM % 2))" != 0 ]; then
+            return 1
+        fi
+    fi
+    return 0
+}
