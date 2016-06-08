@@ -71,7 +71,7 @@ fi
 # cause the CI builds to fail with job logs > 4MB
 travis_sample(){
     if is_travis; then
-        if [ "$(($RANDOM % 2))" != 0 ]; then
+        if [ "$(($RANDOM % 3))" != 0 ]; then
             return 1
         fi
     fi
