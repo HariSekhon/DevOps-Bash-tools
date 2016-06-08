@@ -54,6 +54,7 @@ launch_container(){
     local ports="${@:3}"
     local startupwait2="${startupwait:-30}"
     is_travis && let startupwait2*=2
+    is_travis && trap_container "$container"
     if external_docker; then
         echo "External Docker detected, skipping container creation..."
         return 0
@@ -92,9 +93,18 @@ launch_container(){
 
 delete_container(){
     local container="${1:-$DOCKER_CONTAINER}"
+    local msg="${2:-}"
     echo
     if [ -z "${NODELETE:-}" ] && ! external_docker; then
+        if [ -n "$msg" ]; then
+            echo "$msg"
+        fi
         echo -n "Deleting container "
         docker rm -f "$container"
     fi
+}
+
+trap_container(){
+    local container="${1:-$DOCKER_CONTAINER}"
+    trap "delete_container $container 'trapped exit, cleaning up container'" INT QUIT TRAP ABRT TERM EXIT
 }
