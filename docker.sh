@@ -106,5 +106,5 @@ delete_container(){
 
 trap_container(){
     local container="${1:-$DOCKER_CONTAINER}"
-    trap "delete_container $container 'trapped exit, cleaning up container'" INT QUIT TRAP ABRT TERM EXIT
+    trap 'result=$?; '"delete_container $container 'trapped exit, cleaning up container'"' || : ; exit $result' INT QUIT TRAP ABRT TERM EXIT
 }
