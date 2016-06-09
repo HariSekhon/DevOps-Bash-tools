@@ -54,7 +54,9 @@ launch_container(){
     local ports="${@:3}"
     local startupwait2="${startupwait:-30}"
     is_travis && let startupwait2*=2
-    is_travis && trap_container "$container"
+    if is_travis || [ -n "${TRAP:-}" ]; then
+        trap_container "$container"
+    fi
     if external_docker; then
         echo "External Docker detected, skipping container creation..."
         return 0
