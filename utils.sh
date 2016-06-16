@@ -79,3 +79,7 @@ travis_sample(){
     fi
     return 0
 }
+
+untrap(){
+    trap - $TRAP_SIGNALS
+}
