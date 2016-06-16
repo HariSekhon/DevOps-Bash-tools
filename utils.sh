@@ -17,6 +17,8 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
+
 hr(){
     echo "================================================================================"
 }
