@@ -78,8 +78,8 @@ travis_sample(){
             local a
             IFS=' ' read -r -a a <<< "$versions"
             local highest_index="${#a[@]}"
-            local index="$(($RANDOM % $highest_index))"
-            echo "${a[$index]}"
+            local random_index="$(($RANDOM % $highest_index))"
+            echo "${a[$random_index]}"
             return 1
         else
             if [ "$(($RANDOM % 4))" != 0 ]; then
