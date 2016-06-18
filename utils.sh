@@ -72,9 +72,20 @@ fi
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
 # cause the CI builds to fail with job logs > 4MB
 travis_sample(){
+    local versions="$@"
     if is_travis; then
-        if [ "$(($RANDOM % 4))" != 0 ]; then
+        if [ -n "$versions" ]; then
+            IFS=' ' read -r -a a <<< "$versions"
+            echo "${a[$(($RANDOM % ${#a}))]}"
             return 1
+        else
+            if [ "$(($RANDOM % 4))" != 0 ]; then
+                return 1
+            fi
+        fi
+    else
+        if [ -n "$versions" ]; then
+            echo "$versions"
         fi
     fi
     return 0
