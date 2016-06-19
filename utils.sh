@@ -50,6 +50,14 @@ is_mac(){
     fi
 }
 
+is_jenkins(){
+    if [ -n "${JENKINS_URL:-}" ]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 is_travis(){
     if [ -n "${TRAVIS:-}" ]; then
         return 0
@@ -58,9 +66,17 @@ is_travis(){
     fi
 }
 
+is_CI(){
+    if is_jenkins || is_travis; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 if is_travis; then
     #export DOCKER_HOST="${DOCKER_HOST:-localhost}"
-    HOST="${HOST:-localhost}"
+    export HOST="${HOST:-localhost}"
 fi
 
 if is_travis; then
@@ -71,9 +87,9 @@ fi
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
 # cause the CI builds to fail with job logs > 4MB
-travis_sample(){
+sample(){
     local versions="$@"
-    if is_travis; then
+    if [ -n "${SAMPLE:-}" ] || is_CI; then
         if [ -n "$versions" ]; then
             local a
             IFS=' ' read -r -a a <<< "$versions"
