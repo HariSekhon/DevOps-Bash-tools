@@ -54,7 +54,7 @@ launch_container(){
     local ports="${@:3}"
     local startupwait2="${startupwait:-30}"
     is_travis && let startupwait2*=2
-    if [ -n "${TRAP:-}" ] || is_ci; then
+    if [ -n "${TRAP:-}" ] || is_CI; then
         trap_container "$container"
     fi
     if external_docker; then
