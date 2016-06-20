@@ -53,7 +53,7 @@ launch_container(){
     local container="${2:-${DOCKER_CONTAINER}}"
     local ports="${@:3}"
     local startupwait2="${startupwait:-30}"
-    is_travis && let startupwait2*=2
+    is_CI && let startupwait2*=2
     if [ -n "${TRAP:-}" ] || is_CI; then
         trap_container "$container"
     fi
