@@ -87,7 +87,7 @@ fi
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
 # cause the CI builds to fail with job logs > 4MB
-sample(){
+ci_sample(){
     local versions="$@"
     if [ -n "${SAMPLE:-}" ] || is_CI; then
         if [ -n "$versions" ]; then
