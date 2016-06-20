@@ -54,7 +54,7 @@ launch_container(){
     local ports="${@:3}"
     local startupwait2="${startupwait:-30}"
     is_travis && let startupwait2*=2
-    if is_travis || [ -n "${TRAP:-}" ]; then
+    if [ -n "${TRAP:-}" ] || is_ci; then
         trap_container "$container"
     fi
     if external_docker; then
@@ -103,6 +103,7 @@ delete_container(){
         fi
         echo -n "Deleting container "
         docker rm -f "$container"
+        untrap
     fi
 }
 
