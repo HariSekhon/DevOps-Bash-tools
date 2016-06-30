@@ -21,18 +21,6 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Running Bash Tools ALL"
 
-#"$srcdir/whitespace.sh"
-
-#"$srcdir/compile.sh"
-
-#"$srcdir/syntax.sh"
-
-#"$srcdir/python3.sh"
-
-#for script in $(find . -name 'test*.sh'); do
-#    "$srcdir/$script" -vvv
-#done
-
 # do help afterwards for Spark to be downloaded, and then help will find and use downloaded spark for SPARK_HOME
 #"$srcdir/help.sh"
 
@@ -48,10 +36,18 @@ section "Running Bash Tools ALL"
 
 "$srcdir/pylint.sh"
 
+#"$srcdir/python3.sh"
+
 "$srcdir/check_sbt_build.sh"
 
 "$srcdir/check_shell_syntax.sh"
 
 "$srcdir/check_travis_yml.sh"
+
+#"$srcdir/whitespace.sh"
+
+#for script in $(find . -name 'test*.sh'); do
+#    "$srcdir/$script" -vvv
+#done
 
 section "Bash Tools All Checks Completed"
