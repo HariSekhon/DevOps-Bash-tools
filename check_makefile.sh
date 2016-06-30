@@ -13,17 +13,32 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-grep '^[[:alpha:]]\+:' Makefile |
-sort -u |
-sed 's/:$//' |
-while read target; do
-    if ! make --warn-undefined-variables -n $target >/dev/null; then
-        echo "Makefile validation FAILED"
-        exit 1
-    fi
-done
+echo "
+# ============================================================================ #
+#                                    M a k e
+# ============================================================================ #
+"
+
+if which make &>/dev/null; then
+    find -L "${1:-.}" -name Makefile |
+    while read makefile; do
+        pushd "$(dirname "$makefile")" >/dev/null
+        echo "Validating $makefile"
+        grep '^[[:alpha:]]\+:' Makefile |
+        sort -u |
+        sed 's/:$//' |
+        while read target; do
+            if ! make --warn-undefined-variables -n $target >/dev/null; then
+                echo "Makefile validation FAILED"
+                exit 1
+            fi
+        done
+        popd >/dev/null
+        echo
+    done
+fi
 echo "Makefile validation SUCCEEDED"
 echo
