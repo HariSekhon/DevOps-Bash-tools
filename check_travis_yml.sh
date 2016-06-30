@@ -16,7 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-return &>/dev/null
+return 0 &>/dev/null || :
 exit 0
 if [ -z "${TRAVIS:-}" ]; then
     which travis &>/dev/null ||
