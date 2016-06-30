@@ -15,6 +15,11 @@
 
 # This really only checks basic syntax, if you're made command errors this won't catch it
 
+if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
+    return &>/dev/null
+    exit 0
+fi
+
 echo "
 # ============================================================================ #
 #                            S h e l l   S y n t a x
@@ -24,7 +29,7 @@ echo "
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-for x in $(find "${1:-.}" -type f -iname '*.sh'); do
+for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
     echo -n "checking shell syntax: $x"
     bash -n "$x"
     echo " => OK"
