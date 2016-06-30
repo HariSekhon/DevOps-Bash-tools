@@ -26,7 +26,6 @@ section "Running Bash Tools ALL"
 #"$srcdir/compile.sh"
 
 #"$srcdir/syntax.sh"
-#"$srcdir/pylint.sh"
 
 #"$srcdir/python3.sh"
 
@@ -46,6 +45,8 @@ section "Running Bash Tools ALL"
 "$srcdir/python_compile.sh"
 
 "$srcdir/python_find_quit.sh"
+
+"$srcdir/pylint.sh"
 
 "$srcdir/check_sbt_build.sh"
 
