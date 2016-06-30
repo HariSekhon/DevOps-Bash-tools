@@ -45,6 +45,8 @@ section "Running Bash Tools ALL"
 
 "$srcdir/python_compile.sh"
 
+"$srcdir/python_find_quit.sh"
+
 "$srcdir/check_sbt_build.sh"
 
 "$srcdir/check_shell_syntax.sh"
