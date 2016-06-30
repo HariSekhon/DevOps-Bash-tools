@@ -16,7 +16,7 @@
 # This really only checks basic syntax, if you're made command errors this won't catch it
 
 if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
-    return &>/dev/null
+    return 0 &>/dev/null || :
     exit 0
 fi
 
