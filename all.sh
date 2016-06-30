@@ -30,8 +30,6 @@ section "Running Bash Tools ALL"
 
 #"$srcdir/python3.sh"
 
-#"$srcdir/python_compile.sh"
-
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
 #done
@@ -44,6 +42,8 @@ section "Running Bash Tools ALL"
 "$srcdir/check_maven_pom.sh"
 
 "$srcdir/check_perl_syntax.sh"
+
+"$srcdir/python_compile.sh"
 
 "$srcdir/check_sbt_build.sh"
 
