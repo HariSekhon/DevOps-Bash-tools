@@ -27,6 +27,7 @@ if which mvn &>/dev/null; then
     while read pom; do
         echo "Validating $pom"
         mvn validate -f "$pom" || exit $?
+        echo
     done
 else
     echo "Maven not found in \$PATH, skipping maven pom checks"
