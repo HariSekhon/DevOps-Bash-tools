@@ -17,7 +17,7 @@ set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 if [ -z "$(find -L "${1:-.}" -name pom.xml)" ]; then
-    return &>/dev/null
+    return 0 &>/dev/null || :
     exit 0
 fi
 
