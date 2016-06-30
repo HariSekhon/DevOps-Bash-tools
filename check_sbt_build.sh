@@ -24,6 +24,7 @@ echo "
 
 if which sbt &>/dev/null; then
     find -L "${1:-.}" -name build.sbt |
+    grep -v '/target/' |
     while read build_sbt; do
         pushd "$(dirname $build_sbt)" >/dev/null
         echo "Validating $build_sbt"
