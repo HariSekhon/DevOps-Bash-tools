@@ -26,7 +26,7 @@ fi
 section "Python - finding any instances of calling quit() in code which are probably typos for custom qquit()"
 echo
 
-for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     type isExcluded &>/dev/null && isExcluded "$x" && continue
     egrep '\bquit' "$x" &&
         { echo "ERROR: $x contains quit() call!! Typo?"; exit 1; }
