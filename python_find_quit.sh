@@ -19,6 +19,10 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
+if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+    exit 0
+fi
+
 section "Python - finding any instances of calling quit() in code which are probably typos for custom qquit()"
 echo
 
