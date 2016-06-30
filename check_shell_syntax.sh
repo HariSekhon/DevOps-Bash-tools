@@ -15,6 +15,12 @@
 
 # This really only checks basic syntax, if you're made command errors this won't catch it
 
+echo "
+# ============================================================================ #
+#                            S h e l l   S y n t a x
+# ============================================================================ #
+"
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
@@ -23,3 +29,5 @@ for x in $(find "${1:-.}" -type f -iname '*.sh'); do
     bash -n "$x"
     echo " => OK"
 done
+echo
+echo
