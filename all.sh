@@ -45,6 +45,8 @@ section "Running Bash Tools ALL"
 
 "$srcdir/check_maven_pom.sh"
 
+"$srcdir/check_sbt_build.sh"
+
 "$srcdir/check_shell_syntax.sh"
 
 "$srcdir/check_travis_yml.sh"
