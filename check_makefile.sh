@@ -17,6 +17,7 @@ set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 if [ -z "$(find -L "${1:-.}" -maxdepth 2 -name Makefile)" ]; then
+    return &>/dev/null
     exit 0
 fi
 
