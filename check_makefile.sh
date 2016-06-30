@@ -16,7 +16,7 @@
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ -z "$(find -L "${1:-.}" -name Makefile)" ]; then
+if [ -z "$(find -L "${1:-.}" -maxdepth 2 -name Makefile)" ]; then
     exit 0
 fi
 
@@ -27,7 +27,7 @@ echo "
 "
 
 if which make &>/dev/null; then
-    find -L "${1:-.}" -name Makefile |
+    find -L "${1:-.}" -maxdepth 2 -name Makefile |
     while read makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
