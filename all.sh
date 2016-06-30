@@ -24,25 +24,25 @@ section "Running Bash Tools ALL"
 # do help afterwards for Spark to be downloaded, and then help will find and use downloaded spark for SPARK_HOME
 #"$srcdir/help.sh"
 
-"$srcdir/check_makefile.sh"
+. "$srcdir/check_makefile.sh"
 
-"$srcdir/check_maven_pom.sh"
+. "$srcdir/check_maven_pom.sh"
 
-"$srcdir/check_perl_syntax.sh"
+. "$srcdir/check_perl_syntax.sh"
 
-"$srcdir/python_compile.sh"
+. "$srcdir/python_compile.sh"
 
-"$srcdir/python_find_quit.sh"
+. "$srcdir/python_find_quit.sh"
 
-"$srcdir/pylint.sh"
+. "$srcdir/pylint.sh"
 
 #"$srcdir/python3.sh"
 
-"$srcdir/check_sbt_build.sh"
+. "$srcdir/check_sbt_build.sh"
 
-"$srcdir/check_shell_syntax.sh"
+. "$srcdir/check_shell_syntax.sh"
 
-"$srcdir/check_travis_yml.sh"
+. "$srcdir/check_travis_yml.sh"
 
 #"$srcdir/whitespace.sh"
 
