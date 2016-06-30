@@ -24,6 +24,7 @@ echo "
 
 if which mvn &>/dev/null; then
     find -L "${1:-.}" -name pom.xml |
+    grep -v '/target/' |
     while read pom; do
         echo "Validating $pom"
         mvn validate -f "$pom" || exit $?
