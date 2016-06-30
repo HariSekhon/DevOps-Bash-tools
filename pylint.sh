@@ -18,7 +18,17 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-for x in $(find ${1:-.} -iname '*.py' -o -iname '*.jy'); do
+if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+    exit 0
+fi
+
+echo "
+# ============================================================================ #
+#                                  P y L i n t
+# ============================================================================ #
+"
+
+for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     isExcluded "$x" && continue
     if which pylint &>/dev/null; then
         echo "pylint -E $x"
@@ -27,3 +37,4 @@ for x in $(find ${1:-.} -iname '*.py' -o -iname '*.jy'); do
         hr; echo
     fi
 done
+echo
