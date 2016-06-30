@@ -16,6 +16,10 @@
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+if [ -z "$(find -L "${1:-.}" -name build.sbt)" ]; then
+    exit 0
+fi
+
 echo "
 # ============================================================================ #
 #                                     S B T
