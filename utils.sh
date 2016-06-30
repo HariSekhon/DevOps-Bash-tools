@@ -27,6 +27,7 @@ section(){
     hr
     "$srcdir/center80.sh" "$@"
     hr
+    echo
 }
 
 # TODO:
