@@ -26,7 +26,8 @@ section "Running Bash Tools ALL"
 
 . "$srcdir/check_makefile.sh"
 
-. "$srcdir/check_maven_pom.sh"
+# this is usually run after build, no point testing again
+#. "$srcdir/check_maven_pom.sh"
 
 . "$srcdir/check_perl_syntax.sh"
 
@@ -38,7 +39,8 @@ section "Running Bash Tools ALL"
 
 #"$srcdir/python3.sh"
 
-. "$srcdir/check_sbt_build.sh"
+# this is usually run after build, no point testing again
+#. "$srcdir/check_sbt_build.sh"
 
 . "$srcdir/check_shell_syntax.sh"
 
