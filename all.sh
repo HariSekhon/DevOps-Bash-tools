@@ -31,6 +31,8 @@ section "Running Bash Tools ALL"
 
 . "$srcdir/check_perl_syntax.sh"
 
+. "$srcdir/check_ruby_syntax.sh"
+
 . "$srcdir/python_compile.sh"
 
 . "$srcdir/python_find_quit.sh"
