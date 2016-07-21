@@ -91,6 +91,9 @@ launch_container(){
             echo "Docker container '$container' already running"
         fi
     fi
+    if [ -n "${ENTER:-}" ]; then
+        docker exec -ti "$DOCKER_CONTAINER" bash
+    fi
 }
 
 delete_container(){
