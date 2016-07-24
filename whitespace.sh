@@ -19,11 +19,12 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$srcdir/excluded.sh"
 
 found=0
-for filename in $(find "${1:-.}" -type f | grep -v -e Makefile -e '/\.'); do
+for filename in $(find "${1:-.}" -type f | grep -v -e Makefile -e '/\.' -e '/target/' -e '/build/' -e '/gradle/'); do
     isExcluded "$filename" && continue
     grep -Hn '^[[:space:]]\+$' "$filename" && found=1 || :
 done
 if [ $found == 1 ]; then
     echo "Whitespace only lines detected!"
+    return 1 &>/dev/null || :
     exit 1
 fi
