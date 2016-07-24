@@ -24,6 +24,9 @@ section "Running Bash Tools ALL"
 # do help afterwards for Spark to be downloaded, and then help will find and use downloaded spark for SPARK_HOME
 #"$srcdir/help.sh"
 
+# this is usually run after build, no point testing again
+#. "$srcdir/check_gradle_build.sh"
+
 . "$srcdir/check_makefile.sh"
 
 # this is usually run after build, no point testing again
