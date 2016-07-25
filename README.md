@@ -10,8 +10,8 @@ Bash utility library used by my other repos.
 Currently utilized to supplement testing of the following repos:
 
 * [Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins)
-* [Tools](https://github.com/harisekhon/tools)
-* [PyTools](https://github.com/harisekhon/pytools)
+* [Perl Tools](https://github.com/harisekhon/tools)
+* [Python Tools](https://github.com/harisekhon/pytools)
 * [Lib](https://github.com/harisekhon/lib)
 * [PyLib](https://github.com/harisekhon/pylib)
 
