@@ -1,7 +1,7 @@
 Hari Sekhon - Bash Tools
 ========================
 [![Build Status](https://travis-ci.org/HariSekhon/bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/bash-tools)
-![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-lightgrey.svg)
+[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
 Bash utility library used by my other repos.
