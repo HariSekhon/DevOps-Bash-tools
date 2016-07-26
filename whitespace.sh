@@ -30,3 +30,5 @@ if [ $found == 1 ]; then
     return 1 &>/dev/null || :
     exit 1
 fi
+echo "No whitespace only lines found"
+echo
