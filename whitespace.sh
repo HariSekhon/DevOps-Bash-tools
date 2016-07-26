@@ -16,6 +16,8 @@
 set -euo pipefail
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+echo "checking for whitespace only lines"
+
 . "$srcdir/excluded.sh"
 
 found=0
