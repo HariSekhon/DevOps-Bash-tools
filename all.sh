@@ -51,7 +51,7 @@ section "Running Bash Tools ALL"
 
 . "$srcdir/check_travis_yml.sh"
 
-#"$srcdir/whitespace.sh"
+"$srcdir/whitespace.sh"
 
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
