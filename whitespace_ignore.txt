@@ -1,0 +1,8 @@
+^Makefile$
+/\.
+/target/
+/build/
+/gradle/
+/gradlew
+/mvnw
+dependency-reduced-pom.xml
