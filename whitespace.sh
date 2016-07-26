@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$srcdir/excluded.sh"
 
 found=0
-for filename in $(find "${1:-.}" -type f | grep -v -e Makefile -e '/\.' -e '/target/' -e '/build/' -e '/gradle/'); do
+for filename in $(find "${1:-.}" -type f | grep -v -e Makefile -e '/\.' -e '/target/' -e '/build/' -e '/gradle/' -e 'gradlew' -e 'mvnw'); do
     isExcluded "$filename" && continue
     grep -Hn '^[[:space:]]\+$' "$filename" && found=1 || :
 done
