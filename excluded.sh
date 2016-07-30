@@ -31,7 +31,7 @@ if ! type isExcluded &>/dev/null; then
             if [ -z "$commit" ]; then
                 return 0
             fi
-        }
+        fi
         return 1
     }
 fi
