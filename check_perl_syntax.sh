@@ -31,7 +31,7 @@ for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' 
     #printf "%-50s" "$x:"
     #$perl -Tc $I_lib $x
     # -W too noisy
-    perl -Tc $x
+    perl -I . -Tc $x
 done
 section "All Perl programs passed syntax check"
 echo
