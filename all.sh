@@ -51,7 +51,8 @@ section "Running Bash Tools ALL"
 
 . "$srcdir/check_travis_yml.sh"
 
-"$srcdir/whitespace.sh"
+# too heavy to run all the time, isExcluded on every file has really bad performance
+#"$srcdir/whitespace.sh"
 
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
