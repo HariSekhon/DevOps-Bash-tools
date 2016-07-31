@@ -1,4 +1,4 @@
-^Makefile$
+/Makefile$
 /\.
 \.pyc$
 /target/
