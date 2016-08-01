@@ -17,7 +17,7 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$( dirname "$0" )" && pwd)"
 
-SBT_VERSION=${SBT_VERSION:-}
+SBT_VERSION=${SBT_VERSION:-0.13.12}
 
 BASE=/opt
 
