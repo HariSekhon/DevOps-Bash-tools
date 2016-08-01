@@ -17,7 +17,7 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 
-if [ -z "$@" ]; then
+if [ -z "$*" ]; then
     echo "usage: ${0##*/} arg1 arg2 arg3 ..."
     exit 1
 fi
