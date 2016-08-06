@@ -49,15 +49,14 @@ external_docker(){
 }
 
 startupwait(){
-    startupwait="$1"
-    is_CI && let startupwait2*=2
+    startupwait="${1:-30}"
+    is_CI && let startupwait*=2
 }
 
 launch_container(){
     local image="${1:-${DOCKER_IMAGE}}"
     local container="${2:-${DOCKER_CONTAINER}}"
     local ports="${@:3}"
-    local startupwait2="${startupwait:-30}"
     if [ -n "${TRAP:-}" ] || is_CI; then
         trap_container "$container"
     fi
@@ -89,8 +88,8 @@ launch_container(){
             echo "Running containers:"
             docker ps
             hr
-            echo "waiting $startupwait2 seconds for container to fully initialize..."
-            sleep $startupwait2
+            #echo "waiting $startupwait seconds for container to fully initialize..."
+            #sleep $startupwait
         else
             echo "Docker container '$container' already running"
         fi
