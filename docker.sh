@@ -50,7 +50,9 @@ external_docker(){
 
 startupwait(){
     startupwait="${1:-30}"
-    is_CI && let startupwait*=2
+    if is_CI; then
+        let startupwait*=2
+    fi
 }
 
 launch_container(){
