@@ -114,3 +114,38 @@ ci_sample(){
 untrap(){
     trap - $TRAP_SIGNALS
 }
+
+timestamp(){
+    printf "%s" "`date '+%F %T'`  $*";
+    [ $# -gt 0 ] && printf "\n"
+}
+
+when_ports_available(){
+    local maxsecs="$1"
+    local host="$2"
+    local ports="${@:3}"
+    local nc_cmd="nc -z -G 1 $host "
+    for x in $ports; do
+        cmd="$nc_cmd $x && "
+    done
+    local cmd="${cmd% && }"
+    local found=0
+    if which nc &>/dev/null; then
+        for((i=0; i< $maxsecs; i++)); do
+            timestamp "trying host '$host' port(s) '$ports'"
+            if $cmd; then
+                found=1
+                break
+            fi
+            sleep 1
+        done
+        if [ $found -eq 1 ]; then
+            timestamp "host '$host' port(s) '$ports' available"
+        else
+            timestamp "host '$host' port(s) '$ports' still not available after '$maxsecs' secs, giving up waiting"
+        fi
+    else
+        echo "'nc' command not found, sleeping for '$max_secs' secs instead"
+        sleep "$maxsecs"
+    fi
+}
