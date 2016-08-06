@@ -124,7 +124,7 @@ when_ports_available(){
     local maxsecs="$1"
     local host="$2"
     local ports="${@:3}"
-    local nc_cmd="nc -z -G 1 $host "
+    local nc_cmd="nc -z -G 1 $host"
     cmd=""
     for x in $ports; do
         cmd="$cmd $nc_cmd $x &>/dev/null && "
