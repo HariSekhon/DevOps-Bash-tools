@@ -127,7 +127,7 @@ when_ports_available(){
     local nc_cmd="nc -z -G 1 $host "
     cmd=""
     for x in $ports; do
-        cmd="$cmd $nc_cmd $x && "
+        cmd="$cmd $nc_cmd $x &>/dev/null && "
     done
     local cmd="${cmd% && }"
     echo "cmd: $cmd"
