@@ -78,6 +78,10 @@ launch_container(){
             docker rm -f "$container" &>/dev/null || :
         fi
         if ! is_docker_container_running "$container"; then
+            # This is just to quiet down the CI logs from useless download clutter as docker pull/run doesn't have a quiet switch as of 2016 Q3
+            if is_CI; then
+                docker pull "$image" >/dev/null 2>&1
+            fi
             port_mappings=""
             for port in $ports; do
                 port_mappings="$port_mappings -p $port:$port"
@@ -85,7 +89,7 @@ launch_container(){
             echo -n "starting container: "
             # need tty for sudo which Apache startup scripts use while SSH'ing localhost
             # eg. hadoop-start.sh, hbase-start.sh, mesos-start.sh, spark-start.sh, tachyon-start.sh, alluxio-start.sh
-            docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings $image ${DOCKER_CMD:-}
+            docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings "$image" ${DOCKER_CMD:-}
             hr
             echo "Running containers:"
             docker ps
