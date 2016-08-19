@@ -96,7 +96,10 @@ ci_sample(){
             IFS=' ' read -r -a a <<< "$versions"
             local highest_index="${#a[@]}"
             local random_index="$(($RANDOM % $highest_index))"
-            echo "${a[$random_index]}"
+            # Travis CI builds are too slow, halve the version tests
+            if [ $(($RANDOM % 2 )) = 0 ]; then
+                echo "${a[$random_index]}"
+            fi
             return 1
         else
             if [ "$(($RANDOM % 4))" != 0 ]; then
