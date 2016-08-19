@@ -97,7 +97,7 @@ ci_sample(){
             local highest_index="${#a[@]}"
             local random_index="$(($RANDOM % $highest_index))"
             # Travis CI builds are too slow, halve the version tests
-            if [ $(($RANDOM % 2 )) = 0 ]; then
+            if [ $(($RANDOM % 3 )) = 0 ]; then
                 echo "${a[$random_index]}"
             fi
             return 1
