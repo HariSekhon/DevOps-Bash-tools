@@ -37,9 +37,15 @@ type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
 
 check_exit_code(){
     local exit_code=$?
-    local expected_exit_code="$1"
-    if [ $exit_code != $expected_exit_code ]; then
-        echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_code', got: '$exit_code'"
+    local expected_exit_codes="$@"
+    local failed=1
+    for e in $expected_exit_codes; do
+        if [ $exit_code = $e ]; then
+            failed=0
+        fi
+    done
+    if [ $failed != 0 ]; then
+        echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
         exit 1
     fi
 }
