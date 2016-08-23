@@ -35,6 +35,15 @@ section(){
 
 type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
 
+check_exit_code(){
+    local exit_code=$?
+    local expected_exit_code="$1"
+    if [ $exit_code != $expected_exit_code ]; then
+        echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_code', got: '$exit_code'"
+        exit 1
+    fi
+}
+
 is_linux(){
     if [ "$(uname -s)" = "Linux" ]; then
         return 0
