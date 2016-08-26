@@ -80,7 +80,8 @@ launch_container(){
         if ! is_docker_container_running "$container"; then
             # This is just to quiet down the CI logs from useless download clutter as docker pull/run doesn't have a quiet switch as of 2016 Q3
             if is_CI; then
-                docker pull "$image" >/dev/null 2>&1 || :
+                # pipe to cat tells docker that stdout is not a tty, switches to non-interactive mode with less output
+                { docker pull "$image" || :; } | cat
             fi
             port_mappings=""
             for port in $ports; do
