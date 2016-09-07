@@ -133,25 +133,42 @@ untrap(){
     trap - $TRAP_SIGNALS
 }
 
+plural(){
+    plural="s"
+    local num="${1:-}"
+    if [ "$num" = 1 ]; then
+        plural=""
+    fi
+}
+
+plural_str(){
+    local parts=($@)
+    plural ${#parts[@]}
+}
+
 timestamp(){
     printf "%s" "`date '+%F %T'`  $*";
     [ $# -gt 0 ] && printf "\n"
 }
 
 when_ports_available(){
-    local maxsecs="$1"
+    local max_secs="$1"
     local host="$2"
     local ports="${@:3}"
-    local nc_cmd="nc -z -G 1 $host"
+    local retry_interval=1
+    local max_tries=$(($max_secs / $retry_interval))
+    local nc_cmd="nc -z -G $retry_interval $host"
     cmd=""
     for x in $ports; do
         cmd="$cmd $nc_cmd $x &>/dev/null && "
     done
     local cmd="${cmd% && }"
+    plural_str $ports
+    echo "waiting for port$plural '$ports' to become available, will try up to $max_tries times at $retry_interval sec intervals"
     echo "cmd: $cmd"
     local found=0
     if which nc &>/dev/null; then
-        for((i=0; i< $maxsecs; i++)); do
+        for((i=0; i< $max_tries; i++)); do
             timestamp "trying host '$host' port(s) '$ports'"
             if eval $cmd; then
                 found=1
@@ -162,10 +179,10 @@ when_ports_available(){
         if [ $found -eq 1 ]; then
             timestamp "host '$host' port(s) '$ports' available after $i secs"
         else
-            timestamp "host '$host' port(s) '$ports' still not available after '$maxsecs' secs, giving up waiting"
+            timestamp "host '$host' port(s) '$ports' still not available after '$max_secs' secs, giving up waiting"
         fi
     else
         echo "'nc' command not found, sleeping for '$max_secs' secs instead"
-        sleep "$maxsecs"
+        sleep "$max_secs"
     fi
 }
