@@ -177,9 +177,9 @@ when_ports_available(){
             sleep 1
         done
         if [ $found -eq 1 ]; then
-            timestamp "host '$host' port(s) '$ports' available after $i secs"
+            timestamp "host '$host' port$plural '$ports' available after $i secs"
         else
-            timestamp "host '$host' port(s) '$ports' still not available after '$max_secs' secs, giving up waiting"
+            timestamp "host '$host' port$plural '$ports' still not available after '$max_secs' secs, giving up waiting"
         fi
     else
         echo "'nc' command not found, sleeping for '$max_secs' secs instead"
