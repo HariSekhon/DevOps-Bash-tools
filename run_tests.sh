@@ -24,7 +24,7 @@ section "Running Test Scripts"
 scripts="$(find "${1:-.}" -iname 'test*.sh' | sort -f)"
 
 for script in $scripts; do
-    ./$script -vvv
+    ./$script
 done
 
 section "Test Scripts Completed"
