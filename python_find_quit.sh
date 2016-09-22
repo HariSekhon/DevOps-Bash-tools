@@ -29,7 +29,7 @@ echo
 
 for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     type isExcluded &>/dev/null && isExcluded "$x" && continue
-    egrep '\bquit' "$x" &&
+    egrep '^[^#]*\bquit' "$x" &&
         { echo "ERROR: $x contains quit() call!! Typo?"; exit 1; }
 done
 section "Python - passed - no quit() calls found"
