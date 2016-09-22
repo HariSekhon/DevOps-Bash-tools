@@ -83,7 +83,7 @@ is_travis(){
 }
 
 is_CI(){
-    if is_jenkins || is_travis; then
+    if [ -n "${CI:-}" -o -n "${CI_NAME:-}" ] || is_jenkins || is_travis; then
         return 0
     else
         return 1
