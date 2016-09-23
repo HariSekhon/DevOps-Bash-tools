@@ -15,6 +15,9 @@
 
 # This really only checks basic syntax, if you're made command errors this won't catch it
 
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+
 if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
     return 0 &>/dev/null || :
     exit 0
@@ -25,9 +28,6 @@ echo "
 #                            S h e l l   S y n t a x
 # ============================================================================ #
 "
-
-set -euo pipefail
-[ -n "${DEBUG:-}" ] && set -x
 
 for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
     echo -n "checking shell syntax: $x"
