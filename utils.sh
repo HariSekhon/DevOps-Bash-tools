@@ -19,6 +19,11 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
+die(){
+    echo "$@"
+    exit 1
+}
+
 hr(){
     echo "================================================================================"
 }
