@@ -44,12 +44,15 @@ check_output(){
     local expected="$1"
     local cmd="${@:2}"
     local output="$($cmd 2>&1)"
+    if [ -n "${DEBUG:-}" ]; then
+        echo "full debug output: $output"
+    fi
     local test_output="$(tail -n1 <<< "$output")"
     # intentionally not quoting so that we can use things like google* glob matches for google.com and google.co.uk
     if [[ "$test_output" = $expected ]]; then
         echo "SUCCESS: got expected output '$test_output'"
     else
-        die "FAILED: got '$output', expected '$expected'"
+        die "FAILED: got '$test_output', expected '$expected'"
     fi
     echo
 }
