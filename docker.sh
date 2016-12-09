@@ -15,8 +15,9 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-
-srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo "IN BASH TOOLS DOCKER"
+srcdir_bash_tools_docker="${srcdir:-}"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . "$srcdir/utils.sh"
 
@@ -133,3 +134,6 @@ trap_container(){
     local container="${1:-$DOCKER_CONTAINER}"
     trap 'result=$?; '"delete_container $container 'trapped exit, cleaning up container'"' || : ; exit $result' $TRAP_SIGNALS
 }
+
+# restore original srcdir
+srcdir="$srcdir_bash_tools_docker"
