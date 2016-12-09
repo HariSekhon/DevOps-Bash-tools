@@ -31,6 +31,15 @@ is_docker_available(){
     return 1
 }
 
+is_docker_compose_available(){
+    #[ -n "${TRAVIS:-}" ] && return 0
+    if which docker-compose &>/dev/null; then
+        return 0
+    fi
+    #echo "Docker Compose not available"
+    return 1
+}
+
 is_docker_container_running(){
     local containers="$(docker ps)"
     if [ -n "${DEBUG:-}" ]; then
