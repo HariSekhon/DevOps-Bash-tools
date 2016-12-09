@@ -15,7 +15,9 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+echo "IN BASH TOOLS UTILS"
+srcdir_bash_tools_utils="${srcdir:-}"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
@@ -203,3 +205,6 @@ when_ports_available(){
         sleep "$max_secs"
     fi
 }
+
+# restore original srcdir
+srcdir="$srcdir_bash_tools_utils"
