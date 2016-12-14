@@ -17,7 +17,6 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir_bash_tools_utils="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-echo "srcdir is $srcdir"
 
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
