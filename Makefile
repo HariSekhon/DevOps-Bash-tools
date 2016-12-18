@@ -30,3 +30,7 @@ update-no-recompile:
 .PHONY: clean
 clean:
 	@echo Nothing to clean
+
+.PHONY: push
+push:
+	git push
