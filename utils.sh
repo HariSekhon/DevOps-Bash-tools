@@ -186,7 +186,7 @@ when_ports_available(){
     echo "cmd: $cmd"
     local found=0
     if which nc &>/dev/null; then
-        for((i=0; i< $max_tries; i++)); do
+        for((i=0; i < $max_tries; i++)); do
             timestamp "trying host '$host' port(s) '$ports'"
             if eval $cmd; then
                 found=1
