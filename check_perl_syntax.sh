@@ -26,13 +26,17 @@ fi
 
 section "Perl Syntax Checks"
 
-for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
-    isExcluded "$x" && continue
-    #printf "%-50s" "$x:"
-    #$perl -Tc $I_lib $x
-    # -W too noisy
-    perl -I . -Tc $x
-done
-section "All Perl programs passed syntax check"
-echo
+if [ -n "$NOSYNTAXCHECK" ]; then
+    echo '$NOSYNTAXCHECK environment variable set, skipping perl syntax checks'
+else
+    for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
+        isExcluded "$x" && continue
+        #printf "%-50s" "$x:"
+        #$perl -Tc $I_lib $x
+        # -W too noisy
+        perl -I . -Tc $x
+    done
+    section "All Perl programs passed syntax check"
+    echo
+fi
 echo
