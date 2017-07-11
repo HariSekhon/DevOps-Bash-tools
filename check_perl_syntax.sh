@@ -28,6 +28,8 @@ section "Perl Syntax Checks"
 
 if [ -n "$NOSYNTAXCHECK" ]; then
     echo '$NOSYNTAXCHECK environment variable set, skipping perl syntax checks'
+elif [ -n "$QUICK" ]; then
+    echo '$QUICK environment variable set, skipping perl syntax checks'
 else
     for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
         isExcluded "$x" && continue
