@@ -27,11 +27,15 @@ fi
 section "Compiling all Python / Jython files"
 echo
 
-for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
-    type isExcluded &>/dev/null && isExcluded "$x" && continue
-    echo "compiling $x"
-    python -m py_compile "$x"
-done
-section "Python Compile Completed Successfully"
-echo
+if [ -n "${NOCOMPILE:-}" ]; then
+    echo '$NOCOMPILE environment variable set, skipping python compile'
+else
+    for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+        type isExcluded &>/dev/null && isExcluded "$x" && continue
+        echo "compiling $x"
+        python -m py_compile "$x"
+    done
+    section "Python Compile Completed Successfully"
+    echo
+fi
 echo
