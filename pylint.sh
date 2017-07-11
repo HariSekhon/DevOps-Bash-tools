@@ -29,9 +29,9 @@ echo "
 # ============================================================================ #
 "
 
-if [ -n "${NOPYLINT:-1}" ]; then
+if [ -n "${NOPYLINT:-}" ]; then
     echo '$NOPYLINT environment variable set, skipping PyLint error checks'
-elif [ -n "${QUICK:-1}" ]; then
+elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping PyLint error checks'
 else
     # TODO: make this happen in one pass as it'll be more efficient
