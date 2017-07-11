@@ -29,13 +29,20 @@ echo "
 # ============================================================================ #
 "
 
-for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
-    isExcluded "$x" && continue
-    if which pylint &>/dev/null; then
-        echo "pylint -E $x"
-        echo
-        pylint -E $x
-        hr; echo
-    fi
-done
+if [ -n "${NOPYLINT:-1}" ]; then
+    echo '$NOPYLINT environment variable set, skipping PyLint error checks'
+elif [ -n "${QUICK:-1}" ]; then
+    echo '$QUICK environment variable set, skipping PyLint error checks'
+else
+    # TODO: make this happen in one pass as it'll be more efficient
+    for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+        isExcluded "$x" && continue
+        if which pylint &>/dev/null; then
+            echo "pylint -E $x"
+            echo
+            pylint -E $x
+            hr; echo
+        fi
+    done
+fi
 echo
