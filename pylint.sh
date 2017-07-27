@@ -35,14 +35,21 @@ elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping PyLint error checks'
 else
     # TODO: make this happen in one pass as it'll be more efficient
+    prog_list=""
     for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+        #echo "checking if $x is excluded"
         isExcluded "$x" && continue
-        if which pylint &>/dev/null; then
-            echo "pylint -E $x"
-            echo
-            pylint -E $x
-            hr; echo
-        fi
+        #echo "added $x for testing"
+        prog_list="$prog_list $x"
     done
+    if which pylint &>/dev/null; then
+        #echo
+        #echo "Checking for coding errors:"
+        #echo
+        echo "pylint -E $prog_list"
+        echo
+        pylint -E $prog_list
+        hr; echo
+    fi
 fi
 echo
