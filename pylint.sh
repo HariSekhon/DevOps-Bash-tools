@@ -34,21 +34,23 @@ if [ -n "${NOPYLINT:-}" ]; then
 elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping PyLint error checks'
 else
-    # TODO: make this happen in one pass as it'll be more efficient
-    prog_list=""
-    for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
-        #echo "checking if $x is excluded"
-        isExcluded "$x" && continue
-        #echo "added $x for testing"
-        prog_list="$prog_list $x"
-    done
     if which pylint &>/dev/null; then
+        # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
+        #prog_list="
+        for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+            #echo "checking if $x is excluded"
+            isExcluded "$x" && continue
+            #echo "added $x for testing"
+            #prog_list="$prog_list $x"
+            echo "pylint -E $x"
+            pylint -E "$x"
+        done
         #echo
         #echo "Checking for coding errors:"
         #echo
-        echo "pylint -E $prog_list"
-        echo
-        pylint -E $prog_list
+        #echo "pylint -E $prog_list"
+        #echo
+        #pylint -E $prog_list
         hr; echo
     fi
 fi
