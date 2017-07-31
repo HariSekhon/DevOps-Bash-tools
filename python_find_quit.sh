@@ -33,6 +33,7 @@ for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')
         { echo; echo; echo "ERROR: $x contains quit() call!! Typo?"; exit 1; }
 done
 echo
+echo
 section "Python - passed - no quit() calls found"
 echo
 echo
