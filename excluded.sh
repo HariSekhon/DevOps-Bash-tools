@@ -26,6 +26,7 @@ if ! type isExcluded &>/dev/null; then
         [[ "$prog" =~ ^\* ]] && return 0
         [[ "$prog" =~ ^\.\/\. ]] && return 0
         [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
+        [[ "$prog" =~ *TODO* ]] && return 0
         if which git &>/dev/null; then
             commit="$(git log "$prog" | head -n1 | grep 'commit')"
             if [ -z "$commit" ]; then
