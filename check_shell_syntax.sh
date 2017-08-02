@@ -17,17 +17,16 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
 
-echo "
-# ============================================================================ #
-#                            S h e l l   S y n t a x
-# ============================================================================ #
-"
+section "Shell Syntax Checks"
 
 for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
     echo -n "checking shell syntax: $x"
