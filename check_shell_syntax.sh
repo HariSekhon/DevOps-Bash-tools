@@ -29,6 +29,7 @@ fi
 section "Shell Syntax Checks"
 
 for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
+    isExcluded "$x" && continue
     echo -n "checking shell syntax: $x"
     bash -n "$x"
     echo " => OK"
