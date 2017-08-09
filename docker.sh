@@ -53,6 +53,10 @@ $containers
     return 1
 }
 
+is_inside_docker(){
+    test -f /.dockerenv
+}
+
 external_docker(){
     [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
 }
