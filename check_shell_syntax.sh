@@ -49,4 +49,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "All Shell programs passed syntax check"
 echo
-echo
