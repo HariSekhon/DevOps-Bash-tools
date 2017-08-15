@@ -24,7 +24,10 @@ if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')
     exit 0
 fi
 
-section "Compiling all Python / Jython files"
+section "Compiling Python / Jython files"
+
+date
+start_time="$(date +%s)"
 echo
 
 if [ -n "${NOCOMPILE:-}" ]; then
@@ -40,4 +43,15 @@ else
     section "Python Compile Completed Successfully"
     echo
 fi
+
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Finished compiling Python / Jython files"
+echo
 echo
