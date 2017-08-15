@@ -15,13 +15,39 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-return 0 &>/dev/null || :
-exit 0
-if [ -z "${TRAVIS:-}" ]; then
-    which travis &>/dev/null ||
+. "$srcdir/utils.sh"
+. "$srcdir/docker.sh"
+
+#return 0 &>/dev/null || :
+#exit 0
+
+section "Travis CI Yaml Lint Check"
+
+date
+start_time="$(date +%s)"
+echo
+
+if is_travis; then
+    echo "Running inside Travis CI, skipping lint check"
+elif is_inside_docker; then
+    echo "Running inside Docker, skipping lint check"
+else
+    # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
+    #which travis &>/dev/null ||
+    type travis &>/dev/null ||
         gem install travis --no-rdoc --no-ri
-    yes "y" | travis lint
+    travis lint
 fi
-echo "Travis validation succeeded"
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Travis CI yaml validation succeeded"
+echo
 echo
