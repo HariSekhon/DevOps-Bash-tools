@@ -60,4 +60,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "SBT Install Completed"
 echo
-echo
