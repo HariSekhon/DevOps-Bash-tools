@@ -28,11 +28,25 @@ fi
 
 section "Shell Syntax Checks"
 
+date
+start_time="$(date +%s)"
+echo
+
 for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
     isExcluded "$x" && continue
     echo -n "checking shell syntax: $x"
     bash -n "$x"
     echo " => OK"
 done
+echo
+date
+echo
+end_time="$(date +%s)"
+let time_taken=$end_time-$start_time
+echo "Completed in $time_taken secs"
+echo
+hr2
+echo "All Shell programs passed syntax check"
+hr2
 echo
 echo
