@@ -15,17 +15,20 @@
 
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 if [ -z "$(find -L "${1:-.}" -name build.sbt)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
 
-echo "
-# ============================================================================ #
-#                                     S B T
-# ============================================================================ #
-"
+section "S B T"
+
+date
+start_time="$(date +%s)"
+echo
 
 if which sbt &>/dev/null; then
     find -L "${1:-.}" -name build.sbt |
@@ -41,5 +44,14 @@ else
     echo "SBT not found in \$PATH, skipping maven pom checks"
 fi
 
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "SBT checks passed"
 echo
 echo
