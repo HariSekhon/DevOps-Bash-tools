@@ -56,3 +56,4 @@ let time_taken=$end_time-$start_time || :
 echo "Completed in $time_taken secs"
 echo
 section2 "Makefile validation SUCCEEDED"
+echo
