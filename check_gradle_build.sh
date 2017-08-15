@@ -49,8 +49,6 @@ end_time="$(date +%s)"
 let time_taken=$end_time-$start_time
 echo "Completed in $time_taken secs"
 echo
-hr2
-echo "All Gradle builds passed dry run checks"
-hr2
+section2 "All Gradle builds passed dry run checks"
 echo
 echo
