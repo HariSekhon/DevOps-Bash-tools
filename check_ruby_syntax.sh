@@ -26,11 +26,15 @@ fi
 
 section "Ruby Syntax Checks"
 
-for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.rb'); do
-    isExcluded "$x" && continue
-    echo -n "$x: "
-    ruby -c $x
-done
-section "All Ruby programs passed syntax check"
+if which ruby &>/dev/null; then
+    for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.rb'); do
+        isExcluded "$x" && continue
+        echo -n "$x: "
+        ruby -c $x
+    done
+    section "All Ruby programs passed syntax check"
+else
+    echo "WARNING: ruby not found in \$PATH, skipping ruby syntax checks"
+fi
 echo
 echo
