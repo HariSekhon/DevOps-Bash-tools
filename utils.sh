@@ -44,6 +44,28 @@ section(){
     echo
 }
 
+section2(){
+    hr2
+    hr2echo "$@"
+    hr2
+    echo
+}
+
+section3(){
+    hr3
+    hr3echo "$@"
+    hr3
+    echo
+}
+
+hr2echo(){
+    "`dirname ${BASH_SOURCE[0]}`/center80.sh" "$@" 50
+}
+
+hr3echo(){
+    "`dirname ${BASH_SOURCE[0]}`/center80.sh" "$@" 40
+}
+
 # TODO:
 #export SPARK_HOME="$(ls -d tests/spark-*-bin-hadoop* | head -n 1)"
 
