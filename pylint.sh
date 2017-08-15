@@ -13,7 +13,8 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
-set -eu
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
@@ -23,11 +24,11 @@ if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')
     exit 0
 fi
 
-echo "
-# ============================================================================ #
-#                                  P y L i n t
-# ============================================================================ #
-"
+section "P y L i n t"
+
+date
+start_time="$(date +%s)"
+echo
 
 if [ -n "${NOPYLINT:-}" ]; then
     echo '$NOPYLINT environment variable set, skipping PyLint error checks'
@@ -54,4 +55,15 @@ else
         hr; echo
     fi
 fi
+
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "PyLint checks passed"
+echo
 echo
