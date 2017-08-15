@@ -41,4 +41,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Python PEP8 Completed Successfully"
 echo
-echo
