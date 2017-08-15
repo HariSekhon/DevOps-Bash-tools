@@ -50,6 +50,7 @@ export GROOVY_HOME=/opt/groovy
 export PATH=\$PATH:\$GROOVY_HOME/bin
 EOF
 fi
+
 echo
 date
 echo
@@ -59,5 +60,4 @@ let time_taken=$end_time-$start_time || :
 echo "Completed in $time_taken secs"
 echo
 section2 "Groovy Install Completed"
-echo
 echo
