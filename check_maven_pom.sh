@@ -15,17 +15,20 @@
 
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 if [ -z "$(find -L "${1:-.}" -name pom.xml)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
 
-echo "
-# ============================================================================ #
-#                                   M a v e n
-# ============================================================================ #
-"
+section "M a v e n"
+
+date
+start_time="$(date +%s)"
+echo
 
 if which mvn &>/dev/null; then
     find -L "${1:-.}" -name pom.xml |
@@ -39,5 +42,14 @@ else
     echo "Maven not found in \$PATH, skipping maven pom checks"
 fi
 
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Maven pom checks passed"
 echo
 echo
