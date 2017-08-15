@@ -50,4 +50,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Travis CI yaml validation succeeded"
 echo
-echo
