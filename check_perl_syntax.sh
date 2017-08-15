@@ -25,6 +25,9 @@ if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' 
 fi
 
 section "Perl Syntax Checks"
+date
+start_time="$(date +%s)"
+echo
 
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
     echo '$NOSYNTAXCHECK environment variable set, skipping perl syntax checks'
@@ -38,7 +41,17 @@ else
         # -W too noisy
         perl -I . -Tc $x
     done
-    section "All Perl programs passed syntax check"
+    echo
+    date
+    echo
+    end_time="$(date +%s)"
+    let time_taken=$end_time-$start_time
+    echo "Completed in $time_taken secs"
+    echo
+    hr2
+    echo "All Perl programs passed syntax check"
+    hr2
     echo
 fi
+echo
 echo
