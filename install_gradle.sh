@@ -17,9 +17,17 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$( dirname "$0" )" && pwd)"
 
+. "$srcdir/utils.sh"
+
+section "Gradle Install"
+
 GRADLE_VERSION=${GRADLE_VERSION:-2.14.1}
 
 BASE=/opt
+
+date
+start_time="$(date +%s)"
+echo
 
 if ! [ -e "$BASE/gradle" ]; then
     mkdir -p "$BASE"
@@ -42,4 +50,15 @@ export GRADLE_HOME=/opt/gradle
 export PATH=\$PATH:\$GRADLE_HOME/bin
 EOF
 fi
-echo "DONE"
+
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Gradle Install Completed"
+echo
+echo
