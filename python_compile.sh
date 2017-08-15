@@ -54,4 +54,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Finished compiling Python / Jython files"
 echo
-echo
