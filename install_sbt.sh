@@ -15,11 +15,19 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$( dirname "$0" )" && pwd)"
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
+
+section "SBT Install"
 
 SBT_VERSION=${SBT_VERSION:-0.13.12}
 
 BASE=/opt
+
+date
+start_time="$(date +%s)"
+echo
 
 if ! [ -e "$BASE/sbt" ]; then
     mkdir -p "$BASE"
@@ -41,4 +49,15 @@ export SBT_HOME=/opt/sbt
 export PATH=\$PATH:\$SBT_HOME/bin
 EOF
 fi
-echo "DONE"
+
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "SBT Install Completed"
+echo
+echo
