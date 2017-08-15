@@ -66,4 +66,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "PyLint checks passed"
 echo
-echo
