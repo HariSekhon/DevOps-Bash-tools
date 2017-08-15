@@ -48,4 +48,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Whitespace only checks passed"
 echo
-echo
