@@ -15,17 +15,20 @@
 
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 if [ -z "$(find -L "${1:-.}" -name build.gradle)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
 
-echo "
-# ============================================================================ #
-#                                  G r a d l e
-# ============================================================================ #
-"
+section "G r a d l e"
+
+date
+start_time="$(date +%s)"
+echo
 
 if which gradle &>/dev/null; then
     find -L "${1:-.}" -name build.gradle |
@@ -39,5 +42,15 @@ else
     echo "Gradle not found in \$PATH, skipping gradle checks"
 fi
 
+echo
+date
+echo
+end_time="$(date +%s)"
+let time_taken=$end_time-$start_time
+echo "Completed in $time_taken secs"
+echo
+hr2
+echo "All Gradle builds passed dry run checks"
+hr2
 echo
 echo
