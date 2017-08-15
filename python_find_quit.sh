@@ -26,14 +26,25 @@ fi
 
 section "Python - finding any instances of calling quit() in code which are probably typos for custom qquit()"
 
+date
+start_time="$(date +%s)"
+echo
+
 for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     echo -n '.'
     egrep '^[^#]*\bquit\b' "$x" &&
         { echo; echo; echo "ERROR: $x contains quit() call!! Typo?"; exit 1; }
 done
+
 echo
+date
 echo
-section "Python - passed - no quit() calls found"
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Python - passed - no quit() calls found"
 echo
 echo
