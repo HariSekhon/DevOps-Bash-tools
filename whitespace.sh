@@ -17,7 +17,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "checking for whitespace only lines"
+. "$srcdir/utils.sh"
+
+section "Checking for whitespace only lines"
+
+date
+start_time="$(date +%s)"
+echo
 
 . "$srcdir/excluded.sh"
 
@@ -31,5 +37,15 @@ if [ $found == 1 ]; then
     return 1 &>/dev/null || :
     exit 1
 fi
-echo "No whitespace only lines found"
+
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Whitespace only checks passed"
+echo
 echo
