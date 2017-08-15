@@ -68,8 +68,7 @@ echo
 bash_tools_end_time="$(date +%s)"
 # if start and end time are the same let returns exit code 1
 let bash_tools_time_taken=$bash_tools_end_time-$bash_tools_start_time || :
-echo "Completed in $bash_tools_time_taken secs"
+echo "Bash Tools All Checks Completed in $bash_tools_time_taken secs"
 echo
 section2 "Bash Tools All Checks Completed"
-echo
 echo
