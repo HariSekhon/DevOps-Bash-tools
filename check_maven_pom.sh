@@ -52,4 +52,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Maven pom checks passed"
 echo
-echo
