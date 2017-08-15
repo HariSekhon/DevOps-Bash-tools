@@ -21,12 +21,34 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Running Test Scripts"
 
+date
+start_time="$(date +%s)"
+echo
+
 scripts="$(find "${1:-.}" -iname 'test*.sh' | sort -f)"
 
 for script in $scripts; do
+    date
+    script_start_time="$(date +%s)"
+    echo
     ./$script
+    echo
+    date
+    echo
+    script_end_time="$(date +%s)"
+    # if start and end time are the same let returns exit code 1
+    let script_time_taken=$script_end_time-$script_start_time || :
+    echo "Completed in $script_time_taken secs"
 done
 
-section "Test Scripts Completed"
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "All Test Scripts Completed in $time_taken secs"
+echo
+section2 "Test Scripts Completed"
 echo
 echo
