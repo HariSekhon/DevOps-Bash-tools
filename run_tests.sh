@@ -51,4 +51,3 @@ echo "All Test Scripts Completed in $time_taken secs"
 echo
 section2 "Test Scripts Completed"
 echo
-echo
