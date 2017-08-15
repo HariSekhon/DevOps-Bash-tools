@@ -15,17 +15,20 @@
 
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 if [ -z "$(find -L "${1:-.}" -maxdepth 2 -name Makefile)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
 
-echo "
-# ============================================================================ #
-#                                    M a k e
-# ============================================================================ #
-"
+section "M a k e"
+
+date
+start_time="$(date +%s)"
+echo
 
 if which make &>/dev/null; then
     find -L "${1:-.}" -maxdepth 2 -name Makefile |
@@ -45,5 +48,11 @@ if which make &>/dev/null; then
         echo
     done
 fi
-echo "Makefile validation SUCCEEDED"
+date
 echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Makefile validation SUCCEEDED"
