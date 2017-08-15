@@ -48,9 +48,7 @@ else
     let time_taken=$end_time-$start_time
     echo "Completed in $time_taken secs"
     echo
-    hr2
-    echo "All Perl programs passed syntax check"
-    hr2
+    section2 "All Perl programs passed syntax check"
 fi
 echo
 echo
