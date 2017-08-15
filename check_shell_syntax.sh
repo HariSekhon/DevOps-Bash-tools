@@ -38,6 +38,7 @@ for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
     bash -n "$x"
     echo " => OK"
 done
+
 echo
 date
 echo
