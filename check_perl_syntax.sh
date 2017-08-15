@@ -51,7 +51,6 @@ else
     hr2
     echo "All Perl programs passed syntax check"
     hr2
-    echo
 fi
 echo
 echo
