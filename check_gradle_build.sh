@@ -52,4 +52,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "All Gradle builds passed dry run checks"
 echo
-echo
