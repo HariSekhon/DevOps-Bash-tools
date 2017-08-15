@@ -47,6 +47,6 @@ if which ruby &>/dev/null; then
     section2 "All Ruby programs passed syntax check"
 else
     echo "WARNING: ruby not found in \$PATH, skipping ruby syntax checks"
+    echo
 fi
-echo
 echo
