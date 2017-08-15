@@ -15,11 +15,19 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$( dirname "$0" )" && pwd)"
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
+
+section "Maven Install"
 
 MAVEN_VERSION=${MAVEN_VERSION:-3.3.9}
 
 BASE=/opt
+
+date
+start_time="$(date +%s)"
+echo
 
 if ! [ -e "$BASE/maven" ]; then
     mkdir -p "$BASE"
@@ -42,4 +50,15 @@ export MAVEN_HOME=/opt/maven
 export PATH=\$PATH:\$MAVEN_HOME/bin
 EOF
 fi
-echo "DONE"
+
+echo
+date
+echo
+end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+section2 "Maven Install Completed"
+echo
+echo
