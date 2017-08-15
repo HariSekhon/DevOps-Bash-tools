@@ -61,4 +61,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Gradle Install Completed"
 echo
-echo
