@@ -47,4 +47,3 @@ echo "Completed in $time_taken secs"
 echo
 section2 "Python - passed - no quit() calls found"
 echo
-echo
