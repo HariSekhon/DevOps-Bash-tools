@@ -26,7 +26,7 @@ start_time="$(start_timer)"
 . "$srcdir/excluded.sh"
 
 progress_char='.'
-[ -z "$DEBUG" ] && progress_char=''
+[ -z "${DEBUG:-}" ] && progress_char=''
 
 whitespace_only_files_found=0
 trailing_whitespace_files_found=0
