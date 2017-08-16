@@ -16,5 +16,7 @@ check_memcached_stats.cfg-pnp4nagios
 -bin\b
 \.zip
 \.tar
+\.tgz
+\.tbz
 \.gz
 \.bz2
