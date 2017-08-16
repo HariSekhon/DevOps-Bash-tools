@@ -26,9 +26,7 @@ fi
 
 section "Ruby Syntax Checks"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"
 
 if which ruby &>/dev/null; then
     for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.rb'); do
@@ -36,14 +34,7 @@ if which ruby &>/dev/null; then
         echo -n "$x: "
         ruby -c $x
     done
-    echo
-    date
-    echo
-    end_time="$(date +%s)"
-    # if start and end time are the same let returns exit code 1
-    let time_taken=$end_time-$start_time || :
-    echo "Completed in $time_taken secs"
-    echo
+    time_taken "$start_time"
     section2 "All Ruby programs passed syntax check"
 else
     echo "WARNING: ruby not found in \$PATH, skipping ruby syntax checks"
