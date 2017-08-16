@@ -26,7 +26,7 @@ fi
 
 section "Compiling Python / Jython files"
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 if [ -n "${NOCOMPILE:-}" ]; then
     echo '$NOCOMPILE environment variable set, skipping python compile'
