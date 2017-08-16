@@ -26,9 +26,7 @@ fi
 
 section "P y L i n t"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"                                                                                                                                                          |
 
 if [ -n "${NOPYLINT:-}" ]; then
     echo '$NOPYLINT environment variable set, skipping PyLint error checks'
@@ -56,13 +54,6 @@ else
     fi
 fi
 
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+time_taken "$start_time"
 section2 "PyLint checks passed"
 echo
