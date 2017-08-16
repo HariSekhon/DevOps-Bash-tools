@@ -26,7 +26,7 @@ fi
 
 section "Python - finding any instances of calling quit() in code which are probably typos for custom qquit()"
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
