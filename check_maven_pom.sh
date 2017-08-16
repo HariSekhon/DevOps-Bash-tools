@@ -26,9 +26,7 @@ fi
 
 section "M a v e n"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"
 
 if which mvn &>/dev/null; then
     find -L "${1:-.}" -name pom.xml |
@@ -42,13 +40,6 @@ else
     echo "Maven not found in \$PATH, skipping maven pom checks"
 fi
 
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+time_taken "$start_time"
 section2 "Maven pom checks passed"
 echo
