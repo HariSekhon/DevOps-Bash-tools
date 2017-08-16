@@ -10,4 +10,4 @@ dependency-reduced-pom.xml
 /[[:alnum:]-]+-[[:digit:]\.]+/
 /cover_db/
 check_memcached_stats.cfg-pnp4nagios
-windows-plugins
+/spark-.*-bin-hadoop.*/
