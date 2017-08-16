@@ -25,9 +25,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Travis CI Yaml Lint Check"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"
 
 if is_travis; then
     echo "Running inside Travis CI, skipping lint check"
@@ -40,13 +38,7 @@ else
         gem install travis --no-rdoc --no-ri
     travis lint
 fi
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+
+time_taken "$start_time"                                                                                                                                                             |
 section2 "Travis CI yaml validation succeeded"
 echo
