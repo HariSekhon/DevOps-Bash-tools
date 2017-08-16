@@ -25,11 +25,16 @@ start_time="$(start_timer)"
 
 . "$srcdir/excluded.sh"
 
+progress_char='.'
+[ -z "$DEBUG" ] && progress_char=''
+
 whitespace_only_files_found=0
 trailing_whitespace_files_found=0
 trailing_whitespace_bar_files_found=0
 for filename in $(find "${1:-.}" -type f | egrep -vf "$srcdir/whitespace_ignore.txt"); do
     isExcluded "$filename" && continue
+    printf "%s" "$progress_char"
+    # [[:space:]] matches \r in Windows files which we don't want, so use explicit character class
     grep -Hn '^[[:space:]]\+$' "$filename" && let whitespace_only_files_found+=1 || :
     grep -Hn '[[:space:]]\+$' "$filename" && let trailing_whitespace_files_found+=1 || :
     egrep -Hn '[[:space:]]{4}\|[[:space:]]*$' "$filename" && let trailing_whitespace_bar_files_found+=1 || :
