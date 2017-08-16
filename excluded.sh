@@ -24,7 +24,7 @@ if ! type isExcluded &>/dev/null; then
     isExcluded(){
         local prog="$1"
         [[ "$prog" =~ ^\* ]] && return 0
-        [[ "$prog" =~ ^\.\/\. ]] && return 0
+        [[ "$prog" =~ /\. ]] && return 0
         [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
         [[ "$prog" =~ *TODO* ]] && return 0
         # this external git check is expensive, skip it when in CI as using fresh git checkouts
