@@ -27,10 +27,12 @@ start_time="$(start_timer)"
 
 whitespace_only_files_found=0
 trailing_whitespace_files_found=0
+trailing_whitespace_bar_files_found=0
 for filename in $(find "${1:-.}" -type f | egrep -vf "$srcdir/whitespace_ignore.txt"); do
     isExcluded "$filename" && continue
     grep -Hn '^[[:space:]]\+$' "$filename" && let whitespace_only_files_found+=1 || :
     grep -Hn '[[:space:]]\+$' "$filename" && let trailing_whitespace_files_found+=1 || :
+    egrep -Hn '[[:space:]]{4}\|[[:space:]]*$' "$filename" && let trailing_whitespace_bar_files_found+=1 || :
 done
 if [ $whitespace_only_files_found -gt 0 ]; then
     echo "$whitespace_only_files_found files with whitespace only lines detected!"
@@ -38,7 +40,10 @@ fi
 if [ $trailing_whitespace_files_found -gt 0 ]; then
     echo "$trailing_whitespace_files_found files with trailing whitespace lines detected!"
 fi
-if [ $whitespace_only_files_found -gt 0 -o $trailing_whitespace_files_found -gt 0 ]; then
+if [ $trailing_whitespace_bar_files_found -gt 0 ]; then
+    echo "$trailing_whitespace_bar_files_found files with trailing whitespace bar lines detected!"
+fi
+if [ $whitespace_only_files_found -gt 0 -o $trailing_whitespace_files_found -gt 0 -o  $trailing_whitespace_bar_files_found -gt 0 ]; then
     return 1 &>/dev/null || :
     exit 1
 fi
