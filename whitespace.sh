@@ -34,10 +34,15 @@ trailing_whitespace_bar_files_found=0
 for filename in $(find "${1:-.}" -type f | egrep -vf "$srcdir/whitespace_ignore.txt"); do
     isExcluded "$filename" && continue
     printf "%s" "$progress_char"
-    # TODO: [[:space:]] matches \r in Windows files which we don't want, try explicit character class instead
-    grep -Hn '^[[:space:]]\+$' "$filename" && let whitespace_only_files_found+=1 || :
-    grep -Hn '[[:space:]]\+$' "$filename" && let trailing_whitespace_files_found+=1 || :
-    egrep -Hn '[[:space:]]{4}\|[[:space:]]*$' "$filename" && let trailing_whitespace_bar_files_found+=1 || :
+    # [[:space:]] matches \r in Windows files which we don't want, use explicit character class instead to exclude \r
+    # works but not efficient
+    #grep -Hn '^[[:space:]]\+$' <<< "$(tr -d '\r' < "$filename")" && let whitespace_only_files_found+=1 || :
+    #grep -Hn '[[:space:]]\+$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_files_found+=1 || :
+    #egrep -Hn '[[:space:]]{4}\|[[:space:]]*$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_bar_files_found+=1 || :
+    # \t aren't working inside character classes for some reason, embedding literal tabs instead
+    egrep -Hn '^[ 	]+$' "$filename" && let whitespace_only_files_found+=1 || :
+    egrep -Hn '[ 	]+$' "$filename" && let trailing_whitespace_files_found+=1 || :
+    egrep -Hn '[ 	]{4}\|[ 	]*$' "$filename" && let trailing_whitespace_bar_files_found+=1 || :
 done
 if [ $whitespace_only_files_found -gt 0 ]; then
     echo "$whitespace_only_files_found files with whitespace only lines detected!"
