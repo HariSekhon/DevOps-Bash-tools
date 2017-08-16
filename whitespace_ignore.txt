@@ -1,3 +1,4 @@
+# Posix Regex
 /Makefile$
 /\.
 \.pyc$
@@ -11,3 +12,8 @@ dependency-reduced-pom.xml
 /cover_db/
 check_memcached_stats.cfg-pnp4nagios
 /spark-.*-bin-hadoop.*/
+-bin\b
+\.zip
+\.tar
+\.gz
+\.bz2
