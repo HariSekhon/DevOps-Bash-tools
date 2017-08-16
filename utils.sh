@@ -204,7 +204,6 @@ start_timer(){
     tstamp "Starting...
 "
     date '+%s'
-    echo >&2
 }
 
 time_taken(){
