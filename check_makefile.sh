@@ -26,9 +26,7 @@ fi
 
 section "M a k e"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"
 
 if which make &>/dev/null; then
     find -L "${1:-.}" -maxdepth 2 -name Makefile |
@@ -45,15 +43,9 @@ if which make &>/dev/null; then
             fi
         done
         popd >/dev/null
-        echo
     done
 fi
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+
+time_taken "$start_time"
 section2 "Makefile validation SUCCEEDED"
 echo
