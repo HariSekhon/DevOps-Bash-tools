@@ -40,6 +40,20 @@ is_docker_compose_available(){
     return 1
 }
 
+check_docker_available(){
+    if ! is_docker_available; then
+        echo 'WARNING: Docker not found, skipping checks!!!'
+        exit 0
+    fi
+    if ! is_docker_compose_available; then
+        echo 'WARNING: Docker Compose not found in $PATH, skipping checks!!!'
+        exit 0
+    fi
+    export DOCKER_SERVICE="${0#*test_}"
+    export DOCKER_SERVICE="${DOCKER_SERVICE%.sh}"
+    export COMPOSE_FILE="$srcdir/docker/$DOCKER_SERVICE-docker-compose.yml"
+}
+
 is_docker_container_running(){
     local containers="$(docker ps)"
     if [ -n "${DEBUG:-}" ]; then
