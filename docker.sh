@@ -49,7 +49,7 @@ check_docker_available(){
         echo 'WARNING: Docker Compose not found in $PATH, skipping checks!!!'
         exit 0
     fi
-    export DOCKER_SERVICE="${BASH_SOURCE[0]#*test_}"
+    export DOCKER_SERVICE="${BASH_SOURCE[1]#*test_}"
     export DOCKER_SERVICE="${DOCKER_SERVICE%.sh}"
     export COMPOSE_FILE="$srcdir/docker/$DOCKER_SERVICE-docker-compose.yml"
 }
