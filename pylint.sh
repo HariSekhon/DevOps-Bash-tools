@@ -26,7 +26,7 @@ fi
 
 section "P y L i n t"
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 if [ -n "${NOPYLINT:-}" ]; then
     echo '$NOPYLINT environment variable set, skipping PyLint error checks'
