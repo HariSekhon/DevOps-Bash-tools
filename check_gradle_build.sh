@@ -26,9 +26,7 @@ fi
 
 section "G r a d l e"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"
 
 if which gradle &>/dev/null; then
     find -L "${1:-.}" -name build.gradle |
@@ -36,19 +34,11 @@ if which gradle &>/dev/null; then
     while read build_gradle; do
         echo "Validating $build_gradle"
         gradle -b "$build_gradle" -m clean build || exit $?
-        echo
     done
 else
     echo "Gradle not found in \$PATH, skipping gradle checks"
 fi
 
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+time_taken "$start_time"
 section2 "All Gradle builds passed dry run checks"
 echo
