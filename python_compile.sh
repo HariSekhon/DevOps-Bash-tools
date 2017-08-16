@@ -38,8 +38,6 @@ else
         echo "compiling $x"
         python -m py_compile "$x"
     done
-    section "Python Compile Completed Successfully"
-    echo
 fi
 
 time_taken "$start_time"
