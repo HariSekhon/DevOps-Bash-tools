@@ -7,3 +7,4 @@
 /gradlew
 /mvnw
 dependency-reduced-pom.xml
+/[[:alnum:]-]+-[[:digit:]\.]+/
