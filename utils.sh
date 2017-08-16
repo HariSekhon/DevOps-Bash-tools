@@ -39,7 +39,7 @@ hr3(){
 
 section(){
     hr
-    "`dirname ${BASH_SOURCE[0]}`/center80.sh" "$@"
+    "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@"
     hr
     echo
 }
@@ -59,11 +59,11 @@ section3(){
 }
 
 hr2echo(){
-    "`dirname ${BASH_SOURCE[0]}`/center80.sh" "$@" 50
+    "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@" 50
 }
 
 hr3echo(){
-    "`dirname ${BASH_SOURCE[0]}`/center80.sh" "$@" 40
+    "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@" 40
 }
 
 # TODO:
