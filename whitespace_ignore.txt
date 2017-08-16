@@ -8,3 +8,4 @@
 /mvnw
 dependency-reduced-pom.xml
 /[[:alnum:]-]+-[[:digit:]\.]+/
+/cover_db/
