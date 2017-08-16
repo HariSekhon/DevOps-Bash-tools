@@ -25,7 +25,7 @@ GROOVY_VERSION=${GROOVY_VERSION:-2.4.7}
 
 BASE=/opt
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 if ! [ -e "$BASE/groovy" ]; then
     mkdir -p "$BASE"
