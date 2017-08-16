@@ -25,7 +25,7 @@ MAVEN_VERSION=${MAVEN_VERSION:-3.3.9}
 
 BASE=/opt
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 if ! [ -e "$BASE/maven" ]; then
     mkdir -p "$BASE"
