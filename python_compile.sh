@@ -26,9 +26,7 @@ fi
 
 section "Compiling Python / Jython files"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"                                                                                                                                                          |
 
 if [ -n "${NOCOMPILE:-}" ]; then
     echo '$NOCOMPILE environment variable set, skipping python compile'
@@ -44,13 +42,6 @@ else
     echo
 fi
 
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+time_taken "$start_time"
 section2 "Finished compiling Python / Jython files"
 echo
