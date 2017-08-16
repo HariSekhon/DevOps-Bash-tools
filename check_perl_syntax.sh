@@ -36,10 +36,7 @@ elif [ -n "${QUICK:-}" ]; then
     echo
 else
     for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
-        # expensive call shouldn't be needed when running from a fresh git checkout in CI
-        if ! is_CI; then
-            isExcluded "$x" && continue
-        fi
+        isExcluded "$x" && continue
         #printf "%-50s" "$x:"
         #$perl -Tc $I_lib $x
         # -W too noisy
