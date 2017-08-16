@@ -25,7 +25,7 @@ GRADLE_VERSION=${GRADLE_VERSION:-2.14.1}
 
 BASE=/opt
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 if ! [ -e "$BASE/gradle" ]; then
     mkdir -p "$BASE"
