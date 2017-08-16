@@ -25,9 +25,7 @@ SBT_VERSION=${SBT_VERSION:-0.13.12}
 
 BASE=/opt
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"                                                                                                                                                          |
 
 if ! [ -e "$BASE/sbt" ]; then
     mkdir -p "$BASE"
@@ -50,13 +48,6 @@ export PATH=\$PATH:\$SBT_HOME/bin
 EOF
 fi
 
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+time_taken "$start_time"
 section2 "SBT Install Completed"
 echo
