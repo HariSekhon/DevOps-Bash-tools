@@ -25,7 +25,7 @@ SBT_VERSION=${SBT_VERSION:-0.13.12}
 
 BASE=/opt
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 if ! [ -e "$BASE/sbt" ]; then
     mkdir -p "$BASE"
