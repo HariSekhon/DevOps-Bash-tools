@@ -21,9 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Python PEP8 checking all Python / Jython files"
 
-date
-start_time="$(date +%s)"
-echo
+start_time="$(start_timer)"                                                                                                                                                          |
 
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
     type isExcluded &>/dev/null && isExcluded "$x" && continue
@@ -31,13 +29,6 @@ for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); d
     pep8 --show-source --show-pep8 --max-line-length=120 --ignore=E402 "$x" | more
 done
 
-echo
-date
-echo
-end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
-echo "Completed in $time_taken secs"
-echo
+time_taken "$start_time"
 section2 "Python PEP8 Completed Successfully"
 echo
