@@ -25,9 +25,8 @@ if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' 
 fi
 
 section "Perl Syntax Checks"
-date
-start_time="$(date +%s)"
-echo
+
+start_time="$(start_timer)"
 
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
     echo '$NOSYNTAXCHECK environment variable set, skipping perl syntax checks'
@@ -37,20 +36,16 @@ elif [ -n "${QUICK:-}" ]; then
     echo
 else
     for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
-        isExcluded "$x" && continue
+        # expensive call shouldn't be needed when running from a fresh git checkout in CI
+        if ! is_CI; then
+            isExcluded "$x" && continue
+        fi
         #printf "%-50s" "$x:"
         #$perl -Tc $I_lib $x
         # -W too noisy
         perl -I . -Tc $x
     done
-    echo
-    date
-    echo
-    end_time="$(date +%s)"
-    # if start and end time are the same let returns exit code 1
-    let time_taken=$end_time-$start_time || :
-    echo "Completed in $time_taken secs"
-    echo
+    time_taken "$start_time"
     section2 "All Perl programs passed syntax check"
 fi
 echo
