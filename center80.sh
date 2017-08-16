@@ -26,6 +26,6 @@ set -euo pipefail
 textsize=${#1}
 # I want this to only match my hr() function, not 27" iMac 5K screens
 #width=$(tput cols)
-width=80
+width="${2:-${WIDTH:-80}}"
 span=$((($width + $textsize) / 2))
 printf "%${span}s\n" "$1"
