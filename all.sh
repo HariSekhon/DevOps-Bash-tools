@@ -21,9 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Running Bash Tools ALL"
 
-date
-bash_tools_start_time="$(date +%s)"
-echo
+bash_tools_start_time="$(start_timer)"
 
 # do help afterwards for Spark to be downloaded, and then help will find and use downloaded spark for SPARK_HOME
 #"$srcdir/help.sh"
@@ -62,13 +60,6 @@ echo
 #    "$srcdir/$script" -vvv
 #done
 
-echo
-date
-echo
-bash_tools_end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-let bash_tools_time_taken=$bash_tools_end_time-$bash_tools_start_time || :
-echo "Bash Tools All Checks Completed in $bash_tools_time_taken secs"
-echo
+time_taken "$bash_tools_start_time" "Bash Tools All Checks Completed in"
 section2 "Bash Tools All Checks Completed"
 echo
