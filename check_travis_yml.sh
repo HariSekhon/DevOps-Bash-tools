@@ -40,6 +40,6 @@ else
 fi
 
 echo
-time_taken "$start_time"                                                                                                                                                             |
+time_taken "$start_time"
 section2 "Travis CI yaml validation succeeded"
 echo
