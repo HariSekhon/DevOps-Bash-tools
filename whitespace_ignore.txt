@@ -20,3 +20,4 @@ check_memcached_stats.cfg-pnp4nagios
 \.tbz
 \.gz
 \.bz2
+\.class
