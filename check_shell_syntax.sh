@@ -31,10 +31,7 @@ section "Shell Syntax Checks"
 start_time="$(start_timer)"
 
 for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
-    # expensive call shouldn't be needed when running from a fresh git checkout in CI
-    if ! is_CI; then
-        isExcluded "$x" && continue
-    fi
+    isExcluded "$x" && continue
     echo -n "checking shell syntax: $x"
     bash -n "$x"
     echo " => OK"
