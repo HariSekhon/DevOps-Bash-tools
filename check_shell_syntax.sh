@@ -37,6 +37,6 @@ for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
     echo " => OK"
 done
 
-time_taken $start_time
+time_taken "$start_time"
 section2 "All Shell programs passed syntax check"
 echo
