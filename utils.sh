@@ -198,6 +198,7 @@ timestamp(){
     printf "%s" "`date '+%F %T'`  $*";
     [ $# -gt 0 ] && printf "\n"
 }
+tstamp(){ timestamp "$@"; }
 
 when_ports_available(){
     local max_secs="$1"
