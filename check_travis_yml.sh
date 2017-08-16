@@ -29,10 +29,8 @@ start_time="$(start_timer)"
 
 if is_travis; then
     echo "Running inside Travis CI, skipping lint check"
-    echo
 elif is_inside_docker; then
     echo "Running inside Docker, skipping lint check"
-    echo
 else
     # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
     #which travis &>/dev/null ||
@@ -41,6 +39,7 @@ else
     travis lint
 fi
 
+echo
 time_taken "$start_time"                                                                                                                                                             |
 section2 "Travis CI yaml validation succeeded"
 echo
