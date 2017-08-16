@@ -21,7 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Checking for whitespace only lines"
 
-start_time="$(start_timer)"                                                                                                                                                          |
+start_time="$(start_timer)"
 
 . "$srcdir/excluded.sh"
 
