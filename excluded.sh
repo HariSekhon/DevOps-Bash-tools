@@ -22,6 +22,8 @@ set -eu
 
 if ! type isExcluded &>/dev/null; then
     isExcluded(){
+        # this function is expensive, skip it when in CI as using fresh git checkouts
+        is_CI && return 1
         local prog="$1"
         [[ "$prog" =~ ^\* ]] && return 0
         [[ "$prog" =~ ^\.\/\. ]] && return 0
