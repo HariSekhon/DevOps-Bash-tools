@@ -195,10 +195,32 @@ plural_str(){
 }
 
 timestamp(){
-    printf "%s" "`date '+%F %T'`  $*";
+    printf "%s" "`date '+%F %T'`  $*" >&2;
     [ $# -gt 0 ] && printf "\n"
 }
 tstamp(){ timestamp "$@"; }
+
+start_timer(){
+    tstamp "Starting...
+"
+    date '+%s'
+    echo >&2
+}
+
+time_taken(){
+    echo
+    local start_time="$1"
+    shift
+    local time_taken
+    local msg="${@:-Completed in}"
+    tstamp "Finished"
+    echo
+    local end_time="$(date +%s)"
+    # if start and end time are the same let returns exit code 1
+    let time_taken=$end_time-$start_time || :
+    echo "$msg $time_taken secs"
+    echo
+}
 
 when_ports_available(){
     local max_secs="$1"
