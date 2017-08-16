@@ -2,6 +2,7 @@
 /Makefile$
 /\.
 \.pyc$
+\.jyc$
 /target/
 /build/
 /gradle/
