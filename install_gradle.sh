@@ -24,10 +24,10 @@ GRADLE_VERSION=${GRADLE_VERSION:-2.14.1}
 
 BASE=/opt
 
+echo
 date '+%F %T  Starting...'
 start_time="$(date +%s)"
 echo
-
 
 if ! [ -e "$BASE/gradle" ]; then
     mkdir -p "$BASE"
