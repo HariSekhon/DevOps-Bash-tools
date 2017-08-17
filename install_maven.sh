@@ -53,7 +53,7 @@ fi
 echo
 date '+%F %T  Finished'
 echo
-local end_time="$(date +%s)"
+end_time="$(date +%s)"
 # if start and end time are the same let returns exit code 1
 let time_taken=$end_time-$start_time || :
 echo "Completed in $time_taken secs"
