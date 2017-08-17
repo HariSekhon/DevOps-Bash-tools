@@ -15,17 +15,18 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-. "$srcdir/utils.sh"
-
-section "Groovy Install"
+echo "================================================================================"
+echo "                           G r o o v y   I n s t a l l"
+echo "================================================================================"
 
 GROOVY_VERSION=${GROOVY_VERSION:-2.4.7}
 
 BASE=/opt
 
-start_time="$(start_timer)"
+date '+%F %T  Starting...'
+start_time="$(date +%s)"
+echo
 
 if ! [ -e "$BASE/groovy" ]; then
     mkdir -p "$BASE"
@@ -49,6 +50,15 @@ export PATH=\$PATH:\$GROOVY_HOME/bin
 EOF
 fi
 
-time_taken "$start_time"
-section2 "Groovy Install Completed"
+echo
+date '+%F %T  Finished'
+echo
+local end_time="$(date +%s)"
+# if start and end time are the same let returns exit code 1
+let time_taken=$end_time-$start_time || :
+echo "Completed in $time_taken secs"
+echo
+echo "=================================================="
+echo "            Groovy Install Completed"
+echo "=================================================="
 echo
