@@ -15,7 +15,6 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "================================================================================"
 echo "                           G r a d l e   I n s t a l l"
