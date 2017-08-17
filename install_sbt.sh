@@ -24,6 +24,7 @@ SBT_VERSION=${SBT_VERSION:-0.13.12}
 
 BASE=/opt
 
+echo
 date '+%F %T  Starting...'
 start_time="$(date +%s)"
 echo
