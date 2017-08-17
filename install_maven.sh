@@ -24,6 +24,7 @@ MAVEN_VERSION=${MAVEN_VERSION:-3.3.9}
 
 BASE=/opt
 
+echo
 date '+%F %T  Starting...'
 start_time="$(date +%s)"
 echo
