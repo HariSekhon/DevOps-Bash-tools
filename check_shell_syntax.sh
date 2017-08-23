@@ -15,6 +15,8 @@
 
 # This really only checks basic syntax, if you're made command errors this won't catch it
 
+# This will however catch unbalanced parens / braces / if statements / quotes
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
