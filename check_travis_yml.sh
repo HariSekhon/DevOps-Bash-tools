@@ -34,9 +34,19 @@ elif is_inside_docker; then
 else
     # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
     #which travis &>/dev/null ||
-    type travis &>/dev/null ||
-        gem install travis --no-rdoc --no-ri
-    travis lint
+    if ! type travis &>/dev/null; then
+        if which gem; then
+            gem install travis --no-rdoc --no-ri
+        else
+            echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
+            echo
+        fi
+    fi
+    if type travis &>/dev/null; then
+    	travis lint
+    else
+        echo "WARNING: skipping Travis check as Travis is not installed"
+    fi
 fi
 
 echo
