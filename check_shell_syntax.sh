@@ -15,29 +15,47 @@
 
 # This really only checks basic syntax, if you're made command errors this won't catch it
 
-# This will however catch unbalanced parens / braces / if statements / quotes
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
-    return 0 &>/dev/null || :
-    exit 0
+if [ $# -eq 0 ]; then
+    if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
+        return 0 &>/dev/null || :
+        exit 0
+    fi
 fi
 
 section "Shell Syntax Checks"
 
+check_shell_syntax(){
+    echo -n "checking shell syntax: $1"
+    bash -n "$1"
+    echo " => OK"
+}
+
+recurse_dir(){
+    for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
+        isExcluded "$x" && continue
+        check_shell_syntax "$x"
+    done
+}
+
 start_time="$(start_timer)"
 
-for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
-    isExcluded "$x" && continue
-    echo -n "checking shell syntax: $x"
-    bash -n "$x"
-    echo " => OK"
-done
+if [ $# -gt 0 ]; then
+    for x in $@; do
+        if [ -d "$x" ]; then
+            recurse_dir "$x"
+        else
+            check_shell_syntax "$x"
+        fi
+    done
+else
+    recurse_dir .
+fi
 
 time_taken "$start_time"
 section2 "All Shell programs passed syntax check"
