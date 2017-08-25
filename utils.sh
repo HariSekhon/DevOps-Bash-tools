@@ -227,7 +227,7 @@ when_ports_available(){
     local ports="${@:3}"
     local retry_interval=1
     local max_tries=$(($max_secs / $retry_interval))
-    local nc_cmd="nc -z -G $retry_interval $host"
+    local nc_cmd="nc -z -w $retry_interval $host"
     cmd=""
     for x in $ports; do
         cmd="$cmd $nc_cmd $x &>/dev/null && "
