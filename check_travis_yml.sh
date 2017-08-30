@@ -43,9 +43,8 @@ else
             gem install --user-install travis --no-rdoc --no-ri
             for path in ~/.gem/ruby/*; do
                 [ -d "$path" ] || continue
-                export PATH="$PATH:$path"
+                export PATH="$PATH:$path/bin"
             done
-            echo "extended path to contain local gem bins: $PATH"
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
             echo
