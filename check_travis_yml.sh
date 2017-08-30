@@ -36,10 +36,16 @@ else
     #which travis &>/dev/null ||
     if ! type travis &>/dev/null; then
         if which gem &>/dev/null; then
-            ruby_version="$(ruby --version | awk '{print $2}' | sed 's/p.*//')"
-            export PATH="$PATH:$HOME/.gem/ruby/$ruby_version/bin"
+            # this returns ruby-1.9.3 but using 1.9.1
+            #ruby_version="$(ruby --version | awk '{print $2}' | sed 's/p.*//')"
+            #export PATH="$PATH:$HOME/.gem/ruby/$ruby_version/bin"
             echo "installing travis gem... (requires ruby-dev package to be installed)"
             gem install --user-install travis --no-rdoc --no-ri
+            for path in ~/.gem/ruby/*; do
+                [ -d "$path" ] || continue
+                export PATH="$PATH:$x"
+            done
+            echo "extended path to contain local gem bins: $PATH"
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
             echo
