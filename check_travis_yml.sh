@@ -38,7 +38,7 @@ else
         if which gem &>/dev/null; then
             ruby_version="$(ruby --version | awk '{print $2}' | sed 's/p.*//')"
             export PATH="$PATH:$HOME/.gem/ruby/$ruby_version/bin"
-            echo "installing travis gem..."
+            echo "installing travis gem... (requires ruby-dev package to be installed)"
             gem install --user-install travis --no-rdoc --no-ri
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
