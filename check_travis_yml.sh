@@ -35,7 +35,7 @@ else
     # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
     #which travis &>/dev/null ||
     if ! type travis &>/dev/null; then
-        if which gem; then
+        if which gem &>/dev/null; then
             gem install travis --no-rdoc --no-ri
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
