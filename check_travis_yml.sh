@@ -38,7 +38,7 @@ else
         [ -d "$path" ] || continue
         export PATH="$PATH:$path/bin"
     done
-    if which travis &>/dev/null; then
+    if ! which travis &>/dev/null; then
         if which gem &>/dev/null; then
             # this returns ruby-1.9.3 but using 1.9.1
             #ruby_version="$(ruby --version | awk '{print $2}' | sed 's/p.*//')"
@@ -54,7 +54,7 @@ else
             echo
         fi
     fi
-    if type travis &>/dev/null; then
+    if which travis &>/dev/null; then
     	travis lint
     else
         echo "WARNING: skipping Travis check as Travis is not installed"
