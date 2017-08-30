@@ -36,6 +36,7 @@ else
     #which travis &>/dev/null ||
     if ! type travis &>/dev/null; then
         if which gem &>/dev/null; then
+            echo "installing travis gem..."
             gem install travis --no-rdoc --no-ri
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
