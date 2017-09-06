@@ -235,7 +235,7 @@ when_ports_available(){
     local cmd="${cmd% && }"
     plural_str $ports
     echo "waiting for port$plural '$ports' to become available, will try up to $max_tries times at $retry_interval sec intervals"
-    echo "cmd: $cmd"
+    echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
     if which nc &>/dev/null; then
         for((i=0; i < $max_tries; i++)); do
