@@ -33,16 +33,28 @@ elif is_inside_docker; then
     echo "Running inside Docker, skipping lint check"
 else
     # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
-    #which travis &>/dev/null ||
-    if ! type travis &>/dev/null; then
-        if which gem; then
-            gem install travis --no-rdoc --no-ri
+    #if ! type travis &>/dev/null; then
+    for path in ~/.gem/ruby/*; do
+        [ -d "$path" ] || continue
+        export PATH="$PATH:$path/bin"
+    done
+    if ! which travis &>/dev/null; then
+        if which gem &>/dev/null; then
+            # this returns ruby-1.9.3 but using 1.9.1
+            #ruby_version="$(ruby --version | awk '{print $2}' | sed 's/p.*//')"
+            #export PATH="$PATH:$HOME/.gem/ruby/$ruby_version/bin"
+            echo "installing travis gem... (requires ruby-dev package to be installed)"
+            gem install --user-install travis --no-rdoc --no-ri
+            for path in ~/.gem/ruby/*; do
+                [ -d "$path" ] || continue
+                export PATH="$PATH:$path/bin"
+            done
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
             echo
         fi
     fi
-    if type travis &>/dev/null; then
+    if which travis &>/dev/null; then
     	travis lint
     else
         echo "WARNING: skipping Travis check as Travis is not installed"
