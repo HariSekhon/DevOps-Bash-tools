@@ -40,6 +40,7 @@ else
         #printf "%-50s" "$x:"
         #$perl -Tc $I_lib $x
         # -W too noisy
+        echo -n "$x: "
         perl -I . -Tc $x
     done
     time_taken "$start_time"
