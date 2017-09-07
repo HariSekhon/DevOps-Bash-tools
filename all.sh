@@ -18,8 +18,11 @@ set -euo pipefail
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
+. "$srcdir/docker.sh"
 
 section "Running Bash Tools ALL"
+
+declare_if_inside_docker
 
 bash_tools_start_time="$(start_timer)"
 
