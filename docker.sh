@@ -49,6 +49,8 @@ check_docker_available(){
         echo 'WARNING: Docker Compose not found in $PATH, skipping checks!!!'
         exit 0
     fi
+    # alternative
+    #export DOCKER_SERVICE="$(ps -o comm= $PPID)"
     export DOCKER_SERVICE="${BASH_SOURCE[1]#*test_}"
     export DOCKER_SERVICE="${DOCKER_SERVICE%.sh}"
     export COMPOSE_FILE="$srcdir/docker/$DOCKER_SERVICE-docker-compose.yml"
@@ -70,6 +72,14 @@ $containers
 is_inside_docker(){
     test -f /.dockerenv
 }
+
+declare_inside_docker(){
+    if is_inside_docker; then
+        echo
+        echo "(running in Docker container $(hostname -f))"
+        echo
+    fi
+fi
 
 external_docker(){
     [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
