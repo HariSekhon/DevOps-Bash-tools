@@ -18,8 +18,11 @@ set -euo pipefail
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
+. "$srcdir/docker.sh"
 
 section "Running Test Scripts"
+
+declare_if_inside_docker
 
 start_time="$(start_timer)"
 
@@ -29,6 +32,7 @@ for script in $scripts; do
     date
     script_start_time="$(date +%s)"
     echo
+    declare_if_inside_docker
     ./$script
     echo
     date
