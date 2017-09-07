@@ -79,7 +79,7 @@ declare_if_inside_docker(){
         echo "(running in Docker container $(hostname -f))"
         echo
     fi
-fi
+}
 
 external_docker(){
     [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
