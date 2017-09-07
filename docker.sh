@@ -73,7 +73,7 @@ is_inside_docker(){
     test -f /.dockerenv
 }
 
-declare_inside_docker(){
+declare_if_inside_docker(){
     if is_inside_docker; then
         echo
         echo "(running in Docker container $(hostname -f))"
