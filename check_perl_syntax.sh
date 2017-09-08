@@ -13,7 +13,7 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
-set -eu
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -41,9 +41,7 @@ else
         #$perl -Tc $I_lib $x
         # -W too noisy
         echo -n "$x: "
-        set -o pipefail
         perl -I . -Tc $x | sed "s/^$x//"
-        set +o pipefail
     done
     time_taken "$start_time"
     section2 "All Perl programs passed syntax check"
