@@ -194,6 +194,44 @@ plural_str(){
     plural ${#parts[@]}
 }
 
+# =================================
+#
+# these functions are too clever and dynamic but save a lot of duplication in nagios-plugins test_*.sh scripts
+#
+print_port_mappings(){
+    local name="$(tr 'a-z' 'A-Z' <<< "$1")"
+    echo
+    echo "Port Mappings for Debugging:"
+    echo
+    eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
+    echo
+}
+
+trap_port_mappings(){
+    local name="$1"
+    trap 'result=$?; print_port_mappings '"$name"' ; exit $result' $TRAP_SIGNALS
+}
+
+run_test_versions(){
+    local name="$1"
+    local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}" | sed )"
+    local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
+    test_versions="$(eval ci_sample $`echo $VERSIONS`)"
+    for version in $test_versions; do
+        eval "$test_func" "$version"
+    done
+
+    if [ -n "${NOTESTS:-}" ]; then
+        print_port_mappings "$name"
+    else
+        untrap
+        echo "All $name tests succeeded for versions: $test_versions"
+    fi
+    echo
+}
+
+# =================================
+
 timestamp(){
     printf "%s" "`date '+%F %T'`  $*" >&2
     [ $# -gt 0 ] && printf "\n" >&2
