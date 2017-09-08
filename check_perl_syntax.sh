@@ -41,7 +41,7 @@ else
         #$perl -Tc $I_lib $x
         # -W too noisy
         echo -n "$x: "
-        perl -I . -Tc $x | sed "s/^$x//"
+        perl -I . -Tc $x | sed "s,^$x,,"
     done
     time_taken "$start_time"
     section2 "All Perl programs passed syntax check"
