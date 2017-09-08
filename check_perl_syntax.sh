@@ -35,12 +35,20 @@ elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping perl syntax checks'
     echo
 else
-    for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t'); do
+    filelist=$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')
+    max_len=0
+    for x in $filelist; do
+        if [ ${#x} -gt $max_len ]; then
+            max_len=${#x}
+        fi
+    done
+    # to account for the semi colon
+    let max_len+=1
+    for x in $filelist; do
         isExcluded "$x" && continue
-        #printf "%-50s" "$x:"
+        printf "%-${max_len}s " "$x: "
         #$perl -Tc $I_lib $x
         # -W too noisy
-        echo -n "$x: "
         perl -I . -Tc "$x" | sed "s,^$x,,"
     done
     time_taken "$start_time"
