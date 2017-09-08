@@ -49,7 +49,7 @@ else
         printf "%-${max_len}s " "$x: "
         #$perl -Tc $I_lib $x
         # -W too noisy
-        perl -I . -Tc "$x" | sed "s,^$x,,"
+        perl -I . -Tc "$x" 2>&1 | sed "s,^$x ,,"
     done
     time_taken "$start_time"
     section2 "All Perl programs passed syntax check"
