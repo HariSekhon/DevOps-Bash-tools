@@ -198,18 +198,27 @@ plural_str(){
 #
 # these functions are too clever and dynamic but save a lot of duplication in nagios-plugins test_*.sh scripts
 #
-print_port_mappings(){
-    local name="$(tr 'a-z' 'A-Z' <<< "$1")"
+print_debug_env(){
     echo
-    echo "Port Mappings for Debugging:"
+    echo "Environment for Debugging:"
     echo
-    eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
-    echo
+    # multiple name support for MySQL + MariaDB variables
+    for name in $@; do
+        name="$(tr 'a-z' 'A-Z' <<< "$name")"
+        #eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
+        # instead of just name_PORT, find all PORTS in environment and print them
+        # while read line to preserve CASSANDRA_PORTS=7199 9042
+        env | egrep "^$name.*_" | grep -v DEFAULT | sort | while read env_var; do
+            # sed here to quote export CASSANDRA_PORTS=7199 9042 => export CASSANDRA_PORTS="7199 9042"
+            eval echo "export $env_var" | sed 's/=/="/;s/$/"/'
+        done
+        echo
+    done
 }
 
-trap_port_mappings(){
+trap_debug_env(){
     local name="$1"
-    trap 'result=$?; print_port_mappings '"$name"' ; exit $result' $TRAP_SIGNALS
+    trap 'result=$?; print_debug_env '"$*"'; exit $result' $TRAP_SIGNALS
 }
 
 run_test_versions(){
