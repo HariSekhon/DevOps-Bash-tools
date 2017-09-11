@@ -225,7 +225,7 @@ trap_debug_env(){
 
 run_test_versions(){
     local name="$1"
-    local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}" | sed )"
+    local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
     test_versions="$(eval ci_sample $`echo $VERSIONS`)"
     for version in $test_versions; do
