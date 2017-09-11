@@ -18,6 +18,8 @@ set -eu
 srcdir_bash_tools_utils="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+. "$srcdir/perl.sh"
+
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
 die(){
