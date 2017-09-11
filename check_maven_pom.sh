@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -name pom.xml)" ]; then
+if [ -z "$(find "${1:-.}" -name pom.xml)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ section "M a v e n"
 start_time="$(start_timer)"
 
 if which mvn &>/dev/null; then
-    find -L "${1:-.}" -name pom.xml |
+    find "${1:-.}" -name pom.xml |
     grep -v '/target/' |
     while read pom; do
         echo "Validating $pom"

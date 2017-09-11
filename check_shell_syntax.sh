@@ -22,7 +22,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$srcdir/utils.sh"
 
 if [ $# -eq 0 ]; then
-    if [ -z "$(find -L "${1:-.}" -type f -iname '*.sh')" ]; then
+    if [ -z "$(find "${1:-.}" -type f -iname '*.sh')" ]; then
         return 0 &>/dev/null || :
         exit 0
     fi
@@ -37,7 +37,7 @@ check_shell_syntax(){
 }
 
 recurse_dir(){
-    for x in $(find -L "${1:-.}" -type f -iname '*.sh'); do
+    for x in $(find "${1:-.}" -type f -iname '*.sh'); do
         isExcluded "$x" && continue
         check_shell_syntax "$x"
     done

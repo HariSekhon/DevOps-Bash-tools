@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -maxdepth 2 -name Makefile)" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -name Makefile)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ section "M a k e"
 start_time="$(start_timer)"
 
 if which make &>/dev/null; then
-    find -L "${1:-.}" -maxdepth 2 -name Makefile |
+    find "${1:-.}" -maxdepth 2 -name Makefile |
     while read makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"

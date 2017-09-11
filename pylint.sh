@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -36,7 +36,7 @@ else
     if which pylint &>/dev/null; then
         # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
         #prog_list="
-        for x in $(find -L ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+        for x in $(find ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
             #echo "checking if $x is excluded"
             isExcluded "$x" && continue
             #echo "added $x for testing"

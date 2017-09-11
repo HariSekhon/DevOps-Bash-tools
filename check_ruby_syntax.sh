@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ section "Ruby Syntax Checks"
 start_time="$(start_timer)"
 
 if which ruby &>/dev/null; then
-    for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.rb'); do
+    for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.rb'); do
         isExcluded "$x" && continue
         echo -n "$x: "
         ruby -c $x

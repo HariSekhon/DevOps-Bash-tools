@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -name build.sbt)" ]; then
+if [ -z "$(find "${1:-.}" -name build.sbt)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ section "S B T"
 start_time="$(start_timer)"
 
 if which sbt &>/dev/null; then
-    find -L "${1:-.}" -name build.sbt |
+    find "${1:-.}" -name build.sbt |
     grep -v '/target/' |
     while read build_sbt; do
         pushd "$(dirname $build_sbt)" >/dev/null

@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -name build.gradle)" ]; then
+if [ -z "$(find "${1:-.}" -name build.gradle)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ section "G r a d l e"
 start_time="$(start_timer)"
 
 if which gradle &>/dev/null; then
-    find -L "${1:-.}" -name build.gradle |
+    find "${1:-.}" -name build.gradle |
     grep -v '/build/' |
     while read build_gradle; do
         echo "Validating $build_gradle"

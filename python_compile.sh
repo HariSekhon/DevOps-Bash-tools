@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -33,7 +33,7 @@ if [ -n "${NOCOMPILE:-}" ]; then
 elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping python compile'
 else
-    for x in $(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+    for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
         type isExcluded &>/dev/null && isExcluded "$x" && continue
         echo "compiling $x"
         python -m py_compile "$x"

@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -35,7 +35,7 @@ elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping perl syntax checks'
     echo
 else
-    filelist=$(find -L "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')
+    filelist=$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
