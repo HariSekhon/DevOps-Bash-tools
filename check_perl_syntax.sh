@@ -46,7 +46,7 @@ else
     let max_len+=1
     for x in $filelist; do
         isExcluded "$x" && continue
-        printf "%-${max_len}s " "$x: "
+        printf "%-${max_len}s " "$x:"
         #$perl -Tc $I_lib $x
         # -W too noisy
         $perl -I . -Tc "$x" 2>&1 | sed "s,^$x ,,"
