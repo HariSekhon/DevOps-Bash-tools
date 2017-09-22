@@ -33,9 +33,9 @@ if which make &>/dev/null; then
     while read makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
-        grep '^[[:alpha:]]\+:' Makefile |
+        grep '^[[:alnum:]]\+:' Makefile |
         sort -u |
-        sed 's/:$//' |
+        sed 's/:.*$//' |
         while read target; do
             if ! make --warn-undefined-variables -n $target >/dev/null; then
                 echo "Makefile validation FAILED"
