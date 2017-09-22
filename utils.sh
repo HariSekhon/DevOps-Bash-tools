@@ -77,15 +77,14 @@ check_output(){
     local expected="$1"
     local cmd="${@:2}"
     # do not 2>&1 it will cause indeterministic output even with python -u so even tail -n1 won't work
+    echo "check_output:  $cmd"
+    echo "expecting:     $expected"
     local output="$($cmd)"
-    if [ -n "${DEBUG:-}" ]; then
-        echo "full debug output: $output"
-    fi
     # intentionally not quoting so that we can use things like google* glob matches for google.com and google.co.uk
     if [[ "$output" = $expected ]]; then
-        echo "SUCCESS: got expected output '$output'"
+        echo "SUCCESS:       $output"
     else
-        die "FAILED: got '$output', expected '$expected'"
+        die "FAILED:        $output"
     fi
     echo
 }
