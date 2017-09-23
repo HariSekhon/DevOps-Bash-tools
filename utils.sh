@@ -219,7 +219,7 @@ print_debug_env(){
 
 trap_debug_env(){
     local name="$1"
-    trap 'result=$?; print_debug_env '"$*"'; exit $result' $TRAP_SIGNALS
+    trap 'result=$?; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
 }
 
 run_test_versions(){
