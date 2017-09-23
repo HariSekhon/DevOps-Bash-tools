@@ -203,6 +203,10 @@ print_debug_env(){
     echo
     echo "Environment for Debugging:"
     echo
+    if [ -n "$version" ]; then
+        echo "version: $version"
+        echo
+    fi
     # multiple name support for MySQL + MariaDB variables
     for name in $@; do
         name="$(tr 'a-z' 'A-Z' <<< "$name")"
