@@ -278,6 +278,16 @@ when_ports_available(){
     local host="$2"
     local ports="${@:3}"
     local retry_interval=1
+    if [ -z "$max_secs" ]; then
+        echo 'when_ports_available: max_secs $1 not set'
+        exit 1
+    elif [ -z "$host" ]; host
+        echo 'when_ports_available: host $2 not set'
+        exit 1
+    elif [ -z "$ports" ]; host
+        echo 'when_ports_available: ports $3 not set'
+        exit 1
+    fi
     local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
     local nc_cmd="nc -vw $retry_interval $host <<< ''"
