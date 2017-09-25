@@ -281,10 +281,10 @@ when_ports_available(){
     if [ -z "$max_secs" ]; then
         echo 'when_ports_available: max_secs $1 not set'
         exit 1
-    elif [ -z "$host" ]; host
+    elif [ -z "$host" ]; then
         echo 'when_ports_available: host $2 not set'
         exit 1
-    elif [ -z "$ports" ]; host
+    elif [ -z "$ports" ]; then
         echo 'when_ports_available: ports $3 not set'
         exit 1
     fi
