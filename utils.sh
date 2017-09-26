@@ -336,11 +336,11 @@ when_url_content(){
         exit 1
     fi
     local max_tries=$(($max_secs / $retry_interval))
-    echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content"
+    echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content: '$expected_regex'"
     for((i=1; i <= $max_tries; i++)); do
         timestamp "$i trying $url"
         if curl -s "$url" | grep -q "$expected_regex"; then
-            echo "URL content detected"
+            echo "URL content detected '$expected_regex'"
             return
         fi
         sleep 1
