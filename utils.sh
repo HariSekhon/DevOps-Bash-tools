@@ -301,8 +301,8 @@ when_ports_available(){
     echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
     if which nc &>/dev/null; then
-        for((i=0; i < $max_tries; i++)); do
-            timestamp "trying host '$host' port(s) '$ports'"
+        for((i=1; i <= $max_tries; i++)); do
+            timestamp "$i trying host '$host' port(s) '$ports'"
             if eval $cmd; then
                 found=1
                 break
@@ -318,6 +318,34 @@ when_ports_available(){
         echo "'nc' command not found, sleeping for '$max_secs' secs instead"
         sleep "$max_secs"
     fi
+}
+
+when_url_content(){
+    local max_secs="$1"
+    local url="$2"
+    local expected_regex="$3"
+    local retry_interval=1
+    if [ -z "$max_secs" ]; then
+        echo 'when_url_content: max_secs $1 not set'
+        exit 1
+    elif [ -z "$url" ]; then
+        echo 'when_url_content: url $2 not set'
+        exit 1
+    elif [ -z "$expected_regex" ]; then
+        echo 'when_url_content: expected content $3 not set'
+        exit 1
+    fi
+    local max_tries=$(($max_secs / $retry_interval))
+    echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content"
+    for((i=1; i <= $max_tries; i++)); do
+        timestamp "$i trying $url"
+        if curl -s "$url" | grep -q "$expected_regex"; then
+            echo "URL content detected"
+            return
+        fi
+        sleep 1
+    done
+    echo 'URL content still not detected, giving up!'
 }
 
 # restore original srcdir
