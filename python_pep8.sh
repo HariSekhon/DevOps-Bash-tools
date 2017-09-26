@@ -23,7 +23,7 @@ section "Python PEP8 checking all Python / Jython files"
 
 start_time="$(start_timer)"
 
-for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy'); do
+for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && continue
     which pep8 &>/dev/null || sudo pip install pep8
     pep8 --show-source --show-pep8 --max-line-length=120 --ignore=E402 "$x" | more

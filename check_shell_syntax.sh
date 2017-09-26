@@ -37,7 +37,7 @@ check_shell_syntax(){
 }
 
 recurse_dir(){
-    for x in $(find "${1:-.}" -type f -iname '*.sh'); do
+    for x in $(find "${1:-.}" -type f -iname '*.sh' | sort); do
         isExcluded "$x" && continue
         check_shell_syntax "$x"
     done
