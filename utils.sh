@@ -47,6 +47,9 @@ section(){
     hr
     "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@"
     hr
+    if [ -n "${PROJECT:-}" ]; then
+        echo "PROJECT: $PROJECT"
+    fi
     if is_inside_docker; then
         echo "(running inside docker)"
     fi
