@@ -78,7 +78,9 @@ hr3echo(){
     "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@" 40
 }
 
+#set +o pipefail
 #spark_home="$(ls -d tests/spark-*-bin-hadoop* 2>/dev/null | head -n 1)"
+#set -o pipefail
 #if [ -n "$spark_home" ]; then
 #    export SPARK_HOME="$spark_home"
 #fi
