@@ -18,6 +18,10 @@ set -eu
 srcdir_bash_tools_utils="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+[ "${bash_tools_utils_imported:-0}" = 1 ] && return
+export bash_tools_utils_imported=1
+
+. "$srcdir/docker.sh"
 . "$srcdir/perl.sh"
 
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
@@ -43,6 +47,9 @@ section(){
     hr
     "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@"
     hr
+    if is_inside_docker; then
+        echo "(running inside docker)"
+    fi
     echo
 }
 
