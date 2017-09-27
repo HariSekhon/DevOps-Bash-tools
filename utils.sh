@@ -339,7 +339,7 @@ when_url_content(){
     echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content: '$expected_regex'"
     for((i=1; i <= $max_tries; i++)); do
         timestamp "$i trying $url"
-        if curl -s "$url" | grep -q "$expected_regex"; then
+        if curl -s -L "$url" | grep -q "$expected_regex"; then
             echo "URL content detected '$expected_regex'"
             return
         fi
