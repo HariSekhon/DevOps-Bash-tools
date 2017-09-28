@@ -351,15 +351,21 @@ when_url_content(){
     fi
     local max_tries=$(($max_secs / $retry_interval))
     echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content: '$expected_regex'"
+    found=0
     for((i=1; i <= $max_tries; i++)); do
         timestamp "$i trying $url"
         if curl -s -L "$url" | grep -q -- "$expected_regex"; then
             echo "URL content detected '$expected_regex'"
-            return
+            found=1
+            break
         fi
         sleep 1
     done
-    echo 'URL content still not detected, giving up!'
+    if [ $found -eq 1 ]; then
+        timestamp "URL content found after $i secs"
+    else
+        timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
+    fi
 }
 
 # restore original srcdir
