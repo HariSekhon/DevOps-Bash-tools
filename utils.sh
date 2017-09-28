@@ -217,6 +217,10 @@ print_debug_env(){
     echo
     echo "Environment for Debugging:"
     echo
+    if [ -n "${VERSION:-}" ]; then
+        echo "VERSION: $VERSION"
+        echo
+    fi
     if [ -n "${version:-}" ]; then
         echo "version: $version"
         echo
