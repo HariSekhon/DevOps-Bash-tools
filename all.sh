@@ -63,6 +63,8 @@ bash_tools_start_time="$(start_timer)"
 # too heavy to run all the time, isExcluded on every file has really bad performance
 . "$srcdir/check_whitespace.sh"
 
+"$srcdir/check_pytools.sh"
+
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
 #done
