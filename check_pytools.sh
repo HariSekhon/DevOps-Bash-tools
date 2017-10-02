@@ -34,6 +34,8 @@ start_time="$(start_timer)"
 echo -n "running on branch:  "
 git branch | grep ^*
 echo
+echo "running in dir: $PWD"
+echo
 
 get_pytools(){
     if ! [ -d "$srcdir/pytools_checks" ]; then
