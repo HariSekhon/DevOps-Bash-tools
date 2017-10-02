@@ -23,6 +23,11 @@ srcdir="$srcdir2"
 
 section "PyTools Checks"
 
+if [ "$PROJECT" = "pytools" ]; then
+    echo "detected running in pytools repo, skipping..."
+    exit 0
+fi
+
 export PROJECT=bash-tools
 
 start_time="$(start_timer)"
