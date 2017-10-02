@@ -26,6 +26,9 @@ section "PyTools Checks"
 if [ "$PROJECT" = "pytools" ]; then
     echo "detected running in pytools repo, skipping..."
     exit 0
+elif [ "$PROJECT" = "Dockerfiles" ]; then
+    echo "detected running in Dockerfiles repo, skipping..."
+    exit 0
 fi
 
 export PROJECT=bash-tools
