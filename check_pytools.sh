@@ -64,16 +64,16 @@ else
     get_pytools
 fi
 
+skip_checks=0
 if [ "$PROJECT" = "pytools" ]; then
     echo "detected running in pytools repo, skipping..."
-    return 0 &>/dev/null
-    exit 0
+    skip_checks=1
 elif [ "$PROJECT" = "Dockerfiles" ]; then
     echo "detected running in Dockerfiles repo, skipping..."
-    return 0 &>/dev/null
-    exit 0
+    skip_checks=1
 fi
 
+if [ $skip_checks = 0 ]; then
 echo
 echo "Running validation programs:"
 echo
@@ -88,3 +88,4 @@ done
 time_taken "$start_time"
 section2 "PyTools validations SUCCEEDED"
 echo
+fi
