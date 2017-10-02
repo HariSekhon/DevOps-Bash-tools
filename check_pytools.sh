@@ -34,7 +34,7 @@ start_time="$(start_timer)"
 echo -n "running on branch:  "
 git branch | grep ^*
 echo
-echo "running in dir: $PWD"
+echo "running in dir:  $PWD"
 echo
 
 get_pytools(){
