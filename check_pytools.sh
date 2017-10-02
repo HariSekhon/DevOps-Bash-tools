@@ -66,10 +66,10 @@ fi
 
 skip_checks=0
 if [ "$PROJECT" = "pytools" ]; then
-    echo "detected running in pytools repo, skipping..."
+    echo "detected running in pytools repo, skipping checks here as will be called in bash-tools/all.sh..."
     skip_checks=1
 elif [ "$PROJECT" = "Dockerfiles" ]; then
-    echo "detected running in Dockerfiles repo, skipping..."
+    echo "detected running in Dockerfiles repo, skipping checks here as will be called in bash-tools/all.sh..."
     skip_checks=1
 fi
 
