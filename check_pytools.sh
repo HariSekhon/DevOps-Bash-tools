@@ -21,28 +21,19 @@ srcdir2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 srcdir="$srcdir2"
 
-section "PyTools Checks"
-
-if [ "$PROJECT" = "pytools" ]; then
-    echo "detected running in pytools repo, skipping..."
-    return 0 &>/dev/null
-    exit 0
-elif [ "$PROJECT" = "Dockerfiles" ]; then
-    echo "detected running in Dockerfiles repo, skipping..."
-    return 0 &>/dev/null
-    exit 0
+if [ -z "${PROJECT:-}" ]; then
+    export PROJECT=bash-tools
 fi
 
-export PROJECT=bash-tools
+section "PyTools Checks"
+
+export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
 
 start_time="$(start_timer)"
 
 echo -n "running on branch:  "
 git branch | grep ^*
-
 echo
-
-export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
 
 get_pytools(){
     if ! [ -d "$srcdir/pytools_checks" ]; then
@@ -71,6 +62,16 @@ if which dockerfiles_check_git_branches.py &>/dev/null &&
     fi
 else
     get_pytools
+fi
+
+if [ "$PROJECT" = "pytools" ]; then
+    echo "detected running in pytools repo, skipping..."
+    return 0 &>/dev/null
+    exit 0
+elif [ "$PROJECT" = "Dockerfiles" ]; then
+    echo "detected running in Dockerfiles repo, skipping..."
+    return 0 &>/dev/null
+    exit 0
 fi
 
 echo
