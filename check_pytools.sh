@@ -82,8 +82,13 @@ echo
 for x in "$(dirname "$(which validate_ini.py)")"/validate_*.py; do
     [[ "$x" =~ validate_multimedia.py ]] && continue
     [ -L "$x" ] && continue
+    opts=""
+    if [ "$x" = "validate_ini.py" -o "$x" = "validate_properties.py" ]; then
+        # upstream zookeeper log4j.properties has duplicate keys in it's config
+        opts="--exclude 'zookeeper-*/.*contrib/rest/conf/log4j.properties'"
+    fi
     echo "$x: "
-    $x .
+    $x $opts .
     echo
 done
 
