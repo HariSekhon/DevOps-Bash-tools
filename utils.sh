@@ -254,7 +254,7 @@ run_test_versions(){
     done
 
     if [ -n "${NOTESTS:-}" ]; then
-        print_port_mappings "$name"
+        print_debug_env "$name"
     else
         untrap
         echo "All $name tests succeeded for versions: $test_versions"
