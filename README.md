@@ -5,7 +5,34 @@ Hari Sekhon - Bash Tools
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-Bash utility library used by my other repos.
+Bash Test & Utility library used by all my other [GitHub repos](https://github.com/harisekhon).
+
+This has become a surprisingly important dependency repo as it contains tests for a wide variety of different programming languages and file formats, recursively detects and validates all relevant files for the following:
+
+- Python (syntax, pep8, pre-byte-compiling)
+- Perl
+- Java
+- Scala
+- Make
+- Maven
+- SBT
+- Gradle
+- Travis CI 
+- Ruby
+- Shell
+- Misc (whitespace etc)
+
+Also pulls in many important validation programs from my [PyTools repo](https://github.com/harisekhon/pytools) to validate additional file formats including:
+
+- csv
+- json
+- avro
+- parquet
+- ini / properties files (Java)
+- ldap ldif
+- multimedia (mp3, mp4)
+- xml
+- yaml
 
 Currently utilized to supplement testing of the following repos:
 
