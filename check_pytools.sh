@@ -66,23 +66,23 @@ get_pytools(){
     fi
 }
 
-validate_ini_path="$(which validate_ini.py || :)"
+validate_yaml_path="$(which validate_yaml.py || :)"
 
 # Ensure we have these at the minimum, these validate_*.py will cover
 # most configuration files as we dynamically find and call any validation programs further down
-if [ -z "$validate_ini_path" ]; then
+if [ -z "$validate_yaml_path" ]; then
     get_pytools
 fi
 
 echo
 echo "Running validation programs:"
 echo
-validate_ini_path="$(which validate_ini.py || :)"
-if [ -z "$validate_ini_path" ]; then
-    echo "Failed to find validate_ini.py in \$PATH ($PATH)"
+validate_yaml_path="$(which validate_yaml.py || :)"
+if [ -z "$validate_yaml_path" ]; then
+    echo "Failed to find validate_yaml.py in \$PATH ($PATH)"
     exit 1
 fi
-pytools_dir="$(dirname "$validate_ini_path")"
+pytools_dir="$(dirname "$validate_yaml_path")"
 for x in "$pytools_dir"/validate_*.py; do
     [[ "$x" =~ validate_multimedia.py ]] && continue
     [ -L "$x" ] && continue
