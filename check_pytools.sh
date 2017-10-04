@@ -52,7 +52,7 @@ get_pytools(){
     fi
 }
 
-validate_ini_path="$(which validate_ini.py)"
+validate_ini_path="$(which validate_ini.py || :)"
 
 # Ensure we have these at the minimum, these validate_*.py will cover
 # most configuration files as we dynamically find and call any validation programs further down
