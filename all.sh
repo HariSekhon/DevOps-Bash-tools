@@ -49,7 +49,7 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/python_find_quit.sh"
 
-. "$srcdir/pylint.sh"
+. "$srcdir/check_python_pylint.sh"
 
 #"$srcdir/python3.sh"
 
