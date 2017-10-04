@@ -27,6 +27,20 @@ fi
 
 section "PyTools Checks"
 
+skip_checks=0
+if [ "$PROJECT" = "pytools" ]; then
+    echo "detected running in pytools repo, skipping checks here as will be called in bash-tools/all.sh..."
+    skip_checks=1
+elif [ "$PROJECT" = "Dockerfiles" ]; then
+    echo "detected running in Dockerfiles repo, skipping checks here as will be called in bash-tools/all.sh..."
+    skip_checks=1
+fi
+
+if [ $skip_checks = 0 ]; then
+    return 0 &>/dev/null
+    exit 0
+fi
+
 export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
 
 start_time="$(start_timer)"
@@ -60,16 +74,6 @@ if [ -z "$validate_ini_path" ]; then
     get_pytools
 fi
 
-skip_checks=0
-if [ "$PROJECT" = "pytools" ]; then
-    echo "detected running in pytools repo, skipping checks here as will be called in bash-tools/all.sh..."
-    skip_checks=1
-elif [ "$PROJECT" = "Dockerfiles" ]; then
-    echo "detected running in Dockerfiles repo, skipping checks here as will be called in bash-tools/all.sh..."
-    skip_checks=1
-fi
-
-if [ $skip_checks = 0 ]; then
 echo
 echo "Running validation programs:"
 echo
@@ -95,4 +99,3 @@ done
 time_taken "$start_time"
 section2 "PyTools validations SUCCEEDED"
 echo
-fi
