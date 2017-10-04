@@ -17,9 +17,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-return 0 &>/dev/null
-exit 0
-
 . "$srcdir2/utils.sh"
 
 srcdir="$srcdir2"
@@ -55,9 +52,9 @@ get_pytools(){
 # most configuration files as we dynamically find and call any validation programs further down
 if which dockerfiles_check_git_branches.py &>/dev/null &&
    which git_check_branches_upstream.py &>/dev/null &&
-   which validate_ini.py &>/dev/null
-   which validate_json.py &>/dev/null
-   which validate_yaml.py &>/dev/null
+   which validate_ini.py &>/dev/null &&
+   which validate_json.py &>/dev/null &&
+   which validate_yaml.py &>/dev/null &&
    which validate_xml.py &>/dev/null
     then
     if [ -d "$srcdir/pytools_checks" ]; then
