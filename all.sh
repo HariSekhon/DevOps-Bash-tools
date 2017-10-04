@@ -47,7 +47,7 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/python_compile.sh"
 
-. "$srcdir/python_find_quit.sh"
+. "$srcdir/check_python_find_quit.sh"
 
 . "$srcdir/check_python_pylint.sh"
 
