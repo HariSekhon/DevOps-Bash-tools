@@ -291,6 +291,13 @@ time_taken(){
     echo
 }
 
+startupwait(){
+    startupwait="${1:-30}"
+    if is_CI; then
+        let startupwait*=2
+    fi
+}
+
 when_ports_available(){
     local max_secs="$1"
     local host="$2"

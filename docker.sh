@@ -85,13 +85,6 @@ external_docker(){
     [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
 }
 
-startupwait(){
-    startupwait="${1:-30}"
-    if is_CI; then
-        let startupwait*=2
-    fi
-}
-
 launch_container(){
     local image="${1:-${DOCKER_IMAGE}}"
     local container="${2:-${DOCKER_CONTAINER}}"
