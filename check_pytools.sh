@@ -38,7 +38,11 @@ echo "running in dir:  $PWD"
 echo
 
 get_pytools(){
-    if ! [ -d "$srcdir/pytools_checks" ]; then
+    if [ -d "$srcdir/pytools_checks" ]; then
+        pushd "$srcdir/pytools_checks"
+        make update
+        popd
+    else
         pushd "$srcdir"
         git clone https://github.com/harisekhon/pytools pytools_checks
         pushd pytools_checks
@@ -48,21 +52,11 @@ get_pytools(){
     fi
 }
 
+validate_ini_path="$(which validate_ini.py)"
+
 # Ensure we have these at the minimum, these validate_*.py will cover
 # most configuration files as we dynamically find and call any validation programs further down
-if which dockerfiles_check_git_branches.py &>/dev/null &&
-   which git_check_branches_upstream.py &>/dev/null &&
-   which validate_ini.py &>/dev/null &&
-   which validate_json.py &>/dev/null &&
-   which validate_yaml.py &>/dev/null &&
-   which validate_xml.py &>/dev/null
-    then
-    if [ -d "$srcdir/pytools_checks" ]; then
-        pushd "$srcdir/pytools_checks"
-        make update
-        popd
-    fi
-else
+if [ -z "$validate_ini_path" ]; then
     get_pytools
 fi
 
@@ -79,7 +73,12 @@ if [ $skip_checks = 0 ]; then
 echo
 echo "Running validation programs:"
 echo
-for x in "$(dirname "$(which validate_ini.py)")"/validate_*.py; do
+if [ -z "$validate_ini_path" ]; then
+    echo "Failed to find validate_ini.py in \$PATH ($PATH)"
+    exit 1
+fi
+pytools_dir="$(dirname "$validate_ini_path")"
+for x in "$pytools_dir"/validate_*.py; do
     [[ "$x" =~ validate_multimedia.py ]] && continue
     [ -L "$x" ] && continue
     opts=""
