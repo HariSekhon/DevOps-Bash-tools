@@ -25,6 +25,9 @@ branches:
   only:
     - master
 
+env:
+  - PYTHONUNBUFFERED=1
+
 install:
   - make
 
