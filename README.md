@@ -7,7 +7,7 @@ Hari Sekhon - Bash Tools
 
 Bash Test & Utility library used by all my other [GitHub repos](https://github.com/harisekhon).
 
-This has become a surprisingly important dependency repo as it contains tests for a wide variety of different programming languages and file formats, recursively detects and validates all relevant files for the following:
+Contains utility functions (Docker, environment, CI detection, port and HTTP url availability content checks) and a variety of different programming languages and file formats, recursively detects and validates relevant code and build files for the following:
 
 - Python (syntax, pep8, pre-byte-compiling)
 - Perl
@@ -20,7 +20,7 @@ This has become a surprisingly important dependency repo as it contains tests fo
 - Travis CI 
 - Ruby
 - Shell
-- Misc (whitespace etc)
+- Misc (whitespace, custom enforced checks like not calling quit() in python etc)
 
 Also pulls in many important validation programs from my [PyTools repo](https://github.com/harisekhon/pytools) to validate additional file formats including:
 
