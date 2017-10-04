@@ -36,8 +36,8 @@ elif [ "$PROJECT" = "Dockerfiles" ]; then
     skip_checks=1
 fi
 
-if [ $skip_checks = 0 ]; then
-    return 0 &>/dev/null
+if [ $skip_checks = 1 ]; then
+    return 0 &>/dev/null || :
     exit 0
 fi
 
