@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+return 0 &>/dev/null
+exit 0
+
 . "$srcdir2/utils.sh"
 
 srcdir="$srcdir2"
