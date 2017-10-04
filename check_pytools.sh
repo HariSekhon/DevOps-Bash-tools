@@ -73,6 +73,7 @@ if [ $skip_checks = 0 ]; then
 echo
 echo "Running validation programs:"
 echo
+validate_ini_path="$(which validate_ini.py || :)"
 if [ -z "$validate_ini_path" ]; then
     echo "Failed to find validate_ini.py in \$PATH ($PATH)"
     exit 1
