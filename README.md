@@ -10,18 +10,18 @@ Bash Test & Utility library used by all my other [GitHub repos](https://github.c
 - Utility functions (Docker, environment, CI detection, port and HTTP url availability content checks)
 - Tests for linting a variety of different programming and build files, including:
 
-    - Python (syntax, pep8, pre-byte-compiling)
-    - Perl
-    - Java
-    - Scala
-    - Make
-    - Maven
-    - SBT
-    - Gradle
-    - Travis CI
-    - Ruby
-    - Shell
-    - Misc (whitespace, custom enforced checks like not calling quit() in python etc)
+- Python (syntax, pep8, pre-byte-compiling)
+- Perl
+- Java
+- Scala
+- Make
+- Maven
+- SBT
+- Gradle
+- Travis CI
+- Ruby
+- Shell
+- Misc (whitespace, custom enforced checks like not calling quit() in python etc)
 
 Also pulls in many important validation programs from my [PyTools repo](https://github.com/harisekhon/pytools) to validate additional file formats including:
 
