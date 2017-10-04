@@ -31,7 +31,6 @@ Also pulls in many important validation programs from my [PyTools repo](https://
 - parquet
 - ini / properties files (Java)
 - ldap ldif
-- multimedia (mp3, mp4)
 - xml
 - yaml
 
