@@ -365,7 +365,7 @@ when_url_content(){
     found=0
     for((i=1; i <= $max_tries; i++)); do
         timestamp "$i trying $url"
-        if curl -s -L "$url" | grep -q -- "$expected_regex"; then
+        if curl -s -L --connect-timeout 1 "$url" | grep -q -- "$expected_regex"; then
             echo "URL content detected '$expected_regex'"
             found=1
             break
