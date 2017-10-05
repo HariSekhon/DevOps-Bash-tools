@@ -21,6 +21,11 @@ I_lib=""
 
 perl="perl"
 
+if ! which $perl &>/dev/null; then
+    return 0 &>/dev/null || :
+    exit 0
+fi
+
 if [ -n "${PERLBREW_PERL:-}" ]; then
 
     PERL_VERSION="${PERLBREW_PERL}"
