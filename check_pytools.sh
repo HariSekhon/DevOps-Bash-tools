@@ -87,9 +87,10 @@ for x in "$pytools_dir"/validate_*.py; do
     [[ "$x" =~ validate_multimedia.py ]] && continue
     [ -L "$x" ] && continue
     opts=""
-    if [ "$x" = "validate_ini.py" -o "$x" = "validate_properties.py" ]; then
+    if [ "${x##*/}" = "validate_ini.py" -o "${x##*/}" = "validate_properties.py" ]; then
         # upstream zookeeper log4j.properties has duplicate keys in it's config
-        opts=" --exclude 'zookeeper-.*/.*contrib/rest/conf/log4j.properties'"
+        # if the arg is quoted then would have to eval $x$opts below to get the quotes to be interpreted properly by shell rather than --exclude
+        opts=" --exclude zookeeper-.*/.*contrib/rest/conf/log4j.properties"
     fi
     echo "$x$opts: "
     $x$opts .
