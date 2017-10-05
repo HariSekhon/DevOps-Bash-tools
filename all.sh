@@ -36,6 +36,8 @@ bash_tools_start_time="$(start_timer)"
 # this is usually run after build, no point testing again
 #. "$srcdir/check_gradle_build.sh"
 
+"$srcdir/check_docker_clean.sh"
+
 . "$srcdir/check_makefile.sh"
 
 # this is usually run after build, no point testing again
