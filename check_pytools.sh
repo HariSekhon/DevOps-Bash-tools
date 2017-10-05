@@ -89,7 +89,7 @@ for x in "$pytools_dir"/validate_*.py; do
     opts=""
     if [ "$x" = "validate_ini.py" -o "$x" = "validate_properties.py" ]; then
         # upstream zookeeper log4j.properties has duplicate keys in it's config
-        opts="--exclude 'zookeeper-*/.*contrib/rest/conf/log4j.properties'"
+        opts="--exclude 'zookeeper-.*/.*contrib/rest/conf/log4j.properties'"
     fi
     echo "$x: "
     $x $opts .
