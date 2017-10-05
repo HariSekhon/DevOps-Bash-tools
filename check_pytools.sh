@@ -54,13 +54,13 @@ echo
 get_pytools(){
     if [ -d "$srcdir/pytools_checks" ]; then
         pushd "$srcdir/pytools_checks"
-        make update
+        NOJAVA=1 make update
         popd
     else
         pushd "$srcdir"
         git clone https://github.com/harisekhon/pytools pytools_checks
         pushd pytools_checks
-        make
+        NOJAVA=1 make
         popd
         popd
     fi
