@@ -30,20 +30,23 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #
 # Java / Scala / Groovy:
 #
-# .m2     => Maven
-# .sbt    => SBT
 # .gradle => Gradle
 # .groovy => Groovy
 # .ivy    => Ivy (Sbt / Gradle)
 # .ivy2
+# .m2     => Maven
+# .sbt    => SBT
 
 cache_list="
 .cache
 .cpan
 .cpanm
-.m2
+.gem
+.gradle
+.groovy
 .ivy
 .ivy2
+.m2
 .sbt
 "
 
@@ -61,4 +64,8 @@ if is_inside_docker; then
             fi
         done
     done
+    if [ -n "$(find / -type f -name pytools_checks)" ]; then
+        echo "pytools_checks detected, should have been removed from docker build"
+        exit 1
+    fi
 fi
