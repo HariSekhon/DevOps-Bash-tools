@@ -28,6 +28,8 @@ fi
 
 section "PyTools Checks"
 
+start_time="$(start_timer)"
+
 skip_checks=0
 if [ "$PROJECT" = "pytools" ]; then
     echo "detected running in pytools repo, skipping checks here as will be called in bash-tools/all.sh..."
@@ -46,8 +48,6 @@ if [ $skip_checks = 1 ]; then
 fi
 
 export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
-
-start_time="$(start_timer)"
 
 echo -n "running on branch:  "
 git branch | grep ^*
