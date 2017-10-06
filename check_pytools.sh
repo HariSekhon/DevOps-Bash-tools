@@ -18,6 +18,7 @@ set -euo pipefail
 srcdir2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . "$srcdir2/utils.sh"
+. "$srcdir2/docker.sh"
 
 srcdir="$srcdir2"
 
@@ -33,6 +34,9 @@ if [ "$PROJECT" = "pytools" ]; then
     skip_checks=1
 elif [ "$PROJECT" = "Dockerfiles" ]; then
     echo "detected running in Dockerfiles repo, skipping checks here as will be called in bash-tools/all.sh..."
+    skip_checks=1
+elif is_inside_docker; then
+    echo "detected running inside Docker, skipping pytools checks"
     skip_checks=1
 fi
 
