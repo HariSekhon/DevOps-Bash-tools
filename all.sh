@@ -39,6 +39,8 @@ bash_tools_start_time="$(start_timer)"
 # don't run this here, it needs to be called explicitly otherwise will fail 'make test deep-clean'
 #"$srcdir/check_docker_clean.sh"
 
+"$srcdir/check_non_executable_scripts.sh"
+
 . "$srcdir/check_makefile.sh"
 
 # this is usually run after build, no point testing again
