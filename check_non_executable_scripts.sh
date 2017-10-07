@@ -30,11 +30,11 @@ pl
 rb
 "
 
-name_opt=""
+ext_regex="("
 for ext in $script_extensions; do
-    name_opt="$name_opt -o -name '*.$ext'"
+    ext_regex="$ext_regex|\.$ext'"
 done
-name_opt="${name_opt# -o }"
+ext_regex="${name_opt#|})$"
 
 # -executable switch not available on Mac
 
@@ -42,10 +42,15 @@ name_opt="${name_opt# -o }"
 #non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -500 -type f $name_opt | tee /dev/stderr)"
 
 # works on both Linux + Mac
-non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -u+x -type f $name_opt | grep -v '/\.' | tee /dev/stderr)"
+set +o pipefail
+non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -type f -not -perm -u+x | egrep "$ext_regex" | grep -v '/\.' | tee /dev/stderr)"
+set -o pipefail
 
-if [ -n "$non_executable_scripts" ]; then
-    echo
-    echo 'Non-executable scripts detected!'
+echo
+if [ -z "$non_executable_scripts" ]; then
+    echo "OK: no non-executable scripts detected"
+    exit 0
+else
+    echo 'FAILED: non-executable scripts detected!'
     exit 1
 fi
