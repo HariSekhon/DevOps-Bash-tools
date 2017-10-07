@@ -37,13 +37,12 @@ done
 name_opt="${name_opt# -o }"
 
 # -executable switch not available on Mac
-if ! is_linux; then
-    echo "Non-Linux system detected, skipping as find perm behaviour is broken on Mac"
-    return 0 &>/dev/null || :
-    exit 0
-fi
 
-non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -500 -type f $name_opt | tee /dev/stderr)"
+# this only works on Linux but not on Mac
+#non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -500 -type f $name_opt | tee /dev/stderr)"
+
+# works on both Linux + Mac
+non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -u+x -type f $name_opt | grep -v '/\.' | tee /dev/stderr)"
 
 if [ -n "$non_executable_scripts" ]; then
     echo
