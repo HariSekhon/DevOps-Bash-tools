@@ -35,7 +35,6 @@ for ext in $script_extensions; do
     ext_regex="$ext_regex|\.$ext"
 done
 ext_regex="(${ext_regex#|})$"
-echo "$ext_regex"
 
 set +o pipefail
 # -executable switch not available on Mac
