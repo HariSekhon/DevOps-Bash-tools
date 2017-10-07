@@ -21,7 +21,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # NFS issues sometimes cause scripts to rewritten from vim without executable bit set, which then gets committed to git by accident
 
-section "Find Non Executable Scripts"
+section "Finding Non Executable Scripts"
 
 script_extensions="
 sh
@@ -43,7 +43,7 @@ if ! is_linux; then
     exit 0
 fi
 
-non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -500 -type f $name_opt)"
+non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -500 -type f $name_opt | tee /dev/stderr)"
 
 if [ -n "$non_executable_scripts" ]; then
     echo
