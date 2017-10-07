@@ -30,19 +30,16 @@ pl
 rb
 "
 
-ext_regex="("
+ext_regex=""
 for ext in $script_extensions; do
-    ext_regex="$ext_regex|\.$ext'"
+    ext_regex="$ext_regex|\.$ext"
 done
-ext_regex="${name_opt#|})$"
+ext_regex="(${ext_regex#|})$"
+echo "$ext_regex"
 
-# -executable switch not available on Mac
-
-# this only works on Linux but not on Mac
-#non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -not -perm -500 -type f $name_opt | tee /dev/stderr)"
-
-# works on both Linux + Mac
 set +o pipefail
+# -executable switch not available on Mac
+# trying to build up successive -name options doesn't work and ruins the logic of find, simplify to grep
 non_executable_scripts="$(eval find "${1:-.}" -maxdepth 2 -type f -not -perm -u+x | egrep "$ext_regex" | grep -v '/\.' | tee /dev/stderr)"
 set -o pipefail
 
