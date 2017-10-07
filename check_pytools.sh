@@ -28,6 +28,9 @@ fi
 
 section "PyTools Checks"
 
+# must be up here before skipping check so that Dockerfiles can import it
+export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
+
 start_time="$(start_timer)"
 
 skip_checks=0
@@ -46,8 +49,6 @@ if [ $skip_checks = 1 ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
-
-export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
 
 echo -n "running on branch:  "
 git branch | grep ^*
