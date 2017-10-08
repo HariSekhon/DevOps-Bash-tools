@@ -24,6 +24,7 @@ bash_tools_utils_imported=1
 . "$srcdir/docker.sh"
 . "$srcdir/perl.sh"
 
+# consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
 die(){
