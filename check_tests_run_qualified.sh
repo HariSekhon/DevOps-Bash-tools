@@ -40,7 +40,7 @@ for script in $scripts; do
     # docker-compose or docker exec or docker run
     docker_regex='docker(-compose|[[:space:]]+(exec|run))'
     suspect_lines="$(egrep -n '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" |
-                     egrep -v -e "[[:space:]]*$run_fail[[:space:]]+.*(\\\$perl|./|$docker_regex)" \
+                     egrep -v -e "[[:space:]]*$run_fail[[:space:]](.*[[:space:]])?(./|(\\\$perl|eval|$docker_regex)[[:space:]])" \
                               -e '[[:space:]]*run_test_versions' \
                               -e '[[:space:]]*run_grep[[:space:]].+(\$|./)' \
                               # run_grep filter is not that accurate but will do for now
