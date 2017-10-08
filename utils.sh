@@ -276,6 +276,16 @@ run_fail(){
     set -e
 }
 
+run_grep(){
+    local egrep_pattern="$1"
+    shift
+    run++
+    echo "$@ | tee /dev/stderr | egrep '$egrep_pattern'"
+    set +e
+    "$@" | tee /dev/stderr | egrep -q "$egrep_pattern"
+    set -e
+}
+
 run_test_versions(){
     local name="$1"
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
