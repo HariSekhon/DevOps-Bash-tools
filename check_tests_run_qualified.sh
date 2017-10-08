@@ -39,7 +39,7 @@ for script in $scripts; do
                      egrep -v -e '[[:space:]]*run(_[a-z]+ "?[[:digit:][:space:]]+"?)?[[:space:]]+(\$|./)' \
                               -e '[[:space:]]*run_test_versions' \
                               -e '[[:space:]]*run_grep[[:space:]].+(\$|./)' \
-                              -e '[[:space:]]*run[[:space:]]+docker(-compose|[[:space:]]+exec)'
+                              -e '[[:space:]]*run[[:space:]]+docker(-compose|[[:space:]]+(exec|run))'
                               # run_grep filter is not that accurate but will do for now
                     )"
     set -eo pipefail
