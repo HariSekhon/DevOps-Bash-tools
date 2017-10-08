@@ -328,6 +328,11 @@ when_ports_available(){
     local host="$2"
     local ports="${@:3}"
     local retry_interval=1
+    if ! which nc &>/dev/null; then
+        # Don't run in docker containers
+        echo "WARNING: nc command not found in \$PATH, cannot check port availability, skipping port checks, tests may fail due to race conditions on service availability"
+        return 0
+    fi
     if [ -z "$max_secs" ]; then
         echo 'when_ports_available: max_secs $1 not set'
         exit 1
