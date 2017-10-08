@@ -27,6 +27,13 @@ bash_tools_utils_imported=1
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
+if [ -z "${run_count:-}" ]; then
+    run_count=0
+fi
+if [ -z "${total_run_count:-}" ]; then
+    total_run_count=0
+fi
+
 die(){
     echo "$@"
     exit 1
@@ -246,11 +253,9 @@ trap_debug_env(){
 }
 
 run++(){
-    if [ -n "$run_count" ]; then
-        if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
-            let run_count+=1
-        fi
-    fi
+    #if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
+        let run_count+=1
+    #fi
 }
 
 run(){
@@ -277,7 +282,9 @@ run_test_versions(){
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
     test_versions="$(eval ci_sample $`echo $VERSIONS`)"
     for version in $test_versions; do
+        run_count=0
         eval "$test_func" "$version"
+        let total_run_count+=$run_count
     done
 
     if [ -n "${NOTESTS:-}" ]; then
@@ -285,6 +292,8 @@ run_test_versions(){
     else
         untrap
         echo "All $name tests succeeded for versions: $test_versions"
+        echo
+        echo "Total Tests run: $total_run_count"
     fi
     echo
 }
