@@ -266,7 +266,8 @@ run_fail(){
     echo "$@"
     set +e
     "$@"
-    check_exit_code "$expected_exit_code"
+    # intentionally don't quote $expected_exit_code so that we can pass multiple exit codes through first arg and have them expanded here
+    check_exit_code $expected_exit_code
     set -e
 }
 
