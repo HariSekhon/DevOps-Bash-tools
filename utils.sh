@@ -281,9 +281,9 @@ run_grep(){
     shift
     run++
     echo "$@ | tee /dev/stderr | egrep '$egrep_pattern'"
-    set +e
+    set +eo pipefail
     "$@" | tee /dev/stderr | egrep -q "$egrep_pattern"
-    set -e
+    set -eo pipefail
 }
 
 run_test_versions(){
