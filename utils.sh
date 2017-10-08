@@ -244,6 +244,31 @@ trap_debug_env(){
     trap 'result=$?; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
 }
 
+run++(){
+    if [ -n "$run_count" ]; then
+        if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
+            let run_count+=1
+        fi
+    fi
+}
+
+run(){
+    run++
+    echo "$@"
+    "$@"
+}
+
+run_fail(){
+    local expected_exit_code="$1"
+    shift
+    run++
+    echo "$@"
+    set +e
+    "$@"
+    check_exit_code "$expected_exit_code"
+    set -e
+}
+
 run_test_versions(){
     local name="$1"
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
@@ -306,14 +331,25 @@ when_ports_available(){
     if [ -z "$max_secs" ]; then
         echo 'when_ports_available: max_secs $1 not set'
         exit 1
+    #elif ! egrep '^[[:digit:]]+$' <<< "$max_secs"; then
+    elif ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        echo 'when_ports_available: invalid non-numeric first argument passed for max_secs'
+        exit 1
     elif [ -z "$host" ]; then
         echo 'when_ports_available: host $2 not set'
         exit 1
     elif [ -z "$ports" ]; then
         echo 'when_ports_available: ports $3 not set'
         exit 1
+    else
+        for port in $ports; do
+            if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
+                echo "when_ports_available: invalid non-numeric port argument '$port'"
+                exit 1
+            fi
+        done
     fi
-    local max_tries=$(($max_secs / $retry_interval))
+    #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
     local nc_cmd="nc -vw $retry_interval $host <<< ''"
     cmd=""
@@ -322,20 +358,26 @@ when_ports_available(){
     done
     local cmd="${cmd% && }"
     plural_str $ports
-    echo "waiting for port$plural '$ports' to become available, will try up to $max_tries times at $retry_interval sec intervals"
+    echo "waiting for up to $max_secs secs for port$plural '$ports' to become available, retrying at $retry_interval sec intervals"
     echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
     if which nc &>/dev/null; then
-        for((i=1; i <= $max_tries; i++)); do
-            timestamp "$i trying host '$host' port(s) '$ports'"
+        #for((i=1; i <= $max_tries; i++)); do
+        try_number=0
+        # special built-in that increments for script runtime, reset to zero exploit it here
+        SECONDS=0
+        # bash will interpolate from string for correct numeric comparison and safer to quote vars
+        while [ "$SECONDS" -lt "$max_secs" ]; do
+            let try_number+=1
+            timestamp "$try_number trying host '$host' port(s) '$ports'"
             if eval $cmd; then
                 found=1
                 break
             fi
-            sleep 1
+            sleep "$retry_interval"
         done
         if [ $found -eq 1 ]; then
-            timestamp "host '$host' port$plural '$ports' available after $i secs"
+            timestamp "host '$host' port$plural '$ports' available after $SECONDS secs"
         else
             timestamp "host '$host' port$plural '$ports' still not available after '$max_secs' secs, giving up waiting"
         fi
@@ -353,6 +395,9 @@ when_url_content(){
     if [ -z "$max_secs" ]; then
         echo 'when_url_content: max_secs $1 not set'
         exit 1
+    elif ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        echo 'when_url_content: invalid non-numeric first argument passed for max_secs'
+        exit 1
     elif [ -z "$url" ]; then
         echo 'when_url_content: url $2 not set'
         exit 1
@@ -360,20 +405,26 @@ when_url_content(){
         echo 'when_url_content: expected content $3 not set'
         exit 1
     fi
-    local max_tries=$(($max_secs / $retry_interval))
+    #local max_tries=$(($max_secs / $retry_interval))
     echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content: '$expected_regex'"
     found=0
-    for((i=1; i <= $max_tries; i++)); do
-        timestamp "$i trying $url"
+    #for((i=1; i <= $max_tries; i++)); do
+    try_number=0
+    # special built-in that increments for script runtime, reset to zero exploit it here
+    SECONDS=0
+    # bash will interpolate from string for correct numeric comparison and safer to quote vars
+    while [ "$SECONDS" -lt "$max_secs" ]; do
+        let try_number+=1
+        timestamp "$try_number trying $url"
         if curl -s -L --connect-timeout 1 "$url" | grep -q -- "$expected_regex"; then
             echo "URL content detected '$expected_regex'"
             found=1
             break
         fi
-        sleep 1
+        sleep "$retry_interval"
     done
     if [ $found -eq 1 ]; then
-        timestamp "URL content found after $i secs"
+        timestamp "URL content found after $SECONDS secs"
     else
         timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
     fi
