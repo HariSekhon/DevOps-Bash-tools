@@ -34,7 +34,14 @@ for script in $scripts; do
         continue
     fi
     set +eo pipefail
-    suspect_lines="$(egrep -n '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" | egrep -v -e '[[:space:]]*run(_[a-z]+ "?[[:digit:][:space:]]+"?)?[[:space:]]+(\$|./)' -e run_test_versions)"
+                     # don't anchor grep -v as we're prefixing line numbers for convenience
+    suspect_lines="$(egrep -n '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" |
+                     egrep -v -e '[[:space:]]*run(_[a-z]+ "?[[:digit:][:space:]]+"?)?[[:space:]]+(\$|./)' \
+                              -e '[[:space:]]*run_test_versions' \
+                              -e '[[:space:]]*run_grep[[:space:]].+(\$|./)' \
+                              -e '[[:space:]]*run[[:space:]]+docker(-compose|[[:space:]]+exec)'
+                              # run_grep filter is not that accurate but will do for now
+                    )"
     set -eo pipefail
     if [ -n "$suspect_lines" ]; then
         let failed_count+=1
