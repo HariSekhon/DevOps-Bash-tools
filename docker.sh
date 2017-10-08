@@ -63,7 +63,8 @@ is_docker_container_running(){
 $containers
 "
     fi
-    if grep -q "[[:space:]]$1$" <<< "$containers"; then
+    #if grep -q "[[:space:]]$1$" <<< "$containers"; then
+    if [[ "$containers" =~ [[:space:]]$1$ ]]; then
         return 0
     fi
     return 1
