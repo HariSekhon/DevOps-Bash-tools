@@ -41,6 +41,8 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_non_executable_scripts.sh"
 
+"$srcdir/check_tests_run_qualified.sh"
+
 . "$srcdir/check_makefile.sh"
 
 # this is usually run after build, no point testing again
