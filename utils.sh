@@ -417,6 +417,7 @@ when_url_content(){
     local max_secs="$1"
     local url="$2"
     local expected_regex="$3"
+    local args="${@:4}"
     local retry_interval=1
     if [ -z "$max_secs" ]; then
         echo 'when_url_content: max_secs $1 not set'
@@ -442,7 +443,7 @@ when_url_content(){
     while [ "$SECONDS" -lt "$max_secs" ]; do
         let try_number+=1
         timestamp "$try_number trying $url"
-        if curl -sL --connect-timeout 1 --max-time 5 "$url" | grep -q -- "$expected_regex"; then
+        if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -q -- "$expected_regex"; then
             echo "URL content detected '$expected_regex'"
             found=1
             break
