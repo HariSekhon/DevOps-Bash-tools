@@ -345,8 +345,8 @@ startupwait(){
 }
 
 when_ports_available(){
-    local max_secs="$1"
-    local host="$2"
+    local max_secs="${1:-}"
+    local host="${2:-}"
     local ports="${@:3}"
     local retry_interval=1
     if ! which nc &>/dev/null; then
