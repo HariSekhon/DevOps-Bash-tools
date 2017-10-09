@@ -406,6 +406,7 @@ when_ports_available(){
             timestamp "host '$host' port$plural '$ports' available after $SECONDS secs"
         else
             timestamp "host '$host' port$plural '$ports' still not available after '$max_secs' secs, giving up waiting"
+            return 1
         fi
     else
         echo "'nc' command not found, sleeping for '$max_secs' secs instead"
@@ -454,6 +455,7 @@ when_url_content(){
         timestamp "URL content found after $SECONDS secs"
     else
         timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
+        return 1
     fi
 }
 
