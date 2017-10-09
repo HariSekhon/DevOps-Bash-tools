@@ -414,9 +414,9 @@ when_ports_available(){
 }
 
 when_url_content(){
-    local max_secs="$1"
-    local url="$2"
-    local expected_regex="$3"
+    local max_secs="${1:-}"
+    local url="${2:-}"
+    local expected_regex="${3:-}"
     local args="${@:4}"
     local retry_interval=1
     if [ -z "$max_secs" ]; then
