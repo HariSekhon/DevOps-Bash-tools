@@ -437,21 +437,27 @@ when_url_content(){
     # special built-in that increments for script runtime, reset to zero exploit it here
     SECONDS=0
     # bash will interpolate from string for correct numeric comparison and safer to quote vars
-    while [ "$SECONDS" -lt "$max_secs" ]; do
-        let try_number+=1
-        timestamp "$try_number trying $url"
-        if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -q -- "$expected_regex"; then
-            echo "URL content detected '$expected_regex'"
-            found=1
-            break
+    if which curl &>/dev/null; then
+        while [ "$SECONDS" -lt "$max_secs" ]; do
+            let try_number+=1
+            timestamp "$try_number trying $url"
+            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -q -- "$expected_regex"; then
+                echo "URL content detected '$expected_regex'"
+                found=1
+                break
+            fi
+            sleep "$retry_interval"
+        done
+        if [ $found -eq 1 ]; then
+            timestamp "URL content found after $SECONDS secs"
+        else
+            timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
+            return 1
         fi
-        sleep "$retry_interval"
-    done
-    if [ $found -eq 1 ]; then
-        timestamp "URL content found after $SECONDS secs"
     else
-        timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
-        return 1
+        echo "WARNING: curl command not found in \$PATH, cannot check url content, skipping content checks, tests may fail due to race conditions on service availability"
+        echo "sleeping for '$max_secs' secs instead"
+        sleep "$max_secs"
     fi
 }
 
