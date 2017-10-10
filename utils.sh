@@ -510,7 +510,7 @@ when_url_content(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             let try_number+=1
             timestamp "$try_number trying $url"
-            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -q -- "$expected_regex"; then
+            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | egrep -q -- "$expected_regex"; then
                 echo "URL content detected '$expected_regex'"
                 found=1
                 break
