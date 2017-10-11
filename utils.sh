@@ -266,6 +266,16 @@ run(){
     "$@"
 }
 
+run_output(){
+    local expected_output="$1"
+    shift
+    run++
+    echo "$@"
+    set +e
+    check_output "$expected_output" "$@"
+    set -e
+}
+
 run_fail(){
     local expected_exit_code="$1"
     shift
