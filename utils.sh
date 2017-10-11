@@ -119,6 +119,7 @@ check_exit_code(){
     local failed=1
     for e in $expected_exit_codes; do
         if [ $exit_code = $e ]; then
+            echo "got expected exit code: $e"
             failed=0
         fi
     done
