@@ -18,7 +18,9 @@ set -eu
 srcdir_bash_tools_utils="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-[ "${bash_tools_utils_imported:-0}" = 1 ] && return
+if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
+    return 0
+fi
 bash_tools_utils_imported=1
 
 . "$srcdir/docker.sh"
