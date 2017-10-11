@@ -296,6 +296,10 @@ run_test_versions(){
     for version in $test_versions; do
         run_count=0
         eval "$test_func" "$version"
+        if [ $run_count -eq 0 ]; then
+            echo "NO TEST RUNS DETECTED!"
+            exit 1
+        fi
         let total_run_count+=$run_count
     done
 
