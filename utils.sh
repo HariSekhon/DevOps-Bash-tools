@@ -34,6 +34,8 @@ if [ -z "${total_run_count:-}" ]; then
     total_run_count=0
 fi
 
+wrong_port=1111
+
 die(){
     echo "$@"
     exit 1
