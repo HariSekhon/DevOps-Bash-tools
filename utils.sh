@@ -262,9 +262,13 @@ run++(){
 }
 
 run(){
-    run++
-    echo "$@"
-    "$@"
+    if [ -n "${FAIL:-}" ]; then
+        run_fail "$FAIL" "$@"
+    else
+        run++
+        echo "$@"
+        "$@"
+    fi
 }
 
 run_output(){
