@@ -273,6 +273,11 @@ run(){
     fi
 }
 
+run_conn_refused(){
+    echo "checking connection refused:"
+    run_fail 2 "$@" -H localhost -P "$wrong_port"
+}
+
 run_output(){
     local expected_output="$1"
     shift
