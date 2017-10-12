@@ -20,6 +20,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . "$srcdir/utils.sh"
 
+docker_compose_quiet=""
+if [ -n "${TRAVIS:-}" ]; then
+    docker_compose_quiet="--quiet"
+fi
+
 is_docker_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
     if which docker &>/dev/null; then

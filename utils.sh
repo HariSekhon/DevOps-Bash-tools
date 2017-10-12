@@ -18,7 +18,9 @@ set -eu
 srcdir_bash_tools_utils="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-[ "${bash_tools_utils_imported:-0}" = 1 ] && return
+if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
+    return 0
+fi
 bash_tools_utils_imported=1
 
 . "$srcdir/docker.sh"
@@ -119,6 +121,7 @@ check_exit_code(){
     local failed=1
     for e in $expected_exit_codes; do
         if [ $exit_code = $e ]; then
+            echo "got expected exit code: $e"
             failed=0
         fi
     done
@@ -241,7 +244,7 @@ print_debug_env(){
         #eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
         # instead of just name_PORT, find all PORTS in environment and print them
         # while read line to preserve CASSANDRA_PORTS=7199 9042
-        env | egrep "^$name.*_" | grep -v DEFAULT | sort | while read env_var; do
+        env | egrep "^$name.*_" | grep -v -e 'DEFAULT$' -e 'VERSIONS$' | sort | while read env_var; do
             # sed here to quote export CASSANDRA_PORTS=7199 9042 => export CASSANDRA_PORTS="7199 9042"
             eval echo "export $env_var" | sed 's/=/="/;s/$/"/'
         done
@@ -261,9 +264,23 @@ run++(){
 }
 
 run(){
+    if [ -n "${FAIL:-}" ]; then
+        run_fail "$FAIL" "$@"
+    else
+        run++
+        echo "$@"
+        "$@"
+    fi
+}
+
+run_output(){
+    local expected_output="$1"
+    shift
     run++
     echo "$@"
-    "$@"
+    set +e
+    check_output "$expected_output" "$@"
+    set -e
 }
 
 run_fail(){
@@ -283,9 +300,9 @@ run_grep(){
     shift
     run++
     echo "$@ | tee /dev/stderr | egrep '$egrep_pattern'"
-    set +eo pipefail
+    set +o pipefail
     "$@" | tee /dev/stderr | egrep -q "$egrep_pattern"
-    set -eo pipefail
+    set -o pipefail
 }
 
 run_test_versions(){
@@ -296,6 +313,10 @@ run_test_versions(){
     for version in $test_versions; do
         run_count=0
         eval "$test_func" "$version"
+        if [ $run_count -eq 0 ]; then
+            echo "NO TEST RUNS DETECTED!"
+            exit 1
+        fi
         let total_run_count+=$run_count
     done
 
@@ -347,15 +368,10 @@ startupwait(){
 }
 
 when_ports_available(){
-    local max_secs="$1"
-    local host="$2"
+    local max_secs="${1:-}"
+    local host="${2:-}"
     local ports="${@:3}"
     local retry_interval=1
-    if ! which nc &>/dev/null; then
-        # Don't run in docker containers
-        echo "WARNING: nc command not found in \$PATH, cannot check port availability, skipping port checks, tests may fail due to race conditions on service availability"
-        return 0
-    fi
     if [ -z "$max_secs" ]; then
         echo 'when_ports_available: max_secs $1 not set'
         exit 1
@@ -408,17 +424,88 @@ when_ports_available(){
             timestamp "host '$host' port$plural '$ports' available after $SECONDS secs"
         else
             timestamp "host '$host' port$plural '$ports' still not available after '$max_secs' secs, giving up waiting"
+            return 1
         fi
     else
-        echo "'nc' command not found, sleeping for '$max_secs' secs instead"
+        echo "WARNING: nc command not found in \$PATH, cannot check port availability, skipping port checks, tests may fail due to race conditions on service availability"
+        echo "sleeping for '$max_secs' secs instead"
+        sleep "$max_secs"
+    fi
+}
+
+# Do not use this on docker containers
+# docker mapped ports still return connection succeeded even when the process mapped to them is no longer listening inside the container!
+# must be the result of docker networking
+when_ports_down(){
+    local max_secs="${1:-}"
+    local host="${2:-}"
+    local ports="${@:3}"
+    local retry_interval=1
+    if [ -z "$max_secs" ]; then
+        echo 'when_ports_down: max_secs $1 not set'
+        exit 1
+    #elif ! egrep '^[[:digit:]]+$' <<< "$max_secs"; then
+    elif ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        echo 'when_ports_down: invalid non-numeric first argument passed for max_secs'
+        exit 1
+    elif [ -z "$host" ]; then
+        echo 'when_ports_down: host $2 not set'
+        exit 1
+    elif [ -z "$ports" ]; then
+        echo 'when_ports_down: ports $3 not set'
+        exit 1
+    else
+        for port in $ports; do
+            if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
+                echo "when_ports_down: invalid non-numeric port argument '$port'"
+                exit 1
+            fi
+        done
+    fi
+    #local max_tries=$(($max_secs / $retry_interval))
+    # Linux nc doens't have -z switch like Mac OSX version
+    local nc_cmd="nc -vw $retry_interval $host <<< ''"
+    cmd=""
+    for x in $ports; do
+        cmd="$cmd ! $nc_cmd $x &>/dev/null && "
+    done
+    local cmd="${cmd% && }"
+    plural_str $ports
+    echo "waiting for up to $max_secs secs for port$plural '$ports' to go down, retrying at $retry_interval sec intervals"
+    echo "cmd: ${cmd// \&\>\/dev\/null}"
+    local down=0
+    if which nc &>/dev/null; then
+        #for((i=1; i <= $max_tries; i++)); do
+        try_number=0
+        # special built-in that increments for script runtime, reset to zero exploit it here
+        SECONDS=0
+        # bash will interpolate from string for correct numeric comparison and safer to quote vars
+        while [ "$SECONDS" -lt "$max_secs" ]; do
+            let try_number+=1
+            timestamp "$try_number trying host '$host' port(s) '$ports'"
+            if eval $cmd; then
+                down=1
+                break
+            fi
+            sleep "$retry_interval"
+        done
+        if [ $down -eq 1 ]; then
+            timestamp "host '$host' port$plural '$ports' down after $SECONDS secs"
+        else
+            timestamp "host '$host' port$plural '$ports' still not down after '$max_secs' secs, giving up waiting"
+            return 1
+        fi
+    else
+        echo "WARNING: nc command not found in \$PATH, cannot check for ports down, skipping port checks, tests may fail due to race conditions on service availability"
+        echo "sleeping for '$max_secs' secs instead"
         sleep "$max_secs"
     fi
 }
 
 when_url_content(){
-    local max_secs="$1"
-    local url="$2"
-    local expected_regex="$3"
+    local max_secs="${1:-}"
+    local url="${2:-}"
+    local expected_regex="${3:-}"
     local args="${@:4}"
     local retry_interval=1
     if [ -z "$max_secs" ]; then
@@ -442,20 +529,27 @@ when_url_content(){
     # special built-in that increments for script runtime, reset to zero exploit it here
     SECONDS=0
     # bash will interpolate from string for correct numeric comparison and safer to quote vars
-    while [ "$SECONDS" -lt "$max_secs" ]; do
-        let try_number+=1
-        timestamp "$try_number trying $url"
-        if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -q -- "$expected_regex"; then
-            echo "URL content detected '$expected_regex'"
-            found=1
-            break
+    if which curl &>/dev/null; then
+        while [ "$SECONDS" -lt "$max_secs" ]; do
+            let try_number+=1
+            timestamp "$try_number trying $url"
+            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | egrep -q -- "$expected_regex"; then
+                echo "URL content detected '$expected_regex'"
+                found=1
+                break
+            fi
+            sleep "$retry_interval"
+        done
+        if [ $found -eq 1 ]; then
+            timestamp "URL content found after $SECONDS secs"
+        else
+            timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
+            return 1
         fi
-        sleep "$retry_interval"
-    done
-    if [ $found -eq 1 ]; then
-        timestamp "URL content found after $SECONDS secs"
     else
-        timestamp "URL content still not available after '$max_secs' secs, giving up waiting"
+        echo "WARNING: curl command not found in \$PATH, cannot check url content, skipping content checks, tests may fail due to race conditions on service availability"
+        echo "sleeping for '$max_secs' secs instead"
+        sleep "$max_secs"
     fi
 }
 
