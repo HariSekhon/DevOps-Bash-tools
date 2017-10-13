@@ -371,20 +371,21 @@ startupwait(){
         let startupwait*=2
     fi
 }
+# trigger to set a sensible default if we forget, as it is used
+# as a fallback in when_ports_available and when_url_content below
+startupwait
 
 when_ports_available(){
     local max_secs="${1:-}"
-    local host="${2:-}"
-    local ports="${@:3}"
+    if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        max_secs="$startupwait"
+    else
+        shift
+    fi
+    local host="${1:-}"
+    local ports="${@:2}"
     local retry_interval=1
-    if [ -z "$max_secs" ]; then
-        echo 'when_ports_available: max_secs $1 not set'
-        exit 1
-    #elif ! egrep '^[[:digit:]]+$' <<< "$max_secs"; then
-    elif ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
-        echo 'when_ports_available: invalid non-numeric first argument passed for max_secs'
-        exit 1
-    elif [ -z "$host" ]; then
+    if [ -z "$host" ]; then
         echo 'when_ports_available: host $2 not set'
         exit 1
     elif [ -z "$ports" ]; then
@@ -443,17 +444,15 @@ when_ports_available(){
 # must be the result of docker networking
 when_ports_down(){
     local max_secs="${1:-}"
-    local host="${2:-}"
-    local ports="${@:3}"
+    if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        max_secs="$startupwait"
+    else
+        shift
+    fi
+    local host="${1:-}"
+    local ports="${@:2}"
     local retry_interval=1
-    if [ -z "$max_secs" ]; then
-        echo 'when_ports_down: max_secs $1 not set'
-        exit 1
-    #elif ! egrep '^[[:digit:]]+$' <<< "$max_secs"; then
-    elif ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
-        echo 'when_ports_down: invalid non-numeric first argument passed for max_secs'
-        exit 1
-    elif [ -z "$host" ]; then
+    if [ -z "$host" ]; then
         echo 'when_ports_down: host $2 not set'
         exit 1
     elif [ -z "$ports" ]; then
@@ -509,17 +508,16 @@ when_ports_down(){
 
 when_url_content(){
     local max_secs="${1:-}"
-    local url="${2:-}"
-    local expected_regex="${3:-}"
-    local args="${@:4}"
+    if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        max_secs="$startupwait"
+    else
+        shift
+    fi
+    local url="${1:-}"
+    local expected_regex="${2:-}"
+    local args="${@:3}"
     local retry_interval=1
-    if [ -z "$max_secs" ]; then
-        echo 'when_url_content: max_secs $1 not set'
-        exit 1
-    elif ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
-        echo 'when_url_content: invalid non-numeric first argument passed for max_secs'
-        exit 1
-    elif [ -z "$url" ]; then
+    if [ -z "$url" ]; then
         echo 'when_url_content: url $2 not set'
         exit 1
     elif [ -z "$expected_regex" ]; then
