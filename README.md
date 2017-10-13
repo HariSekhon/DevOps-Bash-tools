@@ -25,14 +25,14 @@ Bash Test & Utility library used by all my other [GitHub repos](https://github.c
 
 Also pulls in many important validation programs from my [PyTools repo](https://github.com/harisekhon/pytools) to validate additional file formats including:
 
-- csv
-- json
-- avro
-- parquet
-- ini / properties files (Java)
-- ldap ldif
-- xml
-- yaml
+- CSV
+- JSON
+- Avro
+- Parquet
+- INI / Properties files (Java)
+- LDAP LDIF
+- XML
+- YAML
 
 Currently utilized to supplement testing of the following repos:
 
