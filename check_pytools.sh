@@ -95,7 +95,9 @@ for x in "$pytools_dir"/validate_*.py; do
     if [ "${x##*/}" = "validate_ini.py" -o "${x##*/}" = "validate_properties.py" ]; then
         # upstream zookeeper log4j.properties has duplicate keys in it's config
         # if the arg is quoted then would have to eval $x$opts below to get the quotes to be interpreted properly by shell rather than --exclude
-        opts=" --exclude zookeeper-.*/.*contrib/rest/conf/log4j.properties"
+        #
+        # gradle's cache.properties is often empty just a single commented date line
+        opts=" --exclude 'zookeeper-.*/.*contrib/rest/conf/log4j.properties|.gradle/.+/taskArtifacts/cache.properties'"
     fi
     echo "$x$opts: "
     $x$opts .
