@@ -87,6 +87,19 @@ declare_if_inside_docker(){
     fi
 }
 
+dockerhub_latest_version(){
+    repo="${1-}"
+    if [ -z "$repo" ]; then
+        echo "Error: no repo passed to dockerhub_latest_version for first arg"
+    fi
+    set +e
+    local version="$(curl "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z_]+_VERSION=/ {print $2; exit}')"
+    set -e
+    if [ -z "$version" ]; then
+        echo ".*"
+    fi
+}
+
 external_docker(){
     [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
 }
