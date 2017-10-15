@@ -96,8 +96,9 @@ dockerhub_latest_version(){
     local version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z_]+_VERSION=/ {print $2; exit}')"
     set -e
     if [ -z "$version" ]; then
-        echo ".*"
+        version='.*'
     fi
+    echo "$version"
 }
 
 external_docker(){
