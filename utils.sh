@@ -575,13 +575,17 @@ retry(){
         exit 1
     fi
     echo "retrying for up to $max_secs secs at $sleep_secs sec intervals:"
+    try_number=0
     SECONDS=0
     while true; do
+        let try_number+=1
+        timestamp "$try_number trying $cmd"
         if $cmd; then
+            timestamp "Succeeded after $SECONDS secs"
             break
         fi
         if [ $SECONDS -gt $max_secs ]; then
-            echo "FAILED: giving up after $max_secs secs"
+            timestamp "FAILED: giving up after $max_secs secs"
             exit 1
         fi
         sleep "$sleep_secs"
