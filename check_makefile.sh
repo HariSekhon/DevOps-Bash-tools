@@ -41,7 +41,7 @@ if which make &>/dev/null; then
                 echo "Makefile validation FAILED"
                 exit 1
             fi
-        done
+        done || :  # without this if no targets are found like in Dockerfiles/jython (which is all inherited) and this will fail set -e silently error out and not check the rest of the Makefiles
         popd >/dev/null
     done
 fi
