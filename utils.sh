@@ -315,7 +315,9 @@ run_test_versions(){
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
     test_versions="$(eval ci_sample $`echo $VERSIONS`)"
+    start_time="$(start_timer "$name version tests")"
     for version in $test_versions; do
+        version_start_time="$(start_timer "$name version $version")"
         run_count=0
         eval "$test_func" "$version"
         if [ $run_count -eq 0 ]; then
@@ -323,6 +325,8 @@ run_test_versions(){
             exit 1
         fi
         let total_run_count+=$run_count
+        time_taken "$version_start_time" "$name version $version test completed in"
+        echo
     done
 
     if [ -n "${NOTESTS:-}" ]; then
@@ -332,6 +336,8 @@ run_test_versions(){
         echo "All $name tests succeeded for versions: $test_versions"
         echo
         echo "Total Tests run: $total_run_count"
+        time_taken "$start_time" "All version tests for $name completed in"
+        echo
     fi
     echo
 }
@@ -345,7 +351,7 @@ timestamp(){
 tstamp(){ timestamp "$@"; }
 
 start_timer(){
-    tstamp "Starting...
+    tstamp "Starting $@
 "
     date '+%s'
 }
