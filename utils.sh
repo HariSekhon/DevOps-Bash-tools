@@ -556,5 +556,37 @@ when_url_content(){
     fi
 }
 
+retry(){
+    local max_secs="${1:-}"
+    local sleep_secs="${2:-}"
+    shift
+    if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        echo "ERROR: non-integer '$max_secs' passed to retry() for \$1"
+        exit 1
+    fi
+    if [[ "$sleep_secs" =~ ^[[:digit:]]+$ ]]; then
+        shift
+    else
+        sleep_secs=1
+    fi
+    local cmd="${@:-}"
+    if [ -z "$cmd" ]; then
+        echo "ERROR: no command passed to retry() for \$3"
+        exit 1
+    fi
+    echo "retrying for up to $max_secs secs at $sleep_secs sec intervals:"
+    SECONDS=0
+    while true; do
+        if $cmd; then
+            break
+        fi
+        if [ $SECONDS -gt $max_secs ]; then
+            echo "FAILED: giving up after $max_secs secs"
+            exit 1
+        fi
+        sleep "$sleep_secs"
+    done
+}
+
 # restore original srcdir
 srcdir="$srcdir_bash_tools_utils"
