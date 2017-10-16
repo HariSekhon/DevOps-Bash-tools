@@ -579,7 +579,7 @@ retry(){
     SECONDS=0
     while true; do
         let try_number+=1
-        echo "try $try_number:  "
+        echo -n "try $try_number:  "
         if $cmd; then
             timestamp "Succeeded after $SECONDS secs"
             break
