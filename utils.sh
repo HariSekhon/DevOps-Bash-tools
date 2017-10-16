@@ -314,8 +314,10 @@ run_test_versions(){
     local name="$1"
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
-    test_versions="$(eval ci_sample $`echo $VERSIONS`)"
+    local test_versions="$(eval ci_sample $`echo $VERSIONS`)"
+    local start_time="$(start_timer "$name version tests")"
     for version in $test_versions; do
+        version_start_time="$(start_timer "$name version $version")"
         run_count=0
         eval "$test_func" "$version"
         if [ $run_count -eq 0 ]; then
@@ -323,6 +325,8 @@ run_test_versions(){
             exit 1
         fi
         let total_run_count+=$run_count
+        time_taken "$version_start_time" "$name version $version test completed in"
+        echo
     done
 
     if [ -n "${NOTESTS:-}" ]; then
@@ -332,6 +336,8 @@ run_test_versions(){
         echo "All $name tests succeeded for versions: $test_versions"
         echo
         echo "Total Tests run: $total_run_count"
+        time_taken "$start_time" "All version tests for $name completed in"
+        echo
     fi
     echo
 }
@@ -345,7 +351,7 @@ timestamp(){
 tstamp(){ timestamp "$@"; }
 
 start_timer(){
-    tstamp "Starting...
+    tstamp "Starting $@
 "
     date '+%s'
 }
@@ -554,6 +560,42 @@ when_url_content(){
         echo "sleeping for '$max_secs' secs instead"
         sleep "$max_secs"
     fi
+}
+
+retry(){
+    local max_secs="${1:-}"
+    local sleep_secs="${2:-}"
+    shift
+    if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
+        echo "ERROR: non-integer '$max_secs' passed to retry() for \$1"
+        exit 1
+    fi
+    if [[ "$sleep_secs" =~ ^[[:digit:]]+$ ]]; then
+        shift
+    else
+        sleep_secs=1
+    fi
+    local cmd="${@:-}"
+    if [ -z "$cmd" ]; then
+        echo "ERROR: no command passed to retry() for \$3"
+        exit 1
+    fi
+    echo "retrying for up to $max_secs secs at $sleep_secs sec intervals:"
+    try_number=0
+    SECONDS=0
+    while true; do
+        let try_number+=1
+        echo -n "try $try_number:  "
+        if $cmd; then
+            timestamp "Succeeded after $SECONDS secs"
+            break
+        fi
+        if [ $SECONDS -gt $max_secs ]; then
+            timestamp "FAILED: giving up after $max_secs secs"
+            exit 1
+        fi
+        sleep "$sleep_secs"
+    done
 }
 
 # restore original srcdir
