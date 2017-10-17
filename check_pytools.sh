@@ -57,12 +57,13 @@ echo "running in dir:  $PWD"
 echo
 
 get_pytools(){
-    if [ -d "$srcdir/pytools_checks" ]; then
+    if [ -d "$srcdir/pytools_checks" -a "$srcdir/pytools_checks/Makefile" ]; then
         pushd "$srcdir/pytools_checks"
         NOJAVA=1 make update
         popd
     else
         pushd "$srcdir"
+        rm -fr pytools_checks
         git clone https://github.com/harisekhon/pytools pytools_checks
         pushd pytools_checks
         NOJAVA=1 make
