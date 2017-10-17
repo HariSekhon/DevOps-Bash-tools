@@ -76,7 +76,7 @@ validate_yaml_path="$(which validate_yaml.py || :)"
 
 # Ensure we have these at the minimum, these validate_*.py will cover
 # most configuration files as we dynamically find and call any validation programs further down
-if [ -z "$validate_yaml_path" ]; then
+if [[ -z "$validate_yaml_path" || "$validate_yaml_path" =~ pytools_checks ]]; then
     get_pytools
 fi
 
