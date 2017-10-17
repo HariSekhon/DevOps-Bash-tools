@@ -25,6 +25,9 @@ notifications:
 #  only:
 #    - master
 
+before_cache:
+  - test -f pytools_checks/Makefile || rm -fr pytools_checks
+
 cache:
   - directories:
     - .cache
