@@ -21,9 +21,14 @@ sudo: false
 notifications:
   email: false
 
-branches:
-  only:
-    - master
+#branches:
+#  only:
+#    - master
+
+cache:
+  - directories:
+    - .cache
+    - pytools_checks
 
 env:
   - PYTHONUNBUFFERED=1
