@@ -57,7 +57,7 @@ echo "running in dir:  $PWD"
 echo
 
 get_pytools(){
-    if [ -d "$srcdir/pytools_checks" -a "$srcdir/pytools_checks/Makefile" ]; then
+    if [ -d "$srcdir/pytools_checks" -a -f "$srcdir/pytools_checks/Makefile" ]; then
         pushd "$srcdir/pytools_checks"
         NOJAVA=1 make update
         popd
