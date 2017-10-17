@@ -108,7 +108,7 @@ docker_compose_port(){
         echo "ERROR: ${env_var}_DEFAULT is not set, cannot run docker_compose_port()"
         exit 1
     fi
-    printf "getting $name => "
+    printf "$name => "
     export $env_var="$(eval docker-compose port "$DOCKER_SERVICE" $`echo ${env_var}_DEFAULT` | sed 's/.*://')"
     if eval [ -z \$"$env_var" ]; then
         echo "ERROR: failed to get port mapping for $env_var"
