@@ -87,6 +87,41 @@ declare_if_inside_docker(){
     fi
 }
 
+docker_compose_port(){
+    local env_var="${1:-}"
+    local name="${2:-}"
+    if [ -z "$env_var" ]; then
+        echo "ERROR: docker_compose_port() first arg \$1 was not supplied for \$env_var"
+        exit 1
+    fi
+    if [ -n "$name" ]; then
+        name="$name port"
+    else
+        name="$env_var"
+    fi
+    if [ -z "${DOCKER_SERVICE:-}" ]; then
+        echo "ERROR: \$DOCKER_SERVICE is not set, cannot run docker_compose_port()"
+        exit 1
+    fi
+    if eval [ -z \$"${env_var}_DEFAULT" ]; then
+        echo "ERROR: ${env_var}_DEFAULT is not set, cannot run docker_compose_port()"
+        exit 1
+    fi
+    printf "getting $name => "
+    export $env_var="$(eval docker-compose port "$DOCKER_SERVICE" $`echo ${env_var}_DEFAULT` | sed 's/.*://')"
+    if eval [ -z \$"$env_var" ]; then
+        echo "ERROR: failed to get port mapping for $env_var"
+        exit 1
+    fi
+    if eval ! [[ \$"$env_var" =~ ^[[:digit:]]+$ ]]; then
+        echo -n "ERROR: failed to get port mapping for $env_var - non-numeric port '"
+        eval echo -n \$"$env_var"
+        echo "' returned, possible parse error"
+        exit 1
+    fi
+    eval echo "\$$env_var"
+}
+
 dockerhub_latest_version(){
     repo="${1-}"
     if [ -z "$repo" ]; then
