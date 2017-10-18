@@ -246,7 +246,7 @@ print_debug_env(){
         # while read line to preserve CASSANDRA_PORTS=7199 9042
         env | egrep "^$name.*_" | grep -v -e 'DEFAULT$' -e 'VERSIONS$' | sort | while read env_var; do
             # sed here to quote export CASSANDRA_PORTS=7199 9042 => export CASSANDRA_PORTS="7199 9042"
-            eval echo "export $env_var" | sed 's/=/="/;s/$/"/'
+            eval echo "'export $env_var'" | sed 's/=/="/;s/$/"/'
         done
         echo
     done
