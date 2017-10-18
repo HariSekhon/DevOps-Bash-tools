@@ -59,6 +59,8 @@ check_docker_available(){
     export DOCKER_SERVICE="${BASH_SOURCE[1]#*test_}"
     export DOCKER_SERVICE="${DOCKER_SERVICE%.sh}"
     export DOCKER_CONTAINER="${COMPOSE_PROJECT_NAME:-docker}_${DOCKER_SERVICE}_1"
+    # nagios-plugins -> nagiosplugins
+    export DOCKER_CONTAINER="${DOCKER_CONTAINER//-}"
     export COMPOSE_FILE="$srcdir/docker/$DOCKER_SERVICE-docker-compose.yml"
 }
 
