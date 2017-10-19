@@ -97,10 +97,13 @@ docker_compose_port(){
         echo "ERROR: docker_compose_port() first arg \$1 was not supplied for \$env_var"
         exit 1
     fi
-    if [ -n "$name" ]; then
-        name="$name port"
-    else
+    if [ -z "$name" ]; then
         name="$env_var"
+    fi
+    name="$name port"
+    if ! [[ "$env_var" =~ .*_PORT$ ]]; then
+        #env_var="$(tr '[[:lower:]]' '[[:upper:]]' <<< "$env_var")_PORT"
+        env_var="$(sed 's/\(.*\)/\U\1/;s/[^[:alnum:]]/_/g' <<< "$env_var")_PORT"
     fi
     if [ -z "${DOCKER_SERVICE:-}" ]; then
         echo "ERROR: \$DOCKER_SERVICE is not set, cannot run docker_compose_port()"
