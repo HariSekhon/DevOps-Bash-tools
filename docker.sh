@@ -116,6 +116,10 @@ docker_compose_port(){
         echo "ERROR: failed to get port mapping for $env_var"
         exit 1
     fi
+    if eval [ -z \$"$env_var" ]; then
+        echo "FAILED got no port mapping for $env_var... did the container crash?"
+        exit 1
+    fi
     if eval ! [[ \$"$env_var" =~ ^[[:digit:]]+$ ]]; then
         echo -n "ERROR: failed to get port mapping for $env_var - non-numeric port '"
         eval echo -n \$"$env_var"
