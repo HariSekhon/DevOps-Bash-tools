@@ -103,7 +103,9 @@ docker_compose_port(){
     name="$name port"
     if ! [[ "$env_var" =~ .*_PORT$ ]]; then
         #env_var="$(tr '[[:lower:]]' '[[:upper:]]' <<< "$env_var")_PORT"
-        env_var="$(sed 's/\(.*\)/\U\1/;s/[^[:alnum:]]/_/g' <<< "$env_var")_PORT"
+        # doesn't work on Mac
+        #env_var="$(sed 's/.*/\U&/;s/[^[:alnum:]]/_/g' <<< "$env_var")_PORT"
+        env_var="$(sed 's/[^[:alnum:]]/_/g' <<< "$env_var" | tr 'a-z' 'A-Z')_PORT"
     fi
     if [ -z "${DOCKER_SERVICE:-}" ]; then
         echo "ERROR: \$DOCKER_SERVICE is not set, cannot run docker_compose_port()"
@@ -113,7 +115,7 @@ docker_compose_port(){
         echo "ERROR: ${env_var}_DEFAULT is not set, cannot run docker_compose_port()"
         exit 1
     fi
-    printf "$name => "
+    eval printf "\"$name -> $`echo ${env_var}_DEFAULT` => \""
     export $env_var="$(eval docker-compose port "$DOCKER_SERVICE" $`echo ${env_var}_DEFAULT` | sed 's/.*://')"
     if eval [ -z \$"$env_var" ]; then
         echo "ERROR: failed to get port mapping for $env_var"
