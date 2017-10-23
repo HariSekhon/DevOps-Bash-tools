@@ -90,6 +90,29 @@ declare_if_inside_docker(){
     fi
 }
 
+docker_compose_path_version(){
+    local path="$1"
+    local dir_base="$2"
+    if [ -z "${DOCKER_SERVICE:-}" ]; then
+        echo "Error: \$DOCKER_SERVICE has not been set in environment yet, was check_docker_available() called first?"
+        exit 1
+    fi
+    set +e
+    local version="$(docker-compose exec "$DOCKER_SERVICE" ls "$path" -1 --color=no |
+                     grep --color=no -- "$dir_base" |
+                     tr -d '\r' |
+                     tee /dev/stderr |
+                     tail -n 1 |
+                     sed "s/$dir_base//"
+                    )"
+    set -e
+    if [ -z "$version" ]; then
+        echo "Error: failed to find docker compose path version from path $path for $dir_base!"
+        exit 1
+    fi
+    echo "$version"
+}
+
 docker_compose_port(){
     local env_var="${1:-}"
     local name="${2:-}"
