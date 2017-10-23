@@ -191,7 +191,7 @@ dockerhub_latest_version(){
         echo "Error: no repo passed to dockerhub_latest_version for first arg"
     fi
     set +e
-    local version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z_]+_VERSION=/ {print $2; exit}')"
+    local version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z0-9_]+_VERSION=/ {print $2; exit}')"
     set -e
     if [ -z "$version" ]; then
         version='.*'
