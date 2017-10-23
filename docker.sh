@@ -113,6 +113,34 @@ docker_compose_path_version(){
     echo "$version"
 }
 
+docker_compose_version_test(){
+    local name="${1:-}"
+    local version="${2:-}"
+    if [ -z "$name" ]; then
+        "ERROR: missing first arg for name to docker_compose_version_test()"
+        exit 1
+    fi
+    if [ -z "$version" ]; then
+        "ERROR: missing second arg for version to docker_compose_version_test()"
+        exit 1
+    fi
+    if [ "$version" = "latest" ]; then
+        echo "latest version, fetching latest version from DockerHub master branch"
+        local version="$(dockerhub_latest_version "$name")"
+        echo "expecting version '$version'"
+    fi
+    hr
+    found_version="$(docker_compose_path_version / "$name"-)"
+    echo "found $name version $found_version"
+    hr
+    if [[ "$found_version" =~ $version* ]]; then
+        echo "$name docker version matches expected (found '$found_version', expected '$version')"
+    else
+        echo "Docker container version does not match expected version! (found '$found_version', expected '$version')"
+        exit 1
+    fi
+}
+
 docker_compose_port(){
     local env_var="${1:-}"
     local name="${2:-}"
