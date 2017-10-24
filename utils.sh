@@ -591,9 +591,11 @@ retry(){
     while true; do
         let try_number+=1
         echo -n "try $try_number:  "
-        if [ -n "$negate" ] && ! $cmd; then
-            timestamp "Command failed after $SECONDS secs"
-            break
+        if [ -n "$negate" ]; then
+            if ! $cmd; then
+                timestamp "Command failed after $SECONDS secs"
+                break
+            fi
         elif $cmd; then
             timestamp "Command succeeded after $SECONDS secs"
             break
