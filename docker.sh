@@ -90,6 +90,57 @@ declare_if_inside_docker(){
     fi
 }
 
+docker_compose_path_version(){
+    local path="$1"
+    local dir_base="$2"
+    if [ -z "${DOCKER_SERVICE:-}" ]; then
+        echo "Error: \$DOCKER_SERVICE has not been set in environment yet, was check_docker_available() called first?"
+        exit 1
+    fi
+    set +e
+    local version="$(docker-compose exec "$DOCKER_SERVICE" ls "$path" -1 --color=no |
+                     grep --color=no -- "$dir_base" |
+                     tr -d '\r' |
+                     tee /dev/stderr |
+                     tail -n 1 |
+                     sed "s/$dir_base//"
+                    )"
+    set -e
+    if [ -z "$version" ]; then
+        echo "Error: failed to find docker compose path version from path $path for $dir_base!"
+        exit 1
+    fi
+    echo "$version"
+}
+
+docker_compose_version_test(){
+    local name="${1:-}"
+    local version="${2:-}"
+    if [ -z "$name" ]; then
+        "ERROR: missing first arg for name to docker_compose_version_test()"
+        exit 1
+    fi
+    if [ -z "$version" ]; then
+        "ERROR: missing second arg for version to docker_compose_version_test()"
+        exit 1
+    fi
+    if [ "$version" = "latest" ]; then
+        echo "latest version, fetching latest version from DockerHub master branch"
+        local version="$(dockerhub_latest_version "$name")"
+        echo "expecting version '$version'"
+    fi
+    hr
+    found_version="$(docker_compose_path_version / "$name"-)"
+    echo "found $name version $found_version"
+    hr
+    if [[ "$found_version" =~ $version* ]]; then
+        echo "$name docker version matches expected (found '$found_version', expected '$version')"
+    else
+        echo "Docker container version does not match expected version! (found '$found_version', expected '$version')"
+        exit 1
+    fi
+}
+
 docker_compose_port(){
     local env_var="${1:-}"
     local name="${2:-}"
@@ -140,7 +191,7 @@ dockerhub_latest_version(){
         echo "Error: no repo passed to dockerhub_latest_version for first arg"
     fi
     set +e
-    local version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z_]+_VERSION=/ {print $2; exit}')"
+    local version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z0-9_]+_VERSION=/ {print $2; exit}')"
     set -e
     if [ -z "$version" ]; then
         version='.*'
