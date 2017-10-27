@@ -101,7 +101,9 @@ for x in "$pytools_dir"/validate_*.py; do
         # exclude kafka nagios plugin's /target/resolution-cache/check_kafka/check_kafka_2.10/0.1.0/resolved.xml.properties
         #
         # do not quote --exclude arg - the quotes will be interpreted literally and would require an eval
-        opts=' --exclude zookeeper-.*/.*contrib/rest/conf/log4j\.properties|\.gradle/.+/taskArtifacts/cache\.properties|\.xml\.properties'
+        #
+        # --allow-empty is for commented out ini files such as alluxio-site.properies in Dockerfiles repo
+        opts=' --exclude zookeeper-.*/.*contrib/rest/conf/log4j\.properties|\.gradle/.+/taskArtifacts/cache\.properties|\.xml\.properties --allow-empty'
     fi
     echo "$x$opts: "
     $x$opts .
