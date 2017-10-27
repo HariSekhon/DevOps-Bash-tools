@@ -244,7 +244,7 @@ print_debug_env(){
         #eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
         # instead of just name_PORT, find all PORTS in environment and print them
         # while read line to preserve CASSANDRA_PORTS=7199 9042
-        env | egrep "^$name.*_" | grep -v -e 'DEFAULT$' -e 'VERSIONS$' | sort | while read env_var; do
+        env | egrep "^$name.*_" | grep -v -e 'DEFAULT=' -e 'VERSIONS=' | sort | while read env_var; do
             # sed here to quote export CASSANDRA_PORTS=7199 9042 => export CASSANDRA_PORTS="7199 9042"
             eval echo "'export $env_var'" | sed 's/=/="/;s/$/"/'
         done
