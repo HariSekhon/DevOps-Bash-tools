@@ -602,7 +602,7 @@ retry(){
         fi
         if [ $SECONDS -gt $max_secs ]; then
             timestamp "FAILED: giving up after $max_secs secs"
-            exit 1
+            return 1
         fi
         sleep "$sleep_secs"
     done
