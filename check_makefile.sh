@@ -19,7 +19,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -name Makefile)" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in)" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ section "M a k e"
 start_time="$(start_timer)"
 
 if which make &>/dev/null; then
-    find "${1:-.}" -maxdepth 2 -name Makefile |
+    find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in |
     while read makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
@@ -44,6 +44,10 @@ if which make &>/dev/null; then
         done || :  # without this if no targets are found like in Dockerfiles/jython (which is all inherited) and this will fail set -e silently error out and not check the rest of the Makefiles
         popd >/dev/null
     done
+else
+    echo "WARNING: 'make' is not installed, skipping..."
+    echo
+    exit 0
 fi
 
 time_taken "$start_time"
