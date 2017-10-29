@@ -89,24 +89,32 @@ if [ -z "$validate_yaml_path" ]; then
     exit 1
 fi
 pytools_dir="$(dirname "$validate_yaml_path")"
-for x in "$pytools_dir"/validate_*.py; do
-    [[ "$x" =~ validate_multimedia.py ]] && continue
-    [ -L "$x" ] && continue
+for validate_program in "$pytools_dir"/validate_*.py; do
+    [[ "$validate_program" =~ validate_multimedia.py ]] && continue
+    [ -L "$validate_program" ] && continue
     opts=""
-    if [ "${x##*/}" = "validate_ini.py" -o "${x##*/}" = "validate_properties.py" ]; then
+    if [ "${validate_program##*/}" = "validate_ini.py" -o \
+         "${validate_program##*/}" = "validate_properties.py" ]; then
+
         # upstream zookeeper log4j.properties has duplicate keys in it's config
-        #
+        echo "$validate_program --include 'zookeeper-.*/.*contrib/rest/conf/log4j\.properties' --ignore-duplicate-keys ."
+        $validate_program --include 'zookeeper-.*/.*contrib/rest/conf/log4j\.properties' --ignore-duplicate-keys .
+        echo
+
+        # alluxio-site.properies is commented out in Dockerfiles repo due to Alluxio parsing bug
         # gradle's cache.properties is often empty just a single commented date line
-        #
+        echo "$validate_program --include 'alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties' --allow-empty ."
+        $validate_program --include 'alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties' --allow-empty .
+        echo
+
+        # exclude all of the above which are checked separately with different rules
         # exclude kafka nagios plugin's /target/resolution-cache/check_kafka/check_kafka_2.10/0.1.0/resolved.xml.properties
-        #
         # do not quote --exclude arg - the quotes will be interpreted literally and would require an eval
-        #
-        # --allow-empty is for commented out ini files such as alluxio-site.properies in Dockerfiles repo
-        opts=' --exclude zookeeper-.*/.*contrib/rest/conf/log4j\.properties|\.gradle/.+/taskArtifacts/cache\.properties|\.xml\.properties --allow-empty'
+        opts=' --exclude zookeeper-.*/.*contrib/rest/conf/log4j\.properties|\.xml\.properties|alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties'
+
     fi
-    echo "$x$opts: "
-    $x$opts .
+    echo "${validate_program}$opts: "
+    ${validate_program}$opts .
     echo
 done
 
