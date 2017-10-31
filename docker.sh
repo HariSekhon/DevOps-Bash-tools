@@ -99,7 +99,7 @@ docker_compose_path_version(){
     fi
     set +e
     local version="$(docker-compose exec "$DOCKER_SERVICE" ls "$path" -1 --color=no |
-                     grep --color=no -- "$dir_base" |
+                     grep --color=no -- "$dir_base.*[[:digit:]]" |
                      tr -d '\r' |
                      tee /dev/stderr |
                      tail -n 1 |
