@@ -390,7 +390,7 @@ when_ports_available(){
     fi
     local host="${1:-}"
     local ports="${@:2}"
-    local retry_interval=1
+    local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo 'when_ports_available: host $2 not set'
         exit 1
@@ -404,6 +404,10 @@ when_ports_available(){
                 exit 1
             fi
         done
+    fi
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "when_ports_available: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
@@ -457,7 +461,7 @@ when_ports_down(){
     fi
     local host="${1:-}"
     local ports="${@:2}"
-    local retry_interval=1
+    local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo 'when_ports_down: host $2 not set'
         exit 1
@@ -471,6 +475,10 @@ when_ports_down(){
                 exit 1
             fi
         done
+    fi
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "when_ports_down: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
@@ -522,7 +530,7 @@ when_url_content(){
     local url="${1:-}"
     local expected_regex="${2:-}"
     local args="${@:3}"
-    local retry_interval=1
+    local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$url" ]; then
         echo 'when_url_content: url $2 not set'
         exit 1
@@ -530,8 +538,12 @@ when_url_content(){
         echo 'when_url_content: expected content $3 not set'
         exit 1
     fi
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "when_url_content: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
+    fi
     #local max_tries=$(($max_secs / $retry_interval))
-    echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content: '$expected_regex'"
+    echo "waiting up to $max_secs secs at $retry_interval sec intervals for HTTP interface to come up with expected regex content: '$expected_regex'"
     found=0
     #for((i=1; i <= $max_tries; i++)); do
     try_number=0
@@ -564,14 +576,15 @@ when_url_content(){
 
 retry(){
     local max_secs="${1:-}"
-    local sleep_secs="${RETRY_INTERVAL:-1}"
+    local retry_interval="${RETRY_INTERVAL:-1}"
     shift
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
         echo "ERROR: non-integer '$max_secs' passed to retry() for \$1"
         exit 1
     fi
-    if ! [[ "$sleep_secs" =~ ^[[:digit:]]+$ ]]; then
-        sleep_secs=1
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "retry: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
     fi
     local negate=""
     expected_return_code="${ERRCODE:-0}"
@@ -584,7 +597,7 @@ retry(){
         echo "ERROR: no command passed to retry() for \$3"
         exit 1
     fi
-    echo "retrying for up to $max_secs secs at $sleep_secs sec intervals:"
+    echo "retrying for up to $max_secs secs at $retry_interval sec intervals:"
     try_number=0
     SECONDS=0
     while true; do
@@ -607,7 +620,7 @@ retry(){
             timestamp "FAILED: giving up after $max_secs secs"
             return 1
         fi
-        sleep "$sleep_secs"
+        sleep "$retry_interval"
     done
 }
 
