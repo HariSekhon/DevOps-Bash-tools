@@ -264,8 +264,8 @@ run++(){
 }
 
 run(){
-    if [ -n "${FAIL:-}" ]; then
-        run_fail "$FAIL" "$@"
+    if [ -n "${ERRCODE:-}" ]; then
+        run_fail "$ERRCODE" "$@"
     else
         run++
         echo "$@"
@@ -564,18 +564,17 @@ when_url_content(){
 
 retry(){
     local max_secs="${1:-}"
-    local sleep_secs="${2:-}"
+    local sleep_secs="${RETRY_INTERVAL:-1}"
     shift
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
         echo "ERROR: non-integer '$max_secs' passed to retry() for \$1"
         exit 1
     fi
-    if [[ "$sleep_secs" =~ ^[[:digit:]]+$ ]]; then
-        shift
-    else
+    if ! [[ "$sleep_secs" =~ ^[[:digit:]]+$ ]]; then
         sleep_secs=1
     fi
     local negate=""
+    expected_return_code="${ERRCODE:-0}"
     if [ "$1" == '!' ]; then
         negate=1
         shift
@@ -591,13 +590,17 @@ retry(){
     while true; do
         let try_number+=1
         echo -n "try $try_number:  "
+        set +e
+        $cmd
+        returncode=$?
+        set -e
         if [ -n "$negate" ]; then
-            if ! $cmd; then
+            if [ $returncode != 0 ]; then
                 timestamp "Command failed after $SECONDS secs"
                 break
             fi
-        elif $cmd; then
-            timestamp "Command succeeded after $SECONDS secs"
+        elif [ $returncode = $expected_return_code ]; then
+            timestamp "Command succeeded with expected exit code of $expected_return_code after $SECONDS secs"
             break
         fi
         if [ $SECONDS -gt $max_secs ]; then
