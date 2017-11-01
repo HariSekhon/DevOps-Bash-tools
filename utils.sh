@@ -303,11 +303,15 @@ run_fail(){
 run_grep(){
     local egrep_pattern="$1"
     shift
+    expected_exit_code="${ERRCODE:-0}"
     run++
-    echo "$@ | tee /dev/stderr | egrep '$egrep_pattern'"
-    set +o pipefail
-    "$@" | tee /dev/stderr | egrep -q "$egrep_pattern"
-    set -o pipefail
+    echo "$@"
+    set +eo pipefail
+    output="$("$@")"
+    check_exit_code "$expected_exit_code"
+    echo "echo $output | tee /dev/stderr | egrep '$egrep_pattern'"
+    echo "$output" | tee /dev/stderr | egrep -q "$egrep_pattern"
+    set -eo pipefail
 }
 
 run_test_versions(){
