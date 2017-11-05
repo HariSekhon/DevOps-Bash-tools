@@ -26,7 +26,10 @@ declare_if_inside_docker
 
 start_time="$(start_timer)"
 
-scripts="$(find "${1:-.}" -maxdepth 2 -iname 'test*.sh' | sort -f)"
+filter="${1:-.*}"
+search_dir="${2:-.}"
+
+scripts="$(find "$search_dir" -maxdepth 2 -type f -iname 'test_*.sh' | egrep "$filter" | sort -f)"
 
 for script in $scripts; do
     date
