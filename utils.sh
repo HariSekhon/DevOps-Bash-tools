@@ -264,8 +264,8 @@ run++(){
 }
 
 run(){
-    if [ -n "${FAIL:-}" ]; then
-        run_fail "$FAIL" "$@"
+    if [ -n "${ERRCODE:-}" ]; then
+        run_fail "$ERRCODE" "$@"
     else
         run++
         echo "$@"
@@ -303,11 +303,15 @@ run_fail(){
 run_grep(){
     local egrep_pattern="$1"
     shift
+    expected_exit_code="${ERRCODE:-0}"
     run++
-    echo "$@ | tee /dev/stderr | egrep '$egrep_pattern'"
-    set +o pipefail
-    "$@" | tee /dev/stderr | egrep -q "$egrep_pattern"
-    set -o pipefail
+    echo "$@"
+    set +eo pipefail
+    output="$("$@")"
+    check_exit_code "$expected_exit_code"
+    echo "echo $output | tee /dev/stderr | egrep '$egrep_pattern'"
+    echo "$output" | tee /dev/stderr | egrep -q "$egrep_pattern"
+    set -eo pipefail
 }
 
 run_test_versions(){
@@ -390,7 +394,7 @@ when_ports_available(){
     fi
     local host="${1:-}"
     local ports="${@:2}"
-    local retry_interval=1
+    local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo 'when_ports_available: host $2 not set'
         exit 1
@@ -404,6 +408,10 @@ when_ports_available(){
                 exit 1
             fi
         done
+    fi
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "when_ports_available: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
@@ -457,7 +465,7 @@ when_ports_down(){
     fi
     local host="${1:-}"
     local ports="${@:2}"
-    local retry_interval=1
+    local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo 'when_ports_down: host $2 not set'
         exit 1
@@ -471,6 +479,10 @@ when_ports_down(){
                 exit 1
             fi
         done
+    fi
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "when_ports_down: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
@@ -522,7 +534,7 @@ when_url_content(){
     local url="${1:-}"
     local expected_regex="${2:-}"
     local args="${@:3}"
-    local retry_interval=1
+    local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$url" ]; then
         echo 'when_url_content: url $2 not set'
         exit 1
@@ -530,8 +542,12 @@ when_url_content(){
         echo 'when_url_content: expected content $3 not set'
         exit 1
     fi
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "when_url_content: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
+    fi
     #local max_tries=$(($max_secs / $retry_interval))
-    echo "waiting up to $max_secs secs for HTTP interface to come up with expected regex content: '$expected_regex'"
+    echo "waiting up to $max_secs secs at $retry_interval sec intervals for HTTP interface to come up with expected regex content: '$expected_regex'"
     found=0
     #for((i=1; i <= $max_tries; i++)); do
     try_number=0
@@ -564,18 +580,18 @@ when_url_content(){
 
 retry(){
     local max_secs="${1:-}"
-    local sleep_secs="${2:-}"
+    local retry_interval="${RETRY_INTERVAL:-1}"
     shift
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
         echo "ERROR: non-integer '$max_secs' passed to retry() for \$1"
         exit 1
     fi
-    if [[ "$sleep_secs" =~ ^[[:digit:]]+$ ]]; then
-        shift
-    else
-        sleep_secs=1
+    if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
+        echo "retry: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        exit 1
     fi
     local negate=""
+    expected_return_code="${ERRCODE:-0}"
     if [ "$1" == '!' ]; then
         negate=1
         shift
@@ -585,26 +601,30 @@ retry(){
         echo "ERROR: no command passed to retry() for \$3"
         exit 1
     fi
-    echo "retrying for up to $max_secs secs at $sleep_secs sec intervals:"
+    echo "retrying for up to $max_secs secs at $retry_interval sec intervals:"
     try_number=0
     SECONDS=0
     while true; do
         let try_number+=1
         echo -n "try $try_number:  "
+        set +e
+        $cmd
+        returncode=$?
+        set -e
         if [ -n "$negate" ]; then
-            if ! $cmd; then
+            if [ $returncode != 0 ]; then
                 timestamp "Command failed after $SECONDS secs"
                 break
             fi
-        elif $cmd; then
-            timestamp "Command succeeded after $SECONDS secs"
+        elif [ $returncode = $expected_return_code ]; then
+            timestamp "Command succeeded with expected exit code of $expected_return_code after $SECONDS secs"
             break
         fi
         if [ $SECONDS -gt $max_secs ]; then
             timestamp "FAILED: giving up after $max_secs secs"
             return 1
         fi
-        sleep "$sleep_secs"
+        sleep "$retry_interval"
     done
 }
 
