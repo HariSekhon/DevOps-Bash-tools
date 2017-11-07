@@ -36,7 +36,7 @@ for script in $scripts; do
     script_start_time="$(date +%s)"
     echo
     declare_if_inside_docker
-    ./$script
+    ./$script ${VERSION:-}
     echo
     date
     echo
