@@ -195,11 +195,11 @@ docker_exec(){
     else
         local cmds="export JAVA=/usr
 $@"
-        echo  "docker exec$user \"$DOCKER_CONTAINER\" <<EOF
+        echo  "docker exec$user \"$DOCKER_CONTAINER\" /bin/bash <<EOF
         $cmds
 EOF"
         run++
-        docker exec$user "$DOCKER_CONTAINER" <<EOF
+        docker exec$user "$DOCKER_CONTAINER" /bin/bash <<EOF
         $cmds
 EOF
     fi
@@ -215,11 +215,11 @@ docker_compose_exec(){
     else
         local cmds="export JAVA=/usr
 $@"
-        echo  "docker-compose exec$user \"$DOCKER_SERVICE\" <<EOF
+        echo  "docker-compose exec$user \"$DOCKER_SERVICE\" /bin/bash <<EOF
         $cmds
 EOF"
         run++
-        docker-compose exec$user "$DOCKER_SERVICE" <<EOF
+        docker-compose exec$user "$DOCKER_SERVICE" /bin/bash <<EOF
         $cmds
 EOF
     fi
