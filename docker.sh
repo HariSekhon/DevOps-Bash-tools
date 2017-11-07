@@ -187,6 +187,7 @@ docker_compose_port(){
 
 docker_exec(){
     #docker-compose exec "$DOCKER_SERVICE" $MNTDIR/$@
+    local user=""
     if [ -n "${DOCKER_USER:-}" ]; then
         user=" --user $DOCKER_USER"
     fi
