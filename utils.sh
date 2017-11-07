@@ -317,9 +317,10 @@ run_grep(){
     set +eo pipefail
     output="$("$@")"
     check_exit_code "$expected_exit_code"
+    set -e
     echo "echo $output | tee /dev/stderr | egrep '$egrep_pattern'"
     echo "$output" | tee /dev/stderr | egrep -q "$egrep_pattern"
-    set -eo pipefail
+    set -o pipefail
 }
 
 run_test_versions(){
