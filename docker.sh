@@ -190,16 +190,20 @@ docker_exec(){
     if [ -n "${DOCKER_USER:-}" ]; then
         user=" --user $DOCKER_USER"
     fi
-    if [ -n "${MNTDIR:-}" ]; then
-        run docker exec$user "$DOCKER_CONTAINER" "$MNTDIR/$@"
+    local MNTDIR="${DOCKER_MOUNT_DIR:-}"
+    if [ -n "$MNTDIR" ]; then
+        MNTDIR="$MNTDIR/"
+    fi
+    if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
+        run docker exec$user "$DOCKER_CONTAINER" "$MNTDIR$@"
     else
-        local cmds="export JAVA=/usr
-$@"
-        echo  "docker exec$user \"$DOCKER_CONTAINER\" /bin/bash <<EOF
+        local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
+$MNTDIR$@"
+        echo  "docker exec -i$user \"$DOCKER_CONTAINER\" /bin/bash <<EOF
         $cmds
 EOF"
-        run++
-        docker exec$user "$DOCKER_CONTAINER" /bin/bash <<EOF
+        # use run rather than run++ and plain docker exec so that it inherits ERRCODE
+        run docker exec -i$user "$DOCKER_CONTAINER" /bin/bash <<EOF
         $cmds
 EOF
     fi
@@ -210,16 +214,19 @@ docker_compose_exec(){
     if [ -n "${DOCKER_USER:-}" ]; then
         user=" --user $DOCKER_USER"
     fi
-    if [ -n "${MNTDIR:-}" ]; then
-        run docker-compose exec$user "$DOCKER_SERVICE" "$MNTDIR/$@"
+    local MNTDIR="${DOCKER_MOUNT_DIR:-}"
+    if [ -n "$MNTDIR" ]; then
+        MNTDIR="$MNTDIR/"
+    fi
+    if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
+        run docker-compose exec$user "$DOCKER_SERVICE" "$MNTDIR$@"
     else
-        local cmds="export JAVA=/usr
-$@"
+        local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
+$MNTDIR$@"
         echo  "docker-compose exec$user \"$DOCKER_SERVICE\" /bin/bash <<EOF
         $cmds
 EOF"
-        run++
-        docker-compose exec$user "$DOCKER_SERVICE" /bin/bash <<EOF
+        run docker-compose exec$user "$DOCKER_SERVICE" /bin/bash <<EOF
         $cmds
 EOF
     fi
