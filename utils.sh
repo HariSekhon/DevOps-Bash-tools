@@ -183,7 +183,7 @@ else
 fi
 
 is_latest_version(){
-    if [ "$version" != "latest" -a "$version" != ".*" ]; then
+    if [ "$version" = "latest" -0 "$version" = ".*" ]; then
         return 0
     fi
     return 1
