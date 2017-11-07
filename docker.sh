@@ -185,6 +185,26 @@ docker_compose_port(){
     eval echo "\$$env_var"
 }
 
+docker_exec(){
+    #docker-compose exec "$DOCKER_SERVICE" $MNTDIR/$@
+    if [ -n "${DOCKER_USER:-}" ]; then
+        user=" --user $DOCKER_USER"
+    fi
+    if [ -n "${MNTDIR:-}" ]; then
+        run docker exec$user "$DOCKER_CONTAINER" "$MNTDIR/$@"
+    else
+        local cmds="export JAVA=/usr
+$@"
+        echo  "docker exec$user \"$DOCKER_CONTAINER\" <<EOF
+        $cmds
+EOF"
+        run++
+        docker exec$user "$DOCKER_CONTAINER" <<EOF
+        $cmds
+EOF
+    fi
+}
+
 dockerhub_latest_version(){
     repo="${1-}"
     if [ -z "$repo" ]; then
