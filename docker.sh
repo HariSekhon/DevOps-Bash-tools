@@ -186,7 +186,6 @@ docker_compose_port(){
 }
 
 docker_exec(){
-    #docker-compose exec "$DOCKER_SERVICE" $MNTDIR/$@
     local user=""
     if [ -n "${DOCKER_USER:-}" ]; then
         user=" --user $DOCKER_USER"
@@ -201,6 +200,26 @@ $@"
 EOF"
         run++
         docker exec$user "$DOCKER_CONTAINER" <<EOF
+        $cmds
+EOF
+    fi
+}
+
+docker_compose_exec(){
+    local user=""
+    if [ -n "${DOCKER_USER:-}" ]; then
+        user=" --user $DOCKER_USER"
+    fi
+    if [ -n "${MNTDIR:-}" ]; then
+        run docker-compose exec$user "$DOCKER_SERVICE" "$MNTDIR/$@"
+    else
+        local cmds="export JAVA=/usr
+$@"
+        echo  "docker-compose exec$user \"$DOCKER_SERVICE\" <<EOF
+        $cmds
+EOF"
+        run++
+        docker-compose exec$user "$DOCKER_SERVICE" <<EOF
         $cmds
 EOF
     fi
