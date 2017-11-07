@@ -183,6 +183,7 @@ else
 fi
 
 is_latest_version(){
+    # permit .* as we often replace version if latest with .* to pass regex version tests, which allows this to be called any time
     if [ "$version" = "latest" -o "$version" = ".*" ]; then
         return 0
     fi
