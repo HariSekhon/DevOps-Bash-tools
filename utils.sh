@@ -182,6 +182,13 @@ else
     sudo=""
 fi
 
+is_latest_version(){
+    if [ "$version" != "latest" -a "$version" != ".*" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
 # cause the CI builds to fail with job logs > 4MB
 ci_sample(){
