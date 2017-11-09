@@ -344,7 +344,7 @@ run_test_versions(){
             exit 1
         fi
         let total_run_count+=$run_count
-        time_taken "$version_start_time" "$name version $version test completed in"
+        time_taken "$version_start_time" "$name version '$version' tests completed in"
         echo
     done
 
