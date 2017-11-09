@@ -319,7 +319,8 @@ run_grep(){
     run++
     echo "$@"
     set +eo pipefail
-    output="$("$@")"
+    # pytools programs write to stderr, must test this for connection refused type information
+    output="$("$@" 2>&1)"
     check_exit_code "$expected_exit_code"
     set -e
     # this must be egrep -i because (?i) modifier does not work
