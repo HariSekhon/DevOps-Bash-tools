@@ -279,11 +279,12 @@ run(){
         echo "$@"
         "$@"
     fi
+    hr
 }
 
 run_conn_refused(){
     echo "checking connection refused:"
-    run_fail 2 "$@" -H localhost -P "$wrong_port"
+    ERRCODE=2 run_grep "connection refused" "$@" -H localhost -P "$wrong_port"
 }
 
 run_output(){
@@ -318,8 +319,9 @@ run_grep(){
     output="$("$@")"
     check_exit_code "$expected_exit_code"
     set -e
-    echo "echo $output | tee /dev/stderr | egrep '$egrep_pattern'"
-    echo "$output" | tee /dev/stderr | egrep -q "$egrep_pattern"
+    # this must be egrep -i because (?i) modifier does not work
+    echo "echo $output | tee /dev/stderr | egrep -qi '$egrep_pattern'"
+    echo "$output" | tee /dev/stderr | egrep -qi "$egrep_pattern"
     set -o pipefail
 }
 
