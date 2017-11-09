@@ -278,13 +278,14 @@ run(){
         run++
         echo "$@"
         "$@"
+        # run_fail does it's own hr
+        hr
     fi
-    hr
 }
 
 run_conn_refused(){
     echo "checking connection refused:"
-    ERRCODE=2 run_grep "connection refused" "$@" -H localhost -P "$wrong_port"
+    ERRCODE=2 run_grep "connection refused|Can't connect" "$@" -H localhost -P "$wrong_port"
 }
 
 run_output(){
@@ -295,6 +296,7 @@ run_output(){
     set +e
     check_output "$expected_output" "$@"
     set -e
+    hr
 }
 
 run_fail(){
@@ -307,6 +309,7 @@ run_fail(){
     # intentionally don't quote $expected_exit_code so that we can pass multiple exit codes through first arg and have them expanded here
     check_exit_code $expected_exit_code
     set -e
+    hr
 }
 
 run_grep(){
@@ -323,6 +326,7 @@ run_grep(){
     echo "echo $output | tee /dev/stderr | egrep -qi '$egrep_pattern'"
     echo "$output" | tee /dev/stderr | egrep -qi "$egrep_pattern"
     set -o pipefail
+    hr
 }
 
 run_test_versions(){
