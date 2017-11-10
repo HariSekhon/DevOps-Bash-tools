@@ -127,7 +127,7 @@ check_exit_code(){
     done
     if [ $failed != 0 ]; then
         echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
-        exit 1
+        return 1
     fi
 }
 
@@ -307,7 +307,7 @@ run_fail(){
     set +e
     "$@"
     # intentionally don't quote $expected_exit_code so that we can pass multiple exit codes through first arg and have them expanded here
-    check_exit_code $expected_exit_code
+    check_exit_code $expected_exit_code || exit 1
     set -e
     hr
 }
@@ -321,7 +321,10 @@ run_grep(){
     set +eo pipefail
     # pytools programs write to stderr, must test this for connection refused type information
     output="$("$@" 2>&1)"
-    check_exit_code "$expected_exit_code"
+    if ! check_exit_code "$expected_exit_code"; then
+        echo "$output"
+        exit 1
+    fi
     set -e
     # this must be egrep -i because (?i) modifier does not work
     echo "echo $output | tee /dev/stderr | egrep -qi '$egrep_pattern'"
