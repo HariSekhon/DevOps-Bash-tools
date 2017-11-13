@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -u
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -31,10 +31,16 @@ start_time="$(start_timer)"
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     echo -n '.'
-    egrep '^[^#]*\bquit\b' "$x" &&
-        { echo; echo; echo "ERROR: $x contains quit() call!! Typo?"; exit 1; }
+    if egrep -q '^[^#]*\bquit\b' "$x"; then
+        echo
+        egrep -q '^[^#]*\bquit\b' "$x"
+        echo
+        echo
+        echo "ERROR: $x contains quit() call!! Typo?"
+        exit 1
+    fi
 done
 
 time_taken "$start_time"
-section2 "Python - passed - no quit() calls found"
+section2 "Python OK - no quit() calls found"
 echo
