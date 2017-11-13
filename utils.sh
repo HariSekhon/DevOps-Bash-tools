@@ -127,7 +127,7 @@ check_exit_code(){
     done
     if [ $failed != 0 ]; then
         echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
-        exit 1
+        return 1
     fi
 }
 
@@ -181,6 +181,14 @@ if is_travis; then
 else
     sudo=""
 fi
+
+is_latest_version(){
+    # permit .* as we often replace version if latest with .* to pass regex version tests, which allows this to be called any time
+    if [ "$version" = "latest" -o "$version" = ".*" ]; then
+        return 0
+    fi
+    return 1
+}
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
 # cause the CI builds to fail with job logs > 4MB
@@ -270,12 +278,14 @@ run(){
         run++
         echo "$@"
         "$@"
+        # run_fail does it's own hr
+        hr
     fi
 }
 
 run_conn_refused(){
     echo "checking connection refused:"
-    run_fail 2 "$@" -H localhost -P "$wrong_port"
+    ERRCODE=2 run_grep "Connection refused|Can't connect|Could not connect to" "$@" -H localhost -P "$wrong_port"
 }
 
 run_output(){
@@ -286,6 +296,7 @@ run_output(){
     set +e
     check_output "$expected_output" "$@"
     set -e
+    hr
 }
 
 run_fail(){
@@ -296,8 +307,9 @@ run_fail(){
     set +e
     "$@"
     # intentionally don't quote $expected_exit_code so that we can pass multiple exit codes through first arg and have them expanded here
-    check_exit_code $expected_exit_code
+    check_exit_code $expected_exit_code || exit 1
     set -e
+    hr
 }
 
 run_grep(){
@@ -307,11 +319,18 @@ run_grep(){
     run++
     echo "$@"
     set +eo pipefail
-    output="$("$@")"
-    check_exit_code "$expected_exit_code"
-    echo "echo $output | tee /dev/stderr | egrep '$egrep_pattern'"
-    echo "$output" | tee /dev/stderr | egrep -q "$egrep_pattern"
-    set -eo pipefail
+    # pytools programs write to stderr, must test this for connection refused type information
+    output="$("$@" 2>&1)"
+    if ! check_exit_code "$expected_exit_code"; then
+        echo "$output"
+        exit 1
+    fi
+    set -e
+    # this must be egrep -i because (?i) modifier does not work
+    echo "echo $output | tee /dev/stderr | egrep -qi '$egrep_pattern'"
+    echo "$output" | tee /dev/stderr | egrep -qi "$egrep_pattern"
+    set -o pipefail
+    hr
 }
 
 run_test_versions(){
@@ -329,7 +348,7 @@ run_test_versions(){
             exit 1
         fi
         let total_run_count+=$run_count
-        time_taken "$version_start_time" "$name version $version test completed in"
+        time_taken "$version_start_time" "$name version '$version' tests completed in"
         echo
     done
 

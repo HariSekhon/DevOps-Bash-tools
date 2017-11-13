@@ -185,6 +185,53 @@ docker_compose_port(){
     eval echo "\$$env_var"
 }
 
+docker_exec(){
+    local user=""
+    if [ -n "${DOCKER_USER:-}" ]; then
+        user=" --user $DOCKER_USER"
+    fi
+    local MNTDIR="${DOCKER_MOUNT_DIR:-}"
+    if [ -n "$MNTDIR" ]; then
+        MNTDIR="$MNTDIR/"
+    fi
+    if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
+        run docker exec$user "$DOCKER_CONTAINER" "$MNTDIR$@"
+    else
+        local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
+$MNTDIR$@"
+        echo  "docker exec -i$user \"$DOCKER_CONTAINER\" /bin/bash <<EOF
+        $cmds
+EOF"
+        # use run rather than run++ and plain docker exec so that it inherits ERRCODE
+        run docker exec -i$user "$DOCKER_CONTAINER" /bin/bash <<EOF
+        $cmds
+EOF
+    fi
+}
+
+docker_compose_exec(){
+    local user=""
+    if [ -n "${DOCKER_USER:-}" ]; then
+        user=" --user $DOCKER_USER"
+    fi
+    local MNTDIR="${DOCKER_MOUNT_DIR:-}"
+    if [ -n "$MNTDIR" ]; then
+        MNTDIR="$MNTDIR/"
+    fi
+    if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
+        run docker-compose exec$user "$DOCKER_SERVICE" "$MNTDIR$@"
+    else
+        local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
+$MNTDIR$@"
+        echo  "docker-compose exec$user \"$DOCKER_SERVICE\" /bin/bash <<EOF
+        $cmds
+EOF"
+        run docker-compose exec$user "$DOCKER_SERVICE" /bin/bash <<EOF
+        $cmds
+EOF
+    fi
+}
+
 dockerhub_latest_version(){
     repo="${1-}"
     if [ -z "$repo" ]; then
