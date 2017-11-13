@@ -31,9 +31,9 @@ start_time="$(start_timer)"
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     echo -n '.'
-    if egrep -B5 '^[[:space:]]+\bpass\b' "$x" | egrep -q '^[^#]*except'; then
+    if egrep -B5 '^[[:space:]]+\bpass\b' "$x" | egrep -q '^[^#]*\bexcept\b'; then
         echo
-        egrep -HnB 5 '^[[:space:]]+\bpass\b' "$x" | egrep -5 '^[^#]*except'
+        egrep -HnB 5 '^[[:space:]]+\bpass\b' "$x" | egrep -5 '^[^#]*\bexcept\b'
         echo
         echo
         echo "WARNING: $x contains 'pass'!! Check this code isn't being sloppy"
