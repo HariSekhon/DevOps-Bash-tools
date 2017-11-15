@@ -288,6 +288,11 @@ run_conn_refused(){
     ERRCODE=2 run_grep "Connection refused|Can't connect|Could not connect to" "$@" -H localhost -P "$wrong_port"
 }
 
+run_usage(){
+    echo "checking usage / parsing:"
+    ERRCODE=3 run_grep "usage: " "$@"
+}
+
 run_output(){
     local expected_output="$1"
     shift
@@ -327,7 +332,7 @@ run_grep(){
     fi
     set -e
     # this must be egrep -i because (?i) modifier does not work
-    echo "echo $output | tee /dev/stderr | egrep -qi '$egrep_pattern'"
+    echo "> | tee /dev/stderr | egrep -qi '$egrep_pattern'"
     echo "$output" | tee /dev/stderr | egrep -qi "$egrep_pattern"
     set -o pipefail
     hr
