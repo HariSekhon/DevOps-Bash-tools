@@ -293,6 +293,11 @@ run_404(){
     ERRCODE=2 run_grep "404 Not Found" "$@"
 }
 
+run_timeout(){
+    echo "checking timeout:"
+    ERRCODE=3 run_grep "timed out" "$@"
+}
+
 run_usage(){
     echo "checking usage / parsing:"
     ERRCODE=3 run_grep "usage: " "$@"
