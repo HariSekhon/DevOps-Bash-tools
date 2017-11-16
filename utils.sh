@@ -288,6 +288,11 @@ run_conn_refused(){
     ERRCODE=2 run_grep "Connection refused|Can't connect|Could not connect to" "$@" -H localhost -P "$wrong_port"
 }
 
+run_404(){
+    echo "checking 404 Not Found:"
+    ERRCODE=2 run_grep "404 Not Found" "$@"
+}
+
 run_usage(){
     echo "checking usage / parsing:"
     ERRCODE=3 run_grep "usage: " "$@"
