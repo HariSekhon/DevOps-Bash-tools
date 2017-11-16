@@ -35,8 +35,13 @@ for script in $scripts; do
     fi
     set +eo pipefail
                      # don't anchor grep -v as we're prefixing line numbers for convenience
-    # run or run_fail \d+ or run_fail "\d+ \d+ ..."
-    run_fail='run(_[a-z]+ "?[[:digit:][:space:]]+"?|_conn_refused|_usage)?'
+    # run
+    # run_fail \d+
+    # run_fail "\d+ \d+ ..."
+    # run_conn_refused
+    # run_usage
+    # run_404
+    run_fail='run(_[a-z]+ "?[[:digit:][:space:]]+"?|_conn_refused|_usage|_404)?'
     # docker-compose or docker exec or docker run
     docker_regex='docker(-compose|[[:space:]]+(exec|run))'
     suspect_lines="$(egrep -n '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" |
