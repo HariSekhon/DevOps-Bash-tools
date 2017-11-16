@@ -90,6 +90,12 @@ declare_if_inside_docker(){
     fi
 }
 
+docker_compose_pull(){
+    if is_CI || [ -n "${DOCKER_PULL:-}" ]; then
+        VERSION="${version:-}" docker-compose pull $docker_compose_quiet || :
+    fi
+}
+
 docker_compose_path_version(){
     local path="$1"
     local dir_base="$2"
