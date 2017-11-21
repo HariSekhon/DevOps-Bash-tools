@@ -71,6 +71,7 @@ mybranch(){
     git branch | awk '/^\*/ {print $2; exit}'
 }
 
+# shouldn't need to use this any more, git_check_branches_upstream.py from PyTools repo has a --fix flag which will do this for all branches if they have no upstream set - https://github.com/harisekhon/pytools
 set_upstream(){
     git branch --set-upstream-to origin/$(mybranch) $(mybranch)
 }
