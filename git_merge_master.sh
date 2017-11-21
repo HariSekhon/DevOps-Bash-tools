@@ -19,6 +19,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . "$srcdir/git.sh"
 
+# For Git < 2.0 may need to set:
+#
+# git config merge.defaultToUpstream true
+
 foreachbranch 'git merge --no-edit && git merge master --no-edit'
 
 git checkout master
