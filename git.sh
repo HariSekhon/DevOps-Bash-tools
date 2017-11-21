@@ -25,6 +25,8 @@ allbranches(){
     else
         local uniq="sort | uniq"
     fi
+    # this only shows local branches, to show all remote ones do
+    # git ls-remote | awk '/\/heads\//{print $2}' | sed 's,refs/heads/,,'
     eval git branch -a | clean_branch_name | $uniq
 }
 
