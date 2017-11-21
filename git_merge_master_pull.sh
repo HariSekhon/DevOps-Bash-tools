@@ -17,8 +17,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "$srcdir"
-
 . "$srcdir/git.sh"
 
 foreachbranch 'git fetch && git merge --no-edit && git merge master --no-edit'
