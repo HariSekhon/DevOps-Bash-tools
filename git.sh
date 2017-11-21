@@ -50,6 +50,10 @@ foreachbranch(){
     local branch;
     for branch in $branches; do
         hr
+        if [ -z "${FORCEMASTER:-}" -a "$branch" = "master" ]; then
+            echo "skipping master branch for safety (set FORCEMASTER=1 environment variable to override)"
+            continue
+        fi
         echo "$branch:"
         if git branch | fgrep --color=auto -q "$branch"; then
             git checkout "$branch"
