@@ -27,7 +27,7 @@ allbranches(){
     fi
     # this only shows local branches, to show all remote ones do
     # git ls-remote | awk '/\/heads\//{print $2}' | sed 's,refs/heads/,,'
-    eval git branch -a | clean_branch_name | $uniq
+    git branch -a | clean_branch_name | eval $uniq
 }
 
 clean_branch_name(){
