@@ -64,3 +64,11 @@ foreachbranch(){
     done
     git checkout "$start_branch"
 }
+
+mybranch(){
+    git branch | awk '/^\*/ {print $2; exit}'
+}
+
+set_upstream(){
+    git branch --set-upstream-to origin/$(mybranch) $(mybranch)
+}
