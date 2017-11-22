@@ -430,21 +430,21 @@ when_ports_available(){
     local ports="${@:2}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
-        echo 'when_ports_available: host $2 not set'
+        echo "$FUNCNAME: host \$2 not set"
         exit 1
     elif [ -z "$ports" ]; then
-        echo 'when_ports_available: ports $3 not set'
+        echo "$FUNCNAME: ports \$3 not set"
         exit 1
     else
         for port in $ports; do
             if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
-                echo "when_ports_available: invalid non-numeric port argument '$port'"
+                echo "$FUNCNAME: invalid non-numeric port argument '$port'"
                 exit 1
             fi
         done
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "when_ports_available: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
         exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
@@ -501,21 +501,21 @@ when_ports_down(){
     local ports="${@:2}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
-        echo 'when_ports_down: host $2 not set'
+        echo "$FUNCNAME: host \$2 not set"
         exit 1
     elif [ -z "$ports" ]; then
-        echo 'when_ports_down: ports $3 not set'
+        echo "$FUNCNAME: ports \$3 not set"
         exit 1
     else
         for port in $ports; do
             if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
-                echo "when_ports_down: invalid non-numeric port argument '$port'"
+                echo "$FUNCNAME: invalid non-numeric port argument '$port'"
                 exit 1
             fi
         done
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "when_ports_down: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
         exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
@@ -570,14 +570,14 @@ when_url_content(){
     local args="${@:3}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$url" ]; then
-        echo 'when_url_content: url $2 not set'
+        echo "$FUNCNAME: url \$2 not set"
         exit 1
     elif [ -z "$expected_regex" ]; then
-        echo 'when_url_content: expected content $3 not set'
+        echo "$FUNCNAME: expected content \$3 not set"
         exit 1
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "when_url_content: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
         exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
@@ -617,11 +617,11 @@ retry(){
     local retry_interval="${RETRY_INTERVAL:-1}"
     shift
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
-        echo "ERROR: non-integer '$max_secs' passed to retry() for \$1"
+        echo "ERROR: non-integer '$max_secs' passed to $FUNCNAME() for \$1"
         exit 1
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "retry: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
         exit 1
     fi
     local negate=""
@@ -632,7 +632,7 @@ retry(){
     fi
     local cmd="${@:-}"
     if [ -z "$cmd" ]; then
-        echo "ERROR: no command passed to retry() for \$3"
+        echo "ERROR: no command passed to $FUNCNAME() for \$3"
         exit 1
     fi
     echo "retrying for up to $max_secs secs at $retry_interval sec intervals:"
