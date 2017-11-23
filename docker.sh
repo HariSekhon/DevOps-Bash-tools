@@ -204,7 +204,7 @@ docker_exec(){
         MNTDIR="$MNTDIR/"
     fi
     if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
-        run docker exec$user "$DOCKER_CONTAINER" "$MNTDIR$@"
+        run docker exec -i$user "$DOCKER_CONTAINER" "$MNTDIR$@"
     else
         local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
 $MNTDIR$@"
