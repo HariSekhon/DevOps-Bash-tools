@@ -92,6 +92,11 @@ pytools_dir="$(dirname "$validate_yaml_path")"
 for validate_program in "$pytools_dir"/validate_*.py; do
     [[ "$validate_program" =~ validate_multimedia.py ]] && continue
     [ -L "$validate_program" ] && continue
+    if [[ -n "${SKIP_PARQUET:-}" && "$validate_program" =~ .*parquet.* ]]; then
+        echo "Skipping Parquet checks..."
+        echo
+        continue
+    fi
     opts=""
     if [ "${validate_program##*/}" = "validate_ini.py" -o \
          "${validate_program##*/}" = "validate_properties.py" ]; then
