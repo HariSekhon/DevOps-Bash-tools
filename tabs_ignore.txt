@@ -1,4 +1,5 @@
 # Posix Regex
 # used on top of whitespace_ignore.txt
-.*.xml$
+.*.json$
 .*.log$
+.*.xml$
