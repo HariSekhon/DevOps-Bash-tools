@@ -55,7 +55,7 @@ else
         fi
     fi
     if which travis &>/dev/null; then
-    	travis lint
+        travis lint
     else
         echo "WARNING: skipping Travis check as Travis is not installed"
     fi
