@@ -25,7 +25,7 @@ start_time="$(start_timer)"
 
 . "$srcdir/excluded.sh"
 
-progress_char='.'
+progress_char='-'
 [ -n "${DEBUG:-}" ] && progress_char=''
 
 whitespace_only_files_found=0
@@ -40,10 +40,26 @@ for filename in $(find "${1:-.}" -type f | egrep -vf "$srcdir/whitespace_ignore.
     #grep -Hn '[[:space:]]\+$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_files_found+=1 || :
     #egrep -Hn '[[:space:]]{4}\|[[:space:]]*$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_bar_files_found+=1 || :
     # \t aren't working inside character classes for some reason, embedding literal tabs instead
-    egrep -Hn '^[ 	]+$' "$filename" && let whitespace_only_files_found+=1 || :
-    egrep -Hn '[ 	]+$' "$filename" && let trailing_whitespace_files_found+=1 || :
-    egrep -Hn '[ 	]{4}\|[ 	]*$' "$filename" && let trailing_whitespace_bar_files_found+=1 || :
+    output=`egrep -Hn '^[ 	]+$' "$filename" || :`
+    if [ -n "$output" ]; then
+        echo
+        echo "$output"
+        let whitespace_only_files_found+=1
+    fi
+    output=`egrep -Hn '[ 	]+$' "$filename" || :`
+    if [ -n "$output" ]; then
+        echo
+        echo "$output"
+        let trailing_whitespace_files_found+=1
+    fi
+    output=`egrep -Hn '[ 	]{4}\|[ 	]*$' "$filename" || :`
+    if [ -n "$output" ]; then
+        echo
+        echo "$output"
+        let trailing_whitespace_bar_files_found+=1
+    fi
 done
+echo
 if [ $whitespace_only_files_found -gt 0 ]; then
     echo "$whitespace_only_files_found files with whitespace only lines detected!"
 fi
@@ -53,7 +69,9 @@ fi
 if [ $trailing_whitespace_bar_files_found -gt 0 ]; then
     echo "$trailing_whitespace_bar_files_found files with trailing whitespace bar lines detected!"
 fi
-if [ $whitespace_only_files_found -gt 0 -o $trailing_whitespace_files_found -gt 0 -o  $trailing_whitespace_bar_files_found -gt 0 ]; then
+if [ $whitespace_only_files_found -gt 0 \
+  -o $trailing_whitespace_files_found -gt 0 \
+  -o $trailing_whitespace_bar_files_found -gt 0 ]; then
     return 1 &>/dev/null || :
     exit 1
 fi
