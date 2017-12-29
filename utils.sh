@@ -447,32 +447,35 @@ when_ports_available(){
         echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
         exit 1
     fi
-    #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
-    local nc_cmd="nc -vw $retry_interval $host <<< ''"
-    cmd=""
-    for x in $ports; do
-        cmd="$cmd $nc_cmd $x &>/dev/null && "
-    done
-    local cmd="${cmd% && }"
+    #local nc_cmd="nc -vw $retry_interval $host <<< ''"
+    #cmd=""
+    #for x in $ports; do
+    #    cmd="$cmd $nc_cmd $x &>/dev/null && "
+    #done
+    #local cmd="${cmd% && }"
     plural_str $ports
     echo "waiting for up to $max_secs secs for port$plural '$ports' to become available, retrying at $retry_interval sec intervals"
-    echo "cmd: ${cmd// \&\>\/dev\/null}"
+    #echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
     if which nc &>/dev/null; then
-        #for((i=1; i <= $max_tries; i++)); do
         try_number=0
         # special built-in that increments for script runtime, reset to zero exploit it here
         SECONDS=0
         # bash will interpolate from string for correct numeric comparison and safer to quote vars
         while [ "$SECONDS" -lt "$max_secs" ]; do
             let try_number+=1
-            timestamp "$try_number trying host '$host' port(s) '$ports'"
-            if eval $cmd; then
+            for port in $ports; do
+                if ! nc -vw "$retry_interval" "$host" "$port" <<< '' &>/dev/null; then
+                    timestamp "$try_number waiting for host '$host' port '$port'"
+                    sleep "$retry_interval"
+                    break
+                fi
                 found=1
+            done
+            if [ $found -eq 1 ]; then
                 break
             fi
-            sleep "$retry_interval"
         done
         if [ $found -eq 1 ]; then
             timestamp "host '$host' port$plural '$ports' available after $SECONDS secs"
