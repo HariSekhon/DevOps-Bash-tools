@@ -41,6 +41,16 @@ until [ $# -lt 1 ]; do
     shift
 done
 
+if [ "$(uname -s)" != "Linux" ]; then
+    echo "Error: this only runs on Linux"
+    exit 1
+fi
+
+if ! [ -f /proc/mounts ]; then
+    echo "Error: /proc/mounts not found"
+    exit 1
+fi
+
 # TODO: switch to awk to filter output just mountpoint
 awk '{print $2}' /proc/mounts |
 egrep -v ' cgroup ' |
