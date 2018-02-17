@@ -171,10 +171,12 @@ docker_compose_port(){
         echo "ERROR: \$DOCKER_SERVICE is not set, cannot run docker_compose_port()"
         exit 1
     fi
+    set +u
     if eval [ -z \$"${env_var}_DEFAULT" ]; then
         echo "ERROR: ${env_var}_DEFAULT is not set, cannot run docker_compose_port()"
         exit 1
     fi
+    set -u
     eval printf "\"$name -> $`echo ${env_var}_DEFAULT` => \""
     export $env_var="$(eval docker-compose port "$DOCKER_SERVICE" $`echo ${env_var}_DEFAULT` | sed 's/.*://')"
     if eval [ -z \$"$env_var" ]; then
