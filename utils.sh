@@ -352,7 +352,7 @@ run_test_versions(){
     local name="$1"
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
-    local test_versions="$(eval ci_sample $`echo $VERSIONS | tr ' ' '\n' | tail -r | tr '\n' ' '`)"
+    local test_versions="$(eval ci_sample $`echo $VERSIONS` | tr ' ' '\n' | tail -r | tr '\n' ' ')"
     local start_time="$(start_timer "$name tests")"
     for version in $test_versions; do
         version_start_time="$(start_timer "$name test for version:  $version")"
