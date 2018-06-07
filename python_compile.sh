@@ -33,11 +33,15 @@ if [ -n "${NOCOMPILE:-}" ]; then
 elif [ -n "${QUICK:-}" ]; then
     echo '$QUICK environment variable set, skipping python compile'
 else
-    for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
-        type isExcluded &>/dev/null && isExcluded "$x" && continue
-        echo "compiling $x"
-        python -m py_compile "$x"
-    done
+    if [ -n "${FAST:-}" ]; then
+        python -m compileall "${1:-.}" || :
+    else
+        for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
+            type isExcluded &>/dev/null && isExcluded "$x" && continue
+            echo "compiling $x"
+            python -m py_compile "$x"
+        done
+    fi
 fi
 
 time_taken "$start_time"
