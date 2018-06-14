@@ -2,6 +2,7 @@
 /Makefile$
 /\.
 \.pyc$
+\.pyo$
 \.jyc$
 /target/
 /build/
