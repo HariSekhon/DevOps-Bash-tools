@@ -39,7 +39,9 @@ else
         for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
             type isExcluded &>/dev/null && isExcluded "$x" && continue
             echo "compiling $x"
-            python -m py_compile "$x"
+            # -O  - optimize
+            # -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
+            python -O -3 -m py_compile "$x"
         done
     fi
 fi
