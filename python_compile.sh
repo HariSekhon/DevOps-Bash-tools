@@ -41,7 +41,8 @@ else
             echo "compiling $x"
             # -O  - optimize
             # -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
-            python -O -3 -m py_compile "$x"
+            # -t  - warn on inconsistent use of tabs
+            python -O -3 -t -m py_compile "$x"
         done
     fi
 fi
