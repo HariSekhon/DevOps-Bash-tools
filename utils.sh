@@ -353,8 +353,12 @@ run_test_versions(){
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
     local test_versions="$(eval ci_sample $`echo $VERSIONS`)"
+    local test_versions_ordered="$test_versions"
+    if [ -z "${NO_VERSION_REVERSE:-}" ]; then
+        local test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | tail -r | tr '\n' ' ')"
+    fi
     local start_time="$(start_timer "$name tests")"
-    for version in $test_versions; do
+    for version in $test_versions_ordered; do
         version_start_time="$(start_timer "$name test for version:  $version")"
         run_count=0
         eval "$test_func" "$version"

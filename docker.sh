@@ -142,7 +142,7 @@ docker_compose_version_test(){
     found_version="$(docker_compose_path_version / "$name"-)"
     echo "found $name version $found_version"
     hr
-    if [[ "$found_version" =~ $version* ]]; then
+    if [[ "$found_version" =~ $version ]]; then
         echo "$name docker version matches expected (found '$found_version', expected '$version')"
     else
         echo "Docker container version does not match expected version! (found '$found_version', expected '$version')"
