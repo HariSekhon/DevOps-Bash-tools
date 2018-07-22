@@ -49,6 +49,7 @@ for script in $scripts; do
                      egrep -v -e "[[:space:]]*$run_fail[[:space:]](.*[[:space:]])?(./|(\\\$perl|eval|$docker_regex)[[:space:]])" \
                               -e '[[:space:]]*run_test_versions' \
                               -e '[[:space:]]*run_(grep|output)[[:space:]].+(\$|./)' \
+                              -e 'ignore_run_unqualified' \
                               # run_grep filter is not that accurate but will do for now
                     )"
     set -eo pipefail
