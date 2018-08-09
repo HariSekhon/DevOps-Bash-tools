@@ -42,5 +42,3 @@ done
 
 time_taken "$start_time"
 section2 "Finished checking TLDs for suspect chars"
-
-exit 0
