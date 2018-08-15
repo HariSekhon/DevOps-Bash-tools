@@ -23,7 +23,7 @@ Bash Test & Utility library used by all my other [GitHub repos](https://github.c
 - Shell
 - Misc (whitespace, custom enforced checks like not calling quit() in python etc)
 
-Also pulls in many important validation programs from my [PyTools repo](https://github.com/harisekhon/pytools) to validate additional file formats including:
+Also pulls in many important validation programs from my [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools) to validate additional file formats including:
 
 - CSV
 - JSON
@@ -37,8 +37,8 @@ Also pulls in many important validation programs from my [PyTools repo](https://
 Currently utilized to supplement testing of the following repos:
 
 * [Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 350+ programs covering every major Hadoop & NoSQL technology and Linux/Unix based infrastructure technologies
-* [Perl Tools](https://github.com/harisekhon/tools) - 25 command line tools
-* [Python Tools](https://github.com/harisekhon/pytools) - 50+ command line tools
+* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 50+ command line tools
+* [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) - 25 command line tools
 * [Perl Lib](https://github.com/harisekhon/lib) - Perl utility library
 * [PyLib](https://github.com/harisekhon/pylib) - Python utility library
 
