@@ -29,7 +29,7 @@ fi
 section "DevOps Python Tools Checks"
 
 # must be up here before skipping check so that Dockerfiles can import it
-export PATH="$PATH:$srcdir/devops-python-tools_checks:$srcdir/../devops-python-tools"
+export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
 
 start_time="$(start_timer)"
 
@@ -57,14 +57,14 @@ echo "running in dir:  $PWD"
 echo
 
 get_pytools(){
-    if [ -d "$srcdir/devops-python-tools_checks" -a -f "$srcdir/devops-python-tools_checks/Makefile" ]; then
-        pushd "$srcdir/devops-python-tools_checks"
+    if [ -d "$srcdir/pytools_checks" -a -f "$srcdir/pytools_checks/Makefile" ]; then
+        pushd "$srcdir/pytools_checks"
         NOJAVA=1 make update
         popd
     else
         pushd "$srcdir"
         rm -fr pytools_checks
-        git clone https://github.com/harisekhon/devops-python-tools pytools_checks
+        git clone https://github.com/harisekhon/pytools pytools_checks
         pushd pytools_checks
         NOJAVA=1 make
         popd
