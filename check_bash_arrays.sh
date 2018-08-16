@@ -30,17 +30,22 @@ if [ $# -eq 0 ]; then
     fi
 fi
 
-section "Bash Array Duplicates Checks"
+section "Bash Array Checks (Duplicate Entries Oveerwriting and early = invalidation)"
 
 check_bash_arrays(){
     local filename="$1"
     echo -n "checking bash arrays for duplicate definitions: $1"
     set +eo pipefail
     dups="$(grep -o '[[:alnum:]][[[:digit:]]\+]=' "$filename" | sort | uniq -d)"
+    early_equals="$(grep -o '[[:alnum:]]=[[[:digit:]]\+]=' "$filename")"
     set -eo pipefail
     if [ -n "$dups" ]; then
-        echo " => Duplicates detected! "
+        echo " => Duplicates detected!"
         echo "$dups"
+        exit 1
+    elif [ -n "$early_equals" ]; then
+        echo " => Invalid array definition detected!"
+        echo "$early_equals"
         exit 1
     else
         echo " => OK"
