@@ -67,6 +67,8 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/check_travis_yml.sh"
 
+. "$srcdir/check_tld_chars.sh"
+
 # too heavy to run all the time, isExcluded on every file has really bad performance
 . "$srcdir/check_whitespace.sh"
 

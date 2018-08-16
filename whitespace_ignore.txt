@@ -4,6 +4,7 @@
 \.pyc$
 \.pyo$
 \.jyc$
+\.jyo$
 /target/
 /build/
 /gradle/

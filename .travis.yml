@@ -37,10 +37,10 @@ env:
   - PYTHONUNBUFFERED=1
 
 install:
-  - make
+  - travis_retry make
 
 script:
-  - make test
+  - travis_retry make test
 
 after_success:
   - curl --data {build:true} -X POST https://registry.hub.docker.com/u/harisekhon/alpine-github/trigger/8d9cb826-48df-439c-8c20-1975713064fc/

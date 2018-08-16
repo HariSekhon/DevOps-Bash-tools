@@ -42,13 +42,14 @@ for script in $scripts; do
     # run_usage
     # run_404
     # run_timeout
-    run_fail='run(_[a-z]+ "?[[:digit:][:space:]]+"?|_conn_refused|_usage|_404|_timeout)?'
+    run_fail='run(_[a-z]+[[:digit:]]* "?[[:digit:][:space:]]+"?|_conn_refused|_usage|_404|_timeout)?'
     # docker-compose or docker exec or docker run
     docker_regex='docker(-compose|[[:space:]]+(exec|run))'
     suspect_lines="$(egrep -n '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" |
                      egrep -v -e "[[:space:]]*$run_fail[[:space:]](.*[[:space:]])?(./|(\\\$perl|eval|$docker_regex)[[:space:]])" \
                               -e '[[:space:]]*run_test_versions' \
                               -e '[[:space:]]*run_(grep|output)[[:space:]].+(\$|./)' \
+                              -e 'ignore_run_unqualified' \
                               # run_grep filter is not that accurate but will do for now
                     )"
     set -eo pipefail

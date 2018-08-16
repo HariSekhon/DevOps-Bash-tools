@@ -26,7 +26,7 @@ if [ -z "${PROJECT:-}" ]; then
     export PROJECT=bash-tools
 fi
 
-section "PyTools Checks"
+section "DevOps Python Tools Checks"
 
 # must be up here before skipping check so that Dockerfiles can import it
 export PATH="$PATH:$srcdir/pytools_checks:$srcdir/../pytools"
@@ -124,5 +124,5 @@ for validate_program in "$pytools_dir"/validate_*.py; do
 done
 
 time_taken "$start_time"
-section2 "PyTools validations SUCCEEDED"
+section2 "DevOps Python Tools validations SUCCEEDED"
 echo
