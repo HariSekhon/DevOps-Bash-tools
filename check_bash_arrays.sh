@@ -30,14 +30,14 @@ if [ $# -eq 0 ]; then
     fi
 fi
 
-section "Bash Array Checks (Duplicate Entries Oveerwriting and early = invalidation)"
+section "Bash Array Checks (Duplicate Indices and Syntax Errors)"
 
 check_bash_arrays(){
     local filename="$1"
-    echo -n "checking bash arrays for duplicate definitions: $1"
+    echo -n "checking bash arrays:  $1"
     set +eo pipefail
-    dups="$(grep -o '[[:alnum:]][[[:digit:]]\+]=' "$filename" | sort | uniq -d)"
-    early_equals="$(grep -o '[[:alnum:]]=[[[:digit:]]\+]=' "$filename")"
+    dups="$(grep -o '[[:alnum:]]\+[[[:digit:]]\+]=' "$filename" | sort | uniq -d)"
+    early_equals="$(grep -o '[[:alnum:]]\+=[[[:digit:]]\+]=' "$filename")"
     set -eo pipefail
     if [ -n "$dups" ]; then
         echo " => Duplicates detected!"
