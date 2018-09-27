@@ -65,6 +65,8 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/check_shell_syntax.sh"
 
+. "$srcdir/check_bash_arrays.sh"
+
 . "$srcdir/check_travis_yml.sh"
 
 . "$srcdir/check_tld_chars.sh"
