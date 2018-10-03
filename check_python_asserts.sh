@@ -28,6 +28,7 @@ section "Python - find and alert on any usage of assert outside of /test/"
 
 start_time="$(start_timer)"
 
+found=0
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     # exclude pytests
@@ -35,12 +36,16 @@ for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | s
     echo -n '.'
     if egrep '^[[:space:]]+\bassert\b' "$x"; then
         echo
-        echo "WARNING: $x contains 'pass'!! Check this code isn't being sloppy"
-        if ! is_CI; then
-            exit 1
-        fi
+        echo "WARNING: $x contains 'assert'!! This could be disabled at runtime by PYTHONOPTIMIZE=1 / -O / -OO and should not be used!! "
+        found=1
+        #if ! is_CI; then
+        #    exit 1
+        #fi
     fi
 done
+if [ $found != 0 ]; then
+    exit 1
+fi
 
 time_taken "$start_time"
 section2 "Python OK - assertions found in normal code"
