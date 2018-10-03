@@ -56,6 +56,7 @@ hr3(){
 }
 
 section(){
+    name="$@"
     hr
     "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@"
     hr
