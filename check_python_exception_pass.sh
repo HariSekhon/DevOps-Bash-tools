@@ -30,6 +30,7 @@ start_time="$(start_timer)"
 
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
+    [[ "$x" =~ /test/ ]] && echo -n '-' && continue
     echo -n '.'
     if egrep -B5 '^[[:space:]]+\bpass\b' "$x" | egrep -q '^[^#]*\bexcept\b'; then
         echo
