@@ -301,7 +301,7 @@ run_timeout(){
 
 run_usage(){
     echo "checking usage / parsing:"
-    ERRCODE=3 run_grep "usage: " "$@"
+    ERRCODE=3 run_grep "usage: " "$@" --help
 }
 
 run_output(){
