@@ -56,6 +56,9 @@ foreachbranch(){
             echo "skipping master branch for safety (set FORCEMASTER=1 environment variable to override)"
             continue
         fi
+        if [ -n "${BRANCH_FILTER:-}" ] && ! egrep "$BRANCH_FILTER" <<< "$branch"; then
+            continue
+        fi
         echo "$branch:"
         if git branch | fgrep --color=auto -q "$branch"; then
             git checkout "$branch"
