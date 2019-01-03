@@ -21,8 +21,10 @@ if [ -z "${PASS:-}" ]; then
     echo
 fi
 
-#hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
-#netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USER password $PASS"; done)"
-#curl --netrc-file <(cat <<< "$netrc_contents") "$@"
+# doesn't work
+#netrc_content="default login $USER password $PASS"
 
-curl --netrc-file <(cat <<< "default login $USER password $PASS") "$@"
+hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
+netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USER password $PASS"; done)"
+
+curl --netrc-file <(cat <<< "$netrc_contents") "$@"
