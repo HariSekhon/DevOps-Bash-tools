@@ -19,7 +19,7 @@ set -euo pipefail
 server="${LDAP_SERVER:-localhost}"
 
 uri="ldap://$server"
-if [ "LDAP_SSL" = 1 ]; then
+if [ "${LDAP_SSL:-}" = 1 ]; then
     uri="ldaps://$server"
 fi
 
@@ -30,11 +30,19 @@ base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
 user="${LDAP_USER:-$USER@$domain}"
 
 set +x
+PASS="${LDAP_PASSWORD:-${PASSWORD:-${PASS:-}}}"
 if [ -z "${PASS:-}" ]; then
     read -s -p "password: " PASS
 fi
 
-if [ "${DEBUG:-}" = 1]; then
-    echo "## ldapsearch -H '$uri' -b '$base_dn' -x -D '$user' -w '...' '$@'"
+if [ "${LDAP_KRB5:-}" = 1 ]; then
+    auth_opts="-Y GSSAPI"
+else
+    auth_opts="-x -D '$user' -w '$PASS'"
 fi
-ldapsearch -H "$uri" -b "$base_dn" -x -D "$user" -w "$PASS" "$@"
+
+if [ "${DEBUG:-}" = 1 ]; then
+    echo
+    echo "$(sed "s/-w '[^']*'/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'")"
+fi
+ldapsearch -H "$uri" -b "$base_dn" $auth_opts "$@"
