@@ -14,7 +14,7 @@
 #
 
 set -euo pipefail
-[ -n "${DEBUG:-}" ] && set -x
+[ "${DEBUG:-}" = 1 ] && set -x
 
 server="${LDAP_SERVER:-localhost}"
 
@@ -25,12 +25,16 @@ fi
 
 domain="$(hostname -f | sed 's/^[^`.]*\.//')"
 
-base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./dc=/g' <<< "$domain")}"
+base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
 
 user="${LDAP_USER:-$USER@$domain}"
 
+set +x
 if [ -z "${PASS:-}" ]; then
     read -s -p "password: " PASS
 fi
 
+if [ "${DEBUG:-}" = 1]; then
+    echo "## ldapsearch -H '$uri' -b '$base_dn' -x -D '$user' -w '...' '$@'"
+fi
 ldapsearch -H "$uri" -b "$base_dn" -x -D "$user" -w "$PASS" "$@"
