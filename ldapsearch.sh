@@ -38,11 +38,11 @@ fi
 if [ "${LDAP_KRB5:-}" = 1 ]; then
     auth_opts="-Y GSSAPI"
 else
-    auth_opts="-x -D '$user' -w '$PASS'"
+    auth_opts="-x -D $user -w $PASS"
 fi
 
 if [ "${DEBUG:-}" = 1 ]; then
     echo
-    "$(sed "s/-w [^']*/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'"
+    sed "s/-w[[:space:]]\+[^[:space:]]\+/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'"
 fi
 ldapsearch -H "$uri" -b "$base_dn" $auth_opts "$@"
