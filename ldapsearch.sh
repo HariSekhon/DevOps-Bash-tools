@@ -43,6 +43,6 @@ fi
 
 if [ "${DEBUG:-}" = 1 ]; then
     echo
-    echo "$(sed "s/-w '[^']*'/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'")"
+    "$(sed "s/-w [^']*/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'"
 fi
 ldapsearch -H "$uri" -b "$base_dn" $auth_opts "$@"
