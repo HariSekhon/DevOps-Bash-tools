@@ -14,7 +14,7 @@
 #
 
 set -euo pipefail
-[ "${DEBUG:-}" = 1 ] && set -x
+[ -n "${DEBUG:-}" ] && set -x
 
 server="${LDAP_SERVER:-localhost}"
 
