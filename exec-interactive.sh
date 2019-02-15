@@ -16,8 +16,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# cannot allow set -e because it will cause an exit before the exec to interactive
 (
 exec ${SHELL:-sh} -i 3<<EOF 4<&0 <&3
+  set +e
     $@
   exec 3>&- <&4
 EOF
