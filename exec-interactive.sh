@@ -13,7 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+# cannot -set -o pipefail because some docker images version of 'sh' do not support it, namely debian and ubuntu
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 # cannot allow set -e because it will cause an exit before the exec to interactive
