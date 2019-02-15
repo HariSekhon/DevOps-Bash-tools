@@ -32,11 +32,11 @@ docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interact
     if type apt-get &>/dev/null; then
         export DEBIAN_FRONTEND=noninteractive
         apt-get update
-        apt-get install -y make
+        apt-get install -y git make
     elif type apk &>/dev/null; then
-        apk add --no-cache make
+        apk add --no-cache git make
     elif type yum &>/dev/null; then
-        yum install -y make
+        yum install -y git make
     fi
     make build test
 '
