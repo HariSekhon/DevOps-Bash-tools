@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Avoids trying to install / upgrade pip modules that have been installed with system packages to avoid errors like the following:
+#
+# Cannot uninstall 'beautifulsoup4'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
