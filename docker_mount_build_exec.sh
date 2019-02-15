@@ -25,7 +25,7 @@ fi
 docker_image="$1"
 
 docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh '
-    set -eu
+    set -e
     cd /code
     if which apk &>/dev/null; then
         apk add --no-cache make
