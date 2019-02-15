@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -24,4 +24,16 @@ fi
 
 docker_image="$1"
 
-docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh 'cd /code && apk add --no-cache make && make build test'
+docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh '
+    set -eu
+    cd /code
+    if which apk &>/dev/null; then
+        apk add --no-cache make
+    elif which apt-get &>/dev/null; then
+        apt-get update
+        apt-get install -y make
+    elif which yum &>/dev/null; then
+        yum install -y make
+    fi
+    make build test
+'
