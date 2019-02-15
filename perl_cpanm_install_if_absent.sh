@@ -21,8 +21,6 @@ if [ $# == 0 ]; then
     exit 1
 fi
 
-filename="$1"
-
 echo "Installing any CPAN Modules not already present"
 
 cpan_modules="$(sed 's/#.*//; /^[[:space:]]*$$/d' "$@")"
