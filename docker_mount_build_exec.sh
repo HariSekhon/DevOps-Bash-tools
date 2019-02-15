@@ -29,11 +29,11 @@ docker_image="$1"
 # cannot set -e because it will exit before the exec to persist
 docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh '
     cd /code
-    if type apk &>/dev/null; then
-        apk add --no-cache make
-    elif type apt-get &>/dev/null; then
+    if type apt-get &>/dev/null; then
         apt-get update
         apt-get install -y make
+    elif type apk &>/dev/null; then
+        apk add --no-cache make
     elif type yum &>/dev/null; then
         yum install -y make
     fi
