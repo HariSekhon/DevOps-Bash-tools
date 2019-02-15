@@ -30,6 +30,7 @@ docker_image="$1"
 docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh '
     cd /code
     if type apt-get &>/dev/null; then
+        export DEBIAN_FRONTEND=noninteractive
         apt-get update
         apt-get install -y make
     elif type apk &>/dev/null; then
