@@ -39,6 +39,7 @@ for pip_module in $pip_modules; do
         s/[>=].*$//;
         s/beautifulsoup4/bs4/;
         s/requests-kerberos/requests_kerberos/;
+        s/MySQL-python/MySQLdb/;
         s/PyYAML/yaml/;
     ' <<< "$pip_module")"
 
