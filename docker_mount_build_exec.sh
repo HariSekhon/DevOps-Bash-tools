@@ -24,15 +24,16 @@ fi
 
 docker_image="$1"
 
+# 'which' command is not available in some bare bones docker images like centos
 docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh '
     set -e
     cd /code
-    if which apk &>/dev/null; then
+    if type apk &>/dev/null; then
         apk add --no-cache make
-    elif which apt-get &>/dev/null; then
+    elif type apt-get &>/dev/null; then
         apt-get update
         apt-get install -y make
-    elif which yum &>/dev/null; then
+    elif type yum &>/dev/null; then
         yum install -y make
     fi
     make build test
