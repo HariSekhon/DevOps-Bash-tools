@@ -32,7 +32,7 @@ SUDO=""
 
 if [ -n "${NOFAIL:-}" ]; then
     for package in $rpm_packages; do
-        ${SUDO} yumt install -y "$package" || :
+        rpm -q "$package" || ${SUDO} yum install -y "$package" || :
     done
 else
     yum install -y $rpm_packages
