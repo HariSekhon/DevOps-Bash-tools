@@ -18,7 +18,7 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# == 0 ]; then
+if [ $# = 0 ]; then
     echo "usage: ${0##*/} <filename> <filename> ..."
     exit 1
 fi
