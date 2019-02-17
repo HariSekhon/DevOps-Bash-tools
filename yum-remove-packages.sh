@@ -30,7 +30,7 @@ rpm_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-if [ -n "${NOFAIL:-}" ]; then
+if [ -n "${NO_FAIL:-}" ]; then
     if ! $SUDO yum remove -y $rpm_packages; then
         for package in $rpm_packages; do
             rpm -q "$package" && $SUDO yum remove -y "$package" || :
