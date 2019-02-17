@@ -30,7 +30,7 @@ deb_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-[ -n "${NO_UPDATE:-}" ] || apt-get update
+[ -n "${NO_UPDATE:-}" ] || $SUDO apt-get update
 
 if [ -n "${NOFAIL:-}" ]; then
     for package in $deb_packages; do
