@@ -34,8 +34,8 @@ SUDO=""
 
 if [ -n "${NOFAIL:-}" ]; then
     for package in $deb_packages; do
-        ${SUDO} apt-get install -y "$package" || :
+        $SUDO apt-get install -y "$package" || :
     done
 else
-    apt-get install -y $deb_packages
+    $SUDO apt-get install -y $deb_packages
 fi
