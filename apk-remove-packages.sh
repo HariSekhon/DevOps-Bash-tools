@@ -32,11 +32,11 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NOFAIL:-}" ]; then
-    if ! apk del $apk_packages; then
+    if ! $SUDO apk del $apk_packages; then
         for package in $apk_packages; do
-            ${SUDO} apk del "$package" || :
+            $SUDO apk del "$package" || :
         done
     fi
 else
-    apk del $apk_packages
+    $SUDO apk del $apk_packages
 fi
