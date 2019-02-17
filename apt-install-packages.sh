@@ -32,7 +32,7 @@ SUDO=""
 
 [ -n "${NO_UPDATE:-}" ] || $SUDO apt-get update
 
-if [ -n "${NOFAIL:-}" ]; then
+if [ -n "${NOFAIL:-}" -o -n "${NO_FAIL:-}" ]; then
     for package in $deb_packages; do
         $SUDO apt-get install -y "$package" || :
     done
