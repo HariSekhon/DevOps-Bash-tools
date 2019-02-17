@@ -35,8 +35,8 @@ SUDO=""
 
 if [ -n "${NOFAIL:-}" ]; then
     for package in $apk_packages; do
-        ${SUDO} apk add "$package" || :
+        $SUDO apk add "$package" || :
     done
 else
-    apk add $apk_packages
+    $SUDO apk add $apk_packages
 fi
