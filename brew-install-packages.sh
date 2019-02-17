@@ -30,9 +30,17 @@ brew_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
 # Sudo is not required as running Homebrew as root is extremely dangerous and no longer supported as
 # Homebrew does not drop privileges on installation you would be giving all build scripts full access to your system
 
-[ -n "${NO_UPDATE:-}" ] || brew update
+if [ -n "${NO_UPDATE:-}" ]; then
+    if ! brew update; then
+        if [ -n "${NO_FAIL:-}" ]; then
+            :
+        else
+            exit 1
+        fi
+    fi
+fi
 
-if [ -n "${NOFAIL:-}" ]; then
+if [ -n "${NO_FAIL:-}" ]; then
     for package in $apk_packages; do
         brew install "$package" || :
     done
