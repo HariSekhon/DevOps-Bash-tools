@@ -24,10 +24,15 @@ fi
 
 docker_image="$1"
 
+script=exec-interactive.sh
+if [ -x "bash-tools/$script" ]; then
+    script="bash-tools/$script"
+fi
+
 # 'which' command is not available in some bare bones docker images like centos
 # cannot set -u because it results in unbound variable error for $USER
 # cannot set -e because it will exit before the exec to persist
-docker run -ti --rm -v $PWD:/code "$docker_image" /code/bash-tools/exec-interactive.sh '
+docker run -ti --rm -v $PWD:/code "$docker_image" "/code/$script" '
     cd /code
     if type apt-get &>/dev/null; then
         export DEBIAN_FRONTEND=noninteractive
