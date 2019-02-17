@@ -33,7 +33,7 @@ SUDO=""
 
 [ -n "${NO_UPDATE:-}" ] || apk update
 
-if [ -n "${NOFAIL:-}" ]; then
+if [ -n "${NO_FAIL:-}" ]; then
     for package in $apk_packages; do
         $SUDO apk add "$package" || :
     done
