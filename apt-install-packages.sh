@@ -25,6 +25,8 @@ fi
 
 echo "Installing Deb Packages"
 
+export DEBIAN_FRONTEND=noninteractive
+
 deb_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
 
 SUDO=""
