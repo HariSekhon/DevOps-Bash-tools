@@ -32,7 +32,7 @@ deb_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-if [ -n "${NOFAIL:-}" -o -n "${NO_FAIL:-}" ]; then
+if [ -n "${NO_FAIL:-}" ]; then
     if ! $SUDO apt-get purge -y $deb_packages; then
         for package in $deb_packages; do
             $SUDO apt-get purge -y "$package" || :
