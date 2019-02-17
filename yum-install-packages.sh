@@ -31,9 +31,10 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NOFAIL:-}" ]; then
-    for package in $rpm_packages; do
-        rpm -q "$package" || ${SUDO} yum install -y "$package" || :
-    done
-else
     yum install -y $rpm_packages
+else
+    # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
+    for package in $rpm_packages; do
+        rpm -q "$package" || ${SUDO} yum install -y "$package"
+    done
 fi
