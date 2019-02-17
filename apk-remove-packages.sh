@@ -31,7 +31,7 @@ SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-if [ -n "${NOFAIL:-}" ]; then
+if [ -n "${NO_FAIL:-}" ]; then
     if ! $SUDO apk del $apk_packages; then
         for package in $apk_packages; do
             $SUDO apk del "$package" || :
