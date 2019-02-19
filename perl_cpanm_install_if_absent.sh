@@ -18,7 +18,7 @@ set -euo pipefail
 
 echo "Installing any CPAN Modules not already present"
 
-cpan_modules="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$$/d')"
+cpan_modules="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
 if [ $EUID != 0 -a -z "${PERLBREW_PERL:-}" ]; then
