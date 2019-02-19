@@ -21,14 +21,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ $# == 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Installing any Python PyPI Modules not already present"
 
-pip_modules="$(sed 's/#.*//;/^[[:space:]]*$$/d' "$@")"
+pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d')"
 
 SUDO=""
 if [ $EUID != 0 -a -z "${VIRTUAL_ENV:-}" -a -z "${CONDA_DEFAULT_ENV:-}" ]; then
