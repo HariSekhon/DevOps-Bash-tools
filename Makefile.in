@@ -121,18 +121,18 @@ homebrew-packages:
 
 .PHONY: apk-packages-remove
 apk-packages-remove:
-	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apk-packages-remove; popd; done
+	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apk-packages-remove; popd; done; :
 	if test -f setup/apk-packages-dev.txt; then NO_FAIL=1 bash-tools/apk-remove-packages.sh setup/apk-packages-dev.txt; fi
 	$(SUDO) rm -fr /var/cache/apk/*
 
 .PHONY: apt-packages-remove
 apt-packages-remove:
-	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apt-packages-remove; popd; done
+	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apt-packages-remove; popd; done; :
 	if test -t setup/deb-packages-dev.txt; then NO_FAIL=1 bash-tools/apt-packages-remove.sh setup/deb-packages-dev.txt; fi
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
-	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) yum-packages-remove; popd; done
+	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) yum-packages-remove; popd; done; :
 	if test -f setup/rpm-packages-dev.txt; then NO_FAIL=1 bash-tools/yum-remove-packages.sh setup/rpm-packages-dev.txt; fi
 
 .PHONY: sonar
