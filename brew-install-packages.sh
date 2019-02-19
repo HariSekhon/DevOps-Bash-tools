@@ -18,14 +18,9 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# = 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Installing Mac HomeBrew Packages"
 
-brew_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
+brew_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 # Sudo is not required as running Homebrew as root is extremely dangerous and no longer supported as
 # Homebrew does not drop privileges on installation you would be giving all build scripts full access to your system
