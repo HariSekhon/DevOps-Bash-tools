@@ -18,16 +18,11 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# = 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
-deb_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
+deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo

@@ -18,14 +18,9 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# = 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Removing RPM Packages"
 
-rpm_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
+rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo

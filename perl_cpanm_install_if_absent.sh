@@ -16,14 +16,9 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# == 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Installing any CPAN Modules not already present"
 
-cpan_modules="$(sed 's/#.*//; /^[[:space:]]*$$/d' "$@")"
+cpan_modules="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
 if [ $EUID != 0 -a -z "${PERLBREW_PERL:-}" ]; then
@@ -31,5 +26,6 @@ if [ $EUID != 0 -a -z "${PERLBREW_PERL:-}" ]; then
 fi
 
 for cpan_module in $cpan_modules; do
-    perl -e "use $cpan_module;" || ${SUDO} ${CPANM:-cpanm} --notest "$cpan_module"
+    perl_module="${cpan_module%%@*}"
+    perl -e "use $perl_module;" || $SUDO ${CPANM:-cpanm} --notest "$cpan_module"
 done

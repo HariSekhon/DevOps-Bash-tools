@@ -18,23 +18,18 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# = 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Installing RPM Packages"
 
-rpm_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
+rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    yum install -y $rpm_packages
+    $SUDO yum install -y $rpm_packages
 else
     # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
     for package in $rpm_packages; do
-        rpm -q "$package" || ${SUDO} yum install -y "$package"
+        rpm -q "$package" || $SUDO yum install -y "$package"
     done
 fi

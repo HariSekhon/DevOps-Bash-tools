@@ -18,20 +18,15 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ $# = 0 ]; then
-    echo "usage: ${0##*/} <filename> <filename> ..."
-    exit 1
-fi
-
 echo "Installing Apk Packages"
 
-apk_packages="$(sed 's/#.*//; /^[[:space:]]*$/d' "$@")"
+apk_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-[ -n "${NO_UPDATE:-}" ] || apk update
+[ -n "${NO_UPDATE:-}" ] || $SUDO apk update
 
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $apk_packages; do
