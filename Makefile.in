@@ -1,0 +1,235 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2013-02-03 10:25:36 +0000 (Sun, 03 Feb 2013)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#  to help improve or steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+export PATH := $(PATH):/usr/local/bin
+
+CPANM = cpanm
+
+SUDO := sudo
+SUDO_PIP := sudo -H
+SUDO_PERL := sudo
+
+ifdef PERLBREW_PERL
+	# can't put this here otherwise gets error - "commands commence before first target.  Stop."
+	#@echo "Perlbrew environment detected, not calling sudo"
+	SUDO_PERL =
+endif
+
+# Travis has custom python install earlier in $PATH even in Perl builds so need to install PyPI modules locally to non-system python otherwise they're not found by programs.
+# Perms not set correctly on custom python install in Travis perl build so workaround is done to chown to travis user in .travis.yml
+# Better than modifying $PATH to put /usr/bin first which is likely to affect many other things including potentially not finding the perlbrew installation first
+# Looks like Perl travis builds are now using system Python - do not use TRAVIS env
+ifdef VIRTUAL_ENV
+	#@echo "Virtual Env / Conda detected, not calling sudo"
+	SUDO_PIP :=
+endif
+ifdef CONDA_DEFAULT_ENV
+	SUDO_PIP :=
+endif
+
+# must come after to reset SUDO_PERL/SUDO_PIP to blank if root
+# EUID /  UID not exported in Make
+# USER not populated in Docker
+ifeq '$(shell id -u)' '0'
+	#@echo "root UID detected, not calling sudo"
+	SUDO :=
+	SUDO_PERL :=
+	SUDO_PIP :=
+endif
+
+.PHONY: quick
+quick:
+	QUICK=1 $(MAKE) build
+
+#.PHONY: submodules
+#submodules:
+#	git submodule init
+#	git submodule update --recursive
+
+.PHONY: push
+push:
+	git push
+
+.PHONY: common
+common: system-packages submodules
+       :
+
+.PHONY: system-packages
+system-packages:
+	if [ -x /sbin/apk ];        then $(MAKE) apk-packages; fi
+	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages; fi
+	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages; fi
+	if [ -x /usr/local/bin/brew -a `uname` = Darwin ]; then $(MAKE) homebrew-packages; fi
+
+.PHONY: apk-packages
+apk-packages:
+	for x in setup/apk-packages.txt setup/apk-packages-dev.txt; do \
+		if [ -f "$$x" ]; then \
+			bash-tools/apk-install-packages.sh "$$x"; \
+		fi; \
+	done
+	for x in setup/apk-packages-optional.txt setup/apk-packages-cpan.txt setup/apk-packages-pip.txt; do \
+		if [ -f "$$x" ]; then \
+			NO_FAIL=1 NO_UPDATE=1 bash-tools/apk-install-packages.sh "$$x"; \
+		fi; \
+	done
+
+.PHONY: apt-packages
+apt-packages:
+	for x in setup/deb-packages.txt setup/deb-packages-dev.txt; do \
+		if [ -f "$$x" ]; then \
+			bash-tools/apt-install-packages.sh "$$x"; \
+		fi; \
+	done
+	for x in setup/deb-packages-optional.txt setup/deb-packages-cpan.txt setup/deb-packages-pip.txt; do \
+		if [ -f "$$x" ]; then \
+			NO_FAIL=1 NO_UPDATE=1 bash-tools/apt-install-packages.sh "$$x"; \
+		fi; \
+	done
+
+.PHONY: yum-packages
+yum-packages:
+	bash-tools/install_epel_repo.sh
+
+	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
+	for x in setup/rpm-packages.txt setup/rpm-packages-dev.txt; do \
+		if [ -f "$$x" ]; then \
+			bash-tools/yum-install-packages.sh "$$x"; \
+		fi; \
+	done
+	for x in setup/rpm-packages-optional.txt setup/rpm-packages-cpan.txt setup/rpm-packages-pip.txt; do \
+		if [ -f "$$x" ]; then \
+			NO_FAIL=1 bash-tools/yum-install-packages.sh "$$x"; \
+		fi; \
+	done
+
+.PHONY: homebrew-packages
+homebrew-packages:
+	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
+	NO_FAIL=1 bash-tools/brew-install-packages.sh setup/brew-packages.txt
+
+.PHONY: apk-packages-remove
+apk-packages-remove:
+	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apk-packages-remove; popd; done
+	if test -f setup/apk-packages-dev.txt; then NO_FAIL=1 bash-tools/apk-remove-packages.sh setup/apk-packages-dev.txt; fi
+	$(SUDO) rm -fr /var/cache/apk/*
+
+.PHONY: apt-packages-remove
+apt-packages-remove:
+	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apt-packages-remove; popd; done
+	if test -t setup/deb-packages-dev.txt; then NO_FAIL=1 bash-tools/apt-packages-remove.sh setup/deb-packages-dev.txt; fi
+
+.PHONY: yum-packages-remove
+yum-packages-remove:
+	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) yum-packages-remove; popd; done
+	if test -f setup/rpm-packages-dev.txt; then NO_FAIL=1 bash-tools/yum-remove-packages.sh setup/rpm-packages-dev.txt; fi
+
+.PHONY: sonar
+sonar:
+	sonar-scanner
+
+.PHONY: update
+update: update2 build
+	:
+
+.PHONY: update2
+update2: update-no-recompile
+	:
+
+.PHONY: update-no-recompile
+update-no-recompile:
+	git pull
+	git submodule update --init --recursive
+
+.PHONY: update-submodules
+update-submodules:
+	git submodule update --init --remote
+.PHONY: updatem
+updatem: update-submodules
+	:
+
+.PHONY: docker-run
+docker-run:
+	docker run -ti --rm ${DOCKER_IMAGE} ${ARGS}
+
+.PHONY: run
+run: docker-run
+	:
+
+.PHONY: docker-mount
+docker-mount:
+	# --privileged=true is needed to be able to:
+	# mount -t tmpfs -o size=1m tmpfs /mnt/ramdisk
+	docker run -ti --rm --privileged=true -v $$PWD:/code ${DOCKER_IMAGE} bash -c "cd /code; exec bash"
+
+.PHONY: docker-mount-alpine
+docker-mount-alpine:
+	# --privileged=true is needed to be able to:
+	# mount -t tmpfs -o size=1m tmpfs /mnt/ramdisk
+	docker run -ti --rm --privileged=true -v $$PWD:/code ${DOCKER_IMAGE}:alpine bash -c "cd /code; exec bash"
+
+.PHONY: docker-mount-debian
+docker-mount-debian:
+	# --privileged=true is needed to be able to:
+	# mount -t tmpfs -o size=1m tmpfs /mnt/ramdisk
+	docker run -ti --rm --privileged=true -v $$PWD:/code ${DOCKER_IMAGE}:debian bash -c "cd /code; exec bash"
+
+.PHONY: docker-mount-centos
+docker-mount-centos:
+	# --privileged=true is needed to be able to:
+	# mount -t tmpfs -o size=1m tmpfs /mnt/ramdisk
+	docker run -ti --rm --privileged=true -v $$PWD:/code ${DOCKER_IMAGE}:centos bash -c "cd /code; exec bash"
+
+.PHONY: docker-mount-ubuntu
+docker-mount-ubuntu:
+	# --privileged=true is needed to be able to:
+	# mount -t tmpfs -o size=1m tmpfs /mnt/ramdisk
+	docker run -ti --rm --privileged=true -v $$PWD:/code ${DOCKER_IMAGE}:ubuntu bash -c "cd /code; exec bash"
+
+.PHONY: mount
+mount: docker-mount
+	:
+
+.PHONY: mount-alpine
+mount-alpine: docker-mount-alpine
+	:
+
+.PHONY: mount-debian
+mount-debian: docker-mount-debian
+	:
+
+.PHONY: mount-centos
+mount-centos: docker-mount-centos
+	:
+
+.PHONY: mount-ubuntu
+mount-ubuntu: docker-mount-ubuntu
+	:
+
+# For quick testing only - for actual Dockerfile builds see https://hub.docker.com/u/harisekhon and Dockerfiles source repo https://github.com/harisekhon/Dockerfiles
+.PHONY: docker-alpine
+docker-alpine:
+	bash-tools/docker_mount_build_exec.sh alpine
+
+.PHONY: docker-debian
+docker-debian:
+	bash-tools/docker_mount_build_exec.sh debian
+
+.PHONY: docker-centos
+docker-centos:
+	bash-tools/docker_mount_build_exec.sh centos
+
+.PHONY: docker-ubuntu
+docker-ubuntu:
+	bash-tools/docker_mount_build_exec.sh ubuntu
