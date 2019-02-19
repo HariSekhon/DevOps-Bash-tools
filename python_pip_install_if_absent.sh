@@ -37,15 +37,14 @@ fi
 for pip_module in $pip_modules; do
     python_module="$(sed '
         s/[>=].*$//;
+        s/-python$//;
+        s/-/_/g;
         s/beautifulsoup4/bs4/;
-        s/kafka-python/kafka/;
-        s/requests-kerberos/requests_kerberos/;
-        s/MySQL-python/MySQLdb/;
+        s/MySQL/MySQLdb/;
         s/PyYAML/yaml/;
         s/GitPython/git/;
-        s/Jinja2/jinja2/;
         s/\[.*\]//;
-    ' <<< "$pip_module")"
+    ' <<< "$pip_module" | tr '[:upper:]' '[:lower:]')"
 
     # pip module often pull in urllib3 which result in errors like the following so ignore it
     #:
