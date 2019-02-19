@@ -117,7 +117,7 @@ yum-packages:
 .PHONY: homebrew-packages
 homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
-	NO_FAIL=1 bash-tools/brew-install-packages.sh setup/brew-packages.txt
+	if test -t setup/brew-packages.txt; then NO_FAIL=1 bash-tools/brew-install-packages.sh setup/brew-packages.txt; fi
 
 .PHONY: apk-packages-remove
 apk-packages-remove:
