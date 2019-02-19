@@ -23,7 +23,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Installing any Python PyPI Modules not already present"
 
-pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d')"
+pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
 if [ $EUID != 0 -a -z "${VIRTUAL_ENV:-}" -a -z "${CONDA_DEFAULT_ENV:-}" ]; then
