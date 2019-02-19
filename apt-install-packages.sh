@@ -22,7 +22,7 @@ echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
-deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d')"
+deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
