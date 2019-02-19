@@ -117,7 +117,7 @@ yum-packages:
 .PHONY: homebrew-packages
 homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
-	if test -t setup/brew-packages.txt; then NO_FAIL=1 bash-tools/brew-install-packages.sh setup/brew-packages.txt; fi
+	if test -f setup/brew-packages.txt; then NO_FAIL=1 bash-tools/brew-install-packages.sh setup/brew-packages.txt; fi
 
 .PHONY: system-packages-remove
 system-packages-remove:
@@ -134,7 +134,7 @@ apk-packages-remove:
 .PHONY: apt-packages-remove
 apt-packages-remove:
 	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apt-packages-remove; popd; done; :
-	if test -t setup/deb-packages-dev.txt; then NO_FAIL=1 bash-tools/apt-packages-remove.sh setup/deb-packages-dev.txt; fi
+	if test -f setup/deb-packages-dev.txt; then NO_FAIL=1 bash-tools/apt-packages-remove.sh setup/deb-packages-dev.txt; fi
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
