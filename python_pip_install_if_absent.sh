@@ -42,5 +42,5 @@ for pip_module in $pip_modules; do
     #:
     # Cannot uninstall 'urllib3'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
     #
-    python -c "import $python_module" || ${SUDO} ${PIP:-pip} install --ignore-installed urllib3 "$pip_module"
+    python -c "import $python_module" || $SUDO ${PIP:-pip} install --ignore-installed urllib3 "$pip_module"
 done
