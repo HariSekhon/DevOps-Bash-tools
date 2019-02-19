@@ -26,7 +26,7 @@ SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-[ -n "${NO_UPDATE:-}" ] || apk update
+[ -n "${NO_UPDATE:-}" ] || $SUDO apk update
 
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $apk_packages; do
