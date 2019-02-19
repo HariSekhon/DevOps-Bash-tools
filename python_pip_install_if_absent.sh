@@ -35,16 +35,20 @@ if [ $EUID != 0 -a -z "${VIRTUAL_ENV:-}" -a -z "${CONDA_DEFAULT_ENV:-}" ]; then
 fi
 
 for pip_module in $pip_modules; do
-    python_module="$(sed '
-        s/[>=].*$//;
-        s/-python$//;
-        s/-/_/g;
-        s/beautifulsoup4/bs4/;
-        s/MySQL/MySQLdb/;
-        s/PyYAML/yaml/;
-        s/GitPython/git/;
-        s/\[.*\]//;
-    ' <<< "$pip_module" | tr '[:upper:]' '[:lower:]')"
+    python_module="$(
+        sed '
+            s/[>=].*$//;
+            s/-*python$//;
+            s/-/_/g;
+            s/beautifulsoup4/bs4/;
+            s/MySQL/MySQLdb/;
+            s/PyYAML/yaml/;
+            s/GitPython/git/;
+            s/\[.*\]//;
+        ' <<< "$pip_module" |
+        tr '[:upper:]' '[:lower:]' |
+        sed 's/mysqldb/MySQLdb/'
+    )"
 
     # pip module often pull in urllib3 which result in errors like the following so ignore it
     #:
