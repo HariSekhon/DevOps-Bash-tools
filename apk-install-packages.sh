@@ -20,7 +20,7 @@ set -eu
 
 echo "Installing Apk Packages"
 
-apk_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d')"
+apk_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
