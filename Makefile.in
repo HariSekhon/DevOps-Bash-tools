@@ -135,6 +135,14 @@ yum-packages-remove:
 	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) yum-packages-remove; popd; done; :
 	if test -f setup/rpm-packages-dev.txt; then NO_FAIL=1 bash-tools/yum-remove-packages.sh setup/rpm-packages-dev.txt; fi
 
+.PHONY: cpan
+cpan:
+	find . -name 'cpan-requirements*.txt' | xargs bash-tools/perl_cpanm_install_if_absent.sh
+
+.PHONY: pip
+pip:
+	find . -name 'requirements.txt' | xargs bash-tools/python_pip_install_if_absent.sh
+
 .PHONY: sonar
 sonar:
 	sonar-scanner
