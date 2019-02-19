@@ -19,6 +19,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ $# == 0 ]; then
     echo "usage: ${0##*/} <filename> <filename> ..."
@@ -35,20 +36,7 @@ if [ $EUID != 0 -a -z "${VIRTUAL_ENV:-}" -a -z "${CONDA_DEFAULT_ENV:-}" ]; then
 fi
 
 for pip_module in $pip_modules; do
-    python_module="$(
-        sed '
-            s/[>=].*$//;
-            s/-*python$//;
-            s/-/_/g;
-            s/beautifulsoup4/bs4/;
-            s/MySQL/MySQLdb/;
-            s/PyYAML/yaml/;
-            s/GitPython/git/;
-            s/\[.*\]//;
-        ' <<< "$pip_module" |
-        tr '[:upper:]' '[:lower:]' |
-        sed 's/mysqldb/MySQLdb/'
-    )"
+    python_module="$("$srcdir/python_pip_normalize_module_names.sh" <<< "$pip_module")"
 
     # pip module often pull in urllib3 which result in errors like the following so ignore it
     #:
