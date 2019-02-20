@@ -134,7 +134,7 @@ apk-packages-remove:
 .PHONY: apt-packages-remove
 apt-packages-remove:
 	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apt-packages-remove; popd; done; :
-	if test -f setup/deb-packages-dev.txt; then NO_FAIL=1 bash-tools/apt-packages-remove.sh setup/deb-packages-dev.txt; fi
+	if test -f setup/deb-packages-dev.txt; then NO_FAIL=1 bash-tools/apt-remove-packages.sh setup/deb-packages-dev.txt; fi
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
