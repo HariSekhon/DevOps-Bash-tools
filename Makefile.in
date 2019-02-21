@@ -83,7 +83,7 @@ apk-packages:
 		apk-packages-perl-dev.txt \
 		apk-packages-python.txt \
 		apk-packages-python-dev.txt \
-		; do
+		; do \
 		if [ -f "setup/$$x" ]; then \
 			bash-tools/apk-install-packages.sh "setup/$$x"; \
 		fi; \
