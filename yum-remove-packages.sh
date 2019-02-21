@@ -22,6 +22,10 @@ echo "Removing RPM Packages"
 
 rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
+if [ -z "$rpm_packages" ]; then
+    exit 0
+fi
+
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
