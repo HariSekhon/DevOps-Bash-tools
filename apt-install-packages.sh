@@ -24,7 +24,9 @@ export DEBIAN_FRONTEND=noninteractive
 
 deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
-[ -z "$deb_packages" ] && exit 0
+if [ -z "$deb_packages" ]; then
+    exit 0
+fi
 
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
