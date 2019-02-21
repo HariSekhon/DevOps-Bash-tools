@@ -74,7 +74,7 @@ system-packages:
 
 .PHONY: apk-packages
 apk-packages:
-	for x in setup/apk-packages.txt setup/apk-packages-dev.txt setup/apk-packages-perl.txt setup/apk-packages-python.txt; do \
+	for x in setup/apk-packages.txt setup/apk-packages-dev.txt setup/apk-packages-perl.txt setup/apk-packages-perl-dev.txt setup/apk-packages-python.txt setup/apk-packages-python-dev.txt; do \
 		if [ -f "$$x" ]; then \
 			bash-tools/apk-install-packages.sh "$$x"; \
 		fi; \
@@ -87,7 +87,7 @@ apk-packages:
 
 .PHONY: apt-packages
 apt-packages:
-	for x in setup/deb-packages.txt setup/deb-packages-dev.txt setup/deb-packages-perl.txt setup/deb-packages-python.txt; do \
+	for x in setup/deb-packages.txt setup/deb-packages-dev.txt setup/deb-packages-perl.txt setup/deb-packages-perl-dev.txt setup/deb-packages-python.txt setup/deb-packages-python-dev.txt; do \
 		if [ -f "$$x" ]; then \
 			bash-tools/apt-install-packages.sh "$$x"; \
 		fi; \
@@ -103,7 +103,7 @@ yum-packages:
 	bash-tools/install_epel_repo.sh
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
-	for x in setup/rpm-packages.txt setup/rpm-packages-dev.txt setup/rpm-packages-perl.txt setup/rpm-packages-python.txt; do \
+	for x in setup/rpm-packages.txt setup/rpm-packages-dev.txt setup/rpm-packages-perl.txt setup/rpm-packages-perl-dev.txt setup/rpm-packages-python.txt setup/rpm-packages-python-dev.txt; do \
 		if [ -f "$$x" ]; then \
 			bash-tools/yum-install-packages.sh "$$x"; \
 		fi; \
