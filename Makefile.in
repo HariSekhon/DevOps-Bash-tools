@@ -101,12 +101,25 @@ apk-packages:
 
 .PHONY: apt-packages
 apt-packages:
-	for x in deb-packages{,-perl,-python}{,-dev}.txt; do \
+	#for x in deb-packages{,-perl,-python}{,-dev}.txt; do \
+	for x in \
+		deb-packages.txt \
+		deb-packages-dev.txt \
+		deb-packages-perl.txt \
+		deb-packages-perl-dev.txt \
+		deb-packages-python.txt \
+		deb-packages-python-dev.txt \
+		; do \
 		if [ -f "setup/$$x" ]; then \
 			bash-tools/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
-	for x in deb-packages-{optional,cpan,pip}.txt; do \
+	#for x in deb-packages-{optional,cpan,pip}.txt; do \
+	for x in \
+		deb-packages-optional.txt \
+		deb-packages-cpan.txt \
+		deb-packages-pip.txt \
+		; do \
 		if [ -f "setup/$$x" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 bash-tools/apt-install-packages.sh "setup/$$x"; \
 		fi; \
