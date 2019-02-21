@@ -74,12 +74,26 @@ system-packages:
 
 .PHONY: apk-packages
 apk-packages:
-	for x in deb-packages{,-perl,-python}{,-dev}.txt; do \
+	# not portable in Alpine sh
+	#for x in apk-packages{,-perl,-python}{,-dev}.txt; do \
+	for x in \
+		apk-packages.txt \
+		apk-packages-dev.txt \
+		apk-packages-perl.txt \
+		apk-packages-perl-dev.txt \
+		apk-packages-python.txt \
+		apk-packages-python-dev.txt \
+		; do
 		if [ -f "setup/$$x" ]; then \
 			bash-tools/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
-	for x in apk-packages-{optional,cpan,pip}.txt; do \
+	#for x in apk-packages-{optional,cpan,pip}.txt; do \
+	for x in \
+		apk-packages-optional.txt \
+		apk-packages-cpan.txt \
+		apk-packages-pip.txt \
+		; do \
 		if [ -f "setup/$$x" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 bash-tools/apk-install-packages.sh "setup/$$x"; \
 		fi; \
