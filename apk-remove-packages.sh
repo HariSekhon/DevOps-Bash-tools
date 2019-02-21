@@ -22,6 +22,10 @@ echo "Removing Apk Packages"
 
 apk_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
+if [ -z "$apk_packages" ]; then
+    exit 0
+fi
+
 SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
