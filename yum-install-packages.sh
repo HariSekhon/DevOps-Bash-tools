@@ -22,7 +22,9 @@ echo "Installing RPM Packages"
 
 rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
-[ -z "$rpm_packages" ] && exit 0
+if [ -z "$rpm_packages" ]; then
+    exit 0
+fi
 
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
