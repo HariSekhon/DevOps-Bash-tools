@@ -22,6 +22,11 @@ echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
+opts=""
+if [ -z "${PS1:-}" ]; then
+    opts="-q"
+fi
+
 deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
 if [ -z "$deb_packages" ]; then
@@ -31,12 +36,12 @@ fi
 SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
-[ -n "${NO_UPDATE:-}" ] || $SUDO apt-get update
+[ -n "${NO_UPDATE:-}" ] || $SUDO apt-get $opts update
 
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $deb_packages; do
-        $SUDO apt-get install -y "$package" || :
+        $SUDO apt-get install -y $opts "$package" || :
     done
 else
-    $SUDO apt-get install -y $deb_packages
+    $SUDO apt-get install -y $opts $deb_packages
 fi
