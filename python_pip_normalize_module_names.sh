@@ -22,6 +22,7 @@ sed '
     s/-*python$//;
     s/-/_/g;
     s/beautifulsoup4/bs4/;
+    s/traceback2/traceback/;
     s/MySQL/MySQLdb/;
     s/PyYAML/yaml/;
     s/GitPython/git/;
