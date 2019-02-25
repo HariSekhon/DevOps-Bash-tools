@@ -51,7 +51,6 @@ if ! [ -f /proc/mounts ]; then
     exit 1
 fi
 
-# TODO: switch to awk to filter output just mountpoint
 awk '{print $2}' /proc/mounts |
 egrep -v ' cgroup ' |
 egrep "$include_regex" |
