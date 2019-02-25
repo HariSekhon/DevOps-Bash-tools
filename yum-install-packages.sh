@@ -23,7 +23,7 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing RPM Packages"
+echo "Installing RPM Packages from file(s): $@"
 
 rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
