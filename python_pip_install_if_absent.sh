@@ -21,7 +21,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Installing any Python PyPI Modules not already present"
+echo "Installing any missing Python PyPI Modules listed in file(s): $@"
+
+opts=""
+if [ -n "${TRAVIS:-}" ]; then
+    echo "running in quiet mode"
+    opts="-q"
+fi
 
 pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
 
@@ -37,5 +43,8 @@ for pip_module in $pip_modules; do
     #:
     # Cannot uninstall 'urllib3'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
     #
-    python -c "import $python_module" || $SUDO ${PIP:-pip} install --ignore-installed urllib3 "$pip_module"
+    echo "checking if python module '$python_module' is installed"
+    if ! python -c "import $python_module"; then
+        $SUDO ${PIP:-pip} install $opts --ignore-installed urllib3 "$pip_module"
+    fi
 done
