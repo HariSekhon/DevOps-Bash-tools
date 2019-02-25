@@ -23,7 +23,7 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing Apk Packages"
+echo "Installing Apk Packages from file(s): $@"
 
 apk_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
 
