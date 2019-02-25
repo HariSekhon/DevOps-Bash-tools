@@ -16,7 +16,13 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing any CPAN Modules not already present"
+echo "Installing any missing CPAN Modules listed in file(s): $@"
+
+opts=""
+if [ -n "${TRAVIS:-}" ]; then
+    echo "running in quiet mode"
+    opts="-q"
+fi
 
 cpan_modules="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$$/d' | sort -u)"
 
@@ -27,5 +33,5 @@ fi
 
 for cpan_module in $cpan_modules; do
     perl_module="${cpan_module%%@*}"
-    perl -e "use $perl_module;" || $SUDO ${CPANM:-cpanm} --notest "$cpan_module"
+    perl -e "use $perl_module;" || $SUDO ${CPANM:-cpanm} $opts --notest "$cpan_module"
 done
