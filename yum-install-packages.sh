@@ -13,7 +13,12 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Install RPM packages in a forgiving way - useful for install Perl CPAN and Python PyPI modules that may or may not be available (will retry cpanm / pip later if they are not found)
+# Install RPM packages in a forgiving way - useful for install Perl CPAN and Python PyPI modules that may or may not be available
+#
+# combine with later use of the following scripts to only build packages that aren't available in the Linux distribution:
+#
+# perl_cpanm_install_if_absent.sh
+# python_pip_install_if_absent.sh
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
