@@ -67,10 +67,22 @@ common: system-packages submodules
 
 .PHONY: system-packages
 system-packages:
-	if [ -x /sbin/apk ];        then $(MAKE) apk-packages apk-packages-perl apk-packages-python; fi
-	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages apt-packages-perl apt-packages-python; fi
-	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages yum-packages-perl yum-packages-python; fi
+	if [ -x /sbin/apk ];        then $(MAKE) apk-packages; fi
+	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages; fi
+	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages; fi
 	if [ -x /usr/local/bin/brew -a `uname` = Darwin ]; then $(MAKE) homebrew-packages; fi
+
+.PHONY: system-packages-perl
+system-packages-perl: system-packages
+	if [ -x /sbin/apk ];        then $(MAKE) apk-packages-perl; fi
+	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages-perl; fi
+	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages-perl; fi
+
+.PHONY: system-packages-python
+system-packages-python: system-packages
+	if [ -x /sbin/apk ];        then $(MAKE) apk-packages-python; fi
+	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages-python; fi
+	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages-python; fi
 
 .PHONY: apk-packages
 apk-packages:
