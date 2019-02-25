@@ -21,7 +21,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Installing any missing Python PyPI Modules listed in file(s): $@"
+echo "Installing Python PyPI Modules listed in file(s): $@"
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
@@ -43,8 +43,9 @@ for pip_module in $pip_modules; do
     #:
     # Cannot uninstall 'urllib3'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
     #
-    echo "checking if python module '$python_module' is installed"
+    #echo "checking if python module '$python_module' is installed"
     if ! python -c "import $python_module"; then
+        echo "python module '$python_module' not installed"
         $SUDO ${PIP:-pip} install $opts --ignore-installed urllib3 "$pip_module"
     fi
 done
