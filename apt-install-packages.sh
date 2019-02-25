@@ -17,13 +17,16 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="`dirname "$0"`"
+
+. "$srcdir/utils.sh"
 
 echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
 opts=""
-if [ -z "${PS1:-}" ]; then
+if is_CI || ! is_interactive; then
     opts="-q"
 fi
 
