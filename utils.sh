@@ -135,41 +135,43 @@ check_exit_code(){
 is_linux(){
     if [ "$(uname -s)" = "Linux" ]; then
         return 0
-    else
-        return 1
     fi
+    return 1
 }
 
 is_mac(){
     if [ "$(uname -s)" = "Darwin" ]; then
         return 0
-    else
-        return 1
     fi
+    return 1
 }
 
 is_jenkins(){
     if [ -n "${JENKINS_URL:-}" ]; then
         return 0
-    else
-        return 1
     fi
+    return 1
 }
 
 is_travis(){
     if [ -n "${TRAVIS:-}" ]; then
         return 0
-    else
-        return 1
     fi
+    return 1
 }
 
 is_CI(){
     if [ -n "${CI:-}" -o -n "${CI_NAME:-}" ] || is_jenkins || is_travis; then
         return 0
-    else
-        return 1
     fi
+    return 1
+}
+
+is_interactive(){
+    if [ -n "${PS1:-}" ]; then
+        return 0
+    fi
+    return 1
 }
 
 if is_travis; then
