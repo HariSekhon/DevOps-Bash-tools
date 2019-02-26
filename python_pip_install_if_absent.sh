@@ -29,6 +29,11 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="-q"
 fi
 
+if [ "`uname -s`" = "Darwin" ]; then
+    # needed to build MySQL-python
+    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+fi
+
 pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
