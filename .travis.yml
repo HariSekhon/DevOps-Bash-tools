@@ -30,8 +30,8 @@ notifications:
 
 cache:
   - directories:
-    - .cache
-    - pytools_checks
+    - .cache          # yamllint disable-line rule:indentation
+    - pytools_checks  # yamllint disable-line rule:indentation
 
 env:
   - PYTHONUNBUFFERED=1
