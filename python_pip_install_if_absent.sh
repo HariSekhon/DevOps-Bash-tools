@@ -29,6 +29,7 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="-q"
 fi
 
+export LDFLAGS=""
 if [ "`uname -s`" = "Darwin" ]; then
     # needed to build MySQL-python
     export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
@@ -51,6 +52,6 @@ for pip_module in $pip_modules; do
     #echo "checking if python module '$python_module' is installed"
     if ! python -c "import $python_module" &>/dev/null; then
         echo "python module '$python_module' not installed"
-        $SUDO ${PIP:-pip} install $opts --ignore-installed urllib3 "$pip_module"
+        $SUDO LDFLAGS="$LDFLAGS" ${PIP:-pip} install $opts --ignore-installed urllib3 "$pip_module"
     fi
 done
