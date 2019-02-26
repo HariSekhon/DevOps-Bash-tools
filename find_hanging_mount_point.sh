@@ -22,6 +22,7 @@ set -euo pipefail
 usage(){
     echo "${0##*/} [ --include <posix_regex> ] [ --exclude <posix_regex> ]
 "
+    exit 3
 }
 
 include_regex=".*"
@@ -51,10 +52,13 @@ if ! [ -f /proc/mounts ]; then
     exit 1
 fi
 
+echo "Testing listing in each mount point:"
+echo
 awk '{print $2}' /proc/mounts |
 egrep -v ' cgroup ' |
 egrep "$include_regex" |
-egrep "$exclude_regex" |
+# default blank here would exclude everything, switched to test within loop only if exclude_regex is not blank
+#egrep -v "$exclude_regex" |
 while read mountpoint; do
     [ -d "$mountpoint" ] || continue
     if [ "$mountpoint" = "/proc" \
@@ -65,8 +69,12 @@ while read mountpoint; do
       -o "${mountpoint:0:5}" = "/dev/" ]; then
         continue
     fi
+    if [[ -n "$exclude_regex" && "$mountpoint" =~ $exclude_regex ]]; then
+        continue
+    fi
     echo -n "$mountpoint:  "
     ls -l "$mountpoint" &>/dev/null
     echo "OK"
 done
+echo
 echo "Finished"
