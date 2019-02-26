@@ -19,6 +19,7 @@ set -euo pipefail
 cat $@ |
 sed '
     s/[>=].*$//;
+    s/^python-//;
     s/-*python$//;
     s/-/_/g;
     s/beautifulsoup4/bs4/;
