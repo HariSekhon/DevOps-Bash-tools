@@ -38,6 +38,8 @@ for x in $@; do
     esac
 done
 
+found=0
+
 sed 's/#.*//;
      s/^[[:space:]]*//;
      s/[[:space:]]*$//;
@@ -46,4 +48,9 @@ sort |
 uniq -d |
 while read line; do
     fgrep -x "$line" "$@"
+    let found+=1
 done
+
+if [ $found -gt 0 ]; then
+    exit 1
+fi
