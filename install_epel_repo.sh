@@ -17,10 +17,20 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+if [ "${NO_FAIL:-}" ]; then
+    set +eo pipefail
+fi
+
+if grep -qi fedora /etc/*release; then
+    echo "Detected Fedora, skipping epel"
+    exit 0
+fi
+
 if ! rpm -q epel-release; then
     if ! yum install -y epel-release; then
         rpm -q wget || yum install -y wget
-        wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-`grep -o '[[:digit:]]' /etc/*release | head -n1`.noarch.rpm"
+        major_version="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
+        wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
         $SUDO rpm -ivh /tmp/epel.rpm
         rm -f /tmp/epel.rpm;
     fi
