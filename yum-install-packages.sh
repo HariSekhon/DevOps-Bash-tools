@@ -35,7 +35,14 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    $SUDO yum install -y $rpm_packages
+    if type dnf &>/dev/null; then
+        # dnf exists if any of the packages aren't found
+        for package in $rpm_packages; do
+            $SUDO yum install -y "$package" || :
+        done
+    else
+        $SUDO yum install -y $rpm_packages || :
+    fi
 else
     # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
     for package in $rpm_packages; do
