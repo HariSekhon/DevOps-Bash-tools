@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to find duplicate Python Pip / PyPI requirements across files
+# Script to find duplicate Python Pip / PyPI module requirements across files
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
