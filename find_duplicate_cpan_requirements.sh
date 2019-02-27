@@ -47,4 +47,9 @@ sort |
 uniq -d |
 while read module; do
     grep "^$module\>" "$@"
+    let found+=1
 done
+
+if [ $found -gt 0 ]; then
+    exit 1
+fi
