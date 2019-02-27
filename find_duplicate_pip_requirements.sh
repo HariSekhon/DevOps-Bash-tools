@@ -40,17 +40,18 @@ done
 
 found=0
 
-sed 's/#.*//;
-     s/[<>=].*//;
-     s/^[[:space:]]*//;
-     s/[[:space:]]*$//;
-     /^[[:space:]]*$/d;' "$@" |
-sort |
-uniq -d |
 while read module; do
     grep "^$module[<>=]" "$@"
     let found+=1
-done
+done < <(
+    sed 's/#.*//;
+         s/[<>=].*//;
+         s/^[[:space:]]*//;
+         s/[[:space:]]*$//;
+         /^[[:space:]]*$/d;' "$@" |
+    sort |
+    uniq -d
+)
 
 if [ $found -gt 0 ]; then
     exit 1
