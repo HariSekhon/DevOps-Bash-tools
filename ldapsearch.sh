@@ -29,16 +29,21 @@ base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
 
 user="${LDAP_USER:-$USER@$domain}"
 
-set +x
+#set +x
 PASS="${LDAP_PASSWORD:-${PASSWORD:-${PASS:-}}}"
-if [ -z "${PASS:-}" ]; then
-    read -s -p "password: " PASS
-fi
+#if [ -z "${PASS:-}" ]; then
+#    read -s -p "password: " PASS
+#fi
 
 if [ "${LDAP_KRB5:-}" = 1 ]; then
     auth_opts="-Y GSSAPI"
 else
-    auth_opts="-x -D $user -w $PASS"
+    auth_opts="-x -D $user"
+    if [ -z "${PASS:-}" ]; then
+        auth_opts="$auth_opts -w $PASS"
+    else
+        auth_opts="$auth_opts -W"
+    fi
 fi
 
 if [ "${DEBUG:-}" = 1 ]; then
