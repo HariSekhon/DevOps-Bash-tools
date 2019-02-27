@@ -32,7 +32,7 @@ if [ -n "$pip_requirements_files" ]; then
     echo
 fi
 
-cpan_requirements_files="$(find . -maxdepth 2 -name 'cpan-requirements*.txt')"
+cpan_requirements_files="$(find . -maxdepth 3 -name 'cpan-requirements*.txt')"
 
 if [ -n "$cpan_requirements_files" ]; then
     echo "Perl CPAN requirements files found: "$cpan_requirements_files
