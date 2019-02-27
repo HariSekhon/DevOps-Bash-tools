@@ -27,10 +27,10 @@ echo "Installing Deb Packages listed in file(s): $@"
 
 export DEBIAN_FRONTEND=noninteractive
 
-opts=""
+opts="--no-install-recommends"
 if [ -n "${TRAVIS:-}" ]; then
     echo "running in quiet mode"
-    opts="-qq"
+    opts="$opts -qq"
 fi
 
 deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
