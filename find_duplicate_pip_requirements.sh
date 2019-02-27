@@ -38,6 +38,8 @@ for x in $@; do
     esac
 done
 
+found=0
+
 sed 's/#.*//;
      s/[<>=].*//;
      s/^[[:space:]]*//;
@@ -47,4 +49,9 @@ sort |
 uniq -d |
 while read module; do
     grep "^$module[<>=]" "$@"
+    let found+=1
 done
+
+if [ $found -gt 0 ]; then
+    exit 1
+fi
