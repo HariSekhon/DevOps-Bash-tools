@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . "$srcdir/utils.sh"
 
-section "Checking for duplicate Perl / Python requirements"
+section "Checking for duplicate package dependency requirements"
 
 start_time="$(start_timer)"
 
@@ -40,6 +40,20 @@ if [ -n "$cpan_requirements_files" ]; then
     "$srcdir/find_duplicate_pip_requirements.sh" $cpan_requirements_files
     echo
 fi
+
+for pkg in apk deb rpm brew; do
+    # don't check lib and pylib at the same time because they will have duplicates between them
+    for lib in lib pylib; do
+        requirements_files="$(find . -maxdepth 3 -name "$pkg-packages*.txt" | grep -v "/$lib/" || :)"
+
+        if [ -n "$requirements_files" ]; then
+            echo "$pkg requirements files found: "$requirements_files
+            echo "checking for duplicates"
+            "$srcdir/find_duplicate_lines.sh" $requirements_files
+            echo
+        fi
+    done
+done
 
 time_taken "$start_time"
 section2 "No duplicate requirements found"
