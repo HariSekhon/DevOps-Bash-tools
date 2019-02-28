@@ -31,12 +31,15 @@ fi
 if [ -n "${REPOS:-}" ]; then
     repolist="$REPOS"
 elif [ -f "$srcdir/repolist.txt" ]; then
-    repolist="$(sed 's/#.*//; s/^/harisekhon\//' < "$srcdir/repolist.txt")"
+    repolist="$(sed 's/#.*//' < "$srcdir/repolist.txt")"
 else
     repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/repolist.txt | sed 's/#.*//')"
 fi
 
 for repo in $repolist; do
+    if ! grep "/" "$repo"; then
+        repo="harisekhon/$repo"
+    fi
     repo_dir="${repo##*/}"
     [ -d "$repo_dir" ] || git clone "https://github.com/$repo"
     pushd "$repo_dir"
