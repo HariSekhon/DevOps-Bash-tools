@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to find unused Python Pip / PyPI modules in the current codebase
+# Script to find unused Python Pip / PyPI modules in the current git directory tree
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -42,9 +42,15 @@ done
 found=0
 
 while read module; do
-    #egrep -q "import[[:space:]]+$module" "$@" || echo "$module"
-    git grep "import[[:space:]]\+$module\|from[[:space:]]\+$module[[:space:]]\+import[[:space:]]\+" | grep -v requirements.txt | grep -q . || echo "$module"
-    let found+=1
+        # sloooow by comparison to git grep
+        #grep -R "import[[:space:]]\+$module\|from[[:space:]]\+$module[[:space:]]\+import[[:space:]]\+" . |
+    if ! \
+        git grep "import[[:space:]]\+$module\|from[[:space:]]\+$module[[:space:]]\+import[[:space:]]\+" |
+        grep -v requirements.txt |
+        grep -q .; then
+            echo "$module"
+            let found+=1
+    fi
 done < <(
     sed 's/#.*//;
          s/[<>=].*//;
