@@ -30,4 +30,7 @@ sed '
     s/\[.*\]//;
 ' |
 tr '[:upper:]' '[:lower:]' |
-sed 's/mysqldb/MySQLdb/'
+sed '
+    s/mysqldb/MySQLdb/;
+    s/krbv/krbV/;
+'
