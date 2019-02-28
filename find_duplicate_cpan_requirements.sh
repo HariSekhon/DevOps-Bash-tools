@@ -38,6 +38,8 @@ for x in $@; do
     esac
 done
 
+found=0
+
 while read module; do
     grep "^$module\>" "$@"
     let found+=1
