@@ -17,11 +17,13 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="`dirname $0`"
 
+build="${BUILD:-}"
+
 opts="${MAKE_OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
-if [ -n "${CLEAN:-}" ]; then
+if [ -z "${NO_CLEAN:-}" ]; then
     opts="$opts clean"
 fi
 
@@ -36,6 +38,6 @@ fi
 for repo in $repolist; do
     [ -d "$repo" ] || git clone "https://github.com/harisekhon/$repo"
     pushd "$repo"
-    make build $opts
+    make $build $opts
     popd
 done
