@@ -37,7 +37,7 @@ cpan_requirements_files="$(find . -maxdepth 3 -name 'cpan-requirements*.txt')"
 if [ -n "$cpan_requirements_files" ]; then
     echo "Perl CPAN requirements files found: "$cpan_requirements_files
     echo "checking for duplicates"
-    "$srcdir/find_duplicate_pip_requirements.sh" $cpan_requirements_files
+    "$srcdir/find_duplicate_cpan_requirements.sh" $cpan_requirements_files
     echo
 fi
 
