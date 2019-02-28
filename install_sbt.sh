@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 echo "================================================================================"
@@ -29,25 +29,40 @@ date '+%F %T  Starting...'
 start_time="$(date +%s)"
 echo
 
-if ! [ -e "$BASE/sbt" ]; then
-    mkdir -p "$BASE"
-    cd "$BASE"
-    wget -t 100 --retry-connrefused https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz && \
-    tar zxvf sbt-$SBT_VERSION.tgz && \
-    rm -f sbt-$SBT_VERSION.tgz
-    echo
-    echo "SBT Install done"
+if type yum 2>&1; then
+    curl -L https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+    yum install -y java-sdk
+    yum install -y --nogpgcheck sbt
+elif type apt-get 2>&1; then
+    apt-get update
+    apt-get install -y openjdk-8-jdk scala
+    echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
+    apt-get install -y --no-install-recommends apt-transport-https
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
+    apt-get update
+    apt-get install -y sbt
 else
-    echo "$BASE/sbt already exists - doing nothing"
-fi
-if ! [ -e /etc/profile.d/sbt.sh ]; then
-    echo "Adding /etc/profile.d/sbt.sh"
-    # shell execution tracing comes out in the file otherwise
-    set +x
-    cat >> /etc/profile.d/sbt.sh <<EOF
+	echo "No mainstream package managers detected, doing tarball install"
+    if ! [ -e "$BASE/sbt" ]; then
+        mkdir -p "$BASE"
+        cd "$BASE"
+        wget -t 10 --retry-connrefused https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz && \
+        tar zxvf sbt-$SBT_VERSION.tgz && \
+        rm -f sbt-$SBT_VERSION.tgz
+        echo
+        echo "SBT Install done"
+    else
+        echo "$BASE/sbt already exists - doing nothing"
+    fi
+    if ! [ -e /etc/profile.d/sbt.sh ]; then
+        echo "Adding /etc/profile.d/sbt.sh"
+        # shell execution tracing comes out in the file otherwise
+        set +x
+        cat >> /etc/profile.d/sbt.sh <<EOF
 export SBT_HOME=/opt/sbt
 export PATH=\$PATH:\$SBT_HOME/bin
 EOF
+    fi
 fi
 
 echo
