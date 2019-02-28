@@ -19,11 +19,11 @@ bash-tools
 
 # libraries first - if these don't work then the dependent repos beneath them won't work
 lib
-lib-java
 pylib
+lib-java
 
-pytools
 tools
+pytools
 #spotify
 #spark-apps
 
