@@ -17,6 +17,8 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="`dirname $0`"
 
+git_url="${GIT_URL:-https://github.com}"
+
 make="${MAKE:-make}"
 build="${BUILD:-}"
 
@@ -41,7 +43,7 @@ for repo in $repolist; do
         repo="harisekhon/$repo"
     fi
     repo_dir="${repo##*/}"
-    [ -d "$repo_dir" ] || git clone "https://github.com/$repo"
+    [ -d "$repo_dir" ] || git clone "$git_url/$repo"
     pushd "$repo_dir"
     $make $build $opts
     popd
