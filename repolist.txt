@@ -24,8 +24,8 @@ pylib
 
 pytools
 tools
-spotify
-spark-apps
+#spotify
+#spark-apps
 
 # biggest repo last
 nagios-plugins
