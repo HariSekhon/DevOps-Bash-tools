@@ -42,7 +42,7 @@ if [ $EUID != 0 -a -z "${VIRTUAL_ENV:-}" -a -z "${CONDA_DEFAULT_ENV:-}" ]; then
 fi
 
 for pip_module in $pip_modules; do
-    python_module="$("$srcdir/python_pip_normalize_module_names.sh" <<< "$pip_module")"
+    python_module="$("$srcdir/python_module_to_import_name.sh" <<< "$pip_module")"
 
     # pip module often pull in urllib3 which result in errors like the following so ignore it
     #:
