@@ -17,9 +17,10 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="`dirname $0`"
 
+make="${MAKE:-make}"
 build="${BUILD:-}"
 
-opts="${MAKE_OPTS:-}"
+opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
@@ -30,14 +31,15 @@ fi
 if [ -n "${REPOS:-}" ]; then
     repolist="$REPOS"
 elif [ -f "$srcdir/repolist.txt" ]; then
-    repolist="$(sed 's/#.*//' < "$srcdir/repolist.txt")"
+    repolist="$(sed 's/#.*//; s/^/harisekhon\//' < "$srcdir/repolist.txt")"
 else
     repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/repolist.txt | sed 's/#.*//')"
 fi
 
 for repo in $repolist; do
-    [ -d "$repo" ] || git clone "https://github.com/harisekhon/$repo"
-    pushd "$repo"
-    make $build $opts
+    repo_dir="${repo##*/}"
+    [ -d "$repo_dir" ] || git clone "https://github.com/$repo"
+    pushd "$repo_dir"
+    $make $build $opts
     popd
 done
