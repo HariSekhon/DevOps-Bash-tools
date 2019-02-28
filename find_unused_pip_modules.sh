@@ -42,7 +42,7 @@ done
 found=0
 
 while read module; do
-        # sloooow by comparison to git grep
+        # grep -R is sloooow by comparison to git grep
         #grep -R "import[[:space:]]\+$module\|from[[:space:]]\+$module[[:space:]]\+import[[:space:]]\+" . |
     if ! \
         git grep "import[[:space:]]\+$module\|from[[:space:]]\+$module\([[:alnum:]\.]\+\)\?[[:space:]]\+import[[:space:]]\+" |
