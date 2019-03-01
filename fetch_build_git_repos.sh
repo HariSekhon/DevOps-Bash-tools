@@ -30,8 +30,9 @@ if [ -z "${NO_CLEAN:-}" ]; then
     opts="$opts clean"
 fi
 
-if [ -n "${REPOS:-}" ]; then
-    repolist="$REPOS"
+repolist="${@:-${REPOS:-}}"
+if [ -n "$repolist" ]; then
+    :
 elif [ -f "$srcdir/repolist.txt" ]; then
     repolist="$(sed 's/#.*//' < "$srcdir/repolist.txt")"
 else
