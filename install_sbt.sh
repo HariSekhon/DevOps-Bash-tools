@@ -42,7 +42,7 @@ elif type apt-get 2>&1; then
     apt-get update
     apt-get install -y sbt
 else
-	echo "No mainstream package managers detected, doing tarball install"
+    echo "No mainstream package managers detected, doing tarball install"
     if ! [ -e "$BASE/sbt" ]; then
         mkdir -p "$BASE"
         cd "$BASE"
