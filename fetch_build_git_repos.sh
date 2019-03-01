@@ -39,7 +39,7 @@ else
 fi
 
 for repo in $repolist; do
-    if ! grep "/" "$repo"; then
+    if ! grep -q "/" <<< "$repo"; then
         repo="harisekhon/$repo"
     fi
     repo_dir="${repo##*/}"
