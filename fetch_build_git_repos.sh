@@ -55,8 +55,13 @@ for repo in $repolist; do
     if ! echo "$repo" | grep -q "/"; then
         repo="harisekhon/$repo"
     fi
+    if ! echo "$repo" | grep -q "//"; then
+        repo="https://github.com/$repo"
+    fi
     repo_dir="${repo##*/}"
-    [ -d "$repo_dir" ] || git clone "$git_url/$repo"
+    if ! [ -d "$repo_dir" ]; then
+        git clone "$git_url/$repo"
+    fi
     pushd "$repo_dir"
     $make $build $opts
     popd
