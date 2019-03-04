@@ -39,6 +39,18 @@ else
     repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/repolist.txt | sed 's/#.*//')"
 fi
 
+if [ -z "${JAVA_HOME:-}" ]; then
+    set +e
+    JAVA_HOME="$(which java 2>/dev/null)/.."
+    if [ -z "${JAVA_HOME:-}" ]; then
+        JAVA_HOME="$(type java 2>/dev/null | sed 's/java is //; s/hashed //; s/[()]//g')"
+    fi
+    set -e
+    if [ -z "${JAVA_HOME:-}" ]; then
+        JAVA_HOME="/usr"
+    fi
+fi
+
 for repo in $repolist; do
     if ! echo "$repo" | grep -q "/"; then
         repo="harisekhon/$repo"
