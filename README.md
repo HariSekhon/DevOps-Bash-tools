@@ -5,9 +5,9 @@ Hari Sekhon - Bash Tools
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-Bash Test & Utility library used by all my other [GitHub repos](https://github.com/harisekhon).
+Shell Script & Utility library used by all my other [GitHub repos](https://github.com/harisekhon).
 
-- Utility functions (Docker, environment, CI detection, port and HTTP url availability content checks)
+- Utility scripts and functions (install scripts, Docker, environment, CI detection, port and HTTP url availability content checks)
 - Tests for linting a variety of different programming and build files, including:
 
 - Python (syntax, pep8, pre-byte-compiling)
@@ -36,8 +36,8 @@ Also pulls in many important validation programs from my [DevOps Python Tools re
 
 Currently utilized to supplement testing of the following repos:
 
-* [Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 350+ programs covering every major Hadoop & NoSQL technology and Linux/Unix based infrastructure technologies
-* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 50+ command line tools
+* [Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 400+ programs covering every major Hadoop & NoSQL technology and Linux/Unix based infrastructure technologies
+* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 75+ command line tools
 * [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) - 25 command line tools
 * [Perl Lib](https://github.com/harisekhon/lib) - Perl utility library
 * [PyLib](https://github.com/harisekhon/pylib) - Python utility library
