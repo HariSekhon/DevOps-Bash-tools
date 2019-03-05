@@ -39,6 +39,10 @@ EOF
     exit 3
 }
 
+if [ $# -eq 0 ]; then
+    usage "no file arguments given"
+fi
+
 for x in $@; do
     case $x in
         -h|--help)  usage
