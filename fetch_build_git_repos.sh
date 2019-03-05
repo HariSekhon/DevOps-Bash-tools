@@ -55,9 +55,6 @@ for repo in $repolist; do
     if ! echo "$repo" | grep -q "/"; then
         repo="harisekhon/$repo"
     fi
-    if ! echo "$repo" | grep -q "//"; then
-        repo="https://github.com/$repo"
-    fi
     repo_dir="${repo##*/}"
     if ! [ -d "$repo_dir" ]; then
         git clone "$git_url/$repo"
