@@ -23,7 +23,7 @@ usage(){
     fi
     cat <<EOF
 
-Splits big file(s) in to \$PARTS parts (defaults to the number of CPU processors) with numeric suffixes
+Splits big file(s) in to \$PARTS parts (defaults to the number of CPU processors)
 
 Useful for easy parallelizing things that don't easily lend themselves to parallelization like
 anonymize.py from DevOps Python Tools which needs successive ordered anonymization rules
