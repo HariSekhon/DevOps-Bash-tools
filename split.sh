@@ -69,4 +69,3 @@ for filename in $@; do
         split -d -n "1/$parts" "$filename" "$filename."
     fi
 done
-echo "Done"
