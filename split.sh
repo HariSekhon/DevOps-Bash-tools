@@ -15,6 +15,9 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+. "$srcdir/utils.sh"
 
 usage(){
     if [ -n "$*" ]; then
@@ -43,24 +46,13 @@ for x in $@; do
     esac
 done
 
-check_bin(){
-    local bin="$1"
-    if ! which $bin &>/dev/null; then
-        echo "$bin command not found in \$PATH ($PATH)"
-        exit 1
-    fi
-}
 check_bin split
 check_bin parallel
 
 parts="${PARTS:-}"
 
 if [ -z "$parts" ]; then
-    if [ "$(uname -s)" = "Darwin" ]; then
-        parts="$(sysctl -n hw.ncpu)"
-    else
-        parts="$(awk '/^processor/ {++n} END {print n+1}' /proc/cpuinfo)"
-    fi
+    parts="$(cpu_count)"
 fi
 
 for filename in $@; do
