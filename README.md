@@ -38,7 +38,7 @@ Currently utilized to supplement testing of the following repos:
 
 * [Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 400+ programs covering every major Hadoop & NoSQL technology and Linux/Unix based infrastructure technologies
 * [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 75+ command line tools
-* [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) - 25 command line tools
+* [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) - 25+ command line tools
 * [Perl Lib](https://github.com/harisekhon/lib) - Perl utility library
 * [PyLib](https://github.com/harisekhon/pylib) - Python utility library
 
