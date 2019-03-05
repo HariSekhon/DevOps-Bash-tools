@@ -100,6 +100,14 @@ hr3echo(){
 
 type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
 
+check_bin(){
+    local bin="$1"
+    if ! which $bin &>/dev/null; then
+        echo "$bin command not found in \$PATH ($PATH)"
+        exit 1
+    fi
+}
+
 check_output(){
     local expected="$1"
     local cmd="${@:2}"
@@ -130,6 +138,15 @@ check_exit_code(){
         echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
         return 1
     fi
+}
+
+cpu_count(){
+    if is_mac; then
+        cpu_count="$(sysctl -n hw.ncpu)"
+    else
+        cpu_count="$(awk '/^processor/ {++n} END {print n+1}' /proc/cpuinfo)"
+    fi
+    echo "$cpu_count"
 }
 
 is_linux(){
