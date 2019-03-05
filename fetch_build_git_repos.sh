@@ -20,7 +20,7 @@ srcdir="`dirname $0`"
 git_url="${GIT_URL:-https://github.com}"
 
 make="${MAKE:-make}"
-build="${BUILD:-}"
+build="${BUILD:-build}"
 
 opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
