@@ -66,6 +66,6 @@ for filename in $@; do
         parts="$(bc <<< "$linecount / $parts")"
         split -l "$parts" "$filename" "$filename."
     else
-        split -d -n "1/$parts" "$filename" "$filename."
+        split -d -n "l/$parts" "$filename" "$filename."
     fi
 done
