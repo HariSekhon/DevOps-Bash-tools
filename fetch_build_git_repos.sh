@@ -26,9 +26,6 @@ opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
-if [ -z "${NO_CLEAN:-}" ]; then
-    opts="$opts clean"
-fi
 
 repolist="${@:-${REPOS:-}}"
 if [ -n "$repolist" ]; then
@@ -61,8 +58,12 @@ for repo in $repolist; do
     fi
     pushd "$repo_dir"
     $make $build $opts
-    if [ -f /.dockerenv ] && grep -q ^system-packages-remove Makefile; then
-        $make system-packages-remove
+    if [ -f /.dockerenv ]; then
+        for x in system-packages-remove clean deep-clean; do
+            if grep -q "^$x:" Makefile bash-tools/Makefile.in 2>/dev/null; then
+                $make "$x"
+            fi
+        done
     fi
     popd
 done
