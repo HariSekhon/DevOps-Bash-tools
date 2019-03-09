@@ -62,4 +62,7 @@ for repo in $repolist; do
     pushd "$repo_dir"
     $make $build $opts
     popd
+    if [ -f /.dockerenv ] && grep -q ^system-packages-remove Makefile; then
+        $make system-packages-remove
+    fi
 done
