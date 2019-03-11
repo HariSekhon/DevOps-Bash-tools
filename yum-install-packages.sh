@@ -38,7 +38,7 @@ if [ -n "${NO_FAIL:-}" ]; then
     if type dnf &>/dev/null; then
         # dnf exists if any of the packages aren't found
         for package in $rpm_packages; do
-            $SUDO yum install -y "$package" || :
+            rpm -q "$package" || $SUDO yum install -y "$package" || :
         done
     else
         $SUDO yum install -y $rpm_packages || :
