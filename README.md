@@ -14,25 +14,25 @@ Shell Script & Utility library used by all my other [GitHub repos](https://githu
   - Perl
   - Java
   - Scala
+  - Ruby
+  - Shell
+  - Misc (whitespace, custom enforced checks like not calling quit() in python etc)
+- Tests for linting a variety of code build systems and CI
   - Make
   - Maven
   - SBT
   - Gradle
   - Travis CI
-  - Ruby
-  - Shell
-  - Misc (whitespace, custom enforced checks like not calling quit() in python etc)
+- Tests for various data formats using validation programs from my [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
 
-Also pulls in many important validation programs from my [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools) to validate additional file formats including:
-
-- CSV
-- JSON
-- Avro
-- Parquet
-- INI / Properties files (Java)
-- LDAP LDIF
-- XML
-- YAML
+  - CSV
+  - JSON
+  - Avro
+  - Parquet
+  - INI / Properties files (Java)
+  - LDAP LDIF
+  - XML
+  - YAML
 
 Currently utilized to supplement testing of the following repos:
 
