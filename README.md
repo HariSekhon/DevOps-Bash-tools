@@ -7,6 +7,8 @@ Hari Sekhon - Bash Tools
 
 Shell Script & Utility library used by all my other [GitHub repos](https://github.com/harisekhon).
 
+For more advanced Systems Administration scripts, see the repos listed at the bottom of the page.
+
 - Scripts - Linux systems administration scripts
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros (Redhat RHEL / CentOS / Fedora, Debian / Ubuntu, Alpine)
   - install if absent scripts for Python and Perl modules - good for combining with first attempt to install via system packages, and then these will pull from PyPI or CPAN only those modules which aren't installed. This speeds up builds and uses the standard packaged modules where possible. This is also more reliable than getting random compile errors from CPAN as libraries update and introduce bugs or needing to install too many dev libraries
