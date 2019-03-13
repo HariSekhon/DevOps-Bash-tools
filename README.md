@@ -13,7 +13,7 @@ Shell Script & Utility library used by all my other [GitHub repos](https://githu
   - install scripts for Jython and build tools like Gradle and SBT for when Linux distros don't provide packaged versions or where the packaged versions are too old
   - Git branch management
   - utility scripts used from other scripts
-  
+
 - Bash utility libraries full of functions for Docker, environment, CI detection, port and HTTP url availability content checks etc.
 
 - Programming language linting:
