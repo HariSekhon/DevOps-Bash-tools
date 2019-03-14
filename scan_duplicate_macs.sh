@@ -17,8 +17,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-. "$srcdir/utils.sh"
-
 usage(){
     if [ -n "$*" ]; then
         echo "$@"
