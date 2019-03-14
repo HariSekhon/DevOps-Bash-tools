@@ -32,6 +32,8 @@ Useful for finding duplicate MACs and also finding hosts behind a VIP or similar
 
 Uses fping to ping all addresses on all local subnets and then checks the local arp cache
 
+Caveat: won't find a VIP on the local host this script is run on
+
 usage: ${0##*/}
 
 EOF
