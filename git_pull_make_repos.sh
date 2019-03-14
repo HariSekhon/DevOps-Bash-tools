@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -eu
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="`dirname $0`"
 
@@ -25,9 +25,6 @@ build="${BUILD:-build}"
 opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
-fi
-if [ -z "${NO_CLEAN:-}" ]; then
-    opts="$opts clean"
 fi
 
 repolist="${@:-${REPOS:-}}"
@@ -61,5 +58,12 @@ for repo in $repolist; do
     fi
     pushd "$repo_dir"
     $make $build $opts
+    if [ -f /.dockerenv ]; then
+        for x in system-packages-remove clean deep-clean; do
+            if grep -q "^$x:" Makefile bash-tools/Makefile.in 2>/dev/null; then
+                $make "$x"
+            fi
+        done
+    fi
     popd
 done
