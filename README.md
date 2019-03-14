@@ -54,5 +54,7 @@ Currently utilized in the following GitHub repos:
 * [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) - 25+ command line tools
 * [Perl Lib](https://github.com/harisekhon/lib) - Perl utility library
 * [PyLib](https://github.com/harisekhon/pylib) - Python utility library
+* [Lib-Java](https://github.com/harisekhon/lib-java) - Java utility library
+* [Nagios Plugin Kafka](https://github.com/harisekhon/nagios-plugin-kafka) - Kafka Nagios Plugin written in Scala with Kerberos support
 
 [Pre-built Docker images](https://hub.docker.com/u/harisekhon/) are available for those repos (which include this one as a submodule) and the ["docker available"](https://hub.docker.com/r/harisekhon/centos-github/)  icon above links to an [uber image](https://hub.docker.com/r/harisekhon/centos-github/) which contains all my github repos pre-built. There are [Centos](https://hub.docker.com/r/harisekhon/centos-github/), [Debian](https://hub.docker.com/r/harisekhon/debian-github/) and [Ubuntu](https://hub.docker.com/r/harisekhon/ubuntu-github/) versions of this uber Docker image containing all repos.
