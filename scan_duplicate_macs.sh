@@ -56,7 +56,7 @@ fi
 
 for network in $networks; do
     echo "scanning network $network..." >&2
-    fping -q -r 0 -B 1 -g "$network" || :
+    fping -q -r 0 -c 1 -B 1 -g "$network" || :
 done
 
 # Linux
