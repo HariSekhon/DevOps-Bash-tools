@@ -23,7 +23,7 @@ if [ "${LDAP_SSL:-}" = 1 ]; then
     uri="ldaps://$server"
 fi
 
-domain="$(hostname -f | sed 's/^[^`.]*\.//')"
+domain="${DOMAIN:-$(hostname -f | sed 's/^[^`.]*\.//')}"
 
 base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
 
@@ -35,11 +35,52 @@ PASS="${LDAP_PASSWORD:-${PASSWORD:-${PASS:-}}}"
 #    read -s -p "password: " PASS
 #fi
 
+usage(){
+    if [ -n "$*" ]; then
+        echo "$@"
+        echo
+    fi
+    cat <<EOF
+
+Queries ldap easily using ldapsearch by inferring many common parameters to remove tediousness
+
+Usually only requires setting one or two environment variables, eg. in .bashrc for fast and easy future ldapsearch queries, useful for systems administrators often doing ldap searches or those of use who forget these switches even after over a decade of using ldapsearch
+
+\$LDAP_SERVER - defaults to localhost. This and \$LDAP_SSL are probably the minimum you need to set
+\$LDAP_SSL - optional, enables SSL
+
+\$LDAP_BASE_DN - infers from local host's domain portion of FQDN (or \$DOMAIN if set)
+
+\$LDAP_USER - defaults to using \$USER@\$DOMAIN. \$USER is usually set, \$DOMAIN is found from 'hostname -f'
+\$LDAP_PASSWORD / \$PASSWORD - prompts if not found
+
+
+Caveat:
+
+ ${0##*/} <dn> - DN based search will not work with ldapsearch - you must use the DN as the \$LDAP_BASE_DN instead of search filter
+
+
+usage: ${0##*/} <ldap_filter> [<attribute_filter>]
+
+
+EOF
+    exit 3
+}
+
+for x in $@; do
+    case $x in
+    -h|--help)  usage
+                ;;
+           -*)  usage "unknown argument: $x"
+                ;;
+    esac
+done
+
 if [ "${LDAP_KRB5:-}" = 1 ]; then
     auth_opts="-Y GSSAPI"
 else
     auth_opts="-x -D $user"
-    if [ -z "${PASS:-}" ]; then
+    if [ -n "${PASS:-}" ]; then
         auth_opts="$auth_opts -w $PASS"
     else
         auth_opts="$auth_opts -W"
