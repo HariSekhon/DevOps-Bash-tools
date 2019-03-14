@@ -28,7 +28,7 @@ Recurses AD LDAP for all groups for which a given user DN belongs
 
 Dumps LDAP group objects, follows group nesting
 
-Uses Microsoft AD LDAP extension, so is not portable to other LDAP servers
+Uses Microsoft Active Directory LDAP extension, so is not portable to other LDAP servers
 
 See the python version in the DevOps Python Tools repo for a more generalized version with nicer control and output
 
