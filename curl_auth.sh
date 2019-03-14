@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Way of sending username + password without putting them on the command line for environments that log every command and every argument to prevent your password being exposed in logs
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
