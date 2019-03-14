@@ -29,13 +29,13 @@ date '+%F %T  Starting...'
 start_time="$(date +%s)"
 echo
 
-if type yum 2>&1; then
+if type yum 2>/dev/null; then
     curl -L https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
     yum install -y java-sdk
     yum install -y --nogpgcheck sbt
-elif type apt-get 2>&1; then
+elif type apt-get 2>/dev/null; then
     apt-get update
-    apt-get install -y openjdk-8-jdk scala
+    apt-get install -y openjdk-8-jdk scala gnupg2
     echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
     apt-get install -y --no-install-recommends apt-transport-https
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
@@ -70,7 +70,7 @@ date '+%F %T  Finished'
 echo
 end_time="$(date +%s)"
 # if start and end time are the same let returns exit code 1
-let time_taken=$end_time-$start_time || :
+time_taken=$(expr $end_time - $start_time) || :
 echo "Completed in $time_taken secs"
 echo
 echo "=================================================="
