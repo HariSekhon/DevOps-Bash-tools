@@ -115,7 +115,7 @@ for validate_program in "$pytools_dir"/validate_*.py; do
         # exclude all of the above which are checked separately with different rules
         # exclude kafka nagios plugin's /target/resolution-cache/check_kafka/check_kafka_2.10/0.1.0/resolved.xml.properties
         # do not quote --exclude arg - the quotes will be interpreted literally and would require an eval
-        opts=' --exclude zookeeper-.*/.*contrib/rest/conf/log4j\.properties|\.xml\.properties|alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties'
+        opts=' --exclude zookeeper-.*/.*contrib/rest/conf/log4j\.properties|\.xml\.properties|alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties|\.gradle/.+/gc.properties'
 
     fi
     echo "${validate_program}$opts: "
