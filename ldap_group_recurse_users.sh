@@ -26,7 +26,7 @@ usage(){
 
 Recurses AD LDAP for all users which are members of a given group DN
 
-Dumps LDAP objects for all users, follows group nesting
+Dumps LDAP user objects, follows group nesting
 
 Uses Microsoft AD LDAP extension, so is not portable to other LDAP servers
 
