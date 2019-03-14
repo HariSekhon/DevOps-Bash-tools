@@ -66,6 +66,7 @@ arp -a |
 # incomplete seems to only appear on Linux arp
 #awk '!/incomplete/{print $3}' |
 awk '{print $4}' |
+grep -vi "ff:ff:ff:ff:ff:ff" |
 sort |
 uniq -d |
 while read mac; do
