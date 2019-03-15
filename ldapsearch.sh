@@ -71,8 +71,6 @@ for x in $@; do
     case $x in
     -h|--help)  usage
                 ;;
-           -*)  usage "unknown argument: $x"
-                ;;
     esac
 done
 
