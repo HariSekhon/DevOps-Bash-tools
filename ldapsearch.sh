@@ -40,6 +40,7 @@ usage(){
         echo "$@" >&2
         echo >&2
     fi
+    script="${0##*/}"
     cat >&2 <<EOF
 
 Queries ldap easily using ldapsearch by inferring many common parameters to remove tediousness
@@ -57,10 +58,10 @@ Usually only requires setting one or two environment variables, eg. in .bashrc f
 
 Caveat:
 
- ${0##*/} <dn> - DN based search will not work with ldapsearch - you must use the DN as the \$LDAP_BASE_DN instead of search filter
+  $script <dn> - DN based search will not work with ldapsearch - you must use the DN as the \$LDAP_BASE_DN instead of search filter
 
 
-usage: ${0##*/} <ldap_filter> [<attribute_filter>]
+usage: $script <ldap_filter> [<attribute_filter>]
 
 
 EOF
