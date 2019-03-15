@@ -58,6 +58,6 @@ fi
 group_dn="$1"
 shift
 
-"$srcdir/ldapsearch.sh" "(&(|(objectClass=user)(objectClass=group))(member:1.2.840.113556.1.4.1941:=$group_dn))" $@
-#"$srcdir/ldapsearch.sh" "(&(objectClass=user)(member:1.2.840.113556.1.4.1941:=$group_dn))" $@
-#"$srcdir/ldapsearch.sh" "(member:1.2.840.113556.1.4.1941:=$group_dn)" $@
+"$srcdir/ldapsearch.sh" "(&(|(objectClass=user)(objectClass=group))(memberOf:1.2.840.113556.1.4.1941:=$group_dn))" $@
+#"$srcdir/ldapsearch.sh" "(&(objectClass=user)(memberOf:1.2.840.113556.1.4.1941:=$group_dn))" $@
+#"$srcdir/ldapsearch.sh" "(memberOf:1.2.840.113556.1.4.1941:=$group_dn)" $@
