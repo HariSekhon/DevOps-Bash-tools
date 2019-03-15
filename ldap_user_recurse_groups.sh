@@ -37,6 +37,11 @@ https://github.com/harisekhon/devops-python-tools
 
 usage: ${0##*/} <user_dn> [<attribute_filter>]
 
+./ldap_user_recurse_groups.sh CN=hari,OU=Users,DC=myDomain,DC=com
+
+Example: if you don't know the DN and just want to search on any attribute such as CN, UID or sAMAccountName, then this is useful
+
+./ldap_user_recurse_groups.sh $(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print $2; exit}')
 
 EOF
     exit 3
