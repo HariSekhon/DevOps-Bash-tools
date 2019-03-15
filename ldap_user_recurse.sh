@@ -43,7 +43,7 @@ $script CN=hari,OU=Users,DC=myDomain,DC=com
 
 Example: if you don't know the DN and just want to search on any attribute such as CN, UID or sAMAccountName, then this is useful
 
-$script $(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print $2; exit}')
+$script \$(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print \$2; exit}')
 
 EOF
     exit 3
