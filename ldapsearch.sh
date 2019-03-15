@@ -37,10 +37,10 @@ PASS="${LDAP_PASSWORD:-${PASSWORD:-${PASS:-}}}"
 
 usage(){
     if [ -n "$*" ]; then
-        echo "$@"
-        echo
+        echo "$@" >&2
+        echo >&2
     fi
-    cat <<EOF
+    cat >&2 <<EOF
 
 Queries ldap easily using ldapsearch by inferring many common parameters to remove tediousness
 
