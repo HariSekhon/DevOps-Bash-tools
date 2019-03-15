@@ -48,16 +48,18 @@ until [ $# -lt 1 ]; do
     shift || :
 done
 
-if [ "$(uname -s)" = "Darwin" ]; then
-    networks="$(netstat -rn | awk '/link#/{print $1}' | grep -e '[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+')"
-else # assume Linux
-    networks="$(ip addr | awk '/inet /{print $2}' | grep -v '^127\.')"
-fi
+if [ -n "${NOSCAN:-}" ]; then
+    if [ "$(uname -s)" = "Darwin" ]; then
+        networks="$(netstat -rn | awk '/link#/{print $1}' | grep -e '[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+')"
+    else # assume Linux
+        networks="$(ip addr | awk '/inet /{print $2}' | grep -v '^127\.')"
+    fi
 
-for network in $networks; do
-    echo "scanning network $network..." >&2
-    fping -q -r 0 -c 1 -B 1 -g "$network" >&2 || :
-done
+    for network in $networks; do
+        echo "scanning network $network..." >&2
+        fping -q -r 0 -c 1 -B 1 -g "$network" >&2 || :
+    done
+fi
 
 # Linux
 #arp -e |
