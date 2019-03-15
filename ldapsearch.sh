@@ -91,4 +91,4 @@ if [ "${DEBUG:-}" = 1 ]; then
     echo
     sed "s/-w[[:space:]]\+[^[:space:]]\+/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'"
 fi
-ldapsearch -H "$uri" -b "$base_dn" $auth_opts "$@"
+ldapsearch -H "$uri" -b "$base_dn" -o ldif-wrap=no $auth_opts "$@"
