@@ -22,6 +22,8 @@ usage(){
         echo "$@" >&2
         echo >&2
     fi
+    # multiple ${0##*/} inside here document causes usage to not be rendered, must be a bash bug
+    script="${0##*/}"
     cat >&2 <<EOF
 
 Recurses AD LDAP for all groups for which a given user DN belongs
@@ -35,13 +37,13 @@ See the python version in the DevOps Python Tools repo for a more generalized ve
 https://github.com/harisekhon/devops-python-tools
 
 
-usage: ${0##*/} <user_dn> [<attribute_filter>]
+usage: $script <user_dn> [<attribute_filter>]
 
-${0##*/} CN=hari,OU=Users,DC=myDomain,DC=com
+$script CN=hari,OU=Users,DC=myDomain,DC=com
 
 Example: if you don't know the DN and just want to search on any attribute such as CN, UID or sAMAccountName, then this is useful
 
-${0##*/} $(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print $2; exit}')
+$script $(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print $2; exit}')
 
 EOF
     exit 3
