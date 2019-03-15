@@ -19,10 +19,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage(){
     if [ -n "$*" ]; then
-        echo "$@"
-        echo
+        echo "$@" >&2
+        echo >&2
     fi
-    cat <<EOF
+    cat >&2 <<EOF
 
 Recurses AD LDAP for all users which are members of a given group DN
 
