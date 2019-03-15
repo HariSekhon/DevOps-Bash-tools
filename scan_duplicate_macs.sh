@@ -63,9 +63,11 @@ done
 #arp -e |
 # BSD - more portable, both Linux and Mac support this
 arp -a |
-# incomplete seems to only appear on Linux arp
+# incomplete seems to only appear on arp on Linux, for both -a and -e formats
+# Linux arp -e
 #awk '!/incomplete/{print $3}' |
-awk '{print $4}' |
+# BSD arp -a (works on Linux too)
+awk '!/incomplete/{print $4}' |
 grep -vi "ff:ff:ff:ff:ff:ff" |
 sort |
 uniq -d |
