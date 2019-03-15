@@ -19,10 +19,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage(){
     if [ -n "$*" ]; then
-        echo "$@"
-        echo
+        echo "$@" >&2
+        echo >&2
     fi
-    cat <<EOF
+    cat >&2 <<EOF
 
 Recurses AD LDAP for all groups for which a given user DN belongs
 
@@ -37,11 +37,11 @@ https://github.com/harisekhon/devops-python-tools
 
 usage: ${0##*/} <user_dn> [<attribute_filter>]
 
-./ldap_user_recurse_groups.sh CN=hari,OU=Users,DC=myDomain,DC=com
+${0##*/} CN=hari,OU=Users,DC=myDomain,DC=com
 
 Example: if you don't know the DN and just want to search on any attribute such as CN, UID or sAMAccountName, then this is useful
 
-./ldap_user_recurse_groups.sh $(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print $2; exit}')
+${0##*/} $(./ldapsearch.sh cn=hari dn | awk '/^dn: /{print $2; exit}')
 
 EOF
     exit 3
@@ -50,8 +50,6 @@ EOF
 for x in $@; do
     case $x in
     -h|--help)  usage
-                ;;
-           -*)  usage "unknown argument: $x"
                 ;;
     esac
 done
