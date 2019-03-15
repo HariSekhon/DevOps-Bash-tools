@@ -40,6 +40,7 @@ usage(){
         echo "$@" >&2
         echo >&2
     fi
+    # multiple ${0##*/} inside here document causes usage to not be rendered, must be a bash bug
     script="${0##*/}"
     cat >&2 <<EOF
 
