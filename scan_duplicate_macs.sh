@@ -48,7 +48,7 @@ until [ $# -lt 1 ]; do
     shift || :
 done
 
-if [ -n "${NOSCAN:-}" ]; then
+if [ -z "${NOSCAN:-}" ]; then
     if [ "$(uname -s)" = "Darwin" ]; then
         networks="$(netstat -rn | awk '/link#/{print $1}' | grep -e '[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+\.[[:digit:]]\+')"
     else # assume Linux
