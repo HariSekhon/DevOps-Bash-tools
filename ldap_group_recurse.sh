@@ -24,9 +24,9 @@ usage(){
     fi
     cat >&2 <<EOF
 
-Recurses AD LDAP for all users which are members of a given group DN
+Recurses AD LDAP for all users and groups which are members of a given group DN
 
-Dumps LDAP user objects, follows group nesting
+Dumps LDAP user and group objects, follows group nesting
 
 Uses Microsoft Active Directory LDAP extension, so is not portable to other LDAP servers
 
