@@ -44,7 +44,7 @@ fi
 for pkg in apk deb rpm brew; do
     # don't check lib and pylib at the same time because they will have duplicates between them
     for lib in lib pylib; do
-        requirements_files="$(find . -maxdepth 3 -name "$pkg-packages*.txt" | grep -v "/$lib/" || :)"
+        requirements_files="$(find . -maxdepth 3 -name "$pkg-packages*.txt" | grep -ve "/$lib/" -e "/bash-tools/" || :)"
 
         if [ -n "$requirements_files" ]; then
             echo "$pkg requirements files found: "$requirements_files
