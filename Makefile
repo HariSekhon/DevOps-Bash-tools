@@ -14,8 +14,8 @@
 include Makefile.in
 
 .PHONY: build
-build:
-	echo Nothing to build	
+build: system-packages
+	:
 
 .PHONY: test
 test:
