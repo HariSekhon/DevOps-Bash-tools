@@ -57,6 +57,15 @@ quick:
 #	git submodule init
 #	git submodule update --recursive
 
+.PHONY: btest
+btest: bash-test
+	:
+
+.PHONY: bash-test
+bash-test:
+	@if [ -f bash-tools/all.sh ]; then bash-tools/all.sh; fi
+	@if [ -f all.sh ]; then ./all.sh; fi
+
 .PHONY: push
 push:
 	git push
