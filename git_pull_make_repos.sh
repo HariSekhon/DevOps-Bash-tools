@@ -48,6 +48,16 @@ if [ -z "${JAVA_HOME:-}" ]; then
     fi
 fi
 
+if type yum &>/dev/null; then
+    yum install -y git make
+elif type apt-get &>/dev/null; then
+    apt-get update
+    apt-get install -y --no-install-recommends git make
+elif type apk &>/dev/null; then
+    apk update
+    apk add git make
+fi
+
 for repo in $repolist; do
     if ! echo "$repo" | grep -q "/"; then
         repo="harisekhon/$repo"
