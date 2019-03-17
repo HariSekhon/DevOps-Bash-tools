@@ -20,7 +20,7 @@ srcdir="`dirname $0`"
 git_url="${GIT_URL:-https://github.com}"
 
 make="${MAKE:-make}"
-build="${BUILD:-update}"
+build="${BUILD:-build}"
 
 opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
@@ -67,6 +67,8 @@ for repo in $repolist; do
         git clone "$git_url/$repo"
     fi
     pushd "$repo_dir"
+    git pull
+    git submodule update --init
     $make $build $opts
     if [ -f /.dockerenv ]; then
         for x in system-packages-remove clean deep-clean; do
