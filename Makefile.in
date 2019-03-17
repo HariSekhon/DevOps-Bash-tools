@@ -12,6 +12,12 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+ifneq ("$(wildcard bash-tools)", "")
+	BASH_TOOLS := "bash-tools"
+else
+	BASH_TOOLS := "."
+endif
+
 export PATH := $(PATH):/usr/local/bin
 
 CPANM = cpanm
@@ -63,8 +69,7 @@ btest: bash-test
 
 .PHONY: bash-test
 bash-test:
-	@if [ -f bash-tools/all.sh ]; then bash-tools/all.sh; fi
-	@if [ -f all.sh ]; then ./all.sh; fi
+	$(BASH_TOOLS)/all.sh
 
 .PHONY: push
 push:
@@ -113,13 +118,13 @@ apk-packages:
 apk-packages-perl:
 	for x in apk-packages-perl.txt apk-packages-perl-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apk-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 	for x in apk-packages-cpan.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apk-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -127,12 +132,12 @@ apk-packages-perl:
 apk-packages-python:
 	for x in apk-packages-python.txt apk-packages-python-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apk-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	for x in apk-packages-pip.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apk-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -141,13 +146,13 @@ apt-packages:
 	#for x in deb-packages{,-perl,-python}{,-dev}.txt; do \
 	for x in deb-packages.txt deb-packages-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apt-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	#for x in deb-packages-{optional,cpan,pip}.txt; do \
 	for x in deb-packages-optional.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apt-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -155,12 +160,12 @@ apt-packages:
 apt-packages-perl:
 	for x in deb-packages-perl.txt deb-packages-perl-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apt-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	for x in deb-packages-cpan.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apt-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -168,29 +173,28 @@ apt-packages-perl:
 apt-packages-python:
 	for x in deb-packages-python.txt deb-packages-python-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apt-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	for x in deb-packages-pip.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apt-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
 .PHONY: yum-packages
 yum-packages:
-	if [ -f bash-tools/install_epel_repo.sh ]; then bash-tools/install_epel_repo.sh; fi
-	if [ -f install_epel_repo.sh ]; then ./install_epel_repo.sh; fi
+	$(BASH_TOOLS)/install_epel_repo.sh
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages.txt rpm-packages-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/yum-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	for x in rpm-packages-optional.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 bash-tools/yum-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -199,12 +203,12 @@ yum-packages-perl:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages-perl.txt rpm-packages-perl-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/yum-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	for x in rpm-packages-cpan.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 bash-tools/yum-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -213,19 +217,19 @@ yum-packages-python:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages-python.txt rpm-packages-python-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/yum-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	for x in rpm-packages-pip.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 bash-tools/yum-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
 .PHONY: homebrew-packages
 homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
-	if test -f setup/brew-packages.txt; then NO_FAIL=1 bash-tools/brew-install-packages.sh setup/brew-packages.txt; fi
+	if test -f setup/brew-packages.txt; then NO_FAIL=1 $(BASH_TOOLS)/brew-install-packages.sh setup/brew-packages.txt; fi
 
 .PHONY: system-packages-remove
 system-packages-remove:
@@ -238,7 +242,7 @@ apk-packages-remove:
 	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apk-packages-remove; popd; done; :
 	for x in apk-packages-{,perl-,python-}dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 bash-tools/apk-remove-packages.sh "setup/$xx"; \
+			NO_FAIL=1 $(BASH_TOOLS)/apk-remove-packages.sh "setup/$xx"; \
 		fi; \
 	done
 	$(SUDO) rm -fr /var/cache/apk/*
@@ -248,7 +252,7 @@ apt-packages-remove:
 	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) apt-packages-remove; popd; done; :
 	for x in deb-packages-{,perl-,python-}dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 bash-tools/apt-remove-packages.sh "setup/$xx"; \
+			NO_FAIL=1 $(BASH_TOOLS)/apt-remove-packages.sh "setup/$xx"; \
 		fi; \
 	done
 
@@ -257,17 +261,17 @@ yum-packages-remove:
 	for x in lib pylib lib-java; do test -f "$$x" && pushd "$$X" && $(MAKE) yum-packages-remove; popd; done; :
 	for x in rpm-packages-{,perl-,python-}dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 bash-tools/yum-remove-packages.sh "setup/$xx"; \
+			NO_FAIL=1 $(BASH_TOOLS)/yum-remove-packages.sh "setup/$xx"; \
 		fi; \
 	done
 
 .PHONY: cpan
 cpan:
-	find . -name 'cpan-requirements*.txt' | xargs bash-tools/perl_cpanm_install_if_absent.sh
+	find . -name 'cpan-requirements*.txt' | xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
 
 .PHONY: pip
 pip:
-	find . -name 'requirements.txt' | xargs bash-tools/python_pip_install_if_absent.sh
+	find . -name 'requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
 .PHONY: sonar
 sonar:
@@ -354,16 +358,16 @@ mount-ubuntu: docker-mount-ubuntu
 # For quick testing only - for actual Dockerfile builds see https://hub.docker.com/u/harisekhon and Dockerfiles source repo https://github.com/harisekhon/Dockerfiles
 .PHONY: docker-alpine
 docker-alpine:
-	bash-tools/docker_mount_build_exec.sh alpine
+	$(BASH_TOOLS)/docker_mount_build_exec.sh alpine
 
 .PHONY: docker-debian
 docker-debian:
-	bash-tools/docker_mount_build_exec.sh debian
+	$(BASH_TOOLS)/docker_mount_build_exec.sh debian
 
 .PHONY: docker-centos
 docker-centos:
-	bash-tools/docker_mount_build_exec.sh centos
+	$(BASH_TOOLS)/docker_mount_build_exec.sh centos
 
 .PHONY: docker-ubuntu
 docker-ubuntu:
-	bash-tools/docker_mount_build_exec.sh ubuntu
+	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
