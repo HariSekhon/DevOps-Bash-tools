@@ -13,9 +13,9 @@
 #
 
 ifneq ("$(wildcard bash-tools)", "")
-	BASH_TOOLS := "bash-tools"
+	BASH_TOOLS := bash-tools
 else
-	BASH_TOOLS := "."
+	BASH_TOOLS := .
 endif
 
 export PATH := $(PATH):/usr/local/bin
