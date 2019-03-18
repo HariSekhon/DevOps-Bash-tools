@@ -58,10 +58,9 @@ endif
 quick:
 	QUICK=1 $(MAKE) build
 
-#.PHONY: submodules
-#submodules:
-#	git submodule init
-#	git submodule update --recursive
+.PHONY: submodules
+submodules:
+	git submodule update --init --recursive
 
 .PHONY: btest
 btest: bash-test
@@ -75,12 +74,8 @@ bash-test:
 push:
 	git push
 
-.PHONY: common
-common: system-packages submodules
-       :
-
 .PHONY: system-packages
-system-packages:
+system-packages: submodules
 	if [ -x /sbin/apk ];        then $(MAKE) apk-packages; fi
 	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages; fi
 	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages; fi
