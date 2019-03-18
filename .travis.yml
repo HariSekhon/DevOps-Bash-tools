@@ -13,8 +13,7 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
-# there's no 'language: bash'
-language: generic
+language: bash
 
 sudo: false
 
