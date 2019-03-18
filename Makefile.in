@@ -283,7 +283,7 @@ update2: update-no-recompile
 .PHONY: update-no-recompile
 update-no-recompile:
 	git pull
-	git submodule update --init --recursive
+	$(MAKE) submodules
 
 .PHONY: update-submodules
 update-submodules:
