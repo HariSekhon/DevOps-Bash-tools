@@ -118,7 +118,7 @@ apk-packages-perl:
 	done
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 	for x in apk-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(SUDO_PERL)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -131,7 +131,7 @@ apk-packages-python:
 		fi; \
 	done
 	for x in apk-packages-pip.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(SUDO_PIP)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -159,7 +159,7 @@ apt-packages-perl:
 		fi; \
 	done
 	for x in deb-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(SUDO_PERL)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -172,7 +172,7 @@ apt-packages-python:
 		fi; \
 	done
 	for x in deb-packages-pip.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(SUDO_PIP)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -202,7 +202,7 @@ yum-packages-perl:
 		fi; \
 	done
 	for x in rpm-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(SUDO_PERL)" ]; then \
 			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -216,7 +216,7 @@ yum-packages-python:
 		fi; \
 	done
 	for x in rpm-packages-pip.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(SUDO_PIP)" ]; then \
 			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
