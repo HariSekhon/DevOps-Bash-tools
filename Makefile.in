@@ -26,6 +26,8 @@ SUDO := sudo
 SUDO_PIP := sudo -H
 SUDO_PERL := sudo
 
+PYTHON_VIRTUALENV :=
+
 ifdef PERLBREW_PERL
 	# can't put this here otherwise gets error - "commands commence before first target.  Stop."
 	#@echo "Perlbrew environment detected, not calling sudo"
@@ -39,9 +41,11 @@ endif
 ifdef VIRTUAL_ENV
 	#@echo "Virtual Env / Conda detected, not calling sudo"
 	SUDO_PIP :=
+	PYTHON_VIRTUALENV := 1
 endif
 ifdef CONDA_DEFAULT_ENV
 	SUDO_PIP :=
+	PYTHON_VIRTUALENV := 1
 endif
 
 # must come after to reset SUDO_PERL/SUDO_PIP to blank if root
@@ -58,10 +62,9 @@ endif
 quick:
 	QUICK=1 $(MAKE) build
 
-#.PHONY: submodules
-#submodules:
-#	git submodule init
-#	git submodule update --recursive
+.PHONY: submodules
+submodules:
+	git submodule update --init --recursive
 
 .PHONY: btest
 btest: bash-test
@@ -75,12 +78,8 @@ bash-test:
 push:
 	git push
 
-.PHONY: common
-common: system-packages submodules
-       :
-
 .PHONY: system-packages
-system-packages:
+system-packages: submodules
 	if [ -x /sbin/apk ];        then $(MAKE) apk-packages; fi
 	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages; fi
 	if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages; fi
@@ -123,7 +122,7 @@ apk-packages-perl:
 	done
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 	for x in apk-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(PERLBREW_PERL)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -136,7 +135,7 @@ apk-packages-python:
 		fi; \
 	done
 	for x in apk-packages-pip.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(PYTHON_VIRTUALENV)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -164,7 +163,7 @@ apt-packages-perl:
 		fi; \
 	done
 	for x in deb-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(PERLBREW_PERL)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -177,7 +176,7 @@ apt-packages-python:
 		fi; \
 	done
 	for x in deb-packages-pip.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(PYTHON_VIRTUALENV)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -207,7 +206,7 @@ yum-packages-perl:
 		fi; \
 	done
 	for x in rpm-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(PERLBREW_PERL)" ]; then \
 			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -221,7 +220,7 @@ yum-packages-python:
 		fi; \
 	done
 	for x in rpm-packages-pip.txt; do \
-		if [ -f "setup/$$x" ]; then \
+		if [ -f "setup/$$x" ] && [ -n "$(PYTHON_VIRTUALENV)" ]; then \
 			NO_FAIL=1 $(BASH_TOOLS)/yum-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -288,7 +287,7 @@ update2: update-no-recompile
 .PHONY: update-no-recompile
 update-no-recompile:
 	git pull
-	git submodule update --init --recursive
+	$(MAKE) submodules
 
 .PHONY: update-submodules
 update-submodules:
