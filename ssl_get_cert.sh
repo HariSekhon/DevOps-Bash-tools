@@ -32,6 +32,6 @@ for host in $@; do
     #    echo "ERROR connecting to $host_port"
     #    exit 1
     #fi
-    # sed returns 1 
+    # sed returns 1
     openssl s_client -connect "$host_port" </dev/null 2>/dev/null | sed -n '/BEGIN/,/END/p' || :
 done
