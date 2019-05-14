@@ -23,7 +23,8 @@ if [ "${LDAP_SSL:-}" = 1 ]; then
     uri="ldaps://$server"
 fi
 
-domain="${DOMAIN:-$(hostname -f | sed 's/^[^`.]*\.//')}"
+#domain="${DOMAIN:-$(hostname -f | sed 's/^[^`.]*\.//')}"
+domain="${DOMAIN:-$(hostname -d)}"
 
 base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
 
