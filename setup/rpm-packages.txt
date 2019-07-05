@@ -21,4 +21,5 @@ make
 parallel
 perl
 python
+shellcheck
 wget
