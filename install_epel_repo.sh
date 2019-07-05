@@ -22,18 +22,25 @@ if [ "${NO_FAIL:-}" ]; then
 fi
 
 if grep -qi "NAME=Fedora" /etc/*release; then
-    echo "Detected Fedora, skipping epel"
+    echo "Detected Fedora, skipping epel install..."
     exit 0
 fi
 
-if ! rpm -q epel-release; then
-    if ! yum repolist | grep -q '\<epel\>'; then
-        if ! yum install -y epel-release; then
-            rpm -q wget || yum install -y wget
-            major_version="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
-            wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
-            $SUDO rpm -ivh /tmp/epel.rpm
-            rm -f /tmp/epel.rpm;
-         fi
-    fi
+if rpm -q epel-release; then
+    echo "EPEL rpm is already installed, skipping..."
+    exit 0
+fi
+
+if ! yum repolist | grep -qi '\<epel\>'; then
+    # accounts for custom internal EPEL mirrors which should have epel in the name
+    echo "EPEL yum repo already detected in yum repolist, skipping..."
+    exit 0
+fi
+
+if ! yum install -y epel-release; then
+    rpm -q wget || yum install -y wget
+    major_version="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
+    wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
+    $SUDO rpm -ivh /tmp/epel.rpm
+    rm -f /tmp/epel.rpm;
 fi
