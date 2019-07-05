@@ -27,11 +27,13 @@ if grep -qi "NAME=Fedora" /etc/*release; then
 fi
 
 if ! rpm -q epel-release; then
-    if ! yum install -y epel-release; then
-        rpm -q wget || yum install -y wget
-        major_version="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
-        wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
-        $SUDO rpm -ivh /tmp/epel.rpm
-        rm -f /tmp/epel.rpm;
+    if ! yum repolist | grep -q '\<epel\>'; then
+        if ! yum install -y epel-release; then
+            rpm -q wget || yum install -y wget
+            major_version="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
+            wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
+            $SUDO rpm -ivh /tmp/epel.rpm
+            rm -f /tmp/epel.rpm;
+         fi
     fi
 fi
