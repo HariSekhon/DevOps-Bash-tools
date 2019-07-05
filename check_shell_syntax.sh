@@ -31,12 +31,15 @@ fi
 section "Shell Syntax Checks"
 
 check_shell_syntax(){
-    echo -n "checking shell syntax: $1"
+    echo -n "checking shell syntax: $1 "
+    if grep -q '#!/bin' "$1"; then
+        echo 'WARNING: #!/bin detected, consider using #!/usr/bin/env bash instead'
+    fi
     bash -n "$1"
     if which shellcheck &>/dev/null; then
         shellcheck "$1" || :
     fi
-    echo " => OK"
+    echo "=> OK"
 }
 
 recurse_dir(){
