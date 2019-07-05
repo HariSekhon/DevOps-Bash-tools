@@ -33,6 +33,9 @@ section "Shell Syntax Checks"
 check_shell_syntax(){
     echo -n "checking shell syntax: $1"
     bash -n "$1"
+    if which shellcheck &>/dev/null; then
+        shellcheck "$1" || :
+    fi
     echo " => OK"
 }
 
