@@ -18,15 +18,17 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+USERNAME="${USERNAME:-$USER}"
+
 if [ -z "${PASS:-}" ]; then
     read -s -p 'password: ' PASS
     echo
 fi
 
 # doesn't work
-#netrc_content="default login $USER password $PASS"
+#netrc_content="default login $USERNAME password $PASS"
 
 hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
-netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USER password $PASS"; done)"
+netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USERNAME password $PASS"; done)"
 
 curl --netrc-file <(cat <<< "$netrc_contents") "$@"
