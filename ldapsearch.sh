@@ -13,6 +13,15 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# USAGE: (will default to your $USER account, infer domain base and prompt for password)
+#
+#  ./ldapsearch.sh <search_query>
+#
+# to test a different account, eg. a service bind account, do
+#
+#  LDAP_USER=<dn_or_email> LDAP_PASSWORD=<password> ./ldapsearch.sh <search_query>
+
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
