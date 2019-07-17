@@ -15,6 +15,8 @@
 
 language: bash
 
+dist: trusty
+
 sudo: false
 
 notifications:
