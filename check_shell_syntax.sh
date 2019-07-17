@@ -51,6 +51,11 @@ recurse_dir(){
 
 start_time="$(start_timer)"
 
+if ! which shellcheck &>/dev/null; then
+    echo "WARNING: shellcheck not installed, will only do basic checks"
+    echo
+fi
+
 if [ $# -gt 0 ]; then
     for x in $@; do
         if [ -d "$x" ]; then
