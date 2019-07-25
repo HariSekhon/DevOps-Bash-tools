@@ -1,13 +1,13 @@
-Hari Sekhon - Bash Tools
-========================
+Hari Sekhon - DevOps Bash Tools
+===============================
 [![Build Status](https://travis-ci.org/HariSekhon/bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/bash-tools)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c61193dd7dcc418b85149bddf93362e4)](https://www.codacy.com/app/harisekhon/bash-tools)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-Shell Script & Utility library used by all my other [GitHub repos](https://github.com/harisekhon).
+Shell Scripts & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon).
 
-For more advanced Systems Administration scripts, see the repos listed at the bottom of the page.
+For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
 - Scripts - Linux systems administration scripts
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros (Redhat RHEL / CentOS / Fedora, Debian / Ubuntu, Alpine)
