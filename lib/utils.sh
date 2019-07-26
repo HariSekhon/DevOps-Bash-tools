@@ -58,7 +58,7 @@ hr3(){
 section(){
     name="$@"
     hr
-    "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@"
+    "$srcdir/../center.sh" "$@"
     hr
     if [ -n "${PROJECT:-}" ]; then
         echo "PROJECT: $PROJECT"
@@ -84,11 +84,11 @@ section3(){
 }
 
 hr2echo(){
-    "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@" 50
+    "$srcdir/../center.sh" "$@" 50
 }
 
 hr3echo(){
-    "`dirname ${BASH_SOURCE[0]}`/center.sh" "$@" 40
+    "$srcdir/../center.sh" "$@" 40
 }
 
 #set +o pipefail
