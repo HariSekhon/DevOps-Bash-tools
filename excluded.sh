@@ -13,9 +13,9 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# intended only to be sourced by utils.sh
+# intended only to be sourced by lib/utils.sh
 #
-# split from utils.sh as this is specific to this repo
+# split from lib/utils.sh as this is specific to this repo
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x

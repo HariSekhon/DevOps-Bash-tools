@@ -19,7 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-. "$srcdir/utils.sh"
+. "$srcdir/lib/utils.sh"
 
 if [ $# -eq 0 ]; then
     if [ -z "$(find "${1:-.}" -type f -iname '*.sh')" ]; then

@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-. "$srcdir/utils.sh"
+. "$srcdir/lib/utils.sh"
 
 tld_files="
 tlds-alpha-by-domain.txt

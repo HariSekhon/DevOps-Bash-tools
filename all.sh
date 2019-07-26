@@ -21,7 +21,7 @@ if [ -z "${PROJECT:-}" ]; then
     export PROJECT=bash-tools
 fi
 
-. "$srcdir/utils.sh"
+. "$srcdir/lib/utils.sh"
 . "$srcdir/docker.sh"
 
 section "Running Bash Tools ALL"

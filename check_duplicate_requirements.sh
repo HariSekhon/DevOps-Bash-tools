@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-. "$srcdir/utils.sh"
+. "$srcdir/lib/utils.sh"
 
 section "Checking for duplicate package dependency requirements"
 

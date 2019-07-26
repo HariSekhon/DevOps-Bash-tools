@@ -17,7 +17,7 @@ set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-. "$srcdir/utils.sh"
+. "$srcdir/lib/utils.sh"
 
 if [ -z "$(find "${1:-.}" -name build.gradle)" ]; then
     return 0 &>/dev/null || :
