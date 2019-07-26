@@ -32,7 +32,9 @@ SUDO=""
 if [ -n "${NO_FAIL:-}" ]; then
     if ! $SUDO yum remove -y $rpm_packages; then
         for package in $rpm_packages; do
-            rpm -q "$package" && $SUDO yum remove -y "$package" || :
+            if rpm -q "$package"; then
+                $SUDO yum remove -y "$package" || :
+            fi
         done
     fi
 else

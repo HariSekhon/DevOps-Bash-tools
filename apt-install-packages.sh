@@ -23,7 +23,7 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing Deb Packages listed in file(s): $@"
+echo "Installing Deb Packages listed in file(s): $*"
 
 export DEBIAN_FRONTEND=noninteractive
 

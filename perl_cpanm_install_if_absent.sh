@@ -16,7 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing CPAN Modules listed in file(s): $@"
+echo "Installing CPAN Modules listed in file(s): $*"
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then

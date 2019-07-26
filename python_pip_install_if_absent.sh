@@ -21,7 +21,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Installing Python PyPI Modules listed in file(s): $@"
+echo "Installing Python PyPI Modules listed in file(s): $*"
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
