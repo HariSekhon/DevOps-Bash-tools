@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 . "$srcdir2/lib/utils.sh"
-. "$srcdir2/docker.sh"
+. "$srcdir2/lib/docker.sh"
 
 srcdir="$srcdir2"
 

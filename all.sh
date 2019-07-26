@@ -22,7 +22,7 @@ if [ -z "${PROJECT:-}" ]; then
 fi
 
 . "$srcdir/lib/utils.sh"
-. "$srcdir/docker.sh"
+. "$srcdir/lib/docker.sh"
 
 section "Running Bash Tools ALL"
 

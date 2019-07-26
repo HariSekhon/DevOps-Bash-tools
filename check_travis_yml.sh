@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 . "$srcdir/lib/utils.sh"
-. "$srcdir/docker.sh"
+. "$srcdir/lib/docker.sh"
 
 #return 0 &>/dev/null || :
 #exit 0
