@@ -24,7 +24,7 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="-q"
 fi
 
-if [ "`uname -s`" = "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
     # needed to build Crypt::SSLeay
     export OPENSSL_INCLUDE=/usr/local/opt/openssl/include
     export OPENSSL_LIB=/usr/local/opt/openssl/lib

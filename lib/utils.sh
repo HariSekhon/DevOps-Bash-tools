@@ -372,6 +372,7 @@ run_test_versions(){
     local name="$1"
     local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
     local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
+    # shellcheck disable=SC2006
     local test_versions="$(eval ci_sample $`echo $VERSIONS`)"
     local test_versions_ordered="$test_versions"
     if [ -z "${NO_VERSION_REVERSE:-}" ]; then
@@ -407,7 +408,7 @@ run_test_versions(){
 # =================================
 
 timestamp(){
-    printf "%s" "`date '+%F %T'`  $*" >&2
+    printf "%s" "$(date '+%F %T')  $*" >&2
     [ $# -gt 0 ] && printf "\n" >&2
 }
 tstamp(){ timestamp "$@"; }

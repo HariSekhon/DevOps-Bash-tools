@@ -178,7 +178,9 @@ docker_compose_port(){
         exit 1
     fi
     set -u
+    # shellcheck disable=SC2006
     eval printf "\"$name -> $`echo ${env_var}_DEFAULT` => \""
+    # shellcheck disable=SC2006
     export $env_var="$(eval docker-compose port "$DOCKER_SERVICE" $`echo ${env_var}_DEFAULT` | sed 's/.*://')"
     if eval [ -z \$"$env_var" ]; then
         echo "ERROR: failed to get port mapping for $env_var"

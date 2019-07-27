@@ -30,7 +30,7 @@ if [ -n "${TRAVIS:-}" ]; then
 fi
 
 export LDFLAGS=""
-if [ "`uname -s`" = "Darwin" ]; then
+if [ "$(uname -s)" = "Darwin" ]; then
     export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
 fi
 

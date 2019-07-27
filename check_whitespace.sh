@@ -40,19 +40,19 @@ for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/whitespace_ignore.
     #grep -Hn '[[:space:]]\+$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_files_found+=1 || :
     #grep -EHn '[[:space:]]{4}\|[[:space:]]*$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_bar_files_found+=1 || :
     # \t aren't working inside character classes for some reason, embedding literal tabs instead
-    output=`grep -EHn '^[ 	]+$' "$filename" || :`
+    output="$(grep -EHn '^[ 	]+$' "$filename" || :)"
     if [ -n "$output" ]; then
         echo
         echo "$output"
         ((whitespace_only_files_found++))
     fi
-    output=`grep -EHn '[ 	]+$' "$filename" || :`
+    output="$(grep -EHn '[ 	]+$' "$filename" || :)"
     if [ -n "$output" ]; then
         echo
         echo "$output"
         let trailing_whitespace_files_found+=1
     fi
-    output=`grep -EHn '[ 	]{4}\|[ 	]*$' "$filename" || :`
+    output="$(grep -EHn '[ 	]{4}\|[ 	]*$' "$filename" || :)"
     if [ -n "$output" ]; then
         echo
         echo "$output"
