@@ -28,9 +28,14 @@ section "Checking TLDs for suspect chars"
 
 start_time="$(start_timer)"
 
+files="${@:-}"
+if [ -z "$files" ]; then
+    files="$(find . -iname "$tld_file")}"
+fi
+
 set +e
 for tld_file in $tld_files; do
-    for x in ${@:-$(find . -iname "$tld_file")}; do
+    for x in "$files"; do
         #isExcluded "$x" && continue
         echo "checking $x"
         if sed 's/#.*//;/^[[:space:]]$/d;s/[[:alnum:]-]//g' "$x" | grep -o '.'; then

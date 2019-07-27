@@ -62,7 +62,7 @@ for script in $scripts; do
     else
         echo "OK"
     fi
-done || failed=1
+done
 
 if [ "$failed_count" = 0 ]; then
     echo
