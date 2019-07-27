@@ -28,7 +28,7 @@ section "Ruby Syntax Checks"
 
 start_time="$(start_timer)"
 
-if which ruby &>/dev/null; then
+if command -v ruby &>/dev/null; then
     for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.rb' | sort); do
         isExcluded "$x" && continue
         echo -n "$x: "

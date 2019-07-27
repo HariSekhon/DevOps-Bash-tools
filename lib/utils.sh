@@ -287,7 +287,7 @@ trap_debug_env(){
 
 run++(){
     #if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
-        let run_count+=1
+        ((run_count++))
     #fi
 }
 
@@ -386,7 +386,7 @@ run_test_versions(){
             echo "NO TEST RUNS DETECTED!"
             exit 1
         fi
-        let total_run_count+=$run_count
+        ((total_run_count+=$run_count))
         time_taken "$version_start_time" "$name version '$version' tests completed in"
         echo
     done
@@ -427,8 +427,7 @@ time_taken(){
     tstamp "Finished"
     echo
     local end_time="$(date +%s)"
-    # if start and end time are the same let returns exit code 1
-    let time_taken=$end_time-$start_time || :
+    time_taken="$((end_time - start_time))"
     echo "$msg $time_taken secs"
     echo
 }
@@ -436,7 +435,7 @@ time_taken(){
 startupwait(){
     startupwait="${1:-30}"
     if is_CI; then
-        let startupwait*=2
+        ((startupwait*=2))
     fi
 }
 # trigger to set a sensible default if we forget, as it is used
@@ -488,7 +487,7 @@ when_ports_available(){
         SECONDS=0
         # bash will interpolate from string for correct numeric comparison and safer to quote vars
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            let try_number+=1
+            ((try_number++))
             for port in $ports; do
                 if ! nc -vw "$retry_interval" "$host" "$port" <<< '' &>/dev/null; then
                     timestamp "$try_number waiting for host '$host' port '$port'"
@@ -564,7 +563,7 @@ when_ports_down(){
         SECONDS=0
         # bash will interpolate from string for correct numeric comparison and safer to quote vars
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            let try_number+=1
+            ((try_number++))
             timestamp "$try_number trying host '$host' port(s) '$ports'"
             if eval $cmd; then
                 down=1
@@ -617,7 +616,7 @@ when_url_content(){
     # bash will interpolate from string for correct numeric comparison and safer to quote vars
     if which curl &>/dev/null; then
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            let try_number+=1
+            ((try_number++))
             timestamp "$try_number trying $url"
             if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
                 echo "URL content detected '$expected_regex'"
@@ -666,7 +665,7 @@ retry(){
     try_number=0
     SECONDS=0
     while true; do
-        let try_number+=1
+        ((try_number++))
         echo -n "try $try_number:  "
         set +e
         $cmd

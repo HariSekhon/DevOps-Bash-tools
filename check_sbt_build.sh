@@ -28,11 +28,11 @@ section "S B T"
 
 start_time="$(start_timer)"
 
-if which sbt &>/dev/null; then
+if command -v sbt &>/dev/null; then
     find "${1:-.}" -name build.sbt |
     grep -v '/target/' |
     sort |
-    while read build_sbt; do
+    while read -r build_sbt; do
         pushd "$(dirname "$build_sbt")" >/dev/null
         echo "Validating $build_sbt"
         echo q | sbt reload || exit $?

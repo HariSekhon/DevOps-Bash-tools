@@ -42,7 +42,7 @@ found=0
 
 while read line; do
     fgrep -x "$line" "$@"
-    let found+=1
+    ((found++))
 done < <(
     sed 's/#.*//;
          s/^[[:space:]]*//;

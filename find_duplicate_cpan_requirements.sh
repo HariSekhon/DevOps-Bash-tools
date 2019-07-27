@@ -42,7 +42,7 @@ found=0
 
 while read module; do
     grep "^$module\>" "$@"
-    let found+=1
+    ((found++))
 done < <(
     sed 's/#.*//;
          s/@.*//;

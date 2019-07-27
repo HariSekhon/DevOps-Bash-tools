@@ -29,10 +29,10 @@ section "Perl Syntax Checks"
 start_time="$(start_timer)"
 
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
-    echo '$NOSYNTAXCHECK environment variable set, skipping perl syntax checks'
+    echo "\$NOSYNTAXCHECK environment variable set, skipping perl syntax checks"
     echo
 elif [ -n "${QUICK:-}" ]; then
-    echo '$QUICK environment variable set, skipping perl syntax checks'
+    echo "\$QUICK environment variable set, skipping perl syntax checks"
     echo
 else
     filelist=$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t' | sort)
@@ -43,12 +43,14 @@ else
         fi
     done
     # to account for the semi colon
-    let max_len+=1
+    ((max_len++))
     for x in $filelist; do
         isExcluded "$x" && continue
         printf "%-${max_len}s " "$x:"
         #$perl -Tc $I_lib $x
         # -W too noisy
+        # shellcheck disable=SC2154
+        # $perl is set in perl.sh which is included from utils.sh
         $perl -I . -Tc "$x" 2>&1 | sed "s,^$x ,,"
     done
     time_taken "$start_time"

@@ -41,8 +41,7 @@ for script in $scripts; do
     date
     echo
     script_end_time="$(date +%s)"
-    # if start and end time are the same let returns exit code 1
-    let script_time_taken=$script_end_time-$script_start_time || :
+    script_time_taken="$((script_end_time - script_start_time))"
     echo "Completed in $script_time_taken secs"
 done
 

@@ -36,7 +36,7 @@ check_shell_syntax(){
         echo 'WARNING: #!''/bin/bash detected, consider using #!/usr/bin/env bash instead'
     fi
     bash -n "$1"
-    if which shellcheck &>/dev/null; then
+    if command -v shellcheck &>/dev/null; then
         shellcheck -e SC1090 "$1" || :
     fi
     echo "=> OK"
@@ -51,13 +51,13 @@ recurse_dir(){
 
 start_time="$(start_timer)"
 
-if ! which shellcheck &>/dev/null; then
+if ! command -v shellcheck &>/dev/null; then
     echo "WARNING: shellcheck not installed, will only do basic checks"
     echo
 fi
 
 if [ $# -gt 0 ]; then
-    for x in $@; do
+    for x in "$@"; do
         if [ -d "$x" ]; then
             recurse_dir "$x"
         else

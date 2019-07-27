@@ -25,7 +25,7 @@ fi
 i=0
 for x in $@; do
     a[$i]=$x
-    let i+=1
+    ((i++))
 done
 
 num=${#@}

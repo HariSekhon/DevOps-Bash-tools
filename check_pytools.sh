@@ -51,13 +51,13 @@ if [ $skip_checks = 1 ]; then
 fi
 
 echo -n "running on branch:  "
-git branch | grep ^*
+git branch | grep '^*'
 echo
 echo "running in dir:  $PWD"
 echo
 
 get_pytools(){
-    if [ -d "$srcdir/pytools_checks" -a -f "$srcdir/pytools_checks/Makefile" ]; then
+    if [ -f "$srcdir/pytools_checks/Makefile" ]; then
         pushd "$srcdir/pytools_checks"
         NOJAVA=1 make update
         popd
@@ -72,7 +72,7 @@ get_pytools(){
     fi
 }
 
-validate_yaml_path="$(which validate_yaml.py || :)"
+validate_yaml_path="$(command -v validate_yaml.py || :)"
 
 # Ensure we have these at the minimum, these validate_*.py will cover
 # most configuration files as we dynamically find and call any validation programs further down
@@ -83,7 +83,7 @@ fi
 echo
 echo "Running validation programs:"
 echo
-validate_yaml_path="$(which validate_yaml.py || :)"
+validate_yaml_path="$(command -v validate_yaml.py || :)"
 if [ -z "$validate_yaml_path" ]; then
     echo "Failed to find validate_yaml.py in \$PATH ($PATH)"
     exit 1
@@ -98,8 +98,8 @@ for validate_program in "$pytools_dir"/validate_*.py; do
         continue
     fi
     opts=""
-    if [ "${validate_program##*/}" = "validate_ini.py" -o \
-         "${validate_program##*/}" = "validate_properties.py" ]; then
+    if [ "${validate_program##*/}" = "validate_ini.py" ] ||
+       [ "${validate_program##*/}" = "validate_properties.py" ]; then
 
         # upstream zookeeper log4j.properties has duplicate keys in it's config
         echo "$validate_program --include 'zookeeper-.*/.*contrib/rest/conf/log4j\.properties' --ignore-duplicate-keys ."

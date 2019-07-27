@@ -69,8 +69,7 @@ echo
 date '+%F %T  Finished'
 echo
 end_time="$(date +%s)"
-# if start and end time are the same let returns exit code 1
-time_taken=$(expr $end_time - $start_time) || :
+time_taken="$((end_time - start_time))"
 echo "Completed in $time_taken secs"
 echo
 echo "=================================================="

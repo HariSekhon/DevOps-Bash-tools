@@ -29,11 +29,11 @@ section "P y L i n t"
 start_time="$(start_timer)"
 
 if [ -n "${NOPYLINT:-}" ]; then
-    echo '$NOPYLINT environment variable set, skipping PyLint error checks'
+    echo "\$NOPYLINT environment variable set, skipping PyLint error checks"
 elif [ -n "${QUICK:-}" ]; then
-    echo '$QUICK environment variable set, skipping PyLint error checks'
+    echo "\$QUICK environment variable set, skipping PyLint error checks"
 else
-    if which pylint &>/dev/null; then
+    if command -v pylint &>/dev/null; then
         # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
         #prog_list="
         for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
