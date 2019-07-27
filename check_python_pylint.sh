@@ -36,7 +36,7 @@ else
     if which pylint &>/dev/null; then
         # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
         #prog_list="
-        for x in $(find ${1:-.} -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
+        for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
             #echo "checking if $x is excluded"
             isExcluded "$x" && continue
             #echo "added $x for testing"

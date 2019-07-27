@@ -272,7 +272,7 @@ print_debug_env(){
         #eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
         # instead of just name_PORT, find all PORTS in environment and print them
         # while read line to preserve CASSANDRA_PORTS=7199 9042
-        env | egrep -- "^$name.*_" | grep -v -e 'DEFAULT=' -e 'VERSIONS=' | sort | while read env_var; do
+        env | grep -E -- "^$name.*_" | grep -v -e 'DEFAULT=' -e 'VERSIONS=' | sort | while read env_var; do
             # sed here to quote export CASSANDRA_PORTS=7199 9042 => export CASSANDRA_PORTS="7199 9042"
             eval echo "'export $env_var'" | sed 's/=/="/;s/$/"/'
         done
@@ -362,8 +362,8 @@ run_grep(){
     fi
     set -e
     # this must be egrep -i because (?i) modifier does not work
-    echo "> | tee /dev/stderr | egrep -qi '$egrep_pattern'"
-    echo "$output" | tee /dev/stderr | egrep -qi -- "$egrep_pattern"
+    echo "> | tee /dev/stderr | grep -Eqi '$egrep_pattern'"
+    echo "$output" | tee /dev/stderr | grep -Eqi -- "$egrep_pattern"
     set -o pipefail
     hr
 }
@@ -619,7 +619,7 @@ when_url_content(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             let try_number+=1
             timestamp "$try_number trying $url"
-            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | egrep -q -- "$expected_regex"; then
+            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
                 echo "URL content detected '$expected_regex'"
                 found=1
                 break

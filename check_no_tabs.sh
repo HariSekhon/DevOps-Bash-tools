@@ -29,16 +29,17 @@ progress_char='-'
 [ -n "${DEBUG:-}" ] && progress_char=''
 
 files_with_tabs=0
-for filename in $(find "${1:-.}" -type f | egrep -vf "$srcdir/whitespace_ignore.txt" -f "$srcdir/tabs_ignore.txt" | sort); do
+for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/whitespace_ignore.txt" -f "$srcdir/tabs_ignore.txt" | sort); do
     isExcluded "$filename" && continue
     [[ "$filename" =~ .*/check_(no_tabs|whitespace).sh$ ]] && continue
     printf "%s" "$progress_char"
     # \t aren't working inside character classes for some reason, embedding literal tabs instead
-    output=`egrep -Hn '	' "$filename" || :`
+    output="$(grep -EHn '	' "$filename" || :)"
     if [ -n "$output" ]; then
         echo
         echo "$output"
-        let files_with_tabs+=1
+        #let files_with_tabs+=1
+        ((files_with_tabs++))
     fi
 done
 echo

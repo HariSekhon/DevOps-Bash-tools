@@ -31,28 +31,28 @@ progress_char='-'
 whitespace_only_files_found=0
 trailing_whitespace_files_found=0
 trailing_whitespace_bar_files_found=0
-for filename in $(find "${1:-.}" -type f | egrep -vf "$srcdir/whitespace_ignore.txt" | sort); do
+for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/whitespace_ignore.txt" | sort); do
     isExcluded "$filename" && continue
     printf "%s" "$progress_char"
     # [[:space:]] matches \r in Windows files which we don't want, use explicit character class instead to exclude \r
     # works but not efficient
     #grep -Hn '^[[:space:]]\+$' <<< "$(tr -d '\r' < "$filename")" && let whitespace_only_files_found+=1 || :
     #grep -Hn '[[:space:]]\+$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_files_found+=1 || :
-    #egrep -Hn '[[:space:]]{4}\|[[:space:]]*$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_bar_files_found+=1 || :
+    #grep -EHn '[[:space:]]{4}\|[[:space:]]*$'  <<< "$(tr -d '\r' < "$filename")" && let trailing_whitespace_bar_files_found+=1 || :
     # \t aren't working inside character classes for some reason, embedding literal tabs instead
-    output=`egrep -Hn '^[ 	]+$' "$filename" || :`
+    output=`grep -EHn '^[ 	]+$' "$filename" || :`
     if [ -n "$output" ]; then
         echo
         echo "$output"
         let whitespace_only_files_found+=1
     fi
-    output=`egrep -Hn '[ 	]+$' "$filename" || :`
+    output=`grep -EHn '[ 	]+$' "$filename" || :`
     if [ -n "$output" ]; then
         echo
         echo "$output"
         let trailing_whitespace_files_found+=1
     fi
-    output=`egrep -Hn '[ 	]{4}\|[ 	]*$' "$filename" || :`
+    output=`grep -EHn '[ 	]{4}\|[ 	]*$' "$filename" || :`
     if [ -n "$output" ]; then
         echo
         echo "$output"

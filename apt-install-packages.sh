@@ -40,14 +40,19 @@ if [ -z "$deb_packages" ]; then
 fi
 
 SUDO=""
+# $EUID is not defined in posix sh
+# shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
+# shellcheck disable=SC2086
 [ -n "${NO_UPDATE:-}" ] || $SUDO apt-get $opts update
 
 if [ -n "${NO_FAIL:-}" ]; then
+    # shellcheck disable=SC2086
     for package in $deb_packages; do
         $SUDO apt-get install -y $opts "$package" || :
     done
 else
+    # shellcheck disable=SC2086
     $SUDO apt-get install -y $opts $deb_packages
 fi

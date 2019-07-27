@@ -51,8 +51,7 @@ cache_list="
 "
 
 if is_inside_docker; then
-    for x in \
-        ; do
+    for x in $cache_list; do
         for y in /root ~; do
             # This might fail if we're not running as root :-/
             # consider sudo'ing and find / -type d -name $x but that might find .cache under some app or something, although we should probably remove that too

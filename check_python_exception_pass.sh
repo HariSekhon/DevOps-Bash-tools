@@ -32,9 +32,9 @@ for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | s
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     [[ "$x" =~ /test/ ]] && echo -n '-' && continue
     echo -n '.'
-    if egrep -B3 -A1 '^[[:space:]]+\bpass\b' "$x" | egrep -q '^[^#]*\bexcept\b'; then
+    if grep -E -B3 -A1 '^[[:space:]]+\bpass\b' "$x" | grep -Eq '^[^#]*\bexcept\b'; then
         echo
-        egrep -HnB 5 -A1 '^[[:space:]]+\bpass\b' "$x" | egrep -5 '^[^#]*\bexcept\b'
+        grep -EHnB 5 -A1 '^[[:space:]]+\bpass\b' "$x" | grep -E -5 '^[^#]*\bexcept\b'
         echo
         echo
         echo "WARNING: $x contains 'pass'!! Check this code isn't being sloppy"

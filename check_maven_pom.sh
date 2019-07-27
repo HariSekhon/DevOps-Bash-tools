@@ -28,10 +28,10 @@ section "M a v e n"
 
 start_time="$(start_timer)"
 
-if which mvn &>/dev/null; then
+if command -v mvn &>/dev/null; then
     find "${1:-.}" -name pom.xml |
     grep -v '/target/' |
-    while read pom; do
+    while read -r pom; do
         echo "Validating $pom"
         mvn validate -f "$pom" || exit $?
         echo

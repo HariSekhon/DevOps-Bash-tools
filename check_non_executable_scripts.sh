@@ -39,7 +39,7 @@ ext_regex="(${ext_regex#|})$"
 set +o pipefail
 # -executable switch not available on Mac
 # trying to build up successive -name options doesn't work and ruins the logic of find, simplify to grep
-non_executable_scripts="$(eval find "${1:-$PWD}" -maxdepth 2 -type f -not -perm -u+x | egrep "$ext_regex" | grep -v -e '/\.' -e '/lib/' -e '/pylib/' | tee /dev/stderr)"
+non_executable_scripts="$(eval find "${1:-$PWD}" -maxdepth 2 -type f -not -perm -u+x | grep -E "$ext_regex" | grep -v -e '/\.' -e '/lib/' -e '/pylib/' | tee /dev/stderr)"
 set -o pipefail
 
 echo

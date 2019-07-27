@@ -63,7 +63,7 @@ recurse_dir(){
 start_time="$(start_timer)"
 
 if [ $# -gt 0 ]; then
-    for x in $@; do
+    for x in "$@"; do
         if [ -d "$x" ]; then
             recurse_dir "$x"
         else

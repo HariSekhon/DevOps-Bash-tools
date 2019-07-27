@@ -55,10 +55,10 @@ fi
 echo "Testing listing in each mount point:"
 echo
 awk '{print $2}' /proc/mounts |
-egrep -v ' cgroup ' |
-egrep "$include_regex" |
+grep -Ev ' cgroup ' |
+grep -E "$include_regex" |
 # default blank here would exclude everything, switched to test within loop only if exclude_regex is not blank
-#egrep -v "$exclude_regex" |
+#grep -Ev "$exclude_regex" |
 while read mountpoint; do
     [ -d "$mountpoint" ] || continue
     if [ "$mountpoint" = "/proc" \

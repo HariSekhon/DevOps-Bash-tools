@@ -29,14 +29,17 @@ if [ -z "$deb_packages" ]; then
 fi
 
 SUDO=""
+# shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
+    # shellcheck disable=SC2086
     if ! $SUDO apt-get purge -y $deb_packages; then
         for package in $deb_packages; do
             $SUDO apt-get purge -y "$package" || :
         done
     fi
 else
+    # shellcheck disable=SC2086
     $SUDO apt-get purge -y $deb_packages
 fi

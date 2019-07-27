@@ -31,9 +31,9 @@ start_time="$(start_timer)"
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     echo -n '.'
-    if egrep -q '^[^#]*\bquit\b' "$x"; then
+    if grep -Eq '^[^#]*\bquit\b' "$x"; then
         echo
-        egrep -q '^[^#]*\bquit\b' "$x"
+        grep -Eq '^[^#]*\bquit\b' "$x"
         echo
         echo
         echo "ERROR: $x contains quit() call!! Typo?"

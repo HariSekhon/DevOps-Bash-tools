@@ -28,7 +28,7 @@ section "M a k e"
 
 start_time="$(start_timer)"
 
-if which make &>/dev/null; then
+if command -v make &>/dev/null; then
     find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in |
     while read makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
@@ -36,8 +36,8 @@ if which make &>/dev/null; then
         grep '^[[:alnum:]]\+:' Makefile |
         sort -u |
         sed 's/:.*$//' |
-        while read target; do
-            if ! make --warn-undefined-variables -n $target >/dev/null; then
+        while read -r target; do
+            if ! make --warn-undefined-variables -n "$target" >/dev/null; then
                 echo "Makefile validation FAILED"
                 exit 1
             fi

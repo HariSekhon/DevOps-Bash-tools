@@ -28,11 +28,11 @@ section "G r a d l e"
 
 start_time="$(start_timer)"
 
-if which gradle &>/dev/null; then
+if command -v gradle &>/dev/null; then
     find "${1:-.}" -name build.gradle |
     grep -v '/build/' |
     sort |
-    while read build_gradle; do
+    while read -r build_gradle; do
         echo "Validating $build_gradle"
         gradle -b "$build_gradle" -m clean build || exit $?
     done

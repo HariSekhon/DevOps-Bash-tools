@@ -34,7 +34,7 @@ for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | s
     # exclude pytests
     [[ "$x" = ./test/* ]] && continue
     echo -n '.'
-    if egrep '^[[:space:]]+\bassert\b' "$x"; then
+    if grep -E '^[[:space:]]+\bassert\b' "$x"; then
         echo
         echo "WARNING: $x contains 'assert'!! This could be disabled at runtime by PYTHONOPTIMIZE=1 / -O / -OO and should not be used!! "
         found=1

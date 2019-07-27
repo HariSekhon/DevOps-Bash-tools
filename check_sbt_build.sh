@@ -33,7 +33,7 @@ if which sbt &>/dev/null; then
     grep -v '/target/' |
     sort |
     while read build_sbt; do
-        pushd "$(dirname $build_sbt)" >/dev/null
+        pushd "$(dirname "$build_sbt")" >/dev/null
         echo "Validating $build_sbt"
         echo q | sbt reload || exit $?
         popd >/dev/null

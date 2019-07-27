@@ -28,14 +28,17 @@ fi
 
 SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
+# shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
+    # shellcheck disable=SC2086
     if ! $SUDO apk del $apk_packages; then
         for package in $apk_packages; do
             $SUDO apk del "$package" || :
         done
     fi
 else
+    # shellcheck disable=SC2086
     $SUDO apk del $apk_packages
 fi

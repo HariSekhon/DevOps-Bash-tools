@@ -32,7 +32,7 @@ fi
 # 'which' command is not available in some bare bones docker images like centos
 # cannot set -u because it results in unbound variable error for $USER
 # cannot set -e because it will exit before the exec to persist
-docker run -ti --rm -v $PWD:/code "$docker_image" sh -x "/code/$script" '
+docker run -ti --rm -v "$PWD:/code" "$docker_image" sh -x "/code/$script" '
     cd /code
     if type apt-get &>/dev/null; then
         export DEBIAN_FRONTEND=noninteractive

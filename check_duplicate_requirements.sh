@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#  shellcheck disable=SC2086
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon

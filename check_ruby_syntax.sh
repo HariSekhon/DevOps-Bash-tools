@@ -32,7 +32,7 @@ if which ruby &>/dev/null; then
     for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.rb' | sort); do
         isExcluded "$x" && continue
         echo -n "$x: "
-        ruby -c $x
+        ruby -c "$x"
     done
     time_taken "$start_time"
     section2 "All Ruby programs passed syntax check"

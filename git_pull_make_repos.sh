@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="`dirname $0`"
+srcdir="$(dirname "$0")"
 
 git_url="${GIT_URL:-https://github.com}"
 
@@ -69,7 +69,8 @@ for repo in $repolist; do
     pushd "$repo_dir"
     git pull
     git submodule update --init
-    $make $build $opts
+    #  shellcheck disable=SC2086
+    "$make" "$build" $opts
     if [ -f /.dockerenv ]; then
         for x in system-packages-remove clean deep-clean; do
             if grep -q "^$x:" Makefile bash-tools/Makefile.in 2>/dev/null; then

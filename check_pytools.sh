@@ -119,6 +119,7 @@ for validate_program in "$pytools_dir"/validate_*.py; do
 
     fi
     echo "${validate_program}$opts: "
+    #  shellcheck disable=SC2086
     ${validate_program}$opts .
     echo
 done

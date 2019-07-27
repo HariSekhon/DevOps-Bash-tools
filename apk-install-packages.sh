@@ -33,6 +33,7 @@ fi
 
 SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
+# shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 [ -n "${NO_UPDATE:-}" ] || $SUDO apk update
@@ -42,5 +43,6 @@ if [ -n "${NO_FAIL:-}" ]; then
         $SUDO apk add "$package" || :
     done
 else
+    # shellcheck disable=SC2086
     $SUDO apk add $apk_packages
 fi
