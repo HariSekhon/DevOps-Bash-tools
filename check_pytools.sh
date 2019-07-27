@@ -51,7 +51,7 @@ if [ $skip_checks = 1 ]; then
 fi
 
 echo -n "running on branch:  "
-git branch | grep '^*'
+git branch | grep '^\*'
 echo
 echo "running in dir:  $PWD"
 echo
