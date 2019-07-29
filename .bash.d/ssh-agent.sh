@@ -30,7 +30,7 @@ ssh_agent(){
                 eval "$(ssh-agent | tee "$SSH_ENV_FILE")" #| grep -v "^Agent pid [[:digit:]]\+$"
                 # lazy evaluated ssh func now so it's not prompted until used
                 #ssh-add
-            elif [ -z "$(ps -p "$SSH_AGENT_PID" -o comm= | awk '/ssh-agent/{print $0}')" ]; then
+            elif [ -z "$(ps -p "$SSH_AGENT_PID" -o comm= | grep 'ssh-agent')" ]; then
                 echo "ssh-agent PID does not belong to ssh-agent, spawning new agent..."
                 eval "$(ssh-agent | tee "$SSH_ENV_FILE")" #| grep -v "^Agent pid [[:digit:]]\+$"
                 # lazy evaluated ssh func now so it's not prompted until used
