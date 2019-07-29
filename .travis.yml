@@ -14,6 +14,9 @@
 #
 
 language: bash
+os:
+  - linux
+  - osx
 
 dist: trusty
 
