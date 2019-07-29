@@ -18,7 +18,7 @@
 
 ssh_agent(){
     #if [ $UID != 0 ]; then
-        local SSH_ENV_FILE=~/.agent.env
+        local SSH_ENV_FILE=~/.ssh-agent.env
         if [ -f "${SSH_ENV_FILE:-}" ]; then
             # shellcheck source=~/.agent.env
             # shellcheck disable=SC1090
