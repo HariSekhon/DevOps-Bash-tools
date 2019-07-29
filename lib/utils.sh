@@ -100,13 +100,15 @@ hr3echo(){
 
 type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
 
+
 check_bin(){
-    local bin="$1"
-    if ! which $bin &>/dev/null; then
-        echo "$bin command not found in \$PATH ($PATH)"
+    local bin="${1:-}"
+    if ! command -v "$bin" &>/dev/null; then
+        echo "command '$bin' not found in \$PATH ($PATH)"
         exit 1
     fi
 }
+
 
 check_output(){
     local expected="$1"
@@ -688,6 +690,21 @@ retry(){
         sleep "$retry_interval"
     done
 }
+
+
+usage(){
+    if [ -n "$*" ]; then
+        echo "$@"
+        echo
+    fi
+    cat <<EOF
+
+usage: ${0##*/}
+
+EOF
+    exit 3
+}
+
 
 # restore original srcdir
 srcdir="$srcdir_bash_tools_utils"
