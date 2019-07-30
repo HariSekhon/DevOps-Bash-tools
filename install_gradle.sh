@@ -34,8 +34,8 @@ if ! [ -e "$BASE/gradle" ]; then
     cd "$BASE"
     wget -t 100 --retry-connrefused "https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip"
     unzip "gradle-$GRADLE_VERSION-bin.zip"
-    ln -sv gradle-$GRADLE_VERSION gradle && \
-    rm -f gradle-$GRADLE_VERSION-bin.zip
+    ln -sv "gradle-$GRADLE_VERSION" gradle && \
+    rm -f "gradle-$GRADLE_VERSION-bin.zip"
     echo
     echo "Gradle Install done"
 else
