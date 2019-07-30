@@ -37,7 +37,9 @@ fi
 pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
-if [ $EUID != 0 -a -z "${VIRTUAL_ENV:-}" -a -z "${CONDA_DEFAULT_ENV:-}" ]; then
+if [ $EUID != 0 ] &&
+   [ -z "${VIRTUAL_ENV:-}" ] &&
+   [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
     SUDO=sudo
 fi
 
@@ -51,6 +53,6 @@ for pip_module in $pip_modules; do
     #echo "checking if python module '$python_module' is installed"
     if ! python -c "import $python_module" &>/dev/null; then
         echo "python module '$python_module' not installed"
-        $SUDO ${PIP:-pip} install $opts --ignore-installed urllib3 "$pip_module"
+        $SUDO "${PIP:-pip}" install $opts --ignore-installed urllib3 "$pip_module"
     fi
 done
