@@ -15,7 +15,6 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ $# -lt 1 ]; then
     echo "usage: ${0##*.} host[:port] [host2[:port]] ..."
@@ -23,7 +22,7 @@ if [ $# -lt 1 ]; then
     exit 3
 fi
 
-for host in $@; do
+for host in "$@"; do
     host_port="$host"
     if ! [[ "$host_port" =~ : ]]; then
         host_port="$host_port:443"
