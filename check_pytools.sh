@@ -17,7 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir2="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir2/lib/utils.sh"
+# shellcheck disable=SC1090
 . "$srcdir2/lib/docker.sh"
 
 srcdir="$srcdir2"
