@@ -15,7 +15,6 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage(){
     if [ -n "$*" ]; then
@@ -73,7 +72,7 @@ awk '!/incomplete/{print $4}' |
 grep -vi "ff:ff:ff:ff:ff:ff" |
 sort |
 uniq -d |
-while read mac; do
+while read -r mac; do
     # Linux
     #arp -e |
     # BSD - more portable, both Linux and Mac support this
