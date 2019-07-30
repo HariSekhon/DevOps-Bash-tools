@@ -17,7 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
+# shellcheck disable=SC1090
 . "$srcdir/lib/docker.sh"
 
 section "Running Test Scripts"
@@ -36,7 +38,7 @@ for script in $scripts; do
     script_start_time="$(date +%s)"
     echo
     declare_if_inside_docker
-    ./$script ${VERSION:-}
+    "./$script" "${VERSION:-}"
     echo
     date
     echo
