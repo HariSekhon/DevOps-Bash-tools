@@ -17,6 +17,7 @@ set -u
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
@@ -29,9 +30,9 @@ section "Compiling Python / Jython files"
 start_time="$(start_timer)"
 
 if [ -n "${NOCOMPILE:-}" ]; then
-    echo '$NOCOMPILE environment variable set, skipping python compile'
+    echo "\$NOCOMPILE environment variable set, skipping python compile"
 elif [ -n "${QUICK:-}" ]; then
-    echo '$QUICK environment variable set, skipping python compile'
+    echo "\$QUICK environment variable set, skipping python compile"
 else
     if [ -n "${FAST:-}" ]; then
         python -m compileall "${1:-.}" || :
