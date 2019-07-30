@@ -19,7 +19,8 @@ export PATH="$PATH:/usr/hdp/current/kafka-broker/bin"
 export KAFKA_OPTS="$KAFKA_OPTS -Xms1G -Xmx1G"
 
 # there was another setting like KAFKA_KERBEROS_CLIENT I've used before but can't remember, this should work too
-export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$srcdir/.bash.d/kafka_cli_jaas.conf"
+kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/kafka_cli_jaas.conf"
+export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$kafka_cli_jaas_conf"
 
 # Must use FQDNs to match Kerberos service principals
 #
@@ -35,16 +36,19 @@ export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$srcdir/.bash.d
 
 bootstrap_server=""
 if [ -n "${KAFKA_BROKERS:-}" ]; then
+    # shellcheck disable=SC2034
     bootstrap_server="--bootstrap-server $KAFKA_BROKERS"
 fi
 
 broker_list=""
 if [ -n "${KAFKA_BROKERS:-}" ]; then
+    # shellcheck disable=SC2034
     broker_list="--broker-list $KAFKA_BROKERS"
 fi
 
 kafka_zookeepers=""
-if [ -n "${KAFKA_BROKERS:-}" ]; then
+if [ -n "${KAFKA_ZOOKEEPERS:-}" ]; then
+    # shellcheck disable=SC2034
     kafka_zookeepers="--zookeepers $KAFKA_ZOOKEEPERS"
 fi
 
