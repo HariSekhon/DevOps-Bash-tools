@@ -16,7 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-cat $@ |
+cat "$@" |
 sed '
     s/[>=].*$//;
     s/^python-//;
