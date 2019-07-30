@@ -33,7 +33,8 @@ fi
 cpan_modules="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
-if [ $EUID != 0 -a -z "${PERLBREW_PERL:-}" ]; then
+if [ $EUID != 0 ] &&
+   [ -z "${PERLBREW_PERL:-}" ]; then
     SUDO=sudo
 fi
 
@@ -41,6 +42,6 @@ for cpan_module in $cpan_modules; do
     perl_module="${cpan_module%%@*}"
     if ! perl -e "use $perl_module;" &>/dev/null; then
         echo "Installing $perl_module"
-        $SUDO ${CPANM:-cpanm} $opts --notest "$cpan_module"
+        $SUDO "${CPANM:-cpanm}" $opts --notest "$cpan_module"
     fi
 done
