@@ -38,7 +38,7 @@ check_shell_syntax(){
     fi
     bash -n "$1"
     if command -v shellcheck &>/dev/null; then
-        shellcheck -e SC1090 "$1" || :
+        shellcheck "$1" || :
     fi
     echo "=> OK"
 }
