@@ -17,6 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 # NFS issues sometimes cause scripts to rewritten from vim without executable bit set, which then gets committed to git by accident
