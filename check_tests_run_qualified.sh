@@ -17,6 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 section "Checking all test_*.sh run calls are fully qualified"
@@ -46,7 +47,7 @@ for script in $scripts; do
     # docker-compose or docker exec or docker run
     docker_regex='docker(-compose|[[:space:]]+(exec|run))'
     suspect_lines="$(grep -En '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" |
-                     grep -Ev -e "[[:space:]]*$run_fail[[:space:]](.*[[:space:]])?(./|(\\\$perl|eval|$docker_regex)[[:space:]])" \
+                     grep -Ev -e "[[:space:]]*${run_fail}[[:space:]](.*[[:space:]])?(./|(\\\$perl|eval|$docker_regex)[[:space:]])" \
                               -e '[[:space:]]*run_test_versions' \
                               -e '[[:space:]]*run_(grep|output)[[:space:]].+(\$|./)' \
                               -e 'ignore_run_unqualified' \
