@@ -21,6 +21,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 if [ $# -eq 0 ]; then
