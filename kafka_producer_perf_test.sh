@@ -20,6 +20,4 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/kafka.sh"
 
-# it's assigned in .bash.d/kafka.sh
-# shellcheck disable=SC2154
-kafka-producer-perf-test.sh "$broker_list" "$@"
+kafka-producer-perf-test.sh "$@"

@@ -22,4 +22,4 @@ srcdir="$(dirname "$0")"
 
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154
-kafka-console-consumer.sh "$bootstrap_server" "$@"
+kafka-console-producer.sh "$bootstrap_server" "$@"
