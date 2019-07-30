@@ -32,8 +32,8 @@ echo
 if ! [ -e "$BASE/maven" ]; then
     mkdir -p "$BASE"
     cd "$BASE"
-    wget -t 100 --retry-connrefused https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz
-    tar zxvf apache-maven-$MAVEN_VERSION-bin.tar.gz
+    wget -t 100 --retry-connrefused "https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz"
+    tar zxvf "apache-maven-$MAVEN_VERSION-bin.tar.gz"
     ln -sv "apache-maven-$MAVEN_VERSION" maven
     rm -f "apache-maven-$MAVEN_VERSION-bin.tar.gz"
     echo
