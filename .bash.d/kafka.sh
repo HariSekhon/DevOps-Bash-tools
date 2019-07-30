@@ -46,9 +46,9 @@ if [ -n "${KAFKA_BROKERS:-}" ]; then
     broker_list="--broker-list $KAFKA_BROKERS"
 fi
 
-kafka_zookeepers=""
+kafka_zookeeper=""
 if [ -n "${KAFKA_ZOOKEEPERS:-}" ]; then
     # shellcheck disable=SC2034
-    kafka_zookeepers="--zookeepers $KAFKA_ZOOKEEPERS"
+    kafka_zookeeper="--zookeeper $KAFKA_ZOOKEEPERS"
 fi
 
