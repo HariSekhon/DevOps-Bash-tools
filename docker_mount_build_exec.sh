@@ -15,7 +15,6 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ $# != 1 ]; then
     echo "usage: ${00#*/} <docker_image>"
