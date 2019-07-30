@@ -21,7 +21,7 @@ set -euo pipefail
 USERNAME="${USERNAME:-$USER}"
 
 if [ -z "${PASS:-}" ]; then
-    read -s -p 'password: ' PASS
+    read -r -s -p 'password: ' PASS
     echo
 fi
 
