@@ -27,9 +27,11 @@ if [ -z "$rpm_packages" ]; then
 fi
 
 SUDO=""
+# shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
+    # shellcheck disable=SC2086
     if ! $SUDO yum remove -y $rpm_packages; then
         for package in $rpm_packages; do
             if rpm -q "$package"; then
