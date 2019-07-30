@@ -17,6 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir/git.sh"
 
 # For Git < 2.0 may need to set:
