@@ -17,6 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 usage(){
@@ -44,8 +45,8 @@ if [ $# -eq 0 ]; then
     usage "no file arguments given"
 fi
 
-for x in $@; do
-    case $x in
+for x in "$@"; do
+    case "$x" in
         -h|--help)  usage
                     ;;
     esac
