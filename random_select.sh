@@ -23,13 +23,13 @@ if [ -z "$*" ]; then
 fi
 
 i=0
-for x in $@; do
-    a[$i]=$x
+for x in "$@"; do
+    a[$i]="$x"
     ((i++))
 done
 
 num=${#@}
 
-selected=$[ $RANDOM % $num ]
+selected=$((RANDOM % num))
 
-echo ${a[$selected]}
+echo "${a[$selected]}"
