@@ -16,8 +16,8 @@
 #                     BASH - Heavily Customized Environment
 # ============================================================================ #
 
-# Sources a thousands of lines of Bash code written over the course of ~15+ years
-# from GitHub repo's .bash.d/*.sh and private ~/.bash.d/*.sh
+# Sources thousands of lines of Bash code written over the course of ~15+ years
+# some of which is now found in this GitHub repo's .bash.d/*.sh
 
 
 # Use with PS4 further down + profile-bash.pl for performance profiling this bashrc
@@ -39,6 +39,8 @@
 #    # Shell is non-interactive.  Be done now!
 #    return
 #fi
+
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 [ `uname` = Darwin ] && export APPLE=1
 
@@ -98,8 +100,6 @@ fi
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # ============================================================================ #
-
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 for src in "$srcdir/.bash.d/"*.sh; do
     . "$src"
