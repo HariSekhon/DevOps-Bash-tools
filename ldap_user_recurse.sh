@@ -49,8 +49,8 @@ EOF
     exit 3
 }
 
-for x in $@; do
-    case $x in
+for x in "$@"; do
+    case "$x" in
     -h|--help)  usage
                 ;;
     esac
@@ -63,4 +63,4 @@ fi
 user_dn="$1"
 shift
 
-"$srcdir/ldapsearch.sh" "(&(objectClass=group)(member:1.2.840.113556.1.4.1941:=$user_dn))" $@
+"$srcdir/ldapsearch.sh" "(&(objectClass=group)(member:1.2.840.113556.1.4.1941:=$user_dn))" "$@"
