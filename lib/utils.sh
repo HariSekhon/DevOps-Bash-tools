@@ -693,14 +693,23 @@ retry(){
 
 
 usage(){
+    local args=""
+    local switches=""
+    if [ -n "${usage_args:-}" ]; then
+        args="$usage_args"
+    fi
+    if [ -n "${usage_switches:-}" ]; then
+        switches="$usage_switches"
+    fi
     if [ -n "$*" ]; then
         echo "$@"
         echo
     fi
     cat <<EOF
 
-usage: ${0##*/}
+usage: ${0##*/} $args
 
+$switches
 EOF
     exit 3
 }
