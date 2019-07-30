@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
+while read -r repo; do
     if [ -d "$repo" ]; then
         pushd "$repo"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
@@ -31,4 +31,4 @@ for repo in $(sed 's/#.*//' < "$srcdir/repolist.txt"); do
     else
         git clone "https://github.com/harisekhon/$repo"
     fi
-done
+done < <(sed 's/#.*//' < "$srcdir/repolist.txt")
