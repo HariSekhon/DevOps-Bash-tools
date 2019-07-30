@@ -46,9 +46,9 @@ else
     if ! [ -e "$BASE/sbt" ]; then
         mkdir -p "$BASE"
         cd "$BASE"
-        wget -t 10 --retry-connrefused https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz && \
-        tar zxvf sbt-$SBT_VERSION.tgz && \
-        rm -f sbt-$SBT_VERSION.tgz
+        wget -t 10 --retry-connrefused "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz" && \
+        tar zxvf "sbt-$SBT_VERSION.tgz" && \
+        rm -f "sbt-$SBT_VERSION.tgz"
         echo
         echo "SBT Install done"
     else
