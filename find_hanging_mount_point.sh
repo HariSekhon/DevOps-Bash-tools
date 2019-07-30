@@ -59,14 +59,14 @@ grep -Ev ' cgroup ' |
 grep -E "$include_regex" |
 # default blank here would exclude everything, switched to test within loop only if exclude_regex is not blank
 #grep -Ev "$exclude_regex" |
-while read mountpoint; do
+while read -r mountpoint; do
     [ -d "$mountpoint" ] || continue
-    if [ "$mountpoint" = "/proc" \
-      -o "$mountpoint" = "/sys" \
-      -o "$mountpoint" = "/dev" \
-      -o "${mountpoint:0:6}" = "/proc/" \
-      -o "${mountpoint:0:5}" = "/sys/" \
-      -o "${mountpoint:0:5}" = "/dev/" ]; then
+    if [ "$mountpoint"       = "/proc"  ] ||
+       [ "$mountpoint"       = "/sys"   ] ||
+       [ "$mountpoint"       = "/dev"   ] ||
+       [ "${mountpoint:0:6}" = "/proc/" ] ||
+       [ "${mountpoint:0:5}" = "/sys/"  ] ||
+       [ "${mountpoint:0:5}" = "/dev/"  ]; then
         continue
     fi
     if [[ -n "$exclude_regex" && "$mountpoint" =~ $exclude_regex ]]; then
