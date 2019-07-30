@@ -17,6 +17,7 @@ set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 if [ -z "$(find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in)" ]; then
@@ -30,7 +31,7 @@ start_time="$(start_timer)"
 
 if command -v make &>/dev/null; then
     find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in |
-    while read makefile; do
+    while read -r makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
         grep '^[[:alnum:]]\+:' Makefile |
