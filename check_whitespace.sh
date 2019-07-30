@@ -17,12 +17,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 section "Checking Whitespace"
 
 start_time="$(start_timer)"
 
+# shellcheck disable=SC1090
 . "$srcdir/excluded.sh"
 
 progress_char='-'
@@ -50,7 +52,7 @@ for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/whitespace_ignore.
     if [ -n "$output" ]; then
         echo
         echo "$output"
-        let trailing_whitespace_files_found+=1
+        ((trailing_whitespace_files_found++))
     fi
     output="$(grep -EHn '[ 	]{4}\|[ 	]*$' "$filename" || :)"
     if [ -n "$output" ]; then
@@ -69,9 +71,9 @@ fi
 if [ $trailing_whitespace_bar_files_found -gt 0 ]; then
     echo "$trailing_whitespace_bar_files_found files with trailing whitespace bar lines detected!"
 fi
-if [ $whitespace_only_files_found -gt 0 \
-  -o $trailing_whitespace_files_found -gt 0 \
-  -o $trailing_whitespace_bar_files_found -gt 0 ]; then
+if [ $whitespace_only_files_found -gt 0 ] ||
+   [ $trailing_whitespace_files_found -gt 0 ] ||
+   [ $trailing_whitespace_bar_files_found -gt 0 ]; then
     return 1 &>/dev/null || :
     exit 1
 fi
