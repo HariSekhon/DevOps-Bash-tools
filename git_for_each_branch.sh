@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/git.sh"
+. "$srcdir/lib/git.sh"
 
 foreachbranch "$@"
 
