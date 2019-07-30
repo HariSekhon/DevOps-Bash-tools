@@ -14,7 +14,7 @@
 #
 
 export PATH="$PATH:/usr/hdp/current/kafka-broker/bin"
-export PATH="$PATH::$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
+export PATH="$PATH:$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
 
 # HDP defaults to 8GB, on VMs that often breaks cli commands which try to claim too much ram and fail
 export KAFKA_OPTS="$KAFKA_OPTS -Xms1G -Xmx1G"
