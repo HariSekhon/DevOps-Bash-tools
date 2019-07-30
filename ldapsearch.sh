@@ -45,6 +45,7 @@ PASS="${LDAP_PASSWORD:-${PASSWORD:-${PASS:-}}}"
 #    read -s -p "password: " PASS
 #fi
 
+# shellcheck disable=SC2120
 usage(){
     if [ -n "$*" ]; then
         echo "$@" >&2
@@ -79,8 +80,9 @@ EOF
     exit 3
 }
 
-for x in $@; do
-    case $x in
+for x in "$@"; do
+    # shellcheck disable=SC2119
+    case "$x" in
     -h|--help)  usage
                 ;;
     esac
@@ -99,6 +101,7 @@ fi
 
 if [ "${DEBUG:-}" = 1 ]; then
     echo
-    sed "s/-w[[:space:]]\+[^[:space:]]\+/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$@'"
+    sed "s/-w[[:space:]]\+[^[:space:]]\+/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$*'"
 fi
+# shellcheck disable=SC2086
 ldapsearch -H "$uri" -b "$base_dn" -o ldif-wrap=no $auth_opts "$@"
