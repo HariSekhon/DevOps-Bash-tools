@@ -17,22 +17,16 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-usage(){
-    if [ -n "$*" ]; then
-        echo "$@"
-        echo
-    fi
-    cat <<EOF
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
-usage: ${0##*/} <files>
+# shellcheck disable=SC2034
+usage_args="<files>"
 
-EOF
-    exit 3
-}
-
-for x in $@; do
-    case $x in
+for x in "$@"; do
+    case "$x" in
     -h|--help)  usage
                 ;;
     esac
@@ -40,8 +34,8 @@ done
 
 found=0
 
-while read module; do
-    grep "^$module[<>=]" "$@"
+while read -r module ; do
+    grep "^${module}[<>=]" "$@"
     ((found++))
 done < <(
     sed 's/#.*//;
