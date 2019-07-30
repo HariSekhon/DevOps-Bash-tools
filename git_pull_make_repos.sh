@@ -27,7 +27,7 @@ if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
 
-repolist="${@:-${REPOS:-}}"
+repolist="${*:-${REPOS:-}}"
 if [ -n "$repolist" ]; then
     :
 elif [ -f "$srcdir/repolist.txt" ]; then
@@ -38,7 +38,7 @@ fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
     set +e
-    JAVA_HOME="$(which java 2>/dev/null)/.."
+    JAVA_HOME="$(command -v java 2>/dev/null)/.."
     if [ -z "${JAVA_HOME:-}" ]; then
         JAVA_HOME="$(type java 2>/dev/null | sed 's/java is //; s/hashed //; s/[()]//g')"
     fi
