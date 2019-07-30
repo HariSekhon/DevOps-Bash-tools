@@ -32,15 +32,17 @@ if [ -z "$rpm_packages" ]; then
 fi
 
 SUDO=""
+# shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    if type dnf &>/dev/null; then
+    if type dnf >/dev/null 2>&1; then
         # dnf exists if any of the packages aren't found
         for package in $rpm_packages; do
             rpm -q "$package" || $SUDO yum install -y "$package" || :
         done
     else
+        # shellcheck disable=SC2086
         $SUDO yum install -y $rpm_packages || :
     fi
 else
