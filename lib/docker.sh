@@ -18,6 +18,7 @@ set -euo pipefail
 srcdir_bash_tools_docker="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=1090
 . "$srcdir/utils.sh"
 
 docker_compose_quiet=""
@@ -51,7 +52,7 @@ check_docker_available(){
         exit 0
     fi
     if ! is_docker_compose_available; then
-        echo 'WARNING: Docker Compose not found in $PATH, skipping checks!!!'
+        echo "WARNING: Docker Compose not found in \$PATH, skipping checks!!!"
         exit 0
     fi
     # alternative
@@ -67,7 +68,8 @@ check_docker_available(){
 }
 
 is_docker_container_running(){
-    local containers="$(docker ps)"
+    local containers
+    containers="$(docker ps)"
     if [ -n "${DEBUG:-}" ]; then
         echo "Containers Running:
 $containers
@@ -108,7 +110,8 @@ docker_compose_path_version(){
         exit 1
     fi
     set +e
-    local version="$(docker-compose exec "$DOCKER_SERVICE" ls "$path" -1 --color=no |
+    local version
+    version="$(docker-compose exec "$DOCKER_SERVICE" ls "$path" -1 --color=no |
                      grep --color=no -- "$dir_base.*[[:digit:]]" |
                      tr -d '\r' |
                      tee /dev/stderr |
@@ -136,7 +139,8 @@ docker_compose_version_test(){
     fi
     if [ "$version" = "latest" ]; then
         echo "latest version, fetching latest version from DockerHub master branch"
-        local version="$(dockerhub_latest_version "$name")"
+        local version
+        version="$(dockerhub_latest_version "$name")"
         echo "expecting version '$version'"
     fi
     hr
@@ -166,7 +170,7 @@ docker_compose_port(){
         #env_var="$(tr '[[:lower:]]' '[[:upper:]]' <<< "$env_var")_PORT"
         # doesn't work on Mac
         #env_var="$(sed 's/.*/\U&/;s/[^[:alnum:]]/_/g' <<< "$env_var")_PORT"
-        env_var="$(sed 's/[^[:alnum:]]/_/g' <<< "$env_var" | tr 'a-z' 'A-Z')_PORT"
+        env_var="$(sed 's/[^[:alnum:]]/_/g' <<< "$env_var" | tr '[:lower;]' '[:upper:]')_PORT"
     fi
     if [ -z "${DOCKER_SERVICE:-}" ]; then
         echo "ERROR: \$DOCKER_SERVICE is not set, cannot run docker_compose_port()"
@@ -178,10 +182,10 @@ docker_compose_port(){
         exit 1
     fi
     set -u
-    # shellcheck disable=SC2006
-    eval printf "\"$name -> $`echo ${env_var}_DEFAULT` => \""
-    # shellcheck disable=SC2006
-    export $env_var="$(eval docker-compose port "$DOCKER_SERVICE" $`echo ${env_var}_DEFAULT` | sed 's/.*://')"
+    # shellcheck disable=SC2006,SC2116
+    eval printf "\"$name -> $`echo "${env_var}_DEFAULT"` => \""
+    # shellcheck disable=SC2006,SC2116,SC2046
+    export "$env_var"="$(eval docker-compose port "$DOCKER_SERVICE" $`echo "${env_var}_DEFAULT"` | sed 's/.*://')"
     if eval [ -z \$"$env_var" ]; then
         echo "ERROR: failed to get port mapping for $env_var"
         exit 1
@@ -209,15 +213,17 @@ docker_exec(){
         MNTDIR="$MNTDIR/"
     fi
     if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
-        run docker exec -i$user "$DOCKER_CONTAINER" "$MNTDIR$@"
+        # shellcheck disable=SC2086
+        run docker exec -i $user "$DOCKER_CONTAINER" "$MNTDIR$*"
     else
         local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
-$MNTDIR$@"
+$MNTDIR$*"
         echo  "docker exec -i$user \"$DOCKER_CONTAINER\" /bin/bash <<EOF
         $cmds
 EOF"
         # use run rather than run++ and plain docker exec so that it inherits ERRCODE
-        run docker exec -i$user "$DOCKER_CONTAINER" /bin/bash <<EOF
+        # shellcheck disable=SC2086
+        run docker exec -i $user "$DOCKER_CONTAINER" /bin/bash <<EOF
         $cmds
 EOF
     fi
@@ -233,14 +239,16 @@ docker_compose_exec(){
         MNTDIR="$MNTDIR/"
     fi
     if [ -z "${DOCKER_JAVA_HOME:-}" ]; then
-        run docker-compose exec$user "$DOCKER_SERVICE" "$MNTDIR$@"
+        # shellcheck disable=SC2086
+        run docker-compose exec $user "$DOCKER_SERVICE" "$MNTDIR$*"
     else
         local cmds="export JAVA_HOME=$DOCKER_JAVA_HOME
-$MNTDIR$@"
+$MNTDIR$*"
         echo  "docker-compose exec$user \"$DOCKER_SERVICE\" /bin/bash <<EOF
         $cmds
 EOF"
-        run docker-compose exec$user "$DOCKER_SERVICE" /bin/bash <<EOF
+        # shellcheck disable=SC2086
+        run docker-compose exec $user "$DOCKER_SERVICE" /bin/bash <<EOF
         $cmds
 EOF
     fi
@@ -252,7 +260,8 @@ dockerhub_latest_version(){
         echo "Error: no repo passed to dockerhub_latest_version for first arg"
     fi
     set +e
-    local version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z0-9_]+_VERSION=/ {print $2; exit}')"
+    local version
+    version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z0-9_]+_VERSION=/ {print $2; exit}')"
     set -e
     if [ -z "$version" ]; then
         version='.*'
@@ -267,7 +276,7 @@ external_docker(){
 launch_container(){
     local image="${1:-${DOCKER_IMAGE}}"
     local container="${2:-${DOCKER_CONTAINER}}"
-    local ports="${@:3}"
+    local ports="${*:3}"
     if [ -n "${TRAP:-}" ] || is_CI; then
         trap_container "$container"
     fi
@@ -299,6 +308,7 @@ launch_container(){
             echo -n "starting container: "
             # need tty for sudo which Apache startup scripts use while SSH'ing localhost
             # eg. hadoop-start.sh, hbase-start.sh, mesos-start.sh, spark-start.sh, tachyon-start.sh, alluxio-start.sh
+            # shellcheck disable=SC2086
             docker run -d -t --name "$container" ${DOCKER_OPTS:-} $port_mappings "$image" ${DOCKER_CMD:-}
             hr
             echo "Running containers:"
@@ -331,6 +341,7 @@ delete_container(){
 
 trap_container(){
     local container="${1:-$DOCKER_CONTAINER}"
+    # shellcheck disable=SC2154,SC2086
     trap 'result=$?; '"delete_container $container 'trapped exit, cleaning up container'"' || : ; exit $result' $TRAP_SIGNALS
 }
 
