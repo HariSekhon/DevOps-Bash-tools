@@ -31,7 +31,7 @@ start_time="$(start_timer)"
 
 files="${*:-}"
 if [ -z "$files" ]; then
-    files="$(find . -iname "$tld_file")}"
+    files="$(find . -iname "$tld_files")"
 fi
 
 set +e
