@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#  shellcheck disable=SC2128
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -23,7 +24,10 @@ if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
 fi
 bash_tools_utils_imported=1
 
+# shellcheck disable=SC1090
 . "$srcdir/docker.sh"
+
+# shellcheck disable=SC1090
 . "$srcdir/perl.sh"
 
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
@@ -56,7 +60,7 @@ hr3(){
 }
 
 section(){
-    name="$@"
+    name="$*"
     hr
     "$srcdir/../center.sh" "$@"
     hr
@@ -98,6 +102,7 @@ hr3echo(){
 #    export SPARK_HOME="$spark_home"
 #fi
 
+# shellcheck disable=SC1090
 type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
 
 
@@ -112,12 +117,14 @@ check_bin(){
 
 check_output(){
     local expected="$1"
-    local cmd="${@:2}"
+    local cmd="${*:2}"
     # do not 2>&1 it will cause indeterministic output even with python -u so even tail -n1 won't work
     echo "check_output:  $cmd"
     echo "expecting:     $expected"
-    local output="$($cmd)"
+    local output
+    output="$($cmd)"
     # intentionally not quoting so that we can use things like google* glob matches for google.com and google.co.uk
+    # shellcheck disable=SC2053
     if [[ "$output" = $expected ]]; then
         echo "SUCCESS:       $output"
     else
@@ -127,16 +134,19 @@ check_output(){
 }
 
 check_exit_code(){
-    local exit_code=$?
-    local expected_exit_codes="$@"
-    local failed=1
+    local exit_code
+    exit_code=$?
+    local expected_exit_codes
+    expected_exit_codes="$*"
+    local failed
+    failed=1
     for e in $expected_exit_codes; do
-        if [ $exit_code = $e ]; then
+        if [ "$exit_code" = "$e" ]; then
             echo "got expected exit code: $e"
             failed=0
         fi
     done
-    if [ $failed != 0 ]; then
+    if [ "$failed" != 0 ]; then
         echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
         return 1
     fi
@@ -180,7 +190,10 @@ is_travis(){
 }
 
 is_CI(){
-    if [ -n "${CI:-}" -o -n "${CI_NAME:-}" ] || is_jenkins || is_travis; then
+    if [ -n "${CI:-}" ] ||
+       [ -n "${CI_NAME:-}" ] ||
+       is_jenkins ||
+       is_travis; then
         return 0
     fi
     return 1
@@ -203,10 +216,11 @@ if is_travis; then
 else
     sudo=""
 fi
+export sudo
 
 is_latest_version(){
     # permit .* as we often replace version if latest with .* to pass regex version tests, which allows this to be called any time
-    if [ "$version" = "latest" -o "$version" = ".*" ]; then
+    if [ "$version" = "latest" ] || [ "$version" = ".*" ]; then
         return 0
     fi
     return 1
@@ -215,13 +229,16 @@ is_latest_version(){
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
 # cause the CI builds to fail with job logs > 4MB
 ci_sample(){
-    local versions="$@"
+    local versions
+    version="$*"
     if [ -n "${SAMPLE:-}" ] || is_CI; then
         if [ -n "$versions" ]; then
             local a
             IFS=' ' read -r -a a <<< "$versions"
-            local highest_index="${#a[@]}"
-            local random_index="$(($RANDOM % $highest_index))"
+            local highest_index
+            highest_index="${#a[@]}"
+            local random_index
+            random_index="$((RANDOM % highest_index))"
             echo "${a[$random_index]}"
             return 0
         else
@@ -236,19 +253,21 @@ ci_sample(){
 }
 
 untrap(){
+    # shellcheck disable=SC2086
     trap - $TRAP_SIGNALS
 }
 
 plural(){
     plural="s"
-    local num="${1:-}"
+    local num
+    num="${1:-}"
     if [ "$num" = 1 ]; then
         plural=""
     fi
 }
 
 plural_str(){
-    local parts=($@)
+    local parts=("$@")
     plural ${#parts[@]}
 }
 
@@ -269,12 +288,12 @@ print_debug_env(){
         echo
     fi
     # multiple name support for MySQL + MariaDB variables
-    for name in $@; do
-        name="$(tr 'a-z' 'A-Z' <<< "$name")"
+    for name in "$@"; do
+        name="$(tr '[:lower:]' '[:upper:]' <<< "$name")"
         #eval echo "export ${name}_PORT=$`echo ${name}_PORT`"
         # instead of just name_PORT, find all PORTS in environment and print them
         # while read line to preserve CASSANDRA_PORTS=7199 9042
-        env | grep -E -- "^$name.*_" | grep -v -e 'DEFAULT=' -e 'VERSIONS=' | sort | while read env_var; do
+        env | grep -E -- "^$name.*_" | grep -v -e 'DEFAULT=' -e 'VERSIONS=' | sort | while read -r env_var; do
             # sed here to quote export CASSANDRA_PORTS=7199 9042 => export CASSANDRA_PORTS="7199 9042"
             eval echo "'export $env_var'" | sed 's/=/="/;s/$/"/'
         done
@@ -283,7 +302,9 @@ print_debug_env(){
 }
 
 trap_debug_env(){
-    local name="$1"
+    local name
+    name="$1"
+    # shellcheck disable=SC2086,SC2154
     trap 'result=$?; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
 }
 
@@ -326,7 +347,8 @@ run_usage(){
 }
 
 run_output(){
-    local expected_output="$1"
+    local expected_output
+    expected_output="$1"
     shift
     run++
     echo "$@"
@@ -337,20 +359,23 @@ run_output(){
 }
 
 run_fail(){
-    local expected_exit_code="$1"
+    local expected_exit_code
+    expected_exit_code="$1"
     shift
     run++
     echo "$@"
     set +e
     "$@"
     # intentionally don't quote $expected_exit_code so that we can pass multiple exit codes through first arg and have them expanded here
+    # shellcheck disable=SC2086
     check_exit_code $expected_exit_code || exit 1
     set -e
     hr
 }
 
 run_grep(){
-    local egrep_pattern="$1"
+    local egrep_pattern
+    egrep_pattern="$1"
     shift
     expected_exit_code="${ERRCODE:-0}"
     run++
@@ -371,16 +396,23 @@ run_grep(){
 }
 
 run_test_versions(){
-    local name="$1"
-    local test_func="$(tr 'A-Z' 'a-z' <<< "test_${name/ /_}")"
-    local VERSIONS="$(tr 'a-z' 'A-Z' <<< "${name/ /_}_VERSIONS")"
+    local name
+    name="$1"
+    local test_func
+    test_func="$(tr '[:upper:]' '[:lower:]' <<< "test_${name/ /_}")"
+    local VERSIONS
+    VERSIONS="$(tr '[:lower:]' '[:upper:]' <<< "${name/ /_}_VERSIONS")"
     # shellcheck disable=SC2006
-    local test_versions="$(eval ci_sample $`echo $VERSIONS`)"
-    local test_versions_ordered="$test_versions"
+    local test_versions
+    # shellcheck disable=SC2046,SC2006,SC2116
+    test_versions="$(eval ci_sample $`echo "$VERSIONS"`)"
+    local test_versions_ordered
+    test_versions_ordered="$test_versions"
     if [ -z "${NO_VERSION_REVERSE:-}" ]; then
-        local test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | tail -r | tr '\n' ' ')"
+        test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | tail -r | tr '\n' ' ')"
     fi
-    local start_time="$(start_timer "$name tests")"
+    local start_time
+    start_time="$(start_timer "$name tests")"
     for version in $test_versions_ordered; do
         version_start_time="$(start_timer "$name test for version:  $version")"
         run_count=0
@@ -389,7 +421,7 @@ run_test_versions(){
             echo "NO TEST RUNS DETECTED!"
             exit 1
         fi
-        ((total_run_count+=$run_count))
+        ((total_run_count+=run_count))
         time_taken "$version_start_time" "$name version '$version' tests completed in"
         echo
     done
@@ -416,25 +448,30 @@ timestamp(){
 tstamp(){ timestamp "$@"; }
 
 start_timer(){
-    tstamp "Starting $@
+    tstamp "Starting $*
 "
     date '+%s'
 }
 
 time_taken(){
     echo
-    local start_time="$1"
+    local start_time
+    start_time="$1"
     shift
     local time_taken
-    local msg="${@:-Completed in}"
+    local msg
+    msg="${*:-Completed in}"
     tstamp "Finished"
     echo
-    local end_time="$(date +%s)"
+    local end_time
+    end_time="$(date +%s)"
     time_taken="$((end_time - start_time))"
     echo "$msg $time_taken secs"
     echo
 }
 
+# args may be passed in client code
+# shellcheck disable=SC2120
 startupwait(){
     startupwait="${1:-30}"
     if is_CI; then
@@ -443,6 +480,7 @@ startupwait(){
 }
 # trigger to set a sensible default if we forget, as it is used
 # as a fallback in when_ports_available and when_url_content below
+# shellcheck disable=SC2119
 startupwait
 
 when_ports_available(){
@@ -453,7 +491,7 @@ when_ports_available(){
         shift
     fi
     local host="${1:-}"
-    local ports="${@:2}"
+    local ports="${*:2}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo "$FUNCNAME: host \$2 not set"
@@ -480,6 +518,7 @@ when_ports_available(){
     #    cmd="$cmd $nc_cmd $x &>/dev/null && "
     #done
     #local cmd="${cmd% && }"
+    # shellcheck disable=SC2086
     plural_str $ports
     echo "waiting for up to $max_secs secs for port$plural '$ports' to become available, retrying at $retry_interval sec intervals"
     #echo "cmd: ${cmd// \&\>\/dev\/null}"
@@ -527,7 +566,7 @@ when_ports_down(){
         shift
     fi
     local host="${1:-}"
-    local ports="${@:2}"
+    local ports="${*:2}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo "$FUNCNAME: host \$2 not set"
@@ -555,6 +594,7 @@ when_ports_down(){
         cmd="$cmd ! $nc_cmd $x &>/dev/null && "
     done
     local cmd="${cmd% && }"
+    # shellcheck disable=SC2086
     plural_str $ports
     echo "waiting for up to $max_secs secs for port$plural '$ports' to go down, retrying at $retry_interval sec intervals"
     echo "cmd: ${cmd// \&\>\/dev\/null}"
@@ -568,7 +608,7 @@ when_ports_down(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number++))
             timestamp "$try_number trying host '$host' port(s) '$ports'"
-            if eval $cmd; then
+            if eval "$cmd"; then
                 down=1
                 break
             fi
@@ -596,7 +636,7 @@ when_url_content(){
     fi
     local url="${1:-}"
     local expected_regex="${2:-}"
-    local args="${@:3}"
+    local args="${*:3}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$url" ]; then
         echo "$FUNCNAME: url \$2 not set"
@@ -621,6 +661,7 @@ when_url_content(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number++))
             timestamp "$try_number trying $url"
+            # shellcheck disable=SC2086
             if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
                 echo "URL content detected '$expected_regex'"
                 found=1
@@ -659,7 +700,7 @@ retry(){
         negate=1
         shift
     fi
-    local cmd="${@:-}"
+    local cmd="${*:-}"
     if [ -z "$cmd" ]; then
         echo "ERROR: no command passed to $FUNCNAME() for \$3"
         exit 1
@@ -679,11 +720,11 @@ retry(){
                 timestamp "Command failed after $SECONDS secs"
                 break
             fi
-        elif [ $returncode = $expected_return_code ]; then
+        elif [ "$returncode" = "$expected_return_code" ]; then
             timestamp "Command succeeded with expected exit code of $expected_return_code after $SECONDS secs"
             break
         fi
-        if [ $SECONDS -gt $max_secs ]; then
+        if [ "$SECONDS" -gt "$max_secs" ]; then
             timestamp "FAILED: giving up after $max_secs secs"
             return 1
         fi
