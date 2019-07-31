@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC1090
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -21,8 +22,13 @@ if [ -z "${PROJECT:-}" ]; then
     export PROJECT=bash-tools
 fi
 
-. "$srcdir/lib/utils.sh"
-. "$srcdir/lib/docker.sh"
+pushd "$srcdir"
+
+# shellcheck disable=SC1091
+. "lib/utils.sh"
+
+# shellcheck disable=SC1091
+. "lib/docker.sh"
 
 section "Running Bash Tools ALL"
 
