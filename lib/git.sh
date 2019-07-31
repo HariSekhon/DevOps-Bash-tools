@@ -19,6 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir/utils.sh"
 
 allbranches(){
@@ -29,6 +30,7 @@ allbranches(){
     fi
     # this only shows local branches, to show all remote ones do
     # git ls-remote | awk '/\/heads\//{print $2}' | sed 's,refs/heads/,,'
+    # shellcheck disable=SC2086
     git branch -a | clean_branch_name | eval $uniq
 }
 
@@ -44,15 +46,17 @@ clean_branch_name(){
 }
 
 foreachbranch(){
-    local start_branch=$(git branch | grep ^\* | clean_branch_name);
-    local branches="$(allbranches)";
+    local start_branch
+    start_branch=$(git branch | grep '^\*' | clean_branch_name);
+    local branches
+    branches="$(allbranches)";
     if [ "$start_branch" != "master" ]; then
         branches="$(sed "1,/$start_branch/d" <<< "$branches")";
     fi;
     local branch;
     for branch in $branches; do
         hr
-        if [ -z "${FORCEMASTER:-}" -a "$branch" = "master" ]; then
+        if [ -z "${FORCEMASTER:-}" ] && [ "$branch" = "master" ]; then
             echo "skipping master branch for safety (set FORCEMASTER=1 environment variable to override)"
             continue
         fi
@@ -60,11 +64,11 @@ foreachbranch(){
             continue
         fi
         echo "$branch:"
-        if git branch | fgrep --color=auto -q "$branch"; then
+        if git branch | grep -Fq --color=auto "$branch"; then
             git checkout "$branch"
         else
             git checkout --track "origin/$branch";
-        fi && eval $@ || return
+        fi && eval "$@" || return
         echo
     done
     git checkout "$start_branch"
@@ -76,5 +80,5 @@ mybranch(){
 
 # shouldn't need to use this any more, git_check_branches_upstream.py from DevOps Python Tools repo has a --fix flag which will do this for all branches if they have no upstream set - https://github.com/harisekhon/devops-python-tools
 set_upstream(){
-    git branch --set-upstream-to origin/$(mybranch) $(mybranch)
+    git branch --set-upstream-to "origin/$(mybranch)" "$(mybranch)"
 }
