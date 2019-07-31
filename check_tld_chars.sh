@@ -17,6 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 tld_files="
@@ -28,14 +29,14 @@ section "Checking TLDs for suspect chars"
 
 start_time="$(start_timer)"
 
-files="${@:-}"
+files="${*:-}"
 if [ -z "$files" ]; then
     files="$(find . -iname "$tld_file")}"
 fi
 
 set +e
 for tld_file in $tld_files; do
-    for x in "$files"; do
+    for x in $files; do
         #isExcluded "$x" && continue
         echo "checking $x"
         if sed 's/#.*//;/^[[:space:]]$/d;s/[[:alnum:]-]//g' "$x" | grep -o '.'; then
