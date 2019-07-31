@@ -26,7 +26,7 @@ if ! type isExcluded &>/dev/null; then
         [[ "$prog" =~ ^\* ]] && return 0
         [[ "$prog" =~ /\. ]] && return 0
         [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
-        [[ "$prog" =~ *TODO* ]] && return 0
+        [[ "$prog" =~ TODO ]] && return 0
         [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
         # this external git check is expensive, skip it when in CI as using fresh git checkouts
         is_CI && return 1
