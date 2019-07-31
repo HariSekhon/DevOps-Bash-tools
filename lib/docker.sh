@@ -15,11 +15,10 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir_bash_tools_docker="${srcdir:-}"
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir_bash_tools_docker="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=1090
-. "$srcdir/utils.sh"
+# shellcheck disable=1090,SC1091
+. "$srcdir_bash_tools_docker/utils.sh"
 
 docker_compose_quiet=""
 if [ -n "${TRAVIS:-}" ]; then
@@ -64,6 +63,8 @@ check_docker_available(){
     # nagios-plugins -> nagiosplugins
     export DOCKER_CONTAINER="${DOCKER_CONTAINER//-}"
     export DOCKER_CONTAINER="${DOCKER_CONTAINER}_${DOCKER_SERVICE}_1"
+    # srcdir is defined in client scripts
+    # shellcheck disable=SC2154
     export COMPOSE_FILE="$srcdir/docker/$DOCKER_SERVICE-docker-compose.yml"
 }
 
@@ -344,6 +345,3 @@ trap_container(){
     # shellcheck disable=SC2154,SC2086
     trap 'result=$?; '"delete_container $container 'trapped exit, cleaning up container'"' || : ; exit $result' $TRAP_SIGNALS
 }
-
-# restore original srcdir
-srcdir="$srcdir_bash_tools_docker"
