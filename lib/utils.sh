@@ -16,8 +16,7 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir_bash_tools_utils="${srcdir:-}"
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir_bash_tools_utils="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
     return 0
@@ -25,10 +24,10 @@ fi
 bash_tools_utils_imported=1
 
 # shellcheck disable=SC1090
-. "$srcdir/docker.sh"
+. "$srcdir_bash_tools_utils/docker.sh"
 
 # shellcheck disable=SC1090
-. "$srcdir/perl.sh"
+. "$srcdir_bash_tools_utils/perl.sh"
 
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
@@ -62,7 +61,7 @@ hr3(){
 section(){
     name="$*"
     hr
-    "$srcdir/../center.sh" "$@"
+    "$srcdir_bash_tools_utils/../center.sh" "$@"
     hr
     if [ -n "${PROJECT:-}" ]; then
         echo "PROJECT: $PROJECT"
@@ -88,11 +87,11 @@ section3(){
 }
 
 hr2echo(){
-    "$srcdir/../center.sh" "$@" 50
+    "$srcdir_bash_tools_utils/../center.sh" "$@" 50
 }
 
 hr3echo(){
-    "$srcdir/../center.sh" "$@" 40
+    "$srcdir_bash_tools_utils/../center.sh" "$@" 40
 }
 
 #set +o pipefail
@@ -103,7 +102,7 @@ hr3echo(){
 #fi
 
 # shellcheck disable=SC1090
-type isExcluded &>/dev/null || . "$srcdir/excluded.sh"
+type isExcluded &>/dev/null || . "$srcdir_bash_tools_utils/excluded.sh"
 
 
 check_bin(){
@@ -754,7 +753,3 @@ $switches
 EOF
     exit 3
 }
-
-
-# restore original srcdir
-srcdir="$srcdir_bash_tools_utils"
