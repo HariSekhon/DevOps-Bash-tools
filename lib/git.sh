@@ -17,6 +17,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir_git="${srcdir:-}"
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
@@ -82,3 +83,5 @@ mybranch(){
 set_upstream(){
     git branch --set-upstream-to "origin/$(mybranch)" "$(mybranch)"
 }
+
+srcdir="$srcdir_git"
