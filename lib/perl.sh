@@ -17,11 +17,11 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 # Taint code doesn't use PERL5LIB, use -I instead
-I_lib=""
+#I_lib=""
 
 perl="perl"
 
-if ! which $perl &>/dev/null; then
+if ! command -v $perl &>/dev/null; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,7 +29,7 @@ fi
 if [ -n "${PERLBREW_PERL:-}" ]; then
 
     PERL_VERSION="${PERLBREW_PERL}"
-    PERL_VERSION="${PERLBREW_PERL/perl-/}"
+    export PERL_VERSION="${PERLBREW_PERL/perl-/}"
 
     # For Travis CI which installs modules locally
 #    export PERL5LIB=$(echo \
@@ -56,8 +56,12 @@ if [ -n "${PERLBREW_PERL:-}" ]; then
         # Compilation failed in require at ./check_riak_diag.pl line 25.
         # BEGIN failed--compilation aborted at ./check_riak_diag.pl line 25.
     #perl="$PERLBREW_ROOT/perls/$PERLBREW_PERL/bin/perl $I_lib"
+    # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 else
     sudo=""
+    # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 fi
+export sudo
+export PERL_MAJOR_VERSION
