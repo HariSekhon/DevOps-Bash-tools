@@ -31,19 +31,19 @@ start_time="$(start_timer)"
 
 files="${*:-}"
 if [ -z "$files" ]; then
-    files="$(find . -iname "$tld_files")"
+    for x in $tld_files; do
+        files="$files $(find . -iname "$x")"
+    done
 fi
 
 set +e
-for tld_file in $tld_files; do
-    for x in $files; do
-        #isExcluded "$x" && continue
-        echo "checking $x"
-        if sed 's/#.*//;/^[[:space:]]$/d;s/[[:alnum:]-]//g' "$x" | grep -o '.'; then
-            echo
-            echo "ERROR: Invalid chars detected in TLD file $x!! "
-        fi
-    done
+for x in $files; do
+    #isExcluded "$x" && continue
+    echo "checking $x"
+    if sed 's/#.*//;/^[[:space:]]$/d;s/[[:alnum:]-]//g' "$x" | grep -o '.'; then
+        echo
+        echo "ERROR: Invalid chars detected in TLD file $x!! "
+    fi
 done
 
 time_taken "$start_time"
