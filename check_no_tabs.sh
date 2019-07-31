@@ -25,7 +25,7 @@ section "Checking for Tabs (rather than Spaces)"
 start_time="$(start_timer)"
 
 # shellcheck disable=SC1090
-. "$srcdir/excluded.sh"
+. "$srcdir/lib/excluded.sh"
 
 progress_char='-'
 [ -n "${DEBUG:-}" ] && progress_char=''
