@@ -17,11 +17,12 @@
 #                              K u b e r n e t e s
 # ============================================================================ #
 
+kubectl_opts=""
+if [ "${K8S_NAMESPACE:-}" ]; then
+    kubectl_opts="-n $K8S_NAMESPACE"
+fi
+
 k(){
-    kubectl_opts=""
-    if [ "${K8S_NAMESPACE:-}" ]; then
-        kubectl_opts="-n $K8S_NAMESPACE"
-    fi
     # shellcheck disable=SC2086
     kubectl $kubectl_opts "$@"
 }
