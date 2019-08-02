@@ -11,14 +11,14 @@ For more advanced Systems Administration scripts in other languages, see the rep
 
 - Scripts - Linux systems administration scripts
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
-  - install if absent scripts for Python and Perl modules - good for combining with first attempt to install via system packages, and then these will pull from PyPI or CPAN only those modules which aren't installed. This speeds up builds and uses the standard packaged modules where possible. This is also more reliable than getting random compile errors from CPAN as libraries update and introduce bugs or needing to install too many dev libraries
-  - install scripts for Jython and build tools like Gradle and SBT for when Linux distros don't provide packaged versions or where the packaged versions are too old
+  - install if absent scripts for Python and Perl modules - good for combining with first attempt to install via system packages, and then these will pull from [PyPI](https://pypi.org/) or [CPAN](https://www.cpan.org/) only those modules which aren't installed. This speeds up builds and uses the standard packaged modules where possible. This is also more reliable than getting random compile errors from CPAN as libraries update and introduce bugs or needing to install too many dev libraries
+  - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
   - Git branch management
   - utility scripts used from other scripts
 
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - tonnes of functions and aliases for [Linux](https://en.wikipedia.org/wiki/Linux), [Docker](https://www.docker.com/), [Kubernetes](https://kubernetes.io/), [Kafka](http://kafka.apache.org/), automatic GPG and SSH agent handling etc.
-- `lib` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ((Travis CI)[https://travis-ci.org/], [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
+- `lib` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
 - `kafka_wrappers` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier (for [Solr](https://lucene.apache.org/solr/) CLI usage see `solr-cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools))
 
 - Programming language linting:
