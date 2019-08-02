@@ -37,6 +37,20 @@ check_duplicate_defs(){
     echo
     check_duplicate_functions "$@"
     check_duplicate_aliases "$@"
+    check_duplicate_aliases_vs_functions "$@"
+}
+
+get_functions(){
+    grep -Eh '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" 2>/dev/null |
+    grep -Ev '^[[:space:]]*for[[:space:]]*\(\(' |
+    sed 's/^[[:space:]]*\(function[[:space:]]*\)*//; s/[[:space:]]*(.*//' |
+    sort
+}
+
+get_aliases(){
+    grep -Eho '^[[:space:]]*alias[[:space:]]+[[:alnum:]]+=' "$@" 2>/dev/null |
+    sed 's/^[[:space:]]*alias[[:space:]]*//; s/=$//' |
+    sort
 }
 
 check_duplicate_functions(){
@@ -44,18 +58,12 @@ check_duplicate_functions(){
     echo
     local function_dups
     set +o pipefail
-    function_dups="$(
-        grep -Eh '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" 2>/dev/null |
-        grep -Ev '^[[:space:]]*for[[:space:]]*\(\(' |
-        sed 's/^[[:space:]]*\(function[[:space:]]*\)*//; s/[[:space:]]*(.*//' |
-        sort |
-        uniq -d
-    )"
+    function_dups="$(get_functions "$@" | uniq -d)"
     if [ -n "$function_dups" ]; then
         echo "Duplicate functions detected across input files!"
         echo
         for x in $function_dups; do
-            grep -Eno "^[[:space:]]*(function[[:space:]]+)?$x[[:space:]]*\\(" "$@" 2>/dev/null || :
+            grep -Eno "^[[:space:]]*(function[[:space:]]+)?${x}[[:space:]]*\\(" "$@" 2>/dev/null || :
         done
         echo
         exit 1
@@ -67,17 +75,34 @@ check_duplicate_aliases(){
     echo
     local alias_dups
     set +o pipefail
-    alias_dups="$(
-        grep -Eho '^[[:space:]]*alias[[:space:]]+[[:alnum:]]+=' "$@" 2>/dev/null |
-        sed 's/^[[:space:]]*alias[[:space:]]*//; s/=$//' |
-        sort |
-        uniq -d
-    )"
+    alias_dups="$(get_aliases "$@" | uniq -d)"
     if [ -n "$alias_dups" ]; then
         echo "Duplicate aliases detected across input files!"
         echo
         for x in $alias_dups; do
-            grep -Eno "^[[:space:]]*alias[[:space:]]+$x=" "$@" 2>/dev/null || :
+            grep -Eno "^[[:space:]]*alias[[:space:]]+${x}=" "$@" 2>/dev/null || :
+        done
+        echo
+        echo
+        exit 1
+    fi
+}
+
+check_duplicate_aliases_vs_functions(){
+    echo "* Checking for duplicate alias vs function definitions"
+    echo
+    local defs
+    local duplicate_defs
+    defs="$(get_functions "$@")
+$(get_aliases "$@")"
+    duplicate_defs="$(sort <<< "$defs" | uniq -d)"
+    if [ -n "$duplicate_defs" ]; then
+        echo "Duplicate function vs alias definitions detected across input files!"
+        echo
+        for x in $duplicate_defs; do
+            grep -Eno -e "^[[:space:]]*alias[[:space:]]+${x}=" \
+                -e "^[[:space:]]*(function[[:space:]]+)?${x}[[:space:]]*\\(" \
+                      "$@" 2>/dev/null || :
         done
         echo
         echo
