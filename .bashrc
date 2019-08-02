@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#  shellcheck disable=SC1091
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -19,8 +21,18 @@
 # Sources thousands of lines of Bash code written over the course of ~15+ years
 # some of which is now found in this GitHub repo's .bash.d/*.sh
 
+# ============================================================================ #
+#
+# put this at the top of your ~/.bashrc to inherit the goodness here (assuming you've checked out this repo to ~/github/bash-tools):
+#
+#   if [ -f ~/github/bash-tools/.bashrc ]; then
+#       . ~/github/bash-tools/.bashrc
+#   fi
+#
+# ============================================================================ #
 
-# Use with PS4 further down + profile-bash.pl for performance profiling this bashrc
+
+# Use with PS4 further down + profile-bash.pl (still in private repos) for performance profiling this bashrc
 #set -x
 
 # If not running interactively, don't do anything:
@@ -42,11 +54,15 @@
 
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-[ `uname` = Darwin ] && export APPLE=1
+if [ "$(uname)" = Darwin ]; then
+    export APPLE=1
+    export OSX=1
+fi
 
 # enable color support for ls
-if [ "$TERM" != "dumb" -a -z "${APPLE:-}" ]; then
-    eval "`dircolors -b`"
+if [ "$TERM" != "dumb" ] && \
+   [ -z "${APPLE:-}" ]; then
+    eval "$(dircolors -b)"
 fi
 
 [ -f /etc/profile     ] && . /etc/profile
@@ -58,8 +74,8 @@ fi
 #unset HISTFILESIZE
 export HISTSIZE=50000
 export HISTFILESIZE=50000
-rmhist(){ history -d $1; }
-histrm(){ rmhist $1; }
+rmhist(){ history -d "$1"; }
+histrm(){ rmhist "$1"; }
 histrmlast(){ history -d "$(history | tail -n 2 | head -n 1 | awk '{print $1}')"; }
 
 # This adds a time format of "YYYY-mm-dd hh:mm:ss  command" to the bash history
@@ -102,5 +118,6 @@ fi
 # ============================================================================ #
 
 for src in "$srcdir/.bash.d/"*.sh; do
+    # shellcheck disable=SC1090
     . "$src"
 done
