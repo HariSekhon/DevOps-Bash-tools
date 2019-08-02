@@ -68,7 +68,8 @@ alias wp=watchpods
 
 alias use="k config use-context"
 alias contexts="k config get-contexts"
-alias context="k config current-context"
+#alias context="k config current-context"
+context(){ k config current-context; }
 # contexts has this info and is more useful
 #alias clusters="k config get-clusters"
 
