@@ -19,6 +19,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# used by utils.sh usage()
+# shellcheck disable=SC2034
+usage_description="Auto-determines the Kubernetes API server and kube-system API Token to make curl calls to K8S easier"
+
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
@@ -28,6 +32,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # used by utils.sh usage()
 # shellcheck disable=SC2034
 usage_args="/path <curl_options>"
+
+if [ $# -lt 1 ]; then
+    usage
+fi
 
 for x in "$@"; do
     case "$x" in
