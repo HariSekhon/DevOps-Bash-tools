@@ -24,7 +24,7 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-section "Checking for duplicate Bash definitions (functions, aliases)"
+section "Checking for Bash duplicate definitions (functions, aliases)"
 
 start_time="$(start_timer)"
 
@@ -37,8 +37,10 @@ check_duplicate_functions(){
     echo "Checking for duplicate function definitions in:  $*"
     echo
     local function_dups
+    set +o pipefail
     function_dups="$(
-        grep -Eho '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" |
+        grep -Eh '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" 2>/dev/null |
+        grep -Ev '^[[:space:]]*for[[:space:]]*\(\(' |
         sed 's/^[[:space:]]*\(function[[:space:]]*\)*//; s/[[:space:]]*(.*//' |
         sort |
         uniq -d
@@ -46,7 +48,9 @@ check_duplicate_functions(){
     if [ -n "$function_dups" ]; then
         echo "Duplicate functions detected across input files:  $*"
         echo
-        echo "$function_dups"
+        for x in $function_dups; do
+            grep -Eno "^[[:space:]]*(function[[:space:]]+)?$x[[:space:]]*\\(" "$@"
+        done
         echo
         exit 1
     fi
@@ -56,8 +60,9 @@ check_duplicate_aliases(){
     echo "Checking for duplicate alias definitions in:  $*"
     echo
     local alias_dups
+    set +o pipefail
     alias_dups="$(
-        grep -Eho '^[[:space:]]*alias[[:space:]]+[[:alnum:]]+=' "$@" |
+        grep -Eho '^[[:space:]]*alias[[:space:]]+[[:alnum:]]+=' "$@" 2>/dev/null |
         sed 's/^[[:space:]]*alias[[:space:]]*//; s/=$//' |
         sort |
         uniq -d
