@@ -30,7 +30,7 @@ for script in $scripts; do
     # this fails files broken on whitespace immediately, will count as 2 of more separate files not found
     echo -n "checking script $script => "
     if ! [ -f "$script" ]; then
-        ((failed_count++))
+        ((failed_count + 1))
         echo "NOT FOUND"
         continue
     fi
@@ -55,7 +55,7 @@ for script in $scripts; do
                     )"
     set -eo pipefail
     if [ -n "$suspect_lines" ]; then
-        ((failed_count++))
+        ((failed_count + 1))
         echo "Suspect lines detected!"
         echo
         echo "$suspect_lines"
