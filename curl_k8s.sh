@@ -53,4 +53,7 @@ path="${1:-}"
 
 shift
 
+# could also extract the k8s certs from ~/.kube/config (not shown in kubectl config view, would have to json parse outside), and then do
+# curl "$api_server" --cert encoded.crt --key encoded.key --cacert encoded-ca.crt
+
 curl -k --header "Authorization: Bearer $token" "$api_server$path" "$@"
