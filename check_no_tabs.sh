@@ -41,7 +41,7 @@ for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/whitespace_ignore.
         echo
         echo "$output"
         #let files_with_tabs+=1
-        ((files_with_tabs++))
+        ((files_with_tabs + 1))
     fi
 done
 echo
