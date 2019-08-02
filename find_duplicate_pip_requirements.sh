@@ -36,7 +36,7 @@ found=0
 
 while read -r module ; do
     grep "^${module}[<>=]" "$@"
-    ((found++))
+    ((found + 1))
 done < <(
     sed 's/#.*//;
          s/[<>=].*//;
