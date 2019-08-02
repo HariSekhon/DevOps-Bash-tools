@@ -19,6 +19,14 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+section "Checking for duplicate Bash definitions (functions, aliases)"
+
+start_time="$(start_timer)"
 
 check_duplicate_defs(){
     check_duplicate_functions "$@"
@@ -26,6 +34,8 @@ check_duplicate_defs(){
 }
 
 check_duplicate_functions(){
+    echo "Checking for duplicate function definitions in:  $*"
+    echo
     local function_dups
     function_dups="$(
         grep -Eho '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" |
@@ -43,6 +53,8 @@ check_duplicate_functions(){
 }
 
 check_duplicate_aliases(){
+    echo "Checking for duplicate alias definitions in:  $*"
+    echo
     local alias_dups
     alias_dups="$(
         grep -Eho '^[[:space:]]*alias[[:space:]]+[[:alnum:]]+=' "$@" |
@@ -59,4 +71,12 @@ check_duplicate_aliases(){
     fi
 }
 
-check_duplicate_defs "$@"
+if [ $# -gt 0 ]; then
+    check_duplicate_defs "$@"
+else
+    check_duplicate_defs "$srcdir/.bashrc" "$srcdir"/.bash.d/*.sh
+fi
+
+time_taken "$start_time"
+section2 "No duplicate bash definitions found"
+echo
