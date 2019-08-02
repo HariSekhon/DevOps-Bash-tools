@@ -29,12 +29,18 @@ section "Checking for Bash duplicate definitions (functions, aliases)"
 start_time="$(start_timer)"
 
 check_duplicate_defs(){
+    echo "Checking for duplicate definitions in the following files:"
+    echo
+    for x in "$@"; do
+        echo "$x"
+    done
+    echo
     check_duplicate_functions "$@"
     check_duplicate_aliases "$@"
 }
 
 check_duplicate_functions(){
-    echo "Checking for duplicate function definitions in:  $*"
+    echo "* Checking for duplicate function definitions"
     echo
     local function_dups
     set +o pipefail
@@ -46,10 +52,10 @@ check_duplicate_functions(){
         uniq -d
     )"
     if [ -n "$function_dups" ]; then
-        echo "Duplicate functions detected across input files:  $*"
+        echo "Duplicate functions detected across input files!"
         echo
         for x in $function_dups; do
-            grep -Eno "^[[:space:]]*(function[[:space:]]+)?$x[[:space:]]*\\(" "$@"
+            grep -Eno "^[[:space:]]*(function[[:space:]]+)?$x[[:space:]]*\\(" "$@" 2>/dev/null || :
         done
         echo
         exit 1
@@ -57,7 +63,7 @@ check_duplicate_functions(){
 }
 
 check_duplicate_aliases(){
-    echo "Checking for duplicate alias definitions in:  $*"
+    echo "* Checking for duplicate alias definitions"
     echo
     local alias_dups
     set +o pipefail
@@ -68,9 +74,12 @@ check_duplicate_aliases(){
         uniq -d
     )"
     if [ -n "$alias_dups" ]; then
-        echo "Duplicate aliases detected across input files:  $*"
+        echo "Duplicate aliases detected across input files!"
         echo
-        echo "$alias_dups"
+        for x in $alias_dups; do
+            grep -Eno "^[[:space:]]*alias[[:space:]]+$x=" "$@" 2>/dev/null || :
+        done
+        echo
         echo
         exit 1
     fi
