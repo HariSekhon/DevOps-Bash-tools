@@ -25,7 +25,7 @@ fi
 i=0
 for x in "$@"; do
     a[$i]="$x"
-    ((i++))
+    ((i + 1))
 done
 
 num=${#@}
