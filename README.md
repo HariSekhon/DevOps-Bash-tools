@@ -19,7 +19,7 @@ For more advanced Systems Administration scripts in other languages, see the rep
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - tonnes of functions and aliases for Linux, Docker, Kubernetes, Kafka, automatic GPG and SSH agent handling etc.
 - `lib` - Bash utility libraries full of functions for Docker, environment, CI detection, port and HTTP url availability content checks etc.
-- `kafka_wrappers` - scripts to make kafka cli usage easier (for Solr CLI usage see solr-cli.pl in [DevOps-Perl-tools](https://github.com/harisekhon/devops-perl-tools)
+- `kafka_wrappers` - scripts to make kafka cli usage easier (for Solr CLI usage see solr-cli.pl in [DevOps-Perl-tools](https://github.com/harisekhon/devops-perl-tools))
 
 - Programming language linting:
 
