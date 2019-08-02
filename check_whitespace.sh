@@ -46,19 +46,19 @@ for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/whitespace_ignore.
     if [ -n "$output" ]; then
         echo
         echo "$output"
-        ((whitespace_only_files_found++))
+        ((whitespace_only_files_found + 1))
     fi
     output="$(grep -EHn '[ 	]+$' "$filename" || :)"
     if [ -n "$output" ]; then
         echo
         echo "$output"
-        ((trailing_whitespace_files_found++))
+        ((trailing_whitespace_files_found + 1))
     fi
     output="$(grep -EHn '[ 	]{4}\|[ 	]*$' "$filename" || :)"
     if [ -n "$output" ]; then
         echo
         echo "$output"
-        ((trailing_whitespace_bar_files_found++))
+        ((trailing_whitespace_bar_files_found + 1))
     fi
 done
 echo
