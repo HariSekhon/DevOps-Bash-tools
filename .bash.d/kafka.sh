@@ -20,7 +20,7 @@ export PATH="$PATH:$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
 export KAFKA_OPTS="$KAFKA_OPTS -Xms1G -Xmx1G"
 
 # there was another setting like KAFKA_KERBEROS_CLIENT I've used before but can't remember, this should work too
-kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/kafka_cli_jaas.conf"
+kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers/kafka_cli_jaas.conf"
 export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$kafka_cli_jaas_conf"
 
 # Must use FQDNs to match Kerberos service principals
