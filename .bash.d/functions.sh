@@ -17,6 +17,12 @@
 #                             Bash General Functions
 # ============================================================================ #
 
+pass(){
+    read -s -p 'password: ' PASSWORD
+    echo
+    export PASSWORD
+}
+
 # this idea's is a bust so far...
 #function c(){
 #    screen -t "$@" bash -c ". ~/.bashrc && eval $@"
