@@ -66,9 +66,30 @@ kdelp(){
 alias p="k get po"
 alias wp=watchpods
 
+alias use="k config use-context"
 alias contexts="k config get-contexts"
 alias context="k config current-context"
+# contexts has this info and is more useful
+#alias clusters="k config get-clusters"
 
 alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
 
 alias menv='eval $(minikube docker-env)'
+
+k8s_get_token(){
+    kubectl describe secret -n kube-system \
+        "$(kubectl get secrets -n kube-system | grep default | cut -f1 -d ' ')" |
+    grep '^token' |
+    #cut -f2 -d':' |
+    #tr -d '\t' |
+    #tr -d " "
+    awk '{print $2}'
+}
+
+k8s_get_api(){
+    local context
+    local cluster
+    context="$(context)"
+    cluster="$(k config view -o jsonpath="{.contexts[?(@.name == \"$context\")].context.cluster}")"
+    k config view -o jsonpath="{.clusters[?(@.name == \"$cluster\")].cluster.server}"
+}
