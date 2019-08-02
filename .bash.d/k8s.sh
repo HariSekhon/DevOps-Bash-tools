@@ -38,10 +38,14 @@ get_pod(){
 
 watchpods(){
     watch "
+        echo 'Context: '
         echo
         kubectl config current-context
         echo
-        kubectl $kubectl_opts get pods
+        echo
+        echo 'Pods:'
+        echo
+        kubectl $kubectl_opts get pods 2>&1
         echo
     "
 }
