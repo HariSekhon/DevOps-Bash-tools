@@ -79,8 +79,9 @@ alias visualvm="~/visualvm/bin/visualvm"
 # for piping from grep
 alias uniqfiles="sed 's/:.*//;/^[[:space:]]*$/d' | sort -u"
 
-alias ping="ping -n"
-alias p=ping
+# use this alias for 'kubectl get pods' now
+#alias ping="ping -n"
+#alias p=ping
 
 export etc=~/etc
 alias etc="cd $etc"
