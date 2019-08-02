@@ -605,7 +605,7 @@ when_ports_down(){
         SECONDS=0
         # bash will interpolate from string for correct numeric comparison and safer to quote vars
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            ((try_number++))
+            ((try_number + 1))
             timestamp "$try_number trying host '$host' port(s) '$ports'"
             if eval "$cmd"; then
                 down=1
@@ -658,7 +658,7 @@ when_url_content(){
     # bash will interpolate from string for correct numeric comparison and safer to quote vars
     if command -v curl &>/dev/null; then
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            ((try_number++))
+            ((try_number + 1))
             timestamp "$try_number trying $url"
             # shellcheck disable=SC2086
             if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
@@ -708,7 +708,7 @@ retry(){
     try_number=0
     SECONDS=0
     while true; do
-        ((try_number++))
+        ((try_number + 1))
         echo -n "try $try_number:  "
         set +e
         $cmd
