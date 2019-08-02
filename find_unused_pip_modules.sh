@@ -42,7 +42,7 @@ while read -r module; do
         grep -v requirements.txt |
         grep -q .; then
             echo "$module"
-            ((found++))
+            ((found + 1))
     fi
 done < <(
     sed 's/#.*//;
