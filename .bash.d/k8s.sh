@@ -17,7 +17,7 @@
 #                              K u b e r n e t e s
 # ============================================================================ #
 
-kubectl_opts=""
+kubectl_opts="${KUBECTL_OPTS:-}"
 if [ "${K8S_NAMESPACE:-}" ]; then
     kubectl_opts="-n $K8S_NAMESPACE"
 fi
