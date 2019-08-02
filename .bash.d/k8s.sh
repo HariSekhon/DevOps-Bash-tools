@@ -23,7 +23,7 @@ k(){
         kubectl_opts="-n $K8S_NAMESPACE"
     fi
     # shellcheck disable=SC2086
-    kubectl $opts "$@"
+    kubectl $kubectl_opts "$@"
 }
 
 get_pod(){
@@ -60,6 +60,6 @@ alias wp=watchpods
 alias contexts="k config get-contexts"
 alias context="k config current-context"
 
-alias kcd="kubectl config set-context $(kubectl config current-context) --namespace"
+alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
 
 alias menv='eval $(minikube docker-env)'
