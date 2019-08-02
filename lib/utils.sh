@@ -229,7 +229,7 @@ is_latest_version(){
 # cause the CI builds to fail with job logs > 4MB
 ci_sample(){
     local versions
-    version="$*"
+    version="${*:-}"
     if [ -n "${SAMPLE:-}" ] || is_CI; then
         if [ -n "$versions" ]; then
             local a
