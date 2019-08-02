@@ -36,7 +36,7 @@ found=0
 
 while read -r line; do
     grep -Fx "$line" "$@"
-    ((found++))
+    ((found + 1))
 done < <(
     sed 's/#.*//;
          s/^[[:space:]]*//;
