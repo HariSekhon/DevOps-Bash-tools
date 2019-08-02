@@ -44,7 +44,7 @@ else
         fi
     done
     # to account for the semi colon
-    ((max_len++))
+    ((max_len + 1))
     for x in $filelist; do
         isExcluded "$x" && continue
         printf "%-${max_len}s " "$x:"
