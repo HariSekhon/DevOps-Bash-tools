@@ -13,22 +13,52 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Sends username + password without putting them on the command line for environments that log every command and every argument to prevent your password being exposed in logs
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# used by utils.sh usage()
+# shellcheck disable=SC2034
+usage_description="Generates a ram only netrc file from .ssh/known_hosts and calls curl with it to avoid credentials being logged in environments that log every command and argument"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# used by utils.sh usage()
+# shellcheck disable=SC2034
+usage_args="<curl_options>"
+
+if [ $# -lt 1 ]; then
+    usage
+fi
+
+for x in "$@"; do
+    case "$x" in
+        -h|--help) usage
+        ;;
+    esac
+done
+
+check_bin curl
 
 USERNAME="${USERNAME:-$USER}"
 
-if [ -z "${PASS:-}" ]; then
-    read -r -s -p 'password: ' PASS
+if [ -z "${PASSWORD:-}" ]; then
+    read -r -s -p 'password: ' PASSWORD
     echo
 fi
 
 # doesn't work
-#netrc_content="default login $USERNAME password $PASS"
+#netrc_content="default login $USERNAME password $PASSWORD"
 
 hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
-netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USERNAME password $PASS"; done)"
+
+# use built-in echo if availble, cat is slow with ~1000 .ssh/known_hosts
+if help echo &>/dev/null; then
+    netrc_contents="$(for host in $hosts; do echo "machine $host login $USERNAME password $PASSWORD"; done)"
+else
+    # slow fallback with lots of forks
+    netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USERNAME password $PASSWORD"; done)"
+fi
 
 curl --netrc-file <(cat <<< "$netrc_contents") "$@"
