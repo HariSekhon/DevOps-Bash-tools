@@ -123,8 +123,6 @@ dockerpull1(){
         #docker pull "$image" | cat &
         docker pull "$image"
         # wipe out dangling image layers
-        # don't quote, we want splitting
-        # shellcheck disable=
         dockerrmi
         echo
     done
