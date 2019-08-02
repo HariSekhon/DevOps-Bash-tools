@@ -23,6 +23,14 @@ pass(){
     export PASSWORD
 }
 
+strLastIndexOf(){
+    local str="$1"
+    local substr="$2"
+    local remainder="${str##*$substr}"
+    local lastIndex=$((${#str} - ${#remainder}))
+    echo $lastIndex
+}
+
 # this idea's is a bust so far...
 #function c(){
 #    screen -t "$@" bash -c ". ~/.bashrc && eval $@"
