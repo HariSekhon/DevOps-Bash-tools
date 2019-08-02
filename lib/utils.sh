@@ -309,7 +309,7 @@ trap_debug_env(){
 
 run++(){
     #if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
-        ((run_count++))
+        ((run_count + 1))
     #fi
 }
 
@@ -528,7 +528,7 @@ when_ports_available(){
         SECONDS=0
         # bash will interpolate from string for correct numeric comparison and safer to quote vars
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            ((try_number++))
+            ((try_number + 1))
             for port in $ports; do
                 if ! nc -vw "$retry_interval" "$host" "$port" <<< '' &>/dev/null; then
                     timestamp "$try_number waiting for host '$host' port '$port'"
