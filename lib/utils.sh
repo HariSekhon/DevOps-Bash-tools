@@ -408,7 +408,9 @@ run_test_versions(){
     local test_versions_ordered
     test_versions_ordered="$test_versions"
     if [ -z "${NO_VERSION_REVERSE:-}" ]; then
-        test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | tail -r | tr '\n' ' ')"
+        # tail -r works on Mac but not Travis CI Ubuntu Trusty
+        # tac works on Linux but not on Mac
+        test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | perl -pe 'print reverse <>' | tr '\n' ' ')"
     fi
     local start_time
     start_time="$(start_timer "$name tests")"
