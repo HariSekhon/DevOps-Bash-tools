@@ -20,7 +20,7 @@
 kubectl_opts="${KUBECTL_OPTS:-}"
 # set K8S_NAMESPACE in local .bashrc or similar files for environments where your ~/.kube/config
 # gets regenerated daily with certification authentication from a kerberos login script, which
-# resets the 'kcd bigdata' namespace change. This way your automatically send the right namespace every time
+# resets the 'kcd bigdata' namespace change. This way you automatically send the right namespace every time
 if [ "${K8S_NAMESPACE:-}" ]; then
     kubectl_opts="-n $K8S_NAMESPACE"
 fi
