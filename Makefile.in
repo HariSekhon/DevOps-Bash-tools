@@ -58,6 +58,10 @@ ifeq '$(shell id -u)' '0'
 	SUDO_PIP :=
 endif
 
+.PHONY: default
+default: build
+	:
+
 .PHONY: quick
 quick:
 	QUICK=1 $(MAKE) build
