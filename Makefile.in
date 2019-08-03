@@ -370,3 +370,11 @@ docker-centos:
 .PHONY: docker-ubuntu
 docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
+
+.PHONY: travis
+travis:
+	travis_last_log.py $(REPO)
+
+.PHONY: travis-debug
+travis-debug:
+	travis_debug_session.py $(REPO)
