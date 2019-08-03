@@ -31,6 +31,21 @@ k(){
     kubectl $kubectl_opts "$@"
 }
 
+# this is one of the most used things out there, even more than ping
+alias p="k get po"
+alias wp=watchpods
+
+alias use="k config use-context"
+alias contexts="k config get-contexts"
+#alias context="k config current-context"
+context(){ k config current-context; }
+# contexts has this info and is more useful
+#alias clusters="k config get-clusters"
+
+alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
+
+alias menv='eval $(minikube docker-env)'
+
 get_pod(){
     local filter="${1:-.*}"
     k get pods | grep "$filter" | head -n1
@@ -61,21 +76,6 @@ kdp(){
 kdelp(){
     k delete pod "$@"
 }
-
-# this is one of the most used things out there, even more than ping
-alias p="k get po"
-alias wp=watchpods
-
-alias use="k config use-context"
-alias contexts="k config get-contexts"
-#alias context="k config current-context"
-context(){ k config current-context; }
-# contexts has this info and is more useful
-#alias clusters="k config get-clusters"
-
-alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
-
-alias menv='eval $(minikube docker-env)'
 
 k8s_get_token(){
     kubectl describe secret -n kube-system \
