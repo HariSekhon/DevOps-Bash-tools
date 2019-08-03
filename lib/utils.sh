@@ -133,8 +133,7 @@ check_output(){
 }
 
 check_exit_code(){
-    local exit_code
-    exit_code=$?
+    local exit_code=$?
     local expected_exit_codes
     expected_exit_codes="$*"
     local failed
