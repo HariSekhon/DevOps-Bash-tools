@@ -33,7 +33,7 @@ if [ -n "$repolist" ]; then
 elif [ -f "$srcdir/lib/repolist.txt" ]; then
     repolist="$(sed 's/#.*//' < "$srcdir/lib/repolist.txt")"
 else
-    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/repolist.txt | sed 's/#.*//')"
+    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/lib/repolist.txt | sed 's/#.*//')"
 fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
