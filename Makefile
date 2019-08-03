@@ -24,3 +24,7 @@ test:
 .PHONY: clean
 clean:
 	@echo Nothing to clean
+
+.PHONY: travis
+travis:
+	travis_last_log.py /DevOps-Bash-tools
