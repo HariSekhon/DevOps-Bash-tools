@@ -100,7 +100,7 @@ bash_tools_start_time="$(start_timer)"
 #    "$srcdir/$script" -vvv
 #done
 
-popd "$srcdir" &>/dev/null
+popd &>/dev/null || :
 
 time_taken "$bash_tools_start_time" "Bash Tools All Checks Completed in"
 section2 "Bash Tools All Checks Completed"
