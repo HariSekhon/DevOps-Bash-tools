@@ -30,8 +30,8 @@ fi
 repolist="${*:-${REPOS:-}}"
 if [ -n "$repolist" ]; then
     :
-elif [ -f "$srcdir/repolist.txt" ]; then
-    repolist="$(sed 's/#.*//' < "$srcdir/repolist.txt")"
+elif [ -f "$srcdir/lib/repolist.txt" ]; then
+    repolist="$(sed 's/#.*//' < "$srcdir/lib/repolist.txt")"
 else
     repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/repolist.txt | sed 's/#.*//')"
 fi
