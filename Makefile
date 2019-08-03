@@ -26,11 +26,3 @@ test:
 .PHONY: clean
 clean:
 	@echo Nothing to clean
-
-.PHONY: travis
-travis:
-	travis_last_log.py $(REPO)
-
-.PHONY: travis-debug
-travis-debug:
-	travis_debug_session.py $(REPO)
