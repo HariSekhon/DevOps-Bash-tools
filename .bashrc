@@ -117,6 +117,24 @@ fi
 
 # ============================================================================ #
 
+#export PATH="${PATH%%:$HOME/github*}"
+add_PATH(){
+    local path
+    path="${1:-}"
+    path="${path%/}"
+    if ! [[ "$PATH" =~ (^|:)$path(:|$) ]]; then
+        export PATH="$PATH:$path"
+    fi
+}
+
+add_PATH "/sbin"
+add_PATH "/usr/sbin"
+add_PATH "/usr/local/sbin"
+add_PATH "$HOME/bin"
+add_PATH "$srcdir"
+
+# ============================================================================ #
+
 for src in "$srcdir/.bash.d/"*.sh; do
     # shellcheck disable=SC1090
     . "$src"
