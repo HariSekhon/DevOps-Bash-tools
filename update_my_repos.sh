@@ -31,4 +31,4 @@ while read -r repo; do
     else
         git clone "https://github.com/harisekhon/$repo"
     fi
-done < <(sed 's/#.*//' < "$srcdir/repolist.txt")
+done < <(sed 's/#.*//' < "$srcdir/lib/repolist.txt")
