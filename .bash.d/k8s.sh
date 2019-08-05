@@ -31,8 +31,10 @@ k(){
     kubectl $kubectl_opts "$@"
 }
 
+k8s_get_pod_opts="-o wide -L app,k8s-app"
+
 # this is one of the most used things out there, even more than ping
-alias p="k get po"
+alias p="k get po \$k8s_get_pod_opts"
 alias wp=watchpods
 
 alias use="k config use-context"
@@ -48,7 +50,8 @@ alias menv='eval $(minikube docker-env)'
 
 get_pod(){
     local filter="${1:-.*}"
-    k get pods -o wide | grep "$filter" | head -n1
+    # shellcheck disable=SC2086
+    k get pods $k8s_get_pod_opts | grep "$filter" | head -n1
 }
 
 watchpods(){
@@ -60,7 +63,7 @@ watchpods(){
         echo
         echo 'Pods:'
         echo
-        kubectl $kubectl_opts get pods 2>&1
+        kubectl $kubectl_opts get pods $k8s_get_pod_opts 2>&1
         echo
     "
 }
