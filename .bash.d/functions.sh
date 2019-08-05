@@ -23,6 +23,10 @@ pass(){
     export PASSWORD
 }
 
+hr(){
+    echo "# ============================================================================ #"
+}
+
 strLastIndexOf(){
     local str="$1"
     local substr="$2"
@@ -51,3 +55,4 @@ findpy(){
     find "${@:-.}" -type f -iname '*.py' -o -iname '*.jy' |
     grep -vf ~/code_regex_exclude.txt
 }
+
