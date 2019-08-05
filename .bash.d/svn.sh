@@ -197,7 +197,7 @@ rmnonsvn(){
     xargs rm -f
 }
 
-sdl(){
+svndifflast(){
     local rev=HEAD
     local rev_last=PREV
     if grep -q '^[[:digit:]]\+' <<< "$1"; then
@@ -211,6 +211,7 @@ sdl(){
     svn diff -r "$rev_last:$rev" "$@" |
     more
 }
+#alias sdl=svndifflast
 
 svndiff(){
     local filename="${1:-}"
