@@ -17,8 +17,9 @@
 #                   R e v i s i o n   C o n t r o l  -  G i t
 # ============================================================================ #
 
-# has interdependencies on hg.sh and svn.sh for some of their functions to allow
-# the same aliases and functions to detect if we are instead in Mercurial or Svn repos and act accordingly
+# Primary revision control system
+#
+# if svn.sh and hg.sh functions are enabled, detects and calls svn and mercurial commands if inside those repos so some of the same commands work dynamically
 
 # set location where you check out all the github repos
 export github=~/github
@@ -87,7 +88,6 @@ st(){
     local target_dirname
     target_basename="$(basename "$target")"
     target_dirname="$(dirname "$target")"
-    local found_rcs=0
     #if [ -f "Vagrantfile" ]; then
     #    echo "> vagrant status"
     #    vagrant status
@@ -107,7 +107,6 @@ st(){
             # shellcheck disable=SC2164
             popd >/dev/null
         done
-        found_rcs=1
     elif isGit "$target"; then
         if [ -d "$target" ]; then
             pushd "$target" >/dev/null || { echo "Error: failed to pushd to $target"; return 1; }
@@ -123,58 +122,71 @@ st(){
         #git status "$target" "${*:2}"
         # shellcheck disable=SC2164
         popd &>/dev/null
-        found_rcs=1
-    elif isHg "$target"; then
+    elif type isHg &>/dev/null && isHg "$target"; then
         echo "> hg status $target ${*:2}" >&2
         hg status "$target" "${*:2}" | grep -v "^?"
         # to see relative paths instead of the default absolute paths
-        #hg status `hg root`
-        found_rcs=1
-    fi
-    if [ $found_rcs == 0 ]; then
-        if isSvn "$target"; then
-            echo "> svn st ${*:2}" >&2
-            svn st --ignore-externals "$target" "${*:2}" | grep -v -e "^?" -e "^x";
-        else 
-            echo "not a revision controlled resource as far as bashrc can tell"
-        fi
+        #hg status "$(hg root)"
+    elif type isSvn &>/dev/null && isSvn "$target"; then
+        echo "> svn st ${*:2}" >&2
+        svn st --ignore-externals "$target" "${*:2}" | grep -v -e "^?" -e "^x";
+    else 
+        echo "not a revision controlled resource as far as bashrc can tell"
     fi
   } | more -R -n "$((LINES - 3))"
 }
 
-githg(){
-    if isGit .; then
-        git "$@"
-    elif isHg .; then
-        hg "$@"
-    else
-        echo "not a Git/Mercurial checkout"
+pull(){
+    local target="${1:-.}"
+    if ! [ -e "$target" ]; then
+        echo "$target does not exist"
         return 1
     fi
-}
-
-retag(){
-    local tag1="$1"
-    local checksum="$2"
-    local additional_tags="${*:2}"
-    for tag in $tag1 $additional_tags; do
-        git tag -d "$tag" || :
-        echo "Creating git tag '$tag'"
-        # quoting checksum causes failure with unrecognized checksum ''
-        git tag "$tag" "$checksum"
-        git tag |
-        grep -qF "$tag" ||
-            echo "FAILED"
-    done
-}
-
-switchbranch(){
-    if isGit "."; then
-        git checkout "$1";
-    elif isHg "."; then
-        hg update "$1"
-    else
-        echo "not a Git / Mercurial checkout, cannot switch to branch $1"
+    local target_basename
+    target_basename="$(basename "$target")"
+    # shellcheck disable=SC2166
+    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$github" ]; then
+        for x in "$target"/*; do
+            [ -d "$x" ] || continue
+            # get last character of string
+            [ "${x: -1}" = 2 ] && continue
+            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
+            if git remote -v | grep -qi harisekhon; then
+                echo "> GitHub: git pull $x ${*:2}"
+                git pull "${@:2}"
+                echo
+            fi
+            # shellcheck disable=SC2164
+            popd >/dev/null
+        done
+        return
+    elif isGit "$target"; then
+        pushd "$target" >/dev/null &&
+        echo "> git pull -v ${*:2}" >&2
+        git pull -v "${@:2}"
+        git submodule update
+        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
+        #for branch in $(git branch | cut -c 3- ); do
+        #    git checkout -q "$branch" &&
+        #    echo -n "$branch => " &&
+        #    git pull -v
+        #    echo
+        #    echo
+        #done
+        #git checkout -q "$orig_branch"
+        # shellcheck disable=SC2164
+        popd >/dev/null
+    elif type isHg &>/dev/null && isHg "$target"; then
+        pushd "$target" >/dev/null &&
+        echo "> hg pull && hg up" >&2  &&
+        hg pull && hg up
+        # shellcheck disable=SC2164
+        popd >/dev/null
+    elif type isSvn &>/dev/null && isSvn "$target"; then
+        echo "> svn up $target" >&2
+        svn up "$target"
+    else 
+        echo "not a revision controlled resource as far as bashrc can tell"
         return 1
     fi
 }
@@ -220,7 +232,7 @@ push(){
         #    git push -v $remote $@
         #done
         git push -v "$@"
-    elif isHg .; then
+    elif type isHg &>/dev/null && isHg .; then
         echo "> hg push $*"
         hg push "$@"
     else
@@ -229,20 +241,16 @@ push(){
     fi
 }
 
-# Don't need this actually u() function is better
-#pull(){
-#    if isGit .; then
-#        echo "> git pull $*"
-#        git pull "$@"
-#    elif isHg .; then
-#        echo "> hg fetch $*"
-#        hg fetch "$@"
-#    else
-#        echo "not in a Git or Mercurial controlled directory"
-#        return 1
-#    fi
-#}
-alias pull=u
+switchbranch(){
+    if isGit "."; then
+        git checkout "$1";
+    elif type isHg &>/dev/null && isHg "."; then
+        hg update "$1"
+    else
+        echo "not a Git / Mercurial checkout, cannot switch to branch $1"
+        return 1
+    fi
+}
 
 gitrm(){
     git rm "$@" &&
@@ -274,6 +282,32 @@ gitlp(){
 
 gitl2(){
     git log --pretty=format:"%n%an => %ar%n%s" --name-status "$@"
+}
+
+githg(){
+    if isGit .; then
+        git "$@"
+    elif type isHg &>/dev/null && isHg .; then
+        hg "$@"
+    else
+        echo "not a Git/Mercurial checkout"
+        return 1
+    fi
+}
+
+retag(){
+    local tag1="$1"
+    local checksum="$2"
+    local additional_tags="${*:2}"
+    for tag in $tag1 $additional_tags; do
+        git tag -d "$tag" || :
+        echo "Creating git tag '$tag'"
+        # quoting checksum causes failure with unrecognized checksum ''
+        git tag "$tag" "$checksum"
+        git tag |
+        grep -qF "$tag" ||
+            echo "FAILED"
+    done
 }
 
 gitfind(){
@@ -350,62 +384,6 @@ upl(){
         popd &&
         hr || return 1
     done
-}
-
-pull(){
-    local target="${1:-.}"
-    if ! [ -e "$target" ]; then
-        echo "$target does not exist"
-        return 1
-    fi
-    local target_basename
-    target_basename="$(basename "$target")"
-    # shellcheck disable=SC2166
-    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$github" ]; then
-        for x in "$target"/*; do
-            [ -d "$x" ] || continue
-            # get last character of string
-            [ "${x: -1}" = 2 ] && continue
-            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
-            if git remote -v | grep -qi harisekhon; then
-                echo "> GitHub: git pull $x ${*:2}"
-                git pull "${@:2}"
-                echo
-            fi
-            # shellcheck disable=SC2164
-            popd >/dev/null
-        done
-        return
-    fi
-    if isGit "$target"; then
-        pushd "$target" >/dev/null &&
-        echo "> git pull -v ${*:2}" >&2
-        git pull -v "${@:2}"
-        git submodule update
-        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
-        #for branch in $(git branch | cut -c 3- ); do
-        #    git checkout -q "$branch" &&
-        #    echo -n "$branch => " &&
-        #    git pull -v
-        #    echo
-        #    echo
-        #done
-        #git checkout -q "$orig_branch"
-        # shellcheck disable=SC2164
-        popd >/dev/null
-    elif isHg "$target"; then
-        pushd "$target" >/dev/null &&
-        echo "> hg pull && hg up" >&2  &&
-        hg pull && hg up
-        # shellcheck disable=SC2164
-        popd >/dev/null
-    elif isSvn "$target"; then
-        echo "> svn up $target" >&2
-        svn up "$target"
-    else 
-        echo "not a revision controlled resource as far as bashrc can tell"
-        return 1
-    fi
 }
 
 stagemerge(){
