@@ -18,7 +18,7 @@
 # ============================================================================ #
 
 pass(){
-    read -s -p 'password: ' PASSWORD
+    read -r -s -p 'password: ' PASSWORD
     echo
     export PASSWORD
 }
@@ -55,4 +55,3 @@ findpy(){
     find "${@:-.}" -type f -iname '*.py' -o -iname '*.jy' |
     grep -vf ~/code_regex_exclude.txt
 }
-
