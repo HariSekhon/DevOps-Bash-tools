@@ -48,7 +48,7 @@ alias menv='eval $(minikube docker-env)'
 
 get_pod(){
     local filter="${1:-.*}"
-    k get pods | grep "$filter" | head -n1
+    k get pods -o wide | grep "$filter" | head -n1
 }
 
 watchpods(){
@@ -81,9 +81,6 @@ k8s_get_token(){
     kubectl describe secret -n kube-system \
         "$(kubectl get secrets -n kube-system | grep default | cut -f1 -d ' ')" |
     grep '^token' |
-    #cut -f2 -d':' |
-    #tr -d '\t' |
-    #tr -d " "
     awk '{print $2}'
 }
 
@@ -93,4 +90,5 @@ k8s_get_api(){
     context="$(context)"
     cluster="$(k config view -o jsonpath="{.contexts[?(@.name == \"$context\")].context.cluster}")"
     k config view -o jsonpath="{.clusters[?(@.name == \"$cluster\")].cluster.server}"
+    echo
 }
