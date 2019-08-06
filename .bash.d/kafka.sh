@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# ============================================================================ #
+#                                   K a f k a
+# ============================================================================ #
+
 export PATH="$PATH:/usr/hdp/current/kafka-broker/bin"
 
 kafka_wrappers="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
