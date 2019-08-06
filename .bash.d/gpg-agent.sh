@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# ============================================================================ #
+#                               G P G   A g e n t
+# ============================================================================ #
+
 # Pinentry is important, gpg-agent won't work without it.
 # pinentry intercepts and stores passphrase.
 
