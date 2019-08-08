@@ -1,9 +1,9 @@
 Bashrc Interactive Functions, Aliases and Shell Customizations
 ==============================================================
 
-All `*.sh` files in this directory are sourced by .bashrc at the top level which is designed to be sourced in your $HOME/.bashrc.
+All `*.sh` files in this directory are automatically sourced by .bashrc at the top level which is itself designed to be sourced in your $HOME/.bashrc.
 
-To disable any these simply rename them to not match the `*.sh` glob, eg. => `*.sh.disabled`.
+To disable any these source files, simply rename them to not match the `*.sh` glob, eg. => `*.sh.disabled`.
 
 * `aliases.sh` - general aliases
 * `functions.sh` - general functions
