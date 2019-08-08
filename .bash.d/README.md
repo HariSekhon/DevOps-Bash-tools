@@ -1,7 +1,7 @@
 Advanced Bashrc Code - Interactive Functions, Aliases and Shell Customizations
 ==============================================================
 
-Advanced bashrc code I've been using for 10-15 years. This is a work-in-progress as there are thousands of lines of bashrc stuff still to sanitize and export here.
+Advanced bashrc code I've been using for 10-15 years. This is a work-in-progress as there are thousands of lines of bashrc stuff still to sanitize and export here from my private repo.
 
 All `*.sh` files in this directory are automatically sourced by .bashrc at the top level which is itself designed to be sourced in your $HOME/.bashrc.
 
