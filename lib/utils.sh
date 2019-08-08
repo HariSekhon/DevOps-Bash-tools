@@ -154,7 +154,8 @@ cpu_count(){
     if is_mac; then
         cpu_count="$(sysctl -n hw.ncpu)"
     else
-        cpu_count="$(awk '/^processor/ {++n} END {print n+1}' /proc/cpuinfo)"
+        #cpu_count="$(awk '/^processor/ {++n} END {print n+1}' /proc/cpuinfo)"
+        cpu_count="$(grep -c '^processor[[:space:]]*:' /proc/cpuinfo)"
     fi
     echo "$cpu_count"
 }
