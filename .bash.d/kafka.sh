@@ -29,33 +29,44 @@ export KAFKA_OPTS="$KAFKA_OPTS -Xms1G -Xmx1G"
 kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers/kafka_cli_jaas.conf"
 export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$kafka_cli_jaas_conf"
 
-# Must use FQDNs to match Kerberos service principals
-#
+# ============================================================================ #
+
+# XXX: Enable KAFKA_BROKERS and KAFKA_ZOOKEEPER for convenience
+#      of not having to specify them each time when using kafka_wrapper/ commands
+
+# XXX: Must use FQDNs to match Kerberos service principals
+
 # Apache / Cloudera
 #export KAFKA_BROKERS="$(hostname -f):9092"
-#
+
 # Hortonworks
 #export KAFKA_BROKERS="$(hostname -f):6667"
-#
+
 #export KAFKA_ZOOKEEPERS="$(hostname -f):2181"
 
+# optional - use if chrooting in zookeeper
 #export KAFKA_ZOOKEEPER_ROOT=/kafka
 
+# ============================================================================ #
+
 bootstrap_server=""
-if [ -n "${KAFKA_BROKERS:-}" ]; then
+echo "$*"
+if [ -n "${KAFKA_BROKERS:-}" ] &&
+   ! [[ "$*" =~ --bootstrap-server ]]; then
     # shellcheck disable=SC2034
     bootstrap_server="--bootstrap-server $KAFKA_BROKERS"
 fi
 
 broker_list=""
-if [ -n "${KAFKA_BROKERS:-}" ]; then
+if [ -n "${KAFKA_BROKERS:-}" ] &&
+   ! [[ "$*" =~ --broker-list ]]; then
     # shellcheck disable=SC2034
     broker_list="--broker-list $KAFKA_BROKERS"
 fi
 
 kafka_zookeeper=""
-if [ -n "${KAFKA_ZOOKEEPERS:-}" ]; then
+if [ -n "${KAFKA_ZOOKEEPERS:-}" ] &&
+   ! [[ "$*" =~ --zookeeper ]]; then
     # shellcheck disable=SC2034
     kafka_zookeeper="--zookeeper $KAFKA_ZOOKEEPERS"
 fi
-
