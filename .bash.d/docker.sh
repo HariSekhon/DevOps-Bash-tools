@@ -21,6 +21,10 @@ alias dockerimg='$EDITOR $HOME/docker-images.txt'
 # wipe out exited containers
 alias dockerrm='docker rm $(docker ps -qf status=exited)'
 
+alias dockerr=dockerrunrm
+alias dockere=dockerexec
+alias de=dockere
+
 # wipe out dangling image layers
 #alias dockerrmi='docker rmi $(docker images -q --filter dangling=true)'
 dockerrmi(){
@@ -56,7 +60,7 @@ dockerrmi(){
 #fi
 
 #alias dockerr="docker run --rm -ti"
-function dockerr(){
+function dockerrunrm(){
     local args=""
     for x in "$@"; do
         if [ "${x:0:1}" = "/" ]; then
@@ -109,7 +113,7 @@ dockerip(){
 
 # this goes to the last created and sometimes exited container
 #alias dockere='docker exec -ti $(docker ps -lq) /bin/bash'
-dockere(){
+dockerexec(){
     if [ $# -gt 0 ]; then
         container="$(docker ps | grep -i "$1" | awk '{print $1}' | head -n1)"
     else
