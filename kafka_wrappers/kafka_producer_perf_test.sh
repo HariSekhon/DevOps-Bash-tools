@@ -13,6 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+set -u
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
