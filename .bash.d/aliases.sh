@@ -25,6 +25,10 @@ alias bashrc="$EDITOR $bashrc && r"
 alias ae="$EDITOR ~/.aliases"
 alias be="bashrc"
 
+# shellcheck disable=SC2154
+export bashd="$srcdir/.bash.d"
+alias bashd='cd $bashd'
+
 alias l33tmode="welcome; retmode=on; echo l33tm0de on"
 alias leetmode=l33tmode
 
