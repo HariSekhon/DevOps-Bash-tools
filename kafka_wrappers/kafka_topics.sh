@@ -21,5 +21,5 @@ srcdir="$(dirname "$0")"
 . "$srcdir/../.bash.d/kafka.sh"
 
 # it's assigned in .bash.d/kafka.sh
-# shellcheck disable=SC2154
-kafka-topics.sh "$bootstrap_server" "$@"
+# shellcheck disable=SC2154,SC2086
+kafka-topics.sh $kafka_zookeeper "$@"
