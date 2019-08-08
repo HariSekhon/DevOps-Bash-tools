@@ -1,6 +1,8 @@
 Bashrc Interactive Functions, Aliases and Shell Customizations
 ==============================================================
 
+Advanced bashrc code I've been using for 10-15 years. This is a work-in-progress as there are thousands of lines of bashrc stuff still to sanitize and export here.
+
 All `*.sh` files in this directory are automatically sourced by .bashrc at the top level which is itself designed to be sourced in your $HOME/.bashrc.
 
 To disable any these source files, simply rename them to not match the `*.sh` glob, eg. => `*.sh.disabled`.
