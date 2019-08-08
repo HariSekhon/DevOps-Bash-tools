@@ -37,6 +37,7 @@ k8s_get_pod_opts="-o wide -L app,env"
 # this is one of the most used things out there, even more than ping
 alias p="k get po \$k8s_get_pod_opts"
 alias wp=watchpods
+alias ke=kubeexec
 
 alias use="k config use-context"
 alias contexts="k config get-contexts"
@@ -79,6 +80,10 @@ kdp(){
 
 kdelp(){
     k delete pod "$@"
+}
+
+kubeexec(){
+    kubectl exec -ti "$@" /bin/sh
 }
 
 k8s_get_token(){
