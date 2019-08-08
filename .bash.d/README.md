@@ -7,6 +7,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
 
 * `aliases.sh` - general aliases
 * `functions.sh` - general functions
+* `ssh-agent.sh` / `gpg-agent.sh` - auto-starts SSH and GPG agents if not already running, stores and auto-sources their details for new shells to automatically
 * `<technology>.sh` - functions and aliases related to day-to-day use of a specific technology such a Git, Kubernetes, Kafka, Docker etc.
 
 More script related functions can be found in the [lib/](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/lib) directory at the top level.
