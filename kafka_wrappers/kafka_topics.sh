@@ -13,6 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+set -u
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
@@ -20,6 +21,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/../.bash.d/kafka.sh"
 
+# old version of kafka used --zookeeper, deprecated now
+#kafka-topics.sh $kafka_zookeeper "$@"
+
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154,SC2086
-kafka-topics.sh $kafka_zookeeper "$@"
+kafka-topics.sh $bootstrap_server "$@"
