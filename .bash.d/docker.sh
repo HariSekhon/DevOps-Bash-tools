@@ -25,6 +25,8 @@ alias dockerr=dockerrunrm
 alias dockere=dockerexec
 alias de=dockere
 
+alias dockerrma=dockerrmall
+
 # wipe out dangling image layers
 #alias dockerrmi='docker rmi $(docker images -q --filter dangling=true)'
 dockerrmi(){
@@ -78,17 +80,6 @@ docker_get_container_ids(){
     docker ps -a --format "{{.ID}} {{.Names}}" |
     grep -vi -f ~/docker-perm.txt 2>/dev/null |
     awk '{print $1}'
-}
-
-dockerrma(){
-    # would use xargs -r / --no-run-if-empty but that is GNU only, doesn't work on Mac
-    local ids
-    ids="$(docker_get_container_ids)"
-    if [ -n "$ids" ]; then
-        docker rm -f "$@"
-        # shellcheck disable=SC2086
-        docker rm $ids
-    fi
 }
 
 dockerrmall(){
