@@ -13,6 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+set -u
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
@@ -21,5 +22,5 @@ srcdir="$(dirname "$0")"
 . "$srcdir/../.bash.d/kafka.sh"
 
 # it's assigned in .bash.d/kafka.sh
-# shellcheck disable=SC2154
-kafka-console-producer.sh "$broker_list" "$@"
+# shellcheck disable=SC2154,SC2086
+kafka-console-producer.sh $broker_list "$@"
