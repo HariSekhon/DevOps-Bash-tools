@@ -38,7 +38,9 @@ for script in $scripts; do
     script_start_time="$(date +%s)"
     echo
     declare_if_inside_docker
-    "./$script" "${VERSION:-}"
+    # quoting VERSION passes blank which prevents populating with default versions
+    # shellcheck disable=SC2086
+    "./$script" ${VERSION:-}
     echo
     date
     echo
