@@ -17,6 +17,22 @@
 #                             Bash General Functions
 # ============================================================================ #
 
+checkprog(){
+    if command -v "$1" &>/dev/null; then
+        return 0
+    else
+        echo "$1 could not be found in path"
+        return 1
+    fi
+}
+
+sc(){
+    checkprog screen || return 1
+    isscreen && { echo "I am already in a screen, aborting"; return 1; }
+    screen -wipe
+    screen -aARRD "$@"
+}
+
 pass(){
     read -r -s -p 'password: ' PASSWORD
     echo
