@@ -21,13 +21,22 @@
 export bashrc=~/.bashrc
 alias r=". $bashrc"
 alias bashrc="$EDITOR $bashrc && r"
-# manual aliases
-alias ae="$EDITOR ~/.aliases"
-alias be="bashrc"
+alias vimrc="$EDITOR ~/.vimrc"
+alias screenrc="$EDITOR ~/.screenrc"
+alias aliases="$EDITOR $bashd/aliases.sh"
+alias ae=aliases
+alias be=bashrc
+alias ve=vimrc
+alias se=screenrc
 
 # shellcheck disable=SC2154
 export bashd="$srcdir/.bash.d"
 alias bashd='cd $bashd'
+
+#alias cleanshell="exec env - bash --rcfile /dev/null"
+alias cleanshell="exec env - bash --norc --noprofile"
+alias newshell="exec bash"
+alias rr="newshell"
 
 alias l33tmode="welcome; retmode=on; echo l33tm0de on"
 alias leetmode=l33tmode
@@ -82,10 +91,6 @@ alias visualvm="~/visualvm/bin/visualvm"
 
 # for piping from grep
 alias uniqfiles="sed 's/:.*//;/^[[:space:]]*$/d' | sort -u"
-
-# use this alias for 'kubectl get pods' now
-#alias ping="ping -n"
-#alias p=ping
 
 export etc=~/etc
 alias etc="cd $etc"
