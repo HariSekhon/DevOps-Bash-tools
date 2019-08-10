@@ -50,7 +50,7 @@ export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$kafka_cli_jaas
 # ============================================================================ #
 
 bootstrap_server=""
-echo "$*"
+
 if [ -n "${KAFKA_BROKERS:-}" ] &&
    ! [[ "$*" =~ --bootstrap-server ]]; then
     # shellcheck disable=SC2034
