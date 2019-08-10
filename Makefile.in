@@ -377,7 +377,7 @@ docker-ubuntu:
 
 .PHONY: travis
 travis:
-	travis_last_log.py $(REPO)
+	travis_last_log.py --failed $(REPO)
 
 .PHONY: travis-debug
 travis-debug:
