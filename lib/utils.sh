@@ -309,7 +309,7 @@ trap_debug_env(){
 
 run++(){
     #if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
-        ((run_count + 1))
+        ((run_count+=1))
     #fi
 }
 
