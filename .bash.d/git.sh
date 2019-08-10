@@ -80,6 +80,7 @@ isGit(){
 st(){
   {
     local target="${1:-.}"
+    shift
     if ! [ -e "$target" ]; then
         echo "$target does not exist"
         return 1
@@ -92,14 +93,15 @@ st(){
     #    echo "> vagrant status"
     #    vagrant status
     # shellcheck disable=SC2166
-    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$HOME/github" ]; then
+    if [ "$target_basename" = "github" ] ||
+       [ "$target" = "." -a "$(pwd)" = "$HOME/github" ]; then
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             if git remote -v | grep -qi harisekhon; then
-                echo "> GitHub: git status $x ${*:2}"
-                git status . "${*:2}"
+                echo "> GitHub: git status $x $*"
+                git status . "$@"
                 echo
                 hr
                 echo
@@ -112,24 +114,24 @@ st(){
             pushd "$target" >/dev/null || { echo "Error: failed to pushd to $target"; return 1; }
             echo "> git stash list" >&2
             git stash list && echo
-            echo "> git status $target ${*:2}" >&2
-            git -c color.status=always status . "${*:2}"
+            echo "> git status $target $*" >&2
+            git -c color.status=always status . "$@"
         else
             pushd "$target_dirname" >/dev/null || { echo "Error: failed to pushed to '$target_dirname'"; return 1; }
-            echo "> git status $target ${*:2}" >&2
-            git -c color.status=always status "$target_basename" "${*:2}"
+            echo "> git status $target $*" >&2
+            git -c color.status=always status "$target_basename" "$@"
         fi
         #git status "$target" "${*:2}"
         # shellcheck disable=SC2164
         popd &>/dev/null
     elif type isHg &>/dev/null && isHg "$target"; then
-        echo "> hg status $target ${*:2}" >&2
-        hg status "$target" "${*:2}" | grep -v "^?"
+        echo "> hg status $target $*" >&2
+        hg status "$target" "$@" | grep -v "^?"
         # to see relative paths instead of the default absolute paths
         #hg status "$(hg root)"
     elif type isSvn &>/dev/null && isSvn "$target"; then
-        echo "> svn st ${*:2}" >&2
-        svn st --ignore-externals "$target" "${*:2}" | grep -v -e "^?" -e "^x";
+        echo "> svn st $*" >&2
+        svn st --ignore-externals "$target" "$@" | grep -v -e "^?" -e "^x";
     else 
         echo "not a revision controlled resource as far as bashrc can tell"
     fi
