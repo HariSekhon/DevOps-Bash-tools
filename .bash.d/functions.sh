@@ -14,8 +14,16 @@
 #
 
 # ============================================================================ #
-#                             Bash General Functions
+#                  B a s h   G e n e r a l   F u n c t i o n s
 # ============================================================================ #
+
+pg(){
+    # don't want pgrep, want color coding
+    # shellcheck disable=SC2009
+    ps -ef |
+    grep -i --color=yes "$@" |
+    grep -v grep
+}
 
 checkprog(){
     if command -v "$1" &>/dev/null; then
@@ -24,13 +32,6 @@ checkprog(){
         echo "$1 could not be found in path"
         return 1
     fi
-}
-
-sc(){
-    checkprog screen || return 1
-    isscreen && { echo "I am already in a screen, aborting"; return 1; }
-    screen -wipe
-    screen -aARRD "$@"
 }
 
 pass(){
@@ -42,6 +43,17 @@ pass(){
 hr(){
     echo "# ============================================================================ #"
 }
+
+currentScreenResolution(){
+    #xrandr | awk '/\*/ {print $1}'
+    xdpyinfo  | awk '/dimensions/ {print $2}'
+}
+
+yy(){
+    cal `date '+%Y'`
+}
+
+# ============================================================================ #
 
 strLastIndexOf(){
     local str="$1"
