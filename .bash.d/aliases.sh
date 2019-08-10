@@ -31,7 +31,7 @@ alias se=screenrc
 
 # shellcheck disable=SC2154
 export bashd="$srcdir/.bash.d"
-alias bashd='cd $bashd'
+alias bashd="cd $bashd"
 
 #alias cleanshell="exec env - bash --rcfile /dev/null"
 alias cleanshell="exec env - bash --norc --noprofile"
