@@ -115,6 +115,17 @@ vihosts(){
     $sudo pkill -1 dnsmasq
 }
 
+paste_clipboard(){
+    if [ "$(uname)" = Darwin ]; then
+        cat | pbcopy
+    elif [ "$(uname)" = Linux ]; then
+        cat | xclip
+    else
+        echo "ERROR: OS is not Darwin/Linux"
+        return 1
+    fi
+}
+
 epoch2date(){
     if [ -n "$APPLE" ]; then
         date -r "$1"
