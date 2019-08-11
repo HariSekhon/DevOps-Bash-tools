@@ -34,7 +34,7 @@ fi
 
 [ $EUID -eq 0 ] && sudo="" || sudo=sudo
 
-if ! $sudo yum repolist | grep -qi '\<epel\>'; then
+if $sudo yum repolist | grep -qi '\<epel\>'; then
     # accounts for custom internal EPEL mirrors which should have epel in the name
     echo "EPEL yum repo already detected in yum repolist, skipping..."
     exit 0
