@@ -17,7 +17,15 @@ For more advanced Systems Administration scripts in other languages, see the rep
   - utility scripts used from other scripts
 
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
-- `.bash.d/*.sh` - advanced bashrc code, lots of functions and aliases for [Linux](https://en.wikipedia.org/wiki/Linux), [Git](https://git-scm.com/), [Docker](https://www.docker.com/), [Kubernetes](https://kubernetes.io/), [Kafka](http://kafka.apache.org/), automatic GPG and SSH agent handling etc. This is a work-in-progress as I still have thousands of lines of code from the last ~15 years to sanitize and export here
+- `.bash.d/*.sh` - thousands of lines of advanced bashrc code, functions and aliases for:
+  - [Linux](https://en.wikipedia.org/wiki/Linux)
+  - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [SVN](https://subversion.apache.org)
+  - [Docker](https://www.docker.com/)
+  - [Kubernetes](https://kubernetes.io/)
+  - [Kafka](http://kafka.apache.org/)
+  - [Vagrant](https://www.vagrantup.com/)
+  - automatic GPG and SSH agent handling
+  - ongoing work-in-progress as I still have thousands of lines of code from the last ~15 years to sanitize and export here
 - `lib` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
 - `kafka_wrappers` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr-cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools))
 
