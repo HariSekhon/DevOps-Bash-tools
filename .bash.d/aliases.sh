@@ -163,6 +163,15 @@ alias t3='$EDITOR $HOME/tmp3'
 alias tg='traceroute www.google.com'
 #alias sec='ps -ef| grep -e arpwatc[h] -e swatc[h] -e scanlog[d]'
 
+
+if [ -n "$APPLE" ]; then
+    alias clipboard=pbcopy
+else
+    alias clipboard=xclip
+fi
+alias clip=clipboard
+
+
 export lab=~/lab
 alias lab='cd $lab'
 
