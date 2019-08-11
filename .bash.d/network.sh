@@ -296,3 +296,64 @@ function dhcpdns(){
     set_dns "Empty"
     #networksetup -setsearchdomains <networkservice> <domain1> [domain2]
 }
+
+airport(){
+    local wifi_adapter
+    wifi_adapter="$(networksetup -listnetworkserviceorder |
+                    grep "Hardware.*Wi-Fi" |
+                    sed 's/.*: //;s/)$//'
+                   )"
+    networksetup -setairportpower "$wifi_adapter" "$1"
+}
+alias air=airport
+
+airportr(){
+    airport off
+    airport on
+}
+alias airr=airportr
+alias ag="airr; g"
+
+watchwifi(){
+    scnum 39
+    while true; do
+        checkwifi
+        sleep 30 || break
+    done
+}
+
+checkwifi(){
+    # needs to be global otherwise will be forgotten between runs of this program
+    [ -z "$wifi_failures" ] && wifi_failures=0
+    for((i=1;i<=3;i++)); do
+        if ping -c1 -W1 4.2.2.1 >/dev/null; then
+            if [ $wifi_failures -gt 0 ]; then
+                tstamp "wifi recovered from $wifi_failures failures"
+            fi
+            wifi_failures=0
+            return
+        else
+            ((wifi_failures+=1))
+            tstamp "$wifi_failures wifi failures"
+        fi
+    done
+    timestamp "RESTARTING WIFI"
+    airportr
+}
+
+setdhcp(){
+    isMacNetworkService "$1" || return 1;
+    sudo networksetup -setdhcp "$1"
+}
+
+renewdhcp(){
+    sudo ipconfig set "$1" DHCP
+}
+
+#sethomenet(){
+#    isMacNetworkService "$1" || return 1;
+#    sudo networksetup -setmanual "$1" x.x.x.x 255.255.255.0 x.x.x.1
+#    sudo route delete 0.0.0.0
+#    sudo route add 0.0.0.0 x.x.x.1
+#    publicdns
+#}
