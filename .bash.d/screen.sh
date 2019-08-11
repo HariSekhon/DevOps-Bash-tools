@@ -55,3 +55,7 @@ sh_server_real(){
 alias fsr=sh_server_real
 alias ssr=sh_server_real
 
+# this idea's is a bust so far...
+#function c(){
+#    screen -t "$@" bash -c ". ~/.bashrc && eval $@"
+#}
