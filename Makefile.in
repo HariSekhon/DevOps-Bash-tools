@@ -382,3 +382,7 @@ travis:
 .PHONY: travis-debug
 travis-debug:
 	travis_debug_session.py $(REPO)
+
+.PHONY: readme
+readme:
+	. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
