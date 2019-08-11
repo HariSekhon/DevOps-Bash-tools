@@ -22,17 +22,28 @@
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
 
 export bashrc=~/.bashrc
+# srcdir defined in .bashrc
+# shellcheck disable=SC2154
+export bashrc2="$srcdir/.bashrc"
 alias r='. $bashrc'
 alias bashrc='$EDITOR $bashrc && r'
+alias bashrc2='$EDITOR $bashrc2 && r'
 alias vimrc='$EDITOR ~/.vimrc'
 alias screenrc='$EDITOR ~/.screenrc'
 alias aliases='$EDITOR $bashd/aliases.sh'
 alias ae=aliases
 alias be=bashrc
+alias be2=bashrc2
 alias ve=vimrc
 alias se=screenrc
+#em(){ emacs "$@" ; }
+#alias em=emacs
+#alias e=em
+#xe(){ xemacs $@ & }
+#alias x=xe
 
-alias bt="cd $(dirname ${BASH_SOURCE[0]})/.."
+# shellcheck disable=SC2139
+alias bt="cd $(dirname "${BASH_SOURCE[0]}")/.."
 
 # shellcheck disable=SC2154
 export bashd="$srcdir/.bash.d"
