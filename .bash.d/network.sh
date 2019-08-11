@@ -173,13 +173,24 @@ isupme(){
 }
 
 chrome(){
-    checkprog google-chrome || return 1
-    google-chrome "${*:-http://www.google.com}" &
+    if [ -n "$APPLE" ]; then
+        # opens in most recent Chrome window
+        # could use one of these: --new --args --incognito --new-window
+        open -a 'Google Chrome' "${*:-http://www.google.com}"
+    else
+        checkprog google-chrome || return 1
+        google-chrome "${*:-http://www.google.com}" &
+    fi
+
 }
 
 ff(){
-    checkprog firefox || return 1
-    firefox "${*:-http://www.google.com}" &
+    if [ -n "$APPLE" ]; then
+        open -a 'Firefox' "http://${*:-www.google.com}"
+    else
+        checkprog firefox || return 1
+        firefox "${*:-http://www.google.com}" &
+    fi
 }
 
 gg(){
