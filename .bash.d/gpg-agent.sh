@@ -34,7 +34,7 @@ gpg_agent(){
                     echo "Stale gpg-agent found. Spawning new agent..."
                     killall -9 gpg-agent
                     eval "$(gpg-agent --daemon | tee "$GPG_ENV_FILE")"
-                elif [ "$(ps -p "$GPG_AGENT_PID" -c comm=")" != "gpg-agent")" ]; then
+                elif [ "$(ps -p "$GPG_AGENT_PID" -o comm=)" != "gpg-agent" ]; then
                     echo "gpg-agent PID does not belong to gpg-agent, spawning new agent..."
                     eval "$(gpg-agent --daemon | tee "$GPG_ENV_FILE")"
                 fi
