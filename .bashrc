@@ -117,6 +117,11 @@ fi
 
 # ============================================================================ #
 
+sudo=sudo
+if [ $EUID -eq 0 ]; then
+    sudo=""
+fi
+
 #export PATH="${PATH%%:$HOME/github*}"
 add_PATH(){
     local path
