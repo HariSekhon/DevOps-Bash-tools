@@ -93,20 +93,18 @@ safe_ssh(){
 } 
 alias sssh=safe_ssh
 
-#check_sshkey(){
-#    op="$1"
-#    shift;
-#    for x in "$@"; do
-#        grep "$x" ~/.ssh/known_hosts |
-#        sort |
-#        while read -r host id key; do
-#            key2="$(ssh-keyscan "$host" | grep "^$host2" | awk '{print $3}')"
-#            if [ "$key" != "$key2" ]; then
-#                echo -e "\nMISMATCH: $host\nkey: $key\nkey2:$key2\n\n"
-#            fi
-#        done
-#    done
-#}
+check_sshkey(){
+    for x in "$@"; do
+        grep "$x" ~/.ssh/known_hosts |
+        sort |
+        while read -r host id known_key; do
+            scanned_key="$(ssh-keyscan "$host" | awk "/^$host $id / {print \$3}")"
+            if [ "$scanned_key" != "$known_key" ]; then
+                echo -e "\nMISMATCH: $host\nknown key: $known_key\nscanned_key:$scanned_key\n\n"
+            fi
+        done
+    done
+}
 
 #update_sshkey(){
 #    host="$1"
