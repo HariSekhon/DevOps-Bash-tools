@@ -365,3 +365,35 @@ renewdhcp(){
 #    sudo route add 0.0.0.0 x.x.x.1
 #    publicdns
 #}
+
+vncwho() {
+    netstat -tW |
+    grep ".*:5900 .*:.*" |
+    awk '{a=$5; split(a,b,":"); print b[1]}'
+}
+
+vnc(){
+    if command -v krdc &>/dev/null; then
+        krdc "vnc:/$1" &
+    elif command -v vncviewer &>/dev/null; then
+        vncviewer "$1" &
+    else
+        echo "could not find krdc or vncviewer in \$PATH"
+        return 1
+    fi
+}
+
+revnc(){
+    if [ -z "$1" ]; then
+        echo "You must supply a hostname or ip address to connect to"
+        return 1
+    fi
+    while ! ping -c 1 "$pingwait" 1 "$1" &>/dev/null; do
+        sleep 1
+    done
+    timestamp "machine is up"
+    until vnc "$1"; do
+        sleep 1
+        timestamp "retrying $1"
+    done
+}
