@@ -44,6 +44,12 @@ hr(){
     echo "# ============================================================================ #"
 }
 
+vihosts(){
+    [ $EUID -eq 0 ] && sudo="" || sudo=sudo
+    $sudo vim /etc/hosts
+    $sudo pkill -1 dnsmasq
+}
+
 currentScreenResolution(){
     #xrandr | awk '/\*/ {print $1}'
     xdpyinfo  | awk '/dimensions/ {print $2}'
