@@ -17,6 +17,22 @@
 #                  B a s h   G e n e r a l   F u n c t i o n s
 # ============================================================================ #
 
+# Enables colourized return codes in prompt_func
+# better leave it as the same as already set. This way a reload of bashrc doesn't change the mode
+# could do retmode=${retmode:-off} but this is unnecessary overhead
+#retmode=off
+# safer to set it to off because otherwise it's possible to get in to a loop with set -u
+retmode=${retmode:-off}
+retmode(){
+    if [ "$retmode" = "on" ]; then
+        retmode=off
+        echo "retmode off"
+    else
+        retmode=on
+        echo "retmode on"
+    fi
+}
+
 pg(){
     # don't want pgrep, want color coding
     # shellcheck disable=SC2009
@@ -64,6 +80,27 @@ loop(){
     done
 }
 
+ptop(){
+    if [ -z "$1" ]; then
+        echo "usage: ptop program1 program2 ..."
+        return 1
+    fi
+    local pids
+    pids="$(pgrep -f "$(sed 's/ /|/g' <<< "$*")")"
+    local pid_args
+    if [ -n "$APPLE" ]; then
+        pid_args="$(sed 's/^/-pid /' <<< "$pids")"
+    else
+        pid_args="$(sed 's/^/-p /' <<< "$pids")"
+    fi
+    if [ -z "$pids" ]; then
+        echo "No matching programs found"
+        return 1
+    fi
+    # shellcheck disable=SC2086
+    top $pid_args
+}
+
 topcommands(){
     # first awk print $2 but my advanced history records `date '+%F %T'` in between number and command for $2 and $3, making command $4
     history |
@@ -103,6 +140,22 @@ f(){
     eval find -L . -type f "$grep"
 }
 
+foreachfile(){
+    # not passing function f()
+    # shellcheck disable=SC2033
+    find . -type f -maxdepth 1 |
+    while read -r file; do
+        [ ! -f "$file" ] && continue
+        [ -b "$file"   ] && continue
+        [ -c "$file"   ] && continue
+        [ -d "$file"   ] && continue
+        [ -p "$file"   ] && continue
+        [ -S "$file"   ] && continue
+        [ -L "$file"   ] && continue
+        eval "$@"
+    done
+}
+
 add_etc_host(){
     local host_line="$*"
     $sudo grep -q "^$host_line" /etc/hosts ||
@@ -124,6 +177,20 @@ paste_clipboard(){
         echo "ERROR: OS is not Darwin/Linux"
         return 1
     fi
+}
+
+wcbash(){
+    # $github defined in aliases.sh
+    # shellcheck disable=SC2154
+    wc "$HOME/.bashrc" \
+       "$HOME/.bash_profile" \
+       "$BASH_HOME/.bash_logout" \
+       "$HOME/.alias"* \
+       "$HOME/.aliases"* \
+       "$HOME/.bashrc_dynamichosts" \
+       "$github/bash-tools/.bashrc" \
+       "$github/bash-tools/.bash_profile" \
+       "$github/bash-tools/.bash.d/"*.sh 2>/dev/null
 }
 
 epoch2date(){
