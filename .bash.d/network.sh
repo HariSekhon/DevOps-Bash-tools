@@ -43,6 +43,18 @@ alias g=google
 # watch_url.pl is in DevOps-Perl-tools repo which should be in $PATH
 alias wg="watch_url.pl google.com"
 
+n(){
+    if command -v host &>/dev/null; then
+        host "$@"
+    elif command -v nslookup &>/dev/null; then
+        nslookup "$@"
+    else
+        echo "neither host nor nslookup were found in the path"
+        return 1
+    fi
+}
+alias h=n
+
 getip(){
     host "$@" | grep "has address" | awk '{print $4; exit}'
 }
@@ -140,6 +152,17 @@ whatismyip(){
     lynx -useragent="Mozilla" -dump www.whatismyip.com 2>/dev/null | awk '/Address Lookup Your IP|Your Public IPv6 is:/ {print $6}'
 }
 
+browser(){
+    if [ -n "$BROWSER" ]; then
+        "$BROWSER" "$@"
+    elif [ -n "$APPLE" ]; then
+        open "$@"
+    else
+        echo "\$BROWSER environment variable not set and not on Mac OSX, not sure which browser to use, aborting..."
+        return 1
+    fi
+}
+
 downorjustme(){
     browser "http://www.downforeveryoneorjustme.com/$1"
 }
@@ -148,6 +171,55 @@ downorjustme(){
 isupme(){
     browser "http://www.isup.me/$1"
 }
+
+chrome(){
+    checkprog google-chrome || return 1
+    google-chrome "${*:-http://www.google.com}" &
+}
+
+ff(){
+    checkprog firefox || return 1
+    firefox "${*:-http://www.google.com}" &
+}
+
+gg(){
+    if [ -z "$*" ]; then
+        browser &
+    else
+        searchterm="$(sed 's/ /%20/g' <<< "$*")"
+        browser "http://www.google.com/search?q=$searchterm" &
+    fi
+}
+
+netcraft(){
+    checkprog firefox || return 1
+    browser "http://uptime.netcraft.com/up/graph?site=$*" &
+}
+
+wikipedia(){
+    checkprog "firefox" || return 1
+    local searchterm
+    searchterm="$(sed 's/ /%20/g' <<< "$*")"
+    browser "http://en.wikipedia.org?search=$searchterm&go=Go" &
+}
+alias wiki=wikipedia
+
+definition(){
+    checkprog "firefox" || return 1
+    local searchterm
+    searchterm="$(sed 's/ /%20/g' <<< "$*")"
+    # hl=en&q=test&btnI=I%27m+Feeling+Lucky&meta=&aq=f
+    browser "http://www.google.co.uk/search?hl=en&q=definition+$searchterm&btnI=I%27m+Feeling+Lucky" &
+}
+# alias def=definition
+
+# gh(){
+#     url="http://www.google.com/search?q="
+#     browser "${url}site%3A$*" &
+#     browser "${url}site%3A$* login" &
+#     browser "${url}link%3A$*" &
+#     browser "${url}related%3A$*" &
+# }
 
 
 # ============================================================================ #
