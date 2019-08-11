@@ -44,10 +44,65 @@ hr(){
     echo "# ============================================================================ #"
 }
 
+topcommands(){
+    # first awk print $2 but my advanced history records `date '+%F %T'` in between number and command for $2 and $3, making command $4
+    history |
+    awk '{print $4}' |
+    awk 'BEGIN {FS="|"} {print $1}' |
+    sort |
+    uniq -c |
+    sort -n |
+    tail -n "${1:-10}" |
+    sort -nr
+}
+alias topcmds=topcommands
+
+# easy quick find recursing down current directory tree
+#
+#f(){
+#    [ -n "$*" ] || { echo "usage: f <partial_pattern>"; return 1; }
+#    pattern=""
+#    for x in $*; do
+#        pattern+="*$x"
+#    done
+#    pattern+="*"
+#    find -L . -iname "$pattern"
+#}
+#
+# shellcheck disable=SC2032
+f(){
+    local grep=""
+    # shellcheck disable=SC2013
+    for x in $(sed 's/[^A-Za-z0-9]/ /g' <<< "$*"); do
+        if [[ "$x" =~ [a-zA-Z0-9] ]]; then
+            grep="$grep | grep -i --color=auto $x"
+        fi
+    done
+    # times about the same
+    #eval find -L . -type f -iname "\*$1\*" $grep
+    eval find -L . -type f "$grep"
+}
+
 vihosts(){
     [ $EUID -eq 0 ] && sudo="" || sudo=sudo
     $sudo vim /etc/hosts
     $sudo pkill -1 dnsmasq
+}
+
+browser(){
+    if [ -n "$BROWSER" ]; then
+        "$BROWSER" "$@"
+    elif [ -n "$APPLE" ]; then
+        open "$@"
+    fi
+}
+
+epoch2date(){
+    if [ -n "$APPLE" ]; then
+        date -r "$1"
+    else
+        date -d "@$1"
+    fi
 }
 
 currentScreenResolution(){
@@ -154,17 +209,23 @@ strLastIndexOf(){
 # ============================================================================ #
 
 progs(){
+    # not passing function f()
+    # shellcheck disable=SC2033
     find "${@:-.}" -type f |
     grep -Evf ~/code_regex_exclude.txt |
     grep -v -e '/lib/' -e '.*-env.sh' -e '/tests/'
 }
 
 progs2(){
+    # not passing function f()
+    # shellcheck disable=SC2033
     find "${@:-.}" -type f -o -type l |
     grep -Evf ~/code_regex_exclude.txt
 }
 
 findpy(){
+    # not passing function f()
+    # shellcheck disable=SC2033
     find "${@:-.}" -type f -iname '*.py' -o -iname '*.jy' |
     grep -vf ~/code_regex_exclude.txt
 }
