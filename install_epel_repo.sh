@@ -41,7 +41,7 @@ if $sudo yum repolist | grep -qi '\<epel\>'; then
 fi
 
 if ! $sudo yum install -y epel-release; then
-    rpm -q wget || yum install -y wget
+    rpm -qi wget || yum install -y wget
     major_release="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
     wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
     $sudo rpm -ivh /tmp/epel.rpm
