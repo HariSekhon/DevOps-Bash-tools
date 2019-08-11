@@ -114,3 +114,16 @@ dp(){
     title
 }
 
+# ============================================================================ #
+
+man(){
+    title "man $1"
+    command man "$@"
+    title "$LAST_TITLE"
+}
+
+sudo(){
+    title "sudo $1"
+    command sudo "$@"
+    title "$LAST_TITLE"
+}
