@@ -49,6 +49,14 @@ alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
 
+install_git_completion(){
+    if ! [ -f "$HOME/.git-completion.bash" ]; then
+        wget -O "$HOME/.git-completion.bash" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    fi
+}
+
+[ -f "$HOME/.git-completion.bash" ] && . "$HOME/.git-completion.bash"
+
 isGit(){
     local target=${1:-.}
     # There aren't local .hg dirs everywhere only at top level so this is difficult in bash
