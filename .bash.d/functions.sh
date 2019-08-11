@@ -44,6 +44,26 @@ hr(){
     echo "# ============================================================================ #"
 }
 
+repeat(){
+    local i n
+    n="$1"
+    shift
+    if [ -z "$n" ]; then
+        echo "usage: repeat N command args"
+        return 1
+    fi
+    for ((i=1; i <= n; i++)); do
+        "$@"
+    done
+}
+
+loop(){
+    while true; do
+        eval "${*//\$/\\$}"
+        sleep 1
+    done
+}
+
 topcommands(){
     # first awk print $2 but my advanced history records `date '+%F %T'` in between number and command for $2 and $3, making command $4
     history |
@@ -81,6 +101,12 @@ f(){
     # times about the same
     #eval find -L . -type f -iname "\*$1\*" $grep
     eval find -L . -type f "$grep"
+}
+
+add_etc_host(){
+    local host_line="$*"
+    $sudo grep -q "^$host_line" /etc/hosts ||
+    $sudo echo "$host_line" >> /etc/hosts
 }
 
 vihosts(){
