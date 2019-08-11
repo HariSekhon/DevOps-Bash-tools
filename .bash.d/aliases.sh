@@ -32,6 +32,8 @@ alias be=bashrc
 alias ve=vimrc
 alias se=screenrc
 
+alias bt="cd $(dirname ${BASH_SOURCE[0]})/.."
+
 # shellcheck disable=SC2154
 export bashd="$srcdir/.bash.d"
 alias bashd='cd $bashd'
@@ -88,6 +90,45 @@ alias screen='screen -T $TERM'
 # my pytools github repo
 alias ht='headtail.py'
 
+# ============================================================================ #
+#                      G i t H u b   /   B i t B u c k e t
+# ============================================================================ #
+
+export github="$HOME/github"
+alias github='cd $github';
+
+export bitbucket="$HOME/bitbucket"
+alias bitbucket='cd $bitbucket'
+alias bb=bitbucket
+
+if [ -d "$github" ]; then
+    for x in "$github/"*; do
+        [ -d "$x" ] || continue
+        y="${x##*/}"
+        y="${y// /}"
+        z="${y//-/_}"
+        z="${z//./_}"
+        z="${z// /}"
+        export "$z"="$x"
+        # shellcheck disable=SC2139,SC2140
+        alias "$y"="sti $y; cd $github/$y"
+    done
+fi
+
+if [ -d "$bitbucket" ]; then
+    for x in "$bitbucket/"*; do
+        [ -d "$x" ] || continue
+        y=${x##*/}
+        z="${y//-/_}"
+        z="${z//./_}"
+        export "$z"="$x"
+        # shellcheck disable=SC2139,SC2140
+        alias "$y"="sti $y; cd $bitbucket/$y"
+    done
+fi
+
+# ============================================================================ #
+
 alias a='ansible'
 alias bc='bc -l'
 alias chromekill='pkill -f "Google Chrome Helper"'
@@ -99,6 +140,7 @@ alias uniqfiles="sed 's/:.*//;/^[[:space:]]*$/d' | sort -u"
 
 export etc=~/etc
 alias etc='cd $etc'
+
 
 alias distro='cat /etc/*release /etc/*version 2>/dev/null'
 alias trace=traceroute
@@ -132,3 +174,13 @@ for v in ~/github/pytools/validate_*.py; do
     # shellcheck disable=SC2139,SC2140
     alias "v$z"="$v"
 done
+
+# keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
+#alias emacs="emacs -nw"
+
+alias fluxkeys='$EDITOR $HOME/.fluxbox/keys'
+alias fke=fluxkeys
+alias fluxmenu='$EDITOR $HOME/.fluxbox/mymenu'
+alias fme=fluxmenu
+alias mymenu=fluxmenu
+alias menu=mymenu
