@@ -233,6 +233,76 @@ definition(){
 # }
 
 
+retry(){
+    local cmd="$1"
+    local host="${2##*@}"
+    #local user="${2%%@*}"
+    local args="${*:3}"
+    if [ -z "$host" ]; then
+        echo "You must supply a hostname or ip address to connect to"
+        return 2
+    fi
+    if [ "$cmd" = "ssh" ] || [ "$cmd" = "rdp" ]; then
+        whenup "$host" || return 1
+    fi
+    [ "$cmd" = "ssh" ] && host="root@$host"
+    if [ "$cmd" = "ssh" ]; then
+        until port "${host##*@}" 22 >/dev/null; do
+            tstamp "trying $host port 22"
+            sleep 1
+        done
+    elif [ "$cmd" = "rdp" ]; then
+        until port "$host" 3389 >/dev/null; do
+            tstamp "trying $host port 3389"
+            sleep 1
+        done
+    fi
+    [ "$cmd" = "ssh" ] && printargs= || printargs="$args"
+    # shellcheck disable=SC2086
+    until "$cmd" "$host" $args; do
+        sleep 1
+        tstamp "trying $cmd $host $printargs"
+    done
+    echo >/dev/null
+}
+
+rerdp(){
+    retry "whenport $1 3389; rdp" "$1"
+}
+
+vncwho() {
+    netstat -tW |
+    grep ".*:5900 .*:.*" |
+    awk '{a=$5; split(a,b,":"); print b[1]}'
+}
+
+vnc(){
+    if command -v krdc &>/dev/null; then
+        krdc "vnc:/$1" &
+    elif command -v vncviewer &>/dev/null; then
+        vncviewer "$1" &
+    else
+        echo "could not find krdc or vncviewer in \$PATH"
+        return 1
+    fi
+}
+
+revnc(){
+    if [ -z "$1" ]; then
+        echo "You must supply a hostname or ip address to connect to"
+        return 1
+    fi
+    while ! ping -c 1 "$pingwait" 1 "$1" &>/dev/null; do
+        sleep 1
+    done
+    timestamp "machine is up"
+    until vnc "$1"; do
+        sleep 1
+        timestamp "retrying $1"
+    done
+}
+
+
 # ============================================================================ #
 #                                 M a c   O S X
 # ============================================================================ #
@@ -365,35 +435,3 @@ renewdhcp(){
 #    sudo route add 0.0.0.0 x.x.x.1
 #    publicdns
 #}
-
-vncwho() {
-    netstat -tW |
-    grep ".*:5900 .*:.*" |
-    awk '{a=$5; split(a,b,":"); print b[1]}'
-}
-
-vnc(){
-    if command -v krdc &>/dev/null; then
-        krdc "vnc:/$1" &
-    elif command -v vncviewer &>/dev/null; then
-        vncviewer "$1" &
-    else
-        echo "could not find krdc or vncviewer in \$PATH"
-        return 1
-    fi
-}
-
-revnc(){
-    if [ -z "$1" ]; then
-        echo "You must supply a hostname or ip address to connect to"
-        return 1
-    fi
-    while ! ping -c 1 "$pingwait" 1 "$1" &>/dev/null; do
-        sleep 1
-    done
-    timestamp "machine is up"
-    until vnc "$1"; do
-        sleep 1
-        timestamp "retrying $1"
-    done
-}
