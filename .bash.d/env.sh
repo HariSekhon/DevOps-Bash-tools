@@ -30,16 +30,21 @@ export LINES
 #Defaults	env_keep += "ENV"
 export ENV="$HOME/.bashrc"
 
+# Clever dynamic environment variables, set using var() function sourced between shells
+export varfile="$HOME/.bash_vars"
+# shellcheck disable=SC1090
+[ -f "$varfile" ] && . "$varfile"
+
 # ============================================================================ #
 
 if [ -n "$APPLE" ]; then
     #BROWSER=open
     unset BROWSER
-elif which google-chrome &>/dev/null; then
+elif command -v google-chrome &>/dev/null; then
     BROWSER=google-chrome
-elif which firefox &>/dev/null; then
+elif command -v firefox &>/dev/null; then
     BROWSER=firefox
-elif which konqueror &>/dev/null; then
+elif command -v konqueror &>/dev/null; then
     BROWSER=konqueror
 else
     BROWSER=UNKNOWN
@@ -52,4 +57,25 @@ fi
 if [ -z "$APPLE" ]; then
     export BROWSER
 fi
+
+var(){
+    local var="${*%%=*}"
+    local val="${*#*=}"
+    if grep -i "export $var" "$varfile" &>/dev/null; then
+        perl -pi -e 's/^export '"$var"'=.*$/export '"$var"'='"$val"'/' "$varfile"
+    else
+        echo "export $var=$val" >> "$varfile"
+    fi
+    export "$var"="$val"
+}
+vars(){
+    $EDITOR "$varfile"
+}
+
+unvar(){
+    local var="${*%%=*}"
+    [ -f "$varfile" ] || { echo "$varfile not found" ; return 1; }
+    perl -pi -e 's/^export '"$var"'=.*\n$//' "$varfile"
+    unset "$var"
+}
 
