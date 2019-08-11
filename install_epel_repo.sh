@@ -32,14 +32,15 @@ if rpm -q epel-release; then
     exit 0
 fi
 
-if ! yum repolist | grep -qi '\<epel\>'; then
+[ $EUID -eq 0 ] && sudo="" || sudo=sudo
+
+if ! $sudo yum repolist | grep -qi '\<epel\>'; then
     # accounts for custom internal EPEL mirrors which should have epel in the name
     echo "EPEL yum repo already detected in yum repolist, skipping..."
     exit 0
 fi
 
-if ! yum install -y epel-release; then
-    [ $EUID -eq 0 ] && sudo="" || sudo=sudo
+if ! $sudo yum install -y epel-release; then
     rpm -q wget || yum install -y wget
     major_release="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
     wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
