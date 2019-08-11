@@ -247,6 +247,14 @@ flushdns(){
 }
 alias flushcache=flushdns
 
+#APPLE_INTERFACES="Ethernet Airport"
+#APPLE_INTERFACES="$(networksetup -listallnetworkservices | grep -E 'Ethernet|Wi-Fi')"
+unset APPLE_INTERFACES
+
+get_apple_interfaces(){
+    networksetup -listallnetworkservices | grep -E 'Ethernet|Wi-Fi'
+}
+
 # Cisco AnyConnect set these rules which mess up my ability to connect directly to VirtualBox VMs on HostOnly Networking
 cleardeny(){
     sudo ipfw delete "$(sudo ipfw list | grep deny | awk '{print $1}')"
