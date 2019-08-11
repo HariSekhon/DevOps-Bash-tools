@@ -55,6 +55,7 @@ install_git_completion(){
     fi
 }
 
+# shellcheck disable=SC1090
 [ -f "$HOME/.git-completion.bash" ] && . "$HOME/.git-completion.bash"
 
 isGit(){
