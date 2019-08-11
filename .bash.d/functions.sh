@@ -115,14 +115,6 @@ vihosts(){
     $sudo pkill -1 dnsmasq
 }
 
-browser(){
-    if [ -n "$BROWSER" ]; then
-        "$BROWSER" "$@"
-    elif [ -n "$APPLE" ]; then
-        open "$@"
-    fi
-}
-
 epoch2date(){
     if [ -n "$APPLE" ]; then
         date -r "$1"
