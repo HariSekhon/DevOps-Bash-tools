@@ -23,6 +23,7 @@
 #alias u="svn up"
 #alias sd="svn diff"
 #alias svnl=svnlog
+#alias svnr="svn revert"
 
 # remapped to screen
 #s(){ svn st "$@" | more; }
