@@ -43,5 +43,5 @@ if ! yum install -y epel-release; then
     major_release="$(grep -o '[[:digit:]]' /etc/*release | head -n1)"
     wget -t 5 --retry-connrefused -O /tmp/epel.rpm "https://dl.fedoraproject.org/pub/epel/epel-release-latest-$major_release.noarch.rpm"
     $SUDO rpm -ivh /tmp/epel.rpm
-    rm -f /tmp/epel.rpm;
+    rm -f /tmp/epel.rpm
 fi
