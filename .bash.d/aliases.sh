@@ -165,10 +165,11 @@ alias tg='traceroute www.google.com'
 
 
 if [ -n "$APPLE" ]; then
-    alias clipboard=pbcopy
+    clipboard=pbcopy
 else
-    alias clipboard=xclip
+    clipboard=xclip
 fi
+alias clipboard="$clipboard"
 alias clip=clipboard
 
 
