@@ -18,6 +18,8 @@
 #                   E n v i r o n m e n t   V a r i a b l e s
 # ============================================================================ #
 
+# more environment variables defined next to the their corresponding aliases in aliases.sh
+
 export TERM=xterm
 
 export EDITOR=vim
@@ -29,6 +31,18 @@ export LINES
 # Needs the following line added to sudoers for ENV to be passed through on sudo su
 #Defaults	env_keep += "ENV"
 export ENV="$HOME/.bashrc"
+
+# aterm doesn't support UTF-8 and you get horrible chars here and there
+# so don't use utf and aterm together. xterm works ok with utf8 though
+#export LANG=en_GB
+#export LC_ALL=en_GB
+#export LANG=C
+#export LC_ALL=C
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+# new stuff didn't seem to work
+#export LANG="en_GB.UTF-8"
+#export LC_ALL="en_GB.UTF-8"
 
 # Clever dynamic environment variables, set using var() function sourced between shells
 export varfile="$HOME/.bash_vars"
