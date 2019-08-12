@@ -24,7 +24,7 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # manual local aliases
 # shellcheck disable=SC1090
-[ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
+[ -f ~/.aliases ] && . ~/.aliases
 
 export bashrc=~/.bashrc
 # srcdir defined in .bashrc
@@ -121,10 +121,10 @@ alias ht='headtail.py'
 #                      G i t H u b   /   B i t B u c k e t
 # ============================================================================ #
 
-export github="$HOME/github"
+export github=~/github
 alias github='cd $github';
 
-export bitbucket="$HOME/bitbucket"
+export bitbucket=~/bitbucket
 alias bitbucket='cd $bitbucket'
 alias bb=bitbucket
 
@@ -171,11 +171,11 @@ alias etc='cd $etc'
 
 alias distro='cat /etc/*release /etc/*version 2>/dev/null'
 alias trace=traceroute
-alias t='$EDITOR $HOME/tmp'
+alias t='$EDITOR ~/tmp'
 # causes more problems than it solves on a slow machine missing the prompt
 #alias y=yes
-alias t2='$EDITOR $HOME/tmp2'
-alias t3='$EDITOR $HOME/tmp3'
+alias t2='$EDITOR ~/tmp2'
+alias t3='$EDITOR ~/tmp3'
 alias tg='traceroute www.google.com'
 #alias sec='ps -ef| grep -e arpwatc[h] -e swatc[h] -e scanlog[d]'
 
@@ -198,8 +198,8 @@ alias lab='cd $lab'
 alias jenkins_cli='java -jar ~/jenkins-cli.jar -s http://jenkins:8080'
 alias backup_jenkins="rsync -av root@jenkins:/jenkins_backup/*.zip '~/jenkins_backup/'"
 
-# Auto-alias uppercase directories in $HOME like Desktop and Downloads
-#for dir in $(find "$HOME" -maxdepth 1 -name '[A-Z]*' -type d); do [ -d "$dir" ] && alias ${dir##*/}="cd '$dir'"; done
+# Auto-alias uppercase directories in ~ like Desktop and Downloads
+#for dir in $(find ~ -maxdepth 1 -name '[A-Z]*' -type d); do [ -d "$dir" ] && alias ${dir##*/}="cd '$dir'"; done
 
 export downloads=~/Downloads
 export down="$downloads"
@@ -228,9 +228,9 @@ done
 #alias ldapwhoami="ldapwhoami -xW"
 #alias ldapvi="ldapvi -b dc=domain,dc=local -D cn=admin,dc=domain,dc=local"
 
-alias fluxkeys='$EDITOR $HOME/.fluxbox/keys'
+alias fluxkeys='$EDITOR ~/.fluxbox/keys'
 alias fke=fluxkeys
-alias fluxmenu='$EDITOR $HOME/.fluxbox/mymenu'
+alias fluxmenu='$EDITOR ~/.fluxbox/mymenu'
 alias fme=fluxmenu
 alias mymenu=fluxmenu
 alias menu=mymenu
