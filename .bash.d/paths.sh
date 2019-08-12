@@ -39,6 +39,26 @@ perlpath(){
 }
 
 # ============================================================================ #
+
+#export PATH="${PATH%%:$HOME/github*}"
+add_PATH(){
+    local path
+    path="${1:-}"
+    path="${path%/}"
+    if ! [[ "$PATH" =~ (^|:)$path(:|$) ]]; then
+        export PATH="$PATH:$path"
+    fi
+}
+
+add_PATH "/bin"
+add_PATH "/usr/bin"
+add_PATH "/sbin"
+add_PATH "/usr/sbin"
+add_PATH "/usr/local/sbin"
+add_PATH "$HOME/bin"
+add_PATH "$srcdir"
+
+# ============================================================================ #
 #                         M y   G i t H u b   r e p o s
 # ============================================================================ #
 
