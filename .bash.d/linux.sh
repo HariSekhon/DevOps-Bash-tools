@@ -88,7 +88,13 @@ findwritable(){
     done
 }
 
-# When using Samba WinPopups on Linux in Windows workgroups - convenient but shouldn't be needed today with the plethora of chat tools
+# ==========================
+# When using Samba WinPopups on Linux in Windows workgroups - convenient back in the day but shouldn't be needed today with the plethora of better chat tools
+#
+#netsend(){ smbclient -M "$1" <<< "${*:2}"; }
+#alias ns=netsend
+#
+# clear pop-ups and alerts if sending instant security alerts
 #clearnetsend(){
 #    sudo pkill -f sambapopup
 #}
@@ -102,6 +108,7 @@ findwritable(){
 #        sleep 0.1
 #    done
 #}
+# =========================
 
 rdp(){
     [ -n "$1" ] || return 1
