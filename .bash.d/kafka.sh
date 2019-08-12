@@ -17,6 +17,10 @@
 #                                   K a f k a
 # ============================================================================ #
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
+
 #export KAFKA_HOME=/usr/local/kafka
 export KAFKA_HOME=/usr/hdp/current/kafka-broker
 add_PATH "$KAFKA_HOME/bin"
