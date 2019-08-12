@@ -17,6 +17,11 @@
 #                                 N e t w o r k
 # ============================================================================ #
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
+
 alias 4="ping 4.2.2.1"
 
 # using alias p for 'kubectl get pods' now
