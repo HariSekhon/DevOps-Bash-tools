@@ -45,6 +45,8 @@ rpmqf(){
 }
 
 fixtime(){
+    # $sudo defined in .bashrc
+    # shellcheck disable=SC2154
     $sudo /etc/init.d/ntp stop
     $sudo ntpdate pool.ntp.org
     $sudo /etc/init.d/ntp start
@@ -85,3 +87,18 @@ findwritable(){
         $sudo find "$x" -xdev -type f -perm -o+w -exec ls -l {} \;
     done
 }
+
+# When using Samba WinPopups on Linux in Windows workgroups - convenient but shouldn't be needed today with the plethora of chat tools
+#clearnetsend(){
+#    sudo pkill -f sambapopup
+#}
+#alias cns=clearnetsend
+#
+#clearxmessage(){
+#    while pkill xmessage; do
+#        sleep 0.1
+#    done
+#    while pkill gmessage; do
+#        sleep 0.1
+#    done
+#}
