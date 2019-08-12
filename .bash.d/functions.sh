@@ -201,6 +201,30 @@ epoch2date(){
     fi
 }
 
+pdf(){
+    if ! [[ "$1" =~ .*.pdf$ ]]; then
+        echo "'$1' does not end in .pdf!"
+        return 1
+    fi
+    if ! [ -f "$1" ]; then
+        echo "file not found: $1"
+        return 1
+    fi
+    if [ -n "$APPLE" ]; then
+        open "$1"
+        return $?
+    fi
+    for x in acroread evince xpdf; do
+        if command -v "$x" &>/dev/null; then
+            echo "opening with $x..."
+            "$x" "$1" &
+            return $?
+        fi
+    done
+    echo "Error cannot find acroread, evince or xpdf in PATH."
+    return 1
+}
+
 currentScreenResolution(){
     #xrandr | awk '/\*/ {print $1}'
     xdpyinfo  | awk '/dimensions/ {print $2}'
