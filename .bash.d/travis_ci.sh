@@ -20,7 +20,7 @@
 # Travis bash autocomplete
 # adapted from Travis ruby gem auto-added to end of ~/.bashrc
 # shellcheck disable=SC1090
-[ -f "$HPME/.travis/travis.sh" ] && source "$HOME/.travis/travis.sh"
+[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 # for auto authentication using Travis CI tools like travis_last_log.py and travis_debug_session.py
 #export TRAVIS_TOKEN=...
