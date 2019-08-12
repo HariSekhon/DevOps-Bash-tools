@@ -21,6 +21,10 @@
 
 # add_PATH() is defined in .bashrc since it is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads
 
+pythonpath(){
+    python -c 'from __future__ import print_function; import sys; [print(_) for _ in sys.path if _]'
+}
+
 perlpath(){
     perl -e 'print join("\n", @INC);'
 }
