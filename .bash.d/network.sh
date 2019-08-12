@@ -266,9 +266,33 @@ retry(){
     echo >/dev/null
 }
 
+
+rdp(){
+    if [ -n "$APPLE" ]; then
+        "/Applications/Remote Desktop Connection.app/Contents/MacOS/Remote Desktop Connection" "$@" &
+    else
+        [ -n "$1" ] || return 1
+        local resolution="800x600"
+        if [ "$(xdpyinfo | awk '/dimensions/ {print $2}' | sed 's/x.*//')" -gt 1024 ]; then
+            resolution="1024x768"
+        fi
+        if command -v krdc &>/dev/null; then
+            krdc "rdp:/$WINDOWSDOMAIN\\$WINDOWSUSER@$*" &
+            exit 0
+        elif command -v rdesktop &>/dev/null; then
+            rdesktop -u "$WINDOWSUSER" -d "$WINDOWSDOMAIN" "$@" -g "$resolution" &
+            exit 0
+        else
+            echo  "Could not find krdc or rdesktop in path"
+            return 1
+        fi
+    fi
+}
+
 rerdp(){
     retry "whenport $1 3389; rdp" "$1"
 }
+
 
 vncwho() {
     netstat -tW |
