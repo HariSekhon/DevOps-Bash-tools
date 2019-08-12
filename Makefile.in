@@ -386,3 +386,21 @@ travis-debug:
 .PHONY: readme
 readme:
 	. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+
+.PHONY: wc
+wc:
+	wc -l $(CODE_FILES)
+
+.PHONY: wc2
+wc2:
+	@echo "Total linecount without # comments:"
+	@sed 's/#.*//;/^[[:space:]]*$$/d' $(CODE_FILES) | wc -l
+
+# finds .swp, would need to port out code lists
+#.PHONY: wcall
+#wcall:
+#	find . -type f --not -path '*.git*' -exec cat {} \; | wc -l
+#
+#.PHONY: wcall
+#wcall:
+#	find . -type f -not -path '*.git*' -exec sed 's/#.*//;/^[[:space:]]*$$/d' {} \; | wc -l
