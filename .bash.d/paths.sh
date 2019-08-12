@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#  shellcheck disable=SC2139
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -25,6 +24,8 @@ if [ -d /usr/local/parquet-tools ]; then
 fi
 
 # my main GitHub repos
+# $github defined in aliases.sh
+# shellcheck disable=SC2154
 add_PATH "$github/bash-tools"
 add_PATH "$github/pytools"
 add_PATH "$github/tool"
@@ -36,7 +37,8 @@ add_PATH "$github/spotify"
 
 # gems will be installed to ~/.gem/ruby/x.y.z/bin
 # add newest ruby to path first
-for ruby_bin in $(ls -d ~/.gem/ruby/*/bin 2>/dev/null | tail -r); do
+#for ruby_bin in $(ls -d ~/.gem/ruby/*/bin 2>/dev/null | tail -r); do
+for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d | tail -r); do
     add_PATH "$ruby_bin"
 done
 
