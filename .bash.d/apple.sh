@@ -53,10 +53,6 @@ alias reloadprefs='killall -u $USER cfprefsd'
 alias strace="dtruss -f"
 alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 
-rdp(){
-    "/Applications/Remote Desktop Connection.app/Contents/MacOS/Remote Desktop Connection" "$@" &
-}
-
 
 # clear paste buffer
 clpb(){
