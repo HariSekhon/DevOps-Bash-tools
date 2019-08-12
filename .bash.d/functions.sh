@@ -224,12 +224,12 @@ abspath(){
 wcbash(){
     # $github defined in aliases.sh
     # shellcheck disable=SC2154
-    wc "$HOME/.bashrc" \
-       "$HOME/.bash_profile" \
-       "$BASH_HOME/.bash_logout" \
-       "$HOME/.alias"* \
-       "$HOME/.aliases"* \
-       "$HOME/.bashrc_dynamichosts" \
+    wc ~/.bashrc \
+       ~/.bash_profile \
+       ~/.bash_logout \
+       ~/.alias* \
+       ~/.aliases* \
+       ~/.bashrc_dynamichosts \
        "$github/bash-tools/.bashrc" \
        "$github/bash-tools/.bash_profile" \
        "$github/bash-tools/.bash.d/"*.sh 2>/dev/null
