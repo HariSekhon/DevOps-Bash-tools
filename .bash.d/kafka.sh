@@ -17,7 +17,9 @@
 #                                   K a f k a
 # ============================================================================ #
 
-add_PATH "/usr/hdp/current/kafka-broker/bin"
+#export KAFKA_HOME=/usr/local/kafka
+export KAFKA_HOME=/usr/hdp/current/kafka-broker
+add_PATH "$KAFKA_HOME/bin"
 
 # kafka wrapper scripts use underscores instead of dashes so do not conflict with above kafka scripts which appear first in $PATH
 kafka_wrappers="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
