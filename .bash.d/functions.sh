@@ -179,6 +179,23 @@ paste_clipboard(){
     fi
 }
 
+# see also readlink (beware differs between Linux and Mac)
+# this works on imaginary paths
+abspath(){
+    if [ -z "$1" ]; then
+        echo "NO PATH GIVEN!"
+        return 1
+    fi
+    sed 's@^\./@'"$PWD"'/@;
+         s@^\([^\./]\)@'"$PWD"'/\1@;
+         s@^\.\./@'"${PWD%/*}"'/@;
+         s@/../@/@g;
+         s@/\./@/@g;
+         s@\(.*\/?\)\.\./?$@\1/@;
+         s@//@/@g;
+         s@/$@@;' <<< "$1"
+}
+
 wcbash(){
     # $github defined in aliases.sh
     # shellcheck disable=SC2154
