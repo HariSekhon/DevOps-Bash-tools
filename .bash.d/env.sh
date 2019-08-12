@@ -36,7 +36,7 @@ export LINES
 # ENV refers to the file that sh attempts to read as a startup file (done on my Mac OSX Snow Leopard)
 # Needs the following line added to sudoers for ENV to be passed through on sudo su
 #Defaults	env_keep += "ENV"
-export ENV="$HOME/.bashrc"
+export ENV=~/.bashrc
 
 # aterm doesn't support UTF-8 and you get horrible chars here and there
 # so don't use utf and aterm together. xterm works ok with utf8 though
@@ -51,7 +51,7 @@ export LANG=en_US.UTF-8
 #export LC_ALL="en_GB.UTF-8"
 
 # Clever dynamic environment variables, set using var() function sourced between shells
-export varfile="$HOME/.bash_vars"
+export varfile=~/.bash_vars
 # shellcheck disable=SC1090
 [ -f "$varfile" ] && . "$varfile"
 
