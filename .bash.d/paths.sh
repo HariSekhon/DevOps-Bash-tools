@@ -40,7 +40,7 @@ perlpath(){
 
 # ============================================================================ #
 
-#export PATH="${PATH%%:$HOME/github*}"
+#export PATH="${PATH%%:~/github*}"
 add_PATH(){
     local path
     path="${1:-}"
@@ -55,7 +55,7 @@ add_PATH "/usr/bin"
 add_PATH "/sbin"
 add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
-add_PATH "$HOME/bin"
+add_PATH ~/bin
 add_PATH "$srcdir"
 
 # ============================================================================ #
@@ -181,7 +181,7 @@ link_latest(){
 #add_PATH "/usr/local/jython/bin"
 #add_PATH "/usr/local/mysql/bin"
 
-#add_PATH "$HOME/bin/expect"
+#add_PATH ~/bin/expect
 #add_PATH "$RANCID_HOME/bin"
 #add_PATH /usr/lib/bin/distcc
 #add_PATH "/usr/lib/nagios/plugins"
