@@ -132,6 +132,8 @@ add_PATH(){
     fi
 }
 
+add_PATH "/bin"
+add_PATH "/usr/bin"
 add_PATH "/sbin"
 add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
