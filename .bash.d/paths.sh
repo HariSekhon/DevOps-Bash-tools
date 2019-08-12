@@ -154,6 +154,7 @@ link_latest(){
 
 #add_PATH "$HOME/bin/expect"
 #add_PATH "$RANCID_HOME/bin"
+#add_PATH /usr/lib/bin/distcc
 
 # ============================================================================ #
 #                               C a s s a n d r a
