@@ -21,6 +21,11 @@
 
 # most of the regular stuff is in the other bash.d/*.sh files
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
+
 [ -n "$APPLE" ] && return
 
 alias reloadXdefaults="xrdb ~/.Xdefaults"
