@@ -19,6 +19,8 @@
 
 # more environment variables defined next to the their corresponding aliases in aliases.sh
 
+#export DISPLAY=:0.0
+
 export TERM=xterm
 
 export EDITOR=vim
