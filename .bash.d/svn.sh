@@ -184,8 +184,7 @@ svnec(){
 
 svncommitauthors(){
     svn log |
-    grep -E "^r[[:digit:]]+[[:space:]]" |
-    awk '{print $3}' |
+    awk '/^r[[:digit:]]+[[:space:]]/ {print $3}' |
     sort |
     uniq -c |
     sort -k1nr
