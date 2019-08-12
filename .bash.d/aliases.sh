@@ -44,6 +44,11 @@ alias se=screenrc
 alias path="echo \$PATH | tr ':' '\n' | more"
 alias paths=path
 
+# not as compatible, better to call pypy explicitly or in #! line
+#if command -v pypy &>/dev/null; then
+#    alias python=pypy
+#fi
+
 # shellcheck disable=SC2139
 alias bt="cd $(dirname "${BASH_SOURCE[0]}")/.."
 
