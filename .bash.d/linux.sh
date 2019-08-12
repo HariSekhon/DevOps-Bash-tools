@@ -40,3 +40,42 @@ if [ -n "$DISPLAY" ] && [ -z "${APPLE:-}" ]; then
     xkbset repeatkeys 116
 fi
 
+rpmqf(){
+    rpm -qf "$(readlink -m "$1")"
+}
+
+getmounts(){
+    #grep -e "ext" -e "reiser" -e "fat" -e "ntfs" < /proc/mounts |
+    #awk '{ print $2 }'
+    awk '/ext|reiser|fat|ntfs|btrfs|xfs/{print $2}'
+}
+
+findsuid(){ 
+    for x in $(getmounts); do
+        echo "Searching $x for suid programs:"
+        # $sudo defined in .bashrc if not root
+        # shellcheck disable=SC2154
+        $sudo find "$x" -xdev -type f -perm -u+s -exec ls -l {} \;
+    done
+}
+
+findguid(){
+    for x in $(getmounts); do
+        echo "Searching $x for guid programs:"
+        $sudo find "$x" -xdev -type f -perm -g+s -exec ls -l {} \;
+    done
+}
+
+findsguid(){
+    for x in $(getmounts); do
+        echo "Searching $x for suid and guid programs:"
+        $sudo find "$x" -xdev -type f \( -perm -u+s -o -perm -g+s \) -exec ls -l {} \;
+    done
+}
+
+findwritable(){
+    for x in $(getmounts); do
+        echo "Searching $x for world writeable files:"
+        $sudo find "$x" -xdev -type f -perm -o+w -exec ls -l {} \;
+    done
+}
