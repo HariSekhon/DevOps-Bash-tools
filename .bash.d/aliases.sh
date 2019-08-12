@@ -17,6 +17,11 @@
 #                         G e n e r a l   A l i a s e s
 # ============================================================================ #
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
+
 # manual local aliases
 # shellcheck disable=SC1090
 [ -f "$HOME/.aliases" ] && . "$HOME/.aliases"
