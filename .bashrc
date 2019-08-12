@@ -54,10 +54,8 @@
 
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ "$(uname)" = Darwin ]; then
-    export APPLE=1
-    export OSX=1
-fi
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
 
 # enable color support for ls
 if [ "$TERM" != "dumb" ] && \
