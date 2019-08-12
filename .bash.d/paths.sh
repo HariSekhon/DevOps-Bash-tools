@@ -151,6 +151,18 @@ link_latest(){
 #add_PATH "$COUCHBASE_HOME/bin"
 
 # ============================================================================ #
+#                                  G r o o v y
+# ============================================================================ #
+
+# brew install groovy
+#export GROOVY_HOME=/usr/local/opt/groovy/libexec
+# brew uninstall groovy
+# brew install groovysdk
+#export GROOVY_HOME=/usr/local/opt/groovysdk/libexec
+
+# using SDK Man now, sourced at end of private .bashrc
+
+# ============================================================================ #
 #                        H a d o o p   E c o s y s t e m
 # ============================================================================ #
 
