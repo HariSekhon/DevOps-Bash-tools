@@ -168,6 +168,26 @@ vihosts(){
     $sudo pkill -1 dnsmasq
 }
 
+proxy(){
+    export proxy_host="${proxy_host:-localhost}"
+    export proxy_port="${proxy_port:-8080}"
+    export proxy_port_ssl="${proxy_port_ssl:-8443}"
+    export proxy_user="${proxy_user:-$USER}"
+    if [ -z "$proxy_password" ]; then
+        read -r -s -p 'proxy password: ' proxy_password
+    fi
+    export http_proxy="http://$proxy_user:$proxy_password@$proxy_host:$proxy_port"
+    export https_proxy="https://$proxy_user:$proxy_password@$proxy_host:$proxy_port_ssl"
+    export https_proxy="$http_proxy"
+    export ftp_proxy="$http_proxy" # might need to replace protocol prefix here, would check, but who even uses ftp any more
+    export NO_PROXY=".local,.localdomain,.intra" # works only on suffixes
+    JAVA_NO_PROXY="$(sed 's/^/*/;s/,/|*/g' <<< "$NO_PROXY")"
+    # strip the additions we just added off the end so that we don't end up with dups if running proxy more than once
+    JAVA_OPTS="${JAVA_OPTS%%-Dhttp.proxyHost*}"
+    export JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyHost=$proxy_host -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttps.proxyHost=$proxy_host -Dhttps.proxyPort=$proxy_port_ssl -DnonProxyHosts='$JAVA_NO_PROXY'"
+    export SBT_OPTS="$JAVA_OPTS"
+}
+
 paste_clipboard(){
     if [ "$(uname)" = Darwin ]; then
         cat | pbcopy
