@@ -25,7 +25,7 @@ alias dpsa='docker ps -a'
 alias dst="dockerhub_show_tags.py"
 # -l shows latest container, -q shows only ID
 alias dl='docker ps -lq'
-alias dockerimg='$EDITOR $HOME/docker-images.txt'
+alias dockerimg='$EDITOR ~/docker-images.txt'
 
 # wipe out exited containers
 alias dockerrm='docker rm $(docker ps -qf status=exited)'
