@@ -21,6 +21,11 @@
 
 # add_PATH() is defined in .bashrc since it is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
+
 # see the effect of inserting a path like so
 # PYTHONPATH=/path/to/blah pythonpath
 pythonpath(){
