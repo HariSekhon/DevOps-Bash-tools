@@ -213,6 +213,15 @@ done
 # keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
 #alias emacs="emacs -nw"
 
+# in some environments I do ldap with Kerberos auth - see ldapsearch.sh script at top level which is more flexible with pre-tuned environment variables
+#alias ldapsearch="ldapsearch -xW"
+#alias ldapadd="ldapadd -xW"
+#alias ldapmodify="ldapmodify -xW"
+#alias ldapdelete="ldapdelete -xW"
+#alias ldappasswd="ldappasswd -xW"
+#alias ldapwhoami="ldapwhoami -xW"
+#alias ldapvi="ldapvi -b dc=domain,dc=local -D cn=admin,dc=domain,dc=local"
+
 alias fluxkeys='$EDITOR $HOME/.fluxbox/keys'
 alias fke=fluxkeys
 alias fluxmenu='$EDITOR $HOME/.fluxbox/mymenu'
