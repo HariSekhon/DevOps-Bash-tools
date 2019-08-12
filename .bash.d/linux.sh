@@ -44,6 +44,12 @@ rpmqf(){
     rpm -qf "$(readlink -m "$1")"
 }
 
+fixtime(){
+    $sudo /etc/init.d/ntp stop
+    $sudo ntpdate pool.ntp.org
+    $sudo /etc/init.d/ntp start
+}
+
 getmounts(){
     #grep -e "ext" -e "reiser" -e "fat" -e "ntfs" < /proc/mounts |
     #awk '{ print $2 }'
