@@ -19,6 +19,11 @@
 
 # More Mac specific stuff in adjacent *.sh files, especially network.sh
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
+
 [ -n "${APPLE:-}" ] || return
 
 # Apple default in Terminal is xterm
