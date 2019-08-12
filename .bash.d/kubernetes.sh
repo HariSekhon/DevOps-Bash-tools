@@ -53,7 +53,7 @@ alias menv='eval $(minikube docker-env)'
 get_pod(){
     local filter="${1:-.*}"
     # shellcheck disable=SC2086
-    k get pods $k8s_get_pod_opts | grep "$filter" | head -n1
+    k get pods $k8s_get_pod_opts | awk "/$filter/{print \$1; exit}"
 }
 
 watchpods(){
@@ -83,7 +83,10 @@ kdelp(){
 }
 
 kubeexec(){
-    kubectl exec -ti "$@" /bin/sh
+    local pod
+    pod="$(get_pod "$1")"
+    shift
+    kubectl exec -ti "$pod" "$@" /bin/sh
 }
 
 k8s_get_token(){
