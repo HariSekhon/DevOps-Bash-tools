@@ -26,6 +26,7 @@ alias v='cd_vagrant; vagrant'
 alias vf='cd_vagrant; vim Vagrantfile; vagrant_gen_etc_hosts; eval "$(vagrant_gen_aliases)"'
 alias vst='v status'
 alias vrun='vst | grep running'
+# vr is aliased to vbox_running in virtualbox.sh
 alias vrr='vrun'
 #alias vssh='cd_vagrant; ssh_func vagrant ssh'
 alias vssh='cd_vagrant; vagrant ssh'
