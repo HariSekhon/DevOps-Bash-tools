@@ -13,6 +13,12 @@
 
 REPO := HariSekhon/DevOps-Bash-tools
 
+CODE_FILES := \
+	*.sh \
+	.bash.d/*.sh \
+	kafka_wrappers/*.sh \
+	lib/*.sh
+
 include Makefile.in
 
 .PHONY: build
@@ -26,7 +32,3 @@ test:
 .PHONY: clean
 clean:
 	@echo Nothing to clean
-
-.PHONY: wc
-wc:
-	wc -l *.sh .bash.d/*.sh
