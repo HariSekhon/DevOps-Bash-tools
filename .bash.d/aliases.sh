@@ -173,6 +173,7 @@ else
 fi
 alias clipboard="$clipboard"
 alias clip=clipboard
+unset -v clipboard
 
 
 export lab=~/lab
