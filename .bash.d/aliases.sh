@@ -41,6 +41,7 @@ alias se=screenrc
 #alias e=em
 #xe(){ xemacs $@ & }
 #alias x=xe
+alias path="echo \$PATH | tr ':' '\n' | more"
 
 # shellcheck disable=SC2139
 alias bt="cd $(dirname "${BASH_SOURCE[0]}")/.."
