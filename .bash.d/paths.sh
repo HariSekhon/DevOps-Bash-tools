@@ -17,7 +17,13 @@
 #                                   $ P A T H
 # ============================================================================ #
 
-# general path additions not tied to bigger <technology>.sh
+# general path additions that aren't big enough to have their own <technology>.sh file
+
+# add_PATH() is defined in .bashrc since it is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads
+
+perlpath(){
+    perl -e 'print join("\n", @INC);'
+}
 
 # ============================================================================ #
 # Anaconda
