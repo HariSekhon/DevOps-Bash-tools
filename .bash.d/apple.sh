@@ -63,6 +63,15 @@ clpb(){
     paste_clipboard < /dev/null
 }
 
+macmac(){
+    ifconfig |
+    awk '
+        /^en[[:digit:]]+:/{gsub(":", "", $1); printf "%s:\t", $1}
+        /^[[:space:]]ether[[:space:]]/{print $2}
+    ' |
+    # filters to only the lines with prefixed interfaces from first match
+    grep "\t"
+}
 
 duall(){
     # srcdir defined in .bashrc
