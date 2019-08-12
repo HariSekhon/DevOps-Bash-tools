@@ -26,3 +26,7 @@ test:
 .PHONY: clean
 clean:
 	@echo Nothing to clean
+
+.PHONY: wc
+wc:
+	wc -l *.sh .bash.d/*.sh
