@@ -26,8 +26,8 @@ export PYTHONPATH="$PYTHONPATH:$ANSIBLE_HOME/lib"
 export ANSIBLE_LIBRARY="$ANSIBLE_HOME/library"
 export MANPATH="$MANPATH:$ANSIBLE_HOME/docs/man"
 
-if [ -f "$HOME/etc/ansible/hosts" ]; then
-    export ANSIBLE_HOSTS="$HOME/etc/ansible/hosts"
+if [ -f ~/etc/ansible/hosts ]; then
+    export ANSIBLE_HOSTS=~/etc/ansible/hosts
 fi
 
 # set in ~/.ansible.cfg now
