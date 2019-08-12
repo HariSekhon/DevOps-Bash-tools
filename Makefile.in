@@ -18,7 +18,7 @@ else
 	BASH_TOOLS := .
 endif
 
-export PATH := $(PATH):/usr/local/bin
+export PATH := $(PATH):/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
 
 CPANM = cpanm
 
@@ -385,7 +385,11 @@ travis-debug:
 
 .PHONY: readme
 readme:
-	. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+	@source .bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+
+.PHONY: showfiles
+showfiles:
+	@echo $(CODE_FILES) | tr ' ' '\n'
 
 .PHONY: wc
 wc:
