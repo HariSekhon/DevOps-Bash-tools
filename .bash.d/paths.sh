@@ -155,6 +155,18 @@ link_latest(){
 #add_PATH "$HOME/bin/expect"
 #add_PATH "$RANCID_HOME/bin"
 #add_PATH /usr/lib/bin/distcc
+#add_PATH "/usr/lib/nagios/plugins"
+#add_PATH "/usr/nagios/libexec"
+#add_PATH "/usr/nagios/libexec/contrib"
+
+#if [ -n "$APPLE" ]; then
+#    # MacPort and Octave installation
+#    add_PATH /opt/local/bin
+#
+#    if [ -d "/Applications/VMware Fusion.app/Contents/Library" ]; then
+#        add_PATH "/Applications/VMware Fusion.app/Contents/Library"
+#    fi
+#fi
 
 # ============================================================================ #
 #                               C a s s a n d r a
