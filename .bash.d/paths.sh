@@ -70,23 +70,156 @@ for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d | tail -r); do
 done
 
 # ============================================================================ #
-# Old Stuff
+# ============================================================================ #
+#                               O l d   S t u f f
+# ============================================================================ #
 
-# don't use Mongo any more
+# Most of the stuff below has been migrated to Docker rather than /usr/local installs
+
+
+# ============================================================================ #
+#                                 M o n g o D B
+# ============================================================================ #
+
+#export MONGO_HOME=/usr/local/mongo
+#add_PATH "$MONGO_HOME/bin"
 #add_PATH "$github/mtools"
 
-#add_PATH "/usr/local/etcd"
+# ============================================================================ #
+#                                    M i s c
+# ============================================================================ #
 
+#add_PATH "/usr/local/etcd"
 #add_PATH "/usr/local/artifactory-oss/bin"
 #add_PATH "/usr/local/jmeter/bin"
 #add_PATH "/usr/local/jruby/bin"
 #add_PATH "/usr/local/jython/bin"
-#add_PATH "/usr/local/mongodb/bin"
 #add_PATH "/usr/local/mysql/bin"
-#add_PATH "/usr/local/mysql/bin"
-#add_PATH "/usr/local/neo4j/bin"
-#add_PATH "/usr/local/riak/bin"
+
+# ============================================================================ #
+#                               C a s s a n d r a
+# ============================================================================ #
+
+#export CASSANDRA_HOME=/usr/local/cassandra
+#export CCM_HOME=/usr/local/ccm
+#add_PATH "$CASSANDRA_HOME/bin"
+#add_PATH "$CASSANDRA_HOME/tools/bin"
+#add_PATH "$CCM_HOME/bin"
+
+# ============================================================================ #
+#                           E l a s t i c s e a r c h
+# ============================================================================ #
+
+#export ELASTICSEARCH_HOME=/usr/local/elasticsearch
+#add_PATH "$ELASTICSEARCH_HOME/bin"
+
+# ============================================================================ #
+#                               C o u c h b a s e
+# ============================================================================ #
+
+#export COUCHBASE_HOME="/Applications/Couchbase Server.app/Contents/Resources/couchbase-core"
+#alias cbq="$COUCHBASE_HOME/bin/cbq"
+#add_PATH "$COUCHBASE_HOME/bin"
+
+# ============================================================================ #
+#                        H a d o o p   E c o s y s t e m
+# ============================================================================ #
+
+## ln -s  /usr/local/hadoop-x.y.z /usr/local/hadoop
+## ln -s  /usr/local/hbase-x.y.z /usr/local/hadoop
+## ln -s /usr/local/zookeeper-x.y.z /usr/local/zookeeper
+#
+# #find /usr/local -type d -name 'hadoop-*' -o -name 'hbase-*' -o -name 'zookeeper-*' -maxdepth 1 | while read path; do sudo ln -vfsh "$path" "${path%%-*}"; done
+# link_latest '/usr/local/hadoop-*' '/usr/local/hbase-*' '/usr/local/pig-*' '/usr/local/zookeeper-*'
+# chown -R hari /usr/local/{hadoop,hbase,zookeeper}
+# re-enabled HADOOP_HOME for Kite SDK
+
+#export HADOOP_HOME="/usr/local/hadoop"    # Deprecated. Annoying error msgs
+#export HADOOP_PREFIX="/usr/local/hadoop"  # Hate this
+## For OSX
+#export HADOOP_OPTS="$HADOOP_OPTS -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
+#export HBASE_OPTS="  $HBASE_OPTS -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
+#export HBASE_HOME=/usr/local/hbase
+#export PIG_HOME=/usr/local/pig
+#export ZOOKEEPER_HOME=/usr/local/zookeeper
+#add_PATH "$HADOOP_PREFIX/bin"
+#add_PATH "$HBASE_HOME/bin"
+#add_PATH "$PIG_HOME/bin"
+#add_PATH "$ZOOKEEPER_HOME/bin"
+
+# ============================================================================ #
+#                              0 x d a t a   H 2 O
+# ============================================================================ #
+
+#export H2O_HOME=/usr/local/h2o
+#alias h2o="cd $H2O_HOME && java -jar h2o.jar -Xmx1g"
+
+# ============================================================================ #
+#                                   J e t t y
+# ============================================================================ #
+
+#export JETTY_HOME="/usr/local/jetty-hightide"
+#alias jetty="cd $JETTY_HOME/ && java -jar start.jar"
+
+# ============================================================================ #
+#                                   N e o 4 J
+# ============================================================================ #
+
+#export NEO4J_HOME="/usr/local/neo4j"
+#add_PATH "$NEO4J_HOME/bin"
+
+# ============================================================================ #
+#                                    S o l r
+# ============================================================================ #
+
+# find /usr/local -type d -name 'apache-solr-*' -maxdepth 1 | while read path; do sudo ln -vfsh "$path" "${path%%-*}"; done
+# link_latest '/usr/local/apache-solr-*'
+# ln -vsf /usr/local/apache-solr /usr/local/solr
+# 3.x
+#export SOLR_HOME=/usr/local/apache-solr
+# 4.x
+#export SOLR_HOME=/usr/local/solr
+#export APACHE_SOLR_HOME="$SOLR_HOME"
+#add_PATH "$SOLR_HOME/bin"
+#add_PATH "$SOLR_HOME/example/scripts/cloud-scripts"
+
+# ============================================================================ #
+#                                   S t o r m
+# ============================================================================ #
+
+#export STORM_HOME=/usr/local/storm
+#add_PATH "$STORM_HOME/bin"
+
+# ============================================================================ #
+#                                 T a c h y o n
+# ============================================================================ #
+
+#export TACHYON_HOME=/usr/local/tachyon
+#add_PATH "$TACHYON_HOME/bin"
+
+# ============================================================================ #
+#                              B a s h o   R i a k
+# ============================================================================ #
+
+#export RIAK_HOME=/usr/local/riak
+#add_PATH "$RIAK_HOME/bin"
+
+# ============================================================================ #
+#                                   S p a r k
+# ============================================================================ #
+
+#export SPARK_HOME=/usr/local/spark
+#add_PATH "$SPARK_HOME/bin"
+
+# ============================================================================ #
+#                                   S c a l a
+# ============================================================================ #
+
 #add_PATH "/usr/local/scala/bin"
+
+# ============================================================================ #
+#                                  C u s t o m
+# ============================================================================ #
 
 #add_PATH "$HOME/bin/expect"
 #add_PATH "$RANCID_HOME/bin"
