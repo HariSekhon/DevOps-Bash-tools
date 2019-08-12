@@ -119,6 +119,8 @@ fi
 
 sudo=sudo
 if [ $EUID -eq 0 ]; then
+    # used throughout .bash.d/*.sh
+    # shellcheck disable=SC2034
     sudo=""
 fi
 
@@ -144,3 +146,6 @@ for src in "$srcdir/.bash.d/"*.sh; do
     # shellcheck disable=SC1090
     . "$src"
 done
+
+# shellcheck disable=SC1090
+[ -f "$HOME/.bashrc_local" ] && . "$HOME/.bashrc_local"
