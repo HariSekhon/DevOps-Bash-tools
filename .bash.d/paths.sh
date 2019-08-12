@@ -70,6 +70,35 @@ for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d | tail -r); do
 done
 
 # ============================================================================ #
+
+link_latest(){
+    # -p suffixes / on dirs, which we grep filter on to make sure we only link dirs
+    # shellcheck disable=SC2010
+    ls -d -p "$@" |
+    grep "/$"  |
+    tail -n 1  |
+    while read -r path; do
+        [ -d "$path" ] || continue
+        #local path_noversion="$( echo "$path" | perl -pn -e 's/-\d+(\.v?\d+)*(-\d+|-[a-z]+)?\/?$//' )"
+        local path_noversion
+        path_noversion="$(perl -pn -e 's/-\d+[\.\w\d-]+\/?$//' <<< "$path")"
+        if [ "$path_noversion" = "$path" ]; then
+            echo "FAILED to strip version, linking back on itself will create a link in subdir"
+            return 1
+        fi
+        [ -e "$path_noversion" ] && [ ! -L "$path_noversion" ] && continue
+        if [ -n "$APPLE" ]; then
+            local ln_opts="-h"
+        else
+            local ln_opts="-T"
+        fi
+        # if you're in 'admin' group on Mac you don't really need to sudo here
+        # shellcheck disable=SC2154
+        $sudo ln -vfs $ln_opts "$path" "$path_noversion"
+    done
+}
+
+# ============================================================================ #
 # ============================================================================ #
 #                               O l d   S t u f f
 # ============================================================================ #
