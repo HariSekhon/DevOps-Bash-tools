@@ -83,7 +83,7 @@ var(){
     export "$var"="$val"
 }
 vars(){
-    $EDITOR "$varfile"
+    "$EDITOR" "$varfile"
 }
 
 unvar(){
