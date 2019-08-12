@@ -36,13 +36,17 @@ alias be=bashrc
 alias be2=bashrc2
 alias ve=vimrc
 alias se=screenrc
+# keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
+#alias emacs="emacs -nw"
 #em(){ emacs "$@" ; }
 #alias em=emacs
 #alias e=em
 #xe(){ xemacs $@ & }
 #alias x=xe
+
 alias path="echo \$PATH | tr ':' '\n' | more"
 alias paths=path
+alias tmp="cd /tmp"
 
 # not as compatible, better to call pypy explicitly or in #! line
 #if command -v pypy &>/dev/null; then
@@ -209,9 +213,6 @@ for v in ~/github/pytools/validate_*.py; do
     # shellcheck disable=SC2139,SC2140
     alias "v$z"="$v"
 done
-
-# keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
-#alias emacs="emacs -nw"
 
 # in some environments I do ldap with Kerberos auth - see ldapsearch.sh script at top level which is more flexible with pre-tuned environment variables
 #alias ldapsearch="ldapsearch -xW"
