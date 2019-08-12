@@ -13,11 +13,7 @@
 
 REPO := HariSekhon/DevOps-Bash-tools
 
-CODE_FILES := \
-	*.sh \
-	.bash.d/*.sh \
-	kafka_wrappers/*.sh \
-	lib/*.sh
+CODE_FILES := $(shell find . -name '*.sh')
 
 include Makefile.in
 
