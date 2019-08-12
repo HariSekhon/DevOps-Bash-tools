@@ -91,4 +91,3 @@ unvar(){
     perl -pi -e 's/^export '"$var"'=.*\n$//' "$varfile"
     unset "$var"
 }
-
