@@ -17,8 +17,8 @@
 #                                 V a g r a n t
 # ============================================================================ #
 
-export VAGRANT_HOME="$HOME/vagrant"
-export VAGRANT_BOXES="$HOME/boxes"
+export VAGRANT_HOME=~/vagrant
+export VAGRANT_BOXES=~/boxes
 
 alias cd_vagrant='[ "$PWD" = "$VAGRANT_HOME" ] || cd "$VAGRANT_HOME"'
 alias vhome=cd_vagrant
