@@ -19,11 +19,24 @@
 
 # general path additions not tied to bigger <technology>.sh
 
+# ============================================================================ #
+# Anaconda
+
+# Make sure to customize Anaconda installation and de-select Modify Path otherwise it'll change the bash profile
+
+# for the 'conda' command
+add_PATH ~/anaconda/bin
+
+# ============================================================================ #
+# Parquet Tools
+
 if [ -d /usr/local/parquet-tools ]; then
     add_PATH "/usr/local/parquet-tools"
 fi
 
+# ============================================================================ #
 # my main GitHub repos
+
 # $github defined in aliases.sh
 # shellcheck disable=SC2154
 add_PATH "$github/bash-tools"
@@ -35,12 +48,19 @@ add_PATH "$github/nagios-plugins"
 add_PATH "$github/nagios-plugin-kafka"
 add_PATH "$github/spotify"
 
+# ============================================================================ #
+# Ruby Gem commands
+
 # gems will be installed to ~/.gem/ruby/x.y.z/bin
+
 # add newest ruby to path first
 #for ruby_bin in $(ls -d ~/.gem/ruby/*/bin 2>/dev/null | tail -r); do
 for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d | tail -r); do
     add_PATH "$ruby_bin"
 done
+
+# ============================================================================ #
+# Old Stuff
 
 # don't use Mongo any more
 #add_PATH "$github/mtools"
