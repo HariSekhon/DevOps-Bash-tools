@@ -17,6 +17,10 @@
 #                A W S  -  A m a z o n   W e b   S e r v i c e s
 # ============================================================================ #
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
+
 # JAVA_HOME needs to be set to use EC2 api tools
 #[ -x /usr/bin/java ] && export JAVA_HOME=/usr  # errors but still works
 
