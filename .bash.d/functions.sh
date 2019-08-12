@@ -349,3 +349,23 @@ findpy(){
     find "${@:-.}" -type f -iname '*.py' -o -iname '*.jy' |
     grep -vf ~/code_regex_exclude.txt
 }
+
+# ============================================================================ #
+
+ldapmaxuid(){
+    ldapsearch -x -W "uidNumber=*" uidNumber |
+    sed 's/#.*//' |
+    grep -v "^[[:space:]]*$" |
+    grep uidNumber |
+    sort -k2n |
+    tail -n1
+}
+
+ldapmaxuidgid(){
+    ldapsearch -xW -x -W "(|(objectClass=posixAccount)(objectClass=posixGroup))" uidNumber gidNumber |
+    sed 's/#.*//' |
+    grep --color=auto -v "^[[:space:]]*$" |
+    grep -R --color=auto "(uidNumber|gidNumber)" |
+    sort -k2n |
+    tail -n1
+}
