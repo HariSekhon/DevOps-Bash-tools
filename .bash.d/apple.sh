@@ -102,7 +102,7 @@ brewupdate(){
 
 brewinstall(){
     brewupdate &&
-    sed 's/#.*// ; /^[[:space:]]*$/d' < "$HOME/mac-list.txt" |
+    sed 's/#.*// ; /^[[:space:]]*$/d' < ~/mac-list.txt |
     while read -r pkg; do
         brew install "$pkg" #||
             #{ echo "FAILED"; break; }
