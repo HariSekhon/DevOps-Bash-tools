@@ -19,7 +19,11 @@ set -u
 # source vault_pass.sh to load cred to environment for multiple ansible_playbook_vault runs without having to enter password each time
 if [ -n "${PS1:-}" ]; then
     read -s -r -p "password: " VAULT_PASS
-else
+    export VAULT_PASS
+elif [ -n "${VAULT_PASS:-}" ]; then
     # retuns password from environment to ansible_playbook_vault
-    echo "${VAULT_PASS:-}"
+    echo "$VAULT_PASS"
+else
+    echo "\$VAULT_PASS not defined - did you forget to define it? Source $0 interactively to set it" >&2
+    exit 1
 fi
