@@ -23,11 +23,11 @@ ssha(){
     ssh_agent
     #num_keys="$(ssh-add -l | grep -Ec "(rsa|dsa)")"
     #if [ "$num_keys" -lt 1 ]; then
-    #    ssh-add "$HOME/.ssh/"id_[rd]sa
+    #    ssh-add ~/.ssh/id_[rd]sa
     #else
     #    return 0
     #fi
-    for key in "$HOME/.ssh/"id_[rd]sa; do
+    for key in ~/.ssh/id_[rd]sa; do
         if ! ssh-add -l | grep -q "${key##*/}"; then
             ssh-add "$key"
         fi
@@ -158,12 +158,12 @@ alias bissh=bouncerissh
 rekey(){
     [ -n "$1" ] || { echo "usage: rekey host"; return 1; }
     cleankey "$1"
-    ssh-keyscan -t rsa "$1" | grep "^$1 ssh-rsa" >> "$HOME/.ssh/known_hosts"
-    ssh-keyscan -t dsa "$1" | grep "^$1 ssh-dss" >> "$HOME/.ssh/known_hosts"
+    ssh-keyscan -t rsa "$1" | grep "^$1 ssh-rsa" >> ~/.ssh/known_hosts
+    ssh-keyscan -t dsa "$1" | grep "^$1 ssh-dss" >> ~/.ssh/known_hosts
 }
 
 sshkey(){ 
-    local key="$HOME/.ssh/id_rsa.pub"
+    local key=~/.ssh/id_rsa.pub
     # now available on Mac, but my tried and tested function of years gone by dedupes the keys
 #    if command -v ssh-copy-id; then
 #        ssh-copy-id -i "$key" "$@"
@@ -201,11 +201,11 @@ cleankey(){
 #        ip="$(host -W 1 "$x" | grep address)"
 #        if [ $? -eq 0 ]; then
 #            ip="$(cut -d" " -f 4 <<< "$ip")"
-#            perl -pi -e 's/^\[?[^,]+\]?(:\d+)?,\[?'"$ip"'\]?(:\d)? .*$//;s/^'"$ip"' .*$//' "$HOME/.ssh/known_hosts"
+#            perl -pi -e 's/^\[?[^,]+\]?(:\d+)?,\[?'"$ip"'\]?(:\d)? .*$//;s/^'"$ip"' .*$//' ~/.ssh/known_hosts
 #        fi
 #        # need to leave second deletion just in case as you may want to specify just the ip address
-#        #perl -pi -e 's/^\[?'"$x"'\]?(:\d+)?\[,\s.*$//;s/^.*[^,]+,'"$x"' .*$//' "$srcdir/.ssh/known_hosts"
-#        perl -pi -e 's/^'"$x"'\s.*$//;s/^.*[^,]+,'"$x"' .*$//' "$HOME/.ssh/known_hosts"
+#        #perl -pi -e 's/^\[?'"$x"'\]?(:\d+)?\[,\s.*$//;s/^.*[^,]+,'"$x"' .*$//' ~/.ssh/known_hosts
+#        perl -pi -e 's/^'"$x"'\s.*$//;s/^.*[^,]+,'"$x"' .*$//' ~/.ssh/known_hosts
     done
 }
 
