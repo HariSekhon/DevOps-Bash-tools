@@ -24,8 +24,8 @@
 # set location where you check out all the github repos
 export github=~/github
 
-alias gitconfig="\$EDITOR \$HOME/.gitconfig"
-alias gitignore="\$EDITOR \$HOME/.gitignore_global"
+alias gitconfig="\$EDITOR \~/.gitconfig"
+alias gitignore="\$EDITOR \~/.gitignore_global"
 alias gitrc=gitconfig
 
 alias co=checkout
@@ -50,13 +50,13 @@ alias stage=staging
 alias dev="switchbranch dev"
 
 install_git_completion(){
-    if ! [ -f "$HOME/.git-completion.bash" ]; then
-        wget -O "$HOME/.git-completion.bash" https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    if ! [ -f ~/.git-completion.bash ]; then
+        wget -O ~/.git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
     fi
 }
 
 # shellcheck disable=SC1090
-[ -f "$HOME/.git-completion.bash" ] && . "$HOME/.git-completion.bash"
+[ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
 
 isGit(){
     local target=${1:-.}
@@ -103,7 +103,7 @@ st(){
     #    vagrant status
     # shellcheck disable=SC2166
     if [ "$target_basename" = "github" ] ||
-       [ "$target" = "." -a "$(pwd)" = "$HOME/github" ]; then
+       [ "$target" = "." -a "$(pwd)" = ~/github ]; then
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
