@@ -53,7 +53,9 @@ alias menv='eval $(minikube docker-env)'
 get_pod(){
     local filter="${1:-.*}"
     # shellcheck disable=SC2086
-    k get pods $k8s_get_pod_opts | grep -v '^NAME[[:space:]]' | awk "/$filter/{print \$1; exit}"
+    k get pods $k8s_get_pod_opts |
+    grep -v '^NAME[[:space:]]' |
+    awk "/$filter/{print \$1; exit}"
 }
 
 watchpods(){
