@@ -182,13 +182,17 @@ alias lab='cd $lab'
 alias jenkins_cli='java -jar ~/jenkins-cli.jar -s http://jenkins:8080'
 alias backup_jenkins="rsync -av root@jenkins:/jenkins_backup/*.zip '~/jenkins_backup/'"
 
+# Auto-alias uppercase directories in $HOME like Desktop and Downloads
+#for dir in $(find "$HOME" -maxdepth 1 -name '[A-Z]*' -type d); do [ -d "$dir" ] && alias ${dir##*/}="cd '$dir'"; done
+
 export downloads=~/Downloads
 export down="$downloads"
-alias Down='cd $downloads'
-alias down=Down
+alias down='cd "$downloads"'
 
-alias desktop=Desktop
-alias desk=Desktop
+export desktop=~/Desktop
+export desk="$desktop"
+alias desktop='cd "$desktop"'
+alias desk=desktop
 
 for v in ~/github/pytools/validate_*.py; do
     z="${v##*/}"
