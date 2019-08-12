@@ -30,22 +30,8 @@ perlpath(){
 }
 
 # ============================================================================ #
-# Anaconda
-
-# Make sure to customize Anaconda installation and de-select Modify Path otherwise it'll change the bash profile
-
-# for the 'conda' command
-add_PATH ~/anaconda/bin
-
+#                         M y   G i t H u b   r e p o s
 # ============================================================================ #
-# Parquet Tools
-
-if [ -d /usr/local/parquet-tools ]; then
-    add_PATH "/usr/local/parquet-tools"
-fi
-
-# ============================================================================ #
-# my main GitHub repos
 
 # $github defined in aliases.sh
 # shellcheck disable=SC2154
@@ -59,7 +45,25 @@ add_PATH "$github/nagios-plugin-kafka"
 add_PATH "$github/spotify"
 
 # ============================================================================ #
-# Ruby Gem commands
+#                                A n a c o n d a
+# ============================================================================ #
+
+# Make sure to customize Anaconda installation and de-select Modify Path otherwise it'll change the bash profile
+
+# for the 'conda' command
+add_PATH ~/anaconda/bin
+
+# ============================================================================ #
+#                           P a r q u e t   T o o l s
+# ============================================================================ #
+
+if [ -d /usr/local/parquet-tools ]; then
+    add_PATH "/usr/local/parquet-tools"
+fi
+
+# ============================================================================ #
+#                       R u b y   G e m   c o m m a n d s
+# ============================================================================ #
 
 # gems will be installed to ~/.gem/ruby/x.y.z/bin
 
@@ -68,6 +72,28 @@ add_PATH "$github/spotify"
 for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d | tail -r); do
     add_PATH "$ruby_bin"
 done
+
+# ============================================================================ #
+#                                  G o l a n g
+# ============================================================================ #
+
+# manual installation of 1.5 mismatches with HomeBrew 1.6 installed to $PATH and
+#export GOROOT="/usr/local/go"
+# causes:
+# imports runtime/internal/sys: cannot find package "runtime/internal/sys" in any of:
+# /usr/local/go/src/runtime/internal/sys (from $GOROOT)
+# /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
+if command -v go &>/dev/null; then
+    if [ -n "$APPLE" ]; then
+        GOROOT="$(dirname "$(dirname "$(greadlink -f "$(command -v go)")")")"
+    else
+        GOROOT="$(dirname "$(dirname "$(readlink -f "$(command -v go)")")")"
+    fi
+    export GOROOT
+    add_PATH "$GOROOT/bin"
+    add_PATH "$GOROOT/libexec/bin"
+    add_PATH "$GOPATH/bin"
+fi
 
 # ============================================================================ #
 
@@ -98,6 +124,7 @@ link_latest(){
     done
 }
 
+
 # ============================================================================ #
 # ============================================================================ #
 #                               O l d   S t u f f
@@ -105,14 +132,14 @@ link_latest(){
 
 # Most of the stuff below has been migrated to Docker rather than /usr/local installs
 
-
 # ============================================================================ #
-#                                 M o n g o D B
+#                            A p a c h e   D r i l l
 # ============================================================================ #
 
-#export MONGO_HOME=/usr/local/mongo
-#add_PATH "$MONGO_HOME/bin"
-#add_PATH "$github/mtools"
+#link_latest /usr/local/apache-drill-*
+#export DRILL_HOME=/usr/local/apache-drill
+#add_PATH "$DRILL_HOME/bin"
+
 
 # ============================================================================ #
 #                                    M i s c
@@ -125,6 +152,9 @@ link_latest(){
 #add_PATH "/usr/local/jython/bin"
 #add_PATH "/usr/local/mysql/bin"
 
+#add_PATH "$HOME/bin/expect"
+#add_PATH "$RANCID_HOME/bin"
+
 # ============================================================================ #
 #                               C a s s a n d r a
 # ============================================================================ #
@@ -135,12 +165,14 @@ link_latest(){
 #add_PATH "$CASSANDRA_HOME/tools/bin"
 #add_PATH "$CCM_HOME/bin"
 
+
 # ============================================================================ #
 #                           E l a s t i c s e a r c h
 # ============================================================================ #
 
 #export ELASTICSEARCH_HOME=/usr/local/elasticsearch
 #add_PATH "$ELASTICSEARCH_HOME/bin"
+
 
 # ============================================================================ #
 #                               C o u c h b a s e
@@ -149,6 +181,7 @@ link_latest(){
 #export COUCHBASE_HOME="/Applications/Couchbase Server.app/Contents/Resources/couchbase-core"
 #alias cbq="$COUCHBASE_HOME/bin/cbq"
 #add_PATH "$COUCHBASE_HOME/bin"
+
 
 # ============================================================================ #
 #                                  G r o o v y
@@ -161,6 +194,7 @@ link_latest(){
 #export GROOVY_HOME=/usr/local/opt/groovysdk/libexec
 
 # using SDK Man now, sourced at end of private .bashrc
+
 
 # ============================================================================ #
 #                        H a d o o p   E c o s y s t e m
@@ -188,12 +222,19 @@ link_latest(){
 #add_PATH "$PIG_HOME/bin"
 #add_PATH "$ZOOKEEPER_HOME/bin"
 
+#export MAHOUT_HOME=/usr/local/mahout
+## indicates to run locally instead of on Hadoop
+#export MAHOUT_LOCAL=true
+#add_PATH "$MAHOUT_HOME/bin"
+
+
 # ============================================================================ #
 #                              0 x d a t a   H 2 O
 # ============================================================================ #
 
 #export H2O_HOME=/usr/local/h2o
 #alias h2o="cd $H2O_HOME && java -jar h2o.jar -Xmx1g"
+
 
 # ============================================================================ #
 #                                   J e t t y
@@ -202,12 +243,44 @@ link_latest(){
 #export JETTY_HOME="/usr/local/jetty-hightide"
 #alias jetty="cd $JETTY_HOME/ && java -jar start.jar"
 
+
+# ============================================================================ #
+#                                   M e s o s
+# ============================================================================ #
+
+# this breaks parsing if supplying without port and causes duplicate --master switch if supplying the switch manually to mesos-slave or mesos-slave.sh
+#export MESOS_MASTER=$HOST:5050
+
+# link_latest /usr/local/mesos
+#export MESOS_HOME=/usr/local/mesos
+#add_PATH "$MESOS_HOME/bin"
+
+#if [ -n "$APPLE" ]; then
+#    export MESOS_NATIVE_JAVA_LIBRARY=/usr/local/mesos/src/.libs/libmesos.dylib
+#else
+#    # check this path
+#    export MESOS_NATIVE_JAVA_LIBRARY=/usr/local/mesos/lib/libmesos.so
+#fi
+# deprecated old var
+#export MESOS_NATIVE_LIBRARY="$MESOS_NATIVE_JAVA_LIBRARY"
+
+
+# ============================================================================ #
+#                                 M o n g o D B
+# ============================================================================ #
+
+#export MONGO_HOME=/usr/local/mongo
+#add_PATH "$MONGO_HOME/bin"
+#add_PATH "$github/mtools"
+
+
 # ============================================================================ #
 #                                   N e o 4 J
 # ============================================================================ #
 
 #export NEO4J_HOME="/usr/local/neo4j"
 #add_PATH "$NEO4J_HOME/bin"
+
 
 # ============================================================================ #
 #                                    S o l r
@@ -224,12 +297,14 @@ link_latest(){
 #add_PATH "$SOLR_HOME/bin"
 #add_PATH "$SOLR_HOME/example/scripts/cloud-scripts"
 
+
 # ============================================================================ #
 #                                   S t o r m
 # ============================================================================ #
 
 #export STORM_HOME=/usr/local/storm
 #add_PATH "$STORM_HOME/bin"
+
 
 # ============================================================================ #
 #                                 T a c h y o n
@@ -245,12 +320,6 @@ link_latest(){
 #export RIAK_HOME=/usr/local/riak
 #add_PATH "$RIAK_HOME/bin"
 
-# ============================================================================ #
-#                                   S p a r k
-# ============================================================================ #
-
-#export SPARK_HOME=/usr/local/spark
-#add_PATH "$SPARK_HOME/bin"
 
 # ============================================================================ #
 #                                   S c a l a
@@ -258,9 +327,27 @@ link_latest(){
 
 #add_PATH "/usr/local/scala/bin"
 
+
 # ============================================================================ #
-#                                  C u s t o m
+#                                   S p a r k
 # ============================================================================ #
 
-#add_PATH "$HOME/bin/expect"
-#add_PATH "$RANCID_HOME/bin"
+#export SPARK_HOME=/usr/local/spark
+#add_PATH "$SPARK_HOME/bin"
+
+
+# ============================================================================ #
+#                               S o n a r Q u b e
+# ============================================================================ #
+
+#export SONAR_SCANNER_HOME=/usr/local/sonar-scanner
+#add_PATH "$SONAR_SCANNER_HOME/bin"
+
+
+# ============================================================================ #
+#                       TypeSafe Activator - Akka, Play
+# ============================================================================ #
+
+# link_latest /usr/local/activator-dist-*
+#export ACTIVATOR_HOME=/usr/local/activator-dist
+#add_PATH "$ACTIVATOR_HOME"
