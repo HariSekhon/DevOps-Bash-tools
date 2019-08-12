@@ -49,7 +49,7 @@ ifdef CONDA_DEFAULT_ENV
 endif
 
 # must come after to reset SUDO_PERL/SUDO_PIP to blank if root
-# EUID /  UID not exported in Make
+# EUID / UID not exported in Make
 # USER not populated in Docker
 ifeq '$(shell id -u)' '0'
 	#@echo "root UID detected, not calling sudo"
