@@ -171,11 +171,13 @@ alias tg='traceroute www.google.com'
 #alias sec='ps -ef| grep -e arpwatc[h] -e swatc[h] -e scanlog[d]'
 
 
+# using variable and single alias definition to work around my bash duplicate defs auto checks
 if [ -n "$APPLE" ]; then
     clipboard=pbcopy
 else
     clipboard=xclip
 fi
+# shellcheck disable=SC2139
 alias clipboard="$clipboard"
 alias clip=clipboard
 unset -v clipboard
