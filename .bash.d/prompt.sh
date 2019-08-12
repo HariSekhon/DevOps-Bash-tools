@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-#  shellcheck disable=SC2154
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -31,9 +30,11 @@ PS1=""
 # if inside Screen, set the screen escape inside PS1
 [ -n "$STY" ] && PS1="$SCREEN_ESCAPE"
 
+# shellcheck disable=SC2154
 PS1_COLOUR="$txtgrn"
 
 if [ $EUID -eq 0 ]; then
+    # shellcheck disable=SC2154
     PS1_COLOUR="$txtred"
 fi
 
@@ -41,6 +42,7 @@ fi
 #   \W      basename of cwd
 #   \w      full path of cwd
 #   \h      host
+# shellcheck disable=SC2154
 export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 
 
