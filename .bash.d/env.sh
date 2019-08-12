@@ -50,6 +50,8 @@ export varfile="$HOME/.bash_vars"
 # shellcheck disable=SC1090
 [ -f "$varfile" ] && . "$varfile"
 
+#export DISTCC_DIR="/var/tmp/portage/.distcc/"
+
 # ============================================================================ #
 
 if [ -n "$APPLE" ]; then
