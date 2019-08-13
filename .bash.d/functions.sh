@@ -183,9 +183,11 @@ proxy(){
     fi
     export http_proxy="http://$proxy_user:$proxy_password@$proxy_host:$proxy_port"
     export https_proxy="https://$proxy_user:$proxy_password@$proxy_host:$proxy_port_ssl"
-    export https_proxy="$http_proxy"
-    export ftp_proxy="$http_proxy" # might need to replace protocol prefix here, would check, but who even uses ftp any more
+    # MiniShift respects these two
+    export HTTP_PROXY="$http_proxy"
+    export HTTPS_PROXY="$https_proxy"
     export NO_PROXY=".local,.localdomain,.intra" # works only on suffixes
+    export ftp_proxy="$http_proxy" # might need to replace protocol prefix here, would check, but who even uses ftp any more
     JAVA_NO_PROXY="$(sed 's/^/*/;s/,/|*/g' <<< "$NO_PROXY")"
     # strip the additions we just added off the end so that we don't end up with dups if running proxy more than once
     JAVA_OPTS="${JAVA_OPTS%%-Dhttp.proxyHost*}"
