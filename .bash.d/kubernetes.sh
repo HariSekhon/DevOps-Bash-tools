@@ -17,6 +17,9 @@
 #                              K u b e r n e t e s
 # ============================================================================ #
 
+# minishift oc-env > ~/.minishift.env
+[ -f ~/.minishift.env ] && . ~/.minishift.env
+
 kubectl_opts="${KUBECTL_OPTS:-}"
 # set K8S_NAMESPACE in local .bashrc or similar files for environments where your ~/.kube/config
 # gets regenerated daily with certification authentication from a kerberos login script, which
