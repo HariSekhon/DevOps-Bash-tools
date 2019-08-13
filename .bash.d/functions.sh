@@ -183,7 +183,7 @@ proxy(){
     fi
     export http_proxy="http://$proxy_user:$proxy_password@$proxy_host:$proxy_port"
     export https_proxy="https://$proxy_user:$proxy_password@$proxy_host:$proxy_port_ssl"
-    # MiniShift respects these two
+    # MiniShift respects these next three
     export HTTP_PROXY="$http_proxy"
     export HTTPS_PROXY="$https_proxy"
     export NO_PROXY=".local,.localdomain,.intra" # works only on suffixes
