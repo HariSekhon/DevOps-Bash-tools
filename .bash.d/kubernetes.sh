@@ -170,6 +170,16 @@ kubeexec(){
     k exec -ti "$pod" "$@" /bin/sh
 }
 
+# Getting token works on stock Kubernetes but not OpenShift due to stricter defaults
+#
+# Error from server (Forbidden): secrets is forbidden: User "developer" cannot list secrets in the namespace "kube-system": no RBAC policy matched
+# error: resource name may not be empty
+#
+## even after 'oc login' as system/admin
+#
+# Error from server (Forbidden): secrets is forbidden: User "system" cannot list secrets in the namespace "kube-system": no RBAC policy matched
+# error: resource name may not be empty
+#
 k8s_get_token(){
     kubectl describe secret -n kube-system \
         "$(kubectl get secrets -n kube-system | grep default | cut -f1 -d ' ')" |
