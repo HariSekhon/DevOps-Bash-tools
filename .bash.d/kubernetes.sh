@@ -28,11 +28,18 @@ kubectl_opts="${KUBECTL_OPTS:-}"
 if [ "${K8S_NAMESPACE:-}" ]; then
     kubectl_opts="-n $K8S_NAMESPACE"
 fi
+oc_opts="$kubectl_opts"
 
 k(){
     # want opts auto split, do not quote $kubectl_opts
     # shellcheck disable=SC2086
     kubectl $kubectl_opts "$@"
+}
+
+oc(){
+    # want opts auto split, do not quote $kubectl_opts
+    # shellcheck disable=SC2086
+    command oc $oc_opts "$@"
 }
 
 # 'k8s-app' label is set by dashboard creation but who uses that
