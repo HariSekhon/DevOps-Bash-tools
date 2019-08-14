@@ -113,14 +113,17 @@ k8s_get_pods(){
 }
 
 get_pods(){
-    case "$(k8s_or_openshift)" in
-            openshift)   oc_get_pods
-                         ;;
-                  k8s)   k8s_get_pods
-                         ;;
-                    *)   k8s_get_pods
-                         ;;
-    esac
+    #case "$(k8s_or_openshift)" in
+    #        openshift)   oc_get_pods
+    #                     ;;
+    #              k8s)   k8s_get_pods
+    #                     ;;
+    #                *)   k8s_get_pods
+    #                     ;;
+    #esac
+    #
+    # k8s functions now include k8s vs oc detection, no need for above or would end up double calling k8s_or_openshift
+    k8s_get_pods
 }
 export -f get_pods
 
