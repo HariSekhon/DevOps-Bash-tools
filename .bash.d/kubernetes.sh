@@ -131,6 +131,7 @@ get_pod(){
     local filter="${1:-.*}"
     get_pods |
     grep -v '^NAME[[:space:]]' |
+    grep Running |
     awk "/$filter/{print \$1; exit}"
 }
 
@@ -164,9 +165,9 @@ kdelp(){
 
 kubeexec(){
     local pod
-    pod="$(k8s_get_pod "$1")"
+    pod="$(get_pod "$1")"
     shift
-    kubectl exec -ti "$pod" "$@" /bin/sh
+    k exec -ti "$pod" "$@" /bin/sh
 }
 
 k8s_get_token(){
