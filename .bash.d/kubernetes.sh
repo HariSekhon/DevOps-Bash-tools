@@ -136,7 +136,7 @@ get_pod(){
 
 watchpods(){
     # watch on Mac (brew installed) doesn't have -x switch and doesn't work on even 'export -f function'
-    # leave using kubectl call for now
+    # leave using kubectl call for now as that works on openshift too
     watch "
         echo 'Context: '
         echo
