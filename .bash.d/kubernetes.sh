@@ -18,6 +18,7 @@
 # ============================================================================ #
 
 # minishift oc-env > ~/.minishift.env
+# shellcheck disable=SC1090
 [ -f ~/.minishift.env ] && . ~/.minishift.env
 
 kubectl_opts="${KUBECTL_OPTS:-}"
@@ -53,15 +54,66 @@ alias kcd='kubectl config set-context $(kubectl config current-context) --namesp
 
 alias menv='eval $(minikube docker-env)'
 
+# looks like both of these work on OpenShift context
+#
+# 'kubectl get pods'
+#
+# 'oc get pods'
+
+# figure out if we're using k8s or openshift via most recent commands - return either 'k8s' or 'openshift'
+k8s_or_openshift(){
+    local last_k8s_cmd
+    last_k8s_cmd="$(
+        history |
+        grep -v history |
+        grep -Eo -e '\<oc\>' \
+                 -e '\<kubect[l]\>' \
+                 -e '\<minikub[e]\>' \
+                 -e '\<minishif[t]\>' |
+        tail -n 1
+    )"
+    case "$last_k8s_cmd" in
+            oc|minishift)   echo openshift
+                            ;;
+        kubectl|minikube)   echo k8s
+                            ;;
+                       *)   echo unknown
+                            ;;
+    esac
+}
+
+oc_get_pods(){
+    # shellcheck disable=SC2086
+    oc get pods $k8s_get_pod_opts
+}
+
+k8s_get_pods(){
+    # shellcheck disable=SC2086
+    k get pods $k8s_get_pod_opts
+}
+
+get_pods(){
+    case "$(k8s_or_openshift)" in
+            openshift)   oc_get_pods
+                         ;;
+                  k8s)   k8s_get_pods
+                         ;;
+                    *)   k8s_get_pods
+                         ;;
+    esac
+}
+export -f get_pods
+
 get_pod(){
     local filter="${1:-.*}"
-    # shellcheck disable=SC2086
-    k get pods $k8s_get_pod_opts |
+    get_pods |
     grep -v '^NAME[[:space:]]' |
     awk "/$filter/{print \$1; exit}"
 }
 
 watchpods(){
+    # watch on Mac (brew installed) doesn't have -x switch and doesn't work on even 'export -f function'
+    # leave using kubectl call for now
     watch "
         echo 'Context: '
         echo
@@ -89,7 +141,7 @@ kdelp(){
 
 kubeexec(){
     local pod
-    pod="$(get_pod "$1")"
+    pod="$(k8s_get_pod "$1")"
     shift
     kubectl exec -ti "$pod" "$@" /bin/sh
 }
