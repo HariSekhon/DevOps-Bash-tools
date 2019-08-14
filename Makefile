@@ -13,7 +13,7 @@
 
 REPO := HariSekhon/DevOps-Bash-tools
 
-CODE_FILES := $(shell find . -type f -name '*.sh')
+CODE_FILES := $(shell find . -type f -name '*.sh' -o -name .bashrc)
 
 include Makefile.in
 
