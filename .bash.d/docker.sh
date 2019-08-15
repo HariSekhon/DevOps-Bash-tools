@@ -17,8 +17,17 @@
 #                                  D o c k e r
 # ============================================================================ #
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/os_detection.sh"
+
 # shellcheck disable=SC1090
 [ -f ~/.docker_vars ] && . ~/.docker_vars
+
+#if [ -n "$LINUX" ] && type podman &>/dev/null; then
+#    alias docker="podman"
+#fi
 
 alias dps='docker ps'
 alias dpsa='docker ps -a'
