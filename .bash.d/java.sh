@@ -74,12 +74,13 @@ elif [ -n "$LINUX" ]; then
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
-        # Debian
+        # Debian / Ubuntu
         elif command -v update-alternatives &>/dev/null; then
             java_home="$(update-alternatives --list java  | sed 's,\(/jre\)\?/bin/java$,,' | head -n1)"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
+        # Alpine / Other / or if all else fails
         else
             # prefers Sun's JDK to OpenJDK, put it higher in the testing list
             # readlink -f => /etc/alternatives/java_sdk => /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.x86_64
@@ -90,7 +91,8 @@ elif [ -n "$LINUX" ]; then
                     /usr/lib/jvm/java-openjdk \
                     /usr/lib/jvm/jre-openjdk \
                     /usr/lib/jvm/jre \
-                    ; do
+                    /usr/lib/jvm/default-jvm \
+                    ; do       # default-jvm is on Alpine
                 if   [ -x "$java_home/bin/java" ]; then
                     export JAVA_HOME="$java_home"
                     break
