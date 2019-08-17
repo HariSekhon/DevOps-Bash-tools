@@ -22,6 +22,8 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/os_detection.sh"
 
+export CLASSPATH="$CLASSPATH:$HOME/bin/java"
+
 if [ -n "${APPLE:-}" ]; then
     mac_export_java_home(){
         local version="$1"
@@ -64,43 +66,48 @@ if [ -n "${APPLE:-}" ]; then
         mac_export_java_home
         mac_export_java_home 7
     fi
-else # assume Linux
-    #hardware_platform="$(uname -i)"
-    # prefers Sun's JDK than OpenJDK, put it higher in the testing list
-            # Sun's JRE
-            # Sun's JDK
-            # Open JDK
-    # TODO: update / improve this for more recent linux desktops for those who still use them
-#    for candidate in \
-#            /usr/java/latest/jre \
-#            /usr/java/latest/    \
-#            /usr/lib/jvm/jre-openjdk \
-#            /usr/lib/jvm/java-6-openjdk-$hardware_platform \
-#            ; do
-#        if   [ -x "$candidate/bin/java" ]; then
-#            JAVA_HOME="$candidate"
-#            break
-#        fi
-#    done
+elif [ -n "$LINUX" ]; then
     if [ -z "$JAVA_HOME" ]; then
-        if [ -n "$DEBUG" ]; then
-            echo "WARNING: failed to find JAVA_HOME" >&2
-        fi
-        # last ditch effort, this will work with warnings
-        if [ -x /usr/bin/java ]; then
-            JAVA_HOME=/usr
+        if command -v alternatives &>/dev/null; then
+            java_home="$(alternatives --list | awk '/^java[[:space:]]/{print $3}' | sed 's,/jre/bin/java,,')"
+            if [ -n "$java_home" ]; then
+                export JAVA_HOME="$java_home"
+            fi
+        else
+            # prefers Sun's JDK to OpenJDK, put it higher in the testing list
+            # readlink -f => /etc/alternatives/java_sdk => /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.el7_6.x86_64
+            for java_home in \
+                    /usr/java/latest    \
+                    /usr/java/latest/jre \
+                    /usr/lib/jvm/java \
+                    /usr/lib/jvm/java-openjdk \
+                    /usr/lib/jvm/jre-openjdk \
+                    /usr/lib/jvm/jre \
+                    ; do
+                if   [ -x "$java_home/bin/java" ]; then
+                    export JAVA_HOME="$java_home"
+                    break
+                fi
+            done
+            if [ -z "$JAVA_HOME" ]; then
+                if [ -n "$DEBUG" ]; then
+                    echo "WARNING: failed to find JAVA_HOME" >&2
+                fi
+                # last ditch effort, this will work with warnings
+                if [ -x /usr/bin/java ]; then
+                    export JAVA_HOME=/usr
+                fi
+            fi
         fi
     fi
-    export JAVA_HOME
 fi
 
-export CLASSPATH="$CLASSPATH:$HOME/bin/java"
-
-j(){
-    for x in "$@"; do
-        echo "javac $x" &&
-        javac "$x"      &&
-        echo "java ${x%.java} $x"  &&
-        java "${x%.java}" "$x"
-    done
-}
+# haven't used this in many years
+#j(){
+#    for x in "$@"; do
+#        echo "javac $x" &&
+#        javac "$x"      &&
+#        echo "java ${x%.java} $x"  &&
+#        java "${x%.java}" "$x"
+#    done
+#}
