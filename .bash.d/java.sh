@@ -70,13 +70,13 @@ elif [ -n "$LINUX" ]; then
     if [ -z "$JAVA_HOME" ]; then
         # RHEL / CentOS
         if command -v alternatives &>/dev/null; then
-            java_home="$(alternatives --list | awk '/^java[[:space:]]/{print $3; exit}' | sed 's,/jre/bin/java,,')"
+            java_home="$(alternatives --list | awk '/^java[[:space:]]/{print $3; exit}' | sed 's,\(/jre\)\?/bin/java$,,')"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
         # Debian
         elif command -v update-alternatives &>/dev/null; then
-            java_home="$(update-alternatives --list java  | sed 's,/jre/bin/java,,' | head -n1)"
+            java_home="$(update-alternatives --list java  | sed 's,\(/jre\)\?/bin/java$,,' | head -n1)"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
