@@ -17,7 +17,7 @@
 #                            P r o m p t   M a g i c
 # ============================================================================ #
 
-# XXX: Warning: imperfect PS1 prompt codes cause terminal to not move to the newline properly but instead wrap around on the same line
+# XXX: Warning: This must be perfect - edit at your own peril as imperfect PS1 prompt codes cause terminal wrap around to the same line
 
 # \[\033k\033\\\] is required for Screen auto title feature to detect prompt
 # replace \033 with \e as it's directly supported in PS1
