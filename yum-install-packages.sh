@@ -36,7 +36,7 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    if type dnf >/dev/null 2>&1; then
+    if command -v dnf >/dev/null 2>&1; then
         # dnf exists if any of the packages aren't found
         for package in $rpm_packages; do
             rpm -q "$package" || $SUDO yum install -y "$package" || :
