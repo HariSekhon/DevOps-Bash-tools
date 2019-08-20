@@ -43,5 +43,7 @@ if [ -n "${NO_FAIL:-}" ]; then
         brew install "$package" || :
     done
 else
+    # want splitting
+    # shellcheck disable=SC2086
     brew install $brew_packages
 fi
