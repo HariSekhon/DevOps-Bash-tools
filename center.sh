@@ -28,4 +28,4 @@ textsize="${#1}"
 #width=$(tput cols)
 width="${2:-${WIDTH:-80}}"
 span="$(((width + textsize) / 2))"
-printf "%${span}s\n" "${1:-NO_MESSAGE_GIVEN_TO_CENTER}"
+printf "%${span}s\\n" "${1:-NO_MESSAGE_GIVEN_TO_CENTER}"
