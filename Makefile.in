@@ -389,7 +389,7 @@ readme:
 
 .PHONY: showfiles
 showfiles:
-	@echo $(CODE_FILES) | tr ' ' '\n'
+	@echo $(CODE_FILES) | tr ' ' '\n' | sort
 
 .PHONY: wc
 wc:
