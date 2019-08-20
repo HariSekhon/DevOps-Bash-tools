@@ -98,7 +98,7 @@ fi
 
 # add newest ruby to path first
 #for ruby_bin in $(ls -d ~/.gem/ruby/*/bin 2>/dev/null | tail -r); do
-for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d | tail -r); do
+for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null | tail -r); do
     add_PATH "$ruby_bin"
 done
 
