@@ -444,7 +444,7 @@ run_test_versions(){
 
 timestamp(){
     printf "%s" "$(date '+%F %T')  $*" >&2
-    [ $# -gt 0 ] && printf "\\n" >&2
+    [ $# -gt 0 ] && printf '\n' >&2
 }
 tstamp(){ timestamp "$@"; }
 
