@@ -391,6 +391,10 @@ readme:
 showfiles:
 	@echo $(CODE_FILES) | tr ' ' '\n' | sort
 
+.PHONY: files
+files: showfiles
+	@:
+
 .PHONY: wc
 wc:
 	wc -l $(CODE_FILES)
