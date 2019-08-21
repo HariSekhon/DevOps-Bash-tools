@@ -32,8 +32,9 @@ if [ "${LDAP_SSL:-}" = 1 ]; then
     uri="ldaps://$server"
 fi
 
-#domain="${DOMAIN:-$(hostname -f | sed 's/^[^`.]*\.//')}"
-domain="${DOMAIN:-$(hostname -d)}"
+# only works on Linux, not Mac
+#domain="${DOMAIN:-$(hostname -d)}"
+domain="${DOMAIN:-$(hostname -f | sed 's/^[^`.]*\.//')}"
 
 base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
 
@@ -101,7 +102,7 @@ fi
 
 if [ "${DEBUG:-}" = 1 ]; then
     echo
-    sed "s/-w[[:space:]]\+[^[:space:]]\+/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$*'"
+    sed sed "s/-w[[:space:]]\\{1,\\}[^[:space:]]\\{1,\\}/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$*'"
 fi
 # shellcheck disable=SC2086
 ldapsearch -H "$uri" -b "$base_dn" -o ldif-wrap=no $auth_opts "$@"
