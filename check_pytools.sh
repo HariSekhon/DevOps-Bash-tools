@@ -104,13 +104,13 @@ for validate_program in "$pytools_dir"/validate_*.py; do
        [ "${validate_program##*/}" = "validate_properties.py" ]; then
 
         # upstream zookeeper log4j.properties has duplicate keys in it's config
-        echo "$validate_program --include 'zookeeper-.*/.*contrib/rest/conf/log4j\.properties' --ignore-duplicate-keys ."
+        echo "$validate_program --include 'zookeeper-.*/.*contrib/rest/conf/log4j\\.properties' --ignore-duplicate-keys ."
         $validate_program --include 'zookeeper-.*/.*contrib/rest/conf/log4j\.properties' --ignore-duplicate-keys .
         echo
 
         # alluxio-site.properies is commented out in Dockerfiles repo due to Alluxio parsing bug
         # gradle's cache.properties is often empty just a single commented date line
-        echo "$validate_program --include 'alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties' --allow-empty ."
+        echo "$validate_program --include 'alluxio-site.properties|\\.gradle/.+/taskArtifacts/cache\\.properties' --allow-empty ."
         $validate_program --include 'alluxio-site.properties|\.gradle/.+/taskArtifacts/cache\.properties' --allow-empty .
         echo
 
