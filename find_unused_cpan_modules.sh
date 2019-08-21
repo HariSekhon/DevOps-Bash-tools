@@ -23,7 +23,18 @@ srcdir="$(dirname "$0")"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
-usage_args="<files>"
+usage_args="[<setup/cpan_requirements.txt>]"
+
+if [ $# -gt 0 ]; then
+    requirements_files="$*"
+else
+    # might be more confusing in perl tools to find unused modules in subdirs like perl lib, so just stick to local
+    #requirements_files="$(find . -name cpan-requirements.txt)"
+    requirements_files="$(find . -maxdepth 2 -name cpan-requirements.txt)"
+    if [ -z "$requirements_files" ]; then
+        usage "No requirements files found, please specify explicit path to cpan-requirements.txt"
+    fi
+fi
 
 for x in "$@"; do
     case "$x" in
@@ -34,23 +45,27 @@ done
 
 found=0
 
+# want splitting of requirements files to separate files
+# shellcheck disable=SC2086
+cpan_modules="$(
+    sed 's/#.*//;
+         s/@.*//;
+         s/^[[:space:]]*//;
+         s/[[:space:]]*$//;
+         /^[[:space:]]*$/d;' $requirements_files |
+    sort -u
+)"
+
 while read -r module; do
         # grep -R is sloooow by comparison to git grep
     if ! \
-        git grep "^[[:space:]]*\(use\|require\|import\)[[:space:]]\+$module" |
+        git grep "^[[:space:]]*\\(use\\|require\\|import\\)[[:space:]]\\+$module" |
         grep -v 'cpan-requirements.*.txt' |
         grep -q .; then
             echo "$module"
             ((found + 1))
     fi
-done < <(
-    sed 's/#.*//;
-         s/@.*//;
-         s/^[[:space:]]*//;
-         s/[[:space:]]*$//;
-         /^[[:space:]]*$/d;' "$@" |
-    sort -u
-)
+done <<< "$cpan_modules"
 
 if [ $found -gt 0 ]; then
     exit 1
