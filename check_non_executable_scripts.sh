@@ -33,7 +33,7 @@ rb
 
 ext_regex=""
 for ext in $script_extensions; do
-    ext_regex="$ext_regex|\.$ext"
+    ext_regex="$ext_regex|\\.$ext"
 done
 ext_regex="(${ext_regex#|})$"
 
