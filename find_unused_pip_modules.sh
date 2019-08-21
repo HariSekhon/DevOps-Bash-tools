@@ -31,6 +31,9 @@ else
     # might be more confusing in pytools to find unused modules in subdirs like pylib, so just stick to local
     #requirements_files="$(find . -name requirements.txt)"
     requirements_files="requirements.txt"
+    if [ -z "$requirements_files" ]; then
+        usage "No requirements files found, please specify explicit path to requirements.txt"
+    fi
 fi
 
 for x in "$@"; do
