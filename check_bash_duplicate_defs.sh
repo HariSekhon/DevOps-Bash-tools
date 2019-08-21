@@ -113,7 +113,10 @@ $(get_aliases "$@")"
 if [ $# -gt 0 ]; then
     check_duplicate_defs "$@"
 else
-    check_duplicate_defs "$srcdir/.bashrc" "$srcdir"/.bash.d/*.sh
+    # only this repo
+    #check_duplicate_defs "$srcdir/.bashrc" "$srcdir"/.bash.d/*.sh
+    # $HOME + this repo
+    check_duplicate_defs ~/.bashrc ~/.bash.d/*.sh "$srcdir/.bashrc" "$srcdir"/.bash.d/*.sh
 fi
 
 time_taken "$start_time"
