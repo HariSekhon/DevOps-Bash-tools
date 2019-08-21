@@ -23,7 +23,15 @@ srcdir="$(dirname "$0")"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
-usage_args="<files>"
+usage_args="[<requirements.txt>]"
+
+if [ $# -gt 0 ]; then
+    requirements_files="$*"
+else
+    # might be more confusing in pytools to find unused modules in subdirs like pylib, so just stick to local
+    #requirements_files="$(find . -name requirements.txt)"
+    requirements_files="requirements.txt"
+fi
 
 for x in "$@"; do
     case "$x" in
@@ -34,25 +42,27 @@ done
 
 found=0
 
+pip_modules="$(
+    sed 's/#.*//;
+     s/[<>=].*//;
+     s/^[[:space:]]*//;
+     s/[[:space:]]*$//;
+     /^[[:space:]]*$/d;' $requirements_files |
+     sort -u |
+     "$srcdir/python_module_to_import_name.sh"
+)"
+
 while read -r module; do
         # grep -R is sloooow by comparison to git grep
-        #grep -R "import[[:space:]]\+$module\|from[[:space:]]\+$module[[:space:]]\+import[[:space:]]\+" . |
+        #grep -R "import[[:space:]]\\+$module\\|from[[:space:]]\\+$module[[:space:]]\\+import[[:space:]]\\+" . |
     if ! \
-        git grep "import[[:space:]]\+$module\|from[[:space:]]\+$module\([[:alnum:]\.]\+\)\?[[:space:]]\+import[[:space:]]\+" |
+        git grep "import[[:space:]]\\+$module\\|from[[:space:]]\\+$module\\([[:alnum:]\\.]\\+\\)\\?[[:space:]]\\+import[[:space:]]\\+" |
         grep -v requirements.txt |
         grep -q .; then
             echo "$module"
             ((found + 1))
     fi
-done < <(
-    sed 's/#.*//;
-         s/[<>=].*//;
-         s/^[[:space:]]*//;
-         s/[[:space:]]*$//;
-         /^[[:space:]]*$/d;' "$@" |
-         sort -u |
-         "$srcdir/python_module_to_import_name.sh"
-)
+done <<< "$pip_modules"
 
 if [ $found -gt 0 ]; then
     exit 1
