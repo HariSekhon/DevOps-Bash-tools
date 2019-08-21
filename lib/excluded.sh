@@ -23,7 +23,10 @@ set -eu
 if ! type isExcluded &>/dev/null; then
     isExcluded(){
         local prog="$1"
+        # this really is anything beginning with a star
+        # shellcheck disable=SC2049
         [[ "$prog" =~ ^\* ]] && return 0
+        [[ "$prog" =~ ^# ]]  && return 0
         [[ "$prog" =~ /\. ]] && return 0
         [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
         [[ "$prog" =~ TODO ]] && return 0
