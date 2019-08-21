@@ -104,6 +104,5 @@ if [ "${DEBUG:-}" = 1 ]; then
     echo
     sed "s/-w[[:space:]]\\{1,\\}[^[:space:]]\\{1,\\}/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$*'"
 fi
-set +x
 # shellcheck disable=SC2086
 ldapsearch -H "$uri" -b "$base_dn" -o ldif-wrap=no $auth_opts "$@"
