@@ -25,6 +25,13 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC2034
 usage_args="[<requirements.txt>]"
 
+for x in "$@"; do
+    case "$x" in
+    -h|--help)  usage
+                ;;
+    esac
+done
+
 if [ $# -gt 0 ]; then
     requirements_files="$*"
 else
@@ -35,13 +42,6 @@ else
         usage "No requirements files found, please specify explicit path to requirements.txt"
     fi
 fi
-
-for x in "$@"; do
-    case "$x" in
-    -h|--help)  usage
-                ;;
-    esac
-done
 
 found=0
 
