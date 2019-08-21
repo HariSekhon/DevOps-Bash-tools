@@ -44,7 +44,7 @@ arch="$(uname -m)"
 
 rpm_url="$(
     curl -s http://repoforge.org/use/ |
-    grep -Eo "http://repository.it4i.cz/mirrors/repoforge/redhat/el$major_release/en/$arch/.*\.$arch\.rpm"
+    grep -Eo "http://repository.it4i.cz/mirrors/repoforge/redhat/el$major_release/en/$arch/.*\\.$arch\\.rpm"
 )"
 
 wget -t 5 --retry-connrefused -O /tmp/repoforge.rpm "$rpm_url"
