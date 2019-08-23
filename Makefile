@@ -23,7 +23,7 @@ build: system-packages
 
 install:
 	@echo "linking dot files to \$$HOME directory: $$HOME"
-	@if grep -Eq '(source|\.).+bash-tools/.bashrc' ~/.bashrc; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
+	@if grep -Eq "(source|\.).+$${PWD##*/}/.bashrc" ~/.bashrc; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
 	@for filename in .tmux.conf .ansible.cfg; do\
 		ln -s "$$filename" ~; \
 	done
