@@ -25,7 +25,11 @@ install:
 	@echo "linking dot files to \$$HOME directory: $$HOME"
 	@if grep -Eq "(source|\.).+$${PWD##*/}/.bashrc" ~/.bashrc; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
 	@for filename in .tmux.conf .ansible.cfg; do\
-		ln -sv "$$PWD/$$filename" ~; \
+		if [ -n "$$FORCE" ]; then \
+			ln -sfv "$$PWD/$$filename" ~; \
+		else \
+			ln -sv "$$PWD/$$filename" ~; \
+		fi \
 	done
 
 .PHONY: test
