@@ -44,15 +44,31 @@ oc_opts="$kubectl_opts"
 #}
 
 k(){
-    # shellcheck disable=SC2086
-    case "$(k8s_or_openshift)" in
-            openshift)   command oc $oc_opts "$@"
-                         ;;
-                  k8s)   command kubectl $kubectl_opts "$@"
-                         ;;
-                    *)   command kubectl $kubectl_opts "$@"
-                         ;;
-    esac
+    local opts
+    # more efficient than forking to check history every time
+    if [ -n "$KUBERNETES_CLI" ]; then
+        case "$KUBERNETES_CLI" in
+            kubectl)    opts="$kubectl_opts"
+                        ;;
+                 oc)    opts="$oc_opts"
+                        ;;
+                  *)    echo "invalid command '$KUBERNETES_CLI' listed in \$KUBERNETES_CLI. Unset the variable to use the k() function"
+                        return
+                        ;;
+        esac
+        # shellcheck disable=SC2086
+        command "$KUBERNETES_CLI" $opts "$@"
+    else
+        # shellcheck disable=SC2086
+        case "$(k8s_or_openshift)" in
+                openshift)   command oc $oc_opts "$@"
+                             export KUBERNETES_CLI=oc
+                             ;;
+                    k8s|*)   command kubectl $kubectl_opts "$@"
+                             export KUBERNETES_CLI=kubectl
+                             ;;
+        esac
+    fi
 }
 
 # 'k8s-app' label is set by dashboard creation but who uses that
@@ -94,8 +110,11 @@ k8s_or_openshift(){
     )"
     case "$last_k8s_cmd" in
             oc|minishift)   echo openshift
+                            # these end up in a subshell so aren't really useful, set in k() instead
+                            #export KUBERNETES_CLI=oc
                             ;;
         kubectl|minikube)   echo k8s
+                            #export KUBERNETES_CLI=kubectl
                             ;;
                        *)   echo unknown
                             ;;
