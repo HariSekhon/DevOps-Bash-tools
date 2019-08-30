@@ -22,7 +22,8 @@ export VAGRANT_BOXES=~/boxes
 
 alias cd_vagrant='[ "$PWD" = "$VAGRANT_HOME" ] || cd "$VAGRANT_HOME"'
 alias vhome=cd_vagrant
-alias v='cd_vagrant; vagrant'
+#alias v='cd_vagrant; vagrant'
+alias v='vagrant'
 alias vf='cd_vagrant; vim Vagrantfile; vagrant_gen_etc_hosts; eval "$(vagrant_gen_aliases)"'
 alias vst='v status'
 alias vrun='vst | grep running'
