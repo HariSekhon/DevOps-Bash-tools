@@ -30,7 +30,8 @@ alias vrun='vst | grep running'
 # vr is aliased to vbox_running in virtualbox.sh
 alias vrr='vrun'
 #alias vssh='cd_vagrant; ssh_func vagrant ssh'
-alias vssh='cd_vagrant; vagrant ssh'
+#alias vssh='cd_vagrant; vagrant ssh'
+alias vssh='vagrant ssh'
 alias boxes='cd $VAGRANT_BOXES'
 
 vagrant_parse_hosts(){
