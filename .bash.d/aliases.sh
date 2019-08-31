@@ -22,6 +22,9 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/os_detection.sh"
 
+# shellcheck disable=SC1090
+#. "$srcdir/.bash.d/paths.sh"
+
 # manual local aliases
 # shellcheck disable=SC1090
 [ -f ~/.aliases ] && . ~/.aliases
