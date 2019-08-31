@@ -21,6 +21,8 @@
 
 # add_PATH() is defined in .bashrc since it is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads
 
+[ -n "$PATHS_SET" ] && return
+
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
@@ -393,3 +395,5 @@ link_latest(){
 # link_latest /usr/local/activator-dist-*
 #export ACTIVATOR_HOME=/usr/local/activator-dist
 #add_PATH "$ACTIVATOR_HOME"
+
+export PATHS_SET=1
