@@ -20,7 +20,9 @@
 export VAGRANT_HOME=~/vagrant
 export VAGRANT_BOXES=~/boxes
 
-alias cd_vagrant='[ "$PWD" = "$VAGRANT_HOME" ] || cd "$VAGRANT_HOME"'
+#alias cd_vagrant='[ "$PWD" = "$VAGRANT_HOME" ] || cd "$VAGRANT_HOME"'
+alias cd_vagrant='cd "$VAGRANT_HOME"'
+alias cdv=cd_vagrant
 alias vhome=cd_vagrant
 #alias v='cd_vagrant; vagrant'
 alias v='vagrant'
