@@ -16,7 +16,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
 * `<technology>.sh` - aliases, functions and environment variables to make interactive day-to-day use of a specific technologies easier, for example:
   * `ansible.sh` - [Ansible](https://www.ansible.com) aliases and environment variables
   * `apple.sh` - [Apple Mac OS X / macOS](https://en.wikipedia.org/wiki/MacOS) Mac specific tricks
-  * `aws.sh` - auto-populates [AWS](https://aws.amazon.com/) credentials from your ~/.boto credentials files to `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables for use with other tools without having to maintain the credentials in multiple places
+  * `aws.sh` - auto-populates [AWS](https://aws.amazon.com/) credentials from your ~/.boto credentials file to `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables for use with other tools without having to maintain the credentials in multiple places
   * `docker.sh` - [Docker](https://www.docker.com/) convenient aliases and functions like clearing old containers and dangling image layers to clean up space
   * `git.sh` - [Git](https://git-scm.com/) aliases and functions
   * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
