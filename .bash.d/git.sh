@@ -141,7 +141,7 @@ st(){
     elif type isSvn &>/dev/null && isSvn "$target"; then
         echo "> svn st $*" >&2
         svn st --ignore-externals "$target" "$@" | grep -v -e "^?" -e "^x";
-    else 
+    else
         echo "not a revision controlled resource as far as bashrc can tell"
     fi
   } | more -R -n "$((LINES - 3))"
@@ -196,7 +196,7 @@ pull(){
     elif type isSvn &>/dev/null && isSvn "$target"; then
         echo "> svn up $target" >&2
         svn up "$target"
-    else 
+    else
         echo "not a revision controlled resource as far as bashrc can tell"
         return 1
     fi
@@ -211,7 +211,7 @@ checkout(){
     fi
 }
 
-commit() { 
+commit() {
     local gitcimsg=""
     for x in "$@"; do
         if git status -s "$x" | grep "^[?A]"; then
@@ -221,7 +221,7 @@ commit() {
     [ -z "$gitcimsg" ] && return 1
     gitcimsg="${gitcimsg%, }"
     gitcimsg="added $gitcimsg"
-    git add "$@" && 
+    git add "$@" &&
     git commit -m "$gitcimsg" "$@"
 }
 
