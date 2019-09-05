@@ -25,7 +25,7 @@ For more advanced Systems Administration scripts in other languages, see the rep
   - [Kafka](http://kafka.apache.org/)
   - [Vagrant](https://www.vagrantup.com/)
   - automatic GPG and SSH agent handling
-  - and lots more - see the [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
+  - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
   - ongoing work-in-progress as I still have thousands of lines of code from the last ~15 years to sanitize and export here (I typically have around 1000 aliases and 500 functions in total, plus some magic prompt hook custom shell behaviours and several hundred external scripts - a few hundred of which can now be found across [my other github repos](https://github.com/HariSekhon))
 - `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
 - `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools)
