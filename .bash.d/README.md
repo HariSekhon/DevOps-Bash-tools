@@ -25,7 +25,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
   * `git.sh` - [Git](https://git-scm.com/) aliases and functions
   * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
   * `kafka.sh` - [Kafka](http://kafka.apache.org/) environment variables for Kerberos security, fixing to high heap defaults for CLI commands and things for kafka_wrappers/ convenience scripts to reduce the number of redundant arguments like setting your Kafka broker and zookeeper nodes
-  * `kubernetes.sh` - [Kubernetes](https://kubernetes.io/) aliases and functions for daily ease of use, contexts, maintaining switching to a namespace despite `.kube/config` regeneration due to certificate expiry, switching between open source [Kubernetes](https://kubernetes.io/) and Redhat [OpenShift](https://www.openshift.com/) `kubectl` and `oc` commands, automating getting authentication token and Kubernetes API endpoints
+  * `kubernetes.sh` - [Kubernetes](https://kubernetes.io/) aliases and functions, managing contexts and namespaces despite periodic `.kube/config` due to regenerated embedded certificates, switching between open source [Kubernetes](https://kubernetes.io/) and Redhat [OpenShift](https://www.openshift.com/) `kubectl` and `oc` commands, automating getting authentication token and Kubernetes API endpoints
   * `vagrant.sh` - [Vagrant](https://www.vagrantup.com/) aliases and functions
 
 More script related functions can be found in the [lib/](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/lib) directory at the top level.
