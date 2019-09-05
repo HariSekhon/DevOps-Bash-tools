@@ -106,6 +106,8 @@ done
 #                                  G o l a n g
 # ============================================================================ #
 
+GOPATH="$github/go-tools"
+
 # manual installation of 1.5 mismatches with HomeBrew 1.6 installed to $PATH and
 #export GOROOT="/usr/local/go"
 # causes:
