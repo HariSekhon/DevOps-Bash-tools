@@ -27,7 +27,7 @@ gpg_agent(){
             if [ -f "$GPG_ENV_FILE" ]; then
                 # shellcheck disable=SC1090
                 . "$GPG_ENV_FILE" > /dev/null
-                
+
                 GPG_AGENT_PID="${GPG_AGENT_INFO#*:}"
                 GPG_AGENT_PID="${GPG_AGENT_PID%:*}"
                 if ! kill -0 "$GPG_AGENT_PID" > /dev/null 2>&1; then
