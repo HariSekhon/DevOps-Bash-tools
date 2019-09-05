@@ -24,7 +24,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
   * `docker.sh` - [Docker](https://www.docker.com/) convenient aliases and functions like clearing old containers and dangling image layers to clean up space
   * `git.sh` - [Git](https://git-scm.com/) aliases and functions
   * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
-  * `kafka.sh` - [Kafka](http://kafka.apache.org/) environment variables Kerberos security and lowering heap for CLI commands to be able run in VMs (using the server conf setting will often fail), reduces redundant arguments needed when combined with `kafka_wrappers/` scripts by setting your Kafka broker and zookeeper nodes
+  * `kafka.sh` - [Kafka](http://kafka.apache.org/) environment variables for Kerberos security and CLI appropriate heap size (avoids heap allocation failures on VMs that otherwise default to using larger server configured heap size), avoiding need for common broker and zookeeper arguments when using `kafka_wrappers/` scripts by setting your Kafka broker and zookeeper addresses once instead of in every command
   * `kubernetes.sh` - [Kubernetes](https://kubernetes.io/) aliases and functions, managing contexts and namespaces even for periodically regenerated `.kube/config` with refreshed embedded certificates, switching between open source [Kubernetes](https://kubernetes.io/) and Redhat [OpenShift](https://www.openshift.com/) `kubectl` and `oc` commands, automating getting authentication token and Kubernetes API endpoints
   * `vagrant.sh` - [Vagrant](https://www.vagrantup.com/) aliases and functions
 
