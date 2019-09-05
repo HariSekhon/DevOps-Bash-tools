@@ -11,7 +11,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
 * `functions.sh` - general functions
 * `paths.sh` - deduplicated adding to `$PATH` for lots of common places (eg. /usr/sbin, /usr/local/bin, ~/bin) and technologies that don't have enough to justify their own `<technology>.sh` (which use `add_PATH()` from here), commands to clearly print one per line Bash `$PATH`, Perl `@INC` and Python `sys.path` components
 * `env.sh` - general environment variables and var/unvar functions for setting environment variables for the current and all new shell sessions
-* `ssh-agent.sh` / `gpg-agent.sh` - auto-starts SSH and GPG agents if not already running, stores and auto-sources their details for new shells to automatically
+* `ssh-agent.sh` / `gpg-agent.sh` - auto-starts SSH and GPG agents if not already running, stores and auto-sources their details for new shells to automatically use them
 * `title.sh` - auto-title tricks for Screen and Terminals
 * `<technology>.sh` - aliases, functions and environment variables to make interactive day-to-day use of a specific technologies easier, for example:
   * `ansible.sh` - [Ansible](https://www.ansible.com) aliases and environment variables
