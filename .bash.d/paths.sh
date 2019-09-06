@@ -31,6 +31,8 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 pythonpath(){
     python -c 'from __future__ import print_function; import sys; [print(_) for _ in sys.path if _]'
 }
+# enable this to avoid creating .pyc files (sometimes they trip you up executing outdated python code)
+# export PYTHONDONTWRITEBYTECODE=1
 
 # see the effect of inserting a path like so
 # PERL5LIB=/path/to/blah perlpath
@@ -55,6 +57,7 @@ add_PATH "/usr/bin"
 add_PATH "/sbin"
 add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
+add_PATH "/usr/local/bin"
 add_PATH ~/bin
 add_PATH "$srcdir"
 
