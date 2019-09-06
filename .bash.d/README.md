@@ -22,7 +22,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
     * `kafka.sh` - [Kafka](http://kafka.apache.org/) environment variables for Kerberos security and CLI appropriate heap size (avoids heap allocation failures on VMs that otherwise default to using larger server configured heap size), avoiding need for common broker and zookeeper arguments when using `kafka_wrappers/` scripts by setting your Kafka broker and zookeeper addresses once instead of in every command
   * general OS:
     * `apple.sh` - [Apple Mac OS X / macOS](https://en.wikipedia.org/wiki/MacOS) specific tricks
-    * `linux.sh` - [Linux](https://en.wikipedia.org/wiki/Linux) specific miscellaneous things like X.org
+    * `linux.sh` - [Linux](https://en.wikipedia.org/wiki/Linux) specific miscellaneous bits like X.org
     * `network.sh` - network aliases and functions
     * `ssh.sh` - SSH convenience functions and key management
     * `ssh-agent.sh` / `gpg-agent.sh` - auto-starts SSH and GPG agents if not already running, stores and auto-sources their details for new shells to automatically use them
