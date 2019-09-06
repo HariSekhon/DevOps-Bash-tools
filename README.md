@@ -17,7 +17,7 @@ For more advanced Systems Administration scripts in other languages, see the rep
   - utility scripts used from other scripts
 
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
-- `.bash.d/*.sh` - thousands of lines of advanced bashrc code, functions and aliases for:
+- `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
   - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [SVN](https://subversion.apache.org)
   - [Docker](https://www.docker.com/)
