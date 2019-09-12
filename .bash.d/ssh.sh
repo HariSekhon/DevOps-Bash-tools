@@ -90,7 +90,7 @@ safe_ssh(){
         echo "RSA   Key: $rsa_key"
         echo "DSA   Key: $dsa_key"
     fi
-} 
+}
 alias sssh=safe_ssh
 
 check_sshkey(){
@@ -162,7 +162,7 @@ rekey(){
     ssh-keyscan -t dsa "$1" | grep "^$1 ssh-dss" >> ~/.ssh/known_hosts
 }
 
-sshkey(){ 
+sshkey(){
     local key=~/.ssh/id_rsa.pub
     # now available on Mac, but my tried and tested function of years gone by dedupes the keys
 #    if command -v ssh-copy-id; then
@@ -212,7 +212,7 @@ cleankey(){
 keyremove(){
     for x in "$@"; do
         ssh -o "PasswordAuthentication no" "$x" '
-            for y in ~/.ssh/authorized_keys*; do 
+            for y in ~/.ssh/authorized_keys*; do
                 if [ -f "$y" ]; then
                     perl -pi -e '"'s/ssh-rsa .*= hari@.*\n//'"' "$y"
                 fi

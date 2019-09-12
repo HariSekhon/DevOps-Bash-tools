@@ -30,10 +30,10 @@ fi
 repolist="${*:-${REPOS:-}}"
 if [ -n "$repolist" ]; then
     :
-elif [ -f "$srcdir/lib/repolist.txt" ]; then
-    repolist="$(sed 's/#.*//' < "$srcdir/lib/repolist.txt")"
+elif [ -f "$srcdir/setup/repolist.txt" ]; then
+    repolist="$(sed 's/#.*//' < "$srcdir/setup/repolist.txt")"
 else
-    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/lib/repolist.txt | sed 's/#.*//')"
+    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
 fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
@@ -60,7 +60,7 @@ fi
 
 for repo in $repolist; do
     if ! echo "$repo" | grep -q "/"; then
-        repo="harisekhon/$repo"
+        repo="HariSekhon/$repo"
     fi
     repo_dir="${repo##*/}"
     if ! [ -d "$repo_dir" ]; then
@@ -70,7 +70,9 @@ for repo in $repolist; do
     git pull
     git submodule update --init
     #  shellcheck disable=SC2086
-    "$make" "$build" $opts
+    if [ -z "${NOBUILD:-}" ]; then
+        "$make" "$build" $opts
+    fi
     if [ -f /.dockerenv ]; then
         for x in system-packages-remove clean deep-clean; do
             if grep -q "^$x:" Makefile bash-tools/Makefile.in 2>/dev/null; then

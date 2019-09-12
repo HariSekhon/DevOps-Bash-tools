@@ -5,7 +5,7 @@ Hari Sekhon - DevOps Bash Tools
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-70+ Shell Scripts & Utility Code Library with dozens of libs used by all my other [GitHub repos](https://github.com/harisekhon).
+70+ Shell Scripts, Advanced Bashrc & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon).
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
@@ -17,15 +17,15 @@ For more advanced Systems Administration scripts in other languages, see the rep
   - utility scripts used from other scripts
 
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
-- `.bash.d/*.sh` - thousands of lines of advanced bashrc code, functions and aliases for:
+- `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
-  - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [SVN](https://subversion.apache.org)
+  - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [Svn](https://subversion.apache.org)
   - [Docker](https://www.docker.com/)
   - [Kubernetes](https://kubernetes.io/)
   - [Kafka](http://kafka.apache.org/)
   - [Vagrant](https://www.vagrantup.com/)
   - automatic GPG and SSH agent handling
-  - ongoing work-in-progress as I still have thousands of lines of code from the last ~15 years to sanitize and export here (I typically have around 1000 aliases and 500 functions in total, plus some magic prompt hook custom shell behaviours and several hundred external scripts - a few hundred of which can now be found across [my other github repos](https://github.com/HariSekhon))
+  - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
 - `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
 - `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools)
 

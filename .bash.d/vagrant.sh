@@ -37,6 +37,9 @@ alias vssh='vagrant ssh'
 alias boxes='cd $VAGRANT_BOXES'
 
 vagrant_parse_hosts(){
+    if ! [ -f "$VAGRANT_HOME/Vagrantfile" ]; then
+        return
+    fi
     #grep '[^#]*config.vm.define' "$VAGRANT_HOME/Vagrantfile" | awk -F'"' '{print $2}'
     sed 's/#.*//;/^[[:space:]]*$/d' "$VAGRANT_HOME/Vagrantfile" |
     grep -e host_name -e network |

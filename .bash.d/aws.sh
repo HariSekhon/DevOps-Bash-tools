@@ -41,8 +41,10 @@ aws_useast(){
 # Storing creds in one place in Boto creds file, pull them straight from there
 # export AWS_ACCESS_KEY
 # export AWS_SECRET_KEY
-eval "$(
-for key in aws_access_key_id aws_secret_access_key; do
-    awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' ~/.boto
-done
-)"
+if [ -r ~/.boto ]; then
+    eval "$(
+    for key in aws_access_key_id aws_secret_access_key; do
+        awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' ~/.boto
+    done
+    )"
+fi

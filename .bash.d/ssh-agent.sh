@@ -27,7 +27,7 @@ ssh_agent(){
             # shellcheck source=~/.agent.env
             # shellcheck disable=SC1090
             . "$SSH_ENV_FILE" > /dev/null
-        
+
             if ! kill -0 "$SSH_AGENT_PID" >/dev/null 2>&1; then
                 echo "Stale ssh-agent found. Spawning new agent..."
                 killall -9 ssh-agent

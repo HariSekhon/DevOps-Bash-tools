@@ -28,10 +28,12 @@ alias gitconfig="\$EDITOR \~/.gitconfig"
 alias gitignore="\$EDITOR \~/.gitignore_global"
 alias gitrc=gitconfig
 
+alias add=gitadd
 alias co=checkout
+alias commit="git commit"
+alias gitci=commit
 alias ci=commit
 alias gitco=checkout
-alias gitci=commit
 alias up=pull
 alias u=up
 alias gdiff="git diff"
@@ -141,7 +143,7 @@ st(){
     elif type isSvn &>/dev/null && isSvn "$target"; then
         echo "> svn st $*" >&2
         svn st --ignore-externals "$target" "$@" | grep -v -e "^?" -e "^x";
-    else 
+    else
         echo "not a revision controlled resource as far as bashrc can tell"
     fi
   } | more -R -n "$((LINES - 3))"
@@ -196,7 +198,7 @@ pull(){
     elif type isSvn &>/dev/null && isSvn "$target"; then
         echo "> svn up $target" >&2
         svn up "$target"
-    else 
+    else
         echo "not a revision controlled resource as far as bashrc can tell"
         return 1
     fi
@@ -211,7 +213,7 @@ checkout(){
     fi
 }
 
-commit() { 
+gitadd() {
     local gitcimsg=""
     for x in "$@"; do
         if git status -s "$x" | grep "^[?A]"; then
@@ -221,7 +223,7 @@ commit() {
     [ -z "$gitcimsg" ] && return 1
     gitcimsg="${gitcimsg%, }"
     gitcimsg="added $gitcimsg"
-    git add "$@" && 
+    git add "$@" &&
     git commit -m "$gitcimsg" "$@"
 }
 
@@ -265,17 +267,17 @@ switchbranch(){
 
 gitrm(){
     git rm "$@" &&
-    git ci -m "removed $*" "$@"
+    git commit -m "removed $*" "$@"
 }
 
 gitrename(){
     git mv "$1" "$2" &&
-    git ci -m "renamed $1 to $2" "$1" "$2"
+    git commit -m "renamed $1 to $2" "$1" "$2"
 }
 
 gitmv(){
     git mv "$1" "$2" &&
-    git ci -m "moved $1 to $2" "$1" "$2"
+    git commit -m "moved $1 to $2" "$1" "$2"
 }
 
 gitd(){
@@ -349,8 +351,8 @@ updatemodules(){
         done
         echo
         for submodule in $(git submodule | awk '{print $2}'); do
-            if [ -d "$submodule" ] && ! [ -L "$submodule" ] && ! git st "$submodule" | grep -q nothing; then
-                git ci -m "updated $submodule" "$submodule" || break
+            if [ -d "$submodule" ] && ! [ -L "$submodule" ] && ! git status "$submodule" | grep -q nothing; then
+                git commit -m "updated $submodule" "$submodule" || break
             fi
         done &&
         make updatem ||
@@ -413,4 +415,20 @@ gitdiff(){
     [ -n "$filename" ] || { echo "usage: gitdiff filename"; return 1; }
     git diff "$filename" > "/tmp/gitdiff.tmp"
     diffnet.pl "/tmp/hgdiff.tmp"
+}
+
+revert_typechange(){
+    # want splitting to separate filenames
+    # shellcheck disable=SC2046
+    co $(git status --porcelain | awk '/^.T/{print $2}')
+}
+
+rm_untracked(){
+    # iterate on explicit targets only
+    # intentionally not including current directory to avoid accidentally wiping out untracked files - you must specify "rm_untracked ." if you really intend this
+    for x in "${@:-}"; do
+        # want splitting to separate filenames
+        # shellcheck disable=SC2046
+        rm -v $(git status --porcelain setup | awk '/^??/{print $2}')
+    done
 }

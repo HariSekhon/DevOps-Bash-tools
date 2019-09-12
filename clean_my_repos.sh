@@ -26,4 +26,4 @@ while read -r repo; do
         fi
         popd
     fi
-done < <(sed 's/#.*//' < "$srcdir/lib/repolist.txt")
+done < <(sed 's/#.*//' < "$srcdir/setup/repolist.txt")
