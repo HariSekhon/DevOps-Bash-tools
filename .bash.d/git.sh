@@ -425,6 +425,8 @@ revert_typechange(){
 
 rm_untracked(){
     for x in "${@:-.}"; do
+        # want splitting to separate filenames
+        # shellcheck disable=SC2046
         rm -v $(git status --porcelain setup | awk '/^??/{print $2}')
     done
 }
