@@ -70,7 +70,9 @@ for repo in $repolist; do
     git pull
     git submodule update --init
     #  shellcheck disable=SC2086
-    "$make" "$build" $opts
+    if [ -z "${NOBUILD:-}" ]; then
+        "$make" "$build" $opts
+    fi
     if [ -f /.dockerenv ]; then
         for x in system-packages-remove clean deep-clean; do
             if grep -q "^$x:" Makefile bash-tools/Makefile.in 2>/dev/null; then
