@@ -351,7 +351,7 @@ updatemodules(){
         done
         echo
         for submodule in $(git submodule | awk '{print $2}'); do
-            if [ -d "$submodule" ] && ! [ -L "$submodule" ] && ! git st "$submodule" | grep -q nothing; then
+            if [ -d "$submodule" ] && ! [ -L "$submodule" ] && ! git status "$submodule" | grep -q nothing; then
                 git commit -m "updated $submodule" "$submodule" || break
             fi
         done &&
