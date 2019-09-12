@@ -32,6 +32,8 @@ export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
     export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
     opts="$opts --user"
+elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
+    opts="$opts --user"
 fi
 
 SUDO=""
