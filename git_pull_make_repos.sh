@@ -60,7 +60,7 @@ fi
 
 for repo in $repolist; do
     if ! echo "$repo" | grep -q "/"; then
-        repo="harisekhon/$repo"
+        repo="HariSekhon/$repo"
     fi
     repo_dir="${repo##*/}"
     if ! [ -d "$repo_dir" ]; then
