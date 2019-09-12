@@ -420,5 +420,11 @@ gitdiff(){
 revert_typechange(){
     # want splitting to separate filenames
     # shellcheck disable=SC2046
-    co $(git status --porcelain | grep '^.T' | awk '{print $2}')
+    co $(git status --porcelain | awk '/^.T/{print $2}')
+}
+
+rm_untracked(){
+    for x in "${@:-.}"; do
+        rm -v $(git status --porcelain setup | awk '/^??/{print $2}')
+    done
 }
