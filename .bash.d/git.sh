@@ -424,7 +424,9 @@ revert_typechange(){
 }
 
 rm_untracked(){
-    for x in "${@:-.}"; do
+    # iterate on explicit targets only
+    # intentionally not including current directory to avoid accidentally wiping out untracked files - you must specify "rm_untracked ." if you really intend this
+    for x in "${@:-}"; do
         # want splitting to separate filenames
         # shellcheck disable=SC2046
         rm -v $(git status --porcelain setup | awk '/^??/{print $2}')
