@@ -267,17 +267,17 @@ switchbranch(){
 
 gitrm(){
     git rm "$@" &&
-    git ci -m "removed $*" "$@"
+    git commit -m "removed $*" "$@"
 }
 
 gitrename(){
     git mv "$1" "$2" &&
-    git ci -m "renamed $1 to $2" "$1" "$2"
+    git commit -m "renamed $1 to $2" "$1" "$2"
 }
 
 gitmv(){
     git mv "$1" "$2" &&
-    git ci -m "moved $1 to $2" "$1" "$2"
+    git commit -m "moved $1 to $2" "$1" "$2"
 }
 
 gitd(){
@@ -352,7 +352,7 @@ updatemodules(){
         echo
         for submodule in $(git submodule | awk '{print $2}'); do
             if [ -d "$submodule" ] && ! [ -L "$submodule" ] && ! git st "$submodule" | grep -q nothing; then
-                git ci -m "updated $submodule" "$submodule" || break
+                git commit -m "updated $submodule" "$submodule" || break
             fi
         done &&
         make updatem ||
