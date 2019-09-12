@@ -32,6 +32,10 @@ fi
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
     export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+    # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
+    opts="$opts --user"
+elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
+    opts="$opts --user"
 fi
 
 pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"

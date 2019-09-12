@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Installs to --user on Mac to avoid System Integrity Protection built-in OS X El Capitan and later
+# Installs to --user on Mac to avoid System Integrity Protection built in to OS X El Capitan and later
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
