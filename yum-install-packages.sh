@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Install RPM packages in a forgiving way - useful for install Perl CPAN and Python PyPI modules that may or may not be available
+# Install RPM packages in a forgiving way - useful for installing Perl CPAN and Python PyPI modules that may or may not be available
 #
 # combine with later use of the following scripts to only build packages that aren't available in the Linux distribution:
 #
