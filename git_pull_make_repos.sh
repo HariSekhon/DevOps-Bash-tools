@@ -30,10 +30,10 @@ fi
 repolist="${*:-${REPOS:-}}"
 if [ -n "$repolist" ]; then
     :
-elif [ -f "$srcdir/lib/repolist.txt" ]; then
-    repolist="$(sed 's/#.*//' < "$srcdir/lib/repolist.txt")"
+elif [ -f "$srcdir/setup/repolist.txt" ]; then
+    repolist="$(sed 's/#.*//' < "$srcdir/setup/repolist.txt")"
 else
-    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/lib/repolist.txt | sed 's/#.*//')"
+    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
 fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
