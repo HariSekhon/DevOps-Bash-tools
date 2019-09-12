@@ -29,23 +29,25 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="-q"
 fi
 
-export LDFLAGS=""
-if [ "$(uname -s)" = "Darwin" ]; then
-    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-    # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
-    opts="$opts --user"
-elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
-    opts="$opts --user"
-fi
-
-pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
-
 SUDO=""
 if [ $EUID != 0 ] &&
    [ -z "${VIRTUAL_ENV:-}" ] &&
    [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
     SUDO=sudo
 fi
+
+export LDFLAGS=""
+if [ "$(uname -s)" = "Darwin" ]; then
+    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+    # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
+    opts="$opts --user"
+    SUDO=""
+elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
+    opts="$opts --user"
+    SUDO=""
+fi
+
+pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
 
 for pip_module in $pip_modules; do
     python_module="$("$srcdir/python_module_to_import_name.sh" <<< "$pip_module")"
@@ -57,6 +59,8 @@ for pip_module in $pip_modules; do
     #echo "checking if python module '$python_module' is installed"
     if ! python -c "import $python_module" &>/dev/null; then
         echo "python module '$python_module' not installed"
+        # want opts splitting
+        # shellcheck disable=SC2086
         $SUDO "${PIP:-pip}" install $opts --ignore-installed urllib3 "$pip_module"
     fi
 done
