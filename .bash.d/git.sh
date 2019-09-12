@@ -416,3 +416,9 @@ gitdiff(){
     git diff "$filename" > "/tmp/gitdiff.tmp"
     diffnet.pl "/tmp/hgdiff.tmp"
 }
+
+revert_typechange(){
+    # want splitting to separate filenames
+    # shellcheck disable=SC2046
+    co $(git status --porcelain | grep '^.T' | awk '{print $2}')
+}
