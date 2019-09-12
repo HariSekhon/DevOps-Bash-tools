@@ -28,6 +28,7 @@ alias gitconfig="\$EDITOR \~/.gitconfig"
 alias gitignore="\$EDITOR \~/.gitignore_global"
 alias gitrc=gitconfig
 
+alias add=gitadd
 alias co=checkout
 alias commit="git commit"
 alias gitci=commit
