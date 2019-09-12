@@ -28,19 +28,21 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="-q"
 fi
 
-export LDFLAGS=""
-if [ "$(uname -s)" = "Darwin" ]; then
-    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-    opts="$opts --user"
-elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
-    opts="$opts --user"
-fi
-
 SUDO=""
 if [ $EUID != 0 ] &&
    [ -z "${VIRTUAL_ENV:-}" ] &&
    [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
     SUDO=sudo
+fi
+
+export LDFLAGS=""
+if [ "$(uname -s)" = "Darwin" ]; then
+    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+    opts="$opts --user"
+    SUDO=""
+elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
+    opts="$opts --user"
+    SUDO=""
 fi
 
 echo "$SUDO ${PIP:-pip} install $opts $*"
