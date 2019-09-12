@@ -29,9 +29,10 @@ alias gitignore="\$EDITOR \~/.gitignore_global"
 alias gitrc=gitconfig
 
 alias co=checkout
+alias commit="git commit"
+alias gitci=commit
 alias ci=commit
 alias gitco=checkout
-alias gitci=commit
 alias up=pull
 alias u=up
 alias gdiff="git diff"
@@ -211,7 +212,7 @@ checkout(){
     fi
 }
 
-commit() {
+gitadd() {
     local gitcimsg=""
     for x in "$@"; do
         if git status -s "$x" | grep "^[?A]"; then
