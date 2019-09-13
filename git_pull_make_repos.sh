@@ -27,13 +27,17 @@ if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
 
-repolist="${*:-${REPOS:-}}"
-if [ -n "$repolist" ]; then
-    :
-elif [ -f "$srcdir/setup/repolist.txt" ]; then
-    repolist="$(sed 's/#.*//' < "$srcdir/setup/repolist.txt")"
+if [ $# -gt 0 ]; then
+    repolist="$*"
 else
-    repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
+    repolist="${*:-${REPOS:-}}"
+    if [ -n "$repolist" ]; then
+        :
+    elif [ -f "$srcdir/setup/repolist.txt" ]; then
+        repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$srcdir/setup/repolist.txt")"
+    else
+        repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
+    fi
 fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
@@ -70,7 +74,8 @@ for repo in $repolist; do
     git pull
     git submodule update --init
     #  shellcheck disable=SC2086
-    if [ -z "${NOBUILD:-}" ]; then
+    if [ -z "${NOBUILD:-}" ] &&
+       [ -z "${NO_BUILD:-}" ]; then
         "$make" "$build" $opts
     fi
     if [ -f /.dockerenv ]; then
