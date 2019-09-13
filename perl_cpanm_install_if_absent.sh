@@ -42,10 +42,14 @@ for cpan_module in $cpan_modules; do
     perl_module="${cpan_module%%@*}"
     if ! perl -e "use $perl_module;" &>/dev/null; then
         echo "Installing $perl_module"
-        # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly
-        $SUDO \
-            OPENSSL_INCLUDE="${OPENSSL_INCLUDE:-}" \
-            OPENSSL_LIB="${OPENSSL_LIB:-}" \
-            "${CPANM:-cpanm}" $opts --notest "$cpan_module"
+        if [ "$(uname -s)" = "Darwin" ]; then
+            # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly
+            $SUDO \
+                OPENSSL_INCLUDE="$OPENSSL_INCLUDE" \
+                OPENSSL_LIB="$OPENSSL_LIB" \
+                "${CPANM:-cpanm}" $opts --notest "$cpan_module"
+        else
+            $SUDO "${CPANM:-cpanm}" $opts --notest "$cpan_module"
+        fi
     fi
 done
