@@ -23,7 +23,10 @@ run(){
     while read -r repo; do
         repo_dir="${repo##*:}"
         repo_dir="${repo_dir##*/}"
-        repo="${repo%%:*}"
+        #repo="${repo%%:*}"
+        #if ! echo "$repo" | grep -q "/"; then
+        #    repo="HariSekhon/$repo"
+        #fi
         if [ -d "$repo_dir" ]; then
             pushd "$repo_dir"
             # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
