@@ -13,6 +13,9 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
+# stop recursing upwards for other .editorconfig files
+#root=true
+
 [*]
 indent_style = space
 indent_size = 4
