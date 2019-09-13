@@ -14,17 +14,21 @@
 #
 
 [*]
-#indent_style = tab
+indent_style = spaces
 indent_size = 4
 
 [*.go]
 indent_style = tab
 indent_size = 4
 
+[Makefile]
+indent_style = tab
+indent_size = 4
+
 [*.md]
-#indent_style = tab
+indent_style = spaces
 indent_size = 2
 
 [.*]
-#indent_style = tab
+indent_style = spaces
 indent_size = 4
