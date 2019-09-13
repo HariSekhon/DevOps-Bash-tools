@@ -17,18 +17,35 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-while read -r repo; do
-    if [ -d "$repo" ]; then
-        pushd "$repo"
-        # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-        git pull
-        if [ "${1:-}" = "quick" ]; then
-            make update-no-recompile || exit 1
+run(){
+    local repofile="$1"
+    echo "processing repos from file: $repofile"
+    while read -r repo; do
+        repo_dir="${repo##*:}"
+        repo_dir="${repo_dir##*/}"
+        repo="${repo%%:*}"
+        if [ -d "$repo_dir" ]; then
+            pushd "$repo_dir"
+            # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
+            git pull
+            if [ -n "${QUICK:-}" ] ||
+               [ -n "${NOBUILD:-}" ] ||
+               [ -n "${NO_BUILD:-}" ]; then
+                make update-no-recompile || exit 1
+            else
+                make update
+            fi
+            popd
         else
-            make update
+            git clone "https://github.com/harisekhon/$repo" "$repo_dir"
         fi
-        popd
-    else
-        git clone "https://github.com/harisekhon/$repo"
-    fi
-done < <(sed 's/#.*//' < "$srcdir/setup/repolist.txt")
+    done < <(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")
+}
+
+if [ $# -gt 0 ]; then
+    for x in "$@"; do
+        run "$x"
+    done
+else
+    run "$srcdir/setup/repolist.txt"
+fi
