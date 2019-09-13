@@ -27,7 +27,7 @@ DevOps-Bash-tools:bash-tools
 # libraries first - if these don't work then the dependent repos beneath them won't work
 lib
 pylib
-lib-java
+lib-java:libj
 
 DevOps-Perl-tools:tools
 DevOps-Python-tools:pytools
