@@ -13,19 +13,28 @@
 #
 
 # Repos to git clone or update, one per line
+#
+# Format:
+#
+# :local_dir is optional in case you want to shorten the local directory name, lowercase it or change it for any reason such as daily convenience
+#
+#   repo[:local_dir]
+#
 
 # always do this one first
-bash-tools
+DevOps-Bash-tools:bash-tools
 
 # libraries first - if these don't work then the dependent repos beneath them won't work
 lib
 pylib
 lib-java
 
-tools
-pytools
+DevOps-Perl-tools:tools
+DevOps-Python-tools:pytools
 #spotify
 #spark-apps
 
+Nagios-Plugin-Kafka:nagios-plugin-kafka
+
 # biggest repo last
-nagios-plugins
+Nagios-Plugins:nagios-plugins
