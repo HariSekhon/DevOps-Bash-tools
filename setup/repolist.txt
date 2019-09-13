@@ -16,9 +16,15 @@
 #
 # Format:
 #
-# :local_dir is optional in case you want to shorten the local directory name, lowercase it or change it for any reason such as daily convenience
+#  <user_or_org>/<repo>[:local_dir]
 #
-#   repo[:local_dir]
+# eg.
+#
+#  HariSekhon/Nagios-Plugins
+#
+# if user or organization prefix is not specified then defaults to the HariSekhon account
+#
+# ":local_dir" is optional in case you want to shorten the local directory name, lowercase it or change it for any reason such as daily convenience
 #
 
 # always do this one first
