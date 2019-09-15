@@ -376,8 +376,8 @@ docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
-travis:
-	$(MAKE) travis-log
+travis: travis-log
+	:
 
 .PHONY: travis-log
 travis-log:
