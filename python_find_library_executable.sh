@@ -20,6 +20,13 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+while read -r path; do
+    bin="${path%/lib/python*/site-packages*}/bin"
+    if [ -d "$bin" ]; then
+        export PATH="$bin:$PATH"
+    fi
+done < <(python -c 'from __future__ import print_function; import sys; print("\n".join(reversed(sys.path)))' | sed '/^[[:space:]]*$/d')
+
 for path in ~/Library/Python/*; do
     bin="$path/bin"
     [ -d "$bin" ] || continue
