@@ -20,6 +20,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# finds weird things like this to make $PATH work
+# /usr/local/Cellar/numpy/1.14.5/libexec/nose/bin
+# since nose is available in brew Cellar's numpy, it doesn't get installed to ~/Library and isn't found otherwise
+# rather than do an --ignore-installed which could all sorts of other issues, just use it from wherever it is found
 while read -r path; do
     bin="${path%/lib/python*/site-packages*}/bin"
     if [ -d "$bin" ]; then
