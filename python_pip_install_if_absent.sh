@@ -58,7 +58,7 @@ for pip_module in $pip_modules; do
     #
     #echo "checking if python module '$python_module' is installed"
     if ! python -c "import $python_module" &>/dev/null; then
-        echo "python module '$python_module' not installed"
+        echo "python module '$python_module' not installed, installing..."
         # want opts splitting
         # shellcheck disable=SC2086
         $SUDO "${PIP:-pip}" install $opts --ignore-installed urllib3 "$pip_module"
