@@ -338,6 +338,7 @@ gitfind(){
 
 updatemodules(){
     if isGit .; then
+        git pull
         #git submodule update --init --remote
         for submodule in $(git submodule | awk '{print $2}'); do
             if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
