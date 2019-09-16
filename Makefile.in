@@ -187,7 +187,7 @@ apt-packages-python:
 
 .PHONY: yum-packages
 yum-packages:
-	$(BASH_TOOLS)/install_epel_repo.sh
+	$(BASH_TOOLS)/setup/install_epel_repo.sh
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages.txt rpm-packages-dev.txt; do \
