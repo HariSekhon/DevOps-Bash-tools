@@ -35,18 +35,23 @@ if [ $EUID != 0 ] &&
     SUDO=sudo
 fi
 
-export LDFLAGS=""
-if [ "$(uname -s)" = "Darwin" ]; then
-    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-    opts="$opts --user"
-    SUDO=""
-elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
-    if [ -n "${VIRTUAL_ENV:-}" ]; then
+user_opt(){
+    if [ -n "${VIRTUAL_ENV:-}" ] ||
+       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
     else
         opts="$opts --user"
         SUDO=""
     fi
+}
+
+export LDFLAGS=""
+if [ "$(uname -s)" = "Darwin" ]; then
+    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+    # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
+    user_opt
+elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
+    user_opt
 fi
 
 echo "$SUDO ${PIP:-pip} install $opts $*"
