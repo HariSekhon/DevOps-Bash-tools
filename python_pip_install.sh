@@ -41,8 +41,12 @@ if [ "$(uname -s)" = "Darwin" ]; then
     opts="$opts --user"
     SUDO=""
 elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
-    opts="$opts --user"
-    SUDO=""
+    if [ -n "${VIRTUAL_ENV:-}" ]; then
+        echo "inside virtualenv, ignoring --user switch which wouldn't work"
+    else
+        opts="$opts --user"
+        SUDO=""
+    fi
 fi
 
 echo "$SUDO ${PIP:-pip} install $opts $*"
