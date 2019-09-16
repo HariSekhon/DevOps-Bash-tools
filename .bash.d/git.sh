@@ -37,6 +37,7 @@ alias gitco=checkout
 alias up=pull
 alias u=up
 alias gdiff="git diff"
+alias gdiffm="gdiff origin/master.."
 alias branch="githg branch"
 alias br=branch
 alias tag="githg tag"
