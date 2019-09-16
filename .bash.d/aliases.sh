@@ -97,6 +97,7 @@ alias la='ls -la $LS_OPTIONS'
 alias ll='ls -l $LS_OPTIONS'
 alias lh='ls -lh $LS_OPTIONS'
 alias lr='ls -ltrh $LS_OPTIONS'
+lw(){ ls -lh $LS_OPTIONS "$(which "$@")"; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
