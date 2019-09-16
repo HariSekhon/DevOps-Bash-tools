@@ -1,0 +1,12 @@
+[include]
+  path = .gitconfig.user
+
+[alias]
+  br = branch
+  co = checkout
+  ci = commit
+  p = push
+  # Show verbose output about tags, branches or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
