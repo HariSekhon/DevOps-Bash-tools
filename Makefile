@@ -15,6 +15,13 @@ REPO := HariSekhon/DevOps-Bash-tools
 
 CODE_FILES := $(shell find . -type f -name '*.sh' -o -name .bashrc | sort)
 
+CONF_FILES := \
+    .tmux.conf \
+    .ansible.cfg \
+    .editorconfig \
+    .vimrc
+
+
 include Makefile.in
 
 .PHONY: build
@@ -24,12 +31,9 @@ build: system-packages
 install:
 	@echo "linking dot files to \$$HOME directory: $$HOME"
 	@if grep -Eq "(source|\.).+$${PWD##*/}/.bashrc" ~/.bashrc 2>/dev/null; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
-	@for filename in .tmux.conf .ansible.cfg; do\
-		if [ -n "$$FORCE" ]; then \
-			ln -sfv "$$PWD/$$filename" ~; \
-		else \
-			ln -sv "$$PWD/$$filename" ~; \
-		fi \
+	@f=""; [ -n "$$FORCE" ] && f="-f"; \
+	for filename in $(CONF_FILES); do\
+		ln -sv $$f "$$PWD/$$filename" ~; \
 	done
 
 .PHONY: test
