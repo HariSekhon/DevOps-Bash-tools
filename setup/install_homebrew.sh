@@ -12,4 +12,7 @@
 
 # Install Homebrew on Mac OS X
 
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
