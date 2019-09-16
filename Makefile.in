@@ -376,7 +376,11 @@ docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
-travis:
+travis: travis-log
+	:
+
+.PHONY: travis-log
+travis-log:
 	travis_last_log.py --failed $(REPO)
 
 .PHONY: travis-debug

@@ -13,14 +13,35 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
+# stop recursing upwards for other .editorconfig files
+#root=true
+
 [*]
-#indent_style = tab
 indent_size = 4
+indent_style = space
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.go]
+indent_size = 4
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[Makefile]
+indent_size = 4
+indent_style = tab
+trim_trailing_whitespace = true
+insert_final_newline = true
 
 [*.md]
-#indent_style = tab
 indent_size = 2
+indent_style = space
+trim_trailing_whitespace = true
+insert_final_newline = true
 
 [.*]
-#indent_style = tab
 indent_size = 4
+indent_style = space
+trim_trailing_whitespace = true
+insert_final_newline = true
