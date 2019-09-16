@@ -16,9 +16,10 @@ REPO := HariSekhon/DevOps-Bash-tools
 CODE_FILES := $(shell find . -type f -name '*.sh' -o -name .bashrc | sort)
 
 CONF_FILES := \
-    .tmux.conf \
     .ansible.cfg \
     .editorconfig \
+    .gitconfig \
+    .tmux.conf \
     .vimrc
 
 
@@ -33,7 +34,7 @@ install:
 	@if grep -Eq "(source|\.).+$${PWD##*/}/.bashrc" ~/.bashrc 2>/dev/null; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
 	@f=""; [ -n "$$FORCE" ] && f="-f"; \
 	for filename in $(CONF_FILES); do \
-		test -f "$$HOME/$$filename" || ln -sv $$f "$$PWD/$$filename" ~/; \
+		test -f "$$HOME/$$filename" || ln -sv $$f "$$PWD/$$filename" ~; \
 	done
 
 .PHONY: test
