@@ -44,7 +44,7 @@ alias tag="githg tag"
 alias um=updatemodules
 
 # git fetch -p or git remote prune origin
-alias prune="co master; git pull; git remote prune origin; git branch | grep -v -e '^\*' -e 'master' | xargs git branch -d"
+alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\*' -e 'master' | xargs git branch -d"
 
 alias master="switchbranch master"
 alias prod="switchbranch prod"
