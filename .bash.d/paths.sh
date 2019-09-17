@@ -60,8 +60,12 @@ add_PATH "/sbin"
 add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
 add_PATH "/usr/local/bin"
-add_PATH ~/bin
 add_PATH "$srcdir"
+add_PATH ~/bin
+for x in ~/bin/*; do
+    [ -d "$x" ] || continue
+    add_PATH "$x"
+done
 
 # ============================================================================ #
 #                         M y   G i t H u b   r e p o s
