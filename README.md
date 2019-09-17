@@ -27,7 +27,7 @@ For more advanced Systems Administration scripts in other languages, see the rep
   - automatic GPG and SSH agent handling
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
 - `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
-- `setup/install_*.sh` - various simple to use installation scripts for common technologies like MiniShift, Maven, Gradle, SBT, EPEL, RPMforge, Homebrew, Travis CI etc
+- `setup/install_*.sh` - various simple to use installation scripts for common technologies like MiniShift, Maven, Gradle, SBT, EPEL, RPMforge, Homebrew, Travis CI, Parquet Tools etc.
 - `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools)
 
 - Programming language linting:
