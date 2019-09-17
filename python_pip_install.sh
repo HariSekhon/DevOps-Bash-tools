@@ -53,6 +53,10 @@ if [ "$(uname -s)" = "Darwin" ]; then
         # usually /opt/local
         brew_prefix="$(brew --prefix)"
 
+        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/lib"
+        export CFLAGS="${CFLAGS:-} -I$brew_prefix/include"
+        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/include"
+
         # for OpenSSL
         export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/openssl/lib"
         export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/openssl/include"
