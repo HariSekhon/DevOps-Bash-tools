@@ -223,6 +223,8 @@ for v in ~/github/pytools/validate_*.py; do
     alias "v$z"="$v"
 done
 
+alias travis_debug=travis_debug_session.py
+
 # in some environments I do ldap with Kerberos auth - see ldapsearch.sh script at top level which is more flexible with pre-tuned environment variables
 #alias ldapsearch="ldapsearch -xW"
 #alias ldapadd="ldapadd -xW"
