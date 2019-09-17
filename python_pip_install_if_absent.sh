@@ -23,38 +23,6 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 echo "Installing Python PyPI Modules listed in file(s): $*"
 
-opts=""
-if [ -n "${TRAVIS:-}" ]; then
-    echo "running in quiet mode"
-    opts="-q"
-fi
-
-SUDO=""
-if [ $EUID != 0 ] &&
-   [ -z "${VIRTUAL_ENV:-}" ] &&
-   [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
-    SUDO=sudo
-fi
-
-user_opt(){
-    if [ -n "${VIRTUAL_ENV:-}" ] ||
-       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
-        echo "inside virtualenv, ignoring --user switch which wouldn't work"
-    else
-        opts="$opts --user"
-        SUDO=""
-    fi
-}
-
-export LDFLAGS=""
-if [ "$(uname -s)" = "Darwin" ]; then
-    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-    # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
-    user_opt
-elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
-    user_opt
-fi
-
 pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
 
 for pip_module in $pip_modules; do
@@ -69,6 +37,6 @@ for pip_module in $pip_modules; do
         echo "python module '$python_module' not installed, installing..."
         # want opts splitting
         # shellcheck disable=SC2086
-        $SUDO "${PIP:-pip}" install $opts --ignore-installed urllib3 "$pip_module"
+        "$srcdir/python_pip_install.sh" --ignore-installed urllib3 "$pip_module"
     fi
 done
