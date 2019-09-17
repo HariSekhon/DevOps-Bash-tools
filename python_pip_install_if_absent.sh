@@ -21,9 +21,20 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Installing Python PyPI Modules listed in file(s): $*"
+echo "Installing Python PyPI Modules that are not already installed"
+echo
 
-pip_modules="$(cat "$@" | sed 's/#.*//;/^[[:space:]]*$$/d' | sort -u)"
+pip_modules=""
+for x in "$@"; do
+    if [ -f "$x" ]; then
+        echo "adding pip modules from file:  $x"
+        pip_modules="$pip_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
+        echo
+    else
+        pip_modules="$pip_modules $x"
+    fi
+    pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
+done
 
 for pip_module in $pip_modules; do
     python_module="$("$srcdir/python_module_to_import_name.sh" <<< "$pip_module")"
