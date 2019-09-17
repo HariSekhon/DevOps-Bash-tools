@@ -1,2 +1,6 @@
+# automake
+# autoconf
+# Mac already supplies a libtool, so this gets prefixed with a 'g'
+# libtool
 ipython
 parquet-tools
