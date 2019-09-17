@@ -47,7 +47,11 @@ user_opt(){
 
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
-    export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
+    # usually /opt/local
+    brew_prefix="$(brew --prefix)"
+    export LDFLAGS="${LDFLAGS:-} -I$brew_prefix/opt/openssl/include -L$brew_prefix/opt/openssl/lib"
+    export LDFLAGS="${LDFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5 -L$brew_prefix/opt/krb5/lib"
+    export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/krb5/include"
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
 elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
