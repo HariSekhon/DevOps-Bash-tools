@@ -31,6 +31,7 @@ alias gitrc=gitconfig
 alias add=gitadd
 alias co=checkout
 alias commit="git commit"
+alias clone="git clone"
 alias gitci=commit
 alias ci=commit
 alias gitco=checkout
