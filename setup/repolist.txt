@@ -40,6 +40,8 @@ DevOps-Python-tools:pytools
 #spotify
 #spark-apps
 
+HAProxy-configs:haproxy-configs
+
 Nagios-Plugin-Kafka:nagios-plugin-kafka
 
 # biggest repo last
