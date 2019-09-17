@@ -21,8 +21,19 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 echo "Installing Python PyPI Modules"
+echo
 
-echo "args: $*"
+pip_modules=""
+for x in "$@"; do
+    if [ -f "$x" ]; then
+        echo "adding pip modules from file:  $x"
+        pip_modules="$pip_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
+        echo
+    else
+        pip_modules="$pip_modules $x"
+    fi
+    pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
+done
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
@@ -76,7 +87,7 @@ elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
     user_opt
 fi
 
-echo "$SUDO ${PIP:-pip} install $opts $*"
+echo "$SUDO ${PIP:-pip} install $opts $pip_modules"
 # want splitting of pip opts
 # shellcheck disable=SC2086
-$SUDO "${PIP:-pip}" install $opts "$@"
+$SUDO "${PIP:-pip}" install $opts $pip_modules
