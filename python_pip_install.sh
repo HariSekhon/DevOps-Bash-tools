@@ -52,9 +52,19 @@ if [ "$(uname -s)" = "Darwin" ]; then
     if command -v brew &>/dev/null; then
         # usually /opt/local
         brew_prefix="$(brew --prefix)"
-        export LDFLAGS="${LDFLAGS:-} -I$brew_prefix/opt/openssl/include -L$brew_prefix/opt/openssl/lib"
-        export LDFLAGS="${LDFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5 -L$brew_prefix/opt/krb5/lib"
-        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/krb5/include"
+
+        # for OpenSSL
+        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/openssl/lib"
+        export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/openssl/include"
+        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/openssl/include"
+
+        # for Kerberos
+        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/krb5/lib"
+        export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
+        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
+
+        export CPATH="${CPATH:-} $LDFLAGS"
+        export LIBRARY_PATH="${LIBRARY_PATH:-} $LDFLAGS"
     fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
