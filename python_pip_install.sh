@@ -14,6 +14,8 @@
 #
 
 # Installs to --user on Mac to avoid System Integrity Protection built in to OS X El Capitan and later
+#
+# Also detects and sets up OpenSSL and Kerberos library paths on Mac when using HomeBrew
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
