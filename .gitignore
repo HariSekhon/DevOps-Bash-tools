@@ -29,3 +29,1659 @@ pytools_checks/
 #       gi ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows >> .gitignore
 #
 # ============================================================================ #
+
+# Created by https://www.gitignore.io/api/ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
+# Edit at https://www.gitignore.io/?templates=ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
+
+### Ansible ###
+*.retry
+
+### AppCode ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+
+# Generated files
+.idea/**/contentModel.xml
+
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+cmake-build-*/
+
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
+
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+### AppCode Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+.idea/sonarlint
+
+### Archive ###
+
+### Mostly from https://en.wikipedia.org/wiki/List_of_archive_formats
+
+## Archiving only
+# The traditional archive format on Unix-like systems, now used mainly for the creation of static libraries.
+*.a
+*.ar
+# RPM files consist of metadata concatenated with (usually) a cpio archive. Newer RPM systems also support other archives, as cpio is becoming obsolete. cpio is also used with initramfs.
+*.cpio
+
+# A self-extracting archive that uses the Bourne shell (sh).
+*.shar
+# A system for storing multiple files. LBR archives typically contained files processed by SQ, or the archive itself was compressed with SQ. LBR archives that were compressed with SQ ended with the extension .LQR
+*.LBR
+# An archive format originally used mainly for archiving and distribution of the exact, nearly-exact, or custom-modified contents of an optical storage medium such as a CD-ROM or DVD-ROM. However, it can be used to archive the contents of other storage media, selected partitions, folders, and/or files. The resulting archive is typically optimized for convenient rendering to (re-)writable CD or DVD media.
+*.iso
+# A library format used primarily on the Commodore 64 and 128 lines of computers. This bears no resemblance to the DOS LBR format. While library files were quick to implement (a number of programs exist to work with them) they are crippled in that they cannot grow with use: once a file has been created it cannot be amended (files added, changed or deleted) without recreating the entire file.
+*.lbr
+# An archive format used by Mozilla for storing binary diffs. Used in conjunction with bzip2.
+*.mar
+# A common archive format used on Unix-like systems. Generally used in conjunction with compressors such as gzip, bzip2, compress or xz to create .tar.gz, .tar.bz2, .tar.Z or tar.xz files.
+*.tar
+
+# Package managers
+# Red Hat Package Manager
+*.rpm
+# Debian package
+*.deb
+# MicroSoft Installer
+*.msi
+*.msm
+*.msp
+# Mozilla package installer
+*.xpi
+# Ruby Package
+*.gem
+
+
+### Audio ###
+*.aif
+*.iff
+*.m3u
+*.m4a
+*.mid
+*.mp3
+*.mpa
+*.ra
+*.wav
+*.wma
+
+### Backup ###
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+### Basic ###
+# Apples Build
+*.build
+*.apples
+
+# Initialized files
+*.exe
+*.ini
+*.basic
+
+### C ###
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+### ChefCookbook ###
+.vagrant
+/cookbooks
+
+# Bundler
+bin/*
+.bundle/*
+
+.kitchen/
+.kitchen.local.yml
+
+### Cloud9 ###
+# Cloud9 IDE - http://c9.io
+.c9revisions
+.c9
+
+### Compressed ###
+*.7z
+*.gz
+*.pkg
+*.rar
+*.sit
+*.sitx
+*.zip
+*.zipx
+*.tgz
+
+### CompressedArchive ###
+
+
+## Archiving and compression
+# Open source file format. Used by 7-Zip.
+# Mac OS X, restoration on different platforms is possible although not immediate 	Yes 	Based on 7z. Preserves Spotlight metadata, resource forks, owner/group information, dates and other data which would be otherwise lost with compression.
+*.s7z
+# Old archive versions only 	Proprietary format
+*.ace
+# A format that compresses and doubly encrypt the data (AES256 and CAS256) avoiding brute force attacks, also hide files in an AFA file. It has two ways to safeguard data integrity and subsequent repair of the file if has an error (repair with AstroA2P (online) or Astrotite (offline)).
+*.afa
+# A mainly Korean format designed for very large archives.
+*.alz
+# Android application package (variant of JAR file format).
+*.apk
+# ??
+*.arc
+# Originally DOS, now multiple
+*.arj
+# Open archive format, used by B1 Free Archiver (http://dev.b1.org/standard/archive-format.html)
+*.b1
+# Binary Archive with external header
+*.ba
+# Proprietary format from the ZipTV Compression Components
+*.bh
+# The Microsoft Windows native archive format, which is also used by many commercial installers such as InstallShield and WISE.
+*.cab
+# Originally DOS, now DOS and Windows 	Created by Yaakov Gringeler; released last in 2003 (Compressia 1.0.0.1 beta), now apparently defunct. Free trial of 30 days lets user create and extract archives; after that it is possible to extract, but not to create.
+*.car
+# Open source file format.
+*.cfs
+# Compact Pro archive, a common archiver used on Mac platforms until about Mac OS 7.5.x. Competed with StuffIt; now obsolete.
+*.cpt
+# Windows, Unix-like, Mac OS X Open source file format. Files are compressed individually with either gzip, bzip2 or lzo.
+*.dar
+# DiskDoubler 	Mac OS 			obsolete
+*.dd
+# ??
+*.dgc
+# Apple Disk Image upports "Internet-enabled" disk images, which, once downloaded, are automatically decompressed, mounted, have the contents extracted, and thrown away. Currently, Safari is the only browser that supports this form of extraction; however, the images can be manually extracted as well. This format can also be password-protected or encrypted with 128-bit or 256-bit AES encryption.
+*.dmg
+# Enterprise Java Archive archive
+*.ear
+# ETSoft compressed archive
+*.egg
+# The predecessor of DGCA.
+*.gca
+# Originally DOS 	Yes, but may be covered by patents 	DOS era format; uses arithmetic/Markov coding
+*.ha
+# MS Windows 	HKI
+*.hki
+# Produced by ICEOWS program. Excels at text file compression.
+*.ice
+# Java archive, compatible with ZIP files
+*.jar
+# Open sourced archiver with compression using the PAQ family of algorithms and optional encryption.
+*.kgb
+# Originally DOS, now multiple 	Multiple 	Yes 	The standard format on Amiga.
+*.lzh
+*.lha
+# Archiver originally used on The Amiga. Now copied by Microsoft to use in their .cab and .chm files.
+*.lzx
+# file format from NoGate Consultings, a rival from ARC-Compressor.
+*.pak
+# A disk image archive format that supports several compression methods as well as splitting the archive into smaller pieces.
+*.partimg
+# An experimental open source packager (http://mattmahoney.net/dc)
+*.paq*
+# Open source archiver supporting authenticated encryption, volume spanning, customizable object level and volume level integrity checks (form CRCs to SHA-512 and Whirlpool hashes), fast deflate based compression
+*.pea
+# The format from the PIM - a freeware compression tool by Ilia Muraviev. It uses an LZP-based compression algorithm with set of filters for executable, image and audio files.
+*.pim
+# PackIt 	Mac OS 			obsolete
+*.pit
+# Used for data in games written using the Quadruple D library for Delphi. Uses byte pair compression.
+*.qda
+# A proprietary archive format, second in popularity to .zip files.
+# The format from a commercial archiving package. Odd among commercial packages in that they focus on incorporating experimental algorithms with the highest possible compression (at the expense of speed and memory), such as PAQ, PPMD and PPMZ (PPMD with unlimited-length strings), as well as a proprietary algorithms.
+*.rk
+# Self Dissolving ARChive 	Commodore 64, Commodore 128 	Commodore 64, Commodore 128 	Yes 	SDAs refer to Self Dissolving ARC files, and are based on the Commodore 64 and Commodore 128 versions of ARC, originally written by Chris Smeets. While the files share the same extension, they are not compatible between platforms. That is, an SDA created on a Commodore 64 but run on a Commodore 128 in Commodore 128 mode will crash the machine, and vice versa. The intended successor to SDA is SFX.
+*.sda
+# A pre-Mac OS X Self-Extracting Archive format. StuffIt, Compact Pro, Disk Doubler and others could create .sea files, though the StuffIt versions were the most common.
+*.sea
+# Scifer Archive with internal header
+*.sen
+# Commodore 64, Commodore 128 	SFX is a Self Extracting Archive which uses the LHArc compression algorithm. It was originally developed by Chris Smeets on the Commodore platform, and runs primarily using the CS-DOS extension for the Commodore 128. Unlike its predecessor SDA, SFX files will run on both the Commodore 64 and Commodore 128 regardless of which machine they were created on.
+*.sfx
+# An archive format designed for the Apple II series of computers. The canonical implementation is ShrinkIt, which can operate on disk images as well as files. Preferred compression algorithm is a combination of RLE and 12-bit LZW. Archives can be manipulated with the command-line NuLib tool, or the Windows-based CiderPress.
+*.shk
+# A compression format common on Apple Macintosh computers. The free StuffIt Expander is available for Windows and OS X.
+# The replacement for the .sit format that supports more compression methods, UNIX file permissions, long file names, very large files, more encryption options, data specific compressors (JPEG, Zip, PDF, 24-bit image, MP3). The free StuffIt Expander is available for Windows and OS X.
+# A royalty-free compressing format
+*.sqx
+# The "tarball" format combines tar archives with a file-based compression scheme (usually gzip). Commonly used for source and binary distribution on Unix-like platforms, widely available elsewhere.
+*.tar.gz
+*.tar.Z
+*.tar.bz2
+*.tbz2
+*.tar.lzma
+*.tlz
+# UltraCompressor 2.3 was developed to act as an alternative to the then popular PKZIP application. The main feature of the application is its ability to create large archives. This means that compressed archives with the UC2 file extension can hold almost 1 million files.
+*.uc
+*.uc0
+*.uc2
+*.ucn
+*.ur2
+*.ue2
+# Based on PAQ, RZM, CSC, CCM, and 7zip. The format consists of a PAQ, RZM, CSC, or CCM compressed file and a manifest with compression settings stored in a 7z archive.
+*.uca
+# A high compression rate archive format originally for DOS.
+*.uha
+# Web Application archive (Java-based web app)
+*.war
+# File-based disk image format developed to deploy Microsoft Windows.
+*.wim
+# XAR
+*.xar
+# Native format of the Open Source KiriKiri Visual Novel engine. Uses combination of block splitting and zlib compression. The filenames and pathes are stored in UTF-16 format. For integrity check, the Adler-32 hashsum is used. For many commercial games, the files are encrypted (and decoded on runtime) via so-called "cxdec" module, which implements xor-based encryption.
+*.xp3
+# Yamazaki zipper archive. Compression format used in DeepFreezer archiver utility created by Yamazaki Satoshi. Read and write support exists in TUGZip, IZArc and ZipZag
+*.yz1
+# The most widely used compression format on Microsoft Windows. Commonly used on Macintosh and Unix systems as well.
+# application/x-zoo 	zoo 	Multiple 	Multiple 	Yes
+*.zoo
+# Journaling (append-only) archive format with rollback capability. Supports deduplication and incremental update based on last-modified dates. Multi-threaded. Compresses in LZ77, BWT, and context mixing formats. Open source.
+*.zpaq
+# Archiver with a compression algorithm based on the Burrows-Wheeler transform method.
+*.zz
+
+
+### Database ###
+*.accdb
+*.db
+*.dbf
+*.mdb
+*.sqlite3
+
+### Diff ###
+*.patch
+*.diff
+
+### Compression ###
+
+### From https://en.wikipedia.org/wiki/List_of_archive_formats
+
+## Compression only
+# An open source, patent- and royalty-free compression format. The compression algorithm is a Burrows-Wheeler transform followed by a move-to-front transform and finally Huffman coding
+*.bz2
+# Old compressor for QNX4 OS. The compression algorithm is a modified LZSS, with an adaptive Huffman coding.
+*.F
+# GNU Zip, the primary compression format used by Unix-like systems. The compression algorithm is DEFLATE.
+# An alternate LZMA algorithm implementation, with support for checksums and ident bytes.
+*.lz
+# The LZMA compression algorithm as used by 7-Zip
+*.lzma
+# An implementation of the LZO data compression algorithm
+*.lzo
+# A compression program designed to do particularly well on very large files containing long distance redundancy.
+*.rz
+# Windows compress/decompress- Linux and Mac OS X decompress only 	A compression program designed to do high compression on SF2 files (SoundFont)
+*.sfark
+# A compression format invented by Google and open-sourced in 2011. Snappy aims for very high speeds, reasonable compression, and maximum stability rather than maximum compression or compatibility with any other compression library.
+*.sz
+# Squeeze: A program which compressed files. A file which was "squeezed" had the middle initial of the name changed to "Q", so that a squeezed text file would end with .TQT, a squeezed executable would end with .CQM or .EQE. Typically used with .LBR archives, either by storing the squeezed files in the archive, or by storing the files decompressed and then compressing the archive, which would have a name ending in ".LQR".
+*.?Q?
+# A compression program written by Steven Greenberg implementing the LZW algorithm. For several years in the CP/M world when no implementation was available of ARC, CRUNCHed files stored in .LBR archives were very popular. CRUNCH's implementation of LZW had a somewhat unique feature of modifying and occasionally clearing the code table in memory when it became full, resulting in a few percent better compression on many files.
+*.?Z?
+# A compression format using LZMA2 to yield very high compression ratios.
+*.xz
+# The traditional Huffman coding compression format.
+*.z
+# The traditional LZW compression format.
+*.Z
+# Joke compression program, actually increasing file size
+*.infl
+# Compression format(s) used by some DOS and Windows install programs. MS-DOS includes expand.exe to decompress its install files. The compressed files are created with a matching compress.exe command. The compression algorithm is LZSS.
+*.??_
+
+
+### Eclipse ###
+.metadata
+bin/
+tmp/
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
+
+# STS (Spring Tool Suite)
+.springBeans
+
+# Code Recommenders
+.recommenders/
+
+# Annotation Processing
+.apt_generated/
+
+# Scala IDE specific (Scala & Java development for Eclipse)
+.cache-main
+.scala_dependencies
+.worksheet
+
+### Eclipse Patch ###
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Annotation Processing
+.apt_generated
+
+.sts4-cache/
+
+### Emacs ###
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+# reftex files
+*.rel
+
+# AUCTeX auto folder
+/auto/
+
+# cask packages
+.cask/
+dist/
+
+# Flycheck
+flycheck_*.el
+
+# server auth directory
+/server/
+
+# projectiles files
+.projectile
+
+# directory configuration
+.dir-locals.el
+
+# network security
+/network-security.data
+
+
+### Go ###
+# Binaries for programs and plugins
+*.exe~
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+
+# Dependency directories (remove the comment below to include it)
+# vendor/
+
+### Go Patch ###
+/vendor/
+/Godeps/
+
+### GPG ###
+secring.*
+
+
+### DiskImage ###
+*.toast
+*.vcd
+
+### Helm ###
+# Chart dependencies
+**/charts/*.tgz
+
+### Images ###
+# JPEG
+*.jpg
+*.jpeg
+*.jpe
+*.jif
+*.jfif
+*.jfi
+
+# JPEG 2000
+*.jp2
+*.j2k
+*.jpf
+*.jpx
+*.jpm
+*.mj2
+
+# JPEG XR
+*.jxr
+*.hdp
+*.wdp
+
+# Graphics Interchange Format
+*.gif
+
+# RAW
+*.raw
+
+# Web P
+*.webp
+
+# Portable Network Graphics
+*.png
+
+# Animated Portable Network Graphics
+*.apng
+
+# Multiple-image Network Graphics
+*.mng
+
+# Tagged Image File Format
+*.tiff
+*.tif
+
+# Scalable Vector Graphics
+*.svg
+*.svgz
+
+# Portable Document Format
+*.pdf
+
+# X BitMap
+*.xbm
+
+# BMP
+*.bmp
+*.dib
+
+# ICO
+*.ico
+
+# 3D Images
+*.3dm
+*.max
+
+### Intellij ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+
+### Java ###
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.nar
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+### JetBrains ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### JetBrains Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+
+### JMeter ###
+# JMeter common ignore files
+# http://jmeter.apache.org/
+
+# Ignore Summary/Aggregrate reports
+*.jtl
+
+# Ignore log files
+
+# Ignore customized user.properties
+user.properties
+
+### JupyterNotebooks ###
+# gitignore template for Jupyter Notebooks
+# website: http://jupyter.org/
+
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# Remove previous ipynb_checkpoints
+#   git rm -r .ipynb_checkpoints/
+#
+
+### KDiff3 ###
+*.BACKUP.*
+*_BACKUP_*
+*.BASE.*
+*_BASE_*
+*.LOCAL.*
+*_LOCAL_*
+*.REMOTE.*
+*_REMOTE_*
+
+
+### Kotlin ###
+# Compiled class file
+
+# Log file
+
+# BlueJ files
+
+# Mobile Tools for Java (J2ME)
+
+# Package Files #
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+
+### LAMP ###
+# LAMP Stack Base
+
+### LAMP.PHP Stack ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### LAMP.Linux Stack ###
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+
+# KDE directory preferences
+.directory
+
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
+
+### Less ###
+*.less
+
+### Linux ###
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+
+# KDE directory preferences
+
+# Linux trash folder which might appear on any partition or disk
+
+# .nfs files are created when an open file is removed but is still being accessed
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### Maven ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Mercurial ###
+.hg/
+.hgignore
+.hgsigs
+.hgsub
+.hgsubstate
+.hgtags
+
+### MicrosoftOffice ###
+
+# Word temporary
+~$*.doc*
+
+# Word Auto Backup File
+Backup of *.doc*
+
+# Excel temporary
+~$*.xls*
+
+# Excel Backup File
+*.xlk
+
+# PowerPoint temporary
+~$*.ppt*
+
+# Visio autosave temporary files
+*.~vsd*
+
+### Node ###
+# Logs
+logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Directory for instrumented libs generated by jscoverage/JSCover
+lib-cov
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+# nyc test coverage
+.nyc_output
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+.grunt
+
+# Bower dependency directory (https://bower.io/)
+bower_components
+
+# node-waf configuration
+.lock-wscript
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# TypeScript v1 declaration files
+typings/
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+
+# parcel-bundler cache (https://parceljs.org/)
+.cache
+
+# next.js build output
+.next
+
+# nuxt.js build output
+.nuxt
+
+# vuepress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
+
+### Octave ###
+# Windows default autosave extension
+*.asv
+
+# OSX / *nix default autosave extension
+*.m~
+
+# Compiled MEX binaries (all platforms)
+*.mex*
+
+# Packaged app and toolbox files
+*.mlappinstall
+*.mltbx
+
+# Generated helpsearch folders
+helpsearch*/
+
+# Simulink code generation folders
+slprj/
+sccprj/
+
+# Matlab code generation folders
+codegen/
+
+# Simulink autosave extension
+*.autosave
+
+# Octave session info
+octave-workspace
+
+### OSX ###
+# General
+
+# Icon must end with two \r
+
+# Thumbnails
+
+# Files that might appear in the root of a volume
+
+# Directories potentially created on remote AFP share
+
+### Packer ###
+# Cache objects
+packer_cache/
+
+# For built boxes
+*.box
+
+### Perl ###
+!Build/
+.last_cover_stats
+/META.yml
+/META.json
+/MYMETA.*
+*.pm.tdy
+*.bs
+
+# Devel::Cover
+cover_db/
+
+# Devel::NYTProf
+nytprof.out
+
+# Dizt::Zilla
+/.build/
+
+# Module::Build
+_build/
+Build
+Build.bat
+
+# Module::Install
+inc/
+
+# ExtUtils::MakeMaker
+/blib/
+/_eumm/
+/*.gz
+/Makefile
+/Makefile.old
+/MANIFEST.bak
+/pm_to_blib
+/*.zip
+
+### Perl6 ###
+# Gitignore for Perl 6 (http://www.perl6.org)
+# As part of https://github.com/github/gitignore
+
+# precompiled files
+.precomp
+lib/.precomp
+
+
+### Puppet ###
+# gitignore template for Puppet modules
+# website: https://forge.puppet.com/
+
+# Built packages
+pkg/*
+
+# Should run on multiple platforms so don't check in
+Gemfile.lock
+
+# Tests
+spec/fixtures/*
+coverage/*
+
+# Third-party
+vendor/*
+
+### PuTTY ###
+# Private key
+*.ppk
+
+### PyCharm+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### PyCharm+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
+.idea/
+
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+
+# Sonarlint plugin
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+
+# Jupyter Notebook
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+### R ###
+# History files
+.Rhistory
+.Rapp.history
+
+# Session Data files
+.RData
+
+# User-specific files
+.Ruserdata
+
+# Example code in package build process
+*-Ex.R
+
+# Output files from R CMD build
+/*.tar.gz
+
+# Output files from R CMD check
+/*.Rcheck/
+
+# RStudio files
+.Rproj.user/
+
+# produced vignettes
+vignettes/*.html
+vignettes/*.pdf
+
+# OAuth2 token, see https://github.com/hadley/httr/releases/tag/v0.3
+.httr-oauth
+
+# knitr and R markdown default cache directories
+*_cache/
+/cache/
+
+# Temporary files created by R markdown
+*.utf8.md
+*.knit.md
+
+### R.Bookdown Stack ###
+# R package: bookdown caching files
+/*_files/
+
+### Rails ###
+*.rbc
+capybara-*.html
+.rspec
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/public/system
+/coverage/
+/spec/tmp
+rerun.txt
+pickle-email-*.html
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# TODO Comment out this rule if you are OK with secrets being uploaded to the repo
+config/initializers/secret_token.rb
+config/master.key
+
+# Only include if you have production secrets in this file, which is no longer a Rails default
+# config/secrets.yml
+
+# dotenv
+# TODO Comment out this rule if environment variables can be committed
+
+## Environment normalization:
+/.bundle
+/vendor/bundle
+
+# these should all be checked in to normalize the environment:
+# Gemfile.lock, .ruby-version, .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+.rvmrc
+
+# if using bower-rails ignore default bower_components path bower.json files
+/vendor/assets/bower_components
+*.bowerrc
+bower.json
+
+# Ignore pow environment settings
+.powenv
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Ignore node_modules
+
+# Ignore precompiled javascript packs
+/public/packs
+/public/packs-test
+/public/assets
+
+# Ignore yarn files
+/yarn-error.log
+
+# Ignore uploaded files in development
+/storage/*
+!/storage/.keep
+
+### Redis ###
+# Ignore redis binary dump (dump.rdb) files
+
+*.rdb
+
+### Ruby ###
+/.config
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+
+# Used by dotenv library to load environment variables.
+# .env
+
+# Ignore Byebug command history file.
+
+## Specific to RubyMotion:
+.dat*
+.repl_history
+*.bridgesupport
+build-iPhoneOS/
+build-iPhoneSimulator/
+
+## Specific to RubyMotion (use of CocoaPods):
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+# vendor/Pods/
+
+## Documentation cache and generated files:
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+
+/.bundle/
+/lib/bundler/man/
+
+# for a library or gem, you might want to ignore these files since the code is
+# intended to run in multiple environments; otherwise, check them in:
+# Gemfile.lock
+# .ruby-version
+# .ruby-gemset
+
+# unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
+
+### SBT ###
+# Simple Build Tool
+# http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
+
+dist/*
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+.history
+.lib/
+
+### Scala ###
+
+### SonarQube ###
+# SonarQube ignore files.
+# https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner
+# Sonar Scanner working directories
+.sonar/
+.scannerwork/
+
+# http://www.sonarlint.org/commandline/
+# SonarLint working directories, configuration files (including credentials)
+.sonarlint/
+
+### Spark ###
+*#*#
+*.#*
+*.pyc
+*.pyo
+.ensime
+.ensime_cache/
+.ensime_lucene
+.generated-mima*
+.pydevproject
+.settings
+/lib/
+R-unit-tests.log
+R/unit-tests.out
+R/cran-check.out
+R/pkg/vignettes/sparkr-vignettes.html
+R/pkg/tests/fulltests/Rplots.pdf
+build/*.jar
+build/apache-maven*
+build/scala*
+build/zinc*
+cache
+checkpoint
+conf/*.cmd
+conf/*.conf
+conf/*.properties
+conf/*.sh
+conf/*.xml
+conf/java-opts
+conf/slaves
+derby.log
+dev/create-release/*final
+dev/create-release/*txt
+dev/pr-deps/
+docs/_site
+docs/api
+sql/docs
+sql/site
+lint-r-report.log
+log/
+logs/
+project/build/target/
+project/plugins/lib_managed/
+project/plugins/project/build.properties
+project/plugins/src_managed/
+project/plugins/target/
+python/lib/pyspark.zip
+python/deps
+python/test_coverage/coverage_data
+python/test_coverage/htmlcov
+python/pyspark/python
+reports/
+scalastyle-on-compile.generated.xml
+scalastyle-output.xml
+scalastyle.txt
+spark-*-bin-*.tgz
+spark-tests.log
+streaming-tests.log
+unit-tests.log
+work/
+docs/.jekyll-metadata
+
+# For Hive
+TempStatsStore/
+metastore/
+metastore_db/
+sql/hive-thriftserver/test_warehouses
+warehouse/
+spark-warehouse/
+
+# For R session data
+.RHistory
+*.Rproj
+*.Rproj.*
+
+.Rproj.user
+
+# For SBT
+.jvmopts
+
+
+### SVN ###
+.svn/
+
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+
+# Ignore any .tfvars files that are generated automatically for each Terraform run. Most
+# .tfvars files are managed as part of configuration and so should be included in
+# version control.
+# example.tfvars
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include override files you do wish to add to version control using negated pattern
+# !example_override.tf
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+# example: *tfplan*
+
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+
+### Windows ###
+# Windows thumbnail cache files
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+
+# Dump file
+*.stackdump
+
+# Folder config file
+[Dd]esktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.msix
+
+# Windows shortcuts
+*.lnk
+
+### Gradle ###
+.gradle
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+### Gradle Patch ###
+**/build/
+
+# End of https://www.gitignore.io/api/ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
+
