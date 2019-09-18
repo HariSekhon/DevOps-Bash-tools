@@ -21,7 +21,7 @@ sc(){
     checkprog screen || return 1
     isscreen && { echo "I am already in a screen, aborting"; return 1; }
     screen -wipe
-    screen -aARRD "$@"
+    screen -aARRD -S main "$@"
 }
 
 screencmd(){
