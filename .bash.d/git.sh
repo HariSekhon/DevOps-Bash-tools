@@ -69,6 +69,8 @@ gitignore_api(){
 	local langs
 	local options=()
     local args=()
+    # noop - set to use 'tr' to separate items to newlines when given the 'list' arg
+    local commas_to_newlines="cat"
 	for arg; do
         if [ "$arg" = -- ]; then
             options+=("$arg")
@@ -79,16 +81,20 @@ gitignore_api(){
 	# take args 'python perl', store as 'python,perl' for the API call
 	langs="$(IFS=, ; echo "${args[*]}")"
     url="https://www.gitignore.io/api/$langs"
+    if [ "$langs" = "list" ]; then
+        commas_to_newlines="tr ',' '\n'"
+    fi
     {
     if hash curl 2>/dev/null; then
         curl -sL "${options[*]}" "$url"
     elif hash wget 2>/dev/null; then
         wget -O - "${options[*]}" "$url"
     fi
-    } | tr ',' '\n'
+    } | eval "$commas_to_newlines"
     echo
 }
 alias gi=gitignore_api
+
 
 isGit(){
     local target=${1:-.}
