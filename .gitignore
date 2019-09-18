@@ -1,2 +1,15 @@
 pytools_checks/
 *.swp
+
+
+# ============================================================================ #
+#
+# regenerate all sections below in to a single arg for API call via:
+#
+#     grep 'Created by https://' .gitignore | grep -v grep | sed 's,.*/,,' | tr '\n' ',' | sed 's/,$//'
+#
+# then pass to gi() function:
+#
+#     gi archive,appcode,ansible,audio,backup,basic,c,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,jetbrains,java,java,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux >> .gitignore
+#
+# ============================================================================ #
