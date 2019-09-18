@@ -1,0 +1,46 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: Fri Oct 20 16:44:03 2006 +0000
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# Gentoo Portage packages to install - one per line
+
+asmon
+mountapp
+wmbio
+wmblob
+wmbutton
+wmclockmon
+wmcpuload
+wmcube
+wmdots
+wmdiskmon
+wmdrawer
+wmfire
+wmfsm
+wmhdplop
+wmifinfo
+wminet
+wmix
+wmlongrun
+wmMatrix
+wmmemmon
+wmmisc
+wmmon
+wmnd
+wmnetload
+wmnetmon
+wmpiki
+wmpower
+wmtop
+wmwave
+xscreensaver-app
