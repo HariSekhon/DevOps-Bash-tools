@@ -62,6 +62,8 @@ install_git_completion(){
 # shellcheck disable=SC1090
 [ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
 
+# usage: gi python,perl,go
+#        gi list
 gitignore_api(){
     curl -sL "https://www.gitignore.io/api/$*"
 }
