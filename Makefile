@@ -54,3 +54,10 @@ wcscripts:
 	@$(MAKE) showscripts | xargs wc -l
 	@printf "Total Scripts: "
 	@$(MAKE) showscripts | wc -l
+
+.PHONY: wcscripts2
+wcscripts2:
+	@printf "Total Scripts: "
+	@$(MAKE) showscripts | wc -l
+	@printf "Total line count without # comments: "
+	@$(MAKE) showscripts | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
