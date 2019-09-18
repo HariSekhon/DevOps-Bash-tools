@@ -145,6 +145,15 @@ f(){
     eval find -L . -type f "$grep"
 }
 
+dgrep(){
+    local pattern="$1"
+    # auto-exported in aliases.sh when iterating git repos
+    # shellcheck disable=SC2154
+    ls "$docs/*$pattern*" 2>/dev/null
+    # shellcheck disable=SC2046,SC2033
+    grep -iR "$pattern" $(find ~/docs "$docs" -type f -maxdepth 1 2>/dev/null | grep -v '/\.')
+}
+
 foreachfile(){
     # not passing function f()
     # shellcheck disable=SC2033
