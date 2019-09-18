@@ -159,35 +159,29 @@ if [ -d "$bitbucket" ]; then
     done
 fi
 
-for x in ~/docs/*; do
+doc_alias(){
+    local docpath="$1"
+    [ -f "$docpath" ] || return 1
+    docfile="${docpath##*/}"
     # slows down shell creation, will drain battery
-#    if [ -L "$x" ]; then
+#    if [ -L "$docpath" ]; then
 #        # brew install coreutils to get greadlink since Mac doesn't have readlink -f
 #        if which greadlink &>/dev/null; then
-#            y="$(greadlink -f "$x")"
+#            docfile="$(greadlink -f "$docpath")"
 #        else
-#            y="$(readlink -f "$x")"
+#            docfile="$(readlink -f "$docpath")"
 #        fi
 #    fi
-    y="${x##*/}"
-    # shellcheck disable=SC2139,SC2140
-    alias "d$y"="\$EDITOR $x"
-    #z=${y%.txt}
-    #z=${z%notes*}
-    #[ "d$z" != "d$y" ] && alias d$z=$x
-
-    #if ! type ${x##*/} &>/dev/null; then
-    #    alias ${x##*/}="$EDITOR $x"
-    #fi
-done
-
-for x in "$github"/docs/*; do
-    if [ -f ~/docs/"${x##*/}" ]; then
-        echo "WARNING: duplicate doc $x also found in ~/docs/"
+    if type "d$docfile" &>/dev/null; then
+        echo "WARNING: d$docfile conflicts with existing alias, duplicate doc $docfile among ~/docs, ~/github/docs, ~/bitbucket/docs?"
+        return
     fi
-    y="${x##*/}"
     # shellcheck disable=SC2139,SC2140
-    alias "d$y"="\$EDITOR $x"
+    alias "d$docfile"="\$EDITOR $docpath"
+}
+
+for x in ~/docs/* "$github"/docs/* "$bitbucket"/docs/*; do
+    doc_alias "$x"
 done
 
 # ============================================================================ #
