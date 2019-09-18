@@ -70,6 +70,12 @@ quick:
 submodules:
 	git submodule update --init --recursive
 
+.PHONY: git-clean
+git-clean:
+	@git clean -n -d
+	@printf "\n\n%s" "If you're happy with this list, run:"
+	@printf "\n\n%s\n\n" "git clean -f -d"
+
 .PHONY: btest
 btest: bash-test
 	:
