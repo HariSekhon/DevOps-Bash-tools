@@ -67,8 +67,10 @@ for repo in $repolist; do
         repo="HariSekhon/$repo"
     fi
     repo_dir="${repo##*/}"
+    repo_dir="${repo_dir##*:}"
+    repo="${repo%%:*}"
     if ! [ -d "$repo_dir" ]; then
-        git clone "$git_url/$repo"
+        git clone "$git_url/$repo" "$repo_dir"
     fi
     pushd "$repo_dir"
     git pull
