@@ -43,7 +43,7 @@ bash_welcome(){
         local j=0
         while true; do
         #for ((j=0; j<"${#charmap}"; j++)); do
-        #while true; do 
+        #while true; do
             #set -x
             if [ $j -gt 2 ]; then
                 local y=$x
