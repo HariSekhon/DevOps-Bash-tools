@@ -65,7 +65,7 @@ install_git_completion(){
 # usage: gi python,perl,go
 #        gi list
 gitignore_api(){
-    curl -sL "https://www.gitignore.io/api/$*"
+    curl -sL "https://www.gitignore.io/api/$(IFS=, ; echo "$*")"
 }
 alias gi=gitignore_api
 
