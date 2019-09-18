@@ -97,7 +97,7 @@ svnaddci(){
     svn ci -m "added $*" "$@"
 }
 
-svnci() { 
+svnci() {
     local svncimsg=""
     for x in "$@"; do
         if svn st "$x" | grep -q "^[?A]"; then
@@ -107,7 +107,7 @@ svnci() {
     [ -z "$svncimsg" ] && return 1
     svncimsg="${svncimsg%, }"
     svncimsg="added $svncimsg"
-    svn add "$@" && 
+    svn add "$@" &&
     svn ci -m "$svncimsg" "$@"
 }
 
@@ -150,7 +150,7 @@ svnrevert(){
     svn revert "$@"
 }
 
-svnlog(){ 
+svnlog(){
     local args=
     local args2=
     until [ $# -lt 1 ]; do
@@ -230,11 +230,11 @@ svndiffcumulative(){
     svn up
     url="$(svn info | awk '/^URL/ {print $2}')"
     HEAD="$(svn info | awk '/Revision/ {print $2}')"
-    for x in $(eval echo "{25470..$HEAD}"); do 
+    for x in $(eval echo "{25470..$HEAD}"); do
         ((y=x+1))
         echo -n "svn $x => $y: "
         svn diff -r "$x:$y" "$url"
-    done 
+    done
 }
 alias svndiffcum="svndiffcumulative"
 
