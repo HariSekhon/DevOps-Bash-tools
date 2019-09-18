@@ -20,6 +20,11 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
   * Automation / Distributed Systems:
     * `ansible.sh` - [Ansible](https://www.ansible.com) aliases and environment variables
     * `kafka.sh` - [Kafka](http://kafka.apache.org/) environment variables for Kerberos security and CLI appropriate heap size (avoids heap allocation failures on VMs that otherwise default to using larger server configured heap size), avoiding need for common broker and zookeeper arguments when using `kafka_wrappers/` scripts by setting your Kafka broker and zookeeper addresses once instead of in every command
+  * Coding:
+    * `git.sh` - [Git](https://git-scm.com/) aliases and functions
+    * `mercurial.sh` - [Mercurial](https://www.mercurial-scm.org/) aliases and functions
+    * `svn.sh` - [Svn](https://subversion.apache.org) aliases and functions
+    * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
   * general OS:
     * `apple.sh` - [Apple Mac OS X / macOS](https://en.wikipedia.org/wiki/MacOS) specific tricks
     * `linux.sh` - [Linux](https://en.wikipedia.org/wiki/Linux) specific miscellaneous bits like X.org
@@ -27,10 +32,5 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
     * `ssh.sh` - SSH convenience functions and key management
     * `ssh-agent.sh` / `gpg-agent.sh` - auto-starts SSH and GPG agents if not already running, stores and auto-sources their details for new shells to automatically use them
     * `title.sh` - auto-title tricks for Screen and Terminals
-  * Coding:
-    * `git.sh` - [Git](https://git-scm.com/) aliases and functions
-    * `mercurial.sh` - [Mercurial](https://www.mercurial-scm.org/) aliases and functions
-    * `svn.sh` - [Svn](https://subversion.apache.org) aliases and functions
-    * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
 
 More script related functions can be found in the [lib/](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/lib) directory at the top level.
