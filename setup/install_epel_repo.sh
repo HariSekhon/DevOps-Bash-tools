@@ -3,8 +3,10 @@
 #
 #  Author: Hari Sekhon
 #  Date: 2019-02-17 11:11:52 +0000 (Sun, 17 Feb 2019)
+#        2013-07-17 21:27:25 +0100 (Wed, 17 Jul 2013)
+#           (found older version)
 #        2012-06-25 15:20:39 +0100
-#        (originally an alias in .bashrc)
+#           (originally an alias in .bashrc)
 #
 #  https://github.com/harisekhon/bash-tools
 #
