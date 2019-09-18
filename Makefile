@@ -24,6 +24,7 @@ CONF_FILES := \
     .toprc \
     .tmux.conf \
     .vimrc \
+    .Xdefaults \
     .Xmodmap
 
 
@@ -38,8 +39,9 @@ install:
 	@echo "linking dot files to \$$HOME directory: $$HOME"
 	@f=""; [ -n "$$FORCE" ] && f="-f"; \
 	for filename in $(CONF_FILES); do \
-		test -f "$$HOME/$$filename" || ln -sv $$f "$$PWD/$$filename" ~; \
-	done
+		ln -sv $$f "$$PWD/$$filename" ~ 2>/dev/null; \
+	done || :
+	@ln -sv $$f ~/.gitignore ~/.gitignore_global 2>/dev/null || :
 
 .PHONY: test
 test:
