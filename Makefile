@@ -20,9 +20,11 @@ CONF_FILES := \
     .editorconfig \
     .gitconfig \
     .gitignore \
+    .my.cnf \
     .toprc \
     .tmux.conf \
-    .vimrc
+    .vimrc \
+    .Xmodmap
 
 
 include Makefile.in
