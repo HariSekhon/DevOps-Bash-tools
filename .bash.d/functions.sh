@@ -161,6 +161,58 @@ foreachfile(){
     done
 }
 
+# vim which
+vw(){
+    local path
+    if [ -z "$1" ]; then
+        echo "usage: vw <filename>"
+        return 1
+    fi
+    path="$(command -v "$1")"
+    if [ -z "$path" ]; then
+        echo "File not found in \$PATH: $1"
+        return 1
+    fi
+    "$EDITOR" "$path"
+}
+
+# file which
+fw(){
+    local path
+    for x in "$@"; do
+        path="$(command -v "$x")"
+        if [ -z "$path" ]; then
+            return 1
+        fi
+        file "$path"
+        echo
+        # shellcheck disable=SC2086
+        ls -l $LS_OPTIONS "$path"
+    done
+}
+
+cdwhich(){
+    local path
+    local directory
+    if [ $# -ne 1 ]; then
+        echo "usage: cdwhich programname"
+        return 1
+    fi
+    path="$(command -v "$1")"
+    if [ -z "$path" ]; then
+        echo
+        echo "$1 could not be found in \$PATH"
+        return 1
+    fi
+    directory="$(dirname "$path")"
+    if [ -z "$directory" ]; then
+        echo "cannot find directory for $path"
+        return 2
+    fi
+    echo "$directory"
+    cd "$directory" || return 1
+}
+
 add_etc_host(){
     local host_line="$*"
     $sudo grep -q "^$host_line" /etc/hosts ||
@@ -282,7 +334,7 @@ yy(){
 
 timestamp(){
     printf "%s" "$(date '+%F %T')  $*"
-    [ $# -gt 0 ] && printf "\n"
+    [ $# -gt 0 ] && printf '\n'
 }
 alias tstamp=timestamp
 
