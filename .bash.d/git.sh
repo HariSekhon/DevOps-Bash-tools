@@ -66,11 +66,23 @@ install_git_completion(){
 #        gi list
 gitignore_api(){
     local url
-    url="https://www.gitignore.io/api/$(IFS=, ; echo "$*")"
+	local langs
+	local options=()
+    local args=()
+	for arg; do
+        if [ "$arg" = -- ]; then
+            options+=("$arg")
+        else
+            args+=("$arg")
+        fi
+    done
+	# take args 'python perl', store as 'python,perl' for the API call
+	langs="$(IFS=, ; echo "${args[*]}")"
+    url="https://www.gitignore.io/api/$langs"
     if hash curl 2>/dev/null; then
-        curl -sL "$url"
+        curl -sL "${options[*]}" "$url"
     elif hash wget 2>/dev/null; then
-        wget -O - "$url"
+        wget -O - "${options[*]}" "$url"
     fi
 }
 alias gi=gitignore_api
