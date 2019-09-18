@@ -62,6 +62,11 @@ install_git_completion(){
 # shellcheck disable=SC1090
 [ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
 
+gitignore_api(){
+    curl -sL "https://www.gitignore.io/api/$*"
+}
+alias gi=gitignore_api
+
 isGit(){
     local target=${1:-.}
     # There aren't local .hg dirs everywhere only at top level so this is difficult in bash
