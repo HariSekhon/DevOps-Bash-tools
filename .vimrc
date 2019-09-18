@@ -5,8 +5,9 @@ set ts=4
 set sw=4
 set sts=4
 set bg=dark
-" add comment to next line when using 'o'
-set formatoptions+=o
+" add comment to next line when using 'o' in command mode
+" add comment to next line when using Insert mode
+set formatoptions+=or
 
 " re-open at last cursor line
 if has("autocmd")
