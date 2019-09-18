@@ -172,10 +172,14 @@ doc_alias(){
 #            docfile="$(readlink -f "$docpath")"
 #        fi
 #    fi
-    if type "d$docfile" &>/dev/null; then
-        echo "WARNING: d$docfile conflicts with existing alias, duplicate doc $docfile among ~/docs, ~/github/docs, ~/bitbucket/docs?"
-        return
-    fi
+    #local count=0
+    #[ -f ~/docs/$docfile ] && ((count+=1))
+    #[ -f "$github/docs/$docfile" ] && ((count+=1))
+    #[ -f "$bitbucket/docs/$docfile" ] && ((count+=1))
+    #if [ $count -gt 1 ]; then
+    #    echo "WARNING: $docfile conflicts with existing alias, duplicate doc $docfile among ~/docs, ~/github/docs, ~/bitbucket/docs?"
+    #    return
+    #fi
     # shellcheck disable=SC2139,SC2140
     alias "d$docfile"="\$EDITOR $docpath"
 }
