@@ -9,8 +9,8 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
 
 * `aliases.sh` - general aliases
 * `functions.sh` - general functions
-* `paths.sh` - deduplicated adding to `$PATH` for lots of common places (eg. /usr/sbin, /usr/local/bin, ~/bin) and commands to clearly print one path per line for Bash `$PATH`, Perl `@INC` and Python `sys.path`. Also contains technology specific paths when there is no `<technology>.sh` file. All other includes use `add_PATH()` function defined here.
 * `env.sh` - general environment variables and var/unvar functions for setting environment variables for the current and all new shell sessions
+* `paths.sh` - deduplicated adding to `$PATH` for lots of common places (eg. /usr/sbin, /usr/local/bin, ~/bin) and commands to clearly print one path per line for Bash `$PATH`, Perl `@INC` and Python `sys.path`. Also contains technology specific paths when there is no `<technology>.sh` file. All other includes use `add_PATH()` function defined here.
 * `<technology>.sh` - aliases, functions and environment variables to make interactive day-to-day use of a specific technologies easier
   * Cloud / Containerization / Virtualization:
     * `aws.sh` - auto-populates [AWS](https://aws.amazon.com/) credentials from your ~/.boto credentials file to `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables for use with other tools without having to maintain the credentials in multiple places
