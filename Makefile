@@ -20,6 +20,7 @@ CONF_FILES := \
     .editorconfig \
     .gitconfig \
     .gitignore \
+    .toprc \
     .tmux.conf \
     .vimrc
 
