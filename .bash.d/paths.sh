@@ -67,6 +67,14 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+
+# do the same with MANPATH
+#if [ -d ~/man ]; then
+#    MANPATH=~/man${MANPATH:-:}
+#    export MANPATH
+#fi
+
+
 # ============================================================================ #
 #                         M y   G i t H u b   r e p o s
 # ============================================================================ #
