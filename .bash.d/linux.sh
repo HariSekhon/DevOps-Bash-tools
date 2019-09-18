@@ -63,7 +63,7 @@ getmounts(){
     awk '/ext|reiser|fat|ntfs|btrfs|xfs/{print $2}'
 }
 
-findsuid(){ 
+findsuid(){
     for x in $(getmounts); do
         echo "Searching $x for suid programs:"
         # $sudo defined in .bashrc if not root
