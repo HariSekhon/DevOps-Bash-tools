@@ -65,7 +65,7 @@ hgignore(){
     #popd &>/dev/null
 }
 
-hgci() { 
+hgci() {
     local hgcimsg=""
     for x in "$@"; do
         if hg st "$x" | grep -q "^[?A]"; then
@@ -75,7 +75,7 @@ hgci() {
     [ -z "$hgcimsg" ] && return 1
     hgcimsg="${hgcimsg%, }"
     hgcimsg="added $hgcimsg"
-    hg add "$@" && 
+    hg add "$@" &&
     echo "committing $*"
     hg ci -m "$hgcimsg" "$@"
 }
@@ -127,7 +127,7 @@ hgu(){
 #    if [ -z "$(diff -iwu "$target_tip" ".$target")" ]; then
 #        echo "Noop changes only, committing..."
 #        hg mydiff "$target" |
-#        #egrep '^\+' | tee /dev/stderr | 
+#        #egrep '^\+' | tee /dev/stderr |
 #        grep -v '^[+-][+-][+-]' # | sl --no-locking
 #        hg ci -m "updated $target" "$target" "spotify/$target"
 #        return $?
