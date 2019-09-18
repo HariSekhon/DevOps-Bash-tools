@@ -52,7 +52,7 @@ alias se=screenrc
 #xe(){ xemacs $@ & }
 #alias x=xe
 
-alias path="echo \$PATH | tr ':' '\n' | more"
+alias path="echo \$PATH | tr ':' '\\n' | more"
 alias paths=path
 alias tmp="cd /tmp"
 
@@ -97,7 +97,8 @@ alias la='ls -la $LS_OPTIONS'
 alias ll='ls -l $LS_OPTIONS'
 alias lh='ls -lh $LS_OPTIONS'
 alias lr='ls -ltrh $LS_OPTIONS'
-lw(){ ls -lh $LS_OPTIONS "$(which "$@")"; }
+# shellcheck disable=SC2086
+lw(){ ls -lh $LS_OPTIONS "$(command -v "$@")"; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -157,6 +158,37 @@ if [ -d "$bitbucket" ]; then
         alias "$y"="sti $y; cd $bitbucket/$y"
     done
 fi
+
+for x in ~/docs/*; do
+    # slows down shell creation, will drain battery
+#    if [ -L "$x" ]; then
+#        # brew install coreutils to get greadlink since Mac doesn't have readlink -f
+#        if which greadlink &>/dev/null; then
+#            y="$(greadlink -f "$x")"
+#        else
+#            y="$(readlink -f "$x")"
+#        fi
+#    fi
+    y="${x##*/}"
+    # shellcheck disable=SC2139,SC2140
+    alias "d$y"="\$EDITOR $x"
+    #z=${y%.txt}
+    #z=${z%notes*}
+    #[ "d$z" != "d$y" ] && alias d$z=$x
+
+    #if ! type ${x##*/} &>/dev/null; then
+    #    alias ${x##*/}="$EDITOR $x"
+    #fi
+done
+
+for x in "$github"/docs/*; do
+    if [ -f ~/docs/"${x##*/}" ]; then
+        echo "WARNING: duplicate doc $x also found in ~/docs/"
+    fi
+    y="${x##*/}"
+    # shellcheck disable=SC2139,SC2140
+    alias "d$y"="\$EDITOR $x"
+done
 
 # ============================================================================ #
 
