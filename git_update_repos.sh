@@ -23,8 +23,8 @@ run(){
     local repofile="$1"
     echo "processing repos from file: $repofile"
     while read -r repo; do
-        repo_dir="${repo##*:}"
-        repo_dir="${repo_dir##*/}"
+        repo_dir="${repo##*/}"
+        repo_dir="${repo_dir##*:}"
         repo="${repo%%:*}"
         if ! echo "$repo" | grep -q "/"; then
             repo="HariSekhon/$repo"
