@@ -18,19 +18,14 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
 home="${HOME:-$(cd && pwd)}"
 authorized_keys="${AUTHORIZED_KEYS:-$home/.ssh/authorized_keys}"
 
-if [[ "$USER" =~ hari|sekhon ]]; then
-    GITHUB_USER="${GITHUB_USER:-harisekhon}"
-else
-    GITHUB_USER="${GITHUB_USER:-$USER}"
-fi
-
-echo "Fetching SSH Key(s) from GitHub for account:  $GITHUB_USER"
-echo
 while read -r ssh_key; do
+    # skip comment lines
+    [ -z "$(sed 's/#.*//; /^[[:space:]]*$/d' <<< "$ssh_key")" ] && continue
     echo "Processing key:  $ssh_key"
     #algo_hash="$(awk '{print $1" "$2}' <<< "$ssh_key")"
     algo_hash="${ssh_key%%==*}"
@@ -43,5 +38,5 @@ while read -r ssh_key; do
         echo "$ssh_key from GitHub" >> "$authorized_keys"
     fi
     echo
-done < <(curl -s "https://github.com/$GITHUB_USER.keys")
+done < <("$srcdir/../github_get_user_ssh_public_key.sh")
 echo Done
