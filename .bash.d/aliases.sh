@@ -177,7 +177,7 @@ doc_alias(){
     #[ -f "$github/docs/$docfile" ] && ((count+=1))
     #[ -f "$bitbucket/docs/$docfile" ] && ((count+=1))
     #if [ $count -gt 1 ]; then
-    #    echo "WARNING: $docfile conflicts with existing alias, duplicate doc $docfile among ~/docs, ~/github/docs, ~/bitbucket/docs?"
+    #    echo "WARNING: $docfile conflicts with existing alias, duplicate doc '$docfile' among ~/docs, ~/github/docs, ~/bitbucket/docs?"
     #    return
     #fi
     # shellcheck disable=SC2139,SC2140
