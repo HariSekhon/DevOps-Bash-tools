@@ -79,11 +79,14 @@ gitignore_api(){
 	# take args 'python perl', store as 'python,perl' for the API call
 	langs="$(IFS=, ; echo "${args[*]}")"
     url="https://www.gitignore.io/api/$langs"
+    {
     if hash curl 2>/dev/null; then
         curl -sL "${options[*]}" "$url"
     elif hash wget 2>/dev/null; then
         wget -O - "${options[*]}" "$url"
     fi
+    } | tr ',' '\n'
+    echo
 }
 alias gi=gitignore_api
 
