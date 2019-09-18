@@ -19,6 +19,7 @@ CONF_FILES := \
     .ansible.cfg \
     .editorconfig \
     .gitconfig \
+    .gitignore \
     .tmux.conf \
     .vimrc
 
