@@ -401,7 +401,10 @@ files: showfiles
 
 .PHONY: wc
 wc:
+	# CODE_FILES := definitions in Makefiles must not be quoted or will get wc error 'open: File name too long'
 	wc -l $(CODE_FILES)
+	@printf "Total Files: "
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l
 
 .PHONY: wc2
 wc2:
