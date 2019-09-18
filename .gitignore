@@ -1,15 +1,31 @@
+# vim: filetype=conf
+
+# Once in a while you should check which files have been ignored via:
+#
+#       git status --ignored
+#
+# to check that there aren't some legit files you need to commit
+
 pytools_checks/
 *.swp
 
+*.doc
+*.docx
+*.log
+*.msg
+*.pages
+*.rtf
+*.wpd
+*.wps
 
 # ============================================================================ #
 #
 # regenerate all sections below in to a single arg for API call via:
 #
-#     grep 'Created by https://' .gitignore | grep -v grep | sed 's,.*/,,' | tr '\n' ',' | sed 's/,$//'
+#       grep 'Created by https://' .gitignore | grep -v grep | sed 's,.*/,,' | tr ',' '\n' | sort -u | tr '\n' ',' | sed 's/,$//'
 #
 # then pass to gi() function:
 #
-#     gi archive,appcode,ansible,audio,backup,basic,c,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,jetbrains,java,java,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux >> .gitignore
+#       gi ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows >> .gitignore
 #
 # ============================================================================ #
