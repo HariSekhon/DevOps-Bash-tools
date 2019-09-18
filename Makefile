@@ -44,3 +44,13 @@ test:
 .PHONY: clean
 clean:
 	@echo Nothing to clean
+
+.PHONY: showscripts
+showscripts:
+	@$(MAKE) showfiles | grep -v -e '/kafka_wrappers/' -e '/lib/' -e '\.bash'
+
+.PHONY: wcscripts
+wcscripts:
+	@$(MAKE) showscripts | xargs wc -l
+	@printf "Total Scripts: "
+	@$(MAKE) showscripts | wc -l
