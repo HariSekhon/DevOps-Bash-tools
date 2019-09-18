@@ -1,0 +1,41 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: Tue May 27 20:29:57 2008 +0000
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# Gentoo Portage packages to install - one per line
+
+app-emacs/gentoo-syntax
+app-vim/gentoo-syntax
+at
+bash-completion
+bind-tools
+denyhosts
+e2fsprogs
+ethtool
+gentoolkit
+lsof
+mailx
+ntp
+ntp-syntax
+openssh
+pam-syntax
+pciutils
+portsentry
+scanlogd
+slocate
+sudo
+syslog-ng
+traceroute
+usbutils
+vim
+vixie-cron
