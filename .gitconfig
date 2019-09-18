@@ -1,12 +1,105 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2012-01-31 14:08:42 +0000 (Tue, 31 Jan 2012)
+#
+
+# configure your user name and email in ~/.gitconfig.local
+#[user]
+#    name = Hari Sekhon
+#    email = harisekhon@gmail.com
+
 [include]
   path = .gitconfig.local
 
+[core]
+    # detects filemode changes
+    filemode = true
+    # global .gitignore
+    excludesfile = ~/.gitignore
+
+
+[push]
+#   default = current
+    default = simple
+
 [alias]
-  br = branch
-  co = checkout
-  ci = commit
-  p = push
-  # Show verbose output about tags, branches or remotes
-  tags = tag -l
-  branches = branch -a
-  remotes = remote -v
+    br = branch
+    co = checkout
+    ci = commit
+    p = push
+    st = status
+
+    # Show verbose output about tags, branches or remotes
+    tags = tag -l
+    branches = branch -a
+    remotes = remote -v
+
+    unstage = reset HEAD --
+    last = log -1 HEAD
+
+    # how to use commands inside git aliases
+    visual = !gitk
+
+    df = diff
+    dc = diff --cached
+    lg = log -p
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    ls = ls-files
+
+    # Show files ignored by git:
+    ign = ls-files -o -i --exclude-standard
+
+[color]
+    ui     = auto
+    diff   = auto
+    grep   = auto
+    # do not set always here, use:
+    # -c color.status=always
+    # for specific overrides, otherwise may break gitci and related functions
+    status = auto
+    branch = auto
+[color "branch"]
+    current     = green ul
+    local       = yellow
+    remote      = red        # default
+    plain       = white
+[color "diff"]
+    new         = green
+    old         = red        # default
+    plain       = white
+    whitespace  = yellow reverse
+    func        = yellow
+    frag        = cyan       # default
+    meta        = green bold # default
+[color "grep"]
+    context     = white
+    filename    = cyan
+    function    = yellow
+    linenumber  = green
+    match       = red
+    selected    = yellow
+    separator   = white
+[color "status"]
+    added       = magenta
+    changed     = red
+    untracked   = cyan
+    branch      = magenta blink
+    nobranch    = red blink
+
+[help]
+    # dangerous this just autocorrected my git rename to git rebase, lucky it errored out...
+    autocorrect = 0
+
+#[difftool "sourcetree"]
+#    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+#    path =
+#
+#[mergetool "sourcetree"]
+#    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+#    trustExitCode = true
+
+#[filter "media"]
+#   clean = git media clean %f
+#   smudge = git media smudge %f
+#   required = true
