@@ -12,6 +12,9 @@ set formatoptions+=or
 " re-open at last cursor line
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+  " auto-strip trailing whitespace on write
+  autocmd BufWritePre * %s/\s\+$//e
 endif
 
 " either works, requires expand()
