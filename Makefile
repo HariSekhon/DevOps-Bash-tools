@@ -31,8 +31,8 @@ build: system-packages
 	:
 
 install:
+	@setup/setup_bash.sh
 	@echo "linking dot files to \$$HOME directory: $$HOME"
-	@if grep -Eq "(source|\.).+$${PWD##*/}/.bashrc" ~/.bashrc 2>/dev/null; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
 	@f=""; [ -n "$$FORCE" ] && f="-f"; \
 	for filename in $(CONF_FILES); do \
 		test -f "$$HOME/$$filename" || ln -sv $$f "$$PWD/$$filename" ~; \
