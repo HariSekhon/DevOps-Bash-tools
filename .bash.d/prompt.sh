@@ -55,7 +55,7 @@ export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 
 # For passing PS1 around:
 #
-#   base64 <<< "$PS1" 
+#   base64 <<< "$PS1"
 #
 # and then pass the result through base64 -d
 #
