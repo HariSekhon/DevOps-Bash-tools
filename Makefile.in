@@ -408,7 +408,9 @@ wc:
 
 .PHONY: wc2
 wc2:
-	@echo "Total linecount without # comments:"
+	@printf "Total Files: "
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l
+	@printf "Total line count without # comments:"
 	@sed 's/#.*//;/^[[:space:]]*$$/d' $(CODE_FILES) | wc -l
 
 # finds .swp, would need to port out code lists
