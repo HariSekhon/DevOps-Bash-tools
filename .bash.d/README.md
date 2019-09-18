@@ -29,6 +29,8 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
     * `title.sh` - auto-title tricks for Screen and Terminals
   * Coding:
     * `git.sh` - [Git](https://git-scm.com/) aliases and functions
+    * `mercurial.sh` - [Mercurial](https://www.mercurial-scm.org/) aliases and functions
+    * `svn.sh` - [Svn](https://subversion.apache.org) aliases and functions
     * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
 
 More script related functions can be found in the [lib/](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/lib) directory at the top level.
