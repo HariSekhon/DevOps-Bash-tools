@@ -25,7 +25,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
     * `mercurial.sh` - [Mercurial](https://www.mercurial-scm.org/) aliases and functions
     * `svn.sh` - [Svn](https://subversion.apache.org) aliases and functions
     * `java.sh` - [Java](https://www.java.com/en/) detection and setting of `$JAVA_HOME` for Linux and Mac environments
-  * general OS:
+  * OS:
     * `apple.sh` - [Apple Mac OS X / macOS](https://en.wikipedia.org/wiki/MacOS) specific tricks
     * `linux.sh` - [Linux](https://en.wikipedia.org/wiki/Linux) specific miscellaneous bits like X.org
     * `network.sh` - network aliases and functions
