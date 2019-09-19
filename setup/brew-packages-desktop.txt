@@ -4,14 +4,17 @@
 #
 
 # Things to install by hand
-
+#
+# Xcode - running 'git' is enough to trigger the install
+#
+# Chrome
+# Docker Desktop
+# Google Drive
 # RStudio
 # Sophos Anti-Virus
 # ClamXav
-# Chrome
 # Colloquay
 # GitHub
-# Google Drive
 # JConsole
 # KeePassX
 # Reggy
