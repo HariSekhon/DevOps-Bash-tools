@@ -62,7 +62,7 @@ endif
 
 .PHONY: default
 default: build
-	:
+	@:
 
 .PHONY: quick
 quick:
