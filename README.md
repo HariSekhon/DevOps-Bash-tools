@@ -90,12 +90,12 @@ Currently utilized in the following GitHub repos:
 
 Optional, only if you don't do the full `make install`.
 
-Install only OS system package dependencies and AWS CLI via Python Pip (doesn't symlink anything to $HOME):
+Install only OS system package dependencies and AWS CLI via Python Pip (doesn't symlink anything to `$HOME`):
 ```
 make
 ```
 
-Symlink `.bashrc` and other dot files to $HOME (doesn't symlink OS system package dependencies):
+Symlink `.bashrc` and other dot files to `$HOME` (doesn't symlink OS system package dependencies):
 ```
 make bash
 ```
