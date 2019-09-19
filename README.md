@@ -88,18 +88,19 @@ Currently utilized in the following GitHub repos:
 
 Optional, only if you don't do the full `make install`.
 
-Symlink `.bashrc` and other dot files to $HOME without installing OS system package dependencies:
+Install only OS system package dependencies and AWS CLI via Python Pip (doesn't symlink anything to $HOME):
+```
+make
+```
+
+Symlink `.bashrc` and other dot files to $HOME (doesn't symlink OS system package dependencies):
 ```
 make bash
 ```
 
-Install only OS system package dependencies:
+Install only OS system package dependencies (doesn't include AWS CLI or Python packages):
 ```
 make system-packages
-```
-or just `make` as the default `build` target only installs system packages without touching $HOME
-```
-make
 ```
 
 Install AWS CLI:
@@ -111,4 +112,3 @@ Install generically useful Python modules (includes AWS CLI, autopep8 etc):
 ```
 make python
 ```
-
