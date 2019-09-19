@@ -21,6 +21,7 @@ jwhois
 parallel
 python
 readline
+shellcheck
 wget
 whois
 
