@@ -1,0 +1,86 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: Tue Oct 17 20:25:14 2006 +0000
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# Gentoo Portage packages to install - one per line
+
+abs-guide
+alien
+app-misc/beagle
+bar
+bing
+bittorrent
+bwmon
+cherrypy
+ckermit
+cmospwd
+cutecom
+djbdns
+echoping
+flasm
+ganglia
+hdparm
+htdig
+htmltidy
+gnome-power-manager
+krusader
+iplog
+ipython
+iptstate
+isic
+kchmviewer
+kolourpaint
+linpopup
+linux-docs
+linux-gazette-all
+linux-logo
+logsentry
+makepasswd
+mbrowse
+minicom
+mp3_check
+ndiswrapper
+net-mail/imapsync
+netwag
+netwox
+opera
+pbnj
+pflogsumm
+phrack-all
+porthole
+powertop
+rain
+raccess
+seamonkey
+siphon
+smokeping
+sniffit
+ssldump
+sslwrap
+tmpwatch
+valgrind
+watchpid
+webalizer
+webmin
+whowatch
+windowmaker
+x11-themes/windowmaker-themes
+wmctrl
+xbatt
+xbattbar
+xchm
+xconsole
+xdiskusage
+xpdf
+xpenguins
+xsimpsons

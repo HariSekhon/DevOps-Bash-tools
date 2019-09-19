@@ -1,6 +1,105 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2011-06-01 16:58:33 +0000 (Wed, 01 Jun 2011)
+#
+
+# Things to install by hand
+
+# RStudio
+# Sophos Anti-Virus
+# ClamXav
+# Chrome
+# Colloquay
+# GitHub
+# Google Drive
+# JConsole
+# KeePassX
+# Reggy
+# Remote Desktop Connection
+# Skype
+# SourceTree
+# Spotify
+# Sublime Text 2
+# SynergyOSX
+# TunnelBlick
+# VLC
+# WindowWrangler?
+# Wireshark
+# YouTube
+# iPhone Explorer
+# iTerm?
+
+# brew cask install minikube
+# brew cask install minishift
+# brew cask install podman
+
+# Install HomeBrew Desktop packages - one per line
+bash-completion
+cmatrix
+colordiff
+coreutils
+csshx
+diffpdf
+dnsmasq
+dnstop
+e2fsprogs
+etcd
+ffmpeg
+git
+gnu-sed
+gnupg2
+gnuplot
+gradle
+# runtime only
+#groovy
+# GDK - use SDKMan instead
+#groovysdk
+imagemagick
+ipcalc
+haproxy
+iperf
+ipython
+jq
+# no longer available
+#jwhois
+kompose
+kubectl
+kubernetes-cli
+lynx
+md5sha1sum
+mercurial
+midnight-commander
+minikube
+minishift
+mplayer
+mtr
+mysql
+octave
+openssl
+p7zip
+parallel
+parquet-tools
+pinentry
+postgresql
+pwgen
+python
+r
+rdesktop
+readline
+snappy
+sqlite
+thrift
+tmux
+# done by SDKMan now
+#maven
+#sbt
+#scala
+watch
+wget
+whois
+xz
+yamllint
 # automake
 # autoconf
 # Mac already supplies a libtool, so this gets prefixed with a 'g'
 # libtool
-ipython
-parquet-tools

@@ -1,21 +1,229 @@
+"
+"  Author: Hari Sekhon
+"  Date: 2006-07-01 22:52:16 +0100 (Sat, 01 Jul 2006)
+"
+
 syn on
-set ai
-set et
-set ts=4
-set sw=4
-set sts=4
-set bg=dark
+
+" ============================================================================ "
+
+" show all settable option values and their values
+"set all
+
+set ai      " autoindent
+set bg=dark " background
+set et      " expandtab
+set ic      " ignorecase
+set is      " incsearch
+"set list   " visually displays eol, tabs etc so you can always see them
+set ls=1    " laststatus. Status line 0=off, 1=multi-windows, 2=on
+set listchars=tab:>-,eol:$,trail:.,extends:# " changes the list characters, makes tabs appear as >---
+set ml      " modeline.  respect the vim: stuff at the stop of files. This doesn't seem to work for me
+set mls=15  " modelines. Controls how many lines to check for modeline, systems often set this to 0,
+set nocp    " nocompatible
+set nofen   "nofoldenable
+set nohls   " nohlsearch
+"set nu      " number (column on left)
+set ru      " ruler
+set sm      " showmatch. show matching brackets {}
+set scs     " smartcase. switch to case sensitive match if uppercase letter is detected
+set si      " smartindent
+set smd     " showmode
+set sta     " smarttab - make "tab" insert indents instead of tabs at beginning of line
+set sts=4   " softtabstop. changes tab key to 4 spaces wide. This is the one you need
+set sw=4    " shiftwidth. number of spaces for indentation, should be the same as tabstop really to make tabs and Shift-> the same width
+set ts=4    " tabstop
+set tw=0    " textwidth (stops auto wrapping)
+set viminfo='100,<1000,s10,h " save <1000 lines in the registers instead of <50 lines between files since otherwise I lose lots of lines when deleting and pasting between files
+set wrap    " line wrapping
+
+" reload the buffer when file has changed but buffer has not (useful for go fmt from within vim)
+set autoread
+
+set encoding=utf-8      " The encoding displayed.
+set fileencoding=utf-8  " The encoding written to file.
+
 " add comment to next line when using 'o' in command mode
 " add comment to next line when using Insert mode
 set formatoptions+=or
 
-" re-open at last cursor line
-if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" ============================================================================ "
 
-  " auto-strip trailing whitespace on write
-  autocmd BufWritePre * %s/\s\+$//e
+"behave mswin
+be xterm
+
+:if has("gui_running")
+    "colorscheme slate
+    colo slate
+:endif
+
+" ============================================================================ "
+
+filetype plugin indent on
+filetype plugin on
+"filetype off
+
+" shows what last set ts, ie .vimrc
+":verbose set ts
+
+" set scrollbind - in each window then windows will scroll together
+
+" ============================================================================ "
+
+if has("autocmd")
+    " re-open at last cursor line
+    "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost *
+      \ if line ("'\"") > 0 && line ("'\"") <= line ("$") |
+      \    exe "normal! g`\"" |
+      \ endif
+
+
+    " auto-strip trailing whitespace on write
+    autocmd BufWritePre * %s/\s\+$//e
+
+    " highlight trailing whitespace
+    " XXX: doesn't work
+    "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    " this works
+    autocmd Filetype * match Error /\s\+$/
+
+    au BufNewFile,BufRead Makefile set noet
+
+    au BufNewFile,BufRead LICENSE set tw=80
+
+    "au BufRead,BufNewFile perl set ts=4 st=4
+    "au BufRead,BufNewFile *.pl set ts=4 st=4
+
+    "au BufNew,BufRead *.pp set syntax=conf
+    " filetype is better than syntax since it figures out indentation and tab completion etc and the ruby is better than conf since it gives more syntax highlighting
+    au BufNew,BufRead *.pp set filetype=ruby sts=2 sw=2 ts=2
+
+    au BufNew,BufRead *.yml set sts=2 sw=2 ts=2
+    au BufNew,BufRead *.yaml set sts=2 sw=2 ts=2
+
+    "au BufNew,BufRead *.rb set filetype=ruby sts=2 sw=2 ts=2
+
+    " this will disable
+    "au BufNew,BufRead *.txt set ft=
+    au BufNew,BufRead *.txt hi def link confString  NONE
+
+    augroup filetypedetect
+        au! BufRead,BufNewFile *.hta setfiletype html
+    augroup end
+
+    au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint % \| headtail.py<CR>
+    au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc %<CR>
+    au BufNew,BufRead *.go   nmap ;l :w<CR>:!clear; go fmt %<CR><CR>
+
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways % \| more -R<CR>
+
+    au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py %<CR>
+    au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py %<CR>
+    au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py %; validate_ini2.py %<CR>
+    au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py %<CR>
+    au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py %<CR>
+    au BufNew,BufRead *.xml        nmap ;l :w<CR>:!clear; validate_xml.py %<CR>
+    au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; validate_yaml.py %<CR>
+
 endif
+
+" ============================================================================ "
+
+"nmap <silent> ;c :call Cformat()<CR>
+nmap <silent> ;c :,!center.py<CR>
+nmap <silent> ;e :,!center.py -s<CR>
+nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
+nmap <silent> ;D :Done<CR>
+nmap          ;f :,!fold -w 120 -s \| sed 's/[[:space:]]*$//'<CR>
+"nmap <silent> ;h :call Hr()<CR>
+nmap <silent> ;h :Hr<CR>
+" this inserts Hr literally
+"imap <silent> <C-H> :Hr<CR>
+nmap <silent> ;j :JHr<CR>
+"nmap <silent> ;' :call Sq()<CR>
+nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
+nmap          ;n :n<CR>
+nmap          ;p :prev<CR>
+nmap          ;q :q<CR>
+nmap          ;r :call WriteRun()<CR>
+"nmap <silent> ;s :call ToggleSyntax()<CR>
+nmap <silent> ;s :,!sqlcase.pl<CR>
+nmap          ;u :call HgGitU()<CR>
+nmap          ;; :call HgGitU()<CR>
+nmap          ;w :w<CR>
+"nmap          ;x :x<CR>
+
+" ============================================================================ "
+
+function! ToggleSyntax()
+    if exists("g:syntax_on")
+        syntax off
+    else
+        syntax enable
+    endif
+endfunction
+
+":command Hr  :normal i # ============================================================================ #<ESC>lx
+:command Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
+":function Hr()
+    ":s/^/# ============================================================================ #/
+    "if b:current_syntax eq "sql"
+    "    ::normal a-- <ESC>74a=<ESC>a --<ESC>
+    "else
+        ":normal a# <ESC>76a=<ESC>a #<ESC>
+    "endif
+":endfunction
+
+":function Br()
+":call Hr()
+":endfunction
+:command Br :Hr
+
+"function JHr()
+"    s,^,// ========================================================================== //,
+"endfunction
+":command JHr :normal a// ========================================================================== //<ESC>lx
+:command JHr :normal a// <ESC>74a=<ESC>a //<ESC>
+
+:command Done :normal 37a=<ESC>a DONE <ESC>37a=<ESC>
+
+":function RemoveIPs()
+"    : %s/\d\+\.\d\+\.\d\+\.\d\+/<IP_REMOVED>/gc
+":endfunction
+"
+":function RemoveMacs()
+"    : %s/\w\w:\w\w:\w\w:\w\w:\w\w:\w\w/<MAC_REMOVED>/gc
+":endfunction
+"
+":function RemoveDomains()
+"    : %s/company1/<DOMAIN_REMOVED>/gci
+"    : %s/company2/<DOMAIN_REMOVED>/gci
+":endfunction
+
+function Scrub()
+    ": call RemoveIPs()
+    ": call RemoveMacs()
+    ": call RemoveDomains()
+    :%!anonymize.py --all
+endfunction
+
+" StripQuotes()
+function Sq()
+    :s/["']//g
+endfunction
+
+function StripTrailingWhiteSpace()
+    :%s/[[:space:]]*$//
+endfunction
+
+function WriteRun()
+    :w
+    :!./%
+    " TODO: if .go then 'go run %'
+endfunction
+
+" ============================================================================ "
 
 " either works, requires expand()
 "let MYLOCALVIMRC = "~/.vimrc.local"

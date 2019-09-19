@@ -20,8 +20,12 @@ CONF_FILES := \
     .editorconfig \
     .gitconfig \
     .gitignore \
+    .my.cnf \
+    .toprc \
     .tmux.conf \
-    .vimrc
+    .vimrc \
+    .Xdefaults \
+    .Xmodmap
 
 
 include Makefile.in
@@ -31,12 +35,13 @@ build: system-packages
 	:
 
 install:
+	@setup/setup_bash.sh
 	@echo "linking dot files to \$$HOME directory: $$HOME"
-	@if grep -Eq "(source|\.).+$${PWD##*/}/.bashrc" ~/.bashrc 2>/dev/null; then echo "already sourced in ~/.bashrc"; else echo "source $$PWD/.bashrc" >> ~/.bashrc; fi
 	@f=""; [ -n "$$FORCE" ] && f="-f"; \
 	for filename in $(CONF_FILES); do \
-		test -f "$$HOME/$$filename" || ln -sv $$f "$$PWD/$$filename" ~; \
-	done
+		ln -sv $$f "$$PWD/$$filename" ~ 2>/dev/null; \
+	done || :
+	@ln -sv $$f ~/.gitignore ~/.gitignore_global 2>/dev/null || :
 
 .PHONY: test
 test:

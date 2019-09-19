@@ -1,0 +1,25 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: Wed Feb 3 16:44:26 2016 +0000
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+PyInstaller
+autopep8
+#avro
+beautifulsoup4
+#hadoopy
+kazoo
+nose
+pyflakes
+#pymongo
+pytest
+requests

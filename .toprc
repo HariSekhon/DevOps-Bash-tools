@@ -1,0 +1,19 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2006-07-01 23:10:15 +0100 (Sat, 01 Jul 2006)
+#
+
+RCfile for "top with windows"		# shameless braggin'
+Id:a, Mode_altscr=1, Mode_irixps=1, Delay_time=3.000, Curwin=0
+CPU	fieldscur=AEHIOQTWKNMbcdfgjplrsuvyzX
+	winflags=65337, sortindx=10, maxtasks=0
+	summclr=2, msgsclr=6, headclr=2, taskclr=6
+TIM	fieldscur=ABcefgjlrstuvyzMKNHIWOPQDX
+	winflags=65337, sortindx=12, maxtasks=0
+	summclr=6, msgsclr=6, headclr=1, taskclr=1
+MEM	fieldscur=ANOPQRSTUVbcdefgjlmyzWHIKX
+	winflags=65337, sortindx=14, maxtasks=0
+	summclr=5, msgsclr=5, headclr=4, taskclr=5
+USR	fieldscur=AbdEcgfHIjlOPQrstuvyzMKNWX
+	winflags=65337, sortindx=7, maxtasks=0
+	summclr=3, msgsclr=3, headclr=2, taskclr=3

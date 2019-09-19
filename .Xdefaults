@@ -1,0 +1,85 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: Sat Jul 1 00:06:15 2006 +0000
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+aterm*background:     black
+aterm*foreground:     whitesmoke
+aterm*geometry:       72x24
+aterm*transparent:    true
+aterm*shading:        50
+#Looks nice but slows things down too much
+aterm*fading:         70
+aterm*cursor:         red
+aterm*scrollBar:      false
+aterm*transpscrollbar:true
+aterm*scrollBar_right:true
+aterm*saveLines:      20000
+aterm*jumpScroll:     true
+aterm*multiscroll:    true
+
+borderlessaterm*background:     black
+borderlessaterm*foreground:     whitesmoke
+borderlessaterm*geometry:       72x24
+borderlessaterm*transparent:    true
+borderlessaterm*shading:        50
+#Looks nice but slows things down too much
+borderlessaterm*fading:         70
+borderlessaterm*cursor:         red
+borderlessaterm*scrollBar:      false
+borderlessaterm*transpscrollbar:true
+borderlessaterm*scrollBar_right:true
+borderlessaterm*saveLines:      20000
+borderlessaterm*jumpScroll:     true
+borderlessaterm*multiscroll:    true
+
+aterm80*background:     black
+aterm80*foreground:     whitesmoke
+aterm80*geometry:       80x24
+aterm80*transparent:    true
+aterm80*shading:        50
+aterm80*fading:         70
+aterm80*cursor:         red
+aterm80*scrollBar:      false
+aterm80*transpscrollbar:true
+aterm80*scrollBar_right:true
+aterm80*saveLines:      20000
+aterm80*jumpScroll:     true
+aterm80*multiscroll:    true
+
+borderlessaterm80*background:     black
+borderlessaterm80*foreground:     whitesmoke
+borderlessaterm80*geometry:       80x24
+borderlessaterm80*transparent:    true
+borderlessaterm80*shading:        50
+borderlessaterm80*fading:         70
+borderlessaterm80*cursor:         red
+borderlessaterm80*scrollBar:      false
+borderlessaterm80*transpscrollbar:true
+borderlessaterm80*scrollBar_right:true
+borderlessaterm80*saveLines:      20000
+borderlessaterm80*jumpScroll:     true
+borderlessaterm80*multiscroll:    true
+
+xterm*charClass:      33:48,37:48,45-47:48,38:48
+xterm*background:     black
+xterm*foreground:     white
+xterm*geometry:       80x24
+xterm*saveLines:      20000
+xterm*jumpScroll:     true
+xterm*multiscroll:    true
+#xterm*highlightColor: LightSkyBlue
+xterm*cursorColor:    MediumBlue
+xterm*pointerColor:   MediumBlue
+xterm*internalBorder: 3
+xterm*scrollBar:      false
+xterm*rightScrollBar: false

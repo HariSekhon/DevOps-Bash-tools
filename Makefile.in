@@ -20,6 +20,8 @@ endif
 
 export PATH := $(PATH):/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
 
+CODE_FILES := $(shell git ls-files)
+
 CPANM = cpanm
 
 SUDO := sudo
