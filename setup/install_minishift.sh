@@ -25,6 +25,7 @@ if [ "$(uname -s)" = Darwin ]; then
     sudo chown root:wheel "$(brew --prefix)"/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
     sudo chmod u+s /usr/local/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
     minishift start --vm-driver=virtualbox
+    # .bash.d/kubernetes.sh automatically sources this so 'oc' command is available in all new shells
     minishift oc-env > ~/.minishift.env
 else
     echo "Only Mac is supported at this time"
