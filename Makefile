@@ -32,7 +32,7 @@ include Makefile.in
 
 .PHONY: build
 build: system-packages
-	:
+	@:
 
 .PHONY: install
 install: build setup
