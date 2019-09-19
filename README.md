@@ -110,7 +110,7 @@ Install AWS CLI:
 make aws
 ```
 
-Install generically useful Python modules (includes AWS CLI, autopep8 etc):
+Install generically useful Python CLI tools and modules (includes AWS CLI, autopep8 etc):
 ```
 make python
 ```
