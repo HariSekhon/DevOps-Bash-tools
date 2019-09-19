@@ -9,6 +9,10 @@ Hari Sekhon - DevOps Bash Tools
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
+These scripts can be used straight from the git clone, but if you want the benefit of linking your `.bashrc` in to all the environment enhancements, installing script OS package dependencies etc, then run `make install` to set everything up:
+
+### Setup
+
 Install OS package dependencies and symlink `.bashrc` and other dot files to $HOME:
 ```
 make install
@@ -39,7 +43,7 @@ Install generically useful Python modules:
 make python
 ```
 
-Inventory Overview:
+### Inventory Overview:
 
 - Scripts - Linux systems administration scripts
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
