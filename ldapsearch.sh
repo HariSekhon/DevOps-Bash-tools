@@ -36,7 +36,8 @@ fi
 #domain="${DOMAIN:-$(hostname -d)}"
 domain="${DOMAIN:-$(hostname -f | sed 's/^[^`.]*\.//')}"
 
-base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
+#base_dn="${LDAP_BASE_DN:-dc=$(sed 's/\./,dc=/g' <<< "$domain")}"
+base_dn="${LDAP_BASE_DN:-dc=${domain//./,dc=}}"
 
 user="${LDAP_USER:-$USER@$domain}"
 
@@ -102,6 +103,7 @@ fi
 
 if [ "${DEBUG:-}" = 1 ]; then
     echo
+    # shellcheck disable=SC2001
     sed "s/-w[[:space:]]\\{1,\\}[^[:space:]]\\{1,\\}/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$*'"
 fi
 # shellcheck disable=SC2086
