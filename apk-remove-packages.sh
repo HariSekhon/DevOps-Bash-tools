@@ -20,9 +20,20 @@ set -eu
 
 echo "Removing Apk Packages"
 
-apk_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
+packages=""
+for arg; do
+    if [ -f "$arg" ]; then
+        echo "adding packages from file:  $arg"
+        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+        echo
+    else
+        packages="$packages $arg"
+    fi
+    # uniq
+    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+done
 
-if [ -z "$apk_packages" ]; then
+if [ -z "$packages" ]; then
     exit 0
 fi
 
@@ -33,12 +44,12 @@ SUDO=""
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
-    if ! $SUDO apk del $apk_packages; then
-        for package in $apk_packages; do
+    if ! $SUDO apk del $packages; then
+        for package in $packages; do
             $SUDO apk del "$package" || :
         done
     fi
 else
     # shellcheck disable=SC2086
-    $SUDO apk del $apk_packages
+    $SUDO apk del $packages
 fi

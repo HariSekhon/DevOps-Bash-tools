@@ -23,11 +23,22 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing RPM Packages listed in file(s): $*"
+echo "Installing RPM Packages"
 
-rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
+packages=""
+for arg; do
+    if [ -f "$arg" ]; then
+        echo "adding packages from file:  $arg"
+        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+        echo
+    else
+        packages="$packages $arg"
+    fi
+    # uniq
+    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+done
 
-if [ -z "$rpm_packages" ]; then
+if [ -z "$packages" ]; then
     exit 0
 fi
 
@@ -38,16 +49,16 @@ SUDO=""
 if [ -n "${NO_FAIL:-}" ]; then
     if command -v dnf >/dev/null 2>&1; then
         # dnf exists if any of the packages aren't found
-        for package in $rpm_packages; do
+        for package in $packages; do
             rpm -q "$package" || $SUDO yum install -y "$package" || :
         done
     else
         # shellcheck disable=SC2086
-        $SUDO yum install -y $rpm_packages || :
+        $SUDO yum install -y $packages || :
     fi
 else
     # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
-    for package in $rpm_packages; do
+    for package in $packages; do
         rpm -q "$package" || $SUDO yum install -y "$package"
     done
 fi

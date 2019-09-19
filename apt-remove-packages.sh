@@ -22,9 +22,20 @@ echo "Removing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
-deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
+packages=""
+for arg; do
+    if [ -f "$arg" ]; then
+        echo "adding packages from file:  $arg"
+        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+        echo
+    else
+        packages="$packages $arg"
+    fi
+    # uniq
+    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+done
 
-if [ -z "$deb_packages" ]; then
+if [ -z "$packages" ]; then
     exit 0
 fi
 
@@ -34,12 +45,12 @@ SUDO=""
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
-    if ! $SUDO apt-get purge -y $deb_packages; then
-        for package in $deb_packages; do
+    if ! $SUDO apt-get purge -y $packages; then
+        for package in $packages; do
             $SUDO apt-get purge -y "$package" || :
         done
     fi
 else
     # shellcheck disable=SC2086
-    $SUDO apt-get purge -y $deb_packages
+    $SUDO apt-get purge -y $packages
 fi

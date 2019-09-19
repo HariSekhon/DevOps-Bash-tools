@@ -23,7 +23,7 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing Deb Packages listed in file(s): $*"
+echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -33,9 +33,20 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="$opts -qq"
 fi
 
-deb_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
+packages=""
+for arg; do
+    if [ -f "$arg" ]; then
+        echo "adding packages from file:  $arg"
+        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+        echo
+    else
+        packages="$packages $arg"
+    fi
+    # uniq
+    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+done
 
-if [ -z "$deb_packages" ]; then
+if [ -z "$packages" ]; then
     exit 0
 fi
 
@@ -49,10 +60,10 @@ SUDO=""
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
-    for package in $deb_packages; do
+    for package in $packages; do
         $SUDO apt-get install -y $opts "$package" || :
     done
 else
     # shellcheck disable=SC2086
-    $SUDO apt-get install -y $opts $deb_packages
+    $SUDO apt-get install -y $opts $packages
 fi

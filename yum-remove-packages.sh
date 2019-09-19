@@ -20,9 +20,20 @@ set -eu
 
 echo "Removing RPM Packages"
 
-rpm_packages="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$/d' | sort -u)"
+packages=""
+for arg; do
+    if [ -f "$arg" ]; then
+        echo "adding packages from file:  $arg"
+        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+        echo
+    else
+        packages="$packages $arg"
+    fi
+    # uniq
+    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+done
 
-if [ -z "$rpm_packages" ]; then
+if [ -z "$packages" ]; then
     exit 0
 fi
 
@@ -32,8 +43,8 @@ SUDO=""
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
-    if ! $SUDO yum remove -y $rpm_packages; then
-        for package in $rpm_packages; do
+    if ! $SUDO yum remove -y $packages; then
+        for package in $packages; do
             if rpm -q "$package"; then
                 $SUDO yum remove -y "$package" || :
             fi
@@ -41,7 +52,7 @@ if [ -n "${NO_FAIL:-}" ]; then
     fi
 else
     # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
-    for package in $rpm_packages; do
+    for package in $packages; do
         rpm -q "$package" || $SUDO yum remove -y "$package"
     done
 fi
