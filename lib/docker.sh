@@ -171,6 +171,7 @@ docker_compose_port(){
         #env_var="$(tr '[[:lower:]]' '[[:upper:]]' <<< "$env_var")_PORT"
         # doesn't work on Mac
         #env_var="$(sed 's/.*/\U&/;s/[^[:alnum:]]/_/g' <<< "$env_var")_PORT"
+        # shellcheck disable=SC2001
         env_var="$(sed 's/[^[:alnum:]]/_/g' <<< "$env_var" | tr '[:lower:]' '[:upper:]')_PORT"
     fi
     if [ -z "${DOCKER_SERVICE:-}" ]; then
