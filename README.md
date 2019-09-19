@@ -13,7 +13,7 @@ These scripts can be used straight from the git clone, but if you want the benef
 
 ### Setup
 
-- Symlinks `.bashrc` and dot conf files to $HOME
+- Symlinks `.bashrc` and dot conf files to `$HOME`
 - Installs OS package dependencies
 - Installs Python packages including AWS CLI
 ```
