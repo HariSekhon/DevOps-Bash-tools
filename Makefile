@@ -47,6 +47,14 @@ setup:
 	done || :
 	@ln -sv $$f ~/.gitignore ~/.gitignore_global 2>/dev/null || :
 
+.PHONY: python
+python:
+	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
+
+.PHONY: aws
+aws: python
+	@:
+
 .PHONY: test
 test:
 	./all.sh
