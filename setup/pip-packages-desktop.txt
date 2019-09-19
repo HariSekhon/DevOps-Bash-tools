@@ -12,14 +12,16 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-PyInstaller
 autopep8
-#avro
+awscli
 beautifulsoup4
-#hadoopy
 kazoo
 nose
 pyflakes
-#pymongo
+PyInstaller
 pytest
 requests
+
+#avro
+#hadoopy
+#pymongo
