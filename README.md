@@ -17,31 +17,7 @@ Install OS package dependencies and symlink `.bashrc` and other dot files to $HO
 ```
 make install
 ```
-This effectively does `make system-packages bash python aws`, but if you want to only do part of it or have more control:
-
-Symlink `.bashrc` and other dot files to $HOME without installing OS system package dependencies:
-```
-make bash
-```
-
-Install only OS system package dependencies:
-```
-make system-packages
-```
-or just `make` as the default `build` target only installs system packages without touching $HOME
-```
-make
-```
-
-Install AWS CLI:
-```
-make aws
-```
-
-Install generically useful Python modules (includes AWS CLI, autopep8 etc):
-```
-make python
-```
+This effectively does `make system-packages bash python aws`, but if you want to pick and choose from different sections, see [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below.
 
 ### Inventory Overview:
 
@@ -107,3 +83,32 @@ Currently utilized in the following GitHub repos:
 * [Nagios Plugin Kafka](https://github.com/harisekhon/nagios-plugin-kafka) - Kafka Nagios Plugin written in Scala with Kerberos support
 
 [Pre-built Docker images](https://hub.docker.com/u/harisekhon/) are available for those repos (which include this one as a submodule) and the ["docker available"](https://hub.docker.com/r/harisekhon/centos-github/)  icon above links to an [uber image](https://hub.docker.com/r/harisekhon/centos-github/) which contains all my github repos pre-built. There are [Centos](https://hub.docker.com/r/harisekhon/centos-github/), [Alpine](https://hub.docker.com/r/harisekhon/alpine-github/), [Debian](https://hub.docker.com/r/harisekhon/debian-github/) and [Ubuntu](https://hub.docker.com/r/harisekhon/ubuntu-github/) versions of this uber Docker image containing all repos.
+
+#### Individual Setup Parts
+
+Optional, only if you don't do the full `make install`.
+
+Symlink `.bashrc` and other dot files to $HOME without installing OS system package dependencies:
+```
+make bash
+```
+
+Install only OS system package dependencies:
+```
+make system-packages
+```
+or just `make` as the default `build` target only installs system packages without touching $HOME
+```
+make
+```
+
+Install AWS CLI:
+```
+make aws
+```
+
+Install generically useful Python modules (includes AWS CLI, autopep8 etc):
+```
+make python
+```
+
