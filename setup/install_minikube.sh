@@ -33,7 +33,7 @@ if [ "$(uname -s)" = Darwin ]; then
     brew_prefix="$(brew --prefix)"
     sudo chown root:wheel "$brew_prefix"/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
     sudo chmod u+s "$brew_prefix"/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-    if ! minikube status | grep -i started; then
+    if ! minikube status | grep -i Running; then
         minikube start
     fi
 else
