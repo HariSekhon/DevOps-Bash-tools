@@ -14,7 +14,7 @@ These scripts can be used straight from the git clone, but if you want the benef
 ### Setup
 
 - Symlinks `.bashrc` and dot conf files to `$HOME`
-- Installs OS package dependencies (detects OS and installs RPMs, Debs or Mac HomeBrew packages)
+- Installs OS package dependencies (detects OS and installs RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including AWS CLI
 ```
 make install
@@ -23,13 +23,13 @@ This effectively does `make system-packages bash python aws`, but if you want to
 
 ### Inventory Overview:
 
-- Scripts - Linux systems administration scripts
+- Scripts - Linux systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
   - install if absent scripts for Python and Perl modules - good for combining with first attempt to install via system packages, and then these will pull from [PyPI](https://pypi.org/) or [CPAN](https://www.cpan.org/) only those modules which aren't installed. This speeds up builds and uses the standard packaged modules where possible. This is also more reliable than getting random compile errors from CPAN as libraries update and introduce bugs or needing to install too many dev libraries
   - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
   - Git branch management
   - utility scripts used from other scripts
-- `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc
+- `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
@@ -38,12 +38,12 @@ This effectively does `make system-packages bash python aws`, but if you want to
   - [Kubernetes](https://kubernetes.io/)
   - [Kafka](http://kafka.apache.org/)
   - [Vagrant](https://www.vagrantup.com/)
-  - automatic GPG and SSH agent handling
+  - automatic GPG and SSH agent handling for handling encrypted private keys without re-entering passwords, and lazy evaluation to only prompt key load the first time SSH is called
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
-  - run 'make bash' to link `.bashrc/.bash_profile` and the `.*` dot files to your `$HOME` directory to auto-inherit everything
-- `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
+  - run `make bash` to link `.bashrc`/`.bash_profile` and the `.*` dot config files to your `$HOME` directory to auto-inherit everything
+- `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc. Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
 - `setup/install_*.sh` - various simple to use installation scripts for common technologies like MiniShift, Maven, Gradle, SBT, EPEL, RPMforge, Homebrew, Travis CI, Parquet Tools etc.
-- `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools)
+- `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
 
 - Programming language linting:
 
