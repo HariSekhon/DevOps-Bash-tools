@@ -37,6 +37,7 @@ alias ci=commit
 alias gitco=checkout
 alias up=pull
 alias u=up
+alias gitp=push
 alias gdiff="git diff"
 alias gdiffm="gdiff origin/master.."
 alias branch="githg branch"
