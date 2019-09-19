@@ -9,6 +9,22 @@ Hari Sekhon - DevOps Bash Tools
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
+Install OS package dependencies and symlink `.bashrc` and other dot files to $HOME:
+```
+make install
+```
+This effectively does `make system-packages setup`, but if you want to only do part of it or have more control:
+
+Symlink `.bashrc` and other dot files to $HOME without installing OS system package dependencies:
+```
+make setup
+```
+
+Install OS system package dependencies:
+```
+make system-packages
+```
+
 - Scripts - Linux systems administration scripts
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
   - install if absent scripts for Python and Perl modules - good for combining with first attempt to install via system packages, and then these will pull from [PyPI](https://pypi.org/) or [CPAN](https://www.cpan.org/) only those modules which aren't installed. This speeds up builds and uses the standard packaged modules where possible. This is also more reliable than getting random compile errors from CPAN as libraries update and introduce bugs or needing to install too many dev libraries
@@ -26,7 +42,7 @@ For more advanced Systems Administration scripts in other languages, see the rep
   - [Vagrant](https://www.vagrantup.com/)
   - automatic GPG and SSH agent handling
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
-  - run 'make install' to link `.bashrc/.bash_profile` and the `.*` dot files to your `$HOME` directory to auto-inherit everything
+  - run 'make setup' to link `.bashrc/.bash_profile` and the `.*` dot files to your `$HOME` directory to auto-inherit everything
 - `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
 - `setup/install_*.sh` - various simple to use installation scripts for common technologies like MiniShift, Maven, Gradle, SBT, EPEL, RPMforge, Homebrew, Travis CI, Parquet Tools etc.
 - `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools)
