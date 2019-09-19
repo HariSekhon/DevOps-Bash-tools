@@ -13,7 +13,7 @@ These scripts can be used straight from the git clone, but if you want the benef
 
 ### Setup
 
-Install OS package dependencies and symlink `.bashrc` and other dot files to $HOME:
+Symlinks `.bashrc` and dot conf files to $HOME, install OS package dependencies and Python packages including AWS CLI:
 ```
 make install
 ```
