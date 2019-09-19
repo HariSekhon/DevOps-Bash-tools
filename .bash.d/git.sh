@@ -24,8 +24,8 @@
 # set location where you check out all the github repos
 export github=~/github
 
-alias gitconfig="\$EDITOR \~/.gitconfig"
-alias gitignore="\$EDITOR \~/.gitignore_global"
+alias gitconfig="\$EDITOR ~/.gitconfig"
+alias gitignore="\$EDITOR ~/.gitignore_global"
 alias gitrc=gitconfig
 
 alias add=gitadd
