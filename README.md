@@ -24,6 +24,10 @@ Install OS system package dependencies:
 ```
 make system-packages
 ```
+or just `make` as the default `build` target only installs system packages without touching $HOME
+```
+make
+```
 
 - Scripts - Linux systems administration scripts
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
