@@ -34,7 +34,11 @@ include Makefile.in
 build: system-packages
 	:
 
-install:
+.PHONY: install
+install: build setup
+
+.PHONY: setup
+setup:
 	@setup/setup_bash.sh
 	@echo "linking dot files to \$$HOME directory: $$HOME"
 	@f=""; [ -n "$$FORCE" ] && f="-f"; \
