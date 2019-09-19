@@ -13,20 +13,30 @@ Install OS package dependencies and symlink `.bashrc` and other dot files to $HO
 ```
 make install
 ```
-This effectively does `make system-packages setup`, but if you want to only do part of it or have more control:
+This effectively does `make system-packages bash python aws`, but if you want to only do part of it or have more control:
 
 Symlink `.bashrc` and other dot files to $HOME without installing OS system package dependencies:
 ```
-make setup
+make bash
 ```
 
-Install OS system package dependencies:
+Install only OS system package dependencies:
 ```
 make system-packages
 ```
 or just `make` as the default `build` target only installs system packages without touching $HOME
 ```
 make
+```
+
+Install AWS CLI:
+```
+make aws
+```
+
+Install generically useful Python modules:
+```
+make python
 ```
 
 - Scripts - Linux systems administration scripts
@@ -46,7 +56,7 @@ make
   - [Vagrant](https://www.vagrantup.com/)
   - automatic GPG and SSH agent handling
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
-  - run 'make setup' to link `.bashrc/.bash_profile` and the `.*` dot files to your `$HOME` directory to auto-inherit everything
+  - run 'make bash' to link `.bashrc/.bash_profile` and the `.*` dot files to your `$HOME` directory to auto-inherit everything
 - `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc.
 - `setup/install_*.sh` - various simple to use installation scripts for common technologies like MiniShift, Maven, Gradle, SBT, EPEL, RPMforge, Homebrew, Travis CI, Parquet Tools etc.
 - `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools)
