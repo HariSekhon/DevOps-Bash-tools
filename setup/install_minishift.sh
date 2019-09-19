@@ -31,8 +31,9 @@ if [ "$(uname -s)" = Darwin ]; then
         brew cask install --force minishift
         brew install docker-machine-driver-xhyve
     fi
-    sudo chown root:wheel "$(brew --prefix)"/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
-    sudo chmod u+s /usr/local/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+    brew_prefix="$(brew --prefix)"
+    sudo chown root:wheel "$brew_prefix"/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
+    sudo chmod u+s "$brew_prefix"/opt/docker-machine-driver-xhyve/bin/docker-machine-driver-xhyve
     if ! minishift status | grep -i started; then
         minishift start --vm-driver=virtualbox
     fi
