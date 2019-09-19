@@ -31,14 +31,14 @@ CONF_FILES := \
 include Makefile.in
 
 .PHONY: build
-build: system-packages
+build: system-packages aws
 	@:
 
 .PHONY: install
-install: build setup
+install: build bash python aws
 
-.PHONY: setup
-setup:
+.PHONY: bash
+bash:
 	@setup/setup_bash.sh
 	@echo "linking dot files to \$$HOME directory: $$HOME"
 	@f=""; [ -n "$$FORCE" ] && f="-f"; \
@@ -52,8 +52,8 @@ python:
 	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
-aws: python
-	@:
+aws:
+	@./python_pip_install_if_absent.sh awscli
 
 .PHONY: test
 test:
