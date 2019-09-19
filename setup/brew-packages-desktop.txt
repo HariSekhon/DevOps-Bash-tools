@@ -8,6 +8,7 @@
 # Xcode - running 'git' is enough to trigger the install
 #
 # Chrome
+# VirtualBox
 # Docker Desktop
 # Google Drive
 # RStudio
