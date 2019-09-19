@@ -18,8 +18,11 @@
 # ============================================================================ #
 
 # minishift oc-env > ~/.minishift.env
-# shellcheck disable=SC1090
-[ -f ~/.minishift.env ] && . ~/.minishift.env
+if [ -f ~/.minishift.env ]; then
+    # remove .minishift.env if it causes errors, which can happen if it was generated when there was no MiniShift VM running
+    # shellcheck disable=SC1090
+    . ~/.minishift.env || rm -f ~/.minishift.env
+fi
 
 kubectl_opts="${KUBECTL_OPTS:-}"
 # set K8S_NAMESPACE in local .bashrc or similar files for environments where your ~/.kube/config
