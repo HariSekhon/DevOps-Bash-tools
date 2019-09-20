@@ -190,7 +190,8 @@ done
 
 # ============================================================================ #
 
-alias a='ansible'
+alias a='ansible -Db'
+alias tf='terraform'
 alias bc='bc -l'
 alias chromekill='pkill -f "Google Chrome Helper"'
 alias eclipse='~/eclipse/Eclipse.app/Contents/MacOS/eclipse';
