@@ -15,7 +15,7 @@ These scripts can be used straight from the git clone, but if you want the benef
 
 - Symlinks `.bashrc` and dot conf files to `$HOME`
 - Installs OS package dependencies (detects OS and installs RPMs, Debs, Apk or Mac HomeBrew packages)
-- Installs Python packages including AWS CLI
+- Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
 ```
 make install
 ```
@@ -100,17 +100,17 @@ Symlink `.bashrc` and other dot files to `$HOME` (doesn't symlink OS system pack
 make bash
 ```
 
-Install only OS system package dependencies (doesn't include AWS CLI or Python packages):
+Install only OS system package dependencies (doesn't include [AWS CLI](https://aws.amazon.com/cli/) or Python packages):
 ```
 make system-packages
 ```
 
-Install AWS CLI:
+Install [AWS CLI](https://aws.amazon.com/cli/):
 ```
 make aws
 ```
 
-Install generically useful Python CLI tools and modules (includes AWS CLI, autopep8 etc):
+Install generically useful Python CLI tools and modules (includes [AWS CLI](https://aws.amazon.com/cli/), autopep8 etc):
 ```
 make python
 ```
