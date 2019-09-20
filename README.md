@@ -42,7 +42,7 @@ This effectively does `make system-packages bash python aws`, but if you want to
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
   - run `make bash` to link `.bashrc`/`.bash_profile` and the `.*` dot config files to your `$HOME` directory to auto-inherit everything
 - `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc. Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
-- `setup/install_*.sh` - various simple to use installation scripts for common technologies like [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/) (Kubernetes dev VM), [MiniShift](https://www.okd.io/minishift/) ([Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) Kubernetes dev VM), [Maven](https://maven.apache.org/), [Gradle](https://gradle.org/), [SBT](https://www.scala-sbt.org/), [EPEL](https://fedoraproject.org/wiki/EPEL), [RPMforge](http://repoforge.org/), [Homebrew](https://brew.sh/), [Travis CI](https://travis-ci.org/), [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools) etc.
+- `setup/install_*.sh` - various simple to use installation scripts for common technologies like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/) (Kubernetes dev VM), [MiniShift](https://www.okd.io/minishift/) ([Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) Kubernetes dev VM), [Maven](https://maven.apache.org/), [Gradle](https://gradle.org/), [SBT](https://www.scala-sbt.org/), [EPEL](https://fedoraproject.org/wiki/EPEL), [RPMforge](http://repoforge.org/), [Homebrew](https://brew.sh/), [Travis CI](https://travis-ci.org/), [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools) etc.
 - `kafka_wrappers/*.sh` - scripts to make [Kafka](http://kafka.apache.org/) cli usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
 
 - Programming language linting:
@@ -55,7 +55,7 @@ This effectively does `make system-packages bash python aws`, but if you want to
   - [Bash](https://www.gnu.org/software/bash/) / Shell
   - Misc (whitespace, custom enforced checks like not calling quit() in python etc)
 
-- Build System and CI linting:
+- Build System & CI linting:
 
   - [Make](https://www.gnu.org/software/make/)
   - [Maven](https://maven.apache.org/)
