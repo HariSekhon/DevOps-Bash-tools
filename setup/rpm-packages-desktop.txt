@@ -20,8 +20,9 @@ acpitool
 air
 airsnort
 alsa-utils
-app-dicts/dictd-dicts
-app-vim/perl-support
+ansible
+#app-dicts/dictd-dicts
+#app-vim/perl-support
 arpd
 arpwatch
 aterm
@@ -40,10 +41,10 @@ cvs
 davl
 debootstrap
 denyhosts
-dev-perl/Net-Netmask
-dev-perl/net-ssh-perl
-dev-perl/Perl-Critic
-dev-perl/perltidy
+#dev-perl/Net-Netmask
+#dev-perl/net-ssh-perl
+#dev-perl/Perl-Critic
+#dev-perl/perltidy
 dia
 dialog
 dnspython
@@ -60,7 +61,7 @@ filelight
 fluxbox
 foremost
 fortune-mod
-games-misc/fortune-mod
+#games-misc/fortune-mod
 gcc
 gdb
 geoip

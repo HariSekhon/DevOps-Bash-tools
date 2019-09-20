@@ -12,8 +12,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-autopep8
+# try to use OS package manager instead - only pip install if too old or not available
+#ansible
 awscli
+autopep8
 beautifulsoup4
 kazoo
 nose

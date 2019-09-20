@@ -38,6 +38,7 @@
 # brew cask install podman
 
 # Install HomeBrew Desktop packages - one per line
+ansible
 bash-completion
 cmatrix
 colordiff

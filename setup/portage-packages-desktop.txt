@@ -36,6 +36,7 @@ airsnort
 alsa-utils
 apachetop
 app-admin/analog
+app-admin/ansible
 app-dicts/dictd-dicts
 app-emacs/gentoo-syntax
 app-vim/gentoo-syntax
