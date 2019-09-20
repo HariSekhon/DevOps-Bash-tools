@@ -27,6 +27,17 @@ os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 echo "OS detected as $os"
 echo
 
+if [ -z "${UPDATE_TERRAFORM:-}" ]; then
+    if command -v terraform &>/dev/null; then
+        echo "Terraformalready installed"
+        echo
+        echo "To update terraform, set the below and then re-run this script"
+        echo
+        echo "export UPDATE_TERRAFORM=1"
+        exit 0
+    fi
+fi
+
 url="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${os}_amd64.zip"
 
 echo "Downloading Terraform from $url"
