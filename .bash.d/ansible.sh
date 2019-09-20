@@ -33,7 +33,9 @@ fi
 # set in ~/.ansible.cfg now
 #export ANSIBLE_HOST_KEY_CHECKING=False
 
-alias ansible='ansible -b'
-alias ansible_playbook='ansible-playbook -b'
-#alias ansible_playbook_vault='ansible-playbook -b --ask-vault-pass'
-alias ansible_playbook_vault='ansible-playbook -b --vault-id $bash_tools/vault_pass.sh'
+alias a=ansible
+# -D diff switch requires newish ansible, doesn't work on 1.7
+alias ansible='ansible -Db'
+alias ansible_playbook='ansible-playbook -Db'
+#alias ansible_playbook_vault='ansible-playbook -Db --ask-vault-pass'
+alias ansible_playbook_vault='ansible-playbook -Db --vault-id $bash_tools/vault_pass.sh'
