@@ -190,7 +190,8 @@ done
 
 # ============================================================================ #
 
-alias a='ansible -Db'
+# set in ansible.sh
+#alias a='ansible -Db'
 alias tf='terraform'
 alias bc='bc -l'
 alias chromekill='pkill -f "Google Chrome Helper"'
