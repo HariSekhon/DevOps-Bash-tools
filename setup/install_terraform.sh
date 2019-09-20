@@ -57,4 +57,4 @@ echo
 unalias mv &>/dev/null || :
 mv -fv terraform "$install_path"
 echo
-echo "Please ensure ~/bin is in your \$PATH (automatic is sourcing this repo's .bashrc, which also gives you the 'tf' shortcut alias)"
+echo "Please ensure $install_path is in your \$PATH (automatic is sourcing this repo's .bashrc, which also gives you the 'tf' shortcut alias)"
