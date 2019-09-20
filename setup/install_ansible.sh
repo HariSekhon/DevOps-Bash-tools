@@ -64,7 +64,7 @@ elif [ "$os" = "Linux" ]; then
             $sudo apt update
             $sudo apt install ansible
         fi
-    elif command -v akp &>/dev/null; then
+    elif command -v apk &>/dev/null; then
         echo "Installing via Apk"
         $sudo apk update
         $sudo apk add ansible
