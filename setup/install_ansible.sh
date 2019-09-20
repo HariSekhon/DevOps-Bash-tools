@@ -13,6 +13,10 @@
 # Installs Ansible on Mac / Linux
 #
 # https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
+#
+# Prompts for sudo if using OS system packages
+#
+# If falling back to Python PIP then if running as root installs to System, otherwise installs to local --user library
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -22,7 +26,11 @@ echo "OS detected as $os"
 echo
 
 sudo=sudo
-[ $EUID -eq 0 ] && sudo=""
+pip_opts="--user"
+if [ $EUID -eq 0 ]; then
+    sudo=""
+    pip_opts=""
+fi
 
 if [ -z "${UPDATE_ANSIBLE:-}" ]; then
     if command -v ansible &>/dev/null; then
@@ -73,14 +81,14 @@ elif [ "$os" = "Linux" ]; then
         $sudo emerge -av app-admin/ansible
     elif command -v pip &>/dev/null; then
         echo "Installing via Pip"
-        pip install --user ansible
+        pip install $pip_opts ansible
     else
         echo "Couldn't find Linux package manager!'"
         exit 1
     fi
 elif command -v pip &>/dev/null; then
     echo "Unsupported OS, installing via Pip"
-    pip install --user ansible
+    pip install $pip_opts ansible
 else
     echo "Unsupported OS and pip not available!"
     exit 2
