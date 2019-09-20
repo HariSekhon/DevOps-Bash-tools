@@ -17,7 +17,7 @@ These scripts can be used straight from the git clone, but see setup benefits of
 make install
 ```
 
-- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview))
+- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
 - Symlinks all `.*` conf files to `$HOME` for vim, top, screen, tmux etc.
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
