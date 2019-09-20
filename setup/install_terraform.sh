@@ -10,7 +10,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Installs Terraform on Mac
+# Installs Terraform on Mac / Linux
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
