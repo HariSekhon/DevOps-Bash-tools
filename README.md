@@ -90,7 +90,7 @@ Currently utilized in the following GitHub repos:
 
 Optional, only if you don't do the full `make install`.
 
-Install only OS system package dependencies and AWS CLI via Python Pip (doesn't symlink anything to `$HOME`):
+Install only OS system package dependencies and [AWS CLI](https://aws.amazon.com/cli/) via Python Pip (doesn't symlink anything to `$HOME`):
 ```
 make
 ```
