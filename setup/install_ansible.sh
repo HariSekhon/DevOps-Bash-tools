@@ -48,7 +48,7 @@ elif [ "$os" = "Linux" ]; then
     elif command -v akp &>/dev/null; then
         $sudo apk update
         $sudo apk add ansible
-    elif command -v deb &>/dev/null; then
+    elif command -v apt &>/dev/null; then
         if grep -q Ubuntu /etc/*release; then
             $sudo apt update
             $sudo apt install software-properties-common
