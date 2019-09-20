@@ -11,6 +11,10 @@
 #
 
 # Installs Terraform on Mac / Linux
+#
+# If running as root, installs to /usr/local/bin
+#
+# If running as non-root, installs to $HOME/bin
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -37,11 +41,20 @@ echo "Unzipping"
 unzip -o terraform.zip
 echo
 
-mkdir -pv ~/bin
+if [ $EUID -eq 0 ]; then
+    install_path=/usr/local/bin
+else
+    install_path=~/bin
+fi
+if [ -e "$install_path" ] && ! [ -d "$install_path" ]; then
+    echo "WARNING: install path $install_path is not a directory, aborting!"
+    exit 1
+fi
+mkdir -pv "$install_path"
 echo
 
 # common alias mv='mv -i' would force a prompt we don't want, even with -f
 unalias mv &>/dev/null || :
-mv -fv terraform ~/bin
+mv -fv terraform "$install_path"
 echo
 echo "Please ensure ~/bin is in your \$PATH (automatic is sourcing this repo's .bashrc, which also gives you the 'tf' shortcut alias)"
