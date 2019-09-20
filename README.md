@@ -9,16 +9,19 @@ Hari Sekhon - DevOps Bash Tools
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
-These scripts can be used straight from the git clone, but if you want the benefit of linking your `.bashrc` in to all the environment enhancements, installing script OS package dependencies etc, then run `make install` to set everything up:
+These scripts can be used straight from the git clone, but see setup benefits of `make install` next.
 
-### Setup
+### Quick Setup
 
-- Symlinks `.bashrc` and dot conf files to `$HOME`
-- Installs OS package dependencies (detects OS and installs RPMs, Debs, Apk or Mac HomeBrew packages)
+- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview))
+- Symlinks all `.*` conf files to `$HOME` for vim, top, screen, tmux etc.
+- Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
+
 ```
 make install
 ```
+
 This effectively does `make system-packages bash python aws`, but if you want to pick and choose from different sections, see [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below.
 
 ### Inventory Overview:
