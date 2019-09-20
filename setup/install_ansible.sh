@@ -42,13 +42,13 @@ if [ "$os" = "Darwin" ]; then
     brew install ansible
 elif [ "$os" = "Linux" ]; then
     if command -v dnf &>/dev/null; then
+        echo "Installing via DNF"
         $sudo dnf install -y ansible
     elif command -v yum &>/dev/null; then
+        echo "Installing via Yum"
         $sudo yum install -y ansible
-    elif command -v akp &>/dev/null; then
-        $sudo apk update
-        $sudo apk add ansible
     elif command -v apt &>/dev/null; then
+        echo "Installing via APT"
         if grep -q Ubuntu /etc/*release; then
             $sudo apt update
             $sudo apt install software-properties-common
@@ -64,15 +64,22 @@ elif [ "$os" = "Linux" ]; then
             $sudo apt update
             $sudo apt install ansible
         fi
+    elif command -v akp &>/dev/null; then
+        echo "Installing via Apk"
+        $sudo apk update
+        $sudo apk add ansible
     elif command -v emerge &>/dev/null; then
+        echo "Installing via Emerge"
         $sudo emerge -av app-admin/ansible
     elif command -v pip &>/dev/null; then
+        echo "Installing via Pip"
         pip install --user ansible
     else
         echo "Couldn't find Linux package manager!'"
         exit 1
     fi
 elif command -v pip &>/dev/null; then
+    echo "Unsupported OS, installing via Pip"
     pip install --user ansible
 else
     echo "Unsupported OS and pip not available!"
