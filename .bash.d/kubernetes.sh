@@ -46,6 +46,16 @@ oc_opts="$kubectl_opts"
 #    command oc $oc_opts "$@"
 #}
 
+oc(){
+    export KUBERNETES_CLI=oc
+    command oc $oc_opts "$@"
+}
+
+kubectl(){
+    export KUBERNETES_CLI=kubectl
+    command kubectl $kubectl_opts "$@"
+}
+
 k(){
     local opts
     # more efficient than forking to check history every time
