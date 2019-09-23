@@ -239,8 +239,11 @@ alias backup_jenkins="rsync -av root@jenkins:/jenkins_backup/*.zip '~/jenkins_ba
 #for dir in $(find ~ -maxdepth 1 -name '[A-Z]*' -type d); do [ -d "$dir" ] && alias ${dir##*/}="cd '$dir'"; done
 
 export downloads=~/Downloads
+export documents=~/Documents
 export down="$downloads"
+export docu="$documents"
 alias down='cd "$downloads"'
+alias docu='cd "$documents"'
 
 export desktop=~/Desktop
 export desk="$desktop"
