@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #
 #  Author: Hari Sekhon
 #  Date: Aug 2019
@@ -21,8 +22,8 @@ set -x
 srcdir="$(dirname "$0")"
 
 if [ "$(uname -s)" = Darwin ]; then
-    if ! command -v minishift &>/dev/null; then
-        if ! command -v brew &>/dev/null; then
+    if ! which minishift &>/dev/null; then
+        if ! which brew &>/dev/null; then
             echo "HomeBrew needs to be installed first, trying to install now"
             "$srcdir/install_homebrew.sh"
         fi
