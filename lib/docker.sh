@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -27,7 +28,7 @@ fi
 
 is_docker_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
-    if command -v docker &>/dev/null; then
+    if which docker &>/dev/null; then
         if docker info &>/dev/null; then
             return 0
         fi
@@ -38,7 +39,7 @@ is_docker_available(){
 
 is_docker_compose_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
-    if command -v docker-compose &>/dev/null; then
+    if which docker-compose &>/dev/null; then
         return 0
     fi
     #echo "Docker Compose not available"

@@ -21,7 +21,8 @@ set -eu
 
 perl="perl"
 
-if ! command -v $perl &>/dev/null; then
+# shellcheck disable=SC2230
+if ! which $perl &>/dev/null; then
     return 0 &>/dev/null || :
     exit 0
 fi

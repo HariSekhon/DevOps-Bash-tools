@@ -33,7 +33,8 @@ if ! type isExcluded &>/dev/null; then
         [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
         # this external git check is expensive, skip it when in CI as using fresh git checkouts
         is_CI && return 1
-        if command -v git &>/dev/null; then
+        # shellcheck disable=SC2230
+        if which git &>/dev/null; then
             commit="$(git log "$prog" | head -n1 | grep 'commit')"
             if [ -z "$commit" ]; then
                 return 0
