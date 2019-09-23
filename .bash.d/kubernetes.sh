@@ -34,25 +34,17 @@ fi
 # TODO: might split this later
 oc_opts="$kubectl_opts"
 
-#k(){
-#    # want opts auto split, do not quote $kubectl_opts
-#    # shellcheck disable=SC2086
-#    kubectl $kubectl_opts "$@"
-#}
-#
-#oc(){
-#    # want opts auto split, do not quote $kubectl_opts
-#    # shellcheck disable=SC2086
-#    command oc $oc_opts "$@"
-#}
 
+# oc() and kubectl() fix future invocations of k() to the each command if you want to explicitly switch between them
 oc(){
     export KUBERNETES_CLI=oc
+    # shellcheck disable=SC2086
     command oc $oc_opts "$@"
 }
 
 kubectl(){
     export KUBERNETES_CLI=kubectl
+    # shellcheck disable=SC2086
     command kubectl $kubectl_opts "$@"
 }
 
@@ -82,6 +74,37 @@ k(){
                              ;;
         esac
     fi
+}
+
+krun(){
+    local image="$1"
+    local name="${image//\//-}"
+    shift
+    # sleep infinity only works on some distros
+    k run --generator=run-pod/v1 "$name" --image "$image" -ti -- /bin/sh
+}
+
+kexec(){
+    local line
+    local name="$1"
+    if [ -z "$name" ]; then
+        echo "usage: kexec <name>"
+        return 1
+    fi
+    for ((i=0;i<100;i++)); do
+        line="$(k get po | grep -F "$name")"
+        if [ -z "$line" ]; then
+            echo "No pod matching name $name found!"
+            return 1
+        fi
+        name="$(awk '/Running/{print $1}' <<< "$line")"
+        if [ -n "$name" ]; then
+            break
+        fi
+        echo "waiting for pod to start running..."
+        sleep 1
+    done
+    k exec -ti "$name" -- /bin/sh
 }
 
 # 'k8s-app' label is set by dashboard creation but who uses that
