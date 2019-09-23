@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -24,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/utils.sh"
 
 allbranches(){
-    if command -v uniq_order_preserved.pl &>/dev/null; then
+    if which uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
     else
         local uniq="sort | uniq"
