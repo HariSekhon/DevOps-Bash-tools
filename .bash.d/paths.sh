@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -134,9 +135,9 @@ GOPATH="$github/go-tools"
 # shellcheck disable=SC2230
 if which go &>/dev/null; then
     if [ -n "$APPLE" ]; then
-        GOROOT="$(dirname "$(dirname "$(greadlink -f "$(command -v go)")")")"
+        GOROOT="$(dirname "$(dirname "$(greadlink -f "$(which go)")")")"
     else
-        GOROOT="$(dirname "$(dirname "$(readlink -f "$(command -v go)")")")"
+        GOROOT="$(dirname "$(dirname "$(readlink -f "$(which go)")")")"
     fi
     export GOROOT
     add_PATH "$GOROOT/bin"

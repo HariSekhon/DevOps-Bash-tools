@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -49,9 +50,9 @@ alias g=google
 alias wg="watch_url.pl google.com"
 
 n(){
-    if command -v host &>/dev/null; then
+    if which host &>/dev/null; then
         host "$@"
-    elif command -v nslookup &>/dev/null; then
+    elif which nslookup &>/dev/null; then
         nslookup "$@"
     else
         echo "neither host nor nslookup were found in the path"
@@ -281,10 +282,10 @@ rdp(){
         if [ "$(xdpyinfo | awk '/dimensions/ {print $2}' | sed 's/x.*//')" -gt 1024 ]; then
             resolution="1024x768"
         fi
-        if command -v krdc &>/dev/null; then
+        if which krdc &>/dev/null; then
             krdc "rdp:/$WINDOWSDOMAIN\\$WINDOWSUSER@$*" &
             exit 0
-        elif command -v rdesktop &>/dev/null; then
+        elif which rdesktop &>/dev/null; then
             rdesktop -u "$WINDOWSUSER" -d "$WINDOWSDOMAIN" "$@" -g "$resolution" &
             exit 0
         else
@@ -306,9 +307,9 @@ vncwho() {
 }
 
 vnc(){
-    if command -v krdc &>/dev/null; then
+    if which krdc &>/dev/null; then
         krdc "vnc:/$1" &
-    elif command -v vncviewer &>/dev/null; then
+    elif which vncviewer &>/dev/null; then
         vncviewer "$1" &
     else
         echo "could not find krdc or vncviewer in \$PATH"

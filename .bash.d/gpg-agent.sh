@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -22,7 +23,7 @@
 
 gpg_agent(){
     if [ $UID != 0 ]; then
-        if command -v gpg-agent &>/dev/null; then
+        if which gpg-agent &>/dev/null; then
             GPG_ENV_FILE=~/.gpg-agent.env
             if [ -f "$GPG_ENV_FILE" ]; then
                 # shellcheck disable=SC1090

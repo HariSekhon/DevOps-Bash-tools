@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -62,11 +63,11 @@ export varfile=~/.bash_vars
 if [ -n "$APPLE" ]; then
     #BROWSER=open
     unset BROWSER
-elif command -v google-chrome &>/dev/null; then
+elif which google-chrome &>/dev/null; then
     BROWSER=google-chrome
-elif command -v firefox &>/dev/null; then
+elif which firefox &>/dev/null; then
     BROWSER=firefox
-elif command -v konqueror &>/dev/null; then
+elif which konqueror &>/dev/null; then
     BROWSER=konqueror
 else
     BROWSER=UNKNOWN

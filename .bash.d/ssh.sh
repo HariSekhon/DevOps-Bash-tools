@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -166,7 +167,7 @@ rekey(){
 sshkey(){
     local key=~/.ssh/id_rsa.pub
     # now available on Mac, but my tried and tested function of years gone by dedupes the keys
-#    if command -v ssh-copy-id; then
+#    if which ssh-copy-id; then
 #        ssh-copy-id -i "$key" "$@"
 #    else
         ssh "$@" '

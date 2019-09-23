@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -69,13 +70,13 @@ if [ -n "${APPLE:-}" ]; then
 elif [ -n "$LINUX" ]; then
     if [ -z "$JAVA_HOME" ]; then
         # RHEL / CentOS
-        if command -v alternatives &>/dev/null; then
+        if which alternatives &>/dev/null; then
             java_home="$(alternatives --list | awk '/^java[[:space:]]/{print $3; exit}' | sed 's,\(/jre\)\?/bin/java$,,')"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
         # Debian / Ubuntu
-        elif command -v update-alternatives &>/dev/null; then
+        elif which update-alternatives &>/dev/null; then
             java_home="$(update-alternatives --list java  | sed 's,\(/jre\)\?/bin/java$,,' | head -n1)"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"

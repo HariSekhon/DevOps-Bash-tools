@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -51,9 +52,9 @@ for x in "$RANCID_HOME/bin/"*login; do
     alias "$y"="rancidlogin_func $y"
 done
 
-# for x in "$RANCID_HOME/bin/"*login; do y="${x##*/}"; command -v "${y%ogin}" &>/dev/null || alias "${y%ogin}"="$y"; done
+# for x in "$RANCID_HOME/bin/"*login; do y="${x##*/}"; which "${y%ogin}" &>/dev/null || alias "${y%ogin}"="$y"; done
 # This is slow to do every time so just past the echo output from:
-# for x in "$RANCID_HOME/bin/"*login; do y="${x##*/}"; command -v "${y%ogin}" &>/dev/null || echo alias "${y%ogin}"="$y"; done
+# for x in "$RANCID_HOME/bin/"*login; do y="${x##*/}"; which "${y%ogin}" &>/dev/null || echo alias "${y%ogin}"="$y"; done
 alias al=alogin
 alias avol=avologin
 alias bl=blogin

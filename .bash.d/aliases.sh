@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -57,7 +58,7 @@ alias paths=path
 alias tmp="cd /tmp"
 
 # not as compatible, better to call pypy explicitly or in #! line
-#if command -v pypy &>/dev/null; then
+#if which pypy &>/dev/null; then
 #    alias python=pypy
 #fi
 
@@ -98,7 +99,7 @@ alias ll='ls -l $LS_OPTIONS'
 alias lh='ls -lh $LS_OPTIONS'
 alias lr='ls -ltrh $LS_OPTIONS'
 # shellcheck disable=SC2086
-lw(){ ls -lh $LS_OPTIONS "$(command -v "$@")"; }
+lw(){ ls -lh $LS_OPTIONS "$(which "$@")"; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
