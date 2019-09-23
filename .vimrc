@@ -85,8 +85,8 @@ if has("autocmd")
     " highlight trailing whitespace
     " XXX: doesn't work
     "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-    " this works
-    autocmd Filetype * match Error /\s\+$/
+    " this works - not using now we auto-strip trailing whitespace above on write anyway and it feels like this constant on/off highlighting slows things down and wastes energy
+    "autocmd Filetype * match Error /\s\+$/
 
     au BufNewFile,BufRead Makefile set noet
 
