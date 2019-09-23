@@ -131,7 +131,8 @@ GOPATH="$github/go-tools"
 # imports runtime/internal/sys: cannot find package "runtime/internal/sys" in any of:
 # /usr/local/go/src/runtime/internal/sys (from $GOROOT)
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
-if command -v go &>/dev/null; then
+# shellcheck disable=SC2230
+if which go &>/dev/null; then
     if [ -n "$APPLE" ]; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(command -v go)")")")"
     else
