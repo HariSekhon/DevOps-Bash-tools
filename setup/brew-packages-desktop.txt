@@ -45,6 +45,7 @@ colordiff
 coreutils
 csshx
 diffpdf
+diff-so-fancy
 dnsmasq
 dnstop
 e2fsprogs
