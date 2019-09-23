@@ -19,6 +19,7 @@
 
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
+# shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 # JAVA_HOME needs to be set to use EC2 api tools
