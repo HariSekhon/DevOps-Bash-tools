@@ -57,6 +57,7 @@ ssh_func(){
     [ "$1" != "scp" ] && title "$LAST_TITLE"
 }
 alias ssh="ssh_func ssh"
+alias sshl="ssh-add -l"
 alias sshni="ssh_func ssh -oPreferredAuthentications=publickey -oStrictHostKeyChecking=no"
 alias scp="ssh_func scp"
 alias sftp="ssh_func sftp"
