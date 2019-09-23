@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #
 #  Author: Hari Sekhon
 #  Date: 2019-09-17
@@ -30,10 +31,10 @@ mkdir -pv "$bin"
 
 cd "$bin"
 
-if command -v parquet-cat; then
+if which parquet-cat; then
     echo "parquet-tools already found in \$PATH:"
     echo
-    dirname "$(command -v parquet-cat)"
+    dirname "$(which parquet-cat)"
 elif [ -f "$zipdir/parquet-cat" ]; then
     echo "parquet-tools already installed in local dir ($PWD/$zipdir)"
 else
