@@ -24,6 +24,14 @@
 # set location where you check out all the github repos
 export github=~/github
 
+# shellcheck disable=SC2230
+#if [ -z "${GIT_PAGER:-}" ] && \
+if which diff-so-fancy &>/dev/null; then
+    # pre-loading a pattern to 'n' / 'N' / '?' / '/' search through will force you in to pager and disregard -F / --quit-if-one-screen
+    #export GIT_PAGER="diff-so-fancy --color=yes | less -RFX --tabs=4 --pattern '^(Date|added|deleted|modified): '"
+    export GIT_PAGER="diff-so-fancy --color=yes | less -RFX --tabs=4"
+fi
+
 alias gitconfig="\$EDITOR ~/.gitconfig"
 alias gitignore="\$EDITOR ~/.gitignore_global"
 alias gitrc=gitconfig
@@ -39,6 +47,8 @@ alias up=pull
 alias u=up
 alias gitp="git push"
 alias gdiff="git diff"
+# bypasses diff-so-fancy
+alias gdiff2="git --no-pager diff"
 alias gdiffm="gdiff origin/master.."
 alias branch="githg branch"
 alias br=branch
