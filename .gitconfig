@@ -14,8 +14,12 @@
 [core]
     # detects filemode changes
     filemode = true
+    # defaults to $VISUAL or $EDITOR which is set in .bash.d/env.sh
+    #editor = vim
     # global .gitignore
     excludesfile = ~/.gitignore
+
+    #whitespace = trailing-space,space-before-tab
 
 [push]
 #   default = current
@@ -49,6 +53,23 @@
     # Show files ignored by git:
     ign = ls-files -o -i --exclude-standard
 
+    # avoid diff-so-fancy so we can create patches
+    patch = !git --no-pager diff --no-color
+
+[help]
+    # autocorrects git commands and executes the inferred command
+    # dangerous this just autocorrected my git rename to git rebase, lucky it errored out...
+    autocorrect = 0
+
+# ============================================================================ #
+#                               G i t   C o l o r
+# ============================================================================ #
+
+# colors: normal, black, red, green, yellow, blue, magenta, cyan, white
+# effects: bold, dim, ul, blink and reverse
+
+# if 2 colours given - 1st is foreground, 2nd is background
+
 [color]
     ui     = auto
     diff   = auto
@@ -58,19 +79,25 @@
     # for specific overrides, otherwise may break gitci and related functions
     status = auto
     branch = auto
+
 [color "branch"]
     current     = green ul
     local       = yellow
     remote      = red        # default
     plain       = white
+
 [color "diff"]
     new         = green
     old         = red        # default
     plain       = white
     whitespace  = yellow reverse
     func        = yellow
-    frag        = cyan       # default
-    meta        = green bold # default
+    #frag        = cyan       # default
+    #meta        = green bold # default
+    # from diff-so-fancy
+    meta = 11
+    frag = magenta bold
+
 [color "grep"]
     context     = white
     filename    = cyan
@@ -79,6 +106,7 @@
     match       = red
     selected    = yellow
     separator   = white
+
 [color "status"]
     added       = magenta
     changed     = red
@@ -86,16 +114,7 @@
     branch      = magenta blink
     nobranch    = red blink
 
-# stick this in ~/.gitconfig.local if diff-so-fancy is installed
-#[core]
-#	pager = diff-so-fancy | less --tabs=4 -RFX
-
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = red bold 52
-  newNormal = green bold
-  newHighlight = green bold 22
-
+# diff-so-fancy but I prefer most of my old preferences
 #[color "diff"]
 #  meta = 11
 #  frag = magenta bold
@@ -104,12 +123,34 @@
 #  new = green bold
 #  whitespace = red reverse
 
+# ============================================================================ #
+#                           D i f f - s o - f a n c y
+# ============================================================================ #
+
+# detected if installed and set via $GIT_PAGER in .bash.d/git.sh
+#[core]
+#	pager = diff-so-fancy | less --tabs=4 -RFX
+#[pager]
+    # don't set --pattern, overrides -F and doesn't quit less automatically for short diffs
+    #diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+    #diff = diff-so-fancy | less --tabs=4 -RFX
+
+    # truncate lines in less, only for 'git blame'
+    #blame = less -S
+
+
+[color "diff-highlight"]
+  #oldNormal = red bold
+  #oldHighlight = red bold 52
+  oldHighlight = normal red
+  #newNormal = green bold
+  #newNormal = green bold
+  newHighlight = normal green
+
 [diff-so-fancy]
   stripLeadingSymbols = false
 
-[help]
-    # dangerous this just autocorrected my git rename to git rebase, lucky it errored out...
-    autocorrect = 0
+# ============================================================================ #
 
 #[difftool "sourcetree"]
 #    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
