@@ -86,7 +86,7 @@ krun(){
 
 kexec(){
     local line
-    local name="$1"
+    local name="${1//\//-}"
     if [ -z "$name" ]; then
         echo "usage: kexec <name>"
         return 1
