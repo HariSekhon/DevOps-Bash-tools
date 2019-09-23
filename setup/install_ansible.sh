@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
+# command -v catches aliases, not suitable
 #
 #  Author: Hari Sekhon
 #  Date: 2019/09/20
@@ -33,8 +35,6 @@ if [ $EUID -eq 0 ]; then
 fi
 
 if [ -z "${UPDATE_ANSIBLE:-}" ]; then
-    # command -v catches aliases, not suitable
-    # shellcheck disable=SC2230
     if which ansible &>/dev/null; then
         echo "Ansible already installed"
         echo
@@ -51,13 +51,13 @@ if [ "$os" = "Darwin" ]; then
     brew update
     brew install ansible
 elif [ "$os" = "Linux" ]; then
-    if command -v dnf &>/dev/null; then
+    if which dnf &>/dev/null; then
         echo "Installing via DNF"
         $sudo dnf install -y ansible
-    elif command -v yum &>/dev/null; then
+    elif which yum &>/dev/null; then
         echo "Installing via Yum"
         $sudo yum install -y ansible
-    elif command -v apt &>/dev/null; then
+    elif which apt &>/dev/null; then
         echo "Installing via APT"
         if grep -q Ubuntu /etc/*release; then
             $sudo apt update
@@ -74,21 +74,21 @@ elif [ "$os" = "Linux" ]; then
             $sudo apt update
             $sudo apt install -y ansible
         fi
-    elif command -v apk &>/dev/null; then
+    elif which apk &>/dev/null; then
         echo "Installing via Apk"
         $sudo apk update
         $sudo apk add ansible
-    elif command -v emerge &>/dev/null; then
+    elif which emerge &>/dev/null; then
         echo "Installing via Emerge"
         $sudo emerge -av app-admin/ansible
-    elif command -v pip &>/dev/null; then
+    elif which pip &>/dev/null; then
         echo "Installing via Pip"
         pip install $pip_opts ansible
     else
         echo "Couldn't find Linux package manager!'"
         exit 1
     fi
-elif command -v pip &>/dev/null; then
+elif which pip &>/dev/null; then
     echo "Unsupported OS, installing via Pip"
     pip install $pip_opts ansible
 else
