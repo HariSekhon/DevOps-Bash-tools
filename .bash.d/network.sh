@@ -203,7 +203,7 @@ gg(){
     if [ -z "$*" ]; then
         browser &
     else
-        searchterm="$(sed 's/ /%20/g' <<< "$*")"
+        searchterm="${*// /%20}"
         browser "http://www.google.com/search?q=$searchterm" &
     fi
 }
@@ -216,7 +216,7 @@ netcraft(){
 wikipedia(){
     checkprog "firefox" || return 1
     local searchterm
-    searchterm="$(sed 's/ /%20/g' <<< "$*")"
+    searchterm="${*// /%20}"
     browser "http://en.wikipedia.org?search=$searchterm&go=Go" &
 }
 alias wiki=wikipedia
@@ -224,7 +224,7 @@ alias wiki=wikipedia
 definition(){
     checkprog "firefox" || return 1
     local searchterm
-    searchterm="$(sed 's/ /%20/g' <<< "$*")"
+    searchterm="${*// /%20}"
     # hl=en&q=test&btnI=I%27m+Feeling+Lucky&meta=&aq=f
     browser "http://www.google.co.uk/search?hl=en&q=definition+$searchterm&btnI=I%27m+Feeling+Lucky" &
 }
