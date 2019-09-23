@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -26,7 +27,7 @@ start_time="$(start_timer)"
 
 for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && continue
-    command -v pep8 &>/dev/null || sudo pip install pep8
+    which pep8 &>/dev/null || sudo pip install pep8
     # E265 - spaces after # - I prefer no space it makes it easier to commented code vs actual comments
     # E402 - import must be at top of file, but I like to do dynamic sys.path.append
     pep8 --show-source --show-pep8 --max-line-length=120 --ignore=E402,E265 "$x" | more

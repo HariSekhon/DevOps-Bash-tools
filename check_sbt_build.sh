@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -29,7 +30,7 @@ section "S B T"
 
 start_time="$(start_timer)"
 
-if command -v sbt &>/dev/null; then
+if which sbt &>/dev/null; then
     find "${1:-.}" -name build.sbt |
     grep -v '/target/' |
     sort |

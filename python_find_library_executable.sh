@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -45,4 +46,4 @@ if [ -d "$bin" ]; then
     export PATH="$bin:$PATH"
 fi
 
-command -v "$@" | head -n1
+which "$@" | head -n1

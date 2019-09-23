@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -29,7 +30,7 @@ section "M a v e n"
 
 start_time="$(start_timer)"
 
-if command -v mvn &>/dev/null; then
+if which mvn &>/dev/null; then
     find "${1:-.}" -name pom.xml |
     grep -v '/target/' |
     while read -r pom; do

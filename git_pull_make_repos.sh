@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -42,7 +43,7 @@ fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
     set +e
-    JAVA_HOME="$(command -v java 2>/dev/null)/.."
+    JAVA_HOME="$(which java 2>/dev/null)/.."
     if [ -z "${JAVA_HOME:-}" ]; then
         JAVA_HOME="$(type java 2>/dev/null | sed 's/java is //; s/hashed //; s/[()]//g')"
     fi

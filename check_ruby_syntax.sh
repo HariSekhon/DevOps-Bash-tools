@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -29,7 +30,7 @@ section "Ruby Syntax Checks"
 
 start_time="$(start_timer)"
 
-if command -v ruby &>/dev/null; then
+if which ruby &>/dev/null; then
     for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.rb' | sort); do
         isExcluded "$x" && continue
         echo -n "$x: "

@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -47,7 +48,8 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    if command -v dnf >/dev/null 2>&1; then
+    # shellcheck disable=SC2230
+    if which dnf >/dev/null 2>&1; then
         # dnf exists if any of the packages aren't found
         for package in $packages; do
             rpm -q "$package" || $SUDO yum install -y "$package" || :

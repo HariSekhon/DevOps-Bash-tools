@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -34,7 +35,7 @@ if [ -n "${NOPYLINT:-}" ]; then
 elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping PyLint error checks"
 else
-    if command -v pylint &>/dev/null; then
+    if which pylint &>/dev/null; then
         # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
         #prog_list="
         for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -74,7 +75,7 @@ get_pytools(){
     fi
 }
 
-validate_yaml_path="$(command -v validate_yaml.py || :)"
+validate_yaml_path="$(which validate_yaml.py || :)"
 
 # Ensure we have these at the minimum, these validate_*.py will cover
 # most configuration files as we dynamically find and call any validation programs further down
@@ -85,7 +86,7 @@ fi
 echo
 echo "Running validation programs:"
 echo
-validate_yaml_path="$(command -v validate_yaml.py || :)"
+validate_yaml_path="$(which validate_yaml.py || :)"
 if [ -z "$validate_yaml_path" ]; then
     echo "Failed to find validate_yaml.py in \$PATH ($PATH)"
     exit 1

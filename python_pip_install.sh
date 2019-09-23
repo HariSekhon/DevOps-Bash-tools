@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -60,7 +61,7 @@ user_opt(){
 
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
-    if command -v brew &>/dev/null; then
+    if which brew &>/dev/null; then
         # usually /opt/local
         brew_prefix="$(brew --prefix)"
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -38,7 +39,7 @@ check_shell_syntax(){
         echo "WARNING: '#!""/bin/bash' detected, consider using '#!/usr/bin/env bash' instead"
     fi
     bash -n "$1"
-    if command -v shellcheck &>/dev/null; then
+    if which shellcheck &>/dev/null; then
         shellcheck "$1" || :
     fi
     echo "=> OK"
@@ -53,7 +54,7 @@ recurse_dir(){
 
 start_time="$(start_timer)"
 
-if ! command -v shellcheck &>/dev/null; then
+if ! which shellcheck &>/dev/null; then
     echo "WARNING: shellcheck not installed, will only do basic checks"
     echo
 fi

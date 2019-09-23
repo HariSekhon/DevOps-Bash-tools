@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -29,7 +30,7 @@ section "M a k e"
 
 start_time="$(start_timer)"
 
-if command -v make &>/dev/null; then
+if which make &>/dev/null; then
     find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in |
     while read -r makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
