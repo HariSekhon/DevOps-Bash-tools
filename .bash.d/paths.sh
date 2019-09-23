@@ -22,7 +22,9 @@
 
 # add_PATH() is defined in .bashrc since it is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads
 
-[ -n "$PATHS_SET" ] && return
+if type add_PATHS &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
+    return
+fi
 
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
