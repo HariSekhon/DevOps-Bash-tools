@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -53,7 +54,7 @@ grepvim(){
 alias grepv=grepvim
 
 checkprog(){
-    if command -v "$1" &>/dev/null; then
+    if which "$1" &>/dev/null; then
         return 0
     else
         echo "$1 could not be found in path"
@@ -187,7 +188,7 @@ vw(){
         echo "usage: vw <filename>"
         return 1
     fi
-    path="$(command -v "$1")"
+    path="$(which "$1")"
     if [ -z "$path" ]; then
         echo "File not found in \$PATH: $1"
         return 1
@@ -199,7 +200,7 @@ vw(){
 fw(){
     local path
     for x in "$@"; do
-        path="$(command -v "$x")"
+        path="$(which "$x")"
         if [ -z "$path" ]; then
             return 1
         fi
@@ -217,7 +218,7 @@ cdwhich(){
         echo "usage: cdwhich programname"
         return 1
     fi
-    path="$(command -v "$1")"
+    path="$(which "$1")"
     if [ -z "$path" ]; then
         echo
         echo "$1 could not be found in \$PATH"
@@ -331,7 +332,7 @@ pdf(){
         return $?
     fi
     for x in acroread evince xpdf; do
-        if command -v "$x" &>/dev/null; then
+        if which "$x" &>/dev/null; then
             echo "opening with $x..."
             "$x" "$1" &
             return $?
