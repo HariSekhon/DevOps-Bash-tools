@@ -56,7 +56,7 @@ make install
   - [Scala](https://www.scala-lang.org/)
   - [Ruby](https://www.ruby-lang.org/en/)
   - [Bash](https://www.gnu.org/software/bash/) / Shell
-  - Misc (whitespace, custom enforced checks like not calling `quit()` in python etc)
+  - Misc (whitespace, custom enforced checks like not calling `quit()` in Python programs etc.)
 
 - Build System & CI linting:
 
