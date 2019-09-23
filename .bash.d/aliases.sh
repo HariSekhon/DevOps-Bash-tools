@@ -30,10 +30,10 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 [ -f ~/.aliases ] && . ~/.aliases
 
-export bashrc=~/.bashrc
 # srcdir defined in .bashrc
 # shellcheck disable=SC2154
-export bashrc2="$srcdir/.bashrc"
+export bashrc="$srcdir/.bashrc"
+export bashrc2=~/.bashrc
 alias r='. $bashrc'
 alias bashrc='$EDITOR $bashrc && r'
 alias bashrc2='$EDITOR $bashrc2 && r'
