@@ -48,7 +48,7 @@ alias up=pull
 alias u=up
 alias gitp="git push"
 alias gdiff="git diff"
-# bypasses diff-so-fancy
+# bypasses diff-so-fancy, could also just pipe through | cat to disable pager and color effects
 alias gdiff2="git --no-pager diff"
 alias gdiffm="gdiff origin/master.."
 alias branch="githg branch"
