@@ -33,7 +33,9 @@ if [ $EUID -eq 0 ]; then
 fi
 
 if [ -z "${UPDATE_ANSIBLE:-}" ]; then
-    if command -v ansible &>/dev/null; then
+    # command -v catches aliases, not suitable
+    # shellcheck disable=SC2230
+    if which ansible &>/dev/null; then
         echo "Ansible already installed"
         echo
         echo "To update ansible, set the below and then re-run this script"
