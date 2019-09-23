@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -81,7 +82,7 @@ duall(){
     sudo du -ax / | sort -k1n | tail -n 50
 }
 alias dua=duall
-if command -v brew &>/dev/null; then
+if which brew &>/dev/null; then
     brew_prefix="$(brew --prefix)"
     if [ -f "$brew_prefix/etc/bash_completion" ]; then
         # shellcheck disable=SC1090
