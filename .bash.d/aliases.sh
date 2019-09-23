@@ -35,6 +35,7 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 export bashrc="$srcdir/.bashrc"
 export bashrc2=~/.bashrc
 alias r='. $bashrc'
+alias rq='set +x; . $bashrc; set -x'
 alias bashrc='$EDITOR $bashrc && r'
 alias bashrc2='$EDITOR $bashrc2 && r'
 alias vimrc='$EDITOR ~/.vimrc'
