@@ -38,5 +38,8 @@ while read -r ssh_key; do
         echo "$ssh_key from GitHub" >> "$authorized_keys"
     fi
     echo
+    echo "ensuring correct 0600 permissions applied to $authorized_keys"
+    chmod 0600 "$authorized_keys"
+    echo
 done < <("$srcdir/../github_get_user_ssh_public_key.sh")
 echo Done
