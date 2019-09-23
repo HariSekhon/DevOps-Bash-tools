@@ -46,6 +46,12 @@ pg(){
     grep -v grep
 }
 
+grepvim(){
+    # shellcheck disable=SC2046
+    vim $(git grep -i "$*" | sed 's/:.*//')
+}
+alias grepv=grepvim
+
 checkprog(){
     if command -v "$1" &>/dev/null; then
         return 0
@@ -91,11 +97,14 @@ ptop(){
         return 1
     fi
     local pids
-    pids="$(pgrep -f "$(sed 's/ /|/g' <<< "$*")")"
+    #pids="$(pgrep -f "$(sed 's/ /|/g' <<< "$*")")"
+    pids="$(pgrep -f "${*// /|}")"
     local pid_args
     if [ -n "$APPLE" ]; then
+        # shellcheck disable=SC2001
         pid_args="$(sed 's/^/-pid /' <<< "$pids")"
     else
+        # shellcheck disable=SC2001
         pid_args="$(sed 's/^/-p /' <<< "$pids")"
     fi
     if [ -z "$pids" ]; then
@@ -135,7 +144,8 @@ alias topcmds=topcommands
 f(){
     local grep=""
     # shellcheck disable=SC2013
-    for x in $(sed 's/[^A-Za-z0-9]/ /g' <<< "$*"); do
+    #for x in $(sed 's/[^A-Za-z0-9]/ /g' <<< "$*"); do
+    for x in "${@//[^A-Za-z]/_}"; do
         if [[ "$x" =~ [a-zA-Z0-9] ]]; then
             grep="$grep | grep -i --color=auto $x"
         fi
@@ -274,6 +284,7 @@ abspath(){
         echo "NO PATH GIVEN!"
         return 1
     fi
+    # shellcheck disable=SC2001
     sed 's@^\./@'"$PWD"'/@;
          s@^\([^\./]\)@'"$PWD"'/\1@;
          s@^\.\./@'"${PWD%/*}"'/@;
