@@ -20,7 +20,7 @@
 
 # general path additions that aren't big enough to have their own <technology>.sh file
 
-# add_PATH() is defined in .bashrc since it is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads
+# this is sourced in .bashrc before .bash.d/*.sh because add_PATH() is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads before it gets to this point in the .bash.d/*.sh lexically ordered list
 
 if type add_PATHS &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
     return
