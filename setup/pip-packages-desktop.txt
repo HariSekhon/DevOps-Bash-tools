@@ -12,8 +12,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# try to use OS package manager instead - only pip install if too old or not available
+# use install_ansible.sh instead now which will try to use OS package manager first and only use pip if not available
+# if OS package manager version is too old then consider installing newer version via pip
 #ansible
+
 awscli
 autopep8
 beautifulsoup4
