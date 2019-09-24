@@ -323,6 +323,7 @@ vagrant/mrepo
 vagrant/mx4j-*
 vagrant/mysql-connector-*
 vagrant/thrift-*
+venv/
 VirtualBox VMs/
 VirtualBoxShared
 visualvm*
