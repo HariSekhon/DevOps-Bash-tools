@@ -16,7 +16,19 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing CPAN Modules listed in file(s): $*"
+echo "Installing CPAN Modules"
+
+cpan_modules=""
+for x in "$@"; do
+    if [ -f "$x" ]; then
+        echo "adding cpan modules from file:  $x"
+        cpan_modules="$cpan_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
+        echo
+    else
+        cpan_modules="$cpan_modules $x"
+    fi
+    cpan_modules="$(tr ' ' ' \n' <<< "$cpan_modules" | sort -u | tr '\n' ' ')"
+done
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
@@ -29,8 +41,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
     export OPENSSL_INCLUDE=/usr/local/opt/openssl/include
     export OPENSSL_LIB=/usr/local/opt/openssl/lib
 fi
-
-cpan_modules="$(cat "$@" | sed 's/#.*//; /^[[:space:]]*$$/d' | sort -u)"
 
 SUDO=""
 if [ $EUID != 0 ] &&
