@@ -13,6 +13,7 @@
 *.avi
 *.bak
 *.bak.*
+*.bkp
 #*.bak.\d{4}-\d{2}-\d{1,2}_\d{2}-\d{2}-\d{2}
 *.bin
 *.bz2
@@ -473,7 +474,7 @@ fabric.properties
 
 # A self-extracting archive that uses the Bourne shell (sh).
 *.shar
-# A system for storing multiple files. LBR archives typically contained files processed by SQ, or the archive itself was compressed with SQ. LBR archives that were compressed with SQ ended with the extension .LQR	
+# A system for storing multiple files. LBR archives typically contained files processed by SQ, or the archive itself was compressed with SQ. LBR archives that were compressed with SQ ended with the extension .LQR
 *.LBR
 # An archive format originally used mainly for archiving and distribution of the exact, nearly-exact, or custom-modified contents of an optical storage medium such as a CD-ROM or DVD-ROM. However, it can be used to archive the contents of other storage media, selected partitions, folders, and/or files. The resulting archive is typically optimized for convenient rendering to (re-)writable CD or DVD media.
 *.iso
@@ -729,7 +730,7 @@ bin/*
 # Yamazaki zipper archive. Compression format used in DeepFreezer archiver utility created by Yamazaki Satoshi. Read and write support exists in TUGZip, IZArc and ZipZag
 *.yz1
 # The most widely used compression format on Microsoft Windows. Commonly used on Macintosh and Unix systems as well.
-# application/x-zoo 	zoo 	Multiple 	Multiple 	Yes 	
+# application/x-zoo 	zoo 	Multiple 	Multiple 	Yes
 *.zoo
 # Journaling (append-only) archive format with rollback capability. Supports deduplication and incremental update based on last-modified dates. Multi-threaded. Compresses in LZ77, BWT, and context mixing formats. Open source.
 *.zpaq
@@ -1395,7 +1396,7 @@ typings/
 # nuxt.js build output
 .nuxt
 
-# react / gatsby 
+# react / gatsby
 public/
 
 # vuepress build output
