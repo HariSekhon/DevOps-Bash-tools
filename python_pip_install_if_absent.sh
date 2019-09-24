@@ -44,7 +44,9 @@ for pip_module in $pip_modules; do
     # Cannot uninstall 'urllib3'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
     #
     #echo "checking if python module '$python_module' is installed"
-    if ! python -c "import $python_module" &>/dev/null; then
+    if python -c "import $python_module" &>/dev/null; then
+        echo "python module '$python_module' already installed, skipping..."
+    else
         echo "python module '$python_module' not installed, installing..."
         # want opts splitting
         # shellcheck disable=SC2086
