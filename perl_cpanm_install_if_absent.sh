@@ -40,8 +40,10 @@ fi
 
 for cpan_module in $cpan_modules; do
     perl_module="${cpan_module%%@*}"
-    if ! perl -e "use $perl_module;" &>/dev/null; then
-        echo "Installing $perl_module"
+    if perl -e "use $perl_module;" &>/dev/null; then
+        echo "perl cpan module '$perl_module' already installed, skipping..."
+    else
+        echo "installing perl cpan module '$perl_module'"
         if [ "$(uname -s)" = "Darwin" ]; then
             # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly
             $SUDO \
