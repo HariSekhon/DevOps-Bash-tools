@@ -78,6 +78,10 @@ git-clean:
 	@printf "\n\n%s" "If you're happy with this list, run:"
 	@printf "\n\n%s\n\n" "git clean -f -d"
 
+.PHONY: gitignore
+gitignore:
+	$(BASH_TOOLS)/update_gitignore.io.sh
+
 .PHONY: btest
 btest: bash-test
 	:
