@@ -94,6 +94,7 @@ rdesktop
 readline
 snappy
 sqlite
+ssllabs-scan
 thrift
 tmux
 # done by SDKMan now
