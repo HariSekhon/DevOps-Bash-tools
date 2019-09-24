@@ -363,6 +363,9 @@ wordlists/users.weighted
 #
 # ============================================================================ #
 
+
+
+
 # Created by https://www.gitignore.io/api/ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
 # Edit at https://www.gitignore.io/?templates=ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
 
@@ -448,7 +451,14 @@ fabric.properties
 # *.ipr
 
 # Sonarlint plugin
-.idea/sonarlint
+.idea/**/sonarlint/
+
+# SonarQube Plugin
+.idea/**/sonarIssues.xml
+
+# Markdown Navigator plugin
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator/
 
 ### Archive ###
 
@@ -463,7 +473,7 @@ fabric.properties
 
 # A self-extracting archive that uses the Bourne shell (sh).
 *.shar
-# A system for storing multiple files. LBR archives typically contained files processed by SQ, or the archive itself was compressed with SQ. LBR archives that were compressed with SQ ended with the extension .LQR
+# A system for storing multiple files. LBR archives typically contained files processed by SQ, or the archive itself was compressed with SQ. LBR archives that were compressed with SQ ended with the extension .LQR	
 *.LBR
 # An archive format originally used mainly for archiving and distribution of the exact, nearly-exact, or custom-modified contents of an optical storage medium such as a CD-ROM or DVD-ROM. However, it can be used to archive the contents of other storage media, selected partitions, folders, and/or files. The resulting archive is typically optimized for convenient rendering to (re-)writable CD or DVD media.
 *.iso
@@ -719,7 +729,7 @@ bin/*
 # Yamazaki zipper archive. Compression format used in DeepFreezer archiver utility created by Yamazaki Satoshi. Read and write support exists in TUGZip, IZArc and ZipZag
 *.yz1
 # The most widely used compression format on Microsoft Windows. Commonly used on Macintosh and Unix systems as well.
-# application/x-zoo 	zoo 	Multiple 	Multiple 	Yes
+# application/x-zoo 	zoo 	Multiple 	Multiple 	Yes 	
 *.zoo
 # Journaling (append-only) archive format with rollback capability. Supports deduplication and incremental update based on last-modified dates. Multi-threaded. Compresses in LZ77, BWT, and context mixing formats. Open source.
 *.zpaq
@@ -912,7 +922,7 @@ flycheck_*.el
 
 ### GPG ###
 secring.*
-
+**/.gnupg/*.gpg
 
 ### DiskImage ###
 *.toast
@@ -1039,6 +1049,10 @@ secring.*
 
 # Sonarlint plugin
 
+# SonarQube Plugin
+
+# Markdown Navigator plugin
+
 ### Java ###
 # Compiled class file
 *.class
@@ -1110,6 +1124,10 @@ hs_err_pid*
 
 # Sonarlint plugin
 
+# SonarQube Plugin
+
+# Markdown Navigator plugin
+
 ### JMeter ###
 # JMeter common ignore files
 # http://jmeter.apache.org/
@@ -1129,9 +1147,12 @@ user.properties
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
 
+# IPython
+profile_default/
+ipython_config.py
+
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
-#
 
 ### KDiff3 ###
 *.BACKUP.*
@@ -1268,6 +1289,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
 
 ### Mercurial ###
 .hg/
@@ -1372,6 +1394,9 @@ typings/
 
 # nuxt.js build output
 .nuxt
+
+# react / gatsby 
+public/
 
 # vuepress build output
 .vuepress/dist
@@ -1555,6 +1580,7 @@ modules.xml
 *.ipr
 
 # Sonarlint plugin
+.idea/sonarlint
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -1609,15 +1635,6 @@ coverage.xml
 *.mo
 *.pot
 
-# Django stuff:
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
-# Flask stuff:
-instance/
-.webassets-cache
-
 # Scrapy stuff:
 .scrapy
 
@@ -1625,12 +1642,6 @@ instance/
 docs/_build/
 
 # PyBuilder
-
-# Jupyter Notebook
-
-# IPython
-profile_default/
-ipython_config.py
 
 # pyenv
 .python-version
@@ -1648,20 +1659,16 @@ celerybeat-schedule
 # SageMath parsed files
 *.sage.py
 
-# Environments
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
-
 # Spyder project settings
 .spyderproject
 .spyproject
 
 # Rope project settings
 .ropeproject
+
+# Mr Developer
+.mr.developer.cfg
+.pydevproject
 
 # mkdocs documentation
 /site
@@ -1807,6 +1814,7 @@ build-iPhoneOS/
 build-iPhoneSimulator/
 
 ## Specific to RubyMotion (use of CocoaPods):
+#
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
@@ -1863,7 +1871,6 @@ project/plugins/project/
 .ensime_cache/
 .ensime_lucene
 .generated-mima*
-.pydevproject
 .settings
 /lib/
 R-unit-tests.log
@@ -2017,4 +2024,3 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
-
