@@ -15,6 +15,7 @@
 
 cmake
 coreutils
+direnv
 gnu-sed
 jq
 jwhois
