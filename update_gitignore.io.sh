@@ -32,7 +32,7 @@ if [ -z "$url" ]; then
     exit 1
 fi
 
-url="$(head -n1 <<< "${url//.*https:/https:}")"
+url="$(head -n1 <<< "${url/*https:/https:}")"
 
 sed_regex="${header//\//\\/}"
 sed -ie "/$sed_regex/,\$d" .gitignore
