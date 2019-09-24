@@ -198,7 +198,11 @@ st(){
     else
         echo "not a revision controlled resource as far as bashrc can tell"
     fi
-  } | more -R -n "$((LINES - 3))"
+  } |
+  # more calls less on Mac, and gets stuck in interactive mode ignoring the less alias switches
+  #more -R -n "$((LINES - 3))"
+  #less -RFX
+  ${GIT_PAGER:-cat}
 }
 
 pull(){
