@@ -71,7 +71,7 @@ else
     #    npm install diff-so-fancy
     #else
         echo "Downloading diff-so-fancy fatpack to ~/bin"
-        mkdir -lv ~/bin
+        mkdir -pv ~/bin
         cd ~bin
         wget https://raw.githubusercontent.com/so-fancy/diff-so-fancy/master/third_party/build_fatpack/diff-so-fancy
         chmod +x diff-so-fancy
