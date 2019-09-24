@@ -47,7 +47,7 @@ for pip_module in $pip_modules; do
     if python -c "import $python_module" &>/dev/null; then
         echo "python module '$python_module' already installed, skipping..."
     else
-        echo "python module '$python_module' not installed, installing..."
+        echo "installing python module '$python_module'"
         # want opts splitting
         # shellcheck disable=SC2086
         "$srcdir/python_pip_install.sh" --ignore-installed urllib3 "$pip_module"
