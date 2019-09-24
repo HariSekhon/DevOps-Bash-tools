@@ -37,4 +37,4 @@ url="$(head -n1 <<< "${url/*https:/https:}")"
 sed_regex="${header//\//\\/}"
 sed -i.bak "/$sed_regex/,\$d" .gitignore
 
-curl "$url" >> .gitignore
+curl "$url" | sed 's/[[:space:]]*$//' | sed -n "/$sed_regex/,\$p" >> .gitignore
