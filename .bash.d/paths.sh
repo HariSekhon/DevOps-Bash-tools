@@ -70,6 +70,12 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+if [ -d ~/Library/Python ]; then
+    for x in ~/Library/Python/*/bin; do
+        [ -d "$x" ] || continue
+        add_PATH "$x"
+    done
+fi
 
 # do the same with MANPATH
 #if [ -d ~/man ]; then
