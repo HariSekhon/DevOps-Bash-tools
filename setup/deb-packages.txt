@@ -15,6 +15,7 @@
 
 bash
 curl
+#direnv
 git
 jq
 make
