@@ -84,7 +84,7 @@ gitignore:
 
 .PHONY: btest
 btest: bash-test
-	:
+	@:
 
 .PHONY: bash-test
 bash-test:
@@ -294,11 +294,11 @@ sonar:
 
 .PHONY: update
 update: update2 build
-	:
+	@:
 
 .PHONY: update2
 update2: update-no-recompile
-	:
+	@:
 
 .PHONY: update-no-recompile
 update-no-recompile:
@@ -310,7 +310,7 @@ update-submodules:
 	git submodule update --init --remote
 .PHONY: updatem
 updatem: update-submodules
-	:
+	@:
 
 .PHONY: docker-run
 docker-run:
@@ -318,7 +318,7 @@ docker-run:
 
 .PHONY: run
 run: docker-run
-	:
+	@:
 
 .PHONY: docker-mount
 docker-mount:
@@ -352,23 +352,23 @@ docker-mount-ubuntu:
 
 .PHONY: mount
 mount: docker-mount
-	:
+	@:
 
 .PHONY: mount-alpine
 mount-alpine: docker-mount-alpine
-	:
+	@:
 
 .PHONY: mount-debian
 mount-debian: docker-mount-debian
-	:
+	@:
 
 .PHONY: mount-centos
 mount-centos: docker-mount-centos
-	:
+	@:
 
 .PHONY: mount-ubuntu
 mount-ubuntu: docker-mount-ubuntu
-	:
+	@:
 
 # For quick testing only - for actual Dockerfile builds see https://hub.docker.com/u/harisekhon and Dockerfiles source repo https://github.com/harisekhon/Dockerfiles
 .PHONY: docker-alpine
@@ -389,7 +389,7 @@ docker-ubuntu:
 
 .PHONY: travis
 travis: travis-log
-	:
+	@:
 
 .PHONY: travis-log
 travis-log:
