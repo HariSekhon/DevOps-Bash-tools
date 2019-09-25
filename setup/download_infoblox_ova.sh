@@ -22,9 +22,11 @@ echo "Downloading InfoBlox OVA to ~/Downloads/"
 
 cd ~/Downloads/
 
-wget "$INFOBLOX_URL"
-
 infoblox_ova="${INFOBLOX_URL##*/}"
+
+if ! [ "$infoblox_ova" ]; then
+    wget "$INFOBLOX_URL"
+fi
 
 if [ "$(uname -s)" = Darwin ]; then
     echo "Opening $infoblox_ova, will run import in GUI and prompt you to accept license agreement"
