@@ -43,7 +43,11 @@ else
             # -O  - optimize
             # -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
             # -t  - warn on inconsistent use of tabs
-            python -O -3 -t -m py_compile "$x"
+            opts=""
+            if python -V | grep -q 'Python 2'; then
+                opts="-3"
+            fi
+            python -t -O $opts -m py_compile "$x"
         done
     fi
 fi
