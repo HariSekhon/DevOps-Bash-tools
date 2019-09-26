@@ -64,9 +64,11 @@
 .a
 .audacious/playlist.xspf
 .audacious/.thumbs
+.aws/credentials
 .bashrc_dynamichosts
 .bashrc_dynamichosts.src
 .bash_history
+.bash_sessions
 .bash_vars
 .boot2docker/
 .cache
@@ -187,6 +189,7 @@
 .PyCharm*/
 .pylint.d
 .python-eggs/
+.python_history
 .qt
 .qicon
 .qnicon
