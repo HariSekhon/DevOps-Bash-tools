@@ -29,11 +29,11 @@ date '+%F %T  Starting...'
 start_time="$(date +%s)"
 echo
 
-if type yum 2>/dev/null; then
+if command -v yum 2>/dev/null; then
     curl -L https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
     yum install -y java-sdk
     yum install -y --nogpgcheck sbt
-elif type apt-get 2>/dev/null; then
+elif command -v apt-get 2>/dev/null; then
     apt-get update
     apt-get install -y openjdk-8-jdk scala gnupg2
     echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
