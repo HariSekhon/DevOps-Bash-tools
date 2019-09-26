@@ -399,6 +399,10 @@ travis-log:
 travis-debug:
 	travis_debug_session.py $(REPO)
 
+.PHONY: browse
+browse:
+	@source .bash.d/network.sh; browser "https://github.com/$(REPO)"
+
 .PHONY: readme
 readme:
 	@source .bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
