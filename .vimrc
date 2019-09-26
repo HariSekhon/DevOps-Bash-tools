@@ -89,6 +89,7 @@ if has("autocmd")
     "autocmd Filetype * match Error /\s\+$/
 
     au BufNewFile,BufRead Makefile set noet
+    au BufNewFile,BufRead *Jenkinsfile* set filetype=groovy
 
     au BufNewFile,BufRead LICENSE set tw=80
 
