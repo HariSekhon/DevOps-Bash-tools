@@ -18,13 +18,13 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if type yum >/dev/null 2>&1; then
+if command -v yum >/dev/null 2>&1; then
     yum autoremove -y
     yum clean all
     rm -rf /var/cache/yum
-elif type apt-get >/dev/null 2>&1; then
+elif command -v apt-get >/dev/null 2>&1; then
     apt-get autoremove -y
     apt-get clean
-elif type apk >/dev/null 2>&1; then
+elif command -v apk >/dev/null 2>&1; then
     :
 fi
