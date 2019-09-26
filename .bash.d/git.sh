@@ -55,6 +55,7 @@ alias branch="githg branch"
 alias br=branch
 alias tag="githg tag"
 alias um=updatemodules
+alias gbrowse=gitbrowse
 
 # git fetch -p or git remote prune origin
 alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\*' -e 'master' | xargs git branch -d"
@@ -67,6 +68,10 @@ alias prod="switchbranch prod"
 alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
+
+gitbrowse(){
+    browser "$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
+}
 
 install_git_completion(){
     if ! [ -f ~/.git-completion.bash ]; then
