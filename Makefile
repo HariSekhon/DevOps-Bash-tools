@@ -13,7 +13,7 @@
 
 REPO := HariSekhon/DevOps-Bash-tools
 
-CODE_FILES := $(shell find . -type f -name '*.sh' -o -name .bashrc | sort)
+CODE_FILES := $(shell find . -type f -name '*.sh' -o -name '.bash*' | sort)
 
 CONF_FILES := \
     .ansible.cfg \
@@ -63,37 +63,31 @@ test:
 clean:
 	@echo Nothing to clean
 
-.PHONY: showcode
-showcode:
-	@$(MAKE) showfiles | grep -v -e '^\.' -e LICENSE -e '.*\.md'
-	@$(MAKE) showfiles | grep '\.bash'
+.PHONY: ls-scripts
+ls-scripts:
+	@$(MAKE) ls-code | grep -v -e '/kafka_wrappers/' -e '/lib/' -e '\.bash'
 
-.PHONY: showscripts
-showscripts:
-	@$(MAKE) showcode | grep -v -e '/kafka_wrappers/' -e '/lib/' -e '\.bash'
+.PHONY: lsscripts
+lsscripts: ls-scripts
+	@:
 
-.PHONY: wccode
-wccode:
-	@$(MAKE) showcode | xargs wc -l
-	@printf "Total code: "
-	@$(MAKE) showcode | wc -l
-
-.PHONY: wccode2
-wccode2:
-	@printf "Total code: "
-	@$(MAKE) showcode | wc -l
-	@printf "Total line count without # comments: "
-	@$(MAKE) showcode | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
+.PHONY: wc-scripts
+wc-scripts:
+	@$(MAKE) ls-scripts | xargs wc -l
+	@printf "Total Scripts: "
+	@$(MAKE) ls-scripts | wc -l
 
 .PHONY: wcscripts
-wcscripts:
-	@$(MAKE) showscripts | xargs wc -l
+wcscripts: wc-scripts
+	@:
+
+.PHONY: wc-scripts2
+wc-scripts2:
 	@printf "Total Scripts: "
-	@$(MAKE) showscripts | wc -l
+	@$(MAKE) ls-scripts | wc -l
+	@printf "Total line count without # comments: "
+	@$(MAKE) ls-scripts | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
 
 .PHONY: wcscripts2
-wcscripts2:
-	@printf "Total Scripts: "
-	@$(MAKE) showscripts | wc -l
-	@printf "Total line count without # comments: "
-	@$(MAKE) showscripts | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
+wcscripts2: wc-scripts2
+	@:
