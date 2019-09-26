@@ -63,9 +63,27 @@ test:
 clean:
 	@echo Nothing to clean
 
+.PHONY: showcode
+showcode:
+	@$(MAKE) showfiles | grep -v -e '^\.' -e LICENSE -e '.*\.md'
+	@$(MAKE) showfiles | grep '\.bash'
+
 .PHONY: showscripts
 showscripts:
-	@$(MAKE) showfiles | grep -v -e '/kafka_wrappers/' -e '/lib/' -e '\.bash'
+	@$(MAKE) showcode | grep -v -e '/kafka_wrappers/' -e '/lib/' -e '\.bash'
+
+.PHONY: wccode
+wccode:
+	@$(MAKE) showcode | xargs wc -l
+	@printf "Total code: "
+	@$(MAKE) showcode | wc -l
+
+.PHONY: wccode2
+wccode2:
+	@printf "Total code: "
+	@$(MAKE) showcode | wc -l
+	@printf "Total line count without # comments: "
+	@$(MAKE) showcode | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
 
 .PHONY: wcscripts
 wcscripts:
