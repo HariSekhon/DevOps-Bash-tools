@@ -407,12 +407,22 @@ browse:
 readme:
 	@source .bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
 
-.PHONY: showfiles
-showfiles:
+.PHONY: ls-files
+ls-files:
 	@echo $(CODE_FILES) | tr ' ' '\n' | sort
 
 .PHONY: files
-files: showfiles
+files: ls-files
+	@:
+
+.PHONY: ls-code
+ls-code:
+	@# TODO: port out my code and non-code lists and make this more generic
+	@$(MAKE) ls-files | grep -v -e '^\.' -e LICENSE -e '.*\.md' -e '.*\.txt'
+	@$(MAKE) ls-files | grep '\.bash'
+
+.PHONY: lscode
+lscode: ls-code
 	@:
 
 .PHONY: wc
@@ -428,6 +438,27 @@ wc2:
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l
 	@printf "Total line count without # comments:"
 	@sed 's/#.*//;/^[[:space:]]*$$/d' $(CODE_FILES) | wc -l
+
+.PHONY: wc-code
+wc-code:
+	@$(MAKE) ls-code | xargs wc -l
+	@printf "Total code: "
+	@$(MAKE) ls-code | wc -l
+
+.PHONY: wccode
+wccode: wc-code
+	@:
+
+.PHONY: wc-code2
+wc-code2:
+	@printf "Total code: "
+	@$(MAKE) ls-code | wc -l
+	@printf "Total line count without # comments: "
+	@$(MAKE) ls-code | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
+
+.PHONY: wccode
+wccode2: wc-code2
+	@:
 
 # finds .swp, would need to port out code lists
 #.PHONY: wcall
