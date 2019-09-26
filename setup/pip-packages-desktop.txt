@@ -23,6 +23,7 @@ kazoo
 nose
 pyflakes
 PyInstaller
+pylint
 pytest
 requests
 
