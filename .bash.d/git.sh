@@ -56,6 +56,7 @@ alias br=branch
 alias tag="githg tag"
 alias um=updatemodules
 alias gbrowse=gitbrowse
+type browse &>/dev/null || alias browse=gbrowse
 
 # git fetch -p or git remote prune origin
 alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\*' -e 'master' | xargs git branch -d"
