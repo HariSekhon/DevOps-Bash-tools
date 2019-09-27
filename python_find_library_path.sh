@@ -26,8 +26,13 @@ python="${PYTHON:-python}"
 find_python_sys_path(){
     cat <<EOF |
 from __future__ import print_function
+# more likely to be right than \$USER
+import getpass
 import sys
+user = getpass.getuser()
 for path in sys.path:
+    if user in path:
+        continue
     if path.endswith('/site-packages'):
         print(path)
         break
