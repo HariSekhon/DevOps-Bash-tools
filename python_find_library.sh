@@ -17,14 +17,33 @@
 # Shows the path to Python libraries given as arguments
 #
 # There is a better version of this in the adjacent DevOps Python Tools repo called find_python_library_path.py
-#
-# Doesn't work for 'sys' module due to lack of __file__ support - you must use full Python version above which works around that
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 python="${PYTHON:-python}"
 
+find_python_sys_path(){
+    cat <<EOF |
+from __future__ import print_function
+import sys
+for path in sys.path:
+    if path.endswith('/site-packages'):
+        print(path)
+        break
+EOF
+    "$python"
+    #sed 's,/python[[:digit:].]*/site-packages,,'
+}
+
+if [ $# -eq 0 ]; then
+    find_python_sys_path
+fi
+
 for arg; do
-    "$python" -c "from __future__ import print_function; import $arg; print($arg.__file__)"
+    if [ "$arg" = "sys" ]; then
+        find_python_sys_path
+    else
+        "$python" -c "from __future__ import print_function; import $arg; print($arg.__file__)"
+    fi
 done
