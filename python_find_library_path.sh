@@ -31,6 +31,8 @@ import getpass
 import sys
 user = getpass.getuser()
 for path in sys.path:
+    # don't return local /Users/\$USER/Library/Python/2.7/lib/python/site-packages
+    # as that is not the source of sys
     if user in path:
         continue
     if path.endswith('/site-packages'):
