@@ -22,7 +22,7 @@ export PATH := $(PATH):/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
 
 DOCKER_IMAGE := harisekhon/centos-github
 
-CODE_FILES := $(shell git ls-files)
+CODE_FILES := $(shell git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done)
 
 CPANM = cpanm
 
@@ -421,7 +421,7 @@ files: ls-files
 ls-code:
 	@# TODO: port out my code and non-code lists and make this more generic
 	@$(MAKE) ls-files | grep -v -e '^\.' -e LICENSE -e '.*\.md' -e '.*\.txt' `for x in $(CONF_FILES) $(shell git submodule | awk '{print $$2}'); do echo "-e $$x"; done`
-@$(MAKE) ls-files | grep '\.bash' || :
+	@$(MAKE) ls-files | grep '\.bash' || :
 
 .PHONY: lscode
 lscode: ls-code
