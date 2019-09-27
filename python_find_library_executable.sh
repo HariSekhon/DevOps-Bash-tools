@@ -46,4 +46,14 @@ if [ -d "$bin" ]; then
     export PATH="$bin:$PATH"
 fi
 
-which "$@" | head -n1
+set +o pipefail
+found="$(which "$@" | head -n 1)"
+set -o pipefail
+
+if [ -n "$found" ]; then
+    echo "$found"
+else
+    echo "no Python executable was found matching any of: $*" >&2
+    echo "\$PATH searched was: $PATH" >&2
+    exit 1
+fi
