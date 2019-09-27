@@ -177,8 +177,7 @@ is_mac(){
 is_jenkins(){
     if [ -n "${JENKINS_URL:-}" ] &&
        [ -n "${BUILD_NUMBER:-}" ] &&
-       [ -n "${BUILD_URL:-}" ]
-       ; then
+       [ -n "${BUILD_URL:-}" ]; then
         return 0
     fi
     return 1
