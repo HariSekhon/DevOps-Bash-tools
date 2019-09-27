@@ -32,8 +32,8 @@ for path in sys.path:
         print(path)
         break
 EOF
-    "$python"
-    #sed 's,/python[[:digit:].]*/site-packages,,'
+    "$python" #|
+    #sed 's,/python/*[[:digit:].]*/site-packages,,'
 }
 
 if [ $# -eq 0 ]; then
