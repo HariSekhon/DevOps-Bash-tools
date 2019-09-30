@@ -21,6 +21,7 @@ CONF_FILES := \
     .gitconfig \
     .gitignore \
     .my.cnf \
+    .screenrc \
     .toprc \
     .tmux.conf \
     .vimrc \
