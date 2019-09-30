@@ -55,7 +55,6 @@ alias branch="githg branch"
 alias br=branch
 alias tag="githg tag"
 alias um=updatemodules
-alias gitgc="du -sh .git; git gc --aggressive; du -sh .git"
 alias gbrowse=gitbrowse
 type browse &>/dev/null || alias browse=gbrowse
 
@@ -70,6 +69,16 @@ alias prod="switchbranch prod"
 alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
+
+gitgc(){
+    if ! [ -d .git ]; then
+        echo "not at top of a git repo, not .git/ directory found"
+        return 1
+    fi
+    du -sh .git
+    git gc --aggressive
+    du -sh .git
+}
 
 gitbrowse(){
     browser "$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
