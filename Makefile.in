@@ -403,11 +403,19 @@ travis-debug:
 
 .PHONY: browse
 browse:
-	@source .bash.d/network.sh; browser "https://github.com/$(REPO)"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
 
 .PHONY: readme
 readme:
-	@source .bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+
+.PHONY: startrack
+startrack:
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?u=$$(sed 's/\/.*//' <<< "$(REPO)")&r=$$(sed 's/.*\///' <<< "$(REPO)")"
+
+.PHONY: star
+star: startrack
+	@:
 
 .PHONY: ls-files
 ls-files:
