@@ -418,13 +418,26 @@ function dhcpdns(){
     #networksetup -setsearchdomains <networkservice> <domain1> [domain2]
 }
 
+get_wifi_interface(){
+    networksetup -listnetworkserviceorder |
+    grep "Hardware.*Wi-Fi" |
+    sed 's/.*: //;s/)$//'
+}
+
+get_wifi_network(){
+    networksetup -getairportnetwork "$(get_wifi_interface)" | sed 's/^Current Wi-Fi Network: //'
+}
+
+set_wifi_network(){
+    networksetup -setairportnetwork "$(get_wifi_interface)" "$*"
+}
+
+wifi(){
+    :
+}
+
 airport(){
-    local wifi_adapter
-    wifi_adapter="$(networksetup -listnetworkserviceorder |
-                    grep "Hardware.*Wi-Fi" |
-                    sed 's/.*: //;s/)$//'
-                   )"
-    networksetup -setairportpower "$wifi_adapter" "$1"
+    networksetup -setairportpower "$(get_wifi_interface)" "$1"
 }
 alias air=airport
 
