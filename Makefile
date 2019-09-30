@@ -37,6 +37,10 @@ build: system-packages aws
 .PHONY: install
 install: build bash python aws
 
+.PHONY: uninstall
+uninstall: bash-unlink
+	@:
+
 .PHONY: bash
 bash:
 	@setup/setup_bash.sh
@@ -46,6 +50,15 @@ bash:
 		ln -sv $$f "$$PWD/$$filename" ~ 2>/dev/null; \
 	done || :
 	@ln -sv $$f ~/.gitignore ~/.gitignore_global 2>/dev/null || :
+
+.PHONY: bash-unlink
+bash-unlink:
+	@for filename in $(CONF_FILES) .gitignore_global; do \
+		if [ -L ~/"$$filename" ]; then \
+			rm -fv ~/"$$filename"; \
+		fi; \
+	done || :
+	@echo "Must manually remove sourcing from ~/.bashrc and ~/.bash_profile"
 
 .PHONY: python
 python:
