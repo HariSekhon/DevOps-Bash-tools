@@ -39,7 +39,7 @@ install: build bash python aws
 
 .PHONY: uninstall
 uninstall: bash-unlink
-	@:
+	@echo "Not removing any system packages for safety"
 
 .PHONY: bash
 bash:
