@@ -208,7 +208,7 @@ st(){
   # more calls less on Mac, and gets stuck in interactive mode ignoring the less alias switches
   #more -R -n "$((LINES - 3))"
   #less -RFX
-  ${GIT_PAGER:-cat}
+  eval ${GIT_PAGER:-cat}
 }
 
 pull(){
