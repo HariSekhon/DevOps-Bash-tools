@@ -71,13 +71,13 @@ filetype plugin on
 " ============================================================================ "
 
 if has("autocmd")
-    " re-open at last cursor line
+    " re-open at last cursor line and center screen on the cursor line
     "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     autocmd BufReadPost *
       \ if line ("'\"") > 0 && line ("'\"") <= line ("$") |
       \    exe "normal! g`\"" |
+      \    exe "normal! g`\"zz" |
       \ endif
-
 
     " auto-strip trailing whitespace on write
     autocmd BufWritePre * %s/\s\+$//e
