@@ -55,7 +55,7 @@ alias branch="githg branch"
 alias br=branch
 alias tag="githg tag"
 alias um=updatemodules
-alias gitgc="git gc --aggressive"
+alias gitgc="du -sh .git; git gc --aggressive; du -sh .git"
 alias gbrowse=gitbrowse
 type browse &>/dev/null || alias browse=gbrowse
 
