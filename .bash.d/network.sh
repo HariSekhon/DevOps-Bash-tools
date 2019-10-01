@@ -431,7 +431,15 @@ get_wifi_network(){
 set_wifi_network(){
     networksetup -setairportnetwork "$(get_wifi_interface)" "$*"
 }
-#alias wifi=set_wifi_network
+
+wifi(){
+    if [ $# -gt 0 ]; then
+        airport on
+        set_wifi_network "$1"
+    else
+        get_wifi_network
+    fi
+}
 
 wifi_networks_preferred(){
     networksetup -listpreferredwirelessnetworks "$(get_wifi_interface)"
