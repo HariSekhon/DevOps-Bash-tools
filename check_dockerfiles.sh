@@ -41,6 +41,10 @@ elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping Dockerfile syntax checks"
     echo
 else
+    if ! command -v hadolint &>/dev/null; then
+        echo "hadolint not found in \$PATH, not running Dockerfile syntax checks"
+        return 0 &>/dev/null || exit 0
+    fi
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
