@@ -1,0 +1,26 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2019-10-01 16:14:15 +0100 (Tue, 01 Oct 2019)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  http://www.linkedin.com/in/harisekhon
+#
+
+ignored:
+  # Maintainer is fine
+  - DL4000
+  # dev images build on upstream latest tag
+  - DL3007
+  # apk add versions need not be pinned
+  - DL3018
+  #- SC1010
+
+trustedRegistries:
+  - docker.io
+  #- my-company.com:5000
