@@ -39,6 +39,7 @@
 
 # Install HomeBrew Desktop packages - one per line
 ansible
+ansible-lint
 bash-completion
 cmatrix
 colordiff
@@ -62,9 +63,12 @@ gradle
 #groovysdk
 imagemagick
 ipcalc
+# lints Dockerfiles
+hadolint
 haproxy
 iperf
 ipython
+jsonlint
 jq
 # no longer available
 #jwhois
