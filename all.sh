@@ -94,6 +94,12 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/check_no_tabs.sh"
 
+# TODO: enable later and tweak configs
+#. "$srcdir/check_ansible_playbooks.sh"
+#. "$srcdir/check_dockerfiles.sh"
+#. "$srcdir/check_json.sh"
+#. "$srcdir/check_yaml.sh"
+
 "$srcdir/check_pytools.sh"
 
 #for script in $(find . -name 'test*.sh'); do
