@@ -4,7 +4,7 @@
 #  Author: Hari Sekhon
 #  Date: 2019-02-15 12:51:17 +0000 (Fri, 15 Feb 2019)
 #
-#  https://github.com/harisekhon/nagios-plugins
+#  https://github.com/harisekhon/bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
