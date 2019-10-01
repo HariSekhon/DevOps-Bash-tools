@@ -433,11 +433,14 @@ set_wifi_network(){
 }
 
 wifi(){
-    if [ $# -gt 0 ]; then
+    if [ $# -eq 1 ]; then
         airport on
         set_wifi_network "$1"
-    else
+    elif [ $# -eq 1 ]; then
         get_wifi_network
+    else
+        echo "usage: wifi <network>"
+        return 1
     fi
 }
 
