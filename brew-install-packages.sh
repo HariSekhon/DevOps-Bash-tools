@@ -37,8 +37,12 @@ done
 # Sudo is not required as running Homebrew as root is extremely dangerous and no longer supported as
 # Homebrew does not drop privileges on installation you would be giving all build scripts full access to your system
 
+brew_update_opts=""
+if [ -n "${TRAVIS:-}" ]; then
+    brew_update_opts="-v"
+fi
 if [ -n "${NO_UPDATE:-}" ]; then
-    if ! brew update; then
+    if ! brew update $brew_update_opts; then
         if [ -n "${NO_FAIL:-}" ]; then
             :
         else
