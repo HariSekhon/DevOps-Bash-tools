@@ -30,7 +30,7 @@ section "S B T"
 
 start_time="$(start_timer)"
 
-if which sbt &>/dev/null; then
+if type -P sbt &>/dev/null; then
     find "${1:-.}" -name build.sbt |
     grep -v '/target/' |
     sort |

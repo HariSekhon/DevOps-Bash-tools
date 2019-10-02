@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/utils.sh"
 
 allbranches(){
-    if which uniq_order_preserved.pl &>/dev/null; then
+    if type -P uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
     else
         local uniq="sort | uniq"

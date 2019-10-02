@@ -107,7 +107,7 @@ type isExcluded &>/dev/null || . "$srcdir_bash_tools_utils/excluded.sh"
 
 check_bin(){
     local bin="${1:-}"
-    if ! which "$bin" &>/dev/null; then
+    if ! type -P "$bin" &>/dev/null; then
         echo "command '$bin' not found in \$PATH ($PATH)"
         exit 1
     fi
@@ -526,7 +526,7 @@ when_ports_available(){
     echo "waiting for up to $max_secs secs for port$plural '$ports' to become available, retrying at $retry_interval sec intervals"
     #echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
-    if which nc &>/dev/null; then
+    if type -P nc &>/dev/null; then
         try_number=0
         # special built-in that increments for script runtime, reset to zero exploit it here
         SECONDS=0
@@ -602,7 +602,7 @@ when_ports_down(){
     echo "waiting for up to $max_secs secs for port$plural '$ports' to go down, retrying at $retry_interval sec intervals"
     echo "cmd: ${cmd// \&\>\/dev\/null}"
     local down=0
-    if which nc &>/dev/null; then
+    if type -P nc &>/dev/null; then
         #for((i=1; i <= $max_tries; i++)); do
         try_number=0
         # special built-in that increments for script runtime, reset to zero exploit it here
@@ -660,7 +660,7 @@ when_url_content(){
     # special built-in that increments for script runtime, reset to zero exploit it here
     SECONDS=0
     # bash will interpolate from string for correct numeric comparison and safer to quote vars
-    if which curl &>/dev/null; then
+    if type -P curl &>/dev/null; then
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number + 1))
             timestamp "$try_number trying $url"

@@ -39,7 +39,7 @@ check_shell_syntax(){
         echo "WARNING: '#!""/bin/bash' detected, consider using '#!/usr/bin/env bash' instead"
     fi
     bash -n "$1"
-    if which shellcheck &>/dev/null; then
+    if type -P shellcheck &>/dev/null; then
         shellcheck "$1" || :
     fi
     echo "=> OK"
@@ -54,7 +54,7 @@ recurse_dir(){
 
 start_time="$(start_timer)"
 
-if ! which shellcheck &>/dev/null; then
+if ! type -P shellcheck &>/dev/null; then
     echo "WARNING: shellcheck not installed, will only do basic checks"
     echo
 fi

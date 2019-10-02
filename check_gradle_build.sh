@@ -30,7 +30,7 @@ section "G r a d l e"
 
 start_time="$(start_timer)"
 
-if which gradle &>/dev/null; then
+if type -P gradle &>/dev/null; then
     find "${1:-.}" -name build.gradle |
     grep -v '/build/' |
     sort |

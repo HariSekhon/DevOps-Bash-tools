@@ -25,13 +25,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if which diff-so-fancy &>/dev/null; then
+if type -P diff-so-fancy &>/dev/null; then
     echo "diff-so-fancy is already installed!"
     #exit 0
 fi
 
 if [ "$(uname -s)" = Darwin ]; then
-    if ! which brew &>/dev/null; then
+    if ! type -P brew &>/dev/null; then
         "$srcdir/install_homebrew.sh"
     fi
     brew update

@@ -61,7 +61,7 @@ user_opt(){
 
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
-    if which brew &>/dev/null; then
+    if type -P brew &>/dev/null; then
         # usually /opt/local
         brew_prefix="$(brew --prefix)"
 

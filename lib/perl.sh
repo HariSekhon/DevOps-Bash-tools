@@ -22,7 +22,7 @@ set -eu
 perl="perl"
 
 # shellcheck disable=SC2230
-if ! which $perl &>/dev/null; then
+if ! type -P $perl &>/dev/null; then
     return 0 &>/dev/null || :
     exit 0
 fi

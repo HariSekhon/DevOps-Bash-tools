@@ -31,7 +31,7 @@ mkdir -pv "$bin"
 
 cd "$bin"
 
-if which parquet-cat &>/dev/null; then
+if type -P parquet-cat &>/dev/null; then
     echo "parquet-tools already found in \$PATH:"
     echo
     dirname "$(which parquet-cat)"
