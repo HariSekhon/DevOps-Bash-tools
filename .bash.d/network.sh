@@ -436,7 +436,7 @@ wifi(){
     if [ $# -eq 1 ]; then
         airport on
         set_wifi_network "$1"
-    elif [ $# -eq 1 ]; then
+    elif [ $# -eq 0 ]; then
         get_wifi_network
     else
         echo "usage: wifi <network>"
