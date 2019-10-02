@@ -48,13 +48,16 @@ aws_env(){
     # export AWS_SESSION_TOKEN - for multi-factor authentication
     local boto=~/.boto
     local aws_credentials=~/.aws/credentials
+    local aws_token=~/.aws/token
     if [ -f "$boto" ]; then
+        echo "loading creds from $boto"
         eval "$(
         for key in aws_access_key_id aws_secret_access_key aws_session_token; do
             awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' "$boto"
         done
         )"
     elif [ -f "$aws_credentials" ]; then
+        echo "loading creds from $aws_credentials"
         eval "$(
         for key in aws_access_key_id aws_secret_access_key aws_session_token; do
             awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' "$aws_credentials"
@@ -63,4 +66,48 @@ aws_env(){
     else
         echo "no credentials found - didn't find $boto or $aws_credentials"
     fi
+    if [ -f "$aws_token" ]; then
+        echo "sourcing $aws_token"
+        source "$aws_token"
+    fi
+}
+
+aws_unenv(){
+    unset AWS_ACCESS_KEY
+    unset AWS_SECRET_KEY
+    unset AWS_SESSION_TOKEN
+}
+
+aws_token(){
+    local output
+    local token
+    if [ $# -eq 0 ]; then
+        echo "usage: aws_token <token_from_mfa_device> [<other_options>]"
+        return 1
+    fi
+    if [ -z "${AWS_MFA_ARN:-}" ]; then
+        echo "environment variable \$AWS_MFA_ARN not set - you need to"
+        echo
+        echo "export AWS_MFA_ARN=arn:aws:iam::<123456789012>:mfa/<user>"
+        echo
+        echo "(you might want to put that in your ~/.bashrc.local or similar)"
+        return 1
+    fi
+    #aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token
+    output="$(aws sts get-session-token --serial-number "$AWS_MFA_ARN" --duration-seconds "${AWS_STS_DURATION_SECS:-129600}" --token-code "$@")"
+    result=$?
+    echo "$output"
+    if [ $result -ne 0 ]; then
+        return $result
+    fi
+    if type -P jq &>/dev/null; then
+        token="$(jq -r '.Credentials.SessionToken' <<< "$output")"
+    else
+        token-"$(awk -F: '/SessionToken/{print $2}' | sed 's/"//')"
+    fi
+    export AWS_SESSION_TOKEN="$token"
+    echo "exported AWS_SESSION_TOKEN"
+    echo "export AWS_SESSION_TOKEN=$token" > ~/.aws/token
+    echo
+    echo "you can now use AWS CLI normally"
 }
