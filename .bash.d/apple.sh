@@ -82,7 +82,7 @@ duall(){
     sudo du -ax / | sort -k1n | tail -n 50
 }
 alias dua=duall
-if which brew &>/dev/null; then
+if type -P brew &>/dev/null; then
     brew_prefix="$(brew --prefix)"
     if [ -f "$brew_prefix/etc/bash_completion" ]; then
         # shellcheck disable=SC1090

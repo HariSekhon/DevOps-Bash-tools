@@ -141,7 +141,7 @@ GOPATH="$github/go-tools"
 # /usr/local/go/src/runtime/internal/sys (from $GOROOT)
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
 # shellcheck disable=SC2230
-if which go &>/dev/null; then
+if type -P go &>/dev/null; then
     if [ -n "$APPLE" ]; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(which go)")")")"
     else

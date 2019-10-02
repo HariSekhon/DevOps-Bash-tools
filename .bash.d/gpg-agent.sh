@@ -23,7 +23,7 @@
 
 gpg_agent(){
     if [ $UID != 0 ]; then
-        if which gpg-agent &>/dev/null; then
+        if type -P gpg-agent &>/dev/null; then
             GPG_ENV_FILE=~/.gpg-agent.env
             if [ -f "$GPG_ENV_FILE" ]; then
                 # shellcheck disable=SC1090

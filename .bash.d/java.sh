@@ -70,13 +70,13 @@ if [ -n "${APPLE:-}" ]; then
 elif [ -n "$LINUX" ]; then
     if [ -z "$JAVA_HOME" ]; then
         # RHEL / CentOS
-        if which alternatives &>/dev/null; then
+        if type -P alternatives &>/dev/null; then
             java_home="$(alternatives --list | awk '/^java[[:space:]]/{print $3; exit}' | sed 's,\(/jre\)\?/bin/java$,,')"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
         # Debian / Ubuntu
-        elif which update-alternatives &>/dev/null; then
+        elif type -P update-alternatives &>/dev/null; then
             java_home="$(update-alternatives --list java  | sed 's,\(/jre\)\?/bin/java$,,' | head -n1)"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"

@@ -27,7 +27,7 @@ export github=~/github
 export GIT_PAGER="less -RFX --tabs=4"
 # shellcheck disable=SC2230
 #if [ -z "${GIT_PAGER:-}" ] && \
-if which diff-so-fancy &>/dev/null; then
+if type -P diff-so-fancy &>/dev/null; then
     # pre-loading a pattern to 'n' / 'N' / '?' / '/' search through will force you in to pager and disregard -F / --quit-if-one-screen
     #export GIT_PAGER="diff-so-fancy --color=yes | less -RFX --tabs=4 --pattern '^(Date|added|deleted|modified): '"
     export GIT_PAGER="diff-so-fancy --color=yes | $GIT_PAGER"

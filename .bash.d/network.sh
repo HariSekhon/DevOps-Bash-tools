@@ -50,9 +50,9 @@ alias g=google
 alias wg="watch_url.pl google.com"
 
 n(){
-    if which host &>/dev/null; then
+    if type -P host &>/dev/null; then
         host "$@"
-    elif which nslookup &>/dev/null; then
+    elif type -P nslookup &>/dev/null; then
         nslookup "$@"
     else
         echo "neither host nor nslookup were found in the path"
@@ -282,10 +282,10 @@ rdp(){
         if [ "$(xdpyinfo | awk '/dimensions/ {print $2}' | sed 's/x.*//')" -gt 1024 ]; then
             resolution="1024x768"
         fi
-        if which krdc &>/dev/null; then
+        if type -P krdc &>/dev/null; then
             krdc "rdp:/$WINDOWSDOMAIN\\$WINDOWSUSER@$*" &
             exit 0
-        elif which rdesktop &>/dev/null; then
+        elif type -P rdesktop &>/dev/null; then
             rdesktop -u "$WINDOWSUSER" -d "$WINDOWSDOMAIN" "$@" -g "$resolution" &
             exit 0
         else
@@ -307,9 +307,9 @@ vncwho() {
 }
 
 vnc(){
-    if which krdc &>/dev/null; then
+    if type -P krdc &>/dev/null; then
         krdc "vnc:/$1" &
-    elif which vncviewer &>/dev/null; then
+    elif type -P vncviewer &>/dev/null; then
         vncviewer "$1" &
     else
         echo "could not find krdc or vncviewer in \$PATH"

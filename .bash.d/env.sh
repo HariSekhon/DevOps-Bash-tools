@@ -63,11 +63,11 @@ export varfile=~/.bash_vars
 if [ -n "$APPLE" ]; then
     #BROWSER=open
     unset BROWSER
-elif which google-chrome &>/dev/null; then
+elif type -P google-chrome &>/dev/null; then
     BROWSER=google-chrome
-elif which firefox &>/dev/null; then
+elif type -P firefox &>/dev/null; then
     BROWSER=firefox
-elif which konqueror &>/dev/null; then
+elif type -P konqueror &>/dev/null; then
     BROWSER=konqueror
 else
     BROWSER=UNKNOWN
