@@ -54,8 +54,21 @@ alias se=screenrc
 #xe(){ xemacs $@ & }
 #alias x=xe
 
+alias mv='mv -i'
+alias cp='cp -i'
+#alias rm='rm -i'
+alias less='less -RFXig'
+alias l='less'
+alias m='more'
+alias vi='vim'
+alias v='vim'
+alias grep='grep --color=auto'
+
+alias hosts='sudo $EDITOR /etc/hosts'
+
 alias path="echo \$PATH | tr ':' '\\n' | more"
 alias paths=path
+
 alias tmp="cd /tmp"
 
 # not as compatible, better to call pypy explicitly or in #! line
@@ -110,15 +123,6 @@ alias ....='cd ../../..'
 # use bare 'cd' instead, it's more standard
 #alias ~='cd ~'
 
-alias mv='mv -i'
-alias cp='cp -i'
-#alias rm='rm -i'
-alias less='less -RFXig'
-alias l='less'
-alias m='more'
-alias vi='vim'
-alias grep='grep --color=auto'
-alias hosts='sudo $EDITOR /etc/hosts'
 alias screen='screen -T $TERM'
 #alias mt=multitail
 #alias halt='shutdown -h now -P'
