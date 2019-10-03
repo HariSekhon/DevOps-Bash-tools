@@ -27,6 +27,7 @@ PyInstaller
 pylint
 pytest
 requests
+yamllint
 
 #avro
 #hadoopy
