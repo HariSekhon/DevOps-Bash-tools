@@ -3,7 +3,7 @@
 #  Date: 2011-06-01 16:58:33 +0000 (Wed, 01 Jun 2011)
 #
 
-# brew cask install $x
+# CASK=1 ../brew-install-packages.sh brew-packages-desktop-casks.txt
 
 atom
 minikube
