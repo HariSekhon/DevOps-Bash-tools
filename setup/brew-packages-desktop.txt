@@ -36,6 +36,7 @@
 # brew cask install minikube
 # brew cask install minishift
 # brew cask install podman
+# brew cask install atom
 
 # Install HomeBrew Desktop packages - one per line
 ansible
