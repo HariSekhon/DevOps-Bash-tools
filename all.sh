@@ -81,7 +81,7 @@ bash_tools_start_time="$(start_timer)"
 # this is usually run after build, no point testing again
 #. "$srcdir/check_sbt_build.sh"
 
-. "$srcdir/check_shell_syntax.sh"
+. "$srcdir/check_bash_syntax.sh"
 
 . "$srcdir/check_bash_arrays.sh"
 
