@@ -51,14 +51,19 @@ if [ -n "${NO_UPDATE:-}" ]; then
     fi
 fi
 
+cask=""
+if [ -n "${CASK:-}" ]; then
+    cask=cask
+fi
+
 # Fails if any of the packages are already installed, so you'll probably want to ignore and continue and detect missing
 # package later in build system if it's a problem eg. resulting in missing headers later in build
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $packages; do
-        brew install "$package" || :
+        brew $cask install "$package" || :
     done
 else
     # want splitting
     # shellcheck disable=SC2086
-    brew install $packages
+    brew $cask install $packages
 fi
