@@ -26,5 +26,5 @@ elif command -v apt-get >/dev/null 2>&1; then
     apt-get autoremove -y
     apt-get clean
 elif command -v apk >/dev/null 2>&1; then
-    :
+    rm -fr /etc/apk/cache /var/cache/apk
 fi
