@@ -43,24 +43,27 @@ aws_useast(){
 
 # Storing creds in one place in Boto creds file, pull them straight from there
 aws_env(){
+    local section="${1:-default}"
     # export AWS_ACCESS_KEY
     # export AWS_SECRET_KEY
     # export AWS_SESSION_TOKEN - for multi-factor authentication
-    local boto=~/.boto
     local aws_credentials=~/.aws/credentials
     local aws_token=~/.aws/token
-    if [ -f "$boto" ]; then
+    local boto=~/.boto
+    if [ -f "$aws_credentials" ]; then
+        echo "loading [$section] creds from $aws_credentials"
+        eval "$(
+        for key in aws_access_key_id aws_secret_access_key aws_session_token; do
+            sed -n "/[[:space:]]*\\[$section\\]/,/^[[:space:]]*\\[/p" "$aws_credentials" |
+            awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}'
+        done
+        )"
+    # older boto creds
+    elif [ -f "$boto" ]; then
         echo "loading creds from $boto"
         eval "$(
         for key in aws_access_key_id aws_secret_access_key aws_session_token; do
             awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' "$boto"
-        done
-        )"
-    elif [ -f "$aws_credentials" ]; then
-        echo "loading creds from $aws_credentials"
-        eval "$(
-        for key in aws_access_key_id aws_secret_access_key aws_session_token; do
-            awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' "$aws_credentials"
         done
         )"
     else
@@ -68,6 +71,7 @@ aws_env(){
     fi
     if [ -f "$aws_token" ]; then
         echo "sourcing $aws_token"
+        # shellcheck disable=SC1090
         source "$aws_token"
     fi
 }
