@@ -67,7 +67,7 @@ else
     # npm WARN !invalid#1 No README data
     # npm WARN !invalid#1 No license field.
     #
-    #if which npm &>/dev/null; then
+    #if type -P npm &>/dev/null; then
     #    npm install diff-so-fancy
     #else
         echo "Downloading diff-so-fancy fatpack to ~/bin"
