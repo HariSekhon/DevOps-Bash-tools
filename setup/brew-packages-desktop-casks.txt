@@ -9,3 +9,4 @@ atom
 minikube
 minishift
 podman
+vagrant
