@@ -10,3 +10,4 @@ minikube
 minishift
 podman
 vagrant
+virtualbox
