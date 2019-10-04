@@ -25,29 +25,29 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if which diff-so-fancy &>/dev/null; then
+if type -P diff-so-fancy &>/dev/null; then
     echo "diff-so-fancy is already installed!"
     #exit 0
 fi
 
 if [ "$(uname -s)" = Darwin ]; then
-    if ! which brew &>/dev/null; then
+    if ! type -P brew &>/dev/null; then
         "$srcdir/install_homebrew.sh"
     fi
     brew update
     brew install diff-so-fancy
 else
 #     if [ "$(uname -s)" = Linux ]; then
-#         if ! which npm &>/dev/null; then
-#           if which dnf &>/dev/null; then
+#         if ! type -P npm &>/dev/null; then
+#           if type -P dnf &>/dev/null; then
 #               dnf install -y npm
-#           elif which yum &>/dev/null; then
+#           elif type -P yum &>/dev/null; then
 #               yum install -y npm
-#           elif which apt-get &>/dev/null; then
+#           elif type -P apt-get &>/dev/null; then
 #               # not available on Debian yet it seems, but present on Ubuntu
 #               apt-get update
 #               apt-get install -y npm
-#           elif which apk &>/dev/null; then
+#           elif type -P apk &>/dev/null; then
 #               apk update
 #               apk add npm
 #           fi
@@ -67,7 +67,7 @@ else
     # npm WARN !invalid#1 No README data
     # npm WARN !invalid#1 No license field.
     #
-    #if which npm &>/dev/null; then
+    #if type -P npm &>/dev/null; then
     #    npm install diff-so-fancy
     #else
         echo "Downloading diff-so-fancy fatpack to ~/bin"

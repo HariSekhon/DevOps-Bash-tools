@@ -73,7 +73,7 @@ dockerrmi(){
 
 # avoid external commands per shell, slows down new shells and wastes battery
 # switched to using ~/.docker_vars file which is cheaper due to less forks and picked up in each new shell
-#if which docker-machine &>/dev/null; then
+#if type -P docker-machine &>/dev/null; then
 #    if docker-machine status default | grep -q -e Started -e Running; then
 #        eval $(docker-machine env default)
 #    fi

@@ -16,6 +16,7 @@
 # if OS package manager version is too old then consider installing newer version via pip
 #ansible
 
+ansible-lint
 awscli
 autopep8
 beautifulsoup4
@@ -26,6 +27,7 @@ PyInstaller
 pylint
 pytest
 requests
+yamllint
 
 #avro
 #hadoopy

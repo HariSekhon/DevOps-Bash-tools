@@ -5,7 +5,7 @@
 #  Author: Hari Sekhon
 #  Date: 2016-01-17 14:07:17 +0000 (Sun, 17 Jan 2016)
 #
-#  https://github.com/harisekhon/nagios-plugins
+#  https://github.com/harisekhon/bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -30,7 +30,7 @@ section "M a k e"
 
 start_time="$(start_timer)"
 
-if which make &>/dev/null; then
+if type -P make &>/dev/null; then
     find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in |
     while read -r makefile; do
         pushd "$(dirname "$makefile")" >/dev/null

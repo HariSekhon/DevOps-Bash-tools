@@ -32,8 +32,8 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # srcdir defined in .bashrc
 # shellcheck disable=SC2154
-export bashrc="$srcdir/.bashrc"
-export bashrc2=~/.bashrc
+export bashrc=~/.bashrc
+export bashrc2="$srcdir/.bashrc"
 alias r='. $bashrc'
 alias rq='set +x; . $bashrc; set -x'
 alias bashrc='$EDITOR $bashrc && r'
@@ -54,12 +54,25 @@ alias se=screenrc
 #xe(){ xemacs $@ & }
 #alias x=xe
 
+alias mv='mv -i'
+alias cp='cp -i'
+#alias rm='rm -i'
+alias less='less -RFXig'
+alias l='less'
+alias m='more'
+alias vi='vim'
+alias v='vim'
+alias grep='grep --color=auto'
+
+alias hosts='sudo $EDITOR /etc/hosts'
+
 alias path="echo \$PATH | tr ':' '\\n' | more"
 alias paths=path
+
 alias tmp="cd /tmp"
 
 # not as compatible, better to call pypy explicitly or in #! line
-#if which pypy &>/dev/null; then
+#if type -P pypy &>/dev/null; then
 #    alias python=pypy
 #fi
 
@@ -101,7 +114,7 @@ alias lh='ls -lh $LS_OPTIONS'
 alias lr='ls -ltrh $LS_OPTIONS'
 alias lR='ls -lRh $LS_OPTIONS'
 # shellcheck disable=SC2086
-lw(){ ls -lh $LS_OPTIONS "$(which "$@")"; }
+lw(){ ls -lh $LS_OPTIONS "$(type -P "$@")"; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -110,15 +123,6 @@ alias ....='cd ../../..'
 # use bare 'cd' instead, it's more standard
 #alias ~='cd ~'
 
-alias mv='mv -i'
-alias cp='cp -i'
-#alias rm='rm -i'
-alias less='less -RFXig'
-alias l='less'
-alias m='more'
-alias vi='vim'
-alias grep='grep --color=auto'
-alias hosts='sudo $EDITOR /etc/hosts'
 alias screen='screen -T $TERM'
 #alias mt=multitail
 #alias halt='shutdown -h now -P'
@@ -169,7 +173,7 @@ doc_alias(){
     # slows down shell creation, will drain battery
 #    if [ -L "$docpath" ]; then
 #        # brew install coreutils to get greadlink since Mac doesn't have readlink -f
-#        if which greadlink &>/dev/null; then
+#        if type -P greadlink &>/dev/null; then
 #            docfile="$(greadlink -f "$docpath")"
 #        else
 #            docfile="$(readlink -f "$docpath")"

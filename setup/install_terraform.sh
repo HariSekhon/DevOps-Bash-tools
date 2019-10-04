@@ -30,7 +30,7 @@ echo
 if [ -z "${UPDATE_TERRAFORM:-}" ]; then
     # command -v catches aliases, not suitable
     # shellcheck disable=SC2230
-    if which terraform &>/dev/null; then
+    if type -P terraform &>/dev/null; then
         echo "Terraformalready installed"
         echo
         echo "To update terraform, set the below and then re-run this script"

@@ -5,7 +5,7 @@
 #  Author: Hari Sekhon
 #  Date: 2015-05-25 01:38:24 +0100 (Mon, 25 May 2015)
 #
-#  https://github.com/harisekhon/nagios-plugins
+#  https://github.com/harisekhon/bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -30,7 +30,7 @@ section "Ruby Syntax Checks"
 
 start_time="$(start_timer)"
 
-if which ruby &>/dev/null; then
+if type -P ruby &>/dev/null; then
     for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.rb' | sort); do
         isExcluded "$x" && continue
         echo -n "$x: "

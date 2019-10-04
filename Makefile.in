@@ -390,8 +390,8 @@ docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
-travis: travis-log
-	@:
+travis:
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://travis-ci.org/$(REPO)"
 
 .PHONY: travis-log
 travis-log:
@@ -403,11 +403,25 @@ travis-debug:
 
 .PHONY: browse
 browse:
-	@source .bash.d/network.sh; browser "https://github.com/$(REPO)"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
 
 .PHONY: readme
 readme:
-	@source .bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+
+.PHONY: startrack
+startrack:
+	@echo "Don't run this too much, you will hit an API limit against your IP"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?u=$$(sed 's/\/.*//' <<< "$(REPO)")&r=$$(sed 's/.*\///' <<< "$(REPO)")"
+
+.PHONY: star
+star: startrack
+	@:
+
+.PHONY: allstars
+allstars:
+	@echo "Takes a while, don't run this all the time or you will an API limit against your IP"
+	@REPOS="Nagios-Plugins Dockerfiles DevOps-Python-tools DevOps-Perl-tools DevOps-Bash-Tools Nagios-Plugin-Kafka HAProxy-configs"; source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?$$(for repo in $$REPOS; do printf "%s" "&u=HariSekhon&r=$$repo"; done | sed 's/\&//')"
 
 .PHONY: ls-files
 ls-files:

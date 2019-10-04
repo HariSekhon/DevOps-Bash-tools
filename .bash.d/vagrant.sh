@@ -25,9 +25,10 @@ alias cd_vagrant='cd "$VAGRANT_HOME"'
 alias cdv=cd_vagrant
 alias vhome=cd_vagrant
 #alias v='cd_vagrant; vagrant'
-alias v='vagrant'
+# aliased to vim now because I run that command far more often
+#alias v='vagrant'
 alias vf='cd_vagrant; vim Vagrantfile; vagrant_gen_etc_hosts; eval "$(vagrant_gen_aliases)"'
-alias vst='v status'
+alias vst='vagrant status'
 alias vrun='vst | grep running'
 # vr is aliased to vbox_running in virtualbox.sh
 alias vrr='vrun'

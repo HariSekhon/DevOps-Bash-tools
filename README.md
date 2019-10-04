@@ -33,10 +33,13 @@ make install
   - Git branch management
   - utility scripts used from other scripts
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
+  - `.vimrc` - contains many awesome vim tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
+  - `.gitconfig` and extensive `.gitignore` - the bashrc profile also auto-uses `diff-so-fancy` for nicer diffs if found in `$PATH`
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
   - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [Svn](https://subversion.apache.org)
+  - [AWS](https://aws.amazon.com/)
   - [Docker](https://www.docker.com/)
   - [Kubernetes](https://kubernetes.io/)
   - [Kafka](http://kafka.apache.org/)

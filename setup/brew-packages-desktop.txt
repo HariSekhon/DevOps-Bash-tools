@@ -36,42 +36,47 @@
 # brew cask install minikube
 # brew cask install minishift
 # brew cask install podman
+# brew cask install atom
 
 # Install HomeBrew Desktop packages - one per line
 ansible
+ansible-lint
 bash-completion
+brew-cask-completion
 cmatrix
 colordiff
 coreutils
 csshx
-diffpdf
 diff-so-fancy
+diffpdf
 dnsmasq
 dnstop
+docker-completion
+docker-compose-completion
 e2fsprogs
 etcd
 ffmpeg
+gem-completion
 git
 gnu-sed
 gnupg2
 gnuplot
 gradle
-# runtime only
-#groovy
-# GDK - use SDKMan instead
-#groovysdk
+gradle-completion
+hadolint
+haproxy
 imagemagick
 ipcalc
-haproxy
 iperf
 ipython
 jq
-# no longer available
-#jwhois
+jsonlint
 kompose
 kubectl
 kubernetes-cli
+launchctl-completion
 lynx
+maven-completion
 md5sha1sum
 mercurial
 midnight-commander
@@ -83,30 +88,47 @@ mysql
 octave
 openssl
 p7zip
+packer-completion
 parallel
 parquet-tools
 pinentry
+pip-completion
 postgresql
 pwgen
 python
 r
 rdesktop
 readline
+ruby-completion
 snappy
+sonar-completion
 sqlite
-sslscan
 ssllabs-scan
+sslscan
 thrift
 tmux
-# done by SDKMan now
-#maven
-#sbt
-#scala
+vagrant-completion
 watch
 wget
 whois
 xz
 yamllint
+
+# runtime only
+#groovy
+# GDK - use SDKMan instead (setup/install_sdkman.sh)
+#groovysdk
+# done by SDKMan now
+#maven
+#sbt
+#scala
+
+# no longer available
+#jwhois
+
+# clashes with docker and needs unlinking - don't use this any more anyway since Docker Desktop arrived
+#docker-machine-completion
+
 # automake
 # autoconf
 # Mac already supplies a libtool, so this gets prefixed with a 'g'

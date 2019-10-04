@@ -27,7 +27,7 @@ export github=~/github
 export GIT_PAGER="less -RFX --tabs=4"
 # shellcheck disable=SC2230
 #if [ -z "${GIT_PAGER:-}" ] && \
-if which diff-so-fancy &>/dev/null; then
+if type -P diff-so-fancy &>/dev/null; then
     # pre-loading a pattern to 'n' / 'N' / '?' / '/' search through will force you in to pager and disregard -F / --quit-if-one-screen
     #export GIT_PAGER="diff-so-fancy --color=yes | less -RFX --tabs=4 --pattern '^(Date|added|deleted|modified): '"
     export GIT_PAGER="diff-so-fancy --color=yes | $GIT_PAGER"
@@ -69,6 +69,16 @@ alias prod="switchbranch prod"
 alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
+
+gitgc(){
+    if ! [ -d .git ]; then
+        echo "not at top of a git repo, not .git/ directory found"
+        return 1
+    fi
+    du -sh .git
+    git gc --aggressive
+    du -sh .git
+}
 
 gitbrowse(){
     browser "$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
@@ -208,7 +218,7 @@ st(){
   # more calls less on Mac, and gets stuck in interactive mode ignoring the less alias switches
   #more -R -n "$((LINES - 3))"
   #less -RFX
-  ${GIT_PAGER:-cat}
+  eval ${GIT_PAGER:-cat}
 }
 
 pull(){

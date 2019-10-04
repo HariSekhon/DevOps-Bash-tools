@@ -44,7 +44,7 @@ else
             # -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
             # -t  - warn on inconsistent use of tabs
             opts=""
-            if python -V | grep -q 'Python 2'; then
+            if python -V 2>&1 | grep -q 'Python 2'; then
                 opts="-3"
             fi
             python -t -O $opts -m py_compile "$x"

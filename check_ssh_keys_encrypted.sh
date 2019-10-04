@@ -22,6 +22,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+section "SSH Keys encrypted check"
+
 for arg in "$@"; do
     case "$arg" in
         -*)  usage
@@ -33,10 +35,15 @@ check_bin openssl
 
 errors=0
 check_ssh_keys_encrypted(){
+    echo "checking keys:"
+    echo
     for key in "${@:-~/.ssh/id_rsa}"; do
+        printf "%s" "$key => "
         if openssl rsa -noout -passin pass:none -in "$key" 2>/dev/null; then
             echo "WARNING: your SSH Key '$key' is unprotected. Encrypt it and use SSH agent"
             errors=1
+        else
+            echo "OK"
         fi
     done
 }
@@ -46,3 +53,7 @@ check_ssh_keys_encrypted "$@"
 if [ $errors = 1 ]; then
     exit 1
 fi
+
+echo
+hr
+echo
