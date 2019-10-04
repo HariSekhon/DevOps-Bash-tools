@@ -50,12 +50,21 @@ aws_env(){
     local aws_credentials=~/.aws/credentials
     local aws_token=~/.aws/token
     local boto=~/.boto
+    if ! [[ "$section" =~ ^[[:alnum:]_-]+$ ]]; then
+        echo "invalid section name given, must be alphanumeric, dashes and underscores allowed"
+        return 1
+    fi
     if [ -f "$aws_credentials" ]; then
+        local section_data
+        section_data="$(sed -n "/[[:space:]]*\\[$section\\]/,/^[[:space:]]*\\[/p" "$aws_credentials")"
+        if [ -z "$section_data" ]; then
+            echo "section [$section] not found in $aws_credentials!"
+            return 1
+        fi
         echo "loading [$section] creds from $aws_credentials"
         eval "$(
         for key in aws_access_key_id aws_secret_access_key aws_session_token; do
-            sed -n "/[[:space:]]*\\[$section\\]/,/^[[:space:]]*\\[/p" "$aws_credentials" |
-            awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}'
+            awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$section_data"
         done
         )"
     # older boto creds
