@@ -2,6 +2,7 @@
 #
 #  Author: Hari Sekhon
 #  Date: 2019-10-04 16:36:18 +0100 (Fri, 04 Oct 2019)
+#        (circa 2016 originally)
 #
 #  https://github.com/harisekhon/devops-bash-tools
 #
