@@ -107,6 +107,7 @@ tmux
 #maven
 #sbt
 #scala
+vagrant-completion
 watch
 wget
 whois
