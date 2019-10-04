@@ -390,8 +390,8 @@ docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
-travis: travis-log
-	@:
+travis:
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://travis-ci.org/$(REPO)"
 
 .PHONY: travis-log
 travis-log:
