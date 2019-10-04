@@ -72,7 +72,7 @@ alias paths=path
 alias tmp="cd /tmp"
 
 # not as compatible, better to call pypy explicitly or in #! line
-#if which pypy &>/dev/null; then
+#if type -P pypy &>/dev/null; then
 #    alias python=pypy
 #fi
 
@@ -114,7 +114,7 @@ alias lh='ls -lh $LS_OPTIONS'
 alias lr='ls -ltrh $LS_OPTIONS'
 alias lR='ls -lRh $LS_OPTIONS'
 # shellcheck disable=SC2086
-lw(){ ls -lh $LS_OPTIONS "$(which "$@")"; }
+lw(){ ls -lh $LS_OPTIONS "$(type -P "$@")"; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
@@ -173,7 +173,7 @@ doc_alias(){
     # slows down shell creation, will drain battery
 #    if [ -L "$docpath" ]; then
 #        # brew install coreutils to get greadlink since Mac doesn't have readlink -f
-#        if which greadlink &>/dev/null; then
+#        if type -P greadlink &>/dev/null; then
 #            docfile="$(greadlink -f "$docpath")"
 #        else
 #            docfile="$(readlink -f "$docpath")"

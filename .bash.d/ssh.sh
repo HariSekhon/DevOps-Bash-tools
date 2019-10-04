@@ -167,7 +167,7 @@ rekey(){
 sshkey(){
     local key=~/.ssh/id_rsa.pub
     # now available on Mac, but my tried and tested function of years gone by dedupes the keys
-#    if which ssh-copy-id; then
+#    if type -P ssh-copy-id; then
 #        ssh-copy-id -i "$key" "$@"
 #    else
         ssh "$@" '
