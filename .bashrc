@@ -131,5 +131,8 @@ for src in "$srcdir/.bash.d/"*.sh; do
     . "$src"
 done
 
+# added by travis gem - should be in ~/.bashrc so not needed to duplicate here
+#[ -f /Users/hari.sekhon/.travis/travis.sh ] && source /Users/hari.sekhon/.travis/travis.sh
+
 # shellcheck disable=SC1090
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
