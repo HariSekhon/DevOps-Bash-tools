@@ -38,16 +38,16 @@ if [ "$(uname -s)" = Darwin ]; then
     brew install diff-so-fancy
 else
 #     if [ "$(uname -s)" = Linux ]; then
-#         if ! which npm &>/dev/null; then
-#           if which dnf &>/dev/null; then
+#         if ! type -P npm &>/dev/null; then
+#           if type -P dnf &>/dev/null; then
 #               dnf install -y npm
-#           elif which yum &>/dev/null; then
+#           elif type -P yum &>/dev/null; then
 #               yum install -y npm
-#           elif which apt-get &>/dev/null; then
+#           elif type -P apt-get &>/dev/null; then
 #               # not available on Debian yet it seems, but present on Ubuntu
 #               apt-get update
 #               apt-get install -y npm
-#           elif which apk &>/dev/null; then
+#           elif type -P apk &>/dev/null; then
 #               apk update
 #               apk add npm
 #           fi
