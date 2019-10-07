@@ -28,6 +28,7 @@ find_python_sys_path(){
 from __future__ import print_function
 # more likely to be right than \$USER
 import getpass
+import os
 import sys
 user = getpass.getuser()
 for path in sys.path:
@@ -35,7 +36,11 @@ for path in sys.path:
     # as that is not the source of sys
     if user in path:
         continue
-    if path.endswith('/site-packages'):
+    if 'Python.framework' in path:
+        path = path.rsplit('{}lib{}'.format(os.sep, os.sep))[0]
+        print(path)
+        break
+    elif path.endswith('/site-packages'):
         print(path)
         break
 EOF
