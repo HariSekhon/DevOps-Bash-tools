@@ -121,3 +121,7 @@ fi
 #        java "${x%.java}" "$x"
 #    done
 #}
+
+if ! type sdk &>/dev/null && [ -s ~/.sdkman/bin/sdkman-init.sh ]; then
+    source ~/.sdkman/bin/sdkman-init.sh
+fi
