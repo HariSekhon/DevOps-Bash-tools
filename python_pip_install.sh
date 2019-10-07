@@ -24,6 +24,8 @@ set -euo pipefail
 echo "Installing Python PyPI Modules"
 echo
 
+PIP="${PIP:-pip}"
+
 pip_modules=""
 for x in "$@"; do
     if [ -f "$x" ]; then
@@ -62,7 +64,7 @@ user_opt(){
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
     if type -P brew &>/dev/null; then
-        # usually /opt/local
+        # usually /usr/local
         brew_prefix="$(brew --prefix)"
 
         export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/lib"
@@ -88,7 +90,7 @@ elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
     user_opt
 fi
 
-echo "$SUDO ${PIP:-pip} install $opts $pip_modules"
-# want splitting of pip opts
+echo "$SUDO $PIP install $opts $pip_modules"
+# want splitting of opts and modules
 # shellcheck disable=SC2086
-$SUDO "${PIP:-pip}" install $opts $pip_modules
+$SUDO "$PIP" install $opts $pip_modules
