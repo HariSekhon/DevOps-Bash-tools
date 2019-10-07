@@ -48,8 +48,6 @@ for pip_module in $pip_modules; do
         echo "python module '$python_module' already installed, skipping..."
     else
         echo "installing python module '$python_module'"
-        # want opts splitting
-        # shellcheck disable=SC2086
         "$srcdir/python_pip_install.sh" --ignore-installed urllib3 "$pip_module"
     fi
 done
