@@ -67,7 +67,9 @@ mkdir -pv "$output_dir"
 
 echo "Generating App::FatPacker self-contained perl scripts with all dependencies:"
 echo
+i=0
 for perl_script in $perl_scripts; do
+    ((i+=1))
     dest="$output_dir/${perl_script%.pl}.fatpack.pl"
     echo "$perl_script -> $dest"
     # re-run without error messages suppressed if it fails
@@ -76,5 +78,6 @@ for perl_script in $perl_scripts; do
     chmod +x "$dest"
 done
 echo
-echo "Done!"
+echo "Done! Generated fatpacks for $i scripts"
+echo
 untrap
