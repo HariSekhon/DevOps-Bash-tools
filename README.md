@@ -5,7 +5,7 @@ Hari Sekhon - DevOps Bash Tools
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-70+ Shell Scripts, Advanced Bashrc & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon).
+80+ Shell Scripts, Advanced Bashrc & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon).
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
