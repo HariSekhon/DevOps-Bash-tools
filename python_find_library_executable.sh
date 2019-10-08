@@ -14,17 +14,19 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Returns the first argument that is found as an executable in the $PATH, which preference given to local Python library installation
+# Returns the first argument that is found as an executable in the $PATH, with preference given to local Python library installation
 #
-# Useful for Macs to find where libraries executable scripts like nosetests which may get installed locally in $HOME/Library/Python/2.7/bin to avoid Mac OS X System Integrity Protection
+# Useful for Macs to find where libraries executable scripts like nosetests are, which may get installed locally in $HOME/Library/Python/2.7/bin to avoid Mac OS X System Integrity Protection
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-# finds weird things like this to make $PATH work
+# finds weird things like this to make $PATH work:
+#
 # /usr/local/Cellar/numpy/1.14.5/libexec/nose/bin
-# since nose is available in brew Cellar's numpy, it doesn't get installed to ~/Library and isn't found otherwise
-# rather than do an --ignore-installed which could all sorts of other issues, just use it from wherever it is found
+#
+# Since nose is available in brew Cellar's numpy, it doesn't get installed to ~/Library and isn't found otherwise.
+# Rather than do an --ignore-installed which could cause all sorts of other issues, just use it from wherever it is found
 while read -r path; do
     bin="${path%/lib/python*/site-packages*}/bin"
     if [ -d "$bin" ]; then
