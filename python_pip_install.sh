@@ -21,10 +21,17 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing Python PyPI Modules"
-echo
-
 PIP="${PIP:-pip}"
+
+usage(){
+    echo "Install Python PyPI modules using Pip, taking in to account library paths, virtual envs etc"
+    echo
+    echo "Takes a list of python module names as arguments or .txt files containing lists of modules (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_modules>"
+    echo
+    exit 3
+}
 
 pip_modules=""
 for x in "$@"; do
@@ -37,6 +44,20 @@ for x in "$@"; do
     fi
     pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 done
+
+for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+if [ -z "$pip_modules" ]; then
+    usage
+fi
+
+echo "Installing Python PyPI Modules"
+echo
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
