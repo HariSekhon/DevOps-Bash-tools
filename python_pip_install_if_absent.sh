@@ -22,7 +22,7 @@ set -euo pipefail
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 usage(){
-    echo "Installs Python PyPI modules using Pip only if they are not installed by testing for their imports and skipping any that are already installed"
+    echo "Installs Python PyPI modules not already installed using Pip"
     echo
     echo "Leverages adjacent python_pip_install.sh which takes in to account library paths, virtual envs etc"
     echo
