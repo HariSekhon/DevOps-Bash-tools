@@ -64,10 +64,6 @@ add_PATH(){
     fi
 }
 
-if [ -d ~/perl5/lib/perl5 ]; then
-    add_PATH PERL5LIB ~/perl5/lib/perl5
-fi
-
 add_PATH "/bin"
 add_PATH "/usr/bin"
 add_PATH "/sbin"
@@ -86,6 +82,13 @@ if [ -d ~/Library/Python ]; then
         [ -d "$x" ] || continue
         add_PATH "$x"
     done
+fi
+
+if [ -d ~/perl5/lib/perl5 ]; then
+    add_PATH PERL5LIB ~/perl5/lib/perl5
+fi
+if [ -d ~/perl5/bin ]; then
+    add_PATH ~/perl5/bin
 fi
 
 # do the same with MANPATH
