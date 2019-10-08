@@ -16,10 +16,17 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing CPAN Modules"
-echo
-
 CPANM="${CPANM:-cpanm}"
+
+usage(){
+    echo "Installs Perl CPAN modules using Cpanm, taking in to account library paths, perlbrew envs etc"
+    echo
+    echo "Takes a list of perl module names as arguments or .txt files containing lists of modules (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_modules>"
+    echo
+    exit 3
+}
 
 cpan_modules=""
 for x in "$@"; do
@@ -32,6 +39,20 @@ for x in "$@"; do
     fi
     cpan_modules="$(tr ' ' ' \n' <<< "$cpan_modules" | sort -u | tr '\n' ' ')"
 done
+
+for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+if [ -z "$cpan_modules" ]; then
+    usage
+fi
+
+echo "Installing CPAN Modules"
+echo
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
