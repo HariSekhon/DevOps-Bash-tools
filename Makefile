@@ -87,7 +87,7 @@ lsscripts: ls-scripts
 .PHONY: wc-scripts
 wc-scripts:
 	@$(MAKE) ls-scripts | xargs wc -l
-	@printf "Total Scripts: "
+	@printf "Total Script files: "
 	@$(MAKE) ls-scripts | wc -l
 
 .PHONY: wcscripts
@@ -96,7 +96,7 @@ wcscripts: wc-scripts
 
 .PHONY: wc-scripts2
 wc-scripts2:
-	@printf "Total Scripts: "
+	@printf "Total Scripts files: "
 	@$(MAKE) ls-scripts | wc -l
 	@printf "Total line count without # comments: "
 	@$(MAKE) ls-scripts | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
