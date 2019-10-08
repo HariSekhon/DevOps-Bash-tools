@@ -120,7 +120,9 @@ aws_token(){
     fi
     export AWS_SESSION_TOKEN="$token"
     echo "exported AWS_SESSION_TOKEN"
+    echo
     echo "export AWS_SESSION_TOKEN=$token" > ~/.aws/token
+    echo "saved to ~/.aws/token for other shells to source via aws_env()"
     echo
     echo "you can now use AWS CLI normally"
 }
