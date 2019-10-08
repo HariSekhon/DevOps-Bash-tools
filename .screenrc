@@ -32,7 +32,8 @@ vbell off
 
 #version
 
-# use hardstatus or caption, otherwise end up with 2 lines of pane listings
+# redundant vs caption - ends up with 2 lines of the same stuff
+# caption is better when splitting
 #hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
 #hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
 
