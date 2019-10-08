@@ -24,7 +24,7 @@ set -euo pipefail
 PIP="${PIP:-pip}"
 
 usage(){
-    echo "Install Python PyPI modules using Pip, taking in to account library paths, virtual envs etc"
+    echo "Installs Python PyPI modules using Pip, taking in to account library paths, virtual envs etc"
     echo
     echo "Takes a list of python module names as arguments or .txt files containing lists of modules (one per line)"
     echo
