@@ -290,6 +290,10 @@ cpan:
 pip:
 	find . -name 'requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
+.PHONY: fatpacks
+fatpacks:
+	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+
 .PHONY: sonar
 sonar:
 	sonar-scanner
