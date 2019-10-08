@@ -25,7 +25,7 @@ output_dir="fatpacks"
 usage(){
     echo "Generates self-contained versions of Perl scripts using App::FatPacker"
     echo
-    echo "Takes a list of perl scripts as arguments or .txt files containing lists of scripts one per line"
+    echo "Takes a list of perl scripts as arguments or .txt files containing lists of scripts (one per line)"
     echo
     echo "usage: ${0##*} <list_of_scripts>"
     echo
