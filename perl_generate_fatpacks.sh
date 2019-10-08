@@ -73,6 +73,7 @@ for perl_script in $perl_scripts; do
     # re-run without error messages suppressed if it fails
     fatpack pack "$perl_script" 2>/dev/null > "$dest" ||
     fatpack pack "$perl_script" > "$dest"
+    chmod +x "$dest"
 done
 echo
 echo "Done!"
