@@ -49,13 +49,24 @@ perlpath(){
 
 #export PATH="${PATH%%:~/github*}"
 add_PATH(){
+    local env_var
     local path
-    path="${1:-}"
+    if [ $# -gt 1 ]; then
+        env_var="$1"
+        path="$2"
+    else
+        env_var=PATH
+        path="${1:-}"
+    fi
     path="${path%/}"
-    if ! [[ "$PATH" =~ (^|:)$path(:|$) ]]; then
-        export PATH="$PATH:$path"
+    if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
+        export $env_var="${!env_var}:$path"
     fi
 }
+
+if [ -d ~/perl5/lib/perl5 ]; then
+    add_PATH PERL5LIB ~/perl5/lib/perl5
+fi
 
 add_PATH "/bin"
 add_PATH "/usr/bin"
