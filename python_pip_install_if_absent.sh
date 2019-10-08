@@ -71,6 +71,6 @@ for pip_module in $pip_modules; do
         echo "python module '$python_module' already installed, skipping..."
     else
         echo "installing python module '$python_module'"
-        "$srcdir/python_pip_install.sh" --ignore-installed urllib3 "$pip_module"
+        "$srcdir/python_pip_install.sh" "$pip_module"
     fi
 done
