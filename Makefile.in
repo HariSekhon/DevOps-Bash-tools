@@ -294,6 +294,10 @@ pip:
 fatpacks:
 	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
 
+.PHONY: fatpack
+fatpack: fatpacks
+	@:
+
 .PHONY: sonar
 sonar:
 	sonar-scanner
