@@ -113,6 +113,7 @@ if has("autocmd")
         au! BufRead,BufNewFile *.hta setfiletype html
     augroup end
 
+    au BufNew,BufRead *Makefile*   nmap ;l :w<CR>:!clear; check_makefile.sh % \| more -R<CR>
     au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint % \| more -R<CR>
     au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint % \| headtail.py<CR>
     au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc %<CR>
