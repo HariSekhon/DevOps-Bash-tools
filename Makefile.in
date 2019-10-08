@@ -458,7 +458,7 @@ wc2:
 .PHONY: wc-code
 wc-code:
 	@$(MAKE) ls-code | xargs wc -l
-	@printf "Total code: "
+	@printf "Total code files: "
 	@$(MAKE) ls-code | wc -l
 
 .PHONY: wccode
@@ -467,7 +467,7 @@ wccode: wc-code
 
 .PHONY: wc-code2
 wc-code2:
-	@printf "Total code: "
+	@printf "Total code files: "
 	@$(MAKE) ls-code | wc -l
 	@printf "Total line count without # comments: "
 	@$(MAKE) ls-code | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
