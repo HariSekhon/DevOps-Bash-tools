@@ -11,9 +11,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+include Makefile.in
+
 REPO := HariSekhon/DevOps-Bash-tools
 
-CODE_FILES := $(shell find . -type f -name '*.sh' -o -name '.bash*' | sort)
+CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
 
 CONF_FILES := \
     .ansible.cfg \
@@ -27,9 +29,6 @@ CONF_FILES := \
     .vimrc \
     .Xdefaults \
     .Xmodmap
-
-
-include Makefile.in
 
 .PHONY: build
 build: system-packages aws
