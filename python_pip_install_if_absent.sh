@@ -21,8 +21,17 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Installing Python PyPI Modules that are not already installed"
-echo
+usage(){
+    echo "Install Python PyPI modules using Pip only if they are not installed by testing for their imports and skipping any that are already installed"
+    echo
+    echo "Leverages adjacent python_pip_install.sh which takes in to account library paths, virtual envs etc"
+    echo
+    echo "Takes a list of python module names as arguments or .txt files containing lists of modules (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_modules>"
+    echo
+    exit 3
+}
 
 pip_modules=""
 for x in "$@"; do
@@ -35,6 +44,20 @@ for x in "$@"; do
     fi
     pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 done
+
+for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+if [ -z "$pip_modules" ]; then
+    usage
+fi
+
+echo "Installing Python PyPI Modules that are not already installed"
+echo
 
 for pip_module in $pip_modules; do
     python_module="$("$srcdir/python_module_to_import_name.sh" <<< "$pip_module")"
