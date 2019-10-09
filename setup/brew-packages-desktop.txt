@@ -74,8 +74,6 @@ maven-completion
 md5sha1sum
 mercurial
 midnight-commander
-minikube
-minishift
 mplayer
 mtr
 mysql
