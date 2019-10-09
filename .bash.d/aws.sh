@@ -62,6 +62,7 @@ aws_env(){
             return 1
         fi
         echo "loading [$section] creds from $aws_credentials"
+        export AWS_PROFILE="$section"
         eval "$(
         for key in aws_access_key_id aws_secret_access_key aws_session_token; do
             awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$section_data"
