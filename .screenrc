@@ -123,5 +123,5 @@ bindkey -k F1 prev      # F11 = previous
 # Hari's style:
 #
 # transparent magenta <hostname> boldGreen <windows_before_current> boldBlue<num>*<flags> <title> <pop> windows_after_current <pad> boldRed <load> white <24HR>:<secs> <Day> <dd>/<Mon>/<YYYY>
-caption always "%{= .G}[ %{= .m}%H %{-}| %-Lw%?%{r}[%{B}%n%f* %t%{-}]%{-}%?%+Lw %= | %{= .R}%l %{-}| %{= .W}%c:%s %D %d/%M/%Y %{-}]"
+caption always "%{= .G}[ %{= .m}%H %{-}| %-Lw%?%{r}[%{B}%n%f* %t%{-}]%{-}%?%+Lw %= | %{= .R}%l %{-}| %{= .d}%c:%s %D %d/%M/%Y %{-}]"
 #       splitonly (default - only shows during splits - but we want always to replace hardline and standardize look with or without splits)
