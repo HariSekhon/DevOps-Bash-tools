@@ -54,31 +54,29 @@ aws_env(){
         echo "invalid section name given, must be alphanumeric, dashes and underscores allowed"
         return 1
     fi
+    local credentials_file
     if [ -f "$aws_credentials" ]; then
-        local section_data
-        section_data="$(sed -n "/[[:space:]]*\\[$section\\]/,/^[[:space:]]*\\[/p" "$aws_credentials")"
-        if [ -z "$section_data" ]; then
-            echo "section [$section] not found in $aws_credentials!"
-            return 1
-        fi
-        echo "loading [$section] creds from $aws_credentials"
-        export AWS_PROFILE="$section"
-        eval "$(
-        for key in aws_access_key_id aws_secret_access_key aws_session_token; do
-            awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$section_data"
-        done
-        )"
+        credentials_file="$aws_credentials"
     # older boto creds
     elif [ -f "$boto" ]; then
-        echo "loading creds from $boto"
-        eval "$(
-        for key in aws_access_key_id aws_secret_access_key aws_session_token; do
-            awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' "$boto"
-        done
-        )"
+        credentials_file="$boto"
     else
         echo "no credentials found - didn't find $boto or $aws_credentials"
+        return 1
     fi
+    local section_data
+    section_data="$(sed -n "/[[:space:]]*\\[$section\\]/,/^[[:space:]]*\\[/p" "$credentials_file")"
+    if [ -z "$section_data" ]; then
+        echo "section [$section] not found in $credentials_file!"
+        return 1
+    fi
+    echo "loading [$section] creds from $credentials_file"
+    export AWS_PROFILE="$section"
+    eval "$(
+    for key in aws_access_key_id aws_secret_access_key aws_session_token; do
+        awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$section_data"
+    done
+    )"
     if [ -f "$aws_token" ]; then
         echo "sourcing $aws_token"
         # shellcheck disable=SC1090
