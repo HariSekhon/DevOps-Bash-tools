@@ -65,7 +65,7 @@ python:
 	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
-aws:
+aws: system-packages
 	@./python_pip_install_if_absent.sh awscli
 
 .PHONY: test
