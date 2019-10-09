@@ -34,8 +34,7 @@ vbell off
 
 # redundant vs caption - ends up with 2 lines of the same stuff
 # caption is better when splitting
-#hardstatus string "%{.kW}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
-#hardstatus string "%{.bW}%-w%{.rW}%n %t%{-}%+w %=%{..G} %H %{..Y} %m/%d %C%a "
+#hardstatus string "..."
 
 # called only during Power Detach (C-a D D), ie. a detach that sends a HUP signal to screen's parent, results in a logout from the parent shell
 pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
@@ -114,11 +113,15 @@ bindkey -k F1 prev      # F11 = previous
 
 # ============================================================================ #
 
+# %=       - pads space
+# .        - sets background transparent
+# %{-}     - pops one colour off the colour change stack to restore the last colour, useful for consistency
+# $LOGNAME - <user> - needs double quotes
+#
+# can use `` the same as in shell
+
 # Hari's style:
 #
-#       splitonly (default)
-caption always "%{= .G}[ %H | %-Lw%?%{B}%n*%f %t%{-}%?%+Lw %= | %{= .R}%l %{-}| %c:%s %D %d/%M/%Y ]"
-
-# %{=} - pads space
-# %{.} - sets background transparent
-# %{-} - pops one colour off the colour change stack to restore the last colour, useful for consistency
+# transparent magenta <hostname> boldGreen <windows_before_current> boldBlue<num>*<flags> <title> <pop> windows_after_current <pad> boldRed <load> white <24HR>:<secs> <Day> <dd>/<Mon>/<YYYY>
+caption always "%{= .G}[ %{= .m}%H %{-}| %-Lw%?%{r}[%{B}%n%f* %t%{-}]%{-}%?%+Lw %= | %{= .R}%l %{-}| %{= .W}%c:%s %D %d/%M/%Y %{-}]"
+#       splitonly (default - only shows during splits - but we want always to replace hardline and standardize look with or without splits)
