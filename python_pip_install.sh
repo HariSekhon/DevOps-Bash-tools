@@ -62,7 +62,7 @@ echo
 
 if [ -n "${TRAVIS:-}" ]; then
     echo "running in quiet mode"
-    opts="-q"
+    opts="$opts -q"
 fi
 
 SUDO=""
