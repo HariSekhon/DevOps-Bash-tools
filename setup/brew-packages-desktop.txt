@@ -7,21 +7,20 @@
 #
 # Xcode - running 'git' is enough to trigger the install
 #
+# Many of these are now available in brew casks - TODO: test and move to brew-packages-desktop-casks.txt
+#
 # Chrome
-# VirtualBox
 # Docker Desktop
 # Google Drive
 # RStudio
 # Sophos Anti-Virus
 # ClamXav
 # Colloquay
-# GitHub
 # JConsole
 # KeePassX
 # Reggy
 # Remote Desktop Connection
 # Skype
-# SourceTree
 # Spotify
 # Sublime Text 2
 # SynergyOSX
@@ -29,14 +28,9 @@
 # VLC
 # WindowWrangler?
 # Wireshark
-# YouTube
 # iPhone Explorer
-# iTerm?
 
-# brew cask install minikube
-# brew cask install minishift
-# brew cask install podman
-# brew cask install atom
+# Cask installed projects are in adjacent file brew-packages-desktop-casks.txt
 
 # Install HomeBrew Desktop packages - one per line
 ansible
@@ -80,8 +74,6 @@ maven-completion
 md5sha1sum
 mercurial
 midnight-commander
-minikube
-minishift
 mplayer
 mtr
 mysql

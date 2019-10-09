@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Uses App::Fatpacker to package all perl scripts given as args in to self-contained scripts with dependencies contained
+#
+# fatpack doesn't bundle compiled XS code, but is smart enough to replace those references eg. 'use JSON::XS;' becomes 'use JSON;' in the outputted self-contained script
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"

@@ -24,7 +24,8 @@ sc(){
     local session=main
     local detached_screens
     detached_screens="$(screen -ls | grep Detached)"
-    if [ "$(wc -l <<< "$detached_screens" | sed 's/[[:space:]]*//')" = 1 ]; then
+    if [ -n "$detached_screens" ] &&
+       [ "$(wc -l <<< "$detached_screens" | awk '{print $1}')" = 1 ]; then
         session="$(awk '{print $1;exit}' <<< "$detached_screens")"
     fi
     screen -aARRD -S "$session" "$@"

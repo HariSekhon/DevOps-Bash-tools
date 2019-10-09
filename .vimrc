@@ -154,7 +154,9 @@ nmap <silent> ;h :Hr<CR>
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;j :JHr<CR>
 "nmap <silent> ;' :call Sq()<CR>
-nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
+" done automatically on write now
+"nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
+nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
 nmap          ;n :n<CR>
 nmap          ;p :prev<CR>
 nmap          ;q :q<CR>
