@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# use .yamllint in $PWD or default to $srcdir/yamllint/config
+export XDG_CONFIG_HOME="$srcdir"
+
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
