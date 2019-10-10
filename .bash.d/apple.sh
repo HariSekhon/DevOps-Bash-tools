@@ -41,6 +41,21 @@ silence_startup(){
     sudo nvram SystemAudioVolume=%80
 }
 
+top(){
+    local opts="-F -R -o"
+    if [ $# -eq 1 ]; then
+        # want opt splitting
+        # shellcheck disable=SC2086
+        command top $opts "$1"
+    elif [ $# -gt 1 ]; then
+        command top "$@"
+    else
+        # want opt splitting
+        # shellcheck disable=SC2086
+        command top $opts cpu
+    fi
+}
+
 fixvbox(){
     sudo /Library/StartupItems/VirtualBox/VirtualBox restart
 }
