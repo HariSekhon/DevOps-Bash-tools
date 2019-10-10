@@ -44,7 +44,8 @@ pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
 
 #altscreen on
 
-# don't use this, it doubles up against 'caption always' further down
+# don't use this, wastes a line at bottom of terminal
+# and if setting string you end up with 2 status lines at bottom since 'caption always' is set further down
 #hardstatus on
 #hardstatus alwayslastline
 
@@ -58,7 +59,11 @@ pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
 # shell -$SHELL
 #
 # must be full path because script which relies on $SHELL which is set by this
-shell -/bin/bash
+#
+# might be a touch expensive as profile logins may do expensive rare initialization operations
+# instead rely on inheriting the profile environment by this point
+#shell -/bin/bash
+shell /bin/bash
 
 # ============================================================================ #
 # defaults to "Unnamed" otherwise
@@ -92,7 +97,9 @@ shelltitle ' > |'
 # ctrl-a `
 bind ` focus up
 
-# Mac
+# Mac key in siilar position to PC `
+# doesn't work when testing 'ctrl-a §'
+# ignore since that key is slightly awkward and just use the up arrow set below
 #bind § focus up
 
 #bindkey ^` focus up
