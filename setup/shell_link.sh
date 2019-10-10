@@ -34,7 +34,9 @@ setup_file(){
 setup_file .bashrc
 setup_file .bash_profile
 
-echo "linking dot files to \$HOME directory: $HOME"
+echo
+echo "symlinking dot files to \$HOME directory: $HOME"
+echo
 
 opts=""
 if [ -n "${FORCE:-}" ]; then
