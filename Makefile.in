@@ -420,7 +420,10 @@ readme:
 .PHONY: startrack
 startrack:
 	@echo "Don't run this too much, you will hit an API limit against your IP"
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?u=$$(sed 's/\/.*//' <<< "$(REPO)")&r=$$(sed 's/.*\///' <<< "$(REPO)")"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; \
+	browser "https://seladb.github.io/StarTrack-js/?\
+	u=$$(sed 's/\/.*//' <<< "$(REPO)")\
+	&r=$$(sed 's/.*\///' <<< "$(REPO)")"
 
 .PHONY: star
 star: startrack
@@ -429,7 +432,15 @@ star: startrack
 .PHONY: allstars
 allstars:
 	@echo "Takes a while, don't run this all the time or you will an API limit against your IP"
-	@REPOS="Nagios-Plugins Dockerfiles DevOps-Python-tools DevOps-Perl-tools DevOps-Bash-Tools Nagios-Plugin-Kafka HAProxy-configs"; source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?$$(for repo in $$REPOS; do printf "%s" "&u=HariSekhon&r=$$repo"; done | sed 's/\&//')"
+	@REPOS="Nagios-Plugins Dockerfiles DevOps-Python-tools DevOps-Perl-tools DevOps-Bash-Tools Nagios-Plugin-Kafka HAProxy-configs"; \
+	source $(BASH_TOOLS)/.bash.d/network.sh; \
+	browser "https://seladb.github.io/StarTrack-js/?\
+	$$(\
+		for repo in $$REPOS; do \
+			printf "%s" "&u=HariSekhon&r=$$repo"; \
+		done | \
+		sed 's/\&//'\
+	)"
 
 .PHONY: ls-files
 ls-files:
