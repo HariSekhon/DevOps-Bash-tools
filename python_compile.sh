@@ -24,6 +24,9 @@ filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')"
 
 if [ -z "$filelist" ]; then
     echo "no Python / Jython files found to compile"
+    echo
+    echo "usage: ${0##*/} <python_file_or_directory>"
+    echo
     return 0 &>/dev/null || :
     exit 0
 fi
