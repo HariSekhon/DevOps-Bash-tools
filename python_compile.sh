@@ -20,7 +20,10 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')"
+
+if [ -z "$filelist" ]; then
+    echo "no Python / Jython files found to compile"
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -29,24 +32,33 @@ section "Compiling Python / Jython files"
 
 start_time="$(start_timer)"
 
+# opts:
+#
+# -O  - optimize
+# -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
+# -t  - warn on inconsistent use of tabs
+
+opts=""
+
+if python -V 2>&1 | grep -q 'Python 2'; then
+    opts="$opts -3"
+fi
+
 if [ -n "${NOCOMPILE:-}" ]; then
     echo "\$NOCOMPILE environment variable set, skipping python compile"
 elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping python compile"
 else
     if [ -n "${FAST:-}" ]; then
-        python -m compileall "${1:-.}" || :
+        # want opt expansion
+        # shellcheck disable=SC2086
+        python $opts -m compileall "${1:-.}" || :
     else
-        for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
+        for x in $filelist; do
             type isExcluded &>/dev/null && isExcluded "$x" && continue
             echo "compiling $x"
-            # -O  - optimize
-            # -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
-            # -t  - warn on inconsistent use of tabs
-            opts=""
-            if python -V 2>&1 | grep -q 'Python 2'; then
-                opts="-3"
-            fi
+            # want opt expansion
+            # shellcheck disable=SC2086
             python -t -O $opts -m py_compile "$x"
         done
     fi
