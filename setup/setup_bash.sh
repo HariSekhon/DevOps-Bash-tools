@@ -19,6 +19,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
 
+conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/files.conf")"
+
 setup_file(){
     local filename="$1"
     if grep -Eq "(source|\.).+$srcdir/$filename" ~/"$filename" 2>/dev/null; then
@@ -31,3 +33,29 @@ setup_file(){
 
 setup_file .bashrc
 setup_file .bash_profile
+
+echo "linking dot files to \$HOME directory: $HOME"
+
+opts=""
+if [ -n "${FORCE:-}" ]; then
+    opts="-f"
+fi
+
+for filename in $conf_files; do
+    if [[ "$filename" =~ / ]]; then
+        dirname="${filename%/*}"
+        filename="${filename##*/}"
+        mkdir -pv ~/"$dirname"
+        # want opt expansion
+        # shellcheck disable=SC2086
+        ln -sv $opts "$PWD/$dirname/$filename" ~/"$dirname"/ || :
+    else
+        # want opt expansion
+        # shellcheck disable=SC2086
+        ln -sv $opts "$PWD/$filename" ~ || :
+    fi
+done
+
+# want opt expansion
+# shellcheck disable=SC2086
+ln -sv $opts ~/.gitignore ~/.gitignore_global || :
