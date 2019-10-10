@@ -17,48 +17,30 @@ REPO := HariSekhon/DevOps-Bash-tools
 
 CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
 
-CONF_FILES := \
-    .ansible.cfg \
-    .editorconfig \
-    .gitconfig \
-    .gitignore \
-    .my.cnf \
-    .screenrc \
-    .toprc \
-    .tmux.conf \
-    .vimrc \
-    .Xdefaults \
-    .Xmodmap
+CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.conf)
 
 .PHONY: build
 build: system-packages aws
 	@:
 
 .PHONY: install
-install: build bash python aws
+install: build link python aws
 
 .PHONY: uninstall
-uninstall: bash-unlink
+uninstall: unlink
 	@echo "Not removing any system packages for safety"
 
 .PHONY: bash
-bash:
-	@setup/setup_bash.sh
-	@echo "linking dot files to \$$HOME directory: $$HOME"
-	@f=""; [ -n "$$FORCE" ] && f="-f"; \
-	for filename in $(CONF_FILES); do \
-		ln -sv $$f "$$PWD/$$filename" ~ 2>/dev/null; \
-	done || :
-	@ln -sv $$f ~/.gitignore ~/.gitignore_global 2>/dev/null || :
+bash: link
+	@:
 
-.PHONY: bash-unlink
-bash-unlink:
-	@for filename in $(CONF_FILES) .gitignore_global; do \
-		if [ -L ~/"$$filename" ]; then \
-			rm -fv ~/"$$filename"; \
-		fi; \
-	done || :
-	@echo "Must manually remove sourcing from ~/.bashrc and ~/.bash_profile"
+.PHONY: link
+link:
+	@setup/shell_link.sh
+
+.PHONY: unlink
+unlink:
+	@setup/shell_unlink.sh
 
 .PHONY: python
 python:
