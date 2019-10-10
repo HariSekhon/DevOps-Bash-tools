@@ -22,10 +22,13 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')"
+filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py')"
 
 if [ -z "$filelist" ]; then
-    echo "no Python / Jython files found to compile"
+    echo "no Python"
+    echo
+    echo "usage: ${0##*/} <python_file_or_directory>"
+    echo
     return 0 &>/dev/null || :
     exit 0
 fi
