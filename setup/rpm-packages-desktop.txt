@@ -65,7 +65,7 @@ fortune-mod
 gcc
 gdb
 geoip
-git
+#git # in rpm-packages.txt
 git-core
 gitk
 gkrellm

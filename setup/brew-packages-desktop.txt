@@ -39,7 +39,7 @@ bash-completion
 brew-cask-completion
 cmatrix
 colordiff
-coreutils
+#coreutils # in brew-packages.txt
 csshx
 diff-so-fancy
 diffpdf
@@ -52,7 +52,7 @@ etcd
 ffmpeg
 gem-completion
 git
-gnu-sed
+#gnu-sed # in brew-packages.txt
 gnupg2
 gnuplot
 gradle
@@ -63,7 +63,7 @@ imagemagick
 ipcalc
 iperf
 ipython
-jq
+#jq # in brew-packages.txt
 jsonlint
 kompose
 kubectl
@@ -81,16 +81,16 @@ octave
 openssl
 p7zip
 packer-completion
-parallel
+#parallel # in brew-packages.txt
 parquet-tools
 pinentry
 pip-completion
 postgresql
 pwgen
-python
+#python  # in brew-packages.txt
 r
 rdesktop
-readline
+#readline # in brew-packages.txt
 ruby-completion
 snappy
 sonar-completion
@@ -101,8 +101,8 @@ thrift
 tmux
 vagrant-completion
 watch
-wget
-whois
+#wget # in brew-packages.txt
+#whois # in brew-packages.txt
 xz
 yamllint
 

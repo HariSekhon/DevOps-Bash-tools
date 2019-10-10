@@ -121,13 +121,13 @@ apk-packages:
 	#for x in apk-packages{,-perl,-python}{,-dev}.txt; do \
 	for x in apk-packages.txt apk-packages-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apk-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 	for x in apk-packages-optional.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apk-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 

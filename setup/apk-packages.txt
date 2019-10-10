@@ -21,5 +21,6 @@ make
 parallel
 perl
 python
+py-pip
 wget
 unzip

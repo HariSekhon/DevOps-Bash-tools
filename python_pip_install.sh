@@ -22,6 +22,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 PIP="${PIP:-pip}"
+opts="${PIP_OPTS:-}"
 
 usage(){
     echo "Installs Python PyPI modules using Pip, taking in to account library paths, virtual envs etc"
@@ -59,10 +60,9 @@ fi
 echo "Installing Python PyPI Modules"
 echo
 
-opts=""
 if [ -n "${TRAVIS:-}" ]; then
     echo "running in quiet mode"
-    opts="-q"
+    opts="$opts -q"
 fi
 
 SUDO=""
