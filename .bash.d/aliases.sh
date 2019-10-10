@@ -188,7 +188,7 @@ doc_alias(){
     #    return
     #fi
     # shellcheck disable=SC2139,SC2140
-    alias "d$docfile"="\$EDITOR $docpath"
+    alias "d$docfile"="ti ${docpath##*/}; \$EDITOR $docpath"
 }
 
 for x in ~/docs/* "$github"/docs/* "$bitbucket"/docs/*; do
