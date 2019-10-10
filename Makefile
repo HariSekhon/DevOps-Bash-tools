@@ -56,7 +56,7 @@ test:
 
 .PHONY: clean
 clean:
-	@echo Nothing to clean
+	@rm -fv setup/terraform.zip
 
 .PHONY: ls-scripts
 ls-scripts:
