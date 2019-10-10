@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#  vim:ts=2:sts=2:sw=2:et:filetype=yaml
+#
+#  Author: Hari Sekhon
+#  Date: 2019-10-10 10:32:04 +0100 (Thu, 10 Oct 2019)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  http://www.linkedin.com/in/harisekhon
+#
+
+extends: default
+
+rules:
+  # don't warn on no --- at start since many yamls don't have this
+  document-start: disable
+
+  # often want to differentiate no space commented out '#code' from '# intentional human comments'
+  comments: disable
+
+  # > 80 char length? Really? I love the 80s but this one should have been left there...
+  line-length: disable
