@@ -59,6 +59,7 @@ gradle
 gradle-completion
 hadolint
 haproxy
+htop
 imagemagick
 ipcalc
 iperf
