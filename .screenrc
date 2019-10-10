@@ -42,9 +42,12 @@ pow_detach_msg "Screen session of \$LOGNAME \$:cr:\$:nl:ended."
 # set pw to prevent root attaching - if no crypted pw, initially prompts twice for pw
 #password [<crypted_pw>]
 
-altscreen on
-hardstatus on
-hardstatus alwayslastline
+#altscreen on
+
+# don't use this, it doubles up against 'caption always' further down
+#hardstatus on
+#hardstatus alwayslastline
+
 #term screen-256color
 
 # ============================================================================ #
