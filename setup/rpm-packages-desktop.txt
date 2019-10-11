@@ -70,7 +70,7 @@ git-core
 gitk
 gkrellm
 gksu
-golang-bin
+golang
 gt5
 gvim
 heartbeat
