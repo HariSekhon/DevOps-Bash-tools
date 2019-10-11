@@ -115,16 +115,27 @@ aws_env(){
 alias awsenv=aws_env
 
 aws_envs(){
-    local current_profile="${AWS_PROFILE:-default}"
     awk '/^[[:space:]]*\[.+\]/{print $1}' < "$aws_credentials_file" |
     sed 's/\[//;s/\]//' |
     while read profile; do
-        if [ "$profile" = "$current_profile" ]; then
+        default=0
+        if [ "$profile" = "$AWS_PROFILE" ]; then
+            local default=1
+        elif [ -z "$AWS_PROFILE" ] &&
+             [ "$profile" = "default" ]; then
+            local default=1
+        fi
+        if [ "$default" = 1 ]; then
             echo -n "* "
         else
             echo -n "  "
         fi
-        echo "$profile"
+        echo -n "$profile"
+        if [ "$default" = 1 ] &&
+           ! env | grep -q '^AWS_SECRET_KEY='; then
+            echo -n " (keys not loaded to env)"
+        fi
+        echo
     done
 }
 alias awsenvs=aws_envs
