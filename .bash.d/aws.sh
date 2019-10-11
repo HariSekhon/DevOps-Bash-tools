@@ -114,6 +114,21 @@ aws_env(){
 }
 alias awsenv=aws_env
 
+aws_envs(){
+    local current_profile="${AWS_PROFILE:-default}"
+    awk '/^[[:space:]]*\[.+\]/{print $1}' < "$aws_credentials_file" |
+    sed 's/\[//;s/\]//' |
+    while read profile; do
+        if [ "$profile" = "$current_profile" ]; then
+            echo -n "* "
+        else
+            echo -n "  "
+        fi
+        echo "$profile"
+    done
+}
+alias awsenvs=aws_envs
+
 aws_unenv(){
     unset AWS_ACCESS_KEY
     unset AWS_SECRET_KEY
