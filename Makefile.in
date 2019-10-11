@@ -293,6 +293,7 @@ pip:
 .PHONY: fatpacks
 fatpacks:
 	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+	if [ -d lib/resources ]; then cp -av lib/resources fatpacks/; fi
 
 .PHONY: fatpack
 fatpack: fatpacks
