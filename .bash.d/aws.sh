@@ -41,9 +41,45 @@ aws_useast(){
 }
 #aws_eu
 
+aws_get_cred_path(){
+    local aws_credentials=~/.aws/credentials
+    local boto=~/.boto
+    local credentials_file
+    if [ -f "$aws_credentials" ]; then
+        credentials_file="$aws_credentials"
+    # older boto creds
+    elif [ -f "$boto" ]; then
+        credentials_file="$boto"
+    else
+        echo "no credentials found - didn't find $boto or $aws_credentials" 2>/dev/null
+        return 1
+    fi
+    echo "$credentials_file"
+}
+
+# this rarely changes so just set it once as initialization instead of passing lots of params
+# or re-executing aws_get_cred_path() multiple times in different functions
+aws_credentials_file="$(aws_get_cred_path)"
+
+aws_get_profile_data(){
+    local profile="$1"
+    sed -n "/[[:space:]]*\\[$profile\\]/,/^[[:space:]]*\\[/p" "$aws_credentials_file"
+}
+
 aws_profile(){
     local profile="${1// }"
     if [ -n "$profile" ]; then
+        if ! [[ "$profile" =~ ^[[:alnum:]_-]+$ ]]; then
+            echo "invalid profile name given, must be alphanumeric, dashes and underscores allowed"
+            return 1
+        fi
+        local profile_data
+        profile_data="$(aws_get_profile_data "$profile")"
+        if [ -z "$profile_data" ]; then
+            echo "profile [$profile] not found in $aws_credentials_file!"
+            return 1
+        fi
+        echo "setting aws profile to '$profile'"
         export AWS_PROFILE="$profile"
     elif [ -n "$AWS_PROFILE" ]; then
         echo "$AWS_PROFILE"
@@ -59,31 +95,12 @@ aws_env(){
     # export AWS_ACCESS_KEY
     # export AWS_SECRET_KEY
     # export AWS_SESSION_TOKEN - for multi-factor authentication
-    local aws_credentials=~/.aws/credentials
     local aws_token=~/.aws/token
-    local boto=~/.boto
-    if ! [[ "$profile" =~ ^[[:alnum:]_-]+$ ]]; then
-        echo "invalid profile name given, must be alphanumeric, dashes and underscores allowed"
-        return 1
-    fi
-    local credentials_file
-    if [ -f "$aws_credentials" ]; then
-        credentials_file="$aws_credentials"
-    # older boto creds
-    elif [ -f "$boto" ]; then
-        credentials_file="$boto"
-    else
-        echo "no credentials found - didn't find $boto or $aws_credentials"
-        return 1
-    fi
+    aws_profile "$profile" || return 1
+    # section is checked for existence as part of aws_profile(), will return before here if not valid
     local profile_data
-    profile_data="$(sed -n "/[[:space:]]*\\[$profile\\]/,/^[[:space:]]*\\[/p" "$credentials_file")"
-    if [ -z "$profile_data" ]; then
-        echo "profile [$profile] not found in $credentials_file!"
-        return 1
-    fi
-    echo "loading [$profile] creds from $credentials_file"
-    aws_profile "$profile"
+    profile_data="$(aws_get_profile_data "$profile")"
+    echo "loading [$profile] creds from $aws_credentials_file"
     eval "$(
     for key in aws_access_key_id aws_secret_access_key aws_session_token; do
         awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$profile_data"
