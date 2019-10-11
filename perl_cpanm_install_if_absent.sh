@@ -17,6 +17,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+perl="${PERL:-perl}"
+
 usage(){
     echo "Installs Perl CPAN modules not already installed using Cpanm"
     echo
@@ -57,10 +59,11 @@ echo
 
 for cpan_module in $cpan_modules; do
     perl_module="${cpan_module%%@*}"
-    if perl -e "use $perl_module;" &>/dev/null; then
+    if "$perl" -e "use $perl_module;" &>/dev/null; then
         echo "perl cpan module '$perl_module' already installed, skipping..."
     else
         echo "installing perl cpan module '$perl_module'"
+        echo
         "$srcdir/perl_cpanm_install.sh" "$cpan_module"
     fi
 done

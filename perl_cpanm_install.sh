@@ -69,17 +69,17 @@ if [ "$(uname -s)" = "Darwin" ]; then
         export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
         export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
         # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
-        envopts=OPENSSL_INCLUDE="$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB"
+        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB"
     fi
 fi
 
-SUDO=""
+sudo=""
 if [ $EUID != 0 ] &&
    [ -z "${PERLBREW_PERL:-}" ]; then
-    SUDO=sudo
+    sudo=sudo
 fi
 
-echo "$SUDO $envopts $CPANM --notest $opts $cpan_modules"
+echo "$sudo $envopts $CPANM --notest $opts $cpan_modules"
 # want splitting of opts and modules
 # shellcheck disable=SC2086
-$SUDO $envopts "$CPANM" --notest $opts $cpan_modules
+eval $sudo $envopts "$CPANM" --notest $opts $cpan_modules
