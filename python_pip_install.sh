@@ -88,14 +88,17 @@ if [ "$(uname -s)" = "Darwin" ]; then
         # usually /usr/local
         brew_prefix="$(brew --prefix)"
 
+        export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
+        export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
+
         export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/lib"
         export CFLAGS="${CFLAGS:-} -I$brew_prefix/include"
         export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/include"
 
         # for OpenSSL
-        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/openssl/lib"
-        export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/openssl/include"
-        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/openssl/include"
+        export LDFLAGS="${LDFLAGS:-} -L$OPENSSL_LIB"
+        export CFLAGS="${CFLAGS:-} -I$OPENSSL_INCLUDE"
+        export CPPFLAGS="${CPPFLAGS:-} -I$OPENSSL_INCLUDE"
 
         # for Kerberos
         export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/krb5/lib"
@@ -104,6 +107,9 @@ if [ "$(uname -s)" = "Darwin" ]; then
 
         export CPATH="${CPATH:-} $LDFLAGS"
         export LIBRARY_PATH="${LIBRARY_PATH:-} $LDFLAGS"
+
+        # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
+        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
     fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
@@ -114,4 +120,4 @@ fi
 echo "$sudo $pip install $opts $pip_modules"
 # want splitting of opts and modules
 # shellcheck disable=SC2086
-$sudo "$pip" install $opts $pip_modules
+eval $sudo $envopts "$pip" install $opts $pip_modules
