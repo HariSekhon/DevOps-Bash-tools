@@ -77,6 +77,10 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+if [ -d ~/go/bin ]; then
+    add_PATH ~/go/bin
+fi
+
 if [ -d ~/Library/Python ]; then
     for x in ~/Library/Python/*/bin; do
         [ -d "$x" ] || continue
