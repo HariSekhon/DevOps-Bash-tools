@@ -20,7 +20,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 usage(){
     echo "Installs Golang tools not already installed"
     echo
-    echo "Leverages adjacent go_cpanm_install.sh which takes in to account library paths, gobrew envs etc"
+    echo "Leverages adjacent golang_get_install.sh which takes in to account library paths etc"
     echo
     echo "Takes a list of go tool names as arguments or .txt files containing lists of tools (one per line)"
     echo
@@ -32,7 +32,7 @@ usage(){
 go_tools=""
 for x in "$@"; do
     if [ -f "$x" ]; then
-        echo "adding cpan tools from file:  $x"
+        echo "adding golang tools from file:  $x"
         go_tools="$go_tools $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
         echo
     else

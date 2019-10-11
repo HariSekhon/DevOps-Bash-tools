@@ -31,7 +31,7 @@ usage(){
 go_tools=""
 for x in "$@"; do
     if [ -f "$x" ]; then
-        echo "adding cpan tools from file:  $x"
+        echo "adding golang tools from file:  $x"
         go_tools="$go_tools $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
         echo
     else
