@@ -113,7 +113,6 @@ gkrellm
 gksu
 gnupg
 gnupg-agent
-golang
 gparted
 gpm
 grub
