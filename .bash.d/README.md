@@ -15,6 +15,7 @@ To disable any these source files, simply rename them to not match the `*.sh` gl
   * Cloud / Containerization / Virtualization:
     * `aws.sh` - [AWS](https://aws.amazon.com) functions:
       - `aws_env` - populates credentials from `~/.aws/credentials` / `~/.boto` section given as an argument to `$AWS_ACCESS_KEY` and `$AWS_SECRET_KEY` environment variables and sets `$AWS_PROFILE` to the profile name (defaults to the 'default' profile and creds if no argument is specified)
+      - `aws_envs` - prints the available envs configured in the aws credentials file and stars the one currently in use
       - `awk_token` - generates a 24-hour MFA session token, exports it as `$AWS_SESSION_TOKEN` for use with [AWS CLI](https://aws.amazon.com/cli/), and saves it to `~/.aws/token` for loading to other shells that call `aws_env`
     * `docker.sh` - [Docker](https://www.docker.com/) convenient aliases and functions like clearing old containers and dangling image layers to clean up space
     * `kubernetes.sh` - [Kubernetes](https://kubernetes.io/) aliases and functions, managing contexts and namespaces even for periodically regenerated `.kube/config` with refreshed embedded certificates, switching between open source [Kubernetes](https://kubernetes.io/) and Redhat [OpenShift](https://www.openshift.com/) `kubectl` and `oc` commands, automating getting authentication token and Kubernetes API endpoints
