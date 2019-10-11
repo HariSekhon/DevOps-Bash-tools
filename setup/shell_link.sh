@@ -23,7 +23,7 @@ conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/files.conf")"
 
 setup_file(){
     local filename="$1"
-    if grep -Eq "(source|\.).+$srcdir/$filename" ~/"$filename" 2>/dev/null; then
+    if grep -Eq "^[[:space:]]*(source|\.)[[:space:]]+$srcdir/$filename" ~/"$filename" 2>/dev/null; then
         echo "$filename already sourced in ~/$filename"
     else
         echo "injecting into ~/$filename: source $srcdir/$filename"

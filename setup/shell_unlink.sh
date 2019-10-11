@@ -34,11 +34,11 @@ echo
 
 remove_sourcing(){
     local filename="$1"
-    if ! grep -Eq "(source|\\.).+$srcdir/$filename" ~/"$filename" 2>/dev/null; then
+    if ! grep -Eq "^[[:space:]]*(source|\\.)[[:space:]]+$srcdir/$filename" ~/"$filename" 2>/dev/null; then
         echo "$filename not currently sourced in ~/$filename"
     else
         echo "in-place editing ~/$filename to remove sourcing of $srcdir/$filename"
-        perl -ni"bak-$(date '+%F_%H%M')" -e "print unless /(source|\\.)[[:space:]]+${srcdir//\//\\/}\/$filename/" ~/"$filename"
+        perl -ni"bak-$(date '+%F_%H%M')" -e "print unless /(source|\\.)[[:space:]]+${srcdir//\//\\/}\/${filename//\//\\/}/" ~/"$filename"
     fi
 }
 
