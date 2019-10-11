@@ -47,7 +47,7 @@ for x in "$@"; do
     esac
 done
 
-if [ -z "$gems" ]; then
+if [ -z "${gems// }" ]; then
     usage
 fi
 
