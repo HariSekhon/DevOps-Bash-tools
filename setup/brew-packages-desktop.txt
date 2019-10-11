@@ -55,7 +55,6 @@ git
 #gnu-sed # in brew-packages.txt
 gnupg2
 gnuplot
-golang
 gradle
 gradle-completion
 hadolint

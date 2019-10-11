@@ -17,6 +17,7 @@ cmake
 coreutils
 direnv
 gnu-sed
+golang
 jq
 jwhois
 parallel
