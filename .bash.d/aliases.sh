@@ -63,6 +63,7 @@ alias m='more'
 alias vi='vim'
 alias v='vim'
 alias grep='grep --color=auto'
+alias dec="decomment.sh"
 
 alias hosts='sudo $EDITOR /etc/hosts'
 
