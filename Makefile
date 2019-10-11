@@ -65,11 +65,11 @@ apt-packages-desktop: system-packages
 
 .PHONY: yum-packages-desktop
 yum-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/rpm-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/yum-install-packages.sh setup/rpm-packages-desktop.txt
 
 .PHONY: homebrew-packages-desktop
 homebrew-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/homebrew-packages-desktop*.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew-install-packages.sh setup/homebrew-packages-desktop*.txt
 
 .PHONY: perl
 perl: system-packages
