@@ -17,7 +17,7 @@ Net::SSH::Expect
 Test::Kwalitee
 Net::SSLeay
 SMS::AQL
-Text::More
+Test::More
 Text::Unidecode
 Thrift::BinaryProtocol
 Thrift::BufferedTransport
