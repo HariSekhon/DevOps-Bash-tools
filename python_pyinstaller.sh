@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Rough sketch of
+# Creates PyInstaller self-contained bundles of all python files given as args or all python files in the current and first subdirectory (to avoid creating bundles of libraries)
 
 set -u
 [ -n "${DEBUG:-}" ] && set -x
@@ -37,17 +37,24 @@ section "Compiling and bundling Python code using PyInstaller"
 
 start_time="$(start_timer)"
 
-opts="-y"
+opts="${PYINSTALLER_OPTS:-}"
+
+opts="$opts -y"
 if [ -d pylib ]; then
     opts="$opts --paths pylib"
+    if [ -d pylib/resources ]; then
+        for filename in pylib/resources/*; do
+            opts="$opts --add-data $filename:resources"
+        done
+    fi
 fi
 
-for x in $filelist; do
-    type isExcluded &>/dev/null && isExcluded "$x" && continue
-    echo "compiling => $x"
+for filename in $filelist; do
+    type isExcluded &>/dev/null && isExcluded "$filename" && continue
+    echo "compiling $filename => dist/$filename"
     # want opt expansion
     # shellcheck disable=SC2086
-    pyinstaller $opts --hidden-import ConfigParser "$x"
+    pyinstaller $opts "$filename"
     echo
 done
 
