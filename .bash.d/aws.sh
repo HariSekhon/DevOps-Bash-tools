@@ -41,17 +41,29 @@ aws_useast(){
 }
 #aws_eu
 
+aws_profile(){
+    local profile="${1// }"
+    if [ -n "$profile" ]; then
+        export AWS_PROFILE="$profile"
+    elif [ -n "$AWS_PROFILE" ]; then
+        echo "$AWS_PROFILE"
+    else
+        echo "default (keys not loaded to env)"
+    fi
+}
+alias awsprofile=aws_profile
+
 # Storing creds in one place in Boto creds file, pull them straight from there
 aws_env(){
-    local section="${1:-default}"
+    local profile="${1:-default}"
     # export AWS_ACCESS_KEY
     # export AWS_SECRET_KEY
     # export AWS_SESSION_TOKEN - for multi-factor authentication
     local aws_credentials=~/.aws/credentials
     local aws_token=~/.aws/token
     local boto=~/.boto
-    if ! [[ "$section" =~ ^[[:alnum:]_-]+$ ]]; then
-        echo "invalid section name given, must be alphanumeric, dashes and underscores allowed"
+    if ! [[ "$profile" =~ ^[[:alnum:]_-]+$ ]]; then
+        echo "invalid profile name given, must be alphanumeric, dashes and underscores allowed"
         return 1
     fi
     local credentials_file
@@ -64,17 +76,17 @@ aws_env(){
         echo "no credentials found - didn't find $boto or $aws_credentials"
         return 1
     fi
-    local section_data
-    section_data="$(sed -n "/[[:space:]]*\\[$section\\]/,/^[[:space:]]*\\[/p" "$credentials_file")"
-    if [ -z "$section_data" ]; then
-        echo "section [$section] not found in $credentials_file!"
+    local profile_data
+    profile_data="$(sed -n "/[[:space:]]*\\[$profile\\]/,/^[[:space:]]*\\[/p" "$credentials_file")"
+    if [ -z "$profile_data" ]; then
+        echo "profile [$profile] not found in $credentials_file!"
         return 1
     fi
-    echo "loading [$section] creds from $credentials_file"
-    export AWS_PROFILE="$section"
+    echo "loading [$profile] creds from $credentials_file"
+    aws_profile "$profile"
     eval "$(
     for key in aws_access_key_id aws_secret_access_key aws_session_token; do
-        awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$section_data"
+        awk -F= "/^[[:space:]]*$key/"'{gsub(/[[:space:]]+/, "", $0); gsub(/_id/, "", $1); gsub(/_secret_access/, "_secret", $1); print "export "toupper($1)"="$2}' <<< "$profile_data"
     done
     )"
     if [ -f "$aws_token" ]; then
@@ -83,12 +95,14 @@ aws_env(){
         source "$aws_token"
     fi
 }
+alias awsenv=aws_env
 
 aws_unenv(){
     unset AWS_ACCESS_KEY
     unset AWS_SECRET_KEY
     unset AWS_SESSION_TOKEN
 }
+alias awsunenv=aws_unenv
 
 aws_token(){
     local output
@@ -125,3 +139,4 @@ aws_token(){
     echo
     echo "you can now use AWS CLI normally"
 }
+alias awstoken=aws_token
