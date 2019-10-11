@@ -109,7 +109,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
         export LIBRARY_PATH="${LIBRARY_PATH:-} $LDFLAGS"
 
         # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
-        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
+        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB" # LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
     fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
