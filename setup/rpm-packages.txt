@@ -17,6 +17,7 @@ bash
 curl
 #direnv
 git
+golang
 jq
 make
 parallel
