@@ -42,8 +42,49 @@ link:
 unlink:
 	@setup/shell_unlink.sh
 
+.PHONY: desktop
+desktop: install
+	@if [ -x /sbin/apk ];        then $(MAKE) apk-packages-desktop; fi
+	@if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages-desktop; fi
+	@if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages-desktop; fi
+	@if [ -x /usr/local/bin/brew -a `uname` = Darwin ]; then $(MAKE) homebrew-packages-desktop; fi
+	@# do these late so that we have the above system packages installed first to take priority and not install from source where we don't need to
+	@$(MAKE) perl
+	@$(MAKE) golang
+	@# no packages any more since jgrep is no longer found
+	@#$(MAKE) ruby
+
+.PHONY: apk-packages-desktop
+apk-packages-desktop: system-packages
+	@echo "Alpine desktop not supported at this time"
+	@exit 1
+
+.PHONY: apt-packages-desktop
+apt-packages-desktop: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/deb-packages-desktop.txt
+
+.PHONY: yum-packages-desktop
+yum-packages-desktop: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/rpm-packages-desktop.txt
+
+.PHONY: homebrew-packages-desktop
+homebrew-packages-desktop: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/homebrew-packages-desktop*.txt
+
+.PHONY: perl
+perl: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
+
+.PHONY: golang
+golang: system-packages
+	NO_FAIL=1 $(BASH_TOOLS)/golang_get_install_if_absent.sh setup/go-packages-desktop.txt
+
+.PHONY: ruby
+ruby: system-packages
+	NO_FAIL=1 $(BASH_TOOLS)/ruby_install_if_absent.sh setup/gem-packages-desktop.txt
+
 .PHONY: python
-python:
+python: system-packages
 	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
