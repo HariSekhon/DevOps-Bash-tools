@@ -56,9 +56,9 @@ echo "Installing Golang tools that are not already installed"
 echo
 
 for go_tool in $go_tools; do
-    go_tool="${go_tool%%@*}"
-    if type -P "$go_tool" &>/dev/null; then
-        echo "go tool '$go_tool' already installed, skipping..."
+    go_bin="${go_tool##*/}"
+    if type -P "$go_bin" &>/dev/null; then
+        echo "go tool '$go_tool' ($go_bin) already installed, skipping..."
     else
         echo "installing go tool '$go_tool'"
         echo
