@@ -53,7 +53,7 @@ for x in "$@"; do
     esac
 done
 
-if [ -z "$pip_modules" ]; then
+if [ -z "${pip_modules// }" ]; then
     usage
 fi
 
