@@ -18,7 +18,7 @@ make install
 ```
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
-- Symlinks all `.*` conf files to `$HOME` for git, vim, top, htop, screen, tmux, editorconfig, ansible etc.
+- Symlinks all `.*` config files to `$HOME` for git, vim, top, htop, screen, tmux, editorconfig, ansible etc.
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
 
