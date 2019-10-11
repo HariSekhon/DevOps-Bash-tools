@@ -21,7 +21,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-PIP="${PIP:-pip}"
+pip="${PIP:-pip}"
 opts="${PIP_OPTS:-}"
 
 usage(){
@@ -65,11 +65,11 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="$opts -q"
 fi
 
-SUDO=""
+sudo=""
 if [ $EUID != 0 ] &&
    [ -z "${VIRTUAL_ENV:-}" ] &&
    [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
-    SUDO=sudo
+    sudo=sudo
 fi
 
 user_opt(){
@@ -78,7 +78,7 @@ user_opt(){
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
     else
         opts="$opts --user"
-        SUDO=""
+        sudo=""
     fi
 }
 
@@ -111,7 +111,7 @@ elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
     user_opt
 fi
 
-echo "$SUDO $PIP install $opts $pip_modules"
+echo "$sudo $pip install $opts $pip_modules"
 # want splitting of opts and modules
 # shellcheck disable=SC2086
-$SUDO "$PIP" install $opts $pip_modules
+$sudo "$pip" install $opts $pip_modules
