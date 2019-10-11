@@ -16,6 +16,7 @@
 bash
 curl
 git
+go
 jq
 make
 parallel
