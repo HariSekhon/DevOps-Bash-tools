@@ -47,7 +47,7 @@ for x in "$@"; do
     esac
 done
 
-if [ -z "$cpan_modules" ]; then
+if [ -z "${cpan_modules// }" ]; then
     usage
 fi
 
