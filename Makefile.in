@@ -290,6 +290,14 @@ cpan:
 pip:
 	find . -name 'requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
+.PHONY: python-compile
+python-compile:
+	$(BASH_TOOLS)/python_compile.sh
+
+.PHONY: pycompile
+pycompile: python-compile
+	@:
+
 .PHONY: fatpacks
 fatpacks:
 	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
