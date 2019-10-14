@@ -38,6 +38,9 @@ if type -P make &>/dev/null; then
         echo "Validating $makefile"
         makefile="${makefile##*/}"
         while read -r target; do
+            if [[ "$target" =~ wc-?(code|scripts) ]]; then
+                continue
+            fi
             if ! make -f "$makefile" --warn-undefined-variables -n "$target" >/dev/null; then
                 echo "Makefile validation FAILED"
                 exit 1
