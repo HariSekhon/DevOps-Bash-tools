@@ -19,6 +19,8 @@ CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | so
 
 CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.conf)
 
+.PHONY: *
+
 .PHONY: build
 build: system-packages aws
 	@:
