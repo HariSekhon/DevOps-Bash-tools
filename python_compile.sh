@@ -13,14 +13,14 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -u
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')"
+filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort)"
 
 if [ -z "$filelist" ]; then
     echo "no Python / Jython files found to compile"
