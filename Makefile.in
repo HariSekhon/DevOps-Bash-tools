@@ -63,8 +63,9 @@ ifeq '$(shell id -u)' '0'
 endif
 
 .PHONY: default
-default: build
-	@:
+default:
+	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
+	@$(MAKE) build
 
 .PHONY: quick
 quick:
@@ -312,8 +313,9 @@ sonar:
 	sonar-scanner
 
 .PHONY: update
-update: update2 build
-	@:
+update: update2
+	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
+	@$(MAKE) build
 
 .PHONY: update2
 update2: update-no-recompile
