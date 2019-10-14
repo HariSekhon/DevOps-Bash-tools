@@ -93,6 +93,8 @@ r
 rdesktop
 #readline # in brew-packages.txt
 ruby-completion
+# screen  # already present on Mac
+s3cmd
 snappy
 sonar-completion
 sqlite
