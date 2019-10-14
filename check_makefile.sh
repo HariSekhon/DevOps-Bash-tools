@@ -36,13 +36,14 @@ if type -P make &>/dev/null; then
     while read -r makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
+        makefile="${makefile##*/}"
         while read -r target; do
-            if ! make --warn-undefined-variables -n "$target" >/dev/null; then
+            if ! make -f "$makefile" --warn-undefined-variables -n "$target" >/dev/null; then
                 echo "Makefile validation FAILED"
                 exit 1
             fi
         done < <(
-            grep '^[[:alnum:]]\+:' "${makefile##*/}" |
+            grep '^[[:alnum:]]\+:' "$makefile" |
             sort -u |
             sed 's/:.*$//'
         ) || :  # without this if no targets are found like in Dockerfiles/jython (which is all inherited) and this will fail set -e silently error out and not check the rest of the Makefiles
