@@ -14,14 +14,16 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -eu #o pipefail
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in)" ]; then
+makefiles="$(find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in)"
+
+if [ -z "$makefiles" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -31,21 +33,21 @@ section "M a k e"
 start_time="$(start_timer)"
 
 if type -P make &>/dev/null; then
-    find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in |
     while read -r makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
-        grep '^[[:alnum:]]\+:' Makefile |
-        sort -u |
-        sed 's/:.*$//' |
         while read -r target; do
             if ! make --warn-undefined-variables -n "$target" >/dev/null; then
                 echo "Makefile validation FAILED"
                 exit 1
             fi
-        done || :  # without this if no targets are found like in Dockerfiles/jython (which is all inherited) and this will fail set -e silently error out and not check the rest of the Makefiles
+        done < <(
+            grep '^[[:alnum:]]\+:' "${makefile##*/}" |
+            sort -u |
+            sed 's/:.*$//'
+        ) || :  # without this if no targets are found like in Dockerfiles/jython (which is all inherited) and this will fail set -e silently error out and not check the rest of the Makefiles
         popd >/dev/null
-    done
+    done <<< "$makefiles"
 else
     echo "WARNING: 'make' is not installed, skipping..."
     echo
