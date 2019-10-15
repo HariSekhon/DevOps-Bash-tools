@@ -218,6 +218,7 @@ st(){
   # more calls less on Mac, and gets stuck in interactive mode ignoring the less alias switches
   #more -R -n "$((LINES - 3))"
   #less -RFX
+  # shellcheck disable=SC2086
   eval ${GIT_PAGER:-cat}
 }
 
@@ -300,8 +301,13 @@ gitadd() {
 }
 
 gitu(){
-    [ -n "$1" ] || { echo "ERROR: must supply arg"; return 1; }
-    [ "$(git diff  "$@" | wc -l)" -gt 0 ] || return
+    if [ -z "$1" ]; then
+        echo "usage: gitu <file>"
+        return 3
+    fi
+    if [ -z "$(git diff "$@")" ]; then
+        return
+    fi
     git diff "$@" &&
     read -r &&
     git add "$@" &&
