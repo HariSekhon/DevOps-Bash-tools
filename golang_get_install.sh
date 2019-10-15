@@ -74,6 +74,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 for go_tool in $go_tools; do
+    go_tool="${go_tool#http?://}"
     echo "$envopts $go get $opts -u $go_tool"
     # want splitting of opts and tools
     # shellcheck disable=SC2086
