@@ -20,6 +20,7 @@
 # Sets the Screen and Terminal titles
 
 alias ti="title"
+# static title - turn dynamic prompt escape codes off, while optionally setting new title
 alias sti="dpoff >/dev/null; ti"
 
 #title(){ echo -ne '\033]0;'"$@"'\007'; }
@@ -83,6 +84,7 @@ dpstatus(){
     fi
 }
 
+# dynamic prompt escape codes off
 dpoff(){
     if dpstatus >/dev/null; then
         title " "
@@ -93,6 +95,7 @@ dpoff(){
     fi
 }
 
+# dynamic prompt escape codes on
 dpon(){
     if ! dpstatus >/dev/null; then
         PS1="${SCREEN_ESCAPE}${PS1}"
@@ -102,6 +105,7 @@ dpon(){
     fi
 }
 
+# toggle dynamic prompt on/off
 dp(){
     if dpstatus; then
         printf '\b\renabled => '
