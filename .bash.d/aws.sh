@@ -47,7 +47,13 @@ aws_useast(){
 
 # https://github.com/remind101/assume-role
 assume-role(){
-    eval "$(command assume-role "$@")"
+    #eval "$(command assume-role "$@")"
+    local output
+    output="$(command assume-role "$@")"
+    # shellcheck disable=SC2181
+    if [ $? -eq 0 ]; then
+        eval "$output"
+    fi
 }
 
 # ============================================================================ #
