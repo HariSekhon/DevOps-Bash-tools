@@ -163,8 +163,11 @@ nmap          ;q :q<CR>
 nmap          ;r :call WriteRun()<CR>
 "nmap <silent> ;s :call ToggleSyntax()<CR>
 nmap <silent> ;s :,!sqlcase.pl<CR>
-nmap          ;u :call HgGitU()<CR>
-nmap          ;; :call HgGitU()<CR>
+"nmap          ;u :call HgGitU()<CR>
+"nmap          ;; :call HgGitU()<CR>
+" command not found
+"nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
+nmap          ;; :! bash -ic 'gitu "%"'<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 
