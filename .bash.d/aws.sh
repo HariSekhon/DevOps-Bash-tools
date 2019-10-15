@@ -31,6 +31,8 @@ if [ -d /usr/local/ec2-api-tools ]; then
     add_PATH "$EC2_HOME/bin"
 fi
 
+# ============================================================================ #
+
 # ec2dre - ec2-describe-regions - list regions you have access to and put them here
 # TODO: pull a more recent list and have aliases/functions auto-generated from that to export
 aws_eu(){
@@ -40,6 +42,15 @@ aws_useast(){
     export EC2_URL=ec2.us-east-1.amazonaws.com
 }
 #aws_eu
+
+# ============================================================================ #
+
+# https://github.com/remind101/assume-role
+assume-role(){
+    eval "$(command assume-role "$@")"
+}
+
+# ============================================================================ #
 
 aws_get_cred_path(){
     local aws_credentials=~/.aws/credentials
@@ -117,7 +128,7 @@ alias awsenv=aws_env
 aws_envs(){
     awk '/^[[:space:]]*\[.+\]/{print $1}' < "$aws_credentials_file" |
     sed 's/\[//;s/\]//' |
-    while read profile; do
+    while read -r profile; do
         default=0
         if [ "$profile" = "$AWS_PROFILE" ]; then
             local default=1
