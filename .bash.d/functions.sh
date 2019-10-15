@@ -62,6 +62,24 @@ checkprog(){
     fi
 }
 
+resolve_symlinks(){
+    local readlink=readlink
+    if [ -n "$APPLE" ]; then
+        if type -P greadlink &>/dev/null; then
+            readlink=greadlink
+        else
+            readlink=""
+        fi
+    fi
+    if [ -z "$readlink" ]; then
+        echo "$*"
+        return
+    fi
+    for x in "$@"; do
+        "$readlink" -m "$x"
+    done
+}
+
 pass(){
     read -r -s -p 'password: ' PASSWORD
     echo
