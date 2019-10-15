@@ -67,3 +67,7 @@ export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 export PS4="--> "
 # Bash performance profiling, can be heavy on performance, &>/tmp/bash.out then use profiling script
 #export PS4='$(date "+%s.%N ($LINENO) + ") --> '
+
+debug_sourcing(){
+    PS4='+ $BASH_SOURCE:$LINENO:' bash -xlic '' 2>&1 | less
+}
