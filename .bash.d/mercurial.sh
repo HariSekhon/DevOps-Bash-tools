@@ -17,10 +17,10 @@
 #             R e v i s i o n   C o n t r o l  -  M e r c u r i a l
 # ============================================================================ #
 
-# I don't use Hg any more so a lot of the convenient aliases for daily use are commented out
+type -P hg &>/dev/null || return 0
 
-#alias hgi=hgignore
-#alias hgrc="$EDITOR ~/.hgrc"
+alias hgi=hgignore
+alias hgrc='$EDITOR ~/.hgrc'
 
 # HG doesn't record dirs and there is no .hg per subdir, rather than traverse upwards checking filesystem boundaries use hg tools themselves
 isHg(){
@@ -65,7 +65,7 @@ hgignore(){
     #popd &>/dev/null
 }
 
-hgci() {
+hgci(){
     local hgcimsg=""
     for x in "$@"; do
         if hg st "$x" | grep -q "^[?A]"; then
