@@ -305,14 +305,19 @@ gitu(){
         echo "usage: gitu <file>"
         return 3
     fi
-    if [ -z "$(git diff "$@")" ]; then
+    local targets
+    for x in "$@"; do
+        x="$(resolve_symlinks "$x")"
+        targets="$targets $x"
+    done
+    if [ -z "$(git diff $targets)" ]; then
         return
     fi
-    git diff "$@" &&
+    git diff $targets &&
     read -r &&
-    git add "$@" &&
-    echo "committing $*" &&
-    git commit -m "updated $*" "$@"
+    git add $targets &&
+    echo "committing $targets" &&
+    git commit -m "updated $targets" $targets
 }
 
 push(){
