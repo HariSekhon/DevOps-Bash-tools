@@ -62,6 +62,17 @@ ifeq '$(shell id -u)' '0'
 	SUDO_PIP :=
 endif
 
+# placeholders to silence check_makefile.sh warnings - should be set in client Makefiles after sourcing
+ifndef REPO
+	REPO := NOTSET
+endif
+ifndef ARGS
+	ARGS := NOTSET
+endif
+ifndef CONF_FILES
+	CONF_FILES := NOTSET
+endif
+
 .PHONY: default
 default:
 	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
