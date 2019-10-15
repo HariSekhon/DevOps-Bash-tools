@@ -49,7 +49,7 @@ bash_tools_start_time="$(start_timer)"
 # don't run this here, it needs to be called explicitly otherwise will fail 'make test deep-clean'
 #"$srcdir/check_docker_clean.sh"
 
-"$srcdir/check_bash_duplicate_defs.sh"
+"$srcdir/check_bash_duplicate_defs.sh" || :
 
 "$srcdir/check_duplicate_requirements.sh"
 
@@ -81,7 +81,7 @@ bash_tools_start_time="$(start_timer)"
 # this is usually run after build, no point testing again
 #. "$srcdir/check_sbt_build.sh"
 
-. "$srcdir/check_shell_syntax.sh"
+. "$srcdir/check_bash_syntax.sh"
 
 . "$srcdir/check_bash_arrays.sh"
 
@@ -94,9 +94,10 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/check_no_tabs.sh"
 
+. "$srcdir/check_dockerfiles.sh"
+
 # TODO: enable later and tweak configs
 #. "$srcdir/check_ansible_playbooks.sh"
-#. "$srcdir/check_dockerfiles.sh"
 #. "$srcdir/check_json.sh"
 #. "$srcdir/check_yaml.sh"
 

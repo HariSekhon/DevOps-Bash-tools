@@ -35,7 +35,7 @@ if [ $EUID -eq 0 ]; then
 fi
 
 if [ -z "${UPDATE_ANSIBLE:-}" ]; then
-    if which ansible &>/dev/null; then
+    if type -P ansible &>/dev/null; then
         echo "Ansible already installed"
         echo
         echo "To update ansible, set the below and then re-run this script"
@@ -51,13 +51,13 @@ if [ "$os" = "Darwin" ]; then
     brew update
     brew install ansible
 elif [ "$os" = "Linux" ]; then
-    if which dnf &>/dev/null; then
+    if type -P dnf &>/dev/null; then
         echo "Installing via DNF"
         $sudo dnf install -y ansible
-    elif which yum &>/dev/null; then
+    elif type -P yum &>/dev/null; then
         echo "Installing via Yum"
         $sudo yum install -y ansible
-    elif which apt &>/dev/null; then
+    elif type -P apt &>/dev/null; then
         echo "Installing via APT"
         if grep -q Ubuntu /etc/*release; then
             $sudo apt update
@@ -75,21 +75,21 @@ elif [ "$os" = "Linux" ]; then
             $sudo apt update
             $sudo apt install -y ansible
         fi
-    elif which apk &>/dev/null; then
+    elif type -P apk &>/dev/null; then
         echo "Installing via Apk"
         $sudo apk update
         $sudo apk add ansible
-    elif which emerge &>/dev/null; then
+    elif type -P emerge &>/dev/null; then
         echo "Installing via Emerge"
         $sudo emerge -av app-admin/ansible
-    elif which pip &>/dev/null; then
+    elif type -P pip &>/dev/null; then
         echo "Installing via Pip"
         pip install $pip_opts ansible
     else
         echo "Couldn't find Linux package manager!'"
         exit 1
     fi
-elif which pip &>/dev/null; then
+elif type -P pip &>/dev/null; then
     echo "Unsupported OS, installing via Pip"
     pip install $pip_opts ansible
 else

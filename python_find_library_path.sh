@@ -26,14 +26,26 @@ python="${PYTHON:-python}"
 find_python_sys_path(){
     cat <<EOF |
 from __future__ import print_function
+# more likely to be right than \$USER
+import getpass
+import os
 import sys
+user = getpass.getuser()
 for path in sys.path:
-    if path.endswith('/site-packages'):
+    # don't return local /Users/\$USER/Library/Python/2.7/lib/python/site-packages
+    # as that is not the source of sys
+    if user in path:
+        continue
+    if 'Python.framework' in path:
+        path = path.rsplit('{}lib{}'.format(os.sep, os.sep))[0]
+        print(path)
+        break
+    elif path.endswith('/site-packages'):
         print(path)
         break
 EOF
-    "$python"
-    #sed 's,/python[[:digit:].]*/site-packages,,'
+    "$python" #|
+    #sed 's,/python/*[[:digit:].]*/site-packages,,'
 }
 
 if [ $# -eq 0 ]; then

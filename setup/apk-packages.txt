@@ -16,10 +16,12 @@
 bash
 curl
 git
+go
 jq
 make
 parallel
 perl
 python
+py-pip
 wget
 unzip

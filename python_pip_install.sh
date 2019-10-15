@@ -21,8 +21,18 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing Python PyPI Modules"
-echo
+pip="${PIP:-pip}"
+opts="${PIP_OPTS:-}"
+
+usage(){
+    echo "Installs Python PyPI modules using Pip, taking in to account library paths, virtual envs etc"
+    echo
+    echo "Takes a list of python module names as arguments or .txt files containing lists of modules (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_modules>"
+    echo
+    exit 3
+}
 
 pip_modules=""
 for x in "$@"; do
@@ -36,17 +46,30 @@ for x in "$@"; do
     pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 done
 
-opts=""
-if [ -n "${TRAVIS:-}" ]; then
-    echo "running in quiet mode"
-    opts="-q"
+for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+if [ -z "${pip_modules// }" ]; then
+    usage
 fi
 
-SUDO=""
+echo "Installing Python PyPI Modules"
+echo
+
+if [ -n "${TRAVIS:-}" ]; then
+    echo "running in quiet mode"
+    opts="$opts -q"
+fi
+
+sudo=""
 if [ $EUID != 0 ] &&
    [ -z "${VIRTUAL_ENV:-}" ] &&
    [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
-    SUDO=sudo
+    sudo=sudo
 fi
 
 user_opt(){
@@ -55,24 +78,28 @@ user_opt(){
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
     else
         opts="$opts --user"
-        SUDO=""
+        sudo=""
     fi
 }
 
+envopts=""
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
-    if which brew &>/dev/null; then
-        # usually /opt/local
+    if type -P brew &>/dev/null; then
+        # usually /usr/local
         brew_prefix="$(brew --prefix)"
+
+        export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
+        export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
 
         export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/lib"
         export CFLAGS="${CFLAGS:-} -I$brew_prefix/include"
         export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/include"
 
         # for OpenSSL
-        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/openssl/lib"
-        export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/openssl/include"
-        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/openssl/include"
+        export LDFLAGS="${LDFLAGS:-} -L$OPENSSL_LIB"
+        export CFLAGS="${CFLAGS:-} -I$OPENSSL_INCLUDE"
+        export CPPFLAGS="${CPPFLAGS:-} -I$OPENSSL_INCLUDE"
 
         # for Kerberos
         export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/krb5/lib"
@@ -81,6 +108,9 @@ if [ "$(uname -s)" = "Darwin" ]; then
 
         export CPATH="${CPATH:-} $LDFLAGS"
         export LIBRARY_PATH="${LIBRARY_PATH:-} $LDFLAGS"
+
+        # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
+        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB" # LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
     fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
@@ -88,7 +118,7 @@ elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
     user_opt
 fi
 
-echo "$SUDO ${PIP:-pip} install $opts $pip_modules"
-# want splitting of pip opts
+echo "$sudo $pip install $opts $pip_modules"
+# want splitting of opts and modules
 # shellcheck disable=SC2086
-$SUDO "${PIP:-pip}" install $opts $pip_modules
+eval $sudo $envopts "$pip" install $opts $pip_modules

@@ -27,7 +27,7 @@ export github=~/github
 export GIT_PAGER="less -RFX --tabs=4"
 # shellcheck disable=SC2230
 #if [ -z "${GIT_PAGER:-}" ] && \
-if which diff-so-fancy &>/dev/null; then
+if type -P diff-so-fancy &>/dev/null; then
     # pre-loading a pattern to 'n' / 'N' / '?' / '/' search through will force you in to pager and disregard -F / --quit-if-one-screen
     #export GIT_PAGER="diff-so-fancy --color=yes | less -RFX --tabs=4 --pattern '^(Date|added|deleted|modified): '"
     export GIT_PAGER="diff-so-fancy --color=yes | $GIT_PAGER"
@@ -156,6 +156,7 @@ isGit(){
 
 
 st(){
+  # shellcheck disable=SC2086
   {
     local target="${1:-.}"
     shift
@@ -300,14 +301,73 @@ gitadd() {
 }
 
 gitu(){
-    [ -n "$1" ] || { echo "ERROR: must supply arg"; return 1; }
-    [ "$(git diff  "$@" | wc -l)" -gt 0 ] || return
-    git diff "$@" &&
+    if [ -z "$1" ]; then
+        echo "usage: gitu <file>"
+        return 3
+    fi
+    local targets
+    for x in "$@"; do
+        x="$(resolve_symlinks "$x")"
+        targets="$targets $x"
+    done
+    # shellcheck disable=SC2086
+    if [ -z "$(git diff $targets)" ]; then
+        return
+    fi
+    # shellcheck disable=SC2086
+    git diff $targets &&
     read -r &&
-    git add "$@" &&
-    echo "committing $*" &&
-    git commit -m "updated $*" "$@"
+    git add $targets &&
+    echo "committing $targets" &&
+    git commit -m "updated $targets" $targets
 }
+
+#githgu(){
+#    target="${1:-.}"
+#    #count=0
+#    while [ -L "$target" ]; do
+#        #target="$(readlink "$target")"
+#        #let count+=1
+#        #if [ $count -gt 10 ]; then
+#        #    echo "looping over links more than 10 times in hggitu! "
+#        #    exit 2
+#        #fi
+#        echo "$target is a symlink! "
+#        return 1
+#    done
+#    if ! [ -e "$target" ]; then
+#        echo "$target does not exist"
+#        return 1
+#    fi
+#    if isGit "$target"; then
+#        echo "> git" >&2
+#        #if [ -d "$target" ]; then
+#        #    pushd "$target" >/dev/null
+#        #else
+#        #    pushd "$(dirname "$target")" >/dev/null
+#        #fi
+#        #"$srcdir2/gitu" "${target##*/}" &&
+#        gitu "$target"
+#        #popd >/dev/null
+#    elif type isHg &>/dev/null && isHg "$target"; then
+#        echo "> hg" >&2
+#        #if [ -d "$target" ]; then
+#        #    pushd "$target" >/dev/null
+#        #else
+#        #    pushd "$(dirname "$target")" >/dev/null
+#        #fi
+#        #"$srcdir2/hgu" "${target##*/}" &&
+#        hgu "$target"
+#        #popd >/dev/null
+#    # Not supporting SVN any more
+#    #elif type isSvn &>/dev/null && isSvn "$target"; then
+#    #    echo "> svn" >&2
+#    #    svnu "$target"
+#    else
+#        echo "not a revision controlled resource as far as bashrc can tell"
+#        return 1
+#    fi
+#}
 
 push(){
     pull . "$@" || return 1

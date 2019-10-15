@@ -21,7 +21,14 @@ sc(){
     checkprog screen || return 1
     isscreen && { echo "I am already in a screen, aborting"; return 1; }
     screen -wipe
-    screen -aARRD -S main "$@"
+    local session=main
+    local detached_screens
+    detached_screens="$(screen -ls | grep Detached)"
+    if [ -n "$detached_screens" ] &&
+       [ "$(wc -l <<< "$detached_screens" | awk '{print $1}')" = 1 ]; then
+        session="$(awk '{print $1;exit}' <<< "$detached_screens")"
+    fi
+    screen -aARRD -S "$session" "$@"
 }
 
 screencmd(){

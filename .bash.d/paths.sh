@@ -49,11 +49,18 @@ perlpath(){
 
 #export PATH="${PATH%%:~/github*}"
 add_PATH(){
+    local env_var
     local path
-    path="${1:-}"
+    if [ $# -gt 1 ]; then
+        env_var="$1"
+        path="$2"
+    else
+        env_var=PATH
+        path="${1:-}"
+    fi
     path="${path%/}"
-    if ! [[ "$PATH" =~ (^|:)$path(:|$) ]]; then
-        export PATH="$PATH:$path"
+    if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
+        export $env_var="${!env_var}:$path"
     fi
 }
 
@@ -70,11 +77,22 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+if [ -d ~/go/bin ]; then
+    add_PATH ~/go/bin
+fi
+
 if [ -d ~/Library/Python ]; then
     for x in ~/Library/Python/*/bin; do
         [ -d "$x" ] || continue
         add_PATH "$x"
     done
+fi
+
+if [ -d ~/perl5/lib/perl5 ]; then
+    add_PATH PERL5LIB ~/perl5/lib/perl5
+fi
+if [ -d ~/perl5/bin ]; then
+    add_PATH ~/perl5/bin
 fi
 
 # do the same with MANPATH
@@ -141,7 +159,7 @@ GOPATH="$github/go-tools"
 # /usr/local/go/src/runtime/internal/sys (from $GOROOT)
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
 # shellcheck disable=SC2230
-if which go &>/dev/null; then
+if type -P go &>/dev/null; then
     if [ -n "$APPLE" ]; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(which go)")")")"
     else

@@ -62,9 +62,21 @@ ifeq '$(shell id -u)' '0'
 	SUDO_PIP :=
 endif
 
+# placeholders to silence check_makefile.sh warnings - should be set in client Makefiles after sourcing
+ifndef REPO
+	REPO := NOTSET
+endif
+ifndef ARGS
+	ARGS := NOTSET
+endif
+ifndef CONF_FILES
+	CONF_FILES := NOTSET
+endif
+
 .PHONY: default
-default: build
-	@:
+default:
+	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
+	@$(MAKE) build
 
 .PHONY: quick
 quick:
@@ -121,13 +133,13 @@ apk-packages:
 	#for x in apk-packages{,-perl,-python}{,-dev}.txt; do \
 	for x in apk-packages.txt apk-packages-dev.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			bash-tools/apk-install-packages.sh "setup/$$x"; \
+			$(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 	for x in apk-packages-optional.txt; do \
 		if [ -f "setup/$$x" ]; then \
-			NO_FAIL=1 NO_UPDATE=1 bash-tools/apk-install-packages.sh "setup/$$x"; \
+			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apk-install-packages.sh "setup/$$x"; \
 		fi; \
 	done
 
@@ -290,13 +302,31 @@ cpan:
 pip:
 	find . -name 'requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
+.PHONY: python-compile
+python-compile:
+	$(BASH_TOOLS)/python_compile.sh
+
+.PHONY: pycompile
+pycompile: python-compile
+	@:
+
+.PHONY: fatpacks
+fatpacks:
+	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+	if [ -d lib/resources ]; then cp -av lib/resources fatpacks/; fi
+
+.PHONY: fatpack
+fatpack: fatpacks
+	@:
+
 .PHONY: sonar
 sonar:
 	sonar-scanner
 
 .PHONY: update
-update: update2 build
-	@:
+update: update2
+	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
+	@$(MAKE) build
 
 .PHONY: update2
 update2: update-no-recompile
@@ -390,8 +420,8 @@ docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
-travis: travis-log
-	@:
+travis:
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://travis-ci.org/$(REPO)"
 
 .PHONY: travis-log
 travis-log:
@@ -412,7 +442,10 @@ readme:
 .PHONY: startrack
 startrack:
 	@echo "Don't run this too much, you will hit an API limit against your IP"
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?u=$$(sed 's/\/.*//' <<< "$(REPO)")&r=$$(sed 's/.*\///' <<< "$(REPO)")"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; \
+	browser "https://seladb.github.io/StarTrack-js/?\
+	u=$$(sed 's/\/.*//' <<< "$(REPO)")\
+	&r=$$(sed 's/.*\///' <<< "$(REPO)")"
 
 .PHONY: star
 star: startrack
@@ -421,7 +454,15 @@ star: startrack
 .PHONY: allstars
 allstars:
 	@echo "Takes a while, don't run this all the time or you will an API limit against your IP"
-	@REPOS="Nagios-Plugins Dockerfiles DevOps-Python-tools DevOps-Perl-tools DevOps-Bash-Tools Nagios-Plugin-Kafka HAProxy-configs"; source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://seladb.github.io/StarTrack-js/?$$(for repo in $$REPOS; do printf "%s" "&u=HariSekhon&r=$$repo"; done | sed 's/\&//')"
+	@REPOS="Nagios-Plugins Dockerfiles DevOps-Python-tools DevOps-Perl-tools DevOps-Bash-Tools Nagios-Plugin-Kafka HAProxy-configs"; \
+	source $(BASH_TOOLS)/.bash.d/network.sh; \
+	browser "https://seladb.github.io/StarTrack-js/?\
+	$$(\
+		for repo in $$REPOS; do \
+			printf "%s" "&u=HariSekhon&r=$$repo"; \
+		done | \
+		sed 's/\&//'\
+	)"
 
 .PHONY: ls-files
 ls-files:
@@ -434,7 +475,7 @@ files: ls-files
 .PHONY: ls-code
 ls-code:
 	@# TODO: port out my code and non-code lists and make this more generic
-	@$(MAKE) ls-files | grep -v -e '^\.' -e LICENSE -e '.*\.md' -e '.*\.txt' `for x in $(CONF_FILES) $(shell git submodule | awk '{print $$2}'); do echo "-e $$x"; done`
+	@$(MAKE) ls-files | grep -v -e '^\./\.' -e LICENSE -e '.*\.md' -e '.*\.txt' `for x in $(CONF_FILES) $(shell git submodule | awk '{print $$2}'); do echo "-e $$x"; done`
 	@$(MAKE) ls-files | grep '\.bash' || :
 
 .PHONY: lscode
@@ -443,8 +484,8 @@ lscode: ls-code
 
 .PHONY: wc
 wc:
-	# CODE_FILES := definitions in Makefiles must not be quoted or will get wc error 'open: File name too long'
-	wc -l $(CODE_FILES)
+	@# CODE_FILES := definitions in Makefiles must not be quoted or will get wc error 'open: File name too long'
+	@wc -l $(CODE_FILES)
 	@printf "Total Files: "
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l
 
@@ -458,7 +499,7 @@ wc2:
 .PHONY: wc-code
 wc-code:
 	@$(MAKE) ls-code | xargs wc -l
-	@printf "Total code: "
+	@printf "Total code files: "
 	@$(MAKE) ls-code | wc -l
 
 .PHONY: wccode
@@ -467,7 +508,7 @@ wccode: wc-code
 
 .PHONY: wc-code2
 wc-code2:
-	@printf "Total code: "
+	@printf "Total code files: "
 	@$(MAKE) ls-code | wc -l
 	@printf "Total line count without # comments: "
 	@$(MAKE) ls-code | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l

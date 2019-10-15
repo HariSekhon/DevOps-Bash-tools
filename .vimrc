@@ -113,20 +113,30 @@ if has("autocmd")
         au! BufRead,BufNewFile *.hta setfiletype html
     augroup end
 
-    au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint % \| more -R<CR>
-    au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint % \| headtail.py<CR>
-    au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc %<CR>
-    au BufNew,BufRead *.go   nmap ;l :w<CR>:!clear; go fmt %<CR><CR>
+    au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint "%" \| headtail.py<CR>
+    au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc "%"<CR>
+    au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
+    au BufNew,BufRead *.go   nmap ;l :w<CR>:!clear; go fmt "%"<CR><CR>
 
-    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways % \| more -R<CR>
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
 
-    au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py %<CR>
-    au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py %<CR>
-    au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py %; validate_ini2.py %<CR>
-    au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py %<CR>
-    au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py %<CR>
-    au BufNew,BufRead *.xml        nmap ;l :w<CR>:!clear; validate_xml.py %<CR>
-    au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; validate_yaml.py %<CR>
+    au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
+    au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
+    au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
+    au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
+    au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py "%"<CR>
+    au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py "%"<CR>
+    au BufNew,BufRead *.toml       nmap ;l :w<CR>:!clear; validate_toml.py "%"<CR>
+    au BufNew,BufRead *.xml        nmap ;l :w<CR>:!clear; validate_xml.py "%"<CR>
+    au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; validate_yaml.py "%"<CR>
+
+    " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
+    au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
+    au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefile.sh "%" \| more -R<CR>
+    au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| more -R<CR>
+    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd `dirname "%"` && echo q \| sbt reload "%" \| more -R<CR>
+    au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| more -R<CR>
+    au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint "%" \| more -R<CR>
 
 endif
 
@@ -144,15 +154,20 @@ nmap <silent> ;h :Hr<CR>
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;j :JHr<CR>
 "nmap <silent> ;' :call Sq()<CR>
-nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
+" done automatically on write now
+"nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
+nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
 nmap          ;n :n<CR>
 nmap          ;p :prev<CR>
 nmap          ;q :q<CR>
 nmap          ;r :call WriteRun()<CR>
 "nmap <silent> ;s :call ToggleSyntax()<CR>
 nmap <silent> ;s :,!sqlcase.pl<CR>
-nmap          ;u :call HgGitU()<CR>
-nmap          ;; :call HgGitU()<CR>
+"nmap          ;u :call HgGitU()<CR>
+"nmap          ;; :call HgGitU()<CR>
+" command not found
+"nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
+nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 

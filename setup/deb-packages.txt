@@ -17,10 +17,13 @@ bash
 curl
 #direnv
 git
+golang
 jq
 make
 parallel
 perl
 python
+python-pip
+python-setuptools # needed by 'pip install awscli'
 wget
 unzip

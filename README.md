@@ -5,7 +5,7 @@ Hari Sekhon - DevOps Bash Tools
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-70+ Shell Scripts, Advanced Bashrc & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon).
+80+ Shell Scripts, Advanced Bashrc & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon).
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
@@ -18,7 +18,7 @@ make install
 ```
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
-- Symlinks all `.*` conf files to `$HOME` for vim, top, screen, tmux etc.
+- Symlinks all `.*` config files to `$HOME` for git, vim, top, htop, screen, tmux, editorconfig, ansible etc.
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
 
@@ -28,7 +28,7 @@ make install
 
 - Scripts - Linux systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
-  - install if absent scripts for Python and Perl modules - good for combining with first attempt to install via system packages, and then these will pull from [PyPI](https://pypi.org/) or [CPAN](https://www.cpan.org/) only those modules which aren't installed. This speeds up builds and uses the standard packaged modules where possible. This is also more reliable than getting random compile errors from CPAN as libraries update and introduce bugs or needing to install too many dev libraries
+  - install if absent scripts for Python, Perl, Ruby and Golang modules - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
   - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
   - Git branch management
   - utility scripts used from other scripts
@@ -39,6 +39,7 @@ make install
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
   - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [Svn](https://subversion.apache.org)
+  - [AWS](https://aws.amazon.com/)
   - [Docker](https://www.docker.com/)
   - [Kubernetes](https://kubernetes.io/)
   - [Kafka](http://kafka.apache.org/)

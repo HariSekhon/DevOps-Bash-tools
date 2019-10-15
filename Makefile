@@ -11,62 +11,86 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+include Makefile.in
+
 REPO := HariSekhon/DevOps-Bash-tools
 
-CODE_FILES := $(shell find . -type f -name '*.sh' -o -name '.bash*' | sort)
+CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
 
-CONF_FILES := \
-    .ansible.cfg \
-    .editorconfig \
-    .gitconfig \
-    .gitignore \
-    .my.cnf \
-    .screenrc \
-    .toprc \
-    .tmux.conf \
-    .vimrc \
-    .Xdefaults \
-    .Xmodmap
+CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.conf)
 
-
-include Makefile.in
+.PHONY: *
 
 .PHONY: build
 build: system-packages aws
 	@:
 
 .PHONY: install
-install: build bash python aws
+install: build link python aws
 
 .PHONY: uninstall
-uninstall: bash-unlink
+uninstall: unlink
 	@echo "Not removing any system packages for safety"
 
 .PHONY: bash
-bash:
-	@setup/setup_bash.sh
-	@echo "linking dot files to \$$HOME directory: $$HOME"
-	@f=""; [ -n "$$FORCE" ] && f="-f"; \
-	for filename in $(CONF_FILES); do \
-		ln -sv $$f "$$PWD/$$filename" ~ 2>/dev/null; \
-	done || :
-	@ln -sv $$f ~/.gitignore ~/.gitignore_global 2>/dev/null || :
+bash: link
+	@:
 
-.PHONY: bash-unlink
-bash-unlink:
-	@for filename in $(CONF_FILES) .gitignore_global; do \
-		if [ -L ~/"$$filename" ]; then \
-			rm -fv ~/"$$filename"; \
-		fi; \
-	done || :
-	@echo "Must manually remove sourcing from ~/.bashrc and ~/.bash_profile"
+.PHONY: link
+link:
+	@setup/shell_link.sh
+
+.PHONY: unlink
+unlink:
+	@setup/shell_unlink.sh
+
+.PHONY: desktop
+desktop: install
+	@if [ -x /sbin/apk ];        then $(MAKE) apk-packages-desktop; fi
+	@if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages-desktop; fi
+	@if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages-desktop; fi
+	@if [ -x /usr/local/bin/brew -a `uname` = Darwin ]; then $(MAKE) homebrew-packages-desktop; fi
+	@# do these late so that we have the above system packages installed first to take priority and not install from source where we don't need to
+	@$(MAKE) perl
+	@$(MAKE) golang
+	@# no packages any more since jgrep is no longer found
+	@#$(MAKE) ruby
+
+.PHONY: apk-packages-desktop
+apk-packages-desktop: system-packages
+	@echo "Alpine desktop not supported at this time"
+	@exit 1
+
+.PHONY: apt-packages-desktop
+apt-packages-desktop: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/deb-packages-desktop.txt
+
+.PHONY: yum-packages-desktop
+yum-packages-desktop: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/yum-install-packages.sh setup/rpm-packages-desktop.txt
+
+.PHONY: homebrew-packages-desktop
+homebrew-packages-desktop: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew-install-packages.sh setup/homebrew-packages-desktop*.txt
+
+.PHONY: perl
+perl: system-packages
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
+
+.PHONY: golang
+golang: system-packages
+	NO_FAIL=1 $(BASH_TOOLS)/golang_get_install_if_absent.sh setup/go-packages-desktop.txt
+
+.PHONY: ruby
+ruby: system-packages
+	NO_FAIL=1 $(BASH_TOOLS)/ruby_install_if_absent.sh setup/gem-packages-desktop.txt
 
 .PHONY: python
-python:
+python: system-packages
 	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
-aws:
+aws: system-packages
 	@./python_pip_install_if_absent.sh awscli
 
 .PHONY: test
@@ -75,7 +99,7 @@ test:
 
 .PHONY: clean
 clean:
-	@echo Nothing to clean
+	@rm -fv setup/terraform.zip
 
 .PHONY: ls-scripts
 ls-scripts:
@@ -88,7 +112,7 @@ lsscripts: ls-scripts
 .PHONY: wc-scripts
 wc-scripts:
 	@$(MAKE) ls-scripts | xargs wc -l
-	@printf "Total Scripts: "
+	@printf "Total Script files: "
 	@$(MAKE) ls-scripts | wc -l
 
 .PHONY: wcscripts
@@ -97,7 +121,7 @@ wcscripts: wc-scripts
 
 .PHONY: wc-scripts2
 wc-scripts2:
-	@printf "Total Scripts: "
+	@printf "Total Scripts files: "
 	@$(MAKE) ls-scripts | wc -l
 	@printf "Total line count without # comments: "
 	@$(MAKE) ls-scripts | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l

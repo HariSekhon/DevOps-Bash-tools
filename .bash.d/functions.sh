@@ -54,12 +54,30 @@ grepvim(){
 alias grepv=grepvim
 
 checkprog(){
-    if which "$1" &>/dev/null; then
+    if type -P "$1" &>/dev/null; then
         return 0
     else
         echo "$1 could not be found in path"
         return 1
     fi
+}
+
+resolve_symlinks(){
+    local readlink=readlink
+    if [ -n "$APPLE" ]; then
+        if type -P greadlink &>/dev/null; then
+            readlink=greadlink
+        else
+            readlink=""
+        fi
+    fi
+    if [ -z "$readlink" ]; then
+        echo "$*"
+        return
+    fi
+    for x in "$@"; do
+        "$readlink" -m "$x"
+    done
 }
 
 pass(){
@@ -332,7 +350,7 @@ pdf(){
         return $?
     fi
     for x in acroread evince xpdf; do
-        if which "$x" &>/dev/null; then
+        if type -P "$x" &>/dev/null; then
             echo "opening with $x..."
             "$x" "$1" &
             return $?

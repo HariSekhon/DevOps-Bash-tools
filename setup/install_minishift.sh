@@ -22,8 +22,8 @@ set -x
 srcdir="$(dirname "$0")"
 
 if [ "$(uname -s)" = Darwin ]; then
-    if ! which minishift &>/dev/null; then
-        if ! which brew &>/dev/null; then
+    if ! type -P minishift &>/dev/null; then
+        if ! type -P brew &>/dev/null; then
             echo "HomeBrew needs to be installed first, trying to install now"
             "$srcdir/install_homebrew.sh"
         fi

@@ -28,7 +28,7 @@ fi
 
 is_docker_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
-    if which docker &>/dev/null; then
+    if type -P docker &>/dev/null; then
         if docker info &>/dev/null; then
             return 0
         fi
@@ -39,7 +39,7 @@ is_docker_available(){
 
 is_docker_compose_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
-    if which docker-compose &>/dev/null; then
+    if type -P docker-compose &>/dev/null; then
         return 0
     fi
     #echo "Docker Compose not available"

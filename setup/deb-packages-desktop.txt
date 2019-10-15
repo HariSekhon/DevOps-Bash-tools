@@ -59,7 +59,7 @@ conky
 cowsay
 cryptcat
 csync2
-curl
+#curl # in deb-packages.txt
 cvs
 davl
 ddrescue
@@ -106,7 +106,7 @@ gdm
 gdm-themes
 gftp
 gimp
-git
+#git # in deb-packages.txt
 git-core
 gitk
 gkrellm
@@ -292,7 +292,7 @@ toilet
 tomboy
 traceroute
 tshark
-unzip
+#unzip # in deb-packages.txt
 usbutils
 vim-full
 virt-manager

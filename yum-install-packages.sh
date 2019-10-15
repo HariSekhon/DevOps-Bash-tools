@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
@@ -48,11 +48,10 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    # shellcheck disable=SC2230
-    if which dnf >/dev/null 2>&1; then
-        # dnf exists if any of the packages aren't found
+    if type -P dnf >/dev/null 2>&1; then
+        # dnf exits if any of the packages aren't found so do them individually and ignore failures
         for package in $packages; do
-            rpm -q "$package" || $SUDO yum install -y "$package" || :
+            rpm -q "$package" || $SUDO dnf install -y "$package" || :
         done
     else
         # shellcheck disable=SC2086

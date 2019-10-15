@@ -21,8 +21,19 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-echo "Installing Python PyPI Modules that are not already installed"
-echo
+python="${PYTHON:-python}"
+
+usage(){
+    echo "Installs Python PyPI modules not already installed using Pip"
+    echo
+    echo "Leverages adjacent python_pip_install.sh which takes in to account library paths, virtual envs etc"
+    echo
+    echo "Takes a list of python module names as arguments or .txt files containing lists of modules (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_modules>"
+    echo
+    exit 3
+}
 
 pip_modules=""
 for x in "$@"; do
@@ -36,6 +47,20 @@ for x in "$@"; do
     pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 done
 
+for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+if [ -z "$pip_modules" ]; then
+    usage
+fi
+
+echo "Installing Python PyPI Modules that are not already installed"
+echo
+
 for pip_module in $pip_modules; do
     python_module="$("$srcdir/python_module_to_import_name.sh" <<< "$pip_module")"
 
@@ -44,12 +69,11 @@ for pip_module in $pip_modules; do
     # Cannot uninstall 'urllib3'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
     #
     #echo "checking if python module '$python_module' is installed"
-    if python -c "import $python_module" &>/dev/null; then
+    if "$python" -c "import $python_module" &>/dev/null; then
         echo "python module '$python_module' already installed, skipping..."
     else
         echo "installing python module '$python_module'"
-        # want opts splitting
-        # shellcheck disable=SC2086
-        "$srcdir/python_pip_install.sh" --ignore-installed urllib3 "$pip_module"
+        echo
+        "$srcdir/python_pip_install.sh" "$pip_module"
     fi
 done

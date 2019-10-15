@@ -15,4 +15,13 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if type -P brew &>/dev/null; then
+    echo "HomeBrew already installed, skipping install..."
+else
+    echo "==================="
+    echo "Installing HomeBrew"
+    echo "==================="
+    echo
+    # automatically sending Enter to Continue
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" <<< ""
+fi

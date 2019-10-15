@@ -41,6 +41,21 @@ silence_startup(){
     sudo nvram SystemAudioVolume=%80
 }
 
+top(){
+    local opts="-F -R -o"
+    if [ $# -eq 1 ]; then
+        # want opt splitting
+        # shellcheck disable=SC2086
+        command top $opts "$1"
+    elif [ $# -gt 1 ]; then
+        command top "$@"
+    else
+        # want opt splitting
+        # shellcheck disable=SC2086
+        command top $opts cpu
+    fi
+}
+
 fixvbox(){
     sudo /Library/StartupItems/VirtualBox/VirtualBox restart
 }
@@ -82,7 +97,7 @@ duall(){
     sudo du -ax / | sort -k1n | tail -n 50
 }
 alias dua=duall
-if which brew &>/dev/null; then
+if type -P brew &>/dev/null; then
     brew_prefix="$(brew --prefix)"
     if [ -f "$brew_prefix/etc/bash_completion" ]; then
         # shellcheck disable=SC1090

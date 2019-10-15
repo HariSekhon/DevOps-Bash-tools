@@ -51,6 +51,7 @@
 *.wmv
 *.zip
 *~
+.a
 .activator/
 .adobe
 .agent.env
@@ -59,11 +60,11 @@
 .anyconnect
 .ApacheDirectoryStudio/
 .atftp_history
+.atom
+.audacious/.thumbs
 .audacious/accels
 .audacious/log
-.a
 .audacious/playlist.xspf
-.audacious/.thumbs
 .aws/credentials
 .bashrc_dynamichosts
 .bashrc_dynamichosts.src
@@ -277,6 +278,8 @@ drive/
 Dropbox/
 eclipse/
 enterprise
+fatpacks/
+fatlib/
 fluxbox-themes
 fluxbox/debian007.jpg
 github/
