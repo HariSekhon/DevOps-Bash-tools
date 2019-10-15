@@ -52,10 +52,10 @@
 #    return
 #fi
 
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+bash_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 # enable color support for ls
 if [ "$TERM" != "dumb" ] && \
@@ -122,11 +122,11 @@ if [ $EUID -eq 0 ]; then
     sudo=""
 fi
 
-type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
+type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # ============================================================================ #
 
-for src in "$srcdir/.bash.d/"*.sh; do
+for src in "$bash_tools/.bash.d/"*.sh; do
     # shellcheck disable=SC1090
     . "$src"
 done
