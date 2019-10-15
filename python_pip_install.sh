@@ -82,6 +82,7 @@ user_opt(){
     fi
 }
 
+envopts=""
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
     if type -P brew &>/dev/null; then
