@@ -156,6 +156,7 @@ isGit(){
 
 
 st(){
+  # shellcheck disable=SC2086
   {
     local target="${1:-.}"
     shift
@@ -218,7 +219,6 @@ st(){
   # more calls less on Mac, and gets stuck in interactive mode ignoring the less alias switches
   #more -R -n "$((LINES - 3))"
   #less -RFX
-  # shellcheck disable=SC2086
   eval ${GIT_PAGER:-cat}
 }
 
@@ -310,15 +310,64 @@ gitu(){
         x="$(resolve_symlinks "$x")"
         targets="$targets $x"
     done
+    # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
         return
     fi
+    # shellcheck disable=SC2086
     git diff $targets &&
     read -r &&
     git add $targets &&
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
 }
+
+#githgu(){
+#    target="${1:-.}"
+#    #count=0
+#    while [ -L "$target" ]; do
+#        #target="$(readlink "$target")"
+#        #let count+=1
+#        #if [ $count -gt 10 ]; then
+#        #    echo "looping over links more than 10 times in hggitu! "
+#        #    exit 2
+#        #fi
+#        echo "$target is a symlink! "
+#        return 1
+#    done
+#    if ! [ -e "$target" ]; then
+#        echo "$target does not exist"
+#        return 1
+#    fi
+#    if isGit "$target"; then
+#        echo "> git" >&2
+#        #if [ -d "$target" ]; then
+#        #    pushd "$target" >/dev/null
+#        #else
+#        #    pushd "$(dirname "$target")" >/dev/null
+#        #fi
+#        #"$srcdir2/gitu" "${target##*/}" &&
+#        gitu "$target"
+#        #popd >/dev/null
+#    elif type isHg &>/dev/null && isHg "$target"; then
+#        echo "> hg" >&2
+#        #if [ -d "$target" ]; then
+#        #    pushd "$target" >/dev/null
+#        #else
+#        #    pushd "$(dirname "$target")" >/dev/null
+#        #fi
+#        #"$srcdir2/hgu" "${target##*/}" &&
+#        hgu "$target"
+#        #popd >/dev/null
+#    # Not supporting SVN any more
+#    #elif type isSvn &>/dev/null && isSvn "$target"; then
+#    #    echo "> svn" >&2
+#    #    svnu "$target"
+#    else
+#        echo "not a revision controlled resource as far as bashrc can tell"
+#        return 1
+#    fi
+#}
 
 push(){
     pull . "$@" || return 1
