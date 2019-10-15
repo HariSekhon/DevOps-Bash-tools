@@ -63,12 +63,14 @@ export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 #
 # is a noop to demonstrate
 
-
-#export PS4="--> "
+if [ -z "$BASH_TIMING" ]; then
+    export PS4="--> "
+fi
 
 # Bash performance profiling, can be heavy on performance, &>/tmp/bash_perf.out then use a profiling script
 # combine with DEBUG=1 or set -x
-bash_timings(){
+bash_timing(){
+    export BASH_TIMING=1
     export PS4='$(date "+%s.%N ($LINENO) + ") --> '
 }
 
