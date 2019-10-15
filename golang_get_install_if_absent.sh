@@ -55,10 +55,16 @@ fi
 echo "Installing Golang tools that are not already installed"
 echo
 
+if [ -n "${GOPATH:-}" ]; then
+    export PATH="$PATH:$GOPATH/bin"
+fi
+
 for go_tool in $go_tools; do
     go_bin="${go_tool##*/}"
-    if type -P "$go_bin" &>/dev/null; then
-        echo "go tool '$go_tool' ($go_bin) already installed, skipping..."
+    path="$(type -P "$go_bin" 2>/dev/null )"
+    # shellcheck disable=SC2181
+    if [ $? -eq 0 ]; then
+        echo "go tool '$go_tool' ($go_bin => $path) already installed, skipping..."
     else
         echo "installing go tool '$go_tool'"
         echo
