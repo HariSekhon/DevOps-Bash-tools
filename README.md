@@ -101,9 +101,13 @@ Install only OS system package dependencies and [AWS CLI](https://aws.amazon.com
 make
 ```
 
-Symlink `.bashrc` and other dot files to `$HOME` (doesn't symlink OS system package dependencies):
+Source `.bashrc`, `.bash_profile` and symlink dot config files to `$HOME` (doesn't install OS system package dependencies):
 ```
-make bash
+make link
+```
+undo via
+```
+make unlink
 ```
 
 Install only OS system package dependencies (doesn't include [AWS CLI](https://aws.amazon.com/cli/) or Python packages):
