@@ -306,10 +306,7 @@ gitu(){
         return 3
     fi
     local targets
-    for x in "$@"; do
-        x="$(resolve_symlinks "$x")"
-        targets="$targets $x"
-    done
+    targets="$(resolve_symlinks "$@")"
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
         return
