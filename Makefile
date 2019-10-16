@@ -44,6 +44,10 @@ link:
 unlink:
 	@setup/shell_unlink.sh
 
+.PHONY:
+ccmenu: system-packages
+	setup/setup_ccmenu.sh
+
 .PHONY: desktop
 desktop: install
 	@if [ -x /sbin/apk ];        then $(MAKE) apk-packages-desktop; fi
