@@ -51,7 +51,7 @@ bash_welcome(){
                 local y=${charmap:$((RANDOM%${#charmap})):1}
             fi
             #local y="${charmap:j:1}"
-            printf "\b%s" "$y"
+            printf "\\b%s" "$y"
             # This does not have enough precision, re-implement in Perl
             # This is because it's an external being called, otherwise pure bash
             # is so fast that you don't see any effect...
@@ -62,7 +62,7 @@ bash_welcome(){
             #set +x
         done
     done
-    #printf "\n"
-    printf "\n"
+    #printf "\\n"
+    printf "\\n"
 }
 
