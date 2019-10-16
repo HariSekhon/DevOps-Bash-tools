@@ -45,8 +45,8 @@ unlink:
 	@setup/shell_unlink.sh
 
 .PHONY:
-ccmenu: system-packages
-	setup/setup_ccmenu.sh
+ccmenu:
+	@setup/setup_ccmenu.sh
 
 .PHONY: desktop
 desktop: install
