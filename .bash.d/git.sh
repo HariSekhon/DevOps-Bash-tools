@@ -130,9 +130,8 @@ alias gi=gitignore_api
 isGit(){
     local target=${1:-.}
     # There aren't local .hg dirs everywhere only at top level so this is difficult in bash
-    if [ -d "$target" ] &&
-       [ -d "$target/.git" ]; then
-            return 0
+    if [ -d "$target/.git" ]; then
+        return 0
     elif [ -f "$target" ] &&
          [ -d "${target%/*}/.git" ]; then
         #-o "$target/../.git" -o "${target%/*}/../.git" ]; then
