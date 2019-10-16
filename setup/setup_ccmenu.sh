@@ -21,6 +21,8 @@ bin=/Applications/CCMenu.app/Contents/MacOS/CCMenu
 wget -c -O ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/net.sourceforge.cruisecontrol.CCMenu.plist \
            https://github.com/HariSekhon/DevOps-Bash-tools/releases/download/ccmenu/net.sourceforge.cruisecontrol.CCMenu.plist
 
+echo
+echo "restarting CCMenu"
 pkill -f "$bin" || :
 
 sleep 2
