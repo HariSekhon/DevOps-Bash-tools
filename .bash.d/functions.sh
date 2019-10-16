@@ -80,6 +80,32 @@ resolve_symlinks(){
     done
 }
 
+# for all files listed, return the highest directory - useful for pushd to the right git root following symlinks before doing git diff and commmits, used by gitu() in git.sh which is called in inline vimrc 'nmap ;;'
+basedir(){
+    local dir_list=""
+    for x in "$@"; do
+        dir_list="$dir_list $(dirname "$x")"
+    done
+    # assumes they share the same base and that the shortest one will be right - could put more comparison here and return error if not
+    local output
+    output="$(tr ' ' '\n'  <<< "$dir_list" | grep -v '^[[:space:]]*$' | sort | head -n 1)"
+    if [ -z "$output" ]; then
+        echo "ERROR: empty basedir"
+        return 1
+    fi
+    echo "$output"
+}
+
+strip_basedirs(){
+    local basedir="$1"
+    shift
+    for x in "$@"; do
+        y="${x#$basedir}"
+        y="${y##/}"
+        echo "$y"
+    done
+}
+
 pass(){
     read -r -s -p 'password: ' PASSWORD
     echo
