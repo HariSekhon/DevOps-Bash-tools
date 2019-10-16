@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if type -P diff-so-fancy &>/dev/null; then
     echo "diff-so-fancy is already installed!"
-    #exit 0
+    exit 0
 fi
 
 if [ "$(uname -s)" = Darwin ]; then
