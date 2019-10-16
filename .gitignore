@@ -50,6 +50,7 @@
 *.tmp
 *.wmv
 *.zip
+~*
 *~
 .a
 .activator/
@@ -104,6 +105,7 @@
 .dropbox/
 .DS_Store
 .dvdcss/
+.envrc_*
 .erlang.cookie
 .evolution
 .fluxbox/backgrounds
@@ -227,14 +229,15 @@
 .svn
 .swatch_script.*
 .TemporaryItems
+.terragrunt
 .themes
 .thumbnails
 .tilda/locks/*
 .tomboy
 .tomboy.log
-.travis/
 .Trash
 .Trashes
+.travis/
 .vagrant
 .vagrant.d/
 .vboxclient-autoresize.pid
