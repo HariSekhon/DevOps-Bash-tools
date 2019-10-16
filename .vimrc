@@ -70,6 +70,8 @@ filetype plugin on
 
 " ============================================================================ "
 
+nmap ;l :echo "No linting defined for this file type"<CR>
+
 if has("autocmd")
     " re-open at last cursor line and center screen on the cursor line
     "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
