@@ -6,6 +6,7 @@
 # CASK=1 ../brew-install-packages.sh brew-packages-desktop-casks.txt
 
 atom
+ccmenu
 minikube
 minishift
 podman
