@@ -15,8 +15,15 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
 bin=/Applications/CCMenu.app/Contents/MacOS/CCMenu
+
+"$srcdir/install_homebrew.sh"
+
+if ! [ -f "$bin" ]; then
+    brew cask install ccmenu
+fi
 
 wget -c -O ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/net.sourceforge.cruisecontrol.CCMenu.plist \
            https://github.com/HariSekhon/DevOps-Bash-tools/releases/download/ccmenu/net.sourceforge.cruisecontrol.CCMenu.plist
