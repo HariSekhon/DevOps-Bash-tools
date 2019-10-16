@@ -67,6 +67,8 @@
 .audacious/log
 .audacious/playlist.xspf
 .aws/credentials
+.aws/config
+.aws/token
 .bashrc_dynamichosts
 .bashrc_dynamichosts.src
 .bash_history
@@ -203,18 +205,21 @@
 .Rhistory
 .rnd
 .rstudio-desktop/
+.sbt/[[:digit:]].[[:digit:]]*/
 .sbt/boot/
+.sbt/preloaded/
 .sbt/repositories
 .sbt/*/plugins/project/target/
 .sbt/*/plugins/target/
 .scala_history
-.sdkman/archives
-.sdkman/bin
-.sdkman/candidates
-.sdkman/ext
-.sdkman/src
-.sdkman/tmp
-.sdkman/var
+.sdkman/archives/
+.sdkman/bin/
+.sdkman/candidates/
+.sdkman/etc/config
+.sdkman/ext/
+.sdkman/src/
+.sdkman/tmp/
+.sdkman/var/
 .serverauth.*
 .sh_history
 .Skype
@@ -291,6 +296,8 @@ gitolite-admin/
 gitroot/
 GNUstep
 Google*Drive
+go/bin/
+go/src/github.com/
 hadoop-sources/
 hgroot/
 IdeaProjects/
@@ -309,6 +316,7 @@ original-tars
 originals_tars
 otherpics
 Qsync/
+perl5/
 Pictures
 Public
 puppet.git/
@@ -322,6 +330,15 @@ subversion/
 svnroot/
 testing/
 tmp.*
+# common vagrant stuff
+vagrant/boxes/
+vagrant/data/
+vagrant/gems/
+vagrant/insecure_private_key
+vagrant/rgloader/
+vagrant/setup_version
+vagrant/tmp/
+# custom stuff found in vagrant
 vagrant/basho_bench/
 vagrant/id_rsa.pub
 vagrant/jce_policy-6
