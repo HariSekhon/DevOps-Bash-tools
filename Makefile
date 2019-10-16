@@ -44,9 +44,13 @@ link:
 unlink:
 	@setup/shell_unlink.sh
 
+.PHONY: bootstrap
+bootstrap:
+	@setup/bootstrap.sh
+
 .PHONY:
 ccmenu:
-	@setup/setup_ccmenu.sh
+	@setup/install_ccmenu.sh
 
 .PHONY: desktop
 desktop: install
