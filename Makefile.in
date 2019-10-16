@@ -435,6 +435,10 @@ travis-debug:
 browse:
 	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
 
+.PHONY: github
+github: browse
+	@:
+
 .PHONY: readme
 readme:
 	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
