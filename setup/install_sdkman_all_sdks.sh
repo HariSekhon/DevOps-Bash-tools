@@ -18,7 +18,17 @@ set -eo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+sdks="
+java
+scala
+groovy
+maven
+gradle
+sbt
+"
+
 if [ -s ~/.sdkman/bin/sdkman-init.sh ]; then
+    # shellcheck disable=SC1090
     . ~/.sdkman/bin/sdkman-init.sh
 fi
 
@@ -26,10 +36,7 @@ if ! type sdk &>/dev/null; then
     "$srcdir/install_sdkman.sh"
 fi
 
-sdk install java
-sdk install scala
-sdk install groovy
-
-sdk install maven
-sdk install gradle
-sdk install sbt
+for x in $sdks; do
+    set +o pipefail
+    yes | sdk install "$x"
+done
