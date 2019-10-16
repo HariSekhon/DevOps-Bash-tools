@@ -300,13 +300,20 @@ gitadd() {
     git commit -m "$gitcimsg" "$@"
 }
 
+# shellcheck disable=SC2086
 gitu(){
     if [ -z "$1" ]; then
         echo "usage: gitu <file>"
         return 3
     fi
     local targets
+    # follow symlinks to the actual files because diffing symlinks returns no changes
     targets="$(resolve_symlinks "$@")"
+    local basedir
+    # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
+    basedir="$(basedir $targets)" &&
+    pushd "$basedir" &&
+    targets="$(strip_basedirs $basedir $targets)" || return 1
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
         return
@@ -317,6 +324,7 @@ gitu(){
     git add $targets &&
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
+    popd || :
 }
 
 #githgu(){
