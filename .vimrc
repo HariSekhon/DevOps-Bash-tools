@@ -115,6 +115,8 @@ if has("autocmd")
         au! BufRead,BufNewFile *.hta setfiletype html
     augroup end
 
+    " headtail.py is useful to see the top things to fix and the score on each run and can be found in the
+    " https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint "%" \| headtail.py<CR>
     au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc "%"<CR>
     au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
@@ -122,6 +124,7 @@ if has("autocmd")
 
     au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
 
+    " these tools are in the https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
     au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
     au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
@@ -134,6 +137,7 @@ if has("autocmd")
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
+    " check_makefile.sh is in this repo which should be added to $PATH
     au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefile.sh "%" \| more -R<CR>
     au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| more -R<CR>
     au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd `dirname "%"` && echo q \| sbt reload "%" \| more -R<CR>
