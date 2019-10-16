@@ -26,10 +26,10 @@ if type add_PATHS &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
     return
 fi
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 # see the effect of inserting a path like so
 # PYTHONPATH=/path/to/blah pythonpath
@@ -70,7 +70,7 @@ add_PATH "/sbin"
 add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
 add_PATH "/usr/local/bin"
-add_PATH "$srcdir"
+add_PATH "$bash_tools"
 add_PATH ~/bin
 for x in ~/bin/*; do
     [ -d "$x" ] || continue

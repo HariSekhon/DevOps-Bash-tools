@@ -20,10 +20,10 @@
 
 # more environment variables defined next to the their corresponding aliases in aliases.sh
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 #export DISPLAY=:0.0
 

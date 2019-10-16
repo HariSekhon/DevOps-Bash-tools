@@ -20,10 +20,10 @@
 
 # More Mac specific stuff in adjacent *.sh files, especially network.sh
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 [ -n "${APPLE:-}" ] || return
 
@@ -91,9 +91,9 @@ macmac(){
 }
 
 duall(){
-    # srcdir defined in .bashrc
+    # bash_tools defined in .bashrc
     # shellcheck disable=SC2154
-    du -ax "$srcdir" | sort -k1n | tail -n 2000
+    du -ax "$bash_tools" | sort -k1n | tail -n 2000
     sudo du -ax / | sort -k1n | tail -n 50
 }
 alias dua=duall

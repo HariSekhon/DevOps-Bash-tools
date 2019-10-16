@@ -18,22 +18,22 @@
 #                         G e n e r a l   A l i a s e s
 # ============================================================================ #
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 # shellcheck disable=SC1090
-#. "$srcdir/.bash.d/paths.sh"
+#. "$bash_tools/.bash.d/paths.sh"
 
 # manual local aliases
 # shellcheck disable=SC1090
 [ -f ~/.aliases ] && . ~/.aliases
 
-# srcdir defined in .bashrc
+# bash_tools defined in .bashrc
 # shellcheck disable=SC2154
 export bashrc=~/.bashrc
-export bashrc2="$srcdir/.bashrc"
+export bashrc2="$bash_tools/.bashrc"
 alias r='. $bashrc'
 alias rq='set +x; . $bashrc; set -x'
 alias bashrc='$EDITOR $bashrc && r'
@@ -81,7 +81,7 @@ alias tmp="cd /tmp"
 alias bt="cd $(dirname "${BASH_SOURCE[0]}")/.."
 
 # shellcheck disable=SC2154
-export bashd="$srcdir/.bash.d"
+export bashd="$bash_tools/.bash.d"
 alias bashd='cd $bashd'
 
 #alias cleanshell='exec env - bash --rcfile /dev/null'

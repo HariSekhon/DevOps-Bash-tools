@@ -17,10 +17,10 @@
 #                                  D o c k e r
 # ============================================================================ #
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 # shellcheck disable=SC1090
 [ -f ~/.docker_vars ] && . ~/.docker_vars
@@ -61,14 +61,14 @@ dockerrmi(){
 
 #alias dm="docker-machine"
 #alias dockerrr="docker-machine restart default"
-#alias dockerreload="docker-machine env default > '$srcdir/.docker_vars'; . '$srcdir/.docker_vars'"
+#alias dockerreload="docker-machine env default > '$bash_tools/.docker_vars'; . '$bash_tools/.docker_vars'"
 
 #dockerstart(){
 #    if ! docker-machine status default | grep -q Running; then
 #        docker-machine start default
 #        sleep 20
 #    fi
-#    docker start $(cat "$srcdir/docker-start.txt")
+#    docker start $(cat "$bash_tools/docker-start.txt")
 #}
 
 # avoid external commands per shell, slows down new shells and wastes battery

@@ -18,10 +18,10 @@
 #                                 N e t w o r k
 # ============================================================================ #
 
-srcdir="$(dirname "${BASH_SOURCE[0]}")/.."
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 alias 4="ping 4.2.2.1"
 

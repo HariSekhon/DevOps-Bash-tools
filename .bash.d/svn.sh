@@ -19,10 +19,10 @@
 
 # I don't use SVN any more so a lot of the convenient aliases for daily use are commented out
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 # superceded by hg and then git pull
 #alias u="svn up"

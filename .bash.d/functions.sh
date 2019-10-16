@@ -18,10 +18,10 @@
 #                  B a s h   G e n e r a l   F u n c t i o n s
 # ============================================================================ #
 
-srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/os_detection.sh"
+. "$bash_tools/.bash.d/os_detection.sh"
 
 # Enables colourized return codes in prompt_func
 # better leave it as the same as already set. This way a reload of bashrc doesn't change the mode
