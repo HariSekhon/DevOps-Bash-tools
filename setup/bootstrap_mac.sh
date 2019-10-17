@@ -19,7 +19,6 @@ srcdir="$(dirname "$0")"
 
 install_scripts="
 install_ansible.sh
-install_ccmenu.sh
 install_diff-so-fancy.sh
 install_github_ssh_key.sh
 install_homebrew.sh
