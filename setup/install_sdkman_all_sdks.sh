@@ -27,13 +27,13 @@ gradle
 sbt
 "
 
+if ! type sdk &>/dev/null; then
+    "$srcdir/install_sdkman.sh"
+fi
+
 if [ -s ~/.sdkman/bin/sdkman-init.sh ]; then
     # shellcheck disable=SC1090
     . ~/.sdkman/bin/sdkman-init.sh
-fi
-
-if ! type sdk &>/dev/null; then
-    "$srcdir/install_sdkman.sh"
 fi
 
 for x in $sdks; do
