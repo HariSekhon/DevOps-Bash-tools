@@ -73,9 +73,11 @@ ifndef CONF_FILES
 	CONF_FILES := NOTSET
 endif
 
-define MAKEFILE_HELP
+define MAKEFILE_USAGE_COMMON
 
  Usage:
+
+  Common Options:
 
     make help                   show this message
     make build                  installs all dependencies - OS packages and any language libraries via native tools eg. pip, cpanm, gem, go etc that are not available via OS packages
@@ -83,7 +85,7 @@ define MAKEFILE_HELP
     make test                   run tests
     make clean                  removes compiled / generated files, downloaded tarballs, temporary files etc.
 
-    make submodules             initialize and update submodules to the right release
+    make submodules             initialize and update submodules to the right release (done automatically by build / system-packages)
 
     make cpan                   install any modules listed in any cpan-requirements.txt files if not already installed
 
@@ -105,7 +107,8 @@ endef
     #make ${VENV}                make a virtualenv in the base directory (see VENV)
     #make pip-install            install python packages in requirements.txt
     #make git-config             set local git configuration
-export MAKEFILE_HELP
+export MAKEFILE_USAGE_COMMON
+export MAKEFILE_USAGE
 
 .PHONY: default
 default:
@@ -116,7 +119,11 @@ default:
 help:
 	@# this doesn't work because the macro insertion of a multiline literal breaks the line-based make format so we have to export to an env var instead of using natively
 	@# even the unescaped macro literal in a commented breaks make
-	@echo "$$MAKEFILE_HELP" | less -RFXig
+	@echo "$$MAKEFILE_USAGE_COMMON $$MAKEFILE_USAGE" | less -RFXig
+
+.PHONY: usage
+usage: help
+	@:
 
 .PHONY: quick
 quick:
