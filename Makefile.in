@@ -73,10 +73,50 @@ ifndef CONF_FILES
 	CONF_FILES := NOTSET
 endif
 
+define MAKEFILE_HELP
+
+ Usage:
+
+    make help                   show this message
+    make build                  installs all dependencies - OS packages and any language libraries via native tools eg. pip, cpanm, gem, go etc that are not available via OS packages
+    make system-packages        installs OS packages only (detects OS via whichever package manager is available)
+    make test                   run tests
+    make clean                  removes compiled / generated files, downloaded tarballs, temporary files etc.
+
+    make submodules             initialize and update submodules to the right release
+
+    make cpan                   install any modules listed in any cpan-requirements.txt files if not already installed
+
+    make pip                    install any modules listed in any requirements.txt files if not already installed
+
+    make python-compile         compile any python files found in the current directory and 1 level of subdirectory
+    make pycompile
+
+    make github                 open browser at github project
+    make readme                 open browser at github's README
+    make github-url             print github url and copy to clipboard
+
+    make ls-files               print list of files in project
+    make ls-code                print list of code files, excluding READMEs and other peripheral files
+    make wc                     show line counts of the files and grand total
+    make wc-code                show line counts of only code files and total
+
+endef
+    #make ${VENV}                make a virtualenv in the base directory (see VENV)
+    #make pip-install            install python packages in requirements.txt
+    #make git-config             set local git configuration
+export MAKEFILE_HELP
+
 .PHONY: default
 default:
 	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
 	@$(MAKE) build
+
+.PHONY: help
+help:
+	@# this doesn't work because the macro insertion of a multiline literal breaks the line-based make format so we have to export to an env var instead of using natively
+	@# even the unescaped macro literal in a commented breaks make
+	@echo "$$MAKEFILE_HELP" | less -RFXig
 
 .PHONY: quick
 quick:
@@ -258,7 +298,9 @@ yum-packages-python:
 .PHONY: homebrew-packages
 homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
-	if test -f setup/brew-packages.txt; then NO_FAIL=1 $(BASH_TOOLS)/brew-install-packages.sh setup/brew-packages.txt; fi
+	if test -f setup/brew-packages.txt; then \
+		NO_FAIL=1 $(BASH_TOOLS)/brew-install-packages.sh setup/brew-packages.txt; \
+	fi
 
 .PHONY: system-packages-remove
 system-packages-remove:
@@ -302,6 +344,17 @@ cpan:
 pip:
 	find . -name 'requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
+.PHONY: fatpacks
+fatpacks:
+	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+	if [ -d lib/resources ]; then \
+		cp -av lib/resources fatpacks/; \
+	fi
+
+.PHONY: fatpack
+fatpack: fatpacks
+	@:
+
 .PHONY: python-compile
 python-compile:
 	$(BASH_TOOLS)/python_compile.sh
@@ -310,14 +363,24 @@ python-compile:
 pycompile: python-compile
 	@:
 
-.PHONY: fatpacks
-fatpacks:
-	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
-	if [ -d lib/resources ]; then cp -av lib/resources fatpacks/; fi
+# =======================
+# Nice tricks for pure Python projects
+# - borrowed from https://gist.github.com/bsmith89/c6811893c1cbd2a72cc1d144a197bef2#file-makefile
 
-.PHONY: fatpack
-fatpack: fatpacks
-	@:
+#VENV = .venv
+#export VIRTUAL_ENV := $(abspath ${VENV})
+
+# putting the venv/bin at the start of the path means that the venv python will be called
+# and the venv libraries used automatically, so no need to 'source .venv/bin/activate' first
+# although it misses the hash flush 'hash -r' that the venv activate script does
+#export PATH := ${VIRTUAL_ENV}/bin:${PATH}
+
+#${VENV}:
+#    python3 -m venv "$@"
+
+#pip-install: requirements.txt | ${VENV}
+#    pip install --upgrade -r requirements.txt
+# =======================
 
 .PHONY: sonar
 sonar:
@@ -438,6 +501,10 @@ browse:
 .PHONY: github
 github: browse
 	@:
+
+.PHONY: github-url
+github-url:
+	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee | tr -d '\n' | paste_clipboard
 
 .PHONY: readme
 readme:
