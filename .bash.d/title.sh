@@ -150,7 +150,7 @@ vim(){
     local num=10
     [ -f ~/shorttitle ] && num=3
     title="${title//.txt/}"
-    #if dpstatus >/dev/null; then
+    if dpstatus >/dev/null; then
         if echo "$title" | grep -q docs/; then
             title="$(basename "$title")"
             title "d${title:0:$num}"
@@ -158,8 +158,8 @@ vim(){
             title="$(basename "$title")"
             title "${title:0:$num}"
         fi
-    #fi
+    fi
     command vim "$@"
-    if dpstatus >/dev/null; then title; fi
+    #if dpstatus >/dev/null; then title; fi
 }
 
