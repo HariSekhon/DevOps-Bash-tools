@@ -140,7 +140,9 @@ vim(){
                 ;;
             +*) :
                 ;;
-             *) title="$title$x "
+             *) #title="$title$x "
+                title="$x"
+                break
                 ;;
         esac
         #shift
