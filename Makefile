@@ -25,22 +25,25 @@ define MAKEFILE_USAGE
 
   Repo specific options:
 
-    make install                build all dependencies, symlinks all config files to \$HOME and adds sourcing of bash profile
-    make link                   symlinks all config files to \$HOME and adds sourcing of bash profile
+    make install                builds all script dependencies, installs AWS CLI, symlinks all config files to $$HOME and adds sourcing of bash profile
+
+    make link                   symlinks all config files to $$HOME and adds sourcing of bash profile
     make unlink                 removes all symlinks pointing to this repo's config files and removes the sourcing lines from .bashrc and .bash_profile
 
-    make bootstrap              links profile as above and installs a bunch of common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI cli, CCMenu, Parquet tools etc.
+    make python                 installs all Python Pip packages for desktop workstation listed in setup/pip-packages-desktop.txt
+    make perl                   installs all Perl CPAN packages for desktop workstation listed in setup/cpan-packages-desktop.txt
+    make ruby                   installs all Ruby Gem packages for desktop workstation listed in setup/gem-packages-desktop.txt
+    make golang                 installs all Golang packages for desktop workstation listed in setup/go-packages-desktop.txt
 
-    make ccmenu                 installs and (re)configures CCMenu to watch all my repos (done by bootstrap too)
+    make desktop                installs all of the above + many desktop OS packages listed in setup/
 
-    make python                 installs all Python Pip packages for desktop workstation
-    make perl                   installs all Perl CPAN packages for desktop workstation
-    make ruby                   installs all Ruby Gem packages for desktop workstation
-    make golang                 installs all Golang packages for desktop workstation
+    make bootstrap              all of the above + installs a bunch of major common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI, CCMenu, Parquet tools etc.
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
     make wc-scripts             show line counts of the scripts and grand total
     make wc-scripts2            show line counts of only scripts and total
+
+    make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
 
 endef
 
@@ -49,7 +52,7 @@ build: system-packages aws
 	@:
 
 .PHONY: install
-install: build link python aws
+install: build link aws
 
 .PHONY: uninstall
 uninstall: unlink
@@ -68,20 +71,20 @@ unlink:
 	@setup/shell_unlink.sh
 
 .PHONY: bootstrap
-bootstrap:
+bootstrap: desktop
 	@setup/bootstrap.sh
 
 .PHONY: bootstrap-mac
-bootstrap-mac:
+bootstrap-mac: desktop
 	@setup/bootstrap_mac.sh
 
 .PHONY: bootstrap-linux
-bootstrap-linux:
+bootstrap-linux: desktop
 	@setup/bootstrap_linux.sh
 
 .PHONY:
 ccmenu:
-	@setup/install_ccmenu.sh
+	@setup/configure_ccmenu.sh
 
 .PHONY: desktop
 desktop: install
