@@ -19,7 +19,30 @@ CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | so
 
 CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.conf)
 
-.PHONY: *
+#.PHONY: *
+
+define MAKEFILE_USAGE
+
+  Repo specific options:
+
+    make install                build all dependencies, symlinks all config files to \$HOME and adds sourcing of bash profile
+    make link                   symlinks all config files to \$HOME and adds sourcing of bash profile
+    make unlink                 removes all symlinks pointing to this repo's config files and removes the sourcing lines from .bashrc and .bash_profile
+
+    make bootstrap              links profile as above and installs a bunch of common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI cli, CCMenu, Parquet tools etc.
+
+    make ccmenu                 installs and (re)configures CCMenu to watch all my repos (done by bootstrap too)
+
+    make python                 installs all Python Pip packages for desktop workstation
+    make perl                   installs all Perl CPAN packages for desktop workstation
+    make ruby                   installs all Ruby Gem packages for desktop workstation
+    make golang                 installs all Golang packages for desktop workstation
+
+    make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
+    make wc-scripts             show line counts of the scripts and grand total
+    make wc-scripts2            show line counts of only scripts and total
+
+endef
 
 .PHONY: build
 build: system-packages aws
@@ -47,6 +70,14 @@ unlink:
 .PHONY: bootstrap
 bootstrap:
 	@setup/bootstrap.sh
+
+.PHONY: bootstrap-mac
+bootstrap-mac:
+	@setup/bootstrap_mac.sh
+
+.PHONY: bootstrap-linux
+bootstrap-linux:
+	@setup/bootstrap_linux.sh
 
 .PHONY:
 ccmenu:
