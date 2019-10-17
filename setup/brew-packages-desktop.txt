@@ -91,7 +91,8 @@ pwgen
 #python  # in brew-packages.txt
 r
 rdesktop
-#readline # in brew-packages.txt
+#readline  # in brew-packages.txt
+ruby  # Mac ruby is too old to install Travis CI
 ruby-completion
 # screen  # already present on Mac
 s3cmd
