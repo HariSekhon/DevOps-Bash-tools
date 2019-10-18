@@ -174,6 +174,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR><CR>
+nmap          ;. :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 
