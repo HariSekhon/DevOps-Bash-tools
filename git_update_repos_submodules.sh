@@ -53,6 +53,9 @@ run(){
         if ! echo "$repo" | grep -q "/"; then
             repo="HariSekhon/$repo"
         fi
+        echo "========================================"
+        echo "Updating $repo"
+        echo "========================================"
         if ! [ -d "$repo_dir" ]; then
             git clone "$git_url/$repo" "$repo_dir"
         fi
@@ -62,9 +65,11 @@ run(){
         git submodule update --init --remote
         for submodule in $(git submodule | awk '{print $2}'); do
             echo "committing latest hashref for submodule $submodule"
-            git ci -m "updated submodule $submodule" || :
+            git ci -m "updated submodule $submodule" "$submodule" || :
         done
+        git push
         popd
+        echo
     done
 }
 
