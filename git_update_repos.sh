@@ -28,6 +28,7 @@ cd "$git_base_dir"
 run(){
     local repofile="$1"
     echo "processing repos from file: $repofile"
+    echo
     while read -r repo; do
         repo_dir="${repo##*/}"
         repo_dir="${repo_dir##*:}"
