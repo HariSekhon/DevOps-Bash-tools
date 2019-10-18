@@ -49,6 +49,8 @@ bash_tools_start_time="$(start_timer)"
 # don't run this here, it needs to be called explicitly otherwise will fail 'make test deep-clean'
 #"$srcdir/check_docker_clean.sh"
 
+"$srcdir/check_aws_no_git_credentials.sh"
+
 "$srcdir/check_bash_duplicate_defs.sh" || :
 
 "$srcdir/check_duplicate_requirements.sh"
