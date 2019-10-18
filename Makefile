@@ -93,10 +93,10 @@ desktop: install
 	@if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages-desktop; fi
 	@if [ -x /usr/local/bin/brew -a `uname` = Darwin ]; then $(MAKE) homebrew-packages-desktop; fi
 	@# do these late so that we have the above system packages installed first to take priority and not install from source where we don't need to
-	@$(MAKE) perl
-	@$(MAKE) golang
+	@$(MAKE) perl-desktop
+	@$(MAKE) golang-desktop
 	@# no packages any more since jgrep is no longer found
-	@#$(MAKE) ruby
+	@#$(MAKE) ruby-desktop
 
 .PHONY: apk-packages-desktop
 apk-packages-desktop: system-packages
