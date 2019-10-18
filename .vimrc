@@ -173,7 +173,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :call HgGitU()<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
-nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
+nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR><CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 
