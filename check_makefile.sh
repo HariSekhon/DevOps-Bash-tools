@@ -38,7 +38,7 @@ if type -P make &>/dev/null; then
         echo "Validating $makefile"
         makefile="${makefile##*/}"
         if grep '#@' "$makefile"; then
-            echo "WARNING: commented lines still visibile in Makefile"
+            echo "WARNING: commented lines still visible in $PWD/$makefile"
         fi
         while read -r target; do
             if [[ "$target" =~ wc-?(code|scripts) ]]; then
