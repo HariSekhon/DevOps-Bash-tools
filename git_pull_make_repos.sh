@@ -16,12 +16,18 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 git_url="${GIT_URL:-https://github.com}"
 
 make="${MAKE:-make}"
 build="${BUILD:-build}"
+
+git_base_dir=~/github
+
+mkdir -pv "$git_base_dir"
+
+cd "$git_base_dir"
 
 opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
