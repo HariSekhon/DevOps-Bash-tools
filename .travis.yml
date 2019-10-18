@@ -40,6 +40,11 @@ cache:
 env:
   - PYTHONUNBUFFERED=1
 
+# avoid package checksum mismatches when installing packages
+before_install:
+  - sudo rm -rf "${TRAVIS_ROOT}/etc/apt/apt.conf.d/99-travis-apt-proxy"
+  - sudo rm -rf "${TRAVIS_ROOT}/var/lib/apt/lists/"*
+
 install:
   - travis_retry make
 
