@@ -33,8 +33,8 @@ SUDO_PERL := sudo
 PYTHON_VIRTUALENV :=
 
 ifdef PERLBREW_PERL
-	# can't put this here otherwise gets error - "commands commence before first target.  Stop."
-	@#echo "Perlbrew environment detected, not calling sudo"
+	# can't put this here, nor @commented, otherwise gets error - "commands commence before first target.  Stop."
+	#echo "Perlbrew environment detected, not calling sudo"
 	SUDO_PERL =
 endif
 
