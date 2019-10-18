@@ -25,11 +25,26 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
+repofile="$srcdir/setup/repolist.txt"
+
+if [ $# -gt 0 ]; then
+    repolist="$*"
+else
+    repolist="${*:-${REPOS:-}}"
+    if [ -n "$repolist" ]; then
+        :
+    elif [ -f "$repofile" ]; then
+        echo "processing repos from file: $repofile"
+        repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
+    else
+        echo "fetching repos from GitHub repo list"
+        repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
+    fi
+fi
+
 run(){
-    local repofile="$1"
-    echo "processing repos from file: $repofile"
-    echo
-    while read -r repo; do
+    local repolist="$*"
+    for repo in $repolist; do
         repo_dir="${repo##*/}"
         repo_dir="${repo_dir##*:}"
         repo="${repo%%:*}"
@@ -51,13 +66,7 @@ run(){
         else
             git clone "$git_url/$repo" "$repo_dir"
         fi
-    done < <(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")
+    done
 }
 
-if [ $# -gt 0 ]; then
-    for x in "$@"; do
-        run "$x"
-    done
-else
-    run "$srcdir/setup/repolist.txt"
-fi
+run "$repolist"
