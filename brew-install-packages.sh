@@ -16,7 +16,7 @@
 
 # Mac OSX - HomeBrew install packages in a forgiving way
 
-set -eu
+set -eu #o pipefail  # undefined in /bin/sh
 [ -n "${DEBUG:-}" ] && set -x
 
 echo "Installing Mac HomeBrew Packages"
@@ -41,14 +41,19 @@ brew_update_opts=""
 if [ -n "${TRAVIS:-}" ]; then
     brew_update_opts="-v"
 fi
-if [ -n "${NO_UPDATE:-}" ]; then
-    if ! brew update $brew_update_opts; then
-        if [ -n "${NO_FAIL:-}" ]; then
-            :
-        else
-            exit 1
-        fi
+if [ -z "${NO_UPDATE:-}" ]; then
+    if [ -n "${NO_FAIL:-}" ]; then
+        set +e #o pipefail  # undefined in /bin/sh
     fi
+    echo "Updating Homebrew"
+    brew update $brew_update_opts &
+    while jobs | grep -q .; do
+        # /bin/sh doesn't support -e
+        #echo -n .
+        printf .
+        sleep 5
+    done
+    set -e #o pipefail  # undefined in /bin/sh
 fi
 
 cask=""
