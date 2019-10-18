@@ -30,10 +30,10 @@ define MAKEFILE_USAGE
     make link                   symlinks all config files to $$HOME and adds sourcing of bash profile
     make unlink                 removes all symlinks pointing to this repo's config files and removes the sourcing lines from .bashrc and .bash_profile
 
-    make python                 installs all Python Pip packages for desktop workstation listed in setup/pip-packages-desktop.txt
-    make perl                   installs all Perl CPAN packages for desktop workstation listed in setup/cpan-packages-desktop.txt
-    make ruby                   installs all Ruby Gem packages for desktop workstation listed in setup/gem-packages-desktop.txt
-    make golang                 installs all Golang packages for desktop workstation listed in setup/go-packages-desktop.txt
+    make python-desktop         installs all Python Pip packages for desktop workstation listed in setup/pip-packages-desktop.txt
+    make perl-desktop           installs all Perl CPAN packages for desktop workstation listed in setup/cpan-packages-desktop.txt
+    make ruby-desktop           installs all Ruby Gem packages for desktop workstation listed in setup/gem-packages-desktop.txt
+    make golang-desktop         installs all Golang packages for desktop workstation listed in setup/go-packages-desktop.txt
 
     make desktop                installs all of the above + many desktop OS packages listed in setup/
 
@@ -115,20 +115,20 @@ yum-packages-desktop: system-packages
 homebrew-packages-desktop: system-packages
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew-install-packages.sh setup/homebrew-packages-desktop*.txt
 
-.PHONY: perl
-perl: system-packages
+.PHONY: perl-desktop
+perl-desktop: system-packages
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
 
-.PHONY: golang
-golang: system-packages
+.PHONY: golang-desktop
+golang-desktop: system-packages
 	NO_FAIL=1 $(BASH_TOOLS)/golang_get_install_if_absent.sh setup/go-packages-desktop.txt
 
-.PHONY: ruby
-ruby: system-packages
+.PHONY: ruby-desktop
+ruby-desktop: system-packages
 	NO_FAIL=1 $(BASH_TOOLS)/ruby_install_if_absent.sh setup/gem-packages-desktop.txt
 
-.PHONY: python
-python: system-packages
+.PHONY: python-desktop
+python-desktop: system-packages
 	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
