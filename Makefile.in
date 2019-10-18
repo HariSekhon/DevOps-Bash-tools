@@ -43,7 +43,7 @@ endif
 # Better than modifying $PATH to put /usr/bin first which is likely to affect many other things including potentially not finding the perlbrew installation first
 # Looks like Perl travis builds are now using system Python - do not use TRAVIS env
 ifdef VIRTUAL_ENV
-	@#echo "Virtual Env / Conda detected, not calling sudo"
+	#echo "Virtual Env / Conda detected, not calling sudo"
 	SUDO_PIP :=
 	PYTHON_VIRTUALENV := 1
 endif
@@ -56,7 +56,7 @@ endif
 # EUID / UID not exported in Make
 # USER not populated in Docker
 ifeq '$(shell id -u)' '0'
-	@#echo "root UID detected, not calling sudo"
+	#echo "root UID detected, not calling sudo"
 	SUDO :=
 	SUDO_PERL :=
 	SUDO_PIP :=
