@@ -21,7 +21,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-section "Scanning to ensure no AWS credentials"
+section "AWS Git credentials scan"
 
 start_time="$(start_timer)"
 
@@ -41,5 +41,5 @@ if git grep \
 fi
 
 time_taken "$start_time"
-section2 "No AWS credentials found"
+section2 "OK: no AWS credentials found in Git"
 echo
