@@ -25,17 +25,31 @@ section "AWS Git credentials scan"
 
 start_time="$(start_timer)"
 
+location="${1:-.}"
+
+if [ "$location" = . ]; then
+    :
+elif [ -d "$location" ]; then
+    cd "$location"
+else
+    cd "$(dirname "$location")"
+fi
+
+# $(pwd) more reliable than $PWD
+echo "checking $(pwd)"
+echo
+
 if git grep \
     -e 'AWS_ACCESS_KEY.*=' \
     -e 'AWS_SECRET_KEY.*=' \
     -e 'AWS_SESSION_TOKEN.*=' \
     -e 'aws_access_key_id.*=' \
     -e 'aws_secret_access_key.*=' \
-    -e 'aws_session_token.*=' \
-    "${1:-.}" |
+    -e 'aws_session_token.*=' |
         grep -v -e '\.bash\.d/aws.sh:' \
                 -e "${0##*/}:" |
     grep .; then
+    echo
     echo "DANGER: potential AWS credentials found in Git!!"
     exit 1
 fi
