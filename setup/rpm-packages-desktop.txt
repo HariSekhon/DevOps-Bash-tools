@@ -104,6 +104,7 @@ mboxgrep
 mdadm
 memdump
 mercurial
+mosh
 mp3info
 mysql
 MySQL-python

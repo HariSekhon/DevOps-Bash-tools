@@ -75,6 +75,7 @@ maven-completion
 md5sha1sum
 mercurial
 midnight-commander
+mosh
 mplayer
 mtr
 mysql

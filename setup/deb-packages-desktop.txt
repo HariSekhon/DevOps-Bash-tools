@@ -180,6 +180,7 @@ mc
 mdadm
 memdump
 mercurial
+mosh
 most
 mp3info
 mtr
