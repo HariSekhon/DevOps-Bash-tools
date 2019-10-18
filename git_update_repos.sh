@@ -15,9 +15,15 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 git_url="${GIT_URL:-https://github.com}"
+
+git_base_dir=~/github
+
+mkdir -pv "$git_base_dir"
+
+cd "$git_base_dir"
 
 run(){
     local repofile="$1"
