@@ -34,15 +34,19 @@ if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
 
+repofile="$srcdir/setup/repolist.txt"
+
 if [ $# -gt 0 ]; then
     repolist="$*"
 else
     repolist="${*:-${REPOS:-}}"
     if [ -n "$repolist" ]; then
         :
-    elif [ -f "$srcdir/setup/repolist.txt" ]; then
-        repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$srcdir/setup/repolist.txt")"
+    elif [ -f "$repofile" ]; then
+        echo "processing repos from file: $repofile"
+        repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
     else
+        echo "fetching repos from GitHub repo list"
         repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
     fi
 fi
