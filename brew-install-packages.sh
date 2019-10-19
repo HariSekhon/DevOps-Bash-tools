@@ -47,7 +47,7 @@ if [ -z "${NO_UPDATE:-}" ]; then
     fi
     echo "Updating Homebrew"
     brew update $brew_update_opts &
-    while jobs | grep -q .; do
+    while jobs | grep -q '[[:space:]]Running[[:space:]]*brew update'; do
         # /bin/sh doesn't support -e
         #echo -n .
         printf .
