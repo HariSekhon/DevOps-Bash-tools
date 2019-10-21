@@ -17,10 +17,17 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+run(){
+    echo "Running $srcdir/$1"
+    QUICK=1 "$srcdir/$1"
+    echo
+    echo
+    echo "================================================================================"
+}
+
 install_scripts="
 install_ansible.sh
 install_diff-so-fancy.sh
-install_github_ssh_key.sh
 install_parquet-tools.sh
 install_sdkman.sh
 install_sdkman_all_sdks.sh
@@ -29,11 +36,10 @@ install_travis.sh
 "
 
 for x in $install_scripts; do
-    echo "Running $srcdir/$x"
-    QUICK=1 "$srcdir/$x"
-    echo
-    echo
-    echo "================================================================================"
+    run "$x"
 done
+if [[ "$USER" =~ hari|sekhon ]]; then
+    run install_github_ssh_key.sh
+fi
 echo
 "$srcdir/shell_link.sh"
