@@ -82,6 +82,11 @@ for perl_script in $perl_scripts; do
     chmod +x "$dest"
 done
 echo
-echo "Done! Generated fatpacks for $i scripts"
-echo
+echo "Generated $i fatpacked scripts under fatpacks/ directory"
+#echo
+#echo "Generating tarball of fatpacked scripts"
+#echo
+#tar czf fatpacks.tar.gz fatpacks/
+#echo
+#echo "Done! Generated fatpacks.tar.gz containing $i fatpacked scripts with all dependencies included"
 untrap
