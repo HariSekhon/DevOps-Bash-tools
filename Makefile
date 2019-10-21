@@ -171,3 +171,11 @@ wc-scripts2:
 .PHONY: wcscripts2
 wcscripts2: wc-scripts2
 	@:
+
+.PHONY: pipreqs-mapping
+pipreqs-mapping:
+	#wget -O lib/pipreqs_mapping.txt https://raw.githubusercontent.com/HariSekhon/pipreqs/mysql-python/pipreqs/mapping
+	wget -O lib/pipreqs_mapping.txt https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
+.PHONY: pip-mapping
+pip-mapping: pipreqs-mapping
+	@:
