@@ -20,8 +20,7 @@ srcdir="$(dirname "$0")"
 mappings="$srcdir/lib/pipreqs_mapping.txt"
 
 if ! [ -f "$mappings" ]; then
-    #wget -O "$mappings" https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
-    wget -O "$mappings" https://raw.githubusercontent.com/HariSekhon/pipreqs/master/pipreqs/mapping
+    wget -O "$mappings" https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
 fi
 
 sed_script="$(
