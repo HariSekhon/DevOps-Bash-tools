@@ -175,7 +175,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && push'<CR>
-nmap <silent> ;v :source ~/.vimrc<CR>
+nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 
