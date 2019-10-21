@@ -357,6 +357,8 @@ fatpacks:
 	if [ -d lib/resources ]; then \
 		cp -av lib/resources fatpacks/; \
 	fi
+	tar czvf fatpacks.tar.gz fatpacks
+	echo "Generated fatpacks.tar.gz containing fatpacks/ directory of perl scripts with all dependencies bundled"
 
 .PHONY: fatpack
 fatpack: fatpacks
