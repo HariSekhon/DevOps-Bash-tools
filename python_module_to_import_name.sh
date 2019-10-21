@@ -15,22 +15,56 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-cat "$@" |
+mappings="$srcdir/lib/pipreqs_mapping.txt"
+
+if ! [ -f "$mappings" ]; then
+    #wget -O "$mappings" https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
+    wget -O "$mappings" https://raw.githubusercontent.com/HariSekhon/pipreqs/master/pipreqs/mapping
+fi
+
+sed_script="$(
+    while read -r import_name module_name rest; do
+        if ! [[ "$import_name" =~ ^[A-Za-z0-9/_.-]+$ ]]; then
+            echo "import name '$import_name' did not match expected alphanumeric regex!" >&2
+            continue
+        fi
+        if ! [[ "$module_name" =~ ^[A-Za-z0-9_.-]+$ ]]; then
+            echo "import name '$module_name' did not match expected alphanumeric regex!" >&2
+            continue
+        fi
+        echo "s/$module_name/${import_name//\//\\/}/;"
+    done < <(tr ':' ' ' < "$mappings")
+)"
+
+for x in "$@"; do
+    if [ -f "$x" ]; then
+        cat "$x"
+    else
+        echo "$x"
+    fi
+done |
+sed 's/[>=].*$//;' |
+    # these have been replaced my pipreqs mapping file
+    #s/beautifulsoup4/bs4/;
+    #s/PyYAML/yaml/;
+    #s/GitPython/git/;
+    #s/traceback2/traceback/;
+sed "$sed_script" |
+    # general rules:
+    # - import names don't have python-* prefixes
+    # - import names don't have *-python suffixes
+    # - import names replace dashes with underscores
 sed '
-    s/[>=].*$//;
     s/^python-//;
     s/-*python$//;
     s/-/_/g;
-    s/beautifulsoup4/bs4/;
-    s/traceback2/traceback/;
-    s/MySQL/MySQLdb/;
-    s/PyYAML/yaml/;
-    s/GitPython/git/;
-    s/\[.*\]//;
-' |
-tr '[:upper:]' '[:lower:]' |
-sed '
-    s/mysqldb/MySQLdb/;
-    s/krbv/krbV/;
-'
+    s/\[.*\]//
+' # |
+    # generally lowercase but a couple of exceptions - these are in mappings file so we don't execute this conversion any more
+#tr '[:upper:]' '[:lower:]' |
+#sed '
+#    s/mysqldb/MySQLdb/;
+#    s/krbv/krbV/;
+#'
