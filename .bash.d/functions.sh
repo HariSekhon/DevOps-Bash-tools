@@ -100,7 +100,7 @@ strip_basedirs(){
     local basedir="$1"
     shift
     for x in "$@"; do
-        y="${x#$basedir}"
+        y="${x#${basedir%%/}/}"
         y="${y##/}"
         echo "$y"
     done
