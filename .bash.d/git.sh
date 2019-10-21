@@ -315,11 +315,11 @@ gitu(){
     local basedir
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
     basedir="$(basedir $targets)" &&
-    pushd "$basedir" &&
+    pushd "$basedir" >/dev/null &&
     targets="$(strip_basedirs $basedir $targets)" || return 1
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
-        popd || :
+        popd >/dev/null || :
         return
     fi
     # shellcheck disable=SC2086
@@ -328,7 +328,7 @@ gitu(){
     git add $targets &&
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
-    popd || :
+    popd >/dev/null || :
 }
 
 #githgu(){
