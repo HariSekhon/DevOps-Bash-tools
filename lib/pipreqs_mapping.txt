@@ -699,6 +699,7 @@ html:pies2overrides
 htmloutput:nosehtmloutput
 http:pies2overrides
 hvad:django_hvad
+krbV:krbv
 i99fix:199Fix
 igraph:python_igraph
 imdb:IMDbPY
