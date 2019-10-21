@@ -306,8 +306,12 @@ gitu(){
         return 3
     fi
     local targets
-    # follow symlinks to the actual files because diffing symlinks returns no changes
-    targets="$(resolve_symlinks "$@")"
+    if [ -n "$(git diff "$@")" ]; then
+        targets="$*"
+    else
+        # follow symlinks to the actual files because diffing symlinks returns no changes
+        targets="$(resolve_symlinks "$@")"
+    fi
     local basedir
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
     basedir="$(basedir $targets)" &&
@@ -315,6 +319,7 @@ gitu(){
     targets="$(strip_basedirs $basedir $targets)" || return 1
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
+        popd || :
         return
     fi
     # shellcheck disable=SC2086
