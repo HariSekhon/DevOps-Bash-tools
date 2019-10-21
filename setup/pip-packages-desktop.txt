@@ -17,9 +17,10 @@
 #ansible
 
 ansible-lint
-awscli
 autopep8
+awscli
 beautifulsoup4
+flake8
 kazoo
 nose
 pyflakes
