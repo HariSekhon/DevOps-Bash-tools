@@ -175,6 +175,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && push'<CR>
+nmap <silent> ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 
@@ -189,7 +190,7 @@ function! ToggleSyntax()
 endfunction
 
 ":command Hr  :normal i # ============================================================================ #<ESC>lx
-:command Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
+:command! Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
 ":function Hr()
     ":s/^/# ============================================================================ #/
     "if b:current_syntax eq "sql"
@@ -202,15 +203,15 @@ endfunction
 ":function Br()
 ":call Hr()
 ":endfunction
-:command Br :Hr
+:command! Br :Hr
 
 "function JHr()
 "    s,^,// ========================================================================== //,
 "endfunction
 ":command JHr :normal a// ========================================================================== //<ESC>lx
-:command JHr :normal a// <ESC>74a=<ESC>a //<ESC>
+:command! JHr :normal a// <ESC>74a=<ESC>a //<ESC>
 
-:command Done :normal 37a=<ESC>a DONE <ESC>37a=<ESC>
+:command! Done :normal 37a=<ESC>a DONE <ESC>37a=<ESC>
 
 ":function RemoveIPs()
 "    : %s/\d\+\.\d\+\.\d\+\.\d\+/<IP_REMOVED>/gc
@@ -225,7 +226,7 @@ endfunction
 "    : %s/company2/<DOMAIN_REMOVED>/gci
 ":endfunction
 
-function Scrub()
+function! Scrub()
     ": call RemoveIPs()
     ": call RemoveMacs()
     ": call RemoveDomains()
@@ -233,15 +234,15 @@ function Scrub()
 endfunction
 
 " StripQuotes()
-function Sq()
+function! Sq()
     :s/["']//g
 endfunction
 
-function StripTrailingWhiteSpace()
+function! StripTrailingWhiteSpace()
     :%s/[[:space:]]*$//
 endfunction
 
-function WriteRun()
+function! WriteRun()
     :w
     :!./%
     " TODO: if .go then 'go run %'
