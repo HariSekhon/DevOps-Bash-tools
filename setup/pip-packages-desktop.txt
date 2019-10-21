@@ -23,6 +23,8 @@ beautifulsoup4
 flake8
 kazoo
 nose
+# pep8 has been renamed to pycodestyle
+pycodestyle
 pyflakes
 PyInstaller
 pylint
