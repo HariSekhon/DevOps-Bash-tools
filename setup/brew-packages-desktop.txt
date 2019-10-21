@@ -35,6 +35,7 @@
 # Install HomeBrew Desktop packages - one per line
 ansible
 ansible-lint
+autossh
 bash-completion
 brew-cask-completion
 cmatrix

@@ -28,6 +28,7 @@ arpwatch
 aterm
 atftpd
 autocutsel
+autossh
 bash-completion
 bittorrent
 bridge-utils

@@ -39,6 +39,7 @@ aterm
 atftpd
 audacious
 autocutsel
+autossh
 azureus
 bash-completion
 bastille
