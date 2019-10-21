@@ -515,11 +515,19 @@ github: browse
 
 .PHONY: github-url
 github-url:
-	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee | tr -d '\n' | paste_clipboard
+	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee /dev/stderr | tr -d '\n' | paste_clipboard
 
 .PHONY: readme
 readme:
 	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+
+.PHONY: github
+dockerhub:
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://hub.docker.com/u/harisekhon"
+
+.PHONY: dockerhub-url
+dockerhub-url:
+	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://hub.docker.com/u/harisekhon" | tee /dev/stderr | tr -d '\n' | paste_clipboard
 
 .PHONY: startrack
 startrack:
