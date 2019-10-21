@@ -245,12 +245,14 @@ alias backup_jenkins="rsync -av root@jenkins:/jenkins_backup/*.zip '~/jenkins_ba
 # Auto-alias uppercase directories in ~ like Desktop and Downloads
 #for dir in $(find ~ -maxdepth 1 -name '[A-Z]*' -type d); do [ -d "$dir" ] && alias ${dir##*/}="cd '$dir'"; done
 
-export downloads=~/Downloads
-export documents=~/Documents
-export down="$downloads"
-export docu="$documents"
-alias down='cd "$downloads"'
-alias docu='cd "$documents"'
+export Downloads=~/Downloads
+export Documents=~/Documents
+alias Downloads='cd "$Downloads"'
+alias Documents='cd "$Documents"'
+export down="$Downloads"
+export docu="$Documents"
+alias down='cd "$Downloads"'
+alias docu='cd "$Documents"'
 
 export desktop=~/Desktop
 export desk="$desktop"
