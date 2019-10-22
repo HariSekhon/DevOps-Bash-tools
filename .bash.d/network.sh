@@ -162,10 +162,18 @@ browser(){
     if [ -n "$BROWSER" ]; then
         "$BROWSER" "$@"
     elif [ -n "$APPLE" ]; then
-        open "$@"
+        open "${*:-http://google.com}"
     else
         echo "\$BROWSER environment variable not set and not on Mac OSX, not sure which browser to use, aborting..."
         return 1
+    fi
+}
+
+browse(){
+    if isGit . &>/dev/null && git remote -v | grep -qi http; then
+        gitbrowse
+    else
+        browser
     fi
 }
 
