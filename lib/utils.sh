@@ -29,6 +29,8 @@ bash_tools_utils_imported=1
 # shellcheck disable=SC1090
 . "$srcdir_bash_tools_utils/perl.sh"
 
+. "$srcdir_bash_tools_utils/../.bash.d/colors.sh"
+
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
@@ -148,6 +150,10 @@ check_exit_code(){
         echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
         return 1
     fi
+}
+
+tick_msg(){
+    echo -e "${bldgrn}✓ ${txtrst}$*"
 }
 
 cpu_count(){
