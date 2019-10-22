@@ -76,7 +76,7 @@ fi
 sudo=""
 if [ $EUID != 0 ]; then
     #sudo=sudo
-    opts="$opts --local"
+    opts="$opts --user-install"
 fi
 
 echo "$sudo $envopts $gem install $opts $gems"
