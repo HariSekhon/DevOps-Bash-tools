@@ -82,9 +82,16 @@ make install
 
 Currently utilized in the following GitHub repos:
 
-* [Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 450+ programs covering every major Hadoop & NoSQL technology and Linux/Unix based infrastructure technologies
-* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 75+ command line tools
-* [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) - 25+ command line tools
+* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 75+ DevOps CLI tools for Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
+
+* [DevOps Perl Tools](https://github.com/harisekhon/perl-tools) - 25+ DevOps CLI tools for Hadoop, HDFS, Hive, Solr/SolrCloud CLI, Log Anonymizer, Nginx stats & HTTP(S) URL watchers for load balanced web farms, Dockerfiles & SQL ReCaser (Hive, Impala, MySQL, PostgreSQL, Cassandra CQL, Apache Drill, Couchbase N1QL, Microsoft SQL Server, Oracle, Pig Latin, Neo4j, InfluxDB), Ambari FreeIPA Kerberos, Datameer, Linux...
+
+* [The Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 450+ programs for Hadoop, Docker, Kafka, Elasticsearch, RabbitMQ, Redis, HBase, Solr, Cassandra, ZooKeeper, HDFS, Yarn, Hive, Presto, Drill, Impala, Consul, Spark, Jenkins, Travis CI, Git, MySQL, Linux, DNS, Whois, SSL Certs, Yum Security Updates, Kubernetes, Mesos, Riak, MongoDB, Memcached, Couchbase, CouchDB, Neo4j, Ambari, Cloudera, Hortonworks, MapR etc.
+
+* [HAProxy-configs](https://github.com/harisekhon/haproxy-configs) - 80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Elasticsearch, SolrCloud, HBase, Cloudera, Hortonworks, MapR, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, ZooKeeper, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, SSH, RabbitMQ, Redis, Riak, Rancher etc.
+
+* [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) - 50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Mesos, Consul, Riak, OpenTSDB, Jython, Advanced Nagios Plugins & DevOps Tools repos on Alpine, CentOS, Debian, Fedora, Ubuntu, Superset, H2O, Serf, Alluxio / Tachyon, FakeS3
+
 * [Perl Lib](https://github.com/harisekhon/lib) - Perl utility library
 * [PyLib](https://github.com/harisekhon/pylib) - Python utility library
 * [Lib-Java](https://github.com/harisekhon/lib-java) - Java utility library
