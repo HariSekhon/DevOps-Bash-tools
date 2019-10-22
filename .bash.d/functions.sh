@@ -261,6 +261,8 @@ cdwhich(){
 
 add_etc_host(){
     local host_line="$*"
+    # $sudo is set in .bashrc if needed
+    # shellcheck disable=SC2154
     $sudo grep -q "^$host_line" /etc/hosts ||
     $sudo echo "$host_line" >> /etc/hosts
 }
