@@ -47,12 +47,6 @@ pg(){
     grep -v grep
 }
 
-grepvim(){
-    # shellcheck disable=SC2046
-    vim $(git grep -i "$*" | sed 's/:.*//')
-}
-alias grepv=grepvim
-
 checkprog(){
     if type -P "$1" &>/dev/null; then
         return 0
@@ -226,19 +220,7 @@ foreachfile(){
 }
 
 # vim which
-vw(){
-    local path
-    if [ -z "$1" ]; then
-        echo "usage: vw <filename>"
-        return 1
-    fi
-    path="$(which "$1")"
-    if [ -z "$path" ]; then
-        echo "File not found in \$PATH: $1"
-        return 1
-    fi
-    "$EDITOR" "$path"
-}
+# vw() moved to vim.sh
 
 # file which
 fw(){
@@ -283,11 +265,7 @@ add_etc_host(){
     $sudo echo "$host_line" >> /etc/hosts
 }
 
-vihosts(){
-    [ $EUID -eq 0 ] && sudo="" || sudo=sudo
-    $sudo vim /etc/hosts
-    $sudo pkill -1 dnsmasq
-}
+# vihosts() moved to vim.sh
 
 proxy(){
     export proxy_host="${proxy_host:-localhost}"
