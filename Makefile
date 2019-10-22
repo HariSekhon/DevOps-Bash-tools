@@ -19,6 +19,8 @@ CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | so
 
 CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.conf)
 
+BASH_PROFILE_FILES := $(shell echo .bashrc .bash_profile .bash.d/*.sh)
+
 #.PHONY: *
 
 define MAKEFILE_USAGE
@@ -170,6 +172,27 @@ wc-scripts2:
 
 .PHONY: wcscripts2
 wcscripts2: wc-scripts2
+	@:
+
+.PHONY: wcbashrc
+wcbashrc:
+	@wc $(BASH_PROFILE_FILES)
+	@printf "Total Bash Profile files: "
+	@ls $(BASH_PROFILE_FILES) | wc -l
+
+.PHONY: wcbash
+wcbash: wcbashrc
+	@:
+
+.PHONY: wcbashrc2
+wcbashrc2:
+	@printf "Total Bash Profile files: "
+	@ls $(BASH_PROFILE_FILES) | wc -l
+	@printf "Total line count without # comments: "
+	@ls $(BASH_PROFILE_FILES) | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
+
+.PHONY: wcbash2
+wcbash2: wcbashrc2
 	@:
 
 .PHONY: pipreqs-mapping
