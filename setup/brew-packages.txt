@@ -16,6 +16,7 @@
 cmake
 coreutils
 direnv
+git-secrets
 gnu-sed
 golang
 jq
