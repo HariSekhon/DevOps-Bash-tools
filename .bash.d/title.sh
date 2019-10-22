@@ -162,4 +162,3 @@ vim(){
     command vim "$@"
     #if dpstatus >/dev/null; then title; fi
 }
-
