@@ -11,6 +11,10 @@
 [include]
   path = .gitconfig.local
 
+# install git-secrets hooks in any repo initialized or cloned to prevent credential leak
+[init]
+	templateDir = ~/.git-templates/git-secrets
+
 [core]
     # detects filemode changes
     filemode = true
