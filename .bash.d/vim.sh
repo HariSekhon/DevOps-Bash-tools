@@ -33,8 +33,13 @@ vimhome(){
     sed 's,[^/]*/,/,'
 }
 
+cdvimhome(){
+    # shellcheck disable=SC2164
+    cd "$(vimhome)"
+}
+
 vimfiletypes(){
-    cd "$(vimhome)" || return 1
+    cdvimhome || return 1
     find syntax ftplugin -iname '*.vim' -exec basename -s .vim {} + | sort -u
 }
 
