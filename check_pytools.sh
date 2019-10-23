@@ -38,10 +38,10 @@ start_time="$(start_timer)"
 
 skip_checks=0
 if [ "$PROJECT" = "pytools" ]; then
-    echo "detected running in pytools repo, skipping checks here as will be called in bash-tools/all.sh..."
+    echo "detected running in pytools repo, skipping checks here as will be called in bash-tools/check_all.sh..."
     skip_checks=1
 #elif [ "$PROJECT" = "Dockerfiles" ]; then
-#    echo "detected running in Dockerfiles repo, skipping checks here as will be called in bash-tools/all.sh..."
+#    echo "detected running in Dockerfiles repo, skipping checks here as will be called in bash-tools/check_all.sh..."
 #    skip_checks=1
 elif is_inside_docker; then
     echo "detected running inside Docker, skipping pytools checks"
