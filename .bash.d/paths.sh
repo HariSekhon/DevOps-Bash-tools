@@ -95,6 +95,11 @@ if [ -d ~/perl5/bin ]; then
     add_PATH ~/perl5/bin
 fi
 
+# output from 'npm bin'
+if [ -d ~/node_modules/.bin ]; then
+    add_PATH ~/node_modules/.bin
+fi
+
 # do the same with MANPATH
 #if [ -d ~/man ]; then
 #    MANPATH=~/man${MANPATH:-:}
