@@ -123,5 +123,6 @@ fi
 #}
 
 if ! type sdk &>/dev/null && [ -s ~/.sdkman/bin/sdkman-init.sh ]; then
+    # shellcheck disable=SC1090
     source ~/.sdkman/bin/sdkman-init.sh
 fi
