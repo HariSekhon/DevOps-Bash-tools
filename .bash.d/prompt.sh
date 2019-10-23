@@ -43,7 +43,8 @@ fi
 #   \w      full path of cwd
 #   \h      host
 # shellcheck disable=SC2154
-export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
+# export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
+export PS1+="\[$PS1_COLOUR\]\t \[$bldpur\]\$(git branch 2>/dev/null | awk '/^\\*/{print \$2}') \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 
 
 # Screen relies on prompt having a dollar sign to detect the next word to set the screen title dynamically - .screenrc needs the following setting
