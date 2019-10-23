@@ -6,3 +6,13 @@
 
 # not found any more
 #jgrep
+
+# mdl needs ruby >= 2.4.0 whereas Mac has 2.3.0, so install manually via
+#
+# brew install ruby
+#
+# GEM=/usr/local/Cellar/ruby/*/bin/gem  ./ruby_gem_install.sh mdl
+#
+# will be picked up by new shells via .bash.d/paths.sh automatically detecting and adding ~/.gem/ruby/*/bin
+#
+# mdl
