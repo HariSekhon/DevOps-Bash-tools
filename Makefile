@@ -107,15 +107,15 @@ apk-packages-desktop: system-packages
 
 .PHONY: apt-packages-desktop
 apt-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt-install-packages.sh setup/deb-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt_install_packages.sh setup/deb-packages-desktop.txt
 
 .PHONY: yum-packages-desktop
 yum-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/yum-install-packages.sh setup/rpm-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/yum_install_packages.sh setup/rpm-packages-desktop.txt
 
 .PHONY: homebrew-packages-desktop
 homebrew-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew-install-packages.sh setup/homebrew-packages-desktop*.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages.sh setup/homebrew-packages-desktop*.txt
 
 .PHONY: perl-desktop
 perl-desktop: system-packages
