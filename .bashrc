@@ -52,6 +52,11 @@
 #    return
 #fi
 
+# after cleanshell, not even $HOME is set, this messes up things that base off $HOME, like SDKman
+if [ -z "${HOME:-}" ]; then
+    export HOME=~
+fi
+
 bash_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
