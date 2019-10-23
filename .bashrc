@@ -126,10 +126,13 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # ============================================================================ #
 
+# want this to fail is there is no match because we should always have local .bash.d/*.sh in this repo
+# shopt -s nullglob
 for src in "$bash_tools/.bash.d/"*.sh; do
     # shellcheck disable=SC1090
     . "$src"
 done
+# shopt -u nullglob
 
 # added by travis gem - should be in ~/.bashrc so not needed to duplicate here
 #[ -f /Users/hari.sekhon/.travis/travis.sh ] && source /Users/hari.sekhon/.travis/travis.sh
