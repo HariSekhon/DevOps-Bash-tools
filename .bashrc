@@ -136,3 +136,8 @@ done
 
 # shellcheck disable=SC1090
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
+if [ -d "$HOME/.bash.d" ]; then
+    for src in "$HOME/.bash.d/"*.sh; do
+        . "$src"
+    done
+fi
