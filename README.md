@@ -1,5 +1,6 @@
 Hari Sekhon - DevOps Bash Tools
 ===============================
+
 [![Build Status](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c61193dd7dcc418b85149bddf93362e4)](https://www.codacy.com/app/harisekhon/bash-tools)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
@@ -24,7 +25,7 @@ make install
 
 `make install` effectively does `make system-packages bash python aws`, but if you want to pick and choose from different sections, see [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below.
 
-### Inventory Overview:
+### Inventory Overview
 
 - Scripts - Linux systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
@@ -104,30 +105,37 @@ Currently utilized in the following GitHub repos:
 Optional, only if you don't do the full `make install`.
 
 Install only OS system package dependencies and [AWS CLI](https://aws.amazon.com/cli/) via Python Pip (doesn't symlink anything to `$HOME`):
+
 ```
 make
 ```
 
 Adds sourcing to `.bashrc` and `.bash_profile` and symlinks dot config files to `$HOME` (doesn't install OS system package dependencies):
+
 ```
 make link
 ```
+
 undo via
+
 ```
 make unlink
 ```
 
 Install only OS system package dependencies (doesn't include [AWS CLI](https://aws.amazon.com/cli/) or Python packages):
+
 ```
 make system-packages
 ```
 
 Install [AWS CLI](https://aws.amazon.com/cli/):
+
 ```
 make aws
 ```
 
 Install generically useful Python CLI tools and modules (includes [AWS CLI](https://aws.amazon.com/cli/), autopep8 etc):
+
 ```
 make python
 ```
