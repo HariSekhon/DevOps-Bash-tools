@@ -149,7 +149,7 @@ btest: bash-test
 
 .PHONY: bash-test
 bash-test:
-	$(BASH_TOOLS)/all.sh
+	$(BASH_TOOLS)/check_all.sh
 
 .PHONY: push
 push:
