@@ -23,7 +23,7 @@ fi
 
 docker_image="$1"
 
-script=exec-interactive.sh
+script=exec_interactive.sh
 if [ -x "bash-tools/$script" ]; then
     script="bash-tools/$script"
 fi
