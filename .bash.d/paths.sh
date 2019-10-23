@@ -106,6 +106,9 @@ fi
 #    export MANPATH
 #fi
 
+if [ -d /Applications/SnowSQL.app/Contents/MacOS ]; then
+    add_PATH /Applications/SnowSQL.app/Contents/MacOS
+fi
 
 # ============================================================================ #
 #                         M y   G i t H u b   r e p o s
