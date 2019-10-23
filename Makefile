@@ -139,7 +139,7 @@ aws: system-packages
 
 .PHONY: test
 test:
-	./all.sh
+	./check_all.sh
 
 .PHONY: clean
 clean:
