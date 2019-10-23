@@ -81,8 +81,8 @@ if has("autocmd")
       \    exe "normal! g`\"zz" |
       \ endif
 
-    " auto-strip trailing whitespace on write
-    autocmd BufWritePre * %s/\s\+$//e
+    " on write - auto-strip trailing whitespace on lines and remove trailing whitespace only lines end at of file
+    autocmd BufWritePre * %s/\s\+$//e | %s#\($\n\s*\)\+\%$##e
 
     " highlight trailing whitespace
     " XXX: doesn't work
