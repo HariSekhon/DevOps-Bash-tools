@@ -566,11 +566,15 @@ revert_typechange(){
 }
 
 rm_untracked(){
+    if [ $# -lt 1 ]; then
+        echo "usage: rm_untracked <target_dir_or_files_or_glob>"
+        return 1
+    fi
     # iterate on explicit targets only
     # intentionally not including current directory to avoid accidentally wiping out untracked files - you must specify "rm_untracked ." if you really intend this
     for x in "${@:-}"; do
         # want splitting to separate filenames
         # shellcheck disable=SC2046
-        rm -v $(git status --porcelain -s "$x" | awk '/^??/{print $2}')
+        rm -v $(git status --porcelain -s "$x" | awk '/^\?\?/{print $2}')
     done
 }
