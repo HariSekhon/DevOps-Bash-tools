@@ -125,6 +125,14 @@ brewinstall(){
     done
 }
 
+brew_find_unlinked_bins(){
+     for x in /usr/local/Cellar/*/*/bin/*; do
+         if ! [ -f "/usr/local/bin/${x##*/}" ]; then
+             echo "$x"
+        fi
+    done
+}
+
 # don't export BROWSER on Mac, trigger python bug:
 # AttributeError: 'MacOSXOSAScript' object has no attribute 'basename'
 # from python's webbrowser library
