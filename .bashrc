@@ -137,7 +137,9 @@ done
 # shellcheck disable=SC1090
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 if [ -d "$HOME/.bash.d" ]; then
+    shopt -s nullglob
     for src in "$HOME/.bash.d/"*.sh; do
         . "$src"
     done
+    shopt -u nullglob
 fi
