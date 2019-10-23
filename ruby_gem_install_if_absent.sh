@@ -17,7 +17,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-ruby="${RUBY:-ruby}"
+#ruby="${RUBY:-ruby}"
+gem_cmd="${GEM:-gem}"
 
 usage(){
     echo "Installs Ruby Gems not already installed"
@@ -57,8 +58,15 @@ fi
 echo "Installing Ruby Gems that are not already installed"
 echo
 
+#installed_gems="$("$gem_cmd" list --no-versions | grep -ve '^[[:space:]]*$' -e '^\*')"
+
 for gem in $gems; do
-    if "$ruby" -e "require '$gem'" &>/dev/null; then
+    #if "$ruby" -e "require '$gem'" &>/dev/null; then
+    #if grep -Fxq "$gem" <<< "$installed_gems"; then
+    # less efficient than above but more likely to not try to re-install packages
+    if "$gem_cmd" list --no-versions |
+        grep -ve '^[[:space:]]*$' -e '^\*' |
+        grep -Fxq "$gem"; then
         echo "ruby gem '$gem' already installed, skipping..."
     else
         echo "installing ruby gem '$gem'"
