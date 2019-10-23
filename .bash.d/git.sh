@@ -541,16 +541,16 @@ upl(){
     done
 }
 
-stagemerge(){
-    if isGit "."; then
-        git checkout prod    && git pull &&
-        git checkout staging && git pull &&
-        git merge prod
-        git checkout prod
-    else
-        echo "Not a Git working copy";
-    fi
-}
+#stagemerge(){
+#    if isGit "."; then
+#        git checkout prod    && git pull &&
+#        git checkout staging && git pull &&
+#        git merge prod
+#        git checkout prod
+#    else
+#        echo "Not a Git working copy";
+#    fi
+#}
 
 gitdiff(){
     local filename="${1:-}"
@@ -559,13 +559,13 @@ gitdiff(){
     diffnet.pl "/tmp/hgdiff.tmp"
 }
 
-revert_typechange(){
+git_revert_typechange(){
     # want splitting to separate filenames
     # shellcheck disable=SC2046
     co $(git status --porcelain -s "${1:-.}" | awk '/^.T/{print $2}')
 }
 
-rm_untracked(){
+git_rm_untracked(){
     if [ $# -lt 1 ]; then
         echo "usage: rm_untracked <target_dir_or_files_or_glob>"
         return 1
