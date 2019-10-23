@@ -37,13 +37,17 @@ sed_script="$(
     done < <(tr ':' ' ' < "$mappings")
 )"
 
-for x in "$@"; do
-    if [ -f "$x" ]; then
-        cat "$x"
-    else
-        echo "$x"
-    fi
-done |
+if [ $# -gt 0 ]; then
+    for x in "$@"; do
+        if [ -f "$x" ]; then
+            cat "$x"
+        else
+            echo "$x"
+        fi
+    done
+else
+    cat
+fi |
 sed 's/[>=].*$//;' |
     # these have been replaced my pipreqs mapping file
     #s/beautifulsoup4/bs4/;
