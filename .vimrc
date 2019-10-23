@@ -70,7 +70,7 @@ filetype plugin on
 
 " ============================================================================ "
 
-nmap ;l :echo "No linting defined for this file type"<CR>
+nmap ;l :echo "No linting defined for this filetype:" &filetype<CR>
 
 if has("autocmd")
     " re-open at last cursor line and center screen on the cursor line
