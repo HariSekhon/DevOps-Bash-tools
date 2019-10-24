@@ -95,8 +95,14 @@ function dockerrunrm(){
 }
 
 docker_get_container_ids(){
+    local exclude_file=~/docker-perm.txt
+    # if exclude file doesn't exist, grep fails entirely and we get no IDs returned, even pre-emptively replacing with /dev/null doesn't work, so omit the option entirely
+    if [ -f "$exclude_file" ]; then
+        exclude_file=" -f $exclude_file"
+    fi
+    # shellcheck disable=SC2086
     docker ps -a --format "{{.ID}} {{.Names}}" |
-    grep -vi -f ~/docker-perm.txt 2>/dev/null |
+    grep -vi $exclude_file 2>/dev/null |
     awk '{print $1}'
 }
 
