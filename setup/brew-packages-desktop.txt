@@ -98,6 +98,7 @@ ruby  # Mac ruby is too old to install Travis CI
 ruby-completion
 # screen  # already present on Mac
 s3cmd
+scalastyle
 snappy
 sonar-completion
 sqlite
