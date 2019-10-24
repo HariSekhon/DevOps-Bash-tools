@@ -114,8 +114,12 @@ alias ll='ls -l $LS_OPTIONS'
 alias lh='ls -lh $LS_OPTIONS'
 alias lr='ls -ltrh $LS_OPTIONS'
 alias lR='ls -lRh $LS_OPTIONS'
+
 # shellcheck disable=SC2086
 lw(){ ls -lh $LS_OPTIONS "$(type -P "$@")"; }
+
+# shellcheck disable=SC2086
+lll(){ ls -l $LS_OPTIONS "$(readlink "$@")"; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
