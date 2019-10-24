@@ -140,8 +140,8 @@ if has("autocmd")
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
     " check_makefile.sh is in this repo which should be added to $PATH
     au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefile.sh "%" \| more -R<CR>
-    au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| more -R<CR> | nmap ;r :!gradle build<CR>
-    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd `dirname "%"` && echo q \| sbt reload "%" \| more -R<CR>
+    au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| more -R<CR> | nmap ;r :!gradle -b "%" clean build<CR>
+    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd "`dirname "%"`" && echo q \| sbt reload "%" \| more -R<CR>
     au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| more -R<CR>
     au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint "%" \| more -R<CR>
 
@@ -175,6 +175,8 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
+nmap          ;g :! bash -ic 'cd $(dirname "%") && git status'<CR>
+nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
