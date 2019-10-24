@@ -176,8 +176,9 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
-nmap          ;g :! bash -ic 'cd $(dirname "%") && git status'<CR>
+nmap          ;g :! bash -ic 'cd $(dirname "%") && st'<CR>
 nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
+nmap          ;[ :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
