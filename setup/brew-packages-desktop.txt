@@ -73,7 +73,7 @@ kubernetes-cli
 launchctl-completion
 lynx
 maven-completion
-md5sha1sum
+#md5sha1sum  # clashes with coreutils
 mercurial
 midnight-commander
 mosh
