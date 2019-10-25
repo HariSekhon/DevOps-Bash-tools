@@ -115,7 +115,7 @@ yum-packages-desktop: system-packages
 
 .PHONY: homebrew-packages-desktop
 homebrew-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages.sh setup/homebrew-packages-desktop*.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop*.txt
 
 .PHONY: perl-desktop
 perl-desktop: system-packages
