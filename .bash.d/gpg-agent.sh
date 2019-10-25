@@ -40,11 +40,13 @@ gpg_agent(){
                 #    echo "gpg-agent PID does not belong to gpg-agent, spawning new agent..."
                 #    eval "$(gpg-agent --daemon | tee "$GPG_ENV_FILE")"
                 #fi
-            if ! pgrep -qf gpg-agent.*--daemon; then
-                echo "Starting gpg-agent..."
-                killall -9 gpg-agent
-                #eval "$(gpg-agent --daemon | tee "$GPG_ENV_FILE")"
-                gpg-agent --daemon
+            if type -P pgrep &>/dev/null; then
+                if ! pgrep -qf gpg-agent.*--daemon; then
+                    echo "Starting gpg-agent..."
+                    killall -9 gpg-agent
+                    #eval "$(gpg-agent --daemon | tee "$GPG_ENV_FILE")"
+                    gpg-agent --daemon
+                fi
             fi
             #clear
         fi
