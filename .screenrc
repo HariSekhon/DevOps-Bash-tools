@@ -16,6 +16,10 @@
 #                                S c r e e n r c
 # ============================================================================ #
 
+# Reload .screenrc without restarting:
+#
+# Ctrl-a :source $HOME/.screenrc
+
 startup_message off
 
 defscrollback 20000
