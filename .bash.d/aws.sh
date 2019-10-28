@@ -28,11 +28,13 @@ alias s3='aws s3'
 # JAVA_HOME needs to be set to use EC2 api tools
 #[ -x /usr/bin/java ] && export JAVA_HOME=/usr  # errors but still works
 
+# Shouldn't be needed any more, all these sorts of tools were unified on awscli
+#
 # link_latest '/usr/local/ec2-api-tools-*'
-if [ -d /usr/local/ec2-api-tools ]; then
-    export EC2_HOME=/usr/local/ec2-api-tools   # this should be a link to the unzipped ec2-api-tools-1.6.1.4/
-    add_PATH "$EC2_HOME/bin"
-fi
+#if [ -d /usr/local/ec2-api-tools/bin ]; then
+#    export EC2_HOME=/usr/local/ec2-api-tools   # this should be a link to the unzipped ec2-api-tools-1.6.1.4/
+#    add_PATH "$EC2_HOME/bin"
+#fi
 
 # ============================================================================ #
 
@@ -63,7 +65,7 @@ assume-role(){
 
 aws_get_cred_path(){
     local aws_credentials=~/.aws/credentials
-    local boto=~/.boto
+    local boto="${BOTO_CONFIG:-$HOME/.boto}"
     local credentials_file
     if [ -f "$aws_credentials" ]; then
         credentials_file="$aws_credentials"
