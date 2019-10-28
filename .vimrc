@@ -3,6 +3,14 @@
 "  Date: 2006-07-01 22:52:16 +0100 (Sat, 01 Jul 2006)
 "
 
+" ============================================================================ "
+"                               v i m r c
+" ============================================================================ "
+
+" to reload without restarting vim
+"
+" :source ~/.vimrc
+
 syn on
 
 " ============================================================================ "
@@ -182,6 +190,7 @@ nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
+nmap          ;§ :call ToggleScrollLock()<CR>
 "nmap          ;x :x<CR>
 
 " ============================================================================ "
@@ -191,6 +200,16 @@ function! ToggleSyntax()
         syntax off
     else
         syntax enable
+    endif
+endfunction
+
+" setting this high keeps cursor in middle of screen
+":set so=999
+function! ToggleScrollLock()
+    if &scrolloff > 0
+        :set scrolloff=0
+    else
+        :set scrolloff=999
     endif
 endfunction
 
