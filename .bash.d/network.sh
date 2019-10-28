@@ -43,10 +43,11 @@ checkhost(){
     fi
 }
 
-alias google="while true; do ping www.google.com && break; sleep 1 || break; done"
-alias g=google
+alias ping_google="while true; do ping www.google.com && break; sleep 1 || break; done"
+alias g=ping_google
 
 # watch_url.pl is in DevOps-Perl-tools repo which should be in $PATH
+alias watchu="watch_url.pl"
 alias wg="watch_url.pl google.com"
 
 n(){
