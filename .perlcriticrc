@@ -1,0 +1,26 @@
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2019-10-29 22:33:20 +0000 (Tue, 29 Oct 2019)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+severity = 5
+#verbose = 11
+#verbose = %f: [%p] %m at line %l, column %c.\n%d\n
+verbose = %f: [%p] %m at line %l, column %c.\n
+theme = core
+
+[TestingAndDebugging::RequireUseWarnings]
+severity = 5
+
+# doesn't find this file with $HOME or ~
+#[Modules::ProhibitEvilModules]
+#modules_file = ~/.perlcritic_forbidden_modules
