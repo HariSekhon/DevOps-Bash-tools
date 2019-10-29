@@ -13,9 +13,14 @@
 #
 
 severity = 5
+# gives full explanations
 #verbose = 11
+
 #verbose = %f: [%p] %m at line %l, column %c.\n%d\n
-verbose = %f: [%p] %m at line %l, column %c.\n
+#
+# this output is ok, but I prefer the default
+#verbose = %f: [%p] %m at line %l, column %c.\n
+
 theme = core
 
 [TestingAndDebugging::RequireUseWarnings]
