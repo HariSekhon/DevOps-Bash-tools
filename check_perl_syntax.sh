@@ -50,6 +50,8 @@ else
         printf "%-${max_len}s " "$x:"
         #$perl -Tc $I_lib $x
         # -W too noisy
+        # -Mstrict - flags common DESCRIPTION / VERSION unscoped
+        # -Mdiagnostics
         # shellcheck disable=SC2154
         # $perl is set in perl.sh which is included from utils.sh
         $perl -I . -Tc "$x" 2>&1 | sed "s,^$x ,,"
