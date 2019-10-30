@@ -26,7 +26,7 @@ nose
 # pep8 has been renamed to pycodestyle
 pycodestyle
 pyflakes
-pyhcl  # Hashicorp's config language parser
+pyhcl  # Hashicorp's config language parser - returns dict and comes with cli tool to parse hcl to json - hcltool INFILE [OUTFILE]
 PyInstaller
 pylint
 pytest
