@@ -585,7 +585,7 @@ git_rm_untracked(){
     done
 }
 
-# example of usage of this in the function below - make sure to put $repo somewhere in the argument body to make use of the iteration variable
+# example of usage of this in the function below - make sure to put '$repo' or "\$repo" somewhere in the argument body to make use of the iteration variable
 foreachrepo(){
     local repolist="${REPOLIST:-$bash_tools/setup/repolist.txt}"
     while read -r repo; do
@@ -594,5 +594,5 @@ foreachrepo(){
 }
 
 github_authors(){
-    foreachrepo "echo \$repo; pushd $github/\$repo >/dev/null; git_authors; popd >/dev/null; echo" | $less
+    foreachrepo 'echo "$repo"; pushd "$github/$repo" >/dev/null; git_authors; popd >/dev/null; echo' | $less
 }
