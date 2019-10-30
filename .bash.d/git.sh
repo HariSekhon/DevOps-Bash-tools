@@ -559,6 +559,12 @@ gitdiff(){
     diffnet.pl "/tmp/hgdiff.tmp"
 }
 
+git_authors(){
+    # split $less to split out opts
+    # shellcheck disable=SC2154
+    git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | $less
+}
+
 git_revert_typechange(){
     # want splitting to separate filenames
     # shellcheck disable=SC2046
@@ -577,4 +583,15 @@ git_rm_untracked(){
         # shellcheck disable=SC2046
         rm -v $(git status --porcelain -s "$x" | awk '/^\?\?/{print $2}')
     done
+}
+
+foreachrepo(){
+    local repolist="${REPOLIST:-$bash_tools/setup/repolist.txt}"
+    for repo in $(dec "$repolist" | sed 's/.*://'); do
+        eval "$@"
+    done
+}
+
+github_authors(){
+    foreachrepo "echo \$repo; pushd $github/\$repo >/dev/null; git_authors; popd >/dev/null; echo"
 }
