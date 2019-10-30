@@ -588,9 +588,9 @@ git_rm_untracked(){
 # example of usage of this in the function below - make sure to put $repo somewhere in the argument body to make use of the iteration variable
 foreachrepo(){
     local repolist="${REPOLIST:-$bash_tools/setup/repolist.txt}"
-    for repo in $(decomment "$repolist" | sed 's/.*://'); do
+    while read -r repo; do
         eval "$@"
-    done
+    done < <(sed 's/#.*$//; s/.*://; /^[[:space:]]*$/d' "$repolist")
 }
 
 github_authors(){
