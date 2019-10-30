@@ -594,5 +594,7 @@ foreachrepo(){
 }
 
 github_authors(){
-    foreachrepo 'echo "$repo"; pushd "$github/$repo" >/dev/null; git_authors; popd >/dev/null; echo' | $less
+    # deferring expansion into loop
+    # shellcheck disable=SC2016
+    foreachrepo 'echo "repo: $repo"; pushd "$github/$repo" >/dev/null || return 1; git_authors; popd >/dev/null || return 1; echo' | $less
 }
