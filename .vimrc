@@ -14,6 +14,8 @@
 syn on
 
 " ============================================================================ "
+"                               S e t   C o n f i g
+" ============================================================================ "
 
 " show all settable option values and their values
 "set all
@@ -55,7 +57,12 @@ set fileencoding=utf-8  " The encoding written to file.
 " add comment to next line when using Insert mode
 set formatoptions+=or
 
+
 " ============================================================================ "
+"                                   G U I
+" ============================================================================ "
+
+" see also ~/.gvimrc.local sourcing at bottom of this config
 
 "behave mswin
 be xterm
@@ -65,6 +72,9 @@ be xterm
     colo slate
 :endif
 
+
+" ============================================================================ "
+"                               P l u g i n s
 " ============================================================================ "
 
 filetype plugin indent on
@@ -76,6 +86,9 @@ filetype plugin on
 
 " set scrollbind - in each window then windows will scroll together
 
+
+" ============================================================================ "
+"                               A u t o c m d
 " ============================================================================ "
 
 nmap ;l :echo "No linting defined for this filetype:" &filetype<CR>
@@ -156,9 +169,13 @@ if has("autocmd")
 
 endif
 
+
+" ============================================================================ "
+"                           K e y b i n d i n g s
 " ============================================================================ "
 
 "nmap <silent> ;c :call Cformat()<CR>
+nmap          ;b :!git blame "%"<CR>
 nmap <silent> ;c :,!center.py<CR>
 nmap <silent> ;e :,!center.py -s<CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
@@ -191,9 +208,15 @@ nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
-nmap          ;§ :call ToggleScrollLock()<CR>
 "nmap          ;x :x<CR>
+nmap          ;§ :call ToggleScrollLock()<CR>
+" breaks ;; nmap
+"nmap          ;\ :source ~/.vimrc<CR>
+nmap          ;/ :source ~/.vimrc<CR>
 
+
+" ============================================================================ "
+"                               F u n c t i o n s
 " ============================================================================ "
 
 function! ToggleSyntax()
@@ -214,7 +237,6 @@ function! ToggleScrollLock()
     endif
 endfunction
 
-":command Hr  :normal i # ============================================================================ #<ESC>lx
 :command! Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
 ":function Hr()
     ":s/^/# ============================================================================ #/
@@ -255,6 +277,8 @@ function! Scrub()
     ": call RemoveIPs()
     ": call RemoveMacs()
     ": call RemoveDomains()
+    " Anonymizer is found in adjacent DevOps Python Tools repo which should be added to $PATH
+    " there is also a faster version in DevOps Perl Tools repo
     :%!anonymize.py --all
 endfunction
 
@@ -274,18 +298,19 @@ function! WriteRun()
 endfunction
 
 " ============================================================================ "
+"                   L o c a l   C o n f i g   S o u r c i n g
+" ============================================================================ "
 
 " either works, requires expand()
 "let MYLOCALVIMRC = "~/.vimrc.local"
 "let MYLOCALVIMRC = "$HOME/.vimrc.local"
 
-" Function to source only if file exists {
+" source a config file only if it exists
 function! SourceIfExists(file)
   if filereadable(expand(a:file))
     exe 'source' a:file
   endif
 endfunction
-" }
 
 call SourceIfExists("~/.vimrc.local")
 call SourceIfExists("~/.vim/colors.vim")
