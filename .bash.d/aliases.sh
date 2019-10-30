@@ -257,6 +257,7 @@ export down="$Downloads"
 export docu="$Documents"
 alias down='cd "$Downloads"'
 alias docu='cd "$Documents"'
+alias doc='cd ~/docs'
 
 export desktop=~/Desktop
 export desk="$desktop"
