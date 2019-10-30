@@ -57,7 +57,9 @@ alias se=screenrc
 alias mv='mv -i'
 alias cp='cp -i'
 #alias rm='rm -i'
-alias less='less -RFXig'
+# allows to re-use custommized less behaviour throughout profile without duplicating options
+less='less -RFXig'
+alias less='$less'
 alias l='less'
 alias m='more'
 alias vi='vim'
