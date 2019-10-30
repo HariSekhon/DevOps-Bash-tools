@@ -26,6 +26,7 @@ nose
 # pep8 has been renamed to pycodestyle
 pycodestyle
 pyflakes
+pyhcl  # Hashicorp's config language parser
 PyInstaller
 pylint
 pytest
