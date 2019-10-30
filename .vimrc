@@ -174,6 +174,7 @@ nmap <silent> ;j :JHr<CR>
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
 nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
 nmap          ;n :n<CR>
+nmap          ;o :!git log -p "%"<CR>
 nmap          ;p :prev<CR>
 nmap          ;q :q<CR>
 nmap          ;r :call WriteRun()<CR>
