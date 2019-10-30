@@ -15,6 +15,8 @@
 #
 
 # Export of useful Git utility functions from years gone by
+#
+# far more git functions are available in the interactive library .bash.d/git.sh
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
