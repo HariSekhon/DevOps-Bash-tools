@@ -16,3 +16,4 @@
 
 github.com/rakyll/hey
 github.com/remind101/assume-role
+github.com/cjbassi/gotop
