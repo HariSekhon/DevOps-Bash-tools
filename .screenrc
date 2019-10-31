@@ -82,7 +82,7 @@ shell /bin/bash
 #
 # change prompt to use > instead of $
 # the space before the > is useful to distinguish the PS1 prompt from the PS4 prompt
-# doesn't work when using 'screen -t blah', can't find a way of reactivating it on the already open window, new windows in the screen are fine though
+# 'screen -t blah' disables dynamic shelltitle on that new pane and cannot reactivate dynamic title even when re-sourcing this config or using functions from .bash.d/screen.sh profile
 shelltitle ' > |'
 
 # ============================================================================ #
