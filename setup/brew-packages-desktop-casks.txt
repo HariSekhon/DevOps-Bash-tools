@@ -7,6 +7,7 @@
 
 atom
 ccmenu
+keepassxc
 minikube
 minishift
 podman

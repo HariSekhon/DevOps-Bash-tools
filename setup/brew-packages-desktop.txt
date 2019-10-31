@@ -17,7 +17,6 @@
 # ClamXav
 # Colloquay
 # JConsole
-# KeePassX
 # Reggy
 # Remote Desktop Connection
 # Skype
