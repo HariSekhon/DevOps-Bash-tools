@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-[ -n "$OS_DETECTION_RUN" ] && return
+[ -n "${OS_DETECTION_RUN:-}" ] && return
 
 uname="$(uname)"
 
