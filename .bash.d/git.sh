@@ -70,6 +70,11 @@ alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
 
+# equivalent of hg root
+git_root(){
+    git rev-parse --show-toplevel
+}
+
 gitgc(){
     if ! [ -d .git ]; then
         echo "not at top of a git repo, not .git/ directory found"
@@ -562,7 +567,7 @@ gitdiff(){
 git_authors(){
     # split $less to split out opts
     # shellcheck disable=SC2154
-    git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | $less
+    git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | ${less:-less}
 }
 
 git_revert_typechange(){
@@ -596,5 +601,5 @@ foreachrepo(){
 github_authors(){
     # deferring expansion into loop
     # shellcheck disable=SC2016
-    foreachrepo 'echo "repo: $repo"; pushd "$github/$repo" >/dev/null || return 1; git_authors; popd >/dev/null || return 1; echo' | $less
+    foreachrepo 'echo "repo: $repo"; pushd "$github/$repo" >/dev/null || return 1; git_authors; popd >/dev/null || return 1; echo' | ${less:-less}
 }
