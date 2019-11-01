@@ -24,7 +24,7 @@
 # set location where you check out all the github repos
 export github=~/github
 
-export GIT_PAGER="less -RFX --tabs=4"
+export GIT_PAGER="less $LESS"
 # shellcheck disable=SC2230
 #if [ -z "${GIT_PAGER:-}" ] && \
 if type -P diff-so-fancy &>/dev/null; then
@@ -565,15 +565,11 @@ gitdiff(){
 }
 
 git_author_names(){
-    # split $less to split out opts
-    # shellcheck disable=SC2154
-    git log --pretty=format:"%an" | sort | uniq -c | sort -k1nr | ${less:-less}
+    git log --pretty=format:"%an" | sort | uniq -c | sort -k1nr | less
 }
 
 git_author_emails(){
-    # split $less to split out opts
-    # shellcheck disable=SC2154
-    git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | ${less:-less}
+    git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | less
 }
 
 git_authors(){
