@@ -25,5 +25,5 @@ fi
 
 echo "# Fetching SSH Public Key(s) from GitHub for account:  $GITHUB_USER" >&2
 echo "#" >&2
-# technically should use the GitHub API but don't want to have to parse the JSON here, might do a tool in a proper programming language for that later
+# technically should use the GitHub API, see adjacent github_get_user_ssh_public_key2.sh for that version
 curl -s "https://github.com/$GITHUB_USER.keys"
