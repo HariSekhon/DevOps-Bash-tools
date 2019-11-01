@@ -24,7 +24,7 @@
 # set location where you check out all the github repos
 export github=~/github
 
-export GIT_PAGER="less $LESS"
+export GIT_PAGER="less ${LESS:-}"
 # shellcheck disable=SC2230
 #if [ -z "${GIT_PAGER:-}" ] && \
 if type -P diff-so-fancy &>/dev/null; then
