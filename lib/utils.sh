@@ -465,7 +465,8 @@ start_timer(){
 time_taken(){
     echo
     local start_time
-    start_time="$1"
+    # workaround if 2>&1 captures message from start_timer and only want final epoch timestamp
+    start_time="${1//*[[:space:]]}"
     shift
     local time_taken
     local msg
