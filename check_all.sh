@@ -51,6 +51,8 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_aws_no_git_credentials.sh"
 
+"$srcdir/check_git_commit_authors.sh"
+
 "$srcdir/check_bash_duplicate_defs.sh" || :
 
 "$srcdir/check_duplicate_requirements.sh"
