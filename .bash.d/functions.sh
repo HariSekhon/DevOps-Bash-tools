@@ -90,6 +90,18 @@ basedir(){
     echo "$output"
 }
 
+trim(){
+    sed 's/^[[:space:]]*//; s/[[:space:]]*$//' "$@"
+}
+
+normalize_spaces(){
+    perl -pe 's/\s+/ /g'
+}
+
+remove_last_column(){
+    awk '{$NF=""; print $0}'
+}
+
 strip_basedirs(){
     local basedir="$1"
     shift
