@@ -58,8 +58,9 @@ alias mv='mv -i'
 alias cp='cp -i'
 #alias rm='rm -i'
 # allows to re-use custommized less behaviour throughout profile without duplicating options
-less='less -RFXig'
-alias less='$less'
+#less='less -RFXig'
+#alias less='$less'
+export LESS="-RFXig --tabs=4"
 alias l='less'
 alias m='more'
 alias vi='vim'
