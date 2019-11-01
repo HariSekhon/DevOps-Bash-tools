@@ -48,6 +48,7 @@ dnstop
 docker-completion
 docker-compose-completion
 e2fsprogs
+expect
 etcd
 ffmpeg
 gem-completion
