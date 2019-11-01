@@ -564,10 +564,20 @@ gitdiff(){
     diffnet.pl "/tmp/hgdiff.tmp"
 }
 
-git_authors(){
+git_author_names(){
+    # split $less to split out opts
+    # shellcheck disable=SC2154
+    git log --pretty=format:"%an" | sort | uniq -c | sort -k1nr | ${less:-less}
+}
+
+git_author_emails(){
     # split $less to split out opts
     # shellcheck disable=SC2154
     git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | ${less:-less}
+}
+
+git_authors(){
+    git_author_emails
 }
 
 git_revert_typechange(){
