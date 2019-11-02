@@ -3,7 +3,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2016-01-22 20:54:53 +0000 (Fri, 22 Jan 2016)
+#  Date: Fri Nov 1 19:04:26 2019 +0000
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -43,25 +43,6 @@ start_time="$(start_timer)"
 commit_count="${GIT_COMMIT_HISTORY_DEPTH:-100}"
 
 exitcode=0
-
-# extra layer for checking personal repos
-#check_top_author(){
-#    top_author_email="$(git_authors | sort -k1nr | awk '{print $2; exit}')"
-#    if [[ "$top_author_email" =~ hari|sekhon ]]; then
-#        other_emails="$(git_authors | grep -e 'hari|sekhon' | grep -v "$top_author_email" || :)"
-#        if [ "$other_emails" ]; then
-#            echo "WARNING: other email addresses found:"
-#            echo
-#            echo "$other_emails"
-#            exitcode=1
-#        else
-#            echo "OK: no other email addresses found for Hari Sekhon (hari|sekhon)"
-#        fi
-#    fi
-#    author_top_prefix="${author_top_email%%@*}"
-#    #author_top_domain="${author_top_email##*@}"
-#    check_duplicate_email_prefixes "$author_top_prefix"
-#}
 
 git_log(){
     git log --all -n "$commit_count" "$@"
@@ -110,19 +91,6 @@ check_multiple_emails_per_name(){
         echo "OK: no differing email addresses committed for each committed user name"
     fi
 }
-
-#check_duplicate_email_prefixes(){
-#    local prefix="$1"
-#    emails_with_same_prefix="$(sed 's/@.*//; s/[[:space:]]*//g' <<< "$emails_in_last_n_commits" | grep -Fx "$prefix")"
-#    if [ "$(wc -l <<< "$emails_with_same_prefix")" -gt 1 ] ; then
-#        echo "WARNING: more than 1 email with the same email prefix detected in git log!"
-#        echo
-#        echo "$emails_with_same_prefix"
-#        exitcode=1
-#    else
-#        echo "OK: no emails with same prefix (domain auto-hostname change check)"
-#    fi
-#}
 
 check_duplicate_email_prefixes(){
     emails="${emails:-$(git_log_emails)}"
