@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSStatusItem Preferred Position Item-0</key>
+	<real>458.5</real>
+	<key>PlaySound Broken</key>
+	<false/>
+	<key>PlaySound Fixed</key>
+	<false/>
+	<key>PlaySound StillFailing</key>
+	<false/>
+	<key>PlaySound Successful</key>
+	<false/>
+	<key>PollInterval</key>
+	<integer>60</integer>
+	<key>Projects</key>
+	<array>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/Dockerfiles</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/spotify-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/spotify-tools/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/lib</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repositories/HariSekhon/lib/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/pylib</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/pylib/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/lib-java</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/lib-java/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/spark-apps</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/Nagios-Plugins</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/Nagios-Plugin-Kafka</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugin-Kafka/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/DevOps-Python-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Python-tools/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/DevOps-Perl-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Perl-tools/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/DevOps-Bash-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repositories/HariSekhon/DevOps-Bash-tools/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/HAProxy-configs</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/HAProxy-configs/cc.xml</string>
+		</dict>
+	</array>
+	<key>SendNotification Broken</key>
+	<true/>
+	<key>SendNotification Fixed</key>
+	<true/>
+	<key>SendNotification StillFailing</key>
+	<true/>
+	<key>SendNotification Successful</key>
+	<true/>
+	<key>ServerHistory</key>
+	<array>
+		<string>http://api.travis-ci.org/repositories/HariSekhon/lib/cc.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon/nagios-plugins/cc.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon/spotify/cc.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon/toolbox/cc.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon/tools/cc.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon/pytools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/lib-java/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/pylib/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml</string>
+		<string>https://api.travis-ci.org/repositories/HariSekhon/bash-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/spotify-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/nagios-plugin-kafka/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/devops-python-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/devops-perl-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repositories/HariSekhon/DevOps-Bash-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugin-Kafka/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Python-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Perl-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/HAProxy-configs/cc.xml</string>
+	</array>
+	<key>Sound Broken</key>
+	<string>Sosumi</string>
+	<key>Sound Fixed</key>
+	<string>Sosumi</string>
+	<key>Sound StillFailing</key>
+	<string>Sosumi</string>
+	<key>Sound Successful</key>
+	<string>Sosumi</string>
+</dict>
+</plist>
