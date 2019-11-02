@@ -86,6 +86,7 @@ p7zip
 packer-completion
 #parallel # in brew-packages.txt
 parquet-tools
+perltidy
 pinentry
 pip-completion
 postgresql
