@@ -18,18 +18,6 @@
 	<array>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/Dockerfiles</string>
-			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
-		</dict>
-		<dict>
-			<key>projectName</key>
-			<string>HariSekhon/spotify-tools</string>
-			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/spotify-tools/cc.xml</string>
-		</dict>
-		<dict>
-			<key>projectName</key>
 			<string>HariSekhon/lib</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repositories/HariSekhon/lib/cc.xml</string>
@@ -48,15 +36,15 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/spark-apps</string>
+			<string>HariSekhon/spotify-tools</string>
 			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/spotify-tools/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/Nagios-Plugins</string>
+			<string>HariSekhon/spark-apps</string>
 			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
@@ -66,9 +54,9 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/DevOps-Python-tools</string>
+			<string>HariSekhon/HAProxy-configs</string>
 			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Python-tools/cc.xml</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/HAProxy-configs/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
@@ -78,15 +66,27 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
+			<string>HariSekhon/DevOps-Python-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Python-tools/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
 			<string>HariSekhon/DevOps-Bash-tools</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repositories/HariSekhon/DevOps-Bash-tools/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/HAProxy-configs</string>
+			<string>HariSekhon/Nagios-Plugins</string>
 			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/HAProxy-configs/cc.xml</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/Dockerfiles</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
 		</dict>
 	</array>
 	<key>SendNotification Broken</key>
