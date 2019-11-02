@@ -16,53 +16,57 @@
 #set -euo pipefail
 #[ -n "${DEBUG:-}" ] && set -x
 
-case "$1" in
-    *.ad[asb]|\
-    *.asm|\
-    *.awk|\
-    *.axp|\
-    *.diff|\
-    *.ebuild|\
-    *.eclass|\
-    *.groff|\
-    *.hh|\
-    *.inc|\
-    *.java|\
-    *.js|\
-    *.lsp|\
-    *.l|\
-    *.m4|\
-    *.pas|\
-    *.patch|\
-    *.php|\
-    *.pl|\
-    *.pm|\
-    *.pod|\
-    *.pov|\
-    *.ppd|\
-    *.py|\
-    *.p|\
-    *.rb|\
-    *.sh|\
-    *.sql|\
-    *.xml|\
-    *.xps|\
-    *.xsl|\
-    *.[ch]pp|\
-    *.[ch]xx|\
-    *.[ch]\
-        )   pygmentize -f 256 "$1"
-            ;;
+if [ $# -gt 0 ]; then
+    case "$1" in
+        *.ad[asb]|\
+        *.asm|\
+        *.awk|\
+        *.axp|\
+        *.diff|\
+        *.ebuild|\
+        *.eclass|\
+        *.groff|\
+        *.hh|\
+        *.inc|\
+        *.java|\
+        *.js|\
+        *.lsp|\
+        *.l|\
+        *.m4|\
+        *.pas|\
+        *.patch|\
+        *.php|\
+        *.pl|\
+        *.pm|\
+        *.pod|\
+        *.pov|\
+        *.ppd|\
+        *.py|\
+        *.p|\
+        *.rb|\
+        *.sh|\
+        *.sql|\
+        *.xml|\
+        *.xps|\
+        *.xsl|\
+        *.[ch]pp|\
+        *.[ch]xx|\
+        *.[ch]\
+            )   pygmentize -f 256 "$1"
+                ;;
 
-    .bash*) pygmentize -f 256 -l sh "$1"
-            ;;
+        .bash*) pygmentize -f 256 -l sh "$1"
+                ;;
 
-    *)
-        if grep -q '#!.*bash' "$1" 2> /dev/null; then
-            pygmentize -f 256 -l sh "$1"
-        else
-            exit 1
-        fi
-esac
+        *)
+            if grep -q '#!.*bash' "$1" 2> /dev/null; then
+                pygmentize -f 256 -l sh "$1"
+            else
+                exit 1
+            fi
+    esac
+else
+    pygmentize -f 256 -g
+fi
 
 exit 0
