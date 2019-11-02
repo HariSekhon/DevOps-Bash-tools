@@ -242,6 +242,7 @@ pyflakes
 pygobject
 pylint
 python-doc
+python-pygments
 rancid
 rancid-cgi
 rancid-core

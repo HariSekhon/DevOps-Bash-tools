@@ -147,6 +147,7 @@ pv
 pydns
 pygobject
 pylint
+python-pygments
 rancid
 rancid-cgi
 rancid-core
