@@ -19,6 +19,10 @@ srcdir="$(dirname "$0")"
 
 bin=/Applications/CCMenu.app/Contents/MacOS/CCMenu
 
+plist_dir="Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences"
+
+plist_file="net.sourceforge.cruisecontrol.CCMenu.plist"
+
 "$srcdir/install_homebrew.sh"
 echo
 
@@ -42,7 +46,12 @@ fi
 #wget -c -O ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/net.sourceforge.cruisecontrol.CCMenu.plist \
 #           https://github.com/HariSekhon/DevOps-Bash-tools/releases/download/ccmenu/net.sourceforge.cruisecontrol.CCMenu.plist
 
-cp -v "$srcdir/net.sourceforge.cruisecontrol.CCMenu.plist" ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/
+cd "$srcdir/.."
+
+# CCMenu refuses to accept the configuration with a symlink
+#ln -svf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
+rm -f ~/"$plist_dir/$plist_file"
+cp -vf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
 echo
 
 echo "Restarting CCMenu"
@@ -54,5 +63,4 @@ sleep 2
 
 disown
 
-echo
 echo "Done"
