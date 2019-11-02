@@ -20,31 +20,34 @@ srcdir="$(dirname "$0")"
 bin=/Applications/CCMenu.app/Contents/MacOS/CCMenu
 
 "$srcdir/install_homebrew.sh"
+echo
 
 if ! [ -f "$bin" ]; then
     echo "================="
     echo "Installing CCMenu"
     echo "================="
     brew cask install ccmenu
+    echo
 fi
 
 if ! pgrep CCMenu &>/dev/null; then
-    echo
     echo "ensuring a first run has been done before replacing config, starting CCMenu"
     # need to ensure it's started before overwriting the config
     "$bin" &
+    echo
     sleep 2
 fi
 
-echo
-echo "Downloading CCMenu configuration from GitHub release"
-wget -c -O ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/net.sourceforge.cruisecontrol.CCMenu.plist \
-           https://github.com/HariSekhon/DevOps-Bash-tools/releases/download/ccmenu/net.sourceforge.cruisecontrol.CCMenu.plist
+#echo "Downloading CCMenu configuration from GitHub release"
+#wget -c -O ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/net.sourceforge.cruisecontrol.CCMenu.plist \
+#           https://github.com/HariSekhon/DevOps-Bash-tools/releases/download/ccmenu/net.sourceforge.cruisecontrol.CCMenu.plist
 
+cp -v "$srcdir/net.sourceforge.cruisecontrol.CCMenu.plist" ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/
 echo
+
 echo "Restarting CCMenu"
 pkill -f "$bin" || :
-
+echo
 sleep 2
 
 "$bin" &
