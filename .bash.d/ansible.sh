@@ -17,14 +17,19 @@
 #                                 A n s i b l e
 # ============================================================================ #
 
+srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
+
 # env var takes preference, then cwd, then $HOME, then /etc/ansible/ansible.cfg
 # $srcdir set in .bashrc
 # shellcheck disable=SC2154
 export ANSIBLE_CONFIG="$srcdir/.ansible.cfg"
 
-export PYTHONPATH="$PYTHONPATH:$ANSIBLE_HOME/lib"
-export ANSIBLE_LIBRARY="$ANSIBLE_HOME/library"
-export MANPATH="$MANPATH:$ANSIBLE_HOME/docs/man"
+add_PATH PYTHONPATH "$ANSIBLE_HOME/lib"
+add_PATH ANSIBLE_LIBRARY "$ANSIBLE_HOME/library"
+add_PATH MANPATH "$ANSIBLE_HOME/docs/man"
 
 if [ -f ~/etc/ansible/hosts ]; then
     export ANSIBLE_HOSTS=~/etc/ansible/hosts
