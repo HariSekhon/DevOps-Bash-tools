@@ -60,7 +60,7 @@ add_PATH(){
     fi
     path="${path%/}"
     if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
-        export $env_var="${!env_var}:$path"
+        export "$env_var"="${!env_var}:$path"
     fi
 }
 
