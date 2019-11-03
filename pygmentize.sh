@@ -16,6 +16,8 @@
 #set -euo pipefail
 #[ -n "${DEBUG:-}" ] && set -x
 
+# idea from https://superuser.com/questions/117841/when-reading-a-file-with-less-or-more-how-can-i-get-the-content-in-colors
+
 if [ $# -gt 0 ]; then
     case "$1" in
         *.ad[asb]|\
