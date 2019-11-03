@@ -150,6 +150,7 @@ if has("autocmd")
     au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
     au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
     au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
+    au BufNew,BufRead *.php        nmap ;l :w<CR>:!clear; php5 -l "%"<CR>
     au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py "%"<CR>
     au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py "%"<CR>
     au BufNew,BufRead *.md         nmap ;l :w<CR>:!clear; mdl "%" \| more -R<CR>
@@ -180,7 +181,7 @@ nmap <silent> ;c :,!center.py<CR>
 nmap <silent> ;e :,!center.py -s<CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 nmap <silent> ;D :Done<CR>
-nmap          ;f :,!fold -w 120 -s \| sed 's/[[:space:]]*$//'<CR>
+nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
 "nmap <silent> ;h :call Hr()<CR>
 nmap <silent> ;h :Hr<CR>
 " this inserts Hr literally
@@ -195,6 +196,7 @@ nmap          ;o :!git log -p "%"<CR>
 nmap          ;p :prev<CR>
 nmap          ;q :q<CR>
 nmap          ;r :call WriteRun()<CR>
+nmap          ;R :call WriteRunDebug()<CR>
 "nmap <silent> ;s :call ToggleSyntax()<CR>
 nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;u :call HgGitU()<CR>
@@ -293,7 +295,13 @@ endfunction
 
 function! WriteRun()
     :w
-    :!./%
+    :! "./%" 2>&1 \| less
+    " TODO: if .go then 'go run %'
+endfunction
+
+function! WriteRunDebug()
+    :w
+    :! DEBUG=1 "./%" 2>&1 \| less
     " TODO: if .go then 'go run %'
 endfunction
 
