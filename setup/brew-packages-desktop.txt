@@ -39,6 +39,7 @@ bash-completion
 brew-cask-completion
 cmatrix
 colordiff
+cowsay
 #coreutils # in brew-packages.txt
 csshx
 diff-so-fancy
@@ -51,6 +52,7 @@ e2fsprogs
 expect
 etcd
 ffmpeg
+fortune
 fzf
 gem-completion
 git
@@ -72,6 +74,7 @@ kompose
 kubectl
 kubernetes-cli
 launchctl-completion
+lolcat
 lynx
 maven-completion
 #md5sha1sum  # clashes with coreutils
