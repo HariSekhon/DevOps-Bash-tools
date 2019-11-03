@@ -51,6 +51,7 @@ e2fsprogs
 expect
 etcd
 ffmpeg
+fzf
 gem-completion
 git
 #gnu-sed # in brew-packages.txt

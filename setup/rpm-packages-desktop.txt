@@ -62,6 +62,7 @@ filelight
 fluxbox
 foremost
 fortune-mod
+fzf
 #games-misc/fortune-mod
 gcc
 gdb

@@ -99,6 +99,7 @@ foremost
 fortune-mod
 fping
 ftp
+fzf
 gaim
 games-misc/fortune-mod
 gcc
