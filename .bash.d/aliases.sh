@@ -62,7 +62,9 @@ alias cp='cp -i'
 #alias less='$less'
 export LESS="-RFXig --tabs=4"
 # will require LESS="-R"
-export LESSOPEN='| $bash_tools/pygmentize.sh %s'
+if type -P pygmentize &>/dev/null; then
+    export LESSOPEN='| "$bash_tools/pygmentize.sh" "%s"'
+fi
 alias l='less'
 alias m='more'
 alias vi='vim'
