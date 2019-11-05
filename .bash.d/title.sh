@@ -148,7 +148,12 @@ vim(){
         #shift
     done
     local num=10
-    [ -n "${TITLE_SHORT:-}" ] && num=3
+    if [[ "${TITLE_SHORT:-}" =~ ^[0-9]+$ ]]; then
+        num=$TITLE_SHORT
+    fi
+    if [ $num -lt 3 ]; then
+        num=3
+    fi
     title="${title//.txt/}"
     if dpstatus >/dev/null; then
         if echo "$title" | grep -q docs/; then
