@@ -16,8 +16,6 @@
 
 # Various Git log author commit checks against Name / Email / Domain inconsistencies to catch committing with the wrong or default user.name / user.email
 
-# Checks the last N commits for an author domain consistency (default: last 100 commits, override with $GIT_COMMIT_HISTORY_DEPTH)
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -37,15 +35,25 @@ start_time="$(start_timer)"
 
 #author_name="${GIT_AUTHOR_NAME:-${USER:-`whoami`}}"
 #author_email="${GIT_AUTHOR_EMAIL:-${EMAIL:-$(whoami)@$(hostname -f | sed 's/.*@//')}}"
-#user_name="$(git config -l | grep user.name)"
-#user_email="$(git config -l | grep user.email)"
+#user_name="$(git config -l | awk -F= '/user.name/{print $2}')"
+#user_email="$(git config -l | awk -F= '/user.email/{print $2}')"
 
-commit_count="${GIT_COMMIT_HISTORY_DEPTH:-100}"
+# used to check the last N commits (default: last 100 commits, override with $GIT_COMMIT_HISTORY_DEPTH)
+# but figured this is fast enough even on my biggest repo with 10,000 commmits it still returns in a second
+#commit_count="${GIT_COMMIT_HISTORY_DEPTH:-100}"
 
 exitcode=0
 
 git_log(){
-    git log --all -n "$commit_count" "$@"
+    #local opts=""
+    #if [[ "$commit_count" =~ ^[0-9]+$ ]] &&
+    #   [ "$commit_count" -gt 1 ]; then
+    #    opts="-n $commit_count"
+    #fi
+    # need to split opts
+    # shellcheck disable=SC2086
+    #git log --all $opts "$@"
+    git log --all "$@"
 }
 
 git_log_names(){
@@ -103,7 +111,7 @@ check_duplicate_email_prefixes(){
 
 check_root_committed(){
     names_emails="${names_emails:-$(git_log_names_emails)}"
-    root_detected="$(grep -i '<root>' <<< "$names_emails" || :)"
+    root_detected="$(grep -i '\<root\>' <<< "$names_emails" || :)"
     check_error "$root_detected" "root commits detected" &&
     echo "OK: no root commits detected" || :
 }
@@ -112,15 +120,15 @@ check_emails_without_domains(){
     emails="${emails:-$(git_local_emails)}"
     # need to use sed not built-in variable replacement in order to handle multi-line emails
     # shellcheck disable=SC2001
-    domains="$(sed 's/.*@//' <<< "$emails")"
-    non_domain_suffixes="$(grep -v '\.' <<< "$domains" || :)"
+    domains="$(sed 's/.*@//' <<< "$emails" | sort -u)"
+    non_domain_suffixes="$(grep -Ev '^(([A-Za-z](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}$' <<< "$domains" || :)"
     check_error "$non_domain_suffixes" "non-domain email suffixes detected (misconfigured git user.email defaulting to hostname?)" &&
     echo "OK: no non-domain email suffixes detected" || :
 }
 
 check_single_word_author_names(){
     names="${names:-$(git_log_names)}"
-    single_word_author_names="$(awk '{if(NF == 1) print $0}' <<< "$names")"
+    single_word_author_names="$(awk '{if(NF == 1) print $0}' <<< "$names" | sort -u)"
     check_error "$single_word_author_names" "single word author names detected (misconfigured git user.name?)" &&
     echo "OK: no single word author names detected" || :
 }
@@ -142,12 +150,14 @@ if isGit; then
     check_duplicate_email_prefixes
     check_root_committed
     check_emails_without_domains
-    check_single_word_author_names
+    # lots of my contrib authors have single word author names
+    # and so do 3rd party services like pyup-bot and ReadmeCritic
+    #check_single_word_author_names
 else
     echo "Not a git repo, skipping..."
 fi
 
 time_taken "$start_time"
-section2 "All Shell programs passed syntax check"
+section2 "All Git author name / email checks passed"
 echo
 exit $exitcode
