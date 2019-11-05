@@ -148,7 +148,7 @@ vim(){
         #shift
     done
     local num=10
-    [ -f ~/shorttitle ] && num=3
+    [ -n "${TITLE_SHORT:-}" ] && num=3
     title="${title//.txt/}"
     if dpstatus >/dev/null; then
         if echo "$title" | grep -q docs/; then
