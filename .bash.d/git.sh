@@ -566,11 +566,11 @@ gitdiff(){
 }
 
 git_author_names(){
-    git log --pretty=format:"%an" | sort | uniq -c | sort -k1nr | less
+    git log -all --pretty=format:"%an" | sort | uniq -c | sort -k1nr | less
 }
 
 git_author_emails(){
-    git log --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | less
+    git log --all --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | less
 }
 
 git_authors(){
