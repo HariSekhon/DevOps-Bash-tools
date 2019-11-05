@@ -20,6 +20,7 @@
 
 #ssh() { set -o xtrace ; command ssh "$@" <<< "$(cat .bashrc_remote)" ; }
 
+# ssh-add
 ssha(){
     ssh_agent
     #num_keys="$(ssh-add -l | grep -Ec "(rsa|dsa)")"
@@ -29,7 +30,8 @@ ssha(){
     #    return 0
     #fi
     for key in ~/.ssh/id_[rd]sa; do
-        if ! ssh-add -l | grep -q "${key##*/}"; then
+        key_fingerprint="$(ssh-keygen -lf "$key")"
+        if ! ssh-add -l | grep -Fq "$key_fingerprint"; then
             ssh-add "$key"
         fi
     done
