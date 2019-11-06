@@ -41,6 +41,10 @@ if [ -z "${total_run_count:-}" ]; then
     total_run_count=0
 fi
 
+# ERE format (egrep / grep -E)
+domain_regex='\b(([A-Za-z](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}\b'
+email_regex='\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
+
 wrong_port=1111
 
 die(){
