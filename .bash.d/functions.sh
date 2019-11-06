@@ -90,12 +90,25 @@ basedir(){
     echo "$output"
 }
 
+toLower(){
+    tr '[[:upper:]]' '[[:lower:]]'
+}
+
+toUpper(){
+    tr '[[:lower:]]' '[[:upper:]]'
+}
+
 trim(){
     sed 's/^[[:space:]]*//; s/[[:space:]]*$//' "$@"
 }
 
 normalize_spaces(){
-    perl -pe 's/\s+/ /g'
+    # not variant of + \+ works on Mac
+    #sed 's/[[:space:]]\+/ /'
+    # flattens out newlines, which changes behaviour in scripts like check_git_commit_authors.sh
+    #perl -pe 's/\s+/ /g'
+    # horizontal newlines, don't match \n
+    perl -pe 's/\h+/ /g'
 }
 
 remove_last_column(){
