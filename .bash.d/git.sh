@@ -577,6 +577,10 @@ git_authors(){
     git_author_emails
 }
 
+git_commit_count(){
+    git log --all --pretty=format:"%h" | wc -l
+}
+
 git_revert_typechange(){
     # want splitting to separate filenames
     # shellcheck disable=SC2046
