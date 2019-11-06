@@ -578,6 +578,8 @@ git_authors(){
 }
 
 git_commit_count(){
+    # interestingly, even on 10,000 commit repos, there are no duplicate short hashes shown from:
+    # git log --all --pretty=format:"%h" | sort | uniq -d
     git log --all --pretty=format:"%h" | wc -l
 }
 
