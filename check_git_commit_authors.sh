@@ -57,15 +57,15 @@ git_log(){
 }
 
 git_log_names(){
-    git_log --pretty=format:"%an" | trim | sort -u
+    git_log --pretty=format:"%an" | toLower | trim | sort -u
 }
 
 git_log_emails(){
-    git_log --pretty=format:"%ae" | trim | sort -u
+    git_log --pretty=format:"%ae" | toLower | trim | sort -u
 }
 
 git_log_names_emails(){
-    git_log --pretty=format:"%an %ae" | trim | sort -u
+    git_log --pretty=format:"%an %ae" | toLower | trim | sort -u
 }
 
 names="$(git_log_names)"
@@ -78,7 +78,12 @@ check_multiple_names_per_email(){
     names_emails="${names_emails:-(git_log_names_emails)}"
     for email in $emails; do
         #names_for_same_email="$(grep "[[:space:]]$email$" <<< "$names_emails" | perl -p -e 's/\s\S*?$//')"
-        names_for_same_email="$(grep -i "[[:space:]]$email$" <<< "$names_emails" | normalize_spaces | remove_last_column | sort | uniq -d || :)"
+        names_for_same_email="$(grep -i "[[:space:]]$email$" <<< "$names_emails" | normalize_spaces | remove_last_column | sort -u || :)"
+        # don't quote otherwise have to trim wc output for comparison
+        # shellcheck disable=SC2046
+        if [ $(wc -l <<< "$names_for_same_email") -eq 1 ]; then
+            names_for_same_email=""
+        fi
         check_error "$names_for_same_email" "different names found for same email address '$email'! (misconfigured git config user.name?)" || err=1
     done
     if [ $err -eq 0 ]; then
@@ -90,11 +95,18 @@ check_multiple_emails_per_name(){
     local err=0
     names="${names:-$(git_log_names)}"
     names_emails="${names_emails:-(git_log_names_emails)}"
-    for name in $names; do
+    while read -r name; do
         name_regex="${name//[[:space:]]/[[:space:].]*}"
-        emails_for_same_name="$(grep -i "^${name_regex}[[:space:]]" <<< "$names_emails" | awk '{print $NF}' | sort | uniq -d || :)"
+        # $email_regex assigned in .bash.d/functions.sh
+        # shellcheck disable=SC2154
+        emails_for_same_name="$(grep -i "^${name_regex}[[:space:]]+$email_regex" <<< "$names_emails" | awk '{print $NF}' | sort -u || :)"
+        # don't quote otherwise have to trim wc output for comparison
+        # shellcheck disable=SC2046
+        if [ $(wc -l <<< "$emails_for_same_name") -eq 1 ]; then
+            emails_for_same_name=""
+        fi
         check_error "$emails_for_same_name" "different email addresses committed for the same user name '$name'! (misconfigured git config user.email?)" || err=1
-    done
+    done <<< "$names"
     if [ $err -eq 0 ]; then
         echo "OK: no differing email addresses committed for each committed user name"
     fi
@@ -121,7 +133,9 @@ check_emails_without_domains(){
     # need to use sed not built-in variable replacement in order to handle multi-line emails
     # shellcheck disable=SC2001
     domains="$(sed 's/.*@//' <<< "$emails" | sort -u)"
-    non_domain_suffixes="$(grep -Ev '^(([A-Za-z](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}$' <<< "$domains" || :)"
+    # $domain_regex defined in .bash.d/functions.sh
+    # shellcheck disable=SC2154
+    non_domain_suffixes="$(grep -Ev "^$domain_regex$" <<< "$domains" || :)"
     check_error "$non_domain_suffixes" "non-domain email suffixes detected (misconfigured git user.email defaulting to hostname?)" &&
     echo "OK: no non-domain email suffixes detected" || :
 }
