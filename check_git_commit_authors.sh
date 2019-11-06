@@ -97,7 +97,7 @@ check_multiple_emails_per_name(){
     names_emails="${names_emails:-(git_log_names_emails)}"
     while read -r name; do
         name_regex="${name//[[:space:]]/[[:space:].]*}"
-        # $email_regex assigned in .bash.d/functions.sh
+        # $email_regex defined in lib
         # shellcheck disable=SC2154
         emails_for_same_name="$(grep -i "^${name_regex}[[:space:]]+$email_regex" <<< "$names_emails" | awk '{print $NF}' | sort -u || :)"
         # don't quote otherwise have to trim wc output for comparison
@@ -133,7 +133,7 @@ check_emails_without_domains(){
     # need to use sed not built-in variable replacement in order to handle multi-line emails
     # shellcheck disable=SC2001
     domains="$(sed 's/.*@//' <<< "$emails" | sort -u)"
-    # $domain_regex defined in .bash.d/functions.sh
+    # $domain_regex defined in lib
     # shellcheck disable=SC2154
     non_domain_suffixes="$(grep -Ev "^$domain_regex$" <<< "$domains" || :)"
     check_error "$non_domain_suffixes" "non-domain email suffixes detected (misconfigured git user.email defaulting to hostname?)" &&
