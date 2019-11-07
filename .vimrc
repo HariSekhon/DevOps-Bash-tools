@@ -13,6 +13,9 @@
 
 syn on
 
+highlight StatusLine ctermfg=darkgrey ctermbg=magenta
+highlight StatusLineNC ctermfg=yellow ctermbg=darkgray
+
 " ============================================================================ "
 "                               S e t   C o n f i g
 " ============================================================================ "
