@@ -60,7 +60,7 @@ alias gbrowse=gitbrowse
 alias ggrep="git grep"
 
 # git fetch -p or git remote prune origin
-alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\*' -e 'master' | xargs git branch -d"
+alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\\*' -e 'master' | xargs git branch -d"
 
 # don't use this unless you are a git pro and understand unwinding history and merge conflicts
 alias GRH="git reset HEAD^"
@@ -119,7 +119,7 @@ gitignore_api(){
 	langs="$(IFS=, ; echo "${args[*]}")"
     url="https://www.gitignore.io/api/$langs"
     if [ "$langs" = "list" ]; then
-        commas_to_newlines="tr ',' '\n'"
+        commas_to_newlines="tr ',' '\\n'"
     fi
     {
     if hash curl 2>/dev/null; then
@@ -321,12 +321,13 @@ gitu(){
     local basedir
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
     basedir="$(basedir $targets)" &&
-    pushd "$basedir" >/dev/null &&
-    targets="$(strip_basedirs $basedir $targets)" || return 1
+    trap 'popd >/dev/null; return 1' INT ERR
+    pushd "$basedir" >/dev/null
+    targets="$(strip_basedirs $basedir $targets)"
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
         popd >/dev/null || :
-        return
+        return 0
     fi
     # shellcheck disable=SC2086
     git diff $targets &&
@@ -335,6 +336,7 @@ gitu(){
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
     popd >/dev/null || :
+    trap - INT
 }
 
 #githgu(){
