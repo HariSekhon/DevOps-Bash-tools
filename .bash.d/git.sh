@@ -322,7 +322,7 @@ gitu(){
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
     basedir="$(basedir $targets)" &&
     trap 'popd >/dev/null; return 1' INT ERR
-    pushd "$basedir" >/dev/null
+    pushd "$basedir" >/dev/null || return 1
     targets="$(strip_basedirs $basedir $targets)"
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
@@ -475,11 +475,11 @@ retag(){
 gitfind(){
     local refids
     refids="$(git log --all --oneline | grep "$@" | awk '{print $1}')"
-    printf "Branches:\n\n"
+    printf 'Branches:\n\n'
     for refid in $refids; do
         git branch --contains "$refid"
     done | sort -u
-    printf "\nTags:\n\n"
+    printf '\nTags:\n\n'
     for refid in $refids; do
         git tag --contains "$refid"
     done | sort -u
