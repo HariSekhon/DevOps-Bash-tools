@@ -15,6 +15,7 @@ syn on
 
 highlight StatusLine ctermfg=darkgrey ctermbg=magenta
 highlight StatusLineNC ctermfg=yellow ctermbg=darkgray
+highlight VertSplit ctermfg=darkgrey ctermbg=yellow
 
 " ============================================================================ "
 "                               S e t   C o n f i g
