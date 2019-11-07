@@ -13,8 +13,8 @@
 
 syn on
 
-highlight StatusLine ctermfg=darkgrey ctermbg=magenta
-highlight StatusLineNC ctermfg=yellow ctermbg=darkgray
+highlight StatusLine ctermfg=yellow ctermbg=darkgray
+highlight StatusLineNC ctermfg=darkgrey ctermbg=yellow
 highlight VertSplit ctermfg=darkgrey ctermbg=yellow
 
 " ============================================================================ "
