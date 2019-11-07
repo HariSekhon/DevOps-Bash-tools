@@ -294,7 +294,7 @@ checkout(){
 gitadd() {
     local gitcimsg=""
     for x in "$@"; do
-        if git status -s "$x" | grep "^[?A]"; then
+        if git status -s "$x" | grep -q '^[?A]'; then
             gitcimsg+="$x, "
         fi
     done
