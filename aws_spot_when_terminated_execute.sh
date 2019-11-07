@@ -42,7 +42,8 @@ set -euo pipefail
 termination_time=""
 
 while true; do
-    # regex borrowed from AWS Systems Administration book by O'Reilly - TODO: improve this
+    # regex borrowed from AWS Systems Administration book by O'Reilly and also here:
+    # https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html
     termination_time="$(curl -s --max-time 1 http://169.254.169.254/latest/meta-data/spot/termination-time | grep '.*T.*Z' || :)"
     if [ -n "$termination_time" ]; then
         break
