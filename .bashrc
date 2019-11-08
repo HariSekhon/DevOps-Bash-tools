@@ -107,9 +107,12 @@ shopt -s histappend
 # check the window size after each command and if necessary update $LINES and $COLUMNS
 shopt -s checkwinsize
 
-#export INPUTRC=~/.inputrc
-
-[ -n "${APPLE:-}" ] || setterm -blank 0
+if [ -n "${APPLE:-}" ]; then
+    export INPUTRC=~/.inputrc.mac
+else
+    export INPUTRC=~/.inputrc
+    setterm -blank 0
+fi
 
 # Prevent core dumps which can leak sensitive information
 ulimit -c 0
