@@ -27,6 +27,9 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 [ -n "${APPLE:-}" ] || return
 
+# put in inputrc for readline
+#set completion-ignore-case on
+
 # Apple default in Terminal is xterm
 #export TERM=xterm
 # not sure why I set it to linux
