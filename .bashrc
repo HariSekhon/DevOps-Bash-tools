@@ -107,10 +107,7 @@ shopt -s histappend
 # check the window size after each command and if necessary update $LINES and $COLUMNS
 shopt -s checkwinsize
 
-if [ -n "${APPLE:-}" ]; then
-    export INPUTRC=~/.inputrc.mac
-else
-    export INPUTRC=~/.inputrc
+if [ -z "${APPLE:-}" ]; then
     setterm -blank 0
 fi
 
