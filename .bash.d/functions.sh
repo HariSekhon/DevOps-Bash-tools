@@ -56,6 +56,11 @@ checkprog(){
     fi
 }
 
+bell_done(){
+    eval "$@"
+    print '\a'
+}
+
 resolve_symlinks(){
     local readlink=readlink
     if [ -n "$APPLE" ]; then
@@ -91,11 +96,11 @@ basedir(){
 }
 
 toLower(){
-    tr '[[:upper:]]' '[[:lower:]]'
+    tr '[:upper:]' '[:lower:]'
 }
 
 toUpper(){
-    tr '[[:lower:]]' '[[:upper:]]'
+    tr '[:lower:]' '[:upper:]'
 }
 
 trim(){
