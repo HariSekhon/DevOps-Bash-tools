@@ -27,7 +27,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 #export DISPLAY=:0.0
 
-export TERM=xterm
+#export TERM=xterm
 
 export EDITOR=vim
 
