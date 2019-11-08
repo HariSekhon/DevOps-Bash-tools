@@ -31,6 +31,8 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 export EDITOR=vim
 
+export INPUTRC=~/.inputrc
+
 # allow programs to use $LINES
 export LINES
 
