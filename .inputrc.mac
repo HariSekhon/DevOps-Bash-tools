@@ -1,4 +1,4 @@
-#  vim:ts=4:sts=4:sw=4:et
+#  vim:ts=4:sts=4:sw=4:et:filetype=conf
 #
 #  Author: Hari Sekhon
 #  Date: 2019-11-08 16:46:24 +0000 (Fri, 08 Nov 2019)
@@ -18,5 +18,7 @@ set bell-style visible
 
 # tab completion on first press
 set show-all-if-ambiguous on
+set show-all-if-unmodified on
 
+# only do this on Macs which have case-insensitive filesystem
 set completion-ignore-case on
