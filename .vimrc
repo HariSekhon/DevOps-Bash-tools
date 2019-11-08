@@ -17,6 +17,8 @@ highlight StatusLine ctermfg=yellow ctermbg=darkgray
 highlight StatusLineNC ctermfg=darkgrey ctermbg=yellow
 highlight VertSplit ctermfg=darkgrey ctermbg=yellow
 
+set visualbell
+
 " ============================================================================ "
 "                               S e t   C o n f i g
 " ============================================================================ "
