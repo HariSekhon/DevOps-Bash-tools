@@ -52,6 +52,8 @@
 #    return
 #fi
 
+# ============================================================================ #
+
 # after cleanshell, not even $HOME is set, this messes up things that base off $HOME, like SDKman
 if [ -z "${HOME:-}" ]; then
     export HOME=~
@@ -68,15 +70,21 @@ if [ "$TERM" != "dumb" ] && \
     eval "$(dircolors -b)"
 fi
 
-[ -f /etc/profile     ] && . /etc/profile
+# ============================================================================ #
+
+# technically should get called only for new login shells
+#[ -f /etc/profile     ] && . /etc/profile
 [ -f /etc/bash/bashrc ] && . /etc/bash/bashrc
 [ -f /etc/bashrc      ] && . /etc/bashrc
+
+# ============================================================================ #
 
 # SECURITY TO STOP STUFF BEING WRITTEN TO DISK
 #unset HISTFILE
 #unset HISTFILESIZE
 export HISTSIZE=50000
 export HISTFILESIZE=50000
+
 rmhist(){ history -d "$1"; }
 histrm(){ rmhist "$1"; }
 histrmlast(){ history -d "$(history | tail -n 2 | head -n 1 | awk '{print $1}')"; }
@@ -96,9 +104,10 @@ HISTCONTROL=ignoredups:ignorespace
 # Make sure we append rather than overwrite history
 shopt -s histappend
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# check the window size after each command and if necessary update $LINES and $COLUMNS
 shopt -s checkwinsize
+
+#export INPUTRC=~/.inputrc
 
 [ -n "${APPLE:-}" ] || setterm -blank 0
 
