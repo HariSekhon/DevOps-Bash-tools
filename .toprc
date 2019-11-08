@@ -1,8 +1,3 @@
-#
-#  Author: Hari Sekhon
-#  Date: 2006-07-01 23:10:15 +0100 (Sat, 01 Jul 2006)
-#
-
 RCfile for "top with windows"		# shameless braggin'
 Id:a, Mode_altscr=1, Mode_irixps=1, Delay_time=3.000, Curwin=0
 CPU	fieldscur=AEHIOQTWKNMbcdfgjplrsuvyzX
