@@ -307,7 +307,7 @@ endfunction
 
 function! WriteRunDebug()
     :w
-    :! DEBUG=1 "./%" 2>&1 \| less
+    :! DEBUG=1 bash -c "./% 2>&1 \| headtail.py"
     " TODO: if .go then 'go run %'
 endfunction
 
