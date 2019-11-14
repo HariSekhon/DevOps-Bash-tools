@@ -559,7 +559,8 @@ fabric.properties
 
 ### C ###
 # Prerequisites
-*.d
+# XXX: clashes with .bash.d/* and .conf.d/* type stuff
+#*.d
 
 # Object files
 *.o
