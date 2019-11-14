@@ -47,6 +47,8 @@ define MAKEFILE_USAGE
 
     make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
 
+    make aws					installs AWS CLI
+    make gcp					installs GCloud SDK
 endef
 
 .PHONY: build
@@ -137,6 +139,10 @@ python-desktop: system-packages
 .PHONY: aws
 aws: system-packages
 	@./python_pip_install_if_absent.sh awscli
+
+.PHONY: gcp
+gcp: system-packages
+	@./setup/install_gcloud.sh
 
 .PHONY: test
 test:
