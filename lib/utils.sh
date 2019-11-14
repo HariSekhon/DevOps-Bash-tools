@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#  shellcheck disable=SC2128,SC2230
+#  shellcheck disable=SC2128,SC2230,SC1090
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -23,12 +23,8 @@ if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
 fi
 bash_tools_utils_imported=1
 
-# shellcheck disable=SC1090
 . "$srcdir_bash_tools_utils/docker.sh"
-
-# shellcheck disable=SC1090
 . "$srcdir_bash_tools_utils/perl.sh"
-
 . "$srcdir_bash_tools_utils/../.bash.d/colors.sh"
 
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
@@ -42,7 +38,11 @@ if [ -z "${total_run_count:-}" ]; then
 fi
 
 # ERE format (egrep / grep -E)
+#
+# used in client scripts
+# shellcheck disable=SC2034
 domain_regex='\b(([A-Za-z](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}\b'
+# shellcheck disable=SC2034
 email_regex='\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
 
 wrong_port=1111
@@ -157,6 +157,8 @@ check_exit_code(){
 }
 
 tick_msg(){
+    # defined in .bash.d/colors.sh
+    # shellcheck disable=SC2154
     echo -e "${bldgrn}✓ ${txtrst}$*"
 }
 
