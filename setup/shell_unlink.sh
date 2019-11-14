@@ -38,7 +38,9 @@ remove_sourcing(){
         echo "$filename not currently sourced in ~/$filename"
     else
         echo "in-place editing ~/$filename to remove sourcing of $srcdir/$filename"
-        perl -ni".bak-$(date '+%F_%H%M')" -e "print unless /(source|\\.)[[:space:]]+${srcdir//\//\\/}\/${filename//\//\\/}/" ~/"$filename"
+        local srcdir_escaped="${srcdir//\//\\/}"
+        local filename_escaped="${filename//\//\\/}"
+        perl -ni".bak-$(date '+%F_%H%M')" -e "print unless /(source|\\.)[[:space:]]+$srcdir_escaped\\/$filename_escaped/" ~/"$filename"
     fi
 }
 
