@@ -93,4 +93,5 @@ fi
 # requires interactive prompts
 #echo "Initializing gcloud..."
 #gcloud init
+echo
 echo "Done. You will need to run 'gcloud init' to set up your profile."
