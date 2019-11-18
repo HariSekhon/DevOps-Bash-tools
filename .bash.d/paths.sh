@@ -60,6 +60,7 @@ add_PATH(){
     fi
     path="${path%/}"
     if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
+        # shellcheck disable=SC2140
         export "$env_var"="${!env_var}:$path"
     fi
 }
@@ -150,10 +151,17 @@ fi
 # gems will be installed to ~/.gem/ruby/x.y.z/bin
 
 # add newest ruby to path first
-#for ruby_bin in $(ls -d ~/.gem/ruby/*/bin 2>/dev/null | tail -r); do
-for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null | tail -r); do
+ruby_bins="$(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null)"
+if [ -n "${APPLE:-}" ]; then
+    ruby_bins_newest="$(tail -r <<< "$ruby_bins")"
+else
+    ruby_bins_newest="$(tac <<< "$ruby_bins")"
+fi
+for ruby_bin in $ruby_bins_newest; do
     add_PATH "$ruby_bin"
 done
+unset ruby_bins
+unset ruby_bins_newest
 
 # ============================================================================ #
 #                                  G o l a n g
