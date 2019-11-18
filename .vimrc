@@ -34,7 +34,7 @@ set is      " incsearch
 "set list   " visually displays eol, tabs etc so you can always see them
 set ls=1    " laststatus. Status line 0=off, 1=multi-windows, 2=on
 set listchars=tab:>-,eol:$,trail:.,extends:# " changes the list characters, makes tabs appear as >---
-set ml      " modeline.  respect the vim: stuff at the stop of files. This doesn't seem to work for me
+set ml      " modeline.  respect the vim: stuff at the stop of files, often off for root
 set mls=15  " modelines. Controls how many lines to check for modeline, systems often set this to 0,
 set nocp    " nocompatible
 set nofen   "nofoldenable
