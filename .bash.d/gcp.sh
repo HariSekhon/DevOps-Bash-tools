@@ -32,3 +32,5 @@ fi
 if [ -f ~/google-cloud-sdk/completion.bash.inc ]; then
     source ~/google-cloud-sdk/completion.bash.inc
 fi
+
+alias gc="gcloud compute"
