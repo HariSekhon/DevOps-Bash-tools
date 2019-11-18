@@ -63,14 +63,17 @@ if [ -z "${JAVA_HOME:-}" ]; then
     fi
 fi
 
-if type yum &>/dev/null; then
-    yum install -y git make
-elif type apt-get &>/dev/null; then
-    apt-get update
-    apt-get install -y --no-install-recommends git make
-elif type apk &>/dev/null; then
-    apk update
-    apk add git make
+if ! type -P git &>/dev/null ||
+   ! type -P make &>/dev/null; then
+    if type -P yum &>/dev/null; then
+        yum install -y git make
+    elif type -P apt-get &>/dev/null; then
+        apt-get update
+        apt-get install -y --no-install-recommends git make
+    elif type -P apk &>/dev/null; then
+        apk update
+        apk add git make
+    fi
 fi
 
 for repo in $repolist; do
