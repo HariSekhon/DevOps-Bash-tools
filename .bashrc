@@ -107,7 +107,9 @@ shopt -s histappend
 # check the window size after each command and if necessary update $LINES and $COLUMNS
 shopt -s checkwinsize
 
-if [ -z "${APPLE:-}" ]; then
+# not supported in the tmux terminal in GCP Cloud Shell
+if [ -z "${APPLE:-}" ] &&
+   [ -z "${GOOGLE_CLOUD_SHELL:-}" ]; then
     setterm -blank 0
 fi
 
