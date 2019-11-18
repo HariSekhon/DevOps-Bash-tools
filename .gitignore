@@ -10,6 +10,10 @@
 #
 # to check that there aren't some legit files you need to commit
 
+# To find out which line is causing a given file to be ignored, do:
+#
+#       git check-ignore -v $filename
+
 *.avi
 *.bak
 *.bak.*
@@ -559,7 +563,8 @@ fabric.properties
 
 ### C ###
 # Prerequisites
-*.d
+# XXX: clashes with .bash.d/* and .conf.d/* type stuff
+#*.d
 
 # Object files
 *.o

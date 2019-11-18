@@ -85,11 +85,11 @@ alias tmp="cd /tmp"
 #fi
 
 # shellcheck disable=SC2139
-alias bt="cd $(dirname "${BASH_SOURCE[0]}")/.."
+alias bt="sti bt; cd $(dirname "${BASH_SOURCE[0]}")/.."
 
 # shellcheck disable=SC2154
 export bashd="$bash_tools/.bash.d"
-alias bashd='cd $bashd'
+alias bashd='sti bashd; cd $bashd'
 
 #alias cleanshell='exec env - bash --rcfile /dev/null'
 alias cleanshell='exec env - bash --norc --noprofile'
