@@ -53,7 +53,7 @@ set tw=0    " textwidth (stops auto wrapping)
 set viminfo='100,<1000,s10,h " save <1000 lines in the registers instead of <50 lines between files since otherwise I lose lots of lines when deleting and pasting between files
 set wrap    " line wrapping
 
-" reload the buffer when file has changed but buffer has not (useful for go fmt from within vim)
+" reload the buffer when file has changed but buffer has not (useful for 'go fmt' / 'git pull' hotkeys from within vim)
 set autoread
 
 set encoding=utf-8      " The encoding displayed.
