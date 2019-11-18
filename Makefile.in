@@ -240,7 +240,9 @@ apt-packages-perl:
 		fi; \
 	done
 	for x in deb-packages-cpan.txt; do \
-		if [ -f "setup/$$x" ] && [ -z "$(PERLBREW_PERL)" ]; then \
+		if [ -f "setup/$$x" ] && \
+		   [ -z "$(PERLBREW_PERL)" ] && \
+		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt_install_packages.sh "setup/$$x"; \
 		fi; \
 	done
@@ -253,7 +255,9 @@ apt-packages-python:
 		fi; \
 	done
 	for x in deb-packages-pip.txt; do \
-		if [ -f "setup/$$x" ] && [ -z "$(PYTHON_VIRTUALENV)" ]; then \
+		if [ -f "setup/$$x" ] && \
+		   [ -z "$(PYTHON_VIRTUALENV)" ] && \
+		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
 			NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt_install_packages.sh "setup/$$x"; \
 		fi; \
 	done
