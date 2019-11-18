@@ -114,7 +114,8 @@ if [ "$(uname -s)" = "Darwin" ]; then
     fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
-elif [ -n "${PYTHON_USER_INSTALL:-}" ]; then
+elif [ -n "${PYTHON_USER_INSTALL:-}" ] ||
+     [ -n "${GOOGLE_CLOUD_SHELL:-}" ]; then
     user_opt
 fi
 
