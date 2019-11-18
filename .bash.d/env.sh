@@ -71,6 +71,8 @@ elif type -P firefox &>/dev/null; then
     BROWSER=firefox
 elif type -P konqueror &>/dev/null; then
     BROWSER=konqueror
+elif [ -n "${GOOGLE_CLOUD_SHELL:-}" ]; then
+    :
 else
     BROWSER=UNKNOWN
     echo "COULD NOT FIND ANY BROWSER IN PATH"
