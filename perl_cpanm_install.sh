@@ -75,7 +75,8 @@ fi
 
 sudo=""
 if [ $EUID != 0 ] &&
-   [ -z "${PERLBREW_PERL:-}" ]; then
+   [ -z "${PERLBREW_PERL:-}" ] &&
+   [ -z "${GOOGLE_CLOUD_SHELL:-}" ]; then
     sudo=sudo
 fi
 
