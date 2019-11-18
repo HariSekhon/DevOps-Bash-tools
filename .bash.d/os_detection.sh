@@ -19,6 +19,9 @@ uname="$(uname)"
 
 if [ "$uname" = Linux ]; then
 	export LINUX=1
+    if [ -n "${DEVSHELL_PROJECT_ID:-}" ]; then
+        export GOOGLE_CLOUD_SHELL=1
+    fi
 elif [ "$uname" = Darwin ]; then
 	export APPLE=1
 	export OSX=1
