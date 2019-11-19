@@ -144,6 +144,10 @@ aws: system-packages
 gcp: system-packages
 	@./setup/install_gcloud.sh
 
+.PHONY: gcp-cloudshell
+gcp-cloudshell: system-packages link
+	@:
+
 .PHONY: test
 test:
 	./check_all.sh
