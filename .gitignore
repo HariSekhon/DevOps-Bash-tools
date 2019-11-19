@@ -227,6 +227,8 @@
 .serverauth.*
 .sh_history
 .Skype
+.snowsql
+.snowsql/config  # pw stored in plaintext in here
 .spark_history
 .Spotlight-*
 .spumux/
