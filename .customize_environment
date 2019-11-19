@@ -19,17 +19,25 @@
 
 set -euxo pipefail
 
-cd
+bash_tools=~/github/bash-tools
 
-if ! [ -d github/bash-tools ]; then
-    mkdir -pv github
-    pushd github
-    git clone https://github.com/harisekhon/bash-tools
+if ! [ -d "$bash_tools" ]; then
+    parent_dir="${bash_tools%/*}"
+    mkdir -pv "$parent_dir"
+    pushd "$parent_dir"
+    git clone https://github.com/harisekhon/bash-tools "$bash_tools"
     popd
 fi
 
-cd github/bash-tools
+mkdir -pv ~/.cloudshell
+
+# suppress apt-get warnings about being ephemeral, that is what this script is for
+touch ~/.cloudshell/no-apt-get-warning
+
+pushd "$bash_tools"
 
 git pull
 
 make gcp-cloudshell
+
+popd
