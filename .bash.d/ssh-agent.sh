@@ -50,4 +50,7 @@ ssh_agent(){
         #clear
     #fi
 }
+
+[ -n "${GOOGLE_CLOUD_SHELL:-}" ] && return
+
 ssh_agent
