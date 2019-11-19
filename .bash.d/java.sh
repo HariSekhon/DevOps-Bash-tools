@@ -67,7 +67,7 @@ if isMac; then
         mac_export_java_home
         mac_export_java_home 7
     fi
-elif [ -n "$LINUX" ]; then
+elif isLinux; then
     if [ -z "$JAVA_HOME" ]; then
         # RHEL / CentOS
         if type -P alternatives &>/dev/null; then
