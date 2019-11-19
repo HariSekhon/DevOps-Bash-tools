@@ -296,14 +296,17 @@ fatpacks/
 fatlib/
 fluxbox-themes
 fluxbox/debian007.jpg
+git/
+git/*     # internal repos
 github/
-github/*
+github/*  # public repos
 gitolite-admin/
 gitroot/
 GNUstep
 Google*Drive
 go/bin/
 go/src/github.com/
+google-cloud-sdk/
 hadoop-sources/
 hgroot/
 IdeaProjects/
