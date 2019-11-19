@@ -66,7 +66,7 @@ bash_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # enable color support for ls
 if [ "$TERM" != "dumb" ] && \
-   [ -z "${APPLE:-}" ]; then
+   ! isMac; then
     eval "$(dircolors -b)"
 fi
 
@@ -108,8 +108,8 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # not supported in the tmux terminal in GCP Cloud Shell
-if [ -z "${APPLE:-}" ] &&
-   [ -z "${GOOGLE_CLOUD_SHELL:-}" ]; then
+if ! isMac &&
+   ! isGoogleCloudShell; then
     setterm -blank 0
 fi
 
