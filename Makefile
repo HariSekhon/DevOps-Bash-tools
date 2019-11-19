@@ -49,6 +49,7 @@ define MAKEFILE_USAGE
 
     make aws					installs AWS CLI
     make gcp					installs GCloud SDK
+    make gcp-cloudshell			sets up GCP Cloud Shell, installs core packages and links configs - called by .customize_environment
 endef
 
 .PHONY: build
