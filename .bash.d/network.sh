@@ -154,9 +154,14 @@ myip(){
     ifconfig | grep 'inet[[:space:]]' | grep -v 127.0.0.1 | awk '{print $2}'
 }
 
+ipify(){
+    curl http://api.ipify.org/
+    echo
+}
+
 whatismyip(){
     #lynx -dump $(lynx -dump www.whatismyip.com | tail -n 1)
-    lynx -useragent="Mozilla" -dump www.whatismyip.com 2>/dev/null | awk '/Address Lookup Your IP|Your Public IPv6 is:/ {print $6}'
+    lynx -useragent="Mozilla" -dump www.whatismyip.com 2>/dev/null | awk '/Your Public IPv[46] is:/ {print $6}'
 }
 
 browser(){
