@@ -19,7 +19,7 @@ type isGoogleCloudShell &>/dev/null &&
 return
 
 get_os(){
-    if [ -z "$operating_system" ] ||
+    if [ -z "${operating_system:-}" ] ||
        ! [[ "$operating_system" =~ ^(Linux|Darwin)$ ]]; then
         operating_system="$(uname -s)"
         export operating_system
@@ -58,6 +58,7 @@ isGoogleCloudShell(){
     return 1
 }
 
-isLinux
-isMac
-isGoogleCloudShell
+# make this safe to import in set -e scripts
+isLinux || :
+isMac || :
+isGoogleCloudShell || :
