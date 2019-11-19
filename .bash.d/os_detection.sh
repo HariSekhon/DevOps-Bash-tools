@@ -15,14 +15,29 @@
 
 [ -n "${OS_DETECTION_RUN:-}" ] && return
 
-uname="$(uname)"
+get_os(){
+    if [ -z "$operating_system" ] ||
+       ! [[ "$operating_system" =~ ^(Linux|Darwin)$ ]]; then
+        operating_system="$(uname -s)"
+    fi
+}
 
-if [ "$uname" = Linux ]; then
+isLinux(){
+    get_os
+    [ "$operating_system" = Linux ]
+}
+
+isMac(){
+    get_os
+    [ "$operating_system" = Darwin ]
+}
+
+if isLinux; then
 	export LINUX=1
     if [ -n "${DEVSHELL_PROJECT_ID:-}" ]; then
         export GOOGLE_CLOUD_SHELL=1
     fi
-elif [ "$uname" = Darwin ]; then
+elif isMac; then
 	export APPLE=1
 	export OSX=1
 fi
