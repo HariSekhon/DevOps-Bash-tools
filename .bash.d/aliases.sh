@@ -106,7 +106,7 @@ alias clhist='HISTSIZE=0; HISTSIZE=5000'
 alias nohist='unset HISTFILE'
 
 export LS_OPTIONS='-F'
-if [ -n "${APPLE:-}" ]; then
+if isMac; then
     export CLICOLOR=1 # equiv to using -G switch when calling
 else
     export LS_OPTIONS="$LS_OPTIONS --color=auto"
@@ -236,7 +236,7 @@ alias tg='traceroute www.google.com'
 
 
 # using variable and single alias definition to work around my bash duplicate defs auto checks which would flag the same alias defined twice in two different files, even if only one is sourced depending on the OS
-if [ -n "$APPLE" ]; then
+if isMac; then
     clipboard=pbcopy
 else
     clipboard=xclip

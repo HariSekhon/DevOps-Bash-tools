@@ -63,7 +63,7 @@ bell_done(){
 
 resolve_symlinks(){
     local readlink=readlink
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         if type -P greadlink &>/dev/null; then
             readlink=greadlink
         else
@@ -169,7 +169,7 @@ ptop(){
     #pids="$(pgrep -f "$(sed 's/ /|/g' <<< "$*")")"
     pids="$(pgrep -f "${*// /|}")"
     local pid_args
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         # shellcheck disable=SC2001
         pid_args="$(sed 's/^/-pid /' <<< "$pids")"
     else
@@ -365,7 +365,7 @@ wcbash(){
 }
 
 epoch2date(){
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         date -r "$1"
     else
         date -d "@$1"
@@ -381,7 +381,7 @@ pdf(){
         echo "file not found: $1"
         return 1
     fi
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         open "$1"
         return $?
     fi

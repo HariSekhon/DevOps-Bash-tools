@@ -152,7 +152,7 @@ fi
 
 # add newest ruby to path first
 ruby_bins="$(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null)"
-if [ -n "${APPLE:-}" ]; then
+if isMac; then
     ruby_bins_newest="$(tail -r <<< "$ruby_bins")"
 else
     ruby_bins_newest="$(tac <<< "$ruby_bins")"
@@ -177,7 +177,7 @@ GOPATH="$github/go-tools"
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
 # shellcheck disable=SC2230
 if type -P go &>/dev/null; then
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(which go)")")")"
     else
         GOROOT="$(dirname "$(dirname "$(readlink -f "$(which go)")")")"
@@ -206,7 +206,7 @@ link_latest(){
             return 1
         fi
         [ -e "$path_noversion" ] && [ ! -L "$path_noversion" ] && continue
-        if [ -n "$APPLE" ]; then
+        if isMac; then
             local ln_opts="-h"
         else
             local ln_opts="-T"
@@ -252,7 +252,7 @@ link_latest(){
 #add_PATH "/usr/nagios/libexec"
 #add_PATH "/usr/nagios/libexec/contrib"
 
-#if [ -n "$APPLE" ]; then
+#if isMac; then
 #    # MacPort and Octave installation
 #    add_PATH /opt/local/bin
 #
@@ -361,7 +361,7 @@ link_latest(){
 #export MESOS_HOME=/usr/local/mesos
 #add_PATH "$MESOS_HOME/bin"
 
-#if [ -n "$APPLE" ]; then
+#if isMac; then
 #    export MESOS_NATIVE_JAVA_LIBRARY=/usr/local/mesos/src/.libs/libmesos.dylib
 #else
 #    # check this path

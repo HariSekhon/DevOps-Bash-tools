@@ -30,7 +30,7 @@ alias 4="ping 4.2.2.1"
 #alias p=ping
 
 pingwait="-w"
-[ "${APPLE:-}" ] && pingwait="-W"
+isMac && pingwait="-W"
 
 checkhost(){
     if [ -z "$1" ]; then
@@ -162,7 +162,7 @@ whatismyip(){
 browser(){
     if [ -n "$BROWSER" ]; then
         "$BROWSER" "$@"
-    elif [ -n "$APPLE" ]; then
+    elif isMac; then
         open "${*:-http://google.com}"
     else
         echo "\$BROWSER environment variable not set and not on Mac OSX, not sure which browser to use, aborting..."
@@ -188,7 +188,7 @@ isupme(){
 }
 
 chrome(){
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         # opens in most recent Chrome window
         # could use one of these: --new --args --incognito --new-window
         open -a 'Google Chrome' "${*:-http://www.google.com}"
@@ -200,7 +200,7 @@ chrome(){
 }
 
 ff(){
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         open -a 'Firefox' "http://${*:-www.google.com}"
     else
         checkprog firefox || return 1
@@ -283,7 +283,7 @@ retry(){
 
 
 rdp(){
-    if [ -n "$APPLE" ]; then
+    if isMac; then
         "/Applications/Remote Desktop Connection.app/Contents/MacOS/Remote Desktop Connection" "$@" &
     else
         [ -n "$1" ] || return 1
@@ -359,7 +359,7 @@ fi
 #                                 M a c   O S X
 # ============================================================================ #
 
-if [ -z "$APPLE" ]; then
+if ! isMac; then
     return
 fi
 

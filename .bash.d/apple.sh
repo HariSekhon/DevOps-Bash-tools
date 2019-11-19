@@ -25,7 +25,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
-[ -n "${APPLE:-}" ] || return
+isMac || return
 
 # put in inputrc for readline
 #set completion-ignore-case on

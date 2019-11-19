@@ -25,7 +25,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 export CLASSPATH="$CLASSPATH:$HOME/bin/java"
 
-if [ -n "${APPLE:-}" ]; then
+if isMac; then
     mac_export_java_home(){
         local version="$1"
         local args

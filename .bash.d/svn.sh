@@ -47,7 +47,7 @@ isSvn(){
 }
 
 svn(){
-    if [ -n "${APPLE:-}" ]; then
+    if isMac; then
         export stat_formatopt=f
     else
         export stat_formatopt=c
