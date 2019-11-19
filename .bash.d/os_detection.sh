@@ -13,33 +13,51 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-[ -n "${OS_DETECTION_RUN:-}" ] && return
+type isLinux &>/dev/null &&
+type isMac &>/dev/null &&
+type isGoogleCloudShell &>/dev/null &&
+return
 
 get_os(){
     if [ -z "$operating_system" ] ||
        ! [[ "$operating_system" =~ ^(Linux|Darwin)$ ]]; then
         operating_system="$(uname -s)"
+        export operating_system
     fi
 }
 
 isLinux(){
+    [ -n "${LINUX:-}" ] && return 0
     get_os
-    [ "$operating_system" = Linux ]
+    if [ "$operating_system" = Linux ]; then
+        export LINUX=1
+        return 0
+    fi
+    return 1
 }
 
 isMac(){
+    [ -n "${OSX:-}" ] && return 0
     get_os
-    [ "$operating_system" = Darwin ]
+    if [ "$operating_system" = Darwin ]; then
+        export APPLE=1
+        export OSX=1
+        return 0
+    fi
+    return 1
 }
 
-if isLinux; then
-	export LINUX=1
+isGoogleCloudShell(){
+    [ -n "${GOOGLE_CLOUD_SHELL:-}" ] && return 0
+    get_os
+    [ "$operating_system" = Linux ] || return 1
     if [ -n "${DEVSHELL_PROJECT_ID:-}" ]; then
         export GOOGLE_CLOUD_SHELL=1
+        return 0
     fi
-elif isMac; then
-	export APPLE=1
-	export OSX=1
-fi
+    return 1
+}
 
-export OS_DETECTION_RUN=1
+isLinux
+isMac
+isGoogleCloudShell
