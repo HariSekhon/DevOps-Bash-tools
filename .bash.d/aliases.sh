@@ -63,6 +63,7 @@ alias cp='cp -i'
 export LESS="-RFXig --tabs=4"
 # will require LESS="-R"
 if type -P pygmentize &>/dev/null; then
+    # shellcheck disable=SC2016
     export LESSOPEN='| "$bash_tools/pygmentize.sh" "%s"'
 fi
 alias l='less'
@@ -125,8 +126,8 @@ alias lR='ls -lRh $LS_OPTIONS'
 # shellcheck disable=SC2086
 lw(){ ls -lh $LS_OPTIONS "$(type -P "$@")"; }
 
-# shellcheck disable=SC2086
-lll(){ ls -l $LS_OPTIONS "$(readlink "$@")"; }
+# shellcheck disable=SC2086,SC2012
+lll(){ ls -l $LS_OPTIONS "$(readlink -f "${@:-.}")" | less -R; }
 
 alias cd..='cd ..'
 alias ..='cd ..'
