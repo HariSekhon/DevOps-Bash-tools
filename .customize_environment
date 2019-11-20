@@ -17,6 +17,10 @@
 #           G C P   C l o u d   S h e l l   C u s t o m i z a t i o n
 # ============================================================================ #
 
+# see log at /var/log/customize_environment
+
+# /google/devshell/customize_environment_done is touched when completed
+
 set -euxo pipefail
 
 bash_tools=~/github/bash-tools
