@@ -42,6 +42,6 @@ pushd "$bash_tools"
 
 git pull
 
-make gcp-cloudshell
+make gcp-shell
 
 popd
