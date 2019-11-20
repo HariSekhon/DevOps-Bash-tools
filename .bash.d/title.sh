@@ -23,18 +23,6 @@ alias ti="title"
 # static title - turn dynamic prompt escape codes off, while optionally setting new title
 alias sti="dpoff >/dev/null; ti"
 
-#title(){ echo -ne '\033]0;'"$@"'\007'; }
-
-#termtitle(){
-#    local termtitle="${*:- }"
-#       #[ -z "${termtitle## }" ]
-#    #if isscreen &&
-#    #   [ -z "$termtitle" ]; then
-#    #    termtitle="screen $WINDOW"
-#    #fi
-#    printf '\033]0;%s\007' "$termtitle"
-#}
-
 termtitle(){
     # in tmux sets the secondary title at bottom right, duplicating info
     if ! istmux; then
