@@ -21,6 +21,11 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+if type -P gcloud &>/dev/null; then
+    echo "GCloud already installed, skipping..."
+    exit 0
+fi
+
 #apt_version="123.0.0-0"
 #yum_version="123.0.0"
 
