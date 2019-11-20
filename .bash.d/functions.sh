@@ -326,13 +326,21 @@ proxy(){
 }
 
 paste_clipboard(){
-    if [ "$(uname)" = Darwin ]; then
+    if isMac; then
         cat | pbcopy
-    elif [ "$(uname)" = Linux ]; then
+    elif isLinux; then
         cat | xclip
     else
         echo "ERROR: OS is not Darwin/Linux"
         return 1
+    fi
+}
+
+readlink(){
+    if isMac; then
+        greadlink "$@"
+    else
+        readlink "$@"
     fi
 }
 
