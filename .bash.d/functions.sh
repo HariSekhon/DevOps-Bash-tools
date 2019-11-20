@@ -233,6 +233,10 @@ dgrep(){
     grep -iR "$pattern" $(find ~/docs "$docs" -type f -maxdepth 1 2>/dev/null | grep -v '/\.')
 }
 
+diffl(){
+    diff "$@" | less
+}
+
 foreachfile(){
     # not passing function f()
     # shellcheck disable=SC2033
