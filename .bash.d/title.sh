@@ -41,7 +41,7 @@ termtitle(){
 
 isscreen(){
     # $STY is only set in screen it seems so this determines if we're in screen
-    [ -n "$STY" ]
+    [ -n "${STY:-}" ]
 }
 
 screentitle(){
@@ -49,6 +49,16 @@ screentitle(){
         printf "\033k%s\033\\" "${*:- }"
         # or
         # screen -X title "$*"
+    fi
+}
+
+istmux(){
+    [ -n "${TMUX:-}" ]
+}
+
+tmuxtitle(){
+    if istmux; then
+        printf "\033]2;%s\033\\" "${*:-}"
     fi
 }
 
@@ -151,7 +161,7 @@ vim(){
     if [[ "${TITLE_SHORT:-}" =~ ^[0-9]+$ ]]; then
         num=$TITLE_SHORT
     fi
-    if [ $num -lt 3 ]; then
+    if [ "$num" -lt 3 ]; then
         num=3
     fi
     title="${title//.txt/}"
