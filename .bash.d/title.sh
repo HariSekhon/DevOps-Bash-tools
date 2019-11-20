@@ -36,7 +36,10 @@ alias sti="dpoff >/dev/null; ti"
 #}
 
 termtitle(){
-    printf '\033]0;%s\007' "${*:- }"
+    # in tmux sets the secondary title at bottom right, duplicating info
+    if ! istmux; then
+        printf '\033]0;%s\007' "${*:- }"
+    fi
 }
 
 isscreen(){
@@ -58,7 +61,10 @@ istmux(){
 
 tmuxtitle(){
     if istmux; then
-        printf "\033]2;%s\033\\" "${*:-}"
+        # window name appears in bottom left as a secondary name
+        #printf "\033]2;%s\033\\" "${*:-}"
+        # this is actually what we want to act like screen
+        tmux rename-window "${*:-}"
     fi
 }
 
@@ -74,6 +80,7 @@ title(){
     export TITLE="$*"
     termtitle "$TITLE"
     screentitle "$TITLE"
+    tmuxtitle "$TITLE"
 }
 
 # .bashrc reload causes title loss if enabling this
