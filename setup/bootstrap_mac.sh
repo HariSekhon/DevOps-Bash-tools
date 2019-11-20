@@ -28,6 +28,7 @@ run(){
 install_scripts="
 install_ansible.sh
 install_diff-so-fancy.sh
+install_gcloud.sh
 install_homebrew.sh
 install_minikube.sh
 install_minishift.sh
