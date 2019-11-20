@@ -13,6 +13,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Install Google Cloud SDK - uses packages where available or else installs to $HOME via the script installer
+#
+# You may want to install manually if using Google App Engine as the docs say to not use the packaged versions of gcloud
+# when installing the app engine add-ons (probably due to path write permissions)
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
