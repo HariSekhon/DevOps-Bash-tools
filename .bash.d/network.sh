@@ -154,6 +154,12 @@ myip(){
     ifconfig | grep 'inet[[:space:]]' | grep -v 127.0.0.1 | awk '{print $2}'
 }
 
+ifconfigco(){
+    curl ifconfig.co
+    # something else to consider with jq for lat/long coordinates, ASN, country etc
+    #curl ifconfig.co/json
+}
+
 ipify(){
     curl http://api.ipify.org/
     echo
