@@ -45,6 +45,6 @@ pushd "$bash_tools"
 
 git pull
 
-make gcp-shell
+make system-packages
 
 popd
