@@ -21,9 +21,12 @@
 
 # /google/devshell/customize_environment_done is touched when completed
 
-set -euxo pipefail
+# called as root by GCP
 
-bash_tools=~/github/bash-tools
+set -euxo pipefail
+srcdir="$(dirname $0)"
+
+bash_tools="$srcdir/github/bash-tools"
 
 if ! [ -d "$bash_tools" ]; then
     parent_dir="${bash_tools%/*}"
