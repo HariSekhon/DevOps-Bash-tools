@@ -45,6 +45,8 @@ pushd "$bash_tools"
 
 git pull
 
+# not calling gcp-shell which also links because it will link config files to /root
+# instead just run 'make gcp-shell' one time to set up $USER's $HOME
 make system-packages
 
 popd
