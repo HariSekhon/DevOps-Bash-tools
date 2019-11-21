@@ -480,6 +480,11 @@ mount-centos: docker-mount-centos
 mount-ubuntu: docker-mount-ubuntu
 	@:
 
+# checks dockerhub build status for this repo - needs check_dockerhub_repo_build_status.py from Advanced Nagios Plugins Collection to be in $PATH
+.PHONY: dockerhub-status
+dockerhub-status:
+	check_dockerhub_repo_build_status.py -r "$(DOCKER_IMAGE)"
+
 # For quick testing only - for actual Dockerfile builds see https://hub.docker.com/u/harisekhon and Dockerfiles source repo https://github.com/harisekhon/Dockerfiles
 .PHONY: docker-alpine
 docker-alpine:
