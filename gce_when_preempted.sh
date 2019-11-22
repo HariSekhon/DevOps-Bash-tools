@@ -24,6 +24,8 @@ Alternative to shutdown scripts if you want to interactively set up a CLI trigge
 
 https://cloud.google.com/compute/docs/shutdownscript
 
+usage:
+
 ${0##*/} <commands>
 "
     exit 3

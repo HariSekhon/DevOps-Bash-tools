@@ -26,6 +26,7 @@ https://cloud.google.com/compute/docs/instances/create-start-preemptible-instanc
 
 https://cloud.google.com/compute/docs/shutdownscript
 
+usage:
 
 ${0##*/}
 "
