@@ -321,7 +321,8 @@ gitu(){
     local basedir
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
     basedir="$(basedir $targets)" &&
-    trap 'popd >/dev/null; return 1' INT ERR
+    local trap_codes="INT ERR"
+    trap 'popd >/dev/null; return 1' $trap_codes
     pushd "$basedir" >/dev/null || return 1
     targets="$(strip_basedirs $basedir $targets)"
     # shellcheck disable=SC2086
@@ -336,7 +337,7 @@ gitu(){
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
     popd >/dev/null || :
-    trap - INT ERR
+    trap - $trap_codes
 }
 
 #githgu(){
