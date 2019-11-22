@@ -16,28 +16,38 @@
 
 # https://aws.amazon.com/blogs/aws/new-ec2-spot-instance-termination-notices/
 
-# Executes the arguments as shell commands when the EC2 instance running this script is notified of Spot Termination
-#
-# Can be used as a latch mechanism to wait before allowing a shell or script to proceed past calling this script
-
-# Usage:
-#
-#  ./aws_spot_when_terminated_execute.sh "command1; command2; command 3"        All commands execute in a subshell
-#
-#  ./aws_spot_when_terminated_execute.sh; command 1; command2; command 3        All commands execute in current shell
-#                                                                       (notice the semi-colon immediately after the script giving it no argument, merely using it as a latch mechanism)
-#
-#  ./aws_spot_when_terminated_execute.sh command1; command2; command 3          First command executes in the subshell (it's an argument). Commands 2 & 3 execute in the current shell after this script
-#
-#  ./aws_spot_when_terminated_execute.sh 'x=test; echo $x'                      Variable is interpolated inside the single quotes at runtime after receiving Spot Termination notice
-#
-
-# Inspired by whenup() / whendown() for hosts and whendone() for processes from interactive bash library .bash.d/* sourced as part of the .bashrc in this repo
-#
-# You can trigger this as part of rc.local or similar on an EC2 Spot instance and when it gets the termination notice it'll execute all of its arguments as commands
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+
+usage(){
+    cat <<EOF
+Executes the arguments as shell commands when the EC2 instance running this script is notified of Spot Termination
+
+Can be used as a latch mechanism to wait before allowing a shell or script to proceed past calling this script
+
+Usage:
+
+ ./aws_spot_when_terminated_execute.sh "command1; command2; command 3"        All commands execute in a subshell
+
+ ./aws_spot_when_terminated_execute.sh; command 1; command2; command 3        All commands execute in current shell
+                                                                              (notice the semi-colon immediately after the script giving it no argument, merely using it as a latch mechanism)
+
+ ./aws_spot_when_terminated_execute.sh command1; command2; command 3          First command executes in the subshell (it's an argument). Commands 2 & 3 execute in the current shell after this script
+
+ ./aws_spot_when_terminated_execute.sh 'x=test; echo \$x'                      Variable is interpolated inside the single quotes at runtime after receiving Spot Termination notice
+
+
+Inspired by whenup() / whendown() for hosts and whendone() for processes from interactive bash library .bash.d/* sourced as part of the .bashrc in this repo
+
+You can trigger this as part of rc.local or similar on an EC2 Spot instance and when it gets the termination notice it'll execute all of its arguments as commands
+
+EOF
+    exit 3
+}
+
+if [[ "${1:-}" =~ ^- ]]; then
+    usage
+fi
 
 termination_time=""
 
