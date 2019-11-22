@@ -336,7 +336,7 @@ gitu(){
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
     popd >/dev/null || :
-    trap - INT
+    trap - INT ERR
 }
 
 #githgu(){
