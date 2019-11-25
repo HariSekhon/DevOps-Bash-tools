@@ -33,4 +33,6 @@ if [ -f ~/google-cloud-sdk/completion.bash.inc ]; then
     source ~/google-cloud-sdk/completion.bash.inc
 fi
 
-alias gc="gcloud compute"
+alias gce="gcloud compute"
+alias gke="gcloud container clusters"
+alias gc="gcloud container"
