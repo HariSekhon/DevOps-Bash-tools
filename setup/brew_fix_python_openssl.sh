@@ -21,6 +21,11 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+if [ "$(uname -s)" != Darwin ]; then
+    echo "Not a Mac system, aborting..."
+    exit 1
+fi
+
 if type -P brew &>/dev/null; then
     # grep -q causes a pipefail via early pipe close which exits the script early without fixing
     if python -c 'import hashlib' 2>&1 | tee /dev/stderr | grep 'unsupported hash type'; then
