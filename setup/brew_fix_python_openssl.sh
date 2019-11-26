@@ -24,9 +24,11 @@ set -euo pipefail
 if type -P brew &>/dev/null; then
     if ! python -c 'import hashlib'; then
         echo "Attempting to upgrade Python to fix OpenSSL linkage break"
-        if python -V | grep -q '^Python 2'; then
+        if python -V | tee /dev/stderr | grep -q '^Python 2'; then
+            echo "upgrading python@2"
             brew upgrade python@2
         else
+            echo "upgrading python"
             brew upgrade python
         fi
     fi
