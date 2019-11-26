@@ -30,7 +30,7 @@ ssha(){
     #    return 0
     #fi
     for key in ~/.ssh/id_[rd]sa; do
-        key_fingerprint="$(ssh-keygen -lf "$key")"
+        key_fingerprint="$(ssh-keygen -lf "$key" | awk '{print $2}')"
         if ! ssh-add -l | grep -Fq "$key_fingerprint"; then
             ssh-add "$key"
         fi
