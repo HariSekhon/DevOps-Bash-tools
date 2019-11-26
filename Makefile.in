@@ -312,6 +312,9 @@ homebrew-packages:
 	if test -f setup/brew-packages.txt; then \
 		NO_FAIL=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages.txt; \
 	fi
+	@# fix for OpenSSL 1.0 -> 1.1 library linkage breaking python -c 'import hashlib', which break pips, eg:
+	@# https://stackoverflow.com/questions/20399331/error-importing-hashlib-with-python-2-7-but-not-with-2-6
+	@$(BASH_TOOLS)/setup/brew_fix_python_openssl.sh
 
 .PHONY: system-packages-remove
 system-packages-remove:
