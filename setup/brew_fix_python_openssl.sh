@@ -22,7 +22,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 if type -P brew &>/dev/null; then
-    if ! python -c 'import hashlib'; then
+    if python -c 'import hashlib' 2>&1 | tee /dev/stderr | grep -Fq 'unsupported hash type'; then
         echo "Attempting to upgrade Python to fix OpenSSL linkage break"
         if python -V | tee /dev/stderr | grep -q '^Python 2'; then
             echo "upgrading python@2"
