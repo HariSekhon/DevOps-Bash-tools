@@ -24,6 +24,30 @@ if [ -f ~/.minishift.env ]; then
     . ~/.minishift.env || rm -f ~/.minishift.env
 fi
 
+# ============================================================================ #
+
+# 'k8s-app' label is set by dashboard creation but who uses that
+k8s_get_pod_opts="-o wide -L app,env"
+
+# this is one of the most used things out there, even more than ping
+alias p='k get po $k8s_get_pod_opts'
+alias kapply='k apply -f'
+alias wp=watchpods
+alias ke=kubeexec
+
+alias use="k config use-context"
+alias contexts="k config get-contexts"
+#alias context="k config current-context"
+context(){ k config current-context; }
+# contexts has this info and is more useful
+#alias clusters="k config get-clusters"
+
+alias kcd='k config set-context $(kubectl config current-context) --namespace'
+
+alias menv='eval $(minikube docker-env)'
+
+# ============================================================================ #
+
 kubectl_opts="${KUBECTL_OPTS:-}"
 # set K8S_NAMESPACE in local .bashrc or similar files for environments where your ~/.kube/config
 # gets regenerated daily with certification authentication from a kerberos login script, which
@@ -34,6 +58,7 @@ fi
 # TODO: might split this later
 oc_opts="$kubectl_opts"
 
+# ============================================================================ #
 
 # oc() and kubectl() fix future invocations of k() to the each command if you want to explicitly switch between them
 oc(){
@@ -106,25 +131,6 @@ kexec(){
     done
     k exec -ti "$name" -- /bin/sh
 }
-
-# 'k8s-app' label is set by dashboard creation but who uses that
-k8s_get_pod_opts="-o wide -L app,env"
-
-# this is one of the most used things out there, even more than ping
-alias p="k get po \$k8s_get_pod_opts"
-alias wp=watchpods
-alias ke=kubeexec
-
-alias use="k config use-context"
-alias contexts="k config get-contexts"
-#alias context="k config current-context"
-context(){ k config current-context; }
-# contexts has this info and is more useful
-#alias clusters="k config get-clusters"
-
-alias kcd='kubectl config set-context $(kubectl config current-context) --namespace'
-
-alias menv='eval $(minikube docker-env)'
 
 # looks like both of these work on OpenShift context
 #
