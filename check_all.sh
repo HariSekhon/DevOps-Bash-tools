@@ -105,7 +105,7 @@ bash_tools_start_time="$(start_timer)"
 #. "$srcdir/check_json.sh"
 #. "$srcdir/check_yaml.sh"
 
-"$srcdir/check_pytools.sh"
+#"$srcdir/check_pytools.sh"
 
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
