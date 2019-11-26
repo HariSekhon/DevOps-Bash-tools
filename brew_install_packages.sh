@@ -46,6 +46,8 @@ if [ -z "${NO_UPDATE:-}" ]; then
         set +e #o pipefail  # undefined in /bin/sh
     fi
     echo "Updating Homebrew"
+    # brew update takes a long time and doesn't output anything so background it and output progress dots every 5 secs
+    # to make sure Travis CI doesn't terminate the job for lack of output activity after 10 mins (used to fail builds)
     brew update $brew_update_opts &
     while jobs | grep -Eq '[[:space:]]+Running[[:space:]]+brew[[:space:]]+update'; do
         # /bin/sh doesn't support -e
