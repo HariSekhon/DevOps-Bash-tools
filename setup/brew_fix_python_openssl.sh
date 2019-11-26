@@ -30,8 +30,7 @@ if type -P brew &>/dev/null; then
     # grep -q causes a pipefail via early pipe close which exits the script early without fixing
     if python -c 'import hashlib' 2>&1 | tee /dev/stderr | grep 'unsupported hash type'; then
         echo "Attempting to upgrade Python to fix OpenSSL linkage break"
-        # no grep -q here either, pipefail will cause the wrong python to be upgraded
-        if python -V | tee /dev/stderr | grep '^Python 2'; then
+        if python -V 2>&1 | tee /dev/stderr | grep '^Python 2'; then
             echo "upgrading python@2"
             brew upgrade python@2
         else
