@@ -32,5 +32,15 @@ travis_debug(){
     #else
     #    travis_debug_session.py -J "$1" ${@:2}
     #fi
-    travis_debug_session.py "$@"
+    opts=""
+    if [[ "$PWD" =~ /github/ ]]; then
+        local repo
+        repo="$(git remote -v | awk '/^origin/{print $2}' | sed 's,.*github.com/,,')"
+        if [ -n "$repo" ]; then
+            opts="--repo $repo"
+        fi
+    fi
+    # want arg splitting
+    # shellcheck disable=SC2086
+    travis_debug_session.py $opts "$@"
 }
