@@ -227,6 +227,8 @@ st(){
   eval ${GIT_PAGER:-cat}
 }
 
+# disabling this as I don't use Mercurial or Svn any more,
+# replacing with simpler function below that will pass through more things like --rebase
 pull(){
     local target="${1:-.}"
     if ! [ -e "$target" ]; then
@@ -279,6 +281,29 @@ pull(){
     else
         echo "not a revision controlled resource as far as bashrc can tell"
         return 1
+    fi
+}
+
+# simpler replacement function to above
+pull(){
+    # shellcheck disable=SC2166
+    if [ "${PWD##*/}" = github ]; then
+        for x in *; do
+            [ -d "$x" ] || continue
+            # get last character of string - don't pull blah2, as I use them as clean checkouts
+            [ "${x: -1}" = 2 ] && continue
+            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
+            if git remote -v | grep -qi harisekhon; then
+                echo "> GitHub: git pull $x $*"
+                git pull "$@"
+                echo
+            fi
+            # shellcheck disable=SC2164
+            popd >/dev/null
+        done
+        return
+    else
+        git pull "$@"
     fi
 }
 
