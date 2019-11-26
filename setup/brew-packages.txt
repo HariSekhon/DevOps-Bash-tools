@@ -22,11 +22,7 @@ golang
 jq
 jwhois
 parallel
-# causes SSL related errors like:
-#   from hashlib import md5, sha1, sha256
-#   ImportError: cannot import name md5
-# and is unnecessary because Macs always come with Python
-#python
+#python  # unnecessary - Macs always come with Python
 readline
 shellcheck
 wget
