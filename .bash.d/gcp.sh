@@ -36,3 +36,4 @@ fi
 alias gce="gcloud compute"
 alias gke="gcloud container clusters"
 alias gc="gcloud container"
+alias gbs="gcloud builds submit --tag"
