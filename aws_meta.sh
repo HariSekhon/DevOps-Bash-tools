@@ -26,8 +26,8 @@ eg. ${0##*/} public-ipv4
     ${0##*/} public-hostname
     ${0##*/} local-ipv4
     ${0##*/} local-hostname
-    ${0##*/} instance-type
     ${0##*/} ami-id
+    ${0##*/} instance-type
     ${0##*/} placement/availability-zone
 
 See also ec2-metadata script which is a more complete shell script
