@@ -117,6 +117,10 @@ default:
 	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
 	@$(MAKE) build
 
+.PHONY: main
+main:
+	@$(MAKE) build test
+
 .PHONY: help
 help:
 	@# this doesn't work because the macro insertion of a multiline literal breaks the line-based make format so we have to export to an env var instead of using natively
