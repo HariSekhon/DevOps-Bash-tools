@@ -371,7 +371,6 @@ fatpacks:
 		echo; \
 		echo "fatpacks-local target detected, running:"; \
 		$(MAKE) fatpacks-local; \
-		echo; \
 	fi
 	@echo
 	tar czvf fatpacks.tar.gz "$(FATPACKS_DIR)"
