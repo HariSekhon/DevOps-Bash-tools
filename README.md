@@ -139,3 +139,7 @@ Install generically useful Python CLI tools and modules (includes [AWS CLI](http
 ```
 make python
 ```
+
+### Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
