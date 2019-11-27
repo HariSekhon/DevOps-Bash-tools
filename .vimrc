@@ -147,7 +147,7 @@ if has("autocmd")
     au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint "%" \| headtail.py<CR>
     au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc "%"<CR>
     au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
-    au BufNew,BufRead *.go   nmap ;l :w<CR>:!clear; go fmt "%"<CR><CR>
+    au BufNew,BufRead *.go   nmap ;l :w<CR>:!gofmt -w "%" && go build "%"<CR>
 
     au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
@@ -304,14 +304,20 @@ endfunction
 
 function! WriteRun()
     :w
-    :! "./%" 2>&1 \| less
-    " TODO: if .go then 'go run %'
+    if &filetype == 'go'
+        :! go run "%" 2>&1 \| less
+    else
+        :! "./%" 2>&1 \| less
+    endif
 endfunction
 
 function! WriteRunDebug()
     :w
-    :! DEBUG=1 bash -c "./% 2>&1 \| headtail.py"
-    " TODO: if .go then 'go run %'
+    if &filetype == 'go'
+        :! DEBUG=1 bash -c "go run % 2>&1 \| headtail.py"
+    else
+        :! DEBUG=1 bash -c "./% 2>&1 \| headtail.py"
+    endif
 endfunction
 
 " ============================================================================ "
