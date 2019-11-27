@@ -368,10 +368,10 @@ fatpacks:
 		cp -av lib/resources fatpacks/; \
 	fi
 	@if $(MAKE) -n fatpacks-local >/dev/null 2>&1; then \
-		@echo; \
-		@echo "fatpacks-local target detected, running:"; \
+		echo; \
+		echo "fatpacks-local target detected, running:"; \
 		$(MAKE) fatpacks-local; \
-		@echo; \
+		echo; \
 	fi
 	@echo
 	tar czvf fatpacks.tar.gz "$(FATPACKS_DIR)"
