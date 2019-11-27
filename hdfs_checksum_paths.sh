@@ -21,7 +21,9 @@
 #
 # Make sure to kinit before running this if using a production Kerberized cluster
 
-# This is slow because the HDFS command startup is slow and is called once per file path
+# This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
+#
+# Unfortunately Snakebite python library doesn't support checksum extraction
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -29,7 +31,7 @@ set -euo pipefail
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
 awk '{$1=$2=$3=$4=$5=$6=$7="";print}' |
-sed 's/^[[:space:]]*//' |
+#sed 's/^[[:space:]]*//' |
 while read -r filepath; do
     hdfs dfs -checksum "$filepath"
 done

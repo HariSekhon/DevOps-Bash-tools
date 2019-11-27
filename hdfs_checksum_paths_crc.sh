@@ -25,6 +25,8 @@
 # This is slow because the HDFS command startup is slow and is called once per file path
 
 # Looks like this only works on Hadoop 2.7+ as still returns MD5-of-MD5 on Hadoop 2.6
+#
+# Unfortunately Snakebite python library doesn't support checksum extraction
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -32,7 +34,7 @@ set -euo pipefail
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
 awk '{$1=$2=$3=$4=$5=$6=$7="";print}' |
-sed 's/^[[:space:]]*//' |
+#sed 's/^[[:space:]]*//' |
 while read -r filepath; do
     hdfs dfs -Ddfs.checksum.combine.mode=COMPOSITE_CRC -checksum "$filepath"
 done
