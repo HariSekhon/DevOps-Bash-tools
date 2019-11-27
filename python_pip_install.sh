@@ -85,6 +85,7 @@ user_opt(){
 envopts=""
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
+    # setting these caused compile errors failing to find stdio.h when pip installing requests-kerberos
 #    if type -P brew &>/dev/null; then
 #        # usually /usr/local
 #        brew_prefix="$(brew --prefix)"
