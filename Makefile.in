@@ -363,11 +363,15 @@ pip:
 .PHONY: fatpacks
 fatpacks:
 	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
-	@if $(MAKE) -n fatpacks-local >/dev/null 2>&1; then \
-		$(MAKE) fatpacks-local; \
-	fi
+	@echo
 	if [ -d lib/resources ]; then \
 		cp -av lib/resources fatpacks/; \
+	fi
+	@if $(MAKE) -n fatpacks-local >/dev/null 2>&1; then \
+		@echo; \
+		@echo "fatpacks-local target detected, running:"; \
+		$(MAKE) fatpacks-local; \
+		@echo; \
 	fi
 	@echo
 	tar czvf fatpacks.tar.gz "$(FATPACKS_DIR)"
