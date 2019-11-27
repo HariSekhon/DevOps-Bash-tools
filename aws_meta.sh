@@ -39,8 +39,13 @@ See also ec2-metadata script which is a more complete shell script
 #    usage
 #fi
 
-if [[ "$1" =~ -.* ]]; then
+if [[ "${1:-}" =~ -.* ]]; then
     usage
+fi
+
+if ! curl -s --connect-timeout 2 http://169.254.169.254/ &>/dev/null; then
+    echo "This script must be run from within an EC2 instance as that is the only place the AWS EC2 Metadata API is available"
+    exit 2
 fi
 
 curl "http://169.254.169.254/latest/meta-data/${1:-}"
