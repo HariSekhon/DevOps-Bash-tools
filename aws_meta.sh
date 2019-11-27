@@ -18,7 +18,7 @@ set -euo pipefail
 
 usage(){
     echo "
-Simple query wrapper to AWS's Metadata API for speed of typing
+AWS Metadata API query shortcut
 
 ${0##*/} <resource>
 
