@@ -41,7 +41,7 @@ EOF
     exit 3
 }
 
-if [[ "$1" =~ ^- ]]; then
+if [[ "${1:-}" =~ ^- ]]; then
     usage
 fi
 
