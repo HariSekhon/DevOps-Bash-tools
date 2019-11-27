@@ -78,29 +78,6 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
-if [ -d ~/go/bin ]; then
-    add_PATH ~/go/bin
-fi
-
-if [ -d ~/Library/Python ]; then
-    for x in ~/Library/Python/*/bin; do
-        [ -d "$x" ] || continue
-        add_PATH "$x"
-    done
-fi
-
-if [ -d ~/perl5/lib/perl5 ]; then
-    add_PATH PERL5LIB ~/perl5/lib/perl5
-fi
-if [ -d ~/perl5/bin ]; then
-    add_PATH ~/perl5/bin
-fi
-
-# output from 'npm bin'
-if [ -d ~/node_modules/.bin ]; then
-    add_PATH ~/node_modules/.bin
-fi
-
 # do the same with MANPATH
 #if [ -d ~/man ]; then
 #    MANPATH=~/man${MANPATH:-:}
@@ -113,21 +90,6 @@ fi
 #fi
 
 # ============================================================================ #
-#                         M y   G i t H u b   r e p o s
-# ============================================================================ #
-
-# $github defined in aliases.sh
-# shellcheck disable=SC2154
-add_PATH "$github/bash-tools"
-add_PATH "$github/pytools"
-add_PATH "$github/tool"
-add_PATH "$github/tools"
-add_PATH "$github/go-tools"
-add_PATH "$github/nagios-plugins"
-add_PATH "$github/nagios-plugin-kafka"
-add_PATH "$github/spotify"
-
-# ============================================================================ #
 #                                A n a c o n d a
 # ============================================================================ #
 
@@ -136,6 +98,7 @@ add_PATH "$github/spotify"
 # for the 'conda' command
 add_PATH ~/anaconda/bin
 
+
 # ============================================================================ #
 #                           P a r q u e t   T o o l s
 # ============================================================================ #
@@ -143,6 +106,52 @@ add_PATH ~/anaconda/bin
 if [ -d /usr/local/parquet-tools ]; then
     add_PATH "/usr/local/parquet-tools"
 fi
+
+
+# ============================================================================ #
+#                                  P y t h o n
+# ============================================================================ #
+
+if [ -d ~/Library/Python ]; then
+    for x in ~/Library/Python/*/bin; do
+        [ -d "$x" ] || continue
+        add_PATH "$x"
+    done
+fi
+
+alias lspythonbin='ls -d ~/Library/Python/*/bin/* 2>/dev/null'
+alias llpythonbin='ls -ld ~/Library/Python/*/bin/* 2>/dev/null'
+alias lspybin=lspythonbin
+alias llpybin=llpythonbin
+
+
+# ============================================================================ #
+#                                    P e r l
+# ============================================================================ #
+
+if [ -d ~/perl5/lib/perl5 ]; then
+    add_PATH PERL5LIB ~/perl5/lib/perl5
+fi
+if [ -d ~/perl5/bin ]; then
+    add_PATH ~/perl5/bin
+fi
+
+alias lsperlbin='ls -d ~/perl5/bin/* 2>/dev/null'
+alias llperlbin='ls -ld ~/perl5/bin/* 2>/dev/null'
+
+
+# ============================================================================ #
+#                                    N o d e
+# ============================================================================ #
+
+# output from 'npm bin'
+if [ -d ~/node_modules/.bin ]; then
+    add_PATH ~/node_modules/.bin
+fi
+
+alias lsnodebin='ls -d ~/node_modules/.bin/* 2>/dev/null'
+alias llnodebin='ls -ld ~/node_modules/.bin/* 2>/dev/null'
+
 
 # ============================================================================ #
 #                       R u b y   G e m   c o m m a n d s
@@ -163,11 +172,21 @@ done
 unset ruby_bins
 unset ruby_bins_newest
 
+alias lsrubybin='ls -d ~/.gem/ruby/*/bin/* 2>/dev/null'
+alias llrubybin='ls -ld ~/.gem/ruby/*/bin/* 2>/dev/null'
+
+
 # ============================================================================ #
 #                                  G o l a n g
 # ============================================================================ #
 
+# defined in aliases.sh
+# shellcheck disable=SC2154
 GOPATH="$github/go-tools"
+
+if [ -d ~/go/bin ]; then
+    add_PATH ~/go/bin
+fi
 
 # manual installation of 1.5 mismatches with HomeBrew 1.6 installed to $PATH and
 #export GOROOT="/usr/local/go"
@@ -187,6 +206,26 @@ if type -P go &>/dev/null; then
     add_PATH "$GOROOT/libexec/bin"
     add_PATH "$GOPATH/bin"
 fi
+
+alias lsgobin='ls -d ~/go/bin/* "$GOROOT"/{bin,libexec/bin}/* "$GOPATH/bin/"* 2>/dev/null'
+alias llgobin='ls -ld ~/go/bin/* "$GOROOT"/{bin,libexec/bin}/* "$GOPATH/bin/"* 2>/dev/null'
+
+
+# ============================================================================ #
+#                         M y   G i t H u b   r e p o s
+# ============================================================================ #
+
+# $github defined in aliases.sh
+# shellcheck disable=SC2154
+add_PATH "$github/bash-tools"
+add_PATH "$github/pytools"
+add_PATH "$github/tool"
+add_PATH "$github/tools"
+add_PATH "$github/go-tools"
+add_PATH "$github/nagios-plugins"
+add_PATH "$github/nagios-plugin-kafka"
+add_PATH "$github/spotify"
+
 
 # ============================================================================ #
 
