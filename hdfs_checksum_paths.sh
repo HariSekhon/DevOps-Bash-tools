@@ -13,20 +13,36 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Recurses HDFS path arguments outputting HDFS MD5-of-MD5 checksums for each file
-#
-# Calls HDFS command which is assumed to be in $PATH
-#
-# Capture stdout > file.txt for comparisons
-#
-# Make sure to kinit before running this if using a production Kerberized cluster
-
-# This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
-#
-# Unfortunately Snakebite python library doesn't support checksum extraction
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+
+usage(){
+    cat <<EOF
+Recurses HDFS path arguments outputting HDFS MD5-of-MD5 checksums for each file
+
+Calls HDFS command which is assumed to be in \$PATH
+
+Capture stdout > file.txt for comparisons
+
+Make sure to kinit before running this if using a production Kerberized cluster
+
+Caveats:
+
+This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
+
+Tried this because Snakebite python library doesn't support checksum extraction
+
+
+usage: ${0##*/} <file_or_directory_paths>
+
+
+EOF
+    exit 3
+}
+
+if [[ "$1" =~ ^- ]]; then
+    usage
+fi
 
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |

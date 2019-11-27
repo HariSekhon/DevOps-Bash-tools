@@ -13,18 +13,32 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Recurses HDFS path arguments outputting:
-#
-# <file_length>     <filename>
-#
-# Calls HDFS command which is assumed to be in $PATH
-#
-# Capture stdout > file.txt for comparisons
-#
-# Make sure to kinit before running this if using a production Kerberized cluster
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+
+usage(){
+    cat <<EOF
+Recurses HDFS path arguments outputting:
+
+<file_length>     <filename>
+
+Calls HDFS command which is assumed to be in \$PATH
+
+Capture stdout > file.txt for comparisons
+
+Make sure to kinit before running this if using a production Kerberized cluster
+
+
+usage: ${0##*/} <file_or_directory_paths>
+
+
+EOF
+    exit 3
+}
+
+if [[ "$1" =~ ^- ]]; then
+    usage
+fi
 
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |

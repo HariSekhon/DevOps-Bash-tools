@@ -13,23 +13,39 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Recurses HDFS path arguments outputting portable CRC32 checksums for each file
-# (can be used for HDFS vs local comparisons, whereas default MD5-of-MD5 cannot)
-#
-# Calls HDFS command which is assumed to be in $PATH
-#
-# Capture stdout > file.txt for comparisons
-#
-# Make sure to kinit before running this if using a production Kerberized cluster
-
-# This is slow because the HDFS command startup is slow and is called once per file path
-
-# Looks like this only works on Hadoop 2.7+ as still returns MD5-of-MD5 on Hadoop 2.6
-#
-# Unfortunately Snakebite python library doesn't support checksum extraction
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+
+usage(){
+    cat <<EOF
+Recurses HDFS path arguments outputting portable CRC32 checksums for each file
+(can be used for HDFS vs local comparisons, whereas default MD5-of-MD5 cannot)
+
+Calls HDFS command which is assumed to be in \$PATH
+
+Capture stdout > file.txt for comparisons
+
+Make sure to kinit before running this if using a production Kerberized cluster
+
+This is slow because the HDFS command startup is slow and is called once per file path
+
+Caveats:
+
+This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
+
+Tried this because Snakebite python library doesn't support checksum extraction
+
+
+usage: ${0##*/} <file_or_directory_paths>
+
+
+EOF
+    exit 3
+}
+
+if [[ "$1" =~ ^- ]]; then
+    usage
+fi
 
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
