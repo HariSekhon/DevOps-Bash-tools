@@ -106,8 +106,8 @@ if [ "$(uname -s)" = "Darwin" ]; then
         export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
         export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
 
-        export CPATH="${CPATH:-} $LDFLAGS"
-        export LIBRARY_PATH="${LIBRARY_PATH:-} $LDFLAGS"
+        #export CPATH="${CPATH:-}:$brew_prefix/lib"
+        #export LIBRARY_PATH="${LIBRARY_PATH:-}:$brew_prefix/lib"
 
         # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
         envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB" # LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
