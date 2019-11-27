@@ -58,6 +58,17 @@ alias um=updatemodules
 alias gbrowse=gitbrowse
 #type browse &>/dev/null || alias browse=gbrowse
 alias ggrep="git grep"
+# much quicker to just 'cd $github; f <pattern>'
+#githubls(){
+#    # GitHub is svn compatible, use this to list files remotely
+#    svn ls "https://github.com/$1.git/branches/master/"
+#}
+#githubgrep(){
+#    for repo in $(sed 's/#.*//;s/:.*//;/^[[:space:]]*$/d' "$srcdir/setup/repolist.txt"); do
+#        githubls "HariSekhon/$repo"
+#    done |
+#    grep "$@"
+#}
 
 # git fetch -p or git remote prune origin
 alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\\*' -e 'master' | xargs git branch -d"
