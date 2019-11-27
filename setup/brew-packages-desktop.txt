@@ -64,6 +64,7 @@ gradle-completion
 hadolint
 haproxy
 htop
+hub
 imagemagick
 ipcalc
 iperf
