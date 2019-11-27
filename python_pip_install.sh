@@ -85,33 +85,33 @@ user_opt(){
 envopts=""
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
-    if type -P brew &>/dev/null; then
-        # usually /usr/local
-        brew_prefix="$(brew --prefix)"
-
-        export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
-        export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
-
-        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/lib"
-        export CFLAGS="${CFLAGS:-} -I$brew_prefix/include"
-        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/include"
-
-        # for OpenSSL
-        export LDFLAGS="${LDFLAGS:-} -L$OPENSSL_LIB"
-        export CFLAGS="${CFLAGS:-} -I$OPENSSL_INCLUDE"
-        export CPPFLAGS="${CPPFLAGS:-} -I$OPENSSL_INCLUDE"
-
-        # for Kerberos
-        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/krb5/lib"
-        export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
-        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
-
-        #export CPATH="${CPATH:-}:$brew_prefix/lib"
-        #export LIBRARY_PATH="${LIBRARY_PATH:-}:$brew_prefix/lib"
-
-        # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
-        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB" # LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
-    fi
+#    if type -P brew &>/dev/null; then
+#        # usually /usr/local
+#        brew_prefix="$(brew --prefix)"
+#
+#        export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
+#        export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
+#
+#        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/lib"
+#        export CFLAGS="${CFLAGS:-} -I$brew_prefix/include"
+#        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/include"
+#
+#        # for OpenSSL
+#        export LDFLAGS="${LDFLAGS:-} -L$OPENSSL_LIB"
+#        export CFLAGS="${CFLAGS:-} -I$OPENSSL_INCLUDE"
+#        export CPPFLAGS="${CPPFLAGS:-} -I$OPENSSL_INCLUDE"
+#
+#        # for Kerberos
+#        export LDFLAGS="${LDFLAGS:-} -L$brew_prefix/opt/krb5/lib"
+#        export CFLAGS="${CFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
+#        export CPPFLAGS="${CPPFLAGS:-} -I$brew_prefix/opt/krb5/include -I $brew_prefix/opt/krb5/include/krb5"
+#
+#        #export CPATH="${CPATH:-}:$brew_prefix/lib"
+#        #export LIBRARY_PATH="${LIBRARY_PATH:-}:$brew_prefix/lib"
+#
+#        # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
+#        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB" # LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
+#    fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
 elif [ -n "${PYTHON_USER_INSTALL:-}" ] ||
