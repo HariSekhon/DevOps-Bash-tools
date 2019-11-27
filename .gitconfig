@@ -61,6 +61,9 @@
     # dangerous this just autocorrected my git rename to git rebase, lucky it errored out...
     autocorrect = 0
 
+[homebrew]
+	donationmessage = false
+
 # ============================================================================ #
 #                               G i t   C o l o r
 # ============================================================================ #
