@@ -29,6 +29,7 @@ Make sure to kinit before running this if using a production Kerberized cluster
 Caveats:
 
 This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
+If you want to skip zero byte files, set environment variable \$SKIP_ZERO_BYTE_FILES
 
 Tried this because Snakebite python library doesn't support checksum extraction
 
@@ -44,8 +45,17 @@ if [[ "$1" =~ ^- ]]; then
     usage
 fi
 
+skip_zero_byte_files(){
+    if [ -n "${SKIP_ZERO_BYTE_FILES:-}" ]; then
+        awk '{if($5 != 0) print }'
+    else
+        cat
+    fi
+}
+
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
+skip_zero_byte_files |
 awk '{$1=$2=$3=$4=$5=$6=$7="";print}' |
 #sed 's/^[[:space:]]*//' |
 while read -r filepath; do
