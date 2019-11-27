@@ -116,7 +116,8 @@ check_duplicate_email_prefixes(){
     emails="${emails:-$(git_log_emails)}"
     # need to use sed not built-in variable replacement in order to handle multi-line emails
     # shellcheck disable=SC2001
-    duplicate_email_prefixes="$(sed 's/@.*$//' <<< "$emails" | sort | uniq -d || :)"
+    duplicate_email_prefixes="$(sed 's/@.*$//;s/\.//g' <<< "$emails" | sort | uniq -d || :)"
+    # email prefixes normalize hari.sekhon => harisekhon since email accounts like gmail treat them the same, so remember duplicates for harisekhon may include hari.sekhon
     check_error "$duplicate_email_prefixes" "duplicate email prefixes detected (misconfigured domain name in git user.email?)" &&
     echo "OK: no duplicate email prefixes detected" || :
 }
