@@ -129,7 +129,7 @@ check_root_committed(){
 }
 
 check_emails_without_domains(){
-    emails="${emails:-$(git_local_emails)}"
+    emails="${emails:-$(git_log_emails)}"
     # need to use sed not built-in variable replacement in order to handle multi-line emails
     # shellcheck disable=SC2001
     domains="$(sed 's/.*@//' <<< "$emails" | sort -u)"
