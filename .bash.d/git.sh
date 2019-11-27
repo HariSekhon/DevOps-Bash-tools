@@ -601,6 +601,10 @@ git_author_emails(){
     git log --all --pretty=format:"%ae" | sort | uniq -c | sort -k1nr | less
 }
 
+git_author_names_emails(){
+    git log --all --pretty=format:"%an %ae" | sort | uniq -c | sort -k1nr | less
+}
+
 git_authors(){
     git_author_emails
 }
