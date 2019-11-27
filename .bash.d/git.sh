@@ -594,7 +594,7 @@ gitdiff(){
 }
 
 git_author_names(){
-    git log -all --pretty=format:"%an" | sort | uniq -c | sort -k1nr | less
+    git log --all --pretty=format:"%an" | sort | uniq -c | sort -k1nr | less
 }
 
 git_author_emails(){
