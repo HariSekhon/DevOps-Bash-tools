@@ -26,6 +26,8 @@ CODE_FILES := $(shell git ls-files | while read line; do test -f "$$line" || con
 
 CPANM = cpanm
 
+FATPACKS_DIR := fatpacks
+
 SUDO := sudo
 SUDO_PIP := sudo -H
 SUDO_PERL := sudo
@@ -361,13 +363,16 @@ pip:
 .PHONY: fatpacks
 fatpacks:
 	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+	@if $(MAKE) -n fatpacks-local >/dev/null 2>&1; then \
+		$(MAKE) fatpacks-local; \
+	fi
 	if [ -d lib/resources ]; then \
 		cp -av lib/resources fatpacks/; \
 	fi
 	@echo
-	tar czvf fatpacks.tar.gz fatpacks
+	tar czvf fatpacks.tar.gz "$(FATPACKS_DIR)"
 	@echo
-	@echo "Generated fatpacks.tar.gz containing fatpacks/ directory of perl scripts with all dependencies bundled"
+	@echo "Generated fatpacks.tar.gz containing $(FATPACKS_DIR)/ directory of perl scripts with all dependencies bundled"
 
 .PHONY: fatpack
 fatpack: fatpacks
