@@ -57,7 +57,7 @@ git_log(){
 }
 
 git_log_names(){
-    git_log --pretty=format:"%an" | toLower | trim | sort -u
+    git_log --pretty=format:"%an" | toLower | trim | perl -p -e 's/[\h-]+/ /g' | sort -u
 }
 
 git_log_emails(){
@@ -65,10 +65,10 @@ git_log_emails(){
 }
 
 git_log_names_emails(){
-    git_log --pretty=format:"%an %ae" | toLower | trim | sort -u
+    git_log --pretty=format:"%an %ae" | toLower | trim | perl -p -e 's/\h+/ /g' | sort -u
 }
 
-names="$(git_log_names)"
+#names="$(git_log_names)"
 emails="$(git_log_emails)"
 names_emails="$(git_log_names_emails)"
 
@@ -78,7 +78,7 @@ check_multiple_names_per_email(){
     names_emails="${names_emails:-(git_log_names_emails)}"
     for email in $emails; do
         #names_for_same_email="$(grep "[[:space:]]$email$" <<< "$names_emails" | perl -p -e 's/\s\S*?$//')"
-        names_for_same_email="$(grep -i "[[:space:]]$email$" <<< "$names_emails" | normalize_spaces | remove_last_column | sort -u || :)"
+        names_for_same_email="$(grep -Ei "[[:space:]]$email$" <<< "$names_emails" | normalize_spaces | remove_last_column | sort -u || :)"
         # don't quote otherwise have to trim wc output for comparison
         # shellcheck disable=SC2046
         if [ $(wc -l <<< "$names_for_same_email") -eq 1 ]; then
@@ -93,19 +93,18 @@ check_multiple_names_per_email(){
 
 check_multiple_emails_per_name(){
     local err=0
-    names="${names:-$(git_log_names)}"
+    names="$(git_log_names | perl -p -e 's/[\s.-]+/[[:space:].-]*/' | sort -u)"
     names_emails="${names_emails:-(git_log_names_emails)}"
-    while read -r name; do
-        name_regex="${name//[[:space:]]/[[:space:].]*}"
+    while read -r name_regex; do
         # $email_regex defined in lib
         # shellcheck disable=SC2154
-        emails_for_same_name="$(grep -i "^${name_regex}[[:space:]]+$email_regex" <<< "$names_emails" | awk '{print $NF}' | sort -u || :)"
+        emails_for_same_name="$(grep -Ei "^${name_regex}[[:space:]]+$email_regex" <<< "$names_emails" | awk '{print $NF}' | sort -u || :)"
         # don't quote otherwise have to trim wc output for comparison
         # shellcheck disable=SC2046
         if [ $(wc -l <<< "$emails_for_same_name") -eq 1 ]; then
             emails_for_same_name=""
         fi
-        check_error "$emails_for_same_name" "different email addresses committed for the same user name '$name'! (misconfigured git config user.email?)" || err=1
+        check_error "$emails_for_same_name" "different email addresses committed for the same user name '$name_regex'! (misconfigured git config user.email?)" || err=1
     done <<< "$names"
     if [ $err -eq 0 ]; then
         echo "OK: no differing email addresses committed for each committed user name"
@@ -142,7 +141,7 @@ check_emails_without_domains(){
 }
 
 check_single_word_author_names(){
-    names="${names:-$(git_log_names)}"
+    names="$(git_log_names)"
     single_word_author_names="$(awk '{if(NF == 1) print $0}' <<< "$names" | sort -u)"
     check_error "$single_word_author_names" "single word author names detected (misconfigured git user.name?)" &&
     echo "OK: no single word author names detected" || :
