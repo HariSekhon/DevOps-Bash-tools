@@ -35,7 +35,7 @@ travis_debug(){
     opts=""
     if [[ "$PWD" =~ /github/ ]]; then
         local repo
-        repo="$(git remote -v | awk '/^origin/{print $2;exit}' | sed 's,.*github.com/,,')"
+        repo="$(git remote -v | awk '/^origin/{print $2;exit}' | sed 's,.*github.com:*/,,')"
         if [ -n "$repo" ]; then
             opts="--repo $repo"
         fi
