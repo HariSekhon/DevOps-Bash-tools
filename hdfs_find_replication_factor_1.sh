@@ -61,7 +61,7 @@ skip_zero_byte_files(){
 
 set_replication_factor_3(){
     if [ -n "${SET_REPLICATION_FACTOR_3:-}" ]; then
-        xargs hdfs dfs -setrep 3
+        xargs --no-run-if-empty hdfs dfs -setrep 3
     else
         cat
     fi
