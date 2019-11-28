@@ -257,3 +257,10 @@ k8s_get_api(){
     k config view -o jsonpath="{.clusters[?(@.name == \"$cluster\")].cluster.server}"
     echo
 }
+
+# to kubectl apply manifests to both clusters for multi-cluster deployments
+kapplyclusters(){
+    for context in $(kubectl config get-contexts -o=name --kubeconfig clusters.yaml); do
+        kubectl --kubeconfig clusters.yaml --context="$context" apply -f "@" # eg. manifests/
+    done
+}
