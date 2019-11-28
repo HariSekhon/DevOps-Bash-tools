@@ -59,7 +59,7 @@ skip_zero_byte_files(){
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
 skip_zero_byte_files |
-awk '{$1=$2=$3=$4=$5=$6=$7="";print}' |
+awk '{ $1=$2=$3=$4=$5=$6=$7=""; print }' |
 #sed 's/^[[:space:]]*//' |
 while read -r filepath; do
     hdfs dfs -Ddfs.checksum.combine.mode=COMPOSITE_CRC -checksum "$filepath"
