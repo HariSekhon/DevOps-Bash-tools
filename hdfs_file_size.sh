@@ -20,7 +20,7 @@ usage(){
     cat <<EOF
 Recurses HDFS path arguments outputting:
 
-<file_length>     <filename>
+<file_size>     <filename>
 
 Calls HDFS command which is assumed to be in \$PATH
 
