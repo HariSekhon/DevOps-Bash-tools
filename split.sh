@@ -53,7 +53,7 @@ for x in "$@"; do
 done
 
 check_bin split
-check_bin parallel
+#check_bin parallel
 
 parts="${PARTS:-}"
 
