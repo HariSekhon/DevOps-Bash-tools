@@ -218,13 +218,21 @@ alias chromekill='pkill -f "Google Chrome Helper"'
 alias eclipse='~/eclipse/Eclipse.app/Contents/MacOS/eclipse';
 alias visualvm='~/visualvm/bin/visualvm'
 
-for x in ~/pmd-bin-*; do
-    if [ -f "$x/bin/run.sh" ]; then
-        # yes evaluate $x here
-        # shellcheck disable=SC2139
-        alias pmd="$x/bin/run.sh pmd -R rulesets/java/quickstart.xml -f text"
-    fi
-done
+# using brew version on Mac
+pmd_opts="-R rulesets/java/quickstart.xml -f text"
+if isMac; then
+    # yes evaluate $pmd_opts here
+    # shellcheck disable=SC2139
+    alias pmd="pmd $pmd_opts"
+else
+    for x in ~/pmd-bin-*; do
+        if [ -f "$x/bin/run.sh" ]; then
+            # yes evaluate $x here
+            # shellcheck disable=SC2139
+            alias pmd="$x/bin/run.sh pmd $pmd_opts"
+        fi
+    done
+fi
 
 # for piping from grep
 alias uniqfiles="sed 's/:.*//;/^[[:space:]]*$/d' | sort -u"
