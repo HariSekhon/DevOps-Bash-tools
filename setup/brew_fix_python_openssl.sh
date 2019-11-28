@@ -31,11 +31,11 @@ if type -P brew &>/dev/null; then
     if python -c 'import hashlib' 2>&1 | tee /dev/stderr | grep 'unsupported hash type'; then
         echo "Attempting to upgrade Python to fix OpenSSL linkage break"
         if python -V 2>&1 | tee /dev/stderr | grep '^Python 2'; then
-            echo "upgrading python@2"
-            brew upgrade python@2
+            echo "upgrading python@2 and wget"
+            brew upgrade python@2 wget
         else
-            echo "upgrading python"
-            brew upgrade python
+            echo "upgrading python and wget"
+            brew upgrade python wget
         fi
     fi
 else
