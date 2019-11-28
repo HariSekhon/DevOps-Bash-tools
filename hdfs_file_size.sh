@@ -20,11 +20,9 @@ usage(){
     cat <<EOF
 Recurses HDFS path arguments outputting:
 
-<file_size>     <filename>
+<file_size_of_single_replica>     <filename>
 
 Calls HDFS command which is assumed to be in \$PATH
-
-Capture stdout > file.txt for comparisons
 
 Make sure to kinit before running this if using a production Kerberized cluster
 
@@ -40,8 +38,5 @@ if [[ "${1:-}" =~ ^- ]]; then
     usage
 fi
 
-hdfs dfs -ls -R "$@" |
-grep -v '^d' |
-awk '{ $1=$2=$3=$4=$6=$7=""; print }' |
-#sed 's/^[[:space:]]*//'
-column -t
+hdfs dfs -du "$@" |
+awk '{ $2=""; print }'
