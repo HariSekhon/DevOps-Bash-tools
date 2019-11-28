@@ -151,7 +151,7 @@ if has("autocmd")
     au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
     au BufNew,BufRead *.go   nmap ;l :w<CR>:!gofmt -w "%" && go build "%"<CR>
     " TODO: groovy/java CLI linters
-    "au BufNew,BufRead *.gsh  nmap ;l :w<CR>:!groovy %<CR>
+    au BufNew,BufRead *.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
 
     au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
