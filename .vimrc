@@ -132,7 +132,7 @@ if has("autocmd")
     au BufNew,BufRead *.yml set sts=2 sw=2 ts=2
     au BufNew,BufRead *.yaml set sts=2 sw=2 ts=2
 
-    au BufNew,BufRead *.gsh  set filetype=groovy
+    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  set filetype=groovy
 
     "au BufNew,BufRead *.rb set filetype=ruby sts=2 sw=2 ts=2
 
@@ -150,8 +150,9 @@ if has("autocmd")
     au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc "%"<CR>
     au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
     au BufNew,BufRead *.go   nmap ;l :w<CR>:!gofmt -w "%" && go build "%"<CR>
+
     " TODO: groovy/java CLI linters
-    au BufNew,BufRead *.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
+    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
 
     au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
