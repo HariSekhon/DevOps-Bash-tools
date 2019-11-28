@@ -37,7 +37,9 @@ if type -P brew &>/dev/null; then
             echo "upgrading python"
             brew upgrade python
         fi
+        echo "finding packages dependent on openssl"
         dependent_packages="$(brew deps --installed | awk -F: '/:.*openssl/{print $1}')"
+        echo "upgrading packages dependent on openssl"
         # want package splitting
         # shellcheck disable=SC2086
         brew upgrade $dependent_packages
