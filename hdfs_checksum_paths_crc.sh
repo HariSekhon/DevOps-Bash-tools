@@ -29,6 +29,9 @@ Make sure to kinit before running this if using a production Kerberized cluster
 
 This is slow because the HDFS command startup is slow and is called once per file path
 
+Setting environment variable SKIP_ZERO_BYTE_FILES to any value will skip files with zero bytes to save time since
+they always return the same checksum anyway.
+
 Caveats:
 
 This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
