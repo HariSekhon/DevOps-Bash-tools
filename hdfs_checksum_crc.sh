@@ -35,7 +35,7 @@ they always return the same checksum anyway.
 Caveats:
 
 This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
-If you want to skip zero byte files, set environment variable \$SKIP_ZERO_BYTE_FILES
+If you want to skip zero byte files, set environment variable \$SKIP_ZERO_BYTE_FILES to any value
 
 Tried this because Snakebite python library doesn't support checksum extraction
 
