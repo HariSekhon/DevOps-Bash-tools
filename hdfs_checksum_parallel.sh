@@ -28,15 +28,14 @@ Capture stdout | sort > file.txt for comparisons
 Make sure to kinit before running this if using a production Kerberized cluster
 
 Setting environment variable SKIP_ZERO_BYTE_FILES to any value will skip files with zero bytes to save time since
-they always return the same anyway:   MD5-of-0MD5-of-0CRC32   00000000000000000000000070bc8f4b72a86921468bf8e8441dce5
+they always return the same checksum anyway:
+
+MD5-of-0MD5-of-0CRC32   00000000000000000000000070bc8f4b72a86921468bf8e8441dce5
 
 Caveats:
 
-This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well which
-is why this launches several parallel dfs commands. Configure parallelism via environment variable PARALLELISM=N
-where N must be an integer
-
-If you want to skip zero byte files, set environment variable SKIP_ZERO_BYTE_FILES to any value
+HDFS command startup is slow and is called once per file so I work around this by launching several dfs commands
+in parallel. Configure parallelism via environment variable PARALLELISM=N where N must be an integer
 
 Tried this because Snakebite python library doesn't support checksum extraction
 
