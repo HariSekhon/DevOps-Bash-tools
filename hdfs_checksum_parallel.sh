@@ -55,7 +55,7 @@ fi
 #PARALLELISM="${PARALELLISM:-$(grep -c '^processor[[:space:]]*:' /proc/cpuinfo)}"
 # don't use all cores because if running on a datanode it might have dozens of cores and overwhelm namenode
 # cap at 10 unless explicitly set
-export PARALLELISM="${PARALELLISM:-10}"
+export PARALLELISM="${PARALLELISM:-10}"
 
 if ! [[ "$PARALLELISM" =~ ^[[:digit:]]+$ ]]; then
     echo "PARALLELISM must be set to an integer!"
