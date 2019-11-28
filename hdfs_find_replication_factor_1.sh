@@ -56,7 +56,6 @@ skip_zero_byte_files(){
 
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
-awk '{ if($2=1) print }' |
 skip_zero_byte_files |
-awk '{ $1=$2=$3=$4=$5=$6=$7=""; print }' |
+awk '{ if($2=1) { $1=$2=$3=$4=$5=$6=$7=""; print } }' |
 sed 's/^[[:space:]]*//'
