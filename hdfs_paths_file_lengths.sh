@@ -42,6 +42,6 @@ fi
 
 hdfs dfs -ls -R "$@" |
 grep -v '^d' |
-awk '{$1=$2=$3=$4=$6=$7="";print}' |
+awk '{ $1=$2=$3=$4=$6=$7=""; print }' |
 #sed 's/^[[:space:]]*//'
 column -t
