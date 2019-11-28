@@ -258,9 +258,14 @@ k8s_get_api(){
     echo
 }
 
-# to kubectl apply manifests to both clusters for multi-cluster deployments
-kapplyclusters(){
+# run kubectl commands against multiple clusters
+kclusters(){
     for context in $(kubectl config get-contexts -o=name --kubeconfig clusters.yaml); do
-        kubectl --kubeconfig clusters.yaml --context="$context" apply -f "@" # eg. manifests/
+        kubectl "$@" --kubeconfig clusters.yaml --context="$context"
     done
+}
+
+# to kubectl apply manifests to both clusters for multi-cluster deployments
+kclustersapply(){
+    kclusters apply -f "$@"  # eg. manifests
 }
