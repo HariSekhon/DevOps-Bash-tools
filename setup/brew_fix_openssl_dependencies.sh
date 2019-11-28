@@ -29,14 +29,18 @@ fi
 if type -P brew &>/dev/null; then
     # grep -q causes a pipefail via early pipe close which exits the script early without fixing
     if python -c 'import hashlib' 2>&1 | tee /dev/stderr | grep 'unsupported hash type'; then
-        echo "Attempting to upgrade Python to fix OpenSSL linkage break"
+        echo "Attempting to upgrade homebrew packages dependending on upgraded OpenSSL linkage break"
         if python -V 2>&1 | tee /dev/stderr | grep '^Python 2'; then
-            echo "upgrading python@2 and wget"
-            brew upgrade python@2 wget
+            echo "upgrading python@2"
+            brew upgrade python@2
         else
-            echo "upgrading python and wget"
-            brew upgrade python wget
+            echo "upgrading python"
+            brew upgrade python
         fi
+        dependent_packages="$(brew deps --installed | awk -F: '/:.*openssl/{print $1}')"
+        # want package splitting
+        # shellcheck disable=SC2086
+        brew upgrade $dependent_packages
     fi
 else
     echo "Not a HomeBrew system, aborting..."
