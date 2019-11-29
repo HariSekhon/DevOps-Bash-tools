@@ -133,6 +133,7 @@ if has("autocmd")
     au BufNew,BufRead *.yaml set sts=2 sw=2 ts=2
 
     au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  set filetype=groovy
+    au BufNew,BufRead *.jsh  set filetype=java
 
     "au BufNew,BufRead *.rb set filetype=ruby sts=2 sw=2 ts=2
 
