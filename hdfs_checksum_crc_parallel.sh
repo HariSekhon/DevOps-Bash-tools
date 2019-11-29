@@ -35,7 +35,15 @@ Caveats:
 HDFS command startup is slow and is called once per file so I work around this by launching several dfs commands
 in parallel. Configure parallelism via environment variable PARALLELISM=N where N must be an integer
 
-Tried this because Snakebite python library doesn't support checksum extraction
+See Also:
+
+hadoop_hdfs_files_native_checksums.jy
+
+from the adjacent GitHub rep (outputs MD5-of-MD5 not CRC32 though):
+
+https://github.com/HariSekhon/DevOps-Python-tools
+
+I would have written this version in Python but the Snakebite library doesn't support checksum extraction
 
 
 usage: ${0##*/} <file_or_directory_paths>

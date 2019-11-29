@@ -34,7 +34,15 @@ Caveats:
 This is slow because the HDFS command startup is slow and is called once per file path so doesn't scale well
 If you want to skip zero byte files, set environment variable \$SKIP_ZERO_BYTE_FILES
 
-Tried this because Snakebite python library doesn't support checksum extraction
+See Also:
+
+hadoop_hdfs_files_native_checksums.jy
+
+from the adjacent GitHub repo:
+
+https://github.com/HariSekhon/DevOps-Python-tools
+
+I would have written this version in Python but the Snakebite library doesn't support checksum extraction
 
 
 usage: ${0##*/} <file_or_directory_paths>
