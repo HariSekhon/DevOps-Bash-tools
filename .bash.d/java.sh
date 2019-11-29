@@ -23,7 +23,10 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
-export CLASSPATH="$CLASSPATH:$HOME/bin/java"
+# shellcheck disable=SC1090
+type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+
+add_PATH CLASSPATH "$HOME/bin/java"
 
 if isMac; then
     mac_export_java_home(){
