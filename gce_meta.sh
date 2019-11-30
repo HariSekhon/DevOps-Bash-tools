@@ -27,11 +27,8 @@ eg. ${0##*/} instance/scheduling/preemptible
     exit 3
 }
 
-if [ $# -ne 1 ]; then
-    usage
-fi
-
-if [[ "$1" =~ -.* ]]; then
+if [ $# -ne 1 ] ||
+   [[ "$1" =~ -.* ]]; then
     usage
 fi
 
