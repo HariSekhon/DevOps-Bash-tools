@@ -35,11 +35,8 @@ See also ec2-metadata script which is a more complete shell script
     exit 3
 }
 
-#if [ $# -ne 1 ]; then
-#    usage
-#fi
-
-if [[ "${1:-}" =~ -.* ]]; then
+if [ $# -ne 1 ] ||
+   [[ "${1:-}" =~ -.* ]]; then
     usage
 fi
 
