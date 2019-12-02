@@ -18,7 +18,7 @@ set -euo pipefail
 
 usage(){
     echo "
-Simple script to decommission an Elasticsearch node from the cluster
+Simple script to trigger a background decommission of an Elasticsearch node from the local cluster
 
 Defaults to connecting to a Elasticsearch via node localhost:9200
 set \$ELASTICSEARCH_HOST and \$ELASTICSEARCH_PORT to override this
