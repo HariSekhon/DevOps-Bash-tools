@@ -112,6 +112,11 @@ endef
 export MAKEFILE_USAGE_COMMON
 export MAKEFILE_USAGE
 
+# doesn't seem to work
+#.DEFAULT: build
+#	@echo running default
+#	$(MAKE) build
+
 .PHONY: default
 default:
 	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
@@ -130,6 +135,14 @@ help:
 .PHONY: usage
 usage: help
 	@:
+
+# catchall - any unrecognized target will print usage
+%::
+	@{ \
+	echo Unrecognized option $@; \
+	echo; \
+	$(MAKE) usage; \
+	} | less -RFXig
 
 .PHONY: quick
 quick:
