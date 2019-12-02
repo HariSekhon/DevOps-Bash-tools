@@ -49,6 +49,8 @@ if [ -n "${ELASTICSEARCH_SSL:-}" ]; then
 fi
 curl_opts="${ELASTICSEARCH_OPTS:-}"
 
+# could make this better by checking octets etc like my Python / Perl libraries
+# but don't want this script to get too heavy with dependencies
 if ! [[ "$node_ip" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
     echo "Invalid node IP given: $node_ip"
     exit 1
