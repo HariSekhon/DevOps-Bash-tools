@@ -49,6 +49,11 @@ if [ -n "${ELASTICSEARCH_SSL:-}" ]; then
 fi
 curl_opts="${ELASTICSEARCH_OPTS:-}"
 
+if ! [[ "$node_ip" =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; then
+    echo "Invalid node IP given: $node_ip"
+    exit 1
+fi
+
 # want curl opts split
 # shellcheck disable=SC2086
 if curl -X PUT -k $curl_opts
