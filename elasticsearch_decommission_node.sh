@@ -20,7 +20,7 @@ usage(){
     echo "
 Simple script to trigger a background decommission of an Elasticsearch node from the local cluster
 
-Defaults to connecting to a Elasticsearch via node localhost:9200
+Defaults to connecting to the Elasticsearch cluster via the node localhost:9200
 set \$ELASTICSEARCH_HOST and \$ELASTICSEARCH_PORT to override this
 set \$ELASTICSEARCH_SSL to any value to enable SSL (ignores ssl validation as this is usually self-signed)
 set \$ELASTICSEARCH_OPTS='-u : --negotiate' to use Kerberos ticket in local environment
