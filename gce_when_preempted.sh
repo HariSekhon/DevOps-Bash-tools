@@ -48,6 +48,11 @@ if [[ "${1:-}" =~ -.* ]]; then
     usage
 fi
 
+if ! curl -s --connect-timeout 2 -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/" &>/dev/null; then
+    echo "This script must be run from within a GCE instance as that is the only place the GCP GCE Metadata API is available"
+    exit 2
+fi
+
 output="$(curl -s -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/preempted?wait_for_change=true")"
 # shellcheck disable=SC2181
 if [ $? -eq 0 ]; then
