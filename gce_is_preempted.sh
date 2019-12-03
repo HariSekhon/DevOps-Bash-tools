@@ -42,7 +42,7 @@ fi
 #    exit 2
 #fi
 
-if output="$(curl -s --connect-timeout 5 -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/preempted")"; then
+if output="$(curl -s -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/preempted")"; then
     if grep -q TRUE <<< "$output"; then
         echo "preempted"
         exit 0
