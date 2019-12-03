@@ -18,9 +18,9 @@ set -euo pipefail
 
 usage(){
     echo "
-Waits and watches GCE Metadata API for the preemption trigger before continuing to execute it's arguments
+Waits and watches GCE Metadata API for the preemption trigger before continuing to execute its arguments
 
-Alternative to shutdown scripts if you want to interactively set up a CLI trigger on pre-emption
+Alternative to shutdown scripts or if you want to set up an interactive CLI latch on preemption
 
 https://cloud.google.com/compute/docs/shutdownscript
 
