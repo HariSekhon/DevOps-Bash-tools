@@ -564,6 +564,10 @@ github-url:
 readme:
 	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
 
+.PHONY: issues
+issues:
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/issues"
+
 .PHONY: github
 dockerhub:
 	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://hub.docker.com/u/harisekhon"
