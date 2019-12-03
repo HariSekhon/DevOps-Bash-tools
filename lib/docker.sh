@@ -62,7 +62,7 @@ check_docker_available(){
     export DOCKER_CONTAINER="${COMPOSE_PROJECT_NAME:-docker}"
     # for Docker Machine but not Docker for Mac
     # nagios-plugins -> nagiosplugins
-    export DOCKER_CONTAINER="${DOCKER_CONTAINER//-}"
+    #export DOCKER_CONTAINER="${DOCKER_CONTAINER//-}"
     export DOCKER_CONTAINER="${DOCKER_CONTAINER}_${DOCKER_SERVICE}_1"
     # srcdir is defined in client scripts
     # shellcheck disable=SC2154
