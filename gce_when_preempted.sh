@@ -50,14 +50,12 @@ fi
 
 url="http://metadata.google.internal/computeMetadata/v1"
 
-if ! curl -s -H "Metadata-Flavor: Google" "$url/" &>/dev/null; then
-    echo "This script must be run from within a GCE instance as that is the only place the GCP GCE Metadata API is available"
-    exit 2
-fi
+#if ! curl -s -H "Metadata-Flavor: Google" "$url/" &>/dev/null; then
+#    echo "This script must be run from within a GCE instance as that is the only place the GCP GCE Metadata API is available"
+#    exit 2
+#fi
 
-output="$(curl -s -H "Metadata-Flavor: Google" "$url/instance/preempted?wait_for_change=true")"
-# shellcheck disable=SC2181
-if [ $? -eq 0 ]; then
+if output="$(curl -s -H "Metadata-Flavor: Google" "$url/instance/preempted?wait_for_change=true")"; then
     if grep -q TRUE <<< "$output"; then
         eval "$@"
     else
