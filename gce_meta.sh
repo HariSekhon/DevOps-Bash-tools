@@ -35,3 +35,6 @@ if [ $# -gt 1 ] ||
 fi
 
 curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/${1:-}"
+
+# above doesn't output a trailing newline, when using in shell we usually want this
+echo
