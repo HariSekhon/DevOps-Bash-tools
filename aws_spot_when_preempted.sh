@@ -41,6 +41,8 @@ Inspired by whenup() / whendown() for hosts and whendone() for processes from in
 
 You can trigger this as part of rc.local or similar on an EC2 Spot instance and when it gets the termination notice it'll execute all of its arguments as commands
 
+For GCP there is a similar adjacent script gce_when_preempted.sh
+
 EOF
     exit 3
 }
