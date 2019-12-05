@@ -38,6 +38,9 @@ if [ -n "$*" ]; then
     requirements_files="$*"
 else
     requirements_files="$(find . -maxdepth 2 -name requirements.txt)"
+    if [ -z "$requirements_files" ]; then
+        usage "No requirements files found, please specify explicit path to requirements.txt"
+    fi
 fi
 
 # need word splitting for different files
