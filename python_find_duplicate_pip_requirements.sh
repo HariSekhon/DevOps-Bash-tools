@@ -37,7 +37,7 @@ found=0
 if [ -n "$*" ]; then
     requirements_files="$*"
 else
-    requirements_files="$(find . -name requirements.txt)"
+    requirements_files="$(find . -maxdepth 2 -name requirements.txt)"
 fi
 
 # need word splitting for different files
