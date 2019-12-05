@@ -18,11 +18,12 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+echo "output will be formatted in to columns at end" >&2
+echo "getting user list" >&2
 aws iam list-users |
 jq -r '.Users[].UserName' |
 while read -r username; do
     echo "querying user $username" >&2
-    echo -n "$username "
     aws iam list-access-keys --user-name "$username" |
     jq -r '.AccessKeyMetadata[] | [.UserName, .Status, .CreateDate] | @tsv'
 done |
