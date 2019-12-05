@@ -17,13 +17,13 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
-usage_args="<files>"
+usage_args="[<pip_requirements_files>]"
 
 for x in "$@"; do
     case "$x" in
@@ -34,18 +34,27 @@ done
 
 found=0
 
+if [ -n "$*" ]; then
+    requirements_files="$*"
+else
+    requirements_files="$(find . -name requirements.txt)"
+fi
+
+# need word splitting for different files
+# shellcheck disable=SC2086
+sed 's/#.*//;
+     s/[<>=].*//;
+     s/^[[:space:]]*//;
+     s/[[:space:]]*$//;
+     /^[[:space:]]*$/d;' $requirements_files |
+sort |
+uniq -d |
 while read -r module ; do
-    grep "^${module}[<>=]" "$@"
+    # need word splitting for different files
+    # shellcheck disable=SC2086
+    grep "^${module}[<>=]" $requirements_files
     ((found + 1))
-done < <(
-    sed 's/#.*//;
-         s/[<>=].*//;
-         s/^[[:space:]]*//;
-         s/[[:space:]]*$//;
-         /^[[:space:]]*$/d;' "$@" |
-    sort |
-    uniq -d
-)
+done
 
 if [ $found -gt 0 ]; then
     exit 1
