@@ -22,7 +22,8 @@ if [ -z "${HIVESERVER2_HOST:-}" ]; then
 fi
 
 ssl=""
-if [ -n "${HIVESERVER2_SSL:-}" ]; then
+if [ -n "${HIVESERVER2_SSL:-}" ] ||
+   grep -A1 'hive.server2.use.SSL' /etc/hive/conf/hive-site.xml 2>/dev/null | grep -q true; then
     ssl=";ssl=true"
 fi
 
