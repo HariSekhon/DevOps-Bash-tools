@@ -16,6 +16,7 @@
 bash
 curl
 #direnv
+gcc
 git
 golang
 jq
@@ -26,4 +27,5 @@ python
 python-pip
 shellcheck
 wget
+which
 unzip
