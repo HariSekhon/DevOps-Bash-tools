@@ -111,6 +111,9 @@ if has("autocmd")
     " on write - auto-strip trailing whitespace on lines and remove trailing whitespace only lines end at of file
     autocmd BufWritePre * %s/\s\+$//e | %s#\($\n\s*\)\+\%$##e
 
+    " doubles up with nmap ;l
+    "au BufWritePost *.tf,*.tfvars :!clear; cd "`dirname "%"`" && terraform fmt -diff; terraform validate
+
     " highlight trailing whitespace
     " XXX: doesn't work
     "autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
@@ -170,6 +173,7 @@ if has("autocmd")
     au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py "%"<CR>
     au BufNew,BufRead *.md         nmap ;l :w<CR>:!clear; mdl "%" \| more -R<CR>
     au BufNew,BufRead *.scala      nmap ;l :w<CR>:!clear; scalastyle -c "$bash_tools/scalastyle_config.xml" "%" \| more -R<CR>
+    au BufNew,BufRead *.tf,*.tfvars nmap ;l :w<CR>:!clear; cd "`dirname "%"`" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
     au BufNew,BufRead *.toml       nmap ;l :w<CR>:!clear; validate_toml.py "%"<CR>
     au BufNew,BufRead *.xml        nmap ;l :w<CR>:!clear; validate_xml.py "%"<CR>
     " TODO: needs fix to allow multiple inline yaml docs in 1 file

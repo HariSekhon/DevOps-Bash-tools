@@ -18,7 +18,7 @@ set -euo pipefail
 
 usage(){
     echo "
-AWS Metadata API query shortcut
+AWS EC2 Metadata API query shortcut
 
 ${0##*/} <resource>
 

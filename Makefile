@@ -49,7 +49,7 @@ define MAKEFILE_USAGE
 
     make aws					installs AWS CLI
     make gcp					installs GCloud SDK
-	make gcp-shell				for setting up GCP Cloud Shell: installs core packages and links configs
+	make gcp-shell				sets up GCP Cloud Shell: installs core packages and links configs
 endef
 
 .PHONY: build
@@ -139,7 +139,7 @@ python-desktop: system-packages
 
 .PHONY: aws
 aws: system-packages
-	@./python_pip_install_if_absent.sh awscli
+	@setup/install_aws_cli.sh
 
 .PHONY: gcp
 gcp: system-packages

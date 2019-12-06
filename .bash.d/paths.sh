@@ -78,6 +78,21 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+# HomeBrew on Linux
+if [ -d ~/.linuxbrew/bin ]; then
+    add_PATH ~/.linuxbrew/bin
+fi
+
+# AWS CLI Linux install location
+if [ -d ~/.local/bin ]; then
+    add_PATH ~/.local/bin
+fi
+
+# AWS SAM CLI Linux install location
+if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
+    add_PATH "/home/linuxbrew/.linuxbrew/bin"
+fi
+
 # do the same with MANPATH
 #if [ -d ~/man ]; then
 #    MANPATH=~/man${MANPATH:-:}
@@ -174,6 +189,11 @@ unset ruby_bins_newest
 
 alias lsrubybin='ls -d ~/.gem/ruby/*/bin/* 2>/dev/null'
 alias llrubybin='ls -ld ~/.gem/ruby/*/bin/* 2>/dev/null'
+
+# HomeBrew install on Linux (for AWS SAM CLI)
+if [ -d ~/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/current/bin ]; then
+    add_PATH ~/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/current/bin
+fi
 
 
 # ============================================================================ #

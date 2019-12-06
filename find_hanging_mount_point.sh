@@ -20,8 +20,15 @@ set -euo pipefail
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage(){
-    echo "${0##*/} [ --include <posix_regex> ] [ --exclude <posix_regex> ]
-"
+    cat <<EOF
+
+Script to find a hanging mount point by iterating over each of them in turn, printing the name before reading from them
+
+The hanging mount point will be the one you get stuck on, so you can debug that one (usually an NFS mount point)
+
+usage:  ${0##*/} [ --include <posix_regex> ] [ --exclude <posix_regex> ]
+
+EOF
     exit 3
 }
 

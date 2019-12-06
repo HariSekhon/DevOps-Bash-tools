@@ -20,6 +20,8 @@ usage(){
     echo "
 Simple query wrapper to GCE's Metadata API
 
+Lists resources if no argument given
+
 ${0##*/} <resource>
 
 eg. ${0##*/} instance/scheduling/preemptible
@@ -27,9 +29,12 @@ eg. ${0##*/} instance/scheduling/preemptible
     exit 3
 }
 
-if [ $# -ne 1 ] ||
-   [[ "$1" =~ -.* ]]; then
+if [ $# -gt 1 ] ||
+   [[ "${1:-}" =~ -.* ]]; then
     usage
 fi
 
-curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/$1"
+curl -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/${1:-}"
+
+# above doesn't output a trailing newline, when using in shell we usually want this
+echo

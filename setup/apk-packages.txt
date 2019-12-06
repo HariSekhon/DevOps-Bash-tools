@@ -15,6 +15,7 @@
 
 bash
 curl
+gcc
 git
 go
 jq
@@ -24,4 +25,5 @@ perl
 python
 py-pip
 wget
+which
 unzip
