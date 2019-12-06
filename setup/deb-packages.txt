@@ -27,4 +27,5 @@ python
 python-pip
 python-setuptools # needed by 'pip install awscli'
 wget
+which
 unzip
