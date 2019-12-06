@@ -139,7 +139,7 @@ python-desktop: system-packages
 
 .PHONY: aws
 aws: system-packages
-	@./python_pip_install_if_absent.sh awscli
+	@setup/install_aws_cli.sh
 
 .PHONY: gcp
 gcp: system-packages
