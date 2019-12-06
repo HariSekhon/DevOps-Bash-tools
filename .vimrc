@@ -111,7 +111,8 @@ if has("autocmd")
     " on write - auto-strip trailing whitespace on lines and remove trailing whitespace only lines end at of file
     autocmd BufWritePre * %s/\s\+$//e | %s#\($\n\s*\)\+\%$##e
 
-    au BufWritePost *.tf,*.tfvars :!clear; cd "`dirname "%"`" && { terraform fmt -diff; terraform validate; } | more -R
+    " doubles up with nmap ;l
+    "au BufWritePost *.tf,*.tfvars :!clear; cd "`dirname "%"`" && terraform fmt -diff; terraform validate
 
     " highlight trailing whitespace
     " XXX: doesn't work
