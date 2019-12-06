@@ -78,6 +78,11 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+# HomeBrew on Linux
+if [ -d ~/.linuxbrew/bin ]; then
+    add_PATH ~/.linuxbrew/bin
+fi
+
 # do the same with MANPATH
 #if [ -d ~/man ]; then
 #    MANPATH=~/man${MANPATH:-:}
