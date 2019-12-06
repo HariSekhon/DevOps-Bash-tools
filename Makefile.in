@@ -135,7 +135,7 @@ help:
 
 .PHONY: usage
 usage: help
-	@:
+	@#:
 
 # catchall - any unrecognized target will print usage
 %::
