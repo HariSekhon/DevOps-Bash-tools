@@ -83,9 +83,14 @@ if [ -d ~/.linuxbrew/bin ]; then
     add_PATH ~/.linuxbrew/bin
 fi
 
-# AWS SAM CLI install location
-if [ -d "/home/homebrew/.homebrew/bin" ]; then
-    add_PATH "/home/homebrew/.homebrew/bin"
+# AWS CLI Linux install location
+if [ -d ~/.local/bin ]; then
+    add_PATH ~/.local/bin
+fi
+
+# AWS SAM CLI Linux install location
+if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
+    add_PATH "/home/linuxbrew/.linuxbrew/bin"
 fi
 
 # do the same with MANPATH
