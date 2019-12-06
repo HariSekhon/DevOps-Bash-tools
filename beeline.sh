@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Script to more easily connect to HiveServer2 without having to specify the big connection string
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
