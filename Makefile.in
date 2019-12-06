@@ -130,7 +130,7 @@ main:
 help:
 	@# this doesn't work because the macro insertion of a multiline literal breaks the line-based make format so we have to export to an env var instead of using natively
 	@# even the unescaped macro literal in a commented breaks make
-	@echo "$$MAKEFILE_USAGE_COMMON $$MAKEFILE_USAGE" | less -RFXig
+	@echo "$$MAKEFILE_USAGE_COMMON $$MAKEFILE_USAGE" # | less -RFXig # don't use less it will make target tests hang
 	@exit 3
 
 .PHONY: usage
@@ -139,11 +139,10 @@ usage: help
 
 # catchall - any unrecognized target will print usage
 %::
-	@{ \
-	echo Unrecognized option $@; \
+	@# don't use less, it will make target tests hang
+	@echo Unrecognized option $@; \
 	echo; \
-	$(MAKE) usage; \
-	} | less -RFXig
+	$(MAKE) usage;
 
 .PHONY: quick
 quick:
