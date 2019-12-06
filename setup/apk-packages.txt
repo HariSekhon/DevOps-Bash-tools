@@ -25,4 +25,5 @@ perl
 python
 py-pip
 wget
+which
 unzip
