@@ -175,6 +175,11 @@ unset ruby_bins_newest
 alias lsrubybin='ls -d ~/.gem/ruby/*/bin/* 2>/dev/null'
 alias llrubybin='ls -ld ~/.gem/ruby/*/bin/* 2>/dev/null'
 
+# HomeBrew install on Linux (for AWS SAM CLI)
+if [ -d ~/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/current/bin ]; then
+    add_PATH ~/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/current/bin
+fi
+
 
 # ============================================================================ #
 #                                  G o l a n g
