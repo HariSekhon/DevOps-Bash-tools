@@ -49,9 +49,12 @@ echo
 #    export PATH="$PATH:$HOME/.linuxbrew/bin"
 #fi
 
-if [ -d ~/.linuxbrew/bin ]; then
-    export PATH="$PATH:"~/.linuxbrew/bin
-fi
+# root installs to first one, user installs to the latter
+for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
+    if [ -d "$x" ]; then
+        export PATH="$PATH:$x"
+    fi
+done
 
 brew tap aws/tap
 echo
