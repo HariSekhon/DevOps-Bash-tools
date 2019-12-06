@@ -131,6 +131,7 @@ help:
 	@# this doesn't work because the macro insertion of a multiline literal breaks the line-based make format so we have to export to an env var instead of using natively
 	@# even the unescaped macro literal in a commented breaks make
 	@echo "$$MAKEFILE_USAGE_COMMON $$MAKEFILE_USAGE" | less -RFXig
+	@exit 3
 
 .PHONY: usage
 usage: help
