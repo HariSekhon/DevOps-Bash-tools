@@ -34,20 +34,12 @@ fi
 echo "Installing AWS CLI & SAM CLI"
 echo
 
+echo "Installing AWS CLI"
 PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
 echo
 
 "$srcdir/install_homebrew.sh"
 echo
-
-#if [ -z "${HOME:-}" ]; then
-#    echo "\$HOME is unset, must set to run this"
-#    exit 1
-#fi
-
-#if [ -d "$HOME/.linuxbrew/bin" ]; then
-#    export PATH="$PATH:$HOME/.linuxbrew/bin"
-#fi
 
 # root installs to first one, user installs to the latter
 for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
@@ -56,7 +48,20 @@ for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
     fi
 done
 
+echo "Installing AWS SAM CLI"
 brew tap aws/tap
 echo
-
 brew install aws-sam-cli
+
+cat <<EOF
+
+Done
+
+AWS CLI will be installed to ~/.local/bin/aws on Linux or ~/Library/Python/2.7/bin on Mac
+
+AWS SAM CLI command will be installed to the standard HomeBrew directory
+
+On Mac that will be /usr/local/bin/sam
+On Linux it will be /home/linuxbrew/.linuxbrew/bin for root or ~/.linuxbrew/bin for users
+
+EOF
