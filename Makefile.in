@@ -137,12 +137,13 @@ help:
 usage: help
 	@#:
 
+# clever but breaks 'make -n <target>' tests because the exit 3 doesn't actually get called and leads make to think there is a matching target, which then fail to execute
 # catchall - any unrecognized target will print usage
-%::
-	@# don't use less, it will make target tests hang
-	@echo Unrecognized option $@; \
-	echo; \
-	$(MAKE) usage;
+#%::
+#	@# don't use less, it will make target tests hang
+#	@echo Unrecognized option $@; \
+#	echo; \
+#	$(MAKE) usage;
 
 .PHONY: quick
 quick:
