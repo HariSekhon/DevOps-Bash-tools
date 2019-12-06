@@ -13,13 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Installs AWS CLI
-#
-# https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
-#
-# Prompts for sudo if using OS system packages
-#
-# If falling back to Python PIP then if running as root installs to System, otherwise installs to local --user library
+# Installs AWS CLI & SAM CLI
 
 # You might need to first:
 #
@@ -32,14 +26,12 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-if [ -z "${UPDATE_ANSIBLE:-}" ]; then
-    if type -P aws &>/dev/null && type -P sam &>/dev/null; then
-        echo "AWS CLI & SAMalready installed"
-        exit 0
-    fi
+if type -P aws &>/dev/null && type -P sam &>/dev/null; then
+    echo "AWS CLI & SAM already installed"
+    exit 0
 fi
 
-echo "Installing AWS CLI"
+echo "Installing AWS CLI & SAM CLI"
 echo
 
 PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
