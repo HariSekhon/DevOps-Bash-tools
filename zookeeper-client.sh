@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Script to more easily connect to ZooKeeper without having to look up the ZooKeeper addresses
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
