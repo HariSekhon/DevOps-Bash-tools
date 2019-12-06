@@ -15,6 +15,7 @@
 
 bash
 curl
+gcc
 git
 go
 jq
