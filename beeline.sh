@@ -30,4 +30,7 @@ if [ -n "${HIVESERVER2_SSL:-}" ] ||
     ssl=";ssl=true"
 fi
 
-beeline -u "jdbc:hive2://$HIVESERVER2_HOST:10000/default;principal=hive/$HIVESERVER2_HOST@${HIVESERVER2_HOST#*.}$ssl" "$@"
+realm="${HIVESERVER2_HOST#*.}"
+
+#beeline -u "jdbc:hive2://$HIVESERVER2_HOST:10000/default;principal=hive/$HIVESERVER2_HOST@${realm}${ssl}" "$@"
+beeline -u "jdbc:hive2://$HIVESERVER2_HOST:10000/default;principal=hive/_HOST@${realm}${ssl}" "$@"
