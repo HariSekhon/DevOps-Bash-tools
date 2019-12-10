@@ -28,6 +28,13 @@ if [ -n "${HIVESERVER2_SSL:-}" ] ||
    grep -A1 'hive.server2.use.SSL' /etc/hive/conf/hive-site.xml 2>/dev/null |
    grep -q true; then
     ssl=";ssl=true"
+    # works without this but enable if you need
+    #set +o pipefail
+    #trust_file="$(find /opt/cloudera/security/jks -maxdepth 1 -name '*-trust.jks' 2>/dev/null | head -n1)"
+    #set -o pipefail
+    #if [ -f "$trust_file" ]; then
+    #    ssl="$ssl;sslTrustStore=$trust_file"
+    #fi
 fi
 
 realm="${HIVESERVER2_HOST#*.}"
