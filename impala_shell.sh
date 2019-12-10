@@ -43,7 +43,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-opts=""
+opts="${IMPALA_OPTS:-}"
 
 if grep -A 1 hadoop.security.authentication /etc/hadoop/conf/core-site.xml  | grep -q kerberos; then
     opts="$opts -k"
