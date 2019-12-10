@@ -15,7 +15,10 @@
 
 # Script to more easily connect to HiveServer2 without having to specify the big connection string
 
-# useful options for scripting:     --silent=true --outputformat=tsv2
+# useful options for scripting:
+#
+#   --silent=true
+#   --outputformat=tsv2     (tsv is deprecated and single quotes results, tsv2 is recommended and cleaner)
 #
 # list all databases
 #
@@ -24,8 +27,6 @@
 # list all tables in all databases
 #
 #   ./beeline.sh --silent=true --outputformat=tsv2 -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh --silent=true --outputformat=tsv2 -e "show tables from $db" | sed "s/^/$db./"; done
-#
-# # tsv is deprecated and single quotes results, tsv2 is recommended and cleaner
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
