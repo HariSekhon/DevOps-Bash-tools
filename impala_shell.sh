@@ -26,6 +26,7 @@
 #   -q --query
 #   -B --delimited
 #   --output_delimiter=\t   # default
+#   --quiet
 #
 # list all databases:
 #
@@ -37,7 +38,7 @@
 #
 # row counts for all tables in all databases:
 #
-#   ./impala_shell.sh -Bq 'show databases' | while read db rest; do ./impala_shell.sh -Bq "use $db; show tables" | while read table; do printf "%s\t" "$db.$table"; ./impala_shell.sh -Bq "use $db; SELECT COUNT(*) FROM $table"; done; done > row_counts.tsv
+#   ./impala_shell.sh --quiet -Bq 'show databases' | while read db rest; do ./impala_shell.sh --quiet -Bq "use $db; show tables" | while read table; do printf "%s\t" "$db.$table"; ./impala_shell.sh --quiet -Bq "use $db; SELECT COUNT(*) FROM $table"; done; done > row_counts.tsv
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
