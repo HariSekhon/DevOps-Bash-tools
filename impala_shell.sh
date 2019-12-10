@@ -15,6 +15,12 @@
 
 # Script to more easily connect to HiveServer2 without having to specify the big connection string
 
+# If you get an error such as:
+#
+# Error connecting: TTransportException, TSocket read 0 bytes
+#
+# then check if you need to add --ssl to the command line (or export IMPALA_SSL=1 to do this automatically, eg. put in .bashrc or similar)
+
 # useful options for scripting:
 #
 #   -q --query
