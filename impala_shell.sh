@@ -15,6 +15,8 @@
 
 # Script to more easily connect to Impala daemon without having to find an impalad and specify so many redundant options like -k for kerberos
 #
+# Tested on Impala 2.7.0 on CHD 5.10
+#
 # See also:
 #
 #   find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
