@@ -13,7 +13,9 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to HiveServer2 without having to specify the big connection string
+# Script to more easily connect to HiveServer2 without having to specify the big JDBC connection string and all options like kerberos principal, ssl etc
+#
+# Tested on Hive 1.1.0 on CHD 5.10
 
 # useful options for scripting:
 #
