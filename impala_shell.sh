@@ -13,7 +13,12 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to HiveServer2 without having to specify the big connection string
+# Script to more easily connect to Impala daemon without having to find an impalad and specify so many redundant options like -k for kerberos
+#
+# See also:
+#
+#   find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
+#   HAProxy Configs for Impala and many other technologies - https://github.com/harisekhon/haproxy-configs
 
 # If you get an error such as:
 #
