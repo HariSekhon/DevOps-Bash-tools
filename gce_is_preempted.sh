@@ -33,7 +33,7 @@ ${0##*/}
     exit 3
 }
 
-if [[ "${1:-}" =~ -.* ]]; then
+if [ $# -ne 0 ]; then
     usage
 fi
 

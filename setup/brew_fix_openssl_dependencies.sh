@@ -38,7 +38,8 @@ if type -P brew &>/dev/null; then
             brew upgrade python
         fi
         echo "finding packages dependent on openssl"
-        dependent_packages="$(brew deps --installed | awk -F: '/:.*openssl/{print $1}')"
+        #dependent_packages="$(brew deps --installed | awk -F: '/:.*openssl/{print $1}')"
+        dependent_packages="$(brew uses openssl --installed)"
         # trick to flatten cheaply
         # shellcheck disable=SC2086
         echo "upgrading packages dependent on openssl:  " $dependent_packages
