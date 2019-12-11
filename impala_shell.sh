@@ -20,7 +20,9 @@
 # See also:
 #
 #   find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
+#
 #   HAProxy Configs for Impala and many other technologies - https://github.com/harisekhon/haproxy-configs
+#
 
 # If you get an error such as:
 #
