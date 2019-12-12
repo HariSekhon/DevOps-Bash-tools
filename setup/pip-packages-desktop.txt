@@ -18,8 +18,10 @@
 
 ansible-lint
 autopep8
+aws-shell
 awscli
 beautifulsoup4
+cfn-lint
 flake8
 kazoo
 nose
