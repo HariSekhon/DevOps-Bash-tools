@@ -24,3 +24,6 @@ rules:
 
   # > 80 char length? Really? I love the 80s but this one should have been left there...
   line-length: disable
+
+  # too many spaces after colons - meh - sometimes it's nice to align adjacent lines values
+  colons: disable
