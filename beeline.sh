@@ -28,7 +28,11 @@
 #
 # list all tables in all databases
 #
-#   ./beeline.sh --silent=true --outputformat=tsv2 -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh --silent=true --outputformat=tsv2 -e "show tables from $db" | sed "s/^/$db./"; done
+#   opts="--silent=true --outputformat=tsv2"; ./beeline.sh $opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh $opts -e "show tables from $db" | sed "s/^/$db./"; done
+#
+# row counts of all tables in all databases:
+#
+#   opts="--silent=true --outputformat=tsv2"; ./beeline.sh $opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh $opts -e "show tables from $db" | sed "s/^/$db./"; done | tail -n +2 | while read table; do printf "%s\t" "$table"; ./beeline.sh $opts -e "select count(*) from $table" | tail -n +2; done | tee row_counts_hive.tsv
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
