@@ -23,9 +23,14 @@ export XDG_CONFIG_HOME="$srcdir"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# could check *.json too but in DevOps Python Tools repo multirecord.json would break as this cannot handle multi-json record files
-#filelist="$(find "${1:-.}" -type f -name '*.y*ml' -o -type f -name '*.json' | sort)"
-filelist="$(find "${1:-.}" -type f -name '*.y*ml' | sort)"
+if [ $# -gt 0 ]; then
+    filelist="$*"
+else
+    # can point to test.json as an explicit argument
+    # could check *.json too but in DevOps Python Tools repo multirecord.json would break as this cannot handle multi-json record files
+    #filelist="$(find "${1:-.}" -type f -name '*.y*ml' -o -type f -name '*.json' | sort)"
+    filelist="$(find "${1:-.}" -type f -name '*.y*ml' | sort)"
+fi
 
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null ||
