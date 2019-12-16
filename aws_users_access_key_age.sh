@@ -14,6 +14,10 @@
 #
 
 # Quick script to dump all users access key status and age
+#
+# See also aws_users_access_key_age.py in DevOps Python Tools which is able to filter by age and status
+#
+# https://github.com/harisekhon/devops-python-tools
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
