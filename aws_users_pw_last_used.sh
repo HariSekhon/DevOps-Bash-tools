@@ -13,6 +13,12 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Lists AWS IAM users and the password last used date
+#
+# See also check_aws_users_password_last_used.py in the Advanced Nagios Plugins collection
+#
+# - https://github.com/harisekhon/nagios-plugins
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
