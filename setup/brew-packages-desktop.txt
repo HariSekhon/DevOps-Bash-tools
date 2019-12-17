@@ -95,6 +95,7 @@ perltidy
 pinentry
 pip-completion
 postgresql
+pstree
 pwgen
 #pygments  # in pip-packages-desktop.txt
 #python  # in brew-packages.txt
