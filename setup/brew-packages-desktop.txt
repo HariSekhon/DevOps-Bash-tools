@@ -104,7 +104,7 @@ rdesktop
 #readline  # in brew-packages.txt
 ruby  # Mac ruby is too old to install Travis CI
 ruby-completion
-# screen  # already present on Mac
+screen  # get newer version for -Q switch, will use different sockets directory
 s3cmd
 scalastyle
 snappy
