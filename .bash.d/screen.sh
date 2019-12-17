@@ -37,10 +37,34 @@ screencmd(){
 
 screensleep(){
     screen "$@"
-   sleep 0.1
+    sleep 0.1
 }
 
 alias scnum="screen -X number"
+
+#screen_get_pid(){
+#    # Mac ps doesn't have --noheaders
+#    ps -p "${PPID}" -o ppid | tail -n +2 | sed 's/[[:space:]]//g'
+#}
+#
+#screen_get_session_name(){
+#    local ppid
+#    ppid="$(screen_get_pid)"
+#    screen -ls | awk "/^[[:blank:]]$ppid/{print \$1}" | cut -d. -f2
+#}
+
+# needs modern version of screen for -Q switch - on Mac you must brew install screen to get recent version, then start new screen
+# when installing GNU screen you will lose Mac's screen since /usr/bin/screen uses a different /var/folders/...../.screen directory for screen sessions
+screen_renumber_windows(){
+    local windowlist
+    windowlist="$(screen -Q windows | grep -Eo '(^|[[:blank:]])[[:digit:]]+')"
+    i=0
+    for windownum in $windowlist; do
+        screen -p "$windownum" -X number "$i"
+        ((i+=1))
+    done
+}
+alias screnum=screen_renumber_windows
 
 screenbuf(){
     local tmp
