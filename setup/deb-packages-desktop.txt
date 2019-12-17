@@ -234,6 +234,7 @@ pinentry-gtk
 piozone
 pound
 psh
+psmisc  # for pstree
 pssh
 pv
 pwgen
