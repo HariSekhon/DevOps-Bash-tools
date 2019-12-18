@@ -32,10 +32,10 @@ set et      " expandtab
 set ic      " ignorecase
 set is      " incsearch
 "set list   " visually displays eol, tabs etc so you can always see them
-set ls=1    " laststatus. Status line 0=off, 1=multi-windows, 2=on
+set ls=1    " laststatus - Status line 0=off, 1=multi-windows, 2=on
 set listchars=tab:>-,eol:$,trail:.,extends:# " changes the list characters, makes tabs appear as >---
-set ml      " modeline.  respect the vim: stuff at the stop of files, often off for root
-set mls=15  " modelines. Controls how many lines to check for modeline, systems often set this to 0
+set ml      " modeline - respect the vim: stuff at the stop of files, often off for root
+set mls=15  " modelines - Controls how many lines to check for modeline, systems often set this to 0
 set nocp    " nocompatible
 set nofen   "nofoldenable
 set nohls   " nohlsearch
@@ -45,9 +45,10 @@ set sm      " showmatch. show matching brackets {}
 set scs     " smartcase. switch to case sensitive match if uppercase letter is detected
 set si      " smartindent
 set smd     " showmode
-set sta     " smarttab - make "tab" insert indents instead of tabs at beginning of line
-set sts=4   " softtabstop. changes tab key to 4 spaces wide. This is the one you need
-set sw=4    " shiftwidth. number of spaces for indentation, should be the same as tabstop really to make tabs and Shift-> the same width
+" enabling either one of these causes deleting 4 spaces with each backspace, often over deletes when writing yaml / docs
+"set sta     " smarttab - make 'tab' insert indents instead of tabs at beginning of line
+"set sts=4   " softtabstop
+set sw=4    " shiftwidth - number of spaces for indentation, should be the same as tabstop really to make tabs and Shift-> the same width
 set ts=4    " tabstop
 set tw=0    " textwidth (stops auto wrapping)
 set viminfo='100,<1000,s10,h " save <1000 lines in the registers instead of <50 lines between files since otherwise I lose lots of lines when deleting and pasting between files
