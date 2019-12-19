@@ -18,6 +18,8 @@
 # See also aws_users_access_key_age.py in DevOps Python Tools which is able to filter by age and status
 #
 # https://github.com/harisekhon/devops-python-tools
+#
+# awless list accesskeys --format tsv | grep 'years[[:space:]]*$'
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
