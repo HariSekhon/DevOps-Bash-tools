@@ -46,8 +46,8 @@ set scs     " smartcase. switch to case sensitive match if uppercase letter is d
 set si      " smartindent
 set smd     " showmode
 " enabling either one of these causes deleting 4 spaces with each backspace, often over deletes when writing yaml / docs
-"set sta     " smarttab - make 'tab' insert indents instead of tabs at beginning of line
-"set sts=4   " softtabstop
+set sta     " smarttab - make 'tab' insert indents instead of tabs at beginning of line
+set sts=4   " softtabstop
 set sw=4    " shiftwidth - number of spaces for indentation, should be the same as tabstop really to make tabs and Shift-> the same width
 set ts=4    " tabstop
 set tw=0    " textwidth (stops auto wrapping)
