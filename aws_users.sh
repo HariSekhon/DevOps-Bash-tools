@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# awless list users
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
