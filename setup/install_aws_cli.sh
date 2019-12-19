@@ -56,8 +56,6 @@ fi
 "$srcdir/install_homebrew.sh"
 echo
 
-uname_s="$(uname -s)"
-
 if type -P sam &>/dev/null; then
     echo "AWS SAM CLI already installed"
 else
@@ -73,7 +71,7 @@ if type -P awless &>/dev/null; then
     echo "Awless already installed"
 else
     echo "Installing AWLess"
-    if [ "$uname_s" = Darwin ]; then
+    if [ "$(uname -s)" = Darwin ]; then
         # this brew install fails on Linux even when brew is installed and works for SAM CLI
         brew tap wallix/awless
         echo
