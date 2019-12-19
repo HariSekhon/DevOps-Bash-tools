@@ -26,7 +26,13 @@ alias assh="awless ssh"
 
 alias awl=awless
 if type -P awless &>/dev/null; then
-    eval "$(awless completion bash | sed 's/awless/awl/g')"
+    # make completion work with awl alias above
+    if ! type _awl_start &>/dev/null; then
+        eval "$(awless completion bash | sed 's/awless/awl/g')"
+    fi
+    if ! type _awless_start &>/dev/null; then
+        eval "$(awless completion bash)"
+    fi
 fi
 
 #alias s3='s3cmd'
