@@ -22,12 +22,12 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
-alias awl=awless
 alias assh="awless ssh"
 
-#if type -P awless &>/dev/null; then
-    #eval "$(awless completion bash)"
-#fi
+alias awl=awless
+if type -P awless &>/dev/null; then
+    eval "$(awless completion bash | sed 's/awless/awl/g')"
+fi
 
 #alias s3='s3cmd'
 alias s3='aws s3'
