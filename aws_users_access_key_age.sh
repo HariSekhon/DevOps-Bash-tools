@@ -31,6 +31,6 @@ jq -r '.Users[].UserName' |
 while read -r username; do
     echo "querying user $username" >&2
     aws iam list-access-keys --user-name "$username" |
-    jq -r '.AccessKeyMetadata[] | [.UserName, .Status, .CreateDate] | @tsv'
+    jq -r '.AccessKeyMetadata[] | [.UserName, .Status, .CreateDate, .AccessKeyId] | @tsv'
 done |
 column -t
