@@ -37,6 +37,7 @@ echo "Installing AWS CLI tools"
 echo
 
 export PATH="$PATH:/usr/local/bin"
+export PATH="$PATH:$HOME/bin"
 # root installs to first one, user installs to the latter
 for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
     if [ -d "$x" ]; then
@@ -78,7 +79,8 @@ else
         brew install awless
     else
         curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
-        mv -iv awless /usr/local/bin/
+        mkdir -p ~/bin
+        mv -iv awless ~/bin/
     fi
 fi
 
