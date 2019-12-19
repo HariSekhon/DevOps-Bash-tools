@@ -27,6 +27,7 @@ readline
 shellcheck
 wget
 whois
+yq
 
 # Mac already provides unzip - brew is keg only and doesn't link anyway to avoid clashes
 #unzip
