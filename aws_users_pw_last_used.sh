@@ -18,6 +18,10 @@
 # See also check_aws_users_password_last_used.py in the Advanced Nagios Plugins collection
 #
 # - https://github.com/harisekhon/nagios-plugins
+#
+# awless list users
+#
+# awless list users --format tsv | awk '{if($4 == "months" || $4 == "years") print}'
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
