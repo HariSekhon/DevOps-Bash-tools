@@ -24,6 +24,10 @@ type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 alias awl=awless
 
+#if type -P awless &>/dev/null; then
+    #eval "$(awless completion bash)"
+#fi
+
 #alias s3='s3cmd'
 alias s3='aws s3'
 
