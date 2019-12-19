@@ -47,7 +47,7 @@ define MAKEFILE_USAGE
 
     make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
 
-    make aws					installs AWS CLI
+    make aws					installs AWS CLI tools
     make gcp					installs GCloud SDK
 	make gcp-shell				sets up GCP Cloud Shell: installs core packages and links configs
 endef
