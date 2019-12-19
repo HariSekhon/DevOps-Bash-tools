@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists AWS IAM users and the password last used date
+# Lists AWS IAM users and their password last used date
 #
 # See also check_aws_users_password_last_used.py in the Advanced Nagios Plugins collection
 #
@@ -24,4 +24,7 @@ set -euo pipefail
 
 aws iam list-users |
 jq -r '.Users[] | [.UserName, .PasswordLastUsed] | @tsv' |
+while read -r username password_last_used; do
+    printf '%s\t%s\n' "$username" "${password_last_used:-N/A}"
+done |
 column -t
