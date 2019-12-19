@@ -26,12 +26,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-if type -P aws &>/dev/null && type -P sam &>/dev/null; then
-    echo "AWS CLI & SAM already installed"
+if type -P aws &>/dev/null &&
+   type -P sam &>/dev/null &&
+   type -P awless &>/dev/null; then
+    echo "AWS CLI, SAM and awless already installed"
     exit 0
 fi
 
-echo "Installing AWS CLI & SAM CLI"
+echo "Installing AWS CLI tools"
 echo
 
 echo "Installing AWS CLI"
@@ -52,9 +54,15 @@ echo "Installing AWS SAM CLI"
 brew tap aws/tap
 echo
 brew install aws-sam-cli
+echo
+
+echo "Installing AWLess"
+brew tap wallix/awless
+echo
+brew install awless
+echo
 
 cat <<EOF
-
 Done
 
 AWS CLI will be installed to ~/.local/bin/aws on Linux or ~/Library/Python/2.7/bin on Mac
