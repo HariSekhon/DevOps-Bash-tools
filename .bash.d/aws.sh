@@ -23,6 +23,7 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 alias awl=awless
+alias assh="awless ssh"
 
 #if type -P awless &>/dev/null; then
     #eval "$(awless completion bash)"
