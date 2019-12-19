@@ -35,6 +35,7 @@ pylint
 pytest
 python-cson
 requests
+saws
 yamllint
 
 #avro
