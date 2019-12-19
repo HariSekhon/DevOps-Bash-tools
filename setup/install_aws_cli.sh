@@ -52,13 +52,17 @@ else
     echo
 fi
 
+# installs on Linux too as it is the AWS recommended method to install SAM CLI
 "$srcdir/install_homebrew.sh"
 echo
+
+uname_s="$(uname -s)"
 
 if type -P sam &>/dev/null; then
     echo "AWS SAM CLI already installed"
 else
     echo "Installing AWS SAM CLI"
+    # AWS installs SAM CLI the same way on Linux + Mac
     brew tap aws/tap
     echo
     brew install aws-sam-cli
@@ -69,9 +73,15 @@ if type -P awless &>/dev/null; then
     echo "Awless already installed"
 else
     echo "Installing AWLess"
-    brew tap wallix/awless
-    echo
-    brew install awless
+    if [ "$uname_s" = Darwin ]; then
+        # this brew install fails on Linux even when brew is installed and works for SAM CLI
+        brew tap wallix/awless
+        echo
+        brew install awless
+    else
+        curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
+        mv -iv awless /usr/local/bin/
+    fi
 fi
 
 # AWS CLI usually installs to ~/.local/bin/aws on Linux or ~/Library/Python/2.7/bin on Mac
