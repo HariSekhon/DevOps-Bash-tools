@@ -26,23 +26,17 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-if type -P aws &>/dev/null &&
-   type -P sam &>/dev/null &&
-   type -P awless &>/dev/null; then
-    echo "AWS CLI, SAM and awless already installed"
-    exit 0
-fi
+#if type -P aws &>/dev/null &&
+#   type -P sam &>/dev/null &&
+#   type -P awless &>/dev/null; then
+#    echo "AWS CLI, SAM and awless already installed"
+#    exit 0
+#fi
 
 echo "Installing AWS CLI tools"
 echo
 
-echo "Installing AWS CLI"
-PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
-echo
-
-"$srcdir/install_homebrew.sh"
-echo
-
+export PATH="$PATH:/usr/local/bin"
 # root installs to first one, user installs to the latter
 for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
     if [ -d "$x" ]; then
@@ -50,26 +44,53 @@ for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
     fi
 done
 
-echo "Installing AWS SAM CLI"
-brew tap aws/tap
-echo
-brew install aws-sam-cli
+if type -P aws &>/dev/null; then
+    echo "AWS CLI already installed"
+else
+    echo "Installing AWS CLI"
+    PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
+    echo
+fi
+
+"$srcdir/install_homebrew.sh"
 echo
 
-echo "Installing AWLess"
-brew tap wallix/awless
-echo
-brew install awless
-echo
+if type -P sam &>/dev/null; then
+    echo "AWS SAM CLI already installed"
+else
+    echo "Installing AWS SAM CLI"
+    brew tap aws/tap
+    echo
+    brew install aws-sam-cli
+    echo
+fi
+
+if type -P awless &>/dev/null; then
+    echo "Awless already installed"
+else
+    echo "Installing AWLess"
+    brew tap wallix/awless
+    echo
+    brew install awless
+fi
+
+# AWS CLI usually installs to ~/.local/bin/aws on Linux or ~/Library/Python/2.7/bin on Mac
+#
+# AWS SAM CLI command installs to the standard HomeBrew directory
+#
+# On Mac that will be /usr/local/bin/sam
+# On Linux it will be /home/linuxbrew/.linuxbrew/bin for root or ~/.linuxbrew/bin for users
+#
+# Awless is usually installed to /usr/local/bin/awless
 
 cat <<EOF
+
 Done
 
-AWS CLI will be installed to ~/.local/bin/aws on Linux or ~/Library/Python/2.7/bin on Mac
+Installed locations:
 
-AWS SAM CLI command will be installed to the standard HomeBrew directory
-
-On Mac that will be /usr/local/bin/sam
-On Linux it will be /home/linuxbrew/.linuxbrew/bin for root or ~/.linuxbrew/bin for users
+$(type -P aws)
+$(type -P sam)
+$(type -P awless)
 
 EOF
