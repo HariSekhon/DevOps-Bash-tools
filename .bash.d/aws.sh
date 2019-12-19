@@ -22,6 +22,8 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
+alias awl=awless
+
 #alias s3='s3cmd'
 alias s3='aws s3'
 
