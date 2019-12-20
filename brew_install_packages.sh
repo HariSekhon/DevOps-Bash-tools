@@ -65,6 +65,9 @@ if [ -n "${TAP:-}" ]; then
     # need splitting
     # shellcheck disable=SC2206
     packages_array=($packages)
+    if [ -n "${NO_FAIL:-}" ]; then
+        set +e
+    fi
     for((i=0; i < ${#packages_array[@]}; i+=2)); do
         tap="${packages_array[$i]}"
         package="${packages_array[(($i+1))]}"
