@@ -1912,7 +1912,7 @@ project/plugins/project/
 .ensime_lucene
 .generated-mima*
 .settings
-/lib/
+#/lib/  # breaks bash-tools/lib additions
 R-unit-tests.log
 R/unit-tests.out
 R/cran-check.out
