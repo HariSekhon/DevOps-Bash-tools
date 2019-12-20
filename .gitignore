@@ -1637,7 +1637,7 @@ develop-eggs/
 downloads/
 eggs/
 .eggs/
-lib/
+#lib/  # breaks bash-tools/lib additions
 lib64/
 parts/
 sdist/
