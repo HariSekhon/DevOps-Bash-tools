@@ -32,14 +32,9 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-# you must run this to generate the report before you can get this info, seems to be ready a couple secs later
-aws iam generate-credential-report >&2
-# >&2 to not mix the following with the CSV stdout
-# {
-#    "State": "COMPLETE"
-# }
-sleep 1
+"$srcdir/aws_iam_generate_credentials_report_wait.sh" >&2
 
 if [ "$(uname -s)" = Darwin ]; then
     base64_decode="base64 -D"
