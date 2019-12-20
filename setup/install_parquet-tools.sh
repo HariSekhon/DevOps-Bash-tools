@@ -25,7 +25,7 @@ zipdir="${zipfile%-bin.zip}"
 
 URL="${URL:-http://search.maven.org/remotecontent?filepath=com/twitter/parquet-tools/$PARQUET_VERSION/$zipfile}"
 
-bin="${BIN:-~/bin}"
+bin="${BIN:-$HOME/bin}"
 
 mkdir -pv "$bin"
 
