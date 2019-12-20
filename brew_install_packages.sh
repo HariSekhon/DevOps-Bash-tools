@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #  shellcheck disable=SC2086
 #  vim:ts=4:sts=4:sw=4:et
 #
@@ -30,8 +30,10 @@ for arg; do
     else
         packages="$packages $arg"
     fi
-    # uniq
-    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+    if [ -z "${TAP:-}" ]; then
+        # uniq
+        packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+    fi
 done
 
 # Sudo is not required as running Homebrew as root is extremely dangerous and no longer supported as
@@ -56,6 +58,20 @@ if [ -z "${NO_UPDATE:-}" ]; then
         sleep 5
     done
     set -e #o pipefail  # undefined in /bin/sh
+fi
+
+if [ -n "${TAP:-}" ]; then
+    # convert to array
+    # need splitting
+    # shellcheck disable=SC2206
+    packages_array=($packages)
+    for((i=0; i < ${#packages_array[@]}; i+=2)); do
+        tap="${packages_array[$i]}"
+        package="${packages_array[(($i+1))]}"
+        brew tap "$tap"
+        brew install "$package"
+    done
+    exit
 fi
 
 cask=""
