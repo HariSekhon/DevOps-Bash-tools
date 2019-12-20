@@ -15,7 +15,7 @@
 
 # Generates an AWS IAM credentials report and waits for it to finish
 #
-# Called from adjacent scripts as a dependency
+# Called from adjacent scripts as a dependency so that they can then pull specific information from the report
 #
 # See more AWS tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
 #
