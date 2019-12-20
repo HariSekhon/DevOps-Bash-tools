@@ -45,4 +45,4 @@ fi
 # not documented in 'aws iam get-credential-report help'
 aws iam get-credential-report --query 'Content' --output text |
 $base64_decode |
-cut -d, -f1,8
+cut -d, -f1,4,8
