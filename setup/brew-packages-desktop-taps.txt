@@ -1,0 +1,9 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2019-12-19 15:08:01 +0000 (Thu, 19 Dec 2019)
+#
+
+# TAP=1 ../brew_install_packages.sh brew-packages-desktop-taps.txt
+
+# tap         package
+wallix/awless awless
