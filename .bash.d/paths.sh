@@ -118,6 +118,12 @@ add_PATH ~/anaconda/bin
 #                           P a r q u e t   T o o l s
 # ============================================================================ #
 
+for x in ~/bin/parquet-tools-*; do
+    if [ -d "$x" ]; then
+        add_PATH "$x"
+    fi
+done
+
 if [ -d /usr/local/parquet-tools ]; then
     add_PATH "/usr/local/parquet-tools"
 fi
