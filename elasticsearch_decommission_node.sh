@@ -62,7 +62,7 @@ if curl -X PUT -k $curl_opts
     "$http://$host:$port/_cluster/settings" \
      -H 'Content-Type: application/json' \
      -d "{ \"transient\" :{ \"cluster.routing.allocation.exclude._ip\" : \"$node_ip\" } }"; then
-    printf "\nSuccess. Now wait for background replication to migrate shards off node %s \n" "$1"
+    printf '\nSuccess. Now wait for background replication to migrate shards off node %s \n' "$1"
 else
-    printf "\nFailed\n"
+    printf '\nFailed\n'
 fi
