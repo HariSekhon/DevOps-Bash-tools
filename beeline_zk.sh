@@ -20,6 +20,7 @@ set -euo pipefail
 
 hive_site_xml=/etc/hive/conf/hive-site.xml
 
+# xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.zookeeper.quorum") | .value'
 if [ -z "${ZOOKEEPERS:-}" ]; then
     ZOOKEEPERS="$(grep -A1 hive.zookeeper.quorum "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,;s/[[:space:]]*//g')"
     if [ -z "${ZOOKEEPERS:-}" ]; then
@@ -28,6 +29,7 @@ if [ -z "${ZOOKEEPERS:-}" ]; then
     fi
 fi
 
+# xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.zookeeper.namespace") | .value'
 if [ -z "${HIVESERVER2_ZOOKEEPER_NAMESPACE:-}" ]; then
     HIVESERVER2_ZOOKEEPER_NAMESPACE="$(grep -A1 hive.zookeeper.namespace "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,; s/hive_zookeeper_namespace_//; s/[[:space:]]*//g')"
     #HIVESERVER2_ZOOKEEPER_NAMESPACE="${HIVESERVER2_ZOOKEEPER_NAMESPACE:-hiveserver2}"
@@ -39,6 +41,7 @@ if [ -n "${BEELINE_OPTS:-}" ]; then
     opts="$opts;$BEELINE_OPTS"
 fi
 
+# xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.server2.use.SSL") | .value'
 if [ -n "${HIVESERVER2_SSL:-}" ] ||
    grep -A1 'hive.server2.use.SSL' /etc/hive/conf/hive-site.xml 2>/dev/null |
    grep -q true; then
