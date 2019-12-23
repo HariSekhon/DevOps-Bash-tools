@@ -37,6 +37,7 @@ python-cson
 requests
 saws
 yamllint
+yq
 
 #avro
 #hadoopy
