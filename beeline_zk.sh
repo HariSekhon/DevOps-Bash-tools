@@ -29,8 +29,9 @@ if [ -z "${ZOOKEEPERS:-}" ]; then
 fi
 
 if [ -z "${HIVESERVER2_ZOOKEEPER_NAMESPACE:-}" ]; then
-    HIVESERVER2_ZOOKEEPER_NAMESPACE="$(grep -A1 hive.zookeeper.namespace "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,;s/[[:space:]]*//g')"
-    HIVESERVER2_ZOOKEEPER_NAMESPACE="${HIVESERVER2_ZOOKEEPER_NAMESPACE:-hiveserver2}"
+    HIVESERVER2_ZOOKEEPER_NAMESPACE="$(grep -A1 hive.zookeeper.namespace "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,; s/hive_zookeeper_namespace_//; s/[[:space:]]*//g')"
+    #HIVESERVER2_ZOOKEEPER_NAMESPACE="${HIVESERVER2_ZOOKEEPER_NAMESPACE:-hiveserver2}"
+    HIVESERVER2_ZOOKEEPER_NAMESPACE="${HIVESERVER2_ZOOKEEPER_NAMESPACE:-hive}"
 fi
 
 opts=""
