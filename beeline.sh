@@ -37,6 +37,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# not listed in hive-site.xml on edge nodes nor https://github.com/apache/hive/blob/master/data/conf/hive-site.xml
+# must specify in your environment / .bashrc or similar
 if [ -z "${HIVESERVER2_HOST:-}" ]; then
     echo "HIVESERVER2_HOST environment variable not set"
     exit 3
@@ -47,6 +49,7 @@ if [ -n "${BEELINE_OPTS:-}" ]; then
     opts="$opts;$BEELINE_OPTS"
 fi
 
+# xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.server2.use.SSL") | .value'
 if [ -n "${HIVESERVER2_SSL:-}" ] ||
    grep -A1 'hive.server2.use.SSL' /etc/hive/conf/hive-site.xml 2>/dev/null |
    grep -q true; then
