@@ -202,7 +202,7 @@ st(){
                 echo
             fi
             # shellcheck disable=SC2164
-            popd >/dev/null
+            popd &>/dev/null
         done
     elif isGit "$target"; then
         if [ -d "$target" ]; then
@@ -261,7 +261,7 @@ pull(){
                 echo
             fi
             # shellcheck disable=SC2164
-            popd >/dev/null
+            popd &>/dev/null
         done
         return
     elif isGit "$target"; then
