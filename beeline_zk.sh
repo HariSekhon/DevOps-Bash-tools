@@ -15,6 +15,10 @@
 
 # Script to more easily connect to HiveServer2 without having to specify the big connection string or look up the ZooKeepers
 
+# see more documentation in the header of the adjacent beeline.sh script
+
+# see also: https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients#HiveServer2Clients-Usinghive-site.xmltoautomaticallyconnecttoHiveServer2
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
