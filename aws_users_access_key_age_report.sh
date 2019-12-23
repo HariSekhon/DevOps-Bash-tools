@@ -15,11 +15,16 @@
 
 # Quick script to dump all users access key status and age
 #
+# CSV Output format:
+#
+# user,access_key_1_active,access_key_1_last_rotated,access_key_2_active,access_key_2_last_rotated
+#
+#
 # See also:
 #
-# aws_users_access_key_age_report.sh - much quicker version for lots of users
+# aws_users_access_key_age.py
 #
-# aws_users_access_key_age.py in DevOps Python Tools which is able to filter by age and status
+# in DevOps Python Tools which is able to filter by age and status
 #
 # https://github.com/harisekhon/devops-python-tools
 #
@@ -27,14 +32,16 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-echo "output will be formatted in to columns at end" >&2
-echo "getting user list" >&2
-aws iam list-users |
-jq -r '.Users[].UserName' |
-while read -r username; do
-    echo "querying user $username" >&2
-    aws iam list-access-keys --user-name "$username" |
-    jq -r '.AccessKeyMetadata[] | [.UserName, .Status, .CreateDate, .AccessKeyId] | @tsv'
-done |
-column -t
+"$srcdir/aws_iam_generate_credentials_report_wait.sh" >&2
+
+if [ "$(uname -s)" = Darwin ]; then
+    base64_decode="base64 -D"
+else
+    base64_decode="base64 -d"
+fi
+
+aws iam get-credential-report --query 'Content' --output text |
+$base64_decode |
+cut -d, -f1,9,10,14,15

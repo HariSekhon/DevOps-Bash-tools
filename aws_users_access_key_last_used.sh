@@ -19,6 +19,12 @@
 #
 # <user>    <access_key>   <last_used_date>  <region>
 #
+#
+# See also:
+#
+# aws_users_access_key_last_used.sh - much quicker version for lots of users
+#
+#
 # See similar tools in DevOps Python Tools repo:
 #
 # https://github.com/harisekhon/devops-python-tools
