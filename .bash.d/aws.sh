@@ -77,7 +77,8 @@ assume-role(){
 # ============================================================================ #
 
 aws_get_cred_path(){
-    local aws_credentials=~/.aws/credentials
+    local aws_credentials="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
+    local aws_config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
     local boto="${BOTO_CONFIG:-$HOME/.boto}"
     local credentials_file
     if [ -f "$aws_credentials" ]; then
@@ -85,8 +86,10 @@ aws_get_cred_path(){
     # older boto creds
     elif [ -f "$boto" ]; then
         credentials_file="$boto"
+    elif [ -f "$aws_config" ]; then
+        credentials_file="$aws_config"
     else
-        echo "no credentials found - didn't find $boto or $aws_credentials" 2>/dev/null
+        echo "no credentials found - didn't find $aws_credentials or $boto or $aws_config" 2>/dev/null
         return 1
     fi
     echo "$credentials_file"
