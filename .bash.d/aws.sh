@@ -99,7 +99,7 @@ aws_get_cred_path(){
 # or re-executing aws_get_cred_path() multiple times in different functions
 aws_credentials_file="$(aws_get_cred_path)"
 
-aws_clear_env(){
+aws_clean_env(){
     echo "clearing AWS_* environment variables"
     while read -r envvar; do
         unset "$envvar"
@@ -124,7 +124,7 @@ aws_profile(){
             echo "profile [$profile] not found in $aws_credentials_file!"
             return 1
         fi
-        aws_clear_env
+        aws_clean_env
         echo "setting aws profile to '$profile'"
         export AWS_PROFILE="$profile"
     elif [ -n "$AWS_PROFILE" ]; then
