@@ -316,7 +316,7 @@ proxy(){
     # MiniShift respects these next three
     export HTTP_PROXY="$http_proxy"
     export HTTPS_PROXY="$https_proxy"
-    export NO_PROXY=".local,.localdomain,.intra" # works only on suffixes
+    export NO_PROXY=".local,.localdomain,.intra,169.254.169.254" # works only on suffixes or IP addresses - ignore the EC2 Metadata API address
     export ftp_proxy="$http_proxy" # might need to replace protocol prefix here, would check, but who even uses ftp any more
     JAVA_NO_PROXY="$(sed 's/^/*/;s/,/|*/g' <<< "$NO_PROXY")"
     # strip the additions we just added off the end so that we don't end up with dups if running proxy more than once
