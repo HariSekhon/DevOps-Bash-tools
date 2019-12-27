@@ -304,10 +304,10 @@ add_etc_host(){
 # vihosts() moved to vim.sh
 
 proxy(){
-    export proxy_host="${proxy_host:-localhost}"
-    export proxy_port="${proxy_port:-8080}"
-    export proxy_port_ssl="${proxy_port_ssl:-8443}"
-    export proxy_user="${proxy_user:-$USER}"
+    export proxy_host="${1:-${proxy_host:-localhost}}"
+    export proxy_port="${2:-${proxy_port:-8080}}"
+    export proxy_port_ssl="${3:-${proxy_port_ssl:-8443}}"
+    export proxy_user="${4:-${proxy_user:-$USER}}"
     if [ -z "$proxy_password" ]; then
         read -r -s -p 'proxy password: ' proxy_password
     fi
