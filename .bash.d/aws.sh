@@ -108,7 +108,8 @@ aws_clean_env(){
 
 aws_get_profile_data(){
     local profile="$1"
-    sed -n "/[[:space:]]*\\[$profile\\]/,/^[[:space:]]*\\[/p" "$aws_credentials_file"
+    local filename="${2:-$aws_credentials_file}"
+    sed -n "/[[:space:]]*\\[\\(profile[[:space:]]*\\)*$profile\\]/,/^[[:space:]]*\\[/p" "$filename"
 }
 
 aws_profile(){
@@ -120,6 +121,8 @@ aws_profile(){
         fi
         local profile_data
         profile_data="$(aws_get_profile_data "$profile")"
+        [ -n "$profile_data" ] ||
+        profile_data="$(aws_get_profile_data "$profile" "${AWS_CONFIG_FILE:-$HOME/.aws/config}")"
         if [ -z "$profile_data" ]; then
             echo "profile [$profile] not found in $aws_credentials_file!"
             return 1
