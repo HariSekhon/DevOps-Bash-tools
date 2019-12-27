@@ -99,6 +99,13 @@ aws_get_cred_path(){
 # or re-executing aws_get_cred_path() multiple times in different functions
 aws_credentials_file="$(aws_get_cred_path)"
 
+aws_clear_env(){
+    echo "clearing AWS_* environment variables"
+    while read -r envvar; do
+        unset "$envvar"
+    done < <(env | sed -n '/^AWS_/ s/=.*// p')
+}
+
 aws_get_profile_data(){
     local profile="$1"
     sed -n "/[[:space:]]*\\[$profile\\]/,/^[[:space:]]*\\[/p" "$aws_credentials_file"
@@ -117,6 +124,7 @@ aws_profile(){
             echo "profile [$profile] not found in $aws_credentials_file!"
             return 1
         fi
+        aws_clear_env
         echo "setting aws profile to '$profile'"
         export AWS_PROFILE="$profile"
     elif [ -n "$AWS_PROFILE" ]; then
@@ -128,6 +136,7 @@ aws_profile(){
 alias awsprofile=aws_profile
 
 # Storing creds in one place in Boto creds file, pull them straight from there
+# if only using new creds, might want to just export AWS_PROFILE instead using aws_profile which provides validation
 aws_env(){
     local profile="${1:-default}"
     # export AWS_ACCESS_KEY
