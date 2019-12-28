@@ -73,6 +73,7 @@
 .aws/credentials
 .aws/config
 .aws/token
+.aws/cli/cache
 .bashrc_dynamichosts
 .bashrc_dynamichosts.src
 .bash_history
