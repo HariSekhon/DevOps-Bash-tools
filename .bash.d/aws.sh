@@ -22,21 +22,36 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
-alias assh="awless ssh"
+# ==================
+# AWS CLI completion
 
-alias awl=awless
-if type -P awless &>/dev/null; then
-    # make completion work with awl alias above
-    if ! type _awl_start &>/dev/null; then
-        eval "$(awless completion bash | sed 's/awless/awl/g')"
-    fi
-    if ! type _awless_start &>/dev/null; then
-        eval "$(awless completion bash)"
-    fi
+aws_completer="$(type -P aws_completer 2>/dev/null)"
+
+if [ -n "$aws_completer" ]; then
+    complete -C "$aws_completer" aws
 fi
 
 #alias s3='s3cmd'
 alias s3='aws s3'
+
+# ==================
+# AWLess completion
+
+alias awl=awless
+alias assh="awless ssh"
+
+if type -P awless &>/dev/null; then
+    # standard completion
+    if ! type _awless_start &>/dev/null; then
+        eval "$(awless completion bash)"
+    fi
+    # make completion work with awl alias above
+    if ! type _awl_start &>/dev/null; then
+        eval "$(awless completion bash | sed 's/awless/awl/g')"
+    fi
+fi
+
+# ==================
 
 # JAVA_HOME needs to be set to use EC2 api tools
 #[ -x /usr/bin/java ] && export JAVA_HOME=/usr  # errors but still works
