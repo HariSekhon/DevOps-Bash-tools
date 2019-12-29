@@ -101,7 +101,7 @@ else
     fi
 fi
 
-if [ "${DEBUG:-}" = 1 ]; then
+if [ -n "${DEBUG:-}" ]; then
     echo
     # shellcheck disable=SC2001
     sed "s/-w[[:space:]]\\{1,\\}[^[:space:]]\\{1,\\}/-w '...'/" <<< "## ldapsearch -H '$uri' -b '$base_dn' $auth_opts '$*'"
