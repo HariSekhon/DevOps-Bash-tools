@@ -17,6 +17,8 @@
 #
 # Called from adjacent scripts as a dependency so that they can then pull specific information from the report
 #
+# Requires iam:GenerateCredentialReport on resource: *
+#
 # See more AWS tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
 #
 # - https://github.com/harisekhon/devops-python-tools
