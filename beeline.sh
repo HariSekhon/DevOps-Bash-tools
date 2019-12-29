@@ -40,7 +40,7 @@
 #
 #   hive_foreach_table.py / impala_foreach_table.py and similar tools in DevOps Python Tools repo - https://github.com/harisekhon/devops-python-tools
 
-set -euo pipefail
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 # not listed in hive-site.xml on edge nodes nor https://github.com/apache/hive/blob/master/data/conf/hive-site.xml
@@ -71,4 +71,5 @@ fi
 
 realm="${HIVESERVER2_HOST#*.}"
 
+set -x
 beeline -u "jdbc:hive2://$HIVESERVER2_HOST:10000/default;principal=hive/_HOST@${realm}${opts}" "$@"
