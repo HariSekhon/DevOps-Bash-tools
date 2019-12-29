@@ -17,7 +17,7 @@
 
 # see more documentation in the header of the adjacent beeline.sh script
 
-set -euo pipefail
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 hive_site_xml=/etc/hive/conf/hive-site.xml
@@ -57,4 +57,5 @@ if [ -n "${HIVESERVER2_SSL:-}" ] ||
     #fi
 fi
 
+set -x
 beeline -u "jdbc:hive2://$ZOOKEEPERS/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=${HIVESERVER2_ZOOKEEPER_NAMESPACE}${opts}" "$@"
