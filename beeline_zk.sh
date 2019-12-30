@@ -17,11 +17,12 @@
 
 # see more documentation in the header of the adjacent beeline.sh script
 
-set -eu
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 hive_site_xml=/etc/hive/conf/hive-site.xml
 
+set +o pipefail
 # xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.zookeeper.quorum") | .value'
 if [ -z "${ZOOKEEPERS:-}" ]; then
     ZOOKEEPERS="$(grep -A1 hive.zookeeper.quorum "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,;s/[[:space:]]*//g')"
