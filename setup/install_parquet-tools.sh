@@ -46,6 +46,9 @@ else
     echo "unzipping parquet-tools"
     unzip "$zipfile"
     echo
+    echo "chmod'ing 0755 parquet-tools-*"
+    chmod 0755 parquet-tools-*
+    echo
     echo "removing zipfile"
     rm -f "$zipfile"
     echo
