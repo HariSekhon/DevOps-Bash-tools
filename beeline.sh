@@ -40,7 +40,7 @@
 #
 #   hive_foreach_table.py / impala_foreach_table.py and similar tools in DevOps Python Tools repo - https://github.com/harisekhon/devops-python-tools
 
-set -eu
+set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 # not listed in hive-site.xml on edge nodes nor https://github.com/apache/hive/blob/master/data/conf/hive-site.xml
@@ -55,6 +55,7 @@ if [ -n "${BEELINE_OPTS:-}" ]; then
     opts="$opts;$BEELINE_OPTS"
 fi
 
+set +o pipefail
 # xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.server2.use.SSL") | .value'
 if [ -n "${HIVESERVER2_SSL:-}" ] ||
    grep -A1 'hive.server2.use.SSL' /etc/hive/conf/hive-site.xml 2>/dev/null |
