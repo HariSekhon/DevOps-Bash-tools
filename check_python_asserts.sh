@@ -44,10 +44,16 @@ for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | s
         #fi
     fi
 done
-if [ $found != 0 ]; then
-    exit 1
-fi
 
 time_taken "$start_time"
-section2 "Python OK - assertions found in normal code"
+
+if [ -n "${WARN_ONLY:-}" ]; then
+    section2 "Python OK - assertions scan finished"
+else
+    if [ $found != 0 ]; then
+        exit 1
+    fi
+    section2 "Python OK - no assertions found in normal code"
+fi
+
 echo
