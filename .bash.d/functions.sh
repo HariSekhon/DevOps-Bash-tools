@@ -459,7 +459,7 @@ unbak(){
         #[ -f "$filename" ] || { echo "file '$filename' does not exist"; return 1; }
         local bakfile
         # don't use -t switch, we want the newest by name, not one that got touched recently
-        bakfile="$(find . -name "$filename.bak.*" 2>/dev/null | sort | tail -n 1)"
+        bakfile="$(find . -path "./$filename.bak.*" 2>/dev/null | sort | tail -n 1)"
         echo "restoring $bakfile"
         cp -av "$bakfile" "$filename"
     done
