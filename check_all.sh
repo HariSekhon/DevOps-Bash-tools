@@ -74,7 +74,7 @@ bash_tools_start_time="$(start_timer)"
 
 . "$srcdir/check_python_find_quit.sh"
 
-. "$srcdir/check_python_asserts.sh"
+WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
 
 . "$srcdir/check_python_exception_pass.sh"
 
