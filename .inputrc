@@ -20,6 +20,14 @@ set bell-style visible
 set show-all-if-ambiguous on
 set show-all-if-unmodified on
 
-set completion-ignore-case on
+# tab-complete case insensitive is useful sometimes but other times it's easier to differentiate by case early on
+#
+# eg. Dockerfile vs docker-compose.yml
+#
+# changing tab complete behaviour to case insensitive is also counter-intuitive to long time unix users like me,
+# even on Mac's case preserving but insensitive APFS filesystem
+#
+#set completion-ignore-case on
+set completion-ignore-case off # default
 
 set visible-stats on
