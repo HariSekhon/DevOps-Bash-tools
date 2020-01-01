@@ -135,7 +135,7 @@ perl-desktop: system-packages cpan
 	@:
 
 .PHONY: cpan
-cpan: cpanm
+cpan:: cpanm
 	@:
 
 .PHONY: cpanm
@@ -170,7 +170,7 @@ gem:
 python-desktop: system-packages pip
 
 .PHONY: pip
-pip:
+pip::
 	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
