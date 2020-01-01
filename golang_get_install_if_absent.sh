@@ -61,9 +61,8 @@ fi
 
 for go_tool in $go_tools; do
     go_bin="${go_tool##*/}"
-    path="$(type -P "$go_bin" 2>/dev/null )"
-    # shellcheck disable=SC2181
-    if [ $? -eq 0 ]; then
+    path="$(type -P "$go_bin" 2>/dev/null || :)"
+    if [ -n "$path" ]; then
         echo "go tool '$go_tool' ($go_bin => $path) already installed, skipping..."
     else
         echo "installing go tool '$go_tool'"
