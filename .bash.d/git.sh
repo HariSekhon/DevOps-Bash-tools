@@ -485,6 +485,13 @@ gitd(){
     git diff "${@:-.}"
 }
 
+gitadded(){
+    git log --name-status |
+    grep -e '^A[^u]' -e '^Date' |
+    grep -B 1 '^A' |
+    less
+}
+
 # doesn't need pipe | less, git drops you in to less anyway
 gitl(){
     git log --all --name-status --graph --decorate "$@"
