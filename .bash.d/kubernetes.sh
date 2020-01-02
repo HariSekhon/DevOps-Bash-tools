@@ -255,7 +255,7 @@ k8s_get_api(){
     context="$(context)"
     cluster="$(k config view -o jsonpath="{.contexts[?(@.name == \"$context\")].context.cluster}")"
     k config view -o jsonpath="{.clusters[?(@.name == \"$cluster\")].cluster.server}"
-    # or
+    # or if you have jq installed:
     # k get --raw=/api | jq -r '.serverAddressByClientCIDRs[0].serverAddress'
     echo
 }
