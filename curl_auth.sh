@@ -51,14 +51,23 @@ fi
 # doesn't work
 #netrc_content="default login $USERNAME password $PASSWORD"
 
-hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
+# ==============================================
+# Instead of generating this for all known hosts
+# just do it for the host extracted from the args url now
+#
+#hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
 
 # use built-in echo if availble, cat is slow with ~1000 .ssh/known_hosts
-if help echo &>/dev/null; then
-    netrc_contents="$(for host in $hosts; do echo "machine $host login $USERNAME password $PASSWORD"; done)"
-else
-    # slow fallback with lots of forks
-    netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USERNAME password $PASSWORD"; done)"
-fi
+#if help echo &>/dev/null; then
+#    netrc_contents="$(for host in $hosts; do echo "machine $host login $USERNAME password $PASSWORD"; done)"
+#else
+#    # slow fallback with lots of forks
+#    netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USERNAME password $PASSWORD"; done)"
+#fi
+# ==============================================
+
+host="$(grep -o '://[^\/[:space:]]*' <<< "$*" | sed 's,://,,')"
+
+netrc_contents="machine $host login $USERNAME password $PASSWORD"
 
 curl --netrc-file <(cat <<< "$netrc_contents") "$@"
