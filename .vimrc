@@ -207,6 +207,9 @@ nmap <silent> ;D :Done<CR>
 nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
 "nmap <silent> ;h :call Hr()<CR>
 nmap <silent> ;h :Hr<CR>
+" this keystroke would probably mess people up, call manually since it's best
+" used in visual blocks anyway
+"nmap          ;H :,!hexanonymize.py --case --hex-only<CR>
 " this inserts Hr literally
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;j :JHr<CR>
