@@ -24,7 +24,7 @@
 # {
 #   "queries" : [ {
 #     "queryId" : "1234f56ae78ff9:123d45f000000000",
-#     "statement" : "select count(*) from myDB.myTable -- somecomment",  # might be just GET_SCHEMAS / GET_TABLES / USE `myDB` / USE myDB
+#     "statement" : "select count(*) from myDB.myTable -- somecomment",  # might be just GET_SCHEMAS / GET_TABLES / USE myDB / DESCRIBE FORMATTED `myDB`.`myTable` / REFRESH myDB.myTable etc.
 #     "queryType" : "QUERY",
 #     "queryState" : "FINISHED",
 #     "startTime" : "2020-01-02T15:03:44.746Z",
