@@ -48,12 +48,13 @@ if [ -z "${PASSWORD:-}" ]; then
     echo
 fi
 
-# doesn't work
-#netrc_content="default login $USERNAME password $PASSWORD"
+# ==============================================
+# option 1
+
+netrc_contents="default login $USERNAME password $PASSWORD"
 
 # ==============================================
-# Instead of generating this for all known hosts
-# just do it for the host extracted from the args url now
+# option 2
 #
 #hosts="$(awk '{print $1}' < ~/.ssh/known_hosts 2>/dev/null | sed 's/,.*//' | sort -u)"
 
@@ -64,10 +65,16 @@ fi
 #    # slow fallback with lots of forks
 #    netrc_contents="$(for host in $hosts; do cat <<< "machine $host login $USERNAME password $PASSWORD"; done)"
 #fi
+
 # ==============================================
+# option 3
 
-host="$(grep -o '://[^\/[:space:]]*' <<< "$*" | sed 's,://,,')"
+# Instead of generating this for all known hosts above just do it for the host extracted from the args url now
 
-netrc_contents="machine $host login $USERNAME password $PASSWORD"
+#host="$(grep -o '://[^\/[:space:]]\+' <<< "$*" | sed 's,://,,')"
+
+#netrc_contents="machine $host login $USERNAME password $PASSWORD"
+
+# ==============================================
 
 curl --netrc-file <(cat <<< "$netrc_contents") "$@"
