@@ -38,6 +38,7 @@ alias gitignore="\$EDITOR ~/.gitignore_global"
 alias gitrc=gitconfig
 
 alias add=gitadd
+alias import=gitimport
 alias co=checkout
 alias commit="git commit"
 alias clone="git clone"
@@ -341,6 +342,20 @@ gitadd() {
     git commit -m "$gitcimsg" "$@"
 }
 
+gitimport() {
+    local gitcimsg=""
+    for x in "$@"; do
+        if git status -s "$x" | grep -q '^[?A]'; then
+            gitcimsg+="$x, "
+        fi
+    done
+    [ -z "$gitcimsg" ] && return 1
+    gitcimsg="${gitcimsg%, }"
+    gitcimsg="imported $gitcimsg"
+    git add "$@" &&
+    git commit -m "$gitcimsg" "$@"
+}
+
 # shellcheck disable=SC2086
 gitu(){
     if [ -z "$1" ]; then
@@ -468,6 +483,13 @@ gitmv(){
 
 gitd(){
     git diff "${@:-.}"
+}
+
+gitadded(){
+    git log --name-status |
+    grep -e '^A[^u]' -e '^Date' |
+    grep -B 1 '^A' |
+    less
 }
 
 # doesn't need pipe | less, git drops you in to less anyway

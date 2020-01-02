@@ -117,26 +117,61 @@ yum-packages-desktop: system-packages
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/yum_install_packages.sh setup/rpm-packages-desktop.txt
 
 .PHONY: homebrew-packages-desktop
-homebrew-packages-desktop: system-packages
+homebrew-packages-desktop: system-packages homebrew
+	@:
+
+.PHONY: homebrew
+homebrew: system-packages brew
+	@:
+
+.PHONY: brew
+brew:
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop.txt
 	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-casks.txt
 	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 
 .PHONY: perl-desktop
-perl-desktop: system-packages
+perl-desktop: system-packages cpan
+	@:
+
+.PHONY: cpan
+cpan:: cpanm
+	@:
+
+.PHONY: cpanm
+cpanm:
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
 
 .PHONY: golang-desktop
-golang-desktop: system-packages
+golang-desktop: system-packages go-desktop
+	@:
+
+.PHONY: go-desktop
+go-desktop: system-packages go
+	@:
+
+.PHONY: go
+go:
 	NO_FAIL=1 $(BASH_TOOLS)/golang_get_install_if_absent.sh setup/go-packages-desktop.txt
 
 .PHONY: ruby-desktop
-ruby-desktop: system-packages
-	NO_FAIL=1 $(BASH_TOOLS)/ruby_install_if_absent.sh setup/gem-packages-desktop.txt
+ruby-desktop: system-packages gems
+	@:
+
+.PHONY: gems
+gems: gem
+	@:
+
+.PHONY: gem
+gem:
+	NO_FAIL=1 $(BASH_TOOLS)/ruby_gem_install_if_absent.sh setup/gem-packages-desktop.txt
 
 .PHONY: python-desktop
-python-desktop: system-packages
-	@./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
+python-desktop: system-packages pip
+
+.PHONY: pip
+pip::
+	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: aws
 aws: system-packages

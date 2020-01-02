@@ -371,11 +371,11 @@ yum-packages-remove:
 	done
 
 .PHONY: cpan
-cpan:
+cpan::
 	find . -name 'cpan-requirements*.txt' | xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
 
 .PHONY: pip
-pip:
+pip::
 	find . -name 'requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
 .PHONY: fatpacks

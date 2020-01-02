@@ -84,8 +84,8 @@ be xterm
 "                               P l u g i n s
 " ============================================================================ "
 
-filetype plugin indent on
 filetype plugin on
+filetype plugin indent on
 "filetype off
 
 " shows what last set ts, ie .vimrc
@@ -173,6 +173,7 @@ if has("autocmd")
     au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py "%"<CR>
     au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py "%"<CR>
     au BufNew,BufRead *.md         nmap ;l :w<CR>:!clear; mdl "%" \| more -R<CR>
+    "au BufNew,BufRead *.sql        nmap ;l :w<CR>:!clear; TODO "%" \| more -R<CR>
     au BufNew,BufRead *.scala      nmap ;l :w<CR>:!clear; scalastyle -c "$bash_tools/scalastyle_config.xml" "%" \| more -R<CR>
     au BufNew,BufRead *.tf,*.tfvars nmap ;l :w<CR>:!clear; cd "`dirname "%"`" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
     au BufNew,BufRead *.toml       nmap ;l :w<CR>:!clear; validate_toml.py "%"<CR>
