@@ -5,6 +5,14 @@
 \.pyo$
 \.jyc$
 \.jyo$
+\.zip$
+\.tar$
+\.tgz$
+\.tbz$
+\.gz$
+\.bz2$
+\.class$
+\.plist$
 /target/
 /build/
 /gradle/
@@ -16,10 +24,3 @@ dependency-reduced-pom.xml
 check_memcached_stats.cfg-pnp4nagios
 /spark-.*-bin-hadoop.*/
 -bin\b
-\.zip
-\.tar
-\.tgz
-\.tbz
-\.gz
-\.bz2
-\.class
