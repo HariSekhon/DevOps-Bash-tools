@@ -134,7 +134,9 @@ user(){
     read -r -p 'user: ' USERNAME
     echo
     export USERNAME
-    pass
+    if [ -z "${PASSWORD:-}" ]; then
+        pass
+    fi
 }
 
 pass(){
