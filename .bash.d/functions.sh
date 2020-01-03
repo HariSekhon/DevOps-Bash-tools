@@ -132,7 +132,6 @@ strip_basedirs(){
 
 user(){
     read -r -p 'user: ' USERNAME
-    echo
     export USERNAME
     if [ -z "${PASSWORD:-}" ]; then
         pass
@@ -141,7 +140,6 @@ user(){
 
 pass(){
     read -r -s -p 'password: ' PASSWORD
-    echo
     export PASSWORD
 }
 
