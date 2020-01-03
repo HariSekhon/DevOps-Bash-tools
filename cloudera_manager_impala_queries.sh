@@ -103,7 +103,7 @@
 #     "detailsAvailable" : true,
 #     "database" : "default",
 #     "durationMillis" : 238
-# 	...
+#   ...
 #   } ],
 #   "warnings" : [ "Impala query scan limit reached. Last end time considered is 2019-12-28T12:29:48.471Z" ]
 # }
