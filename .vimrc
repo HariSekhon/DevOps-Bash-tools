@@ -93,6 +93,26 @@ filetype plugin indent on
 
 " set scrollbind - in each window then windows will scroll together
 
+" =======
+" Vundle
+"
+" to install plugins do:
+"
+" :PluginInstall
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tmux-plugins/vim-tmux'
+
+call vundle#end()
 
 " ============================================================================ "
 "                               A u t o c m d
