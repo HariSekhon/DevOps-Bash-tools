@@ -254,6 +254,7 @@ nmap          ;g :! bash -ic 'cd $(dirname "%") && st'<CR>
 nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
+nmap          ;u :!urlview "%"<CR><CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
