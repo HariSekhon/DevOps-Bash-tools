@@ -45,6 +45,7 @@ define MAKEFILE_USAGE
     make wc-scripts             show line counts of the scripts and grand total
     make wc-scripts2            show line counts of only scripts and total
 
+    make vim					installs Vundle and plugins
     make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
 
     make aws					installs AWS CLI tools
@@ -58,6 +59,7 @@ build: system-packages aws
 
 .PHONY: install
 install: build link aws
+	@:
 
 .PHONY: uninstall
 uninstall: unlink
@@ -184,6 +186,10 @@ gcp: system-packages
 .PHONY: gcp-shell
 gcp-shell: system-packages link
 	@:
+
+.PHONY: vim
+vim:
+	setup/install_vundle.sh
 
 .PHONY: test
 test:
