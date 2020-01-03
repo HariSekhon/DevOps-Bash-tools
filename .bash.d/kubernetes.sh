@@ -24,6 +24,12 @@ if [ -f ~/.minishift.env ]; then
     . ~/.minishift.env || rm -f ~/.minishift.env
 fi
 
+#if [ -f "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]; then
+#    . "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+#    # overriden in prompt.sh which is evaluated later so this is sourced there
+#    #PS1='$(kube_ps1)'" $PS1"
+#fi
+
 # ============================================================================ #
 
 # 'k8s-app' label is set by dashboard creation but who uses that
