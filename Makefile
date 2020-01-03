@@ -46,6 +46,7 @@ define MAKEFILE_USAGE
     make wc-scripts2            show line counts of only scripts and total
 
     make vim					installs Vundle and plugins
+	make tmux					installs TMUX plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
 
     make aws					installs AWS CLI tools
@@ -190,6 +191,13 @@ gcp-shell: system-packages link
 .PHONY: vim
 vim:
 	setup/install_vundle.sh
+
+.PHONY: tmux
+tmux: ~/.tmux/plugins/kube.tmux
+	@:
+
+~/.tmux/plugins/kube.tmux:
+	wget -O ~/.tmux/plugins/kube.tmux https://raw.githubusercontent.com/jonmosco/kube-tmux/master/kube.tmux
 
 .PHONY: test
 test:
