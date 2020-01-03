@@ -7,6 +7,7 @@
 
 atom
 ccmenu
+#iterm2
 keepassxc
 keka
 minikube
