@@ -48,6 +48,10 @@ fi
 # export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 export PS1+="\[$PS1_COLOUR\]\t \[$bldpur\]\$(git branch 2>/dev/null | awk '/^\\*/{print \$2\" \"}')\[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 
+#if type kube_ps1 &>/dev/null; then
+#    PS1='$(kube_ps1)'" $PS1"
+#fi
+
 
 # Screen relies on prompt having a dollar sign to detect the next word to set the screen title dynamically - .screenrc needs the following setting
 #
