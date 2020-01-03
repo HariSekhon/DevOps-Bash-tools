@@ -1,6 +1,6 @@
 # Posix Regex
 # used on top of whitespace_ignore.txt
 Makefile
-.*.json$
-.*.log$
-.*.xml$
+.*\.json$
+.*\.log$
+.*\.xml$
