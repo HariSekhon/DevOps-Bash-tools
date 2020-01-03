@@ -130,6 +130,13 @@ strip_basedirs(){
     done
 }
 
+user(){
+    read -r -p 'user: ' USERNAME
+    echo
+    export USERNAME
+    pass
+}
+
 pass(){
     read -r -s -p 'password: ' PASSWORD
     echo
