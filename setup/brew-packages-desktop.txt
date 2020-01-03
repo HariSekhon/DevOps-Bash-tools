@@ -115,6 +115,7 @@ sslscan
 thrift
 tree
 tmux
+urlview  # used by tmux plugin tmux-urlview
 vagrant-completion
 watch
 #wget # in brew-packages.txt
