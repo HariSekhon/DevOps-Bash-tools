@@ -114,11 +114,18 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ -z "${CLOUDERA_MANAGER:-}" ]; then
-    read -r -p 'Enter Clouder Manager host URL: ' CLOUDERA_MANAGER
+    if [ -n "${CLOUDERA_MANAGER_HOST:-}" ]; then
+        CLOUDERA_MANAGER="${CLOUDERA_MANAGER_HOST:-}:${CLOUDERA_MANAGER_PORT:-7180}"
+    else
+        read -r -p 'Enter Clouder Manager host URL: ' CLOUDERA_MANAGER
+    fi
 fi
 
 if [ -n "${CLOUDERA_MANAGER_SSL:-}" ]; then
     CLOUDERA_MANAGER="https://${CLOUDERA_MANAGER#*://}"
+    if [[ "$CLOUDERA_MANAGER" =~ :7180$ ]]; then
+        CLOUDERA_MANAGER="${CLOUDERA_MANAGER%:7180}:7183"
+    fi
 fi
 
 # seems to work on CM / CDH 5.10.0 even when cluster is set to 'blah' but probably shouldn't rely on that
