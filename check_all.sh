@@ -100,6 +100,8 @@ WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
 
 . "$srcdir/check_dockerfiles.sh"
 
+. "$srcdir/check_docker_compose.sh"
+
 # TODO: enable later and tweak configs
 #. "$srcdir/check_ansible_playbooks.sh"
 #. "$srcdir/check_json.sh"
