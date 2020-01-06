@@ -686,6 +686,10 @@ merge_conflicting_files(){
     git status --porcelain | awk '/^UU/{$1=""; print}'
 }
 
+# useful for Dockerfiles merging lots of branches
+#
+# while ! make mergemasterpull; do fixmerge "merged master"; done
+#
 fixmerge(){
     local msg="${*:-merged}"
     local merge_conflicted_files
