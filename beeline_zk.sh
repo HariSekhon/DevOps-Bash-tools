@@ -32,10 +32,16 @@ if [ -z "${ZOOKEEPERS:-}" ]; then
     fi
 fi
 
+#if ! grep -q -e hive.server2.zookeeper.namespace "$hive_site_xml"; then
+#    echo "Looks like HiveServer2 dynamic discovery is not configured in hive-site.xml, please use beeline.sh adjacent script and set \$HIVESERVER2_HOST in your environment"
+#    exit 1
+#fi
+
 # xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.zookeeper.namespace") | .value'
 if [ -z "${HIVESERVER2_ZOOKEEPER_NAMESPACE:-}" ]; then
-    HIVESERVER2_ZOOKEEPER_NAMESPACE="$(grep -A1 hive.zookeeper.namespace "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,; s/hive_zookeeper_namespace_//; s/[[:space:]]*//g')"
-    #HIVESERVER2_ZOOKEEPER_NAMESPACE="${HIVESERVER2_ZOOKEEPER_NAMESPACE:-hive}"
+    # should be under /hiveserver2
+    # hive.zookeeper.namespace -> hive_zookeeper_namespace_hive is a red herring because it merely contains the db/table hierarchy and not the HS2 HA zk discovery info
+    HIVESERVER2_ZOOKEEPER_NAMESPACE="$(grep -A1 hive.server2.zookeeper.namespace "$hive_site_xml" 2>/dev/null | grep '<value>' | head -n 1 | sed 's/<value>//;s,</value>,,; s/[[:space:]]*//g')"
     HIVESERVER2_ZOOKEEPER_NAMESPACE="${HIVESERVER2_ZOOKEEPER_NAMESPACE:-hiveserver2}"
 fi
 
