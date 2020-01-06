@@ -62,10 +62,8 @@ EOF
     exit 1
 fi
 
-which="$(which which)"
-
 set +o pipefail
-found="$(PATH="$python_path" "$which" "$@" | head -n 1)"
+found="$(PATH="$python_path" type -P "$@" | head -n 1)"
 set -o pipefail
 
 if [ -n "$found" ]; then
