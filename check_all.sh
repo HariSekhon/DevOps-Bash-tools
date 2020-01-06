@@ -51,6 +51,8 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_aws_no_git_credentials.sh"
 
+"$srcdir/check_git_no_merge_remnants.sh"
+
 "$srcdir/check_git_commit_authors.sh"
 
 "$srcdir/check_bash_duplicate_defs.sh" || :
@@ -101,8 +103,6 @@ WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
 . "$srcdir/check_dockerfiles.sh"
 
 . "$srcdir/check_docker_compose.sh"
-
-"$srcdir/check_git_no_merge_remnants.sh"
 
 # TODO: enable later and tweak configs
 #. "$srcdir/check_ansible_playbooks.sh"
