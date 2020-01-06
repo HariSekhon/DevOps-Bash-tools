@@ -48,6 +48,7 @@ make install
     - `.gitconfig` - advanced [git](https://git-scm.com/) configuration
     - `.gitignore` - extensive [git](https://git-scm.com/) ignore of trivial files you shouldn't commit
     - enhanced [git](https://git-scm.com/) diffs
+    - protections against committing AWS access keys & secrets keys, merge conflict unresolved files
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
