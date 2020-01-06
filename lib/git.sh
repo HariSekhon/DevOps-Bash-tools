@@ -72,7 +72,8 @@ foreachbranch(){
             git checkout "$branch"
         else
             git checkout --track "origin/$branch";
-        fi && eval "$@" || return
+        fi &&
+        eval "$@" || return
         echo
     done
     git checkout "$start_branch"
