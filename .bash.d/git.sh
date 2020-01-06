@@ -683,7 +683,12 @@ github_authors(){
 }
 
 merge_conflicting_files(){
-    git status --porcelain | awk '/^UU/{$1=""; print}'
+    # merge conflicts:
+    #
+    # UU = both updated
+    # AA = both added
+    #
+    git status --porcelain | awk '/^UU|^AA/{$1=""; print}'
 }
 
 merge_deleted_files(){
