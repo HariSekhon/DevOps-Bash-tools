@@ -44,10 +44,10 @@ make install
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
   - `.screenrc` - fancy [screen](https://www.gnu.org/software/screen/) configuration including advanced colour bar, large history, hotkey reloading, auto-blanking etc.
   - `.tmux.conf` - fancy [tmux](https://github.com/tmux/tmux/wiki) configuration include advanced colour bar and plugins, settings, hotkey reloading etc.
-  - [git](https://git-scm.com/):
-    - `.gitconfig` - advanced [git](https://git-scm.com/) configuration
-    - `.gitignore` - extensive [git](https://git-scm.com/) ignore of trivial files you shouldn't commit
-    - enhanced [git](https://git-scm.com/) diffs
+  - [Git](https://git-scm.com/):
+    - `.gitconfig` - advanced Git configuration
+    - `.gitignore` - extensive Git ignore of trivial files you shouldn't commit
+    - enhanced Git diffs
     - protections against committing AWS access keys & secrets keys, merge conflict unresolved files
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
