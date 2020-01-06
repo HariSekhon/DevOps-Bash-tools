@@ -686,6 +686,10 @@ merge_conflicting_files(){
     git status --porcelain | awk '/^UU/{$1=""; print}'
 }
 
+merge_deleted_files(){
+    git status --porcelain | awk '/^DU/{$1=""; print}'
+}
+
 # useful for Dockerfiles merging lots of branches
 #
 # while ! make mergemasterpull; do fixmerge "merged master"; done
@@ -693,11 +697,16 @@ merge_conflicting_files(){
 fixmerge(){
     local msg="${*:-merged}"
     local merge_conflicted_files
+    local merge_deleted_files
+    merge_deleted_files="$(merge_deleted_files)"
+    if [ -n "$merge_deleted_files" ]; then
+        xargs git add <<< "$merge_deleted_files"
+    fi
     merge_conflicted_files="$(merge_conflicting_files)"
     if [ -n "$merge_conflicted_files" ]; then
         # shellcheck disable=SC2086
         "$EDITOR" $merge_conflicted_files &&
-        git add $merge_conflicted_files &&
-        git ci -m "$msg"
+        git add $merge_conflicted_files
     fi
+    git ci -m "$msg"
 }
