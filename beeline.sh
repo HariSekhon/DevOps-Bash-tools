@@ -47,7 +47,7 @@ set -euo pipefail
 # must specify in your environment / .bashrc or similar
 if [ -z "${HIVESERVER2_HOST:-}" ]; then
     echo "HIVESERVER2_HOST environment variable not set"
-    exit 3
+    read -p "Enter HiveServer2 address (FQDN): " HIVESERVER2_HOST
 fi
 
 opts=""
