@@ -32,8 +32,11 @@ fi
 
 start_time="$(start_timer)"
 
-echo "searching for '[<]<<<<<<|>>>>>>[>]' under $PWD"
-if grep -aER '[<]<<<<<<|>>>>>>[>]' .; then
+regex='^([<]<<<<<<|>>>>>>[>])'
+
+echo "searching for '$regex' under $PWD:"
+echo
+if grep -IER "$regex" --devices=skip . 2>/dev/null; then
     echo
     echo "FOUND Git / Diff merge remnants!"
     exit 1
