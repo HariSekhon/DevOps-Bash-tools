@@ -34,15 +34,20 @@ make install
 
 ### Inventory Overview
 
-- Scripts - Linux systems administration scripts:
+- Scripts - [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
   - install if absent scripts for Python, Perl, Ruby, NodeJS and Golang packages - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
   - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
   - Git branch management
   - utility scripts used from other scripts
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
-  - `.vimrc` - contains many awesome vim tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
-  - `.gitconfig` and extensive `.gitignore` - the bashrc profile also auto-uses `diff-so-fancy` for nicer diffs if found in `$PATH`
+  - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
+  - `.screenrc` - fancy [screen](https://www.gnu.org/software/screen/) configuration including advanced colour bar, large history, hotkey reloading, auto-blanking etc.
+  - `.tmux.conf` - fancy [tmux](https://github.com/tmux/tmux/wiki) configuration include advanced colour bar and plugins, settings, hotkey reloading etc.
+  - [git](https://git-scm.com/):
+    - `.gitconfig` - advanced [git](https://git-scm.com/) configuration
+    - `.gitignore` - extensive [git](https://git-scm.com/) ignore of trivial files you shouldn't commit
+    - enhanced [git](https://git-scm.com/) diffs via bashrc profile auto-utilizing `diff-so-fancy` if found in `$PATH`
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
