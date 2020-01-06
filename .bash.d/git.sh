@@ -681,3 +681,19 @@ github_authors(){
     # shellcheck disable=SC2016
     foreachrepo 'echo "repo: $repo"; pushd "$github/$repo" >/dev/null || return 1; git_authors; popd >/dev/null || return 1; echo' | ${less:-less}
 }
+
+merge_conflicting_files(){
+    git status --porcelain | awk '/^UU/{$1=""; print}'
+}
+
+fixmerge(){
+    local msg="${*:-merged}"
+    local merge_conflicted_files
+    merge_conflicted_files="$(merge_conflicting_files)"
+    if [ -n "$merge_conflicted_files" ]; then
+        # shellcheck disable=SC2086
+        "$EDITOR" $merge_conflicted_files &&
+        git add $merge_conflicted_files &&
+        git ci -m "$msg"
+    fi
+}
