@@ -32,6 +32,7 @@
 # Cask installed projects are in adjacent file brew-packages-desktop-casks.txt
 
 # Install HomeBrew Desktop packages - one per line
+#ack
 ansible
 ansible-lint
 autossh
