@@ -21,6 +21,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+python_path=""
+
 # finds weird things like this to make $PATH work:
 #
 # /usr/local/Cellar/numpy/1.14.5/libexec/nose/bin
@@ -30,14 +32,14 @@ set -euo pipefail
 while read -r path; do
     bin="${path%/lib/python*/site-packages*}/bin"
     if [ -d "$bin" ]; then
-        export PATH="$bin:$PATH"
+        python_path="$bin:$python_path"
     fi
 done < <(python -c 'from __future__ import print_function; import sys; print("\n".join(reversed(sys.path)))' | sed '/^[[:space:]]*$/d')
 
 for path in ~/Library/Python/*; do
     bin="$path/bin"
     [ -d "$bin" ] || continue
-    export PATH="$bin:$PATH"
+    python_path="$bin:$python_path"
 done
 
 # prioritise our default python at the beginning of the $PATH
@@ -45,11 +47,25 @@ python_version="$(python -c 'from __future__ import print_function; import sys; 
 bin=~/Library/Python/"$python_version"/bin
 
 if [ -d "$bin" ]; then
-    export PATH="$bin:$PATH"
+    python_path="$bin:$python_path"
 fi
 
+if [ $# -lt 1 ]; then
+    cat <<EOF
+Find where one or more CLI programs are installed by searching all the Python library locations
+
+Especially useful when Python tools get installed to places not in your \$PATH - where the 'which' command can't help
+
+usage: ${0##*/} <program> [<program2> <program3> ...]
+
+EOF
+    exit 1
+fi
+
+which="$(which which)"
+
 set +o pipefail
-found="$(which "$@" | head -n 1)"
+found="$(PATH="$python_path" "$which" "$@" | head -n 1)"
 set -o pipefail
 
 if [ -n "$found" ]; then
