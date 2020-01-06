@@ -21,6 +21,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+python="${PYTHON:-python}"
+
 python_path=""
 
 # finds weird things like this to make $PATH work:
@@ -34,7 +36,7 @@ while read -r path; do
     if [ -d "$bin" ]; then
         python_path="$bin:$python_path"
     fi
-done < <(python -c 'from __future__ import print_function; import sys; print("\n".join(reversed(sys.path)))' | sed '/^[[:space:]]*$/d')
+done < <("$python" -c 'from __future__ import print_function; import sys; print("\n".join(reversed(sys.path)))' | sed '/^[[:space:]]*$/d')
 
 for path in ~/Library/Python/*; do
     bin="$path/bin"
@@ -43,7 +45,7 @@ for path in ~/Library/Python/*; do
 done
 
 # prioritise our default python at the beginning of the $PATH
-python_version="$(python -c 'from __future__ import print_function; import sys; print("{}.{}".format(sys.version_info.major, sys.version_info.minor))')"
+python_version="$("$python" -c 'from __future__ import print_function; import sys; print("{}.{}".format(sys.version_info.major, sys.version_info.minor))')"
 bin=~/Library/Python/"$python_version"/bin
 
 if [ -d "$bin" ]; then
