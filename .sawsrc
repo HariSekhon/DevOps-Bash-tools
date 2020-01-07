@@ -1,0 +1,22 @@
+[main]
+
+# Visual theme. Possible values: manni, igor, xcode, vim, autumn, vs, rrt,
+# native, perldoc, borland, tango, emacs, friendly, monokai, paraiso-dark,
+# colorful, murphy, bw, pastie, paraiso-light, trac, default, fruity
+theme = vim
+
+# Use color output mode.
+color_output = True
+
+# Use fuzzy matching mode for resources (default is to use simple substring match).
+fuzzy_match = True
+
+# Use shortcut matching mode
+shortcut_match = True
+
+# log_file location.
+log_file = ~/.saws.log
+
+# Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO"
+# and "DEBUG".
+log_level = INFO
