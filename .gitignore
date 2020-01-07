@@ -73,7 +73,8 @@
 .aws/credentials
 .aws/config
 .aws/token
-.aws/cli/cache
+.aws/cli/cache/
+.aws/shell/
 .bashrc_dynamichosts
 .bashrc_dynamichosts.src
 .bash_history
@@ -241,6 +242,7 @@
 .svn
 .swatch_script.*
 .TemporaryItems
+.terraform.d/
 .terragrunt
 .themes
 .thumbnails
