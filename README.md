@@ -229,7 +229,7 @@ make python
 
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX plugin for kubernetes context
-    make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
+    make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon repos
 
     make aws                    installs AWS CLI tools
     make gcp                    installs GCloud SDK
