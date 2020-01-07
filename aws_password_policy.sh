@@ -13,7 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Dumps password policies to key = value pairs for easy viewing / grepping
+# Dumps password policy to key = value pairs for easy viewing / grepping
+#
+# adjacent script aws_harden_password_policy.sh calls this before and after changing
+# the password policy to be hardened according to the CIS Foundations Benchmark recommendations
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
