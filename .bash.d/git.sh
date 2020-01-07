@@ -47,6 +47,7 @@ alias ci=commit
 alias gitco=checkout
 alias up=pull
 alias u=up
+alias pu=push
 alias gitp="git push"
 alias gdiff="git diff"
 # bypasses diff-so-fancy, could also just pipe through | cat to disable pager and color effects
