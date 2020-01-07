@@ -19,6 +19,17 @@
 #
 # AccountAccessKeysPresent = 0
 # AccountMFAEnabled = 1
+#
+# or comparing number of users to number of MFA devices eg.
+#
+# MFADevices = 6
+# MFADevicesInUse = 6
+# ...
+# Users = 14
+#
+# See Also:
+#
+#   aws_users_mfa_active_report.sh
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
