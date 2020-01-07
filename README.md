@@ -236,6 +236,7 @@ make python
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
 make: *** [help] Error 3
 ```
+(`make help` exits with error code 3 like most of my programs to differentiate from build success to make sure a stray `help` argument doesn't cause silent build failure with exit code 0)
 
 ### Stargazers over time
 
