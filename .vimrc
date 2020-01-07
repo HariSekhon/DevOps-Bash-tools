@@ -352,9 +352,9 @@ endfunction
 function! WriteRunDebug()
     :w
     if &filetype == 'go'
-        :! DEBUG=1 bash -c "go run % `$bash_tools/lib/args_extract.sh "%"` 2>&1 | headtail.py"
+        :! DEBUG=1 bash -c "go run % `$bash_tools/lib/args_extract.sh "%"` 2>&1 | less"
     else
-        :! DEBUG=1 bash -c "./% `$bash_tools/lib/args_extract.sh "%"` 2>&1 | headtail.py"
+        :! DEBUG=1 bash -c "./% `$bash_tools/lib/args_extract.sh "%"` 2>&1 | less"
     endif
 endfunction
 
