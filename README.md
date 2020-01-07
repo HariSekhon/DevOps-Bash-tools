@@ -88,7 +88,7 @@ make install
 
 - Programming language linting:
 
-  - [Python](https://www.python.org/) (syntax, pep8, pre-byte-compiling)
+  - [Python](https://www.python.org/) (syntax, pep8, byte-compiling)
   - [Perl](https://www.perl.org/)
   - [Java](https://www.java.com/en/)
   - [Scala](https://www.scala-lang.org/)
