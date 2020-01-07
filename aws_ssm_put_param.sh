@@ -14,24 +14,37 @@
 #
 
 # Reads a value from the command line and saves it to AWS Systems Manager Parameter Store
+#
+# usage: aws_ssm_put_param.sh [<key>] [<value>]
+#
+# first argument is used as key - if not given prompts for it
+# second argument is used as value - if not given prompts for it (recommended for secrets)
+#
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-read -r -p "Enter key: " key
+key="${1:-}"
+value="${2:-}"
 
-# doesn't echo, let's print a star per character instead as it's nicer feedback
-#read -s -p "Enter value: " value
+if [ -z "$key" ]; then
+    read -r -p "Enter key: " key
+fi
 
-value=""
-prompt="Enter value: "
-while IFS= read -p "$prompt" -r -s -n 1 char; do
-    if [[ "$char" == $'\0' ]]; then
-        break
-    fi
-	prompt='*'
-    value="${value}${char}"
-done
-echo
+if [ -z "$value" ]; then
+    # doesn't echo, let's print a star per character instead as it's nicer feedback
+    #read -s -p "Enter value: " value
+
+    value=""
+    prompt="Enter value: "
+    while IFS= read -p "$prompt" -r -s -n 1 char; do
+        if [[ "$char" == $'\0' ]]; then
+            break
+        fi
+        prompt='*'
+        value="${value}${char}"
+    done
+    echo
+fi
 
 aws ssm put-parameter --name "$key" --value "$value" --type SecureString --overwrite
