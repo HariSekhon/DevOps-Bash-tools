@@ -70,7 +70,7 @@ make install
 - `gce*.sh` - [Google Cloud](https://cloud.google.com/) scripts for [GCE](https://cloud.google.com/compute/) metadata API and pre-emption
 - `curl_auth.sh` - wraps curl to send your username and password from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` argument which can be logged by the OS, exposing your credentials in plaintext in log files
 - `k8s_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and populating `Authorization: Bearer` header
-- `ldapsearch.sh` - wraps ldapsearch to infer most of the settings for you, uses environment variables for overrides
+- `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `zookeeper-client.sh` - wraps zookeeper-client, auto-finds the zookeeper quorum from `/etc/**/*-site.xml` to make it faster and easier to connect
 - `beeline.sh` - connects to [HiveServer2](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Overview) via beeline, auto-populating Kerberos and SSL settings, and using `$HIVESERVER_HOST` environment variable so you can connect with no arguments (prompts for HiveServer2 address if you haven't set this environment variable)
