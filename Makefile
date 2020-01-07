@@ -45,13 +45,13 @@ define MAKEFILE_USAGE
     make wc-scripts             show line counts of the scripts and grand total
     make wc-scripts2            show line counts of only scripts and total
 
-    make vim					installs Vundle and plugins
-    make tmux					installs TMUX plugin for kubernetes context
+    make vim                    installs Vundle and plugins
+    make tmux                   installs TMUX plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
 
-    make aws					installs AWS CLI tools
-    make gcp					installs GCloud SDK
-    make gcp-shell				sets up GCP Cloud Shell: installs core packages and links configs
+    make aws                    installs AWS CLI tools
+    make gcp                    installs GCloud SDK
+    make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
 endef
 
 .PHONY: build
