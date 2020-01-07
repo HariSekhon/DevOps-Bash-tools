@@ -70,6 +70,7 @@
 .audacious/accels
 .audacious/log
 .audacious/playlist.xspf
+.awless/
 .aws/credentials
 .aws/config
 .aws/token
