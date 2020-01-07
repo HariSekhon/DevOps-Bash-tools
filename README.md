@@ -178,7 +178,6 @@ make python
 
 ```
 > make help
- make help
 
  Usage:
 
