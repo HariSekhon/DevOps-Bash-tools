@@ -245,6 +245,7 @@
 .themes
 .thumbnails
 .tilda/locks/*
+.tmux/
 .tomboy
 .tomboy.log
 .Trash
