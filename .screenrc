@@ -144,6 +144,8 @@ caption always "%{= .G}[ %{= .m}%H %{-}| %-Lw%?%{r}[%{B}%n%f* %t%{-}]%{-}%?%+Lw 
 # ============================================================================ #
 
 #idle 60 blanker
+idle 0  # off
+
 #blankerprg cmatrix
 # save battery
 blankerprg ""
