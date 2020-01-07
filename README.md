@@ -174,6 +174,70 @@ Install generically useful Python CLI tools and modules (includes [AWS CLI](http
 make python
 ```
 
+### Full Help
+
+```
+> make help
+ make help
+
+ Usage:
+
+  Common Options:
+
+    make help                   show this message
+    make build                  installs all dependencies - OS packages and any language libraries via native tools eg. pip, cpanm, gem, go etc that are not available via OS packages
+    make system-packages        installs OS packages only (detects OS via whichever package manager is available)
+    make test                   run tests
+    make clean                  removes compiled / generated files, downloaded tarballs, temporary files etc.
+
+    make submodules             initialize and update submodules to the right release (done automatically by build / system-packages)
+
+    make cpan                   install any modules listed in any cpan-requirements.txt files if not already installed
+
+    make pip                    install any modules listed in any requirements.txt files if not already installed
+
+    make python-compile         compile any python files found in the current directory and 1 level of subdirectory
+    make pycompile
+
+    make github                 open browser at github project
+    make readme                 open browser at github's README
+    make github-url             print github url and copy to clipboard
+
+    make ls-files               print list of files in project
+    make ls-code                print list of code files, excluding READMEs and other peripheral files
+    make wc                     show line counts of the files and grand total
+    make wc-code                show line counts of only code files and total
+
+  Repo specific options:
+
+    make install                builds all script dependencies, installs AWS CLI, symlinks all config files to $HOME and adds sourcing of bash profile
+
+    make link                   symlinks all config files to $HOME and adds sourcing of bash profile
+    make unlink                 removes all symlinks pointing to this repo's config files and removes the sourcing lines from .bashrc and .bash_profile
+
+    make python-desktop         installs all Python Pip packages for desktop workstation listed in setup/pip-packages-desktop.txt
+    make perl-desktop           installs all Perl CPAN packages for desktop workstation listed in setup/cpan-packages-desktop.txt
+    make ruby-desktop           installs all Ruby Gem packages for desktop workstation listed in setup/gem-packages-desktop.txt
+    make golang-desktop         installs all Golang packages for desktop workstation listed in setup/go-packages-desktop.txt
+
+    make desktop                installs all of the above + many desktop OS packages listed in setup/
+
+    make bootstrap              all of the above + installs a bunch of major common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI, CCMenu, Parquet tools etc.
+
+    make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
+    make wc-scripts             show line counts of the scripts and grand total
+    make wc-scripts2            show line counts of only scripts and total
+
+    make vim                    installs Vundle and plugins
+    make tmux                   installs TMUX plugin for kubernetes context
+    make ccmenu                 installs and (re)configures CCMenu to watch this all other major HariSekhon repos
+
+    make aws                    installs AWS CLI tools
+    make gcp                    installs GCloud SDK
+    make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
+make: *** [help] Error 3
+```
+
 ### Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
