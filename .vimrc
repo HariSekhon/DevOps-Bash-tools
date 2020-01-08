@@ -230,6 +230,7 @@ nmap <silent> ;h :Hr<CR>
 " this keystroke would probably mess people up, call manually since it's best
 " used in visual blocks anyway
 "nmap          ;H :,!hexanonymize.py --case --hex-only<CR>
+nmap          ;H :call WriteHelp()<CR>
 " this inserts Hr literally
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;j :JHr<CR>
@@ -338,6 +339,15 @@ endfunction
 
 function! StripTrailingWhiteSpace()
     :%s/[[:space:]]*$//
+endfunction
+
+function! WriteHelp()
+    :w
+    if &filetype == 'go'
+        :! go run "%" --help 2>&1 | less
+    else
+        :! "./%" --help 2>&1 | less
+    endif
 endfunction
 
 function! WriteRun()
