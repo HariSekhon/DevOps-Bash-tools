@@ -17,4 +17,4 @@
 
 set -euo pipefail
 
-sed -n '/^#[[:space:]]*args:/ s/^#[[:space:]]*args:[[:space:]]// p' "$@"
+sed -n '/^[[:space:]]*#[[:space:]]*args:/ s/^[[:space:]]*#[[:space:]]*args:[[:space:]]// p' "$@"
