@@ -36,6 +36,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 echo "Installing AWS CLI tools"
 echo
 
+uname_s="$(uname -s)"
+mkdir -p ~/bin
+
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
 # root installs to first one, user installs to the latter
@@ -72,14 +75,13 @@ if type -P awless &>/dev/null; then
     echo "Awless already installed"
 else
     echo "Installing AWLess"
-    if [ "$(uname -s)" = Darwin ]; then
+    if [ "$uname_s" = Darwin ]; then
         # this brew install fails on Linux even when brew is installed and works for SAM CLI
         brew tap wallix/awless
         echo
         brew install awless
     else
         curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
-        mkdir -p ~/bin
         mv -iv awless ~/bin/
     fi
 fi
@@ -92,6 +94,18 @@ fi
 # On Linux it will be /home/linuxbrew/.linuxbrew/bin for root or ~/.linuxbrew/bin for users
 #
 # Awless is usually installed to /usr/local/bin/awless
+
+if type -P ecs-cli &>/dev/null; then
+    echo "ECS CLI already installed"
+else
+    echo "Installing AWS ECS CLI"
+    if [ "$uname_s" = Darwin ]; then
+        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
+    else
+        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
+    fi
+    chmod +x ~/bin/ecs-cli
+fi
 
 cat <<EOF
 
