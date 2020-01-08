@@ -281,13 +281,13 @@ pull(){
         #done
         #git checkout -q "$orig_branch"
         # shellcheck disable=SC2164
-        popd >/dev/null
+        popd &>/dev/null
     elif type isHg &>/dev/null && isHg "$target"; then
         pushd "$target" >/dev/null &&
         echo "> hg pull && hg up" >&2  &&
         hg pull && hg up
         # shellcheck disable=SC2164
-        popd >/dev/null
+        popd &>/dev/null
     elif type isSvn &>/dev/null && isSvn "$target"; then
         echo "> svn up $target" >&2
         svn up "$target"
@@ -312,7 +312,7 @@ pull(){
                 echo
             fi
             # shellcheck disable=SC2164
-            popd >/dev/null
+            popd &>/dev/null
         done
         return
     else
@@ -374,12 +374,14 @@ gitu(){
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
     basedir="$(basedir $targets)" &&
     local trap_codes="INT ERR"
-    trap 'popd >/dev/null; return 1' $trap_codes
+    # expand now
+    # shellcheck disable=SC2064
+    trap "popd &>/dev/null; trap - $trap_codes; return 1" $trap_codes
     pushd "$basedir" >/dev/null || return 1
     targets="$(strip_basedirs $basedir $targets)"
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
-        popd >/dev/null || :
+        popd &>/dev/null || :
         return 0
     fi
     # shellcheck disable=SC2086
@@ -388,7 +390,7 @@ gitu(){
     git add $targets &&
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
-    popd >/dev/null || :
+    popd &>/dev/null || :
     trap - $trap_codes
 }
 
@@ -418,7 +420,7 @@ gitu(){
 #        #fi
 #        #"$srcdir2/gitu" "${target##*/}" &&
 #        gitu "$target"
-#        #popd >/dev/null
+#        #popd &>/dev/null
 #    elif type isHg &>/dev/null && isHg "$target"; then
 #        echo "> hg" >&2
 #        #if [ -d "$target" ]; then
@@ -428,7 +430,7 @@ gitu(){
 #        #fi
 #        #"$srcdir2/hgu" "${target##*/}" &&
 #        hgu "$target"
-#        #popd >/dev/null
+#        #popd &>/dev/null
 #    # Not supporting SVN any more
 #    #elif type isSvn &>/dev/null && isSvn "$target"; then
 #    #    echo "> svn" >&2
