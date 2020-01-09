@@ -92,16 +92,14 @@ histrmlast(){ history -d "$(history | tail -n 2 | head -n 1 | awk '{print $1}')"
 # This adds a time format of "YYYY-mm-dd hh:mm:ss  command" to the bash history
 export HISTTIMEFORMAT="%F %T  "
 
-# Stops duplicate commands next to each other from being logged
-# This totally screws up my terminal to the point where I can't even ssh, I get a strange network tcp network destination unreachable error
-#export HISTCONTROL=ignoredups
+# stop logging duplicate successive commands to history
 HISTCONTROL=ignoredups:ignorespace
 
 # Neat trick "[ \t]*" to exclude any command by just prefixing it with a space. Fast way of going stealth for pw entering on cli
 # & here means any duplicate patterns, others are simple things like built-ins and ls and stuff you don't need history for
 #export HISTIGNORE="[ \t]*:&:ls:[bf]g:exit"
 
-# Make sure we append rather than overwrite history
+# append rather than overwrite history
 shopt -s histappend
 
 # check the window size after each command and if necessary update $LINES and $COLUMNS
