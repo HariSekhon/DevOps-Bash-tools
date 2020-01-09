@@ -102,7 +102,7 @@ HISTCONTROL=ignoredups:ignorespace
 # append rather than overwrite history
 shopt -s histappend
 
-# check the window size after each command and if necessary update $LINES and $COLUMNS
+# check window size and update $LINES and $COLUMNS after each command
 shopt -s checkwinsize
 
 # not supported in the tmux terminal in GCP Cloud Shell
