@@ -93,6 +93,7 @@ function dockerrunrm(){
     done
     eval docker run --rm -ti "$args"
 }
+alias drun='docker run --rm -ti -v "${PWD}":/app'
 
 docker_get_container_ids(){
     local exclude_file=~/docker-perm.txt
