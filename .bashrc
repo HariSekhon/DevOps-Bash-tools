@@ -77,6 +77,12 @@ fi
 [ -f /etc/bash/bashrc ] && . /etc/bash/bashrc
 [ -f /etc/bashrc      ] && . /etc/bashrc
 
+[ -f /etc/bash_completion ] && . /etc/bash_completion
+
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+[ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
+
 # ============================================================================ #
 
 # SECURITY TO STOP STUFF BEING WRITTEN TO DISK
