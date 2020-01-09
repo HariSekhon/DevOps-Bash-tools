@@ -219,7 +219,8 @@ endif
 " ============================================================================ "
 
 "nmap <silent> ;c :call Cformat()<CR>
-nmap          ;b :!git blame "%"<CR>
+nmap <silent> ;a :,!anonymize.py -a<CR>
+nmap <silent> ;b :!git blame "%"<CR>
 nmap <silent> ;c :,!center.py<CR>
 nmap <silent> ;e :,!center.py -s<CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
