@@ -111,15 +111,14 @@ if ! isMac &&
     setterm -blank 0
 fi
 
-# Prevent core dumps which can leak sensitive information
+# prevent core dumps which can leak sensitive information
 ulimit -c 0
 
-# Let's be stingey with permissions
-# This causes problems where root installs libraries and my user account can't access them
+# tighten permissions except for root where library installations become inaccessible to my user account
 if [ $EUID = 0 ]; then
     umask 0022
 else
-    # This causes no end of problems when doing sudo command which retains 0077 and breaks library access. If can get sudo to implicitly read .bashrc to reset this (and prompt colour would be nice) then re-enable this tighter 0077 umask
+    # caused no end of problems when doing sudo command which retained 0077 and broke library access for user accounts
     #umask 0077
     umask 0022
 fi
