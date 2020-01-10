@@ -29,7 +29,8 @@
 #
 # See Also:
 #
-#   aws_users_mfa_active_report.sh
+#   aws_users_mfa_active_report.sh (adjacent)
+#   check_aws_root_account.py   -   in The Advanced Nagios Plugins collection (https://github.com/harisekhon/nagios-plugins)
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
