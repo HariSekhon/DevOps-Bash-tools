@@ -43,17 +43,18 @@ while read -r username; do
     while read -r access_key; do
         aws iam get-access-key-last-used --access-key-id "$access_key" |
         jq -r '[.UserName, .AccessKeyLastUsed.LastUsedDate, .AccessKeyLastUsed.Region] | @tsv' |
-        while read -r user last_used region; do
-            # if there is no last_used field, 3rd field will be taken from region
-            #if [ -z "$region" ]; then
-            #    region="$last_used"
-            #    last_used="blank"
-            #fi
-            if [ -z "$region" ] && [ "$last_used" = "N/A" ]; then
-                region="N/A"
-            fi
-            printf '%s\t%s\t%s\t%s\n' "$user" "$access_key" "${last_used:-blank}" "$region"
-        done
+#        while read -r user last_used region; do
+#            # if there is no last_used field, 3rd field will be taken from region
+#            #if [ -z "$region" ]; then
+#            #    region="$last_used"
+#            #    last_used="blank"
+#            #fi
+#            if [ -z "$region" ] && [ "$last_used" = "N/A" ]; then
+#                region="N/A"
+#            fi
+#            printf '%s\t%s\t%s\t%s\n' "$user" "$access_key" "${last_used:-blank}" "$region"
+#        done
+        awk '{if(NF==2){$3="N/A"}; print $1"\t'"$access_key"'\t"$2"\t"$3}'
     done
 done |
 column -t
