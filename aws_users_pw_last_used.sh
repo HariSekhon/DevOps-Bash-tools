@@ -28,7 +28,8 @@ set -euo pipefail
 
 aws iam list-users |
 jq -r '.Users[] | [.UserName, .PasswordLastUsed] | @tsv' |
-while read -r username password_last_used; do
-    printf '%s\t%s\n' "$username" "${password_last_used:-N/A}"
-done |
+#while read -r username password_last_used; do
+#    printf '%s\t%s\n' "$username" "${password_last_used:-N/A}"
+#done |
+awk '{if(NF==1){$2="N/A"}print}' |
 column -t
