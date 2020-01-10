@@ -18,6 +18,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# prefix user column only if there is any output
 prefix_user(){
     sed "s/^\\(.\\)/${user}   &/"
     #while read line; do
