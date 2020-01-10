@@ -19,4 +19,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 aws iam list-policies |
-jq '.Policies[] | select(.IsAttachable==true) | select (.AttachmentCount==0)'
+# get json to allow to filter later
+#jq -r '.Policies[] | select(.IsAttachable==true) | select (.AttachmentCount==0)'
+jq -r '.Policies[] | select(.IsAttachable==true) | select (.AttachmentCount==0) | [.PolicyId, .PolicyName, .CreateDate, .UpdateDate] | @tsv' |
+sort -k2 |
+column -t
