@@ -237,7 +237,7 @@ dgrep(){
     # shellcheck disable=SC2154
     ls "$docs/"*"${pattern// /}"* 2>/dev/null
     # shellcheck disable=SC2046,SC2033
-    grep -iR "$pattern" $(find ~/docs "$docs" -type f -maxdepth 1 2>/dev/null | grep -v '/\.')
+    grep -iER "$pattern" $(find ~/docs "$docs" -type f -maxdepth 1 2>/dev/null | grep -v '/\.')
 }
 
 diffl(){
