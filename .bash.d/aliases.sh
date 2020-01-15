@@ -74,6 +74,10 @@ alias grep='grep --color=auto'
 alias envg="env | grep -i"
 alias dec="decomment.sh"
 
+export templates="$github/tools/templates"
+alias templates='cd $templates'
+alias tmpl=templates
+
 alias hosts='sudo $EDITOR /etc/hosts'
 
 alias path="echo \$PATH | tr ':' '\\n' | more"
