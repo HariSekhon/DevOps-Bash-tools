@@ -20,14 +20,14 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-hive_site_xml=/etc/hive/conf/hive-site.xml
+hive_site_xml="${HIVE_SITE_XML:-/etc/hive/conf/hive-site.xml}"
 
 set +o pipefail
 # xq -r < hive-site.xml '.configuration.property[] | select(.name == "hive.zookeeper.quorum") | .value'
 if [ -z "${ZOOKEEPERS:-}" ]; then
     ZOOKEEPERS="$(grep -A1 hive.zookeeper.quorum "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,;s/[[:space:]]*//g')"
     if [ -z "${ZOOKEEPERS:-}" ]; then
-        echo "ZOOKEEPERS environment variable not set (format is zookeeper1.domain.com:2181,zookeeper2.domain.com:2181,zookeeper3.domain.com:2181)"
+        echo "ZOOKEEPERS environment variable not set (format is zookeeper1.domain.com:2181,zookeeper2.domain.com:2181,zookeeper3.domain.com:2181)" >&2
         exit 3
     fi
 fi
