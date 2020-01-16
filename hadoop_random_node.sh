@@ -30,7 +30,7 @@ set -euo pipefail
 topology_map="${HADOOP_TOPOLOGY_MAP:-/etc/hadoop/conf/topology.map}"
 
 if ! [ -f "$topology_map" ]; then
-    echo "File not found: $topology_map. Did you run this on a Hadoop node?"
+    echo "File not found: $topology_map. Did you run this on a Hadoop node?" >&2
     exit 1
 fi
 
