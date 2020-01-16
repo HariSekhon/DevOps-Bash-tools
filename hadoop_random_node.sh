@@ -29,6 +29,11 @@ set -euo pipefail
 
 topology_map="${HADOOP_TOPOLOGY_MAP:-/etc/hadoop/conf/topology.map}"
 
+if ! [ -f "$topology_map" ]; then
+    echo "File not found: $topology_map. Did you run this on a Hadoop node?"
+    exit 1
+fi
+
 # returns datanodes in the topology map by omitting nodes with that are masters / namenodes / control nodes
 awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" |
 grep -Ev '[^.]*(name|master|control)' |
