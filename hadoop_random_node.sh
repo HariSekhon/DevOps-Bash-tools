@@ -36,5 +36,5 @@ fi
 
 # returns datanodes in the topology map by omitting nodes with that are masters / namenodes / control nodes
 awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" |
-grep -Ev '[^.]*(name|master|control)' |
+grep -Ev '^[^.]*(name|master|control)' |
 shuf -n 1
