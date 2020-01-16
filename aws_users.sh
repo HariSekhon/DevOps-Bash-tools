@@ -19,4 +19,4 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 #aws iam list-users | jq -r '.Users[].UserName'
-aws iam list-users --query 'Users[*].UserName' --output text | tr '[[:space:]]' '\n'
+aws iam list-users --query 'Users[*].UserName' --output text | tr '[:space:]' '\n'
