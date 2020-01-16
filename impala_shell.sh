@@ -62,7 +62,7 @@ core_site_xml="${HADOOP_CORE_SITE_XML:-/etc/hadoop/conf/core-site.xml}"
 #fi
 
 if [ -n "${IMPALA_KERBEROS:-}" ] ||
-   grep -A 1 hadoop.security.authentication "$core_site_xml"  | grep -q kerberos; then
+   grep -A 1 hadoop.security.authentication "$core_site_xml" 2>/dev/null | grep -q kerberos; then
     opts="$opts -k"
 fi
 
