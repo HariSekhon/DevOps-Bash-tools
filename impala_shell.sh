@@ -80,7 +80,7 @@ elif [ -f "$topology_map" ]; then
     # or alternatively use HAProxy config for load balanced impala clusters - see https://github.com/harisekhon/haproxy-configs
     impalad="$(
         awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" |
-        grep -Ev '[^.]*(name|master|control)' |
+        grep -Ev '^[^.]*(name|master|control)' |
         shuf -n 1
     )"
 else
