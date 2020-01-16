@@ -62,7 +62,7 @@ if [ -n "${IMPALA_SSL:-}" ]; then
     opts="$opts --ssl"
 fi
 
-topology_map="/etc/hadoop/conf/topology.map"
+topology_map="${HADOOP_TOPOLOGY_MAP:-/etc/hadoop/conf/topology.map}"
 
 if [ -n "${IMPALA_HOST:-}" ]; then
     impalad="$IMPALA_HOST"
@@ -70,7 +70,11 @@ elif [ -f "$topology_map" ]; then
     #echo "picking random impala from hadoop topology map" >&2
     # nodes in the topology map that aren't masters, namenodes, controlnodes etc probably have impalad running on them, so pick one at random to connect to
     # or alternatively use HAProxy config for load balanced impala clusters - see https://github.com/harisekhon/haproxy-configs
-    impalad="$(awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" | grep -v -e name -e master -e control | shuf -n 1)"
+    impalad="$(
+        awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" |
+        grep -Ev '[^.]*(name|master|control)' |
+        shuf -n 1
+    )"
 else
     impalad="$(hostname -f)"
     #echo "IMPALA_HOST not set and topology map '$topology_map' not found, defaulting to local host $impalad"
