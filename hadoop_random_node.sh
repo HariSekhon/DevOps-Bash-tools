@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2020-01-16 12:22:40 +0000 (Thu, 16 Jan 2020)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# Script to print a random Hadoop node by parsing the Hadoop topology map from /etc
+#
+# Tested on CDH 5.10
+#
+# See also:
+#
+#   find_active_*.py - https://github.com/harisekhon/devops-python-tools
+#
+#   HAProxy Configs for many Hadoop and other technologies - https://github.com/harisekhon/haproxy-configs
+#
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+
+topology_map="${HADOOP_TOPOLOGY_MAP:-/etc/hadoop/conf/topology.map}"
+
+# returns datanodes in the topology map by omitting nodes with that are masters / namenodes / control nodes
+awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" |
+grep -Ev '[^.]*(name|master|control)' |
+shuf -n 1
