@@ -57,7 +57,7 @@ opts="${IMPALA_OPTS:-}"
 core_site_xml="${HADOOP_CORE_SITE_XML:-/etc/hadoop/conf/core-site.xml}"
 
 #if ! [ -f "$core_site_xml" ]; then
-#    echo "File not found: $core_site_xml. Did you run this on a Hadoop node?"
+#    echo "File not found: $core_site_xml. Did you run this on a Hadoop node?" >&2
 #    exit 1
 #fi
 
