@@ -56,12 +56,13 @@ opts="${IMPALA_OPTS:-}"
 
 core_site_xml="${HADOOP_CORE_SITE_XML:-/etc/hadoop/conf/core-site.xml}"
 
-if ! [ -f "$core_site_xml" ]; then
-    echo "File not found: $core_site_xml. Did you run this on a Hadoop node?"
-    exit 1
-fi
+#if ! [ -f "$core_site_xml" ]; then
+#    echo "File not found: $core_site_xml. Did you run this on a Hadoop node?"
+#    exit 1
+#fi
 
-if grep -A 1 hadoop.security.authentication "$core_site_xml"  | grep -q kerberos; then
+if [ -n "${IMPALA_KERBEROS:-}" ] ||
+   grep -A 1 hadoop.security.authentication "$core_site_xml"  | grep -q kerberos; then
     opts="$opts -k"
 fi
 
