@@ -29,7 +29,7 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 add_PATH CLASSPATH "$HOME/bin/java"
 
 # turn off those annoying Java 11 warnings when using Groovy scripting
-GROOVY_TURN_OFF_JAVA_WARNINGS=true
+export GROOVY_TURN_OFF_JAVA_WARNINGS=true
 
 if isMac; then
     mac_export_java_home(){
