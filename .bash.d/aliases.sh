@@ -54,6 +54,9 @@ alias se=screenrc
 #xe(){ xemacs $@ & }
 #alias x=xe
 
+# not present on Mac
+#type tailf &>/dev/null || alias tailf="tail -f"
+alias tailf="tail -f"  # tail -f is better than tailf anyway
 alias mv='mv -i'
 alias cp='cp -i'
 #alias rm='rm -i'
