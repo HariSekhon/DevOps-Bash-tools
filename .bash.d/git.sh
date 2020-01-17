@@ -38,6 +38,7 @@ alias gitignore="\$EDITOR ~/.gitignore_global"
 alias gitrc=gitconfig
 
 alias add=gitadd
+alias gadd='git add'
 alias import=gitimport
 alias co=checkout
 alias commit="git commit"
@@ -50,6 +51,7 @@ alias u=up
 alias pu=push
 alias gitp="git push"
 alias gdiff="git diff"
+alias gdiffc="git diff --cached"
 # bypasses diff-so-fancy, could also just pipe through | cat to disable pager and color effects
 alias gdiff2="git --no-pager diff"
 alias gdiffm="gdiff origin/master.."
