@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Dumps all unattached policies in JSON format
+# Lists all unattached policies
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
