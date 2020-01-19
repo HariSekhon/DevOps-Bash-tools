@@ -36,7 +36,8 @@ fi
 alias gitconfig="\$EDITOR ~/.gitconfig"
 alias gitignore="\$EDITOR ~/.gitignore_global"
 alias gitrc=gitconfig
-
+# false positive, not calling this from xargs
+# shellcheck disable=SC2032
 alias add=gitadd
 alias gadd='git add'
 alias import=gitimport
@@ -51,6 +52,7 @@ alias u=up
 alias pu=push
 alias gitp="git push"
 alias gdiff="git diff"
+alias gd=gdiff
 alias gdiffc="git diff --cached"
 # bypasses diff-so-fancy, could also just pipe through | cat to disable pager and color effects
 alias gdiff2="git --no-pager diff"
@@ -710,6 +712,8 @@ fixmerge(){
     local merge_deleted_files
     merge_deleted_files="$(merge_deleted_files)"
     if [ -n "$merge_deleted_files" ]; then
+        # false positive, not passing add function/alias add to git
+        # shellcheck disable=SC2033
         xargs git add <<< "$merge_deleted_files"
     fi
     merge_conflicted_files="$(merge_conflicting_files)"
