@@ -96,15 +96,22 @@ shelltitle ' > |'
 # no longer exists - left as example
 #bindkey ^f screen -t Tech-Stable ssh tech-stable.harisekhon.com
 
+# open selection list to jump to any URLs in the current pane - this is better done in adjacent vim and tmux configs
+# ugly hack due to screen not supporting piping hardcopy and none of the usual shell / coreutil tricks work
+# eg. - or /dev/stdout or /dev/fd/1 - hardcopy silently fails if not regular file
+#bind u eval "hardcopy hardcopy.tmp" "exec ... urlview hardcopy.tmp" "exec rm hardcopy.tmp"
+#bind u exec ... urlview
+#bind u exec urlview
+
 # ctrl-a ctrl-x
 #bind ^x focus up
 
 # ctrl-a `
 bind ` focus up
 
-# Mac key in siilar position to PC `
+# Mac key in similar position to PC key `
 # doesn't work when testing 'ctrl-a §'
-# ignore since that key is slightly awkward and just use the up arrow set below
+# ignore since that key is slightly awkward and just use the up arrow set above
 #bind § focus up
 
 #bindkey ^` focus up
