@@ -256,14 +256,16 @@ nmap          ;g :! bash -ic 'cd $(dirname "%") && st'<CR>
 nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
-nmap          ;u :!urlview "%"<CR><CR>
+nmap <silent> ;u :!urlview "%"<CR><CR>
+" pass current line as stdin to urlview to quickly go to this url
+nmap          ;U :.w !urlview<CR><CR>
+" breaks ;; nmap
+"nmap          ;\ :source ~/.vimrc<CR>
+nmap          ;/ :source ~/.vimrc<CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 nmap          ;§ :call ToggleScrollLock()<CR>
-" breaks ;; nmap
-"nmap          ;\ :source ~/.vimrc<CR>
-nmap          ;/ :source ~/.vimrc<CR>
 
 
 " ============================================================================ "
