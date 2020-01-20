@@ -43,7 +43,8 @@ while read -r arn version; do
     policy="$(aws iam get-policy-version --policy-arn "$arn" --version-id "$version")"
     if {
         # select any policies where Action is a string or an array containing * from granting all
-        jq -r '.PolicyVersion | select(.Document.Statement[].Action | index("*"))' <<< "$policy" 2>/dev/null || :
+        # XXX: if you want to find policies granting full access to a service like S3 just replace '*' with 's3:*'
+        jq -r '.PolicyVersion | select(.Document.Statement[].Action == "*")' <<< "$policy" 2>/dev/null || :
         jq -r '.PolicyVersion | select(.Document.Statement[].Action.[] | index("*"))' <<< "$policy" 2>/dev/null || :
        } | grep -q .; then
         echo "WARNING: $arn GRANTS FULL ACCESS:"
