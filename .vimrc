@@ -3,6 +3,8 @@
 "  Date: 2006-07-01 22:52:16 +0100 (Sat, 01 Jul 2006)
 "
 
+" TODO: review https://github.com/nickjj/dotfiles/blob/master/.vimrc
+
 " ============================================================================ "
 "                                   v i m r c
 " ============================================================================ "
@@ -256,9 +258,9 @@ nmap          ;g :! bash -ic 'cd $(dirname "%") && st'<CR>
 nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
-nmap <silent> ;u :!urlview "%"<CR><CR>
+nmap <silent> ;u :w | !urlview "%s"<CR>
 " pass current line as stdin to urlview to quickly go to this url
-nmap          ;U :.w !urlview<CR><CR>
+nmap <silent> ;U :.w !urlview<CR><CR>
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
 nmap          ;/ :source ~/.vimrc<CR>
