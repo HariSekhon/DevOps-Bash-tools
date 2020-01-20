@@ -11,15 +11,13 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Installs Parquet Tools to local ~/bin
-#
-# add ~/bin/parquet-tools-* to $PATH (automatically detected and done via advanced bashrc in this repo)
+# Installs Vim plugin manager Vundle to $HOME/.vim/bundle/Vundle.vim
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 if ! type -P vim &>/dev/null; then
-    echo "ViM not installed, aborting..."
+    echo "Vim not installed, aborting..."
     exit 1
 fi
 
