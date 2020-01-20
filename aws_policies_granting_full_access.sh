@@ -35,26 +35,36 @@ num_policies="$(wc -l <<< "$policies")"
 num_policies="${num_policies//[[:space:]]/}"
 
 echo "Iterating over all $num_policies policies to find policies granting full access (this may take a while)" >&2
-{
-echo '['
-i=1
+#{
+#echo '['
+#i=1
 while read -r arn version; do
-    aws iam get-policy-version --policy-arn "$arn" --version-id "$version"
+    echo "checking $arn version $version" >&2
+    policy="$(aws iam get-policy-version --policy-arn "$arn" --version-id "$version")"
+    if {
+        # select any policies where Action is a string or an array containing * from granting all
+        jq -r '.PolicyVersion | select(.Document.Statement[].Action | index("*"))' <<< "$policy" 2>/dev/null || :
+        jq -r '.PolicyVersion | select(.Document.Statement[].Action.[] | index("*"))' <<< "$policy" 2>/dev/null || :
+       } | grep -q .; then
+        echo "WARNING: $arn GRANTS FULL ACCESS:"
+        echo "$policy"
+        echo
+    fi
     # simple but we want progress numbers
     #echo -n '.' >&2
     # only print counter if stderr is to terminal
-    if [ -t 2 ]; then
-        printf '\r%s/%s' "$i" "$num_policies" >&2
-    fi
-    if [ $i -lt "$num_policies" ]; then
-        echo ','
-    fi
-    ((i+=1))
+    #if [ -t 2 ]; then
+    #    printf '\r%s/%s' "$i" "$num_policies" >&2
+    #fi
+    #if [ $i -lt "$num_policies" ]; then
+    #    echo ','
+    #fi
+    #((i+=1))
 done <<< "$policies"
-printf '\n' >&2
-echo ']'
-} |
+#printf '\n' >&2
+#echo ']'
+#} # |
 # doesn't give full document
 #jq -r '.[].PolicyVersion.Document.Statement[] | select(.Action | index("*"))'
-# gives full document, but not name and not doesn't work when Action is string instead of array
-jq -r '.[].PolicyVersion | select(.Document.Statement[].Action | index("*"))'
+# gives full document, but not name and doesn't work when Action is string instead of array - doing test in loop now to output arn and handle both cases
+#jq -r '.[].PolicyVersion | select(.Document.Statement[].Action | index("*"))'
