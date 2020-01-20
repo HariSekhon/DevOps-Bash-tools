@@ -28,8 +28,8 @@ else
     fi
     # automatically sending Enter to Continue
     if [ "$(uname -s)" = Linux ]; then
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)" <<< ""
+        curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh | sh
     else
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" <<< ""
+        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
     fi
 fi
