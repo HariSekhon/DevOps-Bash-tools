@@ -116,6 +116,7 @@ Plugin 'tmux-plugins/vim-tmux'
 
 call vundle#end()
 
+
 " ============================================================================ "
 "                               A u t o c m d
 " ============================================================================ "
@@ -258,9 +259,10 @@ nmap          ;g :! bash -ic 'cd $(dirname "%") && st'<CR>
 nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
 nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
-nmap <silent> ;u :w | !urlview "%s"<CR>
+nmap <silent> ;u :w<CR> :!urlview "%"<CR>
 " pass current line as stdin to urlview to quickly go to this url
-nmap <silent> ;U :.w !urlview<CR><CR>
+" messes up interactive vim
+"nmap <silent> ;U :.w !urlview<CR> :redraw
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
 nmap          ;/ :source ~/.vimrc<CR>
@@ -372,6 +374,7 @@ function! WriteRunDebug()
         :! DEBUG=1 bash -c "./% `$bash_tools/lib/args_extract.sh "%"` 2>&1 | less"
     endif
 endfunction
+
 
 " ============================================================================ "
 "                   L o c a l   C o n f i g   S o u r c i n g
