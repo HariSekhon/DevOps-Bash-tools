@@ -23,15 +23,17 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 aws cloudtrail describe-trails |
-jq -r '.trailList[] | [.Name, .KmsKeyId] | @tsv' |
-while read -r name keyid; do
-    kms_secured=false
-    if [ -n "$keyid" ]; then
-        kms_secured=true
-    else
-        keyid="N/A"
-    fi
-    printf "%s\t%s\t%s" "$name" "$kms_secured" "$keyid"
-done |
+# more efficient
+jq -r '.trailList[] | [.Name, has("KmsKeyId"), .KmsKeyId // "N/A"] | @tsv' |
+#jq -r '.trailList[] | [.Name, .KmsKeyId] | @tsv' |
+#while read -r name keyid; do
+#    kms_secured=false
+#    if [ -n "$keyid" ]; then
+#        kms_secured=true
+#    else
+#        keyid="N/A"
+#    fi
+#    printf "%s\t%s\t%s" "$name" "$kms_secured" "$keyid"
+#done |
 sort |
 column -t
