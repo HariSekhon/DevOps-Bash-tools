@@ -261,7 +261,7 @@ nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap <silent> ;u :w<CR> :!urlview "%"<CR>
 " pass current line as stdin to urlview to quickly go to this url
-" messes up interactive vim so calling a terminal reset fixes it
+" messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 nmap <silent> ;U :.w !urlview<CR> :!reset<CR><CR>
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
