@@ -261,8 +261,8 @@ nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap <silent> ;u :w<CR> :!urlview "%"<CR>
 " pass current line as stdin to urlview to quickly go to this url
-" messes up interactive vim
-"nmap <silent> ;U :.w !urlview<CR> :redraw
+" messes up interactive vim so calling a terminal reset fixes it
+nmap <silent> ;U :.w !urlview<CR> :!reset<CR><CR>
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
 nmap          ;/ :source ~/.vimrc<CR>
@@ -270,6 +270,13 @@ nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 nmap          ;§ :call ToggleScrollLock()<CR>
+
+" reloading with these didn't fix above pipe disabling arrow keys but
+" adding a terminal reset after the pipe command did fix it
+"noremap <Up>    <Up>
+"noremap <Down>  <Down>
+"noremap <Left>  <Left>
+"noremap <Right> <Right>
 
 
 " ============================================================================ "
