@@ -220,7 +220,8 @@ done
 
 # set in ansible.sh
 #alias a='ansible -Db'
-alias an='anonymize.py -a'
+alias anonymize='anonymize.py'
+alias an='anonymize -a'
 alias tf='terraform'
 alias bc='bc -l'
 alias chromekill='pkill -f "Google Chrome Helper"'
