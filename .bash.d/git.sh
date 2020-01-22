@@ -561,6 +561,7 @@ updatemodules(){
                 git stash
                 git checkout master
                 git pull
+                git submodule update
                 # shellcheck disable=SC2164
                 popd
             fi
