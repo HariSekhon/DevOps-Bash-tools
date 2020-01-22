@@ -55,6 +55,24 @@ whenup(){
     "$@"
 }
 
+# HTTP(s) version of whenup because corporate firewalls block ping
+whenurl(){
+    local url="$1"
+    shift
+    local count=0
+    while ! curl -s --connect-timeout 2 "$url" &>/dev/null; do
+        ((count+=1))
+        timestamp "waiting for $url to come up..."
+        if [ $count -gt 22 ]; then
+            sleep 10
+        else
+            sleep 5
+        fi
+    done
+    timestamp "$url is up"
+    "$@"
+}
+
 whendown(){
     local host="$1"
     shift
