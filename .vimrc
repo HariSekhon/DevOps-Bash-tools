@@ -235,6 +235,7 @@ nmap <silent> ;h :Hr<CR>
 nmap          ;H :call WriteHelp()<CR>
 " this inserts Hr literally
 "imap <silent> <C-H> :Hr<CR>
+nmap <silent> ;I :PluginInstall<CR>
 nmap <silent> ;j :JHr<CR>
 "nmap <silent> ;' :call Sq()<CR>
 " done automatically on write now
