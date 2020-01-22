@@ -3,8 +3,6 @@
 "  Date: 2006-07-01 22:52:16 +0100 (Sat, 01 Jul 2006)
 "
 
-" TODO: review https://github.com/nickjj/dotfiles/blob/master/.vimrc
-
 " ============================================================================ "
 "                                   v i m r c
 " ============================================================================ "
@@ -182,7 +180,7 @@ if has("autocmd")
     " TODO: groovy/java CLI linters
     au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
 
-    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR><CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     " doesn't trigger on window switching
     au FileType sh                        nmap ;l :w<CR>:!clear; shellcheck -Calways "%" \| more -R<CR>
