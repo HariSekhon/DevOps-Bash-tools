@@ -21,6 +21,12 @@
 
 # Tested on Cloudera Enterprise 5.10
 
+# If encountering race conditions in metadata updates between Impalad daemons connected through a load balancer, you may be interested in setting
+#
+# SET SYNC_DDL=1;
+#
+# in your Impala session before issuing DDL statements or INSERTS into partitioned tables, see
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
