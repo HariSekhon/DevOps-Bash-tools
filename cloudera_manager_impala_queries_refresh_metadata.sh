@@ -13,8 +13,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to show recent Impala refresh metadata queries via Cloudera Manager API
+# Script to show recent Impala metadata refresh calls via Cloudera Manager API
 #
+# TSV output format:
+#
+# <time>    <user>      <statement>
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
