@@ -17,11 +17,14 @@
 #
 # TSV output format:
 #
-# <time>    <user>      <statement>
+# <time>    <database>  <user>      <statement>
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$srcdir/cloudera_manager_impala_queries.sh" |
-jq -r '.queries[] | select(.attributes.ddl_type == "RESET_METADATA") | [.startTime, .user, .statement] | @tsv'
+jq -r '.queries[] |
+       select(.attributes.ddl_type == "RESET_METADATA") |
+       [.startTime, .database, .user, .statement] |
+       @tsv'
