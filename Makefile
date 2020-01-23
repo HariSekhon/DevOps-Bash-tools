@@ -236,6 +236,16 @@ wc-scripts2:
 wcscripts2: wc-scripts2
 	@:
 
+.PHONY: wc-scripts3
+wc-scripts3:
+	@$(MAKE) ls-scripts | grep -v /setup/ | xargs wc -l
+	@printf "Total Script files: "
+	@$(MAKE) ls-scripts | grep -v /setup/ | wc -l
+
+.PHONY: wcscripts3
+wcscripts3: wc-scripts3
+	@:
+
 .PHONY: wcbashrc
 wcbashrc:
 	@wc $(BASH_PROFILE_FILES)
