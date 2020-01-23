@@ -24,4 +24,8 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$srcdir/cloudera_manager_impala_queries.sh" |
-jq -r '.queries[] | select(.attributes.query_status | test("metadata")) | [.startTime, .database, .user, .attributes.query_status] | @tsv'
+jq -r '.queries[] |
+       select(.attributes.query_status |
+       test("metadata")) |
+       [.startTime, .database, .user, .attributes.query_status] |
+       @tsv'
