@@ -19,6 +19,8 @@
 #
 # ./cloudera_manager_impala_queries.sh | jq -r '.queries[].statement'
 
+# Tested on Cloudera Enterprise 5.10
+
 # Raw JSON output example:
 #
 # {
