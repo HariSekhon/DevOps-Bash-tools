@@ -53,6 +53,7 @@ alias pu=push
 alias gitp="git push"
 alias gdiff="git diff"
 alias gd=gdiff
+alias gdc=gdiffc
 alias gdiffc="git diff --cached"
 # bypasses diff-so-fancy, could also just pipe through | cat to disable pager and color effects
 alias gdiff2="git --no-pager diff"
