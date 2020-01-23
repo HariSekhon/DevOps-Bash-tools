@@ -115,31 +115,11 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ -z "${CLOUDERA_MANAGER:-}" ]; then
-    if [ -n "${CLOUDERA_MANAGER_HOST:-}" ]; then
-        CLOUDERA_MANAGER="${CLOUDERA_MANAGER_HOST:-}:${CLOUDERA_MANAGER_PORT:-7180}"
-    else
-        read -r -p 'Enter Clouder Manager host URL: ' CLOUDERA_MANAGER
-    fi
-fi
+# shellcheck disable=SC1090
+. "$srcdir/lib/cloudera_manager.sh"
 
-if [ -n "${CLOUDERA_MANAGER_SSL:-}" ]; then
-    CLOUDERA_MANAGER="https://${CLOUDERA_MANAGER#*://}"
-    if [[ "$CLOUDERA_MANAGER" =~ :7180$ ]]; then
-        CLOUDERA_MANAGER="${CLOUDERA_MANAGER%:7180}:7183"
-    fi
-fi
-
-# seems to work on CM / CDH 5.10.0 even when cluster is set to 'blah' but probably shouldn't rely on that
-CLOUDERA_CLUSTER="${CLOUDERA_CLUSTER:-${CLOUDERA_MANAGER_CLUSTER:-}}"
-if [ -z "${CLOUDERA_CLUSTER:-}" ]; then
-    read -r -p 'Enter Clouder Manager Cluster name: ' CLOUDERA_CLUSTER
-fi
-
-# 2020-01-02T16%3A17%3A57.514Z
-# url encoding : => %3A seems to be done automatically by curl so not bothering to urlencode here
-now_timestamp="$(date '+%Y-%m-%dT%H:%M:%S.000Z')"
-
+# defined in lib
+# shellcheck disable=SC2154
 echo "fetching queries up to now:  $now_timestamp" >&2
 
 "$srcdir/curl_auth.sh" -s "$CLOUDERA_MANAGER/api/v7/clusters/$CLOUDERA_CLUSTER/services/impala/impalaQueries?from=1970-01-01T00%3A00%3A00.000Z&to=$now_timestamp&filter="
