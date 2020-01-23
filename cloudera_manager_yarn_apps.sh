@@ -21,6 +21,8 @@
 
 # Tested on Cloudera Enterprise 5.10
 
+# Raw JSON output example:
+#
 # {
 #   "applications" : [ {
 #     "applicationId" : "application_1571433934948_123456",
