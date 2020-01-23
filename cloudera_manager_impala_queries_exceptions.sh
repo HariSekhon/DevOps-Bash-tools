@@ -19,6 +19,8 @@
 #
 # <time>    <database>  <user>  <statement may be long>     <error>
 
+# Tested on Cloudera Enterprise 5.10
+
 # Caveat: this doesn't catch things like:
 #
 # "query_status" : "\nFailed to open HDFS file hdfs://nameservice1/user/hive/warehouse/<database>.db/<table>/part-r-00030-1a234567-8bc9-01d2-e345-678fa901b2c3.snappy.parquet\nError(2): No such file or directory\n",
