@@ -13,12 +13,15 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to show recent Impala refresh metadata queries via Cloudera Manager API
+# Script to show recent Impala query metadata errors via Cloudera Manager API
 #
+# TSV output format:
+#
+# <time>    <database>      <user>      <query error>
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$srcdir/cloudera_manager_impala_queries.sh" |
-jq -r '.queries[] | select(.attributes.query_status | test("metadata")) | [.startTime, .user, .attributes.query_status] | @tsv'
+jq -r '.queries[] | select(.attributes.query_status | test("metadata")) | [.startTime, .database, .user, .attributes.query_status] | @tsv'
