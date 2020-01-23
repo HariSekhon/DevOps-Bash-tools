@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Dumps the SSL certificate blocks for hosts given as arguments
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
