@@ -16,8 +16,8 @@ Contains:
   - advanced `.bashrc` + `.bash.d/*.sh` - tonnes of advanced customizations and functions like `pass` which prompts for a password (star echo'd to screen) and stores it in the shell environment ram, which several scripts can then use to curl APIs without re-entering the password each time, nor exposing passwords on the CLI or in audit logs from command logging
   - advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), installs the best sysadmin packages like those above plus [AWS CLI](https://aws.amazon.com/cli/), [jq](https://stedolan.github.io/jq/) and many others, adds dynamic Git and shell behaviour enhancements, colouring, functions, aliases and automatic pathing of many common installation locations for many major languages like Python, Perl, Ruby, NodeJS, Golang...
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
-  - `.bash.d` - interactive library (huge)
-  - `lib` - script library
+  - `.bash.d/` - interactive library (huge)
+  - `lib/` - script library
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
