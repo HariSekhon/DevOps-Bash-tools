@@ -44,8 +44,7 @@ check_bin curl
 USERNAME="${USERNAME:-$USER}"
 
 if [ -z "${PASSWORD:-}" ]; then
-    read -r -s -p 'password: ' PASSWORD
-    echo
+    pass
 fi
 
 # ==============================================
