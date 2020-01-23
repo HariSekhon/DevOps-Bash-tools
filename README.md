@@ -10,9 +10,11 @@ Hari Sekhon - DevOps Bash Tools
 
 Contains:
 
-- Systems Administation scripts - scripts to make systems administration faster and easier for common tasks, including wrappers to common commands that auto-populate required switches and advanced bashrc functions like `pass` which prompts for a password (star echo'd to screen) and stores it in the shell environment ram, which several scripts can then use to curl APIs without re-entering the password each time, nor exposing passwords on the CLI or in audit logs from command logging
+- Scripts for fast advanced systems administration including auto-populating required switches
 - Scripts for CI builds across all my other repos, forming a drop-in framework containing many common checks
-- Bash environment enhancements - advanced `.bashrc` + `.bash.d/*.sh`, advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), installs the best sysadmin packages like those above plus [AWS CLI](https://aws.amazon.com/cli/), [jq](https://stedolan.github.io/jq/) and many others, adds dynamic Git and shell behaviour enhancements, colouring, functions, aliases and automatic pathing of many common installation locations for many major languages like Python, Perl, Ruby, NodeJS...
+- Bash environment enhancements
+  - advanced `.bashrc` + `.bash.d/*.sh` - countless useful functions like `pass` which prompts for a password (star echo'd to screen) and stores it in the shell environment ram, which several scripts can then use to curl APIs without re-entering the password each time, nor exposing passwords on the CLI or in audit logs from command logging
+  - advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), installs the best sysadmin packages like those above plus [AWS CLI](https://aws.amazon.com/cli/), [jq](https://stedolan.github.io/jq/) and many others, adds dynamic Git and shell behaviour enhancements, colouring, functions, aliases and automatic pathing of many common installation locations for many major languages like Python, Perl, Ruby, NodeJS...
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
   - `.bash.d` - interactive library (huge)
   - `lib` - script library
