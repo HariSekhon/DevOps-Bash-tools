@@ -139,8 +139,23 @@ user(){
 }
 
 pass(){
-    read -r -s -p 'password: ' PASSWORD
+    # doesn't echo, we can do better by making it star for each char
+    #read -r -s -p 'password: ' PASSWORD
+    PASSWORD=""
+    prompt="Enter password: "
+    while IFS= read -p "$prompt" -r -s -n 1 char; do
+        if [[ "$char" == $'\0' ]]; then
+            break
+        fi
+        prompt='*'
+        PASSWORD="${PASSWORD}${char}"
+    done
     export PASSWORD
+    echo
+}
+
+unpass(){
+    unset PASSWORD
 }
 
 hr(){
