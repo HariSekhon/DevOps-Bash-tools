@@ -140,6 +140,6 @@ fi
 # url encoding : => %3A seems to be done automatically by curl so not bothering to urlencode here
 now_timestamp="$(date '+%Y-%m-%dT%H:%M:%S.000Z')"
 
-echo "fetching queryies up to now:  $now_timestamp" >&2
+echo "fetching queries up to now:  $now_timestamp" >&2
 
 "$srcdir/curl_auth.sh" -s "$CLOUDERA_MANAGER/api/v7/clusters/$CLOUDERA_CLUSTER/services/impala/impalaQueries?from=1970-01-01T00%3A00%3A00.000Z&to=$now_timestamp&filter="
