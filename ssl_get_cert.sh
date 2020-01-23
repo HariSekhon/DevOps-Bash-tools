@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 if [ $# -lt 1 ]; then
-    echo "usage: ${0##*.} host[:port] [host2[:port]] ..."
+    echo "usage: ${0##*/} host[:port] [host2[:port]] ..."
     echo
     exit 3
 fi
