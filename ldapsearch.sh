@@ -45,7 +45,7 @@ user="${LDAP_USER:-$USER@$domain}"
 PASS="${LDAP_PASSWORD:-${PASSWORD:-${PASS:-}}}"
 # checks later for Kerberos first, otherwise sets ldapearch -W switch to prompt which is safer
 #if [ -z "${PASS:-}" ]; then
-#    read -s -p "password: " PASS
+#    pass
 #fi
 
 # shellcheck disable=SC2120
