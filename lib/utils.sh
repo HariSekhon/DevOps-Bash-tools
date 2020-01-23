@@ -325,6 +325,7 @@ trap_debug_env(){
 
 pass(){
     read_secret "password"
+    export PASSWORD="$secret"
 }
 
 read_secret(){
@@ -338,6 +339,7 @@ read_secret(){
         secret="${secret}${char}"
     done
     echo
+    export secret
 }
 
 run++(){
