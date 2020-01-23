@@ -19,6 +19,8 @@
 #
 # <time>    <database>      <user>      <query error>
 
+# Tested on Cloudera Enterprise 5.10
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
