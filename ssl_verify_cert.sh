@@ -17,6 +17,8 @@
 #
 # For a much better version of this see check_ssl_cert.pl in the Advanced Nagios Plugins Collection:
 #
+# check_ssl_cert.pl checks expiry days remaining, domain, SAN + SNI
+#
 # https://github.com/harisekhon/nagios-plugins
 
 set -euo pipefail
