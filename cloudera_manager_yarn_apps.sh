@@ -138,3 +138,4 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo "fetching queries up to now:  $now_timestamp" >&2
 
 "$srcdir/curl_auth.sh" -s "$CLOUDERA_MANAGER/api/v7/clusters/$CLOUDERA_CLUSTER/services/yarn/yarnApplications?from=1970-01-01T00%3A00%3A00.000Z&to=$now_timestamp&filter="
+echo
