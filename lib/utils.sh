@@ -323,9 +323,13 @@ trap_debug_env(){
     trap 'result=$?; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
 }
 
+pass(){
+    read_secret "password"
+}
+
 read_secret(){
     secret=""
-    prompt="Enter secret value: "
+    prompt="Enter ${1:-secret value}: "
     while IFS= read -p "$prompt" -r -s -n 1 char; do
         if [[ "$char" == $'\0' ]]; then
             break
