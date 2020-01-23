@@ -25,7 +25,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$srcdir/cloudera_manager_impala_queries.sh" |
 jq -r '.queries[] |
-       select(.attributes.query_status |
-       test("metadata")) |
+       select(.attributes.query_status | test("metadata|No such file or directory"; "i")) |
        [.startTime, .database, .user, .attributes.query_status] |
        @tsv'
