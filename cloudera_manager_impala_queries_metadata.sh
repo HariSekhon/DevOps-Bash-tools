@@ -32,5 +32,6 @@ jq -r '.queries[] |
             or
             (.attributes.query_status | test("metadata|No such file or directory"; "i"))
        ) |
+       select(.statement | test("^(SELECT|INSERT|UPDATE|DELETE)"; "i") | not) |
        [.startTime, .database, .user, .statement] |
        @tsv'
