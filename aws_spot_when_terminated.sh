@@ -52,7 +52,6 @@ if [[ "${1:-}" =~ ^- ]]; then
 fi
 
 if ! curl -sS --connect-timeout 2 http://169.254.169.254/ &>/dev/null; then
-    echo
     echo "This script must be run from within an EC2 instance as that is the only place the AWS EC2 Metadata API is available"
     exit 2
 fi
