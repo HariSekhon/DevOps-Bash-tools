@@ -47,7 +47,7 @@ else
         repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
     else
         echo "fetching repos from GitHub repo list"
-        repolist="$(curl -sL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
+        repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
     fi
 fi
 
