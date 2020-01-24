@@ -30,7 +30,7 @@ start_time="$(date +%s)"
 echo
 
 if command -v yum 2>/dev/null; then
-    curl -L https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
+    curl -sSL https://bintray.com/sbt/rpm/rpm | tee /etc/yum.repos.d/bintray-sbt-rpm.repo
     yum install -y java-sdk
     yum install -y --nogpgcheck sbt
 elif command -v apt-get 2>/dev/null; then
