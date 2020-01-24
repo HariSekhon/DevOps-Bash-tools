@@ -23,9 +23,8 @@ Simple script to trigger a background decommission of an Elasticsearch node from
 Defaults to connecting to the Elasticsearch cluster via the node localhost:9200
 set \$ELASTICSEARCH_HOST and \$ELASTICSEARCH_PORT to override this
 set \$ELASTICSEARCH_SSL to any value to enable SSL (ignores ssl validation as this is usually self-signed)
-set \$ELASTICSEARCH_OPTS='-u : --negotiate' to use Kerberos ticket in local environment
 
-${0##*/} <node_ip>
+${0##*/} <node_ip> [curl_options]
 
 eg. ${0##*/} 192.168.1.23
 "
@@ -47,7 +46,6 @@ http=http
 if [ -n "${ELASTICSEARCH_SSL:-}" ]; then
     http=https
 fi
-curl_opts="${ELASTICSEARCH_OPTS:-}"
 
 # could make this better by checking octets etc like my Python / Perl libraries
 # but don't want this script to get too heavy with dependencies
@@ -58,7 +56,7 @@ fi
 
 # want curl opts split
 # shellcheck disable=SC2086
-if curl -X PUT -k $curl_opts
+if curl -X PUT -k "${@:2}"
     "$http://$host:$port/_cluster/settings" \
      -H 'Content-Type: application/json' \
      -d "{ \"transient\" :{ \"cluster.routing.allocation.exclude._ip\" : \"$node_ip\" } }"; then
