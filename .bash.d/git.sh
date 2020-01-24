@@ -141,7 +141,7 @@ gitignore_api(){
     fi
     {
     if hash curl 2>/dev/null; then
-        curl -sL "${options[*]}" "$url"
+        curl -sSL "${options[*]}" "$url"
     elif hash wget 2>/dev/null; then
         wget -O - "${options[*]}" "$url"
     fi
