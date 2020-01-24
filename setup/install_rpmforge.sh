@@ -43,7 +43,7 @@ major_release="$(grep -ho '[[:digit:]]' /etc/*release | head -n1)"
 arch="$(uname -m)"
 
 rpm_url="$(
-    curl -s http://repoforge.org/use/ |
+    curl -sS http://repoforge.org/use/ |
     grep -Eo "http://repository.it4i.cz/mirrors/repoforge/redhat/el$major_release/en/$arch/.*\\.$arch\\.rpm"
 )"
 
