@@ -81,7 +81,8 @@ else
         echo
         brew install awless
     else
-        if ! curl -s https://updates.awless.io >/dev/null; then
+        if ! curl -sS https://updates.awless.io >/dev/null; then
+            echo
             echo "AWLess SSL certificate still expired, must install manually until fixed"
             exit 0
         fi
