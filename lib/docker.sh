@@ -264,7 +264,7 @@ dockerhub_latest_version(){
     fi
     set +e
     local version
-    version="$(curl -s "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z0-9_]+_VERSION=/ {print $2; exit}')"
+    version="$(curl -sS "https://raw.githubusercontent.com/HariSekhon/Dockerfiles/master/$repo/Dockerfile" | awk -F= '/^ARG[[:space:]]+[A-Za-z0-9_]+_VERSION=/ {print $2; exit}')"
     set -e
     if [ -z "$version" ]; then
         version='.*'
