@@ -16,4 +16,4 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-curl -s "https://get.sdkman.io" | bash
+curl -sS "https://get.sdkman.io" | bash
