@@ -20,7 +20,7 @@ usage(){
     echo "
 AWS EC2 Metadata API query shortcut
 
-${0##*/} <resource>
+${0##*/} <resource> [curl_options]
 
 eg. ${0##*/} public-ipv4
     ${0##*/} public-hostname
@@ -35,7 +35,7 @@ See also ec2-metadata script which is a more complete shell script
     exit 3
 }
 
-if [ $# -ne 1 ] ||
+if [ $# -lt 1 ] ||
    [[ "${1:-}" =~ -.* ]]; then
     usage
 fi
@@ -46,4 +46,4 @@ if ! curl -sS --connect-timeout 2 http://169.254.169.254/ &>/dev/null; then
     exit 2
 fi
 
-curl "http://169.254.169.254/latest/meta-data/${1:-}"
+curl "http://169.254.169.254/latest/meta-data/${1:-}" "${@:2}"
