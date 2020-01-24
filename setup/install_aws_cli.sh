@@ -86,7 +86,7 @@ else
             echo "AWLess SSL certificate still expired, must install manually until fixed"
             exit 0
         fi
-        curl https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
+        curl -sS https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
         mv -iv awless ~/bin/
     fi
 fi
