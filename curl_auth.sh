@@ -19,14 +19,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by utils.sh usage()
 # shellcheck disable=SC2034
-usage_description="Generates a ram only netrc file from .ssh/known_hosts and calls curl with it to avoid credentials being logged in environments that log every command and argument"
+usage_description="Runs curl with either Kerberos SpNego (if \$KRB5 is set) or
+a ram file descriptor using \$PASSWORD to avoid credentials being exposed via process list or command line logging"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 # used by utils.sh usage()
 # shellcheck disable=SC2034
-usage_args="<curl_options>"
+usage_args="[<curl_options>] <url>"
 
 if [ $# -lt 1 ]; then
     usage
@@ -43,14 +44,17 @@ check_bin curl
 
 USERNAME="${USERNAME:-$USER}"
 
-if [ -z "${PASSWORD:-}" ]; then
-    pass
-fi
+if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
+    if [ -z "${PASSWORD:-}" ]; then
+        pass
+    fi
 
 # ==============================================
 # option 1
 
-netrc_contents="default login $USERNAME password $PASSWORD"
+    netrc_contents="default login $USERNAME password $PASSWORD"
+
+fi
 
 # ==============================================
 # option 2
@@ -76,4 +80,8 @@ netrc_contents="default login $USERNAME password $PASSWORD"
 
 # ==============================================
 
-curl --netrc-file <(cat <<< "$netrc_contents") "$@"
+if [ -n "${KRB5:-${KERBEROS:-}}" ]; then
+    curl -u : --negotiate "$@"
+else
+    curl --netrc-file <(cat <<< "$netrc_contents") "$@"
+fi
