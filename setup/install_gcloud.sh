@@ -93,7 +93,7 @@ elif type -P apt-get &>/dev/null; then
 elif [[ "$(uname -s)" =~ Darwin|Linux ]]; then
     # https://cloud.google.com/sdk/docs/downloads-interactive
     install_script="$(mktemp -t gcloud_installer.sh.XXXXXX)"
-    curl https://sdk.cloud.google.com > "$install_script"
+    curl -sS https://sdk.cloud.google.com > "$install_script"
     chmod +x "$install_script"
     "$install_script" --disable-prompts --install-dir="$install_root_dir"
 else
