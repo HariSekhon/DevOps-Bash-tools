@@ -60,6 +60,7 @@ alias gdiff2="git --no-pager diff"
 alias gdiffm="gdiff origin/master.."
 alias branch="githg branch"
 alias br=branch
+alias stash="git stash"
 alias tag="githg tag"
 alias um=updatemodules
 alias gbrowse=gitbrowse
