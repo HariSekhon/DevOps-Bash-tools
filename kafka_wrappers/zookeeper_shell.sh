@@ -13,13 +13,15 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Kafka's zookeeper-shell wrapper to auto-populate common options like the zookeeper addresses and znode parent
+
 set -u
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
 # sources heap, kerberos, brokers, zookeepers etc
 # shellcheck disable=SC1090
-. "$srcdir/../.bash.d/kafka.sh"
+. "$srcdir/.bash.d/kafka.sh"
 
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154
