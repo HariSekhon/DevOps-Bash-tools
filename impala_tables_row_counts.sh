@@ -22,6 +22,11 @@
 # you will almost certainly have to comment out / remove '-o pipefail' to skip authorization errors such as that documented in impala_list_tables.sh
 # and also ignore errors from the 'select count(*)' in the loop as Impala often has metadata errors such as:
 #
+# ERROR: AnalysisException: Failed to load metadata for table: '<table>'
+# CAUSED BY: TableLoadingException: Unsupported type 'void' in column '<column>' of table '<table>'
+#
+# ============================================================================ #
+#
 # WARNINGS: Disk I/O error: Failed to open HDFS file hdfs://nameservice1/user/hive/warehouse/<database>.db/<table>/1234a5678b90cd1-ef23a45678901234_5678901234_data.10.parq
 # Error(2): No such file or directory
 # Root cause: RemoteException: File does not exist: /user/hive/warehouse/<database>.db/<table>/1234a5678b90cd1-ef23a45678901234_5678901234_data.10.parq
@@ -42,6 +47,7 @@
 #         at javax.security.auth.Subject.doAs(Subject.java:422)
 #         at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1924)
 #         at org.apache.hadoop.ipc.Server$Handler.run(Server.java:2272)
+#
 
 set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
