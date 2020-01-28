@@ -64,6 +64,7 @@ alias stash="git stash"
 alias tag="githg tag"
 alias um=updatemodules
 alias gbrowse=gitbrowse
+alias gh=gitbrowse
 #type browse &>/dev/null || alias browse=gbrowse
 alias ggrep="git grep"
 # much quicker to just 'cd $github; f <pattern>'
