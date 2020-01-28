@@ -24,7 +24,7 @@ set -euo pipefail
 srcdir="$(dirname "$0")"
 
 "$srcdir/impala_shell.sh" -Bq 'show databases' |
-while read -r db rest; do
-    "$srcdir/impala_shell.sh" -Bq "use $db; show tables" |
+while read -r db; do
+    "$srcdir/impala_shell.sh" -Bq 'use `'"$db"'`; show tables' |
     sed "s/^/$db./"
 done
