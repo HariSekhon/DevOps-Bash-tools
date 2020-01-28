@@ -19,9 +19,12 @@
 #
 # For more documentation see the comments at the top of impala_shell.sh
 
-# you will need to comment/remove 'o pipefail' below to skip errors if you aren't authorized to use
-# any of the databases to avoid the script exiting early upon encountering any error
-set -euo pipefail
+# you will need to comment/remove '-o pipefail' below to skip errors if you aren't authorized to use
+# any of the databases to avoid the script exiting early upon encountering any authorization error such:
+#
+# ERROR: AuthorizationException: User '<user>@<domain>' does not have privileges to access: default   Default Hive database.*.*
+#
+set -eu -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
