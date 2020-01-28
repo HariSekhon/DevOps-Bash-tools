@@ -16,7 +16,7 @@
 # Lists all Impala databases using adjacent impala_shell.sh script
 #
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
-
+#
 # For more documentation see the comments at the top of impala_shell.sh
 
 set -euo pipefail
