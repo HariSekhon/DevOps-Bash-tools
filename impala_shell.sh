@@ -37,6 +37,8 @@
 #   --output_delimiter=\t   # default
 #   --quiet
 #
+# See adjacent impala_*.sh scripts for slightly better versions of these quick command line examples, including better quoting and error handling
+#
 # list all databases:
 #
 #   ./impala_shell.sh -Bq 'show databases' | awk '{print $1}'
