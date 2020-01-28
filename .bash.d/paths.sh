@@ -160,6 +160,10 @@ fi
 alias lsperlbin='ls -d ~/perl5/bin/* 2>/dev/null'
 alias llperlbin='ls -ld ~/perl5/bin/* 2>/dev/null'
 
+# cpanm --local-lib=~/perl5 local::lib
+# populates a bunch of Perl env vars pointing to ~/perl5/...
+# eval "$(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)"
+
 
 # ============================================================================ #
 #                                    N o d e
