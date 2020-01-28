@@ -16,9 +16,11 @@
 # Lists all Impala tables in all databases using adjacent impala_shell.sh script
 #
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
-
+#
 # For more documentation see the comments at the top of impala_shell.sh
 
+# you will need to comment/remove 'o pipefail' below to skip errors if you aren't authorized to use
+# any of the databases to avoid the script exiting early upon encountering any error
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
