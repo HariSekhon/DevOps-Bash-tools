@@ -15,7 +15,7 @@
 
 # Script to more easily connect to Impala without having to find an impalad and repeatedly specify options like -k for kerberos
 #
-# Tested on Impala 2.7.0 on CDH 5.10
+# Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #
 # See also:
 #
