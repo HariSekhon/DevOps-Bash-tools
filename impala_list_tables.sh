@@ -31,5 +31,5 @@ srcdir="$(dirname "$0")"
 "$srcdir/impala_shell.sh" -Bq 'show databases' "$@" |
 while read -r db; do
     "$srcdir/impala_shell.sh" -Bq 'use `'"$db"'`; show tables' "$@" |
-    sed "s/^/$db./"
+    sed "s/^/$db	/"
 done
