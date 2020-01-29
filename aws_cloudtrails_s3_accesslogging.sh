@@ -29,7 +29,7 @@ set -euo pipefail
 aws cloudtrail describe-trails --query 'trailList[*].S3BucketName' |
 jq -r '.[]' |
 while read -r name; do
-    printf "%s\t" "$name"
+    printf '%s\t' "$name"
     output="$(aws s3api get-bucket-logging --bucket "$name" |
     jq -r '.LoggingEnabled | [.TargetPrefix, .TargetBucket] | @tsv')"
     if [ -z "$output" ]; then
