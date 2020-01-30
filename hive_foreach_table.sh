@@ -39,6 +39,9 @@ shift
 
 opts="--silent=true --outputformat=tsv2"
 
+# exit the loop subshell if you Control-C
+trap 'exit 130' INT
+
 # shellcheck disable=SC2086
 "$srcdir/hive_list_tables.sh" "$@" |
 while read -r db table; do
