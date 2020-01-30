@@ -22,6 +22,8 @@
 #   --silent=true
 #   --outputformat=tsv2     (tsv is deprecated and single quotes results, tsv2 is recommended and cleaner)
 #
+# See adjacent hive_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
+#
 # list all databases
 #
 #   ./beeline.sh --silent=true --outputformat=tsv2 -e 'show databases' | tail -n +2
@@ -42,6 +44,11 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+if [ -n "${HIVE_ZOOKEEPERS:-}" ]; then
+    exec "$srcdir/beeline_zk.sh" "$@"
+fi
 
 # not listed in hive-site.xml on edge nodes nor https://github.com/apache/hive/blob/master/data/conf/hive-site.xml
 # must specify in your environment / .bashrc or similar
