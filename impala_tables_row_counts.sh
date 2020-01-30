@@ -15,6 +15,10 @@
 
 # Counts rows for all Impala tables in all databases using adjacent impala_shell.sh script
 #
+# TSV Output format:
+#
+# <database>    <table>     <count>
+#
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #
 # For more documentation see the comments at the top of impala_shell.sh
