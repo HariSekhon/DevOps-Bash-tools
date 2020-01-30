@@ -37,5 +37,6 @@ opts="--silent=true --outputformat=tsv2"
 "$srcdir/hive_list_databases.sh" "$@" |
 while read -r db; do
     "$srcdir/beeline.sh" $opts -e "SHOW TABLES FROM \`$db\`" "$@" |
+    tail -n +2 |
     sed "s/^/$db	/"
 done
