@@ -23,4 +23,4 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/impala_shell.sh" -Bq 'show databases' "$@"  # | awk '{print $1}'
+"$srcdir/impala_shell.sh" -Bq 'SHOW DATABASES' "$@"  # | awk '{print $1}'
