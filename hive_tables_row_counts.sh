@@ -30,12 +30,4 @@ set -eu -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-opts="--silent=true --outputformat=tsv2"
-
-# shellcheck disable=SC2086
-"$srcdir/hive_list_tables.sh" |
-while read -r db table; do
-    printf '%s\t%s\t' "$db" "$table"
-    "$srcdir/beeline.sh" $opts -e "SELECT COUNT(*) FROM \`$db\`.\`$table\`" "$@" |
-    tail -n +2
-done
+"$srcdir/hive_foreach_table.sh" "SELECT COUNT(*) FROM {db}.{table}" "$@"
