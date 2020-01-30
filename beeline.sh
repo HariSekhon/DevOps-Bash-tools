@@ -46,7 +46,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-if [ -n "${HIVE_ZOOKEEPERS:-}" ]; then
+if [ -n "${HIVE_HA:-}" ] ||
+   [ -n "${HIVE_ZOOKEEPERS:-}" ]; then
     exec "$srcdir/beeline_zk.sh" "$@"
 fi
 
