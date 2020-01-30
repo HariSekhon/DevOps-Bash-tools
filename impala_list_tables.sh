@@ -28,8 +28,8 @@ set -eu -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/impala_shell.sh" -Bq 'SHOW DATABASES' "$@" |
+"$srcdir/impala_list_databases.sh" |
 while read -r db; do
-    "$srcdir/impala_shell.sh" -Bq "USE \`$db\`; SHOW TABLES" "$@" |
+    "$srcdir/impala_shell.sh" -Bq "SHOW TABLES IN \`$db\`" "$@" |
     sed "s/^/$db	/"
 done
