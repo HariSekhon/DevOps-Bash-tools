@@ -69,7 +69,7 @@ trap 'exit 130' INT
 
 "$srcdir/impala_list_tables.sh" "$@" |
 while read -r db table; do
-    printf '%s.%s:\t' "$db" "$table"
+    printf '%s.%s\t' "$db" "$table"
     query="${query_template//\{db\}/\`$db\`}"
     query="${query//\{table\}/\`$table\`}"
     "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@"
