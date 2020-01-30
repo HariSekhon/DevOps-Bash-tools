@@ -23,4 +23,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/impala_shell.sh" -Bq 'SHOW DATABASES' "$@"  # | awk '{print $1}'
+# strip comments after database name, eg.
+# default Default Hive database
+"$srcdir/impala_shell.sh" -Bq 'SHOW DATABASES' "$@" | awk '{print $1}'
