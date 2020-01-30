@@ -17,7 +17,7 @@
 #
 # TSV Output format:
 #
-# <database>    <table>     <count>
+# <database>    <table>     <row_count>
 #
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #
