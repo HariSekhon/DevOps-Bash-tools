@@ -27,7 +27,7 @@ set +o pipefail
 if [ -z "${HIVE_ZOOKEEPERS:-}" ]; then
     HIVE_ZOOKEEPERS="$(grep -A1 hive.zookeeper.quorum "$hive_site_xml" 2>/dev/null | grep '<value>' | sed 's/<value>//;s,</value>,,;s/[[:space:]]*//g')"
     if [ -z "${HIVE_ZOOKEEPERS:-}" ]; then
-        echo "HIVE_ZOOKEEPERS environment variable not set (format is zookeeper1.domain.com:2181,zookeeper2.domain.com:2181,zookeeper3.domain.com:2181)" >&2
+        echo "HIVE_ZOOKEEPERS environment variable not set and couldn't determine from $hive_site_xml (format is zookeeper1.domain.com:2181,zookeeper2.domain.com:2181,zookeeper3.domain.com:2181)" >&2
         exit 3
     fi
 fi
