@@ -57,16 +57,5 @@ set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-# exit the loop subshell if you Control-C
-trap 'exit 130' INT
 
-"$srcdir/impala_list_tables.sh" "$@" |
-while read -r db table; do
-    printf '%s\t%s\t' "$db" "$table"
-    #set +e
-    "$srcdir/impala_shell.sh" --quiet -Bq "SELECT COUNT(*) FROM \`$db\`.\`$table\`" "$@"
-    #if [ $? -eq 130 ]; then
-    #    break
-    #fi
-    #set -e
-done
+"$srcdir/impala_foreach_table.sh" "SELECT COUNT(*) FROM {db}.{table}" "$@"
