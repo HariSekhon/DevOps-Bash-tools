@@ -33,7 +33,7 @@ num_buckets="${num_buckets//[[:space:]]}"
 
 echo "Fetching access logging status for each of $num_buckets buckets (this may take a while):" >&2
 while read -r name; do
-    printf "%s\t" "$name"
+    printf '%s\t' "$name"
     output="$(aws s3api get-bucket-logging --bucket "$name" |
     jq -r '.LoggingEnabled | [.TargetPrefix, .TargetBucket] | @tsv')"
     if [ -z "$output" ]; then

@@ -57,7 +57,7 @@ srcdir="$(dirname "$0")"
 while read -r db; do
     "$srcdir/impala_shell.sh" --quiet -Bq 'use `'"$db"'`; show tables' "$@" |
     while read -r table; do
-        printf "%s\t%s\t" "$db" "$table"
+        printf '%s\t%s\t' "$db" "$table"
         # shellcheck disable=SC2016
         "$srcdir/impala_shell.sh" --quiet -Bq 'use `'"$db"'`; SELECT COUNT(*) FROM `'"$table"'`' "$@" || echo
     done
