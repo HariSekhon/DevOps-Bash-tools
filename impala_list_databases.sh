@@ -19,6 +19,10 @@
 #
 # For more documentation see the comments at the top of impala_shell.sh
 
+# For a better version written in Python see DevOps Python tools repo:
+#
+# https://github.com/harisekhon/devops-python-tools
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
