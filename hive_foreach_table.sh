@@ -20,6 +20,10 @@
 #
 # Tested on Hive 1.1.0 on CDH 5.10, 5.16
 
+# For a better version written in Python see DevOps Python tools repo:
+#
+# https://github.com/harisekhon/devops-python-tools
+
 # you will need to comment out / remove '-o pipefail' below to skip errors if you aren't authorized to use
 # any of the databases to avoid the script exiting early upon encountering any authorization error such:
 #
