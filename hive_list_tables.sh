@@ -24,8 +24,7 @@
 
 # For Hive < 3.0 - consider using adjacent impala_list_tables.sh instead as it is much faster
 
-# you will need to comment out / remove '-o pipefail' below to skip errors if you aren't authorized to use
-# any of the databases to avoid the script exiting early upon encountering any authorization error such:
+# Hive doesn't suffer from db authz issue listing metadata like Impala, which gets:
 #
 # ERROR: AuthorizationException: User '<user>@<domain>' does not have privileges to access: default   Default Hive database.*.*
 #
