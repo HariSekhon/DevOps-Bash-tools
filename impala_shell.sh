@@ -37,7 +37,7 @@
 #   --output_delimiter=\t   # default
 #   --quiet
 #
-# See adjacent impala_*.sh scripts for slightly better versions of these quick command line examples, including better quoting and error handling
+# See adjacent impala_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
 #
 # list all databases:
 #
