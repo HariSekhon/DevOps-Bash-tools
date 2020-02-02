@@ -19,8 +19,11 @@ srcdir="$(dirname "$0")"
 
 # sources heap, kerberos, brokers, zookeepers etc
 # shellcheck disable=SC1090
-. "$srcdir/../.bash.d/kafka.sh"
+. "$srcdir/.bash.d/kafka.sh"
+
+# old version of kafka used --zookeeper, deprecated now
+#kafka-topics.sh $kafka_zookeeper "$@"
 
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154,SC2086
-kafka-consumer-groups.sh $bootstrap_server "$@"
+kafka-topics.sh $bootstrap_server "$@"

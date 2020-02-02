@@ -4,6 +4,8 @@
 #
 #  vim:ts=4:sw=4:et
 
+App::Ack
+App::cpanminus
 App::FatPacker
 DBD::mysql
 IO::Socket::SSL

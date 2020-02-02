@@ -26,7 +26,7 @@ set -euo pipefail
 aws cloudtrail describe-trails |
 jq -r '.trailList[].Name' |
 while read -r name; do
-    printf "%s\t" "$name"
+    printf '%s\t' "$name"
     output="$(aws cloudtrail get-trail-status --name "$name" | jq -r '.LatestcloudwatchLogdDeliveryTime')"
     if [ -n "$output" ]; then
         echo "$output"

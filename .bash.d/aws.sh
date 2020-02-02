@@ -228,8 +228,10 @@ aws_token(){
         return 1
     fi
     #aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token
+    set -x
     output="$(aws sts get-session-token --serial-number "$AWS_MFA_ARN" --duration-seconds "${AWS_STS_DURATION_SECS:-129600}" --token-code "$@")"
     result=$?
+    set +x
     echo "$output"
     if [ $result -ne 0 ]; then
         return $result
