@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- BigQuery Billing Query - get latest 100 charges
+-- BigQuery Billing Query - latest 100 charges
 SELECT
   product,
   resource_type,
