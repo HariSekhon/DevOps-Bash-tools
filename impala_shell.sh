@@ -17,6 +17,10 @@
 #
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #
+#  If using dedicated coordinators then consider setting IMPALA_HOST to one of those explicitly, see
+#
+#    https://docs.cloudera.com/documentation/enterprise/5-16-x/topics/impala_dedicated_coordinator.html
+#
 # See also:
 #
 #   find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
