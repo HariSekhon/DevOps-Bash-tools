@@ -67,6 +67,7 @@ make install
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
   - SCM - [Git](https://git-scm.com/), [Mercurial](https://www.mercurial-scm.org/), [Svn](https://subversion.apache.org)
   - [AWS](https://aws.amazon.com/)
+  - [GCP](https://cloud.google.com/)
   - [Docker](https://www.docker.com/)
   - [Kubernetes](https://kubernetes.io/)
   - [Kafka](http://kafka.apache.org/)
@@ -90,7 +91,7 @@ make install
   - `hive_*.sh` - various scripts using `beeline.sh` to list databases, tables, row counts of all tables in all databases etc.
 - `impala_shell.sh` - connects to [Impala](https://impala.apache.org/) via impala-shell, parsing the Hadoop topology map and selecting a random datanode to connect to its Impalad. This is mostly for convenience to shorten commands and while it acts as a poor man's load balancer, you might want to instead use my real load balancer [HAProxy config for Impala](https://github.com/HariSekhon/HAProxy-configs) (and many other Big Data & NoSQL technologies). Optional environment variables `$IMPALA_HOST` (eg. point to HAProxy load balancer) and `IMPALA_SSL=1` (or use regular impala-shell `--ssl` argument pass through)
   - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
-  - `impala_*.sh` - various scripts using `impala_shell.sh` to get quick database & table lists, row counts of all tables in all databases etc.
+  - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, row counts of all tables in all databases etc.
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
 - `zookeeper_client.sh` - wraps zookeeper-client, auto-finds the zookeeper quorum from `/etc/**/*-site.xml` to make it faster and easier to connect
 - `zookeeper_shell.sh` - wraps Kafka's zookeeper-shell, auto-populating the zookeeper quorum from the environment to make it faster and easier to connect
