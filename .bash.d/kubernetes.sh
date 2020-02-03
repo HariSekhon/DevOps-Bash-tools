@@ -41,6 +41,11 @@ alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
 alias ke=kubeexec
+alias kg='k get'
+alias ka='k apply'
+alias kl='k logs'
+alias kshell='kube-shell'
+alias kubesh='kube-shell'
 
 alias use="k config use-context"
 alias contexts="k config get-contexts"
