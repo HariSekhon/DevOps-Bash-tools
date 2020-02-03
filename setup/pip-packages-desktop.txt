@@ -24,6 +24,7 @@ beautifulsoup4
 cfn-lint
 flake8
 kazoo
+kube-shell
 nose
 # pep8 has been renamed to pycodestyle
 pycodestyle
