@@ -154,6 +154,7 @@ if has("autocmd")
     " filetype is better than syntax since it figures out indentation and tab completion etc and the ruby is better than conf since it gives more syntax highlighting
     au BufNew,BufRead *.pp set filetype=ruby sts=2 sw=2 ts=2
 
+    au BufNew,BufRead *.tf set sts=2 sw=2 ts=2
     au BufNew,BufRead *.yml set sts=2 sw=2 ts=2
     au BufNew,BufRead *.yaml set sts=2 sw=2 ts=2
 
