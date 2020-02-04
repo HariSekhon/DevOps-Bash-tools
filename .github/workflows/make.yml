@@ -11,22 +11,102 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# MarketPlace:  https://github.com/marketplace?type=actions
+
 name: CI
 
-on: [push]
+env:
+  DEBUG: 1
+
+on: # [push]
+  push:
+    branches:
+      - master
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 10 1 * *'
 
 jobs:
   build:
+    #name: build
+    timeout-minutes: 10
+    runs-on:
+      - ubuntu-latest
+      - ubuntu-16.04
+      - macos-latest
 
-    runs-on: ubuntu-latest
+#    runs-on: ${{ matrix.os }}
+#    strategy:
+#        matrix:
+#            os: [ubuntu-16.04, ubuntu-18.04]
+#            node: [6, 8, 10]
 
     steps:
+
+	  # ============================================================================
+	  # https://github.com/actions/cache
+	  # ============================================================================
+	  # Python
+#		- uses: actions/cache@v1
+#			if: startsWith(runner.os, 'Linux')
+#			with:
+#				path: ~/.cache/pip
+#				key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+#				restore-keys: |
+#					${{ runner.os }}-pip-
+#
+#		- uses: actions/cache@v1
+#			if: startsWith(runner.os, 'macOS')
+#			with:
+#				path: ~/Library/Caches/pip
+#				key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+#				restore-keys: |
+#					${{ runner.os }}-pip-
+	  # ============================================================================
+		# Go
+#		- uses: actions/cache@v1
+#			with:
+#				path: ~/go/pkg/mod
+#				key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+#				restore-keys: |
+#					${{ runner.os }}-go-
+	  # ============================================================================
+		# Java
+#		- uses: actions/cache@v1
+#			with:
+#				path: ~/.m2/repository
+#				key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#				restore-keys: |
+#					${{ runner.os }}-maven-
+	  # ============================================================================
+		# SBT
+#		- name: Cache SBT ivy cache
+#			uses: actions/cache@v1
+#			with:
+#				path: ~/.ivy2/cache
+#				key: ${{ runner.os }}-sbt-ivy-cache-${{ hashFiles('**/build.sbt') }}
+#		- name: Cache SBT
+#			uses: actions/cache@v1
+#			with:
+#				path: ~/.sbt
+#				key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+	  # ============================================================================
+
     - uses: actions/checkout@v2
-    - name: build & test
+    #- uses: docker://harisekhon/centos-dev
+      name: build & test
       run: make build test
-    env:
-      DEBUG: 1
     #- name: Run a multi-line script
     #  run: |
     #    echo Add other actions to build,
     #    echo test, and deploy your project.
+
+  docker:
+    #name: docker
+    runs-on:
+      - ubuntu-latest
+
+    steps:
+    - uses: docker://harisekhon/centos-dev
+      name: build & test
+      run: make build test
