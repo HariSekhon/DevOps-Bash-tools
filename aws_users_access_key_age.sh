@@ -20,7 +20,7 @@
 # aws_users_access_key_age_report.sh - much quicker version for lots of users
 #
 #
-# aws_users_access_key_age.py in DevOps Python Tools which is able to filter by age and status
+# aws_users_access_key_age.py - in DevOps Python Tools which is able to filter by age and status
 #
 # https://github.com/harisekhon/devops-python-tools
 #
