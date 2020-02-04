@@ -171,6 +171,15 @@ if has("autocmd")
         au! BufRead,BufNewFile *.hta setfiletype html
     augroup end
 
+"    autocmd FileType c,cpp,java,scala let b:comment_char = '//'
+"    autocmd FileType sh,perl,python   let b:comment_char = '#'
+"    autocmd FileType ruby             let b:comment_char = '#'
+"    autocmd FileType conf,dockerfile,fstab let b:comment_char = '#'
+"    autocmd FileType sql              let b:comment_char = '--'
+"    autocmd FileType tex              let b:comment_char = '%'
+"    autocmd FileType mail             let b:comment_char = '>'
+"    autocmd FileType vim              let b:comment_char = '"'
+
     " headtail.py is useful to see the top things to fix and the score on each run and can be found in the
     " https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint "%" \| headtail.py<CR>
@@ -269,6 +278,9 @@ nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 nmap          ;§ :call ToggleScrollLock()<CR>
 
+"noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_char,'\/')<CR>/<CR>:nohlsearch<CR>
+"noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_char,'\/')<CR>//e<CR>:nohlsearch<CR>
+
 " reloading with these didn't fix above pipe disabling arrow keys but
 " adding a terminal reset after the pipe command did fix it
 "noremap <Up>    <Up>
@@ -288,6 +300,16 @@ function! ToggleSyntax()
         syntax enable
     endif
 endfunction
+
+"function! ToggleComment()
+"    let comment_prefix = '^' . b:comment_char
+"    echo comment_prefix
+"    if getline('.') =~ comment_prefix
+"        :s/^\=get(b:comment_char)//
+"    else
+"        :s/^/\=get(b:comment_char)/
+"    endif
+"endfunction
 
 " setting this high keeps cursor in middle of screen
 ":set so=999
