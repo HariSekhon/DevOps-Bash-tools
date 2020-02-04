@@ -204,9 +204,17 @@ is_travis(){
     return 1
 }
 
+is_github_workflow(){
+    if [ -n "${GITHUB_WORKFLOW:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 is_CI(){
     if [ -n "${CI:-}" ] ||
        [ -n "${CI_NAME:-}" ] ||
+       is_github_workflow ||
        is_jenkins ||
        is_travis; then
         return 0
