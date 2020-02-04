@@ -41,12 +41,6 @@ mkdir -p ~/bin
 
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
-# root installs to first one, user installs to the latter
-for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
-    if [ -d "$x" ]; then
-        export PATH="$PATH:$x"
-    fi
-done
 
 if type -P aws &>/dev/null; then
     echo "AWS CLI already installed"
@@ -59,6 +53,13 @@ fi
 # installs on Linux too as it is the AWS recommended method to install SAM CLI
 "$srcdir/install_homebrew.sh"
 echo
+
+# root installs to first one, user installs to the latter
+for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
+    if [ -d "$x" ]; then
+        export PATH="$PATH:$x"
+    fi
+done
 
 if type -P sam &>/dev/null; then
     echo "AWS SAM CLI already installed"
