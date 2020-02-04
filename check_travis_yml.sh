@@ -49,7 +49,7 @@ else
             echo "installing travis gem... (requires ruby-dev package to be installed)"
             # --no-rdoc option not valid on GitHub Workflows macos-latest build
             #gem install --user-install travis --no-rdoc --no-ri
-            "$srcdir/../ruby_gem_install_if_absent.sh" travis
+            "$srcdir/ruby_gem_install_if_absent.sh" travis
             for path in ~/.gem/ruby/*; do
                 [ -d "$path" ] || continue
                 export PATH="$PATH:$path/bin"
