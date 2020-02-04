@@ -22,13 +22,24 @@
 #
 # See also:
 #
-# aws_users_access_key_age.py
+# aws_users_access_key_age.sh
 #
-# in DevOps Python Tools which is able to filter by age and status
+#
+# aws_users_access_key_age.py - in DevOps Python Tools which is able to filter by age and status
 #
 # https://github.com/harisekhon/devops-python-tools
 #
+#
 # awless list accesskeys --format tsv | grep 'years[[:space:]]*$'
+#
+#
+# AWS Config rule compliance:
+#
+# https://<region>.console.aws.amazon.com/config/home?region=<region>&v2=true#/rules/details?configRuleName=access-keys-rotated
+#
+# eg.
+#
+# https://eu-west-1.console.aws.amazon.com/config/home?region=eu-west-1&v2=true#/rules/details?configRuleName=access-keys-rotated
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
