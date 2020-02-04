@@ -20,6 +20,9 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+. "$srcdir/lib/utils.sh"
 
 perl="${PERL:-perl}"
 
@@ -57,5 +60,13 @@ if [ -n "$found" ]; then
 else
     echo "no perl executable was found matching any of: $*" >&2
     echo "\$PATH searched was: $PATH" >&2
+    if is_CI; then
+        echo
+        echo "running in CI detected, attempting to search all paths"
+        for x in "$@"; do
+            echo "searching for $x:"
+            find / -type f -name "$x" 2>/dev/null || :
+        done
+    fi
     exit 1
 fi
