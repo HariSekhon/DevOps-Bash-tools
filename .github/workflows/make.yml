@@ -42,6 +42,7 @@ jobs:
 #            node: [6, 8, 10]
 
     steps:
+    - uses: actions/checkout@v2
 
 # ============================================================================
 # https://github.com/actions/cache
@@ -92,21 +93,19 @@ jobs:
 #				key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
 # ============================================================================
 
-    - uses: actions/checkout@v2
-    #- uses: docker://harisekhon/centos-dev
-      name: build & test
+    - name: build & test
       run: make build test
     #- name: Run a multi-line script
     #  run: |
     #    echo Add other actions to build,
     #    echo test, and deploy your project.
 
-  docker:
-    #name: docker
-    runs-on:
-      - ubuntu-latest
-
-    steps:
-    - uses: docker://harisekhon/centos-dev
-      name: build & test
-      run: make build test
+#  docker:
+#    #name: docker
+#    runs-on:
+#      - ubuntu-latest
+#
+#    steps:
+#    - uses: docker://harisekhon/centos-dev
+#    -  name: build & test
+#      run: make build test
