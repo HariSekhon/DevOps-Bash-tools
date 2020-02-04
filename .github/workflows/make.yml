@@ -31,9 +31,9 @@ jobs:
     #name: build
     timeout-minutes: 10
     runs-on:
-      - ubuntu-latest
-      - ubuntu-16.04
-      - macos-latest
+    - ubuntu-latest
+    - ubuntu-16.04
+    - macos-latest
 
 #    runs-on: ${{ matrix.os }}
 #    strategy:
@@ -72,7 +72,7 @@ jobs:
 #				restore-keys: |
 #					${{ runner.os }}-go-
 # ============================================================================
-# Java
+# Java / Maven
 #		- uses: actions/cache@v1
 #			with:
 #				path: ~/.m2/repository
@@ -80,7 +80,7 @@ jobs:
 #				restore-keys: |
 #					${{ runner.os }}-maven-
 # ============================================================================
-# SBT
+# Scala / SBT
 #		- name: Cache SBT ivy cache
 #			uses: actions/cache@v1
 #			with:
