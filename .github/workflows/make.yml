@@ -2,7 +2,7 @@
 #  Author: Hari Sekhon
 #  Date: Tue Feb 4 09:53:28 2020 +0000
 #
-#  vim:ts=4:sts=4:sw=4:noet
+#  vim:ts=2:sts=2:sw=2:et
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -24,6 +24,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: build & test
       run: make build test
+    env:
+      DEBUG: 1
     #- name: Run a multi-line script
     #  run: |
     #    echo Add other actions to build,
