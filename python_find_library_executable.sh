@@ -81,7 +81,7 @@ else
         echo "running in CI detected, attempting to search all paths"
         for x in "$@"; do
             echo "searching for $x:"
-            find / -name "$x" 2>/dev/null || :
+            find / -type f -name "$x" 2>/dev/null || :
         done
     fi
     exit 1
