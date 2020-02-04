@@ -34,4 +34,4 @@ jobs:
 #    - uses: docker://harisekhon/centos-dev
     - uses: actions/checkout@v2
     - name: build & test
-      run: cd DevOps-Bash-tools && make build test
+      run: cd $HOME/DevOps-Bash-tools && make build test
