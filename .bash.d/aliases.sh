@@ -94,7 +94,9 @@ alias tmp="cd /tmp"
 #fi
 
 # shellcheck disable=SC2139
-alias bt="sti bt; cd $(dirname "${BASH_SOURCE[0]}")/.."
+bt="$(dirname "${BASH_SOURCE[0]}")/.."
+export bt
+alias bt='sti bt; cd $bt'
 
 # shellcheck disable=SC2154
 export bashd="$bash_tools/.bash.d"
