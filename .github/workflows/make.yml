@@ -13,7 +13,7 @@
 
 # MarketPlace:  https://github.com/marketplace?type=actions
 
-name: CI
+name: CI Ubuntu
 
 env:
   DEBUG: 1
@@ -30,7 +30,7 @@ jobs:
   build:
     #name: build
     timeout-minutes: 10
-    #runs-on: [ubuntu-latest, ubuntu-16.04, macos-latest]
+    #runs-on: ubuntu-latest
 
     runs-on: ${{ matrix.os }}
     strategy:
