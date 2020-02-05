@@ -31,8 +31,6 @@ jobs:
     runs-on: ubuntu-latest
     container: harisekhon/centos-dev
     steps:
-#    - uses: docker://harisekhon/centos-dev
     - uses: actions/checkout@v2
     - name: build & test
-      #run: make build test
-      run: pwd; cat /.dockerenv; cat /etc/*release; /usr/bin/docker run -ti -v $PWD:/code harisekhon/centos-dev bash -c 'cd /code && make build test'
+      run: ls -l /.dockerenv; echo "pwd is $PWD"; cat /etc/*release; make build test
