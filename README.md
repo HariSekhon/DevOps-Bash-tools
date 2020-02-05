@@ -8,6 +8,8 @@ Hari Sekhon - DevOps Bash Tools
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
+[![CI CentOS](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS%22)
+[![CI Alpine](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Alpine%22)
 
 100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon) CI builds.
 
