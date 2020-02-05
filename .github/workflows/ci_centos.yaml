@@ -31,6 +31,14 @@ jobs:
     runs-on: ubuntu-latest
     container: harisekhon/centos-dev
     steps:
-    - uses: actions/checkout@v2
+    # doesn't retain .git in docker container
+    #- uses: actions/checkout@v2
     - name: build & test
-      run: ls -l /.dockerenv; echo "pwd is $PWD"; cat /etc/*release; make build test
+      run: |
+        ls -l /.dockerenv
+        echo "pwd is $PWD"
+        cat /etc/*release
+        cd / &&
+        git clone https://github.com/harisekhon/bash-tools &&
+        cd bash-tools &&
+        make build test
