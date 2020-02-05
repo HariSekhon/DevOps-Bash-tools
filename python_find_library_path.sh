@@ -16,7 +16,7 @@
 
 # Shows the path to Python libraries given as arguments
 #
-# There is a better version of this in the adjacent DevOps Python Tools repo called find_python_library_path.py
+# There is a better version of this in the adjacent DevOps Python Tools repo called python_find_library_path.py
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
