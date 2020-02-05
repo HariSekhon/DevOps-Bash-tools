@@ -26,6 +26,7 @@ air
 airsnort
 alsa-utils
 aosd-cat
+apache2-utils  # ab
 app-dicts/dictd-dicts
 app-vim/perl-support
 apt-file
