@@ -6,8 +6,8 @@ Hari Sekhon - DevOps Bash Tools
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
 
-[![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
+[![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
 
 100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon) CI builds.
 
@@ -94,7 +94,7 @@ make install
   - `hive_*.sh` - various scripts using `beeline.sh` to list databases, tables, row counts of all tables in all databases etc.
 - `impala_shell.sh` - connects to [Impala](https://impala.apache.org/) via impala-shell, parsing the Hadoop topology map and selecting a random datanode to connect to its Impalad. This is mostly for convenience to shorten commands and while it acts as a poor man's load balancer, you might want to instead use my real load balancer [HAProxy config for Impala](https://github.com/HariSekhon/HAProxy-configs) (and many other Big Data & NoSQL technologies). Optional environment variables `$IMPALA_HOST` (eg. point to HAProxy load balancer) and `IMPALA_SSL=1` (or use regular impala-shell `--ssl` argument pass through)
   - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
-  - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, row counts of all tables in all databases etc.
+  - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, row counts for all tables, metadata field extraction, table locations etc.
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
 - `zookeeper_client.sh` - wraps zookeeper-client, auto-finds the zookeeper quorum from `/etc/**/*-site.xml` to make it faster and easier to connect
 - `zookeeper_shell.sh` - wraps Kafka's zookeeper-shell, auto-populating the zookeeper quorum from the environment to make it faster and easier to connect
