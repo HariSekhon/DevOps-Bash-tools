@@ -22,6 +22,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 perl="${PERL:-perl}"
@@ -62,9 +63,9 @@ else
     echo "\$PATH searched was: $PATH" >&2
     if is_CI; then
         echo
-        echo "running in CI detected, attempting to search all paths"
+        echo "running in CI detected, attempting to search all paths" >&2
         for x in "$@"; do
-            echo "searching for $x:"
+            echo "searching for $x:" >&2
             find / -type f -name "$x" 2>/dev/null || :
         done
     fi
