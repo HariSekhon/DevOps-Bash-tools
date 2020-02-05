@@ -46,6 +46,12 @@ jobs:
         key: ${{ runner.os }}-pip-bash-tools  # ${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cpanm
+        key: ${{ runner.os }}-cpanm-bash-tools  # ${{ hashFiles('**/cpan-requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-cpanm-
     - name: build & test
       run: make build test
     #- name: Run a multi-line script
@@ -72,6 +78,14 @@ jobs:
 #       key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
 #       restore-keys: |
 #         ${{ runner.os }}-pip-
+# ============================================================================
+# Perl
+#   - uses: actions/cache@v1
+#     with:
+#       path: ~/.cpanm
+#       key: ${{ runner.os }}-cpanm-${{ hashFiles('**/cpan-requirements.txt') }}
+#       restore-keys: |
+#         ${{ runner.os }}-cpanm-
 # ============================================================================
 # Go
 #   - uses: actions/cache@v1
