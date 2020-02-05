@@ -35,4 +35,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: build & test
       #run: make build test
-      run: docker run -ti -v $PWD:/code harisekhon/centos-dev bash -c 'cd /code && make build test'
+      run: pwd; cat /.dockerenv; cat /etc/*release; /usr/bin/docker run -ti -v $PWD:/code harisekhon/centos-dev bash -c 'cd /code && make build test'
