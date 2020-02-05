@@ -40,62 +40,67 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-
-# ============================================================================
-# https://github.com/actions/cache
-# ============================================================================
-# Python
-#		- uses: actions/cache@v1
-#			if: startsWith(runner.os, 'Linux')
-#			with:
-#				path: ~/.cache/pip
-#				key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-#				restore-keys: |
-#					${{ runner.os }}-pip-
-#
-#		- uses: actions/cache@v1
-#			if: startsWith(runner.os, 'macOS')
-#			with:
-#				path: ~/Library/Caches/pip
-#				key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-#				restore-keys: |
-#					${{ runner.os }}-pip-
-# ============================================================================
-# Go
-#		- uses: actions/cache@v1
-#			with:
-#				path: ~/go/pkg/mod
-#				key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-#				restore-keys: |
-#					${{ runner.os }}-go-
-# ============================================================================
-# Java / Maven
-#		- uses: actions/cache@v1
-#			with:
-#				path: ~/.m2/repository
-#				key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-#				restore-keys: |
-#					${{ runner.os }}-maven-
-# ============================================================================
-# Scala / SBT
-#		- name: Cache SBT ivy cache
-#			uses: actions/cache@v1
-#			with:
-#				path: ~/.ivy2/cache
-#				key: ${{ runner.os }}-sbt-ivy-cache-${{ hashFiles('**/build.sbt') }}
-#		- name: Cache SBT
-#			uses: actions/cache@v1
-#			with:
-#				path: ~/.sbt
-#				key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
-# ============================================================================
-
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
     - name: build & test
       run: make build test
     #- name: Run a multi-line script
     #  run: |
     #    echo Add other actions to build,
     #    echo test, and deploy your project.
+
+# ============================================================================
+# https://github.com/actions/cache
+# ============================================================================
+# Python
+#   - uses: actions/cache@v1
+#     if: startsWith(runner.os, 'Linux')
+#     with:
+#       path: ~/.cache/pip
+#       key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+#       restore-keys: |
+#         ${{ runner.os }}-pip-
+#
+#   - uses: actions/cache@v1
+#     if: startsWith(runner.os, 'macOS')
+#     with:
+#       path: ~/Library/Caches/pip
+#       key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+#       restore-keys: |
+#         ${{ runner.os }}-pip-
+# ============================================================================
+# Go
+#   - uses: actions/cache@v1
+#     with:
+#       path: ~/go/pkg/mod
+#       key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+#       restore-keys: |
+#         ${{ runner.os }}-go-
+# ============================================================================
+# Java / Maven
+#   - uses: actions/cache@v1
+#     with:
+#       path: ~/.m2/repository
+#       key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#       restore-keys: |
+#         ${{ runner.os }}-maven-
+# ============================================================================
+# Scala / SBT
+#   - name: Cache SBT ivy cache
+#     uses: actions/cache@v1
+#     with:
+#       path: ~/.ivy2/cache
+#       key: ${{ runner.os }}-sbt-ivy-cache-${{ hashFiles('**/build.sbt') }}
+#   - name: Cache SBT
+#     uses: actions/cache@v1
+#     with:
+#       path: ~/.sbt
+#       key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+# ============================================================================
 
 #  docker:
 #    #name: docker
