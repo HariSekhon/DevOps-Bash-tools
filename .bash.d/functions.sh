@@ -362,7 +362,7 @@ readlink(){
     if isMac; then
         greadlink "$@"
     else
-        readlink "$@"
+        command readlink "$@"
     fi
 }
 
