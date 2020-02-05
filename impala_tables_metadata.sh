@@ -53,10 +53,6 @@ trap 'exit 130' INT
 
 "$srcdir/impala_list_tables.sh" "$@" |
 while read -r db table; do
-    if [ -n "${FILTER:-}" ] &&
-       ! [[ "$db.$table" =~ $FILTER ]]; then
-        continue
-    fi
     printf '%s.%s\t' "$db" "$table"
     query="${query_template//\{db\}/\`$db\`}"
     query="${query//\{table\}/\`$table\`}"

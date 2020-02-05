@@ -36,4 +36,11 @@ srcdir="$(dirname "$0")"
 while read -r db; do
     "$srcdir/impala_shell.sh" -Bq "SHOW TABLES IN \`$db\`" "$@" |
     sed "s/^/$db	/"
+done |
+while read -r db table; do
+    if [ -n "${FILTER:-}" ] &&
+       ! [[ "$db.$table" =~ $FILTER ]]; then
+        continue
+    fi
+    printf "%s\t%s\n" "$db" "$table"
 done
