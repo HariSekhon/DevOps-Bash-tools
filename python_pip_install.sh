@@ -74,7 +74,8 @@ fi
 
 user_opt(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
-       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
+       [ -n "${CONDA_DEFAULT_ENV:-}" ] ||
+       [ -n "${GITHUB_WORKFLOW:-}" ]; then
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
     else
         opts="$opts --user"
