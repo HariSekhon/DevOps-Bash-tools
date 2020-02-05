@@ -227,9 +227,9 @@ fi
 # shellcheck disable=SC2230
 if type -P go &>/dev/null; then
     if isMac; then
-        GOROOT="$(dirname "$(dirname "$(greadlink -f "$(which go)")")")"
+        GOROOT="$(dirname "$(dirname "$(greadlink -f "$(type -P go)")")")"
     else
-        GOROOT="$(dirname "$(dirname "$(readlink -f "$(which go)")")")"
+        GOROOT="$(dirname "$(dirname "$(readlink -f "$(type -P go)")")")"
     fi
     export GOROOT
     add_PATH "$GOROOT/bin"
