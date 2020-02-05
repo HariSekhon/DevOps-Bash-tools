@@ -52,8 +52,9 @@ EOF
     exit 1
 fi
 
+export PATH="$perl_path:$PATH"
 set +o pipefail
-found="$(PATH="$perl_path" type -P "$@" | head -n 1)"
+found="$(type -P "$@" | head -n 1)"
 set -o pipefail
 
 if [ -n "$found" ]; then
