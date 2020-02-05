@@ -50,6 +50,23 @@ else
     echo
 fi
 
+if type -P ecs-cli &>/dev/null; then
+    echo "ECS CLI already installed"
+else
+    echo "Installing AWS ECS CLI"
+    if [ "$uname_s" = Darwin ]; then
+        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
+    else
+        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
+    fi
+    chmod +x ~/bin/ecs-cli
+fi
+
+if grep Alpine /etc/os-release &>/dev/null; then
+    echo "Skipping SAM CLI install on Alpine as Homebrew installer is broken on Alpine, see https://github.com/Homebrew/homebrew-core/issues/49813"
+    exit 0
+fi
+
 # installs on Linux too as it is the AWS recommended method to install SAM CLI
 "$srcdir/install_homebrew.sh"
 echo
@@ -100,18 +117,6 @@ fi
 # On Linux it will be /home/linuxbrew/.linuxbrew/bin for root or ~/.linuxbrew/bin for users
 #
 # Awless is usually installed to /usr/local/bin/awless
-
-if type -P ecs-cli &>/dev/null; then
-    echo "ECS CLI already installed"
-else
-    echo "Installing AWS ECS CLI"
-    if [ "$uname_s" = Darwin ]; then
-        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
-    else
-        wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
-    fi
-    chmod +x ~/bin/ecs-cli
-fi
 
 cat <<EOF
 
