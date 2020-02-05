@@ -16,7 +16,7 @@
 
 # Shows the path to Perl libraries given as arguments
 #
-# There is a better version of this in the adjacent DevOps Perl Tools repo called find_python_library_path.pl
+# There is a better version of this in the adjacent DevOps Perl Tools repo called perl_find_library_path.pl
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
