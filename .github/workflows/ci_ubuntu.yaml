@@ -24,7 +24,7 @@ on: # [push]
       - master
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0 10 1 * *'
+    - cron:  '0 10 30 * *'
 
 jobs:
   build:
