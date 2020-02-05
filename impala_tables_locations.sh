@@ -28,28 +28,4 @@ set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-for arg; do
-    if [[ "$arg" =~ -h|--help ]]; then
-        echo "usage: ${0##*/} [impala_shell_options]"
-        exit 3
-    fi
-done
-
-query_template="describe formatted {table}"
-
-# exit the loop subshell if you Control-C
-trap 'exit 130' INT
-
-"$srcdir/impala_list_tables.sh" "$@" |
-while read -r db table; do
-    if [ -n "${FILTER:-}" ] &&
-       ! [[ "$db.$table" =~ $FILTER ]]; then
-        continue
-    fi
-    printf '%s.%s\t' "$db" "$table"
-    query="${query_template//\{db\}/\`$db\`}"
-    query="${query//\{table\}/\`$table\`}"
-    { "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@" || echo ERROR; } |
-    grep ^Location |
-    sed 's/^Location:[[:space:]]*//; s/[[:space:]]*NULL[[:space:]]*$//'
-done
+"$srcdir/impala_tables_metadata.sh" Location "$@"
