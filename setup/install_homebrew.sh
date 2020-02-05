@@ -28,7 +28,15 @@ else
     fi
     # automatically sending Enter to Continue
     if [ "$(uname -s)" = Linux ]; then
-        curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh | sh
+        curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
+        {
+        if [ "$EUID" -eq 0 ]; then
+            id linuxbrew || useradd linuxbrew
+            su linuxbrew
+        else
+            sh
+        fi
+        }
     else
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
     fi
