@@ -68,8 +68,9 @@ EOF
     exit 1
 fi
 
+export PATH="$python_path:$PATH"
 set +o pipefail
-found="$(PATH="$python_path" type -P "$@" | head -n 1)"
+found="$(type -P "$@" | head -n 1)"
 set -o pipefail
 
 if [ -n "$found" ]; then
