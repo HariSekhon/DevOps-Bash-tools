@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     container: harisekhon/centos-dev
     steps:
-    # doesn't retain .git in docker container
+    # untars repo in docker container so git submodule update fails
     #- uses: actions/checkout@v2
     - name: build & test
       run: |
