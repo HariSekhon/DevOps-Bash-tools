@@ -31,7 +31,8 @@ else
         curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
         {
         if [ "$EUID" -eq 0 ]; then
-            id linuxbrew || useradd linuxbrew
+            # Alpine has adduser
+            id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
             su linuxbrew
         else
             sh
