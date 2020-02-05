@@ -44,4 +44,11 @@ while read -r db; do
     "$srcdir/beeline.sh" $opts -e "SHOW TABLES FROM \`$db\`" "$@" |
     tail -n +2 |
     sed "s/^/$db	/"
+done |
+while read -r db table; do
+    if [ -n "${FILTER:-}" ] &&
+       ! [[ "$db.$table" =~ $FILTER ]]; then
+        continue
+    fi
+    printf "%s\t%s\n" "$db" "$table"
 done
