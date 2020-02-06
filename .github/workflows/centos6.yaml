@@ -46,7 +46,7 @@ jobs:
     - name: build
       run: |
         cd /bash-tools &&
-        make build
+        make
     - name: test
       run: |
         cd /bash-tools &&
