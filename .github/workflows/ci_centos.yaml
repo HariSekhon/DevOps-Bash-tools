@@ -38,6 +38,7 @@ jobs:
         ls -l /.dockerenv
         echo "pwd is $PWD"
         cat /etc/*release
+        yum install -y git make &&
         cd / &&
         git clone https://github.com/harisekhon/bash-tools &&
         cd bash-tools &&
