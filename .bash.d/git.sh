@@ -260,60 +260,60 @@ st(){
 
 # disabling this as I don't use Mercurial or Svn any more,
 # replacing with simpler function below that will pass through more things like --rebase
-pull(){
-    local target="${1:-.}"
-    if ! [ -e "$target" ]; then
-        echo "$target does not exist"
-        return 1
-    fi
-    local target_basename
-    target_basename="$(basename "$target")"
-    # shellcheck disable=SC2166
-    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$github" ]; then
-        for x in "$target"/*; do
-            [ -d "$x" ] || continue
-            # get last character of string
-            [ "${x: -1}" = 2 ] && continue
-            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
-            if git remote -v | grep -qi harisekhon; then
-                echo "> GitHub: git pull $x ${*:2}"
-                git pull "${@:2}"
-                echo
-            fi
-            # shellcheck disable=SC2164
-            popd &>/dev/null
-        done
-        return
-    elif isGit "$target"; then
-        pushd "$target" >/dev/null &&
-        echo "> git pull -v ${*:2}" >&2
-        git pull -v "${@:2}"
-        git submodule update
-        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
-        #for branch in $(git branch | cut -c 3- ); do
-        #    git checkout -q "$branch" &&
-        #    echo -n "$branch => " &&
-        #    git pull -v
-        #    echo
-        #    echo
-        #done
-        #git checkout -q "$orig_branch"
-        # shellcheck disable=SC2164
-        popd &>/dev/null
-    elif type isHg &>/dev/null && isHg "$target"; then
-        pushd "$target" >/dev/null &&
-        echo "> hg pull && hg up" >&2  &&
-        hg pull && hg up
-        # shellcheck disable=SC2164
-        popd &>/dev/null
-    elif type isSvn &>/dev/null && isSvn "$target"; then
-        echo "> svn up $target" >&2
-        svn up "$target"
-    else
-        echo "not a revision controlled resource as far as bashrc can tell"
-        return 1
-    fi
-}
+#pull(){
+#    local target="${1:-.}"
+#    if ! [ -e "$target" ]; then
+#        echo "$target does not exist"
+#        return 1
+#    fi
+#    local target_basename
+#    target_basename="$(basename "$target")"
+#    # shellcheck disable=SC2166
+#    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$github" ]; then
+#        for x in "$target"/*; do
+#            [ -d "$x" ] || continue
+#            # get last character of string
+#            [ "${x: -1}" = 2 ] && continue
+#            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
+#            if git remote -v | grep -qi harisekhon; then
+#                echo "> GitHub: git pull $x ${*:2}"
+#                git pull "${@:2}"
+#                echo
+#            fi
+#            # shellcheck disable=SC2164
+#            popd &>/dev/null
+#        done
+#        return
+#    elif isGit "$target"; then
+#        pushd "$target" >/dev/null &&
+#        echo "> git pull -v ${*:2}" >&2
+#        git pull -v "${@:2}"
+#        git submodule update
+#        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
+#        #for branch in $(git branch | cut -c 3- ); do
+#        #    git checkout -q "$branch" &&
+#        #    echo -n "$branch => " &&
+#        #    git pull -v
+#        #    echo
+#        #    echo
+#        #done
+#        #git checkout -q "$orig_branch"
+#        # shellcheck disable=SC2164
+#        popd &>/dev/null
+#    elif type isHg &>/dev/null && isHg "$target"; then
+#        pushd "$target" >/dev/null &&
+#        echo "> hg pull && hg up" >&2  &&
+#        hg pull && hg up
+#        # shellcheck disable=SC2164
+#        popd &>/dev/null
+#    elif type isSvn &>/dev/null && isSvn "$target"; then
+#        echo "> svn up $target" >&2
+#        svn up "$target"
+#    else
+#        echo "not a revision controlled resource as far as bashrc can tell"
+#        return 1
+#    fi
+#}
 
 # simpler replacement function to above
 pull(){
