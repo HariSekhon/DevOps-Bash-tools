@@ -43,19 +43,21 @@ if [ -n "$cpan_requirements_files" ]; then
     echo
 fi
 
-for pkg in apk deb rpm brew; do
-    # don't check lib and pylib at the same time because they will have duplicates between them
-    for lib in lib pylib; do
-        requirements_files="$(find . -maxdepth 3 -name "$pkg-packages*.txt" | grep -ve "/$lib/" -e "/bash-tools/" -e '/pytools_checks/' || :)"
+#÷for pkg in apk deb rpm brew portage; do
+#÷    # don't check lib and pylib at the same time because they will have duplicates between them
+#÷    for lib in lib pylib; do
+#÷        requirements_files="$(find . -maxdepth 3 -name "$pkg-packages*.txt" | grep -ve "/$lib/" -e "/bash-tools/" -e '/pytools_checks/' || :)"
+#÷
+#÷        if [ -n "$requirements_files" ]; then
+#÷            echo "$pkg requirements files found: "$requirements_files
+#÷            echo "checking for duplicates"
+#÷            "$srcdir/find_duplicate_lines.sh" $requirements_files
+#÷            echo
+#÷        fi
+#÷    done
+#÷done
 
-        if [ -n "$requirements_files" ]; then
-            echo "$pkg requirements files found: "$requirements_files
-            echo "checking for duplicates"
-            "$srcdir/find_duplicate_lines.sh" $requirements_files
-            echo
-        fi
-    done
-done
+#"$srcdir/check_duplicate_packages.sh"
 
 time_taken "$start_time"
 section2 "No duplicate requirements found"

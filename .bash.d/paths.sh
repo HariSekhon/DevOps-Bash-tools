@@ -145,6 +145,15 @@ alias llpythonbin='ls -ld ~/Library/Python/*/bin/* 2>/dev/null'
 alias lspybin=lspythonbin
 alias llpybin=llpythonbin
 
+# RHEL8 has split python2 / python3 and removed default 'python' :-(
+if ! type -P python &>/dev/null; then
+    if type -P python2 &>/dev/null; then
+        python(){ python2 "$@"; }
+    elif type -P python3 &>/dev/null; then
+        python(){ python3 "$@"; }
+    fi
+fi
+
 
 # ============================================================================ #
 #                                    P e r l

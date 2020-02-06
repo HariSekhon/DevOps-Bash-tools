@@ -17,6 +17,8 @@
 #
 # Query can contain {db} and {table} placeholders which will be replaced for each table
 #
+# FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
+#
 #
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #

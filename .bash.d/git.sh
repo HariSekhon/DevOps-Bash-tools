@@ -63,9 +63,14 @@ alias br=branch
 alias stash="git stash"
 alias tag="githg tag"
 alias um=updatemodules
+#type browse &>/dev/null || alias browse=gbrowse
 alias gbrowse=gitbrowse
 alias gh=gitbrowse
-#type browse &>/dev/null || alias browse=gbrowse
+alias github_actions='gitbrowse actions'
+alias github_workflows='github_actions'
+alias gha='github_actions'
+alias ghw='github_workflows'
+alias wf='cd .github/workflows/'
 alias ggrep="git grep"
 # much quicker to just 'cd $github; f <pattern>'
 #githubls(){
@@ -107,7 +112,14 @@ gitgc(){
 }
 
 gitbrowse(){
-    browser "$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
+    local url
+    url="$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
+    if [ $# -gt 0 ] &&
+       [ -z "$url" ]; then
+        echo "git remote url not found"
+        return 1
+    fi
+    browser "$url/$1"
 }
 
 install_git_completion(){
@@ -249,64 +261,64 @@ st(){
 
 # disabling this as I don't use Mercurial or Svn any more,
 # replacing with simpler function below that will pass through more things like --rebase
-pull(){
-    local target="${1:-.}"
-    if ! [ -e "$target" ]; then
-        echo "$target does not exist"
-        return 1
-    fi
-    local target_basename
-    target_basename="$(basename "$target")"
-    # shellcheck disable=SC2166
-    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$github" ]; then
-        for x in "$target"/*; do
-            [ -d "$x" ] || continue
-            # get last character of string
-            [ "${x: -1}" = 2 ] && continue
-            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
-            if git remote -v | grep -qi harisekhon; then
-                echo "> GitHub: git pull $x ${*:2}"
-                git pull "${@:2}"
-                echo
-                echo "> GitHub: git submodule update --init --recursive"
-                git submodule update --init --recursive
-                echo
-            fi
-            # shellcheck disable=SC2164
-            popd &>/dev/null
-        done
-        return
-    elif isGit "$target"; then
-        pushd "$target" >/dev/null &&
-        echo "> git pull -v ${*:2}" >&2
-        git pull -v "${@:2}"
-        echo "> git submodule update --init --recursive"
-        git submodule update --init --recursive
-        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
-        #for branch in $(git branch | cut -c 3- ); do
-        #    git checkout -q "$branch" &&
-        #    echo -n "$branch => " &&
-        #    git pull -v
-        #    echo
-        #    echo
-        #done
-        #git checkout -q "$orig_branch"
-        # shellcheck disable=SC2164
-        popd &>/dev/null
-    elif type isHg &>/dev/null && isHg "$target"; then
-        pushd "$target" >/dev/null &&
-        echo "> hg pull && hg up" >&2  &&
-        hg pull && hg up
-        # shellcheck disable=SC2164
-        popd &>/dev/null
-    elif type isSvn &>/dev/null && isSvn "$target"; then
-        echo "> svn up $target" >&2
-        svn up "$target"
-    else
-        echo "not a revision controlled resource as far as bashrc can tell"
-        return 1
-    fi
-}
+#pull(){
+#    local target="${1:-.}"
+#    if ! [ -e "$target" ]; then
+#        echo "$target does not exist"
+#        return 1
+#    fi
+#    local target_basename
+#    target_basename="$(basename "$target")"
+#    # shellcheck disable=SC2166
+#    if [ "$target_basename" = "github" ] || [ "$target" = "." -a "$(pwd)" = "$github" ]; then
+#        for x in "$target"/*; do
+#            [ -d "$x" ] || continue
+#            # get last character of string
+#            [ "${x: -1}" = 2 ] && continue
+#            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
+#            if git remote -v | grep -qi harisekhon; then
+#                echo "> GitHub: git pull $x ${*:2}"
+#                git pull "${@:2}"
+#                echo
+#                echo "> GitHub: git submodule update --init --recursive"
+#                git submodule update --init --recursive
+#                echo
+#            fi
+#            # shellcheck disable=SC2164
+#            popd &>/dev/null
+#        done
+#        return
+#    elif isGit "$target"; then
+#        pushd "$target" >/dev/null &&
+#        echo "> git pull -v ${*:2}" >&2
+#        git pull -v "${@:2}"
+#        echo "> git submodule update --init --recursive"
+#        git submodule update --init --recursive
+#        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
+#        #for branch in $(git branch | cut -c 3- ); do
+#        #    git checkout -q "$branch" &&
+#        #    echo -n "$branch => " &&
+#        #    git pull -v
+#        #    echo
+#        #    echo
+#        #done
+#        #git checkout -q "$orig_branch"
+#        # shellcheck disable=SC2164
+#        popd &>/dev/null
+#    elif type isHg &>/dev/null && isHg "$target"; then
+#        pushd "$target" >/dev/null &&
+#        echo "> hg pull && hg up" >&2  &&
+#        hg pull && hg up
+#        # shellcheck disable=SC2164
+#        popd &>/dev/null
+#    elif type isSvn &>/dev/null && isSvn "$target"; then
+#        echo "> svn up $target" >&2
+#        svn up "$target"
+#    else
+#        echo "not a revision controlled resource as far as bashrc can tell"
+#        return 1
+#    fi
+#}
 
 # simpler replacement function to above
 pull(){

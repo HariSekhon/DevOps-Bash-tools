@@ -235,16 +235,17 @@ pmd_opts="-R rulesets/java/quickstart.xml -f text"
 if isMac; then
     # yes evaluate $pmd_opts here
     # shellcheck disable=SC2139
-    alias pmd="pmd $pmd_opts"
+    pmd="pmd $pmd_opts"
 else
     for x in ~/pmd-bin-*; do
         if [ -f "$x/bin/run.sh" ]; then
             # yes evaluate $x here
             # shellcheck disable=SC2139
-            alias pmd="$x/bin/run.sh pmd $pmd_opts"
+            pmd="$x/bin/run.sh pmd $pmd_opts"
         fi
     done
 fi
+alias pmd='$pmd'
 
 # for piping from grep
 alias uniqfiles="sed 's/:.*//;/^[[:space:]]*$/d' | sort -u"

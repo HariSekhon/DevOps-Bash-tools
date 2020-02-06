@@ -15,6 +15,8 @@
 
 # List Hive tables in all databases via beeline
 #
+# FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
+#
 # Tested on Hive 1.1.0 on CDH 5.10, 5.16
 
 # For Hive 3.0+ information schema is finally available which is more efficient than iterating per database eg.

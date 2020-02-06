@@ -14,6 +14,8 @@
 
 # Gentoo Portage packages to install - one per line
 
+# additional packages on top of portage-packages-server.txt and portage-packages-desktop.txt
+
 abs-guide
 alien
 app-misc/beagle
@@ -35,7 +37,6 @@ htmltidy
 gnome-power-manager
 krusader
 iplog
-ipython
 iptstate
 isic
 kchmviewer
@@ -75,7 +76,7 @@ webmin
 whowatch
 windowmaker
 x11-themes/windowmaker-themes
-wmctrl
+#wmctrl
 xbatt
 xbattbar
 xchm

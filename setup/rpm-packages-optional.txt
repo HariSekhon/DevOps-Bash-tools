@@ -10,23 +10,8 @@
 #
 
 # ============================================================================ #
-#                          RPM Package Requirements
+#                       Optional RPM Package Requirements
 # ============================================================================ #
 
-bash
-curl
-#direnv
-gcc
-git
-golang
-jq
-make
-parallel
-perl
-# RHEL8 no longer supports 'python', must specify 'python2'
-python2
-python2-pip
-#ShellCheck  # not available in RHEL8, moved to rpm-packages-optional.txt
-wget
-which
-unzip
+# no longer available on RHEL8 :-(
+ShellCheck

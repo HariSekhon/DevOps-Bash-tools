@@ -14,6 +14,8 @@
 
 # Gentoo Portage packages to install - one per line
 
+# additional packages on top of portage-packages-server.txt
+
 # hal dep required for network manager and is hal masked, review this
 # openvas is masked, review this
 #arptables
@@ -38,8 +40,8 @@ apachetop
 app-admin/analog
 app-admin/ansible
 app-dicts/dictd-dicts
-app-emacs/gentoo-syntax
-app-vim/gentoo-syntax
+#app-emacs/gentoo-syntax
+#app-vim/gentoo-syntax
 app-vim/perl-support
 argus
 arp-sk
@@ -49,7 +51,7 @@ arpoison
 arptools
 arpwatch
 aspell
-at
+#at
 atftpd
 audacious
 audacious-plugins
@@ -61,13 +63,13 @@ autocutsel
 autopsy
 axel
 baghira
-bash-completion
+#bash-completion
 bcrypt
 bcwipe
 biew
-bind-tools
+#bind-tools
 bitchx
-bittorrent
+#bittorrent
 bonnie++
 bridge-utils
 catdoc
@@ -78,7 +80,7 @@ chkrootkit
 chntpw
 cksfv
 clusterssh
-cmospwd
+#cmospwd
 commonbox-styles
 commonbox-styles-extra
 conky
@@ -96,7 +98,7 @@ dclock
 dd-rescue
 ddrescue
 debootstrap
-denyhosts
+#denyhosts
 dev-libs/geoip
 dev-perl/List-MoreUtils
 dev-perl/Net-Netmask
@@ -121,13 +123,13 @@ driftnet
 dsniff
 dynagen
 dynamips
-e2fsprogs
+#e2fsprogs
 emacs
 eterm
 eterm-themes
 etherape
 ethstatus
-ethtool
+#ethtool
 ettercap
 evince
 figlet
@@ -149,7 +151,7 @@ gentoo-artwork
 gentoo-artwork-livecd
 gentoo-bashcomp
 gentoo-xcursors
-gentoolkit
+#gentoolkit
 gftp
 gimp
 git
@@ -221,7 +223,7 @@ logsurfer+
 logwatch
 lsat
 lshw
-lsof
+#lsof
 lsscsi
 luma
 lvm2
@@ -230,7 +232,7 @@ m4
 mac-robber
 macchanger
 magicrescue
-mailx
+#mailx
 mboxgrep
 mc
 md5deep
@@ -283,11 +285,11 @@ nsat
 ntfs3g
 ntfsprogs
 ntop
-ntp
-ntp-syntax
+#ntp
+#ntp-syntax
 openipmi
 openldap
-openssh
+#openssh
 openvpn
 openvpn-blacklist
 ophcrack
@@ -295,13 +297,13 @@ p0f
 packETH
 packit
 paketto
-pam-syntax
+#pam-syntax
 pam_usb
 paros
 parted
 pasco
 pastebinit
-pciutils
+#pciutils
 PEAR-PHP_Shell
 perl-doc
 pidgin
@@ -311,7 +313,7 @@ piozone
 pipebench
 pipeworks
 pkcrack
-portsentry
+#portsentry
 pound
 pscan
 psh
@@ -340,7 +342,7 @@ router-audit-tool
 rsync
 samba
 sbd
-scanlogd
+#scanlogd
 scanssh
 screen
 sec
@@ -352,7 +354,7 @@ sharutils
 siege
 sipcalc
 sleuthkit
-slocate
+#slocate
 slurm
 smartmontools
 smb4k
@@ -369,11 +371,11 @@ steghide
 strace
 stunnel
 subversion
-sudo
+#sudo
 swatch
 sys-apps/ack
 sys-fs/fuse
-syslog-ng
+#syslog-ng
 sysstat
 tcpdump
 tcpreplay
@@ -387,7 +389,7 @@ thcrut
 tilda
 toilet
 tomboy
-traceroute
+#traceroute
 trafshow
 truecrypt
 tsclient
@@ -397,11 +399,11 @@ twisted
 unrar
 unzip
 upnpscan
-usbutils
+#usbutils
 usbview
-vim
+#vim
 virt-manager
-vixie-cron
+#vixie-cron
 vlock
 vmware-player
 vnc

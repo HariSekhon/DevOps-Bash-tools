@@ -22,6 +22,22 @@
 # shellcheck disable=SC1090
 [ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+type browse &>/dev/null || . "$bash_tools/.bash.d/network.sh"
+
+alias trav='travis_browse'
+
+travis_browse(){
+    local url
+    url="$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
+    url="${url/github.com/travis-ci.org}"
+    if [ -z "$url" ]; then
+        url="https://travis-ci.org/${TRAVIS_USER:-${USER:-$(whoami)}}"
+    fi
+    browser "$url"
+}
+
 # for auto authentication using Travis CI tools like travis_last_log.py and travis_debug_session.py
 #export TRAVIS_TOKEN=...
 
