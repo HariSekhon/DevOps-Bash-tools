@@ -38,7 +38,7 @@ jobs:
         ls -l /.dockerenv
         echo "pwd is $PWD"
         cat /etc/*release
-        apk add --no-cache git make
+        yum install -y git make
     - name: git clone
       run: |
         cd / &&
