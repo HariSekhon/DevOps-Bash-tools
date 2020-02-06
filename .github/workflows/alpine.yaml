@@ -49,4 +49,5 @@ jobs:
         make
     - name: test
       run: |
+        cd /bash-tools &&
         make test
