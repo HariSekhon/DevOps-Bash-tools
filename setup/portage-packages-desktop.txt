@@ -196,7 +196,7 @@ ipsorcery
 iptables
 iptraf
 iputils
-#ipython
+ipython
 irssi
 jad-bin
 jedit
