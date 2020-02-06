@@ -57,6 +57,8 @@ for pkg in apk deb rpm brew portage; do
     done
 done
 
+"$srcdir/find_duplicate_packages.sh"
+
 time_taken "$start_time"
 section2 "No duplicate requirements found"
 echo
