@@ -333,6 +333,9 @@ pull(){
                 echo "> GitHub: git pull $x $*"
                 git pull "$@"
                 echo
+                echo "> GitHub: git submodule update --init --recursive"
+                git submodule update --init --recursive
+                echo
             fi
             # shellcheck disable=SC2164
             popd &>/dev/null
@@ -340,6 +343,7 @@ pull(){
         return
     else
         git pull "$@"
+        git submodule update --init --recursive
     fi
 }
 
