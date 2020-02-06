@@ -61,7 +61,7 @@ if [ -n "$*" ]; then
 else
     found_files=0
     for x in rpm deb apk brew portage; do
-        echo "checking for duplicate $x packages"
+        echo "checking for duplicate $x packages" >&2
         requirements_files="$(find . -maxdepth 3 -name "$x*-packages*.txt")"
         if [ -z "$requirements_files" ]; then
             continue
