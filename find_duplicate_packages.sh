@@ -46,7 +46,7 @@ find_dups(){
     while read -r module ; do
         # need word splitting for different files
         # shellcheck disable=SC2086
-        grep "^${module}" $requirements_files
+        grep "^${module}\\([[:space:]]\\|$\\)" $requirements_files
         ((found + 1))
     done
 
@@ -61,12 +61,12 @@ if [ -n "$*" ]; then
 else
     found_files=0
     for x in rpm deb apk brew portage; do
-        echo "checking for duplicate $x packages" >&2
         requirements_files="$(find . -maxdepth 3 -name "$x*-packages*.txt")"
         if [ -z "$requirements_files" ]; then
             continue
         fi
         found_files=1
+        echo "checking for duplicate $x packages" >&2
         find_dups "$requirements_files"
     done
     if [ $found_files -eq 0 ]; then
