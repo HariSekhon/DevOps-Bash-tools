@@ -23,8 +23,9 @@ jq
 make
 parallel
 perl
-python
-python-pip
+# RHEL8 no longer supports 'python', must specify 'python2'
+python2
+python2-pip
 shellcheck
 wget
 which
