@@ -183,9 +183,9 @@ browser(){
 
 browse(){
     if isGit . &>/dev/null && git remote -v | grep -qi http; then
-        gitbrowse
+        gitbrowse "$@"
     else
-        browser
+        browser "$@"
     fi
 }
 
