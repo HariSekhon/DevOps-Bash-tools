@@ -15,6 +15,8 @@
 
 # Print each table's DDL metadata field eg. Location
 #
+# FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
+#
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #
 # For more documentation see the comments at the top of impala_shell.sh
