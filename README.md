@@ -10,7 +10,7 @@ Hari Sekhon - DevOps Bash Tools
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
-[![CI CentOS latest](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS%20latest/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS%22)
+[![CI CentOS latest](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS%22)
 [![CI CentOS 7](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS%207/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS+7%22)
 [![CI CentOS 8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS+8%22)
 [![CI Alpine](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Alpine%22)
