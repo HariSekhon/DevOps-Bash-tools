@@ -57,8 +57,6 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_bash_duplicate_defs.sh" || :
 
-"$srcdir/check_duplicate_packages.sh"
-
 "$srcdir/check_duplicate_requirements.sh"
 
 "$srcdir/check_non_executable_scripts.sh"
