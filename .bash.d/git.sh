@@ -63,13 +63,14 @@ alias br=branch
 alias stash="git stash"
 alias tag="githg tag"
 alias um=updatemodules
+#type browse &>/dev/null || alias browse=gbrowse
 alias gbrowse=gitbrowse
 alias gh=gitbrowse
 alias github_actions='gitbrowse actions'
 alias github_workflows='github_actions'
 alias gha='github_actions'
 alias ghw='github_workflows'
-#type browse &>/dev/null || alias browse=gbrowse
+alias wf='cd .github/workflows/'
 alias ggrep="git grep"
 # much quicker to just 'cd $github; f <pattern>'
 #githubls(){
