@@ -56,6 +56,33 @@ checkprog(){
     fi
 }
 
+typer(){
+    local alias_target
+    local type_output
+    for x in "$@"; do
+        type_output="$(type "$x")"
+        # shellcheck disable=SC2119
+        alias_target="$(
+            awk '/aliased to/{print $5}' <<< "$type_output" |
+            unquote
+        )"
+        if [ -n "$alias_target" ]; then
+            echo "$type_output"
+            typer "$alias_target"
+        else
+            type "$x"
+        fi
+    done
+}
+
+# shellcheck disable=SC2120
+unquote(){
+    sed '
+        s/^[[:space:]]*[`'"'"'"]//;
+        s/[`'"'"'"][[:space:]]*$//;
+    ' "$@"
+}
+
 bell_done(){
     eval "$@"
     print '\a'
