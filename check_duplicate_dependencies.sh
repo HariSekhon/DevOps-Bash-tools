@@ -57,7 +57,7 @@ fi
 #÷    done
 #÷done
 
-"$srcdir/check_duplicate_packages.sh"
+#"$srcdir/check_duplicate_packages.sh"
 
 time_taken "$start_time"
 section2 "No duplicate requirements found"
