@@ -37,7 +37,6 @@ htmltidy
 gnome-power-manager
 krusader
 iplog
-ipython
 iptstate
 isic
 kchmviewer
