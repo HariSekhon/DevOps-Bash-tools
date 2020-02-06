@@ -43,7 +43,7 @@ if [ -n "$cpan_requirements_files" ]; then
     echo
 fi
 
-for pkg in apk deb rpm brew; do
+for pkg in apk deb rpm brew portage; do
     # don't check lib and pylib at the same time because they will have duplicates between them
     for lib in lib pylib; do
         requirements_files="$(find . -maxdepth 3 -name "$pkg-packages*.txt" | grep -ve "/$lib/" -e "/bash-tools/" -e '/pytools_checks/' || :)"
