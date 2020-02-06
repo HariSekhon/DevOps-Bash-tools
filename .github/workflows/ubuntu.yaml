@@ -97,6 +97,7 @@ jobs:
 # ============================================================================
 # Java / Maven
 #   - uses: actions/cache@v1
+#     name: Maven Cache
 #     with:
 #       path: ~/.m2/repository
 #       key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -104,16 +105,16 @@ jobs:
 #         ${{ runner.os }}-maven-
 # ============================================================================
 # Scala / SBT
-#   - name: Cache SBT ivy cache
-#     uses: actions/cache@v1
-#     with:
-#       path: ~/.ivy2/cache
-#       key: ${{ runner.os }}-sbt-ivy-cache-${{ hashFiles('**/build.sbt') }}
-#   - name: Cache SBT
-#     uses: actions/cache@v1
+#   - uses: actions/cache@v1
+#     name: SBT Cache
 #     with:
 #       path: ~/.sbt
 #       key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+#   - uses: actions/cache@v1
+#     name: SBT Ivy Cache
+#     with:
+#       path: ~/.ivy2/cache
+#       key: ${{ runner.os }}-sbt-ivy-cache-${{ hashFiles('**/build.sbt') }}
 # ============================================================================
 
 #  docker:
