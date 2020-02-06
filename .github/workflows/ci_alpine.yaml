@@ -29,7 +29,7 @@ jobs:
     #name: build
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    container: harisekhon/alpine-dev
+    container: alpine
     steps:
     # untars repo in docker container so git submodule update fails
     #- uses: actions/checkout@v2
