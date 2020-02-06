@@ -21,7 +21,15 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-pip="${PIP:-pip}"
+if [ -n "${PIP:-}" ]; then
+    pip="$PIP"
+else
+    pip=pip
+    if ! type -P "pip" 2>/dev/null; then
+        echo "pip not found, falling back to pip2"
+        pip=pip2
+    fi
+fi
 opts="${PIP_OPTS:-}"
 
 usage(){
