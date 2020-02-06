@@ -65,7 +65,10 @@ alias tag="githg tag"
 alias um=updatemodules
 alias gbrowse=gitbrowse
 alias gh=gitbrowse
-alias ghw='gitbrowse actions'
+alias github_actions='gitbrowse actions'
+alias github_workflows='github_actions'
+alias gha='github_actions'
+alias ghw='github_workflows'
 #type browse &>/dev/null || alias browse=gbrowse
 alias ggrep="git grep"
 # much quicker to just 'cd $github; f <pattern>'
@@ -108,7 +111,14 @@ gitgc(){
 }
 
 gitbrowse(){
-    browser "$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"/"$1"
+    local url
+    url="$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
+    if [ $# -gt 0 ] &&
+       [ -z "$url" ]; then
+        echo "git remote url not found"
+        return 1
+    fi
+    browser "$url/$1"
 }
 
 install_git_completion(){
