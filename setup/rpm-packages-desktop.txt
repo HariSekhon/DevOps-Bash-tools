@@ -64,7 +64,6 @@ foremost
 fortune-mod
 fzf
 #games-misc/fortune-mod
-gcc
 gdb
 geoip
 #git # in rpm-packages.txt
