@@ -52,8 +52,11 @@ jobs:
         key: ${{ runner.os }}-cpanm-bash-tools  # ${{ hashFiles('**/cpan-requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-cpanm-
-    - name: build & test
-      run: make build test
+    - name: build
+      run: make
+    - name: test
+      run: make test
+
     #- name: Run a multi-line script
     #  run: |
     #    echo Add other actions to build,
