@@ -23,6 +23,23 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
+usage(){
+    echo "Installs Debian / Ubuntu deb package lists"
+    echo
+    echo "Takes a list of deb packages as arguments or .txt files containing lists of packages (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_packages>"
+    echo
+    exit 3
+}
+
+for x in "$@"; do
+    case "$x" in
+        -*) usage
+            ;;
+    esac
+done
+
 echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
@@ -33,18 +50,26 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="$opts -qq"
 fi
 
-packages=""
-for arg; do
-    if [ -f "$arg" ]; then
-        echo "adding packages from file:  $arg"
-        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-        echo
-    else
-        packages="$packages $arg"
-    fi
-    # uniq
-    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-done
+process_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding packages from file:  $arg"
+            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            packages="$packages $arg"
+        fi
+        # uniq
+        packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+    done
+}
+
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
 
 if [ -z "$packages" ]; then
     exit 0
