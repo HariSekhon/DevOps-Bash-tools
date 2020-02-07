@@ -59,7 +59,7 @@ else
     process_args $(cat)
 fi
 
-if [ -z "$cpan_modules" ]; then
+if [ -z "${cpan_modules// }" ]; then
     usage
 fi
 
