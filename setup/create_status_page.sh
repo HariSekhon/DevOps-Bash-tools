@@ -13,7 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to generate status.md at top level
+# Script to generate Status.md at top level to review all GitHub repos across all CI platforms on a single page
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
@@ -61,8 +62,14 @@ for repo in $repolist; do
     curl -sS "https://raw.githubusercontent.com/HariSekhon/$repo/master/README.md" |
     sed -n '1,/^[^\[[:space:]=]/ p' |
     head -n -1 |
-    perl -np -e 'print unless /=============/' |
-    sed '1 s/^/# /'
+    #perl -ne 'print unless /=============/;' |
+    grep -v "===========" |
+    sed '1 s/^/# /' |
+    # \\ escapes the newlines to allow them inside the sed for literal replacement since \n doesn't work
+    sed "2 s|^|\\
+[https://github.com/HariSekhon/$repo](https://github.com/HariSekhon/$repo)\\
+\\
+|"
     echo
     echo
 done |
