@@ -59,7 +59,7 @@ else
     process_args $(cat)
 fi
 
-if [ -z "$packages" ]; then
+if [ -z "${packages// }" ]; then
     usage
 fi
 
