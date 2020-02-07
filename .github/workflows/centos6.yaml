@@ -13,43 +13,43 @@
 
 # Not supporting RHEL6 any more because it doesn't have GNU parallel package
 
-#name: CI CentOS 6
-#
+name: CI CentOS 6
+
 #env:
 #  DEBUG: 1
-#
-#on:
-#  push:
-#    branches:
-#      - master
-#  schedule:
-#    # * is a special character in YAML so you have to quote this string
-#    - cron:  '0 10 30 * *'
-#
-#jobs:
-#  build:
-#    #name: build
-#    timeout-minutes: 10
-#    runs-on: ubuntu-latest
-#    container: centos:6
-#    steps:
-#    # untars repo in docker container so git submodule update fails
-#    #- uses: actions/checkout@v2
-#    - name: install git & make
-#      run: |
-#        ls -l /.dockerenv
-#        echo "pwd is $PWD"
-#        cat /etc/*release
-#        yum install -y git make
-#    - name: git clone
-#      run: |
-#        cd / &&
-#        git clone https://github.com/harisekhon/bash-tools
-#    - name: build
-#      run: |
-#        cd /bash-tools &&
-#        make
-#    - name: test
-#      run: |
-#        cd /bash-tools &&
-#        make test
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 10 30 * *'
+
+jobs:
+  build:
+    #name: build
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    container: centos:6
+    steps:
+    # untars repo in docker container so git submodule update fails
+    #- uses: actions/checkout@v2
+    - name: install git & make
+      run: |
+        ls -l /.dockerenv
+        echo "pwd is $PWD"
+        cat /etc/*release
+        yum install -y git make
+    - name: git clone
+      run: |
+        cd / &&
+        git clone https://github.com/harisekhon/bash-tools
+    - name: build
+      run: |
+        cd /bash-tools &&
+        make
+    - name: test
+      run: |
+        cd /bash-tools &&
+        make test
