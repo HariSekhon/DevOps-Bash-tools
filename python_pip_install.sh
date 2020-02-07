@@ -42,28 +42,39 @@ usage(){
     exit 3
 }
 
-for x in "$@"; do
-    case "$1" in
+for arg; do
+    case "$arg" in
         -*) usage
             ;;
     esac
 done
 
 pip_modules=""
-while read -r x; do
-    if [ -f "$x" ]; then
-        echo "adding pip modules from file:  $x"
-        pip_modules="$pip_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
-        echo
-    else
-        pip_modules="$pip_modules $x"
-    fi
-    pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
-done < <(cat "$@")
+
+process_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding pip modules from file:  $arg"
+            pip_modules="$pip_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            pip_modules="$pip_modules $arg"
+        fi
+    done
+}
+
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
 
 if [ -z "${pip_modules// }" ]; then
     usage
 fi
+
+pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 
 echo "Installing Python PyPI Modules"
 echo
