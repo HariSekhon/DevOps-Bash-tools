@@ -26,7 +26,8 @@ get_repos(){
     page=1
     while true; do
         echo "fetching repos page $page" >&2
-        if ! output="$(curl -sS --connect-timeout 3 "https://api.github.com/users/HariSekhon/repos?page=$page&per_page=100")"; then
+        # shellcheck disable=SC2086
+        if ! output="$(curl -sS --connect-timeout 3 ${CURL_OPTS:-} "https://api.github.com/users/HariSekhon/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
