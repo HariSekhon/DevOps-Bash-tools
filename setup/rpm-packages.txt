@@ -21,7 +21,6 @@ git
 golang
 jq
 make
-parallel
 perl
 # RHEL8 no longer supports 'python', must specify 'python2'
 python2
