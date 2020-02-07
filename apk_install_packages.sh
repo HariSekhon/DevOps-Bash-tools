@@ -34,7 +34,7 @@ usage(){
 }
 
 for x in "$@"; do
-    case "$1" in
+    case "$x" in
         -*) usage
             ;;
     esac
@@ -42,18 +42,27 @@ done
 
 echo "Installing Apk Packages"
 
-packages="$(cat "$@")"
-for arg; do
-    if [ -f "$arg" ]; then
-        echo "adding packages from file:  $arg"
-        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-        echo
-    else
-        packages="$packages $arg"
-    fi
-    # uniq
-    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-done
+process_args(){
+    for arg in "$@"; do
+        if [ -f "$arg" ]; then
+            echo "adding packages from file:  $arg"
+            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            packages="$packages $arg"
+        fi
+        # uniq
+        packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+    done
+}
+
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
+
 
 if [ -z "$packages" ]; then
     exit 0
