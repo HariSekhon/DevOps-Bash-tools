@@ -31,28 +31,32 @@ usage(){
     exit 3
 }
 
-for x in "$@"; do
-    case "$1" in
+for arg; do
+    case "$arg" in
         -*) usage
             ;;
     esac
 done
 
 cpan_modules=""
-while read -r x; do
-    if [ -f "$x" ]; then
-        echo "adding cpan modules from file:  $x"
-        cpan_modules="$cpan_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
-        echo
-    else
-        cpan_modules="$cpan_modules $x"
-    fi
-    cpan_modules="$(tr ' ' ' \n' <<< "$cpan_modules" | sort -u | tr '\n' ' ')"
-done < <(cat "$@")
+
+process_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding cpan modules from file:  $arg"
+            cpan_modules="$cpan_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            cpan_modules="$cpan_modules $arg"
+        fi
+    done
+}
 
 if [ -z "$cpan_modules" ]; then
     usage
 fi
+
+cpan_modules="$(tr ' ' ' \n' <<< "$cpan_modules" | sort -u | tr '\n' ' ')"
 
 echo "Installing CPAN Modules that are not already installed"
 echo
