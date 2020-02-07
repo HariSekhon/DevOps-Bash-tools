@@ -15,8 +15,8 @@
 
 name: CI Ubuntu
 
-env:
-  DEBUG: 1
+#env:
+#  DEBUG: 1
 
 on: # [push]
   push:
