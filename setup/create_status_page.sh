@@ -26,10 +26,13 @@ get_repos(){
     page=1
     while true; do
         echo "fetching repos page $page" >&2
-        output="$(curl -sS "https://api.github.com/users/HariSekhon/repos?page=$page&per_page=100")"
+        if ! output="$(curl -sS --connect-timeout 3 "https://api.github.com/users/HariSekhon/repos?page=$page&per_page=100")"; then
+            echo "ERROR" >&2
+            exit 1
+        fi
         if [ -z "$(jq '.[]' <<< "$output")" ]; then
             break
-        elif jq -r '.message' <<< "$output" 2>/dev/null; then
+        elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
         jq -r '.[] | select(.fork | not) | [.name, .stargazers_count] | @tsv' <<< "$output"
