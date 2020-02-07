@@ -56,9 +56,12 @@ process_args(){
     done
 }
 
-process_args "$@"
-# shellcheck disable=SC2046
-process_args $(cat)
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
 
 # Sudo is not required as running Homebrew as root is extremely dangerous and no longer supported as
 # Homebrew does not drop privileges on installation you would be giving all build scripts full access to your system
