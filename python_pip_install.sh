@@ -25,7 +25,7 @@ if [ -n "${PIP:-}" ]; then
     pip="$PIP"
 else
     pip=pip
-    if ! type -P "pip" 2>/dev/null; then
+    if ! type -P "pip" &>/dev/null; then
         echo "pip not found, falling back to pip2"
         pip=pip2
     fi
@@ -42,8 +42,15 @@ usage(){
     exit 3
 }
 
-pip_modules=""
 for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+pip_modules=""
+while read -r x; do
     if [ -f "$x" ]; then
         echo "adding pip modules from file:  $x"
         pip_modules="$pip_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
@@ -52,14 +59,7 @@ for x in "$@"; do
         pip_modules="$pip_modules $x"
     fi
     pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
-done
-
-for x in "$@"; do
-    case "$1" in
-        -*) usage
-            ;;
-    esac
-done
+done < <(cat "$@")
 
 if [ -z "${pip_modules// }" ]; then
     usage
