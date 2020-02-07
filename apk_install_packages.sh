@@ -42,8 +42,8 @@ done
 
 echo "Installing Apk Packages"
 
-packages=""
-while read -r x; do
+packages="$(cat "$@")"
+for arg; do
     if [ -f "$arg" ]; then
         echo "adding packages from file:  $arg"
         packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
@@ -53,7 +53,7 @@ while read -r x; do
     fi
     # uniq
     packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-done < <(cat "$@")
+done
 
 if [ -z "$packages" ]; then
     exit 0
