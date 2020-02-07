@@ -50,6 +50,8 @@ if [ -n "${TRAVIS:-}" ]; then
     opts="$opts -qq"
 fi
 
+packages=""
+
 process_args(){
     for arg; do
         if [ -f "$arg" ]; then
