@@ -111,6 +111,5 @@ for repo in $repolist; do
 \\
 |"
     echo
-    echo
 done
 } | tee "Status.md"
