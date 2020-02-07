@@ -31,28 +31,32 @@ usage(){
     exit 3
 }
 
-packages=""
-for x in "$@"; do
-    if [ -f "$x" ]; then
-        echo "adding packages from file:  $x"
-        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
-        echo
-    else
-        packages="$packages $x"
-    fi
-    packages="$(tr ' ' ' \n' <<< "$packages" | sort -u | tr '\n' ' ')"
-done
-
-for x in "$@"; do
-    case "$1" in
+for arg; do
+    case "$arg" in
         -*) usage
             ;;
     esac
 done
 
+packages=""
+
+process_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding packages from file:  $arg"
+            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            packages="$packages $arg"
+        fi
+    done
+}
+
 if [ -z "$packages" ]; then
     usage
 fi
+
+packages="$(tr ' ' ' \n' <<< "$packages" | sort -u | tr '\n' ' ')"
 
 echo "Installing NodeJS NPM packages that are not already installed"
 echo
