@@ -23,10 +23,27 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
+usage(){
+    echo "Installs Alpine APK package lists"
+    echo
+    echo "Takes a list of apk packages as arguments or .txt files containing lists of packages (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_packages>"
+    echo
+    exit 3
+}
+
+for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
 echo "Installing Apk Packages"
 
 packages=""
-for arg; do
+while read -r x; do
     if [ -f "$arg" ]; then
         echo "adding packages from file:  $arg"
         packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
@@ -36,7 +53,7 @@ for arg; do
     fi
     # uniq
     packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-done
+done < <(cat "$@")
 
 if [ -z "$packages" ]; then
     exit 0
