@@ -118,6 +118,8 @@ Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
+"let g:gitgutter_enabled = 0
+
 call vundle#end()
 
 
