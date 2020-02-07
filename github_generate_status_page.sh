@@ -81,6 +81,7 @@ fi
 # make portable between linux and mac
 head(){
     if [ "$(uname -s)" = Darwin ]; then
+        # from brew's coreutils package (installed by 'make')
         ghead
     else
         command head
