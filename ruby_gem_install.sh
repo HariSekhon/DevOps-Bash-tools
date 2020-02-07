@@ -28,28 +28,39 @@ usage(){
     exit 3
 }
 
-gems=""
-for x in "$@"; do
-    if [ -f "$x" ]; then
-        echo "adding gems from file:  $x"
-        gems="$gems $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
-        echo
-    else
-        gems="$gems $x"
-    fi
-    gems="$(tr ' ' ' \n' <<< "$gems" | sort -u | tr '\n' ' ')"
-done
-
-for x in "$@"; do
-    case "$1" in
+for arg; do
+    case "$arg" in
         -*) usage
             ;;
     esac
 done
 
+gems=""
+
+process_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding gems from file:  $arg"
+            gems="$gems $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            gems="$gems $arg"
+        fi
+    done
+}
+
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
+
 if [ -z "${gems// }" ]; then
     usage
 fi
+
+gems="$(tr ' ' ' \n' <<< "$gems" | sort -u | tr '\n' ' ')"
 
 echo "Installing Ruby Gems"
 echo
