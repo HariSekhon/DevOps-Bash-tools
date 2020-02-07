@@ -209,7 +209,7 @@ apk-packages:
 
 	for x in apk-packages-optional.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 NO_UPDATE=1 "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 
 .PHONY: apk-packages-perl
 apk-packages-perl:
@@ -223,7 +223,7 @@ apk-packages-perl:
 		if [ -z "$(PERLBREW_PERL)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
-	done | xargs NO_FAIL=1 NO_UPDATE=1 "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 
 .PHONY: apk-packages-python
 apk-packages-python:
@@ -235,7 +235,7 @@ apk-packages-python:
 		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
-	done | xargs NO_FAIL=1 NO_UPDATE=1 "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 
 .PHONY: apt-packages
 apt-packages:
@@ -248,7 +248,7 @@ apt-packages:
 
 	for x in deb-packages-optional.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 NO_UPDATE=1 "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 
 .PHONY: apt-packages-perl
 apt-packages-perl:
@@ -260,7 +260,7 @@ apt-packages-perl:
 		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
-	done | xargs NO_FAIL=1 NO_UPDATE=1 "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 
 .PHONY: apt-packages-python
 apt-packages-python:
@@ -272,7 +272,7 @@ apt-packages-python:
 		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
-	done  | xargs NO_FAIL=1 NO_UPDATE=1 "$(BASH_TOOLS)/apt_install_packages.sh"
+	done  | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 
 .PHONY: yum-packages
 yum-packages:
@@ -284,7 +284,7 @@ yum-packages:
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 	for x in rpm-packages-optional.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 
 .PHONY: yum-packages-perl
 yum-packages-perl:
@@ -296,7 +296,7 @@ yum-packages-perl:
 		if [ -z "$(PERLBREW_PERL)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
-	done | xargs NO_FAIL=1 "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 
 .PHONY: yum-packages-python
 yum-packages-python:
@@ -308,14 +308,14 @@ yum-packages-python:
 		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
-	done | xargs NO_FAIL=1 "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 
 .PHONY: homebrew-packages
 homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
-	for x in brew-packages.txt; then \
+	for x in brew-packages.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 $(BASH_TOOLS)/brew_install_packages.sh
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/brew_install_packages.sh"
 	@# fix for OpenSSL 1.0 -> 1.1 library linkage breaking python -c 'import hashlib', which break pips, eg:
 	@# https://stackoverflow.com/questions/20399331/error-importing-hashlib-with-python-2-7-but-not-with-2-6
 	$(BASH_TOOLS)/setup/brew_fix_openssl_dependencies.sh
@@ -330,20 +330,20 @@ system-packages-remove:
 apk-packages-remove:
 	for x in apk-packages-{,perl-,python-}dev.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 "$(BASH_TOOLS)/apk_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apk_remove_packages.sh"
 	$(SUDO) rm -fr /var/cache/apk/*
 
 .PHONY: apt-packages-remove
 apt-packages-remove:
 	for x in deb-packages-{,perl-,python-}dev.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 "$(BASH_TOOLS)/apt_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apt_remove_packages.sh"
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
 	for x in rpm-packages-{,perl-,python-}dev.txt; do \
 		find . -path "*/setup/$$x"; \
-	done | xargs NO_FAIL=1 "$(BASH_TOOLS)/yum_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_remove_packages.sh"
 
 .PHONY: cpan
 cpan::
