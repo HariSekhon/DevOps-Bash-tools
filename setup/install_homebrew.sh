@@ -33,6 +33,8 @@ else
         if [ "$EUID" -eq 0 ]; then
             # Alpine has adduser
             id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
+            mkdir -p /home/linuxbrew
+            chown -R linuxbrew /home/linuxbrew
             su linuxbrew
         else
             sh
