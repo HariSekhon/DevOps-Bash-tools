@@ -15,3 +15,6 @@
 
 # no longer available on RHEL8 :-(
 ShellCheck
+
+# not available in RHEL 6 repos
+parallel
