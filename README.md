@@ -15,7 +15,7 @@ Hari Sekhon - DevOps Bash Tools
 [![CI CentOS 8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS+8%22)
 [![CI Alpine](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Alpine%22)
 
-100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon) CI builds.
+100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md).
 
 Contains:
 
