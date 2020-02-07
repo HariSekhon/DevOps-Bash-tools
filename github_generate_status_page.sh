@@ -100,7 +100,7 @@ for repo in $repolist; do
     echo "getting repo $repo" >&2
     echo ---
     curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
-    sed -n '1,/^[^\[[:space:]=]/ p' |
+    sed -n '1,/^[^\[[:space:]<=-]/ p' |
     head -n -1 |
     #perl -ne 'print unless /=============/;' |
     grep -v "===========" |
