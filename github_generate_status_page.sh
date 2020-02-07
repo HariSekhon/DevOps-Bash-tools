@@ -82,9 +82,9 @@ fi
 head(){
     if [ "$(uname -s)" = Darwin ]; then
         # from brew's coreutils package (installed by 'make')
-        ghead
+        ghead "$@"
     else
-        command head
+        command head "$@"
     fi
 }
 
