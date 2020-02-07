@@ -63,7 +63,7 @@ else
     process_args $(cat)
 fi
 
-if [ -z "$pip_modules" ]; then
+if [ -z "${pip_modules// }" ]; then
     usage
 fi
 
