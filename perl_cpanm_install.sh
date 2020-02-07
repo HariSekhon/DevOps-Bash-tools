@@ -28,8 +28,15 @@ usage(){
     exit 3
 }
 
-cpan_modules=""
 for x in "$@"; do
+    case "$1" in
+        -*) usage
+            ;;
+    esac
+done
+
+cpan_modules=""
+while read -r x; do
     if [ -f "$x" ]; then
         echo "adding cpan modules from file:  $x"
         cpan_modules="$cpan_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
@@ -38,14 +45,7 @@ for x in "$@"; do
         cpan_modules="$cpan_modules $x"
     fi
     cpan_modules="$(tr ' ' ' \n' <<< "$cpan_modules" | sort -u | tr '\n' ' ')"
-done
-
-for x in "$@"; do
-    case "$1" in
-        -*) usage
-            ;;
-    esac
-done
+done < <(cat "$@")
 
 if [ -z "${cpan_modules// }" ]; then
     usage
