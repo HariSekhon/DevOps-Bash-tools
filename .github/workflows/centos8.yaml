@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI CentOS 6
+name: CI CentOS 8
 
 env:
   DEBUG: 1
@@ -29,17 +29,25 @@ jobs:
     #name: build
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    container: centos:6
+    container: centos:8
     steps:
     # untars repo in docker container so git submodule update fails
     #- uses: actions/checkout@v2
-    - name: build & test
+    - name: install git & make
       run: |
         ls -l /.dockerenv
         echo "pwd is $PWD"
         cat /etc/*release
-        yum install -y git make &&
+        yum install -y git make
+    - name: git clone
+      run: |
         cd / &&
-        git clone https://github.com/harisekhon/bash-tools &&
-        cd bash-tools &&
-        make build test
+        git clone https://github.com/harisekhon/bash-tools
+    - name: build
+      run: |
+        cd /bash-tools &&
+        make
+    - name: test
+      run: |
+        cd /bash-tools &&
+        make test

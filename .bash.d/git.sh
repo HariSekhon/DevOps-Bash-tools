@@ -280,6 +280,9 @@ st(){
 #                echo "> GitHub: git pull $x ${*:2}"
 #                git pull "${@:2}"
 #                echo
+#                echo "> GitHub: git submodule update --init --recursive"
+#                git submodule update --init --recursive
+#                echo
 #            fi
 #            # shellcheck disable=SC2164
 #            popd &>/dev/null
@@ -289,7 +292,8 @@ st(){
 #        pushd "$target" >/dev/null &&
 #        echo "> git pull -v ${*:2}" >&2
 #        git pull -v "${@:2}"
-#        git submodule update
+#        echo "> git submodule update --init --recursive"
+#        git submodule update --init --recursive
 #        #local orig_branch=$(git branch | awk '/^\*/ {print $2}')
 #        #for branch in $(git branch | cut -c 3- ); do
 #        #    git checkout -q "$branch" &&
@@ -329,6 +333,9 @@ pull(){
                 echo "> GitHub: git pull $x $*"
                 git pull "$@"
                 echo
+                echo "> GitHub: git submodule update --init --recursive"
+                git submodule update --init --recursive
+                echo
             fi
             # shellcheck disable=SC2164
             popd &>/dev/null
@@ -336,6 +343,7 @@ pull(){
         return
     else
         git pull "$@"
+        git submodule update --init --recursive
     fi
 }
 
