@@ -38,7 +38,7 @@ get_repos(){
             export USER
             export PASSWORD
             # shellcheck disable=SC2086
-            if ! output="$("$srcdir/../curl_auth.sh" -sS --connect-timeout 3 ${CURL_OPTS:-} "https://api.github.com/users/$USER/repos?page=$page&per_page=100")"; then
+            if ! output="$("$srcdir/curl_auth.sh" -sS --connect-timeout 3 ${CURL_OPTS:-} "https://api.github.com/users/$USER/repos?page=$page&per_page=100")"; then
                 echo "ERROR" >&2
                 exit 1
             fi
@@ -98,4 +98,4 @@ for repo in $repolist; do
     echo
     echo
 done
-} | tee "$srcdir/../Status.md"
+} | tee "$srcdir/Status.md"
