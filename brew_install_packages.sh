@@ -19,22 +19,46 @@
 set -eu #o pipefail  # undefined in /bin/sh
 [ -n "${DEBUG:-}" ] && set -x
 
+usage(){
+    echo "Installs Mac Homebrew package lists"
+    echo
+    echo "Takes a list of brew packages as arguments or .txt files containing lists of packages (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_packages>"
+    echo
+    exit 3
+}
+
+for x in "$@"; do
+    case "$x" in
+        -*) usage
+            ;;
+    esac
+done
+
 echo "Installing Mac HomeBrew Packages"
 
 packages=""
-for arg; do
-    if [ -f "$arg" ]; then
-        echo "adding packages from file:  $arg"
-        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-        echo
-    else
-        packages="$packages $arg"
-    fi
-    if [ -z "${TAP:-}" ]; then
-        # uniq
-        packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-    fi
-done
+
+process_args(){
+    for arg in "$@"; do
+        if [ -f "$arg" ]; then
+            echo "adding packages from file:  $arg"
+            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            packages="$packages $arg"
+        fi
+        if [ -z "${TAP:-}" ]; then
+            # uniq
+            packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
+        fi
+    done
+}
+
+process_args "$@"
+# shellcheck disable=SC2046
+process_args $(cat)
 
 # Sudo is not required as running Homebrew as root is extremely dangerous and no longer supported as
 # Homebrew does not drop privileges on installation you would be giving all build scripts full access to your system
@@ -75,6 +99,8 @@ if [ -n "${TAP:-}" ]; then
         brew install "$package"
     done
     exit
+else
+    packages="$(tr ' ' '\n' <<< "$packages" | sort -u | tr '\n' ' ')"
 fi
 
 cask=""
