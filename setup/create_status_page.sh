@@ -64,7 +64,7 @@ for repo in $repolist; do
     head -n -1 |
     #perl -ne 'print unless /=============/;' |
     grep -v "===========" |
-    sed '1 s/^/# /' |
+    sed '1 s/^[^#]/# &/' |
     # \\ escapes the newlines to allow them inside the sed for literal replacement since \n doesn't work
     sed "2 s|^|\\
 [https://github.com/HariSekhon/$repo](https://github.com/HariSekhon/$repo)\\
