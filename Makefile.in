@@ -23,7 +23,7 @@ endif
 
 export PATH := $(PATH):/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin
 
-DOCKER_IMAGE := harisekhon/centos-github
+DOCKER_IMAGE := harisekhon/github
 
 CODE_FILES := $(shell git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done)
 
