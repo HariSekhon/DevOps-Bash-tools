@@ -33,8 +33,8 @@ usage(){
     exit 3
 }
 
-for x in "$@"; do
-    case "$x" in
+for arg; do
+    case "$arg" in
         -*) usage
             ;;
     esac
@@ -59,8 +59,6 @@ process_args(){
         else
             packages="$packages $arg"
         fi
-        # uniq
-        packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
     done
 }
 
@@ -74,6 +72,9 @@ fi
 if [ -z "$packages" ]; then
     exit 0
 fi
+
+# uniq
+packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
 SUDO=""
 # $EUID is not defined in posix sh
