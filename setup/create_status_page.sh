@@ -43,9 +43,9 @@ get_repos(){
     done
 }
 
-repolist="$(get_repos | grep -v spark-apps | sort -k2nr | head -n "$top_N")"
+repolist="$(get_repos | grep -v spark-apps | sort -k2nr | awk '{print $1}' | head -n "$top_N")"
 
-echo "$repolist"
+#echo "$repolist" >&2
 
 # make portable between linux and mac
 head(){
