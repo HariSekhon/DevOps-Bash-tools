@@ -60,7 +60,7 @@ else
     process_args $(cat)
 fi
 
-if [ -z "$gems" ]; then
+if [ -z "${gems// }" ]; then
     usage
 fi
 
