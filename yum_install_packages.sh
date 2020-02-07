@@ -24,24 +24,52 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "Installing RPM Packages"
+usage(){
+    echo "Installs Yum RPM packages"
+    echo
+    echo "Takes a list of yum packages as arguments or .txt files containing lists of modules (one per line)"
+    echo
+    echo "usage: ${0##*} <list_of_packages>"
+    echo
+    exit 3
+}
+
+for arg; do
+    case "$arg" in
+        -*) usage
+            ;;
+    esac
+done
 
 packages=""
-for arg; do
-    if [ -f "$arg" ]; then
-        echo "adding packages from file:  $arg"
-        packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-        echo
-    else
-        packages="$packages $arg"
-    fi
-    # uniq
-    packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-done
+
+process_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding packages from file:  $arg"
+            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            packages="$packages $arg"
+        fi
+        # uniq
+    done
+}
+
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
+
+echo "Installing RPM Packages"
 
 if [ -z "$packages" ]; then
     exit 0
 fi
+
+packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
 SUDO=""
 # shellcheck disable=SC2039
