@@ -29,28 +29,39 @@ usage(){
     exit 3
 }
 
-go_tools=""
-for x in "$@"; do
-    if [ -f "$x" ]; then
-        echo "adding golang tools from file:  $x"
-        go_tools="$go_tools $(sed 's/#.*//;/^[[:space:]]*$$/d' "$x")"
-        echo
-    else
-        go_tools="$go_tools $x"
-    fi
-    go_tools="$(tr ' ' ' \n' <<< "$go_tools" | sort -u | tr '\n' ' ')"
-done
-
-for x in "$@"; do
-    case "$1" in
+for arg; do
+    case "$arg" in
         -*) usage
             ;;
     esac
 done
 
+go_tools=""
+
+processs_args(){
+    for arg; do
+        if [ -f "$arg" ]; then
+            echo "adding golang tools from file:  $arg"
+            go_tools="$go_tools $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            echo
+        else
+            go_tools="$go_tools $arg"
+        fi
+    done
+}
+
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
+
 if [ -z "${go_tools// }" ]; then
     usage
 fi
+
+go_tools="$(tr ' ' ' \n' <<< "$go_tools" | sort -u | tr '\n' ' ')"
 
 echo "Installing Golang tools that are not already installed"
 echo
