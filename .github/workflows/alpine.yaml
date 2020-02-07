@@ -13,8 +13,8 @@
 
 name: CI Alpine
 
-env:
-  DEBUG: 1
+#env:
+#  DEBUG: 1
 
 on:
   push:
