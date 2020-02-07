@@ -13,8 +13,8 @@
 
 name: CI CentOS 7
 
-env:
-  DEBUG: 1
+#env:
+#  DEBUG: 1
 
 on:
   push:
