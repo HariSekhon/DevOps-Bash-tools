@@ -52,6 +52,13 @@ process_args(){
     done
 }
 
+if [ -n "${*:-}" ]; then
+    process_args "$@"
+else
+    # shellcheck disable=SC2046
+    process_args $(cat)
+fi
+
 if [ -z "$packages" ]; then
     usage
 fi
