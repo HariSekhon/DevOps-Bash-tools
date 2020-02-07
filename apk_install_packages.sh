@@ -42,6 +42,8 @@ done
 
 echo "Installing Apk Packages"
 
+packages=""
+
 process_args(){
     for arg in "$@"; do
         if [ -f "$arg" ]; then
@@ -51,8 +53,6 @@ process_args(){
         else
             packages="$packages $arg"
         fi
-        # uniq
-        packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
     done
 }
 
@@ -66,6 +66,9 @@ fi
 if [ -z "$packages" ]; then
     exit 0
 fi
+
+# uniq
+packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
 SUDO=""
 # $EUID isn't available in /bin/sh in Alpine
