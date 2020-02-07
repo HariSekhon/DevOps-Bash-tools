@@ -35,6 +35,9 @@ for x in "$@"; do
     esac
 done
 
+echo "Installing Golang tools"
+echo
+
 go_tools=""
 
 process_args(){
@@ -61,9 +64,6 @@ if [ -z "${go_tools// }" ]; then
 fi
 
 go_tools="$(tr ' ' ' \n' <<< "$go_tools" | sort -u | tr '\n' ' ')"
-
-echo "Installing Golang tools"
-echo
 
 opts=""
 if [ -n "${TRAVIS:-}" ]; then
