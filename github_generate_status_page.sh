@@ -13,7 +13,18 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to generate Status.md at top level to review all GitHub repos across all CI platforms on a single page
+# Script to generate Status.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
+#
+# Usage:
+#
+#   without arguments queries for all non-fork repos for your $USER and iterate them up to $top_N to generate the page
+#
+# github_generate_status_page.sh
+#
+#  with arguments will query those repo's README.md at the top level
+#
+# github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
+#
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -24,7 +35,7 @@ PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD}}}"
 
 top_N=20
 
-repolist=""
+repolist="$*"
 
 if [ -n "${PASSWORD:-}"  ]; then
     echo "using authenticated access" >&2
@@ -56,12 +67,14 @@ get_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq -r '.[] | select(.fork | not) | [.name, .stargazers_count] | @tsv' <<< "$output"
+        jq -r '.[] | select(.fork | not) | [.full_name, .stargazers_count] | @tsv' <<< "$output"
         ((page+=1))
     done
 }
 
-repolist="$(get_repos | grep -v spark-apps | sort -k2nr | awk '{print $1}' | head -n "$top_N")"
+if [ -z "$repolist" ]; then
+    repolist="$(get_repos | grep -v spark-apps | sort -k2nr | awk '{print $1}' | head -n "$top_N")"
+fi
 
 #echo "$repolist" >&2
 
@@ -85,7 +98,7 @@ EOF
 for repo in $repolist; do
     echo "getting repo $repo" >&2
     echo ---
-    curl -sS "https://raw.githubusercontent.com/$USER/$repo/master/README.md" |
+    curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
     sed -n '1,/^[^\[[:space:]=]/ p' |
     head -n -1 |
     #perl -ne 'print unless /=============/;' |
@@ -93,10 +106,10 @@ for repo in $repolist; do
     sed '1 s/^[^#]/# &/' |
     # \\ escapes the newlines to allow them inside the sed for literal replacement since \n doesn't work
     sed "2 s|^|\\
-[$USER/$repo repo](https://github.com/$USER/$repo)\\
+[$repo](https://github.com/$repo) repo\\
 \\
 |"
     echo
     echo
 done
-} | tee "$srcdir/Status.md"
+} | tee "Status.md"
