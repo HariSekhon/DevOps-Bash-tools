@@ -24,7 +24,9 @@ else
   exit
 fi
 
-LATEST_VERSION=`curl -fs https://updates.awless.io | grep -oE "v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"`
+# broken SSL cert as documented here - https://github.com/wallix/awless/issues/278
+#LATEST_VERSION=`curl -fs https://updates.awless.io | grep -oE "v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"`
+LATEST_VERSION=`curl -s https://api.github.com/repos/wallix/awless/releases/latest | awk '/"tag_name":/ {print $2}' | sed 's/[",]//g'`
 
 FILENAME=awless-$OS-$ARCH.$EXT
 
