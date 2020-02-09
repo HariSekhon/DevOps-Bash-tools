@@ -276,6 +276,9 @@ apt-packages-python:
 
 .PHONY: yum-packages
 yum-packages:
+	# needed for Fedora docker image for find and xargs
+	yum install -y findutils
+
 	$(BASH_TOOLS)/setup/install_epel_repo.sh
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
