@@ -30,6 +30,8 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     container: centos:8
+    env:
+      repo: bash-tools
     steps:
     # untars repo in docker container so git submodule update fails
     #- uses: actions/checkout@v2
@@ -41,13 +43,13 @@ jobs:
         yum install -y git make
     - name: git clone
       run: |
-        cd / &&
-        git clone https://github.com/harisekhon/bash-tools
+        cd /tmp &&
+        git clone "https://github.com/harisekhon/$repo"
     - name: build
       run: |
-        cd /bash-tools &&
+        cd "/tmp/$repo" &&
         make
     - name: test
       run: |
-        cd /bash-tools &&
+        cd "/tmp/$repo" &&
         make test
