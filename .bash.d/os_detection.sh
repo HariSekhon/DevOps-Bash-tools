@@ -51,6 +51,8 @@ isGoogleCloudShell(){
     [ -n "${GOOGLE_CLOUD_SHELL:-}" ] && return 0
     get_os
     [ "$operating_system" = Linux ] || return 1
+    # DEVSHELL_PROJECT_ID is more likely to be unique to GCP Cloud Shell environment
+    #if [ -n "${GOOGLE_CLOUD_PROJECT:-}" ]; then
     if [ -n "${DEVSHELL_PROJECT_ID:-}" ]; then
         export GOOGLE_CLOUD_SHELL=1
         return 0
