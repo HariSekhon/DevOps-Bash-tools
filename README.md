@@ -6,7 +6,8 @@ Hari Sekhon - DevOps Bash Tools
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/network)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
-[![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/centos-github/)
+[![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
+[![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
@@ -15,7 +16,7 @@ Hari Sekhon - DevOps Bash Tools
 [![CI CentOS 8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+CentOS+8%22)
 [![CI Alpine](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Alpine%22)
 
-100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub repos](https://github.com/harisekhon) CI builds.
+100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md).
 
 Contains:
 
@@ -108,7 +109,7 @@ make install
 - `hdfs_find_replication_factor_1.sh` / `hdfs_set_replication_factor_3.sh` - finds HDFS files with replication factor 1 / sets HDFS files with replication factor <=2 to replication factor 3 to repair replication safety and avoid no replica alarms during maintenance operations (see also Python API version in the [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) repo)
 - `hdfs_file_size.sh` / `hdfs_file_size_including_replicas.sh` - quickly differentiate HDFS files raw size vs total replicated size
 - `check_*.sh` - extensive collection of generalized tests that can be applied to any repo (these run against all my GitHub repos via CI)
-- `git*.sh` - various useful Git scripts like iterating all branches executing command arguments, submodule handling, merging master updates to all branches, fetching GitHub users public SSH keys for quick local installation etc.
+- `git*.sh` - various useful Git scripts like iterating all branches executing command arguments, submodule handling, merging master updates to all branches, fetching GitHub users public SSH keys for quick local installation, generate a [Status.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
 - `perl*.sh` - various Perl utilities including scripts to generate fatpacks (self-contained programs with all CPAN modules built-in), find the Perl library base, find where a Perl CLI tool is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help), print the perl module search path, find unused CPAN modules in project, find duplicate CPAN modules between projects and sub-projects, bulk install file lists of CPAN modules, install CPAN packages only when not present in perl path (either OS packages or CPAN) to avoid needless installations, saving time and reducing build failures
 - `python*.sh` - various Python utilities including scripts to byte-compile, find the Python library base, find where a Python CLI tool is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help), print the module search path, find unused pip modules in projects, find duplicate pip modules between projects and sub-projects, convert Python module names to import names, bulk install file lists of packages, install packages only when not present in python path (either OS or pip - avoids pip installing packages provided by OS, speeds up builds and reduces build failures
   - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures

@@ -19,6 +19,7 @@ curl
 gcc
 git
 golang
+findutils
 jq
 make
 perl

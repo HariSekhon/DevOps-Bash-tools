@@ -28,6 +28,8 @@ fi
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
+github="${github:-$HOME/github}"
+
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
