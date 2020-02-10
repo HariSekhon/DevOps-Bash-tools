@@ -25,7 +25,7 @@ on:
     - cron:  '0 10 30 * *'
 
 jobs:
-  build:
+  fedora-github:
     name: check
     timeout-minutes: 1
     runs-on: ubuntu-latest
@@ -33,3 +33,11 @@ jobs:
     steps:
     - name: check
       run: check_dockerhub_repo_build_status.py --repo harisekhon/fedora-github
+  github_fedora:
+    name: check
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    container: harisekhon/nagios-plugins
+    steps:
+    - name: check
+      run: check_dockerhub_repo_build_status.py --repo harisekhon/github:fedora
