@@ -31,11 +31,11 @@ kafka_wrappers="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
 add_PATH "$kafka_wrappers"
 
 # HDP defaults to 8GB, on VMs that often breaks cli commands which try to claim too much ram and fail
-export KAFKA_OPTS="$KAFKA_OPTS -Xms1G -Xmx1G"
+export KAFKA_OPTS="${KAFKA_OPTS:-} -Xms1G -Xmx1G"
 
 # there was another setting like KAFKA_KERBEROS_CLIENT I've used before but can't remember, this should work too
 kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers/kafka_cli_jaas.conf"
-export KAFKA_OPTS="$KAFKA_OPTS -Djava.security.auth.login.config=$kafka_cli_jaas_conf"
+export KAFKA_OPTS="${KAFKA_OPTS:-} -Djava.security.auth.login.config=$kafka_cli_jaas_conf"
 
 # ============================================================================ #
 
