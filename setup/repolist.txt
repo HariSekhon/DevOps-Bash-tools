@@ -42,6 +42,8 @@ DevOps-Python-tools:pytools
 
 HAProxy-configs:haproxy-configs
 
+Dockerfiles
+
 Nagios-Plugin-Kafka:nagios-plugin-kafka
 
 # biggest repo last
