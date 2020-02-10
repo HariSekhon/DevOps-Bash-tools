@@ -33,6 +33,14 @@ jobs:
     steps:
     - name: check
       run: check_dockerhub_repo_build_status.py --repo harisekhon/bash-tools --tag alpine
+  tools_alpine:
+    name: check
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    container: harisekhon/nagios-plugins
+    steps:
+    - name: check
+      run: check_dockerhub_repo_build_status.py --repo harisekhon/tools --tag alpine
   alpine-github:
     name: check
     timeout-minutes: 1
