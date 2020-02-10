@@ -544,6 +544,10 @@ github: browse
 github-url:
 	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee /dev/stderr | tr -d '\n' | paste_clipboard
 
+.PHONY: status
+status:
+	@source $(BASH_TOOLS)/.bash.d/functions.sh; browser "https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md"
+
 .PHONY: readme
 readme:
 	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
