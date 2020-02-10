@@ -259,6 +259,10 @@ st(){
   eval ${GIT_PAGER:-cat}
 }
 
+stq(){
+    st "$@" | grep --color=no -e "=======" -e branch -e GitHub
+}
+
 # disabling this as I don't use Mercurial or Svn any more,
 # replacing with simpler function below that will pass through more things like --rebase
 #pull(){
