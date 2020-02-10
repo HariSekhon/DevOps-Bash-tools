@@ -48,6 +48,7 @@ define MAKEFILE_USAGE
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon GitHub repos
+    make status                 open the Github Status page of all my repos build statuses across all CI platforms
 
     make aws                    installs AWS CLI tools
     make gcp                    installs GCloud SDK
