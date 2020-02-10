@@ -25,6 +25,14 @@ on:
     - cron:  '0 10 30 * *'
 
 jobs:
+  bash_tools_debian:
+    name: check
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    container: harisekhon/nagios-plugins
+    steps:
+    - name: check
+      run: check_dockerhub_repo_build_status.py --repo harisekhon/bash-tools --tag debian
   debian-github:
     name: check
     timeout-minutes: 1
