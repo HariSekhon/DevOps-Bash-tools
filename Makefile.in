@@ -546,7 +546,7 @@ github-url:
 
 .PHONY: status
 status:
-	@source $(BASH_TOOLS)/.bash.d/functions.sh; browser "https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md"
+	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md"
 
 .PHONY: readme
 readme:
