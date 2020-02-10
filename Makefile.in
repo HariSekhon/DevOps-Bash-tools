@@ -218,8 +218,9 @@ apk-packages-perl:
 	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 
+	# don't put comments inside the for loop, breaks syntax expecting 'done'
+	# no point installing system cpan packages if using perlbrew as they won't be found inside perlbrew
 	for x in apk-packages-cpan.txt; do \
-		# no point installing system cpan packages when they won't be found in perlbrew and will need to be cpan installed anyway
 		if [ -z "$(PERLBREW_PERL)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
