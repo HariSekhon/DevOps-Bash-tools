@@ -33,7 +33,7 @@ jobs:
     steps:
     - name: check
       run: check_dockerhub_repo_build_status.py --repo harisekhon/alpine-github
-  github:alpine:
+  github_alpine:
     name: check
     timeout-minutes: 1
     runs-on: ubuntu-latest
