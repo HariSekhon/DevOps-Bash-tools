@@ -161,6 +161,9 @@ fi
 #                                    P e r l
 # ============================================================================ #
 
+#if [ -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl/ ]; then
+#    add_PATH PERL5LIB /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl
+#fi
 if [ -d ~/perl5/lib/perl5 ]; then
     add_PATH PERL5LIB ~/perl5/lib/perl5
 fi
