@@ -14,13 +14,15 @@
 # ============================================================================ #
 
 bash
+#binutils  # contains old C tools like 'strings'
 curl
 #direnv
 gcc
 git
 golang
-findutils
+findutils  # find and xargs
 hostname
+iputils
 jq
 make
 perl
