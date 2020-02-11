@@ -16,5 +16,8 @@
 # no longer available on RHEL8 :-(
 ShellCheck
 
+# required in Fedora, but not available in RHEL6
+hostname
+
 # not available in RHEL 6 repos
 parallel
