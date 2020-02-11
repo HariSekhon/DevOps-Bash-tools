@@ -40,7 +40,9 @@ jobs:
         ls -l /.dockerenv
         echo "pwd is $PWD"
         cat /etc/*release
-        apk add --no-cache git make
+        #apk add --no-cache git make
+        apk update &&
+        apk add git make
     - name: git clone
       run: |
         cd /tmp &&
