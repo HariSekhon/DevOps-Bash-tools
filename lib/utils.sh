@@ -234,6 +234,12 @@ if is_travis; then
     export HOST="${HOST:-localhost}"
 fi
 
+if [ $EUID -eq 0 ]; then
+    sudo=""
+else
+    sudo=sudo
+fi
+
 if is_travis; then
     sudo=sudo
 else
