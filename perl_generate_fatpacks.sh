@@ -24,6 +24,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/docker.sh"
+
 output_dir="fatpacks"
 
 usage(){
@@ -60,6 +63,11 @@ if [ -z "$perl_scripts" ]; then
 fi
 
 section "FatPacking Perl Scripts"
+
+if is_inside_docker; then
+    echo "Detected running inside Docker, skipping building fatpacks..."
+    exit 0
+fi
 
 check_bin fatpack
 
