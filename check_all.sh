@@ -30,6 +30,8 @@ pushd "$srcdir" >/dev/null
 # shellcheck disable=SC1091
 . "lib/docker.sh"
 
+popd >/dev/null || :
+
 section "Running Bash Tools ALL"
 
 # Breaks on CentOS Docker without this, although works on Debian, Ubuntu and Alpine without
@@ -116,8 +118,6 @@ WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
 #for script in $(find . -name 'test*.sh'); do
 #    "$srcdir/$script" -vvv
 #done
-
-popd &>/dev/null || :
 
 time_taken "$bash_tools_start_time" "Bash Tools All Checks Completed in"
 section2 "Bash Tools All Checks Completed"
