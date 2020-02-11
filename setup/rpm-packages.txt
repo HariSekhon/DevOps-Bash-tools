@@ -29,4 +29,5 @@ perl-App-cpanminus
 #ShellCheck  # not available in RHEL8, moved to rpm-packages-optional.txt
 wget
 which
+zip
 unzip
