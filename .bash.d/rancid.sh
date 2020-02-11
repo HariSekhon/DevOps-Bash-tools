@@ -55,18 +55,18 @@ done
 # for x in "$RANCID_HOME/bin/"*login; do y="${x##*/}"; which "${y%ogin}" &>/dev/null || alias "${y%ogin}"="$y"; done
 # This is slow to do every time so just past the echo output from:
 # for x in "$RANCID_HOME/bin/"*login; do y="${x##*/}"; which "${y%ogin}" &>/dev/null || echo alias "${y%ogin}"="$y"; done
-alias al=alogin
-alias avol=avologin
-alias bl=blogin
-alias cl=clogin
-alias el=elogin
-alias fl=flogin
-alias hl=hlogin
-alias htl=htlogin
-alias jl=jlogin
-alias mrvl=mrvlogin
+#alias al=alogin
+#alias avol=avologin
+#alias bl=blogin
+#alias cl=clogin
+#alias el=elogin
+#alias fl=flogin
+#alias hl=hlogin
+#alias htl=htlogin
+#alias jl=jlogin
+#alias mrvl=mrvlogin
 # nl is a real program so skipped nlogin
-alias nsl=nslogin
-alias rivl=rivlogin
-alias tl=tlogin
-alias tntl=tntlogin
+#alias nsl=nslogin
+#alias rivl=rivlogin
+#alias tl=tlogin
+#alias tntl=tntlogin
