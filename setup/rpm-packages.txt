@@ -21,7 +21,6 @@ gcc
 git
 golang
 findutils  # find and xargs
-hostname
 iputils
 jq
 make
