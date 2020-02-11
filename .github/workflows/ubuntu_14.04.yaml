@@ -40,7 +40,8 @@ jobs:
         ls -l /.dockerenv
         echo "pwd is $PWD"
         cat /etc/*release
-        yum install -y git make
+        apt-get update &&
+        apt-get install -y git make
     - name: git clone
       run: |
         cd /tmp &&
