@@ -32,8 +32,9 @@ for x in "$@"; do
     esac
 done
 
+found=0
+
 find_dups(){
-    local found=0
     local duplicate_packages
     # need word splitting for different files
     # shellcheck disable=SC2086
@@ -53,9 +54,6 @@ find_dups(){
         ((found+=1))
     done <<< "$duplicate_packages"
 
-    if [ $found -gt 0 ]; then
-        exit 1
-    fi
 }
 
 if [ -n "$*" ]; then
@@ -76,4 +74,8 @@ else
     if [ $found_files -eq 0 ]; then
         usage "No package files found, please specify explicit path to *-packages*.txt"
     fi
+fi
+
+if [ $found -gt 0 ]; then
+    exit 1
 fi
