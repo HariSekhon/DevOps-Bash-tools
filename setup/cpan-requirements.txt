@@ -1,0 +1,18 @@
+#  vim:ts=4:sts=4:sw=4:noet
+#
+#  Author: Hari Sekhon
+#  Date: 2013-01-06 15:45:00 +0000 (Sun, 06 Jan 2013)
+#
+#  https://github.com/harisekhon/lib
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                            CPAN Module Dependencies
+# ============================================================================ #
+
+# needed by bash-tools/perl_generate_fatpacks.sh
+App::FatPacker
