@@ -16,6 +16,12 @@
 # no longer available on RHEL8 :-(
 ShellCheck
 
+# RHEL8 no longer supports 'python', must specify 'python2'
+python
+python-pip
+python2
+python2-pip
+
 # required in Fedora, but not available in RHEL6
 hostname
 
