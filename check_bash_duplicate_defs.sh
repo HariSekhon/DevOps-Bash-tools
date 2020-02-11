@@ -41,7 +41,9 @@ check_duplicate_defs(){
 }
 
 get_functions(){
-    grep -Eh '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" 2>/dev/null |
+    # ignore definitions that happen inside indented blocks such as if/else statements creating conditional functions
+    #grep -Eh '^[[:space:]]*(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" 2>/dev/null |
+    grep -Eh '^(function[[:space:]]+)?[[:alnum:]-]+[[:space:]]*\(' "$@" 2>/dev/null |
     grep -Ev '^[[:space:]]*for[[:space:]]*\(\(' |
     sed 's/^[[:space:]]*\(function[[:space:]]*\)*//; s/[[:space:]]*(.*//' |
     sort
