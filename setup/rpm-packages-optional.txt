@@ -21,3 +21,6 @@ hostname
 
 # not available in RHEL 6 repos
 parallel
+
+procps     # RHEL <= 7 (RHEL 7 maps procps to procps-ng)
+procps-ng  # RHEL 8
