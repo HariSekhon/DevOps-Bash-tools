@@ -42,7 +42,7 @@ jobs:
         cat /etc/*release
         #apk add --no-cache git make
         apk update &&
-        apk add git make
+        apk add git make ca-certificates
     - name: git clone
       run: |
         cd /tmp &&
