@@ -34,21 +34,24 @@ done
 
 find_dups(){
     local found=0
+    local duplicate_packages
     # need word splitting for different files
     # shellcheck disable=SC2086
-    sed 's/#.*//;
+    duplicate_packages="$(sed 's/#.*//;
          s/[<>=].*//;
          s/^[[:space:]]*//;
          s/[[:space:]]*$//;
-         /^[[:space:]]*$/d;' $requirements_files |
-    sort |
-    uniq -d |
-    while read -r module ; do
+         /^[[:space:]]*$/d;' $package_files |
+        sort |
+        uniq -d
+    )"
+    while read -r package; do
+        [ -n "$package" ] || continue
         # need word splitting for different files
         # shellcheck disable=SC2086
-        grep "^${module}\\([[:space:]]\\|$\\)" $requirements_files
-        ((found + 1))
-    done
+        grep "^${package}\\([[:space:]]\\|$\\)" $package_files
+        ((found+=1))
+    done <<< "$duplicate_packages"
 
     if [ $found -gt 0 ]; then
         exit 1
@@ -56,18 +59,18 @@ find_dups(){
 }
 
 if [ -n "$*" ]; then
-    requirements_files="$*"
-    find_dups "$requirements_files"
+    package_files="$*"
+    find_dups "$package_files"
 else
     found_files=0
     for x in rpm deb apk brew portage; do
-        requirements_files="$(find . -maxdepth 3 -name "$x*-packages*.txt")"
-        if [ -z "$requirements_files" ]; then
+        package_files="$(find . -maxdepth 3 -name "$x*-packages*.txt")"
+        if [ -z "$package_files" ]; then
             continue
         fi
         found_files=1
         echo "checking for duplicate $x packages" >&2
-        find_dups "$requirements_files"
+        find_dups "$package_files"
         echo
     done
     if [ $found_files -eq 0 ]; then
