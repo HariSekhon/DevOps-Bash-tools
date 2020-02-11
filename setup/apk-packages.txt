@@ -14,10 +14,12 @@
 # ============================================================================ #
 
 bash
+coreutils
 curl
 gcc
 git
 go
+grep
 jq
 make
 parallel
@@ -27,4 +29,5 @@ python
 py-pip
 wget
 which
+zip
 unzip
