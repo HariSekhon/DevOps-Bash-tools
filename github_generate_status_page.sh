@@ -107,7 +107,7 @@ for repo in $repolist; do
     sed '1 s/^[^#]/# &/' |
     # \\ escapes the newlines to allow them inside the sed for literal replacement since \n doesn't work
     sed "2 s|^|\\
-[$repo](https://github.com/$repo) repo\\
+Link:  [$repo](https://github.com/$repo)\\
 \\
 |"
     echo
