@@ -15,6 +15,7 @@
 
 bash
 build-essential
+cpanminus
 curl
 #direnv
 git
