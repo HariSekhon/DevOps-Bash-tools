@@ -231,8 +231,8 @@ apk-packages-python:
 	for x in apk-packages-python.txt apk-packages-python-dev.txt; do \
 		find . -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	# no point installing system pip packages when they won't be found in virtualenv and will need to be pip installed anyway
 	for x in apk-packages-pip.txt; do \
-		# no point installing system pip packages when they won't be found in virtualenv and will need to be pip installed anyway
 		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
 			find . -path "*/setup/$$x"; \
 		fi; \
