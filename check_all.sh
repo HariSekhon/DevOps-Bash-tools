@@ -59,7 +59,10 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_bash_duplicate_defs.sh" || :
 
-"$srcdir/check_duplicate_packages.sh"
+# duplicate packages eg. in nagios-plugins submodules
+# ./pylib/setup/deb-packages-dev.txt:libkrb5-dev
+# ./lib/setup/deb-packages-dev.txt:libkrb5-dev
+"$srcdir/check_duplicate_packages.sh" || :
 
 "$srcdir/check_duplicate_dependencies.sh"
 
