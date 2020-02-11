@@ -17,6 +17,13 @@
 #                  K u b e r n e t e s   /   O p e n S h i f t
 # ============================================================================ #
 
+for x in kubectl oc; do
+    if type -P "$x" &>/dev/null; then
+        # shellcheck disable=SC1090
+        source <("$x" completion bash)
+    fi
+done
+
 # minishift oc-env > ~/.minishift.env
 if [ -f ~/.minishift.env ]; then
     # remove .minishift.env if it causes errors, which can happen if it was generated when there was no MiniShift VM running
