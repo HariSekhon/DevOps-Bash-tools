@@ -68,6 +68,7 @@ else
         found_files=1
         echo "checking for duplicate $x packages" >&2
         find_dups "$requirements_files"
+        echo
     done
     if [ $found_files -eq 0 ]; then
         usage "No package files found, please specify explicit path to *-packages*.txt"
