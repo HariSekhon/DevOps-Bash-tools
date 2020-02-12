@@ -111,6 +111,15 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'airblade/vim-gitgutter'
+Plugin 'hashivim/vim-consul'
+"Plugin 'hashivim/vim-nomadproject'
+"Plugin 'hashivim/vim-ottoproject'
+Plugin 'hashivim/vim-packer'
+Plugin 'hashivim/vim-terraform'
+Plugin 'hashivim/vim-vagrant'
+"Plugin 'hashivim/vim-vaultproject'
+"Plugin 'vim-syntastic/syntastic'
+Plugin 'juliosueiras/vim-terraform-completion'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'preservim/nerdcommenter'
 Plugin 'tmux-plugins/vim-tmux'
@@ -119,6 +128,23 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
 "let g:gitgutter_enabled = 0
+
+" align settings automatically with Tabularize
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+
+" Syntastic Config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+
+" (Optional) Enable terraform plan to be include in filter
+"let g:syntastic_terraform_tffilter_plan = 1
 
 call vundle#end()
 
