@@ -270,10 +270,10 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
-nmap          ;g :! bash -ic 'cd $(dirname "%") && st'<CR>
-nmap          ;G :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
-nmap          ;. :! bash -ic 'cd $(dirname "%") && pull'<CR>
-nmap          ;[ :! bash -ic 'cd $(dirname "%") && push'<CR>
+nmap          ;g :w<CR> :! bash -ic 'cd $(dirname "%") && st'<CR>
+nmap          ;G :w<CR> :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
+nmap          ;. :w<CR> :! bash -ic 'cd $(dirname "%") && pull'<CR>
+nmap          ;[ :w<CR> :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap <silent> ;u :w<CR> :!urlview "%"<CR>
 " pass current line as stdin to urlview to quickly go to this url
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
