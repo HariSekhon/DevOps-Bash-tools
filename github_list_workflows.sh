@@ -42,4 +42,9 @@ if [ -n "${PASSWORD:-}"  ]; then
     echo "using authenticated access" >&2
 fi
 
-eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/repos/$repo/actions/workflows"
+workflow_id="${2:-}"
+if [ -n "$workflow_id" ]; then
+    workflow_id="/$workflow_id"
+fi
+
+eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/repos/$repo/actions/workflows$workflow_id"
