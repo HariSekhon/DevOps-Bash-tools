@@ -31,7 +31,7 @@ set -euo pipefail
 srcdir="$(dirname "$0")"
 
 USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
-PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD}}}"
+PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
 
 top_N=20
 
