@@ -35,6 +35,11 @@ fi
 
 section "Compiling Python / Jython files"
 
+if ! type -P "$python" &>/dev/null; then
+    echo "$python not found in \$PATH, skipping compile"
+    exit 0
+fi
+
 start_time="$(start_timer)"
 
 # opts:

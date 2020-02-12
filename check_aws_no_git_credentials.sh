@@ -39,6 +39,12 @@ fi
 echo "checking $(pwd)"
 echo
 
+if [ -f .gitallowed ]; then
+    gitallowed=.gitallowed
+else
+    gitallowed=/dev/null
+fi
+
 if git grep \
     -e 'AWS_ACCESS_KEY.*=' \
     -e 'AWS_SECRET_KEY.*=' \
@@ -48,6 +54,7 @@ if git grep \
     -e 'aws_session_token.*=' |
         grep -v -e '\.bash\.d/aws.sh:' \
                 -e "${0##*/}:" |
+        grep -v -f "$gitallowed" |
     grep .; then
     echo
     echo "DANGER: potential AWS credentials found in Git!!"
