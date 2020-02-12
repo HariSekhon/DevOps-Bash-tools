@@ -37,7 +37,13 @@ for arg; do
 done
 
 export USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
-export PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
+PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
+
+if [ -z "${PASSWORD:-}" ]; then
+    PASSWORD="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@/{print $2; exit}' | sed 's|https://||;s/@.*//')"
+fi
+
+export PASSWORD
 
 if [ -n "${PASSWORD:-}"  ]; then
     echo "using authenticated access" >&2
