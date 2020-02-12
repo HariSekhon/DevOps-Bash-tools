@@ -67,4 +67,4 @@ if [ -n "${PASSWORD:-}"  ]; then
     echo "using authenticated access" >&2
 fi
 
-eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/repos/$repo/actions/workflows$workflow_id"
+eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/repos/$repo/actions/workflows$workflow_id"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
