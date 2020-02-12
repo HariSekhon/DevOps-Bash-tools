@@ -21,7 +21,7 @@
 #
 #     Hive is more reliable as Impala breaks on some table metadata definitions where Hive doesn't
 #
-#     Impala is faster than Hive for the first hundred or so tables but then slows down
+#     Impala is faster than Hive for the first ~1000 tables but then slows down
 #     so if you have a lot of tables I recommend you use the Hive version of this instead
 #
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
