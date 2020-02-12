@@ -46,7 +46,7 @@ if [ -z "$repo" ]; then
 fi
 
 if [ -z "$repo" ]; then
-    usage
+    usage "repo not specified and couldn't determine from git remote command"
 fi
 
 for arg; do
