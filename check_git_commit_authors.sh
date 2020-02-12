@@ -172,6 +172,10 @@ else
 fi
 
 time_taken "$start_time"
-section2 "All Git author name / email checks passed"
+if [ $exitcode -eq 0 ]; then
+    section2 "All Git author name / email checks passed"
+else
+    section2 "ERROR: some Git author name / email checks failed"
+fi
 echo
 exit $exitcode
