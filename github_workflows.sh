@@ -42,7 +42,7 @@ if [ -n "$workflow_id" ]; then
 fi
 
 if [ -z "$repo" ]; then
-    repo="$(git remote -v 2>/dev/null | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:],,')"
+    repo="$(git remote -v 2>/dev/null | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:]*,,')"
 fi
 
 if [ -z "$repo" ]; then
@@ -57,14 +57,10 @@ for arg; do
 done
 
 USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
-PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD}}}"
+PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
 
 if ! [[ $repo =~ / ]]; then
     repo="$USER/$repo"
 fi
 
-if [ -n "${PASSWORD:-}"  ]; then
-    echo "using authenticated access" >&2
-fi
-
-eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/repos/$repo/actions/workflows$workflow_id"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
+"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
