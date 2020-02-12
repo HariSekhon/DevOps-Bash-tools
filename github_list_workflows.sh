@@ -13,23 +13,48 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to get GitHub Workflows via the API
-#
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+usage(){
+    cat <<EOF
+
+Script to get GitHub Workflows via the API
+
+If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
+
+Optional workflow id as second parameter will filter to just that workflow
+
+\$REPO and \$WORKFLOW_ID environment variables are also supported with positional args taking precedence
+
+usage: ${0##*/} <repo> [<workflow_id>]
+
+EOF
+    exit 3
+}
+
 repo="${1:-${REPO:-}}"
 
-if [ -z "$repo" ]; then
-    repo="$(git remote -v | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:],,')"
+workflow_id="${2:-${WORKFLOW_ID:-}}"
+if [ -n "$workflow_id" ]; then
+    workflow_id="/$workflow_id"
 fi
 
 if [ -z "$repo" ]; then
-    echo "usage: ${0##*/} <repo>"
-    exit 3
+    repo="$(git remote -v 2>/dev/null | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:],,')"
 fi
+
+if [ -z "$repo" ]; then
+    usage
+fi
+
+for arg; do
+    case "$arg" in
+        -*)     usage
+                ;;
+    esac
+done
 
 USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
 PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD}}}"
@@ -40,11 +65,6 @@ fi
 
 if [ -n "${PASSWORD:-}"  ]; then
     echo "using authenticated access" >&2
-fi
-
-workflow_id="${2:-}"
-if [ -n "$workflow_id" ]; then
-    workflow_id="/$workflow_id"
 fi
 
 eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/repos/$repo/actions/workflows$workflow_id"
