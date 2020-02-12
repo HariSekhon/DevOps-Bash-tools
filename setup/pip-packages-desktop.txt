@@ -39,6 +39,7 @@ pylint
 pytest
 python-cson
 requests
+tabulate
 saws
 yamllint
 yq
