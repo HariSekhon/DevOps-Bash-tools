@@ -41,7 +41,7 @@ fi
 #
 # used in client scripts
 # shellcheck disable=SC2034
-domain_regex='\b(([A-Za-z](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}\b'
+domain_regex='\b(([A-Za-z0-9](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}\b'
 # shellcheck disable=SC2034
 email_regex='\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
 # shellcheck disable=SC2034
