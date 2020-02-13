@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="Runs curl with either Kerberos SpNego (if \$KRB5 is set) or
 a ram file descriptor using \$PASSWORD to avoid credentials being exposed via process list or command line logging"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
 # used by utils.sh usage()
