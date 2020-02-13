@@ -18,7 +18,7 @@ set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
 if [ -z "$(find "${1:-.}" -name pom.xml)" ]; then
