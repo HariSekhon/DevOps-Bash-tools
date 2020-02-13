@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-# shellcheck source=".bash.d/git.sh"
+# shellcheck source=.bash.d/git.sh
 . "$srcdir/.bash.d/git.sh"
 
 usage(){
