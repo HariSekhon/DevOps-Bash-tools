@@ -165,6 +165,9 @@ gitignore_api(){
 }
 alias gi=gitignore_api
 
+git_repo(){
+    git remote -v | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:]*,,'
+}
 
 isGit(){
     local target=${1:-.}
