@@ -20,7 +20,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # use .yamllint in $PWD or default to $srcdir/yamllint/config
 export XDG_CONFIG_HOME="$srcdir"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
 #if [ $# -gt 0 ]; then
