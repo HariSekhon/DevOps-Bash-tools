@@ -34,10 +34,12 @@ usage_description="Auto-determines the Kubernetes API server and kube-system API
 usage_args="/path <curl_options>"
 
 if [ $# -lt 1 ]; then
+    # shellcheck disable=SC2119
     usage
 fi
 
 for x in "$@"; do
+    # shellcheck disable=SC2119
     case "$x" in
         -h|--help) usage
         ;;
