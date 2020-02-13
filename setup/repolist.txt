@@ -35,7 +35,7 @@ lib
 pylib
 lib-java:libj
 
-DevOps-Perl-tools:tools
+DevOps-Perl-tools:perl-tools
 DevOps-Python-tools:pytools
 #spotify
 #spark-apps
