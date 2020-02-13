@@ -20,7 +20,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
 if [ $# -eq 0 ]; then
@@ -40,7 +40,18 @@ check_shell_syntax(){
     fi
     bash -n "$1"
     if type -P shellcheck &>/dev/null; then
-        shellcheck "$1" || :
+        local dirname
+        dirname="$(dirname "$1")"
+        # this allows following source hints relative to the source file to be safe to run from any $PWD
+        if ! pushd "$dirname" &>/dev/null; then
+            echo "ERROR: failed to pushd to $dirname"
+            exit 1
+        fi
+        # -x allows to follow source hints for files not given as arguments
+        shellcheck -x "$1" || :
+        if ! popd &>/dev/null; then
+            echo "ERROR: failed to popd from $dirname"
+        fi
     fi
     echo "=> OK"
 }
