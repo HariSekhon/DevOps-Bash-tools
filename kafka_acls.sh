@@ -18,7 +18,7 @@ set -u
 srcdir="$(dirname "$0")"
 
 # sources heap, kerberos, brokers, zookeepers etc
-# shellcheck disable=SC1090
+# shellcheck source=lib/kafka.sh
 . "$srcdir/.bash.d/kafka.sh"
 
 # it's assigned in .bash.d/kafka.sh
