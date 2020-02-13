@@ -28,6 +28,9 @@ if [ -z "${CLOUDERA_MANAGER:-}" ]; then
     fi
 fi
 
+USER="${CLOUDERA_MANAGER_USER:-${CLOUDERA_USER:-${USER:-}}}"
+PASSWORD="${CLOUDERA_MANAGER_PASSWORD:-${CLOUDERA_PASSWORD:-${PASSWORD:-}}}"
+
 if [ -n "${CLOUDERA_MANAGER_SSL:-}" ]; then
     CLOUDERA_MANAGER="https://${CLOUDERA_MANAGER#*://}"
     if [[ "$CLOUDERA_MANAGER" =~ :7180$ ]]; then
