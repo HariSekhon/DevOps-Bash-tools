@@ -40,6 +40,7 @@ check_shell_syntax(){
     fi
     bash -n "$1"
     if type -P shellcheck &>/dev/null; then
+        local basename="${1##*/}"
         local dirname
         dirname="$(dirname "$1")"
         # this allows following source hints relative to the source file to be safe to run from any $PWD
@@ -48,7 +49,7 @@ check_shell_syntax(){
             exit 1
         fi
         # -x allows to follow source hints for files not given as arguments
-        shellcheck -x "$1" || :
+        shellcheck -x "$basename" || :
         if ! popd &>/dev/null; then
             echo "ERROR: failed to popd from $dirname"
         fi
