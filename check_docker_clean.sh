@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/docker.sh
 . "$srcdir/lib/docker.sh"
 
 # Caches we want to check have been removed:
