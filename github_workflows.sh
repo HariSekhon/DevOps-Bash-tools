@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+# shellcheck source=".bash.d/git.sh"
+. "$srcdir/.bash.d/git.sh"
+
 usage(){
     cat <<EOF
 
@@ -42,7 +45,7 @@ if [ -n "$workflow_id" ]; then
 fi
 
 if [ -z "$repo" ]; then
-    repo="$(git remote -v 2>/dev/null | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:]*,,')"
+    repo="$(git_repo)"
 fi
 
 if [ -z "$repo" ]; then
