@@ -28,7 +28,10 @@ and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
 Can specify \$CURL_OPTS for options to pass to curl
 
 
-usage: ${0##*/} <url> [<options>]
+usage: ${0##*/} <url_path> [<options>]
+
+
+eg. ${0##*/} /repos/HariSekhon/actions/workflows
 
 EOF
     exit 3
@@ -59,6 +62,8 @@ export PASSWORD
 #fi
 
 url_path="${1:-}"
+url_path="${url_path//https:\/\/api.github.com}"
+url_path="/${url_path##/}"
 
 shift
 
