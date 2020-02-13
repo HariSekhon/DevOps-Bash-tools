@@ -38,6 +38,8 @@ Environment variables (prompts for address, cluster and password if not passed v
 
 ./cloudera_manager_api.sh /path
 
+Used by various adjacent cloudera_manager_*.sh scripts
+
 Tested on Cloudera Enterprise 5.10
 EOF
     exit 3
