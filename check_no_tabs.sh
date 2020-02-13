@@ -24,7 +24,7 @@ section "Checking for Tabs (rather than Spaces)"
 
 start_time="$(start_timer)"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/excluded.sh
 . "$srcdir/lib/excluded.sh"
 
 progress_char='-'
