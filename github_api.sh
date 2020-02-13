@@ -22,12 +22,21 @@ usage(){
 
 Script to query GitHub API
 
-Automatically handles environment variables \$GITHUB_USER
+Automatically handles authentication via environment variables \$GITHUB_USER
 and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
+
+Can specify \$CURL_OPTS for options to pass to curl
+
+
+usage: ${0##*/} <url> [<options>]
 
 EOF
     exit 3
 }
+
+if [ $# -lt 1 ]; then
+    usage
+fi
 
 for arg; do
     case "$arg" in
@@ -49,4 +58,8 @@ export PASSWORD
 #    echo "using authenticated access" >&2
 #fi
 
-eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com$*"
+url_path="${1:-}"
+
+shift
+
+eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com$url_path" "$@"
