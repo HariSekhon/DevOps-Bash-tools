@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  # false positives
+#  shellcheck disable=SC2178,SC2128
 #
 #  Author: Hari Sekhon
 #  Date: 2019-03-05 18:18:13 +0000 (Tue, 05 Mar 2019)
