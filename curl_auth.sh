@@ -30,10 +30,12 @@ a ram file descriptor using \$PASSWORD to avoid credentials being exposed via pr
 usage_args="[<curl_options>] <url>"
 
 if [ $# -lt 1 ]; then
+    # shellcheck disable=SC2119
     usage
 fi
 
 for x in "$@"; do
+    # shellcheck disable=SC2119
     case "$x" in
         -h|--help) usage
         ;;
