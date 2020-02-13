@@ -30,38 +30,23 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
-PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
-
 top_N=20
 
 repolist="$*"
 
-if [ -n "${PASSWORD:-}"  ]; then
-    echo "using authenticated access" >&2
-fi
+USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
 
 get_repos(){
     page=1
     while true; do
         echo "fetching repos page $page" >&2
-        if [ -n "${PASSWORD:-}" ]; then
-            export USER
-            export PASSWORD
-            # shellcheck disable=SC2086
-            if ! output="$("$srcdir/curl_auth.sh" -sS --connect-timeout 3 ${CURL_OPTS:-} "https://api.github.com/users/$USER/repos?page=$page&per_page=100")"; then
-                echo "ERROR" >&2
-                exit 1
-            fi
-        else
-            # use authenticated requests if you are hitting the API rate limit - this is automatically done above now if USER/PASSWORD GITHUB_USER/GITHUB_PASSWORD/GITHUB_TOKEN environment variables are detected
-            # eg. CURL_OPTS="-u harisekhon:$GITHUB_TOKEN" ...
-            # shellcheck disable=SC2086
-            if ! output="$(curl -sS --connect-timeout 3 ${CURL_OPTS:-} "https://api.github.com/users/$USER/repos?page=$page&per_page=100")"; then
-                echo "ERROR" >&2
-                exit 1
-            fi
+        if ! output="$("$srcdir/github_api.sh" "/users/$USER/repos?page=$page&per_page=100")"; then
+            echo "ERROR" >&2
+            exit 1
         fi
+        # use authenticated requests if you are hitting the API rate limit - this is automatically done above now if USER/PASSWORD GITHUB_USER/GITHUB_PASSWORD/GITHUB_TOKEN environment variables are detected
+        # eg. CURL_OPTS="-u harisekhon:$GITHUB_TOKEN" ...
+        # shellcheck disable=SC2086
         if [ -z "$(jq '.[]' <<< "$output")" ]; then
             break
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
