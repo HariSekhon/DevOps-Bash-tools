@@ -21,10 +21,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/docker.sh
 . "$srcdir/lib/docker.sh"
 
 output_dir="fatpacks"
