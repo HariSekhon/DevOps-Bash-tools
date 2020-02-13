@@ -27,7 +27,7 @@ usage_description="Auto-determines the Kubernetes API server and kube-system API
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/k8s.sh"
+. "$srcdir/.bash.d/kubernetes.sh"
 
 # used by utils.sh usage()
 # shellcheck disable=SC2034
