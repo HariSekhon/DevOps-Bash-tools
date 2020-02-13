@@ -22,9 +22,19 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage(){
     cat <<EOF
-Script to Cloudera Manager API, auto-populating CM address, cluster name and authentication safely from environment
+Script to query Cloudera Manager API, auto-populating Cloudera Manager host address, cluster name from environment and
+safely passing credentials via a file descriptor to avoid exposing them in the process list as arguments or OS logging
+history
 
-combine with jq commands to extract just the list of SQL queries from the rich json output
+combine with jq commands to extract the info you want
+
+Environment variables (prompts for address, cluster and password if not passed via environment variables):
+
+\$CLOUDERA_MANAGER_HOST / \$CLOUDERA_MANAGER
+\$CLOUDERA_MANAGER_CLUSTER / \$CLOUDERA_CLUSTER
+\$CLOUDERA_MANAGER_SSL (any value enables and changes port from 7180 to 7183)
+\$CLOUDERA_MANAGER_USER / \$CLOUDERA_USER / \$USER
+\$CLOUDERA_MANAGER_PASSWORD / \$CLOUDERA_PASSWORD / \$USER
 
 ./cloudera_manager_api.sh /path
 
