@@ -24,10 +24,10 @@ fi
 
 pushd "$srcdir" >/dev/null
 
-# shellcheck disable=SC1091
+# shellcheck source=lib/utils.sh
 . "lib/utils.sh"
 
-# shellcheck disable=SC1091
+# shellcheck source=lib/docker.sh
 . "lib/docker.sh"
 
 popd >/dev/null || :
