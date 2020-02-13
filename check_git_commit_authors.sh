@@ -20,13 +20,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck source=.bash.d/functions.sh
 . "$srcdir/.bash.d/functions.sh"
 
-# shellcheck disable=SC1090
+# shellcheck source=.bash.d/git.sh
 . "$srcdir/.bash.d/git.sh"
 
 section "Git Author Name + Email Checks"
@@ -57,14 +57,17 @@ git_log(){
 }
 
 git_log_names(){
+    # shellcheck disable=SC2119
     git_log --pretty=format:"%an" | toLower | trim | perl -p -e 's/[\h-]+/ /g' | sort -u
 }
 
 git_log_emails(){
+    # shellcheck disable=SC2119
     git_log --pretty=format:"%ae" | toLower | trim | sort -u
 }
 
 git_log_names_emails(){
+    # shellcheck disable=SC2119
     git_log --pretty=format:"%an %ae" | toLower | trim | perl -p -e 's/\h+/ /g' | sort -u
 }
 
