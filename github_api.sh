@@ -28,7 +28,7 @@ and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
 Can specify \$CURL_OPTS for options to pass to curl
 
 
-usage: ${0##*/} <url_path> [<options>]
+usage: ${0##*/} /path [<curl_options>]
 
 
 eg. ${0##*/} /repos/HariSekhon/actions/workflows
