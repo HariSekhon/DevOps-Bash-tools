@@ -47,10 +47,17 @@ if [ $# -lt 1 ]; then
     usage
 fi
 
+for arg; do
+    case "$arg" in
+        -h|--help)  usage
+                    ;;
+    esac
+done
+
 url_path="$1"
 url_path="/${url_path##/}"
 
 api_version="${CLOUDERA_API_VERSION:-7}"
 
-"$srcdir/curl_auth.sh" -sS --connect-timeout 5 "$CLOUDERA_MANAGER/api/v${api_version}${url_path}"
+"$srcdir/curl_auth.sh" -sS --connect-timeout 5 "$CLOUDERA_MANAGER/api/v${api_version}${url_path}" "$@"
 echo
