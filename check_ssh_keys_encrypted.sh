@@ -25,6 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 section "SSH Keys encrypted check"
 
 for arg in "$@"; do
+    # shellcheck disable=SC2119
     case "$arg" in
         -*)  usage
              ;;
