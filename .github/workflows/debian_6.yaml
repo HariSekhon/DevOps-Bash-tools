@@ -39,7 +39,7 @@ jobs:
       run: |
         ls -l /.dockerenv
         echo "pwd is $PWD"
-        cat /etc/*release
+        echo VERSION: ; cat /etc/*release /etc/*version 2>/dev/null || :
         apt-get update &&
         apt-get install -y git make
     - name: git clone
