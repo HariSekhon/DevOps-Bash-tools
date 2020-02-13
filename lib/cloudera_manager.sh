@@ -38,7 +38,7 @@ fi
 # seems to work on CM / CDH 5.10.0 even when cluster is set to 'blah' but probably shouldn't rely on that
 CLOUDERA_CLUSTER="${CLOUDERA_CLUSTER:-${CLOUDERA_MANAGER_CLUSTER:-}}"
 if [ -z "${CLOUDERA_CLUSTER:-}" ]; then
-    read -r -p 'Enter Clouder Manager Cluster name: ' CLOUDERA_CLUSTER
+    read -r -p 'Enter Cloudera Manager Cluster name: ' CLOUDERA_CLUSTER
 fi
 
 # 2020-01-02T16%3A17%3A57.514Z
