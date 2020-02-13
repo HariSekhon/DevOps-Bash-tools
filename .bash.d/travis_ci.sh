@@ -24,6 +24,7 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
+type git_repo &>/dev/null || . "$bash_tools/.bash.d/git.sh"
 type browse &>/dev/null || . "$bash_tools/.bash.d/network.sh"
 
 alias trav='travis_browse'
@@ -51,7 +52,7 @@ travis_debug(){
     opts=""
     if [[ "$PWD" =~ /github/ ]]; then
         local repo
-        repo="$(git remote -v | awk '/^origin/{print $2;exit}' | sed 's,.*github.com:*/,,')"
+        repo="$(git_repo)"
         if [ -n "$repo" ]; then
             opts="--repo $repo"
         fi
@@ -59,4 +60,10 @@ travis_debug(){
     # want arg splitting
     # shellcheck disable=SC2086
     travis_debug_session.py $opts "$@"
+}
+
+travis_log(){
+    local repo
+    repo="$(git_repo)"
+    travis_last_log.py --failed "$repo"
 }
