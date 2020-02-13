@@ -18,7 +18,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# shellcheck disable=SC1090
+# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
 section "AWS Git credentials scan"
