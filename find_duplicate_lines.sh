@@ -26,6 +26,7 @@ srcdir="$(dirname "$0")"
 usage_args="<files>"
 
 for x in "$@"; do
+    # shellcheck disable=SC2119
     case "$x" in
     -h|--help)  usage
                 ;;
