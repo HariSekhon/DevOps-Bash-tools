@@ -137,5 +137,4 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2154
 echo "fetching queries up to now:  $now_timestamp" >&2
 
-"$srcdir/curl_auth.sh" -sS "$CLOUDERA_MANAGER/api/v7/clusters/$CLOUDERA_CLUSTER/services/yarn/yarnApplications?from=1970-01-01T00%3A00%3A00.000Z&to=$now_timestamp&filter="
-echo
+"$srcdir/cloudera_manager_api.sh" "/clusters/$CLOUDERA_CLUSTER/services/yarn/yarnApplications?from=1970-01-01T00%3A00%3A00.000Z&to=$now_timestamp&filter="
