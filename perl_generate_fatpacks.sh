@@ -52,6 +52,7 @@ for x in "$@"; do
 done
 
 for x in "$@"; do
+    # shellcheck disable=SC2119
     case "$1" in
         -*) usage
             ;;
@@ -59,6 +60,7 @@ for x in "$@"; do
 done
 
 if [ -z "$perl_scripts" ]; then
+    # shellcheck disable=SC2119
     usage
 fi
 
