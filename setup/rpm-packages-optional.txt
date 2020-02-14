@@ -16,7 +16,10 @@
 # no longer available on RHEL8 :-(
 ShellCheck
 
-# RHEL8 no longer supports 'python', must specify 'python2'
+
+# not available on RHEL6
+perl-App-cpanminus
+
 python
 python-pip
 python2
