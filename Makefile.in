@@ -516,6 +516,10 @@ docker-debian:
 docker-centos:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh centos
 
+.PHONY: docker-fedora
+docker-fedora:
+	$(BASH_TOOLS)/docker_mount_build_exec.sh fedora
+
 .PHONY: docker-ubuntu
 docker-ubuntu:
 	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
