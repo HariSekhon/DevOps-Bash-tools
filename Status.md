@@ -146,6 +146,7 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
 
 [![Build Status](https://travis-ci.org/HariSekhon/HAProxy-configs.svg?branch=master)](https://travis-ci.org/HariSekhon/HAProxy-configs)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f24e17486db64270b4ae9c10f7f2bf84)](https://www.codacy.com/app/harisekhon/haproxy-configs)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/HAProxy-configs.svg)](https://github.com/HariSekhon/HAProxy-configs/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/HAProxy-configs.svg)](https://github.com/HariSekhon/HAProxy-configs/network)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/HariSekhon/HAProxy-configs)
@@ -155,10 +156,19 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![CI Ubuntu 14.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2014.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+14.04%22)
 [![CI Ubuntu 16.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2016.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+16.04%22)
 [![CI Ubuntu 18.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2018.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+18.04%22)
+[![CI Debian](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian%22)
+[![CI Debian 6](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%206/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+6%22)
+[![CI Debian 7](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%207/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+7%22)
+[![CI Debian 8](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%208/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+8%22)
+[![CI Debian 9](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%209/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+9%22)
+[![CI Debian 10](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%2010/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+10%22)
 [![CI CentOS](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS%22)
+[![CI CentOS 6](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%206/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+6%22)
 [![CI CentOS 7](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%207/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+7%22)
 [![CI CentOS 8](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+8%22)
+[![CI Fedora](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Fedora/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Fedora%22)
 [![CI Alpine](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine%22)
+[![CI Alpine 3](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine%203/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine+3%22)
 
 
 ---
