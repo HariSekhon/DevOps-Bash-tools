@@ -97,4 +97,4 @@ Link:  [$repo](https://github.com/$repo)\\
 |"
     echo
 done
-} | tee "Status.md"
+} | tee "STATUS.md"
