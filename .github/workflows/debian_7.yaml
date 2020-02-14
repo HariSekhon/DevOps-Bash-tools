@@ -35,12 +35,15 @@ jobs:
     steps:
     # untars repo in docker container so git submodule update fails
     #- uses: actions/checkout@v2
+    - name: switch apt sources to archive
+      run: |
+        sed -i 's/deb.debian.org/archive.debian.org/' /etc/apt/sources.list
     - name: install git & make
       run: |
         ls -l /.dockerenv
         echo "pwd is $PWD"
         cat /etc/*release
-        apt-get update &&
+        apt-get update || :  # will fail on security updates
         apt-get install -y git make
     - name: git clone
       run: |
