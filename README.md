@@ -31,7 +31,7 @@ Hari Sekhon - DevOps Bash Tools
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
-100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md).
+100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
 
 Contains:
 
@@ -128,7 +128,7 @@ make install
 - `github*.sh` - various useful GitHub scripts for querying the GitHub API including:
   - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating if github access token is available in environment or remote url, this is used as a base for several other scripts that use the GitHub API
   - fetching GitHub users public SSH keys for quick local installation
-  - generating a [Status.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
+  - generating a [STATUS.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
 - `perl*.sh` - various Perl utilities including scripts to generate fatpacks (self-contained programs with all CPAN modules built-in), find the Perl library base, find where a Perl CLI tool is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help), print the perl module search path, find unused CPAN modules in project, find duplicate CPAN modules between projects and sub-projects, bulk install file lists of CPAN modules, install CPAN packages only when not present in perl path (either OS packages or CPAN) to avoid needless installations, saving time and reducing build failures
 - `python*.sh` - various Python utilities including scripts to byte-compile, find the Python library base, find where a Python CLI tool is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help), print the module search path, find unused pip modules in projects, find duplicate pip modules between projects and sub-projects, convert Python module names to import names, bulk install file lists of packages, install packages only when not present in python path (either OS or pip - avoids pip installing packages provided by OS, speeds up builds and reduces build failures
   - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
