@@ -19,6 +19,7 @@ ShellCheck
 
 # not available on RHEL6
 perl-App-cpanminus
+perl-CPAN  # needed in RHEL6 to build cpanm to build rest
 
 python
 python-pip
