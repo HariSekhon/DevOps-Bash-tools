@@ -286,6 +286,7 @@ nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
 nmap          ;n :n<CR>
 nmap          ;o :!git log -p "%"<CR>
 nmap          ;p :prev<CR>
+nmap          ;P :call TogglePaste()<CR>
 nmap          ;q :q<CR>
 nmap          ;r :call WriteRun()<CR>
 nmap          ;R :call WriteRunDebug()<CR>
@@ -352,6 +353,14 @@ function! ToggleScrollLock()
         :set scrolloff=0
     else
         :set scrolloff=999
+    endif
+endfunction
+
+function! TogglePaste()
+    if &paste > 0
+        :set nopaste
+    else
+        :set paste
     endif
 endfunction
 
