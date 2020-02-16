@@ -263,6 +263,7 @@ make python
     make perl-desktop           installs all Perl CPAN packages for desktop workstation listed in setup/cpan-packages-desktop.txt
     make ruby-desktop           installs all Ruby Gem packages for desktop workstation listed in setup/gem-packages-desktop.txt
     make golang-desktop         installs all Golang packages for desktop workstation listed in setup/go-packages-desktop.txt
+    make nodejs-desktop         installs all NodeJS packages for desktop workstation listed in setup/npm-packages-desktop.txt
 
     make desktop                installs all of the above + many desktop OS packages listed in setup/
 
