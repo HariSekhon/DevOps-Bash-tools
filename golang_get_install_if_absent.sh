@@ -38,7 +38,7 @@ done
 
 go_tools=""
 
-processs_args(){
+process_args(){
     for arg; do
         if [ -f "$arg" ]; then
             echo "adding golang tools from file:  $arg"
