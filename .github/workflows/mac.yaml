@@ -27,7 +27,7 @@ on:
 jobs:
   build:
     #name: build
-    timeout-minutes: 10
+    timeout-minutes: 60
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
