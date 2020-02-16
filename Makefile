@@ -105,6 +105,7 @@ desktop: install
 	@# do these late so that we have the above system packages installed first to take priority and not install from source where we don't need to
 	@$(MAKE) perl-desktop
 	@$(MAKE) golang-desktop
+	@$(MAKE) nodejs-desktop
 	@# no packages any more since jgrep is no longer found
 	@#$(MAKE) ruby-desktop
 
@@ -177,6 +178,13 @@ python-desktop: system-packages pip
 .PHONY: pip
 pip::
 	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
+
+.PHONY: nodejs-desktop
+nodejs-desktop: system-packages npm
+
+.PHONY: npm
+npm::
+	./nodejs_npm_install_if_absent.sh setup/npm-packages-desktop.txt
 
 .PHONY: aws
 aws: system-packages
