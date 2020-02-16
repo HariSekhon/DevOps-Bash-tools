@@ -61,7 +61,7 @@ set +o pipefail
 non_executable_scripts="$(
     eval find "${1:-$PWD}" -maxdepth 2 -type f -not -perm -u+x |
     grep -E "$ext_regex" |
-    grep -v -e '/\.' -e '/test/' |
+    grep -v -e '/\.[[:alnum:]]' |
     filter_is_git_committed |
     filter_not_python_library |
     tee /dev/stderr
