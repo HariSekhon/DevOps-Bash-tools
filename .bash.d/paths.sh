@@ -251,6 +251,10 @@ if type -P go &>/dev/null; then
     add_PATH "$GOPATH/bin"
 fi
 
+if type -P colorgo &>/dev/null; then
+    alias go=colorgo
+fi
+
 alias lsgobin='ls -d ~/go/bin/* "$GOROOT"/{bin,libexec/bin}/* "$GOPATH/bin/"* 2>/dev/null'
 alias llgobin='ls -ld ~/go/bin/* "$GOROOT"/{bin,libexec/bin}/* "$GOPATH/bin/"* 2>/dev/null'
 
