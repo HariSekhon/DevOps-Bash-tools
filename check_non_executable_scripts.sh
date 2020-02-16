@@ -37,10 +37,35 @@ for ext in $script_extensions; do
 done
 ext_regex="(${ext_regex#|})$"
 
+filter_is_git_committed(){
+    while read -r filename; do
+        pushd "$(dirname "$filename")" &>/dev/null
+        set +o pipefail
+        git status --porcelain "$filename" | grep -q '^??' || echo "$filename"
+        set -o pipefail
+        popd &>/dev/null
+    done
+}
+
+filter_not_python_library(){
+    while read -r filename; do
+        pushd "$(dirname "$filename")" &>/dev/null
+        test -f __init__.py || echo "$filename"
+        popd &>/dev/null
+    done
+}
+
 set +o pipefail
 # -executable switch not available on Mac
 # trying to build up successive -name options doesn't work and ruins the logic of find, simplify to grep
-non_executable_scripts="$(eval find "${1:-$PWD}" -maxdepth 2 -type f -not -perm -u+x | grep -E "$ext_regex" | grep -v -e '/\.' -e '/lib/' -e '/pylib/' | tee /dev/stderr)"
+non_executable_scripts="$(
+    eval find "${1:-$PWD}" -maxdepth 2 -type f -not -perm -u+x |
+    grep -E "$ext_regex" |
+    grep -v -e '/\.' -e '/test/' |
+    filter_is_git_committed |
+    filter_not_python_library |
+    tee /dev/stderr
+)"
 set -o pipefail
 
 echo
