@@ -224,10 +224,10 @@ if has("autocmd")
     " TODO: groovy/java CLI linters
     au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
 
-    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "$(dirname "%")" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR><CR>
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "$(dirname "%")" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     " doesn't trigger on window switching
-    au FileType sh                        nmap ;l :w<CR>:!clear; cd "$(dirname "%")" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR><CR>
+    au FileType sh                        nmap ;l :w<CR>:!clear; cd "$(dirname "%")" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
 
     " these tools are in the https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
