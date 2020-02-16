@@ -37,6 +37,8 @@ jobs:
         key: ${{ runner.os }}-pip-bash-tools  # -${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
+    - name: brew update
+      run: which brew && brew update || :
     - name: build
       run: make
     - name: test
