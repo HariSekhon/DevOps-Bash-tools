@@ -44,7 +44,7 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-cpanm-bash-tools
     - name: brew update
-      run: which brew && brew update || :
+      run: which brew && brew update || echo
     - name: build
       run: make
     - name: test
