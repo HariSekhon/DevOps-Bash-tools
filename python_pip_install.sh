@@ -140,7 +140,16 @@ elif [ -n "${PYTHON_USER_INSTALL:-}" ] ||
     user_opt
 fi
 
-echo "$sudo $pip install $opts $pip_modules"
-# want splitting of opts and modules
-# shellcheck disable=SC2086
-eval $sudo $envopts "$pip" install $opts $pip_modules
+if [ -n "${NO_FAIL:-}" ]; then
+    for pip_module in $pip_modules; do
+        echo "$sudo $pip install $opts $pip_module"
+        # want splitting of opts
+        # shellcheck disable=SC2086
+        eval $sudo $envopts "$pip" install $opts "$pip_module"
+    done
+else
+    echo "$sudo $pip install $opts $pip_modules"
+    # want splitting of opts and modules
+    # shellcheck disable=SC2086
+    eval $sudo $envopts "$pip" install $opts $pip_modules
+fi
