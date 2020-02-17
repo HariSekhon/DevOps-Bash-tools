@@ -31,9 +31,12 @@ while read -r repo dir; do
         continue
     fi
     for filename in *.yaml; do
-        if grep -q '^[[:space:]]*container:' "$filename"; then
-            echo "syncing $filename -> ../../../$dir/.github/workflows/$filename"
-            sed "s/bash-tools/$repo/;s/timeout-minutes:.*/timeout-minutes: 60/" "$filename" > "../../../$dir/.github/workflows/$filename"
+        target="../../../$dir/.github/workflows/$filename"
+        if [ -n "${ALL:-}" ] || grep -q '^[[:space:]]*container:' "$filename"; then
+            if [ -n "${NEW:-}" ] || [ -f "$target" ]; then
+                echo "syncing $filename -> $target"
+                sed "s/bash-tools/$repo/;s/timeout-minutes:.*/timeout-minutes: 60/" "$filename" > "$target"
+            fi
         fi
     done
 done
