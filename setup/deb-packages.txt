@@ -23,7 +23,7 @@ git
 golang
 iputils-ping
 jq
-libperl-dev
+libperl-dev  # needed for PAR:Packer
 make
 parallel
 perl
