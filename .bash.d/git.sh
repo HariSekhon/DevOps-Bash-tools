@@ -264,7 +264,7 @@ st(){
 }
 
 stq(){
-    st "$@" | grep --color=no -e "=======" -e branch -e GitHub
+    st "$@" | grep --color=no -e "=======" -e branch -e GitHub | eval ${GIT_PAGER:-cat}
 }
 
 # disabling this as I don't use Mercurial or Svn any more,
