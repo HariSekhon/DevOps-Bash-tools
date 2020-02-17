@@ -363,6 +363,7 @@ cpan::
 .PHONY: pip
 pip::
 	find . -path '*/requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	find . -path '*/requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
 .PHONY: pip-user
 pip-user::
