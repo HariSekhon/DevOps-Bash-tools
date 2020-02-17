@@ -17,5 +17,8 @@
 # needed by bash-tools/perl_generate_fatpacks.sh
 App::FatPacker
 
+# needed for PAR::Packer
+ExtUtils::Embed
+
 # needed by perl_generate_par_binaries.sh
 PAR::Packer
