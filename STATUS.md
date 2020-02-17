@@ -89,7 +89,6 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![CI Debian 9](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20Debian%209/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+Debian+9%22)
 [![CI Debian 10](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20Debian%2010/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+Debian+10%22)
 [![CI CentOS](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20CentOS/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+CentOS%22)
-[![CI CentOS 6](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20CentOS%206/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+CentOS+6%22)
 [![CI CentOS 7](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20CentOS%207/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+CentOS+7%22)
 [![CI CentOS 8](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+CentOS+8%22)
 [![CI Fedora](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20Fedora/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+Fedora%22)
