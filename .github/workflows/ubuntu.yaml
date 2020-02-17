@@ -37,13 +37,13 @@ jobs:
         path: ~/.cache/pip
         key: ${{ runner.os }}-pip-bash-tools  # ${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-pip-
+          ${{ runner.os }}-pip-bash-tools
     - uses: actions/cache@v1
       with:
         path: ~/.cpanm
-        key: ${{ runner.os }}-cpanm-bash-tools  # ${{ hashFiles('**/cpan-requirements.txt') }}
+        key: ${{ runner.os }}-cpanm-bash-tools-${{ hashFiles('**/cpan-requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-cpanm-
+          ${{ runner.os }}-cpanm-bash-tools
     - name: build
       run: make
     - name: test
