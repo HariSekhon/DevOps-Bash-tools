@@ -23,6 +23,7 @@ git
 golang
 iputils-ping
 jq
+libperl-dev
 make
 parallel
 perl
