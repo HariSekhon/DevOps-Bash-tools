@@ -358,11 +358,19 @@ yum-packages-remove:
 .PHONY: cpan
 cpan::
 	find . -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
+	@$(MAKE) cpan-optional
+
+.PHONY: cpan-optional
+cpan-optional::
 	find . -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
 
 .PHONY: pip
 pip::
 	find . -path '*/requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	@$(MAKE) pip-optional
+
+.PHONY: pip-optional
+pip-optional::
 	find . -path '*/requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
 .PHONY: pip-user
