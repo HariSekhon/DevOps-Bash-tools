@@ -93,7 +93,7 @@ fi
 
 if [ -n "${NO_FAIL:-}" ]; then
     for cpan_module in $cpan_modules; do
-        echo "$sudo $envopts $CPANM --notest $opts $cpan_modules"
+        echo "$sudo $envopts $CPANM --notest $opts $cpan_module"
         # want splitting of opts and modules
         # shellcheck disable=SC2086
         eval $sudo $envopts "$CPANM" --notest $opts "$cpan_module" || :
