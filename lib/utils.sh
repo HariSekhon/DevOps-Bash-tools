@@ -205,7 +205,8 @@ is_travis(){
 }
 
 is_github_workflow(){
-    if [ -n "${GITHUB_WORKFLOW:-}" ]; then
+    if [ -n "${GITHUB_ACTIONS:-}" ] ||
+       [ -n "${GITHUB_WORKFLOW:-}" ]; then
         return 0
     fi
     return 1
