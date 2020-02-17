@@ -367,7 +367,7 @@ pip::
 
 .PHONY: pip-user
 pip-user::
-	find . -path '*/requirements.txt' | PYTHON_USER_INSTALL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	PYTHON_USER_INSTALL=1 $(MAKE) pip
 
 .PHONY: fatpacks
 fatpacks:
