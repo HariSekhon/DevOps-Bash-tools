@@ -524,7 +524,7 @@ gitd(){
 }
 
 gitadded(){
-    git log --name-status |
+    git log --name-status "$@" |
     grep -e '^A[^u]' -e '^Date' |
     grep -B 1 '^A' |
     less
