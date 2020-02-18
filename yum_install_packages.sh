@@ -76,7 +76,7 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 if [ -n "${NO_FAIL:-}" ]; then
-    if type -P dnf >/dev/null 2>&1; then
+    if type -P dnf &>/dev/null; then
         # dnf exits if any of the packages aren't found so do them individually and ignore failures
         for package in $packages; do
             rpm -q "$package" || $SUDO dnf install -y "$package" || :
@@ -86,8 +86,15 @@ if [ -n "${NO_FAIL:-}" ]; then
         $SUDO yum install -y $packages || :
     fi
 else
-    # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
-    for package in $packages; do
-        rpm -q "$package" || $SUDO yum install -y "$package"
-    done
+    # dnf exists with a proper error code on any error so faster to do all packages together
+    if type -P dnf &>/dev/null; then
+        # want splitting
+        # shellcheck disable=SC2086
+        dnf install -y $packages
+    else
+        # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
+        for package in $packages; do
+            rpm -q "$package" || $SUDO yum install -y "$package"
+        done
+    fi
 fi
