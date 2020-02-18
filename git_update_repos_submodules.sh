@@ -64,10 +64,12 @@ run(){
         git pull
         git submodule update --init --remote
         for submodule in $(git submodule | awk '{print $2}'); do
+            echo
             echo "committing latest hashref for submodule $submodule"
             git ci -m "updated submodule $submodule" "$submodule" || :
         done
-        git push
+        echo
+        [ -n "${NO_PUSH:-}" ] || git push
         popd
         echo
     done
