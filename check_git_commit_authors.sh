@@ -81,7 +81,7 @@ check_multiple_names_per_email(){
     names_emails="${names_emails:-(git_log_names_emails)}"
     for email in $emails; do
         #names_for_same_email="$(grep "[[:space:]]$email$" <<< "$names_emails" | perl -p -e 's/\s\S*?$//')"
-        names_for_same_email="$(grep -Ei "[[:space:]]$email$" <<< "$names_emails" | normalize_spaces | remove_last_column | sort -u || :)"
+        names_for_same_email="$(grep -Ei "[[:space:]]$email$" <<< "$names_emails" | grep -v 'github-bot@pyup.io' | normalize_spaces | remove_last_column | sort -u || :)"
         # don't quote otherwise have to trim wc output for comparison
         # shellcheck disable=SC2046
         if [ $(wc -l <<< "$names_for_same_email") -eq 1 ]; then
