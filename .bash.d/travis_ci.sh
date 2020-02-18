@@ -65,5 +65,5 @@ travis_debug(){
 travis_log(){
     local repo
     repo="$(git_repo)"
-    travis_last_log.py --failed "$repo"
+    travis_last_log.py --failed "$repo" "$@"
 }
