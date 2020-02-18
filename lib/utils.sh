@@ -165,7 +165,9 @@ tick_msg(){
 }
 
 cpu_count(){
-    if is_mac; then
+    if type -P nproc &>/dev/null; then
+        nproc
+    elif is_mac; then
         cpu_count="$(sysctl -n hw.ncpu)"
     else
         #cpu_count="$(awk '/^processor/ {++n} END {print n+1}' /proc/cpuinfo)"
@@ -357,7 +359,8 @@ read_secret(){
     export secret
 }
 
-run++(){
+# fails interactive import without this
+function run++ () {
     #if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
         ((run_count+=1))
     #fi
