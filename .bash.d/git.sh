@@ -114,7 +114,7 @@ gitgc(){
 
 gitbrowse(){
     local url
-    url="$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
+    url="$(git remote -v | awk '/git@|https:/{print $2}' | sed 's,://.*@,://,; s|git@github.com:|https://github.com/| ; s/\.git$//' | head -n1)"
     if [ $# -gt 0 ] &&
        [ -z "$url" ]; then
         echo "git remote url not found"
