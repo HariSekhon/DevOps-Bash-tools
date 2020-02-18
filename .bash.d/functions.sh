@@ -75,6 +75,15 @@ typer(){
     done
 }
 
+lld(){
+    {
+        local target="$1"
+        ls -ld "$target"
+        [ "$target" = "/" ] && return
+        lld "$(dirname "$target")"
+    } | column -t
+}
+
 # shellcheck disable=SC2120
 unquote(){
     sed '
