@@ -52,12 +52,13 @@ alias u=up
 alias pu=push
 alias gitp="git push"
 alias gdiff="git diff"
-alias gd=gdiff
-alias gdc=gdiffc
-alias gdiffc="git diff --cached"
 # bypasses diff-so-fancy, could also just pipe through | cat to disable pager and color effects
 alias gdiff2="git --no-pager diff"
+alias gdiffc="git diff --cached"
 alias gdiffm="gdiff origin/master.."
+alias gd=gdiff
+alias gdc=gdiffc
+alias gdo=gdiffm
 alias branch="githg branch"
 alias br=branch
 alias fetch='git fetch'
