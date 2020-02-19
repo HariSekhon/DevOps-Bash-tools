@@ -29,6 +29,9 @@ srcdir="$(dirname "$0")"
 
 output_dir="fatpacks"
 
+export PERL5LIB="${PERL5LIB:-}:$HOME/perl5/lib/perl5"
+export PATH="${PATH:-}:$HOME/perl5/bin"
+
 usage(){
     echo "Generates self-contained versions of Perl scripts using App::FatPacker"
     echo
