@@ -32,10 +32,14 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-echo "output will be formatted in to columns at end" >&2
-echo "getting user list" >&2
-aws iam list-users |
-jq -r '.Users[].UserName' |
+if [ $# -gt 0 ]; then
+    users="$*"
+else
+    echo "output will be formatted in to columns at end" >&2
+    echo "getting user list" >&2
+    users="$(aws iam list-users | jq -r '.Users[].UserName')"
+fi
+
 while read -r username; do
     echo "querying user $username" >&2
     aws iam list-access-keys --user-name "$username" |
@@ -56,5 +60,5 @@ while read -r username; do
 #        done
         awk '{if(NF==2){$3="N/A"}; print $1"\t'"$access_key"'\t"$2"\t"$3}'
     done
-done |
+done <<< "$users" |
 column -t
