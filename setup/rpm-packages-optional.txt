@@ -25,6 +25,8 @@ python
 python-pip
 python2
 python2-pip
+python3
+python3-pip
 
 # required in Fedora, but not available in RHEL6
 hostname

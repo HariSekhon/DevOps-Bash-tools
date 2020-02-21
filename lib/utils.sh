@@ -117,6 +117,10 @@ check_bin(){
     local bin="${1:-}"
     if ! type -P "$bin" &>/dev/null; then
         echo "command '$bin' not found in \$PATH ($PATH)"
+        if is_CI; then
+            echo "Running in CI, searching entire system for '$bin'"
+            find / -type f -name "$bin" 2>/dev/null
+        fi
         exit 1
     fi
 }

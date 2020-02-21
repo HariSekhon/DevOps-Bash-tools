@@ -15,6 +15,8 @@
 
 # List all Hive databases via beeline
 #
+# FILTER environment variable will restrict to matching databases (if giving <db>.<table>, matches up to the first dot)
+#
 # Tested on Hive 1.1.0 on CDH 5.10, 5.16
 
 # For a better version written in Python see DevOps Python tools repo:
@@ -30,4 +32,13 @@ set -eu -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/beeline.sh" --silent=true --outputformat=tsv2 -e 'SHOW DATABASES' "$@" | tail -n +2 # | awk '{print $1}'
+"$srcdir/beeline.sh" --silent=true --outputformat=tsv2 -e 'SHOW DATABASES' "$@" |
+tail -n +2 |
+# awk '{print $1}' |
+while read -r db; do
+    if [ -n "${FILTER:-}" ] &&
+       ! [[ "$db" =~ ${FILTER%%.*} ]]; then
+        continue
+    fi
+    printf "%s\n" "$db"
+done

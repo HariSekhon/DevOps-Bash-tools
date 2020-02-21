@@ -15,6 +15,8 @@
 
 # Lists all Impala databases using adjacent impala_shell.sh script
 #
+# FILTER environment variable will restrict to matching databases (if giving <db>.<table>, matches up to the first dot)
+#
 # Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 #
 # For more documentation see the comments at the top of impala_shell.sh
@@ -29,4 +31,12 @@ srcdir="$(dirname "$0")"
 
 # strip comments after database name, eg.
 # default Default Hive database
-"$srcdir/impala_shell.sh" -Bq 'SHOW DATABASES' "$@" | awk '{print $1}'
+"$srcdir/impala_shell.sh" --quiet -Bq 'SHOW DATABASES' "$@" |
+awk '{print $1}' |
+while read -r db; do
+    if [ -n "${FILTER:-}" ] &&
+       ! [[ "$db" =~ ${FILTER%%.*} ]]; then
+        continue
+    fi
+    printf "%s\n" "$db"
+done

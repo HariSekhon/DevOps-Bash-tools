@@ -102,5 +102,8 @@ else
     echo "$sudo $envopts $CPANM --notest $opts $cpan_modules"
     # want splitting of opts and modules
     # shellcheck disable=SC2086
-    eval $sudo $envopts "$CPANM" --notest $opts $cpan_modules
+    if ! eval $sudo $envopts "$CPANM" --notest $opts $cpan_modules; then
+        find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs cat
+        exit 1
+    fi
 fi

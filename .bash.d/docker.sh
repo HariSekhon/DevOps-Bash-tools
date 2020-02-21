@@ -91,7 +91,7 @@ function dockerrunrm(){
         fi
         args="$args $x"
     done
-    eval docker run --rm -ti -v $PWD:/pwd "$args"
+    eval docker run --rm -ti -v $PWD:/pwd -w /pwd "$args"
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
 

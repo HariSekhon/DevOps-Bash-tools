@@ -13,13 +13,20 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Print each table's DDL metadata field eg. Location
+# Print each table's number of columns
 #
 # FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 #
-# Tested on Hive 1.1.0 on CDH 5.10, 5.16
+# Caveats:
 #
-# For more documentation see the comments at the top of beeline.sh
+#     Hive is more reliable as Impala breaks on some table metadata definitions where Hive doesn't
+#
+#     Impala is faster than Hive for the first ~1000 tables but then slows down
+#     so if you have a lot of tables I recommend you use the Hive version of this instead
+#
+# Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
+#
+# For more documentation see the comments at the top of impala_shell.sh
 
 # For a better version written in Python see DevOps Python tools repo:
 #
@@ -31,7 +38,7 @@ set -eu  # -o pipefail
 srcdir="$(dirname "$0")"
 
 usage(){
-    echo "usage: ${0##*/} <metadata_field> [beeline_options]"
+    echo "usage: ${0##*/} [impala_shell_options]"
     exit 3
 }
 
@@ -41,27 +48,20 @@ for arg; do
     fi
 done
 
-if [ $# -lt 1 ]; then
-    usage
-fi
-
-field="$1"
-shift
-
-query_template="describe formatted {table}"
-
-opts="--silent=true --outputformat=tsv2"
+query_template="describe {table}"
 
 # exit the loop subshell if you Control-C
 trap 'exit 130' INT
 
-"$srcdir/hive_list_tables.sh" "$@" |
+"$srcdir/impala_list_tables.sh" "$@" |
 while read -r db table; do
     printf '%s.%s\t' "$db" "$table"
     query="${query_template//\{db\}/\`$db\`}"
     query="${query//\{table\}/\`$table\`}"
-    # shellcheck disable=SC2086
-    { "$srcdir/beeline.sh" $opts -e "USE \`$db\`; $query" "$@" || echo "ERROR running query: $query" >&2; } |
-    {  grep "^$field" || echo UNKNOWN; } |
-    sed "s/^$field:[[:space:]]*//; s/[[:space:]]*NULL[[:space:]]*$//"
+    if ! "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@"; then
+        echo "ERROR running query: $query" >&2
+        echo "UNKNOWN"
+    fi |
+    awk '{if(NF == 2){print}}' |
+    wc -l
 done

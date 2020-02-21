@@ -36,7 +36,7 @@ srcdir="$(dirname "$0")"
 
 "$srcdir/impala_list_databases.sh" |
 while read -r db; do
-    "$srcdir/impala_shell.sh" -Bq "SHOW TABLES IN \`$db\`" "$@" |
+    "$srcdir/impala_shell.sh" --quiet -Bq "SHOW TABLES IN \`$db\`" "$@" |
     sed "s/^/$db	/"
 done |
 while read -r db table; do

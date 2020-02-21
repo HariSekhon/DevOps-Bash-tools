@@ -65,7 +65,7 @@ while read -r db table; do
     printf '%s.%s\t' "$db" "$table"
     query="${query_template//\{db\}/\`$db\`}"
     query="${query//\{table\}/\`$table\`}"
-    { "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@" || echo ERROR; } |
+    { "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@" || echo "ERROR running query: $query" >&2; } |
     {  grep "^$field" || echo UNKNOWN; } |
     sed "s/^$field:[[:space:]]*//; s/[[:space:]]*NULL[[:space:]]*$//"
 done

@@ -31,7 +31,7 @@ set -eu  # -o pipefail
 srcdir="$(dirname "$0")"
 
 usage(){
-    echo "usage: ${0##*/} <metadata_field> [beeline_options]"
+    echo "usage: ${0##*/} [beeline_options]"
     exit 3
 }
 
@@ -41,14 +41,7 @@ for arg; do
     fi
 done
 
-if [ $# -lt 1 ]; then
-    usage
-fi
-
-field="$1"
-shift
-
-query_template="describe formatted {table}"
+query_template="describe {table}"
 
 opts="--silent=true --outputformat=tsv2"
 
@@ -61,7 +54,11 @@ while read -r db table; do
     query="${query_template//\{db\}/\`$db\`}"
     query="${query//\{table\}/\`$table\`}"
     # shellcheck disable=SC2086
-    { "$srcdir/beeline.sh" $opts -e "USE \`$db\`; $query" "$@" || echo "ERROR running query: $query" >&2; } |
-    {  grep "^$field" || echo UNKNOWN; } |
-    sed "s/^$field:[[:space:]]*//; s/[[:space:]]*NULL[[:space:]]*$//"
+    if ! "$srcdir/beeline.sh" $opts -e "USE \`$db\`; $query" "$@"; then
+        echo "ERROR running query: $query" >&2
+        echo "UNKNOWN"
+    fi |
+    tail -n +2 |
+    awk '{if(NF == 2){print}}' |
+    wc -l
 done

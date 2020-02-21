@@ -49,6 +49,7 @@ dnsmasq
 dnstop
 docker-completion
 docker-compose-completion
+dos2unix
 e2fsprogs
 expect
 etcd
@@ -117,6 +118,7 @@ thrift
 tree
 tmux
 urlview  # used by tmux plugin tmux-urlview
+unix2dos
 vagrant-completion
 watch
 #wget # in brew-packages.txt
