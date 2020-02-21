@@ -23,14 +23,11 @@ sudo=""
 
 #$sudo ln -sv `type -P python2` /usr/local/bin/python
 
-set +e
-python2="$(type -P python2 2>/dev/null)"
-python3="$(type -P python3 2>/dev/null)"
-pip2="$(type -P pip2 2>/dev/null)"
-pip3="$(type -P pip3 2>/dev/null)"
-set -e
-
 if ! type -P python; then
+    set +e
+    python2="$(type -P python2 2>/dev/null)"
+    python3="$(type -P python3 2>/dev/null)"
+    set -e
     if [ -n "$python3" ]; then
         $sudo alternatives --set python "$python3"
     elif [ -n "$python2" ]; then
@@ -39,6 +36,10 @@ if ! type -P python; then
 fi
 
 if ! type -P pip; then
+    set +e
+    pip2="$(type -P pip2 2>/dev/null)"
+    pip3="$(type -P pip3 2>/dev/null)"
+    set -e
     if [ -f /usr/local/bin/pip ]; then
         echo "/usr/local/bin/pip already exists, not symlinking - check your \$PATH includes /usr/local/bin (\$PATH = $PATH)"
     elif [ -n "$pip3" ]; then
