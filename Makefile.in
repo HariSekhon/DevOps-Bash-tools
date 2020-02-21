@@ -130,7 +130,11 @@ export MAKEFILE_USAGE
 default:
 	@printf "CPU Cores: "; nproc 2>/dev/null; sysctl -n hw.ncpu 2>/dev/null; :
 	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
-	@$(MAKE) build
+	@$(MAKE) retry-build
+
+.PHONY: retry-build
+retry-build:
+	$(BASH_TOOLS)/retry.sh $(MAKE) build
 
 .PHONY: main
 main:
