@@ -80,5 +80,5 @@ fi
 
 realm="${HIVESERVER2_HOST#*.}"
 
-set -x
+[ -n "${VERBOSE:-}" ] && set -x
 beeline -u "jdbc:hive2://$HIVESERVER2_HOST:10000/default;principal=hive/_HOST@${realm}${opts}" "$@"
