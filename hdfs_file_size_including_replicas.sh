@@ -27,16 +27,19 @@ Calls HDFS command which is assumed to be in \$PATH
 Make sure to kinit before running this if using a production Kerberized cluster
 
 
-usage: ${0##*/} <file_or_directory_paths>
+usage: ${0##*/} <file_or_directory_paths> [hdfs_dfs_du_options]
 
 
 EOF
     exit 3
 }
 
-if [[ "${1:-}" =~ ^- ]]; then
-    usage
-fi
+for arg; do
+    case "$arg" in
+        -h|--help) usage
+                   ;;
+    esac
+done
 
 hdfs dfs -du "$@" |
 awk '{ $1=""; print }' |
