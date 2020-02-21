@@ -42,6 +42,8 @@ for arg; do
     esac
 done
 
+# if using -h there will be more columns so remove cols 3 + 4 which are replica sizes eg.
+# 21.7 M  65.0 M  hdfs://nameservice1/user/hive/warehouse/...
 hdfs dfs -du "$@" |
-awk '{ $1=""; print }' |
+awk '{ if($2 ~ /[A-Za-z]/){ $1=""; $2="" } else { $2=""  }; print  }' |
 column -t
