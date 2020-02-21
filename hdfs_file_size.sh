@@ -36,8 +36,9 @@ EOF
 
 for arg; do
     case "$arg" in
-        -h|--help) usage
-                   ;;
+        # not including -h here because du -h is needed for human readable format
+        --help) usage
+                ;;
     esac
 done
 
