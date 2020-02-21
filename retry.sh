@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -12,6 +12,8 @@
 #
 #  https://www.linkedin.com/in/harisekhon
 #
+
+# Had to do this in /bin/sh not bash so that it can be used on bootstrapping Alpine builds
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -34,7 +36,9 @@ for arg; do
     esac
 done
 
-if [[ "${1:-}" =~ ^[[:digit:]]+$ ]]; then
+# bash only
+#if [[ "${1:-}" =~ ^[[:digit:]]+$ ]]; then
+if echo "${1:-}" | grep -Eq '^[[:digit:]]+$'; then
     tries="$1"
     shift
 fi
@@ -45,7 +49,9 @@ fi
 
 set +eo pipefail
 # {1..$tries} doesn't work and `seq` is a needless fork
-for ((i=0; i < tries; i++)); do
+# bash only
+#for ((i=0; i < tries; i++)); do
+for _ in $(seq "$tries"); do
     eval "$@"
     result=$?
     if [ $result -eq 0 ]; then
