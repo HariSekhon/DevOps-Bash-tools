@@ -58,7 +58,10 @@ while read -r db table; do
     printf '%s.%s\t' "$db" "$table"
     query="${query_template//\{db\}/\`$db\`}"
     query="${query//\{table\}/\`$table\`}"
-    { "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@" || echo "ERROR running query: $query" >&2; } |
+    if ! "$srcdir/impala_shell.sh" --quiet -Bq "USE \`$db\`; $query" "$@"; then
+        echo "ERROR running query: $query" >&2
+        echo "UNKNOWN"
+    fi |
     awk '{if(NF == 2){print}}' |
     wc -l
 done
