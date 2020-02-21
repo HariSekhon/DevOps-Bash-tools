@@ -15,7 +15,7 @@
 
 # Had to do this in /bin/sh not bash so that it can be used on bootstrapping Alpine builds
 
-set -euo pipefail
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 tries="${TRIES:-3}"
@@ -47,7 +47,7 @@ if [ $# -lt 1 ]; then
     usage
 fi
 
-set +eo pipefail
+set +e
 # {1..$tries} doesn't work and `seq` is a needless fork
 # bash only
 #for ((i=0; i < tries; i++)); do
