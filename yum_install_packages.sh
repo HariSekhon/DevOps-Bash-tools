@@ -80,8 +80,8 @@ if [ -n "${NO_FAIL:-}" ]; then
             packages="$packages
 $(sed 's/^python-/python2-/' <<< "$packages")
 $(sed 's/^python-/python3-/' <<< "$packages")
-$(sed '/^python[23]-/d; s/^/python2-/' <<< "$packages")
-$(sed '/^python[23]-/d; s/^/python3-/' <<< "$packages")"
+$(sed '/^python[23]*-/d; s/^/python2-/' <<< "$packages")
+$(sed '/^python[23]*-/d; s/^/python3-/' <<< "$packages")"
             echo "Expanding Python packages out to: $packages"
         fi
     fi
