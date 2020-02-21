@@ -23,12 +23,12 @@ sudo=""
 
 #$sudo ln -sv `type -P python2` /usr/local/bin/python
 
-set -o pipefail
+set +e
 python2="$(type -P python2 2>/dev/null)"
 python3="$(type -P python3 2>/dev/null)"
 pip2="$(type -P pip2 2>/dev/null)"
 pip3="$(type -P pip3 2>/dev/null)"
-set +o pipefail
+set -e
 
 if ! type -P python; then
     if [ -n "$python3" ]; then
