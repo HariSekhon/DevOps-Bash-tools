@@ -29,4 +29,4 @@ srcdir="$(dirname "$0")"
 
 # strip comments after database name, eg.
 # default Default Hive database
-"$srcdir/impala_shell.sh" -Bq 'SHOW DATABASES' "$@" | awk '{print $1}'
+"$srcdir/impala_shell.sh" --quiet -Bq 'SHOW DATABASES' "$@" | awk '{print $1}'
