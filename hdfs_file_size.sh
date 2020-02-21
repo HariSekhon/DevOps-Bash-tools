@@ -44,4 +44,4 @@ done
 
 
 hdfs dfs -du "$@" |
-awk '{ $2=""; print }'
+awk '{ if($2 ~ /[A-Za-z]/){ $3=""; $4=""} else { $2="" }; print }'
