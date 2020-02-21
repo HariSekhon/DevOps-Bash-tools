@@ -53,7 +53,7 @@ jobs:
     - name: build
       run: |
         cd "/tmp/$repo" &&
-        make
+        ./retry.sh make
     - name: test
       run: |
         cd "/tmp/$repo" &&
