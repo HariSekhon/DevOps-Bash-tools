@@ -73,6 +73,7 @@ iperf
 ipython
 #jq # in brew-packages.txt
 jsonlint
+jython
 kompose
 kubectl
 kubernetes-cli
