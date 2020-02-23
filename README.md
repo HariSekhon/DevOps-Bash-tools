@@ -12,7 +12,8 @@ Hari Sekhon - DevOps Bash Tools
 [![Build Status](https://badges.herokuapp.com/travis/HariSekhon/DevOps-Bash-tools?label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 -->
 [![Build Status](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
-[![Build Status](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_build/latest?definitionId=1&branchName=master)
+[![Azure Pipeline](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_build/latest?definitionId=1&branchName=master)
+[![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools)
 [![Run Status](https://api.shippable.com/projects/5e52c634d79b7d00077bf5ed/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
