@@ -18,6 +18,9 @@
 version: 2.1
 jobs:
   build:
+    machine:
+      #image: ubuntu-1604:201903-01
+      image: default
     steps:
       - checkout
       - run: make
