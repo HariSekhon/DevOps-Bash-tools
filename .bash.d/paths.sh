@@ -73,6 +73,7 @@ add_PATH "/sbin"
 add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
 add_PATH "/usr/local/bin"
+add_PATH "/usr/local/opt/python/libexec/bin"  # Mac brew installed Python, must be ahead of ~/anaconda/bin below
 add_PATH "$bash_tools"
 add_PATH ~/bin
 for x in ~/bin/*; do
