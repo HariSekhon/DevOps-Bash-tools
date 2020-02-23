@@ -50,7 +50,7 @@ start_time="$(start_timer)"
 
 opts=""
 
-if python -V 2>&1 | grep -q 'Python 2'; then
+if "$python" -V 2>&1 | grep -q 'Python 2'; then
     opts="$opts -3"
 fi
 
@@ -66,7 +66,7 @@ else
     if [ -n "${FAST:-}" ]; then
         # want opt expansion
         # shellcheck disable=SC2086
-        python $opts -m compileall "${1:-.}" || :
+        "$python" $opts -m compileall "${1:-.}" || :
     else
         for x in $filelist; do
             type isExcluded &>/dev/null && isExcluded "$x" && continue
