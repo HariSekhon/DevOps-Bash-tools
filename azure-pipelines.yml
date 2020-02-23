@@ -16,11 +16,13 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: make
-  displayName: make
+  - displayName: build
+    script: make
+  - displayName: test
+    script: make test
