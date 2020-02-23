@@ -31,6 +31,12 @@ output_dir="fatpacks"
 
 export PERL5LIB="${PERL5LIB:-}:$HOME/perl5/lib/perl5"
 export PATH="${PATH:-}:$HOME/perl5/bin"
+# for Mac
+for x in /usr/local/Cellar/perl/*/bin; do
+    if [ -d "$x" ]; then
+        export PATH="$PATH:$x"
+    fi
+done
 
 usage(){
     echo "Generates self-contained versions of Perl scripts using App::FatPacker"
