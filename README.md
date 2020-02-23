@@ -1,18 +1,19 @@
 Hari Sekhon - DevOps Bash Tools
 ===============================
 
-<!--
-[![Build Status](https://badges.herokuapp.com/travis/HariSekhon/DevOps-Bash-tools?label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
--->
-[![Build Status](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
-[![Build Status](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_build/latest?definitionId=1&branchName=master)
-[![Run Status](https://api.shippable.com/projects/5e52c634d79b7d00077bf5ed/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c61193dd7dcc418b85149bddf93362e4)](https://www.codacy.com/app/harisekhon/bash-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/network)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
+
+<!--
+[![Build Status](https://badges.herokuapp.com/travis/HariSekhon/DevOps-Bash-tools?label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
+-->
+[![Build Status](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
+[![Build Status](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/DevOps-Bash-tools/_build/latest?definitionId=1&branchName=master)
+[![Run Status](https://api.shippable.com/projects/5e52c634d79b7d00077bf5ed/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
