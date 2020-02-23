@@ -185,7 +185,7 @@ nodejs-desktop: system-packages npm
 
 .PHONY: npm
 npm::
-	./nodejs_npm_install_if_absent.sh setup/npm-packages-desktop.txt
+	cd && ./nodejs_npm_install_if_absent.sh $(BASH_TOOLS)/setup/npm-packages-desktop.txt
 
 .PHONY: aws
 aws: system-packages
