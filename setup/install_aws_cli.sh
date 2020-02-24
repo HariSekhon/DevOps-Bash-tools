@@ -89,6 +89,11 @@ else
     echo
 fi
 
+echo "=========================="
+echo "Awless is unmaintained now, installing only optimistically and ignoring failures..."
+echo "=========================="
+set +e
+
 if type -P awless &>/dev/null; then
     echo "Awless already installed"
 else
