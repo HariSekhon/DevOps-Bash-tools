@@ -64,9 +64,9 @@ is_codeship(){
     # also CI and other generic CI_ env vars caught in is_CI generic
     # formerly codeship
     if [ "${CI_NAME:-}" = "CodeShip" ]; then
-        return 1
+        return 0
     fi
-    return 0
+    return 1
 }
 
 # https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables
