@@ -129,7 +129,7 @@ export MAKEFILE_USAGE
 .PHONY: default
 default:
 	@printf "CPU Cores: "; nproc 2>/dev/null; sysctl -n hw.ncpu 2>/dev/null; :
-	@source $(BASH_TOOLS)/lib/utils.sh || : ; \
+	@source $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI; then \
 			echo "RELEASE:"; cat /etc/*release || : ; \
 			echo "ENVIRONMENT:"; env ; \
