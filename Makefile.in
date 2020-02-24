@@ -129,9 +129,12 @@ export MAKEFILE_USAGE
 .PHONY: default
 default:
 	@printf "CPU Cores: "; nproc 2>/dev/null; sysctl -n hw.ncpu 2>/dev/null; :
-	@cat /etc/*release || :
-	@# putting this here instead of inline dep because otherwise check_makefile.sh will fail the target as build target doesn't exist in this Makefile.in
-	@$(MAKE) retry-build
+	@source $(BASH_TOOLS)/lib/utils.sh || : ; \
+		if is_CI; then \
+			echo "RELEASE:"; cat /etc/*release || : ; \
+			echo "ENVIRONMENT:"; env ; \
+		fi
+	$(MAKE) retry-build
 
 .PHONY: retry-build
 retry-build:
