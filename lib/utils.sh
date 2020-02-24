@@ -255,6 +255,15 @@ is_github_workflow(){
     return 1
 }
 
+# https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
+is_gitlab_ci(){
+    # also CI and other generic CI_ env vars caught in is_CI generic
+    if [ -n "${GITLAB_CI:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # http://docs.shippable.com/ci/env-vars/#stdEnv
 is_shippable_ci(){
     # also CI and CONTINUOUS_INTEGRATION but not really specific to Shippable, caught in is_CI generic
@@ -291,6 +300,7 @@ is_CI(){
        is_jenkins ||
        is_travis ||
        is_github_workflow ||
+       is_gitlab_ci ||
        is_azure_devops ||
        is_tfs_ci ||
        is_codeship ||
