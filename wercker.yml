@@ -36,8 +36,8 @@ build:
     # https://devcenter.wercker.com/development/steps/
   steps:
     - script:
-        name: install make
-        code: apt-get update && apt-get install -y make
+        name: install git & make
+        code: apt-get update && apt-get install -y git make
     - script:
         name: build
         code: make
