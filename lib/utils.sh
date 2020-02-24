@@ -199,29 +199,72 @@ is_mac(){
     return 1
 }
 
+# https://jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables
 is_jenkins(){
-    if [ -n "${JENKINS_URL:-}" ] &&
-       [ -n "${BUILD_NUMBER:-}" ] &&
-       [ -n "${BUILD_URL:-}" ]; then
+    # also BUILD_ID, BUILD_NUMBER, BUILD_URL but less specific, caught in is_CI generic
+    if [ -n "${JENKINS_URL:-}" ]; then
         return 0
     fi
     return 1
 }
 
+# https://docs.travis-ci.com/user/environment-variables/#default-environment-variables
 is_travis(){
+    # also TRAVIS_JOB_ID
     if [ -n "${TRAVIS:-}" ]; then
         return 0
     fi
     return 1
 }
 
+# https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
+is_circleci(){
+    # also CI but not really specific, caught in is_CI generic
+    # also CIRCLE_JOB
+    if [ -n "${CIRCLECI:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
+# https://codefresh.io/docs/docs/codefresh-yaml/variables/
+is_codefresh(){
+    # also CI but not really specific, caught in is_CI generic
+    if [ -n "${CF_BUILD_ID:-}" ]; then
+        return 1
+    fi
+    return 0
+}
+
+# https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables/#default-environment-variables
+is_codeship(){
+    # also CI and other generic CI_ env vars caught in is_CI generic
+    # formerly codeship
+    if [ "${CI_NAME:-}" = "CodeShip" ]; then
+        return 1
+    fi
+    return 0
+}
+
+# https://help.github.com/en/actions/configuring-and-managing-workflows/using-environment-variables#default-environment-variables
 is_github_workflow(){
-    if [ "${GITHUB_ACTIONS:-}" = "true" ] ||
+    if [ -n "${GITHUB_ACTIONS:-}" ] ||
        [ -n "${GITHUB_WORKFLOW:-}" ]; then
         return 0
     fi
     return 1
 }
+
+# http://docs.shippable.com/ci/env-vars/#stdEnv
+is_shippable_ci(){
+    # also CI and CONTINUOUS_INTEGRATION but not really specific to Shippable, caught in is_CI generic
+    # also $SHIPPABLE_JOB_ID / $SHIPPABLE_JOB_NUMBER
+    if [ -n "${SHIPPABLE:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 
 is_tfs_ci(){
     if [ -n "${TF_BUILD:-}" ]; then
@@ -230,7 +273,8 @@ is_tfs_ci(){
     return 1
 }
 
-is_azure_devops_ci(){
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml#build-variables
+is_azure_devops(){
     if is_tfs_ci; then
         return 0
     fi
@@ -240,9 +284,19 @@ is_azure_devops_ci(){
 is_CI(){
     if [ -n "${CI:-}" ] ||
        [ -n "${CI_NAME:-}" ] ||
-       is_github_workflow ||
+       [ -n "${CONTINUOUS_INTEGRATION:-}" ] ||
+       [ -n "${BUILD_ID:-}" ] ||
+       [ -n "${BUILD_NUMBER:-}" ] ||
+       [ -n "${BUILD_URL:-}" ] ||
        is_jenkins ||
-       is_travis; then
+       is_travis ||
+       is_github_workflow ||
+       is_azure_devops ||
+       is_tfs_ci ||
+       is_codeship ||
+       is_codefresh ||
+       is_shippable_ci ||
+       is_circleci; then
         return 0
     fi
     return 1
