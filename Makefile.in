@@ -134,7 +134,7 @@ default:
 			echo "RELEASE:"; cat /etc/*release || : ; \
 			echo "ENVIRONMENT:"; env ; \
 		else \
-			env | grep -E 'BUILD|PIPELINE|JOB|\<CI_|^CI=' || :
+			env | grep -E 'BUILD|PIPELINE|JOB|\<CI_|^CI=' || : ; \
 		fi
 	$(MAKE) retry-build
 
