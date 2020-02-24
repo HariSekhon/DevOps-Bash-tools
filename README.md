@@ -2,6 +2,8 @@ Hari Sekhon - DevOps Bash Tools
 ===============================
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c61193dd7dcc418b85149bddf93362e4)](https://www.codacy.com/app/harisekhon/bash-tools)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/network)
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
