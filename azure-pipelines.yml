@@ -28,9 +28,12 @@ pool:
 #container: ubuntu:18.04
 
 steps:
-- script: sudo apt-get update && sudo apt-get install -y git make
-  displayName: install git & make
-- script: make
-  displayName: build
-- script: make test
-  displayName: test
+# doesn't work due to lack of sudo
+#- script: sudo apt-get update && sudo apt-get install -y git make
+#  displayName: install git & make
+#- script: make
+#  displayName: build
+#- script: make test
+#  displayName: test
+- script: sudo docker run -v "$PWD":/pwd ubuntu:18.04 /bin/bash -c "set -ex && cd /pwd && apt update && apt install -y git make && make build test"
+  displayName:
