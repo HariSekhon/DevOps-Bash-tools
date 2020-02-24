@@ -59,6 +59,15 @@ is_circleci(){
     return 1
 }
 
+# https://cirrus-ci.org/guide/writing-tasks/
+is_cirrusci(){
+    # also CI but not really specific, caught in is_CI generic
+    if [ -n "${CIRRUS_CI:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://codefresh.io/docs/docs/codefresh-yaml/variables/
 is_codefresh(){
     # also CI but not really specific, caught in is_CI generic
@@ -138,6 +147,7 @@ is_CI(){
        is_appveyor ||
        is_codeship ||
        is_codefresh ||
+       is_cirrusci ||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0
