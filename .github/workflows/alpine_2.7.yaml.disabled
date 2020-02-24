@@ -27,7 +27,7 @@ on:
 jobs:
   build:
     #name: build
-    timeout-minutes: 10
+    timeout-minutes: 20
     runs-on: ubuntu-latest
     container: alpine:2.7
     env:
