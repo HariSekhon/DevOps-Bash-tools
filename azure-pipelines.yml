@@ -21,7 +21,7 @@ trigger:
 pool:
   # there is no /dev/stderr on this azure build!
   #vmImage: 'ubuntu-latest'
-  # 16.04 required for docker container support
+  # Ubuntu 16.04 required for docker container support, looks like 18.04 works too
   vmImage: 'ubuntu-18.04'
 
 # unprivileged container without sudo, cannot install dependencies
@@ -35,5 +35,7 @@ steps:
 #  displayName: build
 #- script: make test
 #  displayName: test
+
+# hacky workaround to Azure Pipelines limitations :-(
 - script: sudo docker run -v "$PWD":/pwd ubuntu:18.04 /bin/bash -c "set -ex && cd /pwd && apt update && apt install -y git make && make default test"
   displayName:
