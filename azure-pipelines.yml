@@ -28,7 +28,7 @@ pool:
 #container: ubuntu:18.04
 
 steps:
-- script: sudo apt-get update && apt-get install -y git make
+- script: sudo apt-get update && sudo apt-get install -y git make
   displayName: install git & make
 - script: make
   displayName: build
