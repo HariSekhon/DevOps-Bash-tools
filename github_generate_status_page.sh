@@ -135,9 +135,9 @@ printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
 fi
-printf 'repos with %s builds:\n\n' "$num_builds"
+printf 'repos with %s continuous integration builds:\n\n' "$num_builds"
 cat "$tempfile"
-printf '\n%s repos summarized with %s builds\n' "$actual_repos" "$num_builds"
+printf '\n%s repos summarized with %s continuous integration builds\n' "$actual_repos" "$num_builds"
 } | tee "$file"
 
 trap '' exit
