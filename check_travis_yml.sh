@@ -38,9 +38,10 @@ elif is_inside_docker; then
 else
     # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
     #if ! type travis &>/dev/null; then
-    for path in ~/.gem/ruby/*; do
+    for path in ~/.gem/ruby/*/bin; do
         [ -d "$path" ] || continue
-        export PATH="$PATH:$path/bin"
+        echo "adding $path to \$PATH"
+        export PATH="$PATH:$path"
     done
     if ! type -P travis &>/dev/null; then
         if type -P gem &>/dev/null; then
@@ -51,9 +52,10 @@ else
             # --no-rdoc option not valid on GitHub Workflows macos-latest build
             #gem install --user-install travis --no-rdoc --no-ri
             "$srcdir/ruby_gem_install_if_absent.sh" travis
-            for path in ~/.gem/ruby/*; do
+            for path in ~/.gem/ruby/*/bin; do
                 [ -d "$path" ] || continue
-                export PATH="$PATH:$path/bin"
+                echo "adding $path to \$PATH"
+                export PATH="$PATH:$path"
             done
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
