@@ -23,6 +23,11 @@ if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
 fi
 bash_tools_utils_imported=1
 
+# Azure DevOps env var, chain to standard debug across all programs, scripts and repos
+if [ "${SYSTEM_DEBUG:-}" = "true" ]; then
+    export DEBUG=1
+fi
+
 . "$srcdir_bash_tools_utils/docker.sh"
 . "$srcdir_bash_tools_utils/perl.sh"
 . "$srcdir_bash_tools_utils/../.bash.d/colors.sh"
@@ -213,6 +218,20 @@ is_travis(){
 is_github_workflow(){
     if [ "${GITHUB_ACTIONS:-}" = "true" ] ||
        [ -n "${GITHUB_WORKFLOW:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
+is_tfs_ci(){
+    if [ -n "${TF_BUILD:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
+is_azure_devops_ci(){
+    if is_tfs_ci; then
         return 0
     fi
     return 1
