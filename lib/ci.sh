@@ -40,6 +40,15 @@ is_travis(){
     return 1
 }
 
+# https://www.appveyor.com/docs/environment-variables/
+is_appveyor(){
+    # also CI but not really specific, caught in is_CI generic
+    if [ -n "${APPVEYOR:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 is_circleci(){
     # also CI but not really specific, caught in is_CI generic
@@ -122,14 +131,15 @@ is_CI(){
        [ -n "${BUILD_URL:-}" ] ||
        is_jenkins ||
        is_travis ||
+       is_circleci ||
        is_github_workflow ||
        is_gitlab_ci ||
        is_azure_devops ||
-       is_tfs_ci ||
+       is_appveyor ||
        is_codeship ||
        is_codefresh ||
        is_shippable_ci ||
-       is_circleci; then
+       is_tfs_ci; then
         return 0
     fi
     return 1
