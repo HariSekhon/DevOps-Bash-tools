@@ -133,6 +133,8 @@ default:
 		if is_CI; then \
 			echo "RELEASE:"; cat /etc/*release || : ; \
 			echo "ENVIRONMENT:"; env ; \
+		else \
+			env | grep 'BUILD|PIPELINE|JOB' || :
 		fi
 	$(MAKE) retry-build
 
