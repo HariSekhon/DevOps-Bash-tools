@@ -19,11 +19,15 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  # there is no /dev/stderr on this azure build!
+  #vmImage: 'ubuntu-latest'
+  # required for docker container support
+  vmImage: 'ubuntu-16.04'
+
+container: ubuntu:18.04
 
 steps:
 - script: make
   displayName: build
-# there is no /dev/stderr on azure!
-#- script: make test
-#  displayName: test
+- script: make test
+  displayName: test
