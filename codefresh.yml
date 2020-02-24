@@ -31,6 +31,6 @@ steps:
     arguments:
       image: 'ubuntu:18.04'
       commands:
-        - sudo apt update && sudo apt install -y git make
+        - apt update && sudo apt install -y git make
         - make
         - make test
