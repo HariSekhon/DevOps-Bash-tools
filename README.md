@@ -13,6 +13,7 @@ Hari Sekhon - DevOps Bash Tools
 -->
 [![Build Status](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 [![Azure Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools)
 [![Run Status](https://api.shippable.com/projects/5e52c634d79b7d00077bf5ed/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![wercker status](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
