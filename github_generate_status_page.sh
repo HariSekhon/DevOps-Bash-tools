@@ -118,6 +118,11 @@ build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
 build_regex+='|dev\.azure\.com/.+/_apis/build/status'
 build_regex+='|circleci\.com/.+\.svg'
 build_regex+='|api\.shippable\.com/projects/.+/badge'
+build_regex+='|appveyor\.com/api/projects/status'
+build_regex+='|https://img.shields.io/bitbucket/pipelines/'
+build_regex+='|https://api.shippable.com/projects/'
+build_regex+='|https://g.codefresh.io/api/badges/pipeline/'
+build_regex+='|https://app.wercker.com/status/'
 
 if [ -n "${DEBUG:-}" ]; then
     grep -E "$build_regex" "$tempfile" >&2 || :
