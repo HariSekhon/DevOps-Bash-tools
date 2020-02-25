@@ -40,7 +40,8 @@ define MAKEFILE_USAGE
 
     make desktop                installs all of the above + many desktop OS packages listed in setup/
 
-    make bootstrap              all of the above + installs a bunch of major common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI, CCMenu, Parquet tools etc.
+    make mac-desktop            all of the above + installs a bunch of major common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI, CCMenu, Parquet tools etc.
+	make linux-desktop
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
     make wc-scripts             show line counts of the scripts and grand total
@@ -81,17 +82,13 @@ link:
 unlink:
 	@setup/shell_unlink.sh
 
-.PHONY: bootstrap
-bootstrap: desktop
-	@setup/bootstrap.sh
+.PHONY: mac-desktop
+mac-desktop: desktop
+	@setup/mac_desktop.sh
 
-.PHONY: bootstrap-mac
-bootstrap-mac: desktop
-	@setup/bootstrap_mac.sh
-
-.PHONY: bootstrap-linux
-bootstrap-linux: desktop
-	@setup/bootstrap_linux.sh
+.PHONY: linux-desktop
+linux-desktop: desktop
+	@setup/linux_desktop.sh
 
 .PHONY:
 ccmenu:
