@@ -194,10 +194,19 @@ alias llnodebin='ls -ld ~/node_modules/.bin/* 2>/dev/null'
 
 
 # ============================================================================ #
-#                       R u b y   G e m   c o m m a n d s
+#                              R u b y   /   G e m
 # ============================================================================ #
 
 # gems will be installed to ~/.gem/ruby/x.y.z/bin
+
+# RVM stuff
+# usually /usr/local/rvm/bin
+if [ -n "${rvm_bin_path:-}" ];then
+    add_PATH "$rvm_bin_path"
+fi
+if [ -d /usr/local/rvm/bin ]; then
+    add_PATH /usr/local/rvm/bin
+fi
 
 # add newest ruby to path first
 ruby_bins="$(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null)"
