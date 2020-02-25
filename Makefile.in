@@ -131,8 +131,8 @@ default:
 	@printf "CPU Cores: "; nproc 2>/dev/null; sysctl -n hw.ncpu 2>/dev/null; :
 	@source $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI; then \
-			echo "RELEASE:"; cat /etc/*release || : ; \
-			echo "ENVIRONMENT:"; env ; \
+			echo; echo "OS RELEASE:"; echo; cat /etc/*release || : ; echo; \
+			echo; echo "CI ENVIRONMENT:"; echo; env ; echo; echo; \
 		else \
 			env | grep -E 'BUILD|PIPELINE|JOB|\<CI_|^CI=' || : ; \
 		fi
