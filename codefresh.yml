@@ -15,19 +15,20 @@
 
 version: "1.0"
 stages:
-  - "clone"
+  - "checkout"
   - "build"
 steps:
-  clone:
+  checkout:
     type: "git-clone"
     description: "Cloning main repository..."
-    repo: "HariSekhon/DevOps-Bash-tools"
-    revision: "${{CF_BRANCH}}"
-    stage: "clone"
+    #repo: "HariSekhon/DevOps-Bash-tools"
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: "${{CF_REVISION}}"
+    stage: "checkout"
   build:
     title: Running docker image
     type: freestyle
-    #working_directory: '${{CLONE_STEP_NAME}}'
+    working_directory: '${{CF_REPO_NAME}}'
     arguments:
       image: 'ubuntu:18.04'
       commands:
