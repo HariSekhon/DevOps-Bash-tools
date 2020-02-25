@@ -38,7 +38,11 @@ while read -r repo dir; do
         if [ -n "${ALL:-}" ] || grep -q '^[[:space:]]*container:' "$filename"; then
             if [ -n "${NEW:-}" ] || [ -f "$target" ]; then
                 echo "syncing $filename -> $target"
-                sed "s/bash-tools/$repo/;s/timeout-minutes:.*/timeout-minutes: 60/" "$filename" > "$target"
+                timeout=60
+                if [[ "$repo" =~ nagios-plugins ]]; then
+                    timeout=180
+                fi
+                sed "s/bash-tools/$repo/;s/timeout-minutes:.*/timeout-minutes: $timeout/" "$filename" > "$target"
                 if [ "$repo" = "nagios-plugins" ]; then
                     perl -pi -e 's/(^[[:space:]]+make$)/\1 build zookeeper/' "$target"
                 fi
