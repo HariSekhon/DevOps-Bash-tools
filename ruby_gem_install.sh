@@ -85,7 +85,8 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 sudo=""
-if [ $EUID != 0 ]; then
+if [ $EUID != 0 ] &&
+   ! [[ "${GEM_HOME:-}${MY_RUBY_HOME:-}" =~ /\.rvm/ ]]; then
     #sudo=sudo
     opts="$opts --user-install"
 fi
