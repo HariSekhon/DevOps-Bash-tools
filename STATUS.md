@@ -182,8 +182,12 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/network)
+
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 
 <!--
