@@ -16,12 +16,12 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if type apk >/dev/null; then
+if type apk >/dev/null 2>&1; then
     apk --no-cache add bash curl procps
-elif type apt-get >/dev/null; then
+elif type apt-get >/dev/null 2>&1; then
     apt-get update
     apt-get install -y curl procps
-elif type yum >/dev/null; then
+elif type yum >/dev/null 2>&1; then
     echo "rhel based systems aleady have curl"
 fi
 
