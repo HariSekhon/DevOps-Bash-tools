@@ -85,6 +85,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 sudo=""
+# don't use --user-install when using RVM because it will cause programs to error out in the RVM environments, breaking builds in Travis CI, Circle CI, AppVeyor etc
 if [ $EUID != 0 ] &&
    ! [[ "${GEM_HOME:-}${MY_RUBY_HOME:-}" =~ /\.rvm/ ]]; then
     #sudo=sudo
