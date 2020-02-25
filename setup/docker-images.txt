@@ -24,6 +24,8 @@ centos:7
 debian
 debian:10
 fedora
+ubuntu
+ubuntu:18.04
 google/cloud-sdk
 harisekhon/github
 harisekhon/pytools
