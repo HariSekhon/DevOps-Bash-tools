@@ -41,16 +41,18 @@ elif [ "$(uname -s)" = Linux ]; then
         echo "Package Manager not found on Linux, cannot bootstrap"
         exit 1
     fi
-    if [ "${srcdir##*/}" = setup ]; then
-        cd "$srcdir/.."
-    elif [ -d "bash-tools" ]; then
-        cd bash-tools
-    else
-        git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
-        cd bash-tools
-    fi
-    make
 else
     echo "Only Mac & Linux are supported for conveniently bootstrapping all install scripts at this time"
     exit 1
 fi
+
+if [ "${srcdir##*/}" = setup ]; then
+    cd "$srcdir/.."
+elif [ -d "bash-tools" ]; then
+    cd bash-tools
+else
+    git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
+    cd bash-tools
+fi
+
+make
