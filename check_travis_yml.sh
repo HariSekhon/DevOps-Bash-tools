@@ -31,10 +31,10 @@ section "Travis CI Yaml Lint Check"
 
 start_time="$(start_timer)"
 
-if is_travis; then
-    echo "Running inside Travis CI, skipping lint check"
-elif is_inside_docker; then
-    echo "Running inside Docker, skipping lint check"
+#if is_travis; then
+#    echo "Running inside Travis CI, skipping lint check"
+if is_inside_docker; then
+    echo "Running inside Docker, skipping Travis lint check"
 else
     # sometimes ~/.gem/ruby/<version>/bin may not be in $PATH but this succeeds anyway if hashed in shell
     #if ! type travis &>/dev/null; then
@@ -63,6 +63,9 @@ else
         fi
     fi
     if type -P travis &>/dev/null; then
+        if is_CI; then
+            echo "using travis from location: $(type -P travis)"
+        fi
         travis lint
     else
         echo "WARNING: skipping Travis check as Travis is not installed"
