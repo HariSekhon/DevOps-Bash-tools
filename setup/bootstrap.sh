@@ -13,6 +13,14 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Alpine / Wget:
+#
+# wget https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh && sh bootstrap.sh
+#
+# Curl:
+#
+# curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
+
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
