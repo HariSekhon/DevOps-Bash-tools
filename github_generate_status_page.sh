@@ -122,6 +122,8 @@ build_regex+='|circleci\.com/.+\.svg'
 build_regex+='|g\.codefresh\.io/api/badges/pipeline/'
 build_regex+='|api\.shippable\.com/projects/.+/badge'
 build_regex+='|app\.wercker\.com/status/'
+build_regex+='|img\.shields\.io/docker/build/'
+build_regex+='|img\.shields\.io/docker/cloud/build/'
 
 if [ -n "${DEBUG:-}" ]; then
     grep -E "$build_regex" "$tempfile" >&2 || :
