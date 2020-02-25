@@ -285,7 +285,8 @@ make python
 
     make desktop                installs all of the above + many desktop OS packages listed in setup/
 
-    make bootstrap              all of the above + installs a bunch of major common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI, CCMenu, Parquet tools etc.
+    make mac-desktop            all of the above + installs a bunch of major common workstation software packages like Ansible, Terraform, MiniKube, MiniShift, SDKman, Travis CI, CCMenu, Parquet tools etc.
+    make linux-desktop
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
     make wc-scripts             show line counts of the scripts and grand total
