@@ -96,6 +96,12 @@ pytools_dir="$(dirname "$validate_yaml_path")"
 for validate_program in "$pytools_dir"/validate_*.py; do
     [[ "$validate_program" =~ validate_multimedia.py ]] && continue
     [ -L "$validate_program" ] && continue
+    if ! python -V 2>&1 | grep -q 'Python 2' &&
+      [[ "$validate_program" =~ validate_cson.py ]]; then
+        echo "Skipping validate_cson.py on Python 3+ because the cson module hasn't been ported yet"
+        echo
+        continue
+    fi
     if [[ -n "${SKIP_PARQUET:-}" && "$validate_program" =~ .*parquet.* ]]; then
         echo "Skipping Parquet checks..."
         echo
