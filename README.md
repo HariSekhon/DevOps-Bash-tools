@@ -11,7 +11,7 @@ Hari Sekhon - DevOps Bash Tools
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 
 <!--
