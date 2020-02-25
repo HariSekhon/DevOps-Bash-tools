@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -13,16 +13,35 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
 if [ "$(uname -s)" = Darwin ]; then
-    echo "OS detected as Darwin, calling bootstrap_mac.sh"
-    "$srcdir/bootstrap_mac.sh"
+    echo "Bootstrapping Mac"
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
 elif [ "$(uname -s)" = Linux ]; then
-    echo "OS detected as Darwin, calling bootstrap_linux.sh"
-    "$srcdir/bootstrap_linux.sh"
+    echo "Bootstrapping Linux"
+    if type apk 2>/dev/null; then
+        apk --no-cache add bash git make
+    elif type apt-get 2>/dev/null; then
+        apt-get update
+        apt-get install -y git make
+    elif type yum 2>/dev/null; then
+        yum install -y git make
+    else
+        echo "Package Manager not found on Linux, cannot bootstrap"
+        exit 1
+    fi
+    if [ "${srcdir##*/}" = setup ]; then
+        cd "$srcdir/.."
+    elif [ -d "bash-tools" ]; then
+        cd bash-tools
+    else
+        git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
+        cd bash-tools
+    fi
+    make
 else
     echo "Only Mac & Linux are supported for conveniently bootstrapping all install scripts at this time"
     exit 1
