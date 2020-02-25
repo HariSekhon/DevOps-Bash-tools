@@ -18,8 +18,9 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-gem install --user-install travis
+"$srcdir/../ruby_gem_install_if_absent.sh" travis
 
 # add ruby to paths temporarily (logic borrowed from advanced bashrc code in .bash.d/paths.sh)
 for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null | tail -r); do
