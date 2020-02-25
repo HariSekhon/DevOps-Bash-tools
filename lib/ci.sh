@@ -72,9 +72,9 @@ is_cirrusci(){
 is_codefresh(){
     # also CI but not really specific, caught in is_CI generic
     if [ -n "${CF_BUILD_ID:-}" ]; then
-        return 1
+        return 0
     fi
-    return 0
+    return 1
 }
 
 # https://documentation.codeship.com/basic/builds-and-configuration/set-environment-variables/#default-environment-variables
