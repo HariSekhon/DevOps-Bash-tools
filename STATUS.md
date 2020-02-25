@@ -18,12 +18,10 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/nagios-plugins#advanced-nagios-plugins-collection)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
+[![Docker Build Status](https://img.shields.io/docker/build/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/nagios-plugins.svg)](http://microbadger.com/#/images/harisekhon/nagios-plugins)
-<!--
-[![Docker Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
-[![Docker Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
-[![DockerHub Build](https://img.shields.io/docker/build/harisekhon/nagios-plugins)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
--->
 
 [![CI Mac](https://github.com/HariSekhon/Nagios-Plugins/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/Nagios-Plugins/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22CI+Ubuntu%22)
@@ -85,6 +83,9 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/devops-python-tools#hari-sekhon-pytools)
 [![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/pytools/)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/pytools.svg)](https://hub.docker.com/r/harisekhon/pytools/)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/pytools.svg)](https://hub.docker.com/r/harisekhon/pytools/)
+[![Docker Build Status](https://img.shields.io/docker/build/harisekhon/pytools.svg)](https://hub.docker.com/r/harisekhon/pytools/)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/pytools.svg)](http://microbadger.com/#/images/harisekhon/pytools)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+Mac%22)
@@ -116,9 +117,13 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/1769cc854b5246968ee2bae1818f771a)](https://www.codacy.com/app/harisekhon/devops-perl-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-perl-tools.svg)](https://github.com/harisekhon/devops-perl-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-perl-tools.svg)](https://github.com/harisekhon/devops-perl-tools/network)
+
 [![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/devops-perl-tools#hari-sekhon-tools)
-[![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/tools/)
-[![](https://images.microbadger.com/badges/image/harisekhon/tools.svg)](http://microbadger.com/#/images/harisekhon/tools)
+[![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/perl-tools/)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/tools.svg)](https://hub.docker.com/r/harisekhon/perl-tools/)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/perl-tools.svg)](https://hub.docker.com/r/harisekhon/perl-tools/)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/perl-tools.svg)](https://hub.docker.com/r/harisekhon/perl-tools/)
+[![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/perl-tools.svg)](http://microbadger.com/#/images/harisekhon/perl-tools)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
