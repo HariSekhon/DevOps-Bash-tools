@@ -72,6 +72,9 @@ export ZSH="/Users/hari.sekhon/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
+# also messed up
+#ZSH_THEME="agnoster"
+
 # messes up both Terminal and iTerm2 from both brew and git cloned installations
 #if [ -f /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme ]; then
 #    source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
