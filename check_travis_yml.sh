@@ -66,7 +66,12 @@ else
         if is_CI; then
             echo "using travis from location: $(type -P travis)"
         fi
-        travis lint
+        if is_CI; then
+            # get past shell completion install prompt in CI
+            echo "n" | travis lint
+        else
+            travis lint
+        fi
     else
         echo "WARNING: skipping Travis check as Travis is not installed"
     fi
