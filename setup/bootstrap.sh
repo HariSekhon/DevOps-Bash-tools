@@ -25,6 +25,10 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+repo="https://github.com/HariSekhon/DevOps-Bash-tools"
+
+directory="bash-tools"
+
 if [ "$(uname -s)" = Darwin ]; then
     echo "Bootstrapping Mac"
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
@@ -48,11 +52,11 @@ fi
 
 if [ "${srcdir##*/}" = setup ]; then
     cd "$srcdir/.."
-elif [ -d "bash-tools" ]; then
-    cd bash-tools
+elif [ -d "$directory" ]; then
+    cd pytools
 else
-    git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
-    cd bash-tools
+    git clone "$repo" "$directory"
+    cd "$directory"
 fi
 
 make
