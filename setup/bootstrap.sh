@@ -30,12 +30,12 @@ if [ "$(uname -s)" = Darwin ]; then
     curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
-    if type apk 2>/dev/null; then
+    if type apk >/dev/null 2>&1; then
         apk --no-cache add bash git make
-    elif type apt-get 2>/dev/null; then
+    elif type apt-get >/dev/null 2>&1; then
         apt-get update
         apt-get install -y git make
-    elif type yum 2>/dev/null; then
+    elif type yum >/dev/null 2>&1; then
         yum install -y git make
     else
         echo "Package Manager not found on Linux, cannot bootstrap"
