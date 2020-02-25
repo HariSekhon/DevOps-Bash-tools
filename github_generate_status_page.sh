@@ -116,11 +116,11 @@ fi
 build_regex='travis-ci.+\.svg'
 build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
 build_regex+='|dev\.azure\.com/.+/_apis/build/status'
-build_regex+='|circleci\.com/.+\.svg'
-build_regex+='|api\.shippable\.com/projects/.+/badge'
 build_regex+='|appveyor\.com/api/projects/status'
 build_regex+='|img\.shields\.io/bitbucket/pipelines/'
+build_regex+='|circleci\.com/.+\.svg'
 build_regex+='|g\.codefresh\.io/api/badges/pipeline/'
+build_regex+='|api\.shippable\.com/projects/.+/badge'
 build_regex+='|app\.wercker\.com/status/'
 
 if [ -n "${DEBUG:-}" ]; then
