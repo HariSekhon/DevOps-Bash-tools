@@ -31,6 +31,9 @@ file="STATUS.md"
 
 {
 "$srcdir/github_generate_status_page.sh"
+echo
+echo "---"
+echo
 "$srcdir/docker_generate_status_page.sh"
 } | tee "$file"
 
