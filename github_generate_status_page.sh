@@ -100,7 +100,7 @@ for repo in $repolist; do
     if ! [[ "$repo" =~ / ]]; then
         repo="$GITHUB_USER/$repo"
     fi
-    echo "getting repo $repo" >&2
+    echo "getting github repo $repo" >&2
     echo "---"
     curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
     sed -n '1,/^[^\[[:space:]<=-]/ p' |
@@ -119,7 +119,7 @@ done
 } > "$tempfile"
 
 if [ "$num_repos" != "$actual_repos" ]; then
-    echo "ERROR: differing number of target repos ($num_repos) and actual repos ($actual_repos)"
+    echo "ERROR: differing number of target github repos ($num_repos) vs actual repos ($actual_repos)"
     exit 1
 fi
 
@@ -151,9 +151,9 @@ printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
 fi
-printf 'repos with %s continuous integration builds:\n\n' "$num_builds"
+printf 'git repos with %s continuous integration builds:\n\n' "$num_builds"
 cat "$tempfile"
-printf '\n%s repos summarized with %s continuous integration builds\n' "$actual_repos" "$num_builds"
+printf '\n%s git repos summarized with %s continuous integration builds\n' "$actual_repos" "$num_builds"
 } | tee "$file"
 
 trap '' exit
