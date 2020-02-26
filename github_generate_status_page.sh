@@ -17,15 +17,15 @@
 #
 # Usage:
 #
-#   without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
+# without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
 #
-# GITHUB_USER=HariSekhon ./github_generate_status_page.sh
+#   GITHUB_USER=HariSekhon ./github_generate_status_page.sh
 #
-#  with arguments will query those repo's README.md at the top level - if omitting the prefix will prepend $GITHUB_USER/
+# with arguments will query those repo's README.md at the top level - if omitting the prefix will prepend $GITHUB_USER/
 #
-# ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
+#   GITHUB_USER=HariSekhon ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
 #
-# GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools
+#   GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools
 #
 
 set -euo pipefail
