@@ -97,6 +97,9 @@ trap 'echo ERROR >&2; rm -f $tempfile' exit
 actual_repos=0
 
 for repo in $repolist; do
+    if ! [[ "$repo" =~ / ]]; then
+        repo="$GITHUB_USER/$repo"
+    fi
     echo "getting repo $repo" >&2
     echo ---
     curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
