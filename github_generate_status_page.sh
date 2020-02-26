@@ -13,17 +13,19 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to generate Status.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
+# Script to generate REPO_STATUS.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
 #
 # Usage:
 #
-#   without arguments queries for all non-fork repos for your $USER and iterate them up to $top_N to generate the page
+#   without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
 #
-# github_generate_status_page.sh
+# GITHUB_USER=HariSekhon ./github_generate_status_page.sh
 #
-#  with arguments will query those repo's README.md at the top level
+#  with arguments will query those repo's README.md at the top level - if omitting the prefix will prepend $GITHUB_USER/
 #
-# github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
+# ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
+#
+# GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools
 #
 
 set -euo pipefail
@@ -32,19 +34,24 @@ srcdir="$(dirname "$0")"
 
 trap 'echo ERROR >&2' exit
 
-file="STATUS.md"
+file="REPO_STATUS.md"
 
-top_N=20
+top_N=100
 
 repolist="$*"
 
-USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
+# this leads to confusion as it generates some randomly unexpected output by querying a github user who happens to have the same name as your local user eg. hari, so force explicit now
+#USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
+if [ -z "${GITHUB_USER:-}" ] ; then
+    echo "\$GITHUB_USER not set!"
+    exit 1
+fi
 
 get_repos(){
     page=1
     while true; do
         echo "fetching repos page $page" >&2
-        if ! output="$("$srcdir/github_api.sh" "/users/$USER/repos?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir/github_api.sh" "/users/$GITHUB_USER/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
