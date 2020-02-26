@@ -111,6 +111,8 @@ shopt -s histappend
 # check window size and update $LINES and $COLUMNS after each command
 shopt -s checkwinsize
 
+shopt -s cdspell
+
 # not supported in the tmux terminal in GCP Cloud Shell
 if ! isMac &&
    ! isGoogleCloudShell; then
