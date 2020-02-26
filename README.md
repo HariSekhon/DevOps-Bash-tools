@@ -47,7 +47,7 @@ Hari Sekhon - DevOps Bash Tools
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
-100+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
+150+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
 
 Contains:
 
