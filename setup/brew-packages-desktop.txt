@@ -36,6 +36,7 @@
 ansible
 ansible-lint
 autossh
+bash  # version 5, not old version 3 from Apple due to licensing
 bash-completion
 brew-cask-completion
 cmatrix
