@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to generate REPO_STATUS.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
+# Script to generate GIT_STATUS.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
 #
 # Usage:
 #
@@ -34,7 +34,7 @@ srcdir="$(dirname "$0")"
 
 trap 'echo ERROR >&2' exit
 
-file="REPO_STATUS.md"
+file="GIT_STATUS.md"
 
 top_N=100
 
