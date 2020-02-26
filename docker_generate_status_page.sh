@@ -71,7 +71,7 @@ for repo in $repolist; do
         repo="$DOCKER_USER/$repo"
     fi
     echo "[![Docker Build Status](https://img.shields.io/docker/cloud/build/$repo.svg)](https://hub.docker.com/r/$repo/builds)"
-    echo "[![DockerHub Pulls](https://img.shields.io/docker/pulls/$repo.svg)](https://hub.docker.com/r/$repo) - "
+    echo "[![DockerHub Pulls](https://img.shields.io/docker/pulls/$repo.svg)](https://hub.docker.com/r/$repo) -"
     echo "[$repo](https://hub.docker.com/r/$repo)"
     echo
 done
