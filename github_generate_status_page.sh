@@ -101,7 +101,7 @@ for repo in $repolist; do
         repo="$GITHUB_USER/$repo"
     fi
     echo "getting repo $repo" >&2
-    echo ---
+    echo "---"
     curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
     sed -n '1,/^[^\[[:space:]<=-]/ p' |
     head -n -1 |
