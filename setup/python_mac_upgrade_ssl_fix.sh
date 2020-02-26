@@ -14,10 +14,15 @@
 
 set -euo pipefail
 
-brew update && brew upgrade && brew install openssl
-cd /usr/local/Cellar/openssl/1.0.2t/lib
+sudo=""
+[ $EUID -eq 0 ] || sudo=sudo
+
+#brew update && brew upgrade && brew install openssl
+cd /usr/local/Cellar/openssl/*/lib
 sudo cp libssl.1.0.0.dylib libcrypto.1.0.0.dylib /usr/local/lib/
 cd /usr/local/lib
-sudo ln -s libssl.1.0.0.dylib libssl.dylib
-sudo ln -s libcrypto.1.0.0.dylib libcrypto.dylib
+[ -f libssl.dylib ] ||
+    $sudo ln -s libssl.1.0.0.dylib libssl.dylib
+[ -f libcrypto.dylib ] ||
+    $sudo ln -s libcrypto.1.0.0.dylib libcrypto.dylib
 #pip3 install --upgrade packagename
