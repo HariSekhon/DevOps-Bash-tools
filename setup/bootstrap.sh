@@ -53,7 +53,7 @@ fi
 if [ "${srcdir##*/}" = setup ]; then
     cd "$srcdir/.."
 elif [ -d "$directory" ]; then
-    cd pytools
+    cd "$directory"
 else
     git clone "$repo" "$directory"
     cd "$directory"
