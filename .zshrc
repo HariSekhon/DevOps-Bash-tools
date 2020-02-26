@@ -55,6 +55,13 @@ zstyle ':completion:*' menu select
 
 setopt COMPLETE_ALIASES
 
+setopt correct
+export SPROMPT="Correct %R to %r? [Yes, No, Abort, Edit] "
+
+autoload U colors && colors
+
+# expand wilcard expansion on unquoted variables like Bash
+set -o GLOB_SUBST
 
 # ============================================================================ #
 #                                   Oh-My-ZSH
