@@ -127,7 +127,9 @@ Plugin 'tmux-plugins/vim-tmux'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
-"let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = 0
+" keep setting if reloading, otherwise default to 1 for enabled
+"let g:pluginname_setting = get(g:, 'gitgutter_enabled', 1)
 
 " align settings automatically with Tabularize
 let g:terraform_align=1
@@ -285,6 +287,7 @@ nmap <silent> ;j :JHr<CR>
 nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
 nmap          ;n :n<CR>
 nmap          ;o :!git log -p "%"<CR>
+nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
 nmap          ;P :call TogglePaste()<CR>
 nmap          ;q :q<CR>
@@ -362,6 +365,17 @@ function! TogglePaste()
     else
         :set paste
     endif
+endfunction
+
+" changing this setting has no effect on vim gutter in real time
+function! ToggleGutter()
+    :let g:gitgutter_enabled = 0
+    "if g:gitgutter_enabled > 0
+    "if get(g:, 'gitgutter_enabled', 0) > 0
+    "    :let g:gitgutter_enabled = 0
+    "else
+    "    :let g:gitgutter_enabled = 1
+    "endif
 endfunction
 
 :command! Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
