@@ -59,8 +59,12 @@ define MAKEFILE_USAGE
 endef
 
 .PHONY: build
-build: system-packages aws
+build: init system-packages aws
 	@:
+
+.PHONY: init
+init:
+	git submodule update --init --recursive
 
 .PHONY: install
 install: build link aws
