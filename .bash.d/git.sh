@@ -68,7 +68,7 @@ alias um=updatemodules
 #type browse &>/dev/null || alias browse=gbrowse
 alias gbrowse=gitbrowse
 alias gh=gitbrowse
-alias github_actions='gitbrowse actions'
+alias github_actions='gitbrowse actions github'
 alias github_workflows='github_actions'
 alias gha='github_actions'
 alias ghw='github_workflows'
@@ -115,7 +115,8 @@ gitgc(){
 
 gitbrowse(){
     local url
-    url="$(git remote -v | awk '/git@|https:/{print $2}' | sed 's,://.*@,://,; s|git@github.com:|https://github.com/| ; s/\.git$//' | head -n1)"
+    local filter="${2:-.*}"
+    url="$(git remote -v | grep "$filter" | awk '/git@|https:/{print $2}' | sed 's,://.*@,://,; s|git@github.com:|https://github.com/| ; s/\.git$//' | head -n1)"
     if [ $# -gt 0 ] &&
        [ -z "$url" ]; then
         echo "git remote url not found"
