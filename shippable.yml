@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# http://docs.shippable.com/platform/workflow/config/
+
 # Language setting http://docs.shippable.com/ci/languages/node/
 language: none
 
