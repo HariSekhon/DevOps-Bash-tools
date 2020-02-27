@@ -34,7 +34,7 @@ file="STATUS.md"
 echo
 echo "---"
 echo
-"$srcdir/docker_generate_status_page.sh"
+#"$srcdir/docker_generate_status_page.sh"
 } | tee "$file"
 
 trap '' exit
