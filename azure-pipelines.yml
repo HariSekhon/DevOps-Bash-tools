@@ -27,8 +27,8 @@ pool:
 # unprivileged container without sudo, cannot install dependencies
 #container: ubuntu:18.04
 
-steps:
 # doesn't work due to lack of sudo
+#steps:
 #- script: sudo apt-get update && sudo apt-get install -y git make
 #  displayName: install git & make
 #- script: make
@@ -37,5 +37,6 @@ steps:
 #  displayName: test
 
 # hacky workaround to Azure Pipelines limitations :-(
+steps:
 - script: sudo docker run -v "$PWD":/pwd ubuntu:18.04 /bin/bash -c "set -ex && cd /pwd && apt update && apt install -y git make && make default test"
   displayName: docker build
