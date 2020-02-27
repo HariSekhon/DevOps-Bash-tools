@@ -239,8 +239,8 @@ if isMac; then
 else
     for x in ~/pmd-bin-*; do
         if [ -f "$x/bin/run.sh" ]; then
-            # yes evaluate $x here
-            # shellcheck disable=SC2139
+            # yes evaluate $x here, and don't export it's lazy evaluated in alias below
+            # shellcheck disable=SC2139,SC2034
             pmd="$x/bin/run.sh pmd $pmd_opts"
         fi
     done
