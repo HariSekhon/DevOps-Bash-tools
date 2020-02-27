@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://www.appveyor.com/docs/appveyor-yml/
+
 image: Ubuntu
 
 install:
