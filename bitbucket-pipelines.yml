@@ -23,4 +23,4 @@ pipelines:
   default:
     - step:
         script:
-          - apt update && apt install -y git make && make default test
+          - apt update && apt install -y git make && make ci test
