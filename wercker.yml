@@ -13,23 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# This references a standard debian container from the
-# Docker Hub https://registry.hub.docker.com/_/debian/
-# Read more about containers on our dev center
-# https://devcenter.wercker.com/overview-and-core-concepts/containers/
+# https://devcenter.wercker.com/reference/wercker-yml/
+
 box: debian
-# You can also use services such as databases. Read more on our dev center:
-# https://devcenter.wercker.com/administration/services/
-# services:
-    # - postgres
-    # https://devcenter.wercker.com/administration/services/examples/postgresql/
 
-    # - mongo
-    # https://devcenter.wercker.com/administration/services/examples/mongodb/
-
-# This is the build pipeline. Pipelines are the core of wercker
-# Read more about pipelines on our dev center
-# https://devcenter.wercker.com/development/pipelines/
 build:
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
@@ -37,7 +24,10 @@ build:
   steps:
     - script:
         name: install git & make
-        code: apt-get update && apt-get install -y git make
+        code: apt-get update -qq && apt-get install -qy git make
+    - script:
+        name: init
+        code: make init
     - script:
         name: build
         code: make ci
