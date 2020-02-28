@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://codefresh.io/docs/docs/codefresh-yaml/
+
 version: "1.0"
 stages:
   - "checkout"
@@ -32,6 +34,7 @@ steps:
     arguments:
       image: 'ubuntu:18.04'
       commands:
-        - apt update && apt install -y git make
+        - apt update -qq && apt install -qy git make
+        - make init
         - make ci
         - make test
