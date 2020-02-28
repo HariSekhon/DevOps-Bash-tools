@@ -58,6 +58,7 @@ fi
 
 opts=""
 if [ -f /.dockerenv ]; then
+    echo "running inside docker, not installing recommended extra packages unless specified to save space"
     opts="--no-install-recommends"
 fi
 if is_CI; then
