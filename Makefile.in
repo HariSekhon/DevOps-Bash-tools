@@ -128,6 +128,10 @@ export MAKEFILE_USAGE
 
 .PHONY: default
 default:
+	@$(MAKE) main
+
+.PHONY: ci
+ci:
 	@printf "CPU Cores: "; nproc 2>/dev/null; sysctl -n hw.ncpu 2>/dev/null; :
 	@source $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI; then \
