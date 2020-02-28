@@ -133,7 +133,7 @@ default:
 .PHONY: printenv
 printenv:
 	@printf "CPU Cores: "; nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null; :
-	@source $(BASH_TOOLS)/lib/ci.sh || : ; \
+	@. $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI; then \
 			echo; echo "PWD = $$PWD"; \
 			echo; ls -l /.dockerenv 2>/dev/null || : ; \
@@ -556,7 +556,7 @@ docker-ubuntu:
 
 .PHONY: travis
 travis:
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://travis-ci.org/$(REPO)"
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://travis-ci.org/$(REPO)"
 
 .PHONY: travis-log
 travis-log:
@@ -568,7 +568,7 @@ travis-debug:
 
 .PHONY: browse
 browse:
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
 
 .PHONY: commitcount
 commitcount:
@@ -582,32 +582,32 @@ github: browse
 
 .PHONY: github-url
 github-url:
-	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee /dev/stderr | tr -d '\n' | paste_clipboard
+	@. $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee /dev/stderr | tr -d '\n' | paste_clipboard
 
 .PHONY: status
 status:
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md"
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Status.md"
 
 .PHONY: readme
 readme:
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/blob/master/README.md"
 
 .PHONY: issues
 issues:
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/issues"
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)/issues"
 
 .PHONY: github
 dockerhub:
-	@source $(BASH_TOOLS)/.bash.d/network.sh; browser "https://hub.docker.com/u/harisekhon"
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://hub.docker.com/u/harisekhon"
 
 .PHONY: dockerhub-url
 dockerhub-url:
-	@source $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://hub.docker.com/u/harisekhon" | tee /dev/stderr | tr -d '\n' | paste_clipboard
+	@. $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://hub.docker.com/u/harisekhon" | tee /dev/stderr | tr -d '\n' | paste_clipboard
 
 .PHONY: startrack
 startrack:
 	@echo "Don't run this too much, you will hit an API limit against your IP"
-	@source $(BASH_TOOLS)/.bash.d/network.sh; \
+	@. $(BASH_TOOLS)/.bash.d/network.sh; \
 	browser "https://seladb.github.io/StarTrack-js/?\
 	u=$$(sed 's/\/.*//' <<< "$(REPO)")\
 	&r=$$(sed 's/.*\///' <<< "$(REPO)")"
@@ -620,7 +620,7 @@ star: startrack
 allstars:
 	@echo "Takes a while, don't run this all the time or you will an API limit against your IP"
 	@REPOS="Nagios-Plugins Dockerfiles DevOps-Python-tools DevOps-Perl-tools DevOps-Bash-Tools Nagios-Plugin-Kafka HAProxy-configs"; \
-	source $(BASH_TOOLS)/.bash.d/network.sh; \
+	. $(BASH_TOOLS)/.bash.d/network.sh; \
 	browser "https://seladb.github.io/StarTrack-js/?\
 	$$(\
 		for repo in $$REPOS; do \
