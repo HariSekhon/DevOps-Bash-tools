@@ -56,9 +56,15 @@ while read -r repo dir; do
     pushd "$dir" &>/dev/null
     if ! git remote | grep -q "$name"; then
         echo "$name remote not configured, configuring..."
-        url="$(git remote -v | awk '/bitbucket.org|github.com|gitlab.com/{print $2; exit}' | perl -pe "s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/")"
-        echo "inferring $name URL to be $url"
-        echo "adding remote $name with url $url"
+        url="$(git remote -v | awk '/github.com/{print $2;exit}')"
+        if [ -n "$url" ]; then
+            echo "copied existing remote url for $name as is including any access tokens to named remote $name"
+        else
+            url="$(git remote -v | awk '/bitbucket.org|github.com|gitlab.com/{print $2; exit}' | perl -pe "s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/")"
+            echo "inferring $name URL to be $url"
+            # don't put this below and it'd print your access token to screen from existing remote
+            echo "adding remote $name with url $url"
+        fi
         git remote add "$name" "$url"
     fi
     echo "pulling from $name to merge if necessary"
