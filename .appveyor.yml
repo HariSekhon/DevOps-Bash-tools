@@ -18,8 +18,8 @@
 image: Ubuntu
 
 install:
-- sudo apt update
-- sudo apt install -y git make
+- sudo apt update -qq
+- sudo apt install -qy git make
 - make
 
 test_script:
