@@ -353,8 +353,8 @@ pull(){
             [ "${x: -1}" = 2 ] && continue
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             if git remote -v | grep -qi "${GITHUB_USER:-${GIT_USER:-${USER:-}}}"; then
-                echo "> GitHub $x: git pull --no-edit $*"
-                git pull --no-edit "$@"
+                echo "> GitHub $x: git pull --all --no-edit $*"
+                git pull --all --no-edit "$@"
                 echo
                 echo "> GitHub $x: git submodule update --init --recursive"
                 git submodule update --init --recursive
@@ -365,7 +365,9 @@ pull(){
         done
         return
     else
-        git pull "$@"
+        echo "> git pull --all --no-edit $*"
+        git pull --all --no-edit "$@"
+        echo "> git submodule update --init --recursive"
         git submodule update --init --recursive
     fi
 }
