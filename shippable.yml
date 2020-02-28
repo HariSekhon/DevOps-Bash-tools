@@ -15,41 +15,22 @@
 
 # http://docs.shippable.com/platform/workflow/config/
 
-# Language setting http://docs.shippable.com/ci/languages/node/
+# http://docs.shippable.com/ci/advancedOptions/environmentVariables/
+
 language: none
 
-# use this to control what branches get built.
-# http://docs.shippable.com/ci/advancedOptions/branches/
 branches:
   only:
     - master
 
-# using pre-defined build variables
-# full list http://docs.shippable.com/ci/advancedOptions/environmentVariables/
-#env:
-#  global:
-#    - TEST_RESULTS_DIR=$SHIPPABLE_REPO_DIR/shippable/testresults
-#    - CODE_COVERAGE_DIR=$SHIPPABLE_REPO_DIR/shippable/codecoverage
-#    - TESTS_LOC_DIR=$SHIPPABLE_REPO_DIR/tests
-#    - MOD_LOC=$SHIPPABLE_REPO_DIR/node_modules/.bin/
-
 build:
-  # http://docs.shippable.com/ci/shippableyml/#ci
   ci:
-    # npm mirrors can sometimes be flacky, better to use shippable_retry
-    # http://docs.shippable.com/ci/advancedOptions/retry/
     #- shippable_retry make
     - make ci
     - make test
 
-
-# Integrations are used to connect external resources to CI
-# http://docs.shippable.com/integrations/overview/
 integrations:
-  # http://docs.shippable.com/ci/shippableyml/#notifications
   notifications:
-  # turning of email for PR builds, get notified only on failure and change in status
-  # http://docs.shippable.com/integrations/notifications/email/
     - integrationName: email
       type: email
       on_success: never
