@@ -22,6 +22,10 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/ci.sh"
 
 usage(){
     echo "Installs Debian / Ubuntu deb package lists"
@@ -44,9 +48,17 @@ echo "Installing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
 
+#apt="apt"
+apt="apt-get"
+
+if ! type "$apt" >/dev/null 2>&1; then
+    echo "$apt not found in \$PATH ($PATH), cannot install apt packages!"
+    exit 1
+fi
+
 opts="--no-install-recommends"
-if [ -n "${TRAVIS:-}" ]; then
-    echo "running in quiet mode"
+if is_CI; then
+    echo "running in CI quiet mode"
     opts="$opts -qq"
 fi
 
@@ -84,14 +96,14 @@ SUDO=""
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
 
 # shellcheck disable=SC2086
-[ -n "${NO_UPDATE:-}" ] || $SUDO apt-get $opts update
+[ -n "${NO_UPDATE:-}" ] || $SUDO "$apt" $opts update
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
     for package in $packages; do
-        $SUDO apt-get install -y $opts "$package" || :
+        $SUDO "$apt" install -y $opts "$package" || :
     done
 else
     # shellcheck disable=SC2086
-    $SUDO apt-get install -y $opts $packages
+    $SUDO "$apt" install -y $opts $packages
 fi
