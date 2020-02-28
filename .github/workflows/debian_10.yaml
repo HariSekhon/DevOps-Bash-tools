@@ -36,21 +36,12 @@ jobs:
     # untars repo in docker container so git submodule update fails
     #- uses: actions/checkout@v2
     - name: install git & make
-      run: |
-        ls -l /.dockerenv
-        echo "pwd is $PWD"
-        cat /etc/*release
-        apt-get update &&
-        apt-get install -y git make
+      run: apt-get update -qq && apt-get install -qy git make
     - name: git clone
-      run: |
-        cd /tmp &&
-        git clone "https://github.com/harisekhon/$repo"
+      run: cd /tmp && git clone "https://github.com/harisekhon/$repo"
+    - name: init
+      run: cd "/tmp/$repo" && git submodule update --init --recursive
     - name: build
-      run: |
-        cd "/tmp/$repo" &&
-        ./retry.sh make
+      run: cd "/tmp/$repo" && make ci
     - name: test
-      run: |
-        cd "/tmp/$repo" &&
-        make test
+      run: cd "/tmp/$repo" && make test

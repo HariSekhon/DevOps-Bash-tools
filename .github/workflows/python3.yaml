@@ -45,7 +45,9 @@ jobs:
         key: ${{ runner.os }}-pip-bash-tools  # -${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-bash-tools
+    - name: init
+      run: make init
     - name: build
-      run: make
+      run: make ci
     - name: test
       run: make test

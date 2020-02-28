@@ -45,7 +45,9 @@ jobs:
           ${{ runner.os }}-cpanm-bash-tools
     - name: brew update
       run: which brew && brew update || echo
+    - name: init
+      run: make init
     - name: build
-      run: make
+      run: make ci
     - name: test
       run: make test
