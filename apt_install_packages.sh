@@ -56,7 +56,10 @@ if ! type "$apt" >/dev/null 2>&1; then
     exit 1
 fi
 
-opts="--no-install-recommends"
+opts=""
+if [ -f /.dockerenv ]; then
+    opts="--no-install-recommends"
+fi
 if is_CI; then
     echo "running in CI quiet mode"
     opts="$opts -qq"
