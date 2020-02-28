@@ -23,5 +23,6 @@ jobs:
       image: default
     steps:
       - checkout
-      - run: make
+      - run: make init
+      - run: make ci
       - run: make test
