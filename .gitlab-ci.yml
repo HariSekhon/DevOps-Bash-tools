@@ -21,4 +21,4 @@ job:
   before_script:
     - apt-get update -qq && apt-get install -yq git make
   script:
-    - make init ci test
+    - make init && make ci test
