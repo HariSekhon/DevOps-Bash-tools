@@ -19,6 +19,27 @@ srcdir="$(dirname "$0")"
 
 cd "$srcdir"
 
+name="${1:-}"
+
+usage(){
+    echo "usage: ${0##*/} github|gitlab|bitbucket"
+    exit 3
+}
+
+if [ -z "$name" ]; then
+    usage
+fi
+
+if [ "$name" = "github" ]; then
+    domain=github.com
+elif [ "$name" = "gitlab" ]; then
+    domain=gitlab.com
+elif [ "$name" = "bitbucket" ]; then
+    domain=bitbucket.org
+else
+    usage
+fi
+
 sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repolist.txt" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
@@ -30,18 +51,19 @@ while read -r repo dir; do
         continue
     fi
     echo
-    echo "Sync'ing repo $repo to BitBucket"
+    echo "Sync'ing repo $repo to $name"
+    name="${name%.*}"
     pushd "$dir" &>/dev/null
-    if ! git remote | grep -q bitbucket; then
-        echo "BitBucket remote not configured, configuring..."
-        bitbucket_url="$(git remote -v | awk '/github.com|gitlab.com/{print $2; exit}' | sed 's,.*.com/,https://bitbucket.org/,')"
-        echo "inferring BitBucket URL to be $bitbucket_url"
-        echo "adding remote bitbucket with url $bitbucket_url"
-        git remote add bitbucket "$bitbucket_url"
+    if ! git remote | grep -q "$name"; then
+        echo "$name remote not configured, configuring..."
+        url="$(git remote -v | awk '/bitbucket.org|github.com|gitlab.com/{print $2; exit}' | perl -pe "s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/")"
+        echo "inferring $name URL to be $url"
+        echo "adding remote $name with url $url"
+        git remote add "$name" "$url"
     fi
-    echo "pulling from BitBucket to merge if necessary"
-    git pull --no-edit bitbucket master
-    echo "pushing to BitBucket remote"
-    git push bitbucket master
+    echo "pulling from $name to merge if necessary"
+    git pull --no-edit "$name" master
+    echo "pushing to $name remote"
+    git push "$name" master
     popd &>/dev/null
 done
