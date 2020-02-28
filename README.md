@@ -32,15 +32,16 @@ more official badges without logos to differentiate them
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 -->
 [![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
-[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/devops-bash-tools/master?logo=appveyor)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
-[![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/devops-bash-tools?logo=gitlab)](https://gitlab.com/HariSekhon/DevOps-Bash-tools/pipelines)
 [![Codeship Status for HariSekhon/DevOps-Bash-tools](https://app.codeship.com/projects/1b13b490-38c2-0138-ed09-4a04e28a9ab8/status?branch=master)](https://app.codeship.com/projects/386508)
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools)
 [![Shippable](https://api.shippable.com/projects/5e52c634d79b7d00077bf5ed/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/devops-bash-tools/builds)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
+
+[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
+[![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/devops-bash-tools?logo=gitlab)](https://gitlab.com/HariSekhon/DevOps-Bash-tools/pipelines)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Mac%22)
 [![CI Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Ubuntu%22)
