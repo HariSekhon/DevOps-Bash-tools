@@ -140,10 +140,10 @@ ci:
 		else \
 			env | grep -E 'BUILD|PIPELINE|JOB|\<CI_|^CI=' || : ; \
 		fi
-	$(MAKE) retry-build
+	$(MAKE) build-retry
 
-.PHONY: retry-build
-retry-build:
+.PHONY: build-retry
+build-retry:
 	$(BASH_TOOLS)/retry.sh $(MAKE) build
 
 .PHONY: main
