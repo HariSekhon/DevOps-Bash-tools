@@ -40,7 +40,7 @@ build:
         code: apt-get update && apt-get install -y git make
     - script:
         name: build
-        code: make
+        code: make ci
     - script:
         name: test
         code: make test
