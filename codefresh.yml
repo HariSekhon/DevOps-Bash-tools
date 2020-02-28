@@ -33,5 +33,5 @@ steps:
       image: 'ubuntu:18.04'
       commands:
         - apt update && apt install -y git make
-        - make
+        - make ci
         - make test
