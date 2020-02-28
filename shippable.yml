@@ -26,6 +26,7 @@ branches:
 build:
   ci:
     #- shippable_retry make
+    - make init
     - make ci
     - make test
 
