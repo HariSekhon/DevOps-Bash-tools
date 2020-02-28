@@ -17,10 +17,28 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/ci.sh"
 
 echo "Removing Deb Packages"
 
 export DEBIAN_FRONTEND=noninteractive
+
+#apt="apt"
+apt="apt-get"
+
+if ! type "$apt" >/dev/null 2>&1; then
+    echo "$apt not found in \$PATH ($PATH), cannot install apt packages!"
+    exit 1
+fi
+
+opts="--no-install-recommends"
+if is_CI; then
+    echo "running in CI quiet mode"
+    opts="$opts -qq"
+fi
 
 packages=""
 for arg; do
@@ -45,12 +63,12 @@ SUDO=""
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
-    if ! $SUDO apt-get purge -y $packages; then
+    if ! $SUDO "$apt" purge -y $packages; then
         for package in $packages; do
-            $SUDO apt-get purge -y "$package" || :
+            $SUDO "$apt" purge -y "$package" || :
         done
     fi
 else
     # shellcheck disable=SC2086
-    $SUDO apt-get purge -y $packages
+    $SUDO "$apt" purge -y $packages
 fi
