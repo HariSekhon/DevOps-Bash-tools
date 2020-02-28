@@ -266,7 +266,7 @@ st(){
 }
 
 stq(){
-    st "$@" | grep --color=no -e "=======" -e branch -e GitHub | eval ${GIT_PAGER:-cat}
+    st "$@" | grep --color=no -e "=======" -e branch -e GitHub | eval "${GIT_PAGER:-cat}"
 }
 
 # disabling this as I don't use Mercurial or Svn any more,
@@ -339,11 +339,11 @@ pull(){
             # get last character of string - don't pull blah2, as I use them as clean checkouts
             [ "${x: -1}" = 2 ] && continue
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
-            if git remote -v | grep -qi harisekhon; then
-                echo "> GitHub: git pull $x $*"
-                git pull "$@"
+            if git remote -v | grep -qi "${GITHUB_USER:-${GIT_USER:-${USER:-}}}"; then
+                echo "> GitHub $x: git pull --no-edit $*"
+                git pull --no-edit "$@"
                 echo
-                echo "> GitHub: git submodule update --init --recursive"
+                echo "> GitHub $x: git submodule update --init --recursive"
                 git submodule update --init --recursive
                 echo
             fi
