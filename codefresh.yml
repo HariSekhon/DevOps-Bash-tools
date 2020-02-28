@@ -23,7 +23,6 @@ steps:
   checkout:
     type: "git-clone"
     description: "Cloning main repository..."
-    #repo: "HariSekhon/DevOps-Bash-tools"
     repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
     revision: "${{CF_REVISION}}"
     stage: "checkout"
