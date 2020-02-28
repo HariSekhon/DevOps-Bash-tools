@@ -20,12 +20,22 @@ Hari Sekhon - DevOps Bash Tools
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 
 <!--
+official has no logo
+[![Travis CI](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
+this one I don't trust as will stick around
 [![Build Status](https://badges.herokuapp.com/travis/HariSekhon/DevOps-Bash-tools?label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 -->
-[![Travis CI](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
-[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
-[![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
+<!--
+more official badges without logos to differentiate them
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
+# awkward URLs more nicely replaced with shields.io
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
+-->
+[![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
+[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
+[![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/devops-bash-tools/master?logo=appveyor)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
+[![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/devops-bash-tools?logo=gitlab)](https://gitlab.com/HariSekhon/DevOps-Bash-tools/pipelines)
 [![Codeship Status for HariSekhon/DevOps-Bash-tools](https://app.codeship.com/projects/1b13b490-38c2-0138-ed09-4a04e28a9ab8/status?branch=master)](https://app.codeship.com/projects/386508)
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools)
 [![Shippable](https://api.shippable.com/projects/5e52c634d79b7d00077bf5ed/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
