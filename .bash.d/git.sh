@@ -21,6 +21,19 @@
 #
 # if svn.sh and hg.sh functions are enabled, detects and calls svn and mercurial commands if inside those repos so some of the same commands work dynamically
 
+if [ -f ~/.github_token  ]; then
+    GITHUB_TOKEN="$(cat ~/.github_token)"
+    export GITHUB_TOKEN
+fi
+
+if [ -f ~/.gitlab_token  ]; then
+    GITLAB_API_PRIVATE_TOKEN="$(cat ~/.gitlab_token)"
+    export GITLAB_API_PRIVATE_TOKEN
+fi
+if [ -z "${GITLAB_API_ENDPOINT:-}" ]; then
+    export GITLAB_API_ENDPOINT="https://gitlab.com/api/v3"
+fi
+
 # set location where you check out all the github repos
 export github=~/github
 
