@@ -1,0 +1,27 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2019-10-10 17:42:54 +0100 (Thu, 10 Oct 2019)
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying LICENSE file
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                         C I   C o n f i g   F i l e s
+# ============================================================================ #
+
+# Files to sync to adjacent repos, one per line
+
+.appveyor.yml
+.circleci/config.yml
+.cirrus.yml
+.gitlab-ci.yml
+#.travis.yml
+azure-pipelines.yml
+bitbucket-pipelines.yml
+codefresh.yml
+shippable.yml
+wercker.yml
