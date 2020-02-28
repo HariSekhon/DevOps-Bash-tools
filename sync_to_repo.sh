@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Syncs all repos from setup/repolist.txt to one of GitHub / GitLab / BitBucket
+#
+# another trick would be to set all 3 to origin to push to all 3 remotes every time
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
