@@ -17,7 +17,7 @@ REPO := HariSekhon/DevOps-Bash-tools
 
 CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
 
-CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.conf)
+CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.txt)
 
 BASH_PROFILE_FILES := $(shell echo .bashrc .bash_profile .bash.d/*.sh)
 
