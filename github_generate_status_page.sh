@@ -102,7 +102,9 @@ for repo in $repolist; do
     fi
     echo "getting github repo $repo" >&2
     echo "---"
+    #perl -e '$/ = undef; my $content=<STDIN>; $content =~ s/<!--[^>]+-->//gs; print $content' |
     curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
+    perl -pe '$/ = undef; s/<!--[^>]+-->//gs' |
     sed -n '1,/^[^\[[:space:]<=-]/ p' |
     head -n -1 |
     #perl -ne 'print unless /=============/;' |
@@ -127,13 +129,17 @@ build_regex='travis-ci.+\.svg'
 build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
 build_regex+='|dev\.azure\.com/.+/_apis/build/status'
 build_regex+='|appveyor\.com/api/projects/status'
-build_regex+='|img\.shields\.io/bitbucket/pipelines/'
+build_regex+='|img\.shields\.io/.+/pipeline'
+build_regex+='|img.shields.io/.+/build/'
+build_regex+='|img.shields.io/travis/'
 build_regex+='|circleci\.com/.+\.svg'
 build_regex+='|g\.codefresh\.io/api/badges/pipeline/'
 build_regex+='|api\.shippable\.com/projects/.+/badge'
 build_regex+='|app\.wercker\.com/status/'
 build_regex+='|img\.shields\.io/docker/build/'
 build_regex+='|img\.shields\.io/docker/cloud/build/'
+build_regex+='|cloud\.drone\.io/api/badges/.+/status.svg'
+build_regex+='|app\.codeship\.com/projects/.+/status'
 
 if [ -n "${DEBUG:-}" ]; then
     grep -E "$build_regex" "$tempfile" >&2 || :
