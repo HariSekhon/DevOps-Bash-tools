@@ -494,7 +494,7 @@ gitu(){
 #}
 
 push(){
-    pull . "$@" || return 1
+    pull "$@" || return 1
     if isGit .; then
         echo "> git push -v $*"
         #for remote in $(git remote); do
