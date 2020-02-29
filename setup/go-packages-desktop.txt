@@ -18,3 +18,4 @@ github.com/cjbassi/gotop
 github.com/rakyll/hey
 github.com/remind101/assume-role
 github.com/songgao/colorgo
+#github.com/wercker/wercker
