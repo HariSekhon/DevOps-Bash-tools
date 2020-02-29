@@ -50,7 +50,7 @@ is_appveyor(){
 }
 
 # https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
-is_circleci(){
+is_circle_ci(){
     # also CI but not really specific, caught in is_CI generic
     # also CIRCLE_JOB
     if [ -n "${CIRCLECI:-}" ]; then
@@ -60,7 +60,7 @@ is_circleci(){
 }
 
 # https://cirrus-ci.org/guide/writing-tasks/
-is_cirrusci(){
+is_cirrus_ci(){
     # also CI but not really specific, caught in is_CI generic
     if [ -n "${CIRRUS_CI:-}" ]; then
         return 0
@@ -82,6 +82,14 @@ is_codeship(){
     # also CI and other generic CI_ env vars caught in is_CI generic
     # formerly codeship
     if [ "${CI_NAME:-}" = "CodeShip" ]; then
+        return 0
+    fi
+    return 1
+}
+
+is_drone_io(){
+    # also CI and other generic CI_ env vars caught in is_CI generic
+    if [ -n "${DRONE:-}" ]; then
         return 0
     fi
     return 1
@@ -140,14 +148,15 @@ is_CI(){
        [ -n "${BUILD_URL:-}" ] ||
        is_jenkins ||
        is_travis ||
-       is_circleci ||
+       is_circle_ci ||
        is_github_workflow ||
        is_gitlab_ci ||
        is_azure_devops ||
        is_appveyor ||
        is_codeship ||
        is_codefresh ||
-       is_cirrusci ||
+       is_cirrus_ci ||
+       is_drone_io||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0
