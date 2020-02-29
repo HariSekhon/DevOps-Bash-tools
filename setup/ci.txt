@@ -18,6 +18,7 @@
 .appveyor.yml
 .circleci/config.yml
 .cirrus.yml
+.drone.yml
 .gitlab-ci.yml
 #.travis.yml
 azure-pipelines.yml
