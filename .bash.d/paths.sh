@@ -189,6 +189,10 @@ if [ -d ~/node_modules/.bin ]; then
     add_PATH ~/node_modules/.bin
 fi
 
+if [ -d "$bash_tools/node_modules/.bin" ]; then
+    add_PATH "$bash_tools/node_modules/.bin"
+fi
+
 alias lsnodebin='ls -d ~/node_modules/.bin/* 2>/dev/null'
 alias llnodebin='ls -ld ~/node_modules/.bin/* 2>/dev/null'
 
