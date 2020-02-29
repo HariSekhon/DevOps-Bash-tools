@@ -23,6 +23,8 @@ steps:
 #  environment:
 #    DEBUG: 1
   commands:
+  - apt update -qq
+  - apt install -qy make
   - make init
   - make ci
   - make test
