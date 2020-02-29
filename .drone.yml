@@ -24,7 +24,7 @@ steps:
 #    DEBUG: 1
   commands:
   - apt update -qq
-  - apt install -qy make
+  - apt install -qy git make
   - make init
   - make ci
   - make test
