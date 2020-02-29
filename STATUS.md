@@ -32,7 +32,7 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Wercker](https://app.wercker.com/status/76887616b9d1ea67f640e9001cd71662/s/master "wercker status")](https://app.wercker.com/project/byKey/76887616b9d1ea67f640e9001cd71662)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Nagios-Plugins?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=9&branchName=master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/Nagios-Plugins/master?logo=bitbucket)](https://bitbucket.org/harisekhon/Nagios-Plugins/addon/pipelines/home#!/)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/nagios-plugins/master?logo=bitbucket)](https://bitbucket.org/harisekhon/Nagios-Plugins/addon/pipelines/home#!/)
 [![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/Nagios-Plugins?logo=gitlab)](https://gitlab.com/HariSekhon/Nagios-Plugins/pipelines)
 
 [![CI Mac](https://github.com/HariSekhon/Nagios-Plugins/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22CI+Mac%22)
@@ -73,7 +73,7 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![wercker status](https://app.wercker.com/status/26a0f1151450a0de3d8a339345b70019/s/master "wercker status")](https://app.wercker.com/project/byKey/26a0f1151450a0de3d8a339345b70019)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Dockerfiles?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=6&branchName=master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/Dockerfiles/master?logo=bitbucket)](https://bitbucket.org/harisekhon/Dockerfiles/addon/pipelines/home#!/)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/dockerfiles/master?logo=bitbucket)](https://bitbucket.org/harisekhon/dockerfiles/addon/pipelines/home#!/)
 [![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/Dockerfiles?logo=gitlab)](https://gitlab.com/HariSekhon/Dockerfiles/pipelines)
 
 [![CI Mac](https://github.com/HariSekhon/Dockerfiles/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/Dockerfiles/actions?query=workflow%3A%22CI+Mac%22)
@@ -122,7 +122,7 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![Wercker](https://app.wercker.com/status/b40735fb89e7d989dbaf5659a9af9a20/s/master "wercker status")](https://app.wercker.com/project/byKey/b40735fb89e7d989dbaf5659a9af9a20)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Python-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=8&branchName=master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/DevOps-Python-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/DevOps-Python-tools/addon/pipelines/home#!/)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-python-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/devops-python-tools/addon/pipelines/home#!/)
 [![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/DevOps-Python-tools?logo=gitlab)](https://gitlab.com/HariSekhon/DevOps-Python-tools/pipelines)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Python-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22CI+Mac%22)
@@ -166,12 +166,12 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Perl-tools/master?logo=drone)](https://cloud.drone.io/HariSekhon/DevOps-Perl-tools)
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Perl-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Perl-tools)
 [![Codeship Status for HariSekhon/DevOps-Perl-tools](https://app.codeship.com/projects/c9e3bf70-3c5f-0138-d157-661d474a0ccb/status?branch=master)](https://app.codeship.com/projects/387254)
-[![Shippable]([![Codeship Status for HariSekhon/DevOps-Perl-tools](https://app.codeship.com/projects/c9e3bf70-3c5f-0138-d157-661d474a0ccb/status?branch=master)](https://app.codeship.com/projects/387254))](https://app.shippable.com/github/HariSekhon/DevOps-Perl-tools/dashboard/jobs)
+[![Shippable](https://api.shippable.com/projects/5e52c6341b064c0007d02b0c/badge?branch=master)](https://app.shippable.com/github/HariSekhon/DevOps-Perl-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Perl-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/DevOps-Perl-tools/builds)
 [![Wercker](https://app.wercker.com/status/1f2132ff1c5b4098e3321456e67f54db/s/master "wercker status")](https://app.wercker.com/project/byKey/1f2132ff1c5b4098e3321456e67f54db)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Perl-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=7&branchName=master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/DevOps-Perl-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/DevOps-Perl-tools/addon/pipelines/home#!/)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-perl-tools/master?logo=bitbucket)](https://bitbucket.org/harisekhon/devops-perl-tools/addon/pipelines/home#!/)
 [![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/DevOps-Perl-tools?logo=gitlab)](https://gitlab.com/HariSekhon/DevOps-Perl-tools/pipelines)
 
 [![CI Mac](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22CI+Mac%22)
@@ -436,7 +436,7 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 [![wercker status](https://app.wercker.com/status/fe4f87bf98f31e4c22a3041c0966644b/s/master "wercker status")](https://app.wercker.com/project/byKey/fe4f87bf98f31e4c22a3041c0966644b)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Nagios-Plugin-Kafka?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=11&branchName=master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/Nagios-Plugin-Kafka/master?logo=bitbucket)](https://bitbucket.org/harisekhon/Nagios-Plugin-Kafka/addon/pipelines/home#!/)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/nagios-plugin-kafka/master?logo=bitbucket)](https://bitbucket.org/harisekhon/nagios-plugin-kafka/addon/pipelines/home#!/)
 [![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/Nagios-Plugin-Kafka?logo=gitlab)](https://gitlab.com/HariSekhon/Nagios-Plugin-Kafka/pipelines)
 
 [![CI Mac](https://github.com/HariSekhon/Nagios-Plugin-Kafka/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/actions?query=workflow%3A%22CI+Mac%22)
@@ -518,3 +518,6 @@ Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 
 
 11 git repos summarized with 284 continuous integration builds
+
+---
+
