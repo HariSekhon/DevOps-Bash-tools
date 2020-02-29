@@ -25,5 +25,5 @@ jobs:
     steps:
       - checkout
       - run: make init
-      - run: make ci
+      - run: make
       - run: make test
