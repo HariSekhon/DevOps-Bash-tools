@@ -140,7 +140,7 @@ printenv:
 			echo; echo "OS RELEASE:"; echo; cat /etc/*release || : ; echo; \
 			echo; echo "CI ENVIRONMENT:"; echo; env ; echo; echo; \
 		else \
-			env | grep -E 'BUILD|PIPELINE|JOB|\<CI_|^CI=' || : ; \
+			env | grep -E 'BUILD|PIPELINE|JOB|STAGE|\<CI_|^CI=' || : ; \
 		fi
 
 .PHONY: ci
