@@ -8,3 +8,4 @@
 # tap                   package
 #sambadevi/powerlevel9k  powerlevel9k
 wallix/awless           awless
+wercker/wercker         wercker-cli
