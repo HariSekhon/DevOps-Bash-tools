@@ -79,6 +79,7 @@ honeyd
 hostapd
 incron
 iozone
+iotop
 ipcalc
 ipmitool
 iptraf
