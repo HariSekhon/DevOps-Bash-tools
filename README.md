@@ -12,11 +12,12 @@ Hari Sekhon - DevOps Bash Tools
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 -->
 
-[![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20OS%20X-blue.svg)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
-[![DockerHub](https://img.shields.io/badge/docker-available-blue.svg)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools.svg)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
+[![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
+[![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/harisekhon/bash-tools#hari-sekhon---bash-tools)
+[![Docker](https://img.shields.io/badge/OS-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=Dockerhub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 
 <!--
