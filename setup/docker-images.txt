@@ -26,6 +26,7 @@ debian:10
 fedora
 ubuntu
 ubuntu:18.04
+gentoo/stage3-amd64
 google/cloud-sdk
 harisekhon/github
 harisekhon/pytools
