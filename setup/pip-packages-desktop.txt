@@ -24,6 +24,7 @@ beautifulsoup4
 bitbucket-cli
 cfn-lint
 flake8
+gitsome
 # tries to uninstall thrift -> ERROR: Cannot uninstall 'thrift'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
 # just use impala-shell from CDH parcel on edge node instead
 # impala-shell
