@@ -45,10 +45,4 @@ if ! [[ "$application" =~ / ]]; then
     application="${GITHUB_USER:-${GIT_USER:-${USER:-}}}/$application"
 fi
 
-if [ -t 1  ]; then
-    jq=" | jq"
-else
-    jq=""
-fi
-
-eval curl -sS "https://app.wercker.com/api/v3/applications/$application" $jq
+curl -sS "https://app.wercker.com/api/v3/applications/$application"
