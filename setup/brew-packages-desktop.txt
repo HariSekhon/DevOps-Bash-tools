@@ -35,8 +35,8 @@
 #ack
 ansible
 ansible-lint
-autossh
 autojump
+autossh
 bash  # version 5, not old version 3 from Apple due to licensing
 bash-completion
 brew-cask-completion
