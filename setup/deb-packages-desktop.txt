@@ -135,6 +135,7 @@ iceweasel
 ifstat
 ike-scan
 incron
+iotop
 iozone
 ipcalc
 ipmitool
