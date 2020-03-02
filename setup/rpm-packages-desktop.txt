@@ -29,6 +29,7 @@ aterm
 atftpd
 autocutsel
 autojump
+autojump-zsh
 autossh
 bash-completion
 bittorrent
