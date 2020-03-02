@@ -40,6 +40,7 @@ aterm
 atftpd
 audacious
 autocutsel
+autojump
 autossh
 azureus
 bash-completion
