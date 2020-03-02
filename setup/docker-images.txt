@@ -33,3 +33,8 @@ harisekhon/pytools
 harisekhon/perl-tools
 harisekhon/bash-tools
 harisekhon/nagios-plugins
+harisekhon/alpine-github
+harisekhon/centos-github
+harisekhon/debian-github
+harisekhon/fedora-github
+harisekhon/ubuntu-github
