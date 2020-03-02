@@ -28,7 +28,7 @@ run(){
 install_scripts="
 install_ansible.sh
 install_diff-so-fancy.sh
-install_gcloud.sh
+install_gcloud_sdk.sh
 install_parquet-tools.sh
 install_sdkman.sh
 install_sdkman_all_sdks.sh
