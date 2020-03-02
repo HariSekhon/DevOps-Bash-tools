@@ -163,7 +163,7 @@ export bitbucket=~/bitbucket
 # clashes with bitbucket-cli
 #alias bitbucket='cd $bitbucket'
 alias bitb='cd $bitbucket'
-alias bb=bitb
+alias bb=bitbucket
 
 if [ -d "$github" ]; then
     for x in "$github/"*; do
