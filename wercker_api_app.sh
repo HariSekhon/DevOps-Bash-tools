@@ -32,11 +32,23 @@ if [ $# -ne 1 ]; then
     usage
 fi
 
+for arg; do
+    case "$arg" in
+        -*) usage
+            ;;
+    esac
+done
+
 application="${1:-}"
 
 if ! [[ "$application" =~ / ]]; then
     application="${GITHUB_USER:-${GIT_USER:-${USER:-}}}/$application"
 fi
 
-curl -sS "https://app.wercker.com/api/v3/applications/$application" |
-jq
+if [ -t 1  ]; then
+    jq=" | jq"
+else
+    jq=""
+fi
+
+eval curl -sS "https://app.wercker.com/api/v3/applications/$application" $jq
