@@ -375,6 +375,7 @@ subversion
 swatch
 sys-apps/ack
 sys-fs/fuse
+sys-process/iotop
 #syslog-ng
 sysstat
 tcpdump
