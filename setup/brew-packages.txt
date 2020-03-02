@@ -17,6 +17,7 @@ cmake
 coreutils
 cpanm
 direnv
+findutils
 git-secrets
 gnu-sed
 golang
@@ -26,6 +27,7 @@ parallel
 #python  # unnecessary - Macs always come with Python
 readline
 shellcheck
+terraform
 wget
 whois
 yq
