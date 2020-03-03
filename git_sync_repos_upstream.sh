@@ -70,7 +70,7 @@ while read -r repo dir; do
         if [ -n "$url" ]; then
             echo "copied existing remote url for $name as is including any access tokens to named remote $name"
         else
-            url="$(git remote -v | awk '/bitbucket.org|github.com|gitlab.com/{print $2; exit}' | perl -pe "s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/")"
+            url="$(git remote -v | awk '{print $2}' | grep -E 'bitbucket.org|github.com|gitlab.com' | head -n 1 | perl -pe "s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/")"
             echo "inferring $name URL to be $url"
             # don't put this below and it'd print your access token to screen from existing remote
             echo "adding remote $name with url $url"
