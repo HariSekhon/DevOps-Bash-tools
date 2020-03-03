@@ -19,7 +19,7 @@
 # See Also:
 #
 # git_set_multi_origin.sh    - for push to all
-# git_sync_repos_upstream.sh - for staggered sync's
+# git_sync_repos_upstream.sh - for sync'ing all repos to another provider
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
