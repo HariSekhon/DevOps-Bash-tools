@@ -13,9 +13,13 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Sets up multi-origin to GitHub + GitLab + Bitbucket for the local checkout so that each push pushes to all 3 upstream repos
+# Sets up alternative remotes to one or more of the major public Git Repos - GitHub, GitLab or Bitbucket
+# for the local checkout so that you can push to them easily
 #
-# see also adjacent git_sync_repos_upstream.sh if you want to do staggered sync's
+# See Also:
+#
+# git_set_multi_origin.sh    - for push to all
+# git_sync_repos_upstream.sh - for staggered sync's
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
