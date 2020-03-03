@@ -23,4 +23,4 @@ if [ $# -gt 0 ]; then
 else
     cat
 fi |
-perl -MURI::Escape -ne 'chomp;print uri_unescape($_),"\n"'
+perl -MURI::Escape -ne 'chomp; print uri_unescape($_) . "\n"'
