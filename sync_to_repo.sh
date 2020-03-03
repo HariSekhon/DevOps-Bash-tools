@@ -13,9 +13,15 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Syncs all repos from setup/repolist.txt to one of GitHub / GitLab / BitBucket
+# Syncs all adjacent repos from setup/repolist.txt to one of the upstreams GitHub / GitLab / BitBucket
 #
-# another trick would be to set all 3 to origin to push to all 3 remotes every time
+# another trick would be to set the remote origin to contain all 3 URLs so each push goes to all 3 repos every time
+#
+# eg.
+#
+# git remote set-url --add origin <url>
+#
+# git remote set-url --add origin https://bitbucket.org/HariSekhon/DevOps-Bash-tools
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
