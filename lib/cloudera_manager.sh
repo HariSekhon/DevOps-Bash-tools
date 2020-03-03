@@ -24,7 +24,7 @@ if [ -z "${CLOUDERA_MANAGER:-}" ]; then
     if [ -n "${CLOUDERA_MANAGER_HOST:-}" ]; then
         CLOUDERA_MANAGER="${CLOUDERA_MANAGER_HOST:-}:${CLOUDERA_MANAGER_PORT:-7180}"
     else
-        read -r -p 'Enter Clouder Manager host URL: ' CLOUDERA_MANAGER
+        read -r -p 'Enter Cloudera Manager host URL: ' CLOUDERA_MANAGER
     fi
 fi
 
