@@ -24,7 +24,7 @@ srcdir="$(dirname "$0")"
 cd "$srcdir"
 
 usage(){
-    echo "${0##*/} <user>/<application>"
+    echo "${0##*/} <user>/<application_name>"
     exit 3
 }
 
