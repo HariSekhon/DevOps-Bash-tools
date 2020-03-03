@@ -45,6 +45,7 @@ more official badges without logos to differentiate them
 [![Shippable](https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/devops-bash-tools/builds)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
+
 (reload page if some of these badges fail to load - external supplier latency/loading is outside of my control)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
