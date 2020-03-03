@@ -27,8 +27,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-cd "$srcdir"
-
 name="${1:-}"
 
 usage(){
