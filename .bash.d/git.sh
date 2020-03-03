@@ -87,6 +87,8 @@ alias gha='github_actions'
 alias ghw='github_workflows'
 alias wf='cd .github/workflows/'
 alias ggrep="git grep"
+alias remotes='git remote -v'
+alias remote='remotes'
 # much quicker to just 'cd $github; f <pattern>'
 #githubls(){
 #    # GitHub is svn compatible, use this to list files remotely
