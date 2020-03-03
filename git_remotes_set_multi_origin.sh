@@ -18,8 +18,8 @@
 #
 # See Also:
 #
-# git_add_public_remotes.sh  - create alternative remotes for easy individual pushes
-# git_sync_repos_upstream.sh - for sync'ing all repos to another provider
+# git_remotes_add_public_repos.sh  - create alternative remotes for easy individual pushes
+# git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
