@@ -66,7 +66,7 @@ while read -r repo dir; do
     pushd "$dir" &>/dev/null
     if ! git remote | grep -q "$name"; then
         echo "$name remote not configured, configuring..."
-        url="$(git remote -v | awk '/github.com/{print $2;exit}')"
+        url="$(git remote -v | awk "/$name/{print \$2;exit}")"
         if [ -n "$url" ]; then
             echo "copied existing remote url for $name as is including any access tokens to named remote $name"
         else
