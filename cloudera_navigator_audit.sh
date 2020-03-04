@@ -17,9 +17,7 @@
 #
 # See cloudera_navigator_api.sh for base options like Navigator Host, SSL etc
 #
-# From 1 year ago to Now (this is literally today minus 1 year right down to the second)
-#
-# ./cloudera_navigator_audit.sh "1 year ago" <query_filter> <curl_options> ...
+# Tested on Cloudera Enterprise 5.10
 
 
 # See the inline documentation for Cloudera Navigator Query filters
@@ -28,28 +26,32 @@
 #
 # https://$CLOUDERA_NAVIGATOR_HOST:7187/api-console/tutorial.html
 
+# Usage:
+#
+#   ./cloudera_navigator_audit.sh <start_date> <end_date> <query_filter> <curl_options> ...
+
 # Examples:
 #
 # All logs up to now:
 #
-# ./cloudera_navigator_audit.sh <query> ...
+#   ./cloudera_navigator_audit.sh <query> ... > navigator_audit_log.csv
+#
+#
+# Last year only (literally today minus 1 year right down to the second):
+#
+#   ./cloudera_navigator_audit.sh "1 year ago" <query> ... > navigator_audit_log_year.csv
 #
 #
 # From Start to End Dates:
 #
-# ./cloudera_navigator_audit.sh "2019-01-01T00:00:00" "2020-01-01T00:00:00" <query> ...
+#   ./cloudera_navigator_audit.sh "2019-01-01T00:00:00" "2020-01-01T00:00:00" <query> ... > navigator_audit_log_2019.csv
 #
 #
 # All logs up to now for the Impala service, ignoring the self-signed certificate:
 #
-# ./cloudera_navigator_audit.sh service==impala -k
+#   ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
 #
 #
-# combine with jq commands to extract the info you want from the json output
-#
-# ./cloudera_navigator_audit.sh impala | jq -r '.queries[].statement'
-
-# Tested on Cloudera Enterprise 5.10
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -82,7 +84,9 @@ if [[ "${1:-}" =~ ^[[:digit:]] ]]; then
 fi
 
 if [ -z "$start" ]; then
-    start="1970-01-01T00:00:00"
+    start="1 year ago"
+    # XXX: this causes Navigator API to return only admin commands and not SQL queries... weird
+    #start="1970-01-01T00:00:00"
 fi
 start_epoch_ms="$("$date" --utc -d "$start" +%s000)"
 
