@@ -17,6 +17,8 @@
 #
 # See cloudera_navigator_api.sh for base options like Navigator Host, SSL etc
 #
+# I've managed to crash Navigator several times both via the API and the UI trying to get access to > 1 years of historical logs
+#
 # Tested on Cloudera Enterprise 5.10
 
 
