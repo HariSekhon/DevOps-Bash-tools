@@ -59,6 +59,9 @@ done
 url_path="$1"
 url_path="/${url_path##/}"
 
+# remove $1 so we can pass remaining args to curl_auth.sh
+shift
+
 api_version="${CLOUDERA_API_VERSION:-7}"
 
 "$srcdir/curl_auth.sh" -sS --connect-timeout 5 "$CLOUDERA_MANAGER/api/v${api_version}${url_path}" "$@"
