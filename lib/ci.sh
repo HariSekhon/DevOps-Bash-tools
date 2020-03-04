@@ -104,6 +104,10 @@ is_github_workflow(){
     return 1
 }
 
+is_github_action(){
+    if_github_workflow
+}
+
 # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
 is_gitlab_ci(){
     # also CI and other generic CI_ env vars caught in is_CI generic
