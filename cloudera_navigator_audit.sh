@@ -51,7 +51,7 @@
 #
 #   ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
 #
-#
+# XXX: looks like there is a bug in the Navigator API returning only admin for when start date set to 1970-01-01T00:00:00 - workaround is to use 1970-01-01T00:00:01
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -84,9 +84,11 @@ if [[ "${1:-}" =~ ^[[:digit:]] ]]; then
 fi
 
 if [ -z "$start" ]; then
-    start="1 year ago"
+    #start="1 year ago"
     # XXX: this causes Navigator API to return only admin commands and not SQL queries... weird
     #start="1970-01-01T00:00:00"
+    # looks like a bug, workaround:
+    start="1970-01-01T00:00:01"
 fi
 start_epoch_ms="$("$date" --utc -d "$start" +%s000)"
 
@@ -101,7 +103,7 @@ end_date="$($date --utc -d "@${end_epoch_ms%000}")"
 
 # defined in lib
 # shellcheck disable=SC2154
-echo "fetching audit logs from '$start_date' to '$end_date'" >&2
+echo "fetching audit logs from  '$start_date'  to  '$end_date'" >&2
 
 query=""
 if ! [[ "${1:-}" =~ ^- ]]; then
