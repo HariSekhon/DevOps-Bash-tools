@@ -32,7 +32,7 @@ Environment variables (prompts for address, cluster and password if not passed v
 
 \$CLOUDERA_MANAGER_HOST / \$CLOUDERA_MANAGER
 \$CLOUDERA_MANAGER_CLUSTER / \$CLOUDERA_CLUSTER
-\$CLOUDERA_MANAGER_SSL (any value enables and changes port from 7180 to 7183)
+\$CLOUDERA_MANAGER_SSL (any value enables SSL and changes default port from 7180 to 7183)
 \$CLOUDERA_MANAGER_USER / \$CLOUDERA_USER / \$USER
 \$CLOUDERA_MANAGER_PASSWORD / \$CLOUDERA_PASSWORD / \$USER
 
