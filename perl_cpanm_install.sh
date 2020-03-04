@@ -66,8 +66,8 @@ echo "Installing CPAN Modules"
 echo
 
 opts=""
-if [ -n "${TRAVIS:-}" ]; then
-    echo "running in quiet mode"
+if is_CI; then
+    echo "running in quiet mode for CI to minimize log noise"
     opts="-q"
 fi
 
