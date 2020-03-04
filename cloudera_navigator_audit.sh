@@ -84,16 +84,16 @@ fi
 if [ -z "$start" ]; then
     start="1970-01-01T00:00:00"
 fi
-start_epoch_ms="$("$date" -d "$start" +%s000)"
+start_epoch_ms="$("$date" --utc -d "$start" +%s000)"
 
 if [ -z "$end" ]; then
     end_epoch_ms="$now_timestamp"
 else
-    end_epoch_ms="$("$date" -d "$end" +%s000)"
+    end_epoch_ms="$("$date" --utc -d "$end" +%s000)"
 fi
 
-start_date="$($date -d "@${start_epoch_ms%000}")"
-end_date="$($date -d "@${end_epoch_ms%000}")"
+start_date="$($date --utc -d "@${start_epoch_ms%000}")"
+end_date="$($date --utc -d "@${end_epoch_ms%000}")"
 
 # defined in lib
 # shellcheck disable=SC2154
