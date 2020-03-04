@@ -30,9 +30,9 @@
 
 # Examples:
 #
-# From Start to Now:
+# All logs up to now:
 #
-# ./cloudera_navigator_audit.sh "2019-01-01T00:00:00" <query> ...
+# ./cloudera_navigator_audit.sh <query> ...
 #
 #
 # From Start to End Dates:
@@ -40,7 +40,7 @@
 # ./cloudera_navigator_audit.sh "2019-01-01T00:00:00" "2020-01-01T00:00:00" <query> ...
 #
 #
-# Implicit 1 year ago to now for just the Impala service, ignoring the self-signed certificate:
+# All logs up to now for the Impala service, ignoring the self-signed certificate:
 #
 # ./cloudera_navigator_audit.sh service==impala -k
 #
@@ -82,7 +82,7 @@ if [[ "${1:-}" =~ ^[[:digit:]] ]]; then
 fi
 
 if [ -z "$start" ]; then
-    start="1 year ago"
+    start="1970-01-01T00:00:00"
 fi
 start_epoch_ms="$("$date" -d "$start" +%s000)"
 
@@ -109,8 +109,12 @@ fi
 limit="${limit:-10000}" # max limit
 offset="${offset:-0}"
 
-# limit=100&offset=0
-# format=JSON is default
-# attachment will ignore default 10,000 limit and return all results which is what we want
-#"$srcdir/cloudera_navigator_api.sh" "/audits/?query=${query}&startTime=${start_epoch_ms}&endTime=${end_epoch_ms}&limit=$limit&offset=$offset" "$@"
-"$srcdir/cloudera_navigator_api.sh" "/audits/?query=${query}&startTime=${start_epoch_ms}&endTime=${end_epoch_ms}&attachment=true" "$@"
+# CSV format seems to default to attachment=true, ignoring limits and offsets, even when attachment=false
+
+# default in API is JSON
+#format="${format:-JSON}"  # or CSV
+format=CSV  # only way to get all the records
+
+# attachment will ignore default 10,000 limit and return all results which is what we want - seems to not work on JSON, use CSV format instead, which also seems to ignore limit & offset even with attachment=false
+#"$srcdir/cloudera_navigator_api.sh" "/audits/?query=${query}&startTime=${start_epoch_ms}&endTime=${end_epoch_ms}&format=${format}&limit=$limit&offset=$offset&attachment=false" "$@"
+"$srcdir/cloudera_navigator_api.sh" "/audits/?query=${query}&startTime=${start_epoch_ms}&endTime=${end_epoch_ms}&format=${format}&attachment=true" "$@"
