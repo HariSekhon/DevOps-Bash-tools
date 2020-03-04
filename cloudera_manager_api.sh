@@ -26,7 +26,9 @@ Script to query Cloudera Manager API, auto-populating Cloudera Manager host addr
 safely passing credentials via a file descriptor to avoid exposing them in the process list as arguments or OS logging
 history
 
-combine with jq commands to extract the info you want
+Arguments are passed through to curl (eg. -k to not verify internal self-signed SSL certificate)
+
+Combine with jq commands to extract the info you want
 
 Environment variables (prompts for address, cluster and password if not passed via environment variables):
 
