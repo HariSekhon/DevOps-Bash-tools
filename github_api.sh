@@ -52,7 +52,7 @@ export USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
 PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
 
 if [ -z "${PASSWORD:-}" ]; then
-    PASSWORD="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@/{print $2; exit}' | sed 's|https://||;s/@.*//')"
+    PASSWORD="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@github\.com/{print $2; exit}' | sed 's|https://||;s/@.*//')"
 fi
 
 export PASSWORD
