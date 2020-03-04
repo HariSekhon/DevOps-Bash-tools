@@ -184,26 +184,26 @@ make install
   - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key_api.sh` - fetches GitHub users public SSH keys for quick local installation to `~/.ssh/authorized_keys`
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
 - `perl*.sh` - various Perl utilities eg:
-  - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, PERLBREW / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, finding and reading build log upon failure for CI systems etc
+  - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
   - `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
   - `perlpath.sh` - prints all Perl libary search paths, one per line
-  - `perl_find_library_path.sh` - finds directory where a CPAN module is installed, without args finds the Perl library base
+  - `perl_find_library_path.sh` - finds directory where a CPAN module is installed - without args finds the Perl library base
   - `perl_find_library_executable.sh` - finds directory where a CPAN module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
-  - `perl_find_unused_cpan_modules.sh` - finds CPAN modules listed in `cpan-requirements.txt` file that aren't used by any programs in the current directory tree
-  - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed across `cpan-requirements.txt` files under the directory tree (useful for deduping modules across submodules)
-  - `perl_generate_fatpacks.sh` - generates fatpacks (self-contained programs with all CPAN modules built-in)
-- `python*.sh` - various Python utilities including eg:
+  - `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
+  - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN module listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
+  - `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
+- `python*.sh` - various Python utilities eg:
   - `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
   - `python_pip_install.sh` - bulk installs PyPI modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, VirtualEnvs / Anaconda / GitHub Workflows/ Google Cloud Shell, Mac vs Linux library paths, and ignore failure option
   - `python_pip_install_if_absent.sh` - installs PyPI modules not already in Python libary path (OS or pip installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
   - `python_pip_reinstall_all_modules.sh` - reinstalls all PyPI modules which can fix some issues
   - `pythonpath.sh` - prints all Python libary search paths, one per line
-  - `python_find_library_path.sh` - finds directory where a PyPI module is installed, without args finds the Python library base
+  - `python_find_library_path.sh` - finds directory where a PyPI module is installed - without args finds the Python library base
   - `python_find_library_executable.sh` - finds directory where a PyPI module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
-  - `python_find_unused_pip_modules.sh` - finds PyPI modules listed in `requirements.txt` file that aren't used by any programs in the current directory tree
-  - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed across `requirements.txt` files under the directory tree (useful for deduping modules across submodules)
+  - `python_find_unused_pip_modules.sh` - finds PyPI modules that aren't used by any programs in the current directory tree
+  - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
   - `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
-  - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained python programs
+  - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - Programming language linting:
