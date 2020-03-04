@@ -222,7 +222,10 @@ is_latest_version(){
 ci_sample(){
     local versions
     versions="${*:-}"
-    if [ -n "${SAMPLE:-}" ] || is_CI; then
+    # longer time limits on GitHub Workflows than other CI systems like Travis so don't sample, run everything
+    if is_github_workflow; then
+        echo "$versions"
+    elif [ -n "${SAMPLE:-}" ] || is_CI; then
         if [ -n "$versions" ]; then
             local a
             IFS=' ' read -r -a a <<< "$versions"
@@ -231,7 +234,6 @@ ci_sample(){
             local random_index
             random_index="$((RANDOM % highest_index))"
             echo "${a[$random_index]}"
-            return 0
         else
             return 1
         fi
