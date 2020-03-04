@@ -79,8 +79,8 @@ pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 echo "Installing Python PyPI Modules"
 echo
 
-if [ -n "${TRAVIS:-}" ]; then
-    echo "running in quiet mode"
+if is_CI; then
+    echo "running in quiet mode for CI to minimize log noise"
     opts="$opts -q"
 fi
 
