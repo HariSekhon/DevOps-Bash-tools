@@ -48,7 +48,7 @@ if [ -n "${PERLBREW_PERL:-}" ]; then
 #        I_lib+="-I $x "
 #    done
 
-    sudo=sudo
+    #sudo=""
     # gets this error when not specifying full perl path:
         # Can't load '/home/travis/perl5/perlbrew/perls/5.16/lib/5.16.3/x86_64-linux/auto/re/re.so' for module re: /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.3/x86_64-linux/auto/re/re.so: undefined symbol: PL_valid_types_IVX at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.3/XSLoader.pm line 68.
         # at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.3/x86_64-linux/re.pm line 85.
@@ -57,11 +57,14 @@ if [ -n "${PERLBREW_PERL:-}" ]; then
         # Compilation failed in require at ./check_riak_diag.pl line 25.
         # BEGIN failed--compilation aborted at ./check_riak_diag.pl line 25.
     #perl="$PERLBREW_ROOT/perls/$PERLBREW_PERL/bin/perl $I_lib"
+
+    # don't want dollars to expand
     # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 else
     PERL_VERSION="$(perl --version | grep -Eom 1 'v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' | sed 's/^v//')"
     sudo=""
+    # don't want dollars to expand
     # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 fi
