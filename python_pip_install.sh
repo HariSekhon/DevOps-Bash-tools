@@ -20,6 +20,9 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+. "$srcdir/lib/ci.sh"
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -85,17 +88,18 @@ if is_CI; then
 fi
 
 sudo=""
-if [ $EUID != 0 ] &&
-   [ -z "${VIRTUAL_ENV:-}" ] &&
-   [ -z "${CONDA_DEFAULT_ENV:-}" ]; then
+if [ -n "${VIRTUAL_ENV:-}" ] ||
+   [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
+    sudo=""
+elif [ $EUID != 0 ]; then
     sudo=sudo
 fi
 
 user_opt(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
-       [ -n "${CONDA_DEFAULT_ENV:-}" ] ||
-       [ -n "${GITHUB_WORKFLOW:-}" ]; then
+       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
+        sudo=""
     else
         opts="$opts --user"
         sudo=""
