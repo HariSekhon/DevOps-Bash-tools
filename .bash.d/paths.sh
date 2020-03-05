@@ -63,8 +63,12 @@ add_PATH(){
     path="${path%/}"
     if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
         # shellcheck disable=SC2140
-        export "$env_var"="${!env_var}:$path"
+        eval "$env_var"="${!env_var}:$path"
     fi
+    # to prevent Empty compile time value given to use lib at /Users/hari/perl5/lib/perl5/perl5lib.pm line 17.
+    #PERL5LIB="${PERL5LIB##:}"
+    eval "$env_var"="${!env_var##:}"
+    export "${env_var?env_var not defined in add_PATH}"
 }
 
 add_PATH "/bin"
@@ -171,8 +175,6 @@ fi
 if [ -d ~/perl5/bin ]; then
     add_PATH ~/perl5/bin
 fi
-# to prevent Empty compile time value given to use lib at /Users/hari/perl5/lib/perl5/perl5lib.pm line 17.
-PERL5LIB="${PERL5LIB##:}"
 
 alias lsperlbin='ls -d ~/perl5/bin/* 2>/dev/null'
 alias llperlbin='ls -ld ~/perl5/bin/* 2>/dev/null'
