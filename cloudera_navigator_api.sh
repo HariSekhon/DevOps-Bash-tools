@@ -69,7 +69,12 @@ shift
 
 api_version="${CLOUDERA_API_VERSION:-10}"
 
-"$srcdir/curl_auth.sh" -sS --connect-timeout 5 "$CLOUDERA_NAVIGATOR/api/v${api_version}${url_path}" "$@"
+quiet='-sS'
+if [ -n "${PROGRESS:-}" ]; then
+    quiet=''
+fi
+
+"$srcdir/curl_auth.sh" "$quiet" --connect-timeout 5 "$CLOUDERA_NAVIGATOR/api/v${api_version}${url_path}" "$@"
 result=$?
 echo
 exit "$result"
