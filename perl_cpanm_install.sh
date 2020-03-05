@@ -20,6 +20,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/ci.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/perl.sh"
+
 CPANM="${CPANM:-cpanm}"
 
 usage(){
@@ -85,6 +88,24 @@ if [ "$(uname -s)" = "Darwin" ]; then
         export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
         # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
         envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB"
+    fi
+
+    # auto CPATH fix for compiling XS modules with Mac's EXTERN.h
+    #
+    # solves this:
+    #
+    # ./xshelper.h:34:10: fatal error: 'EXTERN.h' file not found
+    # #include <EXTERN.h>
+    #          ^~~~~~~~~~
+    # 1 error generated.
+    #
+    for directory in /Library/Developer/CommandLineTools/SDKs/MacOSX*.sdk/System/Library/Perl/"$PERL_MAJOR_VERSION"/darwin-thread-multi-2level; do
+        if [ -f "$directory/CORE/EXTERN.h" ]; then
+            export CPATH="${CPATH:-}:$directory/CORE"
+        fi
+    done
+    if [ -n "${CPATH:-}" ]; then
+        envopts="${envopts} CPATH=$CPATH"
     fi
 fi
 
