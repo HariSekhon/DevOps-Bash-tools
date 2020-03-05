@@ -46,6 +46,7 @@ more official badges without logos to differentiate them
 [![Shippable](https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/devops-bash-tools/builds)
 [![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker)](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 
 (reload page if some of these badges fail to load - external supplier latency/loading is outside of my control)
 
