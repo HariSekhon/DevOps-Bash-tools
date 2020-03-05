@@ -22,7 +22,11 @@ set -euo pipefail
 
 count=0
 
-cat "$@" |
+if [ $# -gt 0 ]; then
+    "$@"
+else
+    cat
+fi |
 while read -r line; do
     ((count+=1))
     perl -e "if($count % 100 == 0){print STDERR '.'}"
