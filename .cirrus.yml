@@ -17,4 +17,4 @@ container:
   image: ubuntu:18.04
 
 task:
-  script: sudo apt update -qq && apt install -qy git make && make init && make ci test
+  script: apt update -qq && apt install -qy git make && make init && make ci test
