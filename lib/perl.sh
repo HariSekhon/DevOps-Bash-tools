@@ -43,10 +43,6 @@ if [ -n "${PERLBREW_PERL:-}" ]; then
 #        $PERLBREW_ROOT/perls/$PERLBREW_PERL/lib/$PERL_VERSION \
 #        | tr '\n' ':'
 #    )
-#
-#    for x in $(echo "$PERL5LIB" | tr ':' ' '); do
-#        I_lib+="-I $x "
-#    done
 
     #sudo=""
     # gets this error when not specifying full perl path:
@@ -56,6 +52,7 @@ if [ -n "${PERLBREW_PERL:-}" ]; then
         # BEGIN failed--compilation aborted at /home/travis/perl5/perlbrew/perls/5.16/lib/5.16.3/File/Basename.pm line 47.
         # Compilation failed in require at ./check_riak_diag.pl line 25.
         # BEGIN failed--compilation aborted at ./check_riak_diag.pl line 25.
+
     #perl="$PERLBREW_ROOT/perls/$PERLBREW_PERL/bin/perl $I_lib"
 
     # don't want dollars to expand
@@ -68,6 +65,13 @@ else
     # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 fi
+
+# because PERL5LIB is not respected in Taint mode, but -I is because it's more explicit
+for x in $(echo "$PERL5LIB" | tr ':' ' '); do
+    I_lib+="-I $x "
+done
+perl="$perl $I_lib"
+
 export sudo
 export PERL_VERSION
 export PERL_MAJOR_VERSION
