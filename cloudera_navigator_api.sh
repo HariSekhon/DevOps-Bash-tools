@@ -41,7 +41,11 @@ Environment variables (prompts for address and password if not passed via enviro
 \$CLOUDERA_NAVIGATOR_USER / \$CLOUDERA_USER / \$USER
 \$CLOUDERA_NAVIGATOR_PASSWORD / \$CLOUDERA_PASSWORD / \$USER
 
-./cloudera_navigator_api.sh /path
+    ./cloudera_navigator_api.sh /path
+
+If outputting to a file and wanting full curl interactive progress on stderr:
+
+     PROGRESS=1 ./cloudera_navigator_api.sh /path > file.txt
 
 Used by various adjacent cloudera_navigator_*.sh scripts
 
