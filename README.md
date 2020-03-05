@@ -48,7 +48,7 @@ more official badges without logos to differentiate them
 [![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker)](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 
-(reload page if some of these badges fail to load - external supplier latency/loading is outside of my control)
+(reload page if some of these badges fail to load - external supplier latency / loading is outside of my control)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
