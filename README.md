@@ -176,10 +176,11 @@ make install
 - `check_*.sh` - extensive collection of generalized tests that can be applied to any repo (these run against all my GitHub repos via CI)
 - `git*.sh` - various useful Git scripts, eg:
   - `git_for_each_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
-  - `git_update_repos_submodules.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merging master updates to all branches
   - `git_remotes_add_public_repos.sh` - auto-creates a checkout's remotes to the 3 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org))
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to all 3 major public repositories
+  - `git_repos_update.sh` - updates multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
+  - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
 - `github*.sh` - various useful GitHub scripts for querying the GitHub API including:
   - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for several other scripts that use the GitHub API. Built on top of `curl_auth.sh`
   - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key_api.sh` - fetches GitHub users public SSH keys for quick local installation to `~/.ssh/authorized_keys`
