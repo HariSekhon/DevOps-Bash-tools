@@ -66,8 +66,10 @@ else
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 fi
 
+I_lib=""
+PERL5LIB="${PERL5LIB:-}"
 # because PERL5LIB is not respected in Taint mode, but -I is because it's more explicit
-for x in $(echo "$PERL5LIB" | tr ':' ' '); do
+for x in ${PERL5LIB//:/ }; do
     I_lib+="-I $x "
 done
 perl="$perl $I_lib"
