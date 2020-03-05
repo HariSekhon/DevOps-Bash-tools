@@ -15,6 +15,10 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/ci.sh"
 
 CPANM="${CPANM:-cpanm}"
 
@@ -85,9 +89,11 @@ if [ "$(uname -s)" = "Darwin" ]; then
 fi
 
 sudo=""
-if [ $EUID != 0 ] &&
-   [ -z "${PERLBREW_PERL:-}" ] &&
-   [ -z "${GOOGLE_CLOUD_SHELL:-}" ]; then
+if [ -n "${PERL_USER_INSTALL:-}" ] ||
+   [ -n "${PERLBREW_PERL:-}" ] ||
+   [ -n "${GOOGLE_CLOUD_SHELL:-}" ]; then
+    sudo=""
+elif [ $EUID != 0 ]; then
     sudo=sudo
 fi
 
