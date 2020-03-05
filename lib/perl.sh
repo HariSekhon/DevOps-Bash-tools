@@ -60,9 +60,11 @@ if [ -n "${PERLBREW_PERL:-}" ]; then
     # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 else
+    PERL_VERSION="$(perl --version | grep -Eom 1 'v[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' | sed 's/^v//')"
     sudo=""
     # shellcheck disable=SC2016
     PERL_MAJOR_VERSION="$($perl -v | $perl -ne '/This is perl (\d+), version (\d+),/ && print "$1.$2"')"
 fi
 export sudo
+export PERL_VERSION
 export PERL_MAJOR_VERSION
