@@ -68,7 +68,7 @@
 #
 # or if you want full curl interactive progress on stderr:
 #
-#   PROGRESS=1  ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
+#   PROGRESS=1 ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
 #
 #
 # XXX: looks like there is a bug in the Navigator API returning only admin for when start date set to 1970-01-01T00:00:00 - workaround is to use 1970-01-01T00:00:01
