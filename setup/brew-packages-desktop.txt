@@ -87,6 +87,8 @@ maven-completion
 mercurial
 midnight-commander
 mosh
+# nagios-plugins clashes
+monitoring-plugins
 mplayer
 mtr
 mysql
