@@ -190,7 +190,7 @@ make install
   - `perl_find_library_path.sh` - finds directory where a CPAN module is installed - without args finds the Perl library base
   - `perl_find_library_executable.sh` - finds directory where a CPAN module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
   - `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
-  - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN module listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
+  - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
   - `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
 - `python*.sh` - various Python utilities eg:
   - `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
