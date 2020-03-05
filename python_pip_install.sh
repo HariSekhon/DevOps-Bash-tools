@@ -22,6 +22,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+# shellcheck disable=SC1090
 . "$srcdir/lib/ci.sh"
 
 if [ -n "${PIP:-}" ]; then
