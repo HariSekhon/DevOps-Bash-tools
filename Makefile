@@ -192,6 +192,10 @@ npm::
 aws: system-packages
 	@setup/install_aws_cli.sh
 
+.PHONY: azure
+azure: system-packages
+	@setup/install_azure_cli.sh
+
 .PHONY: gcp
 gcp: system-packages
 	@./setup/install_gcloud.sh
