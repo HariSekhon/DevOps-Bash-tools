@@ -50,10 +50,12 @@ download_audit_logs(){
     echo "Querying Cloudera Navigator for $year logs for $service"
     time "$srcdir/cloudera_navigator_audit.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
     local compressed_log="$log.bz2"
-    echo "Compressing audit log:  $log > $compressed_log"
-    # want splitting
-    # shellcheck disable=SC2086
-    $compress_cmd "$log" > "$compressed_log" &
+    if [ -s "$log" ]; then
+        echo "Compressing audit log:  $log > $compressed_log"
+        # want splitting
+        # shellcheck disable=SC2086
+        $compress_cmd "$log" > "$compressed_log" &
+    fi
 }
 
 # works on Mac but seq on Linux doesn't do reverse, outputs nothing
