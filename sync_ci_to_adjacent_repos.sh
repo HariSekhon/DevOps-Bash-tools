@@ -35,13 +35,13 @@ while read -r repo dir; do
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    for filename in $(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/ci.txt"); do
+    while read -r filename; do
         target="../$dir/$filename"
         echo "syncing $filename -> $target"
         sed "s,/bash-tools,/$repo," "$filename" > "$target"
         if [ "$repo" = "nagios-plugins" ]; then
             perl -pi -e 's/(^[[:space:]]+make ci$)/\1 ci zookeeper-retry/' "$target"
         fi
-    done
+    done < <(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/ci.txt")
 done
 "$srcdir/.github/workflows/sync_to_adjacent_repos.sh"
