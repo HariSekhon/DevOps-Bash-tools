@@ -21,7 +21,13 @@ echo "Installing Azure CLI"
 echo
 
 sudo=""
-[ $EUID -eq 0 ] || sudo=sudo
+if [ $EUID != 0 ]; then
+    sudo=sudo
+    if ! type -P "$sudo" &>/dev/null; then
+        echo "not root and $sudo command not available, skipping Azure CLI install"
+        exit 0
+    fi
+fi
 
 uname_s="$(uname -s)"
 #mkdir -p ~/bin
@@ -59,7 +65,6 @@ install_azure_cli(){
 if type -P az &>/dev/null; then
     echo "Azure CLI already installed"
 else
-    echo "Installing Azure CLI"
     install_azure_cli
     echo
 fi
