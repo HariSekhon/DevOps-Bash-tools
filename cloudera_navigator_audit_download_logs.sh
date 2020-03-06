@@ -63,7 +63,10 @@ download_audit_logs(){
         else
             log_size="$(stat -c %s "$log")"
         fi
-        if [ "$log_size" -gt 10240 ]; then
+        if [ "$log_size" = 558 ]; then
+            echo "Skipping $log since it has only headers there are no logs for that date range"
+            return 0
+        elif [ "$log_size" -gt 10240 ]; then
             echo "Skipping $log since it already exists and is > 10MB"
             return 0
         fi
