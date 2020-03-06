@@ -43,12 +43,13 @@ if [[ "${1:-}" =~ ^service== ]]; then
 fi
 
 download_audit_logs(){
-    local year="$1"; shift
-    local service="$2"; shift
-    log="navigator_audit_${service}_${year}.csv"
+    local year="$1"
+    local service="$2"
+    shift; shift
+    local log="navigator_audit_${service}_${year}.csv"
     echo "Querying Cloudera Navigator for $year logs for $service"
     time "$srcdir/cloudera_navigator_audit.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
-    compressed_log="$log.bz2"
+    local compressed_log="$log.bz2"
     echo "Compressing audit log:  $log > $compressed_log"
     # want splitting
     # shellcheck disable=SC2086
