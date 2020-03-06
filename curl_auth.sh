@@ -46,6 +46,7 @@ check_bin curl
 
 USERNAME="${USERNAME:-$USER}"
 
+# Only do password mechanism and netrc_contents workaround if not using Kerberos
 if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
     if [ -z "${PASSWORD:-}" ]; then
         pass
@@ -54,9 +55,10 @@ if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
 # ==============================================
 # option 1
 
-    netrc_contents="default login $USERNAME password $PASSWORD"
-
-fi
+    # works on Mac but not on Linux, so going back to parsing the hostname and dynamic loading
+    # curl 7.64.1 (x86_64-apple-darwin19.0) libcurl/7.64.1 (SecureTransport) LibreSSL/2.8.3 zlib/1.2.11 nghttp2/1.39.2
+    # curl 7.35.0 (x86_64-pc-linux-gnu) libcurl/7.35.0 OpenSSL/1.0.1f zlib/1.2.8 libidn/1.28 librtmp/2.3
+    #netrc_contents="default login $USERNAME password $PASSWORD"
 
 # ==============================================
 # option 2
@@ -76,11 +78,13 @@ fi
 
 # Instead of generating this for all known hosts above just do it for the host extracted from the args url now
 
-#host="$(grep -o '://[^\/[:space:]]\+' <<< "$*" | sed 's,://,,')"
+host="$(grep -om 1 '://[^:\/[:space:]]\+' <<< "$*" | sed 's,://,,')"
 
-#netrc_contents="machine $host login $USERNAME password $PASSWORD"
+netrc_contents="machine $host login $USERNAME password $PASSWORD"
 
 # ==============================================
+
+fi
 
 if [ -n "${KRB5:-${KERBEROS:-}}" ]; then
     curl -u : --negotiate "$@"
