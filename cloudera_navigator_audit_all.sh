@@ -13,7 +13,9 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to download all audit logs from Cloudera Navigator
+# Script to download all historical audit logs from Cloudera Navigator from 2009 to present
+#
+# 2009 was Cloudera's founding year so we don't search for history past that since it can never exist
 #
 # Uses adjacent cloudera_manager_audit.sh, see comments there for more details
 #
@@ -64,6 +66,7 @@ download_audit_logs(){
 
 # works on Mac but seq on Linux doesn't do reverse, outputs nothing
 #for year in $(seq "$current_year" 2009); do
+
 # On Mac tac requires gnu coreutils to be installed via Homebrew
 for year in $(seq 2009 "$current_year" | tac); do
     if [ -n "${single_service:-}" ]; then
