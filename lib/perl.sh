@@ -15,10 +15,10 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+srcdir_bash_tools_perl="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-source "$srcdir/ci.sh"
+source "$srcdir_bash_tools_perl/ci.sh"
 
 # Taint code doesn't use PERL5LIB, use -I instead
 #I_lib=""
