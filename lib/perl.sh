@@ -15,6 +15,10 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+source "$srcdir/ci.sh"
 
 # Taint code doesn't use PERL5LIB, use -I instead
 #I_lib=""
@@ -23,6 +27,19 @@ perl="perl"
 
 # shellcheck disable=SC2230
 if ! type -P $perl &>/dev/null; then
+    if is_CI; then
+        if is_mac; then
+            find="gfind"
+        else
+            find="find"
+        fi
+        echo "WARNING: $perl not found in \$PATH ($PATH)"
+        echo
+        echo "searching filesystem for Perl:"
+        echo
+        "$find" / -type f -name perl -executable 2>/dev/null
+        echo
+    fi >&2
     return 0 &>/dev/null || :
     exit 0
 fi
