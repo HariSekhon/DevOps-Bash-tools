@@ -53,13 +53,14 @@ define MAKEFILE_USAGE
     make status                 open the Github Status page of all my repos build statuses across all CI platforms
 
     make aws                    installs AWS CLI tools
+    make azure                  installs Azure CLI
     make gcp                    installs GCloud SDK
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
 								(future boots then auto-install system packages via .customize_environment hook)
 endef
 
 .PHONY: build
-build: init system-packages aws
+build: init system-packages aws azure
 	@:
 
 .PHONY: init
