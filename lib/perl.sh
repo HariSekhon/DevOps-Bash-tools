@@ -89,7 +89,8 @@ PERL5LIB="${PERL5LIB:-}"
 for x in ${PERL5LIB//:/ }; do
     I_lib+="-I $x "
 done
-perl="$perl $I_lib"
+# this breaks a lot of stuff because client code rightly assumes to run "$perl"
+#perl="$perl $I_lib"
 
 export sudo
 export PERL_VERSION
