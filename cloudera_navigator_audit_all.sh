@@ -47,6 +47,10 @@ download_audit_logs(){
     local service="$2"
     shift; shift
     local log="navigator_audit_${service}_${year}.csv"
+    if [ -s "$log" ]; then
+        echo "Skipping $log since it already exists"
+        return 0
+    fi
     echo "Querying Cloudera Navigator for $year logs for $service"
     time "$srcdir/cloudera_navigator_audit.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
     local compressed_log="$log.bz2"
