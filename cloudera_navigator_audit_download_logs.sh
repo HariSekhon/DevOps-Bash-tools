@@ -52,6 +52,9 @@ download_audit_logs(){
     local service="$2"
     shift; shift
     local log="navigator_audit_${year}_${service}.csv"
+    # expand now
+    # shellcheck disable=SC2064
+    trap "echo ERROR >&2; printf 'Removing partial log file for restartability without audit gaps: ' >&2; rm -fv '$log'" exit
     # a single newline in the log file trips this so make sure we have what looks like enough data
     if [ -s "$log" ]; then
         local log_size
