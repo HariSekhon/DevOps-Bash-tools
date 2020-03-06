@@ -43,10 +43,6 @@ Environment variables (prompts for address and password if not passed via enviro
 
     ./cloudera_navigator_api.sh /path
 
-If outputting to a file and wanting full curl interactive progress on stderr:
-
-     PROGRESS=1 ./cloudera_navigator_api.sh /path > file.txt
-
 Used by various adjacent cloudera_navigator_*.sh scripts
 
 Tested on Cloudera Enterprise 5.10
@@ -73,12 +69,7 @@ shift
 
 api_version="${CLOUDERA_API_VERSION:-10}"
 
-quiet='-sS'
-if [ -n "${PROGRESS:-}" ]; then
-    quiet=''
-fi
-
-"$srcdir/curl_auth.sh" "$quiet" --connect-timeout 5 "$CLOUDERA_NAVIGATOR/api/v${api_version}${url_path}" "$@"
+"$srcdir/curl_auth.sh" --fail -sS --connect-timeout 5 "$CLOUDERA_NAVIGATOR/api/v${api_version}${url_path}" "$@"
 result=$?
 echo
 exit "$result"

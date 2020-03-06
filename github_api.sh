@@ -67,4 +67,4 @@ url_path="${url_path##/}"
 
 shift
 
-eval "$srcdir/curl_auth.sh" -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/$url_path" "$@"
+eval "$srcdir/curl_auth.sh" --fail -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/$url_path" "$@"
