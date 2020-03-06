@@ -64,6 +64,13 @@ fi
 if is_CI; then
     echo "running in CI quiet mode"
     opts="$opts -qq"
+    echo "/etc/apt/sources.list:"
+    cat /etc/apt/sources.list
+    for x in /etc/apt/sources.list.d/*; do
+        [ -f "$x" ] || continue
+        echo "$x:"
+        cat "$x"
+    done
 fi
 
 packages=""
