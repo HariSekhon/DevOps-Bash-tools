@@ -20,6 +20,13 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+LINES_PER_DOT="${LINES_PER_DOT:-100}"
+
+if ! [[ "$LINES_PER_DOT" =~ ^[[:digit:]]+$ ]]; then
+    echo "LINES_PER_DOT must be an integer!" >&2
+    exit 1
+fi
+
 count=0
 
 if [ $# -gt 0 ]; then
@@ -29,6 +36,6 @@ else
 fi |
 while read -r line; do
     ((count+=1))
-    perl -e "if($count % 100 == 0){print STDERR '.'}"
+    perl -e "if($count % $LINES_PER_DOT == 0){print STDERR '.'}"
     printf "%s\n" "$line"
 done
