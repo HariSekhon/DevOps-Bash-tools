@@ -134,7 +134,7 @@ default:
 printenv:
 	@printf "CPU Cores: "; nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null; :
 	@. $(BASH_TOOLS)/lib/ci.sh || : ; \
-		if is_CI; then \
+		if is_CI || test -f /.dockerenv; then \
 			echo; echo "USER = $$USER"; \
 			echo; echo "PWD = $$PWD"; \
 			echo; ls -l /.dockerenv 2>/dev/null || : ; \
