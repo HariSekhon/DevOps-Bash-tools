@@ -68,6 +68,3 @@ shift
 api_version="${CLOUDERA_API_VERSION:-7}"
 
 "$srcdir/curl_auth.sh" --fail -sS --connect-timeout 5 "$CLOUDERA_MANAGER/api/v${api_version}${url_path}" "$@"
-result=$?
-echo
-exit "$result"
