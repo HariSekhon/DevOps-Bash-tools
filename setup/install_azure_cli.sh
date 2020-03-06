@@ -23,7 +23,7 @@ echo
 sudo=""
 if [ $EUID != 0 ]; then
     sudo=sudo
-    #if ! type -P "$sudo" &>/dev/null; then
+    #if ! type -P $sudo &>/dev/null; then
     #    echo "not root and $sudo command not available, skipping Azure CLI install"
     #    exit 0
     #fi
@@ -37,21 +37,21 @@ uname_s="$(uname -s)"
 
 install_azure_cli(){
     if type -P apt-get &>/dev/null; then
-        curl -sL https://aka.ms/InstallAzureCLIDeb | "$sudo" bash
+        curl -sL https://aka.ms/InstallAzureCLIDeb | $sudo bash
     elif type -P yum &>/dev/null; then
 		# Needs Python 3
 		if ! type -P python3 &>/dev/null; then
 			echo "Python 3 dependency not found, skipping"
 			exit 0
 		fi
-        "$sudo" rpm --import https://packages.microsoft.com/keys/microsoft.asc
-		"$sudo" sh -c 'echo -e "[azure-cli]
+        $sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+		$sudo sh -c 'echo -e "[azure-cli]
 		name=Azure CLI
 		baseurl=https://packages.microsoft.com/yumrepos/azure-cli
 		enabled=1
 		gpgcheck=1
 		gpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
-		"$sudo" yum install azure-cli
+		$sudo yum install azure-cli
 	elif [ "$uname_s" = Darwin ]; then
 		brew install azure-cli
 	elif [ "$uname_s" = Linux ]; then
