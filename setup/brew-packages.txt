@@ -13,6 +13,7 @@
 #                    Mac OS X - Homebrew Package Requirements
 # ============================================================================ #
 
+azure-cli
 cmake
 coreutils
 cpanm
