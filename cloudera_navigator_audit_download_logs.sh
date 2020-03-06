@@ -51,7 +51,7 @@ download_audit_logs(){
     local year="$1"
     local service="$2"
     shift; shift
-    local log="navigator_audit_${service}_${year}.csv"
+    local log="navigator_audit_${year}_${service}.csv"
     # a single newline in the log file trips this so make sure we have what looks like enough data
     if [ -s "$log" ]; then
         local log_size
