@@ -25,6 +25,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+source "$srcdir/lib/utils.sh"
+
 trap 'echo ERROR >&2' exit
 
 services="
@@ -49,9 +52,18 @@ download_audit_logs(){
     local service="$2"
     shift; shift
     local log="navigator_audit_${service}_${year}.csv"
+    # a single newline in the log file trips this so make sure we have what looks like enough data
     if [ -s "$log" ]; then
-        echo "Skipping $log since it already exists"
-        return 0
+        local log_size
+        if is_mac; then
+            log_size="$(stat -f %z "$log")"
+        else
+            log_size="$(stat -c %s "$log")"
+        fi
+        if [ "$log_size" -gt 10240 ]; then
+            echo "Skipping $log since it already exists and is > 10MB"
+            return 0
+        fi
     fi
     echo "Querying Cloudera Navigator for $year logs for $service"
     time "$srcdir/cloudera_navigator_audit.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
