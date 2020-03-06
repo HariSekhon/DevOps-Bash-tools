@@ -27,6 +27,7 @@ fedora
 ubuntu
 ubuntu:18.04
 gentoo/stage3-amd64
+mcr.microsoft.com/azure-cli
 google/cloud-sdk
 harisekhon/github
 harisekhon/pytools
