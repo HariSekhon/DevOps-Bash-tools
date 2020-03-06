@@ -23,7 +23,8 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 #type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
-assh(){
+# assh is an alias to awless ssh
+azssh(){
     local ip
     ip="$(az vm show --name "$1" -d --query "[publicIps]" -o tsv)"
     ssh azureuser@"$ip"
