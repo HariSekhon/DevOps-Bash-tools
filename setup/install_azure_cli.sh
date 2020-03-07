@@ -45,6 +45,10 @@ install_azure_cli(){
 #            echo "Python 3 dependency not found, skipping"
 #            exit 0
 #        fi
+        if ! yum list python3 &>/dev/null; then
+            echo "Python 3 not available in package repos, cannot install Azure CLI, skipping..."
+            exit 0
+        fi
         $sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
         $sudo cat > /etc/yum.repos.d/azure-cli.repo <<EOF
 [azure-cli]
