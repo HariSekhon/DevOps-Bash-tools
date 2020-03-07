@@ -156,7 +156,7 @@ build-retry:
 
 .PHONY: main
 main: printenv
-	@$(MAKE) build test
+	@$(MAKE) build
 
 .PHONY: help
 help:
