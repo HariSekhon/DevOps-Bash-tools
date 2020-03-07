@@ -63,14 +63,26 @@ if [ -f /.dockerenv ]; then
 fi
 if is_CI; then
     echo "running in CI quiet mode"
-    opts="$opts -qq"
+    opts="$opts -q"
+    echo
     echo "/etc/apt/sources.list:"
     cat /etc/apt/sources.list
+    echo
     for x in /etc/apt/sources.list.d/*; do
         [ -f "$x" ] || continue
         echo "$x:"
         cat "$x"
+        echo
     done
+    # workaround to broken repos
+    # W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://downloads.apache.org/cassandra/debian 311x InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E91335D77E3E87CB
+    # W: GPG error: http://dl.yarnpkg.com/debian stable Release: The following signatures were invalid: KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983  KEYEXPIRED 1580619281  KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983  KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983
+    # E: The repository 'http://dl.yarnpkg.com/debian stable Release' is no longer signed.
+    # bash-tools/Makefile.in:272: recipe for target 'apt-packages' failed
+    if is_shippable_ci; then
+        rm -fv /etc/apt/sources.list.d/cassandra.sources.list*
+        rm -fv /etc/apt/sources.list.d/yarn.list*
+    fi
 fi
 
 packages=""
