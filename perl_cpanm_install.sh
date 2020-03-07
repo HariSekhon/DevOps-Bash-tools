@@ -130,7 +130,7 @@ else
     # want splitting of opts and modules
     # shellcheck disable=SC2086
     if ! eval $sudo $envopts "$CPANM" --notest $opts $cpan_modules; then
-        find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs cat
+        $sudo find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs $sudo cat
         exit 1
     fi
 fi
