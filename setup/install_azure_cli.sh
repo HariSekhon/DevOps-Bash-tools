@@ -58,7 +58,7 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
-        $sudo yum install azure-cli
+        $sudo yum install -y azure-cli
     elif [ "$uname_s" = Darwin ]; then
         brew install azure-cli
     elif [ "$uname_s" = Linux ]; then
