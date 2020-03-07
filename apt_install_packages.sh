@@ -83,6 +83,9 @@ if is_CI; then
         rm -fv /etc/apt/sources.list.d/cassandra.sources.list*
         rm -fv /etc/apt/sources.list.d/yarn.list*
     fi
+    if is_appveyor; then
+        sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server|d'
+    fi
 fi
 
 packages=""
