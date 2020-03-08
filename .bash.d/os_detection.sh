@@ -76,3 +76,4 @@ isAzureCloudShell(){
 isLinux || :
 isMac || :
 isGoogleCloudShell || :
+isAzureCloudShell || :
