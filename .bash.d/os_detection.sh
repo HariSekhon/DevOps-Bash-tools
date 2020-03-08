@@ -16,6 +16,7 @@
 type isLinux &>/dev/null &&
 type isMac &>/dev/null &&
 type isGoogleCloudShell &>/dev/null &&
+type isAzureCloudShell &>/dev/null &&
 return
 
 get_os(){
@@ -55,6 +56,17 @@ isGoogleCloudShell(){
     #if [ -n "${GOOGLE_CLOUD_PROJECT:-}" ]; then
     if [ -n "${DEVSHELL_PROJECT_ID:-}" ]; then
         export GOOGLE_CLOUD_SHELL=1
+        return 0
+    fi
+    return 1
+}
+
+isAzureCloudShell(){
+    [ -n "${AZURE_CLOUD_SHELL:-}"  ] && return 0
+    get_os
+    [ "$operating_system" = Linux ] || return 1
+    if [ -n "${ACC_TERM_ID:-}" ]; then
+        export AZURE_CLOUD_SHELL=1
         return 0
     fi
     return 1
