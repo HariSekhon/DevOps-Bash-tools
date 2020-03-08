@@ -5,10 +5,10 @@ Hari Sekhon - DevOps Bash Tools
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/devops-bash-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/devops-bash-tools)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
-[![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/network)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
+[![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools.svg)](https://github.com/harisekhon/devops-bash-tools/network)
 <!-- doesn't detect shell code properly
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 -->
