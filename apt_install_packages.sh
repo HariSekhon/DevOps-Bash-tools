@@ -56,6 +56,11 @@ if ! type "$apt" >/dev/null 2>&1; then
     exit 1
 fi
 
+sudo=""
+# $EUID is not defined in posix sh
+# shellcheck disable=SC2039
+[ "${EUID:-$(id -u)}" != 0 ] && sudo=sudo
+
 opts=""
 if [ -f /.dockerenv ]; then
     echo "running inside docker, not installing recommended extra packages unless specified to save space"
@@ -97,8 +102,8 @@ if is_CI; then
     #  make[2]: *** [apt-packages] Error 123
     #  make[2]: Leaving directory '/home/appveyor/projects/pylib'
     #  bash-tools/Makefile.in:212: recipe for target 'system-packages' failed
-    if is_appveyor; then
-        sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d'
+    if is_appveyor && [ -f /etc/apt/sources.list ]; then
+        $sudo sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d' /etc/apt/sources.list
     fi
 fi
 
@@ -130,20 +135,15 @@ fi
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
-SUDO=""
-# $EUID is not defined in posix sh
-# shellcheck disable=SC2039
-[ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
-
 # shellcheck disable=SC2086
-[ -n "${NO_UPDATE:-}" ] || $SUDO "$apt" $opts update
+[ -n "${NO_UPDATE:-}" ] || $sudo "$apt" $opts update
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
     for package in $packages; do
-        $SUDO "$apt" install -y $opts "$package" || :
+        $sudo "$apt" install -y $opts "$package" || :
     done
 else
     # shellcheck disable=SC2086
-    $SUDO "$apt" install -y $opts $packages
+    $sudo "$apt" install -y $opts $packages
 fi
