@@ -90,7 +90,7 @@ fi
 
 sudo=""
 if [ -n "${VIRTUAL_ENV:-}" ] ||
-   [ -n "${PYENV_ROOT:-}" ] ||
+   #[ -n "${PYENV_ROOT:-}" ] ||
    [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
     sudo=""
 elif [ $EUID != 0 ]; then
