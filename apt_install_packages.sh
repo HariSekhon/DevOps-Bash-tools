@@ -98,7 +98,7 @@ if is_CI; then
     #  make[2]: Leaving directory '/home/appveyor/projects/pylib'
     #  bash-tools/Makefile.in:212: recipe for target 'system-packages' failed
     if is_appveyor; then
-        sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server|d'
+        sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d'
     fi
 fi
 
