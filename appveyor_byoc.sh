@@ -22,6 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if ! type -P pwsh &>/dev/null; then
     "$srcdir/setup/install_appveyor_byoc.sh"
+    clear
 fi
 
 if [ -z "${APPVEYOR_TOKEN:-}" ]; then
