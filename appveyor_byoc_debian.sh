@@ -22,4 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "$srcdir"
 
+if [ -z "${APPVEYOR_TOKEN:-}" ]; then
+    echo "\$APPVEYOR_TOKEN not found in environment"
+    exit 1
+fi
+
 docker run -ti --rm -e APPVEYOR_TOKEN -v $PWD:/pwd -w /pwd debian:9 ./appveyor_byoc.sh
