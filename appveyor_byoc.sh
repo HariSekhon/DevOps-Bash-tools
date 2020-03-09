@@ -20,18 +20,18 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 #. "$srcdir/lib/utils.sh"
 
+if [ -z "${APPVEYOR_TOKEN:-}" ]; then
+    echo "\$APPVEYOR_TOKEN not found in environment"
+    exit 1
+fi
+
 if ! type -P pwsh &>/dev/null; then
     "$srcdir/setup/install_appveyor_byoc.sh"
     clear
 fi
 
 if ! type -P sudo &>/dev/null; then
-    "$srcdir/install_packages.sh" sudo sysvinit-tools
-fi
-
-if [ -z "${APPVEYOR_TOKEN:-}" ]; then
-    echo "\$APPVEYOR_TOKEN not found in environment"
-    exit 1
+    "$srcdir/install_packages.sh" sudo sysvinit-utils  # sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
 fi
 
 # leading whitespace break PowerShell commands
