@@ -17,6 +17,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
 echo "Installing Azure CLI"
 echo
@@ -58,15 +59,19 @@ enabled=1
 gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
-        $sudo yum install -y azure-cli
+        "$srcdir/../yum_install_packages.sh" azure-cli
     elif [ "$uname_s" = Darwin ]; then
         brew install azure-cli
     elif [ "$uname_s" = Linux ]; then
+        if ! [ -t 1 ]; then
+            echo "Non-interactive terminal, cannot install Azure CLI using Microsoft's install script as it assumes to pass /dev/tty to second-level python script, skipping..."
+            exit 0
+        fi
         if type -P apk &>/dev/null; then
             # only works on Alpine 3 - Alpine 2.x doesn't support --no-cache and nor does it have Python 3 package dependency which Azure CLI requires
-            $sudo apk add --no-cache curl python3 python3-dev alpine-sdk musl-dev libffi-dev openssl-dev
+            "$srcdir/../apk_install_packages.sh" curl python3 python3-dev alpine-sdk musl-dev libffi-dev # openssl-dev conflicts with libressl-dev
         fi
-        yes | curl -L https://aka.ms/InstallAzureCli | $sudo bash
+        yes "" | curl -L https://aka.ms/InstallAzureCli | $sudo bash
     echo
         echo "OS '$uname_s' is not Mac / Linux - not supported"
         exit 1
