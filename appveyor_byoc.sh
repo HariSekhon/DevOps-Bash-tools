@@ -21,7 +21,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #. "$srcdir/lib/utils.sh"
 
 if ! type -P pwsh &>/dev/null; then
-    "$srcdir/install_appveyor_byoc.sh"
+    "$srcdir/setup/install_appveyor_byoc.sh"
 fi
 
 if [ -z "${APPVEYOR_TOKEN:-}" ]; then
@@ -29,6 +29,7 @@ if [ -z "${APPVEYOR_TOKEN:-}" ]; then
     exit 1
 fi
 
+# leading whitespace break PowerShell commands
 pwsh <<EOF
-    Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken "$APPVEYOR_TOKEN"
+Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken $APPVEYOR_TOKEN
 EOF
