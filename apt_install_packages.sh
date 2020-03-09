@@ -104,6 +104,7 @@ if is_CI; then
     #  bash-tools/Makefile.in:212: recipe for target 'system-packages' failed
     if is_appveyor && [ -f /etc/apt/sources.list ]; then
         $sudo sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d' /etc/apt/sources.list
+        apt-get purge -y mssql-server
     fi
 fi
 
