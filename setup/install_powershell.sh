@@ -24,6 +24,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/../lib/utils.sh"
 
+if type -P pwsh &>/dev/null; then
+    echo "PowerShell is already installed"
+    exit 0
+fi
+
 if is_mac; then
     brew cask install powershell
 elif is_linux; then
