@@ -72,7 +72,7 @@ download_audit_logs(){
         fi
     fi
     echo "Querying Cloudera Navigator for $year logs for $service"
-    time "$srcdir/cloudera_navigator_audit.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
+    time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
     local compressed_log="$log.bz2"
     if [ -s "$log" ]; then
         echo "Compressing audit log:  $log > $compressed_log"
