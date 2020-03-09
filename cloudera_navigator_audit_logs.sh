@@ -33,45 +33,45 @@
 
 # Usage:
 #
-#   ./cloudera_navigator_audit.sh <start_date> <end_date> <query_filter> <curl_options> ...
+#   ./cloudera_navigator_audit_logs.sh <start_date> <end_date> <query_filter> <curl_options> ...
 
 # Examples:
 #
 # All logs up to now:
 #
-#   ./cloudera_navigator_audit.sh <query> ... > navigator_audit_log.csv
+#   ./cloudera_navigator_audit_logs.sh <query> ... > navigator_audit_log.csv
 #
 #
 # Last year of Impala queries (literally today minus 1 year right down to the second):
 #
-#   ./cloudera_navigator_audit.sh "1 year ago" service==impala ... > navigator_audit_log_year.csv
+#   ./cloudera_navigator_audit_logs.sh "1 year ago" service==impala ... > navigator_audit_log_year.csv
 #
 #
 # All Privilege Grants up to now:
 #
-#   ./cloudera_navigator_audit.sh command==GRANT_PRIVILEGE > navigator_audit_log_grants.csv
+#   ./cloudera_navigator_audit_logs.sh command==GRANT_PRIVILEGE > navigator_audit_log_grants.csv
 #
-#   ./cloudera_navigator_audit.sh command==REVOKE_PRIVILEGE > navigator_audit_log_revokes.csv
+#   ./cloudera_navigator_audit_logs.sh command==REVOKE_PRIVILEGE > navigator_audit_log_revokes.csv
 #
 #
 # From Start to End Dates, all hive queries in 2019:
 #
-#   ./cloudera_navigator_audit.sh "2019-01-01T00:00:00" "2020-01-01T00:00:00" service==hive ... > navigator_audit_log_hive_2019.csv
+#   ./cloudera_navigator_audit_logs.sh "2019-01-01T00:00:00" "2020-01-01T00:00:00" service==hive ... > navigator_audit_log_hive_2019.csv
 #
 #
 # All logs up to now for the Impala service, ignoring the self-signed certificate:
 #
-#   ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
+#   ./cloudera_navigator_audit_logs.sh service==impala -k > navigator_audit_log_impala.csv
 #
 #
 # Since this can easily take an hour or two per year of logs to download, you may want to add progress dots like so:
 #
-#   ./cloudera_navigator_audit.sh service==impala -k | ./progress_dots.sh > navigator_audit_log_impala.csv
+#   ./cloudera_navigator_audit_logs.sh service==impala -k | ./progress_dots.sh > navigator_audit_log_impala.csv
 #
 #
 # or if you want full curl interactive progress on stderr:
 #
-#   PROGRESS=1 ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
+#   PROGRESS=1 ./cloudera_navigator_audit_logs.sh service==impala -k > navigator_audit_log_impala.csv
 #
 #
 # XXX: looks like there is a bug in the Navigator API returning only admin commands, not data access, for when start date set to 1970-01-01T00:00:00 - workaround is to use 1970-01-01T00:00:01
