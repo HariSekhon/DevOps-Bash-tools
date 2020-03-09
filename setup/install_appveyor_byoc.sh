@@ -23,6 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$srcdir/install_powershell.sh"
 
+# leading whitespace break PowerShell commands
 pwsh << EOF
 Install-Module AppVeyorBYOC -Scope CurrentUser -Force; Import-Module AppVeyorBYOC
 EOF
