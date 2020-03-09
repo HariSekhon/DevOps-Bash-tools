@@ -22,6 +22,10 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/ci.sh"
 
 usage(){
     echo "Installs Alpine APK package lists"
@@ -70,18 +74,24 @@ fi
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
-SUDO=""
+sudo=""
 # $EUID isn't available in /bin/sh in Alpine
 # shellcheck disable=SC2039
-[ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
+[ "${EUID:-$(id -u)}" != 0 ] && sudo=sudo
 
-[ -n "${NO_UPDATE:-}" ] || $SUDO apk update
+opts=""
+if is_CI; then
+    #opts="--quiet"  # doesn't print packages installed but still has a progress bar
+    opts="--no-progress"  # prints packages installed but not progress bar filling up logs
+fi
+
+[ -n "${NO_UPDATE:-}" ] || $sudo apk update $opts
 
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $packages; do
-        $SUDO apk add "$package" || :
+        $sudo apk add $opts "$package" || :
     done
 else
     # shellcheck disable=SC2086
-    $SUDO apk add $packages
+    $sudo apk add $opts $packages
 fi
