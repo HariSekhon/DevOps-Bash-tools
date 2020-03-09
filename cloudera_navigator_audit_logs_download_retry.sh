@@ -13,7 +13,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Cloudera Navigator fails to download some logs, so set it to loop retry the adjacent script cloudera_navigator_audit_logs_download.sh
+# Cloudera Navigator fails to download some logs but silently fails without an error or outputting anything, not even the headers
+# so this script loop retries the adjacent script cloudera_navigator_audit_logs_download.sh and checks for zero byte CSVs audit logs and retries
+# until they're all downloaded. In practice, some logs repeatedly get zero bytes so this isn't entirely effective have to cut your losses on the
+# logs that refused to extract from Navigator. Ironically older logs output the headers but not logs, at least indicating that there are no logs
+# rather than just giving blank output which is almost certainly another Cloudera bug
 #
 # Tested on Cloudera Enterprise 5.10
 
@@ -21,12 +25,20 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+sleep_secs=60
+
+stat_size="stat -c %s"
+if [ "$(uname -s)" = Darwin ]; then
+    stat_size="stat -f %z"
+fi
+
 time while true; do
     time "$srcdir/cloudera_navigator_audit_logs_download.sh" -k
-    if find . -name 'navigator_audit_*.csv' -exec ls -l {} \; |
-       awk '{print $5}' |
-       grep -q '^0$'; then
-        sleep 60
+    # want splitting of args
+    # shellcheck disable=SC2086
+    if find . -maxdepth 1 -name 'navigator_audit_*.csv' -exec $stat_size {} \; | grep -q '^0$'; then
+        echo "files detected that have silently errored resulting in zero byte files, sleeping for $sleep_secs before retrying downloads..."
+        sleep $sleep_secs
         continue
     fi
     echo FINISHED
