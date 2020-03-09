@@ -31,5 +31,6 @@ fi
 
 # leading whitespace break PowerShell commands
 pwsh <<EOF
+Import-Module AppVeyorBYOC
 Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken $APPVEYOR_TOKEN
 EOF
