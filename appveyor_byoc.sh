@@ -30,9 +30,9 @@ if ! type -P pwsh &>/dev/null; then
     clear
 fi
 
-if ! type -P sudo &>/dev/null; then
-    "$srcdir/install_packages.sh" sudo sysvinit-utils  # sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
-fi
+# AppVeyor host dependencies
+# sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
+"$srcdir/install_packages.sh" libcap2-bin libterm-ui-perl sudo sysvinit-utils
 
 # leading whitespace break PowerShell commands
 pwsh <<EOF
