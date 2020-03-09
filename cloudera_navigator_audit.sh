@@ -18,6 +18,9 @@
 # See cloudera_navigator_api.sh for base options like Navigator Host, SSL etc
 #
 # I've managed to crash Navigator several times both via the API and the UI trying to get access to > 1 years of historical logs
+# even after increasing the heap by several GB, so I don't recommend you run more than one of these scripts at a time, and
+# try to time bound it to a 1 year interval each time so it is more likely to succeed and less range to restart. I've written an
+# adjacent script called cloudera_navigator_audit_download_logs.sh to manage iterating years and retrying where needed
 #
 # Tested on Cloudera Enterprise 5.10
 
@@ -71,7 +74,7 @@
 #   PROGRESS=1 ./cloudera_navigator_audit.sh service==impala -k > navigator_audit_log_impala.csv
 #
 #
-# XXX: looks like there is a bug in the Navigator API returning only admin for when start date set to 1970-01-01T00:00:00 - workaround is to use 1970-01-01T00:00:01
+# XXX: looks like there is a bug in the Navigator API returning only admin commands, not data access, for when start date set to 1970-01-01T00:00:00 - workaround is to use 1970-01-01T00:00:01
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
