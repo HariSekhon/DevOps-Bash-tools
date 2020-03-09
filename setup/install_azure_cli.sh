@@ -64,9 +64,9 @@ EOF
     elif [ "$uname_s" = Linux ]; then
         if type -P apk &>/dev/null; then
             # only works on Alpine 3 - Alpine 2.x doesn't support --no-cache and nor does it have Python 3 package dependency which Azure CLI requires
-            apk add --no-cache curl python3 python3-dev alpine-sdk musl-dev libffi-dev openssl-dev
+            $sudo apk add --no-cache curl python3 python3-dev alpine-sdk musl-dev libffi-dev openssl-dev
         fi
-        yes | curl -L https://aka.ms/InstallAzureCli | bash
+        yes | curl -L https://aka.ms/InstallAzureCli | $sudo bash
     echo
         echo "OS '$uname_s' is not Mac / Linux - not supported"
         exit 1
