@@ -17,6 +17,7 @@ minikube
 minishift
 podman
 postman
+powershell
 spotify
 vagrant
 virtualbox
