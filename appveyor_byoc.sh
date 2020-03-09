@@ -25,6 +25,10 @@ if ! type -P pwsh &>/dev/null; then
     clear
 fi
 
+if ! type -P sudo &>/dev/null; then
+    "$srcdir/install_packages.sh" sudo sysvinit-tools
+fi
+
 if [ -z "${APPVEYOR_TOKEN:-}" ]; then
     echo "\$APPVEYOR_TOKEN not found in environment"
     exit 1
