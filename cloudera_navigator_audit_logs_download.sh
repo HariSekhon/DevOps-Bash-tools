@@ -68,6 +68,11 @@ download_audit_logs(){
         #    echo "Skipping $log since it already exists and is > 10MB"
         #    return 0
         #fi
+        # audit logs start at $year-12-* at the top, and end at the bottom in $year-01-* - partial logs often get cut off
+        # in between, so if we've gotten all the way to January the log is likely complete - tempted to do January 01 but
+        # there will probably be some edge case where a service isn't used on New Year's day or the first few days
+        # because a lot of people take time off around then, so this is more generic to just check for January
+        # can't check for December also being in the log because this would always fail for the current year
         elif grep -q "^\"$year-01-" "$log"; then
             echo "Skipping $log since it contains logs going back to January $year so looks complete"
             return 0
