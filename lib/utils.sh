@@ -456,6 +456,14 @@ run_test_versions(){
 
 # =================================
 
+stat_bytes(){
+    if is_mac; then
+        log_size="$(stat -f %z "$@")"
+    else
+        log_size="$(stat -c %s "$@")"
+    fi
+}
+
 timestamp(){
     printf "%s" "$(date '+%F %T')  $*" >&2
     [ $# -gt 0 ] && printf '\n' >&2
