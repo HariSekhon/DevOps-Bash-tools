@@ -90,7 +90,8 @@
 .cbq_history
 .ccm/
 .CFUserTextEncoding
-.circleci/cli.yml  # api token stored in here
+# Circle CI API Token stored in here
+.circleci/cli.yml
 .circleci/update_check.yml
 .compiz
 .conda/
@@ -233,7 +234,8 @@
 .sh_history
 .Skype
 .snowsql
-.snowsql/config  # pw stored in plaintext in here
+# Snowflake password stored in plaintext in here
+.snowsql/config
 .spark_history
 .Spotlight-*
 .spumux/
@@ -303,10 +305,12 @@ fatpacks/
 fatlib/
 fluxbox-themes
 fluxbox/debian007.jpg
+# internal repos
 git/
-git/*     # internal repos
+git/*
+# public repos
 github/
-github/*  # public repos
+github/*
 gitolite-admin/
 gitroot/
 GNUstep
