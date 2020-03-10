@@ -82,7 +82,7 @@ validate_log(){
     if [ -s "$log" ]; then
         local log_bytes
         log_bytes="$(stat_bytes "$log")"
-        echo "existing log $log = $log_bytes bytes"
+        echo "$log = $log_bytes bytes"
         if [ "$log_bytes" = 558 ]; then
             echo "$log has only headers there are no logs for that date range"
             return 0
