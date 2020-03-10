@@ -41,6 +41,7 @@ scm
 # slighty better compression but takes forever, even slow to decompress
 #compress_cmd="bzip2 -9 -c"
 compress_cmd="gzip -9 -c"
+ext="gz"
 
 current_year="$(date +%Y)"
 
@@ -57,12 +58,32 @@ download_audit_logs(){
     # expand now
     # shellcheck disable=SC2064
     trap "echo ERROR >&2; printf 'Removing partial log file for restartability without audit gaps: ' >&2; rm -fv '$log'" exit
-    # a single newline in the log file trips this so make sure we have what looks like enough data
+    if validate_log "$log"; then
+        echo "Skipping previously completed log $log..."
+        echo
+        return 0
+    fi
+    echo "Querying Cloudera Navigator for $year logs for $service"
+    time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
+    local compressed_log="$log.$ext"
+    #if [ -s "$log" ]; then
+    if validate_log "$log"; then
+        echo "Compressing audit log:  $log > $compressed_log"
+        # want splitting
+        # shellcheck disable=SC2086
+        $compress_cmd "$log" > "$compressed_log" &
+    fi
+    echo
+}
+
+validate_log(){
+    local log="$1"
+    # a single newline in the log file trips this so dive in to deeper checks to make sure we have what looks like enough data
     if [ -s "$log" ]; then
         local log_size
         log_size="$(stat_bytes "$log")"
         if [ "$log_size" = 558 ]; then
-            echo "Skipping $log since it has only headers there are no logs for that date range"
+            echo "$log has only headers there are no logs for that date range"
             return 0
         #elif [ "$log_size" -gt 10240 ]; then
         #    echo "Skipping $log since it already exists and is > 10MB"
@@ -74,19 +95,11 @@ download_audit_logs(){
         # because a lot of people take time off around then, so this is more generic to just check for January
         # can't check for December also being in the log because this would always fail for the current year
         elif grep -q "^\"$year-01-" "$log"; then
-            echo "Skipping $log since it contains logs going back to January $year so looks complete"
+            echo "$log contains logs going back to January $year so looks complete"
             return 0
         fi
     fi
-    echo "Querying Cloudera Navigator for $year logs for $service"
-    time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
-    local compressed_log="$log.bz2"
-    if [ -s "$log" ]; then
-        echo "Compressing audit log:  $log > $compressed_log"
-        # want splitting
-        # shellcheck disable=SC2086
-        $compress_cmd "$log" > "$compressed_log" &
-    fi
+    return 1
 }
 
 # works on Mac but seq on Linux doesn't do reverse, outputs nothing
