@@ -64,11 +64,11 @@ download_audit_logs(){
         echo
     else
         echo "Querying Cloudera Navigator for $year logs for $service"
-        time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
+        time {
+        "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
         log_bytes="$(stat_bytes "$log")"
         echo "$log = $log_bytes bytes"
-        echo
-        echo
+        }
     fi
     local compressed_log="$log.$ext"
     #if [ -s "$log" ]; then
