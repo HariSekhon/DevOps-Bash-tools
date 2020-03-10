@@ -8,7 +8,7 @@ All `*.sh` files in this directory are automatically sourced by .bashrc at the t
 To disable any these source files, simply rename them to not match the `*.sh` glob, eg. => `*.sh.disabled`.
 
 * `aliases.sh` - general aliases
-* `functions.sh` - general functions
+* `functions.sh` - general functions eg. `pass` which prompts for a password which is saved to an environment variable and auto-populated in various top-level API querying scripts built on `curl_auth.sh`
 * `env.sh` - general environment variables and var/unvar functions for setting environment variables for the current and all new shell sessions
 * `paths.sh` - deduplicated adding to `$PATH` for lots of common places (eg. /usr/sbin, /usr/local/bin, ~/bin) and commands to clearly print one path per line for Bash `$PATH`, Perl `@INC` and Python `sys.path`. Also contains technology specific paths when there is no `<technology>.sh` file. All other includes use `add_PATH()` function defined here.
 * `<technology>.sh` - aliases, functions and environment variables to make interactive day-to-day use of a specific technologies easier
