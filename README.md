@@ -82,12 +82,11 @@ Contains:
 
 - Scripts for fast advanced systems administration including auto-populating required switches
 - Scripts for CI builds, forming a drop-in framework of standard checks
-- Bash environment enhancements
-  - advanced `.bashrc` + `.bash.d/*.sh` - tonnes of advanced customizations and functions like `pass` which prompts for a password (star echo'd to screen) and stores it in the shell environment ram, which several scripts can then use to curl APIs without re-entering the password each time, nor exposing passwords on the CLI or in audit logs from command logging
-  - advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), installs the best sysadmin packages like those above plus [AWS CLI](https://aws.amazon.com/cli/), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/) and many others, adds dynamic Git and shell behaviour enhancements, colouring, functions, aliases and automatic pathing of many common installation locations for many major languages like Python, Perl, Ruby, NodeJS, Golang...
+- Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - tonnes of advanced customizations, aliases and functions. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
+- Advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), installs the best sysadmin packages like those above plus [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/) and many others, adds dynamic Git and shell behaviour enhancements, colouring, functions, aliases and automatic pathing of many common installation locations for many major languages like Python, Perl, Ruby, NodeJS, Golang...
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
   - `.bash.d/` - interactive library (huge)
-  - `lib/` - script library
+  - `lib/` - scripting and CI library (heavily used by hundreds of scripts and builds)
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
