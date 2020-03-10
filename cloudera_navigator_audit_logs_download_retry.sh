@@ -25,18 +25,22 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
 sleep_secs=60
 
-stat_size="stat -c %s"
-if [ "$(uname -s)" = Darwin ]; then
-    stat_size="stat -f %z"
+if is_mac; then
+    stat_bytes="stat -f %z"
+else
+    stat_bytes="stat -c %s"
 fi
 
 time while true; do
     time "$srcdir/cloudera_navigator_audit_logs_download.sh" -k
     # want splitting of args
     # shellcheck disable=SC2086
-    if find . -maxdepth 1 -name 'navigator_audit_*.csv' -exec $stat_size {} \; | grep -q '^0$'; then
+    if find . -maxdepth 1 -name 'navigator_audit_*.csv' -exec $stat_bytes {} \; | grep -q '^0$'; then
         echo "files detected that have silently errored resulting in zero byte files, sleeping for $sleep_secs before retrying downloads..."
         sleep $sleep_secs
         continue
