@@ -40,8 +40,11 @@ time while true; do
     time "$srcdir/cloudera_navigator_audit_logs_download.sh" -k
     # want splitting of args
     # shellcheck disable=SC2086
-    if find . -maxdepth 1 -name 'navigator_audit_*.csv' -exec $stat_bytes {} \; | grep -q '^0$'; then
-        echo "files detected that have silently errored resulting in zero byte files, sleeping for $sleep_secs before retrying downloads..."
+    # grep -c stops the pipe terminating early causing:
+    # find: `stat' terminated by signal 13
+    num_zero_files="$(find . -maxdepth 1 -name 'navigator_audit_*.csv' -exec $stat_bytes {} \; | grep -c '^0$')"
+    if [ "$num_zero_files" != 0 ]; then
+        echo "$num_zero_files files detected that have silently errored resulting in zero byte files, sleeping for $sleep_secs before retrying downloads..."
         sleep $sleep_secs
         continue
     fi
