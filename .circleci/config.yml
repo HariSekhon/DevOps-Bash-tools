@@ -19,12 +19,16 @@
 version: 2.1
 jobs:
   build:
+    # technically a docker image is a better choice than machine
+    # but we want to introduce some native environment variation
+    # between build systems in order to test the repo's build automation is robust
     machine:
-      #image: ubuntu-1604:201903-01
       image: default
+      #image: ubuntu-1604:201903-01
       # set to an actual docker image when running locally using circle_ci_job.sh
-      # docker image must have git installed to do the checkout, hence why using harisekhon/ubuntu-dev instead of base ubuntu image
-      #image: harisekhon/ubuntu-dev
+      # docker image must have git installed to do the checkout
+      # so using harisekhon/dev:ubuntu instead of base ubuntu image
+      #image: harisekhon/dev:ubuntu
     steps:
       - checkout
       - run: make init
