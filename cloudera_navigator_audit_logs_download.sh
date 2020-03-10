@@ -55,6 +55,7 @@ download_audit_logs(){
     local service="$2"
     shift; shift
     local log="navigator_audit_${year}_${service}.csv"
+    local log_bytes
     # expand now
     # shellcheck disable=SC2064
     trap "echo ERROR >&2; printf 'Removing partial log file for restartability without audit gaps: ' >&2; rm -fv '$log'" exit
@@ -64,6 +65,10 @@ download_audit_logs(){
     else
         echo "Querying Cloudera Navigator for $year logs for $service"
         time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
+        log_bytes="$(stat_bytes "$log")"
+        echo "$log = $log_bytes bytes"
+        echo
+        echo
     fi
     local compressed_log="$log.$ext"
     #if [ -s "$log" ]; then
