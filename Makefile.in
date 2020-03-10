@@ -146,8 +146,9 @@ printenv:
 			echo; printf "Git commit: "; git log --pretty=format:'%ai  %cn  %H  %s' -n 1; \
 			echo; ls -l /.dockerenv 2>/dev/null || : ; \
 			echo; echo "OS RELEASE:"; echo; cat /etc/*release || : ; echo; \
-			echo; echo "CI ENVIRONMENT:"; echo; env ; echo; echo; \
+			echo; echo "CI ENVIRONMENT:"; echo; env ; echo;  \
 			echo; echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
+			echo; \
 		else \
 			env | grep -E 'BUILD|PIPELINE|JOB|STAGE|\<CI_|^CI=' || : ; \
 		fi
