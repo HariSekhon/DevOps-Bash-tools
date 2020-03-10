@@ -91,6 +91,7 @@
 .ccm/
 .CFUserTextEncoding
 .circleci/cli.yml  # api token stored in here
+.circleci/update_check.yml
 .compiz
 .conda/
 .config
