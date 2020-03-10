@@ -61,10 +61,10 @@ download_audit_logs(){
     if validate_log "$log"; then
         echo "Skipping previously completed log $log..."
         echo
-        return 0
+    else
+        echo "Querying Cloudera Navigator for $year logs for $service"
+        time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
     fi
-    echo "Querying Cloudera Navigator for $year logs for $service"
-    time "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
     local compressed_log="$log.$ext"
     #if [ -s "$log" ]; then
     if validate_log "$log"; then
@@ -80,12 +80,13 @@ validate_log(){
     local log="$1"
     # a single newline in the log file trips this so dive in to deeper checks to make sure we have what looks like enough data
     if [ -s "$log" ]; then
-        local log_size
-        log_size="$(stat_bytes "$log")"
-        if [ "$log_size" = 558 ]; then
+        local log_bytes
+        log_bytes="$(stat_bytes "$log")"
+        echo "existing log $log = $log_bytes bytes"
+        if [ "$log_bytes" = 558 ]; then
             echo "$log has only headers there are no logs for that date range"
             return 0
-        #elif [ "$log_size" -gt 10240 ]; then
+        #elif [ "$log_bytes" -gt 10240 ]; then
         #    echo "Skipping $log since it already exists and is > 10MB"
         #    return 0
         #fi
