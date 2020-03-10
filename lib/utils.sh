@@ -458,9 +458,9 @@ run_test_versions(){
 
 stat_bytes(){
     if is_mac; then
-        log_size="$(stat -f %z "$@")"
+        stat -f %z "$@"
     else
-        log_size="$(stat -c %s "$@")"
+        stat -c %s "$@"
     fi
 }
 
