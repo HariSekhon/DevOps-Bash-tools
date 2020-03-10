@@ -58,16 +58,16 @@ download_audit_logs(){
     # a single newline in the log file trips this so make sure we have what looks like enough data
     if [ -s "$log" ]; then
         local log_size
-        if is_mac; then
-            log_size="$(stat -f %z "$log")"
-        else
-            log_size="$(stat -c %s "$log")"
-        fi
+        log_size="$(stat_bytes "$log")"
         if [ "$log_size" = 558 ]; then
             echo "Skipping $log since it has only headers there are no logs for that date range"
             return 0
-        elif [ "$log_size" -gt 10240 ]; then
-            echo "Skipping $log since it already exists and is > 10MB"
+        #elif [ "$log_size" -gt 10240 ]; then
+        #    echo "Skipping $log since it already exists and is > 10MB"
+        #    return 0
+        #fi
+        elif grep -q "^\"$year-01-" "$log"; then
+            echo "Skipping $log since it contains logs going back to January $year so looks complete"
             return 0
         fi
     fi
