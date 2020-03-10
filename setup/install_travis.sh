@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
 #  Author: Hari Sekhon
-#  Date: 2019-09-17
+#  Date: Tue Sep 17 16:41:02 2019 +0100
 #
 #  https://github.com/harisekhon/devops-bash-tools
 #
