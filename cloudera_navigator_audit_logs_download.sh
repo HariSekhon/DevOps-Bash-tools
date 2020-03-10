@@ -68,6 +68,9 @@ download_audit_logs(){
         "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
         log_bytes="$(stat_bytes "$log")"
         echo "$log = $log_bytes bytes"
+        if [ "$log_bytes" = 0 ]; then
+            echo "ERROR: Navigator return zero byte audit log for $log, not even containing the headers row!"
+        fi
         }
     fi
     local compressed_log="$log.$ext"
