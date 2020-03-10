@@ -90,6 +90,7 @@
 .cbq_history
 .ccm/
 .CFUserTextEncoding
+.circleci/cli.yml  # api token stored in here
 .compiz
 .conda/
 .config
