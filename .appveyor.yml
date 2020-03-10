@@ -18,6 +18,22 @@
 image: Ubuntu
 
 install:
+# workaround for:
+# Some packages could not be installed. This may mean that you have
+# requested an impossible situation or if you are using the unstable
+# distribution that some required packages have not yet been created
+# or been moved out of Incoming.
+# The following information may help to resolve the situation:
+#
+# The following packages have unmet dependencies:
+#  mssql-server : Depends: libsasl2-modules-gssapi-mit but it is not going to be installed
+#  E: Error, pkgProblemResolver::Resolve generated breaks, this may be caused by held packages.
+#  bash-tools/Makefile.in:272: recipe for target 'apt-packages' failed
+#  make[2]: *** [apt-packages] Error 123
+#  make[2]: Leaving directory '/home/appveyor/projects/pylib'
+#  bash-tools/Makefile.in:212: recipe for target 'system-packages' failed
+- sudo sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d' /etc/apt/sources.list || :
+- sudo apt purge -y mssql-server || :
 - sudo apt update -qq
 - sudo apt install -qy git make
 - make
