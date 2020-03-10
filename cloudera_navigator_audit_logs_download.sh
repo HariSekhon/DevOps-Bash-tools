@@ -38,7 +38,9 @@ hbase
 scm
 "
 
-compress_cmd="bzip2 -9 -c"
+# slighty better compression but takes forever, even slow to decompress
+#compress_cmd="bzip2 -9 -c"
+compress_cmd="gzip -9 -c"
 
 current_year="$(date +%Y)"
 
