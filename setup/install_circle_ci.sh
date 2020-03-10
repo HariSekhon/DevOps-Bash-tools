@@ -32,3 +32,9 @@ if is_mac; then
 else
     curl -fLSs https://circle.ci/cli | DESTDIR=~/bin bash
 fi
+
+export PATH="$PATH:$HOME/bin"
+
+if ! is_CI && [ -t 1 ]; then
+    circleci setup
+fi
