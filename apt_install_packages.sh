@@ -79,33 +79,6 @@ if is_CI; then
         cat "$x"
         echo
     done
-    # workaround to broken repos
-    # W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://downloads.apache.org/cassandra/debian 311x InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY E91335D77E3E87CB
-    # W: GPG error: http://dl.yarnpkg.com/debian stable Release: The following signatures were invalid: KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983  KEYEXPIRED 1580619281  KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983  KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983
-    # E: The repository 'http://dl.yarnpkg.com/debian stable Release' is no longer signed.
-    # bash-tools/Makefile.in:272: recipe for target 'apt-packages' failed
-    if is_shippable_ci; then
-        rm -fv /etc/apt/sources.list.d/cassandra.sources.list*
-        rm -fv /etc/apt/sources.list.d/yarn.list*
-    fi
-    # workaround for:
-    # Some packages could not be installed. This may mean that you have
-    # requested an impossible situation or if you are using the unstable
-    # distribution that some required packages have not yet been created
-    # or been moved out of Incoming.
-    # The following information may help to resolve the situation:
-    #
-    # The following packages have unmet dependencies:
-    #  mssql-server : Depends: libsasl2-modules-gssapi-mit but it is not going to be installed
-    #  E: Error, pkgProblemResolver::Resolve generated breaks, this may be caused by held packages.
-    #  bash-tools/Makefile.in:272: recipe for target 'apt-packages' failed
-    #  make[2]: *** [apt-packages] Error 123
-    #  make[2]: Leaving directory '/home/appveyor/projects/pylib'
-    #  bash-tools/Makefile.in:212: recipe for target 'system-packages' failed
-    if is_appveyor && [ -f /etc/apt/sources.list ]; then
-        $sudo sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d' /etc/apt/sources.list
-        apt-get purge -y mssql-server
-    fi
 fi
 
 packages=""
