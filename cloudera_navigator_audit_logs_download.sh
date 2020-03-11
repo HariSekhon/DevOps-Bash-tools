@@ -28,7 +28,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 source "$srcdir/lib/utils.sh"
 
-trap 'echo ERROR >&2' exit
+trap 'tstamp ERROR' exit
 
 services="
 hive
@@ -60,12 +60,13 @@ download_audit_logs(){
     local log_bytes
     # expand now
     # shellcheck disable=SC2064
-    trap "echo ERROR >&2; printf 'Removing partial log file for restartability without audit gaps: ' >&2; rm -fv '$log'" exit
+    trap "tstamp ERROR; tstamp 'Removing partial log file for restartability without audit gaps: '; rm -fv '$log'" exit
     if validate_log "$log"; then
-        echo "Skipping previously completed log $log..."
-        echo
+        tstamp "Skipping previously completed log $log..."
+        echo >&2
+        continue
     else
-        echo "Querying Cloudera Navigator for $year logs for $service"
+        tstamp "Querying Cloudera Navigator for $year logs for $service"
         month="${month#0}"  # because maths ops + 1 won't work on zero prefixed string, so re-add it later
         if [ "$month" = 12 ]; then
             ((end_year=year+1))
@@ -80,29 +81,29 @@ download_audit_logs(){
         if [ "${#end_month}" = 1 ]; then
             end_month="0$end_month"
         fi
-        time {
+        #time {
         # don't let a random 401 stop from downloading other logs, can go back and fill in the gaps later by re-running
         # Navigator returns zero byte logs without headers without error so this || : is not the cause of not catching zero byte logs, which we have to check for separately anyway
         "$srcdir/cloudera_navigator_audit_logs.sh" "$year-$month-01T00:00:00" "$end_year-$end_month-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log" || :
         log_bytes="$(stat_bytes "$log")"
-        echo "$log = $log_bytes bytes"
+        tstamp "$log = $log_bytes bytes"
         if [ "$log_bytes" = 0 ]; then
-            echo "ERROR: Navigator returned zero byte audit log for $log, not even containing the headers row!"
+            tstamp "ERROR: Navigator returned zero byte audit log for $log, not even containing the headers row!"
         fi
-        }
+        #}
     fi
     #local compressed_log="$log.$ext"
     #if [ -s "$log" ]; then
     if validate_log "$log"; then
-        #echo "Compressing audit log:  $log > $compressed_log"
+        #tstamp "Compressing audit log:  $log > $compressed_log"
         # want splitting
         # shellcheck disable=SC2086
         #$compress_cmd "$log" > "$compressed_log" &
         :
     else
-        echo "WARNING: $log doesn't look complete, must check"
+        tstamp "WARNING: $log doesn't look complete, must check"
     fi
-    echo
+    echo >&2
 }
 
 validate_log(){
@@ -111,12 +112,12 @@ validate_log(){
     if [ -s "$log" ]; then
         local log_bytes
         log_bytes="$(stat_bytes "$log")"
-        echo "$log = $log_bytes bytes"
+        tstamp "$log = $log_bytes bytes"
         if [ "$log_bytes" = 558 ]; then
-            echo "$log has only headers - inferring there are no logs for that date range"
+            tstamp "$log has only headers - inferring there are no logs for that date range"
             return 0
         #elif [ "$log_bytes" -gt 10240 ]; then
-        #    echo "Skipping $log since it already exists and is > 10MB"
+        #    tstamp "Skipping $log since it already exists and is > 10MB"
         #    return 0
         #fi
         # audit logs start at $year-12-* at the top, and end at the bottom in $year-01-* - partial logs often get cut off
@@ -125,7 +126,7 @@ validate_log(){
         # because a lot of people take time off around then, so this is more generic to just check for January
         # can't check for December also being in the log because this would always fail for the current year
         elif grep -q "^\"$year-$month-0" "$log"; then
-            echo "$log contains logs for $year-$month-0*, looks complete"
+            tstamp "$log contains logs for $year-$month-0*, looks complete"
             return 0
         fi
     fi
@@ -154,8 +155,8 @@ for year in $(seq 2009 "$current_year" | tac); do
         fi
     done
 done
-echo "Finished querying Cloudera Navigator API"
-echo "Waiting for log compression to finish"
+tstamp "Finished querying Cloudera Navigator API"
+tstamp "Waiting for log compression to finish"
 wait
-echo "DONE"
+tstamp "DONE"
 trap - exit
