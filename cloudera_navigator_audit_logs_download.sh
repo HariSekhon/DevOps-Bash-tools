@@ -81,6 +81,8 @@ download_audit_logs(){
         if [ "${#end_month}" = 1 ]; then
             end_month="0$end_month"
         fi
+        # won't output a newline so the contents of next command will be timestamp prefixed
+        tstamp
         #time {
         # don't let a random 401 stop from downloading other logs, can go back and fill in the gaps later by re-running
         # Navigator returns zero byte logs without headers without error so this || : is not the cause of not catching zero byte logs, which we have to check for separately anyway
@@ -89,6 +91,7 @@ download_audit_logs(){
         tstamp "$log = $log_bytes bytes"
         if [ "$log_bytes" = 0 ]; then
             tstamp "ERROR: Navigator returned zero byte audit log for $log, not even containing the headers row!"
+            continue
         fi
         #}
     fi
