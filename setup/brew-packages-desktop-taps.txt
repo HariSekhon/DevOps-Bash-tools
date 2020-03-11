@@ -9,3 +9,5 @@
 #sambadevi/powerlevel9k  powerlevel9k
 wallix/awless           awless
 wercker/wercker         wercker-cli
+# do via install script to load token
+#buildkite/buildkite     buildkite
