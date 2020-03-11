@@ -39,3 +39,4 @@ while read -r line; do
     perl -e "if($count % $LINES_PER_DOT == 0){print STDERR '.'}"
     printf "%s\n" "$line"
 done
+echo >&2
