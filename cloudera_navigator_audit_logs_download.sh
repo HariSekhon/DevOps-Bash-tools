@@ -50,9 +50,12 @@ fi
 
 download_audit_logs(){
     local year="$1"
-    local month="$2"
+    local month="${2#0}"  # because maths ops + 1 won't work on zero prefixed string, so re-add it later
     local service="$3"
     shift; shift; shift
+    if [ "${#month}" = 1 ]; then
+        month="0$month"
+    fi
     local log="navigator_audit_${year}-${month}_${service}.csv"
     local log_bytes
     # expand now
@@ -63,12 +66,19 @@ download_audit_logs(){
         echo
     else
         echo "Querying Cloudera Navigator for $year logs for $service"
+        month="${month#0}"  # because maths ops + 1 won't work on zero prefixed string, so re-add it later
         if [ "$month" = 12 ]; then
             ((end_year=year+1))
             end_month=01
         else
             ((end_month=month+1))
             end_year="$year"
+        fi
+        if [ "${#month}" = 1 ]; then
+            month="0$month"
+        fi
+        if [ "${#end_month}" = 1 ]; then
+            end_month="0$end_month"
         fi
         time {
         # don't let a random 401 stop from downloading other logs, can go back and fill in the gaps later by re-running
@@ -103,7 +113,7 @@ validate_log(){
         log_bytes="$(stat_bytes "$log")"
         echo "$log = $log_bytes bytes"
         if [ "$log_bytes" = 558 ]; then
-            echo "$log has only headers there are no logs for that date range"
+            echo "$log has only headers - inferring there are no logs for that date range"
             return 0
         #elif [ "$log_bytes" -gt 10240 ]; then
         #    echo "Skipping $log since it already exists and is > 10MB"
@@ -115,7 +125,7 @@ validate_log(){
         # because a lot of people take time off around then, so this is more generic to just check for January
         # can't check for December also being in the log because this would always fail for the current year
         elif grep -q "^\"$year-$month-0" "$log"; then
-            echo "$log contains logs for $year-$month-0* so looks complete"
+            echo "$log contains logs for $year-$month-0*, looks complete"
             return 0
         fi
     fi
@@ -130,7 +140,7 @@ current_month="$(date +%m)"
 
 # On Mac tac requires gnu coreutils to be installed via Homebrew
 for year in $(seq 2009 "$current_year" | tac); do
-    for month in {12..10} 0{9..1}; do
+    for month in {12..1}; do
         if [ "$year" -eq "$current_year" ] && [ "$month" -gt "$current_month" ]; then
             # Navigator returns forbidden if querying in the future
             continue
