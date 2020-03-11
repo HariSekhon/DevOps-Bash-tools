@@ -40,10 +40,8 @@ scm
 
 # slighty better compression but takes forever, even slow to decompress
 #compress_cmd="bzip2 -9 -c"
-compress_cmd="gzip -9 -c"
-ext="gz"
-
-current_year="$(date +%Y)"
+#compress_cmd="gzip -9 -c"
+#ext="gz"
 
 if [[ "${1:-}" =~ ^service== ]]; then
     single_service="${1##service==}"
@@ -52,9 +50,10 @@ fi
 
 download_audit_logs(){
     local year="$1"
-    local service="$2"
-    shift; shift
-    local log="navigator_audit_${year}_${service}.csv"
+    local month="$2"
+    local service="$3"
+    shift; shift; shift
+    local log="navigator_audit_${year}-${month}_${service}.csv"
     local log_bytes
     # expand now
     # shellcheck disable=SC2064
@@ -64,8 +63,15 @@ download_audit_logs(){
         echo
     else
         echo "Querying Cloudera Navigator for $year logs for $service"
+        if [ "$month" = 12 ]; then
+            ((end_year=year+1))
+            end_month=01
+        else
+            ((end_month=month+1))
+            end_year="$year"
+        fi
         time {
-        "$srcdir/cloudera_navigator_audit_logs.sh" "$year-01-01T00:00:00" "$((year+1))-01-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
+        "$srcdir/cloudera_navigator_audit_logs.sh" "$year-$month-01T00:00:00" "$end_year-$end_month-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log"
         log_bytes="$(stat_bytes "$log")"
         echo "$log = $log_bytes bytes"
         if [ "$log_bytes" = 0 ]; then
@@ -73,13 +79,16 @@ download_audit_logs(){
         fi
         }
     fi
-    local compressed_log="$log.$ext"
+    #local compressed_log="$log.$ext"
     #if [ -s "$log" ]; then
     if validate_log "$log"; then
-        echo "Compressing audit log:  $log > $compressed_log"
+        #echo "Compressing audit log:  $log > $compressed_log"
         # want splitting
         # shellcheck disable=SC2086
-        $compress_cmd "$log" > "$compressed_log" &
+        #$compress_cmd "$log" > "$compressed_log" &
+        :
+    else
+        echo "WARNING: $log doesn't look complete, must check"
     fi
     echo
 }
@@ -103,26 +112,35 @@ validate_log(){
         # there will probably be some edge case where a service isn't used on New Year's day or the first few days
         # because a lot of people take time off around then, so this is more generic to just check for January
         # can't check for December also being in the log because this would always fail for the current year
-        elif grep -q "^\"$year-01-" "$log"; then
-            echo "$log contains logs going back to January $year so looks complete"
+        elif grep -q "^\"$year-$month-0" "$log"; then
+            echo "$log contains logs for $year-$month-0* so looks complete"
             return 0
         fi
     fi
     return 1
 }
 
+current_year="$(date +%Y)"
+current_month="$(date +%m)"
+
 # works on Mac but seq on Linux doesn't do reverse, outputs nothing
 #for year in $(seq "$current_year" 2009); do
 
 # On Mac tac requires gnu coreutils to be installed via Homebrew
 for year in $(seq 2009 "$current_year" | tac); do
-    if [ -n "${single_service:-}" ]; then
-        download_audit_logs "$year" "$single_service" "$@"
-    else
-        for service in $services; do
-            download_audit_logs "$year" "$service" "$@"
-        done
-    fi
+    for month in {12..10} 0{9..1}; do
+        if [ "$year" -eq "$current_year" ] && [ "$month" -gt "$current_month" ]; then
+            # Navigator returns forbidden if querying in the future
+            continue
+        fi
+        if [ -n "${single_service:-}" ]; then
+            download_audit_logs "$year" "$month" "$single_service" "$@"
+        else
+            for service in $services; do
+                download_audit_logs "$year" "$month" "$service" "$@"
+            done
+        fi
+    done
 done
 echo "Finished querying Cloudera Navigator API"
 echo "Waiting for log compression to finish"
