@@ -20,8 +20,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+BUILDKITE_TOKEN="${1:-${BUILDKITE_AGENT_TOKEN:-${BUILDKITE_TOKEN:-}}}"
+
 if [ -z "${BUILDKITE_TOKEN:-}" ]; then
-    echo "BUILDKITE_TOKEN environment variable not defined"
+    echo "BUILDKITE_AGENT_TOKEN / BUILDKITE_TOKEN environment variable not defined"
 fi
 
 # Mac / Linux
