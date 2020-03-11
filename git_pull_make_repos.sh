@@ -65,15 +65,16 @@ fi
 
 if ! type -P git &>/dev/null ||
    ! type -P make &>/dev/null; then
-    if type -P yum &>/dev/null; then
-        yum install -y git make
-    elif type -P apt-get &>/dev/null; then
-        apt-get update
-        apt-get install -y --no-install-recommends git make
-    elif type -P apk &>/dev/null; then
-        apk update
-        apk add git make
-    fi
+#    if type -P yum &>/dev/null; then
+#        yum install -y git make
+#    elif type -P apt-get &>/dev/null; then
+#        apt-get update
+#        apt-get install -y --no-install-recommends git make
+#    elif type -P apk &>/dev/null; then
+#        apk update
+#        apk add git make
+#    fi
+    "$srcdir/install_packages.sh" git make
 fi
 
 for repo in $repolist; do
