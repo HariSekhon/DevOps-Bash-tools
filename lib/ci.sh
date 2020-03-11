@@ -49,6 +49,15 @@ is_appveyor(){
     return 1
 }
 
+# https://buildkite.com/docs/pipelines/environment-variables
+is_buildkite(){
+    # also CI but not really specific, caught in is_CI generic
+    if [ -n "${BUILDKITE:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 is_circle_ci(){
     # also CI but not really specific, caught in is_CI generic
@@ -157,6 +166,7 @@ is_CI(){
        is_gitlab_ci ||
        is_azure_devops ||
        is_appveyor ||
+       is_buildkite ||
        is_codeship ||
        is_codefresh ||
        is_cirrus_ci ||
