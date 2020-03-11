@@ -57,7 +57,9 @@ for repo in $repolist; do
         continue
     fi
     pushd "$repo_dir" >/dev/null
-    echo "$PWD:"
+    echo "========================================"
+    echo "$repo - $PWD"
+    echo "========================================"
     eval "$@"
     popd >/dev/null
     echo
