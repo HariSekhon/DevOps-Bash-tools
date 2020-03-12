@@ -27,7 +27,11 @@ if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
 fi
 
 # Mac / Linux
-#buildkite-agent start
+if type -P buildkite-agent &>/dev/null; then
+    if [ -z "${BUILDKITE_DOCKER:-}" ]; then
+        exec buildkite-agent start
+    fi
+fi
 
 # Docker
 tag="latest"
@@ -38,6 +42,7 @@ if [ -n "${BIG:-}" ]; then
 fi
 
 opts=""
+# for debugging so we can docker exec in to machine and build from cwd
 if [ -n "${DEBUG:-}" ]; then
     opts="-v $PWD:/pwd"
 fi
