@@ -31,6 +31,8 @@ fi
 
 # Docker
 tag="latest"
+#tag="alpine"
+#tag="centos"
 if [ -n "${BIG:-}" ]; then
     tag="ubuntu"
 fi
