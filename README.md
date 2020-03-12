@@ -194,7 +194,7 @@ etc.
 - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
 - `psql.sh` - connects to [PostreSQL](https://www.postgresql.org/) via psql. This is mostly for convenience to infer possible settings from the environment using both standard postgres supported environment variables as well as some similar variables
 - `postgres_foreach_table.sh` - executes a SQL query against every table, replacing `{db}`, `{schema}` and `{table}` in each iteration eg. `select count(*) from {table}`
-- `postgres_*.sh` - various scripts using `psql.sh` to list databases, tables, for all tables: row counts
+- `postgres_*.sh` - various scripts using `psql.sh` to output clean lists of databases, schemas and tables for use in easy scripting, such as `postgres_foreach_table.sh` and row counts for all tables
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
 - `zookeeper_client.sh` - wraps zookeeper-client, auto-finds the zookeeper quorum from `/etc/**/*-site.xml` to make it faster and easier to connect
 - `zookeeper_shell.sh` - wraps Kafka's zookeeper-shell, auto-populating the zookeeper quorum from the environment to make it faster and easier to connect
