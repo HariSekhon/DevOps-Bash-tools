@@ -26,19 +26,29 @@ if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
     echo "BUILDKITE_AGENT_TOKEN / BUILDKITE_TOKEN environment variable not defined"
 fi
 
+buildkite_tags="os=linux"
+
 # Mac / Linux
 if type -P buildkite-agent &>/dev/null; then
     if [ -z "${BUILDKITE_DOCKER:-}" ]; then
-        exec buildkite-agent start
+        uname_s="$(uname -s)"
+        if [ "$uname_s" = Darwin ]; then
+            buildkite_tags="os=mac"
+        elif [ "$uname_s" = Linux ]; then
+            buildkite_tags="os=linux"
+        else
+            buildkite_tags="os=unknown"
+        fi
+        exec buildkite-agent start --tags "$buildkite_tags"
     fi
 fi
 
 # Docker
-tag="latest"
-#tag="alpine"
-#tag="centos"
+docker_tag="latest"
+#docker_tag="alpine"
+#docker_tag="centos"
 if [ -n "${BIG:-}" ]; then
-    tag="ubuntu"
+    docker_tag="ubuntu"
 fi
 
 opts=""
@@ -49,4 +59,4 @@ fi
 
 # want splitting
 # shellcheck disable=SC2086
-docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$tag"
+docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$docker_tag" start --tags "$buildkite_tags"
