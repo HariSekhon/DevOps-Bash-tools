@@ -19,7 +19,7 @@
 #
 # https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html
 #
-# Tested on 8.0.15
+# Tested on MySQL 8.0.15
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
