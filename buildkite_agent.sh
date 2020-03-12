@@ -28,6 +28,8 @@ fi
 
 buildkite_tags="os=linux"
 
+export PATH="$PATH:$HOME/.buildkite-agent/bin"
+
 # Mac / Linux
 if type -P buildkite-agent &>/dev/null; then
     if [ -z "${BUILDKITE_DOCKER:-}" ]; then
