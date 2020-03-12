@@ -23,8 +23,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-#"$srcdir/psql.sh" -q -t -c "SELECT table_catalog || '.' || table_schema || '.' || table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" |
-"$srcdir/psql.sh" -q -t -c "SELECT table_catalog, table_schema, table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" |
+#"$srcdir/psql.sh" -q -t -c "SELECT table_catalog || '.' || table_schema || '.' || table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" "$@" |
+"$srcdir/psql.sh" -q -t -c "SELECT table_catalog, table_schema, table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" "$@" |
 sed 's/|//g; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
 #while read -r table; do
 while read -r db schema table; do
