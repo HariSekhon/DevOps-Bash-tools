@@ -20,8 +20,6 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-BUILDKITE_AGENT_TOKEN="${1:-${BUILDKITE_AGENT_TOKEN:-${BUILDKITE_TOKEN:-}}}"
-
 if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
     echo "BUILDKITE_AGENT_TOKEN / BUILDKITE_TOKEN environment variable not defined"
 fi
@@ -61,4 +59,4 @@ fi
 
 # want splitting
 # shellcheck disable=SC2086
-docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$docker_tag" start --tags "$buildkite_tags"
+docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$docker_tag" start --tags "$buildkite_tags" "$@"
