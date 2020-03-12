@@ -21,7 +21,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
-    echo "BUILDKITE_AGENT_TOKEN / BUILDKITE_TOKEN environment variable not defined"
+    echo "BUILDKITE_AGENT_TOKEN environment variable not defined"
 fi
 
 buildkite_tags="os=linux"
