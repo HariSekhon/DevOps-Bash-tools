@@ -60,8 +60,9 @@ define MAKEFILE_USAGE
 								(future boots then auto-install system packages via .customize_environment hook)
 endef
 
+# not including azure here because it requires interactive prompt and hangs automatic testing of make docker-*
 .PHONY: build
-build: init system-packages aws azure
+build: init system-packages aws
 	@:
 
 .PHONY: init
