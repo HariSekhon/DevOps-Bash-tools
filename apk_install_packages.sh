@@ -87,6 +87,14 @@ fi
 
 [ -n "${NO_UPDATE:-}" ] || $sudo apk update $opts
 
+# [[ ]] and <<< not available in sh
+#if echo "$packages" | grep -q openssl-dev; then
+#    if apk info | grep -q libressl-dev; then
+#        echo "openssl-dev is incompatible with currently installed libressl-dev, trying to uninstall libressl-dev before proceeding..."
+#        apk del libressl-dev  # will break if mariadb-dev is installed, this probably isnt't the right place to do this anyway...
+#    fi
+#fi
+
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $packages; do
         $sudo apk add $opts "$package" || :
