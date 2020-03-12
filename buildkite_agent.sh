@@ -35,4 +35,11 @@ if [ -n "${BIG:-}" ]; then
     tag="ubuntu"
 fi
 
-docker run -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$tag"
+opts=""
+if [ -n "${DEBUG:-}" ]; then
+    opts="-v $PWD:/pwd"
+fi
+
+# want splitting
+# shellcheck disable=SC2086
+docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$tag"
