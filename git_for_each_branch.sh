@@ -20,6 +20,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib/git.sh
 . "$srcdir/lib/git.sh"
 
+# access to useful functions and aliases
+# shellcheck disable=SC1090
+#. "$srcdir/.bash.d/aliases.sh"
+#. "$srcdir/.bash.d/functions.sh"
+. "$srcdir/.bash.d/git.sh"
+
 foreachbranch "$@"
 
 git checkout master
