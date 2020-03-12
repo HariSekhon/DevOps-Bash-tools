@@ -65,7 +65,8 @@ build: init system-packages aws azure
 	@:
 
 .PHONY: init
-init:
+init: git
+	@echo "running init:  git submodule update --init --recursive"
 	git submodule update --init --recursive
 
 .PHONY: install
