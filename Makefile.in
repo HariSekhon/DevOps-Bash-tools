@@ -114,6 +114,7 @@ define MAKEFILE_USAGE_COMMON
     make github                 open browser at github project
     make readme                 open browser at github's README
     make github-url             print github url and copy to clipboard
+    make status                 open browser at Github CI Builds overview Status page for all projects
 
     make ls-files               print list of files in project
     make ls-code                print list of code files, excluding READMEs and other peripheral files
@@ -143,14 +144,15 @@ printenv: git
 	@ # printf "Git hashref: "; git rev-parse HEAD
 	@ # printf "Git hashref: "; git log --pretty=format:'%H' -n 1
 	@ # printf "Git branch:  "; git branch --show-current # doesn't work on Alpine
+	@ # printf "Git branch:  "; git show-branch --current # prints too many branches
 	@ . $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI || test -f /.dockerenv; then \
 			echo; \
 			echo "USER = `whoami`"; \
 			echo "PWD = $$PWD"; \
 			echo; \
-			printf "Git branch:  "; git show-branch --current; \
-			printf "Git commit: "; git log --pretty=format:'%ai  %cn  %H  %s\n' -n 1; \
+			printf "Git branch: "; git rev-parse --abbrev-ref HEAD; \
+			printf "Git commit: "; git log --pretty=format:"%ai  %cn  %H  %s" -n 1; echo; \
 			echo; \
 			if [ -f /.dockerenv  ]; then echo "Running inside Docker:"; ls -l /.dockerenv 2>/dev/null; fi; \
 			echo; \
