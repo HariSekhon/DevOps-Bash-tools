@@ -20,6 +20,9 @@
 
 #ssh() { set -o xtrace ; command ssh "$@" <<< "$(cat .bashrc_remote)" ; }
 
+alias sshconfig='$EDITOR ~/.ssh/config'
+alias sshcfg=sshconfig
+
 # ssh-add
 ssha(){
     ssh_agent
