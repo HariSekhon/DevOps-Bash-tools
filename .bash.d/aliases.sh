@@ -217,7 +217,7 @@ doc_alias(){
 }
 
 for x in ~/docs/* "$github"/docs/* "$bitbucket"/docs/*; do
-    doc_alias "$x"
+    doc_alias "$x" || :
 done
 
 # ============================================================================ #
