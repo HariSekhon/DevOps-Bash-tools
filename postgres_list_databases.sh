@@ -23,7 +23,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/psql.sh" -q -t -c 'SELECT DISTINCT(table_catalog) FROM information_schema.tables ORDER BY table_catalog;' |
+"$srcdir/psql.sh" -q -t -c 'SELECT DISTINCT(table_catalog) FROM information_schema.tables ORDER BY table_catalog;' "$@" |
 sed 's/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
 while read -r db; do
     if [ -n "${FILTER:-}" ] &&
