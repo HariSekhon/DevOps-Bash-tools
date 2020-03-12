@@ -31,7 +31,7 @@ else
 	INSIDE_DOCKER :=
 endif
 
-CODE_FILES := $(shell git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done)
+CODE_FILES := $(shell if type git >/dev/null 2>&1; then git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done; fi)
 
 CPANM = cpanm
 
@@ -94,11 +94,15 @@ define MAKEFILE_USAGE_COMMON
 
     make help                   show this message
     make build                  installs all dependencies - OS packages and any language libraries via native tools eg. pip, cpanm, gem, go etc that are not available via OS packages
+    make build-retry            retries 'make build' x 3 until success to try to mitigate temporary upstream repo failures triggering false alerts in CI systems
+    make ci                     prints env, then runs 'build-retry' for more resilient CI builds with debugging
+    make printenv               prints environment variables, CPU cores, OS release, $$PWD, Git branch, hashref etc. Useful for CI debugging
     make system-packages        installs OS packages only (detects OS via whichever package manager is available)
     make test                   run tests
     make clean                  removes compiled / generated files, downloaded tarballs, temporary files etc.
 
     make submodules             initialize and update submodules to the right release (done automatically by build / system-packages)
+    make init                   same as above, often useful to do in CI systems to get access to additional submodule provided targets such as 'make ci'
 
     make cpan                   install any modules listed in any cpan-requirements.txt files if not already installed
 
@@ -129,36 +133,43 @@ export MAKEFILE_USAGE
 #	$(MAKE) build
 
 .PHONY: default
-default:
+default: git
 	@$(MAKE) main
 
 .PHONY: printenv
-printenv:
-	@printf "CPU Cores: "; nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null; :
-	@# $$USER not always set in sh
-	@# echo; printf "Git hashref: "; git rev-parse HEAD; \
-	@# echo; printf "Git hashref: "; git log --pretty=format:'%H' -n 1; \
-	@. $(BASH_TOOLS)/lib/ci.sh || : ; \
+printenv: git
+	@ printf "CPU Cores: "; nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null; :
+	@ # $$USER not always set in sh
+	@ # printf "Git hashref: "; git rev-parse HEAD
+	@ # printf "Git hashref: "; git log --pretty=format:'%H' -n 1
+	@ # printf "Git branch:  "; git branch --show-current # doesn't work on Alpine
+	@ . $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI || test -f /.dockerenv; then \
-			echo; echo "USER = `whoami`"; \
-			echo; echo "PWD = $$PWD"; \
-			echo; printf "Git branch:  "; git branch --show-current; \
-			echo; printf "Git commit: "; git log --pretty=format:'%ai  %cn  %H  %s' -n 1; \
-			echo; ls -l /.dockerenv 2>/dev/null || : ; \
-			echo; echo "OS RELEASE:"; echo; cat /etc/*release || : ; echo; \
-			echo; echo "CI ENVIRONMENT:"; echo; env ; echo;  \
-			echo; echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
+			echo; \
+			echo "USER = `whoami`"; \
+			echo "PWD = $$PWD"; \
+			echo; \
+			printf "Git branch:  "; git show-branch --current; \
+			printf "Git commit: "; git log --pretty=format:'%ai  %cn  %H  %s\n' -n 1; \
+			echo; \
+			if [ -f /.dockerenv  ]; then echo "Running inside Docker:"; ls -l /.dockerenv 2>/dev/null; fi; \
+			echo; \
+			echo "OS RELEASE:"; echo; cat /etc/*release || : ; echo; \
+			echo; \
+			echo "CI ENVIRONMENT:"; echo; env ; echo;  \
+			echo; \
+			echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
 			echo; \
 		else \
 			env | grep -E 'BUILD|PIPELINE|JOB|STAGE|\<CI_|^CI=' || : ; \
-		fi
+		fi | cat # stops git commands from entering pager
 
 .PHONY: ci
 ci: printenv
 	$(MAKE) build-retry
 
 .PHONY: build-retry
-build-retry:
+build-retry: git
 	$(BASH_TOOLS)/retry.sh $(MAKE) build
 
 .PHONY: main
@@ -188,12 +199,18 @@ usage: help
 quick:
 	QUICK=1 $(MAKE) build
 
+.PHONY: git
+git:
+	type git 2>/dev/null || $(BASH_TOOLS)/install_packages.sh git
+
 .PHONY: submodules
-submodules:
+submodules: git
+	@echo "checking out any git submodules:"
 	git submodule update --init --recursive
+	@echo
 
 .PHONY: git-clean
-git-clean:
+git-clean: git
 	@git clean -n -d
 	@printf "\n\n%s" "If you're happy with this list, run:"
 	@printf "\n\n%s\n\n" "git clean -f -d"
