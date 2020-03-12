@@ -67,8 +67,9 @@ build: init system-packages aws
 
 .PHONY: init
 init: git
-	@echo "running init:  git submodule update --init --recursive"
+	@echo "running init:"
 	git submodule update --init --recursive
+	@echo
 
 .PHONY: install
 install: build link aws
