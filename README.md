@@ -145,8 +145,33 @@ make install
   - automatic GPG and SSH agent handling for handling encrypted private keys without re-entering passwords, and lazy evaluation to only prompt key load the first time SSH is called
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
   - run `make bash` to link `.bashrc`/`.bash_profile` and the `.*` dot config files to your `$HOME` directory to auto-inherit everything
-- `lib/*.sh` - Bash utility libraries full of functions for [Docker](https://www.docker.com/), environment, CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/)), port and HTTP url availability content checks etc. Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
-- `setup/install_*.sh` - various simple to use installation scripts for common technologies like [Ansible](https://www.ansible.com/), [Terraform](https://www.terraform.io/), [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/) and [MiniShift](https://www.okd.io/minishift/) (Kubernetes / [Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) dev VMs), [Maven](https://maven.apache.org/), [Gradle](https://gradle.org/), [SBT](https://www.scala-sbt.org/), [EPEL](https://fedoraproject.org/wiki/EPEL), [RPMforge](http://repoforge.org/), [Homebrew](https://brew.sh/), [Travis CI](https://travis-ci.org/), [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools) etc.
+- `lib/*.sh` - Bash utility libraries full of functions for
+[Docker](https://www.docker.com/),
+environment,
+CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/) etc),
+port and HTTP url availability content checks etc.
+Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
+- `setup/install_*.sh` - various simple to use installation scripts for common technologies like
+[AWS CLI](https://aws.amazon.com/cli/),
+[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
+[GCloud SDK](https://cloud.google.com/sdk),
+[Terraform](https://www.terraform.io/),
+[Ansible](https://www.ansible.com/),
+[MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/),
+[MiniShift](https://www.okd.io/minishift/)
+(Kubernetes / [Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) dev VMs),
+[Maven](https://maven.apache.org/),
+[Gradle](https://gradle.org/),
+[SBT](https://www.scala-sbt.org/),
+[EPEL](https://fedoraproject.org/wiki/EPEL),
+[RPMforge](http://repoforge.org/),
+[Homebrew](https://brew.sh/),
+[Travis CI](https://travis-ci.org/),
+[Circle CI](https://circleci.com/),
+[AppVeyor](https://www.appveyor.com/),
+[BuildKite](https://buildkite.com),
+[Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
+etc.
 - `aws*.sh` - various [AWS](https://aws.amazon.com/) scripts for EC2 metadata, Spot Termination, SSM Parameter Store secret put from prompt, IAM Credential Reports on IAM users without MFA, old access keys and passwords, old user accounts that haven't logged in or used an access key recently, show password policy / set hardened password policy, show unattached IAM policies, show account summary to check various details including root account MFA enabled and no access keys, KMS keys rotation status, CloudTrail & Config status etc.
 - `gce*.sh` - [Google Cloud](https://cloud.google.com/) scripts for [GCE](https://cloud.google.com/compute/) metadata API and pre-emption
 - `curl_auth.sh` - wraps curl to send your username and password from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` which might otherwise expose your credentials in the process list or OS audit log files. Used by other API querying scripts
