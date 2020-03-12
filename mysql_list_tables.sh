@@ -15,7 +15,7 @@
 
 # Lists all PostgreSQL tables using adjacent impala_shell.sh script
 #
-# FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<schema>.<table>)
+# FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<table>)
 #
 # Auto-skips information_schema, performance_schema, sys and mysql databases
 #
