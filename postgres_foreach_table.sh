@@ -43,5 +43,5 @@ while read -r db schema table; do
     query="${query//\{schema\}/\"$schema\"}"
     query="${query//\{table\}/\"$table\"}"
     # doing \c $db is noisy
-    "$srcdir/psql.sh" -qd "$db" -c "$query" "$@"
+    "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@"
 done
