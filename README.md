@@ -208,7 +208,7 @@ etc.
 - `git*.sh` - various useful Git scripts, eg:
   - `git_foreach_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - runs a command on all adjacent repos from a given repolist (useful for updating all your github projects across work and home computers)
-  - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on feature branches or version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo), uses `git_foreach_branch.sh`
+  - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_public_repos.sh` - auto-creates a checkout's remotes to the 3 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org))
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to all 3 major public repositories
   - `git_repos_update.sh` - updates multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
