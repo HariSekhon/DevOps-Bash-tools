@@ -64,4 +64,4 @@ fi
 
 # split opts
 # shellcheck disable=SC2086
-psql $opts "$@"
+exec psql $opts "$@"
