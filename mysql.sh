@@ -56,4 +56,4 @@ fi
 
 # split opts
 # shellcheck disable=SC2086
-mysql $opts "$@"
+exec mysql $opts "$@"
