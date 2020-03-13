@@ -96,4 +96,4 @@ fi
 
 # split opts
 # shellcheck disable=SC2086
-impala-shell $opts -i "$impalad" "$@"
+exec impala-shell $opts -i "$impalad" "$@"
