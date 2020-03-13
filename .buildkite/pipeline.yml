@@ -16,6 +16,9 @@
 # BuildKite Pipeline
 
 steps:
+  - command: buildkite-agent pipeline upload
+    label: buildkite-agent pipeline upload
+    timeout: 2
   - command: ./install_packages.sh make
     label: install make
     timeout: 10
