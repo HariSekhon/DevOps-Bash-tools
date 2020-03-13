@@ -336,6 +336,12 @@ Install [GCP GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
 make gcp
 ```
 
+Installs [GCP GCloud Shell](https://cloud.google.com/shell) environment (auto-reinstalling packages and home directory config):
+
+```
+make gcp-shell
+```
+
 Install generically useful Python CLI tools and modules (includes [AWS CLI](https://aws.amazon.com/cli/), autopep8 etc):
 
 ```
