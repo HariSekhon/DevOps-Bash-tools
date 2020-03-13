@@ -19,6 +19,8 @@
 #
 # FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 #
+# Auto-skips information_schema, performance_schema, sys and mysql databases for safety
+#
 # Tested on MySQL 8.0.15
 
 set -eu  # -o pipefail
@@ -36,7 +38,7 @@ shift
 # exit the loop subshell if you Control-C
 trap 'exit 130' INT
 
-"$srcdir/mysql_list_tables.sh" "$@" |
+AUTOFILTER=1 "$srcdir/mysql_list_tables.sh" "$@" |
 while read -r db table; do
     printf '%s.%s\t' "$db" "$table"
     query="${query_template//\{db\}/\`$db\`}"
