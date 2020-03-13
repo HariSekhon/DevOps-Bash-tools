@@ -17,7 +17,7 @@
 #
 # add this command to the UI and it will read the rest of the steps from here:
 #
-# buildkite-agent pipeline upload
+# - command: buildkite-agent pipeline upload
 
 steps:
   - command: ./install_packages.sh make
