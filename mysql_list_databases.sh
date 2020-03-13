@@ -23,7 +23,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/mysql.sh" -s -e 'SELECT DISTINCT(table_catalog) FROM information_schema.tables ORDER BY table_catalog;' "$@" |
+"$srcdir/mysql.sh" -s -e 'SELECT DISTINCT(table_schema) FROM information_schema.tables ORDER BY table_schema;' "$@" |
 sed 's/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
 while read -r db; do
     if [ -n "${FILTER:-}" ] &&
