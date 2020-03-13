@@ -27,9 +27,12 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 # shellcheck disable=SC2154
 export ANSIBLE_CONFIG="$bash_tools/.ansible.cfg"
 
-add_PATH PYTHONPATH "$ANSIBLE_HOME/lib"
-add_PATH ANSIBLE_LIBRARY "$ANSIBLE_HOME/library"
-add_PATH MANPATH "$ANSIBLE_HOME/docs/man"
+if [ -n "${ANSIBLE_HOME:-}" ]; then
+    add_PATH PYTHONPATH "$ANSIBLE_HOME/lib"
+    add_PATH ANSIBLE_LIBRARY "$ANSIBLE_HOME/library"
+    # resets man search path, breaking man lookups
+    #add_PATH MANPATH "$ANSIBLE_HOME/docs/man"
+fi
 
 if [ -f ~/etc/ansible/hosts ]; then
     export ANSIBLE_HOSTS=~/etc/ansible/hosts
