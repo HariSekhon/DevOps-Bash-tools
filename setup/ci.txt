@@ -16,6 +16,7 @@
 # Files to sync to adjacent repos, one per line
 
 .appveyor.yml
+.buildkite/pipeline.yml
 .circleci/config.yml
 .cirrus.yml
 .drone.yml
