@@ -324,6 +324,18 @@ Install [AWS CLI](https://aws.amazon.com/cli/):
 make aws
 ```
 
+Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/):
+
+```
+make azure
+```
+
+Install [GCP](https://cloud.google.com/) [GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
+
+```
+make gcp
+```
+
 Install generically useful Python CLI tools and modules (includes [AWS CLI](https://aws.amazon.com/cli/), autopep8 etc):
 
 ```
