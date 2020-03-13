@@ -36,7 +36,7 @@ shift
 # exit the loop subshell if you Control-C
 trap 'exit 130' INT
 
-"$srcdir/postgres_list_tables.sh" "$@" |
+AUTOFILTER=1 "$srcdir/postgres_list_tables.sh" "$@" |
 while read -r db schema table; do
     printf '%s.%s.%s\t' "$db" "$schema" "$table"
     query="${query_template//\{db\}/\"$db\"}"
