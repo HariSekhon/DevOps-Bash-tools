@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists all PostgreSQL databases using adjacent impala_shell.sh script
+# Lists all PostgreSQL databases using adjacent psql.sh script
 #
 # FILTER environment variable will restrict to matching databases (if giving <db>.<table>, matches up to the first dot)
 #
