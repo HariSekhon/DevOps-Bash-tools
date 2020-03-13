@@ -17,7 +17,7 @@
 #
 # FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<schema>.<table>)
 #
-# Auto-skips information_schema and pg_catalog schemas
+# AUTOFILTER if set to any value skips information_schema and pg_catalog schemas
 #
 # Tested on AWS RDS PostgreSQL 9.5.15
 
@@ -29,11 +29,12 @@ srcdir="$(dirname "$0")"
 "$srcdir/psql.sh" -q -t -c "SELECT table_catalog, table_schema, table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" "$@" |
 sed 's/|//g; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
 #while read -r table; do
+if [ -n "${AUTOFILTER:-}" ]; then
+    grep -Ev '[[:space:]](information_schema|pg_catalog)[[:space:]]'
+else
+    cat
+fi |
 while read -r db schema table; do
-    if [ "$schema" = "information_schema" ] ||
-       [ "$schema" = "pg_catalog" ]; then
-        continue
-    fi
     if [ -n "${FILTER:-}" ] &&
        ! [[ "$db.$schema.$table" =~ $FILTER ]]; then
         continue
