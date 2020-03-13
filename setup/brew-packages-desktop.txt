@@ -105,6 +105,7 @@ pinentry
 pinentry-mac
 pip-completion
 postgresql
+prestosql
 pstree
 pwgen
 #pygments  # in pip-packages-desktop.txt
