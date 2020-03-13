@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists all PostgreSQL tables using adjacent impala_shell.sh script
+# Lists all PostgreSQL tables using adjacent psql.sh script
 #
 # FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<schema>.<table>)
 #
