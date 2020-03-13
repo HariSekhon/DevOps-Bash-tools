@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to PostgreSQL without having to find an impalad and repeatedly specify options like username and password
+# Script to more easily connect to PostgreSQL without having to repeatedly specify options like host, username and password
 #
 # Leverages standard PostgresSQL options as well as others likely to be found in the environment
 #
