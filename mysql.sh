@@ -45,8 +45,9 @@ fi
 MYSQL_PASSWORD="${MYSQL_PWD:-${MYSQL_PASSWORD:-${PASSWORD:-}}}"
 if [ -n "${MYSQL_PASSWORD:-}" ]; then
     echo "WARNING: not auto-adding -p<password> for safety" >&2
+    echo "exporting MYSQL_PWD instead but this is deprecated and may not work in future versions" >&2
     #opts="$opts -p$MYSQL_PASSWORD"
-    :
+    export MYSQL_PWD="$MYSQL_PASSWORD"
 fi
 
 MYSQL_DATABASE="${MYSQL_DATABASE:-${DATABASE:-}}"
