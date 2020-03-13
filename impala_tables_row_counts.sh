@@ -17,7 +17,7 @@
 #
 # TSV Output format:
 #
-# <database>    <table>     <row_count>
+# <database>.<table>     <row_count>
 #
 # FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 #
