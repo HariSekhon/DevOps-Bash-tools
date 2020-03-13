@@ -63,5 +63,4 @@ set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-
-"$srcdir/impala_foreach_table.sh" "SELECT COUNT(*) FROM {db}.{table}" "$@"
+exec "$srcdir/impala_foreach_table.sh" "SELECT COUNT(*) FROM {db}.{table}" "$@"
