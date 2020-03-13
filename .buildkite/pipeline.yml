@@ -25,11 +25,11 @@ steps:
   - wait
   - command: make init
     label: init
-    timeout: 10
+    timeout: 2
   - wait
   - command: make ci
     label: build
-    timeout: 120
+    timeout: 60
   - wait
   - command: make test
     label: test
