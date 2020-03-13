@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2019-07-30 15:16:58 +0100 (Tue, 30 Jul 2019)
+#  Date: 2020-03-13 11:05:05 +0000 (Fri, 13 Mar 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -13,14 +13,18 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -u
+# Counts rows for all MySQL tables in all databases using adjacent mysql.sh script
+#
+# TSV Output format:
+#
+# <database>.<table>     <row_count>
+#
+# FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
+#
+# Tested on MySQL 8.0.15
+
+set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-# sources heap, kerberos, brokers, zookeepers etc
-# shellcheck source=.bash.d/kafka.sh
-. "$srcdir/.bash.d/kafka.sh"
-
-# it's assigned in .bash.d/kafka.sh
-# shellcheck disable=SC2154,SC2086
-exec kafka-console-consumer.sh $bootstrap_server "$@"
+exec "$srcdir/mysql_foreach_table.sh" "SELECT COUNT(*) FROM {db}.{table}" "$@"

@@ -58,6 +58,7 @@ e2fsprogs
 expect
 etcd
 ffmpeg
+fish
 fortune
 fzf
 gem-completion
@@ -105,6 +106,7 @@ pinentry
 pinentry-mac
 pip-completion
 postgresql
+prestosql
 pstree
 pwgen
 #pygments  # in pip-packages-desktop.txt

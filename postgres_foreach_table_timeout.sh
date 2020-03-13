@@ -27,9 +27,17 @@ set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-if [ $# -lt 1 ]; then
+usage(){
+    if [ $# -gt 0 ]; then
+        echo "$*"
+        echo
+    fi
     echo "usage: ${0##*/} <query> [psql_options]"
     exit 3
+}
+
+if [ $# -lt 1 ]; then
+    usage
 fi
 
 query_template="$1"
@@ -38,15 +46,34 @@ shift
 # exit the loop subshell if you Control-C
 trap 'exit 130' INT
 
+timeout=""
+if [ -n "${TABLE_TIMEOUT:-}" ]; then
+    if ! [[ "$TABLE_TIMEOUT" =~ ^[[:digit:]]+$ ]]; then
+        usage "invalid TABLE_TIMEOUT environment variable, must be an integer!"
+    fi
+    timeout="timeout -k 10 $TABLE_TIMEOUT"
+fi
+
 AUTOFILTER=1 "$srcdir/postgres_list_tables.sh" "$@" |
 while read -r db schema table; do
     printf '%s.%s.%s\t' "$db" "$schema" "$table"
     query="${query_template//\{db\}/\"$db\"}"
     query="${query//\{schema\}/\"$schema\"}"
     query="${query//\{table\}/\"$table\"}"
-    # doing \c $db is noisy
-    "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@"
-    # weird situation on RDS PostgreSQL, hanging all night trying to select count(*) a table, happens on many tables, skip them like so and carry on
-    #timeout -k 10 60 "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@" || echo
+    # weird situation on RDS PostgreSQL, hanging all night trying to select count(*) a table, happens on many tables
+    set +e
+    # time them out, skip them and carry on
+    # doing \c $db is noisy, using -d $db instead
+    $timeout "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@"
+    result=$?
+    set -e
+    if [ $result -ne 0 ]; then
+        if [ $result -eq 124 ] &&
+           [ -n "$timeout" ]; then
+            echo
+        else
+            exit $result
+        fi
+    fi
 done |
 sed '/^[[:space:]]*$/d'

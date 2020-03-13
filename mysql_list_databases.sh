@@ -17,14 +17,21 @@
 #
 # FILTER environment variable will restrict to matching databases (if giving <db>.<table>, matches up to the first dot)
 #
+# AUTOFILTER if set to any value skips information_schema, performance_schema, sys and mysql databases
+#
 # Tested on MySQL 8.0.15
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/mysql.sh" -s -e 'SELECT DISTINCT(table_catalog) FROM information_schema.tables ORDER BY table_catalog;' "$@" |
+"$srcdir/mysql.sh" -s -e 'SELECT DISTINCT(table_schema) FROM information_schema.tables ORDER BY table_schema;' "$@" |
 sed 's/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
+if [ -n "${AUTOFILTER:-}" ]; then
+    grep -Ev '^(information_schema|performance_schema|sys|mysql)$'
+else
+    cat
+fi |
 while read -r db; do
     if [ -n "${FILTER:-}" ] &&
        ! [[ "$db" =~ ${FILTER%%.*} ]]; then

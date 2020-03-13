@@ -23,4 +23,4 @@ srcdir="$(dirname "$0")"
 
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154,SC2086
-kafka-consumer-perf-test.sh $broker_list "$@"
+exec kafka-consumer-perf-test.sh $broker_list "$@"

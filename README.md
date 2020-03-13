@@ -78,7 +78,9 @@ more official badges without logos to differentiate them
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
-150+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos 200+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
+200+ Shell Scripts, Advanced Bash environment & Utility Code Library.
+
+Used heavily by all my other [GitHub](https://github.com/harisekhon) repos 300+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
 
 Contains:
 
@@ -192,7 +194,10 @@ etc.
 - `impala_shell.sh` - connects to [Impala](https://impala.apache.org/) via impala-shell, parsing the Hadoop topology map and selecting a random datanode to connect to its Impalad. This is mostly for convenience to shorten commands and while it acts as a poor man's load balancer, you might want to instead use my real load balancer [HAProxy config for Impala](https://github.com/HariSekhon/HAProxy-configs) (and many other Big Data & NoSQL technologies). Optional environment variables `$IMPALA_HOST` (eg. point to HAProxy load balancer) and `IMPALA_SSL=1` (or use regular impala-shell `--ssl` argument pass through)
 - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
 - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
-- `psql.sh` - connects to [PostreSQL](https://www.postgresql.org/) via psql. This is mostly for convenience to infer possible settings from the environment using both standard postgres supported environment variables as well as some similar variables
+- `mysql.sh` - connects to [MySQL](https://www.mysql.com/) via `mysql`, auto-populating settings from environment variables like `MYSQL_HOST`, `MYSQL_USER` etc.
+- `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
+- `mysql_*.sh` - various scripts using `mysql.sh` for row counts, iterating each table, or outputting clean lists of databases and tables for quick scripting
+- `psql.sh` - connects to [PostreSQL](https://www.postgresql.org/) via `psql`, auto-populating settings from environment variables, using both standard postgres supported environment variables like `PG*` (see [doc](https://www.postgresql.org/docs/9.0/libpq-envars.html) as well as other likely variables like `POSTGRES_HOST`, `POSTGRES_USER` etc.
 - `postgres_foreach_table.sh` - executes a SQL query against every table, replacing `{db}`, `{schema}` and `{table}` in each iteration eg. `select count(*) from {table}`
 - `postgres_*.sh` - various scripts using `psql.sh` for row counts, iterating each table, or outputting clean lists of databases, schemas and tables for quick scripting
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
@@ -203,8 +208,9 @@ etc.
 - `hdfs_file_size.sh` / `hdfs_file_size_including_replicas.sh` - quickly differentiate HDFS files raw size vs total replicated size
 - `check_*.sh` - extensive collection of generalized tests that can be applied to any repo (these run against all my GitHub repos via CI)
 - `git*.sh` - various useful Git scripts, eg:
-  - `git_for_each_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
-  - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merging master updates to all branches
+  - `git_foreach_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
+  - `git_foreach_repo.sh` - runs a command on all adjacent repos from a given repolist (useful for updating all your github projects across work and home computers)
+  - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_public_repos.sh` - auto-creates a checkout's remotes to the 3 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org))
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to all 3 major public repositories
   - `git_repos_update.sh` - updates multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
@@ -316,6 +322,24 @@ Install [AWS CLI](https://aws.amazon.com/cli/):
 
 ```
 make aws
+```
+
+Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/):
+
+```
+make azure
+```
+
+Install [GCP GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
+
+```
+make gcp
+```
+
+Install [GCP GCloud Shell](https://cloud.google.com/shell) environment (sets up persistent OS packages and all home directory configs):
+
+```
+make gcp-shell
 ```
 
 Install generically useful Python CLI tools and modules (includes [AWS CLI](https://aws.amazon.com/cli/), autopep8 etc):

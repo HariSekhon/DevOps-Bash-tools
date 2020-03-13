@@ -20,15 +20,14 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
-    echo "BUILDKITE_AGENT_TOKEN environment variable not defined"
-fi
+# ============================================================================ #
+#                        M a c  /  L i n u x   A g e n t
+# ============================================================================ #
 
 buildkite_tags="os=linux"
 
 export PATH="$PATH:$HOME/.buildkite-agent/bin"
 
-# Mac / Linux
 if type -P buildkite-agent &>/dev/null; then
     if [ -z "${BUILDKITE_DOCKER:-}" ]; then
         uname_s="$(uname -s)"
@@ -43,7 +42,18 @@ if type -P buildkite-agent &>/dev/null; then
     fi
 fi
 
-# Docker
+# falls through to Docker agent
+
+# ============================================================================ #
+#                                  D o c k e r
+# ============================================================================ #
+
+# only necessary for Docker, installed agent will have config file containing this token from setup/install_buildkite.sh
+if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
+    echo "BUILDKITE_AGENT_TOKEN environment variable not defined"
+    exit 1
+fi
+
 docker_tag="latest"
 #docker_tag="alpine"
 #docker_tag="centos"
@@ -59,4 +69,4 @@ fi
 
 # want splitting
 # shellcheck disable=SC2086
-docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$docker_tag" start --tags "$buildkite_tags" "$@"
+exec docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$docker_tag" start --tags "$buildkite_tags" "$@"

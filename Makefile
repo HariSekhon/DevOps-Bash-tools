@@ -210,8 +210,9 @@ gcp: system-packages
 	@./setup/install_gcloud.sh
 
 .PHONY: gcp-shell
-gcp-shell: system-packages link
-	@:
+gcp-shell:
+	@if [ -z "${DEVSHELL_PROJECT_ID:-}" ]; then echo "Not running inside Google Cloud Shell"; exit 1; fi
+	@$(MAKE) system-packages link
 
 .PHONY: vim
 vim:

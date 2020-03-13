@@ -13,9 +13,9 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists all PostgreSQL tables using adjacent psql.sh script
+# Lists all PostgreSQL schemas using adjacent psql.sh script
 #
-# FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<schema>.<table>)
+# FILTER environment variable will restrict to matching schemas (matches against fully qualified schema name <db>.<schema>)
 #
 # AUTOFILTER if set to any value skips information_schema and pg_catalog schemas
 #
@@ -25,19 +25,17 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-#"$srcdir/psql.sh" -q -t -c "SELECT table_catalog || '.' || table_schema || '.' || table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" "$@" |
-"$srcdir/psql.sh" -q -t -c "SELECT table_catalog, table_schema, table_name FROM information_schema.tables ORDER BY table_catalog, table_schema, table_name;" "$@" |
+"$srcdir/psql.sh" -q -t -c "SELECT DISTINCT table_catalog, table_schema FROM information_schema.tables ORDER BY table_catalog, table_schema;" "$@" |
 sed 's/|//g; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
-#while read -r table; do
 if [ -n "${AUTOFILTER:-}" ]; then
-    grep -Ev '[[:space:]](information_schema|pg_catalog)[[:space:]]'
+    grep -Ev '[[:space:]](information_schema|pg_catalog)$'
 else
     cat
 fi |
-while read -r db schema table; do
+while read -r db schema; do
     if [ -n "${FILTER:-}" ] &&
-       ! [[ "$db.$schema.$table" =~ $FILTER ]]; then
+       ! [[ "$db.$schema" =~ $FILTER ]]; then
         continue
     fi
-    printf "%s\t%s\t%s\n" "$db" "$schema" "$table"
+    printf "%s\t%s\n" "$db" "$schema"
 done

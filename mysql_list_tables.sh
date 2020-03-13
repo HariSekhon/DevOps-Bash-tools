@@ -17,7 +17,7 @@
 #
 # FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<table>)
 #
-# Auto-skips information_schema, performance_schema, sys and mysql databases
+# AUTOFILTER if set to any value skips information_schema, performance_schema, sys and mysql databases
 #
 # Tested on MySQL 8.0.15
 
@@ -27,7 +27,11 @@ srcdir="$(dirname "$0")"
 
 "$srcdir/mysql.sh" -s -e "SELECT table_schema, TABLE_NAME FROM information_schema.tables;" "$@" |
 sed 's/|//g; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
-grep -Ev '^(information_schema|performance_schema|sys|mysql)[[:space:]]' |
+if [ -n "${AUTOFILTER:-}" ]; then
+    grep -Ev '^(information_schema|performance_schema|sys|mysql)[[:space:]]'
+else
+    cat
+fi |
 while read -r db table; do
     if [ -n "${FILTER:-}" ] &&
        ! [[ "$db.$table" =~ $FILTER ]]; then

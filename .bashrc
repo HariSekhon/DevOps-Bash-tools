@@ -70,6 +70,9 @@ if [ "$TERM" != "dumb" ] && \
     eval "$(dircolors -b)"
 fi
 
+# shut up Mac, Bash still rocks
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
 # ============================================================================ #
 
 # technically should get called only for new login shells

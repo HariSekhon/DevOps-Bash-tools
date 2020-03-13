@@ -25,4 +25,4 @@ srcdir="$(dirname "$0")"
 
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154
-zookeeper-shell.sh "${KAFKA_ZOOKEEPERS:-}${KAFKA_ZOOKEEPER_ROOT:-}" "$@"
+exec zookeeper-shell.sh "${KAFKA_ZOOKEEPERS:-}${KAFKA_ZOOKEEPER_ROOT:-}" "$@"

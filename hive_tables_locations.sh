@@ -30,4 +30,4 @@ set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-"$srcdir/hive_tables_metadata.sh" Location "$@"
+exec "$srcdir/hive_tables_metadata.sh" Location "$@"

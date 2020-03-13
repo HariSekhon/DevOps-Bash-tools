@@ -84,7 +84,7 @@ echo "Installing Python PyPI Modules"
 echo
 
 if is_CI; then
-    echo "running in quiet mode for CI to minimize log noise"
+    #echo "running in quiet mode for CI to minimize log noise"
     opts="$opts -q"
 fi
 

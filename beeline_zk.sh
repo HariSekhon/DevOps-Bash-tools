@@ -65,4 +65,4 @@ if [ -n "${HIVESERVER2_SSL:-}" ] ||
 fi
 
 set -x
-beeline -u "jdbc:hive2://$HIVE_ZOOKEEPERS/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=${HIVESERVER2_ZOOKEEPER_NAMESPACE}${opts}" "$@"
+exec beeline -u "jdbc:hive2://$HIVE_ZOOKEEPERS/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=${HIVESERVER2_ZOOKEEPER_NAMESPACE}${opts}" "$@"

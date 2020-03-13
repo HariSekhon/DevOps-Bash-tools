@@ -61,7 +61,8 @@ gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
         "$srcdir/../yum_install_packages.sh" azure-cli
     elif [ "$uname_s" = Darwin ]; then
-        brew install azure-cli
+        # outputs progress dots to prevent CI builds from terminating after 10 mins without output
+        "$srcdir/../brew_install_packages.sh" azure-cli
     elif [ "$uname_s" = Linux ]; then
         if ! [ -t 1 ]; then
             echo "Non-interactive terminal, cannot install Azure CLI using Microsoft's install script as it assumes to pass /dev/tty to second-level python script, skipping..."
