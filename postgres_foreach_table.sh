@@ -46,5 +46,7 @@ while read -r db schema table; do
     query="${query//\{table\}/\"$table\"}"
     # doing \c $db is noisy
     "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@"
+    # weird situation on RDS PostgreSQL, hanging all night trying to select count(*) a table, happens on many tables, skip them like so and carry on
+    #timeout -k 10 60 "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@" || echo
 done |
 sed '/^[[:space:]]*$/d'
