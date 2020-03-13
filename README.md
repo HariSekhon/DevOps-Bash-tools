@@ -330,7 +330,7 @@ Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/):
 make azure
 ```
 
-Install [GCP](https://cloud.google.com/) [GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
+Install [GCP GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
 
 ```
 make gcp
