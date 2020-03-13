@@ -58,6 +58,7 @@ e2fsprogs
 expect
 etcd
 ffmpeg
+fish
 fortune
 fzf
 gem-completion
