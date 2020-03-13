@@ -53,15 +53,24 @@ zstyle ':completion:*' menu select
 # allows zsh completion scripts run commands with sudo privileges - do not enable if using untrusted autocompletion scripts!!
 #zstyle ':completion::complete:*' gain-privileges 1
 
+# ============================================================================ #
+#                                S e t t i n g s
+# ============================================================================ #
+
+# compatible style with other shells
+#set -o AUTO_CD
+# casse insensitive, underscores stripped
+setopt AUTO_CD
+
 setopt COMPLETE_ALIASES
 
-setopt correct
+setopt CORRECT
 export SPROMPT="Correct %R to %r? [Yes, No, Abort, Edit] "
 
 autoload U colors && colors
 
 # expand wilcard expansion on unquoted variables like Bash
-set -o GLOB_SUBST
+setopt GLOB_SUBST
 
 # ============================================================================ #
 #                                   Oh-My-ZSH
