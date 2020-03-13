@@ -36,6 +36,7 @@ setup_file .bash_profile
 
 setup_file .zshrc
 setup_file .zprofile
+setup_file .zshenv
 
 echo
 echo "symlinking dot files to \$HOME directory: $HOME"
