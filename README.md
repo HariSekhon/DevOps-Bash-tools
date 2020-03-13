@@ -78,7 +78,7 @@ more official badges without logos to differentiate them
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
-150+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos 200+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
+200+ Shell Scripts, Advanced Bash environment & Utility Code Library used by all my other [GitHub](https://github.com/harisekhon) repos 300+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
 
 Contains:
 
