@@ -336,7 +336,7 @@ Install [GCP GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
 make gcp
 ```
 
-Installs [GCP GCloud Shell](https://cloud.google.com/shell) environment (auto-reinstalling packages and home directory config):
+Install [GCP GCloud Shell](https://cloud.google.com/shell) environment (sets up persistent OS packages and all home directory configs):
 
 ```
 make gcp-shell
