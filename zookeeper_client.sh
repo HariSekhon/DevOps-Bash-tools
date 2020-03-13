@@ -28,4 +28,4 @@ if [ -z "${ZOOKEEPERS:-}" ]; then
     fi
 fi
 
-zookeeper-client -server "$ZOOKEEPERS" "$@"
+exec zookeeper-client -server "$ZOOKEEPERS" "$@"
