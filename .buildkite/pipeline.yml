@@ -14,11 +14,12 @@
 #
 
 # BuildKite Pipeline
+#
+# add this command to the UI and it will read the rest of the steps from here:
+#
+# buildkite-agent pipeline upload
 
 steps:
-  - command: buildkite-agent pipeline upload
-    label: buildkite-agent pipeline upload
-    timeout: 2
   - command: ./install_packages.sh make
     label: install make
     timeout: 10
