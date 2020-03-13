@@ -19,6 +19,8 @@
 #
 # FILTER environment variable will restrict to matching fully qualified tables (<db>.<schema>.<table>)
 #
+# Auto-skips information_schema and pg_catalog schemas for safety
+#
 # Tested on AWS RDS PostgreSQL 9.5.15
 
 set -eu  # -o pipefail
@@ -44,4 +46,5 @@ while read -r db schema table; do
     query="${query//\{table\}/\"$table\"}"
     # doing \c $db is noisy
     "$srcdir/psql.sh" -q -t -d "$db" -c "$query" "$@"
-done
+done |
+sed '/^[[:space:]]*$/d'
