@@ -21,4 +21,4 @@ srcdir="$(dirname "$0")"
 # shellcheck source=.bash.d/kafka.sh
 . "$srcdir/.bash.d/kafka.sh"
 
-kafka-producer-perf-test.sh "$@"
+exec kafka-producer-perf-test.sh "$@"
