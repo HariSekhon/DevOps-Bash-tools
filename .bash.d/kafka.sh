@@ -22,19 +22,29 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
-#export KAFKA_HOME=/usr/local/kafka
-export KAFKA_HOME=/usr/hdp/current/kafka-broker
-add_PATH "$KAFKA_HOME/bin"
+for directory in \
+    /usr/hdp/current/kafka-broker \
+    /usr/local/kafka \
+    ; do
+    if [ -d "$directory" ]; then
+        #export KAFKA_HOME=/usr/local/kafka
+        export KAFKA_HOME=/usr/hdp/current/kafka-broker
+        add_PATH "$KAFKA_HOME/bin"
+        break
+    fi
+done
 
 # kafka wrapper scripts use underscores instead of dashes so do not conflict with above kafka scripts which appear first in $PATH
-kafka_wrappers="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
-add_PATH "$kafka_wrappers"
+# moved to top level now
+#kafka_wrappers="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers"
+#add_PATH "$kafka_wrappers"
 
 # HDP defaults to 8GB, on VMs that often breaks cli commands which try to claim too much ram and fail
 export KAFKA_OPTS="${KAFKA_OPTS:-} -Xms1G -Xmx1G"
 
 # there was another setting like KAFKA_KERBEROS_CLIENT I've used before but can't remember, this should work too
-kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers/kafka_cli_jaas.conf"
+#kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/../kafka_wrappers/kafka_cli_jaas.conf"
+kafka_cli_jaas_conf="$(dirname "${BASH_SOURCE[0]}")/../kafka_cli_jaas.conf"
 export KAFKA_OPTS="${KAFKA_OPTS:-} -Djava.security.auth.login.config=$kafka_cli_jaas_conf"
 
 # ============================================================================ #
