@@ -31,7 +31,7 @@ steps:
         elif type yum 2>/dev/null; then
             rpm -q make || yum install -y make
         elif type brew 2>/dev/null; then
-            brew install -y make
+            brew install make
         fi
     label: install make
     timeout: 10
