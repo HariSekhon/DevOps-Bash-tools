@@ -59,9 +59,11 @@ sed "$sed_script" |
     # - import names don't have python-* prefixes
     # - import names don't have *-python suffixes
     # - import names replace dashes with underscores
+    # - psycopg2-binary -> psycopg2
 sed '
     s/^python-//;
     s/-*python$//;
+    s/-binary$//;
     s/-/_/g;
     s/\[.*\]//
 ' # |
