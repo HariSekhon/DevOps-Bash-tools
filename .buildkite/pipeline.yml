@@ -20,7 +20,7 @@
 # - command: buildkite-agent pipeline upload
 
 steps:
-  - command: ./install_packages.sh make
+  - command: if type apk 2>/dev/null; then apk add --no-cache make; elif type apt 2>/dev/null; then apt update && apt install -y make; elif type yum 2>/dev/null; then yum install -y make; fi
     label: install make
     timeout: 10
   - wait
