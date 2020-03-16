@@ -16,6 +16,7 @@
 # Files to link to $HOME, one per line
 
 .ansible.cfg
+.athenacli/athenaclirc
 .aws/shell/awsshellrc
 .config/flake8
 .config/htop/htoprc
