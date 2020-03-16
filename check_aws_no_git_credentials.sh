@@ -43,7 +43,8 @@ matches="$(git grep -i \
     -e 'AWS_(ACCESS_KEY.*=.*[[:alnum:]]\+' \
     -e 'AWS_SECRET_KEY.*=.*[[:alnum:]]\+' \
     -e 'AWS_SECRET_ACCESS_KEY.*=.*[[:alnum:]]\+' \
-    -e 'AWS_SESSION_TOKEN.*=.*[[:alnum:]]\+'
+    -e 'AWS_SESSION_TOKEN.*=.*[[:alnum:]]\+' \
+    || :
 )"
 if [ -f .gitallowed ]; then
     matches="$(grep -v -f .gitallowed <<< "$matches")"
