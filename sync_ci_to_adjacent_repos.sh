@@ -37,6 +37,7 @@ while read -r repo dir; do
     fi
     while read -r filename; do
         target="../$dir/$filename"
+        mkdir -pv "${target%/*}"
         echo "syncing $filename -> $target"
         sed "s,/bash-tools,/$repo," "$filename" > "$target"
         if [ "$repo" = "nagios-plugins" ]; then

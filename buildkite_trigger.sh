@@ -45,5 +45,5 @@ curl \
     -H "Authorization: Bearer $BUILDKITE_TOKEN" \
     -X "POST" \
     -F "commit=${BUILDKITE_COMMIT:-HEAD}" \
-    -F "branch=${BUILDKITE_BRANCH:-master}" # \
-    #-F "message=triggered by Hari Sekhon ${0##*/} script"
+    -F "branch=${BUILDKITE_BRANCH:-master}" \
+    -F "message=triggered by Hari Sekhon ${0##*/} script"

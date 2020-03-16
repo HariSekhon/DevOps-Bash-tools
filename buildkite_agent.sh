@@ -54,11 +54,16 @@ if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
     exit 1
 fi
 
-docker_tag="latest"
-#docker_tag="alpine"
-#docker_tag="centos"
-if [ -n "${BIG:-}" ]; then
+# latest, alpine, centos, ubuntu, stable, stable-latest, stable-ubuntu etc - see dockerhub_show_tags.py from adjacent DevOps Python tools repo
+docker_tag="${BUILDKITE_DOCKER_TAG:-latest}"
+if [ -n "${BIG:-}" ] && [ -z "${BUILDKITE_DOCKER_TAG:-}" ]; then
     docker_tag="ubuntu"
+fi
+
+if [ "$docker_tag" = "latest" ]; then
+    buildkite_tags+=",distribution=alpine"
+elif [[ "$docker_tag" =~ alpine|centos|ubuntu ]]; then
+    buildkite_tags+=",distribution=${docker_tag#stable-}"
 fi
 
 opts=""
