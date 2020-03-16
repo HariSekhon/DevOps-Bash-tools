@@ -15,11 +15,13 @@
 
 # Exports Cloudera Navigator logs from the underlying PostgreSQL database to files in the local directory
 #
-# TSV Output format:
-#
-# <database>.<schema>.<table>     <row_count>
-#
 # FILTER environment variable will restrict to matching fully qualified tables (<db>.<schema>.<table>)
+#
+# CSV Output Format is dependent on database columns and can change, but at time of writing was:
+#
+# HDFS logs:
+#
+# id,service_name,username,ip_addr,event_time,operation,src,dest,permissions,allowed,impersonator,delegation_token_id
 #
 # Tested on AWS RDS PostgreSQL 9.5.15
 
@@ -29,12 +31,16 @@ set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-mkdir -pv cloudera_navigator_logs
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
-echo "Exporting Cloudera Navigator logs from PostgreSQL database:"
+logdir="$PWD/cloudera_navigator_logs"
 
 # only export tables matching this regex
 export FILTER='\.[[:alnum:]]+_audit_events_'
+
+tstamp "Exporting Cloudera Navigator logs from PostgreSQL database:"
+echo >&2
 
 # doesn't seem to like \copy no matter how many backslashes
 #"$srcdir/postgres_foreach_table.sh" "
@@ -42,14 +48,38 @@ export FILTER='\.[[:alnum:]]+_audit_events_'
 #\\copy (SELECT * FROM {db}.{schema}.{table}) TO replace('cloudera_navigator_logs/{db}.{schema}.{table}.csv', '\"', '') WITH (FORMAT CSV, HEADER);
 #" "$@"
 
+tstamp "logdir = $logdir"
+echo >&2
+mkdir -pv "$logdir"
+
 time {
 "$srcdir/postgres_list_tables.sh" "$@" |
 while read -r db schema table; do
-    echo "SELECT 'Exporting $db.$schema.$table' AS progress;"
-    echo "\\copy (SELECT * FROM \"$db\".\"$schema\".\"$table\") TO 'cloudera_navigator_logs/$db.$schema.$table.csv' WITH (FORMAT CSV, HEADER);"
-done |
-"$srcdir/psql.sh" "$@"
-echo
-echo "Cloudera Navigator PostgreSQL exports finished"
-echo
+#    echo "SELECT 'Exporting $db.$schema.$table' AS progress;"
+#    echo "\\copy (SELECT * FROM \"$db\".\"$schema\".\"$table\") TO 'cloudera_navigator_logs/$db.$schema.$table.csv' WITH (FORMAT CSV, HEADER);"
+#done |
+#"$srcdir/psql.sh" "$@"
+    filename="$logdir/$db.$schema.$table.csv"
+    tstamp "Exporting $db.$schema.$table:  "
+    rm -fv "$filename"  # would get overwritten anyway but removing to detect when psql errors out without non-zero exit code
+    psql.sh -c "\\copy (SELECT * FROM \"$db\".\"$schema\".\"$table\") TO '$filename' WITH (FORMAT CSV, HEADER);"
+    if ! [ -f "$filename" ]; then
+        tstamp "ERROR: EXPORT FAILED"
+        exit 1
+    fi
+    # only a header line
+    if wc -l "$filename" | grep -q '^1[[:space:]]'; then
+        tstamp "${filename##*/} has no logs, removing..."
+        rm -f "$filename"
+        echo >&2
+        continue
+    fi
+    # we run out of space without this as logs can easily be dozens of GB per day per service
+    tstamp "compressing $filename"
+    gzip -9 "$filename" &
+    echo >&2
+done || exit $?
+echo >&2
+tstamp "Cloudera Navigator PostgreSQL exports finished"
+echo >&2
 }
