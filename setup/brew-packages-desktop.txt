@@ -107,6 +107,7 @@ pgcli
 pinentry
 pinentry-mac
 pip-completion
+pipx
 postgresql
 prestosql
 pstree
