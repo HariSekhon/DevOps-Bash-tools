@@ -175,7 +175,6 @@ user(){
 }
 
 pass(){
-    passvar="${1:-PASSWORD}"
     # doesn't echo, we can do better by making it star for each char
     #read -r -s -p 'password: ' PASSWORD
     # don't local PASSWORD or default case will not export PASSWORD, changing case to work around
@@ -188,7 +187,10 @@ pass(){
         prompt='*'
         password="${password}${char}"
     done
-    export "$passvar"="$password"
+    #passvar="${1:-PASSWORD}"
+    for passvar in "${@:-PASSWORD}"; do
+        export "$passvar"="$password"
+    done
     echo
 }
 
