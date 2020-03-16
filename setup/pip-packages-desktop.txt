@@ -31,6 +31,7 @@ gitsome
 kazoo
 kube-shell
 nose
+pgcli
 # pep8 has been renamed to pycodestyle
 pycodestyle
 pyflakes
