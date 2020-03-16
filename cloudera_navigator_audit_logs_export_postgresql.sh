@@ -39,6 +39,9 @@ logdir="$PWD/cloudera_navigator_logs"
 # only export tables matching this regex
 export FILTER='\.[[:alnum:]]+_audit_events_'
 
+# if you only want Hive + Impala logs to determine table access patterns
+#export FILTER='\.(hive|impala)_audit_events_'
+
 tstamp "Exporting Cloudera Navigator logs from PostgreSQL database:"
 echo >&2
 
@@ -67,9 +70,16 @@ while read -r db schema table; do
         tstamp "ERROR: EXPORT FAILED"
         exit 1
     fi
+    # empty
+    if ! [ -s "$filename" ]; then
+        tstamp "${filename##*/} is empty, removing..."
+        rm -f "$filename"
+        echo >&2
+        continue
+    fi
     # only a header line
     if wc -l "$filename" | grep -q '^1[[:space:]]'; then
-        tstamp "${filename##*/} has no logs, removing..."
+        tstamp "${filename##*/} has only header line, removing..."
         rm -f "$filename"
         echo >&2
         continue
@@ -77,7 +87,8 @@ while read -r db schema table; do
     # we run out of space without this as logs can easily be dozens of GB per day per service
     tstamp "compressing $filename"
     # don't background if short on space as big new log will fill faster than old log can be gzipped and is only removed after gzip completes
-    gzip -9 "$filename" &
+    # --force overwrite of existing gzip logs
+    gzip -9 --force "$filename" &
     echo >&2
 done || exit $?
 tstamp "waiting for background log compression to finish..."
