@@ -190,6 +190,7 @@ most
 mp3info
 mtr
 multitail
+mycli
 nagios-nrpe-plugin
 nagios-plugins
 nasm
