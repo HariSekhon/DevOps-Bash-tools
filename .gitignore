@@ -196,6 +196,8 @@
 .ovftool.ssldb
 .Qsync/
 .parallel/
+.pgpass
+# stores credentials
 .pig_history
 .pki
 .psql_history
