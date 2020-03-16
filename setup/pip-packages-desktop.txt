@@ -30,6 +30,7 @@ gitsome
 # impala-shell
 kazoo
 kube-shell
+mycli
 nose
 pgcli
 # pep8 has been renamed to pycodestyle
