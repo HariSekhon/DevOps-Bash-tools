@@ -11,3 +11,4 @@ wallix/awless           awless
 wercker/wercker         wercker-cli
 # do via install script to load token
 #buildkite/buildkite     buildkite
+dbcli/tap               athenacli
