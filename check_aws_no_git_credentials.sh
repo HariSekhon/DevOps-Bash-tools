@@ -39,16 +39,17 @@ fi
 echo "checking $(pwd)"
 echo
 
-matches="$(git grep -i \
-    -e 'AWS_(ACCESS_KEY.*=.*[[:alnum:]]\+' \
-    -e 'AWS_SECRET_KEY.*=.*[[:alnum:]]\+' \
-    -e 'AWS_SECRET_ACCESS_KEY.*=.*[[:alnum:]]\+' \
-    -e 'AWS_SESSION_TOKEN.*=.*[[:alnum:]]\+' \
+matches="$(git grep -Ei \
+    -e 'AWS_ACCESS_KEY.*=.*[[:alnum:]]+' \
+    -e 'AWS_SECRET_KEY.*=.*[[:alnum:]]+' \
+    -e 'AWS_SECRET_ACCESS_KEY.*=.*[[:alnum:]]+' \
+    -e 'AWS_SESSION_TOKEN.*=.*[[:alnum:]]+' \
     || :
 )"
 if [ -f .gitallowed ]; then
-    matches="$(grep -v -f .gitallowed <<< "$matches")"
+    matches="$(grep -Ev -f .gitallowed <<< "$matches")"
 fi
+matches="$(grep -Ev -e "^${0##*/}:[[:space:]]+-e[[:space:]]+'AWS_" -e '^.bash.d/aws.sh:' <<< "$matches" || :)"
 if [ -n "$matches" ]; then
         # dangerous, fails silently and suppressed legitimate matches
         #grep -v -f "$gitallowed" |
