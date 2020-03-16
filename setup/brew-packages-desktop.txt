@@ -102,6 +102,7 @@ packer-completion
 #parallel # in brew-packages.txt
 parquet-tools
 perltidy
+pgcli
 pinentry
 pinentry-mac
 pip-completion
