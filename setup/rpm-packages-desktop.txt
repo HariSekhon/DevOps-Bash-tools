@@ -110,6 +110,7 @@ memdump
 mercurial
 mosh
 mp3info
+mycli
 mysql
 MySQL-python
 mysql-server
