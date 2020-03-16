@@ -94,6 +94,7 @@ mosh
 monitoring-plugins
 mplayer
 mtr
+mycli
 mysql
 octave
 openssl
