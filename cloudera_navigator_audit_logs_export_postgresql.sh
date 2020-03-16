@@ -23,6 +23,14 @@
 #
 # id,service_name,username,ip_addr,event_time,operation,src,dest,permissions,allowed,impersonator,delegation_token_id
 #
+# Hive logs:
+#
+# id,event_time,allowed,service_name,username,ip_addr,operation,database_name,object_type,table_name,operation_text,impersonator,resource_path,object_usage_type
+#
+# Impala logs:
+#
+# id,event_time,allowed,service_name,username,impersonator,ip_addr,operation,query_id,session_id,status,database_name,object_type,table_name,privilege,operation_text
+#
 # Tested on AWS RDS PostgreSQL 9.5.15
 
 # For individual table export timings set \timing in ~/.psqlrc
