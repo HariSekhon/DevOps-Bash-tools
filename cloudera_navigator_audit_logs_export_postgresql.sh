@@ -42,6 +42,9 @@ export FILTER='\.[[:alnum:]]+_audit_events_'
 # if you only want Hive + Impala logs to determine table access patterns
 #export FILTER='\.(hive|impala)_audit_events_'
 
+# don't background gzip's if filesystem < 30GB free as filesystem will fill up faster than gzip can complete and remove original files to free space
+MIN_FILESYSTEM_MB=30000
+
 tstamp "Exporting Cloudera Navigator logs from PostgreSQL database:"
 echo >&2
 
@@ -86,9 +89,13 @@ while read -r db schema table; do
     fi
     # we run out of space without this as logs can easily be dozens of GB per day per service
     tstamp "compressing $filename"
-    # don't background if short on space as big new log will fill faster than old log can be gzipped and is only removed after gzip completes
-    # --force overwrite of existing gzip logs
-    gzip -9 --force "$filename" &
+    filesystem_free_mb="$(df -m . | awk '{print $4}' | tail -n 1)"
+    if [ "$filesystem_free_mb" -lt $MIN_FILESYSTEM_MB ]; then
+        # --force overwrite of existing gzip logs
+        gzip -9 --force "$filename"
+    else
+        gzip -9 --force "$filename" &
+    fi
     echo >&2
 done || exit $?
 tstamp "waiting for background log compression to finish..."
