@@ -35,6 +35,10 @@ if type -P buildkite-agent &>/dev/null; then
             buildkite_tags="os=mac"
         elif [ "$uname_s" = Linux ]; then
             buildkite_tags="os=linux"
+            distro="$(awk -F= '/^ID=/{print $2}' /etc/*release)"
+            distro="${distro//\"/}"
+            version="$(awk -F= '/^VERSION_ID=/{print $2}' /etc/*release | grep -Eom 1 '[[:digit:]]+' | head -n 1)"
+            buildkite_tags+=",distro=$distro,version=$version"
         else
             buildkite_tags="os=unknown"
         fi
@@ -61,9 +65,9 @@ if [ -n "${BIG:-}" ] && [ -z "${BUILDKITE_DOCKER_TAG:-}" ]; then
 fi
 
 if [ "$docker_tag" = "latest" ]; then
-    buildkite_tags+=",distribution=alpine"
+    buildkite_tags+=",distro=alpine"
 elif [[ "$docker_tag" =~ alpine|centos|ubuntu ]]; then
-    buildkite_tags+=",distribution=${docker_tag#stable-}"
+    buildkite_tags+=",distro=${docker_tag#stable-}"
 fi
 
 opts=""
