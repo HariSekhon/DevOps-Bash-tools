@@ -1,0 +1,37 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-03-16 14:02:53 +0000 (Mon, 16 Mar 2020)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# https://buddy.works/docs/yaml/yaml-schema
+
+- pipeline: "Build"
+  trigger_mode: "ON_EVERY_PUSH"
+  ref_name: "master"
+  ref_type: "BRANCH"
+  trigger_condition: "ALWAYS"
+  actions:
+  - action: "Execute: make ci test"
+    type: "BUILD"
+    working_directory: "/buddy/devops-bash-tools"
+    docker_image_name: "library/ubuntu"
+    docker_image_tag: "18.04"
+    execute_commands:
+    - "apt update &&"
+    - "apt install -qy make &&"
+    - "make init &&"
+    - "make ci test"
+    volume_mappings:
+    - "/:/buddy/devops-bash-tools"
+    shell: "BASH"
+    trigger_condition: "ALWAYS"
