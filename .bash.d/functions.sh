@@ -175,18 +175,20 @@ user(){
 }
 
 pass(){
+    passvar="${1:-PASSWORD}"
     # doesn't echo, we can do better by making it star for each char
     #read -r -s -p 'password: ' PASSWORD
-    PASSWORD=""
+    # don't local PASSWORD or default case will not export PASSWORD, changing case to work around
+    local password=""
     prompt="Enter password: "
     while IFS= read -p "$prompt" -r -s -n 1 char; do
         if [[ "$char" == $'\0' ]]; then
             break
         fi
         prompt='*'
-        PASSWORD="${PASSWORD}${char}"
+        password="${password}${char}"
     done
-    export PASSWORD
+    export "$passvar"="$password"
     echo
 }
 
