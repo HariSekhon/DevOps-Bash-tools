@@ -1,0 +1,106 @@
+
+[aws_profile default]
+# If you are a user of aws cli, you might want to use some configurations of aws cli,
+# please refer to https://athenacli.readthedocs.io/en/latest/awsconfig.html for more infomation.
+aws_access_key_id = ''
+aws_secret_access_key = ''
+region = '' # e.g us-west-2, us-east-1
+
+# Amazon S3 staging directory where query results are stored
+# NOTE: S3 should in the same region as specified above.
+# The format is 's3://<your s3 directory path>'
+s3_staging_dir = ''
+
+[main]
+# log_file location.
+log_file = ~/.athenacli/app.log
+
+# history_file location.
+history_file = '~/.athenacli/history'
+
+# Multi-line mode allows breaking up the sql statements into multiple lines. If
+# this is set to True, then the end of the statements must have a semi-colon.
+# If this is set to False then sql statements can't be split into multiple
+# lines. End of line (return) is considered as the end of the statement.
+multi_line = True
+
+# Destructive warning mode will alert you before executing a sql statement
+# that may cause harm to the database such as "drop table", "drop database"
+# or "shutdown".
+destructive_warning = True
+
+# Default log level. Possible values: "CRITICAL", "ERROR", "WARNING", "INFO"
+# and "DEBUG". "NONE" disables logging.
+log_level = INFO
+
+# Timing of sql statments and table rendering.
+timing = True
+
+# Table format. Possible values: ascii, double, github,
+# psql, plain, simple, grid, fancy_grid, pipe, orgtbl, rst, mediawiki, html,
+# latex, latex_booktabs, textile, moinmoin, jira, vertical, tsv, csv.
+# Recommended: ascii
+table_format = ascii
+
+# Syntax coloring style. Possible values (many support the "-dark" suffix):
+# manni, igor, xcode, vim, autumn, vs, rrt, native, perldoc, borland, tango, emacs,
+# friendly, monokai, paraiso, colorful, murphy, bw, pastie, paraiso, trac, default,
+# fruity.
+# Screenshots at http://mycli.net/syntax
+syntax_style = default
+
+# Keybindings: Possible values: emacs, vi.
+# Emacs mode: Ctrl-A is home, Ctrl-E is end. All emacs keybindings are available in the REPL.
+# When Vi mode is enabled you can use modal editing features offered by Vi in the REPL.
+key_bindings = emacs
+
+# Athena prompt
+# \d - Database name
+# \r - Region
+# \D - The full current date
+# \m - Minutes of the current time
+# \n - Newline
+# \P - AM/PM
+# \R - The current time, in 24-hour military time (0–23)
+# \s - Seconds of the current time
+prompt = '\r:\d> '
+prompt_continuation = '-> '
+
+# enable pager on startup
+enable_pager = True
+
+# Custom colors for the completion menu, toolbar, etc.
+[colors]
+# Completion menus.
+Token.Menu.Completions.Completion.Current = 'bg:#00aaaa #000000'
+Token.Menu.Completions.Completion = 'bg:#008888 #ffffff'
+Token.Menu.Completions.MultiColumnMeta = 'bg:#aaffff #000000'
+Token.Menu.Completions.ProgressButton = 'bg:#003333'
+Token.Menu.Completions.ProgressBar = 'bg:#00aaaa'
+
+# Query results
+Token.Output.Header = 'bold'
+Token.Output.OddRow = ''
+Token.Output.EvenRow = ''
+
+# Selected text.
+Token.SelectedText = '#ffffff bg:#6666aa'
+
+# Search matches. (reverse-i-search)
+Token.SearchMatch = '#ffffff bg:#4444aa'
+Token.SearchMatch.Current = '#ffffff bg:#44aa44'
+
+# The bottom toolbar.
+Token.Toolbar = 'bg:#222222 #aaaaaa'
+Token.Toolbar.Off = 'bg:#222222 #888888'
+Token.Toolbar.On = 'bg:#222222 #ffffff'
+
+# Search/arg/system toolbars.
+Token.Toolbar.Search = 'noinherit bold'
+Token.Toolbar.Search.Text = 'nobold'
+Token.Toolbar.System = 'noinherit bold'
+Token.Toolbar.Arg = 'noinherit bold'
+Token.Toolbar.Arg.Text = 'nobold'
+
+# Favorite queries.
+[favorite_queries]
