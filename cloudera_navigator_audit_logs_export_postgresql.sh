@@ -76,9 +76,12 @@ while read -r db schema table; do
     fi
     # we run out of space without this as logs can easily be dozens of GB per day per service
     tstamp "compressing $filename"
+    # don't background if short on space as big new log will fill faster than old log can be gzipped and is only removed after gzip completes
     gzip -9 "$filename" &
     echo >&2
 done || exit $?
+tstamp "waiting for background log compression to finish..."
+wait
 echo >&2
 tstamp "Cloudera Navigator PostgreSQL exports finished"
 echo >&2
