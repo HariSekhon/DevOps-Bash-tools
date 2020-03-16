@@ -39,23 +39,22 @@ fi
 echo "checking $(pwd)"
 echo
 
+matches="$(git grep -i \
+    -e 'AWS_(ACCESS_KEY.*=.*[[:alnum:]]\+' \
+    -e 'AWS_SECRET_KEY.*=.*[[:alnum:]]\+' \
+    -e 'AWS_SECRET_ACCESS_KEY.*=.*[[:alnum:]]\+' \
+    -e 'AWS_SESSION_TOKEN.*=.*[[:alnum:]]\+'
+)"
 if [ -f .gitallowed ]; then
-    gitallowed=.gitallowed
-else
-    gitallowed=/dev/null
+    matches="$(grep -v -f .gitallowed <<< "$matches")"
 fi
-
-if git grep \
-    -e 'AWS_ACCESS_KEY.*=' \
-    -e 'AWS_SECRET_KEY.*=' \
-    -e 'AWS_SESSION_TOKEN.*=' \
-    -e 'aws_access_key_id.*=' \
-    -e 'aws_secret_access_key.*=' \
-    -e 'aws_session_token.*=' |
-        grep -v -e '\.bash\.d/aws.sh:' \
-                -e "${0##*/}:" |
-        grep -v -f "$gitallowed" |
-    grep .; then
+if [ -n "$matches" ]; then
+        # dangerous, fails silently and suppressed legitimate matches
+        #grep -v -f "$gitallowed" |
+        #grep -v -e '\.bash\.d/aws.sh:' \
+        #        -e "${0##*/}:" |
+    # shellcheck disable=SC2001
+    sed 's/\(=.....\).*/\1....../' <<< "$matches"
     echo
     echo "DANGER: potential AWS credentials found in Git!!"
     exit 1
