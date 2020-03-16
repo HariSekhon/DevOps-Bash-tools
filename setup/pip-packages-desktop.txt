@@ -17,6 +17,7 @@
 #ansible
 
 ansible-lint
+athenacli
 autopep8
 aws-shell
 awscli
