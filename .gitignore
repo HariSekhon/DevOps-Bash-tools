@@ -162,6 +162,8 @@
 .ipython/
 .irb-save-history
 .irb_history
+# contains creds
+.iredisrc
 .ivy2/
 .jline-jython.history
 .kde
