@@ -229,6 +229,7 @@ pasco
 pastebinit
 pciutils
 perl-doc
+pgcli
 php5-cli
 phrack-all
 pidgin
