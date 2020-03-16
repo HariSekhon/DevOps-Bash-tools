@@ -1,10 +1,11 @@
+# USE defaults from aws cli instead
 
 [aws_profile default]
 # If you are a user of aws cli, you might want to use some configurations of aws cli,
 # please refer to https://athenacli.readthedocs.io/en/latest/awsconfig.html for more infomation.
-aws_access_key_id = ''
-aws_secret_access_key = ''
-region = '' # e.g us-west-2, us-east-1
+#aws_access_key_id = ''
+#aws_secret_access_key = ''
+#region = '' # e.g us-west-2, us-east-1
 
 # Amazon S3 staging directory where query results are stored
 # NOTE: S3 should in the same region as specified above.
