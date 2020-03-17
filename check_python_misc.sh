@@ -50,6 +50,7 @@ for filename in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.
     echo -n '.'
     check "quit() calls" '^[^#]*\bquit\b' "$filename"
     check "self.self references" '^[^#]*\bself\.self\b' "$filename"
+    #check "'assert'!! This could be disabled at runtime by PYTHONOPTIMIZE=1 / -O / -OO and should not be used" '^[[:space:]]+\bassert\b' "$filename"
 done
 
 if [ $exitcode != 0 ]; then
