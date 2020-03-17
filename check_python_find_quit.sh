@@ -25,23 +25,37 @@ if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]
     exit 0
 fi
 
-section "Python - finding any instances of calling quit() in code which are probably typos for custom qquit()"
+section "Python - finding miscellaneous code issues (calling quit(), self.self references)"
 
 start_time="$(start_timer)"
 
-for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
-    type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
-    echo -n '.'
-    if grep -Eq '^[^#]*\bquit\b' "$x"; then
+exitcode=0
+
+check(){
+    local msg="$1"
+    local regex="$2"
+    local filename="$3"
+    if grep -Eq "$regex" "$filename"; then
         echo
-        grep -Eq '^[^#]*\bquit\b' "$x"
+        grep -E "$regex" "$filename"
         echo
         echo
-        echo "ERROR: $x contains quit() call!! Typo?"
-        exit 1
+        echo "ERROR: $filename contains $msg!! Typo?"
+        exitcode=1
     fi
+}
+
+for filename in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
+    type isExcluded &>/dev/null && isExcluded "$filename" && echo -n '-' && continue
+    echo -n '.'
+    check "quit() calls" '^[^#]*\bquit\b' "$filename"
+    check "self.self references" '^[^#]*\bself\.self\b' "$filename"
 done
 
+if [ $exitcode != 0 ]; then
+    exit $exitcode
+fi
+
 time_taken "$start_time"
-section2 "Python OK - no quit() calls found"
+section2 "Python OK - miscellaneous checks passed"
 echo
