@@ -17,6 +17,10 @@ build:
   nodes:
     auto:
       commands:
-        - repo="${SCRUTINIZER_PROJECT#*/}"; git clone "https://github.com/$repo" code && cd code
+        #- repo="${SCRUTINIZER_PROJECT#*/}"; git clone "https://github.com/$repo" code && cd code
+        - checkout-code ~/build
+        - cd ~/build
+        - pwd
+        - ls -l
         - make init
         - make ci test
