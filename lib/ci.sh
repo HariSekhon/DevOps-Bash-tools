@@ -126,6 +126,15 @@ is_gitlab_ci(){
     return 1
 }
 
+# https://scrutinizer-ci.com/docs/build/environment-variables
+is_scrutinizer_ci(){
+    # also CI but specific to Scrutinizer, caught in is_CI generic
+    if [ -n "${SCRUTINIZER:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # http://docs.shippable.com/ci/env-vars/#stdEnv
 is_shippable_ci(){
     # also CI and CONTINUOUS_INTEGRATION but not really specific to Shippable, caught in is_CI generic
@@ -135,7 +144,6 @@ is_shippable_ci(){
     fi
     return 1
 }
-
 
 is_tfs_ci(){
     if [ -n "${TF_BUILD:-}" ]; then
@@ -171,6 +179,7 @@ is_CI(){
        is_codefresh ||
        is_cirrus_ci ||
        is_drone_io||
+       is_scrutinizer_ci ||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0
