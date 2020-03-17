@@ -49,6 +49,15 @@ is_appveyor(){
     return 1
 }
 
+# https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
+is_buddy_works_ci(){
+    # also BUDDY but a bit too generic for my liking
+    if [ -n "${BUDDY_PIPELINE_ID:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://buildkite.com/docs/pipelines/environment-variables
 is_buildkite(){
     # also CI but not really specific, caught in is_CI generic
@@ -175,6 +184,7 @@ is_CI(){
        is_azure_devops ||
        is_appveyor ||
        is_buildkite ||
+       is_buddy_works_ci ||
        is_codeship ||
        is_codefresh ||
        is_cirrus_ci ||
