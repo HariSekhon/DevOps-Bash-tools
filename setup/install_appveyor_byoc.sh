@@ -32,7 +32,7 @@ EOF
 
 # AppVeyor host dependencies
 # sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
-if grep -qi 'debian|ubuntu' /etc/*release; then
+if grep -Eiq 'debian|ubuntu' /etc/*release; then
     apt-get update
     apt-get install -y libcap2-bin libterm-ui-perl sudo sysvinit-utils
 fi
