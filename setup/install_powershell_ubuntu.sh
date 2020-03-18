@@ -20,6 +20,9 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+sudo=""
+[ $EUID -eq 0 ] || sudo=sudo
+
 if type -P pwsh &>/dev/null; then
     echo "PowerShell is already installed"
     exit 0
