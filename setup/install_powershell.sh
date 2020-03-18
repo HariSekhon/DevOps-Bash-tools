@@ -64,14 +64,15 @@ elif is_linux; then
 #        $sudo apt-get update
 #        $sudo apt-get install -y powershell
     elif grep -qi 'redhat' /etc/*release; then
-        version="$(awk -F= '/^VERSION_ID=/{print $2}' /etc/*release)"
-        version="${version//\"/}"
-        if [ "$version" != 7 ]; then
-            echo "Unsupported RHEL/CentOS version"
-            exit 1
-        fi
-        curl "https://packages.microsoft.com/config/rhel/$version/prod.repo" | $sudo tee /etc/yum.repos.d/microsoft.repo
-        $sudo yum install -y powershell
+        "$srcdir/install_powershell_rhel.sh"
+#        version="$(awk -F= '/^VERSION_ID=/{print $2}' /etc/*release)"
+#        version="${version//\"/}"
+#        if [ "$version" != 7 ]; then
+#            echo "Unsupported RHEL/CentOS version"
+#            exit 1
+#        fi
+#        curl "https://packages.microsoft.com/config/rhel/$version/prod.repo" | $sudo tee /etc/yum.repos.d/microsoft.repo
+#        $sudo yum install -y powershell
     else
         echo "Unsupported Linux distribution"
         exit 1
