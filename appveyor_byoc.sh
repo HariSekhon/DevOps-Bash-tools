@@ -25,7 +25,9 @@ if [ -z "${APPVEYOR_TOKEN:-}" ]; then
     exit 1
 fi
 
-if ! type -P pwsh &>/dev/null; then
+export PATH="$PATH:/opt/appveyor/host-agent"
+
+if ! type -P appveyor-host-agent &>/dev/null; then
     "$srcdir/setup/install_appveyor_byoc.sh"
     clear
 fi
@@ -35,8 +37,6 @@ pwsh <<EOF
 Import-Module AppVeyorBYOC
 Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken $APPVEYOR_TOKEN
 EOF
-
-#export PATH="$PATH:/opt/appveyor/host-agent"
 
 if is_inside_docker && [ -x /opt/appveyor/host-agent/appveyor-host-agent ]; then
     cd /opt/appveyor/host-agent
