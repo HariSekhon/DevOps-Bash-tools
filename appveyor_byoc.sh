@@ -31,12 +31,14 @@ if ! type -P pwsh &>/dev/null; then
 fi
 
 # leading whitespace break PowerShell commands
-pwsh || : <<EOF
+pwsh <<EOF
 Import-Module AppVeyorBYOC
 Connect-AppVeyorToComputer -AppVeyorUrl https://ci.appveyor.com -ApiToken $APPVEYOR_TOKEN
 EOF
 
-if is_inside_docker; then
+#export PATH="$PATH:/opt/appveyor/host-agent"
+
+if is_inside_docker && [ -x /opt/appveyor/host-agent/appveyor-host-agent ]; then
     cd /opt/appveyor/host-agent
     /opt/appveyor/host-agent/appveyor-host-agent
 fi
