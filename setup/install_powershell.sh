@@ -52,15 +52,16 @@ elif is_linux; then
     # Debian 10 not supported yet, only in Preview
     # https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7#debian-10
     elif grep -q '^ID=debian' /etc/*release; then
-        # works in Stretch but not in Jessie
-        #codename="$(awk -F= '/^VERSION_CODENAME=/{print $2}' /etc/*release)"
-        codename="$(grep -Eo '^VERSION="[[:digit:]]* \(.+\)"' /etc/*release | sed 's/.*(//; s/)//; s/"//g')"
-        $sudo apt-get update
-        $sudo apt-get install -y curl gnupg apt-transport-https
-        curl https://packages.microsoft.com/keys/microsoft.asc | $sudo apt-key add -
-        $sudo sh -c "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$codename-prod $codename main' > /etc/apt/sources.list.d/microsoft.list"
-        $sudo apt-get update
-        $sudo apt-get install -y powershell
+        "$srcdir/install_powershell_debian.sh"
+#        # works in Stretch but not in Jessie
+#        #codename="$(awk -F= '/^VERSION_CODENAME=/{print $2}' /etc/*release)"
+#        codename="$(grep -Eo '^VERSION="[[:digit:]]* \(.+\)"' /etc/*release | sed 's/.*(//; s/)//; s/"//g')"
+#        $sudo apt-get update
+#        $sudo apt-get install -y curl gnupg apt-transport-https
+#        curl https://packages.microsoft.com/keys/microsoft.asc | $sudo apt-key add -
+#        $sudo sh -c "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$codename-prod $codename main' > /etc/apt/sources.list.d/microsoft.list"
+#        $sudo apt-get update
+#        $sudo apt-get install -y powershell
     elif grep -qi 'redhat' /etc/*release; then
         version="$(awk -F= '/^VERSION_ID=/{print $2}' /etc/*release)"
         version="${version//\"/}"
