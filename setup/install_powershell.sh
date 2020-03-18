@@ -35,19 +35,20 @@ elif is_linux; then
     # Ubuntu 16.04 and 18.04 - 18.10 onwards use Snap, will require updates
     # 16.04 works, 18.04 has broken package dependency
     if grep -q '^DISTRIB_ID=Ubuntu' /etc/*release; then
-        if grep -E '^DISTRIB_RELEASE=(19|18\.10)' /etc/*release; then
-            # assigned in lib
-            # shellcheck disable=SC2154
-            $sudo snap install powershell --classic
-        else
-            version="$(awk -F= '/^DISTRIB_RELEASE=/{print $2}' /etc/*release)"
-            $sudo apt-get update
-            $sudo apt-get install -y wget apt-transport-https
-            wget -q "https://packages.microsoft.com/config/ubuntu/$version/packages-microsoft-prod.deb"
-            $sudo dpkg -i packages-microsoft-prod.deb
-            $sudo apt-get update
-            $sudo apt-get install -y powershell
-        fi
+        "$srcdir/install_powershell_ubuntu.sh"
+#        if grep -E '^DISTRIB_RELEASE=(19|18\.10)' /etc/*release; then
+#            # assigned in lib
+#            # shellcheck disable=SC2154
+#            $sudo snap install powershell --classic
+#        else
+#            version="$(awk -F= '/^DISTRIB_RELEASE=/{print $2}' /etc/*release)"
+#            $sudo apt-get update
+#            $sudo apt-get install -y wget apt-transport-https
+#            wget -q "https://packages.microsoft.com/config/ubuntu/$version/packages-microsoft-prod.deb"
+#            $sudo dpkg -i packages-microsoft-prod.deb
+#            $sudo apt-get update
+#            $sudo apt-get install -y powershell
+#        fi
     # works on Debian 8 & 9
     # Debian 10 not supported yet, only in Preview
     # https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-7#debian-10
