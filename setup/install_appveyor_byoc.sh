@@ -19,11 +19,19 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir="$(dirname "$0")"
 
-"$srcdir/install_powershell.sh"
+if ! type -P pwsh &>/dev/null; then
+    "$srcdir/install_powershell.sh"
+fi
 
 # leading whitespace break PowerShell commands
 pwsh << EOF
 Install-Module AppVeyorBYOC -Scope CurrentUser -Force; Import-Module AppVeyorBYOC
 EOF
+
+# AppVeyor host dependencies
+# sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
+if is_linux; then
+    "$srcdir/install_packages.sh" libcap2-bin libterm-ui-perl sudo sysvinit-utils
+fi
