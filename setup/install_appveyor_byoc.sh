@@ -32,6 +32,6 @@ EOF
 
 # AppVeyor host dependencies
 # sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
-if grep -q 'debian|ubuntu' /etc/*release; then
+if grep -qi 'debian|ubuntu' /etc/*release; then
     "$srcdir/install_packages.sh" libcap2-bin libterm-ui-perl sudo sysvinit-utils
 fi
