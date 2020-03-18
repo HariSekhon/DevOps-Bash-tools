@@ -82,7 +82,7 @@ more official badges without logos to differentiate them
 
 200+ Shell Scripts, Advanced Bash environment & Utility Code Library.
 
-Used heavily by all my [GitHub repos](https://github.com/harisekhon) and their 300+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
+Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 300+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
 
 Contains:
 
