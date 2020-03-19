@@ -22,7 +22,7 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-config="$srcdir/concourse_quickstart.yml"
+config="$srcdir/setup/concourse_quickstart.yml"
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
