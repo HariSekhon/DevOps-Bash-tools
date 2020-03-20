@@ -90,6 +90,7 @@
 .cbq_history
 .ccm/
 .CFUserTextEncoding
+.circleci/build_agent_settings.json
 # Circle CI API Token stored in here
 .circleci/cli.yml
 .circleci/update_check.yml
