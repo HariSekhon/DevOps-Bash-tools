@@ -21,9 +21,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-build_gradle="build.gradle"
+build_files="$(find "${1:-.}" -name build.gradle)"
 
-if [ -z "$(find "${1:-.}" -name "$build_gradle")" ]; then
+if [ -z "$build_files" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -33,8 +33,7 @@ section "G r a d l e"
 start_time="$(start_timer)"
 
 if type -P gradle &>/dev/null; then
-    find "${1:-.}" -name "$build_gradle" |
-    grep -v '/build/' |
+    grep -v '/build/' <<< "$build_files" |
     sort |
     while read -r build_gradle; do
         echo "Validating $build_gradle"
