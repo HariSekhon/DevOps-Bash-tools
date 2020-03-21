@@ -19,6 +19,7 @@
 .buildkite/pipeline.yml
 .circleci/config.yml
 .cirrus.yml
+.concourse.yml
 .drone.yml
 .gitlab-ci.yml
 #.travis.yml
