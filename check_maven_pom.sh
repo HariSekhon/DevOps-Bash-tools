@@ -21,9 +21,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-pom="pom.xml"
+poms="$(find "${1:-.}" -name "pom.xml")"
 
-if [ -z "$(find "${1:-.}" -name "$pom")" ]; then
+if [ -z "$poms" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -33,8 +33,7 @@ section "M a v e n"
 start_time="$(start_timer)"
 
 if type -P mvn &>/dev/null; then
-    find "${1:-.}" -name "$pom" |
-    grep -v '/target/' |
+    grep -v '/target/' <<< "$poms" |
     while read -r pom; do
         echo "Validating $pom"
         mvn validate -f "$pom" || exit $?
