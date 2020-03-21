@@ -19,9 +19,18 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir="$(dirname "$0")"
 
-"$srcdir/install_powershell.sh"
+if ! type -P pwsh &>/dev/null; then
+    "$srcdir/install_powershell.sh"
+fi
+
+# AppVeyor host dependencies
+# sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
+if grep -Eiq 'debian|ubuntu' /etc/*release; then
+    apt-get update
+    apt-get install -y libcap2-bin libterm-ui-perl sudo sysvinit-utils
+fi
 
 # leading whitespace break PowerShell commands
 pwsh << EOF

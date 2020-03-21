@@ -27,4 +27,8 @@ if [ -z "${APPVEYOR_TOKEN:-}" ]; then
     exit 1
 fi
 
-exec docker run -ti --rm -e APPVEYOR_TOKEN -v "$PWD":/pwd -w /pwd debian:9 ./appveyor_byoc.sh
+export DEBIAN_FRONTEND=noninteractive
+
+#exec docker run -ti --rm -e APPVEYOR_TOKEN -e DEBIAN_FRONTEND -v "$PWD":/pwd -w /pwd debian:9 ./appveyor_byoc.sh
+#exec docker run -ti --rm -e APPVEYOR_TOKEN -e DEBIAN_FRONTEND -v "$PWD":/pwd -w /pwd harisekhon/appveyor:debian ./appveyor_byoc.sh
+exec docker run -ti --rm -e APPVEYOR_TOKEN -e DEBIAN_FRONTEND harisekhon/appveyor:debian

@@ -47,7 +47,7 @@ matches="$(git grep -Ei \
     || :
 )"
 if [ -f .gitallowed ]; then
-    matches="$(grep -Ev -f .gitallowed <<< "$matches")"
+    matches="$(grep -Ev -f .gitallowed <<< "$matches" || :)"
 fi
 matches="$(grep -Ev -e "^${0##*/}:[[:space:]]+-e[[:space:]]+'AWS_" -e '^.bash.d/aws.sh:' <<< "$matches" || :)"
 if [ -n "$matches" ]; then

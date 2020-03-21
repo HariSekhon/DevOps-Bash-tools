@@ -49,6 +49,15 @@ is_appveyor(){
     return 1
 }
 
+# https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
+is_buddy_works_ci(){
+    # also BUDDY but a bit too generic for my liking
+    if [ -n "${BUDDY_PIPELINE_ID:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://buildkite.com/docs/pipelines/environment-variables
 is_buildkite(){
     # also CI but not really specific, caught in is_CI generic
@@ -126,6 +135,15 @@ is_gitlab_ci(){
     return 1
 }
 
+# https://scrutinizer-ci.com/docs/build/environment-variables
+is_scrutinizer_ci(){
+    # also CI but specific to Scrutinizer, caught in is_CI generic
+    if [ -n "${SCRUTINIZER:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # http://docs.shippable.com/ci/env-vars/#stdEnv
 is_shippable_ci(){
     # also CI and CONTINUOUS_INTEGRATION but not really specific to Shippable, caught in is_CI generic
@@ -135,7 +153,6 @@ is_shippable_ci(){
     fi
     return 1
 }
-
 
 is_tfs_ci(){
     if [ -n "${TF_BUILD:-}" ]; then
@@ -167,10 +184,12 @@ is_CI(){
        is_azure_devops ||
        is_appveyor ||
        is_buildkite ||
+       is_buddy_works_ci ||
        is_codeship ||
        is_codefresh ||
        is_cirrus_ci ||
        is_drone_io||
+       is_scrutinizer_ci ||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0
