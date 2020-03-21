@@ -29,6 +29,8 @@ ubuntu:18.04
 gentoo/stage3-amd64
 mcr.microsoft.com/azure-cli
 google/cloud-sdk
+postgres
+concourse/concourse
 harisekhon/github
 harisekhon/pytools
 harisekhon/perl-tools
