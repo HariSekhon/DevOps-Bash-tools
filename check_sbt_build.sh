@@ -21,7 +21,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -name build.sbt)" ]; then
+build_sbt="build.sbt"
+
+if [ -z "$(find "${1:-.}" -name "$build_sbt")" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -31,7 +33,7 @@ section "S B T"
 start_time="$(start_timer)"
 
 if type -P sbt &>/dev/null; then
-    find "${1:-.}" -name build.sbt |
+    find "${1:-.}" -name "%build_sbt" |
     grep -v '/target/' |
     sort |
     while read -r build_sbt; do
