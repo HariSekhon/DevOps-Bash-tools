@@ -48,7 +48,7 @@ more official badges without logos to differentiate them
 [![Shippable](https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/devops-bash-tools/builds)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
-[![buddy pipeline](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070)
+[![Buddy](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 [![BuildKite](https://img.shields.io/buildkite/151f2ed84b2cb3056c3f41c16c00a4fd1c7082719590b04753/master?label=BuildKite)](https://buildkite.com/hari-sekhon/devops-bash-tools)
 
