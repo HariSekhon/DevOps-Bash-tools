@@ -71,7 +71,9 @@ echo
 
 echo "updating pipeline: $pipeline"
 # fly sp
-fly -t "$target" set-pipeline -p "$pipeline" -c .concourse.yml
+set +o pipefail
+yes | fly -t "$target" set-pipeline -p "$pipeline" -c .concourse.yml
+set -o pipefail
 echo
 
 echo "unpausing pipeline: $pipeline"
