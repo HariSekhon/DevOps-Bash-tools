@@ -54,6 +54,6 @@ jobs:
             - |
               cd code &&
               apt update -q &&
-              apt install -qy make &&
+              apt install -qy git make &&
               make init &&
               make ci test
