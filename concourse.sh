@@ -22,7 +22,10 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-config="$srcdir/setup/concourse_quickstart.yml"
+export CONCOURSE_USER="${CONCOURSE_USER:-test}"
+export CONCOURSE_PASSWORD="${CONCOURSE_PASSWORD:-test}"
+
+config="$srcdir/setup/concourse-docker-compose.yml"
 
 target="ci"
 
@@ -66,7 +69,7 @@ if [ "$action" = up ] &&
     echo
 fi
 
-fly -t "$target" login -c http://127.0.0.1:8080 -u test -p test
+fly -t "$target" login -c http://127.0.0.1:8080 -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
 echo "updating pipeline: $pipeline"
