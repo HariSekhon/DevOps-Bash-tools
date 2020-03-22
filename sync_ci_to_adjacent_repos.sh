@@ -39,7 +39,7 @@ while read -r repo dir; do
         target="../$dir/$filename"
         mkdir -pv "${target%/*}"
         echo "syncing $filename -> $target"
-        sed "s,/bash-tools,/$repo," "$filename" > "$target"
+        sed "s,/\(devops-\)*bash-tools,/$repo," "$filename" > "$target"
         if [ "$repo" = "nagios-plugins" ]; then
             perl -pi -e 's/(^[[:space:]]+make ci$)/\1 ci zookeeper-retry/' "$target"
         fi
