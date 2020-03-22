@@ -23,8 +23,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: concourse
-      POSTGRES_PASSWORD: concourse_pass
-      POSTGRES_USER: concourse_user
+      POSTGRES_PASSWORD: ${PGPASSWORD:-concourse_password}
+      POSTGRES_USER: ${PGUSER:-concourse_user}
       PGDATA: /database
 
   concourse:
@@ -33,12 +33,14 @@ services:
     privileged: true
     depends_on: [concourse-db]
     ports: ["8080:8080"]
+    #volumes:
+    #  - .:/pwd
     environment:
       CONCOURSE_POSTGRES_HOST: concourse-db
-      CONCOURSE_POSTGRES_USER: concourse_user
-      CONCOURSE_POSTGRES_PASSWORD: concourse_pass
+      CONCOURSE_POSTGRES_USER: ${PGUSER:-concourse_user}
+      CONCOURSE_POSTGRES_PASSWORD: ${PGPASSWORD:-concourse_password}
       CONCOURSE_POSTGRES_DATABASE: concourse
       CONCOURSE_EXTERNAL_URL: http://localhost:8080
-      CONCOURSE_ADD_LOCAL_USER: test:test
-      CONCOURSE_MAIN_TEAM_LOCAL_USER: test
+      CONCOURSE_ADD_LOCAL_USER: ${CONCOURSE_USER:-test2}:${CONCOURSE_PASSWORD:-test}
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: ${CONCOURSE_USER:-test2}
       CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
