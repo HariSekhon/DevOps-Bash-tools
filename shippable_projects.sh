@@ -48,10 +48,11 @@ if [ -n "$project_id" ] &&
     usage "invalid project id '$project_id' argument specified, must be alphanumeric"
 fi
 
+jq_query_common='[.id, .sourceRepoOwner.login, .name] | @tsv'
 # API returns list without project id or hashmap with project id
-jq_query='.[] | [.id, .name] | @tsv'
+jq_query=".[] | $jq_query_common"
 if [ -n "$project_id" ]; then
-    jq_query='[.id, .name] | @tsv'
+    jq_query="$jq_query_common"
 fi
 
 "$srcdir/shippable_api.sh" "/projects/$project_id?sortBy=createdAt&sortOrder=-1&ownerAccountIds=$SHIPPABLE_ACCOUNT_ID" "$@" |
