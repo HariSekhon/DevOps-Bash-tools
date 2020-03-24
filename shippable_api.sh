@@ -26,7 +26,7 @@ usage_description="Queries the Shippable API, auto-populating the base and API t
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
-if [ -z "$SHIPPABLE_TOKEN" ]; then
+if [ -z "${SHIPPABLE_TOKEN:-}" ]; then
     usage "SHIPPABLE_TOKEN environment variable is not set (generate this from your Web UI Dashboard -> profile -> API AUTH TOKENS"
 fi
 
