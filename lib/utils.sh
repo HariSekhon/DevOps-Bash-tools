@@ -774,7 +774,7 @@ usage(){
 "
     fi
     if [ -n "$*" ]; then
-        echo "$@"
+        echo "$*"
         echo
     fi
     cat <<EOF
