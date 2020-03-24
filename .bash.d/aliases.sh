@@ -38,12 +38,15 @@ alias r='. $bashrc'
 alias rq='set +x; . $bashrc; set -x'
 alias bashrc='$EDITOR $bashrc && r'
 alias bashrc2='$EDITOR $bashrc2 && r'
+alias bashrclocal='$EDITOR $bashrc.local'
+alias bashrc3=bashrclocal
 alias vimrc='$EDITOR $bash_tools/.vimrc'
 alias screenrc='$EDITOR $bash_tools/.screenrc'
 alias aliases='$EDITOR $bashd/aliases.sh'
 alias ae=aliases
 alias be=bashrc
 alias be2=bashrc2
+alias be3=bashrc3
 alias ve=vimrc
 alias se=screenrc
 # keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
