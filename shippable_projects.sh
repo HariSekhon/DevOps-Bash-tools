@@ -26,7 +26,7 @@ usage_description="Returns a list of Shippable projects ids and names, or a sing
 # shellcheck disable=SC2034
 usage_args="[<project_id>]"
 
-if [ -z "$SHIPPABLE_ACCOUNT_ID" ]; then
+if [ -z "${SHIPPABLE_ACCOUNT_ID:-}" ]; then
     usage "SHIPPABLE_ACCOUNT_ID environment variable is not set (get this value from your Web UI Dashboard)"
 fi
 
