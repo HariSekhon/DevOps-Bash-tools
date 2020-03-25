@@ -144,6 +144,13 @@ is_scrutinizer_ci(){
     return 1
 }
 
+is_semmle(){
+    if [ -n "${SEMMLE_PLATFORM:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # http://docs.shippable.com/ci/env-vars/#stdEnv
 is_shippable_ci(){
     # also CI and CONTINUOUS_INTEGRATION but not really specific to Shippable, caught in is_CI generic
@@ -190,6 +197,7 @@ is_CI(){
        is_cirrus_ci ||
        is_drone_io||
        is_scrutinizer_ci ||
+       is_semmle ||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0
