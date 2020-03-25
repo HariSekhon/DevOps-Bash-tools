@@ -54,6 +54,7 @@ this one I don't trust it'll stick around so using shields version instead
 [![Buddy](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 [![BuildKite](https://img.shields.io/buildkite/151f2ed84b2cb3056c3f41c16c00a4fd1c7082719590b04753/master?label=BuildKite)](https://buildkite.com/hari-sekhon/devops-bash-tools)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
@@ -224,6 +225,7 @@ etc.
   - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for several other scripts that use the GitHub API. Built on top of `curl_auth.sh`
   - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key_api.sh` - fetches GitHub users public SSH keys for quick local installation to `~/.ssh/authorized_keys`
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
+- `concourse.sh` - launches [Concourse CI](https://concourse-ci.org/) in docker, configures project using `.concourse.yml` from your `$PWD`, initiates build and tails results in terminal. Useful for instantly setting up Concourse CI system, can be called from any repo's top level directory that has a `.concourse.yml` config, giving standardization similar to other fully managed CI systems used in this and adjacent repos
 - `perl*.sh` - various Perl utilities eg:
   - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
   - `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
