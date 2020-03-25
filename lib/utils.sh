@@ -632,7 +632,7 @@ when_ports_down(){
         SECONDS=0
         # bash will interpolate from string for correct numeric comparison and safer to quote vars
         while [ "$SECONDS" -lt "$max_secs" ]; do
-            ((try_number + 1))
+            ((try_number+=1))
             timestamp "$try_number trying host '$host' port(s) '$ports'"
             if eval "$cmd"; then
                 down=1
