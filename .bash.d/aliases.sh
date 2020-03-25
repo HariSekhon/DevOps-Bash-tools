@@ -79,6 +79,7 @@ alias v='vim'
 alias grep='grep --color=auto'
 alias envg="env | grep -i"
 alias dec="decomment.sh"
+alias dum='du -max | sort -k1n | tail -n 10000'
 
 export templates="$github/tools/templates"
 alias templates='cd $templates'
