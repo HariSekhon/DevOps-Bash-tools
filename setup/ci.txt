@@ -25,6 +25,7 @@
 #.travis.yml
 azure-pipelines.yml
 bitbucket-pipelines.yml
+buddy.yml
 codefresh.yml
 shippable.yml
 wercker.yml
