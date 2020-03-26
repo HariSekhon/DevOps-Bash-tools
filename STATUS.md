@@ -12,12 +12,15 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/e6fcf7cb4dcc4905ab0a4cb91567fdda)](https://www.codacy.com/app/harisekhon/nagios-plugins)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugins/badge)](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugins)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HariSekhon/Nagios-Plugins.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/Nagios-Plugins/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugins&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugins)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugins&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugins)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugins&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugins)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugins&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugins)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/HariSekhon/Nagios-Plugins.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/Nagios-Plugins/alerts/)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/nagios-plugins)](https://github.com/harisekhon/nagios-plugins/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/nagios-plugins)](https://github.com/harisekhon/nagios-plugins/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-98k-lightgrey)](https://github.com/HariSekhon/Nagios-Plugins)
 
 
 [![Python 3](https://pyup.io/repos/github/HariSekhon/Nagios-Plugins/python-3-shield.svg)](https://pyup.io/repos/github/HariSekhon/Nagios-Plugins/)
@@ -40,8 +43,10 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff5152/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/Nagios-Plugins/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FNagios%20Plugins?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/Nagios-Plugins/builds)
 [![Wercker](https://app.wercker.com/status/76887616b9d1ea67f640e9001cd71662/s/master "wercker status")](https://app.wercker.com/project/byKey/76887616b9d1ea67f640e9001cd71662)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Nagios-Plugins/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Nagios-Plugins)
 [![BuildKite](https://img.shields.io/buildkite/331e375f6e0f6f8967b6cd57beabecb83d898e8bdd1c58e104/master?label=BuildKite)](https://buildkite.com/hari-sekhon/nagios-plugins)
+[![buddy pipeline](https://app.buddy.works/harisekhon/nagios-plugins/pipelines/pipeline/246986/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/nagios-plugins/pipelines/pipeline/246986)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Nagios-Plugins/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Nagios-Plugins)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Nagios-Plugins?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=9&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/nagios-plugins/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/Nagios-Plugins/addon/pipelines/home#!/)
@@ -99,8 +104,10 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/Dockerfiles/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDockerfiles?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/Dockerfiles/builds)
 [![Wercker](https://app.wercker.com/status/26a0f1151450a0de3d8a339345b70019/s/master "wercker status")](https://app.wercker.com/project/byKey/26a0f1151450a0de3d8a339345b70019)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Dockerfiles/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Dockerfiles)
 [![BuildKite](https://img.shields.io/buildkite/87bafe0ed6cc807143fb690a8bc32853311b836d8611a0a8c3/master?label=BuildKite)](https://buildkite.com/hari-sekhon/dockerfiles)
+[![buddy pipeline](https://app.buddy.works/harisekhon/dockerfiles/pipelines/pipeline/246993/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/dockerfiles/pipelines/pipeline/246993)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Dockerfiles/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Dockerfiles)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/Dockerfiles/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Dockerfiles?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=6&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/dockerfiles/master?logo=bitbucketi&label=BitBucket)](https://bitbucket.org/harisekhon/dockerfiles/addon/pipelines/home#!/)
@@ -135,14 +142,17 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/f7af72140c3b408b9659207ced17544f)](https://www.codacy.com/app/harisekhon/devops-python-tools)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Python-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Python-tools)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HariSekhon/DevOps-Python-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Python-tools/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/HariSekhon/DevOps-Python-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Python-tools/alerts/)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-python-tools)](https://github.com/harisekhon/devops-python-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-python-tools)](https://github.com/harisekhon/devops-python-tools/network)
 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
+
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-26k-lightgrey)](https://github.com/HariSekhon/DevOps-Python-tools)
 [![PyUp](https://pyup.io/repos/github/HariSekhon/DevOps-Python-tools/shield.svg)](https://pyup.io/account/repos/github/HariSekhon/DevOps-Python-tools/)
 [![Python 3](https://pyup.io/repos/github/HariSekhon/DevOps-Python-tools/python-3-shield.svg)](https://pyup.io/repos/github/HariSekhon/DevOps-Python-tools/)
 
@@ -160,11 +170,13 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Python-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Python-tools)
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Python-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Python-tools)
 [![Codeship Status for HariSekhon/DevOps-Python-tools](https://app.codeship.com/projects/b281baa0-3c5f-0138-caef-66210e546d42/status?branch=master)](https://app.codeship.com/projects/387251)
-[![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff5152/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/lib/dashboard/jobs)
+[![Shippable](https://img.shields.io/shippable/5e52c63445c70f0007ff5144/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Python-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Python-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/DevOps-Python-tools/builds)
 [![Wercker](https://app.wercker.com/status/b40735fb89e7d989dbaf5659a9af9a20/s/master "wercker status")](https://app.wercker.com/project/byKey/b40735fb89e7d989dbaf5659a9af9a20)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Python-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Python-tools)
 [![BuildKite](https://img.shields.io/buildkite/314d5913c332d6f1eebad4a10f23da906bca544bdde6550595/master?label=BuildKite)](https://buildkite.com/hari-sekhon/devops-python-tools)
+[![buddy pipeline](https://app.buddy.works/harisekhon/devops-python-tools/pipelines/pipeline/246990/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-python-tools/pipelines/pipeline/246990)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Python-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Python-tools)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Python-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=8&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-python-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-python-tools/addon/pipelines/home#!/)
@@ -206,6 +218,7 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-perl-tools)](https://github.com/harisekhon/devops-perl-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-perl-tools)](https://github.com/harisekhon/devops-perl-tools/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-9.1k-lightgrey)](https://github.com/HariSekhon/DevOps-Perl-tools)
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/harisekhon/DevOps-Perl-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/harisekhon/DevOps-Perl-tools)
@@ -224,8 +237,10 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Shippable](https://img.shields.io/shippable/5e52c6364c324200063326d5/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Perl-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Perl-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/DevOps-Perl-tools/builds)
 [![Wercker](https://app.wercker.com/status/1f2132ff1c5b4098e3321456e67f54db/s/master "wercker status")](https://app.wercker.com/project/byKey/1f2132ff1c5b4098e3321456e67f54db)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Perl-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Perl-tools)
 [![BuildKite](https://img.shields.io/buildkite/ca48d7fe0ea1028ec9d15894458a200d13d763ccc0d239b873/master?label=BuildKite)](https://buildkite.com/hari-sekhon/devops-perl-tools)
+[![buddy pipeline](https://app.buddy.works/harisekhon/devops-perl-tools/pipelines/pipeline/246987/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-perl-tools/pipelines/pipeline/246987)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Perl-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Perl-tools)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Perl-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=7&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-perl-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-perl-tools/addon/pipelines/home#!/)
@@ -265,6 +280,7 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/HAProxy-configs)](https://github.com/HariSekhon/HAProxy-configs/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/HAProxy-configs)](https://github.com/HariSekhon/HAProxy-configs/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-5k-lightgrey)](https://github.com/HariSekhon/HAProxy-configs)
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/HAProxy-configs)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/HAProxy-configs)
@@ -279,8 +295,9 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/HAProxy-configs/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FHAProxy-configs?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/HAProxy-configs/builds)
 [![Wercker](https://app.wercker.com/status/3eab52046f673b476fa5e54adb5dfbba/s/master "wercker status")](https://app.wercker.com/project/byKey/3eab52046f673b476fa5e54adb5dfbba)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/HAProxy-configs/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/HAProxy-configs)
 [![BuildKite](https://img.shields.io/buildkite/7545b71cb8b21d9bd2edb54efe6a60737eea9cced69e5e77fb/master?label=BuildKite)](https://buildkite.com/hari-sekhon/haproxy-configs)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/HAProxy-configs/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/HAProxy-configs)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.HAProxy-configs?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=10&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/haproxy-configs/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/haproxy-configs/addon/pipelines/home#!/)
@@ -321,6 +338,7 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-25k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
@@ -328,7 +346,6 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md)
-
 
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
@@ -339,8 +356,10 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Shippable](https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/devops-bash-tools/builds)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 [![BuildKite](https://img.shields.io/buildkite/151f2ed84b2cb3056c3f41c16c00a4fd1c7082719590b04753/master?label=BuildKite)](https://buildkite.com/hari-sekhon/devops-bash-tools)
+[![Buddy](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/245070)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
@@ -385,6 +404,7 @@ Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_lib&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_lib)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/lib)](https://github.com/harisekhon/lib/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/lib)](https://github.com/harisekhon/lib/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-10k-lightgrey)](https://github.com/HariSekhon/lib)
 
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/harisekhon/lib#hari-sekhon---perl-library)
@@ -404,8 +424,9 @@ Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 [![Shippable](https://img.shields.io/shippable/5e52c6364c324200063326d5/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/lib/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Flib?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/lib/builds)
 [![Wercker](https://app.wercker.com/status/7af643f46ecad1311bc1200fd42e509b/s/master "wercker status")](https://app.wercker.com/project/byKey/7af643f46ecad1311bc1200fd42e509b)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/lib/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/lib)
 [![BuildKite](https://img.shields.io/buildkite/73d50522a8dd505559b653dc21940c7f071664db776012507f/master?label=BuildKite)](https://buildkite.com/hari-sekhon/lib)
+[![buddy pipeline](https://app.buddy.works/harisekhon/lib/pipelines/pipeline/246982/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/lib/pipelines/pipeline/246982)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/lib/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/lib)
 
 
 [![Azure DevOps](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.lib?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=3&branchName=master)
@@ -454,14 +475,18 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cfc553fcdbc94491b3c8c56797dcd189)](https://www.codacy.com/app/harisekhon/pylib)
+[![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/pylib/badge/master)](https://www.codefactor.io/repository/github/harisekhon/pylib/overview/master)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HariSekhon/pylib.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/pylib/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_pylib&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_pylib)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_pylib&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_pylib)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_pylib&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_pylib)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_pylib&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_pylib)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/HariSekhon/pylib.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/pylib/alerts/)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/pylib)](https://github.com/harisekhon/pylib/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/pylib)](https://github.com/harisekhon/pylib/network)
 
-[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_pylib&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_pylib)
+
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-10k-lightgrey)](https://github.com/HariSekhon/pylib)
 [![Coverage Status](https://coveralls.io/repos/HariSekhon/pylib/badge.svg?branch=master&service=github)](https://coveralls.io/github/HariSekhon/pylib?branch=master)
 [![PyUp](https://pyup.io/repos/github/HariSekhon/pylib/shield.svg)](https://pyup.io/account/repos/github/HariSekhon/pylib/)
 [![Python 3](https://pyup.io/repos/github/HariSekhon/pylib/python-3-shield.svg)](https://pyup.io/repos/github/HariSekhon/pylib/)
@@ -480,11 +505,13 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/pylib/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/pylib)
 [![CircleCI](https://circleci.com/gh/HariSekhon/pylib.svg?style=svg)](https://circleci.com/gh/HariSekhon/pylib)
 [![Codeship Status for HariSekhon/pylib](https://app.codeship.com/projects/47db8760-3c4f-0138-d157-661d474a0ccb/status?branch=master)](https://app.codeship.com/projects/387232)
-[![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff5152/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/lib/dashboard/jobs)
+[![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff5152/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/pylib/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Fpylib?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/pylib/builds)
 [![Wercker](https://app.wercker.com/status/abfa58ca784a2d86cc417be3615f2d3a/s/master "wercker status")](https://app.wercker.com/project/byKey/abfa58ca784a2d86cc417be3615f2d3a)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/pylib/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/pylib)
 [![BuildKite](https://img.shields.io/buildkite/ef11e788d5d3504fe9466ea4c1504dfb7136a78f2f550a6150/master?label=BuildKite)](https://buildkite.com/hari-sekhon/pylib)
+[![buddy pipeline](https://app.buddy.works/harisekhon/pylib/pipelines/pipeline/246989/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/pylib/pipelines/pipeline/246989)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/pylib/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/pylib)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
 
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.pylib?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=4&branchName=master)
@@ -547,8 +574,10 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 [![Shippable](https://img.shields.io/shippable/5e52c63620adbf000670adf6/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/Nagios-Plugin-Kafka/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FNagios%20Plugin%20Kafka?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/Nagios-Plugin-Kafka/builds)
 [![Wercker](https://app.wercker.com/status/fe4f87bf98f31e4c22a3041c0966644b/s/master "wercker status")](https://app.wercker.com/project/byKey/fe4f87bf98f31e4c22a3041c0966644b)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Nagios-Plugin-Kafka/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Nagios-Plugin-Kafka)
 [![BuildKite](https://img.shields.io/buildkite/3d50d0880ae9812f344ad5d6fe50768de24ce05be6ac74d582/master?label=BuildKite)](https://buildkite.com/hari-sekhon/nagios-plugin-kafka)
+[![buddy pipeline](https://app.buddy.works/harisekhon/nagios-plugin-kafka/pipelines/pipeline/246985/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/nagios-plugin-kafka/pipelines/pipeline/246985)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Nagios-Plugin-Kafka/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Nagios-Plugin-Kafka)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.concourse.yml)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Nagios-Plugin-Kafka?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=11&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/nagios-plugin-kafka/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/nagios-plugin-kafka/addon/pipelines/home#!/)
@@ -592,6 +621,7 @@ Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 [![Coverage Status](https://coveralls.io/repos/HariSekhon/lib-java/badge.svg?branch=master&service=github)](https://coveralls.io/github/HariSekhon/lib-java?branch=master)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/lib-java)](https://github.com/harisekhon/lib-java/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/lib-java)](https://github.com/harisekhon/lib-java/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-5.7k-lightgrey)](https://github.com/HariSekhon/lib-java)
 
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/lib-java)
@@ -611,8 +641,10 @@ Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/lib-java/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Flib-java?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/lib-java/builds)
 [![Wercker](https://app.wercker.com/status/9f72e3856e29563c4225ca4bdce46cf9/s/master "wercker status")](https://app.wercker.com/project/byKey/9f72e3856e29563c4225ca4bdce46cf9)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/lib-java/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/lib-java)
 [![BuildKite](https://img.shields.io/buildkite/c3e6142bd65c1b912652cf3c7c14a8a2c0eeae704dfc8949a9/master?label=BuildKite)](https://buildkite.com/hari-sekhon/lib-java)
+[![buddy pipeline](https://app.buddy.works/harisekhon/lib-java/pipelines/pipeline/246984/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/lib-java/pipelines/pipeline/246984)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/lib-java/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/lib-java)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/lib-java/blob/master/.concourse.yml)
 
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.lib-java?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=2&branchName=master)
