@@ -47,9 +47,11 @@ matches="$(git grep -Ei \
     || :
 )"
 if [ -f .gitallowed ]; then
+    # makes not difference, .gitallowed is exempted next anyway
+    #matches="$(grep -Ev -f .gitallowed <<< "$matches" | grep -Fv -f .gitallowed || :)"
     matches="$(grep -Ev -f .gitallowed <<< "$matches" || :)"
 fi
-matches="$(grep -Ev -e "^${0##*/}:[[:space:]]+-e[[:space:]]+'AWS_" -e '^.bash.d/aws.sh:' <<< "$matches" || :)"
+matches="$(grep -Ev -e "^${0##*/}:[[:space:]]+-e[[:space:]]+'AWS_" -e '^.bash.d/aws.sh:' -e '^.gitallowed:' <<< "$matches" || :)"
 if [ -n "$matches" ]; then
         # dangerous, fails silently and suppressed legitimate matches
         #grep -v -f "$gitallowed" |
