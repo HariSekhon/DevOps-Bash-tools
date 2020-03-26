@@ -37,9 +37,8 @@ this one I don't trust it'll stick around so using shields version instead
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![Drone](https://cloud.drone.io/api/badges/HariSekhon/DevOps-Bash-tools/status.svg)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
-[![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
 
-# shields.io gets throttled after a few reloads :-/ - which is bad because shields latency is high and oftens fails to load some badges which requires you to reload the page a few times until they load
+# shields.io gets throttled after a few reloads :-/ - which is bad because shields latency is high and oftens fails to load some badges which requires you to reload the page a few times until they load, so have gone back to the generic wercker badge
 
 [![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker)](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
 -->
