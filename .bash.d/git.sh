@@ -153,20 +153,20 @@ install_git_completion(){
 #        gi list
 gitignore_api(){
     local url
-	local langs
-	local options=()
+    local langs
+    local options=()
     local args=()
     # noop - set to use 'tr' to separate items to newlines when given the 'list' arg
     local commas_to_newlines="cat"
-	for arg; do
+    for arg; do
         if [ "$arg" = -- ]; then
             options+=("$arg")
         else
             args+=("$arg")
         fi
     done
-	# take args 'python perl', store as 'python,perl' for the API call
-	langs="$(IFS=, ; echo "${args[*]}")"
+    # take args 'python perl', store as 'python,perl' for the API call
+    langs="$(IFS=, ; echo "${args[*]}")"
     url="https://www.gitignore.io/api/$langs"
     if [ "$langs" = "list" ]; then
         commas_to_newlines="tr ',' '\\n'"
@@ -385,16 +385,25 @@ checkout(){
 
 gitadd() {
     local gitcimsg=""
-    for x in "$@"; do
+    [ -z "$*" ] && return 1
+    local basedir;
+    basedir="$(basedir "$@")" && local trap_codes="INT ERR";
+    # shellcheck disable=SC2064,SC2086
+    trap "popd &>/dev/null; trap - $trap_codes; return 1" $trap_codes;
+    pushd "$basedir" > /dev/null || return 1;
+    # shellcheck disable=SC2086
+    targets="$(strip_basedirs "$basedir" "$@")";
+    for x in $targets; do
         if git status -s "$x" | grep -q '^[?A]'; then
             gitcimsg+="$x, "
         fi
     done
-    [ -z "$gitcimsg" ] && return 1
     gitcimsg="${gitcimsg%, }"
     gitcimsg="added $gitcimsg"
-    git add "$@" &&
-    git commit -m "$gitcimsg" "$@"
+    # want splitting
+    # shellcheck disable=SC2086
+    git add $targets &&
+    git commit -m "$gitcimsg" $targets
 }
 
 gitimport() {
@@ -432,7 +441,7 @@ gitu(){
     # shellcheck disable=SC2064
     trap "popd &>/dev/null; trap - $trap_codes; return 1" $trap_codes
     pushd "$basedir" >/dev/null || return 1
-    targets="$(strip_basedirs $basedir $targets)"
+    targets="$(strip_basedirs "$basedir" $targets)"
     # shellcheck disable=SC2086
     if [ -z "$(git diff $targets)" ]; then
         popd &>/dev/null || :
