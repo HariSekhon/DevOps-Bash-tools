@@ -19,6 +19,7 @@
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "master"
   ref_type: "BRANCH"
+  target_site_url: "https://github.com/harisekhon/devops-bash-tools"
   trigger_condition: "ALWAYS"
   actions:
   - action: "Execute: make ci test"
