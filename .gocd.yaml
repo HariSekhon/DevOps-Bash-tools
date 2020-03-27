@@ -36,27 +36,38 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
-          install-make:
-            timeout: 0
+          apt-update:
+            timeout: 10
             tasks:
             - exec:
-                command: apt update && apt install -qy git make
+                command: apt
+                args: update
+                run_if: passed
+          install-make:
+            timeout: 10
+            tasks:
+            - exec:
+                command: apt
+                args: install -qy git make
                 run_if: passed
           init:
-            timeout: 0
+            timeout: 10
             tasks:
             - exec:
-                command: make init
+                command: make
+                args: init
                 run_if: passed
           build:
-            timeout: 0
+            timeout: 60
             tasks:
             - exec:
-                command: make ci
+                command: make
+                args: ci
                 run_if: passed
           test:
-            timeout: 0
+            timeout: 60
             tasks:
             - exec:
-                command: make test
+                command: make
+                args: test
                 run_if: passed
