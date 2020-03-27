@@ -19,6 +19,8 @@ services:
     image: gocd/gocd-server:v20.2.0
     ports:
       - 8153:8153
+    environment:
+      CONFIG_GIT_REPO: ${CONFIG_GIT_REPO:-https://github.com/harisekhon/bash-tools}
   gocd-agent:
     image: gocd/gocd-agent-ubuntu-18.04:v20.2.0
     # needs root to be able to install OS package dependencies - 'sudo' not installed
