@@ -27,7 +27,11 @@ api="$server/go/api"
 
 config="$srcdir/setup/gocd-docker-compose.yml"
 
-repo_config="$srcdir/setup/gocd_config_repo.json"
+if [ -f setup/gocd_config_repo.json ]; then
+    repo_config=setup/gocd_config_repo.json
+else
+    repo_config="$srcdir/setup/gocd_config_repo.json"
+fi
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
