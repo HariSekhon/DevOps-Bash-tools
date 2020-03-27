@@ -22,6 +22,8 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+NUM_AGENTS=1
+
 server="http://localhost:8153"
 api="$server/go/api"
 
@@ -97,7 +99,7 @@ get_agents(){
 echo "Waiting for agent(s) to register:"
 while true; do
     #if get_agents | grep -q hostname; then
-    if [ "$(get_agents | jq '._embedded.agents | length')" -ge 2 ]; then
+    if [ "$(get_agents | jq '._embedded.agents | length')" -ge $NUM_AGENTS ]; then
         echo
         break
     fi
