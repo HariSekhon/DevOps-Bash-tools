@@ -14,6 +14,8 @@
 
 # https://github.com/tomzo/gocd-yaml-config-plugin#setup
 
+# https://docs.gocd.org/current/configuration/configuration_reference.html
+
 format_version: 3
 pipelines:
   DevOps-Bash-tools:
