@@ -29,6 +29,8 @@ services:
     #  CONFIG_GIT_BRANCH: ${CONFIG_GIT_BRANCH:-master}
   gocd-agent:
     image: gocd/gocd-agent-ubuntu-18.04:v${VERSION:-20.2.0}
+    ports:
+      - 8152:8152
     # needs root to be able to install OS package dependencies - 'sudo' not installed
     user: root:root
     environment:
