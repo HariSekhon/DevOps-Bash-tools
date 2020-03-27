@@ -21,5 +21,7 @@ services:
       - 8153:8153
   gocd-agent:
     image: gocd/gocd-agent-ubuntu-18.04:v20.2.0
+    # needs root to be able to install OS package dependencies - 'sudo' not installed
+    user: root
     environment:
       GO_SERVER_URL: http://gocd-server:8153/go
