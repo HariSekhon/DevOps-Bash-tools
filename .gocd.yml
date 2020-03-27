@@ -18,7 +18,7 @@
 
 format_version: 3
 pipelines:
-  DevOps-Bash-tools:
+  devops-bash-tools:
     group: defaultGroup
     label_template: ${COUNT}
     lock_behavior: none
