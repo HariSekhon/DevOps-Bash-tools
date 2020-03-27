@@ -36,3 +36,12 @@ services:
     restart: on-failure
     links:
       - gocd-server
+  gocd-agent2:
+    image: gocd/gocd-agent-ubuntu-18.04:v${VERSION:-20.2.0}
+    # needs root to be able to install OS package dependencies - 'sudo' not installed
+    user: root:root
+    environment:
+      GO_SERVER_URL: http://gocd-server:8153/go
+    restart: on-failure
+    links:
+      - gocd-server
