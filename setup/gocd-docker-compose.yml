@@ -19,6 +19,11 @@ services:
     image: gocd/gocd-server:v${VERSION:-20.2.0}
     ports:
       - 8153:8153
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8153"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     environment:
       CONFIG_GIT_REPO: ${CONFIG_GIT_REPO:-https://github.com/harisekhon/bash-tools}
       CONFIG_GIT_BRANCH: ${CONFIG_GIT_BRANCH:-master}
@@ -28,3 +33,6 @@ services:
     user: root:root
     environment:
       GO_SERVER_URL: http://gocd-server:8153/go
+    restart: on-failure
+    links:
+      - gocd-server
