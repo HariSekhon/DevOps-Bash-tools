@@ -59,6 +59,11 @@ echo
 when_url_content "$server/go/pipelines#!/" '(?i:gocd)'
 echo
 
+while curl -sS "$server" | grep -q 'GoCD server is starting'; do
+    echo 'waiting for server to finish starting up'
+    sleep 2
+done
+
 echo "(re)creating config repo:"
 echo
 
