@@ -1,0 +1,20 @@
+{
+  "id": "bash-tools",
+  "plugin_id": "yaml.config.plugin",
+  "material": {
+    "type": "git",
+    "attributes": {
+  	"url": "https://github.com/harisekhon/bash-tools",
+  	"branch": "master",
+  	"auto_update": true
+    }
+  },
+  "rules": [
+    {
+  	"directive": "allow",
+  	"action": "*",
+  	"type": "*",
+  	"resource": "*"
+    }
+  ]
+}
