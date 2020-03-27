@@ -328,6 +328,10 @@ nmap          ;§ :call ToggleScrollLock()<CR>
 "noremap <Left>  <Left>
 "noremap <Right> <Right>
 
+if has("autocmd")
+    au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
+endif
+
 
 " ============================================================================ "
 "                               F u n c t i o n s
