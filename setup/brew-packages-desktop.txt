@@ -82,6 +82,7 @@ jython
 kompose
 kubectl
 kubernetes-cli
+kubernetes-helm
 launchctl-completion
 lolcat
 lynx
