@@ -96,7 +96,8 @@ get_agents(){
 
 echo "Waiting for agent(s) to register:"
 while true; do
-    if get_agents | grep -q hostname; then
+    #if get_agents | grep -q hostname; then
+    if [ "$(get_agents | jq '._embedded.agents | length')" -ge 2 ]; then
         echo
         break
     fi
