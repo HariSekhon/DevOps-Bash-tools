@@ -404,6 +404,7 @@ gitadd() {
     # shellcheck disable=SC2086
     git add $targets &&
     git commit -m "$gitcimsg" $targets
+    popd > /dev/null || :
 }
 
 gitimport() {
