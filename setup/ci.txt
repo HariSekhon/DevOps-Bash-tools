@@ -22,6 +22,7 @@
 .concourse.yml
 .drone.yml
 .gitlab-ci.yml
+.gocd.yaml
 #.travis.yml
 azure-pipelines.yml
 bitbucket-pipelines.yml
