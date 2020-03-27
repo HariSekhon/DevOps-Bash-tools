@@ -30,3 +30,4 @@ buddy.yml
 codefresh.yml
 shippable.yml
 wercker.yml
+setup/gocd_config_repo.json
