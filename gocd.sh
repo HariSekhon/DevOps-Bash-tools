@@ -40,7 +40,7 @@ fi
 action="${1:-up}"
 shift || :
 
-git_repo="$(git remote -v | grep github.com | sed 's/.*github.com/https:\/\/github.com/; s/ .*//')"
+#git_repo="$(git remote -v | grep github.com | sed 's/.*github.com/https:\/\/github.com/; s/ .*//')"
 #repo="${git_repo##*/}"
 
 opts=""
