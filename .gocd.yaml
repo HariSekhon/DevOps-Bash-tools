@@ -12,6 +12,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://github.com/tomzo/gocd-yaml-config-plugin#setup
+
 format_version: 3
 pipelines:
   DevOps-Bash-tools:
