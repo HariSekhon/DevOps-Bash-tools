@@ -9,6 +9,12 @@
   	"auto_update": true
     }
   },
+  "configuration": [
+    {
+      "key": "file_pattern",
+      "value": "*.gocd.y*ml"
+    }
+  ],
   "rules": [
     {
   	"directive": "allow",
