@@ -63,7 +63,7 @@ echo
 
 while curl -sS "$server" | grep -q 'GoCD server is starting'; do
     echo 'waiting for server to finish starting up'
-    sleep 2
+    sleep 3
 done
 echo
 
