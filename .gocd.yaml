@@ -50,7 +50,10 @@ pipelines:
             - exec:
                 command: apt
                 arguments:
-                  - install -qy git make
+                  - install
+                  - -qy
+                  - git
+                  - make
                 run_if: passed
           init:
             timeout: 10
