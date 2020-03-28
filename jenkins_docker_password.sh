@@ -19,4 +19,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 config="$srcdir/setup/jenkins-docker-compose.yml"
 
-docker-compose -f "$config" exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword
+password="$(docker-compose -f "$config" exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword)"
+
+export JENKINS_PASSWORD="$password"
+
+echo "$password"
