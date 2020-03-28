@@ -19,8 +19,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 config="$srcdir/setup/jenkins-docker-compose.yml"
 
-password="$(docker-compose -f "$config" exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword)"
+if [ -z "${JENKINS_PASSWORD:-}" ]; then
+    JENKINS_PASSWORD="$(docker-compose -f "$config" exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword)"
+fi
 
-export JENKINS_PASSWORD="$password"
-
-echo "$password"
+# if sourced, export JENKINS_PASSWORD, if subshell, echo it
+if [[ "$_" != "$0" ]]; then
+    export JENKINS_PASSWORD
+else
+    echo "$JENKINS_PASSWORD"
+fi
