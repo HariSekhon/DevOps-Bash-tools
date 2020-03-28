@@ -58,9 +58,11 @@ echo
 
 password="$("$srcdir/jenkins_password.sh" || :)"
 
+if [ -n "$password" ]; then
 cat <<EOF
 
 Jenkins Login username:  admin
 Jenkins Login password:  $password
 
 EOF
+fi
