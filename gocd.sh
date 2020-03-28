@@ -52,7 +52,11 @@ fi
 
 # load .gocd.yaml from this github location
 # doesn't work - see https://github.com/gocd/gocd/issues/7930
-# also, caused gocd-server to be recreated due to this differing environment variable each time
+# also, caused gocd-server to be recreated from different repos due to this differing environment variable each time
+# which is not ideal as we want to boot GoCD from any repo and then incrementally add any builds from other repos, or load all via:
+#
+# git_foreach_repo.sh gocd.sh
+#
 #if [ -n "$git_repo" ]; then
 #    export CONFIG_GIT_REPO="$git_repo"
 #fi
