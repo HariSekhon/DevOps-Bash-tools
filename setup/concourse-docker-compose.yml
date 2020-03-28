@@ -28,11 +28,12 @@ services:
       PGDATA: /database
 
   concourse:
-    image: concourse/concourse
+    image: concourse/concourse:${VERSION:-6.0}
     command: quickstart
     privileged: true
     depends_on: [concourse-db]
-    ports: ["8080:8080"]
+    ports:
+      - 8080:8080
     #volumes:
     #  - .:/pwd
     environment:
@@ -44,3 +45,8 @@ services:
       CONCOURSE_ADD_LOCAL_USER: ${CONCOURSE_USER:-test}:${CONCOURSE_PASSWORD:-test}
       CONCOURSE_MAIN_TEAM_LOCAL_USER: ${CONCOURSE_USER:-test}
       CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
