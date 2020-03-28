@@ -1,0 +1,40 @@
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  Author: Hari Sekhon
+#  Date: 2020-03-28 01:49:38 +0000 (Sat, 28 Mar 2020)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+version: '3'
+
+services:
+  jenkins-server:
+    # official repo abandoned - too old for plugins to load - unusable
+    #image: jenkins:2.60.3
+    # community version
+    image: jenkins/jenkins:${VERSION:-latest}
+    ports:
+      - 8080:8080
+      - 50000:50000
+    # doesn't auto-install, done explicitly by jenkins.sh now
+    #volumes:
+    #  - ./setup/jenkins-plugins.txt:/usr/share/jenkins/ref/plugins.txt
+    user: root:root
+    # gets 403 without -Djenkins.install.runSetupWizard=false
+    #healthcheck:
+    #  test: ["CMD", "curl", "-f", "http://localhost:8080"]
+    #  interval: 30s
+    #  timeout: 10s
+    #  retries: 5
+    environment:
+      # skips creating admin user or prompting to install plugins
+      #JAVA_OPTS: -Dhudson.footerURL=https://github.com/harisekhon -Djenkins.install.runSetupWizard=false
+      JAVA_OPTS: -Dhudson.footerURL=https://github.com/harisekhon
+  #jenkins-slave:
