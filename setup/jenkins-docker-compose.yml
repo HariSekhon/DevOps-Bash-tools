@@ -19,7 +19,7 @@ services:
     # official repo abandoned - too old for plugins to load - unusable
     #image: jenkins:2.60.3
     # community version
-    image: jenkins/jenkins:${VERSION:-latest}
+    image: jenkins/jenkins:${VERSION:-2.228}
     ports:
       - 8080:8080
       - 50000:50000
