@@ -39,9 +39,15 @@ if [ -z "${JENKINS_URL:-}" ]; then
     export JENKINS_URL="$http://$host:$port"
 fi
 
+JENKINS_USER="${JENKINS_USER:-admin}"
+
+if [ -z "${JENKINS_PASSWORD:-}" ]; then
+    . "$srcdir/jenkins_password.sh"
+fi
+
 if ! [ -f "$jar" ]; then
     wget -O "$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
 fi
 
 # -s "$JENKINS_URL" is implicit
-java -jar "$jar" "$@"
+java -jar "$jar" -auth @/dev/fd/0 "$@" <<< "$JENKINS_USER:$JENKINS_PASSWORD"
