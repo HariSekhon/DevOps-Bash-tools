@@ -61,6 +61,7 @@ fi
 #    export CONFIG_GIT_REPO="$git_repo"
 #fi
 
+echo "Booting GoCD:"
 docker-compose -f "$config" "$action" $opts "$@"
 echo
 
