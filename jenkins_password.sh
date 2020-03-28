@@ -24,8 +24,8 @@ if [ -z "${JENKINS_PASSWORD:-}" ]; then
 fi
 
 # if sourced, export JENKINS_PASSWORD, if subshell, echo it
-if [[ "$_" != "$0" ]]; then
+#if [[ "$_" != "$0" ]]; then
     export JENKINS_PASSWORD
-else
+#else
     echo "$JENKINS_PASSWORD"
-fi
+#fi
