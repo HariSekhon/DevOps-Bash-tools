@@ -42,7 +42,7 @@ fi
 JENKINS_USER="${JENKINS_USER:-admin}"
 
 if [ -z "${JENKINS_PASSWORD:-}" ]; then
-    . "$srcdir/jenkins_password.sh"
+    JENKINS_PASSWORD="$("$srcdir/jenkins_password.sh" || :)"
 fi
 
 if ! [ -f "$jar" ]; then
