@@ -48,6 +48,7 @@ if ! [ -f "$config" ]; then
     wget -O "$config" https://concourse-ci.org/docker-compose.yml
 fi
 
+echo "Booting Concourse:"
 docker-compose -f "$config" "$action" $opts "$@"
 echo
 
