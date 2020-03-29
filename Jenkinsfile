@@ -86,18 +86,18 @@ pipeline {
             }
         }
 
-        stage('Human gate') {
-            steps {
-                input "Proceed to deployment?"
-            }
-        }
-
-        stage('Deployment') {
-            steps {
-                echo 'Deploying...'
-				echo 'Nothing to deploy'
-            }
-        }
+//        stage('Human gate') {
+//            steps {
+//                input "Proceed to deployment?"
+//            }
+//        }
+//
+//        stage('Deployment') {
+//            steps {
+//                echo 'Deploying...'
+//				echo 'Nothing to deploy'
+//            }
+//        }
 
     }
 	post {
