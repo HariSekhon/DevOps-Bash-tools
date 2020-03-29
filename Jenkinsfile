@@ -4,7 +4,7 @@
 //  Author: Hari Sekhon
 //  Date: 2017-06-28 12:39:02 +0200 (Wed, 28 Jun 2017)
 //
-//  https://github.com/harisekhon
+//  https://github.com/harisekhon/bash-tools
 //
 //  License: see accompanying Hari Sekhon LICENSE file
 //
