@@ -24,7 +24,9 @@ srcdir="$(dirname "$0")"
 
 #NUM_AGENTS=1
 
-server="http://localhost:8080"
+host=localhost
+port=8080
+server="http://$host:$port"
 #api="$server/go/api"
 cli="$srcdir/jenkins_cli.sh"
 
@@ -62,6 +64,9 @@ fi
 echo "Booting Jenkins docker:"
 docker-compose -f "$config" "$action" $opts "$@"
 echo
+if [ "$action" = down ]; then
+    exit 0
+fi
 
 when_jenkins_up(){
     when_url_content "$server" '(?i:jenkins|hudson)'
@@ -87,10 +92,23 @@ Jenkins Login password:  $password
 EOF
 fi
 
-#echo "Safe-Restarting Jenkins to pick up plugins:"
-#"$cli" safe-restart
+if ! "$cli" list-plugins | grep -q .; then
+    echo "Restarting Jenkins to pick up plugins:"
+    #"$cli" restart
+    #when_ports_down 300 "$host" "$port"
+    docker-compose -f "$config" restart jenkins-server "$@"
 
-#when_jenkins_up
+    when_jenkins_up
+    SECONDS=0
+    while [ "$SECONDS" -lt 300 ]; do
+        if "$cli" list-plugins | grep -q .; then
+            echo
+            break
+        fi
+        tstamp "waiting for Jenkins to finish initializing and list plugins"
+        sleep 1
+    done
+fi
 
 echo "Validating Jenkinsfile"
 "$cli" declarative-linter < "$Jenkinsfile"
@@ -108,6 +126,7 @@ echo
 
 echo "Enabling job - $job:"
 "$cli" enable-job "$job"
+echo
 
 # -f waits for build
 # -v prints build contents
