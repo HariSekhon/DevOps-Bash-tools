@@ -63,10 +63,16 @@ echo "Booting Jenkins docker:"
 docker-compose -f "$config" "$action" $opts "$@"
 echo
 
-when_url_content "$server" '(?i:jenkins|hudson)'
-echo
+when_jenkins_up(){
+    when_url_content "$server" '(?i:jenkins|hudson)'
+    echo
+}
+
+when_jenkins_up
 
 echo "Installing plugins"
+# would be slow to do this via jenkins-cli
+# sed 's/#.*//; s/:.*//; /^[[:space:]]*$/d' setup/jenkins-plugins.txt | while read plugin; do jenkins_cli.sh install-plugin "$plugin"; done
 docker-compose -f "$config" exec -T jenkins-server /usr/local/bin/install-plugins.sh < "$plugins_txt"
 echo
 
@@ -80,6 +86,11 @@ Jenkins Login password:  $password
 
 EOF
 fi
+
+#echo "Safe-Restarting Jenkins to pick up plugins:"
+#"$cli" safe-restart
+
+#when_jenkins_up
 
 echo "Validating Jenkinsfile"
 "$cli" declarative-linter < "$Jenkinsfile"
