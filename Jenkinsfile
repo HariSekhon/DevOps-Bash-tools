@@ -13,6 +13,14 @@
 //  https://www.linkedin.com/in/harisekhon
 //
 
+// ========================================================================== //
+//                        J e n k i n s   P i p e l i n e
+// ========================================================================== //
+
+
+// https://jenkins.io/doc/book/pipeline/syntax/
+
+
 pipeline {
 	// run pipeline any agent
     agent any
