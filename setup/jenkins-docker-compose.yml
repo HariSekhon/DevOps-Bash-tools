@@ -20,6 +20,9 @@ services:
     #image: jenkins:2.60.3
     # community version
     image: jenkins/jenkins:${VERSION:-2.228}
+    # jenkinsci/jenkins is deprecated in favour of jenkins/jenkins but jenkins org doesn't have blueocean
+    # this is based off Alpine - Jenkinsfile is for Debian/Ubuntu systems like standard Jenkins, just use stock image with plugin
+    #image: jenkinsci/blueocean:${VERSION:-1.22.0}
     ports:
       - 8080:8080
       - 50000:50000
