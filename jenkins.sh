@@ -30,7 +30,9 @@ server="http://$host:$port"
 #api="$server/go/api"
 cli="$srcdir/jenkins_cli.sh"
 
-repo="${srcdir##*/}"
+#repo="${PWD##*/}"
+git_repo="$(git remote -v | grep github.com | sed 's/.*github.com/https:\/\/github.com/; s/ .*//')"
+repo="${git_repo##*/}"
 job="$repo"
 job_xml="setup/jenkins-job.xml"
 
@@ -52,9 +54,6 @@ fi
 
 action="${1:-up}"
 shift || :
-
-#git_repo="$(git remote -v | grep github.com | sed 's/.*github.com/https:\/\/github.com/; s/ .*//')"
-#repo="${git_repo##*/}"
 
 opts=""
 if [ "$action" = up ]; then
