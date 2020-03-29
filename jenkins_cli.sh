@@ -50,4 +50,7 @@ if ! [ -f "$jar" ]; then
 fi
 
 # -s "$JENKINS_URL" is implicit
-java -jar "$jar" -auth @/dev/fd/0 "$@" <<< "$JENKINS_USER:$JENKINS_PASSWORD"
+# cannot load jenkins job from stdin if doing this
+#java -jar "$jar" -auth @/dev/fd/0 "$@" <<< "$JENKINS_USER:$JENKINS_PASSWORD"
+#java -jar "$jar" -auth "$JENKINS_USER:$JENKINS_PASSWORD" "$@"
+java -jar "$jar" -auth @<(cat <<< "$JENKINS_USER:$JENKINS_PASSWORD") "$@"
