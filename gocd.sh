@@ -64,6 +64,9 @@ fi
 echo "Booting GoCD:"
 docker-compose -f "$config" "$action" $opts "$@"
 echo
+if [ "$action" = down ]; then
+    exit 0
+fi
 
 when_url_content "$server/go/pipelines#!/" '(?i:gocd)'
 echo
