@@ -26,9 +26,23 @@ srcdir="$(dirname "$0")"
 
 server="http://localhost:8080"
 #api="$server/go/api"
+cli="$srcdir/jenkins_cli.sh"
+
+repo="${srcdir##*/}"
+job="$repo"
+job_xml="setup/jenkins-job.xml"
+
+Jenkinsfile=Jenkinsfile
 
 config="$srcdir/setup/jenkins-docker-compose.yml"
 plugins_txt="$srcdir/setup/jenkins-plugins.txt"
+
+for filename in "$Jenkinsfile" "$job_xml"; do
+    if ! [ -f "$job_xml" ]; then
+        echo "Jenkins configuration '$filename' not found - did you run this from the root of a standard repo?"
+        exit 1
+    fi
+done
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
@@ -66,3 +80,28 @@ Jenkins Login password:  $password
 
 EOF
 fi
+
+echo "Validating Jenkinsfile"
+"$cli" declarative-linter < "$Jenkinsfile"
+echo
+
+echo "Creating / Updating job - $job:"
+if "$cli" list-jobs | grep -q "^$job$"; then
+    echo "job already exists, updating..."
+    "$cli" update-job "$job" < "$job_xml"
+else
+    echo "job does not exist, creating..."
+    "$cli" create-job "$job" < "$job_xml"
+fi
+echo
+
+echo "Enabling job - $job:"
+"$cli" enable-job "$job"
+
+# -f waits for build
+# -v prints build contents
+echo "Building job - $job and tailing output:"
+"$cli" build -f -v "$job"
+
+#echo "Tailing last build:"
+#"$cli" console "$job" -f
