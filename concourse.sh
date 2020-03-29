@@ -51,6 +51,9 @@ fi
 echo "Booting Concourse:"
 docker-compose -f "$config" "$action" $opts "$@"
 echo
+if [ "$action" = down ]; then
+    exit 0
+fi
 
 export PATH="$PATH:"~/bin
 
