@@ -70,7 +70,8 @@ init: git
 	@echo ================
 	@echo Bash Tools Build
 	@echo ================
-
+	@git_summary_line.sh
+	@echo
 	@echo "running init:"
 	git submodule update --init --recursive
 	@echo
