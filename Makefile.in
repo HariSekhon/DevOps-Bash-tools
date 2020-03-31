@@ -166,6 +166,11 @@ printenv: git
 			env | grep -E 'BUILD|PIPELINE|JOB|STAGE|\<CI_|^CI=' | grep -v TOKEN || : ; \
 		fi | cat # stops git commands from entering pager
 
+.PHONY: git-summary
+git-summary: init
+	@bash-tools/git_summary_line.sh
+	@echo
+
 .PHONY: ci
 ci: printenv
 	$(MAKE) build-retry
