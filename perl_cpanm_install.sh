@@ -31,9 +31,9 @@ CPANM="${CPANM:-cpanm}"
 #
 # sudo locale-gen en_US.UTF-8
 #
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+export LANGUAGE="${LANGUAGE:-en_US.UTF-8}"
+export LANG="${LANG:-en_US.UTF-8}"
+export LC_ALL="${LC_ALL:-en_US.UTF-8}"
 
 usage(){
     echo "Installs Perl CPAN modules using Cpanm, taking in to account library paths, perlbrew envs etc"
