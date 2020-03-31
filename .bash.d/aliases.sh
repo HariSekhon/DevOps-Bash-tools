@@ -285,7 +285,8 @@ unset -v clipboard
 export lab=~/lab
 alias lab='cd $lab'
 
-alias jenkins_cli='java -jar ~/jenkins-cli.jar -s http://jenkins:8080'
+#alias jenkins_cli='java -jar ~/jenkins-cli.jar -s http://jenkins:8080'
+alias jenkins-cli='jenkins_cli.sh'
 alias backup_jenkins="rsync -av root@jenkins:/jenkins_backup/*.zip '~/jenkins_backup/'"
 
 # Auto-alias uppercase directories in ~ like Desktop and Downloads
