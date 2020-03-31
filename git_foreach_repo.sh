@@ -20,8 +20,8 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 # access to useful functions and aliases
 # shellcheck disable=SC1090
-#. "$srcdir/.bash.d/aliases.sh"
-#. "$srcdir/.bash.d/functions.sh"
+. "$srcdir/.bash.d/aliases.sh"
+. "$srcdir/.bash.d/functions.sh"
 . "$srcdir/.bash.d/git.sh"
 
 #git_url="${GIT_URL:-https://github.com}"
