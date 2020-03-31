@@ -258,18 +258,18 @@ apk-packages:
 	#for x in apk-packages{,-perl,-python}{,-dev}.txt; do \
 
 	for x in apk-packages.txt apk-packages-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 
 	for x in apk-packages-optional.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 
 .PHONY: apk-packages-perl
 apk-packages-perl:
 	for x in apk-packages-perl.txt apk-packages-perl-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 
@@ -277,19 +277,19 @@ apk-packages-perl:
 	# no point installing system cpan packages if using perlbrew as they won't be found inside perlbrew
 	for x in apk-packages-cpan.txt; do \
 		if [ -z "$(PERLBREW_PERL)" ]; then \
-			find . -path "*/setup/$$x"; \
+			find . -maxdepth 2 -path "*/setup/$$x"; \
 		fi; \
 	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 
 .PHONY: apk-packages-python
 apk-packages-python:
 	for x in apk-packages-python.txt apk-packages-python-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 	# no point installing system pip packages when they won't be found in virtualenv and will need to be pip installed anyway
 	for x in apk-packages-pip.txt; do \
 		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
-			find . -path "*/setup/$$x"; \
+			find . -maxdepth 2 -path "*/setup/$$x"; \
 		fi; \
 	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
 
@@ -298,35 +298,35 @@ apt-packages:
 	#for x in deb-packages{,-perl,-python}{,-dev}.txt; do \
 
 	for x in deb-packages.txt deb-packages-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 	#for x in deb-packages-{optional,cpan,pip}.txt; do \
 
 	for x in deb-packages-optional.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 
 .PHONY: apt-packages-perl
 apt-packages-perl:
 	for x in deb-packages-perl.txt deb-packages-perl-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 	for x in deb-packages-cpan.txt; do \
 		if [ -z "$(PERLBREW_PERL)" ] && \
 		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
-			find . -path "*/setup/$$x"; \
+			find . -maxdepth 2 -path "*/setup/$$x"; \
 		fi; \
 	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 
 .PHONY: apt-packages-python
 apt-packages-python:
 	for x in deb-packages-python.txt deb-packages-python-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 	for x in deb-packages-pip.txt; do \
 		if [ -z "$(PYTHON_VIRTUALENV)" ] && \
 		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
-			find . -path "*/setup/$$x"; \
+			find . -maxdepth 2 -path "*/setup/$$x"; \
 		fi; \
 	done  | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
 
@@ -339,21 +339,21 @@ yum-packages:
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages.txt rpm-packages-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 	for x in rpm-packages-optional.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 
 .PHONY: yum-packages-perl
 yum-packages-perl:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages-perl.txt rpm-packages-perl-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 	for x in rpm-packages-cpan.txt; do \
 		if [ -z "$(PERLBREW_PERL)" ]; then \
-			find . -path "*/setup/$$x"; \
+			find . -maxdepth 2 -path "*/setup/$$x"; \
 		fi; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 
@@ -361,11 +361,11 @@ yum-packages-perl:
 yum-packages-python:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages-python.txt rpm-packages-python-dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 	for x in rpm-packages-pip.txt; do \
 		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
-			find . -path "*/setup/$$x"; \
+			find . -maxdepth 2 -path "*/setup/$$x"; \
 		fi; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 
@@ -373,7 +373,7 @@ yum-packages-python:
 homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
 	for x in brew-packages.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/brew_install_packages.sh"
 	@# fix for OpenSSL 1.0 -> 1.1 library linkage breaking python -c 'import hashlib', which break pips, eg:
 	@# https://stackoverflow.com/questions/20399331/error-importing-hashlib-with-python-2-7-but-not-with-2-6
@@ -388,39 +388,39 @@ system-packages-remove:
 .PHONY: apk-packages-remove
 apk-packages-remove:
 	for x in apk-packages-{,perl-,python-}dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apk_remove_packages.sh"
 	$(SUDO) rm -fr /var/cache/apk/*
 
 .PHONY: apt-packages-remove
 apt-packages-remove:
 	for x in deb-packages-{,perl-,python-}dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apt_remove_packages.sh"
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
 	for x in rpm-packages-{,perl-,python-}dev.txt; do \
-		find . -path "*/setup/$$x"; \
+		find . -maxdepth 2 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_remove_packages.sh"
 
 .PHONY: cpan
 cpan::
-	find . -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
+	find . -maxdepth 2 -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
 	@$(MAKE) cpan-optional
 
 .PHONY: cpan-optional
 cpan-optional::
-	find . -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
+	find . -maxdepth 2 -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
 
 .PHONY: pip
 pip::
-	find . -path '*/requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	find . -maxdepth 2 -path '*/requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 	@$(MAKE) pip-optional
 
 .PHONY: pip-optional
 pip-optional::
-	find . -path '*/requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	find . -maxdepth 2 -path '*/requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
 
 .PHONY: pip-user
 pip-user::
