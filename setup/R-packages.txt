@@ -1,0 +1,26 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2014-12-29 21:10:12 +0000 (Mon, 29 Dec 2014)
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying LICENSE file
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# R packages to install from CRAN
+
+arules # Apriori Association Rules
+data.table
+devtools
+e1071 # Naiive Bayes
+ggplot2
+httr
+jsonlite
+reshape
+RJava
+ROCR # used with Naiive Bayes
+rpart # Decision Trees
+rpart.plot
+slidify
