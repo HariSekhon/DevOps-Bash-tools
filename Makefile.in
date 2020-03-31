@@ -163,7 +163,7 @@ printenv: git
 			echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
 			echo; \
 		else \
-			env | grep -E 'BUILD|PIPELINE|JOB|STAGE|\<CI_|^CI=' || : ; \
+			env | grep -E 'BUILD|PIPELINE|JOB|STAGE|\<CI_|^CI=' | grep -v TOKEN || : ; \
 		fi | cat # stops git commands from entering pager
 
 .PHONY: ci
