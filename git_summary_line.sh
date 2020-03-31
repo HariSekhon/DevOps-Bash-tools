@@ -18,4 +18,4 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-git log -n 1 --format="%m %H  %ai  (%an)  %s"
+git log -n 1 --format="%m %h  %ai  (%an)  %s"
