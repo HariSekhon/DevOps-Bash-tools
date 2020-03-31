@@ -20,7 +20,7 @@ services:
     ports:
       - 8153:8153
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8153"]
+      test: ["CMD", "curl", "-f", "http://localhost:8153/go/api/v1/health"]
       interval: 30s
       timeout: 10s
       retries: 5
