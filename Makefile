@@ -62,16 +62,16 @@ endef
 
 # not including azure here because it requires interactive prompt and hangs automatic testing of make docker-*
 .PHONY: build
-build: init system-packages aws
-	@:
-
-.PHONY: init
-init: git
+build:
 	@echo ================
 	@echo Bash Tools Build
 	@echo ================
-	@git_summary_line.sh
-	@echo
+	@$(MAKE) git-summary
+	@$(MAKE) init
+	@$(MAKE) system-packages aws
+
+.PHONY: init
+init: git
 	@echo "running init:"
 	git submodule update --init --recursive
 	@echo
