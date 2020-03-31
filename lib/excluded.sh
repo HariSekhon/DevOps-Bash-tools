@@ -31,6 +31,8 @@ if ! type isExcluded &>/dev/null; then
         [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
         [[ "$prog" =~ TODO ]] && return 0
         [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
+        # imported, minimal editing restricted to essentials only
+        [[ "$prog" =~ getawless.sh ]] && return 0
         # this external git check is expensive, skip it when in CI as using fresh git checkouts
         is_CI && return 1
         # shellcheck disable=SC2230
