@@ -52,9 +52,10 @@ export ENV=~/.bashrc
 #export LC_ALL=en_GB
 #export LANG=C
 #export LC_ALL=C
-export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 export LANG=en_US.UTF-8
-# new stuff didn't seem to work
+export LC_ALL=en_US.UTF-8
+# didn't seem to work
 #export LANG="en_GB.UTF-8"
 #export LC_ALL="en_GB.UTF-8"
 
