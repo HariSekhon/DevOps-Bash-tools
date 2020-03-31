@@ -23,6 +23,10 @@ if [ -z "${BUILDKITE_TOKEN:-}" ]; then
 fi
 
 usage(){
+    if [ -n "$*" ]; then
+        echo "$*"
+        echo
+    fi
     echo "usage: ${0##*/} repo"
     exit 3
 }
@@ -33,11 +37,11 @@ buildkite_user="${BUILDKITE_USER:-${GITHUB_USER:-${GIT_USER:-${USER:-}}}}"
 repo="${1:-${BUILDKITE_REPO:-${REPO:-}}}"
 
 if [ -z "$buildkite_user" ]; then
-    usage "\$BUILDKITE_USER not defined"
+    usage '$BUILDKITE_USER not defined'
 fi
 
 if [ -z "$repo" ]; then
-    usage "\$BUILDKITE_REPO not defined"
+    usage '$BUILDKITE_REPO not defined'
 fi
 
 curl \
