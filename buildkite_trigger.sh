@@ -18,10 +18,6 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ -z "${BUILDKITE_TOKEN:-}" ]; then
-    echo "BUILDKITE_TOKEN environment variable not defined"
-fi
-
 usage(){
     if [ -n "$*" ]; then
         echo "$*"
@@ -30,6 +26,10 @@ usage(){
     echo "usage: ${0##*/} repo"
     exit 3
 }
+
+if [ -z "${BUILDKITE_TOKEN:-}" ]; then
+    usage '$BUILDKITE_TOKEN not defined'
+fi
 
 # remember to set this eg. BUILDKITE_USER="hari-sekhon"
 buildkite_user="${BUILDKITE_USER:-${GITHUB_USER:-${GIT_USER:-${USER:-}}}}"
