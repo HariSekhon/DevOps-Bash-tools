@@ -17,8 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
-#. "$srcdir/bash-tools/lib/utils.sh"
+# could set this to DNS CNAME 'jenkins', but often these says we run in docker
+DEFAULT_JENKINS_HOST=localhost
+DEFAULT_JENKINS_PORT=8080
 
 java="${JAVA:-java}"
 jar="$srcdir/jenkins-cli.jar"
@@ -30,8 +31,8 @@ if ! which "$java" &>/dev/null; then
 fi
 
 if [ -z "${JENKINS_URL:-}" ]; then
-    host="${JENKINS_HOST:-${HOST:-localhost}}"
-    port="${JENKINS_PORT:-${PORT:-8080}}"
+    host="${JENKINS_HOST:-${HOST:-$DEFAULT_JENKINS_HOST}}"
+    port="${JENKINS_PORT:-${PORT:-$DEFAULT_JENKINS_PORT}}"
     http="http"
     if [ -n "${JENKINS_SSL:-}" ]; then
         http="https"
