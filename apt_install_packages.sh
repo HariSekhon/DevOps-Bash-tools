@@ -80,6 +80,11 @@ if is_CI; then
         echo
     done
 fi
+#if is_semmle; then
+#    # sudo: no tty present and no askpass program specified
+#    echo "Semmle detected, not running package installs as this is a docker user environment without sudo privs or tty"
+#    exit 0
+#fi
 
 packages=""
 

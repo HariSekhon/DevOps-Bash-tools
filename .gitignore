@@ -131,6 +131,8 @@
 .fluxbox/NOBG
 .fluxbox/OTHERTHEMES
 .fluxbox/startup.log
+# contains Concourse bearer auth token
+.flyrc
 .fontconfig
 .fseventsd
 .gaim/accels

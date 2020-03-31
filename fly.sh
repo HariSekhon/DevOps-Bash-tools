@@ -25,4 +25,4 @@ fi
 
 # want word splitting
 # shellcheck disable=SC2086
-exec fly $opts
+exec fly $opts "$@"

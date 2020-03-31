@@ -1,7 +1,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2020-02-22 22:37:52 +0000 (Sat, 22 Feb 2020)
+#  Date: 2016-01-19 12:12:35 +0000 (Tue, 19 Jan 2016)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -22,13 +22,29 @@ centos
 centos:8
 centos:7
 debian
-debian:10
+debian:10 # buster
+#debian:9 # stretch
+#debian:8 # jessie
+#debian:7 # wheezy
 fedora
 ubuntu
 ubuntu:18.04
-gentoo/stage3-amd64
+#ubuntu:14.04
+#gentoo/stage3-amd64
+
 mcr.microsoft.com/azure-cli
 google/cloud-sdk
+
+#mysql
+#mysql:5.5
+#mysql:5.6
+#mysql:5.7
+postgres  # needed by concourse
+
+concourse/concourse
+jenkins
+#sonarqube
+
 harisekhon/github
 harisekhon/pytools
 harisekhon/perl-tools
@@ -51,3 +67,92 @@ harisekhon/centos-github
 harisekhon/debian-github
 harisekhon/fedora-github
 harisekhon/ubuntu-github
+
+# pypy
+# perl
+# golang
+# ruby
+# jruby
+# node
+# clojure
+# julia
+# erlang
+
+#memcached
+# java # only openjdk due to Oracle removing system distributor license, no Linux ships Oracle's Java any more
+#redis
+#redis:3.2-alpine
+
+#elasticsearch
+# preload for nagios plugins tests
+#elasticsearch:1.4
+#elasticsearch:1.5
+#elasticsearch:1.6
+#elasticsearch:1.7
+#elasticsearch:2.0
+#elasticsearch:2.2
+#elasticsearch:2.3
+#elasticsearch:2.4
+#elasticsearch:5.0
+## using my own kafka container
+# spotify/kafka
+# wurstmeister/kafka
+# confluent/kafka
+
+#cassandra
+#couchbase
+#nginx
+#nginx:1.10
+#nginx:1.11.0
+#rabbitmq
+#rabbitmq:3.4
+#rabbitmq:3.5
+#rabbitmq:3.6
+#influxdb
+#solr
+#solr:5
+#solr:6
+#mongo
+#mongo:2.6
+#mongo:3.0
+#mongo:3.2
+#mongo:3.3
+#neo4j
+#neo4j:2.3
+#neo4j:3.0
+# icinga/icinga2
+
+# couchdb
+# hazelcast/hazelcast
+# percona
+# jetty
+# logstash
+# kibana
+# celery
+
+# exciting low latency distributed SQL product
+#crate
+
+# hopsoft/graphite-statsd
+# grafana/grafana
+# icinga/icinga2
+# sequenceiq/spark
+# sequenceiq/drill
+# there is no latest tag for velvia/spark-jobserver :-(
+# velvia/spark-jobserver:0.6.0
+
+#opower/opentsdb
+# petergrace/opentsdb-docker
+#ceph/daemon
+#docker.bintray.io/jfrog/artifactory-oss
+
+# Needs VM with 8GB of RAM, just use VirtualBox
+#cloudera/quickstart
+
+#cloudera/impala-dev:minimal
+# hortonworks/ambari-agent
+# hortonworks/ambari-server
+# mesosphere/marathon
+# mesosphere/swarm
+# mesosphere/presto-server
+# mesosphere/presto-cli

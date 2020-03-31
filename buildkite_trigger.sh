@@ -18,14 +18,18 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ -z "${BUILDKITE_TOKEN:-}" ]; then
-    echo "BUILDKITE_TOKEN environment variable not defined"
-fi
-
 usage(){
+    if [ -n "$*" ]; then
+        echo "$*"
+        echo
+    fi
     echo "usage: ${0##*/} repo"
     exit 3
 }
+
+if [ -z "${BUILDKITE_TOKEN:-}" ]; then
+    usage '$BUILDKITE_TOKEN not defined'
+fi
 
 # remember to set this eg. BUILDKITE_USER="hari-sekhon"
 buildkite_user="${BUILDKITE_USER:-${GITHUB_USER:-${GIT_USER:-${USER:-}}}}"
@@ -33,11 +37,11 @@ buildkite_user="${BUILDKITE_USER:-${GITHUB_USER:-${GIT_USER:-${USER:-}}}}"
 repo="${1:-${BUILDKITE_REPO:-${REPO:-}}}"
 
 if [ -z "$buildkite_user" ]; then
-    usage "\$BUILDKITE_USER not defined"
+    usage '$BUILDKITE_USER not defined'
 fi
 
 if [ -z "$repo" ]; then
-    usage "\$BUILDKITE_REPO not defined"
+    usage '$BUILDKITE_REPO not defined'
 fi
 
 curl \

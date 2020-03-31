@@ -207,6 +207,10 @@ docker_compose_port(){
 }
 
 docker_exec(){
+    if [ -n "${DOCKER_SKIP_EXEC:-}" ]; then
+        echo "skipping docker exec: $*"
+        return 0
+    fi
     local user=""
     if [ -n "${DOCKER_USER:-}" ]; then
         user=" --user $DOCKER_USER"

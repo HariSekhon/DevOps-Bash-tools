@@ -15,6 +15,7 @@
 
 # Files to sync to adjacent repos, one per line
 
+Jenkinsfile
 .appveyor.yml
 .buildkite/pipeline.yml
 .circleci/config.yml
@@ -22,9 +23,13 @@
 .concourse.yml
 .drone.yml
 .gitlab-ci.yml
+.gocd.yml
 #.travis.yml
 azure-pipelines.yml
 bitbucket-pipelines.yml
+buddy.yml
 codefresh.yml
 shippable.yml
 wercker.yml
+setup/gocd_config_repo.json
+setup/jenkins-job.xml

@@ -507,6 +507,14 @@ docker-run:
 run: docker-run
 	@:
 
+.PHONY: concourse
+concourse:
+	$(BASH_TOOLS)/concourse.sh
+
+.PHONY: fly
+fly: concourse
+	@:
+
 .PHONY: docker-mount
 docker-mount:
 	# --privileged=true is needed to be able to:

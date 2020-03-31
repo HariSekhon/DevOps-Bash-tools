@@ -56,6 +56,12 @@ checkprog(){
     fi
 }
 
+dum(){
+    du -max "${@:-.}" |
+    sort -k1n |
+    tail -n 10000
+}
+
 typer(){
     local alias_target
     local type_output

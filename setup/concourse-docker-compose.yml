@@ -1,0 +1,52 @@
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  Author: Hari Sekhon
+#  Date: 2020-03-21 11:14:07 +0000 (Sat, 21 Mar 2020)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# based off concourse quickstart
+#
+# https://concourse-ci.org/docker-compose.yml
+
+version: '3'
+
+services:
+  concourse-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: concourse
+      POSTGRES_PASSWORD: ${PGPASSWORD:-concourse_password}
+      POSTGRES_USER: ${PGUSER:-concourse_user}
+      PGDATA: /database
+
+  concourse:
+    image: concourse/concourse:${VERSION:-6.0}
+    command: quickstart
+    privileged: true
+    depends_on: [concourse-db]
+    ports:
+      - 8080:8080
+    #volumes:
+    #  - .:/pwd
+    environment:
+      CONCOURSE_POSTGRES_HOST: concourse-db
+      CONCOURSE_POSTGRES_USER: ${PGUSER:-concourse_user}
+      CONCOURSE_POSTGRES_PASSWORD: ${PGPASSWORD:-concourse_password}
+      CONCOURSE_POSTGRES_DATABASE: concourse
+      CONCOURSE_EXTERNAL_URL: http://localhost:8080
+      CONCOURSE_ADD_LOCAL_USER: ${CONCOURSE_USER:-test}:${CONCOURSE_PASSWORD:-test}
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: ${CONCOURSE_USER:-test}
+      CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 30s
+      timeout: 10s
+      retries: 5

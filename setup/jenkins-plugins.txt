@@ -1,0 +1,15 @@
+# jenkins_cli.sh list-plugins | awk '{print $1":"$NF}' | sort > setup/jenkins_plugins.txt
+blueocean:1.22.0
+build-timeout:1.19.1
+command-launcher:1.4
+#convert-to-pipeline:1.0
+git-client:3.2.1
+git-server:1.9
+git:4.2.2
+github-api:1.106
+github-branch-source:2.6.0
+github:1.29.5
+gradle:1.36
+junit:1.28
+timestamper:1.11.2
+workflow-aggregator:2.6

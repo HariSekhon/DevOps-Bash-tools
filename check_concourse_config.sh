@@ -3,7 +3,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2016-06-30 14:46:43 +0100 (Thu, 30 Jun 2016)
+#  Date: 2020-03-21 19:21:11 +0000 (Sat, 21 Mar 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -21,31 +21,28 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-build_files="$(find "${1:-.}" -name build.sbt)"
+config=".concourse.yml"
 
-if [ -z "$build_files" ]; then
+if [ -z "$(find "${1:-.}" -name "$config")" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
 
-section "S B T"
+section "C o n c o u r s e"
 
 start_time="$(start_timer)"
 
-if type -P sbt &>/dev/null; then
-    grep -v '/target/' <<< "$build_files" |
-    sort |
-    while read -r build_sbt; do
-        pushd "$(dirname "$build_sbt")" >/dev/null
-        echo "Validating $build_sbt"
-        echo q | sbt reload || exit $?
-        popd >/dev/null
+if type -P fly &>/dev/null; then
+    find "${1:-.}" -name "$config" |
+    while read -r config; do
+        echo "Validating $config"
+        fly validate-pipeline -c "$config" || exit $?
         echo
     done
 else
-    echo "SBT not found in \$PATH, skipping maven pom checks"
+    echo "Concourse 'fly' command not found in \$PATH, skipping concourse config checks"
 fi
 
 time_taken "$start_time"
-section2 "SBT checks passed"
+section2 "Concourse config checks passed"
 echo

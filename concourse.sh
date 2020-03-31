@@ -22,7 +22,15 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-config="$srcdir/setup/concourse_quickstart.yml"
+export CONCOURSE_USER="${CONCOURSE_USER:-test}"
+export CONCOURSE_PASSWORD="${CONCOURSE_PASSWORD:-test}"
+
+config="$srcdir/setup/concourse-docker-compose.yml"
+
+target="ci"
+
+pipeline="${PWD##*/}"
+job="$pipeline/build"
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
@@ -40,23 +48,55 @@ if ! [ -f "$config" ]; then
     wget -O "$config" https://concourse-ci.org/docker-compose.yml
 fi
 
+echo "Booting Concourse:"
 docker-compose -f "$config" "$action" $opts "$@"
+echo
+if [ "$action" = down ]; then
+    exit 0
+fi
 
 export PATH="$PATH:"~/bin
+
+when_url_content 'http://127.0.0.1:8080/' '(?i:concourse)' # Concourse
+echo
 
 # which checks for executable which command -v and type -P don't
 # shellcheck disable=SC2230
 if [ "$action" = up ] &&
    ! which fly &>/dev/null; then
-    when_url_content 'http://127.0.0.1:8080/' '(?i:concourse)' # Concourse
     dir=~/bin
     mkdir -pv "$dir"
     os="$(uname -s | tr '[:upper:]' '[:lower:]')"
     echo "Downloading fly for OS = $os"
     wget -cO "$dir/fly" "http://127.0.0.1:8080/api/v1/cli?arch=amd64&platform=$os"
     chmod +x "$dir/fly"
+    echo
 fi
 
-fly -t ci login -c http://127.0.0.1:8080 -u test -p test
+fly -t "$target" login -c http://127.0.0.1:8080 -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
+echo
 
-fly -t ci set-pipeline -p "${PWD##*/}" -c .concourse.yml
+echo "updating pipeline: $pipeline"
+# fly sp
+set +o pipefail
+yes | fly -t "$target" set-pipeline -p "$pipeline" -c .concourse.yml
+set -o pipefail
+echo
+
+echo "unpausing pipeline: $pipeline"
+# fly up
+fly -t "$target" unpause-pipeline -p "$pipeline"
+echo
+
+echo "unpausing job: $job"
+# fly uj
+fly -t "$target" unpause-job --job "$job"
+
+#fly -t "$target" trigger-job -j "$job"
+#fly -t "$target" watch -j "$job"
+
+# trigger + watch together
+fly -t "$target" trigger-job -j "$job" -w
+
+echo
+fly -t "$target" builds

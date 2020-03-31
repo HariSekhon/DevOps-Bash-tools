@@ -53,6 +53,18 @@ dockerrmi(){
     docker rmi $(docker images -q --filter dangling=true)
 }
 
+# docker-compose -f ...
+dcf(){
+    local docker_compose_yaml="$1"
+    if ! [ -f "$docker_compose_yaml" ] &&
+         [ -f "docker-compose.yaml" ]; then
+        docker_compose_yaml=docker-compose.yaml
+    fi
+    shift
+    docker-compose -f "$docker_compose_yaml" up "$@"
+    docker-compose -f "$docker_compose_yaml" logs -f
+}
+
 # starts the docker VM, shows ASCII whale, but slow
 #alias dockershell="/Applications/Docker/Docker\ Quickstart\ Terminal.app/Contents/Resources/Scripts/start.sh"
 # better

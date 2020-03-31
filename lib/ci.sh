@@ -135,10 +135,25 @@ is_gitlab_ci(){
     return 1
 }
 
+# https://docs.gocd.org/current/faq/dev_use_current_revision_in_build.html
+is_gocd(){
+    if [ -n "${GO_PIPELINE_NAME:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://scrutinizer-ci.com/docs/build/environment-variables
 is_scrutinizer_ci(){
     # also CI but specific to Scrutinizer, caught in is_CI generic
     if [ -n "${SCRUTINIZER:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
+is_semmle(){
+    if [ -n "${SEMMLE_PLATFORM:-}" ]; then
         return 0
     fi
     return 1
@@ -189,7 +204,9 @@ is_CI(){
        is_codefresh ||
        is_cirrus_ci ||
        is_drone_io||
+       is_gocd ||
        is_scrutinizer_ci ||
+       is_semmle ||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0

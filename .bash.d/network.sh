@@ -48,7 +48,9 @@ alias g=ping_google
 
 # watch_url.pl is in DevOps-Perl-tools repo which should be in $PATH
 alias watchu="watch_url.pl"
-alias wg="watch_url.pl google.com"
+# watch google
+# https because http often gets intercepted by routers + proxies giving false 200 OKs where there is an internet issue
+alias wg="watch_url.pl https://google.com"
 
 n(){
     if type -P host &>/dev/null; then

@@ -20,7 +20,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')" ]; then
+filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t' | sort)"
+
+if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -36,7 +38,6 @@ elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping perl syntax checks"
     echo
 else
-    filelist=$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t' | sort)
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
@@ -45,16 +46,16 @@ else
     done
     # to account for the semi colon
     ((max_len + 1))
-    for x in $filelist; do
-        isExcluded "$x" && continue
-        printf "%-${max_len}s " "$x:"
-        #$perl -Tc $I_lib $x
+    for filename in $filelist; do
+        isExcluded "$filename" && continue
+        printf "%-${max_len}s " "$filename:"
+        #$perl -Tc $I_lib $filename
         # -W too noisy
         # -Mstrict - flags common DESCRIPTION / VERSION unscoped
         # -Mdiagnostics
         # shellcheck disable=SC2154
         # $perl is set in perl.sh which is included from utils.sh
-        $perl -I . -Tc "$x" 2>&1 | sed "s,^$x ,,"
+        $perl -I . -Tc "$filename" 2>&1 | sed "s,^$filename ,,"
     done
     time_taken "$start_time"
     section2 "All Perl programs passed syntax check"
