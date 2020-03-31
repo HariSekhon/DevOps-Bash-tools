@@ -89,8 +89,9 @@ if is_CI; then
 fi
 
 sudo=""
+# CircleCI uses /opt/circleci/.pyenv/shims/python
 if [ -n "${VIRTUAL_ENV:-}" ] ||
-   #[ -n "${PYENV_ROOT:-}" ] ||
+   [ -n "${PYENV_ROOT:-}" ] ||
    [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
     sudo=""
 elif [ $EUID != 0 ]; then
