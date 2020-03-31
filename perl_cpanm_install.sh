@@ -25,6 +25,11 @@ srcdir="$(dirname "$0")"
 
 CPANM="${CPANM:-cpanm}"
 
+# to avoid perl: warning: Falling back to the standard locale ("C")
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 usage(){
     echo "Installs Perl CPAN modules using Cpanm, taking in to account library paths, perlbrew envs etc"
     echo
