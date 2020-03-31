@@ -13,6 +13,14 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Queries AppVeyor API, auto-populating $APPVEYOR_TOKEN from environment and API url base for convenience
+#
+# https://kevinoid.github.io/appveyor-swagger/bootprint/
+#
+# eg.
+#
+# appveyor_api.sh projects | jq
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
