@@ -18,7 +18,17 @@ set -eu
 srcdir_bash_tools_perl="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-source "$srcdir_bash_tools_perl/ci.sh"
+. "$srcdir_bash_tools_perl/ci.sh"
+
+# to avoid perl: warning: Falling back to the standard locale ("C")
+#
+# might have to run this on Debian/Ubuntu:
+#
+# sudo locale-gen en_US.UTF-8
+#
+export LANGUAGE="${LANGUAGE:-en_US.UTF-8}"
+export LANG="${LANG:-en_US.UTF-8}"
+export LC_ALL="${LC_ALL:-en_US.UTF-8}"
 
 # Taint code doesn't use PERL5LIB, use -I instead
 #I_lib=""
