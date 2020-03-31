@@ -26,9 +26,10 @@ srcdir_bash_tools_perl="$(dirname "${BASH_SOURCE[0]}")"
 #
 # sudo locale-gen en_US.UTF-8
 #
-export LANGUAGE="${LANGUAGE:-en_US.UTF-8}"
-export LANG="${LANG:-en_US.UTF-8}"
-export LC_ALL="${LC_ALL:-en_US.UTF-8}"
+# breaks on some systems, probably need to install something for setlocale
+#export LANGUAGE="${LANGUAGE:-en_US.UTF-8}"
+#export LANG="${LANG:-en_US.UTF-8}"
+#export LC_ALL="${LC_ALL:-en_US.UTF-8}"
 
 # Taint code doesn't use PERL5LIB, use -I instead
 #I_lib=""
