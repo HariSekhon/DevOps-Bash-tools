@@ -25,16 +25,6 @@ srcdir="$(dirname "$0")"
 
 CPANM="${CPANM:-cpanm}"
 
-# to avoid perl: warning: Falling back to the standard locale ("C")
-#
-# might have to run this on Debian/Ubuntu:
-#
-# sudo locale-gen en_US.UTF-8
-#
-export LANGUAGE="${LANGUAGE:-en_US.UTF-8}"
-export LANG="${LANG:-en_US.UTF-8}"
-export LC_ALL="${LC_ALL:-en_US.UTF-8}"
-
 usage(){
     echo "Installs Perl CPAN modules using Cpanm, taking in to account library paths, perlbrew envs etc"
     echo
