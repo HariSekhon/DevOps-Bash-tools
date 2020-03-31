@@ -35,6 +35,11 @@ services:
     user: root:root
     environment:
       GO_SERVER_URL: http://gocd-server:8153/go
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8152/health/v1/isConnectedToServer"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     restart: on-failure
     links:
       - gocd-server
