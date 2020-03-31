@@ -123,14 +123,16 @@ if [ -n "${NO_FAIL:-}" ]; then
         echo "$sudo $envopts $CPANM --notest $opts $cpan_module"
         # want splitting of opts
         # shellcheck disable=SC2086
-        eval $sudo $envopts "$CPANM" --notest $opts "$cpan_module" || :
+        $sudo $envopts "$CPANM" --notest $opts "$cpan_module" || :
     done
 else
     echo "$sudo $envopts $CPANM --notest $opts $cpan_modules"
     # want splitting of opts and modules
     # shellcheck disable=SC2086
-    if ! eval $sudo $envopts "$CPANM" --notest $opts $cpan_modules; then
-        $sudo find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs $sudo cat
+    if ! $sudo $envopts "$CPANM" --notest $opts $cpan_modules; then
+        #$sudo find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs $sudo cat
+        # build log is still in user's home dir even when using sudo
+        find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs cat
         exit 1
     fi
 fi
