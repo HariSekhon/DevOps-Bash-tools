@@ -67,6 +67,15 @@ is_buildkite(){
     return 1
 }
 
+# Concourse team refuse to add this variable like all the other normal CI systems
+# so it relies on you having added it yourself (see .concourse.yml in any of my repos for example)
+is_concourse(){
+    if [ -n "${CONCOURSE:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://circleci.com/docs/2.0/env-vars/#built-in-environment-variables
 is_circle_ci(){
     # also CI but not really specific, caught in is_CI generic
@@ -202,6 +211,7 @@ is_CI(){
        is_buddy_works_ci ||
        is_codeship ||
        is_codefresh ||
+       is_concourse ||
        is_cirrus_ci ||
        is_drone_io||
        is_gocd ||
