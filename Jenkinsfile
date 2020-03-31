@@ -22,35 +22,35 @@
 
 
 pipeline {
-	// run pipeline any agent
+    // run pipeline any agent
     agent any
-	// can't do this when running jenkins in docker itself, gets '.../script.sh: docker: not found'
+    // can't do this when running jenkins in docker itself, gets '.../script.sh: docker: not found'
 //    agent {
-//		docker {
-//			image 'ubuntu:18.04'
-//			args '-v $HOME/.m2:/root/.m2 -v $HOME/.cache/pip:/root/.cache/pip -v $HOME/.cpanm:/root/.cpanm -v $HOME/.sbt:/root/.sbt -v $HOME/.ivy2:/root/.ivy2 -v $HOME/.gradle:/root/.gradle'
-//		}
-//	}
+//      docker {
+//          image 'ubuntu:18.04'
+//          args '-v $HOME/.m2:/root/.m2 -v $HOME/.cache/pip:/root/.cache/pip -v $HOME/.cpanm:/root/.cpanm -v $HOME/.sbt:/root/.sbt -v $HOME/.ivy2:/root/.ivy2 -v $HOME/.gradle:/root/.gradle'
+//      }
+//  }
 
-	// need to specify at least one env var if enabling
+    // need to specify at least one env var if enabling
     //environment {
-	//	DEBUG = '1'
-	//}
+    //  DEBUG = '1'
+    //}
 
     options {
         // put timestamps in console logs
         timestamps()
 
-		// timeout entire pipeline after 4 hours
-		timeout(time: 4, unit: 'HOURS')
+        // timeout entire pipeline after 4 hours
+        timeout(time: 4, unit: 'HOURS')
 
-		//retry entire pipeline 3 times
-		//retry(3)
+        //retry entire pipeline 3 times
+        //retry(3)
     }
 
-	triggers {
+    triggers {
         cron('H 10 * * 1-5')
-		pollSCM('H/2 * * * *')
+        pollSCM('H/2 * * * *')
     }
 
     stages {
@@ -69,11 +69,11 @@ pipeline {
 //                        sh 'apt update -q'
 //                        sh 'apt install -qy make'
 //                        sh 'make init'
-						sh """
-							apt update -q &&
-							apt install -qy make &&
-							make init
-						"""
+                        sh """
+                            apt update -q &&
+                            apt install -qy make &&
+                            make init
+                        """
                     }
                 }
                 timeout(time: 180, unit: 'MINUTES') {
@@ -103,20 +103,20 @@ pipeline {
 //        stage('Deployment') {
 //            steps {
 //                echo 'Deploying...'
-//				echo 'Nothing to deploy'
+//              echo 'Nothing to deploy'
 //            }
 //        }
 
     }
-	post {
+    post {
         always {
             echo 'Always'
-			//deleteDir() // clean up workspace
+            //deleteDir() // clean up workspace
 
-			// collect JUnit reports for Jenkins UI
-			//junit 'build/reports/**/*.xml'
-			// collect artifacts to Jenkins for analysis
-			//archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            // collect JUnit reports for Jenkins UI
+            //junit 'build/reports/**/*.xml'
+            // collect artifacts to Jenkins for analysis
+            //archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
         }
         success {
             echo 'SUCCESS!'
