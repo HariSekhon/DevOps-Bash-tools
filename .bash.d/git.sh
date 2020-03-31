@@ -389,7 +389,7 @@ gitadd() {
     local basedir;
     basedir="$(basedir "$@")" && local trap_codes="INT ERR";
     # shellcheck disable=SC2064,SC2086
-    trap "popd &>/dev/null; trap - $trap_codes; return 1" $trap_codes;
+    trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes;
     pushd "$basedir" > /dev/null || return 1;
     # shellcheck disable=SC2086
     targets="$(strip_basedirs "$basedir" "$@")";
@@ -440,7 +440,7 @@ gitu(){
     local trap_codes="INT ERR"
     # expand now
     # shellcheck disable=SC2064
-    trap "popd &>/dev/null; trap - $trap_codes; return 1" $trap_codes
+    trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes
     pushd "$basedir" >/dev/null || return 1
     targets="$(strip_basedirs "$basedir" $targets)"
     # shellcheck disable=SC2086
