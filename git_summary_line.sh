@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -15,7 +15,7 @@
 
 # Prints concise git log for $PWD repo - used by all repos headers to signify their release in CI logs
 
-set -euo pipefail
+set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 git log -n 1 --format="%m %h  %ai  (%an)  %s"
