@@ -125,5 +125,6 @@ while read -r hostname uuid; do
     -H 'Accept: application/vnd.go.cd.v6+json' \
     -H 'Content-Type: application/json' \
     -X PATCH \
-    -d '{ "agent_config_state": "Enabled" }' -sS
+    -d '{ "agent_config_state": "Enabled" }' -sS || :  # don't stop, try enabling all agents
+    echo
 done
