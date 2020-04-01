@@ -35,6 +35,7 @@ services:
     user: root:root
     environment:
       GO_SERVER_URL: http://gocd-server:8153/go
+      AGENT_STARTUP_ARGS: -Dgo.agent.status.api.bind.host=0.0.0.0
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8152/health/v1/isConnectedToServer"]
       interval: 30s
