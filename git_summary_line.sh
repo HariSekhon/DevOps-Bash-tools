@@ -18,4 +18,4 @@
 set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-git log -n 1 --format="%m %h  %ai  (%an)  %s"
+git --no-pager log -n 1 --pretty=format:"%m %h  %ai  (%an)  %s"
