@@ -54,12 +54,21 @@ trap 'rm "$tmp"' $TRAP_SIGNALS
 # -r = recursive
 # -nd / --no-directories = don't create local dirs representing structure
 # -nv / --no-verbose = give concise 1 liner information
-# -H / --span-hosts = follows subdomains + external sites
 # -l 1 = crawl 1 level deep (may need to tune this)
 # -w 2 = wait for 2 secs between requests to avoid tripping defenses
+# -H / --span-hosts = follows subdomains + external sites
 # -o "$tmp" = output to tmp, now replaced with tee
-wget --spider -r -nd -nv -H -l 1 -w 2 "$url" |
+wget --spider \
+     -r \
+     -nd \
+     -nv \
+     -l 1 \
+     -w 2 \
+     -H \
+     "$url" 2>&1 |
 tee "$tmp"
-echo
-echo "Broken links:"
-grep -B1 'broken link!' "$tmp"
+if ! grep -q 'Found no broken links' "$tmp"; then
+    echo
+    echo "Broken links:"
+    grep -B1 'broken link!' "$tmp"
+fi
