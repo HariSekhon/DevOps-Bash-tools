@@ -13,40 +13,39 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Triggers BuildKite job for repo given as argument
+# Triggers BuildKite job for a pipeline given as argument
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
 usage(){
     if [ -n "$*" ]; then
         echo "$*"
         echo
     fi
-    echo "usage: ${0##*/} repo"
+    echo "usage: ${0##*/} pipeline"
     exit 3
 }
 
 if [ -z "${BUILDKITE_TOKEN:-}" ]; then
-    usage '$BUILDKITE_TOKEN not defined'
+    usage "\$$BUILDKITE_TOKEN not defined"
 fi
 
-# remember to set this eg. BUILDKITE_USER="hari-sekhon"
-buildkite_user="${BUILDKITE_USER:-${GITHUB_USER:-${GIT_USER:-${USER:-}}}}"
+# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
+BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_ORGANIZATION:-}}"
 
-repo="${1:-${BUILDKITE_REPO:-${REPO:-}}}"
+pipeline="${1:-${BUILDKITE_PIPELINE:-${PIPELINE:-}}}"
 
-if [ -z "$buildkite_user" ]; then
-    usage '$BUILDKITE_USER not defined'
+if [ -z "$BUILDKITE_ORGANIZATION" ]; then
+    usage "\$BUILDKITE_ORGANIZATION not defined"
 fi
 
-if [ -z "$repo" ]; then
-    usage '$BUILDKITE_REPO not defined'
+if [ -z "$pipeline" ]; then
+    usage "\$BUILDKITE_PIPELINE not defined and no argument given"
 fi
 
-curl \
-    "https://api.buildkite.com/v2/organizations/$buildkite_user/pipelines/$repo/builds" \
-    -H "Authorization: Bearer $BUILDKITE_TOKEN" \
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline/builds" \
     -X "POST" \
     -F "commit=${BUILDKITE_COMMIT:-HEAD}" \
     -F "branch=${BUILDKITE_BRANCH:-master}" \
