@@ -54,16 +54,21 @@ trap 'rm "$tmp"' $TRAP_SIGNALS
 # -r = recursive
 # -nd / --no-directories = don't create local dirs representing structure
 # -nv / --no-verbose = give concise 1 liner information
-# -l 1 = crawl 1 level deep (may need to tune this)
+# -l 1 = crawl 1 level deep (may need to tune this), set to 'inf' for infinite
 # -w 2 = wait for 2 secs between requests to avoid tripping defenses
 # -H / --span-hosts = follows subdomains + external sites
 # -o "$tmp" = output to tmp, now replaced with tee
-wget --spider \
+# -N = --timestamping = don't download unless newer than local copy, use with mirroring not spidering
+# -nH = -–no-host-directories
+# -P = --directory-prefix (use instead of host directories)
+# -m = --mirror (-r -N -l inf –no-remove-listing)
+wget \
+     --spider \
      -r \
      -nd \
      -nv \
      -l 1 \
-     -w 2 \
+     -w 2 --random-wait \
      -H \
      "$url" 2>&1 |
 tee "$tmp"
