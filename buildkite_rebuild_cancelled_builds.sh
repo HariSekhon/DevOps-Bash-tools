@@ -31,10 +31,10 @@ usage_description="Rebuilds cancelled builds in BuildKite via its API (inverse o
 usage_args="[<curl_options>]"
 
 "$srcdir/buildkite_api.sh" "builds?state=canceled" "$@" |
-jq -r 'limit(1; .[] | [.pipeline.slug, .number, .url] | @tsv)' |
+jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |
 while read -r name number url; do
     url="${url#https://api.buildkite.com/v2/}"
     echo -n "Rebuilding $name build number $number:  "
     "$srcdir/buildkite_api.sh" "$url/rebuild" -X PUT |
-    jq
+    jq -r '.state'
 done
