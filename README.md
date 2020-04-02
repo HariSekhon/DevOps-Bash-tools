@@ -18,7 +18,7 @@ Hari Sekhon - DevOps Bash Tools
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md)
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 <!-- TODO: fix
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
@@ -87,7 +87,7 @@ this one I don't trust it'll stick around so using shields version instead
 
 200+ Shell Scripts, Advanced Bash environment & Utility Code Library.
 
-Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 300+ [CI builds](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md).
+Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 300+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
 Contains:
 
@@ -225,7 +225,7 @@ etc.
 - `github*.sh` - various useful GitHub scripts for querying the GitHub API including:
   - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for several other scripts that use the GitHub API. Built on top of `curl_auth.sh`
   - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key_api.sh` - fetches GitHub users public SSH keys for quick local installation to `~/.ssh/authorized_keys`
-  - `github_generate_status_page.sh` - generates a [STATUS.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STATUS.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [JenkinS CI](https://jenkins.io/), launches in docker, installs plugins, validates like `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
@@ -434,3 +434,5 @@ make: *** [help] Error 3
 ### Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
+
+[git.io/bash-tools](https://git.io/bash-tools)
