@@ -88,19 +88,26 @@ if is_CI; then
     opts="$opts -q"
 fi
 
+inside_virtualenv(){
+    if [ -n "${VIRTUAL_ENV:-}" ] ||
+       [ -n "${PYENV_ROOT:-}" ] ||
+       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 sudo=""
 # CircleCI uses /opt/circleci/.pyenv/shims/python
-if [ -n "${VIRTUAL_ENV:-}" ] ||
-   [ -n "${PYENV_ROOT:-}" ] ||
-   [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
+if inside_virtualenv; then
+    echo "inside virtualenv, not using sudo"
     sudo=""
 elif [ $EUID != 0 ]; then
     sudo=sudo
 fi
 
 user_opt(){
-    if [ -n "${VIRTUAL_ENV:-}" ] ||
-       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
+    if inside_virtualenv; then
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
         sudo=""
     else
