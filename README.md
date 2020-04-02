@@ -434,3 +434,5 @@ make: *** [help] Error 3
 ### Stargazers over time
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
+
+[git.io/bash-tools](https://git.io/bash-tools)
