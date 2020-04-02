@@ -17,9 +17,7 @@
 #
 # https://buildkite.com/docs/apis/rest-api/builds
 #
-# Doesn't work yet due to Forbidden permissions issue:
-#
-# https://github.com/buildkite/docs/issues/689
+# May fail with Forbidden if your trial account has expired
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
