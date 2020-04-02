@@ -29,7 +29,7 @@ usage(){
 }
 
 if [ -z "${BUILDKITE_TOKEN:-}" ]; then
-    usage "\$$BUILDKITE_TOKEN not defined"
+    usage "\$BUILDKITE_TOKEN not defined"
 fi
 
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
