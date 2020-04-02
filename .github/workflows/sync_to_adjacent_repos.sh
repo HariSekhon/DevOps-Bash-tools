@@ -40,7 +40,7 @@ while read -r repo dir; do
                 echo "syncing $filename -> $target"
                 timeout=60
                 if [[ "$repo" =~ nagios-plugins ]]; then
-                    timeout=180
+                    timeout=240
                 fi
                 sed "s/bash-tools/$repo/;s/timeout-minutes:.*/timeout-minutes: $timeout/" "$filename" > "$target"
                 if [ "$repo" = "nagios-plugins" ]; then
