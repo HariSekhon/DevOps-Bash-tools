@@ -94,6 +94,9 @@ inside_virtualenv(){
        [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
         return 0
     fi
+    if type -P "$pip" | grep -q '/.pyenv/'; then
+        return 0
+    fi
     return 1
 }
 
