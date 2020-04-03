@@ -189,6 +189,12 @@ python-desktop: system-packages pip
 
 .PHONY: pip
 pip::
+	@# executing in sh where type is not available
+	@#type -P python
+	which python || :
+	python -V || :
+	which pip || :
+	pip -V || :
 	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: nodejs-desktop
