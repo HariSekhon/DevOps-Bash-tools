@@ -27,35 +27,35 @@ set -euo pipefail
 opts="${POSTGRES_OPTS:-}"
 
 
-POSTGRES_HOST="${PGHOST:-${POSTGRES_HOST:-${HOST:-}}}"
+POSTGRES_HOST="${PGHOST:-${POSTGRESQL_HOST:-${POSTGRES_HOST:-${HOST:-}}}}"
 if [ -n "${POSTGRES_HOST:-}" ]; then
     # more intuitive to see in the process list what is going on
     #export PGHOST="$POSTGRES_HOST"
     opts="$opts -h $POSTGRES_HOST"
 fi
 
-POSTGRES_PORT="${PGPORT:-${POSTGRES_PORT:-${PORT:-}}}"
+POSTGRES_PORT="${PGPORT:-${POSTGRESQL_PORT:-${POSTGRES_PORT:-${PORT:-}}}}"
 if [ -n "${POSTGRES_PORT:-}" ]; then
     # more intuitive to see in the process list what is going on
     #export PGPORT="$POSTGRES_PORT"
     opts="$opts -p $POSTGRES_PORT"
 fi
 
-POSTGRES_USER="${PGUSER:-${POSTGRES_USER:-${USER:-}}}"
+POSTGRES_USER="${PGUSER:-${POSTGRESQL_USER:-${POSTGRES_USER:-${USER:-}}}}"
 if [ -n "${POSTGRES_USER:-}" ]; then
     # more intuitive to see in the process list what is going on
     #export PGUSER="$POSTGRES_USER"
     opts="$opts -U $POSTGRES_USER"
 fi
 
-POSTGRES_PASSWORD="${PGPASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-}}}"
+POSTGRES_PASSWORD="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-}}}}"
 if [ -n "${POSTGRES_PASSWORD:-}" ]; then
     # can't do this and wouldn't want to as it'd expose it in the password list
     #opts="$opts -U $POSTGRES_PASSWORD"
     export PGPASSWORD="$POSTGRES_PASSWORD"
 fi
 
-POSTGRES_DATABASE="${PGDATABASE:-${POSTGRES_DATABASE:-${DATABASE:-}}}"
+POSTGRES_DATABASE="${PGDATABASE:-${POSTGRESQL_DATABASE:-${POSTGRES_DATABASE:-${DATABASE:-}}}}"
 if [ -n "${POSTGRES_DATABASE:-}" ]; then
     # more intuitive to see in the process list what is going on
     #export PGDATABASE="$POSTGRES_DATABASE"
