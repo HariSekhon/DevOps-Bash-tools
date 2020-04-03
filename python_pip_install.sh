@@ -23,17 +23,11 @@ set -euo pipefail
 srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/ci.sh"
 
-if [ -n "${PIP:-}" ]; then
-    pip="$PIP"
-else
-    pip=pip
-    if ! type -P "pip" &>/dev/null; then
-        echo "pip not found, falling back to pip2"
-        pip=pip2
-    fi
-fi
+# shellcheck disable=SC1090
+. "$srcdir/lib/python.sh"
+
 opts="${PIP_OPTS:-}"
 
 usage(){
@@ -147,6 +141,8 @@ fi
 
 if [ -n "${NO_FAIL:-}" ]; then
     for pip_module in $pip_modules; do
+        # pip defined in lib/python.sh
+        # shellcheck disable=SC2154
         echo "$sudo $pip install $opts $pip_module"
         # want splitting of opts
         # shellcheck disable=SC2086
