@@ -17,7 +17,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 #srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
 
-pip="${PIP:-${pip:-pip}}"
+# shellcheck disable=SC2034
+python="${PYTHON:-python}"
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -34,12 +35,15 @@ fi
 
 inside_virtualenv(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
-       [ -n "${PYENV_ROOT:-}" ] ||
+       #[ -n "${PYENV_ROOT:-}" ] ||
        [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
         return 0
     fi
-    if type -P "$pip" | grep -q '/.pyenv/'; then
-        return 0
+    if [ -n "${PYENV_ROOT:-}" ]; then
+        if type -P "$python" | grep -q "$PYENV_ROOT" &&
+           type -P "$pip" | grep -q "$PYENV_ROOT"; then
+            return 0
+        fi
     fi
     return 1
 }
