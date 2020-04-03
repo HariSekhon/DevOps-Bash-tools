@@ -68,4 +68,9 @@ done
 url_path="${1##/}"
 shift || :
 
-curl -sSH 'Accept: application/json' -H "Authorization: Bearer $BUILDKITE_TOKEN" "https://api.buildkite.com/v2/$url_path" "$@"
+if is_curl_min_version 7.55; then
+    # hide token from process list if curl version is new enough to support this trick
+    curl -sSH 'Accept: application/json' -H @<(cat <<< "Authorization: Bearer $BUILDKITE_TOKEN") "https://api.buildkite.com/v2/$url_path" "$@"
+else
+    curl -sSH 'Accept: application/json' -H "Authorization: Bearer $BUILDKITE_TOKEN" "https://api.buildkite.com/v2/$url_path" "$@"
+fi
