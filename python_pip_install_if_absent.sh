@@ -21,7 +21,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-python="${PYTHON:-python}"
+# shellcheck disable=SC1090
+. "$srcdir/lib/python.sh"
 
 usage(){
     echo "Installs Python PyPI modules not already installed using Pip"
@@ -80,6 +81,8 @@ for pip_module in $pip_modules; do
     # Cannot uninstall 'urllib3'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.
     #
     #echo "checking if python module '$python_module' is installed"
+    # assigned in lib/python.sh
+    # shellcheck disable=SC2154
     if "$python" -c "import $python_module" &>/dev/null; then
         echo "python module '$python_module' already installed, skipping..."
     else
