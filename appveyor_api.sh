@@ -52,4 +52,9 @@ done
 url_path="${1##/}"
 shift || :
 
-curl -sSH 'Accept: application/json' -H "Authorization: Bearer $APPVEYOR_TOKEN" "https://ci.appveyor.com/api/$url_path" "$@"
+if is_curl_min_version 7.55; then
+    # hide token from process list if curl is new enough to support this trick
+    curl -sSH 'Accept: application/json' -H @<(cat <<< "Authorization: Bearer $APPVEYOR_TOKEN") "https://ci.appveyor.com/api/$url_path" "$@"
+else
+    curl -sSH 'Accept: application/json' -H "Authorization: Bearer $APPVEYOR_TOKEN" "https://ci.appveyor.com/api/$url_path" "$@"
+fi
