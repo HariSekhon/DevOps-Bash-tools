@@ -188,14 +188,17 @@ gem:
 python-desktop: system-packages pip
 
 .PHONY: pip
-pip::
+pip:: python-version
+	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
+
+.PHONY: python-version
+python-version:
 	@# executing in sh where type is not available
 	@#type -P python
 	which python || :
 	python -V || :
 	which pip || :
 	pip -V || :
-	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: nodejs-desktop
 nodejs-desktop: system-packages npm
@@ -205,7 +208,7 @@ npm::
 	$(BASH_TOOLS)/nodejs_npm_install_if_absent.sh $(BASH_TOOLS)/setup/npm-packages-desktop.txt
 
 .PHONY: aws
-aws: system-packages
+aws: system-packages python-version
 	@setup/install_aws_cli.sh
 
 .PHONY: azure
