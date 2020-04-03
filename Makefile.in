@@ -371,11 +371,12 @@ yum-packages-python:
 	for x in rpm-packages-python.txt rpm-packages-python-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
-	for x in rpm-packages-pip.txt; do \
-		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
+	. $(BASH_TOOLS)/lib/python.sh; \
+	if ! inside_virtualenv; then \
+		for x in rpm-packages-pip.txt; do \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
-		fi; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
+		done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"; \
+	fi
 
 .PHONY: homebrew-packages
 homebrew-packages:
