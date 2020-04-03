@@ -26,6 +26,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC2034
+usage_description="Gets last build status for a DockerHub repo"
+
+# shellcheck disable=SC2034
+usage_args="<user/repo>"
+
 if [ $# -lt 1 ]; then
     usage
 fi
