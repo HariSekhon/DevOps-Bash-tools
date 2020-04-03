@@ -23,7 +23,7 @@ set -euo pipefail
 srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/ci.sh"
+. "$srcdir/lib/utils.sh"
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -87,18 +87,6 @@ if is_CI; then
     #echo "running in quiet mode for CI to minimize log noise"
     opts="$opts -q"
 fi
-
-inside_virtualenv(){
-    if [ -n "${VIRTUAL_ENV:-}" ] ||
-       [ -n "${PYENV_ROOT:-}" ] ||
-       [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
-        return 0
-    fi
-    if type -P "$pip" | grep -q '/.pyenv/'; then
-        return 0
-    fi
-    return 1
-}
 
 sudo=""
 # CircleCI uses /opt/circleci/.pyenv/shims/python
