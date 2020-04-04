@@ -299,8 +299,7 @@ bitbucket/*
 boxes/
 Box Documents/
 # contains webhook URL which should not be committed publicly
-buildkite-pipeline.json
-buildkite-pipeline.*.json
+buildkite-pipeline*.json
 c
 Calibre Library/
 cli_junkie.gif
