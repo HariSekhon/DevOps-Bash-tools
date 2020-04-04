@@ -42,7 +42,7 @@ help_usage "$@"
 
 if [ $# -ge 1 ]; then
     pipeline_config="$(cat "$1")"
-    shift || :
+    shift
 else
     echo "config file argument not given, reading config from stdin"
     pipeline_config="$(cat)"
