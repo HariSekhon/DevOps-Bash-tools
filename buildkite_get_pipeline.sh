@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2020-04-04 14:33:52 +0100 (Sat, 04 Apr 2020)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<pipeline> [<curl_options>]"
+
+# shellcheck disable=SC2034
+usage_description="
+Fetches a BuildKite pipeline's configuration to stdout
+
+Useful for saving the BuildKite pipeline configuration to a local JSON file
+
+The saved configuration can be loaded via buildkite_create_pipeline.sh
+
+Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
+"
+
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
+BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
+
+check_env_defined BUILDKITE_TOKEN
+check_env_defined BUILDKITE_ORGANIZATION
+
+help_usage "$@"
+
+pipeline="${1:-${BUILDKITE_PIPELINE:-${PIPELINE:-}}}"
+
+if [ -z "$pipeline" ]; then
+    usage "\$BUILDKITE_PIPELINE not defined and no argument given"
+fi
+
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline"
