@@ -14,5 +14,6 @@
 
 # NodeJS desktop packages - one per line
 
+codefresh
 js-yaml
 nodemon
