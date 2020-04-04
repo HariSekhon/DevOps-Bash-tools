@@ -13,33 +13,34 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Triggers BuildKite job for a pipeline given as argument
-
 set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="pipeline [<curl_options>]"
+
+# shellcheck disable=SC2034
+usage_description="
+Triggers BuildKite job for a pipeline given as argument
+"
+
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-usage(){
-    if [ -n "$*" ]; then
-        echo "$*"
-        echo
-    fi
-    echo "usage: ${0##*/} pipeline"
-    exit 3
-}
-
-if [ -z "${BUILDKITE_TOKEN:-}" ]; then
-    usage "\$BUILDKITE_TOKEN not defined"
-fi
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
-BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_ORGANIZATION:-}}"
+BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
+
+check_env_defined BUILDKITE_TOKEN
+check_env_defined BUILDKITE_ORGANIZATION
+
+min_args 1 "$@"
+
+help_usage "$@"
 
 pipeline="${1:-${BUILDKITE_PIPELINE:-${PIPELINE:-}}}"
-
-if [ -z "$BUILDKITE_ORGANIZATION" ]; then
-    usage "\$BUILDKITE_ORGANIZATION not defined"
-fi
 
 if [ -z "$pipeline" ]; then
     usage "\$BUILDKITE_PIPELINE not defined and no argument given"
