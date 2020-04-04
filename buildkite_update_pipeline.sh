@@ -48,7 +48,7 @@ else
     pipeline_config="$(cat)"
 fi
 
-pipeline="$(jq -r '.slug' <<< "$pipeline_config" || :)"
+pipeline="$(jq -r '.slug' <<< "$pipeline_config" 2>/dev/null || :)"
 pipeline="${pipeline:-${BUILDKITE_PIPELINE:-}}"
 
 if [ -z "$BUILDKITE_ORGANIZATION" ]; then
