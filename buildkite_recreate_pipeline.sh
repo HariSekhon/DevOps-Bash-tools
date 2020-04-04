@@ -25,6 +25,7 @@ Recreates BuildKite pipeline to wipe out history (cancelling all build jobs skew
 
 WARNING: the recreated pipeline will have the same name but a newly generated ID, invalidating the existing Status Badge URL
 WARNING: the recreated pipeline will have a different webhook URL, so the GitHub webhook will need to be updated to keep triggering builds
+Worse still, you cannot change the webhook URL back using the saved config as the API ignores the call, which is why the create step cannot set it properly
 
 Creates a <pipeline_name>.json file in the local directory to prevent losing the pipeline configuration
 if the create step fails for any reason after deleting the pipeline (does not pipe the get straight in to the create step)
