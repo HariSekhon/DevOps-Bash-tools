@@ -792,3 +792,27 @@ $switches
 EOF
     exit 3
 }
+
+min_args(){
+    local min="$1"
+    shift || :
+    if [ $# -lt "$min" ]; then
+        usage "error: missing arguments"
+    fi
+}
+
+help_usage(){
+    for arg; do
+        case "$arg" in
+            -h|--help)  usage
+                        ;;
+        esac
+    done
+}
+
+check_env_defined(){
+    local env="$1"
+    if [ -z "${env:-}" ]; then
+        usage "\$$env not defined"
+    fi
+}
