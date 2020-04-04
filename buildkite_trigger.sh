@@ -22,6 +22,11 @@ usage_args="<pipeline> [<curl_options>]"
 # shellcheck disable=SC2034
 usage_description="
 Triggers BuildKite job for a pipeline given as argument
+
+To trigger all your pipelines you can combine with adjacent scripts:
+
+./buildkite_pipelines.sh | while read pipeline; do ./buildkite_trigger.sh \"\$pipeline\"; done
+
 "
 
 [ -n "${DEBUG:-}" ] && set -x
