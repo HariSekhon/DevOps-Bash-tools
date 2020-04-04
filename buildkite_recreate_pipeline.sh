@@ -77,5 +77,9 @@ echo "deleting pipeline '$pipeline'"
 check_json_result "$tmp"
 
 echo "recreating pipeline '$pipeline'"
-"$srcdir/buildkite_create_pipeline.sh" "$config_file" "$@" | tee "$tmp"
+"$srcdir/buildkite_create_pipeline.sh" "$config_file" "$@" > "$tmp"
+check_json_result "$tmp"
+
+echo "triggering build of recreated pipeline '$pipeline'"
+"$srcdir/buildkite_trigger.sh" "$pipeline" > "$tmp"
 check_json_result "$tmp"
