@@ -34,11 +34,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# will attempt to parse from pipeline JSON if not given
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
-
-check_env_defined BUILDKITE_TOKEN
-check_env_defined BUILDKITE_ORGANIZATION
 
 help_usage "$@"
 
@@ -48,6 +46,13 @@ else
     echo "config file argument not given, reading config from stdin"
     pipeline_config="$(cat)"
 fi
+
+if [ -z "$BUILDKITE_ORGANIZATION" ]; then
+    BUILDKITE_ORGANIZATION="$(jq -r '.url' <<< "$pipeline_config" | sed 's|https://api.buildkite.com/v2/organizations/||; s|/pipelines/.*||')"
+fi
+
+check_env_defined BUILDKITE_TOKEN
+check_env_defined BUILDKITE_ORGANIZATION
 
 #if [ -z "$pipeline_config" ]; then
 #    usage "pipeline config not given"
