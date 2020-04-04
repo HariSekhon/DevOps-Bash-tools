@@ -47,10 +47,15 @@ check_env_defined BUILDKITE_ORGANIZATION
 
 help_usage "$@"
 
-pipeline="${1:-${BUILDKITE_PIPELINE:-${PIPELINE:-}}}"
+if [ $# -gt 0 ]; then
+    pipeline="$1"
+    shift || :
+else
+    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-}}"
+fi
 
 if [ -z "$pipeline" ]; then
     usage "\$BUILDKITE_PIPELINE not defined and no argument given"
 fi
 
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline"
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline" "$@"
