@@ -40,7 +40,7 @@ BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
 help_usage "$@"
 
-if [ $# -ge 1 ]; then
+if [ $# -ge 1 ] && [ -f "$1" ]; then
     pipeline_config="$(cat "$1")"
     shift
 else
