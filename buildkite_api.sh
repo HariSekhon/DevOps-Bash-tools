@@ -13,42 +13,44 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Queries BuildKite API, auto-populating $BUILDKITE_TOKEN from environment and API url base for convenience
-#
-# https://buildkite.com/docs/apis/rest-api
-#
-# eg.
-#
-# buildkite_api.sh user | jq
-#
-# buildkite_api.sh organizations | jq
-#
-# buildkite_api.sh organizations/hari-sekhon/pipelines | jq
-#
-# buildkite_api.sh organizations/hari-sekhon/pipelines/devops-bash-tools | jq
-#
-# buildkite_api.sh builds | jq
-#
-# buildkite_api.sh organizations/hari-sekhon/builds | jq
-#
-# buildkite_api.sh organizations/hari-sekhon/pipelines/devops-bash-tools/builds/<num> | jq
-#
-# buildkite_api.sh organizations/hari-sekhon/agents | jq
-#
-# buildkite_api.sh organizations/hari-sekhon/emojis | jq
-
 set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="/path [<curl_options>]"
+
+# shellcheck disable=SC2034
+usage_description="
+Queries BuildKite API, auto-populating \$BUILDKITE_TOKEN from environment and API url base for convenience
+
+https://buildkite.com/docs/apis/rest-api
+
+eg.
+
+buildkite_api.sh user | jq
+
+buildkite_api.sh organizations | jq
+
+buildkite_api.sh organizations/hari-sekhon/pipelines | jq
+
+buildkite_api.sh organizations/hari-sekhon/pipelines/devops-bash-tools | jq
+
+buildkite_api.sh builds | jq
+
+buildkite_api.sh organizations/hari-sekhon/builds | jq
+
+buildkite_api.sh organizations/hari-sekhon/pipelines/devops-bash-tools/builds/<num> | jq
+
+buildkite_api.sh organizations/hari-sekhon/agents | jq
+
+buildkite_api.sh organizations/hari-sekhon/emojis | jq
+"
+
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
-
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_description="Queries the BuildKite API, auto-populating the base and API tokens from the environment"
-# shellcheck disable=SC2034
-usage_args="/path [<curl_options>]"
 
 if [ -z "${BUILDKITE_TOKEN:-}" ]; then
     usage "BUILDKITE_TOKEN environment variable is not set (generate this from the Web UI -> Personal Settings -> API Access Tokens (https://buildkite.com/user/api-access-tokens)"
