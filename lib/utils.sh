@@ -221,7 +221,7 @@ is_curl_min_version(){
     local target_version="$1"
     local curl_version
     curl_version="$(curl --version | awk '{print $2; exit}' | grep -Eo '[[:digit:]]+\.[[:digit:]]+')"
-    bc -l <<< "$curl_version >= $target_version" | grep 1
+    bc -l <<< "$curl_version >= $target_version" | grep -q 1
 }
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
