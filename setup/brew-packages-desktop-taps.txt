@@ -8,7 +8,7 @@
 # tap                   package
 # do via install script to load token
 #buildkite/buildkite     buildkite
-codefresh-io/cli        codefresh
+#codefresh-io/cli        codefresh
 dbcli/tap               athenacli
 #sambadevi/powerlevel9k  powerlevel9k
 wallix/awless           awless
