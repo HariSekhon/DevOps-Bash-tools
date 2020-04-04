@@ -102,7 +102,7 @@ alias remote='remotes'
 #}
 
 # git fetch -p or git remote prune origin
-alias prune="co master; git pull; git remote prune origin; git branch --merged | grep -v -e '^\\*' -e 'master' | xargs git branch -d"
+alias prune="co master; git pull --no-edit; git remote prune origin; git branch --merged | grep -v -e '^\\*' -e 'master' | xargs git branch -d"
 
 # don't use this unless you are a git pro and understand unwinding history and merge conflicts
 alias GRH="git reset HEAD^"
@@ -613,14 +613,14 @@ gitfind(){
 
 updatemodules(){
     if isGit .; then
-        git pull
+        git pull --no-edit
         #git submodule update --init --remote
         for submodule in $(git submodule | awk '{print $2}'); do
             if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
                 pushd "$submodule" || continue
                 git stash
                 git checkout master
-                git pull
+                git pull --no-edit
                 git submodule update
                 # shellcheck disable=SC2164
                 popd
@@ -657,7 +657,7 @@ upl(){
         echo "* Pulling latest repo changes:  $repo"
         echo
         pushd "$github/$repo" &&
-        git pull &&
+        git pull --no-edit &&
         popd &&
         hr || return 1
     done
