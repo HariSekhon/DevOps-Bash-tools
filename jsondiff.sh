@@ -17,7 +17,21 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-#. "$srcdir/bash-tools/lib/utils.sh"
+
+usage(){
+    echo "usage: ${0##*/} file1.json file2.json"
+    exit 3
+}
+
+if ! [ $# -eq 2 ]; then
+    usage
+fi
+
+for arg; do
+    case "$arg" in
+        -*) usage
+            ;;
+    esac
+done
 
 diff <(jq -S . "$1") <(jq -S . "$2")
