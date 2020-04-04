@@ -38,7 +38,12 @@ check_env_defined BUILDKITE_ORGANIZATION
 
 help_usage "$@"
 
-pipeline="${1:-${BUILDKITE_PIPELINE:-${PIPELINE:-}}}"
+if [ $# -gt 0 ]; then
+    pipeline="$1"
+    shift || :
+else
+    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-}}"
+fi
 
 if [ -z "$pipeline" ]; then
     usage "\$BUILDKITE_PIPELINE not defined and no argument given"
@@ -48,4 +53,4 @@ fi
     -X "POST" \
     -F "commit=${BUILDKITE_COMMIT:-HEAD}" \
     -F "branch=${BUILDKITE_BRANCH:-master}" \
-    -F "message=triggered by Hari Sekhon ${0##*/} script"
+    -F "message=triggered by Hari Sekhon ${0##*/} script" "$@"
