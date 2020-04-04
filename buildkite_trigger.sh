@@ -17,7 +17,7 @@ set -euo pipefail
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="pipeline [<curl_options>]"
+usage_args="<pipeline> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
