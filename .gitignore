@@ -90,6 +90,8 @@
 .cbq_history
 .ccm/
 .CFUserTextEncoding
+# Codefresh config contains API Key
+.cfconfig
 .circleci/build_agent_settings.json
 # Circle CI API Token stored in here
 .circleci/cli.yml
