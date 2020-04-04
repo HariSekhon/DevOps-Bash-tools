@@ -49,7 +49,7 @@ help_usage "$@"
 
 if [ $# -gt 0 ]; then
     pipeline="$1"
-    shift || :
+    shift
 else
     pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-}}"
 fi
