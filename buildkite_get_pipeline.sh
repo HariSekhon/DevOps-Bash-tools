@@ -58,4 +58,4 @@ if [ -z "$pipeline" ]; then
     usage "\$BUILDKITE_PIPELINE not defined and no argument given"
 fi
 
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline" "$@"
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline" "$@" | jq
