@@ -19,9 +19,11 @@ set -euo pipefail
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
+save_dir=".buildkite-pipelines"
+
 # shellcheck disable=SC2034
 usage_description="
-Saves all BuildKite pipelines in your \$BUILDKITE_ORGANIZATION to local JSON files in \$PWD
+Saves all BuildKite pipelines in your \$BUILDKITE_ORGANIZATION to local JSON files in \$PWD/$save_dir
 "
 
 [ -n "${DEBUG:-}" ] && set -x
@@ -34,9 +36,11 @@ help_usage "$@"
 
 timestamp="$(date '+%F_%T' | sed 's/:/-/g')"
 
+mkdir -pv "$save_dir"
+
 "$srcdir/buildkite_pipelines.sh" "$@" |
 while read -r pipeline; do
-    json_file="buildkite-pipeline.$pipeline.json"
+    json_file="$save_dir/$pipeline.json"
     echo "Saving pipeline '$pipeline' to '$json_file'"
     "$srcdir/buildkite_get_pipeline.sh" "$pipeline" "$@" > "$json_file"
     if jq -er '.message' < "$json_file" | grep -v '^null$' | grep '[A-Za-z]'; then
