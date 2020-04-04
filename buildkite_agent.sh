@@ -18,7 +18,25 @@
 # see /usr/local/etc/buildkite-agent/buildkite-agent.cfg for config on Mac
 
 set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_description="
+Starts BuildKite Agent, either locally installed agent, or falls back to Docker agent
+
+Environment variables:
+
+BUILDKITE_DOCKER        set to any value to use Docker agent regardless
+BUILDKITE_DOCKER_TAG    set to BuildKite docker agent tag, eg. centos, ubuntu, alpine (default agent latest tag is alpine)
+"
+
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+help_usage "$@"
 
 # ============================================================================ #
 #                        M a c  /  L i n u x   A g e n t
@@ -53,10 +71,7 @@ fi
 # ============================================================================ #
 
 # only necessary for Docker, installed agent will have config file containing this token from setup/install_buildkite.sh
-if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
-    echo "BUILDKITE_AGENT_TOKEN environment variable not defined"
-    exit 1
-fi
+check_env_defined BUILDKITE_AGENT_TOKEN
 
 # latest, alpine, centos, ubuntu, stable, stable-latest, stable-ubuntu etc - see dockerhub_show_tags.py from adjacent DevOps Python tools repo
 docker_tag="${BUILDKITE_DOCKER_TAG:-latest}"
