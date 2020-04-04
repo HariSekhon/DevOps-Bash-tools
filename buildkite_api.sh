@@ -68,7 +68,7 @@ for arg; do
 done
 
 url_path="${1##/}"
-shift || :
+shift
 
 if is_curl_min_version 7.55; then
     # hide token from process list if curl version is new enough to support this trick
