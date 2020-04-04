@@ -36,8 +36,6 @@ BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 check_env_defined BUILDKITE_TOKEN
 check_env_defined BUILDKITE_ORGANIZATION
 
-min_args 1 "$@"
-
 help_usage "$@"
 
 pipeline="${1:-${BUILDKITE_PIPELINE:-${PIPELINE:-}}}"
