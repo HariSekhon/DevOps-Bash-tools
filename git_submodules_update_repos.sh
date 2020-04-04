@@ -61,7 +61,7 @@ run(){
         fi
         pushd "$repo_dir"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-        git pull
+        git pull --no-edit
         git submodule update --init --remote
         for submodule in $(git submodule | awk '{print $2}'); do
             echo
