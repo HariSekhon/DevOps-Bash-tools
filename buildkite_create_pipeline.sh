@@ -42,6 +42,7 @@ help_usage "$@"
 
 if [ $# -ge 1 ]; then
     pipeline_config="$(cat "$1")"
+    shift || :
 else
     echo "config file argument not given, reading config from stdin"
     pipeline_config="$(cat)"
@@ -58,4 +59,4 @@ check_env_defined BUILDKITE_ORGANIZATION
 #    usage "pipeline config not given"
 #fi
 
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines" -X POST -d "$pipeline_config"
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines" -X POST -d "$pipeline_config" "$@"
