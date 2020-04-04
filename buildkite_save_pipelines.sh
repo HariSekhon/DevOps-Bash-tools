@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2020-03-11 18:02:32 +0000 (Wed, 11 Mar 2020)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
+
+# shellcheck disable=SC2034
+usage_description="
+Saves all BuildKite pipelines in your \$BUILDKITE_ORGANIZATION to local JSON files in \$PWD
+"
+
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+help_usage "$@"
+
+timestamp="$(date '+%F_%T' | sed 's/:/-/g')"
+
+"$srcdir/buildkite_pipelines.sh" "$@" |
+while read -r pipeline; do
+    json_file="buildkite-pipeline.$pipeline.json"
+    echo "Saving pipeline '$pipeline' to '$json_file'"
+    "$srcdir/buildkite_get_pipeline.sh" "$pipeline" "$@" > "$json_file"
+    if jq -er '.message' < "$json_file" | grep -v '^null$' | grep '[A-Za-z]'; then
+        exit 1
+    fi
+    # similar behaviour to bak function
+    cp -av "$json_file" "$json_file.bak.$timestamp"
+    echo
+done
