@@ -27,6 +27,9 @@ Useful for saving the BuildKite pipeline configuration to a local JSON file
 
 The saved configuration can be loaded via buildkite_create_pipeline.sh
 
+Important: you probably don't want to commit this pipeline.json to a public Git repo because it contains
+the webhook URL to triggers builds and could lead to a DoS exploit if publicly disclosed
+
 Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
 "
 
