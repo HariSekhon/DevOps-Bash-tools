@@ -107,6 +107,7 @@ if ! is_CI &&
     "$srcdir/check_shippable_readme_ids.sh"
 fi
 . "$srcdir/check_concourse_config.sh"
+. "$srcdir/check_codefresh_config.sh"
 
 . "$srcdir/check_tld_chars.sh"
 
