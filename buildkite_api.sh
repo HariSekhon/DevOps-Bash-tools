@@ -60,12 +60,7 @@ if [ $# -lt 1 ]; then
     usage "no /path given to query in the API"
 fi
 
-for arg; do
-    case "$arg" in
-        -h|--help) usage
-                   ;;
-   esac
-done
+help_usage "$@"
 
 url_path="${1##/}"
 shift
