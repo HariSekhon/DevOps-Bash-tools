@@ -49,7 +49,7 @@ else
 fi
 
 if [ -z "$BUILDKITE_ORGANIZATION" ]; then
-    BUILDKITE_ORGANIZATION="$(jq -r '.url' <<< "$pipeline_config" | sed 's|https://api.buildkite.com/v2/organizations/||; s|/pipelines/.*||')"
+    BUILDKITE_ORGANIZATION="$(jq -r '.url' <<< "$pipeline_config" | sed 's|https://api.buildkite.com/v.*/organizations/||; s|/pipelines/.*||')"
 fi
 
 check_env_defined BUILDKITE_TOKEN
