@@ -208,7 +208,7 @@ is_curl_min_version(){
     local target_version="$1"
     local curl_version
     curl_version="$(curl --version | awk '{print $2; exit}' | grep -Eo '[[:digit:]]+\.[[:digit:]]+')"
-    bc -l <<< "$curl_version >= $target_version" | grep 1
+    bc -l <<< "$curl_version >= $target_version" | grep -q 1
 }
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
@@ -778,4 +778,28 @@ usage: ${0##*/} $args
 $switches
 EOF
     exit 3
+}
+
+min_args(){
+    local min="$1"
+    shift || :
+    if [ $# -lt "$min" ]; then
+        usage "error: missing arguments"
+    fi
+}
+
+help_usage(){
+    for arg; do
+        case "$arg" in
+            -h|--help)  usage
+                        ;;
+        esac
+    done
+}
+
+check_env_defined(){
+    local env="$1"
+    if [ -z "${env:-}" ]; then
+        usage "\$$env not defined"
+    fi
 }

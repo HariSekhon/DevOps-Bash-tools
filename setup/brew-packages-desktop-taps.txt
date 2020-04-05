@@ -6,9 +6,10 @@
 # TAP=1 ../brew_install_packages.sh brew-packages-desktop-taps.txt
 
 # tap                   package
+# do via install script to load token
+#buildkite/buildkite     buildkite
+#codefresh-io/cli        codefresh
+dbcli/tap               athenacli
 #sambadevi/powerlevel9k  powerlevel9k
 wallix/awless           awless
 wercker/wercker         wercker-cli
-# do via install script to load token
-#buildkite/buildkite     buildkite
-dbcli/tap               athenacli

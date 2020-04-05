@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2020-04-01 18:33:42 +0100 (Wed, 01 Apr 2020)
+#  Date: 2020-03-11 18:02:32 +0000 (Wed, 11 Mar 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -17,21 +17,23 @@ set -euo pipefail
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_description="
-Lists BuildKite running builds via its API
-
-https://buildkite.com/docs/apis/rest-api/builds
-"
-
-# shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
+# shellcheck disable=SC2034
+usage_description="
+Triggers BuildKite jobs for all pipelines in the \$BUILDKITE_ORGANIZATION
+"
+
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
-"$srcdir/buildkite_api.sh" 'builds?state=running' "$@"
+"$srcdir/buildkite_pipelines.sh" |
+while read -r pipeline; do
+    echo "triggering job for pipeline '$pipeline'"
+    "$srcdir/buildkite_trigger.sh" "$pipeline" > /dev/null
+done

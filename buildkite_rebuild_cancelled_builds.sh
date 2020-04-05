@@ -13,22 +13,26 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Rebuilds cancelled builds in BuildKite via its API (inverse of buildkite_cancel_scheduled_builds.sh)
-#
-# https://buildkite.com/docs/apis/rest-api/builds
-
 set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_description="
+Rebuilds cancelled builds in BuildKite via its API (inverse of buildkite_cancel_scheduled_builds.sh)
+
+https://buildkite.com/docs/apis/rest-api/builds
+"
+
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
+
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_description="Rebuilds cancelled builds in BuildKite via its API (inverse of buildkite_cancel_scheduled_builds.sh)"
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+help_usage "$@"
 
 "$srcdir/buildkite_api.sh" "builds?state=canceled" "$@" |
 jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |

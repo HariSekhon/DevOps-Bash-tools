@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2020-03-11 18:02:32 +0000 (Wed, 11 Mar 2020)
+#  Date: 2020-04-04 14:33:52 +0100 (Sat, 04 Apr 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -21,7 +21,16 @@ usage_args="<pipeline> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Triggers BuildKite job for a pipeline given as argument
+Fetches a BuildKite pipeline's configuration to stdout
+
+Useful for saving the BuildKite pipeline configuration to a local JSON file
+
+The saved configuration can be loaded via buildkite_create_pipeline.sh
+
+Important: you probably don't want to commit this pipeline.json to a public Git repo because it contains
+the webhook URL to triggers builds and could lead to a DoS exploit if publicly disclosed
+
+Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
 "
 
 [ -n "${DEBUG:-}" ] && set -x
@@ -49,8 +58,4 @@ if [ -z "$pipeline" ]; then
     usage "\$BUILDKITE_PIPELINE not defined and no argument given"
 fi
 
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline/builds" \
-    -X "POST" \
-    -F "commit=${BUILDKITE_COMMIT:-HEAD}" \
-    -F "branch=${BUILDKITE_BRANCH:-master}" \
-    -F "message=triggered by Hari Sekhon ${0##*/} script" "$@"
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline" "$@" | jq

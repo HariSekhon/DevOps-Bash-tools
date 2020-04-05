@@ -17,11 +17,15 @@ set -euo pipefail
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<pipeline> [<curl_options>]"
+usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Triggers BuildKite job for a pipeline given as argument
+Lists BuildKite pipelines in slug format (re-usable in API), one per line to make it easy to iterate on them
+
+eg. trigger a build of each pipeline:
+
+./buildkite_pipelines.sh | while read pipeline; do ./buildkite_trigger.sh \"\$pipeline\"; done
 "
 
 [ -n "${DEBUG:-}" ] && set -x
@@ -38,19 +42,4 @@ check_env_defined BUILDKITE_ORGANIZATION
 
 help_usage "$@"
 
-if [ $# -gt 0 ]; then
-    pipeline="$1"
-    shift
-else
-    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-}}"
-fi
-
-if [ -z "$pipeline" ]; then
-    usage "\$BUILDKITE_PIPELINE not defined and no argument given"
-fi
-
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline/builds" \
-    -X "POST" \
-    -F "commit=${BUILDKITE_COMMIT:-HEAD}" \
-    -F "branch=${BUILDKITE_BRANCH:-master}" \
-    -F "message=triggered by Hari Sekhon ${0##*/} script" "$@"
+"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines" | jq -r '.[].slug'

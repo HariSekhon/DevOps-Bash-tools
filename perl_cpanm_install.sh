@@ -130,6 +130,9 @@ else
     # want splitting of opts and modules
     # shellcheck disable=SC2086
     if ! $sudo $envopts "$CPANM" --notest $opts $cpan_modules; then
+        echo
+        echo "reading latest cpanm build.log for details:"
+        echo
         set +o pipefail
         $sudo find ~/.cpanm/work -type f -name build.log -print0 | xargs -0 ls -tr | tail -n1 | xargs $sudo cat
         # build log is still in user's home dir even when using sudo
