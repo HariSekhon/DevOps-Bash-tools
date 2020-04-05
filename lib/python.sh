@@ -36,14 +36,19 @@ fi
 inside_virtualenv(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
        #[ -n "${PYENV_ROOT:-}" ] ||
+       [ -n "${CODESHIP_VIRTUALENV:-}" ] ||
        [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
         return 0
-    fi
-    if [ -n "${PYENV_ROOT:-}" ]; then
+    elif [ -n "${PYENV_ROOT:-}" ]; then
         if type -P "$python" | grep -q "$PYENV_ROOT" &&
            type -P "$pip" | grep -q "$PYENV_ROOT"; then
             return 0
         fi
+    # Codeship path when using virtualenv
+    elif type -P "$python" | grep -Eqi '/\.pyenv/|/shims/'; then
+        return 0
+    elif type -P "$pip" | grep -Eqi '/\.pyenv/|/shims/'; then
+        return 0
     fi
     return 1
 }
