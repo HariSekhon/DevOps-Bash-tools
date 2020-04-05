@@ -1,5 +1,4 @@
 #!/bin/sh
-#  shellcheck disable=SC2128,SC2230,SC1090
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
