@@ -25,6 +25,7 @@ bash_tools_utils_imported=1
 
 . "$srcdir_bash_tools_utils/ci.sh"
 . "$srcdir_bash_tools_utils/docker.sh"
+. "$srcdir_bash_tools_utils/os.sh"
 . "$srcdir_bash_tools_utils/perl.sh"
 . "$srcdir_bash_tools_utils/../.bash.d/colors.sh"
 
