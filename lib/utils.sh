@@ -5,7 +5,7 @@
 #  Author: Hari Sekhon
 #  Date: 2015-05-25 01:38:24 +0100 (Mon, 25 May 2015)
 #
-#  https://github.com/harisekhon/devops-python-tools
+#  https://github.com/harisekhon/devops-bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -179,20 +179,6 @@ cpu_count(){
         cpu_count="$(grep -c '^processor[[:space:]]*:' /proc/cpuinfo)"
     fi
     echo "$cpu_count"
-}
-
-is_linux(){
-    if [ "$(uname -s)" = "Linux" ]; then
-        return 0
-    fi
-    return 1
-}
-
-is_mac(){
-    if [ "$(uname -s)" = "Darwin" ]; then
-        return 0
-    fi
-    return 1
 }
 
 is_interactive(){
