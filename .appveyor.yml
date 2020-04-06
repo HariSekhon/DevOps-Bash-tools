@@ -22,7 +22,13 @@ environment:
   APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAvihSRU+YjBKvKiacDfUoZ7ghoVMcwNh4cWIYUNFGZosXOzNtyOcBpIb71TCgLFhOd+aMWKXCEC67BpNSIjt+a/FLD27AwmgVHv6cPlE3G0JJ9zmIrNmx9511dshTsxUW2O0SbYG+3InuO7FUkSrld+kA1OucyjgmZU7/+Cs9shpAEOaIVYmGlpDGRucAHpwtckvdgRTtnA3WNZ/Qg1vU6Ik4Xm03vjrW6lSiuTffYO1kbdcMQ4IZBlzfmovOtXQ0PomvN5NMCpgOyQuoNlvyS11tOXoqNiWOkiLE15XEzAQth9hHbNiH8jHJbAtkHqWWh0KK4IUyNGvoL6QfNxsTlw== hari@anotherdimension
 
 # enable SSH session accessible via my public key
-init:
+#init:
+#  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+
+# more useful at end to let .appveyor's tweaks like disabling broken mssql repo/dependencies, checking out project and building the core stuff happen first so we don't have to check out code and do fixes manually
+on_finish:
+  # set this in Settings -> Environment dynamically instead of here
+  #- sh: export APPVEYOR_SSH_BLOCK=true
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 install:
