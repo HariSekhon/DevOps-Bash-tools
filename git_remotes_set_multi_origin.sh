@@ -72,6 +72,8 @@ add_origin_url(){
         echo "adding additional origin remote for $name with url $url"
     fi
     set -o pipefail
+    # --push is willing to add duplicates, prefer error out (should never happen as we check for existing remote url)
+    #git remote set-url --add --push origin "$url"
     git remote set-url --add origin "$url"
 }
 
@@ -81,13 +83,13 @@ if [ "$name" = "github" ] ||
     add_origin_url "$name"
     # TMI
     #git remote show origin
-    git remote -v | grep '^origin'
+    git remote -v | grep '^origin' | sed 's|://.*@|://|'
 elif [ "$name" = "all" ]; then
     for name in github gitlab bitbucket; do
         add_origin_url "$name"
     done
     #git remote show origin
-    git remote -v | grep '^origin'
+    git remote -v | grep '^origin' | sed 's|://.*@|://|'
 else
     usage
 fi
