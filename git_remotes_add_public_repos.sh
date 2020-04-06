@@ -84,13 +84,13 @@ if [ "$name" = "github" ] ||
    [ "$name" = "bitbucket" ]; then
     add_remote_repo "$name"
     echo
-    git remote -v
+    git remote -v | sed 's|://.*@|://|'
 elif [ "$name" = "all" ]; then
     for name in github gitlab bitbucket; do
         add_remote_repo "$name"
     done
     echo
-    git remote -v
+    git remote -v | sed 's|://.*@|://|'
 else
     usage
 fi
