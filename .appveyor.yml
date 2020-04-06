@@ -25,7 +25,7 @@ environment:
 #init:
 #  - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
-# more useful at end to let .appveyor's tweaks like disabling broken mssql repo/dependencies, checking out project and building the core stuff happen first so we don't have to check out code and do fixes manually
+# more useful at end to leverage .appveyor.yml tweaks like disabling broken mssql repo/dependencies, checking out project and building the core stuff happen first so we don't have to do all that manually in SSH session
 on_finish:
   # set this in Settings -> Environment dynamically instead of here
   #- sh: export APPVEYOR_SSH_BLOCK=true
