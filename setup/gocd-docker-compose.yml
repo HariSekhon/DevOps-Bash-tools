@@ -21,7 +21,7 @@ services:
       - 8153:8153
     healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:8153/go/api/v1/health"]
-      # set this to /bin/true in development to stop the containing going down so you can debug
+      # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
       test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8153/go/api/v1/health}"
       interval: 30s
       #start_period: 30s  # version 3.4+
@@ -41,7 +41,7 @@ services:
       AGENT_STARTUP_ARGS: -Dgo.agent.status.api.bind.host=0.0.0.0
     healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:8152/health/v1/isConnectedToServer"]
-      # set this to /bin/true in development to stop the containing going down so you can debug
+      # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
       test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8152/health/v1/isConnectedToServer}"
       interval: 30s
       #start_period: 30s  # version 3.4+
