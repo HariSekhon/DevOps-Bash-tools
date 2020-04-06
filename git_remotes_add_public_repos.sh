@@ -83,10 +83,14 @@ if [ "$name" = "github" ] ||
    [ "$name" = "gitlab" ] ||
    [ "$name" = "bitbucket" ]; then
     add_remote_repo "$name"
+    echo
+    git remote -v
 elif [ "$name" = "all" ]; then
     for name in github gitlab bitbucket; do
         add_remote_repo "$name"
     done
+    echo
+    git remote -v
 else
     usage
 fi
