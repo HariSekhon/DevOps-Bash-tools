@@ -33,7 +33,7 @@ services:
     # gets 403 without -Djenkins.install.runSetupWizard=false
     #healthcheck:
     #  #test: ["CMD", "curl", "-f", "http://localhost:8080"]
-    #  # set this to /bin/true in development to stop the containing going down so you can debug
+    #  # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
     #  test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8080}"
     #  interval: 30s
     #  #start_period: 30s  # version 3.4+
