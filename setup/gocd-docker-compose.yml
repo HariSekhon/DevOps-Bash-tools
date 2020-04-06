@@ -24,6 +24,7 @@ services:
       # set this to /bin/true in development to stop the containing going down so you can debug
       test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8153/go/api/v1/health}"
       interval: 30s
+      #start_period: 30s  # version 3.4+
       timeout: 10s
       retries: 5
     #environment:
