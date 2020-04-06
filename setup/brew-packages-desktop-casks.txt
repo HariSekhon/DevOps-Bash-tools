@@ -5,6 +5,7 @@
 
 # CASK=1 ../brew_install_packages.sh brew-packages-desktop-casks.txt
 
+anaconda
 atom
 ccmenu
 docker
