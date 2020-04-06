@@ -120,6 +120,9 @@ fi
 # for the 'conda' command
 add_PATH ~/anaconda/bin
 
+# version installed by HomeBrew
+add_PATH /usr/local/anaconda3/bin
+
 
 # ============================================================================ #
 #                           P a r q u e t   T o o l s
