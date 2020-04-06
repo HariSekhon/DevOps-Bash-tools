@@ -79,10 +79,15 @@ if [ "$name" = "github" ] ||
    [ "$name" = "gitlab" ] ||
    [ "$name" = "bitbucket" ]; then
     add_origin_url "$name"
+    # TMI
+    #git remote show origin
+    git remote -v | grep '^origin'
 elif [ "$name" = "all" ]; then
     for name in github gitlab bitbucket; do
         add_origin_url "$name"
     done
+    #git remote show origin
+    git remote -v | grep '^origin'
 else
     usage
 fi
