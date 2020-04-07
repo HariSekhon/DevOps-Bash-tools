@@ -80,10 +80,6 @@ alias grep='grep --color=auto'
 alias envg="env | grep -i"
 alias dec="decomment.sh"
 
-export templates="$github/tools/templates"
-alias templates='cd $templates'
-alias tmpl=templates
-
 alias hosts='sudo $EDITOR /etc/hosts'
 
 alias path="echo \$PATH | tr ':' '\\n' | more"
@@ -234,6 +230,10 @@ alias bc='bc -l'
 alias chromekill='pkill -f "Google Chrome Helper"'
 alias eclipse='~/eclipse/Eclipse.app/Contents/MacOS/eclipse';
 alias visualvm='~/visualvm/bin/visualvm'
+
+export templates="$github/tools/templates"
+alias templates='cd $templates'
+alias tmpl=templates
 
 # using brew version on Mac
 pmd_opts="-R rulesets/java/quickstart.xml -f text"
