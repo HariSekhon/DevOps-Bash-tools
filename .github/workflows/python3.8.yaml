@@ -1,0 +1,53 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-02-04 21:40:04 +0000 (Tue, 04 Feb 2020)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+name: CI Python 3.8
+
+#env:
+#  DEBUG: 1
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 7 * * *'
+
+jobs:
+  build:
+    #name: build
+    timeout-minutes: 20
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        #python-version: [2.7, 3.6, 3.7, 3.8, pypy2, pypy3]
+        python-version: [3.8]
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+    - uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-bash-tools  # -${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-bash-tools
+    - name: init
+      run: make init
+    - name: build
+      run: make ci
+    - name: test
+      run: make test
