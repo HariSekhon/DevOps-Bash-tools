@@ -132,7 +132,7 @@ is_github_workflow(){
 }
 
 is_github_action(){
-    if_github_workflow
+    is_github_workflow
 }
 
 # https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
