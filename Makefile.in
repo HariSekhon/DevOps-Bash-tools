@@ -439,7 +439,7 @@ pip-user::
 fatpacks:
 	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
 	@echo
-	if [ -d lib/resources ]; then \
+	@if [ -d lib/resources ]; then \
 		cp -av lib/resources fatpacks/; \
 	fi
 	@if $(MAKE) -n fatpacks-local >/dev/null 2>&1; then \
