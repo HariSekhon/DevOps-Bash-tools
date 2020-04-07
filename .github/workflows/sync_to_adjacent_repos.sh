@@ -35,7 +35,7 @@ while read -r repo dir; do
         if [ -f "$target.disabled" ]; then
             target="$target.disabled"
         fi
-        if [ -n "${ALL:-}" ] || grep -q '^[[:space:]]*container:' "$filename"; then
+        if [ -n "${ALL:-}" ] || grep -Eq '^[[:space:]]*(container|python-version):' "$filename"; then
             if [ -n "${NEW:-}" ] || [ -f "$target" ]; then
                 echo "syncing $filename -> $target"
                 timeout=60
