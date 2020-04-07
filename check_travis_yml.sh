@@ -44,7 +44,10 @@ else
         export PATH="$PATH:$path"
     done
     if ! type -P travis &>/dev/null; then
-        if type -P gem &>/dev/null; then
+        ruby_version="$(ruby --version | awk '{print $2}' | grep -Eo '[[:digit:]]+\.[[:digit:]]+' | head -n1)"
+        if bc -l <<< "$ruby_version < 2.4" | grep -q 1; then
+            echo "Ruby version is < 2.4, too old to install Travis CI gem, skipping check"
+        elif type -P gem &>/dev/null; then
             # this returns ruby-1.9.3 but using 1.9.1
             #ruby_version="$(ruby --version | awk '{print $2}' | sed 's/p.*//')"
             #export PATH="$PATH:$HOME/.gem/ruby/$ruby_version/bin"
