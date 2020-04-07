@@ -92,6 +92,7 @@ echo "Generating App::FatPacker self-contained perl scripts with all dependencie
 echo
 i=0
 for perl_script in $perl_scripts; do
+    [ -f "$perl_scripts" ] || continue
     ((i+=1))
     dest="$output_dir/${perl_script%.pl}.fatpack.pl"
     echo "$perl_script -> $dest"
