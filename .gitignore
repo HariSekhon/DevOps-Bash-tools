@@ -99,6 +99,8 @@
 .compiz
 .conda/
 .config
+# contains repo_token / COVERALLS_REPO_TOKEN
+.coveralls.yml
 .cpan/build/
 .cpan/FTPstats.yml
 .cpan/histfile
