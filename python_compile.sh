@@ -54,7 +54,9 @@ if "$python" -V 2>&1 | grep -q 'Python 2'; then
     opts="$opts -3"
 fi
 
-if ! is_travis && ! type -P pypy &>/dev/null; then
+if ! is_travis &&
+   ! type -P pypy &>/dev/null &&
+   ! type -P python | grep -qi pypy; then
     opts="$opts -t"
 fi
 
