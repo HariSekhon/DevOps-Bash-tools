@@ -250,6 +250,7 @@ export GOPATH="$github/go-tools"
 alias gopath='cd "$GOPATH"'
 alias gogo='gopath'
 alias cdgo='gopath'
+alias gosrc='cd "$GOPATH/src"'
 
 if [ -d ~/go/bin ]; then
     add_PATH ~/go/bin
