@@ -258,7 +258,6 @@ fi
 # imports runtime/internal/sys: cannot find package "runtime/internal/sys" in any of:
 # /usr/local/go/src/runtime/internal/sys (from $GOROOT)
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
-# shellcheck disable=SC2230
 if type -P go &>/dev/null; then
     if isMac; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(type -P go)")")")"
