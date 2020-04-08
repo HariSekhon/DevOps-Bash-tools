@@ -247,6 +247,9 @@ fi
 # Golang
 
 export GOPATH="$github/go-tools"
+alias gopath='cd "$GOPATH"'
+alias gogo='gopath'
+alias cdgo='gopath'
 
 if [ -d ~/go/bin ]; then
     add_PATH ~/go/bin
