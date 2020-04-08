@@ -244,10 +244,9 @@ fi
 # ============================================================================ #
 #                                  G o l a n g
 # ============================================================================ #
+# Golang
 
-# defined in aliases.sh
-# shellcheck disable=SC2154
-GOPATH="$github/go-tools"
+export GOPATH="$github/go-tools"
 
 if [ -d ~/go/bin ]; then
     add_PATH ~/go/bin
