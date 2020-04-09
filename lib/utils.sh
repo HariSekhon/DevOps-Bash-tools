@@ -753,6 +753,15 @@ retry(){
 }
 
 
+timeout(){
+    if is_mac; then
+        gtimeout "$@"
+    else
+        timeout "$@"
+    fi
+}
+
+
 usage(){
     local args=""
     local switches=""
