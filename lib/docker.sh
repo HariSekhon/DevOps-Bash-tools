@@ -357,3 +357,10 @@ docker_rmi_dangling_layers(){
     # shellcheck disable=SC2046
     docker rmi $(docker images -q --filter dangling=true) 2>/dev/null || :
 }
+
+docker_rmi_grep(){
+    docker images |
+    grep -Ei -- "^$1" |
+    awk '{print $1":"$2}' |
+    xargs docker rmi
+}
