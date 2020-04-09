@@ -244,10 +244,13 @@ fi
 # ============================================================================ #
 #                                  G o l a n g
 # ============================================================================ #
+# Golang
 
-# defined in aliases.sh
-# shellcheck disable=SC2154
-GOPATH="$github/go-tools"
+export GOPATH="$github/go-tools"
+alias gopath='cd "$GOPATH"'
+alias gogo='gopath'
+alias cdgo='gopath'
+alias gosrc='cd "$GOPATH/src"'
 
 if [ -d ~/go/bin ]; then
     add_PATH ~/go/bin
@@ -259,7 +262,6 @@ fi
 # imports runtime/internal/sys: cannot find package "runtime/internal/sys" in any of:
 # /usr/local/go/src/runtime/internal/sys (from $GOROOT)
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
-# shellcheck disable=SC2230
 if type -P go &>/dev/null; then
     if isMac; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(type -P go)")")")"

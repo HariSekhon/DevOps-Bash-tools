@@ -351,3 +351,16 @@ trap_container(){
     # shellcheck disable=SC2154,SC2086
     trap 'result=$?; '"delete_container $container 'trapped exit, cleaning up container'"' || : ; exit $result' $TRAP_SIGNALS
 }
+
+docker_rmi_dangling_layers(){
+    # want splitting
+    # shellcheck disable=SC2046
+    docker rmi $(docker images -q --filter dangling=true) 2>/dev/null || :
+}
+
+docker_rmi_grep(){
+    docker images |
+    grep -Ei -- "^$1" |
+    awk '{print $1":"$2}' |
+    xargs docker rmi
+}

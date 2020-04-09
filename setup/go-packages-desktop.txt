@@ -15,6 +15,7 @@
 # List of Golang software to install via 'go get -u', one per line
 
 github.com/cjbassi/gotop
+github.com/mkouhei/gosh
 github.com/rakyll/hey
 github.com/remind101/assume-role
 github.com/songgao/colorgo
