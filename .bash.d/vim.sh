@@ -43,9 +43,17 @@ vimfiletypes(){
     find syntax ftplugin -iname '*.vim' -exec basename -s .vim {} + | sort -u
 }
 
-grepvim(){
+gitgrepvim(){
+    # want splitting
     # shellcheck disable=SC2046
-    vim $(git grep -i "$*" | sed 's/:.*//')
+    vim $(git grep -i "$*" | sed 's/:.*//' | sort -u)
+}
+alias ggrepv=gitgrepvim
+
+grepvim(){
+    # want splitting
+    # shellcheck disable=SC2046
+    vim $(grep -i "$1" "$@" | sed 's/:.*//' | sort -u)
 }
 alias grepv=grepvim
 
