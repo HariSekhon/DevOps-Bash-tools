@@ -729,7 +729,7 @@ retry(){
     try_number=0
     SECONDS=0
     while true; do
-        ((try_number + 1))
+        ((try_number+=1))
         echo -n "try $try_number:  "
         set +e
         $cmd
