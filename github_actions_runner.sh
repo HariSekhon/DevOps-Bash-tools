@@ -53,6 +53,12 @@ if [ -z "$github_repo" ]; then
         echo "Failed to infer github repo url from local git repository"
         exit 1
     fi
+    github_repo_url="${github_repo_url#ssh://}"
+    github_repo_url="${github_repo_url/://}"
+    if ! [[ "$github_repo_url" =~ https?:// ]]; then
+        github_repo_url="https://$github_repo_url"
+    fi
+    echo "inferred github repo url as: $github_repo_url"
 fi
 
 cd "$srcdir"
