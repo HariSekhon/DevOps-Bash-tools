@@ -49,6 +49,7 @@ cowsay
 csshx
 diff-so-fancy
 diffpdf
+direnv
 dnsmasq
 dnstop
 docker-completion
