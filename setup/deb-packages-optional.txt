@@ -1,0 +1,16 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-04-10 13:35:58 +0100 (Fri, 10 Apr 2020)
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying LICENSE file
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                             Deb Packages Optional
+# ============================================================================ #
+
+direnv
