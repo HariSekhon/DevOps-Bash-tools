@@ -15,10 +15,23 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-#srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
+srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir_bash_tools_python/os.sh"
 
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
+
+if is_mac; then
+    # try to find pip in brew installed Python versions since it is
+    # not in /System/Library/Frameworks/Python.framework/Versions/2.7/bin
+    for dir in /usr/local/Cellar/python*; do
+        if [ -d "$dir" ]; then
+            export PATH="$PATH:/$dir/bin"
+        fi
+    done
+fi
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
