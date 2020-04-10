@@ -816,7 +816,7 @@ help_usage(){
 
 check_env_defined(){
     local env="$1"
-    if [ -z "${env:-}" ]; then
+    if [ -z "${!env:-}" ]; then
         usage "\$$env not defined"
     fi
 }
