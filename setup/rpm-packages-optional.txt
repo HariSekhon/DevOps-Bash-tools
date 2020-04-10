@@ -16,6 +16,8 @@
 # no longer available on RHEL8 :-(
 ShellCheck
 
+# only available on Fedora for now
+direnv
 
 # not available on RHEL6
 perl-App-cpanminus
