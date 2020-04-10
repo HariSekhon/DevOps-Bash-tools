@@ -24,6 +24,7 @@ Jenkinsfile
 .drone.yml
 .gitlab-ci.yml
 .gocd.yml
+.semaphore/semaphore.yml
 #.travis.yml
 azure-pipelines.yml
 bitbucket-pipelines.yml
