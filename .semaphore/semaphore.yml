@@ -38,10 +38,10 @@ blocks:
             - sudo apt install -qy git make
         - name: make init
           commands:
-            - make init
+            - cd DevOps-Bash-tools && make init
         - name: make ci
           commands:
-            - make ci
+            - cd DevOps-Bash-tools && make ci
         - name: make test
           commands:
-            - make test
+            - cd DevOps-Bash-tools && make test
