@@ -83,7 +83,6 @@ if is_CI; then
 fi
 
 sudo=""
-# CircleCI uses /opt/circleci/.pyenv/shims/python
 if inside_virtualenv; then
     echo "inside virtualenv, not using sudo"
     sudo=""
