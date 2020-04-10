@@ -16,7 +16,7 @@ include Makefile.in
 REPO := HariSekhon/DevOps-Bash-tools
 
 #CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
-CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.bash.*' | sort)
+CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.bash[^/]*$$' | sort)
 
 CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.txt)
 
