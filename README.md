@@ -89,7 +89,9 @@ this one I don't trust it'll stick around so using shields version instead
 [![CI Python 3.8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Python%203.8/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Python+3.8%22)
 [![CI PyPy 2](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20PyPy%202/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+PyPy+2%22)
 [![CI PyPy 3](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20PyPy%203/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+PyPy+3%22)
-
+<!--
+[![CI Self Hosted](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CI%20Self%20Hosted/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CI+Self+Hosted%22)
+-->
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
