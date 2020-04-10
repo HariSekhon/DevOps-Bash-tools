@@ -27,12 +27,12 @@
     working_directory: "/buddy/devops-bash-tools"
     docker_image_name: "library/ubuntu"
     docker_image_tag: "18.04"
-    execute_commands: |
-      apt update &&
-      apt install -qy make &&
-      make init &&
-      make ci test
+    execute_commands:
+      - "apt update &&"
+      - "apt install -qy git make &&"
+      - "make init &&"
+      - "make ci test"
     volume_mappings:
-    - "/:/buddy/devops-bash-tools"
+      - "/:/buddy/devops-bash-tools"
     shell: "BASH"
     trigger_condition: "ALWAYS"
