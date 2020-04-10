@@ -62,7 +62,7 @@ check_docker_available(){
     export DOCKER_CONTAINER="${COMPOSE_PROJECT_NAME:-docker}"
     # for Docker Machine but not Docker for Mac
     # nagios-plugins -> nagiosplugins
-    #export DOCKER_CONTAINER="${DOCKER_CONTAINER//-}"
+    export DOCKER_CONTAINER="${DOCKER_CONTAINER//-}"
     export DOCKER_CONTAINER="${DOCKER_CONTAINER}_${DOCKER_SERVICE}_1"
     # srcdir is defined in client scripts
     # shellcheck disable=SC2154
@@ -362,5 +362,18 @@ docker_rmi_grep(){
     docker images |
     grep -Ei -- "^$1" |
     awk '{print $1":"$2}' |
-    xargs docker rmi
+    xargs docker rmi --force
+}
+
+# to be called at end of scripts as well as trap function
+docker_image_cleanup(){
+    local docker_images
+    if [ -n "${COMPOSE_FILE:-}" ] && [ -f "$COMPOSE_FILE" ]; then
+        docker_images="$(grep '^[[:space:]]*image' "$COMPOSE_FILE" | sed 's/.*image:[[:space:]]*//; s/:.*//')"
+    fi
+    if [ -n "${docker_images:-}" ]; then
+        for docker_image in $docker_images; do
+            docker_rmi_grep "$docker_image"
+        done
+    fi
 }
