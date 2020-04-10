@@ -14,6 +14,20 @@
 #
 
 set -euo pipefail
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<GITHUB_ACTIONS_RUNNER_TOKEN>]"
+
+# shellcheck disable=SC2034
+usage_description="
+Downloads, configures and runs GitHub Actions Runner
+
+Token can be supplied as either first argument or via environment variable \$GITHUB_ACTIONS_RUNNER_VERSION
+
+Repo is taken from either \$GITHUB_ACTIONS_REPO or inferred from first github remote from local repo
+"
+
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -25,15 +39,21 @@ VERSION="${GITHUB_ACTIONS_RUNNER_VERSION:-${GITHUB_ACTIONS_VERSION:-${VERSION:-2
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/git.sh"
 
+help_usage "$@"
+
+GITHUB_ACTIONS_RUNNER_TOKEN="${1:-${GITHUB_ACTIONS_RUNNER_TOKEN:-}}"
+
 check_env_defined GITHUB_ACTIONS_RUNNER_TOKEN
 
 github_repo="${GITHUB_ACTIONS_REPO:-}"
 if [ -z "$github_repo" ]; then
     echo "GITHUB_ACTIONS_REPO not defined, inferring from local repository"
     github_repo_url="$(git remote -v | awk '/github/{print $2}' | head -n 1 | git_repo_strip)"
+    if [ -z "$github_repo_url" ]; then
+        echo "Failed to infer github repo url from local git repository"
+        exit 1
+    fi
 fi
-
-help_usage
 
 cd "$srcdir"
 
@@ -56,7 +76,7 @@ if ! [ -f "$tar" ]; then
 fi
 
 if ! [ -f config.sh ]; then
-    tar xzf "$tar"
+    tar xzf "$tar" || rm -fv "$tar"
 fi
 
 if ! [ -f .credentials ] ||
