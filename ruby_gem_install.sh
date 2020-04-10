@@ -66,8 +66,8 @@ echo "Installing Ruby Gems"
 echo
 
 opts=""
-if [ -n "${TRAVIS:-}" ]; then
-    echo "running in quiet mode"
+if is_CI; then
+    #echo "running in quiet mode"
     opts="-q"
 fi
 
