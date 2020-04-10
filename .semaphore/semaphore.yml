@@ -16,17 +16,20 @@
 # https://docs.semaphoreci.com/reference/pipeline-yaml-reference/
 
 version: v1.0
-name: Initial Pipeline
+name: build
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
   - name: 'Block #1'
+    #execution_time_limit:
+    #  minutes: 120
     task:
       jobs:
         - name: 'Job #1'
           commands:
+            - checkout
             - sudo apt update
             - sudo apt install -qy make
             - make init
