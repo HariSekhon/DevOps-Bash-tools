@@ -814,6 +814,15 @@ help_usage(){
     done
 }
 
+any_opt_usage(){
+    for arg; do
+        case "$arg" in
+            -*)  usage
+                 ;;
+        esac
+    done
+}
+
 check_env_defined(){
     local env="$1"
     if [ -z "${!env:-}" ]; then
