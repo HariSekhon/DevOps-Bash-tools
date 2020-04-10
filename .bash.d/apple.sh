@@ -27,6 +27,10 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 isMac || return
 
+date(){
+    gdate "$@"
+}
+
 # put in inputrc for readline
 #set completion-ignore-case on
 
