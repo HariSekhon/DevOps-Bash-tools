@@ -141,7 +141,7 @@ add_PATH "$github/nagios-plugins"
 add_PATH "$github/nagios-plugin-kafka"
 add_PATH "$github/spotify"
 
-if [ -n "$LINUX" ]; then
+if isLinux; then
     add_PATH ~/.buildkite-agent/bin
 fi
 
