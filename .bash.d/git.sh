@@ -182,12 +182,20 @@ gitignore_api(){
 }
 alias gi=gitignore_api
 
+git_user_repo(){
+    git remote -v | awk '{print $2}' | head -n1 | sed 's|.*\.[^:/]*[:/]||'
+}
+
 git_repo(){
-    git remote -v | awk '{print $2}' | head -n1 | git_repo_strip
+    git_user_repo | sed 's|.*/||'
+}
+
+github_user_repo(){
+    git remote -v | awk '/github.com/{print $2}' | head -n1 | sed 's|.*\.[^:/]*[:/]||'
 }
 
 github_repo(){
-    git remote -v | awk '/github.com/{print $2}' | head -n1 | git_repo_strip
+    github_user_repo | sed 's|.*/||'
 }
 
 git_repo_strip(){
