@@ -134,14 +134,6 @@ if [ "$(uname -s)" = "Darwin" ]; then
 #    fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
-
-    # try to find pip in brew installed Python versions since it is
-    # not in /System/Library/Frameworks/Python.framework/Versions/2.7/bin
-    for dir in /usr/local/Cellar/python*; do
-        if [ -d "$dir" ]; then
-            export PATH="$PATH:/$dir/bin"
-        fi
-    done
 elif [ -n "${PYTHON_USER_INSTALL:-}" ] ||
      [ -n "${GOOGLE_CLOUD_SHELL:-}" ]; then
     user_opt
