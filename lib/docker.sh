@@ -22,7 +22,7 @@ srcdir_bash_tools_docker="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir_bash_tools_docker/utils.sh"
 
 docker_compose_quiet=""
-if [ -n "${TRAVIS:-}" ]; then
+if is_CI; then
     docker_compose_quiet="--quiet"
 fi
 
