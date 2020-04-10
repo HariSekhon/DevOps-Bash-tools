@@ -30,6 +30,8 @@ blocks:
     #execution_time_limit:
     #  hours: 2
     task:
+      prologue:
+        - cache restore
       jobs:
         - name: install git & make
           commands:
@@ -41,6 +43,8 @@ blocks:
             - make init
             - make ci
             - make test
+      epilogue:
+        - cache store
   - name: Mac build
     skip:
       when: "branch != 'master'"
