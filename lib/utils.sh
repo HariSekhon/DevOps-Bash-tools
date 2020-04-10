@@ -294,7 +294,7 @@ trap_debug_env(){
     # stop CI systems from running out of space due to accumulated docker images as that causes build failures
     if is_CI &&
        ! type trap_function &>/dev/null &&
-       type docker_image_cleanup; then
+       type docker_image_cleanup &>/dev/null; then
         trap_function(){
             docker_image_cleanup
         }
