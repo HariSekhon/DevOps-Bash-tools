@@ -9,7 +9,7 @@ Hari Sekhon - DevOps Bash Tools
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-25k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-34k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 <!-- doesn't detect shell code properly
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 -->
