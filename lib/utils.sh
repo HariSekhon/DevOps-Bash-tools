@@ -291,8 +291,16 @@ print_debug_env(){
 trap_debug_env(){
     local name
     name="$1"
+    # stop CI systems from running out of space due to accumulated docker images as that causes build failures
+    if is_CI &&
+       ! type trap_function &>/dev/null &&
+       type docker_image_cleanup; then
+        trap_function(){
+            docker_image_cleanup
+        }
+    fi
     # shellcheck disable=SC2086,SC2154
-    trap 'result=$?; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
+    trap 'result=$?; type trap_function >/dev/null 2>/dev/null && trap_function; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
 }
 
 pass(){
