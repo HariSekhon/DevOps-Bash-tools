@@ -13,6 +13,6 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-if type -P direnv &>/dev/null; then
+if type -P direnv &>/dev/null && ! type _direnv_hook &>/dev/null; then
     eval "$(direnv hook bash)"
 fi
