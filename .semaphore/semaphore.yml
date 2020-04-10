@@ -31,7 +31,8 @@ blocks:
     #  hours: 2
     task:
       prologue:
-        - cache restore
+        commands:
+          - cache restore
       jobs:
         - name: install git & make
           commands:
@@ -44,7 +45,8 @@ blocks:
             - make ci
             - make test
       epilogue:
-        - cache store
+        commands:
+          - cache store
   - name: Mac build
     skip:
       when: "branch != 'master'"
@@ -55,7 +57,8 @@ blocks:
           os_image: macos-mojave-xcode10
           #os_image: macos-mojave-xcode11
       prologue:
-        - cache restore
+        commands:
+          - cache restore
       jobs:
         - name: build
           commands:
@@ -64,4 +67,5 @@ blocks:
             - make ci
             - make test
       epilogue:
-        - cache store
+        commands:
+          - cache store
