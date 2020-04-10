@@ -376,4 +376,5 @@ docker_image_cleanup(){
             docker_rmi_grep "$docker_image"
         done
     fi
+    docker_rmi_dangling_layers
 }
