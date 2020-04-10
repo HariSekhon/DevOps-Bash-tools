@@ -143,6 +143,16 @@ fi
 #                                  P y t h o n
 # ============================================================================ #
 
+if is_mac; then
+    # try to find pip in brew installed Python versions since it is
+    # not in /System/Library/Frameworks/Python.framework/Versions/2.7/bin
+    for dir in /usr/local/Cellar/python*; do
+        if [ -d "$dir" ]; then
+            add_PATH "$dir/bin"
+        fi
+    done
+fi
+
 if [ -d ~/Library/Python ]; then
     for x in ~/Library/Python/*/bin; do
         [ -d "$x" ] || continue
