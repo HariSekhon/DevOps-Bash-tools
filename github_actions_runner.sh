@@ -88,6 +88,7 @@ fi
 if ! [ -f .credentials ] ||
    ! [ -f .runner ]; then
     ./config.sh remove || :
+    set +o pipefail
     yes "" | ./config.sh --url "$github_repo_url" --token "$GITHUB_ACTIONS_RUNNER_TOKEN"
 fi
 
