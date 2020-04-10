@@ -448,7 +448,7 @@ fatpacks:
 		$(MAKE) fatpacks-local; \
 	fi
 	@echo
-	@if [ -n "$(ls "$(FATPACKS_DIR)")" ]; then \
+	@if [ -n "`ls "$(FATPACKS_DIR)"`" ]; then \
 		tar czvf fatpacks.tar.gz "$(FATPACKS_DIR)"; \
 		echo; \
 		echo "Generated fatpacks.tar.gz containing $(FATPACKS_DIR)/ directory of perl scripts with all dependencies bundled"; \
