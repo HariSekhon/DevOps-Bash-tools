@@ -3,7 +3,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: circa 2006 (forked from .bashrc)
+#  Date: circa 2012 (forked from .bashrc)
 #
 #  https://github.com/harisekhon/bash-tools
 #
