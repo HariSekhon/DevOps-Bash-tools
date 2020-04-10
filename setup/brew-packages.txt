@@ -25,7 +25,7 @@ golang
 jq
 jwhois
 parallel
-#python  # unnecessary - Macs always come with Python
+python  # Macs usually comes with Python, but pip was missing in Semaphore CI
 readline
 shellcheck
 terraform
