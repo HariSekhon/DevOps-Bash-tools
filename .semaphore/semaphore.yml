@@ -29,19 +29,13 @@ blocks:
     #  hours: 2
     task:
       jobs:
-        - name: checkout
-          commands:
-            - checkout
         - name: install git & make
           commands:
             - sudo apt update -qq
             - sudo apt install -qy git make
-        - name: make init
+        - name: build
           commands:
-            - cd /home/semaphore/DevOps-Bash-tools && make init
-        - name: make ci
-          commands:
-            - cd /home/semaphore/DevOps-Bash-tools && make ci
-        - name: make test
-          commands:
-            - cd /home/semaphore/DevOps-Bash-tools && make test
+            - checkout
+            - make init
+            - make ci
+            - make test
