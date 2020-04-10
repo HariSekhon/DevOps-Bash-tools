@@ -122,7 +122,8 @@
 .dropbox/
 .DS_Store
 .dvdcss/
-.envrc_*
+# contains things like auth tokens
+.envrc*
 .erlang.cookie
 .evolution
 .fluxbox/backgrounds
