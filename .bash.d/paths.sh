@@ -33,20 +33,6 @@ github="${github:-$HOME/github}"
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
-# see the effect of inserting a path like so
-# PYTHONPATH=/path/to/blah pythonpath
-pythonpath(){
-    python -c 'from __future__ import print_function; import sys; [print(_) for _ in sys.path if _]'
-}
-# enable this to avoid creating .pyc files (sometimes they trip you up executing outdated python code)
-# export PYTHONDONTWRITEBYTECODE=1
-
-# see the effect of inserting a path like so
-# PERL5LIB=/path/to/blah perlpath
-perlpath(){
-    perl -e 'print join("\n", @INC);'
-}
-
 # ============================================================================ #
 
 #export PATH="${PATH%%:~/github*}"
@@ -111,6 +97,7 @@ fi
 #    add_PATH /Applications/SnowSQL.app/Contents/MacOS
 #fi
 
+
 # ============================================================================ #
 #                                A n a c o n d a
 # ============================================================================ #
@@ -137,64 +124,6 @@ done
 if [ -d /usr/local/parquet-tools ]; then
     add_PATH "/usr/local/parquet-tools"
 fi
-
-
-# ============================================================================ #
-#                                  P y t h o n
-# ============================================================================ #
-
-if is_mac; then
-    # try to find pip in brew installed Python versions since it is
-    # not in /System/Library/Frameworks/Python.framework/Versions/2.7/bin
-    for dir in /usr/local/Cellar/python*; do
-        if [ -d "$dir" ]; then
-            add_PATH "$dir/bin"
-        fi
-    done
-fi
-
-if [ -d ~/Library/Python ]; then
-    for x in ~/Library/Python/*/bin; do
-        [ -d "$x" ] || continue
-        add_PATH "$x"
-    done
-fi
-
-alias lspythonbin='ls -d ~/Library/Python/*/bin/* 2>/dev/null'
-alias llpythonbin='ls -ld ~/Library/Python/*/bin/* 2>/dev/null'
-alias lspybin=lspythonbin
-alias llpybin=llpythonbin
-
-# RHEL8 has split python2 / python3 and removed default 'python' :-(
-if ! type -P python &>/dev/null; then
-    if type -P python2 &>/dev/null; then
-        python(){ python2 "$@"; }
-    elif type -P python3 &>/dev/null; then
-        python(){ python3 "$@"; }
-    fi
-fi
-
-
-# ============================================================================ #
-#                                    P e r l
-# ============================================================================ #
-
-#if [ -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl/ ]; then
-#    add_PATH PERL5LIB /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl
-#fi
-if [ -d ~/perl5/lib/perl5 ]; then
-    add_PATH PERL5LIB ~/perl5/lib/perl5
-fi
-if [ -d ~/perl5/bin ]; then
-    add_PATH ~/perl5/bin
-fi
-
-alias lsperlbin='ls -d ~/perl5/bin/* 2>/dev/null'
-alias llperlbin='ls -ld ~/perl5/bin/* 2>/dev/null'
-
-# cpanm --local-lib=~/perl5 local::lib
-# populates a bunch of Perl env vars pointing to ~/perl5/...
-# eval "$(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)"
 
 
 # ============================================================================ #
