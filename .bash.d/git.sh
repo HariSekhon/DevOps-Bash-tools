@@ -627,6 +627,10 @@ gitfind(){
     done | sort -u
 }
 
+# useful for smaller things:
+#
+# git submodule foreach --recursive 'git checkout master && git pull'
+#
 updatemodules(){
     if isGit .; then
         git pull --no-edit
