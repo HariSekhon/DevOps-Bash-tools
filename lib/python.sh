@@ -55,6 +55,7 @@ inside_virtualenv(){
            type -P "$pip" | grep -q "$PYENV_ROOT"; then
             return 0
         fi
+    # CircleCI uses /opt/circleci/.pyenv/shims/python
     # Codeship path when using virtualenv
     elif type -P "$python" | grep -Eqi '/\.pyenv/|/shims/'; then
         return 0
