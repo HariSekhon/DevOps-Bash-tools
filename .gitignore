@@ -147,6 +147,7 @@
 .gconfd
 .gem
 .gimp-*
+.github_actions_runner/
 .gitk
 .gmvault/
 .gnome
