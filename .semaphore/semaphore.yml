@@ -25,6 +25,8 @@ execution_time_limit:
   hours: 3
 blocks:
   - name: Linux build
+    skip:
+      when: "branch != 'master'"
     #execution_time_limit:
     #  hours: 2
     task:
@@ -40,6 +42,8 @@ blocks:
             - make ci
             - make test
   - name: Mac build
+    skip:
+      when: "branch != 'master'"
     task:
       agent:
         machine:
