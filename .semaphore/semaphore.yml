@@ -16,21 +16,32 @@
 # https://docs.semaphoreci.com/reference/pipeline-yaml-reference/
 
 version: v1.0
-name: build
+name: DevOps-Bash-tools
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
+execution_time_limit:
+  hours: 3
 blocks:
-  - name: 'Block #1'
+  - name: build
     #execution_time_limit:
-    #  minutes: 120
+    #  hours: 2
     task:
       jobs:
-        - name: 'Job #1'
+        - name: checkout
           commands:
             - checkout
-            - sudo apt update
-            - sudo apt install -qy make
+        - name: install git & make
+          commands:
+            - sudo apt update -qq
+            - sudo apt install -qy git make
+        - name: make init
+          commands:
             - make init
-            - make ci test
+        - name: make ci
+          commands:
+            - make ci
+        - name: make test
+          commands:
+            - make test
