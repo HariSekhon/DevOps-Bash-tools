@@ -199,7 +199,7 @@ github_repo(){
 }
 
 git_repo_strip(){
-    sed 's/[[:alnum:]]*@//; s,.*[/:],,'
+    sed 's/[[:alnum:]]*@//'
 }
 
 isGit(){
