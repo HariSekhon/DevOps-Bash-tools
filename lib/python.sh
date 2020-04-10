@@ -46,12 +46,11 @@ else
     fi
 fi
 
-if is_mac; then
-    if ! type -P "$pip" &>/dev/null; then
-        echo "pip not installed, trying to install manually..."
-        curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-        python get-pip.py
-    fi
+if is_mac &&
+   ! type -P "$pip" &>/dev/null; then
+    echo "pip not installed, trying to install manually..."
+    curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    python get-pip.py
 fi
 
 inside_virtualenv(){
