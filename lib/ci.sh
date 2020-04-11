@@ -161,8 +161,20 @@ is_scrutinizer_ci(){
     return 1
 }
 
+# incomplete documentation - CI code framework in this repo reveals a lot more env vars
+# https://help.semmle.com/wiki/display/SD/Environment+variables
 is_semmle(){
     if [ -n "${SEMMLE_PLATFORM:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
+# https://docs.semaphoreci.com/ci-cd-environment/environment-variables/
+is_semaphore_ci(){
+    # too generic, might clash with something else in future
+    #if [ -n "${SEMAPHORE:-}" ]; then
+    if [ -n "${SEMAPHORE_PIPELINE_ID:-}" ]; then
         return 0
     fi
     return 1
@@ -217,6 +229,7 @@ is_CI(){
        is_gocd ||
        is_scrutinizer_ci ||
        is_semmle ||
+       is_semaphore_ci ||
        is_shippable_ci ||
        is_tfs_ci; then
         return 0
