@@ -29,11 +29,6 @@ srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
 
-# Semaphore CI detects /usr/local/bin/pip for Python 3 but has Python 2.7 in /usr/bin
-if is_semaphore_ci; then
-    export PATH="/bin:/usr/bin:$PATH"
-fi
-
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
 else
