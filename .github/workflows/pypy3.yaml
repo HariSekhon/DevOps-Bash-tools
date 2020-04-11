@@ -32,7 +32,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        #python-version: [2.7, 3.6, 3.7, 3.8, pypy2, pypy3]
+        #python-version: [2.7, 3.5, 3.6, 3.7, 3.8, pypy2, pypy3]
         python-version: [pypy3]
     steps:
     - uses: actions/checkout@v2
