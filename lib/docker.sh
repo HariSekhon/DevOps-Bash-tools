@@ -373,7 +373,7 @@ docker_image_cleanup(){
     fi
     if [ -n "${docker_images:-}" ]; then
         for docker_image in $docker_images; do
-            docker_rmi_grep "$docker_image"
+            docker_rmi_grep "$docker_image" || :
         done
     fi
     docker_rmi_dangling_layers
