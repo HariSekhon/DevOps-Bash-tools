@@ -25,8 +25,8 @@ execution_time_limit:
   hours: 3
 blocks:
   - name: Linux build
-    skip:
-      when: "branch != 'master'"
+    run:
+      when: "branch = 'master'"
     #execution_time_limit:
     #  hours: 2
     task:
@@ -48,8 +48,8 @@ blocks:
         commands:
           - cache store
   - name: Mac build
-    skip:
-      when: "branch != 'master'"
+    run:
+      when: "branch = 'master'"
     task:
       agent:
         machine:
