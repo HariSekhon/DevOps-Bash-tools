@@ -57,6 +57,9 @@ set wrap    " line wrapping
 " reload the buffer when file has changed but buffer has not (useful for 'go fmt' / 'git pull' hotkeys from within vim)
 set autoread
 
+" write buffer on next / prev etc
+set autowrite
+
 set encoding=utf-8      " The encoding displayed.
 set fileencoding=utf-8  " The encoding written to file.
 
@@ -160,6 +163,11 @@ call vundle#end()
 nmap ;l :echo "No linting defined for this filetype:" &filetype<CR>
 
 if has("autocmd")
+
+    " to make vim autoread after gofmt
+    " doesn't seem to work, using explicit :e now
+    "au CursorHold * checktime
+
     " re-open at last cursor line and center screen on the cursor line
     "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
     autocmd BufReadPost *
@@ -223,7 +231,8 @@ if has("autocmd")
     au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint "%" \| headtail.py<CR>
     au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc "%"<CR>
     au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
-    au BufNew,BufRead *.go   nmap ;l :w<CR>:!gofmt -w "%" && go build "%"<CR>
+    " :e reloads the file because autoread isn't working after gofmt in this case
+    au BufNew,BufRead *.go   nmap ;l :w<CR>:!gofmt -w "%" && go build "%"<CR>:e<CR>
 
     " TODO: groovy/java CLI linters
     au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
