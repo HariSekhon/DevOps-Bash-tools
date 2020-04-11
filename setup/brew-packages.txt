@@ -24,8 +24,9 @@ gnu-sed
 golang
 jq
 jwhois
+openssl
 parallel
-python  # Macs usually comes with Python, but pip was missing in Semaphore CI
+python  # Mac usually comes with Python, but pip was missing in Semaphore CI
 readline
 shellcheck
 terraform

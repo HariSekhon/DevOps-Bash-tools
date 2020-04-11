@@ -99,7 +99,6 @@ mtr
 mycli
 mysql
 octave
-openssl
 p7zip
 packer-completion
 #parallel # in brew-packages.txt
