@@ -28,6 +28,7 @@ perl
 perl-app-cpanminus
 python
 py-pip
+ruby-dev # to build Travis CI gem
 wget
 which
 zip
