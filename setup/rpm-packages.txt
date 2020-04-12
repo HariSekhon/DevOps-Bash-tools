@@ -28,6 +28,7 @@ make
 perl
 #perl-App-cpanminus  # not available on RHEL6, moved to rpm-packages-optional.txt
 #ShellCheck  # not available in RHEL8, moved to rpm-packages-optional.txt
+ruby-devel  # to build Travis CI gem
 wget
 which
 zip
