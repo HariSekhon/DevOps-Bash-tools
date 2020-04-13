@@ -26,6 +26,10 @@ srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090
 . "$srcdir_bash_tools_python/../.bash.d/paths.sh"
 
+if is_semaphore_ci; then
+    set -x
+fi
+
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
 
