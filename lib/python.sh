@@ -60,6 +60,11 @@ inside_virtualenv(){
            type -P "$pip" | grep -q "$PYENV_ROOT"; then
             return 0
         fi
+    # GitHub Actions Python versions
+    elif type -P "$python" | grep -Eqi '/hostedtoolcache/'; then
+    #or
+    #elif type -P "$pip" | grep -Eqi '/hostedtoolcache/'; then
+        return 0
     # CircleCI uses /opt/circleci/.pyenv/shims/python
     # Codeship path when using virtualenv
     elif type -P "$python" | grep -Eqi '/\.pyenv/|/shims/'; then
