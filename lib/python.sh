@@ -45,7 +45,7 @@ fi
 if is_mac &&
    ! type -P "$pip" &>/dev/null; then
     echo "pip not installed, trying to install manually..."
-    brew install openssl
+    brew install openssl || :
     curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
     export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
