@@ -33,14 +33,13 @@ blocks:
       prologue:
         commands:
           - cache restore
+      # each job is separate and could be run on a separate machine so all steps must be together
       jobs:
-        - name: install git & make
-          commands:
-            - sudo apt update -qq
-            - sudo apt install -qy git make
         - name: build
           commands:
             - checkout
+            - sudo apt update -qq
+            - sudo apt install -qy git make
             - make init
             - make ci
             - make test
