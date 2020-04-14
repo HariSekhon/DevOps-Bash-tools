@@ -473,7 +473,8 @@ python-version:
 	for x in python python2 python3 pip pip2 pip3; do \
 		which $$x && \
 		ls -l `which $$x` && \
-		$$x -V || : ; echo; \
+		$$x -V || : ; \
+		echo; \
 	done
 
 # =======================
