@@ -163,6 +163,8 @@ fi
 num_hosted_builds="$(grep -Ec "$hosted_build_regex" "$tempfile" || :)"
 num_self_hosted_builds="$(grep -Ec "$self_hosted_build_regex" "$tempfile" || :)"
 
+num_builds=$((num_hosted_builds + num_self_hosted_builds))
+
 {
 cat <<EOF
 # GitHub Status Page
@@ -176,9 +178,9 @@ printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
 fi
-printf 'git repos with %s hosted continuous integration builds and %s self-hosted CI builds:\n\n' "$num_hosted_builds" "$num_self_hosted_builds"
+printf 'git repos with %s CI builds (%s hosted, %s self-hosted):\n\n' "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
 cat "$tempfile"
-printf '\n%s git repos summarized with %s hosted continuous integration builds and %s self-hosted CI builds\n' "$actual_repos" "$num_hosted_builds" "$num_self_hosted_builds"
+printf '\n%s git repos summarized with %s CI builds(%s hosted, %s self-hosted)\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
 } | tee "$file"
 
 trap '' exit
