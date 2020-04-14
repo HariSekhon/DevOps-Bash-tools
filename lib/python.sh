@@ -42,6 +42,7 @@ else
         echo "pip not found, falling back to pip2" >&2
         pip=pip2
     else
+        echo "pip not found, falling back to pip=pip" >&2
         pip=pip
     fi
 fi
