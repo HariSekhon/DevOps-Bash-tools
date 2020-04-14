@@ -156,7 +156,7 @@ printenv: git
 			echo; \
 			if [ -f /.dockerenv  ]; then echo "Running inside Docker:"; ls -l /.dockerenv 2>/dev/null; fi; \
 			echo; \
-			echo "OS RELEASE:"; echo; cat /etc/*release || : ; echo; \
+			echo "OS RELEASE:"; echo; uname -a || : ; echo; cat /etc/*release || : ; echo; \
 			echo; \
 			unset MAKEFILE_USAGE; unset MAKEFILE_USAGE_COMMON; unset TERMCAP; \
 			echo "CI ENVIRONMENT:"; echo; env | sort --ignore-case ; echo;  \
