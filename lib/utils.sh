@@ -303,6 +303,10 @@ trap_debug_env(){
     trap 'result=$?; type trap_function >/dev/null 2>/dev/null && trap_function; print_debug_env '"$*"'; untrap; exit $result' $TRAP_SIGNALS
 }
 
+is_debug(){
+    [ -n "${DEBUG:-}" ]
+}
+
 pass(){
     read_secret "password"
     export PASSWORD="$secret"
