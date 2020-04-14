@@ -23,7 +23,7 @@ sudo=""
 
 #$sudo ln -sv `type -P python2` /usr/local/bin/python
 
-if ! type -P python; then
+if ! type -P python &>/dev/null; then
     set +e
     python2="$(type -P python2 2>/dev/null)"
     python3="$(type -P python3 2>/dev/null)"
