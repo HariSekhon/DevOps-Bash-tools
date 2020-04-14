@@ -36,13 +36,11 @@ python="${PYTHON:-python}"
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
 else
-    if type -P pip &>/dev/null; then
-        pip=pip
-    elif type -P pip2 &>/dev/null; then
-        echo "pip not found, falling back to pip2" >&2
-        pip=pip2
-    else
-        echo "pip not found, falling back to pip=pip" >&2
+    pip="$(type -P pip 2>/dev/null)" ||
+    pip="$(type -P pip2 2>/dev/null)" ||
+    pip="$(type -P pip3 2>/dev/null)" || :
+    if [ -z "$pip" ]; then
+        echo "pip not found, falling back to trying just 'pip'" >&2
         pip=pip
     fi
 fi
@@ -52,9 +50,11 @@ if is_mac &&
     echo "pip not installed, trying to install manually..."
     brew install openssl || :
     curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+    brew_prefix="$(brew --prefix)"
     export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
     export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
     python get-pip.py
+    pip="$(type -P pip)"
 fi
 
 inside_virtualenv(){
