@@ -25,7 +25,8 @@ srcdir="$(dirname "$0")"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-python="${PYTHON:-python}"
+# shellcheck source=lib/utils.sh
+. "$srcdir/lib/python.sh"
 
 python_path=""
 
@@ -35,6 +36,9 @@ python_path=""
 #
 # Since nose is available in brew Cellar's numpy, it doesn't get installed to ~/Library and isn't found otherwise.
 # Rather than do an --ignore-installed which could cause all sorts of other issues, just use it from wherever it is found
+#
+# $python defined in lib/python.sh
+# shellcheck disable=SC2154
 while read -r path; do
     bin="${path%/lib/python*/site-packages*}/bin"
     if [ -d "$bin" ]; then
