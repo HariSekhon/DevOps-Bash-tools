@@ -20,6 +20,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/ci.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/os.sh"
+
 gem="${GEM:-gem}"
 
 usage(){
@@ -76,7 +79,7 @@ if is_CI; then
 fi
 
 envopts=""
-if [ "$(uname -s)" = "Darwin" ]; then
+if is_mac; then
     if type -P brew &>/dev/null; then
         # usually /usr/local
         brew_prefix="$(brew --prefix)"
@@ -85,6 +88,10 @@ if [ "$(uname -s)" = "Darwin" ]; then
         export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
         # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
         envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB"
+        # TODO: need a more generic way to detect this Mac library issue to apply workaround
+        if is_semaphore_ci; then
+            brew switch openssl 1.0.2t
+        fi
     fi
 fi
 
