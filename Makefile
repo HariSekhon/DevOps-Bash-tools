@@ -192,17 +192,6 @@ python-desktop: system-packages pip
 pip:: python-version
 	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
-.PHONY: python-version
-python-version:
-	@# executing in sh where type is not available
-	@#type -P python
-	which python && python -V || :
-	which python2 && python2 -V || :
-	which python3 && python3 -V || :
-	which pip && pip -V || :
-	which pip2 && pip2 -V || :
-	which pip3 && pip3 -V || :
-
 .PHONY: nodejs-desktop
 nodejs-desktop: system-packages npm
 
