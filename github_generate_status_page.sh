@@ -125,29 +125,43 @@ if [ "$num_repos" != "$actual_repos" ]; then
     exit 1
 fi
 
-build_regex='travis-ci.+\.svg'
-build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
-build_regex+='|dev\.azure\.com/.+/_apis/build/status'
-build_regex+='|app\.codeship\.com/projects/.+/status'
-build_regex+='|appveyor\.com/api/projects/status'
-build_regex+='|circleci\.com/.+\.svg'
-build_regex+='|cloud\.drone\.io/api/badges/.+/status.svg'
-build_regex+='|g\.codefresh\.io/api/badges/pipeline/'
-build_regex+='|api\.shippable\.com/projects/.+/badge'
-build_regex+='|app\.wercker\.com/status/'
-build_regex+='|img\.shields\.io/.+/pipeline'
-build_regex+='|img\.shields\.io/.+/build/'
-build_regex+='|img\.shields\.io/buildkite/'
-build_regex+='|img\.shields\.io/cirrus/'
-build_regex+='|img\.shields\.io/docker/build/'
-build_regex+='|img\.shields\.io/docker/cloud/build/'
-build_regex+='|img\.shields\.io/travis/'
-build_regex+='|img\.shields\.io/shippable/'
+hosted_build_regex='travis-ci.+\.svg'
+hosted_build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
+hosted_build_regex+='|dev\.azure\.com/.+/_apis/build/status'
+hosted_build_regex+='|app\.codeship\.com/projects/.+/status'
+hosted_build_regex+='|appveyor\.com/api/projects/status'
+hosted_build_regex+='|circleci\.com/.+\.svg'
+hosted_build_regex+='|cloud\.drone\.io/api/badges/.+/status.svg'
+hosted_build_regex+='|g\.codefresh\.io/api/badges/pipeline/'
+hosted_build_regex+='|api\.shippable\.com/projects/.+/badge'
+hosted_build_regex+='|app\.wercker\.com/status/'
+hosted_build_regex+='|img\.shields\.io/.+/pipeline'
+hosted_build_regex+='|img\.shields\.io/.+/build/'
+hosted_build_regex+='|img\.shields\.io/buildkite/'
+hosted_build_regex+='|img\.shields\.io/cirrus/'
+hosted_build_regex+='|img\.shields\.io/docker/build/'
+hosted_build_regex+='|img\.shields\.io/docker/cloud/build/'
+hosted_build_regex+='|img\.shields\.io/travis/'
+hosted_build_regex+='|img\.shields\.io/shippable/'
+
+self_hosted_build_regex='\[\!\[[^]]+\]\(.*\)\]\(.*/blob/master/('
+self_hosted_build_regex+='Jenkinsfile'
+self_hosted_build_regex+='|.concourse.yml'
+self_hosted_build_regex+='|.gocd.yml'
+self_hosted_build_regex+=')\)'
 
 if [ -n "${DEBUG:-}" ]; then
-    grep -E "$build_regex" "$tempfile" >&2 || :
+    echo
+    echo "Hosted Builds:"
+    echo
+    grep -E "$hosted_build_regex" "$tempfile" >&2 || :
+    echo
+    echo "Self-Hosted Builds:"
+    echo
+    grep -E "$self_hosted_build_regex" "$tempfile" >&2 || :
 fi
-num_builds="$(grep -Ec "$build_regex" "$tempfile" || :)"
+num_hosted_builds="$(grep -Ec "$hosted_build_regex" "$tempfile" || :)"
+num_self_hosted_builds="$(grep -Ec "$self_hosted_build_regex" "$tempfile" || :)"
 
 {
 cat <<EOF
@@ -162,9 +176,9 @@ printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
 fi
-printf 'git repos with %s continuous integration builds:\n\n' "$num_builds"
+printf 'git repos with %s hosted continuous integration builds and %s self-hosted CI builds:\n\n' "$num_hosted_builds" "$num_self_hosted_builds"
 cat "$tempfile"
-printf '\n%s git repos summarized with %s continuous integration builds\n' "$actual_repos" "$num_builds"
+printf '\n%s git repos summarized with %s hosted continuous integration builds and %s self-hosted CI builds\n' "$actual_repos" "$num_hosted_builds" "$num_self_hosted_builds"
 } | tee "$file"
 
 trap '' exit
