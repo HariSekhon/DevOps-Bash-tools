@@ -26,7 +26,9 @@ srcdir="$(dirname "$0")"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck source=lib/utils.sh
-. "$srcdir/lib/python.sh"
+#. "$srcdir/lib/python.sh"
+
+python="${PYTHON:-python}"
 
 python_path=""
 
