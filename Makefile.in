@@ -467,7 +467,7 @@ pycompile: python-compile
 	@:
 
 .PHONY: which-python
-which-python:
+python-version:
 	@# executing in sh where type is not available
 	@#type -P python
 	for x in python python2 python3 pip pip2 pip3; do; \
