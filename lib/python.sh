@@ -32,6 +32,7 @@ fi
 
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
+python="$(type -P "$python")"
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -54,8 +55,9 @@ if is_mac &&
     export OPENSSL_INCLUDE="$brew_prefix/opt/openssl/include"
     export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
     python get-pip.py
-    pip="$(type -P pip)"
 fi
+
+pip="$(type -P "$pip")"
 
 inside_virtualenv(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
