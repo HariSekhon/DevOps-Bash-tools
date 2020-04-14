@@ -28,10 +28,10 @@
     docker_image_name: "library/ubuntu"
     docker_image_tag: "18.04"
     execute_commands:
-      - "apt update &&"
-      - "apt install -qy git make &&"
-      - "make init &&"
-      - "make ci test"
+      - apt update
+      - apt install -qy git make
+      - make init
+      - make ci test
     volume_mappings:
       - "/:/buddy/devops-bash-tools"
     shell: "BASH"
