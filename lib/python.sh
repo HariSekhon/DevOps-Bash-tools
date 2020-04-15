@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
+srcdir_bash_tools_python="$(dirname "$0")"
 
 # shellcheck disable=SC1090
 . "$srcdir_bash_tools_python/ci.sh"
@@ -32,14 +32,14 @@ fi
 
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
-python="$(type -P "$python")"
+python="$(command -v "$python")"
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
 else
-    pip="$(type -P pip 2>/dev/null)" ||
-    pip="$(type -P pip2 2>/dev/null)" ||
-    pip="$(type -P pip3 2>/dev/null)" || :
+    pip="$(command -v pip 2>/dev/null)" ||
+    pip="$(command -v pip2 2>/dev/null)" ||
+    pip="$(command -v pip3 2>/dev/null)" || :
     if [ -z "$pip" ]; then
         echo "pip not found, falling back to trying just 'pip'" >&2
         pip=pip
@@ -47,7 +47,7 @@ else
 fi
 
 if is_mac &&
-   ! type -P "$pip" &>/dev/null; then
+   ! command -v "$pip" >/dev/null 2>&1; then
     echo "pip not installed, trying to install manually..."
     brew install openssl || :
     curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
@@ -57,7 +57,7 @@ if is_mac &&
     python get-pip.py
 fi
 
-pip="$(type -P "$pip")"
+pip="$(command -v "$pip")"
 
 inside_virtualenv(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
@@ -66,20 +66,20 @@ inside_virtualenv(){
        [ -n "${CONDA_DEFAULT_ENV:-}" ]; then
         return 0
     elif [ -n "${PYENV_ROOT:-}" ]; then
-        if type -P "$python" | grep -q "$PYENV_ROOT" &&
-           type -P "$pip" | grep -q "$PYENV_ROOT"; then
+        if command -v "$python" | grep -q "$PYENV_ROOT" &&
+           command -v "$pip" | grep -q "$PYENV_ROOT"; then
             return 0
         fi
     # GitHub Actions Python versions
-    elif type -P "$python" | grep -Eqi '/hostedtoolcache/'; then
+    elif command -v "$python" | grep -Eqi '/hostedtoolcache/'; then
     #or
-    #elif type -P "$pip" | grep -Eqi '/hostedtoolcache/'; then
+    #elif command -v "$pip" | grep -Eqi '/hostedtoolcache/'; then
         return 0
     # CircleCI uses /opt/circleci/.pyenv/shims/python
     # Codeship path when using virtualenv
-    elif type -P "$python" | grep -Eqi '/\.pyenv/|/shims/'; then
+    elif command -v "$python" | grep -Eqi '/\.pyenv/|/shims/'; then
         return 0
-    elif type -P "$pip" | grep -Eqi '/\.pyenv/|/shims/'; then
+    elif command -v "$pip" | grep -Eqi '/\.pyenv/|/shims/'; then
         return 0
     fi
     return 1
