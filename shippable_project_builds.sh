@@ -22,6 +22,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
+usage_args="<project_id> [<curl_options>]"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
 usage_description="Returns recent Shippable build results for a given project
 
 Specify the project ID as the first argument or have \$SHIPPABLE_PROJECT_ID environment variable defined
