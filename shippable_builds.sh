@@ -13,8 +13,6 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# pending support ticket around permissions issue
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -32,6 +30,12 @@ if [ -z "${SHIPPABLE_ACCOUNT_ID:-}" ]; then
 Get this value from your Web UI Dashboard - it's in your dashboard url:
 
 https://app.shippable.com/accounts/<THIS_BIT_IS_YOUR_ACCOUNT_ID>/dashboard
+
+
+Caveat: this API endpoint only works for paid accounts :-(
+
+https://github.com/Shippable/support/issues/5068
+
 "
 fi
 
