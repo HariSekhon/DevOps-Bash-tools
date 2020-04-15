@@ -88,10 +88,6 @@ if is_mac; then
         export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
         # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
         envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB"
-        # TODO: need a more generic way to detect this Mac library issue to apply workaround
-        if is_semaphore_ci; then
-            brew switch openssl 1.0.2t
-        fi
     fi
 fi
 
