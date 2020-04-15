@@ -22,7 +22,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_description="Returns recent Shippable build results"
+usage_description="Returns recent Shippable build results
+
+Caveat: this API endpoint only works for paid accounts :-(
+
+https://github.com/Shippable/support/issues/5068
+"
 
 if [ -z "${SHIPPABLE_ACCOUNT_ID:-}" ]; then
     usage "SHIPPABLE_ACCOUNT_ID environment variable is not set
@@ -30,12 +35,6 @@ if [ -z "${SHIPPABLE_ACCOUNT_ID:-}" ]; then
 Get this value from your Web UI Dashboard - it's in your dashboard url:
 
 https://app.shippable.com/accounts/<THIS_BIT_IS_YOUR_ACCOUNT_ID>/dashboard
-
-
-Caveat: this API endpoint only works for paid accounts :-(
-
-https://github.com/Shippable/support/issues/5068
-
 "
 fi
 
