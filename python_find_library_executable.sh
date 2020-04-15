@@ -29,6 +29,7 @@ srcdir="$(dirname "$0")"
 #. "$srcdir/lib/python.sh"
 
 python="${PYTHON:-python}"
+python="$(type -P "$python")"
 
 python_path=""
 
