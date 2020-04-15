@@ -20,6 +20,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+# fix version of Travis CI since it has a dependency on SSL and we need to detect and switch the SSL version for certain Mac environments, eg. Semaphore CI
+export GEM_OPTS="-v 1.8.13"
+
 "$srcdir/../ruby_gem_install_if_absent.sh" travis
 
 # add ruby to paths temporarily (logic borrowed from advanced bashrc code in .bash.d/paths.sh)
