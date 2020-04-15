@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir_bash_tools_python="$(cd "$(dirname "$0")" && pwd -P)"
+srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
 . "$srcdir_bash_tools_python/ci.sh"
@@ -32,7 +32,10 @@ fi
 
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
-python="$(command -v "$python")"
+
+if command -v pip >/dev/null 2>&1; then
+    python="$(command -v "$python")"
+fi
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
