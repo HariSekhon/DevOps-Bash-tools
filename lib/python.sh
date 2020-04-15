@@ -24,7 +24,7 @@ srcdir_bash_tools_python="$(cd "$(dirname "$0")" && pwd -P)"
 . "$srcdir_bash_tools_python/os.sh"
 
 # shellcheck disable=SC1090
-. "$srcdir_bash_tools_python/../.bash.d/paths.sh"
+#. "$srcdir_bash_tools_python/../.bash.d/python.sh"
 
 if is_semaphore_ci; then
     set -x
