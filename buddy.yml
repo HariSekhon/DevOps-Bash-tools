@@ -27,9 +27,10 @@
     working_directory: "/buddy/devops-bash-tools"
     docker_image_name: "library/ubuntu"
     docker_image_tag: "18.04"
-    execute_commands:
+    setup_commands:
       - apt update
       - apt install -qy git make
+    execute_commands:
       - make init
       - make ci test
     volume_mappings:
