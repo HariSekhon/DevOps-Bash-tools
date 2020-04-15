@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir_bash_tools_python="$(dirname "$0")"
+srcdir_bash_tools_python="$(cd "$(dirname "$0")" && pwd -P)"
 
 # shellcheck disable=SC1090
 . "$srcdir_bash_tools_python/ci.sh"
