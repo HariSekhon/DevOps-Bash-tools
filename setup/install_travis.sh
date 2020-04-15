@@ -20,8 +20,22 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+# shellcheck disable=SC1090
+. "$srcdir/../lib/ci.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/../lib/os.sh"
+
 # fix version of Travis CI since it has a dependency on SSL and we need to detect and switch the SSL version for certain Mac environments, eg. Semaphore CI
 export GEM_OPTS="-v 1.8.13"
+
+if is_mac; then
+    #if ! [ -f /usr/local/opt/openssl/lib/libssl.1.0.0.dylib ]; then
+    if is_semaphore_ci; then
+        echo "Switching OpenSSL to version 1.0.2t on Mac to avoid SSL build errors for Travis CI gem" >&2
+        brew switch openssl 1.0.2t
+    fi
+fi
 
 "$srcdir/../ruby_gem_install_if_absent.sh" travis
 
