@@ -24,6 +24,7 @@ srcdir="$(dirname "$0")"
 . "$srcdir/lib/os.sh"
 
 gem="${GEM:-gem}"
+opts="${GEM_OPTS:-}"
 
 usage(){
     echo "Installs Ruby Gems, taking in to account library paths"
@@ -72,7 +73,6 @@ gems="$(tr ' ' ' \n' <<< "$gems" | sort -u | tr '\n' ' ')"
 echo "Installing Ruby Gems"
 echo
 
-opts=""
 if is_CI; then
     #echo "running in quiet mode"
     opts="-q"
