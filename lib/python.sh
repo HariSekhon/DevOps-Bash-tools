@@ -64,7 +64,7 @@ pip="$(command -v "$pip")"
 
 set +eo pipefail
 python_major_version="$("$python" -V 2>&1 | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
-pip_python_major_version="$(pip -V 2>&1 | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
+pip_python_major_version="$("$pip" -V 2>&1 | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
 set -eo pipefail
 
 if [ -n "${python_major_version:-}" ] &&
