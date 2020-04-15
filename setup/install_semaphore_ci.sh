@@ -32,4 +32,6 @@ echo "Done"
 echo
 echo "Semaphore CI CLI installed"
 echo
+sem version
+echo
 echo "Run 'sem help' for options"
