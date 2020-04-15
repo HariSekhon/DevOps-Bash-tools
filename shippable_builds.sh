@@ -27,7 +27,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="Returns recent Shippable build results"
 
 if [ -z "${SHIPPABLE_ACCOUNT_ID:-}" ]; then
-    usage "SHIPPABLE_ACCOUNT_ID environment variable is not set (get this value from your Web UI Dashboard)"
+    usage "SHIPPABLE_ACCOUNT_ID environment variable is not set
+
+Get this value from your Web UI Dashboard - it's in your dashboard url:
+
+https://app.shippable.com/accounts/<THIS_BIT_IS_YOUR_ACCOUNT_ID>/dashboard
+"
 fi
 
 for arg; do
