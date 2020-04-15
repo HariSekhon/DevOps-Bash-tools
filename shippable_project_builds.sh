@@ -26,7 +26,14 @@ usage_description="Returns recent Shippable build results for a given project
 
 Specify the project ID as the first argument or have \$SHIPPABLE_PROJECT_ID environment variable defined
 
-This works for free accounts whereas the adjacent shippable_builds.sh requires a paid account"
+This works for free accounts whereas the adjacent shippable_builds.sh requires a paid account
+
+This is the same API endpoints that shields.io uses for it's badges
+
+The statusCode field returned has integers that correspond to statuses
+
+http://docs.shippable.com/ci/build_status/
+"
 
 SHIPPABLE_PROJECT_ID="${1:-${SHIPPABLE_PROJECT_ID:-}}"
 
