@@ -33,12 +33,14 @@ fi
 if is_CI; then
     echo
     echo "Python and Pip installations:"
-    find / -type f -name 'python' -o \
-           -type f -name 'python2' -o \
-           -type f -name 'python3' -o \
-           -type f -name 'pip' -o \
-           -type f -name 'pip2' -o \
-           -type f -name 'pip3' 2>/dev/null || :
+    # leaving out '-type f' so as to catch symlinks too without doubling everything up
+    find / -name 'python' -o \
+           -name 'python2' -o \
+           -name 'python3' -o \
+           -name 'pip' -o \
+           -name 'pip2' -o \
+           -name 'pip3' 2>/dev/null \
+           -exec ls -ld {} \; || :
     echo
     echo
 fi
