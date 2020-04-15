@@ -30,6 +30,19 @@ if is_semaphore_ci; then
     set -x
 fi
 
+if is_CI; then
+    echo
+    echo "Python and Pip installations:"
+    find / -type f -name 'python' -o \
+           -type f -name 'python2' -o \
+           -type f -name 'python3' -o \
+           -type f -name 'pip' -o \
+           -type f -name 'pip2' -o \
+           -type f -name 'pip3' 2>/dev/null
+    echo
+    echo
+fi
+
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
 
