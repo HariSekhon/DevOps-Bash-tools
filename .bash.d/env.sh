@@ -103,6 +103,7 @@ var(){
 }
 vars(){
     "$EDITOR" "$varfile"
+    . "$varfile"
 }
 
 unvar(){
