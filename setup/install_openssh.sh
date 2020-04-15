@@ -13,7 +13,17 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Written for use in AppVeyor to install OpenSSH if not installed already
+# Install OpenSSH - callable via curl to bash from builds
+#
+# Written for use in AppVeyor to install OpenSSH if not installed already to work around issues:
+#
+# https://github.com/appveyor/ci/issues/3373
+#
+# https://github.com/appveyor/ci/issues/3384
+#
+# has since been added to AppVeyor's own scripts:
+#
+# https://github.com/appveyor/ci/pull/3385
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
