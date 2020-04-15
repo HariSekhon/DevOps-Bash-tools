@@ -11,7 +11,7 @@ Hari Sekhon - DevOps Bash Tools
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
 [![Lines of Code](https://img.shields.io/badge/lines%20of%20code-34k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
-[//]: (
+[//]: # (
 # doesn't detect shell code properly
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 )
@@ -22,14 +22,14 @@ Hari Sekhon - DevOps Bash Tools
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
-[//]: (
+[//]: # (
 TODO: fix
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 )
 
-[//]: (
+[//]: # (
 official badges without logos to differentiate them
 
 [![Travis CI](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
