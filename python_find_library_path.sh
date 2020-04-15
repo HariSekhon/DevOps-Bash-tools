@@ -22,6 +22,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 python="${PYTHON:-python}"
+python="$(type -P "$python")"
 
 find_python_sys_path(){
     cat <<EOF |
