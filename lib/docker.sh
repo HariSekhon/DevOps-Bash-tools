@@ -362,7 +362,7 @@ docker_rmi_grep(){
     docker images |
     grep -Ei -- "^$1" |
     awk '{print $1":"$2}' |
-    xargs docker rmi --force
+    xargs docker rmi --force || :
 }
 
 # to be called at end of scripts as well as trap function
