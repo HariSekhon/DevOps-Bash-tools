@@ -29,7 +29,7 @@ environment:
 on_finish:
   # set this in Settings -> Environment dynamically instead of here
   #- sh: export APPVEYOR_SSH_BLOCK=true
-  - sh: curl -sflL 'https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/setup/install_openssh.sh' | bash -e -
+  - sh: curl -sflL 'https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/install_openssh.sh' | bash -e -
   - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 install:
