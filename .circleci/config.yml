@@ -30,7 +30,7 @@ jobs:
       # so using harisekhon/dev:ubuntu instead of base ubuntu image
       #image: harisekhon/dev:ubuntu
     steps:
-      - sudo sysctl net.ipv4.ip_forward=1
+      - run: sudo sysctl net.ipv4.ip_forward=1
       - checkout
       - run: make init
       - run: make
