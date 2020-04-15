@@ -38,12 +38,7 @@ https://app.shippable.com/accounts/<THIS_BIT_IS_YOUR_ACCOUNT_ID>/dashboard
 "
 fi
 
-for arg; do
-    case "$arg" in
-        -h|--help) usage
-                   ;;
-    esac
-done
+help_usage "$@"
 
 "$srcdir/shippable_api.sh" "/accounts/$SHIPPABLE_ACCOUNT_ID/runStatus" "$@"
 #jq -r "$jq_query"
