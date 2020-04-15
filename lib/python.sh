@@ -62,6 +62,23 @@ fi
 
 pip="$(command -v "$pip")"
 
+set +eo pipefail
+python_major_version="$("$python" -V 2>&1 | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
+pip_python_major_version="$(pip -V 2>&1 | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
+set -eo pipefail
+
+if [ -n "${python_major_version:-}" ] &&
+   [ -n "${pip_python_major_version:-}" ]; then
+    if [ "$python_major_version" != "$pip_python_major_version" ]; then
+        echo "Python major version '$python_major_version' != Pip Python major version '$pip_python_major_version' !!"
+        echo
+        echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
+        echo
+        echo "Fix your \$PATH or \$PYTHON / \$PIP to be aligned to the same installation"
+        exit 1
+    fi
+fi
+
 inside_virtualenv(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||
        #[ -n "${PYENV_ROOT:-}" ] ||
