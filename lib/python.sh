@@ -63,8 +63,11 @@ fi
 pip="$(command -v "$pip")"
 
 set +eo pipefail
-python_major_version="$("$python" -V 2>&1 | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
-pip_python_major_version="$("$pip" -V 2>&1 | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
+# split steps for easier CI debugging in DEBUG mode
+python_major_version="$("$python" -V 2>&1)"
+python_major_version="$(echo "$python_major_version" | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
+pip_python_major_version="$("$pip" -V 2>&1)"
+pip_python_major_version="$(echo "$pip_python_major_version" | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
 set -eo pipefail
 
 if [ -n "${python_major_version:-}" ] &&
