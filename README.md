@@ -21,12 +21,15 @@ Hari Sekhon - DevOps Bash Tools
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
-<!-- TODO: fix
+
+[//]: (
+TODO: fix
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
--->
-<!--
+)
+
+[//]: (
 official badges without logos to differentiate them
 
 [![Travis CI](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
@@ -43,7 +46,8 @@ this one I don't trust it'll stick around so using shields version instead
 # shields.io gets throttled after a few reloads :-/ - which is bad because shields latency is high and oftens fails to load some badges which requires you to reload the page a few times until they load, so have gone back to the generic wercker badge
 
 [![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker)](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
--->
+)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/devops-bash-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Bash-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
