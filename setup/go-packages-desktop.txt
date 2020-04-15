@@ -19,5 +19,5 @@ github.com/songgao/colorgo
 github.com/cjbassi/gotop
 github.com/mkouhei/gosh
 github.com/rakyll/hey
-github.com/PaulRosset/previs
+#github.com/PaulRosset/previs
 #github.com/wercker/wercker
