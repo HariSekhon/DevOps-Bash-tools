@@ -32,12 +32,7 @@ SHIPPABLE_PROJECT_ID="${1:-${SHIPPABLE_PROJECT_ID:-}}"
 
 check_env_defined SHIPPABLE_PROJECT_ID
 
-for arg; do
-    case "$arg" in
-        -h|--help) usage
-                   ;;
-    esac
-done
+help_usage "$@"
 
 # this will enforce a $SHIPPABLE_TOKEN which isn't necessary as this is a public endpoint
 #"$srcdir/shippable_api.sh" "/projects/$SHIPPABLE_PROJECT_ID/branchRunStatus" "$@"
