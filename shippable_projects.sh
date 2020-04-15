@@ -30,12 +30,7 @@ if [ -z "${SHIPPABLE_ACCOUNT_ID:-}" ]; then
     usage "SHIPPABLE_ACCOUNT_ID environment variable is not set (get this value from your Web UI Dashboard)"
 fi
 
-for arg; do
-    case "$arg" in
-        -h|--help) usage
-                   ;;
-    esac
-done
+help_usage "$@"
 
 project_id=""
 if [ $# -gt 0 ]; then
