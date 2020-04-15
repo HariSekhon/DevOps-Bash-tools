@@ -38,7 +38,7 @@ if is_CI; then
            -type f -name 'python3' -o \
            -type f -name 'pip' -o \
            -type f -name 'pip2' -o \
-           -type f -name 'pip3' 2>/dev/null
+           -type f -name 'pip3' 2>/dev/null || :
     echo
     echo
 fi
