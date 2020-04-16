@@ -62,6 +62,8 @@ blocks:
       prologue:
         commands:
           - cache restore
+          - brew install openssl
+          - brew reinstall python
       jobs:
         - name: build
           commands:
