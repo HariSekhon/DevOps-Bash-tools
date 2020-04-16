@@ -50,6 +50,10 @@ blocks:
     run:
       when: "branch = 'master'"
     task:
+      # because otherwise on Mac it uses /usr/bin/python (2.7) but /usr/local/bin/pip (python 3.8)
+      env_vars:
+        - name: PYTHON
+          value: python3
       agent:
         machine:
           type: a1-standard-4
