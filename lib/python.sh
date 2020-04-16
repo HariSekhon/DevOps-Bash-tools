@@ -30,15 +30,19 @@ if is_semaphore_ci; then
     set -x
 fi
 
-if is_CI; then
-    echo
-    echo "Python and Pip installations:"
-    for x in python python2 python3 pip pip2 pip3; do
-        find / -type f -name "$x" -exec ls -l {} \; -o \
-               -type l -name "$x" -exec ls -l {} \; 2>/dev/null || :
-    done
-    echo
-    echo
+# [ 1 ] for debugging CI builds like Semaphore CI's weird Python environment on Mac where it defaults to /usr/bin/python (2.7) but /usr/local/bin/pip (python 3.8)
+if [ ]; then
+    if is_semaphore_ci; then
+        echo
+        echo "Python and Pip installations:"
+        # very slow, pushes build past 1 hour
+        for x in python python2 python3 pip pip2 pip3; do
+            find / -type f -name "$x" -exec ls -l {} \; -o \
+                   -type l -name "$x" -exec ls -l {} \; 2>/dev/null || :
+        done
+        echo
+        echo
+    if
 fi
 
 # shellcheck disable=SC2034
