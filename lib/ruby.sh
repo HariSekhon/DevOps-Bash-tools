@@ -40,7 +40,8 @@ inside_rbenv(){
 }
 
 inside_rvm(){
-    if command -v ruby | grep -q -e '/\.rvm/'; then
+    if [[ "${GEM_HOME:-}${MY_RUBY_HOME:-}" =~ /\.rvm/ ]] ||
+        command -v ruby | grep -q -e '/\.rvm/'; then
         return 0
     fi
     return 1
