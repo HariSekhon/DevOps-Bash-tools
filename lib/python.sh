@@ -30,10 +30,11 @@ if is_semaphore_ci; then
     set -x
 fi
 
-# [ 1 ] for debugging CI builds like Semaphore CI's weird Python environment on Mac where it defaults to /usr/bin/python (2.7)
+# set to true for debugging CI builds like Semaphore CI's weird Python environment on Mac where it defaults to /usr/bin/python (2.7)
 # but /usr/local/opt/python/libexec/bin/pip (python 3.7) or /usr/local/bin/pip3 (python 3.8), causing library installation vs runtime import mismatches
 # (now checked for further below to catch early and highlight the root cause)
-if [ ]; then
+#if [ -n "${DEBUG:-}" ]; then
+if false; then
     if is_semaphore_ci; then
         echo
         echo "Python and Pip installations:"
@@ -44,7 +45,7 @@ if [ ]; then
         done
         echo
         echo
-    if
+    fi
 fi
 
 # shellcheck disable=SC2034
