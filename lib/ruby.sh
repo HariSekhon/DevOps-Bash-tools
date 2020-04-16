@@ -23,9 +23,24 @@ set -euo pipefail
 # shellcheck disable=SC1090
 #. "$srcdir_bash_tools_python/os.sh"
 
+inside_ruby_virtualenv(){
+    # $HOME/.rbenv/shims/ruby
+    if inside_rvm || inside_rbenv; then
+        return 0
+    fi
+    return 1
+}
+
 inside_rbenv(){
     # $HOME/.rbenv/shims/ruby
-    if command -v ruby | grep -q '/.rbenv/'; then
+    if command -v ruby | grep -q -e '/\.rbenv/'; then
+        return 0
+    fi
+    return 1
+}
+
+inside_rvm(){
+    if command -v ruby | grep -q -e '/\.rvm/'; then
         return 0
     fi
     return 1
