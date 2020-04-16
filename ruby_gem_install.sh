@@ -26,6 +26,10 @@ srcdir="$(dirname "$0")"
 gem="${GEM:-gem}"
 opts="${GEM_OPTS:-}"
 
+if type -P "$gem" &>/dev/null; then
+    gem="$(type -P "$gem")"
+fi
+
 usage(){
     echo "Installs Ruby Gems, taking in to account library paths"
     echo
