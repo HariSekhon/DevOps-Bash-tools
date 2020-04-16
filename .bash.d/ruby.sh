@@ -29,7 +29,12 @@ fi
 
 # gems will be installed to ~/.gem/ruby/x.y.z/bin
 
-# RVM stuff
+
+# ============================================================================ #
+#                                     R V M
+# ============================================================================ #
+# RVM
+
 # usually /usr/local/rvm/bin
 if [ -n "${rvm_bin_path:-}" ];then
     add_PATH "$rvm_bin_path"
@@ -37,6 +42,22 @@ fi
 if [ -d /usr/local/rvm/bin ]; then
     add_PATH /usr/local/rvm/bin
 fi
+
+
+# ============================================================================ #
+#                                   R b E n v
+# ============================================================================ #
+# RbEnv
+
+if [ -f ~/.rbenv/bin ]; then
+    add_PATH ~/.rbenv/bin
+fi
+
+
+# ============================================================================ #
+#                          R u b y   U s e r   D i r s
+# ============================================================================ #
+# Ruby User Dirs
 
 # add newest ruby to path first
 ruby_bins="$(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null)"
@@ -53,6 +74,8 @@ unset ruby_bins_newest
 
 alias lsrubybin='ls -d ~/.gem/ruby/*/bin/* 2>/dev/null'
 alias llrubybin='ls -ld ~/.gem/ruby/*/bin/* 2>/dev/null'
+
+# ============================================================================ #
 
 # HomeBrew install on Linux (for AWS SAM CLI)
 if [ -d ~/.linuxbrew/Homebrew/Library/Homebrew/vendor/portable-ruby/current/bin ]; then
