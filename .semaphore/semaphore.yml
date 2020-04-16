@@ -64,6 +64,7 @@ blocks:
           - cache restore
           - brew install openssl
           - brew reinstall python
+          - brew reinstall wget
       jobs:
         - name: build
           commands:
