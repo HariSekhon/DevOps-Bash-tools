@@ -54,6 +54,8 @@ blocks:
       env_vars:
         - name: PYTHON
           value: python3
+        - name: DEBUG
+          value: 1
       agent:
         machine:
           type: a1-standard-4
