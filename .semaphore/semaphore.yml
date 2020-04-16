@@ -62,6 +62,8 @@ blocks:
       prologue:
         commands:
           - cache restore
+          # fix for:
+          # pip is configured with locations that require TLS/SSL, however the ssl module in Python is not available.
           - brew install openssl
           - brew reinstall python
           - brew reinstall wget
