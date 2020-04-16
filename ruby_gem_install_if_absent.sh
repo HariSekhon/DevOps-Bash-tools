@@ -19,6 +19,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 #ruby="${RUBY:-ruby}"
 gem_cmd="${GEM:-gem}"
+if type -P "$gem_cmd" &>/dev/null; then
+    gem_cmd="$(type -P "$gem_cmd")"
+fi
 
 usage(){
     echo "Installs Ruby Gems not already installed"
