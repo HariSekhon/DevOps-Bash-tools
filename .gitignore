@@ -243,6 +243,8 @@
 .sdkman/src/
 .sdkman/tmp/
 .sdkman/var/
+# Semaphore CI - contains auth token
+.sem.yaml
 .serverauth.*
 .sh_history
 .Skype
