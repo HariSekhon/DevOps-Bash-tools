@@ -28,6 +28,8 @@ bash_tools_utils_imported=1
 . "$srcdir_bash_tools_utils/os.sh"
 . "$srcdir_bash_tools_utils/perl.sh"
 . "$srcdir_bash_tools_utils/../.bash.d/colors.sh"
+#. "$srcdir_bash_tools_utils/python.sh"
+#. "$srcdir_bash_tools_utils/ruby.sh"
 
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
