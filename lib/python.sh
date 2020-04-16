@@ -26,10 +26,6 @@ srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090
 #. "$srcdir_bash_tools_python/../.bash.d/python.sh"
 
-if is_semaphore_ci; then
-    set -x
-fi
-
 # set to true for debugging CI builds like Semaphore CI's weird Python environment on Mac where it defaults to /usr/bin/python (2.7)
 # but /usr/local/opt/python/libexec/bin/pip (python 3.7) or /usr/local/bin/pip3 (python 3.8), causing library installation vs runtime import mismatches
 # (now checked for further below to catch early and highlight the root cause)
