@@ -30,6 +30,10 @@ blocks:
     #execution_time_limit:
     #  hours: 2
     task:
+      env_vars:
+        # to match /usr/local/bin/pip version from $PATH
+        - name: PYTHON
+          value: python3.8
       prologue:
         commands:
           - cache restore
@@ -52,6 +56,7 @@ blocks:
     task:
       # because otherwise on Mac it uses /usr/bin/python (2.7) but /usr/local/bin/pip (python 3.8)
       env_vars:
+        # to match /usr/local/bin/pip version from $PATH
         - name: PYTHON
           value: python3
         - name: DEBUG
