@@ -1,0 +1,14 @@
+currentProfile: default
+profiles:
+  default:
+    output:
+      pretty: false
+      dateFormat: default
+    request:
+      timeout: 30000
+      maxAttempts: 10
+      retryDelay: 500
+    logs:
+      fallback:
+        interval: 5000
+        maxAttempts: 1000
