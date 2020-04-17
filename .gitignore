@@ -228,6 +228,8 @@
 .Rhistory
 .rnd
 .rstudio-desktop/
+# 'rbenv local' version file
+.ruby-version
 .sbt/[[:digit:]].[[:digit:]]*/
 .sbt/boot/
 .sbt/preloaded/
