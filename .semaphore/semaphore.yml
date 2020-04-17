@@ -69,6 +69,18 @@ blocks:
           - brew install openssl
           - brew reinstall python
           - brew reinstall wget
+          # avoid Mac SSL errors:
+          #
+          # ERROR:  Loading command: install (LoadError)
+          #   dlopen(/Users/semaphore/.rbenv/versions/2.5.1/lib/ruby/2.5.0/x86_64-darwin18/openssl.bundle, 9): Library not loaded: /usr/local/opt/openssl/lib/libssl.1.0.0.dylib
+          #   Referenced from: /Users/semaphore/.rbenv/versions/2.5.1/lib/ruby/2.5.0/x86_64-darwin18/openssl.bundle
+          #   Reason: image not found - /Users/semaphore/.rbenv/versions/2.5.1/lib/ruby/2.5.0/x86_64-darwin18/openssl.bundle
+          # ERROR:  While executing gem ... (NoMethodError)
+          #     undefined method `invoke_with_build_args' for nil:NilClass#
+          #
+          - rbenv global system
+          # also considered this:
+          # - for version in $(rbenv versions | grep -v system | sed 's/^\*//'); do yes | rbenv uninstall "$version"; rbenv install "$version"; done
       jobs:
         - name: build
           commands:
