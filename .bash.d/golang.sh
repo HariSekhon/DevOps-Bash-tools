@@ -26,12 +26,17 @@ github="${github:-$HOME/github}"
 # shellcheck disable=SC1090
 #. "$bash_tools/.bash.d/os_detection.sh"
 
-export GOPATH="$github/go-tools"
+#export GOPATH="$github/go-tools"
+export GOPATH="$HOME/go"
 alias gopath='cd "$GOPATH"'
 alias gogo='gopath'
 alias cdgo='gopath'
 alias gosrc='cd "$GOPATH/src"'
 alias gobin='cd "$GOPATH/bin"'
+
+alias go-tools='cd "$github/go-tools"; export GOPATH="$github/go-tools"'
+alias gtools=go-tools
+alias gt=gtools
 
 if [ -d ~/go/bin ]; then
     add_PATH ~/go/bin
