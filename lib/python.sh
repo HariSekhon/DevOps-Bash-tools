@@ -88,16 +88,18 @@ pip="$(command -v "$pip")"
 
 set +eo pipefail
 # split steps for easier CI debugging in DEBUG mode
-python_major_version="$("$python" -V 2>&1)"
-python_major_version="$(echo "$python_major_version" | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
-pip_python_major_version="$("$pip" -V 2>&1)"
-pip_python_major_version="$(echo "$pip_python_major_version" | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
+python_version="$("$python" -V 2>&1)"
+python_version="$(echo "$python_version" | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
+python_major_version="${python_version%%.*}"
+pip_python_version="$("$pip" -V 2>&1)"
+pip_python_version="$(echo "$pip_python_version" | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
+pip_python_major_version="${pip_python_version%%.*}"
 set -eo pipefail
 
-if [ -n "${python_major_version:-}" ] &&
-   [ -n "${pip_python_major_version:-}" ]; then
-    if [ "$python_major_version" != "$pip_python_major_version" ]; then
-        echo "Python major version '$python_major_version' != Pip Python major version '$pip_python_major_version' !!"
+if [ -n "${python_version:-}" ] &&
+   [ -n "${pip_python_version:-}" ]; then
+    if [ "$python_version" != "$pip_python_version" ]; then
+        echo "Python major version '$python_version' != Pip Python major version '$pip_python_version' !!"
         echo
         echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
         echo
