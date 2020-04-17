@@ -33,7 +33,10 @@ inside_ruby_virtualenv(){
 
 inside_rbenv(){
     # $HOME/.rbenv/shims/ruby
-    if command -v ruby | grep -q -e '/\.rbenv/'; then
+    # this could be true and still set to system
+    #if command -v ruby | grep -q -e '/\.rbenv/'; then
+    if [ -n "${RBENV_VERSION:-}" ] ||
+       gem env home 2>/dev/null | grep -q -e '/\.rbenv/'; then
         return 0
     fi
     return 1
