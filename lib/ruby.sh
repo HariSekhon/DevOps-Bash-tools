@@ -31,12 +31,18 @@ inside_ruby_virtualenv(){
     return 1
 }
 
+# https://github.com/rbenv/rbenv#command-reference
 inside_rbenv(){
     # $HOME/.rbenv/shims/ruby
     # this could be true and still set to system
     #if command -v ruby | grep -q -e '/\.rbenv/'; then
+    #
+    #rbenv local - $PWD/.ruby-version
+    #rbenv global - ~/.rbenv/version
+    # gem env home exposes this in one
     if [ -n "${RBENV_VERSION:-}" ] ||
        gem env home 2>/dev/null | grep -q -e '/\.rbenv/'; then
+        # technically should check if $RBENV_ROOT is set and also 'rbenv root' but this would be more expensive and should always be .rbenv anyway
         return 0
     fi
     return 1
