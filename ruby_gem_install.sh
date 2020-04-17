@@ -23,6 +23,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/os.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/ruby.sh"
+
 gem="${GEM:-gem}"
 opts="${GEM_OPTS:-}"
 
