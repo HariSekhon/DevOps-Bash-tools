@@ -59,10 +59,10 @@ blocks:
         # to match /usr/local/bin/pip version from $PATH
         - name: PYTHON
           value: python3
-        - name: DEBUG
-          # must be quoted to force string, otherwise pipeline fails to run with this parsing error:
-          # Error: [{"Type mismatch. Expected String but got Integer.", "#/blocks/1/task/env_vars/1/value"}]
-          value: "1"
+        # must be quoted to force string, otherwise pipeline fails to run with this parsing error:
+        # Error: [{"Type mismatch. Expected String but got Integer.", "#/blocks/1/task/env_vars/1/value"}]
+        #- name: DEBUG
+        #  value: "1"
       agent:
         machine:
           type: a1-standard-4
