@@ -96,6 +96,7 @@
 # Circle CI API Token stored in here
 .circleci/cli.yml
 .circleci/update_check.yml
+.Codefresh/agent/
 .compiz
 .conda/
 .config
