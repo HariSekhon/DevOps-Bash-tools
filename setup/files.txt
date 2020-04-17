@@ -18,6 +18,7 @@
 .ansible.cfg
 .athenacli/athenaclirc
 .aws/shell/awsshellrc
+.Codefresh/cli-config/config.yaml
 .config/flake8
 .config/htop/htoprc
 .config/pycodestyle
