@@ -34,7 +34,7 @@ alias dpsa='docker ps -a'
 alias dst="dockerhub_show_tags.py"
 # -l shows latest container, -q shows only ID
 alias dl='docker ps -lq'
-alias dockerimg='$EDITOR ~/docker-images.txt'
+alias dockerimg='$EDITOR "$bash_tools/setup/docker-images.txt"'
 
 # wipe out exited containers
 alias dockerrm='docker rm $(docker ps -qf status=exited)'
@@ -103,7 +103,7 @@ function dockerrunrm(){
         fi
         args="$args $x"
     done
-    eval docker run --rm -ti -v $PWD:/pwd -w /pwd "$args"
+    eval docker run --rm -ti -v "$PWD":/pwd -w /pwd "$args"
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
 
@@ -152,7 +152,7 @@ dockerexec(){
 
 docker_get_images(){
     # uniq_order_preserved.pl is in the DevOps-Perl-tools repo on github and should be in the $PATH
-    echo "$(dockerhub_search.py harisekhon -n 1000 | tail -n +2 | awk '{print $1}' | sort) $(sed 's/#.*//;/^[[:space:]]*$/d' ~/docker-images.txt | uniq_order_preserved.pl)"
+    echo "$(dockerhub_search.py harisekhon -n 1000 | tail -n +2 | awk '{print $1}' | sort) $(sed 's/#.*//;/^[[:space:]]*$/d' "$bash_tools/setup/docker-images.txt" | uniq_order_preserved.pl)"
 }
 
 dockerpull1(){
