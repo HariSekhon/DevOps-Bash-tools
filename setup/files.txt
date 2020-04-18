@@ -35,6 +35,7 @@
 .perlcritic_forbidden_modules
 .psqlrc
 .pylintrc
+.rabbitmqadmin.conf
 .sawsrc
 .screenrc
 .sdkman/etc/config
