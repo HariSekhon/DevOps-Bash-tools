@@ -88,7 +88,7 @@ for repo in $repolist; do
         git clone "$git_url/$repo" "$repo_dir"
     fi
     pushd "$repo_dir"
-    git pull
+    git pull --no-edit
     git submodule update --init
     #  shellcheck disable=SC2086
     if [ -z "${NOBUILD:-}" ] &&
