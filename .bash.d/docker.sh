@@ -152,7 +152,10 @@ dockerexec(){
 
 docker_get_images(){
     # uniq_order_preserved.pl is in the DevOps-Perl-tools repo on github and should be in the $PATH
-    echo "$(dockerhub_search.py harisekhon -n 1000 | tail -n +2 | awk '{print $1}' | sort) $(sed 's/#.*//;/^[[:space:]]*$/d' "$bash_tools/setup/docker-images.txt" | uniq_order_preserved.pl)"
+    # too many images on dockerhub to pull, fills up filesystem
+    #echo "$(dockerhub_search.py harisekhon -n 1000 | tail -n +2 | awk '{print $1}' | sort) $(sed 's/#.*//;/^[[:space:]]*$/d' "$bash_tools/setup/docker-images.txt" | uniq_order_preserved.pl)"
+    sed 's/#.*//;/^[[:space:]]*$/d' "$bash_tools/setup/docker-images.txt" |
+    uniq_order_preserved.pl
 }
 
 dockerpull1(){
