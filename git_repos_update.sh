@@ -54,7 +54,7 @@ run(){
         if [ -d "$repo_dir" ]; then
             pushd "$repo_dir"
             # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-            git pull
+            git pull --no-edit
             if [ -n "${QUICK:-}" ] ||
                [ -n "${NOBUILD:-}" ] ||
                [ -n "${NO_BUILD:-}" ]; then
