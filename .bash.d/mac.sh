@@ -31,6 +31,11 @@ date(){
     gdate "$@"
 }
 
+xargs(){
+    # because --no-run-if-empty is useful
+    gxargs "$@"
+}
+
 # put in inputrc for readline
 #set completion-ignore-case on
 
