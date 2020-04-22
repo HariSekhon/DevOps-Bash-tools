@@ -38,6 +38,7 @@ alias go-tools='cd "$github/go-tools"; export GOPATH="$github/go-tools"'
 alias gtools=go-tools
 alias gt=gtools
 
+add_PATH "$github/go-tools"
 add_PATH "$github/go-tools/bin"
 
 if [ -d ~/go/bin ]; then
