@@ -133,10 +133,11 @@ fi
 # $github defined in aliases.sh
 # shellcheck disable=SC2154
 add_PATH "$github/bash-tools"
-add_PATH "$github/pytools"
-add_PATH "$github/tool"
-add_PATH "$github/tools"
 add_PATH "$github/go-tools"
+add_PATH "$github/perl-tools"
+add_PATH "$github/pytools"
+add_PATH "$github/tools"
+#add_PATH "$github/tool"
 add_PATH "$github/nagios-plugins"
 add_PATH "$github/nagios-plugin-kafka"
 add_PATH "$github/spotify"
