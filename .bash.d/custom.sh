@@ -17,7 +17,7 @@
 #                                  C u s t o m
 # ============================================================================ #
 
-# Stuff that's a bit too custom and only sourced for my own user
+# Stuff that's overly custom and only sourced for my own user
 #
 # eg. $USER specific env vars and too short less generic aliases
 
