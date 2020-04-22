@@ -43,6 +43,7 @@ export pl="$plugins"
 alias plugins='sti pl; cd $pl'
 alias pl=plugins
 
+# travis_last_log.py should be in $PATH from DevOps-Python-tools repo
 alias pll="travis_last_log.py HariSekhon/nagios-plugins"
 export pl2="${plugins}2"
 alias pl2='sti pl2; cd $pl2'
