@@ -87,10 +87,10 @@ if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
 fi
 
 # do the same with MANPATH
-#if [ -d ~/man ]; then
-#    MANPATH=~/man${MANPATH:-:}
-#    export MANPATH
-#fi
+if [ -d ~/man ]; then
+    MANPATH=~/man:"${MANPATH:-}"
+    export MANPATH
+fi
 
 # added to .bash_profile by SnowSQL installer
 #if [ -d /Applications/SnowSQL.app/Contents/MacOS ]; then
