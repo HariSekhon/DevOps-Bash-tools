@@ -466,7 +466,7 @@ python-compile:
 pycompile: python-compile
 	@:
 
-.PHONY: which-python
+.PHONY: python-version
 python-version:
 	@# executing in sh where type is not available
 	@#type -P python
@@ -476,6 +476,16 @@ python-version:
 		$$x -V || : ; \
 		echo; \
 	done
+
+.PHONY: golang-version
+golang-version:
+	which go && \
+	ls -l `which go` && \
+	go version || :
+
+.PHONY: go-version
+go-version: golang-version
+	@:
 
 # =======================
 # Nice tricks for pure Python projects
