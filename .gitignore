@@ -1561,7 +1561,7 @@ inc/
 /blib/
 /_eumm/
 /*.gz
-/Makefile
+#/Makefile
 /Makefile.old
 /MANIFEST.bak
 /pm_to_blib
