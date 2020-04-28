@@ -31,7 +31,7 @@ elif type -P apt-get &>/dev/null; then
     # Debian / Ubuntu
     #openjdk-8-jre-headless  # smaller than openjdk-11 package (127 vs 200 MB) and more tested
     #openjdk-11-jre-headless
-    install_packages.sh openjdk-8-jre-headless
+    install_packages.sh openjdk-11-jre-headless
 elif type -P apk &>/dev/null; then
     # Alpine
     #openjdk8-jre
