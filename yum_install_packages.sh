@@ -74,7 +74,7 @@ packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | sed '/^[[:space:]]*$/d')
 # RHEL8 ruining things with no default python and lots of python package renames
 # - handling systematically rather than exploding out all my repos package lists
 if [ -n "${NO_FAIL:-}" ]; then
-    if grep '^REDHAT_SUPPORT_PRODUCT_VERSION="8"' /etc/*release 2>/dev/null; then
+    if grep -q '^REDHAT_SUPPORT_PRODUCT_VERSION="8"' /etc/*release 2>/dev/null; then
         if grep -q 'python-' <<< "$packages"; then
             # shellcheck disable=SC2001
             packages="$packages
