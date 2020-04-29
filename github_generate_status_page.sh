@@ -63,7 +63,7 @@ get_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq -r '.[] | select(.fork | not) | select(.private | not) | [.full_name, .stargazers_count] | @tsv' <<< "$output"
+        jq -r '.[] | select(.fork | not) | select(.private | not) | [.full_name, .stargazers_count. forks] | @tsv' <<< "$output"
         ((page+=1))
     done
 }
@@ -71,7 +71,7 @@ get_repos(){
 original_sources=0
 
 if [ -z "$repolist" ]; then
-    repolist="$(get_repos | grep -v spark-apps | sort -k2nr | awk '{print $1}' | head -n "$top_N")"
+    repolist="$(get_repos | grep -v spark-apps | sort -k2nr -k3nr | awk '{print $1}' | head -n "$top_N")"
     original_sources=1
 fi
 
