@@ -57,6 +57,9 @@ alias se=screenrc
 #xe(){ xemacs $@ & }
 #alias x=xe
 
+# from DevOps-Perl-tools repo which must be in $PATH
+alias new=new.pl
+
 # not present on Mac
 #type tailf &>/dev/null || alias tailf="tail -f"
 alias tailf="tail -f"  # tail -f is better than tailf anyway
