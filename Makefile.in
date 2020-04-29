@@ -521,7 +521,7 @@ update2: update-no-recompile
 
 .PHONY: update-no-recompile
 update-no-recompile:
-	git pull
+	git pull --no-edit
 	$(MAKE) submodules
 
 .PHONY: update-submodules

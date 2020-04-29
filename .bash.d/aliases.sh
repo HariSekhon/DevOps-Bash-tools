@@ -57,6 +57,9 @@ alias se=screenrc
 #xe(){ xemacs $@ & }
 #alias x=xe
 
+# from DevOps-Perl-tools repo which must be in $PATH
+alias new=new.pl
+
 # not present on Mac
 #type tailf &>/dev/null || alias tailf="tail -f"
 alias tailf="tail -f"  # tail -f is better than tailf anyway
@@ -306,6 +309,16 @@ export desktop=~/Desktop
 export desk="$desktop"
 alias desktop='cd "$desktop"'
 alias desk=desktop
+
+alias todo='ti T; $EDITOR $HOME/TODO'
+alias TODO="todo"
+alias don='ti D; $EDITOR $HOME/DONE'
+alias DON=don
+
+# drive => Google Drive
+export google_drive="$HOME/drive"
+export drive="$google_drive"
+alias drive='cd "$drive"'
 
 for v in ~/github/pytools/validate_*.py; do
     z="${v##*/}"

@@ -32,6 +32,7 @@ jobs:
     steps:
       # to allow docker networking to work
       - run: sudo sysctl net.ipv4.ip_forward=1
+      - run: sudo service docker restart
       - checkout
       - run: make init
       - run: make

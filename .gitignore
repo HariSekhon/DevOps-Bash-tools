@@ -222,6 +222,8 @@
 .qt
 .qicon
 .qnicon
+# contains usernames and passwords
+.rabbitmqadmin.conf
 .RData
 .recently-used
 .recently-used.xbel
