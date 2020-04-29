@@ -77,7 +77,7 @@ done <<< "$cache_list"
 while read -r directory; do
     [ -n "$directory" ] || continue
     # ~ more reliable than $HOME which could be unset
-    echo rm -rf ~/"$directory"
+    rm -rf ~/"$directory"
     if [ $EUID != 0 ]; then
         if type -P sudo &>/dev/null; then
             sudo -n rm -rf "/root/$directory"
