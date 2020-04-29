@@ -29,9 +29,6 @@ make
 parallel
 perl
 procps
-python
-python-pip
-python-setuptools # needed by 'pip install awscli'
 ruby-dev  # to build Travis CI gem
 wget
 # included in distro
