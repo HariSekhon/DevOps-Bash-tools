@@ -20,7 +20,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib/docker.sh
 . "$srcdir/lib/docker.sh"
 
-# Caches we want to check have been removed:
+# Personal Language Caches we want to check have been removed:
 #
 # .cache => Python pip
 #
@@ -32,13 +32,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # Java / Scala / Groovy:
 #
 # .gradle => Gradle
-# .groovy => Groovy
+# .groovy => Groovy (contains grapes/)
 # .ivy    => Ivy (Sbt / Gradle)
 # .ivy2
 # .m2     => Maven
 # .sbt    => SBT
 
-cache_list="
+personal_cache_list="
 .cache
 .cpan
 .cpanm
@@ -52,11 +52,11 @@ cache_list="
 "
 
 if is_inside_docker; then
-    for x in $cache_list; do
+    for x in $personal_cache_list; do
         for y in /root ~; do
             # This might fail if we're not running as root :-/
             # consider sudo'ing and find / -type d -name $x but that might find .cache under some app or something, although we should probably remove that too
-            # for now this is good enough as most dockers are built as root
+            # for now this is good enough as most docker images are built as root
             # should test for sudo availability as well
             if [ -e "$y/$x" ]; then
                 echo "$y/$x detected, should have been removed from docker build"
