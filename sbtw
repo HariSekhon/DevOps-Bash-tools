@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2017-08-24 15:40:04 +0200 (Thu, 24 Aug 2017)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+
+SBT_VERSION="${SBT_VERSION:-1.3.10}"
+
+if [ -z "$JAVA_HOME" ]; then
+    echo "\$JAVA_HOME not set!"
+    exit 1
+fi
+
+#JAR="$HOME/.sbt/sbt-launch-$SBT_VERSION.jar"
+
+bootdir="$HOME/.sbt/boot"
+
+mkdir -vp "$bootdir"
+
+if ! test -d "$bootdir/sbt-$SBT_VERSION"; then
+    #URL="https://dl.bintray.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$SBT_VERSION/sbt-launch.jar"
+    #URL="https://dl.bintray.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/$SBT_VERSION/jars/sbt-launch.jar"
+    URL=https://piccolo.link/sbt-1.3.3.tgz
+    echo "Downloading sbt $SBT_VERSION from $URL"
+    pushd "$bootdir"
+    wget -O "sbt.tgz" "$URL"
+    tar zxf "sbt.tgz"
+    mv sbt "sbt-$SBT_VERSION"
+    #mv sbt/bin/sbt-launcher.jar "$JAR"
+    rm -f "sbt.tgz"
+    popd
+fi
+
+# calling launcher manually is not necessary
+#exec "$JAVA_HOME/bin/java" \
+#    "${JVM_ARGS:-}" \
+#    -d64 \
+#    -noverify \
+#    -Dfile.encoding=UTF8 \
+#    -Dsbt.boot.directory="$HOME/.sbt/boot" \
+#    -Xmx1024M -Xss1M -XX:MaxPermSize=256m \
+#    -XX:+CMSClassUnloadingEnabled \
+#    -jar "$JAR" "$@"
+
+exec "$bootdir/sbt-$SBT_VERSION/bin/sbt" "$@"
