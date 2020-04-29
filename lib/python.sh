@@ -47,9 +47,9 @@ fi
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
 
-if command -v pip >/dev/null 2>&1; then
+#if command -v pip >/dev/null 2>&1; then
     python="$(command -v "$python")"
-fi
+#fi
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -86,14 +86,27 @@ fi
 
 pip="$(command -v "$pip")"
 
+if [[ "$pip" =~ pip3$ ]] &&
+   "$python" -V | grep -q 'Python 2'; then
+#   [ -L "$python" ] &&
+#    python3="$(command -v python3 2>/dev/null || :)"
+#    if [ -n "$python3" ]; then
+#        echo "Symlinking python to python3 to match pip3:"
+#        ln -sfv "$python3" "$python"
+#    fi
+    if command -v python3 &>/dev/null; then
+        python="$(command -v python3)"
+    fi
+fi
+
 set +eo pipefail
 # split steps for easier CI debugging in DEBUG mode
 python_version="$("$python" -V 2>&1)"
 python_version="$(echo "$python_version" | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
-python_major_version="${python_version%%.*}"
+export python_major_version="${python_version%%.*}"
 pip_python_version="$("$pip" -V 2>&1)"
 pip_python_version="$(echo "$pip_python_version" | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
-pip_python_major_version="${pip_python_version%%.*}"
+export pip_python_major_version="${pip_python_version%%.*}"
 set -eo pipefail
 
 if [ -n "${python_version:-}" ] &&
