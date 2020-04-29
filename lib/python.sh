@@ -87,7 +87,7 @@ fi
 pip="$(command -v "$pip")"
 
 if [[ "$pip" =~ pip3$ ]] &&
-   "$python" -V | grep -q 'Python 2'; then
+   "$python" -V 2>&1 | grep -q 'Python 2'; then
 #   [ -L "$python" ] &&
 #    python3="$(command -v python3 2>/dev/null || :)"
 #    if [ -n "$python3" ]; then
