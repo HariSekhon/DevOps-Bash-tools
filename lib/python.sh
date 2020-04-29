@@ -114,6 +114,9 @@ if [ -n "${python_version:-}" ] &&
     if [ "$python_version" != "$pip_python_version" ]; then
         echo "Python major version '$python_version' != Pip Python major version '$pip_python_version' !!"
         echo
+        echo "python = $python"
+        echo "pip    = $pip"
+        echo
         echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
         echo
         echo "Fix your \$PATH or \$PYTHON / \$PIP to be aligned to the same installation"
