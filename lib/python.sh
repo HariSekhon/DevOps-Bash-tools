@@ -112,7 +112,7 @@ set -eo pipefail
 if [ -n "${python_version:-}" ] &&
    [ -n "${pip_python_version:-}" ]; then
     if [ "$python_version" != "$pip_python_version" ]; then
-        echo "Python major version '$python_version' != Pip Python major version '$pip_python_version' !!"
+        echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
         echo
         echo "python = $python"
         echo "pip    = $pip"
