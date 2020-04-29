@@ -74,14 +74,14 @@ install_pip_manually(){
     python get-pip.py
 }
 
-if is_mac; then
-    #if is_semaphore_ci; then
-    #    echo "Semaphore CI detected, installing manually to avoid non-SSL version"
-    #    install_pip_manually
-    if ! command -v "$pip" >/dev/null 2>&1; then
-        echo "pip not installed, trying to install manually..."
-        install_pip_manually
-    fi
+# Needed on Semaphore Mac builds and also Ubuntu 20.04 LTS
+#
+#if is_semaphore_ci; then
+#    echo "Semaphore CI detected, installing manually to avoid non-SSL version"
+#    install_pip_manually
+if ! command -v "$pip" >/dev/null 2>&1; then
+    echo "pip not installed, trying to install manually..."
+    install_pip_manually
 fi
 
 pip="$(command -v "$pip")"
