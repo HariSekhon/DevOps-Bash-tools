@@ -63,7 +63,7 @@ get_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq -r '.[] | select(.fork | not) | select(.private | not) | [.full_name, .stargazers_count. forks] | @tsv' <<< "$output"
+        jq -r '.[] | select(.fork | not) | select(.private | not) | [.full_name, .stargazers_count, .forks] | @tsv' <<< "$output"
         ((page+=1))
     done
 }
