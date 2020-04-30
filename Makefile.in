@@ -133,6 +133,7 @@ export MAKEFILE_USAGE
 #	@echo running default
 #	$(MAKE) build
 
+# won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: default
 default: git
 	@$(MAKE) main
@@ -182,6 +183,7 @@ ci: printenv
 build-retry: git
 	$(BASH_TOOLS)/retry.sh $(MAKE) build
 
+# won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: main
 main: printenv
 	@$(MAKE) build
