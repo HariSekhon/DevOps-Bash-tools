@@ -20,7 +20,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
+set +o pipefail
 filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t' | grep -v /templates/ | sort)"
+set -o pipefail
 
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
