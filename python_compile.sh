@@ -22,7 +22,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 python="${PYTHON:-python}"
 
-filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort)"
+filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | grep -v /templates/ | sort)"
 
 if [ -z "$filelist" ]; then
     echo "no Python / Jython files found to compile"
