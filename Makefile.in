@@ -374,6 +374,7 @@ yum-packages-python:
 		find . -maxdepth 3 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 	. "$(BASH_TOOLS)/lib/python.sh"; \
+	set +o pipefail || : ; \
 	if ! inside_virtualenv; then \
 		for x in rpm-packages-pip.txt; do \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
