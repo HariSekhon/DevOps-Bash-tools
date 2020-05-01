@@ -31,9 +31,11 @@ blocks:
     #  hours: 2
     task:
       env_vars:
-        # to match /usr/local/bin/pip version from $PATH
+        # $PATH selects /usr/bin/python and /usr/local/bin/pip which are mismatched versions of Python
         - name: PYTHON
-          value: python3.8
+          value: python3
+        - name: PIP
+          value: pip3
       prologue:
         commands:
           - cache restore
