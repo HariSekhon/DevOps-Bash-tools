@@ -59,6 +59,8 @@ install:
 #  adding "|| :" to the end of these commands causes them to be silently ignored!
 - sudo sed -i '/https:\/\/packages.microsoft.com\/ubuntu\/.*\/mssql-server/d' /etc/apt/sources.list
 - sudo apt purge -qy --allow-change-held-packages mssql-server
+# this prevents conflicts installing default-jdk - see https://github.com/appveyor/ci/issues/3411
+#- dpkg -l | awk '/openjdk/{print $2}' | DEBIAN_FRONTEND=noninteractive xargs sudo apt-get remove -y --allow-change-held-packages
 - sudo apt update -qq
 - sudo apt install -qy git make
 - make
