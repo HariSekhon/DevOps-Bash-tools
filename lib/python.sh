@@ -97,6 +97,11 @@ if [[ "$pip" =~ pip3$ ]] &&
     if command -v python3 &>/dev/null; then
         python="$(command -v python3)"
     fi
+elif [[ "$python" =~ python3 ]] &&
+    "$pip" -V 2>&1 | grep -qi 'python[ /]2'; then
+    if command -v pip3 &>/dev/null; then
+        pip="$(command -v pip3)"
+    fi
 fi
 
 set +eo pipefail
