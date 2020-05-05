@@ -482,9 +482,11 @@ python-version:
 
 .PHONY: golang-version
 golang-version:
-	which go && \
+	@which go && \
 	ls -l `which go` && \
-	go version || :
+	echo && \
+	go version || : ; \
+	echo
 
 .PHONY: go-version
 go-version: golang-version
