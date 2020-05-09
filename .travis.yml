@@ -20,7 +20,7 @@ os:
   - linux
   - osx
 
-dist: trusty
+#dist: trusty
 
 sudo: false
 
