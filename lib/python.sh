@@ -47,9 +47,9 @@ fi
 # shellcheck disable=SC2034
 python="${PYTHON:-python}"
 
-if command -v pip >/dev/null 2>&1; then
+#if command -v pip >/dev/null 2>&1; then
     python="$(command -v "$python")"
-fi
+#fi
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -74,32 +74,53 @@ install_pip_manually(){
     python get-pip.py
 }
 
-if is_mac; then
-    #if is_semaphore_ci; then
-    #    echo "Semaphore CI detected, installing manually to avoid non-SSL version"
-    #    install_pip_manually
-    if ! command -v "$pip" >/dev/null 2>&1; then
-        echo "pip not installed, trying to install manually..."
-        install_pip_manually
-    fi
+# Needed on Semaphore Mac builds and also Ubuntu 20.04 LTS
+#
+#if is_semaphore_ci; then
+#    echo "Semaphore CI detected, installing manually to avoid non-SSL version"
+#    install_pip_manually
+if ! command -v "$pip" >/dev/null 2>&1; then
+    echo "pip not installed, trying to install manually..."
+    install_pip_manually
 fi
 
 pip="$(command -v "$pip")"
+
+if [[ "$pip" =~ pip3$ ]] &&
+   "$python" -V 2>&1 | grep -q 'Python 2'; then
+#   [ -L "$python" ] &&
+#    python3="$(command -v python3 2>/dev/null || :)"
+#    if [ -n "$python3" ]; then
+#        echo "Symlinking python to python3 to match pip3:"
+#        ln -sfv "$python3" "$python"
+#    fi
+    if command -v python3 &>/dev/null; then
+        python="$(command -v python3)"
+    fi
+elif [[ "$python" =~ python3 ]] &&
+    "$pip" -V 2>&1 | grep -qi 'python[ /]2'; then
+    if command -v pip3 &>/dev/null; then
+        pip="$(command -v pip3)"
+    fi
+fi
 
 set +eo pipefail
 # split steps for easier CI debugging in DEBUG mode
 python_version="$("$python" -V 2>&1)"
 python_version="$(echo "$python_version" | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
-python_major_version="${python_version%%.*}"
+export python_major_version="${python_version%%.*}"
 pip_python_version="$("$pip" -V 2>&1)"
 pip_python_version="$(echo "$pip_python_version" | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
-pip_python_major_version="${pip_python_version%%.*}"
+export pip_python_major_version="${pip_python_version%%.*}"
 set -eo pipefail
 
 if [ -n "${python_version:-}" ] &&
    [ -n "${pip_python_version:-}" ]; then
     if [ "$python_version" != "$pip_python_version" ]; then
-        echo "Python major version '$python_version' != Pip Python major version '$pip_python_version' !!"
+        echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
+        echo
+        echo "python = $python"
+        echo "pip    = $pip"
         echo
         echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
         echo

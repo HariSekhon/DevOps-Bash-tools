@@ -133,6 +133,7 @@ export MAKEFILE_USAGE
 #	@echo running default
 #	$(MAKE) build
 
+# won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: default
 default: git
 	@$(MAKE) main
@@ -182,6 +183,7 @@ ci: printenv
 build-retry: git
 	$(BASH_TOOLS)/retry.sh $(MAKE) build
 
+# won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: main
 main: printenv
 	@$(MAKE) build
@@ -372,6 +374,7 @@ yum-packages-python:
 		find . -maxdepth 3 -path "*/setup/$$x"; \
 	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
 	. "$(BASH_TOOLS)/lib/python.sh"; \
+	set +o pipefail || : ; \
 	if ! inside_virtualenv; then \
 		for x in rpm-packages-pip.txt; do \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
@@ -479,9 +482,11 @@ python-version:
 
 .PHONY: golang-version
 golang-version:
-	which go && \
+	@which go && \
 	ls -l `which go` && \
-	go version || :
+	echo && \
+	go version || : ; \
+	echo
 
 .PHONY: go-version
 go-version: golang-version

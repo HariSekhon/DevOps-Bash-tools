@@ -29,8 +29,10 @@ if ! type -P python &>/dev/null; then
     python3="$(type -P python3 2>/dev/null)"
     set -e
     if [ -n "$python3" ]; then
+        echo "alternatives: setting python -> $python3"
         $sudo alternatives --set python "$python3"
     elif [ -n "$python2" ]; then
+        echo "alternatives: setting python -> $python2"
         $sudo alternatives --set python "$python2"
     fi
 fi

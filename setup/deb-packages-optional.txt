@@ -14,3 +14,10 @@
 # ============================================================================ #
 
 direnv
+
+# Ubuntu 20.04 has Python3, python installs Python2 but python-pip package is no longer available
+python
+python3
+python-pip
+python3-pip
+python-setuptools # needed by 'pip install awscli'
