@@ -58,7 +58,8 @@ alias se=screenrc
 #alias x=xe
 
 # from DevOps-Perl-tools repo which must be in $PATH
-alias new=new.pl
+# done via functions.sh now
+#alias new=new.pl
 
 # not present on Mac
 #type tailf &>/dev/null || alias tailf="tail -f"
