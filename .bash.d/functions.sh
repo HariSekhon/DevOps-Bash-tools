@@ -39,6 +39,16 @@ retmode(){
     fi
 }
 
+new(){
+    if [ $# -eq 2 ]; then
+        title "${2#modules/}"
+    else
+        title "$1"
+    fi
+    command new.pl "$@"
+    title "$LAST_TITLE"
+}
+
 pg(){
     # don't want pgrep, want color coding
     # shellcheck disable=SC2009
