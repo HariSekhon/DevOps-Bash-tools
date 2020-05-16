@@ -48,7 +48,12 @@ fi
 python="${PYTHON:-python}"
 
 #if command -v pip >/dev/null 2>&1; then
-    python="$(command -v "$python")"
+    python="$(command -v "$python" || command -v "python3" || command -v "python2" || :)"
+    # shellcheck disable=SC2181
+    if [ $? != 0 ]; then
+        echo "ERROR: 'command -v $python' failed" >&2
+        exit 1
+    fi
 #fi
 
 if [ -n "${PIP:-}" ]; then
