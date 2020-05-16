@@ -22,8 +22,11 @@ echo
 # executing in sh where type is not available
 #type -P python
 for x in python python2 python3 pip pip2 pip3; do
-    command -v "$x"
-    ls -l "$(command -v $x)"
-    "$x" -V
+    cmdpath="$(command -v "$x" 2>/dev/null)"
+    if [ -n "$cmdpath" ]; then
+        echo "$cmdpath"
+        ls -l "$cmdpath"
+        "$cmdpath" -V
+    fi
     echo
 done
