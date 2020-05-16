@@ -22,6 +22,7 @@ findutils
 git-secrets
 gnu-sed
 golang
+grep  # gnu version better than Mac version
 jq
 jwhois
 openssl
