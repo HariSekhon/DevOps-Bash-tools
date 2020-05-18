@@ -485,6 +485,14 @@ golang-version:
 go-version: golang-version
 	@:
 
+.PHONY: golang-clean
+golang-clean:
+	@$(BASH_TOOLS)/golang_rm_binaries.sh
+
+.PHONY: go-clean
+go-clean: golang-clean
+	@:
+
 # =======================
 # Nice tricks for pure Python projects
 # - borrowed from https://gist.github.com/bsmith89/c6811893c1cbd2a72cc1d144a197bef2#file-makefile
