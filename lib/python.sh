@@ -48,18 +48,29 @@ fi
 python="${PYTHON:-python}"
 
 #if command -v pip >/dev/null 2>&1; then
-    python="$(command -v "$python")"
+    python="$(command -v "$python" || command -v "python3" || command -v "python2" || :)"
+    # shellcheck disable=SC2181
+    if [ $? != 0 ]; then
+        echo "ERROR: 'command -v $python' failed" >&2
+        exit 1
+    fi
 #fi
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
 else
-    pip="$(command -v pip 2>/dev/null)" ||
-    pip="$(command -v pip2 2>/dev/null)" ||
-    pip="$(command -v pip3 2>/dev/null)" || :
+    pip="$(command -v pip 2>/dev/null || :)"
+    pip2="$(command -v pip2 2>/dev/null || :)"
+    pip3="$(command -v pip3 2>/dev/null || :)"
     if [ -z "$pip" ]; then
-        echo "pip not found, falling back to trying just 'pip'" >&2
-        pip=pip
+        if [ -n "$pip3" ]; then
+            pip="$pip3"
+        elif [ -n "$pip2" ]; then
+            pip="$pip2"
+        else
+            echo "pip not found, falling back to trying just 'pip'" >&2
+            pip=pip
+        fi
     fi
 fi
 
@@ -117,15 +128,23 @@ set -eo pipefail
 if [ -n "${python_version:-}" ] &&
    [ -n "${pip_python_version:-}" ]; then
     if [ "$python_version" != "$pip_python_version" ]; then
-        echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
-        echo
-        echo "python = $python"
-        echo "pip    = $pip"
-        echo
-        echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
-        echo
-        echo "Fix your \$PATH or \$PYTHON / \$PIP to be aligned to the same installation"
-        exit 1
+        if [ "${python_version:0:1}" = 3 ] &&
+           [ -n "$pip3" ]; then
+            pip="$pip3"
+        elif [ "${python_version:0:1}" = 2 ] &&
+             [ -n "$pip2" ]; then
+            pip="$pip2"
+        else
+            echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
+            echo
+            echo "python = $python"
+            echo "pip    = $pip"
+            echo
+            echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
+            echo
+            echo "Fix your \$PATH or \$PYTHON / \$PIP to be aligned to the same installation"
+            exit 1
+        fi
     fi
 fi
 
