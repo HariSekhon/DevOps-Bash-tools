@@ -19,7 +19,11 @@ srcdir="$(dirname "$0")"
 
 cd "$srcdir"
 
-sed 's/#.*//; s/:/ /' ../../setup/repolist.txt |
+if [ -n "$*" ]; then
+    echo "$@"
+else
+    sed 's/#.*//; s/:/ /' ../../setup/repolist.txt
+fi |
 grep -v -e bash-tools -e '^[[:space:]]*$' |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
