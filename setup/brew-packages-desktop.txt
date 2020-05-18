@@ -31,6 +31,9 @@
 
 # Cask installed projects are in adjacent file brew-packages-desktop-casks.txt
 
+# Install from formula on GitHub
+https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
+
 # Install HomeBrew Desktop packages - one per line
 #ack
 ansible
