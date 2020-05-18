@@ -19,7 +19,11 @@ srcdir="$(dirname "$0")"
 
 cd "$srcdir"
 
-sed 's/#.*//; s/:/ /' "$srcdir/setup/repolist.txt" |
+if [ -n "$*" ]; then
+    echo "$@"
+else
+    sed 's/#.*//; s/:/ /' "$srcdir/setup/repolist.txt"
+fi |
 grep -v -e bash-tools -e '^[[:space:]]*$' |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
@@ -45,4 +49,4 @@ while read -r repo dir; do
         fi
     done < <(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/ci.txt")
 done
-"$srcdir/.github/workflows/sync_to_adjacent_repos.sh"
+"$srcdir/.github/workflows/sync_to_adjacent_repos.sh" "$@"
