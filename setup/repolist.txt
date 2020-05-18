@@ -38,8 +38,8 @@ lib-java:libj
 DevOps-Golang-tools:go-tools
 DevOps-Perl-tools:perl-tools
 DevOps-Python-tools:pytools
-#spotify
-#spark-apps
+Spotify-tools:spotify
+#Spark-Apps:spark-apps
 
 HAProxy-configs:haproxy-configs
 
