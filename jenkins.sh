@@ -24,9 +24,10 @@ srcdir="$(dirname "$0")"
 
 #NUM_AGENTS=1
 
-host=localhost
-port=8080
-server="http://$host:$port"
+export JENKINS_HOST=localhost
+export JENKINS_PORT=8080
+
+server="http://$JENKINS_HOST:$JENKINS_PORT"
 #api="$server/go/api"
 cli="$srcdir/jenkins_cli.sh"
 
@@ -94,7 +95,7 @@ fi
 if ! "$cli" list-plugins | grep -q .; then
     echo "Restarting Jenkins to pick up plugins:"
     #"$cli" restart
-    #when_ports_down 300 "$host" "$port"
+    #when_ports_down 300 "$JENKINS_HOST" "$JENKINS_PORT"
     docker-compose -f "$config" restart jenkins-server "$@"
 
     when_jenkins_up
