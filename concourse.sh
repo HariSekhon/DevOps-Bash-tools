@@ -25,6 +25,8 @@ srcdir="$(dirname "$0")"
 export CONCOURSE_USER="${CONCOURSE_USER:-test}"
 export CONCOURSE_PASSWORD="${CONCOURSE_PASSWORD:-test}"
 
+export CONCOURSE_PORT=8081
+
 config="$srcdir/setup/concourse-docker-compose.yml"
 
 target="ci"
@@ -57,7 +59,7 @@ fi
 
 export PATH="$PATH:"~/bin
 
-when_url_content 'http://127.0.0.1:8080/' '(?i:concourse)' # Concourse
+when_url_content "http://127.0.0.1:$CONCOURSE_PORT/" '(?i:concourse)' # Concourse
 echo
 
 # which checks for executable which command -v and type -P don't
@@ -68,12 +70,12 @@ if [ "$action" = up ] &&
     mkdir -pv "$dir"
     os="$(uname -s | tr '[:upper:]' '[:lower:]')"
     echo "Downloading fly for OS = $os"
-    wget -cO "$dir/fly" "http://127.0.0.1:8080/api/v1/cli?arch=amd64&platform=$os"
+    wget -cO "$dir/fly" "http://127.0.0.1:$CONCOURSE_PORT/api/v1/cli?arch=amd64&platform=$os"
     chmod +x "$dir/fly"
     echo
 fi
 
-fly -t "$target" login -c http://127.0.0.1:8080 -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
+fly -t "$target" login -c "http://127.0.0.1:$CONCOURSE_PORT" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
 echo "updating pipeline: $pipeline"
