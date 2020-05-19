@@ -144,6 +144,7 @@ hosted_build_regex+='|img\.shields\.io/docker/cloud/build/'
 hosted_build_regex+='|img\.shields\.io/travis/'
 hosted_build_regex+='|img\.shields\.io/shippable/'
 hosted_build_regex+='|app\.buddy\.works/.*/pipelines/pipeline/.*/badge.svg'
+hosted_build_regex+='|\.semaphoreci\.com/badges/'
 
 self_hosted_build_regex='\[\!\[[^]]+\]\(.*\)\]\(.*/blob/master/('
 self_hosted_build_regex+='Jenkinsfile'
