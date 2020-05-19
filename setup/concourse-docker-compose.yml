@@ -33,7 +33,7 @@ services:
     privileged: true
     depends_on: [concourse-db]
     ports:
-      - 8080:8080
+      - ${CONCOURSE_PORT:-8080}:8080
     #volumes:
     #  - .:/pwd
     environment:
