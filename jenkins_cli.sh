@@ -46,7 +46,7 @@ if [ -z "${JENKINS_PASSWORD:-}" ]; then
     JENKINS_PASSWORD="$("$srcdir/jenkins_password.sh" || :)"
 fi
 
-if ! [ -f "$jar" ]; then
+if ! [ -s "$jar" ]; then
     wget -O "$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
 fi
 
