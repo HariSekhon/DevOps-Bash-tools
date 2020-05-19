@@ -32,17 +32,18 @@ Hari Sekhon - DevOps Bash Tools
 official badges without logos to differentiate them
 
 [![Travis CI](https://travis-ci.org/HariSekhon/DevOps-Bash-tools.svg?branch=master)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
+
 this one I don't trust it'll stick around so using shields version instead
 [![Build Status](https://badges.herokuapp.com/travis/HariSekhon/DevOps-Bash-tools?label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
 
-# awkward URLs more nicely replaced with shields.io
+awkward URLs more nicely replaced with shields.io
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![Drone](https://cloud.drone.io/api/badges/HariSekhon/DevOps-Bash-tools/status.svg)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
 
-# shields.io gets throttled after a few reloads :-/ - which is bad because shields latency is high and oftens fails to load some badges which requires you to reload the page a few times until they load, so have gone back to the generic wercker badge
+shields.io gets throttled after a few reloads :-/ - which is bad because shields latency is high and oftens fails to load some badges which requires you to reload the page a few times until they load, so have gone back to the generic wercker badge
 
 [![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker)](https://app.wercker.com/project/byKey/c46a517909343e278c9ce354164394ae)
 -->
