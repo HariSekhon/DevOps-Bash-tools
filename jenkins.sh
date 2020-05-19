@@ -69,7 +69,7 @@ if [ "$action" = down ]; then
 fi
 
 when_jenkins_up(){
-    when_url_content "$server" '(?i:jenkins|hudson)'
+    when_url_content 90 "$server" '(?i:jenkins|hudson)'
     echo
 }
 
