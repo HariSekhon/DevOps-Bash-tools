@@ -128,3 +128,7 @@ while read -r hostname uuid; do
     -d '{ "agent_config_state": "Enabled" }' -sS || :  # don't stop, try enabling all agents
     echo
 done
+
+if is_mac; then
+    open 'http://localhost:8153/go/pipelines#!/'
+fi
