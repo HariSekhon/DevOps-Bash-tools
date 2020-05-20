@@ -444,7 +444,7 @@ gitu(){
         return 3
     fi
     local targets
-    if [ -n "$(git diff "$@")" ]; then
+    if [ -n "$(git diff "$@" 2>/dev/null || :)" ]; then
         targets="$*"
     else
         # follow symlinks to the actual files because diffing symlinks returns no changes
