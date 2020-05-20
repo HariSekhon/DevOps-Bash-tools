@@ -36,9 +36,9 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/spotify-tools</string>
+			<string>HariSekhon/Spotify-tools</string>
 			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/spotify-tools/cc.xml</string>
+            <string>https://api.travis-ci.org/repos/HariSekhon/Spotify-tools/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
@@ -100,22 +100,14 @@
 	<key>ServerHistory</key>
 	<array>
 		<string>http://api.travis-ci.org/repositories/HariSekhon/lib/cc.xml</string>
-		<string>http://api.travis-ci.org/repos/HariSekhon.xml</string>
-		<string>http://api.travis-ci.org/repos/HariSekhon/nagios-plugins/cc.xml</string>
-		<string>http://api.travis-ci.org/repos/HariSekhon/spotify/cc.xml</string>
-		<string>http://api.travis-ci.org/repos/HariSekhon/toolbox/cc.xml</string>
-		<string>http://api.travis-ci.org/repos/HariSekhon/tools/cc.xml</string>
-		<string>http://api.travis-ci.org/repos/HariSekhon/pytools/cc.xml</string>
+		<string>http://api.travis-ci.org/repos/HariSekhon/Spotify-tools/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/lib-java/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/pylib/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml</string>
-		<string>https://api.travis-ci.org/repositories/HariSekhon/bash-tools/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/spotify-tools/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/nagios-plugin-kafka/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
-		<string>https://api.travis-ci.org/repos/HariSekhon/devops-python-tools/cc.xml</string>
-		<string>https://api.travis-ci.org/repos/HariSekhon/devops-perl-tools/cc.xml</string>
-		<string>https://api.travis-ci.org/repositories/HariSekhon/DevOps-Bash-tools/cc.xml</string>
+		<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Bash-tools/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugin-Kafka/cc.xml</string>
 		<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Python-tools/cc.xml</string>
