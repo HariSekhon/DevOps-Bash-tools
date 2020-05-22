@@ -19,7 +19,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 config="$srcdir/setup/jenkins-docker-compose.yml"
 
-if [ -z "${JENKINS_PASSWORD:-}" ]; then
+if [ -n "${JENKINS_PASSWORD:-}" ]; then
+    echo "using \$JENKINS_PASSWORD from environment" >&2
+else
     # </dev/null stops this swallowing stdin which we need for jenkins_cli.sh create-job
     JENKINS_PASSWORD="$(docker-compose -f "$config" exec -T jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword </dev/null)"
 fi
