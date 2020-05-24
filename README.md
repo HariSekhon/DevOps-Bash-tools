@@ -11,8 +11,9 @@ Hari Sekhon - DevOps Bash Tools
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
 [![Lines of Code](https://img.shields.io/badge/lines%20of%20code-34k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
-<!--[
-# doesn't detect shell code properly
+<!--
+BitBucket exposes HTML comments - open issue - works properly on GitHub/GitLab
+doesn't detect shell code properly
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 -->
 
