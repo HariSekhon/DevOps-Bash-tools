@@ -26,9 +26,16 @@ if is_CI; then
     docker_compose_quiet="--quiet"
 fi
 
+is_docker_installed(){
+    if type -P docker &>/dev/null; then
+        return 0
+    fi
+    return 1
+}
+
 is_docker_available(){
     #[ -n "${TRAVIS:-}" ] && return 0
-    if type -P docker &>/dev/null; then
+    if is_docker_installed; then
         if docker info &>/dev/null; then
             return 0
         fi
@@ -47,8 +54,12 @@ is_docker_compose_available(){
 }
 
 check_docker_available(){
-    if ! is_docker_available; then
+    if ! is_docker_installed; then
         echo 'WARNING: Docker not found, skipping checks!!!'
+        exit 0
+    fi
+    if ! is_docker_available; then
+        echo 'WARNING: Docker not available, skipping checks!!!'
         exit 0
     fi
     if ! is_docker_compose_available; then
