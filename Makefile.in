@@ -146,6 +146,7 @@ printenv: git
 	@ # printf "Git hashref: "; git log --pretty=format:'%H' -n 1
 	@ # printf "Git branch:  "; git branch --show-current # doesn't work on Alpine
 	@ # printf "Git branch:  "; git show-branch --current # prints too many branches
+	@ # sort --ignore-case switch not available on Alpine, must use sort -f which is available on both Mac and all Linux distros
 	@ . $(BASH_TOOLS)/lib/ci.sh || : ; \
 		if is_CI || test -f /.dockerenv; then \
 			echo; \
@@ -160,7 +161,7 @@ printenv: git
 			echo "OS RELEASE:"; echo; uname -a || : ; echo; cat /etc/*release || : ; echo; \
 			echo; \
 			unset MAKEFILE_USAGE; unset MAKEFILE_USAGE_COMMON; unset TERMCAP; \
-			echo "CI ENVIRONMENT:"; echo; env | sort --ignore-case ; echo;  \
+			echo "CI ENVIRONMENT:"; echo; env | sort -f ; echo;  \
 			echo; \
 			echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
 			echo; \
