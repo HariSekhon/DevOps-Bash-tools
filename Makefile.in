@@ -135,7 +135,7 @@ export MAKEFILE_USAGE
 
 # won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: default
-default: git
+default: git printenv
 	@$(MAKE) main
 
 .PHONY: printenv
