@@ -163,6 +163,7 @@ printenv: git
 			unset MAKEFILE_USAGE; unset MAKEFILE_USAGE_COMMON; unset TERMCAP; \
 			echo "CI ENVIRONMENT:"; echo; env | sort -f ; echo;  \
 			echo; \
+			if which java 2>/dev/null; then which java; java -version; echo; fi; \
 			echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
 			echo; \
 		else \
