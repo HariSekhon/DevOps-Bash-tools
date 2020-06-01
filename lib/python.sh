@@ -122,7 +122,13 @@ elif [[ "$python" =~ python3 ]] &&
     fi
 fi
 
+recursion_depth=0
 check_python_pip_versions_match(){
+    ((recursion_depth+=1))
+    if [ $recursion_depth -gt 5 ]; then
+        echo "recurring too deep in $srcdir_bash_tools_python/python.sh"
+        exit 1
+    fi
     set +eo pipefail
     # split steps for easier CI debugging in DEBUG mode
     python_version="$("$python" -V 2>&1)"
