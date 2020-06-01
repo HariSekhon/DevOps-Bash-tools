@@ -256,6 +256,9 @@ else
 fi
 alias pmd='$pmd'
 
+# from DevOps Perl tools repo - like uniq but doesn't require pre-sorting keeps the original ordering
+alias uniq2=uniq_order_preserved.pl
+
 # for piping from grep
 alias uniqfiles="sed 's/:.*//;/^[[:space:]]*$/d' | sort -u"
 
