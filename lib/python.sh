@@ -44,17 +44,24 @@ if false; then
     fi
 fi
 
-# shellcheck disable=SC2034
-python="${PYTHON:-python}"
-
-#if command -v pip >/dev/null 2>&1; then
-    python="$(command -v "$python" || command -v "python3" || command -v "python2" || :)"
-    # shellcheck disable=SC2181
-    if [ $? != 0 ]; then
-        echo "ERROR: 'command -v $python' failed" >&2
-        exit 1
+if [ -n "${PYTHON:-}" ]; then
+    python="$PYTHON"
+else
+    #python="$(command -v "$python" || command -v "python3" || command -v "python2" || :)"
+    python="$(command -v python 2>/dev/null || :)"
+    python2="$(command -v python2 2>/dev/null || :)"
+    python3="$(command -v python3 2>/dev/null || :)"
+    if [ -z "$python" ]; then
+        if [ -n "$python3" ]; then
+            python="$python3"
+        elif [ -n "$python2" ]; then
+            python="$python2"
+        else
+            echo "ERROR: 'command -v python' failed to find python" >&2
+            exit 1
+        fi
     fi
-#fi
+fi
 
 if [ -n "${PIP:-}" ]; then
     pip="$PIP"
@@ -125,30 +132,40 @@ pip_python_version="$(echo "$pip_python_version" | grep -Eom1 '\(python [[:digit
 export pip_python_major_version="${pip_python_version%%.*}"
 set -eo pipefail
 
-if [ -n "${python_version:-}" ] &&
-   [ -n "${pip_python_version:-}" ]; then
-    if [ "$python_version" != "$pip_python_version" ]; then
-        if [ "${python_version:0:1}" = 3 ] &&
-           [ -n "$pip3" ]; then
-            pip="$pip3"
-        elif [ "${python_version:0:1}" = 2 ] &&
-             [ -n "$pip2" ]; then
-            pip="$pip2"
-        else
-            echo
-            echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
-            echo
-            echo "python = $python"
-            echo "pip    = $pip"
-            echo
-            echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
-            echo
-            echo "Fix your \$PATH or \$PYTHON / \$PIP to be aligned to the same installation"
-            echo
-            exit 1
+check_python_pip_versions_match(){
+    if [ -n "${python_version:-}" ] &&
+       [ -n "${pip_python_version:-}" ]; then
+        if [ "$python_version" != "$pip_python_version" ]; then
+            if [ "${python_version:0:1}" = 3 ] &&
+               [ -n "$pip3" ]; then
+                pip="$pip3"
+                check_python_pip_versions_match
+            elif [ "${python_version:0:1}" = 2 ] &&
+                 [ -n "$pip2" ]; then
+                pip="$pip2"
+                check_python_pip_versions_match
+            elif [ "${python_version:0:1}" = 2 ] &&
+                 [ -n "$python3" ]; then
+                python="$python3"
+                check_python_pip_versions_match
+            else
+                echo
+                echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
+                echo
+                echo "python = $python"
+                echo "pip    = $pip"
+                echo
+                echo "Python PyPI modules will not be installed to the correct site-packages and will lead to import failures later on"
+                echo
+                echo "Fix your \$PATH or \$PYTHON / \$PIP to be aligned to the same installation"
+                echo
+                exit 1
+            fi
         fi
     fi
-fi
+}
+
+check_python_pip_versions_match
 
 inside_virtualenv(){
     if [ -n "${VIRTUAL_ENV:-}" ] ||

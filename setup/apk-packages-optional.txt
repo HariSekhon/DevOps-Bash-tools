@@ -13,29 +13,17 @@
 #                          Alpine Package Requirements
 # ============================================================================ #
 
-bash
-bc
-coreutils
-curl
-gcc
-git
-go
-grep
-jq
-make
-parallel
-perl
-perl-app-cpanminus
-ruby-dev # to build Travis CI gem
-wget
-which
-zip
-unzip
+# Packages that don't error if failing to install
 
-# causes errors now so moved to apk-packages-optional.txt to allow failures
+# Python is a mess and breaks with this on latest Alpine 3, so do as best effort
 #
 #   python (missing):
 # ERROR: unsatisfiable constraints:
 #     required by: world[python]
-#python
-#py-pip
+
+python
+python2
+python3
+py-pip
+py2-pip
+py3-pip
