@@ -8,6 +8,7 @@
 anaconda
 atom
 ccmenu
+codeship/taps/jet
 docker
 #iterm2
 firefox-developer-edition
