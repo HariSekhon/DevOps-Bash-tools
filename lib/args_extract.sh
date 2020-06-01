@@ -16,5 +16,14 @@
 # helper script for calling from vim function to run programs with args extraction
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
 
-sed -n '/^[[:space:]]*#[[:space:]]*args:/ s/^[[:space:]]*#[[:space:]]*args:[[:space:]]// p' "$@"
+# sed is horribly non-portable between Linux and Mac - must use gsed or perl
+if [ "$(uname -s)" = Darwin ]; then
+    # requires coreutils to be installed
+    sed(){ gsed "$@"; }
+fi
+
+# #  args: <output this bit>
+# // args: <output this bit>
+sed -n '/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:/ s/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:[[:space:]]// p' "$@"
