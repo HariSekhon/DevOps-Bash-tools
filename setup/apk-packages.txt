@@ -26,10 +26,16 @@ make
 parallel
 perl
 perl-app-cpanminus
-python
-py-pip
 ruby-dev # to build Travis CI gem
 wget
 which
 zip
 unzip
+
+# causes errors now so moved to apk-packages-optional.txt to allow failures
+#
+#   python (missing):
+# ERROR: unsatisfiable constraints:
+#   required by: world[python]
+#python
+#py-pip
