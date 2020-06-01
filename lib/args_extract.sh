@@ -19,11 +19,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 # sed is horribly non-portable between Linux and Mac - must use gsed or perl
-if [ "$(uname -s)" = Darwin ]; then
-    # requires coreutils to be installed
-    sed(){ gsed "$@"; }
-fi
+#if [ "$(uname -s)" = Darwin ]; then
+#    # requires coreutils to be installed
+#    sed(){ gsed "$@"; }
+#fi
 
 # #  args: <output this bit>
 # // args: <output this bit>
-sed -n '/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:/ s/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:[[:space:]]// p' "$@"
+#sed -n '/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:/ s/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:[[:space:]]// p' "$@"
+# or
+perl -ne 'if(/^\s*(#|\/\/)\s*args:/){s/^\s*(#|\/\/)\s*args:\s*//; print $_; exit}' "$@"
