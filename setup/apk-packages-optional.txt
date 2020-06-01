@@ -1,0 +1,29 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2019-03-16 20:35:14 +0000 (Sat, 16 Mar 2019)
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying LICENSE file
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                          Alpine Package Requirements
+# ============================================================================ #
+
+# Packages that don't error if failing to install
+
+# Python is a mess and breaks with this on latest Alpine 3, so do as best effort
+#
+#   python (missing):
+# ERROR: unsatisfiable constraints:
+#     required by: world[python]
+
+python
+python2
+python3
+py-pip
+py2-pip
+py3-pip
