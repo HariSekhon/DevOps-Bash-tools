@@ -71,6 +71,7 @@ pipeline {
 //                           apt install -qy make
 //                           make init
 //                       """
+                        sh 'git submodule update --init'
                         sh 'find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh'
                         sh 'make init'
                     }
