@@ -53,7 +53,7 @@ jobs:
             - -c
             - |
               cd code &&
-              git submodule update --init &&
-              find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh &&
+              apt update -q &&
+              apt install -qy git make &&
               make init &&
               make ci test
