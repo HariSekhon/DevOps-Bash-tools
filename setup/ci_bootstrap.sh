@@ -30,7 +30,7 @@ retry(){
     while true; do
         # no let or bare (()) in posix sh, must discard output rather than execute it
         _=$((count+=1))
-        printf "try %d: " "$count"
+        printf "%s  try %d:  " "$(date '+%F %T')" "$count"
         echo "$*"
         "$@" &&
         break;
