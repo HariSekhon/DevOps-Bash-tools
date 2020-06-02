@@ -131,7 +131,20 @@ dockerrmall(){
 
 dockerrmigrep(){
     for x in "$@"; do
-        docker images | grep "$x" | grep -v "<none>" | awk '{print $1":"$2}' | xargs docker rmi
+        docker images |
+        grep "$x" |
+        grep -v "<none>" |
+        awk '{print $1":"$2}' |
+        xargs -r docker rmi
+    done
+}
+
+dockerrmgrep(){
+    for x in "$@"; do
+        docker ps -a |
+        grep "$x" |
+        awk '{print $NF}' |
+        xargs -r docker rm -f
     done
 }
 
