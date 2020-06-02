@@ -40,6 +40,7 @@ pool:
 steps:
 - script: sudo docker run -v "$PWD":/pwd ubuntu:18.04 /bin/bash -c "set -ex &&
     cd /pwd &&
+    git submodule update --init
     find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh &&
     make init &&
     make ci test"
