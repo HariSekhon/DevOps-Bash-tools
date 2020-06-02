@@ -21,7 +21,7 @@ build:
   steps:
     - script:
         name: ci bootstrap
-        code: find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
+        code: git submodule update --init && find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
     - script:
         name: init
         code: make init
