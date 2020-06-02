@@ -23,8 +23,7 @@ steps:
 #  environment:
 #    DEBUG: 1
   commands:
-  - apt update -qq
-  - apt install -qy git make
+  - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
   - make init
   - make ci
   - make test
