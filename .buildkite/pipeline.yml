@@ -21,6 +21,7 @@
 
 steps:
   - command: |
+        git submodule update --init &&
         find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
 #        type make 2>/dev/null ||
 #        if type apk 2>/dev/null; then
