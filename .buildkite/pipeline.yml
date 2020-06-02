@@ -21,22 +21,20 @@
 
 steps:
   - command: |
-        git submodule update --init &&
-        find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
-#        type make 2>/dev/null ||
-#        if type apk 2>/dev/null; then
-#            apk add --no-cache --no-progress make
-#        # apt is /usr/bin/apt
-#        # Unable to locate an executable at "/Users/hari/.sdkman/candidates/java/current/bin/apt" (-1)
-#        elif type apt-get 2>/dev/null; then
-#            apt-get update -q &&
-#            apt-get install -qy make
-#        elif type yum 2>/dev/null; then
-#            rpm -q make || yum install -y make
-#        elif type brew 2>/dev/null; then
-#            brew install make
-#        fi
-    label: ci bootstrap
+        type make 2>/dev/null ||
+        if type apk 2>/dev/null; then
+            apk add --no-cache --no-progress make
+        # apt is /usr/bin/apt
+        # Unable to locate an executable at "/Users/hari/.sdkman/candidates/java/current/bin/apt" (-1)
+        elif type apt-get 2>/dev/null; then
+            apt-get update -q &&
+            apt-get install -qy make
+        elif type yum 2>/dev/null; then
+            rpm -q make || yum install -y make
+        elif type brew 2>/dev/null; then
+            brew install make
+        fi
+    label: install make
     timeout: 20  # brew can take 10 mins just to do a brew update
   - wait
   - command: make init
