@@ -33,8 +33,7 @@
     #  - apt update
     #  - apt install -qy git make
     execute_commands:
-      - apt update
-      - apt install -qy git make
+      - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
       - make init
       - make ci test
     volume_mappings:
