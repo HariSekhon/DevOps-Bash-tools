@@ -19,6 +19,7 @@ image: ubuntu:18.04
 
 job:
   before_script:
+    - git submodule update --init
     - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
   script:
     - make init && make ci test
