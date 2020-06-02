@@ -19,7 +19,6 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
 
 max_tries=10
 interval=60 # secs
@@ -52,8 +51,11 @@ retry(){
 
 if [ "$(uname -s)" = Darwin ]; then
     echo "Bootstrapping Mac"
-    retry "$srcdir/install_homebrew.sh"
-    retry $sudo brew update
+    # removing adjacent dependency to be able to curl from github to avoid submodule circular dependency (git / submodule / install git & make)
+    #retry "$srcdir/install_homebrew.sh"
+    if command -v brew 2>&1; then
+        retry $sudo brew update
+    fi
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
     if type -P apk >/dev/null 2>&1; then
