@@ -19,6 +19,8 @@
 #
 # https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html
 #
+# GNU sql may also be of interest
+#
 # Tested on MySQL 8.0.15
 
 set -euo pipefail
