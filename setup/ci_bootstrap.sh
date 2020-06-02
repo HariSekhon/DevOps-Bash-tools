@@ -21,6 +21,7 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+max_tries=10
 interval=60 # secs
 
 retry(){
@@ -33,8 +34,9 @@ retry(){
         echo "$*"
         "$@" &&
         break;
-        if [ $count -ge 10 ]; then
-            echo "$count tries failing, giving up"
+        if [ $count -ge $max_tries ]; then
+            echo
+            echo "$count tries failed, aborting..."
             exit 1
         fi
         echo "sleeping for $interval secs before retrying"
