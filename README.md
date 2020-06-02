@@ -446,6 +446,8 @@ make python
     make gcp                    installs GCloud SDK
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
                                 (future boots then auto-install system packages via .customize_environment hook)
+
+Now exiting usage help with status code 3 to explicitly prevent silent build failures from stray 'help' arguments
 make: *** [help] Error 3
 ```
 
