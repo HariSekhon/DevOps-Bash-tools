@@ -23,8 +23,8 @@ steps:
 #  environment:
 #    DEBUG: 1
   commands:
-  - git submodule update --init
-  - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
+  - apt update -qq
+  - apt install -qy git make
   - make init
   - make ci
   - make test
