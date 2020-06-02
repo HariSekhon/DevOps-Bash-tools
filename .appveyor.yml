@@ -61,11 +61,8 @@ install:
 - sudo apt purge -qy --allow-change-held-packages mssql-server
 # this prevents conflicts installing default-jdk - see https://github.com/appveyor/ci/issues/3411
 #- dpkg -l | awk '/openjdk/{print $2}' | DEBIAN_FRONTEND=noninteractive xargs sudo apt-get remove -y --allow-change-held-packages
-#- for x in `seq 10`; do sudo apt update -qq && break; sleep 60; done
-#- for x in `sed 10`; do sudo apt install -qy git make && break; sleep 60; done
-# works in this repo or in repos containing this repo as a submodule
-- git submodule update --init
-- find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
+- for x in `seq 10`; do sudo apt update -qq && break; sleep 60; done
+- for x in `sed 10`; do sudo apt install -qy git make && break; sleep 60; done
 - make
 
 test_script:
