@@ -23,7 +23,4 @@ pipelines:
   default:
     - step:
         script:
-          - git submodule update --init
-          - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
-          - make init
-          - make ci test
+          - apt update -qq && apt install -qy git make && make init && make ci test
