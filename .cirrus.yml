@@ -13,8 +13,17 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://cirrus-ci.org/guide/writing-tasks/
+
 container:
   image: ubuntu:18.04
 
 task:
-  script: apt update -qq && apt install -qy git make && make init && make ci test
+  ci_bootstrap_script:
+    - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
+  make_init_script:
+    - make init
+  make_ci_script:
+    - make ci
+  make_test_script:
+    - make test
