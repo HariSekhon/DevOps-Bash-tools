@@ -19,6 +19,8 @@
 #
 # https://www.postgresql.org/docs/9.0/libpq-envars.html
 #
+# GNU sql may also be of interest
+#
 # Tested on AWS RDS PostgreSQL 9.5.15
 
 set -euo pipefail
