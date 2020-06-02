@@ -53,6 +53,7 @@ rm_if_binary(){
 
 # Finds and removes 'foo' binary for 'foo.go' adjacent compiled programs
 find "$basedir" -type f -name '*.go' |
+grep -Eve '/src/github\.com/' -e '/src/golang\.org/' |
 while read -r filename; do
     filename="${filename%.go}"
     rm_if_binary "$filename"
