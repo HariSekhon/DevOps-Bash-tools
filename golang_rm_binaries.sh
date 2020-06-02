@@ -46,6 +46,7 @@ rm_if_binary(){
     # can't use -l because it gives (standard input) instead of filename,
     # must get the filename from the file --mime output instead
     grep 'charset=binary' |
+    grep -v '[[:space:]]inode/directory;[[:space:]]' |
     sed 's/:.*//' |
     xargs rm -fv
 }
