@@ -44,6 +44,7 @@ blocks:
         - name: build
           commands:
             - checkout
+            - git submodule update --init
             - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
             - make init
             - make ci
