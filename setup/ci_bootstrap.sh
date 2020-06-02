@@ -39,13 +39,14 @@ retry(){
         echo "$*"
         "$@" &&
         break;
+        echo
         if [ $count -ge $max_tries ]; then
-            echo
             echo "$count tries failed, aborting..."
             exit 1
         fi
         echo "sleeping for $interval secs before retrying"
         sleep "$interval"
+        echo
     done
 }
 
