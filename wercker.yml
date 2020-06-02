@@ -20,8 +20,8 @@ box: debian
 build:
   steps:
     - script:
-        name: ci bootstrap
-        code: git submodule update --init && find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
+        name: install git & make
+        code: apt-get update -qq && apt-get install -qy git make
     - script:
         name: init
         code: make init
