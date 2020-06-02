@@ -34,6 +34,7 @@ jobs:
       - run: sudo sysctl net.ipv4.ip_forward=1
       - run: sudo service docker restart
       - checkout
+      - run: find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
       - run: make init
       - run: make
       - run: make test
