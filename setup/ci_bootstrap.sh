@@ -52,13 +52,13 @@ elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
     if type -P apk >/dev/null 2>&1; then
         retry apk update
-        retry apk add add bash git make
+        retry apk add add --no-progress bash git make
     elif type apt-get >/dev/null 2>&1; then
         retry apt-get update -qq
         retry apt-get install -qy git make
     elif type yum >/dev/null 2>&1; then
         #retry yum makecache
-        retry yum install -y git make
+        retry yum install -qy git make
     else
         echo "Package Manager not found on Linux, cannot bootstrap"
         exit 1
@@ -67,3 +67,9 @@ else
     echo "Only Mac & Linux are supported for conveniently bootstrapping all install scripts at this time"
     exit 1
 fi
+
+#retry make init
+
+# not calling make because in some CI systems we call 'make ci' which includes retries but in others with more restrictive build minutes we only run 'make' for a single shot build
+#
+#make
