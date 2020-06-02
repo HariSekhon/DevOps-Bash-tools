@@ -58,7 +58,7 @@ elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
     if type -P apk >/dev/null 2>&1; then
         retry $sudo apk update
-        retry $sudo apk add add --no-progress bash git make
+        retry $sudo apk add --no-progress bash git make
     elif type apt-get >/dev/null 2>&1; then
         retry $sudo apt-get update -q
         retry $sudo apt-get install -qy git make
