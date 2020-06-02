@@ -24,6 +24,11 @@ srcdir="$(dirname "$0")"
 max_tries=10
 interval=60 # secs
 
+sudo=""
+# EUID undefined in posix sh
+#[ $EUID = 0 ] || sudo=sudo
+[ "$(whoami)" = root ] || sudo=sudo
+
 retry(){
     # no local in posix sh
     count=0
@@ -47,18 +52,18 @@ retry(){
 if [ "$(uname -s)" = Darwin ]; then
     echo "Bootstrapping Mac"
     retry "$srcdir/install_homebrew.sh"
-    retry brew update
+    retry $sudo brew update
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
     if type -P apk >/dev/null 2>&1; then
-        retry apk update
-        retry apk add add --no-progress bash git make
+        retry $sudo apk update
+        retry $sudo apk add add --no-progress bash git make
     elif type apt-get >/dev/null 2>&1; then
-        retry apt-get update -qq
-        retry apt-get install -qy git make
+        retry $sudo apt-get update -q
+        retry $sudo apt-get install -qy git make
     elif type yum >/dev/null 2>&1; then
-        #retry yum makecache
-        retry yum install -qy git make
+        #retry $sudo yum makecache
+        retry $sudo yum install -qy git make
     else
         echo "Package Manager not found on Linux, cannot bootstrap"
         exit 1
