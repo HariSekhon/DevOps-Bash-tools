@@ -33,6 +33,7 @@ build:
     - rm -fv /etc/apt/sources.list.d/cassandra.sources.list*
     - rm -fv /etc/apt/sources.list.d/yarn.list*
     #- shippable_retry make
+    - git submodule update --init
     - find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
     - make init
     - make ci
