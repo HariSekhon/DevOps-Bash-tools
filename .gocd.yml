@@ -38,33 +38,24 @@ pipelines:
           type: success
           allow_only_on_success: false
         jobs:
-#          apt-update:
-#            timeout: 10
-#            tasks:
-#            - exec:
-#                command: apt
-#                arguments:
-#                  - update
-#                run_if: passed
-#          install-make:
-#            timeout: 10
-#            tasks:
-#            - exec:
-#                command: apt
-#                arguments:
-#                  - install
-#                  - -qy
-#                  - git
-#                  - make
-#                run_if: passed
-          ci-bootstrap:
-            timeout: 20
+          apt-update:
+            timeout: 10
             tasks:
             - exec:
-                command: sh
+                command: apt
                 arguments:
-                  - -c
-                  - git submodule update --init && find . -maxdepth 3 -name ci_bootstrap.sh | head -n 1 | xargs sh
+                  - update
+                run_if: passed
+          install-make:
+            timeout: 10
+            tasks:
+            - exec:
+                command: apt
+                arguments:
+                  - install
+                  - -qy
+                  - git
+                  - make
                 run_if: passed
           init:
             timeout: 10
