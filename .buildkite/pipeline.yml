@@ -36,7 +36,7 @@ steps:
 #            brew install make
 #        fi
     label: ci bootstrap
-    timeout: 60  # brew can take 10 mins just to do a brew update
+    timeout: 20  # brew can take 10 mins just to do a brew update
   - wait
   - command: make init
     label: init
