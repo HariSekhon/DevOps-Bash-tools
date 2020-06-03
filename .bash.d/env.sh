@@ -27,7 +27,8 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # similar to what zsh does by default
 if [ -f ~/.bashenv ]; then
-    source ~/.bashenv
+    # shellcheck disable=SC1090
+    . ~/.bashenv
 fi
 
 #export DISPLAY=:0.0
@@ -103,6 +104,7 @@ var(){
 }
 vars(){
     "$EDITOR" "$varfile"
+    # shellcheck disable=SC1090
     . "$varfile"
 }
 
