@@ -39,5 +39,5 @@ while read -r db schema table; do
        ! [[ "$db.$schema.$table" =~ $FILTER ]]; then
         continue
     fi
-    printf "%s\t%s\t%s\n" "$db" "$schema" "$table"
+    printf '%s\t%s\t%s\n' "$db" "$schema" "$table"
 done
