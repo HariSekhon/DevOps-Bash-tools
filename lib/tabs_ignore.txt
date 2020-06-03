@@ -1,6 +1,7 @@
 # Posix Regex
 # used on top of whitespace_ignore.txt
 Makefile
+.*\.go$
 .*\.json$
 .*\.log$
 .*\.xml$
