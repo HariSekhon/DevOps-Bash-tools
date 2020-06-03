@@ -224,7 +224,7 @@ dockerpull1r(){
     while true; do
         dockerpull1 "$@"
         wait
-        echo -e "\n\nsleeping for 1 hour\n\n"
+        echo -e '\n\nsleeping for 1 hour\n\n'
         sleep 3600
     done
 }
@@ -233,7 +233,7 @@ dockerpullr(){
     while true; do
         dockerpull "$@"
         wait
-        echo -e "\n\nsleeping for 1 hour\n\n"
+        echo -e '\n\nsleeping for 1 hour\n\n'
         sleep 3600
     done
 }
