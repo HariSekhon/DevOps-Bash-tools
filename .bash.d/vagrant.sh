@@ -127,8 +127,8 @@ vupssh(){
     [ -n "$1" ] || return 1
     local status
     status="$(vst "$1")"
-    if grep -q "^$1[[:space:]]" <<< "$status"; then
-        grep -q "^$1[[:space:]]\+running" <<< "$status" || vup "$1"
+    if grep -Eq "^$1[[:space:]]" <<< "$status"; then
+        grep -Eq "^$1[[:space:]]+running" <<< "$status" || vup "$1"
     else
         echo "VM not found: $1"
         return 1
