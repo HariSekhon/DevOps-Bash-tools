@@ -37,6 +37,6 @@ fi |
 while read -r line; do
     ((count+=1))
     perl -e "if($count % $LINES_PER_DOT == 0){print STDERR '.'}"
-    printf "%s\n" "$line"
+    printf '%s\n' "$line"
 done
 echo >&2
