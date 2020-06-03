@@ -77,7 +77,7 @@ tping(){
                           -e "transmitted" \
                           -e "rtt min/avg/max/mdev" \
                           -e "bytes of data" \
-                          -e "^\s*$" \
+                          -e "^[[:space:]]*$" \
                           -e "^PING " \
                           -e "round-trip"
                  )"
