@@ -3,7 +3,7 @@ set -e
 
 # Download latest awless binary from Github
 
-ARCH_UNAME=`uname -m`
+ARCH_UNAME="$(uname -m)"
 if [[ "$ARCH_UNAME" == "x86_64" ]]; then
 	ARCH="amd64"
 else
@@ -26,7 +26,7 @@ fi
 
 # broken SSL cert as documented here - https://github.com/wallix/awless/issues/278
 #LATEST_VERSION=`curl -fs https://updates.awless.io | grep -oE "v[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}"`
-LATEST_VERSION=`curl -s https://api.github.com/repos/wallix/awless/releases/latest | awk '/"tag_name":/ {print $2}' | sed 's/[",]//g'`
+LATEST_VERSION="$(curl -s https://api.github.com/repos/wallix/awless/releases/latest | awk '/"tag_name":/ {print $2}' | sed 's/[",]//g')"
 
 FILENAME=awless-$OS-$ARCH.$EXT
 
@@ -34,7 +34,7 @@ DOWNLOAD_URL="https://github.com/wallix/awless/releases/download/$LATEST_VERSION
 
 echo "Downloading awless from $DOWNLOAD_URL"
 
-if ! curl --fail -o $FILENAME -L $DOWNLOAD_URL; then
+if ! curl --fail -o "$FILENAME" -L "$DOWNLOAD_URL"; then
     exit
 fi
 
@@ -42,7 +42,7 @@ echo ""
 echo "extracting $FILENAME to ./awless"
 
 if [[ "$OS" == "windows" ]]; then
-	echo 'y' | unzip $FILENAME 2>&1 > /dev/null
+	echo 'y' | unzip $FILENAME > /dev/null
 else
 	tar -xzf $FILENAME
 fi
