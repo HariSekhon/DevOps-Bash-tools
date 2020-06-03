@@ -371,6 +371,9 @@ rpms/
 shm/
 siege.log
 Sites
+# golang libraries
+src/github.com
+src/golang.org
 subversion/
 svnroot/
 testing/
