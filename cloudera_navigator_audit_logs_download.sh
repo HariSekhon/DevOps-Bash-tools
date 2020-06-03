@@ -64,7 +64,7 @@ download_audit_logs(){
     if validate_log "$log"; then
         tstamp "Skipping previously completed log $log..."
         echo >&2
-        continue
+        return
     else
         tstamp "Querying Cloudera Navigator for $year logs for $service"
         month="${month#0}"  # because maths ops + 1 won't work on zero prefixed string, so re-add it later
@@ -91,7 +91,7 @@ download_audit_logs(){
         tstamp "$log = $log_bytes bytes"
         if [ "$log_bytes" = 0 ]; then
             tstamp "ERROR: Navigator returned zero byte audit log for $log, not even containing the headers row!"
-            continue
+            return
         fi
         #}
     fi
