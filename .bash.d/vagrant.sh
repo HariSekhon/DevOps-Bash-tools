@@ -75,7 +75,7 @@ vagrant_gen_etc_hosts(){
         host_record="$ip $host.local $host"
         # sudo auto-defined in .bashrc
         # shellcheck disable=SC2154
-        $sudo perl -pi -e "s/^$ip\s+.*/$host_record/" /etc/hosts
+        $sudo perl -pi -e "s/^$ip\\s+.*/$host_record/" /etc/hosts
         if [ -n "$ip" ]; then
             grep -q "^$host_record" /etc/hosts ||
             $sudo sh -c "echo '$host_record' >> /etc/hosts"
