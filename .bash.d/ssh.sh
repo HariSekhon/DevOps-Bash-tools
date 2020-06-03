@@ -49,7 +49,7 @@ ssh_func(){
             case ${!n} in
                 -*) :
                     ;;
-                 *) grep -q "^[0-9]\+$" <<< "${!n}" || break
+                 *) grep -Eq "^[0-9]+$" <<< "${!n}" || break
                     ;;
             esac
             ((n+=1))
