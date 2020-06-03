@@ -40,5 +40,5 @@ while read -r db; do
        ! [[ "$db" =~ ${FILTER%%.*} ]]; then
         continue
     fi
-    printf "%s\n" "$db"
+    printf '%s\n' "$db"
 done
