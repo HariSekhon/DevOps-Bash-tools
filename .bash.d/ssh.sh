@@ -107,7 +107,7 @@ check_sshkey(){
         while read -r host id known_key; do
             scanned_key="$(ssh-keyscan "$host" | awk "/^$host $id / {print \$3}")"
             if [ "$scanned_key" != "$known_key" ]; then
-                echo -e "\nMISMATCH: $host\nknown key: $known_key\nscanned_key:$scanned_key\n\n"
+                echo -e "\\nMISMATCH: $host\\nknown key: $known_key\\nscanned_key:$scanned_key\\n\\n"
             fi
         done
     done
