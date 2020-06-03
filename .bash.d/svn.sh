@@ -241,6 +241,6 @@ alias svndiffcum="svndiffcumulative"
 svncommmitcount(){
     svn up
     svn log -r 25470:HEAD |
-    grep "^r[[:digit:]]\+ |" |
+    grep -E "^r[[:digit:]]+ |" |
     wc
 }
