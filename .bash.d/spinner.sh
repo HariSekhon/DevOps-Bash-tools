@@ -23,7 +23,7 @@ spinner(){
     local num=1000
     #local delay=${3:-0.00001}
     local delay=0.00001
-    spin="-\|/"
+    spin='-\|/'
     #printf "${msg//?/ }"
     printf "%s" "$msg "
     for ((i=0; i < num; i++)); do
@@ -32,9 +32,9 @@ spinner(){
         #printf "\r${msg}${spin:$((${i}%${#spin})):1}"
         # TODO: naughty allowing variables in printf format string but fiddly with msg var replaced backspace otherwise, clean up later...
         # shellcheck disable=SC2059
-        printf "\b${msg//?/\\b}${msg}${spin:$((i % ${#spin})):1}"
+        printf "\\b${msg//?/\\b}${msg}${spin:$((i % ${#spin})):1}"
     done
-    printf "\b "
+    printf '\b '
     echo
     echo "done"
 }
