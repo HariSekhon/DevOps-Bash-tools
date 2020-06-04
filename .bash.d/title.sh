@@ -37,7 +37,7 @@ isscreen(){
 
 screentitle(){
     if isscreen; then
-        printf "\033k%s\033\\" "${*:- }"
+        printf '\033k%s\033\\' "${*:- }"
         # or
         # screen -X title "$*"
     fi
