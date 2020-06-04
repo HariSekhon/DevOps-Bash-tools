@@ -400,7 +400,6 @@ checkout(){
 }
 
 gitadd() {
-    local gitcimsg=""
     [ -z "$*" ] && return 1
     local basedir;
     basedir="$(basedir "$@")" && local trap_codes="INT ERR";
@@ -411,30 +410,33 @@ gitadd() {
     targets="$(strip_basedirs "$basedir" "$@")";
     for x in $targets; do
         if git status -s "$x" | grep -q '^[?A]'; then
-            gitcimsg+="$x, "
+            git add "$x" &&
+            git commit -m "added $x" "$x"
+        else
+            echo "'$x' already in git, commit as an update instead" >&2
         fi
     done
-    gitcimsg="${gitcimsg%, }"
-    gitcimsg="added $gitcimsg"
-    # want splitting
-    # shellcheck disable=SC2086
-    git add $targets &&
-    git commit -m "$gitcimsg" $targets
     popd > /dev/null || :
 }
 
 gitimport() {
-    local gitcimsg=""
-    for x in "$@"; do
+    [ -z "$*" ] && return 1
+    local basedir;
+    basedir="$(basedir "$@")" && local trap_codes="INT ERR";
+    # shellcheck disable=SC2064,SC2086
+    trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes;
+    pushd "$basedir" > /dev/null || return 1;
+    # shellcheck disable=SC2086
+    targets="$(strip_basedirs "$basedir" "$@")";
+    for x in $targets; do
         if git status -s "$x" | grep -q '^[?A]'; then
-            gitcimsg+="$x, "
+            git add "$x" &&
+            git commit -m "imported $x" "$x"
+        else
+            echo "'$x' already in git, commit as an update instead" >&2
         fi
     done
-    [ -z "$gitcimsg" ] && return 1
-    gitcimsg="${gitcimsg%, }"
-    gitcimsg="imported $gitcimsg"
-    git add "$@" &&
-    git commit -m "$gitcimsg" "$@"
+    popd > /dev/null || :
 }
 
 # shellcheck disable=SC2086
