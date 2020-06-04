@@ -399,7 +399,9 @@ checkout(){
     fi
 }
 
-gitadd() {
+_gitaddimport() {
+    local action="$1"
+    shift;
     [ -z "$*" ] && return 1
     local basedir;
     basedir="$(basedir "$@")" && local trap_codes="INT ERR";
@@ -411,7 +413,7 @@ gitadd() {
     for x in $targets; do
         if git status -s "$x" | grep -q '^[?A]'; then
             git add "$x" &&
-            git commit -m "added $x" "$x"
+            git commit -m "$action $x" "$x"
         else
             echo "'$x' already in git, commit as an update instead" >&2
         fi
@@ -419,25 +421,14 @@ gitadd() {
     popd > /dev/null || :
 }
 
-gitimport() {
-    [ -z "$*" ] && return 1
-    local basedir;
-    basedir="$(basedir "$@")" && local trap_codes="INT ERR";
-    # shellcheck disable=SC2064,SC2086
-    trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes;
-    pushd "$basedir" > /dev/null || return 1;
-    # shellcheck disable=SC2086
-    targets="$(strip_basedirs "$basedir" "$@")";
-    for x in $targets; do
-        if git status -s "$x" | grep -q '^[?A]'; then
-            git add "$x" &&
-            git commit -m "imported $x" "$x"
-        else
-            echo "'$x' already in git, commit as an update instead" >&2
-        fi
-    done
-    popd > /dev/null || :
+gitadd(){
+    _gitaddimport added "$@"
 }
+
+gitimport(){
+    _gitaddimport imported "$@"
+}
+
 
 # shellcheck disable=SC2086
 gitu(){
