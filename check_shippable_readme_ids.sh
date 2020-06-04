@@ -32,7 +32,7 @@ while read -r id name; do
             exit 1
         fi
         if [ "${name}" != "$owner/$repo" ]; then
-            echo "README.md Shippable badge name '$name' != returned owner/repo '$owner/$repo'"
+            echo "README.md Shippable badge name '$name' vs ID mismatch ('$owner/$repo')"
             exit 1
         fi
     done || exit 1
