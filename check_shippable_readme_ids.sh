@@ -20,6 +20,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 #. "$srcdir/lib/utils.sh"
 
+echo "Checking Shippable README.md Project Badge"
 # https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs
 find . -name README.md -exec grep -Eo 'img.shields.io/shippable/.*app.shippable.com/[^/]+/[^/]+/[^/]+' {} \; |
 sed 's,img.shields.io/shippable/,,; s,[^[:alnum:]].*app.shippable.com/[^/]*/, ,' |
@@ -31,8 +32,9 @@ while read -r id name; do
             exit 1
         fi
         if [ "${name}" != "$owner/$repo" ]; then
-            echo "name '$name' != returned owner/repo '$owner/$repo'"
+            echo "README.md Shippable badge name '$name' != returned owner/repo '$owner/$repo'"
             exit 1
         fi
     done || exit 1
 done
+echo
