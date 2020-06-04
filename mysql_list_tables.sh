@@ -37,5 +37,5 @@ while read -r db table; do
        ! [[ "$db.$table" =~ $FILTER ]]; then
         continue
     fi
-    printf "%s\t%s\n" "$db" "$table"
+    printf '%s\t%s\n' "$db" "$table"
 done
