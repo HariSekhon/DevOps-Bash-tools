@@ -51,7 +51,9 @@ for script in $scripts; do
                               -e '[[:space:]]*run_test_versions' \
                               -e '[[:space:]]*run_(grep|output)[[:space:]].+(\$|./)' \
                               -e 'ignore_run_unqualified' \
+                              -e '\$bin/' \
                               # run_grep filter is not that accurate but will do for now
+                              # ignore golang tests where we do run "$bin/binary"
                     )"
     set -eo pipefail
     if [ -n "$suspect_lines" ]; then
