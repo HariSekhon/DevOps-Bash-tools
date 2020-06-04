@@ -99,7 +99,7 @@ macmac(){
         /^[[:space:]]ether[[:space:]]/{print $2}
     ' |
     # filters to only the lines with prefixed interfaces from first match
-    grep "\t"
+    grep '\t'
 }
 
 duall(){
