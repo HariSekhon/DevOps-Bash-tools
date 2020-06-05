@@ -267,12 +267,14 @@ st(){
             pushd "$target" >/dev/null || { echo "Error: failed to pushd to $target"; return 1; }
             echo "> git stash list" >&2
             git stash list && echo
+            #"$bash_tools/git_summary_line.sh"
             echo "> git status $target $*" >&2
             #git -c color.status=always status -sb . "$@"
             git -c color.status=always status . "$@"
         else
             pushd "$target_dirname" >/dev/null || { echo "Error: failed to pushed to '$target_dirname'"; return 1; }
             echo "> git status $target $*" >&2
+            #"$bash_tools/git_summary_line.sh"
             git -c color.status=always status "$target_basename" "$@"
         fi
         #git status "$target" "${*:2}"
