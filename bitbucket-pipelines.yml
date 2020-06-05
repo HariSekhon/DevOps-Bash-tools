@@ -22,5 +22,8 @@ image: atlassian/default-image:2
 pipelines:
   default:
     - step:
-        script:
-          - apt update -qq && apt install -qy git make && make init && make ci test
+        script: |
+          for x in `seq 10`; do sudo apt update -q && break; sleep 60; done &&
+          for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done &&
+          make init &&
+          make ci test
