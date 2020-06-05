@@ -2,7 +2,7 @@
 #  Author: Hari Sekhon
 #  Date: 2020-02-24 15:41:04 +0000 (Mon, 24 Feb 2020)
 #
-#  vim:ts=4:sts=4:sw=4:et
+#  vim:ts=2:sts=2:sw=2:et
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -21,7 +21,9 @@ build:
   steps:
     - script:
         name: install git & make
-        code: apt-get update -qq && apt-get install -qy git make
+        code: |
+          for x in `seq 10`; do sudo apt update -q && break; sleep 60; done &&
+          for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done
     - script:
         name: init
         code: make init
