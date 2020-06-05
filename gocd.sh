@@ -129,6 +129,10 @@ while read -r hostname uuid; do
     echo
 done
 
+url="$server/go/pipelines#!/"
+echo
+echo "GoCD URL:  $url"
+echo
 if is_mac; then
-    open 'http://localhost:8153/go/pipelines#!/'
+    open "$url"
 fi
