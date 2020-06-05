@@ -60,7 +60,9 @@ fi
 
 export PATH="$PATH:"~/bin
 
-when_url_content "http://$CONCOURSE_HOST:$CONCOURSE_PORT/" '(?i:concourse)' # Concourse
+url="http://$CONCOURSE_HOST:$CONCOURSE_PORT"
+
+when_url_content "$url" '(?i:concourse)' # Concourse
 echo
 
 # which checks for executable which command -v and type -P don't
@@ -76,7 +78,7 @@ if [ "$action" = up ] &&
     echo
 fi
 
-fly -t "$target" login -c "http://$CONCOURSE_HOST:$CONCOURSE_PORT" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
+fly -t "$target" login -c "$url" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
 echo "updating pipeline: $pipeline"
@@ -97,6 +99,10 @@ fly -t "$target" unpause-job --job "$job"
 
 #fly -t "$target" trigger-job -j "$job"
 #fly -t "$target" watch -j "$job"
+
+echo
+echo "Concourse URL:  $url"
+echo
 
 # trigger + watch together
 fly -t "$target" trigger-job -j "$job" -w

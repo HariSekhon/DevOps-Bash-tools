@@ -24,7 +24,8 @@ srcdir="$(dirname "$0")"
 
 NUM_AGENTS=1
 
-server="http://localhost:8153"
+server="http://${GOCD_HOST:-localhost}:${GOCD_PORT:-8153}"
+url="$server/go/pipelines#!/"
 api="$server/go/api"
 
 config="$srcdir/setup/gocd-docker-compose.yml"
@@ -68,7 +69,7 @@ if [ "$action" = down ]; then
     exit 0
 fi
 
-when_url_content "$server/go/pipelines#!/" '(?i:gocd)'
+when_url_content "$url" '(?i:gocd)'
 echo
 
 while curl -sS "$server" | grep -q 'GoCD server is starting'; do
@@ -131,7 +132,7 @@ done
 
 url="$server/go/pipelines#!/"
 echo
-echo "GoCD UI URL:  $url"
+echo "GoCD URL:  $url"
 echo
 if is_mac; then
     open "$url"
