@@ -53,7 +53,6 @@ jobs:
             - -c
             - |
               cd code &&
-              apt update -q &&
-              apt install -qy git make &&
+              setup/ci_bootstrap.sh &&
               make init &&
               make ci test
