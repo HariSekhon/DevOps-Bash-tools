@@ -23,8 +23,8 @@ steps:
 #  environment:
 #    DEBUG: 1
   commands:
-  - for x in `seq 10`; do sudo apt update -q && break; sleep 60; done
-  - for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done
+  - for x in `seq 10`; do apt update -q && break; sleep 60; done
+  - for x in `seq 10`; do apt install -qy git make && break; sleep 60; done
   - make init
   - make ci
   - make test
