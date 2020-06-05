@@ -31,8 +31,8 @@ jobs:
       #image: harisekhon/dev:ubuntu
     steps:
       - checkout
-      - run: for x in `seq 10`; do sudo apt update -q && break; sleep 60; done
-      - run: for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done
+      - run: for x in `seq 10`; do sudo apt update -q && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+      - run: for x in `seq 10`; do sudo apt install -qy git make && break; [ "$x" = 10 ] && exit 1; sleep 60; done
       - run: make init
       - run: make
       # to allow docker networking to work
