@@ -30,12 +30,12 @@ blocks:
     #execution_time_limit:
     #  hours: 2
     task:
-      env_vars:
+      #env_vars:
         # $PATH selects /usr/bin/python and /usr/local/bin/pip which are mismatched versions of Python
-        - name: PYTHON
-          value: python3
-        - name: PIP
-          value: pip3
+        #- name: PYTHON
+        #  value: python3
+        #- name: PIP
+        #  value: pip3
       prologue:
         commands:
           - cache restore
@@ -57,10 +57,10 @@ blocks:
       when: "branch = 'master'"
     task:
       # because otherwise on Mac it uses /usr/bin/python (2.7) but /usr/local/bin/pip (python 3.8)
-      env_vars:
+      #env_vars:
         # to match /usr/local/bin/pip version from $PATH
-        - name: PYTHON
-          value: python3
+        #- name: PYTHON
+        #  value: python3
         # must be quoted to force string, otherwise pipeline fails to run with this parsing error:
         # Error: [{"Type mismatch. Expected String but got Integer.", "#/blocks/1/task/env_vars/1/value"}]
         #- name: DEBUG
@@ -89,6 +89,9 @@ blocks:
           - rbenv global system
           # also considered this:
           # - for version in $(rbenv versions | grep -v system | sed 's/^\*//'); do yes | rbenv uninstall "$version"; rbenv install "$version"; done
+          #
+          # fix for python vs pip version mismatch
+          - ln -svf /usr/local/bin/python3 /usr/local/bin/python
       jobs:
         - name: build
           commands:
