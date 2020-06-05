@@ -70,8 +70,7 @@ pipeline {
 //                        sh 'apt install -qy make'
 //                        sh 'make init'
                         sh """
-                            apt update -q &&
-                            apt install -qy make &&
+                            setup/ci_bootstrap.sh &&
                             make init
                         """
                     }
