@@ -88,7 +88,7 @@ install_pip_manually(){
         export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
     fi
     curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python get-pip.py
+    "$python" get-pip.py
 }
 
 # Needed on Semaphore Mac builds and also Ubuntu 20.04 LTS
@@ -100,9 +100,6 @@ if ! command -v "$pip" >/dev/null 2>&1; then
     echo "pip not installed, trying to install manually..."
     install_pip_manually
 fi
-
-# replace with fully qualified, which aids in debugging different CI environments
-pip="$(command -v "$pip")"
 
 # bad idea, programs with /usr/env/python will often call python 2 and fail to find pip modules
 #if [[ "$pip" =~ pip3$ ]] &&
@@ -122,6 +119,9 @@ pip="$(command -v "$pip")"
 #        pip="$(command -v pip3)"
 #    fi
 #fi
+
+# replace with fully qualified, which aids in debugging different CI environments
+pip="$(command -v "$pip")"
 
 recursion_depth=0
 check_python_pip_versions_match(){
@@ -147,9 +147,14 @@ check_python_pip_versions_match(){
                [ -n "$pip3" ]; then
                 pip="$pip3"
                 check_python_pip_versions_match
-            elif [ "${python_version:0:1}" = 2 ] &&
-                 [ -n "$pip2" ]; then
-                pip="$pip2"
+            elif [ "${python_version:0:1}" = 2 ]; then
+                if [ -n "$pip2" ]; then
+                    pip="$pip2"
+                else
+                    # python2-pip removed from Ubuntu / Alpine repos :-(
+                    install_pip_manually
+                    pip="$(command -v "pip")"
+                fi
                 check_python_pip_versions_match
             # switching to python3 will lead programs with /usr/env/python defaulting to python 2 to fail to find pip modules
             #elif [ "${python_version:0:1}" = 2 ] &&
