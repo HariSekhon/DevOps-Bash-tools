@@ -38,6 +38,6 @@ pool:
 
 # hacky workaround to Azure Pipelines limitations :-(
 steps:
-- script: sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c 'set -ex && cd /code && setup/ci_boostrap.sh && make init && make ci test'
+- script: sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c 'set -ex && cd /code && setup/ci_bootstrap.sh && make init && make ci test'
 
   displayName: docker build
