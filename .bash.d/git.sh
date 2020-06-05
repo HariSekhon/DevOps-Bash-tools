@@ -51,7 +51,8 @@ alias gitignore="\$EDITOR ~/.gitignore_global"
 alias gitrc=gitconfig
 # false positive, not calling this from xargs
 # shellcheck disable=SC2032
-alias add=gitadd
+#alias add=gitadd
+add(){ gitadd "$@"; }
 alias gadd='git add'
 alias import=gitimport
 alias co=checkout
