@@ -33,10 +33,10 @@
     #  - apt update
     #  - apt install -qy git make
     execute_commands:
-      - for x in `seq 10`; do apt update -q && break; [ "$x" = 10 ] && exit 1; sleep 60; done
-      - for x in `seq 10`; do apt install -qy git make && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+      - setup/ci_bootstrap.sh
       - make init
-      - make ci test
+      - make ci
+      - make test
     volume_mappings:
       - "/:/buddy/devops-bash-tools"
     shell: "BASH"
