@@ -30,19 +30,18 @@ srcdir_bash_tools_python="$(dirname "${BASH_SOURCE[0]}")"
 # but /usr/local/opt/python/libexec/bin/pip (python 3.7) or /usr/local/bin/pip3 (python 3.8), causing library installation vs runtime import mismatches
 # (now checked for further below to catch early and highlight the root cause)
 #if [ -n "${DEBUG:-}" ]; then
-if false; then
-    if is_semaphore_ci; then
-        echo
-        echo "Python and Pip installations:"
-        # very slow, pushes build past 1 hour
-        for x in python python2 python3 pip pip2 pip3; do
-            find / -type f -name "$x" -exec ls -l {} \; -o \
-                   -type l -name "$x" -exec ls -l {} \; 2>/dev/null || :
-        done
-        echo
-        echo
-    fi
-fi
+#    if is_semaphore_ci; then
+#        echo
+#        echo "Python and Pip installations:"
+#        # very slow, pushes build past 1 hour
+#        for x in python python2 python3 pip pip2 pip3; do
+#            find / -type f -name "$x" -exec ls -l {} \; -o \
+#                   -type l -name "$x" -exec ls -l {} \; 2>/dev/null || :
+#        done
+#        echo
+#        echo
+#    fi
+#fi
 
 if [ -n "${PYTHON:-}" ]; then
     python="$PYTHON"
@@ -102,40 +101,42 @@ if ! command -v "$pip" >/dev/null 2>&1; then
     install_pip_manually
 fi
 
+# replace with fully qualified, which aids in debugging different CI environments
 pip="$(command -v "$pip")"
 
-if [[ "$pip" =~ pip3$ ]] &&
-   "$python" -V 2>&1 | grep -q 'Python 2'; then
+# bad idea, programs with /usr/env/python will often call python 2 and fail to find pip modules
+#if [[ "$pip" =~ pip3$ ]] &&
+#   "$python" -V 2>&1 | grep -q 'Python 2'; then
 #   [ -L "$python" ] &&
-#    python3="$(command -v python3 2>/dev/null || :)"
-#    if [ -n "$python3" ]; then
-#        echo "Symlinking python to python3 to match pip3:"
-#        ln -sfv "$python3" "$python"
+##    python3="$(command -v python3 2>/dev/null || :)"
+##    if [ -n "$python3" ]; then
+##        echo "Symlinking python to python3 to match pip3:"
+##        ln -sfv "$python3" "$python"
+##    fi
+#    if command -v python3 &>/dev/null; then
+#        python="$(command -v python3)"
 #    fi
-    if command -v python3 &>/dev/null; then
-        python="$(command -v python3)"
-    fi
-elif [[ "$python" =~ python3 ]] &&
-    "$pip" -V 2>&1 | grep -qi 'python[ /]2'; then
-    if command -v pip3 &>/dev/null; then
-        pip="$(command -v pip3)"
-    fi
-fi
+#elif [[ "$python" =~ python3 ]] &&
+#    "$pip" -V 2>&1 | grep -qi 'python[ /]2'; then
+#    if command -v pip3 &>/dev/null; then
+#        pip="$(command -v pip3)"
+#    fi
+#fi
 
 recursion_depth=0
 check_python_pip_versions_match(){
     ((recursion_depth+=1))
     if [ $recursion_depth -gt 5 ]; then
-        echo "recurring too deep in $srcdir_bash_tools_python/python.sh"
+        echo "recursing too deep in $srcdir_bash_tools_python/python.sh, non-trivial python vs pip versions mismatch!"
         exit 1
     fi
     set +eo pipefail
     # split steps for easier CI debugging in DEBUG mode
     python_version="$("$python" -V 2>&1)"
-    python_version="$(echo "$python_version" | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
+    python_version="$(<<< "$python_version" grep -Eom1 '[[:digit:]]+\.[[:digit:]]+')"
     export python_major_version="${python_version%%.*}"
     pip_python_version="$("$pip" -V 2>&1)"
-    pip_python_version="$(echo "$pip_python_version" | grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
+    pip_python_version="$(<<< "$pip_python_version" grep -Eom1 '\(python [[:digit:]]+\.[[:digit:]]+\)' | sed 's/(python[[:space:]]*//; s/)//')"
     export pip_python_major_version="${pip_python_version%%.*}"
     set -eo pipefail
 
@@ -150,10 +151,11 @@ check_python_pip_versions_match(){
                  [ -n "$pip2" ]; then
                 pip="$pip2"
                 check_python_pip_versions_match
-            elif [ "${python_version:0:1}" = 2 ] &&
-                 [ -n "$python3" ]; then
-                python="$python3"
-                check_python_pip_versions_match
+            # switching to python3 will lead programs with /usr/env/python defaulting to python 2 to fail to find pip modules
+            #elif [ "${python_version:0:1}" = 2 ] &&
+            #     [ -n "$python3" ]; then
+            #    python="$python3"
+            #    check_python_pip_versions_match
             else
                 echo
                 echo "Python major version '$python_version' != Pip major version '$pip_python_version' !!"
