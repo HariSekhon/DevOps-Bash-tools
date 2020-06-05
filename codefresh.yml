@@ -33,7 +33,8 @@ steps:
     arguments:
       image: 'ubuntu:18.04'
       commands:
-        - apt update -qq && apt install -qy git make
+        - for x in `seq 10`; do sudo apt update -q && break; sleep 60; done
+        - for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done
         - make init
         - make ci
         - make test
