@@ -30,10 +30,12 @@ jobs:
       # so using harisekhon/dev:ubuntu instead of base ubuntu image
       #image: harisekhon/dev:ubuntu
     steps:
+      - checkout
+      - run: for x in `seq 10`; do sudo apt update -q && break; sleep 60; done
+      - run: for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done
+      - run: make init
+      - run: make
       # to allow docker networking to work
       - run: sudo sysctl net.ipv4.ip_forward=1
       - run: sudo service docker restart
-      - checkout
-      - run: make init
-      - run: make
       - run: make test
