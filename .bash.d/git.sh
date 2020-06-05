@@ -416,8 +416,10 @@ _gitaddimport() {
         if git status -s "$x" | grep -q '^[?A]'; then
             git add "$x" &&
             git commit -m "$action $x" "$x"
+        elif git status -s "$x" | grep -q '^.M'; then
+            echo "'$x' already in git, but has changes, commit as an update instead" >&2
         else
-            echo "'$x' already in git, commit as an update instead" >&2
+            echo "'$x' already in git" >&2
         fi
     done
     popd > /dev/null || :
