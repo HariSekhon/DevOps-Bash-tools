@@ -20,4 +20,4 @@ set -eu #o pipefail
 
 # setting TERM and --no-pager are attempted workarounds to breakage in CircleCI, hangs with 'WARNING: terminal is not fully functional' (press RETURN)
 export TERM=xterm
-git --no-pager log -n 1 --pretty=format:'%m %h  %ai  (%an)  %s%n'
+git --no-pager log -n 1 --pretty=format:'>>> %H  %ai  (%an)  %s%n'
