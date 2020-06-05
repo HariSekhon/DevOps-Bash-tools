@@ -34,3 +34,4 @@ shippable.yml
 wercker.yml
 setup/gocd_config_repo.json
 setup/jenkins-job.xml
+setup/ci_bootstrap.sh
