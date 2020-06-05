@@ -13,12 +13,14 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://cirrus-ci.org/guide/writing-tasks/
+
 container:
   image: ubuntu:18.04
 
 task:
-  script: |
-    for x in `seq 10`; do apt update -q && break; sleep 60; done &&
-    for x in `seq 10`; do apt install -qy git make && break; sleep 60; done &&
-    make init &&
-    make ci test
+  script:
+    - for x in `seq 10`; do apt update -q && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+    - for x in `seq 10`; do apt install -qy git make && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+    - make init &&
+    - make ci test
