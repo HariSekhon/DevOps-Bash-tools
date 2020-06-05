@@ -19,7 +19,6 @@ image: ubuntu:18.04
 
 job:
   before_script:
-    - for x in `seq 10`; do apt update -q && break; [ "$x" = 10 ] && exit 1; sleep 60; done
-    - for x in `seq 10`; do apt install -qy git make && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+    - setup/ci_bootstrap.sh
   script:
     - make init && make ci test
