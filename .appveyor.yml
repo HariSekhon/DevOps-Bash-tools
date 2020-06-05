@@ -61,8 +61,8 @@ install:
 - sudo apt purge -qy --allow-change-held-packages mssql-server
 # this prevents conflicts installing default-jdk - see https://github.com/appveyor/ci/issues/3411
 #- dpkg -l | awk '/openjdk/{print $2}' | DEBIAN_FRONTEND=noninteractive xargs sudo apt-get remove -y --allow-change-held-packages
-- for x in `seq 10`; do sudo apt update -q && break; sleep 60; done
-- for x in `seq 10`; do sudo apt install -qy git make && break; sleep 60; done
+- for x in `seq 10`; do sudo apt update -q && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+- for x in `seq 10`; do sudo apt install -qy git make && break; [ "$x" = 10 ] && exit 1; sleep 60; done
 - make
 
 test_script:
