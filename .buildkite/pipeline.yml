@@ -21,38 +21,30 @@
 
 steps:
   - command: |
-        type make 2>/dev/null ||
-        if type apk 2>/dev/null; then
-            for x in `seq 10`; do
+        for x in `seq 10`; do
+            type make 2>/dev/null ||
+            if type apk 2>/dev/null; then
                 apk update &&
                 apk add --no-progress make &&
                 break
-                sleep 60
-            done
-        # apt is /usr/bin/apt
-        # Unable to locate an executable at "/Users/hari/.sdkman/candidates/java/current/bin/apt" (-1)
-        elif type apt-get 2>/dev/null; then
-            for x in `seq 10`; do
+            # apt is /usr/bin/apt
+            # Unable to locate an executable at "/Users/hari/.sdkman/candidates/java/current/bin/apt" (-1)
+            elif type apt-get 2>/dev/null; then
                 apt-get update -q &&
                 apt-get install -qy make &&
                 break
-                sleep 60
-            done
-        elif type yum 2>/dev/null; then
-            for x in `seq 10`; do
+            elif type yum 2>/dev/null; then
                 rpm -q make &&
                     break
                 yum install -y make &&
                     break
-                sleep 60
-            done
-        elif type brew 2>/dev/null; then
-            for x in `seq 10`; do
+            elif type brew 2>/dev/null; then
                 brew install make &&
                 break
-                sleep 60
-            done
-        fi
+            fi
+            [ "$x" = 10 ] && exit 1;
+            sleep 60
+        done
     label: install make
     timeout: 30  # brew can take 10 mins just to do a brew update
   - wait
