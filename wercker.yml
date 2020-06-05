@@ -20,10 +20,8 @@ box: debian
 build:
   steps:
     - script:
-        name: install git & make
-        code: |
-          for x in `seq 10`; do sudo apt update -q && break; [ "$x" = 10 ] && exit 1; sleep 60; done &&
-          for x in `seq 10`; do sudo apt install -qy git make && break; [ "$x" = 10 ] && exit 1; sleep 60; done
+        name: ci bootstrap
+        code: setup/ci_bootstrap.sh
     - script:
         name: init
         code: make init
