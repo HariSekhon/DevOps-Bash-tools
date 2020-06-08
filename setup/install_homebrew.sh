@@ -11,6 +11,10 @@
 #
 
 # Install Homebrew on Mac OS X
+#
+# doesn't install on CentOS 6 any more
+#
+# https://github.com/Homebrew/brew/issues/7583#issuecomment-640379742
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
