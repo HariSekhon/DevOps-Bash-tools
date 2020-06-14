@@ -19,7 +19,7 @@
 #
 # Cmd-Shift-4   - to take a select area screenshot displays the coordates, then press Esc to cancel
 #
-# MouseTool -location
+# MouseTools -location
 
 tell application "System Events"
     # doesn't work due to mouse not being defined
