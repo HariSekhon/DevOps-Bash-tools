@@ -26,6 +26,11 @@ if [ "$(uname -s)" != Darwin ]; then
     exit 0
 fi
 
+if type -P MouseTools &>/dev/null; then
+    echo "MouseTools already installed"
+    exit 0
+fi
+
 cd /tmp
 
 wget -O MouseTools.zip http://www.hamsoftengineering.com/assets/MouseTools.zip
