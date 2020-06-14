@@ -27,6 +27,8 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 isMac || return
 
+alias osash="osascript -i"
+
 date(){
     gdate "$@"
 }
