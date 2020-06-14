@@ -40,3 +40,6 @@ unzip -o MouseTools.zip
 mv -iv MouseTools ~/bin
 
 rm MouseTools.zip
+
+echo
+echo "MouseTools is now available at ~/bin - ensure that location is in $PATH"
