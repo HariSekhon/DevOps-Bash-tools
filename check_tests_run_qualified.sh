@@ -46,6 +46,8 @@ for script in $scripts; do
     run_fail='run(_[a-z]+[[:digit:]]* "?[[:digit:][:space:]]+"?|_conn_refused|_usage|_404|_timeout)?'
     # docker-compose or docker exec or docker run
     docker_regex='docker(-compose|[[:space:]]+(exec|run))'
+    # want $bin in regex
+    # shellcheck disable=SC2016
     suspect_lines="$(grep -En '^[[:space:]]*run(_.+)?[[:space:]]+' "$script" |
                      grep -Ev -e "[[:space:]]*${run_fail}[[:space:]](.*[[:space:]])?(./|(\\\$perl|eval|$docker_regex)[[:space:]])" \
                               -e '[[:space:]]*run_test_versions' \
