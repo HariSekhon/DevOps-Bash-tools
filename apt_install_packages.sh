@@ -114,15 +114,19 @@ fi
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
+"$srcdir/apt_wait.sh"
+
 # shellcheck disable=SC2086
 [ -n "${NO_UPDATE:-}" ] || $sudo "$apt" $opts update
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
     for package in $packages; do
+        "$srcdir/apt_wait.sh"
         $sudo "$apt" install -y $opts "$package" || :
     done
 else
+    "$srcdir/apt_wait.sh"
     # shellcheck disable=SC2086
     $sudo "$apt" install -y $opts $packages
 fi
