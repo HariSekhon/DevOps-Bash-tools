@@ -63,8 +63,13 @@ else
     chmod +x ~/bin/ecs-cli
 fi
 
-if grep Alpine /etc/os-release &>/dev/null; then
+if grep -q Alpine /etc/os-release 2>/dev/null; then
     echo "Skipping SAM CLI install on Alpine as Homebrew installer is broken on Alpine, see https://github.com/Homebrew/homebrew-core/issues/49813"
+    exit 0
+fi
+
+if grep -q 'CentOS release [1-6][\.[:space:]]' /etc/system-release 2>/dev/null; then
+    echo "Skipping SAM CLI install on RHEL/CentOS < 7 as Homebrew installer no longer supports it, see https://github.com/Homebrew/brew/issues/7583#issuecomment-640379742"
     exit 0
 fi
 

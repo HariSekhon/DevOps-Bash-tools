@@ -316,7 +316,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
 nmap          ;g :w<CR> :! bash -ic 'cd $(dirname "%") && st'<CR>
-nmap          ;G :w<CR> :! bash -ic 'cd $(dirname "%") && git log -p'<CR>
+nmap          ;G :w<CR> :! bash -ic 'cd $(dirname "%") && git log -p "%"'<CR>
 nmap          ;. :w<CR> :! bash -ic 'cd $(dirname "%") && pull'<CR>
 nmap          ;[ :w<CR> :! bash -ic 'cd $(dirname "%") && push'<CR>
 nmap <silent> ;u :w<CR> :!urlview "%"<CR>
