@@ -649,7 +649,8 @@ fabric.properties
 *.pdb
 
 # Kernel Module Compile Results
-*.mod*
+# *.mod* changed to avoid clashing with Golang's new module system go.mod
+*.mod?*
 *.cmd
 .tmp_versions/
 modules.order
