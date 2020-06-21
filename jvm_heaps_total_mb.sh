@@ -32,6 +32,7 @@ if [ "$(uname -s)" = Darwin ]; then
 fi
 
 # picks up other things like Adobe crash reporter with lots of java related env vars - which is wrong, we only care about CLI args to java procs
+# shellcheck disable=SC2009
 #pgrep -l -f java |
 ps -ef |
 grep java |
