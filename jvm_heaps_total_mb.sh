@@ -31,7 +31,10 @@ if [ "$(uname -s)" = Darwin ]; then
     numfmt(){ gnumfmt "$@"; }
 fi
 
-pgrep -l -f java |
+# picks up other things like Adobe crash reporter with lots of java related env vars - which is wrong, we only care about CLI args to java procs
+#pgrep -l -f java |
+ps -ef |
+grep java |
 grep -v -e '[[:space:][:alpha:]]grep[[:space:]]' -e 'sed[[:space:]]' |
 sed 's/.*[[:space:]]-Xmx/-Xmx/' |
 grep --color=no -o -- '-Xmx[^[:space:]]*' |
