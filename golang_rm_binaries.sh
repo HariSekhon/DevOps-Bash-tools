@@ -79,4 +79,3 @@ done
 if [ "src" = "$(basename "$(cd "$basedir" && pwd)")" ]; then
     check_src_dir "$basedir"
 fi
-echo
