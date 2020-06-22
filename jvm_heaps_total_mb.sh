@@ -42,4 +42,4 @@ grep --color=no -o -- '-Xmx[^[:space:]]*' |
 sed 's/-Xmx//' |
 numfmt --from=iec |
 awk '{sum += $1} END {print sum}' |
-numfmt --to-unit=Mi
+numfmt --to-unit=M # some versions need Mi, others do not and will result in 'Abort trap: 6'
