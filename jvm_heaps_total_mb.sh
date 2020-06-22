@@ -42,4 +42,4 @@ grep --color=no -o -- '-Xmx[^[:space:]]*' |
 sed 's/-Xmx//' |
 numfmt --from=iec |
 awk '{sum += $1} END {print sum}' |
-numfmt --to-unit=M
+numfmt --to-unit=Mi
