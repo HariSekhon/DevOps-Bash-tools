@@ -23,6 +23,11 @@ set -euo pipefail
 
 len="${1:-256}"
 
+if ! [[ "$len" =~ ^[[:digit:]]+$ ]]; then
+    echo "invalid string len given as first argument to ${0##*/}" >&2
+    exit 1
+fi
+
 # fixes illegal byte error in tr / sed etc
 export LC_ALL=C
 
