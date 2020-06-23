@@ -39,7 +39,7 @@ check_env_defined "SPOTIFY_CLIENT_SECRET"
 
 output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 'grant_type=client_credentials' https://accounts.spotify.com/api/token)"
 # shellcheck disable=SC2181
-if [ $? != 0 ]; then
+if [ $? != 0 ] || [[ "$output" =~ error_description ]]; then
     echo "$output" >&2
     exit 1
 fi
