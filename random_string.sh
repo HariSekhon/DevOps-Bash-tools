@@ -21,7 +21,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-len="${1:-256}"
+len="${1:-32}"
 
 if ! [[ "$len" =~ ^[[:digit:]]+$ ]]; then
     echo "invalid string len given as first argument to ${0##*/}" >&2
