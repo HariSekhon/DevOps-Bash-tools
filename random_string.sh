@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Generates a random string of the given length
+# Generates a random alphanumeric string of the given length
 #
 # pwgen is also a good option, but may not always be installed, hence this is more portable
 
@@ -27,4 +27,4 @@ len="${1:-256}"
 export LC_ALL=C
 
 #tr -duc 'A-Za-z0-9' < /dev/urandom | fold -w "$len" | head -n1
-tr -duc 'A-Za-z0-9' < /dev/urandom | head -c "$len"
+tr -duc '[:alnum:]' < /dev/urandom | head -c "$len"
