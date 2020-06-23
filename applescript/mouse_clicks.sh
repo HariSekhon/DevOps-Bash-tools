@@ -21,30 +21,69 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/../lib/utils.sh"
 
 usage(){
+    if [ -n "$*" ]; then
+        echo "usage error: $*" >&2
+        echo >&2
+    fi
     echo "
-Performs N mouse clicks at the current mouse coordinates location, 1 second apart to automate tedious UI actions
+Automates Mouse Clicks to automate tedious UI actions
 
-Starts clicking after 5 seconds to give time to alt-tab back to your UI application and position the cursor
+Performs N mouse clicks at the sequence of X,Y coordinates given or the current mouse location if no coordinates
 
-${0##*/} <num>"
+Sleeps for \$SLEEP_SECS (default: 1) between clicks to allow UIs to update and perform the next click
+
+Starts clicking after \$START_DELAYS seconds (default: 5) to give time to alt-tab back to your UI application and position the cursor
+
+${0##*/} <num> [<coordinates> <coordinates> <coordinates> ...]"
     exit 3
 }
 
-if [ $# != 1 ]; then
-    usage
-fi
-
-if ! [[ "$1" =~ ^[[:digit:]]+$ ]]; then
+if [ $# -lt 1 ]; then
     usage
 fi
 
 num="$1"
+start_delay="${START_DELAY:-5}"
+sleep_secs="${SLEEP_SECS:-1}"
 
-sleep 5
+if ! [[ "$num" =~ ^[[:digit:]]+$ ]]; then
+    usage "invalid non-integer '$num' given for first argument"
+fi
+
+if ! [[ "$sleep_secs" =~ ^[[:digit:]]+(\.[[:digit:]]+)?$ ]]; then
+    usage "invalid non-float '$SLEEP_SECS' found in environment for \$SLEEP_SECS"
+fi
+
+shift || :
+
+read -r -a coordinates <<< "$@"
+
+if [ -n "${coordinates:-}" ]; then
+    for coordinate in "${coordinates[@]}"; do
+        if ! [[ "$coordinate" =~ ^[[:digit:]]+,[[:digit:]]+$ ]]; then
+            usage "invalid coordinate '$coordinate' given - must be in form x,y"
+        fi
+    done
+fi
+
+timestamp "waiting for $start_delay secs before starting"
+sleep "$start_delay"
+timestamp "starting"
+echo
 
 # shellcheck disable=SC2086
 for i in $(seq "$num"); do
-    timestamp "click $i"
-    MouseTools -leftClick
-    sleep 1
+    if [ -n "${coordinates:-}" ]; then
+        for coordinate in "${coordinates[@]}"; do
+            x="${coordinate%,*}"
+            y="${coordinate#*,}"
+            timestamp "mouse click $i at $x , $y"
+            MouseTools -leftClick -x "$x" -y "$y"
+            sleep "$sleep_secs"
+        done
+    else
+        timestamp "mouse click $i at current mouse location"
+        MouseTools -leftClick
+        sleep "$sleep_secs"
+    fi
 done
