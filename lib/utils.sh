@@ -791,10 +791,10 @@ usage(){
 "
     fi
     if [ -n "$*" ]; then
-        echo "$*"
-        echo
+        echo "$*" >&2
+        echo >&2
     fi
-    cat <<EOF
+    cat >&2 <<EOF
 $description
 usage: ${0##*/} $args
 
