@@ -33,6 +33,9 @@ Generate an App client ID and secret here:
 
 https://developer.spotify.com/dashboard/applications
 
+Uses the Client Credenials authorization flow as documented here:
+
+https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 "
 
 [ -n "${DEBUG:-}" ] && set -x
