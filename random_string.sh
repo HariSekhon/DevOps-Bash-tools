@@ -23,4 +23,8 @@ set -euo pipefail
 
 len="${1:-256}"
 
-LC_ALL=C tr -duc 'A-Za-z0-9' < /dev/urandom | fold -w "$len" | head -n1
+# fixes illegal byte error in tr / sed etc
+export LC_ALL=C
+
+#tr -duc 'A-Za-z0-9' < /dev/urandom | fold -w "$len" | head -n1
+tr -duc 'A-Za-z0-9' < /dev/urandom | head -c "$len"
