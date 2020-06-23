@@ -89,6 +89,7 @@ install_pip_manually(){
     fi
     curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     "$python" get-pip.py
+    rm get-pip.py
 }
 
 # Needed on Semaphore Mac builds and also Ubuntu 20.04 LTS
