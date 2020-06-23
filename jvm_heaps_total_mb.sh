@@ -15,6 +15,8 @@
 
 # Calculates the total combined RAM in MB allocated to all Java heap sizes on all JVM processes running on the local machine
 #
+# Requires recent version of GNU coreutils to be installed for correct MB conversions (you might need to 'brew upgrade coreutils' on Mac)
+#
 # You should account for at least ~20% overhead on top of this to account for non-heap Java RAM usage eg. off-heap allocations, JIT optimizations, JNI code, GC (especially G1) etc...
 #
 # Sun JDK 8, OpenJDK 11 and IBM JDK all treat the last -Xmx on the command line as the actual one, so we are going with that
@@ -42,4 +44,4 @@ grep --color=no -o -- '-Xmx[^[:space:]]*' |
 sed 's/-Xmx//' |
 numfmt --from=iec |
 awk '{sum += $1} END {print sum}' |
-numfmt --to-unit=M # some versions need Mi, others do not and will result in 'Abort trap: 6'
+numfmt --to-unit=Mi # newers versions (eg. 8.30) need Mi for correct unit conversion, but older versions (eg. 8.23) crash when given Mi as target unit (eg.  'Abort trap: 6') - if this happens to you, 'brew upgrade coreutils' to resolve it
