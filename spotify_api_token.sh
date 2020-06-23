@@ -20,6 +20,10 @@ usage_description="
 Returns a Spotify access token from the Spotify API
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+
+Uses the Client Credenials authorization flow as documented here:
+
+https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 "
 
 [ -n "${DEBUG:-}" ] && set -x
