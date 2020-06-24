@@ -32,6 +32,8 @@ Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_ap
 export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
+
+For an example of how to do this and process multiple paged requests see spotify_playlist_tracks.sh
 "
 
 # shellcheck disable=SC1090
