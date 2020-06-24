@@ -35,9 +35,9 @@ Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=5
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-min_args 1 "$@"
-
 help_usage "$@"
+
+min_args 1 "$@"
 
 playlist_id="$1"
 
