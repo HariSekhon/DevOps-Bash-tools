@@ -48,6 +48,8 @@ fi
 
 offset="${OFFSET:-0}"
 
+# expands out to: /v1/users/harisekhon/playlists...
+#             or: /v1/me/playlists...
 url_path="/v1/$user/playlists?limit=50&offset=$offset"
 
 output(){
