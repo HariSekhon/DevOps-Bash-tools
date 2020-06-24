@@ -34,6 +34,12 @@ Requires \$SPOTIFY_USER be set in the environment or else given as the second ar
 Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
 
 export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+
+Examples:
+
+./spotify_foreach_playlist.sh './spotify_playlist_tracks.sh {playlist_id} > playlists/{playlist}.txt' harisekhon
+
+./spotify_foreach_playlist.sh './spotify_playlist_tracks_uri.sh {playlist_id} > playlist-backups/{playlist}.txt' harisekhon
 "
 
 # shellcheck disable=SC1090
@@ -58,4 +64,5 @@ while read -r playlist_id playlist; do
     cmd="${cmd//$/\\$}"
     cmd="${cmd//\`/}"
     eval "$cmd"
+    printf '\n'
 done
