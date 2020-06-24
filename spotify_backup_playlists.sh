@@ -47,10 +47,11 @@ shift || :
 
 backup_dir="$PWD/playlists/spotify"
 
+SECONDS=0
 timestamp "Backing up Spotify playlists to $backup_dir"
 echo >&2
 mkdir -vp "$backup_dir"
 
 "$srcdir"/spotify_foreach_playlist.sh "./spotify_playlist_tracks_uri.sh '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}.txt\")\" $*" "$spotify_user" "$@"
 echo >&2
-timestamp "Backups finished"
+timestamp "Backups finished in $SECONDS seconds"
