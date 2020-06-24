@@ -32,4 +32,4 @@ fi
 export LC_ALL=C
 
 #tr -duc 'A-Za-z0-9' < /dev/urandom | fold -w "$len" | head -n1
-tr -duc '[:alnum:]' < /dev/urandom | head -c "$len"
+tr -duc '[:alnum:]' < /dev/urandom | head -c "$len" || :  # head returns error code 141 but succeeds
