@@ -23,9 +23,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlists for \$SPOTIFY_USER / \$USER
+Returns spotify playlists for \$SPOTIFY_USER or current user to which the \$SPOTIFY_ACCESS_TOKEN belongs
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET in the environment, or \$SPOTIFY_ACCESS_TOKEN (can generate from spotify_api_token.sh)
+Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
+
+export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
 "
@@ -33,7 +35,7 @@ Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=5
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-user="${SPOTIFY_USER:-${USER:-whoami}}"
+user="${SPOTIFY_USER:-me}"
 
 offset="${OFFSET:-0}"
 
