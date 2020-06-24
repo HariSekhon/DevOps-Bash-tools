@@ -39,11 +39,16 @@ export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
 help_usage "$@"
 
-user="${SPOTIFY_USER:-me}"
+if [ -n "${SPOTIFY_USER:-}" ]; then
+    user="users/$SPOTIFY_USER"
+else
+    # must not have 'users/' prefix (will go to an actual literal user called 'me' in that case)
+    user="me"
+fi
 
 offset="${OFFSET:-0}"
 
-url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
+url_path="/v1/$user/playlists?limit=50&offset=$offset"
 
 output(){
     jq -r '.items[] | [.id, .name] | @tsv' <<< "$output"
@@ -56,7 +61,8 @@ get_next(){
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
     # shellcheck disable=SC2181
-    if [ $? != 0 ]; then
+    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
+        echo "$output" >&2
         exit 1
     fi
     url_path="$(get_next)"
