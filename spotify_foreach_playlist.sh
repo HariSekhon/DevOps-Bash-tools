@@ -58,7 +58,7 @@ shift || :
 while read -r playlist_id playlist; do
     printf '%s\t' "$playlist"
     cmd="${command_template//\{playlist_id\}/$playlist_id}"
-    cmd="${cmd//\{playlist\}/\"$playlist\"}"
+    cmd="${cmd//\{playlist\}/$playlist}"
     # handle danger
     # this works, tested on Ke$ha playlist and `echo injected`
     cmd="${cmd//$/\\$}"
