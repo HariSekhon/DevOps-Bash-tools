@@ -31,7 +31,7 @@ export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
 
-For an example of how to use this to return and process multiple paged requests see spotify_playlists.sh
+For an example of how to do this and process multiple paged requests see spotify_playlists.sh
 "
 
 # shellcheck disable=SC1090
@@ -40,9 +40,9 @@ For an example of how to use this to return and process multiple paged requests 
 help_usage "$@"
 
 if [ -n "${1:-}" ]; then
-    user="users/$1"
+    user="$1"
 elif [ -n "${SPOTIFY_USER:-}" ]; then
-    user="users/$SPOTIFY_USER"
+    user="$SPOTIFY_USER"
 else
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
     #user="me"
