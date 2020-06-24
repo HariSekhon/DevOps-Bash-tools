@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -39,18 +39,19 @@ export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
 help_usage "$@"
 
-if [ -n "${SPOTIFY_USER:-}" ]; then
+if [ -n "${1:-}" ]; then
+    user="users/$1"
+elif [ -n "${SPOTIFY_USER:-}" ]; then
     user="users/$SPOTIFY_USER"
 else
-    # must not have 'users/' prefix (will go to an actual literal user called 'me' in that case)
-    user="me"
+    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+    #user="me"
+    usage "user not specified"
 fi
 
 offset="${OFFSET:-0}"
 
-# expands out to: /v1/users/harisekhon/playlists...
-#             or: /v1/me/playlists...
-url_path="/v1/$user/playlists?limit=50&offset=$offset"
+url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
 
 output(){
     jq -r '.items[] | [.id, .name] | @tsv' <<< "$output"
