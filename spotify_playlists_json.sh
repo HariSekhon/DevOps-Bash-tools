@@ -48,4 +48,5 @@ fi
 
 offset="${OFFSET:-0}"
 
+#         expands out to: /v1/users/harisekhon/playlists...
 "$srcdir/spotify_api.sh" "/v1/$user/playlists?limit=50&offset=$offset" "$@"
