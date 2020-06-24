@@ -25,7 +25,7 @@ usage_args="<playlist_id> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlist for given playlist id argument (get this from spotify_playlists.sh)
+Returns spotify playlist for given playlist id argument or \$SPOTIFY_PLAYLIST (get this from spotify_playlists.sh)
 
 Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
 
@@ -39,9 +39,11 @@ Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=5
 
 help_usage "$@"
 
-min_args 1 "$@"
+playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
 
-playlist_id="$1"
+if [ -z "$playlist_id" ]; then
+    usage "playlist id not defined"
+fi
 
 offset="${OFFSET:-0}"
 
