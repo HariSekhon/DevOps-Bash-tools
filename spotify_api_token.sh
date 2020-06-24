@@ -26,6 +26,10 @@ usage_description="
 Returns a Spotify access token from the Spotify API
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+
+Generate an App client ID and secret here:
+
+https://developer.spotify.com/dashboard/applications
 "
 
 # shellcheck disable=SC1090
