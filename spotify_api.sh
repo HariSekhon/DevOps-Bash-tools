@@ -55,6 +55,7 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
 fi
 
+url_path="${url_path##https://api.spotify.com}"
 url_path="${url_path##/}"
 
 curl -sSL -H "Authorization: Bearer $SPOTIFY_ACCESS_TOKEN" "https://api.spotify.com/$url_path" "$@"
