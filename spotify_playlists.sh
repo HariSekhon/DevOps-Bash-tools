@@ -35,10 +35,10 @@ Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=5
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+help_usage "$@"
+
 user="${SPOTIFY_USER:-me}"
 
 offset="${OFFSET:-0}"
-
-help_usage "$@"
 
 "$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
