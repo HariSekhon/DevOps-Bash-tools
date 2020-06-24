@@ -40,6 +40,8 @@ Examples:
 ./spotify_foreach_playlist.sh './spotify_playlist_tracks.sh {playlist_id} > playlists/{playlist}.txt' harisekhon
 
 ./spotify_foreach_playlist.sh './spotify_playlist_tracks_uri.sh {playlist_id} > playlist-backups/{playlist}.txt' harisekhon
+
+See spotify_backup_playlists.sh for a slightly better implementation of this one liner
 "
 
 # shellcheck disable=SC1090
