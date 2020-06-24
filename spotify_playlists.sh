@@ -24,6 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_description="
 Returns spotify playlists for \$SPOTIFY_USER / \$USER
+
+Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET in the environment, or \$SPOTIFY_ACCESS_TOKEN (can generate from spotify_api_token.sh)
+
+Caveat: limited to 50 public playlists, this script does not iterate as the output of multiple json's wouldn't be useful, iterate yourself in code if you want more specific info
 "
 
 # shellcheck disable=SC1090
