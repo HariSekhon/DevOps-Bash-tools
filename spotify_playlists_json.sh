@@ -39,8 +39,13 @@ For an example of how to use this to return and process multiple paged requests 
 
 help_usage "$@"
 
-user="${SPOTIFY_USER:-me}"
+if [ -n "${SPOTIFY_USER:-}" ]; then
+    user="users/$SPOTIFY_USER"
+else
+    # must not have 'users/' prefix (will go to an actual literal user called 'me' in that case)
+    user="me"
+fi
 
 offset="${OFFSET:-0}"
 
-"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
+"$srcdir/spotify_api.sh" "/v1/$user/playlists?limit=50&offset=$offset" "$@"
