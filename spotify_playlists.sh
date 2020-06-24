@@ -27,7 +27,7 @@ Returns spotify playlists for \$SPOTIFY_USER / \$USER
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET in the environment, or \$SPOTIFY_ACCESS_TOKEN (can generate from spotify_api_token.sh)
 
-Caveat: limited to 50 public playlists, this script does not iterate as the output of multiple json's wouldn't be useful, iterate yourself in code if you want more specific info
+Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
 "
 
 # shellcheck disable=SC1090
@@ -35,6 +35,8 @@ Caveat: limited to 50 public playlists, this script does not iterate as the outp
 
 user="${SPOTIFY_USER:-${USER:-whoami}}"
 
+offset="${OFFSET:-0}"
+
 help_usage "$@"
 
-"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50"
+"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset"
