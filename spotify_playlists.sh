@@ -31,4 +31,6 @@ Returns spotify playlists for \$SPOTIFY_USER / \$USER
 
 user="${SPOTIFY_USER:-${USER:-whoami}}"
 
+help_usage "$@"
+
 "$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50"
