@@ -17,6 +17,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
+
 # shellcheck disable=SC2034
 usage_description="
 Returns a Spotify access token from the Spotify API
@@ -37,7 +41,7 @@ check_env_defined "SPOTIFY_CLIENT_SECRET"
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 #
-output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 'grant_type=client_credentials' https://accounts.spotify.com/api/token)"
+output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 'grant_type=client_credentials' https://accounts.spotify.com/api/token "$@")"
 
 # ============================================================================ #
 
