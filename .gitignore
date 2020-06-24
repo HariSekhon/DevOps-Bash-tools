@@ -1235,7 +1235,8 @@ ipython_config.py
 
 ### KDiff3 ###
 *.BACKUP.*
-*_BACKUP_*
+# false positive excludes backup scripts
+#*_BACKUP_*
 *.BASE.*
 *_BASE_*
 *.LOCAL.*
