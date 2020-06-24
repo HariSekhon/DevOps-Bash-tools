@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#  args: harisekhon
+#
+#  Author: Hari Sekhon
+#  Date: 2020-06-24 17:39:04 +0100 (Wed, 24 Jun 2020)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<spotify_user> [<curl_options>]"
+
+# shellcheck disable=SC2034
+usage_description="
+Backs up all public spotify playlists for a given user to text files contains Spotify track URIs which can be copied and pasted back in to Spotify to restore a playlist
+
+Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
+
+Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
+
+export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+help_usage "$@"
+
+if [ $# -lt 1 ]; then
+    usage
+fi
+
+spotify_user="$1"
+shift || :
+
+backup_dir="$PWD/playlists/spotify"
+
+timestamp "Backing up Spotify playlists to $backup_dir"
+echo >&2
+mkdir -vp "$backup_dir"
+
+"$srcdir"/spotify_foreach_playlist.sh "./spotify_playlist_tracks_uri.sh '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}.txt\")\" $*" "$spotify_user" "$@"
+echo >&2
+timestamp "Backups finished"
