@@ -19,11 +19,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+usage_args="<spotify_username> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlists in raw JSON format for \$SPOTIFY_USER or current user to which the \$SPOTIFY_ACCESS_TOKEN belongs
+Returns spotify playlists in raw JSON format for the \$SPOTIFY_USER given as an argument or inherited from the evironment
 
 Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
 
@@ -39,15 +39,16 @@ For an example of how to use this to return and process multiple paged requests 
 
 help_usage "$@"
 
-if [ -n "${SPOTIFY_USER:-}" ]; then
+if [ -n "${1:-}" ]; then
+    user="users/$1"
+elif [ -n "${SPOTIFY_USER:-}" ]; then
     user="users/$SPOTIFY_USER"
 else
-    # must not have 'users/' prefix (will go to an actual literal user called 'me' in that case)
-    user="me"
+    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+    #user="me"
+    usage "user not specified"
 fi
 
 offset="${OFFSET:-0}"
 
-#         expands out to: /v1/users/harisekhon/playlists...
-#                     or: /v1/me/playlists...
-"$srcdir/spotify_api.sh" "/v1/$user/playlists?limit=50&offset=$offset" "$@"
+"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
