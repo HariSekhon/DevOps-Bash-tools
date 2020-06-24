@@ -23,13 +23,15 @@ usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlists for \$SPOTIFY_USER or current user to which the \$SPOTIFY_ACCESS_TOKEN belongs
+Returns spotify playlists in raw JSON format for \$SPOTIFY_USER or current user to which the \$SPOTIFY_ACCESS_TOKEN belongs
 
 Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
 
 export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
+
+For an example of how to use this to return and process multiple paged requests see spotify_playlists.sh
 "
 
 # shellcheck disable=SC1090
