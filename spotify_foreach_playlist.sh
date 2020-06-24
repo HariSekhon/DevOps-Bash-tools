@@ -59,12 +59,12 @@ shift || :
 "$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
     printf '%s\t' "$playlist"
+    # handle danger - done at playlist level not command level because we need late command evaluation in spotify_backup_playlists.sh
+    # this works, tested on Ke$ha playlist and `echo injected`
+    playlist="${playlist//$/\\$}"
+    playlist="${playlist//\`/}"
     cmd="${command_template//\{playlist_id\}/$playlist_id}"
     cmd="${cmd//\{playlist\}/$playlist}"
-    # handle danger
-    # this works, tested on Ke$ha playlist and `echo injected`
-    cmd="${cmd//$/\\$}"
-    cmd="${cmd//\`/}"
     eval "$cmd"
     printf '\n'
 done
