@@ -52,7 +52,7 @@ if [ $# -lt 1 ]; then
 fi
 
 command_template="$1"
-shift
+shift || :
 
 "$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
