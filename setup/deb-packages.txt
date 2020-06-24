@@ -29,6 +29,7 @@ make
 parallel
 perl
 procps
+psmisc  # for fuser for apt_wait.sh
 ruby-dev  # to build Travis CI gem
 wget
 # included in distro
