@@ -106,7 +106,7 @@ shields.io gets throttled after a few reloads :-/ - which is bad because shields
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
-200+ Shell Scripts, Advanced Bash environment & Utility Code Library.
+250+ Shell Scripts, Advanced Bash environment & Utility Code Library.
 
 Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 300+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
