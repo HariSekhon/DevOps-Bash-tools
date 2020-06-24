@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-#usage_args="arg [<options>]"
+usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -41,4 +41,4 @@ offset="${OFFSET:-0}"
 
 help_usage "$@"
 
-"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset"
+"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
