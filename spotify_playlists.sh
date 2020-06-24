@@ -23,7 +23,7 @@ usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlists for \$SPOTIFY_USER or current user to which the \$SPOTIFY_ACCESS_TOKEN belongs
+Returns spotify playlists for the \$SPOTIFY_USER given as an argument or inherited from the evironment
 
 Output Format:
 
