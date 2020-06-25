@@ -43,6 +43,7 @@ Eg.
 
 ./spotify_api.sh /v1/users/harisekhon
 
+Used by adjacent spotify_*.sh scripts for more serious usage
 "
 
 # shellcheck disable=SC1090
