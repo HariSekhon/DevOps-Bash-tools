@@ -55,6 +55,15 @@ while true; do
     ids=""
     for ((i=0; i<50; i++)); do
         read -r -s track_uri || break
+        if [[ "$track_uri" =~ ^spotify:local: ]]; then
+            track_uri="${track_uri#spotify:local:}"
+            track_uri="${track_uri#:}"
+            track_uri="${track_uri#:}"
+            track_uri="${track_uri%:*}"
+            track_uri="${track_uri//+/ }"
+            "$srcdir/urldecode.sh" <<< "$track_uri"
+            continue
+        fi
         if ! [[ "$track_uri" =~ ^(spotify:track:|http://open.spotify.com/track/)?[[:alnum:]]+$ ]]; then
             echo "Invalid track URI provided: $track_uri" >&2
             exit 1
@@ -74,4 +83,5 @@ while true; do
         exit 1
     fi
     output
+    sleep 0.1
 done
