@@ -62,6 +62,7 @@ while true; do
             track_uri="${track_uri%:*}"
             track_uri="${track_uri//+/ }"
             "$srcdir/urldecode.sh" <<< "$track_uri"
+            ((i-=1))
             continue
         fi
         if ! [[ "$track_uri" =~ ^(spotify:track:|http://open.spotify.com/track/)?[[:alnum:]]+$ ]]; then
