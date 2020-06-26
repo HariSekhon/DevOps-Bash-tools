@@ -35,9 +35,7 @@ These IDs are 22 chars, but this is length is not enforced
 
 Useful for saving Spotify playlists in a format that is easier to understand the revision control changes or export to other music systems
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
 
 # shellcheck disable=SC1090
@@ -50,6 +48,10 @@ url_base="/v1/tracks"
 output(){
     jq -r '.tracks[] | [ .artists[].name, "-", .name ] | @tsv' <<< "$output" | tr '\t' ' '
 }
+
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+fi
 
 while true; do
     ids=""
