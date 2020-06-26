@@ -27,9 +27,7 @@ usage_args="<playlist_id> [<curl_options>]"
 usage_description="
 Returns spotify playlist for given playlist id argument or \$SPOTIFY_PLAYLIST (get this from spotify_playlists.sh)
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
 
@@ -48,5 +46,9 @@ if [ -z "$playlist_id" ]; then
 fi
 
 offset="${OFFSET:-0}"
+
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+fi
 
 "$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?limit=50&offset=$offset" "$@"
