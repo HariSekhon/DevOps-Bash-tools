@@ -28,9 +28,7 @@ Backs up all public spotify playlists for a given user to text files contains Sp
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
 
 # shellcheck disable=SC1090
@@ -51,6 +49,10 @@ SECONDS=0
 timestamp "Backing up Spotify playlists to $backup_dir"
 echo >&2
 mkdir -vp "$backup_dir"
+
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+fi
 
 "$srcdir"/spotify_foreach_playlist.sh "./spotify_playlist_tracks_uri.sh '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}.txt\")\" $*" "$spotify_user" "$@"
 echo >&2
