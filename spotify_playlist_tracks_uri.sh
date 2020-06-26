@@ -29,9 +29,7 @@ Returns track URIs for the spotify playlist for given playlist id argument or \$
 
 Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
 
 # shellcheck disable=SC1090
@@ -57,6 +55,10 @@ output(){
 get_next(){
     jq -r '.next' <<< "$output"
 }
+
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+fi
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
