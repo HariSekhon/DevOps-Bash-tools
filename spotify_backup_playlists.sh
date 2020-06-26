@@ -36,12 +36,13 @@ Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the en
 
 help_usage "$@"
 
-if [ $# -lt 1 ]; then
-    usage
-fi
+spotify_user="${1:-${SPOTIFY_USER:-}}"
 
-spotify_user="$1"
 shift || :
+
+if [ -z "$spotify_user" ]; then
+    usage "\$SPOTIFY_USER not defined and no first argument given"
+fi
 
 backup_dir="$PWD/playlists/spotify"
 
