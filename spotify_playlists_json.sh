@@ -49,8 +49,4 @@ fi
 
 offset="${OFFSET:-0}"
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-fi
-
 "$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
