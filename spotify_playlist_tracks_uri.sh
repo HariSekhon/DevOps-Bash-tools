@@ -39,6 +39,8 @@ help_usage "$@"
 
 playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
 
+shift || :
+
 if [ -z "$playlist_id" ]; then
     usage "playlist id not defined"
 fi
