@@ -31,9 +31,7 @@ Useful for combining with other spotify_*.sh scripts, such as downloading all th
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment (can generate from spotify_api_token.sh) or will auto generate from \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET if found in the environment
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
+Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 
 Examples:
 
@@ -55,6 +53,10 @@ fi
 
 command_template="$1"
 shift || :
+
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+fi
 
 "$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
