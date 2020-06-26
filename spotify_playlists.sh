@@ -47,6 +47,8 @@ else
     usage "user not specified"
 fi
 
+shift || :
+
 offset="${OFFSET:-0}"
 
 url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
