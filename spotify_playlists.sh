@@ -61,6 +61,10 @@ get_next(){
     jq -r '.next' <<< "$output"
 }
 
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+fi
+
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
     # shellcheck disable=SC2181
