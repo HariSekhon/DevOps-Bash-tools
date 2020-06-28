@@ -104,10 +104,18 @@ function dockerrunrm(){
         args="$args $x"
     done
     args="${args# }"
-    if [[ "$args" =~ alpine:2 ]] && ! [[ "$args" =~ [[:space:]] ]]; then
-        echo "warning: using alpine:2.* with args but alpine:2.* doesn't have a default CMD so adding 'sh' arg" >&2
-        args="$args sh"
-    fi
+    # Alpine 2 is dead in the water since the package list repos don't even load any more:
+    #
+    # # apk update
+    # fetch http://dl-4.alpinelinux.org/alpine/v2.7/main/x86_64/APKINDEX.tar.gz
+    # wget: server returned error: HTTP/1.1 404 Not Found
+    # ERROR: http://dl-4.alpinelinux.org/alpine/v2.7/main: Bad address
+    # WARNING: Ignoring APKINDEX.0f59c441.tar.gz: No such file or directory
+    #
+    #if [[ "$args" =~ alpine:2 ]] && ! [[ "$args" =~ [[:space:]] ]]; then
+    #    echo "warning: using alpine:2.* with args but alpine:2.* doesn't have a default CMD so adding 'sh' arg" >&2
+    #    args="$args sh"
+    #fi
     eval docker run --rm -ti -v "$PWD":/pwd -w /pwd "$args"
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
