@@ -104,6 +104,10 @@ function dockerrunrm(){
         args="$args $x"
     done
     args="${args# }"
+    if [[ "$args" =~ alpine:2 ]] && ! [[ "$args" =~ [[:space:]] ]]; then
+        echo "warning: using alpine:2.* with args but alpine:2.* doesn't have a default CMD so adding 'sh' arg" >&2
+        args="$args sh"
+    fi
     eval docker run --rm -ti -v "$PWD":/pwd -w /pwd "$args"
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
