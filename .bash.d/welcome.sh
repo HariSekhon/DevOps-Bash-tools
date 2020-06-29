@@ -21,9 +21,15 @@
 
 # Bash version further down is for interest of if you don't have the other repos
 
+# welcome should be found in $PATH from DevOps-Golang-Tools repo
 # welcome.py should be found in $PATH from DevOps-Python-Tools repo
-alias welcome=welcome.py
-#welcome(){ welcome.py; }
+welcome(){
+    if type -P welcome &>/dev/null; then
+        command welcome
+    elif type -P welcome.py &>/dev/null; then
+        welcome.py
+    fi
+}
 
 # set this instead to use bash only version if you don't have the other repos
 #alias welcome=bash_welcome
@@ -65,4 +71,3 @@ bash_welcome(){
     #printf "\\n"
     printf "\\n"
 }
-
