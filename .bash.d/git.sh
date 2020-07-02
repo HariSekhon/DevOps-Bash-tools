@@ -748,9 +748,20 @@ git_rm_untracked(){
     # iterate on explicit targets only
     # intentionally not including current directory to avoid accidentally wiping out untracked files - you must specify "rm_untracked ." if you really intend this
     for x in "${@:-}"; do
-        # want splitting to separate filenames
-        # shellcheck disable=SC2046
-        rm -v $(git status --porcelain -s "$x" | awk '/^\?\?/{print $2}')
+        git status --porcelain -s --untracked-files=all "$x" |
+        # this breaks the correct spacings for Spotify playlist filenames
+        #awk '/^\?\?/{$1=""; print}' |
+        grep '^??' |
+        sed 's/^?? //' |
+        while read -r filename; do
+            # git status --porcelain double quotes file paths when containing unicode chars which are representated in \xxx format
+            # you must set 'git config --global core.quotePath false' for this to work properly
+            #
+            # this doesn't help because you are still stuck with \xxx chars throughout
+            #filename="${filename#\"}"
+            #filename="${filename%\"}"
+            rm -v "$filename" || break
+        done
     done
 }
 
