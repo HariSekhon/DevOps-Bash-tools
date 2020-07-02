@@ -44,7 +44,8 @@ if [ -z "$spotify_user" ]; then
     usage "\$SPOTIFY_USER not defined and no first argument given"
 fi
 
-backup_dir="${SPOTIFY_BACKUP_DIR:-$PWD/playlists/spotify}"
+backup_dir="${SPOTIFY_BACKUP_DIR:-$PWD/playlists}"
+backup_dir_spotify="$backup_dir/spotify"
 
 SECONDS=0
 timestamp "Backing up Spotify playlists to $backup_dir"
@@ -55,6 +56,13 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
 fi
 
-"$srcdir"/spotify_foreach_playlist.sh "echo -n '=> ' && \"$srcdir/spotify_playlist_tracks_uri.sh\" '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}\")\" $* && echo -n 'OK'" "$spotify_user" "$@"
+"$srcdir"/spotify_foreach_playlist.sh "
+    echo -n '=> URIs => ' &&
+    playlist=\"\$(\"$srcdir/spotify_playlist_to_filename.sh\" <<< \"{playlist}\")\" &&
+    \"$srcdir/spotify_playlist_tracks_uri.sh\" '{playlist_id}' > '$backup_dir_spotify'/\"\$playlist\" $* &&
+    echo -n 'OK => Tracks => ' &&
+    \"$srcdir/spotify_playlist_tracks.sh\" '{playlist_id}' > '$backup_dir'/\"\$playlist\" $* &&
+    echo -n 'OK'
+" "$spotify_user" "$@"
 echo >&2
 timestamp "Spotify playlists backup finished in $SECONDS seconds"
