@@ -45,7 +45,7 @@ playlist_id="$1"
 if ! [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
     playlist_id="$("$srcdir/spotify_playlists.sh" | awk "/$playlist_id/{print \$1; exit}" || :)"
     if [ -z "$playlist_id" ]; then
-        echo "failed to find playlist matching name regex given" >&2
+        echo "Error: failed to find playlist matching name regex given" >&2
         exit 1
     fi
 fi
