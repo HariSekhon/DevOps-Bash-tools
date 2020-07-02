@@ -57,4 +57,4 @@ fi
 
 "$srcdir"/spotify_foreach_playlist.sh "echo -n '=> ' && \"$srcdir/spotify_playlist_tracks_uri.sh\" '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}\")\" $* && echo -n 'OK'" "$spotify_user" "$@"
 echo >&2
-timestamp "Backups finished in $SECONDS seconds"
+timestamp "Spotify playlists backup finished in $SECONDS seconds"
