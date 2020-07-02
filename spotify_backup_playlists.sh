@@ -44,7 +44,7 @@ if [ -z "$spotify_user" ]; then
     usage "\$SPOTIFY_USER not defined and no first argument given"
 fi
 
-backup_dir="$PWD/playlists/spotify"
+backup_dir="${SPOTIFY_BACKUP_DIR:-$PWD/playlists/spotify}"
 
 SECONDS=0
 timestamp "Backing up Spotify playlists to $backup_dir"
