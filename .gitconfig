@@ -18,6 +18,8 @@
     #editor = vim
     # global .gitignore
     excludesfile = ~/.gitignore
+    # stops unicode chars coming out as \xxx and double quoted filenames in git status (used in .bash.d/git.sh git_rm_untracked function)
+    quotePath = false
 
     #whitespace = trailing-space,space-before-tab
 
@@ -62,7 +64,7 @@
     autocorrect = 0
 
 [homebrew]
-	donationmessage = false
+    donationmessage = false
 
 # ============================================================================ #
 #                               G i t   C o l o r
@@ -132,7 +134,7 @@
 
 # detected if installed and set via $GIT_PAGER in .bash.d/git.sh
 #[core]
-#	pager = diff-so-fancy | less --tabs=4 -RFX
+#   pager = diff-so-fancy | less --tabs=4 -RFX
 #[pager]
     # don't set --pattern, overrides -F and doesn't quit less automatically for short diffs
     #diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
@@ -175,16 +177,16 @@
 
 # install git-secrets hooks in any repo initialized or cloned to prevent credential leak
 [init]
-	templateDir = ~/.git-templates/git-secrets
+    templateDir = ~/.git-templates/git-secrets
 
 [secrets]
-	providers = git secrets --aws-provider
-	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
-	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
-	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+    providers = git secrets --aws-provider
+    patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
+    patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+    patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
     # doesn't work, doesn't support (?! ) negative lookahead regex
     #patterns = (\bhari|sekhon\b)(!.*@gmail.com)
     # only applies to contents, not metadata to prevent wrong author commits
     #patterns = hari|sekhon
-	allowed = AKIAIOSFODNN7EXAMPLE
-	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    allowed = AKIAIOSFODNN7EXAMPLE
+    allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
