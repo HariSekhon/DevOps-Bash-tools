@@ -53,7 +53,9 @@ offset="${OFFSET:-0}"
 url_path="/v1/playlists/$playlist_id/tracks?limit=50&offset=$offset"
 
 output(){
-    jq -r '.items[].track | [([.artists[].name] | join(",")), "-", .name] | @tsv' <<< "$output" | tr '\t' ' '
+    jq -r '.items[].track | [([.artists[].name] | join(",")), "-", .name] | @tsv' <<< "$output" |
+    tr '\t' ' ' |
+    sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
 }
 
 get_next(){
