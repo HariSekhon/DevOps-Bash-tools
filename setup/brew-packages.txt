@@ -19,6 +19,7 @@ coreutils
 cpanm
 direnv
 findutils
+gawk
 git-secrets
 gnu-sed
 golang
