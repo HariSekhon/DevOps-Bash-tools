@@ -55,6 +55,6 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
 fi
 
-"$srcdir"/spotify_foreach_playlist.sh "echo -n '=> ' && ./spotify_playlist_tracks_uri.sh '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}.txt\")\" $* && echo -n 'OK'" "$spotify_user" "$@"
+"$srcdir"/spotify_foreach_playlist.sh "echo -n '=> ' && \"$srcdir/spotify_playlist_tracks_uri.sh\" '{playlist_id}' > '$backup_dir'/\"\$(tr -d / <<< \"{playlist}\")\" $* && echo -n 'OK'" "$spotify_user" "$@"
 echo >&2
 timestamp "Backups finished in $SECONDS seconds"
