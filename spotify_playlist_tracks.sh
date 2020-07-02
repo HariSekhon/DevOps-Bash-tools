@@ -2,6 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  args: 64OO67Be8wOXn6STqHxexr
+#  args: Florence.*
 #
 #  Author: Hari Sekhon
 #  Date: 2020-06-24 01:17:21 +0100 (Wed, 24 Jun 2020)
@@ -25,7 +26,9 @@ usage_args="<playlist_id> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns track names for the spotify playlist for given playlist id argument or \$SPOTIFY_PLAYLIST (get this from spotify_playlists.sh)
+Returns track names for the argument specifying a spotify playlist name (regex match) or playlist id (get this from spotify_playlists.sh)
+
+\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
@@ -43,6 +46,15 @@ if [ -z "$playlist_id" ]; then
     usage "playlist id not defined"
 fi
 
+# if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
+if ! [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
+    playlist_id="$("$srcdir/spotify_playlists.sh" | awk "/$playlist_id/{print \$1; exit}" || :)"
+    if [ -z "$playlist_id" ]; then
+        echo "failed to find playlist matching name regex given" >&2
+        exit 1
+    fi
+fi
+
 offset="${OFFSET:-0}"
 
 url_path="/v1/playlists/$playlist_id/tracks?limit=50&offset=$offset"
@@ -56,7 +68,8 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
 fi
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
