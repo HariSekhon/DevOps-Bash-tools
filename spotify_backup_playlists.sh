@@ -64,10 +64,8 @@ fi
 # for spotify_backup_playlist.sh to inherit
 export SPOTIFY_BACKUP_DIR="$backup_dir"
 
-# stop spotify_foreach_playlist.sh from printing the playlist name as this results in duplicate output
-export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
 export SPOTIFY_FOREACH_NO_NEWLINE=1
 
-"$srcdir"/spotify_foreach_playlist.sh "$srcdir/spotify_backup_playlist.sh '{playlist}'" "$spotify_user" "$@"
+"$srcdir"/spotify_foreach_playlist.sh "$srcdir/spotify_backup_playlist.sh '{playlist_id}'" "$spotify_user" "$@"
 echo >&2
 timestamp "Spotify playlists backup finished in $SECONDS seconds"
