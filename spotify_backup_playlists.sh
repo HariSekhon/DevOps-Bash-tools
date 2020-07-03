@@ -24,11 +24,15 @@ usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Backs up all public spotify playlists for a given user to text files contains Spotify track URIs which can be copied and pasted back in to Spotify to restore a playlist
+Backs up all public spotify playlists for a given user to text files containing Spotify track URIs
+which can be copied and pasted back in to Spotify to restore a playlist to a previous state
+(for example if you accidentally deleted a track and didn't do an immediate Ctrl-Z / Cmd-Z)
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+
+Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
 # shellcheck disable=SC1090
