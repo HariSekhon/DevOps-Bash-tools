@@ -23,7 +23,7 @@ Uses Spotify API to translate a Spotify public playlist name to ID
 
 Matches the first playlist from your account with a name matching the given argument as a partial string match
 
-If a spotify playlist ID is given, returns as is
+If a Spotify playlist ID is given, returns as is
 
 Needed by several other adjacent spotify tools
 
@@ -41,7 +41,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-playlist_id="$1"
+playlist_name="$1"
 shift || :
 
 if [ "$(uname -s)" = Darwin ]; then
@@ -51,18 +51,20 @@ if [ "$(uname -s)" = Darwin ]; then
 fi
 
 # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
-if ! [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
+if [[ "$playlist_name" =~ ^[[:alnum:]]{22}$ ]]; then
+    echo "$playlist_name"
+else
     # works but could get needlessly complicated to escape all possible regex special chars, switching to partial string match instead
     #playlist_regex="${playlist_id//\//\\/}"
     #playlist_regex="${playlist_regex//\(/\\(}"
     #playlist_regex="${playlist_regex//\)/\\)}"
                    #awk "BEGIN{IGNORECASE=1} /${playlist_regex//\//\\/}/ {print \$1; exit}" || :)"
     playlist_id="$("$srcdir/spotify_playlists.sh" "$@" |
-                   grep -Fi -m1 "$playlist_id" |
+                   grep -Fi -m1 "$playlist_name" |
                    awk '{print $1}' || :)"
     if [ -z "$playlist_id" ]; then
-        echo "Error: failed to find playlist matching name regex given" >&2
+        echo "Error: failed to find playlist ID matching given playlist name '$playlist_name'" >&2
         exit 1
     fi
+    echo "$playlist_id"
 fi
-echo "$playlist_id"
