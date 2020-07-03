@@ -46,7 +46,9 @@ help_usage "$@"
 url_base="/v1/tracks"
 
 output(){
-    jq -r '.tracks[] | [ .artists[].name, "-", .name ] | @tsv' <<< "$output" | tr '\t' ' '
+    jq -r '.tracks[] | [([.artists[].name] | join(",")), "-", .name] | @tsv' <<< "$output" |
+    tr '\t' ' ' |
+    sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
