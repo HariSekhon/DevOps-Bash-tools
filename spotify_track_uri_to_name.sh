@@ -23,7 +23,7 @@ usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Takes Spotify track URIS and converts them to 'Artist - Track names' using the Spotify API
+Takes Spotify track URIs and converts them to 'Artist - Track' names using the Spotify API
 
 Track URIs are fed via standard input and can accept any of the following forms for convenience:
 
@@ -31,9 +31,9 @@ spotify:track:<alphanumeric_ID>
 http://open.spotify.com/track/<alphanumeric_ID>
 <alphanumeric_ID>
 
-These IDs are 22 chars, but this is length is not enforced
+These IDs are 22 chars, but this is length is not enforced in case the Spotify API changes
 
-Useful for saving Spotify playlists in a format that is easier to understand the revision control changes or export to other music systems
+Useful for saving Spotify playlists in a format that is easier to understand, revision control changes or export to other music systems
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
