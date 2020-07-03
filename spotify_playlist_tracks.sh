@@ -35,6 +35,14 @@ or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
+Output format:
+
+Artist - Track
+
+or if \$SPOTIFY_CSV environment variable is set then:
+
+\"Artist\",\"Track\"
+
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 
 Caveat: due to limitations of the Spotify API, this only works for public playlists
@@ -60,7 +68,11 @@ offset="${OFFSET:-0}"
 url_path="/v1/playlists/$playlist_id/tracks?limit=50&offset=$offset"
 
 output(){
-    jq -r '.items[].track | [([.artists[].name] | join(",")), "-", .name] | @tsv' <<< "$output" |
+    if [ -n "${SPOTIFY_CSV:-}" ]; then
+        jq -r '.items[].track | [([.artists[].name] | join(",")), .name] | @csv'
+    else
+        jq -r '.items[].track | [([.artists[].name] | join(",")), "-", .name] | @tsv'
+    fi <<< "$output" |
     tr '\t' ' ' |
     sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
 }
