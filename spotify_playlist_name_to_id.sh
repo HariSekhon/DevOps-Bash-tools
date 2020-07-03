@@ -26,6 +26,8 @@ Matches the first playlist from your account with a name matching the given rege
 If a spotify playlist ID is given, returns as is
 
 Needed by several other adjacent spotify tools
+
+Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
 # used by usage() in lib/utils.sh
