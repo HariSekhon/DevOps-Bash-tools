@@ -24,8 +24,9 @@ usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Backs up all public spotify playlists for a given user to text files containing Spotify track URIs
-which can be copied and pasted back in to Spotify to restore a playlist to a previous state
+Backs up all public Spotify playlists for a given user to text files in both Spotify and human readable formats
+
+Spotify track URI format can be copied and pasted back in to Spotify to restore a playlist to a previous state
 (for example if you accidentally deleted a track and didn't do an immediate Ctrl-Z / Cmd-Z)
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
@@ -57,7 +58,8 @@ echo >&2
 mkdir -vp "$backup_dir"
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
 fi
 
 "$srcdir"/spotify_foreach_playlist.sh "
