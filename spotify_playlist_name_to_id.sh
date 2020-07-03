@@ -58,7 +58,7 @@ if ! [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
     #playlist_regex="${playlist_regex//\)/\\)}"
                    #awk "BEGIN{IGNORECASE=1} /${playlist_regex//\//\\/}/ {print \$1; exit}" || :)"
     playlist_id="$("$srcdir/spotify_playlists.sh" "$@" |
-                   grep -F -m1 "$playlist_id" |
+                   grep -Fi -m1 "$playlist_id" |
                    awk '{print $1}' || :)"
     if [ -z "$playlist_id" ]; then
         echo "Error: failed to find playlist matching name regex given" >&2
