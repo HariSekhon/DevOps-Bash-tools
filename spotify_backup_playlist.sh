@@ -72,14 +72,14 @@ fi
 playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist" "$@")"
 playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
 
-echo -n "$playlist_name => URIs => "
+echo -n "$playlist_name "
 
 filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
+echo -n "=> URIs => "
 "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
 
 echo -n 'OK => Tracks => '
-
 "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
 
 echo 'OK'
