@@ -468,7 +468,7 @@ gitu(){
     fi
     # shellcheck disable=SC2086
     git diff $targets &&
-    read -r &&
+    read -r -p "Hit enter to commit or Control-C to cancel" &&
     git add $targets &&
     echo "committing $targets" &&
     git commit -m "updated $targets" $targets
