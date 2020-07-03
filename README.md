@@ -274,7 +274,7 @@ etc.
   - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
   - `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
   - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
-- `spotify_*.sh` - [Spotify](https://www.spotify.com/) API scripts to list playlists, track URIs, Artists and Track names, convert Spotify URIs to human readable names, create backups of all Spotify playlists, iterate any command against all playlists, query any API endpoint with authentication etc.
+- `spotify_*.sh` - [Spotify](https://www.spotify.com/) API scripts to list playlists, playlist contents as track URIs / `Artists - Track` / CSV, convert Spotify track URIs to `Artist - Track` / CSV, create backups of all Spotify playlists, iterate any command against all playlists, query any API endpoint with authentication etc.
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - Programming language linting:
