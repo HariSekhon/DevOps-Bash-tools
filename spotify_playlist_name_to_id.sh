@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Uses Spotify API to translate a spotify playlist name to ID
+Uses Spotify API to translate a spotify public playlist name to ID
 
 Matches the first playlist from your account with a name matching the given regex argument
 
