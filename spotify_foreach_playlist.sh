@@ -23,7 +23,7 @@ usage_args="<command to execute per playlist> [<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Executes a command per Spotify playlist for a given user
+Executes a command per Spotify public playlist for a given user
 
 The command must be quoted as the first argument and is templated, replacing the placeholders {playlist} and {playlist_id} in the command string
 
@@ -39,7 +39,9 @@ Examples:
 
 ./spotify_foreach_playlist.sh './spotify_playlist_tracks_uri.sh {playlist_id} > playlist-backups/{playlist}.txt' harisekhon
 
-See spotify_backup_playlists.sh for a slightly better implementation of this one liner
+(see spotify_backup_playlists.sh for an even better implementation of this above one liner using this script)
+
+Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
 # shellcheck disable=SC1090
