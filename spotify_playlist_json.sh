@@ -21,13 +21,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist_id> [<curl_options>]"
+usage_args="<playlist> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify public playlist json output from API for a given playlist argument
+Returns Spotify API output for a given public playlist
 
-Playlist can be a playlist name (a regex which will return the first matching playlist)
+Playlist argument can be a playlist name (a regex which will return the first matching playlist)
 or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
