@@ -44,11 +44,11 @@ min_args 1 "$@"
 playlist_name="$1"
 shift || :
 
-if [ "$(uname -s)" = Darwin ]; then
-    awk(){
-        command gawk "$@"
-    }
-fi
+#if [ "$(uname -s)" = Darwin ]; then
+#    awk(){
+#        command gawk "$@"
+#    }
+#fi
 
 # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
 if [[ "$playlist_name" =~ ^[[:alnum:]]{22}$ ]]; then
