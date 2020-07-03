@@ -62,7 +62,9 @@ fi
 
 "$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
-    printf '%s\t' "$playlist"
+    if [ -z "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}" ]; then
+        printf '%s\t' "$playlist"
+    fi
     # handle danger - done at playlist level not command level because we need late command evaluation in spotify_backup_playlists.sh
     # this works, tested on Ke$ha playlist and `echo injected`
     playlist="${playlist//$/\\$}"
