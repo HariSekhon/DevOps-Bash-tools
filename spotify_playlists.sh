@@ -23,7 +23,9 @@ usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns the list of Spotify public playlists for the \$SPOTIFY_USER given as an argument or inherited from the evironment
+Returns the list of Spotify public playlists for the given Spotify user
+
+\$SPOTIFY_USER can be used from the evironment if no first argument is given
 
 Output Format:
 
