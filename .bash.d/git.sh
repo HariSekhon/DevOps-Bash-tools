@@ -34,6 +34,10 @@ if [ -z "${GITLAB_API_ENDPOINT:-}" ]; then
     export GITLAB_API_ENDPOINT="https://gitlab.com/api/v3"
 fi
 
+if ! type basedir &>/dev/null; then
+    . "$(dirname "${BASH_SOURCE[0]}")/functions.sh"
+fi
+
 # set location where you check out all the github repos
 export github=~/github
 
