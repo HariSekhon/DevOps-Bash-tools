@@ -74,7 +74,11 @@ output(){
         jq -r '.items[].track | [([.artists[].name] | join(",")), "-", .name] | @tsv'
     fi <<< "$output" |
     tr '\t' ' ' |
-    sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
+    sed '
+        s/^[[:space:]]*-//;
+        s/^[[:space:]]*//;
+        s/[[:space:]]*$//
+    '
 }
 
 get_next(){
