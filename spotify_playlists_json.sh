@@ -52,6 +52,8 @@ else
     usage "user not specified"
 fi
 
+shift || :
+
 offset="${OFFSET:-0}"
 
 "$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
