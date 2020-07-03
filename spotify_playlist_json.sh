@@ -25,13 +25,21 @@ usage_args="<playlist_id> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlist for given playlist id argument or \$SPOTIFY_PLAYLIST (get this from spotify_playlists.sh)
+Returns spotify public playlist json output from API for a given playlist argument
+
+Playlist can be a playlist name (a regex which will return the first matching playlist)
+or a playlist ID (get this from spotify_playlists.sh)
+
+\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 
-Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
+Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
+        This script does not iterate each page automatically because the output would be nonsensical
+        multiple json outputs so you must iterate yourself and process each json result in turn
+        For an example of how to do this and process multiple paged requests see spotify_playlist_tracks.sh
 
-For an example of how to do this and process multiple paged requests see spotify_playlist_tracks.sh
+Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
 # shellcheck disable=SC1090
@@ -45,10 +53,13 @@ if [ -z "$playlist_id" ]; then
     usage "playlist id not defined"
 fi
 
+playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
+
 offset="${OFFSET:-0}"
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
 fi
 
 "$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?limit=50&offset=$offset" "$@"
