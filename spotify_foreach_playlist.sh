@@ -72,5 +72,7 @@ while read -r playlist_id playlist; do
     cmd="${command_template//\{playlist_id\}/$playlist_id}"
     cmd="${cmd//\{playlist\}/$playlist}"
     eval "$cmd"
-    printf '\n'
+    if [ -z "${SPOTIFY_FOREACH_NO_NEWLINE:-}" ]; then
+        printf '\n'
+    fi
 done
