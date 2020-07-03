@@ -49,7 +49,13 @@ if [ -z "$spotify_user" ]; then
     usage "\$SPOTIFY_USER not defined and no first argument given"
 fi
 
-backup_dir="${SPOTIFY_BACKUP_DIR:-$PWD/playlists}"
+if [ -n "${SPOTIFY_BACKUP_DIR:-}" ]; then
+    backup_dir="$SPOTIFY_BACKUP_DIR"
+elif [[ "$PWD" =~ playlist ]]; then
+    backup_dir="$PWD"
+else
+    backup_dir="$PWD/playlists"
+fi
 
 SECONDS=0
 timestamp "Backing up Spotify playlists to $backup_dir"
@@ -61,9 +67,11 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-# for spotify_backup_playlist.sh to inherit
+# for spotify_backup_playlist.sh to inherit, saving executions to recalculate on each iteration
 export SPOTIFY_BACKUP_DIR="$backup_dir"
 
+# stop spotify_foreach_playlist.sh from printing the playlist name as this results in duplicate output
+export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
 export SPOTIFY_FOREACH_NO_NEWLINE=1
 
 "$srcdir"/spotify_foreach_playlist.sh "$srcdir/spotify_backup_playlist.sh '{playlist_id}'" "$spotify_user" "$@"
