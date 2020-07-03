@@ -26,7 +26,12 @@ usage_args="<playlist_id> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns track names for the argument specifying a Spotify public playlist name (regex match) or playlist id (get this from spotify_playlists.sh)
+Returns track names in a given Spotify public playlist
+
+Playlist argument can be a playlist name (a regex which will return the first matching playlist)
+or a playlist ID (get this from spotify_playlists.sh)
+
+\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
