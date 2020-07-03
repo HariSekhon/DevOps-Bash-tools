@@ -19,9 +19,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Uses Spotify API to translate a spotify public playlist name to ID
+Uses Spotify API to translate a Spotify public playlist name to ID
 
-Matches the first playlist from your account with a name matching the given regex argument
+Matches the first playlist from your account with a name matching the given argument as a partial string match
 
 If a spotify playlist ID is given, returns as is
 
@@ -52,7 +52,14 @@ fi
 
 # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
 if ! [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
-    playlist_id="$("$srcdir/spotify_playlists.sh" "$@" | awk "BEGIN{IGNORECASE=1} /${playlist_id//\//\\/}/ {print \$1; exit}" || :)"
+    # works but could get needlessly complicated to escape all possible regex special chars, switching to partial string match instead
+    #playlist_regex="${playlist_id//\//\\/}"
+    #playlist_regex="${playlist_regex//\(/\\(}"
+    #playlist_regex="${playlist_regex//\)/\\)}"
+                   #awk "BEGIN{IGNORECASE=1} /${playlist_regex//\//\\/}/ {print \$1; exit}" || :)"
+    playlist_id="$("$srcdir/spotify_playlists.sh" "$@" |
+                   grep -F -m1 "$playlist_id" |
+                   awk '{print $1}' || :)"
     if [ -z "$playlist_id" ]; then
         echo "Error: failed to find playlist matching name regex given" >&2
         exit 1
