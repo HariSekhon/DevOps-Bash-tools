@@ -24,7 +24,7 @@ usage_args="<playlist_name>"
 
 # shellcheck disable=SC2034
 usage_description="
-Normalizes a Spotify playlist  provided as arg(s) or stdin to a valid filename
+Normalizes a Spotify playlist name provided as arg(s) or stdin to a valid filename
 "
 
 # shellcheck disable=SC1090
