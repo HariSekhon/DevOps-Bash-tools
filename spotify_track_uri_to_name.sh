@@ -33,6 +33,14 @@ http://open.spotify.com/track/<alphanumeric_ID>
 
 These IDs are 22 chars, but this is length is not enforced in case the Spotify API changes
 
+Output format:
+
+Artist - Track
+
+or if \$SPOTIFY_CSV environment variable is set then:
+
+\"Artist\",\"Track\"
+
 Useful for saving Spotify playlists in a format that is easier to understand, revision control changes or export to other music systems
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
@@ -46,7 +54,11 @@ help_usage "$@"
 url_base="/v1/tracks"
 
 output(){
-    jq -r '.tracks[] | [([.artists[].name] | join(",")), "-", .name] | @tsv' <<< "$output" |
+    if [ -n "${SPOTIFY_CSV:-}" ]; then
+        jq -r '.tracks[] | [([.artists[].name] | join(",")), .name] | @csv'
+    else
+        jq -r '.tracks[] | [([.artists[].name] | join(",")), "-", .name] | @tsv'
+    fi <<< "$output" |
     tr '\t' ' ' |
     sed 's/^[[:space:]]*//; s/[[:space:]]*$//'
 }
