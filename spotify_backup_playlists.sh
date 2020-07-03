@@ -50,7 +50,6 @@ if [ -z "$spotify_user" ]; then
 fi
 
 backup_dir="${SPOTIFY_BACKUP_DIR:-$PWD/playlists}"
-backup_dir_spotify="$backup_dir/spotify"
 
 SECONDS=0
 timestamp "Backing up Spotify playlists to $backup_dir"
@@ -62,13 +61,12 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-"$srcdir"/spotify_foreach_playlist.sh "
-    echo -n '=> URIs => ' &&
-    playlist=\"\$(\"$srcdir/spotify_playlist_to_filename.sh\" <<< \"{playlist}\")\" &&
-    \"$srcdir/spotify_playlist_tracks_uri.sh\" '{playlist_id}' > '$backup_dir_spotify'/\"\$playlist\" $* &&
-    echo -n 'OK => Tracks => ' &&
-    \"$srcdir/spotify_playlist_tracks.sh\" '{playlist_id}' > '$backup_dir'/\"\$playlist\" $* &&
-    echo -n 'OK'
-" "$spotify_user" "$@"
+# for spotify_backup_playlist.sh to inherit
+export SPOTIFY_BACKUP_DIR="$backup_dir"
+
+# stop spotify_foreach_playlist.sh from printing the playlist name as this results in duplicate output
+export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
+
+"$srcdir"/spotify_foreach_playlist.sh "$srcdir/spotify_backup_playlist.sh '{playlist}'" "$spotify_user" "$@"
 echo >&2
 timestamp "Spotify playlists backup finished in $SECONDS seconds"
