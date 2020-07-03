@@ -23,13 +23,18 @@ usage_args="<spotify_username> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns spotify playlists in raw JSON format for the \$SPOTIFY_USER given as an argument or inherited from the evironment
+Returns the list of Spotify public playlists in raw JSON format for the given Spotify user
+
+\$SPOTIFY_USER can be used from the evironment if no first argument is given
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 
-Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50. This script does not iterate each page automatically because the output would be nonsensical multiple json outputs so you must iterate yourself and process each json result in turn
+Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
+        This script does not iterate each page automatically because the output would be nonsensical
+        multiple json outputs so you must iterate yourself and process each json result in turn
+        For an example of how to do this and process multiple paged requests see spotify_playlists.sh
 
-For an example of how to do this and process multiple paged requests see spotify_playlists.sh
+Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
 # shellcheck disable=SC1090
