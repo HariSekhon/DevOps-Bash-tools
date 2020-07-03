@@ -25,11 +25,16 @@ usage_args="<playlist_id> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns track URIs for the spotify playlist for given playlist id argument or \$SPOTIFY_PLAYLIST (get this from spotify_playlists.sh)
+Returns track URIs for the given Spotify public playlist
+
+Playlist argument can be a playlist name (a regex which will return the first matching playlist)
+or a playlist ID (get this from spotify_playlists.sh)
 
 Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+
+Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
 # shellcheck disable=SC1090
