@@ -35,6 +35,7 @@ if [ -z "${GITLAB_API_ENDPOINT:-}" ]; then
 fi
 
 if ! type basedir &>/dev/null; then
+    # shellcheck disable=SC1090
     . "$(dirname "${BASH_SOURCE[0]}")/functions.sh"
 fi
 
@@ -416,17 +417,20 @@ _gitaddimport() {
     trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes;
     pushd "$basedir" > /dev/null || return 1;
     # shellcheck disable=SC2086
-    targets="$(strip_basedirs "$basedir" "$@")";
-    for x in $targets; do
-        if git status -s "$x" | grep -q '^[?A]'; then
-            git add "$x" &&
-            git commit -m "$action $x" "$x"
-        elif git status -s "$x" | grep -q '^.M'; then
-            echo "'$x' already in git, but has changes, commit as an update instead" >&2
+    local filenames
+    filenames="$(strip_basedirs "$basedir" "$@")";
+    while read -r filename; do
+        if ! [ -f "$filename" ]; then
+            echo "$filename does not exist" >&2
+        elif git status -s "$filename" | grep -q '^[?A]'; then
+            git add "$filename" &&
+            git commit -m "$action $filename" "$filename"
+        elif git status -s "$filename" | grep -q '^.M'; then
+            echo "'$filename' already in git, but has changes, commit as an update instead" >&2
         else
-            echo "'$x' already in git" >&2
+            echo "'$filename' already in git" >&2
         fi
-    done
+    done <<< "$filenames"
     popd > /dev/null || :
 }
 
