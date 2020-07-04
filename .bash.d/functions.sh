@@ -175,11 +175,11 @@ remove_last_column(){
 strip_basedirs(){
     local basedir="$1"
     shift
-    for x in "$@"; do
-        y="${x#${basedir%%/}/}"
-        y="${y##/}"
-        echo "$y"
-    done
+    while read -r filename; do
+        filename="${filename#${basedir%%/}/}"
+        filename="${filename##/}"
+        echo "$filename"
+    done <<< "$@"
 }
 
 user(){
