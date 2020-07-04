@@ -27,6 +27,9 @@ usage_args="<spotify_user> [<curl_options>]"
 usage_description="
 Returns the list of Spotify public playlists for the given Spotify user
 
+Returns only playlists that originate from the given Spotify user by default
+Set \$SPOTIFY_PLAYLISTS_ALL=1 in the environment to return all followed playlists as well
+
 \$SPOTIFY_USER can be used from the evironment if no first argument is given
 
 Output Format:
@@ -60,7 +63,11 @@ offset="${OFFSET:-0}"
 url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
 
 output(){
-    jq -r '.items[] | [.id, .name] | @tsv' <<< "$output"
+    if [ -n "${SPOTIFY_PLAYLISTS_ALL:-}" ]; then
+        jq -r ".items[] | [.id, .name] | @tsv"
+    else
+        jq -r ".items[] | select(.owner.id == \"$user\") | [.id, .name] | @tsv"
+    fi <<< "$output"
 }
 
 get_next(){
@@ -68,7 +75,8 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
 fi
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
