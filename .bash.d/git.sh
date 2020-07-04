@@ -446,44 +446,38 @@ gitimport(){
 # shellcheck disable=SC2086
 gitu(){
     if [ -z "$1" ]; then
-        echo "usage: gitu <file>"
+        echo "usage: gitu <file> <file2> ..."
         return 3
     fi
-    local targets
-    if [ -n "$(git diff "$@" 2>/dev/null || :)" ]; then
-        targets="$*"
-    else
-        # follow symlinks to the actual files because diffing symlinks returns no changes
-        targets="$(resolve_symlinks "$@")"
-    fi
     local basedir
-    # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
-    basedir="$(basedir "$targets")" &&
     local trap_codes="INT ERR"
     # expand now
     # shellcheck disable=SC2064
     trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes
-    pushd "$basedir" >/dev/null || return 1
-    targets="$(strip_basedirs "$basedir" "$targets")"
-    # shellcheck disable=SC2086
-    if [ -z "$(git diff "$targets")" ]; then
-        popd &>/dev/null || :
-        return 0
-    fi
-    for filename in $targets; do
-        if git diff "$filename" &&
-        echo &&
-        read -r -p "Hit enter to commit '$filename' or Control-C to cancel" &&
-        echo &&
-        git add "$filename" &&
-        echo "committing $filename" &&
-        git commit -m "updated $filename" "$filename"; then
+    #targets=("$(strip_basedirs "$basedir" "$targets")")
+    for filename in "$@"; do
+        # follow symlinks to the actual files because diffing symlinks returns no changes
+        filename="$(resolve_symlinks "$filename")"
+        # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
+        basedir="$(basedir "$filename")" || return 1
+        pushd "$basedir" >/dev/null || return 1
+        if [ -z "$(git diff "${filename##*/}")" ]; then
+            popd &>/dev/null || :
+            return 0
+        fi
+        git diff "${filename##*/}"
+        echo
+        read -r -p "Hit enter to commit '$filename' or Control-C to cancel" || return 1
+        echo
+        if git add "${filename##*/}" &&
+           echo "committing $filename" &&
+           git commit -m "updated ${filename##*/}" "${filename##*/}"; then
             :
         else
             break
         fi
+        popd &>/dev/null || :
     done
-    popd &>/dev/null || :
     trap - $trap_codes
 }
 
