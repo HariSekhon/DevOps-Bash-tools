@@ -59,7 +59,7 @@ else
     #playlist_regex="${playlist_regex//\(/\\(}"
     #playlist_regex="${playlist_regex//\)/\\)}"
                    #awk "BEGIN{IGNORECASE=1} /${playlist_regex//\//\\/}/ {print \$1; exit}" || :)"
-    playlist_id="$("$srcdir/spotify_playlists.sh" "$@" |
+    playlist_id="$(SPOTIFY_PLAYLISTS_ALL=1 "$srcdir/spotify_playlists.sh" "$@" |
                    grep -Fi -m1 "$playlist_name" |
                    awk '{print $1}' || :)"
     if [ -z "$playlist_id" ]; then
