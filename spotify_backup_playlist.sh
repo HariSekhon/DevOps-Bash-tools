@@ -69,8 +69,8 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist" "$@")"
 playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
+playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
 
 echo -n "$playlist_name "
 
