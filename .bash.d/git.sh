@@ -458,24 +458,31 @@ gitu(){
     fi
     local basedir
     # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
-    basedir="$(basedir $targets)" &&
+    basedir="$(basedir "$targets")" &&
     local trap_codes="INT ERR"
     # expand now
     # shellcheck disable=SC2064
     trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes
     pushd "$basedir" >/dev/null || return 1
-    targets="$(strip_basedirs "$basedir" $targets)"
+    targets="$(strip_basedirs "$basedir" "$targets")"
     # shellcheck disable=SC2086
-    if [ -z "$(git diff $targets)" ]; then
+    if [ -z "$(git diff "$targets")" ]; then
         popd &>/dev/null || :
         return 0
     fi
-    # shellcheck disable=SC2086
-    git diff $targets &&
-    read -r -p "Hit enter to commit or Control-C to cancel" &&
-    git add $targets &&
-    echo "committing $targets" &&
-    git commit -m "updated $targets" $targets
+    for filename in $targets; do
+        if git diff "$filename" &&
+        echo &&
+        read -r -p "Hit enter to commit '$filename' or Control-C to cancel" &&
+        echo &&
+        git add "$filename" &&
+        echo "committing $filename" &&
+        git commit -m "updated $filename" "$filename"; then
+            :
+        else
+            break
+        fi
+    done
     popd &>/dev/null || :
     trap - $trap_codes
 }
