@@ -42,8 +42,7 @@ fi
 # 'k8s-app' label is set by dashboard creation but who uses that
 k8s_get_pod_opts="-o wide -L app,env"
 
-# this is one of the most used things out there, even more than ping
-alias p='k get po $k8s_get_pod_opts'
+#alias p='k get po $k8s_get_pod_opts'
 alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
