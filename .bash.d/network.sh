@@ -25,9 +25,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 alias 4="ping 4.2.2.1"
 
-# using alias p for 'kubectl get pods' now
-#alias ping="ping -n"
-#alias p=ping
+alias ping="ping -n"
 
 pingwait="-w"
 isMac && pingwait="-W"
