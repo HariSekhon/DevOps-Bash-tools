@@ -28,7 +28,7 @@ usage_description="
 Returns the list of Spotify public playlists for the given Spotify user
 
 Returns only playlists that originate from the given Spotify user by default
-Set \$SPOTIFY_PLAYLISTS_ALL=1 in the environment to return all followed playlists as well
+Set \$SPOTIFY_PLAYLISTS_ALL in the environment to return all followed playlists as well
 
 \$SPOTIFY_USER can be used from the evironment if no first argument is given
 
