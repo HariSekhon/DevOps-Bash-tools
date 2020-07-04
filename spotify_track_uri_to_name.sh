@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/
+
+# https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -48,10 +52,6 @@ in order to preserve the correct playlist ordering between Spotify and local tra
 
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
-
-# https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/
-
-# https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
