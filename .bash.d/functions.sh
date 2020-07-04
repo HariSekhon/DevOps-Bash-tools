@@ -291,9 +291,8 @@ alias topcmds=topcommands
 f(){
     local grep=""
     # shellcheck disable=SC2013
-    #for x in $(sed 's/[^A-Za-z0-9]/ /g' <<< "$*"); do
-    for x in "${@//[^A-Za-z]/_}"; do
-        if [[ "$x" =~ [a-zA-Z0-9] ]]; then
+    for x in "${@//[^A-Za-z0-9_-]/.}"; do
+        if [[ "$x" =~ [a-zA-Z0-9._-] ]]; then
             grep="$grep | grep -i --color=auto $x"
         fi
     done
