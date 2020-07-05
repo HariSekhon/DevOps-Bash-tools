@@ -63,22 +63,24 @@ url_base="/v1/tracks"
 #sleep_secs="0.1"
 sleep_secs="0"
 
+declare -a curl_options
+if [ $# -gt 0 ]; then
+    curl_options=("$@")
+else
+    curl_options=()
+fi
+
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-track_by_track(){
+convert_by_track(){
     while true; do
         read -r -s track_uri || break
         [ -z "$track_uri" ] && break
         if [[ "$track_uri" =~ ^spotify:local: ]]; then
-            track_uri="${track_uri#spotify:local:}"
-            track_uri="${track_uri#:}"
-            track_uri="${track_uri#:}"
-            track_uri="${track_uri%:*}"
-            track_uri="${track_uri//+/ }"
-            "$srcdir/urldecode.sh" <<< "$track_uri"
+            output_local_track "$track_uri"
             continue
         fi
         if ! [[ "$track_uri" =~ ^(spotify:track:|http://open.spotify.com/track/)?[[:alnum:]]+$ ]]; then
@@ -87,7 +89,9 @@ track_by_track(){
         fi
         track_id="${track_uri##*[:/]}"
         url_path="$url_base/$track_id"
-        output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
+        # cannot quote curl_options as when empty as this results in a blank literal which breaks curl
+        # shellcheck disable=SC2068
+        output="$("$srcdir/spotify_api.sh" "$url_path" ${curl_options[@]:-})"
         # shellcheck disable=SC2181
         if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
             echo "$output" >&2
@@ -98,20 +102,17 @@ track_by_track(){
     done
 }
 
-track_by_bulk(){
+convert_by_bulk(){
     while true; do
-        ids=""
-        for ((i=0; i<50; i++)); do
+        declare -a ids
+        ids=()
+        while [ "${#ids[@]}" -lt 50 ]; do
             read -r -s track_uri || break
             [ -z "$track_uri" ] && break
             if [[ "$track_uri" =~ ^spotify:local: ]]; then
-                track_uri="${track_uri#spotify:local:}"
-                track_uri="${track_uri#:}"
-                track_uri="${track_uri#:}"
-                track_uri="${track_uri%:*}"
-                track_uri="${track_uri//+/ }"
-                "$srcdir/urldecode.sh" <<< "$track_uri"
-                ((i-=1))
+                query_bulk_tracks "${ids[@]}"
+                ids=()
+                output_local_track "$track_uri"
                 continue
             fi
             if ! [[ "$track_uri" =~ ^(spotify:track:|http://open.spotify.com/track/)?[[:alnum:]]+$ ]]; then
@@ -119,22 +120,44 @@ track_by_bulk(){
                 exit 1
             fi
             track_uri="${track_uri##*[:/]}"
-            ids+=",$track_uri"
+            ids+=("$track_uri")
         done
-        if [ -z "$ids" ]; then
-            break
+        if [ -z "${ids[*]:-}" ]; then
+            return
         fi
-        ids="${ids#,}"
-        url_path="$url_base?ids=$ids"
-        output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-        # shellcheck disable=SC2181
-        if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
-            echo "$output" >&2
-            exit 1
-        fi
-        output_bulk
-        sleep "$sleep_secs"
+        query_bulk_tracks "${ids[@]}"
     done
+}
+
+query_bulk_tracks(){
+    local ids
+    # join array arg on commas
+    { local IFS=','; ids="$*"; }
+    if [ -z "$ids" ]; then
+        return
+    fi
+    url_path="$url_base?ids=$ids"
+    # cannot quote curl_options as when empty as this results in a blank literal which breaks curl
+    # shellcheck disable=SC2068
+    output="$("$srcdir/spotify_api.sh" "$url_path" ${curl_options[@]:-})"
+    # shellcheck disable=SC2181
+    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
+        echo "$output" >&2
+        exit 1
+    fi
+    output_bulk
+    sleep "$sleep_secs"
+}
+
+output_local_track(){
+    local track_uri="$1"
+    track_uri="${track_uri#spotify:local:}"
+    track_uri="${track_uri#:}"
+    track_uri="${track_uri#:}"
+    track_uri="${track_uri%:*}"
+    track_uri="${track_uri//+/ }"
+    "$srcdir/urldecode.sh" <<< "$track_uri" |
+    sed 's/:.*:/ - /'
 }
 
 output(){
@@ -167,9 +190,10 @@ clean_output(){
 # must slurp in to memory and check all track URIs for local references before knowing if it's safe to use bulk track API
 track_uris="$(cat)"
 
-if grep -q 'spotify:local:' <<< "$track_uris"; then
+# convert_by_bulk updated to do bulk in between local spotify tracks
+#if grep -q 'spotify:local:' <<< "$track_uris"; then
     # in order to preserve the correct playlist ordering
-    track_by_track "$@" <<< "$track_uris"
-else
-    track_by_bulk "$@" <<< "$track_uris"
-fi
+#    convert_by_track "$@" <<< "$track_uris"
+#else
+    convert_by_bulk "$@" <<< "$track_uris"
+#fi
