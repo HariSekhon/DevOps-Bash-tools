@@ -60,6 +60,9 @@ help_usage "$@"
 
 url_base="/v1/tracks"
 
+#sleep_secs="0.1"
+sleep_secs="0"
+
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
@@ -68,6 +71,7 @@ fi
 track_by_track(){
     while true; do
         read -r -s track_uri || break
+        [ -z "$track_uri" ] && break
         if [[ "$track_uri" =~ ^spotify:local: ]]; then
             track_uri="${track_uri#spotify:local:}"
             track_uri="${track_uri#:}"
@@ -90,7 +94,7 @@ track_by_track(){
             exit 1
         fi
         output
-        sleep 0.1
+        sleep "$sleep_secs"
     done
 }
 
@@ -99,6 +103,7 @@ track_by_bulk(){
         ids=""
         for ((i=0; i<50; i++)); do
             read -r -s track_uri || break
+            [ -z "$track_uri" ] && break
             if [[ "$track_uri" =~ ^spotify:local: ]]; then
                 track_uri="${track_uri#spotify:local:}"
                 track_uri="${track_uri#:}"
@@ -128,7 +133,7 @@ track_by_bulk(){
             exit 1
         fi
         output_bulk
-        sleep 0.1
+        sleep "$sleep_secs"
     done
 }
 
