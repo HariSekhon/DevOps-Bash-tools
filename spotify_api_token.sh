@@ -41,7 +41,7 @@ check_env_defined "SPOTIFY_CLIENT_ID"
 check_env_defined "SPOTIFY_CLIENT_SECRET"
 
 # encode spaces as %20 or +
-scope="
+scope="${SPOTIFY_TOKEN_SCOPE:-
 app-remote-control
 playlist-modify-private
 playlist-modify-public
@@ -60,11 +60,12 @@ user-read-playback-state
 user-read-private
 user-read-recently-played
 user-top-read
+}
 "
 # perl -pe doesn't really work here, hard to remove leading/trailing ++ without slurp to real var
 #scope="$(perl -e '$str = do { local $/; <STDIN> }; $str =~ s/\s+/\+/g; $str =~ s/^\++//; $str =~ s/\++$//; print $str' <<< "$scope")"
 # simpler
-scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+\+$//; s/+\+/+/g')"
+scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+*$//')"
 
 # ============================================================================ #
 # Client Credentials method - the most suitable to scripting but doesn't grant access to user data :-/
