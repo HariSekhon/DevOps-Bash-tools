@@ -41,7 +41,30 @@ check_env_defined "SPOTIFY_CLIENT_ID"
 check_env_defined "SPOTIFY_CLIENT_SECRET"
 
 # encode spaces as %20 or +
-scope="user-read-private+user-read-email+playlist-read-private+user-top-read"
+scope="
+app-remote-control
+playlist-modify-private
+playlist-modify-public
+playlist-read-collaborative
+playlist-read-private
+streaming
+user-follow-modify
+user-follow-read
+user-library-modify
+user-library-read
+user-modify-playback-state
+user-read-currently-playing
+user-read-email
+user-read-playback-position
+user-read-playback-state
+user-read-private
+user-read-recently-played
+user-top-read
+"
+# perl -pe doesn't really work here, hard to remove leading/trailing ++ without slurp to real var
+#scope="$(perl -e '$str = do { local $/; <STDIN> }; $str =~ s/\s+/\+/g; $str =~ s/^\++//; $str =~ s/\++$//; print $str' <<< "$scope")"
+# simpler
+scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+\+$//; s/+\+/+/g')"
 
 # ============================================================================ #
 # Client Credentials method - the most suitable to scripting but doesn't grant access to user data :-/
