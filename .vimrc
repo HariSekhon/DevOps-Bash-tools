@@ -463,18 +463,21 @@ endfunction
 function! WriteRun()
     :w
     if &filetype == 'go'
-        :! go run "%" `$bash_tools/lib/args_extract.sh "%"` 2>&1 | less
+        " TODO: consider switching this to go build and then run the binary as
+        " this gets stdout only at the end so things like welcome.go don't get
+        " the transition effects when run like this
+        :! go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
     else
-        :! "./%" `$bash_tools/lib/args_extract.sh "%"`  2>&1 | less
+        :! "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
     endif
 endfunction
 
 function! WriteRunDebug()
     :w
     if &filetype == 'go'
-        :! DEBUG=1 bash -c "go run % `$bash_tools/lib/args_extract.sh "%"` 2>&1 | less"
+        :! DEBUG=1 bash -c "go run %:p `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less"
     else
-        :! DEBUG=1 bash -c "./% `$bash_tools/lib/args_extract.sh "%"` 2>&1 | less"
+        :! DEBUG=1 bash -c "%:p `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less"
     endif
 endfunction
 
