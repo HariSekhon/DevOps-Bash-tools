@@ -86,7 +86,7 @@ commit_playlist(){
     read -r -p "Hit enter to commit playlist '$playlist' or Control-C to exit"
     echo
     git add "$playlist" "spotify/$playlist"
-    git ci -m "updated $playlist spotify/$playlist"
+    git ci -m "updated $playlist"
 }
 
 find_net_removals(){
