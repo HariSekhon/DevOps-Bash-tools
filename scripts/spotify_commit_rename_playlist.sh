@@ -34,9 +34,6 @@ usage_args="<playlist_new_name> <playlist_existing_name>"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
-#. "$srcdir/.bash.d/git.sh"
-
 help_usage "$@"
 
 commit_rename(){
