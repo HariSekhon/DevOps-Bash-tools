@@ -155,12 +155,16 @@ query_bulk_tracks(){
 output_local_track(){
     local track_uri="$1"
     track_uri="${track_uri#spotify:local:}"
-    track_uri="${track_uri#:}"
-    track_uri="${track_uri#:}"
+    artist="${track_uri%%:*}"
+    track_uri="${track_uri#*:}"
+    track_uri="${track_uri#*:}"
     track_uri="${track_uri%:*}"
-    track_uri="${track_uri//+/ }"
-    "$srcdir/urldecode.sh" <<< "$track_uri" |
-    sed 's/:.*:/ - /'
+    track="${track_uri//+/ }"
+    if [ -n "$artist" ]; then
+        artist="${artist//+/ }"
+        track="$artist - $track"
+    fi
+    "$srcdir/urldecode.sh" <<< "$track"
 }
 
 output(){
