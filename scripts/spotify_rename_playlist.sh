@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/.bash.d/git.sh"
+. "$srcdir/../.bash.d/git.sh"
 
 rename(){
     gitrename "$1" "$2"
