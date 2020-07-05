@@ -122,11 +122,10 @@ else
     if ! [[ "$PWD" =~ playlists ]]; then
         cd playlists
     fi
-    for playlist in $(git status --porcelain |
-                      grep '^.M' |
-                      awk '{print $2}' |
-                      sed 's,spotify/,,' |
-                      sort -u); do
+    while read -r playlist; do
         commit_playlist "$playlist"
-    done
+    done < <(git status --porcelain |
+           grep '^.M' |
+           sed 's/^...//; s,spotify/,,; s/^"//; s/"$//' |
+           sort -u)
 fi
