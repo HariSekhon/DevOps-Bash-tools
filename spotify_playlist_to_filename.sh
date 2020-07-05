@@ -33,7 +33,8 @@ Normalizes a Spotify playlist name provided as arg(s) or stdin to a valid filena
 help_usage "$@"
 
 normalize(){
-    # replace forward slash with unicode version
+    # replace forward slash with unicode version so we can store playlist files that look like the real thing
+    # but avoid the breakage caused by directory separator
     tr '/' '∕'
     #tr '/[:space:]' '_'
     # requires Perl 5.10+
