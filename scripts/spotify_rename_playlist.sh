@@ -17,6 +17,21 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC2034
+usage_description="
+Renames a Spotify playlist in both the \$PWD and \$PWD/spotify/ directories
+to keep the Spotify backups in sync
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<playlist_old_name> <playlist_new_name>"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+help_usage "$@"
+
 # shellcheck disable=SC1090
 . "$srcdir/../.bash.d/git.sh"
 
