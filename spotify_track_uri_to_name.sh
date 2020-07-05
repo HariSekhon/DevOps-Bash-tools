@@ -75,6 +75,7 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
+# unused now as individual calls are slow, convert_by_bulk is optimized to do bulk requests in between local tracks now, preserving order
 convert_by_track(){
     while true; do
         read -r -s track_uri || break
@@ -110,8 +111,10 @@ convert_by_bulk(){
             read -r -s track_uri || break
             [ -z "$track_uri" ] && break
             if [[ "$track_uri" =~ ^spotify:local: ]]; then
-                query_bulk_tracks "${ids[@]}"
-                ids=()
+                if [ -n "${ids[*]:-}" ]; then
+                    query_bulk_tracks "${ids[@]}"
+                    ids=()
+                fi
                 output_local_track "$track_uri"
                 continue
             fi
@@ -190,7 +193,7 @@ clean_output(){
 # must slurp in to memory and check all track URIs for local references before knowing if it's safe to use bulk track API
 track_uris="$(cat)"
 
-# convert_by_bulk updated to do bulk in between local spotify tracks
+# convert_by_bulk now optimized to do bulk requests in between local spotify tracks, preserving order and speeding up execution
 #if grep -q 'spotify:local:' <<< "$track_uris"; then
     # in order to preserve the correct playlist ordering
 #    convert_by_track "$@" <<< "$track_uris"
