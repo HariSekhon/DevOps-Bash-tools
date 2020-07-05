@@ -40,19 +40,21 @@ help_usage "$@"
 check_env_defined "SPOTIFY_CLIENT_ID"
 check_env_defined "SPOTIFY_CLIENT_SECRET"
 
+# encode spaces as %20 or +
+scope="user-read-private+user-read-email+playlist-read-private+user-top-read"
+
 # ============================================================================ #
 # Client Credentials method - the most suitable to scripting but doesn't grant access to user data :-/
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 #
-output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 'grant_type=client_credentials' https://accounts.spotify.com/api/token "$@")"
+output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
 
 # ============================================================================ #
 
 # These next 3 methods won't never work because it relies on live Login challenge - only relevant to webapps
 
 #redirect_uri="https:%2F%2Fgithub.com%2Fharisekhon"
-#scope="user-read-private%20user-read-email"
 
 # ============================================================================ #
 # Authorization Code Flow
