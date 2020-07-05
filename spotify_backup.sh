@@ -19,14 +19,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-One-touch Spotify Backup using code from Spotify Tools and DevOps Bash Tools repos
+One-touch Spotify Backup of all or selected Spotify playlists
+using code from Spotify Tools and DevOps Bash Tools repos
+
+Without args, also backs up the entire list of public Spotify playlists
 
 \$SPOTIFY_USER must be set in the environment
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist>"
+usage_args="[<playlist> <playlist2> ...]"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
