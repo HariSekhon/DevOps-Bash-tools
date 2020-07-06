@@ -74,7 +74,7 @@ playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
 
 echo -n "$playlist_name "
 
-filename="$("$srcdir/spotify_playlist_id_to_filename.sh" <<< "$playlist_name")"
+filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
 echo -n "=> URIs => "
 "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
