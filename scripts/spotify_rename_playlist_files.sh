@@ -36,9 +36,15 @@ help_usage "$@"
 . "$srcdir/../.bash.d/git.sh"
 
 rename(){
-    gitrename "$1" "$2"
+    local from="$1"
+    local to="$2"
 
-    gitrename "spotify/$1" "spotify/$2"
+    from="$("$srcdir/../spotify_playlist_to_filename.sh" "$from")"
+    to="$("$srcdir/../spotify_playlist_to_filename.sh" "$to")"
+
+    gitrename "$from" "$to"
+
+    gitrename "spotify/$from" "spotify/$to"
 }
 
 rename "$1" "$2"
