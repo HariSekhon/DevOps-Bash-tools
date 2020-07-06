@@ -71,9 +71,9 @@ url_path="/v1/playlists/$playlist_id/tracks?limit=50&offset=$offset"
 
 output(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r '.items[].track | [([.artists[].name] | join(",")), .name] | @csv'
+        jq -r '.items[].track | [([.artists[].name] | join(", ")), .name] | @csv'
     else
-        jq -r '.items[].track | [([.artists[].name] | join(",")), "-", .name] | @tsv'
+        jq -r '.items[].track | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
     fi <<< "$output" |
     tr '\t' ' ' |
     sed '
