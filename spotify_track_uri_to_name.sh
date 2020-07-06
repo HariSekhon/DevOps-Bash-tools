@@ -222,10 +222,10 @@ if [ $# -gt 0 ]; then
     curl_options=("$@")
 fi
 
+
+# update: convert_by_bulk now optimized to do bulk requests in between local spotify tracks, preserving order and speeding up execution
 # must slurp in to memory and check all track URIs for local references before knowing if it's safe to use bulk track API
 #uris="$(cat "${files[@]:--}")"
-
-# convert_by_bulk now optimized to do bulk requests in between local spotify tracks, preserving order and speeding up execution
 #if grep -q 'spotify:local:' <<< "$track_uris"; then
     # in order to preserve the correct playlist ordering
 #    convert_by_track "$@" <<< "$track_uris"
