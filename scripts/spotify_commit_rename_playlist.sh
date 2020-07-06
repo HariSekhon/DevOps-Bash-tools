@@ -44,7 +44,7 @@ commit_rename(){
 
     "$srcdir/spotify_commit_playlists.sh" "$2"
 
-    "$srcdir/spotify_rename_playlist.sh" "$2" "$1"
+    "$srcdir/spotify_rename_playlist_files.sh" "$2" "$1"
 }
 
 if [ $# -gt 0 ]; then
