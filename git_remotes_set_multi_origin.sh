@@ -67,9 +67,9 @@ add_origin_url(){
         echo "copied existing remote url for $name as is including any access tokens to named remote $name"
     else
         url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com' | head -n 1 | perl -pe "s/(ssh:\\/\\/(\\w+@)?|https?:\\/\\/|\\w+@|).*(bitbucket.org|github.com|gitlab.com)/\$1bitbucket.org/")"
-        # don't put the full url below as it'd print your access token to screen from existing remote
-        echo "inferring $name URL to be ${url##*@}"
-        echo "adding additional origin remote for $name with url ${url##*@}"
+        # shouldn't really print full url below in case it has an http access token in it that we don't want appearing to the scrren, but git remote -v will print it anyway later on
+        echo "inferring $name URL to be $url"
+        echo "adding additional origin remote for $name with url $url"
     fi
     set -o pipefail
     # --push is willing to add duplicates, prefer error out (should never happen as we check for existing remote url)
