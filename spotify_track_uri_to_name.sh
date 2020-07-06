@@ -23,13 +23,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+usage_args="[<files>] [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
 Takes Spotify track URIs and converts them to 'Artist - Track' names using the Spotify API
 
-Track URIs are fed via standard input and can accept any of the following forms for convenience:
+Track URIs are fed via file arguments or standard input and can accept any of the following forms for convenience:
 
 spotify:track:<alphanumeric_ID>
 http://open.spotify.com/track/<alphanumeric_ID>
@@ -50,6 +50,8 @@ Useful for saving Spotify playlists in a format that is easier to understand, re
 Uses the Spotify bulk track API if there are no local track references in a playlist, otherwise falls back to individual track lookups
 in order to preserve the correct playlist ordering between Spotify and local tracks
 
+The first argument that doesn't correspond to a file and all subsequent arguements are fed as is to curl as options
+
 Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
 "
 
@@ -64,11 +66,7 @@ url_base="/v1/tracks"
 sleep_secs="0"
 
 declare -a curl_options
-if [ $# -gt 0 ]; then
-    curl_options=("$@")
-else
-    curl_options=()
-fi
+curl_options=()
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
@@ -80,7 +78,7 @@ convert_by_track(){
     while true; do
         read -r -s track_uri || break
         [ -z "$track_uri" ] && break
-        if [[ "$track_uri" =~ ^spotify:local: ]]; then
+        if is_local_track_uri "$track_uri"; then
             output_local_track "$track_uri"
             continue
         fi
@@ -110,7 +108,7 @@ convert_by_bulk(){
         while [ "${#ids[@]}" -lt 50 ]; do
             read -r -s track_uri || break
             [ -z "$track_uri" ] && break
-            if [[ "$track_uri" =~ ^spotify:local: ]]; then
+            if is_local_track_uri "$track_uri"; then
                 if [ -n "${ids[*]:-}" ]; then
                     query_bulk_tracks "${ids[@]}"
                     ids=()
@@ -152,13 +150,28 @@ query_bulk_tracks(){
     sleep "$sleep_secs"
 }
 
+is_local_track_uri(){
+    [[ "$1" =~ ^spotify:local:|open.spotify.com/local/ ]]
+}
+
 output_local_track(){
     local track_uri="$1"
-    track_uri="${track_uri#spotify:local:}"
-    artist="${track_uri%%:*}"
-    track_uri="${track_uri#*:}"
-    track_uri="${track_uri#*:}"
-    track_uri="${track_uri%:*}"
+    if [[ "$track_uri" =~ ^spotify:local: ]]; then
+        track_uri="${track_uri#spotify:local:}"
+        artist="${track_uri%%:*}"
+        track_uri="${track_uri#*:}"
+        track_uri="${track_uri#*:}"
+        track_uri="${track_uri%:*}"
+    elif [[ "$track_uri" =~ open.spotify.com/local/ ]]; then
+        track_uri="${track_uri#http://open.spotify.com/local/}"
+        artist="${track_uri%%/*}"
+        track_uri="${track_uri#*/}"
+        track_uri="${track_uri#*/}"
+        track_uri="${track_uri%/*}"
+    else
+        echo "Unrecognized track URI format: $track_uri"
+        exit 1
+    fi
     track="${track_uri//+/ }"
     if [ -n "$artist" ]; then
         artist="${artist//+/ }"
@@ -169,18 +182,18 @@ output_local_track(){
 
 output(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r '[([.artists[].name] | join(",")), .name] | @csv'
+        jq -r '[([.artists[].name] | join(", ")), .name] | @csv'
     else
-        jq -r '[([.artists[].name] | join(",")), "-", .name] | @tsv'
+        jq -r '[([.artists[].name] | join(", ")), "-", .name] | @tsv'
     fi <<< "$output" |
     clean_output
 }
 
 output_bulk(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r '.tracks[] | [([.artists[].name] | join(",")), .name] | @csv'
+        jq -r '.tracks[] | [([.artists[].name] | join(", ")), .name] | @csv'
     else
-        jq -r '.tracks[] | [([.artists[].name] | join(",")), "-", .name] | @tsv'
+        jq -r '.tracks[] | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
     fi <<< "$output" |
     clean_output
 }
@@ -194,13 +207,36 @@ clean_output(){
     '
 }
 
+files=()
+
+for filename in "$@"; do
+    if [ -f "$filename" ]; then
+        files+=("$filename")
+        shift || :
+    else
+        break
+    fi
+done
+
+if [ $# -gt 0 ]; then
+    curl_options=("$@")
+fi
+
 # must slurp in to memory and check all track URIs for local references before knowing if it's safe to use bulk track API
-track_uris="$(cat)"
+#uris="$(cat "${files[@]:--}")"
 
 # convert_by_bulk now optimized to do bulk requests in between local spotify tracks, preserving order and speeding up execution
 #if grep -q 'spotify:local:' <<< "$track_uris"; then
     # in order to preserve the correct playlist ordering
 #    convert_by_track "$@" <<< "$track_uris"
 #else
-    convert_by_bulk "$@" <<< "$track_uris"
+#    convert_by_bulk "$@" <<< "$track_uris"
 #fi
+
+if [ -n "${files[*]:-}" ]; then
+    for filename in "${files[@]}"; do
+        convert_by_bulk < "$filename"
+    done
+else
+    convert_by_bulk  # read from stdin
+fi
