@@ -584,7 +584,7 @@ gitadded(){
 
 # doesn't need pipe | less, git drops you in to less anyway
 gitl(){
-    git log --all --name-status --graph --decorate "$@"
+    git log --all --graph --decorate --name-status "$@"
 }
 
 gitlp(){
@@ -592,6 +592,10 @@ gitlp(){
 }
 
 gitl2(){
+    git log --all --graph --decorate --stat "$@"
+}
+
+gitl3(){
     git log --pretty=format:"%n%an => %ar%n%s" --name-status "$@"
 }
 
