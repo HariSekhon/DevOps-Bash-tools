@@ -647,8 +647,8 @@ travis-debug:
 	travis_debug_session.py $(REPO)
 
 .PHONY: browse
-browse:
-	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
+browse: github
+	@:
 
 .PHONY: commitcount
 commitcount:
@@ -657,12 +657,28 @@ commitcount:
 	@git log --all --pretty=format:"%h" | wc -l
 
 .PHONY: github
-github: browse
-	@:
+github:
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://github.com/$(REPO)"
 
 .PHONY: github-url
 github-url:
 	@. $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://github.com/$(REPO)" | tee /dev/stderr | tr -d '\n' | paste_clipboard
+
+.PHONY: gitlab
+gitlab:
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://gitlab.com/$(REPO)"
+
+.PHONY: gitlab-url
+gitlab-url:
+	@. $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://gitlab.com/$(REPO)" | tee /dev/stderr | tr -d '\n' | paste_clipboard
+
+.PHONY: bitbucket
+bitbucket:
+	@. $(BASH_TOOLS)/.bash.d/network.sh; browser "https://bitbucket.org/$(REPO)/src/master/"
+
+.PHONY: bitbucket-url
+bitbucket-url:
+	@. $(BASH_TOOLS)/.bash.d/functions.sh; echo "https://bitbucket.org/$(REPO)/src/master/" | tee /dev/stderr | tr -d '\n' | paste_clipboard
 
 .PHONY: status
 status:
