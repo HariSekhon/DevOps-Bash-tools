@@ -241,7 +241,7 @@ clean:
 
 .PHONY: ls-scripts
 ls-scripts:
-	@$(MAKE) ls-code | grep -v -e '/kafka_wrappers/' -e '/lib/' -e '\.bash'
+	@$(MAKE) ls-code | grep -v -e 'lib/' -e '\.bash'
 
 .PHONY: lsscripts
 lsscripts: ls-scripts
