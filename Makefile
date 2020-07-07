@@ -243,8 +243,16 @@ clean:
 ls-scripts:
 	@$(MAKE) ls-code | grep -v -e 'lib/' -e '\.bash'
 
+.PHONY: ls-scripts2
+ls-scripts2:
+	@$(MAKE) ls-code | grep -v -e 'lib/' -e '\.bash' -e 'setup/'
+
 .PHONY: lsscripts
 lsscripts: ls-scripts
+	@:
+
+.PHONY: lsscripts2
+lsscripts2: ls-scripts2
 	@:
 
 .PHONY: wc-scripts
