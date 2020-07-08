@@ -25,7 +25,7 @@ Queries Gerrit Code Review API for Project List, outputting in CSV format
 
 Output Format:
 
-<Project ID> , <State> , <Parent Project ID>, <Groups> , <Latest Commit Timestamp>
+<Project ID> , <State> , <Parent Project ID>, <Groups> , <Latest Master Commit Timestamp>
 
 The following environment variables should be set before running:
 
