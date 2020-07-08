@@ -25,7 +25,7 @@ Queries Gerrit Code Review API for Project List, outputting in CSV format
 
 Output Format:
 
-<Project ID> , <state> , <Parent Project ID>, <Groups> , <Latest Commit Timestamp>
+<Project ID> , <State> , <Parent Project ID>, <Groups> , <Latest Commit Timestamp>
 
 The following environment variables should be set before running:
 
@@ -67,22 +67,24 @@ bugfix_gerrit_api_output(){
 curl_options="-sSL $*"
 
 curl_auth(){
+    # /a/ prefix for authenticated API access - https://gerrit-review.googlesource.com/Documentation/rest-api.html#authentication
+    local url="$protocol://$host:$port/a/$1"
+    shift || :
     # need opt splitting
     # shellcheck disable=SC2086
-    "$srcdir/curl_auth.sh" -H 'Content-type: application/json' $curl_options "$@" |
+    "$srcdir/curl_auth.sh" -H 'Content-type: application/json' $curl_options "$url" "$@" |
     bugfix_gerrit_api_output
 }
 
-# /a/ prefix for authenticated API access - https://gerrit-review.googlesource.com/Documentation/rest-api.html#authentication
-curl_auth "$protocol://$host:$port/a/projects/" |
+curl_auth "projects/" |
 jq -r 'to_entries | .[] | .value | [.id, .state] | @tsv' |
 while read -r project_id state; do
-    parent="$(curl_auth "$protocol://$host:$port/a/projects/$project_id/parent" | tr -d '\n')"
+    parent="$(curl_auth "projects/$project_id/parent" | tr -d '\n')"
     parent="${parent//\"}"
-    groups="$(curl_auth "$protocol://$host:$port/a/projects/$project_id/access" | jq -r '([(.groups | to_entries | .[].value.name)] | join(","))')"
+    groups="$(curl_auth "projects/$project_id/access" | jq -r '([(.groups | to_entries | .[].value.name)] | join(","))')"
     groups="${groups//\"}"
     # might not have a timestamp, in which case ignore
-    latest_commit_timestamp="$(curl_auth "$protocol://$host:$port/a/projects/$project_id/branches/master/reflog" | jq -r 'limit(1; .[] | .who.date)' 2>/dev/null || :)"
+    latest_commit_timestamp="$(curl_auth "projects/$project_id/branches/master/reflog" | jq -r 'limit(1; .[] | .who.date)' 2>/dev/null || :)"
     latest_commit_timestamp="${latest_commit_timestamp//\"}"
     echo "\"$project_id\",\"$state\",\"$parent\",\"$groups\",\"$latest_commit_timestamp\""
 done
