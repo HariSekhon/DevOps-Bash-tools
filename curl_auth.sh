@@ -20,7 +20,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # used by utils.sh usage()
 # shellcheck disable=SC2034
 usage_description="Runs curl with either Kerberos SpNego (if \$KRB5 is set) or
-a ram file descriptor using \$PASSWORD to avoid credentials being exposed via process list or command line logging"
+a ram file descriptor using \$PASSWORD to avoid credentials being exposed via process list or command line logging
+
+Requires prefixing url with http:// or https:// to work on older versions of curl in order to parse hostname
+for constructing the authentication string to be specific to the host as using netrc default login doesn't always work
+"
+
 
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
@@ -78,6 +83,10 @@ if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
 
 # Instead of generating this for all known hosts above just do it for the host extracted from the args url now
 
+if ! [[ "$*" =~ :// ]]; then
+    usage "http(s):// not specified in URL"
+fi
+
 host="$(grep -om 1 '://[^:\/[:space:]]\+' <<< "$*" | sed 's,://,,')"
 
 netrc_contents="machine $host login $USERNAME password $PASSWORD"
@@ -87,7 +96,7 @@ netrc_contents="machine $host login $USERNAME password $PASSWORD"
 fi
 
 if [ -n "${KRB5:-${KERBEROS:-}}" ]; then
-    curl -u : --negotiate "$@"
+    command curl -u : --negotiate "$@"
 else
-    curl --netrc-file <(cat <<< "$netrc_contents") "$@"
+    command curl --netrc-file <(cat <<< "$netrc_contents") "$@"
 fi
