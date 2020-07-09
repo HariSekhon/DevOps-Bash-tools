@@ -59,6 +59,6 @@ gerrit_docker
 
 if [ "$(uname -s)" = Darwin ]; then
     when_ports_available 120 localhost 8080
-    when_url_content 30 'http://localhost:8080' Gerrit
+    when_url_content 60 'http://localhost:8080' Gerrit
     open 'http://localhost:8080'
 fi
