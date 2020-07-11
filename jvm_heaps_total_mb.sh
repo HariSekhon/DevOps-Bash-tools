@@ -44,4 +44,6 @@ grep --color=no -o -- '-Xmx[^[:space:]]*' |
 sed 's/-Xmx//' |
 numfmt --from=iec |
 awk '{sum += $1} END {print sum}' |
-numfmt --to-unit=Mi # newers versions (eg. 8.30) need Mi for correct unit conversion, but older versions (eg. 8.23) crash when given Mi as target unit (eg.  'Abort trap: 6') - if this happens to you, 'brew upgrade coreutils' to resolve it
+numfmt --to-unit=Mi # newers versions (eg. 8.30) need Mi for correct unit conversion,
+                    # but older versions (eg. 8.23) crash when given Mi as target unit
+                    # eg.  'Abort trap: 6' - if this happens to you, 'brew upgrade coreutils' to resolve it

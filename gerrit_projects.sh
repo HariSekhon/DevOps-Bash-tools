@@ -25,13 +25,14 @@ Queries Gerrit Code Review API for Project List, outputting in CSV format
 
 Output Format:
 
-<Project ID> , <State> , <Parent Project ID>, <Groups> , <Latest Master Commit Timestamp>
+<Project ID> , <State> , <Parent Project ID>, <Groups> , <Initial Commit Timestamp>, <Latest Master Commit Timestamp>
 
 The following environment variables should be set before running:
 
 \$GERRIT_HOST (default: localhost)
 \$GERRIT_PORT (default: 8080)
 \$GERRIT_SSL = 1 (default: blank which is off)
+\$GERRIT_URL_PREFIX (default: blank, you might need to set /gerrit)
 
 \$GERRIT_USER
 \$GERRIT_PASSWORD
@@ -66,13 +67,22 @@ bugfix_gerrit_api_output(){
 
 curl_options="-sSL $*"
 
+url_prefix=""
+if [ -n "${GERRIT_URL_PREFIX:-}" ]; then
+    GERRIT_URL_PREFIX="${GERRIT_URL_PREFIX#/}"
+    GERRIT_URL_PREFIX="${GERRIT_URL_PREFIX%/}"
+    url_prefix="/$GERRIT_URL_PREFIX"
+fi
+
+# /a/ prefix for authenticated API access - https://gerrit-review.googlesource.com/Documentation/rest-api.html#authentication
+base_url="$protocol://$host:$port${url_prefix}/a"
+
 curl_auth(){
-    # /a/ prefix for authenticated API access - https://gerrit-review.googlesource.com/Documentation/rest-api.html#authentication
-    local url="$protocol://$host:$port/a/$1"
+    local url_path="$1"
     shift || :
     # need opt splitting
     # shellcheck disable=SC2086
-    "$srcdir/curl_auth.sh" -H 'Content-type: application/json' $curl_options "$url" "$@" |
+    "$srcdir/curl_auth.sh" -H 'Content-type: application/json' $curl_options "$base_url/$url_path" "$@" |
     bugfix_gerrit_api_output
 }
 
@@ -83,8 +93,12 @@ while read -r project_id state; do
     parent="${parent//\"}"
     groups="$(curl_auth "projects/$project_id/access" | jq -r '([(.groups | to_entries | .[].value.name)] | join(","))')"
     groups="${groups//\"}"
-    # might not have a timestamp, in which case ignore
+    # might not have a timestamp, in which case ignore failures
+    # Also the reflog might get limited and not return the real full git lot to find the initial commit.
+    # It doesn't look like this creation timestamp is available in the /projects/ API directly
+    initial_commit_timestamp="$(curl_auth "projects/$project_id/branches/master/reflog" | jq -r 'last | .who.date' 2>/dev/null || :)"
+    initial_commit_timestamp="${initial_commit_timestamp//\"}"
     latest_commit_timestamp="$(curl_auth "projects/$project_id/branches/master/reflog" | jq -r 'limit(1; .[] | .who.date)' 2>/dev/null || :)"
     latest_commit_timestamp="${latest_commit_timestamp//\"}"
-    echo "\"$project_id\",\"$state\",\"$parent\",\"$groups\",\"$latest_commit_timestamp\""
+    echo "\"$project_id\",\"$state\",\"$parent\",\"$groups\",\"$initial_commit_timestamp\", \"$latest_commit_timestamp\""
 done
