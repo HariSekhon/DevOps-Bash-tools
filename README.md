@@ -280,7 +280,7 @@ etc.
   - `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
   - `spotify_search.sh` - search Spotify's library for tracks / albums / artists getting results in human readable or URI formats for easy loading to Spotify playlists
   - `spotify_playlist_tracks.sh` / `spotify_playlist_tracks_uri.sh` - download playlist contents as track URIs / `Artists - Track` / CSV
-  - `spotify_track_uri_to_name.sh` - convert Spotify track URIs to `Artist - Track` / CSV
+  - `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
   - `spotify_foreach_playlist.sh` - iterate any command against all playlists
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
