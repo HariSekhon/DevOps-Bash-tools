@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: ../playlists/spotify/Rocky
 #
 #  Author: Hari Sekhon
 #  Date: 2020-06-25 22:28:51 +0100 (Thu, 25 Jun 2020)
@@ -13,9 +14,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# https://developer.spotify.com/documentation/web-api/reference/tracks/get-track/
-
 # https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/
+#
+# https://developer.spotify.com/documentation/web-api/reference/albums/get-several-albums/
+#
+# https://developer.spotify.com/documentation/web-api/reference/artists/get-several-artists/
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -27,28 +30,31 @@ usage_args="[<files>] [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Takes Spotify track URIs and converts them to 'Artist - Track' names using the Spotify API
+Takes Spotify URIs and converts them to Track, Album or Artist names using the Spotify API
 
-Track URIs are fed via file arguments or standard input and can accept any of the following forms for convenience:
+Spotify URIs are read from file arguments or standard input and can accept any of the following forms for convenience:
 
-spotify:track:<alphanumeric_ID>
-http://open.spotify.com/track/<alphanumeric_ID>
+spotify:<type>:<alphanumeric_ID>
+http://open.spotify.com/<type>/<alphanumeric_ID>
 <alphanumeric_ID>
+
+where <type> is track / album / artist
 
 These IDs are 22 chars, but this is length is not enforced in case the Spotify API changes
 
-Output format:
+Output format (depending on whether it's a track, an album or an artist URI):
 
 Artist - Track
+Artist - Album
+Artist
 
 or if \$SPOTIFY_CSV environment variable is set then:
 
 \"Artist\",\"Track\"
+\"Artist\",\"Album\"
+\"Artist\"
 
 Useful for saving Spotify playlists in a format that is easier to understand, revision control changes or export to other music systems
-
-Uses the Spotify bulk track API if there are no local track references in a playlist, otherwise falls back to individual track lookups
-in order to preserve the correct playlist ordering between Spotify and local tracks
 
 The first argument that doesn't correspond to a file and all subsequent arguements are fed as is to curl as options
 
@@ -59,8 +65,6 @@ Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the en
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"
-
-url_base="/v1/tracks"
 
 #sleep_secs="0.1"
 sleep_secs="0"
@@ -73,64 +77,74 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-# unused now as individual calls are slow, convert_by_bulk is optimized to do bulk requests in between local tracks now, preserving order
-convert_by_track(){
-    while true; do
-        read -r -s track_uri || break
-        [ -z "$track_uri" ] && break
-        if is_local_track_uri "$track_uri"; then
-            output_local_track "$track_uri"
-            continue
+uri_type="${SPOTIFY_URI_TYPE:-track}"
+
+if ! [[ "$uri_type" =~ ^(track|album|artist)$ ]]; then
+    usage "invalid \$SPOTIFY_URI_TYPE '$uri_type' - must be track, album or artist"
+fi
+
+url_base="/v1/${uri_type}s"
+
+uri_inferred=0
+infer_uri_type(){
+    local uri="$1"
+    if [ $uri_inferred = 0 ] && [ -z "${SPOTIFY_URI_TYPE:-}" ]; then
+        if [[ "$uri" =~ ^spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/ ]]; then
+            for x in "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"; do
+                if [ -n "$x" ]; then
+                    uri_type="$x"
+                    url_base="/v1/${uri_type}s"
+                    break
+                fi
+            done
         fi
-        if ! [[ "$track_uri" =~ ^(spotify:track:|http://open.spotify.com/track/)?[[:alnum:]]+$ ]]; then
-            echo "Invalid track URI provided: $track_uri" >&2
-            exit 1
-        fi
-        track_id="${track_uri##*[:/]}"
-        url_path="$url_base/$track_id"
-        # cannot quote curl_options as when empty as this results in a blank literal which breaks curl
-        # shellcheck disable=SC2068
-        output="$("$srcdir/spotify_api.sh" "$url_path" ${curl_options[@]:-})"
-        # shellcheck disable=SC2181
-        if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
-            echo "$output" >&2
-            exit 1
-        fi
-        output
-        sleep "$sleep_secs"
-    done
+    fi
 }
 
-convert_by_bulk(){
+validate_spotify_uri(){
+    local uri="$1"
+    if ! [[ "$uri" =~ ^(spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/)?[[:alnum:]]+(\?.+)?$ ]]; then
+        echo "Invalid URI provided: $uri" >&2
+        exit 1
+    fi
+    if [[ "$uri" =~ open.spotify.com/|^spotify: ]]; then
+        if ! [[ "$uri" =~ open.spotify.com/$uri_type|^spotify:$uri_type ]]; then
+            echo "Invalid URI type '$uri_type' vs URI '$uri'" >&2
+            exit 1
+        fi
+    fi
+    uri="${uri##*[:/]}"
+    uri="${uri%%\?*}"
+    echo "$uri"
+}
+
+convert(){
     while true; do
         declare -a ids
         ids=()
         while [ "${#ids[@]}" -lt 50 ]; do
-            read -r -s track_uri || break
-            [ -z "$track_uri" ] && break
-            if is_local_track_uri "$track_uri"; then
+            read -r -s uri || break
+            [ -z "$uri" ] && break
+            if is_local_uri "$uri"; then
                 if [ -n "${ids[*]:-}" ]; then
-                    query_bulk_tracks "${ids[@]}"
+                    query_bulk "${ids[@]}"
                     ids=()
                 fi
-                output_local_track "$track_uri"
+                output_local_uri "$uri"
                 continue
             fi
-            if ! [[ "$track_uri" =~ ^(spotify:track:|http://open.spotify.com/track/)?[[:alnum:]]+$ ]]; then
-                echo "Invalid track URI provided: $track_uri" >&2
-                exit 1
-            fi
-            track_uri="${track_uri##*[:/]}"
-            ids+=("$track_uri")
+            infer_uri_type "$uri"
+            uri="$(validate_spotify_uri "$uri")"
+            ids+=("$uri")
         done
         if [ -z "${ids[*]:-}" ]; then
             return
         fi
-        query_bulk_tracks "${ids[@]}"
+        query_bulk "${ids[@]}"
     done
 }
 
-query_bulk_tracks(){
+query_bulk(){
     local ids
     # join array arg on commas
     { local IFS=','; ids="$*"; }
@@ -146,33 +160,33 @@ query_bulk_tracks(){
         echo "$output" >&2
         exit 1
     fi
-    output_bulk
+    output
     sleep "$sleep_secs"
 }
 
-is_local_track_uri(){
+is_local_uri(){
     [[ "$1" =~ ^spotify:local:|open.spotify.com/local/ ]]
 }
 
-output_local_track(){
-    local track_uri="$1"
-    if [[ "$track_uri" =~ ^spotify:local: ]]; then
-        track_uri="${track_uri#spotify:local:}"
-        artist="${track_uri%%:*}"
-        track_uri="${track_uri#*:}"
-        track_uri="${track_uri#*:}"
-        track_uri="${track_uri%:*}"
-    elif [[ "$track_uri" =~ open.spotify.com/local/ ]]; then
-        track_uri="${track_uri#http://open.spotify.com/local/}"
-        artist="${track_uri%%/*}"
-        track_uri="${track_uri#*/}"
-        track_uri="${track_uri#*/}"
-        track_uri="${track_uri%/*}"
+output_local_uri(){
+    local uri="$1"
+    if [[ "$uri" =~ ^spotify:local: ]]; then
+        uri="${uri#spotify:local:}"
+        artist="${uri%%:*}"
+        uri="${uri#*:}"
+        uri="${uri#*:}"
+        uri="${uri%:*}"
+    elif [[ "$uri" =~ open.spotify.com/local/ ]]; then
+        uri="${uri#http://open.spotify.com/local/}"
+        artist="${uri%%/*}"
+        uri="${uri#*/}"
+        uri="${uri#*/}"
+        uri="${uri%/*}"
     else
-        echo "Unrecognized track URI format: $track_uri"
+        echo "Unrecognized track URI format: $uri"
         exit 1
     fi
-    track="${track_uri//+/ }"
+    track="${uri//+/ }"
     if [ -n "$artist" ]; then
         artist="${artist//+/ }"
         track="$artist - $track"
@@ -181,21 +195,33 @@ output_local_track(){
 }
 
 output(){
+    if [[ "$output" =~ \"(tracks|albums|artists)\"[[:space:]]*:[[:space:]]+\[[[:space:]]*null[[:space:]]*\] ]]; then
+        echo "no matching $uri_type URI found - did you specify an incorrect URI or wrong \$SPOTIFY_URI_TYPE for that URI?" >&2
+        return
+    fi
+    local conversion="@tsv"
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r '[([.artists[].name] | join(", ")), .name] | @csv'
+        conversion="@csv"
+    fi
+    if [ "$uri_type" = track ]; then
+        output_artist_item
+    elif [ "$uri_type" = artist ]; then
+        jq -r ".${uri_type}s[] | [([.name] | join(\", \"))] | $conversion"
+    elif [ "$uri_type" = album ]; then
+        output_artist_item
     else
-        jq -r '[([.artists[].name] | join(", ")), "-", .name] | @tsv'
+        echo "URI type '$uri' parsing not implemented" >&2
+        exit 1
     fi <<< "$output" |
     clean_output
 }
 
-output_bulk(){
+output_artist_item(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r '.tracks[] | [([.artists[].name] | join(", ")), .name] | @csv'
+        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), .name] | $conversion"
     else
-        jq -r '.tracks[] | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
-    fi <<< "$output" |
-    clean_output
+        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
+    fi
 }
 
 clean_output(){
@@ -222,21 +248,10 @@ if [ $# -gt 0 ]; then
     curl_options=("$@")
 fi
 
-
-# update: convert_by_bulk now optimized to do bulk requests in between local spotify tracks, preserving order and speeding up execution
-# must slurp in to memory and check all track URIs for local references before knowing if it's safe to use bulk track API
-#uris="$(cat "${files[@]:--}")"
-#if grep -q 'spotify:local:' <<< "$track_uris"; then
-    # in order to preserve the correct playlist ordering
-#    convert_by_track "$@" <<< "$track_uris"
-#else
-#    convert_by_bulk "$@" <<< "$track_uris"
-#fi
-
 if [ -n "${files[*]:-}" ]; then
     for filename in "${files[@]}"; do
-        convert_by_bulk < "$filename"
+        convert < "$filename"
     done
 else
-    convert_by_bulk  # read from stdin
+    convert  # read from stdin
 fi
