@@ -63,10 +63,12 @@ offset="${OFFSET:-0}"
 url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
 
 output(){
+    # now enforcing only public playlists to avoid accidentally backing up private playlists if $SPOTIFY_ACCESS_TOKEN
+    # in the environment happens to be an authorized token and therefore skips generating the right token below
     if [ -n "${SPOTIFY_PLAYLISTS_ALL:-}" ]; then
-        jq -r ".items[] | [.id, .name] | @tsv"
+        jq -r ".items[] | select(.public == true) | [.id, .name] | @tsv"
     else
-        jq -r ".items[] | select(.owner.id == \"$user\") | [.id, .name] | @tsv"
+        jq -r ".items[] | select(.public == true) | select(.owner.id == \"$user\") | [.id, .name] | @tsv"
     fi <<< "$output"
 }
 
