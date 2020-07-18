@@ -35,8 +35,6 @@ or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
-\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
-
 Output format:
 
 Artist - Track
