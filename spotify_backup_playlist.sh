@@ -31,7 +31,7 @@ Spotify track URI format can be copied and pasted back in to Spotify to restore 
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Caveat: due to limitations of the Spotify API, this only works for public playlists
 "

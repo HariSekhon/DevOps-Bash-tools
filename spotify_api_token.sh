@@ -25,7 +25,7 @@ usage_args="[<curl_options>]"
 usage_description="
 Returns a Spotify access token from the Spotify API
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Generate an App client ID and secret here:
 
@@ -37,8 +37,8 @@ https://developer.spotify.com/dashboard/applications
 
 help_usage "$@"
 
-check_env_defined "SPOTIFY_CLIENT_ID"
-check_env_defined "SPOTIFY_CLIENT_SECRET"
+check_env_defined "SPOTIFY_ID"
+check_env_defined "SPOTIFY_SECRET"
 
 # encode spaces as %20 or +
 scope="${SPOTIFY_TOKEN_SCOPE:-
@@ -72,7 +72,7 @@ scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+*$//')"
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 #
-output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
+output="$(curl -sSL -u "$SPOTIFY_ID:$SPOTIFY_SECRET" -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
 
 # ============================================================================ #
 
@@ -85,7 +85,7 @@ output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
 #
-#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_CLIENT_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
+#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
 
 # ============================================================================ #
 # Authorization Code Flow with Proof Key for Code Exchange (PKCE)
@@ -98,14 +98,14 @@ output="$(curl -sSL -u "$SPOTIFY_CLIENT_ID:$SPOTIFY_CLIENT_SECRET" -X 'POST' -d 
 #    }
 #fi
 #code_challenge="$("$srcdir/random_string.sh" 128 | sha1sum -a 256 | base64)"
-#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_CLIENT_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge")"
+#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge")"
 
 # ============================================================================ #
 # Implicit Grant Method
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow
 #
-#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_CLIENT_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=token")"
+#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=token")"
 
 # shellcheck disable=SC2181
 if [ $? != 0 ] || [[ "$output" =~ error_description ]]; then

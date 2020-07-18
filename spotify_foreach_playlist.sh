@@ -31,7 +31,7 @@ Useful for combining with other spotify_*.sh scripts, such as downloading all th
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Examples:
 

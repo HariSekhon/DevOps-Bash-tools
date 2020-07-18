@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Requires $SPOTIFY_USER, $SPOTIFY_CLIENT_ID and $SPOTIFY_CLIENT_SECRET environment variables to run
+# Requires $SPOTIFY_USER, $SPOTIFY_ID and $SPOTIFY_SECRET environment variables to run
 
 cd "$srcdir/.."
 

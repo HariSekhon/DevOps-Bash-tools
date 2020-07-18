@@ -58,7 +58,7 @@ Useful for saving Spotify playlists in a format that is easier to understand, re
 
 The first argument that doesn't correspond to a file and all subsequent arguements are fed as is to curl as options
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 "
 
 # shellcheck disable=SC1090

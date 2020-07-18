@@ -45,7 +45,7 @@ or if \$SPOTIFY_CSV environment variable is set then:
 
 \"Artist\",\"Track\"
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Caveat: due to limitations of the Spotify API, this only works for public playlists
 "

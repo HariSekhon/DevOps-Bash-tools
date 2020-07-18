@@ -25,7 +25,7 @@ usage_args="/url/path [<curl_options>]"
 usage_description="
 Queries the Spotify API
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment, or \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET, in which case it'll call spotify_access_token.sh to generate a new token for the duration of this script
+Requires \$SPOTIFY_ACCESS_TOKEN in the environment, or \$SPOTIFY_ID and \$SPOTIFY_SECRET, in which case it'll call spotify_access_token.sh to generate a new token for the duration of this script
 
 You may want to do this in your shell environment for efficiency to avoid regenerating API tokens for every script call within the hour (just remember to remove it after the expiry, usually 1 hour)
 

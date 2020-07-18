@@ -34,7 +34,7 @@ or a playlist ID (get this from spotify_playlists.sh)
 
 Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the environment
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Caveat: due to limitations of the Spotify API, this only works for public playlists
 "

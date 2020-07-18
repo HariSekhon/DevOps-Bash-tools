@@ -52,7 +52,7 @@ Environment variable options:
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
 
-Requires \$SPOTIFY_CLIENT_ID and \$SPOTIFY_CLIENT_SECRET to be defined in the
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the
 environment for authentication, see spotify_api_token.sh for more details
 "
 
