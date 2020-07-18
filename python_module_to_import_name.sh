@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-mappings="$srcdir/lib/pipreqs_mapping.txt"
+mappings="$srcdir/resources/pipreqs_mapping.txt"
 
 if ! [ -f "$mappings" ]; then
     wget -O "$mappings" https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping
