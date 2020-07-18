@@ -25,6 +25,9 @@ usage_args="[<curl_options>]"
 usage_description="
 Returns a Spotify access token from the Spotify API
 
+This token can be used to access the Spotify API but not user private data - for that you must use the adjacent
+spotify_api_token_interactive.sh in order to obtain an authorized token instead
+
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Generate an App client ID and secret here:
@@ -82,6 +85,8 @@ output="$(curl -sSL -u "$SPOTIFY_ID:$SPOTIFY_SECRET" -X 'POST' -d 'grant_type=cl
 
 # ============================================================================ #
 # Authorization Code Flow
+#
+# use spotify_api_token_interactive.sh for this method
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
 #
