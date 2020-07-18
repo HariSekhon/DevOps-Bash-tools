@@ -40,6 +40,12 @@ https://developer.spotify.com/dashboard/applications
 
 help_usage "$@"
 
+#if [ -n "${SPOTIFY_ACCESS_TOKEN:-}" ] &&
+#   [ -n "${SPOTIFY_ACCESS_TOKEN//[[:space:]]}" ]; then
+#    echo "$SPOTIFY_ACCESS_TOKEN"
+#    exit 0
+#fi
+
 check_env_defined "SPOTIFY_ID"
 check_env_defined "SPOTIFY_SECRET"
 
