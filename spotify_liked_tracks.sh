@@ -28,7 +28,7 @@ usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns a Spotify user's Saved Tracks
+Returns a Spotify user's Liked Songs aka Saved Tracks using the Spotify API
 
 Output format:
 
