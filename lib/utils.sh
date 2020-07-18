@@ -480,6 +480,12 @@ timestamp(){
 }
 tstamp(){ timestamp "$@"; }
 
+log(){
+    if [ -n "${VERBOSE:-}" ]; then
+        timestamp "$@"
+    fi
+}
+
 start_timer(){
     tstamp "Starting $*
 "
