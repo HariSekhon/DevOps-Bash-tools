@@ -32,6 +32,8 @@ Returns track URIs for the given Spotify public playlist
 Playlist argument can be a playlist name (a regex which will return the first matching playlist)
 or a playlist ID (get this from spotify_playlists.sh)
 
+\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
+
 Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
