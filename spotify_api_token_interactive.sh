@@ -25,13 +25,16 @@ usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns a Spotify access token from the interactive Spotify Authorization API
+Returns a Spotify access token with private user authorization from the interactive Spotify API (browser pop up)
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Generate an App client ID and secret here and add a callback URL of 'http://localhost:12345/callback':
 
 https://developer.spotify.com/dashboard/applications
+
+spotify_api_token.sh (adjacent) is better for most uses where user private data is not required as it's non-interactive
+and therefore better for scripting without the human authorization prompt
 
 "
 
@@ -82,7 +85,12 @@ else
 fi
 
 log "waiting to catch callback"
-response="$(nc -l localhost 12345 <<< "OK, now return to command line")"
+response="$(nc -l localhost 12345 <<EOF
+HTTP/1.1 200 OK
+
+OK, now return to command line
+EOF
+)"
 log "callback caught"
 
 code="$(grep -Eo "GET.*code=([^?]+)" <<< "$response" | sed 's/.*code=//; s/[[:space:]].*$//' || :)"
