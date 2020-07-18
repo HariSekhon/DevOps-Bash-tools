@@ -28,7 +28,7 @@ usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns the URIs of a Spotify user's Liked Songs aka Saved Tracks
+Returns the URIs of a Spotify user's Liked Songs (aka Saved Tracks) using the Spotify API
 
 Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist, or combined with spotify_set_track_uris_to_liked.sh
 
