@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: supserset
+#  args: superset
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-19 15:58:35 +0100 (Sun, 19 Jul 2020)
@@ -40,7 +40,7 @@ shift || :
 
 response="$(curl -sSL "https://pypi.org/pypi/$package/json" "$@")"
 
-if ! jq -r '.releases | keys | to_entries[] | .value' <<< "$response"; then
+if ! jq -r '.releases | keys | .[]' <<< "$response"; then
     cat >&2 <<EOF
 $response
 EOF
