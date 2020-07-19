@@ -41,7 +41,9 @@ Examples:
 
 (see spotify_backup_playlists.sh for an even better implementation of this above one liner using this script)
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must set SPOTIFY_PRIVATE=1 and preferably also get an interactively authorized access token like so to prevent repeated web authorization pop-ups:
+
+export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 \"$srcdir/spotify_api_token.sh\")\"
 "
 
 # shellcheck disable=SC1090
@@ -61,13 +63,7 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-{
-    if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
-        "$srcdir/spotify_playlists_private.sh" "$@"
-    else
-        "$srcdir/spotify_playlists.sh" "$@"
-    fi
-} |
+"$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
     if [ -z "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}" ]; then
         printf '%s\t' "$playlist"
