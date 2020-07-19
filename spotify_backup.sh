@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
+
 # shellcheck disable=SC2034
 usage_description="
 One-touch Spotify Backup of all or selected Spotify playlists
@@ -35,9 +38,6 @@ For private playlist, the user is inferred from the authorized token
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="[<playlist> <playlist2> ...]"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
