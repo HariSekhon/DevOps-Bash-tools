@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
+
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="<command to execute per playlist> [<spotify_user> [<curl_options>]"
@@ -31,7 +34,7 @@ Useful for combining with other spotify_*.sh scripts, such as downloading all th
 
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Examples:
 
@@ -46,9 +49,6 @@ Caveat: due to limitations of the Spotify API, this by default only works for pu
 export SPOTIFY_PRIVATE=1
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
