@@ -59,13 +59,13 @@ if [ -z "$playlist_id" ]; then
     usage "playlist id not defined"
 fi
 
-playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
-
-offset="${OFFSET:-0}"
-
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
+
+playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
+
+offset="${OFFSET:-0}"
 
 "$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?limit=50&offset=$offset" "$@"
