@@ -19,32 +19,36 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
-    exec "$srcdir/spotify_playlists_private.sh" "$@"
-fi
-
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns the list of Spotify public playlists for the given Spotify user
-
-Returns only playlists that originate from the given Spotify user by default
-Set \$SPOTIFY_PLAYLISTS_ALL in the environment to return all followed playlists as well
-
-\$SPOTIFY_USER can be used from the evironment if no first argument is given
+Returns the list of Spotify playlists
 
 Output Format:
 
 <playlist_id>   <playlist_name>
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+By default returns only public playlists owned by given Spotify user
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists.
-For private playlists use spotify_playlists_private.sh or set \$SPOTIFY_PRIVATE=1
-which will exec to call that script instead (in which case you don't specify the username)
+Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return all followed playlists as well
+
+\$SPOTIFY_USER can be used from the evironment if no first argument is given
+
+To get private playlists set \$SPOTIFY_PRIVATE=1 and don't specify the spotify user which is inferred from the token
+used
+
+Due to quirks of the Spotify API, this requires an interactive web authorization pop-up
+or \$SPOTIFY_ACCESS_TOKEN in the environment. To prevent repeated pop-ups, set once an hour in your shell like so:
+
+export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
+
+If you 've exported a non-authorized \$SPOTIFY_ACCESS_TOKEN in your environment (eg. from spotify_api_token.sh),
+then this script will fail with a 401 unauthorized error
+
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment if SPOTIFY_ACCESS_TOKEN is unset
 "
 
 # shellcheck disable=SC1090
@@ -66,12 +70,19 @@ shift || :
 
 offset="${OFFSET:-0}"
 
-url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
+if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+    url_path="/v1/me/playlists?limit=50&offset=$offset"
+else
+    url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
+fi
 
 output(){
+    if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+        jq -r ".items[] | select(.public != true) | [.id, .name] | @tsv" <<< "$output"
     # now enforcing only public playlists to avoid accidentally backing up private playlists if $SPOTIFY_ACCESS_TOKEN
     # in the environment happens to be an authorized token and therefore skips generating the right token below
-    if [ -n "${SPOTIFY_PLAYLISTS_ALL:-}" ]; then
+    elif [ -n "${SPOTIFY_PLAYLISTS_FOLLOWED:-}" ]; then
         jq -r ".items[] | select(.public == true) | [.id, .name] | @tsv"
     else
         jq -r ".items[] | select(.public == true) | select(.owner.id == \"$user\") | [.id, .name] | @tsv"
@@ -83,7 +94,11 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token_interactive.sh")"
+    else
+        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    fi
     export SPOTIFY_ACCESS_TOKEN
 fi
 
