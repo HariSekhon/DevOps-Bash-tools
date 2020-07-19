@@ -22,54 +22,43 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
+
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns the URIs of a Spotify user's Liked Songs (aka Saved Tracks) using the Spotify API
 
 Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist, or combined with spotify_set_track_uris_to_liked.sh
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Caveat: due to limitations of the Spotify API, this requires an interactively authorized access token, which you will be prompted for if you haven't already got one in your shell environment. To set up an authorized token for an hour in your current shell, you can run the following command (make sure you don't have an access token in the environment from spotify_api_token.sh otherwise you will get a 401 error):
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/spotify_api_token_interactive.sh')\"
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
 help_usage "$@"
 
-offset="${SPOTIFY_OFFSET:-0}"
-limit="${SPOTIFY_LIMIT:-50}"
-
+# defined in lib/spotify.sh
+# shellcheck disable=SC2154
 url_path="/v1/me/tracks?limit=$limit&offset=$offset"
 
 output(){
     jq -r '.items[] | [.track.uri] | @tsv' <<< "$output"
 }
 
-get_next(){
-    jq -r '.next' <<< "$output"
-}
+export SPOTIFY_PRIVATE=1
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_PRIVATE=1
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    # shellcheck disable=SC2181
-    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
-        echo "$output" >&2
-        exit 1
-    fi
+    exit_if_jq_error
     url_path="$(get_next)"
     output
 done
