@@ -467,7 +467,7 @@ function! WriteRun()
         " TODO: consider switching this to go build and then run the binary as
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
-        :! go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
+        :! eval go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
     elseif expand('%:t') == 'Makefile'
         :call Make()
     elseif expand('%:t') == 'Dockerfile'
@@ -478,13 +478,14 @@ function! WriteRun()
             :! docker build "%:p:h"
         endif
     else
-        :! "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
+        :! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
     endif
 endfunction
 
 function! WriteRunDebug()
     :let $DEBUG=1
     :call WriteRun()
+    :let $DEBUG=
 endfunction
 
 function! Make()
