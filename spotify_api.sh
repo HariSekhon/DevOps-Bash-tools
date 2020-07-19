@@ -23,13 +23,13 @@ usage_args="/url/path [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Queries the Spotify API
+Queries the given Spotify API endpoint
 
 Requires \$SPOTIFY_ACCESS_TOKEN in the environment, or \$SPOTIFY_ID and \$SPOTIFY_SECRET, in which case it'll call spotify_access_token.sh to generate a new token for the duration of this script
 
-If accessing API endpoints for private user data that require authorized tokens, such as /v1/me/... , then you'll need to export SPOTIFY_API=1 to generate an interactive pop-up authorized token due to quirks in the Spotify API
+If accessing API endpoints for private user data that require authorized tokens, such as /v1/me/... , then you'll need to export SPOTIFY_PRIVATE=1 before generating a token with interactive authorization pop-up due to quirks in the Spotify API
 
-You may want to do this in your shell environment for efficiency to avoid regenerating API tokens for every script call within the hour (just remember to unset it after the expiry, usually 1 hour)
+For efficiency to avoid regenerating API tokens for every script call, do the following once an hour in your shell:
 
 export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
