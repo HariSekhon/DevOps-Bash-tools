@@ -468,11 +468,14 @@ function! WriteRun()
         " the transition effects when run like this
         :! go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
     elseif expand('%:t') == 'Makefile'
-        " "%:p:h" is dirname
-        :! bash -c 'cd "%:p:h" && make'
+        :call Make()
     elseif expand('%:t') == 'Dockerfile'
         " "%:p:h" is dirname
-        :! docker build "%:p:h"
+        if filereadable(join([expand("%:p:h"), "Makefile"], "/"))
+            :call Make()
+        else
+            :! docker build "%:p:h"
+        endif
     else
         :! "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
     endif
@@ -482,6 +485,11 @@ function! WriteRunDebug()
     ": echo expand('%:t')
     :let $DEBUG=1
     :call WriteRun()
+endfunction
+
+function! Make()
+    " '%:p:h' is dirname
+    :! bash -c 'cd "%:p:h" && make'
 endfunction
 
 
