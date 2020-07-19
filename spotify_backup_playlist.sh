@@ -33,7 +33,9 @@ Requires \$SPOTIFY_USER be set in the environment or else given as the second ar
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
+
+export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 "
 
 # shellcheck disable=SC1090
@@ -46,6 +48,12 @@ min_args 1 "$@"
 spotify_user="${SPOTIFY_USER:-}"
 
 playlist="$1"
+if [ "$playlist" = liked ] || [ "$playlist" = saved ]; then
+    playlist="Liked Songs"
+fi
+liked(){
+    [ "$playlist" = "Liked Songs" ]
+}
 
 shift || :
 
@@ -61,25 +69,44 @@ else
     backup_dir="$PWD/playlists"
 fi
 backup_dir_spotify="$backup_dir/spotify"
+if liked; then
+    playlist_name="Liked Songs"
+    backup_dir+="/private"
+    backup_dir_spotify+="/private"
+fi
 
 mkdir -vp "$backup_dir"
+mkdir -vp "$backup_dir_spotify"
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    if liked; then
+        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token_interactive.sh")"
+    else
+        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    fi
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
-playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
-
 echo -n "$playlist_name "
 
-filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
+if liked; then
+    filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
+    echo -n "=> URIs => "
+    "$srcdir/spotify_liked_tracks_uris.sh" "$@" > "$backup_dir_spotify/$filename"
 
-echo -n "=> URIs => "
-"$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
+    echo -n 'OK => Tracks => '
+    "$srcdir/spotify_liked_tracks.sh" "$@" > "$backup_dir/$filename"
+else
+    playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
+    playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
 
-echo -n 'OK => Tracks => '
-"$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
+    filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
+
+    echo -n "=> URIs => "
+    "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
+
+    echo -n 'OK => Tracks => '
+    "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
+fi
 
 echo 'OK'
