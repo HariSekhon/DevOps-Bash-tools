@@ -26,7 +26,7 @@ If playlist args are given then backs up only those playlists
 
 Without args, backs up the entire list of public Spotify playlists, or private playlists if \$SPOTIFY_PRIVATE is set
 
-\$SPOTIFY_USER must be set in the environment
+\$SPOTIFY_USER must be set in the environment by default, unless doing private playlists in which case is inferred from token
 "
 
 # used by usage() in lib/utils.sh
@@ -41,6 +41,8 @@ help_usage "$@"
 if [ -z "${SPOTIFY_BACKUP_DIR:-}" ]; then
     if [[ "$PWD" =~ playlists ]]; then
         export SPOTIFY_BACKUP_DIR="$PWD"
+    else
+        export SPOTIFY_BACKUP_DIR="$PWD/playlists"
     fi
 fi
 
@@ -58,7 +60,7 @@ fi
 mkdir -pv "$SPOTIFY_BACKUP_DIR/spotify"
 
 timestamp "Dumping list of Spotify playlists to $SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
-"$srcdir/spotify_playlists.sh" "$SPOTIFY_USER" > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
+"$srcdir/spotify_playlists.sh" > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 echo >&2
 
 timestamp "Stripping spotify playlist IDs from $SPOTIFY_BACKUP_DIR/spotify/playlists.txt => $SPOTIFY_BACKUP_DIR/playlists.txt"
