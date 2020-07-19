@@ -22,7 +22,9 @@ usage_description="
 One-touch Spotify Backup of all or selected Spotify playlists
 using code from Spotify Tools and DevOps Bash Tools repos
 
-Without args, also backs up the entire list of public Spotify playlists
+If playlist args are given then backs up only those playlists
+
+Without args, backs up the entire list of public Spotify playlists, or private playlists if \$SPOTIFY_PRIVATE is set
 
 \$SPOTIFY_USER must be set in the environment
 "
@@ -53,12 +55,12 @@ if [ $# -gt 0 ]; then
     exit 0
 fi
 
-timestamp "Dumping list of Spotify playlists to spotify/playlists.txt"
-"$srcdir/spotify_playlists.sh" "$SPOTIFY_USER" > spotify/playlists.txt
+timestamp "Dumping list of Spotify playlists to $SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
+"$srcdir/spotify_playlists.sh" "$SPOTIFY_USER" > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 echo >&2
 
-timestamp "Stripping spotify playlist IDs from spotify/playlists.txt => playlists.txt"
-sed 's/^[^[:space:]]*[[:space:]]*//' spotify/playlists.txt > playlists.txt
+timestamp "Stripping spotify playlist IDs from $SPOTIFY_BACKUP_DIR/spotify/playlists.txt => $SPOTIFY_BACKUP_DIR/playlists.txt"
+sed 's/^[^[:space:]]*[[:space:]]*//' "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt" > "$SPOTIFY_BACKUP_DIR/playlists.txt"
 echo >&2
 
 "$srcdir/spotify_backup_playlists.sh"
