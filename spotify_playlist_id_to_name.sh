@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: 2ddv4fdbsD7WOnmY30g40i
+#  args: 2ddv4fdbsD7WOnmY30g40i | tee /dev/stderr | spotify_playlist_name_to_id.sh "`cat`"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-03 00:25:24 +0100 (Fri, 03 Jul 2020)
