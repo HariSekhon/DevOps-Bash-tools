@@ -41,13 +41,11 @@ export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
 min_args 1 "$@"
-
-spotify_user="${SPOTIFY_USER:-}"
 
 playlist="$1"
 if [ "$playlist" = liked ] || [ "$playlist" = saved ]; then
@@ -59,9 +57,7 @@ liked(){
 
 shift || :
 
-if [ -z "$spotify_user" ] && [ -z "${SPOTIFY_PRIVATE:-}" ]; then
-    usage "\$SPOTIFY_USER not defined"
-fi
+spotify_user
 
 if [ -n "${SPOTIFY_BACKUP_DIR:-}" ]; then
     backup_dir="$SPOTIFY_BACKUP_DIR"
@@ -80,13 +76,10 @@ fi
 mkdir -vp "$backup_dir"
 mkdir -vp "$backup_dir_spotify"
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    if liked; then
-        export SPOTIFY_PRIVATE=1
-    fi
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
+if liked; then
+    export SPOTIFY_PRIVATE=1
 fi
+spotify_token
 
 if liked; then
     echo -n "$playlist_name "
