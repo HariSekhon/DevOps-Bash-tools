@@ -58,7 +58,7 @@ liked(){
 
 shift || :
 
-if [ -z "$spotify_user" ]; then
+if [ -z "$spotify_user" ] && [ -z "${SPOTIFY_PRIVATE:-}" ]; then
     usage "\$SPOTIFY_USER not defined"
 fi
 
