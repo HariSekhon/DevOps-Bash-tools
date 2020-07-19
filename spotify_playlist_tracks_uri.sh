@@ -34,7 +34,10 @@ or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
-Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist
+Spotify track URIs can be used:
+- as backups to restore a playlist's contents
+- copied to new playlists
+- set to Liked (spotify_set_track_uris_to_liked.sh)
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
