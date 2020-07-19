@@ -51,7 +51,7 @@ Used by adjacent spotify_*.sh scripts for more serious usage
 "
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
@@ -61,9 +61,7 @@ url_path="$1"
 
 shift || :
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-fi
+spotify_token
 
 url_base="https://api.spotify.com"
 url_path="${url_path##$url_base}"
