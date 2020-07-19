@@ -467,18 +467,21 @@ function! WriteRun()
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
         :! go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
+    elseif expand('%:t') == 'Makefile'
+        " "%:p:h" is dirname
+        :! bash -c 'cd "%:p:h" && make'
+    elseif expand('%:t') == 'Dockerfile'
+        " "%:p:h" is dirname
+        :! docker build "%:p:h"
     else
         :! "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
     endif
 endfunction
 
 function! WriteRunDebug()
-    :w
-    if &filetype == 'go'
-        :! DEBUG=1 bash -c "go run %:p `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less"
-    else
-        :! DEBUG=1 bash -c "%:p `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less"
-    endif
+    ": echo expand('%:t')
+    :let $DEBUG=1
+    :call WriteRun()
 endfunction
 
 
