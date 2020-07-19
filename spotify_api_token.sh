@@ -30,7 +30,7 @@ Due to quirks of the Spotify API, by default returns a non-interactive access to
 To get a token to access the private user data API endpoints, set \$SPOTIFY_PRIVATE=1
 This will then require a browser prompt to authorize, at which point this will capture and output the resulting token
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment if \$SPOTIFY_ACCESS_TOKEN is not set
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Generate an App client ID and secret here and add a callback URL of 'http://localhost:12345/callback':
 
