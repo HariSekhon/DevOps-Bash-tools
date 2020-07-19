@@ -36,7 +36,7 @@ Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Caveat: due to limitations of the Spotify API, this requires an interactively authorized access token, which you will be prompted for if you haven't already got one in your shell environment. To set up an authorized token for an hour in your current shell, you can run the following command (make sure you don't have an access token in the environment from spotify_api_token.sh otherwise you will get a 401 error):
 
-export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
+export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/spotify_api_token_interactive.sh')\"
 "
 
 # shellcheck disable=SC1090
@@ -57,7 +57,7 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token_interactive.sh")"
+    SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
 
