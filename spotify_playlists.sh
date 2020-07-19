@@ -68,13 +68,14 @@ fi
 
 shift || :
 
-offset="${OFFSET:-0}"
+offset="${SPOTIFY_OFFSET:-0}"
+limit="${SPOTIFY_LIMIT:-50}"
 
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
-    url_path="/v1/me/playlists?limit=50&offset=$offset"
+    url_path="/v1/me/playlists?limit=$limit&offset=$offset"
 else
-    url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
+    url_path="/v1/users/$user/playlists?limit=$limit&offset=$offset"
 fi
 
 output(){
