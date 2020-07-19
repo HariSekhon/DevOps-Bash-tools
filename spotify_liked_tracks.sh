@@ -50,9 +50,9 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-offset="${OFFSET:-0}"
-
-url_path="/v1/me/tracks?limit=50&offset=$offset"
+# defined in lib/spotify.sh
+# shellcheck disable=SC2154
+url_path="/v1/me/tracks?limit=$limit&offset=$offset"
 
 output(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
@@ -74,11 +74,7 @@ spotify_token
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    # shellcheck disable=SC2181
-    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
-        echo "$output" >&2
-        exit 1
-    fi
+    exit_if_jq_error
     url_path="$(get_next)"
     output
 done
