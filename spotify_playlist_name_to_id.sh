@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: "My Shazam Tracks"
+#  args: "My Shazam Tracks" | tee /dev/stderr | xargs spotify_playlist_id_to_name.sh
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-03 00:25:24 +0100 (Fri, 03 Jul 2020)
