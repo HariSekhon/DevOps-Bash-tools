@@ -25,10 +25,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/spotify.sh"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
-
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Returns the URIs of a Spotify user's Liked Songs (aka Saved Tracks) using the Spotify API
@@ -41,6 +37,10 @@ Caveat: due to limitations of the Spotify API, this requires an interactively au
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/spotify_api_token_interactive.sh')\"
 "
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
 help_usage "$@"
 
