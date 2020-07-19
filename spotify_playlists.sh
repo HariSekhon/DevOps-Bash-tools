@@ -94,11 +94,7 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
-        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token_interactive.sh")"
-    else
-        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    fi
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
 
