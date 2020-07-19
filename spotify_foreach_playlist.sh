@@ -43,7 +43,8 @@ Examples:
 
 Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists export SPOTIFY_PRIVATE=1 and get an interactively authorized access token for your shell to prevent repeated web authorization pop-ups:
 
-export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 \"$srcdir/spotify_api_token.sh\")\"
+export SPOTIFY_PRIVATE=1
+export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
 
 # shellcheck disable=SC1090
