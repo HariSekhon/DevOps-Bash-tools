@@ -19,9 +19,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<spotify_username> [<curl_options>]"
+# shellcheck disable=SC1090,SC2154
+. "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -29,7 +28,7 @@ Returns the list of Spotify public playlists in raw JSON format for the given Sp
 
 \$SPOTIFY_USER can be used from the evironment if no first argument is given
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
         This script does not iterate each page automatically because the output would be nonsensical
@@ -39,15 +38,15 @@ Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=5
 Caveat: due to limitations of the Spotify API, this only works for public playlists
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<spotify_username> [<curl_options>]"
 
 help_usage "$@"
 
-offset="${SPOTIFY_OFFSET:-0}"
-limit="${SPOTIFY_LIMIT:-50}"
-
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    # $limit/$offset defined in lib/spotify.sh
+    # shellcheck disable=SC2154
     url_path="/v1/me/playlists?limit=$limit&offset=$offset"
 else
     if [ -n "${1:-}" ]; then
@@ -59,6 +58,8 @@ else
         #user="me"
         usage "user not specified"
     fi
+    # $limit/$offset defined in lib/spotify.sh
+    # shellcheck disable=SC2154
     url_path="/v1/users/$user/playlists?limit=$limit&offset=$offset"
 fi
 
