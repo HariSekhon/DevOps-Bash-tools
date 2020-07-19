@@ -27,11 +27,13 @@ Queries the Spotify API
 
 Requires \$SPOTIFY_ACCESS_TOKEN in the environment, or \$SPOTIFY_ID and \$SPOTIFY_SECRET, in which case it'll call spotify_access_token.sh to generate a new token for the duration of this script
 
-You may want to do this in your shell environment for efficiency to avoid regenerating API tokens for every script call within the hour (just remember to remove it after the expiry, usually 1 hour)
+If accessing API endpoints for private user data that require authorized tokens, such as /v1/me/... , then you'll need to export SPOTIFY_API=1 to generate an interactive pop-up authorized token due to quirks in the Spotify API
+
+You may want to do this in your shell environment for efficiency to avoid regenerating API tokens for every script call within the hour (just remember to unset it after the expiry, usually 1 hour)
 
 export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
 
-Generate an App client ID and secret here:
+Generate an App client ID and secret here and add a callback URL of 'http://localhost:12345/callback':
 
 https://developer.spotify.com/dashboard/applications
 
@@ -41,7 +43,9 @@ https://developer.spotify.com/documentation/web-api/reference/
 
 Eg.
 
-./spotify_api.sh /v1/users/harisekhon
+spotify_api.sh /v1/users/harisekhon
+
+SPOTIFY_PRIVATE=1 spotify_api.sh /v1/me/tracks
 
 Used by adjacent spotify_*.sh scripts for more serious usage
 "
