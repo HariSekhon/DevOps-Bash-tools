@@ -18,9 +18,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<spotify_user> [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -40,8 +39,9 @@ For private playlists you must export SPOTIFY_PRIVATE=1 and preferably pre-gener
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/spotify.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
