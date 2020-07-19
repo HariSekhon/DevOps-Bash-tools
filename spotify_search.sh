@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: 64OO67Be8wOXn6STqHxexr
+#  args: "Foo Fighers"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-05 14:33:55 +0100 (Sun, 05 Jul 2020)
@@ -21,11 +21,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="'<search_expression>"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Searches the Spotify API and returns the first N tracks / artists / albums that match the given search expression
 
@@ -50,13 +49,12 @@ Environment variable options:
 
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
-
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the
-environment for authentication, see spotify_api_token.sh for more details
+$usage_auth_msg
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="'<search_expression>"
 
 help_usage "$@"
 
