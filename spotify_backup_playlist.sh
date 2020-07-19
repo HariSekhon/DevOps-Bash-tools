@@ -82,10 +82,9 @@ mkdir -vp "$backup_dir_spotify"
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     if liked; then
-        SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$srcdir/spotify_api_token.sh")"
-    else
-        SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+        export SPOTIFY_PRIVATE=1
     fi
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
 
