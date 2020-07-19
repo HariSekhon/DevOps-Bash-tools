@@ -57,10 +57,17 @@ command_template="$1"
 shift || :
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
 fi
 
-"$srcdir/spotify_playlists.sh" "$@" |
+{
+    if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+        "$srcdir/spotify_playlists_private.sh" "$@"
+    else
+        "$srcdir/spotify_playlists.sh" "$@"
+    fi
+} |
 while read -r playlist_id playlist; do
     if [ -z "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}" ]; then
         printf '%s\t' "$playlist"
