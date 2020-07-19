@@ -22,11 +22,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns a Spotify user's Liked Songs aka Saved Tracks using the Spotify API
 
@@ -38,15 +37,16 @@ or if \$SPOTIFY_CSV environment variable is set then:
 
 \"Artist\",\"Track\"
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Caveat: due to limitations of the Spotify API, this requires an interactively authorized access token, which you will be prompted for if you haven't already got one in your shell environment. To set up an authorized token for an hour in your current shell, you can run the following command (make sure you don't have an access token in the environment from spotify_api_token.sh otherwise you will get a 401 error):
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 \"$srcdir/spotify_api_token.sh\")\"
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
 help_usage "$@"
 
@@ -68,15 +68,9 @@ output(){
     '
 }
 
-get_next(){
-    jq -r '.next' <<< "$output"
-}
+export SPOTIFY_PRIVATE=1
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_PRIVATE=1
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
