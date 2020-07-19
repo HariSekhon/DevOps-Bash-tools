@@ -41,7 +41,7 @@ export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
@@ -66,10 +66,7 @@ timestamp "Backing up Spotify playlists to $backup_dir"
 echo >&2
 mkdir -vp "$backup_dir"
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 # for spotify_backup_playlist.sh to inherit, saving executions to recalculate on each iteration
 export SPOTIFY_BACKUP_DIR="$backup_dir"
