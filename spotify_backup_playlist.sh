@@ -87,10 +87,11 @@ if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
     export SPOTIFY_ACCESS_TOKEN
 fi
 
-echo -n "$playlist_name "
-
 if liked; then
+    echo -n "$playlist_name "
+
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
+
     echo -n "=> URIs => "
     "$srcdir/spotify_liked_tracks_uris.sh" "$@" > "$backup_dir_spotify/$filename"
 
@@ -99,6 +100,8 @@ if liked; then
 else
     playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
+
+    echo -n "$playlist_name "
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
