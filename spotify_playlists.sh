@@ -19,9 +19,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<spotify_user> [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -48,11 +47,12 @@ export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 If you 've exported a non-authorized \$SPOTIFY_ACCESS_TOKEN in your environment (eg. from spotify_api_token.sh),
 then this script will fail with a 401 unauthorized error
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment if SPOTIFY_ACCESS_TOKEN is unset
+$usage_auth
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
@@ -68,13 +68,14 @@ fi
 
 shift || :
 
-offset="${SPOTIFY_OFFSET:-0}"
-limit="${SPOTIFY_LIMIT:-50}"
-
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+    # $limit/$offset defined in lib/spotify.sh
+    # shellcheck disable=SC2154
     url_path="/v1/me/playlists?limit=$limit&offset=$offset"
 else
+    # $limit/$offset defined in lib/spotify.sh
+    # shellcheck disable=SC2154
     url_path="/v1/users/$user/playlists?limit=$limit&offset=$offset"
 fi
 
@@ -90,22 +91,11 @@ output(){
     fi <<< "$output"
 }
 
-get_next(){
-    jq -r '.next' <<< "$output"
-}
-
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    # shellcheck disable=SC2181
-    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
-        echo "$output" >&2
-        exit 1
-    fi
+    exit_if_jq_error
     url_path="$(get_next)"
     output
 done
