@@ -72,7 +72,8 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    export SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
 fi
 
 while [ -n "$url_path" ] && [ "$url_path" != null ]; do
