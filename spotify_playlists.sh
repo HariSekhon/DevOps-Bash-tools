@@ -42,7 +42,9 @@ Output Format:
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+Caveat: due to limitations of the Spotify API, this only works for public playlists.
+For private playlists use spotify_playlists_private.sh or set \$SPOTIFY_PRIVATE=1
+which will exec to call that script instead (in which case you don't specify the username)
 "
 
 # shellcheck disable=SC1090
