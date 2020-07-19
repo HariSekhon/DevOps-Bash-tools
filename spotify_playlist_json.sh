@@ -20,11 +20,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<playlist> [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns Spotify API output for a given public playlist
 
@@ -32,7 +31,7 @@ Playlist argument can be a playlist name (or partial string match) or a playlist
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
-Requires \$SPOTIFY_ACCESS_TOKEN, or \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
         This script does not iterate each page automatically because the output would be nonsensical
@@ -46,8 +45,9 @@ export SPOTIFY_PRIVATE=1
 export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token_interactive.sh')\"
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<playlist> [<curl_options>]"
 
 help_usage "$@"
 
@@ -59,13 +59,10 @@ if [ -z "$playlist_id" ]; then
     usage "playlist id not defined"
 fi
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 
-offset="${OFFSET:-0}"
-
-"$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?limit=50&offset=$offset" "$@"
+# defined in lib/spotify.sh
+# shellcheck disable=SC2154
+"$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?limit=$limit&offset=$offset" "$@"
