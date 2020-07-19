@@ -21,10 +21,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/spotify.sh"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<playlist> [<curl_options>]"
-
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Backs up a given public Spotify playlists for a given user to text files in both Spotify and human readable formats
@@ -42,6 +38,10 @@ For private playlists you must export SPOTIFY_PRIVATE=1 and preferably pre-gener
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<playlist> [<curl_options>]"
 
 help_usage "$@"
 
