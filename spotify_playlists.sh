@@ -19,6 +19,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    exec "$srcdir/spotify_playlists_private.sh" "$@"
+fi
+
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="<spotify_user> [<curl_options>]"
