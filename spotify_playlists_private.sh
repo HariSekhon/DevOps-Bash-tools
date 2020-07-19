@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# https://developer.spotify.com/documentation/web-api/reference/playlists/get-list-users-playlists/
+# https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -21,15 +21,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<spotify_user> [<curl_options>]"
+usage_args="[<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns the list of Spotify private playlists for the given Spotify user
+Returns the list of Spotify private playlists for your access token
 
-Returns only playlists that originate from the given Spotify user
-
-\$SPOTIFY_USER can be used from the evironment if no first argument is given
+THe spotify user is inferred from the access token
 
 Output Format:
 
@@ -37,11 +35,13 @@ Output Format:
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Caveat: due to limitations of the Spotify API, this requires an interactive web authorization or
-\$SPOTIFY_ACCESS_TOKEN in the environment (can be obtained for an hour from spotify_api_token_interactive.sh)
+Caveat: due to limitations of the Spotify API, this requires an interactive web authorization pop-up or
+\$SPOTIFY_ACCESS_TOKEN in the environment:
+
+export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 
 If you have exported a non-authorized \$SPOTIFY_ACCESS_TOKEN in your environment (eg. from spotify_api_token.sh),
-then this script will return no public playlists
+then this script will fail with a 401 unauthorized error
 "
 
 # shellcheck disable=SC1090
@@ -49,24 +49,13 @@ then this script will return no public playlists
 
 help_usage "$@"
 
-if [ -n "${1:-}" ]; then
-    user="$1"
-elif [ -n "${SPOTIFY_USER:-}" ]; then
-    user="$SPOTIFY_USER"
-else
-    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
-    #user="me"
-    usage "user not specified"
-fi
-
-shift || :
-
 offset="${OFFSET:-0}"
 
-url_path="/v1/users/$user/playlists?limit=50&offset=$offset"
+# /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+url_path="/v1/me/playlists?limit=50&offset=$offset"
 
 output(){
-    jq -r ".items[] | select(.owner.id == \"$user\") | select(.public != true) | [.id, .name] | @tsv" <<< "$output"
+    jq -r ".items[] | select(.public != true) | [.id, .name] | @tsv" <<< "$output"
 }
 
 get_next(){
@@ -74,7 +63,7 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token_interactive.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
 
