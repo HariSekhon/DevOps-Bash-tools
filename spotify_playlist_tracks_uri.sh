@@ -70,17 +70,25 @@ url_path="/v1/playlists/$playlist_id/tracks?limit=$limit&offset=$offset"
 
 output(){
     #jq -r '.' <<< "$output"
-    jq -r '.items[] | [.track.uri] | @tsv' <<< "$output"
+    jq -r '.items[] | select(.track.uri) | [.track.uri] | @tsv' <<< "$output"
 }
 
 get_next(){
     jq -r '.next' <<< "$output"
 }
 
-while [ -n "$url_path" ] && [ "$url_path" != null ]; do
-    output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
+has_next_url(){
+    [ -n "$url_path" ] && [ "$url_path" != null ]
+}
+
+has_jq_error(){
     # shellcheck disable=SC2181
-    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
+    [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]
+}
+
+while has_next_url; do
+    output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
+    if has_jq_error; then
         echo "$output" >&2
         exit 1
     fi
