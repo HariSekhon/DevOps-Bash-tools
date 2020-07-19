@@ -44,18 +44,24 @@ Caveat: due to limitations of the Spotify API, this only works for public playli
 
 help_usage "$@"
 
-if [ -n "${1:-}" ]; then
-    user="$1"
-elif [ -n "${SPOTIFY_USER:-}" ]; then
-    user="$SPOTIFY_USER"
+offset="${OFFSET:-0}"
+limit="${LIMIT:-50}"
+
+if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    url_path="/v1/me/playlists?limit=$limit&offset=$offset"
 else
-    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
-    #user="me"
-    usage "user not specified"
+    if [ -n "${1:-}" ]; then
+        user="$1"
+    elif [ -n "${SPOTIFY_USER:-}" ]; then
+        user="$SPOTIFY_USER"
+    else
+        # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+        #user="me"
+        usage "user not specified"
+    fi
+    url_path="/v1/users/$user/playlists?limit=$limit&offset=$offset"
 fi
 
 shift || :
 
-offset="${OFFSET:-0}"
-
-"$srcdir/spotify_api.sh" "/v1/users/$user/playlists?limit=50&offset=$offset" "$@"
+"$srcdir/spotify_api.sh" "$url_path" "$@"
