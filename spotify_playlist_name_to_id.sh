@@ -69,6 +69,11 @@ playlist_name_to_id(){
     fi
 }
 
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
+fi
+
 if [ $# -gt 0 ]; then
     playlist_name="$1"
     shift || :
