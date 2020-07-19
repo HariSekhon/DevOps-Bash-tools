@@ -48,21 +48,16 @@ export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
-if [ $# -lt 1 ]; then
-    usage
-fi
+min_args 1 "$@"
 
 command_template="$1"
 shift || :
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 "$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
