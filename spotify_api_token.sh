@@ -121,7 +121,9 @@ redirect_uri='http://localhost:12345/callback'
 #output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
 
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    # authorization code flow
     url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
+    # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
     {
     if [ "$(uname -s)" = Darwin ]; then
         open "$url"
@@ -153,12 +155,12 @@ EOF
     # or send client_id + client_secret fields in POST body - using curl_auth.sh now to avoid this appearing in process list / logs
     #basic_auth_token="$(base64 <<< "$SPOTIFY_ID:$SPOTIFY_SECRET")"
 
-    # output everything that isn't the token to stderr as it's almost certainly user information or errors and we don't want that to be captured by client scripts
-    } >&2
-
     #curl -H "Authorization: Basic $basic_auth_token" -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri" https://accounts.spotify.com/api/token
     # won't appear in process list
     output="$(USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/curl_auth.sh" -sSL -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri" https://accounts.spotify.com/api/token)"
+
+    # output everything that isn't the token to stderr as it's almost certainly user information or errors and we don't want that to be captured by client scripts
+    } >&2
 fi
 
 # shellcheck disable=SC2181
