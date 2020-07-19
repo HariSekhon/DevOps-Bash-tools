@@ -55,6 +55,8 @@ if [ $# -gt 0 ]; then
     exit 0
 fi
 
+mkdir -pv "$SPOTIFY_BACKUP_DIR/spotify"
+
 timestamp "Dumping list of Spotify playlists to $SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 "$srcdir/spotify_playlists.sh" "$SPOTIFY_USER" > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 echo >&2
