@@ -38,7 +38,7 @@ https://developer.spotify.com/dashboard/applications
 "
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
@@ -125,7 +125,7 @@ if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
     url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
     {
-    if [ "$(uname -s)" = Darwin ]; then
+    if is_mac; then
         open "$url"
     else
         echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
