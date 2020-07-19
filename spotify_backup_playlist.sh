@@ -29,11 +29,12 @@ Backs up a given public Spotify playlists for a given user to text files in both
 Spotify track URI format can be copied and pasted back in to Spotify to restore a playlist to a previous state
 (for example if you accidentally deleted a track and didn't do an immediate Ctrl-Z / Cmd-Z)
 
-Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
+Requires \$SPOTIFY_USER be set in the environment for public playlists, inferred from authorized token for private playlists where \$SPOTIFY_PRIVATE=1 is set
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+Requires \$SPOTIFY_ACCESS_TOKEN, or \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists export SPOTIFY_PRIVATE=1 and get an interactively authorized access token for your shell to prevent repeated web authorization pop-ups:
+Caveat: due to limitations of the Spotify API, this by default only works for public playlists.
+For private playlists export SPOTIFY_PRIVATE=1 and get an interactively authorized access token for your shell to prevent repeated web authorization pop-ups:
 
 export SPOTIFY_PRIVATE=1
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
