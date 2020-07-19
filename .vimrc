@@ -485,7 +485,7 @@ endfunction
 function! WriteRunDebug()
     :let $DEBUG=1
     :call WriteRun()
-    :let $DEBUG=
+    :let $DEBUG=""
 endfunction
 
 function! Make()
