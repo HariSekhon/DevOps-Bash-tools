@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#
-#  args: 64OO67Be8wOXn6STqHxexr
-#  args: Florence.*
+#  args: "Upbeat & Sexual Pop"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-06-24 01:17:21 +0100 (Wed, 24 Jun 2020)
@@ -30,8 +28,7 @@ usage_args="<playlist_id> [<curl_options>]"
 usage_description="
 Returns track names in a given Spotify public playlist
 
-Playlist argument can be a playlist name (a regex which will return the first matching playlist)
-or a playlist ID (get this from spotify_playlists.sh)
+Playlist argument can be a playlist name (partial string match) or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
