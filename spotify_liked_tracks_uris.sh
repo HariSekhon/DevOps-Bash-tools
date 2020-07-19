@@ -44,9 +44,10 @@ export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/spotify_api_token_in
 
 help_usage "$@"
 
-offset="${OFFSET:-0}"
+offset="${SPOTIFY_OFFSET:-0}"
+limit="${SPOTIFY_LIMIT:-50}"
 
-url_path="/v1/me/tracks?limit=50&offset=$offset"
+url_path="/v1/me/tracks?limit=$limit&offset=$offset"
 
 output(){
     jq -r '.items[] | [.track.uri] | @tsv' <<< "$output"
@@ -57,7 +58,8 @@ get_next(){
 }
 
 if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_PRIVATE=1
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 fi
 
