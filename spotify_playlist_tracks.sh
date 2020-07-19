@@ -67,9 +67,10 @@ fi
 
 playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 
-offset="${OFFSET:-0}"
+offset="${SPOTIFY_OFFSET:-0}"
+limit="${SPOTIFY_LIMIT:-50}"
 
-url_path="/v1/playlists/$playlist_id/tracks?limit=50&offset=$offset"
+url_path="/v1/playlists/$playlist_id/tracks?limit=$limit&offset=$offset"
 
 output(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
