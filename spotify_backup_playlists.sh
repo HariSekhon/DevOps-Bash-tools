@@ -33,7 +33,9 @@ Requires \$SPOTIFY_USER be set in the environment or else given as the second ar
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
+
+export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 "
 
 # shellcheck disable=SC1090
@@ -75,5 +77,8 @@ export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
 export SPOTIFY_FOREACH_NO_NEWLINE=1
 
 "$srcdir"/spotify_foreach_playlist.sh "$srcdir/spotify_backup_playlist.sh '{playlist_id}'" "$spotify_user" "$@"
+if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    "$srcdir/spotify_backup_playlist.sh" liked "$@"
+fi
 echo >&2
 timestamp "Spotify playlists backup finished in $SECONDS seconds"
