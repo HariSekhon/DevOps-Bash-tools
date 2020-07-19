@@ -24,18 +24,19 @@ usage_args="<spotify_user> [<curl_options>]"
 
 # shellcheck disable=SC2034
 usage_description="
-Backs up all public Spotify playlists for a given user to text files in both Spotify and human readable formats
+Backs up all public or privte Spotify playlists for a given user to text files in both Spotify and human readable formats
 
 Spotify track URI format can be copied and pasted back in to Spotify to restore a playlist to a previous state
 (for example if you accidentally deleted a track and didn't do an immediate Ctrl-Z / Cmd-Z)
 
-Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
+Requires \$SPOTIFY_USER be set in the environment or else given as the second arg for public playlists
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
+Caveat: due to limitations of the Spotify API, by default works on public playlists.
+For private playlists you must export SPOTIFY_PRIVATE=1 and preferably pre-generate the token in your shell to prevent repeated web authorization pop-ups:
 
-export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
+export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
 
 # shellcheck disable=SC1090
@@ -47,7 +48,7 @@ spotify_user="${1:-${SPOTIFY_USER:-}}"
 
 shift || :
 
-if [ -z "$spotify_user" ]; then
+if [ -z "$spotify_user" ] && [ -z "${SPOTIFY_PRIVATE:-}" ]; then
     usage "\$SPOTIFY_USER not defined and no first argument given"
 fi
 
