@@ -20,11 +20,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<playlist_id> [<curl_options>]"
+# shellcheck disable=SC1090,SC2154
+. "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns track names in a given Spotify public playlist
 
@@ -40,15 +39,16 @@ or if \$SPOTIFY_CSV environment variable is set then:
 
 \"Artist\",\"Track\"
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<playlist_id> [<curl_options>]"
 
 help_usage "$@"
 
@@ -60,16 +60,12 @@ if [ -z "$playlist_id" ]; then
     usage "playlist id not defined"
 fi
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 
-offset="${SPOTIFY_OFFSET:-0}"
-limit="${SPOTIFY_LIMIT:-50}"
-
+# defined in lib/spotify.sh
+# shellcheck disable=SC2154
 url_path="/v1/playlists/$playlist_id/tracks?limit=$limit&offset=$offset"
 
 output(){
@@ -86,25 +82,9 @@ output(){
     '
 }
 
-get_next(){
-    jq -r '.next' <<< "$output"
-}
-
-has_next_url(){
-    [ -n "$url_path" ] && [ "$url_path" != null ]
-}
-
-has_jq_error(){
-    # shellcheck disable=SC2181
-    [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]
-}
-
 while has_next_url; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    if has_jq_error; then
-        echo "$output" >&2
-        exit 1
-    fi
+    exit_if_jq_error
     url_path="$(get_next)"
     output
 done
