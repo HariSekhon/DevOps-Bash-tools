@@ -24,9 +24,12 @@ using code from Spotify Tools and DevOps Bash Tools repos
 
 If playlist args are given then backs up only those playlists
 
-Without args, backs up the entire list of public Spotify playlists, or private playlists if \$SPOTIFY_PRIVATE is set
+Without args, backs up the entire list of public Spotify playlists
 
-\$SPOTIFY_USER must be set in the environment by default, unless doing private playlists in which case is inferred from token
+To backup private playlists you must export \$SPOTIFY_PRIVATE=1
+
+For public playlists, \$SPOTIFY_USER must be set in the environment
+For private playlist, the user is inferred from the authorized token
 "
 
 # used by usage() in lib/utils.sh
