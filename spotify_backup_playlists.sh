@@ -29,7 +29,8 @@ Backs up all public or privte Spotify playlists for a given user to text files i
 Spotify track URI format can be copied and pasted back in to Spotify to restore a playlist to a previous state
 (for example if you accidentally deleted a track and didn't do an immediate Ctrl-Z / Cmd-Z)
 
-Requires \$SPOTIFY_USER be set in the environment or else given as the second arg for public playlists
+For public playlists, \$SPOTIFY_USER be set in the environment or given as the first arg
+For private playlists, the user is inferred from the authorized token
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
