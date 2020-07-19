@@ -18,13 +18,18 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
+
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Uses Spotify API to translate a Spotify public playlist name to ID
 
 Matches the first playlist from your account with a name matching the given argument as a partial string match
 
 If a Spotify playlist ID is given, returns as is
+
+$usage_auth_msg
 
 Needed by several other adjacent spotify tools
 
@@ -35,12 +40,9 @@ Caveat: due to limitations of the Spotify API, this only works for public playli
 # shellcheck disable=SC2034
 usage_args="<playlist> [<curl_options>]"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
 help_usage "$@"
 
-#if [ "$(uname -s)" = Darwin ]; then
+#if is_mac; then
 #    awk(){
 #        command gawk "$@"
 #    }
@@ -69,10 +71,7 @@ playlist_name_to_id(){
     fi
 }
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 if [ $# -gt 0 ]; then
     playlist_name="$1"
