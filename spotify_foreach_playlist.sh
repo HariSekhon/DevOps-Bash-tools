@@ -20,10 +20,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/spotify.sh"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<command to execute per playlist> [<spotify_user> [<curl_options>]"
-
 # shellcheck disable=SC2034
 usage_description="
 Executes a command per Spotify public playlist for a given user
@@ -49,6 +45,10 @@ Caveat: due to limitations of the Spotify API, this by default only works for pu
 export SPOTIFY_PRIVATE=1
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
 "
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<command to execute per playlist> [<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
