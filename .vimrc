@@ -176,7 +176,7 @@ if has("autocmd")
     autocmd BufWritePre * %s/\s\+$//e | %s#\($\n\s*\)\+\%$##e
 
     " doubles up with nmap ;l
-    "au BufWritePost *.tf,*.tfvars :!clear; cd "`dirname "%"`" && terraform fmt -diff; terraform validate
+    "au BufWritePost *.tf,*.tfvars :!clear; cd "%:p:h" && terraform fmt -diff; terraform validate
 
     " highlight trailing whitespace
     " XXX: doesn't work
@@ -241,10 +241,10 @@ if has("autocmd")
     " TODO: groovy/java CLI linters
     au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
 
-    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "$(dirname "%")" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     " doesn't trigger on window switching
-    au FileType sh                        nmap ;l :w<CR>:!clear; cd "$(dirname "%")" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
+    au FileType sh                        nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
 
     " these tools are in the https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
@@ -257,7 +257,7 @@ if has("autocmd")
     au BufNew,BufRead *.md         nmap ;l :w<CR>:!clear; mdl "%" \| more -R<CR>
     "au BufNew,BufRead *.sql        nmap ;l :w<CR>:!clear; TODO "%" \| more -R<CR>
     au BufNew,BufRead *.scala      nmap ;l :w<CR>:!clear; scalastyle -c "$bash_tools/scalastyle_config.xml" "%" \| more -R<CR>
-    au BufNew,BufRead *.tf,*.tfvars nmap ;l :w<CR>:!clear; cd "`dirname "%"`" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
+    au BufNew,BufRead *.tf,*.tfvars nmap ;l :w<CR>:!clear; cd "%:p:h" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
     au BufNew,BufRead *.toml       nmap ;l :w<CR>:!clear; validate_toml.py "%"<CR>
     au BufNew,BufRead *.xml        nmap ;l :w<CR>:!clear; validate_xml.py "%"<CR>
     " TODO: needs fix to allow multiple inline yaml docs in 1 file
@@ -269,7 +269,7 @@ if has("autocmd")
     " check_makefile.sh is in this repo which should be added to $PATH
     au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefile.sh "%" \| more -R<CR>
     au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| more -R<CR> | nmap ;r :!gradle -b "%" clean build<CR>
-    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd "`dirname "%"`" && echo q \| sbt reload "%" \| more -R<CR>
+    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd "%:p:h" && echo q \| sbt reload "%" \| more -R<CR>
     au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| more -R<CR>
     au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint "%" \| more -R<CR>
 
@@ -315,10 +315,10 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
-nmap          ;g :w<CR> :! bash -ic 'cd $(dirname "%") && st'<CR>
-nmap          ;G :w<CR> :! bash -ic 'cd $(dirname "%") && git log -p "%"'<CR>
-nmap          ;. :w<CR> :! bash -ic 'cd $(dirname "%") && pull'<CR>
-nmap          ;[ :w<CR> :! bash -ic 'cd $(dirname "%") && push'<CR>
+nmap          ;g :w<CR> :! bash -ic 'cd "%:p:h" && st'<CR>
+nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%"'<CR>
+nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull'<CR>
+nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push'<CR>
 nmap <silent> ;u :w<CR> :!urlview "%"<CR>
 " pass current line as stdin to urlview to quickly go to this url
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
@@ -482,7 +482,6 @@ function! WriteRun()
 endfunction
 
 function! WriteRunDebug()
-    ": echo expand('%:t')
     :let $DEBUG=1
     :call WriteRun()
 endfunction
