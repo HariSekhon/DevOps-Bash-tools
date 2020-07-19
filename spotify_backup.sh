@@ -51,6 +51,11 @@ fi
 
 section "Running Spotify Playlists Backup"
 
+if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
+    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
+    export SPOTIFY_ACCESS_TOKEN
+fi
+
 if [ $# -gt 0 ]; then
     echo "Backing up selected playlist(s):"
     echo
