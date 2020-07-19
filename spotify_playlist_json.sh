@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#
 #  args: 64OO67Be8wOXn6STqHxexr
 #
 #  Author: Hari Sekhon
@@ -29,19 +28,22 @@ usage_args="<playlist> [<curl_options>]"
 usage_description="
 Returns Spotify API output for a given public playlist
 
-Playlist argument can be a playlist name (a regex which will return the first matching playlist)
-or a playlist ID (get this from spotify_playlists.sh)
+Playlist argument can be a playlist name (or partial string match) or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+Requires \$SPOTIFY_ACCESS_TOKEN, or \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
         This script does not iterate each page automatically because the output would be nonsensical
         multiple json outputs so you must iterate yourself and process each json result in turn
         For an example of how to do this and process multiple paged requests see spotify_playlist_tracks.sh
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+For private playlists you must specify \$SPOTIFY_PRIVATE=1 before generating the \$SPOTIFY_ACCESS_TOKEN:
+
+export SPOTIFY_PRIVATE=1
+
+export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token_interactive.sh')\"
 "
 
 # shellcheck disable=SC1090
