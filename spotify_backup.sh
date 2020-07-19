@@ -37,7 +37,7 @@ For private playlist, the user is inferred from the authorized token
 usage_args="[<playlist> <playlist2> ...]"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 help_usage "$@"
 
@@ -51,10 +51,7 @@ fi
 
 section "Running Spotify Playlists Backup"
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 if [ $# -gt 0 ]; then
     echo "Backing up selected playlist(s):"
