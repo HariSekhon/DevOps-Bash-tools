@@ -17,9 +17,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -37,8 +36,9 @@ Generate an App client ID and secret here and add a callback URL of 'http://loca
 https://developer.spotify.com/dashboard/applications
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/spotify.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
 help_usage "$@"
 
