@@ -44,8 +44,8 @@ Caveat: due to limitations of the Spotify API, this only works for public playli
 
 help_usage "$@"
 
-offset="${OFFSET:-0}"
-limit="${LIMIT:-50}"
+offset="${SPOTIFY_OFFSET:-0}"
+limit="${SPOTIFY_LIMIT:-50}"
 
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
     url_path="/v1/me/playlists?limit=$limit&offset=$offset"
