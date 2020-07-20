@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns track URIs for the given Spotify public playlist
 
@@ -55,7 +55,7 @@ playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
 
 shift || :
 
-if [ -z "$playlist_id" ]; then
+if is_blank "$playlist_id"; then
     usage "playlist id not defined"
 fi
 
@@ -72,9 +72,9 @@ output(){
     jq -r '.items[] | select(.track.uri) | [.track.uri] | @tsv' <<< "$output"
 }
 
-while has_next_url; do
+while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    exit_if_jq_error
-    url_path="$(get_next)"
+    die_if_error_field "$output"
+    url_path="$(get_next "$output")"
     output
 done
