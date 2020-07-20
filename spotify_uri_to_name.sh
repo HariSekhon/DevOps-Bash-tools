@@ -2,6 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  args: ../playlists/spotify/Rocky
+#  args: ../playlists/spotify/Starred
 #
 #  Author: Hari Sekhon
 #  Date: 2020-06-25 22:28:51 +0100 (Thu, 25 Jun 2020)
@@ -115,8 +116,8 @@ convert(){
                 continue
             fi
             infer_uri_type "$uri"
-            uri="$(validate_spotify_uri "$uri")"
-            ids+=("$uri")
+            id="$(validate_spotify_uri "$uri")"
+            ids+=("$id")
         done
         if [ -z "${ids[*]:-}" ]; then
             return
@@ -136,11 +137,7 @@ query_bulk(){
     # cannot quote curl_options as when empty as this results in a blank literal which breaks curl
     # shellcheck disable=SC2068
     output="$("$srcdir/spotify_api.sh" "$url_path" ${curl_options[@]:-})"
-    # shellcheck disable=SC2181
-    if [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]; then
-        echo "$output" >&2
-        exit 1
-    fi
+    exit_if_jq_error
     output
     sleep "$sleep_secs"
 }
@@ -195,9 +192,10 @@ output(){
 
 output_artist_item(){
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), .name] | $conversion"
+        # the first track comes out with blank artist and track name, but still has .type == track so can't filter on that
+        jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), .name] | $conversion"
     else
-        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
+        jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
     fi
 }
 
