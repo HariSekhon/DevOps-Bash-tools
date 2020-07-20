@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: sed 's/^[^[:space:]]*[[:space:]]*//' $playlists/playlists.txt
+#
+#  args: < ../playlists/playlists.txt
 #
 #  Author: Hari Sekhon
 #  Date: 2020-06-24 17:39:04 +0100 (Wed, 24 Jun 2020)
