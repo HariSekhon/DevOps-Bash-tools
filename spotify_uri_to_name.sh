@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#
 #  args: ../playlists/spotify/Rocky
 #
 #  Author: Hari Sekhon
@@ -24,11 +25,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<files>] [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Takes Spotify URIs and converts them to Track, Album or Artist names using the Spotify API
 
@@ -58,11 +58,12 @@ Useful for saving Spotify playlists in a format that is easier to understand, re
 
 The first argument that doesn't correspond to a file and all subsequent arguements are fed as is to curl as options
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<files>] [<curl_options>]"
 
 help_usage "$@"
 
@@ -72,10 +73,7 @@ sleep_secs="0"
 declare -a curl_options
 curl_options=()
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 uri_type="${SPOTIFY_URI_TYPE:-track}"
 
@@ -99,23 +97,6 @@ infer_uri_type(){
             done
         fi
     fi
-}
-
-validate_spotify_uri(){
-    local uri="$1"
-    if ! [[ "$uri" =~ ^(spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/)?[[:alnum:]]+(\?.+)?$ ]]; then
-        echo "Invalid URI provided: $uri" >&2
-        exit 1
-    fi
-    if [[ "$uri" =~ open.spotify.com/|^spotify: ]]; then
-        if ! [[ "$uri" =~ open.spotify.com/$uri_type|^spotify:$uri_type ]]; then
-            echo "Invalid URI type '$uri_type' vs URI '$uri'" >&2
-            exit 1
-        fi
-    fi
-    uri="${uri##*[:/]}"
-    uri="${uri%%\?*}"
-    echo "$uri"
 }
 
 convert(){
@@ -162,10 +143,6 @@ query_bulk(){
     fi
     output
     sleep "$sleep_secs"
-}
-
-is_local_uri(){
-    [[ "$1" =~ ^spotify:local:|open.spotify.com/local/ ]]
 }
 
 output_local_uri(){
