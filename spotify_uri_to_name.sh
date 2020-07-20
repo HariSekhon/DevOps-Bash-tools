@@ -87,10 +87,10 @@ url_base="/v1/${uri_type}s"
 uri_inferred=0
 infer_uri_type(){
     local uri="$1"
-    if [ $uri_inferred = 0 ] && [ -z "${SPOTIFY_URI_TYPE:-}" ]; then
+    if [ $uri_inferred = 0 ] && is_blank "${SPOTIFY_URI_TYPE:-}"; then
         if [[ "$uri" =~ ^spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/ ]]; then
             for x in "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"; do
-                if [ -n "$x" ]; then
+                if not_blank "$x"; then
                     uri_type="$x"
                     url_base="/v1/${uri_type}s"
                     break
@@ -106,9 +106,11 @@ convert(){
         ids=()
         while [ "${#ids[@]}" -lt 50 ]; do
             read -r -s uri || break
-            [ -z "$uri" ] && break
+            if is_blank "$uri"; then
+                break
+            fi
             if is_local_uri "$uri"; then
-                if [ -n "${ids[*]:-}" ]; then
+                if not_blank "${ids[*]:-}"; then
                     query_bulk "${ids[@]}"
                     ids=()
                 fi
@@ -119,7 +121,7 @@ convert(){
             id="$(validate_spotify_uri "$uri")"
             ids+=("$id")
         done
-        if [ -z "${ids[*]:-}" ]; then
+        if is_blank "${ids[*]:-}"; then
             return
         fi
         query_bulk "${ids[@]}"
@@ -130,14 +132,14 @@ query_bulk(){
     local ids
     # join array arg on commas
     { local IFS=','; ids="$*"; }
-    if [ -z "$ids" ]; then
+    if is_blank "$ids"; then
         return
     fi
     url_path="$url_base?ids=$ids"
     # cannot quote curl_options as when empty as this results in a blank literal which breaks curl
     # shellcheck disable=SC2068
     output="$("$srcdir/spotify_api.sh" "$url_path" ${curl_options[@]:-})"
-    exit_if_jq_error
+    die_if_error_field "$output"
     output
     sleep "$sleep_secs"
 }
@@ -161,7 +163,7 @@ output_local_uri(){
         exit 1
     fi
     track="${uri//+/ }"
-    if [ -n "$artist" ]; then
+    if not_blank "$artist"; then
         artist="${artist//+/ }"
         track="$artist - $track"
     fi
@@ -174,7 +176,7 @@ output(){
         return
     fi
     local conversion="@tsv"
-    if [ -n "${SPOTIFY_CSV:-}" ]; then
+    if not_blank "${SPOTIFY_CSV:-}"; then
         conversion="@csv"
     fi
     if [ "$uri_type" = track ]; then
@@ -191,7 +193,7 @@ output(){
 }
 
 output_artist_item(){
-    if [ -n "${SPOTIFY_CSV:-}" ]; then
+    if not_blank "${SPOTIFY_CSV:-}"; then
         # the first track comes out with blank artist and track name, but still has .type == track so can't filter on that
         jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), .name] | $conversion"
     else
