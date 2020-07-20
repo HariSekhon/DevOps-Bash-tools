@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: 64OO67Be8wOXn6STqHxexr
+#  args: "Foo Fighters"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-05 14:33:55 +0100 (Sun, 05 Jul 2020)
