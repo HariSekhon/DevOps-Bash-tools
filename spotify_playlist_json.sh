@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#
 #  args: 64OO67Be8wOXn6STqHxexr
 #
 #  Author: Hari Sekhon
@@ -55,7 +56,7 @@ playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
 
 shift || :
 
-if [ -z "$playlist_id" ]; then
+if is_blank "$playlist_id"; then
     usage "playlist id not defined"
 fi
 
