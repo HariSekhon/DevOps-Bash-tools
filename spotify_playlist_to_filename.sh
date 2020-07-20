@@ -44,7 +44,7 @@ normalize(){
     #perl -pe 's/[^\w\v-]/_/g'
 }
 
-if [ -n "$*" ]; then
+if not_blank "$*"; then
     normalize <<< "$*"
 else
     normalize  # from stdin
