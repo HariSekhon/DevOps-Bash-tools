@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#
 #  args: "My Shazam Tracks" | tee /dev/stderr | spotify_playlist_id_to_name.sh
 #
 #  Author: Hari Sekhon
@@ -63,7 +64,7 @@ playlist_name_to_id(){
         playlist_id="$(SPOTIFY_PLAYLISTS_ALL=1 "$srcdir/spotify_playlists.sh" "$@" |
                        grep -Fi -m1 "$playlist_name" |
                        awk '{print $1}' || :)"
-        if [ -z "$playlist_id" ]; then
+        if is_blank "$playlist_id"; then
             echo "Error: failed to find playlist ID matching given playlist name '$playlist_name'" >&2
             exit 1
         fi
