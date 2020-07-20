@@ -37,7 +37,7 @@ or a playlist ID (get this from spotify_playlists.sh)
 Spotify track URIs can be used:
 - as backups to restore a playlist's contents
 - copied to new playlists
-- set to Liked (spotify_set_track_uris_to_liked.sh)
+- set to Liked (spotify_set_tracks_uri_to_liked.sh)
 
 $usage_auth_msg
 
