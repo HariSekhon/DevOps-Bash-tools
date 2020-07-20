@@ -59,7 +59,7 @@ shift || :
 
 spotify_user
 
-if [ -n "${SPOTIFY_BACKUP_DIR:-}" ]; then
+if not_blank "${SPOTIFY_BACKUP_DIR:-}"; then
     backup_dir="$SPOTIFY_BACKUP_DIR"
 elif [[ "$PWD" =~ playlist ]]; then
     backup_dir="$PWD"
