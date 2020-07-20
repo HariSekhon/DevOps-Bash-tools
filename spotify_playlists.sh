@@ -47,7 +47,7 @@ export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 If you 've exported a non-authorized \$SPOTIFY_ACCESS_TOKEN in your environment (eg. from spotify_api_token.sh),
 then this script will fail with a 401 unauthorized error
 
-$usage_auth
+$usage_auth_msg
 "
 
 # used by usage() in lib/utils.sh
