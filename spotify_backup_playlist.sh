@@ -69,8 +69,6 @@ fi
 backup_dir_spotify="$backup_dir/spotify"
 if liked; then
     playlist_name="Liked Songs"
-    backup_dir+="/private"
-    backup_dir_spotify="$backup_dir/spotify"
 fi
 
 mkdir -vp "$backup_dir"
