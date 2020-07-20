@@ -15,10 +15,10 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-lib_srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$lib_srcdir/utils.sh"
+. "$libdir/utils.sh"
 
 offset="${SPOTIFY_OFFSET:-0}"
 limit="${SPOTIFY_LIMIT:-50}"
@@ -34,10 +34,14 @@ if ! [[ "$limit" =~ ^[[:digit:]]+$ ]]; then
 fi
 
 spotify_token(){
-    if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-        SPOTIFY_ACCESS_TOKEN="$("$lib_srcdir/../spotify_api_token.sh")"
-        export SPOTIFY_ACCESS_TOKEN
+    # tokens with authorization have length 281, tokens without 219, so if there is an unauthorized token in the environment, regenerate it to avoid 401 errors
+    # [ -a ] works in bash and is the most concise way of doing this
+    # shellcheck disable=SC2166
+    if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ] ||
+       [ -n "${SPOTIFY_PRIVATE:-}" -a "${#SPOTIFY_ACCESS_TOKEN}" -lt 280 ]; then
+        SPOTIFY_ACCESS_TOKEN="$("$libdir/../spotify_api_token.sh")"
     fi
+    export SPOTIFY_ACCESS_TOKEN
 }
 
 spotify_user(){
