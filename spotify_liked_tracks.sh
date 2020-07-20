@@ -53,7 +53,7 @@ url_path="/v1/me/tracks?limit=$limit&offset=$offset"
 
 output(){
     # some tracks come out with blank artists and track name, skip these using select(name != "") filter to avoid blank lines
-    if [ -n "${SPOTIFY_CSV:-}" ]; then
+    if not_blank "${SPOTIFY_CSV:-}"; then
         jq -r '.items[].track | select(.name != "") | [([.artists[].name] | join(", ")), .name] | @csv'
     else
         jq -r '.items[].track | select(.name != "") | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
