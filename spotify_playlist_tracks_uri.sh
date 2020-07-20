@@ -38,7 +38,7 @@ Spotify track URIs can be used:
 - copied to new playlists
 - set to Liked (spotify_set_track_uris_to_liked.sh)
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_auth_msg
 
 Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
 
