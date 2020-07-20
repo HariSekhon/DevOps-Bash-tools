@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: 64OO67Be8wOXn6STqHxexr
-#  args: Florence.*
-#
 #  Author: Hari Sekhon
 #  Date: 2020-06-24 01:17:21 +0100 (Wed, 24 Jun 2020)
 #
@@ -55,10 +52,11 @@ help_usage "$@"
 url_path="/v1/me/tracks?limit=$limit&offset=$offset"
 
 output(){
+    # some tracks come out with blank artists and track name, skip these using select(name != "") filter to avoid blank lines
     if [ -n "${SPOTIFY_CSV:-}" ]; then
-        jq -r '.items[].track | [([.artists[].name] | join(", ")), .name] | @csv'
+        jq -r '.items[].track | select(.name != "") | [([.artists[].name] | join(", ")), .name] | @csv'
     else
-        jq -r '.items[].track | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
+        jq -r '.items[].track | select(.name != "") | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
     fi <<< "$output" |
     tr '\t' ' ' |
     sed '
@@ -72,9 +70,9 @@ export SPOTIFY_PRIVATE=1
 
 spotify_token
 
-while [ -n "$url_path" ] && [ "$url_path" != null ]; do
+while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    exit_if_jq_error
-    url_path="$(get_next)"
+    die_if_error_field "$output"
+    url_path="$(get_next "$output")"
     output
 done
