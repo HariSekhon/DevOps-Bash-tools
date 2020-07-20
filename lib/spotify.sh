@@ -59,27 +59,7 @@ usage_auth_msg="Requires \$SPOTIFY_ACCESS_TOKEN, or \$SPOTIFY_ID and \$SPOTIFY_S
 usage_token_private="export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/spotify_api_token.sh')\""
 
 get_next(){
-    # defined in client scripts
-    # shellcheck disable=SC2154
-    jq -r '.next' <<< "$output"
-}
-
-has_next_url(){
-    # defined in client scripts
-    # shellcheck disable=SC2154
-    [ -n "$url_path" ] && [ "$url_path" != null ]
-}
-
-has_jq_error(){
-    # shellcheck disable=SC2181
-    [ $? != 0 ] || [ "$(jq -r '.error' <<< "$output")" != null ]
-}
-
-exit_if_jq_error(){
-    if has_jq_error; then
-        echo "$output" >&2
-        exit 1
-    fi
+    jq -r '.next' <<< "$*"
 }
 
 is_local_uri(){
