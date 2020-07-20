@@ -89,10 +89,12 @@ else
 fi
 
 while read -r track_uri; do
-    [ -z "$track_uri" ] && continue
-    # move these to library from spotify_uri_to_name.sh
-    # also copy get_next, has_jq_error etc functions there
-    is_local_uri "$track_uri" && continue
+    if is_blank "$track_uri"; then
+        continue
+    fi
+    if is_local_uri "$track_uri"; then
+        continue
+    fi
     id="$(validate_spotify_uri "$track_uri")"
 
     ids+=("$id")
