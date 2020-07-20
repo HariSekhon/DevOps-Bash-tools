@@ -61,7 +61,7 @@ spotify_token
 
 "$srcdir/spotify_playlists.sh" "$@" |
 while read -r playlist_id playlist; do
-    if [ -z "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}" ]; then
+    if is_blank "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}"; then
         printf '%s\t' "$playlist"
     fi
     # handle danger - done at playlist level not command level because we need late command evaluation in spotify_backup_playlists.sh
@@ -71,7 +71,7 @@ while read -r playlist_id playlist; do
     cmd="${command_template//\{playlist_id\}/$playlist_id}"
     cmd="${cmd//\{playlist\}/$playlist}"
     eval "$cmd"
-    if [ -z "${SPOTIFY_FOREACH_NO_NEWLINE:-}" ]; then
+    if is_blank "${SPOTIFY_FOREACH_NO_NEWLINE:-}"; then
         printf '\n'
     fi
 done
