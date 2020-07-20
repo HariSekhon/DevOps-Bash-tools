@@ -85,7 +85,7 @@ if liked; then
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
     echo -n "=> URIs => "
-    "$srcdir/spotify_liked_tracks_uris.sh" "$@" > "$backup_dir_spotify/$filename"
+    "$srcdir/spotify_liked_tracks_uri.sh" "$@" > "$backup_dir_spotify/$filename"
 
     echo -n 'OK => Tracks => '
     "$srcdir/spotify_liked_tracks.sh" "$@" > "$backup_dir/$filename"
