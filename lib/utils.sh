@@ -841,3 +841,46 @@ check_env_defined(){
         usage "\$$env not defined"
     fi
 }
+
+# ============================================================================ #
+#                                   JSON utils
+# ============================================================================ #
+
+is_blank(){
+    [ -z "${*:-}" ] || [ "${*##[:space:]}" = "" ]
+}
+
+not_blank(){
+    ! is_blank "$*"
+}
+
+is_null(){
+    is_blank "${*:-}" || [ "$*" = null ]
+}
+
+not_null(){
+    ! is_null "$*"
+}
+
+has_error_field(){
+    # shellcheck disable=SC2181
+    if [ $? != 0 ]; then
+        return 0
+    elif [ "$(jq -r '.error' <<< "$*" || :)" != null ]; then
+        return 0
+    elif [ "$(jq -r '.error_description' <<< "$*" || :)" != null ]; then
+        return 0
+    fi
+    return 1
+}
+
+die_if_error_field(){
+    if [ -z "$*" ]; then
+        echo "no json string passed to die_if_error_field()" >&2
+        exit 1
+    fi
+    if has_error_field "$*"; then
+        echo "$*" >&2
+        exit 1
+    fi
+}
