@@ -83,7 +83,7 @@ scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+*$//')"
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 #
-if [ -z "${SPOTIFY_PRIVATE:-}" ]; then
+if is_blank "${SPOTIFY_PRIVATE:-}"; then
     output="$(curl -sSL -u "$SPOTIFY_ID:$SPOTIFY_SECRET" -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
 fi
 
@@ -120,7 +120,7 @@ redirect_uri='http://localhost:12345/callback'
 #
 #output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
 
-if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # authorization code flow
     url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
@@ -144,7 +144,7 @@ EOF
     log "callback caught"
 
     code="$(grep -Eo "GET.*code=([^?]+)" <<< "$response" | sed 's/.*code=//; s/[&[:space:]].*$//' || :)"
-    if not_blank "$code"; then
+    if is_blank "$code"; then
         echo "failed to parse code, authentication failure or authorization denied?"
         exit 1
     fi
