@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC2154
 . "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns the list of Spotify public playlists in raw JSON format for the given Spotify user
 
@@ -44,16 +44,13 @@ usage_args="<spotify_username> [<curl_options>]"
 
 help_usage "$@"
 
-if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # $limit/$offset defined in lib/spotify.sh
     # shellcheck disable=SC2154
     url_path="/v1/me/playlists?limit=$limit&offset=$offset"
 else
-    if [ -n "${1:-}" ]; then
-        user="$1"
-    elif [ -n "${SPOTIFY_USER:-}" ]; then
-        user="$SPOTIFY_USER"
-    else
+    user="${1:-${SPOTIFY_USER:-}}"
+    if is_blank "$user"; then
         # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
         #user="me"
         usage "user not specified"
