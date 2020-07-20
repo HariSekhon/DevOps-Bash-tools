@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#
 #  args: "Upbeat & Sexual Pop"
 #
 #  Author: Hari Sekhon
@@ -56,7 +57,7 @@ playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
 
 shift || :
 
-if [ -z "$playlist_id" ]; then
+if is_blank "$playlist_id"; then
     usage "playlist id not defined"
 fi
 
@@ -69,7 +70,7 @@ playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 url_path="/v1/playlists/$playlist_id/tracks?limit=$limit&offset=$offset"
 
 output(){
-    if [ -n "${SPOTIFY_CSV:-}" ]; then
+    if not_blank "${SPOTIFY_CSV:-}"; then
         jq -r '.items[].track | select(.artists) | [([.artists[].name] | join(", ")), .name] | @csv'
     else
         jq -r '.items[].track | select(.artists) | [([.artists[].name] | join(", ")), "-", .name] | @tsv'
@@ -82,9 +83,9 @@ output(){
     '
 }
 
-while has_next_url; do
+while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    exit_if_jq_error
-    url_path="$(get_next)"
+    die_if_error_field "$output"
+    url_path="$(get_next "$output")"
     output
 done
