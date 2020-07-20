@@ -39,11 +39,11 @@ Sample use cases:
 Outputs the URIs it has marked as Liked Songs so that you can track the progress.
 You can combine this with spotify_uri_to_name.sh to get human readable progress, eg:
 
-spotify_set_track_uris_to_liked.sh Starred | spotify_uri_to_name.sh
+spotify_set_tracks_uri_to_liked.sh Starred | spotify_uri_to_name.sh
 
 for debugging to see both the URIs processed and the human readable names you can do:
 
-spotify_set_track_uris_to_liked.sh Starred | tee /dev/stderr | spotify_uri_to_name.sh
+spotify_set_tracks_uri_to_liked.sh Starred | tee /dev/stderr | spotify_uri_to_name.sh
 
 $usage_auth_msg
 
