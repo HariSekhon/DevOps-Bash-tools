@@ -49,11 +49,11 @@ spotify_user="${1:-${SPOTIFY_USER:-}}"
 
 shift || :
 
-if [ -z "$spotify_user" ] && [ -z "${SPOTIFY_PRIVATE:-}" ]; then
-    usage "\$SPOTIFY_USER not defined and no first argument given"
+if is_blank "$spotify_user" && is_blank "${SPOTIFY_PRIVATE:-}"; then
+    usage "\$SPOTIFY_USER not defined and no first argument given, and not specified \$SPOTIFY_PRIVATE to infer from token"
 fi
 
-if [ -n "${SPOTIFY_BACKUP_DIR:-}" ]; then
+if not_blank "${SPOTIFY_BACKUP_DIR:-}"; then
     backup_dir="$SPOTIFY_BACKUP_DIR"
 elif [[ "$PWD" =~ playlist ]]; then
     backup_dir="$PWD"
