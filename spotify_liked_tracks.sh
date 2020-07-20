@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns a Spotify user's Liked Songs aka Saved Tracks using the Spotify API
+Returns the current Spotify user's Liked Songs (aka Saved Tracks) via the Spotify API
 
 Output format:
 
@@ -38,7 +38,7 @@ $usage_auth_msg
 
 Caveat: due to limitations of the Spotify API, this requires an interactively authorized access token, which you will be prompted for if you haven't already got one in your shell environment. To set up an authorized token for an hour in your current shell, you can run the following command (make sure you don't have an access token in the environment from spotify_api_token.sh otherwise you will get a 401 error):
 
-export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 \"$srcdir/spotify_api_token.sh\")\"
+$usage_token_private
 "
 
 # used by usage() in lib/utils.sh
