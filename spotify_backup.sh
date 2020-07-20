@@ -41,7 +41,7 @@ usage_args="[<playlist> <playlist2> ...]"
 
 help_usage "$@"
 
-if [ -z "${SPOTIFY_BACKUP_DIR:-}" ]; then
+if is_blank "${SPOTIFY_BACKUP_DIR:-}"; then
     if [[ "$PWD" =~ playlists ]]; then
         export SPOTIFY_BACKUP_DIR="$PWD"
     else
