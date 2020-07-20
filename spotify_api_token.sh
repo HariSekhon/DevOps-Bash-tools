@@ -143,8 +143,8 @@ EOF
     )"
     log "callback caught"
 
-    code="$(grep -Eo "GET.*code=([^?]+)" <<< "$response" | sed 's/.*code=//; s/[[:space:]].*$//' || :)"
-    if [ -z "$code" ]; then
+    code="$(grep -Eo "GET.*code=([^?]+)" <<< "$response" | sed 's/.*code=//; s/[&[:space:]].*$//' || :)"
+    if not_blank "$code"; then
         echo "failed to parse code, authentication failure or authorization denied?"
         exit 1
     fi
