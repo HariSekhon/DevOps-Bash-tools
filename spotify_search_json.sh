@@ -21,11 +21,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="'<search_expression>"
+# shellcheck disable=SC1090
+. "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Searches the Spotify API and returns the first N tracks / artists / albums that match the given search expression
 
@@ -52,12 +51,12 @@ Environment variable options:
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the
-environment for authentication, see spotify_api_token.sh for more details
+$usage_auth_msg
 "
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="'<search_expression>"
 
 help_usage "$@"
 
@@ -77,10 +76,7 @@ min_args 1 "$@"
 search_terms="$*"
 search_terms="${search_terms// /+}"
 
-if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ]; then
-    SPOTIFY_ACCESS_TOKEN="$("$srcdir/spotify_api_token.sh")"
-    export SPOTIFY_ACCESS_TOKEN
-fi
+spotify_token
 
 search_type="${SPOTIFY_SEARCH_TYPE:-track}"
 if [ -n "${SPOTIFY_SEARCH_LIMIT:-}" ]; then
