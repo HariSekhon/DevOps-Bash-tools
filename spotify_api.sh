@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
+#  args: /v1/users/harisekhon
+#
 #  Author: Hari Sekhon
 #  Date: 2020-06-23 17:17:18 +0100 (Tue, 23 Jun 2020)
 #
