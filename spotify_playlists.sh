@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/spotify.sh"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Returns the list of Spotify playlists
 
@@ -56,11 +56,9 @@ usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
-if [ -n "${1:-}" ]; then
-    user="$1"
-elif [ -n "${SPOTIFY_USER:-}" ]; then
-    user="$SPOTIFY_USER"
-else
+user="${1:-${SPOTIFY_USER:-}}"
+
+if is_blank "$user"; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
     #user="me"
     usage "user not specified"
@@ -68,7 +66,7 @@ fi
 
 shift || :
 
-if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
     # $limit/$offset defined in lib/spotify.sh
     # shellcheck disable=SC2154
@@ -80,11 +78,11 @@ else
 fi
 
 output(){
-    if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    if not_blank "${SPOTIFY_PRIVATE:-}"; then
         jq -r ".items[] | select(.public != true) | [.id, .name] | @tsv" <<< "$output"
     # now enforcing only public playlists to avoid accidentally backing up private playlists if $SPOTIFY_ACCESS_TOKEN
     # in the environment happens to be an authorized token and therefore skips generating the right token below
-    elif [ -n "${SPOTIFY_PLAYLISTS_FOLLOWED:-}" ]; then
+    elif not_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
         jq -r ".items[] | select(.public == true) | [.id, .name] | @tsv"
     else
         jq -r ".items[] | select(.public == true) | select(.owner.id == \"$user\") | [.id, .name] | @tsv"
@@ -93,9 +91,9 @@ output(){
 
 spotify_token
 
-while [ -n "$url_path" ] && [ "$url_path" != null ]; do
+while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    exit_if_jq_error
-    url_path="$(get_next)"
+    die_if_error_field "$output"
+    url_path="$(get_next "$output")"
     output
 done
