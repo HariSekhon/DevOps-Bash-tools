@@ -163,10 +163,6 @@ EOF
     } >&2
 fi
 
-# shellcheck disable=SC2181
-if [ $? != 0 ] || [[ "$output" =~ error_description ]]; then
-    echo "$output" >&2
-    exit 1
-fi
+die_if_error_field "$output"
 
 jq -r '.access_token' <<< "$output"
