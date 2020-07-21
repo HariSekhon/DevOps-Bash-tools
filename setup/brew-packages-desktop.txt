@@ -76,6 +76,7 @@ hadolint
 haproxy
 htop
 hub
+id3v2  # mp3 tag cli editor
 imagemagick
 ipcalc
 iperf
@@ -92,6 +93,7 @@ lolcat
 lynx
 maven-completion
 #md5sha1sum  # clashes with coreutils
+media-info  # read mp3 tags
 mercurial
 midnight-commander
 mosh
