@@ -244,70 +244,6 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 
 ---
-# Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
-
-Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
-
-
-[![Codacy](https://api.codacy.com/project/badge/Grade/f24e17486db64270b4ae9c10f7f2bf84)](https://www.codacy.com/app/harisekhon/haproxy-configs)
-[![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/HAProxy-configs/badge)](https://www.codefactor.io/repository/github/harisekhon/HAProxy-configs)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
-[![GitHub stars](https://img.shields.io/github/stars/harisekhon/HAProxy-configs)](https://github.com/HariSekhon/HAProxy-configs/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/harisekhon/HAProxy-configs)](https://github.com/HariSekhon/HAProxy-configs/network)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-5k-lightgrey)](https://github.com/HariSekhon/HAProxy-configs)
-
-[![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/HAProxy-configs)
-[![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/HAProxy-configs)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/_/haproxy)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
-
-[![Travis CI](https://img.shields.io/travis/harisekhon/HAProxy-configs/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/HAProxy-configs)
-[![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/HAProxy-configs/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/HAProxy-configs/branch/master)
-[![Drone](https://img.shields.io/drone/build/HariSekhon/HAProxy-configs/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/HAProxy-configs)
-[![CircleCI](https://circleci.com/gh/HariSekhon/HAProxy-configs.svg?style=svg)](https://circleci.com/gh/HariSekhon/HAProxy-configs)
-[![Codeship Status for HariSekhon/HAProxy-configs](https://app.codeship.com/projects/6e6d6a50-3c5f-0138-6969-1ecbdb7eccb9/status?branch=master)](https://app.codeship.com/projects/387248)
-[![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/HAProxy-configs/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FHAProxy-configs?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e31b3953b7fe454b7904&pipeline=HAProxy-configs&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
-[![Wercker](https://app.wercker.com/status/3eab52046f673b476fa5e54adb5dfbba/s/master "wercker status")](https://app.wercker.com/harisekhon/haproxy-configs/runs)
-[![BuildKite](https://img.shields.io/buildkite/0eaa69ea93cc6695ecd48013d1daf895e0e9a7bcef068b7324/master?label=BuildKite)](https://buildkite.com/hari-sekhon/haproxy-configs)
-[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/HAProxy-configs/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/HAProxy-configs)
-[![Semaphore](https://harisekhon.semaphoreci.com/badges/HAProxy-configs.svg)](https://harisekhon.semaphoreci.com/projects/HAProxy-configs)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.gocd.yml)
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/Jenkinsfile)
-
-[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.HAProxy-configs?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=10&branchName=master)
-[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/haproxy-configs/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/haproxy-configs/addon/pipelines/home#!/)
-[![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/HAProxy-configs?logo=gitlab&label=GitLab)](https://gitlab.com/HariSekhon/HAProxy-configs/pipelines)
-[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/HAProxy-configs)
-[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/HAProxy-configs)
-[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/HAProxy-configs)
-
-[![CI Mac](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Mac%22)
-[![CI Mac 10.15](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Mac%2010.15/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Mac+10.15%22)
-[![CI Ubuntu](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu%22)
-[![CI Ubuntu 14.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2014.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+14.04%22)
-[![CI Ubuntu 16.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2016.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+16.04%22)
-[![CI Ubuntu 18.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2018.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+18.04%22)
-[![CI Ubuntu 20.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2020.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+20.04%22)
-[![CI Ubuntu GitHub](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%20GitHub/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+GitHub%22)
-[![CI Debian](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian%22)
-[![CI Debian 8](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%208/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+8%22)
-[![CI Debian 9](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%209/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+9%22)
-[![CI Debian 10](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%2010/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+10%22)
-[![CI CentOS](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS%22)
-[![CI CentOS 6](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%206/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+6%22)
-[![CI CentOS 7](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%207/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+7%22)
-[![CI CentOS 8](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+8%22)
-[![CI Fedora](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Fedora/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Fedora%22)
-[![CI Alpine](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine%22)
-[![CI Alpine 3](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine%203/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine+3%22)
-
-
----
 # Hari Sekhon - DevOps Bash Tools
 
 Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
@@ -319,9 +255,11 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
+[![Code Inspector Grade](https://www.code-inspector.com/project/8840/status/svg)](https://frontend.code-inspector.com/project/8840/dashboard)
+[![Code Inspector Score](https://www.code-inspector.com/project/8840/score/svg)](https://frontend.code-inspector.com/project/8840/dashboard)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-34k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-36k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 
 
@@ -390,6 +328,70 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 
 
 ---
+# Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
+
+Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
+
+
+[![Codacy](https://api.codacy.com/project/badge/Grade/f24e17486db64270b4ae9c10f7f2bf84)](https://www.codacy.com/app/harisekhon/haproxy-configs)
+[![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/HAProxy-configs/badge)](https://www.codefactor.io/repository/github/harisekhon/HAProxy-configs)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_HAProxy-configs&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_HAProxy-configs)
+[![GitHub stars](https://img.shields.io/github/stars/harisekhon/HAProxy-configs)](https://github.com/HariSekhon/HAProxy-configs/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/harisekhon/HAProxy-configs)](https://github.com/HariSekhon/HAProxy-configs/network)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-5k-lightgrey)](https://github.com/HariSekhon/HAProxy-configs)
+
+[![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/HAProxy-configs)
+[![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/HAProxy-configs)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/_/haproxy)
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+
+[![Travis CI](https://img.shields.io/travis/harisekhon/HAProxy-configs/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/HAProxy-configs)
+[![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/HAProxy-configs/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/HAProxy-configs/branch/master)
+[![Drone](https://img.shields.io/drone/build/HariSekhon/HAProxy-configs/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/HAProxy-configs)
+[![CircleCI](https://circleci.com/gh/HariSekhon/HAProxy-configs.svg?style=svg)](https://circleci.com/gh/HariSekhon/HAProxy-configs)
+[![Codeship Status for HariSekhon/HAProxy-configs](https://app.codeship.com/projects/6e6d6a50-3c5f-0138-6969-1ecbdb7eccb9/status?branch=master)](https://app.codeship.com/projects/387248)
+[![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/HAProxy-configs/dashboard/jobs)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FHAProxy-configs?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e31b3953b7fe454b7904&pipeline=HAProxy-configs&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
+[![Wercker](https://app.wercker.com/status/3eab52046f673b476fa5e54adb5dfbba/s/master "wercker status")](https://app.wercker.com/harisekhon/haproxy-configs/runs)
+[![BuildKite](https://img.shields.io/buildkite/0eaa69ea93cc6695ecd48013d1daf895e0e9a7bcef068b7324/master?label=BuildKite)](https://buildkite.com/hari-sekhon/haproxy-configs)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/HAProxy-configs/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/HAProxy-configs)
+[![Semaphore](https://harisekhon.semaphoreci.com/badges/HAProxy-configs.svg)](https://harisekhon.semaphoreci.com/projects/HAProxy-configs)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.gocd.yml)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue)](https://github.com/HariSekhon/HAProxy-configs/blob/master/Jenkinsfile)
+
+[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.HAProxy-configs?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=10&branchName=master)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/haproxy-configs/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/haproxy-configs/addon/pipelines/home#!/)
+[![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/HAProxy-configs?logo=gitlab&label=GitLab)](https://gitlab.com/HariSekhon/HAProxy-configs/pipelines)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/HAProxy-configs)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/HAProxy-configs)
+[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/HAProxy-configs)
+
+[![CI Mac](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Mac/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Mac%22)
+[![CI Mac 10.15](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Mac%2010.15/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Mac+10.15%22)
+[![CI Ubuntu](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu%22)
+[![CI Ubuntu 14.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2014.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+14.04%22)
+[![CI Ubuntu 16.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2016.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+16.04%22)
+[![CI Ubuntu 18.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2018.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+18.04%22)
+[![CI Ubuntu 20.04](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%2020.04/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+20.04%22)
+[![CI Ubuntu GitHub](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Ubuntu%20GitHub/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Ubuntu+GitHub%22)
+[![CI Debian](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian%22)
+[![CI Debian 8](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%208/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+8%22)
+[![CI Debian 9](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%209/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+9%22)
+[![CI Debian 10](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Debian%2010/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Debian+10%22)
+[![CI CentOS](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS%22)
+[![CI CentOS 6](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%206/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+6%22)
+[![CI CentOS 7](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%207/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+7%22)
+[![CI CentOS 8](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20CentOS%208/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+CentOS+8%22)
+[![CI Fedora](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Fedora/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Fedora%22)
+[![CI Alpine](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine%22)
+[![CI Alpine 3](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine%203/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine+3%22)
+
+
+---
 # Hari Sekhon - DevOps Perl Tools
 
 Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-tools)
@@ -401,6 +403,8 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
+[![Code Inspector Grade](https://www.code-inspector.com/project/4745/status/svg)](https://frontend.code-inspector.com/project/4745/dashboard)
+[![Code Inspector Score](https://www.code-inspector.com/project/4745/score/svg)](https://frontend.code-inspector.com/project/4745/dashboard)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-perl-tools)](https://github.com/harisekhon/devops-perl-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-perl-tools)](https://github.com/harisekhon/devops-perl-tools/network)
 [![Lines of Code](https://img.shields.io/badge/lines%20of%20code-9.1k-lightgrey)](https://github.com/HariSekhon/DevOps-Perl-tools)
