@@ -84,10 +84,10 @@ if liked; then
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
-    echo -n "=> URIs => "
+    echo -n "=> URIs "
     "$srcdir/spotify_liked_tracks_uri.sh" "$@" > "$backup_dir_spotify/$filename"
 
-    echo -n 'OK => Tracks => '
+    echo -n 'OK => Tracks '
     "$srcdir/spotify_liked_tracks.sh" "$@" > "$backup_dir/$filename"
 else
     playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
@@ -97,10 +97,10 @@ else
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
-    echo -n "=> URIs => "
+    echo -n "=> URIs "
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
 
-    echo -n 'OK => Tracks => '
+    echo -n 'OK => Tracks '
     "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
 fi
 
