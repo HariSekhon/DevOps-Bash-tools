@@ -36,6 +36,8 @@ Sample use cases:
 - convert Spotify's previous Starred tracks to Liked Songs (Spotify change Starred a normal playlist and created the new Liked Songs)
 - mark all the songs of your favourite playlists as Liked Songs
 
+spotify_set_tracks_uri_to_liked.sh Starred
+
 Outputs the URIs it has marked as Liked Songs so that you can track the progress.
 You can combine this with spotify_uri_to_name.sh to get human readable progress, eg:
 
