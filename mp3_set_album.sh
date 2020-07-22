@@ -43,11 +43,16 @@ shift || :
 
 mp3_files="$(for dir in "$@"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
 
+if is_blank "$mp3_files"; then
+    echo "No MP3 files found"
+    exit 1
+fi
+
 echo "List of MP3 files to set album = '$album':"
 echo
 echo "$mp3_files"
 echo
-read -r -p "Are you happy to set the album metadata on all of the following mp3 files to '$*' (y/N) " answer
+read -r -p "Are you happy to set the album metadata on all of the following mp3 files to '$album'? (y/N) " answer
 
 if [ "$answer" != "y" ]; then
     echo "Aborting..."
