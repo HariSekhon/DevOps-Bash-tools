@@ -58,7 +58,7 @@ echo "List of MP3 files to set album = '$album':"
 echo
 echo "$mp3_files"
 echo
-read -r -p "Are you happy to set the album metadata on all of the following mp3 files to '$album'? (y/N) " answer
+read -r -p "Are you happy to set the album metadata on all of the above mp3 files to '$album'? (y/N) " answer
 
 if [ "$answer" != "y" ]; then
     echo "Aborting..."
