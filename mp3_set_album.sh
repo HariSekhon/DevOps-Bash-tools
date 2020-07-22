@@ -19,21 +19,23 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Adds / Modifies album metadata across all mp3 files in the given directories to group albums or audiobooks for Mac's Books.app
+Adds / Modifies album metadata across all MP3 files in the given directories to group albums or audiobooks for Mac's Books.app
+
+If no directories are given, operates on \$PWD
 
 Shows the list of MP3 files that would be affected before running the metadata update and prompts for confirmation before proceeding for safety
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="\"album name\" <dir1> [<dir2> ...]"
+usage_args="\"album name\" [<dir1> <dir2> ...]"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
-min_args 2 "$@"
+min_args 1 "$@"
 
 check_bin id3v2
 
@@ -41,7 +43,7 @@ album="$1"
 
 shift || :
 
-mp3_files="$(for dir in "$@"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
+mp3_files="$(for dir in "${@:-$PWD}"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
 
 if is_blank "$mp3_files"; then
     echo "No MP3 files found"
