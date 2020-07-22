@@ -17,21 +17,19 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090,SC2154
+. "$srcdir/lib/mp3.sh"
+
 # shellcheck disable=SC2034
 usage_description="
 Adds / Modifies artist metadata across all MP3 files in the given directories to edit albums or group audiobooks for Mac's Books.app
 
-If no directory arguments are given, works on MP3s under \$PWD. Finds MP3 files within 1 level of subdirectories
-
-Shows the list of MP3 files that would be affected before running the metadata update and prompts for confirmation before proceeding for safety
+$mp3_usage_behaviour_msg
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="\"artist name\" [<dir1> <dir2> ...]"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
@@ -47,12 +45,7 @@ shift || :
 # evaluation of file list changing after confirmation prompt, and RAM is cheap, so better to use a static list of files
 # stored in ram and operate on that since it'll never be that huge anyway
 
-mp3_files="$(for dir in "${@:-$PWD}"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
-
-if is_blank "$mp3_files"; then
-    echo "No MP3 files found"
-    exit 1
-fi
+mp3_files="$(get_mp3_files "${@:-$PWD}")"
 
 echo "List of MP3 files to set artist = '$artist':"
 echo
@@ -61,10 +54,7 @@ echo
 
 read -r -p "Are you happy to set the artist metadata on all of the above mp3 files to '$artist'? (y/N) " answer
 
-if [ "$answer" != "y" ]; then
-    echo "Aborting..."
-    exit 1
-fi
+check_yes "$answer"
 
 echo
 
