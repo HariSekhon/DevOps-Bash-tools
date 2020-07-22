@@ -131,6 +131,7 @@ Plugin 'tmux-plugins/vim-tmux'
 "Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+"Plugin 'fatih/vim-go'
 
 let g:gitgutter_enabled = 0
 " keep setting if reloading, otherwise default to 1 for enabled

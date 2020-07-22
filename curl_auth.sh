@@ -85,7 +85,7 @@ fi
 
 # Instead of generating this for all known hosts above just do it for the host extracted from the args url now
 
-if [ -z "$netrc_contents" ]; then
+if [ -z "${netrc_contents:-}" ]; then
     if ! [[ "$*" =~ :// ]]; then
         usage "http(s):// not specified in URL"
     fi

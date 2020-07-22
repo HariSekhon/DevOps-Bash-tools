@@ -39,6 +39,7 @@
 .sawsrc
 .screenrc
 .sdkman/etc/config
+.sqliterc
 .tmux.conf
 .toprc
 .vimrc
