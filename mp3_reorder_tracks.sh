@@ -19,11 +19,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Adds / Modifies track metadata across all MP3 in the directory tree to restructure Audiobooks to be contiguous for Mac's Books.app
+Adds / Modifies track number metadata across all MP3 files in the given directories to restructure audiobooks to be contiguous for Mac's Books.app
 
-If no directory argument is given, works on MP3s under \$PWD
+If no directory argument is given, works on MP3s under \$PWD. Finds MP3 files to a single level of subdirectories.
 
-Shows the list of MP3 files and the tags they would be changed to a depth of 1 subdirectory and prompts for confirmation before proceeding for safety
+Shows the list of MP3 files with the proposed track number metadata and prompts for confirmation before proceeding for safety
 
 MP3 filenames should be in lexical order before running this
 "
