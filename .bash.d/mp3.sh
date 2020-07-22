@@ -14,22 +14,11 @@
 #
 
 # set the Track number metadata on mp3 files in the order that they are given
-#
-# eg. mp3_renumber *.mp3
-#
-# (*.mp3 simply works if the mp3 files are already in the correct lexical order they will receive the right metadata track order which some apps like Books.app need)
-#
-#
-# If you want to set subdirectories order, eg if you have audiobooks with CD1, CD2 subdirectories you can do this instead but beware not to do this at the root of your MP3 collection or it'll mess up your metadata between unrelated albums:
-#
-# find . -maxdepth 2 -iname '*.mp3' | { i=0; while read mp3; do ((i+=1)); id3v2 -T $i "$mp3"; done; }
-#
-# see mp3_track_metadata_reorder.sh for a safer way with preview and prompt
-
-mp3_renumber(){
-    local i=0
-    for x in "$@"; do
-        ((i+=1))
-        id3v2 --track "$i" "$x"
-    done
-}
+# see much better mp3_set_track_order.sh at top level of this repo now
+#mp3_renumber(){
+#    local i=0
+#    for x in "$@"; do
+#        ((i+=1))
+#        id3v2 --track "$i" "$x"
+#    done
+#}
