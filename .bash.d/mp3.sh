@@ -23,6 +23,8 @@
 # If you want to set subdirectories order, eg if you have audiobooks with CD1, CD2 subdirectories you can do this instead but beware not to do this at the root of your MP3 collection or it'll mess up your metadata between unrelated albums:
 #
 # find . -maxdepth 2 -iname '*.mp3' | { i=0; while read mp3; do ((i+=1)); id3v2 -T $i "$mp3"; done; }
+#
+# see mp3_track_metadata_reorder.sh for a safer way with preview and prompt
 
 mp3_renumber(){
     local i=0
