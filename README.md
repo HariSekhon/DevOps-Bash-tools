@@ -274,14 +274,19 @@ etc.
   - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
   - `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
   - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
+- `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books eg. for correct importing into Mac's Books.app
+- `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering albums songs and audiobook chapters eg. for Mac's Books.app. Especially useful when there are multiple CD sub-folders which you want to treat as a single contiguous audiobook in Mac's Books.app
 - `spotify_*.sh` - [Spotify](https://www.spotify.com/) API scripts:
   - `spotify_playlists*.sh` - list playlists in either `<id> <name>` format or JSON output
+  - `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
   - `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
   - `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
-  - `spotify_search.sh` - search Spotify's library for tracks / albums / artists getting results in human readable or URI formats for easy loading to Spotify playlists
-  - `spotify_playlist_tracks.sh` / `spotify_playlist_tracks_uri.sh` - download playlist contents as track URIs / `Artists - Track` / CSV
+  - `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
   - `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
-  - `spotify_foreach_playlist.sh` - iterate any command against all playlists
+  - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / top tracks in either human readable or URI format (which can be auto-loaded into other playlists)
+  - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
+  - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
+  - `spotify_foreach_playlist.sh` - iterate any command against all playlists with command templating of `{playlist}` and `{playlist_id}`
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
