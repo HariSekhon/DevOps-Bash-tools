@@ -43,6 +43,10 @@ album="$1"
 
 shift || :
 
+# used to pipe file list inline which is more comp sci 101 correct but that could create a race condition on second
+# evaluation of file list changing after confirmation prompt, and RAM is cheap, so better to use a static list of files
+# stored in ram and operate on that since it'll never be that huge anyway
+
 mp3_files="$(for dir in "${@:-$PWD}"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
 
 if is_blank "$mp3_files"; then
