@@ -274,7 +274,7 @@ etc.
   - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
   - `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
   - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
-- `mp3_set_*.sh` - various metadata management scripts for MP3 albums and audiobooks:
+- `mp3_set_*.sh` - various MP3 metadata management scripts for albums and audiobooks:
   - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
   - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
   - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
