@@ -52,7 +52,7 @@ echo "List of MP3 files to set artist = '$artist':"
 echo
 echo "$mp3_files"
 echo
-read -r -p "Are you happy to set the artist metadata on all of the following mp3 files to '$*' (y/N) " answer
+read -r -p "Are you happy to set the artist metadata on all of the following mp3 files to '$artist'? (y/N) " answer
 
 if [ "$answer" != "y" ]; then
     echo "Aborting..."
