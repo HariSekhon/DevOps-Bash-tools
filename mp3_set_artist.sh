@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Adds / Modifies artist metadata across all mp3 files in the given directories to edit albums or group audiobooks for Mac's Books.app
+Adds / Modifies artist metadata across all MP3 files in the given directories to edit albums or group audiobooks for Mac's Books.app
 
 Shows the list of MP3 files that would be affected before running the metadata update and prompts for confirmation before proceeding for safety
 "
@@ -42,6 +42,11 @@ artist="$1"
 shift || :
 
 mp3_files="$(for dir in "$@"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
+
+if is_blank "$mp3_files"; then
+    echo "No MP3 files found"
+    exit 1
+fi
 
 echo "List of MP3 files to set artist = '$artist':"
 echo
