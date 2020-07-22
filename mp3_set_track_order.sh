@@ -17,13 +17,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC1090
+. "$srcdir/lib/mp3.sh"
+
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Adds / Modifies track number metadata across all MP3 files in the given directories to restructure audiobooks to be contiguous for Mac's Books.app
 
-If no directory arguments are given, works on MP3s under \$PWD. Finds MP3 files within 1 level of subdirectories
-
-Shows the list of MP3 files with the proposed track number metadata and prompts for confirmation before proceeding for safety
+$mp3_usage_behaviour_msg
 
 MP3 filenames should be in lexical order before running this
 "
@@ -31,9 +32,6 @@ MP3 filenames should be in lexical order before running this
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="[<dir1> <dir2> ...]"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
@@ -43,12 +41,7 @@ check_bin id3v2
 # evaluation of file list changing after confirmation prompt, and RAM is cheap, so better to use a static list of files
 # stored in ram and operate on that since it'll never be that huge anyway
 
-mp3_files="$(for dir in "${@:-$PWD}"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
-
-if is_blank "$mp3_files"; then
-    echo "No MP3 files found"
-    exit 1
-fi
+mp3_files="$(get_mp3_files "${@:-$PWD}")"
 
 echo "List of MP3 files and their metadata track ordering:"
 
@@ -67,10 +60,7 @@ echo
 
 read -r -p 'Are you happy with this track metadata ordering? (y/N) ' answer
 
-if [ "$answer" != "y" ]; then
-    echo "Aborting..."
-    exit 1
-fi
+check_yes "$answer"
 
 echo
 
