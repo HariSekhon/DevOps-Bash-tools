@@ -275,6 +275,7 @@ etc.
   - `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
   - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
 - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books eg. for correct importing into Mac's Books.app
+- `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
 - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering albums songs and audiobook chapters eg. for Mac's Books.app. Especially useful when there are multiple CD sub-folders which you want to treat as a single contiguous audiobook in Mac's Books.app
 - `spotify_*.sh` - [Spotify](https://www.spotify.com/) API scripts:
   - `spotify_playlists*.sh` - list playlists in either `<id> <name>` format or JSON output
