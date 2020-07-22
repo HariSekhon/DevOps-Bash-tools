@@ -17,23 +17,21 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC2034
+# shellcheck disable=SC1090
+. "$srcdir/lib/mp3.sh"
+
+# shellcheck disable=SC2034,SC2154
 usage_description="
 Adds / Modifies track name metadata to match MP3 filenames for all MP3s in the given directories to improve display appearance when playing
 
 The track name metadata is taken to be the basename of the MP3 file without the extension
 
-If no directory arguments are given, works on MP3s under \$PWD. Finds MP3 files within 1 level of subdirectories
-
-Shows the list of MP3 files that would be affected before running the metadata update and prompts for confirmation before proceeding for safety
+$mp3_usage_behaviour_msg
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="[<dir1> <dir2> ...]"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
@@ -45,12 +43,7 @@ shift || :
 # evaluation of file list changing after confirmation prompt, and RAM is cheap, so better to use a static list of files
 # stored in ram and operate on that since it'll never be that huge anyway
 
-mp3_files="$(for dir in "${@:-$PWD}"; do find "$dir" -maxdepth 2 -iname '*.mp3' || exit 1; done)"
-
-if is_blank "$mp3_files"; then
-    echo "No MP3 files found"
-    exit 1
-fi
+mp3_files="$(get_mp3_files "${@:-$PWD}")"
 
 echo "List of MP3 files => track names to be set:"
 
@@ -84,10 +77,7 @@ echo
 
 read -r -p "Are you happy to set the track name metadata on all of the above mp3 files? (y/N) " answer
 
-if [ "$answer" != "y" ]; then
-    echo "Aborting..."
-    exit 1
-fi
+check_yes "$answer"
 
 echo
 
