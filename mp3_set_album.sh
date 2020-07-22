@@ -21,7 +21,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Adds / Modifies album metadata across all MP3 files in the given directories to group albums or audiobooks for Mac's Books.app
 
-If no directory arguments are given, works on MP3s under \$PWD. Finds MP3 files within 1 level of subdirectories
+If no directory arguments are given, works on MP3s under \$PWD
+
+Only proposes MP3 files within direct subdirectories to reduce the chance of accidentally running on an entire top level MP3 archive
 
 Shows the list of MP3 files that would be affected before running the metadata update and prompts for confirmation before proceeding for safety
 "
