@@ -842,6 +842,18 @@ check_env_defined(){
     fi
 }
 
+
+check_yes(){
+    local answer="$1"
+    shopt -s nocasematch
+    if ! [[ "$answer" =~ ^(y|yes)$ ]]; then
+        echo "Aborting..." >&2
+        exit 1
+    fi
+    shopt -u nocasematch
+}
+
+
 # ============================================================================ #
 #                                   JSON utils
 # ============================================================================ #
