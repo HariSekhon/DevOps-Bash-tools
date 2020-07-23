@@ -78,7 +78,7 @@ else
 fi
 
 output(){
-    if not_blank "${SPOTIFY_PRIVATE:-}"; then
+    if not_blank "${SPOTIFY_PRIVATE_ONLY:-}"; then
         jq -r ".items[] | select(.public != true) | [.id, .name] | @tsv" <<< "$output"
     # now enforcing only public playlists to avoid accidentally backing up private playlists if $SPOTIFY_ACCESS_TOKEN
     # in the environment happens to be an authorized token and therefore skips generating the right token below
