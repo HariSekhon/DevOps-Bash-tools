@@ -286,6 +286,7 @@ etc.
   - `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
   - `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
   - `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
+  - `spotify_add_to_playlist.sh` - adds Spotify URIs to a given playlist from files or standard input. Can be combined with many other tools listed here which output Spotify URIs
   - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / top tracks in either human readable or URI format (which can be auto-loaded into other playlists)
   - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
