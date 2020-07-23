@@ -24,6 +24,10 @@ Finds duplicate files by file checksum
 Only compares files with the same byte counts for efficiency, using the adjacent find_duplicate_files_by_size.sh
 as a pre-filter to speed up the process
 
+Output format:
+
+<md5 checksum>  <filename>
+
 For a much more sophisticated duplicate file finder utilizing size, checksums, basenames and
 even partial basenames via regex match see
 
