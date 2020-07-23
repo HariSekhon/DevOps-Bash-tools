@@ -26,7 +26,7 @@ as a pre-filter to speed up the process
 
 Output format:
 
-<md5 checksum>  <filename>
+<md5_checksum>      <filename>
 
 For a much more sophisticated duplicate file finder utilizing size, checksums, basenames and
 even partial basenames via regex match see
