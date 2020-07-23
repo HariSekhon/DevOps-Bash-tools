@@ -52,8 +52,6 @@ set_playlist_public(){
 
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id")"
 
-    # $spotify_user is defined by spotify_user() from library
-    # shellcheck disable=SC2154
     url_path="/v1/playlists/$playlist_id"
 
     timestamp "setting playlist '$playlist_name' to public"
