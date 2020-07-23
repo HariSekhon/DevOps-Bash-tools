@@ -26,7 +26,9 @@ even partial basenames via regex match see
 
 find_duplicate_files.py
 
-in the DevOps Python tools repo https://github.com/harisekhon/devops-python-tools)
+in the DevOps Python tools repo:
+
+https://github.com/harisekhon/devops-python-tools
 "
 
 # used by usage() in lib/utils.sh
