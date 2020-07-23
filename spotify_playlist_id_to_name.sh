@@ -51,7 +51,7 @@ playlist_id_to_name(){
     if [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
         playlist_name="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id" "$@" |
                     jq -r '.name' || :)"
-        if is_blank "$playlist_name"; then
+        if is_blank "$playlist_name" || [ "$playlist_name" = null ]; then
             echo "Error: failed to find playlist name matching ID '$playlist_id'" >&2
             exit 1
         fi
