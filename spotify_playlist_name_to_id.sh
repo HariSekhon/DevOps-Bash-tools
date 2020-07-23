@@ -28,7 +28,9 @@ Uses Spotify API to translate a Spotify public playlist name to ID
 
 Matches the first playlist from your account with a name matching the given argument as a partial string match
 
-If a Spotify playlist ID is given, returns as is
+If you want an exact full string match of the playlist name to guarantee you get the right playlist ID, then export SPOTIFY_PLAYLIST_EXACT_MATCH=1
+
+If a Spotify playlist ID is given, returns it as is (this is for coding convenience when calling from other scripts)
 
 $usage_auth_msg
 
