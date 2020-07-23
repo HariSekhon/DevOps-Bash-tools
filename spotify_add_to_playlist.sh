@@ -43,7 +43,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-playlist_id="$1"
+playlist="$1"
 shift || :
 
 # requires authorized token
@@ -52,7 +52,7 @@ export SPOTIFY_PRIVATE=1
 spotify_token
 
 # this script returns the ID if it's already in the correct format, otherwise queries and returns the playlist ID for the first matching playlist
-playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id")"
+playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist")"
 
 playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id")"
 
