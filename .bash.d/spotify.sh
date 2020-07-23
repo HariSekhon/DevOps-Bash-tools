@@ -21,6 +21,6 @@ spotifysession(){
 
     # defined in ../.bashrc
     # shellcheck disable=SC2154
-    SPOTIFY_ACCESS_TOKEN="$("$bash_tools/spotify_api_token_interactive.sh")"
+    SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$bash_tools/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
 }
