@@ -39,9 +39,10 @@ Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return all followed playl
 To get private playlists set \$SPOTIFY_PRIVATE=1 and don't specify the spotify user which is inferred from the token
 used
 To return only private playlists set \$SPOTIFY_PRIVATE_ONLY=1
+To return only public playlists even when using a private token set \$SPOTIFY_PUBLIC_ONLY=1
 
-Due to quirks of the Spotify API, this requires an interactive web authorization pop-up
-or \$SPOTIFY_ACCESS_TOKEN in the environment. To prevent repeated pop-ups, set once an hour in your shell like so:
+Due to quirks of the Spotify API, listing private playlists requires an authorized token with interactive authorization
+pop-up or \$SPOTIFY_ACCESS_TOKEN in the environment. To prevent repeated pop-ups, set once an hour in your shell like so:
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 
@@ -67,6 +68,10 @@ fi
 
 shift || :
 
+if [ -n "${SPOTIFY_PRIVATE_ONLY:-1}" ]; then
+    export SPOTIFY_PRIVATE=1
+fi
+
 if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
     # $limit/$offset defined in lib/spotify.sh
@@ -79,15 +84,18 @@ else
 fi
 
 output(){
-    if not_blank "${SPOTIFY_PRIVATE_ONLY:-}"; then
-        jq -r ".items[] | select(.public != true) | [.id, .name] | @tsv" <<< "$output"
-    # now enforcing only public playlists to avoid accidentally backing up private playlists if $SPOTIFY_ACCESS_TOKEN
-    # in the environment happens to be an authorized token and therefore skips generating the right token below
-    elif not_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
-        jq -r ".items[] | select(.public == true) | [.id, .name] | @tsv"
+    jq '.items[]' <<< "$output" |
+    if not_blank "${SPOTIFY_PUBLIC_ONLY:-}"; then
+        jq 'select(.public == true)'
+    elif not_blank "${SPOTIFY_PRIVATE_ONLY:-}"; then
+        jq 'select(.public != true)'
     else
-        jq -r ".items[] | select(.public == true) | select(.owner.id == \"$user\") | [.id, .name] | @tsv"
-    fi <<< "$output"
+        cat
+    fi |
+    if is_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
+        jq "select(.owner.id == \"$user\")"
+    fi |
+    jq -r "[.id, .name] | @tsv"
 }
 
 spotify_token
