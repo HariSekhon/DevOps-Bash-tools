@@ -62,8 +62,18 @@ playlist_name_to_id(){
         #playlist_regex="${playlist_regex//\)/\\)}"
                        #awk "BEGIN{IGNORECASE=1} /${playlist_regex//\//\\/}/ {print \$1; exit}" || :)"
         playlist_id="$(SPOTIFY_PLAYLISTS_ALL=1 "$srcdir/spotify_playlists.sh" "$@" |
-                       grep -Fi -m1 "$playlist_name" |
-                       awk '{print $1}' || :)"
+                        if [ "${SPOTIFY_PLAYLIST_EXACT_MATCH:-}" ]; then
+                            while read -r _ name; do
+                                if [ "$name" = "$playlist_name" ]; then
+                                   echo "$name"
+                                   break
+                                fi
+                           done
+                        else
+                            grep -Fi -m1 "$playlist_name" |
+                            awk '{print $1}'
+                        fi || :
+        )"
         if is_blank "$playlist_id"; then
             echo "Error: failed to find playlist ID matching given playlist name '$playlist_name'" >&2
             exit 1
