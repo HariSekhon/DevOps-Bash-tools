@@ -45,9 +45,13 @@ spotify_token(){
 }
 
 spotify_user(){
-    spotify_user="${SPOTIFY_USER:-}"
-    if [ -z "$spotify_user" ] && [ -z "${SPOTIFY_PRIVATE:-}" ]; then
-        usage "\$SPOTIFY_USER not defined"
+    spotify_user="${spotify_user:-${SPOTIFY_USER:-}}"
+    if [ -z "$spotify_user" ]; then
+        if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+            spotify_user="$(SPOTIFY_PRIVATE=1 "$libdir/../spotify_api.sh" "/v1/me" | jq -r '.id')"
+        else
+            usage "\$SPOTIFY_USER not defined"
+        fi
     fi
 }
 
