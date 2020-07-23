@@ -38,6 +38,7 @@ Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return all followed playl
 
 To get private playlists set \$SPOTIFY_PRIVATE=1 and don't specify the spotify user which is inferred from the token
 used
+To return only private playlists set \$SPOTIFY_PRIVATE_ONLY=1
 
 Due to quirks of the Spotify API, this requires an interactive web authorization pop-up
 or \$SPOTIFY_ACCESS_TOKEN in the environment. To prevent repeated pop-ups, set once an hour in your shell like so:
