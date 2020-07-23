@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: "Driving (auto-generated as reverse of Upbeat & Sexual Pop)"
+#  args: "Driving (Auto-generated as reverse of Upbeat & Sexual Pop)"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-23 23:26:15 +0100 (Thu, 23 Jul 2020)
