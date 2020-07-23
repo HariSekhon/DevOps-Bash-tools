@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Adds Spotify URIs to a given playlist
 
+Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name
+
 Can take file(s) with URIs as arguments or read from standard input for chaining with other tools
 
 Useful for chaining with other 'spotify_*_uri.sh' tools (eg. spotify_playlist_tracks_uri.sh, spotify_search_uri.sh) or loading from saved spotify format playlists (eg. HariSekhon/Spotify-Playlists github repo)
@@ -50,7 +52,7 @@ export SPOTIFY_PRIVATE=1
 spotify_token
 
 # this script returns the ID if it's already in the correct format, otherwise queries and returns the playlist ID for the first matching playlist
-playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id")"
+playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id")"
 
 playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id")"
 
