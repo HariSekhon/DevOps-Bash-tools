@@ -65,14 +65,18 @@ playlist_name_to_id(){
                        #awk "BEGIN{IGNORECASE=1} /${playlist_regex//\//\\/}/ {print \$1; exit}" || :)"
         playlist_id="$(SPOTIFY_PLAYLISTS_ALL=1 "$srcdir/spotify_playlists.sh" "$@" |
                         if [ "${SPOTIFY_PLAYLIST_EXACT_MATCH:-}" ]; then
-                            playlist_name="$(tr '[:upper:]' '[:lower:]' <<< "$playlist_name")"
-                            tr '[:upper:]' '[:lower:]' |
+                            # do not tr [:upper:] [:lower:] as this invalidates the ID which is case insensitive
+                            # save last case sensitive setting, ignore return code which will error if not already set
+                            last_nocasematch="$(shopt -p nocasematch || :)"
+                            shopt -s nocasematch
                             while read -r id name; do
-                                if [ "$name" = "$playlist_name" ]; then
+                                if [[ "$name" = "$playlist_name" ]]; then
                                    echo "$id"
                                    break
                                 fi
                             done
+                            # restore last case sensitive setting
+                            eval "$last_nocasematch"
                         else
                             grep -Fi -m1 "$playlist_name" |
                             awk '{print $1}'
