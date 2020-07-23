@@ -42,6 +42,17 @@ last_size=""
 last_filename=""
 last_printed=0
 
+# GNU coreutils du has bytes, whereas Mac's du only goes to the less granular blocks which is less accurate
+if is_mac; then
+    du_files(){
+        gdu -ab "$@"
+    }
+else
+    du_files(){ du -ab "$@"; }
+fi
+# export function to be used in subshell with xargs, intentionally name it differently than du to make debugging easier
+export -f du_files
+
 while read -r size filename; do
     if [ "$size" = "$last_size" ]; then
         if [ "$last_printed" = 0 ]; then
@@ -54,4 +65,4 @@ while read -r size filename; do
     fi
     last_size="$size"
     last_filename="$filename"
-done < <(for dir in "${@:-$PWD}"; do find "$dir" -type f -print0; done | xargs -0 du -a | sort -k1n)
+done < <(for dir in "${@:-$PWD}"; do find "$dir" -type f -print0; done | xargs -0 bash -c 'du_files "$@"' | sort -k1n)
