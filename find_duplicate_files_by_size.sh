@@ -21,6 +21,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds duplicate files by file size in bytes
 
+Output format:
+
+<size_in_bytes>     <filename>
+
 For a much more sophisticated duplicate file finder utilizing size, checksums, basenames and
 even partial basenames via regex match see
 
