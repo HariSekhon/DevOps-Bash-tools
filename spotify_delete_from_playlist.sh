@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Deletes Spotify URIs from a given playlist
 
-Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name
+Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name (see spotify_playlists.sh)
 
 Can take file(s) with URIs as arguments or read from standard input for chaining with other tools
 
@@ -32,9 +32,9 @@ Useful for chaining with other tools (eg. spotify_playlist_tracks_uri.sh / spoti
 tracks_already_in_playlists.sh in the HariSekhon/Spotify-Playlists github repo) or loading from saved spotify format
 playlists (eg. TODO playlists dumped by spotify_backup*.sh / spotify_playlist_tracks_uri.sh)
 
-$usage_auth_msg
+$usage_playlist_help
 
-$usage_token_private
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
