@@ -280,17 +280,17 @@ etc.
   - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
   - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
 - `spotify_*.sh` - [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo:
-  - `spotify_playlists*.sh` - list playlists in either `<id> <name>` format or JSON output
+  - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
   - `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
   - `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
   - `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
   - `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
   - `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
   - `spotify_create_playlist.sh` - creates a Spotify playlist, either public or private
-  - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
   - `spotify_rename_playlist.sh` - renames a Spotify playlist
+  - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
   - `spotify_add_to_playlist.sh` - adds tracks to a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input. Can be combined with many other tools listed here which output Spotify URIs, or appended from other playlists. Can also be used to restore a spotify playlist from backups
-  - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / top tracks in either human readable or URI format (which can be auto-loaded into other playlists)
+  - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
   - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
   - `spotify_foreach_playlist.sh` - iterate any command against all playlists with command templating of `{playlist}` and `{playlist_id}`
