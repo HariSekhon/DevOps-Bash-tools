@@ -26,7 +26,10 @@ Renames a given Spotify playlist
 
 The Spotify playlist to rename can be identified by name or ID
 
-$usage_auth_msg
+
+$usage_playlist_help
+
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
