@@ -243,7 +243,8 @@ etc.
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_public_repos.sh` - auto-creates remotes for the 3 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org))
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 3 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) which doesn't have the [GitLab](https://gitlab.com/) auto-sync from [GitHub](https://github.com/) feature)
-  - `git_repos_update.sh` - updates multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
+  - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
+  - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
 - `github*.sh` - various useful GitHub scripts for querying the GitHub API including:
   - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for several other scripts that use the GitHub API. Built on top of `curl_auth.sh`
