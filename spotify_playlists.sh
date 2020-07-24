@@ -44,10 +44,7 @@ To return only public playlists even when using a private token set \$SPOTIFY_PU
 Due to quirks of the Spotify API, listing private playlists requires an authorized token with interactive authorization
 pop-up or \$SPOTIFY_ACCESS_TOKEN in the environment. To prevent repeated pop-ups, set once an hour in your shell like so:
 
-export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
-
-If you 've exported a non-authorized \$SPOTIFY_ACCESS_TOKEN in your environment (eg. from spotify_api_token.sh),
-then this script will fail with a 401 unauthorized error
+$usage_token_private
 
 $usage_auth_msg
 "
