@@ -26,8 +26,14 @@ Returns a Spotify access token from the Spotify API, needed to access the Spotif
 
 Due to quirks of the Spotify API, by default returns a non-interactive access token that cannot access private user data
 
-To get a token to access the private user data API endpoints, set \$SPOTIFY_PRIVATE=1
-This will then require a browser prompt to authorize, at which point this will capture and output the resulting token
+To get a token to access the private user data API endpoints:
+
+export SPOTIFY_PRIVATE=1
+
+This will then require an interactive browser pop-up prompt to authorize, at which point this script will capture and output the resulting token
+If you don't want this pop-up to happen on every run of these spotify scripts, you can preload a private authorized token in to your shell for an hour like so:
+
+export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/../spotify_api_token.sh')
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
