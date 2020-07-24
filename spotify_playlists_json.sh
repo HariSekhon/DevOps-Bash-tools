@@ -28,14 +28,14 @@ Returns the list of Spotify public playlists in raw JSON format for the given Sp
 
 \$SPOTIFY_USER can be used from the evironment if no first argument is given
 
-$usage_auth_msg
-
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
         This script does not iterate each page automatically because the output would be nonsensical
         multiple json outputs so you must iterate yourself and process each json result in turn
         For an example of how to do this and process multiple paged requests see spotify_playlists.sh
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+$usage_playlist_help
+
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
