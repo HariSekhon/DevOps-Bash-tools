@@ -114,8 +114,6 @@ redirect_uri='http://localhost:12345/callback'
 # ============================================================================ #
 # Authorization Code Flow
 #
-# use spotify_api_token_interactive.sh for this method
-#
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
 #
 #output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
