@@ -26,17 +26,18 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Uses Spotify API to translate a Spotify public playlist name to ID
 
-Matches the first playlist from your account with a name matching the given argument as a partial string match
+Returns the ID for first playlist in your account which name contains the given playlist name (case insensitive substring match for convenience)
 
 If you want an exact full string match of the playlist name to guarantee you get the right playlist ID, then export SPOTIFY_PLAYLIST_EXACT_MATCH=1
 
 If a Spotify playlist ID is given, returns it as is (this is for coding convenience when calling from other scripts)
 
-$usage_auth_msg
-
 Needed by several other adjacent spotify tools
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+
+$usage_playlist_help
+
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
