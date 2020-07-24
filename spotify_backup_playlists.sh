@@ -23,20 +23,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Backs up all public or privte Spotify playlists for a given user to text files in both Spotify and human readable formats
+Backs up Spotify playlists for a given user to text files in both Spotify URI and human readable formats
 
 Spotify track URI format can be copied and pasted back in to Spotify to restore a playlist to a previous state
 (for example if you accidentally deleted a track and didn't do an immediate Ctrl-Z / Cmd-Z)
 
-For public playlists, \$SPOTIFY_USER be set in the environment or given as the first arg
-For private playlists, the user is inferred from the authorized token
+Spotify track URI format can also be combined with spotify_add_to_playlist.sh to restore or add to another playlist
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+$usage_playlist_help
 
-Caveat: due to limitations of the Spotify API, by default works on public playlists.
-For private playlists you must export SPOTIFY_PRIVATE=1 and preferably pre-generate the token in your shell to prevent repeated web authorization pop-ups:
-
-export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token.sh\")\"
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
@@ -49,9 +45,7 @@ spotify_user="${1:-${SPOTIFY_USER:-}}"
 
 shift || :
 
-if is_blank "$spotify_user" && is_blank "${SPOTIFY_PRIVATE:-}"; then
-    usage "\$SPOTIFY_USER not defined and no first argument given, and not specified \$SPOTIFY_PRIVATE to infer from token"
-fi
+spotify_user
 
 if not_blank "${SPOTIFY_BACKUP_DIR:-}"; then
     backup_dir="$SPOTIFY_BACKUP_DIR"
