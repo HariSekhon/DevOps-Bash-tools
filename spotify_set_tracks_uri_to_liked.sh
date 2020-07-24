@@ -47,9 +47,8 @@ for debugging to see both the URIs processed and the human readable names you ca
 
 spotify_set_tracks_uri_to_liked.sh Starred | tee /dev/stderr | spotify_uri_to_name.sh
 
-$usage_auth_msg
 
-$usage_token_private
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
