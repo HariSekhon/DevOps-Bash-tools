@@ -31,11 +31,13 @@ If a spotify playlist name is given instead of an ID, returns it as is
 
 A single playlist ID can be given as an argument, or a list can be passed via stdin
 
-$usage_auth_msg
-
 Needed by several other adjacent spotify tools
 
-Caveat: due to limitations of the Spotify API, this only works for public playlists
+
+$usage_playlist_help
+
+$usage_auth_help
+
 "
 
 # used by usage() in lib/utils.sh
