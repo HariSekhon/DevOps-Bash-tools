@@ -58,9 +58,16 @@ spotify_user(){
 # used by client scripts
 # shellcheck disable=SC2034
 usage_auth_msg="Requires \$SPOTIFY_ACCESS_TOKEN, or \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment"
+
 # srcdir defined in client scripts
 # shellcheck disable=SC2034,SC2154
 usage_token_private="export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$libdir/../spotify_api_token.sh')\""
+
+# shellcheck disable=SC2034
+usage_playlist_help="See spotify_playlists.sh --help for more details about getting private playlists"
+
+# shellcheck disable=SC2034
+usage_auth_help="See spotify_api_token.sh --help for authentication details and setting up your SPOTIFY_ID, SPOTIFY_SECRET and callback URL"
 
 get_next(){
     jq -r '.next' <<< "$*"
