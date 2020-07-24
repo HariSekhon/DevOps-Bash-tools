@@ -35,10 +35,11 @@ lib
 pylib
 lib-java:libj
 
-DevOps-Golang-tools:go-tools
+#DevOps-Golang-tools:go-tools
 DevOps-Perl-tools:perl-tools
 DevOps-Python-tools:pytools
 Spotify-tools:spotify-tools
+Spotify-Playlists:playlists
 #Spark-Apps:spark-apps
 
 HAProxy-configs:haproxy-configs
