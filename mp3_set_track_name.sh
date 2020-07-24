@@ -55,6 +55,7 @@ mp3_regex='([^/]+).mp3$'
 
 get_track_name(){
     local mp3="$1"
+    local artist
     #track_name="$mp3"
     #track_name="${track_name##*/}"
     #track_name="${track_name%.mp3}"
@@ -62,10 +63,15 @@ get_track_name(){
     # case insensitive matching without subshelling
     if [[ "$mp3" =~ $mp3_regex ]]; then
         track_name="${BASH_REMATCH[1]}"
-        echo "$track_name"
     else
         die "failed to regex match filename '$mp3' to generate track name"
     fi
+    artist="$(id3v2 -l "$mp3" |
+        grep '[[:space:]]Artist:[[:space:]]' | sed 's/.*[[:space:]]Artist:[[:space:]]*//; s/[[:space:]]*$//'
+    )"
+    track_name="${track_name#$artist}"
+    track_name="${track_name#[[:space:]]*-[[:space:]]*}"
+    echo "$track_name"
 }
 
 while read -r mp3; do
