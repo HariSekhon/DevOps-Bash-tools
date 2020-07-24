@@ -58,19 +58,22 @@ usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
-user="${1:-${SPOTIFY_USER:-}}"
+if [ -n "${SPOTIFY_PRIVATE_ONLY:-1}" ]; then
+    export SPOTIFY_PRIVATE=1
+fi
 
-if is_blank "$user"; then
+spotify_user="${1:-${SPOTIFY_USER:-}}"
+
+# will infer from token if $SPOTIFY_PRIVATE=1
+spotify_user
+
+if is_blank "$spotify_user"; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
     #user="me"
     usage "user not specified"
 fi
 
 shift || :
-
-if [ -n "${SPOTIFY_PRIVATE_ONLY:-1}" ]; then
-    export SPOTIFY_PRIVATE=1
-fi
 
 if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
@@ -80,7 +83,7 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
 else
     # $limit/$offset defined in lib/spotify.sh
     # shellcheck disable=SC2154
-    url_path="/v1/users/$user/playlists?limit=$limit&offset=$offset"
+    url_path="/v1/users/$spotify_user/playlists?limit=$limit&offset=$offset"
 fi
 
 output(){
@@ -93,7 +96,7 @@ output(){
         cat
     fi |
     if is_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
-        jq "select(.owner.id == \"$user\")"
+        jq "select(.owner.id == \"$spotify_user\")"
     fi |
     jq -r "[.id, .name] | @tsv"
 }
