@@ -22,7 +22,7 @@ cd "$srcdir"
 if [ -n "$*" ]; then
     echo "$@"
 else
-    sed 's/#.*//; s/:/ /' ../../setup/repolist.txt
+    sed 's/#.*//; s/:/ /' ../../setup/repos.txt
 fi |
 grep -v -e bash-tools -e '^[[:space:]]*$' |
 while read -r repo dir; do
