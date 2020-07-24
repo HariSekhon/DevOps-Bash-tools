@@ -26,24 +26,18 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns Spotify API output for a given public playlist
+Returns Spotify API output for a given playlist
 
-Playlist argument can be a playlist name (or partial string match) or a playlist ID (get this from spotify_playlists.sh)
-
-\$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
-
-$usage_auth_msg
+Playlist argument can be a playlist name or ID (see spotify_playlists.sh)
 
 Caveat: limited to 50 public playlists due to Spotify API, must specify OFFSET=50 to get next 50.
         This script does not iterate each page automatically because the output would be nonsensical
         multiple json outputs so you must iterate yourself and process each json result in turn
         For an example of how to do this and process multiple paged requests see spotify_playlist_tracks.sh
 
-For private playlists you must specify \$SPOTIFY_PRIVATE=1 before generating the \$SPOTIFY_ACCESS_TOKEN:
+$usage_playlist_help
 
-export SPOTIFY_PRIVATE=1
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token_interactive.sh')\"
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
