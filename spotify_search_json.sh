@@ -43,8 +43,8 @@ API JSON is returned, used by adjacent spotify_search*.sh scripts
 Environment variable options:
 
 \$SPOTIFY_SEARCH_TYPE  = track # default
-                         artist
-                         album
+                        artist
+                        album
 
 \$SPOTIFY_SEARCH_LIMIT = 1 # default
 
