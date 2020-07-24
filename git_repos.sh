@@ -20,4 +20,11 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 repofile="$srcdir/setup/repos.txt"
 
-sed 's/#.*//; s/.*://; /^[[:space:]]*$/d' < "$repofile"
+if [ -f "$repofile" ]; then
+    echo "processing repos from local file: $repofile" >&2
+    cat "$repofile"
+else
+    echo "fetching repos from GitHub repos.txt:" >&2
+    curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt
+fi |
+sed 's/#.*//; s/.*://; /^[[:space:]]*$/d'
