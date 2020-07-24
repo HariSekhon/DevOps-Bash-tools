@@ -28,7 +28,7 @@ By default the created playlist will be public
 
 If SPOTIFY_PRIVATE=1 is set in the environment then the created playlist will be private
 
-$usage_auth_msg
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
