@@ -41,11 +41,13 @@ or if \$SPOTIFY_CSV environment variable is set then:
 
 \"Artist\",\"Track\"
 
+This works on public playlists by default
+For private playlists you must export SPOTIFY_PRIVATE=1 to get a privately authorized token which requires an interactive browser authorization pop-up
+To prevent repeated pop-ups, you can pre-get a token once an hour in your shell like so:
+
+$usage_token_private
+
 $usage_auth_msg
-
-Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
-
-export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
 "
 
 # used by usage() in lib/utils.sh
