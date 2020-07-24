@@ -27,10 +27,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns track URIs for the given Spotify public playlist
+Returns track URIs for the given Spotify playlist
 
-Playlist argument can be a playlist name (a regex which will return the first matching playlist)
-or a playlist ID (get this from spotify_playlists.sh)
+Playlist argument can be a playlist name or ID. See spotify_playlist_name_to_id.sh --help for details
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
@@ -39,11 +38,9 @@ Spotify track URIs can be used:
 - copied to new playlists
 - set to Liked (spotify_set_tracks_uri_to_liked.sh)
 
-$usage_auth_msg
+$usage_playlist_help
 
-Caveat: due to limitations of the Spotify API, this by default only works for public playlists. For private playlists you must get an interactively authorized access token like so:
-
-export SPOTIFY_ACCESS_TOKEN=\"\$(\"$srcdir/spotify_api_token_interactive.sh\")\"
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
