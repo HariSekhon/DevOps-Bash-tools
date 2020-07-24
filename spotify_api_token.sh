@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns a Spotify access token from the Spotify API, needed to access the Spotify API
 
+Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
+
 Due to quirks of the Spotify API, by default returns a non-interactive access token that cannot access private user data
 
 To get a token to access the private user data API endpoints:
@@ -31,15 +33,20 @@ To get a token to access the private user data API endpoints:
 export SPOTIFY_PRIVATE=1
 
 This will then require an interactive browser pop-up prompt to authorize, at which point this script will capture and output the resulting token
-If you don't want this pop-up to happen on every run of these spotify scripts, you can preload a private authorized token in to your shell for an hour like so:
+
+Many scripts utilize this code and will automatically generate the authentication tokens for you if you have \$SPOTIFY_ID and \$SPOTIFY_SECRET environment variables set so you usually don't need to call this yourself
+
+
+For private tokens which require authorization pop-ups, if you want to avoid these on every run of these spotify scripts, you can preload a private authorized token in to your shell for an hour like so:
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/../spotify_api_token.sh')
 
-Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
-Generate an App client ID and secret here and add a callback URL of 'http://localhost:12345/callback':
+Generate an App client ID and secret for SPOTIFY_ID and SPOTIFY_SECRET environment variables here:
 
 https://developer.spotify.com/dashboard/applications
+
+Make sure to add a callback URL of exactly 'http://localhost:12345/callback' without the quotes to be able to generate private tokens
 "
 
 # used by usage() in lib/utils.sh
