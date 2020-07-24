@@ -101,7 +101,7 @@ alias remote='remotes'
 #    svn ls "https://github.com/$1.git/branches/master/"
 #}
 #githubgrep(){
-#    for repo in $(sed 's/#.*//;s/:.*//;/^[[:space:]]*$/d' "$srcdir/setup/repolist.txt"); do
+#    for repo in $(sed 's/#.*//;s/:.*//;/^[[:space:]]*$/d' "$srcdir/setup/repos.txt"); do
 #        githubls "HariSekhon/$repo"
 #    done |
 #    grep "$@"
@@ -780,7 +780,7 @@ git_rm_untracked(){
 
 # example of usage of this in the function below - make sure to put '$repo' or "\$repo" somewhere in the argument body to make use of the iteration variable
 foreachrepo(){
-    local repolist="${REPOLIST:-$bash_tools/setup/repolist.txt}"
+    local repolist="${REPOLIST:-$bash_tools/setup/repos.txt}"
     while read -r repo; do
         eval "$@"
     done < <(sed 's/#.*$//; s/.*://; /^[[:space:]]*$/d' "$repolist")
