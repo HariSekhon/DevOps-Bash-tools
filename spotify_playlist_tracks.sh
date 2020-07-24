@@ -27,11 +27,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns track names in a given Spotify public playlist
+Returns track names in a given Spotify playlist
 
 Playlist argument can be a playlist name (partial string match) or a playlist ID (get this from spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
+
 
 Output format:
 
@@ -41,13 +42,10 @@ or if \$SPOTIFY_CSV environment variable is set then:
 
 \"Artist\",\"Track\"
 
-This works on public playlists by default
-For private playlists you must export SPOTIFY_PRIVATE=1 to get a privately authorized token which requires an interactive browser authorization pop-up
-To prevent repeated pop-ups, you can pre-get a token once an hour in your shell like so:
 
-$usage_token_private
+$usage_playlist_help
 
-$usage_auth_msg
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
