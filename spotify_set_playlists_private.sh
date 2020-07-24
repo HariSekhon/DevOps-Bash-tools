@@ -28,7 +28,7 @@ Sets given Spotify playlists to private
 
 Accepts Spotify playlist names or IDs as either arguments or on standard input, one playlist per line
 
-$usage_auth_msg
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
