@@ -34,8 +34,7 @@ By default returns only public playlists owned by given Spotify user
 
 Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return all followed playlists as well
 
-\$SPOTIFY_USER can be used from the evironment if no first argument is given,
-Spotify user is auto-inferred from the authorized token obtained when \$SPOTIFY_PRIVATE is set
+\$SPOTIFY_USER must be defined in environment or given as first arg unless \$SPOTIFY_PRIVATE=1 is set, in which case it's inferred from the auth token
 
 Gets public playlists by default
 To also get private playlists - export SPOTIFY_PRIVATE=1
