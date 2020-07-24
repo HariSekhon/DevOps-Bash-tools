@@ -25,7 +25,7 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
-repofile="$srcdir/setup/repolist.txt"
+repofile="$srcdir/setup/repos.txt"
 
 if [ $# -gt 0 ]; then
     repolist="$*"
@@ -38,7 +38,7 @@ else
         repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
     else
         echo "fetching repos from GitHub repo list"
-        repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
+        repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
     fi
 fi
 
