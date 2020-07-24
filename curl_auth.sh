@@ -90,7 +90,17 @@ if [ -z "${netrc_contents:-}" ]; then
         usage "http(s):// not specified in URL"
     fi
 
-    host="$(grep -om 1 '://[^:\/[:space:]]\+' <<< "$*" | sed 's,://,,')"
+    # sed https* - because sed on Mac doesn't respect either ? or \? and otherwise I'd have to use:
+    #
+    # perl -pe 's/https?:\/\///'
+    #
+    # or else wrap
+    #
+    # if is_mac; then
+    #       sed(){ gsed "$@" }
+    # fi
+    #
+    host="$(grep -Eom 1 'https?://[^:\/[:space:]]+' <<< "$*" | sed 's,https*://,,' | grep -v localhost | head -n1)"
 
     netrc_contents="machine $host login $USERNAME password $PASSWORD"
 fi
