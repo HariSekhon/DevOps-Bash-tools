@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -18,15 +17,28 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "$0")" && pwd)"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
 # access to useful functions and aliases
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/aliases.sh"
-#
+
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/functions.sh"
-#
+
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/git.sh"
+
+# shellcheck disable=SC2034
+usage_description="Runs any arguments as a command against each file with a Git modified status
+
+The filename will be appended to the end of each command in each iteration"
+
+# shellcheck disable=SC2034
+usage_args="<cmd> <args>"
+
+help_usage "$@"
 
 for filename in $(git status --porcelain | awk '/^.M/{print $NF}'); do
     "$@" "$filename"
