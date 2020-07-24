@@ -26,29 +26,23 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Queries the given Spotify API endpoint
 
-Requires \$SPOTIFY_ACCESS_TOKEN in the environment, or \$SPOTIFY_ID and \$SPOTIFY_SECRET, in which case it'll call spotify_access_token.sh to generate a new token for the duration of this script
-
-If accessing API endpoints for private user data that require authorized tokens, such as /v1/me/... , then you'll need to export SPOTIFY_PRIVATE=1 before generating a token with interactive authorization pop-up due to quirks in the Spotify API
-
-For efficiency to avoid regenerating API tokens for every script call, do the following once an hour in your shell:
-
-export SPOTIFY_ACCESS_TOKEN=\"\$('$srcdir/spotify_api_token.sh')\"
-
-Generate an App client ID and secret here and add a callback URL of 'http://localhost:12345/callback':
-
-https://developer.spotify.com/dashboard/applications
-
-API documentation for calls to make:
+API endpoints you can query with this code:
 
 https://developer.spotify.com/documentation/web-api/reference/
 
-Eg.
+For private user data endpoints you must export SPOTIFY_PRIVATE=1
+
+$usage_auth_help
+
+
+Examples:
 
 spotify_api.sh /v1/users/harisekhon
 
 SPOTIFY_PRIVATE=1 spotify_api.sh /v1/me/tracks
 
 Used by adjacent spotify_*.sh scripts for more serious usage
+
 "
 
 # used by usage() in lib/utils.sh
@@ -62,6 +56,10 @@ min_args 1 "$@"
 url_path="$1"
 
 shift || :
+
+if [[ "$url_path" =~ /v1/me/ ]]; then
+    export SPOTIFY_PRIVATE=1
+fi
 
 spotify_token
 
