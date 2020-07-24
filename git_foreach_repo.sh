@@ -41,7 +41,7 @@ if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
 
-repofile="$srcdir/setup/repolist.txt"
+repofile="$srcdir/setup/repos.txt"
 
 repolist="${REPOS:-}"
 if [ -n "$repolist" ]; then
@@ -51,7 +51,7 @@ elif [ -f "$repofile" ]; then
     repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
 else
     echo "fetching repos from GitHub repo list"
-    repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repolist.txt | sed 's/#.*//')"
+    repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
 fi
 
 for repo in $repolist; do
