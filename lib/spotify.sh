@@ -64,7 +64,7 @@ usage_auth_msg="Requires \$SPOTIFY_ACCESS_TOKEN, or \$SPOTIFY_ID and \$SPOTIFY_S
 usage_token_private="export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$libdir/../spotify_api_token.sh')\""
 
 # shellcheck disable=SC2034
-usage_playlist_help="See spotify_playlists.sh --help for more details about getting private playlists"
+usage_playlist_help="See spotify_playlists.sh --help for more details on accessing private playlists"
 
 # shellcheck disable=SC2034
 usage_auth_help="See spotify_api_token.sh --help for authentication details and setting up your SPOTIFY_ID, SPOTIFY_SECRET and callback URL"
