@@ -34,19 +34,15 @@ By default returns only public playlists owned by given Spotify user
 
 Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return all followed playlists as well
 
-\$SPOTIFY_USER can be used from the evironment if no first argument is given
+\$SPOTIFY_USER can be used from the evironment if no first argument is given,
+Spotify user is auto-inferred from the authorized token obtained when \$SPOTIFY_PRIVATE is set
 
-To get private playlists set \$SPOTIFY_PRIVATE=1 and don't specify the spotify user which is inferred from the token
-used
-To return only private playlists set \$SPOTIFY_PRIVATE_ONLY=1
-To return only public playlists even when using a private token set \$SPOTIFY_PUBLIC_ONLY=1
+Gets public playlists by default
+To also get private playlists - export SPOTIFY_PRIVATE=1
+To get only private playlists - export SPOTIFY_PRIVATE_ONLY=1
+To get only public playlists  - export SPOTIFY_PUBLIC_ONLY=1
 
-Due to quirks of the Spotify API, listing private playlists requires an authorized token with interactive authorization
-pop-up or \$SPOTIFY_ACCESS_TOKEN in the environment. To prevent repeated pop-ups, set once an hour in your shell like so:
-
-$usage_token_private
-
-$usage_auth_msg
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
