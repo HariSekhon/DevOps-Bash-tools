@@ -29,7 +29,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns track URIs for the given Spotify playlist
 
-Playlist argument can be a playlist name or ID. See spotify_playlist_name_to_id.sh --help for details
+Playlist argument can be a playlist name or ID (see spotify_playlists.sh)
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
