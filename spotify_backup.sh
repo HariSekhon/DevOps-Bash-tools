@@ -23,16 +23,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_description="
 One-touch Spotify Backup of all or selected Spotify playlists
-using code from Spotify Tools and DevOps Bash Tools repos
 
 If playlist args are given then backs up only those playlists
 
-Without args, backs up the entire list of public Spotify playlists
+Without args, backs up all public playlists
 
-To backup private playlists you must export \$SPOTIFY_PRIVATE=1
+$usage_playlist_help
 
-For public playlists, \$SPOTIFY_USER must be set in the environment
-For private playlist, the user is inferred from the authorized token
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
