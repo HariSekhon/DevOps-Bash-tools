@@ -18,6 +18,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "$0")" && pwd)"
 
-repofile="$srcdir/setup/repolist.txt"
+repofile="$srcdir/setup/repos.txt"
 
 sed 's/#.*//; s/.*://; /^[[:space:]]*$/d' < "$repofile"
