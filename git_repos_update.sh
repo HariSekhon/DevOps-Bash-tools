@@ -27,26 +27,15 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
-repofile="$srcdir/setup/repos.txt"
-
-if [ $# -gt 0 ]; then
-    repolist="$*"
-else
-    repolist="${*:-${REPOS:-}}"
-    if [ -n "$repolist" ]; then
-        :
-    elif [ -f "$repofile" ]; then
-        echo "processing repos from file: $repofile"
-        repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
-    else
-        echo "fetching repos from GitHub repo list"
-        repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
-    fi
+repolist="${*:-${REPOS:-}}"
+if [ -z "$repolist" ]; then
+    repolist="$("$srcdir/git_repos.sh")"
 fi
 
 run(){
     local repolist="$*"
     for repo in $repolist; do
+        "$srcdir/git_repos_pull.sh" "$repo"
         repo_dir="${repo##*/}"
         repo_dir="${repo_dir##*:}"
         repo="${repo%%:*}"
@@ -56,7 +45,6 @@ run(){
         if [ -d "$repo_dir" ]; then
             pushd "$repo_dir"
             # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-            git pull --no-edit
             if [ -n "${QUICK:-}" ] ||
                [ -n "${NOBUILD:-}" ] ||
                [ -n "${NO_BUILD:-}" ]; then
