@@ -42,14 +42,15 @@ Uses spotify_search_json.sh which supports the following environment variable op
 Environment variable options:
 
 \$SPOTIFY_SEARCH_TYPE  = track # default
-                         artist
-                         album
+                        artist
+                        album
 
 \$SPOTIFY_SEARCH_LIMIT = 1 # default
 
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
-$usage_auth_msg
+
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
