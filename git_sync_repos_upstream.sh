@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Syncs all adjacent repos from setup/repolist.txt to one of the upstreams GitHub / GitLab / BitBucket
+# Syncs all adjacent repos from setup/repos.txt to one of the upstreams GitHub / GitLab / BitBucket
 #
 # another trick would be to set the remote origin to contain all 3 URLs so each push goes to all 3 repos every time
 #
@@ -48,7 +48,7 @@ else
     usage
 fi
 
-sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repolist.txt" |
+sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"
