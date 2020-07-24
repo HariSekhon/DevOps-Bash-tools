@@ -26,13 +26,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns the URIs of the current Spotify user's Liked Songs (aka Saved Tracks) via the Spotify API
 
-Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist, or combined with spotify_set_tracks_uri_to_liked.sh
+Spotify track URIs can be used as backups to restore a playlist's contents or copying to a new playlist
 
-$usage_auth_msg
 
-Caveat: due to limitations of the Spotify API, this requires an interactively authorized access token, which you will be prompted for if you haven't already got one in your shell environment. To set up an authorized token for an hour in your current shell, you can run the following command (make sure you don't have an access token in the environment from spotify_api_token.sh otherwise you will get a 401 error):
-
-$usage_token_private
+$usage_auth_help
 "
 
 # used by usage() in lib/utils.sh
