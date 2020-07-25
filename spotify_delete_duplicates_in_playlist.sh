@@ -28,6 +28,12 @@ Deletes duplicate Spotify URIs in a given playlist
 
 Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name (see spotify_playlists.sh)
 
+To see which URIs would be deleted, you can first run spotify_duplicate_uri_in_playlist.sh <playlist_name_or_id> and optionally pipe that through spotify_uri_to_name.sh to translate to human readable names eg for a playlist called 'test':
+
+spotify_duplicate_uri_in_playlist.sh test
+
+spotify_duplicate_uri_in_playlist.sh test | spotify_uri_to_name.sh
+
 $usage_playlist_help
 
 $usage_auth_help
@@ -52,19 +58,7 @@ spotify_token
 # this script returns the ID if it's already in the correct format, otherwise queries and returns the playlist ID for the playlist
 playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist")"
 
-count=0
+export SPOTIFY_DUPLICATE_TRACK_POSITIONS=1
 
-# playlists max out at only around ~8000 tracks so this is safe to do in ram
-tracklist_URIs="$("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id")"
-
-duplicate_URIs="$(sort <<< "$tracklist_URIs" | uniq -d)"
-
-duplicate_URIs_with_track_positions="$(
-while read -r uri; do
-    ((count+=1))
-    grep -Fxn "$uri" <<< "$tracklist_URIs" |
-    tail -n +2
-done <<< "$duplicate_URIs"
-)"
-
-"$srcdir/spotify_delete_from_playlist.sh" "$playlist_id" <<< "$duplicate_URIs_with_track_positions"
+"$srcdir/spotify_duplicate_uri_in_playlist.sh" "$playlist_id" |
+"$srcdir/spotify_delete_from_playlist.sh" "$playlist_id"
