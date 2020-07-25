@@ -68,6 +68,10 @@ while read -r uri; do
 done <<< "$duplicate_URIs" |
 if [ -n "${SPOTIFY_DUPLICATE_TRACK_POSITIONS:-}" ]; then
     sed 's/:/ /' |
+    while read -r track_position uri; do
+        ((track_position-=1))
+        echo "$track_position $uri"
+    done |
     column -t
 else
     sed 's/^[[:digit:]]://'
