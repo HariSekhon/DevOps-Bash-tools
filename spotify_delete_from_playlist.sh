@@ -28,6 +28,19 @@ Playlist must be specified as the first argument and can be either a Spotify pla
 
 Can take file(s) with URIs as arguments or read from standard input for chaining with other tools
 
+Input formats can be IDs or any standard Spotify URI format, eg:
+
+spotify:track:<ID>
+https://open.spotify.com/track/<ID>
+<ID>
+
+or can be prefixed with track position in the playlist if you only want to delete a single instance of the song (useful when removing only duplicates)
+
+<track_position>      spotify:track:<ID>
+<track_position>      https://open.spotify.com/track/<ID>
+<track_position>      <ID>
+
+
 Useful for chaining with other tools (eg. spotify_playlist_tracks_uri.sh / spotify_search_uri.sh in this repo, or
 tracks_already_in_playlists.sh in the HariSekhon/Spotify-Playlists github repo) or loading from saved spotify format
 playlists (eg. TODO playlists dumped by spotify_backup*.sh / spotify_playlist_tracks_uri.sh)
@@ -63,19 +76,32 @@ url_path="/v1/playlists/$playlist_id/tracks"
 
 count=0
 
+# Takes track IDs or track position:ID for more specific deletes
 delete_from_playlist(){
     if [ $# -lt 1 ]; then
         echo "Error: no IDs passed to delete_from_playlist()" >&2
         exit 1
     fi
     local uri_array=""
+    local track_position
+    local id
     for id in "$@"; do
-        # requires explicit track URI type since could also be episodes added to playlist
-        uri_array+="{\"uri\": \"spotify:track:$id\"}, "
+        if [[ "$id" =~ ^[[:digit:]]+: ]]; then
+            # extract first column for track position
+            track_position="${id%%:*}"
+            id="${id#*:}"
+            # requires explicit track URI type since could also be episodes added to playlist
+            uri_array+="{\"uri\": \"spotify:track:$id\", \"positions\": [$track_position]}, "
+        else
+            # requires explicit track URI type since could also be episodes added to playlist
+            uri_array+="{\"uri\": \"spotify:track:$id\"}, "
+        fi
     done
     uri_array="${uri_array%, }"
     timestamp "removing ${#@} tracks from playlist '$playlist_name'"
-    "$srcdir/spotify_api.sh" "$url_path" -X DELETE -d '{"tracks": '"[$uri_array]}" >/dev/null  # ignore the { "spotify_snapshot": ... } json output
+    local output
+    output="$("$srcdir/spotify_api.sh" "$url_path" -X DELETE -d '{"tracks": '"[$uri_array]}")" # >/dev/null  # ignore the { "spotify_snapshot": ... } json output
+    die_if_error_field "$output"
     ((count+=${#@}))
 }
 
@@ -83,6 +109,17 @@ delete_URIs_from_file(){
     declare -a ids
     ids=()
     while read -r track_uri; do
+        track_position=""
+        if [[ "$track_uri" =~ ^[[:digit:]]+[[:space:]]+ ]]; then
+            # extract first column for track position
+            track_position="${track_uri%%[[:space:]]*}"
+
+            # remove first column of track position
+            track_uri="${track_uri#*[[:space:]]}"
+
+            # strip any remaining leading whitespace without subshelling to sed
+            track_uri="${track_uri#"${track_uri%%[![:space:]]*}"}"
+        fi
         if is_blank "$track_uri"; then
             continue
         fi
@@ -91,7 +128,11 @@ delete_URIs_from_file(){
         fi
         id="$(validate_spotify_uri "$track_uri")"
 
-        ids+=("$id")
+        if [ -n "$track_position" ]; then
+            ids+=("$track_position:$id")
+        else
+            ids+=("$id")
+        fi
 
         if [ "${#ids[@]}" -ge 100 ]; then
             delete_from_playlist "${ids[@]}"
