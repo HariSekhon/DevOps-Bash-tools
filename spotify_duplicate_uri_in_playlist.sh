@@ -76,5 +76,5 @@ if [ -n "${SPOTIFY_DUPLICATE_TRACK_POSITIONS:-}" ]; then
     done |
     column -t
 else
-    sed 's/^[[:digit:]]://'
+    sed 's/^[[:digit:]]*://'
 fi
