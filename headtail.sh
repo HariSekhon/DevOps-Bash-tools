@@ -24,8 +24,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Head and Tail input files or standard input
 
-Very quick overly simple rustle up for fun
-
 For a better version written in Python see the adjacent DevOps Python tools repo:
 
     https://github.com/HariSekhon/DevOps-Python-tools
