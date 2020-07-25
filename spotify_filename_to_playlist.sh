@@ -25,6 +25,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_description="
 Normalizes a Spotify playlist filename provided as arg(s) or stdin to an original playlist name
+
+This is used because playlists with slashes have them converted to unicode equivalent by spotify_playlist_to_filename.sh, so when searching for playlists in spotify_playlist_name_to_id.sh, I use this script to reverse the process to allow for using auto-completed filenames as playlist names and still having everything resolve correctly
 "
 
 # used by usage() in lib/utils.sh
