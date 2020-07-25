@@ -76,6 +76,8 @@ url_path="/v1/playlists/$playlist_id/tracks"
 
 count=0
 
+snapshot_id=""
+
 # Takes track IDs or track position:ID for more specific deletes
 delete_from_playlist(){
     if [ $# -lt 1 ]; then
@@ -99,10 +101,24 @@ delete_from_playlist(){
     done
     uri_array="${uri_array%, }"
     timestamp "removing ${#@} tracks from playlist '$playlist_name'"
+    json_payload='{"tracks": '"[$uri_array]"
+    #if [ -n "$snapshot_id" ] && [ "$snapshot_id" != null ]; then
+    # let it send null and fail as we should never get back null
+    if [ -n "$snapshot_id" ]; then
+        json_payload+=", \"snapshot_id\": \"$snapshot_id\""
+    fi
+    json_payload+="}"
     local output
-    output="$("$srcdir/spotify_api.sh" "$url_path" -X DELETE -d '{"tracks": '"[$uri_array]}")" # >/dev/null  # ignore the { "spotify_snapshot": ... } json output
+    output="$("$srcdir/spotify_api.sh" "$url_path" -X DELETE -d "$json_payload")"
     die_if_error_field "$output"
     ((count+=${#@}))
+    snapshot_id="$(jq -r '.snapshot_id' <<< "$output")"
+    if is_blank "$snapshot_id"; then
+        die "Spotify API returned blank snapshot id, please investigate with DEBUG=1 mode"
+    fi
+    if [ "$snapshot_id" = null ]; then
+        die "Spotify API returned snapshot_id '$snapshot_id', please investigate with DEBUG=1 mode"
+    fi
 }
 
 delete_URIs_from_file(){
