@@ -32,6 +32,8 @@ You can combine this with spotify_uri_to_name.sh to see the duplicate track name
 
 ${0##*/} test | spotify_uri_to_name.sh
 
+If \$SPOTIFY_DUPLICATE_TRACK_POSITIONS is set then also outputs the track position (zero-index to align with the Spotify API) as the first column with the URI as the second column
+
 $usage_playlist_help
 
 $usage_auth_help
