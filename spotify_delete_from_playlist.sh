@@ -34,7 +34,7 @@ spotify:track:<ID>
 https://open.spotify.com/track/<ID>
 <ID>
 
-or can be prefixed with track position in the playlist (one indexed) if you only want to delete a single instance of the song (useful when removing only duplicates), separated by either space:
+or can be prefixed with track position in the playlist (zero-indexed) if you only want to delete a single instance of the song (useful when removing only duplicates), separated by either space:
 
 <track_position>      spotify:track:<ID>
 <track_position>      https://open.spotify.com/track/<ID>
@@ -97,7 +97,8 @@ delete_from_playlist(){
         if [[ "$id" =~ ^[[:digit:]]+: ]]; then
             # extract first column for track position
             track_position="${id%%:*}"
-            ((track_position-=1)) # convert one-indexed (eg. from grep) to zero-indexed for Spotify API
+            # keep zero-indexed for compatability with other tools
+            #((track_position-=1)) # convert one-indexed (eg. from grep) to zero-indexed for Spotify API
             id="${id#*:}"
             # requires explicit track URI type since could also be episodes added to playlist
             uri_array+="{\"uri\": \"spotify:track:$id\", \"positions\": [$track_position]}, "
