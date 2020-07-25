@@ -281,7 +281,7 @@ etc.
   - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
   - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
   - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
-- `spotify_*.sh` - [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo:
+- `spotify_*.sh` - 30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo), including:
   - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
   - `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
   - `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
@@ -298,6 +298,7 @@ etc.
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
   - `spotify_foreach_playlist.sh` - iterate any command against all playlists with command templating of `{playlist}` and `{playlist_id}`
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
+  - `spotify_api_tokens.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
