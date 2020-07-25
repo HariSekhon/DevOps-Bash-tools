@@ -163,7 +163,9 @@ delete_URIs_from_file(){
         fi
     done < "$filename"
 
-    delete_from_playlist "${ids[@]}"
+    if [ "${#ids[@]}" -gt 0 ]; then
+        delete_from_playlist "${ids[@]}"
+    fi
 }
 
 for filename in "${@:-/dev/stdin}"; do
