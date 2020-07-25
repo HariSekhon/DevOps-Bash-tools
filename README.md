@@ -298,7 +298,7 @@ etc.
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
   - `spotify_foreach_playlist.sh` - iterate any command against all playlists with command templating of `{playlist}` and `{playlist_id}`
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
-  - `spotify_api_tokens.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
+  - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
