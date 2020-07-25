@@ -34,11 +34,17 @@ spotify:track:<ID>
 https://open.spotify.com/track/<ID>
 <ID>
 
-or can be prefixed with track position in the playlist if you only want to delete a single instance of the song (useful when removing only duplicates)
+or can be prefixed with track position in the playlist (one indexed) if you only want to delete a single instance of the song (useful when removing only duplicates), separated by either space:
 
 <track_position>      spotify:track:<ID>
 <track_position>      https://open.spotify.com/track/<ID>
 <track_position>      <ID>
+
+or a colon:
+
+<track_position>:spotify:track:<ID>
+<track_position>:https://open.spotify.com/track/<ID>
+<track_position>:<ID>
 
 
 Useful for chaining with other tools (eg. spotify_playlist_tracks_uri.sh / spotify_search_uri.sh in this repo, or
@@ -91,6 +97,7 @@ delete_from_playlist(){
         if [[ "$id" =~ ^[[:digit:]]+: ]]; then
             # extract first column for track position
             track_position="${id%%:*}"
+            ((track_position-=1)) # convert one-indexed (eg. from grep) to zero-indexed for Spotify API
             id="${id#*:}"
             # requires explicit track URI type since could also be episodes added to playlist
             uri_array+="{\"uri\": \"spotify:track:$id\", \"positions\": [$track_position]}, "
@@ -126,15 +133,15 @@ delete_URIs_from_file(){
     ids=()
     while read -r track_uri; do
         track_position=""
-        if [[ "$track_uri" =~ ^[[:digit:]]+[[:space:]]+ ]]; then
+        if [[ "$track_uri" =~ ^[[:digit:]]+[:[:space:]]+ ]]; then
             # extract first column for track position
-            track_position="${track_uri%%[[:space:]]*}"
+            track_position="${track_uri%%[:[:space:]]*}"
 
             # remove first column of track position
-            track_uri="${track_uri#*[[:space:]]}"
+            track_uri="${track_uri#*[:[:space:]]}"
 
             # strip any remaining leading whitespace without subshelling to sed
-            track_uri="${track_uri#"${track_uri%%[![:space:]]*}"}"
+            track_uri="${track_uri#"${track_uri%%[!:[:space:]]*}"}"
         fi
         if is_blank "$track_uri"; then
             continue
