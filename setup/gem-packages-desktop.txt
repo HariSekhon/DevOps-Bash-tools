@@ -8,7 +8,9 @@ gitlab
 gist
 jgrep
 lolcat
-rbenv
+
+# installed via homebrew now, can't find gem any more
+#rbenv
 
 # mdl needs ruby >= 2.4.0 whereas older Macs may have 2.3.0 - if so install manually via:
 #
