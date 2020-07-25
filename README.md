@@ -292,7 +292,7 @@ etc.
   - `spotify_rename_playlist.sh` - renames a Spotify playlist
   - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
   - `spotify_add_to_playlist.sh` - adds tracks to a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input. Can be combined with many other tools listed here which output Spotify URIs, or appended from other playlists. Can also be used to restore a spotify playlist from backups
-  - `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input
+  - `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input, optionally prefixed with a track position to remove only specific occurrences (useful for removing duplicates from playlists)
   - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
   - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
