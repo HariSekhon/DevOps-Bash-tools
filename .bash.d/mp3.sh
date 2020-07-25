@@ -22,3 +22,27 @@
 #        id3v2 --track "$i" "$x"
 #    done
 #}
+
+mp3info(){
+    find "${@:-.}" -type f -iname '*.mp3' |
+    head -n 1 |
+    while read -r filename; do
+        mediainfo "$filename"
+    done
+}
+
+mp3infotail(){
+    find "${@:-.}" -type f -iname '*.mp3' |
+    tail -n 1 |
+    while read -r filename; do
+        mediainfo "$filename"
+    done
+}
+
+mp3infoheadtail(){
+    find "${@:-.}" -type f -iname '*.mp3' |
+    sed -n '1p;$p' |
+    while read -r filename; do
+        mediainfo "$filename"
+    done
+}
