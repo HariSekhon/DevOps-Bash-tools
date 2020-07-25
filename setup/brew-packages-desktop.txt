@@ -121,6 +121,7 @@ pwgen
 #pygments  # in pip-packages-desktop.txt
 #python  # in brew-packages.txt
 r
+rbenv
 rdesktop
 #readline  # in brew-packages.txt
 ruby  # Mac ruby is too old to install Travis CI
