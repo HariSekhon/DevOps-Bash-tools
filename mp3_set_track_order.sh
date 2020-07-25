@@ -47,12 +47,19 @@ echo "List of MP3 files and their metadata track ordering:"
 
 echo
 
+total=0
+
+while read -r mp3; do
+    [ -n "$mp3" ] || continue
+    ((total+=1))
+done <<< "$mp3_files"
+
 {
-    i=0;
+    position=0;
     while read -r mp3; do
         [ -n "$mp3" ] || continue
-        ((i+=1))
-        printf '%s\t%s\n' "$i" "$mp3"
+        ((position+=1))
+        printf '%s\t%s\n' "$position/$total" "$mp3"
     done
 } <<< "$mp3_files"
 
@@ -65,11 +72,11 @@ check_yes "$answer"
 echo
 
 {
-    i=0;
+    position=0;
     while read -r mp3; do
         [ -n "$mp3" ] || continue
-        ((i+=1))
-        echo "setting track order $i on '$mp3'"
-        id3v2 --track "$i" "$mp3"
+        ((position+=1))
+        echo "setting track order $position/$total on '$mp3'"
+        id3v2 --track "$position/$total" "$mp3"
     done
 } <<< "$mp3_files"
