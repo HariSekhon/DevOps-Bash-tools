@@ -86,7 +86,7 @@ if liked; then
     echo -n 'OK => Tracks '
     "$srcdir/spotify_liked_tracks.sh" "$@" > "$backup_dir/$filename"
 else
-    playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
+    playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
 
     echo -n "$playlist_name "
