@@ -503,6 +503,11 @@ function! TerraformPlan()
     :! bash -c 'cd "%:p:h" && terraform plan'
 endfunction
 
+"function! TerraformApply()
+"    " '%:p:h' is dirname
+"    :! bash -c 'cd "%:p:h" && terraform apply'
+"endfunction
+
 
 " ============================================================================ "
 "                   L o c a l   C o n f i g   S o u r c i n g
