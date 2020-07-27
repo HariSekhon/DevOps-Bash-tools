@@ -160,6 +160,11 @@ ifconfigco(){
     #curl ifconfig.co/json
 }
 
+ipinfo(){
+    # returns json without /ip with region, reverse dns hostname, city, region, country, lat/long coordinates, org, postcode, timezone
+    curl ipinfo.io/ip
+}
+
 ipify(){
     curl http://api.ipify.org/
     echo
