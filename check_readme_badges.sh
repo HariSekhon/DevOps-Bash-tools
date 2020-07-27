@@ -38,6 +38,7 @@ duplicates="$(
     grep -v -e 'STATUS.md' \
             -e 'harisekhon/github' \
             -e 'harisekhon/centos-github' \
+            -e 'StarTrack' \
             -e '^=*$'
 )"
 set -eo pipefail
