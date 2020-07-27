@@ -34,6 +34,7 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
 [![Docker Build Status](https://img.shields.io/docker/build/harisekhon/nagios-plugins.svg)](https://hub.docker.com/r/harisekhon/nagios-plugins/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/nagios-plugins.svg)](http://microbadger.com/#/images/harisekhon/nagios-plugins)
+[![StarTrack](https://img.shields.io/badge/Star-Track-blue)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/Nagios-Plugins/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/Nagios-Plugins)
@@ -117,6 +118,7 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/Dockerfiles)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/Dockerfiles)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/u/harisekhon)
+[![StarTrack](https://img.shields.io/badge/Star-Track-blue)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/Dockerfiles/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/Dockerfiles)
@@ -191,6 +193,7 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/pytools.svg)](https://hub.docker.com/r/harisekhon/pytools/)
 [![Docker Build Status](https://img.shields.io/docker/build/harisekhon/pytools.svg)](https://hub.docker.com/r/harisekhon/pytools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/pytools.svg)](http://microbadger.com/#/images/harisekhon/pytools)
+[![StarTrack](https://img.shields.io/badge/Star-Track-blue)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Python-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Python-tools)
@@ -259,7 +262,7 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Code Inspector Score](https://www.code-inspector.com/project/8840/score/svg)](https://frontend.code-inspector.com/project/8840/dashboard)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-36k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-40k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 
 
@@ -267,6 +270,7 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![StarTrack](https://img.shields.io/badge/Star-Track-blue)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 
@@ -346,6 +350,7 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/HAProxy-configs)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/HAProxy-configs)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/_/haproxy)
+[![StarTrack](https://img.shields.io/badge/Star-Track-blue)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/HAProxy-configs/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/HAProxy-configs)
@@ -416,6 +421,7 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/perl-tools.svg)](https://hub.docker.com/r/harisekhon/perl-tools/)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/perl-tools.svg)](https://hub.docker.com/r/harisekhon/perl-tools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/perl-tools.svg)](http://microbadger.com/#/images/harisekhon/perl-tools)
+[![StarTrack](https://img.shields.io/badge/Star-Track-blue)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Perl-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Perl-tools)
