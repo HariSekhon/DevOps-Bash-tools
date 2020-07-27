@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  shellcheck disable=SC2139
 #
 #  Author: Hari Sekhon
 #  Date: 2014-07-13 16:56:14 +0100
@@ -41,9 +42,13 @@ fi
 # set in ~/.ansible.cfg now
 #export ANSIBLE_HOST_KEY_CHECKING=False
 
-alias a=ansible
 # -D diff switch requires newish ansible, doesn't work on 1.7
-alias ansible='ansible -Db'
-alias ansible_playbook='ansible-playbook -Db'
-#alias ansible_playbook_vault='ansible-playbook -Db --ask-vault-pass'
-alias ansible_playbook_vault='ansible-playbook -Db --vault-id $bash_tools/vault_pass.sh'
+# -b - matter of preference between using lots of sudo in manifests or not, better to remove it for tighter authz & logging purposes in governed environments
+ansible_opts="-D -b"
+
+alias a=ansible
+# expand now, no dynamic surprises
+alias ansible="ansible $ansible_opts"
+alias ansible_playbook="ansible-playbook $ansible_opts"
+#alias ansible_playbook_vault="ansible-playbook $ansible_opts --ask-vault-pass"
+alias ansible_playbook_vault="ansible-playbook $ansible_opts --vault-id '$bash_tools/vault_pass.sh'"
