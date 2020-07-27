@@ -53,9 +53,9 @@ curl -sSL "$url" |
 #jq -r '.items[] | [.network, .mask_len | tostring ] | join("/")'
 jq -r '.items[] | .cidr' |
 if [ -n "${IPV4_ONLY:-}" ]; then
-    grep -v -e '[:alpha:]' -e '::'
+    grep -v -e '[:alpha:]' -e ':'
 elif [ -n "${IPV6_ONLY:-}" ]; then
-    grep -e '[:alpha:]' -e '::'
+    grep -e '[:alpha:]' -e ':'
 else
     cat
 fi
