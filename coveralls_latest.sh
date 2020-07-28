@@ -14,10 +14,14 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="user/repo [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/git.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -32,14 +36,9 @@ eg.
 coveralls_latest.sh HariSekhon/pylib
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
-# shellcheck disable=SC1090
-. "$srcdir/.bash.d/git.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="user/repo [<curl_options>]"
 
 help_usage "$@"
 
