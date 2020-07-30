@@ -469,6 +469,10 @@ function! WriteRun()
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
         :! eval go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
+    " doesn't work, probably due to no first class support so just get file extension
+    "elseif &filetype == 'tf'
+    elseif expand('%:e') == 'tf'
+        :call TerraformPlan()
     elseif expand('%:t') == 'Makefile'
         :call Make()
     elseif expand('%:t') == 'Dockerfile'
@@ -493,6 +497,16 @@ function! Make()
     " '%:p:h' is dirname
     :! bash -c 'cd "%:p:h" && make'
 endfunction
+
+function! TerraformPlan()
+    " '%:p:h' is dirname
+    :! bash -c 'cd "%:p:h" && terraform plan'
+endfunction
+
+"function! TerraformApply()
+"    " '%:p:h' is dirname
+"    :! bash -c 'cd "%:p:h" && terraform apply'
+"endfunction
 
 
 " ============================================================================ "

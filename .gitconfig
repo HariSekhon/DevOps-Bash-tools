@@ -28,19 +28,33 @@
     default = simple
 
 [alias]
-    br = branch
-    co = checkout
-    ci = commit
-    p = push
-    st = status
+	who = config --get user.email
+    co  = checkout
+    ci  = commit
+    p   = push
+    st  = status
+    br  = branch
+    ba  = branch -a
+    bav = branch -a -vvv
+    cp  = cherry-pick
+    ls  = ls-files
 
-    # Show verbose output about tags, branches or remotes
-    tags = tag -l
+    rem      = remote -v
+    remotes  = remote -v
+    tags     = tag -l
     branches = branch -a
-    remotes = remote -v
+
+    in      = log HEAD..FETCH_HEAD
+    out     = log FETCH_HEAD..HEAD
+	age     = for-each-ref --format '%(authordate:iso) %(refname:short)' --sort=-authordate refs/remotes refs/heads
 
     unstage = reset HEAD --
     last = log -1 HEAD
+
+    # Show files ignored by git:
+    ign = ls-files -o -i --exclude-standard
+    ignored = !git clean -ndX | sed -e 's/^Would remove //' | sed 's/^Would skip repository //'
+	untracked = ls-files --others --exclude-standard
 
     # how to use commands inside git aliases
     visual = !gitk
@@ -50,13 +64,19 @@
     lg = log -p
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-    ls = ls-files
-
-    # Show files ignored by git:
-    ign = ls-files -o -i --exclude-standard
 
     # avoid diff-so-fancy so we can create patches
     patch = !git --no-pager diff --no-color
+
+    #ffm     = merge --ff-only
+    #ffp     = pull --ff-only
+	#fp      = fetch --prune
+
+	#mp      = merge --no-commit --no-ff
+	#ma      = merge --abort
+	#dno     = diff --name-only
+	#gone    = !git branch -vv | grep ': gone'
+	#gd      = !git branch -vv | awk '/: gone/ {print $1}' | xargs --no-run-if-empty -n1 git branch -D
 
 [help]
     # autocorrects git commands and executes the inferred command
