@@ -50,7 +50,7 @@ usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
 
-if [ -n "${SPOTIFY_PRIVATE_ONLY:-1}" ]; then
+if [ -n "${SPOTIFY_PRIVATE_ONLY:-}" ]; then
     export SPOTIFY_PRIVATE=1
 fi
 
