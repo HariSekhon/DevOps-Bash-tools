@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2230
+# shellcheck disable=SC2230,SC2139
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -160,7 +160,7 @@ alias ht='headtail.py'
 # ============================================================================ #
 
 export github=~/github
-alias github='cd $github';
+alias github="sti github; cd $github";
 
 export bitbucket=~/bitbucket
 # clashes with bitbucket-cli
