@@ -28,6 +28,7 @@ SELECT
   -- using greatest() to avoid divide by zero error, by ensuring we divide by at least 1
     shared_blks_hit /
     GREATEST((shared_blks_hit + shared_blks_read), 1)::float AS shared_blks_hit_ratio,
+    -- casting divisor to float to avoid getting integer maths returning zeros instead of fractional ratios
   local_blks_hit,
   local_blks_read,
     local_blks_hit /
