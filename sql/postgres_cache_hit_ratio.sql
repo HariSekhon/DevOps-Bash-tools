@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL Cache-hit ratio (should be closer to 1, eg. 0.99)
+-- PostgreSQL Tables Cache-hit ratio (should be closer to 1, eg. 0.99)
 
 SELECT
   SUM(heap_blks_read) AS heap_read,
@@ -21,4 +21,5 @@ SELECT
             SUM(heap_blks_hit) /
   (SUM(heap_blks_hit) + SUM(heap_blks_read))
                 AS ratio
-FROM pg_statio_user_tables;
+FROM
+  pg_statio_user_tables;
