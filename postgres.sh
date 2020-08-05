@@ -50,8 +50,9 @@ if ! docker ps -qf name=postgres | grep -q .; then
     docker run -d -ti \
                --name "$container_name" \
                -e POSTGRES_PASSWORD="$password" \
-               -v "$srcdir:/code" \
+               -v "$srcdir:/bash" \
                -v "$srcdir/sql:/sql" \
+               -v "$HOME/github:/github" \
                -v "$PWD:/pwd" \
                -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
                postgres \
@@ -68,8 +69,9 @@ if ! docker ps -qf name=postgres | grep -q .; then
 fi
 
 cat <<EOF
-SQL scripts are found in /sql
-Repo code is found in /code
+SQL  scripts are mounted at /sql
+Bash scripts are mounted at /bash
+\$HOME/github  is mounted at /github
 
 To source a SQL script, do:
 
