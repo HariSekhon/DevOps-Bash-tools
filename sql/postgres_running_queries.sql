@@ -2,7 +2,7 @@
 --  Author: Hari Sekhon
 --  Date: 2020-08-05 12:54:34 +0100 (Wed, 05 Aug 2020)
 --
---  vim:ts=4:sts=4:sw=4:et
+--  vim:ts=2:sts=2:sw=2:et:filetype=sql
 --
 --  https://github.com/harisekhon/bash-tools
 --
@@ -15,11 +15,16 @@
 
 -- Running queries for PostgreSQL >= 9.2
 
-SELECT pid,
-       age(clock_timestamp(), query_start),
-       usename,
-       query
-FROM pg_stat_activity
-WHERE query != '<IDLE>'
-  AND query NOT ILIKE '%pg_stat_activity%'
-ORDER BY query_start desc;
+SELECT
+  pid,
+  age(clock_timestamp(), query_start),
+  usename,
+  query
+FROM
+  pg_stat_activity
+WHERE
+  query != '<IDLE>'
+    AND
+  query NOT ILIKE '%pg_stat_activity%'
+ORDER BY
+  query_start DESC;
