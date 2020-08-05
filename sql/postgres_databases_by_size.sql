@@ -2,7 +2,7 @@
 --  Author: Hari Sekhon
 --  Date: 2020-08-05 14:54:12 +0100 (Wed, 05 Aug 2020)
 --
---  vim:ts=4:sts=4:sw=4:et
+--  vim:ts=2:sts=2:sw=2:et:filetype=sql
 --
 --  https://github.com/harisekhon/bash-tools
 --
@@ -15,7 +15,10 @@
 
 -- List PostgreSQL databases by size descending
 
-SELECT datname,
-       pg_size_pretty(pg_database_size(datname))
-FROM pg_database
-ORDER BY pg_database_size(datname) DESC;
+SELECT
+  datname,
+  pg_size_pretty(pg_database_size(datname))
+FROM
+  pg_database
+ORDER
+  BY pg_database_size(datname) DESC;
