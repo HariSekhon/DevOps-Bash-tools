@@ -16,6 +16,8 @@
 -- PostgreSQL Indexes Cache-hit Ratio
 --
 -- should be closer to 1, eg. 0.99
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   SUM(idx_blks_read) AS idx_read,
