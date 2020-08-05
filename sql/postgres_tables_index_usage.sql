@@ -26,6 +26,6 @@ FROM
 WHERE
   seq_scan + idx_scan > 0
 ORDER BY
-  n_live_tup,
+  rows_in_table,
   percent_of_times_index_used
 DESC;
