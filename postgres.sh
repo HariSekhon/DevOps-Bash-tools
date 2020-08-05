@@ -77,6 +77,8 @@ To source a SQL script, do:
 
 \i /sql/<file>.sql
 
+\! to get to shell command line
+
 EOF
 
 docker exec -ti postgres psql -U postgres
