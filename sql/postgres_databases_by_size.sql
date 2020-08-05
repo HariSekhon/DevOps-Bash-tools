@@ -14,6 +14,8 @@
 --
 
 -- List PostgreSQL databases by size descending
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   datname,
