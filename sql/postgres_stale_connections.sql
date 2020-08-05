@@ -15,6 +15,10 @@
 
 -- List PostgreSQL stale connections that have been idle > 10 mins
 --
+-- Can be used to kill connections using the pids returned, eg.
+--
+-- SELECT pg_terminate_backend(pid)
+--
 -- Tested on PostgreSQL 12.3
 
 SELECT
