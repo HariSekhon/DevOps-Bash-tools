@@ -18,8 +18,8 @@
 -- should be closer to 1, eg. 0.99
 
 SELECT
-  SUM(heap_blks_read) AS heap_read,
-  SUM(heap_blks_hit)  AS heap_hit,
+  SUM(heap_blks_read) AS heap_blks_read,
+  SUM(heap_blks_hit)  AS heap_blks_hit,
             SUM(heap_blks_hit) /
   (SUM(heap_blks_hit) + SUM(heap_blks_read))
                 AS ratio
