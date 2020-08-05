@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL vacuum info for tables with dead tuples
+-- PostgreSQL vacuum info for tables with deleted rows
 
 SELECT
   schemaname,
