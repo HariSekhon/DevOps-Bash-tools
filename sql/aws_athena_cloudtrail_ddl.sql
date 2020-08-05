@@ -1,3 +1,4 @@
+--  vim:ts=4:sts=4:sw=4:et:filetype=sql
 --
 --  Author: Hari Sekhon
 --  Date: 2020-01-01 15:38:58 +0000 (Wed, 01 Jan 2020)
