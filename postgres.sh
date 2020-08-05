@@ -75,6 +75,7 @@ fi
 cat <<EOF
 SQL  scripts are mounted at /sql
 Bash scripts are mounted at /bash
+\$PWD          is mounted at /pwd
 \$HOME/github  is mounted at /github
 
 To source a SQL script, do:
