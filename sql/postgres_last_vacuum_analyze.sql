@@ -27,4 +27,6 @@ SELECT
   autovacuum_count,
   analyze_count,
   autoanalyze_count
-FROM pg_stat_user_tables;
+FROM pg_stat_user_tables
+ORDER BY
+  n_mod_since_analyze DESC;
