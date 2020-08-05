@@ -2,7 +2,7 @@
 --  Author: Hari Sekhon
 --  Date: 2020-02-02 00:37:06 +0000 (Sun, 02 Feb 2020)
 --
---  vim:ts=2:sts=2:sw=2:et
+--  vim:ts=2:sts=2:sw=2:et:filetype=sql
 --
 --  https://github.com/harisekhon/bash-tools
 --
@@ -14,7 +14,7 @@
 --
 
 -- BigQuery Billing Query - most frequently used products costing more than 1 dollar
---
+
 SELECT
   product,
   COUNT(*) AS billing_records
