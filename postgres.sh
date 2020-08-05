@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Boots a quick postgres Docker container and drops you in to the 'psql' shell
+Boots a quick PostgreSQL docker container and drops you in to the 'psql' shell
 
-Docker automatic mount points inside the container:
+Automatically createst shared bind mount points inside the container for convenience:
 
 sql   => /sql
 repo  => /code
