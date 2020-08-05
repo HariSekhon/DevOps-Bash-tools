@@ -14,6 +14,8 @@
 --
 
 -- PostgreSQL vacuum info for tables with deleted rows
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   schemaname,
