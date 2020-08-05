@@ -14,6 +14,8 @@
 --
 
 -- PostgreSQL vacuum and analyze info
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   schemaname,
