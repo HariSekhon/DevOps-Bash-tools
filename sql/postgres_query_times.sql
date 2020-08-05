@@ -28,5 +28,8 @@ SELECT
   query
 FROM
   pg_stat_statements
-ORDER BY average_secs DESC
+ORDER BY
+  average_secs DESC,
+  calls DESC,
+  rows DESC
 LIMIT 100;
