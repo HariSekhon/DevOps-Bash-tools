@@ -22,6 +22,7 @@ CREATE extension pg_stat_statements;
 
 SELECT
   calls,
+  rows,
   (total_time / 1000) AS total_secs,
   (total_time / calls) AS average_secs,
   query
