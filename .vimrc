@@ -321,7 +321,7 @@ nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%"'<CR>
 nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
 nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull'<CR>
 nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push'<CR>
-nmap <silent> ;u :w<CR> :!urlview "%"<CR>
+nmap <silent> ;u :w<CR> :! grep -v harisekhon "%" \| urlview <CR>
 " pass current line as stdin to urlview to quickly go to this url
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 nmap <silent> ;U :.w !urlview<CR> :!reset<CR><CR>
