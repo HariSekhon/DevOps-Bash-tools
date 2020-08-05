@@ -16,6 +16,8 @@
 -- PostgreSQL % of times indexes are used on tables by table size descending (might want to tweak to list by % descending)
 --
 -- If not near 99% index usage on tables > 10,000 rows, consider adding an index to match your query patterns (CREATE INDEX CONCURRENTLY in prod to avoid locking table)
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   relname AS table,
