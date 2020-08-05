@@ -20,7 +20,7 @@ SELECT
   relname,
   n_live_tup,
   n_dead_tup,
-  n_dead_tup / greatest(n_live_tup + n_dead_tup, 1)::float * 100 AS dead_percentage,
+  n_dead_tup / GREATEST(n_live_tup + n_dead_tup, 1)::float * 100 AS dead_percentage,
   n_mod_since_analyze,
   last_vacuum,
   last_autovacuum,
