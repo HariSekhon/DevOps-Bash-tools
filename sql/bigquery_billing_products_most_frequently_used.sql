@@ -14,6 +14,7 @@
 --
 
 -- BigQuery Billing Query - most frequently used products costing more than 1 dollar
+--
 SELECT
   product,
   COUNT(*) AS billing_records
