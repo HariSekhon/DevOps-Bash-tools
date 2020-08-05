@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL databases by size (only ones you can access)
+-- PostgreSQL databases by size descending (only ones you can access)
 --
 -- Tested on PostgreSQL 12.3
 
