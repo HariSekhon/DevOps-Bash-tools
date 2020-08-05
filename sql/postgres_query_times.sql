@@ -13,7 +13,9 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL query times from pg_stat_statement
+-- PostgreSQL query times from pg_stat_statements
+--
+-- Tested on PostgreSQL 12.3
 
 -- postgresql.conf needs before start:
 -- shared_preload_libraries = 'pg_stat_statements'
