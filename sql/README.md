@@ -7,7 +7,8 @@ SQL Scripts
 
 You can quickly test these PostgreSQL scripts using `postgres.sh` which boots a docker container and drops in to `psql` shell with this directory mounted at `/sql` for easy sourcing eg. `\i /sql/postgres_query_times.sql`
 
-See Also:
+#### See Also:
 
-`sqlcase.pl` in the [DevOps Perl tools](https://github.com/harisekhon/devops-perl-tools) repo - autocases your SQL code (I use this a lot and call it via hotkey configured in the `.vimrc` at the top level)
-  - there are specializations of this for most of the major SQL RDBMS and distributed SQL systems using their specific language keywords
+`sqlcase.pl` in the [DevOps Perl tools](https://github.com/harisekhon/devops-perl-tools) repo - autocases your SQL code
+  - I use this a lot and call it via hotkey configured in my [.vimrc](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.vimrc)
+  - there are specializations for most of the major SQL, RDBMS and distributed SQL systems using their specific language keywords
