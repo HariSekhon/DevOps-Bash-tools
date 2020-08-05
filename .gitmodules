@@ -1,0 +1,6 @@
+[submodule "SQL"]
+	path = SQL
+	url = https://github.com/HariSekhon/SQL
+[submodule "sql"]
+	path = sql
+	url = https://github.com/HariSekhon/SQL
