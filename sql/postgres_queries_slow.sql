@@ -16,6 +16,8 @@
 -- PostgreSQL queries currently executing that have taken over 30 secs
 --
 -- a current snapshot alternative to slow query log
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   now() - query_start as "runtime",
