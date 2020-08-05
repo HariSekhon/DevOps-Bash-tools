@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://hub.docker.com/_/postgres
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
