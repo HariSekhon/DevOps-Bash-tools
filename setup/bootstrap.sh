@@ -31,7 +31,9 @@ directory="bash-tools"
 
 if [ "$(uname -s)" = Darwin ]; then
     echo "Bootstrapping Mac"
-    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+    if ! type brew >/dev/null 2>&1; then
+        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+    fi
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
     if type apk >/dev/null 2>&1; then
