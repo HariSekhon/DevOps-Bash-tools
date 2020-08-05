@@ -15,7 +15,7 @@
 
 -- PostgreSQL Tables Cache-hit Ratio
 --
--- should be closer to 1, eg. 0.99
+-- should be closer to 1, eg. 0.99, at least 0.90
 
 SELECT
   SUM(heap_blks_read) AS heap_blks_read,
