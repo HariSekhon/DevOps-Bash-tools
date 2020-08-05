@@ -2,7 +2,7 @@
 --  Author: Hari Sekhon
 --  Date: 2020-08-05 14:57:37 +0100 (Wed, 05 Aug 2020)
 --
---  vim:ts=4:sts=4:sw=4:et
+--  vim:ts=2:sts=2:sw=2:et:filetype=sql
 --
 --  https://github.com/harisekhon/bash-tools
 --
@@ -15,9 +15,10 @@
 
 -- PostgreSQL Cache-hit ratio (should be closer to 1, eg. 0.99)
 
-SELECT SUM(heap_blks_read) AS heap_read,
-       SUM(heap_blks_hit)  AS heap_hit,
-              SUM(heap_blks_hit) /
-    (SUM(heap_blks_hit) + SUM(heap_blks_read))
-                     AS ratio
+SELECT
+  SUM(heap_blks_read) AS heap_read,
+  SUM(heap_blks_hit)  AS heap_hit,
+            SUM(heap_blks_hit) /
+  (SUM(heap_blks_hit) + SUM(heap_blks_read))
+                AS ratio
 FROM pg_statio_user_tables;
