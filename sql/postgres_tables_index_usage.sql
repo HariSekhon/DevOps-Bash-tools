@@ -26,6 +26,5 @@ FROM
 WHERE
   seq_scan + idx_scan > 0
 ORDER BY
-  rows_in_table,
-  percent_of_times_index_used
-DESC;
+  rows_in_table DESC,
+  percent_of_times_index_used DESC;
