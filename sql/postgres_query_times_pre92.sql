@@ -13,7 +13,9 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL query times from pg_stat_statement for PostgreSQL <= 9.4
+-- PostgreSQL query times from pg_stat_statements for PostgreSQL <= 9.4
+--
+-- Tested on PostgreSQL 12.3, should work on old version <= 9.4 too
 
 -- postgresql.conf needs before start:
 -- shared_preload_libraries = 'pg_stat_statements'
