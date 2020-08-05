@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL vacuum info for tables with deleted rows
+-- PostgreSQL Vacuum info for tables with deleted rows
 --
 -- Tested on PostgreSQL 12.3
 
