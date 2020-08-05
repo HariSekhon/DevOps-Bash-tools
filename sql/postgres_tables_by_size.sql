@@ -18,7 +18,9 @@
 -- Tested on PostgreSQL 12.3
 
 SELECT
-	nspname || '.' || relname AS relation,
+	--nspname || '.' || relname AS relation,
+  nspname,
+  relname,
   pg_size_pretty(pg_total_relation_size(C.oid)) AS total_size
 FROM
  	pg_class C
