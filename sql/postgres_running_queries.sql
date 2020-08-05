@@ -14,6 +14,8 @@
 --
 
 -- Running queries for PostgreSQL >= 9.2
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   pid,
