@@ -14,6 +14,8 @@
 --
 
 -- PostgreSQL tables by size, excluding catalog and information schema
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
 	nspname || '.' || relname AS relation,
