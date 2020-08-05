@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL vacuum and analyze info
+-- PostgreSQL Vacuum and Analyze info
 --
 -- Tested on PostgreSQL 12.3
 
