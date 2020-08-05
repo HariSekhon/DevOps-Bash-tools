@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- PostgreSQL analyze info for tables with rows modified since last analyze
+-- PostgreSQL Analyze info for tables with rows modified since last analyze
 --
 -- Tested on PostgreSQL 12.3
 
