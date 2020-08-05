@@ -23,9 +23,9 @@ CREATE extension pg_stat_statements;
 SELECT
   calls,
   rows,
-  ROUND((total_time / 1000)::numeric, 4) AS total_secs,
+  ROUND((total_time::numeric / 1000), 4) AS total_secs,
   -- newer versions of PostgreSQL have mean_time field, but we have to calculate on PostgreSQL <= 9.4
-  ROUND((total_time / 1000 / calls)::numeric, 4) AS average_secs,
+  ROUND((total_time::numeric / 1000 / calls), 4) AS average_secs,
   query
 FROM
   pg_stat_statements
