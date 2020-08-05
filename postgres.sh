@@ -53,7 +53,9 @@ if ! docker ps -qf name=postgres | grep -q .; then
                -v "$srcdir:/code" \
                -v "$srcdir/sql:/sql" \
                -v "$PWD:/pwd" \
-               postgres
+               -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
+               postgres \
+                    -c 'config_file=/etc/postgresql/postgresql.conf'
 
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     while true; do
