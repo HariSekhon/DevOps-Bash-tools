@@ -48,6 +48,11 @@ version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
+sql_scripts="$srcdir/sql"
+if [ -d "$srcdir/../sql" ]; then
+    sql_scripts="$srcdir/../sql"
+fi
+
 if ! docker ps -qf name=postgres | grep -q .; then
     timestamp 'booting postgres container:'
     docker run -d -ti \
@@ -55,7 +60,7 @@ if ! docker ps -qf name=postgres | grep -q .; then
                -p 5432:5432 \
                -e POSTGRES_PASSWORD="$password" \
                -v "$srcdir:/bash" \
-               -v "$srcdir/sql:/sql" \
+               -v "$sql_scripts:/sql" \
                -v "$HOME/github:/github" \
                -v "$PWD:/pwd" \
                -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
@@ -64,7 +69,7 @@ if ! docker ps -qf name=postgres | grep -q .; then
 
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     while true; do
-        if docker logs --tail 10 "$container_name" | grep 'ready to accept connections'; then
+        if [ "$(docker logs "$container_name" | grep -c 'ready to accept connections')" -gt 1 ]; then
             break
         fi
         sleep 0.1
