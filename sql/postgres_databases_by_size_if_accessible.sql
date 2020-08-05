@@ -14,6 +14,8 @@
 --
 
 -- PostgreSQL databases by size (only ones you can access)
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
 	d.datname AS Name,
