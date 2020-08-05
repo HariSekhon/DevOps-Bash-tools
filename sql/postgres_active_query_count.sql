@@ -15,7 +15,7 @@
 
 -- PostgreSQL number of active queries
 --
--- should be <= CPU Cores, otherwise upgrade/scale
+-- if consistently > CPU Cores, then upgrade/scale
 
 SELECT
   COUNT(*) as active_query_count
