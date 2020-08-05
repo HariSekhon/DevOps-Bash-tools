@@ -42,6 +42,7 @@ usage_args=""
 help_usage "$@"
 
 container_name=postgres
+version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
@@ -49,13 +50,14 @@ if ! docker ps -qf name=postgres | grep -q .; then
     timestamp 'booting postgres container:'
     docker run -d -ti \
                --name "$container_name" \
+               -p 5432:5432 \
                -e POSTGRES_PASSWORD="$password" \
                -v "$srcdir:/bash" \
                -v "$srcdir/sql:/sql" \
                -v "$HOME/github:/github" \
                -v "$PWD:/pwd" \
                -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
-               postgres \
+               postgres:"$version" \
                     -c 'config_file=/etc/postgresql/postgresql.conf'
 
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
