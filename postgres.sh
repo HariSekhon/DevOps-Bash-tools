@@ -22,7 +22,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Boots a quick postgres docker container and drops you in to the psql shell
+Boots a quick postgres Docker container and drops you in to the 'psql' shell
+
+Docker automatic mount points inside the container:
+
+sql   => /sql
+repo  => /code
+\$PWD => /pwd
+
+You can quickly test scripts via include, eg.
+
+\i /sql/postgres_running_queries.sql
 "
 
 # used by usage() in lib/utils.sh
@@ -37,7 +47,13 @@ password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
 if ! docker ps -qf name=postgres | grep -q .; then
     timestamp 'booting postgres container:'
-    docker run -d -ti --name "$container_name" -e POSTGRES_PASSWORD="$password" postgres
+    docker run -d -ti \
+               --name "$container_name" \
+               -e POSTGRES_PASSWORD="$password" \
+               -v "$srcdir:/code" \
+               -v "$srcdir/sql:/sql" \
+               -v "$PWD:/pwd" \
+               postgres
 
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     while true; do
@@ -48,6 +64,16 @@ if ! docker ps -qf name=postgres | grep -q .; then
     done
     echo
 fi
+
+cat <<EOF
+SQL scripts are found in /sql
+Repo code is found in /code
+
+To source a SQL script, do:
+
+\i /sql/<file>.sql
+
+EOF
 
 docker exec -ti postgres psql -U postgres
 
