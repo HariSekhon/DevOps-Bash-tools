@@ -48,6 +48,11 @@ version="${MYSQL_VERSION:-latest}"
 
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 
+sql_scripts="$srcdir/sql"
+if [ -d "$srcdir/../sql" ]; then
+    sql_scripts="$srcdir/../sql"
+fi
+
 if ! docker ps -qf name=mysql | grep -q .; then
     timestamp 'booting MySQL container:'
     docker run -d -ti \
@@ -55,7 +60,7 @@ if ! docker ps -qf name=mysql | grep -q .; then
                -p 3306:3306 \
                -e MYSQL_ROOT_PASSWORD="$password" \
                -v "$srcdir:/bash" \
-               -v "$srcdir/sql:/sql" \
+               -v "$sql_scripts:/sql" \
                -v "$HOME/github:/github" \
                -v "$PWD:/pwd" \
                mysql:"$version"
@@ -63,7 +68,7 @@ if ! docker ps -qf name=mysql | grep -q .; then
 
     timestamp 'waiting for mysql to be ready to accept connections before connecting to mysql shell...'
     while true; do
-        if docker logs --tail 10 "$container_name" | grep 'mysqld.*ready to accept connections'; then
+        if [ "$(docker logs "$container_name" | grep -c 'mysqld.*ready to accept connections')" -gt 1 ]; then
             break
         fi
         sleep 0.5
