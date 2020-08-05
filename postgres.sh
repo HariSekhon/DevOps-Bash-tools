@@ -93,5 +93,7 @@ EOF
 
 docker exec -ti postgres psql -U postgres
 
-# not cleaning up the postgres container by default in case we want to maintain state for testing
-#docker rm -f postgres
+if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
+    echo "last session closing, deleting container:"
+    docker rm -f postgres
+fi
