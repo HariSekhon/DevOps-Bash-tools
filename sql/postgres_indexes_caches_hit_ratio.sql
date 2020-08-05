@@ -20,8 +20,8 @@
 SELECT
   SUM(idx_blks_read) AS idx_read,
   SUM(idx_blks_hit)  AS idx_hit,
-  (SUM(idx_blks_hit) - SUM(idx_blks_read)) /
-					SUM(idx_blks_hit)
+					SUM(idx_blks_hit) /
+  (SUM(idx_blks_hit) + SUM(idx_blks_read))::float
 							AS ratio
 FROM
   pg_statio_user_indexes;
