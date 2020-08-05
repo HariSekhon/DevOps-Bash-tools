@@ -22,6 +22,7 @@ SELECT
   last_autovacuum,
   last_analyze,
   last_autoanalyze,
+  n_dead_tup,
   n_mod_since_analyze,
   vacuum_count,
   autovacuum_count,
@@ -29,4 +30,5 @@ SELECT
   autoanalyze_count
 FROM pg_stat_user_tables
 ORDER BY
+  n_dead_tup DESC,
   n_mod_since_analyze DESC;
