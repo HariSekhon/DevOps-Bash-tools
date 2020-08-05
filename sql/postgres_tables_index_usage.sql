@@ -2,7 +2,7 @@
 --  Author: Hari Sekhon
 --  Date: 2020-08-05 15:08:23 +0100 (Wed, 05 Aug 2020)
 --
---  vim:ts=4:sts=4:sw=4:et
+--  vim:ts=2:sts=2:sw=2:et:filetype=sql
 --
 --  https://github.com/harisekhon/bash-tools
 --
