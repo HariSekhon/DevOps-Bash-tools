@@ -24,6 +24,4 @@ SELECT
 					SUM(idx_blks_hit)
 							AS ratio
 FROM
-  pg_statio_user_indexes
-ORDER BY
-  ratio DESC;
+  pg_statio_user_indexes;
