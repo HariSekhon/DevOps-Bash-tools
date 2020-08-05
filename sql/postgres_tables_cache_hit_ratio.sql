@@ -23,7 +23,7 @@ SELECT
   SUM(heap_blks_read) AS heap_blks_read,
   SUM(heap_blks_hit)  AS heap_blks_hit,
             SUM(heap_blks_hit) /
-  (SUM(heap_blks_hit) + SUM(heap_blks_read))
+  (SUM(heap_blks_hit) + SUM(heap_blks_read))::float
                 AS ratio
 FROM
   pg_statio_user_tables;
