@@ -13,7 +13,7 @@
 --  https://www.linkedin.com/in/harisekhon
 --
 
--- List PostgreSQL databases by size descending
+-- PostgreSQL databases by size descending
 --
 -- Tested on PostgreSQL 12.3
 
