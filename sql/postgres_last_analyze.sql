@@ -14,6 +14,8 @@
 --
 
 -- PostgreSQL analyze info for tables with rows modified since last analyze
+--
+-- Tested on PostgreSQL 12.3
 
 SELECT
   schemaname,
