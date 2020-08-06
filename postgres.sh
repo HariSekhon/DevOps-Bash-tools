@@ -98,5 +98,5 @@ docker exec -ti postgres psql -U postgres
 
 if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
     echo "last session closing, deleting container:"
-    docker rm -f postgres
+    docker rm -f "$container_name"
 fi
