@@ -101,7 +101,7 @@ To source a SQL script, do:
 
 EOF
 
-docker exec -ti postgres psql -U postgres
+docker exec -ti -w /sql postgres psql -U postgres
 
 if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
     echo "last session closing, deleting container:"
