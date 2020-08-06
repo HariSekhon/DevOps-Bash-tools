@@ -35,6 +35,9 @@ repo  => /code
 You can quickly test scripts via include, eg.
 
 \i /sql/mysql_running_queries.sql
+
+Multiple invocations of this script will connect to the same MySQL container if already running
+and the last invocation of this script to exit from the mysql shell will delete that container
 "
 
 # used by usage() in lib/utils.sh
@@ -92,5 +95,7 @@ EOF
 
 docker exec -ti mysql mysql -u root -p"$password"
 
-# not cleaning up the mysql container by default in case we want to maintain state for testing
-#docker rm -f mysql
+if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
+    echo "last session closing, deleting container:"
+    docker rm -f "$container_name"
+fi
