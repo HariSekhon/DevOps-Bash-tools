@@ -69,12 +69,24 @@ if ! docker ps -qf name=mysql | grep -q .; then
                mysql:"$version"
                #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
 
-    timestamp 'waiting for mysql to be ready to accept connections before connecting mysql shell...'
+    tries=0
     while true; do
-        if docker logs --tail 10 "$container_name" | grep 'mysqld.*ready to accept connections'; then
+        ((tries+=1))
+        if [ $((tries % 5)) = 0 ]; then
+            timestamp 'waiting for mysql to be ready to accept connections before connecting mysql shell...'
+        fi
+        if docker logs --tail 10 "$container_name" |
+            grep -e 'mysqld.*ready for connections' \
+                 -e 'mysqld.*ready to accept connections'; then
             break
         fi
-        sleep 0.5
+        sleep 1
+        if [ $tries -gt 60 ]; then
+            echo "MySQL container failed to become ready for connections within reasonable time, check logs (format may have changed):"
+            echo
+            docker logs "$container_name"
+            exit 1
+        fi
     done
     echo
 fi
