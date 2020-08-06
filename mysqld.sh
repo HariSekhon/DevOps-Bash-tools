@@ -97,15 +97,20 @@ Bash scripts are mounted at /bash
 \$PWD          is mounted at /pwd
 \$HOME/github  is mounted at /github
 
-To source a SQL script, do:
+To source a SQL script::
 
 source /sql/<file>.sql
 
-\! bash     to get to shell command line
+\.     /sql/<file>.sql
+
+
+To get to shell command line:
+
+\! bash
 
 EOF
 
-docker exec -ti mysql mysql -u root -p"$password"
+docker exec -ti -w /sql mysql mysql -u root -p"$password"
 
 if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
 #if [ "$(pgrep -lf "bash.*${0##*/}" | grep -c .)" -lt 2 ]; then
