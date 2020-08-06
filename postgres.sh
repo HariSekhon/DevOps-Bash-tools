@@ -70,12 +70,22 @@ if ! docker ps -qf name=postgres | grep -q .; then
                postgres:"$version" \
                     -c 'config_file=/etc/postgresql/postgresql.conf'
 
-    timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
+    tries=0
     while true; do
+        ((tries+=1))
+        if [ $tries = 10 ]; then
+            timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
+        fi
         if [ "$(docker logs "$container_name" | grep -c 'ready to accept connections')" -gt 1 ]; then
             break
         fi
         sleep 0.1
+        if [ $tries -gt 200 ]; then
+            echo "PostgreSQL failed to become ready for connections within reasonable time, check logs (format may have changed):"
+            echo
+            docker logs "$container_name"
+            exit 1
+        fi
     done
     echo
 fi
