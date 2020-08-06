@@ -73,7 +73,7 @@ if ! docker ps -qf name=mysql | grep -q .; then
     while true; do
         ((tries+=1))
         if [ $((tries % 5)) = 0 ]; then
-            timestamp 'waiting for mysql to be ready to accept connections before connecting mysql shell...'
+            timestamp 'waiting for mysqld to be ready to accept connections before connecting mysql shell...'
         fi
         if docker logs --tail 10 "$container_name" |
             grep -e 'mysqld.*ready for connections' \
