@@ -36,8 +36,8 @@ You can quickly test scripts via include, eg.
 
 \i /sql/postgres_running_queries.sql
 
-Multiple invocations of this script will connect to the same Postgres instance if already running
-and the last invocation of this script to exit will delete that container
+Multiple invocations of this script will connect to the same Postgres container if already running
+and the last invocation of this script to exit from the psql shell will delete that container
 "
 
 # used by usage() in lib/utils.sh
