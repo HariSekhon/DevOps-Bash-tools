@@ -108,6 +108,8 @@ EOF
 docker exec -ti mysql mysql -u root -p"$password"
 
 if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
+#if [ "$(pgrep -lf "bash.*${0##*/}" | grep -c .)" -lt 2 ]; then
+#if [ "$(ps -ef | grep -c "[b]ash.*${0##*/}")" -lt 2 ]; then
     echo "last session closing, deleting container:"
     docker rm -f "$container_name"
 fi
