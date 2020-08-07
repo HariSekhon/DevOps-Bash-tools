@@ -22,22 +22,37 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/dbshell.sh"
+
+# defined in lib/dbshell.sh
+# shellcheck disable=SC2154
+shell_description="$sql_mount_description
+
+Source a sql script:
+
+\i /sql/postgres_info.sql
+
+
+Get shell access:
+
+\!
+
+
+List available SQL scripts:
+
+\! ls -l
+"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Boots a quick PostgreSQL docker container and drops you in to the 'psql' shell
 
-Automatically creates shared bind mount points inside the container for convenience:
-
-sql   => /sql
-repo  => /code
-\$PWD => /pwd
-
-You can quickly test scripts via include, eg.
-
-\i /sql/postgres_running_queries.sql
-
 Multiple invocations of this script will connect to the same Postgres container if already running
 and the last invocation of this script to exit from the psql shell will delete that container
+
+Automatically creates shared bind mount points from host to container for convenience:
+$shell_description
 "
 
 # used by usage() in lib/utils.sh
@@ -51,24 +66,19 @@ version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
-sql_scripts="$srcdir/sql"
-if [ -d "$srcdir/../sql" ]; then
-    sql_scripts="$srcdir/../sql"
-fi
-
 if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp 'booting postgres container:'
-    docker run -d -ti \
-               --name "$container_name" \
-               -p 5432:5432 \
-               -e POSTGRES_PASSWORD="$password" \
-               -v "$srcdir:/bash" \
-               -v "$sql_scripts:/sql" \
-               -v "$HOME/github:/github" \
-               -v "$PWD:/pwd" \
-               -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
-               postgres:"$version" \
-                    -c 'config_file=/etc/postgresql/postgresql.conf'
+    # defined in lib/dbshell.sh
+    # shellcheck disable=SC2154
+    eval docker run \
+        -d -ti \
+        --name "$container_name" \
+        -p 5432:5432 \
+        -e POSTGRES_PASSWORD="$password" \
+        "$docker_sql_mount_switches" \
+        -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
+        postgres:"$version" \
+        -c 'config_file=/etc/postgresql/postgresql.conf'
 
     SECONDS=0
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
@@ -88,22 +98,10 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
 fi
 
 cat <<EOF
-SQL  scripts are mounted at => /sql
-Bash scripts are mounted at => /bash
-\$PWD          is mounted at => /pwd
-\$HOME/github  is mounted at => /github
-
-To source a SQL script, do:
-
-\i /sql/<file>.sql
-
-\! to get to shell command line
+$shell_description
 
 EOF
 
-docker exec -ti -w /sql postgres psql -U postgres
+docker exec -ti -w /sql "$container_name" psql -U postgres
 
-if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
-    echo "last session closing, deleting container:"
-    docker rm -f "$container_name"
-fi
+docker_rm_when_last_connection "$0" "$container_name"
