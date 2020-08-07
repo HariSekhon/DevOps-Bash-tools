@@ -13,7 +13,9 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# helper script for calling from vim function to run programs with args extraction
+# Helper script for calling from vim function to run programs with args extraction
+#
+# Returns the value of the 'args:' header from the given file
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -26,6 +28,6 @@ set -euo pipefail
 
 # #  args: <output this bit>
 # // args: <output this bit>
-#sed -n '/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:/ s/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:[[:space:]]// p' "$@"
+#sed -n '/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:/ s/^[[:space:]]*\(#\|\/\/\)[[:space:]]*args:[[:space:]]// p' "$1"
 # or
-perl -ne 'if(/^\s*(#|\/\/)\s*args:/){s/^\s*(#|\/\/)\s*args:\s*//; print $_; exit}' "$@"
+perl -ne 'if(/^\s*(#|\/\/)\s*args:/){s/^\s*(#|\/\/)\s*args:\s*//; print $_; exit}' "$1"
