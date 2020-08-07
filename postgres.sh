@@ -61,13 +61,14 @@ usage_args=""
 
 help_usage "$@"
 
+docker_image=postgres
 container_name=postgres
 version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
 if ! docker ps -qf name="$container_name" | grep -q .; then
-    timestamp 'booting postgres container:'
+    timestamp "booting PostgreSQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
     eval docker run -d \
@@ -76,7 +77,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -e POSTGRES_PASSWORD="$password" \
         "$docker_sql_mount_switches" \
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
-        postgres:"$version" \
+        "$docker_image":"$version" \
         -c 'config_file=/etc/postgresql/postgresql.conf'
 
     SECONDS=0
