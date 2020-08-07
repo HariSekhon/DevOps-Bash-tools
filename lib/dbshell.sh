@@ -46,9 +46,11 @@ wait_for_mysql_ready(){
             timestamp 'waiting for mysqld to be ready to accept connections before connecting mysql shell...'
         fi
         if docker logs --tail 10 "$container_name" 2>&1 |
-            grep -e 'mysqld.*ready for connections' \
-                 -e 'mysqld.*ready to accept connections'; then
-            break
+            grep -q -e 'mysqld.*ready for connections' \
+                    -e 'mysqld.*ready to accept connections'; then
+            if docker logs --tail 50 "$container_name" 2>&1 | grep -i 'Entrypoint.*Ready'; then
+                break
+            fi
         fi
         sleep 1
         if [ $tries -gt 60 ]; then
