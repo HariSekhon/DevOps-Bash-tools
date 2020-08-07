@@ -61,6 +61,7 @@ usage_args=""
 
 help_usage "$@"
 
+docker_image=mysql
 container_name=mysql
 version="${MYSQL_VERSION:-latest}"
 
@@ -76,7 +77,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -p 3306:3306 \
         -e MYSQL_ROOT_PASSWORD="$password" \
         "$docker_sql_mount_switches" \
-        mysql:"$version"
+        "$docker_image":"$version"
         #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
 
     wait_for_mysql_ready "$container_name"
