@@ -68,7 +68,7 @@ version="${MYSQL_VERSION:-latest}"
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 
 if ! docker ps -qf name="$container_name" | grep -q .; then
-    timestamp 'booting MySQL container:'
+    timestamp "booting MySQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
     eval docker run -d \
