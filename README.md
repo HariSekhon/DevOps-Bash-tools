@@ -204,7 +204,7 @@ Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make 
 [BuildKite](https://buildkite.com),
 [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
 etc.
-- `sql/*.sql` - SQL scripts eg. [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries
+- [sql/](https://github.com/HariSekhon/SQL-scripts)*.sql` - useful SQL scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
 - `aws*.sh` - various [AWS](https://aws.amazon.com/) scripts for EC2 metadata, Spot Termination, SSM Parameter Store secret put from prompt, IAM Credential Reports on IAM users without MFA, old access keys and passwords, old user accounts that haven't logged in or used an access key recently, show password policy / set hardened password policy, show unattached IAM policies, show account summary to check various details including root account MFA enabled and no access keys, KMS keys rotation status, CloudTrail & Config status etc.
 - `gce*.sh` - [Google Cloud](https://cloud.google.com/) scripts for [GCE](https://cloud.google.com/compute/) metadata API and pre-emption
 - `curl_auth.sh` - wraps curl to send your username and password from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` which might otherwise expose your credentials in the process list or OS audit log files. Used by other API querying scripts
