@@ -48,7 +48,7 @@ wait_for_mysql_ready(){
         if docker logs --tail 10 "$container_name" 2>&1 |
             grep -q -e 'mysqld.*ready for connections' \
                     -e 'mysqld.*ready to accept connections'; then
-            if docker logs --tail 50 "$container_name" 2>&1 | grep -i 'Entrypoint.*Ready'; then
+            if docker logs --tail 50 "$container_name" 2>&1 | grep -qi 'Entrypoint.*Ready'; then
                 break
             fi
         fi
