@@ -71,8 +71,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp 'booting MySQL container:'
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
-    eval docker run \
-        -d -ti \
+    eval docker run -d \
         --name "$container_name" \
         -p 3306:3306 \
         -e MYSQL_ROOT_PASSWORD="$password" \
