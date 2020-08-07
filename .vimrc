@@ -347,6 +347,10 @@ if has("autocmd")
     au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
 endif
 
+if has("autocmd")
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; haproxy -f 10-global.cfg -f 20-stats.cfg -f "%"<CR>
+endif
+
 
 " ============================================================================ "
 "                               F u n c t i o n s
@@ -483,7 +487,11 @@ function! WriteRun()
             :! docker build "%:p:h"
         endif
     else
-        :! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
+        " this only works for scripts
+        ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
+        " but this now works for config files too which can have run headers
+        " instead of args headers
+        :! "$bash_tools/lib/run.sh" "%:p" 2>&1 | less
     endif
 endfunction
 
