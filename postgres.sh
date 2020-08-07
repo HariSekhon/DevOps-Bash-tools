@@ -82,7 +82,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     SECONDS=0
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     while true; do
-        if [ "$(docker logs "$container_name" | grep -c 'ready to accept connections')" -gt 1 ]; then
+        if [ "$(docker logs "$container_name" 2>/dev/null | grep -c 'ready to accept connections')" -ge 1 ]; then
             break
         fi
         sleep 0.1
