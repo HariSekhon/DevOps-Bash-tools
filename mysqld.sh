@@ -85,6 +85,7 @@ fi
 
 cat <<EOF
 $shell_description
+
 EOF
 
 docker exec -ti -w /sql "$container_name" mysql -u root -p"$password"
