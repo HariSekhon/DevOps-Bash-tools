@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Boots a quick MySQL docker container and drops you in to the 'mysql' shell
 
-Automatically createst shared bind mount points inside the container for convenience:
+Automatically creates shared bind mount points inside the container for convenience:
 
 sql   => /sql
 repo  => /code
@@ -56,7 +56,7 @@ if [ -d "$srcdir/../sql" ]; then
     sql_scripts="$srcdir/../sql"
 fi
 
-if ! docker ps -qf name=mysql | grep -q .; then
+if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp 'booting MySQL container:'
     docker run -d -ti \
                --name "$container_name" \
@@ -92,12 +92,12 @@ if ! docker ps -qf name=mysql | grep -q .; then
 fi
 
 cat <<EOF
-SQL  scripts are mounted at /sql
-Bash scripts are mounted at /bash
-\$PWD          is mounted at /pwd
-\$HOME/github  is mounted at /github
+SQL  scripts are mounted at => /sql
+Bash scripts are mounted at => /bash
+\$PWD          is mounted at => /pwd
+\$HOME/github  is mounted at => /github
 
-To source a SQL script::
+To source a SQL script, do:
 
 source /sql/<file>.sql
 
