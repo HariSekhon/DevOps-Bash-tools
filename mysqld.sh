@@ -110,7 +110,7 @@ To get to shell command line:
 
 EOF
 
-docker exec -ti -w /sql mysql mysql -u root -p"$password"
+docker exec -ti -w /sql "$container_name" mysql -u root -p"$password"
 
 if [ "$(lsof -lnt "$0" | grep -c .)" -lt 2 ]; then
 #if [ "$(pgrep -lf "bash.*${0##*/}" | grep -c .)" -lt 2 ]; then
