@@ -120,6 +120,7 @@ Contains:
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
   - `.bash.d/` - interactive library (huge)
   - `lib/` - scripting and CI library (heavily used by hundreds of scripts and builds)
+- [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 70+ scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
