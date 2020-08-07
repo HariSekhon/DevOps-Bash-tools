@@ -70,8 +70,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp 'booting postgres container:'
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
-    eval docker run \
-        -d -ti \
+    eval docker run -d \
         --name "$container_name" \
         -p 5432:5432 \
         -e POSTGRES_PASSWORD="$password" \
