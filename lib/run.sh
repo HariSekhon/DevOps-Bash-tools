@@ -13,11 +13,21 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# helper script for calling from vim function to run programs with args extraction
+# Helper script for calling from vim function to run programs or execute with args extraction
+#
+# Runs the value of the 'run:' header from the given file
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # #  run: <output this bit>
 # // run: <output this bit>
-eval "$(perl -ne 'if(/^\s*(#|\/\/)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$@")"
+run_cmd="$(perl -ne 'if(/^\s*(#|\/\/)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$1")"
+
+if [ -n "$run_cmd" ]; then
+    cd "$(dirname "$1")"
+    eval "$run_cmd"
+else
+    eval "$1" "$("$srcdir/args_extract.sh" "$1")"
+fi
