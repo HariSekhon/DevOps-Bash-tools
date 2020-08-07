@@ -21,13 +21,19 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+filename="$1"
+
 # #  run: <output this bit>
 # // run: <output this bit>
-run_cmd="$(perl -ne 'if(/^\s*(#|\/\/)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$1")"
+run_cmd="$(perl -ne 'if(/^\s*(#|\/\/)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$filename")"
 
 if [ -n "$run_cmd" ]; then
-    cd "$(dirname "$1")"
+    cd "$(dirname "$filename")"
     eval "$run_cmd"
 else
-    eval "$1" "$("$srcdir/args_extract.sh" "$1")"
+    if ! [ -x "$filename" ]; then
+        echo "ERROR: file '$filename' is not set executable!" >&2
+        exit 1
+    fi
+    eval "$filename" "$("$srcdir/args_extract.sh" "$filename")"
 fi
