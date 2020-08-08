@@ -70,7 +70,9 @@ password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 # ensures version is correct before we kill any existing test env to switch versions
 docker_pull "$docker_image:$version"
 
-if [ "$(docker ps --filter "name=$container_name" --format '{{.Image}}')" != "$docker_image:$version" ]; then
+docker_ps_image_version="$(docker ps --filter "name=$container_name" --format '{{.Image}}')"
+if [ -n "$docker_ps_image_version" ] &&
+   [ "$docker_ps_image_version" != "$docker_image:$version" ]; then
     MARIADB_RESTART=1
 fi
 
