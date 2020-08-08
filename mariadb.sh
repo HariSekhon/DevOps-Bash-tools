@@ -111,6 +111,10 @@ $shell_description
 
 EOF
 
+trap "echo ERROR; echo; echo; docker logs '$container_name'" EXIT
+
 docker exec -ti -w /sql "$container_name" mysql -u root -p"$password"
+
+untrap
 
 docker_rm_when_last_connection "$0" "$container_name"
