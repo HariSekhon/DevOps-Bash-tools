@@ -85,7 +85,7 @@ if docker_ps_not_running "name=$container_name"; then
 fi
 
 if [ -n "${MYSQL_RESTART:-}" ]; then
-    timestamp "killing existing container:"
+    timestamp "killing existing MySQL container:"
     docker rm -f "$container_name" 2>/dev/null || :
 fi
 
@@ -110,6 +110,10 @@ $shell_description
 
 EOF
 
+trap "echo ERROR; echo; echo; docker logs '$container_name'" EXIT
+
 docker exec -ti -w /sql "$container_name" mysql -u root -p"$password"
+
+untrap
 
 docker_rm_when_last_connection "$0" "$container_name"
