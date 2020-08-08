@@ -26,7 +26,7 @@ fi
 sql_mount_description="
 SQL  scripts     => /sql  <- session \$PWD for convenient sql sourcing
 Bash scripts     => /bash
-\$PWD             => /pwd
+host \$PWD        => /pwd
 \$HOME/github     => /github
 "
 
@@ -51,13 +51,13 @@ wait_for_mysql_ready(){
         if [ $((tries % 5)) = 0 ]; then
             timestamp 'waiting for mysqld to be ready to accept connections before connecting mysql shell...'
         fi
-        docker_logs="$(docker logs --tail "$num_lines" "$container_name" 2>&1)"
-        if grep -i -A "$num_lines" <<< "$docker_logs" \
-                -e 'Entrypoint.*Ready' \
-                -e 'MySQL init process done' |
-           grep -q \
-                -e 'mysqld.*ready for connections' \
-                -e 'mysqld.*ready to accept connections'; then
+        if docker logs --tail "$num_lines" "$container_name" 2>&1 |
+            grep -i -A "$num_lines" \
+                 -e 'Entrypoint.*Ready' \
+                 -e 'MySQL init process done' |
+            grep -q \
+                 -e 'mysqld.*ready for connections' \
+                 -e 'mysqld.*ready to accept connections'; then
             break
         fi
         sleep 1
