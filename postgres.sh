@@ -51,19 +51,22 @@ Boots a quick PostgreSQL docker container and drops you in to the 'psql' shell
 Multiple invocations of this script will connect to the same Postgres container if already running
 and the last invocation of this script to exit from the psql shell will delete that container
 
+An argument can be given to specify the docker tag version of PostgreSQL,
+or infers from the \$POSTGRES_VERSION environment variable if set, otherwise 'latest' is used
+
 Automatically creates shared bind mount points from host to container for convenience:
 $shell_description
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<version>]"
 
 help_usage "$@"
 
 docker_image=postgres
 container_name=postgres
-version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
+version="${1:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
