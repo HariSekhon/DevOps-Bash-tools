@@ -86,7 +86,7 @@ if docker_ps_not_running "name=$container_name"; then
 fi
 
 if [ -n "${MARIADB_RESTART:-}" ]; then
-    timestamp "killing existing container:"
+    timestamp "killing existing MariaDB container:"
     docker rm -f "$container_name" 2>/dev/null || :
 fi
 
