@@ -70,9 +70,15 @@ password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 # ensures version is correct before we kill any existing test env to switch versions
 docker_pull "$docker_image:$version"
 
+# kill existing if we have specified a different version than is running
 docker_ps_image_version="$(docker ps --filter "name=$container_name" --format '{{.Image}}')"
 if [ -n "$docker_ps_image_version" ] &&
    [ "$docker_ps_image_version" != "$docker_image:$version" ]; then
+    MARIADB_RESTART=1
+fi
+
+# remove existing non-running container so we can boot a new one
+if docker ps -a --filter "name=$container_name" --format '{{.Status}}' | grep -Eqi 'created|paused|dead' ; then
     MARIADB_RESTART=1
 fi
 
@@ -87,7 +93,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # shellcheck disable=SC2154
     eval docker run -d \
         --name "$container_name" \
-        -p 3306:3306 \
+        -p 3307:3306 \
         -e MYSQL_ROOT_PASSWORD="$password" \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version"
