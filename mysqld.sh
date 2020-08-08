@@ -51,7 +51,8 @@ Boots a quick MySQL docker container and drops you in to the 'mysql' shell
 Multiple invocations of this script will connect to the same MySQL container if already running
 and the last invocation of this script to exit from the mysql shell will delete that container
 
-An argument can be given to specify the docker tag version of MySQL, or \$MYSQL_VERSION, otherwise 'latest' is used
+An argument can be given to specify the docker tag version of MySQL,
+or infers from the \$MYSQL_VERSION environment variable if set, otherwise 'latest' is used
 
 Automatically creates shared bind mount points from host to container for convenience:
 $shell_description
