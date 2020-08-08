@@ -68,7 +68,7 @@ version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
 # ensures version is correct before we kill any existing test env to switch versions
-docker pull "$docker_image:$version"
+docker_pull "$docker_image:$version"
 
 if [ "$(docker ps --filter "name=$container_name" --format '{{.Image}}')" != "$docker_image:$version" ]; then
     POSTGRES_RESTART=1
