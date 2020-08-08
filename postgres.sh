@@ -76,6 +76,11 @@ if [ -n "$docker_ps_image_version" ] &&
     POSTGRES_RESTART=1
 fi
 
+# remove existing non-running container so we can boot a new one
+if docker_ps_not_running "$container_name"; then
+    POSTGRES_RESTART=1
+fi
+
 if [ -n "${POSTGRES_RESTART:-}" ]; then
     timestamp "killing existing container:"
     docker rm -f "$container_name" 2>/dev/null || :
