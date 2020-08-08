@@ -77,7 +77,7 @@ if [ -n "$docker_ps_image_version" ] &&
 fi
 
 # remove existing non-running container so we can boot a new one
-if docker_ps_not_running "$container_name"; then
+if docker_ps_not_running "name=$container_name"; then
     MYSQL_RESTART=1
 fi
 
