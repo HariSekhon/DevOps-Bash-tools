@@ -287,6 +287,11 @@ dockerhub_latest_version(){
     echo "$version"
 }
 
+docker_ps_not_running(){
+    local container_name="$1"
+    docker ps -a --filter "name=$container_name" --format '{{.Status}}' | grep -Eqi 'created|paused|dead'
+}
+
 docker_pull(){
     local docker_image="$1"
     local version
