@@ -68,7 +68,7 @@ version="${MYSQL_VERSION:-latest}"
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 
 # ensures version is correct before we kill any existing test env to switch versions
-docker pull "$docker_image:$version"
+docker_pull "$docker_image:$version"
 
 if [ "$(docker ps --filter "name=$container_name" --format '{{.Image}}')" != "$docker_image:$version" ]; then
     MYSQL_RESTART=1
