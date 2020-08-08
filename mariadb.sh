@@ -51,19 +51,22 @@ Boots a quick MariaDB docker container and drops you in to the 'mysql' shell
 Multiple invocations of this script will connect to the same MariaDB container if already running
 and the last invocation of this script to exit from the mysql shell will delete that container
 
+An argument can be given to specify the docker tag version of MariaDB,
+or infers from the \$MARIADB_VERSION environment variable if set, otherwise 'latest' is used
+
 Automatically creates shared bind mount points from host to container for convenience:
 $shell_description
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<version>]"
 
 help_usage "$@"
 
 docker_image=mariadb
 container_name=mariadb
-version="${MARIADB_VERSION:-latest}"
+version="${1:-${MARIADB_VERSION:-latest}}"
 
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 
