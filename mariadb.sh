@@ -67,6 +67,14 @@ version="${MARIADB_VERSION:-latest}"
 
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 
+if [ "$(docker ps --filter "name=$container_name" --format '{{.Image}}')" != "$docker_image:$version" ]; then
+    MARIADB_RESTART=1
+fi
+
+if [ -n "${MARIADB_RESTART:-}" ]; then
+    docker rm -f "$container_name" 2>/dev/null || :
+fi
+
 if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp "booting MariaDB container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
