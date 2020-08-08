@@ -75,6 +75,7 @@ if [ "$(docker ps --filter "name=$container_name" --format '{{.Image}}')" != "$d
 fi
 
 if [ -n "${MARIADB_RESTART:-}" ]; then
+    timestamp "killing existing container:"
     docker rm -f "$container_name" 2>/dev/null || :
 fi
 
