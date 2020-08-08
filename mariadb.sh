@@ -78,7 +78,7 @@ if [ -n "$docker_ps_image_version" ] &&
 fi
 
 # remove existing non-running container so we can boot a new one
-if docker ps -a --filter "name=$container_name" --format '{{.Status}}' | grep -Eqi 'created|paused|dead' ; then
+if docker_ps_not_running "name=$container_name"; then
     MARIADB_RESTART=1
 fi
 
