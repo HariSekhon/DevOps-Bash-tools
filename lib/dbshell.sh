@@ -37,20 +37,28 @@ docker_sql_mount_switches=" \
     -v '$PWD:/pwd' \
 "
 
+# MySQL 5.5 container
+#
+# MySQL init process done. Ready for start up.
+# ...
+# 200808 19:30:58 [Note] mysqld: ready for connections.
 wait_for_mysql_ready(){
     local container_name="$1"
-    tries=0
+    local tries=0
+    local num_lines=50
     while true; do
         ((tries+=1))
         if [ $((tries % 5)) = 0 ]; then
             timestamp 'waiting for mysqld to be ready to accept connections before connecting mysql shell...'
         fi
-        if docker logs --tail 10 "$container_name" 2>&1 |
-            grep -q -e 'mysqld.*ready for connections' \
-                    -e 'mysqld.*ready to accept connections'; then
-            if docker logs --tail 50 "$container_name" 2>&1 | grep -qi 'Entrypoint.*Ready'; then
-                break
-            fi
+        docker_logs="$(docker logs --tail "$num_lines" "$container_name" 2>&1)"
+        if grep -i -A "$num_lines" <<< "$docker_logs" \
+                -e 'Entrypoint.*Ready' \
+                -e 'MySQL init process done' |
+           grep -q \
+                -e 'mysqld.*ready for connections' \
+                -e 'mysqld.*ready to accept connections'; then
+            break
         fi
         sleep 1
         if [ $tries -gt 60 ]; then
