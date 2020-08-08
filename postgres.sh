@@ -67,6 +67,14 @@ version="${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
+if [ "$(docker ps --filter "name=$container_name" --format '{{.Image}}')" != "$docker_image:$version" ]; then
+    POSTGRES_RESTART=1
+fi
+
+if [ -n "${POSTGRES_RESTART:-}" ]; then
+    docker rm -f "$container_name" 2>/dev/null || :
+fi
+
 if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp "booting PostgreSQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
