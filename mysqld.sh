@@ -51,7 +51,7 @@ Boots a quick MySQL docker container and drops you in to the 'mysql' shell
 Multiple invocations of this script will connect to the same MySQL container if already running
 and the last invocation of this script to exit from the mysql shell will delete that container
 
-DB version can be specified using the first argument, or the \$MYSQL_VERSION environment variable,
+MySQL version can be specified using the first argument, or the \$MYSQL_VERSION environment variable,
 otherwise 'latest' is used
 
 Versions to use can be found from the following URL:
