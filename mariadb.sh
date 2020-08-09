@@ -120,9 +120,20 @@ $shell_description
 
 EOF
 
+# yes expand now
+# shellcheck disable=SC2064
 trap "echo ERROR; echo; echo; docker logs '$container_name'" EXIT
 
-docker exec -ti -w /sql "$container_name" mysql -u root -p"$password"
+# cd to /sql to make sourcing easier without /sql/ path prefix
+docker_exec_opts="-w /sql -i"
+
+# allow non-interactive piped automation eg.
+# for sql in mysql*.sql; do echo "source $sql"; done | DOCKER_NON_INTERACTIVE=1 mariadb.sh
+if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+    docker_exec_opts+=" -t"
+fi
+
+eval docker exec "$docker_exec_opts" "$container_name" mysql -u root -p"$password"
 
 untrap
 
