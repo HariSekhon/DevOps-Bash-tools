@@ -73,7 +73,7 @@ wait_for_mysql_ready(){
 docker_rm_when_last_connection(){
     local scriptname="$1"
     local container_name="$2"
-    [ -n "${DOCKER_NO_DELETE:-}" ] && return
+    [ -z "${DOCKER_NO_DELETE:-}" ] || return
     if [ "$(lsof -lnt "$scriptname" | grep -c .)" -lt 2 ]; then
     #if [ "$(pgrep -lf "bash.*${0##*/}" | grep -c .)" -lt 2 ]; then
     #if [ "$(ps -ef | grep -c "[b]ash.*${0##*/}")" -lt 2 ]; then
