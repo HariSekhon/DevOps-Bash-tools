@@ -31,10 +31,11 @@ Uses mysqld.sh to boot a mysql docker environment and pipe source statements in 
 
 Sources each script in MySQL in the order given
 
-If \$MYSQL_VERSIONS environment variable is set, then only tests against those versions,
-otherwise if dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo),
-then uses it to fetches the latest live list of version tags available from the dockerhub API,
-otherwise falls back to the following pre-set list of versions:
+Runs against a list of MySQL versions from the first of the following conditions:
+
+- If \$MYSQL_VERSIONS environment variable is set, then only tests against those versions in the order given
+- If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetches the latest live list of version tags available from the dockerhub API, newest first
+- Falls back to the following pre-set list of versions, newest first:
 
 $(tr ' ' '\n' <<< "$mysql_versions")
 "
@@ -52,7 +53,7 @@ for sql in "$@"; do
 done
 
 get_mysql_versions(){
-    if [ -n "${GET_TAGS:-}" ]; then
+    if [ -n "${GET_DOCKER_TAGS:-}" ]; then
         echo "checking if dockerhub_show_tags.py is available:" >&2
         echo
         if type -P dockerhub_show_tags.py 2>/dev/null; then
@@ -60,7 +61,7 @@ get_mysql_versions(){
             echo "dockerhub_show_tags.py found, executing to get latest list of MySQL docker version tags" >&2
             echo
             mysql_versions="$(dockerhub_show_tags.py mysql |
-                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' -e '^[[:space:]*latest[[:space:]]*$' |
                                 sed 's/[[:space:]]//g' |
                                 sort -u -t. -k1n -k2n)"
             echo "found MySQL versions:" >&2
@@ -76,7 +77,7 @@ if [ -n "${MYSQL_VERSIONS:-}" ]; then
     mysql_versions="${MYSQL_VERSIONS//,/ }"
     echo "using given MySQL versions:"
 else
-    mysql_versions="$(get_mysql_versions)"
+    mysql_versions="$(get_mysql_versions | tail -r)"
 fi
 
 tr ' ' '\n' <<< "$mysql_versions"
