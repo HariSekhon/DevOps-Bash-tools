@@ -51,8 +51,17 @@ Boots a quick PostgreSQL docker container and drops you in to the 'psql' shell
 Multiple invocations of this script will connect to the same Postgres container if already running
 and the last invocation of this script to exit from the psql shell will delete that container
 
-An argument can be given to specify the docker tag version of PostgreSQL,
-or infers from the \$POSTGRES_VERSION environment variable if set, otherwise 'latest' is used
+PostgresSQL version can be specified using the first argument, or the \$POSTGRES_VERSION environment variable,
+otherwise 'latest' is used
+
+Versions to use can be found from the following URL:
+
+https://hub.docker.com/_/postgres?tab=tags
+
+or programmatically on the command line (see DevOps Python tools repo):
+
+dockerhub_show_tags.py postgres
+
 
 Automatically creates shared bind mount points from host to container for convenience:
 $shell_description
