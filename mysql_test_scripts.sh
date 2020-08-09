@@ -85,12 +85,14 @@ tr ' ' '\n' <<< "$mysql_versions"
 echo
 
 for version in $mysql_versions; do
+    hr
     echo "Executing scripts against MySQL version '$version'": >&2
     echo >&2
     {
     echo 'SELECT VERSION();'
     for sql in "$@"; do
-        echo '\! printf "================================================================================\n"'
+        # comes out first, not between scripts
+        #echo '\! printf "================================================================================\n"'
         # no effect
         #echo
         # comes out first instead of with scripts
