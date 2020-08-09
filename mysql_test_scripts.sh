@@ -56,7 +56,10 @@ else
         echo
         echo "dockerhub_show_tags.py found, executing to get latest list of MySQL docker version tags"
         echo
-        mysql_versions="$(dockerhub_show_tags.py mysql | grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' | sort -u)"
+        mysql_versions="$(dockerhub_show_tags.py mysql |
+                          grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                          sed 's/[[:space:]]//g' |
+                          sort -u -t. -k1n -k2n)"
         echo
         echo "found MySQL versions:"
     else
