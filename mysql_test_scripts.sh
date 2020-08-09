@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  shellcheck disable=SC2028
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-09 10:42:23 +0100 (Sun, 09 Aug 2020)
@@ -46,31 +47,44 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+for sql in "$@"; do
+    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+done
+
+get_mysql_versions(){
+    if [ -n "${GET_TAGS:-}" ]; then
+        echo "checking if dockerhub_show_tags.py is available:" >&2
+        echo
+        if type -P dockerhub_show_tags.py 2>/dev/null; then
+            echo
+            echo "dockerhub_show_tags.py found, executing to get latest list of MySQL docker version tags" >&2
+            echo
+            mysql_versions="$(dockerhub_show_tags.py mysql |
+                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                                sed 's/[[:space:]]//g' |
+                                sort -u -t. -k1n -k2n)"
+            echo "found MySQL versions:" >&2
+            echo "$mysql_versions"
+            return
+        fi
+    fi
+    echo "using default list of MySQL versions to test against:" >&2
+    echo "$mysql_versions"
+}
+
 if [ -n "${MYSQL_VERSIONS:-}" ]; then
     mysql_versions="${MYSQL_VERSIONS//,/ }"
     echo "using given MySQL versions:"
 else
-    echo "checking if dockerhub_show_tags.py is available:"
-    echo
-    if type -P dockerhub_show_tags.py 2>/dev/null; then
-        echo
-        echo "dockerhub_show_tags.py found, executing to get latest list of MySQL docker version tags"
-        echo
-        mysql_versions="$(dockerhub_show_tags.py mysql |
-                          grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
-                          sed 's/[[:space:]]//g' |
-                          sort -u -t. -k1n -k2n)"
-        echo
-        echo "found MySQL versions:"
-    else
-        echo "using default list of MySQL versions to test against:"
-    fi
+    mysql_versions="$(get_mysql_versions)"
 fi
-echo
+
 tr ' ' '\n' <<< "$mysql_versions"
 echo
 
 for version in $mysql_versions; do
+    echo "Executing scripts against MySQL version $version": >&2
+    echo >&2
     {
     echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
