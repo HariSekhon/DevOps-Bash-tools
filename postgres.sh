@@ -136,7 +136,14 @@ EOF
 
 trap "echo ERROR; echo; echo; docker logs '$container_name'" EXIT
 
-docker exec -ti -w /sql "$container_name" psql -U postgres
+# cd to /sql to make sourcing easier without /sql/ path prefix
+docker_exec_opts="-w /sql -i"
+# this allows non-interactive piped automation eg.
+# for sql in postgres*.sql; do echo "\\i $sql"; done | DOCKER_NON_INTERACTIVE=1 postgres.sh
+if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+    docker_exec_opts+=" -t"
+fi
+eval docker exec "$docker_exec_opts" "\$container_name" psql -U postgres
 
 untrap
 
