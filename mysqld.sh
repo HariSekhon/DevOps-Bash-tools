@@ -63,6 +63,8 @@ or programmatically on the command line (see DevOps Python tools repo):
 dockerhub_show_tags.py mysql
 
 
+Options to the 'mysql' shell command can be given using the \$MYSQL_OPTS environment variable
+
 Automatically creates shared bind mount points from host to container for convenience:
 $shell_description
 "
@@ -133,7 +135,7 @@ if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec "$docker_exec_opts" "$container_name" mysql -u root -p"$password"
+eval docker exec "$docker_exec_opts" "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}"
 
 untrap
 
