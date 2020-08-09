@@ -103,21 +103,29 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp "booting PostgreSQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
+    # this works on newer postgres but not the older versions such as 9.0
     eval docker run -d \
         --name "$container_name" \
         -p 5432:5432 \
         -e POSTGRES_PASSWORD="$password" \
+        -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         "$docker_sql_mount_switches" \
-        -v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
         "$docker_image":"$version" \
-        # this works on newer postgres but not the older versions such as 9.0
-        #-v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
-        #-c 'config_file=/etc/postgresql/postgresql.conf'
+        -c 'config_file=/etc/postgresql/postgresql.conf'
+        # this doesn't work because it prevents /var/lib/postgresql/data from being initialized
+        #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
 
     SECONDS=0
+    num_lines=50
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
+    # PostgreSQL 11.8:
+    #
+    # PostgreSQL init process complete; ready for start up.
+    # ...
+    # 2020-08-09 21:56:04.824 GMT [1] LOG:  database system is ready to accept connections
+    #
     while true; do
-        if [ "$(docker logs "$container_name" 2>&1 | grep -c 'ready to accept connections')" -ge 1 ]; then
+        if docker logs --tail "$num_lines" "$container_name" 2>&1 | grep -E -A "$num_lines" 'PostgreSQL init.*(ready|complete)' | grep 'ready to accept connections'; then
             break
         fi
         sleep 0.1
