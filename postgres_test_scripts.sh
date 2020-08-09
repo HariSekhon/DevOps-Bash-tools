@@ -103,6 +103,7 @@ else
 fi
 echo
 tr ' ' '\n' <<< "$postgres_versions"
+echo
 
 for version in $postgres_versions; do
     for sql in "$@"; do
