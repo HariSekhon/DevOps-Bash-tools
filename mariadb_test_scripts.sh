@@ -26,7 +26,7 @@ mariadb_versions="5.5 10.0 10.1 10.2 10.3 10.4 10.5 latest"
 usage_description="
 Runs all of the scripts given as arguments against multiple MariaDB versions using docker
 
-Uses mariadb.sh to boot a mysql docker environment and pipe source statements in to the container
+Uses mariadb.sh to boot a MariaDB docker environment and pipe source statements in to the container
 
 Sources each script in MariaDB in the order given
 
