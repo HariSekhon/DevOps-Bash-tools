@@ -31,7 +31,7 @@ shell_description="$sql_mount_description
 
 Source a sql script:
 
-\i /sql/postgres_info.sql
+\i postgres_info.sql
 
 
 Get shell access:
@@ -73,6 +73,7 @@ password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 # ensures version is correct before we kill any existing test env to switch versions
 docker_pull "$docker_image:$version"
 
+# kill existing if we have specified a different version than is running
 docker_ps_image_version="$(docker ps --filter "name=$container_name" --format '{{.Image}}')"
 if [ -n "$docker_ps_image_version" ] &&
    [ "$docker_ps_image_version" != "$docker_image:$version" ]; then
