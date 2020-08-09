@@ -117,10 +117,12 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
-cat <<EOF
+if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+    cat <<EOF
 $shell_description
 
 EOF
+fi
 
 # yes expand now
 # shellcheck disable=SC2064
