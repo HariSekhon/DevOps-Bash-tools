@@ -47,25 +47,28 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+for sql in "$@"; do
+    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+done
+
 if [ -n "${MARIADB_VERSIONS:-}" ]; then
     mariadb_versions="${MARIADB_VERSIONS//,/ }"
     echo "using given MariaDB versions:"
 else
-    echo "checking if dockerhub_show_tags.py is available:"
-    echo
-    if type -P dockerhub_show_tags.py 2>/dev/null; then
-        echo
-        echo "dockerhub_show_tags.py found, executing to get latest list of MariaDB docker version tags"
-        echo
-        mariadb_versions="$(dockerhub_show_tags.py mariadb |
-                            grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
-                            sed 's/[[:space:]]//g' |
-                            sort -u -t. -k1n -k2n)"
-        echo
-        echo "found MariaDB versions:"
-    else
+    #echo "checking if dockerhub_show_tags.py is available:"
+    #echo
+    #if type -P dockerhub_show_tags.py 2>/dev/null; then
+    #    echo
+    #    echo "dockerhub_show_tags.py found, executing to get latest list of MariaDB docker version tags"
+    #    echo
+    #    mariadb_versions="$(dockerhub_show_tags.py mariadb |
+    #                        grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+    #                        sed 's/[[:space:]]//g' |
+    #                        sort -u -t. -k1n -k2n)"
+    #    echo "found MariaDB versions:"
+    #else
         echo "using default list of MariaDB versions to test against:"
-    fi
+    #fi
 fi
 echo
 tr ' ' '\n' <<< "$mariadb_versions"
@@ -81,7 +84,9 @@ for version in $mariadb_versions; do
         # comes out first instead of with scripts
         #echo "\\! printf '\nscript %s:' '$sql'"
         echo "select '$sql' as script;"
-        echo "source $sql"
+        # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
+        #echo "source $sql"
+        cat "$sql"
         #echo "\\! printf '\n\n'"
     done
     } |
