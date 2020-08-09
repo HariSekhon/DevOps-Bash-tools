@@ -81,32 +81,45 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+for sql in "$@"; do
+    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+done
+
+get_postgres_versions(){
+    if [ -n "${GET_TAGS:-}" ]; then
+        echo "checking if dockerhub_show_tags.py is available:" >&2
+        echo
+        if type -P dockerhub_show_tags.py 2>/dev/null; then
+            echo
+            echo "dockerhub_show_tags.py found, executing to get latest list of PostgreSQL docker version tags" >&2
+            echo
+            postgres_versions="$(dockerhub_show_tags.py postgres |
+                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                                sed 's/[[:space:]]//g' |
+                                grep -v "8.4" |
+                                sort -u -t. -k1n -k2n)"
+            echo "found PostgreSQL versions:" >&2
+            echo "$postgres_versions"
+            return
+        fi
+    fi
+    echo "using default list of PostgreSQL versions to test against:" >&2
+    echo "$postgres_versions"
+}
+
 if [ -n "${POSTGRES_VERSIONS:-}" ]; then
     postgres_versions="${POSTGRES_VERSIONS//,/ }"
-    echo "using given PostgreSQL versions:"
+    echo "using given PostgreSQL versions:" >&2
 else
-    echo "checking if dockerhub_show_tags.py is available:"
-    echo
-    if type -P dockerhub_show_tags.py 2>/dev/null; then
-        echo
-        echo "dockerhub_show_tags.py found, executing to get latest list of PostgreSQL docker version tags"
-        echo
-        postgres_versions="$(dockerhub_show_tags.py postgres |
-                             grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
-                             sed 's/[[:space:]]//g' |
-                             grep -v "8.4" |
-                             sort -u -t. -k1n -k2n)"
-        echo
-        echo "found PostgreSQL versions:"
-    else
-        echo "using default list of PostgreSQL versions to test against:"
-    fi
+    postgres_versions="$(get_postgres_versions)"
 fi
-echo
+
 tr ' ' '\n' <<< "$postgres_versions"
 echo
 
 for version in $postgres_versions; do
+    echo "Executing scripts against PostgreSQL version $version": >&2
+    echo >&2
     {
     echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
@@ -116,7 +129,9 @@ for version in $postgres_versions; do
         # ugly
         #echo "select '$sql' as script;"
         echo "\\! printf '\\nscript %s:\\n\\n' '$sql'"
-        echo "\\i $sql"
+        # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
+        #echo "\\i $sql"
+        cat "$sql"
         echo "\\! printf '\\n\\n'"
     done
     } |
