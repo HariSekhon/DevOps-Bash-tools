@@ -94,6 +94,7 @@ else
         postgres_versions="$(dockerhub_show_tags.py postgres |
                              grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
                              sed 's/[[:space:]]//g' |
+                             grep -v "8.4" |
                              sort -u -t. -k1n -k2n)"
         echo
         echo "found PostgreSQL versions:"
@@ -106,17 +107,19 @@ tr ' ' '\n' <<< "$postgres_versions"
 echo
 
 for version in $postgres_versions; do
+    {
+    echo '\! printf "================================================================================\n"'
+    echo 'SELECT VERSION();'
     for sql in "$@"; do
         # no effect
         #echo
         # ugly
         #echo "select '$sql' as script;"
-        echo '\! printf "================================================================================\n"'
-        echo 'SELECT VERSION();'
         echo "\\! printf '\\nscript %s:\\n\\n' '$sql'"
         echo "\\i $sql"
         echo "\\! printf '\\n\\n'"
-    done |
+    done
+    } |
     # need docker run non-interactive to avoid tty errors
     DOCKER_NON_INTERACTIVE=1 \
     "$srcdir/postgres.sh" "$version"
