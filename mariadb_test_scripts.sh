@@ -85,10 +85,12 @@ tr ' ' '\n' <<< "$mariadb_versions"
 echo
 
 for version in $mariadb_versions; do
+    hr
     echo "Executing scripts against MariaDB version '$version'": >&2
     echo >&2
     {
-    echo '\! printf "================================================================================\n"'
+    # comes out first, not between scripts
+    #echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
     for sql in "$@"; do
         # no effect
