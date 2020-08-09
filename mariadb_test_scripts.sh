@@ -68,11 +68,14 @@ else
 fi
 echo
 tr ' ' '\n' <<< "$mariadb_versions"
+echo
 
 for version in $mariadb_versions; do
     for sql in "$@"; do
         # no effect
         #echo
+        echo '\! printf "================================================================================\n"'
+        echo 'SELECT VERSION();'
         # comes out first instead of with scripts
         #echo "\\! printf '\nscript %s:' '$sql'"
         echo "select '$sql' as script;"
