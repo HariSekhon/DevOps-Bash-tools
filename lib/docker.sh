@@ -289,7 +289,7 @@ dockerhub_latest_version(){
 
 docker_ps_not_running(){
     local filter="$1"
-    docker ps -a --filter "$filter" --format '{{.Status}}' | grep -Eqi 'created|paused|dead'
+    docker ps -a --filter "$filter" --format '{{.Status}}' | grep -Eqi 'created|paused|dead|exited'
 }
 
 docker_pull(){
