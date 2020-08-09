@@ -84,7 +84,7 @@ tr ' ' '\n' <<< "$mysql_versions"
 echo
 
 for version in $mysql_versions; do
-    echo "Executing scripts against MySQL version $version": >&2
+    echo "Executing scripts against MySQL version '$version'": >&2
     echo >&2
     {
     echo '\! printf "================================================================================\n"'
