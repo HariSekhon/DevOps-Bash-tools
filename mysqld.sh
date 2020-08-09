@@ -124,7 +124,7 @@ EOF
 
 # yes expand now
 # shellcheck disable=SC2064
-trap "echo ERROR; echo; echo; docker logs '$container_name'" EXIT
+trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
 
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
