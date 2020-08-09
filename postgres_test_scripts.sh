@@ -119,7 +119,7 @@ tr ' ' '\n' <<< "$postgres_versions"
 echo
 
 for version in $postgres_versions; do
-    echo "Executing scripts against PostgreSQL version $version": >&2
+    echo "Executing scripts against PostgreSQL version '$version'": >&2
     echo >&2
     {
     echo '\! printf "================================================================================\n"'
