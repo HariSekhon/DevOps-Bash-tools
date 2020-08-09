@@ -84,7 +84,7 @@ tr ' ' '\n' <<< "$mariadb_versions"
 echo
 
 for version in $mariadb_versions; do
-    echo "Executing scripts against MariaDB version $version": >&2
+    echo "Executing scripts against MariaDB version '$version'": >&2
     echo >&2
     {
     echo '\! printf "================================================================================\n"'
