@@ -108,9 +108,11 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -p 5432:5432 \
         -e POSTGRES_PASSWORD="$password" \
         "$docker_sql_mount_switches" \
-        -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
+        -v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
         "$docker_image":"$version" \
-        -c 'config_file=/etc/postgresql/postgresql.conf'
+        # this works on newer postgres but not the older versions such as 9.0
+        #-v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
+        #-c 'config_file=/etc/postgresql/postgresql.conf'
 
     SECONDS=0
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
@@ -129,10 +131,12 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
-cat <<EOF
+if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+    cat <<EOF
 $shell_description
 
 EOF
+fi
 
 # yes expand now
 # shellcheck disable=SC2064
