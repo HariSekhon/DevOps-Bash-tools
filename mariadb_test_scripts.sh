@@ -51,30 +51,40 @@ for sql in "$@"; do
     [ -f "$sql" ] || die "ERROR: file not found: $sql"
 done
 
+get_mariadb_versions(){
+    if [ -n "${GET_TAGS:-}" ]; then
+        echo "checking if dockerhub_show_tags.py is available:" >&2
+        echo
+        if type -P dockerhub_show_tags.py 2>/dev/null; then
+            echo
+            echo "dockerhub_show_tags.py found, executing to get latest list of MariaDB docker version tags" >&2
+            echo
+            mariadb_versions="$(dockerhub_show_tags.py mariadb |
+                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                                sed 's/[[:space:]]//g' |
+                                sort -u -t. -k1n -k2n)"
+            echo "found MariaDB versions:" >&2
+            echo "$mariadb_versions"
+            return
+        fi
+    fi
+    echo "using default list of MariaDB versions to test against:" >&2
+    echo "$mariadb_versions"
+}
+
 if [ -n "${MARIADB_VERSIONS:-}" ]; then
     mariadb_versions="${MARIADB_VERSIONS//,/ }"
-    echo "using given MariaDB versions:"
+    echo "using given MariaDB versions:" >&2
 else
-    #echo "checking if dockerhub_show_tags.py is available:"
-    #echo
-    #if type -P dockerhub_show_tags.py 2>/dev/null; then
-    #    echo
-    #    echo "dockerhub_show_tags.py found, executing to get latest list of MariaDB docker version tags"
-    #    echo
-    #    mariadb_versions="$(dockerhub_show_tags.py mariadb |
-    #                        grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
-    #                        sed 's/[[:space:]]//g' |
-    #                        sort -u -t. -k1n -k2n)"
-    #    echo "found MariaDB versions:"
-    #else
-        echo "using default list of MariaDB versions to test against:"
-    #fi
+    mariadb_versions="$(get_mariadb_versions)"
 fi
-echo
+
 tr ' ' '\n' <<< "$mariadb_versions"
 echo
 
 for version in $mariadb_versions; do
+    echo "Executing scripts against MariaDB version $version": >&2
+    echo >&2
     {
     echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
