@@ -61,7 +61,8 @@ get_mysql_versions(){
             echo "dockerhub_show_tags.py found, executing to get latest list of MySQL docker version tags" >&2
             echo
             mysql_versions="$(dockerhub_show_tags.py mysql |
-                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' -e '^[[:space:]*latest[[:space:]]*$' |
+                                grep -Eo -e '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' \
+                                         -e '^[[:space:]*latest[[:space:]]*$' |
                                 sed 's/[[:space:]]//g' |
                                 sort -u -t. -k1n -k2n)"
             echo "found MySQL versions:" >&2
@@ -77,7 +78,7 @@ if [ -n "${MYSQL_VERSIONS:-}" ]; then
     mysql_versions="${MYSQL_VERSIONS//,/ }"
     echo "using given MySQL versions:"
 else
-    mysql_versions="$(get_mysql_versions | tail -r)"
+    mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tail -r)"
 fi
 
 tr ' ' '\n' <<< "$mysql_versions"
@@ -87,15 +88,17 @@ for version in $mysql_versions; do
     echo "Executing scripts against MySQL version '$version'": >&2
     echo >&2
     {
-    echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
     for sql in "$@"; do
+        echo '\! printf "================================================================================\n"'
         # no effect
         #echo
         # comes out first instead of with scripts
         #echo "\\! printf '\nscript %s:' '$sql'"
         echo "select '$sql' as script;"
-        echo "source $sql"
+        # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
+        #echo "source $sql"
+        cat "$sql"
         #echo "\\! printf '\n\n'"
     done
     } |
