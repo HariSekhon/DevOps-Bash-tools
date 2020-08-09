@@ -61,7 +61,8 @@ get_mariadb_versions(){
             echo "dockerhub_show_tags.py found, executing to get latest list of MariaDB docker version tags" >&2
             echo
             mariadb_versions="$(dockerhub_show_tags.py mariadb |
-                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' -e '^[[:space:]*latest[[:space:]]*$' |
+                                grep -Eo -e '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' \
+                                         -e '^[[:space:]*latest[[:space:]]*$' |
                                 sed 's/[[:space:]]//g' |
                                 sort -u -t. -k1n -k2n)"
             echo "found MariaDB versions:" >&2
@@ -77,7 +78,7 @@ if [ -n "${MARIADB_VERSIONS:-}" ]; then
     mariadb_versions="${MARIADB_VERSIONS//,/ }"
     echo "using given MariaDB versions:" >&2
 else
-    mariadb_versions="$(get_mariadb_versions | tail -r)"
+    mariadb_versions="$(get_mariadb_versions | tr ' ' '\n' | tail -r)"
 fi
 
 tr ' ' '\n' <<< "$mariadb_versions"
