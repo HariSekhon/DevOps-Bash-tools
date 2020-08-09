@@ -134,6 +134,8 @@ $shell_description
 
 EOF
 
+# yes expand now
+# shellcheck disable=SC2064
 trap "echo ERROR; echo; echo; docker logs '$container_name'" EXIT
 
 # cd to /sql to make sourcing easier without /sql/ path prefix
@@ -143,7 +145,7 @@ docker_exec_opts="-w /sql -i"
 if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
-eval docker exec "$docker_exec_opts" "\$container_name" psql -U postgres
+eval docker exec "$docker_exec_opts" "$container_name" psql -U postgres
 
 untrap
 
