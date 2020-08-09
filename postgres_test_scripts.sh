@@ -65,12 +65,13 @@ Uses postgres.sh to boot a PostgreSQL docker environment and pipe source stateme
 
 Sources each script in PostgreSQL in the order given
 
-If \$POSTGRES_VERSIONS environment variable is set, then only tests against those versions,
-otherwise if dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo),
-then uses it to fetches the latest live list of version tags available from the dockerhub API,
-otherwise falls back to the following pre-set list of versions:
+Runs against a list of PostgreSQL versions from the first of the following conditions:
 
-$(tr ' ' '\n' <<< "$postgres_versions")
+- If \$POSTGRES_VERSIONS environment variable is set, then only tests against those versions in the order given
+- If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetches the latest live list of version tags available from the dockerhub API, newest first
+- Falls back to the following pre-set list of versions, newest first:
+
+$(tr ' ' '\n' <<< "$postgres_versions" | grep -v '^[[:space:]]*$')
 "
 
 # used by usage() in lib/utils.sh
@@ -86,7 +87,7 @@ for sql in "$@"; do
 done
 
 get_postgres_versions(){
-    if [ -n "${GET_TAGS:-}" ]; then
+    if [ -n "${GET_DOCKER_TAGS:-}" ]; then
         echo "checking if dockerhub_show_tags.py is available:" >&2
         echo
         if type -P dockerhub_show_tags.py 2>/dev/null; then
@@ -94,7 +95,7 @@ get_postgres_versions(){
             echo "dockerhub_show_tags.py found, executing to get latest list of PostgreSQL docker version tags" >&2
             echo
             postgres_versions="$(dockerhub_show_tags.py postgres |
-                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                                grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' -e '^[[:space:]*latest[[:space:]]*$' |
                                 sed 's/[[:space:]]//g' |
                                 grep -v "8.4" |
                                 sort -u -t. -k1n -k2n)"
@@ -111,7 +112,7 @@ if [ -n "${POSTGRES_VERSIONS:-}" ]; then
     postgres_versions="${POSTGRES_VERSIONS//,/ }"
     echo "using given PostgreSQL versions:" >&2
 else
-    postgres_versions="$(get_postgres_versions)"
+    postgres_versions="$(get_postgres_versions | tail -r)"
 fi
 
 tr ' ' '\n' <<< "$postgres_versions"
