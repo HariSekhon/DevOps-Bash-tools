@@ -71,17 +71,19 @@ tr ' ' '\n' <<< "$mariadb_versions"
 echo
 
 for version in $mariadb_versions; do
+    {
+    echo '\! printf "================================================================================\n"'
+    echo 'SELECT VERSION();'
     for sql in "$@"; do
         # no effect
         #echo
-        echo '\! printf "================================================================================\n"'
-        echo 'SELECT VERSION();'
         # comes out first instead of with scripts
         #echo "\\! printf '\nscript %s:' '$sql'"
         echo "select '$sql' as script;"
         echo "source $sql"
         #echo "\\! printf '\n\n'"
-    done |
+    done
+    } |
     # need docker run non-interactive to avoid tty errors
     # forcing mysql shell --table output as though interactive
     DOCKER_NON_INTERACTIVE=1 \
