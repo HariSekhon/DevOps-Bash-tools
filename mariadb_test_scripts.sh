@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  shellcheck disable=SC2028
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-09 10:42:23 +0100 (Sun, 09 Aug 2020)
