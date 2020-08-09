@@ -56,7 +56,10 @@ else
         echo
         echo "dockerhub_show_tags.py found, executing to get latest list of MariaDB docker version tags"
         echo
-        mariadb_versions="$(dockerhub_show_tags.py mariadb | grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' | sort -u)"
+        mariadb_versions="$(dockerhub_show_tags.py mariadb |
+                            grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' |
+                            sed 's/[[:space:]]//g' |
+                            sort -u -t. -k1n -k2n)"
         echo
         echo "found MariaDB versions:"
     else
