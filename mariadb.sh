@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# https://hub.docker.com/_/mysql
+# https://hub.docker.com/_/mariadb
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
