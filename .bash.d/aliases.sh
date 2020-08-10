@@ -81,7 +81,8 @@ alias m='more'
 alias vi='vim'
 alias v='vim'
 alias grep='grep --color=auto'
-alias envg="env | grep -i"
+# in functions.sh for multiple args now
+#alias envg="env | grep -i"
 alias dec="decomment.sh"
 
 alias hosts='sudo $EDITOR /etc/hosts'
