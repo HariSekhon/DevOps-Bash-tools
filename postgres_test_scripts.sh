@@ -119,14 +119,16 @@ tr ' ' '\n' <<< "$postgres_versions"
 echo
 
 for version in $postgres_versions; do
+    hr
     echo "Executing scripts against PostgreSQL version '$version'": >&2
     echo >&2
     {
-    echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
     for sql in "$@"; do
+        echo '\! printf "================================================================================\n"'
         # no effect
         #echo
+        echo '\set ON_ERROR_STOP true'
         # ugly
         #echo "select '$sql' as script;"
         echo "\\! printf '\\nscript %s:\\n\\n' '$sql'"
@@ -139,4 +141,6 @@ for version in $postgres_versions; do
     # need docker run non-interactive to avoid tty errors
     DOCKER_NON_INTERACTIVE=1 \
     "$srcdir/postgres.sh" "$version"
+    echo
+    echo
 done
