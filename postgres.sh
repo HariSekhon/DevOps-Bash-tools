@@ -116,6 +116,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
 
     SECONDS=0
+    max_secs=30
     num_lines=50
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     # PostgreSQL 84:
@@ -140,8 +141,8 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
             break
         fi
         sleep 0.1
-        if [ $SECONDS -gt 20 ]; then
-            echo "PostgreSQL failed to become ready for connections within 20 secs, check logs (format may have changed):"
+        if [ $SECONDS -gt $max_secs ]; then
+            echo "PostgreSQL failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
             echo
             docker logs "$container_name"
             exit 1
