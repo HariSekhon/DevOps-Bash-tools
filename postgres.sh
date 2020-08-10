@@ -111,6 +111,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version" \
+        $(if [ "${version:0:1}" = 8 ]; then echo postgres; fi) \
         -c 'config_file=/etc/postgresql/postgresql.conf'
         # this doesn't work because it prevents /var/lib/postgresql/data from being initialized
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
@@ -118,6 +119,13 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     SECONDS=0
     num_lines=50
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
+    # PostgreSQL 84:
+    #
+	# Success. You can now start the database server using:
+	# ...
+	# LOG:  database system is ready to accept connections
+    #
+    #
     # PostgreSQL 11.8:
     #
     # PostgreSQL init process complete; ready for start up.
@@ -125,7 +133,11 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # 2020-08-09 21:56:04.824 GMT [1] LOG:  database system is ready to accept connections
     #
     while true; do
-        if docker logs --tail "$num_lines" "$container_name" 2>&1 | grep -E -A "$num_lines" 'PostgreSQL init.*(ready|complete)' | grep 'ready to accept connections'; then
+        if docker logs --tail "$num_lines" "$container_name" 2>&1 |
+           grep -E -A "$num_lines" \
+           -e 'PostgreSQL init.*(ready|complete)' \
+           -e 'You can now start the database server' |
+           grep 'ready to accept connections'; then
             break
         fi
         sleep 0.1
