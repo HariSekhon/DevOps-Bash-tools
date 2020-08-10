@@ -316,6 +316,7 @@ Box Documents/
 buildkite-pipeline*.json
 .buildkite-pipelines/
 c
+chinook.sqlite
 Calibre Library/
 cli_junkie.gif
 Desktop
