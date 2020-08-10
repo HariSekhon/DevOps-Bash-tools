@@ -103,7 +103,6 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp "booting PostgreSQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
-    # this works on newer postgres but not the older versions such as 9.0
     eval docker run -d \
         --name "$container_name" \
         -p 5432:5432 \
@@ -111,9 +110,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version" \
-        "$(if [ "${version:0:1}" = 8 ]; then echo postgres; fi)" \
+        "$(if [ "${version:0:1}" = 8 ] || [ "${version:0:3}" = '9.0' ]; then echo postgres; fi)" \
         -c 'config_file=/etc/postgresql/postgresql.conf'
-        # this doesn't work because it prevents /var/lib/postgresql/data from being initialized
+        # can't mount postgresql.conf here because it prevents /var/lib/postgresql/data from being initialized
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
 
     SECONDS=0
