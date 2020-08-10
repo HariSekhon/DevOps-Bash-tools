@@ -114,7 +114,7 @@ else
     postgres_versions="$(get_postgres_versions | tail -r)"
 fi
 
-tr ' ' '\n' <<< "$postgres_versions"
+tr ' ' '\n' <<< "$postgres_versions" | grep -v '^[[:space:]]*$'
 echo
 
 for version in $postgres_versions; do
