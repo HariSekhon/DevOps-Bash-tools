@@ -480,6 +480,18 @@ gitu(){
     done
     trap - $trap_codes
 }
+gituu(){
+    # avoiding xargs due to function reference:
+    # gxargs: gitu: No such file or directory
+    eval gitu "$(
+        git status --porcelain . |
+        grep '^.M' |
+        sed 's/...//' |
+        while read -r filename; do
+            echo "\"$filename\""
+        done
+    )"
+}
 
 #githgu(){
 #    target="${1:-.}"
