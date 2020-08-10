@@ -111,7 +111,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version" \
-        $(if [ "${version:0:1}" = 8 ]; then echo postgres; fi) \
+        "$(if [ "${version:0:1}" = 8 ]; then echo postgres; fi)" \
         -c 'config_file=/etc/postgresql/postgresql.conf'
         # this doesn't work because it prevents /var/lib/postgresql/data from being initialized
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
@@ -121,7 +121,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     # PostgreSQL 84:
     #
-	# Success. You can now start the database server using:
+	# PostgreSQL stand-alone backend 8
 	# ...
 	# LOG:  database system is ready to accept connections
     #
@@ -136,7 +136,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         if docker logs --tail "$num_lines" "$container_name" 2>&1 |
            grep -E -A "$num_lines" \
            -e 'PostgreSQL init.*(ready|complete)' \
-           -e 'You can now start the database server' |
+           -e 'PostgreSQL stand-alone backend 8' |
            grep 'ready to accept connections'; then
             break
         fi
