@@ -109,4 +109,6 @@ for version in $mysql_versions; do
     DOCKER_NON_INTERACTIVE=1 \
     MYSQL_OPTS="--table" \
     "$srcdir/mysqld.sh" "$version"
+    echo
+    echo
 done
