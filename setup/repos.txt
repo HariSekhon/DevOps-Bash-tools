@@ -27,7 +27,8 @@
 # ":local_dir" is optional in case you want to shorten the local directory name, lowercase it or change it for any reason such as daily convenience
 #
 
-# always do this one first
+# order repos by dependent submodule repos first
+SQL-scripts:sql
 DevOps-Bash-tools:bash-tools
 
 # libraries first - if these don't work then the dependent repos beneath them won't work

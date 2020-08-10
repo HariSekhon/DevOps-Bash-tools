@@ -287,6 +287,26 @@ dockerhub_latest_version(){
     echo "$version"
 }
 
+docker_ps_not_running(){
+    local filter="$1"
+    docker ps -a --filter "$filter" --format '{{.Status}}' | grep -Eqi 'created|paused|dead|exited'
+}
+
+docker_pull(){
+    local docker_image="$1"
+    local version
+    if [[ "$docker_image" =~ : ]]; then
+        version="${docker_image#*:}"
+        docker_image="${docker_image%:*}"
+    else
+        local version="$2"
+    fi
+    # don't pull if we already have the image locally - both to save time and remove internet dependency if running on a laptop
+    if ! docker images --filter reference="$docker_image:$version" --format '{{.Repository}}:{{.Tag}}' | grep -q .; then
+        docker pull "$docker_image:$version"
+    fi
+}
+
 external_docker(){
     [ -n "${EXTERNAL_DOCKER:-}" ] && return 0 || return 1
 }

@@ -321,7 +321,7 @@ nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%"'<CR>
 nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
 nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull'<CR>
 nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push'<CR>
-nmap <silent> ;u :w<CR> :!urlview "%"<CR>
+nmap <silent> ;u :w<CR> :! grep -v harisekhon "%" \| urlview <CR>
 " pass current line as stdin to urlview to quickly go to this url
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 nmap <silent> ;U :.w !urlview<CR> :!reset<CR><CR>
@@ -345,6 +345,12 @@ nmap          ;§ :call ToggleScrollLock()<CR>
 
 if has("autocmd")
     au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
+endif
+
+if has("autocmd")
+    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%"<CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; "%:p:h/run.sh" "%"<CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w<CR>:!clear; DEBUG=1 "%:p:h/run.sh" "%"<CR>
 endif
 
 
@@ -483,7 +489,11 @@ function! WriteRun()
             :! docker build "%:p:h"
         endif
     else
-        :! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
+        " this only works for scripts
+        ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
+        " but this now works for config files too which can have run headers
+        " instead of args headers
+        :! "$bash_tools/lib/run.sh" "%:p" 2>&1 | less
     endif
 endfunction
 

@@ -11,7 +11,7 @@ Hari Sekhon - DevOps Bash Tools
 [![Code Inspector Score](https://www.code-inspector.com/project/8840/score/svg)](https://frontend.code-inspector.com/project/8840/dashboard)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools)](https://github.com/harisekhon/devops-bash-tools/network)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-40k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-42k-lightgrey)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 <!--
 BitBucket exposes HTML comments - open issue - works properly on GitHub/GitLab
@@ -120,6 +120,7 @@ Contains:
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
   - `.bash.d/` - interactive library (huge)
   - `lib/` - scripting and CI library (heavily used by hundreds of scripts and builds)
+- [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 70+ scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
 
@@ -131,7 +132,7 @@ Cloud & Big Data Contractor, United Kingdom
 
 (ex-Cloudera, former Hortonworks Consultant)
 
-[https://www.linkedin.com/in/harisekhon](https://www.linkedin.com/in/harisekhon)
+[![My LinkedIn](https://img.shields.io/badge/LinkedIn%20Profile-HariSekhon-blue?logo=linkedin)](https://www.linkedin.com/in/harisekhon/)
 ###### (you're welcome to connect with me on LinkedIn)
 
 ### Quick Setup
@@ -204,7 +205,7 @@ Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make 
 [BuildKite](https://buildkite.com),
 [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
 etc.
-- `sql/*.sql` - SQL scripts eg. [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries
+- [sql/](https://github.com/HariSekhon/SQL-scripts)`*.sql` - useful SQL scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
 - `aws*.sh` - various [AWS](https://aws.amazon.com/) scripts for EC2 metadata, Spot Termination, SSM Parameter Store secret put from prompt, IAM Credential Reports on IAM users without MFA, old access keys and passwords, old user accounts that haven't logged in or used an access key recently, show password policy / set hardened password policy, show unattached IAM policies, show account summary to check various details including root account MFA enabled and no access keys, KMS keys rotation status, CloudTrail & Config status etc.
 - `gce*.sh` - [Google Cloud](https://cloud.google.com/) scripts for [GCE](https://cloud.google.com/compute/) metadata API and pre-emption
 - `curl_auth.sh` - wraps curl to send your username and password from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` which might otherwise expose your credentials in the process list or OS audit log files. Used by other API querying scripts
@@ -222,11 +223,13 @@ etc.
 - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
 - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
 - `mysql.sh` - connects to [MySQL](https://www.mysql.com/) via `mysql`, auto-populating settings from both standard environment variables like `$MYSQL_TCP_PORT`, `$DBI_USER`, `$MYSQL_PWD` (see [doc](https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html)) and other common environment variables like `$MYSQL_HOST` / `$HOST`, `$MYSQL_USER` / `$USER`, `$MYSQL_PASSWORD` / `$PASSWORD`, `$MYSQL_DATABASE` / `$DATABASE`
+- `mysqld.sh` - one-touch [MySQL](https://www.mysql.com/), boots docker container + drops in to `mysql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `source /sql/<name>.sql`
 - `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
 - `mysql_*.sh` - various scripts using `mysql.sh` for row counts, iterating each table, or outputting clean lists of databases and tables for quick scripting
 - `psql.sh` - connects to [PostreSQL](https://www.postgresql.org/) via `psql`, auto-populating settings from environment variables, using both standard postgres supported environment variables like `$PG*` (see [doc](https://www.postgresql.org/docs/9.0/libpq-envars.html)) as well as other common environment variables like `$POSTGRESQL_HOST` / `$POSTGRES_HOST` / `$HOST`, `$POSTGRESQL_USER` / `$POSTGRES_USER` / `$USER`, `$POSTGRESQL_PASSWORD` / `$POSTGRES_PASSWORD` / `$PASSWORD`, `$POSTGRESQL_DATABASE` / `$POSTGRES_DATABASE` / `$DATABASE`
 - `postgres_foreach_table.sh` - executes a SQL query against every table, replacing `{db}`, `{schema}` and `{table}` in each iteration eg. `select count(*) from {table}`
 - `postgres_*.sh` - various scripts using `psql.sh` for row counts, iterating each table, or outputting clean lists of databases, schemas and tables for quick scripting
+- `postgres.sh` - one-touch [Postgres](https://www.postgresql.org/), boots docker container + drops in to `psql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `\i /sql/<name>.sql`
 - `find_duplicate_files_by_size.sh` / `find_duplicate_files_by_checksum.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `hdfs_checksum*.sh` - walks an HDFS directory tree and outputs HDFS native checksums, MD5-of-MD5 or the portable externally comparable CRC32, in serial or in parallel to save time
 - `hdfs_find_replication_factor_1.sh` / `hdfs_set_replication_factor_3.sh` - finds HDFS files with replication factor 1 / sets HDFS files with replication factor <=2 to replication factor 3 to repair replication safety and avoid no replica alarms during maintenance operations (see also Python API version in the [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) repo)
@@ -251,7 +254,7 @@ etc.
 - `github*.sh` - various useful GitHub scripts for querying the GitHub API including:
   - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for several other scripts that use the GitHub API. Built on top of `curl_auth.sh`
   - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key_api.sh` - fetches GitHub users public SSH keys for quick local installation to `~/.ssh/authorized_keys`
-  - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
