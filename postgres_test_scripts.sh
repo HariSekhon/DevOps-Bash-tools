@@ -21,9 +21,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# entrypoint broken
-# 8.4
 postgres_versions="
+8.4
 9.0
 9.1
 9.2
