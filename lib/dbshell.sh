@@ -62,8 +62,8 @@ wait_for_mysql_ready(){
         fi
         sleep 1
         if [ $tries -gt 60 ]; then
-            echo "container '$container_name' failed to become ready for connections within reasonable time, check logs (format may have changed):"
-            echo
+            timestamp "container '$container_name' failed to become ready for connections within reasonable time, check logs (format may have changed):"
+            echo >&2
             docker logs "$container_name"
             exit 1
         fi
@@ -77,7 +77,7 @@ docker_rm_when_last_connection(){
     if [ "$(lsof -lnt "$scriptname" | grep -c .)" -lt 2 ]; then
     #if [ "$(pgrep -lf "bash.*${0##*/}" | grep -c .)" -lt 2 ]; then
     #if [ "$(ps -ef | grep -c "[b]ash.*${0##*/}")" -lt 2 ]; then
-        echo "last session closing, deleting container:"
+        timestamp "last session closing, deleting container:"
         docker rm -f "$container_name"
     fi
 }
