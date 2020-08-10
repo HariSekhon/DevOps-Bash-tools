@@ -79,6 +79,12 @@ version="${1:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
+#db="$srcdir/chinook.psql"
+#if ! [ -f "$db" ]; then
+#    timestamp "downloading sample 'chinook' database"
+#    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql?raw=true'
+#fi
+
 # ensures version is correct before we kill any existing test env to switch versions
 docker_pull "$docker_image:$version"
 
@@ -149,6 +155,10 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         fi
     done
     echo
+    #timestamp "loading chinook database"
+    #PGOPTIONS="-c client_min_messages=WARNING"
+    #docker exec "$container_name" psql -U postgres -c 'SET client_min_messages=WARNING; CREATE DATABASE Chinook' -f /bash/chinook.psql
+    timestamp "done"
 fi
 
 if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
