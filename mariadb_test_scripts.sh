@@ -109,4 +109,6 @@ for version in $mariadb_versions; do
     DOCKER_NON_INTERACTIVE=1 \
     MYSQL_OPTS="--table" \
     "$srcdir/mariadb.sh" "$version"
+    echo
+    echo
 done
