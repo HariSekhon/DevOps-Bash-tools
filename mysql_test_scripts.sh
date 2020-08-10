@@ -81,7 +81,7 @@ else
     mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tail -r)"
 fi
 
-tr ' ' '\n' <<< "$mysql_versions"
+tr ' ' '\n' <<< "$mysql_versions" | grep -v '^[[:space:]]*$'
 echo
 
 for version in $mysql_versions; do
