@@ -81,7 +81,7 @@ else
     mariadb_versions="$(get_mariadb_versions | tr ' ' '\n' | tail -r)"
 fi
 
-tr ' ' '\n' <<< "$mariadb_versions"
+tr ' ' '\n' <<< "$mariadb_versions" | grep -v '^[[:space:]]*$'
 echo
 
 for version in $mariadb_versions; do
