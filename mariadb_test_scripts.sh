@@ -46,7 +46,21 @@ Runs against a list of MariaDB versions from the first of the following conditio
 - If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetch the latest live list of version tags available from the dockerhub API, reordering by newest first
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
-$(tr ' ' '\n' <<< "$mariadb_versions")
+$(tr ' ' '\n' <<< "$mariadb_versions" | grep -v '^[[:space:]]*$')
+
+If a script has a headers such as:
+
+-- Requires MariaDB N.N (same as >=)
+-- Requires MariaDB >= N.N
+-- Requires MariaDB >  N.N
+-- Requires MariaDB <= N.N
+-- Requires MariaDB <  N.N
+
+then will only run that script on the specified versions of MariaDB
+
+This is for convenience so you can test a whole repository such as my SQL-scripts repo just by running against all scripts and have this code figure out the combinations of scripts to run vs versions, eg:
+
+${0##*/} mysql_*.sql
 "
 
 # used by usage() in lib/utils.sh
@@ -114,6 +128,12 @@ for version in $mariadb_versions; do
     #echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
     for sql in "$@"; do
+        if skip_min_version "MariaDB" "$version" "$sql"; then
+            continue
+        fi
+        if skip_max_version "MariaDB" "$version" "$sql"; then
+            continue
+        fi
         # no effect
         #echo
         # comes out first instead of with scripts
