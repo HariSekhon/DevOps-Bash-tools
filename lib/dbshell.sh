@@ -85,7 +85,7 @@ docker_rm_when_last_connection(){
 }
 
 strip_requires_db_pre(){
-    sed 's/.*Requires[[:space:]]*'"$db//"
+    sed 's/.*Requires[[:space:]].*'"$db//"
 }
 
 strip_requires_db_post(){
@@ -109,8 +109,10 @@ skip_min_version(){
     # some versions of sed don't support +, so stick to *
     #                                             Requires PostgreSQL 9.2+
     #                                             Requires 9.2 <= PostgreSQL <= 9.5
-    min_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+(>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | strip_requires_db_pre ||
-                   grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+[[:digit:]]+(\.[[:digit:]]+)?[[:space:]]*<=?[[:space:]]*'"$db" "$sql_file" | strip_requires_db_post || :)"
+    min_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+(>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | strip_requires_db_pre || :)"
+    if [ -z "$min_version" ]; then
+        min_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+[[:digit:]]+(\.[[:digit:]]+)?[[:space:]]*<=?[[:space:]]*'"$db" "$sql_file" | strip_requires_db_post || :)"
+    fi
     if [ -n "$min_version" ] &&
        [ "$version" != latest ]; then
         if [[ "$min_version" =~ \= ]] ||
@@ -152,8 +154,7 @@ skip_max_version(){
     fi
     # some versions of sed don't support +, so stick to *
     #                                             Requires PostgreSQL <= 9.1
-    max_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+<=?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | strip_requires_db_pre ||
-                   grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+[[:digit:]]+(\.[[:digit:]]+)?[[:space:]]*<=?[[:space:]]*'"$db" "$sql_file" | strip_requires_db_post || :)"
+    max_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+.*'"$db"'[[:space:]]+<=?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | strip_requires_db_pre || :)"
     if [ -n "$max_version" ]; then
         if [[ "$max_version" =~ = ]]; then
             inclusive="="
