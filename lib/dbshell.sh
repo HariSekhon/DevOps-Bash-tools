@@ -90,7 +90,7 @@ skip_min_version(){
     local min_version
     local inclusive=""
     # some versions of sed don't support +, so stick to *
-    min_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+'"$db"'[[:space:]](>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    min_version="$(grep -Eio -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+(>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
     if [ -n "$min_version" ] &&
        [ "$version" != latest ]; then
         if [[ "$min_version" =~ \= ]] ||
@@ -99,7 +99,10 @@ skip_min_version(){
         fi
         min_version="${min_version#>}"
         min_version="${min_version#=}"
+        min_version="${min_version//[[:space:]]}"
+        [[ "$min_version" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]] || die "code error: non-float '$min_version' parsed in skip_min_version()"
         skip_msg="skipping script '$sql_file' due to min required version >$inclusive $min_version"
+        [[ "$version" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]] || die "code error: non-float '$version' passed to skip_min_version()"
         if [ -n "$inclusive" ]; then
             if bc_bool "$version < $min_version"; then
                 timestamp "$skip_msg"
@@ -122,18 +125,23 @@ skip_max_version(){
     local sql_file="$3"
     local max_version
     local inclusive=""
-    max_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+'"$db"'[[:space:]]<=?[[:space:]][[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    # some versions of sed don't support +, so stick to *
+    # some versions of sed don't support +, so stick to *
+    max_version="$(grep -Eio -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+<=?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *'"$db"' *//' || :)"
     if [ -n "$max_version" ]; then
         if [[ "$max_version" =~ = ]]; then
             inclusive="="
         fi
+        max_version="${max_version#<}"
+        max_version="${max_version#=}"
+        max_version="${max_version//[[:space:]]}"
+        [[ "$max_version" =~ ^[[:digit:]]+(\.[[:digit:]]+)?$ ]] || die "code error: non-float '$max_version' parsed in skip_max_version()"
         skip_msg="skipping script '$sql_file' due to max required version <$inclusive $max_version"
-        if [ "$version" != latest ]; then
+        if [ "$version" = latest ]; then
             timestamp "$skip_msg"
             return 0
         fi
-        max_version="${max_version#<}"
-        max_version="${max_version#=}"
+        [[ "$version" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]] || die "code error: non-float '$version' passed to skip_max_version()"
         if [ "$inclusive" = 1 ]; then
             if bc_bool "$version > $max_version"; then
                 timestamp "$skip_msg"
