@@ -21,7 +21,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-mysql_versions="5.5 5.6 5.7 8.0 latest"
+mysql_versions="
+5.5
+5.6
+5.7
+8.0
+latest
+"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -75,7 +81,19 @@ get_mysql_versions(){
 }
 
 if [ -n "${MYSQL_VERSIONS:-}" ]; then
-    mysql_versions="${MYSQL_VERSIONS//,/ }"
+    versions=""
+    MYSQL_VERSIONS="${MYSQL_VERSIONS//,/ }"
+    for version in $MYSQL_VERSIONS; do
+        if [[ "$version" =~ x ]]; then
+            versions+=" $(grep "${version//x/.*}" <<< "$mysql_versions" |
+                          sort -u -t. -k1n -k2 |
+                          tail -r ||
+                          die "version '$version' not found")"
+        else
+            versions+=" $version"
+        fi
+    done
+    mysql_versions="$versions"
     echo "using given MySQL versions:"
 else
     mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tail -r)"
