@@ -71,6 +71,20 @@ Runs against a list of PostgreSQL versions from the first of the following condi
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
 $(tr ' ' '\n' <<< "$postgres_versions" | grep -v '^[[:space:]]*$')
+
+If a script has a headers such as:
+
+-- Requires PostgreSQL N.N (same as >=)
+-- Requires PostgreSQL >= N.N
+-- Requires PostgreSQL >  N.N
+-- Requires PostgreSQL <= N.N
+-- Requires PostgreSQL <  N.N
+
+then will only run that script on the specified versions of PostgreSQL
+
+This is for convenience so you can test a whole repository such as my SQL-scripts repo just by running against all scripts and have this code figure out the combinations of scripts to run vs versions, eg:
+
+${0##*/} postgres_*.sql
 "
 
 # used by usage() in lib/utils.sh
@@ -136,6 +150,12 @@ for version in $postgres_versions; do
     {
     echo 'SELECT VERSION();'
     for sql in "$@"; do
+        if skip_min_version "PostreSQL" "$version" "$sql"; then
+            continue
+        fi
+        if skip_max_version "PostgreSQL" "$version" "$sql"; then
+            continue
+        fi
         echo '\! printf "================================================================================\n"'
         # no effect
         #echo
