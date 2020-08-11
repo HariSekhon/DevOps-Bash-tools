@@ -21,6 +21,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/dbshell.sh"
+
 mysql_versions="
 5.5
 5.6
@@ -44,6 +47,17 @@ Runs against a list of MySQL versions from the first of the following conditions
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
 $(tr ' ' '\n' <<< "$mysql_versions")
+
+If a script has a headers such as:
+
+-- Requires MySQL N.N
+-- Requires MySQL >= N.N
+-- Requires MySQL < N.N
+
+then will only run that script on the specified versions of MySL
+
+This is for convenience so you can test a whole repository such as my SQL-scripts repo just by doing: ${0##*/} mysql_*.sql
+and have this code figure out the combinations of scripts to run vs versions
 "
 
 # used by usage() in lib/utils.sh
@@ -109,6 +123,12 @@ for version in $mysql_versions; do
     {
     echo 'SELECT VERSION();'
     for sql in "$@"; do
+        if skip_min_version "$sql" "$version"; then
+            continue
+        fi
+        if skip_max_version "$sql" "$version"; then
+            continue
+        fi
         # comes out first, not between scripts
         #echo '\! printf "================================================================================\n"'
         # no effect
@@ -117,6 +137,7 @@ for version in $mysql_versions; do
         #echo "\\! printf '\nscript %s:' '$sql'"
         echo "select '$sql' as script;"
         # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
+        # just cat them in to the shell instead as it's more portable
         #echo "source $sql"
         cat "$sql"
         #echo "\\! printf '\n\n'"
