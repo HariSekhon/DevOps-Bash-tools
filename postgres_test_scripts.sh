@@ -66,7 +66,7 @@ Sources each script in PostgreSQL in the order given
 
 Runs against a list of PostgreSQL versions from the first of the following conditions:
 
-- If \$POSTGRES_VERSIONS environment variable is set, then only tests against those versions in the order given
+- If \$POSTGRES_VERSIONS environment variable is set, then only tests against those versions in the order given, space or comma separated, with 'x' used as a wildcard (eg. '10.x , 11.x , 12.x')
 - If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetch the latest live list of version tags available from the dockerhub API, reordering by newest first
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
@@ -108,7 +108,16 @@ get_postgres_versions(){
 }
 
 if [ -n "${POSTGRES_VERSIONS:-}" ]; then
-    postgres_versions="${POSTGRES_VERSIONS//,/ }"
+    versions=""
+    POSTGRES_VERSIONS="${POSTGRES_VERSIONS//,/ }"
+    for version in $POSTGRES_VERSIONS; do
+        if [[ "$version" =~ x ]]; then
+            versions+=" $(grep "${version//x/.*}" <<< "$postgres_versions" || die "version '$version' not found")"
+        else
+            versions+=" $version"
+        fi
+    done
+    postgres_versions="$versions"
     echo "using given PostgreSQL versions:" >&2
 else
     postgres_versions="$(get_postgres_versions | tail -r)"
