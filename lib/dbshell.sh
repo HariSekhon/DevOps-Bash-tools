@@ -84,12 +84,13 @@ docker_rm_when_last_connection(){
 
 # detect version headers and only run if the version corresponds
 skip_min_version(){
-    local sql_file="$1"
+    local db="$1"
     local version="$2"
+    local sql_file="$3"
     local min_version
     local inclusive=""
     # some versions of sed don't support +, so stick to *
-    min_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+MySQL[[:space:]](>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    min_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+'"$db"'[[:space:]](>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
     if [ -n "$min_version" ] &&
        [ "$version" != latest ]; then
         if [[ "$min_version" =~ \= ]] ||
@@ -98,7 +99,7 @@ skip_min_version(){
         fi
         min_version="${min_version#>}"
         min_version="${min_version#=}"
-        skip_msg="skipping script '$sql_file' due to min requirement version >$inclusive $min_version"
+        skip_msg="skipping script '$sql_file' due to min required version >$inclusive $min_version"
         if [ -n "$inclusive" ]; then
             if bc_bool "$version < $min_version"; then
                 timestamp "$skip_msg"
@@ -116,16 +117,17 @@ skip_min_version(){
 
 # detect version headers and only run if the version corresponds
 skip_max_version(){
-    local sql_file="$1"
+    local db="$1"
     local version="$2"
+    local sql_file="$3"
     local max_version
     local inclusive=""
-    max_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+MySQL[[:space:]]<=?[[:space:]][[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    max_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+'"$db"'[[:space:]]<=?[[:space:]][[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
     if [ -n "$max_version" ]; then
         if [[ "$max_version" =~ = ]]; then
             inclusive="="
         fi
-        skip_msg="skipping script '$sql_file' due to max requirement version <$inclusive $max_version"
+        skip_msg="skipping script '$sql_file' due to max required version <$inclusive $max_version"
         if [ "$version" != latest ]; then
             timestamp "$skip_msg"
             return 0
