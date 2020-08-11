@@ -14,6 +14,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Utility library for the postgres / mysql / mariadb scripts at top level
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -82,6 +84,17 @@ docker_rm_when_last_connection(){
     fi
 }
 
+strip_requires_db_pre(){
+    sed 's/.*Requires[[:space:]]*'"$db//"
+}
+
+strip_requires_db_post(){
+    sed '
+        s/.*Requires[[:space:]]*//;
+        s/'"$db"'[[:space:]]*$//
+    '
+}
+
 # detect version headers and only run if the version corresponds
 skip_min_version(){
     local db="$1"
@@ -89,20 +102,28 @@ skip_min_version(){
     local sql_file="$3"
     local min_version
     local inclusive=""
+    if grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]*N/A' "$sql_file"; then
+        timestamp "skipping script '$sql_file' due to N/A version"
+        return 0
+    fi
     # some versions of sed don't support +, so stick to *
-    min_version="$(grep -Eio -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+(>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    #                                             Requires PostgreSQL 9.2+
+    #                                             Requires 9.2 <= PostgreSQL <= 9.5
+    min_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+(>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | strip_requires_db_pre ||
+                   grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+[[:digit:]]+(\.[[:digit:]]+)?[[:space:]]*<=?[[:space:]]*'"$db" "$sql_file" | strip_requires_db_post || :)"
     if [ -n "$min_version" ] &&
        [ "$version" != latest ]; then
         if [[ "$min_version" =~ \= ]] ||
-           ! [[ "$min_version" =~ \> ]]; then
+           ! [[ "$min_version" =~ [\<\>] ]]; then
             inclusive="="
         fi
-        min_version="${min_version#>}"
-        min_version="${min_version#=}"
+        min_version="${min_version/>}"
+        min_version="${min_version/<}"
+        min_version="${min_version/=}"
         min_version="${min_version//[[:space:]]}"
-        [[ "$min_version" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]] || die "code error: non-float '$min_version' parsed in skip_min_version()"
+        is_float "$min_version" || die "code error: non-float '$min_version' parsed in skip_min_version()"
         skip_msg="skipping script '$sql_file' due to min required version >$inclusive $min_version"
-        [[ "$version" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]] || die "code error: non-float '$version' passed to skip_min_version()"
+        is_float "$version" || die "code error: non-float '$version' passed to skip_min_version()"
         if [ -n "$inclusive" ]; then
             if bc_bool "$version < $min_version"; then
                 timestamp "$skip_msg"
@@ -125,23 +146,29 @@ skip_max_version(){
     local sql_file="$3"
     local max_version
     local inclusive=""
+    if grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]*N/A' "$sql_file"; then
+        timestamp "skipping script '$sql_file' due to N/A version"
+        return 0
+    fi
     # some versions of sed don't support +, so stick to *
-    # some versions of sed don't support +, so stick to *
-    max_version="$(grep -Eio -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+<=?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *'"$db"' *//' || :)"
+    #                                             Requires PostgreSQL <= 9.1
+    max_version="$(grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+'"$db"'[[:space:]]+<=?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | strip_requires_db_pre ||
+                   grep -Eiom 1 -- '--[[:space:]]*Requires[[:space:]]+[[:digit:]]+(\.[[:digit:]]+)?[[:space:]]*<=?[[:space:]]*'"$db" "$sql_file" | strip_requires_db_post || :)"
     if [ -n "$max_version" ]; then
         if [[ "$max_version" =~ = ]]; then
             inclusive="="
         fi
-        max_version="${max_version#<}"
-        max_version="${max_version#=}"
+        max_version="${max_version/<}"
+        max_version="${max_version/>}"
+        max_version="${max_version/=}"
         max_version="${max_version//[[:space:]]}"
-        [[ "$max_version" =~ ^[[:digit:]]+(\.[[:digit:]]+)?$ ]] || die "code error: non-float '$max_version' parsed in skip_max_version()"
+        is_float "$max_version" || die "code error: non-float '$max_version' parsed in skip_max_version()"
         skip_msg="skipping script '$sql_file' due to max required version <$inclusive $max_version"
         if [ "$version" = latest ]; then
             timestamp "$skip_msg"
             return 0
         fi
-        [[ "$version" =~ ^[[:digit:]]+\.[[:digit:]]+$ ]] || die "code error: non-float '$version' passed to skip_max_version()"
+        is_float "$version" || die "code error: non-float '$version' passed to skip_max_version()"
         if [ "$inclusive" = 1 ]; then
             if bc_bool "$version > $max_version"; then
                 timestamp "$skip_msg"
