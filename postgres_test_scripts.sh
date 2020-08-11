@@ -153,7 +153,7 @@ for version in $postgres_versions; do
     {
     echo 'SELECT VERSION();'
     for sql in "$@"; do
-        if skip_min_version "PostreSQL" "$version" "$sql"; then
+        if skip_min_version "PostgreSQL" "$version" "$sql"; then
             continue
         fi
         if skip_max_version "PostgreSQL" "$version" "$sql"; then
