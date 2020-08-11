@@ -126,10 +126,10 @@ for version in $mysql_versions; do
     {
     echo 'SELECT VERSION();'
     for sql in "$@"; do
-        if skip_min_version "$sql" "$version"; then
+        if skip_min_version "MySQL" "$version" "$sql"; then
             continue
         fi
-        if skip_max_version "$sql" "$version"; then
+        if skip_max_version "MySQL" "$version" "$sql"; then
             continue
         fi
         # comes out first, not between scripts
