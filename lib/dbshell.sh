@@ -81,3 +81,65 @@ docker_rm_when_last_connection(){
         docker rm -f "$container_name"
     fi
 }
+
+# detect version headers and only run if the version corresponds
+skip_min_version(){
+    local sql_file="$1"
+    local version="$2"
+    # some versions of sed don't support +, so stick to *
+    min_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+MySQL[[:space:]](>=?)?[[:space:]]*[[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    inclusive=""
+    if [ -n "$min_version" ] &&
+       [ "$version" != latest ]; then
+        if [[ "$min_version" =~ \= ]] ||
+           ! [[ "$min_version" =~ \> ]]; then
+            inclusive="="
+        fi
+        min_version="${min_version#>}"
+        min_version="${min_version#=}"
+        skip_msg="skipping script '$sql_file' due to min requirement version >$inclusive $min_version"
+        if [ -n "$inclusive" ]; then
+            if bc -l <<< "$version >= $min_version" &>/dev/null; then
+                timestamp "$skip_msg"
+                return 0
+            fi
+        else
+            if bc -l <<< "$version > $min_version" &>/dev/null; then
+                timestamp "$skip_msg"
+                return 0
+            fi
+        fi
+    fi
+    return 1
+}
+
+# detect version headers and only run if the version corresponds
+skip_max_version(){
+    local sql_file="$1"
+    local version="$2"
+    max_version="$(grep -Eio -- '--[[:space:]]Requires[[:space:]]+MySQL[[:space:]]<=?[[:space:]][[:digit:]]+(\.[[:digit:]]+)?' "$sql_file" | sed 's/.*Requires *MySQL *//' || :)"
+    if [ -n "$max_version" ]; then
+        if [[ "$max_version" =~ = ]]; then
+            inclusive=1
+        fi
+        skip_msg="skipping script '$sql_file' due to max requirement version <$inclusive $max_version"
+        if [ "$version" != latest ]; then
+            timestamp "$skip_msg"
+            return 0
+        fi
+        max_version="${max_version#<}"
+        max_version="${max_version#=}"
+        if [ "$inclusive" = 1 ]; then
+            if bc -l <<< "$version <= $max_version" &>/dev/null; then
+                timestamp "$skip_msg"
+                return 0
+            fi
+        else
+            if bc -l <<< "$version < $max_version" &>/dev/null; then
+                timestamp "$skip_msg"
+                return 0
+            fi
+        fi
+    fi
+    return 1
+}
