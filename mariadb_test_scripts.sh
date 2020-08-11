@@ -21,7 +21,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-mariadb_versions="5.5 10.0 10.1 10.2 10.3 10.4 10.5 latest"
+mariadb_versions="
+5.5
+10.0
+10.1
+10.2
+10.3
+10.4
+10.5
+latest
+"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -75,7 +84,19 @@ get_mariadb_versions(){
 }
 
 if [ -n "${MARIADB_VERSIONS:-}" ]; then
-    mariadb_versions="${MARIADB_VERSIONS//,/ }"
+    versions=""
+    MARIADB_VERSIONS="${MARIADB_VERSIONS//,/ }"
+    for version in $MARIADB_VERSIONS; do
+        if [[ "$version" =~ x ]]; then
+            versions+=" $(grep "${version//x/.*}" <<< "$mariadb_versions" |
+                          sort -u -t. -k1n -k2 |
+                          tail -r ||
+                          die "version '$version' not found")"
+        else
+            versions+=" $version"
+        fi
+    done
+    mariadb_versions="$versions"
     echo "using given MariaDB versions:" >&2
 else
     mariadb_versions="$(get_mariadb_versions | tr ' ' '\n' | tail -r)"
