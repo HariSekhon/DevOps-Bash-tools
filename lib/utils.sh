@@ -210,7 +210,15 @@ is_curl_min_version(){
     local target_version="$1"
     local curl_version
     curl_version="$(curl --version | awk '{print $2; exit}' | grep -Eo '[[:digit:]]+\.[[:digit:]]+')"
-    bc -l <<< "$curl_version >= $target_version" | grep -q 1
+    bc_bool "$curl_version >= $target_version"
+}
+
+
+bc_bool(){
+    # bc returns 1 when expression is true and zero otherwise, but this is counterintuitive
+    # to regular shell scripting, let's use the actual output 1 for true, 0 for false
+    # echo rather than <<< to show expression to evaluate in trace debugging
+    echo "$@" | bc -l | grep -q 1
 }
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
