@@ -112,7 +112,10 @@ if [ -n "${POSTGRES_VERSIONS:-}" ]; then
     POSTGRES_VERSIONS="${POSTGRES_VERSIONS//,/ }"
     for version in $POSTGRES_VERSIONS; do
         if [[ "$version" =~ x ]]; then
-            versions+=" $(grep "${version//x/.*}" <<< "$postgres_versions" || die "version '$version' not found")"
+            versions+=" $(grep "${version//x/.*}" <<< "$postgres_versions" |
+                          sort -u -t. -k1n -k2 |
+                          tail -r ||
+                          die "version '$version' not found")"
         else
             versions+=" $version"
         fi
