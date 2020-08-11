@@ -42,7 +42,7 @@ Sources each script in MariaDB in the order given
 
 Runs against a list of MariaDB versions from the first of the following conditions:
 
-- If \$MARIADB_VERSIONS environment variable is set, then only tests against those versions in the order given
+- If \$MARIADB_VERSIONS environment variable is set, then only tests against those versions in the order given, space or comma separated, with 'x' used as a wildcard (eg. '5.x , 10.x')
 - If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetch the latest live list of version tags available from the dockerhub API, reordering by newest first
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
