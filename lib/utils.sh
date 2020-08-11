@@ -213,7 +213,6 @@ is_curl_min_version(){
     bc_bool "$curl_version >= $target_version"
 }
 
-
 bc_bool(){
     # bc returns 1 when expression is true and zero otherwise, but this is counterintuitive
     # to regular shell scripting, let's use the actual output 1 for true, 0 for false
@@ -861,6 +860,15 @@ check_yes(){
     shopt -u nocasematch
 }
 
+is_int(){
+    local arg="$1"
+    [[ "$arg" =~ ^[[:digit:]]+$ ]]
+}
+
+is_float(){
+    local arg="$1"
+    [[ "$arg" =~ ^[[:digit:]]+(\.[[:digit:]]+)?$ ]]
+}
 
 # ============================================================================ #
 #                                   JSON utils
