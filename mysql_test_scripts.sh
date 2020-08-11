@@ -46,18 +46,21 @@ Runs against a list of MySQL versions from the first of the following conditions
 - If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetch the latest live list of version tags available from the dockerhub API, reordering by newest first
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
-$(tr ' ' '\n' <<< "$mysql_versions")
+$(tr ' ' '\n' <<< "$mysql_versions" | grep -v '^[[:space:]]*$')
 
 If a script has a headers such as:
 
--- Requires MySQL N.N
+-- Requires MySQL N.N (same as >=)
 -- Requires MySQL >= N.N
--- Requires MySQL < N.N
+-- Requires MySQL >  N.N
+-- Requires MySQL <= N.N
+-- Requires MySQL <  N.N
 
-then will only run that script on the specified versions of MySL
+then will only run that script on the specified versions of MySQL
 
-This is for convenience so you can test a whole repository such as my SQL-scripts repo just by doing: ${0##*/} mysql_*.sql
-and have this code figure out the combinations of scripts to run vs versions
+This is for convenience so you can test a whole repository such as my SQL-scripts repo just by running against all scripts and have this code figure out the combinations of scripts to run vs versions, eg:
+
+${0##*/} mysql_*.sql
 "
 
 # used by usage() in lib/utils.sh
