@@ -148,7 +148,7 @@ for version in $mysql_versions; do
     } |
     # forcing mysql shell --table output as though interactive
     MYSQL_OPTS="--table" \
-    "$srcdir/mysqld.sh" "$version"
+    "$srcdir/mysqld.sh" "$version" --restart
     timestamp "Succeeded testing scripts for MySQL $version"
     echo >&2
     echo >&2
