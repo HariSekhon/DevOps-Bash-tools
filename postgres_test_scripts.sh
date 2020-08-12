@@ -89,7 +89,10 @@ This is for convenience so you can test a whole repository such as my SQL-script
 
 ${0##*/} postgres_*.sql
 
-If no script files are given as arguments, then searches \$PWD for scripts named in the formats: postgres*.sql / *.psql
+If no script files are given as arguments, then searches \$PWD for scripts named in the formats:
+
+postgres*.sql
+*.psql
 "
 
 # used by usage() in lib/utils.sh
