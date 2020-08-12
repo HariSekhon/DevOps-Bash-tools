@@ -144,9 +144,17 @@ get_postgres_versions(){
             return
         fi
     fi
-    echo "using default list of PostgreSQL versions to test against:" >&2
+    echo "$postgres_versions" |
+    tr ' ' '\n' |
+    grep -v '^[[:space:]]*$' |
+    if is_CI; then
+        echo "CI detected - using randomized sample of PostgreSQL versions to test against:" >&2
+        shuf | head -n 5
+    else
+        echo "using default list of PostgreSQL versions to test against:" >&2
+        cat
+    fi
     echo >&2
-    echo "$postgres_versions"
 }
 
 if [ -n "${POSTGRES_VERSIONS:-}" ]; then
@@ -162,13 +170,13 @@ if [ -n "${POSTGRES_VERSIONS:-}" ]; then
             versions+=" $version"
         fi
     done
-    postgres_versions="$versions"
+    postgres_versions="$(tr ' ' '\n' <<< "$versions" | grep -v '^[[:space:]]*$')"
     echo "using given PostgreSQL versions:" >&2
 else
     postgres_versions="$(get_postgres_versions | tac)"
 fi
 
-tr ' ' '\n' <<< "$postgres_versions" | grep -v '^[[:space:]]*$'
+echo "$postgres_versions"
 echo
 
 for version in $postgres_versions; do
