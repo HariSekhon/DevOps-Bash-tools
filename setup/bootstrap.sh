@@ -30,7 +30,7 @@ repo="https://github.com/HariSekhon/DevOps-Bash-tools"
 directory="bash-tools"
 
 sudo=""
-[ "$(whoami)" != "root" ] || sudo=sudo
+[ "$(whoami)" = "root" ] || sudo=sudo
 
 if [ "$(uname -s)" = Darwin ]; then
     echo "Bootstrapping Mac"
