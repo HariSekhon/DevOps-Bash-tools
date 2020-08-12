@@ -165,7 +165,7 @@ for version in $mariadb_versions; do
     # comes out first, not between scripts
     #echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
-    for sql_file in "$@"; do
+    for sql_file in "${scripts[@]}"; do
         if skip_min_version "MariaDB" "$version" "$sql_file"; then
             continue
         fi
