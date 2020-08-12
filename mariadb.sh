@@ -82,7 +82,6 @@ usage_args="[<version>] [options]
 help_usage "$@"
 
 docker_image=mariadb
-container_name=mariadb
 port=""
 docker_opts=""
 
@@ -111,6 +110,7 @@ while [ $# -gt 0 ]; do
     shift
 done
 
+container_name="${container_name:-${MARIADB_CONTAINER_NAME:-mariadb}}"
 version="${version:-${MARIADB_VERSION:-latest}}"
 
 if [ -n "$port" ]; then
