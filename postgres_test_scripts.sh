@@ -172,8 +172,6 @@ for version in $postgres_versions; do
         echo "\\! printf '\\n\\n'"
     done
     } |
-    # need docker run non-interactive to avoid tty errors
-    DOCKER_NON_INTERACTIVE=1 \
     "$srcdir/postgres.sh" "$version"
     timestamp "Succeeded testing scripts for PostgreSQL $version"
     echo >&2
