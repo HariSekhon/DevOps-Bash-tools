@@ -96,31 +96,51 @@ usage_args="script1.sql [script2.sql ...]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-for sql in "$@"; do
-    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+if [ $# -gt 0 ]; then
+    scripts=("$@")
+else
+    shopt -s nullglob
+    scripts=(postgres*.sql *.psql)
+fi
+
+if [ ${#scripts} -lt 1 ]; then
+    usage "no scripts given and none found in current working directory matching the patterns postgres*.sql or *.psql"
+fi
+
+for sql_file in "${scripts[@]}"; do
+    [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
+
+echo "Testing scripts:"
+echo
+for sql_file in "${scripts[@]}"; do
+    echo "$sql_file"
+done
+echo
 
 get_postgres_versions(){
     if [ -n "${GET_DOCKER_TAGS:-}" ]; then
         echo "checking if dockerhub_show_tags.py is available:" >&2
-        echo
+        echo >&2
         if type -P dockerhub_show_tags.py 2>/dev/null; then
             echo
             echo "dockerhub_show_tags.py found, executing to get latest list of PostgreSQL docker version tags" >&2
-            echo
+            echo >&2
             postgres_versions="$(dockerhub_show_tags.py postgres |
                                 grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' -e '^[[:space:]*latest[[:space:]]*$' |
                                 sed 's/[[:space:]]//g' |
                                 grep -v "8.4" |
                                 sort -u -t. -k1n -k2n)"
             echo "found PostgreSQL versions:" >&2
+            echo
             echo "$postgres_versions"
             return
         fi
     fi
     echo "using default list of PostgreSQL versions to test against:" >&2
+    echo >&2
     echo "$postgres_versions"
 }
 
@@ -152,11 +172,11 @@ for version in $postgres_versions; do
     echo >&2
     {
     echo 'SELECT VERSION();'
-    for sql in "$@"; do
-        if skip_min_version "PostgreSQL" "$version" "$sql"; then
+    for sql_file in "${scripts[@]}"; do
+        if skip_min_version "PostgreSQL" "$version" "$sql_file"; then
             continue
         fi
-        if skip_max_version "PostgreSQL" "$version" "$sql"; then
+        if skip_max_version "PostgreSQL" "$version" "$sql_file"; then
             continue
         fi
         echo '\! printf "================================================================================\n"'
@@ -164,11 +184,11 @@ for version in $postgres_versions; do
         #echo
         echo '\set ON_ERROR_STOP true'
         # ugly
-        #echo "select '$sql' as script;"
-        echo "\\! printf '\\nscript %s:\\n\\n' '$sql'"
+        #echo "select '$sql_file' as script;"
+        echo "\\! printf '\\nscript %s:\\n\\n' '$sql_file'"
         # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
-        #echo "\\i $sql"
-        cat "$sql"
+        #echo "\\i $sql_file"
+        cat "$sql_file"
         echo "\\! printf '\\n\\n'"
     done
     } |
