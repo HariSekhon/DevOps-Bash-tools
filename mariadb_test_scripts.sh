@@ -79,6 +79,8 @@ usage_args="script1.sql [script2.sql ...]"
 
 help_usage "$@"
 
+export MARIADB_CONTAINER_NAME="${MARIADB_CONTAINER_NAME:-mariadb-test-scripts}"
+
 #min_args 1 "$@"
 
 if [ $# -gt 0 ]; then
