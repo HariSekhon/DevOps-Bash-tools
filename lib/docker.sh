@@ -314,7 +314,7 @@ docker_pull(){
     if ! docker images --filter reference="$docker_image:$version" --format '{{.Repository}}:{{.Tag}}' | grep -q .; then
         # want splitting
         # shellcheck disable=SC2086
-        docker pull $opts "$docker_image:$version"
+        eval docker pull $opts "$docker_image:$version"
     fi
 }
 
