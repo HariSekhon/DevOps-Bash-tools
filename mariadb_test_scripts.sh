@@ -72,11 +72,29 @@ usage_args="script1.sql [script2.sql ...]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-for sql in "$@"; do
-    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+if [ $# -gt 0 ]; then
+    scripts=("$@")
+else
+    shopt -s nullglob
+    scripts=(mysql*.sql maria*.sql mariadb*.sql *.mysql)
+fi
+
+if [ ${#scripts[@]} -lt 1 ]; then
+    usage "no scripts given and none found in current working directory matching the patterns: mysql*.sql / maria*.sql / mariadb*.sql / *.mysql"
+fi
+
+for sql_file in "${scripts[@]}"; do
+    [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
+
+echo "Testing ${#scripts[@]} scripts:"
+echo
+for sql_file in "${scripts[@]}"; do
+    echo "$sql_file"
+done
+echo
 
 get_mariadb_versions(){
     if [ -n "${GET_DOCKER_TAGS:-}" ]; then
@@ -130,21 +148,21 @@ for version in $mariadb_versions; do
     # comes out first, not between scripts
     #echo '\! printf "================================================================================\n"'
     echo 'SELECT VERSION();'
-    for sql in "$@"; do
-        if skip_min_version "MariaDB" "$version" "$sql"; then
+    for sql_file in "$@"; do
+        if skip_min_version "MariaDB" "$version" "$sql_file"; then
             continue
         fi
-        if skip_max_version "MariaDB" "$version" "$sql"; then
+        if skip_max_version "MariaDB" "$version" "$sql_file"; then
             continue
         fi
         # no effect
         #echo
         # comes out first instead of with scripts
-        #echo "\\! printf '\nscript %s:' '$sql'"
-        echo "select '$sql' as script;"
+        #echo "\\! printf '\nscript %s:' '$sql_file'"
+        echo "select '$sql_file' as script;"
         # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
-        #echo "source $sql"
-        cat "$sql"
+        #echo "source $sql_file"
+        cat "$sql_file"
         #echo "\\! printf '\n\n'"
     done
     } |
@@ -152,7 +170,7 @@ for version in $mariadb_versions; do
     MYSQL_OPTS="--table" \
     command time \
     "$srcdir/mariadb.sh" "$version" --restart
-    timestamp "Succeeded testing scripts for MariaDB $version"
+    timestamp "Succeeded testing ${#scripts[@]} scripts for MariaDB $version"
     echo >&2
     echo >&2
 done
