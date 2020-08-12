@@ -106,7 +106,7 @@ else
 fi
 
 if [ ${#scripts} -lt 1 ]; then
-    usage "no scripts given and none found in current working directory matching the patterns postgres*.sql or *.psql"
+    usage "no scripts given and none found in current working directory matching the patterns: postgres*.sql / *.psql"
 fi
 
 for sql_file in "${scripts[@]}"; do
