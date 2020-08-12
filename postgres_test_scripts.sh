@@ -172,7 +172,7 @@ for version in $postgres_versions; do
         echo "\\! printf '\\n\\n'"
     done
     } |
-    "$srcdir/postgres.sh" "$version"
+    "$srcdir/postgres.sh" "$version" --restart
     timestamp "Succeeded testing scripts for PostgreSQL $version"
     echo >&2
     echo >&2
