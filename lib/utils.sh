@@ -188,6 +188,9 @@ is_interactive(){
     if [ -n "${PS1:-}" ]; then
         return 0
     fi
+    case "$-" in
+        *i*) return 0
+    esac
     return 1
 }
 
