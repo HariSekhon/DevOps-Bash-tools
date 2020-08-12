@@ -69,21 +69,45 @@ $shell_description
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<version>]"
+usage_args="[<version>] [options]
+
+-n  --no-delete     Don't delete the container upon the last psql session closing (\$DOCKER_NO_DELETE)
+-r  --restart       Force a restart of a clean PostgreSQL instance (\$POSTGRES_RESTART)
+-s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
 
 help_usage "$@"
 
 docker_image=postgres
 container_name=postgres
-version="${1:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
-#db="$srcdir/chinook.psql"
-#if ! [ -f "$db" ]; then
-#    timestamp "downloading sample 'chinook' database"
-#    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql?raw=true'
-#fi
+for arg; do
+    # DOCKER_NO_DELETE used by functions from lib
+    # shellcheck disable=SC2034
+    case "$arg" in
+     -s|--sample)   LOAD_SAMPLE_DB=1
+                    ;;
+    -r|--restart)   POSTGRES_RESTART=1
+                    ;;
+  -n|--no-delete)   DOCKER_NO_DELETE=1
+                    ;;
+               *)   version="$arg"
+                    shift
+                    ;;
+    esac
+done
+
+version="${version:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
+
+db="$srcdir/chinook.psql"
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
+   ! [ -f "$db.utf8" ]; then
+    timestamp "downloading sample 'chinook' database"
+    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql?raw=true'
+    iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
+fi
 
 # ensures version is correct before we kill any existing test env to switch versions
 docker_pull "$docker_image:$version"
@@ -122,9 +146,8 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
 
     SECONDS=0
-    max_secs=30
+    max_secs=60
     num_lines=50
-    timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     # PostgreSQL 84:
     #
 	# PostgreSQL stand-alone backend 8
@@ -139,6 +162,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # 2020-08-09 21:56:04.824 GMT [1] LOG:  database system is ready to accept connections
     #
     while true; do
+        timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
         if docker logs --tail "$num_lines" "$container_name" 2>&1 |
            grep -E -A "$num_lines" \
            -e 'PostgreSQL init.*(ready|complete)' \
@@ -146,7 +170,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
            grep 'ready to accept connections'; then
             break
         fi
-        sleep 0.1
+        sleep 1
         if [ $SECONDS -gt $max_secs ]; then
             echo "PostgreSQL failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
             echo
@@ -155,10 +179,20 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         fi
     done
     echo
-    #timestamp "loading chinook database"
-    #PGOPTIONS="-c client_min_messages=WARNING"
-    #docker exec "$container_name" psql -U postgres -c 'SET client_min_messages=WARNING; CREATE DATABASE Chinook' -f /bash/chinook.psql
+fi
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
+    dbname="${db##*/}"
+    dbname="${dbname%%.*}"
+    timestamp "loading $dbname database"
+    # psql -c doesn't allow mixing SQL and psql meta-commands, must pipe in
+    # create database if not exists equiv in postgres                                                         # \gexec executes each column returned as a SQL statement
+    echo "SELECT 'CREATE DATABASE $dbname' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '$dbname')\\gexec" |
+    docker exec -i -e PGOPTIONS="-c client_min_messages=WARNING" "$container_name" psql -U postgres
+    timestamp "loading data (this may take a minute)"
+    docker exec -e PGOPTIONS="-c client_min_messages=WARNING" "$container_name" psql -U postgres -q -d "$dbname" -f "/bash/${db##*/}.utf8"
     timestamp "done"
+    echo >&2
 fi
 
 if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
