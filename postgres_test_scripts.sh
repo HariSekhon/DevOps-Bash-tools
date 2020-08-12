@@ -105,7 +105,7 @@ else
     scripts=(postgres*.sql *.psql)
 fi
 
-if [ ${#scripts} -lt 1 ]; then
+if [ ${#scripts[@]} -lt 1 ]; then
     usage "no scripts given and none found in current working directory matching the patterns: postgres*.sql / *.psql"
 fi
 
@@ -113,7 +113,7 @@ for sql_file in "${scripts[@]}"; do
     [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
 
-echo "Testing scripts:"
+echo "Testing ${#scripts[@]} scripts:"
 echo
 for sql_file in "${scripts[@]}"; do
     echo "$sql_file"
@@ -193,7 +193,7 @@ for version in $postgres_versions; do
     done
     } |
     command time "$srcdir/postgres.sh" "$version" --restart
-    timestamp "Succeeded testing scripts for PostgreSQL $version"
+    timestamp "Succeeded testing ${#scripts[@]} scripts for PostgreSQL $version"
     echo >&2
     echo >&2
 done
