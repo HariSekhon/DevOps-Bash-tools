@@ -84,7 +84,7 @@ container_name=postgres
 port=""
 docker_opts="-p 5432:5432"
 
-password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
+password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-test}}}}"
 
 while [ $# -gt 0 ]; do
     # DOCKER_NO_DELETE used by functions from lib
