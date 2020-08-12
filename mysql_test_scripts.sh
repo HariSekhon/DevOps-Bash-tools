@@ -146,7 +146,7 @@ if [ -n "${MYSQL_VERSIONS:-}" ]; then
     mysql_versions="$(tr ' ' '\n' <<< "$versions" | grep -v '^[[:space:]]*$')"
     echo "using given MySQL versions:"
 else
-    mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tac)"
+    mysql_versions="$(get_mysql_versions | tac)"
 fi
 
 echo "$mysql_versions"
