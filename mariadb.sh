@@ -71,15 +71,45 @@ $shell_description
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<version>]"
+usage_args="[<version>] [options]
+
+-n  --no-delete     Don't delete the container upon the last mysql session closing (\$DOCKER_NO_DELETE)
+-r  --restart       Force a restart of a clean MariaDB instance (\$MARIADB_RESTART)
+-s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
 
 help_usage "$@"
 
 docker_image=mariadb
 container_name=mariadb
-version="${1:-${MARIADB_VERSION:-latest}}"
 
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
+
+for arg; do
+    # DOCKER_NO_DELETE used by functions from lib
+    # shellcheck disable=SC2034
+    case "$arg" in
+     -s|--sample)   LOAD_SAMPLE_DB=1
+                    ;;
+    -r|--restart)   MARIADB_RESTART=1
+                    ;;
+  -n|--no-delete)   DOCKER_NO_DELETE=1
+                    ;;
+               *)   version="$arg"
+                    shift
+                    ;;
+    esac
+done
+
+version="${version:-${MARIADB_VERSION:-latest}}"
+
+db="$srcdir/chinook.mysql"
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
+   ! [ -f "$db" ]; then
+    timestamp "downloading sample 'chinook' database"
+    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_MySql.sql?raw=true'
+    #iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
+fi
 
 # ensures version is correct before we kill any existing test env to switch versions
 docker_pull "$docker_image:$version"
@@ -117,16 +147,27 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
+# yes expand now
+# shellcheck disable=SC2064
+trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
+    dbname="${db##*/}"
+    dbname="${dbname%%.*}"
+    timestamp "loading $dbname database"
+    #eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" -e "CREATE DATABASE IF NOT EXISTS $dbname"
+    timestamp "loading data (this may take a minute)"
+    eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" < "${db}"
+    timestamp "done"
+    echo >&2
+fi
+
 if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     cat <<EOF
 $shell_description
 
 EOF
 fi
-
-# yes expand now
-# shellcheck disable=SC2064
-trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
 
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
