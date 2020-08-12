@@ -122,9 +122,17 @@ get_mariadb_versions(){
             return
         fi
     fi
-    echo "using default list of MariaDB versions to test against:" >&2
+    echo "$mariadb_versions" |
+    tr ' ' '\n' |
+    grep -v '^[[:space:]]*$' |
+    if is_CI; then
+        echo "CI detected - using randomized sample of MariaDB versions to test against:" >&2
+        shuf | head -n 3
+    else
+        echo "using default list of MariaDB versions to test against:" >&2
+        cat
+    fi
     echo >&2
-    echo "$mariadb_versions"
 }
 
 if [ -n "${MARIADB_VERSIONS:-}" ]; then
@@ -140,13 +148,13 @@ if [ -n "${MARIADB_VERSIONS:-}" ]; then
             versions+=" $version"
         fi
     done
-    mariadb_versions="$versions"
-    echo "using given MariaDB versions:" >&2
+    mariadb_versions="$(tr ' ' '\n' <<< "$versions" | grep -v '^[[:space:]]*$')"
+    echo "using given MariaDB versions:"
 else
-    mariadb_versions="$(get_mariadb_versions | tr ' ' '\n' | tac)"
+    mariadb_versions="$(get_mariadb_versions | tac)"
 fi
 
-tr ' ' '\n' <<< "$mariadb_versions" | grep -v '^[[:space:]]*$'
+echo "$mariadb_versions"
 echo
 
 for version in $mariadb_versions; do
