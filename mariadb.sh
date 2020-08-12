@@ -83,6 +83,8 @@ help_usage "$@"
 
 docker_image=mariadb
 container_name=mariadb
+port=""
+docker_opts=""
 
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-${PASSWORD:-test}}}}"
 
