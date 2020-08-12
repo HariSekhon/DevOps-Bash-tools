@@ -224,9 +224,10 @@ trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_nam
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
 
-# allow non-interactive piped automation eg.
-# for sql in postgres*.sql; do echo "\\i $sql"; done | DOCKER_NON_INTERACTIVE=1 postgres.sh
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+# allow non-interactive piped automation to avoid tty errors eg.
+# for sql in postgres*.sql; do echo "source $sql"; done | postgres.sh
+# normally you would just 'postgres.sh postgres*.sql' but this is used by postgres_test_scripts.sh
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
