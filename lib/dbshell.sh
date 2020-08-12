@@ -46,8 +46,10 @@ docker_sql_mount_switches=" \
 # 200808 19:30:58 [Note] mysqld: ready for connections.
 wait_for_mysql_ready(){
     local container_name="$1"
-    local tries=0
+    local max_secs=90
     local num_lines=50
+    local tries=0
+    SECONDS=0
     while true; do
         ((tries+=1))
         if [ $((tries % 5)) = 0 ]; then
@@ -63,8 +65,8 @@ wait_for_mysql_ready(){
             break
         fi
         sleep 1
-        if [ $tries -gt 60 ]; then
-            timestamp "container '$container_name' failed to become ready for connections within reasonable time, check logs (format may have changed):"
+        if [ $SECONDS -gt $max_secs ]; then
+            timestamp "container '$container_name' failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
             echo >&2
             docker logs "$container_name"
             exit 1
