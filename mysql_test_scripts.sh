@@ -117,9 +117,17 @@ get_mysql_versions(){
             return
         fi
     fi
-    echo "using default list of MySQL versions to test against:" >&2
+    echo "$mysql_versions" |
+    tr ' ' '\n' |
+    grep -v '^[[:space:]]*$' |
+    if is_CI; then
+        echo "CI detected - using randomized sample of MySQL versions to test against:" >&2
+        shuf | head -n 3
+    else
+        echo "using default list of MySQL versions to test against:" >&2
+        cat
+    fi
     echo >&2
-    echo "$mysql_versions"
 }
 
 if [ -n "${MYSQL_VERSIONS:-}" ]; then
@@ -135,13 +143,13 @@ if [ -n "${MYSQL_VERSIONS:-}" ]; then
             versions+=" $version"
         fi
     done
-    mysql_versions="$versions"
+    mysql_versions="$(tr ' ' '\n' <<< "$versions" | grep -v '^[[:space:]]*$')"
     echo "using given MySQL versions:"
 else
     mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tac)"
 fi
 
-tr ' ' '\n' <<< "$mysql_versions" | grep -v '^[[:space:]]*$'
+echo "$mysql_versions"
 echo
 
 for version in $mysql_versions; do
