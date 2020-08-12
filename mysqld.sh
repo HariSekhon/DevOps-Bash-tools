@@ -127,6 +127,7 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
 fi
 
 # ensures version is correct before we kill any existing test env to switch versions
+timestamp "docker pull $docker_image:$version"
 docker_pull "$docker_image:$version"
 
 # kill existing if we have specified a different version than is running
