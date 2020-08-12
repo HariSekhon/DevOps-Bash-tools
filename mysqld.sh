@@ -73,7 +73,9 @@ $shell_description
 # shellcheck disable=SC2034
 usage_args="[<version>] [options]
 
--n  --no-delete     Don't delete the container upon the last mysql session closing (\$DOCKER_NO_DELETE)
+-n  --name  NAME    Docker container name to use (default: mysql)
+-p  --port  PORT    Expose MySQL port 3306 on given port number
+-d  --no-delete     Don't delete the container upon the last mysql session closing (\$DOCKER_NO_DELETE)
 -r  --restart       Force a restart of a clean MySQL instance (\$MYSQL_RESTART)
 -s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
 
@@ -84,23 +86,34 @@ container_name=mysql
 
 password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
 
-for arg; do
+while [ $# -gt 0 ]; do
     # DOCKER_NO_DELETE used by functions from lib
     # shellcheck disable=SC2034
-    case "$arg" in
+    case "$1" in
+      -n| --name)   container_name="$2"
+                    shift
+                    ;;
+      -p| --port)   port="$2"
+                    [[ "$port" =~ ^[[:digit:]]*$ ]] || die "invalid --port '$port' given"
+                    shift
+                    ;;
      -s|--sample)   LOAD_SAMPLE_DB=1
                     ;;
     -r|--restart)   MYSQL_RESTART=1
                     ;;
-  -n|--no-delete)   DOCKER_NO_DELETE=1
+  -d|--no-delete)   DOCKER_NO_DELETE=1
                     ;;
-               *)   version="$arg"
-                    shift
+               *)   version="$1"
                     ;;
     esac
+    shift
 done
 
 version="${version:-${MYSQL_VERSION:-latest}}"
+
+if [ -n "$port" ]; then
+    docker_opts="-p $port:5432"
+fi
 
 db="$srcdir/chinook.mysql"
 
@@ -137,7 +150,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # shellcheck disable=SC2154
     eval docker run -d \
         --name "$container_name" \
-        -p 3306:3306 \
+        "$docker_opts" \
         -e MYSQL_ROOT_PASSWORD="$password" \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version"
