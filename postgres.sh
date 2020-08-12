@@ -71,7 +71,9 @@ $shell_description
 # shellcheck disable=SC2034
 usage_args="[<version>] [options]
 
--n  --no-delete     Don't delete the container upon the last psql session closing (\$DOCKER_NO_DELETE)
+-n  --name  NAME    Docker container name to use (default: postgres)
+-p  --port  PORT    Expose PostgreSQL post 5432 on given port number
+-d  --no-delete     Don't delete the container upon the last psql session closing (\$DOCKER_NO_DELETE)
 -r  --restart       Force a restart of a clean PostgreSQL instance (\$POSTGRES_RESTART)
 -s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
 
@@ -79,26 +81,39 @@ help_usage "$@"
 
 docker_image=postgres
 container_name=postgres
+port=""
+docker_opts="-p 5432:5432"
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
 
-for arg; do
+while [ $# -gt 0 ]; do
     # DOCKER_NO_DELETE used by functions from lib
     # shellcheck disable=SC2034
-    case "$arg" in
+    case "$1" in
+      -n| --name)   container_name="$2"
+                    shift
+                    ;;
+      -p| --port)   port="$2"
+                    [[ "$port" =~ ^[[:digit:]]*$ ]] || die "invalid --port '$port' given"
+                    shift
+                    ;;
      -s|--sample)   LOAD_SAMPLE_DB=1
                     ;;
     -r|--restart)   POSTGRES_RESTART=1
                     ;;
-  -n|--no-delete)   DOCKER_NO_DELETE=1
+  -d|--no-delete)   DOCKER_NO_DELETE=1
                     ;;
-               *)   version="$arg"
-                    shift
+               *)   version="$1"
                     ;;
     esac
+    shift
 done
 
 version="${version:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
+
+if [ -n "$port" ]; then
+    docker_opts="-p $port:5432"
+fi
 
 db="$srcdir/chinook.psql"
 
@@ -135,7 +150,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # shellcheck disable=SC2154
     eval docker run -d \
         --name "$container_name" \
-        -p 5432:5432 \
+        "$docker_opts" \
         -e POSTGRES_PASSWORD="$password" \
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         "$docker_sql_mount_switches" \
