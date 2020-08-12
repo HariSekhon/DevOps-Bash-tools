@@ -82,7 +82,7 @@ help_usage "$@"
 docker_image=postgres
 container_name=postgres
 port=""
-docker_opts="-p 5432:5432"
+docker_opts=""
 
 password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-test}}}}"
 
