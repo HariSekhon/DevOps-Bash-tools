@@ -188,9 +188,9 @@ fi
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
 
-# allow non-interactive piped automation eg.
-# for sql in mysql*.sql; do echo "source $sql"; done | DOCKER_NON_INTERACTIVE=1 mariadb.sh
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+# allow non-interactive piped automation to avoid tty errors eg.
+# for sql in mysql*.sql; do echo "source $sql"; done | mariadb.sh
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
