@@ -80,7 +80,6 @@ usage_args="[<version>] [options]
 help_usage "$@"
 
 docker_image=postgres
-container_name=postgres
 port=""
 docker_opts=""
 
@@ -109,6 +108,7 @@ while [ $# -gt 0 ]; do
     shift
 done
 
+container_name="${container_name:-${POSTGRES_CONTAINER_NAME:-postgres}}"
 version="${version:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
 
 if [ -n "$port" ]; then
