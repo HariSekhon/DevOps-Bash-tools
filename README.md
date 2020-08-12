@@ -139,6 +139,14 @@ Cloud & Big Data Contractor, United Kingdom
 ### Quick Setup
 
 ```
+curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
+```
+
+or manually
+
+```
+git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
+cd bash-tools
 make install
 ```
 
