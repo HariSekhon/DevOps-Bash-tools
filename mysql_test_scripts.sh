@@ -76,6 +76,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+export MYSQL_CONTAINER_NAME="${MYSQL_CONTAINER_NAME:-mysql-test-scripts}"
+
 if [ $# -gt 0 ]; then
     scripts=("$@")
 else
