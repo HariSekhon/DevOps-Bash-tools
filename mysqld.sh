@@ -151,9 +151,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
     eval docker run -d \
-        --name "$container_name" \
+        --name '"$container_name"' \
         "$docker_opts" \
-        -e MYSQL_ROOT_PASSWORD="$password" \
+        -e MYSQL_ROOT_PASSWORD='"$password"' \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version"
         #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
@@ -172,7 +172,8 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     timestamp "loading $dbname database"
     #eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" -e "CREATE DATABASE IF NOT EXISTS $dbname"
     timestamp "loading data (this may take a minute)"
-    eval docker exec -i -e MYSQL_PWD="$password" "$container_name" mysql -u root "${MYSQL_OPTS:-}" < "${db}"
+    # shellcheck disable=SC2086
+    docker exec -i -e MYSQL_PWD="$password" "$container_name" mysql -u root ${MYSQL_OPTS:-} < "${db}"
     timestamp "done"
     echo >&2
 fi
@@ -193,7 +194,7 @@ if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec -e MYSQL_PWD="$password" "$docker_exec_opts" "$container_name" mysql -u root "${MYSQL_OPTS:-}"
+eval docker exec -e MYSQL_PWD='"$password"' "$docker_exec_opts" '"$container_name"' mysql -u root "${MYSQL_OPTS:-}"
 
 untrap
 
