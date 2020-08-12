@@ -88,6 +88,8 @@ then will only run that script on the specified versions of PostgreSQL
 This is for convenience so you can test a whole repository such as my SQL-scripts repo just by running against all scripts and have this code figure out the combinations of scripts to run vs versions, eg:
 
 ${0##*/} postgres_*.sql
+
+If no script files are given as arguments, then searches \$PWD for scripts named in the formats: postgres*.sql / *.psql
 "
 
 # used by usage() in lib/utils.sh
@@ -113,7 +115,7 @@ for sql_file in "${scripts[@]}"; do
     [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
 
-echo "Testing ${#scripts[@]} scripts:"
+echo "Testing ${#scripts[@]} PostgreSQL scripts:"
 echo
 for sql_file in "${scripts[@]}"; do
     echo "$sql_file"
