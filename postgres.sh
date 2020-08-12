@@ -211,7 +211,7 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     echo >&2
 fi
 
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     cat <<EOF
 $shell_description
 
