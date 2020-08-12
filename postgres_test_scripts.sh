@@ -156,7 +156,7 @@ if [ -n "${POSTGRES_VERSIONS:-}" ]; then
         if [[ "$version" =~ x ]]; then
             versions+=" $(grep "${version//x/.*}" <<< "$postgres_versions" |
                           sort -u -t. -k1n -k2 |
-                          tail -r ||
+                          tac ||
                           die "version '$version' not found")"
         else
             versions+=" $version"
@@ -165,7 +165,7 @@ if [ -n "${POSTGRES_VERSIONS:-}" ]; then
     postgres_versions="$versions"
     echo "using given PostgreSQL versions:" >&2
 else
-    postgres_versions="$(get_postgres_versions | tail -r)"
+    postgres_versions="$(get_postgres_versions | tac)"
 fi
 
 tr ' ' '\n' <<< "$postgres_versions" | grep -v '^[[:space:]]*$'

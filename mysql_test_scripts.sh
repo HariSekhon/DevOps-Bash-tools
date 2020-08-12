@@ -129,7 +129,7 @@ if [ -n "${MYSQL_VERSIONS:-}" ]; then
         if [[ "$version" =~ x ]]; then
             versions+=" $(grep "${version//x/.*}" <<< "$mysql_versions" |
                           sort -u -t. -k1n -k2 |
-                          tail -r ||
+                          tac ||
                           die "version '$version' not found")"
         else
             versions+=" $version"
@@ -138,7 +138,7 @@ if [ -n "${MYSQL_VERSIONS:-}" ]; then
     mysql_versions="$versions"
     echo "using given MySQL versions:"
 else
-    mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tail -r)"
+    mysql_versions="$(get_mysql_versions | tr ' ' '\n' | tac)"
 fi
 
 tr ' ' '\n' <<< "$mysql_versions" | grep -v '^[[:space:]]*$'

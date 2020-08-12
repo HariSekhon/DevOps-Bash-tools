@@ -134,7 +134,7 @@ if [ -n "${MARIADB_VERSIONS:-}" ]; then
         if [[ "$version" =~ x ]]; then
             versions+=" $(grep "${version//x/.*}" <<< "$mariadb_versions" |
                           sort -u -t. -k1n -k2 |
-                          tail -r ||
+                          tac ||
                           die "version '$version' not found")"
         else
             versions+=" $version"
@@ -143,7 +143,7 @@ if [ -n "${MARIADB_VERSIONS:-}" ]; then
     mariadb_versions="$versions"
     echo "using given MariaDB versions:" >&2
 else
-    mariadb_versions="$(get_mariadb_versions | tr ' ' '\n' | tail -r)"
+    mariadb_versions="$(get_mariadb_versions | tr ' ' '\n' | tac)"
 fi
 
 tr ' ' '\n' <<< "$mariadb_versions" | grep -v '^[[:space:]]*$'
