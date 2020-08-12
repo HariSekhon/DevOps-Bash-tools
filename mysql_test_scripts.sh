@@ -62,7 +62,10 @@ This is for convenience so you can test a whole repository such as my SQL-script
 
 ${0##*/} mysql_*.sql
 
-If no script file arguments are given, then searches \$PWD for scripts named in the formats: mysql*.sql / *.mysql
+If no script files are given as arguments, then searches \$PWD for scripts named in the formats:
+
+mysql*.sql
+*.mysql
 "
 
 # used by usage() in lib/utils.sh
