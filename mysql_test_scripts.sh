@@ -61,6 +61,8 @@ then will only run that script on the specified versions of MySQL
 This is for convenience so you can test a whole repository such as my SQL-scripts repo just by running against all scripts and have this code figure out the combinations of scripts to run vs versions, eg:
 
 ${0##*/} mysql_*.sql
+
+If no script file arguments are given, then searches \$PWD for scripts named in the formats: mysql*.sql / *.mysql
 "
 
 # used by usage() in lib/utils.sh
@@ -86,7 +88,7 @@ for sql_file in "${scripts[@]}"; do
     [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
 
-echo "Testing ${#scripts[@]} scripts:"
+echo "Testing ${#scripts[@]} MySQL scripts:"
 echo
 for sql_file in "${scripts[@]}"; do
     echo "$sql_file"
