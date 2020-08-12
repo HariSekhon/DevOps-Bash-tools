@@ -295,6 +295,10 @@ docker_ps_not_running(){
 docker_pull(){
     local docker_image="$1"
     local version
+    local opts
+    if is_CI or ! is_interactive; then
+        opts="-q"
+    fi
     if [[ "$docker_image" =~ : ]]; then
         version="${docker_image#*:}"
         docker_image="${docker_image%:*}"
@@ -303,7 +307,7 @@ docker_pull(){
     fi
     # don't pull if we already have the image locally - both to save time and remove internet dependency if running on a laptop
     if ! docker images --filter reference="$docker_image:$version" --format '{{.Repository}}:{{.Tag}}' | grep -q .; then
-        docker pull "$docker_image:$version"
+        docker pull $opts "$docker_image:$version"
     fi
 }
 
