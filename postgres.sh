@@ -72,7 +72,7 @@ $shell_description
 usage_args="[<version>] [options]
 
 -n  --name  NAME    Docker container name to use (default: postgres)
--p  --port  PORT    Expose PostgreSQL post 5432 on given port number
+-p  --port  PORT    Expose PostgreSQL port 5432 on given port number
 -d  --no-delete     Don't delete the container upon the last psql session closing (\$DOCKER_NO_DELETE)
 -r  --restart       Force a restart of a clean PostgreSQL instance (\$POSTGRES_RESTART)
 -s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
