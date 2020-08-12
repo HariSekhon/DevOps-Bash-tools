@@ -175,6 +175,7 @@ for version in $postgres_versions; do
     # need docker run non-interactive to avoid tty errors
     DOCKER_NON_INTERACTIVE=1 \
     "$srcdir/postgres.sh" "$version"
-    echo
-    echo
+    echo "Succeeded testing scripts for PostgreSQL $version"
+    echo >&2
+    echo >&2
 done
