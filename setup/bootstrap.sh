@@ -40,16 +40,16 @@ if [ "$(uname -s)" = Darwin ]; then
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
     if type apk >/dev/null 2>&1; then
-        $sudo apk --no-cache add bash git make
+        $sudo apk --no-cache add bash git make curl
     elif type apt-get >/dev/null 2>&1; then
         opts=""
         if [ -z "${PS1:-}" ]; then
             opts="-qq"
         fi
         $sudo apt-get update $opts
-        $sudo apt-get install $opts -y git make
+        $sudo apt-get install $opts -y git make curl
     elif type yum >/dev/null 2>&1; then
-        $sudo yum install -y git make
+        $sudo yum install -y git make curl
     else
         echo "Package Manager not found on Linux, cannot bootstrap"
         exit 1
