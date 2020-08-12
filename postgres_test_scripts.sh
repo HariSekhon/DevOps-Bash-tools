@@ -130,7 +130,7 @@ get_postgres_versions(){
         echo "checking if dockerhub_show_tags.py is available:" >&2
         echo >&2
         if type -P dockerhub_show_tags.py 2>/dev/null; then
-            echo
+            echo >&2
             echo "dockerhub_show_tags.py found, executing to get latest list of PostgreSQL docker version tags" >&2
             echo >&2
             postgres_versions="$(dockerhub_show_tags.py postgres |
@@ -139,7 +139,7 @@ get_postgres_versions(){
                                 grep -v "8.4" |
                                 sort -u -t. -k1n -k2n)"
             echo "found PostgreSQL versions:" >&2
-            echo
+            echo >&2
             echo "$postgres_versions"
             return
         fi
