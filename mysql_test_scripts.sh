@@ -78,7 +78,7 @@ else
     scripts=(mysql*.sql *.mysql)
 fi
 
-if [ ${#scripts} -lt 1 ]; then
+if [ ${#scripts[@]} -lt 1 ]; then
     usage "no scripts given and none found in current working directory matching the patterns: mysql*.sql / *.mysql"
 fi
 
@@ -86,7 +86,7 @@ for sql_file in "${scripts[@]}"; do
     [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
 
-echo "Testing scripts:"
+echo "Testing ${#scripts[@]} scripts:"
 echo
 for sql_file in "${scripts[@]}"; do
     echo "$sql_file"
@@ -168,7 +168,7 @@ for version in $mysql_versions; do
     MYSQL_OPTS="--table" \
     command time \
     "$srcdir/mysqld.sh" "$version" --restart
-    timestamp "Succeeded testing scripts for MySQL $version"
+    timestamp "Succeeded testing ${#scripts[@]} scripts for MySQL $version"
     echo >&2
     echo >&2
 done
