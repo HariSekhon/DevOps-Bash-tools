@@ -441,8 +441,7 @@ run_test_versions(){
     test_versions_ordered="$test_versions"
     if [ -z "${NO_VERSION_REVERSE:-}" ]; then
         # tail -r works on Mac but not Travis CI Ubuntu Trusty
-        # tac works on Linux but not on Mac
-        test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | perl -pe 'print reverse <>' | tr '\n' ' ')"
+        test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | tac | tr '\n' ' ')"
     fi
     local start_time
     start_time="$(start_timer "$name tests")"
