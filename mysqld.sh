@@ -82,7 +82,6 @@ usage_args="[<version>] [options]
 help_usage "$@"
 
 docker_image=mysql
-container_name=mysql
 port=""
 docker_opts=""
 
@@ -111,6 +110,7 @@ while [ $# -gt 0 ]; do
     shift
 done
 
+container_name="${container_name:-${MYSQL_CONTAINER_NAME:-mysql}}"
 version="${version:-${MYSQL_VERSION:-latest}}"
 
 if [ -n "$port" ]; then
