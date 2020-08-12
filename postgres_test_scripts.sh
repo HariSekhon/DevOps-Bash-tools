@@ -103,6 +103,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+export POSTGRES_CONTAINER_NAME="${POSTGRES_CONTAINER_NAME:-postgres-test-scripts}"
+
 if [ $# -gt 0 ]; then
     scripts=("$@")
 else
