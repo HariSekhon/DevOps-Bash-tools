@@ -172,7 +172,7 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     timestamp "loading $dbname database"
     #eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" -e "CREATE DATABASE IF NOT EXISTS $dbname"
     timestamp "loading data (this may take a minute)"
-    eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" < "${db}"
+    eval docker exec -i -e MYSQL_PWD="$password" "$container_name" mysql -u root "${MYSQL_OPTS:-}" < "${db}"
     timestamp "done"
     echo >&2
 fi
@@ -193,7 +193,7 @@ if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec "$docker_exec_opts" "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}"
+eval docker exec -e MYSQL_PWD="$password" "$docker_exec_opts" "$container_name" mysql -u root "${MYSQL_OPTS:-}"
 
 untrap
 
