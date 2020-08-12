@@ -69,11 +69,29 @@ usage_args="script1.sql [script2.sql ...]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-for sql in "$@"; do
-    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+if [ $# -gt 0 ]; then
+    scripts=("$@")
+else
+    shopt -s nullglob
+    scripts=(mysql*.sql *.mysql)
+fi
+
+if [ ${#scripts} -lt 1 ]; then
+    usage "no scripts given and none found in current working directory matching the patterns: mysql*.sql / *.mysql"
+fi
+
+for sql_file in "${scripts[@]}"; do
+    [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
+
+echo "Testing scripts:"
+echo
+for sql_file in "${scripts[@]}"; do
+    echo "$sql_file"
+done
+echo
 
 get_mysql_versions(){
     if [ -n "${GET_DOCKER_TAGS:-}" ]; then
@@ -125,11 +143,11 @@ for version in $mysql_versions; do
     echo >&2
     {
     echo 'SELECT VERSION();'
-    for sql in "$@"; do
-        if skip_min_version "MySQL" "$version" "$sql"; then
+    for sql_file in "${scripts[@]}"; do
+        if skip_min_version "MySQL" "$version" "$sql_file"; then
             continue
         fi
-        if skip_max_version "MySQL" "$version" "$sql"; then
+        if skip_max_version "MySQL" "$version" "$sql_file"; then
             continue
         fi
         # comes out first, not between scripts
@@ -137,12 +155,12 @@ for version in $mysql_versions; do
         # no effect
         #echo
         # comes out first instead of with scripts
-        #echo "\\! printf '\nscript %s:' '$sql'"
-        echo "select '$sql' as script;"
+        #echo "\\! printf '\nscript %s:' '$sql_file'"
+        echo "select '$sql_file' as script;"
         # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
         # just cat them in to the shell instead as it's more portable
-        #echo "source $sql"
-        cat "$sql"
+        #echo "source $sql_file"
+        cat "$sql_file"
         #echo "\\! printf '\n\n'"
     done
     } |
