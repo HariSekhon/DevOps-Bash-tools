@@ -42,8 +42,12 @@ elif [ "$(uname -s)" = Linux ]; then
     if type apk >/dev/null 2>&1; then
         $sudo apk --no-cache add bash git make
     elif type apt-get >/dev/null 2>&1; then
-        $sudo apt-get update
-        $sudo apt-get install -y git make
+        opts=""
+        if [ -z "${PS1:-}" ]; then
+            opts="-qq"
+        fi
+        $sudo apt-get update $opts
+        $sudo apt-get install $opts -y git make
     elif type yum >/dev/null 2>&1; then
         $sudo yum install -y git make
     else
