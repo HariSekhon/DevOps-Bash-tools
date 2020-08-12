@@ -190,6 +190,7 @@ docker_exec_opts="-w /sql -i"
 
 # allow non-interactive piped automation to avoid tty errors eg.
 # for sql in mysql*.sql; do echo "source $sql"; done | mysqld.sh
+# normally you would just 'mysqld.sh mysql*.sql' but this is used by mysql_test_scripts.sh
 if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
