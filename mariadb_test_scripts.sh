@@ -148,9 +148,7 @@ for version in $mariadb_versions; do
         #echo "\\! printf '\n\n'"
     done
     } |
-    # need docker run non-interactive to avoid tty errors
     # forcing mysql shell --table output as though interactive
-    DOCKER_NON_INTERACTIVE=1 \
     MYSQL_OPTS="--table" \
     "$srcdir/mariadb.sh" "$version"
     timestamp "Succeeded testing scripts for MariaDB $version"
