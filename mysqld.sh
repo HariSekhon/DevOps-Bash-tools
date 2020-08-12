@@ -84,7 +84,7 @@ help_usage "$@"
 docker_image=mysql
 container_name=mysql
 
-password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
+password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-${PASSWORD:-test}}}}"
 
 while [ $# -gt 0 ]; do
     # DOCKER_NO_DELETE used by functions from lib
