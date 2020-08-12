@@ -150,6 +150,7 @@ for version in $mariadb_versions; do
     } |
     # forcing mysql shell --table output as though interactive
     MYSQL_OPTS="--table" \
+    command time \
     "$srcdir/mariadb.sh" "$version" --restart
     timestamp "Succeeded testing scripts for MariaDB $version"
     echo >&2
