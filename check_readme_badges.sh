@@ -39,6 +39,8 @@ duplicates="$(
             -e 'harisekhon/github' \
             -e 'harisekhon/centos-github' \
             -e 'StarTrack' \
+            -e 'LinkedIn' \
+            -e 'Spotify' \
             -e '^=*$'
 )"
 set -eo pipefail

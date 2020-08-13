@@ -69,17 +69,63 @@ $shell_description
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<version>]"
+usage_args="[<version>] [options]
+
+-n  --name  NAME    Docker container name to use (default: postgres)
+-p  --port  PORT    Expose PostgreSQL port 5432 on given port number
+-d  --no-delete     Don't delete the container upon the last psql session closing (\$DOCKER_NO_DELETE)
+-r  --restart       Force a restart of a clean PostgreSQL instance (\$POSTGRES_RESTART)
+-s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
 
 help_usage "$@"
 
 docker_image=postgres
-container_name=postgres
-version="${1:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
+port=""
+docker_opts=""
 
-password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-test}}}"
+password="${PGPASSWORD:-${POSTGRESQL_PASSWORD:-${POSTGRES_PASSWORD:-${PASSWORD:-test}}}}"
+
+while [ $# -gt 0 ]; do
+    # DOCKER_NO_DELETE used by functions from lib
+    # shellcheck disable=SC2034
+    case "$1" in
+      -n| --name)   container_name="$2"
+                    shift
+                    ;;
+      -p| --port)   port="$2"
+                    [[ "$port" =~ ^[[:digit:]]*$ ]] || die "invalid --port '$port' given"
+                    shift
+                    ;;
+     -s|--sample)   LOAD_SAMPLE_DB=1
+                    ;;
+    -r|--restart)   POSTGRES_RESTART=1
+                    ;;
+  -d|--no-delete)   DOCKER_NO_DELETE=1
+                    ;;
+               *)   version="$1"
+                    ;;
+    esac
+    shift
+done
+
+container_name="${container_name:-${POSTGRES_CONTAINER_NAME:-postgres}}"
+version="${version:-${POSTGRESQL_VERSION:-${POSTGRES_VERSION:-latest}}}"
+
+if [ -n "$port" ]; then
+    docker_opts="-p $port:5432"
+fi
+
+db="$srcdir/chinook.psql"
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
+   ! [ -f "$db.utf8" ]; then
+    timestamp "downloading sample 'chinook' database"
+    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_PostgreSql.sql?raw=true'
+    iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
+fi
 
 # ensures version is correct before we kill any existing test env to switch versions
+timestamp "docker pull $docker_image:$version"
 docker_pull "$docker_image:$version"
 
 # kill existing if we have specified a different version than is running
@@ -104,9 +150,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
     eval docker run -d \
-        --name "$container_name" \
-        -p 5432:5432 \
-        -e POSTGRES_PASSWORD="$password" \
+        --name '"$container_name"' \
+        "$docker_opts" \
+        -e POSTGRES_PASSWORD="\"$password\"" \
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version" \
@@ -116,9 +162,8 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
 
     SECONDS=0
-    max_secs=30
+    max_secs=60
     num_lines=50
-    timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
     # PostgreSQL 84:
     #
 	# PostgreSQL stand-alone backend 8
@@ -133,6 +178,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # 2020-08-09 21:56:04.824 GMT [1] LOG:  database system is ready to accept connections
     #
     while true; do
+        timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
         if docker logs --tail "$num_lines" "$container_name" 2>&1 |
            grep -E -A "$num_lines" \
            -e 'PostgreSQL init.*(ready|complete)' \
@@ -140,7 +186,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
            grep 'ready to accept connections'; then
             break
         fi
-        sleep 0.1
+        sleep 1
         if [ $SECONDS -gt $max_secs ]; then
             echo "PostgreSQL failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
             echo
@@ -151,7 +197,21 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
+    dbname="${db##*/}"
+    dbname="${dbname%%.*}"
+    timestamp "loading $dbname database"
+    # psql -c doesn't allow mixing SQL and psql meta-commands, must pipe in
+    # create database if not exists equiv in postgres                                                         # \gexec executes each column returned as a SQL statement
+    echo "SELECT 'CREATE DATABASE $dbname' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = '$dbname')\\gexec" |
+    docker exec -i -e PGOPTIONS="-c client_min_messages=WARNING" "$container_name" psql -U postgres
+    timestamp "loading data (this may take a minute)"
+    docker exec -e PGOPTIONS="-c client_min_messages=WARNING" "$container_name" psql -U postgres -q -d "$dbname" -f "/bash/${db##*/}.utf8"
+    timestamp "done"
+    echo >&2
+fi
+
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     cat <<EOF
 $shell_description
 
@@ -165,13 +225,14 @@ trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_nam
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
 
-# allow non-interactive piped automation eg.
-# for sql in postgres*.sql; do echo "\\i $sql"; done | DOCKER_NON_INTERACTIVE=1 postgres.sh
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+# allow non-interactive piped automation to avoid tty errors eg.
+# for sql in postgres*.sql; do echo "source $sql"; done | postgres.sh
+# normally you would just 'postgres.sh postgres*.sql' but this is used by postgres_test_scripts.sh
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec "$docker_exec_opts" "$container_name" psql -U postgres
+eval docker exec "$docker_exec_opts" '"$container_name"' psql -U postgres
 
 untrap
 

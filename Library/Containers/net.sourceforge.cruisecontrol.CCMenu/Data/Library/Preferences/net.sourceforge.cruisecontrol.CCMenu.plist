@@ -88,6 +88,12 @@
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
 		</dict>
+		<dict>
+			<key>projectName</key>
+            <string>HariSekhon/SQL-scripts</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/SQL-scripts/cc.xml</string>
+		</dict>
 	</array>
 	<key>SendNotification Broken</key>
 	<true/>

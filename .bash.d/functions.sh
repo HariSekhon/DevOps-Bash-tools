@@ -39,6 +39,11 @@ retmode(){
     fi
 }
 
+envg(){
+    env |
+    eval grep -i "$(for arg; do echo -n " -e '$arg'"; done)"
+}
+
 new(){
     if [ $# -eq 2 ]; then
         title "${2#modules/}"

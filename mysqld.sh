@@ -71,17 +71,63 @@ $shell_description
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<version>]"
+usage_args="[<version>] [options]
+
+-n  --name  NAME    Docker container name to use (default: mysql)
+-p  --port  PORT    Expose MySQL port 3306 on given port number
+-d  --no-delete     Don't delete the container upon the last mysql session closing (\$DOCKER_NO_DELETE)
+-r  --restart       Force a restart of a clean MySQL instance (\$MYSQL_RESTART)
+-s  --sample        Load sample Chinook database (\$LOAD_SAMPLE)"
 
 help_usage "$@"
 
 docker_image=mysql
-container_name=mysql
-version="${1:-${MYSQL_VERSION:-latest}}"
+port=""
+docker_opts=""
 
-password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-test}}}"
+password="${MYSQL_ROOT_PASSWORD:-${MYSQL_PWD:-${MYSQL_PASSWORD:-${PASSWORD:-test}}}}"
+
+while [ $# -gt 0 ]; do
+    # DOCKER_NO_DELETE used by functions from lib
+    # shellcheck disable=SC2034
+    case "$1" in
+      -n| --name)   container_name="$2"
+                    shift
+                    ;;
+      -p| --port)   port="$2"
+                    [[ "$port" =~ ^[[:digit:]]*$ ]] || die "invalid --port '$port' given"
+                    shift
+                    ;;
+     -s|--sample)   LOAD_SAMPLE_DB=1
+                    ;;
+    -r|--restart)   MYSQL_RESTART=1
+                    ;;
+  -d|--no-delete)   DOCKER_NO_DELETE=1
+                    ;;
+               *)   version="$1"
+                    ;;
+    esac
+    shift
+done
+
+container_name="${container_name:-${MYSQL_CONTAINER_NAME:-mysql}}"
+version="${version:-${MYSQL_VERSION:-latest}}"
+
+if [ -n "$port" ]; then
+    docker_opts="-p $port:5432"
+fi
+
+db="$srcdir/chinook.mysql"
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
+   ! [ -f "$db" ]; then
+    timestamp "downloading sample 'chinook' database"
+    wget -qcO "$db" 'https://github.com/lerocha/chinook-database/blob/master/ChinookDatabase/DataSources/Chinook_MySql.sql?raw=true'
+    #iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
+fi
 
 # ensures version is correct before we kill any existing test env to switch versions
+timestamp "docker pull $docker_image:$version"
 docker_pull "$docker_image:$version"
 
 # kill existing if we have specified a different version than is running
@@ -106,9 +152,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154
     eval docker run -d \
-        --name "$container_name" \
-        -p 3306:3306 \
-        -e MYSQL_ROOT_PASSWORD="$password" \
+        --name '"$container_name"' \
+        "$docker_opts" \
+        -e MYSQL_ROOT_PASSWORD='"$password"' \
         "$docker_sql_mount_switches" \
         "$docker_image":"$version"
         #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
@@ -117,27 +163,40 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+# yes expand now
+# shellcheck disable=SC2064
+trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
+
+if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
+    dbname="${db##*/}"
+    dbname="${dbname%%.*}"
+    timestamp "loading $dbname database"
+    #eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" -e "CREATE DATABASE IF NOT EXISTS $dbname"
+    timestamp "loading data (this may take a minute)"
+    # shellcheck disable=SC2086
+    docker exec -i -e MYSQL_PWD="$password" "$container_name" mysql -u root ${MYSQL_OPTS:-} < "${db}"
+    timestamp "done"
+    echo >&2
+fi
+
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     cat <<EOF
 $shell_description
 
 EOF
 fi
 
-# yes expand now
-# shellcheck disable=SC2064
-trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
-
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
 
-# allow non-interactive piped automation eg.
-# for sql in mysql*.sql; do echo "source $sql"; done | DOCKER_NON_INTERACTIVE=1 mysqld.sh
-if [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+# allow non-interactive piped automation to avoid tty errors eg.
+# for sql in mysql*.sql; do echo "source $sql"; done | mysqld.sh
+# normally you would just 'mysqld.sh mysql*.sql' but this is used by mysql_test_scripts.sh
+if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec "$docker_exec_opts" "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}"
+eval docker exec -e MYSQL_PWD='"$password"' "$docker_exec_opts" '"$container_name"' mysql -u root "${MYSQL_OPTS:-}"
 
 untrap
 

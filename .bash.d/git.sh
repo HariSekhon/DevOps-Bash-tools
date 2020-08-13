@@ -193,7 +193,7 @@ git_user_repo(){
 }
 
 git_repo(){
-    git_user_repo | sed 's|.*/||'
+    git_user_repo | sed 's|.*/||;s/\.git$//'
 }
 
 github_user_repo(){
@@ -479,6 +479,18 @@ gitu(){
         popd &>/dev/null || :
     done
     trap - $trap_codes
+}
+gituu(){
+    # avoiding xargs due to function reference:
+    # gxargs: gitu: No such file or directory
+    eval gitu "$(
+        git status --porcelain . |
+        grep '^.M' |
+        sed 's/...//' |
+        while read -r filename; do
+            echo "\"$filename\""
+        done
+    )"
 }
 
 #githgu(){

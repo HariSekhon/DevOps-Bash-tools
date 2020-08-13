@@ -316,6 +316,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
 nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
+nmap          ;/ :w<CR> :! bash -ic 'add "%"'<CR>
 nmap          ;g :w<CR> :! bash -ic 'cd "%:p:h" && st'<CR>
 nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%"'<CR>
 nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
@@ -327,7 +328,7 @@ nmap <silent> ;u :w<CR> :! grep -v harisekhon "%" \| urlview <CR>
 nmap <silent> ;U :.w !urlview<CR> :!reset<CR><CR>
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
-nmap          ;/ :source ~/.vimrc<CR>
+"nmap          ;/ :source ~/.vimrc<CR>
 nmap          ;v :source ~/.vimrc<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>

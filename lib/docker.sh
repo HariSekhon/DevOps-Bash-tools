@@ -295,6 +295,15 @@ docker_ps_not_running(){
 docker_pull(){
     local docker_image="$1"
     local version
+    local opts
+    if is_CI or ! is_interactive; then
+        if [ "$(docker version --format '{{.Client.Version}}' | grep -o '[[:digit:]]*' | head -n 1)" -gt 18 ]; then
+            opts="-q"
+        else
+            # Travis CI has Docker 18 without the -q / --quiet switch
+            opts="> /dev/null"
+        fi
+    fi
     if [[ "$docker_image" =~ : ]]; then
         version="${docker_image#*:}"
         docker_image="${docker_image%:*}"
@@ -303,7 +312,9 @@ docker_pull(){
     fi
     # don't pull if we already have the image locally - both to save time and remove internet dependency if running on a laptop
     if ! docker images --filter reference="$docker_image:$version" --format '{{.Repository}}:{{.Tag}}' | grep -q .; then
-        docker pull "$docker_image:$version"
+        # want splitting
+        # shellcheck disable=SC2086
+        eval docker pull $opts "$docker_image:$version"
     fi
 }
 

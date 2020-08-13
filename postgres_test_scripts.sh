@@ -21,6 +21,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/dbshell.sh"
+
 postgres_versions="
 8.4
 9.0
@@ -66,11 +69,30 @@ Sources each script in PostgreSQL in the order given
 
 Runs against a list of PostgreSQL versions from the first of the following conditions:
 
-- If \$POSTGRES_VERSIONS environment variable is set, then only tests against those versions in the order given
+- If \$POSTGRES_VERSIONS environment variable is set, then only tests against those versions in the order given, space or comma separated, with 'x' used as a wildcard (eg. '10.x , 11.x , 12.x')
 - If \$GET_DOCKER_TAGS is set and dockerhub_show_tags.py is found in the \$PATH (from DevOps Python tools repo), then uses it to fetch the latest live list of version tags available from the dockerhub API, reordering by newest first
 - Falls back to the following pre-set list of versions, reordering by newest first:
 
 $(tr ' ' '\n' <<< "$postgres_versions" | grep -v '^[[:space:]]*$')
+
+If a script has a headers such as:
+
+-- Requires PostgreSQL N.N (same as >=)
+-- Requires PostgreSQL >= N.N
+-- Requires PostgreSQL >  N.N
+-- Requires PostgreSQL <= N.N
+-- Requires PostgreSQL <  N.N
+
+then will only run that script on the specified versions of PostgreSQL
+
+This is for convenience so you can test a whole repository such as my SQL-scripts repo just by running against all scripts and have this code figure out the combinations of scripts to run vs versions, eg:
+
+${0##*/} postgres_*.sql
+
+If no script files are given as arguments, then searches \$PWD for scripts named in the formats:
+
+postgres*.sql
+*.psql
 "
 
 # used by usage() in lib/utils.sh
@@ -79,42 +101,84 @@ usage_args="script1.sql [script2.sql ...]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-for sql in "$@"; do
-    [ -f "$sql" ] || die "ERROR: file not found: $sql"
+export POSTGRES_CONTAINER_NAME="${POSTGRES_CONTAINER_NAME:-postgres-test-scripts}"
+
+if [ $# -gt 0 ]; then
+    scripts=("$@")
+else
+    shopt -s nullglob
+    scripts=(postgres*.sql *.psql)
+fi
+
+if [ ${#scripts[@]} -lt 1 ]; then
+    usage "no scripts given and none found in current working directory matching the patterns: postgres*.sql / *.psql"
+fi
+
+for sql_file in "${scripts[@]}"; do
+    [ -f "$sql_file" ] || die "ERROR: file not found: $sql_file"
 done
+
+echo "Testing ${#scripts[@]} PostgreSQL scripts:"
+echo
+for sql_file in "${scripts[@]}"; do
+    echo "$sql_file"
+done
+echo
 
 get_postgres_versions(){
     if [ -n "${GET_DOCKER_TAGS:-}" ]; then
         echo "checking if dockerhub_show_tags.py is available:" >&2
-        echo
+        echo >&2
         if type -P dockerhub_show_tags.py 2>/dev/null; then
-            echo
+            echo >&2
             echo "dockerhub_show_tags.py found, executing to get latest list of PostgreSQL docker version tags" >&2
-            echo
+            echo >&2
             postgres_versions="$(dockerhub_show_tags.py postgres |
                                 grep -Eo '[[:space:]][[:digit:]]{1,2}\.[[:digit:]]' -e '^[[:space:]*latest[[:space:]]*$' |
                                 sed 's/[[:space:]]//g' |
                                 grep -v "8.4" |
                                 sort -u -t. -k1n -k2n)"
             echo "found PostgreSQL versions:" >&2
+            echo >&2
             echo "$postgres_versions"
             return
         fi
     fi
-    echo "using default list of PostgreSQL versions to test against:" >&2
-    echo "$postgres_versions"
+    echo "$postgres_versions" |
+    tr ' ' '\n' |
+    grep -v '^[[:space:]]*$' |
+    if is_CI; then
+        echo "CI detected - using randomized sample of PostgreSQL versions to test against:" >&2
+        shuf | head -n 5
+    else
+        echo "using default list of PostgreSQL versions to test against:" >&2
+        cat
+    fi
+    echo >&2
 }
 
 if [ -n "${POSTGRES_VERSIONS:-}" ]; then
-    postgres_versions="${POSTGRES_VERSIONS//,/ }"
+    versions=""
+    POSTGRES_VERSIONS="${POSTGRES_VERSIONS//,/ }"
+    for version in $POSTGRES_VERSIONS; do
+        if [[ "$version" =~ x ]]; then
+            versions+=" $(grep "${version//x/.*}" <<< "$postgres_versions" |
+                          sort -u -t. -k1n -k2 |
+                          tac ||
+                          die "version '$version' not found")"
+        else
+            versions+=" $version"
+        fi
+    done
+    postgres_versions="$(tr ' ' '\n' <<< "$versions" | grep -v '^[[:space:]]*$')"
     echo "using given PostgreSQL versions:" >&2
 else
-    postgres_versions="$(get_postgres_versions | tail -r)"
+    postgres_versions="$(get_postgres_versions | tac)"
 fi
 
-tr ' ' '\n' <<< "$postgres_versions"
+echo "$postgres_versions"
 echo
 
 for version in $postgres_versions; do
@@ -123,23 +187,28 @@ for version in $postgres_versions; do
     echo >&2
     {
     echo 'SELECT VERSION();'
-    for sql in "$@"; do
+    for sql_file in "${scripts[@]}"; do
+        if skip_min_version "PostgreSQL" "$version" "$sql_file"; then
+            continue
+        fi
+        if skip_max_version "PostgreSQL" "$version" "$sql_file"; then
+            continue
+        fi
         echo '\! printf "================================================================================\n"'
         # no effect
         #echo
         echo '\set ON_ERROR_STOP true'
         # ugly
-        #echo "select '$sql' as script;"
-        echo "\\! printf '\\nscript %s:\\n\\n' '$sql'"
+        #echo "select '$sql_file' as script;"
+        echo "\\! printf '\\nscript %s:\\n\\n' '$sql_file'"
         # instead of dealing with pathing issues, prefixing /pwd or depending on the scripts being in the sql/ directory
-        #echo "\\i $sql"
-        cat "$sql"
+        #echo "\\i $sql_file"
+        cat "$sql_file"
         echo "\\! printf '\\n\\n'"
     done
     } |
-    # need docker run non-interactive to avoid tty errors
-    DOCKER_NON_INTERACTIVE=1 \
-    "$srcdir/postgres.sh" "$version"
-    echo
-    echo
+    command time "$srcdir/postgres.sh" "$version" --restart
+    timestamp "Succeeded testing ${#scripts[@]} scripts for PostgreSQL $version"
+    echo >&2
+    echo >&2
 done
