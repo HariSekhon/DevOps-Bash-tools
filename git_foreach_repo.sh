@@ -47,10 +47,10 @@ repolist="${REPOS:-}"
 if [ -n "$repolist" ]; then
     :
 elif [ -f "$repofile" ]; then
-    echo "processing repos from file: $repofile"
+    echo "processing repos from file: $repofile" >&2
     repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
 else
-    echo "fetching repos from GitHub repo list"
+    echo "fetching repos from GitHub repo list" >&2
     repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
 fi
 
@@ -67,9 +67,9 @@ for repo in $repolist; do
         continue
     fi
     pushd "$repo_dir" >/dev/null
-    echo "========================================"
-    echo "$repo - $PWD"
-    echo "========================================"
+    echo "========================================" >&2
+    echo "$repo - $PWD" >&2
+    echo "========================================" >&2
     eval "$@"
     popd >/dev/null
     echo
