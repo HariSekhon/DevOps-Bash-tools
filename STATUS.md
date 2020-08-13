@@ -38,6 +38,11 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/nagios-plugins.svg)](http://microbadger.com/#/images/harisekhon/nagios-plugins)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/Nagios-Plugins/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/Nagios-Plugins)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Nagios-Plugins/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Nagios-Plugins/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/Nagios-Plugins/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/Nagios-Plugins)
@@ -51,11 +56,6 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Nagios-Plugins.svg)](https://harisekhon.semaphoreci.com/projects/Nagios-Plugins)
 [![Wercker](https://app.wercker.com/status/76887616b9d1ea67f640e9001cd71662/s/master "wercker status")](https://app.wercker.com/harisekhon/Nagios-Plugins/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Nagios-Plugins?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=9&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/nagios-plugins/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/Nagios-Plugins/addon/pipelines/home#!/)
@@ -126,6 +126,11 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/u/harisekhon)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/Dockerfiles/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Dockerfiles/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Dockerfiles/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/Dockerfiles/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/Dockerfiles)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Dockerfiles/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Dockerfiles/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/Dockerfiles/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/Dockerfiles)
@@ -138,11 +143,6 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Dockerfiles.svg)](https://harisekhon.semaphoreci.com/projects/Dockerfiles)
 [![Wercker](https://app.wercker.com/status/26a0f1151450a0de3d8a339345b70019/s/master "wercker status")](https://app.wercker.com/harisekhon/dockerfiles/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/Dockerfiles/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Dockerfiles/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Dockerfiles/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Dockerfiles?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=6&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/dockerfiles/master?logo=bitbucketi&label=BitBucket)](https://bitbucket.org/harisekhon/dockerfiles/addon/pipelines/home#!/)
@@ -204,6 +204,11 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/pytools.svg)](http://microbadger.com/#/images/harisekhon/pytools)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Python-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Python-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/DevOps-Python-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/DevOps-Python-tools/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Python-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Python-tools)
@@ -217,11 +222,6 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Python-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Python-tools)
 [![Wercker](https://app.wercker.com/status/b40735fb89e7d989dbaf5659a9af9a20/s/master "wercker status")](https://app.wercker.com/harisekhon/DevOps-Python-tools/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Python-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=8&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-python-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-python-tools/addon/pipelines/home#!/)
@@ -288,6 +288,11 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 
 
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/devops-bash-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Bash-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
@@ -301,11 +306,6 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Bash-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Bash-tools)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/harisekhon/DevOps-Bash-tools/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Bash-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=1&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
@@ -367,6 +367,11 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/_/haproxy)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/HAProxy-configs/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/HAProxy-configs/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/HAProxy-configs)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/HAProxy-configs/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/HAProxy-configs/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/HAProxy-configs/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/HAProxy-configs)
@@ -379,11 +384,6 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/HAProxy-configs.svg)](https://harisekhon.semaphoreci.com/projects/HAProxy-configs)
 [![Wercker](https://app.wercker.com/status/3eab52046f673b476fa5e54adb5dfbba/s/master "wercker status")](https://app.wercker.com/harisekhon/haproxy-configs/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/HAProxy-configs/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.HAProxy-configs?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=10&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/haproxy-configs/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/haproxy-configs/addon/pipelines/home#!/)
@@ -441,6 +441,11 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/perl-tools.svg)](http://microbadger.com/#/images/harisekhon/perl-tools)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,Dockerfiles&r=HariSekhon,HAProxy-configs)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Perl-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Perl-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/DevOps-Perl-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/DevOps-Perl-tools/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Perl-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Perl-tools)
@@ -454,11 +459,6 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Perl-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Perl-tools)
 [![Wercker](https://app.wercker.com/status/1f2132ff1c5b4098e3321456e67f54db/s/master "wercker status")](https://app.wercker.com/harisekhon/DevOps-Perl-tools/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.DevOps-Perl-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=7&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-perl-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/devops-perl-tools/addon/pipelines/home#!/)
@@ -523,6 +523,11 @@ Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/centos-github?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/github.svg)](http://microbadger.com/#/images/harisekhon/github)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/lib/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/lib/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/lib/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/lib/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/lib)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/lib/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/lib/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/lib/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/lib)
@@ -535,11 +540,6 @@ Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/lib.svg)](https://harisekhon.semaphoreci.com/projects/lib)
 [![Wercker](https://app.wercker.com/status/7af643f46ecad1311bc1200fd42e509b/s/master "wercker status")](https://app.wercker.com/harisekhon/lib/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/lib/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/lib/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/lib/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.lib?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=3&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/lib/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/lib/addon/pipelines/home#!/)
@@ -600,6 +600,11 @@ Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/spotify-tools#spotify-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/spotify-tools#spotify-tools)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/Spotify-tools/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/Spotify-tools/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/Spotify-tools/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/Spotify-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/Spotify-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Spotify-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Spotify-tools/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/Spotify-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/Spotify-tools)
@@ -612,11 +617,6 @@ Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Spotify-tools.svg)](https://harisekhon.semaphoreci.com/projects/Spotify-tools)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/harisekhon/Spotify-tools/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/Spotify-tools/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/Spotify-tools/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/Spotify-tools/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.spotify-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=3&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/spotify-tools/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/spotify-tools/addon/pipelines/home#!/)
@@ -678,6 +678,11 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/centos-github?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/github.svg)](http://microbadger.com/#/images/harisekhon/github)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/pylib/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/pylib/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/pylib/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/pylib/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/pylib)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/pylib/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/pylib/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/pylib/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/pylib)
@@ -690,11 +695,6 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/pylib.svg)](https://harisekhon.semaphoreci.com/projects/pylib)
 [![Wercker](https://app.wercker.com/status/abfa58ca784a2d86cc417be3615f2d3a/s/master "wercker status")](https://app.wercker.com/harisekhon/pylib/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/pylib/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/pylib/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/pylib/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.pylib?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=4&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/pylib/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/pylib/addon/pipelines/home#!/)
@@ -756,6 +756,11 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/nagios-plugin-kafka?logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/nagios-plugin-kafka.svg)](http://microbadger.com/#/images/harisekhon/nagios-plugin-kafka)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/Nagios-Plugin-Kafka/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/Nagios-Plugin-Kafka)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Nagios-Plugin-Kafka/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Nagios-Plugin-Kafka/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/Nagios-Plugin-Kafka/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/Nagios-Plugin-Kafka)
@@ -768,11 +773,6 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Nagios-Plugin-Kafka.svg)](https://harisekhon.semaphoreci.com/projects/Nagios-Plugin-Kafka)
 [![Wercker](https://app.wercker.com/status/fe4f87bf98f31e4c22a3041c0966644b/s/master "wercker status")](https://app.wercker.com/harisekhon/nagios-plugin-kafka/runs)
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.Nagios-Plugin-Kafka?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=11&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/nagios-plugin-kafka/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/nagios-plugin-kafka/addon/pipelines/home#!/)
@@ -816,7 +816,9 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 [![AWS Athena](https://img.shields.io/badge/SQL-AWS%20Athena-232F3E?logo=amazon%20aws)](https://aws.amazon.com/athena/)
 [![Google BigQuery](https://img.shields.io/badge/SQL-Google%20BigQuery-4285F4?logo=google%20cloud)](https://cloud.google.com/bigquery)
 
-[![Travis CI](https://img.shields.io/travis/harisekhon/sql-scripts/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/SQL-scripts)
+[![Travis CI](https://img.shields.io/travis/harisekhon/sql-scripts/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/SQL-scripts)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/network)
 [![Lines of Code](https://img.shields.io/badge/lines%20of%20code-3.8k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/SQL-scripts#SQL-Scripts)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/commits/master)
 
@@ -839,11 +841,11 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 [![Tracks](https://img.shields.io/badge/Tracks-30,000+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
 [![Unique Tracks](https://img.shields.io/badge/Unique%20Tracks-15,000+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/commits/master)
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/Spotify-Playlists)
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/Spotify-Playlists)
 [![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/Spotify-Playlists)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 
 ---
@@ -875,6 +877,11 @@ Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/centos-github?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/centos-github.svg)](http://microbadger.com/#/images/harisekhon/centos-github)
 
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/lib-java/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/lib-java/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/lib-java/blob/master/.gocd.yml)
+
 [![Travis CI](https://img.shields.io/travis/harisekhon/lib-java/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/lib-java)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/lib-java/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/lib-java/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/lib-java/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/lib-java)
@@ -889,11 +896,6 @@ Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 
 
 
-
-[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins?logo=jenkins)](https://github.com/HariSekhon/lib-java/blob/master/Jenkinsfile)
-[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse?logo=concourse)](https://github.com/HariSekhon/lib-java/blob/master/.concourse.yml)
-[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go?logo=go)](https://github.com/HariSekhon/lib-java/blob/master/.gocd.yml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 
 [![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/HariSekhon.lib-java?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=2&branchName=master)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/lib-java/master?logo=bitbucket&label=BitBucket)](https://bitbucket.org/harisekhon/lib-java/addon/pipelines/home#!/)
