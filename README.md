@@ -47,10 +47,6 @@ awkward URLs more nicely replaced with shields.io
 
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/u6f97cskcgb30sce/branch/master?svg=true)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![Drone](https://cloud.drone.io/api/badges/HariSekhon/DevOps-Bash-tools/status.svg)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
-
-Wercker throttles Shields.io resulting in "invalid response data" - do not use Shields.io until this is resolved
-
-[![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker&logo=oracle)](https://app.wercker.com/harisekhon/DevOps-Bash-tools/runs)
 -->
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
@@ -60,11 +56,16 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 [![Codeship Status for HariSekhon/DevOps-Bash-tools](https://app.codeship.com/projects/1b13b490-38c2-0138-ed09-4a04e28a9ab8/status?branch=master)](https://app.codeship.com/projects/386508)
 [![Shippable](https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable&logo=shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
 [![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e53eaeea284e010982eaa6e&pipeline=DevOps-Bash-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
-[![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/harisekhon/DevOps-Bash-tools/runs)
 [![BuildKite](https://img.shields.io/buildkite/f11bdd9690a9bac9a8edc6094dc2f2b9af3218a7a15d4ec17d/master?label=BuildKite)](https://buildkite.com/hari-sekhon/devops-bash-tools)
 [![Buddy](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/248539/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/248539)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Bash-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Bash-tools)
+[![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/harisekhon/DevOps-Bash-tools/runs)
+<!--
+Wercker throttles Shields.io resulting in "invalid response data" - do not use Shields.io until this is resolved
+
+[![Wercker](https://img.shields.io/wercker/ci/5e53ee68d1f86d0900f031dc/master?label=Wercker&logo=oracle)](https://app.wercker.com/harisekhon/DevOps-Bash-tools/runs)
+-->
 
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
