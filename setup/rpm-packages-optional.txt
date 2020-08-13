@@ -19,6 +19,9 @@ ShellCheck
 # only available on Fedora for now
 direnv
 
+# RHEL7
+kubernetes-client
+
 # not available on RHEL6
 perl-App-cpanminus
 perl-CPAN  # needed in RHEL6 to build cpanm to build rest
