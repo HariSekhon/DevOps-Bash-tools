@@ -53,7 +53,7 @@ awkward URLs more nicely replaced with shields.io
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.gocd.yml)
 
-[![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis&label=Travis)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
+[![Travis CI](https://img.shields.io/travis/harisekhon/devops-bash-tools/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Bash-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/devops-bash-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/devops-bash-tools/branch/master)
 [![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Bash-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools)
