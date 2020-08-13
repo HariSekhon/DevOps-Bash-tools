@@ -193,7 +193,7 @@ git_user_repo(){
 }
 
 git_repo(){
-    git_user_repo | sed 's|.*/||'
+    git_user_repo | sed 's|.*/||;s/\.git$//'
 }
 
 github_user_repo(){
