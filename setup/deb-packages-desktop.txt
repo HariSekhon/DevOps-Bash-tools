@@ -152,6 +152,8 @@ kismet
 kodos
 kolourpaint
 ksh
+kubernetes  # only on Ubuntu - not kubeadm, 'kubernetes install' - for microk8s or Canonical K8S distribution on workstation, VMware, Openstack, AWS, Azure, Google, and Oracle cloud
+kubetail
 kvirc
 labrea
 ldap-utils
