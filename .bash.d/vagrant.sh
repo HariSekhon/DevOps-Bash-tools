@@ -86,29 +86,36 @@ vagrant_gen_etc_hosts(){
     done
 }
 
+vagrant_usage(){
+    if [ -z "$1" ]; then
+        echo "usage: ${FUNCNAME[1]} <vm_name>"
+        return 1
+    fi
+}
+
 vup(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant up "$@"
 }
 
 vre(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant reload "$@"
 }
 
 vressh(){
-    [ $# -eq 1 ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant reload "$1"
     vagrant ssh "$1"
 }
 
 vsus(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant suspend "$@"
 }
 
 vres(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant resume "$@"
 }
 
@@ -124,7 +131,7 @@ vsusall(){
 alias vsusa=vsusall
 
 vupssh(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     local status
     status="$(vst "$1")"
     if grep -Eq "^$1[[:space:]]" <<< "$status"; then
@@ -139,7 +146,7 @@ vupssh(){
 alias vups="vupssh"
 
 vhalt(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant halt "$@"
 }
 
@@ -156,7 +163,7 @@ vrsus(){
 }
 
 vdestroy(){
-    [ -n "$1" ] || return 1
+    vagrant_usage "$1" || return 1
     vagrant destroy -f "$@"
 }
 
