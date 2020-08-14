@@ -151,11 +151,14 @@ get_postgres_versions(){
     grep -v '^[[:space:]]*$' |
     if is_CI; then
         echo "CI detected - using randomized sample of PostgreSQL versions to test against:" >&2
-        shuf | head -n 5
+        shuf | head -n 2
+        echo 9.1  # most problematic / incompatible versions should always be tested
+        echo 9.5
+        echo latest
     else
         echo "using default list of PostgreSQL versions to test against:" >&2
         cat
-    fi
+    fi | sort -u
     echo >&2
 }
 
