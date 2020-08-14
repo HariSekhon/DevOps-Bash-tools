@@ -95,7 +95,7 @@ vagrant_usage(){
 }
 
 vup(){
-    vagrant_usage "$1" || return 1
+    #vagrant_usage "$1" || return 1
     vagrant up "$@"
 }
 
@@ -111,12 +111,12 @@ vressh(){
 }
 
 vsus(){
-    vagrant_usage "$1" || return 1
+    #vagrant_usage "$1" || return 1
     vagrant suspend "$@"
 }
 
 vres(){
-    vagrant_usage "$1" || return 1
+    #vagrant_usage "$1" || return 1
     vagrant resume "$@"
 }
 
@@ -147,7 +147,7 @@ vupssh(){
 alias vups="vupssh"
 
 vhalt(){
-    vagrant_usage "$1" || return 1
+    #vagrant_usage "$1" || return 1
     vagrant halt "$@"
 }
 
@@ -164,7 +164,7 @@ vrsus(){
 }
 
 vdestroy(){
-    vagrant_usage "$1" || return 1
+    #vagrant_usage "$1" || return 1
     vagrant destroy -f "$@"
 }
 
@@ -179,7 +179,7 @@ vdestroyups(){
 }
 
 vprov(){
-    [ -n "$1" ] || return 1
+    #vagrant_usage "$1" || return 1
     vagrant provision "$@"
 }
 
