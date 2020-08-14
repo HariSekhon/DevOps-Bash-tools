@@ -67,3 +67,7 @@ done
 # want opt expansion
 # shellcheck disable=SC2086
 ln -sv $opts ~/.gitignore ~/.gitignore_global || :
+
+if [[ "${USER:-}" =~ harisekhon|hsekhon ]]; then
+    ln -sv "$PWD/.gitconfig.local" ~ || :
+fi
