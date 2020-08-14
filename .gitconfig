@@ -2,6 +2,7 @@
 #  Author: Hari Sekhon
 #  Date: 2012-01-31 14:08:42 +0000 (Tue, 31 Jan 2012)
 #
+#  vim:ts=4:sts=4:sw=4:et
 
 # configure your user name and email in ~/.gitconfig.local
 #[user]
@@ -28,7 +29,10 @@
     default = simple
 
 [alias]
-	who = config --get user.email
+    name = config --get user.name
+    email = config --get user.email
+    who = !git config -l | grep -E '^user\\.(name|email)'
+    whoami = who
     co  = checkout
     ci  = commit
     p   = push
@@ -46,7 +50,7 @@
 
     in      = log HEAD..FETCH_HEAD
     out     = log FETCH_HEAD..HEAD
-	age     = for-each-ref --format '%(authordate:iso) %(refname:short)' --sort=-authordate refs/remotes refs/heads
+    age     = for-each-ref --format '%(authordate:iso) %(refname:short)' --sort=-authordate refs/remotes refs/heads
 
     unstage = reset HEAD --
     last = log -1 HEAD
@@ -54,7 +58,7 @@
     # Show files ignored by git:
     ign = ls-files -o -i --exclude-standard
     ignored = !git clean -ndX | sed -e 's/^Would remove //' | sed 's/^Would skip repository //'
-	untracked = ls-files --others --exclude-standard
+    untracked = ls-files --others --exclude-standard
 
     # how to use commands inside git aliases
     visual = !gitk
@@ -70,13 +74,13 @@
 
     #ffm     = merge --ff-only
     #ffp     = pull --ff-only
-	#fp      = fetch --prune
+    #fp      = fetch --prune
 
-	#mp      = merge --no-commit --no-ff
-	#ma      = merge --abort
-	#dno     = diff --name-only
-	#gone    = !git branch -vv | grep ': gone'
-	#gd      = !git branch -vv | awk '/: gone/ {print $1}' | xargs --no-run-if-empty -n1 git branch -D
+    #mp      = merge --no-commit --no-ff
+    #ma      = merge --abort
+    #dno     = diff --name-only
+    #gone    = !git branch -vv | grep ': gone'
+    #gd      = !git branch -vv | awk '/: gone/ {print $1}' | xargs --no-run-if-empty -n1 git branch -D
 
 [help]
     # autocorrects git commands and executes the inferred command
