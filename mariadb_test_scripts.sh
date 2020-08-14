@@ -193,3 +193,6 @@ for version in $mariadb_versions; do
     echo >&2
     echo >&2
 done
+echo >&2
+echo >&2
+timestamp "All MariaDB tests passed for all scripts on all versions: "$(tac <<< "$mariadb_versions")
