@@ -213,7 +213,7 @@ azure-shell: link
 
 .PHONY: gcp
 gcp: system-packages
-	@./setup/install_gcloud.sh
+	@./setup/install_gcloud_sdk.sh
 
 .PHONY: gcp-shell
 gcp-shell:

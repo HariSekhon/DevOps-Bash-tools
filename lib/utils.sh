@@ -184,6 +184,11 @@ cpu_count(){
     echo "$cpu_count"
 }
 
+has_terminal(){
+    [ -t 0 ]
+}
+
+# beware this results false in scripts, has_terminal is probably what you want
 is_interactive(){
     if [ -n "${PS1:-}" ]; then
         return 0

@@ -129,7 +129,12 @@ get_mariadb_versions(){
     grep -v '^[[:space:]]*$' |
     if is_CI; then
         echo "CI detected - using randomized sample of MariaDB versions to test against:" >&2
-        shuf | head -n 3
+        {
+        shuf | head -n 1
+        echo 5.5  # most problematic / incompatible versions should always be tested
+        echo 10.0
+        echo latest
+        } | sort -unr -t. -k1,2
     else
         echo "using default list of MariaDB versions to test against:" >&2
         cat
@@ -193,3 +198,6 @@ for version in $mariadb_versions; do
     echo >&2
     echo >&2
 done
+echo >&2
+echo >&2
+timestamp "All MariaDB tests passed for all scripts on all versions: "$(tac <<< "$mariadb_versions")

@@ -124,7 +124,12 @@ get_mysql_versions(){
     grep -v '^[[:space:]]*$' |
     if is_CI; then
         echo "CI detected - using randomized sample of MySQL versions to test against:" >&2
-        shuf | head -n 3
+        {
+        shuf | head -n 1
+        echo 5.5  # most problematic / incompatible versions should always be tested
+        echo 5.6
+        echo latest
+        } | sort -unr -t. -k1,2
     else
         echo "using default list of MySQL versions to test against:" >&2
         cat
@@ -189,3 +194,6 @@ for version in $mysql_versions; do
     echo >&2
     echo >&2
 done
+echo >&2
+echo >&2
+timestamp "All MySQL tests passed for all scripts on all versions: "$(tac <<< "$mysql_versions")
