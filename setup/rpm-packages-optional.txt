@@ -19,7 +19,7 @@ ShellCheck
 # only available on Fedora for now
 direnv
 
-# RHEL7
+# RHEL7 only - kubernetes meta packages pulls in kubernetes-client, kubernetes-master, kubernetes-node, docker, python etc..
 kubernetes-client
 
 # not available on RHEL6
