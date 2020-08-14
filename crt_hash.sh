@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Uses OpenSSL to get the hash of a certificate crt file
+Uses OpenSSL to get the sha256 hash of a certificate crt file
 
 Useful to generating the hash needed for joining a Kubernetes node to a cluster eg.
 
@@ -30,6 +30,8 @@ kubeadm join \\
     --token <token> \\
     --discovery-token-ca-cert-hash sha256:<hash> \\
     k8smaster:6443
+
+To generate this actual command on a live cluster, run the adjacent k8s_join_cmd.sh script (which uses this script)
 "
 
 # used by usage() in lib/utils.sh
