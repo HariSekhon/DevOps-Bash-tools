@@ -211,7 +211,7 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     echo >&2
 fi
 
-if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+if has_terminal && [ -z "${DOCKER_NO_TERMINAL:-}" ]; then
     cat <<EOF
 $shell_description
 
@@ -228,7 +228,7 @@ docker_exec_opts="-w /sql -i"
 # allow non-interactive piped automation to avoid tty errors eg.
 # for sql in postgres*.sql; do echo "source $sql"; done | postgres.sh
 # normally you would just 'postgres.sh postgres*.sql' but this is used by postgres_test_scripts.sh
-if is_interactive && [ -z "${DOCKER_NON_INTERACTIVE:-}" ]; then
+if has_terminal && [ -z "${DOCKER_NO_TERMINAL:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
