@@ -31,7 +31,7 @@ kubeadm join \\
     --discovery-token-ca-cert-hash sha256:<hash> \\
     k8smaster:6443
 
-To generate this actual command on a live cluster, run the adjacent k8s_join_cmd.sh script (which uses this script)
+To generate this actual command on a live cluster, run the adjacent kubeadm_join_cmd.sh script (which uses this script)
 "
 
 # used by usage() in lib/utils.sh
