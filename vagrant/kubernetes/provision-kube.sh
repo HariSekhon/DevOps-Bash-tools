@@ -27,9 +27,6 @@ source "$bash_tools/lib/utils.sh"
 
 section "Running Vagrant Shell Provisioner Script - Kubernetes"
 
-# remove stale old generated join script so kube2 awaits new one
-rm -fv /vagrant/kubeadm_join.sh
-
 pushd /vagrant
 
 apt-get install -y docker.io
