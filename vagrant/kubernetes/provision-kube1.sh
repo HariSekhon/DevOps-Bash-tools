@@ -40,8 +40,10 @@ echo >&2
 timestamp "bootstrapping kubernetes master:"
 echo >&2
 
-# kubeadm-config.yml is in vagrant dir mounted at /vagrant
-kubeadm init --node-name "$(hostname -f)" --config=kubeadm-config.yaml --upload-certs | tee /vagrant/logs/kubeadm-init.out # save output for review
+if ! netstat -lnt | grep -q :10248; then
+    # kubeadm-config.yml is in vagrant dir mounted at /vagrant
+    kubeadm init --node-name "$(hostname -f)" --config=kubeadm-config.yaml --upload-certs | tee /vagrant/logs/kubeadm-init.out # save output for review
+fi
 
 echo >&2
 
@@ -49,13 +51,14 @@ kubeadm token list
 
 echo >&2
 
-timestamp "configuring kubectl:"
-mkdir -pv ~/.kube /vagrant/.kube
-cp -i /etc/kubernetes/admin.conf ~/.kube/config
-chown "$(id -u):$(id -g)" ~/.kube/config
-cp ~/.kube/config /vagrant/.kube/config
-
-echo >&2
+if ! [ -f ~/.kube/config ]; then
+    timestamp "configuring kubectl:"
+    mkdir -pv ~/.kube /vagrant/.kube
+    cp -i /etc/kubernetes/admin.conf ~/.kube/config
+    chown "$(id -u):$(id -g)" ~/.kube/config
+    cp ~/.kube/config /vagrant/.kube/config
+    echo >&2
+fi
 
 timestamp "applying calico.yaml:"
 kubectl apply -f calico.yaml
@@ -67,7 +70,7 @@ kubectl get nodes
 
 echo >&2
 
-kubectl taint nodes --all node-role.kubernetes.io/master-
+kubectl taint nodes --all node-role.kubernetes.io/master- || :
 
 echo >&2
 
@@ -75,7 +78,7 @@ kubectl get nodes
 
 echo >&2
 
-kubectl taint nodes --all node.kubernetes.io/not-ready-
+kubectl taint nodes --all node.kubernetes.io/not-ready- || :
 
 echo >&2
 
@@ -83,7 +86,7 @@ kubectl get nodes
 
 echo >&2
 
-timestamp "generating /vagrant/k8s_join.sh for kube2 to use"
-/bash-tools/k8s_join_cmd.sh > /vagrant/k8s_join.sh
+timestamp "generating /vagrant/kubeadm_join.sh for kube2 to use"
+/bash-tools/k8s_join_cmd.sh > /vagrant/kubeadm_join.sh
 
 } 2>&1 | tee -a /vagrant/logs/provision-kube1.log
