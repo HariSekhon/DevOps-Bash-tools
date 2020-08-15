@@ -27,6 +27,8 @@ Quick script to parse a given Vagrantfile and emit an /etc/hosts format output, 
 172.16.0.2 kube1.local kube1
 172.16.0.3 kube2.local kube2
 
+Vagrantfile can be given as first arg, otherwise checks for \$PWD/Vagrantfile or /vagrant/Vagrantfile for convenience
+
 Tested on vagrant/k8s/Vagrantfile
 "
 
@@ -42,6 +44,9 @@ if [ $# -gt 0 ]; then
     Vagrantfile="$1"
 elif [ -f Vagrantfile ]; then
     Vagrantfile=Vagrantfile
+elif [ -f /vagrant/Vagrantfile ]; then
+    # auto-detect when running inside a Vagrant VM
+    Vagrantfile=/vagrant/Vagrantfile
 else
     usage "Vagrantfile not specified and no Vagrantfile found in \$PWD"
 fi
