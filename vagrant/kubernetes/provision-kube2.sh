@@ -40,7 +40,7 @@ kubeadm_join="/vagrant/kubeadm_join.sh"
 timestamp "waiting for kube1 to bootstrap and generate kubectl join command at $kubeadm_join"
 SECONDS=0
 while ! [ -f "$kubeadm_join" ]; do
-    if [ $SECONDS -gt 300 ]; then
+    if [ $SECONDS -gt 600 ]; then
         timestamp "Max wait time for $kubeadm_join exceeded, aborting k8s worker node join"
         exit 1
     fi
