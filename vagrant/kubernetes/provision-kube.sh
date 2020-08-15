@@ -37,7 +37,7 @@ apt-get install -y docker.io
 systemctl enable docker.service
 systemctl start docker.service
 
-echo "deb  http://apt.kubernetes.io/  kubernetes-xenial  main" >> /etc/apt/sources.list.d/kubernetes.list
+echo "deb  http://apt.kubernetes.io/  kubernetes-xenial  main" | "$bash_tools/grep_or_append.sh" /etc/apt/sources.list.d/kubernetes.list
 
 curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
