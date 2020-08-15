@@ -178,9 +178,13 @@ vdestroyups(){
     vups "$@"
 }
 
-vprov(){
+vprovision(){
     #vagrant_usage "$1" || return 1
     vagrant provision "$@"
+}
+
+vprov(){
+    vprovision "$@"
 }
 
 whenvdown(){
