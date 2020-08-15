@@ -27,6 +27,8 @@ source "$bash_tools/lib/utils.sh"
 
 section "Running Vagrant Shell Provisioner Script - Kube1"
 
+kubeadm_join="/vagrant/kubeadm_join.sh"
+
 pushd /vagrant
 
 # should already be in the vagrant dir
@@ -41,6 +43,9 @@ timestamp "bootstrapping kubernetes master:"
 echo >&2
 
 if ! netstat -lnt | grep -q :10248; then
+    # remove stale old generated join script so kube2 awaits new one
+    rm -fv "$kubeadm_join"
+
     # kubeadm-config.yml is in vagrant dir mounted at /vagrant
     kubeadm init --node-name "$(hostname -f)" --config=kubeadm-config.yaml --upload-certs | tee /vagrant/logs/kubeadm-init.out # save output for review
 fi
@@ -86,7 +91,6 @@ kubectl get nodes
 
 echo >&2
 
-kubeadm_join="/vagrant/kubeadm_join.sh"
 timestamp "(re)generating $kubeadm_join for kube2 to use"
 "$bash_tools/kubernetes_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
