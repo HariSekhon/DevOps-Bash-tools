@@ -33,34 +33,43 @@ pushd /vagrant
 
 kubeadm_join="/vagrant/kubeadm_join.sh"
 
-# happens after kube1 anyway
-#timestamp "waiting for 15 secs to give kube1 time to provision"
-#sleep 15
+if ! netstat -lnt | grep -q :10248; then
+    timestamp "Bootstrapping kubernetes worker:"
+    echo >&2
 
-timestamp "waiting for kube1 to bootstrap and generate kubectl join command at $kubeadm_join"
-SECONDS=0
-while ! [ -f "$kubeadm_join" ]; do
-    if [ $SECONDS -gt 600 ]; then
-        timestamp "ERROR: max wait time for $kubeadm_join to appear exceeded, aborting worker node join. Check provisioner run on kube1 has generated $kubeadm_join or re-run provisioner"
-        exit 1
-    fi
-    sleep 1
-done
-echo >&2
+    # happens after kube1 anyway
+    #timestamp "waiting for 15 secs to give kube1 time to provision"
+    #sleep 15
 
-# doesn't error out if already joined
-timestamp "running $kubeadm_join"
-chmod +x "$kubeadm_join"
-"$kubeadm_join"
+    timestamp "Waiting for kube1 to bootstrap and generate kubectl join command at $kubeadm_join"
+    SECONDS=0
+    while ! [ -f "$kubeadm_join" ]; do
+        if [ $SECONDS -gt 600 ]; then
+            timestamp "ERROR: max wait time for $kubeadm_join to appear exceeded, aborting worker node join. Check provisioner run on kube1 has generated $kubeadm_join or re-run provisioner"
+            exit 1
+        fi
+        sleep 1
+    done
+    echo >&2
 
-echo >&2
+    # doesn't error out if already joined
+    timestamp "Running $kubeadm_join"
+    chmod +x "$kubeadm_join"
+    "$kubeadm_join"
 
-if ! [ -f ~/.kube/config ]; then
-    timestamp "configuring kubectl"
-    mkdir -pv ~/.kube
-    cp -v /vagrant/.kube/config ~/.kube/
     echo >&2
 fi
+
+timestamp "Configuring kubectl:"
+mkdir -pv ~/.kube /home/vagrant/.kube
+for kube_config in ~/.kube/config /home/vagrant/.kube/config; do
+    if ! [ -f "$kube_config" ]; then
+        cp -vf /vagrant/.kube/config "$kube_config"
+    fi
+done
+chown -v "$(id -u):$(id -g)" ~/.kube/config
+chown -v vagrant:vagrant /home/vagrant/.kube/config
+echo >&2
 
 timestamp "Kubernetes Nodes:"
 kubectl get nodes
