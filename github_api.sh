@@ -20,7 +20,7 @@ srcdir="$(dirname "$0")"
 usage(){
     cat <<EOF
 
-Script to query GitHub API
+Script to query the GitHub.com API
 
 Automatically handles authentication via environment variables \$GITHUB_USER
 and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
