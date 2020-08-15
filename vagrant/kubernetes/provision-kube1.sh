@@ -87,8 +87,8 @@ kubectl get nodes
 echo >&2
 
 kubeadm_join="/vagrant/kubeadm_join.sh"
-timestamp "generating $kubeadm_join for kube2 to use"
-/bash-tools/k8s_join_cmd.sh > "$kubeadm_join"
+timestamp "(re)generating $kubeadm_join for kube2 to use"
+"$bash_tools/k8s_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
 
 } 2>&1 | tee -a /vagrant/logs/provision-kube1.log
