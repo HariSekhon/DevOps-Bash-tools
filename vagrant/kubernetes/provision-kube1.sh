@@ -31,28 +31,36 @@ pushd /vagrant
 
 # should already be in the vagrant dir
 if ! [ -f calico.yaml ]; then
-    timestamp "fetching calico.yaml"
+    timestamp "fetching calico.yaml:"
     wget https://docs.projectcalico.org/manifests/calico.yaml
 fi
 
 echo >&2
 
-timestamp "bootstrapping kubernetes master"
+timestamp "bootstrapping kubernetes master:"
+echo >&2
+
 # kubeadm-config.yml is in vagrant dir mounted at /vagrant
-kubeadm init --node-name "$(hostname -f)" --config=kubeadm-config.yaml --upload-certs | tee kubeadm-init.out # save output for review
+kubeadm init --node-name "$(hostname -f)" --config=kubeadm-config.yaml --upload-certs | tee /vagrant/logs/kubeadm-init.out # save output for review
 
 echo >&2
 
 kubeadm token list
 
-timestamp "configuring kubectl"
+echo >&2
+
+timestamp "configuring kubectl:"
 mkdir -pv ~/.kube /vagrant/.kube
 cp -i /etc/kubernetes/admin.conf ~/.kube/config
 chown "$(id -u):$(id -g)" ~/.kube/config
 cp ~/.kube/config /vagrant/.kube/config
 
-timestamp "applying calico.yaml"
+echo >&2
+
+timestamp "applying calico.yaml:"
 kubectl apply -f calico.yaml
+
+echo >&2
 
 timestamp "K8S Nodes:"
 kubectl get nodes
@@ -75,6 +83,7 @@ kubectl get nodes
 
 echo >&2
 
+timestamp "generating /vagrant/k8s_join.sh for kube2 to use"
 /bash-tools/k8s_join_cmd.sh > /vagrant/k8s_join.sh
 
 } 2>&1 | tee -a /vagrant/logs/provision-kube1.log
