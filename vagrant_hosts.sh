@@ -29,7 +29,7 @@ Quick script to parse a given Vagrantfile and emit an /etc/hosts format output, 
 
 Vagrantfile can be given as first arg, otherwise checks for \$PWD/Vagrantfile or /vagrant/Vagrantfile for convenience
 
-Tested on vagrant/k8s/Vagrantfile
+Tested on vagrant/kubernetes/Vagrantfile in this repo and used as part of provision scripts
 "
 
 # used by usage() in lib/utils.sh
