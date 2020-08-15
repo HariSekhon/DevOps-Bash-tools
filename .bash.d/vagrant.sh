@@ -169,17 +169,12 @@ vdestroy(){
 }
 
 vdestroyup(){
-    vdestroy "$@" || return 1
-    vup "$@"
-}
-
-vdestroyup(){
-    vdestroy "$@" || return 1
+    vdestroy "$@" || :
     vup "$@"
 }
 
 vdestroyups(){
-    vdestroy "$@" || return 1
+    vdestroy "$@" || :
     vups "$@"
 }
 
