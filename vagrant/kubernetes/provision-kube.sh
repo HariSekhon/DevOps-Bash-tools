@@ -28,7 +28,7 @@ source "$bash_tools/lib/utils.sh"
 section "Running Vagrant Shell Provisioner Script - Kubernetes"
 
 # remove stale old generated join script so kube2 awaits new one
-rm -fv /vagrant/k8s_join.sh
+rm -fv /vagrant/kubeadm_join.sh
 
 pushd /vagrant
 
