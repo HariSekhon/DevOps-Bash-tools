@@ -339,6 +339,9 @@ etc.
   - [SBT](https://www.scala-sbt.org/)
   - [Gradle](https://gradle.org/)
   - [Travis CI](https://travis-ci.org/)
+  - [Dockerfiles](https://docs.docker.com/engine/reference/builder/)
+  - [Docker Compose](https://docs.docker.com/compose/) yamls
+  - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
 
 - Data format validation using programs from my [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
 
