@@ -2,6 +2,8 @@
 "  Author: Hari Sekhon
 "  Date: 2006-07-01 22:52:16 +0100 (Sat, 01 Jul 2006)
 "
+"  vim:ts=4:sts=4:sw=4:tw=0:et
+"
 
 " ============================================================================ "
 "                                   v i m r c
@@ -242,10 +244,12 @@ if has("autocmd")
     " TODO: groovy/java CLI linters
     au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
 
-    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
+    " TODO: often these don't trigger on window switching between different file types
+
+    " %:t = basename of file
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| more -R<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
-    " doesn't trigger on window switching
-    au FileType sh                        nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "$(basename "%")" \| more -R<CR>
+    au FileType sh                        nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| more -R<CR>
 
     " these tools are in the https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
