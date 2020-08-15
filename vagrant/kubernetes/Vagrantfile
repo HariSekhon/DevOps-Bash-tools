@@ -80,6 +80,7 @@ Vagrant.configure("2") do |config|
                 #"--cpus",     3,
                 #"--memory", 7168
             ]
+            # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
             config.vm.hostname = "#{vb.name}"
         end
         config.vm.provision :shell, :path => "provision-kube1.sh"
