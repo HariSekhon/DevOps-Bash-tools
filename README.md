@@ -322,7 +322,7 @@ etc.
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
-- Programming language linting:
+- Programming language linting (`check_*.sh`):
 
   - [Python](https://www.python.org/) (syntax, pep8, byte-compiling, reliance on asserts which can be disabled at runtime, except/pass etc.)
   - [Perl](https://www.perl.org/)
@@ -332,7 +332,7 @@ etc.
   - [Bash](https://www.gnu.org/software/bash/) / Shell
   - Misc (whitespace, custom enforced checks like not calling `quit()` in Python programs etc.)
 
-- Build System & CI linting:
+- Build System & CI linting (`check_*.sh`):
 
   - [Make](https://www.gnu.org/software/make/)
   - [Maven](https://maven.apache.org/)
@@ -343,7 +343,7 @@ etc.
   - [Docker Compose](https://docs.docker.com/compose/) yamls
   - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
 
-- Data format validation using programs from my [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
+- Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
 
   - CSV
   - JSON
