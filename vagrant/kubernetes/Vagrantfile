@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     #config.ssh.password     = "vagrant"
     config.ssh.insert_key = true
     #config.ssh.private_key_path = "~/.ssh/id_rsa"
-                                                     # host_path         guest_path
+                               # host_path         guest_path
     config.vm.synced_folder    "~/github",         "/github"
     config.vm.synced_folder    "../../",           "/bash-tools"
     config.ssh.forward_agent = false
