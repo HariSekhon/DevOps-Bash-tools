@@ -322,7 +322,9 @@ etc.
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
+
   - Programming language linting:
+  
     - [Python](https://www.python.org/) (syntax, pep8, byte-compiling, reliance on asserts which can be disabled at runtime, except/pass etc.)
     - [Perl](https://www.perl.org/)
     - [Java](https://www.java.com/en/)
@@ -330,7 +332,9 @@ etc.
     - [Ruby](https://www.ruby-lang.org/en/)
     - [Bash](https://www.gnu.org/software/bash/) / Shell
     - Misc (whitespace, custom code checks etc.)
+    
   - Build System, Docker & CI linting:
+  
     - [Make](https://www.gnu.org/software/make/)
     - [Maven](https://maven.apache.org/)
     - [SBT](https://www.scala-sbt.org/)
