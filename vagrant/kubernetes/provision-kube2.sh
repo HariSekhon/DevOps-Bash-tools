@@ -48,9 +48,12 @@ while ! [ -f "$kubeadm_join" ]; do
 done
 echo >&2
 
+# doesn't error out if already joined
+timestamp "running $kubeadm_join"
 chmod +x "$kubeadm_join"
-
 "$kubeadm_join"
+
+echo >&2
 
 if ! [ -f ~/.kube/config ]; then
     timestamp "configuring kubectl"
