@@ -54,6 +54,8 @@ apt-mark hold \
     kubectl
 
 #source <(kubectl completion bash)
-echo "source <(kubectl completion bash)" >> ~/.bashrc
+timestamp "adding bash completion for kubectl:"
+echo "source <(kubectl completion bash)" | "$bash_tools/grep_or_append.sh" ~/.bashrc
+echo >&2
 
 } 2>&1 | tee -a /vagrant/logs/provision-kube.log
