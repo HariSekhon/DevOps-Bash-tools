@@ -324,7 +324,7 @@ etc.
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
 
   - Programming language linting:
-  
+
     - [Python](https://www.python.org/) (syntax, pep8, byte-compiling, reliance on asserts which can be disabled at runtime, except/pass etc.)
     - [Perl](https://www.perl.org/)
     - [Java](https://www.java.com/en/)
@@ -332,16 +332,16 @@ etc.
     - [Ruby](https://www.ruby-lang.org/en/)
     - [Bash](https://www.gnu.org/software/bash/) / Shell
     - Misc (whitespace, custom code checks etc.)
-    
+
   - Build System, Docker & CI linting:
-  
+
     - [Make](https://www.gnu.org/software/make/)
     - [Maven](https://maven.apache.org/)
     - [SBT](https://www.scala-sbt.org/)
     - [Gradle](https://gradle.org/)
     - [Travis CI](https://travis-ci.org/)
     - [Dockerfiles](https://docs.docker.com/engine/reference/builder/)
-    - [Docker Compose](https://docs.docker.com/compose/) yamls
+    - [Docker Compose](https://docs.docker.com/compose/)
     - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
 
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
