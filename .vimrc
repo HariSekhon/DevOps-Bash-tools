@@ -273,6 +273,9 @@ if has("autocmd")
     au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd "%:p:h" && echo q \| sbt reload "%" \| more -R<CR>
     au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| more -R<CR>
     au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint "%" \| more -R<CR>
+    " vagrant validate doesn't take an -f argument so it must be an exact match in order to validate the right thing
+    " otherwise you will get an error or false positive
+    au BufNew,BufRead Vagrantfile    nmap ;l :w<CR>:!clear; cd "%:p:h" && vagrant validate<CR>
 
 endif
 
