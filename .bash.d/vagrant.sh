@@ -165,7 +165,12 @@ vrsus(){
 
 vdestroy(){
     #vagrant_usage "$1" || return 1
-    vagrant destroy -f "$@"
+    vagrant destroy --force "$@"
+}
+
+vdestroyup(){
+    vdestroy "$@" || return 1
+    vup "$@"
 }
 
 vdestroyup(){
