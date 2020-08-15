@@ -254,7 +254,6 @@ etc.
 - `cloudera_navigator_api.sh` - script to simplify querying [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) API using environment variables, prompts, authentication and sensible defaults. Built on top of `curl_auth.sh`
 - `cloudera_navigator_audit_logs.sh` - fetches [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for given service eg. hive/impala/hdfs via the API, simplifying date handling, authentication and common settings. Built on top of `cloudera_navigator_api.sh`
 - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
-- `check_*.sh` - extensive collection of generalized tests that can be applied to any repo (these run against all my GitHub repos via CI)
 - `git*.sh` - various useful Git scripts, eg:
   - `git_foreach_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - runs a command on all adjacent repos from a given repolist (useful for updating all your github projects across work and home computers)
@@ -322,7 +321,7 @@ etc.
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
-- `check_*.sh`
+- `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
   - Programming language linting:
     - [Python](https://www.python.org/) (syntax, pep8, byte-compiling, reliance on asserts which can be disabled at runtime, except/pass etc.)
     - [Perl](https://www.perl.org/)
