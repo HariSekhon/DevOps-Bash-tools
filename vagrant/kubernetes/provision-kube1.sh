@@ -88,7 +88,7 @@ echo >&2
 
 kubeadm_join="/vagrant/kubeadm_join.sh"
 timestamp "(re)generating $kubeadm_join for kube2 to use"
-"$bash_tools/kubeadm_join_cmd.sh" > "$kubeadm_join"
+"$bash_tools/kubernetes_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
 
 } 2>&1 | tee -a /vagrant/logs/provision-kube1.log
