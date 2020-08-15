@@ -22,11 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates the Kubernetes cluster join command for an already existing cluster where the initial kubeadm init join command token has already expired
+Generates the kubeadm join command for an already existing Kubernetes cluster where the initial kubeadm init join command token has already expired
 
 Determines the certificate hash, and generates a new temporary token with which to join
 
-Kubectl is assumed to be working and available in the \$PATH
+kubeadm is assumed to be working and available in the \$PATH
 
 Tested on Kubernetes 1.18.1
 "
