@@ -70,7 +70,9 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_tests_run_qualified.sh"
 
-. "$srcdir/check_makefile.sh"
+. "$srcdir/check_makefiles.sh"
+
+. "$srcdir/check_vagrantfiles.sh"
 
 # this is usually run after build, no point testing again
 #. "$srcdir/check_maven_pom.sh"
