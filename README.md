@@ -330,7 +330,7 @@ etc.
   - [Scala](https://www.scala-lang.org/)
   - [Ruby](https://www.ruby-lang.org/en/)
   - [Bash](https://www.gnu.org/software/bash/) / Shell
-  - Misc (whitespace, custom enforced checks like not calling `quit()` in Python programs etc.)
+  - Misc (whitespace, custom checks etc.)
 
 - Build System & CI linting (`check_*.sh`):
 
