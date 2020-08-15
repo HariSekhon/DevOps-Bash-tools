@@ -495,7 +495,7 @@ make python
     make azure-shell            sets up Azure Cloud Shell (limited, doesn't install OS packages since there is no sudo)
     make gcp                    installs GCloud SDK
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
-                                (future boots then auto-install system packages via .customize_environment hook)
+                                (maintains itself across future Cloud Shells via .customize_environment hook)
 
 Now exiting usage help with status code 3 to explicitly prevent silent build failures from stray 'help' arguments
 make: *** [help] Error 3
