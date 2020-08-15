@@ -41,7 +41,7 @@ timestamp "waiting for kube1 to bootstrap and generate kubectl join command at $
 SECONDS=0
 while ! [ -f "$kubeadm_join" ]; do
     if [ $SECONDS -gt 600 ]; then
-        timestamp "Max wait time for $kubeadm_join exceeded, aborting k8s worker node join"
+        timestamp "ERROR: max wait time for $kubeadm_join to appear exceeded, aborting worker node join. Check provisioner run on kube1 has generated $kubeadm_join or re-run provisioner"
         exit 1
     fi
     sleep 1
@@ -62,7 +62,7 @@ if ! [ -f ~/.kube/config ]; then
     echo >&2
 fi
 
-timestamp "K8S Nodes:"
+timestamp "Kubernetes Nodes:"
 kubectl get nodes
 
 } 2>&1 | tee -a /vagrant/logs/provision-kube2.log
