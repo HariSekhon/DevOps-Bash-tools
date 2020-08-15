@@ -34,6 +34,7 @@ install_sdkman.sh
 install_sdkman_all_sdks.sh
 install_terraform.sh
 install_travis.sh
+install_vundle.sh
 "
 
 for x in $install_scripts; do
