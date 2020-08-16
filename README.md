@@ -273,6 +273,7 @@ etc.
   - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
   - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
+  - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to repos of the same name on GitLab (uses `git_foreach_repo.sh`, `github_repo_description.sh` and `gitlab_set_project_description.sh`)
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
   - `gitlab_get_user_ssh_public_key.sh` / `gitlab_get_user_ssh_public_key2.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
