@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: /user | jq
+#  args: /users/$(gitlab_api.sh /users?username=harisekhon | jq -r .[].id) | jq
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-15 23:27:44 +0100 (Sat, 15 Aug 2020)
@@ -12,8 +14,6 @@
 #
 #  https://www.linkedin.com/in/harisekhon
 #
-
-# https://docs.gitlab.com/ee/api/
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -41,20 +41,30 @@ API Reference:
 https://docs.gitlab.com/ee/api/api_resources.html
 
 
-
 Examples:
 
 
-List a user's GitLab projects (repos):
+# Get currently authenticated user:
 
-${0##*/} /users/harisekhon/projects
+${0##*/} /user
 
 
-Update a project's description:
+# List a user's GitLab projects (repos):
 
-${0##*/} /projects/<id_or_url_encoded_project_name> -X PUT -d 'description=test'
+${0##*/} /users/HariSekhon/projects
+
+
+Specify project ID or name (url-encoded otherwise will return 404 and fail to find project)
+
+
+# Update a project's description:
 
 ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
+
+
+# List a project's CI pipelines, sorted by newest run first:
+
+${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
 "
 
 # used by usage() in lib/utils.sh
