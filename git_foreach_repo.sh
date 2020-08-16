@@ -77,14 +77,16 @@ repolist="${REPOS:-}"
 if [ -n "$repolist" ]; then
     :
 elif [ -f "$repofile" ]; then
-    echo "processing repos from file: $repofile" >&2
+    log "processing repos from file: $repofile" >&2
     repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
 else
-    echo "fetching repos from GitHub repo list" >&2
+    log "fetching repos from GitHub repo list" >&2
     repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
 fi
 
-for repo in $repolist; do
+execute_repo(){
+    local repo="$1"
+    local cmd="${*:2}"
     if ! echo "$repo" | grep -q "/"; then
         repo="HariSekhon/$repo"
     fi
@@ -94,17 +96,24 @@ for repo in $repolist; do
     repo="${repo%%:*}"
     if ! [ -d "$repo_dir" ]; then
         #git clone "$git_url/$repo" "$repo_dir"
-        continue
+        return
     fi
     pushd "$repo_dir" >/dev/null
     repo_dir="$PWD"
-    echo "# ============================================================================ #" >&2
-    echo "# $repo - $repo_dir" >&2
-    echo "# ============================================================================ #" >&2
-    cmd="$*"
+    if [ -z "${GIT_FOREACH_REPO_NO_HEADERS:-}" ]; then
+        echo "# ============================================================================ #" >&2
+        echo "# $repo - $repo_dir" >&2
+        echo "# ============================================================================ #" >&2
+    fi
+    # shellcheck disable=SC2016
     cmd="${cmd//\{repo\}/'$repo'}"
+    # shellcheck disable=SC2016
     cmd="${cmd//\{dir\}/'$repo_dir'}"
     eval "$cmd"
     popd >/dev/null
-    echo
+    echo >&2
+}
+
+for repo in $repolist; do
+    execute_repo "$repo" "$@"
 done
