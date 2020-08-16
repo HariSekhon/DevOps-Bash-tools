@@ -35,5 +35,7 @@ else
         echo "ERROR: file '$filename' is not set executable!" >&2
         exit 1
     fi
-    eval "$filename" "$("$srcdir/args_extract.sh" "$filename")"
+    args="$("$srcdir/args_extract.sh" "$filename")"
+    echo "$filename" "$args" >&2
+    eval "$filename" "$args"
 fi
