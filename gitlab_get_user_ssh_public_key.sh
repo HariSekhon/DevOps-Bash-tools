@@ -17,7 +17,7 @@ set -euo pipefail
 
 usage(){
     cat <<EOF
-Fetches a GitLab user's public SSH key via the GitLab API
+Fetches a GitLab user's public SSH key(s) via the GitLab API
 
 User can be given as first argument, or environment variables \$GITLAB_USER or \$USER
 
