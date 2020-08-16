@@ -277,6 +277,7 @@ etc.
   - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
   - `gitlab_get_user_ssh_public_key.sh` / `gitlab_get_user_ssh_public_key2.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
+  - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
@@ -328,6 +329,7 @@ etc.
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
   - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
+- `yaml2json.sh` - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
