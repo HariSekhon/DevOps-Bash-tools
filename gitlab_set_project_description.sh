@@ -39,6 +39,11 @@ Automatically url encodes the entire project name for you since the GitLab API w
 Example:
 
 ${0##*/} HariSekhon/DevOps-Bash-tools    my new description
+
+
+If no args are given, will read project and description from standard input for easy chaining with other tools, can easily update multiple repositories this way, one project + description per line:
+
+echo <project> <description> | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
@@ -47,28 +52,46 @@ usage_args="<project> <description>"
 
 help_usage "$@"
 
-min_args 2 "$@"
+#min_args 2 "$@"
 
-project="$1"
+set_project_description(){
+    local project="$1"
+    local description="${*:2}"
 
-description="${*:2}"
-
-if ! [[ "$project" =~ / ]]; then
-    log "no username prefix in project, attempting to infer"
-    if [ -n "${GITLAB_USER:-}" ]; then
-        user="$GITLAB_USER"
-        log "using username '$user' from \$GITLAB_USER"
-    else
-        log "querying GitLab API for currently authenticated username"
-        user="$("$srcdir/gitlab_api.sh" /user | jq -r .username)"
-        log "GitLab API returned username '$user'"
+    if ! [[ "$project" =~ / ]]; then
+        log "no username prefix in project '$project', will auto-add it"
+        # refuse gitlab_user between function calls for efficiency to save additional queries to the GitLab API
+        if [ -z "${gitlab_user:-}" ]; then
+            log "attempting to infer username"
+            if [ -n "${GITLAB_USER:-}" ]; then
+                gitlab_user="$GITLAB_USER"
+                log "using username '$gitlab_user' from \$GITLAB_USER"
+            else
+                log "querying GitLab API for currently authenticated username"
+                gitlab_user="$("$srcdir/gitlab_api.sh" /user | jq -r .username)"
+                log "GitLab API returned username '$gitlab_user'"
+            fi
+        fi
+        project="$gitlab_user/$project"
     fi
-    project="$user/$project"
+
+    timestamp "setting GitLab project '$project' description to '$description'" >&2
+
+    # url-encode project name otherwise GitLab API will fail to find project and return 404
+    project="$("$srcdir/urlencode.sh" <<< "$project")"
+
+    "$srcdir/gitlab_api.sh" "/projects/$project" -X PUT --data "description=$description" >/dev/null
+}
+
+if [ $# -gt 0 ]; then
+    if [ $# -lt 2 ]; then
+        usage
+    fi
+    set_project_description "$@"
+else
+    while read -r project description; do
+        [ -n "$project" ] || continue
+        [ -n "$description" ] || continue
+        set_project_description "$project" "$description"
+    done
 fi
-
-timestamp "setting GitLab project '$project' description to '$description'" >&2
-
-# url-encode project name otherwise GitLab API will fail to find project and return 404
-project="$("$srcdir/urlencode.sh" <<< "$project")"
-
-"$srcdir/gitlab_api.sh" "/projects/$project" -X PUT --data "description=$description" >/dev/null
