@@ -23,9 +23,8 @@ srcdir="$(dirname "$0")"
 # shellcheck source=.bash.d/git.sh
 . "$srcdir/.bash.d/git.sh"
 
-usage(){
-    cat <<EOF
-
+# shellcheck disable=SC2034,SC2154
+usage_description="
 Script to get GitHub Actions Runners for the local git repo via the GitHub API
 
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
@@ -34,9 +33,9 @@ If no repo arg is given and is inside a git repo then takes determines the repo 
 
 usage: ${0##*/} <repo>
 
-EOF
-    exit 3
-}
+"
+
+help_usage "$@"
 
 repo="${1:-${REPO:-}}"
 
