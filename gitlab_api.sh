@@ -45,14 +45,14 @@ https://docs.gitlab.com/ee/api/api_resources.html
 Examples:
 
 
-Query list of user projects:
+List a user's GitLab projects (repos):
 
 ${0##*/} /users/harisekhon/projects
 
 
-Update description of a project:
+Update a project's description:
 
-${0##*/} /projects/<id_or_url_encoded_project_name> -X PUT -d 'description=blah'
+${0##*/} /projects/<id_or_url_encoded_project_name> -X PUT -d 'description=test'
 
 ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
 "
