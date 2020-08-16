@@ -30,13 +30,12 @@ and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
-
-usage: ${0##*/} /path [<curl_options>]
-
-
 eg. ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
-
 "
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="/path [<curl_options>]"
 
 help_usage "$@"
 
