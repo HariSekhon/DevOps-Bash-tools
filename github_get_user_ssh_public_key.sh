@@ -10,20 +10,48 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Fetches the GitHub user's public SSH key from the GitHub API
-#
-# Uses $GITHUB_USER or $USER as the expected GitHub user
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [[ "$USER" =~ hari|sekhon ]]; then
-    GITHUB_USER="${GITHUB_USER:-harisekhon}"
+usage(){
+    cat <<EOF
+Fetches a GitHub user's public SSH key via HTTP
+
+User can be given as first argument, or environment variables \$GITHUB_USER or \$USER
+
+Technically should use the GitHub API instead as it's more guaranteed to be stable
+See Also: github_get_user_ssh_public_key_api.sh
+
+
+${0##*/} <user>
+EOF
+    exit 3
+}
+
+for arg; do
+    case "$arg" in
+        -*)     usage
+                ;;
+    esac
+done
+
+if [ $# -gt 1 ]; then
+    usage
+elif [ $# -eq 1 ]; then
+    user="$1"
+elif [ -n "${GITHUB_USER:-}" ]; then
+    user="$GITHUB_USER"
+elif [ -n "${USER:-}" ]; then
+    if [[ "$USER" =~ hari|sekhon ]]; then
+        user=harisekhon
+    else
+        user="$USER"
+    fi
 else
-    GITHUB_USER="${GITHUB_USER:-$USER}"
+    usage
 fi
 
-echo "# Fetching SSH Public Key(s) from GitHub for account:  $GITHUB_USER" >&2
+
+echo "# Fetching SSH Public Key(s) from GitHub for account:  $user" >&2
 echo "#" >&2
-# technically should use the GitHub API, see adjacent github_get_user_ssh_public_key_api.sh for that version
-curl -sS "https://github.com/$GITHUB_USER.keys"
+curl -sS "https://github.com/$user.keys"
