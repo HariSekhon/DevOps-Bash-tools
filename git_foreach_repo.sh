@@ -110,12 +110,14 @@ execute_repo(){
     # shellcheck disable=SC2016
     cmd="${cmd//\{dir\}/'$repo_dir'}"
     eval "$cmd"
-    if [[ "$cmd" =~ github_.*.sh ]]; then
-        # throttle hitting the GitHub API too often as it may error out
-        sleep 0.1
+    if [[ "$cmd" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
+        # throttle hitting the GitHub / GitLab / Bitbucket APIs too often as they may error out
+        sleep 0.05
     fi
     popd >/dev/null
-    echo >&2
+    if [ -z "${GIT_FOREACH_REPO_NO_HEADERS:-}" ]; then
+        echo >&2
+    fi
 }
 
 for repo in $repolist; do
