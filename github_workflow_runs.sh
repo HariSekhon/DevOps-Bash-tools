@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: ci_ubuntu
 #
 #  Author: Hari Sekhon
 #  Date: 2020-02-12 16:21:52 +0000 (Wed, 12 Feb 2020)
@@ -17,10 +18,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-usage(){
-    cat <<EOF
-$*
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
+# shellcheck disable=SC2034
+usage_description="
 Script to get GitHub Workflow runs for a given Workflow ID (or name.yaml) via the API
 
 Workflow ID can be either a number (see output of adjacent github_workflows.sh), or the name of the workflow yaml file, with or without the .yaml extension
@@ -28,12 +33,13 @@ Workflow ID can be either a number (see output of adjacent github_workflows.sh),
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
 
 \$REPO and \$WORKFLOW_ID environment variables are also supported with positional args taking precedence
+"
 
-usage: ${0##*/} <workflow_id> [<repo>]
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<workflow_id> [<repo>]"
 
-EOF
-    exit 3
-}
+help_usage "$@"
 
 workflow_id="${1:-${WORKFLOW_ID:-}}"
 
@@ -50,7 +56,7 @@ if ! [[ "$workflow_id" =~ ^[[:digit:]]+$ ]]; then
 fi
 
 if [ -z "$repo" ]; then
-    repo="$(git remote -v 2>/dev/null | awk '{print $2}' | head -n1 | sed 's/[[:alnum:]]*@//; s,.*github.com[/:]*,,')"
+    repo="$(git_repo)"
 fi
 
 if [ -z "$repo" ]; then
