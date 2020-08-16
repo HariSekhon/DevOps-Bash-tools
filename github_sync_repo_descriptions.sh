@@ -22,10 +22,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Sync GitHub repo descriptions to GitLab and BitBucket repos
+Sync GitHub repo descriptions to GitLab repos
 
 Queries the GitHub API for each repo's description, then pushes that description to repos of
-the same name on GitLab and BitBucket via the GitLab and BitBucket APIs
+the same name on GitLab via the GitLab API
 
 For more details see github_repo_description.sh, gitlab_set_project_description.sh for tuning options around authentication, user/organization for each site etc.
 "
