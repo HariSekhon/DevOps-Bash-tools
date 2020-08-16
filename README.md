@@ -256,7 +256,7 @@ etc.
 - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
 - `git*.sh` - various useful Git scripts, eg:
   - `git_foreach_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
-  - `git_foreach_repo.sh` - runs a command on all adjacent repos from a given repolist (useful for updating all your github projects across work and home computers)
+  - `git_foreach_repo.sh` - runs a command on all adjacent repos from a given repolist (used heavily by many adjacent scripts)
   - `git_foreach_modified.sh` - runs a command against each file with git modified status
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_public_repos.sh` - auto-creates remotes for the 3 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org))
