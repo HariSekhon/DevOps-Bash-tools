@@ -104,6 +104,7 @@ WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
 
 "$srcdir/check_travis_yml.sh"
 "$srcdir/check_circle_ci_yml.sh"
+"$srcdir/check_gitlab_ci_yml.sh"
 if ! is_CI &&
    [ -n "${SHIPPABLE_TOKEN:-}" ]; then
     "$srcdir/check_shippable_readme_ids.sh"
