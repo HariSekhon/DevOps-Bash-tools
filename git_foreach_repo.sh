@@ -70,7 +70,10 @@ for repo in $repolist; do
     echo "========================================" >&2
     echo "$repo - $PWD" >&2
     echo "========================================" >&2
-    eval "$@"
+    cmd="$*"
+    cmd="${cmd//\{repo\}/'$repo'}"
+    cmd="${cmd//\{dir\}/'$repo_dir'}"
+    eval "$cmd"
     popd >/dev/null
     echo
 done
