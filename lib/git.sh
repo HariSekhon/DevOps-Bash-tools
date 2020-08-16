@@ -26,6 +26,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/utils.sh"
 
+git_repo(){
+    git remote -v 2>/dev/null |
+    awk '{print $2}' |
+    head -n1 |
+    sed '
+        s,.*://,,;
+        s/[[:alnum:]]*@//;
+        s/[^:/]*[:/]//;
+    '
+}
+
 allbranches(){
     if type -P uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
