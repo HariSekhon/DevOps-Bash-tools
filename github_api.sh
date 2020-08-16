@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 #
 #  Author: Hari Sekhon
 #  Date: 2020-02-12 23:43:00 +0000 (Wed, 12 Feb 2020)
@@ -12,9 +13,6 @@
 #
 #  https://www.linkedin.com/in/harisekhon
 #
-#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
-#  # returns 0
-#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/runners
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
