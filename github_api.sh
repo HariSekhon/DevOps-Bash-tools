@@ -23,7 +23,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Script to query the GitHub.com API
+Queries the GitHub.com API
 
 Automatically handles authentication via environment variables \$GITHUB_USER
 and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
