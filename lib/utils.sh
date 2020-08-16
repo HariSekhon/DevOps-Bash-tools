@@ -819,6 +819,7 @@ $description
 usage: ${0##*/} $args
 
 $switches
+-h --help   Print usage help and exit
 EOF
     exit 3
 }
