@@ -49,5 +49,5 @@ fi
 
 echo "# Fetching SSH Public Key(s) from GitLab for account:  $user" >&2
 echo "#" >&2
-curl -sS "https://gitlab.com/api/v4/users/$user/keys" |
+curl -sS --fail "https://gitlab.com/api/v4/users/$user/keys" |
 jq -r '.[].key'
