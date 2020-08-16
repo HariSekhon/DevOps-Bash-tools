@@ -33,7 +33,7 @@ Project can be the full project name (eg. HariSekhon/DevOps-Bash-tools) or the p
 
 Project username prefix can be omitted, will use \$GITLAB_USER if available, otherwise will query the GitLab API to determine it
 
-Automatically url encodes the entire project name for you since the GitLab API will 404 fail to find the project otherwise
+Automatically url encodes the project name and description for you since the GitLab API will return 404 and fail to find the project name if not url encoded
 
 
 Example:
@@ -79,6 +79,7 @@ set_project_description(){
 
     # url-encode project name otherwise GitLab API will fail to find project and return 404
     project="$("$srcdir/urlencode.sh" <<< "$project")"
+    description="$("$srcdir/urlencode.sh" <<< "$description")"
 
     "$srcdir/gitlab_api.sh" "/projects/$project" -X PUT --data "description=$description" >/dev/null
 }
