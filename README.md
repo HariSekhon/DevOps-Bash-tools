@@ -264,10 +264,18 @@ etc.
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
-- `github*.sh` - various useful GitHub scripts for querying the GitHub API including:
-  - `github_api.sh` - querying the GitHub API while inferring github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for several other scripts that use the GitHub API. Built on top of `curl_auth.sh`
+- `github_*.sh` - various useful [GitHub](https://github.com/) scripts for querying the GitHub API including:
+  - `github_api.sh` - queryies the GitHub API. Infers github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
   - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key_api.sh` - fetches GitHub users public SSH keys for quick local installation to `~/.ssh/authorized_keys`
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
+  - `github_runners.sh` - lists GitHub Actions runners
+  - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
+  - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
+  - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
+- `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
+  - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
+  - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
