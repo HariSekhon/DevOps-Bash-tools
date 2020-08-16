@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: /user
+#  args: /users/HariSekhon/repos
 #  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 #
 #  Author: Hari Sekhon
@@ -30,7 +32,38 @@ and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
-eg. ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
+
+Set up a personal access token here:
+
+https://github.com/settings/tokens
+
+
+API Reference:
+
+https://docs.github.com/en/rest/reference
+
+
+Examples:
+
+
+# Get currently authenticated user:
+
+${0##*/} /user
+
+
+# Get a specific user:
+
+${0##*/} /users/HariSekhon
+
+
+# List a user's GitHub repos:
+
+${0##*/} /users/HariSekhon/repos
+
+
+# Get the GitHub Actions workflows for a given repo:
+
+${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 "
 
 # used by usage() in lib/utils.sh
