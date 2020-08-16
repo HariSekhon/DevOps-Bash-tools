@@ -920,3 +920,19 @@ die_if_error_field(){
         exit 1
     fi
 }
+
+yaml2json(){
+    if type -P python &>/dev/null; then
+        python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin, Loader=yaml.FullLoader), sys.stdout, indent=4)'
+    elif type -P ruby &>/dev/null; then
+        # don't want variable expansion
+        # shellcheck disable=SC2016
+        ruby -r yaml -r json -e 'puts YAML.load($stdin.read).to_json'
+    # needs 3rd party modules installed (YAML::XS, JSON::XS), so try this one last
+    elif type -P perl &>/dev/null; then
+        #perl -MYAML::XS=LoadFile -MJSON::XS=encode_json -e 'for (@ARGV) { for (LoadFile($_)) { print encode_json($_),"\n" } }'
+        perl -MYAML::XS=Load -MJSON::XS=encode_json -e '$/ = undef; print encode_json(Load(<STDIN>)) . "\n"'
+    else
+        die "ERROR: unable to convert yaml to json since not one of the following tools were found: python, perl, ruby"
+    fi
+}
