@@ -17,21 +17,21 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-usage(){
-    cat <<EOF
-$*
+# shellcheck source=lib/utils.sh
+. "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC2034,SC2154
+usage_description="
 Script to get GitHub Workflow runs status via the API
 
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
 
 \$REPO and \$WORKFLOW_ID environment variables are also supported with positional args taking precedence
+"
 
-usage: ${0##*/} <repo> [<workflow_id>]
-
-EOF
-    exit 3
-}
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<repo> [<workflow_id>]"
 
 workflows="$(
     "$srcdir/github_workflows.sh" "$@" |
