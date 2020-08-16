@@ -10,12 +10,14 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://docs.github.com/en/rest/reference/users#list-public-keys-for-a-user
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 usage(){
     cat <<EOF
-Fetches a GitHub user's public SSH key via HTTP
+Fetches a GitHub user's public SSH key(s) via HTTP
 
 User can be given as first argument, or environment variables \$GITHUB_USER or \$USER
 
