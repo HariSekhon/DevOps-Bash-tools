@@ -20,8 +20,8 @@ srcdir="$(dirname "$0")"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-# shellcheck source=.bash.d/git.sh
-. "$srcdir/.bash.d/git.sh"
+# shellcheck source=lib/git.sh
+. "$srcdir/lib/git.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
