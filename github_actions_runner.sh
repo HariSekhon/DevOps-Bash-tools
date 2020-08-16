@@ -14,10 +14,14 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<GITHUB_ACTIONS_RUNNER_TOKEN>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/.bash.d/git.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -28,18 +32,13 @@ Token can be supplied as either first argument or via environment variable \$GIT
 Repo is taken from either \$GITHUB_ACTIONS_REPO or inferred from first github remote from local repo
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-VERSION="${GITHUB_ACTIONS_RUNNER_VERSION:-${GITHUB_ACTIONS_VERSION:-${VERSION:-2.168.0}}}"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
-# shellcheck disable=SC1090
-. "$srcdir/.bash.d/git.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<GITHUB_ACTIONS_RUNNER_TOKEN>]"
 
 help_usage "$@"
+
+VERSION="${GITHUB_ACTIONS_RUNNER_VERSION:-${GITHUB_ACTIONS_VERSION:-${VERSION:-2.168.0}}}"
 
 GITHUB_ACTIONS_RUNNER_TOKEN="${1:-${GITHUB_ACTIONS_RUNNER_TOKEN:-}}"
 
