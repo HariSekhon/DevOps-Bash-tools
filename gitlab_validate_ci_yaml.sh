@@ -63,4 +63,8 @@ json_content_escaped="$(sed 's/"/\\"/g;s/^[[:space:]]*//;' <<< "$json_content" |
 
 # doesn't need to be authenticated
 #"$srcdir/gitlab_api.sh" /ci/lint -X POST --header "Content-Type: application/json" --data "{\"content\": \"$json_content_escaped\"}" | jq -r .status
-curl -sS --fail https://gitlab.com/api/v4/ci/lint -X POST --header "Content-Type: application/json" --data "{\"content\": \"$json_content_escaped\"}" | jq -r .status
+result="$(curl -sS --fail https://gitlab.com/api/v4/ci/lint -X POST --header "Content-Type: application/json" --data "{\"content\": \"$json_content_escaped\"}" | jq -r .status)"
+echo "$result"
+if [ "$result" != valid ]; then
+    exit 1
+fi
