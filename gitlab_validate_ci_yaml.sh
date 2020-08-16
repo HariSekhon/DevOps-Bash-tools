@@ -53,7 +53,7 @@ if [ $# -gt 0 ]; then
 elif [ -f "$gitlab_ci_yml" ]; then
     filename="$gitlab_ci_yml"
 else
-    usage "no filename given"
+    usage "no filename given and no file '$gitlab_ci_yml' found in the current directory"
 fi
 
 content="$(sed 's/#.*//; /^[[:space:]]*$/d' "$filename")"
