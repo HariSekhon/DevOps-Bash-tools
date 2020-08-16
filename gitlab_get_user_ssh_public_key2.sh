@@ -10,17 +10,18 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://docs.gitlab.com/ee/api/users.html#list-ssh-keys
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 usage(){
     cat <<EOF
-Fetches a GitLab user's public SSH key via HTTP
+Fetches a GitLab user's public SSH key(s) via HTTP
 
 User can be given as first argument, or environment variables \$GITLAB_USER or \$USER
 
 Technically should use the GitLab API, see instead:  gitlab_get_user_ssh_public_key.sh
-
 
 ${0##*/} <user>
 EOF
