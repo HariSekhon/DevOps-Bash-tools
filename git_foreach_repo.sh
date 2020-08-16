@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
+#  args: echo {repo} is found at {dir}
 #
 #  Author: Hari Sekhon
 #  Date: 2016-01-17 12:14:06 +0000 (Sun, 17 Jan 2016)
@@ -27,6 +28,35 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 #
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/git.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Run a command against all GitHub repos while changing to their directories on disk
+
+Any repos which are not checked out locally adjacent to this repo are skipped
+
+All arguments become the command template
+
+The command template replaces the following for convenience in each iteration:
+
+{repo} - with the repo name (eg. HariSekhon/DevOps-Bash-tools)
+{dir}  - with the directory on disk (eg. /Users/hari/github/bash-tools)
+
+eg. ${0##*/} 'echo {repo} is found at {dir}'
+
+or more usefully when chained with the other adjacent github_*.sh / gitlab_*.sh scripts
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<cmd>"
+
+help_usage "$@"
+
+min_args 1 "$@"
 
 #git_url="${GIT_URL:-https://github.com}"
 
@@ -67,9 +97,10 @@ for repo in $repolist; do
         continue
     fi
     pushd "$repo_dir" >/dev/null
-    echo "========================================" >&2
-    echo "$repo - $PWD" >&2
-    echo "========================================" >&2
+    repo_dir="$PWD"
+    echo "# ============================================================================ #" >&2
+    echo "# $repo - $repo_dir" >&2
+    echo "# ============================================================================ #" >&2
     cmd="$*"
     cmd="${cmd//\{repo\}/'$repo'}"
     cmd="${cmd//\{dir\}/'$repo_dir'}"
