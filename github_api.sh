@@ -12,41 +12,37 @@
 #
 #  https://www.linkedin.com/in/harisekhon
 #
+#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
+#  # returns 0
+#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/runners
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-usage(){
-    cat <<EOF
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC2034,SC2154
+usage_description="
 Script to query the GitHub.com API
 
 Automatically handles authentication via environment variables \$GITHUB_USER
 and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
 
-Can specify \$CURL_OPTS for options to pass to curl
+Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
 usage: ${0##*/} /path [<curl_options>]
 
 
-eg. ${0##*/} /repos/HariSekhon/actions/workflows
+eg. ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
-EOF
-    exit 3
-}
+"
 
-if [ $# -lt 1 ]; then
-    usage
-fi
+help_usage "$@"
 
-for arg; do
-    case "$arg" in
-        -*)     usage
-                ;;
-    esac
-done
+min_args 1 "$@"
 
 export USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
 PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
