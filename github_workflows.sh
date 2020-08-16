@@ -32,10 +32,11 @@ If no repo arg is given and is inside a git repo then takes determines the repo 
 Optional workflow id as second parameter will filter to just that workflow
 
 \$REPO and \$WORKFLOW_ID environment variables are also supported with positional args taking precedence
-
-usage: ${0##*/} <repo> [<workflow_id>]
-
 "
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<repo> [<workflow_id>]"
 
 help_usage "$@"
 
