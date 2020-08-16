@@ -266,7 +266,7 @@ etc.
   - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
 - `github_*.sh` - various useful [GitHub](https://github.com/) scripts for querying the GitHub API including:
   - `github_api.sh` - queryies the GitHub API. Infers github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
-  - `github_get_user_ssh_public_key.sh` / `github_get_user_ssh_public_key2.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `github_get_user_ssh_public_key.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
   - `github_runners.sh` - lists GitHub Actions runners
@@ -276,7 +276,7 @@ etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to repos of the same name on GitLab (uses `git_foreach_repo.sh`, `github_repo_description.sh` and `gitlab_set_project_description.sh`)
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
-  - `gitlab_get_user_ssh_public_key.sh` / `gitlab_get_user_ssh_public_key2.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `gitlab_get_user_ssh_public_key.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
