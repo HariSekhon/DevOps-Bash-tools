@@ -110,6 +110,10 @@ execute_repo(){
     # shellcheck disable=SC2016
     cmd="${cmd//\{dir\}/'$repo_dir'}"
     eval "$cmd"
+    if [[ "$cmd" =~ github_.*.sh ]]; then
+        # throttle hitting the GitHub API too often as it may error out
+        sleep 0.1
+    fi
     popd >/dev/null
     echo >&2
 }
