@@ -10,20 +10,44 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Fetches the GitHub user's public SSH key from the GitHub API
-#
-# Uses $GITHUB_USER or $USER as the expected GitHub user
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [[ "$USER" =~ hari|sekhon ]]; then
-    GITHUB_USER="${GITHUB_USER:-harisekhon}"
+usage(){
+    cat <<EOF
+Fetches a GitHub user's public SSH key from the GitHub API
+
+User can be given as first argument, or environment variables \$GITHUB_USER or \$USER
+
+${0##*/} <user>
+EOF
+    exit 3
+}
+
+for arg; do
+    case "$arg" in
+        -*)     usage
+                ;;
+    esac
+done
+
+if [ $# -gt 1 ]; then
+    usage
+elif [ $# -eq 1 ]; then
+    user="$1"
+elif [ -n "${GITHUB_USER:-}" ]; then
+    user="$GITHUB_USER"
+elif [ -n "${USER:-}" ]; then
+    if [[ "$USER" =~ hari|sekhon ]]; then
+        user=harisekhon
+    else
+        user="$USER"
+    fi
 else
-    GITHUB_USER="${GITHUB_USER:-$USER}"
+    usage
 fi
 
-echo "# Fetching SSH Public Key(s) from GitHub for account:  $GITHUB_USER" >&2
+echo "# Fetching SSH Public Key(s) from GitHub for account:  $user" >&2
 echo "#" >&2
-curl -sS "https://api.github.com/users/$GITHUB_USER/keys" |
+curl -sS "https://api.github.com/users/$user/keys" |
 jq -r '.[].key'
