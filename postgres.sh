@@ -166,9 +166,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     num_lines=50
     # PostgreSQL 84:
     #
-	# PostgreSQL stand-alone backend 8
-	# ...
-	# LOG:  database system is ready to accept connections
+    # PostgreSQL stand-alone backend 8
+    # ...
+    # LOG:  database system is ready to accept connections
     #
     #
     # PostgreSQL 11.8:
