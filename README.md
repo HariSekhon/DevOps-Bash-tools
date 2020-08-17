@@ -116,10 +116,10 @@ Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of 
 
 #### Contains:
 
-- Scripts for fast advanced systems administration including auto-populating required switches
-- Scripts for CI builds, forming a drop-in framework of standard checks
+- Scripts for fast advanced systems administration across many major technologies, APIs, auto-populating required switches, auto-handling authentication, shortening common commands like a Pro...
+- Scripts for CI builds, CI APIs, local runners, and checks forming a drop-in framework of standard tests used across repos, with specializations for handling many major languages and build tools
 - Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - advanced customizations, aliases, functions, dynamic Git and shell behaviour enhancements, colouring, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
-- Advanced configuration files for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki)
+- Advanced configuration files for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), top etc...
 - Installs the best systems packages [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/)... extensive package lists for servers and desktops for all major Linux distributions package managers and Mac
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
   - `.bash.d/` - interactive library (huge)
