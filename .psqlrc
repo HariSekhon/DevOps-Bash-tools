@@ -17,11 +17,84 @@
 --
 -- https://github.com/HariSekhon/SQL-scripts
 
-\! echo; echo .psqlrc loaded; echo
+--\! echo; echo .psqlrc loaded; echo
+\echo
+\echo .psqlrc loaded
+\echo
 
--- \set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
+-- colourize prompt
+\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
+
+-- jump to your SQL scripts directory (this is done in postgres.sh)
+--\cd ~/github/sql
+
+-- separate history files per DB
+\set HISTFILE ~/.psql_history- :DBNAME
+
+-- default: 500
+\set HISTSIZE 5000
+
+-- same as in Bash, don't record duplicate commands
+\set HISTCONTROL ignoredups
+
+-- tab-complete SQL keywords to uppercase
+\set COMP_KEYWORD_CASE upper
+
+-- turn pager off if inside a terminal multiplexer (screen, tmux)
+\pset pager on
+
+-- display NULLs literally instead of as blanks which is confusing
+\pset null 'NULL'
+
+-- leave wrapping to inherit \$COLUMNS
+--\pset columns 80
+
+-- enforce vertical results instead of horizontal columns (default: auto - vertical when width > columns)
+--\pset expanded
+
+-- replace | with \t or , to create TSV/CSV output
+--\pset fieldsep
+
+-- don't align columns for human readability (use when creating TSV/CSV output), default is 'aligned'
+--\pset unaligned
+
+-- line separator for unaligned output (default: \n)
+--\pset recordsep
+
+-- show (N row) count after each query
+\pset footer on
+
+-- show the encoding
+\! printf "Encoding: "
+\encoding
+
+-- interactively disables transaction rollbacks to fix things interactively, change of default behaviour might confuse though
+--\set ON_ERROR_ROLLBACK interactive
+
+-- exit SQL script or return to interactive prompt upon first error - use this in production scripts
+--\set ON_ERROR_STOP on
+
+-- same as -s / --single-step - use this to debug SQL scripts by prompting between executing each line
+--\set SINGLESTEP on
+
+-- same as -S / --single-line - use newlines as SQL statement terminators so you don't need semicolons
+--\set SINGLELINE on
+
+-- debug SQL errors: default, verbose or terse
+--\set VERBOSITY verbose
 
 -- enable timings for every query
 \timing on
 
-\! echo
+-- \! echo
+\echo
+
+\conninfo
+
+--\! echo
+\echo
+
+-- set useful variables
+-- call like this - :reload OR :r
+\set reload '\\i ~/.psqlrc'
+\set r '\\i ~/.psqlrc'
