@@ -200,6 +200,10 @@ fi
 timestamp "linking shell profile for .psqlrc"
 docker exec "$container_name" bash -c "cd /bash && setup/shell_link.sh &>/dev/null" || :
 
+# yes expand now
+# shellcheck disable=SC2064
+trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
+
 if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     dbname="${db##*/}"
     dbname="${dbname%%.*}"
@@ -220,10 +224,6 @@ $shell_description
 
 EOF
 fi
-
-# yes expand now
-# shellcheck disable=SC2064
-trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
 
 # cd to /sql to make sourcing easier without /sql/ path prefix
 docker_exec_opts="-w /sql -i"
