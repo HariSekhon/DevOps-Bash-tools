@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: .gitlab-ci.yml
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-16 19:21:27 +0100 (Sun, 16 Aug 2020)
