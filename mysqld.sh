@@ -36,12 +36,12 @@ source mysql_info.sql
 
 Get shell access:
 
-\! bash
+\\! bash
 
 
 List available SQL scripts:
 
-\! ls -l
+\\! ls -l
 "
 
 # shellcheck disable=SC2034,SC2154
