@@ -545,12 +545,24 @@ gituu(){
 
 push(){
     pull "$@" || return 1
+    echo
     if isGit .; then
-        echo "> git push -v $*"
+        echo "> git push $*"
         #for remote in $(git remote); do
         #    git push -v $remote $@
         #done
-        git push -v "$@"
+        # can't be sure where we're pushing without parsing the command args, so omit for now
+        if [ $# -eq 0 ]; then
+            echo "pushing to:"
+            # uniq_ordered.pl from my DevOps-Perl-tools repo or
+            # uniq2 from my DevOps-Golang-tools repo would be better here
+            # but not sure I want to create a dependency on that
+            # unix's standard uniq unfortnately will only deduplicate adjacent lines but should be good enough in most cases
+            git remote -v | awk '/^origin/{print $1"\t"$2}' | sed 's,://.*@,://,' | uniq
+        fi
+        # exposes your Github / GitLab / Bitbucket tokens on the screen, not secure, use printing above instead
+        #git push -v "$@"
+        git push "$@"
     elif type isHg &>/dev/null && isHg .; then
         echo "> hg push $*"
         hg push "$@"
