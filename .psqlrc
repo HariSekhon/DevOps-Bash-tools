@@ -28,7 +28,8 @@
 \echo .psqlrc loaded
 \echo
 
--- fancy colourized prompt
+---------------
+-- fancy prompt
 --
 -- %M   fqdn
 -- %m   hostname / local for socket
@@ -40,8 +41,26 @@
 -- %#   # if superuser, > otherwise
 -- %:myvar:  replaced with variable myvar
 -- %`command`   output of shell command
+
+------------------
+-- default prompt:
+--
+--              db=#
+--\set PROMPT1 '%/%R%# '
+
+---------------------------
+-- fancy prompt colourized:
+--                           time          hostname      serverhost/local              user             transaction    database      = #
 \set PROMPT1 '%[%033[32m%]%`date "+%T"` %`hostname -s` %[%033[35;1m%]%m:%[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]>%/%[%033[0m%]%R%# '
+
+-------------------------------------------------------------
+-- fancy prompt non-colourized for older verions of Postgres:
+--\set PROMPT1 '%`date "+%T"` %`hostname -s` %m:%n %x>%/%R%# '
+
+-------------------------------
 \set PROMPT2 '[continue] %R > '
+
+-------------------------------------------------------------------
 
 -- jump to your SQL scripts directory (this is done in postgres.sh)
 --\cd ~/github/sql
@@ -58,11 +77,13 @@
 -- tab-complete SQL keywords to uppercase
 \set COMP_KEYWORD_CASE upper
 
--- turn pager off if inside a terminal multiplexer (screen, tmux)
---\pset pager on
-
 -- display NULLs literally instead of as blanks which is confusing
 \pset null 'NULL'
+
+-------------------------------------------------------------------
+
+-- turn pager off if inside a terminal multiplexer (screen, tmux)
+--\pset pager on
 
 -- leave wrapping to inherit \$COLUMNS
 --\pset columns 80
@@ -87,6 +108,8 @@
 \! printf "Encoding: "
 \encoding
 
+-------------------------------------------------------------------
+
 -- interactively disables transaction rollbacks to fix things interactively, change of default behaviour might confuse though
 --\set ON_ERROR_ROLLBACK interactive
 
@@ -102,18 +125,21 @@
 -- debug SQL errors: default, verbose or terse
 \set VERBOSITY verbose
 
+---------------------------------
 -- enable timings for every query
 \timing on
 
 -- \! echo
 \echo
 
+---------
 -- doesn't work on PostgreSQL <= 9.0, but doesn't error out so it's fine
 \conninfo
 
 --\! echo
 \echo
 
+-----------------------
 -- set useful variables
 -- call like this - :reload OR :r
 -- or interpolate them into queries eg. SELECT * FROM :tablename;
