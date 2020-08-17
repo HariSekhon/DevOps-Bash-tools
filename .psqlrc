@@ -96,5 +96,8 @@
 
 -- set useful variables
 -- call like this - :reload OR :r
+-- or interpolate them into queries eg. SELECT * FROM :tablename;
+-- single quote the value to treat as an SQL literal  :'select'
+-- double quote the value to treat as a SQL identifier :"tablename"
 \set reload '\\i ~/.psqlrc'
 \set r '\\i ~/.psqlrc'
