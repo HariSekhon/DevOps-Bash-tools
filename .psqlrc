@@ -134,7 +134,7 @@
 \echo
 
 ---------
--- doesn't work on PostgreSQL <= 9.0, but doesn't error out so it's fine
+-- doesn't work on PostgreSQL < 9.1, but doesn't error out so it's fine
 \conninfo
 
 --\! echo
