@@ -49,6 +49,7 @@ python-cson
 requests
 tabulate
 saws
+PyYAML
 yamllint
 yq
 
