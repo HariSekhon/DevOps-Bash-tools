@@ -49,18 +49,18 @@ if [ -n "$sudo" ]; then
 fi
 
 while true; do
-	for lock in $locks; do
-		if $sudo fuser "$lock" &>/dev/null; then
-			echo "apt lock in use ($lock), waiting..." >&2
-			sleep "$sleep_secs"
-			continue
-		fi
-	done
-	if [ -f "$unattended_upgrade_log" ] &&
-	   $sudo fuser "$unattended_upgrade_log" &>/dev/null; then
-		echo "apt unattended upgrade log in use ($unattended_upgrade_log), waiting..." >&2
-		sleep "$sleep_secs"
-		continue
-	fi
-	break
+    for lock in $locks; do
+        if $sudo fuser "$lock" &>/dev/null; then
+            echo "apt lock in use ($lock), waiting..." >&2
+            sleep "$sleep_secs"
+            continue
+        fi
+    done
+    if [ -f "$unattended_upgrade_log" ] &&
+       $sudo fuser "$unattended_upgrade_log" &>/dev/null; then
+        echo "apt unattended upgrade log in use ($unattended_upgrade_log), waiting..." >&2
+        sleep "$sleep_secs"
+        continue
+    fi
+    break
 done
