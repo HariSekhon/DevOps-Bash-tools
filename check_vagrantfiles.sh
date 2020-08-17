@@ -43,7 +43,7 @@ if type -P vagrant &>/dev/null; then
         # vm:
         # * The host path of the shared folder is missing: ~/github
         #
-        awk '/^[[:space:]]*config.vm.synced_folder/{print$2}' "$vagrantfile" |
+        awk '/^[[:space:]]*config.vm.synced_folder/{print$2}' Vagrantfile |
         sed 's/,$//; s/"//g' |
         sed "s/'//" |
         while read -r directory; do
