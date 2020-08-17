@@ -116,14 +116,14 @@ Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of 
 
 #### Contains:
 
-- Scripts for fast advanced systems engineering, automation, APIs, short CLI commands auto-populating required switches, auto-handling authentication etc...
+- Scripts for fast advanced systems engineering, automation, APIs, short CLIs auto-populating required switches, auto-handling authentication etc...
 - Scripts for [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), APIs, agents, checks forming a drop-in framework of standard tests used [across repos](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), specializations handling many major languages and build tools
 - Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - advanced customizations, aliases, functions, dynamic Git and shell behaviour enhancements, colouring, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
 - Advanced configuration files for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), top etc...
-- Installs the best systems packages [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/)... extensive package lists for servers and desktops for all major Linux distributions package managers and Mac
-- Utility library used in many scripts here and sourced from other repos, using the 2 libraries
-  - `.bash.d/` - interactive library (huge)
-  - `lib/` - scripting and CI library (heavily used by hundreds of scripts and builds)
+- Installs the best systems packages - [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/) etc... extensive package lists for servers and desktops for all major Linux distributions package managers and Mac
+- Utility Libraries used by hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/harisekhon):
+  - `.bash.d/` - interactive library
+  - `lib/` - scripting and CI library
 - [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 70+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs, [Google BigQuery](https://cloud.google.com/bigquery) billing queries
 
 For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
