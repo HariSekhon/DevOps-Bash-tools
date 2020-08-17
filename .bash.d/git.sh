@@ -559,6 +559,7 @@ push(){
             # but not sure I want to create a dependency on that
             # unix's standard uniq unfortnately will only deduplicate adjacent lines but should be good enough in most cases
             git remote -v | awk '/^origin/{print $1"\t"$2}' | sed 's,://.*@,://,' | uniq
+            echo
         fi
         # exposes your Github / GitLab / Bitbucket tokens on the screen, not secure, use printing above instead
         #git push -v "$@"
