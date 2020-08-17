@@ -37,6 +37,19 @@ if type -P vagrant &>/dev/null; then
     echo
     while read -r vagrantfile; do
         pushd "$(dirname "$vagrantfile")" >/dev/null
+
+        # create host directories to avoid this Vagrantfile validation error in GitHub Actions "CI Mac" builds:
+        #
+        # vm:
+        # * The host path of the shared folder is missing: ~/github
+        #
+        awk '/^[[:space:]]*config.vm.synced_folder/{print$2}' "$vagrantfile" |
+        sed 's/,$//; s/"//g' |
+        sed "s/'//" |
+        while read -r directory; do
+            mkdir -pv "$directory"
+        done
+
         echo -n "$vagrantfile => "
         vagrant validate
         popd >/dev/null
