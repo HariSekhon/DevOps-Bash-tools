@@ -275,7 +275,7 @@ etc.
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab repos (uses `git_foreach_repo.sh`, `github_repo_description.sh` and `gitlab_set_project_description.sh`)
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
-  - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
+  - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts
   - `gitlab_get_user_ssh_public_key.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
