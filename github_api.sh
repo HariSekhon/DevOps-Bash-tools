@@ -23,6 +23,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Queries the GitHub.com API
@@ -90,6 +93,10 @@ export PASSWORD
 url_path="${1:-}"
 url_path="${url_path//https:\/\/api.github.com}"
 url_path="${url_path##/}"
+
+# for convenience of straight copying and pasting out of documentation pages
+url_path="${url_path/:owner/$USER}"
+url_path="${url_path/:repo/$(git_repo | sed 's/.*\///')}"
 
 shift
 
