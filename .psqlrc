@@ -32,7 +32,7 @@
 -- %#   # if superuser, > otherwise
 -- %:myvar:  replaced with variable myvar
 -- %`command`   output of shell command
-\set PROMPT1 '%[%033[32;m%]%`date "+%F %T"` %[%033[35;1m%]%m %[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]%/%[%033[0m%]%R%# '
+\set PROMPT1 '%[%033[32;m%]%`date "+%T"` %[%033[35;1m%]%m %[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]%/%[%033[0m%]%R%# '
 
 -- jump to your SQL scripts directory (this is done in postgres.sh)
 --\cd ~/github/sql
