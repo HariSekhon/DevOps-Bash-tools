@@ -196,4 +196,4 @@ for version in $mysql_versions; do
 done
 echo >&2
 echo >&2
-timestamp "All MySQL tests passed for all scripts on all versions: "$(tac <<< "$mysql_versions")
+timestamp "All MySQL tests passed for all scripts on all versions:  $(tac <<< "$mysql_versions" | tr '\n' ' ')"
