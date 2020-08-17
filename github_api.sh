@@ -81,6 +81,10 @@ ${0##*/} /repos/:user/:repo/actions/workflows
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
+url_base="https://api.github.com"
+
+CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+
 help_usage "$@"
 
 min_args 1 "$@"
@@ -117,4 +121,4 @@ url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 
 
-eval "$srcdir/curl_auth.sh" --fail -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/$url_path" "$@"
+eval "$srcdir/curl_auth.sh" "$CURL_OPTS" "$url_base/$url_path" "$@"
