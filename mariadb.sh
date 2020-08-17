@@ -163,6 +163,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
+timestamp "linking shell profile for .my.cnf"
+docker exec "$container_name" bash -c "cd /bash && setup/shell_link.sh &>/dev/null" || :
+
 # yes expand now
 # shellcheck disable=SC2064
 trap "echo ERROR; echo; echo; [ -z '${DEBUG:-}' ] || docker logs '$container_name'" EXIT
