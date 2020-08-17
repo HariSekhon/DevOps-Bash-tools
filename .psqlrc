@@ -54,7 +54,7 @@
 \set PROMPT1 '%[%033[32m%]%`date "+%T"` %`hostname -s` %[%033[35;1m%]%m:%[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]>%/%[%033[0m%]%R%# '
 
 -------------------------------------------------------------
--- fancy prompt non-colorized (for PostgreSQL < 9.3):
+-- fancy prompt non-colorized (for PostgreSQL 9.0 - 9.2 environments where colors aren't working - probably a term/env issue):
 --
 --\set PROMPT1 '%`date "+%T"` %`hostname -s` %m:%n %x>%/%R%# '
 
