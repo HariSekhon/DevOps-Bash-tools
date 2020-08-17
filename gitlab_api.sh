@@ -14,9 +14,12 @@
 #
 
 #  args: /user | jq
+#  args: /users/:id/projects | jq
 #  args: /users/$(gitlab_api.sh /users?username=harisekhon | jq -r .[].id) | jq
 #  args: /users/HariSekhon/projects | jq
+#  args: /projects/:id | jq
 #  args: /projects/HariSekhon%2FDevOps-Bash-tools/pipelines | jq
+#  args: /projects/:id/pipelines | jq
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -71,6 +74,12 @@ ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
 # List a project's CI pipelines, sorted by newest run first:
 
 ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
+
+For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings (due to the context variation of the GitLAB API documentation tokens this is only done for users and projects only at this time)
+
+Placeholders replaced by \$GITLAB_USER:  :owner, :user, :username, <user>, <username>, /users/:id
+Placeholders replaced by the local repo name of the current directory:  :repo, <repo>
+Placeholders replaced by the local full 'user/repo' name of the current directory:  :project, <project>, /projects/:id
 "
 
 # used by usage() in lib/utils.sh
@@ -99,17 +108,22 @@ url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
 
-#project=$(git_repo)
-#repo=$(sed 's/.*\///' <<< "$project")
-#project="${project//\//%2F}" # cheap url encode slash
-#
-#url_path="${url_path/:owner/$USER}"
-#url_path="${url_path/:user/$USER}"
-#url_path="${url_path/:username/$USER}"
-#url_path="${url_path/<user>/$USER}"
-#url_path="${url_path/<username>/$USER}"
-#url_path="${url_path/:repo/$repo}"
-#url_path="${url_path/<repo>/$repo}"
+user="${GITLAB_USER:-${USER:-}}"
+project=$(git_repo)
+repo=$(sed 's/.*\///' <<< "$project")
+project="${project//\//%2F}" # cheap url encode slash
+
+url_path="${url_path/:owner/$USER}"
+url_path="${url_path/:user/$USER}"
+url_path="${url_path/:username/$USER}"
+url_path="${url_path/<user>/$USER}"
+url_path="${url_path/<username>/$USER}"
+url_path="${url_path/:repo/$repo}"
+url_path="${url_path/<repo>/$repo}"
+url_path="${url_path/:project/$project}"
+url_path="${url_path/<project>/$project}"
+url_path="${url_path/projects\/:id/projects\/$project}"
+url_path="${url_path/users\/:id/users\/$user}"
 
 
 if is_curl_min_version 7.55; then
