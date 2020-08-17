@@ -17,6 +17,12 @@
 --
 -- https://github.com/HariSekhon/SQL-scripts
 
+
+-- PSQL docs:
+--
+-- https://www.postgresql.org/docs/12/app-psql.html
+
+
 --\! echo; echo .psqlrc loaded; echo
 \echo
 \echo .psqlrc loaded
@@ -24,7 +30,9 @@
 
 -- fancy colourized prompt
 --
--- %m   hostname -s / socket
+-- %M   fqdn
+-- %m   hostname / local for socket
+-- %>   port
 -- %n   username
 -- %x   transaction status - * in transaction, ! when transaction failed, ? when indeterminate
 -- %/   database
@@ -32,7 +40,7 @@
 -- %#   # if superuser, > otherwise
 -- %:myvar:  replaced with variable myvar
 -- %`command`   output of shell command
-\set PROMPT1 '%[%033[32m%]%`date "+%T"` %[%033[35;1m%]%m:%[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]%/%[%033[0m%]%R%# '
+\set PROMPT1 '%[%033[32m%]%`date "+%T"` %`hostname -s` %[%033[35;1m%]%m:%[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]>%/%[%033[0m%]%R%# '
 \set PROMPT2 '[continue] %R > '
 
 -- jump to your SQL scripts directory (this is done in postgres.sh)
@@ -100,6 +108,7 @@
 -- \! echo
 \echo
 
+-- doesn't work on PostgreSQL <= 9.0, but doesn't error out so it's fine
 \conninfo
 
 --\! echo
@@ -112,3 +121,7 @@
 -- double quote the value to treat as a SQL identifier :"tablename"
 \set reload '\\i ~/.psqlrc'
 \set r '\\i ~/.psqlrc'
+
+-- for local settings
+-- XXX: see if there is a way to check for existence and source only then
+--\i ~/.psqlrc.local
