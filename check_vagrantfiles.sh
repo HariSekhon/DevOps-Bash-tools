@@ -47,9 +47,9 @@ if type -P vagrant &>/dev/null; then
         sed 's/,$//; s/"//g' |
         sed "s/'//" |
         while read -r directory; do
-            # want globbing to complete ~/github
-            # shellcheck disable=SC2086
-            mkdir -pv $directory
+            # Mac is silent even with -v and
+            # creates literal ~/ subdirectory path unless eval'd, leaving validation to fail with the real path missing
+            eval mkdir -p -v "$directory"
         done
 
         echo -n "$vagrantfile => "
