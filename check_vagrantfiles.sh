@@ -47,7 +47,9 @@ if type -P vagrant &>/dev/null; then
         sed 's/,$//; s/"//g' |
         sed "s/'//" |
         while read -r directory; do
-            mkdir -pv "$directory"
+            # want globbing to complete ~/github
+            # shellcheck disable=SC2086
+            mkdir -pv $directory
         done
 
         echo -n "$vagrantfile => "
