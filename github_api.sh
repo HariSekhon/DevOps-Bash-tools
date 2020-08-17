@@ -3,6 +3,7 @@
 #  args: /user
 #  args: /users/HariSekhon/repos
 #  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
+#  args: /repos/:user/:repo/actions/workflows
 #
 #  Author: Hari Sekhon
 #  Date: 2020-02-12 23:43:00 +0000 (Wed, 12 Feb 2020)
@@ -70,8 +71,8 @@ ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
-The ':owner' / ':user' / '<user>' placeholders are replaced by \$GITHUB_USER
-The ':repo' / '<repo>' placeholders are replaced by the local repo name
+Placeholders replaced by \$GITHUB_USER:  :owner, :user, :username, <user>, <username>
+Placeholders replaced by the local repo name of the current directory:  :repo, <repo>
 
 ${0##*/} /repos/:user/:repo/actions/workflows
 "
@@ -109,7 +110,9 @@ repo=$(git_repo | sed 's/.*\///')
 
 url_path="${url_path/:owner/$USER}"
 url_path="${url_path/:user/$USER}"
+url_path="${url_path/:username/$USER}"
 url_path="${url_path/<user>/$USER}"
+url_path="${url_path/<username>/$USER}"
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 
