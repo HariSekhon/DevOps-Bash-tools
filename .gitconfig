@@ -50,6 +50,8 @@
 
     in      = log HEAD..FETCH_HEAD
     out     = log FETCH_HEAD..HEAD
+    inp     = log -p HEAD..FETCH_HEAD
+    outp    = log -p FETCH_HEAD..HEAD
     age     = for-each-ref --format '%(authordate:iso) %(refname:short)' --sort=-authordate refs/remotes refs/heads
 
     unstage = reset HEAD --
