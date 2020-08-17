@@ -219,4 +219,4 @@ for version in $postgres_versions; do
 done
 echo >&2
 echo >&2
-timestamp "All PostgreSQL tests passed for all scripts on all versions: "$(tac <<< "$postgres_versions")
+timestamp "All PostgreSQL tests passed for all scripts on all versions:  $(tac <<< "$postgres_versions" | tr '\n' ' ')"
