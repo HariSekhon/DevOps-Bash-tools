@@ -50,7 +50,7 @@ spotify_user(){
         if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
             spotify_user="$(SPOTIFY_PRIVATE=1 "$libdir/../spotify_api.sh" "/v1/me" | jq -r '.id')"
         else
-            usage "\$SPOTIFY_USER not defined, and not using SPOTIFY_PRIVATE to auto-infer from authorized token"
+            usage "\$SPOTIFY_USER not defined, and not using SPOTIFY_PRIVATE to auto-infer user from an authorized token"
         fi
     fi
 }
