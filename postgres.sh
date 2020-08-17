@@ -31,17 +31,17 @@ shell_description="$sql_mount_description
 
 Source a sql script:
 
-\i postgres_info.sql
+\\i postgres_info.sql
 
 
 Get shell access:
 
-\!
+\\!
 
 
 List available SQL scripts:
 
-\! ls -l
+\\! ls -l
 "
 
 # shellcheck disable=SC2034,SC2154
