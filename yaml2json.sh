@@ -34,7 +34,7 @@ usage_args="[<filename>]"
 help_usage "$@"
 
 yaml2json(){
-    if type -P python &>/dev/null; then
+    if type -P python &>/dev/null && python -c 'import yaml' &>/dev/null; then
         python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin, Loader=yaml.FullLoader), sys.stdout, indent=4)'
     elif type -P ruby &>/dev/null; then
         # don't want variable expansion
