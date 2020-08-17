@@ -67,6 +67,13 @@ ${0##*/} /users/HariSekhon/repos
 # Get the GitHub Actions workflows for a given repo:
 
 ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
+
+
+For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
+The ':owner' / ':user' / '<user>' placeholders are replaced by \$GITHUB_USER
+The ':repo' / '<repo>' placeholders are replaced by the local repo name
+
+${0##*/} /repos/:user/:repo/actions/workflows
 "
 
 # used by usage() in lib/utils.sh
@@ -91,13 +98,20 @@ export PASSWORD
 #fi
 
 url_path="${1:-}"
+shift
+
 url_path="${url_path//https:\/\/api.github.com}"
 url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out of documentation pages
-url_path="${url_path/:owner/$USER}"
-url_path="${url_path/:repo/$(git_repo | sed 's/.*\///')}"
 
-shift
+repo=$(git_repo | sed 's/.*\///')
+
+url_path="${url_path/:owner/$USER}"
+url_path="${url_path/:user/$USER}"
+url_path="${url_path/<user>/$USER}"
+url_path="${url_path/:repo/$repo}"
+url_path="${url_path/<repo>/$repo}"
+
 
 eval "$srcdir/curl_auth.sh" --fail -sS --connect-timeout 3 "${CURL_OPTS:-}" "https://api.github.com/$url_path" "$@"
