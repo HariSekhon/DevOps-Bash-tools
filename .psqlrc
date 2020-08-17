@@ -22,8 +22,17 @@
 \echo .psqlrc loaded
 \echo
 
--- colourize prompt
-\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
+-- fancy colourized prompt
+--
+-- %m   hostname -s / socket
+-- %n   username
+-- %x   transaction status - * in transaction, ! when transaction failed, ? when indeterminate
+-- %/   database
+-- %R   = for connected, ! for disconnected, ^ for single line mode
+-- %#   # if superuser, > otherwise
+-- %:myvar:  replaced with variable myvar
+-- %`command`   output of shell command
+\set PROMPT1 '%[%033[35;1m%]%m %[%033[36;1m%]%n %[%033[33;1m%]%x%[%033[;1m%]%/%[%033[0m%]%R%# '
 
 -- jump to your SQL scripts directory (this is done in postgres.sh)
 --\cd ~/github/sql
