@@ -41,7 +41,7 @@ Get shell access:
 
 List available SQL scripts:
 
-\\! ls -l
+\\! ls -l mysql*.sql
 "
 
 # shellcheck disable=SC2034,SC2154
