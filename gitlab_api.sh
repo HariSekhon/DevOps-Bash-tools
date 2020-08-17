@@ -25,6 +25,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Queries the GitLab.com APIv4
@@ -74,6 +77,10 @@ ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
+url_base="https://gitlab.com/api/v4"
+
+CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+
 if [ -z "${GITLAB_TOKEN:-}" ]; then
     GITLAB_TOKEN="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//')"
 fi
@@ -85,22 +92,31 @@ help_usage "$@"
 min_args 1 "$@"
 
 url_path="${1:-}"
+shift
+
 url_path="${url_path//https:\/\/api.github.com}"
 url_path="${url_path##/}"
 
-shift
+# for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
 
-url_base="https://gitlab.com/api/v4"
+#project=$(git_repo)
+#repo=$(sed 's/.*\///' <<< "$project")
+#project="${project//\//%2F}" # cheap url encode slash
+#
+#url_path="${url_path/:owner/$USER}"
+#url_path="${url_path/:user/$USER}"
+#url_path="${url_path/:username/$USER}"
+#url_path="${url_path/<user>/$USER}"
+#url_path="${url_path/<username>/$USER}"
+#url_path="${url_path/:repo/$repo}"
+#url_path="${url_path/<repo>/$repo}"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
 
-# want splitting
-# shellcheck disable=SC2086
 if is_curl_min_version 7.55; then
     # this trick doesn't work, file descriptor is lost by next line
     #filedescriptor=<(cat <<< "Private-Token: $GITLAB_TOKEN")
-    curl ${CURL_OPTS} -H @<(cat <<< "Private-Token: $GITLAB_TOKEN") "$url_base/$url_path" "$@"
+    eval curl "$CURL_OPTS" -H @<(cat <<< "Private-Token: $GITLAB_TOKEN") "$url_base/$url_path" "$@"
 else
     # could also use OAuth compliant header "Authorization: Bearer <token>"
-    curl ${CURL_OPTS:-} -H "Private-Token: $GITLAB_TOKEN" "$url_base/$url_path" "$@"
+    eval curl "$CURL_OPTS" -H "Private-Token: $GITLAB_TOKEN" "$url_base/$url_path" "$@"
 fi
