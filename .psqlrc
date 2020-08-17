@@ -51,7 +51,7 @@
 \set COMP_KEYWORD_CASE upper
 
 -- turn pager off if inside a terminal multiplexer (screen, tmux)
-\pset pager on
+--\pset pager on
 
 -- display NULLs literally instead of as blanks which is confusing
 \pset null 'NULL'
@@ -60,7 +60,8 @@
 --\pset columns 80
 
 -- enforce vertical results instead of horizontal columns (default: auto - vertical when width > columns)
---\pset expanded
+--\x auto
+--\pset expanded auto
 
 -- replace | with \t or , to create TSV/CSV output
 --\pset fieldsep
@@ -91,7 +92,7 @@
 --\set SINGLELINE on
 
 -- debug SQL errors: default, verbose or terse
---\set VERBOSITY verbose
+\set VERBOSITY verbose
 
 -- enable timings for every query
 \timing on
