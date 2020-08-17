@@ -197,6 +197,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     echo
 fi
 
+timestamp "linking shell profile for .psqlrc and other goodies"
+docker exec "$container_name" bash -c "cd /bash && setup/shell_link.sh &>/dev/null" || :
+
 if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     dbname="${db##*/}"
     dbname="${dbname%%.*}"
