@@ -112,14 +112,15 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 350+ DevOps Shell Scripts, Advanced Bash environment & Utility Code Library.
 
-Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 300+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
+Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
-Contains:
+#### Contains:
 
 - Scripts for fast advanced systems administration including auto-populating required switches
 - Scripts for CI builds, forming a drop-in framework of standard checks
-- Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - tonnes of advanced customizations, aliases and functions. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
-- Advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), installs the best sysadmin packages like those above plus [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/) and many others, adds dynamic Git and shell behaviour enhancements, colouring, functions, aliases and automatic pathing of many common installation locations for many major languages like Python, Perl, Ruby, NodeJS, Golang...
+- Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - advanced customizations, aliases, functions, dynamic Git and shell behaviour enhancements, colouring, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
+- Advanced configuration files for common tools like [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki)
+- Installs the best systems packages [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [jq](https://stedolan.github.io/jq/)... extensive package lists for servers and desktops for all major package managers across Linux distributions and Mac
 - Utility library used in many scripts here and sourced from other repos, using the 2 libraries
   - `.bash.d/` - interactive library (huge)
   - `lib/` - scripting and CI library (heavily used by hundreds of scripts and builds)
