@@ -39,6 +39,12 @@ xargs(){
     gxargs "$@"
 }
 
+if ! type tac &>/dev/null; then
+    tac(){
+        gtac "$@"
+    }
+fi
+
 # put in inputrc for readline
 #set completion-ignore-case on
 
