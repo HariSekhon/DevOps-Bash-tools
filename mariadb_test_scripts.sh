@@ -194,6 +194,7 @@ for version in $mariadb_versions; do
     MYSQL_OPTS="--table" \
     command time \
     "$srcdir/mariadb.sh" "$version" --restart
+    echo >&2
     timestamp "Succeeded testing ${#scripts[@]} scripts for MariaDB $version"
     echo >&2
     echo >&2
