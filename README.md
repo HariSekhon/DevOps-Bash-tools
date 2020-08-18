@@ -331,7 +331,8 @@ etc.
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
   - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
   - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
-- `yaml2json.sh` - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
+- `json2yaml.sh` - converts JSON to YAML
+- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
