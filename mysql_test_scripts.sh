@@ -190,6 +190,7 @@ for version in $mysql_versions; do
     MYSQL_OPTS="--table" \
     command time \
     "$srcdir/mysqld.sh" "$version" --restart
+    echo >&2
     timestamp "Succeeded testing ${#scripts[@]} scripts for MySQL $version"
     echo >&2
     echo >&2
