@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Converts YAML to JSON using either Python, Ruby or Perl (whichever is available in that order)
+Converts YAML to JSON using either Python, Perl or Ruby (whichever is available in that order)
 
 YAML can be specified as a filename argument to piped to standard input
 "
