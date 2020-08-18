@@ -45,6 +45,8 @@ yaml2json(){
     elif type -P perl &>/dev/null; then
         #perl -MYAML::XS=LoadFile -MJSON::XS=encode_json -e 'for (@ARGV) { for (LoadFile($_)) { print encode_json($_),"\n" } }'
         perl -MYAML::XS=Load -MJSON::XS=encode_json -e '$/ = undef; print encode_json(Load(<STDIN>)) . "\n"'
+    # don't use yq - there are 2 completely different 'yq' which could appear in \$PATH, so this is unreliable
+    #elif type -P yq &>/dev/null; then
     else
         die "ERROR: unable to convert yaml to json since not one of the following tools were found: python, perl, ruby"
     fi
