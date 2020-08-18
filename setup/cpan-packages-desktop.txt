@@ -7,6 +7,8 @@
 App::Ack
 App::cpanminus
 App::FatPacker
+# useful for converting JSON to YAML
+Catmandu
 DBD::mysql
 IO::Socket::SSL
 JSON
