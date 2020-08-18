@@ -213,6 +213,7 @@ for version in $postgres_versions; do
     done
     } |
     command time "$srcdir/postgres.sh" "$version" --restart
+    echo >&2
     timestamp "Succeeded testing ${#scripts[@]} scripts for PostgreSQL $version"
     echo >&2
     echo >&2
