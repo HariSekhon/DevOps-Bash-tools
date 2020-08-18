@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Converts JSON to YAML using either Python, Perl or Ruby (whichever is available in that order)
+Converts JSON to YAML using either Perl, Ruby or Python (whichever is available in that order)
 
 JSON can be specified as a filename argument to piped to standard input
 "
@@ -35,12 +35,8 @@ usage_args="[<filename>]"
 help_usage "$@"
 
 json2yaml(){
-    # yaml is a 3rd party library, and in old 2.x versions so was json - only run the Python conversion if we have both libraries installed
-    if type -P python &>/dev/null &&
-       python -c 'import yaml, json' &>/dev/null; then
-        python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)'
     # needs 3rd party modules installed (YAML::XS, JSON::XS), so check we have both modules first
-    elif type -P perl &>/dev/null &&
+    if type -P perl &>/dev/null &&
          perl -MYAML::XS=Load -MJSON::XS=encode_json -e '' &>/dev/null; then
         #perl -MYAML::XS=LoadFile -MJSON::XS=encode_json -e 'for (@ARGV) { for (LoadFile($_)) { print encode_json($_),"\n" } }'
         perl -MYAML::XS=Dump -MJSON::XS=decode_json -e '$/ = undef; print Dump(decode_json(<STDIN>)) . "\n"'
@@ -52,6 +48,11 @@ json2yaml(){
         # don't want variable expansion
         # shellcheck disable=SC2016
         ruby -r yaml -r json -e 'puts YAML.dump(JSON.parse(STDIN.read))'
+    # moved to last as typical Python version change problems, breaks across environments with AttributeError: 'module' object has no attribute 'FullLoader'
+    # yaml is a 3rd party library, and in old 2.x versions so was json - only run the Python conversion if we have both libraries installed
+    elif type -P python &>/dev/null &&
+       python -c 'import yaml, json' &>/dev/null; then
+        python -c 'import sys, yaml, json; yaml.safe_dump(json.load(sys.stdin), sys.stdout, default_flow_style=False)'
     # don't use yq - there are 2 completely different 'yq' which could appear in \$PATH, so this is unreliable
     #elif type -P yq &>/dev/null; then
     else
