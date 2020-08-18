@@ -45,7 +45,7 @@ yaml2json(){
         #perl -MYAML::XS=LoadFile -MJSON::XS=encode_json -e 'for (@ARGV) { for (LoadFile($_)) { print encode_json($_),"\n" } }'
         perl -MYAML::XS=Load -MJSON::XS=encode_json -e '$/ = undef; print encode_json(Load(<STDIN>)) . "\n"'
     elif type -P ruby &>/dev/null &&
-         ruby -r yaml -r json -e '' &>dev/null; then
+         ruby -r yaml -r json -e '' &>/dev/null; then
         # don't want variable expansion
         # shellcheck disable=SC2016
         ruby -r yaml -r json -e 'puts YAML.load($stdin.read).to_json'
