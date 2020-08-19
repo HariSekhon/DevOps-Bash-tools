@@ -125,6 +125,7 @@ for repo in $repolist; do
         printf '%s\n' "$description"
         cat
     }
+    # works for Link which is a limited format, but couldn't expect to safely inject a description line pulled from the GitHub API because all sorts of characters could be contained which break this, so instead doing this via the brace piping trick above
     # \\ escapes the newlines to allow them inside the sed for literal replacement since \n doesn't work
     #sed "2 s|^|\\
 #\\
