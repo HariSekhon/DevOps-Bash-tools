@@ -23,9 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 filename="$1"
 
-# #  run: <output this bit>
-# // run: <output this bit>
-run_cmd="$(perl -ne 'if(/^\s*(#|\/\/)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$filename")"
+# examples:
+#
+# #  run: kubectl apply -f file.yaml
+# // run: go run file.go
+# -- run: psql -f file.sql
+run_cmd="$(perl -ne 'if(/^\s*(#|\/\/|--)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$filename")"
 
 dirname="$(dirname "$filename")"
 
