@@ -120,5 +120,6 @@ url_path="${url_path/<username>/$USER}"
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 
-
-eval "$srcdir/curl_auth.sh" "$CURL_OPTS" "'$url_base/$url_path'" "$@"
+# need CURL_OPTS splitting, safer than eval
+# shellcheck disable=SC2086
+"$srcdir/curl_auth.sh" $CURL_OPTS "$url_base/$url_path" "$@"
