@@ -237,6 +237,7 @@ alias eclipse='~/eclipse/Eclipse.app/Contents/MacOS/eclipse';
 alias visualvm='~/visualvm/bin/visualvm'
 
 export templates="$github/tools/templates"
+export tmpl="$templates"
 alias templates='cd $templates'
 alias tmpl=templates
 
