@@ -27,8 +27,11 @@ filename="$1"
 # // run: <output this bit>
 run_cmd="$(perl -ne 'if(/^\s*(#|\/\/)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$filename")"
 
+dirname="$(dirname "$filename")"
+
+cd "$dirname"
+
 if [ -n "$run_cmd" ]; then
-    cd "$(dirname "$filename")"
     eval "$run_cmd"
 else
     if ! [ -x "$filename" ]; then
