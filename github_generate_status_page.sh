@@ -50,7 +50,7 @@ fi
 get_repos(){
     page=1
     while true; do
-        echo "fetching repos page $page" >&2
+        echo "fetching GitHub repos - page $page" >&2
         if ! output="$("$srcdir/github_api.sh" "/users/$GITHUB_USER/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
@@ -96,25 +96,40 @@ trap 'echo ERROR >&2; rm -f $tempfile' exit
 {
 actual_repos=0
 
+echo "---" >&2
 for repo in $repolist; do
     if ! [[ "$repo" =~ / ]]; then
         repo="$GITHUB_USER/$repo"
     fi
-    echo "getting github repo $repo" >&2
+    echo "fetching GitHub description for repo $repo" >&2
+    description="$("$srcdir/github_repo_description.sh" "$repo" | awk '{$1=""; print}')"
+    echo "fetching GitHub README.md   for github repo $repo" >&2
     echo "---"
-    #perl -e '$/ = undef; my $content=<STDIN>; $content =~ s/<!--[^>]+-->//gs; print $content' |
-    curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
-    perl -pe '$/ = undef; s/<!--[^>]+-->//gs' |
-    sed -n '1,/^[^\[[:space:]<=-]/ p' |
-    head -n -1 |
-    #perl -ne 'print unless /=============/;' |
-    grep -v "===========" |
-    sed '1 s/^[^#]/# &/' |
+    echo "---" >&2
+    {
+        #perl -e '$/ = undef; my $content=<STDIN>; $content =~ s/<!--[^>]+-->//gs; print $content' |
+        curl -sS "https://raw.githubusercontent.com/$repo/master/README.md" |
+        perl -pe '$/ = undef; s/<!--[^>]+-->//gs' |
+        sed -n '1,/^[^\[[:space:]<=-]/ p' |
+        head -n -1 |
+        #perl -ne 'print unless /=============/;' |
+        grep -v "===========" |
+        sed '1 s/^[^#]/# &/'
+    } |
+    {
+        read -r title
+        printf '%s\n' "$title"
+        echo
+        printf '%s\n' "Link:  [$repo](https://github.com/$repo)"
+        echo
+        printf '%s\n' "$description"
+        cat
+    }
     # \\ escapes the newlines to allow them inside the sed for literal replacement since \n doesn't work
-    sed "2 s|^|\\
-Link:  [$repo](https://github.com/$repo)\\
-\\
-|"
+    #sed "2 s|^|\\
+#\\
+#Link:  [$repo](https://github.com/$repo)
+#|"
     echo
     ((actual_repos+=1))
 done
