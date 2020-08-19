@@ -19,3 +19,7 @@ ExtUtils::Embed
 
 # needed by perl_generate_par_binaries.sh
 PAR::Packer
+
+# for json2yaml.sh / yaml2json.sh
+JSON::XS
+YAML::XS

@@ -119,7 +119,7 @@ Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of 
 - Scripts for fast advanced systems engineering, automation, APIs, short CLIs auto-populating required switches, auto-handling authentication etc...
 - Scripts for [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), APIs, agents, checks forming a drop-in framework of standard tests used [across repos](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), specializations handling many major languages and build tools
 - Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - advanced customizations, aliases, functions, dynamic Git and shell behaviour enhancements, colouring, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
-- Advanced configuration files for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), `.toprc`, [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc...
+- Advanced configuration files for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
 - Installs the best systems packages - [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [Terraform](https://www.terraform.io/), [jq](https://stedolan.github.io/jq/) etc... extensive package lists for servers and desktops for all major Linux distributions package managers and Mac
 - Utility Libraries used by hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/harisekhon):
   - `.bash.d/` - interactive library
@@ -141,6 +141,16 @@ Cloud & Big Data Contractor, United Kingdom
 
 ### Quick Setup
 
+To install package dependencies, simply `cd` to the directory and run `make`:
+
+```
+git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
+cd bash-tools
+make
+```
+
+To install packages and also link in to your shell profile to inherit all configs and `$PATH`, do:
+
 ```
 curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
 ```
@@ -154,7 +164,7 @@ make install
 ```
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
-- Symlinks all `.*` config files to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/) etc.
+- Symlinks `.*` config dotfiles to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/), [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc. (only when they don't already exist so there is no conflict with your own configs)
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
 

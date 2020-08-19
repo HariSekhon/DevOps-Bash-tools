@@ -53,7 +53,7 @@ yaml2json(){
     # don't use yq - there are 2 completely different 'yq' which could appear in \$PATH, so this is unreliable
     #elif type -P yq &>/dev/null; then
     else
-        die "ERROR: unable to convert yaml to json since not one of the following tools were found: Python PyYaml, Perl YAML::XS + JSON::XS, Ruby json + yaml"
+        die "ERROR: unable to convert yaml to json since not one of the following tools were found:  Perl (YAML::XS + JSON::XS), Ruby (json + yaml) or Python (PyYaml)"
     fi
 }
 
