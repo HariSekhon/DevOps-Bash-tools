@@ -132,5 +132,5 @@ if is_curl_min_version 7.55; then
     eval curl "$CURL_OPTS" -H @<(cat <<< "Private-Token: $GITLAB_TOKEN") "$url_base/$url_path" "$@"
 else
     # could also use OAuth compliant header "Authorization: Bearer <token>"
-    eval curl "$CURL_OPTS" -H "Private-Token: $GITLAB_TOKEN" "$url_base/$url_path" "$@"
+    eval curl "$CURL_OPTS" -H "'Private-Token: $GITLAB_TOKEN'" "$url_base/$url_path" "$@"
 fi
