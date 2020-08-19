@@ -264,6 +264,7 @@ k8s_get_token(){
     awk '/^token/ {print $2}'
 }
 
+# better than: kubectl config view | grep server
 k8s_get_api(){
     local context
     local cluster
@@ -273,6 +274,32 @@ k8s_get_api(){
     # or if you have jq installed:
     # k get --raw=/api | jq -r '.serverAddressByClientCIDRs[0].serverAddress'
     echo
+}
+
+# TODO: path like above to get the current context's cluster
+k8s_get_client_cert(){
+    awk '/^[[:space:]]*client-cert/{print $2}' ~/.kube/config | head -n 1
+}
+
+k8s_get_client_key(){
+    awk '/^[[:space:]]*client-key-data/{print $2}' ~/.kube/config | head -n 1
+}
+
+k8s_get_ca_cert(){
+    awk '/^[[:space:]]*certificate-authority-data/{print $2}' ~/.kube/config | head -n 1
+}
+
+# generates files for authenticating to kube-apiserver via curl:
+#
+# curl --cert client_cert.pem --key client_key.pem --cacert ca_cert.pem https://k8smaster:6443/api/v1/pods
+# curl --cert client_cert.pem --key client_key.pem --cacert ca_cert.pem https://k8smaster:6443/api/v1/pods/namespaces/default/pods -XPOST -H 'Content-Type: application/json' -d @pod_defintion.json
+k8s_get_keys(){
+    k8s_get_client_cert | base64 -d - > client_cert.pem
+    echo "generated client_cert.pem"
+    k8s_get_client_key | base64 -d - > client_key.pem
+    echo "generated client_key.pem"
+    k8s_get_ca_cert | base64 -d - > ca_cert.pem
+    echo "generated ca_cert.pem"
 }
 
 # run kubectl commands against multiple clusters
