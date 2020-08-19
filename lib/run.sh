@@ -21,6 +21,11 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+if [ $# -eq 0 ]; then
+    echo "usage: ${0##*/} <filename>"
+    exit 3
+fi
+
 filename="$1"
 
 # examples:
@@ -31,15 +36,14 @@ filename="$1"
 run_cmd="$(perl -ne 'if(/^\s*(#|\/\/|--)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$filename")"
 
 dirname="$(dirname "$filename")"
+basename="${filename##*/}"
 
 cd "$dirname"
-
-filename="${filename##*/}"
 
 if [ -n "$run_cmd" ]; then
     eval "$run_cmd"
 else
-    case "$filename" in
+    case "$basename" in
         Makefile)   make
                     ;;
       Dockerfile)   if [ -f Makefile ]; then
