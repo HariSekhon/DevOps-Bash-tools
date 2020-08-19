@@ -149,7 +149,7 @@ cd bash-tools
 make
 ```
 
-To build all dependencies but all link in to your shell profile with all the `$PATH` sourcing and shell enhancements, do:
+To build all dependencies and also link in to your shell profile to inherit all the `$PATH` sourcing, shell enhancements and link all advanced configuration dotfiles to `$HOME` (only when they don't already exist), do:
 
 ```
 curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
