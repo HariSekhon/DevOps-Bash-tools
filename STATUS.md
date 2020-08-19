@@ -9,10 +9,9 @@ This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/d
 ---
 # Advanced Nagios Plugins Collection
 
- 450+ AWS, Hadoop, Cloud, Kafka, Docker, Elasticsearch, RabbitMQ, Redis, HBase, Solr, Cassandra, ZooKeeper, HDFS, Yarn, Hive, Presto, Drill, Impala, Consul, Spark, Jenkins, Travis CI, Git, MySQL, Linux, DNS, Whois, SSL Certs, Yum Security Updates, Kubernetes, Mesos, Riak, MongoDB, Memcached, Couchbase, CouchDB, Neo4j, Ambari, Cloudera, Hortonworks, MapR. Products: Attivio, Blue Talon, Datameer, H2O, WanDisco, Zaloni
-
 Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
+ 450+ AWS, Hadoop, Cloud, Kafka, Docker, Elasticsearch, RabbitMQ, Redis, HBase, Solr, Cassandra, ZooKeeper, HDFS, Yarn, Hive, Presto, Drill, Impala, Consul, Spark, Jenkins, Travis CI, Git, MySQL, Linux, DNS, Whois, SSL Certs, Yum Security Updates, Kubernetes, Cloudera etc...
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/e6fcf7cb4dcc4905ab0a4cb91567fdda)](https://www.codacy.com/app/harisekhon/nagios-plugins)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugins/badge)](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugins)
@@ -108,10 +107,9 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 ---
 # Big Data, NoSQL & DevOps Docker Images
 
- 50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Mesos, Consul, Riak, OpenTSDB, Jython, Advanced Nagios Plugins & DevOps Tools repos on Alpine, CentOS, Debian, Fedora, Ubuntu, Superset, H2O, Serf, Alluxio / Tachyon, FakeS3
-
 Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
+ 50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak, and DevOps tools built various distros: Alpine, CentOS, Debian, Fedora, Ubuntu
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/de6229f2d2ba4945acde9f86f59d2c66)](https://www.codacy.com/app/harisekhon/Dockerfiles)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Dockerfiles/badge)](https://www.codefactor.io/repository/github/harisekhon/Dockerfiles)
@@ -179,10 +177,9 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 ---
 # Hari Sekhon - DevOps Python Tools
 
- 80+ DevOps & Data CLI Tools - AWS, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, Ambari, Blueprints, CloudFormation, Elasticsearch, Solr, Pig, IPython - Python / Jython Tools
-
 Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Python-tools)
 
+ 80+ DevOps & Data CLI Tools - AWS, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, AWS CloudFormation, Elasticsearch, Solr etc.
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/f7af72140c3b408b9659207ced17544f)](https://www.codacy.com/app/harisekhon/devops-python-tools)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Python-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Python-tools)
@@ -264,10 +261,9 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 ---
 # Hari Sekhon - DevOps Bash Tools
 
- 350+ DevOps Bash Scripts, Advanced Configs, AWS, GCP, Kubernetes, Kafka, Docker, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, CI, Jenkins, Concourse, GitHub API, Spotify API, MP3 tools, LDAP, Code/Build Linting, package management for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .screenrc, .tmux.conf, .gitconfig, .psqlrc ...
-
 Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
 
+ 350+ DevOps Bash Scripts & Advanced Configs - AWS, GCP, Kubernetes, Kafka, Docker, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, CI, Jenkins, Concourse, GitHub API, Spotify API, MP3 tools, LDAP, Code/Build Linting, package management for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .screenrc, .tmux.conf, .gitconfig, .psqlrc ...
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c61193dd7dcc418b85149bddf93362e4)](https://www.codacy.com/app/harisekhon/bash-tools)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/devops-bash-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/devops-bash-tools)
@@ -354,10 +350,9 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 ---
 # Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
 
- 80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, Hortonworks, MapR, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
-
 Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
 
+ 80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/f24e17486db64270b4ae9c10f7f2bf84)](https://www.codacy.com/app/harisekhon/haproxy-configs)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/HAProxy-configs/badge)](https://www.codefactor.io/repository/github/harisekhon/HAProxy-configs)
@@ -424,10 +419,9 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 ---
 # Hari Sekhon - DevOps Perl Tools
 
- 25+ DevOps CLI Tools - Kubernetes & code templates, Log Anonymizer, Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles, Pig Latin, Neo4j, InfluxDB), Linux, Nginx stats & HTTP(S) URL watchers for load balanced web farms, Ambari FreeIPA Kerberos, Datameer...
-
 Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-tools)
 
+ 25+ DevOps CLI Tools - Kubernetes & Code templates, Log Anonymizer, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles), Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, Nginx stats & HTTP(S) URL watchers for load-balanced web farms, Linux tools etc.
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/1769cc854b5246968ee2bae1818f771a)](https://www.codacy.com/app/harisekhon/devops-perl-tools)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Perl-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Perl-tools)
@@ -509,10 +503,9 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 ---
 # Hari Sekhon - Perl Library
 
- Perl Utility Library for my other repos
-
 Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 
+ Perl Utility Library for my other repos
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b74a91c19a5845e2961533a5933381db)](https://www.codacy.com/app/harisekhon/lib)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/lib/badge)](https://www.codefactor.io/repository/github/harisekhon/lib)
@@ -593,10 +586,9 @@ Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 ---
 # Spotify Tools
 
- Spotify Tools - Playlist Backups, Spotify CLI, Spotify URI => Track Names, Track Name Normalization, Playlist name <=> ID conversions, various Spotify API tools etc.
-
 Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 
+ Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication detection / removal, API search queries, API automation etc.
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bf879eba5f1c4fd89f92b0f9407b345e)](https://www.codacy.com/app/harisekhon/spotify-tools)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/spotify-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/spotify-tools)
@@ -661,10 +653,9 @@ Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 ---
 # SQL Scripts
 
- 70+ SQL Scripts - AWS Athena, Google BigQuery, MySQL and lots of PostgreSQL
-
 Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 
+ 70+ SQL Scripts - PostgreSQL, MySQL, MariaDB, AWS Athena, Google BigQuery
 
 [![PostgreSQL](https://img.shields.io/badge/SQL-PostreSQL-336791?logo=postgresql)](https://www.postgresql.org/)
 [![MySQL](https://img.shields.io/badge/SQL-MySQL-4479A1?logo=mysql)](https://www.mysql.com/)
@@ -689,10 +680,9 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 ---
 # Hari Sekhon - Python / Jython Library
 
- Python / Jython Utility Library for my other repos
-
 Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 
+ Python / Jython Utility Library for my other repos
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cfc553fcdbc94491b3c8c56797dcd189)](https://www.codacy.com/app/harisekhon/pylib)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/pylib/badge/master)](https://www.codefactor.io/repository/github/harisekhon/pylib/overview/master)
@@ -775,10 +765,9 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 ---
 # Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
- Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
-
 Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
 
+ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/de500bf4f90d401ba5c98ed903c8a612)](https://www.codacy.com/app/harisekhon/nagios-plugin-kafka)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugin-Kafka/badge)](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugin-Kafka)
@@ -849,10 +838,9 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 ---
 # Hari Sekhon - Spotify Playlists
 
- 220+ Spotify playlists of 30,000+ tracks, exported in both URI and human-readable formats. Suites of tools to manage Spotify and use the Spotify API are in submodules of this repo
-
 Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
 
+ 220+ Spotify playlists of 30,000+ tracks, exported in both URI and human-readable formats. Suites of tools to manage Spotify and use the Spotify API are in submodules of this repo
 
 [![Spotify Profile](https://img.shields.io/badge/Spotify%20Profile-HariSekhon-brightgreen?logo=spotify&style=social)](https://open.spotify.com/user/harisekhon)
 [![Playlists](https://img.shields.io/badge/Playlists-220+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
@@ -869,10 +857,9 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 ---
 # Hari Sekhon Java Library
 
- Java Utility library for my other repos
-
 Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 
+ Java Utility library for my other repos
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b929aef71cb34ede9decf79459aa936d)](https://www.codacy.com/app/harisekhon/lib-java)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/lib-java/badge)](https://www.codefactor.io/repository/github/harisekhon/lib-java)
