@@ -55,4 +55,8 @@ timestamp "adding bash completion for kubectl:"
 echo "source <(kubectl completion bash)" | "$bash_tools/grep_or_append.sh" ~/.bashrc
 echo >&2
 
+if [ -d /github/perl-tools/templates ]; then
+    ln -sv /github/perl-tools/templates /
+fi
+
 } 2>&1 | tee -a /vagrant/logs/provision-kube.log
