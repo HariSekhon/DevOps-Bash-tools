@@ -141,7 +141,7 @@ Cloud & Big Data Contractor, United Kingdom
 
 ### Quick Setup
 
-To build the dependencies to run out of the git clone directory, simply `cd` to the directory and run `make`:
+To install package dependencies, simply `cd` to the directory and run `make`:
 
 ```
 git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
@@ -149,7 +149,7 @@ cd bash-tools
 make
 ```
 
-To build all dependencies and also link in to your shell profile to inherit all the `$PATH` sourcing, shell enhancements and link all advanced configuration dotfiles to `$HOME` (only when they don't already exist), do:
+To install packages and also link in to your shell profile to inherit all configs and `$PATH`, do:
 
 ```
 curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
@@ -164,7 +164,7 @@ make install
 ```
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
-- Symlinks all `.*` config files to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/) etc.
+- Symlinks all `.*` config files to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/), [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc.
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
 
