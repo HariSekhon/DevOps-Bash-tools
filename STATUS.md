@@ -9,6 +9,8 @@ This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/d
 ---
 # Advanced Nagios Plugins Collection
 
+ 450+ AWS, Hadoop, Cloud, Kafka, Docker, Elasticsearch, RabbitMQ, Redis, HBase, Solr, Cassandra, ZooKeeper, HDFS, Yarn, Hive, Presto, Drill, Impala, Consul, Spark, Jenkins, Travis CI, Git, MySQL, Linux, DNS, Whois, SSL Certs, Yum Security Updates, Kubernetes, Mesos, Riak, MongoDB, Memcached, Couchbase, CouchDB, Neo4j, Ambari, Cloudera, Hortonworks, MapR. Products: Attivio, Blue Talon, Datameer, H2O, WanDisco, Zaloni
+
 Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 
@@ -106,6 +108,8 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 ---
 # Big Data, NoSQL & DevOps Docker Images
 
+ 50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Mesos, Consul, Riak, OpenTSDB, Jython, Advanced Nagios Plugins & DevOps Tools repos on Alpine, CentOS, Debian, Fedora, Ubuntu, Superset, H2O, Serf, Alluxio / Tachyon, FakeS3
+
 Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
 
@@ -174,6 +178,8 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
 ---
 # Hari Sekhon - DevOps Python Tools
+
+ 80+ DevOps & Data CLI Tools - AWS, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, Ambari, Blueprints, CloudFormation, Elasticsearch, Solr, Pig, IPython - Python / Jython Tools
 
 Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Python-tools)
 
@@ -257,6 +263,8 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 ---
 # Hari Sekhon - DevOps Bash Tools
+
+ 350+ DevOps Bash Scripts, Advanced Configs, AWS, GCP, Kubernetes, Kafka, Docker, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, CI, Jenkins, Concourse, GitHub API, Spotify API, MP3 tools, LDAP, Code/Build Linting, package management for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .screenrc, .tmux.conf, .gitconfig, .psqlrc ...
 
 Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
 
@@ -346,6 +354,8 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 ---
 # Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
 
+ 80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, Hortonworks, MapR, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
+
 Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
 
 
@@ -413,6 +423,8 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 
 ---
 # Hari Sekhon - DevOps Perl Tools
+
+ 25+ DevOps CLI Tools - Kubernetes & code templates, Log Anonymizer, Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles, Pig Latin, Neo4j, InfluxDB), Linux, Nginx stats & HTTP(S) URL watchers for load balanced web farms, Ambari FreeIPA Kerberos, Datameer...
 
 Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-tools)
 
@@ -497,6 +509,8 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 ---
 # Hari Sekhon - Perl Library
 
+ Perl Utility Library for my other repos
+
 Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 
 
@@ -579,6 +593,8 @@ Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 ---
 # Spotify Tools
 
+ Spotify Tools - Playlist Backups, Spotify CLI, Spotify URI => Track Names, Track Name Normalization, Playlist name <=> ID conversions, various Spotify API tools etc.
+
 Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 
 
@@ -645,6 +661,8 @@ Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 ---
 # SQL Scripts
 
+ 70+ SQL Scripts - AWS Athena, Google BigQuery, MySQL and lots of PostgreSQL
+
 Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 
 
@@ -670,6 +688,8 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 
 ---
 # Hari Sekhon - Python / Jython Library
+
+ Python / Jython Utility Library for my other repos
 
 Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 
@@ -755,6 +775,8 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 ---
 # Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
+ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
+
 Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
 
 
@@ -827,6 +849,8 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 ---
 # Hari Sekhon - Spotify Playlists
 
+ 220+ Spotify playlists of 30,000+ tracks, exported in both URI and human-readable formats. Suites of tools to manage Spotify and use the Spotify API are in submodules of this repo
+
 Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
 
 
@@ -844,6 +868,8 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 
 ---
 # Hari Sekhon Java Library
+
+ Java Utility library for my other repos
 
 Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 
