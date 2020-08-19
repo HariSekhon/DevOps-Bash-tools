@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: vagrant/kubernetes/Vagrantfile
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-15 12:50:08 +0100 (Sat, 15 Aug 2020)
@@ -51,9 +52,11 @@ else
     usage "Vagrantfile not specified and no Vagrantfile found in \$PWD"
 fi
 
-grep -A 20 config.vm.define "$Vagrantfile" |
-grep -e config.vm.define \
+sed 's/#.*//; /^[[:space:]]*$/d' "$Vagrantfile" |
+grep -A 20 '^[[:space:]]*config.vm.define' |
+grep -e '^[[:space:]]*config.vm.define' \
      -e '^[[:space:]]*config.vm.network.*private_network.*ip' |
+grep -v -e "^--" -e "default_hostname" |
 sed '
     s/ do .*//;
     s/config.vm.[[:alnum:]]*//;
