@@ -34,14 +34,31 @@ dirname="$(dirname "$filename")"
 
 cd "$dirname"
 
+filename="${filename##*/}"
+
 if [ -n "$run_cmd" ]; then
     eval "$run_cmd"
 else
-    if ! [ -x "$filename" ]; then
-        echo "ERROR: file '$filename' is not set executable!" >&2
-        exit 1
-    fi
-    args="$("$srcdir/args_extract.sh" "$filename")"
-    echo "$filename" "$args" >&2
-    eval "$filename" "$args"
+    case "$filename" in
+        Makefile)   make
+                    ;;
+      Dockerfile)   if [ -f Makefile ]; then
+                        make
+                    else
+                        docker build .
+                    fi
+                    ;;
+            *.go)   go run "$filename" "$("$srcdir/args_extract.sh" "$filename")"
+                    ;;
+            *.tf)   terraform plan
+                    ;;
+               *)   if ! [ -x "$filename" ]; then
+                        echo "ERROR: file '$filename' is not set executable!" >&2
+                        exit 1
+                    fi
+                    args="$("$srcdir/args_extract.sh" "$filename")"
+                    echo "$filename" "$args" >&2
+                    eval "$filename" "$args"
+                    ;;
+    esac
 fi
