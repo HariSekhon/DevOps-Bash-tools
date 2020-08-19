@@ -121,4 +121,4 @@ url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 
 
-eval "$srcdir/curl_auth.sh" "$CURL_OPTS" "$url_base/$url_path" "$@"
+eval "$srcdir/curl_auth.sh" "$CURL_OPTS" "'$url_base/$url_path'" "$@"
