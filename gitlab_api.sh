@@ -13,13 +13,13 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-#  args: /user | jq
-#  args: /users/:id/projects | jq
-#  args: /users/$(gitlab_api.sh /users?username=harisekhon | jq -r .[].id) | jq
-#  args: /users/HariSekhon/projects | jq
-#  args: /projects/:id | jq
-#  args: /projects/HariSekhon%2FDevOps-Bash-tools/pipelines | jq
-#  args: /projects/:id/pipelines | jq
+#  args: /user | jq .
+#  args: /users/:id/projects | jq .
+#  args: /users/$(gitlab_api.sh /users?username=harisekhon | jq -r .[].id) | jq .
+#  args: /users/HariSekhon/projects | jq .
+#  args: /projects/:id | jq .
+#  args: /projects/HariSekhon%2FDevOps-Bash-tools/pipelines | jq .
+#  args: /projects/:id/pipelines | jq .
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -126,11 +126,13 @@ url_path="${url_path/projects\/:id/projects\/$project}"
 url_path="${url_path/users\/:id/users\/$user}"
 
 
+# need CURL_OPTS splitting, safer than eval
+# shellcheck disable=SC2086
 if is_curl_min_version 7.55; then
     # this trick doesn't work, file descriptor is lost by next line
     #filedescriptor=<(cat <<< "Private-Token: $GITLAB_TOKEN")
-    eval curl "$CURL_OPTS" -H @<(cat <<< "Private-Token: $GITLAB_TOKEN") "$url_base/$url_path" "$@"
+    curl $CURL_OPTS -H @<(cat <<< "Private-Token: $GITLAB_TOKEN") "$url_base/$url_path" "$@"
 else
     # could also use OAuth compliant header "Authorization: Bearer <token>"
-    eval curl "$CURL_OPTS" -H "'Private-Token: $GITLAB_TOKEN'" "$url_base/$url_path" "$@"
+    curl $CURL_OPTS -H "Private-Token: $GITLAB_TOKEN" "$url_base/$url_path" "$@"
 fi
