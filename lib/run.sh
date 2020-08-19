@@ -48,7 +48,7 @@ else
                         docker build .
                     fi
                     ;;
-            *.go)   go run "$filename" "$("$srcdir/args_extract.sh" "$filename")"
+            *.go)   eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
                     ;;
             *.tf)   terraform plan
                     ;;
@@ -57,8 +57,8 @@ else
                         exit 1
                     fi
                     args="$("$srcdir/args_extract.sh" "$filename")"
-                    echo "$filename" "$args" >&2
-                    eval "$filename" "$args"
+                    echo "'$filename'" "$args" >&2
+                    eval "'$filename'" "$args"
                     ;;
     esac
 fi
