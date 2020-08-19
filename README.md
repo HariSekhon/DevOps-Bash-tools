@@ -141,6 +141,16 @@ Cloud & Big Data Contractor, United Kingdom
 
 ### Quick Setup
 
+To build the dependencies to run out of the git clone directory, simply `cd` to the directory and run `make`:
+
+```
+git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
+cd bash-tools
+make
+```
+
+To build all dependencies but all link in to your shell profile with all the `$PATH` sourcing and shell enhancements, do:
+
 ```
 curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
 ```
