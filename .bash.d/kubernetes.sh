@@ -260,10 +260,8 @@ kubeexec(){
 # error: resource name may not be empty
 #
 k8s_get_token(){
-    kubectl describe secret -n kube-system \
-        "$(kubectl get secrets -n kube-system | grep default | cut -f1 -d ' ')" |
-    grep '^token' |
-    awk '{print $2}'
+    kubectl describe secret -n kube-system "$(kubectl get secrets -n kube-system | awk '/^default-token/ {print $1}')" |
+    awk '/^token/ {print $2}'
 }
 
 k8s_get_api(){
