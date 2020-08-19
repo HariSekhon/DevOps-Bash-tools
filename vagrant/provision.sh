@@ -53,9 +53,14 @@ timestamp "disabling swap"
 ./disable_swap.sh
 echo >&2
 
-timestamp "custom shell configuration and config linking"
+timestamp "custom shell configuration and config linking as user '$USER':"
 make link
 echo >&2
+# above links as root, let's link as vagrant too
+if [ $EUID = 0 ] && id vagrant &>/dev/null; then
+    timestamp "custom shell configuration and config linking as user 'vagrant':'"
+    su - vagrant -c "pushd '$bash_tools'; make link"
+fi
 
 packages="vim bash-completion"
 
