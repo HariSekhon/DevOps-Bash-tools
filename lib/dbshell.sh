@@ -33,10 +33,10 @@ host \$PWD        => /pwd
 "
 
 docker_sql_mount_switches=" \
-    -v '$srcdir:/bash' \
-    -v '$sql_scripts:/sql' \
-    -v '$HOME/github:/github' \
-    -v '$PWD:/pwd' \
+    -v $srcdir:/bash \
+    -v $sql_scripts:/sql \
+    -v $HOME/github:/github \
+    -v $PWD:/pwd \
 "
 
 # MySQL 5.5 container
