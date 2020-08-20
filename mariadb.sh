@@ -152,9 +152,9 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154,SC2086
     docker run -d \
-        --name '"$container_name"' \
+        --name "$container_name" \
         $docker_opts \
-        -e MYSQL_ROOT_PASSWORD='"$password"' \
+        -e MYSQL_ROOT_PASSWORD="$password" \
         $docker_sql_mount_switches \
         "$docker_image":"$version"
         #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
