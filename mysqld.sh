@@ -150,12 +150,12 @@ fi
 if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp "booting MySQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
-    # shellcheck disable=SC2154
-    eval docker run -d \
+    # shellcheck disable=SC2154,SC2086
+    docker run -d \
         --name '"$container_name"' \
-        "$docker_opts" \
+        $docker_opts \
         -e MYSQL_ROOT_PASSWORD='"$password"' \
-        "$docker_sql_mount_switches" \
+        $docker_sql_mount_switches \
         "$docker_image":"$version"
         #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
 
@@ -174,7 +174,7 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ]; then
     dbname="${db##*/}"
     dbname="${dbname%%.*}"
     timestamp "loading $dbname database"
-    #eval docker exec -i "$container_name" mysql -u root -p"$password" "${MYSQL_OPTS:-}" -e "CREATE DATABASE IF NOT EXISTS $dbname"
+    #docker exec -i "$container_name" mysql -u root -p"$password" ${MYSQL_OPTS:-} -e "CREATE DATABASE IF NOT EXISTS $dbname"
     timestamp "loading data (this may take a minute)"
     # shellcheck disable=SC2086
     docker exec -i -e MYSQL_PWD="$password" "$container_name" mysql -u root ${MYSQL_OPTS:-} < "${db}"
@@ -199,7 +199,9 @@ if has_terminal && [ -z "${DOCKER_NO_TERMINAL:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec -e MYSQL_PWD='"$password"' "$docker_exec_opts" '"$container_name"' mysql -u root "${MYSQL_OPTS:-}"
+# want opt splitting
+# shellcheck disable=SC2086
+docker exec -e MYSQL_PWD="$password" $docker_exec_opts "$container_name" mysql -u root ${MYSQL_OPTS:-}
 
 untrap
 
