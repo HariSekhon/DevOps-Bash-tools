@@ -150,7 +150,7 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154,SC2086
     docker run -d \
-        --name '"$container_name"' \
+        --name "$container_name" \
         $docker_opts \
         -e POSTGRES_PASSWORD="$password" \
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
