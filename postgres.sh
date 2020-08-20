@@ -148,13 +148,13 @@ fi
 if ! docker ps -qf name="$container_name" | grep -q .; then
     timestamp "booting PostgreSQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
-    # shellcheck disable=SC2154
-    eval docker run -d \
+    # shellcheck disable=SC2154,SC2086
+    docker run -d \
         --name '"$container_name"' \
-        "$docker_opts" \
-        -e POSTGRES_PASSWORD="\"$password\"" \
+        $docker_opts \
+        -e POSTGRES_PASSWORD="$password" \
         -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
-        "$docker_sql_mount_switches" \
+        $docker_sql_mount_switches \
         "$docker_image":"$version" \
         "$(if [ "${version:0:1}" = 8 ] || [ "${version:0:3}" = '9.0' ]; then echo postgres; fi)" \
         -c 'config_file=/etc/postgresql/postgresql.conf'
@@ -235,7 +235,9 @@ if has_terminal && [ -z "${DOCKER_NO_TERMINAL:-}" ]; then
     docker_exec_opts+=" -t"
 fi
 
-eval docker exec "$docker_exec_opts" '"$container_name"' psql -U postgres
+# want opt splitting
+# shellcheck disable=SC2086
+docker exec $docker_exec_opts "$container_name" psql -U postgres
 
 untrap
 
