@@ -16,6 +16,13 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
+# not supported in the tmux terminal in GCP Cloud Shell
+#if ! isMac &&
+#   ! isGoogleCloudShell &&
+#   [ "${TERM:-}" != "xterm-256color" ]; then
+#    setterm -blank 0
+#fi
+
 # prints a cool spinning welcome message which shows the time of last login
 # this is available in the Python / Perl and Golang Devops Tools repos,
 # as well as a function in .bash.d/welcome.sh in the DevOps Bash Tools repo
