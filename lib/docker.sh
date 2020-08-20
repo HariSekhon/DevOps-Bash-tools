@@ -287,9 +287,24 @@ dockerhub_latest_version(){
     echo "$version"
 }
 
-docker_ps_not_running(){
-    local filter="$1"
-    docker ps -a --filter "$filter" --format '{{.Status}}' | grep -Eqi 'created|paused|dead|exited'
+docker_container_image(){
+    local container_name="$1"
+    docker ps --filter "name=^$container_name$" --format '{{.Image}}'
+}
+
+docker_container_exists(){
+    local container_name="$1"
+    docker ps -a --filter "name=^$container_name$" --format '{{.Status}}' | grep -q .
+}
+
+docker_container_exited(){
+    local container_name="$1"
+    docker ps -a --filter "name=^$container_name$" --format '{{.Status}}' | grep -Eqi 'Dead|Exited'
+}
+
+docker_container_not_running(){
+    local container_name="$1"
+    docker ps -a --filter "name=^$container_name$" --format '{{.Status}}' | grep -Eqi 'Created|Paused|Dead|Exited'
 }
 
 docker_pull(){

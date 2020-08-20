@@ -126,28 +126,28 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
     #iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
 fi
 
-# ensures version is correct before we kill any existing test env to switch versions
-timestamp "docker pull $docker_image:$version"
-docker_pull "$docker_image:$version"
-
 # kill existing if we have specified a different version than is running
-docker_ps_image_version="$(docker ps --filter "name=$container_name" --format '{{.Image}}')"
-if [ -n "$docker_ps_image_version" ] &&
-   [ "$docker_ps_image_version" != "$docker_image:$version" ]; then
+docker_image_version="$(docker_container_image "$container_name")"
+if [ -n "$docker_image_version" ] &&
+   [ "$docker_image_version" != "$docker_image:$version" ]; then
     MYSQL_RESTART=1
 fi
 
 # remove existing non-running container so we can boot a new one
-if docker_ps_not_running "name=$container_name"; then
+if docker_container_not_running "$container_name"; then
     MYSQL_RESTART=1
 fi
 
 if [ -n "${MYSQL_RESTART:-}" ]; then
+    # ensures version is correct before we kill any existing test env to switch versions to minimize downtime
+    timestamp "docker pull $docker_image:$version"
+    docker_pull "$docker_image:$version"
+
     timestamp "killing existing MySQL container:"
     docker rm -f "$container_name" 2>/dev/null || :
 fi
 
-if ! docker ps -qf name="$container_name" | grep -q .; then
+if ! docker_container_exists "$container_name"; then
     timestamp "booting MySQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154,SC2086
@@ -159,9 +159,10 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         "$docker_image":"$version"
         #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
 
-    wait_for_mysql_ready "$container_name"
-    echo
 fi
+
+wait_for_mysql_ready "$container_name"
+echo
 
 timestamp "linking shell profile for .my.cnf"
 docker exec "$container_name" bash -c "cd /bash && setup/shell_link.sh &>/dev/null" || :

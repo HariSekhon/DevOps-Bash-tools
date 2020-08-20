@@ -124,28 +124,28 @@ if [ -n "${LOAD_SAMPLE_DB:-}" ] &&
     iconv -f ISO-8859-1 -t UTF-8 "$db" > "$db.utf8"
 fi
 
-# ensures version is correct before we kill any existing test env to switch versions
-timestamp "docker pull $docker_image:$version"
-docker_pull "$docker_image:$version"
-
 # kill existing if we have specified a different version than is running
-docker_ps_image_version="$(docker ps --filter "name=$container_name" --format '{{.Image}}')"
-if [ -n "$docker_ps_image_version" ] &&
-   [ "$docker_ps_image_version" != "$docker_image:$version" ]; then
+docker_image_version="$(docker_container_image "$container_name")"
+if [ -n "$docker_image_version" ] &&
+   [ "$docker_image_version" != "$docker_image:$version" ]; then
     POSTGRES_RESTART=1
 fi
 
 # remove existing non-running container so we can boot a new one
-if docker_ps_not_running "name=$container_name"; then
+if docker_container_not_running "$container_name"; then
     POSTGRES_RESTART=1
 fi
 
 if [ -n "${POSTGRES_RESTART:-}" ]; then
+    # ensures version is correct before we kill any existing test env to switch versions to minimize downtime
+    timestamp "docker pull $docker_image:$version"
+    docker_pull "$docker_image:$version"
+
     timestamp "killing existing container:"
     docker rm -f "$container_name" 2>/dev/null || :
 fi
 
-if ! docker ps -qf name="$container_name" | grep -q .; then
+if ! docker_container_exists "$container_name"; then
     timestamp "booting PostgreSQL container from image '$docker_image:$version':"
     # defined in lib/dbshell.sh
     # shellcheck disable=SC2154,SC2086
@@ -160,42 +160,10 @@ if ! docker ps -qf name="$container_name" | grep -q .; then
         -c 'config_file=/etc/postgresql/postgresql.conf'
         # can't mount postgresql.conf here because it prevents /var/lib/postgresql/data from being initialized
         #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf" \
-
-    SECONDS=0
-    max_secs=60
-    num_lines=50
-    # PostgreSQL 84:
-    #
-    # PostgreSQL stand-alone backend 8
-    # ...
-    # LOG:  database system is ready to accept connections
-    #
-    #
-    # PostgreSQL 11.8:
-    #
-    # PostgreSQL init process complete; ready for start up.
-    # ...
-    # 2020-08-09 21:56:04.824 GMT [1] LOG:  database system is ready to accept connections
-    #
-    while true; do
-        timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
-        if docker logs --tail "$num_lines" "$container_name" 2>&1 |
-           grep -E -A "$num_lines" \
-           -e 'PostgreSQL init.*(ready|complete)' \
-           -e 'PostgreSQL stand-alone backend 8' |
-           grep 'ready to accept connections'; then
-            break
-        fi
-        sleep 1
-        if [ $SECONDS -gt $max_secs ]; then
-            echo "PostgreSQL failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
-            echo
-            docker logs "$container_name"
-            exit 1
-        fi
-    done
-    echo
 fi
+
+wait_for_postgres_ready "$container_name"
+echo
 
 timestamp "linking shell profile for .psqlrc"
 docker exec "$container_name" bash -c "cd /bash && setup/shell_link.sh &>/dev/null" || :

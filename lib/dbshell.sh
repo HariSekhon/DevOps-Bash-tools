@@ -52,8 +52,14 @@ wait_for_mysql_ready(){
     SECONDS=0
     while true; do
         ((tries+=1))
-        if [ $((tries % 5)) = 0 ]; then
+        if [ $((tries % 5)) = 1 ]; then
             timestamp 'waiting for mysqld to be ready to accept connections before connecting mysql shell...'
+        fi
+        if docker_container_exited "$container_name"; then
+            echo "ERROR: '$container_name' container died!" >&2
+            echo >&2
+            docker logs "$container_name"
+            exit 1
         fi
         if docker logs --tail "$num_lines" "$container_name" 2>&1 |
             grep -i -A "$num_lines" \
@@ -68,6 +74,49 @@ wait_for_mysql_ready(){
         if [ $SECONDS -gt $max_secs ]; then
             timestamp "container '$container_name' failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
             echo >&2
+            docker logs "$container_name"
+            exit 1
+        fi
+    done
+}
+
+wait_for_postgres_ready(){
+    local container_name="$1"
+    local max_secs=60
+    local num_lines=50
+    # PostgreSQL 84:
+    #
+    # PostgreSQL stand-alone backend 8
+    # ...
+    # LOG:  database system is ready to accept connections
+    #
+    #
+    # PostgreSQL 11.8:
+    #
+    # PostgreSQL init process complete; ready for start up.
+    # ...
+    # 2020-08-09 21:56:04.824 GMT [1] LOG:  database system is ready to accept connections
+    #
+    SECONDS=0
+    while true; do
+        timestamp 'waiting for postgres to be ready to accept connections before connecting psql...'
+        if docker_container_exited "$container_name"; then
+            echo "ERROR: '$container_name' container died!" >&2
+            echo >&2
+            docker logs "$container_name"
+            exit 1
+        fi
+        if docker logs --tail "$num_lines" "$container_name" 2>&1 |
+           grep -E -A "$num_lines" \
+           -e 'PostgreSQL init.*(ready|complete)' \
+           -e 'PostgreSQL stand-alone backend 8' |
+           grep -q 'ready to accept connections'; then
+            break
+        fi
+        sleep 1
+        if [ $SECONDS -gt $max_secs ]; then
+            echo "PostgreSQL failed to become ready for connections within $max_secs secs, check logs (format may have changed):"
+            echo
             docker logs "$container_name"
             exit 1
         fi
@@ -117,6 +166,7 @@ skip_min_version(){
     fi
     if [ -n "$min_version" ] &&
        [ "$version" != latest ]; then
+        # shellcheck disable=SC1001
         if [[ "$min_version" =~ \= ]] ||
            ! [[ "$min_version" =~ [\<\>] ]]; then
             inclusive="="
