@@ -116,13 +116,6 @@ shopt -s checkwinsize
 
 shopt -s cdspell
 
-# not supported in the tmux terminal in GCP Cloud Shell
-#if ! isMac &&
-#   ! isGoogleCloudShell &&
-#   [ "${TERM:-}" != "xterm-256color" ]; then
-#    setterm -blank 0
-#fi
-
 # prevent core dumps which can leak sensitive information
 ulimit -c 0
 
