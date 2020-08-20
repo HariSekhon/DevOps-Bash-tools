@@ -81,8 +81,9 @@ elif type -P konqueror &>/dev/null; then
 elif [ -n "${GOOGLE_CLOUD_SHELL:-}" ]; then
     :
 else
-    BROWSER=UNKNOWN
-    echo "COULD NOT FIND ANY BROWSER IN PATH"
+    :
+    #BROWSER=UNKNOWN
+    #echo "COULD NOT FIND ANY BROWSER IN PATH"
 fi
 
 # don't export BROWSER on Mac, trigger python bug:
