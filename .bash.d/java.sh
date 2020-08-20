@@ -83,7 +83,7 @@ elif isLinux; then
             fi
         # Debian / Ubuntu
         elif type -P update-alternatives &>/dev/null; then
-            java_home="$(update-alternatives --list java  | sed 's,\(/jre\)\?/bin/java$,,' | head -n1)"
+            java_home="$(update-alternatives --list java 2>/dev/null | sed 's,\(/jre\)\?/bin/java$,,' | head -n1)"
             if [ -n "$java_home" ]; then
                 export JAVA_HOME="$java_home"
             fi
