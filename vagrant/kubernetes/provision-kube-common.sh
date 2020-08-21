@@ -13,15 +13,15 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+
 mkdir -pv /vagrant/logs
 
 name="${0##*/}"
 name="${name%.sh}"
 
 {
-
-set -euo pipefail
-[ -n "${DEBUG:-}" ] && set -x
 
 bash_tools="/bash-tools"
 
