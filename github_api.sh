@@ -89,13 +89,24 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-export USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
-PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
+user="${GITHUB_USER:-}"
+if [ -z "${GITHUB_USER:-}" ]; then
+    user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@bitbucket\.org/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
+    # curl_auth.sh does this automatically
+    #if [ -z "$user" ]; then
+    #    user="${USERNAME:${USER:-}}"
+    #fi
+fi
+
+PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-}}"
 
 if [ -z "${PASSWORD:-}" ]; then
     PASSWORD="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@github\.com/{print $2; exit}' | sed 's|https://||;s/@.*//')"
 fi
 
+if [ -n "$user" ]; then
+    export USER="$user"
+fi
 export PASSWORD
 
 #if [ -n "${PASSWORD:-}" ]; then
