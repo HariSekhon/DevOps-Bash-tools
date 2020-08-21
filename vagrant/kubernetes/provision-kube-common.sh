@@ -16,10 +16,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# has to be before brace to set up logging path and logfile name
 mkdir -pv /vagrant/logs
-
 name="${0##*/}"
-name="${name%.sh}"
+log="/vagrant/logs/${name%.sh}.log"
 
 {
 
@@ -63,4 +63,4 @@ if ! [ -d /templates ] &&
     ln -sv /github/perl-tools/templates /
 fi
 
-} 2>&1 | tee -a "/vagrant/logs/$name.log"
+} 2>&1 | tee -a "$log"
