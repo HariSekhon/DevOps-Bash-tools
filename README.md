@@ -149,27 +149,26 @@ Cloud & Big Data Contractor, United Kingdom
 
 ### Quick Setup
 
-To bootstrap, install  packages and link in to your shell profile to inherit all configs, do:
+To bootstrap, install packages and link in to your shell profile to inherit all configs, do:
 
 ```
 curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
 ```
-
-To only install package dependencies, simply `cd` to the directory and run `make`:
-
-```
-git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
-cd bash-tools
-make
-```
-If you want to link to your shell profile, you can `make link`. See [here](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#full-help) for more details around install/uninstall options.
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
 - Symlinks `.*` config dotfiles to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/), [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc. (only when they don't already exist so there is no conflict with your own configs)
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
 
-`make install` effectively does `make system-packages bash python aws`, but if you want to pick and choose from different sections, see [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below.
+To only install package dependencies to run scripts, simply `cd` to the git clone directory and run `make`:
+
+```
+git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
+cd bash-tools
+make
+```
+
+`make install` sets your shell profile to source this repo. See [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below for more install/uninstall options.
 
 ### Inventory Overview
 
