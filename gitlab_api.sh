@@ -33,7 +33,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Queries the GitLab.com APIv4
+Queries the GitLab.com API (v4)
 
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
