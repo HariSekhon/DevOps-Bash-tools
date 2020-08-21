@@ -105,16 +105,16 @@ for repo in $repolist; do
     if ! [[ "$repo" =~ / ]]; then
         repo="$GITHUB_USER/$repo"
     fi
-    echo "fetching GitHub description for repo $repo" >&2
-    description="$("$srcdir/github_repo_description.sh" "$repo" | awk '{$1=""; print}')"
-    star_info="$("$srcdir/github_repo_stars.sh" "$repo")"
-    stars="$(awk '{print $2}' <<< "$star_info")"
-    forks="$(awk '{print $3}' <<< "$star_info")"
-    watchers="$(awk '{print $4}' <<< "$star_info")"
+    echo "fetching GitHub repo info for '$repo'" >&2
+    repo_json="$("$srcdir/github_api.sh" "/repos/$repo")"
+    description="$(jq -r .description <<< "$repo_json")"
+    stars="$(jq -r .stargazers_count <<< "$repo_json")"
+    forks="$(jq -r .forks <<< "$repo_json")"
+    watchers="$(jq -r .watchers <<< "$repo_json")"
     ((total_stars += stars))
     ((total_forks += forks))
     ((total_watchers += watchers))
-    echo "fetching GitHub README.md   for github repo $repo" >&2
+    echo "fetching GitHub README.md for '$repo'" >&2
     echo "---"
     echo "---" >&2
     {
