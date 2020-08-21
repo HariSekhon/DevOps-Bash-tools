@@ -90,10 +90,6 @@ url_base="https://gitlab.com/api/v4"
 
 CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
 
-if [ -z "${GITLAB_TOKEN:-}" ]; then
-    GITLAB_TOKEN="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/.*://' || :)"
-fi
-
 help_usage "$@"
 
 min_args 1 "$@"
@@ -112,6 +108,14 @@ if [ -z "${GITLAB_USER:-}" ]; then
     if [ -z "$user" ]; then
         user="${USERNAME:${USER:-}}"
     fi
+fi
+
+if [ -z "${GITLAB_TOKEN:-}" ]; then
+    GITLAB_TOKEN="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/.*://' || :)"
+fi
+
+if [ -z "$GITLAB_TOKEN" ]; then
+    usage "GITLAB_TOKEN not defined and could not infer from local repo"
 fi
 
 project="$(git_repo 2>/dev/null || :)"
