@@ -15,6 +15,9 @@
 
 mkdir -pv /vagrant/logs
 
+name="${0##*/}"
+name="${name%.sh}"
+
 {
 
 set -euo pipefail
@@ -74,4 +77,4 @@ echo >&2
 timestamp "Kubernetes Nodes:"
 kubectl get nodes
 
-} 2>&1 | tee -a /vagrant/logs/provision-kube2.log
+} 2>&1 | tee -a "/vagrant/logs/$name.log"
