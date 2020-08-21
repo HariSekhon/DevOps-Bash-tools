@@ -65,7 +65,7 @@ Vagrant.configure("2") do |config|
 
     # generic provision for each VM
     config.vm.provision :shell, :path => "../provision.sh"
-    config.vm.provision :shell, :path => "provision-kube.sh"
+    config.vm.provision :shell, :path => "provision-kube-common.sh"
 
     # ==================================
     config.vm.define "kube1" do |config|
@@ -83,7 +83,7 @@ Vagrant.configure("2") do |config|
             # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
             config.vm.hostname = "#{vb.name}"
         end
-        config.vm.provision :shell, :path => "provision-kube1.sh"
+        config.vm.provision :shell, :path => "provision-kube-master.sh"
     end
 
     # ==================================
@@ -99,6 +99,6 @@ Vagrant.configure("2") do |config|
             ]
             config.vm.hostname = "#{vb.name}"
         end
-        config.vm.provision :shell, :path => "provision-kube2.sh"
+        config.vm.provision :shell, :path => "provision-kube-worker.sh"
     end
 end
