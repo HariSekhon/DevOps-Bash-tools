@@ -36,6 +36,10 @@ usage_args=""
 
 help_usage "$@"
 
-GIT_FOREACH_REPO_NO_HEADERS=1 \
+export GIT_FOREACH_REPO_NO_HEADERS=1
+
 "$srcdir/git_foreach_repo.sh" "github_repo_description.sh '{repo}'" |
-"$srcdir/gitlab_set_project_description.sh"
+while read -r repo description; do
+    "$srcdir/gitlab_set_project_description.sh" <<< "$repo $description"
+    "$srcdir/bitbucket_set_repo_description.sh" <<< "$repo $description"
+done
