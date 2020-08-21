@@ -276,7 +276,7 @@ etc.
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
 - `github_*.sh` - various useful [GitHub](https://github.com/) scripts for querying the GitHub API including:
-  - `github_api.sh` - queryies the GitHub API. Infers github repo from local remotes and authenticating using `$GITHUB_TOKEN` or token from git checkout's remote github url when available. Used as a base for adjacent scripts. Built on top of `curl_auth.sh`
+  - `github_api.sh` - queryies the GitHub API. Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_get_user_ssh_public_key.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
@@ -284,12 +284,15 @@ etc.
   - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
   - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
-  - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab repos (uses `git_foreach_repo.sh`, `github_repo_description.sh` and `gitlab_set_project_description.sh`)
+  - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab repos (uses `git_foreach_repo.sh`, `github_repo_description.sh`, `gitlab_set_project_description.sh`, `bitbucket_set_repo_description.sh`)
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
-  - `gitlab_api.sh` - queries the GitLab API. Infers the authentication from `$GITLAB_TOKEN`. Used as a base for adjacent scripts
+  - `gitlab_api.sh` - queries the GitLab API. Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_get_user_ssh_public_key.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
+- `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
+  - `bitbucket_api.sh` - queries the BitBucket API. Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
+  - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
