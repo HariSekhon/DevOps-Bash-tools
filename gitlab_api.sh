@@ -103,7 +103,7 @@ min_args 1 "$@"
 url_path="${1:-}"
 shift
 
-url_path="${url_path//https:\/\/api.github.com}"
+url_path="${url_path##*:\/\/api.gitlab.com\/api\/v4}"
 url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
