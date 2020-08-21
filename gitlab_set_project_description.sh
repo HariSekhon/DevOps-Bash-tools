@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Sets the description of a GitLab.com project via the GitLab API
 
-Uses the adjcent script gitlab_api.sh, see there for authentication details
+Uses the adajcent script gitlab_api.sh, see there for authentication details
 
 \$CURL_OPTS can be set to provide extra arguments to curl
 
