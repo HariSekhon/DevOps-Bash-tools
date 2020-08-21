@@ -66,8 +66,8 @@ add_remote_repo(){
     if [ -n "$url" ]; then
         echo "copied existing remote url for $name as is including any access tokens to named remote $name"
     else
-        url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com' | head -n 1 | perl -pe "s/^((\\w+:\\/\\/)?(git@)?)[^\\/:]+/\$1$domain/")"
-        # shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen, but git remote -v will print it later on anyway
+        url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com' | head -n 1 | perl -pe "s/^((\\w+:\\/\\/)?(git@)?).+@[^\\/:]+/\$1$domain/")"
+        # shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen
         echo "inferring $name URL to be $url"
         echo "adding remote $name with url $url"
     fi
