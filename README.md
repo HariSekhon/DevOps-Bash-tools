@@ -149,27 +149,20 @@ Cloud & Big Data Contractor, United Kingdom
 
 ### Quick Setup
 
-To install package dependencies, simply `cd` to the directory and run `make`:
+To bootstrap, install  packages and link in to your shell profile to inherit all configs, do:
+
+```
+curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
+```
+
+To only install package dependencies, simply `cd` to the directory and run `make`:
 
 ```
 git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
 cd bash-tools
 make
 ```
-
-To install packages and also link in to your shell profile to inherit all configs and `$PATH`, do:
-
-```
-curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
-```
-
-or manually
-
-```
-git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
-cd bash-tools
-make install
-```
+If you want to link to your shell profile, you can `make link`. See [here](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#full-help) for more details around install/uninstall options.
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
 - Symlinks `.*` config dotfiles to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/), [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc. (only when they don't already exist so there is no conflict with your own configs)
