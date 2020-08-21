@@ -207,11 +207,12 @@ cat <<EOF
 ![Stars](https://img.shields.io/badge/Stars-$total_stars-blue?logo=github)
 ![Forks](https://img.shields.io/badge/Forks-$total_forks-blue?logo=github)
 ![Watchers](https://img.shields.io/badge/Watchers-$total_watchers-blue?logo=github)
-![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)
-![Lines of Code](https://img.shields.io/badge/lines%20of%20code-${lines_of_code}k-lightgrey?logo=codecademy)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-blue?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-blue?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon)
+
+![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)
+![Lines of Code](https://img.shields.io/badge/lines%20of%20code-${lines_of_code}k-lightgrey?logo=codecademy)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 ![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
                                                                   # "$srcdir/urlencode.sh" |
