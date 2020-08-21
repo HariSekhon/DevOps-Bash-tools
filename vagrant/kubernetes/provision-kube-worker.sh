@@ -16,10 +16,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# has to be before brace to set up logging path and logfile name
 mkdir -pv /vagrant/logs
-
 name="${0##*/}"
-name="${name%.sh}"
+log="/vagrant/logs/${name%.sh}.log"
 
 {
 
@@ -77,4 +77,4 @@ echo >&2
 timestamp "Kubernetes Nodes:"
 kubectl get nodes
 
-} 2>&1 | tee -a "/vagrant/logs/$name.log"
+} 2>&1 | tee -a "$log"
