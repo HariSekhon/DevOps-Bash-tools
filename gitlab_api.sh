@@ -91,10 +91,8 @@ url_base="https://gitlab.com/api/v4"
 CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
 
 if [ -z "${GITLAB_TOKEN:-}" ]; then
-    GITLAB_TOKEN="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//')"
+    GITLAB_TOKEN="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/.*://' || :)"
 fi
-
-check_env_defined "GITLAB_TOKEN"
 
 help_usage "$@"
 
@@ -108,16 +106,23 @@ url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
 
-user="${GITLAB_USER:-${USER:-}}"
-project=$(git_repo)
-repo=$(sed 's/.*\///' <<< "$project")
+user="${GITLAB_USER:-}"
+if [ -z "${GITLAB_USER:-}" ]; then
+    user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
+    if [ -z "$user" ]; then
+        user="${USERNAME:${USER:-}}"
+    fi
+fi
+
+project="$(git_repo 2>/dev/null || :)"
+repo="$(sed 's/.*\///' <<< "$project")"
 project="${project//\//%2F}" # cheap url encode slash
 
-url_path="${url_path/:owner/$USER}"
-url_path="${url_path/:user/$USER}"
-url_path="${url_path/:username/$USER}"
-url_path="${url_path/<user>/$USER}"
-url_path="${url_path/<username>/$USER}"
+url_path="${url_path/:owner/$user}"
+url_path="${url_path/:user/$user}"
+url_path="${url_path/:username/$user}"
+url_path="${url_path/<user>/$user}"
+url_path="${url_path/<username>/$user}"
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 url_path="${url_path/:project/$project}"
