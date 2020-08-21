@@ -17,6 +17,7 @@
 #  args: /workspaces | jq .
 #  args: /repositories/harisekhon | jq .
 #  args: /repositories/harisekhon/devops-bash-tools/pipelines/ | jq .
+#  args: /repositories/harisekhon/devops-bash-tools -X PUT -H 'Content-Type: application/json' -d '{"description": "some words"}'
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -34,9 +35,8 @@ Queries the BitBucket.org API
 
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
-Automatically handles authentication via environment variable \$BITBUCKER_USER and \$BITBUCKET_TOKEN
+Automatically handles authentication via environment variables \$BITBUCKER_USER and \$BITBUCKET_TOKEN
 If either of these are not found, tries to infer from local git repo's bitbucket remotes
-
 
 You must set up a personal access token here:
 
@@ -70,6 +70,11 @@ ${0##*/} /repositories/harisekhon
 # Get a repo's BitBucket Pipelines [oldest first] (must have a slash on the end otherwise gets 404 error):
 
 ${0##*/} /repositories/harisekhon/devops-bash-tools/pipelines/
+
+
+# Update a repo's description:
+
+${0##*/} /repositories/harisekhon/devops-bash-tools -X PUT -H 'Content-Type: application/json' -d '{\"description\": \"some words\"}'
 "
 
 # used by usage() in lib/utils.sh
@@ -85,7 +90,7 @@ help_usage "$@"
 min_args 1 "$@"
 
 user="${BITBUCKET_USER:-}"
-PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-${PASSWORD:-}}}"
+PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
 
 if [ -z "${BITBUCKET_USER:-}" ]; then
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@bitbucket\.org/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
