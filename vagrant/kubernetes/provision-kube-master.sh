@@ -15,6 +15,9 @@
 
 mkdir -pv /vagrant/logs
 
+name="${0##*/}"
+name="${name%.sh}"
+
 {
 
 set -euo pipefail
@@ -96,4 +99,4 @@ timestamp "(re)generating $kubeadm_join for kube2 to use"
 "$bash_tools/kubernetes_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
 
-} 2>&1 | tee -a /vagrant/logs/provision-kube1.log
+} 2>&1 | tee -a "/vagrant/logs/$name.log"
