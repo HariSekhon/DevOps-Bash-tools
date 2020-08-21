@@ -118,24 +118,13 @@ shift
 
 repo=$(git_repo 2>/dev/null | sed 's/.*\///' || :)
 
-url_path="${url_path/:owner/$USER}"
-url_path="${url_path/:user/$USER}"
-url_path="${url_path/:username/$USER}"
-url_path="${url_path/<user>/$USER}"
-url_path="${url_path/<username>/$USER}"
-url_path="${url_path/:repo/$repo}"
-url_path="${url_path/<repo>/$repo}"
-
-# want splitting
-# shellcheck disable=SC2086
-#if is_curl_min_version 7.55; then
-#    # this trick doesn't work, file descriptor is lost by next line
-#    #filedescriptor=<(cat <<< "Private-Token: $BITBUCKET_TOKEN")
-#    curl ${CURL_OPTS} -H @<(cat <<< "Private-Token: $BITBUCKET_TOKEN") "$url_base/$url_path" "$@"
-#else
-#    # could also use OAuth compliant header "Authorization: Bearer <token>"
-#    curl ${CURL_OPTS:-} -H "Private-Token: $BITBUCKET_TOKEN" "$url_base/$url_path" "$@"
-#fi
+#url_path="${url_path/:owner/$USER}"
+#url_path="${url_path/:user/$USER}"
+#url_path="${url_path/:username/$USER}"
+#url_path="${url_path/<user>/$USER}"
+#url_path="${url_path/<username>/$USER}"
+#url_path="${url_path/:repo/$repo}"
+#url_path="${url_path/<repo>/$repo}"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
