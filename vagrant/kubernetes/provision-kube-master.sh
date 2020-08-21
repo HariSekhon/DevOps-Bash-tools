@@ -16,10 +16,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# has to be before brace to set up logging path and logfile name
 mkdir -pv /vagrant/logs
-
 name="${0##*/}"
-name="${name%.sh}"
+log="/vagrant/logs/${name%.sh}.log"
 
 {
 
@@ -99,4 +99,4 @@ timestamp "(re)generating $kubeadm_join for kube2 to use"
 "$bash_tools/kubernetes_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
 
-} 2>&1 | tee -a "/vagrant/logs/$name.log"
+} 2>&1 | tee -a "$log"
