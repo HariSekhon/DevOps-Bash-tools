@@ -276,7 +276,7 @@ etc.
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
 - `github_*.sh` - various useful [GitHub](https://github.com/) scripts for querying the GitHub API including:
-  - `github_api.sh` - queryies the GitHub API. Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
+  - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_get_user_ssh_public_key.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
@@ -286,12 +286,12 @@ etc.
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab repos (uses `git_foreach_repo.sh`, `github_repo_description.sh`, `gitlab_set_project_description.sh`, `bitbucket_set_repo_description.sh`)
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
-  - `gitlab_api.sh` - queries the GitLab API. Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
+  - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_get_user_ssh_public_key.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
-  - `bitbucket_api.sh` - queries the BitBucket API. Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
+  - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
   - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
@@ -343,7 +343,7 @@ etc.
   - `spotify_foreach_playlist.sh` - iterate any command against all playlists with command templating of `{playlist}` and `{playlist_id}`
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
   - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
-  - `spotify_api.sh` - query any Spotify API endpoint with authentication, used by all other scripts
+  - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by all other scripts
 - `json2yaml.sh` - converts JSON to YAML
 - `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
