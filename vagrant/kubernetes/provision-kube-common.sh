@@ -15,6 +15,9 @@
 
 mkdir -pv /vagrant/logs
 
+name="${0##*/}"
+name="${name%.sh}"
+
 {
 
 set -euo pipefail
@@ -60,4 +63,4 @@ if ! [ -d /templates ] &&
     ln -sv /github/perl-tools/templates /
 fi
 
-} 2>&1 | tee -a /vagrant/logs/provision-kube.log
+} 2>&1 | tee -a "/vagrant/logs/$name.log"
