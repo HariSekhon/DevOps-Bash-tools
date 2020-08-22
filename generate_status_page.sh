@@ -35,6 +35,8 @@ echo
 echo "---"
 echo
 #"$srcdir/docker_generate_status_page.sh"
+echo
+echo https://git.io/hari-ci
 } | tee "$file"
 
 trap '' exit
