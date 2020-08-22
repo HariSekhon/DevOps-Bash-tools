@@ -2,7 +2,7 @@
 
 ![Original Repos](https://img.shields.io/badge/Repos-13-blue?logo=github)
 ![Stars](https://img.shields.io/badge/Stars-2337-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1061-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1062-blue?logo=github)
 ![Watchers](https://img.shields.io/badge/Watchers-2337-blue?logo=github)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-blue?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-blue?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -961,3 +961,5 @@ Java Utility library for my other repos
 
 ---
 
+
+https://git.io/hari-ci
