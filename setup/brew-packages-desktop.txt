@@ -58,6 +58,7 @@ dnstop
 docker-completion
 docker-compose-completion
 dos2unix
+drone-cli
 e2fsprogs
 expect
 etcd
