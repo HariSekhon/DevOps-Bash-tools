@@ -759,8 +759,8 @@ wc:
 											   -e tests/ \
 											   -e vagrant/ \
 											   | wc -l | sed 's/[[:space:]]//g'
-	@printf 'of which .bash.d/:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep '\.bash\.d/' | wc -l | sed 's/[[:space:]]//g'
+	@printf 'of which .bash*:\t\t'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep '\.bash' | wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which setup/:\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep setup/ | wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which tests/:\t\t'
