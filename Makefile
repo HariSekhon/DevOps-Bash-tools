@@ -254,39 +254,6 @@ lsscripts: ls-scripts
 lsscripts2: ls-scripts2
 	@:
 
-.PHONY: wc-scripts
-wc-scripts:
-	@$(MAKE) ls-scripts | xargs wc -l
-	@printf "Total Script files: "
-	@$(MAKE) ls-scripts | wc -l
-	@printf "including setup/ scripts: "
-	@$(MAKE) ls-scripts | grep setup/ | wc -l | sed 's/[[:space:]]//g'
-
-.PHONY: wcscripts
-wcscripts: wc-scripts
-	@:
-
-.PHONY: wc-scripts2
-wc-scripts2:
-	@printf "Total Scripts files: "
-	@$(MAKE) ls-scripts | wc -l
-	@printf "Total line count without # comments: "
-	@$(MAKE) ls-scripts | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
-
-.PHONY: wcscripts2
-wcscripts2: wc-scripts2
-	@:
-
-.PHONY: wc-scripts3
-wc-scripts3:
-	@$(MAKE) ls-scripts | grep -v /setup/ | xargs wc -l
-	@printf "Total Script files: "
-	@$(MAKE) ls-scripts | grep -v /setup/ | wc -l
-
-.PHONY: wcscripts3
-wcscripts3: wc-scripts3
-	@:
-
 .PHONY: wcbashrc
 wcbashrc:
 	@wc $(BASH_PROFILE_FILES)
