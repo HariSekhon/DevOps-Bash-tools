@@ -32,6 +32,9 @@ section "V a g r a n t"
 
 start_time="$(start_timer)"
 
+# catches $VAGRANT_HOME/Vagrantfile instead of validating the one we are targeting
+unset VAGRANT_HOME
+
 if type -P vagrant &>/dev/null; then
     echo "Validating Vagrantfiles:"
     echo
