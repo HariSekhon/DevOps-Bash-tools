@@ -54,7 +54,7 @@ define MAKEFILE_USAGE
 
     make aws                    installs AWS CLI tools
     make azure                  installs Azure CLI
-	make azure-shell			sets up Azure Cloud Shell (limited, doesn't install OS packages since there is no sudo)
+    make azure-shell			sets up Azure Cloud Shell (limited, doesn't install OS packages since there is no sudo)
     make gcp                    installs GCloud SDK
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
                                 (maintains itself across future Cloud Shells via .customize_environment hook)
