@@ -245,14 +245,6 @@ ls-scripts:
 ls-scripts2:
 	@$(MAKE) ls | grep -v -e 'lib/' -e '\.bash' -e 'setup/'
 
-.PHONY: lsscripts
-lsscripts: ls-scripts
-	@:
-
-.PHONY: lsscripts2
-lsscripts2: ls-scripts2
-	@:
-
 .PHONY: wcbashrc
 wcbashrc:
 	@wc $(BASH_PROFILE_FILES)
