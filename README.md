@@ -118,9 +118,9 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
-350+ DevOps Shell Scripts, Advanced Bash environment & Utility Code Library.
+350+ DevOps Shell Scripts and Advanced Bash environment.
 
-Used heavily by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
+Heavily used by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
 #### Contains:
 
