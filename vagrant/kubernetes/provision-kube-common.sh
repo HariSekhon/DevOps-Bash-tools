@@ -28,7 +28,7 @@ bash_tools="/bash-tools"
 # shellcheck disable=SC1090
 source "$bash_tools/lib/utils.sh"
 
-section "Running Vagrant Shell Provisioner Script - Kubernetes"
+section "Running Vagrant Shell Provisioner Script - Kubernetes Common"
 
 pushd /vagrant
 
