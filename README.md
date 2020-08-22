@@ -493,10 +493,9 @@ make python
     make readme                 open browser at github's README
     make github-url             print github url and copy to clipboard
 
-    make ls-files               print list of files in project
-    make ls-code                print list of code files, excluding READMEs and other peripheral files
-    make wc                     show line counts of the files and grand total
-    make wc-code                show line counts of only code files and total
+    make ls                     print list of code files in project
+    make wc                     show counts of files and lines
+
 
   Repo specific options:
 
@@ -517,8 +516,6 @@ make python
     make linux-desktop
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
-    make wc-scripts             show line counts of the scripts and grand total
-    make wc-scripts2            show line counts of only scripts and total
 
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX plugin for kubernetes context
