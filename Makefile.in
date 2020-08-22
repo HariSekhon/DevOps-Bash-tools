@@ -747,15 +747,16 @@ lscode: ls-code
 wc:
 	@# CODE_FILES := definitions in Makefiles must not be quoted or will get wc error 'open: File name too long'
 	@wc -l $(CODE_FILES)
-	@printf "Total Files: "
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l
-
-.PHONY: wc2
-wc2:
-	@printf "Total Files: "
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l
-	@printf "Total line count without # comments:"
-	@sed 's/#.*//;/^[[:space:]]*$$/d' $(CODE_FILES) | wc -l
+	@printf 'Total Lines:\t\t\t'
+	@cat $(CODE_FILES) | wc -l | sed 's/[[:space:]]//g'
+	@printf 'Total Lines without # comments:\t'
+	@sed 's/#.*//;/^[[:space:]]*$$/d' $(CODE_FILES) | wc -l | sed 's/[[:space:]]//g'
+	@printf 'Total Files:\t\t\t'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | wc -l | sed 's/[[:space:]]//g'
+	@printf 'of which setup/:\t\t'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep setup/ | wc -l | sed 's/[[:space:]]//g'
+	@printf 'of which tests/:\t\t'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep tests/ | wc -l | sed 's/[[:space:]]//g'
 
 .PHONY: wc-code
 wc-code:
