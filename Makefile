@@ -239,11 +239,11 @@ clean:
 
 .PHONY: ls-scripts
 ls-scripts:
-	@$(MAKE) ls-code | grep -v -e 'lib/' -e '\.bash'
+	@$(MAKE) ls | grep -v -e 'lib/' -e '\.bash'
 
 .PHONY: ls-scripts2
 ls-scripts2:
-	@$(MAKE) ls-code | grep -v -e 'lib/' -e '\.bash' -e 'setup/'
+	@$(MAKE) ls | grep -v -e 'lib/' -e '\.bash' -e 'setup/'
 
 .PHONY: lsscripts
 lsscripts: ls-scripts
