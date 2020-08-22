@@ -142,6 +142,7 @@ ipcalc
 ipmitool
 iptables
 iptraf
+ipvsadm
 ipython
 irssi
 jedit
