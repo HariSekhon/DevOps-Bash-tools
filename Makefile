@@ -45,8 +45,7 @@ define MAKEFILE_USAGE
 	make linux-desktop
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
-    make wc-scripts             show line counts of the scripts and grand total
-    make wc-scripts2            show line counts of only scripts and total
+    make wc						show file and line count breakdowns
 
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX plugin for kubernetes context
