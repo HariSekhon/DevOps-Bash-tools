@@ -116,10 +116,8 @@ define MAKEFILE_USAGE_COMMON
     make github-url             print github url and copy to clipboard
     make status                 open browser at Github CI Builds overview Status page for all projects
 
-    make ls-files               print list of files in project
-    make ls-code                print list of code files, excluding READMEs and other peripheral files
-    make wc                     show line counts of the files and grand total
-    make wc-code                show line counts of only code files and total
+    make ls               		print list of code files in project
+    make wc                     show counts of files and lines
 
 endef
     #make ${VENV}                make a virtualenv in the base directory (see VENV)
@@ -725,23 +723,9 @@ allstars:
 		sed 's/\&//'\
 	)"
 
-.PHONY: ls-files
-ls-files:
+.PHONY: ls
+ls:
 	@echo $(CODE_FILES) | tr ' ' '\n' | sort
-
-.PHONY: files
-files: ls-files
-	@:
-
-.PHONY: ls-code
-ls-code:
-	@# TODO: port out my code and non-code lists and make this more generic
-	@$(MAKE) ls-files | grep -v -e '^\./\.' -e LICENSE -e '.*\.md' -e '.*\.txt' `for x in $(CONF_FILES) $(shell git submodule | awk '{print $$2}'); do echo "-e '$$x'"; done`
-	@$(MAKE) ls-files | grep '\.bash' || :
-
-.PHONY: lscode
-lscode: ls-code
-	@:
 
 .PHONY: wc
 wc:
@@ -770,27 +754,6 @@ wc:
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -Ee 'tests?/' | wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which vagrant/:\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep vagrant/ | wc -l | sed 's/[[:space:]]//g'
-
-.PHONY: wc-code
-wc-code:
-	@$(MAKE) ls-code | xargs wc -l
-	@printf "Total code files: "
-	@$(MAKE) ls-code | wc -l
-
-.PHONY: wccode
-wccode: wc-code
-	@:
-
-.PHONY: wc-code2
-wc-code2:
-	@printf "Total code files: "
-	@$(MAKE) ls-code | wc -l
-	@printf "Total line count without # comments: "
-	@$(MAKE) ls-code | xargs sed 's/#.*//;/^[[:space:]]*$$/d' | wc -l
-
-.PHONY: wccode
-wccode2: wc-code2
-	@:
 
 # finds .swp, would need to port out code lists
 #.PHONY: wcall
