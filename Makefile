@@ -260,6 +260,8 @@ wc-scripts:
 	@$(MAKE) ls-scripts | xargs wc -l
 	@printf "Total Script files: "
 	@$(MAKE) ls-scripts | wc -l
+	@printf "including setup/ scripts: "
+	@$(MAKE) ls-scripts | grep setup/ | wc -l | sed 's/[[:space:]]//g'
 
 .PHONY: wcscripts
 wcscripts: wc-scripts
