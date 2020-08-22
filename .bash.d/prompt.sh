@@ -35,10 +35,12 @@ PS1=""
 
 # shellcheck disable=SC2154
 PS1_COLOUR="$txtgrn"
+PS1_USER_COLOUR="$txtcyn"
 
 if [ $EUID -eq 0 ]; then
     # shellcheck disable=SC2154
-    PS1_COLOUR="$txtred"
+    PS1_COLOUR="$bldred"
+    PS1_USER_COLOUR="$bldred"
 fi
 
 # XXX: important that every single escape sequence is enclosed in \[ \] to make sure it isn't included in the line wrapping calculcation otherwise the lines wrap back on to themselves
@@ -47,7 +49,7 @@ fi
 #   \h      host
 # shellcheck disable=SC2154
 # export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
-export PS1+="\[$PS1_COLOUR\]\t \[$txtcyn\]\u\[$txtwht\]@\[$bldgrn\]\h:\[$bldpur\]\$(git branch 2>/dev/null | awk '/^\\*/{print \$2\" \"}')\[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
+export PS1+="\[$PS1_COLOUR\]\t \[$PS1_USER_COLOUR\]\u\[$txtwht\]@\[$bldgrn\]\h:\[$bldpur\]\$(git branch 2>/dev/null | awk '/^\\*/{print \$2\" \"}')\[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 
 #if type kube_ps1 &>/dev/null; then
 #    PS1='$(kube_ps1)'" $PS1"
