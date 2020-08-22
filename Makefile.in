@@ -116,7 +116,7 @@ define MAKEFILE_USAGE_COMMON
     make github-url             print github url and copy to clipboard
     make status                 open browser at Github CI Builds overview Status page for all projects
 
-    make ls						print list of code files in project
+    make ls                     print list of code files in project
     make wc                     show counts of files and lines
 
 endef
