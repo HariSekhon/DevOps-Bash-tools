@@ -40,7 +40,7 @@ fi
 # ============================================================================ #
 
 # 'k8s-app' label is set by dashboard creation but who uses that
-k8s_get_pod_opts="-o wide -L app,env"
+k8s_get_pod_opts="-o wide -L app,env --show-labels"
 
 alias po='k get po $k8s_get_pod_opts'
 alias kapply='k apply -f'
