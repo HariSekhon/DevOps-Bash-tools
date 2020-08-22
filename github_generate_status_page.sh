@@ -98,7 +98,8 @@ actual_repos=0
 
 total_stars=0
 total_forks=0
-total_watchers=0
+echo "getting followers" >&2
+followers="$("$srcdir/github_api.sh" /users/harisekhon | jq -r .followers)"
 
 echo "---" >&2
 for repo in $repolist; do
@@ -110,10 +111,10 @@ for repo in $repolist; do
     description="$(jq -r .description <<< "$repo_json")"
     stars="$(jq -r .stargazers_count <<< "$repo_json")"
     forks="$(jq -r .forks <<< "$repo_json")"
-    watchers="$(jq -r .watchers <<< "$repo_json")"
+    #watchers="$(jq -r .watchers <<< "$repo_json")"
     ((total_stars += stars))
     ((total_forks += forks))
-    ((total_watchers += watchers))
+    #((total_watchers += watchers))
     echo "fetching GitHub README.md for '$repo'" >&2
     echo "---"
     echo "---" >&2
@@ -206,7 +207,7 @@ cat <<EOF
 ![Original Repos](https://img.shields.io/badge/Repos-$actual_repos-blue?logo=github)
 ![Stars](https://img.shields.io/badge/Stars-$total_stars-blue?logo=github)
 ![Forks](https://img.shields.io/badge/Forks-$total_forks-blue?logo=github)
-![Watchers](https://img.shields.io/badge/Watchers-$total_watchers-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-$followers-blue?logo=github)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-blue?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-blue?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon)
