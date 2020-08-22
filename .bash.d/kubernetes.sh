@@ -17,6 +17,12 @@
 #                  K u b e r n e t e s   /   O p e n S h i f t
 # ============================================================================ #
 
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
+# shellcheck disable=SC1090
+type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+
+
 for x in kubectl oc; do
     if type -P "$x" &>/dev/null; then
         # shellcheck disable=SC1090
@@ -36,6 +42,8 @@ fi
 #    # overriden in prompt.sh which is evaluated later so this is sourced there
 #    #PS1='$(kube_ps1)'" $PS1"
 #fi
+
+add_PATH "${KREW_ROOT:-$HOME/.krew}"
 
 # ============================================================================ #
 
