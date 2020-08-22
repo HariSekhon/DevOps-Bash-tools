@@ -13,6 +13,16 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://docs.drone.io/quickstart/cli/
+#
+# https://docs.drone.io/cli/install/
+#
+# brew install drone-cli
+#
+# cd to this directory
+#
+# drone exec [--pipeline default] [--include=thisstep] [--exclude=thatstep]
+
 kind: pipeline
 type: docker
 name: default
