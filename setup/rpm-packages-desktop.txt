@@ -85,6 +85,7 @@ iotop
 ipcalc
 ipmitool
 iptraf
+ipvsadm
 ipython
 irssi
 jedit
