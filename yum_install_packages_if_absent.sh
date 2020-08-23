@@ -18,52 +18,28 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-usage(){
-    echo "Installs Yum RPM package lists if the packages aren't already installed"
-    echo
-    echo "Takes a list of yum packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
-    echo
-    echo "usage: ${0##*/} <list_of_packages>"
-    echo
-    exit 3
-}
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
-for arg; do
-    case "$arg" in
-        -*) usage
-            ;;
-    esac
-done
+# shellcheck disable=SC1090
+. "$srcdir/lib/packages.sh"
 
-packages=""
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Yum RPM package lists if the packages aren't already installed
 
-process_args(){
-    for arg; do
-        if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
-            echo "adding packages from file:  $arg"
-            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-            echo
-        else
-            packages="$packages $arg"
-        fi
-        # uniq
-    done
-}
+$package_args_description
 
-if [ -n "${*:-}" ]; then
-    process_args "$@"
-else
-    # shellcheck disable=SC2046
-    process_args $(cat)
-fi
+Tested on CentOS
+"
 
-tr ' ' '\n' <<< "${packages[*]}" |
-sort -u |
-grep -v '^[[:space:]]*$' |
-grep -vFx -f <(rpm -qa --queryformat '%{RPMTAG_NAME}\n') |
-while read -r package; do
-    # accounts for vim being provided by vim-enhanced, so we don't try to install the metapackage again and again
-    rpm -q --queryformat '%{RPMTAG_NAME}\n' --whatprovides "$package" &>/dev/null ||
-    echo "$package"
-done |
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<packages>"
+
+help_usage "$@"
+
+process_package_args "$@" |
+"$srcdir/rpms_filter_not_installed.sh" |
+rpms_filter_not_provided |
 xargs --no-run-if-empty "$srcdir/yum_install_packages.sh"
