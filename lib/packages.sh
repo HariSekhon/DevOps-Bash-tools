@@ -49,6 +49,10 @@ process_package_args(){
     fi
 }
 
+installed_apk(){
+    apk info 2>/dev/null
+}
+
 installed_debs(){
     dpkg-query -W -f '${db:Status-Abbrev}\t${binary:Package}\n' |
     awk '/^i/{print $2}' |
