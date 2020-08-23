@@ -17,49 +17,29 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-usage(){
-    echo "Installs Debian / Ubuntu deb package lists if the packages aren't already installed"
-    echo
-    echo "Takes a list of deb packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
-    echo
-    echo "usage: ${0##*/} <list_of_packages>"
-    echo
-    exit 3
-}
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
-for arg; do
-    case "$arg" in
-        -*) usage
-            ;;
-    esac
-done
+# shellcheck disable=SC1090
+. "$srcdir/lib/packages.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Debian / Ubuntu deb package lists if the packages aren't already installed
+
+$package_args_description
+
+Tested on Debian and Ubuntu
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<packages>"
+
+help_usage "$@"
 
 export DEBIAN_FRONTEND=noninteractive
 
-packages=""
-
-process_args(){
-    for arg; do
-        if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
-            echo "adding packages from file:  $arg"
-            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-            echo
-        else
-            packages="$packages $arg"
-        fi
-    done
-}
-
-if [ -n "${*:-}" ]; then
-    process_args "$@"
-else
-    # shellcheck disable=SC2046
-    process_args $(cat)
-fi
-
-echo "$packages" |
-tr ' ' '\n' |
-sort -u |
-grep -v '^[[:space:]]*$' |
-grep -vFx -f <(dpkg-query -W -f '${binary:Package}\n') |
+process_package_args "$@" |
+"$srcdir/debs_not_installed.sh" |
 xargs --no-run-if-empty "$srcdir/apt_install_packages.sh"
