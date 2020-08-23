@@ -55,3 +55,23 @@ installed_debs(){
     sed 's/:.*$//' |
     sort -u
 }
+
+installed_rpms(){
+    rpm -qa --queryformat '%{RPMTAG_NAME}\n'
+}
+
+rpms_filter_provided(){
+    while read -r rpm; do
+        # accounts for vim being provided by vim-enhanced, so we don't try to install the metapackage again and again
+        rpm -q --whatprovides "$rpm" >/dev/null 2>&1 &&
+        echo "$rpm"
+    done
+}
+
+rpms_filter_not_provided(){
+    while read -r rpm; do
+        # accounts for vim being provided by vim-enhanced, so we don't try to install the metapackage again and again
+        rpm -q --whatprovides "$rpm" >/dev/null 2>&1 ||
+        echo "$rpm"
+    done
+}
