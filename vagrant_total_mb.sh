@@ -15,24 +15,38 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-usage(){
-    cat <<EOF
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
 Calculates the total combined RAM in MB allocated to all VMs in a Vagrantfile
 
-Can take one or more Vagrantfiles given as arguments, otherwise tries to read a Vagrantfile in the \$PWD
-EOF
-    exit 3
-}
+Can take one or more Vagrantfiles given as arguments, otherwise tries to read \$PWD/Vagrantfile or /vagrant/Vagrantfile for convenience
 
-for arg; do
-    case "$arg" in
-        -*) usage
-            ;;
-    esac
-done
+Tested on vagrant/kubernetes/Vagrantfile in this repo
+"
 
-grep -E '^[^#]+\.memory' "${@:-Vagrantfile}" |
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<Vagrantfile>"
+
+help_usage "$@"
+
+if [ $# -gt 0 ]; then
+    Vagrantfiles=("$@")
+elif [ -f Vagrantfile ]; then
+    Vagrantfiles=(Vagrantfile)
+elif [ -f /vagrant/Vagrantfile ]; then
+    # auto-detect when running inside a Vagrant VM
+    Vagrantfiles=(/vagrant/Vagrantfile)
+else
+    usage "Vagrantfile not specified and no Vagrantfile found in \$PWD or /vagrant/"
+fi
+
+grep -E '^[^#]+\.memory' "${Vagrantfiles[@]}" |
 sed 's/.*=[[:space:]]*//' |
 grep -E '^[[:digit:]]+(\.[[:digit:]]+)?$' |
 tr '\n' '+' |
