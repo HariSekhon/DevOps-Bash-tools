@@ -59,6 +59,7 @@ fi
 
 tr ' ' '\n' <<< "${packages[*]}" |
 sort -u |
+grep -v '^[[:space:]]*$' |
 grep -vFx -f <(rpm -qa --queryformat '%{RPMTAG_NAME}\n') |
 while read -r package; do
     # accounts for vim being provided by vim-enhanced, so we don't try to install the metapackage again and again
