@@ -19,7 +19,7 @@ set -eu
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 usage(){
-    echo "Installs Yum RPM package lists if the packages aren't already instealled"
+    echo "Installs Yum RPM package lists if the packages aren't already installed"
     echo
     echo "Takes a list of yum packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
     echo
@@ -39,7 +39,7 @@ packages=""
 
 process_args(){
     for arg; do
-        if [ -f "$arg" ]; then
+        if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
             echo "adding packages from file:  $arg"
             packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
             echo
