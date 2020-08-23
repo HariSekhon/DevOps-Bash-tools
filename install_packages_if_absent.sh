@@ -29,6 +29,12 @@ check_packages_list(){
     tr ' ' '\n' <<< "${packages[*]}" | grep -vFx -f <("$@")
 }
 
+if [ "$(uname -s)" = Darwin ]; then
+    xargs(){
+        gxargs "$@"
+    }
+fi
+
 if check_bin apk; then
     check_packages_list apk info
 elif check_bin apt-get dpkg; then
@@ -52,4 +58,4 @@ else
     echo "Unsupported OS / Package Manager"
     exit 1
 fi |
-"$srcdir/install_packages.sh"
+xargs --no-run-if-empty "$srcdir/install_packages.sh"
