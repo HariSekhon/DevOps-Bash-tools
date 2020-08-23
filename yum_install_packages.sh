@@ -27,7 +27,7 @@ set -eu
 usage(){
     echo "Installs Yum RPM packages"
     echo
-    echo "Takes a list of yum packages as arguments or .txt files containing lists of modules (one per line)"
+    echo "Takes a list of yum packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
     echo
     echo "usage: ${0##/*} <list_of_packages>"
     echo
@@ -45,7 +45,7 @@ packages=""
 
 process_args(){
     for arg; do
-        if [ -f "$arg" ]; then
+        if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
             echo "adding packages from file:  $arg"
             packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
             echo
