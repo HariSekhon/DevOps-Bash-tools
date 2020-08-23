@@ -17,8 +17,6 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-#. "$srcdir/lib/utils.sh"
-
 if type -P apk &>/dev/null; then
     "$srcdir/apk_install_packages.sh" "$@"
 elif type -P apt-get &>/dev/null; then
