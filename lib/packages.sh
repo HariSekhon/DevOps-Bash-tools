@@ -48,3 +48,10 @@ process_package_args(){
         _process_package_args $(cat)
     fi
 }
+
+installed_debs(){
+    dpkg-query -W -f '${db:Status-Abbrev}\t${binary:Package}\n' |
+    awk '/^i/{print $2}' |
+    sed 's/:.*$//' |
+    sort -u
+}
