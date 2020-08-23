@@ -41,8 +41,6 @@ for x in "$@"; do
     esac
 done
 
-echo "Installing Apk Packages"
-
 packages=""
 
 process_args(){
@@ -72,4 +70,5 @@ echo "$packages" |
 tr ' ' '\n' |
 sort -u |
 grep -vFx -f "$installed_packages" |
-xargs --no-run-if-empty "$srcdir/apk_install_packages.sh"
+grep -v '^[[:space:]]*$' |
+xargs -r "$srcdir/apk_install_packages.sh"
