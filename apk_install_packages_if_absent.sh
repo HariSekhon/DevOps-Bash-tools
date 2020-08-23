@@ -69,6 +69,6 @@ apk info > "$installed_packages"
 echo "$packages" |
 tr ' ' '\n' |
 sort -u |
-grep -vFx -f "$installed_packages" |
 grep -v '^[[:space:]]*$' |
+grep -vFx -f "$installed_packages" |
 xargs -r "$srcdir/apk_install_packages.sh"
