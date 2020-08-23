@@ -19,22 +19,11 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-#. "$srcdir/lib/utils.sh"
-
 packages=("$@")
-#packages_to_install=()
 
 check_bin(){
     type -P "$@" &>/dev/null
 }
-
-#check_packages_individually(){
-#    for package in "${packages[@]}"; do
-#        if ! "$@" "$package" &>/dev/null; then
-#            packages_to_install+=("$package")
-#        fi
-#    done
-#}
 
 check_packages_list(){
     tr ' ' '\n' <<< "${packages[*]}" | grep -vFx -f <("$@")
