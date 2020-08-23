@@ -25,37 +25,15 @@ check_bin(){
     type -P "$@" &>/dev/null
 }
 
-check_packages_list(){
-    tr ' ' '\n' <<< "${packages[*]}" | grep -vFx -f <("$@")
-}
-
-if [ "$(uname -s)" = Darwin ]; then
-    xargs(){
-        gxargs "$@"
-    }
-fi
-
 if check_bin apk; then
-    check_packages_list apk info
+    "$srcdir/apk_install_packages_if_absent.sh" "${packages[@]}"
 elif check_bin apt-get dpkg; then
-    #check_packages dpkg -s
-
-    # want dollar passed as-is in single quotes
-    # shellcheck disable=SC2016
-    check_packages_list dpkg-query -W -f '${binary:Package}\n'
+    "$srcdir/apt_install_packages_if_absent.sh" "${packages[@]}"
 elif check_bin yum rpm; then
-    #check_packages rpm -q
-
-    check_packages_list rpm -qa --queryformat '%{RPMTAG_NAME}\n' |
-    while read -r package; do
-        # accounts for vim being provided by vim-enhanced, so we don't try to install the metapackage again and again
-        rpm -q --queryformat '%{RPMTAG_NAME}\n' --whatprovides "$package" &>/dev/null ||
-        echo "$package"
-    done
+    "$srcdir/yum_install_packages_if_absent.sh" "${packages[@]}"
 elif check_bin brew; then
-    check_packages_list brew list
+    "$srcdir/brew_install_packages_if_absent.sh" "${packages[@]}"
 else
     echo "Unsupported OS / Package Manager"
     exit 1
-fi |
-xargs --no-run-if-empty "$srcdir/install_packages.sh"
+fi
