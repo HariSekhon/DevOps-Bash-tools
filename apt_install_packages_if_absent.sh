@@ -41,5 +41,5 @@ help_usage "$@"
 export DEBIAN_FRONTEND=noninteractive
 
 process_package_args "$@" |
-"$srcdir/debs_not_installed.sh" |
+"$srcdir/debs_filter_not_installed.sh" |
 xargs --no-run-if-empty "$srcdir/apt_install_packages.sh"
