@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: vagrant/kubernetes/Vagrantfile
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-23 23:08:43 +0100 (Sun, 23 Aug 2020)
@@ -12,8 +13,6 @@
 #
 #  https://www.linkedin.com/in/harisekhon
 #
-
-# args: vagrant/kubernetes/Vagrantfile
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
