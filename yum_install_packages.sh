@@ -29,7 +29,7 @@ usage(){
     echo
     echo "Takes a list of yum packages as arguments or .txt files containing lists of modules (one per line)"
     echo
-    echo "usage: ${0##*} <list_of_packages>"
+    echo "usage: ${0##/*} <list_of_packages>"
     echo
     exit 3
 }
