@@ -25,7 +25,7 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 usage(){
-    echo "Installs Yum RPM packages"
+    echo "Installs Yum RPM package lists"
     echo
     echo "Takes a list of yum packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
     echo
