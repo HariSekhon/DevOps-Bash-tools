@@ -70,6 +70,6 @@ timestamp "installing: $packages"
 
 # want splitting
 # shellcheck disable=SC2086
-./install_packages.sh $packages
+./install_packages_if_absent.sh $packages
 
 } 2>&1 | tee -a /vagrant/logs/provision.log
