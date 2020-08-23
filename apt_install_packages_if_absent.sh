@@ -60,5 +60,6 @@ fi
 echo "$packages" |
 tr ' ' '\n' |
 sort -u |
+grep -v '^[[:space:]]*$' |
 grep -vFx -f <(dpkg-query -W -f '${binary:Package}\n') |
 xargs --no-run-if-empty "$srcdir/apt_install_packages.sh"
