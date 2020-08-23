@@ -41,4 +41,4 @@ help_usage "$@"
 export DEBIAN_FRONTEND=noninteractive
 
 process_package_args "$@" |
-grep -vFx -f <(dpkg-query -W -f '${binary:Package}\n')
+grep -vFx -f <(installed_debs)
