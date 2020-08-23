@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# args: vagrant/kubernetes/Vagrantfile
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -22,9 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Calculates the total combined RAM in MB allocated to all VMs in a Vagrantfile
+Calculates the total combined RAM in MB allocated to all VMs in one or more Vagrantfiles
 
-Can take one or more Vagrantfiles given as arguments, otherwise tries to read \$PWD/Vagrantfile or /vagrant/Vagrantfile for convenience
+Accepts one or more Vagrantfiles as arguments, otherwise tries to read \$PWD/Vagrantfile or /vagrant/Vagrantfile for convenience
 
 Tested on vagrant/kubernetes/Vagrantfile in this repo
 "
