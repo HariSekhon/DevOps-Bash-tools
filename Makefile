@@ -47,7 +47,7 @@ define MAKEFILE_USAGE
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
 
     make vim                    installs Vundle and plugins
-    make tmux                   installs TMUX plugin for kubernetes context
+    make tmux                   installs TMUX TPM and plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon GitHub repos
     make status                 open the Github Status page of all my repos build statuses across all CI platforms
 
@@ -223,8 +223,11 @@ vim:
 	setup/install_vundle.sh
 
 .PHONY: tmux
-tmux: ~/.tmux/plugins/kube.tmux
+tmux: ~/.tmux/plugins/tpm ~/.tmux/plugins/kube.tmux
 	@:
+
+~/.tmux/plugins/tpm:
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 ~/.tmux/plugins/kube.tmux:
 	wget -O ~/.tmux/plugins/kube.tmux https://raw.githubusercontent.com/jonmosco/kube-tmux/master/kube.tmux
