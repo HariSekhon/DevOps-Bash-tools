@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Checks a given list of RPM packages and returns those already installed
+Checks a given list of RPM packages and returns those not installed
 
 $package_args_description
 
