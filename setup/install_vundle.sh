@@ -29,4 +29,5 @@ if ! [ -e "$target" ]; then
     git clone https://github.com/gmarik/Vundle.vim.git "$target"
 fi
 
+# this tends to mess up the terminal and requires a reset afterwards
 vim +PluginInstall +qall
