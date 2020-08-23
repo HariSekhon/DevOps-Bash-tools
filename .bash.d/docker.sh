@@ -40,6 +40,7 @@ alias dockerimg='$EDITOR "$bash_tools/setup/docker-images.txt"'
 alias dockerrm='docker rm $(docker ps -qf status=exited)'
 
 alias dockerr=dockerrunrm
+alias dock=dockerr
 alias dockere=dockerexec
 alias de=dockere
 
