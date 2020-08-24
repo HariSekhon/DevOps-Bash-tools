@@ -22,6 +22,7 @@ findutils
 gawk
 git-secrets
 gnu-sed
+gnu-tar
 golang
 grep  # gnu version better than Mac version
 jq
