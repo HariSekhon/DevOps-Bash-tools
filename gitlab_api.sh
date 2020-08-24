@@ -134,14 +134,11 @@ url_path="${url_path/<project>/$project}"
 url_path="${url_path/projects\/:id/projects\/$project}"
 url_path="${url_path/users\/:id/users\/$user}"
 
+export TOKEN="$GITLAB_TOKEN"
+
+# can also leave out to use OAuth compliant header "Authorization: Bearer <token>"
+export CURL_AUTH_HEADER="Private-Token:"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-if is_curl_min_version 7.55; then
-    # this trick doesn't work, file descriptor is lost by next line
-    #filedescriptor=<(cat <<< "Private-Token: $GITLAB_TOKEN")
-    curl $CURL_OPTS -H @<(cat <<< "Private-Token: $GITLAB_TOKEN") "$url_base/$url_path" "$@"
-else
-    # could also use OAuth compliant header "Authorization: Bearer <token>"
-    curl $CURL_OPTS -H "Private-Token: $GITLAB_TOKEN" "$url_base/$url_path" "$@"
-fi
+"$srcdir/curl_auth.sh" $CURL_OPTS "$url_base/$url_path" "$@"
