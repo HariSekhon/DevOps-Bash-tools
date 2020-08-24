@@ -40,8 +40,11 @@ usage_args="<packages>"
 
 help_usage "$@"
 
+# process_package_args requires much more specific env var to disambiguate
+HOMEBREW_PACKAGES_TAP="${TAP:-}"
+
 process_package_args "$@" |
-if [ -n "${TAP:-}" ]; then
+if [ -n "${HOMEBREW_PACKAGES_TAP:-}" ]; then
     if [ -n "${NO_FAIL:-}" ]; then
         set +e
     fi
