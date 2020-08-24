@@ -16,7 +16,7 @@
 azure-cli
 cmake
 coreutils
-cpanm
+cpanminus
 direnv
 findutils
 gawk
