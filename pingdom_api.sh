@@ -13,7 +13,16 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-#  args: /checks | jq .
+# args: /credits | jq .
+# args: /checks | jq .
+# args: /checks/<check_id> | jq .
+# args: /checks/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
+# args: /actions | jq .
+# args: /maintenance | jq .
+# args: /maintenance.occurrences | jq .
+# args: /probes | jq .
+# args: /analysis/<check_id> | jq .
+# args: /analysis/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -50,6 +59,37 @@ Examples:
 # Get Pingdom checks and statuses:
 
 ${0##*/} /checks
+
+
+# Get detailed info on a specific check:
+
+${0##*/} /checks/<id>
+
+
+# Get Pingdom actions such as status change emails and SMS (newest first):
+
+${0##*/} /actions
+
+
+# Get your configured Maintenance windows and occurrences:
+
+${0##*/} /maintenance
+${0##*/} /maintenance.occurrences
+
+
+# List all Pingdom probe servers
+
+${0##*/} /probes
+
+
+# Get check results from all probes for a given check id (find which geographies a sight is being affected in). You will need to correlate this to the probe ids from from the /probes query
+
+${0##*/} /results/<check_id>
+
+
+# Get Credits remaining:
+
+${0##*/} /credits
 "
 
 # used by usage() in lib/utils.sh
