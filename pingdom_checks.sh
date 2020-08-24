@@ -45,7 +45,7 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-"$srcdir/pingdom_api.sh" /checks |
+"$srcdir/pingdom_api.sh" /checks "$@" |
 jq -r ".checks[] | [.id, .name, .type, .hostname, .status, .lastresponsetime] | @csv" |
 column -t -s , |
 sed 's/"//g'
