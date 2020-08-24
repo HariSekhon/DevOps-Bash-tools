@@ -28,7 +28,7 @@ _process_package_args(){
     for arg; do
         if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
             echo "adding packages from file:  $arg" >&2
-            packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            packages="$packages $(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d; /^[^[:alnum:]]/d' "$arg")"
             echo >&2
         else
             packages="$packages $arg"
@@ -42,7 +42,9 @@ _process_package_args(){
         tr ' ' '\n' |
         sort -u
     fi |
-    grep -v '^[[:space:]]*$'
+    grep -v -e '^[[:space:]]*$' \
+            -e '^[^[:alnum:]]' \
+            -e '[^[:alnum:]]$'
 }
 
 process_package_args(){
