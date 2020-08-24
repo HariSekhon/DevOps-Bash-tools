@@ -35,5 +35,5 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-"$srcdir/pingdom_api.sh" /credits |
+"$srcdir/pingdom_api.sh" /credits "$@" |
 jq -r '.credits.availablesms'
