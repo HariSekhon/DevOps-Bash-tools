@@ -31,6 +31,11 @@ Output format - quoted CSV:
 For TSV format, set TSV=1 environment variable
 
 
+To find check IDs:
+
+    pingdom_checks.sh
+
+
 \$PINGDOM_TOKEN must be defined in the environment for authentication
 
 See adjacent pingdom_api.sh for more details
