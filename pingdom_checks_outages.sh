@@ -42,4 +42,4 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-"$srcdir/pingdom_foreach_check.sh" "$srcdir/pingdom_check_outages.sh" {id}
+"$srcdir/pingdom_foreach_check.sh" "$srcdir/pingdom_check_outages.sh" "{id}"
