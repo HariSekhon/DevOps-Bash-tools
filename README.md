@@ -293,7 +293,7 @@ etc.
 - `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
   - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
-- `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) queries and reports for status, latency, average response times, SMS credits, outages periods and durations over the last year etc.
+- `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
   - `pingdom_foreach_check.sh` - runs any templated command against each [Pingdom](https://www.pingdom.com/) check
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
