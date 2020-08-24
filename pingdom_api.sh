@@ -13,17 +13,6 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# args: /credits | jq .
-# args: /checks | jq .
-# args: /checks/<check_id> | jq .
-# args: /checks/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
-# args: /actions | jq .
-# args: /maintenance | jq .
-# args: /maintenance.occurrences | jq .
-# args: /probes | jq .
-# args: /analysis/<check_id> | jq .
-# args: /analysis/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
@@ -66,6 +55,11 @@ ${0##*/} /checks
 ${0##*/} /checks/<id>
 
 
+# Get average uptime / response time for a specific check:
+
+${0##*/} /summary.average/<check_id>
+
+
 # Get Pingdom actions such as status change emails and SMS (newest first):
 
 ${0##*/} /actions
@@ -77,6 +71,10 @@ ${0##*/} /maintenance
 ${0##*/} /maintenance.occurrences
 
 
+# Recent Outages (last week by default, see pingdom_check_outages.sh for last year):
+${0##*/} /summary.outage/<check_id>
+
+
 # List all Pingdom probe servers
 
 ${0##*/} /probes
@@ -85,6 +83,16 @@ ${0##*/} /probes
 # Get check results from all probes for a given check id (find which geographies a sight is being affected in). You will need to correlate this to the probe ids from from the /probes query
 
 ${0##*/} /results/<check_id>
+
+
+# List teams and their members:
+
+${0##*/} /alerting/teams
+
+
+# List alert contacts:
+
+${0##*/} /alerting/contacts
 
 
 # Get Credits remaining:
@@ -116,3 +124,21 @@ export TOKEN="$PINGDOM_TOKEN"
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
 "$srcdir/curl_auth.sh" $CURL_OPTS "$url_base/$url_path" "$@"
+
+# args: /checks | jq .
+# args: /checks/<check_id>
+# args: /checks/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
+# args: /alerting/contacts | jq .
+# args: /alerting/teams | jq .
+# args: /credits | jq .
+# args: /actions | jq .
+# args: /summary.average/<checkid>
+# args: /summary.average/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
+# args: /summary.outage/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
+# args: /summary.hoursofday/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
+# args: /summary.performance/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
+# args: /maintenance | jq .
+# args: /maintenance.occurrences | jq .
+# args: /probes | jq .
+# args: /analysis/<check_id> | jq .
+# args: /analysis/$(pingdom_api.sh /checks | jq -r 'first(.checks[].id)') | jq .
