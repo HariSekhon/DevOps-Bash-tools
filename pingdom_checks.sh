@@ -24,7 +24,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists the Pingdom checks and their status via the Pingdom API
 
-\$PINGDOM_TOKEN must be defined in the environment
+Output format:
+
+<check_name>      <type>      <hostname>    <status>    <last_response_time_in_ms>
+
+
+From https://docs.pingdom.com/api/#section/Best-Practices/Use-common-sense:
+
+\"Don't check for the status of a check every other second. The highest check resolution is one minute. Checking more often than that won't give you much of an advantage\"
+
+
+\$PINGDOM_TOKEN must be defined in the environment for authentication
 
 See adjacent pingdom_api.sh for more details
 "
