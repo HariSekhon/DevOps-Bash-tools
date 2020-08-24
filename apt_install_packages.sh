@@ -30,9 +30,9 @@ srcdir="$(dirname "$0")"
 usage(){
     echo "Installs Debian / Ubuntu deb package lists"
     echo
-    echo "Takes a list of deb packages as arguments or .txt files containing lists of packages (one per line)"
+    echo "Takes a list of deb packages as arguments or via stdin, and for any arguments that are plaintext files, reads the packages from those given files (one package per line)"
     echo
-    echo "usage: ${0##*} <list_of_packages>"
+    echo "usage: ${0##*/} <list_of_packages>"
     echo
     exit 3
 }

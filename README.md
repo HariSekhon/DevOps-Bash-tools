@@ -29,7 +29,7 @@ doesn't detect shell code properly
 [![Alpine](https://img.shields.io/badge/Linux-Alpine-0D597F?logo=alpine%20linux&color=0D597F)](https://alpinelinux.org/)
 [![CentOS](https://img.shields.io/badge/Linux-CentOS-red?logo=centos&color=262577&logoColor=white)](https://www.centos.org/)
 [![Debian](https://img.shields.io/badge/Linux-Debian-red?logo=debian&color=A81D33)](https://www.debian.org/)
-[![Fedora](https://img.shields.io/badge/Linux-Fedora-294172?logo=fedora)](https://www.redhat.com/en)
+[![Fedora](https://img.shields.io/badge/Linux-Fedora-294172?logo=fedora)](https://getfedora.org/)
 [![Redhat](https://img.shields.io/badge/Linux-Redhat-red?logo=red%20hat)](https://www.redhat.com/en)
 [![Ubuntu](https://img.shields.io/badge/Linux-Ubuntu-orange?logo=ubuntu&logoColor=white)](https://ubuntu.com/)
 [![Mac Homebrew](https://img.shields.io/badge/Mac-Homebrew-999999?logo=apple&logoColor=white)](https://brew.sh/)
@@ -346,6 +346,17 @@ etc.
   - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by all other scripts
 - `json2yaml.sh` - converts JSON to YAML
 - `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
+- OS / Distro Package Management:
+  - `install_packages.sh` - installs package lists from arguments, files or stdin on major linux distros and Mac, detecting the package manager and invoking the right install commands, with `sudo` if not root. Works on [RHEL](https://www.redhat.com/en) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/), and [Mac Homebrew](https://brew.sh/). Leverages and supports all features of the distro / OS specific install scripts listed below
+  - `install_packages_if_absent.sh` - installs package lists if they're not already installed, saving time and minimizing install logs / CI logs, same support list as above
+  - `yum_install_packages.sh` / `yum_remove_packages.sh` - installs RPM lists from arguments, files or stdin. Handles Yum + Dnf behavioural differences, calls `sudo` if not root, auto-attempts variations of python/python2/python3 package names. Avoids yum slowness by checking if rpm is installed before attempting to install it, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across RHEL/CentOS/Fedora versions)
+  - `yum_install_if_absent.sh` - installs RPMs only if not already installed and not a metapackage provided by other packages (eg. `vim` metapackage provided by `vim-enhanced`), saving time and minimizing install logs / CI logs, plus all the features of `yum_install_packages.sh` above
+  - `apt_install_packages.sh` / `apt_remove_packages.sh` - installs Deb package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Debian/Ubuntu distros/versions)
+  - `apt_install_if_absent.sh` - installs Deb packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apt_install_packages.sh` above
+  - `apk_install_packages.sh` / `apk_remove_packages.sh` - installs Alpine apk package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Alpine versions)
+  - `apk_install_if_absent.sh` - installs Alpine apk packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apk_install_packages.sh` above
+  - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
+  - `brew_install_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:

@@ -49,7 +49,7 @@ elif [ -f /vagrant/Vagrantfile ]; then
     # auto-detect when running inside a Vagrant VM
     Vagrantfile=/vagrant/Vagrantfile
 else
-    usage "Vagrantfile not specified and no Vagrantfile found in \$PWD"
+    usage "Vagrantfile not specified and no Vagrantfile found in \$PWD or /vagrant/"
 fi
 
 sed 's/#.*//; /^[[:space:]]*$/d' "$Vagrantfile" |

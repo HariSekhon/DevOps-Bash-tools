@@ -16,14 +16,14 @@
 azure-cli
 cmake
 coreutils
-cpanm
+cpanminus
 direnv
 findutils
 gawk
 git-secrets
 gnu-sed
 gnu-tar
-golang
+go
 grep  # gnu version better than Mac version
 jq
 jwhois

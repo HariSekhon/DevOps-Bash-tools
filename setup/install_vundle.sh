@@ -29,4 +29,7 @@ if ! [ -e "$target" ]; then
     git clone https://github.com/gmarik/Vundle.vim.git "$target"
 fi
 
-vim +PluginInstall +qall
+date "+%F %T  Installing Vim Vundle plugins..."
+# this tends to mess up the terminal and requires a reset afterwards
+vim --not-a-term +PluginInstall +qall >/dev/null
+date "+%F %T  Finished installing Vim Vundle plugins"
