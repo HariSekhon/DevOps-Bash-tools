@@ -30,6 +30,10 @@ Output format - quoted CSV:
 
 For TSV format, set TSV=1 environment variable
 
+If you only want the outages just pipe it through:
+
+    | grep -Ev '^\"?up'
+
 
 \$PINGDOM_TOKEN must be defined in the environment for authentication
 
