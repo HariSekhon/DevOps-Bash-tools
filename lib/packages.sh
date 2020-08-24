@@ -36,7 +36,7 @@ _process_package_args(){
     done
     # Homebrew tap package lists are in format "tap package" and those lines should not be split
     echo "$packages" |
-    if [ -n "${TAP:-}" ]; then
+    if [ -n "${HOMEBREW_PACKAGES_TAP:-}" ]; then
         cat
     else
         tr ' ' '\n' |
