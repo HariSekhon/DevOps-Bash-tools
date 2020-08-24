@@ -27,16 +27,21 @@ packages=""
 _process_package_args(){
     for arg; do
         if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
-            echo "adding packages from file:  $arg"
+            echo "adding packages from file:  $arg" >&2
             packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
-            echo
+            echo >&2
         else
             packages="$packages $arg"
         fi
     done
+    # Homebrew tap package lists are in format "tap package" and those lines should not be split
     echo "$packages" |
-    tr ' ' '\n' |
-    sort -u |
+    if [ -n "${TAP:-}" ]; then
+        cat
+    else
+        tr ' ' '\n' |
+        sort -u
+    fi |
     grep -v '^[[:space:]]*$'
 }
 
