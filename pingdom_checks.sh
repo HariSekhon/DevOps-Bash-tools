@@ -26,7 +26,7 @@ Lists the Pingdom checks and their status via the Pingdom API
 
 Output format:
 
-<check_name>      <type>      <hostname>    <status>    <last_response_time_in_ms>
+<check_id>  <check_name>      <type>      <hostname>    <status>    <last_response_time_in_ms>
 
 
 From https://docs.pingdom.com/api/#section/Best-Practices/Use-common-sense:
@@ -46,6 +46,6 @@ usage_args="[<curl_options>]"
 help_usage "$@"
 
 "$srcdir/pingdom_api.sh" /checks |
-jq -r ".checks[] | [.name, .type, .hostname, .status, .lastresponsetime] | @csv" |
+jq -r ".checks[] | [.id, .name, .type, .hostname, .status, .lastresponsetime] | @csv" |
 column -t -s , |
 sed 's/"//g'
