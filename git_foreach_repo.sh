@@ -105,10 +105,8 @@ execute_repo(){
         echo "# $repo - $repo_dir" >&2
         echo "# ============================================================================ #" >&2
     fi
-    # shellcheck disable=SC2016
-    cmd="${cmd//\{repo\}/'$repo'}"
-    # shellcheck disable=SC2016
-    cmd="${cmd//\{dir\}/'$repo_dir'}"
+    cmd="${cmd//\{repo\}/$repo}"
+    cmd="${cmd//\{dir\}/$repo_dir}"
     eval "$cmd"
     if [[ "$cmd" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
         # throttle hitting the GitHub / GitLab / Bitbucket APIs too often as they may error out
