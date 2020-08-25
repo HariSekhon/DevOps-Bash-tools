@@ -22,11 +22,43 @@
 # - API services to be enabled (or to select Y to enable them when prompted)
 # - Billing to be enabled in order to enable API services
 #
-# Tested with Google Cloud SDK installed locally and in Google Cloud Shell
+# Tested with Google Cloud SDK installed locally
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists GCP deployed resources in the current or specified GCP Project
+
+Will temporarily switch the core.project setting (sets back to previous on exit or any error)
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<project_id>]"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
+if [ $# -gt 0 ]; then
+    project_id="$1"
+    shift || :
+    current_project="$(gcloud config list --format="value(core.project)")"
+    if [ -n "$current_project" ]; then
+        # want interpolation now not at exit
+        # shellcheck disable=SC2064
+        trap "gcloud config set project '$current_project'" EXIT
+    else
+        trap "gcloud config unset project" EXIT
+    fi
+    gcloud config set project "$project_id"
+fi
 
 cat <<EOF
 # ============================================================================ #
