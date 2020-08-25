@@ -36,6 +36,10 @@ The command template replaces the following for convenience in each iteration:
 
 eg.
     ${0##*/} 'echo GCP project has id {id} and name {name}'
+
+For a more useful example, see:
+
+    gcp_info_all_projects.sh
 "
 
 # used by usage() in lib/utils.sh
