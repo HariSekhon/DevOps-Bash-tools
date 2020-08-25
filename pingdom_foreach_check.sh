@@ -56,13 +56,9 @@ while read -r check_id check_name; do
     echo "# $check_id - $check_name" >&2
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
-    # shellcheck disable=SC2016
     cmd="${cmd//\{check_id\}/$check_id}"
-    # shellcheck disable=SC2016
     cmd="${cmd//\{check_name\}/$check_name}"
-    # shellcheck disable=SC2016
     cmd="${cmd//\{id\}/$check_id}"
-    # shellcheck disable=SC2016
     cmd="${cmd//\{name\}/$check_name}"
     eval "$cmd"
 done < <("$srcdir/pingdom_api.sh" /checks | jq -r '.checks[] | [.id, .name] | @tsv')
