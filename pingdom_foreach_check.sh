@@ -33,7 +33,13 @@ The command template replaces the following for convenience in each iteration:
 {id}   - with the check id   <-- this is the one you want for chaining API queries with pingdom_api.sh
 {name} - with the check name
 
-eg. ${0##*/} 'echo check id = {id}'
+eg.
+    ${0##*/} 'echo check id = {id} and name = {name}'
+
+For real usage examples, see:
+
+    pingdom_checks_outages.sh
+    pingdom_checks_latency_by_hour.sh
 "
 
 # used by usage() in lib/utils.sh
