@@ -233,7 +233,7 @@ etc.
 - `gcp_info_all_projects.sh` - same as above but for all detected projects
 - `gcp_foreach_project.sh` - execute any templated command across all GCP projects - powerful, so use with care (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
 - `gce_*.sh` - [GCP](https://cloud.google.com/) [Google Compute Engine](https://cloud.google.com/compute/) metadata API to call from within Virtual Machines, VM pre-emption latches and queries
-- `gke_kube_creds.sh` - [GCP Cloud](https://cloud.google.com/) script for [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) to auto-load all Kubernetes credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock
+- `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
 - `curl_auth.sh` - wraps curl to send your username and password from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` which might otherwise expose your credentials in the process list or OS audit log files. Used by other API querying scripts
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and populating `Authorization: Bearer` header
 - `kubernetes_join_cmd.sh` - outputs `kubeadm join` command (calculates cert hash + generates new token) to join an existing Kubernetes cluster. Useful to simplify cli or scripting (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
