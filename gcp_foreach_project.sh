@@ -49,21 +49,19 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-# single quotes around $project_id etc only apply after variable expansion so this is fine
-# shellcheck disable=SC2016
 while read -r project_id project_name; do
     echo "# ============================================================================ #" >&2
     echo "# GCP Project ID = $project_id -- Name = $project_name" >&2
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
     # shellproject disable=SC2016
-    cmd="${cmd//\{project_id\}/'$project_id'}"
+    cmd="${cmd//\{project_id\}/$project_id}"
     # shellproject disable=SC2016
-    cmd="${cmd//\{project_name\}/'$project_name'}"
+    cmd="${cmd//\{project_name\}/$project_name}"
     # shellproject disable=SC2016
-    cmd="${cmd//\{id\}/'$project_id'}"
+    cmd="${cmd//\{id\}/$project_id}"
     # shellproject disable=SC2016
-    cmd="${cmd//\{name\}/'$project_name'}"
+    cmd="${cmd//\{name\}/$project_name}"
     eval "$cmd"
 #                                          or projectId
 done < <(gcloud projects list --format="value(project_id,name)")
