@@ -49,7 +49,7 @@ Lists in this order:
     - Cloud SQL instances
     - App Engine instances
     - Cloud Functions
-    - Networks, Addresses and Subnets
+    - Networks, Addresses, Subnets, Proxies, Reservations, Routers, VPNs, Tunnels, Routes
     - Firewall Rules & Forwarding Rules
     - DNS managed zones & verified domains
     - Cloud Storage Buckets
@@ -271,8 +271,38 @@ echo
 echo "Addresses:"
 gcloud compute addresses list
 echo
+echo "HTTP Proxies:"
+gcloud compute target-http-proxies list
+echo
+echo "HTTPS Proxies:"
+gcloud compute target-https-proxies list
+echo
+echo "SSL Proxies:"
+gcloud compute target-ssl-proxies list
+echo
+echo "TCP Proxies:"
+gcloud compute target-tcp-proxies list
+echo
+echo "URL Maps:"
+gcloud compute url-maps list
+echo
 echo "Subnets:"
 gcloud compute networks subnets list --sort-by=NETWORK
+echo
+echo "Routers:"
+gcloud compute routers list
+echo
+echo "VPN Gateways:"
+gcloud compute vpn-gateways list
+echo
+echo "VPN Tunnels:"
+gcloud compute vpn-tunnels list
+echo
+echo "Reservations:"
+gcloud compute reservations list
+echo
+echo "Routes:"
+gcloud compute routes list
 
 
 cat <<EOF
