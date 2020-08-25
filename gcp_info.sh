@@ -35,21 +35,30 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists GCP deployed resources in the current or specified GCP Project
 
+Make sure that you run this from an authorized network so things like kubectl don't hang
+
 Lists in this order:
 
     - GCloud SDK version
+    - Organizations
     - Auth, Configurations and Current Config Properties
     - Project ID
     - Services & APIs enabled
+    - Service Accounts
     - GCE Virtual Machines
+    - Cloud SQL instances
     - App Engine instances
     - Cloud Functions
     - Networks, Addresses and Subnets
-    - Firewall Rules & Forwarding
-    - DNS managed zones
+    - Firewall Rules & Forwarding Rules
+    - DNS managed zones & verified domains
     - Cloud Storage Buckets
     - GKE Clusters
     - Kubernetes pods deployed in all namespaces on each GKE cluster
+    - Dataflow jobs
+    - PubSub topics
+    - BigTable clusters and instances
+    - Datastore Indexes
 
 Will temporarily switch the core.project setting (sets back to previous on exit or any error)
 "
@@ -98,6 +107,18 @@ echo
 
 
 cat <<EOF
+
+# ============================================================================ #
+#                           O r g a n i z a t i o n s
+# ============================================================================ #
+
+EOF
+
+gcloud organizations list
+
+
+cat <<EOF
+
 
 # ============================================================================ #
 #                           A u t h   &   C o n f i g
@@ -151,7 +172,7 @@ LISTING INFO FOR PROJECT:  $(gcloud info --format="get(config.project)")
 
 
 # ============================================================================ #
-#                                S e r v i c e s
+#                 S e r v i c e s   &   A P I s   E n a b l e d
 # ============================================================================ #
 
 EOF
@@ -159,6 +180,30 @@ EOF
 echo "Services Enabled:"
 echo
 gcloud services list --enabled
+
+
+#cat <<EOF
+
+
+# ============================================================================ #
+#                                 S e c r e t s
+# ============================================================================ #
+
+#EOF
+
+#gcloud secrets list
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                        S e r v i c e   A c c o u n t s
+# ============================================================================ #
+
+EOF
+
+gcloud iam service-accounts list
 
 
 cat <<EOF
@@ -173,6 +218,18 @@ EOF
 #gcloud compute machine-types list
 
 gcloud compute instances list --sort-by=ZONE
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                     C l o u d   S Q L   I n s t a n c e s
+# ============================================================================ #
+
+EOF
+
+gcloud sql instances list
 
 
 cat <<EOF
@@ -227,11 +284,12 @@ cat <<EOF
 
 EOF
 
+echo "Firewall Rules:"
 gcloud compute firewall-rules list
 # same output
 #gcloud compute firewall-rules list --sort-by=NETWORK
 echo
-echo "Forwarding Rules"
+echo "Forwarding Rules:"
 gcloud compute forwarding-rules list
 
 
@@ -245,7 +303,8 @@ cat <<EOF
 EOF
 
 gcloud dns managed-zones list
-
+echo
+gcloud domains list-user-verified
 
 cat <<EOF
 
@@ -257,6 +316,19 @@ cat <<EOF
 EOF
 
 gsutil ls
+
+
+# TODO: prompts to set up - determine if set up before calling
+#cat <<EOF
+
+
+# ============================================================================ #
+#                               C l o u d   R u n
+# ============================================================================ #
+
+#EOF
+
+#gcloud run services list
 
 
 cat <<EOF
@@ -272,6 +344,7 @@ gcloud container clusters list
 
 
 cat <<EOF
+
 
 # ============================================================================ #
 #                                G K E   P o d s
@@ -290,6 +363,136 @@ EOF
     echo
     kubectl get pods --all-namespaces
 done < <(gcloud container clusters list --format='value(name,zone)')
+
+
+# TODO: detect if the API is enabled and only then run this
+#cat <<EOF
+
+
+# ============================================================================ #
+#                       D a t a p r o c   C l u s t e r s
+# ============================================================================ #
+
+#EOF
+
+#gcloud dataproc clusters list --region all
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                           D a t a f l o w   J o b s
+# ============================================================================ #
+
+EOF
+
+gcloud dataflow jobs list --region=all
+
+
+# TODO: figure out if enabled before calling
+#cat <<EOF
+
+# ============================================================================ #
+#                 C l o u d   M e m o r y S t o r e   R e d i s
+# ============================================================================ #
+
+#EOF
+
+#gcloud redis instances list --region all
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                           P u b S u b   T o p i c s
+# ============================================================================ #
+
+EOF
+
+gcloud pubsub topics list
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                                B i g T a b l e
+# ============================================================================ #
+
+EOF
+
+echo "Clusters:"
+gcloud bigtable clusters list
+echo
+echo "Instances:"
+gcloud bigtable instances list
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                       D a t a s t o r e   I n d e x e s
+# ============================================================================ #
+
+EOF
+
+gcloud datastore indexes  list
+
+
+# TODO: figure out if enabled before calling
+#cat <<EOF
+
+
+# ============================================================================ #
+#                            C l o u d   B u i l d s
+# ============================================================================ #
+
+#EOF
+
+#gcloud builds list
+
+
+# TODO: figure out if enabled before calling
+#cat <<EOF
+
+
+# ============================================================================ #
+#                      D e p l o y m e n t   M a n a g e r
+# ============================================================================ #
+
+#EOF
+
+#gcloud deployment-manager deployments list
+
+
+# TODO: figure out if enabled before calling
+#cat <<EOF
+
+
+# ============================================================================ #
+#                            S o u r c e   R e p o s
+# ============================================================================ #
+
+#EOF
+
+#gcloud source repos list
+
+
+# TODO: figure out if enabled before calling
+#cat <<EOF
+
+
+# ============================================================================ #
+#                         C l o u d   F i l e s t o r e
+# ============================================================================ #
+
+#EOF
+
+#gcloud filestore instances list
+
 
 cat <<EOF
 
