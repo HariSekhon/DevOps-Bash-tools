@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #  args: echo {repo} is found at {dir}
 #
@@ -58,12 +57,12 @@ while read -r check_id check_name; do
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
     # shellcheck disable=SC2016
-    cmd="${cmd//\{check_id\}/'$check_id'}"
+    cmd="${cmd//\{check_id\}/$check_id}"
     # shellcheck disable=SC2016
-    cmd="${cmd//\{check_name\}/'$check_name'}"
+    cmd="${cmd//\{check_name\}/$check_name}"
     # shellcheck disable=SC2016
-    cmd="${cmd//\{id\}/'$check_id'}"
+    cmd="${cmd//\{id\}/$check_id}"
     # shellcheck disable=SC2016
-    cmd="${cmd//\{name\}/'$check_name'}"
+    cmd="${cmd//\{name\}/$check_name}"
     eval "$cmd"
 done < <("$srcdir/pingdom_api.sh" /checks | jq -r '.checks[] | [.id, .name] | @tsv')
