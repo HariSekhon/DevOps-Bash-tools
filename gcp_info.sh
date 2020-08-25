@@ -54,7 +54,7 @@ Lists in this order:
     - DNS managed zones & verified domains
     - Cloud Storage Buckets
     - GKE Clusters
-    - Kubernetes pods deployed in all namespaces on each GKE cluster
+    - Kubernetes deployments, services, jobs, cronjobs and pods deployed in all namespaces on each GKE cluster
     - Dataflow jobs
     - PubSub topics
     - BigTable clusters and instances
@@ -391,7 +391,7 @@ while read -r cluster zone; do
 EOF
     gcloud container clusters get-credentials "$cluster" --zone "$zone"
     echo
-    kubectl get pods --all-namespaces
+    kubectl get --all-namespaces deployments,services,jobs,cronjobs,pods
 done < <(gcloud container clusters list --format='value(name,zone)')
 
 
