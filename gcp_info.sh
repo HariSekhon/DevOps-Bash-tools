@@ -46,6 +46,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+check_bin gcloud
+
 if [ $# -gt 0 ]; then
     project_id="$1"
     shift || :
@@ -59,6 +61,7 @@ if [ $# -gt 0 ]; then
     fi
     gcloud config set project "$project_id"
 fi
+
 
 cat <<EOF
 # ============================================================================ #
@@ -97,13 +100,13 @@ gcloud config list
 
 cat <<EOF
 
+
 # ============================================================================ #
 #                                 P r o j e c t
 # ============================================================================ #
 
 EOF
 
-echo
 echo "Checking project is configured..."
 # unreliable only errors when not initially set, but gives (unset) if you were to 'gcloud config unset project'
 #if ! gcloud config get-value project &>/dev/null; then
@@ -151,11 +154,9 @@ cat <<EOF
 
 EOF
 
-#gcloud compute machine-types list || :
+#gcloud compute machine-types list
 
-gcloud compute instances list --sort-by=ZONE || :
-echo
-gcloud compute addresses list || :
+gcloud compute instances list --sort-by=ZONE
 
 
 cat <<EOF
@@ -167,15 +168,32 @@ cat <<EOF
 
 EOF
 
+echo "Networks:"
 gcloud compute networks list
 echo
+echo "Addresses:"
+gcloud compute addresses list
+echo
+echo "Subnets:"
 gcloud compute networks subnets list --sort-by=NETWORK
-echo
+
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                               F i r e w a l l s
+# ============================================================================ #
+
+EOF
+
 gcloud compute firewall-rules list
+# same output
+#gcloud compute firewall-rules list --sort-by=NETWORK
 echo
+echo "Forwarding Rules"
 gcloud compute forwarding-rules list
-echo
-gcloud compute firewall-rules list --sort-by=NETWORK
 
 
 cat <<EOF
@@ -221,3 +239,11 @@ EOF
     echo
     kubectl get pods --all-namespaces
 done < <(gcloud container clusters list --format='value(name,zone)')
+
+cat <<EOF
+
+# ============================================================================ #
+# Finished listing resources for GCP Project $(gcloud config list --format="value(core.project)")
+# ============================================================================ #
+
+EOF
