@@ -256,7 +256,7 @@ st(){
     #    vagrant status
     # shellcheck disable=SC2166
     if [ "$target_basename" = "github" ] ||
-       [ "$target" = "." -a "$(pwd)" = ~/github ]; then
+       [ "$target" = "." -a "$PWD" = ~/github ]; then
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
@@ -268,6 +268,19 @@ st(){
                 hr
                 echo
             fi
+            # shellcheck disable=SC2164
+            popd &>/dev/null
+        done
+    elif [ "$target" = "." ] && [ "$PWD" = ~/github/work ]; then
+        hr
+        for x in "$target"/*; do
+            [ -d "$x" ] || continue
+            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
+            echo "> Work: git status $x $*"
+            git status . "$@"
+            echo
+            hr
+            echo
             # shellcheck disable=SC2164
             popd &>/dev/null
         done
@@ -392,7 +405,19 @@ pull(){
             # shellcheck disable=SC2164
             popd &>/dev/null
         done
-        return
+    elif [ "$PWD" = ~/github/work ]; then
+        for x in *; do
+            [ -d "$x" ] || continue
+            pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
+            echo "> work $x: git pull --all --no-edit $*"
+            git pull --all --no-edit "$@"
+            echo
+            echo "> work $x: git submodule update --init --recursive"
+            git submodule update --init --recursive
+            echo
+            # shellcheck disable=SC2164
+            popd &>/dev/null
+        done
     else
         echo "> git pull --all --no-edit $*"
         git pull --all --no-edit "$@"
