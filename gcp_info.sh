@@ -35,6 +35,22 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists GCP deployed resources in the current or specified GCP Project
 
+Lists in this order:
+
+    - GCloud SDK version
+    - Auth, Configurations and Current Config Properties
+    - Project ID
+    - Services & APIs enabled
+    - GCE Virtual Machines
+    - App Engine instances
+    - Cloud Functions
+    - Networks, Addresses and Subnets
+    - Firewall Rules & Forwarding
+    - DNS managed zones
+    - Cloud Storage Buckets
+    - GKE Clusters
+    - Kubernetes pods deployed in all namespaces on each GKE cluster
+
 Will temporarily switch the core.project setting (sets back to previous on exit or any error)
 "
 
@@ -163,6 +179,30 @@ cat <<EOF
 
 
 # ============================================================================ #
+#                           A p p   I n s t a n c e s
+# ============================================================================ #
+
+EOF
+
+gcloud app instances list
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                         C l o u d   F u n c t i o n s
+# ============================================================================ #
+
+EOF
+
+gcloud functions list
+
+
+cat <<EOF
+
+
+# ============================================================================ #
 #                              N e t w o r k i n g
 # ============================================================================ #
 
@@ -176,7 +216,6 @@ gcloud compute addresses list
 echo
 echo "Subnets:"
 gcloud compute networks subnets list --sort-by=NETWORK
-
 
 
 cat <<EOF
@@ -194,6 +233,18 @@ gcloud compute firewall-rules list
 echo
 echo "Forwarding Rules"
 gcloud compute forwarding-rules list
+
+
+cat <<EOF
+
+
+# ============================================================================ #
+#                                     D N S
+# ============================================================================ #
+
+EOF
+
+gcloud dns managed-zones list
 
 
 cat <<EOF
