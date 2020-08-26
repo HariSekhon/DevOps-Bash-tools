@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo {repo} is found at {dir}
+#  args: echo project id is {id}, name is '{name}'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-25 16:39:17 +0100 (Tue, 25 Aug 2020)
@@ -64,5 +64,6 @@ while read -r project_id project_name; do
     cmd="${cmd//\{id\}/$project_id}"
     cmd="${cmd//\{name\}/$project_name}"
     eval "$cmd"
+    echo >&2
 #                                          or projectId
 done < <(gcloud projects list --format="value(project_id,name)")
