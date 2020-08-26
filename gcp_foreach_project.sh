@@ -65,5 +65,6 @@ while read -r project_id project_name; do
     cmd="${cmd//\{name\}/$project_name}"
     eval "$cmd"
     echo >&2
+    echo >&2
 #                                          or projectId
 done < <(gcloud projects list --format="value(project_id,name)")
