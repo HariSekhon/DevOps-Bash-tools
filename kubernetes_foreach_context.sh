@@ -38,7 +38,7 @@ Replaces {context} if present in the command template with the current kubectl c
 eg.
     ${0##*/} kubectl get pods
 
-In reality, this script is likely to hang if you've got Docker Desktop, Minikube, dead GKE clusters that are offline/removed and don't respond, so you'll need to be on top of your kubeconfig before calling this
+Since lab contexts like Docker Desktop, Minikube etc are often offline and likely to hang, they are skipped. Deleted GKE clusters you'll need to remove from your kubeconfig yourself before calling this
 "
 
 help_usage "$@"
@@ -50,6 +50,11 @@ cmd_template="$*"
 original_context="$(kubectl config current-context)"
 
 while read -r context; do
+    if [[ "$context" =~ docker|minikube|minishift ]]; then
+        echo "Skipping context '$context'..."
+        echo
+        continue
+    fi
     echo "# ============================================================================ #" >&2
     echo "# Kubernetest context = $context" >&2
     echo "# ============================================================================ #" >&2
@@ -58,4 +63,5 @@ while read -r context; do
     kubectl config use-context "$context"
     cmd="${cmd_template//\{context\}/$context}"
     eval "$cmd"
+    echo
 done < <(kubectl config get-contexts -o name)
