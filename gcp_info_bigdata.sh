@@ -29,7 +29,7 @@ Lists in this order:
     - Dataproc clusters       (all regions)
     - Dataflow jobs           (all regions)
     - PubSub topics
-    - Cloud IOT Registries    (all regions)
+    - Cloud IOT registries    (all regions)
 "
 
 # used by usage() in lib/utils.sh
