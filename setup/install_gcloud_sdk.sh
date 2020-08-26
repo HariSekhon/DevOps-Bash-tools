@@ -96,6 +96,7 @@ elif [[ "$(uname -s)" =~ Darwin|Linux ]]; then
     curl -sS https://sdk.cloud.google.com > "$install_script"
     chmod +x "$install_script"
     "$install_script" --disable-prompts --install-dir="$install_root_dir"
+    gcloud components install kubectl
 else
     echo "Unsupported OS '$(uname -s)'" >&2
     exit 1
