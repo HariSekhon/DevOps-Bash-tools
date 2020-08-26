@@ -54,13 +54,21 @@ Lists in this order:
     - DNS managed zones & verified domains
     - Cloud Storage Buckets
     - GKE Clusters
-    - Kubernetes deployments, services, jobs, cronjobs and pods deployed in all namespaces on each GKE cluster
+    - Kubernetes, for every GKE cluster:
+      - cluster-info
+      - master component statuses
+      - nodes
+      - namespaces
+      - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
+      - storage classes, persistent volumes, persistent volume claims
+      - service accounts, resource quotas, network policies, pod security policies
+      - pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
     - Dataflow jobs
     - PubSub topics
     - BigTable clusters and instances
     - Datastore Indexes
 
-Will temporarily switch the core.project setting (sets back to previous on exit or any error)
+Can optionally specify a project id to switch to and list info for (will switch back to original project on any exit except kill -9)
 "
 
 # used by usage() in lib/utils.sh
@@ -88,9 +96,10 @@ if [ $# -gt 0 ]; then
 fi
 
 
+# GCloud SDK tools versions
 cat <<EOF
 # ============================================================================ #
-#                                  G C l o u d
+#                              G C l o u d   S D K
 # ============================================================================ #
 
 EOF
@@ -106,6 +115,7 @@ echo
 #bq version
 
 
+# Organizations
 cat <<EOF
 
 # ============================================================================ #
@@ -117,6 +127,7 @@ EOF
 gcloud organizations list
 
 
+# Auth & Config
 cat <<EOF
 
 
@@ -135,15 +146,20 @@ echo
 
 gcloud config list
 
+
+# Project
 cat <<EOF
 
 
 # ============================================================================ #
-#                                 P r o j e c t
+#                                P r o j e c t s
 # ============================================================================ #
 
 EOF
 
+echo "Projects:"
+gcloud projects list
+echo
 echo "Checking project is configured..."
 # unreliable only errors when not initially set, but gives (unset) if you were to 'gcloud config unset project'
 #if ! gcloud config get-value project &>/dev/null; then
@@ -153,19 +169,17 @@ echo "Checking project is configured..."
 if ! gcloud info --format="get(config.project)" | grep -q .; then
     cat <<EOF
 
-ERROR: You need to set the Google Cloud project first
+ERROR: You need to configure your Google Cloud project first
 
-Select from one of the following projects IDs:
-
-EOF
-    gcloud projects list
-    cat <<EOF
+Select one from the project IDs above:
 
 gcloud config set project <id>
 EOF
     exit 1
 fi
 
+
+# Services & APIs Enabled
 cat <<EOF
 
 LISTING INFO FOR PROJECT:  $(gcloud info --format="get(config.project)")
@@ -177,23 +191,37 @@ LISTING INFO FOR PROJECT:  $(gcloud info --format="get(config.project)")
 
 EOF
 
+echo "getting list of all services & APIs (will use this to determine which services to list based on what is enabled)"
+# Don't change order of headings here as is_services_enabled() below depends on this
+services_list="$(gcloud services list --available --format "table[no-heading](state, config.name, config.title)")"
+echo
+
+is_service_enabled(){
+    # must be the api path, eg. file.googleapis.com
+    local service="$1"
+    service="${service//./\.}"  # escape dots for grep
+    grep -Ei "^ENABLED[[:space:]]+$service" <<< "$services_list"
+}
+
 echo "Services Enabled:"
 echo
 gcloud services list --enabled
 
 
-#cat <<EOF
+# Secrets
+cat <<EOF
 
 
 # ============================================================================ #
 #                                 S e c r e t s
 # ============================================================================ #
 
-#EOF
+EOF
 
-#gcloud secrets list
+gcloud secrets list
 
 
+# Service Accounts
 cat <<EOF
 
 
@@ -206,6 +234,7 @@ EOF
 gcloud iam service-accounts list
 
 
+# GCE Virtual Machines
 cat <<EOF
 
 
@@ -220,6 +249,7 @@ EOF
 gcloud compute instances list --sort-by=ZONE
 
 
+# Cloud SQL instances
 cat <<EOF
 
 
@@ -232,6 +262,7 @@ EOF
 gcloud sql instances list
 
 
+# App instances
 cat <<EOF
 
 
@@ -244,6 +275,7 @@ EOF
 gcloud app instances list
 
 
+# Cloud Functions
 cat <<EOF
 
 
@@ -256,6 +288,7 @@ EOF
 gcloud functions list
 
 
+# Networking
 cat <<EOF
 
 
@@ -305,6 +338,7 @@ echo "Routes:"
 gcloud compute routes list
 
 
+# Firewalls
 cat <<EOF
 
 
@@ -322,7 +356,7 @@ echo
 echo "Forwarding Rules:"
 gcloud compute forwarding-rules list
 
-
+# DNS
 cat <<EOF
 
 
@@ -336,6 +370,8 @@ gcloud dns managed-zones list
 echo
 gcloud domains list-user-verified
 
+
+# Cloud Storage Buckets
 cat <<EOF
 
 
@@ -348,7 +384,25 @@ EOF
 gsutil ls
 
 
+# Cloud Filestore
+cat <<EOF
+
+
+# ============================================================================ #
+#                         C l o u d   F i l e s t o r e
+# ============================================================================ #
+
+EOF
+
+if is_service_enabled file.googleapis.com; then
+    gcloud filestore instances list
+else
+    echo "Cloud Filestore API not enabled, skipping..."
+fi
+
+
 # TODO: prompts to set up - determine if set up before calling
+# Cloud Run
 #cat <<EOF
 
 
@@ -361,6 +415,7 @@ gsutil ls
 #gcloud run services list
 
 
+# GKE clusters
 cat <<EOF
 
 
@@ -373,41 +428,47 @@ EOF
 gcloud container clusters list
 
 
+# Kubernetes
 cat <<EOF
 
 
 # ============================================================================ #
-#                                G K E   P o d s
+#                         G K E   D e p l o y m e n t s
 # ============================================================================ #
 EOF
 
 while read -r cluster zone; do
     cat <<EOF
 
-# ======================================================= #
-# GKE Cluster: $cluster
-# ======================================================= #
+    # ======================================================= #
+    # GKE Cluster: $cluster
+    # ======================================================= #
 
 EOF
     gcloud container clusters get-credentials "$cluster" --zone "$zone"
     echo
-    kubectl get --all-namespaces deployments,services,jobs,cronjobs,pods
+    "$srcdir/kubernetes_info.sh"
 done < <(gcloud container clusters list --format='value(name,zone)')
 
 
-# TODO: detect if the API is enabled and only then run this
-#cat <<EOF
+# Dataproc clusters
+cat <<EOF
 
 
 # ============================================================================ #
 #                       D a t a p r o c   C l u s t e r s
 # ============================================================================ #
 
-#EOF
+EOF
 
-#gcloud dataproc clusters list --region all
+if is_service_enabled dataproc.googleapis.com; then
+    gcloud dataproc clusters list --region all
+else
+    echo "Dataproc service API not enabled, skipping..."
+fi
 
 
+# Dataflow jobs
 cat <<EOF
 
 
@@ -417,21 +478,28 @@ cat <<EOF
 
 EOF
 
+# this works even when set to DISABLED
+#if is_service_enabled dataflow.googleapis.com; then
 gcloud dataflow jobs list --region=all
 
 
-# TODO: figure out if enabled before calling
-#cat <<EOF
+# Cloud MemoryStore Redis
+cat <<EOF
 
 # ============================================================================ #
-#                 C l o u d   M e m o r y S t o r e   R e d i s
+#                 C l o u d   M e m o r y s t o r e   R e d i s
 # ============================================================================ #
 
-#EOF
+EOF
 
-#gcloud redis instances list --region all
+if is_service_enabled redis.googleapis.com; then
+    gcloud redis instances list --region all
+else
+    echo "Cloud Memorystore Redis API is not enabled, skipping..."
+fi
 
 
+# PubSub topics
 cat <<EOF
 
 
@@ -441,9 +509,14 @@ cat <<EOF
 
 EOF
 
-gcloud pubsub topics list
+if is_service_enabled pubsub.googleapis.com; then
+    gcloud pubsub topics list
+else
+    echo "Cloud PubSub API is not enabled, skipping..."
+fi
 
 
+# BigTable clusters and instances
 cat <<EOF
 
 
@@ -453,6 +526,8 @@ cat <<EOF
 
 EOF
 
+# these work even though bigtable.googleapis.com is DISABLED
+# if is_service_enabled bigtable.googleapis.com; then
 echo "Clusters:"
 gcloud bigtable clusters list
 echo
@@ -460,6 +535,7 @@ echo "Instances:"
 gcloud bigtable instances list
 
 
+# Datastore Indexes
 cat <<EOF
 
 
@@ -469,62 +545,67 @@ cat <<EOF
 
 EOF
 
-gcloud datastore indexes  list
+if is_service_enabled datastore.googleapis.com; then
+    gcloud datastore indexes list
+else
+    echo "Datastore API is not enabled, skipping..."
+fi
 
 
-# TODO: figure out if enabled before calling
-#cat <<EOF
-
-
-# ============================================================================ #
-#                            C l o u d   B u i l d s
-# ============================================================================ #
-
-#EOF
-
-#gcloud builds list
-
-
-# TODO: figure out if enabled before calling
-#cat <<EOF
-
-
-# ============================================================================ #
-#                      D e p l o y m e n t   M a n a g e r
-# ============================================================================ #
-
-#EOF
-
-#gcloud deployment-manager deployments list
-
-
-# TODO: figure out if enabled before calling
-#cat <<EOF
+# Source Repos
+cat <<EOF
 
 
 # ============================================================================ #
 #                            S o u r c e   R e p o s
 # ============================================================================ #
 
-#EOF
+EOF
 
-#gcloud source repos list
-
-
-# TODO: figure out if enabled before calling
-#cat <<EOF
-
-
-# ============================================================================ #
-#                         C l o u d   F i l e s t o r e
-# ============================================================================ #
-
-#EOF
-
-#gcloud filestore instances list
+if is_service_enabled sourcerepo.googleapis.com; then
+    gcloud source repos list
+else
+    echo "Source Repos API (sourcerepo.googleapis.com) is not enabled, skipping..."
+fi
 
 
+# Cloud Builds
 cat <<EOF
+
+
+# ============================================================================ #
+#                            C l o u d   B u i l d s
+# ============================================================================ #
+
+EOF
+
+if is_service_enabled cloudbuild.googleapis.com; then
+    gcloud builds list
+else
+    echo "Cloud Builds API (cloudbuild.googleapis.com) is not enabled, skipping..."
+fi
+
+
+# Deployment Manager
+cat <<EOF
+
+
+# ============================================================================ #
+#                      D e p l o y m e n t   M a n a g e r
+# ============================================================================ #
+
+EOF
+
+if is_service_enabled deploymentmanager.googleapis.com; then
+    gcloud deployment-manager deployments list
+else
+    echo "Deployment Manager API (deploymentmanager.googleapis.com) is not enabled, skipping..."
+fi
+
+
+# Finished
+cat <<EOF
+
 
 # ============================================================================ #
 # Finished listing resources for GCP Project $(gcloud config list --format="value(core.project)")
