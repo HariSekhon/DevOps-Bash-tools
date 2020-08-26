@@ -254,7 +254,7 @@ etc.
   - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
   - storage classes, persistent volumes, persistent volume claims
   - service accounts, resource quotas, network policies, pod security policies
-  - pods  (might be too voluminous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
+  - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and populating `Authorization: Bearer` header
 - `kubernetes_join_cmd.sh` - outputs `kubeadm join` command (calculates cert hash + generates new token) to join an existing Kubernetes cluster. Useful to simplify cli or scripting (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
