@@ -57,6 +57,21 @@ add_PATH(){
     export "${env_var?env_var not defined in add_PATH}"
 }
 
+# use 'which -a'
+#
+#binpaths(){
+#    if [ $# != 1 ]; then
+#        echo "usage: binpaths <binary>"
+#        return 1
+#    fi
+#    local bin="$1"
+#    for path in $(sed 's/:/ /' <<< "$PATH"); do
+#        if [ -x "$path/$bin" ]; then
+#            echo "$path/$bin"
+#        fi
+#    done
+#}
+
 add_PATH "/bin"
 add_PATH "/usr/bin"
 add_PATH "/sbin"
