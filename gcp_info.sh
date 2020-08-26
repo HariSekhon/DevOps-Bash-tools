@@ -157,7 +157,6 @@ cat <<EOF
 
 EOF
 
-echo "Projects:"
 gcloud projects list
 echo
 echo "Checking project is configured..."
@@ -303,6 +302,9 @@ gcloud compute networks list
 echo
 echo "Addresses:"
 gcloud compute addresses list
+echo
+echo "Target Pools:"
+gcloud compute target-pools list
 echo
 echo "HTTP Proxies:"
 gcloud compute target-http-proxies list
