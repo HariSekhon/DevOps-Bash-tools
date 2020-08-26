@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists Kubernetes cluster-info, master components status, cluster nodes and all major deployment objects in the current kubernetes cluster context
+Lists Kubernetes info and deployed resources within the current cluster / kube context
 
 Can optionally specify a different kubernetes context to switch to (will switch back to original context on any exit except kill -9)
 
