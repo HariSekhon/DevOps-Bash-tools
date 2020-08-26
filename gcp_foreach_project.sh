@@ -59,13 +59,9 @@ while read -r project_id project_name; do
     echo "# GCP Project ID = $project_id -- Name = $project_name" >&2
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
-    # shellproject disable=SC2016
     cmd="${cmd//\{project_id\}/$project_id}"
-    # shellproject disable=SC2016
     cmd="${cmd//\{project_name\}/$project_name}"
-    # shellproject disable=SC2016
     cmd="${cmd//\{id\}/$project_id}"
-    # shellproject disable=SC2016
     cmd="${cmd//\{name\}/$project_name}"
     eval "$cmd"
 #                                          or projectId
