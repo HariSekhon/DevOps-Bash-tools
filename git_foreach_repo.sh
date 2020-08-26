@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2230
 #  vim:ts=4:sts=4:sw=4:et
 #  args: echo {repo} is found at {dir}
 #
