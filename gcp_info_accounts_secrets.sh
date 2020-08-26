@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists GCP Service Accounts & Secrets deployed in the current GCP Project
+Lists GCP IAM Service Accounts & Secrets Manager secrets deployed in the current GCP Project
 
 Lists in this order:
 
