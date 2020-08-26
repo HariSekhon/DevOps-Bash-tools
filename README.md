@@ -246,7 +246,15 @@ etc.
 - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM pre-emption latch and boolean check scripts
 - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
 - `curl_auth.sh` - wraps curl to securely load your username & password or API token from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` which might otherwise expose your credentials in the process list or OS audit log files. Used by other API querying scripts
-- `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory of deployed resources within the current kube context - cluster-info, master component statuses, nodes, namespaces, deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers, storage classes, persistent volumes, persistent volume claims, service accounts, resource quotas, network policies, pod security policies, and full pod list across all namespaces (you can comment out this last one if using high replica counts and confident nobody has deployed any pod outside of a deployment)
+- `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory of deployed resources within the current kube context:
+  - cluster-info
+  - master component statuses
+  - nodes
+  - namespaces
+  - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
+  - storage classes, persistent volumes, persistent volume claims
+  - service accounts, resource quotas, network policies, pod security policies
+  - pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and populating `Authorization: Bearer` header
 - `kubernetes_join_cmd.sh` - outputs `kubeadm join` command (calculates cert hash + generates new token) to join an existing Kubernetes cluster. Useful to simplify cli or scripting (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
