@@ -230,16 +230,16 @@ etc.
 - [sql/](https://github.com/HariSekhon/SQL-scripts)`*.sql` - useful SQL scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
 - `aws_*.sh` - various [AWS](https://aws.amazon.com/) scripts for EC2 metadata, Spot Termination, SSM Parameter Store secret put from prompt, IAM Credential Reports on IAM users without MFA, old access keys and passwords, old user accounts that haven't logged in or used an access key recently, show password policy / set hardened password policy, show unattached IAM policies, show account summary to check various details including root account MFA enabled and no access keys, KMS keys rotation status, CloudTrail & Config status etc.
 - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which are enabled):
-  - `gcp_info_auth_config.sh` - Auth Configurations, Organizations & Current Config
-  - `gcp_info_projects.sh` - Projects names and IDs
-  - `gcp_info_services.sh` - Services & APIs enabled
-    - `gcp_service_apis.sh` - lists all available [GCP](https://cloud.google.com/) Services, APIs and their states (ENABLED/DISABLED), and provides `is_service_enabled()` function use throughout the adjacent scripts to avoid errors and only show relevant services
-  - `gcp_info_accounts_secrets.sh` - IAM Service Accounts, Secrets Manager secrets
   - `gcp_info_compute.sh` - [GCE](https://cloud.google.com/compute/) Virtual Machine instances, [App Engine](https://cloud.google.com/appengine) instances, [Cloud Functions](https://cloud.google.com/functions), [GKE](https://cloud.google.com/kubernetes-engine) clusters, all [Kubernetes](https://kubernetes.io/) objects across all GKE clusters (see `kubernetes_info.sh` below for more details)
   - `gcp_info_storage.sh` - [Cloud SQL](https://cloud.google.com/sql) instances, [Cloud Storage](https://cloud.google.com/storage) Buckets, [Cloud Filestore](https://cloud.google.com/filestore), [Cloud Memorystore Redis](https://cloud.google.com/memorystore), [BigTable](https://cloud.google.com/bigtable) clusters and instances, [Datastore](https://cloud.google.com/datastore) indexes
   - `gcp_info_networking.sh` - VPC Networks, Addresses, Target Pools, HTTP(S) Proxies, TCP/SSL Proxies, URL Maps, Subnets, Routers, VPN Gateways, VPN Tunnels, Reserverations, Routes VPNs, Firewall rules, Forwarding rules, [Cloud DNS](https://cloud.google.com/dns) managed zones and verified domains
   - `gcp_info_bigdata.sh` - [Dataproc](https://cloud.google.com/dataproc) clusters in all regions, [Dataflow](https://cloud.google.com/dataflow) jobs in all regions, [PubSub](https://cloud.google.com/pubsub) messaging topics, [Cloud IOT](https://cloud.google.com/iot-core) registries in all regions
   - `gcp_info_tools.sh` - [Cloud Source Repositories](https://cloud.google.com/source-repositories), [Cloud Builds](https://cloud.google.com/cloud-build), [Container Registry](https://cloud.google.com/container-registry) images, [Deployment Manager](https://cloud.google.com/deployment-manager) deployments
+  - `gcp_info_auth_config.sh` - Auth Configurations, Organizations & Current Config
+  - `gcp_info_projects.sh` - Projects names and IDs
+  - `gcp_info_services.sh` - Services & APIs enabled
+    - `gcp_service_apis.sh` - lists all available [GCP](https://cloud.google.com/) Services, APIs and their states (ENABLED/DISABLED), and provides `is_service_enabled()` function use throughout the adjacent scripts to avoid errors and only show relevant services
+  - `gcp_info_accounts_secrets.sh` - IAM Service Accounts, Secrets Manager secrets
 - `gcp_info_all_projects.sh` - same as above but for all detected projects
 - `gcp_foreach_project.sh` - execute any templated command across all GCP projects - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
 - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
