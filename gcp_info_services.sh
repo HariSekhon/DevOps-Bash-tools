@@ -41,6 +41,7 @@ EOF
 
 if ! type is_service_enabled &>/dev/null; then
     echo "getting list of all services & APIs (will use this to determine which services to list based on what is enabled)" >&2
+    # shellcheck disable=SC1090
     . "$srcdir/gcp_service_apis.sh" >/dev/null
     echo >&2
     echo >&2
