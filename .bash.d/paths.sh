@@ -65,7 +65,8 @@ add_PATH(){
 #        return 1
 #    fi
 #    local bin="$1"
-#    for path in $(sed 's/:/ /' <<< "$PATH"); do
+#    tr ':' '\n' <<< "$PATH" |
+#    while read -r path; do
 #        if [ -x "$path/$bin" ]; then
 #            echo "$path/$bin"
 #        fi
