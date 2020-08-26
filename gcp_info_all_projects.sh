@@ -31,4 +31,4 @@ Combines gcp_foreach_project.sh and gcp_info.sh
 # shellcheck disable=SC2034
 usage_args=""
 
-gcp_foreach_project.sh "'$srcdir/gcp_info.sh' '{id}'; echo; echo; echo"
+gcp_foreach_project.sh "'$srcdir/gcp_info.sh' '{id}'"
