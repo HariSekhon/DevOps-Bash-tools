@@ -66,10 +66,11 @@ etcd
 ffmpeg
 fish
 fortune
+fswatch
 fzf
 gem-completion
 git
-#gnu-sed # in brew-packages.txt
+#gnu-sed  # in brew-packages.txt
 gnupg2
 gnuplot
 gradle
@@ -83,11 +84,11 @@ imagemagick
 ipcalc
 iperf
 ipython
-#jq # in brew-packages.txt
+#jq  # in brew-packages.txt
 jsonlint
 jython
 kompose
-kubectl
+#kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
 kubernetes-helm
 launchctl-completion
@@ -108,7 +109,7 @@ mysql
 octave
 p7zip
 packer-completion
-#parallel # in brew-packages.txt
+#parallel  # in brew-packages.txt
 parquet-tools
 perltidy
 pgcli
@@ -119,6 +120,7 @@ pipx
 postgresql
 prestosql
 pstree
+pup  # parse html from command line
 pwgen
 #pygments  # in pip-packages-desktop.txt
 #python  # in brew-packages.txt
@@ -145,8 +147,8 @@ urlview  # used by tmux plugin tmux-urlview
 unix2dos
 vagrant-completion
 watch
-#wget # in brew-packages.txt
-#whois # in brew-packages.txt
+#wget  # in brew-packages.txt
+#whois  # in brew-packages.txt
 xz
 yamllint
 zsh
