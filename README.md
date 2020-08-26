@@ -246,7 +246,7 @@ etc.
 - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM pre-emption latch and boolean check scripts
 - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
 - `curl_auth.sh` - wraps curl to securely load your username & password or API token from environment variables or interactive prompt through a ram file descriptor to avoid using the `-u`/`--user` which might otherwise expose your credentials in the process list or OS audit log files. Used by other API querying scripts
-- `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory of deployed resources within the current kube context:
+- `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory of deployed resources ithin the current cluster / kube context:
   - cluster-info
   - master component statuses
   - nodes
