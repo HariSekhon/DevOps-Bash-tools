@@ -23,14 +23,27 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists all Kubernetes cluster-info, nodes and all major deployment objects in the current kubernetes cluster context
+Lists Kubernetes cluster-info, master components status, cluster nodes and all major deployment objects in the current kubernetes cluster context
 
-Can optionally specify a different kubernetes context to switch to (will switch back to original at end of script)
+Can optionally specify a different kubernetes context to switch to (will switch back to original context on any exit except kill -9)
+
+Lists:
+
+- cluster-info
+- master component statuses
+- nodes
+- namespaces
+- deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
+- storage classes, persistent volumes, persistent volume claims
+- service accounts, resource quotas, network policies, pod security policies
+- pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="[<kubernetes_context>]"
+
+help_usage "$@"
 
 current_context="$(kubectl config current-context)"
 
@@ -38,8 +51,9 @@ if [ $# -gt 0 ]; then
     context="$1"
     # want interpolation now
     # shellcheck disable=SC2064
-    trap "kubectl config use-context '$current_context'" EXIT
-    echo "switching to kubernetes context '$context'"
+    trap "echo; kubectl config use-context '$current_context'" EXIT
+    # kubectl declares this just fine
+    #echo "switching to kubernetes context '$context'"
     kubectl config use-context "$context"
     echo
 fi
