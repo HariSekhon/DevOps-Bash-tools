@@ -27,6 +27,8 @@ Run a command against each GCP project in the current account
 
 This is powerful so use carefully!
 
+Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
+
 All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
