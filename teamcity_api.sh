@@ -109,6 +109,8 @@ ${0##*/} /projects
 Get details on a specific project:
 
 ${0##*/} /projects/<id>
+or
+${0##*/} /projects/id:<id>
 
 
 Get list of revision control repositories roots:
