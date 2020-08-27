@@ -45,6 +45,8 @@ else
         fi
         }
     else
-        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+        # now deprecated and replaced with the shell version belownow
+        #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
+        bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 fi
