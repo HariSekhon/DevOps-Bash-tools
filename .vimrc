@@ -273,8 +273,8 @@ if has("autocmd")
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
-    " check_makefile.sh is in this repo which should be added to $PATH
-    au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefile.sh "%" \| more -R<CR>
+    " check_makefiles.sh is in this repo which should be added to $PATH
+    au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefiles.sh "%" \| more -R<CR>
     au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| more -R<CR> | nmap ;r :!gradle -b "%" clean build<CR>
     au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd "%:p:h" && echo q \| sbt reload "%" \| more -R<CR>
     au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| more -R<CR>
@@ -473,6 +473,8 @@ function! WriteHelp()
     :w
     if &filetype == 'go'
         :! go run "%" --help 2>&1 | less
+    elseif expand('%:t') == 'Makefile'
+        :call Make('help')
     else
         :! "./%" --help 2>&1 | less
     endif
@@ -513,9 +515,14 @@ function! WriteRunDebug()
     :let $DEBUG=""
 endfunction
 
-function! Make()
+" variable number of args like *args in python
+function! Make(...)
     " '%:p:h' is dirname
-    :! bash -c 'cd "%:p:h" && make'
+    ":! cd "%:p:h" && make join(map(a:000, 'shellescape(v:val)'), ' ')
+    " this works
+    ":exe '! cd "%:p:h" && make ' . join(a:000, '')
+    " this is better as it pages
+    :echo system('cd ' . expand('%:p:h') . ' && make ' . join(a:000, ''))
 endfunction
 
 function! TerraformPlan()
