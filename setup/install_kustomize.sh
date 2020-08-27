@@ -20,6 +20,7 @@ cd /tmp
 
 # https://kubernetes-sigs.github.io/kustomize/installation/binaries/
 
+date "+%F %T  downloading kustomize"
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
 mkdir -pv ~/bin
