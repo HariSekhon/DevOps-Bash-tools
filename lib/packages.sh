@@ -42,7 +42,11 @@ _process_package_args(){
         tr ' ' '\n' |
         sort -u
     fi |
-    sed 's/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d'
+    sed 's/^[[:space:]]*//;
+         s/[[:space:]]*$//;
+         /^[[:space:]]*$/d;
+         /^[^[:alnum:]]/d;
+         /[^[:alnum:]]$/d'
 }
 
 process_package_args(){
