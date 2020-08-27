@@ -60,6 +60,11 @@ Examples:
 (don't forget to add '\$help' to the end to find out what attributes endpoints support):
 Remember you can check logs/teamcity-rest.log server log for these API requests
 
+See also:
+
+    teamcity_builds.sh
+    teamcity_agents.sh
+
 
 Explore API:
 
