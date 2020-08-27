@@ -16,8 +16,15 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-cd ~/bin
+cd /tmp
 
 # https://kubernetes-sigs.github.io/kustomize/installation/binaries/
 
 curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+
+mkdir -pv ~/bin
+unalias mv &>/dev/null || :
+mv -vf kustomize ~/bin/
+
+# called as part of download script
+#~/bin/kustomize version -
