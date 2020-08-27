@@ -42,9 +42,7 @@ _process_package_args(){
         tr ' ' '\n' |
         sort -u
     fi |
-    grep -v -e '^[[:space:]]*$' \
-            -e '^[^[:alnum:]]' \
-            -e '[^[:alnum:]]$'
+    sed 's/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d'
 }
 
 process_package_args(){
