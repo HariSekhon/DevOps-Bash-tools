@@ -35,6 +35,10 @@ brew update
 
 echo
 
+timestamp "Listing outdated brew packages"
+
+echo
+
 brew outdated
 
 echo
@@ -48,4 +52,14 @@ fi
 
 echo
 
+timestamp "Upgrading brew packages"
+
 brew upgrade
+
+echo
+
+timestamp "Cleaning up (removing cached downloads)"
+
+echo
+
+brew cleanup -s
