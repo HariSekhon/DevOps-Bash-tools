@@ -256,7 +256,7 @@ etc.
   - service accounts, resource quotas, network policies, pod security policies
   - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
 - `kubernetes_foreach_context.sh` - runs a command across all kubectl contexts (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
-- `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and populating `Authorization: Bearer` header
+- `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
 - `kubernetes_join_cmd.sh` - outputs `kubeadm join` command (calculates cert hash + generates new token) to join an existing Kubernetes cluster. Useful to simplify cli or scripting (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
