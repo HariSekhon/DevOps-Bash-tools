@@ -522,11 +522,15 @@ make python
 
     make help                   show this message
     make build                  installs all dependencies - OS packages and any language libraries via native tools eg. pip, cpanm, gem, go etc that are not available via OS packages
+    make build-retry            retries 'make build' x 3 until success to try to mitigate temporary upstream repo failures triggering false alerts in CI systems
+    make ci                     prints env, then runs 'build-retry' for more resilient CI builds with debugging
+    make printenv               prints environment variables, CPU cores, OS release, $PWD, Git branch, hashref etc. Useful for CI debugging
     make system-packages        installs OS packages only (detects OS via whichever package manager is available)
     make test                   run tests
     make clean                  removes compiled / generated files, downloaded tarballs, temporary files etc.
 
     make submodules             initialize and update submodules to the right release (done automatically by build / system-packages)
+    make init                   same as above, often useful to do in CI systems to get access to additional submodule provided targets such as 'make ci'
 
     make cpan                   install any modules listed in any cpan-requirements.txt files if not already installed
 
@@ -538,10 +542,10 @@ make python
     make github                 open browser at github project
     make readme                 open browser at github's README
     make github-url             print github url and copy to clipboard
+    make status                 open browser at Github CI Builds overview Status page for all projects
 
     make ls                     print list of code files in project
     make wc                     show counts of files and lines
-
 
   Repo specific options:
 
@@ -563,17 +567,19 @@ make python
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
 
+    make kubernetes             installs kubectl and kustomize to ~/bin/
     make vim                    installs Vundle and plugins
-    make tmux                   installs TMUX plugin for kubernetes context
+    make tmux                   installs TMUX TPM and plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon GitHub repos
     make status                 open the Github Status page of all my repos build statuses across all CI platforms
 
     make aws                    installs AWS CLI tools
     make azure                  installs Azure CLI
-    make azure-shell            sets up Azure Cloud Shell (limited, doesn't install OS packages since there is no sudo)
-    make gcp                    installs GCloud SDK
+    make gcp                    installs Google Cloud SDK
+
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
                                 (maintains itself across future Cloud Shells via .customize_environment hook)
+    make azure-shell            sets up Azure Cloud Shell (limited compared to gcp-shell, doesn't install OS packages since there is no sudo)
 
 Now exiting usage help with status code 3 to explicitly prevent silent build failures from stray 'help' arguments
 make: *** [help] Error 3
