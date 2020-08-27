@@ -39,6 +39,11 @@ _process_package_args(){
     if [ -n "${HOMEBREW_PACKAGES_TAP:-}" ]; then
         cat
     else
+        # filter out commands in scripts which have spaces between tokens like 'cat <<END' or 'brew install'
+        sed '/[^[:space:]][[:space:]][^[:space:]]/d' |
+        # get rid of EOF / END type heredocs endings, using perl because Mac's sed has weak regex
+        #     /^[[:upper:]]{2,3}$/d'
+        perl -p -e 's/^[[:upper:]]{3}$//' |
         tr ' ' '\n' |
         sort -u
     fi |
