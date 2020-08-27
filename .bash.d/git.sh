@@ -395,10 +395,11 @@ pull(){
             [ "${x: -1}" = 2 ] && continue
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             if git remote -v | grep -qi "${GITHUB_USER:-${GIT_USER:-${USER:-}}}"; then
+                hr
                 echo "> GitHub $x: git pull --all --no-edit $*"
                 git pull --all --no-edit "$@"
                 echo
-                echo "> GitHub $x: git submodule update --init --recursive"
+                #echo "> GitHub $x: git submodule update --init --recursive"
                 git submodule update --init --recursive
                 echo
             fi
@@ -408,11 +409,12 @@ pull(){
     elif [ "$PWD" = ~/github/work ]; then
         for x in *; do
             [ -d "$x" ] || continue
+            hr
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             echo "> work $x: git pull --all --no-edit $*"
             git pull --all --no-edit "$@"
             echo
-            echo "> work $x: git submodule update --init --recursive"
+            #echo "> work $x: git submodule update --init --recursive"
             git submodule update --init --recursive
             echo
             # shellcheck disable=SC2164
