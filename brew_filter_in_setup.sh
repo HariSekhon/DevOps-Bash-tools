@@ -54,5 +54,5 @@ else
     # do not quote cask, blank quotes break shells and there will never be any token splitting anyway
     # shellcheck disable=SC2046
     tr ' ' '\n' |
-    grep -Fx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:digit:]]*$/d' "$srcdir/setup/"brew-packages*.txt)
+    grep -Fx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt)
 fi
