@@ -46,6 +46,7 @@ define MAKEFILE_USAGE
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
 
+    make kubernetes             installs kubectl and kustomize to ~/bin/
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX TPM and plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon GitHub repos
@@ -53,10 +54,11 @@ define MAKEFILE_USAGE
 
     make aws                    installs AWS CLI tools
     make azure                  installs Azure CLI
-    make azure-shell			sets up Azure Cloud Shell (limited, doesn't install OS packages since there is no sudo)
-    make gcp                    installs GCloud SDK
+    make gcp                    installs Google Cloud SDK
+
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
                                 (maintains itself across future Cloud Shells via .customize_environment hook)
+    make azure-shell            sets up Azure Cloud Shell (limited compared to gcp-shell, doesn't install OS packages since there is no sudo)
 endef
 
 # not including azure here because it requires interactive prompt and hangs automatic testing of make docker-*
