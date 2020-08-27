@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the average response times for all Pingdom checks via the Pingdom API
+Lists the average response times for all Pingdom checks over the last week via the Pingdom API
 
 Output format - quoted CSV:
 
@@ -42,11 +42,19 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
+if is_mac; then
+    date(){
+        gdate "$@"
+    }
+fi
+
+epoch_1_week_ago="$(date "+%s" -d "1 week ago")"
+
 "$srcdir/pingdom_api.sh" /checks "$@" |
 jq -r ".checks[] | [.id, .type, .hostname, .status, .name] | @tsv" |
 while read -r id type hostname status name; do
     printf '"%s","%s","%s","%s","%s","%s"\n' "$id" "$name" "$type" "$hostname" "$status" \
-    "$("$srcdir/pingdom_api.sh" "/summary.average/$id" "$@" | jq '.summary.responsetime.avgresponse')"
+    "$("$srcdir/pingdom_api.sh" "/summary.average/$id?from=$epoch_1_week_ago" "$@" | jq '.summary.responsetime.avgresponse')"
 done |
 if [ -n "${TSV:-}" ]; then
     column -t -s , |
