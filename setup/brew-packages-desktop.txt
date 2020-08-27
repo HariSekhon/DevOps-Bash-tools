@@ -109,10 +109,12 @@ mysql
 octave
 p7zip
 packer-completion
+pandoc
 #parallel  # in brew-packages.txt
 parquet-tools
 perltidy
 pgcli
+pgformatter
 pinentry
 pinentry-mac
 pip-completion
@@ -128,6 +130,7 @@ r
 rbenv
 rdesktop
 #readline  # in brew-packages.txt
+rlwrap
 ruby  # Mac ruby is too old to install Travis CI
 ruby-completion
 screen  # get newer version for -Q switch, will use different sockets directory
@@ -141,11 +144,14 @@ ssllabs-scan
 sslscan
 ssh-copy-id
 thrift
+tidy-html5
 tree
 tmux
 urlview  # used by tmux plugin tmux-urlview
 unix2dos
+utimer
 vagrant-completion
+vim
 watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
