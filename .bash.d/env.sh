@@ -105,6 +105,7 @@ var(){
 }
 vars(){
     "$EDITOR" "$varfile"
+    chmod -v 0400 "$varfile"
     # shellcheck disable=SC1090
     . "$varfile"
 }
