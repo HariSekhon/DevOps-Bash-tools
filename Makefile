@@ -218,8 +218,33 @@ gcp-shell:
 	@if [ -z "${DEVSHELL_PROJECT_ID:-}" ]; then echo "Not running inside Google Cloud Shell"; exit 1; fi
 	@$(MAKE) system-packages link
 
+.PHONY: kubernetes
+kubernetes: kubectl kustomize
+	@:
+
+.PHONY: k8s
+k8s: kubernetes
+	@:
+
+.PHONY: kubectl
+kubectl: ~/bin/kubectl
+	@:
+
+~/bin/kubectl:
+	setup/install_kubectl.sh
+
+.PHONY: kustomize
+kustomize: ~/bin/kustomize
+	@:
+
+~/bin/kustomize:
+	setup/install_kustomize.sh
+
 .PHONY: vim
-vim:
+vim: ~/.vim/bundle/Vundle.vim
+	setup/install_vundle.sh
+
+~/.vim/bundle/Vundle.vim:
 	setup/install_vundle.sh
 
 .PHONY: tmux
@@ -276,3 +301,7 @@ pipreqs-mapping:
 .PHONY: pip-mapping
 pip-mapping: pipreqs-mapping
 	@:
+
+.PHONY: status-page
+status-page:
+	./generate_status_page.sh; . .bash.d/git.sh; gitu STATUS.md
