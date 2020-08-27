@@ -62,4 +62,5 @@ timestamp "Cleaning up (removing cached downloads)"
 
 echo
 
-brew cleanup -s
+# lots of 'Warning: Skipping <name>: most recent version <x.y.z> not installed'
+brew cleanup -s 2>/dev/null || :
