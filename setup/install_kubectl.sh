@@ -16,7 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-cd ~/bin
+cd /tmp
 
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
 
@@ -29,3 +29,9 @@ cd ~/bin
 curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/$(uname -s | tr [:upper:] [:lower:])/amd64/kubectl"
 
 chmod +x kubectl
+
+mkdir -pv ~/bin
+unalias mv &>/dev/null || :
+mv -vf kubectl ~/bin/
+
+~/bin/kubectl version --client
