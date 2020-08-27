@@ -54,5 +54,7 @@ else
     # do not quote cask, blank quotes break shells and there will never be any token splitting anyway
     # shellcheck disable=SC2046
     tr ' ' '\n' |
-    grep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt)
+    # Mac's grep is buggy, doesn't matches utimer unless sort -r to try it before '^r$' - but then gives false positives on other packages
+    #grep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt | sort)
+    command ggrep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt)
 fi
