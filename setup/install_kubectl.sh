@@ -26,8 +26,11 @@ cd /tmp
 #    curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 #fi
 
-curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/$(uname -s | tr [:upper:] [:lower:])/amd64/kubectl"
+date "+%F %T  downloading kubectl"
+curl -sSLO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/$(uname -s | tr [:upper:] [:lower:])/amd64/kubectl"
 
+date "+%F %T  downloaded kubectl"
+date "+%F %T  chmod'ing and moving to ~/bin"
 chmod +x kubectl
 
 mkdir -pv ~/bin
