@@ -242,7 +242,7 @@ kustomize: ~/bin/kustomize
 
 .PHONY: vim
 vim: ~/.vim/bundle/Vundle.vim
-	setup/install_vundle.sh
+	@:
 
 ~/.vim/bundle/Vundle.vim:
 	setup/install_vundle.sh
