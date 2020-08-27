@@ -333,8 +333,8 @@ etc.
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
 - `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/), launches in docker, configures pipeline from `$PWD/.concourse.yml`, triggers build, tails results in terminal, prints recent build statuses at end. Call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/), launches in docker, (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`), detects and enables agent(s) to start building. Call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
-- `teamcity_*.sh` - [Teamcity](https://www.jetbrains.com/teamcity/) API scripts
-  - `teamcity_api.sh` - queries Teamcity API, auto-handling authentication and other quirks of the API
+- `teamcity_*.sh` - [Teamcity CI](https://www.jetbrains.com/teamcity/) API scripts:
+  - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 Teamcity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
 - `perl*.sh` - various Perl utilities eg:
