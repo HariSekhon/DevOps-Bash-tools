@@ -45,7 +45,7 @@ packages=""
 
 process_args(){
     for arg; do
-        if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
+        if [ -f "$arg" ]; then  # && file "$arg" | grep -q ASCII  # file not available by default and may not be installed
             echo "adding packages from file:  $arg"
             packages="$packages $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
             echo
