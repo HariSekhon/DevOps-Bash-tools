@@ -519,10 +519,10 @@ endfunction
 function! Make(...)
     " '%:p:h' is dirname
     ":! cd "%:p:h" && make join(map(a:000, 'shellescape(v:val)'), ' ')
-    " this works
-    ":exe '! cd "%:p:h" && make ' . join(a:000, '')
-    " this is better as it pages
-    :echo system('cd ' . expand('%:p:h') . ' && make ' . join(a:000, ''))
+    " this works and nicely pages but only outputs at the end, which is ok for help
+    " but bad for actual make builds which are long and look like they hang
+    ":echo system('cd ' . expand('%:p:h') . ' && make ' . join(a:000, ''))
+    :exe '! cd "%:p:h" && make ' . join(a:000, '') . ' | more'
 endfunction
 
 function! TerraformPlan()
