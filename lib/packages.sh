@@ -52,7 +52,7 @@ process_package_args(){
         _process_package_args "$@"
     else
         # shellcheck disable=SC2046
-        _process_package_args $(cat)
+        _process_package_args "$(cat)"
     fi
 }
 
