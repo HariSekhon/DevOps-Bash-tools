@@ -86,11 +86,11 @@ echo
 echo "Subnets:"
 gcloud compute networks subnets list --sort-by=NETWORK
 echo
-echo "Routes:"
-gcloud compute routes list
-echo
 echo "Routers:"
 gcloud compute routers list
+echo
+echo "Routes:"
+gcloud compute routes list
 echo
 echo "VPN Gateways:"
 gcloud compute vpn-gateways list
