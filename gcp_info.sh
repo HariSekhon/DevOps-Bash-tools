@@ -81,8 +81,8 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
       - Addresses
       - Proxies
       - Subnets
-      - Routes
       - Routers
+      - Routes
       - VPN Gateways
       - VPN Tunnels
       - Reservations
