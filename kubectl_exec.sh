@@ -24,36 +24,39 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Kubectl exec's to the first pod in the current or given namespace
 
+Shows the full auto-generated 'kubectl exec' command for clarity
+
 Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
 
 This is useful to quickly jump in to any pod in a namespace/deployment to debug a web farm etc.
 
-Optional args include namespace for the first arg unless it starts with the dash in which case it's assumed to be a regular filter switch, and any remaining args are passed straight to 'kubectl get pods' to be used as filters, eg. -l app=nginx
+First arg is the optional pod container unless it starts with a dash (if no container is specified we'll pick the first one and show you in the kubectl output)
+Any other args in are passed straight to 'kubectl get pods' to be used as filters, eg. -n prod -l app=nginx
 
 Example:
 
-${0##*/} prod-namespace -l app=nginx
+${0##*/} -n prod -l app=nginx
 
-${0##*/} prod-namespace sidecar-container -l app=nginx
+${0##*/} sidecar-container -n prod -l app=nginx
+
+
+See also:
+
+    kubectl_exec_grep.sh
+
+for a different approaching using just a partial pod name and optional partial container name, auto-determines the namespace, it's simpler and less typing in most cases
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<namespace>] [<container>] [<pod_filters>]"
+usage_args="[<container_name>] [<pod_filters>]"
 
 help_usage "$@"
 
-#pod_min_args 1 "$@"
+min_args 1 "$@"
 
-namespace=""
 container=""
 
-if [ $# -gt 0 ]; then
-    if ! [[ "$1" =~ ^- ]]; then
-        namespace="$1"
-        shift
-    fi
-fi
 if [ $# -gt 0 ]; then
     if ! [[ "$1" =~ ^- ]]; then
         container="$1"
@@ -61,27 +64,20 @@ if [ $# -gt 0 ]; then
     fi
 fi
 
-namespace_opt=""
-if [ -n "$namespace" ]; then
-    namespace_opt="-n $namespace"
+pod="$(kubectl get pods "$@" -o 'jsonpath={.items[0].metadata.name}' 2>/dev/null || :)"
+
+if [ -z "$pod" ]; then
+    die "No matching pods found, perhaps you forgot to pass the --namespace? (tip: specify -A / --all-namespaces if lazy, it'll filter by pod name)"
 fi
 
-container_opt=""
-if [ -n "$container" ]; then
-    container_opt="-c $container"
+# auto-determine namespace because specifying it is annoying
+namespace="$(kubectl get pods --all-namespaces | grep -E "^[^[:space:]]+[[:space:]]+[^[:space:]]*${pod}" | awk '{print $1; exit}' || :)"
+
+if [ -z "$container" ]; then
+    # auto-determine first container to show explicitly what we're connecting to
+    container="$(kubectl get pods -n "$namespace" "$pod" -o 'jsonpath={.spec.containers[*].name}' | grep -m 1 "." | awk '{print $1}' || :)"
 fi
 
-# want splitting and cannot quote because would pass breaking whitespace args
-# shellcheck disable=SC2086,SC2090
-pod="$(kubectl get pods $namespace_opt "$@" -o 'jsonpath={.items[0].metadata.name}')"
-
-if [ -n "$container_opt" ]; then
-    timestamp "Exec'ing to pod '$pod' container '$container'"
-else
-    timestamp "Exec'ing to pod '$pod'"
-fi
-
-# want splitting and cannot quote because would pass breaking whitespace args
-# shellcheck disable=SC2086,SC2090
-# # want splitting and cannot quote because would pass breaking whitespace args
-kubectl exec -it $namespace_opt "$pod" $container_opt /bin/sh
+cmd="kubectl exec -ti --namespace \"$namespace\" \"$pod\" --container \"$container\" /bin/sh"
+echo "$cmd"
+eval "$cmd"
