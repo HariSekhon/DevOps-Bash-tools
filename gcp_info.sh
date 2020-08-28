@@ -68,7 +68,7 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
         - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
         - storage classes, persistent volumes, persistent volume claims
         - service accounts, resource quotas, network policies, pod security policies
-        - pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
+        - pods  # might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
     - Storage:
       - Cloud SQL instances
       - Cloud Storage Buckets
