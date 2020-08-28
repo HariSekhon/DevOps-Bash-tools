@@ -31,8 +31,8 @@ Lists in this order:
       - Addresses
       - Proxies
       - Subnets
-      - Routes
       - Routers
+      - Routes
       - VPN Gateways
       - VPN Tunnels
       - Reservations
