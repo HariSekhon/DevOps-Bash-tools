@@ -22,23 +22,33 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Kubectl exec's to the first pod name matching a grep extended regex
+Kubectl exec's to the first pod matching the given regex name and optional pod filters
+
+Shows the full auto-generated 'kubectl exec' command for clarity
 
 Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
 
 This is useful to quickly jump in to any pod in a namespace/deployment to debug a web farm etc.
 
-First arg is a grep extended regular expression
-Optional second arg if not a switch starting with '-' is assumed to be the container regex to exec in to
-Subsequent args are passed straight to 'kubectl get pods' to set namespace or label filters
+First arg is the pod's name as an extended regex (ERE)
+Optional second arg is the container's name as an extended regex (ERE)
+Subsequent args from the first dash are passed straight to 'kubectl get pods' to set namespace, label filters etc.
 
-Example:
+Examples:
 
 ${0##*/} nginx
 
 ${0##*/} nginx -n prod
 
 ${0##*/} nginx -n prod -l app=nginx
+
+${0##*/} nginx sidecar-container -n prod -l app=nginx
+
+See also:
+
+    kubectl_exec.sh
+
+for a version with one less arg that works strictly on pod filters
 "
 
 # used by usage() in lib/utils.sh
@@ -61,10 +71,10 @@ if [ $# -gt 0 ]; then
     fi
 fi
 
-pod="$(kubectl get pods --all-namespaces -o 'jsonpath={.items[*].metadata.name}' | tr ' ' '\n' | grep -E -m 1 "$pod_regex" || :)"
+pod="$(kubectl get pods "$@" -o 'jsonpath={.items[*].metadata.name}' | tr ' ' '\n' | grep -E -m 1 "$pod_regex" || :)"
 
 if [ -z "$pod" ]; then
-    die "No matching pod found"
+    die "No matching pods found, perhaps you forgot to pass the --namespace? (tip: specify -A / --all-namespaces if lazy, it'll filter by pod name)"
 fi
 
 # auto-determine namespace because specifying it is annoying
