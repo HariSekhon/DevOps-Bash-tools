@@ -28,14 +28,14 @@ Lists in this order:
 
     - Networks:
       - VPC Networks
-      - Addresses
       - Subnets
-      - Proxies
-      - Reservations
-      - Routers
-      - VPNs
-      - Tunnels
       - Routes
+      - Addresses
+      - Proxies
+      - Routers
+      - VPN Gateways
+      - VPN Tunnels
+      - Reservations
     - Firewall Rules & Forwarding Rules
     - DNS managed zones & verified domains
 "
@@ -62,6 +62,12 @@ EOF
 echo "Networks:"
 gcloud compute networks list
 echo
+echo "Subnets:"
+gcloud compute networks subnets list --sort-by=NETWORK
+echo
+echo "Routes:"
+gcloud compute routes list
+echo
 echo "Addresses:"
 gcloud compute addresses list
 echo
@@ -83,9 +89,6 @@ echo
 echo "URL Maps:"
 gcloud compute url-maps list
 echo
-echo "Subnets:"
-gcloud compute networks subnets list --sort-by=NETWORK
-echo
 echo "Routers:"
 gcloud compute routers list
 echo
@@ -97,9 +100,6 @@ gcloud compute vpn-tunnels list
 echo
 echo "Reservations:"
 gcloud compute reservations list
-echo
-echo "Routes:"
-gcloud compute routes list
 
 
 # Firewalls
