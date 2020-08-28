@@ -78,14 +78,14 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
       - Datastore Indexes
     - Networks:
       - VPC Networks
-      - Addresses
       - Subnets
-      - Proxies
-      - Reservations
-      - Routers
-      - VPNs
-      - Tunnels
       - Routes
+      - Addresses
+      - Proxies
+      - Routers
+      - VPN Gateways
+      - VPN Tunnels
+      - Reservations
       - Firewall Rules & Forwarding Rules
       - DNS managed zones & verified domains
     - Big Data:
