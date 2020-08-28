@@ -62,12 +62,6 @@ EOF
 echo "Networks:"
 gcloud compute networks list
 echo
-echo "Subnets:"
-gcloud compute networks subnets list --sort-by=NETWORK
-echo
-echo "Routes:"
-gcloud compute routes list
-echo
 echo "Addresses:"
 gcloud compute addresses list
 echo
@@ -88,6 +82,12 @@ gcloud compute target-tcp-proxies list
 echo
 echo "URL Maps:"
 gcloud compute url-maps list
+echo
+echo "Subnets:"
+gcloud compute networks subnets list --sort-by=NETWORK
+echo
+echo "Routes:"
+gcloud compute routes list
 echo
 echo "Routers:"
 gcloud compute routers list
