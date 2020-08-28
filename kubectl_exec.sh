@@ -30,10 +30,10 @@ Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
 
 This is useful to quickly jump in to any pod in a namespace/deployment to debug a web farm etc.
 
-First arg is the optional pod container unless it starts with a dash (if no container is specified we'll pick the first one and show you in the kubectl output)
-Any other args in are passed straight to 'kubectl get pods' to be used as filters, eg. -n prod -l app=nginx
+First arg is the optional pod container name (if no container is specified we'll pick the first one and show you in the kubectl output)
+Subsequent args from the first dash are passed straight to 'kubectl get pods' to set namespace, label filters etc.
 
-Example:
+Examples:
 
 ${0##*/} -n prod -l app=nginx
 
