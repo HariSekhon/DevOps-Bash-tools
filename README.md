@@ -242,7 +242,7 @@ etc.
   - `gcp_info_accounts_secrets.sh` - IAM Service Accounts, Secrets Manager secrets
 - `gcp_info_all_projects.sh` - same as above but for all detected projects
 - `gcp_foreach_project.sh` - execute any templated command across all GCP projects - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
-- `gcp_find_orphaned_disks.sh` - lists orphaned disks not attached to any compute instance
+- `gcp_find_orphaned_disks.sh` - lists orphaned disks across all GCP projects (not attached to any compute instance)
 - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
 - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM pre-emption latch and boolean check scripts
 - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
