@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Kubectl exec's to the first pod in the current or given namespace
+Kubectl exec's to the first pod matching the given filter criteria
 
 Shows the full auto-generated 'kubectl exec' command for clarity
 
