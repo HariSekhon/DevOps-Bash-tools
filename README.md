@@ -257,6 +257,8 @@ etc.
   - service accounts, resource quotas, network policies, pod security policies
   - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
 - `kubernetes_foreach_context.sh` - runs a command across all kubectl contexts (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
+- `kubectl_exec.sh` - finds and execs to the first Kubernetes pod matching given pod filters, can optionally specify the container to exec to
+- `kubectl_exec_grep.sh` - finds and execs to the first Kubernetes pod matching the given name regex, can optionally specify the container name regex to exec to
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
 - `kubernetes_join_cmd.sh` - outputs `kubeadm join` command (generates new token) to join an existing Kubernetes cluster (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
 - `kubernetes_join_cmd2.sh` - outputs `kubeadm join` command manually (calculates cert hash + generates new token) to join an existing Kubernetes cluster
