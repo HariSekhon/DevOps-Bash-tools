@@ -28,10 +28,10 @@ Lists in this order:
 
     - Networks:
       - VPC Networks
-      - Subnets
-      - Routes
       - Addresses
       - Proxies
+      - Subnets
+      - Routes
       - Routers
       - VPN Gateways
       - VPN Tunnels
