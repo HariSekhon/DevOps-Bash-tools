@@ -64,7 +64,7 @@ kubectl cluster-info
 echo
 kubectl get componentstatuses
 echo
-kubectl get nodes
+kubectl get nodes -o wide
 echo
 kubectl get namespaces
 echo
