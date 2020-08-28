@@ -190,6 +190,11 @@ sshkey(){
 #    fi
 }
 
+sshkeygo(){
+    sshkey "$@"
+    ssh "$@"
+}
+
 cleankey(){
     if [ $# -lt 1 ]; then
         echo "usage: cleankey regex"
