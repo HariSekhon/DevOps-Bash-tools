@@ -66,6 +66,8 @@ if [ $# -gt 0 ]; then
     fi
 fi
 
+kubectl cluster-info &>/dev/null || die "Failed to connect to Kubernetes cluster!"
+
 pod="$(kubectl get pods "$@" -o 'jsonpath={.items[0].metadata.name}' 2>/dev/null || :)"
 
 if [ -z "$pod" ]; then
