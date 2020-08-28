@@ -34,6 +34,8 @@ Lists:
 - nodes
 - namespaces
 - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
+- services, ingresses
+- jobs, cronjobs
 - storage classes, persistent volumes, persistent volume claims
 - service accounts, resource quotas, network policies, pod security policies
 - pods  # might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
@@ -68,11 +70,17 @@ kubectl get namespaces
 echo
 kubectl get --all-namespaces deployments,replicasets,replicationcontrollers,statefulsets,daemonsets,horizontalpodautoscalers
 echo
-kubectl get --all-namespaces services,ingresses,jobs,cronjobs
+kubectl get --all-namespaces services,ingresses
+echo
+echo
+kubectl get --all-namespaces jobs,cronjobs
+echo
 echo
 kubectl get --all-namespaces storageclasses,persistentvolumes,persistentvolumeclaims
 echo
+echo
 kubectl get --all-namespaces serviceaccounts,resourcequotas,networkpolicies,podsecuritypolicies
+echo
 echo
 # pods might be too numerous with high replica counts and low value info, but there is always a chance that people launched pods without deployments, you can comment it out if you're confident that isn't the case
 kubectl get --all-namespaces pods
