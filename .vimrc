@@ -296,6 +296,9 @@ nmap          ;A :,!hexanonymize.py --case --hex-only<CR>
 nmap <silent> ;b :!git blame "%"<CR>
 nmap <silent> ;c :,!center.py<CR>
 nmap <silent> ;e :,!center.py -s<CR>
+" parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunExampleLine() further down for example
+" messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
+nmap <silent> ;E :call WriteRunExampleLine()<CR> :!reset<CR><CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 nmap <silent> ;D :Done<CR>
 nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
@@ -513,6 +516,19 @@ function! WriteRunDebug()
     :let $DEBUG=1
     :call WriteRun()
     :let $DEBUG=""
+endfunction
+
+function! WriteRunExampleLine()
+    :w
+    if &filetype == 'go'
+        " TODO: consider switching this to go build and then run the binary as
+        " this gets stdout only at the end so things like welcome.go don't get
+        " the transition effects when run like this
+        :.w ! sed 's/\$0/.\/%/ ; s/\${0\#*\*\/}/.\/%/' | xargs go run "%:p" 2>&1 | less
+    else
+        " $0 => ./script.sh  ${0##*/} => ./script.sh
+        .w ! sed 's/\$0/.\/%/ ; s/\${0\#*\*\/}/.\/%/' | bash -x 2>&1 | less
+    endif
 endfunction
 
 " variable number of args like *args in python
