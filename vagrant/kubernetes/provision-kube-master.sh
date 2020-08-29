@@ -23,10 +23,10 @@ log="/vagrant/logs/${name%.sh}.log"
 
 {
 
-bash_tools="/bash-tools"
+bash_tools="/bash"
 
-# shellcheck disable=SC1090
-source "$bash_tools/lib/utils.sh"
+# shellcheck source=provision-kube-common.sh
+. "/vagrant/provision-kube-common.sh"
 
 section "Running Vagrant Shell Provisioner Script - Kubernetes Master"
 
@@ -45,7 +45,7 @@ echo >&2
 if ! netstat -lnt | grep -q :10248; then
     timestamp "Bootstrapping kubernetes master:"
     echo >&2
-    # remove stale old generated join script so kube2 awaits new one
+    # remove stale old generated join script so worker(s) awaits new one
     rm -fv "$kubeadm_join"
     echo >&2
     # kubeadm-config.yml is in vagrant dir mounted at /vagrant
@@ -74,16 +74,17 @@ kubectl apply -f calico.yaml
 
 echo >&2
 
-timestamp "K8S Nodes:"
-kubectl get nodes
+timestamp "Kubernetes Node Taints:"
+kubectl describe nodes | grep -i -e '^Name:' -e '^Taints:'
 
 echo >&2
 
+timestamp "untainting master node for pod scheduling"
 kubectl taint nodes --all node-role.kubernetes.io/master- || :
 
 echo >&2
 
-kubectl get nodes
+kubectl describe nodes | grep -i -e '^Name:' -e '^Taints:'
 
 echo >&2
 
@@ -91,11 +92,12 @@ kubectl taint nodes --all node.kubernetes.io/not-ready- || :
 
 echo >&2
 
+timestamp "Kubernetes Nodes:"
 kubectl get nodes
 
 echo >&2
 
-timestamp "(re)generating $kubeadm_join for kube2 to use"
+timestamp "(re)generating $kubeadm_join for workers to use"
 "$bash_tools/kubernetes_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
 
