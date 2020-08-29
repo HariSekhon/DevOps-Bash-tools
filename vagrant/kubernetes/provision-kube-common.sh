@@ -16,14 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-# has to be before brace to set up logging path and logfile name
-mkdir -pv /vagrant/logs
-name="${0##*/}"
-log="/vagrant/logs/${name%.sh}.log"
-
-{
-
-bash_tools="/bash-tools"
+bash_tools="/bash"
 
 # shellcheck disable=SC1090
 source "$bash_tools/lib/utils.sh"
@@ -32,7 +25,7 @@ section "Running Vagrant Shell Provisioner Script - Kubernetes Common"
 
 pushd /vagrant
 
-apt-get install -y docker.io
+"$bash_tools/install_packages_if_absent.sh" docker.io
 
 systemctl enable docker.service
 systemctl start docker.service
@@ -41,17 +34,17 @@ echo "deb  http://apt.kubernetes.io/  kubernetes-xenial  main" | "$bash_tools/gr
 
 curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 
-apt-get update
+if ! dpkg -s kubeadm kubelet kubectl &>/dev/null; then
+    /bash/install_packages_if_absent.sh \
+        kubeadm=1.18.1-00 \
+        kubelet=1.18.1-00 \
+        kubectl=1.18.1-00
 
-apt-get install -y \
-    kubeadm=1.18.1-00 \
-    kubelet=1.18.1-00 \
-    kubectl=1.18.1-00
-
-apt-mark hold \
-    kubelet \
-    kubeadm \
-    kubectl
+    apt-mark hold \
+        kubelet \
+        kubeadm \
+        kubectl
+fi
 
 #source <(kubectl completion bash)
 timestamp "adding bash completion for kubectl:"
@@ -63,4 +56,4 @@ if ! [ -d /templates ] &&
     ln -sv /github/perl-tools/templates /
 fi
 
-} 2>&1 | tee -a "$log"
+popd
