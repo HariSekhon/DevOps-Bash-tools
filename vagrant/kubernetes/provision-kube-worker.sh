@@ -23,10 +23,8 @@ log="/vagrant/logs/${name%.sh}.log"
 
 {
 
-bash_tools="/bash-tools"
-
-# shellcheck disable=SC1090
-source "$bash_tools/lib/utils.sh"
+# shellcheck source=provision-kube-common.sh
+. "/vagrant/provision-kube-common.sh"
 
 section "Running Vagrant Shell Provisioner Script - Kubernetes Worker"
 
@@ -40,15 +38,15 @@ if ! netstat -lnt | grep -q :10248; then
     timestamp "Bootstrapping kubernetes worker:"
     echo >&2
 
-    # happens after kube1 anyway
-    #timestamp "waiting for 15 secs to give kube1 time to provision"
+    # happens after master anyway
+    #timestamp "waiting for 15 secs to give master time to provision"
     #sleep 15
 
-    timestamp "Waiting for kube1 to bootstrap and generate kubectl join command at $kubeadm_join"
+    timestamp "Waiting for master to bootstrap and generate kubectl join command at $kubeadm_join"
     SECONDS=0
     while ! [ -f "$kubeadm_join" ]; do
         if [ $SECONDS -gt 600 ]; then
-            timestamp "ERROR: max wait time for $kubeadm_join to appear exceeded, aborting worker node join. Check provisioner run on kube1 has generated $kubeadm_join or re-run provisioner"
+            timestamp "ERROR: max wait time for $kubeadm_join to appear exceeded, aborting worker node join. Check provisioner run on master has generated $kubeadm_join or re-run provisioner"
             exit 1
         fi
         sleep 1
