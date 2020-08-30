@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run a command for each original non-fork GitLab project (repo)
+Run a command for each GitLab project / repo
 
 All arguments become the command template
 
