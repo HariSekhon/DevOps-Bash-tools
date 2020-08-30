@@ -75,6 +75,42 @@ ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
 
 ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
 
+
+# List a project's jobs (contains the status and pipeline reference):
+
+${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/jobs
+
+
+# List a project's jobs for a specific pipeline:
+
+${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines/<pipeline_id>/jobs
+
+
+# List a project's deployments:
+
+${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/deployments
+
+
+# Get details for a single job:
+
+${0##*/} /projects/:id/jobs/:job_id
+
+
+# Get a project's remote mirrors:
+
+${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/remote_mirrors
+
+
+# Get log for a specific job:
+
+${0##*/} /projects/:id/jobs/:job_id/trace
+
+
+# List recent events such as pushes, by the currently authenticated user:
+
+${0##*/} /events
+
+
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings (due to the context variation of the GitLAB API documentation tokens this is only done for users and projects only at this time)
 
 Placeholders replaced by \$GITLAB_USER:  :owner, :user, :username, <user>, <username>, /users/:id
@@ -123,10 +159,10 @@ repo="$(sed 's/.*\///' <<< "$project")"
 project="${project//\//%2F}" # cheap url encode slash
 
 url_path="${url_path/:owner/$user}"
-url_path="${url_path/:user/$user}"
 url_path="${url_path/:username/$user}"
-url_path="${url_path/<user>/$user}"
+url_path="${url_path/:user/$user}"
 url_path="${url_path/<username>/$user}"
+url_path="${url_path/<user>/$user}"
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 url_path="${url_path/:project/$project}"
