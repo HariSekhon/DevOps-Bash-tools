@@ -56,7 +56,7 @@ else
 fi
 
 get_repos(){
-    page=1
+    local page=1
     while true; do
         if ! output="$("$srcdir/gitlab_api.sh" "/users/$user/projects?page=$page&per_page=100")"; then
             echo "ERROR" >&2
