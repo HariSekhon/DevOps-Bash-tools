@@ -55,7 +55,7 @@ else
 fi
 
 get_repos(){
-    page=1
+    local page=1
     while true; do
         if ! output="$("$srcdir/github_api.sh" "/users/$user/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
