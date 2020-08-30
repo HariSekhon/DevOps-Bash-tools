@@ -113,9 +113,9 @@ ${0##*/} /events
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings (due to the context variation of the GitLAB API documentation tokens this is only done for users and projects only at this time)
 
-Placeholders replaced by \$GITLAB_USER:  :owner, :user, :username, <user>, <username>, /users/:id
-Placeholders replaced by the local repo name of the current directory:  :repo, <repo>
-Placeholders replaced by the local full 'user/repo' name of the current directory:  :project, <project>, /projects/:id
+Placeholders replaced by \$GITLAB_USERNAME / \$GITLAB_USER:                               :owner, :user, :username, <user>, <username>, /users/:id
+Placeholders replaced by the local repo name of the current directory:                  :repo, <repo>
+Placeholders replaced by the local full 'user/repo' name of the current directory:      :project, <project>, /projects/:id
 "
 
 # used by usage() in lib/utils.sh
@@ -138,12 +138,13 @@ url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
 
-user="${GITLAB_USER:-}"
+user="${GITLAB_USERNAME:-${GITLAB_USER:-}}"
 if [ -z "${GITLAB_USER:-}" ]; then
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
-    if [ -z "$user" ]; then
-        user="${USERNAME:${USER:-}}"
-    fi
+fi
+
+if [ -n "$user" ]; then
+    export USERNAME="$user"
 fi
 
 if [ -z "${GITLAB_TOKEN:-}" ]; then
@@ -158,11 +159,13 @@ project="$(git_repo 2>/dev/null || :)"
 repo="$(sed 's/.*\///' <<< "$project")"
 project="${project//\//%2F}" # cheap url encode slash
 
-url_path="${url_path/:owner/$user}"
-url_path="${url_path/:username/$user}"
-url_path="${url_path/:user/$user}"
-url_path="${url_path/<username>/$user}"
-url_path="${url_path/<user>/$user}"
+if [ -n "$user" ]; then
+    url_path="${url_path/:owner/$user}"
+    url_path="${url_path/:username/$user}"
+    url_path="${url_path/:user/$user}"
+    url_path="${url_path/<username>/$user}"
+    url_path="${url_path/<user>/$user}"
+fi
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 url_path="${url_path/:project/$project}"
