@@ -31,7 +31,7 @@ The command template replaces the following for convenience in each iteration:
 
 {username}, {user}    =>    your authenticated user
 {name}                =>    the repo / project name without the user prefix
-{project}, {repo}     =>    the repo / project path with the user prefix
+{project}, {repo}     =>    the repo / project name with the user prefix
 
 eg.
     ${0##*/} echo user={user} name={name} repo={project}
