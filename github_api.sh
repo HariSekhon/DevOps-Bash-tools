@@ -106,7 +106,7 @@ if [ -z "${PASSWORD:-}" ]; then
 fi
 
 if [ -n "$user" ]; then
-    export USER="$user"
+    export USERNAME="$user"
 fi
 export PASSWORD
 
@@ -124,11 +124,13 @@ url_path="${url_path##/}"
 
 repo=$(git_repo | sed 's/.*\///')
 
-url_path="${url_path/:owner/$USER}"
-url_path="${url_path/:username/$USER}"
-url_path="${url_path/:user/$USER}"
-url_path="${url_path/<username>/$USER}"
-url_path="${url_path/<user>/$USER}"
+if [ -n "$user" ]; then
+    url_path="${url_path/:owner/$user}"
+    url_path="${url_path/:username/$user}"
+    url_path="${url_path/:user/$user}"
+    url_path="${url_path/<username>/$user}"
+    url_path="${url_path/<user>/$user}"
+fi
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 
