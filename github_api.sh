@@ -124,10 +124,10 @@ url_path="${url_path##/}"
 repo=$(git_repo | sed 's/.*\///')
 
 url_path="${url_path/:owner/$USER}"
-url_path="${url_path/:user/$USER}"
 url_path="${url_path/:username/$USER}"
-url_path="${url_path/<user>/$USER}"
+url_path="${url_path/:user/$USER}"
 url_path="${url_path/<username>/$USER}"
+url_path="${url_path/<user>/$USER}"
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 
