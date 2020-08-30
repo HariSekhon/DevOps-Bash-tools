@@ -35,6 +35,7 @@ The command template replaces the following for convenience in each iteration:
 
 eg.
     ${0##*/} echo user={user} name={name} repo={project}
+    ${0##*/} echo user={user} name={name} repo={repo}
 "
 
 # used by usage() in lib/utils.sh
@@ -54,6 +55,23 @@ else
     user="$(gitlab_api.sh /user | jq -r .username)"
 fi
 
+get_repos(){
+    page=1
+    while true; do
+        if ! output="$("$srcdir/gitlab_api.sh" "/users/$user/projects?page=$page&per_page=100")"; then
+            echo "ERROR" >&2
+            exit 1
+        fi
+        if [ -z "$(jq '.[]' <<< "$output")" ]; then
+            break
+        elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
+            exit 1
+        fi
+        jq -r '.[] | select(.fork | not) | [.path, .path_with_namespace] | @tsv' <<< "$output"
+        ((page+=1))
+    done
+}
+
 while read -r name repo; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
@@ -65,4 +83,4 @@ while read -r name repo; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
-done < <("$srcdir/gitlab_api.sh" "/users/$user/projects" | jq -r '.[] | [ .path, .path_with_namespace ] | @tsv')
+done < <(get_repos)
