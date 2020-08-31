@@ -62,4 +62,4 @@ while read -r name repo; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
-done < <(get_github_repos)
+done < <(get_github_repos "$user")
