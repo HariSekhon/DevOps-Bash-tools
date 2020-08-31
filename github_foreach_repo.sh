@@ -21,6 +21,9 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/github.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Run a command for each original non-fork GitHub repo
@@ -47,29 +50,7 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-if [ -n "${GITHUB_USER:-}" ]; then
-    user="$GITHUB_USER"
-else
-    # get currently authenticated user
-    user="$(github_api.sh /user | jq -r .username)"
-fi
-
-get_repos(){
-    local page=1
-    while true; do
-        if ! output="$("$srcdir/github_api.sh" "/users/$user/repos?page=$page&per_page=100")"; then
-            echo "ERROR" >&2
-            exit 1
-        fi
-        if [ -z "$(jq '.[]' <<< "$output")" ]; then
-            break
-        elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
-            exit 1
-        fi
-        jq -r '.[] | select(.fork | not) | [.name, .full_name] | @tsv' <<< "$output"
-        ((page+=1))
-    done
-}
+user="$(get_github_user)"
 
 while read -r name repo; do
     echo "# ============================================================================ #" >&2
@@ -81,4 +62,4 @@ while read -r name repo; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
-done < <(get_repos)
+done < <(get_github_repos)
