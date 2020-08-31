@@ -806,6 +806,8 @@ usage(){
     fi
     if [ -n "${usage_switches:-}" ]; then
         switches="$usage_switches"
+        switches="${switches##[[:space:]]}"
+        switches="${switches%%[[:space:]]}"
     fi
     if [ -n "${usage_description:-}" ]; then
         description="$usage_description
