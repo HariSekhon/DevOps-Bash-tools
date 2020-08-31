@@ -46,7 +46,7 @@ get_github_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq -r '.[] | select(.fork | not) | [.name, .full_name] | @tsv' <<< "$output"
+        jq -r '.[] | select(.fork | not) | .name' <<< "$output"
         ((page+=1))
     done
 }
