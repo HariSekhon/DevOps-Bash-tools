@@ -95,14 +95,14 @@ check_repos(){
         line="$(printf 'Repo: %s\tGitHub: %s\t' "$github_user/$repo" "$github_master_hashref")"
         in_sync=True
         if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
-            gitlab_master_hashref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" | jq -r '.commit.id')"
+            gitlab_master_hashref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
             line+="$(printf 'GitLab: %s\t' "$gitlab_master_hashref")"
             if [ "$gitlab_master_hashref" != "$github_master_hashref" ]; then
                 in_sync=False
             fi
         fi
         if [ $check_bitbucket = 1 ] || [ $check_gitlab = 0 ]; then
-            bitbucket_master_hashref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" | jq -r '.target.hash')"
+            bitbucket_master_hashref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" 2>/dev/null | jq -r '.target.hash' || echo None)"
             line+="$(printf 'BitBucket: %s\t' "$bitbucket_master_hashref")"
             if [ "$bitbucket_master_hashref" != "$github_master_hashref" ]; then
                 in_sync=False
