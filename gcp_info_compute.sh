@@ -84,12 +84,18 @@ EOF
 # DISABLED  accessapproval.googleapis.com                         Access Approval API
 # DISABLED  appengine.googleapis.com                              App Engine Admin API
 # DISABLED  appengineflex.googleapis.com                          Google App Engine Flexible Environment
-#
-#if is_service_enabled appengine.googleapis.com; then
-    gcloud app instances list
-#else
-#    echo "GAE API (appengine.googleapis.com) is not enabled, skipping..."
-#fi
+
+app_engine_details(){
+    gcloud app describe || return 0
+    echo
+    #if is_service_enabled appengine.googleapis.com; then
+        # errors out if App Engine hasn't been created in the project yet
+        gcloud app instances list || return 0
+    #else
+    #    echo "GAE API (appengine.googleapis.com) is not enabled, skipping..."
+    #fi
+}
+app_engine_details
 
 
 # Cloud Functions
