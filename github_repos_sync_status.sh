@@ -50,9 +50,13 @@ or pushed to BitBucket
 
 User name is assumed to be the same across GitHub / GitLab / BitBucket. If it's not, make sure to specify \$GITLAB_USER / \$BITBUCKET_USER to override
 
-Caveat: due to a limitation of the BitBucket API requiring username + token, cannot auto-determine username so if your
+Caveats:
+
+- due to a limitation of the BitBucket API requiring username + token, cannot auto-determine username so if your
 \$BITBUCKET_USERNAME / \$BITBUCKET_USER / \$USER etc is incorrect, this'll fail to authenticate and won't find the relevant repo,
 returning 'None' for the hashref and 'In-Sync: False'. You must ensure your BitBucket username is correct
+
+- the BitBucket workspace is assumed to be the same as the username
 "
 
 # used by usage() in lib/utils.sh
@@ -64,6 +68,7 @@ usage_args="[options] [<repos_to_check>]"
 usage_switches="
 -g --gitlab         Compare each GitHub repo with its GitLab counterpart
 -b --bitbucket      Compare each GitHub repo with its BitBucket counterpart
+-d --date           Compare by date of latest commit instead of hashref
 "
 
 help_usage "$@"
@@ -73,12 +78,16 @@ help_usage "$@"
 repos=()
 check_gitlab=0
 check_bitbucket=0
+compare_by_date=0
 
 for arg; do
     case "$arg" in
         -g|--gitlab)    check_gitlab=1
                         ;;
      -b|--bitbucket)    check_bitbucket=1
+                        ;;
+          -d|--date)    compare_by_date=1
+                        shift || :
                         ;;
          -D|--debug)    export DEBUG=1
                         shift || :
@@ -92,23 +101,50 @@ done
 
 github_user="$(get_github_user)"
 
+if is_mac; then
+    date(){
+        command gdate "$@"
+    }
+fi
+
 check_repos(){
     for repo in "${@:-$(get_github_repos "$github_user")}"; do
-        github_master_hashref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master" | jq -r '.object.sha')"
+        if [ $compare_by_date = 1 ]; then
+            # GitHub returns Z time
+            github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master" | jq -r '.commit.committer.date')"
+        else
+            github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master" | jq -r '.object.sha')"
+        fi
         # don't printf as we go because it's harder to debug, instead collect the line and print in one go
-        line="$(printf 'Repo: %s\tGitHub: %s\t' "$github_user/$repo" "$github_master_hashref")"
+        line="$(printf 'Repo: %s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
         in_sync=True
         if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
-            gitlab_master_hashref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
-            line+="$(printf 'GitLab: %s\t' "$gitlab_master_hashref")"
-            if [ "$gitlab_master_hashref" != "$github_master_hashref" ]; then
+            if [ $compare_by_date = 1 ]; then
+                # GitHub returns current timezone eg. .000+01:00
+                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/commits?ref_name=master" 2>/dev/null | jq -r '.[0].created_at' || echo None)"
+                if [ "$gitlab_master_ref" != None ]; then
+                    gitlab_master_ref="$(date --utc -d "$gitlab_master_ref" '+%FT%TZ')"
+                fi
+            else
+                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
+            fi
+            line+="$(printf 'GitLab: %s\t' "$gitlab_master_ref")"
+            if [ "$gitlab_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
         fi
         if [ $check_bitbucket = 1 ] || [ $check_gitlab = 0 ]; then
-            bitbucket_master_hashref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" 2>/dev/null | jq -r '.target.hash' || echo None)"
-            line+="$(printf 'BitBucket: %s\t' "$bitbucket_master_hashref")"
-            if [ "$bitbucket_master_hashref" != "$github_master_hashref" ]; then
+            if [ $compare_by_date = 1 ]; then
+                # BitBucket returns +00:00 timezone
+                bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" | jq -r '.values[0].date' || echo None)"
+                if [ "$bitbucket_master_ref" != None ]; then
+                    bitbucket_master_ref="$(date --utc -d "$bitbucket_master_ref" '+%FT%TZ')"
+                fi
+            else
+                bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" 2>/dev/null | jq -r '.target.hash' || echo None)"
+            fi
+            line+="$(printf 'BitBucket: %s\t' "$bitbucket_master_ref")"
+            if [ "$bitbucket_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
         fi
