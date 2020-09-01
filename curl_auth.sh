@@ -103,7 +103,7 @@ if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
         #       sed(){ gsed "$@" }
         # fi
         #
-        host="$(grep -Eom 1 'https?://[^:\/[:space:]]+' <<< "$*" | sed 's,https*://,,' | grep -v localhost | head -n1)"
+        host="$(grep -Eom 1 'https?://[^:\/[:space:]]+' <<< "$*" | sed 's,https*://,,' | head -n1)"
 
         netrc_contents="machine $host login $USERNAME password $PASSWORD"
     fi
