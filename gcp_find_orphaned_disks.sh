@@ -28,17 +28,18 @@ This is done by finding disks in each project with no 'users' (instances attache
 
 Output format:
 
-<project_id>    <project_name>  <disk_name>
+<project_id>    <zone>    <type>    <sizeGB>    <disk_name>
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args=""
 
-while read -r project_id project_name; do
-    gcloud compute disks list --format="table[no-heading](name,users)" --project "$project_id" |
-    while read -r disk users; do
+while read -r project_id; do
+    # XXX: for disks that have always been in use lastDetachTimestamp may not exist and result in false positives
+    gcloud compute disks list --format="table[no-heading](name, zone.basename(), type.basename(), sizeGb, users.join(','))" --project "$project_id" |
+    while read -r disk zone type size users; do
         [ -n "$users" ] && continue
-        printf '%s\t%s\t%s\n' "$project_id" "$project_name" "$disk"
+        printf '%s\t%s\t%s\t%s\t%s\n' "$project_id" "$zone" "$type" "$size" "$disk"
     done
-done < <(gcloud projects list --format="value(project_id,name)")
+done < <(gcloud projects list --format="get(project_id)")
