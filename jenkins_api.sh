@@ -32,7 +32,8 @@ Queries the Jenkins Rest API
 
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
-Automatically handles authentication via environment variables \$JENKINS_USERNAME / \$JENKINS_USER and \$JENKINS_PASSWORD
+Automatically handles authentication via environment variables \$JENKINS_USERNAME / \$JENKINS_USER and \$JENKINS_PASSWORD,
+and obtains the Jenkins-Crumb cookie from a pre-request
 
 Requires either \$JENKINS_URL or \$JENKINS_HOST + \$JENKINS_PORT which defaults to localhost and port 8080
 
