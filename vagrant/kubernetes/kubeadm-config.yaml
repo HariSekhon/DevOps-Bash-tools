@@ -15,7 +15,7 @@
 
 apiVersion: kubeadm.k8s.io/v1beta2
 kind: ClusterConfiguration
-kubernetesVersion: 1.18.1           # Use the word stable for newest version
-controlPlaneEndpoint: "kube1:6443"  # Use the node alias not the IP so cert matches from LB
+kubernetesVersion: 1.18.1             # Use the word stable for newest version
+controlPlaneEndpoint: "master1:6443"  # Use the node alias not the IP so cert matches from LB
 networking:
-  podSubnet: 192.168.0.0/16         # Match the IP range from the Calico config file
+  podSubnet: 192.168.0.0/16           # Match the IP range from the Calico config file

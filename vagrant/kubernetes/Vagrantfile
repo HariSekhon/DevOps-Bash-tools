@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
     #config.ssh.private_key_path = "~/.ssh/id_rsa"
                                # host_path         guest_path
     config.vm.synced_folder    "~/github",         "/github"
-    config.vm.synced_folder    "../../",           "/bash-tools"
+    config.vm.synced_folder    "../../",           "/bash"
     config.ssh.forward_agent = false
     config.ssh.forward_x11   = false
 
@@ -65,16 +65,62 @@ Vagrant.configure("2") do |config|
 
     # generic provision for each VM
     config.vm.provision :shell, :path => "../provision.sh"
-    config.vm.provision :shell, :path => "provision-kube-common.sh"
+
+    # Colocating Etcd cluster on masters to save RAM - uncomment these if you have RAM to burn and want them on separate hosts
+    # ==================================
+#    config.vm.define "etcd1" do |config|
+#        config.vm.network "private_network", ip: "172.16.0.21"
+#        config.vm.provider "virtualbox" do |vb|
+#            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
+#            vb.name = "etcd1"
+#            vb.cpus = 1
+#            vb.memory = 1024
+#            vb.customize [
+#                "modifyvm", :id, "--name", "#{vb.name}"
+#            ]
+#            # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
+#            config.vm.hostname = "#{vb.name}"
+#        end
+#    end
+#
+#    config.vm.define "etcd2" do |config|
+#        config.vm.network "private_network", ip: "172.16.0.22"
+#        config.vm.provider "virtualbox" do |vb|
+#            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
+#            vb.name = "etcd2"
+#            vb.cpus = 1
+#            vb.memory = 1024
+#            vb.customize [
+#                "modifyvm", :id, "--name", "#{vb.name}"
+#            ]
+#            # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
+#            config.vm.hostname = "#{vb.name}"
+#        end
+#    end
+#
+#    config.vm.define "etcd3" do |config|
+#        config.vm.network "private_network", ip: "172.16.0.23"
+#        config.vm.provider "virtualbox" do |vb|
+#            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
+#            vb.name = "etcd3"
+#            vb.cpus = 1
+#            vb.memory = 1024
+#            vb.customize [
+#                "modifyvm", :id, "--name", "#{vb.name}"
+#            ]
+#            # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
+#            config.vm.hostname = "#{vb.name}"
+#        end
+#    end
 
     # ==================================
-    config.vm.define "kube1" do |config|
-        config.vm.network "private_network", ip: "172.16.0.2"
+    config.vm.define "master1" do |config|
+        config.vm.network "private_network", ip: "172.16.0.11"
         config.vm.provider "virtualbox" do |vb|
             # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
-            vb.name = "kube1"
-            vb.cpus = 3
-            vb.memory = 7168
+            vb.name = "master1"
+            vb.cpus = 2
+            vb.memory = 4096
             vb.customize [
                 "modifyvm", :id, "--name", "#{vb.name}"
                 #"--cpus",     3,
@@ -86,19 +132,77 @@ Vagrant.configure("2") do |config|
         config.vm.provision :shell, :path => "provision-kube-master.sh"
     end
 
-    # ==================================
-    config.vm.define "kube2" do |config|
-        config.vm.network "private_network", ip: "172.16.0.3"
+    config.vm.define "master2" do |config|
+        config.vm.network "private_network", ip: "172.16.0.12"
         config.vm.provider "virtualbox" do |vb|
-            vb.name = "kube2"
-            vb.memory = 7168
-            #vb.cpus = 2
+            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
+            vb.name = "master2"
+            vb.cpus = 2
+            vb.memory = 4096
             vb.customize [
                 "modifyvm", :id, "--name", "#{vb.name}"
-                #"--memory", 7168
+            ]
+            # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
+            config.vm.hostname = "#{vb.name}"
+        end
+        #config.vm.provision :shell, :path => "provision-kube-master.sh"
+    end
+
+    config.vm.define "master3" do |config|
+        config.vm.network "private_network", ip: "172.16.0.13"
+        config.vm.provider "virtualbox" do |vb|
+            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
+            vb.name = "master3"
+            vb.cpus = 1
+            # Only Etcd on this one so less RAM needed
+            vb.memory = 1024
+            vb.customize [
+                "modifyvm", :id, "--name", "#{vb.name}"
+            ]
+            # sets the guest OS hostname and /etc/hosts (edited by provision.sh as we want external IP and not 127.0.1.1)
+            config.vm.hostname = "#{vb.name}"
+        end
+    end
+
+    # ==================================
+    config.vm.define "worker1" do |config|
+        config.vm.network "private_network", ip: "172.16.0.14"
+        config.vm.provider "virtualbox" do |vb|
+            vb.name = "worker1"
+            vb.memory = 2048
+            vb.cpus = 1
+            vb.customize [
+                "modifyvm", :id, "--name", "#{vb.name}"
             ]
             config.vm.hostname = "#{vb.name}"
         end
         config.vm.provision :shell, :path => "provision-kube-worker.sh"
     end
+    # Enable if you have lots of ram and want more workers
+    config.vm.define "worker2" do |config|
+        config.vm.network "private_network", ip: "172.16.0.15"
+        config.vm.provider "virtualbox" do |vb|
+            vb.name = "worker2"
+            vb.memory = 2048
+            vb.cpus = 1
+            vb.customize [
+                "modifyvm", :id, "--name", "#{vb.name}"
+            ]
+            config.vm.hostname = "#{vb.name}"
+        end
+        config.vm.provision :shell, :path => "provision-kube-worker.sh"
+    end
+#    config.vm.define "worker3" do |config|
+#        config.vm.network "private_network", ip: "172.16.0.16"
+#        config.vm.provider "virtualbox" do |vb|
+#            vb.name = "worker3"
+#            vb.memory = 2048
+#            vb.cpus = 1
+#            vb.customize [
+#                "modifyvm", :id, "--name", "#{vb.name}"
+#            ]
+#            config.vm.hostname = "#{vb.name}"
+#        end
+#        config.vm.provision :shell, :path => "provision-kube-worker.sh"
+#    end
 end

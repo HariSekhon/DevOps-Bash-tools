@@ -308,6 +308,7 @@ etc.
 - `github_*.sh` - various useful [GitHub](https://github.com/) scripts for querying the GitHub API including:
   - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_get_user_ssh_public_key.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
   - `github_runners.sh` - lists GitHub Actions runners
@@ -315,13 +316,17 @@ etc.
   - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos (uses `git_foreach_repo.sh`, `github_repo_description.sh`, `gitlab_set_project_description.sh`, `bitbucket_set_repo_description.sh`)
+  - `github_repos_sync_status.sh` - determines whether each GitHub repo has an in-sync GitLab and BitBucket repo by querying all 3 APIs for the master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_get_user_ssh_public_key.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
+  - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
+  - `bitbucket_foreach_repo.sh` - executes a templated command for each BitBucket repo, replacing the `{user}` and `{repo}` in each iteration
   - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script

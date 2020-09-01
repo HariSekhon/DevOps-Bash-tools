@@ -15,7 +15,7 @@
 
 #  Used on Alpine so needs to be /bin/sh
 
-set -euo pipefail
+set +euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 # used in client code
@@ -40,18 +40,17 @@ _process_package_args(){
         cat
     else
         # filter out commands in scripts which have spaces between tokens like 'cat <<END' or 'brew install'
-        sed '/[^[:space:]][[:space:]][^[:space:]]/d' |
         # get rid of EOF / END type heredocs endings, using perl because Mac's sed has weak regex
         #     /^[[:upper:]]{2,3}$/d'
-        perl -p -e 's/^[[:upper:]]{3}$//' |
         tr ' ' '\n' |
-        sort -u
+        sed 's/^[[:space:]]*//; s/[[:space:]]*$//' |
+        #perl -p -e 's/^[[:upper:]]{3}$//' |
+        #sed '/[^[:space:]][[:space:]][^[:space:]]/d' |
+        sort -u || :
     fi |
     sed 's/^[[:space:]]*//;
          s/[[:space:]]*$//;
-         /^[[:space:]]*$/d;
-         /^[^[:alnum:]]/d;
-         /[^[:alnum:]]$/d'
+         /^[[:space:]]*$/d' || :
 }
 
 process_package_args(){
@@ -71,7 +70,7 @@ installed_debs(){
     dpkg-query -W -f '${db:Status-Abbrev}\t${binary:Package}\n' |
     awk '/^i/{print $2}' |
     sed 's/:.*$//' |
-    sort -u
+    sort -u || :
 }
 
 installed_rpms(){

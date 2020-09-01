@@ -31,7 +31,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Queries the GitHub.com API
 
-Automatically handles authentication via environment variables \$GITHUB_USER
+Automatically handles authentication via environment variables \$GITHUB_USERNAME / \$GITHUB_USER
 and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
@@ -71,8 +71,9 @@ ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
-Placeholders replaced by \$GITHUB_USER:  :owner, :user, :username, <user>, <username>
-Placeholders replaced by the local repo name of the current directory:  :repo, <repo>
+
+Placeholders replaced by \$GITHUB_USERNAME / \$GITHUB_USER:                 :owner, :user, :username, <user>, <username>
+Placeholders replaced by the local repo name of the current directory:    :repo, <repo>
 
 ${0##*/} /repos/:user/:repo/actions/workflows
 "
@@ -89,7 +90,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-user="${GITHUB_USER:-}"
+user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
 if [ -z "${GITHUB_USER:-}" ]; then
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@bitbucket\.org/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
     # curl_auth.sh does this automatically
@@ -105,7 +106,7 @@ if [ -z "${PASSWORD:-}" ]; then
 fi
 
 if [ -n "$user" ]; then
-    export USER="$user"
+    export USERNAME="$user"
 fi
 export PASSWORD
 
@@ -123,11 +124,13 @@ url_path="${url_path##/}"
 
 repo=$(git_repo | sed 's/.*\///')
 
-url_path="${url_path/:owner/$USER}"
-url_path="${url_path/:user/$USER}"
-url_path="${url_path/:username/$USER}"
-url_path="${url_path/<user>/$USER}"
-url_path="${url_path/<username>/$USER}"
+if [ -n "$user" ]; then
+    url_path="${url_path/:owner/$user}"
+    url_path="${url_path/:username/$user}"
+    url_path="${url_path/:user/$user}"
+    url_path="${url_path/<username>/$user}"
+    url_path="${url_path/<user>/$user}"
+fi
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 

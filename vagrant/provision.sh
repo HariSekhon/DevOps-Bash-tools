@@ -22,7 +22,7 @@ mkdir -pv /vagrant/logs
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-bash_tools="/bash-tools"
+bash_tools="/bash"
 
 # shellcheck disable=SC1090
 source "$bash_tools/lib/utils.sh"

@@ -31,11 +31,11 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Queries the BitBucket.org API
+Queries the BitBucket.org API (v2.0)
 
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
-Automatically handles authentication via environment variables \$BITBUCKER_USER and \$BITBUCKET_TOKEN
+Automatically handles authentication via environment variables \$BITBUCKET_USERNAME / \$BITBUCKER_USER and \$BITBUCKET_TOKEN (which is used as the password, your real BitBucket password isn't accepted by the BitBucket 2.0 API)
 If either of these are not found, tries to infer from local git repo's bitbucket remotes
 
 You must set up a personal access token here:
@@ -50,11 +50,6 @@ https://developer.atlassian.com/bitbucket/api/2/reference/resource/
 
 
 Examples:
-
-
-# Get currently authenticated user:
-
-${0##*/} /user
 
 
 # Get currently authenticated user's workspaces:
@@ -75,6 +70,17 @@ ${0##*/} /repositories/harisekhon/devops-bash-tools/pipelines/
 # Update a repo's description:
 
 ${0##*/} /repositories/harisekhon/devops-bash-tools -X PUT -H 'Content-Type: application/json' -d '{\"description\": \"some words\"}'
+
+
+# Get currently authenticated user (unfortunately this is less useful than with GitHub / GitLab APIs since you can't use a standard OAuth2 authentication with just the bearer token, and must specify a username to authenticate to the API in the first place):
+
+${0##*/} /user
+
+
+For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
+
+Placeholders replaced by \$BITBUCKET_USERNAME / \$BITBUCKET_USER:             :owner, :user, :username, <user>, <username>
+Placeholders replaced by the local repo name of the current directory:      :repo, <repo>
 "
 
 # used by usage() in lib/utils.sh
@@ -89,10 +95,11 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-user="${BITBUCKET_USER:-}"
+user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
 PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
 
-if [ -z "${BITBUCKET_USER:-}" ]; then
+if [ -z "$user" ]; then
+    echo "WARNING: \$BITBUCKET_USERNAME / \$BITBUCKET_USER not specified, attempting to determine from local remote url" >&2
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@bitbucket\.org/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
     # curl_auth.sh does this automatically
     #if [ -z "$user" ]; then
@@ -106,7 +113,9 @@ if [ -z "${PASSWORD:-}" ]; then
 fi
 
 if [ -n "$user" ]; then
-    export USER="$user"
+    export USERNAME="$user"
+else
+    echo "WARNING: \$BITBUCKET_USERNAME / \$BITBUCKET_USER not specified, and failed to determine from local remote url, will end up using your environment's default \$USERNAME / \$USER which may not be the right BitBucket username and can lead to authentication failures - recommend you set \$BITBUCKET_USERNAME explicitly" >&2
 fi
 export PASSWORD
 
@@ -118,13 +127,14 @@ shift
 
 repo=$(git_repo 2>/dev/null | sed 's/.*\///' || :)
 
-#url_path="${url_path/:owner/$USER}"
-#url_path="${url_path/:user/$USER}"
-#url_path="${url_path/:username/$USER}"
-#url_path="${url_path/<user>/$USER}"
-#url_path="${url_path/<username>/$USER}"
-#url_path="${url_path/:repo/$repo}"
-#url_path="${url_path/<repo>/$repo}"
+if [ -n "$user" ]; then
+    url_path="${url_path/:username/$user}"
+    url_path="${url_path/:user/$user}"
+    url_path="${url_path/<username>/$user}"
+    url_path="${url_path/<user>/$user}"
+fi
+url_path="${url_path/:repo/$repo}"
+url_path="${url_path/<repo>/$repo}"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
