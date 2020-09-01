@@ -140,6 +140,7 @@ echo
 echo
 
 # ============================================================================ #
+# this is done after gcp_info_projects.sh because that enforces having a project set
 echo "LISTING INFO FOR PROJECT:  $(gcloud info --format="get(config.project)")"
 echo
 echo
