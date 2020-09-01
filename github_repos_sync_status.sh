@@ -49,6 +49,10 @@ efficiency you may want to explicitly specify the repos as args or in cases wher
 or pushed to BitBucket
 
 User name is assumed to be the same across GitHub / GitLab / BitBucket. If it's not, make sure to specify \$GITLAB_USER / \$BITBUCKET_USER to override
+
+Caveat: due to a limitation of the BitBucket API requiring username + token, cannot auto-determine username so if your
+\$BITBUCKET_USERNAME / \$BITBUCKET_USER / \$USER etc is incorrect, this'll fail to authenticate and won't find the relevant repo,
+returning 'None' for the hashref and 'In-Sync: False'. You must ensure your BitBucket username is correct
 "
 
 # used by usage() in lib/utils.sh
