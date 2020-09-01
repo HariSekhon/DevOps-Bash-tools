@@ -82,7 +82,7 @@ curl_auth(){
     shift || :
     # need opt splitting
     # shellcheck disable=SC2086
-    "$srcdir/curl_auth.sh" -H 'Content-type: application/json' $curl_options "$base_url/$url_path" "$@" |
+    "$srcdir/curl_auth.sh" "$base_url/$url_path" -H 'Content-type: application/json' "$@" $curl_options |
     bugfix_gerrit_api_output
 }
 
