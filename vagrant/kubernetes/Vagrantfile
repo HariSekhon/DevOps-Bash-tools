@@ -69,7 +69,7 @@ Vagrant.configure("2") do |config|
     # Colocating Etcd cluster on masters to save RAM - uncomment these if you have RAM to burn and want them on separate hosts
     # ==================================
 #    config.vm.define "etcd1" do |config|
-#        config.vm.network "private_network", ip: "172.16.0.11"
+#        config.vm.network "private_network", ip: "172.16.0.21"
 #        config.vm.provider "virtualbox" do |vb|
 #            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
 #            vb.name = "etcd1"
@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
 #    end
 #
 #    config.vm.define "etcd2" do |config|
-#        config.vm.network "private_network", ip: "172.16.0.12"
+#        config.vm.network "private_network", ip: "172.16.0.22"
 #        config.vm.provider "virtualbox" do |vb|
 #            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
 #            vb.name = "etcd2"
@@ -99,7 +99,7 @@ Vagrant.configure("2") do |config|
 #    end
 #
 #    config.vm.define "etcd3" do |config|
-#        config.vm.network "private_network", ip: "172.16.0.13"
+#        config.vm.network "private_network", ip: "172.16.0.23"
 #        config.vm.provider "virtualbox" do |vb|
 #            # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
 #            vb.name = "etcd3"
@@ -115,7 +115,7 @@ Vagrant.configure("2") do |config|
 
     # ==================================
     config.vm.define "master1" do |config|
-        config.vm.network "private_network", ip: "172.16.0.5"
+        config.vm.network "private_network", ip: "172.16.0.11"
         config.vm.provider "virtualbox" do |vb|
             # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
             vb.name = "master1"
@@ -133,7 +133,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "master2" do |config|
-        config.vm.network "private_network", ip: "172.16.0.6"
+        config.vm.network "private_network", ip: "172.16.0.12"
         config.vm.provider "virtualbox" do |vb|
             # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
             vb.name = "master2"
@@ -149,7 +149,7 @@ Vagrant.configure("2") do |config|
     end
 
     config.vm.define "master3" do |config|
-        config.vm.network "private_network", ip: "172.16.0.6"
+        config.vm.network "private_network", ip: "172.16.0.13"
         config.vm.provider "virtualbox" do |vb|
             # can't set vb.name at shared level, as it evaluates too early and gets 'default-vagrant-hostname'
             vb.name = "master3"
@@ -166,7 +166,7 @@ Vagrant.configure("2") do |config|
 
     # ==================================
     config.vm.define "worker1" do |config|
-        config.vm.network "private_network", ip: "172.16.0.7"
+        config.vm.network "private_network", ip: "172.16.0.14"
         config.vm.provider "virtualbox" do |vb|
             vb.name = "worker1"
             vb.memory = 2048
@@ -180,7 +180,7 @@ Vagrant.configure("2") do |config|
     end
     # Enable if you have lots of ram and want more workers
     config.vm.define "worker2" do |config|
-        config.vm.network "private_network", ip: "172.16.0.8"
+        config.vm.network "private_network", ip: "172.16.0.15"
         config.vm.provider "virtualbox" do |vb|
             vb.name = "worker2"
             vb.memory = 2048
@@ -193,7 +193,7 @@ Vagrant.configure("2") do |config|
         config.vm.provision :shell, :path => "provision-kube-worker.sh"
     end
 #    config.vm.define "worker3" do |config|
-#        config.vm.network "private_network", ip: "172.16.0.9"
+#        config.vm.network "private_network", ip: "172.16.0.16"
 #        config.vm.provider "virtualbox" do |vb|
 #            vb.name = "worker3"
 #            vb.memory = 2048
