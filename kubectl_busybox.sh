@@ -31,4 +31,8 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-kubectl run -ti --rm --restart=Never busybox --image=busybox "$@" /bin/sh
+if kubectl get po busybox "$@" &>/dev/null; then
+    kubectl exec -ti busybox "$@" /bin/sh
+else
+    kubectl run -ti --rm --restart=Never busybox --image=busybox "$@" /bin/sh
+fi
