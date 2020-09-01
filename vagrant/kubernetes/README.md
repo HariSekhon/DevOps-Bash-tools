@@ -4,7 +4,7 @@ Vagrant Kubernetes Lab
 Builds a Kubernetes cluster using `kubeadm` of one of the following configurations:
 
 - 2 nodes - 1 master, 1 worker
-- 3 nodes - 1 masters, 2 workers
+- 3 nodes - 1 master, 2 workers
 - 4 nodes - 3 masters, 1 worker
 - 5 nodes - 3 masters, 2 workers
 
