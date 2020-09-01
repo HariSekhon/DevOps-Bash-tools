@@ -91,6 +91,7 @@ kompose
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
 kubernetes-helm
+kustomize
 launchctl-completion
 lolcat
 lynx
