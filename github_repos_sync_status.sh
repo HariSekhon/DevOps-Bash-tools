@@ -108,7 +108,7 @@ if is_mac; then
 fi
 
 check_repos(){
-    for repo in "${@:-$(get_github_repos "$github_user")}"; do
+    for repo in "$@"; do
         if [ $compare_by_date = 1 ]; then
             # GitHub returns Z time
             github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master?per_page=1" | jq -r '.commit.committer.date')"
@@ -116,7 +116,7 @@ check_repos(){
             github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master" | jq -r '.object.sha')"
         fi
         # don't printf as we go because it's harder to debug, instead collect the line and print in one go
-        line="$(printf 'Repo: %s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
+        line="$(printf 'Repo: %-26s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
         in_sync=True
         if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
             if [ $compare_by_date = 1 ]; then
