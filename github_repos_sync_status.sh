@@ -128,7 +128,7 @@ check_repos(){
             else
                 gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
             fi
-            line+="$(printf 'GitLab: %s\t' "$gitlab_master_ref")"
+            line+="$(printf 'GitLab: %-40s\t' "$gitlab_master_ref")"
             if [ "$gitlab_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
@@ -143,7 +143,7 @@ check_repos(){
             else
                 bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" 2>/dev/null | jq -r '.target.hash' || echo None)"
             fi
-            line+="$(printf 'BitBucket: %s\t' "$bitbucket_master_ref")"
+            line+="$(printf 'BitBucket: %-40s\t' "$bitbucket_master_ref")"
             if [ "$bitbucket_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
