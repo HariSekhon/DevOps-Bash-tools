@@ -125,7 +125,7 @@ export TOKEN="$PINGDOM_TOKEN"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" $CURL_OPTS "$url_base/$url_path" "$@"
+"$srcdir/curl_auth.sh" "$url_base/$url_path" "$@" $CURL_OPTS
 
 # args: /checks | jq .
 # args: /checks/<check_id>
