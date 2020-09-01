@@ -59,45 +59,63 @@ cat <<EOF
 
 EOF
 
+echo "========="
 echo "Networks:"
 gcloud compute networks list
 echo
+echo "=========="
 echo "Addresses:"
 gcloud compute addresses list
 echo
+echo "============="
 echo "Target Pools:"
 gcloud compute target-pools list
 echo
+echo "============="
 echo "HTTP Proxies:"
 gcloud compute target-http-proxies list
 echo
+echo "=============="
 echo "HTTPS Proxies:"
 gcloud compute target-https-proxies list
 echo
+echo "============"
 echo "SSL Proxies:"
 gcloud compute target-ssl-proxies list
 echo
+echo "============"
 echo "TCP Proxies:"
 gcloud compute target-tcp-proxies list
 echo
+echo "========="
 echo "URL Maps:"
 gcloud compute url-maps list
 echo
+echo "========="
 echo "Subnets:"
-gcloud compute networks subnets list --sort-by=NETWORK
+gcloud compute networks subnets list --sort-by=NETWORK,REGION
 echo
+echo "======================="
+echo "Subnets usable for GKE:"
+gcloud container subnets list-usable --sort-by=NETWORK,REGION
+echo
+echo "========"
 echo "Routers:"
 gcloud compute routers list
 echo
+echo "======="
 echo "Routes:"
 gcloud compute routes list
 echo
+echo "============="
 echo "VPN Gateways:"
 gcloud compute vpn-gateways list
 echo
+echo "============"
 echo "VPN Tunnels:"
 gcloud compute vpn-tunnels list
 echo
+echo "============="
 echo "Reservations:"
 gcloud compute reservations list
 
@@ -112,11 +130,13 @@ cat <<EOF
 
 EOF
 
+echo "==============="
 echo "Firewall Rules:"
 gcloud compute firewall-rules list
 # same output
 #gcloud compute firewall-rules list --sort-by=NETWORK
 echo
+echo "================="
 echo "Forwarding Rules:"
 gcloud compute forwarding-rules list
 
