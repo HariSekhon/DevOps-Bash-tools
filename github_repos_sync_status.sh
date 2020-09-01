@@ -111,7 +111,7 @@ check_repos(){
     for repo in "${@:-$(get_github_repos "$github_user")}"; do
         if [ $compare_by_date = 1 ]; then
             # GitHub returns Z time
-            github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master" | jq -r '.commit.committer.date')"
+            github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master?per_page=1" | jq -r '.commit.committer.date')"
         else
             github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master" | jq -r '.object.sha')"
         fi
@@ -121,7 +121,7 @@ check_repos(){
         if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
             if [ $compare_by_date = 1 ]; then
                 # GitHub returns current timezone eg. .000+01:00
-                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/commits?ref_name=master" 2>/dev/null | jq -r '.[0].created_at' || echo None)"
+                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/commits?ref_name=master&per_page=1" 2>/dev/null | jq -r '.[0].created_at' || echo None)"
                 if [ "$gitlab_master_ref" != None ]; then
                     gitlab_master_ref="$(date --utc -d "$gitlab_master_ref" '+%FT%TZ')"
                 fi
@@ -136,7 +136,7 @@ check_repos(){
         if [ $check_bitbucket = 1 ] || [ $check_gitlab = 0 ]; then
             if [ $compare_by_date = 1 ]; then
                 # BitBucket returns +00:00 timezone
-                bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" | jq -r '.values[0].date' || echo None)"
+                bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" 2>/dev/null | jq -r '.values[0].date' || echo None)"
                 if [ "$bitbucket_master_ref" != None ]; then
                     bitbucket_master_ref="$(date --utc -d "$bitbucket_master_ref" '+%FT%TZ')"
                 fi
