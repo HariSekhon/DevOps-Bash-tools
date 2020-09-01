@@ -150,7 +150,8 @@ cat <<EOF
 EOF
 
 if is_service_enabled datastore.googleapis.com; then
-    gcloud datastore indexes list
+    # may error out if doesn't exist
+    gcloud datastore indexes list || :
 else
     echo "Datastore API datastore.googleapis.com) is not enabled, skipping..."
 fi
