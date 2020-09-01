@@ -5,7 +5,6 @@ Builds a Kubernetes cluster using `kubeadm` of one of the following configuratio
 
 - 2 nodes - 1 master, 1 worker
 - 3 nodes - 1 masters, 2 workers
-Right now Masters 2 & 3 are not provisioned as I haven't decided the split of services, but will be done shortly
 - 4 nodes - 3 masters, 1 worker
 - 5 nodes - 3 masters, 2 workers
 
