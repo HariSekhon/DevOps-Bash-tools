@@ -27,7 +27,7 @@ For all or a given list of instances in the current GCP project, list the instan
 GCloud SDK is required, and will attempt to infer the zone based on the instance name, but sometimes it cannot, in
 which cases you advised to set the compute/zone yourself (gcloud config set compute/zone ...)
 
-Caveat: slow, see gce_list_instance_service_accounts.py in the adjacent DevOps Python tools repos
+Caveat: slow - would write a Python version but the API is so bad and hardly documented that it's not worth the trouble
 "
 
 # used by usage() in lib/utils.sh
