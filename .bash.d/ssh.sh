@@ -195,6 +195,10 @@ sshkeygo(){
     ssh "$@"
 }
 
+sshkey2(){
+    sshkeygo "$@"
+}
+
 cleankey(){
     if [ $# -lt 1 ]; then
         echo "usage: cleankey regex"
