@@ -69,6 +69,7 @@ usage_switches="
 -g --gitlab         Compare each GitHub repo with its GitLab counterpart
 -b --bitbucket      Compare each GitHub repo with its BitBucket counterpart
 -d --date           Compare by date of latest commit instead of hashref
+-l --long-hashrefs  Use long 40 char hashrefs, not 8 char abbreviated ones
 "
 
 help_usage "$@"
@@ -79,6 +80,7 @@ repos=()
 check_gitlab=0
 check_bitbucket=0
 compare_by_date=0
+long_hashrefs=0
 
 for arg; do
     case "$arg" in
@@ -87,6 +89,9 @@ for arg; do
      -b|--bitbucket)    check_bitbucket=1
                         ;;
           -d|--date)    compare_by_date=1
+                        shift || :
+                        ;;
+ -l|--long-hashrefs)    long_hashrefs=1
                         shift || :
                         ;;
          -D|--debug)    export DEBUG=1
@@ -98,6 +103,10 @@ for arg; do
                         ;;
     esac
 done
+
+if [ $compare_by_date = 1 ] && [ $long_hashrefs = 1 ]; then
+    usage "--date and --long-hashrefs are mutually exclusive"
+fi
 
 github_user="$(get_github_user)"
 
@@ -114,6 +123,9 @@ check_repos(){
             github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master?per_page=1" | jq -r '.commit.committer.date')"
         else
             github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master" | jq -r '.object.sha')"
+            if [ $long_hashrefs = 0 ]; then
+                github_master_ref="${github_master_ref:0:8}"
+            fi
         fi
         # don't printf as we go because it's harder to debug, instead collect the line and print in one go
         line="$(printf 'Repo: %-26s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
@@ -126,9 +138,13 @@ check_repos(){
                     gitlab_master_ref="$(date --utc -d "$gitlab_master_ref" '+%FT%TZ')"
                 fi
             else
+                # or .commit.short_id - only GitLab gives this short hashref in the API, we'll just truncate all of them to 8 chars for output
                 gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
+                if [ $long_hashrefs = 0 ]; then
+                    gitlab_master_ref="${gitlab_master_ref:0:8}"
+                fi
             fi
-            line+="$(printf 'GitLab: %-40s\t' "$gitlab_master_ref")"
+            line+="$(printf "GitLab: %-${#github_master_ref}s\t" "$gitlab_master_ref")"
             if [ "$gitlab_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
@@ -142,8 +158,11 @@ check_repos(){
                 fi
             else
                 bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" 2>/dev/null | jq -r '.target.hash' || echo None)"
+                if [ $long_hashrefs = 0 ]; then
+                    bitbucket_master_ref="${bitbucket_master_ref:0:8}"
+                fi
             fi
-            line+="$(printf 'BitBucket: %-40s\t' "$bitbucket_master_ref")"
+            line+="$(printf "BitBucket: %-${#github_master_ref}s" "$bitbucket_master_ref")"
             if [ "$bitbucket_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
