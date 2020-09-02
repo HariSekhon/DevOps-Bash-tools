@@ -56,6 +56,7 @@ elif [ "$selected_cni" = "$weavenet_yaml" ]; then
     if ! [ -f "$weavenet_yaml" ]; then
         timestamp "Fetching $weavenet_yaml:"
         wget -O "$weavenet_yaml" https://git.io/weave-kube
+        #wget -O "$weavenet_yaml" "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
     fi
 else
     echo "Selected CNI '$selected_cni' doesn't match one of: $flannel_yml, $calico_yaml, $weavenet_yaml"
