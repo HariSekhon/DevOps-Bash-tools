@@ -121,7 +121,7 @@ kubectl get nodes
 echo >&2
 
 timestamp "(re)generating $kubeadm_join for workers to use"
-"$bash_tools/kubernetes_join_cmd.sh" > "$kubeadm_join"
+"$bash_tools/kubeadm_join_cmd.sh" > "$kubeadm_join"
 chmod +x "$kubeadm_join"
 
 } 2>&1 | tee -a "$log"
