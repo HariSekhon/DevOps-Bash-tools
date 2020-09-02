@@ -28,7 +28,7 @@ https://api.cloudflare.com/#dnssec-dnssec-details
 
 Output format:
 
-<zone_id>    <zone_name>    <dns_status>
+<zone_id>    <zone_name>    <dnssec_status>
 "
 
 # used by usage() in lib/utils.sh
