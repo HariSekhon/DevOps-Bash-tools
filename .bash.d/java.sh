@@ -26,7 +26,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
-add_PATH CLASSPATH "$HOME/bin/java"
+add_PATH CLASSPATH ~/bin/java
 
 # turn off those annoying Java 11 warnings when using Groovy scripting
 export GROOVY_TURN_OFF_JAVA_WARNINGS=true
