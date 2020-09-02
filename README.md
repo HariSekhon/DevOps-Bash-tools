@@ -329,6 +329,18 @@ etc.
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
   - `bitbucket_foreach_repo.sh` - executes a templated command for each BitBucket repo, replacing the `{user}` and `{repo}` in each iteration
   - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
+- `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
+- `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
+  - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
+  - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
+  - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with the status and expiry date
+  - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
+  - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones
+  - `cloudflare_dnssec.sh` - lists the Cloudflare DNSSec status for all zones
+  - `cloudflare_foreach_account.sh` - executes a templated command for each Cloudflare account, replacing the `{account_id}` and `{account_name}` in each iteration (useful for chaining with `cloudflare_api.sh`)
+  - `cloudflare_foreach_zone.sh` - executes a templated command for each Cloudflare zone, replacing the `{zone_id}` and `{zone_name}` in each iteration (useful for chaining with `cloudflare_api.sh`, used by adjacent `cloudflare_*_all_zones.sh` scripts)
+  - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
+  - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
   - `pingdom_foreach_check.sh` - runs any templated command against each [Pingdom](https://www.pingdom.com/) check
