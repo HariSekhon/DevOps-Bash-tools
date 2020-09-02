@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists Cloudflare DnsSec status for all zones
 
+https://api.cloudflare.com/#dnssec-dnssec-details
+
 Output format:
 
 <zone_id>    <zone_name>    <dns_status>
