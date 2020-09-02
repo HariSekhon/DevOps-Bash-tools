@@ -25,8 +25,8 @@ if [ -d "$srcdir/../sql" ]; then
     sql_scripts="$srcdir/../sql"
 fi
 
-# unreliable that this is set, ensure shell evaluates to the right thing before we use it
-HOME=~
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+[ -n "${HOME:-}" ] || HOME=~
 
 sql_mount_description="
 SQL  scripts     => /sql  <- session \$PWD for convenient sql sourcing
