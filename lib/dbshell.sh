@@ -25,6 +25,9 @@ if [ -d "$srcdir/../sql" ]; then
     sql_scripts="$srcdir/../sql"
 fi
 
+# unreliable that this is set, ensure shell evaluates to the right thing before we use it
+HOME=~
+
 sql_mount_description="
 SQL  scripts     => /sql  <- session \$PWD for convenient sql sourcing
 Bash scripts     => /bash
