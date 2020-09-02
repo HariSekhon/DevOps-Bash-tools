@@ -40,6 +40,9 @@ setup_file .zshenv
 setup_file .zlogin
 setup_file .zlogout
 
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+[ -n "${HOME:-}" ] || HOME=~
+
 echo
 echo "symlinking dot files to \$HOME directory: $HOME"
 echo
