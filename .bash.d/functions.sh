@@ -39,6 +39,10 @@ retmode(){
     fi
 }
 
+jq(){
+    command jq -CS "$@"
+}
+
 envg(){
     env |
     eval grep -i "$(for arg; do echo -n " -e '$arg'"; done)"
