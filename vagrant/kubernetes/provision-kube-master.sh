@@ -43,20 +43,20 @@ selected_cni="$calico_yaml"
 
 # should already be in the vagrant dir
 if [ "$selected_cni" = "$flannel_yml" ]; then
-    if ! [ -f "$flannel_yml" ]; then
+    if ! [ -s "$flannel_yml" ]; then
         timestamp "Fetching $flannel_yml:"
         wget -O "$flannel_yml" https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
     fi
 elif [ "$selected_cni" = "$calico_yaml" ]; then
-    if ! [ -f "$calico_yaml" ]; then
+    if ! [ -s "$calico_yaml" ]; then
         timestamp "Fetching $calico_yaml:"
         wget -O "$calico_yaml" https://docs.projectcalico.org/manifests/calico.yaml
     fi
 elif [ "$selected_cni" = "$weavenet_yaml" ]; then
-    if ! [ -f "$weavenet_yaml" ]; then
+    if ! [ -s "$weavenet_yaml" ]; then
         timestamp "Fetching $weavenet_yaml:"
-        wget -O "$weavenet_yaml" https://git.io/weave-kube
-        #wget -O "$weavenet_yaml" "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+        #wget -O "weave.sh https://git.io/weave
+        wget -O "$weavenet_yaml" "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
     fi
 else
     echo "Selected CNI '$selected_cni' doesn't match one of: $flannel_yml, $calico_yaml, $weavenet_yaml"
