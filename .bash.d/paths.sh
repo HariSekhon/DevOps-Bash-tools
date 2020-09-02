@@ -28,8 +28,8 @@ fi
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# unreliable that this is set, ensure shell evaluates to the right thing before we use it
-HOME=~
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+[ -n "${HOME:-}" ] || HOME=~
 
 github="${github:-$HOME/github}"
 
