@@ -106,6 +106,44 @@ Gets Cloudflare zone SSL verification status for a given zone (see cloudflare_ss
 ${0##*/} /zones/<zone_id>/ssl/verification
 
 
+Get Firewall Rules for a zone:
+
+${0##*/} /zones/<zone_id>/firewall/rules
+
+
+Get Firewall Security Events for a zone:
+
+${0##*/} /zones/<zone_id>/security/events
+
+
+List account rules lists:
+
+${0##*/}  /accounts/<account_id>/rules/lists
+
+
+List load balancer pools:
+
+${0##*/} /user/load_balancers/pools
+
+
+List load balancer monitors:
+
+${0##*/} /user/load_balancers/monitors
+
+
+List load balancers for a zone:
+
+${0##*/}  /zones/<zone_id>/load_balancers
+
+
+Get all cidr ranges owned by the account:
+
+${0##*/} /accounts/<account_id>/addressing/prefixes
+
+
+List healthchecks for a zone:
+
+${0##*/} /zones/<zone_id>/healthchecks
 "
 
 # used by usage() in lib/utils.sh
