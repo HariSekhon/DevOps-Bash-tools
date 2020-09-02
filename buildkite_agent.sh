@@ -44,6 +44,9 @@ help_usage "$@"
 
 buildkite_tags="os=linux"
 
+# unreliable that this is set, ensure shell evaluates to the right thing before we use it
+HOME=~
+
 export PATH="$PATH:$HOME/.buildkite-agent/bin"
 
 if type -P buildkite-agent &>/dev/null; then
