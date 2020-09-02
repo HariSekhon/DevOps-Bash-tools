@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo {repo} is found at {dir}
+#  args: echo check id = {id} and name = {name}
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-24 15:25:27 +0100 (Mon, 24 Aug 2020)
