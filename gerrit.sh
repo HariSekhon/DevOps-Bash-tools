@@ -32,7 +32,7 @@ usage_args="arg [<options>]"
 GERRIT_VERSION="3.1.3"
 
 gerrit_local(){
-    GERRIT_SITE="$HOME/gerrit_site"
+    GERRIT_SITE=~/gerrit_site
 
     WAR="$GERRIT_SITE/gerrit-$GERRIT_VERSION.war"
 
