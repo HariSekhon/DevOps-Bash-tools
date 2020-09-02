@@ -23,6 +23,9 @@ if [ -z "$JAVA_HOME" ]; then
     exit 1
 fi
 
+# unreliable that this is set, ensure shell evaluates to the right thing before we use it
+HOME=~
+
 #JAR="$HOME/.sbt/sbt-launch-$SBT_VERSION.jar"
 
 bootdir="$HOME/.sbt/boot"
