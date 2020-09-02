@@ -58,4 +58,4 @@ while read -r zone_id zone_name; do
     cmd="${cmd//\{id\}/$zone_id}"
     cmd="${cmd//\{name\}/$zone_name}"
     eval "$cmd"
-done < <("$srcdir/cloudflare_api.sh" zones | jq -r '.result[] | [.id, .name] | @tsv')
+done < <("$srcdir/cloudflare_api.sh" zones | jq -r '.result[] | [.id, .name] | @tsv' | sed "s/'/\\\\'/g")
