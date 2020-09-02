@@ -25,6 +25,9 @@ zipdir="${zipfile%-bin.zip}"
 
 URL="${URL:-http://search.maven.org/remotecontent?filepath=com/twitter/parquet-tools/$PARQUET_VERSION/$zipfile}"
 
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+[ -n "${HOME:-}" ] || HOME=~
+
 bin="${BIN:-$HOME/bin}"
 
 mkdir -pv "$bin"
