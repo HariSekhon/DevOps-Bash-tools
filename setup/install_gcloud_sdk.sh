@@ -30,7 +30,7 @@ fi
 #yum_version="123.0.0"
 
 # installs to $HOME/google-cloud-sdk
-install_root_dir="$HOME"
+install_root_dir=~
 
 apt_optional_packages="
 google-cloud-sdk-app-engine-python \
