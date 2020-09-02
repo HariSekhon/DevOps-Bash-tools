@@ -92,7 +92,7 @@ chown -v vagrant:vagrant /home/vagrant/.kube/config
 cp -vf ~/.kube/config /vagrant/.kube/config
 echo >&2
 
-timestamp "Applying $selected_cni:"
+timestamp "Applying CNI $selected_cni:"
 kubectl apply -f "$selected_cni"
 
 echo >&2
