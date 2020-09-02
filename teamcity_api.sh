@@ -142,7 +142,7 @@ usage_args="/path [<curl_options>]"
 # used to put this in /tmp but it is created world readable by default and when securing it there is a race condition
 # between the 2 curl and chmod lines, whereas $HOME is more likely to be read restricted
 # now additionally this is initialized with restricted permissions before it is ever used to avoid this race condition
-cookie_jar="$HOME/.teamcity_cookie_jar_${EUID}"
+cookie_jar=~/".teamcity_cookie_jar_${EUID}"
 touch "$cookie_jar"
 chown "$(whoami)" "$cookie_jar"
 chmod 0600 "$cookie_jar"
