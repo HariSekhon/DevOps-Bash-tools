@@ -37,6 +37,4 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
-"$srcdir/cloudflare_foreach_zone.sh" "$srcdir/cloudflare_api.sh /zones/{id}/dns_records | jq -r '.result[] | [.name, .type, .ttl] | @tsv' | column -t"
+"$srcdir/cloudflare_foreach_zone.sh" "$srcdir/cloudflare_dns_records.sh {zone_id}"
