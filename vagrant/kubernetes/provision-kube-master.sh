@@ -34,10 +34,28 @@ kubeadm_join="/vagrant/kubeadm_join.sh"
 
 pushd /vagrant
 
+flannel_yml=kube-flannel.yml
+calico_yaml=calico.yaml
+weavenet_yaml=weavenet.yaml
+
+# XXX: one-line CNI deployment change right here :-)
+selected_cni="$calico_yaml"
+
 # should already be in the vagrant dir
-if ! [ -f calico.yaml ]; then
-    timestamp "Fetching calico.yaml:"
-    wget https://docs.projectcalico.org/manifests/calico.yaml
+if [ "$selected_cni" = "$flannel_yml" ] &&
+   ! [ -f "$flannel_yml" ]; then
+    timestamp "Fetching $flannel_yml:"
+    wget -O "$flannel_yml" https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+fi
+if [ "$selected_cni" = "$calico_yaml" ] &&
+   ! [ -f "$calico_yaml" ]; then
+    timestamp "Fetching $calico_yaml:"
+    wget -O "$calico_yaml" https://docs.projectcalico.org/manifests/calico.yaml
+fi
+if [ "$selected_cni" = "$weavenet_yaml" ] &&
+   ! [ -f "$weavenet_yaml" ]; then
+    timestamp "Fetching $weavenet_yaml:"
+    wget -O "$weavenet_yaml" https://git.io/weave-kube
 fi
 
 echo >&2
@@ -69,8 +87,8 @@ chown -v vagrant:vagrant /home/vagrant/.kube/config
 cp -vf ~/.kube/config /vagrant/.kube/config
 echo >&2
 
-timestamp "Applying calico.yaml:"
-kubectl apply -f calico.yaml
+timestamp "Applying $selected_cni:"
+kubectl apply -f "$selected_cni"
 
 echo >&2
 
