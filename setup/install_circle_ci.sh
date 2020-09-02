@@ -33,6 +33,9 @@ else
     curl -fLSs https://circle.ci/cli | DESTDIR=~/bin bash
 fi
 
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+[ -n "${HOME:-}" ] || HOME=~
+
 export PATH="$PATH:$HOME/bin"
 
 if ! is_CI && [ -t 1 ]; then
