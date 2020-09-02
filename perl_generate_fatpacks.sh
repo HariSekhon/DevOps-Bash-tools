@@ -29,8 +29,8 @@ srcdir="$(dirname "$0")"
 
 output_dir="fatpacks"
 
-# unreliable that this is set, ensure shell evaluates to the right thing before we use it
-HOME=~
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+[ -n "${HOME:-}" ] || HOME=~
 
 export PERL5LIB="${PERL5LIB:-}:$HOME/perl5/lib/perl5"
 export PATH="${PATH:-}:$HOME/perl5/bin"
