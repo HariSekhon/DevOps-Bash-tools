@@ -26,10 +26,14 @@ Fetches and parses Atlassian's IP ranges API, outputting the CIDR ranges, one pe
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[--ipv4 / --ipv6]
+usage_args="[--ipv4 / --ipv6]"
 
---ipv4  Output only IPv4 CIDR ranges
---ipv6  Output only IPv6 CIDR ranges"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_switches="
+   --ipv4           Output only IPv4 CIDR ranges
+   --ipv6           Output only IPv6 CIDR ranges
+"
 
 help_usage "$@"
 
