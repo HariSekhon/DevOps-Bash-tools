@@ -333,7 +333,7 @@ etc.
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
   - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
-  - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with the status and expiry date
+  - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
   - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
   - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones
   - `cloudflare_dnssec.sh` - lists the Cloudflare DNSSec status for all zones
