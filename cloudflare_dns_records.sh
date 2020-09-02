@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists all DNS records in Cloudflare across all zones
 
+https://api.cloudflare.com/#dns-records-for-a-zone-list-dns-records
+
 Output format:
 
 <dns_record>    <type>    <ttl>
