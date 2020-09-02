@@ -319,13 +319,13 @@ export desk="$desktop"
 alias desktop='cd "$desktop"'
 alias desk=desktop
 
-alias todo='ti T; $EDITOR $HOME/TODO'
+alias todo='ti T; $EDITOR ~/TODO'
 alias TODO="todo"
-alias don='ti D; $EDITOR $HOME/DONE'
+alias don='ti D; $EDITOR ~/DONE'
 alias DON=don
 
 # drive => Google Drive
-export google_drive="$HOME/drive"
+export google_drive=~/drive
 export drive="$google_drive"
 alias drive='cd "$drive"'
 
