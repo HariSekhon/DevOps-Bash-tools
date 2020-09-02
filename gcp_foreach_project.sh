@@ -30,6 +30,7 @@ This is powerful so use carefully!
 Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
 
 Sets the core/project in each iteration, and sets back to the original project upon any exit (except kill -9)
+This allows easy chaining with other scripts that operate on the current project
 
 All arguments become the command template
 
