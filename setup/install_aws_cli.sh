@@ -40,6 +40,9 @@ echo
 uname_s="$(uname -s)"
 mkdir -p ~/bin
 
+# unreliable that this is set, ensure shell evaluates to the right thing before we use it
+HOME=~
+
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
 
