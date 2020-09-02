@@ -241,7 +241,7 @@ etc.
     - `gcp_service_apis.sh` - lists all available [GCP](https://cloud.google.com/) Services, APIs and their states (ENABLED/DISABLED), and provides `is_service_enabled()` function use throughout the adjacent scripts to avoid errors and only show relevant services
   - `gcp_info_accounts_secrets.sh` - IAM Service Accounts, Secrets Manager secrets
 - `gcp_info_all_projects.sh` - same as above but for all detected projects
-- `gcp_foreach_project.sh` - execute any templated command across all GCP projects - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
+- `gcp_foreach_project.sh` - executes a templated command across all GCP projects, switching `core/project` and replacing `{project_id}` and `{project_name}` in each iteration - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
 - `gcp_find_orphaned_disks.sh` - lists orphaned disks across all GCP projects (not attached to any compute instance)
 - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
 - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM pre-emption latch and boolean check scripts
@@ -256,7 +256,7 @@ etc.
   - storage classes, persistent volumes, persistent volume claims
   - service accounts, resource quotas, network policies, pod security policies
   - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
-- `kubernetes_foreach_context.sh` - runs a command across all kubectl contexts (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
+- `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
 - `kubectl_exec.sh` - finds and execs to the first Kubernetes pod matching given pod filters, can optionally specify the container to exec to, showing the full generated `kubectl exec` command line for clarity
 - `kubectl_exec_grep.sh` - finds and execs to the first Kubernetes pod matching the given name regex, can optionally specify the container name regex to exec to, showing the full generated `kubectl exec` command line for clarity
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
@@ -296,9 +296,9 @@ etc.
 - `cloudera_navigator_audit_logs.sh` - fetches [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for given service eg. hive/impala/hdfs via the API, simplifying date handling, authentication and common settings. Built on top of `cloudera_navigator_api.sh`
 - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
 - `git*.sh` - various useful Git scripts, eg:
-  - `git_foreach_branch.sh` - runs a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
-  - `git_foreach_repo.sh` - runs a command on all adjacent repos from a given repolist (used heavily by many adjacent scripts)
-  - `git_foreach_modified.sh` - runs a command against each file with git modified status
+  - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
+  - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
+  - `git_foreach_modified.sh` - executes a command against each file with git modified status
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_public_repos.sh` - auto-creates remotes for the 3 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org))
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 3 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) which doesn't have the [GitLab](https://gitlab.com/) auto-sync from [GitHub](https://github.com/) feature)
@@ -343,7 +343,7 @@ etc.
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
-  - `pingdom_foreach_check.sh` - runs a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing `{check_id}` and `{check_name}` in each iteration
+  - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
   - `pingdom_checks.sh` - show all Pingdom checks, status and latencies
   - `pingdom_checks_outages.sh` / `pingdom_checks_outages.sh` - show one or all Pingdom checks outage histories for the last year
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
@@ -400,7 +400,7 @@ etc.
   - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
   - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
-  - `spotify_foreach_playlist.sh` - iterate any command against all playlists with command templating of `{playlist}` and `{playlist_id}`
+  - `spotify_foreach_playlist.sh` - executes a templated command against all playlists, replacing `{playlist}` and `{playlist_id}` in each iteration
   - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
   - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
   - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
