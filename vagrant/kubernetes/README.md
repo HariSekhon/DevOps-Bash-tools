@@ -38,7 +38,7 @@ eg.
 vagrant up master1 worker1
 ```
 
-or use any one of the scripts:
+or use any one of the following script shortcuts to give you one of the above configurations:
 
 ```
 ./2nodes.sh
