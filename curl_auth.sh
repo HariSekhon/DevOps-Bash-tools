@@ -49,7 +49,7 @@ done
 
 check_bin curl
 
-USERNAME="${USERNAME:-$USER}"
+USERNAME="${USERNAME:-${USER:-$(whoami)}}"
 
 # Only do password mechanism and netrc_contents workaround if not using Kerberos
 if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
