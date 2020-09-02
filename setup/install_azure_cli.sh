@@ -34,6 +34,8 @@ fi
 uname_s="$(uname -s)"
 #mkdir -p ~/bin
 
+# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+#[ -n "${HOME:-}" ] || HOME=~
 #export PATH="$PATH:/usr/local/bin"
 #export PATH="$PATH:$HOME/bin"
 
