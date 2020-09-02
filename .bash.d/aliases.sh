@@ -85,8 +85,6 @@ alias grep='grep --color=auto'
 #alias envg="env | grep -i"
 alias dec="decomment.sh"
 
-alias jq="jq -CS"
-
 alias hosts='sudo $EDITOR /etc/hosts'
 
 alias path="echo \$PATH | tr ':' '\\n' | more"
