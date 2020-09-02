@@ -29,6 +29,8 @@ This is powerful so use carefully!
 
 Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
 
+Sets the core/project in each iteration, and sets back to the original project upon any exit (except kill -9)
+
 All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
@@ -54,10 +56,20 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+current_project="$(gcloud config list --format="value(core.project)")"
+if [ -n "$current_project" ]; then
+    # want interpolation now not at exit
+    # shellcheck disable=SC2064
+    trap "gcloud config set project '$current_project'" EXIT
+else
+    trap "gcloud config unset project" EXIT
+fi
+
 while read -r project_id project_name; do
     echo "# ============================================================================ #" >&2
     echo "# GCP Project ID = $project_id -- Name = $project_name" >&2
     echo "# ============================================================================ #" >&2
+    gcloud config set project "$project_id"
     cmd="$cmd_template"
     cmd="${cmd//\{project_id\}/$project_id}"
     cmd="${cmd//\{project_name\}/$project_name}"
