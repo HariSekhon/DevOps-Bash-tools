@@ -92,6 +92,8 @@ assume-role(){
 # ============================================================================ #
 
 aws_get_cred_path(){
+    # unreliable that this is set, ensure shell evaluates to the right thing before we use it
+    local HOME=~
     local aws_credentials="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
     local aws_config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
     local boto="${BOTO_CONFIG:-$HOME/.boto}"
