@@ -198,7 +198,7 @@ url_path="${url_path##/}"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-#                                  XML by default :-/
+#                                                        XML by default :-/
 "$srcdir/curl_auth.sh" "$url_base/$url_path" -H "Accept: application/json" "$@" $CURL_OPTS
 chmod 0600 "$cookie_jar"
 
