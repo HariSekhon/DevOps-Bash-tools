@@ -343,7 +343,7 @@ etc.
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
-  - `pingdom_foreach_check.sh` - runs any templated command against each [Pingdom](https://www.pingdom.com/) check
+  - `pingdom_foreach_check.sh` - runs a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing `{check_id}` and `{check_name}` in each iteration
   - `pingdom_checks.sh` - show all Pingdom checks, status and latencies
   - `pingdom_checks_outages.sh` / `pingdom_checks_outages.sh` - show one or all Pingdom checks outage histories for the last year
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
