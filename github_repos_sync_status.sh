@@ -128,7 +128,7 @@ check_repos(){
             fi
         fi
         # don't printf as we go because it's harder to debug, instead collect the line and print in one go
-        line="$(printf 'Repo: %-26s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
+        line="$(printf '%-26s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
         in_sync=True
         if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
             if [ $compare_by_date = 1 ]; then
