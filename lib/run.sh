@@ -21,6 +21,12 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+ . "$srcdir/../.bash.d/aliases.sh"
+
+# shellcheck disable=SC1090
+ . "$srcdir/../.bash.d/functions.sh"
+
 if [ $# -eq 0 ]; then
     echo "usage: ${0##*/} <filename>"
     exit 3
