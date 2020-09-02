@@ -1,7 +1,15 @@
 Vagrant Kubernetes Lab
 ======================
 
-Builds a Kubernetes cluster using `kubeadm` of one of the following configurations:
+#### Quickstart
+
+Boots a 2 node Kubernetes cluster (1 master + 1 worker) and drops you straight in to the master shell to run `kubectl` commands
+
+`make`
+
+#### Details
+
+Builds a Kubernetes cluster using `kubeadm` with one of the following configurations:
 
 - 2 nodes - 1 master, 1 worker
 - 3 nodes - 1 master, 2 workers
