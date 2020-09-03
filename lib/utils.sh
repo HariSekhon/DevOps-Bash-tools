@@ -189,6 +189,14 @@ has_terminal(){
     [ -t 0 ]
 }
 
+is_tty(){
+    has_terminal
+}
+
+is_piped(){
+    ! [ -t 1 ]
+}
+
 # beware this results false in scripts, has_terminal is probably what you want
 is_interactive(){
     if [ -n "${PS1:-}" ]; then
