@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP network resources deployed in the current GCP Project
@@ -59,65 +62,35 @@ cat <<EOF
 
 EOF
 
-echo "========="
-echo "Networks:"
-gcloud compute networks list
-echo
-echo "=========="
-echo "Addresses:"
-gcloud compute addresses list
-echo
-echo "============="
-echo "Target Pools:"
-gcloud compute target-pools list
-echo
-echo "============="
-echo "HTTP Proxies:"
-gcloud compute target-http-proxies list
-echo
-echo "=============="
-echo "HTTPS Proxies:"
-gcloud compute target-https-proxies list
-echo
-echo "============"
-echo "SSL Proxies:"
-gcloud compute target-ssl-proxies list
-echo
-echo "============"
-echo "TCP Proxies:"
-gcloud compute target-tcp-proxies list
-echo
-echo "========="
-echo "URL Maps:"
-gcloud compute url-maps list
-echo
-echo "========="
-echo "Subnets:"
-gcloud compute networks subnets list --sort-by=NETWORK,REGION
-echo
-echo "======================="
-echo "Subnets usable for GKE:"
-gcloud container subnets list-usable --sort-by=NETWORK,REGION
-echo
-echo "========"
-echo "Routers:"
-gcloud compute routers list
-echo
-echo "======="
-echo "Routes:"
-gcloud compute routes list
-echo
-echo "============="
-echo "VPN Gateways:"
-gcloud compute vpn-gateways list
-echo
-echo "============"
-echo "VPN Tunnels:"
-gcloud compute vpn-tunnels list
-echo
-echo "============="
-echo "Reservations:"
-gcloud compute reservations list
+gcp_info "Networks"               gcloud compute networks list
+
+gcp_info "Addresses"              gcloud compute addresses list
+
+gcp_info "Target Pools"           gcloud compute target-pools list
+
+gcp_info "HTTP Proxies"           gcloud compute target-http-proxies list
+
+gcp_info "HTTPS Proxies"          gcloud compute target-https-proxies list
+
+gcp_info "SSL Proxies"            gcloud compute target-ssl-proxies list
+
+gcp_info "TCP Proxies"            gcloud compute target-tcp-proxies list
+
+gcp_info "URL Maps"               gcloud compute url-maps list
+
+gcp_info "Subnets"                gcloud compute networks subnets list --sort-by=NETWORK,REGION
+
+gcp_info "Subnets usable for GKE" gcloud container subnets list-usable --sort-by=NETWORK,REGION
+
+gcp_info "Routers"                gcloud compute routers list
+
+gcp_info "Routes"                 gcloud compute routes list
+
+gcp_info "VPN Gateways"           gcloud compute vpn-gateways list
+
+gcp_info "VPN Tunnels"            gcloud compute vpn-tunnels list
+
+gcp_info "Reservations"           gcloud compute reservations list
 
 
 # Firewalls
@@ -130,15 +103,11 @@ cat <<EOF
 
 EOF
 
-echo "==============="
-echo "Firewall Rules:"
-gcloud compute firewall-rules list
-# same output
-#gcloud compute firewall-rules list --sort-by=NETWORK
-echo
-echo "================="
-echo "Forwarding Rules:"
-gcloud compute forwarding-rules list
+gcp_info "Firewall Rules" gcloud compute firewall-rules list
+                         # same output
+                         #gcloud compute firewall-rules list --sort-by=NETWORK
+
+gcp_info  "Forwarding Rules:" gcloud compute forwarding-rules list
 
 
 # DNS
@@ -152,9 +121,9 @@ cat <<EOF
 EOF
 
 if is_service_enabled dns.googleapis.com; then
-    gcloud dns managed-zones list
-    echo
-    gcloud domains list-user-verified
+    gcp_info "DNS Managed Zones" gcloud dns managed-zones list
+
+    gcp_info "Domains verified" gcloud domains list-user-verified
 else
     echo "Cloud DNS API (dns.googleapis.com) is not enabled, skipping..."
 fi
