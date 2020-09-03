@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP IAM Service Accounts & Secrets Manager secrets deployed in the current GCP Project
@@ -28,6 +31,8 @@ Lists in this order:
 
     - IAM Service Accounts
     - Secrets Manager secrets
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -49,7 +54,7 @@ cat <<EOF
 
 EOF
 
-gcloud iam service-accounts list
+gcp_info "Service Accounts" gcloud iam service-accounts list
 
 
 # Secrets
@@ -63,7 +68,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled secretmanager.googleapis.com; then
-    gcloud secrets list
+    gcp_info "GCP Secrets" gcloud secrets list
 else
     echo "Secrets Manager API (secretmanager.googleapis.com) is not enabled, skipping..."
 fi
