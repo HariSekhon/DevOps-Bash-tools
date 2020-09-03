@@ -41,7 +41,7 @@ gcp_info(){
         echo "$title:"
     fi
     # better than eval'ing the entire command line to evaluate $title in the formatting string interpolation
-    "$@" --format="$(eval echo "$formatting")"
+    "$@" --format="$(eval echo "$formatting")" || return
     if [ -z "$formatting" ]; then
         echo
     fi
