@@ -36,4 +36,6 @@ $gcp_info_formatting_help
 # shellcheck disable=SC2034
 usage_args=""
 
+help_usage "$@"
+
 gcp_foreach_project.sh "'$srcdir/gcp_info.sh' '{id}'"
