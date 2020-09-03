@@ -25,6 +25,8 @@ usage_description="
 Gathers GCP Info across all projects
 
 Combines gcp_foreach_project.sh and gcp_info.sh
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
