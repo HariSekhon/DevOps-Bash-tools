@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP Big Data resources deployed in the current GCP Project
@@ -30,6 +33,8 @@ Lists in this order:
     - Dataflow jobs           (all regions)
     - PubSub topics
     - Cloud IOT registries    (all regions)
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -52,7 +57,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
-    gcloud dataproc clusters list --region all
+    gcp_info "Dataproc clusters" gcloud dataproc clusters list --region all
 else
     echo "Dataproc API (dataproc.googleapis.com) is not enabled, skipping..."
 fi
@@ -73,7 +78,8 @@ EOF
 # DISABLED  dataflow.googleapis.com   Dataflow API
 #
 #if is_service_enabled dataflow.googleapis.com; then
-gcloud dataflow jobs list --region=all
+    gcp_info "Dataflow jobs" gcloud dataflow jobs list --region=all
+#else
 #    echo "Dataflow API (dataflow.googleapis.com) is not enabled, skipping..."
 #fi
 
@@ -89,7 +95,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled pubsub.googleapis.com; then
-    gcloud pubsub topics list
+    gcp_info "Cloud PubSub topics" gcloud pubsub topics list
 else
     echo "Cloud PubSub API (pubsub.googleapis.com) is not enabled, skipping..."
 fi
@@ -106,7 +112,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled cloudiot.googleapis.com; then
-    gcloud iot registries list --region=all
+    gcp_info "Cloud IOT registries" gcloud iot registries list --region=all
 else
     echo "Cloud IOT API ( cloudiot.googleapis.com) is not enabled, skipping..."
 fi
