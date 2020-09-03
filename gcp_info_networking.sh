@@ -41,6 +41,8 @@ Lists in this order:
       - Reservations
     - Firewall Rules & Forwarding Rules
     - DNS managed zones & verified domains
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -103,11 +105,11 @@ cat <<EOF
 
 EOF
 
-gcp_info "Firewall Rules" gcloud compute firewall-rules list
-                         # same output
-                         #gcloud compute firewall-rules list --sort-by=NETWORK
+gcp_info "Firewall Rules"   gcloud compute firewall-rules list
+                            # same output
+                            #gcloud compute firewall-rules list --sort-by=NETWORK
 
-gcp_info  "Forwarding Rules:" gcloud compute forwarding-rules list
+gcp_info "Forwarding Rules" gcloud compute forwarding-rules list
 
 
 # DNS
@@ -123,7 +125,7 @@ EOF
 if is_service_enabled dns.googleapis.com; then
     gcp_info "DNS Managed Zones" gcloud dns managed-zones list
 
-    gcp_info "Domains verified" gcloud domains list-user-verified
+    gcp_info "Domains verified"  gcloud domains list-user-verified
 else
     echo "Cloud DNS API (dns.googleapis.com) is not enabled, skipping..."
 fi
