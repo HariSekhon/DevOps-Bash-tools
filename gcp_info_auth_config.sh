@@ -20,9 +20,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP Auth, Organizations and Config
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -40,7 +45,7 @@ cat <<EOF
 
 EOF
 
-gcloud organizations list
+gcp_info "Organizations" gcloud organizations list
 
 
 # Auth & Config
@@ -53,11 +58,14 @@ cat <<EOF
 
 EOF
 
-gcloud config configurations list
+gcp_info "GCloud SDK Configurations" gcloud config configurations list
 echo
 
 # list credentialed accounts and show which one is active - dupliates info from configurations so not needed
 #gcloud auth list
 #echo
 
+echo "========================="
+echo "GCloud SDK Configuration:"
+echo
 gcloud config list
