@@ -20,11 +20,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP Projects and checks project is configured
 
 Can optionally specify a project id to switch to (will switch back to original project on any exit except kill -9)
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -58,7 +63,7 @@ cat <<EOF
 
 EOF
 
-gcloud projects list
+gcp_info "GCP Projects" gcloud projects list
 echo
 echo "Checking project is configured..."
 # unreliable only errors when not initially set, but gives (unset) if you were to 'gcloud config unset project'
