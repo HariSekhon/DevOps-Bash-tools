@@ -24,6 +24,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 . "$bash_tools/.bash.d/os_detection.sh"
 
 alias 4="ping 4.2.2.1"
+alias 8="ping 8.8.8.8"
 
 alias ping="ping -n"
 
