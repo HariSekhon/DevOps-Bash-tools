@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP 'Tools category' resources deployed resources in the current GCP Project
@@ -30,6 +33,8 @@ Lists in this order:
     - Cloud Builds
     - Container Registry Images
     - Deployment Manager
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -69,7 +74,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled cloudbuild.googleapis.com; then
-    gcloud builds list
+    gcp_info "Cloud Builds" gcloud builds list
 else
     echo "Cloud Builds API (cloudbuild.googleapis.com) is not enabled, skipping..."
 fi
@@ -86,7 +91,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled containerregistry.googleapis.com; then
-    gcloud container images list
+    gcp_info "Google Container Registry Images" gcloud container images list
 else
     echo "Container Registry API (containerregistry.googleapis.com) is not enabled, skipping..."
 fi
@@ -103,7 +108,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled deploymentmanager.googleapis.com; then
-    gcloud deployment-manager deployments list
+    gcp_info "Deployment Manager deployments" gcloud deployment-manager deployments list
 else
     echo "Deployment Manager API (deploymentmanager.googleapis.com) is not enabled, skipping..."
 fi
