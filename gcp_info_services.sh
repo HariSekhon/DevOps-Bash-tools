@@ -20,9 +20,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP services & APIs enabled in the current GCP Project
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -47,6 +52,4 @@ if ! type is_service_enabled &>/dev/null; then
     echo >&2
 fi
 
-echo "Services Enabled:"
-echo
-gcloud services list --enabled
+gcp_info "Services Enabled" gcloud services list --enabled
