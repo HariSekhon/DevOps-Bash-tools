@@ -58,6 +58,8 @@ EOF
 
 if is_service_enabled dataproc.googleapis.com; then
     gcp_info "Dataproc clusters" gcloud dataproc clusters list --region all
+
+    gcp_info "Dataproc jobs"     gcloud dataproc jobs list --region all
 else
     echo "Dataproc API (dataproc.googleapis.com) is not enabled, skipping..."
 fi
