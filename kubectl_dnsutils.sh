@@ -36,7 +36,7 @@ help_usage "$@"
 name=dnsutils
 
 if kubectl get po "$name" "$@" &>/dev/null; then
-    kubectl exec -ti "$name" "$@" /bin/bash
+    kubectl exec -ti "$name" "$@" -- /bin/bash
 else
-    kubectl run -ti --rm --restart=Never "$name" --image=tutum/dnsutils "$@" /bin/bash
+    kubectl run -ti --rm --restart=Never "$name" --image=tutum/dnsutils "$@" -- /bin/bash
 fi
