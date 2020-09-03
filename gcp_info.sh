@@ -32,6 +32,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP deployed resources in the current or specified GCP Project
@@ -102,6 +105,8 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
       - Deployment Manager
 
 Can optionally specify a project id to switch to and list info for (will switch back to original project on any exit except kill -9)
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
