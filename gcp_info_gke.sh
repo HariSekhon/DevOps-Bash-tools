@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GKE resources deployed in the current GCP Project
@@ -36,6 +39,9 @@ Lists in this order:
       - storage classes, persistent volumes, persistent volume claims
       - service accounts, resource quotas, network policies, pod security policies
       - pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
+
+$gcp_info_formatting_help
+Does not apply to Kubernetes info
 "
 
 # used by usage() in lib/utils.sh
@@ -59,7 +65,8 @@ EOF
 
 list_gke_clusters(){
     if is_service_enabled container.googleapis.com; then
-        if ! gcloud container clusters list | grep .; then
+        gcp_info "GKE clusters" gcloud container clusters list
+        if ! gcloud container clusters list | grep -q .; then
             echo "No GKE clusters found, skipping listing GKE deployments and resources"
             return 0
         fi
