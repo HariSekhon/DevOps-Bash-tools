@@ -28,6 +28,8 @@ Beware that the first shortname for a URL will stick, ignoring subsequent reques
 
 See here for more details:
 
+https://github.blog/2011-11-10-git-io-github-url-shortener/
+
 https://aletheia.icu/~badt/git-io/
 
 https://gist.github.com/dikiaap/01f5e2ba3c738012aef0a8f524a6e207
