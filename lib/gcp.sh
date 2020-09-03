@@ -28,7 +28,7 @@ fi
 gcp_info(){
     local title="$1"
     shift || :
-    #perl -e "print '=' x ${#title};"
+    #perl -e "print '=' x (${#title} + 1);"
     for ((i=0; i <= ${#title}; i++)); do
         #printf '='
         # built-in - not as portable eg. sh, but given we explicitly execute in bash should be ok
