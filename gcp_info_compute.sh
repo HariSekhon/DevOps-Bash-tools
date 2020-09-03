@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP Compute resources deployed in the current GCP Project
@@ -39,6 +42,9 @@ Lists in this order:
       - storage classes, persistent volumes, persistent volume claims
       - service accounts, resource quotas, network policies, pod security policies
       - pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
+
+$gcp_info_formatting_help
+Does not apply to Kubernetes info
 "
 
 # used by usage() in lib/utils.sh
@@ -63,7 +69,7 @@ EOF
 if is_service_enabled compute.googleapis.com; then
     #gcloud compute machine-types list
 
-    gcloud compute instances list --sort-by=ZONE
+    gcp_info "GCE instances" gcloud compute instances list --sort-by=ZONE
 else
     echo "GCE API (compute.googleapis.com) is not enabled, skipping..."
 fi
@@ -86,11 +92,11 @@ EOF
 # DISABLED  appengineflex.googleapis.com                          Google App Engine Flexible Environment
 
 app_engine_details(){
-    gcloud app describe || return 0
-    echo
+    gcp_info "App Engine" gcloud app describe || return 0
+
     #if is_service_enabled appengine.googleapis.com; then
         # errors out if App Engine hasn't been created in the project yet
-        gcloud app instances list || return 0
+        gcp_info "App Engine instances" gcloud app instances list || return 0
     #else
     #    echo "GAE API (appengine.googleapis.com) is not enabled, skipping..."
     #fi
@@ -109,7 +115,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled cloudfunctions.googleapis.com; then
-    gcloud functions list
+    gcp_info "Cloud Functions" gcloud functions list
 else
     echo "Cloud Functions API (cloudfunctions.googleapis.com) is not enabled, skipping..."
 fi
@@ -127,7 +133,7 @@ EOF
 
 # confirm this one
 if is_service_enabled run.googleapis.com; then
-    gcloud run services list
+    gcp_info "Cloud Run services" gcloud run services list
 else
     echo "Cloud RUN API (run.googleapis.com) is not enabled, skipping..."
 fi
