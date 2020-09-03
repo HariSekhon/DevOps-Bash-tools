@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists GCP storage resources deployed in the current GCP Project
@@ -32,6 +35,8 @@ Lists in this order:
     - Cloud Memorystore Redis
     - BigTable clusters and instances
     - Datastore Indexes
+
+$gcp_info_formatting_help
 "
 
 # used by usage() in lib/utils.sh
@@ -55,7 +60,7 @@ EOF
 
 # might need this one instead sqladmin.googleapis.com
 if is_service_enabled sql-component.googleapis.com; then
-    gcloud sql instances list
+    gcp_info "Cloud SQL instances" gcloud sql instances list
 else
     echo "Cloud SQL API (sql-component.googleapis.com) is not enabled, skipping..."
 fi
@@ -89,7 +94,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled file.googleapis.com; then
-    gcloud filestore instances list
+    gcp_info "Cloud Filestore instances" gcloud filestore instances list
 else
     echo "Cloud Filestore API (file.googleapis.com) is not enabled, skipping..."
 fi
@@ -106,7 +111,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled redis.googleapis.com; then
-    gcloud redis instances list --region all
+    gcp_info "Cloud Memorystore Redis instances" gcloud redis instances list --region all
 else
     echo "Cloud Memorystore Redis API (redis.googleapis.com) is not enabled, skipping..."
 fi
@@ -129,11 +134,8 @@ EOF
 # DISABLED  bigtabletableadmin.googleapis.com                     Cloud Bigtable Table Admin API
 #
 # if is_service_enabled bigtable.googleapis.com; then
-    echo "Clusters:"
-    gcloud bigtable clusters list
-    echo
-    echo "Instances:"
-    gcloud bigtable instances list
+    gcp_info "BigTable clusters"  gcloud bigtable clusters list
+    gcp_info "BigTable instances" gcloud bigtable instances list
 #else
 #    echo "BigTable API (bigtable.googleapis.com) is not enabled, skipping..."
 #fi
@@ -151,7 +153,7 @@ EOF
 
 if is_service_enabled datastore.googleapis.com; then
     # may error out if doesn't exist
-    gcloud datastore indexes list || :
+    gcp_info "Cloud Datastore indexes" gcloud datastore indexes list || :
 else
     echo "Datastore API datastore.googleapis.com) is not enabled, skipping..."
 fi
