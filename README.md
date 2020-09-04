@@ -243,6 +243,8 @@ etc.
 - `gcp_info_all_projects.sh` - same as above but for all detected projects
 - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, switching `core/project` and replacing `{project_id}` and `{project_name}` in each iteration - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
 - `gcp_find_orphaned_disks.sh` - lists orphaned disks across all GCP projects (not attached to any compute instance)
+- `gcp_secret_manager_load_kubernetes.sh` - loads [Google Secret Manager](https://cloud.google.com/secret-manager) secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of Google secrets to load or auto-loads all `k8s`/`kubernetes` prefixed Google secrets to the current namespace (`kcd` to the right namespace first, see `.bash.d/kubernetes`)
+- `gcp_secret_manager_load_kubernetes_combined.sh` - creates a Kubernetes secret from multiple Google Secret Manager secrets
 - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
 - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM pre-emption latch and boolean check scripts
 - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
