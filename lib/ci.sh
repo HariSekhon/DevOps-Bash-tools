@@ -191,6 +191,7 @@ is_shippable_ci(){
 }
 
 is_teamcity_ci(){
+    # also BUILD_NUMBER, but less specific, caught in is_CI generic
     if [ -n "${TEAMCITY_VERSION:-}" ]; then
         return 0
     fi
