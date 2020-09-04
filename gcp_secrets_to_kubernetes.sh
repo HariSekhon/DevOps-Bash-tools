@@ -48,7 +48,7 @@ get_latest_version(){
 load_secret(){
     local secret="$1"
     if kubectl get secret "$secret" &>/dev/null; then
-        echo "WARNING: secret '$secret' already exists, skipping..." >&2
+        echo "WARNING: kubernetes secret '$secret' already exists, skipping creation..." >&2
         return
     fi
     latest_version="$(get_latest_version "$secret")"
