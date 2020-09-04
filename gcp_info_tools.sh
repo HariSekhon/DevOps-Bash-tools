@@ -90,8 +90,14 @@ cat <<EOF
 
 EOF
 
+project="$(gcloud info --format="get(config.project)")"
+
 if is_service_enabled containerregistry.googleapis.com; then
-    gcp_info "Google Container Registry Images" gcloud container images list
+    gcp_info "Google Container Registry Images: gcr.io/$project" gcloud container images list
+    for x in us eu asia; do
+        repository="$x.gcr.io/$project"
+        gcp_info "Google Container Registry Images: $repository" gcloud container images list --repository "$repository"
+    done
 else
     echo "Container Registry API (containerregistry.googleapis.com) is not enabled, skipping..."
 fi
