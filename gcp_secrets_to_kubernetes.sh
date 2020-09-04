@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Loads given list of GCP Secret Manager secrets to the current Kubernetes cluster with the same name
 
-If no secrets are specified, then finds all secrets in the current project with prefixes of k8s or kubernetes
+If no secrets are specified, then finds all secrets in the current project with labels of kubernetes-namespace that match the current kubectl context's namespace
 
 Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
@@ -53,6 +53,9 @@ load_secret(){
     kubectl create secret generic "$secret" --from-literal="$secret=$value"
 }
 
+# there is no --format or -o namespace as of Kubernetes 1.15 so have to just print 5th col
+current_namespace="$(kubectl config get-contexts "$(kubectl config current-context)" --no-headers | awk '{print $5}')"
+
 if [ $# -gt 0 ]; then
     for arg; do
         load_secret "$arg"
@@ -64,5 +67,5 @@ else
         secret="${secret#-}"
         secret="${secret#_}"
         load_secret "$secret"
-    done < <(gcloud secrets list --format='value(name)' | grep -e '^k8s' -e '^kubernetes')
+    done < <(gcloud secrets list --filter="labels.kubernetes-namespace=$current_namespace" --format='value(name)')
 fi
