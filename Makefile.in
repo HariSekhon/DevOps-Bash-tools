@@ -105,7 +105,8 @@ define MAKEFILE_USAGE_COMMON
     make init                   same as above, often useful to do in CI systems to get access to additional submodule provided targets such as 'make ci'
 
     make cpan                   install any modules listed in any cpan-requirements.txt files if not already installed
-
+    make gem                    install any modules listed in any gem-requirements.txt files if not already installed
+    make npm                    install any modules listed in any npm-requirements.txt files if not already installed
     make pip                    install any modules listed in any requirements.txt files if not already installed
 
     make python-compile         compile any python files found in the current directory and 1 level of subdirectory
@@ -426,6 +427,28 @@ cpan::
 .PHONY: cpan-optional
 cpan-optional::
 	find . -maxdepth 3 -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
+
+.PHONY: gems
+gems:: gem
+	@:
+
+.PHONY: gem
+gem::
+	find . -maxdepth 3 -path '*/setup/gem-requirements.txt' | xargs $(BASH_TOOLS)/ruby_gem_install_if_absent.sh
+	@$(MAKE) gem-optional
+
+.PHONY: gem-optional
+gem-optional::
+	find . -maxdepth 3 -path '*/setup/gem-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+
+.PHONY: npm
+npm::
+	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' | $(BASH_TOOLS)/nodejs_npm_install_if_absent.sh
+	@$(MAKE) npm-optional
+
+.PHONY: npm-optional
+npm-optional::
+	find . -maxdepth 3 -path '*/setup/npm-requirements-optional.txt' | NO_FAIL=1 $(BASH_TOOLS)/nodejs_npm_install_if_absent.sh
 
 .PHONY: pip
 pip::
