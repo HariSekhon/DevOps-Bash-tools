@@ -51,7 +51,7 @@ kubernetes_secret="$1"
 shift || :
 
 if kubectl get secret "$kubernetes_secret" &>/dev/null; then
-    echo "WARNING: kubernetes secret '$kubernetes_secret' already exists, skipping..." >&2
+    echo "WARNING: kubernetes secret '$kubernetes_secret' already exists, skipping creation..." >&2
     exit 1
 fi
 
