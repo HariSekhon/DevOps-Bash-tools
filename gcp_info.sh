@@ -95,6 +95,7 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
       - DNS managed zones & verified domains
     - Big Data:
       - Dataproc clusters       (all regions)
+      - Dataproc jobs           (all regions)
       - Dataflow jobs           (all regions)
       - PubSub topics
       - Cloud IOT Registries    (all regions)
