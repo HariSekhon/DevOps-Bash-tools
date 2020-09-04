@@ -22,11 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Loads given list of GCP Secrets Manager secrets to the current Kubernetes cluster with the same name
+Loads given list of GCP Secret Manager secrets to the current Kubernetes cluster with the same name
 
 If no secrets are specified, then finds all secrets in the current project with prefixes of k8s or kubernetes
 
-Loads to the current Kubernetes namespace since there is no namespace information in Google Secrets Manager, so you may
+Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
 "
 
