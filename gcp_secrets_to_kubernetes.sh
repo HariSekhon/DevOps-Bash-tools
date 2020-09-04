@@ -47,6 +47,10 @@ get_latest_version(){
 
 load_secret(){
     local secret="$1"
+    if kubectl get secret "$secret" &>/dev/null; then
+        echo "WARNING: secret '$secret' already exists, skipping..." >&2
+        return
+    fi
     latest_version="$(get_latest_version "$secret")"
     value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
     # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
