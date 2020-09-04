@@ -47,6 +47,7 @@ load_secret(){
     local secret="$1"
     latest_version="$(get_latest_version "$secret")"
     value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
+    # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
     kubectl create secret generic "$secret" --from-literal="$secret=$value"
 }
 
