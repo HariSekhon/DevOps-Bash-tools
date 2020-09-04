@@ -36,7 +36,7 @@ help_usage "$@"
 name=busybox
 
 if kubectl get po "$name" "$@" &>/dev/null; then
-    kubectl exec -ti "$name" "$@" /bin/sh
+    kubectl exec -ti "$name" "$@" -- /bin/sh
 else
-    kubectl run -ti --rm --restart=Never "$name" --image=busybox "$@" /bin/sh
+    kubectl run -ti --rm --restart=Never "$name" --image=busybox "$@" -- /bin/sh
 fi

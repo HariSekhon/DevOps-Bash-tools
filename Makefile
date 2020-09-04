@@ -119,6 +119,7 @@ desktop: install
 	@$(MAKE) perl-desktop
 	@$(MAKE) golang-desktop
 	@$(MAKE) nodejs-desktop
+	@$(MAKE) ruby-desktop
 	@# no packages any more since jgrep is no longer found
 	@#$(MAKE) ruby-desktop
 
@@ -150,15 +151,11 @@ brew:
 	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 
 .PHONY: perl-desktop
-perl-desktop: system-packages cpan
+perl-desktop: system-packages cpan-desktop
 	@:
 
-.PHONY: cpan
-cpan:: cpanm
-	@:
-
-.PHONY: cpanm
-cpanm:
+.PHONY: cpan-desktop
+cpan-desktop: cpan
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
 
 .PHONY: golang-desktop
@@ -174,29 +171,25 @@ go:
 	NO_FAIL=1 $(BASH_TOOLS)/golang_get_install_if_absent.sh setup/go-packages-desktop.txt
 
 .PHONY: ruby-desktop
-ruby-desktop: system-packages gems
+ruby-desktop: system-packages gem-desktop
 	@:
 
-.PHONY: gems
-gems: gem
-	@:
-
-.PHONY: gem
-gem:
+.PHONY: gem-desktop
+gem-desktop: gem
 	NO_FAIL=1 $(BASH_TOOLS)/ruby_gem_install_if_absent.sh setup/gem-packages-desktop.txt
 
 .PHONY: python-desktop
-python-desktop: system-packages pip
+python-desktop: system-packages pip-desktop
 
 .PHONY: pip
-pip:: python-version
+pip-desktop: pip
 	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: nodejs-desktop
 nodejs-desktop: system-packages npm
 
-.PHONY: npm
-npm::
+.PHONY: npm-desktop
+npm-desktop: npm
 	$(BASH_TOOLS)/nodejs_npm_install_if_absent.sh $(BASH_TOOLS)/setup/npm-packages-desktop.txt
 
 .PHONY: aws
