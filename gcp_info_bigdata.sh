@@ -30,6 +30,7 @@ Lists GCP Big Data resources deployed in the current GCP Project
 Lists in this order:
 
     - Dataproc clusters       (all regions)
+    - Dataproc jobs           (all regions)
     - Dataflow jobs           (all regions)
     - PubSub topics
     - Cloud IOT registries    (all regions)
