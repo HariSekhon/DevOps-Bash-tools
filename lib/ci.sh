@@ -190,6 +190,13 @@ is_shippable_ci(){
     return 1
 }
 
+is_teamcity_ci(){
+    if [ -n "${TEAMCITY_VERSION:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 is_tfs_ci(){
     if [ -n "${TF_BUILD:-}" ]; then
         return 0
@@ -231,6 +238,7 @@ is_CI(){
        is_semmle ||
        is_semaphore_ci ||
        is_shippable_ci ||
+       is_teamcity ||
        is_tfs_ci; then
         return 0
     fi
