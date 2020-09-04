@@ -197,6 +197,7 @@ is_teamcity_ci(){
     fi
     return 1
 }
+is_teamcity(){ is_teamcity_ci; }
 
 is_tfs_ci(){
     if [ -n "${TF_BUILD:-}" ]; then
