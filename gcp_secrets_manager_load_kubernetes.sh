@@ -40,7 +40,9 @@ help_usage "$@"
 
 get_latest_version(){
     local secret="$1"
-    gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' | sort -k1nr | head -n1
+    gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' |
+    sort -k1nr |
+    head -n1
 }
 
 load_secret(){
@@ -62,5 +64,5 @@ else
         secret="${secret#-}"
         secret="${secret#_}"
         load_secret "$secret"
-    done < <(gcloud secrets list --format='value(name)' | grep -e '^k8s' -e '^kubernetes' )
+    done < <(gcloud secrets list --format='value(name)' | grep -e '^k8s' -e '^kubernetes')
 fi
