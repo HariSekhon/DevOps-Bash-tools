@@ -50,6 +50,11 @@ get_latest_version(){
 kubernetes_secret="$1"
 shift || :
 
+if kubectl get secret "$kubernetes_secret" &>/dev/null; then
+    echo "WARNING: kubernetes secret '$kubernetes_secret' already exists, skipping..." >&2
+    exit 1
+fi
+
 # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
 kubectl_cmd="kubectl create secret generic '$kubernetes_secret' "
 
