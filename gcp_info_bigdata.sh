@@ -58,7 +58,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
-    gce_regions="$(gcloud compute regions list --format='table[no-heading](name)')"
+    gce_regions="${GCE_REGIONS:-$(gcloud compute regions list --format='table[no-heading](name)')}"
     gcp_info "Dataproc clusters: global"      gcloud dataproc clusters list --region="global"
     for region in $gce_regions; do
         gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
@@ -146,10 +146,10 @@ EOF
 
 # get dynamically in case they add a region
 # ERROR: (gcloud.iot.registries.list) NOT_FOUND: The cloud region 'projects/$GOOGLE_PROJECT_ID/locations/all' (location 'all') isn't supported. Valid regions: {asia-east1,europe-west1,us-central1}
-iot_supported_regions="$(gcloud iot registries list --region="all" 2>&1 | sed 's/.*{//; s/}//; s/,/ /g' || :)"
+iot_regions="${IOT_REGIONS:-$(gcloud iot registries list --region="all" 2>&1 | sed 's/.*{//; s/}//; s/,/ /g' || :)}"
 
 if is_service_enabled cloudiot.googleapis.com; then
-    for region in $iot_supported_regions; do
+    for region in $iot_regions; do
         gcp_info "Cloud IOT registries" gcloud iot registries list --region="$region"
     done
 else
