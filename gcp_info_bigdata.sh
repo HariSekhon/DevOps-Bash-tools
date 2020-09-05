@@ -58,10 +58,12 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
+    gcp_info "Dataproc clusters: global"      gcloud dataproc clusters list --region="global"
     regions="$(gcloud compute regions list --format='table[no-heading](name)')"
     for region in $regions; do
         gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
     done
+    gcp_info "Dataproc jobs: global"          gcloud dataproc jobs list --region="global"
     for region in $regions; do
         gcp_info "Dataproc jobs: $region"     gcloud dataproc jobs list --region="$region"
     done
