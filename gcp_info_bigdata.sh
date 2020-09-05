@@ -125,7 +125,10 @@ EOF
 #europe-west1
 #us-central1
 #"
-iot_supported_regions="$(gcloud iot registries list --region=global 2>&1 | sed 's/.*{//; s/}//; s/,/ /g')"
+
+# get dynamically in case they add a region
+# ERROR: (gcloud.iot.registries.list) NOT_FOUND: The cloud region 'projects/$GOOGLE_PROJECT_ID/locations/all' (location 'all') isn't supported. Valid regions: {asia-east1,europe-west1,us-central1}
+iot_supported_regions="$(gcloud iot registries list --region="all" 2>&1 | sed 's/.*{//; s/}//; s/,/ /g')"
 
 if is_service_enabled cloudiot.googleapis.com; then
     for region in $io_supported_regions; do
