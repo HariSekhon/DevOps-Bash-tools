@@ -58,13 +58,13 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
+    gce_regions="$(gcloud compute regions list --format='table[no-heading](name)')"
     gcp_info "Dataproc clusters: global"      gcloud dataproc clusters list --region="global"
-    regions="$(gcloud compute regions list --format='table[no-heading](name)')"
-    for region in $regions; do
+    for region in $gce_regions; do
         gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
     done
     gcp_info "Dataproc jobs: global"          gcloud dataproc jobs list --region="global"
-    for region in $regions; do
+    for region in $gce_regions; do
         gcp_info "Dataproc jobs: $region"     gcloud dataproc jobs list --region="$region"
     done
 else
@@ -120,8 +120,17 @@ cat <<EOF
 
 EOF
 
+#iot_supported_regions="
+#asia-east1
+#europe-west1
+#us-central1
+#"
+iot_supported_regions="$(gcloud iot registries list --region=global 2>&1 | sed 's/.*{//; s/}//; s/,/ /g')"
+
 if is_service_enabled cloudiot.googleapis.com; then
-    gcp_info "Cloud IOT registries" gcloud iot registries list --region=all
+    for region in $io_supported_regions; do
+        gcp_info "Cloud IOT registries" gcloud iot registries list --region="$region"
+    done
 else
     echo "Cloud IOT API ( cloudiot.googleapis.com) is not enabled, skipping..."
 fi
