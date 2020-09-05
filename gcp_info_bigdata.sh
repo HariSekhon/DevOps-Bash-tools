@@ -110,7 +110,9 @@ EOF
 # DISABLED  dataflow.googleapis.com   Dataflow API
 #
 #if is_service_enabled dataflow.googleapis.com; then
-    gcp_info "Dataflow jobs" gcloud dataflow jobs list --region=all
+    # --region=all      actually works here unlike dataproc and cloud iot
+    # --status=active   to see only running jobs
+    gcp_info "Dataflow jobs" gcloud dataflow jobs list --region=all --status=all
 #else
 #    echo "Dataflow API (dataflow.googleapis.com) is not enabled, skipping..."
 #fi
