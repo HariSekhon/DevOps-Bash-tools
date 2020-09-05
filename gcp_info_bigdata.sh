@@ -58,9 +58,13 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
-    gcp_info "Dataproc clusters" gcloud dataproc clusters list --region all
-
-    gcp_info "Dataproc jobs"     gcloud dataproc jobs list --region all
+    regions="$(gcloud compute regions list --format='table[no-heading](name)')"
+    for region in $regions; do
+        gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
+    done
+    for region in $regions; do
+        gcp_info "Dataproc jobs: $region"     gcloud dataproc jobs list --region ="$region"
+    done
 else
     echo "Dataproc API (dataproc.googleapis.com) is not enabled, skipping..."
 fi
