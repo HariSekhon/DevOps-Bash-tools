@@ -63,6 +63,7 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
+    # because --region=all doesn't work
     # inherit gce_regions if set elsewhere, eg. gcp_info_compute.sh called first when running gcp_info.sh
     gce_regions="${GCE_REGIONS:-${gce_regions:-$(gcloud compute regions list --format='table[no-heading](name)')}}"
     gce_regions="${gce_regions//,/ }"
@@ -86,8 +87,8 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
+    # because --region=all doesn't work
     # re-use gce_regions from above
-    #gce_regions="$(gcloud compute regions list --format='table[no-heading](name)')"
     gcp_info "Dataproc jobs: global"          gcloud dataproc jobs list --region="global"
     for region in $gce_regions; do
         gcp_info "Dataproc jobs: $region"     gcloud dataproc jobs list --region="$region"
