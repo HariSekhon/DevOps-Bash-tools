@@ -63,6 +63,22 @@ if is_service_enabled dataproc.googleapis.com; then
     for region in $gce_regions; do
         gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
     done
+else
+    echo "Dataproc API (dataproc.googleapis.com) is not enabled, skipping..."
+fi
+
+
+# Dataproc jobs
+cat <<EOF
+# ============================================================================ #
+#                           D a t a p r o c   J o b s
+# ============================================================================ #
+
+EOF
+
+if is_service_enabled dataproc.googleapis.com; then
+    # re-use gce_regions from above
+    #gce_regions="$(gcloud compute regions list --format='table[no-heading](name)')"
     gcp_info "Dataproc jobs: global"          gcloud dataproc jobs list --region="global"
     for region in $gce_regions; do
         gcp_info "Dataproc jobs: $region"     gcloud dataproc jobs list --region="$region"
@@ -131,7 +147,7 @@ EOF
 iot_supported_regions="$(gcloud iot registries list --region="all" 2>&1 | sed 's/.*{//; s/}//; s/,/ /g')"
 
 if is_service_enabled cloudiot.googleapis.com; then
-    for region in $io_supported_regions; do
+    for region in $iot_supported_regions; do
         gcp_info "Cloud IOT registries" gcloud iot registries list --region="$region"
     done
 else
