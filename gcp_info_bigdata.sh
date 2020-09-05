@@ -35,7 +35,7 @@ Lists in this order:
     - PubSub topics
     - Cloud IOT registries    (all regions)
 
-Environment variables to shortcut scanning all regions, should contain space separated list of regions:
+Environment variables of regions to shortcut scanning all regions, comma or space separated:
 
 GCE_REGIONS - for Dataproc clusters and jobs
 IOT_REGIONS - for Cloud IOT registries
@@ -65,6 +65,7 @@ EOF
 if is_service_enabled dataproc.googleapis.com; then
     # inherit gce_regions if set elsewhere, eg. gcp_info_compute.sh called first when running gcp_info.sh
     gce_regions="${GCE_REGIONS:-${gce_regions:-$(gcloud compute regions list --format='table[no-heading](name)')}}"
+    gce_regions="${gce_regions//,/ }"
     gcp_info "Dataproc clusters: global"      gcloud dataproc clusters list --region="global"
     for region in $gce_regions; do
         gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
@@ -155,6 +156,7 @@ EOF
 # get dynamically in case they add a region
 # ERROR: (gcloud.iot.registries.list) NOT_FOUND: The cloud region 'projects/$GOOGLE_PROJECT_ID/locations/all' (location 'all') isn't supported. Valid regions: {asia-east1,europe-west1,us-central1}
 iot_regions="${IOT_REGIONS:-$(gcloud iot registries list --region="all" 2>&1 | sed 's/.*{//; s/}//; s/,/ /g' || :)}"
+iot_regions="${iot_regions//,/ }"
 
 if is_service_enabled cloudiot.googleapis.com; then
     for region in $iot_regions; do
