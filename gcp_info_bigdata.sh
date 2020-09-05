@@ -35,6 +35,11 @@ Lists in this order:
     - PubSub topics
     - Cloud IOT registries    (all regions)
 
+Environment variables to shortcut scanning all regions, should contain space separated list of regions:
+
+GCE_REGIONS - for Dataproc clusters and jobs
+IOT_REGIONS - for Cloud IOT registries
+
 $gcp_info_formatting_help
 "
 
@@ -150,7 +155,7 @@ iot_regions="${IOT_REGIONS:-$(gcloud iot registries list --region="all" 2>&1 | s
 
 if is_service_enabled cloudiot.googleapis.com; then
     for region in $iot_regions; do
-        gcp_info "Cloud IOT registries" gcloud iot registries list --region="$region"
+        gcp_info "Cloud IOT registries: $region" gcloud iot registries list --region="$region"
     done
 else
     echo "Cloud IOT API ( cloudiot.googleapis.com) is not enabled, skipping..."
