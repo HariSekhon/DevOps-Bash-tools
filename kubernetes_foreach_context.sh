@@ -41,6 +41,10 @@ eg.
 Since lab contexts like Docker Desktop, Minikube etc are often offline and likely to hang, they are skipped. Deleted GKE clusters you'll need to remove from your kubeconfig yourself before calling this
 "
 
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<command> <args>"
+
 help_usage "$@"
 
 min_args 1 "$@"
