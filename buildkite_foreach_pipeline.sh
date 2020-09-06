@@ -24,16 +24,17 @@ All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
 
-{username}, {user}    => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
-{name}                => the repo name without the user prefix
-{repo}                => the repo name with the user prefix
+{username}, {user}      => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
+{organization}, {org}   => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
+{name}                  => the pipeline name without the user/organization prefix
+{pipeline}              => the pipeline name with the user/organization prefix
 
 eg.
-    ${0##*/} echo user={user} name={name} repo={repo}
+    ${0##*/} echo user={user} name={name} pipeline={pipeline}
 "
 
 # shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+usage_args="[<command>]"
 
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -51,14 +52,16 @@ cmd_template="$*"
 prefix="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
 while read -r name; do
-    repo="$prefix/$name"
+    pipeline="$prefix/$name"
     echo "# ============================================================================ #" >&2
-    echo "# $repo" >&2
+    echo "# $pipeline" >&2
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
     cmd="${cmd//\{username\}/$prefix}"
     cmd="${cmd//\{user\}/$prefix}"
-    cmd="${cmd//\{repo\}/$repo}"
+    cmd="${cmd//\{organization\}/$prefix}"
+    cmd="${cmd//\{org\}/$prefix}"
+    cmd="${cmd//\{pipeline\}/$pipeline}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
 done < <("$srcdir/buildkite_pipelines.sh")
