@@ -51,7 +51,7 @@ or more usefully when chained with the other adjacent github_*.sh / gitlab_*.sh 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<cmd>"
+usage_args="<command> <args>"
 
 help_usage "$@"
 
