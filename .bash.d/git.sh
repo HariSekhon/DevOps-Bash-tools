@@ -86,8 +86,10 @@ alias tag="githg tag"
 alias um=updatemodules
 #type browse &>/dev/null || alias browse=gbrowse
 alias gbrowse=gitbrowse
-alias gh='gitbrowse "" github'
-alias github_actions='gitbrowse actions github'
+alias gh='gitbrowse github'
+alias gl='gitbrowse gitlab'
+alias bb='gitbrowse bitbucket'
+alias github_actions='gitbrowse github actions'
 alias github_workflows='github_actions'
 alias gha='github_actions'
 alias ghw='github_workflows'
@@ -138,15 +140,21 @@ gitgc(){
 }
 
 gitbrowse(){
-    local url
-    local filter="${2:-.*}"
-    url="$(git remote -v | grep "$filter" | awk '/git@|https:/{print $2}' | sed 's,://.*@,://,; s|git@github.com:|https://github.com/| ; s/\.git$//' | head -n1)"
+    local filter="${1:-.*}"
+    local path="${2:-}"
+    local url_base
+    url_base="$(git remote -v |
+                grep "$filter" |
+                awk '/git@|https:/{print $2}' |
+                head -n1 |
+                sed 's|git@|https://|; s/\.git$//;' |
+                perl -pe 's/:(?!\/\/)/\//')"
     if [ $# -gt 0 ] &&
-       [ -z "$url" ]; then
+       [ -z "$url_base" ]; then
         echo "git remote url not found"
         return 1
     fi
-    browser "$url/$1"
+    browser "$url_base/$path"
 }
 
 install_git_completion(){
