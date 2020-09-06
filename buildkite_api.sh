@@ -62,8 +62,16 @@ fi
 
 help_usage "$@"
 
-url_path="${1##/}"
-shift
+min_args 1 "$@"
+
+url_base="https://api.buildkite.com/v2"
+api_version=2
+
+url_path="$1"
+shift || :
+
+url_path="${url_path#$url_base}"
+url_path="${url_path##/}"
 
 if is_curl_min_version 7.55; then
     # hide token from process list if curl version is new enough to support this trick
