@@ -36,7 +36,7 @@ usage_description="Runs any arguments as a command against each file with a Git 
 The filename will be appended to the end of each command in each iteration"
 
 # shellcheck disable=SC2034
-usage_args="<cmd> <args>"
+usage_args="<command> <args>"
 
 help_usage "$@"
 
