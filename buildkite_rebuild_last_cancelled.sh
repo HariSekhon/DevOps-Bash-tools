@@ -14,6 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -27,12 +32,6 @@ May fail with Forbidden if your trial account has expired (renew or contact supp
 
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
-
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
 
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
