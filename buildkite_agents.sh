@@ -34,6 +34,9 @@ Output format:
 eg.
 
 myhost.local   x.x.x.x  2020-09-06T09:52:51.969Z    buildkite-agent/3.20.0.3264 (darwin; amd64)
+f805f651ccfe   x.x.x.x  2020-09-07T09:41:37.603Z    buildkite-agent/3.22.1.x (linux; amd64)
+
+(this second one is running in Docker hence the funny hostname)
 "
 
 # shellcheck disable=SC2034
