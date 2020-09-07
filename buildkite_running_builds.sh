@@ -34,4 +34,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 help_usage "$@"
 
-"$srcdir/buildkite_api.sh" 'builds?state=running' "$@"
+"$srcdir/buildkite_api.sh" 'builds?state=running' "$@" |
+jq -r '.[] | [.pipeline.slug, .branch, .number, .commit, .created_at, .jobs[0].agent.name] | @tsv' |
+#while read -r name branch number commit created agent; do
+#    commit="${commit:0:8}"
+#    echo "$name $branch $number $commit $created $agent"
+#done |
+sed 's/\([[:space:]][[:alnum:]]\{8\}\)[[:alnum:]]\{32\}[[:space:]]/\1 /' |
+column -t
