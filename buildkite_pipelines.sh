@@ -14,10 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -28,11 +29,9 @@ eg. trigger a build of each pipeline:
 ./buildkite_pipelines.sh | while read pipeline; do ./buildkite_trigger.sh \"\$pipeline\"; done
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
