@@ -29,14 +29,16 @@ Lists BuildKite Agents via the BuildKite API
 
 Output format:
 
-<hostname>    <ip_address>    <started_date>    <user_agent>
+<agent_name>    <hostname>    <ip_address>    <started_date>    <user_agent>    <tags>
 
 eg.
 
-myhost.local   x.x.x.x  2020-09-06T09:52:51.969Z    buildkite-agent/3.20.0.3264 (darwin; amd64)
-f805f651ccfe   x.x.x.x  2020-09-07T09:41:37.603Z    buildkite-agent/3.22.1.x (linux; amd64)
+myhost.local-1  myhost.local    <ip_x.x.x.x>  2020-09-07T17:07:10.578Z    buildkite-agent/3.20.0.3264 (darwin; amd64) os=mac
+fb3e859b5cb8-1  fb3e859b5cb8    <ip_x.x.x.x>  2020-09-07T17:05:18.562Z    buildkite-agent/3.23.0.x (linux; amd64) os=linux,distro=alpine
+arbitrary_name  b03797c47520    <ip_x.x.x.x>  2020-09-07T17:05:38.062Z    buildkite-agent/3.23.0.x (linux; amd64) os=linux,distro=centos
 
-(this second one is running in Docker hence the funny hostname)
+The 2nd and 3rd agents are running in Docker hence the hostname field is nonsensical, but if you use the adjacent buildkite_agent.sh it'll set
+the agent name to the same as the hostname for intuitive results and auto-add some tags for os and linux distro
 "
 
 # shellcheck disable=SC2034
@@ -49,4 +51,4 @@ check_env_defined BUILDKITE_ORGANIZATION
 help_usage "$@"
 
 "$srcdir/buildkite_api.sh" "organizations/$BUILDKITE_ORGANIZATION/agents" "$@" |
-jq -r '.[] | [.hostname, .ip_address, .created_at, .user_agent] | @tsv'
+jq -r '.[] | [.name, .hostname, .ip_address, .created_at, .user_agent, (.meta_data | join(",")) ] | @tsv'
