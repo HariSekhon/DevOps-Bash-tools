@@ -95,4 +95,9 @@ fi
 
 # want splitting
 # shellcheck disable=SC2086
-exec docker run $opts -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" buildkite/agent:"$docker_tag" start --tags "$buildkite_tags" "$@"
+exec docker run --rm --name="buildkite-agent-$$" \
+                $opts \
+                -e BUILDKITE_AGENT_TOKEN="$BUILDKITE_AGENT_TOKEN" \
+                buildkite/agent:"$docker_tag" start \
+                    --name="${BUILDKITE_AGENT_NAME:-${HOSTNAME:-$(hostname)-$$}}" \
+                    --tags "$buildkite_tags" "$@"
