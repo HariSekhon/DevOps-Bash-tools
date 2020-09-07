@@ -14,10 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<pipeline> [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -42,11 +43,9 @@ buildkite_api.sh organizations | jq -r '.[].slug'
 
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<pipeline> [<curl_options>]"
 
 help_usage "$@"
 
