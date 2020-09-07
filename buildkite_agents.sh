@@ -16,6 +16,11 @@
 # https://buildkite.com/docs/apis/rest-api/agents
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -33,12 +38,6 @@ myhost.local   x.x.x.x  2020-09-06T09:52:51.969Z    buildkite-agent/3.20.0.3264 
 
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
-
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
 
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
