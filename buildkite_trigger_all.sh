@@ -14,21 +14,20 @@
 #
 
 set -euo pipefail
-
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
-
-# shellcheck disable=SC2034
-usage_description="
-Triggers BuildKite jobs for all pipelines in the \$BUILDKITE_ORGANIZATION
-"
-
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034
+usage_description="
+Triggers BuildKite build jobs for all pipelines in the \$BUILDKITE_ORGANIZATION
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
 help_usage "$@"
 
