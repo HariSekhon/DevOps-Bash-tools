@@ -13,14 +13,22 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://buildkite.com/docs/apis/rest-api/agents
+
 set -euo pipefail
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_description="
-# Lists BuildKite Agents via BuildKite API
-#
-# https://buildkite.com/docs/apis/rest-api/agents
+Lists BuildKite Agents via the BuildKite API
+
+Output format:
+
+<hostname>    <ip_address>    <created_date>    <user_agent>
+
+eg.
+
+myhost.local   x.x.x.x  2020-09-06T09:52:51.969Z    buildkite-agent/3.20.0.3264 (darwin; amd64)
 "
 
 # shellcheck disable=SC2034
