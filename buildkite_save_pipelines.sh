@@ -14,23 +14,22 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
-
-save_dir=".buildkite-pipelines"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
 Saves all BuildKite pipelines in your \$BUILDKITE_ORGANIZATION to local JSON files in \$PWD/$save_dir
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+save_dir=".buildkite-pipelines"
 
 help_usage "$@"
 
