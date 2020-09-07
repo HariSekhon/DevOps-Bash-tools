@@ -14,10 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="[<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -29,11 +30,11 @@ API pagination not returning all results or even indicating if there are more re
 https://buildkite.com/docs/apis/rest-api/builds
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<curl_options>]"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+help_usage "$@"
 
 "$srcdir/buildkite_api.sh" 'builds?state=scheduled' "$@" |
 jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |

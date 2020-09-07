@@ -30,9 +30,15 @@ Lists GCP Big Data resources deployed in the current GCP Project
 Lists in this order:
 
     - Dataproc clusters       (all regions)
+    - Dataproc jobs           (all regions)
     - Dataflow jobs           (all regions)
     - PubSub topics
     - Cloud IOT registries    (all regions)
+
+Environment variables of regions to shortcut scanning all regions, comma or space separated:
+
+GCE_REGIONS - for Dataproc clusters and jobs
+IOT_REGIONS - for Cloud IOT registries
 
 $gcp_info_formatting_help
 "
@@ -57,9 +63,36 @@ cat <<EOF
 EOF
 
 if is_service_enabled dataproc.googleapis.com; then
-    gcp_info "Dataproc clusters" gcloud dataproc clusters list --region all
+    # because --region=all doesn't work
+    # inherit gce_regions if set elsewhere, eg. gcp_info_compute.sh called first when running gcp_info.sh
+    gce_regions="${GCE_REGIONS:-${gce_regions:-$(gcloud compute regions list --format='table[no-heading](name)')}}"
+    gce_regions="${gce_regions//,/ }"
+    gcp_info "Dataproc clusters: global"      gcloud dataproc clusters list --region="global"
+    for region in $gce_regions; do
+        gcp_info "Dataproc clusters: $region" gcloud dataproc clusters list --region="$region"
+    done
+else
+    echo "Dataproc API (dataproc.googleapis.com) is not enabled, skipping..."
+fi
 
-    gcp_info "Dataproc jobs"     gcloud dataproc jobs list --region all
+
+# Dataproc jobs
+cat <<EOF
+
+
+# ============================================================================ #
+#                           D a t a p r o c   J o b s
+# ============================================================================ #
+
+EOF
+
+if is_service_enabled dataproc.googleapis.com; then
+    # because --region=all doesn't work
+    # re-use gce_regions from above
+    gcp_info "Dataproc jobs: global"          gcloud dataproc jobs list --region="global"
+    for region in $gce_regions; do
+        gcp_info "Dataproc jobs: $region"     gcloud dataproc jobs list --region="$region"
+    done
 else
     echo "Dataproc API (dataproc.googleapis.com) is not enabled, skipping..."
 fi
@@ -80,7 +113,9 @@ EOF
 # DISABLED  dataflow.googleapis.com   Dataflow API
 #
 #if is_service_enabled dataflow.googleapis.com; then
-    gcp_info "Dataflow jobs" gcloud dataflow jobs list --region=all
+    # --region=all      actually works here unlike dataproc and cloud iot
+    # --status=active   to see only running jobs
+    gcp_info "Dataflow jobs" gcloud dataflow jobs list --region=all --status=all
 #else
 #    echo "Dataflow API (dataflow.googleapis.com) is not enabled, skipping..."
 #fi
@@ -113,8 +148,21 @@ cat <<EOF
 
 EOF
 
+#iot_supported_regions="
+#asia-east1
+#europe-west1
+#us-central1
+#"
+
+# get dynamically in case they add a region
+# ERROR: (gcloud.iot.registries.list) NOT_FOUND: The cloud region 'projects/$GOOGLE_PROJECT_ID/locations/all' (location 'all') isn't supported. Valid regions: {asia-east1,europe-west1,us-central1}
+iot_regions="${IOT_REGIONS:-$(gcloud iot registries list --region="all" 2>&1 | sed 's/.*{//; s/}//; s/,/ /g' || :)}"
+iot_regions="${iot_regions//,/ }"
+
 if is_service_enabled cloudiot.googleapis.com; then
-    gcp_info "Cloud IOT registries" gcloud iot registries list --region=all
+    for region in $iot_regions; do
+        gcp_info "Cloud IOT registries: $region" gcloud iot registries list --region="$region"
+    done
 else
     echo "Cloud IOT API ( cloudiot.googleapis.com) is not enabled, skipping..."
 fi

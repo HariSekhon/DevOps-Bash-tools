@@ -164,10 +164,11 @@ export github=~/github
 alias github="sti github; cd $github";
 
 export bitbucket=~/bitbucket
+alias bitb='cd $bitbucket'
 # clashes with bitbucket-cli
 #alias bitbucket='cd $bitbucket'
-alias bitb='cd $bitbucket'
-alias bb=bitbucket
+# used to gitbrowse to bitbucket now in git.sh
+#alias bb=bitbucket
 
 if [ -d "$github" ]; then
     for x in "$github/"*; do

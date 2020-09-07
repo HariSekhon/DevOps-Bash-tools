@@ -49,7 +49,7 @@ For a more useful example, see:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<command>"
+usage_args="<command> <args>"
 
 help_usage "$@"
 

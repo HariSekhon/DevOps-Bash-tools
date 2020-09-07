@@ -14,10 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="<pipeline> [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -33,11 +34,9 @@ the webhook URL to triggers builds and could lead to a DoS exploit if publicly d
 Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<pipeline> [<curl_options>]"
 
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"

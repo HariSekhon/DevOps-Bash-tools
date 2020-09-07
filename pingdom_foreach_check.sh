@@ -43,7 +43,7 @@ For real usage examples, see:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<cmd>"
+usage_args="<command> <args>"
 
 help_usage "$@"
 

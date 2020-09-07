@@ -118,9 +118,11 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 <!-- TODO: https://codecov.io, https://coveralls.io -->
 
+[git.io/bash-tools](https://git.io/bash-tools)
+
 400+ DevOps Shell Scripts and Advanced Bash environment.
 
-Heavily used by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon)([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
+Heavily used by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
 #### Contains:
 
@@ -233,7 +235,7 @@ etc.
   - `gcp_info_compute.sh` - [GCE](https://cloud.google.com/compute/) Virtual Machine instances, [App Engine](https://cloud.google.com/appengine) instances, [Cloud Functions](https://cloud.google.com/functions), [GKE](https://cloud.google.com/kubernetes-engine) clusters, all [Kubernetes](https://kubernetes.io/) objects across all GKE clusters (see `kubernetes_info.sh` below for more details)
   - `gcp_info_storage.sh` - [Cloud SQL](https://cloud.google.com/sql) instances, [Cloud Storage](https://cloud.google.com/storage) Buckets, [Cloud Filestore](https://cloud.google.com/filestore), [Cloud Memorystore Redis](https://cloud.google.com/memorystore), [BigTable](https://cloud.google.com/bigtable) clusters and instances, [Datastore](https://cloud.google.com/datastore) indexes
   - `gcp_info_networking.sh` - VPC Networks, Addresses, Proxies, Subnets, Routers, Routes, VPN Gateways, VPN Tunnels, Reservations, Firewall rules, Forwarding rules, [Cloud DNS](https://cloud.google.com/dns) managed zones and verified domains
-  - `gcp_info_bigdata.sh` - [Dataproc](https://cloud.google.com/dataproc) clusters in all regions, [Dataflow](https://cloud.google.com/dataflow) jobs in all regions, [PubSub](https://cloud.google.com/pubsub) messaging topics, [Cloud IOT](https://cloud.google.com/iot-core) registries in all regions
+  - `gcp_info_bigdata.sh` - [Dataproc](https://cloud.google.com/dataproc) clusters and jobs in all regions, [Dataflow](https://cloud.google.com/dataflow) jobs in all regions, [PubSub](https://cloud.google.com/pubsub) messaging topics, [Cloud IOT](https://cloud.google.com/iot-core) registries in all regions
   - `gcp_info_tools.sh` - [Cloud Source Repositories](https://cloud.google.com/source-repositories), [Cloud Builds](https://cloud.google.com/cloud-build), [Container Registry](https://cloud.google.com/container-registry) images across all major repos (`gcr.io`, `us.gcr.io`, `eu.gcr.io`, `asia.gcr.io`), [Deployment Manager](https://cloud.google.com/deployment-manager) deployments
   - `gcp_info_auth_config.sh` - Auth Configurations, Organizations & Current Config
   - `gcp_info_projects.sh` - Projects names and IDs
@@ -244,9 +246,9 @@ etc.
 - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, switching `core/project` and replacing `{project_id}` and `{project_name}` in each iteration - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
 - `gcp_find_orphaned_disks.sh` - lists orphaned disks across all GCP projects (not attached to any compute instance)
 - `gcp_secrets_to_kubernetes.sh` - loads [Google Secret Manager](https://cloud.google.com/secret-manager) secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of Google secrets to load or auto-loads all Google secrets with labels `kubernetes-namespace` equalling the current kubectl context's namespace (`kcd` to the right namespace first, see `.bash.d/kubernetes`)
-- `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple Google Secret Manager secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on disk mounts for apps to use)
+- `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple [Google Secret Manager](https://cloud.google.com/secret-manager) secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
 - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
-- `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM pre-emption latch and boolean check scripts
+- `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM preemption latch and boolean check scripts
 - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
 - `curl_auth.sh` - wraps curl to securely load your OAuth API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
@@ -351,6 +353,22 @@ etc.
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
   - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
+- `buildkite_*.sh` - [BuildKite](https://buildkite.com/) API scripts:
+  - `buildkite_pipelines.sh` - list buildkite pipelines for your `$BUILDKITE_ORGANIZATION` / `$BUILDKITE_USER`
+  - `buildkite_foreach_pipeline.sh` - executes a templated command for each Buildkite pipeline, replacing the `{user}` and `{pipeline}` in each iteration
+  - `buildkite_agent.sh` - runs a buildkite agent locally on Linux or Mac, or in Docker with choice of Linux distros
+  - `buildkite_agents.sh` - lists the Buildkite agents connected along with their hostname, IP, started dated and agent details
+  - `buildkite_pipelines.sh` - lists Buildkite pipelines
+  - `buildkite_create_pipeline.sh` - create a Buildkite pipeline from a JSON configuration (like from `buildkite_get_pipeline.sh` or `buildkite_save_pipelines.sh`)
+  - `buildkite_get_pipeline.sh` - gets details for a specific Buildkite pipeline in JSON format
+  - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
+  - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of any cancelled pipelines
+  - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of any failed pipelines (useful if you killed an agent and want to re-run them)
+  - `buildkite_recreate_pipeline.sh` - recreates a pipeline to wipe out all stats (see url and badge caveats in `--help`)
+  - `buildkite_running_builds.sh` - lists running builds and the agent they're running on
+  - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
+  - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
+  - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)

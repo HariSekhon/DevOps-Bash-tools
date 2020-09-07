@@ -14,6 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -26,12 +31,13 @@ https://buildkite.com/docs/apis/rest-api/builds
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
 help_usage "$@"
 
-"$srcdir/buildkite_api.sh" 'builds?state=running' "$@"
+"$srcdir/buildkite_api.sh" 'builds?state=running' "$@" |
+jq -r '.[] | [.pipeline.slug, .branch, .number, .commit, .created_at, .jobs[0].agent.name] | @tsv' |
+#while read -r name branch number commit created agent; do
+#    commit="${commit:0:8}"
+#    echo "$name $branch $number $commit $created $agent"
+#done |
+sed 's/\([[:space:]][[:alnum:]]\{8\}\)[[:alnum:]]\{32\}[[:space:]]/\1 /' |
+column -t
