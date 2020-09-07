@@ -18,6 +18,11 @@
 # see /usr/local/etc/buildkite-agent/buildkite-agent.cfg for config on Mac
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -29,12 +34,6 @@ Environment variables:
 BUILDKITE_DOCKER        set to any value to use Docker agent regardless
 BUILDKITE_DOCKER_TAG    set to BuildKite docker agent tag, eg. centos, ubuntu, alpine (default agent latest tag is alpine)
 "
-
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
