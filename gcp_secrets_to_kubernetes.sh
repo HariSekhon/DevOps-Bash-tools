@@ -25,6 +25,7 @@ usage_description="
 Loads given list of GCP Secret Manager secrets to the current Kubernetes cluster with the same name
 
 If no secrets are specified, then finds all secrets in the current project with labels of kubernetes-namespace that match the current kubectl context's namespace
+and which do not have the label kubernetes-multi-part-secret set (as these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
 
 Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
@@ -71,5 +72,5 @@ else
         secret="${secret#-}"
         secret="${secret#_}"
         load_secret "$secret"
-    done < <(gcloud secrets list --filter="labels.kubernetes-namespace=$current_namespace" --format='value(name)')
+    done < <(gcloud secrets list --filter="labels.kubernetes-namespace=$current_namespace AND NOT labels.kubernetes-multi-part-secret ~ ." --format='value(name)')
 fi
