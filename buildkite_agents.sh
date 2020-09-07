@@ -24,7 +24,7 @@ Lists BuildKite Agents via the BuildKite API
 
 Output format:
 
-<hostname>    <ip_address>    <created_date>    <user_agent>
+<hostname>    <ip_address>    <started_date>    <user_agent>
 
 eg.
 
