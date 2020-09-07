@@ -14,10 +14,11 @@
 #
 
 set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
-# used by usage() in lib/utils.sh
-# shellcheck disable=SC2034
-usage_args="pipeline.json [<curl_options>]"
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -28,11 +29,9 @@ This JSON file can be created from a configuration downloaded by buildkite_get_p
 Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
 "
 
-[ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
-
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="pipeline.json [<curl_options>]"
 
 # will attempt to parse from pipeline JSON if not given
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
