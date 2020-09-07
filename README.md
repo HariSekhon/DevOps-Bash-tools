@@ -353,6 +353,22 @@ etc.
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
   - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
+- `buildkite_*.sh` - [BuildKite](https://buildkite.com/) API scripts:
+  - `buildkite_pipelines.sh` - list buildkite pipelines for your `$BUILDKITE_ORGANIZATION` / `$BUILDKITE_USER`
+  - `buildkite_foreach_pipeline.sh` - executes a templated command for each Buildkite pipeline, replacing the `{user}` and `{pipeline}` in each iteration
+  - `buildkite_agent.sh` - runs a buildkite agent locally on Linux or Mac, or in Docker with choice of Linux distros
+  - `buildkite_agents.sh` - lists the Buildkite agents connected along with their hostname, IP, started dated and agent details
+  - `buildkite_pipelines.sh` - lists Buildkite pipelines
+  - `buildkite_create_pipeline.sh` - create a Buildkite pipeline from a JSON configuration (like from `buildkite_get_pipeline.sh` or `buildkite_save_pipelines.sh`)
+  - `buildkite_get_pipeline.sh` - gets details for a specific Buildkite pipeline in JSON format
+  - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
+  - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of any cancelled pipelines
+  - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of any failed pipelines (useful if you killed an agent and want to re-run them)
+  - `buildkite_recreate_pipeline.sh` - recreates a pipeline to wipe out all stats (see url and badge caveats in `--help`)
+  - `buildkite_running_builds.sh` - lists running builds and the agent they're running on
+  - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
+  - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
+  - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
 - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
 - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
