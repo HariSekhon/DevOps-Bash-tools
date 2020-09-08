@@ -71,7 +71,7 @@ while read -r namespace; do
     echo "# Kubernetest namespace = $namespace, content = $current_context" >&2
     echo "# ============================================================================ #" >&2
     # shellcheck disable=SC2064  # want interpolation now
-    trap "echo; echo 'Reverting context to original namespace:' ; set_namespace '$original_namespace'" EXIT
+    trap "echo; echo 'Reverting context to original namespace: $original_namespace' ; set_namespace '$original_namespace'" EXIT
     set_namespace "$namespace"
     cmd="${cmd_template//\{namespace\}/$namespace}"
     eval "$cmd"
