@@ -31,6 +31,12 @@ Loads to the current Kubernetes namespace since there is no namespace informatio
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
 
 Remember to execute this from the right GCP project configured to get the right secrets and with the right Kubernetes context and namespace set
+
+See Also:
+
+    gcp_secrets_to_kubernetes_multipart.sh - for create more complex compound secrets
+
+    kubernetes_get_secret_values.sh - for checking what was auto-loaded into to a given kubernetes secret
 "
 
 # used by usage() in lib/utils.sh
