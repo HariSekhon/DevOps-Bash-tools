@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run a command against each Kubernetes kubectl namespace in the current context
+Run a command against each Kubernetes namespace on the current cluster / kubectl context
 
 Can chain with kubernetes_foreach_context.sh
 
