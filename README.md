@@ -268,6 +268,7 @@ etc.
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
 - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
 - `kubernetes_pods_per_nodes.sh` - queries number of pods per node sorted descending
+- `kubernetes_get_secret_values.sh` - reads and base64 decodes each key and value within a a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
