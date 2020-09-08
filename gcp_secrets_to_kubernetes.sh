@@ -24,8 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Loads given list of GCP Secret Manager secrets to the current Kubernetes cluster with the same name
 
-If no secrets are specified, then finds all secrets in the current project with labels of kubernetes-namespace that match the current kubectl context's namespace
-and which do not have the label kubernetes-multi-part-secret set (as these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
+If no secrets are specified, then finds all secrets in the current project with labels of kubernetes-cluster and
+kubernetes-namespace that match the current kubectl context's cluster and namespace and which do not have the label
+kubernetes-multi-part-secret set (as these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
 
 Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
@@ -47,7 +48,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-get_latest_version(){
+get_latest_secret_version(){
     local secret="$1"
     gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' |
     sort -k1nr |
@@ -60,14 +61,17 @@ load_secret(){
         echo "WARNING: kubernetes secret '$secret' already exists, skipping creation..." >&2
         return
     fi
-    latest_version="$(get_latest_version "$secret")"
+    latest_version="$(get_latest_secret_version "$secret")"
     value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
     # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
+    #         could alternatively make this --from-literal="value=$value"
     kubectl create secret generic "$secret" --from-literal="$secret=$value"
 }
 
-# there is no --format or -o namespace as of Kubernetes 1.15 so have to just print 5th col
-current_namespace="$(kubectl config get-contexts "$(kubectl config current-context)" --no-headers | awk '{print $5}')"
+# there's no -o jsonpath / -o namespace / -o cluster as of Kubernetes 1.15 so have to just print columns
+kubectl_context="$(kubectl config get-contexts "$(kubectl config current-context)" --no-headers)"
+current_cluster="$(awk '{print $3}' <<< "$kubectl_context")"
+current_namespace="$(awk '{print $5}' <<< "$kubectl_context")"
 
 if [ $# -gt 0 ]; then
     for arg; do
@@ -75,10 +79,9 @@ if [ $# -gt 0 ]; then
     done
 else
     while read -r secret; do
-        secret="${secret#k8s}"
-        secret="${secret#kubernetes}"
-        secret="${secret#-}"
-        secret="${secret#_}"
         load_secret "$secret"
-    done < <(gcloud secrets list --filter="labels.kubernetes-namespace=$current_namespace AND NOT labels.kubernetes-multi-part-secret ~ ." --format='value(name)')
+    done < <(gcloud secrets list --format='value(name)' \
+                                 --filter="labels.kubernetes-cluster=$current_cluster \
+                                       AND labels.kubernetes-namespace=$current_namespace \
+                                       AND NOT labels.kubernetes-multi-part-secret ~ .")
 fi
