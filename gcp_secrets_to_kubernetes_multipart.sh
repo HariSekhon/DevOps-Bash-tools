@@ -30,6 +30,12 @@ Use the following command to see secrets you may want to combine and load to Kub
 
 Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
+
+See Also:
+
+    gcp_secrets_to_kubernetes.sh - for linear 1-to-1 secret auto-loading
+
+    kubernetes_get_secret_values.sh - for checking what was auto-loaded into to a given kubernetes secret
 "
 
 # used by usage() in lib/utils.sh
