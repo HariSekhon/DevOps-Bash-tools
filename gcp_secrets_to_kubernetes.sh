@@ -29,6 +29,8 @@ and which do not have the label kubernetes-multi-part-secret set (as these must 
 
 Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
 want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
+
+Remember to execute this from the right GCP project configured to get the right secrets and with the right Kubernetes context and namespace set
 "
 
 # used by usage() in lib/utils.sh
