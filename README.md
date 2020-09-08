@@ -307,7 +307,7 @@ etc.
   - `cloudera_navigator_api.sh` - script to simplify querying [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) API using environment variables, prompts, authentication and sensible defaults. Built on top of `curl_auth.sh`
   - `cloudera_navigator_audit_logs.sh` - fetches [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for given service eg. hive/impala/hdfs via the API, simplifying date handling, authentication and common settings. Built on top of `cloudera_navigator_api.sh`
   - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
-- `git*.sh` - various useful Git scripts, eg:
+- `git*.sh` - [Git](https://git-scm.com/) scripts:
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
   - `git_foreach_modified.sh` - executes a command against each file with git modified status
@@ -317,7 +317,7 @@ etc.
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
-- `github_*.sh` - various useful [GitHub](https://github.com/) scripts for querying the GitHub API including:
+- `github_*.sh` - [GitHub](https://github.com/) API scripts:
   - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_get_user_ssh_public_key.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
