@@ -33,8 +33,9 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-kubectl get po --all-namespaces -o json |
-jq -r '.items[] | .spec.nodeName' |
+#kubectl get pods --all-namespaces -o json |
+#jq -r '.items[] | .spec.nodeName' |
+kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.spec.nodeName}{"\n"}' |
 sort |
 uniq -c |
 sort -k1nr
