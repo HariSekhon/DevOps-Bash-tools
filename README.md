@@ -12,7 +12,7 @@ Hari Sekhon - DevOps Bash Tools
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/network)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/commits/master)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-41k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-44k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 <!--
 BitBucket exposes HTML comments - open issue - works properly on GitHub/GitLab
@@ -122,23 +122,24 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 400+ DevOps Shell Scripts and Advanced Bash environment.
 
-Heavily used by all my [GitHub repos](https://github.com/harisekhon), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
+Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
-#### Contains:
+Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
-- Scripts for fast advanced systems engineering, automation, APIs, short CLIs auto-populating required switches, auto-handling authentication etc...
-- Scripts for [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), APIs, agents, checks forming a drop-in framework of standard tests used [across repos](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), specializations handling many major languages and build tools
-- Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - advanced customizations, aliases, functions, dynamic Git and shell behaviour enhancements, colouring, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
-- Advanced configuration files for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
+#### Summary:
+
+- Scripts for most popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#inventory) below for more details
+- Advanced configs for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
+- CI configs for most major Continuous Integration products (see [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page)
+- CI scripts for a drop-in framework of standard checks to run in all [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), CI detection, accounting for installation differences across CI environments, root vs user, virtualenvs etc.
+- Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - aliases, functions, colouring, dynamic Git & shell behaviour enhancements, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
 - Installs the best systems packages - [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [Terraform](https://www.terraform.io/), [jq](https://stedolan.github.io/jq/) etc... extensive package lists for servers and desktops for all major Linux distributions package managers and Mac
-- Utility Libraries used by hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/harisekhon):
+- Utility Libraries by many hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
   - `lib/` - scripting and CI library
-- [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 70+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs, [Google BigQuery](https://cloud.google.com/bigquery) billing queries
+- [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 80+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) + [CloudTrail](https://aws.amazon.com/cloudtrail/), [Google BigQuery](https://cloud.google.com/bigquery), DevOps / DBA / analytics queries etc.
 
-For more advanced Systems Administration scripts in other languages, see the repos listed at the bottom of the page.
-
-These scripts can be used straight from the git clone, but see setup benefits of `make install` next.
+See Also: [similar DevOps repos](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#see-also) in other languages
 
 Hari Sekhon
 
@@ -172,14 +173,7 @@ make
 
 `make install` sets your shell profile to source this repo. See [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below for more install/uninstall options.
 
-### Inventory Overview
-
-- Scripts - [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
-  - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
-  - install if absent scripts for Python, Perl, Ruby, NodeJS and Golang packages - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
-  - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
-  - Git branch management
-  - utility scripts used from other scripts
+### Inventory
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
   - `.screenrc` - fancy [screen](https://www.gnu.org/software/screen/) configuration including advanced colour bar, large history, hotkey reloading, auto-blanking etc.
@@ -188,7 +182,7 @@ make
     - `.gitconfig` - advanced Git configuration
     - `.gitignore` - extensive Git ignore of trivial files you shouldn't commit
     - enhanced Git diffs
-    - protections against committing AWS access keys & secrets keys, merge conflict unresolved files
+    - protections against committing AWS secret keys or merge conflict unresolved files
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
@@ -428,17 +422,21 @@ etc.
   - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
 - `json2yaml.sh` - converts JSON to YAML
 - `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
-- OS / Distro Package Management:
-  - `install_packages.sh` - installs package lists from arguments, files or stdin on major linux distros and Mac, detecting the package manager and invoking the right install commands, with `sudo` if not root. Works on [RHEL](https://www.redhat.com/en) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/), and [Mac Homebrew](https://brew.sh/). Leverages and supports all features of the distro / OS specific install scripts listed below
-  - `install_packages_if_absent.sh` - installs package lists if they're not already installed, saving time and minimizing install logs / CI logs, same support list as above
-  - `yum_install_packages.sh` / `yum_remove_packages.sh` - installs RPM lists from arguments, files or stdin. Handles Yum + Dnf behavioural differences, calls `sudo` if not root, auto-attempts variations of python/python2/python3 package names. Avoids yum slowness by checking if rpm is installed before attempting to install it, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across RHEL/CentOS/Fedora versions)
-  - `yum_install_if_absent.sh` - installs RPMs only if not already installed and not a metapackage provided by other packages (eg. `vim` metapackage provided by `vim-enhanced`), saving time and minimizing install logs / CI logs, plus all the features of `yum_install_packages.sh` above
-  - `apt_install_packages.sh` / `apt_remove_packages.sh` - installs Deb package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Debian/Ubuntu distros/versions)
-  - `apt_install_if_absent.sh` - installs Deb packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apt_install_packages.sh` above
-  - `apk_install_packages.sh` / `apk_remove_packages.sh` - installs Alpine apk package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Alpine versions)
-  - `apk_install_if_absent.sh` - installs Alpine apk packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apk_install_packages.sh` above
-  - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
-  - `brew_install_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
+- [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
+  - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
+  - install if absent scripts for Python, Perl, Ruby, NodeJS and Golang packages - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
+  - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
+  - OS / Distro Package Management:
+    - `install_packages.sh` - installs package lists from arguments, files or stdin on major linux distros and Mac, detecting the package manager and invoking the right install commands, with `sudo` if not root. Works on [RHEL](https://www.redhat.com/en) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/), and [Mac Homebrew](https://brew.sh/). Leverages and supports all features of the distro / OS specific install scripts listed below
+    - `install_packages_if_absent.sh` - installs package lists if they're not already installed, saving time and minimizing install logs / CI logs, same support list as above
+    - `yum_install_packages.sh` / `yum_remove_packages.sh` - installs RPM lists from arguments, files or stdin. Handles Yum + Dnf behavioural differences, calls `sudo` if not root, auto-attempts variations of python/python2/python3 package names. Avoids yum slowness by checking if rpm is installed before attempting to install it, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across RHEL/CentOS/Fedora versions)
+    - `yum_install_if_absent.sh` - installs RPMs only if not already installed and not a metapackage provided by other packages (eg. `vim` metapackage provided by `vim-enhanced`), saving time and minimizing install logs / CI logs, plus all the features of `yum_install_packages.sh` above
+    - `apt_install_packages.sh` / `apt_remove_packages.sh` - installs Deb package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Debian/Ubuntu distros/versions)
+    - `apt_install_if_absent.sh` - installs Deb packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apt_install_packages.sh` above
+    - `apk_install_packages.sh` / `apk_remove_packages.sh` - installs Alpine apk package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Alpine versions)
+    - `apk_install_if_absent.sh` - installs Alpine apk packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apk_install_packages.sh` above
+    - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
+    - `brew_install_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
@@ -479,7 +477,7 @@ etc.
   - XML
   - YAML
 
-Currently utilized in the following GitHub repos:
+### See Also:
 
 * [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 80+ DevOps CLI tools for AWS, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
 
@@ -487,7 +485,7 @@ Currently utilized in the following GitHub repos:
 
 * [DevOps Perl Tools](https://github.com/harisekhon/perl-tools) - 25+ DevOps CLI tools for Hadoop, HDFS, Hive, Solr/SolrCloud CLI, Log Anonymizer, Nginx stats & HTTP(S) URL watchers for load balanced web farms, Dockerfiles & SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles, Pig Latin, Neo4j, InfluxDB), Ambari FreeIPA Kerberos, Datameer, Linux...
 
-* [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 70+ SQL Scripts - PostgreSQL, MySQL, AWS Athena, Google BigQuery
+* [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 80+ SQL Scripts - PostgreSQL, MySQL, AWS Athena, Google BigQuery
 
 * [HAProxy Configs](https://github.com/HariSekhon/HAProxy-configs) - 80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Elasticsearch, SolrCloud, HBase, Cloudera, Hortonworks, MapR, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, ZooKeeper, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, SSH, RabbitMQ, Redis, Riak, Rancher etc.
 
