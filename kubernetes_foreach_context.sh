@@ -23,11 +23,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run a command against each Kubernetes kubectl context
+Run a command against each configured Kubernetes kubectl context (cluster)
 
 Can chain with kubernetes_foreach_namespace.sh
 
 This is powerful so use carefully!
+
+See Also: gke_kube_creds.sh to auto-create all your contexts for all clusters on Google Kubernetes Engine!
 
 Requires 'kubectl' to be configured and available in \$PATH
 
