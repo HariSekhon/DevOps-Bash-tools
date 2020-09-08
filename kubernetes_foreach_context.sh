@@ -65,7 +65,7 @@ while read -r context; do
     echo "# Kubernetest context = $context" >&2
     echo "# ============================================================================ #" >&2
     # shellcheck disable=SC2064  # want interpolation now
-    trap "echo; echo Reverting to original context:; kubectl config use-context '$original_context'" EXIT
+    trap "echo; echo 'Reverting to original context:' ; kubectl config use-context '$original_context'" EXIT
     kubectl config use-context "$context"
     cmd="${cmd_template//\{context\}/$context}"
     eval "$cmd"
