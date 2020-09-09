@@ -79,7 +79,8 @@ fi
 alias l='less'
 alias m='more'
 alias vi='vim'
-alias v='vim'
+# used by vagrant now
+#alias v='vim'
 alias grep='grep --color=auto'
 # in functions.sh for multiple args now
 #alias envg="env | grep -i"
