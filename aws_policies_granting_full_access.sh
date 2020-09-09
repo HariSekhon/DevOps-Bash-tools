@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Dumps policies granting full access in JSON format
+# Finds policies granting full access in JSON format
 #
 # Takes a while to run (eg. ~18 mins for ~700 policies)
 #
