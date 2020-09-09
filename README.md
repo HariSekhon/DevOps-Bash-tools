@@ -227,33 +227,33 @@ etc.
 - [sql/](https://github.com/HariSekhon/SQL-scripts)`*.sql` - useful SQL scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
 - `aws_*.sh` - [AWS](https://aws.amazon.com/) scripts:
   - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
-  - `aws_cloudtrails_cloudwatch.sh` - lists Cloud Trails and their last delivery to CloudWatch Logs (should be recent)
-  - `aws_cloudtrails_event_selectors.sh` - lists Cloud Trails and their event selectors to check each one has at least one event selector
-  - `aws_cloudtrails_s3_accesslogging.sh` - lists Cloud Trails buckets and their Access Logging prefix and target bucket. Checks S3 access logging is enabled
-  - `aws_cloudtrails_s3_kms.sh` - lists Cloud Trails and whether their S3 buckets are KMS secured
-  - `aws_cloudtrails_status.sh` - lists Cloud Trails status - if logging, multi-region and log file validation enabled
-  - `aws_config_all_types.sh` - lists AWS Config recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
-  - `aws_config_recording.sh` - lists AWS Config recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_harden_password_policy.sh` - strengthens AWS password policy according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
+  - `aws_cloudtrails_cloudwatch.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their last delivery to [CloudWatch](https://aws.amazon.com/cloudwatch/features/) Logs (should be recent)
+  - `aws_cloudtrails_event_selectors.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their event selectors to check each one has at least one event selector
+  - `aws_cloudtrails_s3_accesslogging.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) buckets and their Access Logging prefix and target bucket. Checks [S3 access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) is enabled
+  - `aws_cloudtrails_s3_kms.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and whether their [S3](https://aws.amazon.com/s3/) buckets are [KMS](https://aws.amazon.com/kms/) secured
+  - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
+  - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
+  - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
+  - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
   - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html) and waits for it to finish (used by adjacent `*_report.sh` scripts to ensure we have a fresh recent report)
-  - `aws_kms_key_rotation_enabled.sh` - lists KMS keys and whether they have key rotation enabled
-  - `aws_meta.sh` - AWS EC2 Metadata API query shortcut. See also See also the official `ec2-metadata` shell script with more features
-  - `aws_password_policy.sh` - prints password policy in `key = value` pairs for easy viewing / grepping (used by `aws_harden_password_policy.sh` before and after to show the differences)
-  - `aws_policies_attached_to_users.sh` - finds policies directly attached to users (anti-best practice) instead of groups
-  - `aws_policies_granting_full_access.sh` - finds policies granting full access (anti-best practice) in JSON format for further processing
-  - `aws_policies_unattached.sh` - lists unattached policies
-  - `aws_s3_access_logging.sh` - lists S3 buckets and their access logging status
-  - `aws_spot_when_terminated.sh` - executes commands when the EC2 instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
+  - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
+  - `aws_meta.sh` - [AWS EC2 Metadata API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) query shortcut. See also See also the official [ec2-metadata](https://aws.amazon.com/code/ec2-instance-metadata-query-tool/) shell script with more features
+  - `aws_password_policy.sh` - prints [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in `key = value` pairs for easy viewing / grepping (used by `aws_harden_password_policy.sh` before and after to show the differences)
+  - `aws_policies_attached_to_users.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) directly attached to users (anti-best practice) instead of groups
+  - `aws_policies_granting_full_access.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) granting full access (anti-best practice) in JSON format for further processing
+  - `aws_policies_unattached.sh` - lists unattached [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html)
+  - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
+  - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
-  - `aws_users.sh` - list your AWS IAM users
-  - `aws_users_access_key_age.sh` - prints users access key status and age (see also `aws_users_access_key_age_report.sh` using credentials report instead of API which is much quicker for lots of users, and `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which is able to filter by age and status)
-  - `aws_users_access_key_age_report.sh` - prints users access key status and age using a bulk credentials report (faster for many users)
-  - `aws_users_access_key_last_used.sh` - prints users access keys and their last used date
+  - `aws_users.sh` - list your [AWS IAM](https://aws.amazon.com/iam/) users
+  - `aws_users_access_key_age.sh` - prints AWS users access key status and age (see also `aws_users_access_key_age_report.sh` below, and `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which is able to filter by age and status)
+  - `aws_users_access_key_age_report.sh` - prints AWS users access key status and age using a bulk credentials report (faster for many users)
+  - `aws_users_access_key_last_used.sh` - prints AWS users access keys and their last used date
   - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
-  - `aws_users_last_used_report.sh` - lists AWS IAM users last used dates for password and access keys
-  - `aws_users_mfa_active_report.sh` - lists AWS IAM users password enabled and MFA enabled status
-  - `aws_users_mfa_serials.sh` - lists AWS IAM users MFAs serial numbers to differentiate Virtual vs Hardward MFAs
-  - `aws_users_pw_last_used.sh` - lists AWS IAM users and their password last used date
+  - `aws_users_last_used_report.sh` - lists AWS users last used dates for password and access keys
+  - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and MFA enabled status
+  - `aws_users_mfa_serials.sh` - lists AWS users MFAs serial numbers to differentiate Virtual vs Hardward MFAs
+  - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
 - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` - [Google Cloud](https://cloud.google.com/) scripts:
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
     - `gcp_info_compute.sh` - [GCE](https://cloud.google.com/compute/) Virtual Machine instances, [App Engine](https://cloud.google.com/appengine) instances, [Cloud Functions](https://cloud.google.com/functions), [GKE](https://cloud.google.com/kubernetes-engine) clusters, all [Kubernetes](https://kubernetes.io/) objects across all GKE clusters (see `kubernetes_info.sh` below for more details)
