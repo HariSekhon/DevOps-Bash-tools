@@ -13,11 +13,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists AWS IAM users last used dates for password and access keys
+# Lists AWS IAM users password enabled and MFA enabled status
 #
 # Output format is CSV with the following headers
 #
-# user,password_last_used,access_key_1_last_used_date,access_key_2_last_used_date
+# user,password_enabled,mfa_active
 #
 # Add
 #
