@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Quick script to dump all users access key status and age
+# Prints users access key status and age
 #
 # See also:
 #
