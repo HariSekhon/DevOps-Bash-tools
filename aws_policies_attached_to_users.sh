@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Finds and dumps all policies directly attached to users (anti-best practice) instead of groups
+# Finds and prints all policies directly attached to users (anti-best practice) instead of groups
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
