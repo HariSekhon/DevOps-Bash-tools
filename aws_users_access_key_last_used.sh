@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Quick script to dump the last access key used date for all users
+# Prints users access keys and their last used date
 #
 # Output format, tab separated:
 #
