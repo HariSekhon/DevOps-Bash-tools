@@ -33,5 +33,9 @@ usage_args=""
 
 help_usage "$@"
 
-kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{.spec.containers[].image}{"\n"}' |
+# some less fancy ways of doing this:
+#
+# https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
+
+kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}' |
 sort -u
