@@ -45,15 +45,13 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-secret="$1"
-
 base64_decode_switch="-d"
 if is_mac; then
     base64_decode_switch="-D"
 fi
 
 #kubectl get secret stackdriver-api-key -o 'jsonpath={.data.stackdriver-api-key}' | base64 -D
-kubectl get secret "$secret" -o json |
+kubectl get secret "$@" -o json |
 # @base64d works nicely on jq 1.6 but not available on 1.5
 #jq -r '.data | to_entries[] | [.key, (.value | @base64d) ] | @tsv''
 jq -r '.data | to_entries[] | [.key, .value] | @tsv' |
