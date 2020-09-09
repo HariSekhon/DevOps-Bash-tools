@@ -33,7 +33,7 @@ usage_args=""
 
 help_usage "$@"
 
-# some less fancy ways of doing this:
+# some similar queries:
 #
 # https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
 
