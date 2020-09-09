@@ -284,6 +284,8 @@ etc.
     - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
     - storage classes, persistent volumes, persistent volume claims
     - service accounts, resource quotas, network policies, pod security policies
+    - container images running
+    - container images running counts descending
     - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
   - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
   - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
