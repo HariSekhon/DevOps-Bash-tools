@@ -225,7 +225,35 @@ Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make 
 [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
 etc.
 - [sql/](https://github.com/HariSekhon/SQL-scripts)`*.sql` - useful SQL scripts for [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup, [Google BigQuery](https://cloud.google.com/bigquery) billing queries, [MySQL](https://www.mysql.com/) and lots of [PostgreSQL](https://www.postgresql.org/)
-- `aws_*.sh` - various [AWS](https://aws.amazon.com/) scripts for EC2 metadata, Spot Termination, SSM Parameter Store secret put from prompt, IAM Credential Reports on IAM users without MFA, old access keys and passwords, old user accounts that haven't logged in or used an access key recently, show password policy / set hardened password policy, show unattached IAM policies, show account summary to check various details including root account MFA enabled and no access keys, KMS keys rotation status, CloudTrail & Config status etc.
+- `aws_*.sh` - [AWS](https://aws.amazon.com/) scripts:
+  - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
+  - `aws_cloudtrails_cloudwatch.sh` - lists Cloud Trails and their last delivery to CloudWatch Logs (should be recent)
+  - `aws_cloudtrails_event_selectors.sh` - lists Cloud Trails and their event selectors to check each one has at least one event selector
+  - `aws_cloudtrails_s3_accesslogging.sh` - lists Cloud Trails buckets and their Access Logging prefix and target bucket. Checks S3 access logging is enabled
+  - `aws_cloudtrails_s3_kms.sh` - lists Cloud Trails and whether their S3 buckets are KMS secured
+  - `aws_cloudtrails_status.sh` - lists Cloud Trails status - if logging, multi-region and log file validation enabled
+  - `aws_config_all_types.sh` - lists AWS Config recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
+  - `aws_config_recording.sh` - lists AWS Config recorders, their recording status (should be true) and their last status (should be success)
+  - `aws_harden_password_policy.sh` - strengthens AWS password policy according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
+  - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html) and waits for it to finish (used by adjacent `*_report.sh` scripts to ensure we have a fresh recent report)
+  - `aws_kms_key_rotation_enabled.sh` - lists KMS keys and whether they have key rotation enabled
+  - `aws_meta.sh` - AWS EC2 Metadata API query shortcut. See also See also the official `ec2-metadata` shell script with more features
+  - `aws_password_policy.sh` - prints password policy in `key = value` pairs for easy viewing / grepping (used by `aws_harden_password_policy.sh` before and after to show the differences)
+  - `aws_policies_attached_to_users.sh` - finds policies directly attached to users (anti-best practice) instead of groups
+  - `aws_policies_granting_full_access.sh` - finds policies granting full access (anti-best practice) in JSON format for further processing
+  - `aws_policies_unattached.sh` - lists unattached policies
+  - `aws_s3_access_logging.sh` - lists S3 buckets and their access logging status
+  - `aws_spot_when_terminated.sh` - executes commands when the EC2 instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
+  - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
+  - `aws_users.sh` - list your AWS IAM users
+  - `aws_users_access_key_age.sh` - prints users access key status and age (see also `aws_users_access_key_age_report.sh` using credentials report instead of API which is much quicker for lots of users, and `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which is able to filter by age and status)
+  - `aws_users_access_key_age_report.sh` - prints users access key status and age using a bulk credentials report (faster for many users)
+  - `aws_users_access_key_last_used.sh` - prints users access keys and their last used date
+  - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
+  - `aws_users_last_used_report.sh` - lists AWS IAM users last used dates for password and access keys
+  - `aws_users_mfa_active_report.sh` - lists AWS IAM users password enabled and MFA enabled status
+  - `aws_users_mfa_serials.sh` - lists AWS IAM users MFAs serial numbers to differentiate Virtual vs Hardward MFAs
+  - `aws_users_pw_last_used.sh` - lists AWS IAM users and their password last used date
 - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` - [Google Cloud](https://cloud.google.com/) scripts:
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
     - `gcp_info_compute.sh` - [GCE](https://cloud.google.com/compute/) Virtual Machine instances, [App Engine](https://cloud.google.com/appengine) instances, [Cloud Functions](https://cloud.google.com/functions), [GKE](https://cloud.google.com/kubernetes-engine) clusters, all [Kubernetes](https://kubernetes.io/) objects across all GKE clusters (see `kubernetes_info.sh` below for more details)
@@ -316,7 +344,7 @@ etc.
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 3 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) which doesn't have the [GitLab](https://gitlab.com/) auto-sync from [GitHub](https://github.com/) feature)
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
-  - `git_submodules_update_repos.sh` - submodule handling, including updating and committing latest submodule updates - used on all my repos for updating shared code submodules
+  - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout on all my repos
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
   - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_get_user_ssh_public_key.sh` - fetches a GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
@@ -387,7 +415,7 @@ etc.
   - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 Teamcity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
-- `perl*.sh` - various Perl utilities eg:
+- `perl*.sh` - Perl utilities:
   - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
   - `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
   - `perlpath.sh` - prints all Perl libary search paths, one per line
@@ -396,7 +424,7 @@ etc.
   - `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
   - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
   - `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
-- `python*.sh` - various Python utilities eg:
+- `python*.sh` - Python utilities:
   - `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
   - `python_pip_install.sh` - bulk installs PyPI modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, VirtualEnvs / Anaconda / GitHub Workflows/ Google Cloud Shell, Mac vs Linux library paths, and ignore failure option
   - `python_pip_install_if_absent.sh` - installs PyPI modules not already in Python libary path (OS or pip installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
@@ -412,7 +440,7 @@ etc.
   - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
   - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
   - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
-- `spotify_*.sh` - 30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo), including:
+- `spotify_*.sh` - 30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo):
   - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
   - `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
   - `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
