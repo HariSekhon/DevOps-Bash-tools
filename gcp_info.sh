@@ -73,6 +73,8 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
         - jobs, cronjobs
         - storage classes, persistent volumes, persistent volume claims
         - service accounts, resource quotas, network policies, pod security policies
+        - container images running
+        - container images running counts descending
         - pods  # might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
     - Storage:
       - Cloud SQL instances
