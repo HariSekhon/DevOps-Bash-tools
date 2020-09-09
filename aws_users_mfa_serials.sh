@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Prints users MFAs serial numbers to differentiate Virtual vs Hardward MFAs
+# Prints users MFAs serial numbers to differentiate Virtual vs Hardware MFAs
 #
 # Virtual MFAs have a SerialNumber in the format:
 #
