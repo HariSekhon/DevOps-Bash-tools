@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists AWS IAM users the dates of their last password and access key usage
+# Lists AWS IAM users last used dates for password and access keys
 #
 # Output format is CSV with the following headers
 #
