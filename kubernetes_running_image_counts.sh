@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists Kubernetes running docker image counts sorted descending
+Lists Kubernetes docker images running counts sorted descending
 
 Requires kubectl to be in \$PATH and configured
 "
