@@ -294,7 +294,9 @@ etc.
   - `kubectl_exec_grep.sh` - finds and execs to the first Kubernetes pod matching the given name regex, can optionally specify the container name regex to exec to, showing the full generated `kubectl exec` command line for clarity
   - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
   - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
-  - `kubernetes_pods_per_nodes.sh` - queries number of pods per node sorted descending
+  - `kubernetes_pods_per_nodes.sh` - lists number of pods per node sorted descending
+  - `kubernetes_running_images.sh` - lists Kubernetes docker images running on the current cluster
+  - `kubernetes_running_image_counts.sh` - lists Kubernetes docker images running counts sorted descending
   - `kubernetes_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
