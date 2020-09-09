@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
+
 # Generates an AWS IAM credentials report and waits for it to finish
 #
 # Called from adjacent scripts as a dependency so that they can then pull specific information from the report
