@@ -248,9 +248,9 @@ etc.
   - `aws_users.sh` - list your [AWS IAM](https://aws.amazon.com/iam/) users
   - `aws_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age_report.sh` below, and `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which is able to filter by age and status)
   - `aws_users_access_key_age_report.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age using a bulk credentials report (faster for many users)
-  - `aws_users_access_key_last_used.sh` - prints AWS users [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) and their last used date
+  - `aws_users_access_key_last_used.sh` - prints AWS users [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) last used date
   - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
-  - `aws_users_last_used_report.sh` - lists AWS users last used dates for password and access keys
+  - `aws_users_last_used_report.sh` - lists AWS users password/access keys last used dates
   - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
   - `aws_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
   - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
