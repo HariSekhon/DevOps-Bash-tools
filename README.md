@@ -252,7 +252,7 @@ etc.
   - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
   - `aws_users_last_used_report.sh` - lists AWS users last used dates for password and access keys
   - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and MFA enabled status
-  - `aws_users_mfa_serials.sh` - lists AWS users MFAs serial numbers to differentiate Virtual vs Hardware MFAs
+  - `aws_users_mfa_serials.sh` - lists AWS users MFAs serial numbers (differentiates Virtual vs Hardware MFAs)
   - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
 - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` - [Google Cloud](https://cloud.google.com/) scripts:
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
