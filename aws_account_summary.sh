@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Dumps AWS account summary to key = value pairs for easy viewing / grepping
+# Prints AWS account summary in 'key = value' pairs for easy viewing / grepping
 #
 # Useful information in here is whether the root account has MFA enabled and no access keys:
 #
