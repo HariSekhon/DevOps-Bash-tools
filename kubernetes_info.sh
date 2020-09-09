@@ -38,6 +38,8 @@ Lists:
 - jobs, cronjobs
 - storage classes, persistent volumes, persistent volume claims
 - service accounts, resource quotas, network policies, pod security policies
+- container images running
+- container images running counts descending
 - pods  # might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
 "
 
@@ -80,6 +82,16 @@ kubectl get --all-namespaces storageclasses,persistentvolumes,persistentvolumecl
 echo
 echo
 kubectl get --all-namespaces serviceaccounts,resourcequotas,networkpolicies,podsecuritypolicies
+echo
+echo
+echo "# Running container images:"
+echo
+"$srcdir/kubernetes_running_images.sh"
+echo
+echo
+echo "# Running container image counts:"
+echo
+"$srcdir/kubernetes_running_image_counts.sh"
 echo
 echo
 # pods might be too numerous with high replica counts and low value info, but there is always a chance that people launched pods without deployments, you can comment it out if you're confident that isn't the case
