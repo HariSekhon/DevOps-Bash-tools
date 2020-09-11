@@ -34,12 +34,16 @@ usage_args="[<kubectl_options>]"
 help_usage "$@"
 
 stuck_jobs="$(kubernetes_find_stuck_jobs.sh "$@")"
+header="$(head -n1 <<< "$stuck_jobs")"
+stuck_jobs="$(tail -n +2 <<< "$stuck_jobs")"
+
 if [ -z "$stuck_jobs" ]; then
     exit 0
 fi
 
 echo "Jobs to delete:"
 echo
+echo "$header"
 echo "$stuck_jobs"
 echo
 read -r -p "Are you sure you want to delete these jobs? (y/N)" answer
@@ -50,6 +54,8 @@ if ! [[ "$answer" =~ y|yes ]]; then
     timestamp "Aborting..."
     exit 1
 fi
+
+timestamp "Deleting stuck kubernetes jobs"
 
 awk '!/^NAME/{print $1}' <<< "$stuck_jobs" |
 xargs kubectl delete jobs
