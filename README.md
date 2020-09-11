@@ -298,6 +298,7 @@ etc.
   - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
   - `kubernetes_pods_per_nodes.sh` - lists number of pods per node sorted descending
   - `kubernetes_find_stuck_jobs.sh` - finds Kubernetes jobs stuck for hours or days with no completions
+  - `kubernetes_delete_stuck_jobs.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
   - `kubernetes_running_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubernetes_running_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubernetes_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
