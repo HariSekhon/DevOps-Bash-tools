@@ -458,7 +458,8 @@ etc.
   - `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input, optionally prefixed with a track position to remove only specific occurrences (useful for removing duplicates from playlists)
   - `spotify_duplicate_uri_in_playlist.sh` - finds duplicate Spotify URIs in a given playlist (these are guaranteed exact duplicate matches), returns all but the first occurrence and optionally their track positions (zero-indexed to align with the Spotify API for easy chaining with other tools)
   - `spotify_duplicate_tracks_in_playlist.sh` - finds duplicate Spotify tracks in a given playlist (these are idential `Artist - Track` name matches, which may be from different albums / singles)
-  - `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate URI tracks in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+  - `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate Spotify URI tracks (identical) in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+  - `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
   - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
   - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
