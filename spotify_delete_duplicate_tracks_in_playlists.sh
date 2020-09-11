@@ -74,6 +74,7 @@ done <<< "$duplicates"
 echo
 
 read -r -p "Are you sure you want to delete these $count tracks from playlist '$playlist'? (y/N) " answer
+echo >&2
 
 shopt -s nocasematch
 
@@ -83,4 +84,5 @@ if ! [[ "$answer" =~ y|yes ]]; then
 fi
 
 timestamp "Deleting duplicate tracks"
+echo >&2
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_id" <<< "$duplicates"
