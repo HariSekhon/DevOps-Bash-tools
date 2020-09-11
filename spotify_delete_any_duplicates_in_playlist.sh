@@ -37,6 +37,6 @@ min_args 1 "$@"
 
 timestamp "calling spotify_delete_duplicates_in_playlist.sh:"
 "$srcdir/spotify_delete_duplicates_in_playlist.sh" "$@"
-
+echo >&2
 timestamp "calling spotify_delete_tracks_duplicates_in_playlist.sh:"
 "$srcdir/spotify_delete_duplicate_tracks_in_playlists.sh" "$@"
