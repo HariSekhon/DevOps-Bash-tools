@@ -85,6 +85,6 @@ if [ -z "${SPOTIFY_NO_CONFIRM:-}" ]; then
     fi
 fi
 
-timestamp "Deleting duplicate tracks"
+timestamp "Deleting $count duplicate tracks"
 echo >&2
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_id" <<< "$duplicates"
