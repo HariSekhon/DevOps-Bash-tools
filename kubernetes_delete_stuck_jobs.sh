@@ -24,7 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds and deletes stuck Kubernetes jobs using the criteria specified in the adjacent script kubernetes_find_stuck_jobs.sh which this script calls
 
-Prompts for confirmation before deleting the jobs
+Shows the jobs and prompts for confirmation before deleting them
+
+This assumes that your jobs are being run by cronjobs and will be recreated
 "
 
 # used by usage() in lib/utils.sh
