@@ -297,6 +297,8 @@ etc.
   - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
   - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
   - `kubernetes_pods_per_nodes.sh` - lists number of pods per node sorted descending
+  - `kubernetes_find_stuck_jobs.sh` - finds Kubernetes jobs stuck for hours or days with no completions
+  - `kubernetes_delete_stuck_jobs.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
   - `kubernetes_running_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubernetes_running_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubernetes_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
@@ -456,8 +458,11 @@ etc.
   - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
   - `spotify_add_to_playlist.sh` - adds tracks to a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input. Can be combined with many other tools listed here which output Spotify URIs, or appended from other playlists. Can also be used to restore a spotify playlist from backups
   - `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input, optionally prefixed with a track position to remove only specific occurrences (useful for removing duplicates from playlists)
-  - `spotify_duplicate_uri_in_playlist.sh` - find duplicate Spotify URIs in a given playlist (these are guaranteed exact duplicate matches), returns all but the first occurrence and optionally their track positions (zero-indexed to align with the Spotify API for easy chaining with other tools)
-  - `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate tracks in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+  - `spotify_duplicate_uri_in_playlist.sh` - finds duplicate Spotify URIs in a given playlist (these are guaranteed exact duplicate matches), returns all but the first occurrence and optionally their track positions (zero-indexed to align with the Spotify API for easy chaining with other tools)
+  - `spotify_duplicate_tracks_in_playlist.sh` - finds duplicate Spotify tracks in a given playlist (these are idential `Artist - Track` name matches, which may be from different albums / singles)
+  - `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate Spotify URI tracks (identical) in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+  - `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+  - `spotify_delete_any_duplicates_in_playlist.sh` - calls both of the above scripts to first get rid of duplicate URIs and then remove any other duplicates by track name matches
   - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
   - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
   - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`

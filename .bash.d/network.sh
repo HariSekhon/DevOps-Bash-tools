@@ -27,6 +27,7 @@ alias 4="ping 4.2.2.1"
 alias 8="ping 8.8.8.8"
 
 alias ping="ping -n"
+alias p="ping"
 
 pingwait="-w"
 isMac && pingwait="-W"

@@ -24,15 +24,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists duplicate Spotify URIs in a given playlist
+Lists duplicate Spotify tracks in a given playlist
 
 Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name (see spotify_playlists.sh)
 
 You can combine this with spotify_uri_to_name.sh to see the duplicate track names eg. for a playlist called 'My Playlist':
 
-${0##*/} 'My Playlist' | spotify_uri_to_name.sh
+${0##*/} 'My Playlist'
 
-If \$SPOTIFY_DUPLICATE_TRACK_POSITIONS is set then also outputs the track position (zero-indexed to align with the Spotify API) as the first column with the URI as the second column
+If \$SPOTIFY_DUPLICATE_TRACK_POSITIONS is set then outputs the track position (zero-indexed to align with the Spotify API) as the first column with the URI as the second column
 
 $usage_playlist_help
 
@@ -61,17 +61,20 @@ playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_
 # playlists max out at only around ~8000 tracks so this is safe to do in ram
 tracklist_URIs="$("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id")"
 
-duplicate_URIs="$(sort <<< "$tracklist_URIs" | uniq -d)"
+tracklist_tracks="$("$srcdir/spotify_uri_to_name.sh" <<< "$tracklist_URIs")"
 
-while read -r uri; do
-    [ -n "$uri" ] || continue
-    grep -Fxn "$uri" <<< "$tracklist_URIs" |
+duplicate_tracks="$(sort <<< "$tracklist_tracks" | uniq -d)"
+
+while read -r track_name; do
+    [ -n "$track_name" ] || continue
+    grep -Fxn "$track_name" <<< "$tracklist_tracks" |
     tail -n +2
-done <<< "$duplicate_URIs" |
+done <<< "$duplicate_tracks" |
 if [ -n "${SPOTIFY_DUPLICATE_TRACK_POSITIONS:-}" ]; then
     sed 's/:/ /' |
-    while read -r track_position uri; do
-        ((track_position-=1))
+    while read -r track_position track_name; do
+        uri="$(sed -n "${track_position}p" <<< "$tracklist_URIs")"
+        ((track_position -= 1))
         echo "$track_position $uri"
     done |
     column -t

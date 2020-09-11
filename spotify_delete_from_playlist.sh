@@ -129,7 +129,7 @@ delete_from_playlist(){
     fi
 }
 
-delete_URIs_from_file(){
+delete_URIs_from_playlist(){
     declare -a ids
     ids=()
     while read -r track_uri; do
@@ -162,7 +162,7 @@ delete_URIs_from_file(){
             delete_from_playlist "${ids[@]}"
             ids=()
         fi
-    done < "$filename"
+    done
 
     if [ "${#ids[@]}" -gt 0 ]; then
         delete_from_playlist "${ids[@]}"
@@ -170,7 +170,7 @@ delete_URIs_from_file(){
 }
 
 for filename in "${@:-/dev/stdin}"; do
-    delete_URIs_from_file "$filename"
+    delete_URIs_from_playlist < "$filename"
 done
 
 timestamp "$count tracks deleted from playlist '$playlist_name'"

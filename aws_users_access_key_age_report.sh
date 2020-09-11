@@ -47,12 +47,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 "$srcdir/aws_iam_generate_credentials_report_wait.sh" >&2
 
-if [ "$(uname -s)" = Darwin ]; then
-    base64_decode="base64 -D"
-else
-    base64_decode="base64 -d"
-fi
+# use --decode not -d / -D which varies between Linux and Mac
+#if [ "$(uname -s)" = Darwin ]; then
+#    base64_decode="base64 -D"
+#else
+#    base64_decode="base64 -d"
+#fi
 
 aws iam get-credential-report --query 'Content' --output text |
-$base64_decode |
+base64 --decode |
 cut -d, -f1,9,10,14,15

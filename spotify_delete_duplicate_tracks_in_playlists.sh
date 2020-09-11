@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: test | tee /dev/stderr | spotify_uri_to_name.sh
+#  args: test
 #
 #  Author: Hari Sekhon
 #  Date: 2020-07-24 19:05:25 +0100 (Fri, 24 Jul 2020)
@@ -24,15 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists duplicate Spotify URIs in a given playlist
+Deletes duplicate Spotify tracks in a given playlist (by Artist - Track name match, may be from different albums / singles and not 100% identical performances)
 
 Playlist must be specified as the first argument and can be either a Spotify playlist ID or a full playlist name (see spotify_playlists.sh)
-
-You can combine this with spotify_uri_to_name.sh to see the duplicate track names eg. for a playlist called 'My Playlist':
-
-${0##*/} 'My Playlist' | spotify_uri_to_name.sh
-
-If \$SPOTIFY_DUPLICATE_TRACK_POSITIONS is set then also outputs the track position (zero-indexed to align with the Spotify API) as the first column with the URI as the second column
 
 $usage_playlist_help
 
@@ -58,23 +52,39 @@ spotify_token
 # this script returns the ID if it's already in the correct format, otherwise queries and returns the playlist ID for the playlist
 playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist")"
 
-# playlists max out at only around ~8000 tracks so this is safe to do in ram
-tracklist_URIs="$("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id")"
+export SPOTIFY_DUPLICATE_TRACK_POSITIONS=1
 
-duplicate_URIs="$(sort <<< "$tracklist_URIs" | uniq -d)"
+timestamp "Finding duplicates..."
+duplicates="$("$srcdir/spotify_duplicate_tracks_in_playlist.sh" "$playlist_id")"
 
-while read -r uri; do
-    [ -n "$uri" ] || continue
-    grep -Fxn "$uri" <<< "$tracklist_URIs" |
-    tail -n +2
-done <<< "$duplicate_URIs" |
-if [ -n "${SPOTIFY_DUPLICATE_TRACK_POSITIONS:-}" ]; then
-    sed 's/:/ /' |
-    while read -r track_position uri; do
-        ((track_position-=1))
-        echo "$track_position $uri"
-    done |
-    column -t
-else
-    sed 's/^[[:digit:]]*://'
+if [ -z "$duplicates" ]; then
+    timestamp "No duplicate track names found"
+    exit 0
 fi
+
+count="$(wc -l <<< "$duplicates" | sed 's/[[:space:]]*//g')"
+
+if [ -z "${SPOTIFY_NO_CONFIRM:-}" ]; then
+    timestamp "Duplicates to remove:"
+    echo >&2
+
+    while read -r position uri; do
+        printf '%s\t' "$position"
+        "$srcdir/spotify_uri_to_name.sh" <<< "$uri"
+    done <<< "$duplicates"
+    echo
+
+    read -r -p "Are you sure you want to delete these $count tracks from playlist '$playlist'? (y/N) " answer
+    echo >&2
+
+    shopt -s nocasematch
+
+    if ! [[ "$answer" =~ y|yes ]]; then
+        timestamp "Aborting..."
+        exit 1
+    fi
+fi
+
+timestamp "Deleting duplicate tracks"
+echo >&2
+"$srcdir/spotify_delete_from_playlist.sh" "$playlist_id" <<< "$duplicates"
