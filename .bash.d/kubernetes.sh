@@ -305,11 +305,12 @@ k8s_get_ca_cert(){
 # curl --cert client_cert.pem --key client_key.pem --cacert ca_cert.pem https://k8smaster:6443/api/v1/pods
 # curl --cert client_cert.pem --key client_key.pem --cacert ca_cert.pem https://k8smaster:6443/api/v1/pods/namespaces/default/pods -XPOST -H 'Content-Type: application/json' -d @pod_defintion.json
 k8s_get_keys(){
-    k8s_get_client_cert | base64 -d - > client_cert.pem
+    # use --decode not -d / -D which varies between Linux and Mac
+    k8s_get_client_cert | base64 --decode - > client_cert.pem
     echo "generated client_cert.pem"
-    k8s_get_client_key | base64 -d - > client_key.pem
+    k8s_get_client_key | base64 --decode - > client_key.pem
     echo "generated client_key.pem"
-    k8s_get_ca_cert | base64 -d - > ca_cert.pem
+    k8s_get_ca_cert | base64 --decode - > ca_cert.pem
     echo "generated ca_cert.pem"
 }
 

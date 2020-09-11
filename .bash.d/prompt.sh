@@ -67,9 +67,9 @@ export PS1+="\[$PS1_COLOUR\]\t \[$PS1_USER_COLOUR\]\u\[$txtwht\]@\[$bldgrn\]\h:\
 #
 #   base64 <<< "$PS1"
 #
-# and then pass the result through base64 -d
+# and then pass the result through base64 --decode
 #
-#   base64 <<< "$PS1" | base64 -d
+#   base64 <<< "$PS1" | base64 --decode
 #
 # is a noop to demonstrate
 
