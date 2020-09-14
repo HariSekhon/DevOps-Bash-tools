@@ -302,6 +302,10 @@ etc.
   - `kubernetes_running_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubernetes_running_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubernetes_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
+- `dockerhub_*.sh` - DockerHub API scripts
+  - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
+  - `dockerhub_show_tags.sh` - lists tags for a given DockerHub repo. See also [dockerhub_show_tags.py](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/dockerhub_show_tags.py) in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo.
+  - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
