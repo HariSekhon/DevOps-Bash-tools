@@ -1,0 +1,16 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2019-03-16 20:35:14 +0000 (Sat, 16 Mar 2019)
+#
+#  https://github.com/harisekhon/devops-bash-tools
+#
+#  License: see accompanying LICENSE file
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                      Alpine Desktop Package Requirements
+# ============================================================================ #
+
+skopeo

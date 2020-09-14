@@ -167,6 +167,7 @@ screen
 sguil-client
 sguil-sensor
 sguil-server
+skopeo
 sipcalc
 slurm
 snort
