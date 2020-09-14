@@ -25,6 +25,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists tags for a given DockerHub image using the DockerHub API
 
+Example:
+
+    ${0##*/} centos
+
+    ${0##*/} ubuntu
+
+    ${0##*/} harisekhon/hbase
+
+
 See also:
 
 - dockerhub_show_tags.py in the DevOps Python tools repo:  https://github.com/HariSekhon/devops-python-tools
