@@ -27,9 +27,9 @@ Creates Date and Timestamp tags for a Docker Image on Google Cloud Registry, bas
 Tags are in the format:
 
 YYYY-MM-DD
-YYYY-MM-DDTHHMMSS  (standard ISO timestamp without the timezone or semi-colons which are invalid chars for docker image tags)
+YYYY-MM-DDTHHMMSSZ  (standard ISO UTC time without semi-colons which are invalid in docker tags)
 
-The timestamp will be the localtime for timezone as-is from GCR itself, no munging is done to normalize to UTC
+The timestamp will be normalized to UTC
 
 Requires GCloud SDK to be installed and configured
 "
@@ -56,14 +56,22 @@ if [ -z "$timestamp" ]; then
 	echo "Failed to determine timestamp from Cloud Build for image '$docker_image' with tag '$tag'"
 	exit 1
 fi
-timestamp="${timestamp%%+*}"
-if ! [[ "$timestamp" =~ ^[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}[[:space:]][[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2}$ ]]; then
-	echo "Cloud Build timestamp not in expect YYYY-MM-DD HH:MM:SS format, API may have changed"
+if ! [[ "$timestamp" =~ ^[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}[[:space:]][[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2}[+-][[:digit:]]{2}:[[:digit:]]{2}$ ]]; then
+	echo "Cloud Build timestamp not in expect YYYY-MM-DD HH:MM:SS[+-]HH:MM format, API may have changed"
 	exit 1
 fi
-timestamp="${timestamp//:/}"
-timestamp="${timestamp/[[:space:]]/T}"
+
+if is_mac; then
+    date(){
+        gdate "$@"
+    }
+fi
+
+# normalize to UTC
+timestamp="$(date --utc --date="$timestamp" '+%FT%H%M%SZ')"
+
 date="${timestamp%T*}"
+
 echo "tagging docker image $docker_image:$tag with extra tags: $date $timestamp"
 # --quiet otherwise prompts Y/n which would hang build
 gcloud container images add-tag --quiet \
