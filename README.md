@@ -302,7 +302,7 @@ etc.
   - `kubernetes_running_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubernetes_running_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubernetes_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
-- `dockerhub_*.sh` - [DockerHub](https://hub.docker.com/) API scripts
+- `dockerhub_*.sh` - [DockerHub](https://hub.docker.com/) API scripts:
   - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
   - `dockerhub_show_tags.sh` - lists tags for a given DockerHub repo. See also [dockerhub_show_tags.py](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/dockerhub_show_tags.py) in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo.
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
