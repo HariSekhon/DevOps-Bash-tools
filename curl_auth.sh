@@ -50,6 +50,7 @@ done
 check_bin curl
 
 USERNAME="${USERNAME:-${USER:-$(whoami)}}"
+TOKEN="${TOKEN:-${OAUTH2_TOKEN:-${OAUTH_TOKEN:-${JWT_TOKEN:-}}}}"
 
 # Only do password mechanism and netrc_contents workaround if not using Kerberos
 if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
@@ -114,7 +115,12 @@ fi
 if [ -n "${KRB5:-${KERBEROS:-}}" ]; then
     command curl -u : --negotiate "$@"
 elif [ -n "${TOKEN:-}" ]; then
-    auth_header="${CURL_AUTH_HEADER:-Authorization: Bearer} $TOKEN"
+    if [ -n "${JWT_TOKEN:-}" ]; then
+        auth_header="${CURL_AUTH_HEADER:-Authorization: JWT} $JWT_TOKEN"
+    else
+        # OAuth2
+        auth_header="${CURL_AUTH_HEADER:-Authorization: Bearer} $TOKEN"
+    fi
     if is_curl_min_version 7.55; then
         # this trick doesn't work, file descriptor is lost by next line
         #filedescriptor=<(cat <<< "Private-Token: $GITLAB_TOKEN")
