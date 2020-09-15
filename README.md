@@ -309,6 +309,7 @@ etc.
 - `dockerhub_*.sh` - [DockerHub](https://hub.docker.com/) API scripts:
   - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
   - `dockerhub_show_tags.sh` - lists tags for a given DockerHub repo. See also [dockerhub_show_tags.py](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/dockerhub_show_tags.py) in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo.
+  - `dockerhub_show_tags_by_last_updated.sh` - lists tags for a given DockerHub repo sorted by last updated timestamp descending
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
