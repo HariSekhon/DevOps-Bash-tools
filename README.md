@@ -273,6 +273,7 @@ etc.
   - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple [Google Secret Manager](https://cloud.google.com/secret-manager) secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
   - `gcr_tag_datetime.sh` - tags a given [Google Container Registry](https://cloud.google.com/container-registry) docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling and pushing the docker image
   - `gcr_tag_latest.sh` - tags a given [Google Container Registry](https://cloud.google.com/container-registry) docker image:tag as latest without pulling and pushing the docker image
+  - `gcr_find_newest_image_tags.sh` - finds the tags for the given [Google Container Registry](https://cloud.google.com/container-registry) docker image with the newest creation date (can use this to tag `latest`)
   - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
   - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM preemption latch and boolean check scripts
   - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
