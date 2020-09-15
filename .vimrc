@@ -505,7 +505,7 @@ function! WriteRun()
             :! docker build "%:p:h"
         endif
     elseif expand('%:t') == 'kustomization.yaml'
-        :! bash -c 'cd "%:p:h" && kustomize build'
+        :! bash -c 'cd "%:p:h" && kustomize build' 2>&1 | less
     else
         " this only works for scripts
         ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
