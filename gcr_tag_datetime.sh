@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates Date and Timestamp tags for a Docker Image on Google Cloud Registry, based on the created time (upload or Google Cloud Build timestamp)
+Creates Date and Timestamp tags for a Docker Image on Google Cloud Registry, based on the created time (either uploaded or created by Google Cloud Build)
 
 Tags are in the format:
 
