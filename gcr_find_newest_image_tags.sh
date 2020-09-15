@@ -22,7 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds the tags of the Google Cloud Registry docker image with the latest creation date
+Finds the tags for the given Google Cloud Registry docker image with the newest creation date
+
+(eg. for tagging it as 'latest', see adjacent script gcr_tag_latest.sh)
 
 When a docker image has multiple tags (eg. v1, latest) then outputs each tag on a separate line for easy further piping and filtering
 
