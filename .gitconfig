@@ -47,6 +47,7 @@
     remotes  = remote -v
     tags     = tag -l
     branches = branch -a
+    prune-branches = !git remote prune origin; git branch -vv | cut -c 3- | awk '$4 ~ /gone\]/ {print $1}' | xargs git branch -d
 
     in      = log HEAD..FETCH_HEAD
     out     = log FETCH_HEAD..HEAD
