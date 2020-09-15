@@ -22,7 +22,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates Date and Timestamp tags for a build on Google Cloud Build based on the Cloud Build timestamps themselves
+Creates Date and Timestamp tags for a Docker Image on Google Cloud Registry, based on the created time (upload or Google Cloud Build timestamp)
+
+Tags are in the format:
+
+YYYY-MM-DD
+YYYY-MM-DDTHHMMSS  (standard ISO timestamp without the timezone or semi-colons which are invalid chars for docker image tags)
+
+The timestamp will be the localtime for timezone as-is from GCR itself, no munging is done to normalize to UTC
 
 Requires GCloud SDK to be installed and configured
 "
