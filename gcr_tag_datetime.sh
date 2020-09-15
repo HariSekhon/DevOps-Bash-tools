@@ -22,7 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates Date and Timestamp tags for a Docker Image on Google Cloud Registry, based on the created time (either uploaded or created by Google Cloud Build)
+Tags a given Google Cloud Registry docker image:tag with it's creation Date and Timestamp
+
+The timestamp is the created time (either uploaded or created by Google Cloud Build)
 
 Tags are in the format:
 
@@ -78,4 +80,4 @@ gcloud container images add-tag --quiet \
 	"$docker_image:$tag" \
 		"$docker_image:$date" \
 		"$docker_image:$timestamp"
-		#"$docker_image:latest"
+		#"$docker_image:latest"  # there is also gcr_tag_latest.sh adjacent now
