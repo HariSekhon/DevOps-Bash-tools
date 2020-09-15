@@ -111,7 +111,12 @@ alias remote='remotes'
 
 # git fetch -p or git remote prune origin
 #alias prune="co master; git pull --no-edit; git remote prune origin; git branch --merged | grep -v -e '^\\*' -e 'master' | xargs git branch -d"
-alias removed_branches="git branch -vv | cut -c 3- | awk '\$4 ~ /gone\]/ {print \$1}'"
+removed_branches(){
+    git remote prune origin
+    git branch -vv |
+    cut -c 3- |
+    awk '$4 ~ /gone\]/ {print $1}'
+}
 alias prune="removed_branches | xargs git branch -d"
 
 # don't use this unless you are a git pro and understand unwinding history and merge conflicts
