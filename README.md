@@ -120,7 +120,7 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 [git.io/bash-tools](https://git.io/bash-tools)
 
-400+ DevOps Shell Scripts and Advanced Bash environment.
+450+ DevOps Shell Scripts and Advanced Bash environment.
 
 Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
