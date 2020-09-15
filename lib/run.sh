@@ -58,6 +58,8 @@ else
                         docker build .
                     fi
                     ;;
+kustomization.yaml) kustomize build
+                    ;;
             *.go)   eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
                     ;;
             *.tf)   terraform plan
