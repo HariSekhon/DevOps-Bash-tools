@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Tags a given Google Cloud Registry docker image:tag with it's creation Date and Timestamp
+Tags a given Google Cloud Registry docker image with it's creation Date and Timestamp
 
 The timestamp is the created time (either uploaded or created by Google Cloud Build)
 
@@ -38,7 +38,7 @@ Requires GCloud SDK to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<gcr.io>/<project_id>/<image>:<tag>"
+usage_args="<gcr.io>/<project_id>/<image>[:<tag>]"
 
 help_usage "$@"
 
@@ -46,12 +46,18 @@ min_args 1 "$@"
 
 image_tag="$1"
 
-if ! [[ "$image_tag" =~ ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$ ]]; then
-    usage 'unrecognized GCR image:tag name - should be in a format matching this regex: ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
+if ! [[ "$image_tag" =~ ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+(:.+)?$ ]]; then
+    usage 'unrecognized GCR image:tag name - should be in a format matching this regex: ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+(:.+)?$'
 fi
 
 docker_image="${image_tag%%:*}"
 tag="${image_tag##*:}"
+
+if [ -z "$tag" ] ||
+   [ "$tag" = "$docker_image" ] ||
+   [ "$tag" = "$image_tag" ]; then
+    tag="latest"
+fi
 
 timestamp="$(gcloud container images list-tags "$docker_image" --limit 10 --format='get(timestamp.datetime)' --filter="tags=$tag")"
 if [ -z "$timestamp" ]; then
