@@ -28,8 +28,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Queries the DockerHub.com API v2
 
-Automatically handles getting an JWT authentication token if you've got auth environment variables:
-\$DOCKERHUB_USERNAME / \$DOCKERHUB_USER and \$DOCKERHUB_TOKEN / \$DOCKERHUB_PASSWORD
+Automatically handles getting a JWT authentication token if you've got auth environment variables:
+\$DOCKERHUB_USERNAME / \$DOCKERHUB_USER and \$DOCKERHUB_PASSWORD / \$DOCKERHUB_TOKEN
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
@@ -88,28 +88,34 @@ url_path="${url_path##/}"
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
 if [ -n "${PASSWORD:-}" ]; then
-    # OAuth2 flow
-    #output="$(curl https://auth.docker.io/token -X POST \
-    #                                 -H 'Content-Type: application/x-www-form-urlencoded' \
-    #                                 -d "grant_type=password&access_type=online&client_id=$user&service=registry.hub.docker.com&username=$user&password=$PASSWORD"
-    #                                 #-d "grant_type=password&access_type=online&client_id=$user&service=hub.docker.io&username=$user&password=$PASSWORD"
-    #                                 #-H 'Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="registry.docker.io",scope="repository:myuser/myimage:pull,push"'
-    #)"
-    # JWT flow
-    output="$(curl https://hub.docker.com/v2/users/login/ \
-                   $CURL_OPTS -X POST \
-                   -H "Content-Type: application/json" \
-                   -d '{"username": "'$user'", "password": "'$PASSWORD'"}' \
-    )"
-    # OAuth2
-    #token="$(jq -r .access_token <<< "$output")"
-    # JWT
-    token="$(jq -r .token <<< "$output")"
+    # since DockerHub has many different API addresses it's easier to use JWT which isn't limited to a predefined service address
+    JWT=1
+    if [ -n "${JWT:-}" ]; then
+        #output="$("$srcdir/curl_auth.sh" https://hub.docker.com/v2/users/login/ \
+        output="$(curl https://hub.docker.com/v2/users/login/ \
+                       $CURL_OPTS -X POST \
+                       -H "Content-Type: application/json" \
+                       -d '{"username": "'$user'", "password": "'$PASSWORD'"}'
+        )"
+        # JWT
+        token="$(jq -r .token <<< "$output")"
+        export JWT_TOKEN="$token"
+    else
+        # OAuth2
+        output="$("$srcdir/curl_auth.sh" https://auth.docker.io/token -X GET \
+                                         -H 'Content-Type: application/x-www-form-urlencoded' \
+                                         -H 'Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="hub.docker.com"' \
+                                         -d "grant_type=password&access_type=online&client_id=${0##*}&service=hub.docker.com" # alternative: registry.docker.io
+                                         #-d "grant_type=password&access_type=online&client_id=${0##*}&service=hub.docker.io&username=$user&password=$PASSWORD"
+                                         #-H 'Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="hub.docker.com",scope="repository:myuser/myimage:pull,push"'
+        )"
+        token="$(jq -r .access_token <<< "$output")"
+        export TOKEN="$token"
+    fi
     if [ -z "$token" ] || [ "$token" = null ]; then
         die "Authentication failed: $output"
     fi
-    export PASSWORD="$token"
-    curl "$url_base/$url_path" -H "Authorization: JWT $token" "$@" $CURL_OPTS
+    "$srcdir/curl_auth.sh" "$url_base/$url_path" "$@" $CURL_OPTS
 else
     # proceed without authentication
     curl "$url_base/$url_path" "$@" $CURL_OPTS
