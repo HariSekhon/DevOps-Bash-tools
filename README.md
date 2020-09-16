@@ -282,6 +282,7 @@ etc.
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current project
     - `bigquery_foreach_dataset.sh` - executes a templated command for each BigQuery dataset
     - `bigquery_generate_query_biggest_tables_across_datasets_by_row_count.sh` / `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size or row count
+    - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight BigQuery SQL scripts
 - `curl_auth.sh` - wraps curl to securely load your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `kubernetes_*.sh` - [Kubernetes](https://kubernetes.io/) scripts:
   - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
@@ -336,6 +337,7 @@ etc.
   - `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `mysql_*.sh` - various scripts using `mysql.sh` for row counts, iterating each table, or outputting clean lists of databases and tables for quick scripting
   - `mysqld.sh` - one-touch [MySQL](https://www.mysql.com/), boots docker container + drops in to `mysql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `source /sql/<name>.sql`. Optionally loads sample 'chinook' database
+  - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight MySQL SQL scripts
 - `mariadb.sh` - one-touch [MariaDB](https://mariadb.org/), boots docker container + drops in to `mysql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `source /sql/<name>.sql`. Optionally loads sample 'chinook' database
 - `sqlite.sh` - one-touch [SQLite](https://www.sqlite.org/index.html), starts sqlite3 shell with sample 'chinook' database loaded
 - `postgres*.sh` / `psql.sh` - [PostgreSQL](https://www.postgresql.org/) scripts:
@@ -343,6 +345,7 @@ etc.
   - `psql.sh` - connects to [PostreSQL](https://www.postgresql.org/) via `psql`, auto-populating settings from environment variables, using both standard postgres supported environment variables like `$PG*` (see [doc](https://www.postgresql.org/docs/12/libpq-envars.html)) as well as other common environment variables like `$POSTGRESQL_HOST` / `$POSTGRES_HOST` / `$HOST`, `$POSTGRESQL_USER` / `$POSTGRES_USER` / `$USER`, `$POSTGRESQL_PASSWORD` / `$POSTGRES_PASSWORD` / `$PASSWORD`, `$POSTGRESQL_DATABASE` / `$POSTGRES_DATABASE` / `$DATABASE`
   - `postgres_foreach_table.sh` - executes a SQL query against every table, replacing `{db}`, `{schema}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `postgres_*.sh` - various scripts using `psql.sh` for row counts, iterating each table, or outputting clean lists of databases, schemas and tables for quick scripting
+  - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight PostgreSQL SQL scripts
 - `find_duplicate_files_by_size.sh` / `find_duplicate_files_by_checksum.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `hdfs_*.sh` - Hadoop [HDFS](https://en.wikipedia.org/wiki/Apache_Hadoop#Hadoop_distributed_file_system) scripts:
   - `hdfs_checksum*.sh` - walks an HDFS directory tree and outputs HDFS native checksums, MD5-of-MD5 or the portable externally comparable CRC32, in serial or in parallel to save time
