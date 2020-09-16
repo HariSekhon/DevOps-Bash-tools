@@ -269,14 +269,18 @@ etc.
   - `gcp_info_all_projects.sh` - same as above but for all detected projects
   - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, switching `core/project` and replacing `{project_id}` and `{project_name}` in each iteration - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
   - `gcp_find_orphaned_disks.sh` - lists orphaned disks across all GCP projects (not attached to any compute instance)
-  - `gcp_secrets_to_kubernetes.sh` - loads [Google Secret Manager](https://cloud.google.com/secret-manager) secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of Google secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also kubernetes_get_secret_values.sh` to debug the actual values that got loaded
-  - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple [Google Secret Manager](https://cloud.google.com/secret-manager) secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
-  - `gcr_tag_datetime.sh` - tags a given [Google Container Registry](https://cloud.google.com/container-registry) docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
-  - `gcr_tag_latest.sh` - tags a given [Google Container Registry](https://cloud.google.com/container-registry) docker image:tag as latest without pulling or pushing the docker image
-  - `gcr_find_newest_image_tags.sh` - finds the tags for the given [Google Container Registry](https://cloud.google.com/container-registry) docker image with the newest creation date (can use this to tag `latest`)
-  - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given [Google Container Registry](https://cloud.google.com/container-registry) docker image as `latest` without pulling or pushing the docker image
-  - `gce_meta.sh` - simple script to query [Google Compute Engine](https://cloud.google.com/compute/) metadata API from within Virtual Machines
-  - `gce_when_preempted.sh` / `gce_is_preempted.sh` - [Google Compute Engine](https://cloud.google.com/compute/) VM preemption latch and boolean check scripts
+  - `gcp_secrets_*.sh` - [Google Secret Manager](https://cloud.google.com/secret-manager) scripts:
+    - `gcp_secrets_to_kubernetes.sh` - loads GCP secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also kubernetes_get_secret_values.sh` to debug the actual values that got loaded
+    - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple GCP secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
+  - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
+    - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
+    - `gcr_tag_latest.sh` - tags a given GCR docker image:tag as latest without pulling or pushing the docker image
+    - `gcr_find_newest_image_tags.sh` - finds the tags for the given GCR docker image with the newest creation date (can use this to tag `latest`)
+    - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given GCR docker image as `latest` without pulling or pushing the docker image
+  - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
+    - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
+    - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
+    - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
   - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current project
