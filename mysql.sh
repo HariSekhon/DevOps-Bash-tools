@@ -20,9 +20,6 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/git.sh"
-
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Script to more easily connect to MySQL without having to repeatedly specify options like host, username and password
