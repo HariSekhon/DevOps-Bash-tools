@@ -13,27 +13,36 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Run SQL query against all PostgreSQL tables in all databases via psql.sh
-#
-# Query can contain {db}, {schema} and {table} placeholders which will be replaced for each table
-#
-# FILTER environment variable will restrict to matching fully qualified tables (<db>.<schema>.<table>)
-#
-# Auto-skips information_schema and pg_catalog schemas for safety
-#
-# Tested on AWS RDS PostgreSQL 9.5.15
-
 set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-if [ $# -lt 1 ]; then
-    echo "usage: ${0##*/} <query> [psql_options]"
-    exit 3
-fi
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Run SQL query against all PostgreSQL tables in all databases via psql.sh
+
+Query can contain {db}, {schema} and {table} placeholders which will be replaced for each table
+
+FILTER environment variable will restrict to matching fully qualified tables (<db>.<schema>.<table>)
+
+Auto-skips information_schema and pg_catalog schemas for safety
+
+Tested on AWS RDS PostgreSQL 9.5.15
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="\"<query>\" [<psql_options>]"
+
+help_usage "$@"
+
+min_args 1 "$@"
 
 query_template="$1"
-shift
+shift || :
 
 # exit the loop subshell if you Control-C
 trap 'exit 130' INT
