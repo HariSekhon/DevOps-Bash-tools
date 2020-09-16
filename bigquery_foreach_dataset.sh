@@ -47,7 +47,15 @@ trap 'exit 130' INT
 
 "$srcdir/bigquery_list_datasets.sh" |
 while read -r dataset_id; do
-    printf '%s\t' "$dataset_id"
+    if [ -z "${NO_HEADING:-}" ]; then
+        hr
+        echo "Dataset = $dataset_id"
+        hr
+    fi >&2
+    #printf '%s\t' "$dataset_id"
     command="${command_template//\{dataset_id\}/$dataset_id}"
     eval "$command"
+    if [ -z "${NO_HEADING:-}" ]; then
+        echo
+    fi >&2
 done
