@@ -59,7 +59,8 @@ SELECT
 FROM
   ALL__TABLES__
 ORDER BY
-  row_count DESC
+  row_count DESC,
+  size_gb DESC
 LIMIT 10;
 "
 
