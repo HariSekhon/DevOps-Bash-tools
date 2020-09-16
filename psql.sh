@@ -13,21 +13,45 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to PostgreSQL without having to repeatedly specify options like host, username and password
-#
-# Leverages standard PostgresSQL options as well as others likely to be found in the environment
-#
-# https://www.postgresql.org/docs/9.0/libpq-envars.html
-#
-# GNU sql may also be of interest
-#
-# Tested on AWS RDS PostgreSQL 9.5.15
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Script to more easily connect to PostgreSQL without having to repeatedly specify options like host, username and password
+
+Leverages standard PostgresSQL options as well as others likely to be found in the environment
+
+https://www.postgresql.org/docs/9.0/libpq-envars.html
+
+See also - GNU sql
+
+Tested on AWS RDS PostgreSQL 9.5.15
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<psql_options>]"
+
+#help_usage "$@"
+
+#min_args 1 "$@"
+
+for arg; do
+    case "$arg" in
+        --help) usage
+                ;;
+    esac
+done
 
 opts="${POSTGRES_OPTS:-}"
-
 
 POSTGRES_HOST="${PGHOST:-${POSTGRESQL_HOST:-${POSTGRES_HOST:-${HOST:-}}}}"
 if [ -n "${POSTGRES_HOST:-}" ]; then
