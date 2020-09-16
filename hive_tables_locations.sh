@@ -23,7 +23,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Show table location for all tables via Impala shell
+Show table location for all tables via beeline
 
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 
