@@ -116,6 +116,8 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 
 
+[git.io/nagios-plugins](https://git.io/nagios-plugins)
+
 
 ---
 # Big Data, NoSQL & DevOps Docker Images
@@ -185,6 +187,8 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![CI Fedora](https://github.com/HariSekhon/Dockerfiles/workflows/CI%20Fedora/badge.svg)](https://github.com/HariSekhon/Dockerfiles/actions?query=workflow%3A%22CI+Fedora%22)
 [![CI Alpine](https://github.com/HariSekhon/Dockerfiles/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/Dockerfiles/actions?query=workflow%3A%22CI+Alpine%22)
 [![CI Alpine 3](https://github.com/HariSekhon/Dockerfiles/workflows/CI%20Alpine%203/badge.svg)](https://github.com/HariSekhon/Dockerfiles/actions?query=workflow%3A%22CI+Alpine+3%22)
+
+[git.io/dockerhub](https://git.io/dockerhub)
 
 
 ---
@@ -440,6 +444,8 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![CI Alpine](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine%22)
 [![CI Alpine 3](https://github.com/HariSekhon/HAProxy-configs/workflows/CI%20Alpine%203/badge.svg)](https://github.com/HariSekhon/HAProxy-configs/actions?query=workflow%3A%22CI+Alpine+3%22)
 
+[git.io/haproxy-configs](https://git.io/haproxy-configs)
+
 
 ---
 # Hari Sekhon - DevOps Perl Tools
@@ -624,6 +630,8 @@ Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication dete
 [![CI Alpine](https://github.com/HariSekhon/spotify-tools/workflows/CI%20Alpine/badge.svg)](https://github.com/HariSekhon/spotify-tools/actions?query=workflow%3A%22CI+Alpine%22)
 [![CI Alpine 3](https://github.com/HariSekhon/spotify-tools/workflows/CI%20Alpine%203/badge.svg)](https://github.com/HariSekhon/spotify-tools/actions?query=workflow%3A%22CI+Alpine+3%22)
 
+[git.io/spotify](https://git.io/spotify)
+
 
 ---
 # Hari Sekhon - Perl Library
@@ -792,6 +800,8 @@ Python / Jython Utility Library for my other repos
 [![CI PyPy 2](https://github.com/HariSekhon/pylib/workflows/CI%20PyPy%202/badge.svg)](https://github.com/HariSekhon/pylib/actions?query=workflow%3A%22CI+PyPy+2%22)
 [![CI PyPy 3](https://github.com/HariSekhon/pylib/workflows/CI%20PyPy%203/badge.svg)](https://github.com/HariSekhon/pylib/actions?query=workflow%3A%22CI+PyPy+3%22)
 
+[git.io/python-lib](https://git.io/pylib)
+
 
 ---
 # Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
@@ -865,6 +875,8 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 [![CI SBT](https://github.com/HariSekhon/Nagios-Plugin-Kafka/workflows/CI%20SBT/badge.svg)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/actions?query=workflow%3A%22CI+SBT%22)
 [![CI Gradle](https://github.com/HariSekhon/Nagios-Plugin-Kafka/workflows/CI%20Gradle/badge.svg)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/actions?query=workflow%3A%22CI+Gradle%22)
 
+[git.io/nagios-plugin-kafka](https://git.io/nagios-plugin-kafka)
+
 
 ---
 # Kubernetes Templates
@@ -872,6 +884,11 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernetes-templates)
 
 Kubernetes YAML templates - Best Practices, Tips and Tricks are baked right into the templates for future deployments
+
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/Kubernetes-Templates)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/Kubernetes-Templates)
+[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/Kubernetes-Templates)
 
 [git.io/k8s-templates](https://git.io/k8s-templates)
 
@@ -881,7 +898,24 @@ Kubernetes YAML templates - Best Practices, Tips and Tricks are baked right into
 
 Link:  [HariSekhon/SQL-keywords](https://github.com/HariSekhon/SQL-keywords)
 
-SQL keywords and built-in functions for most major RDBMS & MPP SQL systems, as well as various Big Data & NoSQL systems, Docker and others. Used by sqlcase.pl to auto-recase SQL scripts.
+SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL systems - MySQL, PostgreSQL, Oracle, SQL Server, Presto / AWS Athena, Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra, Couchbase N1QL, Pig Latin, Neo4j Cypher, Dockerfiles - Used by sqlcase.pl to auto-recase SQL scripts, Dockerfiles etc.
+
+[![PostgreSQL](https://img.shields.io/badge/SQL-PostreSQL-336791?logo=postgresql)](https://www.postgresql.org/)
+[![MySQL](https://img.shields.io/badge/SQL-MySQL-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![MariaDB](https://img.shields.io/badge/SQL-MariaDB-003545?logo=mariadb)](https://mariadb.org/)
+[![AWS Athena](https://img.shields.io/badge/SQL-AWS%20Athena-232F3E?logo=amazon%20aws)](https://aws.amazon.com/athena/)
+[![AWS Redshift](https://img.shields.io/badge/SQL-AWS%20Redshift-232F3E?logo=amazon%20aws)](https://aws.amazon.com/redshift/)
+[![Oracle](https://img.shields.io/badge/SQL-Oracle-232F3E?logo=oracle)](http://oracle.com/)
+[![SQL Server](https://img.shields.io/badge/SQL-SQL%20Server-CC2927?logo=microsoft%20sql%20server)](https://www.microsoft.com/en-gb/sql-server)
+
+[![Cassandra](https://img.shields.io/badge/CQL-Cassandra-1287B1?logo=apache%20cassandra&logoColor=white)](https://cassandra.apache.org/)
+[![Docker](https://img.shields.io/badge/Dockerfile-Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
+[![Neo4j](https://img.shields.io/badge/Cypher-Neo4j-008CC1?logo=neo4j&logoColor=white)](https://neo4j.com/)
+
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/SQL-keywords)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/SQL-keywords)
+[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/SQL-keywords)
 
 [git.io/sql-keywords](https://git.io/sql-keywords)
 
@@ -904,6 +938,8 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/Spotify-Playlists)
 [![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/Spotify-Playlists)
 
+[git.io/spotify-playlists](https://git.io/spotify-playlists)
+
 
 ---
 # Code & Config Templates
@@ -911,6 +947,11 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
 
 Code & Config templates for many popular programming languages & DevOps tools, AWS, GCP, Kubernetes, Docker, Jenkins, Vagrant, Make, SBT, Gradle etc...
+
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/Templates)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/Templates)
+[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon/Templates)
 
 [git.io/code-templates](https://git.io/code-templates)
 
