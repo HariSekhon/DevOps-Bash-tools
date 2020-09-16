@@ -13,38 +13,51 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to HiveServer2 without having to specify the big JDBC connection string and all options like kerberos principal, ssl etc
-#
-# Tested on Hive 1.1.0 on CDH 5.10
-
-# useful options for scripting:
-#
-#   --silent=true
-#   --outputformat=tsv2     (tsv is deprecated and single quotes results, tsv2 is recommended and cleaner)
-#
-# See adjacent hive_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
-#
-# list all databases
-#
-#   ./beeline.sh --silent=true --outputformat=tsv2 -e 'show databases' | tail -n +2
-#
-# list all tables in all databases
-#
-#   opts="--silent=true --outputformat=tsv2"; ./beeline.sh $opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh $opts -e "show tables from $db" | sed "s/^/$db./"; done
-#
-# row counts of all tables in all databases:
-#
-#   opts="--silent=true --outputformat=tsv2"; ./beeline.sh $opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh $opts -e "show tables from $db" | sed "s/^/$db./"; done | tail -n +2 | while read table; do printf "%s\t" "$table"; ./beeline.sh $opts -e "select count(*) from $table" | tail -n +2; done | tee row_counts_hive.tsv
-#
-# See also:
-#
-#   https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients#HiveServer2Clients-Usinghive-site.xmltoautomaticallyconnecttoHiveServer2
-#
-#   hive_foreach_table.py / impala_foreach_table.py and similar tools in DevOps Python Tools repo - https://github.com/harisekhon/devops-python-tools
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Script to more easily connect to HiveServer2 without having to specify the big JDBC connection string and all options like kerberos principal, ssl etc
+
+Tested on Hive 1.1.0 on CDH 5.10
+
+useful options for scripting:
+
+  --silent=true
+  --outputformat=tsv2     (tsv is deprecated and single quotes results, tsv2 is recommended and cleaner)
+
+See adjacent hive_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
+
+List all databases:
+
+  ./beeline.sh --silent=true --outputformat=tsv2 -e 'show databases' | tail -n +2
+
+List all tables in all databases:
+
+  opts=\"--silent=true --outputformat=tsv2\"; ./beeline.sh \$opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh \$opts -e \"show tables from \$db\" | sed \"s/^/\$db./\"; done
+
+Row counts of all tables in all databases:
+
+  opts=\"--silent=true --outputformat=tsv2\"; ./beeline.sh \$opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh \$opts -e \"show tables from \$db\" | sed \"s/^/\$db./\"; done | tail -n +2 | while read table; do printf \"%s\\t\" \"\$table\"; ./beeline.sh \$opts -e \"select count(*) from \$table\" | tail -n +2; done | tee row_counts_hive.tsv
+
+See also:
+
+  https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients#HiveServer2Clients-Usinghive-site.xmltoautomaticallyconnecttoHiveServer2
+
+  hive_foreach_table.py / impala_foreach_table.py and similar tools in DevOps Python Tools repo - https://github.com/harisekhon/devops-python-tools
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<beeline_options>]"
+
+help_usage "$@"
+
 
 if [ -n "${HIVE_HA:-}" ] ||
    [ -n "${HIVE_ZOOKEEPERS:-}" ]; then
