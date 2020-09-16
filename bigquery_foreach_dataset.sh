@@ -14,22 +14,31 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Execute a command against all Google BigQuery dataset IDs in the current project
-#
-# Command can contain {dataset_id} placeholder which will be replaced for each dataset
-#
-# Requires GCloud SDK which must be configured and authorized for the project
-#
-# Tested on Google BigQuery
-
-set -euo pipefail
+set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-if [ $# -lt 1 ]; then
-    echo "usage: ${0##*/} <command>"
-    exit 3
-fi
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Execute a command against all Google BigQuery dataset IDs in the current project
+
+Command can contain {dataset_id} placeholder which will be replaced for each dataset
+
+Requires GCloud SDK which must be configured and authorized for the project
+
+Tested on Google BigQuery
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<command>"
+
+help_usage "$@"
+
+min_args 1 "$@"
 
 command_template="$*"
 
