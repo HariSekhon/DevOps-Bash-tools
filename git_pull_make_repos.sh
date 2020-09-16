@@ -23,32 +23,15 @@ git_url="${GIT_URL:-https://github.com}"
 make="${MAKE:-make}"
 build="${BUILD:-build}"
 
-#git_base_dir=~/github
+git_base_dir=~/github
 
-#mkdir -pv "$git_base_dir"
+mkdir -pv "$git_base_dir"
 
-#cd "$git_base_dir"
+cd "$git_base_dir"
 
 opts="${OPTS:-}"
 if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
-fi
-
-repofile="$srcdir/setup/repos.txt"
-
-if [ $# -gt 0 ]; then
-    repolist="$*"
-else
-    repolist="${*:-${REPOS:-}}"
-    if [ -n "$repolist" ]; then
-        :
-    elif [ -f "$repofile" ]; then
-        echo "processing repos from file: $repofile"
-        repolist="$(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")"
-    else
-        echo "fetching repos from GitHub repo list"
-        repolist="$(curl -sSL https://raw.githubusercontent.com/HariSekhon/bash-tools/master/setup/repos.txt | sed 's/#.*//')"
-    fi
 fi
 
 if [ -z "${JAVA_HOME:-}" ]; then
@@ -77,17 +60,17 @@ if ! type -P git &>/dev/null ||
     "$srcdir/install_packages.sh" git make
 fi
 
-for repo in $repolist; do
+while read -r repo dir; do
+    if [ -z "$dir" ]; then
+        dir="$repo"
+    fi
     if ! echo "$repo" | grep -q "/"; then
         repo="HariSekhon/$repo"
     fi
-    repo_dir="${repo##*/}"
-    repo_dir="${repo_dir##*:}"
-    repo="${repo%%:*}"
-    if ! [ -d "$repo_dir" ]; then
-        git clone "$git_url/$repo" "$repo_dir"
+    if ! [ -d "$dir" ]; then
+        git clone "$git_url/$repo" "$dir"
     fi
-    pushd "$repo_dir"
+    pushd "$dir"
     git pull --no-edit
     git submodule update --init
     #  shellcheck disable=SC2086
@@ -103,4 +86,4 @@ for repo in $repolist; do
         done
     fi
     popd
-done
+done < <(sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/setup/repos.txt")
