@@ -281,12 +281,12 @@ etc.
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
     - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
-  - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current project
     - `bigquery_foreach_dataset.sh` - executes a templated command for each BigQuery dataset
     - `bigquery_generate_query_biggest_tables_across_datasets_by_row_count.sh` / `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size or row count
     - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight BigQuery SQL scripts
+  - `gke_kube_creds.sh` - auto-load all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
 - `curl_auth.sh` - wraps curl to securely load your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `kubernetes_*.sh` - [Kubernetes](https://kubernetes.io/) scripts:
   - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
