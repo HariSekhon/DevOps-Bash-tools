@@ -25,7 +25,7 @@ if [ "${GIT_HTTPS:-}" ]; then
         git_url="https://$GITHUB_TOKEN@${git_url#https://}"
     fi
 else
-    git_url="${GIT_URL:-ssh://git@github.com:}"
+    git_url="${GIT_URL:-git@github.com:}"
 fi
 
 git_base_dir=~/github
