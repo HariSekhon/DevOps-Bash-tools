@@ -13,17 +13,29 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists all PostgreSQL tables using adjacent impala_shell.sh script
-#
-# FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<table>)
-#
-# AUTOFILTER if set to any value skips information_schema, performance_schema, sys and mysql databases
-#
-# Tested on MySQL 8.0.15
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists all MySQL tables using adjacent mysql.sh script
+
+FILTER environment variable will restrict to matching tables (matches against fully qualified table name <db>.<table>)
+
+AUTOFILTER if set to any value skips information_schema, performance_schema, sys and mysql databases
+
+Tested on MySQL 8.0.15
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<mysql_options>]"
+
+help_usage "$@"
 
 "$srcdir/mysql.sh" -s -e "SELECT table_schema, TABLE_NAME FROM information_schema.tables;" "$@" |
 sed 's/|//g; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' |
