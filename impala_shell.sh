@@ -13,50 +13,64 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to Impala without having to find an impalad and repeatedly specify options like -k for kerberos
-#
-# Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
-#
-#  If using dedicated coordinators then consider setting IMPALA_HOST to one of those explicitly, see
-#
-#    https://docs.cloudera.com/documentation/enterprise/5-16-x/topics/impala_dedicated_coordinator.html
-#
-# See also:
-#
-#   find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
-#
-#   HAProxy Configs for Impala and many other technologies - https://github.com/harisekhon/haproxy-configs
-#
-
-# If you get an error such as:
-#
-# Error connecting: TTransportException, TSocket read 0 bytes
-#
-# then check if you need to add --ssl to the command line (or export IMPALA_SSL=1 to do this automatically, eg. put in .bashrc or similar)
-
-# useful options for scripting:
-#
-#   -q --query
-#   -B --delimited
-#   --output_delimiter=\t   # default
-#   --quiet
-#
-# See adjacent impala_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
-#
-# list all databases:
-#
-#   ./impala_shell.sh -Bq 'show databases' | awk '{print $1}'
-#
-# list all tables in all databases:
-#
-#   ./impala_shell.sh -Bq 'show databases' | while read db rest; do ./impala_shell.sh -Bq "use $db; show tables" | sed "s/^/$db./"; done
-#
-# row counts for all tables in all databases:
-#
-#   ./impala_shell.sh --quiet -Bq 'show databases' | while read db rest; do ./impala_shell.sh --quiet -Bq "use $db; show tables" | while read table; do printf "%s\t" "$db.$table"; ./impala_shell.sh --quiet -Bq "use $db; SELECT COUNT(*) FROM $table"; done; done > row_counts.tsv
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Script to more easily connect to Impala without having to find an impalad and repeatedly specify options like -k for kerberos
+
+Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
+
+ If using dedicated coordinators then consider setting IMPALA_HOST to one of those explicitly, see
+
+   https://docs.cloudera.com/documentation/enterprise/5-16-x/topics/impala_dedicated_coordinator.html
+
+See also:
+
+  find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
+
+  HAProxy Configs for Impala and many other technologies - https://github.com/harisekhon/haproxy-configs
+
+
+If you get an error such as:
+
+Error connecting: TTransportException, TSocket read 0 bytes
+
+then check if you need to add --ssl to the command line (or export IMPALA_SSL=1 to do this automatically, eg. put in .bashrc or similar)
+
+useful options for scripting:
+
+  -q --query
+  -B --delimited
+  --output_delimiter=\\t   # default
+  --quiet
+
+See adjacent impala_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
+
+list all databases:
+
+  ./impala_shell.sh -Bq 'show databases' | awk '{print \$1}'
+
+list all tables in all databases:
+
+  ./impala_shell.sh -Bq 'show databases' | while read db rest; do ./impala_shell.sh -Bq \"use \$db; show tables\" | sed \"s/^/\$db./\"; done
+
+row counts for all tables in all databases:
+
+  ./impala_shell.sh --quiet -Bq 'show databases' | while read db rest; do ./impala_shell.sh --quiet -Bq \"use \$db; show tables\" | while read table; do printf \"%s\\t\" \"\$db.\$table\"; ./impala_shell.sh --quiet -Bq \"use \$db; SELECT COUNT(*) FROM \$table\"; done; done > row_counts.tsv
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<impala_shell_options>]"
+
+help_usage "$@"
+
 
 opts="${IMPALA_OPTS:-}"
 
