@@ -20,22 +20,19 @@ srcdir="$(dirname "$0")"
 run(){
     local repofile="$1"
     echo "processing repos from file: $repofile"
-    while read -r repo; do
-        repo_dir="${repo##*/}"
-        repo_dir="${repo_dir##*:}"
-        #repo="${repo%%:*}"
+    while read -r _ dir; do
         #if ! echo "$repo" | grep -q "/"; then
         #    repo="HariSekhon/$repo"
         #fi
-        if [ -d "$repo_dir" ]; then
-            pushd "$repo_dir"
+        if [ -d "$dir" ]; then
+            pushd "$dir"
             # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
             if grep -q '^clean:' Makefile; then
                 make clean
             fi
             popd
         fi
-    done < <(sed 's/#.*//; /^[[:space:]]*$/d' < "$repofile")
+    done < <(sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$repofile")
 }
 
 if [ $# -gt 0 ]; then
