@@ -73,6 +73,7 @@ usage_args="\"<query>\" [<impala_shell_options>]"
 
 help_usage "$@"
 
+min_args 1 "$@"
 
 query_template="$1"
 shift || :
