@@ -29,6 +29,9 @@
 
 # order repos by dependent submodule repos first
 SQL-scripts:sql
+SQL-keywords:sql-keywords
+Templates:templates
+Kubernetes-templates:k8s
 DevOps-Bash-tools:bash-tools
 
 # libraries first - if these don't work then the dependent repos beneath them won't work
