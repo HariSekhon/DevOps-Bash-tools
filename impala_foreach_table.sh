@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  shellcheck disable=SC2016
 #
 #  Author: Hari Sekhon
 #  Date: 2019-12-10 11:33:52 +0000 (Tue, 10 Dec 2019)
