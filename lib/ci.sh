@@ -190,6 +190,7 @@ is_shippable_ci(){
     return 1
 }
 
+# https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
 is_teamcity_ci(){
     # also BUILD_NUMBER, but less specific, caught in is_CI generic
     if [ -n "${TEAMCITY_VERSION:-}" ]; then
@@ -199,6 +200,8 @@ is_teamcity_ci(){
 }
 is_teamcity(){ is_teamcity_ci; }
 
+# same as Azure DevOps
+# https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml#build-variables
 is_tfs_ci(){
     if [ -n "${TF_BUILD:-}" ]; then
         return 0
@@ -207,6 +210,16 @@ is_tfs_ci(){
 }
 
 # https://docs.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml#build-variables
+#
+# docs aren't great, testing shows these env vars of interest:
+#
+# AGENT_NAME=Azure Pipelines 2
+# POWERSHELL_DISTRIBUTION_CHANNEL=Azure-DevOps-ubuntu18
+# SYSTEM_TASKDEFINITIONSURI=https://dev.azure.com/harisekhon/
+# SYSTEM_TEAMFOUNDATIONCOLLECTIONURI=https://dev.azure.com/harisekhon/
+# SYSTEM_TEAMFOUNDATIONSERVERURI=https://dev.azure.com/harisekhon/
+# TF_BUILD=True
+#
 is_azure_devops(){
     if is_tfs_ci; then
         return 0
