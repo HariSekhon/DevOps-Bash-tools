@@ -13,21 +13,45 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to more easily connect to MySQL without having to repeatedly specify options like host, username and password
-#
-# Leverages standard MySQL options as well as others likely to be found in the environment
-#
-# https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html
-#
-# GNU sql may also be of interest
-#
-# Tested on MySQL 8.0.15
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Script to more easily connect to MySQL without having to repeatedly specify options like host, username and password
+
+Leverages standard MySQL options as well as others likely to be found in the environment
+
+https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html
+
+See also - GNU sql
+
+Tested on MySQL 8.0.15
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<mysql_options>]"
+
+#help_usage "$@"
+
+#min_args 1 "$@"
+
+for arg; do
+    case "$arg" in
+        --help) usage
+                ;;
+    esac
+done
 
 opts="${MYSQL_OPTS:-}"
-
 
 MYSQL_HOST="${MYSQL_HOST:-${HOST:-}}"
 if [ -n "${MYSQL_HOST:-}" ]; then
