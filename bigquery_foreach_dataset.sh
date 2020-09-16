@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo "this is dataset_id {dataset_id}"
+#  args: echo "dataset_id =  \'{dataset_id}\'"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-16 08:54:54 +0100 (Wed, 16 Sep 2020)
@@ -48,6 +48,6 @@ trap 'exit 130' INT
 "$srcdir/bigquery_list_datasets.sh" |
 while read -r dataset_id; do
     printf '%s\t' "$dataset_id"
-    command_template="${command_template//\{dataset_id\}/$dataset_id}"
-    $command_template
+    command="${command_template//\{dataset_id\}/$dataset_id}"
+    eval "$command"
 done
