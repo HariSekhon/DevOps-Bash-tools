@@ -84,6 +84,7 @@ imagemagick
 ipcalc
 iperf
 ipython
+jenkins-x/jx/jx
 #jq  # in brew-packages.txt
 jsonlint
 jython
