@@ -13,14 +13,28 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists the BigQuery datasets in the current GCP project, one per line
-#
-# Requires GCloud SDK which must be configured and authorized for the project
-#
-# Tested on Google BigQuery
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists the BigQuery datasets in the current GCP project, one per line
+
+Requires GCloud SDK which must be configured and authorized for the project
+
+Tested on Google BigQuery
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 bq ls --headless --format=json |
 jq -r '.[].datasetReference.datasetId'
