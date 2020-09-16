@@ -24,6 +24,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
 if [ $# -lt 1 ]; then
     echo "usage: ${0##*/} <command>"
@@ -31,13 +32,11 @@ if [ $# -lt 1 ]; then
 fi
 
 command_template="$*"
-shift
 
 # exit the loop subshell if you Control-C
 trap 'exit 130' INT
 
-bq ls --headless --format=json |
-jq -r '.[].datasetReference.datasetId' |
+"$srcdir/bigquery_list_datasets.sh" |
 while read -r dataset_id; do
     printf '%s\t' "$dataset_id"
     command_template="${command_template//\{dataset_id\}/$dataset_id}"
