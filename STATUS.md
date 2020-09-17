@@ -883,7 +883,7 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 
 Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernetes-templates)
 
-Kubernetes YAML templates - Best Practices, Tips and Tricks are baked right into the templates for future deployments
+Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for future deployments
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/Kubernetes-Templates)
