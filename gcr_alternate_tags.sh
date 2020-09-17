@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all tags for the given Google Cloud Registry docker image:tag
+Lists all alternative tags for the given specific Google Cloud Registry docker image:tag
 
 For example if a container is tagged with a build hashref as well as latest, you can find out what the hashref is by querying for the floating tag 'latest' which gets reassigned to the newest build
 
