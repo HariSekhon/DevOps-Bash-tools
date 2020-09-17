@@ -273,11 +273,11 @@ etc.
     - `gcp_secrets_to_kubernetes.sh` - loads GCP secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also kubernetes_get_secret_values.sh` to debug the actual values that got loaded
     - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple GCP secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
+    - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
-    - `gcr_tag_latest.sh` - tags a given GCR docker image:tag as latest without pulling or pushing the docker image
-    - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to tag `latest`)
+    - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
     - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given GCR docker image as `latest` without pulling or pushing the docker image
-    - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker image:tag (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
+    - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
     - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
