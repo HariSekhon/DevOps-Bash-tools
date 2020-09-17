@@ -851,12 +851,11 @@ max_args(){
     fi
 }
 
-exact_args(){
+num_args(){
     local num="$1"
     shift || :
-    if [ $# != "$num" ]; then
-        usage "error: wrong number of arguments, expected $num, got $#"
-    fi
+    min_args "$num" "$@"
+    max_args "$num" "$@"
 }
 
 help_usage(){
