@@ -47,4 +47,4 @@ if ! [[ "$image" =~ $regex ]]; then
 fi
 
 gcloud container images list-tags "$image" --format='csv[no-heading,delimiter="\n"](tags[])' |
-grep -v '^[[:space:]]*$'
+sed '/^[[:space:]]*$/d'
