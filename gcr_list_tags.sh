@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: google-containers/busybox
 #  args: gcr.io/google-containers/busybox
 #
 #  Author: Hari Sekhon
@@ -37,7 +38,7 @@ Requires GCloud SDK to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<gcr.io>/<project_id>/<image>:<tag>"
+usage_args="[gcr.io/]<project_id>/<image>:<tag>"
 
 help_usage "$@"
 
@@ -45,6 +46,12 @@ num_args 1 "$@"
 
 image="$1"
 
+if ! [[ "$image" =~ gcr\.io ]]; then
+    image="gcr.io/$image"
+fi
+
+# $gcr_image_regex is defined in lib/gcp.sh
+# shellcheck disable=SC2154
 if ! [[ "$image" =~ $gcr_image_regex ]]; then
     usage "unrecognized GCR image name - should be in a format matching this regex: $gcr_image_regex"
 fi
