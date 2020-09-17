@@ -83,6 +83,7 @@ alias br=branch
 alias fetch='git fetch'
 alias stash="git stash"
 alias tag="githg tag"
+alias gitlogwc='git log --oneline | wc -l'
 alias um=updatemodules
 #type browse &>/dev/null || alias browse=gbrowse
 alias gbrowse=gitbrowse
