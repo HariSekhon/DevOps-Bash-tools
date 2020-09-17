@@ -83,10 +83,8 @@ add_remote_repo(){
                 log "added authentication credentials from environment"
                 url="https://$user:$token@${url##https://}"
             fi
-        elif [[ "$url" =~ ^ssh:// ]] && ! [[ "$url" =~ git@ ]]; then
-            url="ssh://git@${url##ssh://}"
-        elif ! [[ "$url" =~ :// ]]; then
-            url="ssh://git@$url"
+        elif ! [[ "$url" =~ git@ ]]; then
+            url="git@${url##ssh:\/\/}"
         fi
     fi
     set -o pipefail
