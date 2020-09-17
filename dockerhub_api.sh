@@ -29,7 +29,9 @@ usage_description="
 Queries the DockerHub.com API v2
 
 Automatically handles getting a JWT authentication token if you've got auth environment variables:
-\$DOCKERHUB_USERNAME / \$DOCKERHUB_USER and \$DOCKERHUB_PASSWORD / \$DOCKERHUB_TOKEN
+
+\$DOCKERHUB_USERNAME / \$DOCKERHUB_USER  / \$DOCKER_USERNAME / \$DOCKER_USER
+\$DOCKERHUB_PASSWORD / \$DOCKERHUB_TOKEN / \$DOCKER_PASSWORD / \$DOCKER_TOKEN
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
@@ -64,13 +66,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-user="${DOCKERHUB_USERNAME:-${DOCKERHUB_USER:-}}"
-# curl_auth.sh does this automatically
-#if [ -z "$user" ]; then
-#    user="${USERNAME:${USER:-}}"
-#fi
-
-PASSWORD="${DOCKERHUB_PASSWORD:-${DOCKERHUB_TOKEN:-}}"
+user="${DOCKERHUB_USERNAME:-${DOCKERHUB_USER:-${DOCKER_USERNAME:-${DOCKER_USER:-}}}}"
+PASSWORD="${DOCKERHUB_PASSWORD:-${DOCKERHUB_TOKEN:-${DOCKER_PASSWORD:-${DOCKER_TOKEN:-}}}}"
 
 if [ -n "$user" ]; then
     export USERNAME="$user"
