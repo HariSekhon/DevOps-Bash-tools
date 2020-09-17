@@ -8,7 +8,7 @@
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-blue?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-460-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-463-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-203.3k-lightgrey?logo=codecademy)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 ![Last Generated](https://img.shields.io/badge/Last%20Generated-2020--09--17-lightgrey?logo=github)
@@ -17,7 +17,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-16 original source git repos with 460 CI builds (427 hosted, 33 self-hosted):
+16 original source git repos with 463 CI builds (430 hosted, 33 self-hosted):
 
 ---
 # Advanced Nagios Plugins Collection
@@ -885,6 +885,7 @@ Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernete
 
 Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for future deployments
 
+[![Travis CI](https://img.shields.io/travis/harisekhon/kubernetes-templates/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Kubernetes-templates)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/Kubernetes-Templates)
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/Kubernetes-Templates)
@@ -913,6 +914,7 @@ SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL system
 [![Docker](https://img.shields.io/badge/Dockerfile-Docker-2496ED?logo=docker&logoColor=white)](https://www.docker.com/)
 [![Neo4j](https://img.shields.io/badge/Cypher-Neo4j-008CC1?logo=neo4j&logoColor=white)](https://neo4j.com/)
 
+[![Travis CI](https://img.shields.io/travis/harisekhon/sql-keywords/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/SQL-keywords)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/SQL-keywords)
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/SQL-keywords)
@@ -950,6 +952,7 @@ Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
 
 Code & Config templates for many popular programming languages & DevOps tools, AWS, GCP, Kubernetes, Docker, Jenkins, Vagrant, Make, SBT, Gradle etc...
 
+[![Travis CI](https://img.shields.io/travis/harisekhon/templates/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Templates)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-blue?logo=github)](https://github.com/HariSekhon/Templates)
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-blue?logo=gitlab)](https://gitlab.com/HariSekhon/Templates)
@@ -1039,7 +1042,7 @@ Java Utility library for my other repos
 
 
 
-16 git repos summarized with 460 CI builds(427 hosted, 33 self-hosted)
+16 git repos summarized with 463 CI builds(430 hosted, 33 self-hosted)
 
 ---
 
