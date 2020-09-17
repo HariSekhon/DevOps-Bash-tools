@@ -24,9 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists all alternative tags for the given specific Google Cloud Registry docker image:tag
 
-For example if a container is tagged with a build hashref as well as latest, you can find out what the hashref is by querying for the floating tag 'latest' which gets reassigned to the newest build
+If a container has multiple tags (eg. latest, v1, hashref), you can supply '<image>:latest' to see which version has been tagged to 'latest'
 
-Each tag for the given image:tag is output on a separate line for easy further piping and filtering, including the originally supplied tag
+Each tag for the given <image>:<tag> is output on a separate line for easy further piping and filtering, including the originally supplied tag
 
 If the image isn't found in GCR, will return nothing and no error code since this is the default GCloud SDK behaviour
 
@@ -43,8 +43,9 @@ num_args 1 "$@"
 
 image_tag="$1"
 
-if ! [[ "$image_tag" =~ ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$ ]]; then
-    usage 'unrecognized GCR image name - should be in a format matching this regex: ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
+regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
+if ! [[ "$image_tag" =~ $regex ]]; then
+    usage "unrecognized GCR image name - should be in a format matching this regex: $regex"
 fi
 
 image="${image_tag%%:*}"
