@@ -31,13 +31,19 @@ steps:
 # requires script as first key, otherwise parsing breaks with error message:  Unexpected value 'displayName'
 - script: env | sort
   displayName: env
-# doesn't work due to lack of sudo
-- script: sudo apt-get update && sudo apt-get install -y git make
-  displayName: install git & make
-- script: make
-  displayName: build
-- script: make test
-  displayName: test
-# hacky workaround to Azure Pipelines ubuntu environment limitations without sudo :-(
-#- script: sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c 'set -ex && cd /code && setup/ci_bootstrap.sh && make init && make ci test'
-#  displayName: docker build
+
+# doesn't work in container due to unprivileged execution and lack of sudo
+#- script: sudo apt-get update && sudo apt-get install -y git make
+#  displayName: install git & make
+
+#- script: make
+#  displayName: build
+
+# doesn't work in vmImage build due to lack of access to normal /dev/stderr device
+# tee: /dev/stderr: No such device or address
+#- script: make test
+#  displayName: test
+
+# hacky workaround to Azure Pipelines ubuntu environment limitations of unprivileged container and no /dev/stderr in vmImage :-(
+- script: sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c 'set -ex && cd /code && setup/ci_bootstrap.sh && make init && make ci test'
+  displayName: docker build
