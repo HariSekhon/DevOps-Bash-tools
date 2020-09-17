@@ -52,6 +52,8 @@ if ! [[ "$image_tag" =~ gcr\.io ]]; then
     image_tag="gcr.io/$image_tag"
 fi
 
+# $gcr_image_tag_regex is defined in lib/gcp.sh
+# shellcheck disable=SC2154
 if ! [[ "$image_tag" =~ $gcr_image_tag_regex ]]; then
     usage "unrecognized GCR image name - should be in a format matching this regex: $gcr_image_tag_regex"
 fi
