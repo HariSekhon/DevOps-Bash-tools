@@ -375,6 +375,7 @@ etc.
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 3 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) which doesn't have the [GitLab](https://gitlab.com/) auto-sync from [GitHub](https://github.com/) feature)
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
+  - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout on all my repos
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
   - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
