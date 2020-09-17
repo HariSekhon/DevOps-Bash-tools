@@ -43,7 +43,7 @@ https://docs.docker.com/registry/spec/api/
 
 Examples:
 
-# Get all the tags for a given repository called 'harisekhon/hbase' on DockerHub' public registry:
+# Get all the tags for a given repository called 'harisekhon/hbase' on DockerHub's public registry:
 
 ${0##*/} https://hub.docker.com/v2/repositories/harisekhon/hbase/tags
 "
