@@ -78,7 +78,7 @@ ${0##*/} /repos
 ${0##*/} /builds
 
 
-# Get crons:
+# Get crons (repository slug must be url-encoded replacing slash with %2F):
 
 ${0##*/} /repo/<user>%2F<repo>/crons
 
@@ -89,6 +89,12 @@ ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/crons
 
 ${0##*/} /jobs
 
+
+# Get repository settings:
+
+${0##*/} /repo/<user>%2F<repo>/settings
+
+${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/settings
 "
 
 # used by usage() in lib/utils.sh
