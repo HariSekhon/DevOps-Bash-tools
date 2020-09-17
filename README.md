@@ -277,6 +277,7 @@ etc.
     - `gcr_tag_latest.sh` - tags a given GCR docker image:tag as latest without pulling or pushing the docker image
     - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to tag `latest`)
     - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker image:tag (can supply image:latest to see what version / build hashref / date tag has been tagged as `latest`)
+    - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
     - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given GCR docker image as `latest` without pulling or pushing the docker image
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
