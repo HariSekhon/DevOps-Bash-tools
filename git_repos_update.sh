@@ -27,36 +27,25 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
-repolist="${*:-${REPOS:-}}"
-if [ -z "$repolist" ]; then
-    repolist="$("$srcdir/git_repos.sh")"
-fi
-
-run(){
-    local repolist="$*"
-    for repo in $repolist; do
-        "$srcdir/git_repos_pull.sh" "$repo"
-        repo_dir="${repo##*/}"
-        repo_dir="${repo_dir##*:}"
-        repo="${repo%%:*}"
-        if ! echo "$repo" | grep -q "/"; then
-            repo="HariSekhon/$repo"
-        fi
-        if [ -d "$repo_dir" ]; then
-            pushd "$repo_dir"
-            # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-            if [ -n "${QUICK:-}" ] ||
-               [ -n "${NOBUILD:-}" ] ||
-               [ -n "${NO_BUILD:-}" ]; then
-                make update-no-recompile || exit 1
-            else
-                make update
-            fi
-            popd
+while read -r repo dir; do
+    if [ -z "$dir" ]; then
+        dir="$repo"
+    fi
+    if ! echo "$repo" | grep -q "/"; then
+        repo="HariSekhon/$repo"
+    fi
+    if [ -d "$dir" ]; then
+        pushd "$dir"
+        # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
+        if [ -n "${QUICK:-}" ] ||
+           [ -n "${NOBUILD:-}" ] ||
+           [ -n "${NO_BUILD:-}" ]; then
+            make update-no-recompile || exit 1
         else
-            git clone "$git_url/$repo" "$repo_dir"
+            make update
         fi
-    done
-}
-
-run "$repolist"
+        popd
+    else
+        git clone "$git_url/$repo" "$dir"
+    fi
+done < <(sed 's/#.*//; s/:/ /; /^[[:digit:]]*$/d' "$srcdir/setup/repos.txt")

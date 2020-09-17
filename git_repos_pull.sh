@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Pulls all my Git repos listed in setup/repolist.txt to ~/github/
+# Pulls all my Git repos listed in setup/repos.txt to ~/github/
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -25,7 +25,7 @@ if [ "${GIT_HTTPS:-}" ]; then
         git_url="https://$GITHUB_TOKEN@${git_url#https://}"
     fi
 else
-    git_url="${GIT_URL:-ssh://git@github.com:}"
+    git_url="${GIT_URL:-git@github.com:}"
 fi
 
 git_base_dir=~/github
@@ -34,29 +34,19 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
-repolist="${*:-${REPOS:-}}"
-if [ -z "$repolist" ]; then
-    repolist="$("$srcdir/git_repos.sh")"
-fi
-
-run(){
-    local repolist="$*"
-    for repo in $repolist; do
-        repo_dir="${repo##*/}"
-        repo_dir="${repo_dir##*:}"
-        repo="${repo%%:*}"
-        if ! echo "$repo" | grep -q "/"; then
-            repo="HariSekhon/$repo"
-        fi
-        if [ -d "$repo_dir" ]; then
-            pushd "$repo_dir"
-            # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-            git pull --no-edit
-            popd
-        else
-            git clone "${git_url}${repo}" "$repo_dir"
-        fi
-    done
-}
-
-run "$repolist"
+while read -r repo dir; do
+    if [ -z "$dir" ]; then
+        dir="$repo"
+    fi
+    if ! echo "$repo" | grep -q "/"; then
+        repo="HariSekhon/$repo"
+    fi
+    if [ -d "$dir" ]; then
+        pushd "$dir"
+        # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
+        git pull --no-edit
+        popd
+    else
+        git clone "${git_url}${repo}" "$dir"
+    fi
+done < <(sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt")
