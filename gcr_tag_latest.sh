@@ -37,8 +37,9 @@ num_args 1 "$@"
 
 image_tag="$1"
 
-if ! [[ "$image_tag" =~ ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$ ]]; then
-    usage 'unrecognized GCR image:tag name - should be in a format matching this regex: ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
+regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
+if ! [[ "$image_tag" =~ $regex ]]; then
+    usage "unrecognized GCR image:tag name - should be in a format matching this regex: $regex"
 fi
 
 docker_image="${image_tag%%:*}"
