@@ -159,7 +159,7 @@ gitbrowse(){
                 perl -pe 's/:(?!\/\/)/\//')"
     if [ $# -gt 0 ] &&
        [ -z "$url_base" ]; then
-        echo "git remote url not found"
+        echo "git remote url not found for $filter"
         return 1
     fi
     browser "$url_base/$path"
