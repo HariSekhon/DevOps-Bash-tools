@@ -27,6 +27,10 @@ else
     formatting='"[box,title=\"$title\"]"'
 fi
 
+gcr_image_regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+$'
+gcr_image_tag_regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
+gcr_image_optional_tag_regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+(:.+)?$'
+
 gcp_info(){
     local title="$1"
     shift || :
