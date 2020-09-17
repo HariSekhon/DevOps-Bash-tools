@@ -78,8 +78,8 @@ fi
 export PASSWORD
 
 
-url_path="${1:-}"
-shift
+url_path="$1"
+shift || :
 
 url_path="${url_path#https:\/\/registry.hub.docker.com\/v2}"
 url_path="${url_path#https:\/\/hub.docker.com\/v2}"
