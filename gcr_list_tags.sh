@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: gcr.io/google-containers/busybox
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-15 14:52:47 +0100 (Tue, 15 Sep 2020)
@@ -19,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/gcp.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -41,9 +45,8 @@ num_args 1 "$@"
 
 image="$1"
 
-regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+$'
-if ! [[ "$image" =~ $regex ]]; then
-    usage "unrecognized GCR image name - should be in a format matching this regex: $regex"
+if ! [[ "$image" =~ $gcr_image_regex ]]; then
+    usage "unrecognized GCR image name - should be in a format matching this regex: $gcr_image_regex"
 fi
 
 gcloud container images list-tags "$image" --format='csv[no-heading,delimiter="\n"](tags[])' |
