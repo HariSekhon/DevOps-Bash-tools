@@ -843,6 +843,22 @@ min_args(){
     fi
 }
 
+max_args(){
+    local max="$1"
+    shift || :
+    if [ $# -gt "$max" ]; then
+        usage "error: too many arguments, expected $max, got $#"
+    fi
+}
+
+exact_args(){
+    local num="$1"
+    shift || :
+    if [ $# != "$num" ]; then
+        usage "error: wrong number of arguments, expected $num, got $#"
+    fi
+}
+
 help_usage(){
     for arg; do
         case "$arg" in
