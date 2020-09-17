@@ -37,8 +37,9 @@ pool:
 #  displayName: test
 
 steps:
-- displayName: env
-  script: env | sort
+# requires script as first key, otherwise parsing breaks with error message:  Unexpected value 'displayName'
+- script: env | sort
+  displayName: env
 # hacky workaround to Azure Pipelines limitations :-(
-- displayName: docker build
-  script: sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c 'set -ex && cd /code && setup/ci_bootstrap.sh && make init && make ci test'
+- script: sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c 'set -ex && cd /code && setup/ci_bootstrap.sh && make init && make ci test'
+  displayName: docker build
