@@ -36,15 +36,29 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/Spotify-tools</string>
+            <string>HariSekhon/SQL-keywords</string>
 			<key>serverUrl</key>
-            <string>https://api.travis-ci.org/repos/HariSekhon/Spotify-tools/cc.xml</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/SQL-keywords/cc.xml</string>
 		</dict>
+        <!--
 		<dict>
 			<key>projectName</key>
 			<string>HariSekhon/spark-apps</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml</string>
+		</dict>
+        -->
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/HAProxy-configs</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/HAProxy-configs/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/Nagios-Plugins</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
@@ -54,9 +68,27 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/HAProxy-configs</string>
+            <string>HariSekhon/Kubernetes-templates</string>
 			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/HAProxy-configs/cc.xml</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Kubernetes-templates/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+            <string>HariSekhon/Templates</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Templates/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+            <string>HariSekhon/SQL-scripts</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/SQL-scripts/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/Spotify-tools</string>
+			<key>serverUrl</key>
+            <string>https://api.travis-ci.org/repos/HariSekhon/Spotify-tools/cc.xml</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
@@ -78,21 +110,9 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/Nagios-Plugins</string>
-			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/Nagios-Plugins/cc.xml</string>
-		</dict>
-		<dict>
-			<key>projectName</key>
 			<string>HariSekhon/Dockerfiles</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/Dockerfiles/cc.xml</string>
-		</dict>
-		<dict>
-			<key>projectName</key>
-            <string>HariSekhon/SQL-scripts</string>
-			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/SQL-scripts/cc.xml</string>
 		</dict>
 	</array>
 	<key>SendNotification Broken</key>
