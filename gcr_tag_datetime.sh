@@ -43,7 +43,7 @@ usage_args="<gcr.io>/<project_id>/<image>[:<tag>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+num_args 1 "$@"
 
 image_tag="$1"
 
