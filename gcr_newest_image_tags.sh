@@ -43,8 +43,9 @@ num_args 1 "$@"
 
 image="$1"
 
-if ! [[ "$image" =~ ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+$ ]]; then
-    usage 'unrecognized GCR image name - should be in a format matching this regex: ^([^\.]+\.)?gcr\.io/[^/]+/[^:]+$'
+regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+$'
+if ! [[ "$image" =~ $regex ]]; then
+    usage "unrecognized GCR image name - should be in a format matching this regex: $regex"
 fi
 
 gcloud container images list-tags "$image" --sort-by="~timestamp" --limit 1 --format='csv[no-heading,delimiter="\n"](tags[])' # |
