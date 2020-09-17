@@ -47,4 +47,5 @@ if ! [[ "$image" =~ $regex ]]; then
 fi
 
 gcloud container images list-tags "$image" --format='csv[no-heading,delimiter="\n"](tags[])' |
+# grep -v changes the error code depending on whether it managed to filter out any blank lines, so preferring sed here
 sed '/^[[:space:]]*$/d'
