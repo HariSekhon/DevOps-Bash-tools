@@ -33,12 +33,12 @@ sudo=""
 [ "$(whoami)" = "root" ] || sudo=sudo
 
 if [ "$(uname -s)" = Darwin ]; then
-    echo "Bootstrapping Mac"
+    echo "Bootstrapping on Mac OS X:  $repo"
     if ! type brew >/dev/null 2>&1; then
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | $sudo ruby
     fi
 elif [ "$(uname -s)" = Linux ]; then
-    echo "Bootstrapping Linux"
+    echo "Bootstrapping on Linux:  $repo"
     if type apk >/dev/null 2>&1; then
         $sudo apk --no-cache add bash git make curl
     elif type apt-get >/dev/null 2>&1; then
