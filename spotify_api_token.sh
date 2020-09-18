@@ -146,10 +146,11 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     fi
 
     log "waiting to catch callback"
+    timestamp="$(date '+%F %H')"
     response="$(nc -l localhost 12345 <<EOF
 HTTP/1.1 200 OK
 
-Spotify token accepted, now return to command line to use Spotify API tools
+$timestamp  Spotify token accepted, now return to command line to use Spotify API tools
 EOF
     )"
     log "callback caught"
