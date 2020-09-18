@@ -149,7 +149,7 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     response="$(nc -l localhost 12345 <<EOF
 HTTP/1.1 200 OK
 
-OK, now return to command line
+Spotify token accepted, now return to command line to use Spotify API tools
 EOF
     )"
     log "callback caught"
