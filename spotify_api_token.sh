@@ -146,7 +146,7 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     fi
 
     log "waiting to catch callback"
-    timestamp="$(date '+%F %H')"
+    timestamp="$(date '+%F %T')"
     response="$(nc -l localhost 12345 <<EOF
 HTTP/1.1 200 OK
 
