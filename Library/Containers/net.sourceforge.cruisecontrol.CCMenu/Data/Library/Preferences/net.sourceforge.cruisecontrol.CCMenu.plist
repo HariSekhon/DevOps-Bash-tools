@@ -98,6 +98,12 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
+			<string>HariSekhon/Spotify-Playlists</string>
+			<key>serverUrl</key>
+            <string>https://api.travis-ci.org/repos/HariSekhon/Spotify-Playlists/cc.xml</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
 			<string>HariSekhon/DevOps-Perl-tools</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Perl-tools/cc.xml</string>
