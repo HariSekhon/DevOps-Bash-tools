@@ -528,6 +528,9 @@ function! WriteRunExampleLine()
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
         :.w ! set -x; sed 's/\$0/.\/%/ ; s/\${0\#*\*\/}/.\/%/' | xargs go run 2>&1 | less
+    elseif expand('%:t') == 'Makefile' " || expand('%:t') == 'Makefile.in'
+        let target = split(getline('.'), ':')[0]
+        call Make(target)
     else
         " $0 => ./script.sh  ${0##*/} => ./script.sh
         " super crafy hack to get jq options injected via jq() function from interactive profile without doing
