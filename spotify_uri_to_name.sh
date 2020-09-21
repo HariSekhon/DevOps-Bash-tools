@@ -195,10 +195,14 @@ output(){
 
 output_artist_item(){
     if not_blank "${SPOTIFY_CSV:-}"; then
-        # the first track comes out with blank artist and track name, but still has .type == track so can't filter on that
-        jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), .name] | $conversion"
+        # some tracks come out with blank artists and track name, skip these using select(name != "") filter to avoid blank lines
+        # unfortunately some tracks actually do come out with blank artist and track name, this must be a bug inside Spotify, but
+        # filtering it like this throws off the line counts verification and also the track might be blank but the artist might not be
+        #jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), .name] | $conversion"
+        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), .name] | $conversion"
     else
-        jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
+        #jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
+        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
     fi
 }
 
