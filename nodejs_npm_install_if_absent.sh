@@ -59,9 +59,9 @@ else
     process_args $(cat)
 fi
 
-if [ -z "${packages// }" ]; then
-    usage
-fi
+#if [ -z "${packages// }" ]; then
+#    usage
+#fi
 
 packages="$(tr ' ' ' \n' <<< "$packages" | sort -u | tr '\n' ' ')"
 
