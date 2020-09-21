@@ -99,6 +99,18 @@ is_inside_docker(){
     test -f /.dockerenv
 }
 
+# KUBERNETES_PORT=tcp://<ip_x.x.x.x>:443
+# KUBERNETES_PORT_443_TCP=tcp://<ip_x.x.x.x>:443
+# KUBERNETES_PORT_443_TCP_ADDR=<ip_x.x.x.x>
+# KUBERNETES_PORT_443_TCP_PORT=443
+# KUBERNETES_PORT_443_TCP_PROTO=tcp
+# KUBERNETES_SERVICE_HOST=<ip_x.x.x.x>
+# KUBERNETES_SERVICE_PORT=443
+# KUBERNETES_SERVICE_PORT_HTTPS=443
+is_inside_kubernetes(){
+    [ -n "${KUBERNETES_PORT:-}" ]
+}
+
 declare_if_inside_docker(){
     if is_inside_docker; then
         echo
