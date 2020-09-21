@@ -752,6 +752,7 @@ ls:
 
 .PHONY: wc
 wc:
+	if [ -x wc.sh ]; then ./wc.sh; exit; fi
 	@# CODE_FILES := definitions in Makefiles must not be quoted or will get wc error 'open: File name too long'
 	@wc -l $(CODE_FILES)
 	@printf 'Total Lines:\t\t\t'
