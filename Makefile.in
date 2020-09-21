@@ -443,7 +443,7 @@ gem-optional::
 
 .PHONY: npm
 npm::
-	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' | $(BASH_TOOLS)/nodejs_npm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' -o -path '*/setup/npm-packages.txt' | $(BASH_TOOLS)/nodejs_npm_install_if_absent.sh
 	@$(MAKE) npm-optional
 
 .PHONY: npm-optional
