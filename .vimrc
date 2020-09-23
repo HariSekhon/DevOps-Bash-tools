@@ -443,6 +443,7 @@ endfunction
 
 :command! Done :normal 37a=<ESC>a DONE <ESC>37a=<ESC>
 
+" superceded by anonymize.py from DevOps Python tools repo, called via hotkey ;a declared above
 ":function RemoveIPs()
 "    : %s/\d\+\.\d\+\.\d\+\.\d\+/<IP_REMOVED>/gc
 ":endfunction
@@ -456,7 +457,7 @@ endfunction
 "    : %s/company2/<DOMAIN_REMOVED>/gci
 ":endfunction
 
-function! Scrub()
+function! Anonymize()
     ": call RemoveIPs()
     ": call RemoveMacs()
     ": call RemoveDomains()
@@ -554,6 +555,7 @@ function! Make(...)
     :exe '! cd "%:p:h" && make ' . join(a:000, '') . ' | more'
 endfunction
 
+" Hashicorp Terraform
 function! TerraformPlan()
     " '%:p:h' is dirname
     :! bash -c 'cd "%:p:h" && terraform plan'
@@ -564,6 +566,7 @@ endfunction
 "    :! bash -c 'cd "%:p:h" && terraform apply'
 "endfunction
 
+" GCP Google Cloud Build
 function! CloudBuild()
     " '%:p:h' is dirname
     :! bash -c 'cd "%:p:h" && gcloud builds submit --config cloudbuild.yaml .'
