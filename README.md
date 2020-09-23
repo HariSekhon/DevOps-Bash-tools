@@ -281,7 +281,7 @@ etc.
     - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
     - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
-    - see also [gcp_cloudbuild.yml](https://github.com/HariSekhon/Templates/blob/master/gcp_cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
+    - see also [cloudbuild.yml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
