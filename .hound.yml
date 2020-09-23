@@ -1,0 +1,31 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-09-23 10:28:21 +0100 (Wed, 23 Sep 2020)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+---
+# https://intercom.help/hound/en/articles/2138537-flake8
+flake8:
+  enabled: true
+  #config_file: .flake8
+
+# http://help.houndci.com/en/articles/2138564-shellcheck
+shellcheck:
+  enabled: true
+  #config_file: .shellcheck.yml
+
+# http://help.houndci.com/en/articles/2138524-golint
+golint:
+    enabled: false
+
+#fail_on_violations: true
