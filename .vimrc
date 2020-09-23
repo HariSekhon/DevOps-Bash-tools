@@ -123,7 +123,8 @@ Plugin 'hashivim/vim-packer'
 Plugin 'hashivim/vim-terraform'
 Plugin 'hashivim/vim-vagrant'
 "Plugin 'hashivim/vim-vaultproject'
-"Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-syntastic/syntastic'
+"Plugin 'dense-analysis/ale'
 Plugin 'juliosueiras/vim-terraform-completion'
 " gets in the way editing more than it helps because it adds doubles of quotes
 " and braces that often break edits or require more keystrokes to remove than saved
