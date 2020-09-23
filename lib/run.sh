@@ -58,6 +58,8 @@ else
                         docker build .
                     fi
                     ;;
+   cloudbuild.yaml) gcloud builds submit --config cloudbuild.yaml .
+                    ;;
 kustomization.yaml) kustomize build
                     ;;
             *.go)   eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
