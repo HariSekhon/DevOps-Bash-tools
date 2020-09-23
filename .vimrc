@@ -505,6 +505,8 @@ function! WriteRun()
         else
             :! docker build "%:p:h"
         endif
+    elseif expand('%:t') == 'cloudbuild.yaml'
+        :call CloudBuild()
     elseif expand('%:t') == 'kustomization.yaml'
         :! bash -c 'cd "%:p:h" && kustomize build' 2>&1 | less
     else
@@ -561,6 +563,11 @@ endfunction
 "    " '%:p:h' is dirname
 "    :! bash -c 'cd "%:p:h" && terraform apply'
 "endfunction
+
+function! CloudBuild()
+    " '%:p:h' is dirname
+    :! bash -c 'cd "%:p:h" && gcloud builds submit --config cloudbuild.yaml .'
+endfunction
 
 
 " ============================================================================ "
