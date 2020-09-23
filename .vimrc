@@ -506,7 +506,8 @@ function! WriteRun()
         else
             :! docker build "%:p:h"
         endif
-    elseif expand('%:t') == 'cloudbuild.yaml'
+    "elseif ! empty(matchstr(expand('%:t'), 'cloudbuild.*.yaml'))
+    elseif expand('%:t') =~ 'cloudbuild.*\.ya\?ml'
         :call CloudBuild()
     elseif expand('%:t') == 'kustomization.yaml'
         :! bash -c 'cd "%:p:h" && kustomize build' 2>&1 | less
@@ -569,7 +570,8 @@ endfunction
 " GCP Google Cloud Build
 function! CloudBuild()
     " '%:p:h' is dirname
-    :! bash -c 'cd "%:p:h" && gcloud builds submit --config cloudbuild.yaml .'
+    let cloudbuild_yaml = expand('%:t')
+    :exe '! cd "%:p:h" && gcloud builds submit --config ' . cloudbuild_yaml . ' .'
 endfunction
 
 
