@@ -19,7 +19,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.12.20}}"
+TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.12.29}}"
 echo "TERRAFORM_VERSION = $TERRAFORM_VERSION"
 echo
 
@@ -70,4 +70,5 @@ echo
 unalias mv &>/dev/null || :
 mv -fv terraform "$install_path"
 echo
-echo "Please ensure $install_path is in your \$PATH (automatic is sourcing this repo's .bashrc, which also gives you the 'tf' shortcut alias)"
+echo "Please ensure $install_path is in your \$PATH"
+echo "(this is done automatically if sourcing this repo's .bashrc, which also gives you the 'tf' shortcut alias)"
