@@ -58,7 +58,7 @@ else
                         docker build .
                     fi
                     ;;
-   cloudbuild.yaml) gcloud builds submit --config cloudbuild.yaml .
+  cloudbuild*.y*ml) gcloud builds submit --config "$basename" .
                     ;;
 kustomization.yaml) kustomize build
                     ;;
