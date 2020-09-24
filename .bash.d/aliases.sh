@@ -232,7 +232,6 @@ done
 #alias a='ansible -Db'
 alias anonymize='anonymize.py'
 alias an='anonymize -a'
-alias tf='terraform'
 alias bc='bc -l'
 alias chromekill='pkill -f "Google Chrome Helper"'
 alias eclipse='~/eclipse/Eclipse.app/Contents/MacOS/eclipse';
