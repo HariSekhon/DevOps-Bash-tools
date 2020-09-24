@@ -42,3 +42,9 @@ alias gc="gcloud container"
 alias gbs="gcloud builds submit --tag"
 alias bqq="bq query"
 alias gcloudconfig="gcloud config configurations activate"
+
+gsopen(){
+    local gspath="$1"
+    gspath="${gspath#gs:\/\/}"
+    open "https://console.cloud.google.com/storage/browser/$gspath"
+}
