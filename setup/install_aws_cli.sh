@@ -94,6 +94,11 @@ else
     # AWS installs SAM CLI the same way on Linux + Mac
     brew tap aws/tap
     echo
+    # ignore this failure:
+    # ==> Downloading https://api.github.com/repos/aws/aws-sam-cli/tarball/v1.3.1
+    # ==> Downloading from https://codeload.github.com/aws/aws-sam-cli/legacy.tar.gz/v
+    # curl: (22) The requested URL returned error: 404 Not Found
+    set +e
     brew install aws-sam-cli
     echo
 fi
