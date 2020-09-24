@@ -47,7 +47,7 @@ check_env_defined GITHUB_ACTIONS_RUNNER_TOKEN
 github_repo="${GITHUB_ACTIONS_REPO:-}"
 if [ -z "$github_repo" ]; then
     echo "GITHUB_ACTIONS_REPO not defined, inferring from local repository"
-    github_repo_url="$(git remote -v | awk '/github/{print $2}' | head -n 1 | git_repo_strip)"
+    github_repo_url="$(git remote -v | awk '/github/{print $2}' | head -n 1 | git_repo_strip_auth)"
     if [ -z "$github_repo_url" ]; then
         echo "Failed to infer github repo url from local git repository"
         exit 1
