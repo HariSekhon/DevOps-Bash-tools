@@ -30,12 +30,9 @@ type browse &>/dev/null || . "$bash_tools/.bash.d/network.sh"
 alias trav='travis_browse'
 
 travis_browse(){
-    local url
-    url="$(git remote -v | awk '/https:/{print $2}' | sed 's,://.*@,://,' | head -n1)"
-    url="${url/github.com/travis-ci.org}"
-    if [ -z "$url" ]; then
-        url="https://travis-ci.org/${TRAVIS_USER:-${USER:-$(whoami)}}"
-    fi
+    local repo
+    repo="$(github_repo)"
+    url="https://travis-ci.org/${TRAVIS_USER:-${USER:-$(whoami)}}/$repo"
     browser "$url"
 }
 
