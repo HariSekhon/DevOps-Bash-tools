@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo "dataset_id =  \'{dataset_id}\'"
+#  args: echo "dataset_id =  \'{dataset}\'"
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-16 08:54:54 +0100 (Wed, 16 Sep 2020)
@@ -25,7 +25,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Execute a command against all Google BigQuery dataset IDs in the current project
 
-Command can contain {dataset_id} placeholder which will be replaced for each dataset
+Command can contain {dataset} placeholder which will be replaced with the id for each dataset
 
 Requires GCloud SDK which must be configured and authorized for the project
 
@@ -53,7 +53,8 @@ while read -r dataset_id; do
         hr
     fi >&2
     #printf '%s\t' "$dataset_id"
-    command="${command_template//\{dataset_id\}/$dataset_id}"
+    command_template="${command_template//\{dataset_id\}/$dataset_id}"
+    command="${command_template//\{dataset\}/$dataset_id}"
     eval "$command"
     if [ -z "${NO_HEADING:-}" ]; then
         echo
