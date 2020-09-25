@@ -60,6 +60,7 @@ if [ $? != 0 ]; then
     echo "$output" >&2
     exit 1
 fi
+set -e
 jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' <<< "$output" |
 while read -r project dataset table; do
     if [ -n "${FILTER:-}" ] &&
