@@ -55,6 +55,7 @@ max_rows=10000
 
 set +e
 output="$(bq query --quiet --headless --format=prettyjson --max_rows "$max_rows" --nouse_legacy_sql 'select table_catalog, table_schema, table_name FROM `'"$dataset"'.INFORMATION_SCHEMA.TABLES`;')"
+# shellcheck disable=SC2181
 if [ $? != 0 ]; then
     echo "$output" >&2
     exit 1
