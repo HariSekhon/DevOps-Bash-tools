@@ -28,7 +28,7 @@ FILTER environment variable will restrict to matching tables (matches against fu
 
 Limited to 10,000 table names by default (increase max_rows in script if you have a bigger dataset than this)
 
-Tested on GCP BigQuery
+Tested on Google BigQuery
 "
 
 # used by usage() in lib/utils.sh
