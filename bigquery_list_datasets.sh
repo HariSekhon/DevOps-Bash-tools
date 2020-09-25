@@ -35,6 +35,13 @@ usage_args=""
 
 help_usage "$@"
 
-
-bq ls --headless --format=json |
+#set +e
+#output="$(bq ls --quiet --headless --format=json)"
+## shellcheck disable=SC2181
+#if [ $? != 0 ]; then
+#    echo "$output" >&2
+#    exit 1
+#fi
+#set -e
+bq ls --quiet --headless --format=json |
 jq -r '.[].datasetReference.datasetId'
