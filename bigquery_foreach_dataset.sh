@@ -53,8 +53,8 @@ while read -r dataset_id; do
         hr
     fi >&2
     #printf '%s\t' "$dataset_id"
-    command_template="${command_template//\{dataset_id\}/$dataset_id}"
-    command="${command_template//\{dataset\}/$dataset_id}"
+    command="${command_template//\{dataset_id\}/$dataset_id}"
+    command="${command//\{dataset\}/$dataset_id}"
     eval "$command"
     if [ -z "${NO_HEADING:-}" ]; then
         echo
