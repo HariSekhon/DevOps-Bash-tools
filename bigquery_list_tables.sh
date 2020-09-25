@@ -25,6 +25,10 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists all BigQuery tables in a given dataset by querying BigQuery's Information Schema for that dataset
 
+Output Format:
+
+<project>   <dataset>   <table>
+
 FILTER environment variable will restrict to matching tables (matches against fully qualified table name <dataset>.<schema>.<table>)
 
 Limited to 10,000 table names by default (increase max_rows in script if you have a bigger dataset than this)
