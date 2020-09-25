@@ -57,5 +57,5 @@ if [ $? != 0 ]; then
 fi
 jq -r '.[].row_count' <<< "$output" |
 while read -r row_count; do
-    printf '%s\t%s' "$table" "$row_count"
+    printf '%s\t%s\n' "$table" "$row_count"
 done
