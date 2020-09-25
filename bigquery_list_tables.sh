@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: bigquery-public-data.github_repos
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-25 14:46:21 +0100 (Fri, 25 Sep 2020)
@@ -41,8 +42,8 @@ min_args 1 "$@"
 
 dataset="$1"
 
-if ! [[ "$dataset" =~ ^[[:alnum:]_]+$ ]]; then
-    die "invalid dataset name given (must contain only letters, numbers and underscores):  $dataset"
+if ! [[ "$dataset" =~ ^[[:alnum:]_.-]+$ ]]; then
+    die "invalid dataset name given (must contain only alphanumeric, dots, dashes and underscores):  $dataset"
 fi
 
 # XXX: you might need to edit this
@@ -54,7 +55,7 @@ if [ $? != 0 ]; then
     echo "$output" >&2
     exit 1
 fi
-jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' <<< "$output"
+jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' <<< "$output" |
 while read -r db schema table; do
     if [ -n "${FILTER:-}" ] &&
        ! [[ "$db.$schema.$table" =~ $FILTER ]]; then
