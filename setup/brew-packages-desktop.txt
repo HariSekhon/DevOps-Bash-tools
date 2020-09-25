@@ -171,6 +171,7 @@ watch
 #whois  # in brew-packages.txt
 xz
 yamllint
+youtube-dl
 zsh
 
 # runtime only
