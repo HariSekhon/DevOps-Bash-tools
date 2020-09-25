@@ -56,11 +56,11 @@ while read -r project dataset table; do
         echo "Project = $project, Dataset/Schema = $dataset, Table = $table"
         hr
     fi >&2
-    command_template="${command_template//\{project\}/$project}"
-    command_template="${command_template//\{dataset\}/$dataset}"
-    command_template="${command_template//\{schema\}/$dataset}"
-    command_template="${command_template//\{table\}/$table}"
-    eval "$command_template"
+    command="${command_template//\{project\}/$project}"
+    command="${command//\{dataset\}/$dataset}"
+    command="${command//\{schema\}/$dataset}"
+    command="${command//\{table\}/$table}"
+    eval "$command"
     if [ -z "${NO_HEADING:-}" ]; then
         echo
     fi >&2
