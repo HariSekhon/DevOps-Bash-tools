@@ -23,9 +23,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Execute a command against all Google BigQuery tables in a given dataset in the current project
+Execute a command against all Google BigQuery tables in all datasets in the current project
 
-Command can contain {dataset}, {schema} and {table} placeholders which will be replaced for each table
+Command can contain {project}, {dataset} / {schema} and {table} placeholders which will be replaced for each table
 
 Requires GCloud SDK which must be configured and authorized for the project
 
