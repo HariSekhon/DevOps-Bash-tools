@@ -48,8 +48,13 @@ fi
 # XXX: you might need to edit this
 max_rows=10000
 
-bq query --quiet --headless --format=prettyjson --max_rows "$max_rows" --nouse_legacy_sql 'select table_catalog, table_schema, table_name FROM `'"$dataset"'.INFORMATION_SCHEMA.TABLES`;' |
-jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' |
+set +e
+output="$(bq query --quiet --headless --format=prettyjson --max_rows "$max_rows" --nouse_legacy_sql 'select table_catalog, table_schema, table_name FROM `'"$dataset"'.INFORMATION_SCHEMA.TABLES`;')"
+if [ $? != 0 ]; then
+    echo "$output" >&2
+    exit 1
+fi
+jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' <<< "$output"
 while read -r db schema table; do
     if [ -n "${FILTER:-}" ] &&
        ! [[ "$db.$schema.$table" =~ $FILTER ]]; then
