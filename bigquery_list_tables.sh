@@ -29,7 +29,7 @@ Output Format:
 
 <project>   <dataset>   <table>
 
-FILTER environment variable will restrict to matching tables (matches against fully qualified table name <dataset>.<schema>.<table>)
+FILTER environment variable will restrict to matching tables (matches against fully qualified table name <project>.<dataset>.<table>)
 
 Limited to 10,000 table names by default (increase max_rows in script if you have a bigger dataset than this)
 
@@ -60,10 +60,10 @@ if [ $? != 0 ]; then
     exit 1
 fi
 jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' <<< "$output" |
-while read -r db schema table; do
+while read -r project dataset table; do
     if [ -n "${FILTER:-}" ] &&
-       ! [[ "$db.$schema.$table" =~ $FILTER ]]; then
+       ! [[ "$project.$dataset.$table" =~ $FILTER ]]; then
         continue
     fi
-    printf '%s\t%s\t%s\n' "$db" "$schema" "$table"
+    printf '%s\t%s\t%s\n' "$project" "$dataset" "$table"
 done
