@@ -289,12 +289,12 @@ etc.
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current GCP project
     - `bigquery_list_tables.sh` - lists BigQuery tables in a given dataset
-    - `bigquery_list_tables_all_datasets.sh` - lists BigQuery tables for all datasets in the current GCP project
-    - `bigquery_foreach_dataset.sh` - executes a templated command for each BigQuery dataset
+    - `bigquery_list_tables_all_datasets.sh` - lists tables for all datasets in the current GCP project
+    - `bigquery_foreach_dataset.sh` - executes a templated command for each dataset
     - `bigquery_foreach_table.sh` - executes a templated command for each table in a given dataset
-    - `bigquery_foreach_table_all_datasets.sh` - executes a templated command for each table in all datasets in the current GCP project
-    - `bigquery_table_row_count.sh` - gets the row count for a given BigQuery table
-    - `bigquery_tables_row_counts.sh` - gets the row counts for all tables in a given BigQuery dataset
+    - `bigquery_foreach_table_all_datasets.sh` - executes a templated command for each table in each dataset in the current GCP project
+    - `bigquery_table_row_count.sh` - gets the row count for a given table
+    - `bigquery_tables_row_counts.sh` - gets the row counts for all tables in a given dataset
     - `bigquery_tables_row_counts_all_datasets.sh` - gets the row counts for all tables in all datasets in the current GCP project
     - `bigquery_generate_query_biggest_tables_across_datasets_by_row_count.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by row count
     - `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size
