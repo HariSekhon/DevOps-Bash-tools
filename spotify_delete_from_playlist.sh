@@ -97,11 +97,17 @@ delete_from_playlist(){
         if [[ "$id" =~ ^[[:digit:]]+: ]]; then
             # extract first column for track position
             track_position="${id%%:*}"
-            # keep zero-indexed for compatability with other tools
+            # don't try to calculate this, the numbers aren't as predicted during testing, use snapshot consistency instead
+            #((track_position-=count))
+            # keep zero-indexed for compatability with other tools - no longer necessary, they return zero indexed now
             #((track_position-=1)) # convert one-indexed (eg. from grep) to zero-indexed for Spotify API
             id="${id#*:}"
             # requires explicit track URI type since could also be episodes added to playlist
             uri_array+="{\"uri\": \"spotify:track:$id\", \"positions\": [$track_position]}, "
+            if [ -z "$snapshot_id" ]; then
+                # get the Snapshot ID of the playlist before we start deleting for consistency and use this for all rounds of deletions
+                snapshot_id="$("$srcdir/spotify_api.sh" "${url_path%/tracks}?fields=snapshot_id" | jq -r '.snapshot_id')"
+            fi
         else
             # requires explicit track URI type since could also be episodes added to playlist
             uri_array+="{\"uri\": \"spotify:track:$id\"}, "
@@ -120,13 +126,14 @@ delete_from_playlist(){
     output="$("$srcdir/spotify_api.sh" "$url_path" -X DELETE -d "$json_payload")"
     die_if_error_field "$output"
     ((count+=${#@}))
-    snapshot_id="$(jq -r '.snapshot_id' <<< "$output")"
-    if is_blank "$snapshot_id"; then
-        die "Spotify API returned blank snapshot id, please investigate with DEBUG=1 mode"
-    fi
-    if [ "$snapshot_id" = null ]; then
-        die "Spotify API returned snapshot_id '$snapshot_id', please investigate with DEBUG=1 mode"
-    fi
+    # don't take the new snapshot ID - use the one from before we start deleting for consistency otherwise the second round of deletes will fail
+    #snapshot_id="$(jq -r '.snapshot_id' <<< "$output")"
+    #if is_blank "$snapshot_id"; then
+    #    die "Spotify API returned blank snapshot id, please investigate with DEBUG=1 mode"
+    #fi
+    #if [ "$snapshot_id" = null ]; then
+    #    die "Spotify API returned snapshot_id '$snapshot_id', please investigate with DEBUG=1 mode"
+    #fi
 }
 
 delete_URIs_from_playlist(){
@@ -158,7 +165,7 @@ delete_URIs_from_playlist(){
             ids+=("$id")
         fi
 
-        if [ "${#ids[@]}" -ge 100 ]; then
+        if [ "${#ids[@]}" -eq 100 ]; then
             delete_from_playlist "${ids[@]}"
             ids=()
         fi
