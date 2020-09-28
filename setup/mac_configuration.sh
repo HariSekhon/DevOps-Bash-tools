@@ -203,9 +203,12 @@ defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int
 
 # TODO: set Finder to columns that are auto-wide
 
+# set Desktop as the default location for new Finder windows
+#defaults write com.apple.finder NewWindowTarget -string "PfDe"
 # set Downloads as the default location for new Finder windows
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
+defaults write com.apple.finder NSNavLastRootDirectory -string "file://${HOME}/Downloads/"
 
 # allow copying from Quick Look preview
 defaults write com.apple.finder QLEnableTextSelection -bool true
@@ -215,6 +218,9 @@ chflags nohidden ~/Library
 
 # Empty Trash securely by default
 defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# Automatically remove Trash > 30 days
+defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
 # disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
