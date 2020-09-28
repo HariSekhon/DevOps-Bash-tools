@@ -14,10 +14,33 @@
 #
 
 # Ignore uploading these to Google Cloud Build
+#
+# there is a much bigger list in the adjacent .gitignore, some of which may be worth porting in to here too
 
-.git
-dist
-node_modules
-vendor
+.git/
+.DS_Store
+
+dist/
+node_modules/
+vendor/
+
+*.a
+*.bak
+*.bak.*
+*.class
+*.dump
 *.jar
+*.log
+*.o
+*.orig
+*.out
 *.pyc
+*.pyo
+*.stderr
+*.stdout
+*.swo
+*.swp
+*.tmp
+
+*~
+~*
