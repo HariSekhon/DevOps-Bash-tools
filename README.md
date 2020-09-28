@@ -235,6 +235,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
+  - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
   - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
   - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
