@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# ============================================================================ #
+#                            M a c   S e t t i n g s
+# ============================================================================ #
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
@@ -71,8 +75,8 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 # ============================================================================ #
 
 # "Apple Global Domain" === NSGlobalDomain
-defaults write NSGlobalDomain InitialKeyRepeat -int 15;
-defaults write NSGlobalDomain KeyRepeat -int 2;
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
 
 # make Fn key show hotkeys in touch bar on newer Macs
@@ -108,89 +112,17 @@ mac_terminal_settings="${mac_terminal_settings/<integer>239</<integer>$COLUMNS<}
 mac_terminal_settings="${mac_terminal_settings/<integer>72</<integer>$LINES<}"
 defaults write com.apple.Terminal "Window Settings" -dict-add Hari "$mac_terminal_settings"
 
-
+# ============================================================================ #
+#                             S c r e e n s a v e r
 # ============================================================================ #
 
 # require password immediately after sleep / screen saver
 defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# auto-restart after a system freeze
-#sudo systemsetup -setrestartfreeze on
-
-# Check for software updates daily, not just once per week
-#defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
-
-# Disable local Time Machine snapshots
-sudo tmutil disable local
-
-# Increase sound quality for Bluetooth headphones/headsets
-defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
-
-# Avoid creating .DS_Store files on network volumes
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-# Automatically open a new Finder window when a volume is mounted
-defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
-defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
-defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
-
-# ============================================================================ #
-#                                  F i n d e r
-# ============================================================================ #
-
-# TODO: set Finder to columns that are auto-wide
-
-# set Downloads as the default location for new Finder windows
-defaults write com.apple.finder NewWindowTarget -string "PfDe"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
-
-# allow copying from Quick Look preview
-defaults write com.apple.finder QLEnableTextSelection -bool true
-
-# show the ~/Library folder
-chflags nohidden ~/Library
-
-# Empty Trash securely by default
-defaults write com.apple.finder EmptyTrashSecurely -bool true
-
-# disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
-
-# show hidden files by default
-defaults write com.apple.finder AppleShowAllFiles -bool true
-
-# show all filename extensions
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true
-
-# show path bar
-defaults write com.apple.finder ShowPathbar -bool true
-
-# display full POSIX path as Finder window title
-defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
-
-# When performing a search, search the current folder by default
-defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
-
-# disable the warning when changing a file extension
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-# Show icons for hard drives, servers, and removable media on the desktop
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop         -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop     -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop     -bool true
-
-#killall Finder
-
-# ============================================================================ #
-#                                 P r e v i e w
-# ============================================================================ #
-
-# set to false to not re-open previous documents from last Preview session
-defaults write com.apple.Preview NSQuitAlwaysKeepsWindows -bool true
-
-#killall Preview
+# enable bottom left Hot Corners to activate Screensaver, require password after 5 seconds
+defaults write com.apple.dock wvous-bl-corner -int 5
+defaults write com.apple.dock wvous-bl-modifier -int 0
 
 # ============================================================================ #
 #                             S c r e e n s h o t s
@@ -240,6 +172,87 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 #killall Dock
 
 # ============================================================================ #
+#                           M i s c e l l a n e o u s
+# ============================================================================ #
+
+# auto-restart after a system freeze
+sudo systemsetup -setrestartfreeze on
+
+# Check for software updates daily, not just once per week
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+
+# Disable local Time Machine snapshots
+sudo tmutil disable local
+
+# Increase sound quality for Bluetooth headphones/headsets
+defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# ============================================================================ #
+#                                  F i n d e r
+# ============================================================================ #
+
+# TODO: set Finder to columns that are auto-wide
+
+# set Downloads as the default location for new Finder windows
+defaults write com.apple.finder NewWindowTarget -string "PfDe"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
+
+# allow copying from Quick Look preview
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# show the ~/Library folder
+chflags nohidden ~/Library
+
+# Empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# show hidden files by default
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# show path bar
+defaults write com.apple.finder ShowPathbar -bool true
+
+# display full POSIX path as Finder window title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+# When performing a search, search the current folder by default
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Show icons for hard drives, servers, and removable media on the desktop
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowHardDrivesOnDesktop         -bool true
+defaults write com.apple.finder ShowMountedServersOnDesktop     -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop     -bool true
+
+# Avoid creating .DS_Store files on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Automatically open a new Finder window when a volume is mounted
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+
+#killall Finder
+
+# ============================================================================ #
+#                                 P r e v i e w
+# ============================================================================ #
+
+# set to false to not re-open previous documents from last Preview session
+defaults write com.apple.Preview NSQuitAlwaysKeepsWindows -bool true
+
+#killall Preview
+
+# ============================================================================ #
 
 # Enable AirDrop over Ethernet and on unsupported Macs running Lion
 #defaults write com.apple.NetworkBrowser BrowseAllInterfaces -bool true
@@ -271,10 +284,11 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # ============================================================================ #
 
-echo "Some settings won't take effect until you restart Finder. When you're ready, run:
+echo "Some settings won't take effect until you restart the processes. When you've saved your work and are ready, run:
 
-killall Finder
-killall Dock
-killall SystemUIServer
-killall Terminal
+sudo killall Finder
+sudo killall Dock
+sudo killall cfprefsd
+sudo killall SystemUIServer
+sudo killall Terminal
 "
