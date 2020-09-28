@@ -39,8 +39,9 @@ export EDITOR=vim
 
 export INPUTRC=~/.inputrc
 
-# allow programs to use $LINES
+# allow programs to use $LINES and $COLUMNS
 export LINES
+export COLUMNS
 
 # ENV refers to the file that sh attempts to read as a startup file (done on my Mac OSX Snow Leopard)
 # Needs the following line added to sudoers for ENV to be passed through on sudo su
