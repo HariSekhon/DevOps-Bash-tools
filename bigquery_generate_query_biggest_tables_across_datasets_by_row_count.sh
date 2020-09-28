@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates an SQL query to find the Top 10 biggest tables by row count across all BigQuery datasets in the current GCP project
 
-Prints the SQL query to standard output
+Prints the SQL query to standard output. Pipe this to the 'bq query' command to execute
 
 Requires GCloud SDK to be installed and authorized
 "

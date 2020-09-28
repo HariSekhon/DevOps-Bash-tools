@@ -89,6 +89,8 @@ output(){
     fi |
     if is_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
         jq "select(.owner.id == \"$spotify_user\")"
+    else
+        cat
     fi |
     jq -r "[.id, .name] | @tsv"
 }

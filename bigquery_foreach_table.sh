@@ -34,7 +34,7 @@ Tested on Google BigQuery
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<dataset> <command>"
+usage_args="[<project>.]<dataset> <command>"
 
 help_usage "$@"
 

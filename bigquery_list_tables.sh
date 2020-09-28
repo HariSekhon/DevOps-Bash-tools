@@ -25,6 +25,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists all BigQuery tables in a given dataset by querying BigQuery's Information Schema for that dataset
 
+To list tables from a dataset in another project, just prefix the project eg. <project>.<dataset>
+
 Output Format:
 
 <project>   <dataset>   <table>
@@ -38,7 +40,7 @@ Tested on Google BigQuery
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<dataset>"
+usage_args="[<project>.]<dataset>"
 
 help_usage "$@"
 
@@ -55,10 +57,12 @@ max_rows=10000
 
 set +e
 output="$(bq query --quiet --headless --format=prettyjson --max_rows "$max_rows" --nouse_legacy_sql 'select table_catalog, table_schema, table_name FROM `'"$dataset"'.INFORMATION_SCHEMA.TABLES`;')"
+# shellcheck disable=SC2181
 if [ $? != 0 ]; then
     echo "$output" >&2
     exit 1
 fi
+set -e
 jq -r '.[] | [.table_catalog, .table_schema, .table_name] | @tsv' <<< "$output" |
 while read -r project dataset table; do
     if [ -n "${FILTER:-}" ] &&
