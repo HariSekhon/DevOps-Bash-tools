@@ -216,6 +216,9 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 # show the ~/Library folder
 chflags nohidden ~/Library
 
+# show Status Bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
 # Empty Trash securely by default
 defaults write com.apple.finder EmptyTrashSecurely -bool true
 
