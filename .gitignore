@@ -370,6 +370,7 @@ puppet.git/
 PycharmProjects/
 pytools_checks/
 rpms/
+setup/mac_settings/
 shm/
 siege.log
 Sites
