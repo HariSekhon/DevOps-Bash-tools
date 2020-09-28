@@ -34,6 +34,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 #                                T r a c k p a d
 # ============================================================================ #
 
+# ============
 # tap to click
 defaults write com.apple.trackpad forceClick -bool false
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool false
@@ -42,22 +43,28 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -int 0
 
+# ============================
 # tap to click on login screen
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # OS version on login screen
 defaults write com.apple.loginwindow AdminHostInfo HostName
 
+# ==============
 # Trackpad Speed - choose an int/float in the range 0-3:
 # 0 = slowest
 # 3 = fastest
 defaults write com.apple.trackpad.scaling -float 3
 
+# ===========
 # right-click
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-# click bottom right corner for right-click
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+# click bottom right corner for right-click - doesn't work
+#defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 2
+#defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
 
+# ===============
 # Haptic feedback
 # 0: Light
 # 1: Medium
@@ -67,8 +74,12 @@ defaults write com.apple.AppleMultitouchTrackpad.SecondClickThreshold -int 0
 defaults write com.apple.AppleMultitouchTrackpad.ForceSuppressed -int 0
 defaults write com.apple.AppleMultitouchTrackpad ActuationStrength -int 0
 
+# =======================================
 # Enable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
+
+# Maximize window when double clicking the bar
+defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
 
 # ============================================================================ #
 #                                K e y b o a r d
@@ -77,7 +88,6 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 # "Apple Global Domain" === NSGlobalDomain
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
 
 # make Fn key show hotkeys in touch bar on newer Macs
 defaults write com.apple.touchbar.agent.PresentationModeFnModes.appWithControlStrip -string fullControlStrip
