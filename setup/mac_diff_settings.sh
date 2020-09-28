@@ -41,6 +41,6 @@ after_settings="$dir/settings-after-$(date '+%F_%H%M%S').json"
 
 defaults read > "$after_settings"
 
-diff "$before_settings" "$after_settings" | less
+diff "$before_settings" "$after_settings" | less -+F -i || :
 
 exec "${EDITOR:-vim}" "$after_settings"
