@@ -94,6 +94,7 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "Hari"
 # - $LINES and $COLUMNS aren't automatically available in a non-interactive script shell, so if not set fall back to 'tput'
 #   - tput comes out to 80 cols x 70 lines too conservative
 #     - now instead relying on $COLUMNS and $LINES being exported by shell profile .bash.d/env.sh
+#       - this relies on user having already maximized your Terminal window before running this
 COLUMNS="${COLUMNS:-$(tput cols)}"
 LINES="${LINES:-$(tput lines)}"
 # try to squeaze the terminal right to the edges
