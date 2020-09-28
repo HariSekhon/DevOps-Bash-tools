@@ -471,14 +471,20 @@ _gitaddimport() {
     filenames="$(strip_basedirs "$basedir" "$@")";
     while read -r filename; do
         if ! [ -f "$filename" ]; then
-            echo "$filename does not exist" >&2
+            echo "ERROR: $filename does not exist" >&2
+            return 1
         elif git status -s "$filename" | grep -q '^[?A]'; then
             git add "$filename" &&
             git commit -m "$action $filename" "$filename"
         elif git status -s "$filename" | grep -q '^.M'; then
-            echo "'$filename' already in git, but has changes, commit as an update instead" >&2
+            echo "ERROR: '$filename' already in git, but has changes, commit as an update instead" >&2
+            return 1
+        elif git status --ignored -s "$filename" | grep -q '^!!'; then
+            echo "ERROR: '$filename' is ignored!!! =>  $(git check-ignore -v "$filename")" >&2
+            return 1
         else
-            echo "'$filename' already in git" >&2
+            echo "ERROR: '$filename' already in git" >&2
+            return 1
         fi
     done <<< "$filenames"
     popd > /dev/null || :
