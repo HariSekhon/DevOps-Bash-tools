@@ -96,6 +96,9 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "Hari"
 #     - now instead relying on $COLUMNS and $LINES being exported by shell profile .bash.d/env.sh
 COLUMNS="${COLUMNS:-$(tput cols)}"
 LINES="${LINES:-$(tput lines)}"
+# try to squeaze the terminal right to the edges
+((COLUMNS+=1))
+((LINES+=1))
 
 # this is a blob and cannot be descended in to using 'defaults' command :'-(
 # so we load from a saved Terminal -> Preferences -> Profiles -> Hari -> Settings -> Export file and override the $LINES and $COLUMNS
