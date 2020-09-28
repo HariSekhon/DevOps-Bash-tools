@@ -97,6 +97,9 @@ add_file_URIs(){
         fi
     done < "$filename"
 
+    if [ "${#ids[@]}" -eq 0 ]; then
+        return
+    fi
     add_to_playlist "${ids[@]}"
 }
 

@@ -42,3 +42,19 @@ alias gc="gcloud container"
 alias gbs="gcloud builds submit --tag"
 alias bqq="bq query"
 alias gcloudconfig="gcloud config configurations activate"
+
+gsopen(){
+    local gspath="$1"
+    gspath="${gspath#gs:\/\/}"
+    browser "https://console.cloud.google.com/storage/browser/$gspath"
+}
+
+gcropen(){
+    local image="$1"
+    if ! [[ "$image" =~ gcr\.io/ ]]; then
+        echo "'$image' is not a GCR image name (requires gcr.io to know where to open)"
+        return 1
+    fi
+    image="${image%:*}"
+    browser "https://$image"
+}

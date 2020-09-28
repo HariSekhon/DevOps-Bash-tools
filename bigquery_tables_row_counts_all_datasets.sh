@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2020-09-16 08:54:54 +0100 (Wed, 16 Sep 2020)
+#  Date: 2020-09-25 15:32:21 +0100 (Fri, 25 Sep 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu  # -o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
@@ -22,7 +22,12 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the BigQuery datasets in the current GCP project, one per line
+Counts rows for all BigQuery tables in all datasets in the current project
+
+Output:
+
+<project>.<dataset>.<table>     <row_count>
+
 
 Requires GCloud SDK which must be configured and authorized for the project
 
@@ -35,13 +40,9 @@ usage_args=""
 
 help_usage "$@"
 
-#set +e
-#output="$(bq ls --quiet --headless --format=json)"
-## shellcheck disable=SC2181
-#if [ $? != 0 ]; then
-#    echo "$output" >&2
-#    exit 1
-#fi
-#set -e
-bq ls --quiet --headless --format=json |
-jq -r '.[].datasetReference.datasetId'
+# exit the loop subshell if you Control-C
+trap 'exit 130' INT
+
+export NO_HEADING=1
+
+"$srcdir/bigquery_foreach_table_all_datasets.sh" "$srcdir/bigquery_table_row_count.sh" "{project}.{dataset}.{table}"

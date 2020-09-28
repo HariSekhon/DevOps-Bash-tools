@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2020-09-16 08:54:54 +0100 (Wed, 16 Sep 2020)
+#  Date: 2020-09-25 14:46:21 +0100 (Fri, 25 Sep 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -22,9 +22,15 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the BigQuery datasets in the current GCP project, one per line
+Lists all BigQuery tables in all datasets in the current project using the BigQuery Information Schema for each dataset
 
-Requires GCloud SDK which must be configured and authorized for the project
+Output Format:
+
+<project>   <dataset>   <table>
+
+FILTER environment variable will restrict to matching tables (matches against fully qualified table name <dataset>.<schema>.<table>)
+
+Limited to 10,000 table names by default (increase max_rows in script if you have a bigger dataset than this)
 
 Tested on Google BigQuery
 "
@@ -35,13 +41,7 @@ usage_args=""
 
 help_usage "$@"
 
-#set +e
-#output="$(bq ls --quiet --headless --format=json)"
-## shellcheck disable=SC2181
-#if [ $? != 0 ]; then
-#    echo "$output" >&2
-#    exit 1
-#fi
-#set -e
-bq ls --quiet --headless --format=json |
-jq -r '.[].datasetReference.datasetId'
+"$srcdir/bigquery_list_datasets.sh" |
+while read -r dataset; do
+    "$srcdir/bigquery_list_tables.sh" "$dataset"
+done

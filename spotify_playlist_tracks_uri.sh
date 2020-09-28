@@ -61,9 +61,9 @@ spotify_token
 
 playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 
-# $limit/$offset defined in lib/spotify.sh
+# defined in lib/spotify.sh
 # shellcheck disable=SC2154
-url_path="/v1/playlists/$playlist_id/tracks?limit=$limit&offset=$offset"
+url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
 
 output(){
     #jq -r '.' <<< "$output"
