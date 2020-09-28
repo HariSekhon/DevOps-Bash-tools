@@ -21,7 +21,11 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-before_settings="$srcdir/settings-before-$(date '+%F_%H%M%S').json"
+dir="$srcdir/mac_settings"
+
+mkdir -pv "$dir"
+
+before_settings="$dir/settings-before-$(date '+%F_%H%M%S').json"
 
 defaults read > "$before_settings"
 
@@ -33,7 +37,7 @@ echo "Press Enter when ready to collect the changes difference"
 
 read -r
 
-after_settings="$srcdir/settings-after-$(date '+%F_%H%M%S').json"
+after_settings="$dir/settings-after-$(date '+%F_%H%M%S').json"
 
 defaults read > "$after_settings"
 
