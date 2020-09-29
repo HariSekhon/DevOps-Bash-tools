@@ -14,6 +14,7 @@
 #
 #       git check-ignore -v $filename
 
+*.a
 *.avi
 *.bak
 *.bak.*
