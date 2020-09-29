@@ -34,13 +34,13 @@ if ! [ -f "$bin" ]; then
     echo
 fi
 
-if ! pgrep CCMenu &>/dev/null; then
-    echo "ensuring a first run has been done before replacing config, starting CCMenu"
-    # need to ensure it's started before overwriting the config
-    "$bin" &
-    echo
-    sleep 2
-fi
+#if ! pgrep CCMenu &>/dev/null; then
+#    echo "ensuring a first run has been done before replacing config, starting CCMenu"
+#    # need to ensure it's started before overwriting the config
+#    "$bin" &
+#    echo
+#    sleep 2
+#fi
 
 #echo "Downloading CCMenu configuration from GitHub release"
 #wget -c -O ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/Preferences/net.sourceforge.cruisecontrol.CCMenu.plist \
@@ -48,13 +48,33 @@ fi
 
 cd "$srcdir/.."
 
-# CCMenu refuses to accept the configuration with a symlink
-#ln -svf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
-rm -f ~/"$plist_dir/$plist_file"
-cp -vf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
+echo "Killing CCMenu"
+pkill -f "$bin" || :
 echo
 
-echo "Restarting CCMenu"
+while pgrep CCMenu &>/dev/null; do
+    echo "waiting for CCMenu to go down"
+    sleep 1
+    if [ $SECONDS -gt 30 ]; then
+        echo "Timed out waiting for CCMenu to go down"
+        exit 1
+    fi
+done
+
+#mkdir -pv ~/"$plist_dir/"
+#rm -f ~/"$plist_dir/$plist_file"
+#echo "Removing ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Container.plist"
+#rm -f ~/Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Container.plist
+# these don't take immediate effect due to caching, so load via 'defaults' instead
+#echo "Linking CCMenu configuration:"
+#ln -svf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
+#echo "Copying CCMenu configuration:"
+#cp -vf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
+echo "Loading CCMenu configuration"
+defaults import net.sourceforge.cruisecontrol.CCMenu - < "$PWD/$plist_dir/$plist_file"
+echo
+
+echo "(Re)Starting CCMenu"
 pkill -f "$bin" || :
 echo
 sleep 2
