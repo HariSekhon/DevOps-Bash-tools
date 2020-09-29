@@ -23,6 +23,12 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # ============================================================================ #
 
+# References:
+#
+# https://ss64.com/osx/defaults.html
+#
+# https://github.com/herrbischoff/awesome-macos-command-line
+
 # TIP: how to figure out settings keys
 #
 # 1. defaults read > settings.json
@@ -33,6 +39,29 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # This now automated using the adjacent script mac_diff_settings.sh
 # which saves copies of the before and after configs and diffs them,
 # before dropping in to the new config to explore the full settings paths
+
+defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain AppleMetricUnits -bool true
+defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
+defaults write NSGlobalDomain com.apple.sound.beep.flash -bool false
+
+# Remove Shutdown & Restart buttons at login window
+#defaults write com.apple.loginwindow ShutDownDisabled -bool true
+#defaults write com.apple.loginwindow RestartDisabled -bool true
+#defaults write com.apple.loginwindow LoginwindowText "Your Message"
+
+# turn off the annoying "Application Downloaded from Internet" quarantine warning
+#defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# disable annoying crash prompt
+defaults write com.apple.CrashReporter DialogType none  # set to 'prompt' to restore
+
+# disable dashboar widgets (saves RAM)
+defaults write com.apple.dashboard mcx-disabled -boolean true
 
 # ============================================================================ #
 #                                T r a c k p a d
@@ -51,6 +80,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeF
 # tap to click on login screen
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
 # OS version on login screen
 defaults write com.apple.loginwindow AdminHostInfo HostName
 
@@ -90,8 +120,8 @@ defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
 # ============================================================================ #
 
 # "Apple Global Domain" === NSGlobalDomain
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
-defaults write NSGlobalDomain KeyRepeat -int 2
+defaults write NSGlobalDomain InitialKeyRepeat -int 12
+defaults write NSGlobalDomain KeyRepeat -int 1
 
 # make Fn key show hotkeys in touch bar on newer Macs
 defaults write com.apple.touchbar.agent.PresentationModeFnModes.appWithControlStrip -string fullControlStrip
@@ -170,6 +200,9 @@ defaults write com.apple.dock autohide-delay         -float 0  # secs
 # disappear instantly
 defaults write com.apple.dock autohide-time-modifier -float 0
 
+# speed up Mission Control animations
+defaults write com.apple.dock expose-animation-duration -float 0.12
+
 # revert to default dock delays
 #defaults delete com.apple.dock autohide-delay
 #defaults delete com.apple.dock autohide-time-modifier
@@ -182,6 +215,18 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # enable Dashboard with widgets
 #defaults write com.apple.dashboard mcx-disabled -boolean false
+
+# make hidden app icons translucent
+defaults write com.apple.Dock showhidden -bool true
+
+# show indicator lights for open applications in the dock
+defaults write com.apple.dock show-process-indicators -bool true
+
+# disable bouncing icons
+defaults write com.apple.dock no-bouncing -bool true
+
+# don't minimize to applications, it's more obvious when they're on the far right
+defaults write com.apple.dock minimize-to-application -bool false
 
 #killall Dock
 
@@ -198,14 +243,29 @@ defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 # Disable local Time Machine snapshots
 sudo tmutil disable local
 
+defaults write com.apple.TimeMachine AutoBackup -int 1
+# default 3600 = 1 hour backup interval
+#sudo defaults write /System/Library/Launch Daemons/com.apple.backupd-auto StartInterval -int 1800
+
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
+
+# Expanded print options
+defaults write -g PMPrintingExpandedStateForPrint -bool true
+defaults write -g PMPrintingExpandedStateForPrint2 -bool true
+
+# Expand file save dialog
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 
 # ============================================================================ #
 #                                  F i n d e r
 # ============================================================================ #
 
 # TODO: set Finder to columns that are auto-wide
+
+# hide Desktop icons
+#defaults write com.apple.finder CreateDesktop -bool false
 
 # set Desktop as the default location for new Finder windows
 #defaults write com.apple.finder NewWindowTarget -string "PfDe"
@@ -216,6 +276,7 @@ defaults write com.apple.finder NSNavLastRootDirectory -string "file://${HOME}/D
 
 # default to Details view
 defaults write com.apple.finder FXPreferredViewStyle        -string Nlsv
+defaults write com.apple.finder TrashViewSettings -string Nlsv
 defaults write com.apple.finder SearchRecentsSavedViewStyle -string Nlsv
 
 # allow copying from Quick Look preview
@@ -242,6 +303,12 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 # show all filename extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 
+# show the scroll bar all the time
+defaults write NSGlobalDomain AppleShowScrollBars -string WhenScrolling # or Automatic or Always
+
+# close always confirms changes
+defaults write NSGlobalDomain NSCloseAlwaysConfirmsChanges -bool true
+
 # show path bar
 defaults write com.apple.finder ShowPathbar -bool true
 
@@ -262,11 +329,18 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop     -bool true
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+# Don't create .DS_Store files on USB drives - probably don't want this if you use external hard drives a lot
+#defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
 
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder    OpenWindowForNewRemovableDisk -bool true
+
+# Enable 'Quit' menu item in Finder
+#defaults write com.apple.finder QuitMenuItem -bool true
+defaults write com.apple.finder QuitMenuItem -bool false
 
 #killall Finder
 
@@ -278,6 +352,25 @@ defaults write com.apple.finder    OpenWindowForNewRemovableDisk -bool true
 defaults write com.apple.Preview NSQuitAlwaysKeepsWindows -bool true
 
 #killall Preview
+
+# ============================================================================ #
+#                       A u t o m a t i c   U p d a t e s
+# ============================================================================ #
+
+# Auto check for updates
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+
+# Auto download updates in background
+defaults write com.apple.SoftwareUpdate AutomaticDownload -bool true
+
+# Don't install App updates automatically
+defaults write com.apple.commerce AutoUpdate -bool false
+
+# Don't install MacOS updates automatically
+defaults write com.apple.commerce AutoUpdateRestartRequired -bool false
+
+# Don't install Security updates automatically
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -bool false
 
 # ============================================================================ #
 
