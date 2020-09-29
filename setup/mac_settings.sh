@@ -21,6 +21,15 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
+backup_dir="$srcdir/mac_settings"
+
+mkdir -pv "$backup_dir"
+
+backup="$backup_dir/settings-backup-$(date '+%F %H%M%S').json"
+
+echo "backing up mac settings to $backup before applying new settings"
+defaults read > "$backup"
+
 # ============================================================================ #
 
 # References:
