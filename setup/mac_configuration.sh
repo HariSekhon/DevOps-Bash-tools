@@ -53,8 +53,8 @@ defaults write NSGlobalDomain com.apple.sound.beep.flash -bool false
 defaults write com.apple.menuextra.battery ShowPercent -string "YES"
 
 defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM  HH:mm"
-defaults write com.apple.menuextra.clock FlashDateSeparators -int 0
-defaults write com.apple.menuextra.clock IsAnalog -int 0
+defaults write com.apple.menuextra.clock FlashDateSeparators -bool false
+defaults write com.apple.menuextra.clock IsAnalog -bool false
 
 # Remove Shutdown & Restart buttons at login window
 #defaults write com.apple.loginwindow ShutDownDisabled -bool true
@@ -164,16 +164,22 @@ mac_terminal_settings="${mac_terminal_settings/<integer>72</<integer>$LINES<}"
 defaults write com.apple.Terminal "Window Settings" -dict-add Hari "$mac_terminal_settings"
 
 # ============================================================================ #
-#                             S c r e e n s a v e r
+#               S c r e e n s a v e r   &   H o t   C o r n e r s
 # ============================================================================ #
 
-# require password immediately after sleep / screen saver
+# require password after screensaver
 defaults write com.apple.screensaver askForPassword -int 1
-defaults write com.apple.screensaver askForPasswordDelay -int 0
 
-# enable bottom left Hot Corners to activate Screensaver, require password after 5 seconds
+# gives 5 secs grace before requiring password in case you accidentally hit a hot corner
+defaults write com.apple.screensaver askForPasswordDelay -int 5
+
+# bottom left Hot Corner activates Screensaver
 defaults write com.apple.dock wvous-bl-corner -int 5
 defaults write com.apple.dock wvous-bl-modifier -int 0
+
+# top right Hot Corner puts display to sleep
+defaults write com.apple.dock wvous-tr-corner -int 10
+defaults write com.apple.dock wvous-tr-modifier -int 0
 
 # ============================================================================ #
 #                             S c r e e n s h o t s
@@ -241,8 +247,15 @@ defaults write com.apple.dock minimize-to-application -bool false
 #                           M i s c e l l a n e o u s
 # ============================================================================ #
 
+# Use network time
+systemsetup -setusingnetworktime on
+
 # auto-restart after a system freeze
 sudo systemsetup -setrestartfreeze on
+
+# restore windows after reboot
+defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool true
+defaults write -g NSQuitAlwaysKeepsWindows -bool true
 
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
