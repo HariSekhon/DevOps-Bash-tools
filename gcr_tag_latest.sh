@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Tags a given Docker image:tag in Google Cloud Registry as 'latest' without pulling and pushing the docker image
+Tags a given Docker image:tag in Google Container Registry as 'latest' without pulling and pushing the docker image
 
 Requires GCloud SDK to be installed and configured
 "
