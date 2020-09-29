@@ -15,7 +15,7 @@
 
 # Script to diff settings changes and then drop in to the new settings json to explore
 #
-# Speeds up experimentation and key collecting for adjacent script mac_configuration.sh
+# Speeds up experimentation and key collecting for adjacent script mac_settings.sh
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
