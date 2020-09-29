@@ -50,6 +50,12 @@ defaults write NSGlobalDomain AppleMetricUnits -bool true
 defaults write NSGlobalDomain AppleTemperatureUnit -string "Celsius"
 defaults write NSGlobalDomain com.apple.sound.beep.flash -bool false
 
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"
+
+defaults write com.apple.menuextra.clock DateFormat -string "EEE d MMM  HH:mm"
+defaults write com.apple.menuextra.clock FlashDateSeparators -int 0
+defaults write com.apple.menuextra.clock IsAnalog -int 0
+
 # Remove Shutdown & Restart buttons at login window
 #defaults write com.apple.loginwindow ShutDownDisabled -bool true
 #defaults write com.apple.loginwindow RestartDisabled -bool true
