@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: haritest:1.0 stable
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-28 11:45:38 +0100 (Mon, 28 Sep 2020)
@@ -26,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Tags an AWS ECR image with another tag without pulling + pushing the image
 
+If :<tag> isn't given, assumes 'latest'
+
 (this is easier to do on GCP as there is a supported command, hence the reason for this script)
 
 Similar gcr_*.sh scripts exist adjacent for Google Cloud Registry
@@ -33,22 +36,28 @@ Similar gcr_*.sh scripts exist adjacent for Google Cloud Registry
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image> <original_tag> <new_tag>"
+usage_args="<image>:<tag> <new_tag>"
 
 help_usage "$@"
 
-min_args 3 "$@"
+min_args 2 "$@"
 
-image="$1"
-original_tag="$2"
-new_tag="$3"
+image_tag="$1"
+new_tag="$2"
 
-tstamp "getting manifest for '$image:$original_tag'"
-manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageTag=$original_tag" --query 'images[].imageManifest' --output text)"
+image="${image_tag%%:*}"
+tag="${image_tag##*:}"
+if ! [[ "$image_tag" =~ : ]] ||
+   [ "$tag" = "$image" ]; then
+    tag="latest"
+fi
 
-tstamp "tagging image '$image:$original_tag' with new tag '$new_tag'"
+tstamp "getting manifest for image '$image:$tag'"
+manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageTag=$tag" --query 'images[].imageManifest' --output text)"
+
+tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
 aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest"
 
-tstamp "tags for image '$image:$original_tag' are now:"
+tstamp "tags for image '$image:$tag' are now:"
 aws ecr describe-images --repository-name "$image" |
 jq -r '.imageDetails[] | select(.imageTags[] == "latest") | .imageTags[]'
