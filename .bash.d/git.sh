@@ -519,7 +519,7 @@ gitu(){
         pushd "$basedir" >/dev/null || return 1
         if [ -z "$(git diff "${filename##*/}")" ]; then
             popd &>/dev/null || :
-            return 0
+            continue
         fi
         git diff "${filename##*/}"
         echo
