@@ -76,13 +76,9 @@ echo "Loading CCMenu configuration"
 defaults import net.sourceforge.cruisecontrol.CCMenu - < "$PWD/$plist_dir/$plist_file"
 echo
 
-echo "(Re)Starting CCMenu"
-pkill -f "$bin" || :
-echo
-sleep 2
-
-"$bin" &
-
-disown
+echo "Starting CCMenu"
+#"$bin" &
+#disown
+open -a CCMenu
 
 echo "Done"
