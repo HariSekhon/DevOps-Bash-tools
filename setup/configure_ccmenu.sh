@@ -71,6 +71,8 @@ done
 #echo "Copying CCMenu configuration:"
 #cp -vf "$PWD/$plist_dir/$plist_file" ~/"$plist_dir/$plist_file"
 echo "Loading CCMenu configuration"
+# give file or pipe via stdin
+#defaults import net.sourceforge.cruisecontrol.CCMenu "$PWD/$plist_dir/$plist_file"
 defaults import net.sourceforge.cruisecontrol.CCMenu - < "$PWD/$plist_dir/$plist_file"
 echo
 
