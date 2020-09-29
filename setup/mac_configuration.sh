@@ -110,7 +110,7 @@ defaults write com.apple.Terminal "Startup Window Settings" -string "Hari"
 # - MacBook Pro 15" 2018 has 239 x 72
 # - if you're running a 13" Macbook Pro this will be different again, let's infer the size using the current terminal
 # - $LINES and $COLUMNS aren't automatically available in a non-interactive script shell, so if not set fall back to 'tput'
-#   - tput comes out to 80 cols x 70 lines too conservative
+#   - tput falls back to 80 cols x 24 lines - too conservative
 #     - now instead relying on $COLUMNS and $LINES being exported by shell profile .bash.d/env.sh
 #       - this relies on user having already maximized your Terminal window before running this
 COLUMNS="${COLUMNS:-$(tput cols)}"
@@ -262,7 +262,7 @@ defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 # Automatically open a new Finder window when a volume is mounted
 defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
 defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
-defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+defaults write com.apple.finder    OpenWindowForNewRemovableDisk -bool true
 
 #killall Finder
 
