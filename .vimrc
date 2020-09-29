@@ -261,6 +261,9 @@ if has("autocmd")
     au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
     au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
     au BufNew,BufRead *.php        nmap ;l :w<CR>:!clear; php5 -l "%"<CR>
+    " this acts as both a validation as well as a fast way of being able to edit the plist
+    " trying to convert to json results in an error "invalid object in plist for destination format"
+    au BufNew,BufRead *.plist      nmap ;l :w<CR>:!clear; plutil -convert xml1 "%" && echo PList OK<CR>
     au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py "%"<CR>
     au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py "%"<CR>
     au BufNew,BufRead *.md         nmap ;l :w<CR>:!clear; mdl "%" \| more -R<CR>
