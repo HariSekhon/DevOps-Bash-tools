@@ -215,7 +215,10 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 # auto-hide dock
 defaults write com.apple.dock autohide -bool true
-defaults write com.apple.dock static-only -bool true
+
+# hide non-active apps
+# careful this wipes out your Dock and reversing it to false doesn't restore your Dock items
+#defaults write com.apple.dock static-only -bool true
 
 # pop-up instantly
 defaults write com.apple.dock autohide-delay         -float 0  # secs
@@ -228,9 +231,6 @@ defaults write com.apple.dock expose-animation-duration -float 0.12
 # revert to default dock delays
 #defaults delete com.apple.dock autohide-delay
 #defaults delete com.apple.dock autohide-time-modifier
-
-# hide non-active apps
-#defaults write com.apple.dock static-only -bool true
 
 # stop apps saving to iCloud by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
