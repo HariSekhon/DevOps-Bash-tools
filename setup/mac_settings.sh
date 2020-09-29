@@ -287,7 +287,7 @@ defaults write -g NSQuitAlwaysKeepsWindows -bool true
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
 
 # Disable local Time Machine snapshots
-sudo tmutil disable local
+#sudo tmutil disable local
 
 defaults write com.apple.TimeMachine AutoBackup -int 1
 # default 3600 = 1 hour backup interval
