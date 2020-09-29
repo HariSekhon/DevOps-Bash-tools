@@ -32,7 +32,7 @@ backup_dir="$srcdir/mac_settings"
 
 mkdir -pv "$backup_dir"
 
-backup="$backup_dir/settings-backup-$(date '+%F %H%M%S').json"
+backup="$backup_dir/settings-backup-$(date '+%F_%H%M%S')-$HOSTNAME.json"
 
 echo "backing up mac settings to $backup before applying new settings"
 defaults read > "$backup"
