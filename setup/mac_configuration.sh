@@ -168,7 +168,7 @@ defaults write com.apple.Terminal "Window Settings" -dict-add Hari "$mac_termina
 # ============================================================================ #
 
 # require password after screensaver
-defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPassword -bool true
 
 # gives 5 secs grace before requiring password in case you accidentally hit a hot corner
 defaults write com.apple.screensaver askForPasswordDelay -int 5
