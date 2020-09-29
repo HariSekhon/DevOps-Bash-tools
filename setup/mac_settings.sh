@@ -83,8 +83,17 @@ defaults write com.apple.menuextra.clock IsAnalog -bool false
 # disable annoying crash prompt
 defaults write com.apple.CrashReporter DialogType none  # set to 'prompt' to restore
 
-# disable dashboar widgets (saves RAM)
+# disable dashboard widgets (saves RAM)
 defaults write com.apple.dashboard mcx-disabled -boolean true
+
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.TimeMachine" -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.airport"     -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.appleuser"   -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.battery"     -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.bluetooth"   -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.volume"      -bool true
+defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextra.clock"       -bool true
+
 
 # ============================================================================ #
 #                                K e y b o a r d
