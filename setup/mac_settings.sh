@@ -21,6 +21,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
+# ============================================================================ #
+#                  B a c k u p   B e f o r e   A p p l y i n g
+# ============================================================================ #
+
+# If you do mess something up, you can also go in to Time Machine and get the ~/Library/Preferences/ plist back,
+# 'defaults import' it and then restart the daemons
+
 backup_dir="$srcdir/mac_settings"
 
 mkdir -pv "$backup_dir"
@@ -217,7 +224,8 @@ defaults write com.apple.screencapture disable-shadow -bool true
 defaults write com.apple.dock autohide -bool true
 
 # hide non-active apps
-# careful this wipes out your Dock and reversing it to false doesn't restore your Dock items
+# XXX: careful this wipes out your Dock and reversing it to false doesn't restore your Dock items
+# If you mess up your Dock it is difficult to regenerate programmatically, so I suggest you go in to Time Machine and get the ~/Library/Preferences/com.apple.dock.plist back, 'defaults import' and then killall Dock to get back your icons
 #defaults write com.apple.dock static-only -bool true
 
 # pop-up instantly
