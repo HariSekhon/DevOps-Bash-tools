@@ -107,7 +107,7 @@ linux-desktop: desktop
 
 .PHONY:
 ccmenu:
-	@setup/configure_ccmenu.sh
+	@setup/ccmenu_setup.sh
 
 .PHONY: desktop
 desktop: install
