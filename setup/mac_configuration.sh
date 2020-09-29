@@ -214,6 +214,10 @@ defaults write com.apple.finder NewWindowTarget -string "PfLo"
 defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/Downloads/"
 defaults write com.apple.finder NSNavLastRootDirectory -string "file://${HOME}/Downloads/"
 
+# default to Details view
+defaults write com.apple.finder FXPreferredViewStyle        -string Nlsv
+defaults write com.apple.finder SearchRecentsSavedViewStyle -string Nlsv
+
 # allow copying from Quick Look preview
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
