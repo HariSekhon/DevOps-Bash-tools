@@ -30,6 +30,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # 3. defaults read > settings2.json
 # 4. diff settings.json settings2.json
 
+# This process is automated using the adjacent mac_diff_settings.sh which saves copies of the before and after configs
+# and diffs them, before dropping in to the new config to explore the full settings paths
+
 # ============================================================================ #
 #                                T r a c k p a d
 # ============================================================================ #
