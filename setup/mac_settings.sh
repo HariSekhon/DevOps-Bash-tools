@@ -248,7 +248,7 @@ defaults write com.apple.dock minimize-to-application -bool false
 # ============================================================================ #
 
 # Use network time
-systemsetup -setusingnetworktime on
+sudo systemsetup -setusingnetworktime on
 
 # auto-restart after a system freeze
 sudo systemsetup -setrestartfreeze on
