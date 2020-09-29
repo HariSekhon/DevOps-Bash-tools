@@ -40,6 +40,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # which saves copies of the before and after configs and diffs them,
 # before dropping in to the new config to explore the full settings paths
 
+# "Apple Global Domain" === NSGlobalDomain
 defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
@@ -62,6 +63,17 @@ defaults write com.apple.CrashReporter DialogType none  # set to 'prompt' to res
 
 # disable dashboar widgets (saves RAM)
 defaults write com.apple.dashboard mcx-disabled -boolean true
+
+# ============================================================================ #
+#                                K e y b o a r d
+# ============================================================================ #
+
+# fast keyboard repeat and low delay
+defaults write NSGlobalDomain InitialKeyRepeat -int 10
+defaults write NSGlobalDomain KeyRepeat -int 1
+
+# make Fn key show hotkeys in touch bar on newer Macs
+defaults write com.apple.touchbar.agent.PresentationModeFnModes.appWithControlStrip -string fullControlStrip
 
 # ============================================================================ #
 #                                T r a c k p a d
@@ -114,17 +126,6 @@ defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true
 
 # Maximize window when double clicking the bar
 defaults write NSGlobalDomain AppleActionOnDoubleClick -string Maximize
-
-# ============================================================================ #
-#                                K e y b o a r d
-# ============================================================================ #
-
-# "Apple Global Domain" === NSGlobalDomain
-defaults write NSGlobalDomain InitialKeyRepeat -int 12
-defaults write NSGlobalDomain KeyRepeat -int 1
-
-# make Fn key show hotkeys in touch bar on newer Macs
-defaults write com.apple.touchbar.agent.PresentationModeFnModes.appWithControlStrip -string fullControlStrip
 
 # ============================================================================ #
 #                                T e r m i n a l
