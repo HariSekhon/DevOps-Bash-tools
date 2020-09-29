@@ -31,7 +31,7 @@ If :<tag> isn't given, assumes 'latest'
 
 (this is easier to do on GCP as there is a supported command, hence the reason for this script)
 
-Similar gcr_*.sh scripts exist adjacent for Google Cloud Registry
+Similar gcr_*.sh scripts exist adjacent for Google Container Registry
 "
 
 # used by usage() in lib/utils.sh
