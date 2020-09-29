@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists all tags for the given Google Cloud Registry docker image
+Lists all tags for the given Google Container Registry docker image
 
 Each tag for the given image is output on a separate line for easy further piping and filtering
 
