@@ -332,7 +332,9 @@ etc.
   - see also the [Kubernetes templates](https://github.com/HariSekhon/Kubernetes-templates) repo
 - `docker_*.sh` / `dockerhub_*.sh` - [Docker](https://www.docker.com/) / [DockerHub](https://hub.docker.com/) API scripts:
   - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
-  - `docker_api.sh` - queries a Docker registry with optional basic authentication if `$DOCKER_USER` & `$DOCKER_PASSWORD` are set
+  - `docker_api.sh` - queries a Docker Registry with optional basic authentication if `$DOCKER_USER` & `$DOCKER_PASSWORD` are set
+  - `docker_registry_list_images.sh` - lists images in a given private Docker Registry
+  - `docker_show_tags.sh` - lists tags for a given image in a private Docker Registry
   - `dockerhub_show_tags.sh` - lists tags for a given DockerHub repo. See also [dockerhub_show_tags.py](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/dockerhub_show_tags.py) in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo.
   - `dockerhub_show_tags_by_last_updated.sh` - lists tags for a given DockerHub repo sorted by last updated timestamp descending
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
