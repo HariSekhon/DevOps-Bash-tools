@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Deletes all cron jobs for the given Travis CI repo
+Deletes all caches for the given Travis CI repo
 
 Uses the adjacent travis_*.sh scripts
 "
