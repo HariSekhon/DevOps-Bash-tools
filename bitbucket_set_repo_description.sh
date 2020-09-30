@@ -73,7 +73,7 @@ set_repo_description(){
         repo="$bitbucket_user/$repo"
     fi
 
-    timestamp "setting BitBucket repo '$repo' description to '$description'" >&2
+    timestamp "setting BitBucket repo '$repo' description to '$description'"
 
     #description="$("$srcdir/urlencode.sh" <<< "$description")"
 
