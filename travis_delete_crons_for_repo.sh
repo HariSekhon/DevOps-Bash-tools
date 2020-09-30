@@ -38,6 +38,7 @@ min_args 1 "$@"
 
 repo="$1"
 
+timestamp "Deleting all cron jobs for repo '$repo'"
 while read -r cron_id rest; do
     "$srcdir/travis_delete_cron.sh" "$cron_id"
 done < <("$srcdir/travis_repo_crons.sh" "$repo")
