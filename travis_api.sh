@@ -95,6 +95,13 @@ ${0##*/} /jobs
 ${0##*/} /repo/<user>%2F<repo>/settings
 
 ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/settings
+
+
+# List caches for a repository:
+
+${0##*/} /repo/<user>%2F<repo>/caches
+
+${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/caches
 "
 
 # used by usage() in lib/utils.sh
