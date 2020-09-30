@@ -41,4 +41,5 @@ cron_id="$1"
 
 url_path="/crons/$cron_id"
 
+timestamp "deleting Travis CI cron job '$cron_id'" >&2
 "$srcdir/travis_api.sh" "$url_path" -X DELETE
