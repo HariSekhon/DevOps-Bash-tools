@@ -41,7 +41,7 @@ Example:
     ${0##*/} https://hub.docker.com harisekhon/hbase
 
 
-If the registry given is hub.docker.com, calls dockerhub_show_tags.sh
+If the registry given is hub.docker.com, calls dockerhub_list_tags.sh
 "
 
 # used by usage() in lib/utils.sh
@@ -59,7 +59,7 @@ shift || :
 
 if [[ "$registry" =~ hub.docker.com ]]; then
     # calling this unifies the logic around prefixing library/ to official images and takes care of the differing paths between Docker Registry API and DockerHub APIs
-    exec "$srcdir/dockerhub_show_tags.sh" "$image" "$@"
+    exec "$srcdir/dockerhub_list_tags.sh" "$image" "$@"
 fi
 
 # now we only have to deal with Docker Registry API
