@@ -34,7 +34,7 @@ Uses the adjacent travis_api.sh script
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="<repo>"
 
 help_usage "$@"
 
