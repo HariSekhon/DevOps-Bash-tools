@@ -46,6 +46,10 @@ Examples:
 # Get all the tags for a given repository called 'harisekhon/hbase' on DockerHub's public registry:
 
 ${0##*/} https://hub.docker.com/v2/repositories/harisekhon/hbase/tags
+
+
+For authenticated queries against DockerHub which requires a more complicated OAuth or JWT workflow
+rather than basic authentication, use instead the adjacent 'dockerhub_api.sh' script
 "
 
 # used by usage() in lib/utils.sh
