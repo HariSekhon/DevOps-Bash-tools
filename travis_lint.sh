@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lints the local .travis.yml using the Travis CI API
 
+For production CI see instead the 'travis' gem and the adjacent script 'check_travis_yml.sh'
+
 Uses the adjacent travis_api.sh script
 "
 
