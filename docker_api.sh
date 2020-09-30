@@ -75,8 +75,12 @@ shift || :
 
 if [[ "$url" =~ hub.docker.com ]]; then
     "$srcdir/dockerhub_api.sh" "$url" "$@"
-else
+elif [ -n "${PASSWORD:-}" ]; then
     # want splitting
     # shellcheck disable=SC2086
     "$srcdir/curl_auth.sh" "$url" "$@" $CURL_OPTS
+else
+    # want splitting
+    # shellcheck disable=SC2086
+    curl "$url" "$@" $CURL_OPTS
 fi
