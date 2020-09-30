@@ -335,7 +335,7 @@ etc.
   - `docker_api.sh` - queries a Docker Registry with optional basic authentication if `$DOCKER_USER` & `$DOCKER_PASSWORD` are set
   - `docker_registry_list_images.sh` - lists images in a given private Docker Registry
   - `docker_registry_list_tags.sh` - lists tags for a given image in a private Docker Registry
-  - `docker_registry_get_manifest.sh` - gets a given image:tag manifest from a private Docker Registry
+  - `docker_registry_get_image_manifest.sh` - gets a given image:tag manifest from a private Docker Registry
   - `docker_registry_tag_image.sh` - tags a given image with a new tag in a private Docker Registry via the API without pulling and pushing the image data (must faster and more efficient)
   - `dockerhub_list_tags.sh` - lists tags for a given DockerHub repo. See also [dockerhub_show_tags.py](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/dockerhub_show_tags.py) in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo.
   - `dockerhub_list_tags_by_last_updated.sh` - lists tags for a given DockerHub repo sorted by last updated timestamp descending
