@@ -41,13 +41,7 @@ next="/repos"
 get_repos(){
     local url_path="$1"
     local output
-    if [ -n "${DEBUG:-}" ]; then
-        timestamp "getting $url_path"
-    fi
     output="$("$srcdir/travis_api.sh" "$url_path")"
-    if [ -n "${DEBUG:-}" ]; then
-        jq . <<< "$output"
-    fi
     jq -r '.repositories[] | select(.active == true) | .slug' <<< "$output"
     next="$(jq -r '.["@pagination"].next["@href"]' <<< "$output")"
 }
