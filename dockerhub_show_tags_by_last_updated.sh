@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists tags for a given DockerHub image using the DockerHub API, sorted by last updated timestamp descending
+Lists tags for a given DockerHub image using the DockerHub API, sorted by last updated timestamp descending (newest at the top)
 
 Example:
 
