@@ -48,13 +48,7 @@ next="/repo/$repo/crons"
 get_crons(){
     local url_path="$1"
     local output
-    if [ -n "${DEBUG:-}" ]; then
-        timestamp "getting $url_path"
-    fi
     output="$("$srcdir/travis_api.sh" "$url_path")"
-    if [ -n "${DEBUG:-}" ]; then
-        jq . <<< "$output"
-    fi
     jq -r '.crons[] | [.id, .branch.name, .interval, .created_at, .last_run, .next_run] | @tsv' <<< "$output"
     next="$(jq -r '.["@pagination"].next["@href"]' <<< "$output")"
 }
