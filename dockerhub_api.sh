@@ -45,6 +45,9 @@ API Reference:
 
 https://docs.docker.com/registry/spec/api/
 
+DockerHub doesn't respect a lot of the Docker Registry API spec, eg. .../_catalog and .../tags/list both don't work and get 404s,
+so may need to experiment more than with your own private docker registry
+
 
 Examples:
 
@@ -78,8 +81,11 @@ export PASSWORD
 url_path="$1"
 shift || :
 
-url_path="${url_path#https:\/\/registry.hub.docker.com\/v2}"
-url_path="${url_path#https:\/\/hub.docker.com\/v2}"
+url_path="${url_path#https:\/\/registry.hub.docker.com}"
+url_path="${url_path#https:\/\/hub.docker.com}"
+# replace // with /
+url_path="${url_path//\/\/\//\/}"
+url_path="${url_path#/v2}"
 url_path="${url_path##/}"
 
 # need CURL_OPTS splitting, safer than eval
