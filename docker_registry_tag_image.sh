@@ -61,6 +61,6 @@ if ! [[ "$image_tag" =~ : ]] &&
     tag="latest"
 fi
 
-manifest="$("$srcdir/docker_registry_get_manifest.sh" "$docker_registry_url" "$image_tag" -H "Accept: application/vnd.docker.distribution.manifest.v2+json")"
+manifest="$("$srcdir/docker_registry_get_image_manifest.sh" "$docker_registry_url" "$image_tag")"
 
 "$srcdir/docker_api.sh" "$docker_registry_url/v2/$image/manifests/$new_tag" -X PUT -d "$manifest" -H "Content-Type: application/vnd.docker.distribution.manifest.v2+json"
