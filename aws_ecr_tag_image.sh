@@ -47,7 +47,7 @@ new_tag="$2"
 
 image="${image_tag%%:*}"
 tag="${image_tag##*:}"
-if ! [[ "$image_tag" =~ : ]] ||
+if ! [[ "$image_tag" =~ : ]] &&
    [ "$tag" = "$image" ]; then
     tag="latest"
 fi
