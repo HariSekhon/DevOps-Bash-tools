@@ -32,7 +32,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Tool to list the images available in a private Docker Registry using the Docker Registry API v2
+Lists the images available in a private Docker Registry using the Docker Registry API v2
 
 See adjacent docker_api.sh for authentication details
 "
