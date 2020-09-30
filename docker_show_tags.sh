@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: https://hub.docker.com/v2/repositories/library/centos
+#  args: localhost:5000 centos
+#  args: https://hub.docker.com centos
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-30 11:08:01 +0100 (Wed, 30 Sep 2020)
@@ -27,53 +28,42 @@ Lists tags for a given Docker Registry image using the Docker Registry API
 
 Example:
 
-Official images must be prefixed with 'library/':
+    ${0##*/} localhost:5000 centos
 
-    ${0##*/} https://hub.docker.com/v2/repositories/library/centos
+    ${0##*/} localhost:5000 ubuntu
 
-    ${0##*/} https://hub.docker.com/v2/repositories/library/ubuntu
+    ${0##*/} localhost:5000 harisekhon/hbase
 
-User images are prefixed with '<username>/':
+    ${0##*/} https://hub.docker.com centos
 
-    ${0##*/} https://hub.docker.com/v2/repositories/harisekhon/hbase
+    ${0##*/} https://hub.docker.com ubuntu
+
+    ${0##*/} https://hub.docker.com harisekhon/hbase
 
 
-See also:
-
-- dockerhub_show_tags.sh:
-
-    ddockerhub_show_tags.sh harisekhon/hbase
-
-- Skopeo:
-
-    skopeo inspect docker://harisekhon/hbase | jq -r '.RepoTags[]'
+If the registry given is hub.docker.com, calls dockerhub_show_tags.sh
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="https://host:port/v2/repository/<repo>/<image> [<curl_options>]"
+usage_args="https://host:port <image> [<curl_options>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+min_args 2 "$@"
 
-url="$1"
+registry="$1"
+image="$2"
+shift || :
 shift || :
 
-get_tags(){
-    local url="$1"
-    local output
-    shift || :
-    output="$("$srcdir/docker_api.sh" "$url" "$@")"
-    tags="$(jq -r '.results[].name' <<< "$output")"
-    if [ -z "$tags" ]; then
-        die "no tags returned for url '$url'"
-    fi
-    echo "$tags"
-    next="$(jq -r .next <<< "$output")"
-    if [ -n "$next" ] && [ "$next" != null ]; then
-        get_tags "$next"
-    fi
-}
+if [[ "$registry" =~ hub.docker.com ]]; then
+    # calling this unifies the logic around prefixing library/ to official images and takes care of the differing paths between Docker Registry API and DockerHub APIs
+    exec "$srcdir/dockerhub_show_tags.sh" "$image" "$@"
+fi
 
-get_tags "$url/tags" "$@"
+# now we only have to deal with Docker Registry API
+url="$registry/v2/$image/tags/list"
+
+"$srcdir/docker_api.sh" "$url" "$@" |
+jq -r '.tags[]'
