@@ -420,7 +420,7 @@ etc.
   - `github_repos_sync_status.sh` - determines whether each GitHub repo has an in-sync GitLab and BitBucket repo by querying all 3 APIs for the master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
-  - `gitlab_get_user_ssh_public_key.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `gitlab_get_user_ssh_public_keys.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
