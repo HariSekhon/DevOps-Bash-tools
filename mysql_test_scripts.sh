@@ -66,6 +66,9 @@ If no script files are given as arguments, then searches \$PWD for scripts named
 
 mysql*.sql
 *.mysql
+
+
+Tested on MySQL 5.5, 5.6, 5.7, 8.0
 "
 
 # used by usage() in lib/utils.sh

@@ -220,12 +220,13 @@ skip_max_version(){
         max_version="${max_version//[[:space:]]}"
         is_float "$max_version" || die "code error: non-float '$max_version' parsed in skip_max_version()"
         skip_msg="skipping script '$sql_file' due to max required version <$inclusive $max_version"
+        # we can't know if the latest version has moved beyond the max version, so assume it has to be safe and return true to skip
         if [ "$version" = latest ]; then
             timestamp "$skip_msg"
             return 0
         fi
         is_float "$version" || die "code error: non-float '$version' passed to skip_max_version()"
-        if [ "$inclusive" = 1 ]; then
+        if [ -n "$inclusive" ]; then
             if bc_bool "$version > $max_version"; then
                 timestamp "$skip_msg"
                 return 0

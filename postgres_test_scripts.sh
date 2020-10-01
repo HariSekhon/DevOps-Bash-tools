@@ -57,6 +57,7 @@ postgres_versions="
 12.2
 12.3
 12.4
+13.0
 latest
 "
 
@@ -94,6 +95,9 @@ If no script files are given as arguments, then searches \$PWD for scripts named
 
 postgres*.sql
 *.psql
+
+
+Tested on PostgreSQL 8.4, 9.x, 10.x, 11.x, 12.x, 13.0
 "
 
 # used by usage() in lib/utils.sh
