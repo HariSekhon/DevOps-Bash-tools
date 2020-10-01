@@ -22,6 +22,11 @@ Fetches a GitLab user's public SSH key(s) via the GitLab API
 
 User can be given as first argument, otherwise falls back to using environment variables \$GITLAB_USER or \$USER
 
+SSH Keys can be found in the Web UI here:
+
+    https://gitlab.com/profile/keys
+
+
 ${0##*/} <user>
 EOF
     exit 3
