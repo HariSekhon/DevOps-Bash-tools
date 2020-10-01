@@ -100,8 +100,8 @@ defaults write com.apple.systemuiserver "NSStatusItem Visible com.apple.menuextr
 # ============================================================================ #
 
 # fast keyboard repeat and low delay
-defaults write NSGlobalDomain InitialKeyRepeat -int 10
-defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
 
 # make Fn key show hotkeys in touch bar on newer Macs
 defaults write com.apple.touchbar.agent.PresentationModeFnModes.appWithControlStrip -string fullControlStrip
