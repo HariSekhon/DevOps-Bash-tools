@@ -47,7 +47,7 @@ usage_args="<ssh_public_key_file> [<ssh_public_key_file2>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
 # this doc is wrong, doesn't accept either account id or uuid, but does accept username
 #
