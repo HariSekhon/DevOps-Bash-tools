@@ -23,11 +23,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
+# shellcheck disable=SC1090
 . "$srcdir/lib/travis.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Shows the caches for a given Travis CI repo in JSON format
+
+If no repo is given, then tries to determine the repo name from the local git remote url
 
 If the repo doesn't have a user / organization prefix, then queries
 the Travis CI API for the currently authenticated username first
@@ -41,10 +46,14 @@ usage_args="[<user>/]<repo> [<curl_options>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-repo="$1"
+repo="${1:-}"
 shift || :
+
+if [ -z "$repo" ]; then
+    repo="$(git_repo)"
+fi
 
 repo="$(travis_prefix_encode_repo "$repo")"
 
