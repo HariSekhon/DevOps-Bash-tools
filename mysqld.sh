@@ -67,6 +67,9 @@ Options to the 'mysql' shell command can be given using the \$MYSQL_OPTS environ
 
 Automatically creates shared bind mount points from host to container for convenience:
 $shell_description
+
+
+Tested on MySQL 5.5, 5.6, 5.7, 8.0
 "
 
 # used by usage() in lib/utils.sh
