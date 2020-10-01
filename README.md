@@ -430,8 +430,8 @@ etc.
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
   - `bitbucket_foreach_repo.sh` - executes a templated command for each BitBucket repo, replacing the `{user}` and `{repo}` in each iteration
   - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
-  - `bitbucket_get_user_ssh_public_keys.sh` - fetches the currently authenticated user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
-  - `bitbucket_add_ssh_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account (can be chained with adjacent tools which get the SSH keys from GitHub / GitLab)
+  - `bitbucket_get_ssh_public_keys.sh` - fetches the currently authenticated user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `bitbucket_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account (can be chained with adjacent tools which get the SSH keys from GitHub / GitLab)
 - `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
