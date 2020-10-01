@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: DevOps-Bash-tools
 #  args: HariSekhon/DevOps-Bash-tools
 #
 #  Author: Hari Sekhon
@@ -21,34 +22,45 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/travis.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists all crons for a given Travis CI repo using the Travis CI API
 
+
 Output Format:
 
 <id>    <branch>    <interval>    <created_at>    <last_run>    <next_run>
+
+
+If the repo doesn't have a user / organization prefix, then queries
+the Travis CI API for the currently authenticated username first
 
 Uses the adjacent travis_api.sh script
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo>"
+usage_args="[<user>/]<repo> [<curl_options>]"
 
 help_usage "$@"
 
 min_args 1 "$@"
 
 repo="$1"
-repo="${repo//\//%2F}"
+shift || :
+
+repo="$(travis_prefix_encode_repo "$repo")"
 
 next="/repo/$repo/crons"
 
 get_crons(){
     local url_path="$1"
+    shift || :
     local output
-    output="$("$srcdir/travis_api.sh" "$url_path")"
+    output="$("$srcdir/travis_api.sh" "$url_path" "$@")"
     jq -r '.crons[] | [.id, .branch.name, .interval, .created_at, .last_run, .next_run] | @tsv' <<< "$output"
     next="$(jq -r '.["@pagination"].next["@href"]' <<< "$output")"
 }
@@ -56,5 +68,5 @@ get_crons(){
 # iterate over all next hrefs to get through all pages of crons
 while [ -n "$next" ] &&
       [ "$next" != null ]; do
-    get_crons "$next"
+    get_crons "$next" "$@"
 done
