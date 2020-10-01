@@ -29,6 +29,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Deletes all caches for the given Travis CI repo
 
+If no repo is given, then tries to determine the repo name from the local git remote url
+
 If the repo doesn't have a user / organization prefix, then queries
 the Travis CI API for the currently authenticated username first
 
@@ -41,9 +43,9 @@ usage_args="[<user>/]<repo> [<curl_options>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-repo="$1"
+repo="${1:-}"
 shift || :
 
 repo="$(travis_prefix_encode_repo "$repo")"
