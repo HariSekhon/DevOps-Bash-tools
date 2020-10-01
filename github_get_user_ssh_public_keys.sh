@@ -14,12 +14,13 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+#srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 usage(){
     cat <<EOF
 Fetches a GitHub user's public SSH key(s) via the GitHub API
 
-User can be given as first argument, or environment variables \$GITHUB_USER or \$USER
+User can be given as first argument, otherwise falls back to using environment variables \$GITHUB_USER or \$USER
 
 ${0##*/} <user>
 EOF
@@ -49,7 +50,14 @@ else
     usage
 fi
 
+# XXX: not handling paging because if you have > 100 SSH keys I want to know what is going on first!
 echo "# Fetching SSH Public Key(s) from GitHub for account:  $user" >&2
 echo "#" >&2
-curl -sS --fail "https://api.github.com/users/$user/keys" |
+#if [ "$user" = "${GITHUB_USER:-}" ]; then
+#    # authenticated query for simpler endpoint with more information doesn't work
+#    # gets 404 even though /user works and is clearly authenticated - are the API docs wrong?
+#    "$srcdir/github_api.sh" "/user/keys" -H "Accept: application/vnd.github.v3+json" |
+#else
+    curl -sS --fail "https://api.github.com/users/$user/keys" |
+#fi |
 jq -r '.[].key'
