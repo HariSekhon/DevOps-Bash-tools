@@ -71,6 +71,9 @@ mysql*.sql
 maria*.sql
 mariadb*.sql
 *.mysql
+
+
+Tested on MariaDB 5.5, 10.0 - 10.5
 "
 
 # used by usage() in lib/utils.sh
