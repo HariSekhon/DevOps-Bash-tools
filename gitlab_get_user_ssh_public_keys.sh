@@ -14,7 +14,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+#srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 usage(){
     cat <<EOF
@@ -54,12 +54,13 @@ fi
 
 echo "# Fetching SSH Public Key(s) from GitLab for account:  $user" >&2
 echo "#" >&2
-shopt -s nocasematch
+# authenticated query is not necessary, gets more information than GitHub regardless, which I use to add standard SSH key description suffix back (useful if loading these keys to other systems to know what their descriptions are)
+#shopt -s nocasematch
 # case insensitive matching requires [[
-if [[ "$user" == "${GITHUB_USER:-}" ]]; then
-    # authenticated query gets more information which I use to add standard SSH key description suffix back (useful if loading these keys to other systems to know what their descriptions are)
-    "$srcdir/gitlab_api.sh" "/user/keys"
-else
-    curl -sS --fail "https://gitlab.com/api/v4/users/$user/keys"
-fi |
+#if [[ "$user" == "a${GITHUB_USER:-}" ]]; then
+    # authenticated query
+#    "$srcdir/gitlab_api.sh" "/user/keys"
+#else
+    curl -sS --fail "https://gitlab.com/api/v4/users/$user/keys" |
+#fi |
 jq -r '.[] | [.key, .title] | @tsv'
