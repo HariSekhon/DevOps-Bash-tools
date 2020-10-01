@@ -22,6 +22,11 @@ Fetches a GitHub user's public SSH key(s) via the GitHub API
 
 User can be given as first argument, otherwise falls back to using environment variables \$GITHUB_USER or \$USER
 
+SSH Keys can be found in the Web UI here:
+
+    https://github.com/settings/keys
+
+
 ${0##*/} <user>
 EOF
     exit 3
