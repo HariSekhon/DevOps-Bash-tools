@@ -29,6 +29,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Add a cron job to a given Travis CI repo using the Travis CI API
 
+Since you can only have 1 cronjob per branch per repo, this overwrites any existing cron on that branch
+
 If no repo is given, then tries to determine the repo name from the local git remote url
 
 If the repo doesn't have a user / organization prefix, then queries
