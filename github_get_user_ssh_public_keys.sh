@@ -51,6 +51,7 @@ else
 fi
 
 # XXX: not handling paging because if you have > 100 SSH keys I want to know what is going on first!
+
 echo "# Fetching SSH Public Key(s) from GitHub for account:  $user" >&2
 echo "#" >&2
 #if [ "$user" = "${GITHUB_USER:-}" ]; then
