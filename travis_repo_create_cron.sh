@@ -40,6 +40,8 @@ branch              - defaults to 'master'
 interval            - defaults to 'monthly'. Options: daily, weekly, monthly
 recent_dont_rerun   - boolean, defaults to 'true'. Don't run cron job if a build has occurred in the last 24 hours. Set to 0 or 'false' to disable this, any other value is taken as 'true'
 
+Prints the JSON of the cron it just created showing all the details
+
 Uses the adjacent travis_api.sh script
 "
 
