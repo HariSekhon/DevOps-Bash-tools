@@ -51,10 +51,6 @@ help_usage "$@"
 repo="${1:-}"
 shift || :
 
-if [ -z "$repo" ]; then
-    repo="$(git_repo)"
-fi
-
 repo="$(travis_prefix_encode_repo "$repo")"
 
 "$srcdir/travis_api.sh" "/repo/$repo/caches" "$@"
