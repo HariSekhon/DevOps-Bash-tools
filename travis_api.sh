@@ -119,7 +119,7 @@ help_usage "$@"
 min_args 1 "$@"
 
 url_path="${1:-}"
-shift
+shift || :
 
 url_path="${url_path//https:\/\/api.travis-ci.org}"
 url_path="${url_path##/}"
@@ -130,4 +130,4 @@ export CURL_AUTH_HEADER="Authorization: token"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "$@" $CURL_OPTS "$@"
