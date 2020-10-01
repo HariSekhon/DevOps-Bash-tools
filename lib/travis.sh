@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+. "$libdir/git.sh"
+
 get_travis_user(){
     "$libdir/../travis_api.sh" /user | jq -r '.login'
 }
@@ -38,7 +41,10 @@ travis_url_encode_repo(){
 }
 
 travis_prefix_encode_repo(){
-    local repo="$1"
+    local repo="${1:-}"
+    if [ -z "$repo" ]; then
+        repo="$(git_repo)"
+    fi
     repo="$(travis_prefix_repo "$repo")"
     repo="$(travis_url_encode_repo "$repo")"
     echo "$repo"
