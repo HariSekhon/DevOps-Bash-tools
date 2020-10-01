@@ -342,7 +342,18 @@ etc.
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
   - see also the [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo
 - `quay.io_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
-- `travis_api.sh` - queries the [Travis CI](https://travis-ci.org/) API with `$TRAVIS_TOKEN` (one of my all-time favourite CI systems)
+- `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
+  - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
+  - `travis_repos.sh` - lists Travis CI repos
+  - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
+  - `travis_repo_caches.sh` - lists caches for a given repo
+  - `travis_repo_crons.sh` - lists crons for a given repo
+  - `travis_repo_env_vars.sh` - lists environment variables for a given repo
+  - `travis_repo_create_cron.sh` - creates a cron for a given repo and branch
+  - `travis_repo_delete_crons.sh` - deletes all crons for a given repo
+  - `travis_repo_delete_caches.sh` - deletes all caches for a given repo (sometimes clears build problems)
+  - `travis_delete_cron.sh` - deletes a Travis CI cron by ID
+  - `travis_lint.sh` - lints a given `.travis.yml` using the API
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
