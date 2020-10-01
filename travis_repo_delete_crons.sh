@@ -36,7 +36,7 @@ Uses the adjacent travis_*.sh scripts
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<user/]<repo> [<curl_options>]"
+usage_args="[<user>/]<repo> [<curl_options>]"
 
 help_usage "$@"
 
