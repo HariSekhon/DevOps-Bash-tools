@@ -41,5 +41,5 @@ while read -r ssh_key; do
     echo "ensuring correct 0600 permissions applied to $authorized_keys"
     chmod 0600 "$authorized_keys"
     echo
-done < <("$srcdir/../github_get_user_ssh_public_key.sh")
+done < <("$srcdir/../github_get_user_ssh_public_keys.sh")
 echo Done
