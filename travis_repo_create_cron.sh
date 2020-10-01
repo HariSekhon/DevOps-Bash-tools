@@ -29,14 +29,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Add a cron job to a given Travis CI repo using the Travis CI API
 
+If no repo is given, then tries to determine the repo name from the local git remote url
+
+If the repo doesn't have a user / organization prefix, then queries
+the Travis CI API for the currently authenticated username first
+
 Args:
 
 branch              - defaults to 'master'
 interval            - defaults to 'monthly'. Options: daily, weekly, monthly
 recent_dont_rerun   - boolean, defaults to 'true'. Don't run cron job if a build has occurred in the last 24 hours. Set to 0 or 'false' to disable this, any other value is taken as 'true'
-
-If the repo doesn't have a user / organization prefix, then queries
-the Travis CI API for the currently authenticated username first
 
 Uses the adjacent travis_api.sh script
 "
@@ -47,9 +49,9 @@ usage_args="[<user>/]<repo> [<branch>] [<interval>] [<recent_dont_rerun>] [<curl
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-repo="$1"
+repo="${1:-}"
 branch="${2:-master}"
 interval="${3:-monthly}"
 recent_dont_rerun="${4:-true}"
