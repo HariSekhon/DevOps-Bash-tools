@@ -62,6 +62,9 @@ else
     user="$("$srcdir/bitbucket_api.sh" "/user" | jq -r '.username')"
 fi
 
+echo "# Getting existing SSH public keys to skip any keys that already exist (to avoid 400 errors)" >&2
+ssh_public_keys="$("$srcdir/bitbucket_get_ssh_public_keys.sh")"
+
 add_ssh_public_keys_from_file(){
     local public_key_file="$1"
     if [ "$public_key_file" = "-" ]; then
@@ -75,6 +78,11 @@ add_ssh_public_keys_from_file(){
 
 add_ssh_public_key(){
     local public_key="$1"
+    key="$(awk '{print $1" "$2}' <<< "$public_key")"
+    if grep -Fq "$key" <<< "$ssh_public_keys"; then
+        timestamp "SSH public key already exists, skipping: '$public_key'"
+        return
+    fi
     timestamp "adding SSH public key to currently authenticated BitBucket account: '$public_key'"
     # comment field will be populated from the key comment suffix, label is for the UI (which defaults to the comment otherwise but leaves the label field blank)
     # however, if I load someone else's public key or pipe from another download script, we certainly don't want it misleadingly marking the key as belonging to this machine, so more accurate to just rely on the SSH key comment
