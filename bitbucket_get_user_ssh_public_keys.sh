@@ -24,6 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Gets the currently authenticated user's SSH key(s) for the BitBucket.org account via the BitBucket API
 
+SSH Keys can be found in the Web UI here:
+
+    https://bitbucket.org/account/settings/ssh-keys/
+
 If \$BITBUCKET_USER is not set, then first queries the BitBucket API to determine this first
 
 Uses the adjacent script bitbucket_api.sh, see there for authentication details
