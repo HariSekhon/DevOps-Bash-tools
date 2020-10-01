@@ -322,7 +322,7 @@ defaults write com.apple.finder NSNavLastRootDirectory -string "file://${HOME}/D
 
 # default to Details view
 defaults write com.apple.finder FXPreferredViewStyle        -string Nlsv
-defaults write com.apple.finder TrashViewSettings -string Nlsv
+defaults write com.apple.finder TrashViewSettings           -string Nlsv
 defaults write com.apple.finder SearchRecentsSavedViewStyle -string Nlsv
 
 # allow copying from Quick Look preview
@@ -340,8 +340,8 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 # Automatically remove Trash > 30 days
 defaults write com.apple.finder FXRemoveOldTrashItems -bool true
 
-# disable the warning before emptying the Trash
-defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# don't disable the warning before emptying the Trash in case you hit Cmd-Del then Cmd-Shift-Del data could be lost
+defaults write com.apple.finder WarnOnEmptyTrash -bool true
 
 # show hidden files by default
 defaults write com.apple.finder AppleShowAllFiles -bool true
