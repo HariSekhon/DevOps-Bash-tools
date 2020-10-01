@@ -102,6 +102,13 @@ ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/settings
 ${0##*/} /repo/<user>%2F<repo>/caches
 
 ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/caches
+
+
+# List environment variables for a repository:
+
+${0##*/} /repo/<user>%2F<repo>/env_vars
+
+${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/env_vars
 "
 
 # used by usage() in lib/utils.sh
