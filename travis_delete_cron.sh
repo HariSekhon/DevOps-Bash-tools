@@ -26,6 +26,8 @@ Deletes a given Travis CI cron by ID
 
 See travis_repo_crons.sh which outputs the IDs are the first field
 
+Prints the JSON of the cron it deleted
+
 Uses the adjacent travis_api.sh script
 "
 
