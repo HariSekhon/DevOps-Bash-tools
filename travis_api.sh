@@ -95,6 +95,13 @@ ${0##*/} /jobs
 ${0##*/} /repo/<user>%2F<repo>/settings
 
 ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/settings
+
+
+# List caches for a repository:
+
+${0##*/} /repo/<user>%2F<repo>/caches
+
+${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/caches
 "
 
 # used by usage() in lib/utils.sh
@@ -112,7 +119,7 @@ help_usage "$@"
 min_args 1 "$@"
 
 url_path="${1:-}"
-shift
+shift || :
 
 url_path="${url_path//https:\/\/api.travis-ci.org}"
 url_path="${url_path##/}"
@@ -123,4 +130,4 @@ export CURL_AUTH_HEADER="Authorization: token"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "$@" $CURL_OPTS "$@"
