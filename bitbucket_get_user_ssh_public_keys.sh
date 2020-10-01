@@ -28,11 +28,10 @@ SSH Keys can be found in the Web UI here:
 
     https://bitbucket.org/account/settings/ssh-keys/
 
+
 If \$BITBUCKET_USER is not set, then first queries the BitBucket API to determine this first
 
 Uses the adjacent script bitbucket_api.sh, see there for authentication details
-
-\$CURL_OPTS can be set to provide extra arguments to curl
 "
 
 # used by usage() in lib/utils.sh
