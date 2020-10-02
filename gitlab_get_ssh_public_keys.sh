@@ -29,6 +29,10 @@ You can regenerate a token with the right permissions here:
 
     https://gitlab.com/profile/personal_access_tokens
 
+To get other named users's public SSH keys see:
+
+    gitlab_get_user_ssh_public_keys.sh
+
 
 ${0##*/}
 EOF
