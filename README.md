@@ -179,8 +179,8 @@ make
 
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth, LDAP, duplicate files finder, `.bashrc`, `.bash.d/*.sh`, config dotfiles: `.vimrc`, `.screenrc`, `.tmux.conf` etc.
 - [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI, instant sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), advanced `.psqlrc`
-- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services)
-- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - GCE, GKE, GCR, BigQuery
+- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - lots of IAM reports and config hardening
+- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - GCE, GKE, GCR, Secret Manager, BigQuery
 - [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - cluster management scripts & tricks
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
 - [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager
