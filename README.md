@@ -342,25 +342,6 @@ etc.
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
   - see also the [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo
 - `quay.io_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
-- `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
-  - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
-  - `travis_repos.sh` - lists Travis CI repos
-  - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
-  - `travis_repo_caches.sh` - lists caches for a given repo
-  - `travis_repo_crons.sh` - lists crons for a given repo
-  - `travis_repo_env_vars.sh` - lists environment variables for a given repo
-  - `travis_repo_settings.sh` - lists settings for a given repo
-  - `travis_repo_create_cron.sh` - creates a cron for a given repo and branch
-  - `travis_repo_delete_crons.sh` - deletes all crons for a given repo
-  - `travis_repo_delete_caches.sh` - deletes all caches for a given repo (sometimes clears build problems)
-  - `travis_delete_cron.sh` - deletes a Travis CI cron by ID
-  - `travis_repos_settings.sh` - lists settings for all repos
-  - `travis_repos_caches.sh` - lists caches for all repos
-  - `travis_repos_crons.sh` - lists crons for all repos
-  - `travis_repos_create_cron.sh` - creates a cron for all repos
-  - `travis_repos_delete_crons.sh` - deletes all crons for all repos
-  - `travis_repos_delete_caches.sh` - deletes all caches for all repos
-  - `travis_lint.sh` - lints a given `.travis.yml` using the API
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
@@ -446,25 +427,25 @@ etc.
   - `bitbucket_get_ssh_public_keys.sh` - fetches the currently authenticated BitBucket user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `bitbucket_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
 - `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
-- `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
-  - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
-  - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
-  - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
-  - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
-  - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones
-  - `cloudflare_dnssec.sh` - lists the Cloudflare DNSSec status for all zones
-  - `cloudflare_foreach_account.sh` - executes a templated command for each Cloudflare account, replacing the `{account_id}` and `{account_name}` in each iteration (useful for chaining with `cloudflare_api.sh`)
-  - `cloudflare_foreach_zone.sh` - executes a templated command for each Cloudflare zone, replacing the `{zone_id}` and `{zone_name}` in each iteration (useful for chaining with `cloudflare_api.sh`, used by adjacent `cloudflare_*_all_zones.sh` scripts)
-  - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
-  - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
-- `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
-  - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
-  - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
-  - `pingdom_checks.sh` - show all Pingdom checks, status and latencies
-  - `pingdom_checks_outages.sh` / `pingdom_checks_outages.sh` - show one or all Pingdom checks outage histories for the last year
-  - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
-  - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
-  - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
+- `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
+  - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
+  - `travis_repos.sh` - lists Travis CI repos
+  - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
+  - `travis_repo_caches.sh` - lists caches for a given repo
+  - `travis_repo_crons.sh` - lists crons for a given repo
+  - `travis_repo_env_vars.sh` - lists environment variables for a given repo
+  - `travis_repo_settings.sh` - lists settings for a given repo
+  - `travis_repo_create_cron.sh` - creates a cron for a given repo and branch
+  - `travis_repo_delete_crons.sh` - deletes all crons for a given repo
+  - `travis_repo_delete_caches.sh` - deletes all caches for a given repo (sometimes clears build problems)
+  - `travis_delete_cron.sh` - deletes a Travis CI cron by ID
+  - `travis_repos_settings.sh` - lists settings for all repos
+  - `travis_repos_caches.sh` - lists caches for all repos
+  - `travis_repos_crons.sh` - lists crons for all repos
+  - `travis_repos_create_cron.sh` - creates a cron for all repos
+  - `travis_repos_delete_crons.sh` - deletes all crons for all repos
+  - `travis_repos_delete_caches.sh` - deletes all caches for all repos
+  - `travis_lint.sh` - lints a given `.travis.yml` using the API
 - `buildkite_*.sh` - [BuildKite](https://buildkite.com/) API scripts:
   - `buildkite_pipelines.sh` - list buildkite pipelines for your `$BUILDKITE_ORGANIZATION` / `$BUILDKITE_USER`
   - `buildkite_foreach_pipeline.sh` - executes a templated command for each Buildkite pipeline, replacing the `{user}` and `{pipeline}` in each iteration
@@ -491,6 +472,25 @@ etc.
   - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 Teamcity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
+- `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
+  - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
+  - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
+  - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
+  - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
+  - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones
+  - `cloudflare_dnssec.sh` - lists the Cloudflare DNSSec status for all zones
+  - `cloudflare_foreach_account.sh` - executes a templated command for each Cloudflare account, replacing the `{account_id}` and `{account_name}` in each iteration (useful for chaining with `cloudflare_api.sh`)
+  - `cloudflare_foreach_zone.sh` - executes a templated command for each Cloudflare zone, replacing the `{zone_id}` and `{zone_name}` in each iteration (useful for chaining with `cloudflare_api.sh`, used by adjacent `cloudflare_*_all_zones.sh` scripts)
+  - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
+  - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
+- `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
+  - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
+  - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
+  - `pingdom_checks.sh` - show all Pingdom checks, status and latencies
+  - `pingdom_checks_outages.sh` / `pingdom_checks_outages.sh` - show one or all Pingdom checks outage histories for the last year
+  - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
+  - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
+  - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
 - `perl*.sh` - Perl utilities:
   - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
   - `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
