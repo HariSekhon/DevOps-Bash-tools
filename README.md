@@ -348,15 +348,17 @@ etc.
   - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
   - `travis_repo_caches.sh` - lists caches for a given repo
   - `travis_repo_crons.sh` - lists crons for a given repo
-  - `travis_repos_crons.sh` - lists crons for all repos
   - `travis_repo_env_vars.sh` - lists environment variables for a given repo
+  - `travis_repo_settings.sh` - lists settings for a given repo
   - `travis_repo_create_cron.sh` - creates a cron for a given repo and branch
-  - `travis_repos_create_cron.sh` - creates a cron for all repos
   - `travis_repo_delete_crons.sh` - deletes all crons for a given repo
-  - `travis_repos_delete_crons.sh` - deletes all crons for all repos
   - `travis_repo_delete_caches.sh` - deletes all caches for a given repo (sometimes clears build problems)
-  - `travis_repos_delete_caches.sh` - deletes all caches for all repos
   - `travis_delete_cron.sh` - deletes a Travis CI cron by ID
+  - `travis_repos_settings.sh` - lists settings for all repos
+  - `travis_repos_crons.sh` - lists crons for all repos
+  - `travis_repos_create_cron.sh` - creates a cron for all repos
+  - `travis_repos_delete_crons.sh` - deletes all crons for all repos
+  - `travis_repos_delete_caches.sh` - deletes all caches for all repos
   - `travis_lint.sh` - lints a given `.travis.yml` using the API
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
