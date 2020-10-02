@@ -178,11 +178,11 @@ make
 ### Inventory
 
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl auto OAuth / JWT, LDAP, duplicate files finder, `.bashrc`, `.bash.d/*.sh`, config dotfiles: `.vimrc`, `.screenrc`, `.tmux.conf` etc.
-- [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
 - [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, config hardening, EC2 meta, Spot termination, S3 access logging, KMS rotation, SSM, ECR, CloudTrail, lots of IAM reports
 - [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, GCE, GKE, GCR, Secret Manager, BigQuery
-- [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, luster management scripts & tricks
+- [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
+- [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
 - [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager & Cloudera Navigator API scripts
 - [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - Git local & mirror management scripts, GitHub API, GitLab API, BitBucket API scripts
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, BuildKite, Concourse, GoCD, Teamcity, one-touch CI docker boot & build
