@@ -62,4 +62,4 @@ echo "#" >&2
 #done
 jq -r '.[] | [.key, .title] | @tsv' |
 tr '\t' ' ' |
-sed "s/$/ ($user github.com)/"
+sed "s|$| (github.com/$user)|"
