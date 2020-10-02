@@ -37,8 +37,8 @@ EOF
 
 for arg; do
     case "$arg" in
-        *)     usage
-               ;;
+        *)  usage
+            ;;
     esac
 done
 
