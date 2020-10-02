@@ -27,7 +27,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Shows the caches for a given Travis CI repo in JSON format
+Shows the caches for a given Travis CI repo
+
+Output Format;
+
+<repo>    <branch>    <size>    <last_modified>    <long_name>
 
 If no repo is given, then tries to determine the repo name from the local git remote url
 
@@ -50,4 +54,5 @@ shift || :
 
 repo="$(travis_prefix_encode_repo "$repo")"
 
-"$srcdir/travis_api.sh" "/repo/$repo/caches" "$@"
+"$srcdir/travis_api.sh" "/repo/$repo/caches" "$@" |
+jq -r '.caches[] | [.repo.slug, .branch, .size, .last_modified, .name] | @tsv'
