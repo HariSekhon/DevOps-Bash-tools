@@ -74,4 +74,6 @@ case "$recent_dont_rerun" in
                  ;;
 esac
 
-"$srcdir/travis_api.sh" "/repo/$repo/branch/$branch/cron" -X POST -d "cron.interval=$interval&cron.dont_run_if_recent_build_exists=$recent_dont_rerun"
+"$srcdir/travis_api.sh" "/repo/$repo/branch/$branch/cron" -X POST -d "cron.interval=$interval&cron.dont_run_if_recent_build_exists=$recent_dont_rerun" |
+jq -r '"Created cron for repo \"" + .repository.slug + "\" on branch \"" + .branch.name + "\" at interval \"" + .interval +"\""' |
+timestamp "$(cat)"
