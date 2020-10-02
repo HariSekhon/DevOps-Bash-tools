@@ -14,7 +14,6 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-#srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 usage(){
     cat <<EOF
@@ -59,18 +58,5 @@ fi
 
 echo "# Fetching SSH Public Key(s) from GitHub for account:  $user" >&2
 echo "#" >&2
-#if [ "$user" = "${GITHUB_USER:-}" ]; then
-#    # authenticated query for simpler endpoint with more information doesn't work
-#    # gets 404 even though /user works and is clearly authenticated - are the API docs wrong?
-#    "$srcdir/github_api.sh" "/user/keys" -H "Accept: application/vnd.github.v3+json" |
-    #"$srcdir/github_api.sh" "/users/$user/keys" |
-    #jq -r '.[].id' |
-    #while read -r id; do
-    #    # also gets 404, or 401 if trying curl without github_api.sh handling the auth
-    #    "$srcdir/github_api.sh" "/user/keys/$id" |
-    #    jq .
-    #done
-#else
-    curl -sS --fail "https://api.github.com/users/$user/keys" |
-#fi |
+curl -sS --fail "https://api.github.com/users/$user/keys" |
 jq -r '.[].key'
