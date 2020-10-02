@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Adds the given SSH public key(s) to your BitBucket.org account via the BitBucket API
+Adds the given SSH public key(s) to the currently authenticated BitBucket.org account via the BitBucket API
 
 If no SSH public key is given, defaults to using ~/.ssh/id_rsa.pub
 
