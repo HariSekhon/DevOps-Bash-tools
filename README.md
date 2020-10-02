@@ -183,7 +183,7 @@ make
 - [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, GCE, GKE, GCR, Secret Manager, BigQuery
 - [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, luster management scripts & tricks
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
-- [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager & Cloudera Navigator API scripts
+- [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager & Cloudera Navigator API scripts
 - [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - Git local & mirror management scripts, GitHub API, GitLab API, BitBucket API scripts
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, BuildKite, Concourse, GoCD, Teamcity, one-touch CI docker boot & build
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
