@@ -427,7 +427,7 @@ etc.
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
-  - `gitlab_get_user_ssh_public_keys.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
+  - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_get_ssh_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account (defaults to `~/.ssh/id_rsa.pub`. Can provide alternate key files or read piped keys from files or adjacent tools which get the SSH keys from GitHub / BitBucket)
   - `gitlab_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitLab account by key id or title regex match
