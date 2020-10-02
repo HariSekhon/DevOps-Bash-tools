@@ -348,10 +348,14 @@ etc.
   - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
   - `travis_repo_caches.sh` - lists caches for a given repo
   - `travis_repo_crons.sh` - lists crons for a given repo
+  - `travis_repos_crons.sh` - lists crons for all repos
   - `travis_repo_env_vars.sh` - lists environment variables for a given repo
   - `travis_repo_create_cron.sh` - creates a cron for a given repo and branch
+  - `travis_repos_create_cron.sh` - creates a cron for all repos
   - `travis_repo_delete_crons.sh` - deletes all crons for a given repo
+  - `travis_repos_delete_crons.sh` - deletes all crons for all repos
   - `travis_repo_delete_caches.sh` - deletes all caches for a given repo (sometimes clears build problems)
+  - `travis_repos_delete_caches.sh` - deletes all caches for all repos
   - `travis_delete_cron.sh` - deletes a Travis CI cron by ID
   - `travis_lint.sh` - lints a given `.travis.yml` using the API
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
