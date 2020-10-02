@@ -66,6 +66,10 @@ pg(){
     grep -v grep
 }
 
+rmdirempty(){
+    find "${1:-.}" -type d -empty -exec rmdir "{}" \;
+}
+
 checkprog(){
     if type -P "$1" &>/dev/null; then
         return 0
