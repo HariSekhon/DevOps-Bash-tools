@@ -65,5 +65,6 @@ fi
 echo "# Fetching SSH Public Key(s) from BitBucket for account:  $user" >&2
 echo "#" >&2
 "$srcdir/bitbucket_api.sh" "/users/$user/ssh-keys" |
-jq -r '.values[] | [ .key, .owner.display_name, .label, "(bitbucket.org)", .comment ] | @tsv' |
-tr '\t' ' '
+jq -r '.values[] | [ .key, .comment, .label ] | @tsv' |
+tr '\t' ' ' |
+sed "s|$| (bitbucket.org/$user)|"
