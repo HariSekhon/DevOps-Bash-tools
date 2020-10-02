@@ -63,4 +63,5 @@ fi
 echo "# Fetching SSH Public Key(s) from GitHub for account:  $user" >&2
 echo "#" >&2
 curl -sS --fail "https://api.github.com/users/$user/keys" |
-jq -r '.[].key'
+jq -r '.[].key' |
+sed "s/$/ $user (github.com)/"
