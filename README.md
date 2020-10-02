@@ -415,7 +415,7 @@ etc.
   - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
   - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
-  - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos (uses `git_foreach_repo.sh`, `github_repo_description.sh`, `gitlab_set_project_description.sh`, `bitbucket_set_repo_description.sh`)
+  - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitLab / BitBucket
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, like above but with identifying key comments
   - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chaining with adjacent tools for GitLab / BitBucket
