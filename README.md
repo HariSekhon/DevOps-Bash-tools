@@ -411,6 +411,7 @@ etc.
   - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account (defaults to `~/.ssh/id_rsa.pub`. Can provide alternate key files or read piped keys from files or adjacent tools which get the SSH keys from GitLab / BitBucket)
+  - `github_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitHub account by key id or title regex match
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
@@ -425,6 +426,7 @@ etc.
   - `gitlab_get_user_ssh_public_keys.sh` - fetches a GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_get_ssh_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
   - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account (defaults to `~/.ssh/id_rsa.pub`. Can provide alternate key files or read piped keys from files or adjacent tools which get the SSH keys from GitHub / BitBucket)
+  - `gitlab_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitLab account by key id or title regex match
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
