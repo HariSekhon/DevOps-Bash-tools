@@ -355,6 +355,7 @@ etc.
   - `travis_repo_delete_caches.sh` - deletes all caches for a given repo (sometimes clears build problems)
   - `travis_delete_cron.sh` - deletes a Travis CI cron by ID
   - `travis_repos_settings.sh` - lists settings for all repos
+  - `travis_repos_caches.sh` - lists caches for all repos
   - `travis_repos_crons.sh` - lists crons for all repos
   - `travis_repos_create_cron.sh` - creates a cron for all repos
   - `travis_repos_delete_crons.sh` - deletes all crons for all repos
