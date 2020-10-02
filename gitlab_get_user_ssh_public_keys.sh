@@ -10,7 +10,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# https://docs.gitlab.com/ee/api/users.html#list-ssh-keys
+# https://docs.gitlab.com/ee/api/users.html#list-ssh-keys-for-user
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -18,7 +18,7 @@ set -euo pipefail
 
 usage(){
     cat <<EOF
-Fetches a GitLab user's public SSH key(s) via the GitLab API
+Fetches a given GitLab user's public SSH key(s) via the GitLab API
 
 User can be given as first argument, otherwise falls back to using environment variables \$GITLAB_USER or \$USER
 
@@ -60,12 +60,6 @@ fi
 echo "# Fetching SSH Public Key(s) from GitLab for account:  $user" >&2
 echo "#" >&2
 # authenticated query is not necessary, gets more information than GitHub regardless, which I use to add standard SSH key description suffix back (useful if loading these keys to other systems to know what their descriptions are)
-#shopt -s nocasematch
-# case insensitive matching requires [[
-#if [[ "$user" == "a${GITHUB_USER:-}" ]]; then
-    # authenticated query
-#    "$srcdir/gitlab_api.sh" "/user/keys"
-#else
-    curl -sS --fail "https://gitlab.com/api/v4/users/$user/keys" |
-#fi |
-jq -r '.[] | [.key, .title] | @tsv'
+curl -sS --fail "https://gitlab.com/api/v4/users/$user/keys" |
+jq -r '.[] | [.key, .title] | @tsv' |
+tr '\t' ' '
