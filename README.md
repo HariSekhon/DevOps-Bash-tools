@@ -416,9 +416,9 @@ etc.
   - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos (uses `git_foreach_repo.sh`, `github_repo_description.sh`, `gitlab_set_project_description.sh`, `bitbucket_set_repo_description.sh`)
-  - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or `gitlab_add_ssh_public_keys.sh` / `bitbucket_add_ssh_public_keys.sh`
+  - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitLab / BitBucket
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
-  - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chainging with other tools eg. `gitlab_get_ssh_public_keys.sh`  / `bitbucket_get_ssh_public_keys.sh`
+  - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chainging with adjacent tools for GitLab / BitBucket
   - `github_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitHub account by key id or title regex match
   - `github_repos_sync_status.sh` - determines whether each GitHub repo has an in-sync GitLab and BitBucket repo by querying all 3 APIs for the master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
@@ -427,17 +427,17 @@ etc.
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
   - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
-  - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or `github_add_ssh_public_keys.sh` / `bitbucket_add_ssh_public_keys.sh`
+  - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitHub / BitBucket
   - `gitlab_get_ssh_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
-  - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chaining with other tools eg. `github_get_ssh_public_keys.sh` / `bitbucket_ssh_public_keys.sh`
+  - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chaining with adjacent tools for GitHub / BitBucket
   - `gitlab_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitLab account by key id or title regex match
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
   - `bitbucket_foreach_repo.sh` - executes a templated command for each BitBucket repo, replacing the `{user}` and `{repo}` in each iteration
   - `bitbucket_set_project_description.sh` - sets the description for one or more repos using the BitBucket API
-  - `bitbucket_get_ssh_public_keys.sh` - fetches the currently authenticated BitBucket user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or `github_add_ssh_public_keys.sh` / `gitlab_add_ssh_public_keys.sh`
-  - `bitbucket_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chaining with other tools eg. `github_get_ssh_public_keys.sh` / `gitlab_get_ssh_public_keys.sh`
+  - `bitbucket_get_ssh_public_keys.sh` - fetches the currently authenticated BitBucket user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitHub / GitLab
+  - `bitbucket_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chaining with adjacent tools for GitHub / GitLab
 - `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
