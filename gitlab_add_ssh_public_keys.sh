@@ -44,7 +44,7 @@ SSH Keys can be found in the Web UI here:
     https://gitlab.com/profile/keys
 
 If you get a 404 error it is likely that your \$GITLAB_TOKEN doesn't have the api (full) permissions
-You can edit the permissions your token has here:
+You can regenerate a token with the right permissions here:
 
     https://gitlab.com/profile/personal_access_tokens
 
