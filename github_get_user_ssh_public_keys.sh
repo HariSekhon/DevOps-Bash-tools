@@ -25,6 +25,10 @@ SSH Keys can be found in the Web UI here:
 
     https://github.com/settings/keys
 
+To retrieve SSH keys with comments, you'd need to use API authentication, see
+
+    github_get_ssh_public_keys.sh
+
 
 ${0##*/} <user>
 EOF
