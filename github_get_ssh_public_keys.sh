@@ -46,6 +46,9 @@ for arg; do
     esac
 done
 
+echo "# Getting user login for tagging the keys" >&2
+user="$("$srcdir/github_api.sh" "/user" | jq -r '.login')"
+
 # XXX: not handling paging because if you have > 100 SSH keys I want to know what is going on first!
 
 echo "# Fetching SSH Public Key(s) from GitHub for the currently authenticated account" >&2
@@ -57,5 +60,6 @@ echo "#" >&2
 #    "$srcdir/github_api.sh" "/user/keys/$id" |
 #    jq .
 #done
-jq -r '.[] | [.key, .title + " (github.com)"] | @tsv' |
-tr '\t' ' '
+jq -r '.[] | [.key, .title] | @tsv' |
+tr '\t' ' ' |
+sed "s/$/ ($user github.com)/"
