@@ -130,11 +130,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck source=lib/utils.sh
+. "$srcdir/lib/utils.sh"
+
 # shellcheck source=lib/cloudera_manager.sh
 . "$srcdir/lib/cloudera_manager.sh"
 
 # defined in lib
 # shellcheck disable=SC2154
-echo "fetching queries up to now:  $now_timestamp" >&2
+timestamp "fetching queries up to now:  $now_timestamp"
 
 "$srcdir/cloudera_manager_api.sh" "/clusters/$CLOUDERA_CLUSTER/services/yarn/yarnApplications?from=1970-01-01T00%3A00%3A00.000Z&to=$now_timestamp&filter="
