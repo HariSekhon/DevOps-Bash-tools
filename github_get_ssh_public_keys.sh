@@ -29,6 +29,10 @@ You can edit the permissions your token has here:
 
     https://github.com/settings/tokens
 
+To get other named users's public SSH keys see:
+
+    github_get_user_ssh_public_keys.sh
+
 
 ${0##*/}
 EOF
