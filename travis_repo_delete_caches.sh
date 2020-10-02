@@ -48,7 +48,7 @@ help_usage "$@"
 repo="${1:-}"
 shift || :
 
-repo="$(travis_prefix_encode_repo "$repo")"
+repo_encoded="$(travis_prefix_encode_repo "$repo")"
 
 timestamp "Deleting all caches for repo '$repo'"
-"$srcdir/travis_api.sh" "/repo/$repo/caches" -X DELETE "$@"
+"$srcdir/travis_api.sh" "/repo/$repo_encoded/caches" -X DELETE "$@"
