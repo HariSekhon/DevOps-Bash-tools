@@ -418,7 +418,7 @@ etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos (uses `git_foreach_repo.sh`, `github_repo_description.sh`, `gitlab_set_project_description.sh`, `bitbucket_set_repo_description.sh`)
   - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitLab / BitBucket
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API for quick local installation to `~/.ssh/authorized_keys`
-  - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chainging with adjacent tools for GitLab / BitBucket
+  - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey file(s) (defaults to `~/.ssh/id_rsa.pub`) or read from standard input for chaining with adjacent tools for GitLab / BitBucket
   - `github_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitHub account by key id or title regex match
   - `github_repos_sync_status.sh` - determines whether each GitHub repo has an in-sync GitLab and BitBucket repo by querying all 3 APIs for the master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
