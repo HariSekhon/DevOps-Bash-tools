@@ -52,7 +52,7 @@ min_args 1 "$@"
 
 filter="$1"
 
-timestamp "Getting SSH public keys" >&2
+timestamp "Getting SSH public keys"
 "$srcdir/github_api.sh" "/user/keys" |
 jq -r '.[] | [.id, .title] | @tsv' |
 while read -r key_id title; do
