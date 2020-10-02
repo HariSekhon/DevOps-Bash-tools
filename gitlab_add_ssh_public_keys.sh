@@ -85,8 +85,7 @@ add_ssh_public_key(){
     # don't assume the key is from the local machine, it's likely this will be used by admins or chained with other tools that download from GitHub / BitBucket and upload to GitLab for synchronization, in which case the local machine is not related to the key
     #"$srcdir/gitlab_api.sh" "/user/keys" -X POST -H "Content-Type: application/json" -d '{"key": "'"$public_key"'", "title": "'"$USER@${HOSTNAME:-$(hostname)}"'"}' > /dev/null  # JSON of the newly added key
     "$srcdir/gitlab_api.sh" "/user/keys" -X POST -H "Content-Type: application/json" -d '{"title": "'"$comment"'", "key": "'"$public_key"'"}' |
-    jq -r '[ "SSH public key \"" +  .title + "\" was added to account as key id", .id ] | @tsv' |
-    tr '\t' ' ' |
+    jq -r '"SSH public key \"" + .title + "\" was added to account as key id " + (.id|tostring)' |
     timestamp "$(cat)"
     echo >&2
 }
