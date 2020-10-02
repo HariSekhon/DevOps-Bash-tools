@@ -53,5 +53,5 @@ echo "#" >&2
 #    "$srcdir/github_api.sh" "/user/keys/$id" |
 #    jq .
 #done
-jq -r '.[] | [.key, .title, "(github.com)"] | @tsv' |
+jq -r '.[] | [.key, .title + " (github.com)"] | @tsv' |
 tr '\t' ' '
