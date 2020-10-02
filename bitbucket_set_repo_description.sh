@@ -34,6 +34,12 @@ Repo should be specified as <workspace>/<repo> using the slugs which are usually
 Repo workspace prefix, if not set, is assumed to be the username and will use \$BITBUCKET_USER if available, otherwise will query the BitBucket API to determine it
 
 
+If you get an error it's possible you don't have the right token permissions.
+You can generate a new token with the right permissions here:
+
+    https://bitbucket.org/account/settings/app-passwords/
+
+
 Example:
 
 ${0##*/} harisekhon/devops-bash-tools    my new description
