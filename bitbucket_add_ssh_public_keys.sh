@@ -36,6 +36,11 @@ If a dash is given, reads the SSH public key(s) from standard input, ignoring co
     gitlab_get_ssh_public_keys.sh
     bitbucket_get_ssh_public_keys.sh
 
+If you get an error it's possible you don't have the right token permissions.
+You can generate a new token with the right permissions here:
+
+    https://bitbucket.org/account/settings/app-passwords/
+
 Will return a 400 error if the SSH public key is invalid or has already been added.
 The script detects already existing keys and skips them to avoid this error
 
