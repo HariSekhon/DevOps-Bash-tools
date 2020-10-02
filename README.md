@@ -177,6 +177,23 @@ make
 
 ### Inventory
 
+- [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth, LDAP, duplicate files finder, `.bashrc`, `.bash.d/*.sh`, config dotfiles: `.vimrc`, `.screenrc`, `.tmux.conf` etc.
+- [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI, instant sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), advanced `.psqlrc`
+- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services)
+- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - GCE, GKE, GCR, BigQuery
+- [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - cluster management scripts & tricks
+- [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
+- [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager
+- [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - Git scripts, GitHub API, GitLab API, BitBucket API scripts
+- [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, Concourse, GoCD, Teamcity
+- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
+- [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities
+- [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities
+- [Spotify](https://github.com/HariSekhon/DevOps-Bash-tools#spotify) - Spotify API scripts
+- [More Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#more-linux--mac) - more systems administration scripts, package installation automation
+- [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
+- [Data Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
+
 #### Linux & Mac:
 
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
@@ -628,6 +645,8 @@ etc.
     - [Dockerfiles](https://docs.docker.com/engine/reference/builder/)
     - [Docker Compose](https://docs.docker.com/compose/)
     - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
+
+#### Data Validation
 
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
 
