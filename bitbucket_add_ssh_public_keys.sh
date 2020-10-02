@@ -28,11 +28,14 @@ If no SSH public key is given, defaults to using ~/.ssh/id_rsa.pub
 
 If a dash is given, reads the SSH public key(s) from standard input, ignoring comment lines so you can chain with tools like the adjacent scripts:
 
-    github_get_user_public_ssh_keys.sh
-    gitlab_get_user_public_ssh_keys.sh
-    bitbucket_get_user_public_ssh_keys.sh
+    github_get_user_ssh_public_keys.sh
+    gitlab_get_user_ssh_public_keys.sh
+    github_get_ssh_public_keys.sh
+    gitlab_get_ssh_public_keys.sh
+    bitbucket_get_ssh_public_keys.sh
 
-Will return a 400 error if the SSH public key is invalid or has already been added
+Will return a 400 error if the SSH public key is invalid or has already been added.
+The script detects already existing keys and skips them to avoid this error
 
 SSH Keys can be found in the Web UI here:
 
