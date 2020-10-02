@@ -418,7 +418,7 @@ etc.
   - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitLab / BitBucket
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, like above but with identifying key comments
   - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey file(s) (default: `~/.ssh/id_rsa.pub`) or read from standard input for chaining with adjacent tools for GitLab / BitBucket
-  - `github_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitHub account by key id or title regex match
+  - `github_delete_ssh_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
@@ -430,7 +430,7 @@ etc.
   - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent add key tools to GitHub / BitBucket
   - `gitlab_get_ssh_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API
   - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey file(s) (default: `~/.ssh/id_rsa.pub`) or read from standard input for chaining with adjacent tools for GitHub / BitBucket
-  - `gitlab_delete_ssh_public_keys.sh` - deletes given SSH key(s) from the currently authenticated GitLab account by key id or title regex match
+  - `gitlab_delete_ssh_public_keys.sh` - deletes given SSH keys from the currently authenticated GitLab account by key id or title regex match
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
