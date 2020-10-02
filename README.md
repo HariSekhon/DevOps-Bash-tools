@@ -177,22 +177,22 @@ make
 
 ### Inventory
 
-- [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth, LDAP, duplicate files finder, `.bashrc`, `.bash.d/*.sh`, config dotfiles: `.vimrc`, `.screenrc`, `.tmux.conf` etc.
-- [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI, instant sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), advanced `.psqlrc`
-- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - lots of IAM reports and config hardening
-- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - GCE, GKE, GCR, Secret Manager, BigQuery
-- [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - cluster management scripts & tricks
+- [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl auto OAuth / JWT, LDAP, duplicate files finder, `.bashrc`, `.bash.d/*.sh`, config dotfiles: `.vimrc`, `.screenrc`, `.tmux.conf` etc.
+- [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
+- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, config hardening, EC2 meta, Spot termination, S3 access logging, KMS rotation, SSM, ECR, CloudTrail, lots of IAM reports
+- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, GCE, GKE, GCR, Secret Manager, BigQuery
+- [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, luster management scripts & tricks
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
-- [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager
-- [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - Git scripts, GitHub API, GitLab API, BitBucket API scripts
-- [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, Concourse, GoCD, Teamcity
+- [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager & Cloudera Navigator API scripts
+- [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - Git local & mirror management scripts, GitHub API, GitLab API, BitBucket API scripts
+- [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, BuildKite, Concourse, GoCD, Teamcity, one-touch CI docker boot & build
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
-- [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities
-- [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities
-- [Spotify](https://github.com/HariSekhon/DevOps-Bash-tools#spotify) - Spotify API scripts
+- [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
+- [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
+- [Spotify](https://github.com/HariSekhon/DevOps-Bash-tools#spotify) - 30+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, top artists/tracks etc.
 - [More Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#more-linux--mac) - more systems administration scripts, package installation automation
 - [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
-- [Data Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
+- [Data Format Conversion & Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-format-conversion--&--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
 
 #### Linux & Mac:
 
@@ -598,8 +598,6 @@ etc.
 
 #### More Linux & Mac:
 
-- `json2yaml.sh` - converts JSON to YAML
-- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see `gitlab_*.sh` section above)
 - [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
   - install if absent scripts for Python, Perl, Ruby, NodeJS and Golang packages - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
@@ -658,6 +656,9 @@ etc.
   - LDAP LDIF
   - XML
   - YAML
+
+- `json2yaml.sh` - converts JSON to YAML
+- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) section above)
 
 ### See Also:
 
