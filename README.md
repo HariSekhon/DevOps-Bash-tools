@@ -409,7 +409,6 @@ etc.
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
   - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
-  - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_actions_runner.sh` - downloads, configures and runs a local GitHub Actions Runner
   - `github_runners.sh` - lists GitHub Actions runners
   - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
@@ -419,6 +418,7 @@ etc.
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, like above but with identifying key comments
   - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
   - `github_delete_ssh_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
+  - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
