@@ -50,13 +50,18 @@ cmd_template="$*"
 while read -r repo; do
     user="${repo%%/*}"
     name="${repo##*/}"
-    echo "# ============================================================================ #" >&2
-    echo "# $repo" >&2
-    echo "# ============================================================================ #" >&2
+    if [ -z "${NO_HEADING:-}" ]; then
+        echo "# ============================================================================ #" >&2
+        echo "# $repo" >&2
+        echo "# ============================================================================ #" >&2
+    fi
     cmd="$cmd_template"
     cmd="${cmd//\{username\}/$user}"
     cmd="${cmd//\{user\}/$user}"
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
+    if [ -z "${NO_HEADING:-}" ]; then
+        echo >&2
+    fi
 done < <("$srcdir/travis_repos.sh")
