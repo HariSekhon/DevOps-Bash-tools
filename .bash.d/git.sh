@@ -908,3 +908,13 @@ fixmerge(){
     fi
     git ci -m "$msg"
 }
+
+buildkite_browse(){
+    if [ -z "${BUILDKITE_ORGANIZATION:-}" ]; then
+        echo "\$BUILDKITE_ORGANIZATION not set"
+        return 1
+    fi
+    local repo="$(git_repo | tr '[:upper:]' '[:lower:]')"
+    browser "https://buildkite.com/$BUILDKITE_ORGANIZATION/$repo"
+}
+alias bk=buildkite_browse
