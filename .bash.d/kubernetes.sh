@@ -64,6 +64,10 @@ alias kl='k logs'
 alias kshell='kube-shell'
 alias kubesh='kube-shell'
 
+# kustomize
+alias kbuilddiff="kustomize build | kubectl diff -f -"
+alias kbuildapply="kustomize build | kubectl apply -f -"
+
 alias use="k config use-context"
 alias contexts="k config get-contexts"
 #alias context="k config current-context"
