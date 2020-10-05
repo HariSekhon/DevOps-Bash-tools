@@ -402,6 +402,7 @@ etc.
   - `dockerhub_list_tags.sh` - lists tags for a given DockerHub repo. See also [dockerhub_show_tags.py](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/dockerhub_show_tags.py) in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo.
   - `dockerhub_list_tags_by_last_updated.sh` - lists tags for a given DockerHub repo sorted by last updated timestamp descending
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
+  - `clean_caches.sh` - cleans out OS package and programming language caches, call near end of `Dockerfile` to reduce Docker image size
   - see also the [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo
 - `quay.io_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
 
