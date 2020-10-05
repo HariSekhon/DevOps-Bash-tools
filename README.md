@@ -160,7 +160,7 @@ To bootstrap, install packages and link in to your shell profile to inherit all 
 curl -L git.io/bash-bootstrap | sh
 ```
 
-- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory Overview](https://github.com/harisekhon/devops-bash-tools#Inventory-Overview) below)
+- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#Inventory) below)
 - Symlinks `.*` config dotfiles to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/), [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc. (only when they don't already exist so there is no conflict with your own configs)
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages including [AWS CLI](https://aws.amazon.com/cli/)
