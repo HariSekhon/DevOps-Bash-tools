@@ -184,7 +184,7 @@ make
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
 - [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
 - [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager & Cloudera Navigator API scripts
-- [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - Git local & mirror management scripts, GitHub API, GitLab API, BitBucket API scripts
+- [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - scripts for Git local & mirror management, GitHub API, GitLab API, BitBucket API
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, BuildKite, Concourse, GoCD, Teamcity, one-touch CI docker boot & build, API query scripts
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
