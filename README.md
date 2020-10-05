@@ -510,6 +510,14 @@ etc.
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
+- `appveyor_*.sh` - [AppVeyor](https://www.appveyor.com/) API scripts:
+  - `appveyor_api.sh` - queries Appveyor's API with authentication
+- `drone_*.sh` - [Drone.io](https://drone.io/) API scripts:
+  - `drone_api.sh` - queries Drone.io's API with authentication
+- `shippable_*.sh` - [Shippable](https://www.shippable.com/) API scripts:
+  - `shippable_api.sh` - queries Shippable's API with authentication
+- `wercker_*.sh` - [Wercker](https://app.wercker.com/) API scripts:
+  - `wercker_app_api.sh` - queries Wercker's Applications API with authentication
 - `teamcity_*.sh` - [Teamcity CI](https://www.jetbrains.com/teamcity/) API scripts:
   - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
