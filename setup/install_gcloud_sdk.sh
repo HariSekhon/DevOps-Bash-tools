@@ -21,6 +21,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+export PATH="$PATH:$HOME/google-cloud-sdk/bin"
+
 if type -P gcloud &>/dev/null; then
     echo "GCloud already installed, skipping..."
     exit 0
