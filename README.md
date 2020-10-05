@@ -511,7 +511,7 @@ etc.
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `appveyor_*.sh` - [AppVeyor](https://www.appveyor.com/) API scripts:
-  - `appveyor_api.sh` - queries Appveyor's API with authentication
+  - `appveyor_api.sh` - queries AppVeyor's API with authentication
 - `drone_*.sh` - [Drone.io](https://drone.io/) API scripts:
   - `drone_api.sh` - queries Drone.io's API with authentication
 - `shippable_*.sh` - [Shippable](https://www.shippable.com/) API scripts:
