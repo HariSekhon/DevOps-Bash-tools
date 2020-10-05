@@ -139,7 +139,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 - Utility Libraries used by many hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
   - `lib/` - scripting and CI library
-- [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 80+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) + [CloudTrail](https://aws.amazon.com/cloudtrail/), [Google BigQuery](https://cloud.google.com/bigquery)
+- [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 100+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) + [CloudTrail](https://aws.amazon.com/cloudtrail/), [Google BigQuery](https://cloud.google.com/bigquery)
 
 See Also: [similar DevOps repos](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#see-also) in other languages
 
@@ -263,7 +263,7 @@ etc.
 
 ##### Databases
 
-- [sql/](https://github.com/HariSekhon/SQL-scripts)`*.sql` - SQL scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [Google BigQuery](https://cloud.google.com/bigquery) and [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration setup
+- [sql/](https://github.com/HariSekhon/SQL-scripts)`*.sql` - SQL scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [Google BigQuery](https://cloud.google.com/bigquery) and [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration
 - `mysql*.sh` - [MySQL](https://www.mysql.com/) scripts:
   - `mysql.sh` - shortens `mysql` command to connect to [MySQL](https://www.mysql.com/) by auto-populating switches from both standard environment variables like `$MYSQL_TCP_PORT`, `$DBI_USER`, `$MYSQL_PWD` (see [doc](https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html)) and other common environment variables like `$MYSQL_HOST` / `$HOST`, `$MYSQL_USER` / `$USER`, `$MYSQL_PASSWORD` / `$PASSWORD`, `$MYSQL_DATABASE` / `$DATABASE`
   - `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
