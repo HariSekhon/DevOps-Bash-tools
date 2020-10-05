@@ -469,6 +469,12 @@ etc.
 
 #### CI/CD - Continuous Integration / Continuous Deployment
 
+- `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
+  - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
+  - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
+  - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
+- `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/), launches in docker, configures pipeline from `$PWD/.concourse.yml`, triggers build, tails results in terminal, prints recent build statuses at end. Call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
+- `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/), launches in docker, (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`), detects and enables agent(s) to start building. Call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
@@ -504,12 +510,6 @@ etc.
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
-- `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
-  - `jenkins_cli.sh` - runs Jenkins CLI, auto-inferring basic configuations, auto-downloads `jenkins-cli.jar` from Jenkins server if not present, infers a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
-  - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
-  - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
-- `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/), launches in docker, configures pipeline from `$PWD/.concourse.yml`, triggers build, tails results in terminal, prints recent build statuses at end. Call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
-- `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/), launches in docker, (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`), detects and enables agent(s) to start building. Call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `teamcity_*.sh` - [Teamcity CI](https://www.jetbrains.com/teamcity/) API scripts:
   - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
