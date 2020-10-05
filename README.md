@@ -597,30 +597,31 @@ etc.
 
 #### Spotify
 
-- `spotify_*.sh` - 30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo):
-  - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
-  - `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
-  - `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
-  - `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
-  - `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
-  - `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
-  - `spotify_create_playlist.sh` - creates a Spotify playlist, either public or private
-  - `spotify_rename_playlist.sh` - renames a Spotify playlist
-  - `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
-  - `spotify_add_to_playlist.sh` - adds tracks to a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input. Can be combined with many other tools listed here which output Spotify URIs, or appended from other playlists. Can also be used to restore a spotify playlist from backups
-  - `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input, optionally prefixed with a track position to remove only specific occurrences (useful for removing duplicates from playlists)
-  - `spotify_duplicate_uri_in_playlist.sh` - finds duplicate Spotify URIs in a given playlist (these are guaranteed exact duplicate matches), returns all but the first occurrence and optionally their track positions (zero-indexed to align with the Spotify API for easy chaining with other tools)
-  - `spotify_duplicate_tracks_in_playlist.sh` - finds duplicate Spotify tracks in a given playlist (these are idential `Artist - Track` name matches, which may be from different albums / singles)
-  - `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate Spotify URI tracks (identical) in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
-  - `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
-  - `spotify_delete_any_duplicates_in_playlist.sh` - calls both of the above scripts to first get rid of duplicate URIs and then remove any other duplicates by track name matches
-  - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
-  - `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
-  - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
-  - `spotify_foreach_playlist.sh` - executes a templated command against all playlists, replacing `{playlist}` and `{playlist_id}` in each iteration
-  - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
-  - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
-  - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
+30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo):
+
+- `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
+- `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
+- `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
+- `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
+- `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
+- `spotify_uri_to_name.sh` - convert Spotify track / album / artist URIs to human readable `Artist - Track` / CSV format. Takes Spotify URIs, URL links or just IDs. Reads URIs from files or standard input
+- `spotify_create_playlist.sh` - creates a Spotify playlist, either public or private
+- `spotify_rename_playlist.sh` - renames a Spotify playlist
+- `spotify_set_playlists_public.sh` / `spotify_set_playlists_private.sh` - sets one or more given Spotify playlists to public / private
+- `spotify_add_to_playlist.sh` - adds tracks to a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input. Can be combined with many other tools listed here which output Spotify URIs, or appended from other playlists. Can also be used to restore a spotify playlist from backups
+- `spotify_delete_from_playlist.sh` - deletes tracks from a given playlist. Takes a playlist name or ID and Spotify URIs in any form from files or standard input, optionally prefixed with a track position to remove only specific occurrences (useful for removing duplicates from playlists)
+- `spotify_duplicate_uri_in_playlist.sh` - finds duplicate Spotify URIs in a given playlist (these are guaranteed exact duplicate matches), returns all but the first occurrence and optionally their track positions (zero-indexed to align with the Spotify API for easy chaining with other tools)
+- `spotify_duplicate_tracks_in_playlist.sh` - finds duplicate Spotify tracks in a given playlist (these are idential `Artist - Track` name matches, which may be from different albums / singles)
+- `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate Spotify URI tracks (identical) in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+- `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
+- `spotify_delete_any_duplicates_in_playlist.sh` - calls both of the above scripts to first get rid of duplicate URIs and then remove any other duplicates by track name matches
+- `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
+- `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
+- `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
+- `spotify_foreach_playlist.sh` - executes a templated command against all playlists, replacing `{playlist}` and `{playlist_id}` in each iteration
+- `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
+- `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
+- `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
 
 #### More Linux & Mac:
 
