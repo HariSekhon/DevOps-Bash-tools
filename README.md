@@ -190,6 +190,8 @@ make
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
+- [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
+- [MP3](https://github.com/HariSekhon/DevOps-Bash-tools#mp3) - MP3 metadata editing, grouping and ordering of albums and audiobooks
 - [Spotify](https://github.com/HariSekhon/DevOps-Bash-tools#spotify) - 30+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, top artists/tracks etc.
 - [More Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#more-linux--mac) - more systems administration scripts, package installation automation
 - [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
@@ -558,30 +560,28 @@ etc.
 
 #### Perl
 
-- `perl*.sh` - Perl utilities:
-  - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
-  - `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
-  - `perlpath.sh` - prints all Perl libary search paths, one per line
-  - `perl_find_library_path.sh` - finds directory where a CPAN module is installed - without args finds the Perl library base
-  - `perl_find_library_executable.sh` - finds directory where a CPAN module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
-  - `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
-  - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
-  - `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
+- `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
+- `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
+- `perlpath.sh` - prints all Perl libary search paths, one per line
+- `perl_find_library_path.sh` - finds directory where a CPAN module is installed - without args finds the Perl library base
+- `perl_find_library_executable.sh` - finds directory where a CPAN module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
+- `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
+- `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
+- `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
 
 #### Python
 
-- `python*.sh` - Python utilities:
-  - `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
-  - `python_pip_install.sh` - bulk installs PyPI modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, VirtualEnvs / Anaconda / GitHub Workflows/ Google Cloud Shell, Mac vs Linux library paths, and ignore failure option
-  - `python_pip_install_if_absent.sh` - installs PyPI modules not already in Python libary path (OS or pip installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
-  - `python_pip_reinstall_all_modules.sh` - reinstalls all PyPI modules which can fix some issues
-  - `pythonpath.sh` - prints all Python libary search paths, one per line
-  - `python_find_library_path.sh` - finds directory where a PyPI module is installed - without args finds the Python library base
-  - `python_find_library_executable.sh` - finds directory where a PyPI module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
-  - `python_find_unused_pip_modules.sh` - finds PyPI modules that aren't used by any programs in the current directory tree
-  - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
-  - `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
-  - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
+- `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
+- `python_pip_install.sh` - bulk installs PyPI modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, VirtualEnvs / Anaconda / GitHub Workflows/ Google Cloud Shell, Mac vs Linux library paths, and ignore failure option
+- `python_pip_install_if_absent.sh` - installs PyPI modules not already in Python libary path (OS or pip installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
+- `python_pip_reinstall_all_modules.sh` - reinstalls all PyPI modules which can fix some issues
+- `pythonpath.sh` - prints all Python libary search paths, one per line
+- `python_find_library_path.sh` - finds directory where a PyPI module is installed - without args finds the Python library base
+- `python_find_library_executable.sh` - finds directory where a PyPI module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
+- `python_find_unused_pip_modules.sh` - finds PyPI modules that aren't used by any programs in the current directory tree
+- `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
+- `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
+- `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
 
 #### Golang
 
@@ -591,10 +591,9 @@ etc.
 
 #### MP3
 
-- `mp3_set_*.sh` - various MP3 metadata management scripts for albums and audiobooks, grouping and ordering:
-  - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
-  - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
-  - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
+- `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
+- `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
+- `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
 
 #### Spotify
 
