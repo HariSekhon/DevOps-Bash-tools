@@ -246,10 +246,19 @@ Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make 
 [BuildKite](https://buildkite.com),
 [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
 etc.
+- `clean_caches.sh` - cleans out OS package and programming language caches - useful for Docker builds to reduce image size
 - `curl_auth.sh` - wraps curl to securely load your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `ldapsearch.sh` - wraps ldapsearch inferring settings from environment, can use environment variables for overrides
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
-- `find_duplicate_files_by_size.sh` / `find_duplicate_files_by_checksum.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
+- `find_duplicate_files*.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
+- `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
+- `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
+- `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
+- `ssl_get_cert.sh` - gets an SSL cert in a format you can pipe, save and use locally, for example in Java truststores
+- `ssl_verify_cert.sh` - verifies a remote SSL certificate (a more feature rich version exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
+- `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
+- `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
+- `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
 
 ##### Databases
 
@@ -411,9 +420,10 @@ etc.
   - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
 - `hdfs_*.sh` - Hadoop [HDFS](https://en.wikipedia.org/wiki/Apache_Hadoop#Hadoop_distributed_file_system) scripts:
-  - `hdfs_checksum*.sh` - walks an HDFS directory tree and outputs HDFS native checksums, MD5-of-MD5 or the portable externally comparable CRC32, in serial or in parallel to save time
+  - `hdfs_checksum*.sh` - walks an HDFS directory tree and outputs HDFS native checksums (faster) or portable externally comparable CRC32, in serial or in parallel to save time
   - `hdfs_find_replication_factor_1.sh` / `hdfs_set_replication_factor_3.sh` - finds HDFS files with replication factor 1 / sets HDFS files with replication factor <=2 to replication factor 3 to repair replication safety and avoid no replica alarms during maintenance operations (see also Python API version in the [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) repo)
   - `hdfs_file_size.sh` / `hdfs_file_size_including_replicas.sh` - quickly differentiate HDFS files raw size vs total replicated size
+  - `hadoop_random_node.sh` - picks a random Hadoop cluster worker node, like a cheap CLI load balancer, useful in scripts when you want to connect to any worker etc. See also the read [HAProxy Load Balancer configurations](https://github.com/HariSekhon/HAProxy-configs) which focuses on master nodes
 - `cloudera_*.sh` - [Cloudera](https://www.cloudera.com/) scripts:
   - `cloudera_manager_api.sh` - script to simplify querying [Cloudera Manager](https://www.cloudera.com/products/product-components/cloudera-manager.html) API using environment variables, prompts, authentication and sensible defaults. Built on top of `curl_auth.sh`
   - `cloudera_manager_impala_queries*.sh` - queries [Cloudera Manager](https://www.cloudera.com/products/product-components/cloudera-manager.html) for recent [Impala](https://impala.apache.org/) queries, failed queries, exceptions, DDL statements, metadata stale errors, metadata refresh calls etc. Built on top of `cloudera_manager_api.sh`
@@ -475,6 +485,7 @@ etc.
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/), launches in docker, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
 - `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/), launches in docker, configures pipeline from `$PWD/.concourse.yml`, triggers build, tails results in terminal, prints recent build statuses at end. Call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
+  - `fly.sh` - shortens `fly` command to not have to specify target all the time
 - `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/), launches in docker, (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`), detects and enables agent(s) to start building. Call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
@@ -574,6 +585,12 @@ etc.
   - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
   - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
 
+#### Golang
+
+- `golang_get_install.sh` - install golang CLI package
+- `golang_get_install_if_absernt.sh` - install golang CLI package if the binary isn't already available in `$PATH`
+- `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete you `bin/` etc as these are often real deployed applications rather than development binaries
+
 #### Spotify
 
 - `spotify_*.sh` - 30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo):
@@ -610,14 +627,23 @@ etc.
   - OS / Distro Package Management:
     - `install_packages.sh` - installs package lists from arguments, files or stdin on major linux distros and Mac, detecting the package manager and invoking the right install commands, with `sudo` if not root. Works on [RHEL](https://www.redhat.com/en) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/), and [Mac Homebrew](https://brew.sh/). Leverages and supports all features of the distro / OS specific install scripts listed below
     - `install_packages_if_absent.sh` - installs package lists if they're not already installed, saving time and minimizing install logs / CI logs, same support list as above
-    - `yum_install_packages.sh` / `yum_remove_packages.sh` - installs RPM lists from arguments, files or stdin. Handles Yum + Dnf behavioural differences, calls `sudo` if not root, auto-attempts variations of python/python2/python3 package names. Avoids yum slowness by checking if rpm is installed before attempting to install it, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across RHEL/CentOS/Fedora versions)
-    - `yum_install_if_absent.sh` - installs RPMs only if not already installed and not a metapackage provided by other packages (eg. `vim` metapackage provided by `vim-enhanced`), saving time and minimizing install logs / CI logs, plus all the features of `yum_install_packages.sh` above
-    - `apt_install_packages.sh` / `apt_remove_packages.sh` - installs Deb package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Debian/Ubuntu distros/versions)
-    - `apt_install_if_absent.sh` - installs Deb packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apt_install_packages.sh` above
-    - `apk_install_packages.sh` / `apk_remove_packages.sh` - installs Alpine apk package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Alpine versions)
-    - `apk_install_if_absent.sh` - installs Alpine apk packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apk_install_packages.sh` above
-    - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
-    - `brew_install_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
+    - Redhat RHEL / CentOS:
+      - `yum_install_packages.sh` / `yum_remove_packages.sh` - installs RPM lists from arguments, files or stdin. Handles Yum + Dnf behavioural differences, calls `sudo` if not root, auto-attempts variations of python/python2/python3 package names. Avoids yum slowness by checking if rpm is installed before attempting to install it, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across RHEL/CentOS/Fedora versions)
+      - `yum_install_packages_if_absent.sh` - installs RPMs only if not already installed and not a metapackage provided by other packages (eg. `vim` metapackage provided by `vim-enhanced`), saving time and minimizing install logs / CI logs, plus all the features of `yum_install_packages.sh` above
+      - `rpms_filter_installed.sh` / `rpms_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
+    - Debian / Ubuntu:
+      - `apt_install_packages.sh` / `apt_remove_packages.sh` - installs Deb package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Debian/Ubuntu distros/versions)
+      - `apt_install_packages_if_absent.sh` - installs Deb packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apt_install_packages.sh` above
+      - `apt_wait.sh` - blocking wait on concurrent apt locks to avoid failures and continue when available, mimicking yum's waiting behaviour rather than error'ing out
+      - `debs_filter_installed.sh` / `debs_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
+    - Alpine:
+      - `apk_install_packages.sh` / `apk_remove_packages.sh` - installs Alpine apk package lists from arguments, files or stdin. Auto calls `sudo` if not root, accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across Alpine versions)
+      - `apk_install_packages_if_absent.sh` - installs Alpine apk packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `apk_install_packages.sh` above
+      - `apk_filter_installed.sh` / `apk_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
+    - Mac:
+      - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
+      - `brew_install_packages_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
+      - `brew_filter_installed.sh` / `brew_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 #### Builds, Languages & Linting
@@ -651,6 +677,7 @@ etc.
 
 #### Data Format Conversion & Validation
 
+- `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against column positions
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
 
   - CSV
