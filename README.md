@@ -129,7 +129,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 
 #### Summary:
 
-- Scripts for many popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#inventory) below for more details
+- Scripts for many popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#inventory) below for more details
 - Advanced configs for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
 - CI configs for most major Continuous Integration products (see [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page)
 - CI scripts for a drop-in framework of standard checks to run in all [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), CI detection, accounting for installation differences across CI environments, root vs user, virtualenvs etc.
@@ -175,7 +175,7 @@ make
 
 `make install` sets your shell profile to source this repo. See [Individual Setup Parts](https://github.com/harisekhon/devops-bash-tools#Individual-Setup-Parts) below for more install/uninstall options.
 
-### Inventory
+## Inventory
 
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl auto OAuth / JWT, LDAP, duplicate files finder, `.bashrc`, `.bash.d/*.sh`, config dotfiles: `.vimrc`, `.screenrc`, `.tmux.conf` etc.
 - [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, config hardening, EC2 meta, Spot termination, S3 access logging, KMS rotation, SSM, ECR, CloudTrail, lots of IAM reports
