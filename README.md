@@ -254,8 +254,8 @@ etc.
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
-- `ssl_get_cert.sh` - gets an SSL cert in a format you can pipe, save and use locally, for example in Java truststores
-- `ssl_verify_cert.sh` - verifies a remote SSL certificate (a more feature rich version exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
+- `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
+- `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
 - `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
 - `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
 - `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
