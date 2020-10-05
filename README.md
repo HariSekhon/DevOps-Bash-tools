@@ -513,7 +513,7 @@ etc.
 - `appveyor_*.sh` - [AppVeyor](https://www.appveyor.com/) API scripts:
   - `appveyor_api.sh` - queries AppVeyor's API with authentication
 - `drone_*.sh` - [Drone.io](https://drone.io/) API scripts:
-  - `drone_api.sh` - queries Drone.io's API with authentication
+  - `drone_api.sh` - queries Drone's API with authentication
 - `shippable_*.sh` - [Shippable](https://www.shippable.com/) API scripts:
   - `shippable_api.sh` - queries Shippable's API with authentication
 - `wercker_*.sh` - [Wercker](https://app.wercker.com/) API scripts:
