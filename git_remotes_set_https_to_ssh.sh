@@ -36,4 +36,4 @@ cd "$topdir"
 
 cp -iv .git/config ".git/config.$(date +%F_%H%M%S).bak"
 
-perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/; s/https:\/\//git@/' .git/config
+perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/; s/https:\/\/(.+@)?/git@/' .git/config
