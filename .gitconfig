@@ -42,6 +42,7 @@
     bav = branch -a -vvv
     cp  = cherry-pick
     ls  = ls-files
+    root = rev-parse --show-toplevel
 
     rem      = remote -v
     remotes  = remote -v
