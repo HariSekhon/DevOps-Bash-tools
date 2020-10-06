@@ -274,7 +274,7 @@ if has("autocmd")
     " TODO: needs fix to allow multiple inline yaml docs in 1 file
     "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; validate_yaml.py "%"<CR>
     au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; js-yaml "%" >/dev/null && echo YAML OK<CR>
-    au BufNew,BufRead *.tf,*.tfvars,*.tf.json nmap ;l :w<CR>:!clear; cd "%:p:h" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
+    au BufNew,BufRead *.tf,*.tf.json,*.tfvars nmap ;l :w<CR>:!clear; cd "%:p:h" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
