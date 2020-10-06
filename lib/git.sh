@@ -38,6 +38,10 @@ git_repo(){
     '
 }
 
+git_root(){
+    git rev-parse --show-toplevel
+}
+
 allbranches(){
     if type -P uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
