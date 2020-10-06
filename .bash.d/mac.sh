@@ -36,7 +36,7 @@ date(){
 
 xargs(){
     # because --no-run-if-empty is useful
-    gxargs "$@"
+    command gxargs "$@"
 }
 
 if ! type tac &>/dev/null; then
