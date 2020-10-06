@@ -65,8 +65,13 @@ alias kshell='kube-shell'
 alias kubesh='kube-shell'
 
 # kustomize
-alias kbuilddiff="kustomize build | kubectl diff -f -"
-alias kbuildapply="kustomize build | kubectl apply -f -"
+alias kbuild='kustomize build'
+alias kustomizebuilddiff='kbuild | kubectl diff -f -'
+alias kbuilddiff=kustomizebuilddiff
+alias kbuildd=kbuilddiff
+alias kustomizebuildapply='kbuild | kubectl apply -f -'
+alias kbuildapply=kustomizebuildapply
+alias kbuilda=kbuildapply
 
 alias use="k config use-context"
 alias contexts="k config get-contexts"
