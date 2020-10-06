@@ -343,7 +343,7 @@ nmap <silent> ;u :w<CR> :! grep -vi harisekhon "%" \| urlview <CR> :<CR>
 " pass current line as stdin to urlview to quickly go to this url
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 "nmap <silent> ;U :.w !urlview<CR><CR> :!reset<CR><CR>
-nmap <silent> ;U :.w !open `grep -Eom 1 'https?://[^[:space:]]+'` <CR><CR>
+nmap <silent> ;U :.w !urlopen.sh<CR><CR>
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
 "nmap          ;/ :source ~/.vimrc<CR>
