@@ -79,8 +79,7 @@ kustomizebuildapply(){
     read -r -p "Are you sure you want to apply this change set? (y/N) " answer
     answer="${answer//[:space:]]/}"
     if [[ "$answer" =~ ^Y|y|yes$ ]]; then
-        #kbuild | kubectl apply -f -
-        echo APPLYING
+        kbuild | kubectl apply -f -
     fi
 }
 
