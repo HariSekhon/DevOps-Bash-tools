@@ -58,7 +58,7 @@ if [ "$(uname -s)" = Darwin ]; then
     fi
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
-    if type -P apk >/dev/null 2>&1; then
+    if type apk >/dev/null 2>&1; then
         retry $sudo apk update
         retry $sudo apk add --no-progress bash git make
     elif type apt-get >/dev/null 2>&1; then
