@@ -20,7 +20,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# bash completion and externals aren't written defensively enough, erroring commands and undefined variables :'-(
+# vendor's bash completion and other external sources aren't written defensively enough, erroring commands and undefined variables :'-(
 set +euo pipefail
 # auto-wraps xargs to gxargs for --no-run-if-empty
 # shellcheck disable=SC1090
