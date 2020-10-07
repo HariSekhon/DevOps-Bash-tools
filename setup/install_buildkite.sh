@@ -32,7 +32,7 @@ fi
 
 if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
     echo "BUILDKITE_AGENT_TOKEN environment variable not defined"
-    exit
+    exit 1
 fi
 
 if type -P buildkite-agent &>/dev/null; then
