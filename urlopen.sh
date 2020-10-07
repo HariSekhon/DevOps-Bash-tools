@@ -29,7 +29,7 @@ set +euo pipefail
 # providers browser abstraction for Linux + Mac
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/network.sh"
-set -euop pipefail
+set -euo pipefail
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
