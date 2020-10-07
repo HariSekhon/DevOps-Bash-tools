@@ -10,7 +10,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Installs Circle CI using Homebrew on Mac or direct download to ~/bin otherwise
+# Installs BuildKite using Homebrew on Mac or direct download to ~/bin otherwise
+
+# https://buildkite.com/organizations/hari-sekhon/agents#setup-linux
+#
+# https://buildkite.com/organizations/hari-sekhon/agents#setup-macos
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
