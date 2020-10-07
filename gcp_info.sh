@@ -78,7 +78,7 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
         - pods  # might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
     - Storage:
       - Cloud SQL instances
-      - Cloud SQL backups
+      - Cloud SQL backups enabled
       - Cloud Storage Buckets
       - Cloud Filestore
       - Cloud Memorystore Redis
