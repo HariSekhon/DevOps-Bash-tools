@@ -50,23 +50,7 @@ help_usage "$@"
 # shellcheck disable=SC1090
 type is_service_enabled &>/dev/null || . "$srcdir/gcp_service_apis.sh" >/dev/null
 
-
-# Cloud SQL instances
-cat <<EOF
-# ============================================================================ #
-#                     C l o u d   S Q L   I n s t a n c e s
-# ============================================================================ #
-
-EOF
-
-# might need this one instead sqladmin.googleapis.com
-if is_service_enabled sql-component.googleapis.com; then
-    gcp_info "Cloud SQL instances" gcloud sql instances list
-    gcp_info "Cloud SQL backups enabled"   gcloud sql instances list --format="table(name, settings.backupConfiguration.enabled: label='BACKUPS_ENABLED', settings.backupConfiguration.pointInTimeRecoveryEnabled, settings.backupConfiguration.replicationLogArchivingEnabled, settings.backupConfiguration.startTime)"
-else
-    echo "Cloud SQL API (sql-component.googleapis.com) is not enabled, skipping..."
-fi
-
+"$srcdir/gcp_info_cloud_sql.sh"
 
 # Cloud Storage Buckets
 cat <<EOF
