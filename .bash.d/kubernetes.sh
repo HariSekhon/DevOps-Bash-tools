@@ -69,9 +69,20 @@ alias kbuild='kustomize build'
 alias kustomizebuilddiff='kbuild | kubectl diff -f -'
 alias kbuilddiff=kustomizebuilddiff
 alias kbuildd=kbuilddiff
-alias kustomizebuildapply='kbuild | kubectl apply -f -'
+#alias kustomizebuildapply='kbuild | kubectl apply -f -'
 alias kbuildapply=kustomizebuildapply
 alias kbuilda=kbuildapply
+
+kustomizebuildapply(){
+    kustomizebuilddiff | more
+    echo
+    read -r -p "Are you sure you want to apply this change set? (y/N) " answer
+    answer="${answer//[:space:]]/}"
+    if [[ "$answer" =~ ^Y|y|yes$ ]]; then
+        #kbuild | kubectl apply -f -
+        echo APPLYING
+    fi
+}
 
 alias use="k config use-context"
 alias contexts="k config get-contexts"
