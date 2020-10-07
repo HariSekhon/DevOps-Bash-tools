@@ -29,6 +29,10 @@ srcdir="$(dirname "$0")"
 usage_description="
 Starts BuildKite Agent, either locally installed agent, or falls back to Docker agent
 
+Requires \$BUILDKITE_AGENT_TOKEN, which can be obtained from here:
+
+    https://buildkite.com/organizations/<your_user_or_organization>/agents
+
 Environment variables:
 
 BUILDKITE_DOCKER        set to any value to use Docker agent regardless
