@@ -39,16 +39,17 @@ while read -r repo dir; do
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    filename="setup/bootstrap.sh"
-    target="../$dir/$filename"
-    mkdir -pv "${target%/*}"
-    echo "syncing $filename -> $target"
-    perl -pe "
-        s/(devops-)*bash-tools/$repo/i;
-        s/make install/make/;
-        s/directory=\"devops-/directory=\"/;" \
-        "$filename" > "$target"
-    if [ "$repo" = "nagios-plugins" ]; then
-        perl -pi -e 's/^(\s*make)$/$1 build zookeeper/' "$target"
-    fi
+    for filename in setup/bootstrap.sh setup/ci_bootstrap.sh; do
+        target="../$dir/$filename"
+        mkdir -pv "${target%/*}"
+        echo "syncing $filename -> $target"
+        perl -pe "
+            s/(devops-)*bash-tools/$repo/i;
+            s/make install/make/;
+            s/directory=\"devops-/directory=\"/;" \
+            "$filename" > "$target"
+        if [ "$repo" = "nagios-plugins" ]; then
+            perl -pi -e 's/^(\s*make)$/$1 build zookeeper/' "$target"
+        fi
+    done
 done
