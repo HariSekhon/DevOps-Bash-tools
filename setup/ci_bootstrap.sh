@@ -54,7 +54,7 @@ if [ "$(uname -s)" = Darwin ]; then
     # removing adjacent dependency to be able to curl from github to avoid submodule circular dependency (git / submodule / install git & make)
     #retry "$srcdir/install_homebrew.sh"
     if command -v brew 2>&1; then
-        retry $sudo brew update
+        retry brew update
     fi
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping Linux"
