@@ -178,7 +178,7 @@ whatismyip(){
 }
 
 browser(){
-    if [ -n "$BROWSER" ]; then
+    if [ -n "${BROWSER:-}" ]; then
         "$BROWSER" "$@"
     elif isMac; then
         open "${*:-http://google.com}"
