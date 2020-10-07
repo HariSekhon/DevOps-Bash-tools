@@ -30,6 +30,7 @@ Lists GCP storage resources deployed in the current GCP Project
 Lists in this order:
 
     - Cloud SQL instances
+    - Cloud SQL backups
     - Cloud Storage Buckets
     - Cloud Filestore
     - Cloud Memorystore Redis
@@ -61,6 +62,7 @@ EOF
 # might need this one instead sqladmin.googleapis.com
 if is_service_enabled sql-component.googleapis.com; then
     gcp_info "Cloud SQL instances" gcloud sql instances list
+    gcp_info "Cloud SQL backups"   gcloud sql instances list --format="table(name, settings.backupConfiguration.enabled: label='BACKUPS_ENABLED', settings.backupConfiguration.pointInTimeRecoveryEnabled, settings.backupConfiguration.replicationLogArchivingEnabled, settings.backupConfiguration.startTime)"
 else
     echo "Cloud SQL API (sql-component.googleapis.com) is not enabled, skipping..."
 fi
