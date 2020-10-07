@@ -149,12 +149,13 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     timestamp="$(date '+%F %T')"
     netcat_switches="-l localhost 12345"
     # GNU netcat has different switches :-/
+    # also errors out so we have to ignore its error code
     if nc --version 2>&1 | grep -q GNU; then
         netcat_switches="-l -p 12345 --close"
     fi
     # need opt splitting
     # shellcheck disable=SC2086
-    response="$(nc $netcat_switches <<EOF
+    response="$(nc $netcat_switches <<EOF || :
 HTTP/1.1 200 OK
 
 $timestamp  Spotify token accepted, now return to command line to use Spotify API tools
