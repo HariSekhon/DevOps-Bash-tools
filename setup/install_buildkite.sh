@@ -36,28 +36,30 @@ if [ -z "${BUILDKITE_AGENT_TOKEN:-}" ]; then
 fi
 
 if type -P buildkite-agent &>/dev/null; then
-    if is_mac; then
-        config=/usr/local/etc/buildkite-agent/buildkite-agent.cfg
-        if [ -f "$config" ]; then
-            if ! grep "$BUILDKITE_AGENT_TOKEN" "$config"; then
-                echo "injecting buildkite token into $config"
-                sed -i.bak "s/^token=.*/token=$BUILDKITE_AGENT_TOKEN/" "$config"
-            fi
-        fi
-    fi
-    echo "buildkite-agent is already installed"
-    exit 0
+    echo "** buildkite-agent is already installed"
+elif is_mac; then
+    brew tap buildkite/buildkite
+    brew install buildkite-agent
+else
+    TOKEN="$BUILDKITE_AGENT_TOKEN" bash -c "$(curl -sL https://raw.githubusercontent.com/buildkite/agent/master/install.sh)"
 fi
 
 if is_mac; then
-    brew tap buildkite/buildkite
-    # inserts token in to /usr/local/etc/buildkite-agent/buildkite-agent.cfg
-    brew install --token="$BUILDKITE_AGENT_TOKEN" buildkite-agent
+    config=/usr/local/etc/buildkite-agent/buildkite-agent.cfg
+    if [ -f "$config" ]; then
+        if grep -q "$BUILDKITE_AGENT_TOKEN" "$config"; then
+            echo "** \$BUILDKITE_AGENT_TOKEN already found in config"
+        else
+            echo
+            echo "** injecting buildkite token into config: $config"
+            echo
+            sed -i.bak "s/^token=.*/token=$BUILDKITE_AGENT_TOKEN/" "$config"
+        fi
+    fi
     # run as a background agent
     # brew services start buildkite/buildkite/buildkite-agent
     # run as foreground agent
     buildkite-agent start
 else
-    TOKEN="$BUILDKITE_AGENT_TOKEN" bash -c "$(curl -sL https://raw.githubusercontent.com/buildkite/agent/master/install.sh)"
     ~/.buildkite-agent/bin/buildkite-agent start
 fi
