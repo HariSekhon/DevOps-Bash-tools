@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists all tags for the given Google Container Registry docker image as well as their image upload timestamp
+Lists all tags for the given GCR docker image as well as their image upload timestamp
 
 Output Format:
 

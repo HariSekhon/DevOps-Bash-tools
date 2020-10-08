@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds the newest build of a given Google Container Registry docker image by creation date and tags it as 'latest'
+Finds the newest build of a given GCR docker image by creation date and tags it as 'latest'
 
 Does this via metadata API calls to  avoids network transfer from any docker pull / docker push
 
