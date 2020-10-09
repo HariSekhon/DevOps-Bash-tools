@@ -155,7 +155,7 @@ sqlite
 ssllabs-scan
 sslscan
 ssh-copy-id
-subversion
+#subversion  # pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
 thrift
 tidy-html5
 tree
@@ -165,7 +165,7 @@ unix2dos
 unrar
 utimer
 vagrant-completion
-vim
+#vim  # unneeded as vim is already installed - pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
 watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
