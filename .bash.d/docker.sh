@@ -95,12 +95,22 @@ dcf(){
 #alias dockerr="docker run --rm -ti"
 function dockerrunrm(){
     local args=""
+    local passed_first_non_switch_arg=0  # when this gets to 3 we stop doing prefix processing
     for x in "$@"; do
-        if [ "${x:0:1}" = "/" ]; then
-            if [[ "$x" != */Users/* && "$x" != */home/* ]] &&
-               [ "$(strLastIndexOf "$x" / )" -eq 1 ]; then
-                x="harisekhon$x"
+        if [ "${x:0:1}" = "-" ]; then
+            passed_first_non_switch_arg=1
+        elif [ $passed_first_non_switch_arg -eq 1 ]; then
+            passed_first_non_switch_arg=2
+        elif [ $passed_first_non_switch_arg -lt 3 ]; then
+            if [ "${x:0:1}" = "/" ]; then
+                if [[ "$x" != */Users/* && "$x" != */home/* ]] &&
+                   [ "$(strLastIndexOf "$x" / )" -eq 1 ]; then
+                    x="harisekhon$x"
+                fi
             fi
+            passed_first_non_switch_arg=3
+        else
+            ((passed_first_non_switch_arg+=1))
         fi
         args="$args $x"
     done
@@ -117,7 +127,9 @@ function dockerrunrm(){
     #    echo "warning: using alpine:2.* with args but alpine:2.* doesn't have a default CMD so adding 'sh' arg" >&2
     #    args="$args sh"
     #fi
-    eval docker run --rm -ti -v "$PWD":/pwd -w /pwd "$args"
+    # want arg splitting
+    # shellcheck disable=SC2086
+    docker run --rm -ti -v "$PWD":/pwd -w /pwd $args
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
 
