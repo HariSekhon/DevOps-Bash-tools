@@ -13,8 +13,20 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Removes local caches for OS package installations and Programming Language development libraries
+#
+# Useful in Docker builds to reduce image size or just general space cleaning
+#
+# eg.
+#
+# Add this to the end of each of your RUN statements in your Dockerfile to clean up the installation caches and not save them in the Docker layer:
+#
+#   curl -s https://raw.githubusercontent.com/HariSekhon/bash-tools/master/docker_clean.sh | sh
+#
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+# not using any of myl libraries or path dependencies to allow the above self-contained curl to shell to work for calling from Dockerfile
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # OS package management caches
@@ -56,6 +68,12 @@ personal_cache_list="
 .sbt
 "
 
+
+echo "Deleting Caches"
+# =====================================
+# Run native OS cache cleaning commands
+#
+# rm -fr is done in the next block
 #if type -P apk &>/dev/null; then
 #    rm -rf /var/cache/apk
 if type -P apt-get &>/dev/null; then
@@ -68,12 +86,19 @@ elif type -P yum &>/dev/null; then
     yum clean all
 fi
 
+# =========================
+# Delete OS Cache locations
+#
 # safer than for loop - don't risk word splitting with rm
 while read -r directory; do
     [ -n "$directory" ] || continue
     rm -rf "$directory"
 done <<< "$cache_list"
 
+echo "Deleting Personal Caches"
+# =============================================================
+# Delete Personal Cache locations & Programming Language Caches
+#
 while read -r directory; do
     [ -n "$directory" ] || continue
     # ~ more reliable than $HOME which could be unset
@@ -84,3 +109,5 @@ while read -r directory; do
         fi
     fi
 done <<< "$personal_cache_list"
+
+echo "Finished deleting caches"
