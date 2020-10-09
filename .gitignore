@@ -9,6 +9,10 @@
 #                              . g i t i g n o r e
 # ============================================================================ #
 
+# Ignores any file in any subdirectory with matching basename or path
+#
+# (can use **/filename but not necessary)
+
 # Once in a while you should check which files have been ignored via:
 #
 #       git status --ignored
