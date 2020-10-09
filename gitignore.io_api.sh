@@ -27,17 +27,24 @@ Downloads the latest gitignore.io ignore lists to standard output via gitignore.
 
 Useful as a large base to populate your .gitignore, and then sprinkle a few customizations
 
-See the massive .gitignore in this repo for an example of this being used along with the list of common languages
-and frameworks passed to this script
+See the massive .gitignore in this repo for an example of this being used
 
 
-Args should be a comma / space separate list of languages and frameworks - see gitignore.io for the full list available
+Args should be a comma / space separate list of languages and frameworks for which to retrieve gitignore config for
 
 Example:
 
+# List all available languages, configs and frameworks:
+
+    ${0##*/} list
+
+# Get the .gitignore config for the C, Python and Perl programming languages
+
     ${0##*/} c,python,perl
 
-    ${0##*/} c python perl ruby java scala go
+# Get the .gitignore for a whole bunch of programming languages you use, plus Maven, SBT, Gradle, Ansible and Homebrew ...
+
+    ${0##*/} c python perl ruby java scala go maven sbt gradle ansible
 "
 
 # used by usage() in lib/utils.sh
