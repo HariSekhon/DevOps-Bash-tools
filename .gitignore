@@ -5,6 +5,10 @@
 #  vim: filetype=conf
 #
 
+# ============================================================================ #
+#                              . g i t i g n o r e
+# ============================================================================ #
+
 # Once in a while you should check which files have been ignored via:
 #
 #       git status --ignored
@@ -20,7 +24,6 @@
 *.bak
 *.bak.*
 *.bkp
-#*.bak.\d{4}-\d{2}-\d{1,2}_\d{2}-\d{2}-\d{2}
 *.bin
 *.bz2
 *.class
@@ -28,6 +31,7 @@
 *.flv
 *.gif
 *.gz
+*.img
 *.jar
 *.jpeg
 *.jpg
@@ -67,7 +71,7 @@
 .anyconnect
 .ApacheDirectoryStudio/
 .atftp_history
-.atom
+.atom/
 .audacious/.thumbs
 .audacious/accels
 .audacious/log
@@ -109,7 +113,7 @@
 .cpan/histfile
 .cpan/Metadata
 .cpan/sources/
-.cpanm
+.cpanm/
 .cups/
 .data
 .dbshell
@@ -165,7 +169,7 @@
 .gstreamer-*
 .gvfs
 .hg
-.htoprc
+#.htoprc
 .ICEauthority
 .IdeaIC*
 .idea
@@ -201,13 +205,13 @@
 .neo4j_shell_history
 .npm/
 .octave_hist
-.octave_hist$
 .openoffice.org
 .openoffice.org2
 .oracle_jre_usage/
 .ovftool.ssldb
 .Qsync/
 .parallel/
+# PostgreSQL password file
 .pgpass
 # stores credentials
 .pig_history
