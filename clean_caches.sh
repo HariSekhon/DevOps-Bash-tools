@@ -31,6 +31,7 @@ set -euo pipefail
 
 # OS package management caches
 cache_list="
+/etc/apk/cache
 /var/lib/apt/lists
 /var/cache/apt
 /var/cache/apk
