@@ -95,22 +95,24 @@ dcf(){
 #alias dockerr="docker run --rm -ti"
 function dockerrunrm(){
     local args=""
-    local passed_first_non_switch_arg=0  # when this gets to 3 we stop doing prefix processing
+    local passed_first_non_switch_arg=0  # when this latch gets to level 3 we stop doing prefix processing to not adulterate ls -l / type args
     for x in "$@"; do
-        if [ "${x:0:1}" = "-" ]; then
-            passed_first_non_switch_arg=1
-        elif [ $passed_first_non_switch_arg -eq 1 ]; then
-            passed_first_non_switch_arg=2
-        elif [ $passed_first_non_switch_arg -lt 3 ]; then
-            if [ "${x:0:1}" = "/" ]; then
-                if [[ "$x" != */Users/* && "$x" != */home/* ]] &&
-                   [ "$(strLastIndexOf "$x" / )" -eq 1 ]; then
-                    x="harisekhon$x"
+        if [ $passed_first_non_switch_arg -lt 3 ]; then
+            if [ "${x:0:1}" = "-" ]; then
+                passed_first_non_switch_arg=1
+            elif [ $passed_first_non_switch_arg -eq 1 ]; then
+                passed_first_non_switch_arg=2
+            elif [ $passed_first_non_switch_arg -lt 3 ]; then
+                if [ "${x:0:1}" = "/" ]; then
+                    if [[ "$x" != */Users/* && "$x" != */home/* ]] &&
+                       [ "$(strLastIndexOf "$x" / )" -eq 1 ]; then
+                        x="harisekhon$x"
+                    fi
                 fi
+                passed_first_non_switch_arg=3
+            else
+                ((passed_first_non_switch_arg+=1))
             fi
-            passed_first_non_switch_arg=3
-        else
-            ((passed_first_non_switch_arg+=1))
         fi
         args="$args $x"
     done
