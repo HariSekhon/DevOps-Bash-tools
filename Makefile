@@ -186,7 +186,7 @@ pip-desktop: pip
 	./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: nodejs-desktop
-nodejs-desktop: system-packages npm
+nodejs-desktop: system-packages npm-desktop
 
 .PHONY: npm-desktop
 npm-desktop: npm
