@@ -23,6 +23,8 @@ if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
 fi
 bash_tools_utils_imported=1
 
+export PATH="$PATH:/usr/local/bin"
+
 . "$srcdir_bash_tools_utils/ci.sh"
 . "$srcdir_bash_tools_utils/docker.sh"
 . "$srcdir_bash_tools_utils/os.sh"

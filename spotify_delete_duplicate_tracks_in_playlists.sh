@@ -74,14 +74,16 @@ if [ -z "${SPOTIFY_NO_CONFIRM:-}" ]; then
     done <<< "$duplicates"
     echo
 
-    read -r -p "Are you sure you want to delete these $count tracks from playlist '$playlist'? (y/N) " answer
-    echo >&2
+    if is_interactive; then
+        read -r -p "Are you sure you want to delete these $count tracks from playlist '$playlist'? (y/N) " answer
+        echo >&2
 
-    shopt -s nocasematch
+        shopt -s nocasematch
 
-    if ! [[ "$answer" =~ y|yes ]]; then
-        timestamp "Aborting..."
-        exit 1
+        if ! [[ "$answer" =~ y|yes ]]; then
+            timestamp "Aborting..."
+            exit 1
+        fi
     fi
 fi
 
