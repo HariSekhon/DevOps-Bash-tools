@@ -20,9 +20,16 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
 # shellcheck disable=SC2034
 usage_description="
 Triggers a BuildKite build job for a given pipeline
+
+Pipeline can be given as an argumnent, or taken from \$BUILDKITE_PIPELINE / \$PIPELINE environment variables
+
+Otherwise tries to infer from the current Git repository remote origin URL
 "
 
 # used by usage() in lib/utils.sh
@@ -41,7 +48,7 @@ if [ $# -gt 0 ]; then
     pipeline="$1"
     shift
 else
-    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-}}"
+    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-$(git_repo_name)}}"
 fi
 
 if [ -z "$pipeline" ]; then
