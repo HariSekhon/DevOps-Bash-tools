@@ -23,7 +23,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Print each table's DDL metadata field eg. Location
+Prints the number of columns per Hive table
 
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 
@@ -62,5 +62,6 @@ while read -r db table; do
     fi |
     tail -n +2 |
     awk '{if(NF == 2){print}}' |
-    wc -l
+    wc -l |
+    sed 's/[[:space:]]*//g'
 done
