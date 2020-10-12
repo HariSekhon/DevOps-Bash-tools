@@ -24,9 +24,16 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists all Impala tables in all databases using adjacent impala_shell.sh script
 
+Output Format:
+
+<db>    <table>
+
+
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 
+
 Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
+
 
 For more documentation see the comments at the top of impala_shell.sh
 
