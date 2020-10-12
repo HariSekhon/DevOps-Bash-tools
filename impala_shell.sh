@@ -24,11 +24,14 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Script to more easily connect to Impala without having to find an impalad and repeatedly specify options like -k for kerberos
 
+
 Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
 
- If using dedicated coordinators then consider setting IMPALA_HOST to one of those explicitly, see
+
+If using dedicated coordinators then consider setting IMPALA_HOST to one of those explicitly, see
 
    https://docs.cloudera.com/documentation/enterprise/5-16-x/topics/impala_dedicated_coordinator.html
+
 
 See also:
 
@@ -43,14 +46,20 @@ Error connecting: TTransportException, TSocket read 0 bytes
 
 then check if you need to add --ssl to the command line (or export IMPALA_SSL=1 to do this automatically, eg. put in .bashrc or similar)
 
-useful options for scripting:
+
+Useful options for scripting:
 
   -q --query
   -B --delimited
   --output_delimiter=\\t   # default
   --quiet
 
+
 See adjacent impala_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
+
+
+Examples:
+
 
 list all databases:
 
