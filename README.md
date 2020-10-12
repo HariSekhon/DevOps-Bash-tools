@@ -423,7 +423,7 @@ etc.
   - `hive_list_databases.sh` - list Hive databases, one per line, suitable for scripting pipelines
   - `hive_list_tables.sh` - list Hive tables, one per line, suitable for scripting pipelines
   - `hive_tables_metadata.sh` - lists a given DDL metadata field for each Hive table (to compare tables)
-  - `hive_tables_location.sh` - lists the data locations of all Hive tables (eg. to compare locations of external tables)
+  - `hive_tables_location.sh` - lists the data location per Hive table (eg. compare external table locations)
   - `hive_tables_row_counts.sh` - lists the row count per Hive table
   - `hive_tables_column_counts.sh` - lists the column count per Hive table
 - ` impala*.sh` - [Apache Impala](https://impala.apache.org/) scripts:
@@ -432,7 +432,7 @@ etc.
   - `impala_list_databases.sh` - list Impala databases, one per line, suitable for scripting pipelines
   - `impala_list_tables.sh` - list Impala tables, one per line, suitable for scripting pipelines
   - `impala_tables_metadata.sh` - lists a given DDL metadata field for each Impala table (to compare tables)
-  - `impala_tables_location.sh` - lists the data locations of all Impala tables (eg. to compare locations of external tables)
+  - `impala_tables_location.sh` - lists the data location per Impala table (eg. compare external table locations)
   - `impala_tables_row_counts.sh` - lists the row count per Impala table
   - `impala_tables_column_counts.sh` - lists the column count per Impala table
 - `hdfs_*.sh` - Hadoop [HDFS](https://en.wikipedia.org/wiki/Apache_Hadoop#Hadoop_distributed_file_system) scripts:
