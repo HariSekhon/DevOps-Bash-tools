@@ -25,9 +25,16 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Prints the number of columns per Hive table
 
+Output Format:
+
+<db>.<table>    <column_count>
+
+
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 
+
 Tested on Hive 1.1.0 on CDH 5.10, 5.16
+
 
 For more documentation see the comments at the top of beeline.sh
 
