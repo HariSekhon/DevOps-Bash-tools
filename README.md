@@ -157,7 +157,7 @@ Cloud & Big Data Contractor, United Kingdom
 To bootstrap, install packages and link in to your shell profile to inherit all configs, do:
 
 ```
-curl -L git.io/bash-bootstrap | sh
+curl -L https://git.io/bash-bootstrap | sh
 ```
 
 - Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#Inventory) below)
