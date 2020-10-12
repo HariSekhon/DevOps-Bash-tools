@@ -430,7 +430,12 @@ etc.
 - ` impala*.sh` - [Apache Impala](https://impala.apache.org/) scripts:
   - `impala_shell.sh` - shortens `impala-shell` command to connect to [Impala](https://impala.apache.org/) by parsing the Hadoop topology map and selecting a random datanode to connect to its Impalad, acting as a cheap CLI load balancer. For a real load balancer see [HAProxy config for Impala](https://github.com/HariSekhon/HAProxy-configs) (and many other Big Data & NoSQL technologies). Optional environment variables `$IMPALA_HOST` (eg. point to an explicit node or an HAProxy load balancer) and `IMPALA_SSL=1` (or use regular impala-shell `--ssl` argument pass through)
   - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
-  - `impala_*.sh` - various scripts using `impala_shell.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
+  - `impala_list_databases.sh` - list Impala databases, one per line, in a format suitable for scripting pipelines
+  - `impala_list_tables.sh` - list Impala tables in `<db>\t<table>` format, one per line, suitable for scripting pipelines
+  - `impala_tables_metadata.sh` - lists a given metadata field for each Impala table eg. `<db>.<table>\t<field>` (to compare Impala table configurations)
+  - `impala_tables_location.sh` - lists the data locations of all Impala tables eg. `<db>.<table>\t<location>` (to compare locations of all external tables)
+  - `impala_tables_row_counts.sh` - lists the row counts per Impala table eg. `<db>.<table>\t<row_count>`
+  - `impala_tables_column_counts.sh` - lists the number of columns per Impala table eg. `<db>.<table>\t<column_count>`
 - `hdfs_*.sh` - Hadoop [HDFS](https://en.wikipedia.org/wiki/Apache_Hadoop#Hadoop_distributed_file_system) scripts:
   - `hdfs_checksum*.sh` - walks an HDFS directory tree and outputs HDFS native checksums (faster) or portable externally comparable CRC32, in serial or in parallel to save time
   - `hdfs_find_replication_factor_1.sh` / `hdfs_set_replication_factor_3.sh` - finds HDFS files with replication factor 1 / sets HDFS files with replication factor <=2 to replication factor 3 to repair replication safety and avoid no replica alarms during maintenance operations (see also Python API version in the [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) repo)
