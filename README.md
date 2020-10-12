@@ -421,6 +421,12 @@ etc.
     - `beeline_zk.sh` - same as above for [HiveServer2](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Overview) HA by auto-populating SSL and ZooKeeper service discovery settings (specify `$HIVE_ZOOKEEPERS` environment variable to override). Automatically called by `beeline.sh` if either `$HIVE_ZOOKEEPERS` or `$HIVE_HA` is set (the latter parses `hive-site.xml` for the ZooKeeper addresses)
   - `hive_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `hive_*.sh` - various scripts using `beeline.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
+  - `hive_list_databases.sh` - list Hive databases, one per line, in a format suitable for scripting pipelines
+  - `hive_list_tables.sh` - list Hive tables in `<db>\t<table>` format, one per line, suitable for scripting pipelines
+  - `hive_tables_metadata.sh` - lists a given metadata field for each Hive table eg. `<db>.<table>\t<field>` (to compare Hive table configurations)
+  - `hive_tables_location.sh` - lists the data locations of all Hive tables eg. `<db>.<table>\t<location>` (to compare locations of all external tables)
+  - `hive_tables_row_counts.sh` - lists the row counts per Hive table eg. `<db>.<table>\t<row_count>`
+  - `hive_tables_column_counts.sh` - lists the number of columns per Hive table eg. `<db>.<table>\t<column_count>`
 - ` impala*.sh` - [Apache Impala](https://impala.apache.org/) scripts:
   - `impala_shell.sh` - shortens `impala-shell` command to connect to [Impala](https://impala.apache.org/) by parsing the Hadoop topology map and selecting a random datanode to connect to its Impalad, acting as a cheap CLI load balancer. For a real load balancer see [HAProxy config for Impala](https://github.com/HariSekhon/HAProxy-configs) (and many other Big Data & NoSQL technologies). Optional environment variables `$IMPALA_HOST` (eg. point to an explicit node or an HAProxy load balancer) and `IMPALA_SSL=1` (or use regular impala-shell `--ssl` argument pass through)
   - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
