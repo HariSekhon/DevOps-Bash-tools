@@ -25,7 +25,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Show table location for all tables via beeline
 
+Output Format:
+
+<db>.<table>    <location>
+
+
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
+
 
 Tested on Hive 1.1.0 on CDH 5.10, 5.16
 
