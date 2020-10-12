@@ -24,26 +24,36 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Script to more easily connect to HiveServer2 without having to specify the big JDBC connection string and all options like kerberos principal, ssl etc
 
+
 Tested on Hive 1.1.0 on CDH 5.10
 
-useful options for scripting:
+
+Useful options for scripting:
 
   --silent=true
   --outputformat=tsv2     (tsv is deprecated and single quotes results, tsv2 is recommended and cleaner)
 
+
 See adjacent hive_*.sh scripts for slightly better versions of these quick command line examples, including better escaping
 
-List all databases:
+
+Examples:
+
+
+# List all databases:
 
   ./beeline.sh --silent=true --outputformat=tsv2 -e 'show databases' | tail -n +2
 
-List all tables in all databases:
+
+# List all tables in all databases:
 
   opts=\"--silent=true --outputformat=tsv2\"; ./beeline.sh \$opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh \$opts -e \"show tables from \$db\" | sed \"s/^/\$db./\"; done
 
-Row counts of all tables in all databases:
+
+# Row counts of all tables in all databases:
 
   opts=\"--silent=true --outputformat=tsv2\"; ./beeline.sh \$opts -e 'show databases' | tail -n +2 | while read db; do ./beeline.sh \$opts -e \"show tables from \$db\" | sed \"s/^/\$db./\"; done | tail -n +2 | while read table; do printf \"%s\\t\" \"\$table\"; ./beeline.sh \$opts -e \"select count(*) from \$table\" | tail -n +2; done | tee row_counts_hive.tsv
+
 
 See also:
 
