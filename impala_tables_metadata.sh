@@ -25,7 +25,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Print each table's DDL metadata field eg. Location
 
+Output Format:
+
+<db>.<table>    <field>
+
+
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
+
 
 Caveats:
 
@@ -34,7 +40,9 @@ Caveats:
     Impala is faster than Hive for the first ~1000 tables but then slows down
     so if you have a lot of tables I recommend you use the Hive version of this instead
 
+
 Tested on Impala 2.7.0, 2.12.0 on CDH 5.10, 5.16 with Kerberos and SSL
+
 
 For more documentation see the comments at the top of impala_shell.sh
 
