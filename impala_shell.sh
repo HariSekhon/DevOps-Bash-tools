@@ -61,15 +61,17 @@ See adjacent impala_*.sh scripts for slightly better versions of these quick com
 Examples:
 
 
-list all databases:
+# List all databases:
 
   ./impala_shell.sh -Bq 'show databases' | awk '{print \$1}'
 
-list all tables in all databases:
+
+# List all tables in all databases:
 
   ./impala_shell.sh -Bq 'show databases' | while read db rest; do ./impala_shell.sh -Bq \"use \$db; show tables\" | sed \"s/^/\$db./\"; done
 
-row counts for all tables in all databases:
+
+# Row counts for all tables in all databases:
 
   ./impala_shell.sh --quiet -Bq 'show databases' | while read db rest; do ./impala_shell.sh --quiet -Bq \"use \$db; show tables\" | while read table; do printf \"%s\\t\" \"\$db.\$table\"; ./impala_shell.sh --quiet -Bq \"use \$db; SELECT COUNT(*) FROM \$table\"; done; done > row_counts.tsv
 "
