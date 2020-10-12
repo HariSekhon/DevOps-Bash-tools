@@ -420,10 +420,9 @@ etc.
   - `beeline.sh` - shortens `beeline` command to connect to [HiveServer2](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Overview) by auto-populating Kerberos and SSL settings, zookeepers for HiveServer2 HA discovery if the environment variable `$HIVE_HA` is set or using the `$HIVESERVER_HOST` environment variable so you can connect with no arguments (prompts for HiveServer2 address if you haven't set `$HIVESERVER_HOST` or `$HIVE_HA`)
     - `beeline_zk.sh` - same as above for [HiveServer2](https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Overview) HA by auto-populating SSL and ZooKeeper service discovery settings (specify `$HIVE_ZOOKEEPERS` environment variable to override). Automatically called by `beeline.sh` if either `$HIVE_ZOOKEEPERS` or `$HIVE_HA` is set (the latter parses `hive-site.xml` for the ZooKeeper addresses)
   - `hive_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
-  - `hive_*.sh` - various scripts using `beeline.sh` to list databases, tables, for all tables: row counts, DDL metadata field extraction, table locations etc.
   - `hive_list_databases.sh` - list Hive databases, one per line, in a format suitable for scripting pipelines
   - `hive_list_tables.sh` - list Hive tables in `<db>\t<table>` format, one per line, suitable for scripting pipelines
-  - `hive_tables_metadata.sh` - lists a given metadata field for each Hive table eg. `<db>.<table>\t<field>` (to compare Hive table configurations)
+  - `hive_tables_metadata.sh` - lists a given DDL metadata field for each Hive table eg. `<db>.<table>\t<field>` (to compare Hive table configurations)
   - `hive_tables_location.sh` - lists the data locations of all Hive tables eg. `<db>.<table>\t<location>` (to compare locations of all external tables)
   - `hive_tables_row_counts.sh` - lists the row counts per Hive table eg. `<db>.<table>\t<row_count>`
   - `hive_tables_column_counts.sh` - lists the number of columns per Hive table eg. `<db>.<table>\t<column_count>`
@@ -432,7 +431,7 @@ etc.
   - `impala_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `impala_list_databases.sh` - list Impala databases, one per line, in a format suitable for scripting pipelines
   - `impala_list_tables.sh` - list Impala tables in `<db>\t<table>` format, one per line, suitable for scripting pipelines
-  - `impala_tables_metadata.sh` - lists a given metadata field for each Impala table eg. `<db>.<table>\t<field>` (to compare Impala table configurations)
+  - `impala_tables_metadata.sh` - lists a given DDL metadata field for each Impala table eg. `<db>.<table>\t<field>` (to compare Impala table configurations)
   - `impala_tables_location.sh` - lists the data locations of all Impala tables eg. `<db>.<table>\t<location>` (to compare locations of all external tables)
   - `impala_tables_row_counts.sh` - lists the row counts per Impala table eg. `<db>.<table>\t<row_count>`
   - `impala_tables_column_counts.sh` - lists the number of columns per Impala table eg. `<db>.<table>\t<column_count>`
