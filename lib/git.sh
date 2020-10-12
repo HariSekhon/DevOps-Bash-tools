@@ -38,6 +38,11 @@ git_repo(){
     '
 }
 
+git_repo_name(){
+    git_repo |
+    sed 's|.*/||'
+}
+
 git_root(){
     git rev-parse --show-toplevel
 }
