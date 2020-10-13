@@ -29,6 +29,10 @@ usage_description="
 Run a manual backup of one or more Cloud SQL database instances in the current project
 
 SQL instances can optionally be specified, otherwise iterates all running non-replica SQL instances
+
+Cloud SQL backups are deleted with SQL instances so while these are convenient, you should also do full exports to GCS using the adjacent script:
+
+    gcp_sql_export.sh
 "
 
 # used by usage() in lib/utils.sh
