@@ -65,7 +65,7 @@ min_args 1 "$@"
 gcs_bucket="$1"
 shift || :
 
-sql_instances="${*}"
+sql_instances="$*"
 
 if [ -z "$sql_instances" ]; then
     # XXX: only running instances can do exports, otherwise will error out
