@@ -24,9 +24,14 @@ echo
 for x in python python2 python3 pip pip2 pip3; do
     cmdpath="$(command -v "$x" 2>/dev/null)"
     if [ -n "$cmdpath" ]; then
-        echo "$cmdpath"
-        ls -l "$cmdpath"
+        printf "%s" "$cmdpath => "
         "$cmdpath" -V
     fi
-    echo
+done
+echo
+for x in python python2 python3 pip pip2 pip3; do
+    cmdpath="$(command -v "$x" 2>/dev/null)"
+    if [ -n "$cmdpath" ]; then
+        ls -l "$cmdpath"
+    fi
 done
