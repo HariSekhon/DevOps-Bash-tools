@@ -49,9 +49,17 @@ gcp_sql_service_accounts.sh
 
 - Do not back up Replicas as it the export will likely conflict with the ongoing recovery operation like so:
 
-ERROR: (gcloud.sql.export.sql) [ERROR_RDBMS] pg_dump: Dumping the contents of table \"<myTable>\" failed: PQgetResult() failed.
-pg_dump: Error message from server: ERROR:  canceling statement due to conflict with recovery
+    ERROR: (gcloud.sql.export.sql) [ERROR_RDBMS] pg_dump: Dumping the contents of table \"<myTable>\" failed: PQgetResult() failed.
+    pg_dump: Error message from server: ERROR:  canceling statement due to conflict with recovery
 
+
+For busy heavily utilized production databases this may put a strain on their resources or take a long time due to contention leading to the export command erroring out with a timeout waiting like so:
+
+    Exporting Cloud SQL instance...failed.
+    ERROR: (gcloud.sql.export.sql) Operation https://sqladmin.googleapis.com/sql/v1beta4/projects/<project>/operations/<instance_id> is taking longer than expected. You can continue waiting for the operation by running \`gcloud beta sql operations wait --project <project> <instance_id>\`
+
+
+In this case your options are modify the export command to use --async or use the --offload flag to use serverless export (will take 5 minutes longer to spin up a replica and additional charges will apply)
 "
 
 # used by usage() in lib/utils.sh
@@ -83,7 +91,7 @@ for sql_instance in $sql_instances; do
     for database in $databases; do
         timestamp "Exporting SQL instance '$sql_instance' database '$database'"
         # adding .gz will auto-encrypt the bucket
-        gcloud sql export sql "$sql_instance" "gs://$gcs_bucket/$sql_instance--$database--backup-$(date '+%F_%H%M').sql.gz" --database "$database"
+        gcloud sql export sql "$sql_instance" "gs://$gcs_bucket/$sql_instance--$database--backup-$(date '+%F_%H%M').sql.gz" --database "$database"  # --offload
     done
 done
 echo >&2
