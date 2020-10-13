@@ -30,6 +30,10 @@ Run a manual backup of one or more Cloud SQL database instances in the current p
 
 SQL instances can optionally be specified, otherwise iterates all running non-replica SQL instances
 
+To enabled automated daily backups, run the adjacent script:
+
+    gcp_sql_enable_automated_backups.sh
+
 Cloud SQL backups are deleted with SQL instances so while these are convenient, you should also do full exports to GCS using the adjacent script:
 
     gcp_sql_export.sh
