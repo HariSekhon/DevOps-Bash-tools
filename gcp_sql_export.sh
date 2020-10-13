@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://cloud.google.com/sql/docs/postgres/import-export/exporting
+#
+# https://cloud.google.com/sql/docs/postgres/import-export
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,9 +30,9 @@ Exports all running non-replica SQL database instances in the current project to
 
 GCS bucket name must be specified
 
-SQL instances can optionally be specified, otherwise iterates all running SQL instances
+SQL instances can optionally be specified, otherwise iterates all running non-replica SQL instances
 (only running instances can export, otherwise will error out)
-(only non-replicas should be exported, replicas will likely fail due to conflict with replication changes)
+(only non-replicas should be exported, replicas will likely fail due to conflict with replication recovery)
 
 All databases for each SQL instance will be exported to the GCS bucket with file names in the format:
 
