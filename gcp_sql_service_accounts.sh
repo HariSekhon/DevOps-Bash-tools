@@ -41,7 +41,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-sql_instances="${*}"
+sql_instances="$*"
 
 if [ -z "$sql_instances" ]; then
     sql_instances="$(gcloud sql instances list --format='get(name)')"
