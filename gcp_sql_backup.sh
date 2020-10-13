@@ -46,6 +46,9 @@ no_more_opts "$@"
 sql_instances="$*"
 
 if [ -z "$sql_instances" ]; then
+    # XXX: backups cannot be run for stopped instances or read replicas:
+    # ERROR: (gcloud.sql.backups.create) HTTPError 400: This operation is not valid for this instance.
+    # ERROR: (gcloud.sql.backups.create) HTTPError 400: Backups cannot be enabled for read replica instances.
     sql_instances="$(gcloud sql instances list --format=json |
                      jq -r '.[] | select(.instanceType != "READ_REPLICA_INSTANCE") | select(.state == "RUNNABLE") | .name')"
 fi
