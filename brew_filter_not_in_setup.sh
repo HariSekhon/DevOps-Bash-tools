@@ -59,5 +59,6 @@ else
     command ggrep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt) |
     while read -r package; do
         grep -Eqi "^#${package}([[:space:]]|$)" "$srcdir/setup/"brew-packages*.txt || echo "$package"
-    done
+    done |
+    sort -u
 fi
