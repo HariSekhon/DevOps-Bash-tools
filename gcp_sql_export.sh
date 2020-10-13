@@ -66,7 +66,9 @@ sql_instances="${*}"
 if [ -z "$sql_instances" ]; then
     # XXX: only running instances can do exports, otherwise will error out
     # XXX: only non-replicas back up correctly due to conflicts with ongoing replication recovery operations - see description above for details
-    sql_instances="$(gcloud sql instances list --format='get(name)' --filter 'STATUS=runnable' | grep -v -- '-replica$')"
+    #sql_instances="$(gcloud sql instances list --format='get(name)' --filter 'STATUS=runnable' | grep -v -- '-replica$')"
+    # better to not rely on the name having a '-replica' suffix and instead use the JSON instanceType field to exclude replicas
+    sql_instances="$(gcloud sql instances list --format=json | jq -r '.[] | select(.instanceType != "READ_REPLICA_INSTANCE") | select(.state == "RUNNABLE") | .name')"
 fi
 
 timestamp "Exporting SQL instance(s) to GCS bucket '$gcs_bucket'"
