@@ -30,7 +30,7 @@ SQL instances can optionally be specified, otherwise iterates all running non-re
 
 This automatically creates a backup at the time of enabling, which takes a few minutes during which your database may be unavailable.
 
-WARNING: Enabling/Disabling point-in-time recovery restarts the instance, causing an outage.
+WARNING: Enabling/Disabling point-in-time recovery restarts the instance, causing an outage, so this script will prompt for confirmation before proceeding.
 
 Requires automated backups to already be enabled, otherwise you'll get this error:
 
@@ -56,6 +56,24 @@ if [ -z "$sql_instances" ]; then
     # ERROR: (gcloud.sql.instances.patch) HTTPError 400: The incoming request contained invalid data.
     sql_instances="$(gcloud sql instances list --format=json |
                      jq -r '.[] | select(.instanceType != "READ_REPLICA_INSTANCE") | select(.state == "RUNNABLE") | .name')"
+fi
+
+echo "Cloud SQL instances on which point-in-time recovery will be enabled:"
+echo
+for sql_instance in $sql_instances; do
+    echo "$sql_instance"
+done
+echo
+echo
+echo "WARNING: Enabling or disabling point-in-time recovery restarts the instance, causing an outage"
+echo
+echo "WARNING: Do not do this on production databases during business hours"
+echo
+read -r -p "Are you sure you want to proceed to enable point-in-time recovery including restarting the above Cloud SQL instances? (y/N) " answer
+echo
+if ! [[ "$answer" =~ ^(y|yes)$ ]]; then
+    echo "Aborting..."
+    exit 1
 fi
 
 for sql_instance in $sql_instances; do
