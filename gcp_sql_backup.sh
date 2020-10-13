@@ -41,7 +41,7 @@ usage_args="[<sql_instance1> <sql_instance2> ...]"
 
 help_usage "$@"
 
-#min_args 1 "$@"
+no_more_opts "$@"
 
 sql_instances="$*"
 
