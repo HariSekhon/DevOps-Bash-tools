@@ -30,7 +30,13 @@ SQL instances can optionally be specified, otherwise iterates all running non-re
 
 This automatically creates a backup at the time of enabling, which takes a few minutes during which your database may be unavailable.
 
-Requires automated backups to already be configured, see adjacent script:
+WARNING: Enabling/Disabling point-in-time recovery restarts the instance, causing an outage.
+
+Requires automated backups to already be enabled, otherwise you'll get this error:
+
+    ERROR: (gcloud.sql.instances.patch) HTTPError 400: Invalid request: Point in time recovery must be disabled when backup is disabled.
+
+See adjacent script to enable automated backups first:
 
     gcp_sql_enable_automated_backups.sh
 "
