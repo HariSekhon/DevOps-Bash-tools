@@ -348,8 +348,9 @@ etc.
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
     - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
-  - `gcp_sql_service_accounts.sh` - lists [Cloud SQL](https://cloud.google.com/sql) service accounts. Useful for copying to [IAM](https://cloud.google.com/iam) to grant permissions (eg. Storage Object Creator for SQL export backups)
-  - `gcp_sql_export.sh` - creates [Cloud SQL](https://cloud.google.com/sql) export backups to [GCS](https://cloud.google.com/storage)
+  - `gcp_sql_*.sh` - [Cloud SQL](https://cloud.google.com/sql) scripts:
+    - `gcp_sql_service_accounts.sh` - lists [Cloud SQL](https://cloud.google.com/sql) service accounts. Useful for copying to [IAM](https://cloud.google.com/iam) to grant permissions (eg. Storage Object Creator for SQL export backups)
+    - `gcp_sql_export.sh` - creates [Cloud SQL](https://cloud.google.com/sql) export backups to [GCS](https://cloud.google.com/storage)
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current GCP project
     - `bigquery_list_tables.sh` - lists BigQuery tables in a given dataset
