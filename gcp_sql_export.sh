@@ -68,6 +68,8 @@ usage_args="<gcs_bucket> [<sql_instance1> <sql_instance2> ...]"
 
 help_usage "$@"
 
+no_more_opts "$@"
+
 min_args 1 "$@"
 
 gcs_bucket="$1"
