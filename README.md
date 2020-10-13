@@ -327,8 +327,8 @@ etc.
     - `gcp_info_auth_config.sh` - Auth Configurations, Organizations & Current Config
     - `gcp_info_projects.sh` - Projects names and IDs
     - `gcp_info_services.sh` - Services & APIs enabled
-      - `gcp_service_apis.sh` - lists all available [GCP](https://cloud.google.com/) Services, APIs and their states (ENABLED/DISABLED), and provides `is_service_enabled()` function use throughout the adjacent scripts to avoid errors and only show relevant services
-    - `gcp_info_accounts_secrets.sh` - IAM Service Accounts, Secrets Manager secrets
+      - `gcp_service_apis.sh` - lists all available [GCP](https://cloud.google.com/) Services, APIs and their states (enabled/disabled), and provides `is_service_enabled()` function used throughout the adjacent scripts to avoid errors and only show relevant enabled services
+    - `gcp_info_accounts_secrets.sh` - [IAM](https://cloud.google.com/iam) Service Accounts, [Secret Manager](https://cloud.google.com/secret-manager) secrets
   - `gcp_info_all_projects.sh` - same as above but for all detected projects
   - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, switching `core/project` and replacing `{project_id}` and `{project_name}` in each iteration - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
   - `gcp_find_orphaned_disks.sh` - lists orphaned disks across all GCP projects (not attached to any compute instance)
