@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns a Spotify access token from the Spotify API, needed to access the Spotify API
+Returns a Spotify access token from the Spotify API, using app credentials. This token is needed to access the rest of the Spotify API endpoints
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
