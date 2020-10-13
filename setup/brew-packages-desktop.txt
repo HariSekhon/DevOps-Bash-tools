@@ -36,14 +36,21 @@ https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
 
 # Install HomeBrew Desktop packages - one per line
 ack
+amazon-ecs-cli
+amazon-sam-cli
 ansible
 ansible-lint
+#atomicparsley  # mp4 cli tool
+autoconf
 autojump
 autossh
+#awsume
+#aws-iam-authenticator
 bash  # version 5, not old version 3 from Apple due to licensing
 bash-completion
 brew-cask-completion
 cfssl
+#cfn-lint
 checkstyle
 circleci
 cmatrix
@@ -63,6 +70,7 @@ dos2unix
 drone-cli
 e2fsprogs
 #ec2-api-tools
+eksctl
 expect
 etcd
 ffmpeg
@@ -70,24 +78,31 @@ fish
 fortune
 fswatch
 fzf
+gcc
 gem-completion
-git
+#git  # comes with macOS XCode
 #gnu-sed  # in brew-packages.txt
+#gnupg
 gnupg2
 gnuplot
 gradle
 gradle-completion
+#groovy  # see near end
+#groovysdk  # see near end
 hadolint
 haproxy
 htop
 hub
+#hugo  # static website generator - https://gohugo.io/getting-started/quick-start/
 id3v2  # mp3 tag cli editor
+#id3lib  # mp3 tag manipulation
 iftop
 imagemagick
 ipcalc
 iperf
 ipython
 jenkins-x/jx/jx
+#jpeg
 #jq  # in brew-packages.txt
 jsonlint
 jython
@@ -96,15 +111,24 @@ jython
 kubernetes-cli
 kubernetes-helm
 kustomize
+#lame  # mp3 encoder
 launchctl-completion
+#libpng
+#libtiff
+#libusb
 lolcat
 lynx
+#lzo
+#lz4
+#makedepend  # Makefile dependencies for C
+#maven
 maven-completion
 maven-shell
 #md5sha1sum  # clashes with coreutils
 media-info  # read mp3 tags
 mercurial
 midnight-commander
+#mitmproxy
 mosh
 # nagios-plugins clashes
 monitoring-plugins
@@ -113,15 +137,20 @@ mpssh
 mtr
 mycli
 mysql
+netcat
 ngrep
 nmap
-netcat
+#node  # NodeJS
 #octave
+#openjpeg
+#oniguruma  # regex library
 p7zip
 packer-completion
 pandoc
 #parallel  # in brew-packages.txt
 parquet-tools
+#pcre
+#pcre2
 perltidy
 pgcli
 pgformatter
@@ -129,21 +158,29 @@ pinentry
 pinentry-mac
 pip-completion
 pipx
+#pk11-kit
 postgresql
 prestosql
+#protobuf
 pssh
 pstree
 pup  # parse html from command line
 pwgen
 #pygments  # in pip-packages-desktop.txt
 #python  # in brew-packages.txt
+#pipenv
+#pyenv
 r
 rbenv
 rdesktop
+#redis
 #readline  # in brew-packages.txt
 rlwrap
+#rtmpdump
 ruby  # Mac ruby is too old to install Travis CI
 ruby-completion
+#sbt  # see near end
+#scala  # see near end
 screen  # get newer version for -Q switch, will use different sockets directory
 s3cmd
 scalastyle
@@ -165,10 +202,15 @@ unix2dos
 unrar
 utimer
 vagrant-completion
+vault  # Hashicorp
 #vim  # unneeded as vim is already installed - pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+#vscode
 watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
+#x264
+#x265
+#xvid
 xz
 yamllint
 youtube-dl
