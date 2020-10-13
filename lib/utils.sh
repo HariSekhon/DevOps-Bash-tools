@@ -877,6 +877,9 @@ any_opt_usage(){
         esac
     done
 }
+no_more_opts(){
+    any_opt_usage "$@"
+}
 
 check_env_defined(){
     local env="$1"
