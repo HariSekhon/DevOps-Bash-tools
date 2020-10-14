@@ -54,6 +54,7 @@
 
 **/docker-compose.yml
 **/.gitignore
+**/.gcloudignore
 **/.ssh/
 # don't accidentally publish your whole code base via Docker like Twitter Vine did!!
 **/.git/
