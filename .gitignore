@@ -9,16 +9,21 @@
 #                              . g i t i g n o r e
 # ============================================================================ #
 
+# https://git-scm.com/docs/gitignore
+
+# ===================================================================
 # Ignores any file in any subdirectory with matching basename or path
 #
 # (can use **/filename but not necessary)
 
+# ===================================================================
 # Once in a while you should check which files have been ignored via:
 #
 #       git status --ignored
 #
 # to check that there aren't some legit files you need to commit
 
+# =================================================================
 # To find out which line is causing a given file to be ignored, do:
 #
 #       git check-ignore -v $filename
