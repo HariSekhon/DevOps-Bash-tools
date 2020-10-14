@@ -163,7 +163,7 @@
 #
 # then pipe through perl to add recursive prefix '**/':
 #
-#       gitignore.io_api.sh ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows | perl -p -e 's/^([^#\s\/])/**\/$1/; s/^\//**\//' >> .dockerignore
+#       gitignore.io_api.sh ansible,apachehadoop,appcode,appengine,archive,archives,archlinuxpackages,audio,autotools,backup,basic,bittorrent,c,c++,certificates,chefcookbook,clojure,cloud9,cmake,code,code-java,codeblocks,compressed,compressedarchive,compression,data,database,datarecovery,diff,direnv,diskimage,docfx,docpress,docz,dotenv,dotfilessh,dotsettings,dropbox,eclipse,emacs,erlang,executable,firebase,flask,git,gitbook,go,gpg,gradle,grails,groovy,grunt,haskell,helm,homebrew,hugo,images,intellij,intellij+all,intellij+iml,java,java-web,jenv,jetbrains,jetbrains+all,jetbrains+iml,jmeter,julia,jupyternotebooks,kotlin,lamp,latex,less,linux,lua,macos,matlab,maven,mercurial,microsoftoffice,node,octave,osx,packer,patch,perl,perl6,phpunit,powershell,puppet,putty,pycharm,pycharm+all,pycharm+iml,pydev,python,r,rails,react,reactnative,redis,root,ruby,rust,sbt,scala,serverless,sonar,sonarqube,spark,splunk,spreadsheet,ssh,sublimetext,svn,terraform,terragrunt,tortoisegit,vagrant,venv,virtualenv,visualstudio,visualstudiocode,vs,vscode,vue,vuejs,waf,windows,xcode,xcodeinjection,zsh | perl -p -e 's/^([^#\s\/])/**\/$1/; s/^\//**\//' >> .dockerignore
 #
 # Find new or missing tags you aren't using yet:
 #
@@ -172,11 +172,29 @@
 # ============================================================================ #
 
 
-# Created by https://www.toptal.com/developers/gitignore/api/ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
+# Created by https://www.toptal.com/developers/gitignore/api/ansible,apachehadoop,appcode,appengine,archive,archives,archlinuxpackages,audio,autotools,backup,basic,bittorrent,c,c++,certificates,chefcookbook,clojure,cloud9,cmake,code,code-java,codeblocks,compressed,compressedarchive,compression,data,database,datarecovery,diff,direnv,diskimage,docfx,docpress,docz,dotenv,dotfilessh,dotsettings,dropbox,eclipse,emacs,erlang,executable,firebase,flask,git,gitbook,go,gpg,gradle,grails,groovy,grunt,haskell,helm,homebrew,hugo,images,intellij,intellij+all,intellij+iml,java,java-web,jenv,jetbrains,jetbrains+all,jetbrains+iml,jmeter,julia,jupyternotebooks,kotlin,lamp,latex,less,linux,lua,macos,matlab,maven,mercurial,microsoftoffice,node,octave,osx,packer,patch,perl,perl6,phpunit,powershell,puppet,putty,pycharm,pycharm+all,pycharm+iml,pydev,python,r,rails,react,reactnative,redis,root,ruby,rust,sbt,scala,serverless,sonar,sonarqube,spark,splunk,spreadsheet,ssh,sublimetext,svn,terraform,terragrunt,tortoisegit,vagrant,venv,virtualenv,visualstudio,visualstudiocode,vs,vscode,vue,vuejs,waf,windows,xcode,xcodeinjection,zsh
+# Edit at https://www.toptal.com/developers/gitignore?templates=ansible,apachehadoop,appcode,appengine,archive,archives,archlinuxpackages,audio,autotools,backup,basic,bittorrent,c,c++,certificates,chefcookbook,clojure,cloud9,cmake,code,code-java,codeblocks,compressed,compressedarchive,compression,data,database,datarecovery,diff,direnv,diskimage,docfx,docpress,docz,dotenv,dotfilessh,dotsettings,dropbox,eclipse,emacs,erlang,executable,firebase,flask,git,gitbook,go,gpg,gradle,grails,groovy,grunt,haskell,helm,homebrew,hugo,images,intellij,intellij+all,intellij+iml,java,java-web,jenv,jetbrains,jetbrains+all,jetbrains+iml,jmeter,julia,jupyternotebooks,kotlin,lamp,latex,less,linux,lua,macos,matlab,maven,mercurial,microsoftoffice,node,octave,osx,packer,patch,perl,perl6,phpunit,powershell,puppet,putty,pycharm,pycharm+all,pycharm+iml,pydev,python,r,rails,react,reactnative,redis,root,ruby,rust,sbt,scala,serverless,sonar,sonarqube,spark,splunk,spreadsheet,ssh,sublimetext,svn,terraform,terragrunt,tortoisegit,vagrant,venv,virtualenv,visualstudio,visualstudiocode,vs,vscode,vue,vuejs,waf,windows,xcode,xcodeinjection,zsh
 
 ### Ansible ###
 **/*.retry
+
+### ApacheHadoop ###
+**/*.iml
+**/*.ipr
+**/*.iws
+**/*.orig
+**/*.rej
+**/.idea
+**/.svn
+**/.classpath
+**/.project
+**/.settings
+**/target
+**/hadoop-common-project/hadoop-kms/downloads/
+**/hadoop-hdfs-project/hadoop-hdfs/downloads
+**/hadoop-hdfs-project/hadoop-hdfs-httpfs/downloads
+**/hadoop-common-project/hadoop-common/src/test/resources/contract-test-options.xml
+**/hadoop-tools/hadoop-openstack/src/test/resources/contract-test-options.xml
 
 ### AppCode ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -225,7 +243,6 @@
 **/.idea/**/mongoSettings.xml
 
 # File-based project format
-**/*.iws
 
 # IntelliJ
 **/out/
@@ -281,6 +298,10 @@
 # https://plugins.jetbrains.com/plugin/12206-codestream
 **/.idea/codestream.xml
 
+### AppEngine ###
+# Google App Engine generated folder
+**/appengine-generated/
+
 ### Archive ###
 
 ### Mostly from https://en.wikipedia.org/wiki/List_of_archive_formats
@@ -320,6 +341,41 @@
 **/*.gem
 
 
+### Archives ###
+# It's better to unpack these files and commit the raw source because
+# git has its own built in compression methods.
+**/*.7z
+**/*.jar
+**/*.rar
+**/*.zip
+**/*.gz
+**/*.gzip
+**/*.tgz
+**/*.bzip
+**/*.bzip2
+**/*.bz2
+**/*.xz
+**/*.lzma
+**/*.cab
+**/*.xar
+
+# Packing-only formats
+
+# Package management formats
+**/*.dmg
+**/*.egg
+**/*.txz
+
+### ArchLinuxPackages ###
+**/*.tar.*
+**/*.exe
+**/*.log
+**/*.log.*
+**/*.sig
+
+**/pkg/
+**/src/
+
 ### Audio ###
 **/*.aif
 **/*.iff
@@ -334,11 +390,64 @@
 **/*.ogg
 **/*.flac
 
+### Autotools ###
+# http://www.gnu.org/software/automake
+
+**/Makefile.in
+**/ar-lib
+**/mdate-sh
+**/py-compile
+**/test-driver
+**/ylwrap
+**/.deps/
+
+# http://www.gnu.org/software/autoconf
+
+**/autom4te.cache
+**/autoscan.log
+**/autoscan-*.log
+**/aclocal.m4
+**/compile
+**/config.guess
+**/config.h.in
+**/config.log
+**/config.status
+**/config.sub
+**/configure
+**/configure.scan
+**/depcomp
+**/install-sh
+**/missing
+**/stamp-h1
+
+# https://www.gnu.org/software/libtool/
+
+**/ltmain.sh
+
+# http://www.gnu.org/software/texinfo
+
+**/texinfo.tex
+
+# http://www.gnu.org/software/m4/
+
+**/m4/libtool.m4
+**/m4/ltoptions.m4
+**/m4/ltsugar.m4
+**/m4/ltversion.m4
+**/m4/lt~obsolete.m4
+
+# Generated Makefile
+# (meta build system like autotools,
+# can automatically generate from config.status script
+# (which is called by configure script))
+**/Makefile
+
+### Autotools Patch ###
+
 ### Backup ###
 **/*.bak
 **/*.gho
 **/*.ori
-**/*.orig
 **/*.tmp
 
 ### Basic ###
@@ -347,9 +456,11 @@
 **/*.apples
 
 # Initialized files
-**/*.exe
 **/*.ini
 **/*.basic
+
+### BitTorrent ###
+**/*.torrent
 
 ### C ###
 # Prerequisites
@@ -403,6 +514,62 @@
 **/Mkfile.old
 **/dkms.conf
 
+### C++ ###
+# Prerequisites
+
+# Compiled Object files
+**/*.slo
+
+# Precompiled Headers
+
+# Compiled Dynamic libraries
+
+# Fortran module files
+**/*.mod
+**/*.smod
+
+# Compiled Static libraries
+**/*.lai
+
+# Executables
+
+### Zsh ###
+# Zsh compiled script + zrecompile backup
+**/*.zwc
+**/*.zwc.old
+
+# Zsh completion-optimization dumpfile
+**/*zcompdump*
+
+# Zsh zcalc history
+**/.zcalc_history
+
+# A popular plugin manager's files
+**/._zplugin
+**/.zplugin_lstupd
+
+# zdharma/zshelldoc tool's files
+**/zsdoc/data
+
+# robbyrussell/oh-my-zsh/plugins/per-directory-history plugin's files
+# (when set-up to store the history in the local directory)
+**/.directory_history
+
+# MichaelAquilina/zsh-autoswitch-virtualenv plugin's files
+# (for Zsh plugins using Python)
+**/.venv
+
+# Zunit tests' output
+**/tests/_output/*
+**/!/tests/_output/.gitkeep
+
+### certificates ###
+**/*.pem
+**/*.key
+**/*.crt
+**/*.cer
+**/*.priv
+
 ### ChefCookbook ###
 **/.vagrant
 **/cookbooks
@@ -417,21 +584,52 @@
 **/kitchen.local.yml
 **/kitchen.*.local.yml
 
+### CMake ###
+**/CMakeLists.txt.user
+**/CMakeCache.txt
+**/CMakeFiles
+**/CMakeScripts
+**/Testing
+**/cmake_install.cmake
+**/install_manifest.txt
+**/compile_commands.json
+**/CTestTestfile.cmake
+**/_deps
+
+### CMake Patch ###
+# External projects
+**/*-prefix/
+
+### Clojure ###
+**/pom.xml
+**/pom.xml.asc
+**/*.class
+**/lib/
+**/classes/
+**/target/
+**/checkouts/
+**/.lein-deps-sum
+**/.lein-repl-history
+**/.lein-plugins/
+**/.lein-failures
+**/.nrepl-port
+**/.cpcache/
+
+### Code-Java ###
+# Language Support for Java(TM) by Red Hat extension for Visual Studio Code - https://marketplace.visualstudio.com/items?itemName=redhat.java
+
+**/factoryConfiguration.json
+
 ### Cloud9 ###
 # Cloud9 IDE - http://c9.io
 **/.c9revisions
 **/.c9
 
 ### Compressed ###
-**/*.7z
-**/*.gz
 **/*.pkg
-**/*.rar
 **/*.sit
 **/*.sitx
-**/*.zip
 **/*.zipx
-**/*.tgz
 
 ### CompressedArchive ###
 
@@ -459,7 +657,6 @@
 # Proprietary format from the ZipTV Compression Components
 **/*.bh
 # The Microsoft Windows native archive format, which is also used by many commercial installers such as InstallShield and WISE.
-**/*.cab
 # Originally DOS, now DOS and Windows 	Created by Yaakov Gringeler; released last in 2003 (Compressia 1.0.0.1 beta), now apparently defunct. Free trial of 30 days lets user create and extract archives; after that it is possible to extract, but not to create.
 **/*.car
 # Open source file format.
@@ -473,11 +670,9 @@
 # ??
 **/*.dgc
 # Apple Disk Image upports "Internet-enabled" disk images, which, once downloaded, are automatically decompressed, mounted, have the contents extracted, and thrown away. Currently, Safari is the only browser that supports this form of extraction; however, the images can be manually extracted as well. This format can also be password-protected or encrypted with 128-bit or 256-bit AES encryption.
-**/*.dmg
 # Enterprise Java Archive archive
 **/*.ear
 # ETSoft compressed archive
-**/*.egg
 # The predecessor of DGCA.
 **/*.gca
 # Originally DOS 	Yes, but may be covered by patents 	DOS era format; uses arithmetic/Markov coding
@@ -487,7 +682,6 @@
 # Produced by ICEOWS program. Excels at text file compression.
 **/*.ice
 # Java archive, compatible with ZIP files
-**/*.jar
 # Open sourced archiver with compression using the PAQ family of algorithms and optional encryption.
 **/*.kgb
 # Originally DOS, now multiple 	Multiple 	Yes 	The standard format on Amiga.
@@ -549,7 +743,6 @@
 # File-based disk image format developed to deploy Microsoft Windows.
 **/*.wim
 # XAR
-**/*.xar
 # Native format of the Open Source KiriKiri Visual Novel engine. Uses combination of block splitting and zlib compression. The filenames and pathes are stored in UTF-16 format. For integrity check, the Adler-32 hashsum is used. For many commercial games, the files are encrypted (and decoded on runtime) via so-called "cxdec" module, which implements xor-based encryption.
 **/*.xp3
 # Yamazaki zipper archive. Compression format used in DeepFreezer archiver utility created by Yamazaki Satoshi. Read and write support exists in TUGZip, IZArc and ZipZag
@@ -563,31 +756,18 @@
 **/*.zz
 
 
-### Database ###
-**/*.accdb
-**/*.db
-**/*.dbf
-**/*.mdb
-**/*.sqlite3
-
-### Diff ###
-**/*.patch
-**/*.diff
-
 ### Compression ###
 
 ### From https://en.wikipedia.org/wiki/List_of_archive_formats
 
 ## Compression only
 # An open source, patent- and royalty-free compression format. The compression algorithm is a Burrows-Wheeler transform followed by a move-to-front transform and finally Huffman coding
-**/*.bz2
 # Old compressor for QNX4 OS. The compression algorithm is a modified LZSS, with an adaptive Huffman coding.
 **/*.F
 # GNU Zip, the primary compression format used by Unix-like systems. The compression algorithm is DEFLATE.
 # An alternate LZMA algorithm implementation, with support for checksums and ident bytes.
 **/*.lz
 # The LZMA compression algorithm as used by 7-Zip
-**/*.lzma
 # An implementation of the LZO data compression algorithm
 **/*.lzo
 # A compression program designed to do particularly well on very large files containing long distance redundancy.
@@ -601,7 +781,6 @@
 # A compression program written by Steven Greenberg implementing the LZW algorithm. For several years in the CP/M world when no implementation was available of ARC, CRUNCHed files stored in .LBR archives were very popular. CRUNCH's implementation of LZW had a somewhat unique feature of modifying and occasionally clearing the code table in memory when it became full, resulting in a few percent better compression on many files.
 **/*.?Z?
 # A compression format using LZMA2 to yield very high compression ratios.
-**/*.xz
 # The traditional Huffman coding compression format.
 **/*.z
 # The traditional LZW compression format.
@@ -612,9 +791,85 @@
 **/*.??_
 
 
+### Data ###
+**/*.csv
+**/*.dat
+**/*.efx
+**/*.gbr
+**/*.pps
+**/*.ppt
+**/*.pptx
+**/*.sdf
+**/*.tax2010
+**/*.vcf
+**/*.xml
+
+### Code ###
+**/.vscode/*
+**/!.vscode/settings.json
+**/!.vscode/tasks.json
+**/!.vscode/launch.json
+**/!.vscode/extensions.json
+**/*.code-workspace
+
+### DataRecovery ###
+
+
+## Data recovery
+# File format used by dvdisaster to be used for data recovery when discs become damaged or partially unreadable.
+**/*.ecc
+# File format used in conjunction with any archive format to provide redundancy and data recovery, most often in newsgroup distribution of binary files.
+**/*.par
+**/*.par2
+
+
+### Diff ###
+**/*.patch
+**/*.diff
+
+### direnv ###
+**/.direnv
+**/.envrc
+
+### CodeBlocks ###
+# specific to CodeBlocks IDE
+**/*.layout
+**/*.depend
+# generated directories
+**/bin/
+**/obj/
+
+### DocFx ###
+**/.cache
+**/**/_site/
+
+### Docpress ###
+# docpress documentation generator: https://docpress.github.io/index.html
+
+**/_docpress/
+
+### Docz ###
+**/.docz
+
+
+### dotenv ###
+**/.env
+
+### DotfilesSh ###
+**/local-patch
+**/patched-src
+
+### DotSettings ###
+**/*.DotSettings
+
+### Dropbox ###
+# Dropbox settings and caches
+**/.dropbox
+**/.dropbox.attr
+**/.dropbox.cache
+
 ### Eclipse ###
 **/.metadata
-**/bin/
 **/tmp/
 **/*.swp
 **/*~.nib
@@ -727,6 +982,199 @@
 **/network-security.data
 
 
+### Database ###
+**/*.accdb
+**/*.db
+**/*.dbf
+**/*.mdb
+**/*.sqlite3
+
+### Executable ###
+**/*.bat
+**/*.cgi
+**/*.com
+**/*.gadget
+**/*.pif
+**/*.vb
+**/*.wsf
+
+### Firebase ###
+**/**/node_modules/*
+**/**/.firebaserc
+
+### Firebase Patch ###
+**/.runtimeconfig.json
+**/.firebase/
+
+### Flask ###
+**/instance/*
+**/!instance/.gitignore
+**/.webassets-cache
+
+### Flask.Python Stack ###
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+
+# C extensions
+
+# Distribution / packaging
+**/.Python
+**/build/
+**/develop-eggs/
+**/downloads/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/wheels/
+**/pip-wheel-metadata/
+**/share/python-wheels/
+**/*.egg-info/
+**/.installed.cfg
+**/MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+**/*.manifest
+**/*.spec
+
+# Installer logs
+**/pip-log.txt
+**/pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+**/htmlcov/
+**/.tox/
+**/.nox/
+**/.coverage
+**/.coverage.*
+**/nosetests.xml
+**/coverage.xml
+**/*.cover
+**/*.py,cover
+**/.hypothesis/
+**/.pytest_cache/
+**/pytestdebug.log
+
+# Translations
+**/*.mo
+**/*.pot
+
+# Django stuff:
+**/local_settings.py
+**/db.sqlite3
+**/db.sqlite3-journal
+
+# Flask stuff:
+**/instance/
+
+# Scrapy stuff:
+**/.scrapy
+
+# Sphinx documentation
+**/docs/_build/
+**/doc/_build/
+
+# PyBuilder
+**/target/
+
+# Jupyter Notebook
+**/.ipynb_checkpoints
+
+# IPython
+**/profile_default/
+**/ipython_config.py
+
+# pyenv
+**/.python-version
+
+# pipenv
+#   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
+#   However, in case of collaboration, if having platform-specific dependencies or dependencies
+#   having no cross-platform support, pipenv may install dependencies that don't work, or not
+#   install all needed dependencies.
+#Pipfile.lock
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+**/__pypackages__/
+
+# Celery stuff
+**/celerybeat-schedule
+**/celerybeat.pid
+
+# SageMath parsed files
+**/*.sage.py
+
+# Environments
+**/env/
+**/venv/
+**/ENV/
+**/env.bak/
+**/venv.bak/
+**/pythonenv*
+
+# Spyder project settings
+**/.spyderproject
+**/.spyproject
+
+# Rope project settings
+**/.ropeproject
+
+# mkdocs documentation
+**/site
+
+# mypy
+**/.mypy_cache/
+**/.dmypy.json
+**/dmypy.json
+
+# Pyre type checker
+**/.pyre/
+
+# pytype static type analyzer
+**/.pytype/
+
+# profiling data
+**/.prof
+
+### Git ###
+# Created by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+
+# Created by git when using merge tools for conflicts
+**/*.BACKUP.*
+**/*.BASE.*
+**/*.LOCAL.*
+**/*.REMOTE.*
+**/*_BACKUP_*.txt
+**/*_BASE_*.txt
+**/*_LOCAL_*.txt
+**/*_REMOTE_*.txt
+
+### GitBook ###
+# Node rules:
+## Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+**/.grunt
+
+## Dependency directory
+## Commenting this out is preferred by some people, see
+## https://docs.npmjs.com/misc/faq#should-i-check-my-node_modules-folder-into-git
+**/node_modules
+
+# Book build output
+**/_book
+
+# eBook build output
+**/*.epub
+**/*.mobi
+**/*.pdf
+
 ### Go ###
 # Binaries for programs and plugins
 **/*.exe~
@@ -751,9 +1199,100 @@
 **/*.toast
 **/*.vcd
 
+### Grails ###
+# .gitignore for Grails 1.2 and 1.3
+# Although this should work for most versions of grails, it is
+# suggested that you use the "grails integrate-with --git" command
+# to generate your .gitignore file.
+
+# web application files
+**/web-app/WEB-INF/classes
+
+# default HSQL database files for production mode
+**/prodDb.*
+
+# general HSQL database files
+**/*Db.properties
+**/*Db.script
+
+# logs
+**/stacktrace.log
+**/test/reports
+**/logs
+
+# project release file
+**/*.war
+
+# plugin release files
+**/*.zip
+**/plugin.xml
+
+# older plugin install locations
+**/plugins
+**/web-app/plugins
+
+# "temporary" build files
+**/target
+
+### Groovy ###
+# .gitignore created from Groovy contributors in https://github.com/apache/groovy/blob/master/.gitignore
+
+**/user.gradle
+**/.gradle/
+
+**/*.DS_Store
+
+**/.shelf
+
+
+
+### grunt ###
+# Grunt usually compiles files inside this directory
+
+# Grunt usually preprocesses files such as coffeescript, compass... inside the .tmp directory
+**/.tmp/
+
+### Haskell ###
+**/dist
+**/dist-*
+**/cabal-dev
+**/*.hi
+**/*.hie
+**/*.chi
+**/*.chs.h
+**/*.dyn_o
+**/*.dyn_hi
+**/.hpc
+**/.hsenv
+**/.cabal-sandbox/
+**/cabal.sandbox.config
+**/*.prof
+**/*.aux
+**/*.hp
+**/*.eventlog
+**/.stack-work/
+**/cabal.project.local
+**/cabal.project.local~
+**/.HTF/
+**/.ghc.environment.*
+
 ### Helm ###
 # Chart dependencies
 **/**/charts/*.tgz
+
+### Homebrew ###
+**/Brewfile.lock.json
+
+### Hugo ###
+# Generated files by hugo
+**/public/
+**/resources/_gen/
+**/hugo_stats.json
+
+# Executable may be added to repository
+**/hugo.exe
+**/hugo.darwin
+**/hugo.linux
 
 ### Images ###
 # JPEG
@@ -804,7 +1343,6 @@
 **/*.svgz
 
 # Portable Document Format
-**/*.pdf
 
 # X BitMap
 **/*.xbm
@@ -888,12 +1426,118 @@
 # CodeStream plugin
 # https://plugins.jetbrains.com/plugin/12206-codestream
 
+### Intellij+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### Intellij+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
+**/.idea/
+
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+**/modules.xml
+**/.idea/misc.xml
+
+# Sonarlint plugin
+**/.idea/sonarlint
+
+### Intellij+iml ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### Intellij+iml Patch ###
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+
 ### Java ###
 # Compiled class file
-**/*.class
 
 # Log file
-**/*.log
 
 # BlueJ files
 **/*.ctxt
@@ -906,6 +1550,16 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 **/hs_err_pid*
+
+### Java-Web ###
+## ignoring target file
+
+### JEnv ###
+# JEnv local Java version configuration file
+**/.java-version
+
+# Used by previous versions of JEnv
+**/.jenv-version
 
 ### JetBrains ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -975,6 +1629,110 @@
 # CodeStream plugin
 # https://plugins.jetbrains.com/plugin/12206-codestream
 
+### JetBrains+all ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### JetBrains+all Patch ###
+# Ignores the whole .idea folder and all .iml files
+# See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
+
+
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+
+# Sonarlint plugin
+
+### JetBrains+iml ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### JetBrains+iml Patch ###
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+
 ### JMeter ###
 # JMeter common ignore files
 # http://jmeter.apache.org/
@@ -987,30 +1745,34 @@
 # Ignore customized user.properties
 **/user.properties
 
+### Erlang ###
+**/.eunit
+**/*.beam
+**/*.plt
+**/erl_crash.dump
+**/.concrete/DEV_MODE
+
+# rebar 2.x
+**/.rebar
+**/rel/example_project
+**/ebin/*.beam
+**/deps
+
+# rebar 3
+**/.rebar3
+**/_build/
+**/_checkouts/
+
 ### JupyterNotebooks ###
 # gitignore template for Jupyter Notebooks
 # website: http://jupyter.org/
 
-**/.ipynb_checkpoints
 **/*/.ipynb_checkpoints/*
 
 # IPython
-**/profile_default/
-**/ipython_config.py
 
 # Remove previous ipynb_checkpoints
 #   git rm -r .ipynb_checkpoints/
-
-### KDiff3 ###
-**/*.BACKUP.*
-**/*_BACKUP_*
-**/*.BASE.*
-**/*_BASE_*
-**/*.LOCAL.*
-**/*_LOCAL_*
-**/*.REMOTE.*
-**/*_REMOTE_*
-
 
 ### Kotlin ###
 # Compiled class file
@@ -1087,6 +1849,291 @@
 
 # Android studio 3.1+ serialized cache file
 
+### LaTeX ###
+## Core latex/pdflatex auxiliary files:
+**/*.lof
+**/*.lot
+**/*.fls
+**/*.toc
+**/*.fmt
+**/*.fot
+**/*.cb
+**/*.cb2
+**/.*.lb
+
+## Intermediate documents:
+**/*.dvi
+**/*.xdv
+**/*-converted-to.*
+# these rules might exclude image files for figures etc.
+# *.ps
+# *.eps
+# *.pdf
+
+## Generated if empty string is given at "Please type another file name for output:"
+**/.pdf
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*-blx.aux
+**/*-blx.bib
+**/*.run.xml
+
+## Build tool auxiliary files:
+**/*.fdb_latexmk
+**/*.synctex
+**/*.synctex(busy)
+**/*.synctex.gz
+**/*.synctex.gz(busy)
+**/*.pdfsync
+
+## Build tool directories for auxiliary files
+# latexrun
+**/latex.out/
+
+## Auxiliary and intermediate files from other packages:
+# algorithms
+**/*.alg
+**/*.loa
+
+# achemso
+**/acs-*.bib
+
+# amsthm
+**/*.thm
+
+# beamer
+**/*.nav
+**/*.pre
+**/*.snm
+**/*.vrb
+
+# changes
+**/*.soc
+
+# comment
+**/*.cut
+
+# cprotect
+
+# elsarticle (documentclass of Elsevier journals)
+**/*.spl
+
+# endnotes
+**/*.ent
+
+# fixme
+**/*.lox
+
+# feynmf/feynmp
+**/*.mf
+**/*.mp
+**/*.t[1-9]
+**/*.t[1-9][0-9]
+**/*.tfm
+
+#(r)(e)ledmac/(r)(e)ledpar
+**/*.end
+**/*.?end
+**/*.[1-9]
+**/*.[1-9][0-9]
+**/*.[1-9][0-9][0-9]
+**/*.[1-9]R
+**/*.[1-9][0-9]R
+**/*.[1-9][0-9][0-9]R
+**/*.eledsec[1-9]
+**/*.eledsec[1-9]R
+**/*.eledsec[1-9][0-9]
+**/*.eledsec[1-9][0-9]R
+**/*.eledsec[1-9][0-9][0-9]
+**/*.eledsec[1-9][0-9][0-9]R
+
+# glossaries
+**/*.acn
+**/*.acr
+**/*.glg
+**/*.glo
+**/*.gls
+**/*.glsdefs
+**/*.lzs
+
+# uncomment this for glossaries-extra (will ignore makeindex's style files!)
+# *.ist
+
+# gnuplottex
+**/*-gnuplottex-*
+
+# gregoriotex
+**/*.gaux
+**/*.gtex
+
+# htlatex
+**/*.4ct
+**/*.4tc
+**/*.idv
+**/*.lg
+**/*.trc
+**/*.xref
+
+# hyperref
+**/*.brf
+
+# knitr
+**/*-concordance.tex
+# TODO Comment the next line if you want to keep your tikz graphics files
+**/*.tikz
+**/*-tikzDictionary
+
+# listings
+**/*.lol
+
+# luatexja-ruby
+**/*.ltjruby
+
+# makeidx
+**/*.idx
+**/*.ilg
+**/*.ind
+
+# minitoc
+**/*.maf
+**/*.mlf
+**/*.mlt
+**/*.mtc
+**/*.mtc[0-9]*
+**/*.slf[0-9]*
+**/*.slt[0-9]*
+**/*.stc[0-9]*
+
+# minted
+**/_minted*
+**/*.pyg
+
+# morewrites
+**/*.mw
+
+# nomencl
+**/*.nlg
+**/*.nlo
+**/*.nls
+
+# pax
+**/*.pax
+
+# pdfpcnotes
+**/*.pdfpc
+
+# sagetex
+**/*.sagetex.sage
+**/*.sagetex.py
+**/*.sagetex.scmd
+
+# scrwfile
+**/*.wrt
+
+# sympy
+**/*.sout
+**/*.sympy
+**/sympy-plots-for-*.tex/
+
+# pdfcomment
+**/*.upa
+**/*.upb
+
+# pythontex
+**/*.pytxcode
+**/pythontex-files-*/
+
+# tcolorbox
+**/*.listing
+
+# thmtools
+**/*.loe
+
+# TikZ & PGF
+**/*.dpth
+**/*.md5
+**/*.auxlock
+
+# todonotes
+**/*.tdo
+
+# vhistory
+**/*.hst
+**/*.ver
+
+# easy-todo
+**/*.lod
+
+# xcolor
+**/*.xcp
+
+# xmpincl
+**/*.xmpi
+
+# xindy
+**/*.xdy
+
+# xypic precompiled matrices and outlines
+**/*.xyc
+**/*.xyd
+
+# endfloat
+**/*.ttt
+**/*.fff
+
+# Latexian
+**/TSWLatexianTemp*
+
+## Editors:
+# WinEdt
+**/*.sav
+
+# Texpad
+**/.texpadtmp
+
+# LyX
+**/*.lyx~
+
+# Kile
+**/*.backup
+
+# gummi
+**/.*.swp
+
+# KBibTeX
+**/*~[0-9]*
+
+# TeXnicCenter
+**/*.tps
+
+# auto folder when using emacs and auctex
+**/./auto/*
+**/*.el
+
+# expex forward references with \gathertags
+**/*-tags.tex
+
+# standalone packages
+**/*.sta
+
+# Makeindex log files
+**/*.lpz
+
+# REVTeX puts footnotes in the bibliography by default, unless the nofootinbib
+# option is specified. Footnotes are the stored in a file with suffix Notes.bib.
+# Uncomment the next line to have this generated file ignored.
+#*Notes.bib
+
+### LaTeX Patch ###
+# LIPIcs / OASIcs
+**/*.vtc
+
+# glossaries
+**/*.glstex
+
 ### Less ###
 **/*.less
 
@@ -1099,6 +2146,26 @@
 # Linux trash folder which might appear on any partition or disk
 
 # .nfs files are created when an open file is removed but is still being accessed
+
+### Lua ###
+# Compiled Lua sources
+**/luac.out
+
+# luarocks build files
+**/*.src.rock
+
+# Object files
+**/*.os
+
+# Precompiled Headers
+
+# Libraries
+**/*.def
+
+# Shared objects (inc. Windows DLLs)
+
+# Executables
+
 
 ### macOS ###
 # General
@@ -1128,8 +2195,40 @@
 **/Temporary Items
 **/.apdisk
 
+### MATLAB ###
+# Windows default autosave extension
+**/*.asv
+
+# OSX / *nix default autosave extension
+**/*.m~
+
+# Compiled MEX binaries (all platforms)
+**/*.mex*
+
+# Packaged app and toolbox files
+**/*.mlappinstall
+**/*.mltbx
+
+# Generated helpsearch folders
+**/helpsearch*/
+
+# Simulink code generation folders
+**/slprj/
+**/sccprj/
+
+# Matlab code generation folders
+**/codegen/
+
+# Simulink autosave extension
+**/*.autosave
+
+# Simulink cache files
+**/*.slxc
+
+# Octave session info
+**/octave-workspace
+
 ### Maven ###
-**/target/
 **/pom.xml.tag
 **/pom.xml.releaseBackup
 **/pom.xml.versionsBackup
@@ -1197,7 +2296,6 @@
 **/.nyc_output
 
 # Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
-**/.grunt
 
 # Bower dependency directory (https://bower.io/)
 **/bower_components
@@ -1239,12 +2337,10 @@
 **/.yarn-integrity
 
 # dotenv environment variables file
-**/.env
 **/.env.test
 **/.env*.local
 
 # parcel-bundler cache (https://parceljs.org/)
-**/.cache
 **/.parcel-cache
 
 # Next.js build output
@@ -1252,7 +2348,6 @@
 
 # Nuxt.js build / generate output
 **/.nuxt
-**/dist
 
 # Gatsby files
 **/.cache/
@@ -1280,36 +2375,24 @@
 
 ### Octave ###
 # Windows default autosave extension
-**/*.asv
 
 # OSX / *nix default autosave extension
-**/*.m~
 
 # Compiled MEX binaries (all platforms)
-**/*.mex*
 
 # Packaged app and toolbox files
-**/*.mlappinstall
-**/*.mltbx
 
 # Generated helpsearch folders
-**/helpsearch*/
 
 # Simulink code generation folders
-**/slprj/
-**/sccprj/
 
 # Matlab code generation folders
-**/codegen/
 
 # Simulink autosave extension
-**/*.autosave
 
 # Simulink cache files
-**/*.slxc
 
 # Octave session info
-**/octave-workspace
 
 ### OSX ###
 # General
@@ -1332,6 +2415,8 @@
 # For built boxes
 **/*.box
 
+### Patch ###
+
 ### Perl ###
 **/!Build/
 **/.last_cover_stats
@@ -1351,7 +2436,6 @@
 **/.build/
 
 # Module::Build
-**/_build/
 **/Build
 **/Build.bat
 
@@ -1366,7 +2450,6 @@
 **/Makefile.old
 **/MANIFEST.bak
 **/pm_to_blib
-**/*.zip
 
 ### Perl6 ###
 # Gitignore for Perl 6 (http://www.perl6.org)
@@ -1376,6 +2459,25 @@
 **/.precomp
 **/lib/.precomp
 
+
+### PHPUnit ###
+# Covers PHPUnit
+# Reference: https://phpunit.de/
+
+# Generated files
+**/.phpunit.result.cache
+
+# PHPUnit
+**/app/phpunit.xml
+**/phpunit.xml
+
+# Build data
+**/build/
+
+### PowerShell ###
+# Exclude packaged modules
+
+# Exclude .NET assemblies from source
 
 ### Puppet ###
 # gitignore template for Puppet modules
@@ -1397,6 +2499,74 @@
 ### PuTTY ###
 # Private key
 **/*.ppk
+
+### PyCharm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### PyCharm Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
+
+# Sonarlint plugin
+# https://plugins.jetbrains.com/plugin/7973-sonarlint
+
+# SonarQube Plugin
+# https://plugins.jetbrains.com/plugin/7238-sonarqube-community-plugin
+
+# Markdown Navigator plugin
+# https://plugins.jetbrains.com/plugin/7896-markdown-navigator-enhanced
+
+# Cache file creation bug
+# See https://youtrack.jetbrains.com/issue/JBR-2257
+
+# CodeStream plugin
+# https://plugins.jetbrains.com/plugin/12206-codestream
 
 ### PyCharm+all ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
@@ -1447,88 +2617,88 @@
 # Ignores the whole .idea folder and all .iml files
 # See https://github.com/joeblau/gitignore.io/issues/186 and https://github.com/joeblau/gitignore.io/issues/360
 
-**/.idea/
 
 # Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
 
-**/*.iml
-**/modules.xml
-**/.idea/misc.xml
-**/*.ipr
 
 # Sonarlint plugin
-**/.idea/sonarlint
+
+### PyCharm+iml ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff
+
+# Generated files
+
+# Sensitive or high-churn files
+
+# Gradle
+
+# Gradle and Maven with auto-import
+# When using Gradle or Maven with auto-import, you should exclude module files,
+# since they will be recreated, and may cause churn.  Uncomment if using
+# auto-import.
+# .idea/artifacts
+# .idea/compiler.xml
+# .idea/jarRepositories.xml
+# .idea/modules.xml
+# .idea/*.iml
+# .idea/modules
+# *.iml
+# *.ipr
+
+# CMake
+
+# Mongo Explorer plugin
+
+# File-based project format
+
+# IntelliJ
+
+# mpeltonen/sbt-idea plugin
+
+# JIRA plugin
+
+# Cursive Clojure plugin
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+
+# Editor-based Rest Client
+
+# Android studio 3.1+ serialized cache file
+
+### PyCharm+iml Patch ###
+# Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-249601023
+
+
+### pydev ###
+**/.pydevproject
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
-**/__pycache__/
-**/*.py[cod]
-**/*$py.class
 
 # C extensions
 
 # Distribution / packaging
-**/.Python
-**/build/
-**/develop-eggs/
-**/downloads/
-**/eggs/
-**/.eggs/
-**/lib/
-**/lib64/
-**/parts/
-**/sdist/
-**/var/
-**/wheels/
-**/pip-wheel-metadata/
-**/share/python-wheels/
-**/*.egg-info/
-**/.installed.cfg
-**/MANIFEST
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
-**/*.manifest
-**/*.spec
 
 # Installer logs
-**/pip-log.txt
-**/pip-delete-this-directory.txt
 
 # Unit test / coverage reports
-**/htmlcov/
-**/.tox/
-**/.nox/
-**/.coverage
-**/.coverage.*
-**/nosetests.xml
-**/coverage.xml
-**/*.cover
-**/*.py,cover
-**/.hypothesis/
-**/.pytest_cache/
-**/pytestdebug.log
 
 # Translations
-**/*.mo
-**/*.pot
 
 # Django stuff:
-**/local_settings.py
-**/db.sqlite3
-**/db.sqlite3-journal
 
 # Flask stuff:
-**/instance/
-**/.webassets-cache
 
 # Scrapy stuff:
-**/.scrapy
 
 # Sphinx documentation
-**/docs/_build/
-**/doc/_build/
 
 # PyBuilder
 
@@ -1537,57 +2707,34 @@
 # IPython
 
 # pyenv
-**/.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
 #   However, in case of collaboration, if having platform-specific dependencies or dependencies
 #   having no cross-platform support, pipenv may install dependencies that don't work, or not
 #   install all needed dependencies.
-#Pipfile.lock
 
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow
-**/__pypackages__/
 
 # Celery stuff
-**/celerybeat-schedule
-**/celerybeat.pid
 
 # SageMath parsed files
-**/*.sage.py
 
 # Environments
-**/.venv
-**/env/
-**/venv/
-**/ENV/
-**/env.bak/
-**/venv.bak/
-**/pythonenv*
 
 # Spyder project settings
-**/.spyderproject
-**/.spyproject
 
 # Rope project settings
-**/.ropeproject
 
 # mkdocs documentation
-**/site
 
 # mypy
-**/.mypy_cache/
-**/.dmypy.json
-**/dmypy.json
 
 # Pyre type checker
-**/.pyre/
 
 # pytype static type analyzer
-**/.pytype/
 
 # profiling data
-**/.prof
 
 ### R ###
 # History files
@@ -1699,10 +2846,252 @@
 **/storage/*
 **/!/storage/.keep
 
+### react ###
+**/.DS_*
+**/**/*.backup.*
+**/**/*.back.*
+
+
+**/*.sublime*
+
+**/psd
+**/thumb
+**/sketch
+
+### ReactNative ###
+# React Native Stack Base
+
+**/.expo
+**/__generated__
+
+### ReactNative.Android Stack ###
+# Built application files
+**/*.aar
+**/*.ap_
+**/*.aab
+
+# Files for the ART/Dalvik VM
+**/*.dex
+
+# Java class files
+
+# Generated files
+**/gen/
+#  Uncomment the following line in case you need and you don't have the release build type files in your app
+# release/
+
+# Gradle files
+
+# Local configuration file (sdk path, etc)
+
+# Proguard folder generated by Eclipse
+**/proguard/
+
+# Log Files
+
+# Android Studio Navigation editor temp files
+**/.navigation/
+
+# Android Studio captures folder
+**/captures/
+
+# IntelliJ
+**/.idea/workspace.xml
+**/.idea/tasks.xml
+**/.idea/gradle.xml
+**/.idea/assetWizardSettings.xml
+**/.idea/dictionaries
+**/.idea/libraries
+# Android Studio 3 in .gitignore file.
+**/.idea/caches
+**/.idea/modules.xml
+# Comment next line if keeping position of elements in Navigation Editor is relevant for you
+**/.idea/navEditor.xml
+
+# Keystore files
+# Uncomment the following lines if you do not want to check your keystore files in.
+#*.jks
+#*.keystore
+
+# External native build folder generated in Android Studio 2.2 and later
+**/.externalNativeBuild
+**/.cxx/
+
+# Google Services (e.g. APIs or Firebase)
+# google-services.json
+
+# Freeline
+**/freeline.py
+**/freeline/
+**/freeline_project_description.json
+
+# fastlane
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output
+**/fastlane/readme.md
+
+# Version control
+**/vcs.xml
+
+# lint
+**/lint/intermediates/
+**/lint/generated/
+**/lint/outputs/
+**/lint/tmp/
+# lint/reports/
+
+### ReactNative.Buck Stack ###
+**/buck-out/
+**/.buckconfig.local
+**/.buckd/
+**/.buckversion
+**/.fakebuckversion
+
+### ReactNative.Gradle Stack ###
+**/.gradle
+
+# Ignore Gradle GUI config
+**/gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+**/!gradle-wrapper.jar
+
+# Cache of project
+**/.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+### ReactNative.Linux Stack ###
+
+# temporary files which can be created if a process still has a handle open of a deleted file
+
+# KDE directory preferences
+
+# Linux trash folder which might appear on any partition or disk
+
+# .nfs files are created when an open file is removed but is still being accessed
+
+### ReactNative.Node Stack ###
+# Logs
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+
+# Runtime data
+
+# Directory for instrumented libs generated by jscoverage/JSCover
+
+# Coverage directory used by tools like istanbul
+
+# nyc test coverage
+
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
+
+# Bower dependency directory (https://bower.io/)
+
+# node-waf configuration
+
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+
+# Dependency directories
+
+# TypeScript v1 declaration files
+
+# TypeScript cache
+
+# Optional npm cache directory
+
+# Optional eslint cache
+
+# Microbundle cache
+
+# Optional REPL history
+
+# Output of 'npm pack'
+
+# Yarn Integrity file
+
+# dotenv environment variables file
+
+# parcel-bundler cache (https://parceljs.org/)
+
+# Next.js build output
+
+# Nuxt.js build / generate output
+
+# Gatsby files
+# Comment in the public line in if your project uses Gatsby and not Next.js
+# https://nextjs.org/blog/next-9-1#public-directory-support
+# public
+
+# vuepress build output
+
+# Serverless directories
+
+# FuseBox cache
+
+# DynamoDB Local files
+
+# TernJS port file
+
+# Stores VSCode versions used for testing VSCode extensions
+
+### ReactNative.Xcode Stack ###
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+**/xcuserdata/
+
+## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+**/*.xcscmblueprint
+**/*.xccheckout
+
+## compatibility with Xcode 3 and earlier (ignoring not required starting Xcode 4)
+**/DerivedData/
+**/*.moved-aside
+**/*.pbxuser
+**/!default.pbxuser
+**/*.mode1v3
+**/!default.mode1v3
+**/*.mode2v3
+**/!default.mode2v3
+**/*.perspectivev3
+**/!default.perspectivev3
+
+## Gcc Patch
+**/*.gcno
+
+### ReactNative.macOS Stack ###
+# General
+
+# Icon must end with two \r
+**/Icon
+
+# Thumbnails
+
+# Files that might appear in the root of a volume
+
+# Directories potentially created on remote AFP share
+
 ### Redis ###
 # Ignore redis binary dump (dump.rdb) files
 
 **/*.rdb
+
+### ROOT ###
+# ROOT Home Page : https://root.cern.ch/
+# ROOT Used by Experimental Physicists, not necessarily HEP
+# ROOT based on C++
+
+# Files generated by ROOT, observed with v6.xy
+
+**/*.pcm
+
+
 
 ### Ruby ###
 **/.config
@@ -1727,7 +3116,6 @@
 **/build-iPhoneSimulator/
 
 ## Specific to RubyMotion (use of CocoaPods):
-#
 # We recommend against adding the Pods directory to your .gitignore. However
 # you should judge for yourself, the pros and cons are mentioned at:
 # https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
@@ -1757,6 +3145,14 @@
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
 
+### Rust ###
+# Generated by Cargo
+# will have compiled files and executables
+
+# Remove Cargo.lock from gitignore if creating an executable, leave it for libraries
+# More information here https://doc.rust-lang.org/cargo/guide/cargo-toml-vs-cargo-lock.html
+**/Cargo.lock
+
 ### SBT ###
 # Simple Build Tool
 # http://www.scala-sbt.org/release/docs/Getting-Started/Directories.html#configuring-version-control
@@ -1770,6 +3166,14 @@
 **/.lib/
 
 ### Scala ###
+
+### Serverless ###
+# Ignore build directory
+**/.serverless
+
+### Sonar ###
+#Sonar generated dir
+**/.sonar/
 
 ### SonarQube ###
 # SonarQube ignore files.
@@ -1787,15 +3191,10 @@
 **/*.#*
 **/*.pyc
 **/*.pyo
-**/.classpath
 **/.ensime
 **/.ensime_cache/
 **/.ensime_lucene
 **/.generated-mima*
-**/.project
-**/.pydevproject
-**/.settings
-**/lib/
 **/R-unit-tests.log
 **/R/unit-tests.out
 **/R/cran-check.out
@@ -1865,6 +3264,58 @@
 **/.jvmopts
 
 
+### Splunk ###
+# gitignore template for Splunk apps
+# documentation: http://docs.splunk.com/Documentation/Splunk/6.2.3/admin/Defaultmetaconf
+
+# Splunk local meta file
+**/local.meta
+
+# Splunk local folder
+**/local
+
+### Spreadsheet ###
+**/*.xlr
+**/*.xls
+**/*.xlsx
+
+### SSH ###
+**/**/.ssh/id_*
+**/**/.ssh/*_id_*
+**/**/.ssh/known_hosts
+
+### SublimeText ###
+# Cache files for Sublime Text
+**/*.tmlanguage.cache
+**/*.tmPreferences.cache
+**/*.stTheme.cache
+
+# Workspace files are user-specific
+**/*.sublime-workspace
+
+# Project files should be checked into the repository, unless a significant
+# proportion of contributors will probably not be using Sublime Text
+# *.sublime-project
+
+# SFTP configuration file
+**/sftp-config.json
+
+# Package control specific files
+**/Package Control.last-run
+**/Package Control.ca-list
+**/Package Control.ca-bundle
+**/Package Control.system-ca-bundle
+**/Package Control.cache/
+**/Package Control.ca-certs/
+**/Package Control.merged-ca-bundle
+**/Package Control.user-ca-bundle
+**/oscrypto-ca-bundle.crt
+**/bh_unicode_properties.cache
+
+# Sublime-github package stores a github token in this file
+# https://packagecontrol.io/packages/sublime-github
+**/GitHub.sublime-settings
+
 ### SVN ###
 **/.svn/
 
@@ -1896,6 +3347,14 @@
 # Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
 # example: *tfplan*
 
+### Terragrunt ###
+# terragrunt cache directories
+**/**/.terragrunt-cache/*
+
+### TortoiseGit ###
+# Project-level settings
+**/.tgitconfig
+
 ### Vagrant ###
 # General
 **/.vagrant/
@@ -1904,6 +3363,427 @@
 # *.log
 
 ### Vagrant Patch ###
+
+### venv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+**/[Bb]in
+**/[Ii]nclude
+**/[Ll]ib
+**/[Ll]ib64
+**/[Ll]ocal
+**/[Ss]cripts
+**/pyvenv.cfg
+**/pip-selfcheck.json
+
+### VirtualEnv ###
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+
+### Julia ###
+# Files generated by invoking Julia with --code-coverage
+**/*.jl.cov
+**/*.jl.*.cov
+
+# Files generated by invoking Julia with --track-allocation
+**/*.jl.mem
+
+# System-specific files and directories generated by the BinaryProvider and BinDeps packages
+# They contain absolute paths specific to the host computer, and so should not be committed
+**/deps/deps.jl
+**/deps/build.log
+**/deps/downloads/
+**/deps/usr/
+**/deps/src/
+
+# Build artifacts for creating documentation generated by the Documenter package
+**/docs/build/
+**/docs/site/
+
+# File generated by Pkg, the package manager, based on a corresponding Project.toml
+# It records a fixed state of all packages used by the project. As such, it should not be
+# committed for packages, but should be committed for applications that require a static
+# environment.
+**/Manifest.toml
+
+### VisualStudioCode ###
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+**/.ionide
+
+### vs ###
+## Ignore Visual Studio temporary files, build results, and
+## files generated by popular Visual Studio add-ons.
+##
+## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
+
+# User-specific files
+**/*.rsuser
+**/*.suo
+**/*.user
+**/*.userosscache
+**/*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+**/*.userprefs
+
+# Mono auto generated files
+**/mono_crash.*
+
+# Build results
+**/[Dd]ebug/
+**/[Dd]ebugPublic/
+**/[Rr]elease/
+**/[Rr]eleases/
+**/x64/
+**/x86/
+**/[Aa][Rr][Mm]/
+**/[Aa][Rr][Mm]64/
+**/bld/
+**/[Bb]in/
+**/[Oo]bj/
+**/[Ll]og/
+**/[Ll]ogs/
+
+# Visual Studio 2015/2017 cache/options directory
+**/.vs/
+# Uncomment if you have tasks that create the project's static files in wwwroot
+#wwwroot/
+
+# Visual Studio 2017 auto generated files
+**/Generated\ Files/
+
+# MSTest test Results
+**/[Tt]est[Rr]esult*/
+**/[Bb]uild[Ll]og.*
+
+# NUnit
+**/*.VisualState.xml
+**/TestResult.xml
+**/nunit-*.xml
+
+# Build Results of an ATL Project
+**/[Dd]ebugPS/
+**/[Rr]eleasePS/
+**/dlldata.c
+
+# Benchmark Results
+**/BenchmarkDotNet.Artifacts/
+
+# .NET Core
+**/project.lock.json
+**/project.fragment.lock.json
+**/artifacts/
+
+# StyleCop
+**/StyleCopReport.xml
+
+# Files built by Visual Studio
+**/*_i.c
+**/*_p.c
+**/*_h.h
+**/*.meta
+**/*.iobj
+**/*.ipdb
+**/*.pgc
+**/*.pgd
+**/*.rsp
+**/*.sbr
+**/*.tlb
+**/*.tli
+**/*.tlh
+**/*.tmp_proj
+**/*_wpftmp.csproj
+**/*.vspscc
+**/*.vssscc
+**/.builds
+**/*.pidb
+**/*.svclog
+**/*.scc
+
+# Chutzpah Test files
+**/_Chutzpah*
+
+# Visual C++ cache files
+**/ipch/
+**/*.aps
+**/*.ncb
+**/*.opendb
+**/*.opensdf
+**/*.cachefile
+**/*.VC.db
+**/*.VC.VC.opendb
+
+# Visual Studio profiler
+**/*.psess
+**/*.vsp
+**/*.vspx
+**/*.sap
+
+# Visual Studio Trace Files
+**/*.e2e
+
+# TFS 2012 Local Workspace
+**/$tf/
+
+# Guidance Automation Toolkit
+**/*.gpState
+
+# ReSharper is a .NET coding add-in
+**/_ReSharper*/
+**/*.[Rr]e[Ss]harper
+**/*.DotSettings.user
+
+# TeamCity is a build add-in
+**/_TeamCity*
+
+# DotCover is a Code Coverage Tool
+**/*.dotCover
+
+# AxoCover is a Code Coverage Tool
+**/.axoCover/*
+**/!.axoCover/settings.json
+
+# Coverlet is a free, cross platform Code Coverage Tool
+**/coverage*[.json, .xml, .info]
+
+# Visual Studio code coverage results
+**/*.coverage
+**/*.coveragexml
+
+# NCrunch
+**/_NCrunch_*
+**/.*crunch*.local.xml
+**/nCrunchTemp_*
+
+# MightyMoose
+**/*.mm.*
+**/AutoTest.Net/
+
+# Web workbench (sass)
+**/.sass-cache/
+
+# Installshield output folder
+**/[Ee]xpress/
+
+# DocProject is a documentation generator add-in
+**/DocProject/buildhelp/
+**/DocProject/Help/*.HxT
+**/DocProject/Help/*.HxC
+**/DocProject/Help/*.hhc
+**/DocProject/Help/*.hhk
+**/DocProject/Help/*.hhp
+**/DocProject/Help/Html2
+**/DocProject/Help/html
+
+# Click-Once directory
+**/publish/
+
+# Publish Web Output
+**/*.[Pp]ublish.xml
+**/*.azurePubxml
+# Note: Comment the next line if you want to checkin your web deploy settings,
+# but database connection strings (with potential passwords) will be unencrypted
+**/*.pubxml
+**/*.publishproj
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to
+# checkin your Azure Web App publish settings, but sensitive information contained
+# in these scripts will be unencrypted
+**/PublishScripts/
+
+# NuGet Packages
+**/*.nupkg
+# NuGet Symbol Packages
+**/*.snupkg
+# The packages folder can be ignored because of Package Restore
+**/**/[Pp]ackages/*
+# except build/, which is used as an MSBuild target.
+**/!**/[Pp]ackages/build/
+# Uncomment if necessary however generally it will be regenerated when needed
+#!**/[Pp]ackages/repositories.config
+# NuGet v3's project.json files produces more ignorable files
+**/*.nuget.props
+**/*.nuget.targets
+
+# Microsoft Azure Build Output
+**/csx/
+**/*.build.csdef
+
+# Microsoft Azure Emulator
+**/ecf/
+**/rcf/
+
+# Windows Store app package directories and files
+**/AppPackages/
+**/BundleArtifacts/
+**/Package.StoreAssociation.xml
+**/_pkginfo.txt
+**/*.appx
+**/*.appxbundle
+**/*.appxupload
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+**/*.[Cc]ache
+# but keep track of directories ending in .cache
+**/!?*.[Cc]ache/
+
+# Others
+**/ClientBin/
+**/~$*
+**/*.dbmdl
+**/*.dbproj.schemaview
+**/*.jfm
+**/*.pfx
+**/*.publishsettings
+**/orleans.codegen.cs
+
+# Including strong name files can present a security risk
+# (https://github.com/github/gitignore/pull/2483#issue-259490424)
+#*.snk
+
+# Since there are multiple workflows, uncomment next line to ignore bower_components
+# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
+#bower_components/
+
+# RIA/Silverlight projects
+**/Generated_Code/
+
+# Backup & report files from converting an old project file
+# to a newer Visual Studio version. Backup files are not needed,
+# because we have git ;-)
+**/_UpgradeReport_Files/
+**/Backup*/
+**/UpgradeLog*.XML
+**/UpgradeLog*.htm
+**/ServiceFabricBackup/
+**/*.rptproj.bak
+
+# SQL Server files
+**/*.mdf
+**/*.ldf
+**/*.ndf
+
+# Business Intelligence projects
+**/*.rdl.data
+**/*.bim.layout
+**/*.bim_*.settings
+**/*.rptproj.rsuser
+**/*- [Bb]ackup.rdl
+**/*- [Bb]ackup ([0-9]).rdl
+**/*- [Bb]ackup ([0-9][0-9]).rdl
+
+# Microsoft Fakes
+**/FakesAssemblies/
+
+# GhostDoc plugin setting file
+**/*.GhostDoc.xml
+
+# Node.js Tools for Visual Studio
+**/.ntvs_analysis.dat
+
+# Visual Studio 6 build log
+**/*.plg
+
+# Visual Studio 6 workspace options file
+**/*.opt
+
+# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+**/*.vbw
+
+# Visual Studio LightSwitch build output
+**/**/*.HTMLClient/GeneratedArtifacts
+**/**/*.DesktopClient/GeneratedArtifacts
+**/**/*.DesktopClient/ModelManifest.xml
+**/**/*.Server/GeneratedArtifacts
+**/**/*.Server/ModelManifest.xml
+**/_Pvt_Extensions
+
+# Paket dependency manager
+**/.paket/paket.exe
+**/paket-files/
+
+# FAKE - F# Make
+**/.fake/
+
+# CodeRush personal settings
+**/.cr/personal
+
+# Python Tools for Visual Studio (PTVS)
+
+# Cake - Uncomment if you are using it
+# tools/**
+# !tools/packages.config
+
+# Tabs Studio
+**/*.tss
+
+# Telerik's JustMock configuration file
+**/*.jmconfig
+
+# BizTalk build output
+**/*.btp.cs
+**/*.btm.cs
+**/*.odx.cs
+**/*.xsd.cs
+
+# OpenCover UI analysis results
+**/OpenCover/
+
+# Azure Stream Analytics local run output
+**/ASALocalRun/
+
+# MSBuild Binary and Structured Log
+**/*.binlog
+
+# NVidia Nsight GPU debugger configuration file
+**/*.nvuser
+
+# MFractors (Xamarin productivity tool) working folder
+**/.mfractor/
+
+# Local History for Visual Studio
+**/.localhistory/
+
+# BeatPulse healthcheck temp database
+**/healthchecksdb
+
+# Backup folder for Package Reference Convert tool in Visual Studio 2017
+**/MigrationBackup/
+
+# Ionide (cross platform F# VS Code tools) working folder
+**/.ionide/
+
+### vscode ###
+
+### Vue ###
+# gitignore template for Vue.js projects
+# Recommended template: Node.gitignore
+
+# TODO: where does this rule come from?
+**/docs/_book
+
+# TODO: where does this rule come from?
+**/test/
+
+### Vuejs ###
+# Recommended template: Node.gitignore
+
+**/npm-debug.log
+**/yarn-error.log
+
+### Waf ###
+# For projects that use the Waf build system: https://waf.io/
+# Dot-hidden on Unix-like systems
+**/.waf-*-*/
+**/.waf3-*-*/
+# Hidden directory on Windows (no dot)
+**/waf-*-*/
+**/waf3-*-*/
+# Lockfile
+**/.lock-waf_*_build
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -1927,17 +3807,35 @@
 # Windows shortcuts
 **/*.lnk
 
+### Xcode ###
+# Xcode
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+
+
+
+
+### Xcode Patch ###
+**/*.xcodeproj/*
+**/!*.xcodeproj/project.pbxproj
+**/!*.xcodeproj/xcshareddata/
+**/!*.xcworkspace/contents.xcworkspacedata
+**/**/xcshareddata/WorkspaceSettings.xcsettings
+
+### XcodeInjection ###
+# Code Injection
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+# https://github.com/johnno1962/injectionforxcode
+
+**/iOSInjectionProject/
+
 ### Gradle ###
-**/.gradle
 
 # Ignore Gradle GUI config
-**/gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
-**/!gradle-wrapper.jar
 
 # Cache of project
-**/.gradletasknamecache
 
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
@@ -1945,4 +3843,162 @@
 ### Gradle Patch ###
 **/**/build/
 
-# End of https://www.toptal.com/developers/gitignore/api/ansible,appcode,archive,audio,backup,basic,c,chefcookbook,cloud9,compressed,compressedarchive,compression,database,diff,diskimage,eclipse,emacs,go,gpg,gradle,helm,images,intellij,java,jetbrains,jmeter,jupyternotebooks,kdiff3,kotlin,lamp,less,linux,macos,maven,mercurial,microsoftoffice,node,octave,osx,packer,perl,perl6,puppet,putty,pycharm+all,python,r,rails,redis,ruby,sbt,scala,sonarqube,spark,svn,terraform,vagrant,windows
+### VisualStudio ###
+
+# User-specific files
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+
+# Mono auto generated files
+
+# Build results
+
+# Visual Studio 2015/2017 cache/options directory
+# Uncomment if you have tasks that create the project's static files in wwwroot
+
+# Visual Studio 2017 auto generated files
+
+# MSTest test Results
+
+# NUnit
+
+# Build Results of an ATL Project
+
+# Benchmark Results
+
+# .NET Core
+
+# StyleCop
+
+# Files built by Visual Studio
+
+# Chutzpah Test files
+
+# Visual C++ cache files
+
+# Visual Studio profiler
+
+# Visual Studio Trace Files
+
+# TFS 2012 Local Workspace
+
+# Guidance Automation Toolkit
+
+# ReSharper is a .NET coding add-in
+
+# TeamCity is a build add-in
+
+# DotCover is a Code Coverage Tool
+
+# AxoCover is a Code Coverage Tool
+
+# Coverlet is a free, cross platform Code Coverage Tool
+
+# Visual Studio code coverage results
+
+# NCrunch
+
+# MightyMoose
+
+# Web workbench (sass)
+
+# Installshield output folder
+
+# DocProject is a documentation generator add-in
+
+# Click-Once directory
+
+# Publish Web Output
+# Note: Comment the next line if you want to checkin your web deploy settings,
+# but database connection strings (with potential passwords) will be unencrypted
+
+# Microsoft Azure Web App publish settings. Comment the next line if you want to
+# checkin your Azure Web App publish settings, but sensitive information contained
+# in these scripts will be unencrypted
+
+# NuGet Packages
+# NuGet Symbol Packages
+# The packages folder can be ignored because of Package Restore
+# except build/, which is used as an MSBuild target.
+# Uncomment if necessary however generally it will be regenerated when needed
+# NuGet v3's project.json files produces more ignorable files
+
+# Microsoft Azure Build Output
+
+# Microsoft Azure Emulator
+
+# Windows Store app package directories and files
+
+# Visual Studio cache files
+# files ending in .cache can be ignored
+# but keep track of directories ending in .cache
+
+# Others
+
+# Including strong name files can present a security risk
+# (https://github.com/github/gitignore/pull/2483#issue-259490424)
+
+# Since there are multiple workflows, uncomment next line to ignore bower_components
+# (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
+
+# RIA/Silverlight projects
+
+# Backup & report files from converting an old project file
+# to a newer Visual Studio version. Backup files are not needed,
+# because we have git ;-)
+
+# SQL Server files
+
+# Business Intelligence projects
+
+# Microsoft Fakes
+
+# GhostDoc plugin setting file
+
+# Node.js Tools for Visual Studio
+
+# Visual Studio 6 build log
+
+# Visual Studio 6 workspace options file
+
+# Visual Studio 6 auto-generated workspace file (contains which files were open etc.)
+
+# Visual Studio LightSwitch build output
+
+# Paket dependency manager
+
+# FAKE - F# Make
+
+# CodeRush personal settings
+
+# Python Tools for Visual Studio (PTVS)
+
+# Cake - Uncomment if you are using it
+# tools/**
+# !tools/packages.config
+
+# Tabs Studio
+
+# Telerik's JustMock configuration file
+
+# BizTalk build output
+
+# OpenCover UI analysis results
+
+# Azure Stream Analytics local run output
+
+# MSBuild Binary and Structured Log
+
+# NVidia Nsight GPU debugger configuration file
+
+# MFractors (Xamarin productivity tool) working folder
+
+# Local History for Visual Studio
+
+# BeatPulse healthcheck temp database
+
+# Backup folder for Package Reference Convert tool in Visual Studio 2017
+
+# Ionide (cross platform F# VS Code tools) working folder
+
+# End of https://www.toptal.com/developers/gitignore/api/ansible,apachehadoop,appcode,appengine,archive,archives,archlinuxpackages,audio,autotools,backup,basic,bittorrent,c,c++,certificates,chefcookbook,clojure,cloud9,cmake,code,code-java,codeblocks,compressed,compressedarchive,compression,data,database,datarecovery,diff,direnv,diskimage,docfx,docpress,docz,dotenv,dotfilessh,dotsettings,dropbox,eclipse,emacs,erlang,executable,firebase,flask,git,gitbook,go,gpg,gradle,grails,groovy,grunt,haskell,helm,homebrew,hugo,images,intellij,intellij+all,intellij+iml,java,java-web,jenv,jetbrains,jetbrains+all,jetbrains+iml,jmeter,julia,jupyternotebooks,kotlin,lamp,latex,less,linux,lua,macos,matlab,maven,mercurial,microsoftoffice,node,octave,osx,packer,patch,perl,perl6,phpunit,powershell,puppet,putty,pycharm,pycharm+all,pycharm+iml,pydev,python,r,rails,react,reactnative,redis,root,ruby,rust,sbt,scala,serverless,sonar,sonarqube,spark,splunk,spreadsheet,ssh,sublimetext,svn,terraform,terragrunt,tortoisegit,vagrant,venv,virtualenv,visualstudio,visualstudiocode,vs,vscode,vue,vuejs,waf,windows,xcode,xcodeinjection,zsh
