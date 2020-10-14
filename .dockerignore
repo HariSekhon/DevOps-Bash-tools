@@ -110,12 +110,13 @@
 
 # ========================================
 # Based on the massive adjacent .gitignore, modified for Docker ignore's Go filepath.Match() function
+*#*#
 **/*.a
 **/*.avi
 **/*.bak
 **/*.bak.*
-**/*.bkp
 **/*.bin
+**/*.bkp
 **/*.class
 **/*.dump
 **/*.flv
@@ -128,21 +129,20 @@
 **/*.mpeg
 **/*.mpg
 **/*.o
-**/*.out
 **/*.orig
+**/*.out
 **/*.part
 **/*.pyc
 **/*.pyo
-**/*.stdout
 **/*.stderr
+**/*.stdout
 **/*.swo
 **/*.swp
 **/*.tmp
 **/*.wmv
+**/*~
 **/tmp.*
 **/~*
-**/*~
-*#*#
 
 **/*.doc
 **/*.docx
