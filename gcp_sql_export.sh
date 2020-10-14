@@ -41,11 +41,8 @@ All databases for each SQL instance will be exported to the GCS bucket with file
 Requirements:
 
 - GCS bucket must already exist
-- Each SQL instance's service account must have write permissions to the bucket (Storage Object Creator)
-  - right now GCloud SDK doesn't support granting IAM permissions otherwise I'd have automated this too
-  - get the list of service accounts for SQL instances to add to IAM from the adjacent script:
+- Each SQL instance's service account will be granted the minimal role Storage Object Creator to the specified bucket to allow the export to succeed
 
-gcp_sql_service_accounts.sh
 
 - Do not back up Replicas as it the export will likely conflict with the ongoing recovery operation like so:
 
@@ -88,6 +85,9 @@ fi
 timestamp "Exporting SQL instance(s) to GCS bucket '$gcs_bucket'"
 for sql_instance in $sql_instances; do
     echo >&2
+    service_account="$(gcloud sql instances describe "$sql_instance" --format='get(serviceAccountEmailAddress)')"
+    timestamp "Granting instance '$sql_instance' service account '$service_account' objectCreator role to the backup bucket '$gcs_bucket'"
+    gsutil iam ch "serviceAccount:$service_account:objectCreator" "gs://$gcs_bucket"
     timestamp "Getting list of databases for SQL instance '$sql_instance'"
     databases="$(gcloud sql databases list --instance="$sql_instance" --format='get(name)')"
     for database in $databases; do
