@@ -24,7 +24,11 @@
 #
 # there is a much bigger list in the adjacent .gitignore, some of which may be worth porting in to here too
 #
-# XXX: tested, cannot use blacklists ( * ) like in .dockerignore because this breaks uploading anything, regardless of the blacklist coming before or after the !whitelist items
+# XXX: tested, cannot use blacklists like in .dockerignore because this breaks uploading anything, regardless of the blacklist coming before or after the !whitelist items
+#      use of either * or .* breaks Google Cloud Functions upload which end up with empty zips even with !main.py and !requirements.txt whitelist exclusions before or after
+#      so this definitely doesn't support the features of .gitignore and .dockerignore
+# *
+# .*
 
 .git/
 .gcloudignore
