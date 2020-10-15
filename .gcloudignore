@@ -13,27 +13,61 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Ignore uploading these to Google Cloud Build
+# ============================================================================ #
+#                           . g c l o u d i g n o r e
+# ============================================================================ #
+
+# https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore
+
+# ============================================
+# Ignore uploading these to Google App Engin, Cloud Build, Cloud Functions
 #
 # there is a much bigger list in the adjacent .gitignore, some of which may be worth porting in to here too
 
 .git/
-.DS_Store
+.gcloudignore
+.gitignore
+.dockerignore
 
 dist/
 node_modules/
 vendor/
+logs/
+git/
+github/
+vagrant/
+venv/
+debs/
+rpms/
 
+# XXX: don't include any hidden files unless we explicitly override and include them with a !.filename
+.*
+
+# ========================================
+# Based on the massive adjacent .gitignore
+
+*#*#
 *.a
+*.avi
 *.bak
 *.bak.*
+*.bin
+*.bkp
 *.class
 *.dump
-*.jar
+*.flv
+*.kdb
+*.lock
 *.log
+*.macports-saved_*
+*.mp3
+*.mp4
+*.mpeg
+*.mpg
 *.o
 *.orig
 *.out
+*.part
 *.pyc
 *.pyo
 *.stderr
@@ -41,6 +75,35 @@ vendor/
 *.swo
 *.swp
 *.tmp
-
+*.wmv
 *~
+tmp.*
 ~*
+
+*.doc
+*.docx
+*.msg
+*.pages
+*.ppt
+*.pptx
+*.rtf
+*.wpd
+*.wps
+*.xls
+*.xlsx
+
+# don't include CI configs not covered by ignoring dotfiles
+**/Jenkinsfile
+**/azure-pipelines.y*ml
+**/bitbucket-pipelines.y*ml
+**/buddy.y*ml
+**/codefresh.y*ml
+**/shippable.y*ml
+**/wercker.y*ml
+**/gocd_config_repo.json
+**/jenkins-job.xml
+**/hadolint.y*ml
+**/scalastyle_config.xml
+**/yamllint/
+# contains webhook URL which should not be committed publicly
+**/buildkite-pipeline*.json
