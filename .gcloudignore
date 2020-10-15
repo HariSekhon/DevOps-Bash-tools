@@ -23,6 +23,8 @@
 # Ignore uploading these to Google App Engin, Cloud Build, Cloud Functions
 #
 # there is a much bigger list in the adjacent .gitignore, some of which may be worth porting in to here too
+#
+# XXX: tested, cannot use blacklists ( * ) like in .dockerignore because this breaks uploading anything, regardless of the blacklist coming before or after the !whitelist items
 
 .git/
 .gcloudignore
