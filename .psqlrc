@@ -19,19 +19,18 @@
 
 -- See also:
 --
--- https://github.com/HariSekhon/SQL-scripts
+--      https://github.com/HariSekhon/SQL-scripts
 
 
 -- PSQL docs:
 --
--- https://www.postgresql.org/docs/12/app-psql.html
+--      https://www.postgresql.org/docs/12/app-psql.html
 
 
 --\! echo; echo .psqlrc loaded; echo
 \echo
-\echo .psqlrc loaded
+\echo '.psqlrc loaded'
 \echo
-
 
 --\set QUIET ON
 -- then later set
@@ -242,7 +241,9 @@
 
 -- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_sessions.sql
 \echo '\t' ':sessions' '\t' 'Show sessions (9.2+)'
-\set sessions 'SELECT pid, usename, client_addr, client_hostname, client_port, backend_start, query_start, state, backend_type FROM pg_stat_activity ORDER BY backend_type;'
+-- backend_type requires PostgreSQL 10+
+--\set sessions 'SELECT pid, usename, client_addr, client_hostname, client_port, backend_start, query_start, state, backend_type FROM pg_stat_activity ORDER BY backend_type;'
+\set sessions 'SELECT pid, usename, client_addr, client_hostname, client_port, backend_start, query_start, state FROM pg_stat_activity;'
 
 -- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_session_state_count.sql
 -- using extra space because the tab pushes description to the next tab stop and misaligns help
