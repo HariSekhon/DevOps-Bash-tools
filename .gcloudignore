@@ -41,6 +41,7 @@
 
 # descends directories matching basenames like .gitignore, doesn't need **/ prefix like .dockerignore
 
+# CI stuff you'd usuall commit but don't want to upload - there are more dot files with auth that wouldn't commit borrowed from massive adjacent .gitignore further down in the dotfiles section
 Jenkinsfile
 azure-pipelines.y*ml
 bitbucket-pipelines.y*ml
@@ -93,6 +94,7 @@ rpms/
 *.flv
 *.kdb
 *.lock
+*.local
 *.log
 *.macports-saved_*
 *.mp3
@@ -117,6 +119,9 @@ tmp.*
 
 # since .* doesn't work we must specify the common dot files to exclude below
 
+.*.local
+.*.env
+
 .a
 .activator/
 .adobe
@@ -140,57 +145,122 @@ tmp.*
 .cfconfig
 # Circle CI API Token stored in .circleci/cli.yml
 .circleci/
+.Codefresh/
+.compiz
+.conda/
 .config
+# contains repo_token / COVERALLS_REPO_TOKEN
+.coveralls.yml
+.cpan/
 .cpanm/
+.cups/
 .data
 .dbshell
+.dbus
 .dcos/
+.DCOPserver_*
 .devcenter/
 .docker*
 .dropbox/
 .DS_Store
+.dvdcss/
+# contains things like auth tokens
+.envrc*
 .env*
 .erlang.cookie
+.evolution
+.fluxbox/
 .flyrc
+.fontconfig
+.fseventsd
+.gaim/
 .gem
+.gimp-*
+.github_actions_runner/
+.gitk
+.gmvault/
+.gnome
+.gnome2
+.gnome2_private
+.gnupg*
+.gpg*
 .gradle
 .groovy
+.gstreamer-*
+.gvfs
+.htoprc
+.ICEauthority
+.IdeaIC*
+.idea
+.inkscape-etc/
+.ion3
+.ipython/
 .irb-save-history
 .irb_history
 # contains creds
 .iredisrc
 .ivy2/
+.jline-jython.history
+.kde
+.kodos
 .kube/
 .ldapvi_history
 .lesshst
+.links2
+.local
 .m2/
 .macports/
+.macports/
+.macromedia
+.matplotlib/
 .mcop
 .mcoprc
 .minikube/
 .minishift/
 .minishift.env
+.mozilla
 .mtools/
 .mysql_history
+.nbprofiler/
 .neo4j_shell_history
 .npm/
 .octave_hist
+.openoffice.org
+.openoffice.org2
+.oracle_jre_usage/
+.ovftool.ssldb
+.Qsync/
+.parallel/
 # PostgreSQL password file
 .pgpass
 # stores credentials
 .pig_history
 .pki
+.pentaho/
 .psql_history
+.pulse
 .puppet/
 .pwm3
+.PyCharm*/
+.pylint*
+.python*
 .python-eggs/
 .python_history
+.qt
+.qicon
+.qnicon
 # contains usernames and passwords
 .rabbitmqadmin.conf
 .RData
+.recently-used
+.recently-used.xbel
+.rediscli_history
+.Rhistory
 .rnd
 .rstudio-desktop/
 .rbenv/
+# 'rbenv local' $PWD version file
+.ruby-version
 .sbt/
 .scala_history
 .sdkman/
@@ -202,27 +272,46 @@ tmp.*
 .snowsql/
 # Snowflake password stored in plaintext in here
 .snowsql/config
+.spark*
 .spark_history
 .Spotlight-*
+.spumux/
 .sqlite_history
 .sqlline/history
-.ssh
+.ssh/
+.ssh*
 .subversion/
 # stores creds
 .subversion/auth
 .svn
+.swatch_script.*
 .TemporaryItems
 .terraform.d/
+.terragrunt
+.themes
+.thumbnails
+.tilda/
 .tmux/
+.tomboy
+.tomboy.log
+.Trash
+.Trashes
 .travis/
 .vagrant
 .vagrant.d/
+.vboxclient*
 .vim/
 .viminfo
 .vnc/
+.wapi
+.wget-hsts
+.wine
 .wireshark-etc/
 .wireshark/
+.wmii*
 .Xauthority
+.xine
+.xmms
 .xsession-errors
 .zenmap-etc/pango/pangorc
 
