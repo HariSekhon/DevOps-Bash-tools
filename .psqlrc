@@ -211,8 +211,6 @@
 
 -- can use be encased in single quotes. otherwise syntax error at the first double quote
 
-\set reload '\\i ~/.psqlrc'
-\set r '\\i ~/.psqlrc'
 \echo 'Query Aliases & Shortcuts:'
 \echo
 
@@ -305,8 +303,16 @@
 \set ll '\\! ls -l;'
 \set lt '\\! ls -ltr;'
 
+\echo
+
+\echo '\t' ':help' '\t\t' 'Reload ~/.psqlrc (which prints this helps)'
+\set help '\\i ~/.psqlrc'
+
 \echo '\t' ':reload' '\t' 'Reload ~/.psqlrc'
-\echo '\t' ':r'    '\t\t' 'Reload ~/.psqlrc'
+\set reload '\\i ~/.psqlrc'
+
+\echo '\t' ':r' '\t\t' 'Reload ~/.psqlrc'
+\set r '\\i ~/.psqlrc'
 
 \echo
 \echo 'Many more excellent queries are available at:'
