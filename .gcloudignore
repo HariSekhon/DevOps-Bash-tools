@@ -39,6 +39,23 @@
 .gitignore
 .dockerignore
 
+# descends directories matching basenames like .gitignore, doesn't need **/ prefix like .dockerignore
+
+Jenkinsfile
+azure-pipelines.y*ml
+bitbucket-pipelines.y*ml
+buddy.y*ml
+codefresh.y*ml
+shippable.y*ml
+wercker.y*ml
+gocd_config_repo.json
+jenkins-job.xml
+hadolint.y*ml
+scalastyle_config.xml
+yamllint/
+# contains webhook URL which should not be committed publicly
+buildkite-pipeline*.json
+
 # ========================================
 # Based on the massive adjacent .gitignore
 
@@ -99,6 +116,7 @@ tmp.*
 ~*
 
 # since .* doesn't work we must specify the common dot files to exclude below
+
 .aws/
 .bash*
 .cache
@@ -195,6 +213,7 @@ tmp.*
 .xsession-errors
 .zenmap-etc/pango/pangorc
 
+Box Documents/
 Desktop/
 Documents/
 Downloads/
@@ -202,8 +221,17 @@ drive/
 Dropbox/
 eclipse/
 Google*Drive
+mbox
+Movies
+Music
+Qsync/
+Pictures
 vagrant/
 venv/
+VirtualBox VMs/
+VirtualBoxShared
+visualvm*
+wordlists/
 
 *.doc
 *.docx
@@ -216,19 +244,3 @@ venv/
 *.wps
 *.xls
 *.xlsx
-
-# don't include CI configs not covered by ignoring dotfiles
-**/Jenkinsfile
-**/azure-pipelines.y*ml
-**/bitbucket-pipelines.y*ml
-**/buddy.y*ml
-**/codefresh.y*ml
-**/shippable.y*ml
-**/wercker.y*ml
-**/gocd_config_repo.json
-**/jenkins-job.xml
-**/hadolint.y*ml
-**/scalastyle_config.xml
-**/yamllint/
-# contains webhook URL which should not be committed publicly
-**/buildkite-pipeline*.json
