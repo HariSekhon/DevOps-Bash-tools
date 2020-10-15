@@ -30,10 +30,28 @@
 # *
 # .*
 
+# since .* doesn't work, unlike .dockerignore we must specify the common dot files to exclude below
+
 .git/
+.hg/
+.svn/
 .gcloudignore
 .gitignore
 .dockerignore
+
+# ========================================
+# Based on the massive adjacent .gitignore
+
+git/
+github/
+gitolite*/
+gitroot/
+mercurial/
+hg/
+hgroot/
+svn/
+svnroot/
+subversion/
 
 dist/
 node_modules/
@@ -45,9 +63,6 @@ vagrant/
 venv/
 debs/
 rpms/
-
-# ========================================
-# Based on the massive adjacent .gitignore
 
 *#*#
 *.a
@@ -82,6 +97,113 @@ rpms/
 *~
 tmp.*
 ~*
+
+# since .* doesn't work we must specify the common dot files to exclude below
+.aws/
+.bash*
+.cache
+.cassandra/
+.cbq_history
+.ccm/
+# Codefresh config contains API Key
+.cfconfig
+# Circle CI API Token stored in .circleci/cli.yml
+.circleci/
+.config
+.cpanm/
+.data
+.dbshell
+.dcos/
+.devcenter/
+.docker*
+.dropbox/
+.DS_Store
+.env*
+.erlang.cookie
+.flyrc
+.gem
+.gradle
+.groovy
+.irb-save-history
+.irb_history
+# contains creds
+.iredisrc
+.ivy2/
+.kube/
+.ldapvi_history
+.lesshst
+.m2/
+.macports/
+.mcop
+.mcoprc
+.minikube/
+.minishift/
+.minishift.env
+.mtools/
+.mysql_history
+.neo4j_shell_history
+.npm/
+.octave_hist
+# PostgreSQL password file
+.pgpass
+# stores credentials
+.pig_history
+.pki
+.psql_history
+.puppet/
+.pwm3
+.python-eggs/
+.python_history
+# contains usernames and passwords
+.rabbitmqadmin.conf
+.RData
+.rnd
+.rstudio-desktop/
+.rbenv/
+.sbt/
+.scala_history
+.sdkman/
+# Semaphore CI - contains auth token
+.sem.yaml
+.serverauth.*
+.sh_history
+.Skype
+.snowsql/
+# Snowflake password stored in plaintext in here
+.snowsql/config
+.spark_history
+.Spotlight-*
+.sqlite_history
+.sqlline/history
+.ssh
+.subversion/
+# stores creds
+.subversion/auth
+.svn
+.TemporaryItems
+.terraform.d/
+.tmux/
+.travis/
+.vagrant
+.vagrant.d/
+.vim/
+.viminfo
+.vnc/
+.wireshark-etc/
+.wireshark/
+.Xauthority
+.xsession-errors
+.zenmap-etc/pango/pangorc
+
+Desktop/
+Documents/
+Downloads/
+drive/
+Dropbox/
+eclipse/
+Google*Drive
+vagrant/
+venv/
 
 *.doc
 *.docx
