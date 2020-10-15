@@ -117,12 +117,25 @@ tmp.*
 
 # since .* doesn't work we must specify the common dot files to exclude below
 
+.a
+.activator/
+.adobe
+.agent.env
+.aliaslists
+.android/
+.anyconnect
+.ApacheDirectoryStudio/
+.atftp_history
+.atom/
+.audacious/
+.awless/
 .aws/
 .bash*
 .cache
 .cassandra/
 .cbq_history
 .ccm/
+.CFUserTextEncoding
 # Codefresh config contains API Key
 .cfconfig
 # Circle CI API Token stored in .circleci/cli.yml
