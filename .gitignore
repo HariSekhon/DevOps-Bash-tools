@@ -227,8 +227,8 @@
 # stores credentials
 .pig_history
 .pki
-.psql_history
 .pentaho/
+.psql_history
 .pulse
 .puppet/
 .pwm3
@@ -309,7 +309,7 @@
 .wine
 .wireshark-etc/
 .wireshark/
-.wmii-3.5
+.wmii-*
 .Xauthority
 .xine
 .xmms
