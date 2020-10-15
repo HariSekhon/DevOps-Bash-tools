@@ -28,6 +28,7 @@
 #
 #       git check-ignore -v $filename
 
+*#*#
 *.a
 *.avi
 *.bak
@@ -436,7 +437,6 @@ wordlists/users.medium
 wordlists/users.small
 wordlists/users.tiny
 wordlists/users.weighted
-*#*#
 
 *.doc
 *.docx
