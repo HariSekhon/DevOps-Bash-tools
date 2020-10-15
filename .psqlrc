@@ -37,9 +37,10 @@
 -- then later set
 --\set QUIET OFF
 
----------------
--- fancy prompt
---
+-- ========================================================================== --
+--                                  P r o m p t
+-- ========================================================================== --
+
 -- %M   fqdn
 -- %m   hostname / local for socket
 -- %>   port
@@ -75,7 +76,7 @@
 -------------------------------
 \set PROMPT2 '[continue] %R > '
 
--------------------------------------------------------------------
+-- ========================================================================== --
 
 -- jump to your SQL scripts directory (this is done in postgres.sh)
 --\cd ~/github/sql
@@ -113,7 +114,7 @@
 -- ascii art tables
 \pset border 2
 
--------------------------------------------------------------------
+-- ========================================================================== --
 
 -- set to 'off' if inside a terminal multiplexer (screen, tmux)
 --\pset pager on
@@ -141,7 +142,7 @@
 \! printf "Encoding: "
 \encoding
 
--------------------------------------------------------------------
+-- ========================================================================== --
 
 -- interactively disables transaction rollbacks to fix things interactively, change of default behaviour might confuse though
 --\set ON_ERROR_ROLLBACK interactive
@@ -181,15 +182,57 @@
 --\! echo
 \echo
 
------------------------
--- set useful variables
--- call like this - :reload OR :r
--- or interpolate them into queries eg. SELECT * FROM :tablename;
--- single quote the value to treat as an SQL literal  :'select'
--- double quote the value to treat as a SQL identifier :"tablename"
-\set reload '\\i ~/.psqlrc'
-\set r '\\i ~/.psqlrc'
 
 -- for local settings
 -- XXX: see if there is a way to check for existence and source only then
 --\i ~/.psqlrc.local
+
+
+-- =========
+-- Variables
+--
+-- \set myvar literal
+--
+-- call like
+--
+-- :myvar
+--
+-- or interpolate them into queries eg.
+--
+-- SELECT * FROM :tablename;
+--
+-- single quote the value to treat as an SQL literal  :'select'
+-- double quote the value to treat as a SQL identifier :"tablename"
+
+
+-- ========================================================================== --
+--                           Q u e r y   A l i a s e s
+-- ========================================================================== --
+
+\set reload '\\i ~/.psqlrc'
+\set r '\\i ~/.psqlrc'
+\echo 'Query Aliases & Shortcuts:'
+\echo
+
+\echo '\t' ':backends' '\t' 'List number of connected backends per database'
+\set backends   'SELECT datname,numbackends FROM pg_catalog.pg_stat_database ORDER BY numbackends DESC, datname ASC;'
+
+\echo '\t' ':uptime' '\t' 'Print postmaster uptime in seconds'
+\set uptime 'select date_trunc(\'second\', current_timestamp - pg_postmaster_start_time() ) as uptime;'
+
+\echo '\t' ':ls' '\t\t' 'Lists files in $PWD'
+\echo '\t' ':ll' '\t\t' 'Lists files in $PWD with timestamps'
+\echo '\t' ':lt' '\t\t' 'Lists files in $PWD by timestamps ascending'
+\set ls '\\! ls;'
+\set ll '\\! ls -l;'
+\set lt '\\! ls -ltr;'
+
+\echo '\t' ':reload' '\t' 'Reload ~/.psqlrc'
+\echo '\t' ':r'    '\t\t' 'Reload ~/.psqlrc'
+
+\echo
+\echo 'Many more excellent queries are available at:'
+\echo
+\echo '\t' 'https://github.com/HariSekhon/SQL-scripts'
+\echo
+\echo
