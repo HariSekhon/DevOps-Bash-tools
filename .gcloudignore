@@ -46,9 +46,6 @@ venv/
 debs/
 rpms/
 
-# XXX: don't include any hidden files unless we explicitly override and include them with a !.filename
-.*
-
 # ========================================
 # Based on the massive adjacent .gitignore
 
