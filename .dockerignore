@@ -9,10 +9,9 @@
 #                           . d o c k e r i g n o r e
 # ============================================================================ #
 
-# Reference:
-#
-#   https://docs.docker.com/engine/reference/builder/#dockerignore-file
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
 
+# =================================================
 # Don't send things you don't need to Docker server and avoid uploading your secrets / keys!!
 #
 # XXX: RULES:
@@ -20,10 +19,12 @@
 #      - unfortunately .dockerignore doesn't match basenames like .gitignore so you need to prefix **/ for recursive matching to be safe
 #      - Last Match Wins - you must put more specific whitelisting matches after the general exclusion pattern
 
+# ====================================================================
 # Smaller more concise .dockerignore files are found in the builds at:
 #
 #   https://github.com/harisekhon/dockerfiles
 
+# =========================================================
 # This is a huge list of exclusions which covers most cases
 #
 # XXX: Best Practice - enable '*' ignore and create short concise whitelist of inclusions
@@ -38,7 +39,8 @@
 
 # *
 
-# Whitelist - must come after the more general blacklist pattern as Last Match Wins
+# =========================================================================================
+# Whitelist - must come after the more general blacklist pattern * above as Last Match Wins
 #
 # always include package.json and requirements.txt for standard dependency installations on NodeJS and Python
 !package.json
