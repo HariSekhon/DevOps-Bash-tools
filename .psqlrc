@@ -14,7 +14,7 @@
 --
 
 -- ========================================================================== --
---                        A d v a n c e d    . p s q l r c
+--         A d v a n c e d   P o s t g r e S Q L   U s e r   C o n f i g
 -- ========================================================================== --
 
 -- See also:
@@ -32,6 +32,11 @@
 \echo .psqlrc loaded
 \echo
 
+
+--\set QUIET ON
+-- then later set
+--\set QUIET OFF
+
 ---------------
 -- fancy prompt
 --
@@ -40,11 +45,16 @@
 -- %>   port
 -- %n   username
 -- %x   transaction status - * in transaction, ! when transaction failed, ? when indeterminate
--- %/   database
--- %R   = for connected, ! for disconnected, ^ for single line mode
--- %#   # if superuser, > otherwise
--- %:myvar:  replaced with variable myvar
+-- %/   current database
+-- %~   like %/ but ~ for default database
+-- %R   = for connected
+--      ! for disconnected
+--      ^ for single line mode
+-- %#   '#' if superuser, '>' otherwise
+--
+-- %:myvar:     replaced with variable myvar
 -- %`command`   output of shell command
+-- %[%...%]     terminal colour control sequences
 
 ------------------
 -- default prompt:
@@ -79,15 +89,33 @@
 -- same as in Bash, don't record duplicate commands
 \set HISTCONTROL ignoredups
 
+-- number of EOF (ctrl-D) to ignore before terminating
+\set IGNOREEOF 0
+
 -- tab-complete SQL keywords to uppercase
 \set COMP_KEYWORD_CASE upper
+
+-- args:
+--  default:    none
+--  all         all input lines are printed
+--  queries     queries are printed as they are sent to server
+--  errors      only failed queries are printed
+--
+-- useful to set in scripts
+--\set ECHO queries
+
+-- echo the hidden queries for things like \d
+\set ECHO_HIDDEN ON
 
 -- display NULLs literally instead of as blanks which is confusing
 \pset null 'NULL'
 
+-- ascii art tables
+\pset border 2
+
 -------------------------------------------------------------------
 
--- turn pager off if inside a terminal multiplexer (screen, tmux)
+-- set to 'off' if inside a terminal multiplexer (screen, tmux)
 --\pset pager on
 
 -- leave wrapping to inherit \$COLUMNS
@@ -127,8 +155,17 @@
 -- same as -S / --single-line - use newlines as SQL statement terminators so you don't need semicolons
 --\set SINGLELINE on
 
+-- display context messages from the server - always, errors (default) or never
+--\set SHOW_CONTEXT errors
+
 -- debug SQL errors: default, verbose or terse
-\set VERBOSITY verbose
+--\set VERBOSITY verbose
+
+-- run after an error to get print the last error in verbose format as though VERBOSITY verbose was always set
+--\errverbose
+
+-- shortcut alias
+\set eav 'EXPLAIN ANALYZE VERBOSE'
 
 ---------------------------------
 -- enable timings for every query
