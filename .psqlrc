@@ -315,7 +315,7 @@
 \set r '\\i ~/.psqlrc'
 
 \echo
-\echo 'Many more excellent queries are available at:'
+\echo 'Many more excellent PostgreSQL queries are available at:'
 \echo
 \echo '\t' 'https://github.com/HariSekhon/SQL-scripts'
 \echo
