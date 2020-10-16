@@ -41,7 +41,12 @@ alias gke="gcloud container clusters"
 alias gc="gcloud container"
 alias gbs="gcloud builds submit --tag"
 alias bqq="bq query"
-alias gcloudconfig="gcloud config configurations activate"
+
+gcloudconfig(){
+    # configurations are usually called the same as the project name so export GOOGLE_PROJECT_ID for convenience too
+    gcloud config configurations activate "$1"
+    export GOOGLE_PROJECT_ID="$1"
+}
 
 gsopen(){
     local gspath="$1"
