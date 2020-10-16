@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu  #o pipefail  # not available in POSIX sh
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
