@@ -36,7 +36,7 @@ SQL instances can optionally be specified, otherwise iterates all running non-re
 
 All databases for each SQL instance will be exported to the GCS bucket with file names in the format:
 
-    <sql_instance>--<database_name>--backup-<date_timestamp>.sql.gz
+    gs://<bucket>/backups/sql/<sql_instance>--<database_name>--<date_timestamp>.sql.gz
 
 Requirements:
 
@@ -93,7 +93,7 @@ for sql_instance in $sql_instances; do
     for database in $databases; do
         timestamp "Exporting SQL instance '$sql_instance' database '$database'"
         # adding .gz will auto-encrypt the bucket
-        gcloud sql export sql "$sql_instance" "gs://$gcs_bucket/$sql_instance--$database--backup-$(date '+%F_%H%M').sql.gz" --database "$database"  # --offload
+        gcloud sql export sql "$sql_instance" "gs://$gcs_bucket/backups/sql/$sql_instance--$database--$(date '+%F_%H%M').sql.gz" --database "$database"  # --offload
     done
 done
 echo >&2
