@@ -355,7 +355,8 @@ etc.
     - `gcp_sql_enable_automated_backups.sh` - enable automated daily [Cloud SQL](https://cloud.google.com/sql) backups
     - `gcp_sql_enable_point_in_time_recovery.sh` - enable point-in-time recovery with write-ahead logs for [Cloud SQL](https://cloud.google.com/sql) instances
     - `gcp_sql_exports_create_service_account.sh` - creates a service account and grants permissions to Cloud SQL read-only and the backup export GCS bucket object creator only
-  - `gcp_cloud_scheduler_sql_exports.sh` - creates Google [Cloud Scheduler](https://cloud.google.com/scheduler) jobs to trigger [Cloud Function](https://cloud.google.com/functions) SQL exports to [GCS](https://cloud.google.com/storage) via [PubSub](https://cloud.google.com/pubsub) messages for all [Cloud SQL](https://cloud.google.com/sql) instances in the current GCP project
+  - `gcp_cloud_schedule_sql_exports.sh` - creates Google [Cloud Scheduler](https://cloud.google.com/scheduler) jobs to trigger [Cloud Function](https://cloud.google.com/functions) SQL exports to [GCS](https://cloud.google.com/storage) via [PubSub](https://cloud.google.com/pubsub) messages for all [Cloud SQL](https://cloud.google.com/sql) instances in the current GCP project
+    - find the Python GCF function in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current GCP project
     - `bigquery_list_tables.sh` - lists BigQuery tables in a given dataset
