@@ -354,6 +354,7 @@ etc.
     - `gcp_sql_service_accounts.sh` - lists [Cloud SQL](https://cloud.google.com/sql) service accounts. Useful for copying to [IAM](https://cloud.google.com/iam) to grant permissions (eg. Storage Object Creator for SQL export backups to [GCS](https://cloud.google.com/storage))
     - `gcp_sql_enable_automated_backups.sh` - enable automated daily [Cloud SQL](https://cloud.google.com/sql) backups
     - `gcp_sql_enable_point_in_time_recovery.sh` - enable point-in-time recovery with write-ahead logs for [Cloud SQL](https://cloud.google.com/sql) instances
+  - `gcp_cloud_scheduler_sql_exports.sh` - creates Google [Cloud Scheduler](https://cloud.google.com/scheduler) jobs to trigger [Cloud Function](https://cloud.google.com/functions) SQL exports to [GCS](https://cloud.google.com/storage) via [PubSub](https://cloud.google.com/pubsub) messages for all [Cloud SQL](https://cloud.google.com/sql) instances in the current GCP project
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
     - `bigquery_list_datasets.sh` - lists BigQuery datasets in the current GCP project
     - `bigquery_list_tables.sh` - lists BigQuery tables in a given dataset
