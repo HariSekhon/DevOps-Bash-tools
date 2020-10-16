@@ -14,37 +14,47 @@
 --
 
 -- ========================================================================== --
---                        A d v a n c e d    . p s q l r c
+--         A d v a n c e d   P o s t g r e S Q L   U s e r   C o n f i g
 -- ========================================================================== --
 
 -- See also:
 --
--- https://github.com/HariSekhon/SQL-scripts
+--      https://github.com/HariSekhon/SQL-scripts
 
 
 -- PSQL docs:
 --
--- https://www.postgresql.org/docs/12/app-psql.html
+--      https://www.postgresql.org/docs/12/app-psql.html
 
 
 --\! echo; echo .psqlrc loaded; echo
 \echo
-\echo .psqlrc loaded
+\echo '.psqlrc loaded'
 \echo
 
----------------
--- fancy prompt
---
+--\set QUIET ON
+-- then later set
+--\set QUIET OFF
+
+-- ========================================================================== --
+--                                  P r o m p t
+-- ========================================================================== --
+
 -- %M   fqdn
 -- %m   hostname / local for socket
 -- %>   port
 -- %n   username
 -- %x   transaction status - * in transaction, ! when transaction failed, ? when indeterminate
--- %/   database
--- %R   = for connected, ! for disconnected, ^ for single line mode
--- %#   # if superuser, > otherwise
--- %:myvar:  replaced with variable myvar
+-- %/   current database
+-- %~   like %/ but ~ for default database
+-- %R   = for connected
+--      ! for disconnected
+--      ^ for single line mode
+-- %#   '#' if superuser, '>' otherwise
+--
+-- %:myvar:     replaced with variable myvar
 -- %`command`   output of shell command
+-- %[%...%]     terminal colour control sequences
 
 ------------------
 -- default prompt:
@@ -65,7 +75,7 @@
 -------------------------------
 \set PROMPT2 '[continue] %R > '
 
--------------------------------------------------------------------
+-- ========================================================================== --
 
 -- jump to your SQL scripts directory (this is done in postgres.sh)
 --\cd ~/github/sql
@@ -79,15 +89,33 @@
 -- same as in Bash, don't record duplicate commands
 \set HISTCONTROL ignoredups
 
+-- number of EOF (ctrl-D) to ignore before terminating
+\set IGNOREEOF 0
+
 -- tab-complete SQL keywords to uppercase
 \set COMP_KEYWORD_CASE upper
+
+-- args:
+--  default:    none
+--  all         all input lines are printed
+--  queries     queries are printed as they are sent to server
+--  errors      only failed queries are printed
+--
+-- useful to set in scripts
+--\set ECHO queries
+
+-- echo the hidden queries for things like \d
+\set ECHO_HIDDEN ON
 
 -- display NULLs literally instead of as blanks which is confusing
 \pset null 'NULL'
 
--------------------------------------------------------------------
+-- ascii art tables
+\pset border 2
 
--- turn pager off if inside a terminal multiplexer (screen, tmux)
+-- ========================================================================== --
+
+-- set to 'off' if inside a terminal multiplexer (screen, tmux)
 --\pset pager on
 
 -- leave wrapping to inherit \$COLUMNS
@@ -113,7 +141,7 @@
 \! printf "Encoding: "
 \encoding
 
--------------------------------------------------------------------
+-- ========================================================================== --
 
 -- interactively disables transaction rollbacks to fix things interactively, change of default behaviour might confuse though
 --\set ON_ERROR_ROLLBACK interactive
@@ -127,8 +155,17 @@
 -- same as -S / --single-line - use newlines as SQL statement terminators so you don't need semicolons
 --\set SINGLELINE on
 
+-- display context messages from the server - always, errors (default) or never
+--\set SHOW_CONTEXT errors
+
 -- debug SQL errors: default, verbose or terse
-\set VERBOSITY verbose
+--\set VERBOSITY verbose
+
+-- run after an error to get print the last error in verbose format as though VERBOSITY verbose was always set
+--\errverbose
+
+-- shortcut alias
+\set eav 'EXPLAIN ANALYZE VERBOSE'
 
 ---------------------------------
 -- enable timings for every query
@@ -144,15 +181,143 @@
 --\! echo
 \echo
 
------------------------
--- set useful variables
--- call like this - :reload OR :r
--- or interpolate them into queries eg. SELECT * FROM :tablename;
--- single quote the value to treat as an SQL literal  :'select'
--- double quote the value to treat as a SQL identifier :"tablename"
-\set reload '\\i ~/.psqlrc'
-\set r '\\i ~/.psqlrc'
 
 -- for local settings
 -- XXX: see if there is a way to check for existence and source only then
 --\i ~/.psqlrc.local
+
+
+-- =========
+-- Variables
+--
+-- \set myvar literal
+--
+-- call like
+--
+-- :myvar
+--
+-- or interpolate them into queries eg.
+--
+-- SELECT * FROM :tablename;
+--
+-- single quote the value to treat as an SQL literal  :'select'
+-- double quote the value to treat as a SQL identifier :"tablename"
+
+
+-- ========================================================================== --
+--                           Q u e r y   A l i a s e s
+-- ========================================================================== --
+
+-- can use be encased in single quotes. otherwise syntax error at the first double quote
+
+\echo 'Query Aliases & Shortcuts:'
+\echo
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_backends_per_database.sql
+\echo '\t' ':backends' '\t' 'Show number of connected backends per database'
+\set backends 'SELECT datname,numbackends FROM pg_catalog.pg_stat_database ORDER BY numbackends DESC, datname ASC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_databases_by_size.sql
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_databases_by_size_if_accessible.sql
+\echo '\t' ':databases' '\t' 'Show databases by size desc (only ones you can access)'
+--\set databases 'SELECT datname, pg_size_pretty(pg_database_size(datname)) FROM pg_database ORDER BY pg_database_size(datname) DESC;'
+\set databases 'SELECT d.datname AS Name, pg_catalog.pg_get_userbyid(d.datdba) AS Owner, CASE WHEN pg_catalog.has_database_privilege(d.datname, \'CONNECT\') THEN pg_catalog.pg_size_pretty(pg_catalog.pg_database_size(d.datname)) ELSE \'No Access\' END AS SIZE FROM pg_catalog.pg_database d ORDER BY CASE WHEN pg_catalog.has_database_privilege(d.datname, \'CONNECT\') THEN pg_catalog.pg_database_size(d.datname) ELSE NULL END DESC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_running_queries.sql
+\echo '\t' ':queries' '\t' 'Show running queries'
+\set queries 'SELECT pid, age(clock_timestamp(), query_start), usename, application_name, query FROM pg_stat_activity WHERE state != \'idle\' AND query NOT ILIKE \'%pg_stat_activity%\' ORDER BY query_start DESC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_locks.sql
+\echo '\t' ':locks' '\t' 'Show locks'
+\set locks 'SELECT t.schemaname, t.relname, l.locktype, page, virtualtransaction, pid, mode, granted FROM pg_locks l, pg_stat_all_tables t WHERE l.relation = t.relid ORDER BY relation ASC; SELECT relation::regclass AS relation_regclass, * FROM pg_locks WHERE NOT granted;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_tables_row_estimates.sql
+\echo '\t' ':rowcounts' '\t' 'Show row count estimates per table'
+\set rowcounts 'SELECT schemaname, relname, n_live_tup FROM pg_stat_user_tables ORDER BY n_live_tup DESC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_queries_slow.sql
+\echo '\t' ':slowqueries' '\t' 'Show slow queries (runtime > 30 secs)'
+\set slowqueries 'SELECT now() - query_start as "runtime", usename, datname, wait_event, state, query FROM pg_stat_activity WHERE now() - query_start > \'30 seconds\'::interval ORDER BY runtime DESC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_sessions.sql
+\echo '\t' ':sessions' '\t' 'Show sessions (9.2+)'
+-- backend_type requires PostgreSQL 10+
+--\set sessions 'SELECT pid, usename, client_addr, client_hostname, client_port, backend_start, query_start, state, backend_type FROM pg_stat_activity ORDER BY backend_type;'
+\set sessions 'SELECT pid, usename, client_addr, client_hostname, client_port, backend_start, query_start, state FROM pg_stat_activity;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_session_state_count.sql
+-- using extra space because the tab pushes description to the next tab stop and misaligns help
+\echo '\t' ':sessioncounts ' 'Show session counts (grouped by state desc)'
+\set sessioncounts 'SELECT count(1), state FROM pg_stat_activity GROUP BY state ORDER BY 1 DESC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_tables_by_size.sql
+\echo '\t' ':tables' '\t' 'Show tables by size ascending'
+\set tables 'SELECT nspname, relname, pg_size_pretty(pg_total_relation_size(C.oid)) AS total_size FROM pg_class C LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace) WHERE nspname NOT IN (\'pg_catalog\', \'information_schema\') AND C.relkind <> \'i\' AND nspname !~ \'^pg_toast\' ORDER BY pg_total_relation_size(C.oid) DESC;'
+
+\echo
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_query_cache_hit_ratio.sql
+\echo '\t' ':qryhits' '\t' 'Show Query cache-hit ratio desc'
+\set qryhits 'CREATE EXTENSION IF NOT EXISTS pg_stat_statements; SELECT calls, rows, shared_blks_hit, shared_blks_read, shared_blks_hit / GREATEST(shared_blks_hit + shared_blks_read, 1)::float AS shared_blks_hit_ratio, local_blks_hit, local_blks_read, local_blks_hit / GREATEST(local_blks_hit + local_blks_read, 1)::float AS local_blks_hit_ratio, query FROM pg_stat_statements ORDER BY shared_blks_hit_ratio DESC, local_blks_hit_ratio DESC, rows DESC LIMIT 100;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_indexes_cache_hit_ratio.sql
+\echo '\t' ':idxhits' '\t' 'Show Index cache-hit ratio'
+\set idxhits 'SELECT SUM(idx_blks_read) AS idx_blks_read, SUM(idx_blks_hit)  AS idx_blks_hit, SUM(idx_blks_hit) / GREATEST(SUM(idx_blks_hit) + SUM(idx_blks_read), 1)::float AS ratio FROM pg_statio_user_indexes;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_tables_cache_hit_ratio.sql
+\echo '\t' ':tblhits' '\t' 'Show Table cache-hit ratio'
+\set tblhits 'SELECT SUM(heap_blks_read) AS heap_blks_read, SUM(heap_blks_hit)  AS heap_blks_hit, SUM(heap_blks_hit) / GREATEST(SUM(heap_blks_hit) + SUM(heap_blks_read), 1)::float AS ratio FROM pg_statio_user_tables;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_tables_index_usage.sql
+\echo '\t' ':tblidxuse' '\t' 'Show Table index usage % desc'
+\set tblidxuse 'SELECT relname AS table, idx_scan / GREATEST(seq_scan + idx_scan, 1) * 100 AS percent_of_times_index_used, n_live_tup AS rows_in_table FROM pg_stat_user_tables WHERE seq_scan + idx_scan > 0 ORDER BY rows_in_table DESC, percent_of_times_index_used DESC;'
+
+\echo
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_last_analyze.sql
+\echo '\t' ':analyzed' '\t' 'Show last analyzed stats (9.3+)'
+\set analyzed 'SELECT schemaname, relname, n_mod_since_analyze, last_analyze, last_autoanalyze, analyze_count, autoanalyze_count FROM pg_stat_user_tables ORDER BY n_mod_since_analyze DESC, last_analyze DESC, last_autoanalyze DESC;'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_last_vacuum.sql
+\echo '\t' ':vacuumed' '\t' 'Show last vaccumed stats (9.1+)'
+\set vacuumed 'SELECT schemaname, relname, n_live_tup, n_dead_tup, n_dead_tup / GREATEST(n_live_tup + n_dead_tup, 1)::float * 100 AS dead_percentage, last_vacuum, last_autovacuum, vacuum_count, autovacuum_count FROM pg_stat_user_tables WHERE n_dead_tup > 0 ORDER BY n_dead_tup DESC, last_vacuum DESC, last_autovacuum DESC;'
+
+\echo
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_dirs.sql
+\echo '\t' ':dirs' '\t\t' 'Show PostgreSQL config files, data and socket directory locations'
+\set dirs 'SELECT current_setting(\'config_file\') AS "config_file", current_setting(\'hba_file\') AS "hba_file", current_setting(\'ident_file\') AS "ident_file"; SELECT current_setting(\'data_directory\') AS "data_directory", current_setting(\'external_pid_file\') AS "external_pid_file"; SELECT current_setting(\'unix_socket_directories\') AS "unix_socket_directories", current_setting(\'unix_socket_permissions\') AS "unix_socket_permissions", current_setting(\'unix_socket_group\') AS "unix_socket_group";'
+
+-- https://github.com/HariSekhon/SQL-scripts/blob/master/postgres_settings.sql
+\echo '\t' ':settings' '\t' 'Print PostgreSQL settings (running + from config file)'
+\set settings 'SELECT name, setting, unit, context FROM pg_settings; select * from pg_file_settings;'
+
+\echo '\t' ':uptime' '\t' 'Print postmaster uptime in seconds'
+\set uptime 'select date_trunc(\'second\', current_timestamp - pg_postmaster_start_time() ) as uptime;'
+
+\echo
+
+\echo '\t' ':ls' '\t\t' 'Lists files in $PWD'
+\echo '\t' ':ll' '\t\t' 'Lists files in $PWD with timestamps'
+\echo '\t' ':lt' '\t\t' 'Lists files in $PWD by timestamps ascending'
+\set ls '\\! ls;'
+\set ll '\\! ls -l;'
+\set lt '\\! ls -ltr;'
+
+\echo
+
+\echo '\t' ':help' '\t\t' 'Reload ~/.psqlrc (which prints this helps)'
+\set help '\\i ~/.psqlrc'
+
+\echo '\t' ':reload' '\t' 'Reload ~/.psqlrc'
+\set reload '\\i ~/.psqlrc'
+
+\echo '\t' ':r' '\t\t' 'Reload ~/.psqlrc'
+\set r '\\i ~/.psqlrc'
+
+\echo
+\echo 'Many more excellent PostgreSQL queries are available at:'
+\echo
+\echo '\t' 'https://github.com/HariSekhon/SQL-scripts'
+\echo
+\echo

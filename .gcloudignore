@@ -13,27 +13,98 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Ignore uploading these to Google Cloud Build
+# ============================================================================ #
+#                           . g c l o u d i g n o r e
+# ============================================================================ #
+
+# https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore
+
+# ============================================
+# Ignore uploading these to Google App Engin, Cloud Build, Cloud Functions
 #
 # there is a much bigger list in the adjacent .gitignore, some of which may be worth porting in to here too
+#
+# XXX: tested, cannot use blacklists like in .dockerignore because this breaks uploading anything, regardless of the blacklist coming before or after the !whitelist items
+#      use of either * or .* breaks Google Cloud Functions upload which end up with empty zips even with !main.py and !requirements.txt whitelist exclusions before or after
+#      so this definitely doesn't support the features of .gitignore and .dockerignore
+# *
+# .*
+
+# since .* doesn't work, unlike .dockerignore we must specify the common dot files to exclude below
 
 .git/
-.DS_Store
+.hg/
+.svn/
+.gcloudignore
+.gitignore
+.dockerignore
+
+# descends directories matching basenames like .gitignore, doesn't need **/ prefix like .dockerignore
+
+# CI stuff you'd usuall commit but don't want to upload - there are more dot files with auth that wouldn't commit borrowed from massive adjacent .gitignore further down in the dotfiles section
+Jenkinsfile
+azure-pipelines.y*ml
+bitbucket-pipelines.y*ml
+buddy.y*ml
+codefresh.y*ml
+shippable.y*ml
+wercker.y*ml
+gocd_config_repo.json
+jenkins-job.xml
+hadolint.y*ml
+scalastyle_config.xml
+yamllint/
+# contains webhook URL which should not be committed publicly
+buildkite-pipeline*.json
+
+# ========================================
+# Based on the massive adjacent .gitignore
+
+git/
+github/
+gitolite*/
+gitroot/
+mercurial/
+hg/
+hgroot/
+svn/
+svnroot/
+subversion/
 
 dist/
 node_modules/
 vendor/
+logs/
+git/
+github/
+vagrant/
+venv/
+debs/
+rpms/
 
+*#*#
 *.a
+*.avi
 *.bak
 *.bak.*
+*.bin
+*.bkp
 *.class
 *.dump
-*.jar
+*.flv
+*.kdb
+*.lock
+*.local
 *.log
+*.macports-saved_*
+*.mp3
+*.mp4
+*.mpeg
+*.mpg
 *.o
 *.orig
 *.out
+*.part
 *.pyc
 *.pyo
 *.stderr
@@ -41,6 +112,237 @@ vendor/
 *.swo
 *.swp
 *.tmp
-
+*.wmv
 *~
+tmp.*
 ~*
+
+# since .* doesn't work we must specify the common dot files to exclude below
+
+.*.local
+.*.env
+
+.a
+.activator/
+.adobe
+.agent.env
+.aliaslists
+.android/
+.anyconnect
+.ApacheDirectoryStudio/
+.atftp_history
+.atom/
+.audacious/
+.awless/
+.aws/
+.bash*
+.cache
+.cassandra/
+.cbq_history
+.ccm/
+.CFUserTextEncoding
+# Codefresh config contains API Key
+.cfconfig
+# Circle CI API Token stored in .circleci/cli.yml
+.circleci/
+.Codefresh/
+.compiz
+.conda/
+.config
+# contains repo_token / COVERALLS_REPO_TOKEN
+.coveralls.yml
+.cpan/
+.cpanm/
+.cups/
+.data
+.dbshell
+.dbus
+.dcos/
+.DCOPserver_*
+.devcenter/
+.docker*
+.dropbox/
+.DS_Store
+.dvdcss/
+# contains things like auth tokens
+.envrc*
+.env*
+.erlang.cookie
+.evolution
+.fluxbox/
+.flyrc
+.fontconfig
+.fseventsd
+.gaim/
+.gem
+.gimp-*
+.github_actions_runner/
+.gitk
+.gmvault/
+.gnome
+.gnome2
+.gnome2_private
+.gnupg*
+.gpg*
+.gradle
+.groovy
+.gstreamer-*
+.gvfs
+.htoprc
+.ICEauthority
+.IdeaIC*
+.idea
+.inkscape-etc/
+.ion3
+.ipython/
+.irb-save-history
+.irb_history
+# contains creds
+.iredisrc
+.ivy2/
+.jline-jython.history
+.kde
+.kodos
+.kube/
+.ldapvi_history
+.lesshst
+.links2
+.local
+.m2/
+.macports/
+.macports/
+.macromedia
+.matplotlib/
+.mcop
+.mcoprc
+.minikube/
+.minishift/
+.minishift.env
+.mozilla
+.mtools/
+.mysql_history
+.nbprofiler/
+.neo4j_shell_history
+.npm/
+.octave_hist
+.openoffice.org
+.openoffice.org2
+.oracle_jre_usage/
+.ovftool.ssldb
+.Qsync/
+.parallel/
+# PostgreSQL password file
+.pgpass
+# stores credentials
+.pig_history
+.pki
+.pentaho/
+.psql_history
+.pulse
+.puppet/
+.pwm3
+.PyCharm*/
+.pylint*
+.python*
+.python-eggs/
+.python_history
+.qt
+.qicon
+.qnicon
+# contains usernames and passwords
+.rabbitmqadmin.conf
+.RData
+.recently-used
+.recently-used.xbel
+.rediscli_history
+.Rhistory
+.rnd
+.rstudio-desktop/
+.rbenv/
+# 'rbenv local' $PWD version file
+.ruby-version
+.sbt/
+.scala_history
+.sdkman/
+# Semaphore CI - contains auth token
+.sem.yaml
+.serverauth.*
+.sh_history
+.Skype
+.snowsql/
+# Snowflake password stored in plaintext in here
+.snowsql/config
+.spark*
+.spark_history
+.Spotlight-*
+.spumux/
+.sqlite_history
+.sqlline/history
+.ssh/
+.ssh*
+.subversion/
+# stores creds
+.subversion/auth
+.svn
+.swatch_script.*
+.TemporaryItems
+.terraform.d/
+.terragrunt
+.themes
+.thumbnails
+.tilda/
+.tmux/
+.tomboy
+.tomboy.log
+.Trash
+.Trashes
+.travis/
+.vagrant
+.vagrant.d/
+.vboxclient*
+.vim/
+.viminfo
+.vnc/
+.wapi
+.wget-hsts
+.wine
+.wireshark-etc/
+.wireshark/
+.wmii*
+.Xauthority
+.xine
+.xmms
+.xsession-errors
+.zenmap-etc/pango/pangorc
+
+Box Documents/
+Desktop/
+Documents/
+Downloads/
+drive/
+Dropbox/
+eclipse/
+Google*Drive
+mbox
+Movies
+Music
+Qsync/
+Pictures
+vagrant/
+venv/
+VirtualBox VMs/
+VirtualBoxShared
+visualvm*
+wordlists/
+
+*.doc
+*.docx
+*.msg
+*.pages
+*.ppt
+*.pptx
+*.rtf
+*.wpd
+*.wps
+*.xls
+*.xlsx

@@ -32,19 +32,28 @@ See the massive .gitignore in this repo for an example of this being used
 
 Args should be a comma / space separate list of languages and frameworks for which to retrieve gitignore config for
 
-Example:
+
+Examples:
+
 
 # List all available languages, configs and frameworks:
 
     ${0##*/} list
 
+
 # Get the .gitignore config for the C, Python and Perl programming languages
 
     ${0##*/} c,python,perl
 
+
 # Get the .gitignore for a whole bunch of programming languages you use, plus Maven, SBT, Gradle, Ansible and Homebrew ...
 
     ${0##*/} c python perl ruby java scala go maven sbt gradle ansible
+
+
+# List all available languages, configs and frameworks that aren't in the list passed in from standard input. eg. find only new and missing options to add to your configs
+
+    ${0##*/} missing <<< 'your_existing_list_comma_or_space_or_newline_separated'
 "
 
 # used by usage() in lib/utils.sh
@@ -85,4 +94,16 @@ gitignore_api(){
     echo
 }
 
-gitignore_api "$@"
+if [ "$*" = "missing" ] || [ "$*" = "new" ]; then
+    if is_mac; then
+        # Mac's grep is buggy and fails to exclude things it should from file, randomly missing some without any special characters or whitespace or anything else to explain it, but GNU grep works correctly with grep -v -f
+        grep(){
+            command ggrep "$@"
+        }
+    fi
+    my_list="$(cat)"
+    gitignore_api list |
+    grep -Fvx -f <(tr ',' ' ' <<< "${my_list%%#*}" | tr '[:space:]' '\n' | sed 's/[[:space:]]*//g; /^[[:space:]]*$/d')
+else
+    gitignore_api "$@"
+fi
