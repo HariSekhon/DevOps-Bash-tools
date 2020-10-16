@@ -513,6 +513,7 @@ etc.
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
   - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
+  - `travis_repo_build.sh` - triggers a build for the given repo
   - `travis_repo_caches.sh` - lists caches for a given repo
   - `travis_repo_crons.sh` - lists crons for a given repo
   - `travis_repo_env_vars.sh` - lists environment variables for a given repo
