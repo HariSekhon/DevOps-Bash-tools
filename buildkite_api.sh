@@ -64,7 +64,6 @@ help_usage "$@"
 min_args 1 "$@"
 
 url_base="https://api.buildkite.com/v2"
-api_version=2
 
 url_path="$1"
 shift || :

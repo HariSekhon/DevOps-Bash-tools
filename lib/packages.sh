@@ -15,7 +15,11 @@
 
 #  Used on Alpine so needs to be /bin/sh
 
-set +euo pipefail
+set +eu  #o pipefail
+if [ "${SHELL##*/}" = bash ]; then
+    # shellcheck disable=SC2039
+    set -o pipefail
+fi
 [ -n "${DEBUG:-}" ] && set -x
 
 # used in client code

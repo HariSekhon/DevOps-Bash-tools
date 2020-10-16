@@ -13,7 +13,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-set -euo pipefail
+set -eu  #o pipefail  # not available in POSIX sh
+if [ "${SHELL##*/}" = bash ]; then
+    # shellcheck disable=SC2039
+    set -o pipefail
+fi
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
