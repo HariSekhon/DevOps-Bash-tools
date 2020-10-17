@@ -42,7 +42,8 @@ alias gc="gcloud container"
 alias gbs="gcloud builds submit --tag"
 alias bqq="bq query"
 
-gcloudconfig(){
+# when switching an alias to a function during re-source without un-aliasing, declare function explicitly to avoid errors
+function gcloudconfig(){
     # configurations are usually called the same as the project name so export GOOGLE_PROJECT_ID for convenience too
     gcloud config configurations activate "$1"
     export GOOGLE_PROJECT_ID="$1"
