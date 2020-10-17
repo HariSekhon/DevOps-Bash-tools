@@ -22,11 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns a Codeship access token from the Codeship API using basic authentication
+Returns a CodeShip access token from the CodeShip API using basic authentication
 
 Requires \$CODESHIP_USERNAME / \$CODESHIP_USER and \$CODESHIP_PASSWORD to be defined in the environment
 
-Codeship user is usually your email address and if using GitHub OAuth sign-in, you'll need to set a normal password via this link:
+CodeShip user is usually your email address and if using GitHub OAuth sign-in, you'll need to set a normal password via this link:
 
     https://app.codeship.com/password_reset/new
 "
