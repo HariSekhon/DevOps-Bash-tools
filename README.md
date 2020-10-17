@@ -549,6 +549,7 @@ etc.
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
+- `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
 - `shippable_api.sh` - queries [Shippable](https://www.shippable.com/)'s API with authentication
 - `wercker_app_api.sh` - queries [Wercker](https://app.wercker.com/)'s Applications API with authentication
