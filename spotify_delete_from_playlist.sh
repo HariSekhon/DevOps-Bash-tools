@@ -167,6 +167,7 @@ delete_URIs_from_playlist(){
 
         if [ "${#ids[@]}" -eq 100 ]; then
             delete_from_playlist "${ids[@]}"
+            sleep 1
             ids=()
         fi
     done
