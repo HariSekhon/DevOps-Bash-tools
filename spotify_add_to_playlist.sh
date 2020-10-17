@@ -93,6 +93,7 @@ add_file_URIs(){
 
         if [ "${#ids[@]}" -ge 50 ]; then
             add_to_playlist "${ids[@]}"
+            sleep 1
             ids=()
         fi
     done < "$filename"
