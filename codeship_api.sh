@@ -25,7 +25,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Queries the CodeShip.com API
+Queries the CodeShip.com API with authentication
 
 Required:
 
@@ -48,7 +48,7 @@ https://apidocs.codeship.com/v2
 
 Examples:
 
-The Codeship API is pretty rudimentary compared to other systems APIs found in adjacent scripts
+The CodeShip API is pretty rudimentary compared to other systems APIs found in adjacent scripts
 
 # List projects:
 
