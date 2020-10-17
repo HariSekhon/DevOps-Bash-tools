@@ -50,7 +50,10 @@ done
 check_bin curl
 
 USERNAME="${USERNAME:-${USER:-$(whoami)}}"
-TOKEN="${TOKEN:-${OAUTH2_TOKEN:-${OAUTH_TOKEN:-${JWT_TOKEN:-}}}}"
+# for APIs like Codeship codeship_api_token.sh in which you must use basic auth and not pass a token
+if [ -z "${NO_TOKEN_AUTH:-}" ]; then
+    TOKEN="${TOKEN:-${OAUTH2_TOKEN:-${OAUTH_TOKEN:-${JWT_TOKEN:-}}}}"
+fi
 
 # Only do password mechanism and netrc_contents workaround if not using Kerberos
 if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
