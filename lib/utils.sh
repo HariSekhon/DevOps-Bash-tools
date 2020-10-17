@@ -935,6 +935,8 @@ has_error_field(){
         return 0
     elif [ "$(jq -r '.error' <<< "$*" || :)" != null ]; then
         return 0
+    elif [ "$(jq -r '.errors' <<< "$*" || :)" != null ]; then
+        return 0
     elif [ "$(jq -r '.error_description' <<< "$*" || :)" != null ]; then
         return 0
     fi
