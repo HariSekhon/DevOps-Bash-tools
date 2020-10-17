@@ -50,6 +50,7 @@ Examples:
 
 The CodeShip API is pretty rudimentary compared to other systems APIs found in adjacent scripts
 
+
 # List projects:
 
     ${0##*/} /organizations/{organization_uuid}/projects | jq .
@@ -58,15 +59,18 @@ The CodeShip API is pretty rudimentary compared to other systems APIs found in a
 
     ${0##*/} /organizations/{organization_uuid}/projects/{project_uuid}/builds
 
+    ${0##*/} /organizations/950777b0-5660-0134-8981-1aa13e5eb75e/projects/1b13b490-38c2-0138-ed09-4a04e28a9ab8/builds | jq .
+
 # Get pipelines for a build:
 
     ${0##*/} /organizations/{organization_uuid}/projects/{project_uuid}/builds/{build_uuid}/pipelines
+
+    ${0##*/} /organizations/950777b0-5660-0134-8981-1aa13e5eb75e/projects/1b13b490-38c2-0138-ed09-4a04e28a9ab8/builds/daec9560-f29c-0138-f24e-0a117489fb82/pipelines | jq .
 
 
 Placeholders replaced by \$CODESHIP_ORGANIZATION_UUID:                     {organization}, {organization_uuid}, <organization>, <organization_uuid>, :organization, :organization_uuid
 Placeholders replaced by \$CODESHIP_USERNAME / \$CODESHIP_USER:             :owner, :user, :username, <user>, <username>
 Placeholders replaced by the local repo name of the current directory:    :repo, <repo>
-
 "
 
 # used by usage() in lib/utils.sh
