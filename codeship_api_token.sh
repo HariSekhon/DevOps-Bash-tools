@@ -51,7 +51,8 @@ export PASSWORD="$CODESHIP_PASSWORD"
 
 # want arg splitting
 # shellcheck disable=SC2086
-output="$("$srcdir/curl_auth.sh" https://api.codeship.com/v2/auth -X POST -H "Content-Type: application/json" -H "Accept: application/json" "$@" $CURL_OPTS)"
+# has to be basic auth, don't allow token to be used as it will result in a 401
+output="$(NO_TOKEN_AUTH=1 "$srcdir/curl_auth.sh" https://api.codeship.com/v2/auth -X POST -H "Content-Type: application/json" -H "Accept: application/json" "$@" $CURL_OPTS)"
 
 die_if_error_field "$output"
 
@@ -60,4 +61,8 @@ if [ -n "${DEBUG:-}" ]; then
     jq . <<< "$output" >&2
 fi
 
-jq -r '.access_token' <<< "$output"
+if [ -n "${GET_ORGANIZATION:-}" ]; then
+    jq -r '[.access_token, .organizations[0].uuid] | @tsv' <<< "$output"
+else
+    jq -r '.access_token' <<< "$output"
+fi
