@@ -18,9 +18,18 @@
 spotifysession(){
     # this would prevent it from being exported to the shell as we want to make it easier to use full spotify tools
     #local SPOTIFY_ACCESS_TOKEN
-
+    # SECONDS cannot be reset in the background in spotify_token_expire_timer() function
+    SECONDS=0
+    spotify_token_expire_timer &
     # defined in ../.bashrc
     # shellcheck disable=SC2154
     SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$bash_tools/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
+
+}
+
+spotify_token_expire_timer(){
+    if [ "$SECONDS" -ge 3600 ]; then
+        unset SPOTIFY_ACCESS_TOKEN
+    fi
 }
