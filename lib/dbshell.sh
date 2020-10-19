@@ -226,6 +226,12 @@ skip_max_version(){
             return 0
         fi
         is_float "$version" || die "code error: non-float '$version' passed to skip_max_version()"
+        # if version is an int, eg. 12, implies 12.x, so make the requirement to be greater than or equal to the next integer up
+        # since 12.3 > 12 will return to skip, but humanly we want <= 12 to allow all versions of 12, only skipping for 13+
+        if [[ "$max_version" =~ ^[[:digit:]]+$ ]]; then
+            ((max_version+=1))
+            inclusive="="
+        fi
         if [ -n "$inclusive" ]; then
             if bc_bool "$version > $max_version"; then
                 timestamp "$skip_msg"
