@@ -20,28 +20,30 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
-if ! type isExcluded &>/dev/null; then
-    isExcluded(){
-        local prog="$1"
-        # this really is anything beginning with a star
-        # shellcheck disable=SC2049
-        [[ "$prog" =~ ^\* ]] && return 0
-        [[ "$prog" =~ ^# ]]  && return 0
-        [[ "$prog" =~ /\. ]] && return 0
-        [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
-        [[ "$prog" =~ TODO ]] && return 0
-        [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
-        # imported, minimal editing restricted to essentials only
-        [[ "$prog" =~ getawless.sh ]] && return 0
-        # this external git check is expensive, skip it when in CI as using fresh git checkouts
-        is_CI && return 1
-        # shellcheck disable=SC2230
-        if type -P git &>/dev/null; then
-            commit="$(git log "$prog" | head -n1 | grep 'commit')"
-            if [ -z "$commit" ]; then
-                return 0
-            fi
-        fi
-        return 1
-    }
+if type isExcluded &>/dev/null; then
+    return 0
 fi
+
+isExcluded(){
+    local prog="$1"
+    # this really is anything beginning with a star
+    # shellcheck disable=SC2049
+    [[ "$prog" =~ ^\* ]] && return 0
+    [[ "$prog" =~ ^# ]]  && return 0
+    [[ "$prog" =~ /\. ]] && return 0
+    [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
+    [[ "$prog" =~ TODO ]] && return 0
+    [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
+    # imported, minimal editing restricted to essentials only
+    [[ "$prog" =~ getawless.sh ]] && return 0
+    # this external git check is expensive, skip it when in CI as using fresh git checkouts
+    is_CI && return 1
+    # shellcheck disable=SC2230
+    if type -P git &>/dev/null; then
+        commit="$(git log "$prog" | head -n1 | grep 'commit')"
+        if [ -z "$commit" ]; then
+            return 0
+        fi
+    fi
+    return 1
+}
