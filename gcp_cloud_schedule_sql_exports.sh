@@ -36,6 +36,8 @@ Optional environment variables and their defaults:
 \$CLOUD_SCHEDULER_CRON    0 2 * * *
 \$TIMEZONE                Etc/UTC
 \$CLOUD_SCHEDULER_REPLACE if set to any value will delete and recreate the Cloud Scheduler job (gcloud prompts before deleting each job)
+
+Caveat: if the scheduler kicks off a subsequent database export on the same SQL instance, it will fail to launch if the previous one hasn't finished yet, so the \$CLOUD_SCHEDULER_CRON will increment the hour field for each successive database on the same SQL instance
 "
 
 # used by usage() in lib/utils.sh
@@ -66,6 +68,7 @@ for sql_instance in $sql_instances; do
     timestamp "Getting all databases on SQL instance '$sql_instance'"
     databases="$(gcloud sql databases list --instance="$sql_instance" --format='get(name)')"
     echo >&2
+    instance_cron="$cron"
     for database in $databases; do
         job_name="cloud-sql-backup--$sql_instance--$database"
         if [ -n "${CLOUD_SCHEDULER_REPLACE:-}" ]; then
@@ -73,8 +76,10 @@ for sql_instance in $sql_instances; do
             gcloud scheduler jobs delete "$job_name" || :
             echo >&2
         fi
-        timestamp "Creating Cloud Scheduler job for instance '$sql_instance' database '$database'"
-        gcloud scheduler jobs create pubsub "$job_name" --schedule "$cron" --topic "$topic" --message-body '{ "database": "'"$database"'", "instance": "'"${sql_instance}"'", "project": "'"$project_id"'", "bucket": "'"$bucket"'" }' --time-zone "$timezone" --description "Triggers Cloud SQL export of instance '$sql_instance' database '$database' via a PubSub message trigger to a Cloud Function"
+        timestamp "Creating Cloud Scheduler job for instance '$sql_instance' database '$database' with cron '$instance_cron'"
+        gcloud scheduler jobs create pubsub "$job_name" --schedule "$instance_cron" --topic "$topic" --message-body '{ "database": "'"$database"'", "instance": "'"${sql_instance}"'", "project": "'"$project_id"'", "bucket": "'"$bucket"'" }' --time-zone "$timezone" --description "Triggers Cloud SQL export of instance '$sql_instance' database '$database' via a PubSub message trigger to a Cloud Function"
         echo >&2
+        # increments the second hour field, resets the clock if we hit midnight
+        instance_cron="$(awk '{if($2 > 22){$2 -= 24}; print $1" "$2+1" "$3" "$4" "$5}' <<< "$instance_cron")"
     done
 done
