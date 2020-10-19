@@ -230,7 +230,7 @@ skip_max_version(){
         # since 12.3 > 12 will return to skip, but humanly we want <= 12 to allow all versions of 12, only skipping for 13+
         if [[ "$max_version" =~ ^[[:digit:]]+$ ]]; then
             ((max_version+=1))
-            inclusive="="
+            inclusive=""
         fi
         if [ -n "$inclusive" ]; then
             if bc_bool "$version > $max_version"; then
