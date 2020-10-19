@@ -29,7 +29,11 @@ spotifysession(){
 }
 
 spotify_token_expire_timer(){
-    if [ "$SECONDS" -ge 3600 ]; then
-        unset SPOTIFY_ACCESS_TOKEN
-    fi
+    while true; do
+        if [ "$SECONDS" -ge 3600 ]; then
+            unset SPOTIFY_ACCESS_TOKEN
+            break
+        fi
+        sleep 1
+    done
 }
