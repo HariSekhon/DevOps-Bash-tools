@@ -67,7 +67,16 @@ url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
 
 output(){
     #jq -r '.' <<< "$output"
-    jq -r '.items[] | select(.track.uri) | [.track.uri] | @tsv' <<< "$output"
+
+    # If you set \$SPOTIFY_PLAYLIST_TRACKS_UNAVAILABLE=1 then will only output tracks that are unavailable (greyed out on Spotify)
+    # Can feed this in to spotify_delete_from_playlist.sh to crop them from TODO / Discover Backlog type playlists
+    #if [ -n "${SPOTIFY_PLAYLIST_TRACKS_UNAVAILABLE:-}" ]; then
+        # XXX: this isn't reliable, some tracks are still available when these fields are both empty :-/
+        # and debug dumps comparing tracks shows there are no other fields to differentiate whether a track is available or not
+    #    jq -r '.items[] | select(.track.uri) | select((.track.available_markets | length) == 0) | select((.track.album.available_markets | length) == 0)' <<< "$output"
+    #else
+    jq -r '.items[] | select(.track.uri) | .track.uri' <<< "$output"
+    #fi
 }
 
 while not_null "$url_path"; do
