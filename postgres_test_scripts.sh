@@ -169,8 +169,9 @@ get_postgres_versions(){
     echo >&2
 }
 
-if [ -n "${POSTGRES_VERSIONS:-}" ]; then
+if [ -n "${POSTGRESQL_VERSIONS:-${POSTGRES_VERSIONS:-}}" ]; then
     versions=""
+    POSTGRES_VERSIONS="${POSTGRESQL_VERSIONS:-$POSTGRES_VERSIONS}"
     POSTGRES_VERSIONS="${POSTGRES_VERSIONS//,/ }"
     for version in $POSTGRES_VERSIONS; do
         if [[ "$version" =~ x ]]; then
