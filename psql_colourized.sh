@@ -25,6 +25,8 @@ usage_description="
 Runs 'psql' with colourized output
 
 Uses adjacent psql.sh, see there for more details
+
+Tested on PostgreSQL 8.4, 9.x, 10.x, 11.x, 12.x, 13.0
 "
 
 # used by usage() in lib/utils.sh
