@@ -319,6 +319,11 @@
 
 \echo
 
+\echo '\t' ':clear' '\t' 'Clear the screen'
+\set clear '\\! clear;'
+
+\echo
+
 \echo '\t' ':help' '\t\t' 'Reload ~/.psqlrc (which prints this helps)'
 \set help '\\i ~/.psqlrc'
 
