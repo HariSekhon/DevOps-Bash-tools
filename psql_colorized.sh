@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs 'psql' with colourized output
+Runs 'psql' with colorized output
 
 Uses adjacent psql.sh, see there for more details
 
