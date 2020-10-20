@@ -30,7 +30,7 @@ https://www.postgresql.org/docs/9.0/libpq-envars.html
 
 See also - GNU sql
 
-Tested on AWS RDS PostgreSQL 9.5.15
+Tested on PostgreSQL 13, AWS RDS PostgreSQL 9.5.15
 "
 
 # used by usage() in lib/utils.sh
