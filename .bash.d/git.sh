@@ -68,6 +68,7 @@ alias ci=commit
 alias gitco=checkout
 alias up=pull
 alias u=up
+alias uu="GIT_PULL_IN_BACKGROUND=1 u"
 alias pu=push
 alias gitp="git push"
 alias gdiff="git diff"
@@ -417,11 +418,12 @@ pull(){
             if git remote -v | grep -qi "${GITHUB_USER:-${GIT_USER:-${USER:-}}}"; then
                 hr
                 echo "> GitHub $x: git pull --all --no-edit $*"
-                git pull --all --no-edit "$@"
-                echo
                 #echo "> GitHub $x: git submodule update --init --recursive"
-                git submodule update --init --recursive
-                echo
+                if [ -n "${GIT_PULL_IN_BACKGROUND:-}" ]; then
+                    git_pull "$@" &
+                else
+                    git_pull "$@"
+                fi
             fi
             # shellcheck disable=SC2164
             popd &>/dev/null
@@ -432,20 +434,28 @@ pull(){
             hr
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             echo "> work $x: git pull --all --no-edit $*"
-            git pull --all --no-edit "$@"
-            echo
             #echo "> work $x: git submodule update --init --recursive"
-            git submodule update --init --recursive
-            echo
+            if [ -n "${GIT_PULL_IN_BACKGROUND:-}" ]; then
+                git_pull "$@" &
+            else
+                git_pull "$@"
+            fi
             # shellcheck disable=SC2164
             popd &>/dev/null
         done
     else
         echo "> git pull --all --no-edit $*"
-        git pull --all --no-edit "$@"
         echo "> git submodule update --init --recursive"
-        git submodule update --init --recursive
+        git_pull "$@"
     fi
+}
+
+git_pull(){
+    echo
+    git pull --all --no-edit "$@"
+    echo
+    git submodule update --init --recursive
+    echo
 }
 
 checkout(){
@@ -914,7 +924,8 @@ buildkite_browse(){
         echo "\$BUILDKITE_ORGANIZATION not set"
         return 1
     fi
-    local repo="$(git_repo | tr '[:upper:]' '[:lower:]')"
+    local repo
+    repo="$(git_repo | tr '[:upper:]' '[:lower:]')"
     browser "https://buildkite.com/$BUILDKITE_ORGANIZATION/$repo"
 }
 alias bk=buildkite_browse
