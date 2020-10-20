@@ -208,7 +208,7 @@ fi
 
 # want opt splitting
 # shellcheck disable=SC2086
-docker exec $docker_exec_opts "$container_name" psql -U postgres
+docker exec $docker_exec_opts "$container_name" /bash/psql_colourized.sh -U postgres
 
 untrap
 
