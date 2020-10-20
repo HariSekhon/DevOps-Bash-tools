@@ -50,6 +50,12 @@ NOCOLOR="$(echo -e '\033[0m')"
 #export LESS="-iMSx4 -FXR"
 export LESS="-RFXig --tabs=4"
 
+if type -P less &>/dev/null; then
+    pager="less"
+else
+    pager="more"
+fi
+
 sed="sed"
 if is_mac; then
     # doesn't work inside PAGER evaluation
@@ -68,6 +74,6 @@ export PAGER="$sed '
                 s/|/$GREEN|$NOCOLOR/g;
                 s/^\([-+]\+\)/$GREEN\1$NOCOLOR/
                 ' 2>&1 |
-              less"
+              $pager"
 
 "$srcdir/psql.sh" --pset pager=always "$@"
