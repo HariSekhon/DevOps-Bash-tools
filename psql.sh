@@ -37,6 +37,7 @@ Tested on AWS RDS PostgreSQL 9.5.15
 # shellcheck disable=SC2034
 usage_args="[<psql_options>]"
 
+# would catch -h but this is a legit option we should let through
 #help_usage "$@"
 
 #min_args 1 "$@"
