@@ -29,6 +29,8 @@ SQL instances can optionally be specified, otherwise iterates all running non-re
 (only running instances can export, otherwise will error out)
 (only non-replicas should be exported, replicas will likely fail due to conflict with replication recovery)
 
+Consider scheduling cron to be before / after the Automated Backups window and before the Google Maintenance Window for each instance
+
 Optional environment variables and their defaults:
 
 \$BUCKET                  \${project_id}-sql-backups
