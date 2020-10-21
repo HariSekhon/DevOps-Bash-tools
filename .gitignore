@@ -323,8 +323,8 @@
 
 # GCP credentials
 application_default_credentials.json
-keyfile.json
-credentials.json
+*keyfile.json
+*credentials.json
 
 abs-guide.pdf
 android-sdks/
