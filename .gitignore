@@ -269,6 +269,7 @@
 # Semaphore CI - contains auth token
 .sem.yaml
 .serverauth.*
+.serverless/bin/
 .sh_history
 .Skype
 .snowsql
