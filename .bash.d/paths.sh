@@ -93,6 +93,11 @@ for x in ~/bin/*; do
     add_PATH "$x"
 done
 
+# Serverless.com framework
+if [ -d ~/.serverless/bin ]; then
+    add_PATH ~/.serverless/bin
+fi
+
 # HomeBrew on Linux
 if [ -d ~/.linuxbrew/bin ]; then
     add_PATH ~/.linuxbrew/bin
