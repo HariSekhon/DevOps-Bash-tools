@@ -269,6 +269,9 @@
 # Semaphore CI - contains auth token
 .sem.yaml
 .serverauth.*
+# $PWD/.serverless local service artifacts
+.serverless/
+# $HOME/.serverless installation
 .serverless/bin/
 .sh_history
 .Skype
