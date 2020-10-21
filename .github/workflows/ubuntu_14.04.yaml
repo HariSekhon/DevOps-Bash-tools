@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Ubuntu 14.04
+name: Ubuntu 14.04
 
 #env:
 #  DEBUG: 1

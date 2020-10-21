@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI PyPy 2
+name: PyPy 2
 
 #env:
 #  DEBUG: 1

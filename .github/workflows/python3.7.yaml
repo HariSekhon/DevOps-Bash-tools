@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Python 3.7
+name: Python 3.7
 
 #env:
 #  DEBUG: 1

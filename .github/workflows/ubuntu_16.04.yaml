@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Ubuntu 16.04
+name: Ubuntu 16.04
 
 #env:
 #  DEBUG: 1

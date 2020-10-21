@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI PyPy 3
+name: PyPy 3
 
 #env:
 #  DEBUG: 1

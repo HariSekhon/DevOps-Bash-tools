@@ -13,7 +13,7 @@
 
 # Not supporting RHEL6 any more because it doesn't have GNU parallel package
 
-name: CI CentOS 6
+name: CentOS 6
 
 #env:
 #  DEBUG: 1

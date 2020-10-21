@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Ubuntu 18.04
+name: Ubuntu 18.04
 
 #env:
 #  DEBUG: 1
