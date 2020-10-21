@@ -316,6 +316,11 @@
 .xmms
 .xsession-errors
 .zenmap-etc/pango/pangorc
+
+# GCP credentials
+keyfile.json
+credentials.json
+
 abs-guide.pdf
 android-sdks/
 Applications/
