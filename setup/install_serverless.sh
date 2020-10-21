@@ -31,7 +31,11 @@ usage_args=""
 
 help_usage "$@"
 
-curl -o- -L https://slss.io/install | bash
+if [ -n "${FORCE_INSTALL:-}" ] || ! type -P serverless &>/dev/null; then
+    curl -o- -L https://slss.io/install | bash
+else
+    echo "serverless is already installed. To upgrade run 'serverless upgrade'"
+fi
 
 # configure by first run of:
 #
@@ -40,3 +44,9 @@ curl -o- -L https://slss.io/install | bash
 # uninstall via:
 #
 #   serverless uninstall
+
+echo
+echo "Serverless Version:"
+echo
+
+serverless --version
