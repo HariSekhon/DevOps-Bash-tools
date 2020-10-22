@@ -75,19 +75,18 @@ shift || :
 sql_instances="$*"
 
 if [ -z "$sql_instances" ]; then
-    # XXX: only running instances can do exports, otherwise will error out
-    # XXX: only non-replicas back up correctly due to conflicts with ongoing replication recovery operations - see description above for details
-    #sql_instances="$(gcloud sql instances list --format='get(name)' --filter 'STATUS=runnable' | grep -v -- '-replica$')"
-    # better to not rely on the name having a '-replica' suffix and instead use the JSON instanceType field to exclude replicas
-    sql_instances="$(gcloud sql instances list --format=json | jq -r '.[] | select(.instanceType != "READ_REPLICA_INSTANCE") | select(.state == "RUNNABLE") | .name')"
+    sql_instances="$("$srcdir/gcp_sql_running_primaries.sh")"
 fi
+
+timestamp "Granting SQL instance(s) objectCreator on GCS bucket '$gcs_bucket'"
+# want splitting
+# shellcheck disable=SC2086
+"$srcdir/gcp_sql_grant_instances_object_creator.sh" "$gcs_bucket" $sql_instances
+echo >&2
 
 timestamp "Exporting SQL instance(s) to GCS bucket '$gcs_bucket'"
 for sql_instance in $sql_instances; do
     echo >&2
-    service_account="$(gcloud sql instances describe "$sql_instance" --format='get(serviceAccountEmailAddress)')"
-    timestamp "Granting instance '$sql_instance' service account '$service_account' objectCreator role to the backup bucket '$gcs_bucket'"
-    gsutil iam ch "serviceAccount:$service_account:objectCreator" "gs://$gcs_bucket"
     timestamp "Getting list of databases for SQL instance '$sql_instance'"
     databases="$(gcloud sql databases list --instance="$sql_instance" --format='get(name)')"
     for database in $databases; do
