@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Alpine 2.7
+name: Alpine 2.7
 
 #env:
 #  DEBUG: 1

@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Debian 6
+name: Debian 6
 
 #env:
 #  DEBUG: 1

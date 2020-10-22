@@ -11,7 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: CI Debian 8
+name: Debian 8
 
 #env:
 #  DEBUG: 1
