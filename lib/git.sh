@@ -109,6 +109,30 @@ set_upstream(){
     git branch --set-upstream-to "origin/$(mybranch)" "$(mybranch)"
 }
 
+# load domain, user and token variables from environment
+# don't export variables, they are used as globals in calling script but shouldn't be visible to child processes
+# shellcheck disable=SC2034
+git_provider_env(){
+    local name="$1"
+    if [ "$name" = "github" ]; then
+        domain=github.com
+        user="${GITHUB_USER:-}"
+        token="${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}"
+    elif [ "$name" = "gitlab" ]; then
+        domain=gitlab.com
+        user="${GITLAB_USER:-}"
+        token="${GITLAB_TOKEN:-${GITLAB_PASSWORD:-}}"
+    elif [ "$name" = "bitbucket" ]; then
+        domain=bitbucket.org
+        user="${BITBUCKET_USER:-}"
+        token="${BITBUCKET_TOKEN:-${BITBUCKET_PASSWORD:-}}"
+    elif [ "$name" = "azure" ]; then
+        domain=dev.azure.com
+        user="${AZURE_DEVOPS_USER:-}"
+        token="${AZURE_DEVOPS_TOKEN:-${AZURE_DEVOPS_PASSWORD:-}}"
+    fi
+}
+
 # Azure DevOps has non-uniform URLs compared to the 3 main Git repos so here are general conversion rules used by git_remotes_add_public_repos.sh / git_remotes_set_multi_origin.sh
 git_to_azure_url(){
     local url="$1"
