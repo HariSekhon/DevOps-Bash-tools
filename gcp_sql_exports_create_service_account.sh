@@ -54,7 +54,6 @@ help_usage "$@"
 project="$(gcloud config list --format="value(core.project)")"
 name="cloud-function-sql-backup"
 service_account="$name@$project.iam.gserviceaccount.com"
-bucket="${BUCKET:-$project-sql-backups}"
 
 if ! gcloud iam service-accounts list | grep -q "$service_account"; then
     timestamp "Creating GCP service account '$service_account'"
@@ -70,5 +69,10 @@ timestamp "Granting CloudSQL Client to service account '$service_account'"
 gcloud projects add-iam-policy-binding "$project" --member="serviceAccount:$service_account" --role=roles/cloudsql.viewer
 echo >&2
 
-timestamp "Granting Storage Object Creator on bucket '$bucket' to service account '$service_account'"
-gsutil iam ch "serviceAccount:$service_account:objectCreator" "gs://$bucket"
+# XXX: need to grant the Cloud SQL instance service accounts objectCreator to the bucket, not this cloud function's service account
+#      see instead adjacent script:
+#
+#      gcp_sql_grant_instances_object_creator.sh
+#
+#timestamp "Granting Storage Object Creator on bucket '$bucket' to service account '$service_account'"
+#gsutil iam ch "serviceAccount:$service_account:objectCreator" "gs://$bucket"
