@@ -68,4 +68,4 @@ for sql_instance in $sql_instances; do
     gsutil iam ch "serviceAccount:$service_account:objectCreator" "gs://$gcs_bucket"
     echo >&2
 done
-timestamp "Grants completed"
+timestamp "Cloud SQL grants to GCS bucket '$gcs_bucket' completed"
