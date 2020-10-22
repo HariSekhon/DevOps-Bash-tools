@@ -4090,7 +4090,8 @@ MigrationBackup/
 docs/_book
 
 # TODO: where does this rule come from?
-test/
+# XXX: covers up standard Python unit test path
+# test/
 
 ### Vuejs ###
 # Recommended template: Node.gitignore
