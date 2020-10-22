@@ -96,4 +96,4 @@ for sql_instance in $sql_instances; do
     done
 done
 echo >&2
-timestamp "Exports completed"
+timestamp "Cloud SQL exports to GCS bucket '$gcs_bucket' completed"
