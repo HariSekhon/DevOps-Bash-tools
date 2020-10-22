@@ -109,4 +109,33 @@ set_upstream(){
     git branch --set-upstream-to "origin/$(mybranch)" "$(mybranch)"
 }
 
+# Azure DevOps has non-uniform URLs compared to the 3 main Git repos so here are general conversion rules used by git_remotes_add_public_repos.sh / git_remotes_set_multi_origin.sh
+git_to_azure_url(){
+    local url="$1"
+    # XXX: you should set $AZURE_DEVOPS_PROJECT in your environment or call your project GitHub as I have - there is no portable way to infer this from other repos since they don't have this hierarchy level - querying the API might work if there is only a single project, but this might get overly complicated if requiring additional authentication
+    project="${AZURE_DEVOPS_PROJECT:-}"
+    if [ -z "$project" ]; then
+        timestamp "WARNING: \$AZURE_DEVOPS_PROJECT not set, defaulting to project name 'GitHub'"
+        project="GitHub"
+    fi
+    url="${url/git@dev.azure.com/git@ssh.dev.azure.com}"
+    if [[ "$url" =~ ssh.dev.azure.com ]]; then
+        url="${url/:/:v3\/}"
+        # XXX: lowercase username and inject $project just before the repo name to conform to weird Azure DevOps urls
+        url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\$2/" <<< "$url")"
+    else # https
+        url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\\/_git\$2/" <<< "$url")"
+    fi
+    echo "$url"
+}
+
+azure_to_git_url(){
+    local url="$1"
+    url="${url/:v3\//:}"
+    url="${url/\/_git\//\/}"
+    # XXX: strip the middle component out from git@ssh.dev.azure.com:v3/harisekhon/GitHub/DevOps-Bash-tools
+    url="$(perl -pe 's/([\/:][^\/:]+)(\/[^\/]+)(\/[^\/]+)$/$1$3/' <<< "$url")"
+    echo "$url"
+}
+
 srcdir="$srcdir_git"
