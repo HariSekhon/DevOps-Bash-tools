@@ -91,6 +91,12 @@ add_remote_repo(){
             else # https
                 url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\\/_git\$2/" <<< "$url")"
             fi
+        else
+            # undo weird Azure DevOps url components if we happen to infer URL from an Azure DevOps url
+            url="${url/:v3\//:}"
+            url="${url/\/_git\//\/}"
+            # XXX: strip the middle component out from git@ssh.dev.azure.com:v3/harisekhon/GitHub/DevOps-Bash-tools
+            url="$(perl -pe 's/([\/:][^\/:]+)(\/[^\/]+)(\/[^\/]+)$/$1$3/' <<< "$url")"
         fi
         # shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen
         log "inferring $name URL to be $url"
