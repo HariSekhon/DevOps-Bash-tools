@@ -28,8 +28,8 @@ Useful to get a list to iterate on for backups, exports, grants etc.
 
 Used by adjacent scripts:
 
-    gcp_sql_grant_instances_object_creator.sh
     gcp_sql_export.sh
+    gcp_sql_grant_instances_gcs_object_creator.sh
 "
 
 # used by usage() in lib/utils.sh
