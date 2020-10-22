@@ -18,10 +18,21 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# shellcheck source=lib/utils.sh
+# shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Recurses a given directory tree or \$PWD, finding all Python and Jython files and validating them using PyLint
+"
+
+help_usage "$@"
+
+directory="${1:-.}"
+shift ||:
+
+filelist="$(find "$directory" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort)"
+if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -38,14 +49,14 @@ else
     if type -P pylint &>/dev/null; then
         # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
         #prog_list="
-        for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
-            #echo "checking if $x is excluded"
-            isExcluded "$x" && continue
-            #echo "added $x for testing"
-            #prog_list="$prog_list $x"
-            echo "pylint -E $x"
-            pylint -E "$x"
-        done
+        while read -r filename; do
+            #echo "checking if $filename is excluded"
+            isExcluded "$filename" && continue
+            #echo "added $filename for testing"
+            #prog_list="$prog_list $filename"
+            echo "pylint -E $filename $*"
+            pylint -E "$filename" "$@"
+        done <<< "$filelist"
         #echo
         #echo "Checking for coding errors:"
         #echo
