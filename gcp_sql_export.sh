@@ -81,7 +81,7 @@ fi
 timestamp "Granting SQL instance(s) objectCreator on GCS bucket '$gcs_bucket'"
 # want splitting
 # shellcheck disable=SC2086
-"$srcdir/gcp_sql_grant_instances_object_creator.sh" "$gcs_bucket" $sql_instances
+"$srcdir/gcp_sql_grant_instances_gcs_object_creator.sh" "$gcs_bucket" $sql_instances
 echo >&2
 
 timestamp "Exporting SQL instance(s) to GCS bucket '$gcs_bucket'"
