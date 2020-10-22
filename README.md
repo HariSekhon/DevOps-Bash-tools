@@ -353,7 +353,7 @@ etc.
     - `gcp_sql_export.sh` - creates [Cloud SQL](https://cloud.google.com/sql) exports to [GCS](https://cloud.google.com/storage)
     - `gcp_sql_enable_automated_backups.sh` - enable automated daily [Cloud SQL](https://cloud.google.com/sql) backups
     - `gcp_sql_enable_point_in_time_recovery.sh` - enable point-in-time recovery with write-ahead logs for [Cloud SQL](https://cloud.google.com/sql) instances
-    - `gcp_sql_running_primaries.sh` - lists [Cloud SQL](https://cloud.google.com/sql) primary running SQL instances - used by adjacent scripts
+    - `gcp_sql_running_primaries.sh` - lists [Cloud SQL](https://cloud.google.com/sql) primary running SQL instances
     - `gcp_sql_service_accounts.sh` - lists [Cloud SQL](https://cloud.google.com/sql) service accounts. Useful for copying to [IAM](https://cloud.google.com/iam) to grant permissions (eg. Storage Object Creator for SQL export backups to [GCS](https://cloud.google.com/storage))
     - `gcp_sql_create_readonly_service_account.sh` - creates a service account and grants read-only permissions to [Cloud SQL](https://cloud.google.com/sql) eg. to run export backups to [GCS](https://cloud.google.com/storage)
     - `gcp_sql_grant_instances_gcs_object_creator.sh` - grants minimal objectCreator permission to given list or all [Cloud SQL](https://cloud.google.com/sql) primary instances on the specified [GCS](https://cloud.google.com/storage) bucket to enable exports
