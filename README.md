@@ -356,7 +356,7 @@ etc.
     - `gcp_sql_running_primaries.sh` - lists [Cloud SQL](https://cloud.google.com/sql) primary running SQL instances
     - `gcp_sql_service_accounts.sh` - lists [Cloud SQL](https://cloud.google.com/sql) service accounts. Useful for copying to [IAM](https://cloud.google.com/iam) to grant permissions (eg. Storage Object Creator for SQL export backups to [GCS](https://cloud.google.com/storage))
     - `gcp_sql_create_readonly_service_account.sh` - creates a service account and grants read-only permissions to [Cloud SQL](https://cloud.google.com/sql) eg. to run export backups to [GCS](https://cloud.google.com/storage)
-    - `gcp_sql_grant_instances_gcs_object_creator.sh` - grants minimal objectCreator permission to given list or all [Cloud SQL](https://cloud.google.com/sql) primary instances on the specified [GCS](https://cloud.google.com/storage) bucket to enable exports
+    - `gcp_sql_grant_instances_gcs_object_creator.sh` - grants minimal objectCreator permission primary [Cloud SQL](https://cloud.google.com/sql) instances on the specified [GCS](https://cloud.google.com/storage) bucket for exports
   - `gcp_cloud_schedule_sql_exports.sh` - creates Google [Cloud Scheduler](https://cloud.google.com/scheduler) jobs to trigger a [Cloud Function](https://cloud.google.com/functions) via [PubSub](https://cloud.google.com/pubsub) to run [Cloud SQL](https://cloud.google.com/sql) exports to [GCS](https://cloud.google.com/storage) for all [Cloud SQL](https://cloud.google.com/sql) instances in the current GCP project
     - the Python [GCF](https://cloud.google.com/functions) function is in the [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) repo
   - `bigquery_*.sh` - [BigQuery](https://cloud.google.com/bigquery) scripts:
