@@ -71,7 +71,7 @@ echo >&2
 # XXX: need to grant the Cloud SQL instance service accounts objectCreator to the bucket, not this cloud function's service account
 #      see instead adjacent script:
 #
-#      gcp_sql_grant_instances_object_creator.sh
+#      gcp_sql_grant_instances_gcs_object_creator.sh
 #
 #timestamp "Granting Storage Object Creator on bucket '$bucket' to service account '$service_account'"
 #gsutil iam ch "serviceAccount:$service_account:objectCreator" "gs://$bucket"
