@@ -13,32 +13,36 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Sets up multi-origin to one or more of the major public Git repos - GitHub, GitLab, Bitbucket
-# for the local checkout so that each push pushes to all 3 upstream repos
-#
-# See Also:
-#
-# git_remotes_add_public_repos.sh  - create alternative remotes for easy individual pushes
-# git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-usage(){
-    echo "usage: ${0##*/} github|gitlab|bitbucket|all"
-    exit 3
-}
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
-for arg; do
-    case "$arg" in
-        -*) usage
-            ;;
-    esac
-done
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
 
-if [ $# -ne 1 ]; then
-    usage
-fi
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Sets up Git multi-origin to one or more of the major public Git repos - GitHub, GitLab, Bitbucket
+for the local checkout so that each push sync's to multiple provider's repos
+
+See Also:
+
+    git_remotes_add_public_repos.sh  - create alternative remotes for easy individual pushes
+    git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="github|gitlab|bitbucket|azure|all"
+
+help_usage "$@"
+
+no_more_opts "$@"
+
+min_args 1 "$@"
 
 name="${1:-}"
 
@@ -48,14 +52,9 @@ fi
 
 add_origin_url(){
     local name="$1"
-    local domain
-    if [ "$name" = "github" ]; then
-        domain=github.com
-    elif [ "$name" = "gitlab" ]; then
-        domain=gitlab.com
-    elif [ "$name" = "bitbucket" ]; then
-        domain=bitbucket.org
-    fi
+    local domain="unconfigured"
+    # loads domain and variables user and token if available via environment variables
+    git_provider_env "$name"
     if git remote -v | grep -Eq "^origin[[:space:]]+.+$domain"; then
         echo "$name remote already configured in origin, skipping..."
         return 0
@@ -67,7 +66,14 @@ add_origin_url(){
         echo "copied existing remote url for $name as is including any access tokens to named remote $name"
     else
         url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com' | head -n 1 | perl -pe "s/^((\\w+:\\/\\/)?(git@)?)[^\\/:]+/\$1$domain/")"
-        # shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen, but git remote -v will print it later on anyway
+        # XXX: Azure DevOps has non-uniform URLs compared to the 3 main Git repos
+        if [ "$name" = "azure" ]; then
+            url="$(git_to_azure_url "$url")"
+        else
+            # undo weird Azure DevOps url components if we happen to infer URL from an Azure DevOps url
+            url="$(azure_to_git_url "$url")"
+        fi
+        # XXX: shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen, but git remote -v will print it later on anyway
         echo "inferring $name URL to be $url"
         echo "adding additional origin remote for $name with url $url"
     fi
@@ -79,15 +85,18 @@ add_origin_url(){
 
 if [ "$name" = "github" ] ||
    [ "$name" = "gitlab" ] ||
-   [ "$name" = "bitbucket" ]; then
+   [ "$name" = "bitbucket" ] ||
+   [ "$name" = "azure" ]; then
     add_origin_url "$name"
+    echo >&2
     # TMI
     #git remote show origin
     git remote -v | grep '^origin' | sed 's|://.*@|://|'
 elif [ "$name" = "all" ]; then
-    for name in github gitlab bitbucket; do
+    for name in github gitlab bitbucket azure; do
         add_origin_url "$name"
     done
+    echo >&2
     #git remote show origin
     git remote -v | grep '^origin' | sed 's|://.*@|://|'
 else
