@@ -20,15 +20,18 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Sets up alternative remotes to one or more of the major public Git Repos - GitHub, GitLab, Bitbucket or Azure DevOps
-for the local checkout so that you can push to them easily
+Sets up Git remotes to one or more of the major public Git Repos - GitHub, GitLab, Bitbucket or Azure DevOps
+for the local checkout so that you can pull / push to them by name easily
 
 See Also:
 
-git_remotes_set_multi_origin.sh  - for push to all
-git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
+    git_remotes_set_multi_origin.sh  - for push to all
+    git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
 "
 
 # used by usage() in lib/utils.sh
@@ -36,6 +39,8 @@ git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
 usage_args="github|gitlab|bitbucket|azure|all"
 
 help_usage "$@"
+
+no_more_opts "$@"
 
 min_args 1 "$@"
 
@@ -70,8 +75,6 @@ add_remote_repo(){
     elif [ "$name" = "azure" ]; then
         domain=dev.azure.com
         user="${AZURE_DEVOPS_USER:-}"
-        # XXX: you should set $AZURE_DEVOPS_PROJECT in your environment or call your project GitHub as I have - there is no portable way to infer this from other repos since they don't have this hierarchy level
-        project="${AZURE_DEVOPS_PROJECT:-GitHub}"
         token="${AZURE_DEVOPS_TOKEN:-${AZURE_DEVOPS_PASSWORD:-}}"
     fi
     log "$name remote not configured, configuring..."
@@ -83,20 +86,10 @@ add_remote_repo(){
         url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com|dev.azure.com' | head -n 1 | perl -pe "s/^((\\w+:\\/\\/)?(git@)?)(.+@)?[^\\/:]+/\$1$domain/")"
         # XXX: Azure DevOps has non-uniform URLs compared to the 3 main Git repos
         if [ "$name" = "azure" ]; then
-            url="${url/git@dev.azure.com/git@ssh.dev.azure.com}"
-            if [[ "$url" =~ ssh.dev.azure.com ]]; then
-                url="${url/:/:v3\/}"
-                # XXX: lowercase username and inject $project just before the repo name to conform to weird Azure DevOps urls
-                url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\$2/" <<< "$url")"
-            else # https
-                url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\\/_git\$2/" <<< "$url")"
-            fi
+            url="$(git_to_azure_url "$url")"
         else
             # undo weird Azure DevOps url components if we happen to infer URL from an Azure DevOps url
-            url="${url/:v3\//:}"
-            url="${url/\/_git\//\/}"
-            # XXX: strip the middle component out from git@ssh.dev.azure.com:v3/harisekhon/GitHub/DevOps-Bash-tools
-            url="$(perl -pe 's/([\/:][^\/:]+)(\/[^\/]+)(\/[^\/]+)$/$1$3/' <<< "$url")"
+            url="$(azure_to_git_url "$url")"
         fi
         # shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen
         log "inferring $name URL to be $url"
