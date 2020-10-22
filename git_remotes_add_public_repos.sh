@@ -52,7 +52,7 @@ fi
 
 add_remote_repo(){
     local name="$1"
-    local domain
+    local domain="unconfigured"
     # used by log statements
     # shellcheck disable=SC2034
     local VERBOSE=1
@@ -60,23 +60,8 @@ add_remote_repo(){
         log "$name remote already configured, skipping..."
         return 0
     fi
-    if [ "$name" = "github" ]; then
-        domain=github.com
-        user="${GITHUB_USER:-}"
-        token="${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}"
-    elif [ "$name" = "gitlab" ]; then
-        domain=gitlab.com
-        user="${GITLAB_USER:-}"
-        token="${GITLAB_TOKEN:-${GITLAB_PASSWORD:-}}"
-    elif [ "$name" = "bitbucket" ]; then
-        domain=bitbucket.org
-        user="${BITBUCKET_USER:-}"
-        token="${BITBUCKET_TOKEN:-${BITBUCKET_PASSWORD:-}}"
-    elif [ "$name" = "azure" ]; then
-        domain=dev.azure.com
-        user="${AZURE_DEVOPS_USER:-}"
-        token="${AZURE_DEVOPS_TOKEN:-${AZURE_DEVOPS_PASSWORD:-}}"
-    fi
+    # loads domain and variables user and token if available via environment variables
+    git_provider_env "$name"
     log "$name remote not configured, configuring..."
     set +o pipefail
     url="$(git remote -v | awk '{print $2}' | grep -Ei "$domain" | head -n 1)"
@@ -91,7 +76,7 @@ add_remote_repo(){
             # undo weird Azure DevOps url components if we happen to infer URL from an Azure DevOps url
             url="$(azure_to_git_url "$url")"
         fi
-        # shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen
+        # XXX: shouldn't really print full url below in case it has an http access token in it that we don't want appearing as plaintext on the screen
         log "inferring $name URL to be $url"
         log "adding remote $name with url $url"
         if [[ "$url" =~ ^https:// ]]; then
