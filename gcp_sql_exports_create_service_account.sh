@@ -22,15 +22,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a GCP service account in the current project called cloud-function-sql-backup@\${project_id}.iam.gserviceaccount.com
+Creates a GCP service account in the current project called \${GOOGLE_SERVICE_ACCOUNT}@\${project_id}.iam.gserviceaccount.com
+
+GOOGLE_SERVICE_ACCOUNT defaults to 'cloud-function-sql-backup'
 
 Grants it permissions:
 
     - Cloud SQL Client
     - Cloud SQL Viewer
-    - Cloud Storage Object Creator on the bucket \${project_id}-sql-backups
-
-Set the environment variable \$BUCKET to override - bucket should already exist
 
 
 This is necessary to set up Cloud SQL export backups to GCS using the adjacent scripts. See
@@ -52,7 +51,7 @@ usage_args=""
 help_usage "$@"
 
 project="$(gcloud config list --format="value(core.project)")"
-name="cloud-function-sql-backup"
+name="${GOOGLE_SERVICE_ACCOUNT:-cloud-function-sql-backup}"
 service_account="$name@$project.iam.gserviceaccount.com"
 
 if ! gcloud iam service-accounts list | grep -q "$service_account"; then
