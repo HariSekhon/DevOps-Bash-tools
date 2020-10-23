@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Changes all the current repo's .git/config URLs from https:// to git@ (SSH)
+Changes all of the current repo's remote URLs from https:// to git@ (SSH)
 
 Has some extra rules for conversion to Azure DevOps ssh path format since this differs from standard GitHub / GitLab / Bitbucket type paths
 "
