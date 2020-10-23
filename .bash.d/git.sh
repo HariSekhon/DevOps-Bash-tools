@@ -411,7 +411,7 @@ pull(){
     # shellcheck disable=SC2166
     if [ "${PWD##*/}" = github ]; then
         for x in *; do
-            [ -d "$x" ] || continue
+            [ -d "$x/.git" ] || continue
             # get last character of string - don't pull blah2, as I use them as clean checkouts
             [ "${x: -1}" = 2 ] && continue
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
