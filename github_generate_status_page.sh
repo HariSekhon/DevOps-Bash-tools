@@ -207,9 +207,10 @@ cat <<EOF
 ![Stars](https://img.shields.io/badge/Stars-$total_stars-blue?logo=github)
 ![Forks](https://img.shields.io/badge/Forks-$total_forks-blue?logo=github)
 ![Followers](https://img.shields.io/badge/Followers-$followers-blue?logo=github)
-[![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-blue?logo=github)](https://github.com/HariSekhon)
-[![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-blue?logo=gitlab)](https://gitlab.com/HariSekhon)
-[![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-blue?logo=bitbucket)](https://bitbucket.org/HariSekhon)
+[![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
+[![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
+[![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
+[![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
 [![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-${lines_of_code}k-lightgrey?logo=codecademy)
