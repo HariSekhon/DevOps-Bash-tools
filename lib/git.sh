@@ -144,7 +144,7 @@ git_to_azure_url(){
     fi
     url="${url/git@dev.azure.com/git@ssh.dev.azure.com}"
     if [[ "$url" =~ ssh.dev.azure.com ]]; then
-        url="${url/:/:v3\/}"
+        url="${url/:/:v3/}"
         # XXX: lowercase username and inject $project just before the repo name to conform to weird Azure DevOps urls
         url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\$2/" <<< "$url")"
     else # https
