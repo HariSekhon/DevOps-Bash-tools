@@ -30,6 +30,9 @@ Queries the Azure DevOps API
 Automatically handles authentication via environment variables \$AZURE_DEVOPS_USERNAME / \$AZURE_DEVOPS_USER
 and \$AZURE_DEVOPS_TOKEN / \$AZURE_DEVOPS_PASSWORD
 
+Currently authentication is done using HTTP basic auth which works for most endpoints according to the docs,
+except for account management, for which this code would have to be switched to OAuth
+
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
