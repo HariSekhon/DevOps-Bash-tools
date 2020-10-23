@@ -162,6 +162,8 @@ git_to_azure_url(){
         fi
     else # https
         url="${url/ssh.dev.azure.com/dev.azure.com}"
+        url="${url/\/v3\//\/}"
+        url="${url/:v3\//\/}"
         if ! [[ "$url" =~ /_git/ ]]; then
             url="$(perl -pe 's/(\/[^\/]+)$/\/_git$1/' <<< "$url")"
         fi
