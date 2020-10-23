@@ -265,7 +265,7 @@ etc.
 - `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
 - `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
 
-##### Databases
+#### Databases
 
 - [sql/](https://github.com/HariSekhon/SQL-scripts) - 100+ SQL scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [Google BigQuery](https://cloud.google.com/bigquery) and [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration
 - `mysql*.sh` - [MySQL](https://www.mysql.com/) scripts:
@@ -461,7 +461,7 @@ etc.
   - `cloudera_navigator_audit_logs.sh` - fetches [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for given service eg. hive/impala/hdfs via the API, simplifying date handling, authentication and common settings. Built on top of `cloudera_navigator_api.sh`
   - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
 
-#### Git
+#### Git - GitHub, GitLab, Bitbucket, Azure DevOps
 
 - `git*.sh` - [Git](https://git-scm.com/) scripts:
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
