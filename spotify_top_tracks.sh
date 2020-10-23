@@ -57,7 +57,6 @@ output(){
     fi <<< "$output" |
     tr '\t' ' ' |
     sed '
-        s/^[[:space:]]*-//;
         s/^[[:space:]]*//;
         s/[[:space:]]*$//
     '
