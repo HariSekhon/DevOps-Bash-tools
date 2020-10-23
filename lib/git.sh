@@ -143,6 +143,7 @@ git_to_azure_url(){
         project="GitHub"
     fi
     url="${url/git@dev.azure.com/git@ssh.dev.azure.com}"
+    url="${url%.git}"
     if [[ "$url" =~ ssh.dev.azure.com ]]; then
         url="${url/:/:v3/}"
         # XXX: lowercase username and inject $project just before the repo name to conform to weird Azure DevOps urls
