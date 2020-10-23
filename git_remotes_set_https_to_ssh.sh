@@ -26,6 +26,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Changes all the current repo's .git/config URLs from https:// to git@ (SSH)
+
+Has some extra rules for conversion to Azure DevOps ssh path format since this differs from standard GitHub / GitLab / Bitbucket type paths
 "
 
 help_usage "$@"
@@ -36,4 +38,9 @@ cd "$topdir"
 
 cp -iv .git/config ".git/config.$(date +%F_%H%M%S).bak"
 
-perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/; s/https:\/\/(.+@)?/git@/' .git/config
+perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/;
+             s/https:\/\/(.+@)?/git\@/;
+             s/git@dev.azure.com/git\@ssh.dev.azure.com/;
+             s/\/_git\//\//;
+             s/git@ssh.dev.azure.com:(?!v3\/)/git\@ssh.dev.azure.com:v3\//;
+             ' .git/config
