@@ -44,19 +44,23 @@ perl -pi -e 's/(\bgit@[^:]+):/\1\//;
              s/\bgit@/https:\/\//;
              ' .git/config
 
-azure_devops_url="$(grep '^[[:space:]]*url[[:space:]]*=[[:space:]]*.*dev.azure.com' .git/config | sed 's/.*url[[:space:]]*=[[:space:]]*//; s/[[:space:]]*$//')"
+azure_devops_url="$(grep '^[[:space:]]*url[[:space:]]*=[[:space:]]*.*dev.azure.com' .git/config | sed 's/.*url[[:space:]]*=[[:space:]]*//; s/[[:space:]]*$//' || :)"
 
-azure_devops_url2="$(git_to_azure_url "$azure_devops_url")"
+if [ -n "$azure_devops_url" ]; then
+    azure_devops_url2="$(git_to_azure_url "$azure_devops_url")"
 
-sed -i.bak "s|$azure_devops_url|$azure_devops_url2|" .git/config
+    sed -i.bak "s|$azure_devops_url|$azure_devops_url2|" .git/config
+fi
 
 # TODO: consider splitting this to its own cred loading script
 for x in github gitlab bitbucket azure; do
     git_provider_env "$x"
     # variables loaded by git_provider_env()
-    # inject user:token for https authentication - remove if there is no token eg. ':<blank>@' and strip : prefix if there is no user
+    # inject user:token for https authentication
     # shellcheck disable=SC2154
     perl -pi -e "s/(?<!\\@)$domain/$user:$token\\@$domain/;" .git/config
+    # remove prefix if there is no $token eg. ':<blank>@'
+    # strip : prefix if there is no $user
     perl -pi -e 's/\/\/[^:]*:\@/\/\//;
                  s/\/\/:/\/\//;' .git/config
 done
