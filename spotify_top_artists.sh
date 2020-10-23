@@ -43,7 +43,6 @@ output(){
     # some tracks come out with blank artists and track name, skip these using select(name != "") filter to avoid blank lines
     jq -r '.items[] | select(.name != "") | .name' <<< "$output" |
     sed '
-        s/^[[:space:]]*-//;
         s/^[[:space:]]*//;
         s/[[:space:]]*$//
     '
