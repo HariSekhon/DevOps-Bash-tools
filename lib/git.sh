@@ -144,7 +144,8 @@ git_to_azure_url(){
     fi
     url="${url/git@dev.azure.com/git@ssh.dev.azure.com}"
     url="${url%.git}"
-    if [[ "$url" =~ ssh.dev.azure.com ]]; then
+    # don't match on ssh.dev.azure.com because ssh. prefix might not be stripped before this point, eg. from git_remotes_set_ssh_to_https.sh
+    if [[ "$url" =~ git@|ssh:// ]]; then
         url="${url/\/_git\//\/}"
         if ! [[ "$url" =~ v3/ ]]; then
             if [[ "$url" =~ ^ssh:// ]]; then
