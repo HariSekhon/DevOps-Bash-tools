@@ -26,7 +26,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Sets up Git remotes to one or more of the major public Git Repos - GitHub, GitLab, Bitbucket or Azure DevOps
-for the local checkout so that you can pull / push to them by name easily
+
+Useful to:
+
+1. easily pull / push to each provider by name
+2. fetch and merge updates from all Repo providers via a single command:
+
+    git pull --all
 
 See Also:
 
