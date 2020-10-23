@@ -39,8 +39,8 @@ cd "$topdir"
 cp -iv .git/config ".git/config.$(date +%F_%H%M%S).bak"
 
 perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/;
-             s/https:\/\/(.+@)?/git\@/;
-             s/git@dev.azure.com/git\@ssh.dev.azure.com/;
+             s/https:\/\/(.+\@)?/git\@/;
+             s/git\@dev.azure.com/git\@ssh.dev.azure.com/;
              s/\/_git\//\//;
-             s/git@ssh.dev.azure.com:(?!v3\/)/git\@ssh.dev.azure.com:v3\//;
+             s/git\@ssh.dev.azure.com:(?!v3\/)/git\@ssh.dev.azure.com:v3\//;
              ' .git/config
