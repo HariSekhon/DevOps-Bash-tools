@@ -139,7 +139,7 @@ url_path="${url_path##/}"
 # for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
 
 user="${GITLAB_USERNAME:-${GITLAB_USER:-}}"
-if [ -z "${GITLAB_USER:-}" ]; then
+if [ -z "$user" ]; then
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@gitlab\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
 fi
 
