@@ -13,26 +13,36 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Syncs all adjacent repos from setup/repos.txt to one of the upstreams GitHub / GitLab / BitBucket
-#
-# another trick would be to set the remote origin to contain all 3 URLs so each push goes to all 3 repos every time
-#
-# eg.
-#
-# git remote set-url --add origin <url>
-#
-# git remote set-url --add origin https://bitbucket.org/HariSekhon/DevOps-Bash-tools
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Syncs all adjacent repos from setup/repos.txt to one of the upstreams GitHub / GitLab / BitBucket / Azure DevOps
+
+Another trick would be to set the remote origin to contain all 3 URLs so each push goes to all 3 repos every time
+
+eg.
+
+    git remote set-url --add origin <url>
+
+    git remote set-url --add origin https://bitbucket.org/HariSekhon/DevOps-Bash-tools
+
+See git_remotes_set_multi_origin.sh for an auto-inferred implementation of this
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="github|gitlab|bitbucket|azure"
 
 name="${1:-}"
-
-usage(){
-    echo "usage: ${0##*/} github|gitlab|bitbucket"
-    exit 3
-}
 
 if [ -z "$name" ]; then
     usage
@@ -44,11 +54,14 @@ elif [ "$name" = "gitlab" ]; then
     domain=gitlab.com
 elif [ "$name" = "bitbucket" ]; then
     domain=bitbucket.org
+elif [ "$name" = "azure" ]; then
+    domain=dev.azure.com
 else
     usage
 fi
 
-sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt" |
+#sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt" |
+echo "DevOps-Golang-tools go-tools" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"
@@ -69,7 +82,14 @@ while read -r repo dir; do
         if [ -n "$url" ]; then
             echo "copied existing remote url for $name as is including any access tokens to named remote $name"
         else
-            url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com' | head -n 1 | perl -pe "s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/")"
+            url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com|dev.azure.com' | head -n 1 | perl -pe "s/^((\\w+:\\/\\/)?(git@)?)[^\\/:]+/\$1$domain/")"
+            # XXX: Azure DevOps has non-uniform URLs compared to the 3 main Git repos
+            if [ "$name" = "azure" ]; then
+                url="$(git_to_azure_url "$url")"
+            else
+                # undo weird Azure DevOps url components if we happen to infer URL from an Azure DevOps url
+                url="$(azure_to_git_url "$url")"
+            fi
             echo "inferring $name URL to be $url"
             # don't put this below and it'd print your access token to screen from existing remote
             echo "adding remote $name with url $url"
