@@ -38,9 +38,16 @@ cd "$topdir"
 
 cp -iv .git/config ".git/config.$(date +%F_%H%M%S).bak"
 
+# XXX: only replace first / with : since we're setting to git@ prefix without ssh:// prefix - if ssh://git@ then it uses slashes throughout
 perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/;
              s/https:\/\/(.+\@)?/git\@/;
-             s/git\@dev.azure.com/git\@ssh.dev.azure.com/;
-             s/\/_git\//\//;
-             s/git\@ssh.dev.azure.com:(?!v3\/)/git\@ssh.dev.azure.com:v3\//;
              ' .git/config
+
+azure_devops_url="$(grep '^[[:space:]]*url[[:space:]]*=[[:space:]]*.*dev.azure.com' .git/config | sed 's/.*url[[:space:]]*=[[:space:]]*//; s/[[:space:]]*$//')"
+
+azure_devops_url2="$(git_to_azure_url "$azure_devops_url")"
+
+sed -i.bak "s|$azure_devops_url|$azure_devops_url2|" .git/config
+
+echo >&2
+git remotes -v
