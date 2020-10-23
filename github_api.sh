@@ -70,10 +70,10 @@ ${0##*/} /users/HariSekhon/repos
 ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
 
-For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
+For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings. The following tokens in the form :token, <token>, {token} are replaced:
 
-Placeholders replaced by \$GITHUB_USERNAME / \$GITHUB_USER:                 :owner, :user, :username, <user>, <username>
-Placeholders replaced by the local repo name of the current directory:    :repo, <repo>
+Placeholders replaced by \$GITHUB_USERNAME / \$GITHUB_USER:                 owner, username, user
+Placeholders replaced by the local repo name of the current directory:    repo
 
 ${0##*/} /repos/:user/:repo/actions/workflows
 "
@@ -126,13 +126,18 @@ repo=$(git_repo | sed 's/.*\///')
 
 if [ -n "$user" ]; then
     url_path="${url_path/:owner/$user}"
+    url_path="${url_path/<owner>/$user}"
+    url_path="${url_path/\{owner\}/$user}"
     url_path="${url_path/:username/$user}"
-    url_path="${url_path/:user/$user}"
     url_path="${url_path/<username>/$user}"
+    url_path="${url_path/\{username\}/$user}"
+    url_path="${url_path/:user/$user}"
     url_path="${url_path/<user>/$user}"
+    url_path="${url_path/\{user\}/$user}"
 fi
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
+url_path="${url_path/\{repo\}/$repo}"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
