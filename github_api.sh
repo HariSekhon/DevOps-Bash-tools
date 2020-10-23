@@ -91,7 +91,7 @@ help_usage "$@"
 min_args 1 "$@"
 
 user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
-if [ -z "${GITHUB_USER:-}" ]; then
+if [ -z "$user" ]; then
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@github\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
     # curl_auth.sh does this automatically
     #if [ -z "$user" ]; then
