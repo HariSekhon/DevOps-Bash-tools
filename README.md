@@ -555,6 +555,7 @@ etc.
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
+- `azure_devops_api.sh` - queries [Azure DevOps](https://dev.azure.com/)'s API with authentication
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
 - `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
