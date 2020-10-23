@@ -187,7 +187,7 @@ make
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
 - [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
 - [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager & Cloudera Navigator API scripts
-- [Git / GitHub / GitLab / BitBucket](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
+- [Git](https://github.com/HariSekhon/DevOps-Bash-tools#git) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - Travis CI, Jenkins, BuildKite, Concourse, GoCD, Teamcity, one-touch CI docker boot & build, API query scripts, configs for most major CI systems
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
@@ -461,7 +461,7 @@ etc.
   - `cloudera_navigator_audit_logs.sh` - fetches [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for given service eg. hive/impala/hdfs via the API, simplifying date handling, authentication and common settings. Built on top of `cloudera_navigator_api.sh`
   - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
 
-#### Git / GitHub / GitLab / BitBucket
+#### Git
 
 - `git*.sh` - [Git](https://git-scm.com/) scripts:
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
