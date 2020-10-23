@@ -116,19 +116,19 @@ git_provider_env(){
     local name="$1"
     if [ "$name" = "github" ]; then
         domain=github.com
-        user="${GITHUB_USER:-}"
+        user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
         token="${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}"
     elif [ "$name" = "gitlab" ]; then
         domain=gitlab.com
-        user="${GITLAB_USER:-}"
+        user="${GITLAB_USERNAME:-${GITLAB_USER:-}}"
         token="${GITLAB_TOKEN:-${GITLAB_PASSWORD:-}}"
     elif [ "$name" = "bitbucket" ]; then
         domain=bitbucket.org
-        user="${BITBUCKET_USER:-}"
+        user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
         token="${BITBUCKET_TOKEN:-${BITBUCKET_PASSWORD:-}}"
     elif [ "$name" = "azure" ]; then
         domain=dev.azure.com
-        user="${AZURE_DEVOPS_USER:-}"
+        user="${AZURE_DEVOPS_USERNAME:-${AZURE_DEVOPS_USER:-}}"
         token="${AZURE_DEVOPS_TOKEN:-${AZURE_DEVOPS_PASSWORD:-}}"
     fi
 }
@@ -145,11 +145,30 @@ git_to_azure_url(){
     url="${url/git@dev.azure.com/git@ssh.dev.azure.com}"
     url="${url%.git}"
     if [[ "$url" =~ ssh.dev.azure.com ]]; then
-        url="${url/:/:v3/}"
-        # XXX: lowercase username and inject $project just before the repo name to conform to weird Azure DevOps urls
-        url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\$2/" <<< "$url")"
+        url="${url/\/_git\//\/}"
+        if ! [[ "$url" =~ v3/ ]]; then
+            if [[ "$url" =~ ^ssh:// ]]; then
+                url="$(perl -pn -e 's/^(ssh:\/\/[^\/]+)\/(?!v3\/)/$1v3\//' <<< "$url")"
+            else
+                url="${url/:/:v3/}"
+            fi
+        fi
+        # if 3 sections then it's already in Azure format, just lowercase username, otherwise inject project just before repo name to conform to weird Azure DevOps urls
+        if grep -Eq '/[^/]+/[^/]+/[^/]+$' <<< "$url"; then
+            url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+\\/[^\\/]+)$/\\L\$1\\E\$2/" <<< "$url")"
+        else
+            url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\$2/" <<< "$url")"
+        fi
     else # https
-        url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\\/_git\$2/" <<< "$url")"
+        url="${url/ssh.dev.azure.com/dev.azure.com}"
+        if ! [[ "$url" =~ /_git/ ]]; then
+            url="$(perl -pe 's/(\/[^\/]+)$/\/_git$1/' <<< "$url")"
+        fi
+        # match exactly
+        # shellcheck disable=SC2076
+        if ! [[ "$url" =~ "/$project/" ]]; then
+            url="$(perl -pe "s/\\/_git\\//\\/$project\\/_git\\//" <<< "$url")"
+        fi
     fi
     echo "$url"
 }
