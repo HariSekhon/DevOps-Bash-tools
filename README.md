@@ -198,6 +198,7 @@ make
 - [More Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#more-linux--mac) - more systems administration scripts, package installation automation
 - [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
 - [Data Format Conversion & Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-format-conversion--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
+- [Templates](https://github.com/HariSekhon/Templates) - Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions Workflows, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
 
 #### Linux & Mac:
 
