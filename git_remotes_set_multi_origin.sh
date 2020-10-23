@@ -25,12 +25,20 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Sets up Git multi-origin to one or more of the major public Git repos - GitHub, GitLab, Bitbucket
+Sets up Git multi-origin to one or more of the major public Git repos - GitHub, GitLab, Bitbucket or Azure DevOps
 for the local checkout so that each push sync's to multiple provider's repos
+
+To pull from multiple Repo providers in a single command:
+
+    git pull --all
+
+see the related script:
+
+    git_remotes_add_public_repos.sh
 
 See Also:
 
-    git_remotes_add_public_repos.sh  - create alternative remotes for easy individual pushes
+    git_remotes_add_public_repos.sh  - creates remotes for easy individual pull/pushes or git pull --all
     git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
 "
 
