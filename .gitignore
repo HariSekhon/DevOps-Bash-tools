@@ -3691,9 +3691,11 @@ override.tf.json
 ### venv ###
 # Virtualenv
 # http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
-[Bb]in
+# XXX: prevents committing scripts at ~/bin
+#[Bb]in
 [Ii]nclude
-[Ll]ib
+# XXX: prevents committing submodule lib
+#[Ll]ib
 [Ll]ib64
 [Ll]ocal
 [Ss]cripts
@@ -3765,7 +3767,8 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+# XXX: prevents committing scripts at ~/bin
+#[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
