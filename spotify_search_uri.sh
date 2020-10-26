@@ -64,11 +64,11 @@ min_args 1 "$@"
 "$srcdir/spotify_search_json.sh" "$@" |
 
 #if [ "${SPOTIFY_SEARCH_TYPE:-}" = "artist" ]; then
-#    jq -r '.artists.items[] | .uri'
+#    jq -r '.artists.items[].uri'
 #elif [ "${SPOTIFY_SEARCH_TYPE:-}" = "album" ]; then
-#    jq -r '.albums.items[] | .uri'
+#    jq -r '.albums.items[].uri'
 #else
-#    jq -r '.tracks.items[] | .uri'
+#    jq -r '.tracks.items[].uri'
 #fi
 
-jq -r ".${SPOTIFY_SEARCH_TYPE:-track}s.items[] | .uri"
+jq -r ".${SPOTIFY_SEARCH_TYPE:-track}s.items[].uri"
