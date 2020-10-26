@@ -38,6 +38,10 @@ threshold="${1:-5}"
 
 is_int "$threshold" || usage "threshold given is not an integer"
 
+export SPOTIFY_PRIVATE=1
+
+spotify_token
+
 "$srcdir/spotify_liked_artists_uri.sh" |
 sort |
 uniq -c |
