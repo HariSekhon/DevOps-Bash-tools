@@ -17,4 +17,6 @@ if type -P direnv &>/dev/null && ! type _direnv_hook &>/dev/null; then
     eval "$(direnv hook bash)"
 fi
 
-alias envrc='$EDITOR .envrc && direnv allow .'
+#alias envrc='$EDITOR .envrc && direnv allow .'
+# same effect as above
+alias envrc='direnv edit'
