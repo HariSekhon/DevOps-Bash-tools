@@ -21,6 +21,7 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$libdir/utils.sh"
 
 offset="${SPOTIFY_OFFSET:-0}"
+# conservative, some API endpoints can take 100, others 50 - this is the safe choice but will go faster for those APIs if you can set 100 where appropriate
 limit="${SPOTIFY_LIMIT:-50}"
 
 if ! [[ "$offset" =~ ^[[:digit:]]+$ ]]; then
