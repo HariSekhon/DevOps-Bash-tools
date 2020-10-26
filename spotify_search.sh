@@ -32,9 +32,16 @@ See this page for documentation on how to write query expressions:
 
 https://developer.spotify.com/documentation/web-api/reference/search/search/
 
-Example:
+Examples:
 
-./${0##*/} artist:foo fighters track:arlandria
+Find tracks called 'arlandria' by artist 'foo fighters':
+
+    ${0##*/} artist:foo fighters track:arlandria
+
+
+Find top 5 matching artists with 'foo' in the name:
+
+    SPOTIFY_SEARCH_TYPE=artist SPOTIFY_SEARCH_LIMIT=5 ${0##*/} foo
 
 
 Uses spotify_search_json.sh which supports the following environment variable options:
@@ -64,7 +71,7 @@ min_args 1 "$@"
 "$srcdir/spotify_search_json.sh" "$@" |
 
 if [ "${SPOTIFY_SEARCH_TYPE:-}" = "artist" ]; then
-    jq -r '.artists.items[] | .name'
+    jq -r '.artists.items[].name'
 elif [ "${SPOTIFY_SEARCH_TYPE:-}" = "album" ]; then
     jq -r '.albums.items[] | [([.artists[].name] | join(",")), "-", .name ] | @tsv' |
     tr '\t' ' '
