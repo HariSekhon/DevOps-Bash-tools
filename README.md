@@ -647,7 +647,11 @@ etc.
 - `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
 - `spotify_delete_any_duplicates_in_playlist.sh` - calls both of the above scripts to first get rid of duplicate URIs and then remove any other duplicates by track name matches
 - `spotify_top_artists*.sh` / `spotify_top_tracks*.sh` - fetch your list of top artists / tracks in either human readable or URI format (which can be auto-loaded into other playlists)
-- `spotify_liked_tracks*.sh` - download the `Liked Songs` list in either human readable or URI formats
+- `spotify_liked_tracks*.sh` - download the `Liked Songs` list in URI or human readable formats
+- `spotify_liked_artists*.sh` - list artists from `Liked Songs` in URI or human readable formats
+- `spotify_followed_artists*.sh` - lists all followed artists in URI or human readable formats
+- `spotify_follow_artists.sh` - follows artists for the given URIs from files or standard input
+- `spotify_follow_liked_artists.sh` - follows artists with N or more tracks in Liked Songs
 - `spotify_set_tracks_uri_to_liked.sh` - set a list of spotify URIs to "Liked" so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
 - `spotify_foreach_playlist.sh` - executes a templated command against all playlists, replacing `{playlist}` and `{playlist_id}` in each iteration
 - `spotify_playlist_name_to_id.sh` / `spotify_playlist_id_to_name.sh` - convert playlist names <=> IDs
