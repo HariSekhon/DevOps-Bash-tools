@@ -631,7 +631,7 @@ etc.
 30+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo):
 
 - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
-- `spotify_playlist_tracks*.sh` - download playlist contents as track URIs / `Artists - Track` / CSV format - useful for Spotify backups, portable backups, or exporting between music systems
+- `spotify_playlist_tracks*.sh` - gets playlist contents as track URIs / `Artists - Track` / CSV format - useful for backups or exports between music systems
 - `spotify_backup.sh` - backup all Spotify playlists as well as the ordered list of playlists
 - `spotify_backup_playlist*.sh` - backup Spotify playlists to local files in both human readable `Artist - Track` format and Spotify URI format for easy restores or adding to new playlists
 - `spotify_search*.sh` - search Spotify's library for tracks / albums / artists getting results in human readable format, JSON, or URI formats for easy loading to Spotify playlists
