@@ -49,11 +49,12 @@ https://docs.microsoft.com/en-us/rest/api/azure/devops/
 Examples:
 
 
-# List a user's Azure DevOps repos:
+# List a user or organization's Azure DevOps repos:
 
     ${0##*/} /{organization}/{project}/_apis/git/repositories  | jq .
 
-# List a user's Azure DevOps Pipelines:
+
+# List a user or organization's Azure DevOps Pipelines:
 
     ${0##*/} /{username}/{project}/_apis/pipelines | jq .
 
