@@ -28,6 +28,10 @@ Returns the artist URIs of all artists in Liked Songs
 
 Useful for piping to spotify_follow_artists.sh
 
+To see the list of Liked artists by name, it's faster to pipeline all the URIs to spotify_uri_to_name.sh which batches translations in groups of 50, then sort and count at the very end by name (it's also potentially more accurate where more than one URI converts to the same artist name), or just run:
+
+    spotify_liked_artists.sh
+
 $usage_auth_help
 "
 
