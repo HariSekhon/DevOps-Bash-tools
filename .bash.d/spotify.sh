@@ -31,6 +31,7 @@ spotifysession(){
 spotify_token_expire_timer(){
     while true; do
         if [ "$SECONDS" -ge 3600 ]; then
+            # XXX: this probably won't work as it'll only affect the subshell
             unset SPOTIFY_ACCESS_TOKEN
             break
         fi
