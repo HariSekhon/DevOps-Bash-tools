@@ -25,7 +25,9 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 usage_description="
 Run a command against each GCP project in the current account
 
-This is powerful so use carefully!
+DANGER: This is powerful so use carefully!
+
+DANGER: sets the GCloud SDK project property during each iteration so any concurrent GCloud SDK commands in another window may hit a concurrency race condition. You must ensure that no other GCloud commands are running while this is running!
 
 Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
 
