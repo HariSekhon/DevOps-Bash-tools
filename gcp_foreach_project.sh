@@ -27,7 +27,7 @@ Run a command against each GCP project in the current account
 
 DANGER: This is powerful so use carefully!
 
-DANGER: sets the GCloud SDK project property during each iteration so any concurrent GCloud SDK commands in another window may hit a concurrency race condition. You must ensure that no other GCloud commands are running while this is running!
+DANGER: sets the GCloud SDK project property during each iteration so any concurrent GCloud SDK commands in another window may hit a concurrency race condition. You must ensure that no other GCloud commands are running while this is running! It's much safer to iterate the projects and just suffix --project to each command in scripts
 
 Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
 
