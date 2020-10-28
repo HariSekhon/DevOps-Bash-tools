@@ -29,7 +29,7 @@ Can chain with kubernetes_foreach_context.sh
 
 DANGER: This is powerful so use carefully!
 
-DANGER: Changes the kubectl context's default namespace - due to the way Kubectl works - this must not be run concurrently with any other kubectl based operations in any other scripts / terraform etc otherwise the Kubernetes changes may be sent to the wrong namespace!
+DANGER: Changes the kubectl context's default namespace - due to the way Kubectl works - this must not be run concurrently with any other kubectl based operations in any other scripts / terraform etc otherwise the Kubernetes changes may be sent to the wrong namespace! It's actually safer to script an operation to iterate on namespaces and instead of changing the default namespace in each iteration, pass the -n switch. See kubectl_rollout_history_all_deployments.sh for an example of this.
 
 Requires 'kubectl' to be configured and available in \$PATH
 
