@@ -37,6 +37,9 @@ export PATH="$PATH:/usr/local/bin"
 # consider adding ERR as set -e handler, not inherited by shell funcs / cmd substitutions / subshells without set -E
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
+# prevents illegal byte encoding errors when piping to filenames with unicode characters
+export LC_ALL=en_US.UTF-8
+
 if [ -z "${run_count:-}" ]; then
     run_count=0
 fi
