@@ -60,6 +60,6 @@ playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_
 
 export SPOTIFY_DUPLICATE_TRACK_POSITIONS=1
 
-timestamp "Finding and deleting duplicates in playlist by exact URI match:"
+timestamp "Finding and deleting duplicates in playlist \"$playlist\" by exact URI match:"
 "$srcdir/spotify_duplicate_uri_in_playlist.sh" "$playlist_id" |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_id"
