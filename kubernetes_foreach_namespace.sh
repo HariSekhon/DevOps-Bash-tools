@@ -27,7 +27,9 @@ Run a command against each Kubernetes namespace on the current cluster / kubectl
 
 Can chain with kubernetes_foreach_context.sh
 
-This is powerful so use carefully!
+DANGER: This is powerful so use carefully!
+
+DANGER: Changes the kubectl context's default namespace - due to the way Kubectl works - this must not be run concurrently with any other kubectl based operations in any other scripts / terraform etc otherwise the Kubernetes changes may be sent to the wrong namespace!
 
 Requires 'kubectl' to be configured and available in \$PATH
 
