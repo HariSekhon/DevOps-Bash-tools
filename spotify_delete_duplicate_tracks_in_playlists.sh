@@ -65,16 +65,16 @@ fi
 count="$(wc -l <<< "$duplicates" | sed 's/[[:space:]]*//g')"
 
 if [ -z "${SPOTIFY_NO_CONFIRM:-}" ]; then
-    timestamp "Duplicates to remove:"
-    echo >&2
-
-    while read -r position uri; do
-        printf '%s\t' "$position"
-        "$srcdir/spotify_uri_to_name.sh" <<< "$uri"
-    done <<< "$duplicates"
-    echo
-
     if is_interactive; then
+        timestamp "Duplicates to remove:"
+        echo >&2
+
+        while read -r position uri; do
+            printf '%s\t' "$position"
+            "$srcdir/spotify_uri_to_name.sh" <<< "$uri"
+        done <<< "$duplicates"
+        echo
+
         read -r -p "Are you sure you want to delete these $count tracks from playlist \"$playlist\"? (y/N) " answer
         echo >&2
 
