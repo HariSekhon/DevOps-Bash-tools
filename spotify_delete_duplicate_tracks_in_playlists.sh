@@ -75,7 +75,7 @@ if [ -z "${SPOTIFY_NO_CONFIRM:-}" ]; then
     echo
 
     if is_interactive; then
-        read -r -p "Are you sure you want to delete these $count tracks from playlist '$playlist'? (y/N) " answer
+        read -r -p "Are you sure you want to delete these $count tracks from playlist \"$playlist\"? (y/N) " answer
         echo >&2
 
         shopt -s nocasematch
