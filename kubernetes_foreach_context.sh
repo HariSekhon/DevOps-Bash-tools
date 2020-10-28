@@ -27,7 +27,9 @@ Run a command against each configured Kubernetes kubectl context (cluster)
 
 Can chain with kubernetes_foreach_namespace.sh
 
-This is powerful so use carefully!
+DANGER: This is powerful so use carefully!
+
+DANGER: Changes the kubectl context - due to the way Kubectl works - this must not be run concurrently with any other kubectl based operations in any other scripts / terraform etc otherwise the Kubernetes changes may be sent to the wrong cluster! Discovered this the hard way by a colleague who write imperative Terraform with kubectl :-/
 
 See Also: gke_kube_creds.sh to auto-create all your contexts for all clusters on Google Kubernetes Engine!
 
