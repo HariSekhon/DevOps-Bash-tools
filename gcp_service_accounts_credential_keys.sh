@@ -38,6 +38,15 @@ Output Format:
 
 
 Requires GCloud SDK to be installed and configured for your project
+
+
+See Also:
+
+    gcp_service_account_credential_keys.py
+
+in the DevOps Python tools repo:
+
+    https://github.com/HariSekhon/DevOps-Python-tools/
 "
 
 # used by usage() in lib/utils.sh
