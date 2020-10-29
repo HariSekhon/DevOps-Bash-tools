@@ -72,7 +72,7 @@ if is_mac; then
     }
 fi
 
-keyfile="$(greadlink -e "$keyfile")"
+keyfile="$(readlink -e "$keyfile")"
 
 echo
 echo "Set this in your environment to use Terraform now:"
