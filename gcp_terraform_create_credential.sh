@@ -28,7 +28,7 @@ and even prints the export GOOGLE_CREDENTIALS command to configure your environm
 The following optional arguments can be given:
 
 - service account name prefix   (default: \$USER-terraform)
-- credentials file path         (default: \$HOME/.gcloud/\$name-\$project-credentials.json)
+- credential file path          (default: \$HOME/.gcloud/\$name-\$project-credential.json)
 - project                       (default: gcloud config's currently configured project setting core.project)
 
 Idempotent - safe to re-run, will skip service accounts and keyfiles that already exist
@@ -36,7 +36,7 @@ Idempotent - safe to re-run, will skip service accounts and keyfiles that alread
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<name> <credentials.json> <project>]"
+usage_args="[<name> <credential.json> <project>]"
 
 help_usage "$@"
 
