@@ -24,6 +24,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 List all service account credential keys, creation and expiry dates in the current GCP project
 
+Excludes built-in system managed keys which are hidden in the Console UI anyway and are not actionable
+or in scope for a key policy audit.
+
+To get a list of all user managed keys with no expiry set, you can simply grep the output from this script:
+
+    ${0##*/} | grep 9999-12-31T23:59:59Z
+
+
 Output Format:
 
 <key_id>  <created_date>  <expiry_date>  <service_account_email>
