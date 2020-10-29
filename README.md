@@ -341,6 +341,7 @@ etc.
     - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple GCP secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
   - `gcp_service_accounts_credential_keys.sh` - lists all service account credential keys and expiry dates, can `grep 9999-12-31T23:59:59Z` to find non-expiring keys
   - `gcp_service_accounts_credential_keys_age.sh` - lists all service account credential keys age in days
+  - `gcp_service_accounts_credential_keys_expired.sh` - lists expired service account credential keys that should be removed and recreated if needed
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
