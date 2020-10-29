@@ -319,7 +319,7 @@ etc.
 #### GCP - Google Cloud Platform
 
 - [Google Cloud](https://cloud.google.com/) scripts - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
-  - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and gives you the export command to begin using Terraform immediately
+  - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using Terraform immediately
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
     - `gcp_info_compute.sh` - [GCE](https://cloud.google.com/compute/) Virtual Machine instances, [App Engine](https://cloud.google.com/appengine) instances, [Cloud Functions](https://cloud.google.com/functions), [GKE](https://cloud.google.com/kubernetes-engine) clusters, all [Kubernetes](https://kubernetes.io/) objects across all GKE clusters (see `kubernetes_info.sh` below for more details)
     - `gcp_info_storage.sh` - [Cloud SQL](https://cloud.google.com/sql) info below, plus: [Cloud Storage](https://cloud.google.com/storage) Buckets, [Cloud Filestore](https://cloud.google.com/filestore), [Cloud Memorystore Redis](https://cloud.google.com/memorystore), [BigTable](https://cloud.google.com/bigtable) clusters and instances, [Datastore](https://cloud.google.com/datastore) indexes
