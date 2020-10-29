@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-List all service account credential keys, creation and expiry dates in the current GCP project
+List all service account credential keys in the current GCP project along with their creation and expiry dates
 
 Excludes built-in system managed keys which are hidden in the Console UI anyway and are not actionable
 or in scope for a key policy audit.
