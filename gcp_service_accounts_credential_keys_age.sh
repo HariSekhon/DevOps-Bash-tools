@@ -59,7 +59,7 @@ for service_account in $service_accounts; do
     while read -r id creation_date; do
         creation_epoch="$(date --date "$creation_date" '+%s')"
         age_days=$(( (now - creation_epoch) / 86400))
-        printf "%s  %4d" "$id" "$age_days"
+        printf '%s  %4d\n' "$id" "$age_days"
     done |
     # suffixing is better for alignment as service account email lengths are the only variable field and otherwise
     # this comes out all misaligned or we have to pipe through column -t with no progress output,
