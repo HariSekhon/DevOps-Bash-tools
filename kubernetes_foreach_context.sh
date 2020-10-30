@@ -35,9 +35,7 @@ Requires 'kubectl' to be configured and available in \$PATH
 
 All arguments become the command template
 
-Sets the kubectl context in each iteration and then returns the context to the original context on any exit except kill -9
-
-Replaces {context} if present in the command template with the current kubectl context name in each iteration, but often this isn't necessary to specify explicitly given the kubectl context is changed in each iteration for each context for convenience running short commands local to the context
+Replaces {context} if present in the command template with the current kubectl context name in each iteration, but often this isn't necessary to specify explicitly given the kubectl context is set within each iteration for each context for convenience running short commands local to the context
 
 eg.
     ${0##*/} kubectl get pods
