@@ -33,9 +33,7 @@ Requires 'kubectl' to be configured and available in \$PATH
 
 All arguments become the command template
 
-Sets the kubectl namespace on the current context in each iteration and then returns the context to the original namespace on any exit except kill -9
-
-Replaces {namespace} if present in the command template with the namespace in each iteration, but often this isn't necessary to specify explicitly given the kubectl context's namespace is changed in each iteration for convenience running short commands local to the namespace
+Replaces {namespace} if present in the command template with the namespace in each iteration, but often this isn't necessary to specify explicitly given the kubectl context's namespace is set within each iteration for convenience running short commands local to the namespace
 
 eg.
     ${0##*/} gcp_secrets_to_kubernetes.sh
