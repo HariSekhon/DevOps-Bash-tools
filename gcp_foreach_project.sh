@@ -25,21 +25,16 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 usage_description="
 Run a command against each GCP project in the current account
 
-DANGER: This is powerful so use carefully!
-
-DANGER: sets the GCloud SDK project property during each iteration so any concurrent GCloud SDK commands in another window may hit a concurrency race condition. You must ensure that no other GCloud commands are running while this is running! It's much safer to iterate the projects and just suffix --project to each command in scripts
+This is powerful so use carefully!
 
 Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
 
-Sets the core/project in each iteration, and sets back to the original project upon any exit (except kill -9)
-This allows easy chaining with other scripts that operate on the current project
-
 All arguments become the command template
 
-The command template replaces the following for convenience in each iteration:
+The following command template tokens are replaced in each iteration:
 
-{id}   - with the project id
-{name} - with the project name
+Project ID:     {id}    {project_id}
+Project Name:   {name}  {project_name}
 
 eg.
     ${0##*/} 'echo GCP project has id {id} and name {name}'
@@ -59,20 +54,23 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-current_project="$(gcloud config list --format="value(core.project)")"
-if [ -n "$current_project" ]; then
-    # want interpolation now not at exit
-    # shellcheck disable=SC2064
-    trap "gcloud config set project '$current_project'" EXIT
-else
-    trap "gcloud config unset project" EXIT
-fi
+# don't need to capture and replace project in config as done in environment variable now as it's much safer as it's limited to only this script and its child processes
+#current_project="$(gcloud config list --format="value(core.project)")"
+#if [ -n "$current_project" ]; then
+#    # want interpolation now not at exit
+#    # shellcheck disable=SC2064
+#    trap "gcloud config set project '$current_project'" EXIT
+#else
+#    trap "gcloud config unset project" EXIT
+#fi
 
 while read -r project_id project_name; do
     echo "# ============================================================================ #" >&2
     echo "# GCP Project ID = $project_id -- Name = $project_name" >&2
     echo "# ============================================================================ #" >&2
-    gcloud config set project "$project_id"
+    # XXX: this would cause a concurrency race condition bug between other scripts and sessions that could be dangerous
+    #gcloud config set project "$project_id"
+    export CLOUDSDK_CORE_PROJECT="$project_id"
     cmd="$cmd_template"
     cmd="${cmd//\{project_id\}/$project_id}"
     cmd="${cmd//\{project_name\}/$project_name}"
