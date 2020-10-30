@@ -56,7 +56,7 @@ min_args 1 "$@"
 cmd_template="$*"
 
 # XXX: critical to protect current environment from imperative kubectl concurrency race conditions because changes the current context - so isolate to only this script's environment
-kubeconfig="/tmp/.kube/config.$$"
+kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
 mkdir -pv "$(dirname "$kubeconfig")"
 cp "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
 export KUBECONFIG="$kubeconfig"
