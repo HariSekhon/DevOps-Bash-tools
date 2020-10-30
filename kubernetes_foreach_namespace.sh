@@ -27,9 +27,7 @@ Run a command against each Kubernetes namespace on the current cluster / kubectl
 
 Can chain with kubernetes_foreach_context.sh
 
-DANGER: This is powerful so use carefully!
-
-DANGER: Changes the kubectl context's default namespace - due to the way Kubectl works - this must not be run concurrently with any other kubectl based operations in any other scripts / terraform etc otherwise the Kubernetes changes may be sent to the wrong namespace! It's actually safer to script an operation to iterate on namespaces and instead of changing the default namespace in each iteration, pass the -n switch. See kubectl_rollout_history_all_deployments.sh for an example of this.
+This is powerful so use carefully!
 
 Requires 'kubectl' to be configured and available in \$PATH
 
@@ -53,10 +51,17 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+# XXX: critical to protect current environment from imperative kubectl concurrency race conditions because changes the current namespace - so isolate to only this script's environment
+kubeconfig="/tmp/.kube/config.$$"
+mkdir -pv "$(dirname "$kubeconfig")"
+cp "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
+export KUBECONFIG="$kubeconfig"
+
 current_context="$(kubectl config current-context)"
 
 # there is no -o jsonpath/namespace so must just get column
-original_namespace="$(kubectl config get-contexts "$current_context" --no-headers | awk '{print $5}')"
+# don't need to store this any more as we now switch the KUBECONFIG which is only used for the lifetime of this script
+#original_namespace="$(kubectl config get-contexts "$current_context" --no-headers | awk '{print $5}')"
 
 set_namespace(){
     local namespace="$1"
@@ -73,7 +78,8 @@ while read -r namespace; do
     echo "# Kubernetest namespace = $namespace, content = $current_context" >&2
     echo "# ============================================================================ #" >&2
     # shellcheck disable=SC2064  # want interpolation now
-    trap "echo; echo 'Reverting context to original namespace: $original_namespace' ; set_namespace '$original_namespace'" EXIT
+    # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
+    #trap "echo; echo 'Reverting context to original namespace: $original_namespace' ; set_namespace '$original_namespace'" EXIT
     set_namespace "$namespace"
     cmd="${cmd_template//\{namespace\}/$namespace}"
     eval "$cmd"
