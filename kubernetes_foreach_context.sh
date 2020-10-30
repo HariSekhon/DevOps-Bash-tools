@@ -27,9 +27,7 @@ Run a command against each configured Kubernetes kubectl context (cluster)
 
 Can chain with kubernetes_foreach_namespace.sh
 
-DANGER: This is powerful so use carefully!
-
-DANGER: Changes the kubectl context - due to the way Kubectl works - this must not be run concurrently with any other kubectl based operations in any other scripts / terraform etc otherwise the Kubernetes changes may be sent to the wrong cluster! Discovered this the hard way by a colleague who write imperative Terraform with kubectl :-/
+This is powerful so use carefully!
 
 See Also: gke_kube_creds.sh to auto-create all your contexts for all clusters on Google Kubernetes Engine!
 
@@ -57,7 +55,14 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-original_context="$(kubectl config current-context)"
+# XXX: critical to protect current environment from imperative kubectl concurrency race conditions because changes the current context - so isolate to only this script's environment
+kubeconfig="/tmp/.kube/config.$$"
+mkdir -pv "$(dirname "$kubeconfig")"
+cp "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
+export KUBECONFIG="$kubeconfig"
+
+# don't need to store this any more as we now switch the KUBECONFIG which is only used for the lifetime of this script
+#original_context="$(kubectl config current-context)"
 
 while read -r context; do
     if [[ "$context" =~ docker|minikube|minishift ]]; then
@@ -69,8 +74,9 @@ while read -r context; do
     echo "# Kubernetest context = $context" >&2
     echo "# ============================================================================ #" >&2
     # shellcheck disable=SC2064  # want interpolation now
-    trap "echo; echo 'Reverting to original context:' ; kubectl config use-context '$original_context'" EXIT
-    kubectl config use-context "$context"
+    # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
+    #trap "echo; echo 'Reverting to original context:' ; kubectl config use-context '$original_context'" EXIT
+    #kubectl config use-context "$context"
     cmd="${cmd_template//\{context\}/$context}"
     eval "$cmd"
     echo
