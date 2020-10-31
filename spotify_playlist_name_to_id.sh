@@ -26,8 +26,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Uses Spotify API to translate a Spotify public playlist name to ID
 
-Returns the ID for first playlist in your account which name contains the given playlist name
-
 If a Spotify playlist ID is given, returns it as is (this is for coding convenience when calling from other scripts)
 
 Needed by several other adjacent spotify tools
