@@ -36,9 +36,10 @@ Playlist argument can be a playlist name or a playlist ID (get this from spotify
 
 Outputs 1 artist per line, so tracks with multiple artists become multiple artist lines
 
-This is useful for piping to 'sort | uniq -c' to count the number of tracks per artist,
-which is used to find top artists in playlists, and in the Spotify-Playlists repo
-is used to detect artists with many blacklisted tracks (in the Blacklist playlist)
+This is useful for piping to 'sort | uniq -c' to:
+
+1. Find top artists per playlist by counting the number of tracks per artist
+2. Find top blacklisted artists by doing the above for my Blacklist playlist (done the Spotify-Playlists repo)
 
 Example:
 
