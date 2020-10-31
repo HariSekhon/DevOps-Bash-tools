@@ -50,7 +50,7 @@ $usage_auth_help
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist_id> [<curl_options>]"
+usage_args="<playlist> [<curl_options>]"
 
 help_usage "$@"
 
@@ -59,7 +59,7 @@ playlist_id="${1:-${SPOTIFY_PLAYLIST:-}}"
 shift || :
 
 if is_blank "$playlist_id"; then
-    usage "playlist id not defined"
+    usage "playlist not defined"
 fi
 
 spotify_token
