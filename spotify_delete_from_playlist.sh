@@ -157,7 +157,15 @@ delete_URIs_from_playlist(){
         if is_local_uri "$track_uri"; then
             continue
         fi
-        id="$(validate_spotify_uri "$track_uri")"
+        if [ -n "${SPOTIFY_DELETE_IGNORE_IRREGULAR_IDS:-}" ]; then
+            id="$(validate_spotify_uri "$track_uri" || :)"
+            if ! [[ "$id" =~ ^[[:alnum:]]{22}$ ]]; then
+                timestamp "skipping deleting irregular ID '$id'"
+                continue
+            fi
+        else
+            id="$(validate_spotify_uri "$track_uri")"
+        fi
 
         if [ -n "$track_position" ]; then
             ids+=("$track_position:$id")
