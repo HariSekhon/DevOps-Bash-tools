@@ -82,12 +82,12 @@ validate_spotify_uri(){
     local uri="$1"
     if ! [[ "$uri" =~ ^(spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/)?[[:alnum:]]+(\?.+)?$ ]]; then
         echo "Invalid URI provided: $uri" >&2
-        exit 1
+        return 1
     fi
     if [[ "$uri" =~ open.spotify.com/|^spotify: ]]; then
         if ! [[ "$uri" =~ open.spotify.com/${uri_type:-track}|^spotify:${uri_type:-track} ]]; then
             echo "Invalid URI type '${uri_type:-track}' vs URI '$uri'" >&2
-            exit 1
+            return 1
         fi
     fi
     uri="${uri##*[:/]}"
