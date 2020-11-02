@@ -67,4 +67,4 @@ url_base="https://api.spotify.com"
 url_path="${url_path##$url_base}"
 url_path="${url_path##/}"
 
-curl -sSL -H "Authorization: Bearer $SPOTIFY_ACCESS_TOKEN" "$url_base/$url_path" "$@"
+TOKEN="$SPOTIFY_ACCESS_TOKEN" "$srcdir/curl_auth.sh" -sSL "$url_base/$url_path" "$@"
