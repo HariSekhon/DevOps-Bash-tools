@@ -270,6 +270,11 @@ ci_sample(){
     return 0
 }
 
+trap_cmd(){
+    # shellcheck disable=SC2064,SC2086
+    trap "$@" $TRAP_SIGNALS
+}
+
 untrap(){
     # shellcheck disable=SC2086
     trap - $TRAP_SIGNALS
