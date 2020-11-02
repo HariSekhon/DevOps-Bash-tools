@@ -31,3 +31,15 @@
 
 # custom
 .hg/
+.svn/
+.ssh/
+github/
+gitroot/
+mercurial/
+hg/
+hgroot/
+svn/
+svnroot/
+
+# exclude all hidden dot files
+.*
