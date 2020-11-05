@@ -380,7 +380,7 @@ etc.
     - `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size
     - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight BigQuery SQL scripts
   - `gke_kube_creds.sh` - auto-loads all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
-  - `gke_kubectl.sh` - safe way of running kubectl commands fixed to a specific GCP project and K8s cluster to avoid concurrency race conditions from other scripts changing the kubectl context or running `gcloud container clusters get-credentials`
+  - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
 
 #### Kubernetes
 
@@ -396,7 +396,7 @@ etc.
     - container images running
     - container images running counts descending
     - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
-  - `kubectl.sh` - runs `kubectl` commands safely against a given context using config isolation to avoid concurrency race conditions
+  - `kubectl.sh` - runs `kubectl` commands safely fixed to a given context using config isolation to avoid concurrency race conditions
   - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
   - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
     - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters! Powerful stuff, use with care.
