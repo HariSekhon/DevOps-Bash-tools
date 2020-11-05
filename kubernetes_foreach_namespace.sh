@@ -73,7 +73,7 @@ while read -r namespace; do
     #    continue
     #fi
     echo "# ============================================================================ #" >&2
-    echo "# Kubernetest namespace = $namespace, content = $current_context" >&2
+    echo "# Kubernetes namespace = $namespace, content = $current_context" >&2
     echo "# ============================================================================ #" >&2
     # shellcheck disable=SC2064  # want interpolation now
     # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
