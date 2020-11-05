@@ -69,7 +69,7 @@ while read -r context; do
         continue
     fi
     echo "# ============================================================================ #" >&2
-    echo "# Kubernetest context = $context" >&2
+    echo "# Kubernetes context = $context" >&2
     echo "# ============================================================================ #" >&2
     # shellcheck disable=SC2064  # want interpolation now
     # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
