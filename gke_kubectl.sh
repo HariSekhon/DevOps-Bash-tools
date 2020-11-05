@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs a kubectl command safely fixed to a GKE cluster by using an isolated fixed config for the lifetime of this script
+Runs a kubectl command safely fixed to a GKE cluster by generating an isolated fixed config for the lifetime of this script
 
 Avoids concurrency race conditions from other commands or scripts changing the kubectl context
 
@@ -33,6 +33,8 @@ Eg. running:
 in another script or window would cause a concurrency race condition bug since that also switches the kubectl context to that cluster, meaning your kubectl commands would fire against the wrong cluster, leading to cross environment misconfigurations and outages in real world usage
 
 For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the PROJECT, CLUSTER and ZONE variables
+
+Could also use main kube config with kubectl switches --cluster / --context (after configuring, see gke_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 "
 
 # used by usage() in lib/utils.sh
