@@ -380,6 +380,7 @@ etc.
     - `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size
     - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight BigQuery SQL scripts
   - `gke_kube_creds.sh` - auto-loads all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
+  - `gke_kubectl.sh` - safe way of running kubectl commands fixed to a specific GCP project and K8s cluster to avoid concurrency race conditions from other scripts changing the kubectl context or running `gcloud container clusters get-credentials`
 
 #### Kubernetes
 
