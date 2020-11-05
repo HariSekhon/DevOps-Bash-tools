@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Safe way of running kubectl against a specific GKE project and K8s cluster by using an isolated fixed config for the lifetime of this script
+Runs a kubectl command safely fixed to a GKE cluster by using an isolated fixed config for the lifetime of this script
 
 Avoids concurrency race conditions from other commands or scripts changing the kubectl context
 
