@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo context is now {context}
+#  args: 'echo -n "kubectl context: "; kubectl config current-context; echo "var \{context\}: {context}"'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-26 16:18:30 +0100 (Wed, 26 Aug 2020)
@@ -74,7 +74,7 @@ while read -r context; do
     # shellcheck disable=SC2064  # want interpolation now
     # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
     #trap "echo; echo 'Reverting to original context:' ; kubectl config use-context '$original_context'" EXIT
-    #kubectl config use-context "$context"
+    kubectl config use-context "$context"
     cmd="${cmd_template//\{context\}/$context}"
     eval "$cmd"
     echo
