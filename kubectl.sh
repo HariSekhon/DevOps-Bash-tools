@@ -35,6 +35,8 @@ in another script or window would cause a concurrency race condition bug where y
 For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CONTEXT variable
 
 The kubectl context specified should already be configured in your primary kubectl config which is copied to an isolated config to fix it before running your kubectl actions
+
+Could also use explicit kubectl switches --cluster / --context, but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 "
 
 # used by usage() in lib/utils.sh
