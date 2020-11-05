@@ -49,6 +49,12 @@ usage_args="[<kubernetes_context>]"
 
 help_usage "$@"
 
+# XXX: set the kubectl context for the lifetime of this script to avoid a concurrency race condition changing the cluster we're speaking to half way through - this way the context reported at the beginning is the one we're using all the way through for consistent results
+kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
+mkdir -pv "$(dirname "$kubeconfig")"
+cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
+export KUBECONFIG="$kubeconfig"
+
 current_context="$(kubectl config current-context)"
 
 if [ $# -gt 0 ]; then
@@ -62,6 +68,8 @@ if [ $# -gt 0 ]; then
     echo
 fi
 
+echo "kubectl context: $(kubectl config current-context)"
+echo
 kubectl cluster-info
 echo
 kubectl get componentstatuses
