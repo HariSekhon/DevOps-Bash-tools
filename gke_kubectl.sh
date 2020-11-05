@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Safe way of running kubectl against a specific GKE project and K8s cluster by using an isolated fixed config for the lifetime of this script
 
-This avoids risk of concurrency race conditions from other commands or scripts changing the kubectl context
+Avoids concurrency race conditions from other commands or scripts changing the kubectl context
 
 Eg. running:
 
