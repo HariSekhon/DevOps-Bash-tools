@@ -59,7 +59,9 @@ playlist_name_to_id(){
         echo "$playlist_name"
     else
         # If we've auto-completed a playlist name from the filename, replace the unicode slashes with the real ones
-        playlist_name="$("$srcdir/spotify_filename_to_playlist.sh" <<< "$playlist_name")"
+        if [ -f "$playlist_name" ]; then
+            playlist_name="$("$srcdir/spotify_filename_to_playlist.sh" <<< "$playlist_name")"
+        fi
         # works but could get needlessly complicated to escape all possible regex special chars, switching to partial string match instead
         #playlist_regex="${playlist_id//\//\\/}"
         #playlist_regex="${playlist_regex//\(/\\(}"
