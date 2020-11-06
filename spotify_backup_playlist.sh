@@ -80,11 +80,13 @@ if liked; then
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
+    # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
+    #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
     echo -n "=> URIs "
-    "$srcdir/spotify_liked_tracks_uri.sh" "$@" > "$backup_dir_spotify/$filename"
+    "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
 
     echo -n 'OK => Tracks '
-    "$srcdir/spotify_liked_tracks.sh" "$@" > "$backup_dir/$filename"
+    "$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$backup_dir/$filename"
 else
     playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
