@@ -757,15 +757,14 @@ when_url_content(){
 
 retry(){
     local max_secs="${1:-}"
+    local max_retries="${MAX_RETRIES:-10}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     shift
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
-        echo "ERROR: non-integer '$max_secs' passed to $FUNCNAME() for \$1"
-        exit 1
+        die "ERROR: non-integer '$max_secs' passed to $FUNCNAME() for \$1"
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
-        exit 1
+        die "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
     fi
     local negate=""
     expected_return_code="${ERRCODE:-0}"
@@ -773,29 +772,34 @@ retry(){
         negate=1
         shift
     fi
-    local cmd="${*:-}"
-    if [ -z "$cmd" ]; then
-        echo "ERROR: no command passed to $FUNCNAME() for \$3"
-        exit 1
+    local cmd=("$@")
+    if [ -z "$*" ]; then
+        die "ERROR: no command passed to $FUNCNAME() for \$3"
     fi
-    echo "retrying for up to $max_secs secs at $retry_interval sec intervals:"
+    #echo "retrying for up to $max_secs secs at $retry_interval sec intervals:"
     try_number=0
     SECONDS=0
     while true; do
         ((try_number+=1))
-        echo -n "try $try_number:  "
+        #echo -n "try $try_number:  "
         set +e
-        $cmd
+        "${cmd[@]}"
         returncode=$?
         set -e
         if [ -n "$negate" ]; then
             if [ $returncode != 0 ]; then
-                timestamp "Command failed after $SECONDS secs"
+                RETRY_INFO_MSG="$(timestamp "Command failed after $SECONDS secs" 2>&1)"
+                export RETRY_INFO_MSG
                 break
             fi
         elif [ "$returncode" = "$expected_return_code" ]; then
-            timestamp "Command succeeded with expected exit code of $expected_return_code after $SECONDS secs"
+            RETRY_INFO_MSG="$(timestamp "Command succeeded with expected exit code of $expected_return_code after $SECONDS secs" 2>&1)"
+            export RETRY_INFO_MSG
             break
+        fi
+        if [ "$try_number" -gt "$max_retries" ]; then
+            timestamp "FAILED: giving up after $max_retries retries"
+            return 1
         fi
         if [ "$SECONDS" -gt "$max_secs" ]; then
             timestamp "FAILED: giving up after $max_secs secs"
