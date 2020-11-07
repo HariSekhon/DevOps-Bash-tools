@@ -78,6 +78,14 @@ is_local_uri(){
     [[ "$1" =~ ^spotify:local:|open.spotify.com/local/ ]]
 }
 
+is_spotify_playlist_id(){
+    #local playlist_id="${1:-}"
+    #if [ -z "$playlist_id" ]; then
+    #    die "no playlist id passed to function is_spotify_playlist_id()"
+    #fi
+    [[ "$1" =~ [[:alnum:]]{22} ]]
+}
+
 validate_spotify_uri(){
     local uri="$1"
     if ! [[ "$uri" =~ ^(spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/)?[[:alnum:]]+(\?.+)?$ ]]; then
