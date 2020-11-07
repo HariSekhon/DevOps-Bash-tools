@@ -50,7 +50,7 @@ playlist_id_to_name(){
     local playlist_id="$1"
     shift || :
     # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
-    if [[ "$playlist_id" =~ ^[[:alnum:]]{22}$ ]]; then
+    if is_spotify_playlist_id "$playlist_id"; then
         playlist_name="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id" "$@" |
                     jq -r '.name' || :)"
         if is_blank "$playlist_name" || [ "$playlist_name" = null ]; then

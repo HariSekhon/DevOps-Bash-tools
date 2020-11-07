@@ -183,6 +183,6 @@ EOF
     } >&2
 fi
 
-die_if_error_field "$output"
+#die_if_error_field "$output"
 
 jq -r '.access_token' <<< "$output"

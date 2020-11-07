@@ -124,7 +124,7 @@ delete_from_playlist(){
     json_payload+="}"
     local output
     output="$("$srcdir/spotify_api.sh" "$url_path" -X DELETE -d "$json_payload")"
-    die_if_error_field "$output"
+    #die_if_error_field "$output"
     ((count+=${#@}))
     # don't take the new snapshot ID - use the one from before we start deleting for consistency otherwise the second round of deletes will fail
     #snapshot_id="$(jq -r '.snapshot_id' <<< "$output")"
@@ -159,7 +159,7 @@ delete_URIs_from_playlist(){
         fi
         if [ -n "${SPOTIFY_DELETE_IGNORE_IRREGULAR_IDS:-}" ]; then
             id="$(validate_spotify_uri "$track_uri" || :)"
-            if ! [[ "$id" =~ ^[[:alnum:]]{22}$ ]]; then
+            if ! is_spotify_playlist_id "$id"; then
                 timestamp "skipping deleting irregular ID '$id'"
                 continue
             fi

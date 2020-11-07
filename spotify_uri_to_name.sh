@@ -140,7 +140,7 @@ query_bulk(){
     # cannot quote curl_options as when empty as this results in a blank literal which breaks curl
     # shellcheck disable=SC2068
     output="$("$srcdir/spotify_api.sh" "$url_path" ${curl_options[@]:-})"
-    die_if_error_field "$output"
+    #die_if_error_field "$output"
     output
     sleep "$sleep_secs"
 }

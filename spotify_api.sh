@@ -67,4 +67,7 @@ url_base="https://api.spotify.com"
 url_path="${url_path##$url_base}"
 url_path="${url_path##/}"
 
-TOKEN="$SPOTIFY_ACCESS_TOKEN" "$srcdir/curl_auth.sh" -sSL "$url_base/$url_path" "$@"
+export TOKEN="$SPOTIFY_ACCESS_TOKEN"
+
+# the Spotify API is very unreliable and often gets 502 errors
+retry 300 "$srcdir/curl_auth.sh" -sSL "$url_base/$url_path" "$@"

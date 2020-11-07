@@ -55,7 +55,7 @@ playlist_name_to_id(){
     local playlist_name="$1"
     shift || :
     # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
-    if [[ "$playlist_name" =~ ^[[:alnum:]]{22}$ ]]; then
+    if is_spotify_playlist_id "$playlist_name"; then
         echo "$playlist_name"
     else
         # If we've auto-completed a playlist name from the filename, replace the unicode slashes with the real ones

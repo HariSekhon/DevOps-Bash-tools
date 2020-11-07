@@ -55,7 +55,7 @@ spotify_token
 
 while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
-    die_if_error_field "$output"
+    #die_if_error_field "$output"
     url_path="$(get_next "$output")"
     output
 done
