@@ -109,6 +109,12 @@ if [ $compare_by_date = 1 ] && [ $long_hashrefs = 1 ]; then
 fi
 
 github_user="$(get_github_user)"
+if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
+    if [ -z "${GITLAB_USERNAME:-${GITLAB_USER:-}}" ]; then
+        gitlab_user="$("$srcdir/gitlab_api.sh" "/user" | jq -r '.username')"
+        gitlab_user="${gitlab_user:-<user>}"
+    fi
+fi
 
 if is_mac; then
     date(){
@@ -133,13 +139,13 @@ check_repos(){
         if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
             if [ $compare_by_date = 1 ]; then
                 # GitHub returns current timezone eg. .000+01:00
-                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/commits?ref_name=master&per_page=1" 2>/dev/null | jq -r '.[0].created_at' || echo None)"
+                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/${gitlab_user}%2F$repo/repository/commits?ref_name=master&per_page=1" 2>/dev/null | jq -r '.[0].created_at' || echo None)"
                 if [ "$gitlab_master_ref" != None ]; then
                     gitlab_master_ref="$(date --utc -d "$gitlab_master_ref" '+%FT%TZ')"
                 fi
             else
                 # or .commit.short_id - only GitLab gives this short hashref in the API, we'll just truncate all of them to 8 chars for output
-                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/<user>%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
+                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/${gitlab_user}%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
                 if [ $long_hashrefs = 0 ]; then
                     gitlab_master_ref="${gitlab_master_ref:0:8}"
                 fi
