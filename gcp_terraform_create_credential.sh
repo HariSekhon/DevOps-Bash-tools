@@ -66,7 +66,7 @@ else
     gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json"
 fi
 
-echo "Granting Owner permissions to service account '$service_account' on projecgt '$project'"
+echo "Granting Owner permissions to service account '$service_account' on project '$project'"
 # some projects may require --condition=None in non-interactive mode
 gcloud projects add-iam-policy-binding "$project" --member="serviceAccount:$service_account" --role=roles/owner --condition=None >/dev/null
 
