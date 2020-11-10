@@ -113,9 +113,11 @@ ${0##*/} /events
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings (due to the context variation of the GitLAB API documentation tokens this is only done for users and projects only at this time)
 
-Placeholders replaced by \$GITLAB_USERNAME / \$GITLAB_USER:                               :owner, :user, :username, <user>, <username>, /users/:id
-Placeholders replaced by the local repo name of the current directory:                  :repo, <repo>
-Placeholders replaced by the local full 'user/repo' name of the current directory:      :project, <project>, /projects/:id
+The following placeholders are replaced if the environment variables are available or inferred fro mthe local git repo. The format can be one of {token}, <token> :token
+
+\$GITLAB_USERNAME / \$GITLAB_USER:                           owner, username, user, /users/:id
+local repo name of the current directory:                  repo
+local full 'user/repo' name of the current directory:      project, /projects/:id
 "
 
 # used by usage() in lib/utils.sh
@@ -160,16 +162,22 @@ repo="$(sed 's/.*\///' <<< "$project")"
 project="${project//\//%2F}" # cheap url encode slash
 
 if [ -n "$user" ]; then
+    url_path="${url_path/\{owner\}/$user}"
+    url_path="${url_path/<owner>/$user}"
     url_path="${url_path/:owner/$user}"
-    url_path="${url_path/:username/$user}"
-    url_path="${url_path/:user/$user}"
+    url_path="${url_path/\{username\}/$user}"
     url_path="${url_path/<username>/$user}"
+    url_path="${url_path/:username/$user}"
+    url_path="${url_path/\{user\}/$user}"
     url_path="${url_path/<user>/$user}"
+    url_path="${url_path/:user/$user}"
 fi
-url_path="${url_path/:repo/$repo}"
+url_path="${url_path/\{repo\}/$repo}"
 url_path="${url_path/<repo>/$repo}"
-url_path="${url_path/:project/$project}"
+url_path="${url_path/:repo/$repo}"
+url_path="${url_path/\{project\}/$project}"
 url_path="${url_path/<project>/$project}"
+url_path="${url_path/:project/$project}"
 url_path="${url_path/projects\/:id/projects\/$project}"
 url_path="${url_path/users\/:id/users\/$user}"
 
