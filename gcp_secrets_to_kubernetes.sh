@@ -24,14 +24,19 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Loads given list of GCP Secret Manager secrets to the current Kubernetes cluster with the same name
 
-If no secrets are specified, then finds all secrets in the current project with labels of kubernetes-cluster and
-kubernetes-namespace that match the current kubectl context's cluster and namespace and which do not have the label
-kubernetes-multi-part-secret set (as these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
+If no secrets are specified, then finds all secrets in the current project with a label of kubernetes-cluster that
+matches the current kubectl context's cluster and which do not have the label kubernetes-multi-part-secret set (as
+these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
 
-Loads to the current Kubernetes namespace since there is no namespace information in Google Secret Manager, so you may
-want to switch to the right namespace first (see kcd in .bash.d/kubernetes for a convenient way to persist this in your session)
+For each secret, checks for a label called 'kubernetes-namespace', and if set, then creates the secret in that namespace,
+otherwise loads to the current namespace
 
-Remember to execute this from the right GCP project configured to get the right secrets and with the right Kubernetes context and namespace set
+Remember to execute this from the right GCP project configured to get the right secrets
+and with the right Kubernetes context selected to load to the right cluster
+
+To avoid concurrency race conditions between kubectl commands this script will isolate the current kubernetes context
+environment in this script before beginning the load so that all secrets are loaded to the right cluster regardless of
+any other naive kubernetes processes that might change the global kubectl context to point to a different cluster
 
 See Also:
 
