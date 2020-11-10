@@ -22,8 +22,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a GCP service account for Terraform deployments, then creates and downloads the credentials json
-and even prints the export GOOGLE_CREDENTIALS command to configure your environment to start using Terraform immediately
+Creates a GCP service account for Terraform deployments in the current or specified GCP project, then
+creates and downloads the credentials json and even prints the command to configure your environment to start using Terraform immediately:
+
+export GOOGLE_CREDENTIALS=\$HOME/.gcloud/\$name-\$project-credential.json
 
 The following optional arguments can be given:
 
