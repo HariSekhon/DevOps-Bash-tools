@@ -83,7 +83,7 @@ load_secret(){
     fi
     latest_version="$(get_latest_secret_version "$secret")"
     value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
-    timestamp "creating secret '$secret' in namespace '$namespace'"
+    timestamp "creating kubernetes secret '$secret' in namespace '$namespace'"
     # kubectl create secret automatically base64 encodes the $value
     # if you did this in yaml you'd have to base64 encode it yourself in the yaml
     #         could alternatively make this --from-literal="value=$value"
