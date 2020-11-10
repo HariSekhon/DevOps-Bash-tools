@@ -61,8 +61,12 @@ Examples:
 
 For convenience the following tokens in the form :token, <token>, {token} are replaced:
 
-Placeholders replaced by \$AZURE_DEVOPS_USERNAME / \$AZURE_DEVOPS_USER:     organization, owner, username, user
-Placeholders replaced by the local repo name of the current directory:    repo
+\$AZURE_DEVOPS_USERNAME / \$AZURE_DEVOPS_USER:                         organization, owner, username, user
+\$AZURE_DEVOPS_PROJECT or \$PWD repo's project from remote url:        project
+inferred from \$PWD repo's remote url:                                repo
+
+These depend on the environment variables listed above being set or able to infer from local git repo remote urls
+otherwise they are not replaced
 "
 
 # used by usage() in lib/utils.sh
