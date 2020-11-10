@@ -487,7 +487,7 @@ function! WriteHelp()
     elseif expand('%:t') == 'Makefile'
         :call Make('help')
     else
-        :! "./%" --help 2>&1 | less
+        :! "%" --help 2>&1 | less
     endif
 endfunction
 
