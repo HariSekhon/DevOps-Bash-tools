@@ -55,7 +55,7 @@ help_usage "$@"
 
 # fix kube cluster to protect consistency against k8s race conditions
 kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
-mkdir -pv "$(dirname "$kubeconfig")"
+mkdir -p "$(dirname "$kubeconfig")"
 cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
 export KUBECONFIG="$kubeconfig"
 
