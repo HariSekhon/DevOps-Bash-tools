@@ -48,6 +48,12 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+# fix kube cluster to protect consistency against k8s race conditions
+kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
+mkdir -pv "$(dirname "$kubeconfig")"
+cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
+export KUBECONFIG="$kubeconfig"
+
 get_latest_secret_version(){
     local secret="$1"
     gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' |
@@ -57,15 +63,23 @@ get_latest_secret_version(){
 
 load_secret(){
     local secret="$1"
-    if kubectl get secret "$secret" &>/dev/null; then
-        echo "WARNING: kubernetes secret '$secret' already exists, skipping creation..." >&2
+    local namespace
+    local namespace_opt
+    namespace="$(gcloud secrets describe "$secret" --format='get(labels.kubernetes-namespace)')"
+    if [ -n "$namespace" ]; then
+        namespace_opt=("-n" "$namespace")
+    fi
+    if kubectl get secret "$secret" "${namespace_opt[@]}" &>/dev/null; then
+        timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
         return
     fi
     latest_version="$(get_latest_secret_version "$secret")"
     value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
-    # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
+    timestamp "creating secret '$secret' in namespace '${namespace:-$current_namespace}'"
+    # kubectl create secret automatically base64 encodes the $value
+    # if you did this in yaml you'd have to base64 encode it yourself in the yaml
     #         could alternatively make this --from-literal="value=$value"
-    kubectl create secret generic "$secret" --from-literal="$secret=$value"
+    kubectl create secret generic "$secret" --from-literal="$secret=$value" "${namespace_opt[@]}"
 }
 
 # there's no -o jsonpath / -o namespace / -o cluster as of Kubernetes 1.15 so have to just print columns
@@ -82,6 +96,6 @@ else
         load_secret "$secret"
     done < <(gcloud secrets list --format='value(name)' \
                                  --filter="labels.kubernetes-cluster=$current_cluster \
-                                       AND labels.kubernetes-namespace=$current_namespace \
-                                       AND NOT labels.kubernetes-multi-part-secret ~ .")
+                                           AND NOT \
+                                           labels.kubernetes-multi-part-secret ~ .")
 fi
