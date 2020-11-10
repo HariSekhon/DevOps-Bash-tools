@@ -42,7 +42,7 @@ See Also:
 
     gcp_secrets_to_kubernetes_multipart.sh - for create more complex compound secrets
 
-    kubernetes_get_secret_values.sh - for checking what was auto-loaded into to a given kubernetes secret
+    kubernetes_get_secret_values.sh - for checking what was auto-loaded into a given kubernetes secret
 "
 
 # used by usage() in lib/utils.sh
