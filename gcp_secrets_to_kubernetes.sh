@@ -54,6 +54,12 @@ mkdir -pv "$(dirname "$kubeconfig")"
 cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
 export KUBECONFIG="$kubeconfig"
 
+# there's no -o jsonpath / -o namespace / -o cluster as of Kubernetes 1.15 so have to just print columns
+kubectl_context="$(kubectl config get-contexts "$(kubectl config current-context)" --no-headers)"
+current_cluster="$(awk '{print $3}' <<< "$kubectl_context")"
+current_namespace="$(awk '{print $5}' <<< "$kubectl_context")"
+current_namespace="${current_namespace:-default}"
+
 get_latest_secret_version(){
     local secret="$1"
     gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' |
@@ -64,28 +70,20 @@ get_latest_secret_version(){
 load_secret(){
     local secret="$1"
     local namespace
-    local namespace_opt
     namespace="$(gcloud secrets describe "$secret" --format='get(labels.kubernetes-namespace)')"
-    if [ -n "$namespace" ]; then
-        namespace_opt=("-n" "$namespace")
-    fi
-    if kubectl get secret "$secret" "${namespace_opt[@]}" &>/dev/null; then
+    namespace="${namespace:-$current_namespace}"
+    if kubectl get secret "$secret" -n "$namespace" &>/dev/null; then
         timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
         return
     fi
     latest_version="$(get_latest_secret_version "$secret")"
     value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
-    timestamp "creating secret '$secret' in namespace '${namespace:-$current_namespace}'"
+    timestamp "creating secret '$secret' in namespace '$namespace'"
     # kubectl create secret automatically base64 encodes the $value
     # if you did this in yaml you'd have to base64 encode it yourself in the yaml
     #         could alternatively make this --from-literal="value=$value"
-    kubectl create secret generic "$secret" --from-literal="$secret=$value" "${namespace_opt[@]}"
+    kubectl create secret generic "$secret" --from-literal="$secret=$value" -n "$namespace"
 }
-
-# there's no -o jsonpath / -o namespace / -o cluster as of Kubernetes 1.15 so have to just print columns
-kubectl_context="$(kubectl config get-contexts "$(kubectl config current-context)" --no-headers)"
-current_cluster="$(awk '{print $3}' <<< "$kubectl_context")"
-current_namespace="$(awk '{print $5}' <<< "$kubectl_context")"
 
 if [ $# -gt 0 ]; then
     for arg; do
