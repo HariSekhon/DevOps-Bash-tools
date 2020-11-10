@@ -24,7 +24,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates kubectl credentials and contexts for all GKE clusters in the current GCP project
 
-This action is idempotent and fast way to get set up in new environments, or even just if new clusters have been added
+This is fast way to get set up in new environments, or even just add any new GKE clusters to your existing \$HOME/.kube/config
+
+WARNING: GCloud SDK switches your kubectl context to the last cluster you get credentials for. This can lead to race conditions between other kubectl scripts if they have not forked and isolated their \$KUBECONFIG. Do not run this while other naive kubectl commands and scripts are running otherwise those non-isolated commands may fire against the wrong kubernetes cluster. See kubectl.sh for more info
+
+See also:
+
+    gke_kubectl.sh  - gets temporary credentials at runtime to an isolated config before running the kubectl command against the given cluster
+    kubectl.sh      - isolates kube config to fix kubectl commands to the given cluster to prevent race conditions apply kubectl changes to the wrong cluster
 "
 
 # used by usage() in lib/utils.sh
