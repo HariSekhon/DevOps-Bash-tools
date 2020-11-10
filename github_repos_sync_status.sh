@@ -25,20 +25,22 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-For each non-fork GitHub repo, checks corresponding GitLab and/or BitBucket repos to check they are in sync with the same master hashref
+For each non-fork GitHub repo, checks corresponding GitLab / BitBucket / Azure DevOps repos to check they are in sync with the same master hashref
 
-Useful for checking if GitLab repo mirroring has broken or if BitBucket hasn't been pushed to be kept in sync with master GitHub repos
+Useful for checking if GitLab repo mirroring has broken or if BitBucket / Azure DevOps haven't been pushed to be kept in sync with master GitHub repos
 
 
 Output Format:
 
-Repo: <user>/<repo>    GitHub: <sha_hash>        GitLab: <sha_hash>        BitBucket: <sha_hash>             In-Sync: <boolean>
+Repo: <user>/<repo>    GitHub: <sha_hash>        GitLab: <sha_hash>        BitBucket: <sha_hash>        Azure_Devops: <sha_hash>        In-Sync: <boolean>
 
-Output Format If selecting only one of --gitlab / --bitbucket:
+Output Format If selecting only one of --gitlab / --bitbucket / --azure-devops:
 
 Repo: <user>/<repo>    GitHub: <sha_hash>        GitLab: <sha_hash>        In-Sync: <boolean>
 
 Repo: <user>/<repo>    GitHub: <sha_hash>        BitBucket: <sha_hash>     In-Sync: <boolean>
+
+Repo: <user>/<repo>    GitHub: <sha_hash>        Azure_DevOps: <sha_hash>  In-Sync: <boolean>
 
 
 Arguments can be specified to check only select repos, and options can be specified to compare each GitHub repo to its
@@ -68,6 +70,7 @@ usage_args="[options] [<repos_to_check>]"
 usage_switches="
 -g --gitlab         Compare each GitHub repo with its GitLab counterpart
 -b --bitbucket      Compare each GitHub repo with its BitBucket counterpart
+-a --azure-devops   Compare each GitHub repo with its Azure DevOps counterpart
 -d --date           Compare by date of latest commit instead of hashref
 -l --long-hashrefs  Use long 40 char hashrefs, not 8 char abbreviated ones
 "
@@ -79,6 +82,7 @@ help_usage "$@"
 repos=()
 check_gitlab=0
 check_bitbucket=0
+check_azure_devops=0
 compare_by_date=0
 long_hashrefs=0
 
@@ -87,6 +91,8 @@ for arg; do
         -g|--gitlab)    check_gitlab=1
                         ;;
      -b|--bitbucket)    check_bitbucket=1
+                        ;;
+  -a|--azure-devops)    check_azure_devops=1
                         ;;
           -d|--date)    compare_by_date=1
                         shift || :
@@ -108,7 +114,30 @@ if [ $compare_by_date = 1 ] && [ $long_hashrefs = 1 ]; then
     usage "--date and --long-hashrefs are mutually exclusive"
 fi
 
+check_gitlab(){
+    [ $check_gitlab = 1 ]       && return 0
+    [ $check_bitbucket = 0 ]    || return 1
+    [ $check_azure_devops = 0 ] || return 1
+    return 0
+}
+
+check_bitbucket(){
+    [ $check_bitbucket = 1 ]    && return 0
+    [ $check_gitlab = 0 ]       || return 1
+    [ $check_azure_devops = 0 ] || return 1
+    return 0
+}
+
+check_azure_devops(){
+    [ $check_azure_devops = 1 ] && return 0
+    [ $check_gitlab = 0 ]       || return 1
+    [ $check_bitbucket = 0 ]    || return 1
+    return 0
+}
+
 github_user="$(get_github_user)"
+
+# need gitlab user
 if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
     if [ -z "${GITLAB_USERNAME:-${GITLAB_USER:-}}" ]; then
         gitlab_user="$("$srcdir/gitlab_api.sh" "/user" | jq -r '.username')"
@@ -124,56 +153,92 @@ fi
 
 check_repos(){
     for repo in "$@"; do
+        # very concise gives exactly the head hashref but no date
+        #github_commits="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master")"
+        github_commits="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master?per_page=1")"
         if [ $compare_by_date = 1 ]; then
             # GitHub returns Z time
-            github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/commits/master?per_page=1" | jq -r '.commit.committer.date')"
+            github_master_ref="$(jq -r '.commit.committer.date' <<< "$github_commits")"
         else
-            github_master_ref="$("$srcdir/github_api.sh" "/repos/$github_user/$repo/git/ref/heads/master" | jq -r '.object.sha')"
+            #github_master_ref="$(jq -r '.object.sha' <<< "$github_commits")"
+            github_master_ref="$(jq -r '.sha' <<< "$github_commits")"
             if [ $long_hashrefs = 0 ]; then
                 github_master_ref="${github_master_ref:0:8}"
             fi
         fi
         # don't printf as we go because it's harder to debug, instead collect the line and print in one go
-        line="$(printf '%-26s\tGitHub: %s\t' "$github_user/$repo" "$github_master_ref")"
+        line="$(printf '%-26s\tGitHub: %s    ' "$github_user/$repo" "$github_master_ref")"
         in_sync=True
-        if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
+        if check_gitlab; then
+            #gitlab_commits="$("$srcdir/gitlab_api.sh" "/projects/${gitlab_user}%2F$repo/repository/branches/master" 2>/dev/null || :)"
+            gitlab_commits="$("$srcdir/gitlab_api.sh" "/projects/${gitlab_user}%2F$repo/repository/commits?ref_name=master&per_page=1" 2>/dev/null || :)"
             if [ $compare_by_date = 1 ]; then
                 # GitHub returns current timezone eg. .000+01:00
-                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/${gitlab_user}%2F$repo/repository/commits?ref_name=master&per_page=1" 2>/dev/null | jq -r '.[0].created_at' || echo None)"
-                if [ "$gitlab_master_ref" != None ]; then
+                gitlab_master_ref="$(jq -r '.[0].committed_date' <<< "$gitlab_commits")"
+                if [ -n "$gitlab_master_ref" ] && [ "$gitlab_master_ref" != null ]; then
                     gitlab_master_ref="$(date --utc -d "$gitlab_master_ref" '+%FT%TZ')"
                 fi
             else
                 # or .commit.short_id - only GitLab gives this short hashref in the API, we'll just truncate all of them to 8 chars for output
-                gitlab_master_ref="$("$srcdir/gitlab_api.sh" "/projects/${gitlab_user}%2F$repo/repository/branches/master" 2>/dev/null | jq -r '.commit.id' || echo None)"
+                # for /repository/branches/master endpoint
+                #gitlab_master_ref="$(jq -r '.commit.id' <<< "$gitlab_commits")"
+                gitlab_master_ref="$(jq -r '.[0].id' <<< "$gitlab_commits")"
                 if [ $long_hashrefs = 0 ]; then
                     gitlab_master_ref="${gitlab_master_ref:0:8}"
                 fi
             fi
-            line+="$(printf "GitLab: %-${#github_master_ref}s\t" "$gitlab_master_ref")"
+            gitlab_master_ref="${gitlab_master_ref:-None}"
+            line+="$(printf "GitLab: %-${#github_master_ref}s    " "$gitlab_master_ref")"
             if [ "$gitlab_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
         fi
-        if [ $check_bitbucket = 1 ] || [ $check_gitlab = 0 ]; then
+        if check_bitbucket; then
+            #bitbucket_commits=$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master?pagelen=1" 2>/dev/null || : )"
+            bitbucket_commits="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" 2>/dev/null || : )"
             if [ $compare_by_date = 1 ]; then
                 # BitBucket returns +00:00 timezone
-                bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" 2>/dev/null | jq -r '.values[0].date' || echo None)"
-                if [ "$bitbucket_master_ref" != None ]; then
+                bitbucket_master_ref="$(jq -r '.values[0].date' <<< "$bitbucket_commits")"
+                if [ -n "$bitbucket_master_ref" ] && [ "$bitbucket_master_ref" != null ]; then
                     bitbucket_master_ref="$(date --utc -d "$bitbucket_master_ref" '+%FT%TZ')"
                 fi
             else
-                bitbucket_master_ref="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master" 2>/dev/null | jq -r '.target.hash' || echo None)"
+                # for refs/branches/master endpoint
+                #bitbucket_master_ref="$(jq -r '.target.hash' <<< "$bitbucket_commits" || echo None)"
+                bitbucket_master_ref="$(jq -r '.values[0].hash' <<< "$bitbucket_commits")"
                 if [ $long_hashrefs = 0 ]; then
                     bitbucket_master_ref="${bitbucket_master_ref:0:8}"
                 fi
             fi
-            line+="$(printf "BitBucket: %-${#github_master_ref}s" "$bitbucket_master_ref")"
+            bitbucket_master_ref="${bitbucket_master_ref:-None}"
+            line+="$(printf "BitBucket: %-${#github_master_ref}s    " "$bitbucket_master_ref")"
             if [ "$bitbucket_master_ref" != "$github_master_ref" ]; then
                 in_sync=False
             fi
         fi
-        printf '%s\tIn-Sync: %s\n' "$line" "$in_sync"
+        if check_azure_devops; then
+            # Bug in Azure DevOps API: returns commits in timestamped order to second resolution,so if two commits have the same timestamp, you may get the wrong one
+            # https://developercommunity.visualstudio.com/content/problem/508507/azure-devops-rest-api-returns-commits-in-incorrect.html
+            azure_devops_commits="$("$srcdir/azure_devops_api.sh" "/{user}/{project}/_apis/git/repositories/$repo/commits?api-version=6.1-preview.1&searchCriteria.\$top=1&searchCriteria.compareVersion.version=master&searchCriteria.compareVersion.versionType=branch"  2>/dev/null || :)"
+            azure_devops_commits="$("$srcdir/azure_devops_api.sh" "/{user}/{project}/_apis/git/repositories/$repo/commits?\$top=1&branch=master"  2>/dev/null || :)"
+            if [ $compare_by_date = 1 ]; then
+                azure_devops_master_ref="$(jq -r '.value[0].committer.date' <<< "$azure_devops_commits")"
+                if [ -n "$azure_devops_master_ref" ] && [ "$azure_devops_master_ref" != null ]; then
+                    azure_devops_master_ref="$(date --utc -d "$azure_devops_master_ref" '+%FT%TZ')"
+                fi
+            else
+                azure_devops_master_ref="$(jq -r '.value[0].commitId' <<< "$azure_devops_commits")"
+                if [ $long_hashrefs = 0 ]; then
+                    azure_devops_master_ref="${azure_devops_master_ref:0:8}"
+                fi
+            fi
+            azure_devops_master_ref="${azure_devops_master_ref:-None}"
+            line+="$(printf "Azure_DevOps: %-${#github_master_ref}s    " "$azure_devops_master_ref")"
+            if [ "$azure_devops_master_ref" != "$github_master_ref" ]; then
+                in_sync=False
+            fi
+        fi
+        printf '%sIn-Sync: %s\n' "$line" "$in_sync"
     done
 }
 
