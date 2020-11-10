@@ -79,8 +79,10 @@ ${0##*/} /user | jq .
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
 
-Placeholders replaced by \$BITBUCKET_USERNAME / \$BITBUCKET_USER:             :owner, :user, :username, <user>, <username>
-Placeholders replaced by the local repo name of the current directory:      :repo, <repo>
+Placeholders are replaced if the following information is available in environment variables or can be inferred from the local git repo remote urls. The tokens for replacement can be given in the form {token}, <token>, :token
+
+\$BITBUCKET_USERNAME / \$BITBUCKET_USER:             owner, username, user
+the local repo name of the current directory:      repo
 "
 
 # used by usage() in lib/utils.sh
@@ -128,13 +130,16 @@ shift
 repo=$(git_repo 2>/dev/null | sed 's/.*\///' || :)
 
 if [ -n "$user" ]; then
-    url_path="${url_path/:username/$user}"
-    url_path="${url_path/:user/$user}"
+    url_path="${url_path/\{username\}/$user}"
     url_path="${url_path/<username>/$user}"
+    url_path="${url_path/:username/$user}"
+    url_path="${url_path/\{user\}/$user}"
     url_path="${url_path/<user>/$user}"
+    url_path="${url_path/:user/$user}"
 fi
-url_path="${url_path/:repo/$repo}"
+url_path="${url_path/\{repo\}/$repo}"
 url_path="${url_path/<repo>/$repo}"
+url_path="${url_path/:repo/$repo}"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
