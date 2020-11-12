@@ -33,6 +33,8 @@ If a container has multiple tags (eg. latest, v1, hashref), you can supply '<ima
 
 Each tag for the given <image>:<tag> is output on a separate line for easy further piping and filtering, including the originally supplied tag
 
+If no tag is given, assumes 'latest'
+
 If the image isn't found in GCR, will return nothing and no error code since this is the default GCloud SDK behaviour
 
 Requires GCloud SDK to be installed and configured
@@ -40,7 +42,7 @@ Requires GCloud SDK to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[gcr.io/]<project_id>/<image>:<tag>"
+usage_args="[gcr.io/]<project_id>/<image>[:<tag>]"
 
 help_usage "$@"
 
@@ -54,12 +56,15 @@ fi
 
 # $gcr_image_tag_regex is defined in lib/gcp.sh
 # shellcheck disable=SC2154
-if ! [[ "$image_tag" =~ $gcr_image_tag_regex ]]; then
-    usage "unrecognized GCR image name - should be in a format matching this regex: $gcr_image_tag_regex"
+if ! [[ "$image_tag" =~ $gcr_image_regex|$gcr_image_tag_regex ]]; then
+    usage "unrecognized GCR image name - should be in a format matching this regex: $gcr_image_regex or $gcr_image_tag_regex"
 fi
 
 image="${image_tag%%:*}"
 tag="${image_tag##*:}"
+if [ -z "$tag" ] || [ "$tag" = "$image" ]; then
+    tag="latest"
+fi
 
 gcloud container images list-tags "$image" --format='csv[no-heading,delimiter="\n"](tags[])' --filter="tags=$tag" # |
 #while read -r tag; do
