@@ -37,7 +37,7 @@ Instead you can first pipe it through this script to precreate the namespaces so
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<file.yaml> <file2.yaml>]"
 
 help_usage "$@"
 
@@ -51,4 +51,4 @@ while read -r namespace; do
         kubectl create namespace "$namespace"
     fi
     echo
-done < <(awk '/namespace:/{print $2}' | sort -u)
+done < <(awk '/namespace:/{print $2}' "$@" | sort -u)
