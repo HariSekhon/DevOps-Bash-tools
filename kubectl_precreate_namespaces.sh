@@ -31,6 +31,8 @@ This is needed because on blank installs doing something like
 fails with an error like:
 
     Error from server (NotFound): namespaces \"blah\" not found
+
+Instead you can first pipe it through this script to precreate the namespaces so the kubectl diff succeeds
 "
 
 # used by usage() in lib/utils.sh
