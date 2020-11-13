@@ -29,7 +29,7 @@ matches the current kubectl context's cluster and which do not have the label ku
 these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
 
 For each secret, checks for a label called 'kubernetes-namespace', and if set, then creates the secret in that namespace,
-otherwise loads to the current namespace
+otherwise loads to the current namespace. This can even be a comma separated list of namespace and will create the secret in each one
 
 Remember to execute this from the right GCP project configured to get the right secrets
 and with the right Kubernetes context selected to load to the right cluster
@@ -75,19 +75,22 @@ get_latest_secret_version(){
 load_secret(){
     local secret="$1"
     local namespace
-    namespace="$(gcloud secrets describe "$secret" --format='get(labels.kubernetes-namespace)')"
-    namespace="${namespace:-$current_namespace}"
-    if kubectl get secret "$secret" -n "$namespace" &>/dev/null; then
-        timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
-        return
-    fi
-    latest_version="$(get_latest_secret_version "$secret")"
-    value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
-    timestamp "creating kubernetes secret '$secret' in namespace '$namespace'"
-    # kubectl create secret automatically base64 encodes the $value
-    # if you did this in yaml you'd have to base64 encode it yourself in the yaml
-    #         could alternatively make this --from-literal="value=$value"
-    kubectl create secret generic "$secret" --from-literal="$secret=$value" -n "$namespace"
+    namespaces="$(gcloud secrets describe "$secret" --format='get(labels.kubernetes-namespace)')"
+    namespaces="${namespaces:-$current_namespace}"
+    while read -r namespace; do
+        [ -z "$namespace" ] && continue
+        if kubectl get secret "$secret" -n "$namespace" &>/dev/null; then
+            timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
+            return
+        fi
+        latest_version="$(get_latest_secret_version "$secret")"
+        value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
+        timestamp "creating kubernetes secret '$secret' in namespace '$namespace'"
+        # kubectl create secret automatically base64 encodes the $value
+        # if you did this in yaml you'd have to base64 encode it yourself in the yaml
+        #         could alternatively make this --from-literal="value=$value"
+        kubectl create secret generic "$secret" --from-literal="$secret=$value" -n "$namespace"
+    done < <(tr ',' '\n' <<< "$namespaces")
 }
 
 if [ $# -gt 0 ]; then
