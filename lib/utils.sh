@@ -805,7 +805,11 @@ retry(){
             timestamp "FAILED: giving up after $max_secs secs"
             return 1
         fi
-        sleep "$retry_interval"
+        if [ -n "${RETRY_EXPONENTIAL_BACKOFF:-}" ]; then
+            sleep "$(( retry_interval * (2 ** try_number) ))"
+        else
+            sleep "$retry_interval"
+        fi
     done
 }
 
