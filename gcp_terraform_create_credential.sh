@@ -48,7 +48,9 @@ name="${1:-$USER-terraform}"
 
 project="${3:-$(gcloud config list --format='get(core.project)')}"
 
+# XXX: fix the GCP project for the duration of the script for consistency
 not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project value not set"
+export CLOUDSDK_CORE_PROJECT="$project"
 
 keyfile="${2:-$HOME/.gcloud/$name-$project-credential.json}"
 
