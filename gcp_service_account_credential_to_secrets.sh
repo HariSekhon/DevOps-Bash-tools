@@ -61,7 +61,7 @@ trap_cmd "rm -f '$keyfile'"
 service_account="$name@$project.iam.gserviceaccount.com"
 
 if gcloud iam service-accounts list --format='get(email)' | grep -Fxq "$service_account"; then
-    echo "Service account '$service_account' already exists" >&2
+    timestamp "Service account '$service_account' already exists"
 else
     timestamp "Creating service account '$name' in project '$project'"
     gcloud iam service-accounts create "$name" --description="$description"
@@ -69,7 +69,7 @@ fi
 
 secret_name="${name}-credential"
 if gcloud secrets list --format='value(name)' | grep -Fxq "$secret_name"; then
-    echo "GCP Secret '$secret_name' already exists" >&2
+    timestamp "GCP Secret '$secret_name' already exists"
 else
     timestamp "Exporting service account '$name' credential key to GCP Secret '$secret_name' in project '$project'"
     gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json"
