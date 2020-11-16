@@ -69,7 +69,7 @@ if kubectl get secret "$kubernetes_secret" -n "$namespace" &>/dev/null; then
 fi
 
 # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
-kubectl_cmd="kubectl create secret generic '$kubernetes_secret' "
+kubectl_cmd="kubectl create secret generic '$kubernetes_secret' -n '$namespace'"
 
 for gcp_secret; do
     latest_secret_version="$(get_latest_version "$gcp_secret")"
