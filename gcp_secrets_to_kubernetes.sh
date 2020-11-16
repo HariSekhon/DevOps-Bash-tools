@@ -59,7 +59,7 @@ mkdir -p "$(dirname "$kubeconfig")"
 cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
 export KUBECONFIG="$kubeconfig"
 
-# XXX: fix the project for consistency
+# XXX: fix the GCP project for the duration of the script for consistency
 project="$(gcloud config list --format='get(core.project)')"
 not_blank "$project" || die "ERROR: GCloud SDK core.project value not set"
 export CLOUDSDK_CORE_PROJECT="$project"
