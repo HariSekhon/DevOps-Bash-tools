@@ -53,11 +53,16 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-# fix kube cluster to protect consistency against k8s race conditions
+# XXX: fix kube cluster to protect consistency against k8s race conditions
 kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
 mkdir -p "$(dirname "$kubeconfig")"
 cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
 export KUBECONFIG="$kubeconfig"
+
+# XXX: fix the project for consistency
+project="$(gcloud config list --format='get(core.project)')"
+not_blank "$project" || die "ERROR: GCloud SDK core.project value not set"
+export CLOUDSDK_CORE_PROJECT="$project"
 
 # there's no -o jsonpath / -o namespace / -o cluster as of Kubernetes 1.15 so have to just print columns
 kubectl_context="$(kubectl config get-contexts "$(kubectl config current-context)" --no-headers)"
