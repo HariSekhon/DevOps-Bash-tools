@@ -483,11 +483,11 @@ endfunction
 function! WriteHelp()
     :w
     if &filetype == 'go'
-        :! go run "%" --help 2>&1 | less
+        :! go run "%:p" --help 2>&1 | less
     elseif expand('%:t') == 'Makefile'
         :call Make('help')
     else
-        :! "%" --help 2>&1 | less
+        :! "%:p" --help 2>&1 | less
     endif
 endfunction
 
