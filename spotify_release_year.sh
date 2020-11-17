@@ -27,23 +27,30 @@ Finds the original release year of a given track or album via a search query of 
 Especially useful to find the original dates of songs that get re-released in 'Greatest Hits' type albums
 (eg. use in script to find songs from X decade regardless of which copy of the songs are in your playlist)
 
-The search must be as specific as possible for accurate results and should use the artist:<name> specifier, eg.
+The search must be as specific as possible for accurate results and should include both the artist name as well as the track/album,
+preferably with the artist specified as artist:<name> eg.
 
     <track_name> artist:<artist_name>
 
     <album_name> artist:<artist_name>
 
-Example:
+Examples:
 
-    ${0##*/} artist:the beloved track:sweet harmony
+    Tracks:
 
-    ${0##*/} sweet harmony artist:the beloved
+        ${0##*/} sweet harmony artist:the beloved
 
-    SPOTIFY_SEARCH_TYPE=album ${0##*/} happiness artist:the beloved
+        ${0##*/} artist:the beloved track:sweet harmony
 
-    SPOTIFY_SEARCH_TYPE=album ${0##*/} artist:the beloved album:happiness
+        ${0##*/} kylie on a night like this
 
-For more search details see spotify_search_json.sh
+    Albums:
+
+        SPOTIFY_SEARCH_TYPE=album ${0##*/} happiness artist:the beloved
+
+        SPOTIFY_SEARCH_TYPE=album ${0##*/} artist:the beloved album:happiness
+
+For more details on search query syntax see spotify_search.sh
 "
 
 # used by usage() in lib/utils.sh
