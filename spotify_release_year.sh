@@ -64,6 +64,10 @@ elif [ "${SPOTIFY_SEARCH_TYPE:-}" = album ]; then
 else
     die "unsupported SPOTIFY_SEARCH_TYPE='$SPOTIFY_SEARCH_TYPE' - must be either track or album"
 fi |
+# lexical oldest of YYYY or YYYY-mm-dd will be first
 sort |
 head -n1 |
-sed 's/-.*$//'
+# a few release dates have higher granularity, strip everything after the year YYYY-mm-dd
+sed 's/-.*$//' |
+# this is only here to make the exit code error 1 if nothing is found
+grep --color=no .
