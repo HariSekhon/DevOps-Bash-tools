@@ -275,6 +275,8 @@
 # $HOME/.serverless installation
 .serverless/bin/
 .sh_history
+# contains client id and secret for Shpotify
+.shpotify.cfg
 .Skype
 .snowsql
 # Snowflake password stored in plaintext in here
