@@ -185,6 +185,7 @@ screen  # get newer version for -Q switch, will use different sockets directory
 s3cmd
 scalastyle
 skopeo
+shpotify
 snappy
 sonar-completion
 sonar-scanner
