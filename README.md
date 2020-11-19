@@ -655,6 +655,7 @@ etc.
 - `spotify_delete_duplicates_in_playlist.sh` - deletes duplicate Spotify URI tracks (identical) in a given playlist using `spotify_duplicate_uri_in_playlist.sh` and `spotify_delete_from_playlist.sh`
 - `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
 - `spotify_delete_any_duplicates_in_playlist.sh` - calls both of the above scripts to first get rid of duplicate URIs and then remove any other duplicates by track name matches
+- `spotify_playlist_tracks_uri_in_year.sh` - finds track URIs in a playlist where their original release date is in a given year or decade (by regex match)
 - `spotify_top_artists*.sh` - lists your top artists in URI or human readable format
 - `spotify_top_tracks*.sh` - lists top tracks in URI or human readable format
 - `spotify_liked_tracks*.sh` - lists your `Liked Songs` in URI or human readable formats
