@@ -34,8 +34,9 @@ https://developer.spotify.com/documentation/web-api/reference/search/search/
 
 Example:
 
-./${0##*/} artist:foo fighters track:arlandria
+    ./${0##*/} artist:foo fighters track:arlandria
 
+    ./${0##*/} artist:\"Foo Fighters\" track:arlandria
 
 API JSON is returned, used by adjacent spotify_search*.sh scripts
 
@@ -74,7 +75,18 @@ min_args 1 "$@"
 
 # this substitution doesn't work on $* so have to do it in 2 steps
 search_terms="$*"
-search_terms="${search_terms// /+}"
+shopt -s extglob
+# replace multiple spaces with a single plus, requires extglob
+search_terms="${search_terms//+([[:space:]])/%20}"
+
+# quotes break search unless urlencoded - but url encoding the entire search string using urlencode.sh breaks everything so just replace the quotes
+search_terms="${search_terms//\"/%22}"
+
+# looks like rather than URL encoding single quotes the Spotify API strips them out - replacing with urlencoded fails to match, but if you strip them out or just leave them in for the Spotify API itself to strip out then it returns the correct results
+#search_terms="${search_terms//\'/%27}"
+
+# brackets also work in searches - don't get complicated here
+#search_terms="${search_terms//[^[:alnum:][:space:]:%-]/}"
 
 spotify_token
 
