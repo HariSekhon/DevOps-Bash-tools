@@ -58,6 +58,8 @@ Caveat: this is only as accurate as Spotify's data which is usually fairly good,
     artist:\"Carl Douglas\"  track:\"Kung Fu Fighting\"
 
 Which I know is a 70s song but Spotify only has it on compilations dated 2001 onwards, leading to an incorrect result in that rare case.
+
+In a rare case you may need to tune the number of results from which the original date is inferred to more than 10 using the SPOTIFY_SEARCH_LIMIT environment variable but in my testing the first 10 results have always contained the original version from which to infer the oldest date,
 "
 
 # used by usage() in lib/utils.sh
@@ -68,7 +70,7 @@ help_usage "$@"
 
 min_args 2 "$@"
 
-export SPOTIFY_SEARCH_LIMIT=10
+export SPOTIFY_SEARCH_LIMIT="${SPOTIFY_SEARCH_LIMIT:-10}"
 
 "$srcdir/spotify_search_json.sh" "$@" |
 if [ "${SPOTIFY_SEARCH_TYPE:-track}" = track ]; then
