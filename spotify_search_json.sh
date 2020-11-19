@@ -93,7 +93,7 @@ search_terms="${search_terms//\"/%22}"
 
 # looks like rather than URL encoding single quotes the Spotify API strips them out - replacing with urlencoded fails to match, but if you strip them out or just leave them in for the Spotify API itself to strip out then it returns the correct results
 #search_terms="${search_terms//\'/%27}"
-search_terms="${search_terms//\'/}"
+#search_terms="${search_terms//\'/}"
 
 # brackets also work in searches - don't get complicated here
 #search_terms="${search_terms//[^[:alnum:][:space:]:%-]/}"
@@ -114,6 +114,11 @@ else
 fi
 
 offset="${SPOTIFY_SEARCH_OFFSET-0}"
+
+# causes errors if trying to query more than the max limit of 50
+if [ "$limit" -gt 50 ]; then
+    limit=50
+fi
 
 url_path="/v1/search?type=$search_type&offset=$offset&limit=$limit"
 
