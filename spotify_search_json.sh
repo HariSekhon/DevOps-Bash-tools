@@ -81,7 +81,8 @@ search_terms="${search_terms//+([[:space:]])/%20}"
 
 # quotes break search unless urlencoded - but url encoding the entire search string using urlencode.sh breaks everything so just replace the quotes
 # XXX: also quoting only seems to work for simple queries, not highly specific ones like artist:blah track:blah which don't seem to work whether you try artist:"blah" track:"blah" or "artist:blah track:blah" - so best to leave them off
-#search_terms="${search_terms//\"/%22}"
+# XXX: this escaping is necessary for when tracks have quotes inside their names - ie. part of the data, not part of the search tricks
+search_terms="${search_terms//\"/%22}"
 
 # looks like rather than URL encoding single quotes the Spotify API strips them out - replacing with urlencoded fails to match, but if you strip them out or just leave them in for the Spotify API itself to strip out then it returns the correct results
 #search_terms="${search_terms//\'/%27}"
