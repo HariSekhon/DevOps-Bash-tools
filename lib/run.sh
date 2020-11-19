@@ -30,7 +30,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
  . "$srcdir/../.bash.d/functions.sh"
 
-trap_cmd 'echo; echo "Exit Code: $?"'
+trap_cmd 'exitcode=$?; echo; echo "Exit Code: $exitcode"'
 
 if [ $# -eq 0 ]; then
     echo "usage: ${0##*/} <filename>"
