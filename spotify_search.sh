@@ -44,8 +44,6 @@ Find top 5 matching artists with 'foo' in the name:
     SPOTIFY_SEARCH_TYPE=artist SPOTIFY_SEARCH_LIMIT=5 ${0##*/} foo
 
 
-Uses spotify_search_json.sh which supports the following environment variable options:
-
 Environment variable options:
 
 \$SPOTIFY_SEARCH_TYPE  = track # default
@@ -55,6 +53,9 @@ Environment variable options:
 \$SPOTIFY_SEARCH_LIMIT = 1 # default
 
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
+
+
+Uses spotify_search_json.sh - see there for more searching defails.
 
 
 $usage_auth_help
