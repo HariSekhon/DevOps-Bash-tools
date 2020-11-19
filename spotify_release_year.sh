@@ -50,7 +50,7 @@ Examples:
 
         SPOTIFY_SEARCH_TYPE=album ${0##*/} artist:the beloved album:happiness
 
-For more details on search query syntax see spotify_search.sh
+For more details on search query syntax see spotify_search_json.sh
 
 
 Caveat: this is only as accurate as Spotify's data which is usually fairly good, but if Spotify has only managed to license a song via a later compilation album then we can only report the earliest release date which may not be the real original release for a classic. An example of this is
