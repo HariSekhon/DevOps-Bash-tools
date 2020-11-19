@@ -51,6 +51,13 @@ Examples:
         SPOTIFY_SEARCH_TYPE=album ${0##*/} artist:the beloved album:happiness
 
 For more details on search query syntax see spotify_search.sh
+
+
+Caveat: this is only as accurate as Spotify's data which is usually fairly good, but if Spotify has only managed to license a song via a later compilation album then we can only report the earliest release date which may not be the real original release for a classic. An example of this is
+
+    artist:\"Carl Douglas\"  track:\"Kung Fu Fighting\"
+
+Which I know is a 70s song but Spotify only has it on compilations dated 2001 onwards, leading to an incorrect result in that rare case.
 "
 
 # used by usage() in lib/utils.sh
