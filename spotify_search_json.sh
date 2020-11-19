@@ -52,6 +52,13 @@ Environment variable options:
 \$SPOTIFY_SEARCH_OFFSET = 0 # default
 
 
+Caveat: the Spotify API returns unicode characters eg.
+
+    Blue Öyster Cult - (Don't Fear) The Reaper
+
+but these same unicode characters when fed back in to the Spotify Search API find no entries and only work if you were feed in simple characters ie. convert the Öyster to Oyster or url encode them before passing them to this script.
+
+
 $usage_auth_help
 "
 
