@@ -22,10 +22,15 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
+ . "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC1090
  . "$srcdir/../.bash.d/aliases.sh"
 
 # shellcheck disable=SC1090
  . "$srcdir/../.bash.d/functions.sh"
+
+trap_cmd 'echo; echo "Exit Code: $?"'
 
 if [ $# -eq 0 ]; then
     echo "usage: ${0##*/} <filename>"
