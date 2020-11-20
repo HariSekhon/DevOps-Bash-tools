@@ -96,7 +96,14 @@ else
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
     echo -n "=> Description "
-    "$srcdir/spotify_playlist_json.sh" "$playlist_id" | jq -r '.description' > "$backup_dir/$filename.description"
+    description_file="$backup_dir/$filename.description"
+    "$srcdir/spotify_playlist_json.sh" "$playlist_id" | jq -r '.description' | tr -d '\n' > "$description_file"
+    if [ -f "$description_file" ]; then
+        # if file is blank then no description is set, remove the useless file
+        if ! [ -s "$description_file" ]; then
+            rm -f "$description_file"
+        fi
+    fi
 
     echo -n "OK => URIs "
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
