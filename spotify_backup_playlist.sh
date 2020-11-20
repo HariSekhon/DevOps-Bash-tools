@@ -95,7 +95,10 @@ else
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
-    echo -n "=> URIs "
+    echo -n "=> Description "
+    "$srcdir/spotify_playlist_json.sh" "$playlist_id" | jq -r '.description' > "$backup_dir/$filename.description"
+
+    echo -n "OK => URIs "
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
 
     echo -n 'OK => Tracks '
