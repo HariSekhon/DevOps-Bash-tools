@@ -143,7 +143,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
   - `lib/` - scripting and CI library
 - [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 100+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) + [CloudTrail](https://aws.amazon.com/cloudtrail/), [Google BigQuery](https://cloud.google.com/bigquery)
 - [Templates](https://github.com/HariSekhon/Templates) - templates for common programming languages and build configs
-- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML configs for most common scenarios, including production best practices and tricks
+- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
 See Also: [similar DevOps repos](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#see-also) in other languages
 
@@ -201,7 +201,7 @@ make
 - [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
 - [Data Format Conversion & Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-format-conversion--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
-- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML configs for most common scenarios, including production best practices and tricks
+- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
 #### Linux & Mac:
 
