@@ -334,6 +334,8 @@ abs-guide.pdf
 android-sdks/
 Applications/
 AT.postflight.*
+# contains OAuth token
+auth.json
 bin/altfirewalls
 bin/altnames
 bin/contrib/*
