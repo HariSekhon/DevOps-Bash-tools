@@ -17,7 +17,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-gcp_info_formatting_help="Prints fancy boxes around GCP info in interactive mode. Skips formatting if the output is sent through a pipe to other commands, redirected to file, or \$NO_FORMATTING=1 is set in environment, to allow for easier parsing / grepping"
+gcp_info_formatting_help="In interactive mode, prints fancy boxes around GCP info to be easier on the eye. In non-interactive mode it skips formatting so it's easier to parse or process with other commands like grep / awk etc. Non-interactive mode happens automatically when the output is piped or redirected to a file or another command, or when \$NO_FORMATTING=1 is set in environment"
 
 if is_piped || [ -n "${NO_FORMATTING:-}" ]; then
     gcloud_formatting=''
