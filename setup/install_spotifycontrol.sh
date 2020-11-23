@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# Update: using Shpotify now which is installed via adjacent brew packages list
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
