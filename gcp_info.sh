@@ -112,7 +112,7 @@ This is useful in so many ways. Aside from a general inventory / overview for a 
 
     ${0##*/} | tee output.txt && grep -E '[[:digit:]]+(\.[[:digit:]]+){3}' output.txt
 
-Can optionally specify a project id to switch to and list info for (will switch back to original project on any exit except kill -9)
+Can optionally specify a project id using the first argument
 
 $gcp_info_formatting_help
 "
@@ -124,6 +124,12 @@ usage_args="[<project_id>]"
 help_usage "$@"
 
 check_bin gcloud
+
+if [ $# -gt 0 ]; then
+    project_id="$1"
+    shift || :
+    export CLOUDSDK_CORE_PROJECT="$project_id"
+fi
 
 
 # GCloud SDK tools versions
