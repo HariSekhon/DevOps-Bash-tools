@@ -108,9 +108,11 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
       - Container Registry Images
       - Deployment Manager
 
-This is useful in so many ways. Aside from a general inventory / overview for a new client, you might be interested in tracking down a specific IP address by outputting this to a file and then running grep on it to find all the IP
+This is useful in so many ways. Aside from a general inventory / overview for a new client, you might be interested in tracking down a specific IP address by outputting this to a file and then running grepping for the IPs:
 
     ${0##*/} | tee output.txt && grep -E '[[:digit:]]+(\.[[:digit:]]+){3}' output.txt
+
+You should only use these gcp_info*.sh scripts in non-interactive pipes once you have tested them locally on the command line because some services may prompt you for choices, eg. Cloud Run, which you should save to your GCloud SDK project settings before non-interactively
 
 Can optionally specify a project id using the first argument
 
