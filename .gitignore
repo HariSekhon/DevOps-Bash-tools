@@ -44,6 +44,7 @@
 *.gz
 *.img
 *.jar
+*.jks
 *.jpeg
 *.jpg
 *.kdb
@@ -58,6 +59,7 @@
 *.o
 *.orig
 *.out
+*.p12
 *.part
 *.pyc
 *.pyo
