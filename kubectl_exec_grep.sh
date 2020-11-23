@@ -55,7 +55,7 @@ There is similar stuff in the .bash.d/kubernetes.sh interactive library
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<pod_regex>] [<container_regex>] [<pod_filters>]"
+usage_args="<pod_name_regex> [<container_name_regex>] [<pod_filters>]"
 
 help_usage "$@"
 
