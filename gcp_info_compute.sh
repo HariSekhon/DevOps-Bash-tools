@@ -45,7 +45,7 @@ Lists in this order:
 
 $gcp_info_noninteractive_help
 
-Can optionally specify a project id using the first argument
+Can optionally specify a project id using the first argument, otherwise uses currently configured project
 
 $gcp_info_formatting_help
 Does not apply to Kubernetes info

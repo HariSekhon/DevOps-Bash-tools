@@ -27,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists GCP Cloud SQL instances and the status of backups for each SQL instance in the current GCP Project
 
+Can optionally specify a project id using the first argument, otherwise uses currently configured project
+
 $gcp_info_formatting_help
 "
 

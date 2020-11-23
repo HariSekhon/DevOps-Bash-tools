@@ -32,6 +32,8 @@ Lists in this order:
     - IAM Service Accounts
     - Secrets Manager secrets
 
+Can optionally specify a project id using the first argument, otherwise uses currently configured project
+
 $gcp_info_formatting_help
 "
 

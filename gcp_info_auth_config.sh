@@ -27,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists GCP Auth, Organizations and Config
 
+Can optionally specify a project id using the first argument, otherwise uses currently configured project
+
 $gcp_info_formatting_help
 "
 

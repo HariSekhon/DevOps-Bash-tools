@@ -40,6 +40,8 @@ Environment variables of regions to shortcut scanning all regions, comma or spac
 GCE_REGIONS - for Dataproc clusters and jobs
 IOT_REGIONS - for Cloud IOT registries
 
+Can optionally specify a project id using the first argument, otherwise uses currently configured project
+
 $gcp_info_formatting_help
 "
 

@@ -29,6 +29,8 @@ Lists GCP Projects and checks project is configured
 
 Can optionally specify a project id to switch to (will switch back to original project on any exit except kill -9)
 
+Can optionally specify a project id using the first argument, otherwise uses currently configured project
+
 $gcp_info_formatting_help
 "
 
