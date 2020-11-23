@@ -17,6 +17,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+gcp_info_noninteractive_help="You should only this script non-interactively / in pipes once you have tested it locally on the command line because some services may prompt you for choices, eg. Cloud Run, which you should save to your GCloud SDK config settings first"
+
 gcp_info_formatting_help="In interactive mode, prints fancy boxes around GCP info to be easier on the eye. In non-interactive mode it skips formatting so it's easier to parse or process with other commands like grep / awk etc. Non-interactive mode happens automatically when the output is piped or redirected to a file or another command, or when \$NO_FORMATTING=1 is set in environment"
 
 if is_piped || [ -n "${NO_FORMATTING:-}" ]; then
