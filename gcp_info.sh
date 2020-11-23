@@ -112,7 +112,7 @@ This is useful in so many ways. Aside from a general inventory / overview for a 
 
     ${0##*/} | tee output.txt && grep -E '[[:digit:]]+(\.[[:digit:]]+){3}' output.txt
 
-You should only use these gcp_info*.sh scripts in non-interactive pipes once you have tested them locally on the command line because some services may prompt you for choices, eg. Cloud Run, which you should save to your GCloud SDK project settings before non-interactively
+You should only use these gcp_info*.sh scripts non-interactively / in pipes once you have tested them locally on the command line because some services may prompt you for choices, eg. Cloud Run, which you should save to your GCloud SDK project settings before non-interactively
 
 Can optionally specify a project id using the first argument
 
