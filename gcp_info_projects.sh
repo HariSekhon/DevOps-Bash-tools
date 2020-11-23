@@ -41,17 +41,7 @@ help_usage "$@"
 if [ $# -gt 0 ]; then
     project_id="$1"
     shift || :
-    current_project="$(gcloud config list --format="value(core.project)")"
-    if [ -n "$current_project" ]; then
-        # want interpolation now not at exit
-        # shellcheck disable=SC2064
-        trap "gcloud config set project '$current_project'" EXIT
-    else
-        trap "gcloud config unset project" EXIT
-    fi
-    gcloud config set project "$project_id"
-    echo
-    echo
+    export CLOUDSDK_CORE_PROJECT="$project_id"
 fi
 
 
