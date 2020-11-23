@@ -46,9 +46,17 @@ Does not apply to Kubernetes info
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<project_id>]"
 
 help_usage "$@"
+
+check_bin gcloud
+
+if [ $# -gt 0 ]; then
+    project_id="$1"
+    shift || :
+    export CLOUDSDK_CORE_PROJECT="$project_id"
+fi
 
 
 # shellcheck disable=SC1090
