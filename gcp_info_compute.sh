@@ -43,6 +43,10 @@ Lists in this order:
       - service accounts, resource quotas, network policies, pod security policies
       - pods  # might be too volumous if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments
 
+$gcp_info_noninteractive_help
+
+Can optionally specify a project id using the first argument
+
 $gcp_info_formatting_help
 Does not apply to Kubernetes info
 "
