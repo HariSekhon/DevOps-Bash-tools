@@ -108,6 +108,10 @@ Lists in this order (categories broadly reflect the GCP Console grouping of serv
       - Container Registry Images
       - Deployment Manager
 
+This is useful in so many ways. Aside from a general inventory / overview for a new client, you might be interested in tracking down a specific IP address by outputting this to a file and then running grep on it to find all the IP
+
+    ${0##*/} | tee output.txt && grep -E '[[:digit:]]+(\.[[:digit:]]+){3}' output.txt
+
 Can optionally specify a project id to switch to and list info for (will switch back to original project on any exit except kill -9)
 
 $gcp_info_formatting_help
