@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Start a quick local Concourse CI
+# Start a quick local GoCD CI cluster
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
