@@ -72,8 +72,13 @@ fi
 when_url_content "$url" '(?i:gocd)'
 echo
 
+SECONDS=0
+max_secs=300
 while curl -sS "$server" | grep -q 'GoCD server is starting'; do
     tstamp 'waiting for server to finish starting up and remove message "GoCD server is starting"'
+    if [ $SECONDS -gt $max_secs ]; then
+        die "GoCD server failed to start in $max_secs seconds"
+    fi
     sleep 3
 done
 echo
