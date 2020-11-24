@@ -131,7 +131,7 @@ while read -r hostname uuid; do
 done
 
 echo
-echo "GoCD URL:  $url"
+echo "GoCD Server URL:  $url"
 echo
 if is_mac; then
     open "$url"
