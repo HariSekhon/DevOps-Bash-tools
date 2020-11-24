@@ -159,6 +159,8 @@
 .fluxbox/startup.log
 # contains Concourse bearer auth token
 .flyrc
+# contains GCP credentials for Ruby Fog library (like Boto)
+.fog
 .fontconfig
 .fseventsd
 .gaim/accels
