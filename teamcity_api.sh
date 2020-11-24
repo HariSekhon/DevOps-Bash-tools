@@ -66,66 +66,66 @@ See also:
     teamcity_agents.sh
 
 
-Explore API:
+# Explore API:
 
-${0##*/} /server
-
-
-Explore supported requests and parameters:
-
-${0##*/} /application.wadl
+    ${0##*/} /server
 
 
-Swagger endpoint:
+# Explore supported requests and parameters:
 
-${0##*/} /swagger.json
-
-
-Show Teamcity agents:
-
-${0##*/} /agents
+    ${0##*/} /application.wadl
 
 
-Get an agent's details:
+# Swagger endpoint:
 
-${0##*/} /agents/id:3
-
-
-Get list of builds:
-
-${0##*/} /builds
+    ${0##*/} /swagger.json
 
 
-Get list of builds filtered by successful status with a specific tag:
+# Show Teamcity agents:
 
-${0##*/} /builds?locator=status:SUCCESS,tag=dev
-
-
-Get list of projects:
-
-${0##*/} /projects
+    ${0##*/} /agents
 
 
-Get details on a specific project:
+# Get an agent's details:
 
-${0##*/} /projects/<id>
-or
-${0##*/} /projects/id:<id>
+    ${0##*/} /agents/id:3
 
 
-Get list of revision control repositories roots:
+# Get list of builds:
 
-${0##*/} /vcs-roots
-
-
-Get details on one specific revision control repository:
-
-${0##*/} /vcs-roots/id:<id>
+    ${0##*/} /builds
 
 
-Get list of cloud profiles (kubernetes is configured here):
+# Get list of builds filtered by successful status with a specific tag:
 
-${0##*/} /cloud/profiles
+    ${0##*/} /builds?locator=status:SUCCESS,tag=dev
+
+
+# Get list of projects:
+
+    ${0##*/} /projects
+
+
+# Get details on a specific project:
+
+    ${0##*/} /projects/<id>
+# or
+    ${0##*/} /projects/id:<id>
+
+
+# Get list of revision control repositories roots:
+
+    ${0##*/} /vcs-roots
+
+
+# Get details on one specific revision control repository:
+
+    ${0##*/} /vcs-roots/id:<id>
+
+
+# Get list of cloud profiles (kubernetes is configured here):
+
+    ${0##*/} /cloud/profiles
 
 "
 
