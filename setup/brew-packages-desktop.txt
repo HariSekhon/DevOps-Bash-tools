@@ -80,6 +80,7 @@ fswatch
 fzf
 gcc
 gem-completion
+gh  # GitHub CLI
 #git  # comes with macOS XCode
 #gnu-sed  # in brew-packages.txt
 #gnupg
