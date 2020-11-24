@@ -106,7 +106,7 @@ jenkins-x/jx/jx
 #jq  # in brew-packages.txt
 jsonlint
 jython
-#kompose  # install binary to ~/bin via setup/ scripts instead
+kompose
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
 kubernetes-helm
