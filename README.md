@@ -530,6 +530,11 @@ etc.
 - `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/), launches in docker, configures pipeline from `$PWD/.concourse.yml`, triggers build, tails results in terminal, prints recent build statuses at end. Call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
   - `fly.sh` - shortens `fly` command to not have to specify target all the time
 - `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/), launches in docker, (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`), detects and enables agent(s) to start building. Call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
+- `teamcity_*.sh` - [Teamcity CI](https://www.jetbrains.com/teamcity/) API scripts:
+  - `teamcity.sh` - boots TeamCity CI cluster in docker, just click proceed and accept the EULA and it does the rest, it even creates an admin user and an API token for you
+  - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
+  - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
+  - `teamcity_builds.sh` - lists the last 100 Teamcity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
@@ -572,10 +577,6 @@ etc.
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
 - `shippable_api.sh` - queries [Shippable](https://www.shippable.com/)'s API with authentication
 - `wercker_app_api.sh` - queries [Wercker](https://app.wercker.com/)'s Applications API with authentication
-- `teamcity_*.sh` - [Teamcity CI](https://www.jetbrains.com/teamcity/) API scripts:
-  - `teamcity_api.sh` - queries Teamcity's API, auto-handling authentication and other quirks of the API
-  - `teamcity_agents.sh` - lists Teamcity agents, their connected state, authorized state, whether enabled and up to date
-  - `teamcity_builds.sh` - lists the last 100 Teamcity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
 
 #### Internet Services
 
