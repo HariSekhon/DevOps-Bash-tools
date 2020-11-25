@@ -24,10 +24,10 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-One-touch GoCD CI cluster with server and agent(s)
+One-touch GoCD CI cluster with server and agent(s) in Docker, and builds the current repo
 
-- boots GoCD server and agent(s) (one by default)
-- loads the config repo for the current git project
+- boots GoCD server and agent(s) (one by default) in Docker
+- loads the config repo for the current git project (setup/gocd_config_repo.json)
 - authorizes the agent(s) to begin building
 - opens the GoCD web UI (on Mac only)
 
