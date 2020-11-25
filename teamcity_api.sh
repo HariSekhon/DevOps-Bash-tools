@@ -142,8 +142,12 @@ usage_args="/path [<curl_options>]"
 # used to put this in /tmp but it is created world readable by default and when securing it there is a race condition
 # between the 2 curl and chmod lines, whereas $HOME is more likely to be read restricted
 # now additionally this is initialized with restricted permissions before it is ever used to avoid this race condition
-cookie_jar=~/".teamcity_cookie_jar_${EUID}"
-touch "$cookie_jar"
+cookie_jar=~/".teamcity_cookie_jar/.${EUID:-$UID}.$$"
+mkdir -p "${cookie_jar%/*}"  # pre-create the directory
+# XXX: this cookie jar causes 403 to API endpoints such as /agents/id:1/authorized when switching between -H 'Accept: application/json' and -H 'Accept: text/plain' as that endpoint only works with the latter but this cache breaks this
+#rm -f "$cookie_jar"
+#touch "$cookie_jar"
+: > "$cookie_jar"
 chown "$(whoami)" "$cookie_jar"
 chmod 0600 "$cookie_jar"
 
