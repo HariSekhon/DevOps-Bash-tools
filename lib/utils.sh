@@ -584,7 +584,7 @@ when_ports_available(){
         echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
         exit 1
     fi
-    # Linux nc doens't have -z switch like Mac OSX version
+    # Mac nc doesn't have -z switch like Linux GNU version and we can't rely on one being found first in $PATH
     #local nc_cmd="nc -vw $retry_interval $host <<< ''"
     #cmd=""
     #for x in $ports; do
@@ -604,7 +604,7 @@ when_ports_available(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number+=1))
             for port in $ports; do
-                if ! nc -vw "$retry_interval" "$host" "$port" <<< '' &>/dev/null; then
+                if ! nc -v -w "$retry_interval" "$host" "$port" < /dev/null &>/dev/null; then
                     timestamp "$try_number waiting for host '$host' port '$port'"
                     sleep "$retry_interval"
                     break
@@ -660,8 +660,8 @@ when_ports_down(){
         return 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
-    # Linux nc doens't have -z switch like Mac OSX version
-    local nc_cmd="nc -vw $retry_interval $host <<< ''"
+    # Mac nc doens't have -z switch like Linux GNU version and we can't rely on one being found first in $PATH
+    local nc_cmd="nc -v -w $retry_interval $host < /dev/null"
     cmd=""
     for x in $ports; do
         cmd="$cmd ! $nc_cmd $x &>/dev/null && "
