@@ -35,8 +35,7 @@ services:
     volumes:
       # for server.xml override:
       #- teamcity/conf::/opt/teamcity/conf
-      # XXX: switch this out of /tmp if you really want to keep this stuff long term eg. non-dev
-      # XXX: seems to interfere with dir creation
+      # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
       - /tmp/teamcity/server/datadir:/data/teamcity_server/datadir
       - /tmp/teamcity/server/logs:/opt/teamcity/logs
   teamcity-agent:
@@ -51,7 +50,7 @@ services:
       SERVER_URL: http://teamcity-server:8111
       # this name is used to verify and automatically authorize the agent(s) in teamcity.sh so must be set
       AGENT_NAME: agent1
-      # XXX: see if we can hardcode this in server to put here, otherwise authorize via API
+      # XXX: currently authorize via API in teamcity.sh
       #AGENT_TOKEN:
     healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:9090"]
@@ -65,8 +64,7 @@ services:
     links:
       - teamcity-server
     volumes:
-      # XXX: switch this out of /tmp if you really want to keep this stuff long term eg. non-dev, but you will have to use a location shared through Docker
-      # XXX: seems to interfere with dir creation
+      # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
       # checked out sources
       - /tmp/teamcity/agent1/work:/opt/buildagent/work
       # internal build agent caches
