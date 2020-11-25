@@ -39,6 +39,10 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
     ${0##*/} [up]
 
     ${0##*/} down
+
+See Also:
+
+    teamcity_api.sh - this script makes heavy use of it to handle API authentication and other details
 "
 
 # used by usage() in lib/utils.sh
@@ -47,9 +51,7 @@ usage_args="[up|down]"
 
 help_usage "$@"
 
-server="http://${TEAMCITY_HOST:-localhost}:${TEAMCITY_PORT:-8111}"
-url="$server"
-api="$server/app/rest"
+export TEAMCITY_URL="http://${TEAMCITY_HOST:-localhost}:${TEAMCITY_PORT:-8111}"
 
 config="$srcdir/setup/teamcity-docker-compose.yml"
 
@@ -74,26 +76,26 @@ fi
 
 # fails due to 302 redirect to http://localhost:8111/setupAdmin.html
 # / and /setupAdmin.html and /login.html
-#when_url_content "$server/login.html" '(?i:teamcity)'
+#when_url_content "$TEAMCITY_URL/login.html" '(?i:teamcity)'
 #when_ports_available 60 "${TEAMCITY_HOST:-localhost}" "${TEAMCITY_PORT:-8111}"
-when_url_content 60 "$server" '.*'
+when_url_content 60 "$TEAMCITY_URL" '.*'
 echo >&2
 
 timestamp "Open TeamCity Server URL in web browser to continue, click proceed, accept EULA etc.."
 echo >&2
-timestamp "TeamCity Server URL:  $url"
+timestamp "TeamCity Server URL:  $TEAMCITY_URL"
 echo >&2
 if is_mac; then
     timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
     echo >&2
-    open "$url"
+    open "$TEAMCITY_URL"
 fi
 
 max_secs=300
 
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for user to click proceed through First Start and database setup pages"
-while curl -sSL "$url" | \
+while curl -sSL "$TEAMCITY_URL" | \
       grep -qi -e 'first.*start' \
                -e 'database.*setup' \
                -e 'TeamCity Maintenance' \
@@ -108,15 +110,15 @@ echo >&2
 
 # second run would break here as this wouldn't come again, must use .* search
 # just to check we are not getting a temporary 404 or something that happens before the EULA comes up
-#when_url_content 60 "$url" "license.*agreement"
-when_url_content 60 "$url" ".*"
+#when_url_content 60 "$TEAMCITY_URL" "license.*agreement"
+when_url_content 60 "$TEAMCITY_URL" ".*"
 echo >&2
 
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for user to accept EULA"
 # curl gives an error when grep cuts its long EULA agreement short:
 # (23) Failed writing body
-while { curl -sSL "$url" 2>/dev/null || : ; } |
+while { curl -sSL "$TEAMCITY_URL" 2>/dev/null || : ; } |
       grep -qi 'license.*agreement'; do
     timestamp "waiting for you to accept the license agreement"
     if [ $SECONDS -gt $max_secs ]; then
@@ -129,7 +131,7 @@ echo >&2
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for TeamCity to finish initializing"
 # too transitory to be idempotent
-#while ! curl -sS "$url" | grep -q 'TeamCity is starting'; do
+#while ! curl -sS "$TEAMCITY_URL" | grep -q 'TeamCity is starting'; do
 # although hard to miss this log as not a fast scroll, might break idempotence for re-running later if logs are cycled out of buffer
 #while ! docker-compose -f "$config" logs --tail 50 teamcity-server | grep -q 'TeamCity initialized'; do
 while ! docker-compose -f "$config" logs teamcity-server |
@@ -143,37 +145,34 @@ while ! docker-compose -f "$config" logs teamcity-server |
 done
 echo
 
-superuser_token="$(docker-compose -f "$config" logs teamcity-server | grep -E -m1 -o 'Super user authentication token: [[:alnum:]]+' | tail -n1 | awk '{print $5}' || :)"
+TEAMCITY_SUPERUSER_TOKEN="$(docker-compose -f "$config" logs teamcity-server | grep -E -m1 -o 'Super user authentication token: [[:alnum:]]+' | tail -n1 | awk '{print $5}' || :)"
 
-if [ -z "$superuser_token" ]; then
+if [ -z "$TEAMCITY_SUPERUSER_TOKEN" ]; then
     timestamp "ERROR: Super user token not found in docker logs (maybe premature or late ie. logs were already cycled out of buffer?)"
     exit 1
 fi
 
-timestamp "TeamCity superuser token: $superuser_token"
+export TEAMCITY_SUPERUSER_TOKEN
+
+timestamp "TeamCity superuser token: $TEAMCITY_SUPERUSER_TOKEN"
 timestamp "(this must be used with a blank username using basic auth if usingt the API)"
 echo >&2
 
 # can't use this with teamcity_api.sh because superuser token can only be used with a blank username, not as a bearer token
-#export TEAMCITY_TOKEN="$superuser_token"
+#export TEAMCITY_TOKEN="$TEAMCITY_SUPERUSER_TOKEN"
 
 teamcity_user="${TEAMCITY_USER:-admin}"
 teamcity_password="${TEAMCITY_PASSWORD:-admin}"
 
 user_already_exists=0
-timestamp "Checking teamcity user '$teamcity_user' exists"
-if curl -sSL --fail -H 'Accept: application/json' -u ":$superuser_token" "$api/users" | jq -r '.user[].username' | grep -Fxq "$teamcity_user"; then
+timestamp "Checking if teamcity user '$teamcity_user' exists"
+if "$srcdir/teamcity_api.sh" /users -sSL --fail | jq -r '.user[].username' | grep -Fxq "$teamcity_user"; then
     timestamp "teamcity user '$teamcity_user' user already detected, skipping creation"
     user_already_exists=1
 else
     timestamp "Creating teamcity user '$teamcity_user':"
-    # can't use curl_auth.sh as there is no way to pass blank username through it, must end up using -u switch
-    curl -L --fail \
-         -u ":$superuser_token" \
-         -H 'Accept: application/json' \
-         -H "Content-Type: application/json" \
-         -d "{ \"username\": \"$teamcity_user\", \"password\": \"$teamcity_password\"}" \
-         "$api/users/"
+    "$srcdir/teamcity_api.sh" /users -sSL --fail \
+         -d "{ \"username\": \"$teamcity_user\", \"password\": \"$teamcity_password\"}"
          # Note: Unnecessary use of -X or --request, POST is already inferred.
          #-X POST \
     # no newline returned if error eg.
@@ -184,38 +183,32 @@ else
 fi
 
 timestamp "Setting teamcity user '$teamcity_user' as system administrator:"
-curl -sSL --fail -X PUT \
-     -u ":$superuser_token" \
-     -H 'Accept: application/json' \
-     "$api/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" > /dev/null
+"$srcdir/teamcity_api.sh" "/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" -sSL --fail -X PUT > /dev/null
 # no newline returned
 echo >&2
 
-api_token="$(curl -sSL \
-                  -u ":$superuser_token" \
-                  -H 'Accept: application/json' \
-                  "$api/users/$teamcity_user/tokens" | \
+api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens" -sSL | \
              jq -r '.token[]' || :)"
 if [ -n "$api_token" ]; then
     timestamp "Teamcity user '$teamcity_user' already has an API token, skipping token creation"
     timestamp "since we cannot get existing token value out of the API, will load TEAMCITY_SUPERUSER_TOKEN to environment to use instead"
-    export TEAMCITY_SUPERUSER_TOKEN="$superuser_token"
+    export TEAMCITY_SUPERUSER_TOKEN="$TEAMCITY_SUPERUSER_TOKEN"
 else
     timestamp "Creating API token for user '$teamcity_user'"
-    api_token="$(curl -sSL -u ":$superuser_token" -H 'Accept: application/json' -X POST "$api/users/$teamcity_user/tokens/mytoken" --fail | jq -r '.value')"
+    api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens/mytoken" -sSL --fail -X POST | jq -r '.value')"
     timestamp "here is your user API token, export this and then you can easily use teamcity_api.sh:"
     echo >&2
-    echo "export TEAMCITY_URL=$server"
-    export TEAMCITY_URL="$server"
-    echo "export TEAMCITY_TOKEN=$api_token"
-    export TEAMCITY_TOKEN="$api_token"
+    echo "export TEAMCITY_URL=$TEAMCITY_URL"
+    export TEAMCITY_URL="$TEAMCITY_URL"
+    echo "export TEAMCITY_TOKEN=_token"
+    export TEAMCITY_TOKEN="_token"
 fi
 echo >&2
 
 if [ "$user_already_exists" = 0 ]; then
     timestamp "Login here with username '$teamcity_user' and password: \$TEAMCITY_PASSWORD (default: admin):"
     echo >&2
-    login_url="$server/login.html"
+    login_url="$TEAMCITY_URL/login.html"
     timestamp "TeamCity Login page:  $login_url"
     echo >&2
     if is_mac; then
@@ -228,7 +221,7 @@ fi
 
 timestamp "getting list of unauthorized agents"
 # using our new teamcity API token, let's agents waiting to be authorized
-unauthorized_agents="$("$srcdir/teamcity_api.sh" /agents?locator=authorized:false --fail | jq -r '.agent[].name')"
+unauthorized_agents="$("$srcdir/teamcity_api.sh" "/agents?locator=authorized:false" -sSL --fail | jq -r '.agent[].name')"
 
 timestamp "getting list of expected agents"
 expected_agents="$(docker-compose -f "$config" config | awk '/AGENT_NAME:/ {print $2}')"
@@ -243,7 +236,7 @@ for agent in $unauthorized_agents; do
         # needs -H 'Accept: text/plain' to override the default -H 'Accept: application/json' from teamcity_api.sh
         # otherwise gets 403 error and then even switching to -H 'Accept: text/plain' still breaks due to cookie jar behaviour,
         # so teamcity_api.sh now uses a unique cookie jar per script run and clears the cookie jar first
-        teamcity_api.sh /agents/agent1/authorized -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
+        teamcity_api.sh "/agents/agent1/authorized" -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
         # no newline returned
         echo
     else
