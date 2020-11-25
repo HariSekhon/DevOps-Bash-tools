@@ -597,6 +597,11 @@ when_ports_available(){
     #echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
     if type -P nc &>/dev/null; then
+        # Mac nc doesn't have -z switch like Linux GNU version
+        nc_opts=""
+        if nc --help 2>&1 | grep -q GNU; then
+            nc_opts="-z"
+        fi
         try_number=0
         # special built-in that increments for script runtime, reset to zero exploit it here
         SECONDS=0
@@ -604,7 +609,7 @@ when_ports_available(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number+=1))
             for port in $ports; do
-                if ! nc -v -w "$retry_interval" "$host" "$port" < /dev/null &>/dev/null; then
+                if ! nc -v -w "$retry_interval" $nc_opts "$host" "$port" < /dev/null &>/dev/null; then
                     timestamp "$try_number waiting for host '$host' port '$port'"
                     sleep "$retry_interval"
                     break
@@ -660,8 +665,12 @@ when_ports_down(){
         return 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
-    # Mac nc doens't have -z switch like Linux GNU version and we can't rely on one being found first in $PATH
-    local nc_cmd="nc -v -w $retry_interval $host < /dev/null"
+    # Mac nc doesn't have -z switch like Linux GNU version
+    nc_opts=""
+    if nc --help 2>&1 | grep -q GNU; then
+        nc_opts="-z"
+    fi
+    local nc_cmd="nc -v -w $retry_interval $nc_opts $host < /dev/null"
     cmd=""
     for x in $ports; do
         cmd="$cmd ! $nc_cmd $x &>/dev/null && "
