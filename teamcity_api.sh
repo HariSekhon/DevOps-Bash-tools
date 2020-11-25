@@ -55,15 +55,20 @@ At time of writing, prior API versions are: 2018.1, 2017.2, 2017.1, 10.0, 9.1, 9
 https://www.jetbrains.com/help/teamcity/rest-api.html#REST+API+Versions
 
 
+See Also:
+
+    teamcity.sh - boots a TeamCity cluster in Docker and makes heavy use of this script against many API endpoints to configure it
+                  convenient way of getting a TeamCity API to test this script against, outputs the TEAMCITY_URL and TEAMCITY_TOKEN for you
+
+    teamcity_builds.sh - lists builds using this API
+    teamcity_agents.sh - lists agents using this API
+
+
 Examples:
 
 (don't forget to add '\$help' to the end to find out what attributes endpoints support):
 Remember you can check logs/teamcity-rest.log server log for these API requests
 
-See also:
-
-    teamcity_builds.sh
-    teamcity_agents.sh
 
 
 # Explore API:
