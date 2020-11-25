@@ -156,7 +156,12 @@ mkdir -p "${cookie_jar%/*}"  # pre-create the directory
 chown "$(whoami)" "$cookie_jar"
 chmod 0600 "$cookie_jar"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-}"
+#CURL_OPTS=(-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-})
+read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-}"
+if ! [[ "$*" =~ Accept:|Content-Type: ]]; then
+#                           XML by default :-/
+    CURL_OPTS+=(-H "Accept: application/json" -H "Content-Type: application/json")
+fi
 
 # don't enforce as hard requirements here, instead try alternation further down and construct from what's available
 #check_env_defined "TEAMCITY_URL"
@@ -211,10 +216,9 @@ url_path="${url_path##/}"
 # use superuser token override to support teamcity.sh when token has already been created but we cannot get it's key value out of the API, so need to continue using superuser token
 if [ -n "${TEAMCITY_SUPERUSER_TOKEN:-}" ]; then
     # XXX: superuser token can only be used with blank user which cannot be used with curl_auth.sh
-    curl -u ":$TEAMCITY_SUPERUSER_TOKEN" "$url_base/$url_path" -H "Accept: application/json" -H "Content-Type: application/json" $CURL_OPTS "$@"
+    curl -u ":$TEAMCITY_SUPERUSER_TOKEN" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 else
-#                                                            XML by default :-/
-    "$srcdir/curl_auth.sh" "$url_base/$url_path" -H "Accept: application/json" -H "Content-Type: application/json" $CURL_OPTS "$@"
+    "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 fi
 chmod 0600 "$cookie_jar"
 
