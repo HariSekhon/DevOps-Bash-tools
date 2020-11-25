@@ -128,7 +128,7 @@ check_bin(){
     if ! type -P "$bin" &>/dev/null; then
         echo "command '$bin' not found in \$PATH ($PATH)"
         if is_CI; then
-            echo "Running in CI, searching entire system for '$bin'"
+            timestamp "Running in CI, searching entire system for '$bin'"
             find / -type f -name "$bin" 2>/dev/null
         fi
         exit 1
@@ -486,9 +486,9 @@ run_test_versions(){
         print_debug_env "$name"
     else
         untrap
-        echo "All $name tests succeeded for versions: $test_versions"
-        echo
-        echo "Total Tests run: $total_run_count"
+        timestamp "All $name tests succeeded for versions: $test_versions"
+        echo >&2
+        timestamp "Total Tests run: $total_run_count"
         time_taken "$start_time" "All version tests for $name completed in"
         echo
     fi
@@ -593,7 +593,7 @@ when_ports_available(){
     #local cmd="${cmd% && }"
     # shellcheck disable=SC2086
     plural_str $ports
-    echo "waiting for up to $max_secs secs for port$plural '$ports' to become available, retrying at $retry_interval sec intervals"
+    timestamp "waiting for up to $max_secs secs for port$plural '$ports' to become available, retrying at $retry_interval sec intervals"
     #echo "cmd: ${cmd// \&\>\/dev\/null}"
     local found=0
     if type -P nc &>/dev/null; then
@@ -622,8 +622,8 @@ when_ports_available(){
             return 1
         fi
     else
-        echo "WARNING: nc command not found in \$PATH, cannot check port availability, skipping port checks, tests may fail due to race conditions on service availability"
-        echo "sleeping for '$max_secs' secs instead"
+        timestamp "WARNING: nc command not found in \$PATH, cannot check port availability, skipping port checks, tests may fail due to race conditions on service availability"
+        timestamp "sleeping for '$max_secs' secs instead"
         sleep "$max_secs"
     fi
 }
@@ -643,21 +643,21 @@ when_ports_down(){
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
         echo "$FUNCNAME: host \$2 not set"
-        exit 1
+        return 1
     elif [ -z "$ports" ]; then
         echo "$FUNCNAME: ports \$3 not set"
-        exit 1
+        return 1
     else
         for port in $ports; do
             if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
                 echo "$FUNCNAME: invalid non-numeric port argument '$port'"
-                exit 1
+                return 1
             fi
         done
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
         echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
-        exit 1
+        return 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
     # Linux nc doens't have -z switch like Mac OSX version
@@ -669,8 +669,8 @@ when_ports_down(){
     local cmd="${cmd% && }"
     # shellcheck disable=SC2086
     plural_str $ports
-    echo "waiting for up to $max_secs secs for port$plural '$ports' to go down, retrying at $retry_interval sec intervals"
-    echo "cmd: ${cmd// \&\>\/dev\/null}"
+    timestamp "waiting for up to $max_secs secs for port$plural '$ports' to go down, retrying at $retry_interval sec intervals"
+    timestamp "cmd: ${cmd// \&\>\/dev\/null}"
     local down=0
     if type -P nc &>/dev/null; then
         #for((i=1; i <= $max_tries; i++)); do
@@ -694,8 +694,8 @@ when_ports_down(){
             return 1
         fi
     else
-        echo "WARNING: nc command not found in \$PATH, cannot check for ports down, skipping port checks, tests may fail due to race conditions on service availability"
-        echo "sleeping for '$max_secs' secs instead"
+        timestamp "WARNING: nc command not found in \$PATH, cannot check for ports down, skipping port checks, tests may fail due to race conditions on service availability"
+        timestamp "sleeping for '$max_secs' secs instead"
         sleep "$max_secs"
     fi
 }
@@ -723,7 +723,7 @@ when_url_content(){
         exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
-    echo "waiting up to $max_secs secs at $retry_interval sec intervals for HTTP interface to come up with expected regex content: '$expected_regex'"
+    timestamp "waiting up to $max_secs secs at $retry_interval sec intervals for HTTP interface to come up with expected regex content: '$expected_regex'"
     found=0
     #for((i=1; i <= $max_tries; i++)); do
     try_number=0
@@ -736,7 +736,7 @@ when_url_content(){
             timestamp "$try_number trying $url"
             # shellcheck disable=SC2086
             if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
-                echo "URL content detected '$expected_regex'"
+                timestamp "URL content detected '$expected_regex'"
                 found=1
                 break
             fi
@@ -749,8 +749,8 @@ when_url_content(){
             return 1
         fi
     else
-        echo "WARNING: curl command not found in \$PATH, cannot check url content, skipping content checks, tests may fail due to race conditions on service availability"
-        echo "sleeping for '$max_secs' secs instead"
+        timestamp "WARNING: curl command not found in \$PATH, cannot check url content, skipping content checks, tests may fail due to race conditions on service availability"
+        timestamp "sleeping for '$max_secs' secs instead"
         sleep "$max_secs"
     fi
 }
