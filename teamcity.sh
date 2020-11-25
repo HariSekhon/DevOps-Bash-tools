@@ -198,6 +198,8 @@ api_token="$(curl -sSL \
              jq -r '.token[]' || :)"
 if [ -n "$api_token" ]; then
     timestamp "Teamcity user '$teamcity_user' already has an API token, skipping token creation"
+    timestamp "since we cannot get existing token value out of the API, will load TEAMCITY_SUPERUSER_TOKEN to environment to use instead"
+    export TEAMCITY_SUPERUSER_TOKEN="$superuser_token"
 else
     timestamp "Creating API token for user '$teamcity_user'"
     api_token="$(curl -sSL -u ":$superuser_token" -H 'Accept: application/json' -X POST "$api/users/$teamcity_user/tokens/mytoken" --fail | jq -r '.value')"
@@ -207,8 +209,8 @@ else
     export TEAMCITY_URL="$server"
     echo "export TEAMCITY_TOKEN=$api_token"
     export TEAMCITY_TOKEN="$api_token"
-    echo >&2
 fi
+echo >&2
 
 if [ "$user_already_exists" = 0 ]; then
     timestamp "Login here with username '$teamcity_user' and password: \$TEAMCITY_PASSWORD (default: admin):"
@@ -218,18 +220,23 @@ if [ "$user_already_exists" = 0 ]; then
     echo >&2
     if is_mac; then
         timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
-        echo >&2
         open "$login_url"
+        echo >&2
     fi
-    echo >&2
     echo >&2
 fi
 
+timestamp "getting list of unauthorized agents"
 # using our new teamcity API token, let's agents waiting to be authorized
 unauthorized_agents="$("$srcdir/teamcity_api.sh" /agents?locator=authorized:false --fail | jq -r '.agent[].name')"
 
+timestamp "getting list of expected agents"
 expected_agents="$(docker-compose -f "$config" config | awk '/AGENT_NAME:/ {print $2}')"
 
+timestamp "authorizing any expected agents that are not currently authorized"
+if [ -z "$unauthorized_agents" ]; then
+    timestamp "no unauthorized agents found"
+fi
 for agent in $unauthorized_agents; do
     if grep -Fxq "$agent" <<< "$expected_agents"; then
         timestamp "authorizing expected agent '$agent'"
@@ -237,9 +244,14 @@ for agent in $unauthorized_agents; do
         # otherwise gets 403 error and then even switching to -H 'Accept: text/plain' still breaks due to cookie jar behaviour,
         # so teamcity_api.sh now uses a unique cookie jar per script run and clears the cookie jar first
         teamcity_api.sh /agents/agent1/authorized -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
+        # no newline returned
+        echo
     else
         timestamp "WARNING: unauthorized agent '$agent' was not expected, not automatically authorizing"
     fi
 done
 
 # TODO: load pipeline
+
+echo >&2
+timestamp "TeamCity is up and ready"
