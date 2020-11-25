@@ -22,6 +22,26 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC2034,SC2154
+usage_description="
+One-touch GoCD CI cluster with server and agent(s)
+
+- boots GoCD server and agent(s) (one by default)
+- loads the config repo for the current git project
+- authorizes the agent(s) to begin building
+- opens the GoCD web UI (on Mac only)
+
+    ${0##*/} [up]
+
+    ${0##*/} down
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[up|down]"
+
+help_usage "$@"
+
 NUM_AGENTS=1
 
 server="http://${GOCD_HOST:-localhost}:${GOCD_PORT:-8153}"
