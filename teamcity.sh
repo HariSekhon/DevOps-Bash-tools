@@ -85,14 +85,25 @@ fi
 when_url_content 60 "$TEAMCITY_URL" '.*'
 echo >&2
 
-timestamp "Open TeamCity Server URL in web browser to continue, click proceed, accept EULA etc.."
-echo >&2
+is_setup_in_progress(){
+     # don't let cut off output affect the return code
+     { curl -sSL "$TEAMCITY_URL" || : ; } | \
+       grep -qi -e 'first.*start' \
+                -e 'database.*setup' \
+                -e 'TeamCity Maintenance' \
+                -e 'Setting up'
+}
+
 timestamp "TeamCity Server URL:  $TEAMCITY_URL"
 echo >&2
-if is_mac; then
-    timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
+if is_setup_in_progress; then
+    timestamp "Open TeamCity Server URL in web browser to continue, click proceed, accept EULA etc.."
     echo >&2
-    open "$TEAMCITY_URL"
+    if is_mac; then
+        timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
+        echo >&2
+        open "$TEAMCITY_URL"
+    fi
 fi
 
 # too late, agent won't arrive in the unauthorized list in time to be found and authorized before this script exits, agents must boot in parallel with server not later
@@ -105,11 +116,7 @@ max_secs=300
 
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for user to click proceed through First Start and database setup pages"
-while { curl -sSL "$TEAMCITY_URL" || : ; } | \
-      grep -qi -e 'first.*start' \
-               -e 'database.*setup' \
-               -e 'TeamCity Maintenance' \
-               -e 'Setting up'; do
+while is_setup_in_progress; do
     timestamp "waiting for you to click proceed through First Start & setup pages and then preliminary initialization to finish"
     if [ $SECONDS -gt $max_secs ]; then
         die "Did not progress past First Start and setup pages within $max_secs seconds"
