@@ -255,17 +255,23 @@ if [ -z "$unauthorized_agents" ]; then
     timestamp "no unauthorized agents found"
 fi
 for agent in $unauthorized_agents; do
-    if grep -Fxq "$agent" <<< "$expected_agents"; then
-        timestamp "authorizing expected agent '$agent'"
-        # needs -H 'Accept: text/plain' to override the default -H 'Accept: application/json' from teamcity_api.sh
-        # otherwise gets 403 error and then even switching to -H 'Accept: text/plain' still breaks due to cookie jar behaviour,
-        # so teamcity_api.sh now uses a unique cookie jar per script run and clears the cookie jar first
-        teamcity_api.sh "/agents/agent1/authorized" -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
-        # no newline returned
-        echo
-    else
-        timestamp "WARNING: unauthorized agent '$agent' was not expected, not automatically authorizing"
-    fi
+    # XXX: recreated agents end up with a digit appended to the name to avoid clash with old stale agent reference
+    #      if the agent disk state isn't lost this shouldn't be needed, but this environment is disposable so allow this
+    #      this is only a local environment so we don't have to worry about rogue agents
+    for expected_agent in $expected_agents; do
+        # grep -f would be easier but don't want to depend on have the GNU version installed and then remapped via func
+        if [[ "$agent" =~ ^$expected_agent(-[[:digit:]]+)?$ ]]; then
+            timestamp "authorizing expected agent '$agent'"
+            # needs -H 'Accept: text/plain' to override the default -H 'Accept: application/json' from teamcity_api.sh
+            # otherwise gets 403 error and then even switching to -H 'Accept: text/plain' still breaks due to cookie jar behaviour,
+            # so teamcity_api.sh now uses a unique cookie jar per script run and clears the cookie jar first
+            teamcity_api.sh "/agents/$agent/authorized" -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
+            # no newline returned
+            echo
+            continue 2
+        fi
+    done
+    timestamp "WARNING: unauthorized agent '$agent' was not expected, not automatically authorizing"
 done
 
 # TODO: load pipeline
