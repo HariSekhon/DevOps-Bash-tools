@@ -225,12 +225,30 @@ if [ "$user_already_exists" = 0 ]; then
     echo >&2
 fi
 
+timestamp "getting list of expected agents"
+expected_agents="$(docker-compose -f "$config" config | awk '/^[[:space:]]+AGENT_NAME:/ {print $2}' | sed '/^[[:space:]]*$/d')"
+num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
+
+SECONDS=0
+timestamp "waiting for $num_expected_agents expected agent(s) to become connected before authorizing them"
+while true; do
+    num_connected_agents="$("$srcdir/teamcity_api.sh" "/agents?locator=connected:true,authorized:any" -sSL --fail | jq -r '.agent[].name' | grep -c . || :)"
+    timestamp "connected agents: $num_connected_agents"
+    if [ "$num_connected_agents" -ge "$num_expected_agents" ]; then
+        timestamp "$num_connected_agents connected agents >= $num_expected_agents expected agents, continuing"
+        break
+    fi
+    if [ $SECONDS -gt $max_secs ]; then
+        timestamp "giving up waiting for connect agents after $max_secs"
+        break
+    fi
+    sleep 3
+done
+echo >&2
+
 timestamp "getting list of unauthorized agents"
 # using our new teamcity API token, let's agents waiting to be authorized
 unauthorized_agents="$("$srcdir/teamcity_api.sh" "/agents?locator=authorized:false" -sSL --fail | jq -r '.agent[].name')"
-
-timestamp "getting list of expected agents"
-expected_agents="$(docker-compose -f "$config" config | awk '/AGENT_NAME:/ {print $2}')"
 
 timestamp "authorizing any expected agents that are not currently authorized"
 if [ -z "$unauthorized_agents" ]; then
