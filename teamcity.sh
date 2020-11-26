@@ -60,7 +60,7 @@ config="$srcdir/setup/teamcity-docker-compose.yml"
 
 # don't take any change this script could run against a real teamcity server for safety
 #export TEAMCITY_URL="http://${TEAMCITY_HOST:-localhost}:${TEAMCITY_PORT:-8111}"
-export TEAMCITY_URL="http://localhost:8111"
+export TEAMCITY_URL="http://${DOCKER_HOST:-localhost}:8111"
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
