@@ -64,8 +64,10 @@ shift || :
 
 if [ "$action" = up ]; then
     timestamp "Booting TeamCity cluster:"
+    # starting agents later they won't be connected in time to become authorized
     # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
-    docker-compose -f "$config" up -d teamcity-server "$@"
+    #docker-compose -f "$config" up -d teamcity-server "$@"
+    docker-compose -f "$config" up -d "$@"
 else
     docker-compose -f "$config" "$action" "$@"
     echo >&2
@@ -89,8 +91,9 @@ if is_mac; then
     open "$TEAMCITY_URL"
 fi
 
+# too late, agent won't arrive in the unauthorized list in time to be found and authorized before this script exits, agents must boot in parallel with server not later
 # now download and start the agent(s) while the server is booting
-docker-compose -f "$config" up -d
+#docker-compose -f "$config" up -d
 
 # now continue configuring server
 
