@@ -158,7 +158,7 @@ fi
 export TEAMCITY_SUPERUSER_TOKEN
 
 timestamp "TeamCity superuser token: $TEAMCITY_SUPERUSER_TOKEN"
-timestamp "(this must be used with a blank username using basic auth if usingt the API)"
+timestamp "(this must be used with a blank username via basic auth if using the API)"
 echo >&2
 
 # can't use this with teamcity_api.sh because superuser token can only be used with a blank username, not as a bearer token
