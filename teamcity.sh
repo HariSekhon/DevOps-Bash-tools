@@ -53,6 +53,7 @@ usage_args="[up|down]"
 
 help_usage "$@"
 
+# could set this as implicit COMPOSE_FILE, but in DEBUG mode it's easier to see the file path on the CLI for copy paste debugging
 config="$srcdir/setup/teamcity-docker-compose.yml"
 
 #teamcity_port="$(docker-compose -f "$config" config | sed -n '/teamcity-server:[[:space:]]*$/,$p' | awk '/- published: [[:digit:]]+/{print $3; exit}')"
