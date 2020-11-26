@@ -40,6 +40,8 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 
     ${0##*/} down
 
+    ${0##*/} ui     - prints the Teamcity Server URL and on Mac automatically opens it for you
+
 See Also:
 
     teamcity_api.sh - this script makes heavy use of it to handle API authentication and other details
@@ -72,6 +74,12 @@ if [ "$action" = up ]; then
     # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
     #docker-compose -f "$config" up -d teamcity-server "$@"
     docker-compose -f "$config" up -d "$@"
+elif [ "$action" = ui ]; then
+    echo "TeamCity Server URL:  $TEAMCITY_URL"
+    if is_mac; then
+        open "$TEAMCITY_URL"
+    fi
+    exit 0
 else
     docker-compose -f "$config" "$action" "$@"
     echo >&2
