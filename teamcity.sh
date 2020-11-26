@@ -51,9 +51,13 @@ usage_args="[up|down]"
 
 help_usage "$@"
 
-export TEAMCITY_URL="http://${TEAMCITY_HOST:-localhost}:${TEAMCITY_PORT:-8111}"
-
 config="$srcdir/setup/teamcity-docker-compose.yml"
+
+#teamcity_port="$(docker-compose -f "$config" config | sed -n '/teamcity-server:[[:space:]]*$/,$p' | awk '/- published: [[:digit:]]+/{print $3; exit}')"
+
+# don't take any change this script could run against a real teamcity server for safety
+#export TEAMCITY_URL="http://${TEAMCITY_HOST:-localhost}:${TEAMCITY_PORT:-8111}"
+export TEAMCITY_URL="http://localhost:8111"
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
@@ -265,13 +269,22 @@ for agent in $unauthorized_agents; do
             # needs -H 'Accept: text/plain' to override the default -H 'Accept: application/json' from teamcity_api.sh
             # otherwise gets 403 error and then even switching to -H 'Accept: text/plain' still breaks due to cookie jar behaviour,
             # so teamcity_api.sh now uses a unique cookie jar per script run and clears the cookie jar first
-            teamcity_api.sh "/agents/$agent/authorized" -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
+            "$srcdir/teamcity_api.sh" "/agents/$agent/authorized" -X PUT -d true -H 'Accept: text/plain' -H 'Content-Type: text/plain'
             # no newline returned
             echo
             continue 2
         fi
     done
     timestamp "WARNING: unauthorized agent '$agent' was not expected, not automatically authorizing"
+done
+
+# this stops us accumulating huge numbers of agent-[[:digit:]] increments each time
+timestamp "deleting old disconnected agent references"
+# slight race condition here but it's not critical
+disconnected_agents="$("$srcdir/teamcity_api.sh" "/agents?locator=connected:false" -sSL --fail | jq -r '.agent[].name')"
+for disconnected_agent in $disconnected_agents; do
+    timestamp "deleting disconnected agent '$disconnected_agent'"
+    "$srcdir/teamcity_api.sh" "/agents/$disconnected_agent" -X DELETE
 done
 
 # TODO: load pipeline
