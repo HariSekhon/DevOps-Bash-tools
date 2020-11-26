@@ -62,15 +62,13 @@ fi
 action="${1:-up}"
 shift || :
 
-opts=""
 if [ "$action" = up ]; then
-    opts="-d"
-fi
-
-timestamp "Booting TeamCity cluster:"
-docker-compose -f "$config" "$action" $opts "$@"
-echo >&2
-if [ "$action" = down ]; then
+    timestamp "Booting TeamCity cluster:"
+    # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
+    docker-compose -f "$config" up -d teamcity-server "$@"
+else
+    docker-compose -f "$config" "$action" "$@"
+    echo >&2
     exit 0
 fi
 
@@ -90,6 +88,11 @@ if is_mac; then
     echo >&2
     open "$TEAMCITY_URL"
 fi
+
+# now download and start the agent(s) while the server is booting
+docker-compose -f "$config" up -d
+
+# now continue configuring server
 
 max_secs=300
 
