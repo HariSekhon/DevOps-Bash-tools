@@ -101,7 +101,7 @@ max_secs=300
 
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for user to click proceed through First Start and database setup pages"
-while curl -sSL "$TEAMCITY_URL" | \
+while { curl -sSL "$TEAMCITY_URL" || : ; } | \
       grep -qi -e 'first.*start' \
                -e 'database.*setup' \
                -e 'TeamCity Maintenance' \
@@ -140,10 +140,10 @@ timestamp "waiting for up to $max_secs seconds for TeamCity to finish initializi
 #while ! curl -sS "$TEAMCITY_URL" | grep -q 'TeamCity is starting'; do
 # although hard to miss this log as not a fast scroll, might break idempotence for re-running later if logs are cycled out of buffer
 #while ! docker-compose -f "$config" logs --tail 50 teamcity-server | grep -q 'TeamCity initialized'; do
-while ! docker-compose -f "$config" logs teamcity-server |
+while ! { docker-compose -f "$config" logs teamcity-server || : ; } |
       grep -q -e 'Super user authentication token'; do
               #-e 'TeamCity initialized' # happens just before but checking for the super user token achieves both and protects against race condition
-    tstamp 'waiting for TeamCity server to finish initializing'
+    timestamp 'waiting for TeamCity server to finish initializing and reveal superuser token in logs'
     if [ $SECONDS -gt $max_secs ]; then
         die "TeamCity server failed to initialize within $max_secs seconds (perhaps you didn't trigger the UI to continue initialization?)"
     fi

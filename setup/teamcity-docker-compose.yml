@@ -67,7 +67,12 @@ services:
       # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
       # checked out sources
       - /tmp/teamcity/agent1/work:/opt/buildagent/work
+      #
       # internal build agent caches
-      - /tmp/teamcity/agent1/system:/opt/buildagent/system
-      # plugins -
-      - /tmp/teamcity/agent1/plugins:/opt/buildagent/plugins
+      # XXX: causes:  WARN - ig.BuildAgentConfigurablePaths - Failed to create directory: /opt/buildagent/system/.artifacts_cache
+      # XXX: causes agent to get stuck looping on bootstrap/upgrade process dying
+      #- /tmp/teamcity/agent1/system:/opt/buildagent/system
+      #
+      # plugins
+      # XXX: causes agent to get stuck looping on bootstrap/upgrade process dying
+      #- /tmp/teamcity/agent1/plugins:/opt/buildagent/plugins
