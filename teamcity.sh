@@ -13,8 +13,6 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Start a quick local TeamCity CI cluster
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
@@ -34,13 +32,13 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 - opens the TeamCity web UI to proceed and accept EULA (on Mac only)
 - waits for the setup and EULA pages
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
-  - opens the TeamCity web UI login page (on Mac only)
+  - opens the TeamCity web UI login page in browser (on Mac only)
 
     ${0##*/} [up]
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the Teamcity Server URL and on Mac automatically opens it for you
+    ${0##*/} ui     - prints the Teamcity Server URL and on Mac automatically opens browser
 
 See Also:
 
