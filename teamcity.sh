@@ -47,14 +47,13 @@ See Also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[up|down]"
+usage_args="[up|down|ui]"
 
 help_usage "$@"
 
-# could set this as implicit COMPOSE_FILE, but in DEBUG mode it's easier to see the file path on the CLI for copy paste debugging
-config="$srcdir/setup/teamcity-docker-compose.yml"
+export COMPOSE_FILE="$srcdir/setup/teamcity-docker-compose.yml"
 
-#teamcity_port="$(docker-compose -f "$config" config | sed -n '/teamcity-server:[[:space:]]*$/,$p' | awk '/- published: [[:digit:]]+/{print $3; exit}')"
+#teamcity_port="$(docker-compose config | sed -n '/teamcity-server:[[:space:]]*$/,$p' | awk '/- published: [[:digit:]]+/{print $3; exit}')"
 
 # don't take any change this script could run against a real teamcity server for safety
 #export TEAMCITY_URL="http://${TEAMCITY_HOST:-localhost}:${TEAMCITY_PORT:-8111}"
@@ -71,8 +70,8 @@ if [ "$action" = up ]; then
     timestamp "Booting TeamCity cluster:"
     # starting agents later they won't be connected in time to become authorized
     # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
-    #docker-compose -f "$config" up -d teamcity-server "$@"
-    docker-compose -f "$config" up -d "$@"
+    #docker-compose up -d teamcity-server "$@"
+    docker-compose up -d "$@"
 elif [ "$action" = ui ]; then
     echo "TeamCity Server URL:  $TEAMCITY_URL"
     if is_mac; then
@@ -80,7 +79,7 @@ elif [ "$action" = ui ]; then
     fi
     exit 0
 else
-    docker-compose -f "$config" "$action" "$@"
+    docker-compose "$action" "$@"
     echo >&2
     exit 0
 fi
@@ -115,7 +114,7 @@ fi
 
 # too late, agent won't arrive in the unauthorized list in time to be found and authorized before this script exits, agents must boot in parallel with server not later
 # now download and start the agent(s) while the server is booting
-#docker-compose -f "$config" up -d
+#docker-compose up -d
 
 # now continue configuring server
 
@@ -157,8 +156,8 @@ timestamp "waiting for up to $max_secs seconds for TeamCity to finish initializi
 # too transitory to be idempotent
 #while ! curl -sS "$TEAMCITY_URL" | grep -q 'TeamCity is starting'; do
 # although hard to miss this log as not a fast scroll, might break idempotence for re-running later if logs are cycled out of buffer
-#while ! docker-compose -f "$config" logs --tail 50 teamcity-server | grep -q 'TeamCity initialized'; do
-while ! { docker-compose -f "$config" logs teamcity-server || : ; } |
+#while ! docker-compose logs --tail 50 teamcity-server | grep -q 'TeamCity initialized'; do
+while ! { docker-compose logs teamcity-server || : ; } |
       grep -q -e 'Super user authentication token'; do
               #-e 'TeamCity initialized' # happens just before but checking for the super user token achieves both and protects against race condition
     timestamp 'waiting for TeamCity server to finish initializing and reveal superuser token in logs'
@@ -169,7 +168,7 @@ while ! { docker-compose -f "$config" logs teamcity-server || : ; } |
 done
 echo
 
-TEAMCITY_SUPERUSER_TOKEN="$(docker-compose -f "$config" logs teamcity-server | grep -E -m1 -o 'Super user authentication token: [[:alnum:]]+' | tail -n1 | awk '{print $5}' || :)"
+TEAMCITY_SUPERUSER_TOKEN="$(docker-compose logs teamcity-server | grep -E -m1 -o 'Super user authentication token: [[:alnum:]]+' | tail -n1 | awk '{print $5}' || :)"
 
 if [ -z "$TEAMCITY_SUPERUSER_TOKEN" ]; then
     timestamp "ERROR: Super user token not found in docker logs (maybe premature or late ie. logs were already cycled out of buffer?)"
@@ -244,13 +243,18 @@ if [ "$user_already_exists" = 0 ]; then
 fi
 
 timestamp "getting list of expected agents"
-expected_agents="$(docker-compose -f "$config" config | awk '/^[[:space:]]+AGENT_NAME:/ {print $2}' | sed '/^[[:space:]]*$/d')"
+expected_agents="$(docker-compose config | awk '/^[[:space:]]+AGENT_NAME:/ {print $2}' | sed '/^[[:space:]]*$/d')"
 num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
+
+get_connected_agents(){
+    "$srcdir/teamcity_api.sh" "/agents?locator=connected:true,authorized:any" -sSL --fail |
+    jq -r '.agent[].name'
+}
 
 SECONDS=0
 timestamp "waiting for $num_expected_agents expected agent(s) to become connected before authorizing them"
 while true; do
-    num_connected_agents="$("$srcdir/teamcity_api.sh" "/agents?locator=connected:true,authorized:any" -sSL --fail | jq -r '.agent[].name' | grep -c . || :)"
+    num_connected_agents="$(get_connected_agents | grep -c . || :)"
     timestamp "connected agents: $num_connected_agents"
     if [ "$num_connected_agents" -ge "$num_expected_agents" ]; then
         timestamp "$num_connected_agents connected agents >= $num_expected_agents expected agents, continuing"
