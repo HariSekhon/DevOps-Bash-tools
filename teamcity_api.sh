@@ -30,6 +30,8 @@ Requires \$TEAMCITY_TOKEN be available in the environment, generation a token he
 or
 https://\$TEAMCITY_HOST:\$TEAMCITY_PORT/profile.html?item=accessTokens
 
+If using the superuser token, it must instead be specified as \$TEAMCITY_SUPERUSER_TOKEN and takes precedence
+
 
 \$TEAMCITY_URL or \$TEAMCITY_HOST must be set to point to the Teamcity server
 
@@ -188,7 +190,7 @@ else
     url_base="$protocol://$host:$port"
 fi
 
-# for superuser account, empty username and system generated password, but curl_auth.sh won't allow that by default so you'd have to USERNAME="" USER="" curl_auth.sh to prevent it trying to infer an username
+# for superuser account, empty username and system generated password, but curl_auth.sh won't allow that so handle it separately via $TEAMCITY_SUPERUSER_TOKEN further down
 if [ -n "${TEAMCITY_TOKEN:-}" ]; then
     export TOKEN="$TEAMCITY_TOKEN"
 else
