@@ -40,9 +40,13 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 
     ${0##*/} ui     - prints the Teamcity Server URL and on Mac automatically opens browser
 
+Idempotent, you can re-run this and continue from any stage
+
+The official docker images from JetBrains are huge so the first pull may take a while
+
 See Also:
 
-    teamcity_api.sh - this script makes heavy use of it to handle API authentication and other details
+    teamcity_api.sh - this script makes heavy use of it to handle API calls with authentication as part of the setup
 "
 
 # used by usage() in lib/utils.sh
@@ -72,6 +76,7 @@ if [ "$action" = up ]; then
     # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
     #docker-compose up -d teamcity-server "$@"
     docker-compose up -d "$@"
+    echo >&2
 elif [ "$action" = ui ]; then
     echo "TeamCity Server URL:  $TEAMCITY_URL"
     if is_mac; then
@@ -168,7 +173,7 @@ while ! { docker-compose logs teamcity-server || : ; } |
 done
 echo
 
-TEAMCITY_SUPERUSER_TOKEN="$(docker-compose logs teamcity-server | grep -E -m1 -o 'Super user authentication token: [[:alnum:]]+' | tail -n1 | awk '{print $5}' || :)"
+TEAMCITY_SUPERUSER_TOKEN="$(docker-compose logs teamcity-server | grep -E -o 'Super user authentication token: [[:alnum:]]+' | tail -n1 | awk '{print $5}' || :)"
 
 if [ -z "$TEAMCITY_SUPERUSER_TOKEN" ]; then
     timestamp "ERROR: Super user token not found in docker logs (maybe premature or late ie. logs were already cycled out of buffer?)"
@@ -181,19 +186,22 @@ timestamp "TeamCity superuser token: $TEAMCITY_SUPERUSER_TOKEN"
 timestamp "(this must be used with a blank username via basic auth if using the API)"
 echo >&2
 
-# can't use this with teamcity_api.sh because superuser token can only be used with a blank username, not as a bearer token
-#export TEAMCITY_TOKEN="$TEAMCITY_SUPERUSER_TOKEN"
-
 teamcity_user="${TEAMCITY_USER:-admin}"
 teamcity_password="${TEAMCITY_PASSWORD:-admin}"
 
 user_already_exists=0
-timestamp "Checking if teamcity user '$teamcity_user' exists"
-if "$srcdir/teamcity_api.sh" /users -sSL --fail | jq -r '.user[].username' | grep -Fxq "$teamcity_user"; then
-    timestamp "teamcity user '$teamcity_user' user already detected, skipping creation"
+api_token=""
+#timestamp "Checking if teamcity user '$teamcity_user' exists"
+timestamp "Checking if any user already exists"
+users="$("$srcdir/teamcity_api.sh" /users -sSL --fail | jq -r '.user[].username')"
+#if grep -Fxq "$teamcity_user" <<< "$users"; then
+#    timestamp "teamcity user '$teamcity_user' user already detected, skipping creation"
+if [ -n "${users//[[:space:]]/}" ]; then
+    timestamp "users already exist, not creating teamcity administrative user '$teamcity_user'"
     user_already_exists=1
 else
-    timestamp "Creating teamcity user '$teamcity_user':"
+    #timestamp "Creating teamcity user '$teamcity_user':"
+    timestamp "no users exist yet, creating teamcity user '$teamcity_user'"
     "$srcdir/teamcity_api.sh" /users -sSL --fail \
          -d "{ \"username\": \"$teamcity_user\", \"password\": \"$teamcity_password\"}"
          # Note: Unnecessary use of -X or --request, POST is already inferred.
@@ -203,37 +211,36 @@ else
     #       Invalid request. Please check the request URL and data are correct.
     echo >&2
     echo >&2
-fi
-
-timestamp "Setting teamcity user '$teamcity_user' as system administrator:"
-"$srcdir/teamcity_api.sh" "/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" -sSL --fail -X PUT > /dev/null
-# no newline returned
-echo >&2
-
-api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens" -sSL | \
-             jq -r '.token[]' || :)"
-if [ -n "$api_token" ]; then
-    timestamp "Teamcity user '$teamcity_user' already has an API token, skipping token creation"
-    timestamp "since we cannot get existing token value out of the API, will load TEAMCITY_SUPERUSER_TOKEN to environment to use instead"
-    export TEAMCITY_SUPERUSER_TOKEN="$TEAMCITY_SUPERUSER_TOKEN"
-else
-    timestamp "Creating API token for user '$teamcity_user'"
-    api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens/mytoken" -sSL --fail -X POST | jq -r '.value')"
-    timestamp "here is your user API token, export this and then you can easily use teamcity_api.sh:"
+    timestamp "Setting teamcity user '$teamcity_user' as system administrator:"
+    "$srcdir/teamcity_api.sh" "/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" -sSL --fail -X PUT > /dev/null
+    # no newline returned
     echo >&2
-    echo "export TEAMCITY_URL=$TEAMCITY_URL"
-    export TEAMCITY_URL="$TEAMCITY_URL"
-    echo "export TEAMCITY_TOKEN=_token"
-    export TEAMCITY_TOKEN="_token"
+    api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens" -sSL | \
+                 jq -r '.token[]' || :)"
+    if [ -n "$api_token" ]; then
+        timestamp "Teamcity user '$teamcity_user' already has an API token, skipping token creation"
+        timestamp "since we cannot get existing token value out of the API, will load TEAMCITY_SUPERUSER_TOKEN to environment to use instead"
+    else
+        timestamp "Creating API token for user '$teamcity_user'"
+        api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens/mytoken" -sSL --fail -X POST | jq -r '.value')"
+        timestamp "here is your user API token, export this and then you can easily use teamcity_api.sh:"
+        echo >&2
+        # this takes precedence so disable it and use the user's api token instead
+        unset TEAMCITY_SUPERUSER_TOKEN
+        echo "export TEAMCITY_URL=$TEAMCITY_URL"
+        export TEAMCITY_URL="$TEAMCITY_URL"
+        echo "export TEAMCITY_TOKEN=$api_token"
+        export TEAMCITY_TOKEN="$api_token"
+    fi
+    echo >&2
 fi
-echo >&2
 
 if [ "$user_already_exists" = 0 ]; then
     timestamp "Login here with username '$teamcity_user' and password: \$TEAMCITY_PASSWORD (default: admin):"
     echo >&2
     login_url="$TEAMCITY_URL/login.html"
-    timestamp "TeamCity Login page:  $login_url"
-    echo >&2
+    echo "$login_url"
+    echo
     if is_mac; then
         timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
         open "$login_url"
