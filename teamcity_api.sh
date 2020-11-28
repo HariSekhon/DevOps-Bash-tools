@@ -158,9 +158,12 @@ chmod 0600 "$cookie_jar"
 
 #CURL_OPTS=(-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-})
 read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-}"
-if ! [[ "$*" =~ Accept:|Content-Type: ]]; then
-#                           XML by default :-/
-    CURL_OPTS+=(-H "Accept: application/json" -H "Content-Type: application/json")
+# XML by default :-/
+if ! [[ "$*" =~ Accept: ]]; then
+    CURL_OPTS+=(-H "Accept: application/json")
+fi
+if ! [[ "$*" =~ Content-Type: ]]; then
+    CURL_OPTS+=(-H "Content-Type: application/json")
 fi
 
 # don't enforce as hard requirements here, instead try alternation further down and construct from what's available
