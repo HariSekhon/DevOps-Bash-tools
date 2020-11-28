@@ -29,6 +29,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 #    alias docker="podman"
 #fi
 
+alias dc=docker-compose
 alias dps='docker ps'
 alias dpsa='docker ps -a'
 alias dst="dockerhub_show_tags.py"
