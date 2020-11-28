@@ -210,9 +210,6 @@ shift || :
 
 url_path="${url_path##/}"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
-#
 # use superuser token override to support teamcity.sh when token has already been created but we cannot get it's key value out of the API, so need to continue using superuser token
 if [ -n "${TEAMCITY_SUPERUSER_TOKEN:-}" ]; then
     # XXX: superuser token can only be used with blank user which cannot be used with curl_auth.sh
