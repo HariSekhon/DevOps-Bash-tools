@@ -252,7 +252,7 @@ get_connected_agents(){
 }
 
 SECONDS=0
-timestamp "waiting for $num_expected_agents expected agent(s) to become connected before authorizing them"
+timestamp "waiting for $num_expected_agents expected agent(s) to connect before authorizing them"
 while true; do
     num_connected_agents="$(get_connected_agents | grep -c . || :)"
     timestamp "connected agents: $num_connected_agents"
