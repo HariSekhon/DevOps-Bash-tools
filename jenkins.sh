@@ -99,7 +99,7 @@ EOF
 }
 
 if [ "$action" = up ]; then
-    timestamp "Booting Jenkins docker container:"
+    timestamp "Booting Jenkins:"
     docker-compose up -d "$@"
     echo >&2
 elif [ "$action" = ui ]; then
@@ -114,7 +114,6 @@ else
     echo >&2
     exit 0
 fi
-
 
 when_jenkins_up(){
     when_url_content 90 "$JENKINS_URL" '(?i:jenkins|hudson)'
