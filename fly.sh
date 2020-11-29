@@ -16,6 +16,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+export PATH="$PATH:/usr/local/bin:"~/bin
+
 target="${FLY_TARGET:-}"
 
 opts=()
