@@ -40,6 +40,8 @@ If \$TEAMCITY_HOST is used, then the following may also be set:
 \$TEAMCITY_PORT - defaults to 8111 and is only used if \$TEAMCITY_URL is not used
 \$TEAMCITY_SSL  - defaults to http, any value enables https
 
+If no Accept or Content-Type headers are passed in the arguments, then sets them to application/json by default because the API returns XML otherwise, and who wants that in the modern age... but this still allows you to override them for the odd endpoint that requires instead sending text/plain (looking at you Agent authorization endpoint)
+
 
 API Reference:
 
