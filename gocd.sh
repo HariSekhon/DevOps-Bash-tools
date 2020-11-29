@@ -35,7 +35,7 @@ Boots a GoCD CI cluster with server and agent(s) in Docker, and builds the curre
 
     ${0##*/} ui     - prints the GoCD Server URL and on Mac automatically opens browser
 
-Idempotent, so you can cancel and re-run this from any stage and it'll find out where it got up to any continue from that point
+Idempotent, you can re-run this and continue from any stage
 
 See Also:
 
