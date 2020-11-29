@@ -184,6 +184,8 @@ while read -r hostname uuid; do
 done
 
 echo
+timestamp "GoCD is up and ready"
+echo
 echo "GoCD Server URL:  $url"
 echo
 if is_mac; then
