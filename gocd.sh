@@ -149,7 +149,7 @@ expected_agents="$(docker-compose config | awk '/^[[:space:]]+gocd-agent.*:[[:sp
 num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
 
 SECONDS=0
-timestamp "Waiting for $num_expected_agents expected agent(s) connect before authorizing them:"
+timestamp "Waiting for $num_expected_agents expected agent(s) connect before enabling them:"
 while true; do
     num_connected_agents="$(get_agent_count)"
     #if get_agents | grep -q hostname; then
@@ -157,7 +157,7 @@ while true; do
         break
     fi
     if [ $SECONDS -gt $max_secs ]; then
-        timestamp "giving up waiting for connect agents after $max_secs"
+        timestamp "giving up waiting for connected agents after $max_secs"
         break
     fi
     timestamp "connected agents: $num_connected_agents"
