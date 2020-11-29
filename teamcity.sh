@@ -38,7 +38,7 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the TeamCity Server URL and on Mac automatically opens browser
+    ${0##*/} ui     - prints the TeamCity Server URL and on Mac automatically opens in browser
 
 Idempotent, you can re-run this and continue from any stage
 
