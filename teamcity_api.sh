@@ -140,6 +140,20 @@ Remember you can check logs/teamcity-rest.log server log for these API requests
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
+help_usage "$@"
+
+min_args 1 "$@"
+
+url_path="$1"
+shift || :
+
+url_path="${url_path##/}"
+
+# don't enforce as hard requirements here, instead try alternation further down and construct from what's available
+#check_env_defined "TEAMCITY_URL"
+#check_env_defined "TEAMCITY_HOST"
+#check_env_defined "TEAMCITY_TOKEN"
+
 # to speed up http basic auth:
 #
 # https://youtrack.jetbrains.com/issue/TW-14209
@@ -167,15 +181,6 @@ fi
 if ! [[ "$*" =~ Content-Type: ]]; then
     CURL_OPTS+=(-H "Content-Type: application/json")
 fi
-
-# don't enforce as hard requirements here, instead try alternation further down and construct from what's available
-#check_env_defined "TEAMCITY_URL"
-#check_env_defined "TEAMCITY_HOST"
-#check_env_defined "TEAMCITY_TOKEN"
-
-help_usage "$@"
-
-min_args 1 "$@"
 
 if [ -n "${TEAMCITY_URL:-}" ]; then
     url_base="${TEAMCITY_URL%%/}"
@@ -209,11 +214,6 @@ if [ -n "${TEAMCITY_API_VERSION:-}" ]; then
     #url_base+="/2018.1"
     url_base+="/${TEAMCITY_API_VERSION##/}"
 fi
-
-url_path="$1"
-shift || :
-
-url_path="${url_path##/}"
 
 # use superuser token override to support teamcity.sh when token has already been created but we cannot get it's key value out of the API, so need to continue using superuser token
 if [ -n "${TEAMCITY_SUPERUSER_TOKEN:-}" ]; then
