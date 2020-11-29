@@ -20,7 +20,7 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC2034,SC2154
+# shellcheck disable=SC2034
 usage_description="
 Boots a GoCD CI cluster with server and agent(s) in Docker, and builds the current repo
 
