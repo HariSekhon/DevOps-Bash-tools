@@ -151,8 +151,7 @@ shift || :
 
 url_path="${url_path##/}"
 
-#CURL_OPTS=(-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-})
-read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-}"
+read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
 
 # XML by default :-/
 if ! [[ "$*" =~ Accept: ]]; then
@@ -184,6 +183,8 @@ mkdir -p "${cookie_jar%/*}"  # pre-create the directory
 : > "$cookie_jar"
 chown "$(whoami)" "$cookie_jar"
 chmod 0600 "$cookie_jar"
+
+CURL_OPTS+=(-b "$cookie_jar" -c "$cookie_jar")
 
 if [ -n "${TEAMCITY_URL:-}" ]; then
     url_base="${TEAMCITY_URL%%/}"
