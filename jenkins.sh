@@ -22,14 +22,15 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/git.sh"
 
-# shellcheck disable=SC2034,SC2154
+# shellcheck disable=SC2034
 usage_description="
 Boots Jenkins CI in Docker, and builds the current repo
 
 - boots Jenkins container in Docker
 - installs plugins
 - prints admin credentials
-- creates job pipeline from setup/jenkins-job.xml and Jenkinsfile
+- creates job from \$PWD/setup/jenkins-job.xml
+  - using pipeline from \$PWD/Jenkinsfile
 - enables job
 - builds job
 - prints Jenkins UI URL and on Mac opens it in browser
