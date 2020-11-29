@@ -18,6 +18,7 @@ version: '3'
 
 services:
   teamcity-server:
+    hostname: teamcity-server
     # 2GB docker image
     image: jetbrains/teamcity-server:${VERSION:-2020.2}
     ports:
@@ -40,6 +41,7 @@ services:
       - /tmp/teamcity/server/datadir:/data/teamcity_server/datadir
       - /tmp/teamcity/server/logs:/opt/teamcity/logs
   teamcity-agent:
+    hostname: teamcity-agent
     # 1.3GB docker image
     image: jetbrains/teamcity-agent:${VERSION:-2020.2}
     #image: jetbrains/teamcity-agent:${VERSION:-2020.2}-linux-sudo
