@@ -26,9 +26,9 @@ Queries the Teamcity API
 
 Requires \$TEAMCITY_TOKEN be available in the environment, generation a token here:
 
-\$TEAMCITY_URL/profile.html?item=accessTokens
-or
-https://\$TEAMCITY_HOST:\$TEAMCITY_PORT/profile.html?item=accessTokens
+    \$TEAMCITY_URL/profile.html?item=accessTokens
+        or
+    https://\$TEAMCITY_HOST:\$TEAMCITY_PORT/profile.html?item=accessTokens
 
 If using the superuser token, it must instead be specified as \$TEAMCITY_SUPERUSER_TOKEN and takes precedence
 
@@ -45,9 +45,9 @@ If no Accept or Content-Type headers are passed in the arguments, then sets them
 
 API Reference:
 
-https://www.jetbrains.com/help/teamcity/rest-api.html
+    https://www.jetbrains.com/help/teamcity/rest-api.html
 
-https://www.jetbrains.com/help/teamcity/rest-api-reference.html
+    https://www.jetbrains.com/help/teamcity/rest-api-reference.html
 
 
 The API version used by default is latest, but you can specify an older API version like so:
@@ -56,7 +56,7 @@ The API version used by default is latest, but you can specify an older API vers
 
 At time of writing, prior API versions are: 2018.1, 2017.2, 2017.1, 10.0, 9.1, 9.0, 8.1, 8.0. See:
 
-https://www.jetbrains.com/help/teamcity/rest-api.html#REST+API+Versions
+    https://www.jetbrains.com/help/teamcity/rest-api.html#REST+API+Versions
 
 
 See Also:
