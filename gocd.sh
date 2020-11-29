@@ -13,8 +13,6 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Start a quick local GoCD CI cluster
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
@@ -24,7 +22,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-One-touch GoCD CI cluster with server and agent(s) in Docker, and builds the current repo
+Boots a GoCD CI cluster with server and agent(s) in Docker, and builds the current repo
 
 - boots GoCD server and agent(s) (one by default) in Docker
 - loads the config repo for the current git project (setup/gocd_config_repo.json)
@@ -34,21 +32,26 @@ One-touch GoCD CI cluster with server and agent(s) in Docker, and builds the cur
     ${0##*/} [up]
 
     ${0##*/} down
+
+    ${0##*/} ui     - prints the GoCD Server URL and on Mac automatically opens browser
+
+Idempotent, so you can cancel and re-run this from any stage and it'll find out where it got up to any continue from that point
+
+See Also:
+
+    gocd_api.sh - this script makes use of it to handle API calls as part of the setup
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[up|down]"
+usage_args="[up|down|ui]"
 
 help_usage "$@"
 
-NUM_AGENTS=1
+export GOCD_URL="http://${GOCD_HOST:-localhost}:${GOCD_PORT:-8153}"
+url="$GOCD_URL/go/pipelines#!/"
 
-server="http://${GOCD_HOST:-localhost}:${GOCD_PORT:-8153}"
-url="$server/go/pipelines#!/"
-api="$server/go/api"
-
-config="$srcdir/setup/gocd-docker-compose.yml"
+export COMPOSE_FILE="$srcdir/setup/gocd-docker-compose.yml"
 
 if [ -f setup/gocd_config_repo.json ]; then
     repo_config=setup/gocd_config_repo.json
@@ -66,11 +69,6 @@ shift || :
 #git_repo="$(git remote -v | grep github.com | sed 's/.*github.com/https:\/\/github.com/; s/ .*//')"
 #repo="${git_repo##*/}"
 
-opts=""
-if [ "$action" = up ]; then
-    opts="-d"
-fi
-
 # load .gocd.yaml from this github location
 # doesn't work - see https://github.com/gocd/gocd/issues/7930
 # also, caused gocd-server to be recreated from different repos due to this differing environment variable each time
@@ -82,77 +80,107 @@ fi
 #    export CONFIG_GIT_REPO="$git_repo"
 #fi
 
-echo "Booting GoCD:"
-docker-compose -f "$config" "$action" $opts "$@"
-echo
-if [ "$action" = down ]; then
+if [ "$action" = up ]; then
+    timestamp "Booting GoCD cluster:"
+    # starting agents later they won't be connected in time to become authorized
+    # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
+    #docker-compose up -d teamcity-server "$@"
+    docker-compose up -d "$@"
+elif [ "$action" = ui ]; then
+    echo "GoCD Server URL:  $GOCD_URL"
+    if is_mac; then
+        open "$GOCD_URL"
+    fi
+    exit 0
+else
+    docker-compose "$action" "$@"
+    echo >&2
     exit 0
 fi
 
-when_url_content "$url" '(?i:gocd)'
-echo
+when_url_content "$GOCD_URL" '(?i:gocd)'
+echo >&2
 
 SECONDS=0
 max_secs=300
-while curl -sS "$server" | grep -q 'GoCD server is starting'; do
-    tstamp 'waiting for server to finish starting up and remove message "GoCD server is starting"'
+# don't use --fail here, it'll exit the loop prematurely
+while curl -sS "$GOCD_URL" | grep -q 'GoCD server is starting'; do
+    timestamp 'waiting for server to finish starting up and remove message "GoCD server is starting"'
     if [ $SECONDS -gt $max_secs ]; then
         die "GoCD server failed to start within $max_secs seconds"
     fi
     sleep 3
 done
-echo
+echo >&2
 
-echo "(re)creating config repo:"
-echo
+timestamp "(re)creating config repo:"
+echo >&2
 
 config_repo="$(jq -r '.id' "$repo_config")"
 
-echo "deleting config repo if already existing:"
-curl "$api/admin/config_repos/$config_repo" \
+# XXX: these config_repo endpoints don't work unless v3 is set
+timestamp "deleting config repo if already existing:"
+"$srcdir/gocd_api.sh" "/admin/config_repos/$config_repo" \
      -H 'Accept:application/vnd.go.cd.v3+json' \
-     -H 'Content-Type:application/json' \
-     -X DELETE -sS || :
-echo
-echo
+     -X DELETE || :
+echo >&2
+echo >&2
 
-echo "creating config repo:"
-curl "$api/admin/config_repos" \
+# XXX: these config_repo endpoints don't work unless v3 is set
+timestamp "creating config repo:"
+"$srcdir/gocd_api.sh" "/admin/config_repos" \
      -H 'Accept:application/vnd.go.cd.v3+json' \
-     -H 'Content-Type:application/json' \
-     -X POST \
-     -d @"$repo_config" -sS
-echo
-echo
+     -X POST -d @"$repo_config"
+echo >&2
+echo >&2
 
 # needs this header, otherwise gets 404
 get_agents(){
-    curl -sS "$api/agents" -H 'Accept: application/vnd.go.cd.v6+json'
+    "$srcdir/gocd_api.sh" "/agents"
+}
+# TODO: refine this to only connected agents
+get_agent_count(){
+    get_agents |
+    jq '._embedded.agents | length'
 }
 
-echo "Waiting for agent(s) to register:"
+timestamp "getting list of expected agents"
+expected_agents="$(docker-compose config | awk '/^[[:space:]]+gocd-agent.*:[[:space:]]*$/ {print $1}' | sed 's/://g; s/[[:space:]]//g; /^[[:space:]]*$/d')"
+num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
+
+SECONDS=0
+timestamp "Waiting for $num_expected_agents expected agent(s) connect before authorizing them:"
 while true; do
+    num_connected_agents="$(get_agent_count)"
     #if get_agents | grep -q hostname; then
-    if [ "$(get_agents | jq '._embedded.agents | length')" -ge $NUM_AGENTS ]; then
-        echo
+    if [ "$num_connected_agents" -ge "$num_expected_agents" ]; then
         break
     fi
-    echo -n '.'
-    sleep 1
+    if [ $SECONDS -gt $max_secs ]; then
+        timestamp "giving up waiting for connect agents after $max_secs"
+        break
+    fi
+    timestamp "connected agents: $num_connected_agents"
+    sleep 3
 done
+echo
 
 echo "Enabling agent(s):"
 echo
 get_agents |
 jq -r '._embedded.agents[] | [.hostname, .uuid] | @tsv' |
 while read -r hostname uuid; do
-    echo "enabling agent: $hostname"
-    curl "$api/agents/$uuid" \
-    -H 'Accept: application/vnd.go.cd.v6+json' \
-    -H 'Content-Type: application/json' \
-    -X PATCH \
-    -d '{ "agent_config_state": "Enabled" }' -sS || :  # don't stop, try enabling all agents
-    echo
+    for expected_agent in $expected_agents; do
+        # grep -f would be easier but don't want to depend on have the GNU version installed and then remapped via func
+        #if [[ "$hostname" =~ ^$expected_agent(-[[:digit:]]+)?$ ]]; then
+        if [[ "$hostname" =~ ^$expected_agent$ ]]; then
+            timestamp "enabling expected agent '$hostname' with uuid '$uuid'"
+            "$srcdir/gocd_api.sh" "/agents/$uuid" -X PATCH -d '{ "agent_config_state": "Enabled" }' || :  # don't stop, try enabling all agents
+            echo
+            continue 2
+        fi
+    done
+    timestamp "WARNING: unauthorized agent '$hostname' was not expected, not automatically enabling"
 done
 
 echo
