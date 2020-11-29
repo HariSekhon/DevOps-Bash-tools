@@ -16,6 +16,7 @@ version: '3'
 
 services:
   gocd-server:
+    hostname: gocd-server
     image: gocd/gocd-server:v${VERSION:-20.2.0}
     ports:
       - 8153:8153
@@ -30,7 +31,11 @@ services:
     #environment:
     #  CONFIG_GIT_REPO: ${CONFIG_GIT_REPO:-https://github.com/harisekhon/bash-tools}
     #  CONFIG_GIT_BRANCH: ${CONFIG_GIT_BRANCH:-master}
+
+  # XXX: containers should be called gocd-agent as gocd.sh uses this to count the number of expected agents and wait for them to connect before authorizing them
   gocd-agent:
+    # XXX: hostname must be set to gocd-agent to be recognized as an expected agent
+    hostname: gocd-agent
     image: gocd/gocd-agent-ubuntu-18.04:v${VERSION:-20.2.0}
     ports:
       - 8152:8152
@@ -50,6 +55,7 @@ services:
     restart: on-failure
     links:
       - gocd-server
+
 #  gocd-agent2:
 #    image: gocd/gocd-agent-ubuntu-18.04:v${VERSION:-20.2.0}
 #    # needs root to be able to install OS package dependencies - 'sudo' not installed
