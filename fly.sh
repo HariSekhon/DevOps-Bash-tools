@@ -18,11 +18,9 @@ set -euo pipefail
 
 target="${FLY_TARGET:-}"
 
-opts=""
+opts=()
 if [ -n "$target" ]; then
-    opts="-t $target"
+    opts+=(-t "$target")
 fi
 
-# want word splitting
-# shellcheck disable=SC2086
-exec fly $opts "$@"
+exec fly "${opts[@]}" "$@"
