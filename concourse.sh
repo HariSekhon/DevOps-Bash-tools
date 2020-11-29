@@ -22,15 +22,45 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC2034
+usage_description="
+Boots Concourse CI in Docker, and builds the current repo
+
+- boots Concourse container in Docker
+- creates job pipeline from \$PWD/.concourse.yml
+- unpauses pipeline and job
+- triggers pipeline job
+- follows job build log in CLI
+- prints recent build statuses
+
+    ${0##*/} [up]
+
+    ${0##*/} down
+
+    ${0##*/} ui     - prints the Concourse URL and on Mac automatically opens in browser
+
+Idempotent, you can re-run this and continue from any stage
+
+See Also:
+
+    fly.sh - wraps the fly command specify target from the environment variable FLY_TARGET to avoid repetition
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[up|down|ui]"
+
+help_usage "$@"
+
 export CONCOURSE_USER="${CONCOURSE_USER:-test}"
 export CONCOURSE_PASSWORD="${CONCOURSE_PASSWORD:-test}"
 
 export CONCOURSE_HOST=localhost
 export CONCOURSE_PORT=8081
 
-config="$srcdir/setup/concourse-docker-compose.yml"
+export COMPOSE_FILE="$srcdir/setup/concourse-docker-compose.yml"
 
-target="ci"
+export FLY_TARGET="ci"
 
 pipeline="${PWD##*/}"
 job="$pipeline/build"
@@ -42,33 +72,39 @@ fi
 action="${1:-up}"
 shift || :
 
-opts=""
+if ! [ -f "$COMPOSE_FILE" ]; then
+    timestamp "downloading Concourse CI docker-compose.yml" # this is in Git so shouldn't run any more
+    wget -O "$COMPOSE_FILE" https://concourse-ci.org/docker-compose.yml
+fi
+
 if [ "$action" = up ]; then
-    opts="-d"
-fi
-
-if ! [ -f "$config" ]; then
-    wget -O "$config" https://concourse-ci.org/docker-compose.yml
-fi
-
-echo "Booting Concourse:"
-docker-compose -f "$config" "$action" $opts "$@"
-echo
-if [ "$action" = down ]; then
+    timestamp "Booting Concourse:"
+    docker-compose up -d "$@"
+    echo >&2
+elif [ "$action" = ui ]; then
+    echo "Concourse URL:  $CONCOURSE_URL"
+    if is_mac; then
+        open "$CONCOURSE_URL"
+    fi
+    exit 0
+else
+    docker-compose "$action" "$@"
+    echo >&2
     exit 0
 fi
 
 export PATH="$PATH:"~/bin
 
-url="http://$CONCOURSE_HOST:$CONCOURSE_PORT"
+CONCOURSE_URL="http://$CONCOURSE_HOST:$CONCOURSE_PORT"
 
-when_url_content "$url" '(?i:concourse)' # Concourse
+when_url_content "$CONCOURSE_URL" '(?i:concourse)' # Concourse
 echo
 
 # which checks for executable which command -v and type -P don't
 # shellcheck disable=SC2230
 if [ "$action" = up ] &&
    ! which fly &>/dev/null; then
+    # fly.sh has ~/bin in $PATH
     dir=~/bin
     mkdir -pv "$dir"
     os="$(uname -s | tr '[:upper:]' '[:lower:]')"
@@ -78,34 +114,34 @@ if [ "$action" = up ] &&
     echo
 fi
 
-fly -t "$target" login -c "$url" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
+"$srcdir/fly.sh" login -c "$CONCOURSE_URL" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
-echo "updating pipeline: $pipeline"
+timestamp "updating pipeline: $pipeline"
 # fly sp
 set +o pipefail
-yes | fly -t "$target" set-pipeline -p "$pipeline" -c .concourse.yml
+yes | "$srcdir/fly.sh" set-pipeline -p "$pipeline" -c .concourse.yml
 set -o pipefail
 echo
 
-echo "unpausing pipeline: $pipeline"
+timestamp "unpausing pipeline: $pipeline"
 # fly up
-fly -t "$target" unpause-pipeline -p "$pipeline"
+"$srcdir/fly.sh" unpause-pipeline -p "$pipeline"
 echo
 
-echo "unpausing job: $job"
+timestamp "unpausing job: $job"
 # fly uj
-fly -t "$target" unpause-job --job "$job"
+"$srcdir/fly.sh" unpause-job --job "$job"
 
-#fly -t "$target" trigger-job -j "$job"
-#fly -t "$target" watch -j "$job"
+#"$srcdir/fly.sh" trigger-job -j "$job"
+#"$srcdir/fly.sh" watch -j "$job"
 
 echo
-echo "Concourse URL:  $url"
+echo "Concourse URL:  $CONCOURSE_URL"
 echo
 
 # trigger + watch together
-fly -t "$target" trigger-job -j "$job" -w
+"$srcdir/fly.sh" trigger-job -j "$job" -w
 
 echo
-fly -t "$target" builds
+"$srcdir/fly.sh" builds
