@@ -82,9 +82,6 @@ shift || :
 
 if [ "$action" = up ]; then
     timestamp "Booting GoCD cluster:"
-    # starting agents later they won't be connected in time to become authorized
-    # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
-    #docker-compose up -d teamcity-server "$@"
     docker-compose up -d "$@"
 elif [ "$action" = ui ]; then
     echo "GoCD Server URL:  $GOCD_URL"
