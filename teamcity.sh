@@ -38,7 +38,7 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the Teamcity Server URL and on Mac automatically opens browser
+    ${0##*/} ui     - prints the TeamCity Server URL and on Mac automatically opens browser
 
 Idempotent, you can re-run this and continue from any stage
 
@@ -218,7 +218,7 @@ else
     api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens" -sSL | \
                  jq -r '.token[]' || :)"
     if [ -n "$api_token" ]; then
-        timestamp "Teamcity user '$teamcity_user' already has an API token, skipping token creation"
+        timestamp "TeamCity user '$teamcity_user' already has an API token, skipping token creation"
         timestamp "since we cannot get existing token value out of the API, will load TEAMCITY_SUPERUSER_TOKEN to environment to use instead"
     else
         timestamp "Creating API token for user '$teamcity_user'"
