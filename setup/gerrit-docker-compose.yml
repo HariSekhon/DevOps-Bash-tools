@@ -12,10 +12,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-version: '2.2'
+version: '3'
 
 services:
   gerrit:
+    hostname: gerrit
     image: gerritcodereview/gerrit:${VERSION:-latest}
     ports:
       - 8080:8080
