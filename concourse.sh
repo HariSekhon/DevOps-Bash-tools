@@ -58,6 +58,8 @@ export CONCOURSE_PASSWORD="${CONCOURSE_PASSWORD:-test}"
 export CONCOURSE_HOST=localhost
 export CONCOURSE_PORT=8081
 
+CONCOURSE_URL="http://$CONCOURSE_HOST:$CONCOURSE_PORT"
+
 export COMPOSE_FILE="$srcdir/setup/concourse-docker-compose.yml"
 
 export FLY_TARGET="ci"
@@ -83,6 +85,10 @@ if [ "$action" = up ]; then
     echo >&2
 elif [ "$action" = ui ]; then
     echo "Concourse URL:  $CONCOURSE_URL"
+    echo
+    echo "Concourse user:     $CONCOURSE_USER"
+    echo "Concourse password: $CONCOURSE_PASSWORD"
+    echo
     if is_mac; then
         open "$CONCOURSE_URL"
     fi
@@ -94,8 +100,6 @@ else
 fi
 
 export PATH="$PATH:"~/bin
-
-CONCOURSE_URL="http://$CONCOURSE_HOST:$CONCOURSE_PORT"
 
 when_url_content "$CONCOURSE_URL" '(?i:concourse)' # Concourse
 echo
