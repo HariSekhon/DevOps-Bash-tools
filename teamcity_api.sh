@@ -149,6 +149,17 @@ shift || :
 
 url_path="${url_path##/}"
 
+#CURL_OPTS=(-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-})
+read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-}"
+
+# XML by default :-/
+if ! [[ "$*" =~ Accept: ]]; then
+    CURL_OPTS+=(-H "Accept: application/json")
+fi
+if ! [[ "$*" =~ Content-Type: ]]; then
+    CURL_OPTS+=(-H "Content-Type: application/json")
+fi
+
 # don't enforce as hard requirements here, instead try alternation further down and construct from what's available
 #check_env_defined "TEAMCITY_URL"
 #check_env_defined "TEAMCITY_HOST"
@@ -171,16 +182,6 @@ mkdir -p "${cookie_jar%/*}"  # pre-create the directory
 : > "$cookie_jar"
 chown "$(whoami)" "$cookie_jar"
 chmod 0600 "$cookie_jar"
-
-#CURL_OPTS=(-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-})
-read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 -b $cookie_jar -c $cookie_jar ${CURL_OPTS:-}"
-# XML by default :-/
-if ! [[ "$*" =~ Accept: ]]; then
-    CURL_OPTS+=(-H "Accept: application/json")
-fi
-if ! [[ "$*" =~ Content-Type: ]]; then
-    CURL_OPTS+=(-H "Content-Type: application/json")
-fi
 
 if [ -n "${TEAMCITY_URL:-}" ]; then
     url_base="${TEAMCITY_URL%%/}"
@@ -222,7 +223,7 @@ if [ -n "${TEAMCITY_SUPERUSER_TOKEN:-}" ]; then
 else
     "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 fi
-chmod 0600 "$cookie_jar"
+#chmod 0600 "$cookie_jar"
 
 # args: /swagger.json | jq .
 # args: /server | jq .  # get all the API details, takes a moment to query
