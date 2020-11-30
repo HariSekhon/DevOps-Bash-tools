@@ -28,7 +28,7 @@ Any args are passed straight to kubectl as is
 
 Output:
 
-    <namespace>    <pvc_name>    <kubernetes_persistent_volume>    <gcp_persistent_disk>
+    <namespace>    <pvc_name>    <kubernetes_persistent_volume>    <gcp_persistent_disk>    <zone>
 
 This is useful to investigate GCP disks when testing disk resizing
 
@@ -50,6 +50,6 @@ help_usage "$@"
 # the spec line needs to be one line because newlines in the jsonpath come out literally
 kubectl get pv "$@" -o jsonpath='
     {range .items[*]}
-        {.spec.claimRef.namespace}{"\t"}{.spec.claimRef.name}{"\t"}{.metadata.name}{"\t"}{.spec.gcePersistentDisk.pdName}{"\n"}
+        {.spec.claimRef.namespace}{"\t"}{.spec.claimRef.name}{"\t"}{.metadata.name}{"\t"}{.spec.gcePersistentDisk.pdName}{"\t"}{.metadata.labels.failure-domain\.beta\.kubernetes\.io/zone}{"\n"}
     ' |
 column -t
