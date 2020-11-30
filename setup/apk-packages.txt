@@ -22,6 +22,7 @@ git
 go
 grep
 jq
+libxml2-utils  # needed for xmllint
 make
 parallel
 perl
