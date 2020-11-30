@@ -43,7 +43,7 @@ Idempotent, you can re-run this and continue from any stage
 
 See Also:
 
-    fly.sh - wraps the fly command specify target from the environment variable FLY_TARGET to avoid repetition
+    fly.sh - wraps the fly command specifying target from the environment variable FLY_TARGET to avoid repetition. Also automatically downloads the 'fly' utility if not present in \$PATH
 "
 
 # used by usage() in lib/utils.sh
@@ -109,24 +109,27 @@ export PATH="$PATH:"~/bin
 when_url_content "$CONCOURSE_URL" '(?i:concourse)' # Concourse
 echo
 
+# done in fly.sh now
 # which checks for executable which command -v and type -P don't
 # shellcheck disable=SC2230
-if [ "$action" = up ] &&
-   ! which fly &>/dev/null; then
-    # fly.sh has ~/bin in $PATH
-    dir=~/bin
-    mkdir -pv "$dir"
-    os="$(uname -s | tr '[:upper:]' '[:lower:]')"
-    echo "Downloading fly for OS = $os"
-    wget -cO "$dir/fly" "http://$CONCOURSE_HOST:$CONCOURSE_PORT/api/v1/cli?arch=amd64&platform=$os"
-    chmod +x "$dir/fly"
-    echo
-fi
+#if [ "$action" = up ] &&
+#   ! which fly &>/dev/null; then
+#    # fly.sh has ~/bin in $PATH
+#    dir=~/bin
+#    mkdir -pv "$dir"
+#    os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+#    echo "Downloading fly for OS = $os"
+#    wget -cO "$dir/fly" "http://$CONCOURSE_HOST:$CONCOURSE_PORT/api/v1/cli?arch=amd64&platform=$os"
+#    chmod +x "$dir/fly"
+#    echo
+#fi
 
+timestamp "fly login:"
 "$srcdir/fly.sh" login -c "$CONCOURSE_URL" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
 timestamp "updating pipeline: $pipeline"
+timestamp "loading config from $PWD/.concourse.yml"
 # fly sp
 set +o pipefail
 yes | "$srcdir/fly.sh" set-pipeline -p "$pipeline" -c .concourse.yml
