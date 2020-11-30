@@ -24,11 +24,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 On GKE prints the list of Kubernetes volumes to GCP persistent disk name mappings using kubectl
 
-Any args are passed straight to kubectl, eg.
+Any args are passed straight to kubectl as is
 
-    -n mynamespace
+Output:
 
-    --all-namespaces
+    <namespace>     <pod_claim_name>    <kubernetes_persistent_volume>     <gcp_persistent_disk>
 
 This is useful to investigate GCP disks when testing disk resizing
 
@@ -47,4 +47,4 @@ usage_args="[<kubectl_args>]"
 
 help_usage "$@"
 
-kubectl get pv -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.gcePersistentDisk.pdName}{"\n"}' "$@"
+kubectl get pv -o jsonpath='{range .items[*]}{.spec.claimRef.namespace}{"\t"}{.spec.claimRef.name}{"\t"}{.metadata.name}{"\t"}{.spec.gcePersistentDisk.pdName}{"\n"}' "$@" | column -t
