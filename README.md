@@ -327,8 +327,10 @@ etc.
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
     - `gcp_info_compute.sh` - [GCE](https://cloud.google.com/compute/) Virtual Machine instances, [App Engine](https://cloud.google.com/appengine) instances, [Cloud Functions](https://cloud.google.com/functions), [GKE](https://cloud.google.com/kubernetes-engine) clusters, all [Kubernetes](https://kubernetes.io/) objects across all GKE clusters (see `kubernetes_info.sh` below for more details)
     - `gcp_info_storage.sh` - [Cloud SQL](https://cloud.google.com/sql) info below, plus: [Cloud Storage](https://cloud.google.com/storage) Buckets, [Cloud Filestore](https://cloud.google.com/filestore), [Cloud Memorystore Redis](https://cloud.google.com/memorystore), [BigTable](https://cloud.google.com/bigtable) clusters and instances, [Datastore](https://cloud.google.com/datastore) indexes
-    - `gcp_info_cloud_sql.sh` - [Cloud SQL](https://cloud.google.com/sql) instances & whether their backups are enabled
-      - `gcp_info_cloud_sql_backups.sh` - list of backups for each [Cloud SQL](https://cloud.google.com/sql) instance with their dates and status (this is not included in `gcp_info*.sh` calls above as it'd clutter the inventory overview). See also `gcp_sql_export.sh` further down for more durable backups to [GCS](https://cloud.google.com/storage)
+    - `gcp_info_cloud_sql.sh` - [Cloud SQL](https://cloud.google.com/sql) instances, whether their backups are enabled, and all databases on each instance
+      - `gcp_info_cloud_sql_databases.sh` - lists databases inside each [Cloud SQL](https://cloud.google.com/sql) instance. Included in `gcp_info_cloud_sql.sh`
+      - `gcp_info_cloud_sql_backups.sh` - lists backups for each [Cloud SQL](https://cloud.google.com/sql) instance with their dates and status. Not included in `gcp_info_cloud_sql.sh` for brevity. See also `gcp_sql_export.sh` further down for more durable backups to [GCS](https://cloud.google.com/storage)
+      - `gcp_info_cloud_sql_users.sh` - lists users for each running [Cloud SQL](https://cloud.google.com/sql) instance. Not included in `gcp_info_cloud_sql.sh` for brevity but useful to audit users
     - `gcp_info_networking.sh` - VPC Networks, Addresses, Proxies, Subnets, Routers, Routes, VPN Gateways, VPN Tunnels, Reservations, Firewall rules, Forwarding rules, [Cloud DNS](https://cloud.google.com/dns) managed zones and verified domains
     - `gcp_info_bigdata.sh` - [Dataproc](https://cloud.google.com/dataproc) clusters and jobs in all regions, [Dataflow](https://cloud.google.com/dataflow) jobs in all regions, [PubSub](https://cloud.google.com/pubsub) messaging topics, [Cloud IOT](https://cloud.google.com/iot-core) registries in all regions
     - `gcp_info_tools.sh` - [Cloud Source Repositories](https://cloud.google.com/source-repositories), [Cloud Builds](https://cloud.google.com/cloud-build), [Container Registry](https://cloud.google.com/container-registry) images across all major repos (`gcr.io`, `us.gcr.io`, `eu.gcr.io`, `asia.gcr.io`), [Deployment Manager](https://cloud.google.com/deployment-manager) deployments
@@ -384,8 +386,10 @@ etc.
     - `bigquery_generate_query_biggest_tables_across_datasets_by_row_count.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by row count
     - `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size
     - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight BigQuery SQL scripts
-  - `gke_kube_creds.sh` - auto-loads all [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
-  - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
+  - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
+    - `gke_kube_creds.sh` - auto-loads all GKE credentials and contexts for all clusters in the current project so your `kubectl` is ready to rock on GCP
+    - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
+    - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
 
 #### Kubernetes
 
