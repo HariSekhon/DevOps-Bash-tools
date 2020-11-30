@@ -63,6 +63,8 @@ EOF
 if is_service_enabled sql-component.googleapis.com; then
     gcp_info "Cloud SQL instances" gcloud sql instances list
     gcp_info "Cloud SQL backups enabled"   gcloud sql instances list --format="table(name, settings.backupConfiguration.enabled: label='BACKUPS_ENABLED', settings.backupConfiguration.pointInTimeRecoveryEnabled, settings.backupConfiguration.replicationLogArchivingEnabled, settings.backupConfiguration.startTime)"
+    echo
+    "$srcdir/gcp_info_cloud_sql_databases.sh"
 else
     echo "Cloud SQL API (sql-component.googleapis.com) is not enabled, skipping..."
 fi
