@@ -16,6 +16,7 @@
 # exports SPOTIFY_ACCESS_TOKEN so all the user private data spotify tools (../spotify_*.sh) can use it easily without re-prompting ia browser
 
 spotifysession(){
+    local SPOTIFY_ACCESS_TOKEN
     # this would prevent it from being exported to the shell as we want to make it easier to use full spotify tools
     #local SPOTIFY_ACCESS_TOKEN
     # SECONDS cannot be reset in the background in spotify_token_expire_timer() function
@@ -25,14 +26,26 @@ spotifysession(){
     # shellcheck disable=SC2154
     SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$bash_tools/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
-
+    timestamp "starting spotify session shell"
+    "$SHELL"
+    timestamp "exiting spotify session shell"
+    unset SPOTIFY_ACCESS_TOKEN
 }
 
 spotify_token_expire_timer(){
+    # we have the same $$ as our foreground shell
+    local ppid=$$
     while true; do
         if [ "$SECONDS" -ge 3600 ]; then
-            # XXX: this probably won't work as it'll only affect the subshell
-            unset SPOTIFY_ACCESS_TOKEN
+            # XXX: this would never work as it'd only affect this background thread
+            #unset SPOTIFY_ACCESS_TOKEN
+            # instead kill the shell session and handle the unset in the spotifysession() function
+            timestamp "Spotify Token expired - killing spotify shell"
+            pgrep -P "$ppid" |
+            # protect own shell so we can finish this code pipe
+            grep -v $$ |
+            # bash needs a -HUP signal, ignores TERM
+            xargs kill -HUP
             break
         fi
         sleep 1
