@@ -24,7 +24,8 @@ git
 golang
 iputils-ping
 jq
-libperl-dev  # needed for PAR:Packer
+libperl-dev    # needed for PAR:Packer
+libxml2-utils  # needed for xmllint
 make
 parallel
 perl
