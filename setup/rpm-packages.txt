@@ -24,6 +24,7 @@ golang
 findutils  # find and xargs
 iputils
 jq
+libxml2  # needed for xmllint - usually already installed
 make
 perl
 #perl-App-cpanminus  # not available on RHEL6, moved to rpm-packages-optional.txt
