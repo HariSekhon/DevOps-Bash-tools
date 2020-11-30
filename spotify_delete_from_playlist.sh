@@ -51,6 +51,9 @@ Useful for chaining with other tools (eg. spotify_playlist_tracks_uri.sh / spoti
 tracks_already_in_playlists.sh in the HariSekhon/Spotify-Playlists github repo) or loading from saved spotify format
 playlists (eg. TODO playlists dumped by spotify_backup*.sh / spotify_playlist_tracks_uri.sh)
 
+Caveat: won't check the tracks are already in the playlist, will simply fire batch delete API calls and count the number of tracks requested to be removed, so repeated runs of the same URIs fed in will give the same results, which might mislead you to thinking they weren't remove the first time around, when they've already been removed
+
+
 $usage_playlist_help
 
 $usage_auth_help
