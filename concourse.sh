@@ -58,7 +58,12 @@ export CONCOURSE_PASSWORD="${CONCOURSE_PASSWORD:-test}"
 export CONCOURSE_HOST=localhost
 export CONCOURSE_PORT=8081
 
-CONCOURSE_URL="http://$CONCOURSE_HOST:$CONCOURSE_PORT"
+protocol="http"
+if [ -n "${CONCOURSE_SSL:-}" ]; then
+    protocol=https
+fi
+
+CONCOURSE_URL="$protocol://$CONCOURSE_HOST:$CONCOURSE_PORT"
 
 export COMPOSE_FILE="$srcdir/setup/concourse-docker-compose.yml"
 
