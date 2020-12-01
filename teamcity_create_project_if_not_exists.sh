@@ -29,6 +29,10 @@ Creates a TeamCity project if it doesn't already exist
 Uses the adjacent teamcity_api.sh
 
 See teamcity_api.sh for required connection settings and authentication
+
+If you need to delete a project you can call
+
+    teamcity_api.sh /projects/NAME -X DELETE
 "
 
 # used by usage() in lib/utils.sh
