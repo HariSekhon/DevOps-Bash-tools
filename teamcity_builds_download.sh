@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://www.jetbrains.com/help/teamcity/rest-api-reference.html#Build+Configuration+And+Template+Settings
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -22,7 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Exports all TeamCity builds to local JSON configuration files for backup/restore / migration purposes, or even just to backport changes to Git for revision control tracking
+Exports all TeamCity BuildTypes (build pipelines) to local JSON configuration files for backup/restore / migration purposes, or even just to backport changes to Git for revision control tracking
+
+If arguments are specified then only downloads those named BuildTypes, otherwise finds and downloads all BuildTypes
 
 Uses the adjacent teamcity_api.sh and jq (installed by 'make')
 
@@ -31,7 +35,7 @@ See teamcity_api.sh for required connection settings and authentication
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<build1> <build2> ...]"
+usage_args="[<buildtype1> <buildtype2> ...]"
 
 help_usage "$@"
 
