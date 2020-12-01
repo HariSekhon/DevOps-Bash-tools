@@ -38,12 +38,12 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 Set up a personal access token here:
 
-https://hub.docker.com/settings/security
+    https://hub.docker.com/settings/security
 
 
 API Reference:
 
-https://docs.docker.com/registry/spec/api/
+    https://docs.docker.com/registry/spec/api/
 
 DockerHub doesn't respect a lot of the Docker Registry API spec, eg. .../_catalog and .../tags/list both don't work and get 404s,
 so may need to experiment more than with your own private docker registry
@@ -53,7 +53,7 @@ Examples:
 
 # Get all the tags for a given repository called 'harisekhon/hbase':
 
-${0##*/} /repositories/harisekhon/hbase/tags
+    ${0##*/} /repositories/harisekhon/hbase/tags
 "
 
 # used by usage() in lib/utils.sh
@@ -63,11 +63,11 @@ usage_args="/path [<curl_options>]"
 #url_base="https://registry.hub.docker.com/v2"
 url_base="https://hub.docker.com/v2"
 
-curl_api_opts
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+curl_api_opts
 
 user="${DOCKERHUB_USERNAME:-${DOCKERHUB_USER:-${DOCKER_USERNAME:-${DOCKER_USER:-}}}}"
 PASSWORD="${DOCKERHUB_PASSWORD:-${DOCKERHUB_TOKEN:-${DOCKER_PASSWORD:-${DOCKER_TOKEN:-}}}}"
