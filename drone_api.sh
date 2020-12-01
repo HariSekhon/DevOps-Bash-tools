@@ -38,12 +38,12 @@ Automatically handles authentication via environment variable \$DRONE_TOKEN
 
 Get your personal access token here:
 
-https://cloud.drone.io/account
+    https://cloud.drone.io/account
 
 
 API Reference:
 
-https://docs.drone.io/api/overview/
+    https://docs.drone.io/api/overview/
 
 
 Examples:
@@ -51,17 +51,17 @@ Examples:
 
 # Get currently authenticated user:
 
-${0##*/} /user
+    ${0##*/} /user
 
 
 # List repos registered in Drone:
 
-${0##*/} /user/repos
+    ${0##*/} /user/repos
 
 
 # List your Drone builds for a repo (case sensitive):
 
-${0##*/} /repos/{owner}/{repo}/builds
+    ${0##*/} /repos/{owner}/{repo}/builds
 "
 
 # used by usage() in lib/utils.sh
@@ -70,11 +70,11 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://cloud.drone.io/api"
 
-curl_api_opts
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+curl_api_opts
 
 url_path="${1:-}"
 shift
@@ -83,11 +83,11 @@ url_path="${url_path##*:\/\/cloud.drone.io\/api}"
 url_path="${url_path##/}"
 url_path="${url_path##api}"
 
-if is_curl_min_version 7.55; then
-    # this trick doesn't work, file descriptor is lost by next line
-    #filedescriptor=<(cat <<< "Private-Token: $DRONE_TOKEN")
-    curl "${CURL_OPTS[@]}" -H @<(cat <<< "Authorization: Bearer $DRONE_TOKEN") "$url_base/$url_path" "$@"
-else
-    # could also use OAuth compliant header "Authorization: Bearer <token>"
-    curl "${CURL_OPTS[@]}" -H "Authorization: Bearer $DRONE_TOKEN" "$url_base/$url_path" "$@"
-fi
+export TOKEN="$DRONE_TOKEN"
+
+# this trick doesn't work, file descriptor is lost by next line
+#filedescriptor=<(cat <<< "Private-Token: $DRONE_TOKEN")
+# this works
+#curl "${CURL_OPTS[@]}" -H @<(cat <<< "Authorization: Bearer $DRONE_TOKEN") "$url_base/$url_path" "$@"
+
+"$srcdir/curl_auth.sh" "$url_base/$url_path" -H @<(cat <<< "Authorization: Bearer $DRONE_TOKEN") "${CURL_OPTS[@]}" "$@"
