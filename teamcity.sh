@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
@@ -29,8 +29,9 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 
 - boots TeamCity server and agent in Docker
 - authorizes the agent(s) to begin building
-- opens the TeamCity web UI to proceed and accept EULA (on Mac only)
-- waits for the setup and EULA pages
+- waits for you to accept the EULA
+  - prints the TeamCity URL
+  - opens the TeamCity web UI (on Mac only)
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
   - opens the TeamCity web UI login page in browser (on Mac only)
 
@@ -77,6 +78,10 @@ if [ "$action" = up ]; then
     #docker-compose up -d teamcity-server "$@"
     docker-compose up -d "$@"
     echo >&2
+elif [ "$action" = restart ]; then
+    docker-compose down
+    echo >&2
+    exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "TeamCity Server URL:  $TEAMCITY_URL"
     if is_mac; then
@@ -96,6 +101,7 @@ fi
 when_url_content 60 "$TEAMCITY_URL" '.*'
 echo >&2
 
+# XXX: database.properties is mounted to skip the database step now
 is_setup_in_progress(){
      # don't let cut off output affect the return code
      { curl -sSL "$TEAMCITY_URL" || : ; } | \
