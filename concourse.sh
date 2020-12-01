@@ -17,7 +17,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
@@ -88,6 +88,10 @@ if [ "$action" = up ]; then
     timestamp "Booting Concourse:"
     docker-compose up -d "$@"
     echo >&2
+elif [ "$action" = restart ]; then
+    docker-compose down
+    echo >&2
+    exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "Concourse URL:  $CONCOURSE_URL"
     echo
