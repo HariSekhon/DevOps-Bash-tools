@@ -42,12 +42,12 @@ Automatically handles authentication via environment variable \$GITLAB_TOKEN
 
 You must set up a personal access token here:
 
-https://gitlab.com/profile/personal_access_tokens
+    https://gitlab.com/profile/personal_access_tokens
 
 
 API Reference:
 
-https://docs.gitlab.com/ee/api/api_resources.html
+    https://docs.gitlab.com/ee/api/api_resources.html
 
 
 Examples:
@@ -55,12 +55,12 @@ Examples:
 
 # Get currently authenticated user:
 
-${0##*/} /user
+    ${0##*/} /user
 
 
 # List a user's GitLab projects (repos):
 
-${0##*/} /users/HariSekhon/projects
+    ${0##*/} /users/HariSekhon/projects
 
 
 Specify project ID or name (url-encoded otherwise will return 404 and fail to find project)
@@ -68,47 +68,47 @@ Specify project ID or name (url-encoded otherwise will return 404 and fail to fi
 
 # Update a project's description:
 
-${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
+    ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
 
 
 # List a project's CI pipelines, sorted by newest run first:
 
-${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
+    ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
 
 
 # List a project's jobs (contains the status and pipeline reference):
 
-${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/jobs
+    ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/jobs
 
 
 # List a project's jobs for a specific pipeline:
 
-${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines/<pipeline_id>/jobs
+    ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines/<pipeline_id>/jobs
 
 
 # List a project's deployments:
 
-${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/deployments
+    ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/deployments
 
 
 # Get details for a single job:
 
-${0##*/} /projects/:id/jobs/:job_id
+    ${0##*/} /projects/:id/jobs/:job_id
 
 
 # Get a project's remote mirrors:
 
-${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/remote_mirrors
+    ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/remote_mirrors
 
 
 # Get log for a specific job:
 
-${0##*/} /projects/:id/jobs/:job_id/trace
+    ${0##*/} /projects/:id/jobs/:job_id/trace
 
 
 # List recent events such as pushes, by the currently authenticated user:
 
-${0##*/} /events
+    ${0##*/} /events
 
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings (due to the context variation of the GitLAB API documentation tokens this is only done for users and projects only at this time)
