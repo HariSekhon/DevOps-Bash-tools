@@ -117,13 +117,15 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://api.travis-ci.org"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
-check_env_defined TRAVIS_TOKEN
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+check_env_defined TRAVIS_TOKEN
+
+export TOKEN="$TRAVIS_TOKEN"
+
+curl_api_opts
 
 url_path="${1:-}"
 shift || :
@@ -131,10 +133,6 @@ shift || :
 url_path="${url_path//https:\/\/api.travis-ci.org}"
 url_path="${url_path##/}"
 
-export TOKEN="$TRAVIS_TOKEN"
-
 export CURL_AUTH_HEADER="Authorization: token"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "$@" $CURL_OPTS "$@"
+"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "${CURL_OPTS[@]}" "$@"
