@@ -54,27 +54,27 @@ Examples:
 
 # Get currently authenticated user's workspaces:
 
-${0##*/} /workspaces | jq .
+    ${0##*/} /workspaces | jq .
 
 
 # Get repos in given workspace:
 
-${0##*/} /repositories/harisekhon
+    ${0##*/} /repositories/harisekhon | jq .
 
 
 # Get a repo's BitBucket Pipelines [oldest first] (must have a slash on the end otherwise gets 404 error):
 
-${0##*/} /repositories/harisekhon/devops-bash-tools/pipelines/ | jq .
+    ${0##*/} /repositories/harisekhon/devops-bash-tools/pipelines/ | jq .
 
 
 # Update a repo's description:
 
-${0##*/} /repositories/harisekhon/devops-bash-tools -X PUT -H 'Content-Type: application/json' -d '{\"description\": \"some words\"}' | jq .
+    ${0##*/} /repositories/harisekhon/devops-bash-tools -X PUT -H 'Content-Type: application/json' -d '{\"description\": \"some words\"}' | jq .
 
 
 # Get currently authenticated user (unfortunately this is less useful than with GitHub / GitLab APIs since you can't use a standard OAuth2 authentication with just the bearer token, and must specify a username to authenticate to the API in the first place):
 
-${0##*/} /user | jq .
+    ${0##*/} /user | jq .
 
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings.
