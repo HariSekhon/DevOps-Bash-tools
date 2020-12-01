@@ -35,17 +35,17 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 Set up your OAuth2 access token here:
 
-https://quay.io/user/<username>?tab=robots
+    https://quay.io/user/<username>?tab=robots
 
 
 API Reference:
 
-https://docs.quay.io/api/
+    https://docs.quay.io/api/
 
 
 API Explorer:
 
-https://docs.quay.io/api/swagger/
+    https://docs.quay.io/api/swagger/
 "
 
 # used by usage() in lib/utils.sh
@@ -54,15 +54,15 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://quay.io/api/v1"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
-check_env_defined "QUAY_TOKEN"
-
 help_usage "$@"
 
 min_args 1 "$@"
 
+check_env_defined "QUAY_TOKEN"
+
 export TOKEN="$QUAY_TOKEN"
+
+curl_api_opts
 
 url_path="${1:-}"
 shift
@@ -72,4 +72,4 @@ url_path="${url_path##/}"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" -L "$url_base/$url_path" "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" -L "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
