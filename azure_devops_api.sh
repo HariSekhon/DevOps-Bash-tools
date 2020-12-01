@@ -37,14 +37,14 @@ except for account management, for which this code would have to be switched to 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
-Set up a personal access token here:
+# Set up a personal access token here:
 
-https://dev.azure.com/\$AZURE_DEVOPS_USER/_usersSettings/tokens
+    https://dev.azure.com/\$AZURE_DEVOPS_USER/_usersSettings/tokens
 
 
-API Reference:
+# API Reference:
 
-https://docs.microsoft.com/en-us/rest/api/azure/devops/
+    https://docs.microsoft.com/en-us/rest/api/azure/devops/
 
 
 Examples:
