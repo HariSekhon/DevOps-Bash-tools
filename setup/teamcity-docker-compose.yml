@@ -36,10 +36,11 @@ services:
       TEAMCITY_SERVER_MEM_OPTS: "-Xmx512m"
     volumes:
       # for server.xml override:
-      #- teamcity/conf::/opt/teamcity/conf
+      #- teamcity/conf:/opt/teamcity/conf
+      - ./teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
       # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
-      - /tmp/teamcity/server/datadir:/data/teamcity_server/datadir
-      - /tmp/teamcity/server/logs:/opt/teamcity/logs
+      #- /tmp/teamcity/server/datadir:/data/teamcity_server/datadir
+      #- /tmp/teamcity/server/logs:/opt/teamcity/logs
   teamcity-agent:
     hostname: teamcity-agent
     # 1.3GB docker image
@@ -67,10 +68,11 @@ services:
     restart: on-failure
     links:
       - teamcity-server
-    volumes:
+    #volumes:
       # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
+      #- /tmp/teamcity/agent1/conf:/opt/buildagent/conf
       # checked out sources
-      - /tmp/teamcity/agent1/work:/opt/buildagent/work
+      #- /tmp/teamcity/agent1/work:/opt/buildagent/work
       #
       # internal build agent caches
       # XXX: causes:  WARN - ig.BuildAgentConfigurablePaths - Failed to create directory: /opt/buildagent/system/.artifacts_cache
