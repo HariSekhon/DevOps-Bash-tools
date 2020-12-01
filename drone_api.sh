@@ -70,7 +70,7 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://cloud.drone.io/api"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+curl_api_opts
 
 help_usage "$@"
 
@@ -83,13 +83,11 @@ url_path="${url_path##*:\/\/cloud.drone.io\/api}"
 url_path="${url_path##/}"
 url_path="${url_path##api}"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
 if is_curl_min_version 7.55; then
     # this trick doesn't work, file descriptor is lost by next line
     #filedescriptor=<(cat <<< "Private-Token: $DRONE_TOKEN")
-    curl $CURL_OPTS -H @<(cat <<< "Authorization: Bearer $DRONE_TOKEN") "$url_base/$url_path" "$@"
+    curl "${CURL_OPTS[@]}" -H @<(cat <<< "Authorization: Bearer $DRONE_TOKEN") "$url_base/$url_path" "$@"
 else
     # could also use OAuth compliant header "Authorization: Bearer <token>"
-    curl $CURL_OPTS -H "Authorization: Bearer $DRONE_TOKEN" "$url_base/$url_path" "$@"
+    curl "${CURL_OPTS[@]}" -H "Authorization: Bearer $DRONE_TOKEN" "$url_base/$url_path" "$@"
 fi
