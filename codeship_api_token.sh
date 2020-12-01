@@ -37,7 +37,7 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+curl_api_opts
 
 check_env_defined "CODESHIP_PASSWORD"
 
@@ -49,10 +49,8 @@ fi
 export USER="$user"
 export PASSWORD="$CODESHIP_PASSWORD"
 
-# want arg splitting
-# shellcheck disable=SC2086
 # has to be basic auth, don't allow token to be used as it will result in a 401
-output="$(NO_TOKEN_AUTH=1 "$srcdir/curl_auth.sh" https://api.codeship.com/v2/auth -X POST -H "Content-Type: application/json" -H "Accept: application/json" "$@" $CURL_OPTS)"
+output="$(NO_TOKEN_AUTH=1 "$srcdir/curl_auth.sh" https://api.codeship.com/v2/auth -X POST "${CURL_OPTS[@]}" "$@")"
 
 die_if_error_field "$output"
 
