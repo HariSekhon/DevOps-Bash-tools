@@ -70,7 +70,8 @@ url_path="${url_path##/}"
 #check_env_defined "GOCD_HOST"
 #check_env_defined "GOCD_TOKEN"
 
-read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+# not using curl_api_opts because need more control over the accept headers which control API version
+CURL_OPTS=(-sS --fail --connect-timeout 3 "${CURL_OPTS[@]}")
 
 if ! [[ "$*" =~ Accept: ]]; then
     if [ -n "${GOCD_API_VERSION:-}" ]; then
