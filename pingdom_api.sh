@@ -108,13 +108,18 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://api.pingdom.com/api/3.1"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
 help_usage "$@"
+
+min_args 1 "$@"
 
 check_env_defined "PINGDOM_TOKEN"
 
-min_args 1 "$@"
+#curl_api_opts json headers breaks the Pingdom API calls
+if [ -n "${CURL_OPTS:-}" ]; then
+    read -r -a CURL_OPTS <<< "${CURL_OPTS[@]}" # this @ notation works for both strings and arrays in case a future version of bash do export arrays this should still work
+else
+    CURL_OPTS=(-sS --fail --connect-timeout 3)
+fi
 
 url_path="${1:-}"
 shift
@@ -123,9 +128,7 @@ url_path="${url_path##/}"
 
 export TOKEN="$PINGDOM_TOKEN"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 
 # args: /checks | jq .
 # args: /checks/<check_id>
