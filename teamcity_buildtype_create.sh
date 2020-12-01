@@ -59,8 +59,8 @@ echo
 timestamp "uploading build '$build_file' to TeamCity"
 
 # XXX: can't export arrays in Bash :-( - must pass as a string and split inside teamcity_api.sh
-    # Update: unfortunately removing --fail causes curl to not error out properly, so other scripts that depend on this would not be notified of the failure, so only do this when debugging
-export CURL_OPTS="-sS" # this overrides teamcity_api.sh to not include --fail so we can get decent error messages here
+# Update: unfortunately removing --fail causes curl to not error out properly, so other scripts that depend on this would not be notified of the failure, so only do this when debugging
+#export CURL_OPTS="-sS" # this overrides teamcity_api.sh to not include --fail so we can get decent error messages here
 
 # create build type using the given JSON configuration file
 
