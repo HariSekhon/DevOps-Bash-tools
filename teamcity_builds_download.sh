@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Exports all TeamCity builds to local XML configuration files for backup/restore / migration purposes, or even just to backport changes to Git for revision control tracking
+Exports all TeamCity builds to local JSON configuration files for backup/restore / migration purposes, or even just to backport changes to Git for revision control tracking
 
-Uses the adjacent teamcity_api.sh and xmllint (installed by 'make')
+Uses the adjacent teamcity_api.sh and jq (installed by 'make')
 
 See teamcity_api.sh for required connection settings and authentication
 "
@@ -47,9 +47,9 @@ else
 fi |
 grep -v '^[[:space:]]*$' |
 while read -r build_name; do
-    filename="$build_name.xml"
+    filename="$build_name.json"
     timestamp "downloading build '$build_name' to '$filename'"
-    # override the default -H json that teamcity_api.sh usually uses as the API indicates this can only be loaded from XML so we have to store it like this
-    "$srcdir/teamcity_api.sh" "/buildTypes/$build_name" -H "Accept: application/xml" |
-    xmllint --format - > "$filename"
+    "$srcdir/teamcity_api.sh" "/buildTypes/$build_name" |
+    # using jq just for formatting
+    jq . > "$filename" || :  # some builds get 400 errors, ignore these
 done
