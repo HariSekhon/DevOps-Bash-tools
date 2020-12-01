@@ -70,6 +70,4 @@ shift
 url_path="${url_path//https:\/\/quay.io\/api\/v1/}"
 url_path="${url_path##/}"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
 "$srcdir/curl_auth.sh" -L "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
