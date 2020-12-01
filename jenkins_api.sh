@@ -47,7 +47,7 @@ usage_args="/path [<curl_options>]"
 
 JENKINS_URL="http://${JENKINS_URL:-${JENKINS_HOST:-localhost}:${JENKINS_PORT:-8080}}"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+curl_api_opts
 
 help_usage "$@"
 
@@ -63,6 +63,4 @@ shift || :
 
 crumb="$("$srcdir/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" -H "Jenkins-Crumb: $crumb" "$@" ${CURL_OPTS:-}
+"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" -H "Jenkins-Crumb: $crumb" "${CURL_OPTS[@]}" "$@"
