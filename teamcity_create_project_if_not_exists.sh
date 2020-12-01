@@ -50,11 +50,12 @@ projects="$("$srcdir/teamcity_api.sh" "/projects" | jq -r '.project[].name')"
 if grep -Fxq "$project" <<< "$projects"; then
     timestamp "project '$project' already exists in TeamCity"
 else
-    timestamp "creating project '$project' in TeamCity"
     # XXX: can't export arrays in Bash :-( - must pass as a string and split inside teamcity_api.sh
-    export CURL_OPTS="-sS" # this overrides teamcity_api.sh to not include --fail so we can get decent error messages here
-    # create new empty project
+    # Update: unfortunately removing --fail causes curl to not error out properly, so other scripts that depend on this would not be notified of the failure, so only do this when debugging
+    #export CURL_OPTS="-sS" # this overrides teamcity_api.sh to not include --fail so we can get decent error messages here
+    timestamp "creating project '$project' in TeamCity"
     set +e
+    # create new empty project
     "$srcdir/teamcity_api.sh" "/projects/" \
         -X POST \
         -H "Content-Type: text/plain" \
