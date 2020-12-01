@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
@@ -83,6 +83,10 @@ shift || :
 if [ "$action" = up ]; then
     timestamp "Booting GoCD cluster:"
     docker-compose up -d "$@"
+elif [ "$action" = restart ]; then
+    docker-compose down
+    echo >&2
+    exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "GoCD Server URL:  $GOCD_URL"
     if is_mac; then
