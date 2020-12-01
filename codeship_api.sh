@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: /organizations/{organization_uuid}/projects | jq .
 #
 #  Author: Hari Sekhon
 #  Date: 2020-10-13 19:49:17 +0100 (Tue, 13 Oct 2020)
@@ -79,8 +80,6 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://api.codeship.com/v2"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
 help_usage "$@"
 
 min_args 1 "$@"
@@ -132,6 +131,24 @@ if [ -n "${repo:-}" ]; then
     url_path="${url_path/<repo>/$repo}"
 fi
 
+# arrays can't be exported so have to pass as a string and then split to array
+if [ -n "${CURL_OPTS:-}" ]; then
+    read -r -a CURL_OPTS <<< "$CURL_OPTS"
+else
+    read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
+fi
+
+# case insensitive regex matching
+shopt -s nocasematch
+if ! [[ "$*" =~ Accept: ]]; then
+    CURL_OPTS+=(-H "Accept: application/json")
+fi
+if ! [[ "$*" =~ Content-Type: ]]; then
+    CURL_OPTS+=(-H "Content-Type: application/json")
+fi
+# unset to return to default setting for safety to avoid hard to debug changes of behaviour elsewhere
+shopt -u nocasematch
+
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" -H "Content-Type: application/json" -H "Accept: application/json" "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
