@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: /{organization}/{project}/_apis/git/repositories  | jq .
 #
 #  Author: Hari Sekhon
 #  Date: 2020-10-23 17:58:16 +0100 (Fri, 23 Oct 2020)
