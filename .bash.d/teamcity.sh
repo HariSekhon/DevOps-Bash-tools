@@ -13,8 +13,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# finds and loads the current superuser token from the local docker compose to the environment for immediate use with teamcity_api.sh
-teamcity_superuser_token(){
+# sets TeamCity URL to the local docker and finds and loads the current container's superuser token to the environment for immediate use with teamcity_api.sh
+teamcity_local(){
     TEAMCITY_SUPERUSER_TOKEN="$(
         docker-compose -f "$(dirname "${BASH_SOURCE[0]}")/../setup/teamcity-docker-compose.yml" \
             logs teamcity-server | \
@@ -24,4 +24,5 @@ teamcity_superuser_token(){
     )"
 
     export TEAMCITY_SUPERUSER_TOKEN
+    export TEAMCITY_URL="http://localhost:8111"
 }
