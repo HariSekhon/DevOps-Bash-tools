@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://www.jetbrains.com/help/teamcity/rest-api-reference.html#Projects+and+Build+Configuration%2FTemplates+Lists
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
