@@ -60,55 +60,55 @@ Examples:
 
 # Get the currently authenticated user:
 
-${0##*/} /user
+    ${0##*/} /user
 
 
 # Get Organizations the current user has access to:
 
-${0##*/} /orgs
+    ${0##*/} /orgs
 
 
 # Get Repositories:
 
-${0##*/} /repos
+    ${0##*/} /repos
 
 
 # Get builds:
 
-${0##*/} /builds
+    ${0##*/} /builds
 
 
 # Get crons (repository slug must be url-encoded replacing slash with %2F):
 
-${0##*/} /repo/<user>%2F<repo>/crons
+    ${0##*/} /repo/<user>%2F<repo>/crons
 
-${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/crons
+    ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/crons
 
 
 # Get jobs:
 
-${0##*/} /jobs
+    ${0##*/} /jobs
 
 
 # Get repository settings:
 
-${0##*/} /repo/<user>%2F<repo>/settings
+    ${0##*/} /repo/<user>%2F<repo>/settings
 
-${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/settings
+    ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/settings
 
 
 # List caches for a repository:
 
-${0##*/} /repo/<user>%2F<repo>/caches
+    ${0##*/} /repo/<user>%2F<repo>/caches
 
-${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/caches
+    ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/caches
 
 
 # List environment variables for a repository:
 
-${0##*/} /repo/<user>%2F<repo>/env_vars
+    ${0##*/} /repo/<user>%2F<repo>/env_vars
 
-${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/env_vars
+    ${0##*/} /repo/HariSekhon%2FDevOps-Bash-tools/env_vars
 "
 
 # used by usage() in lib/utils.sh
