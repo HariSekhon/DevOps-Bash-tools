@@ -23,6 +23,7 @@ services:
     image: jetbrains/teamcity-server:${VERSION:-2020.2}
     ports:
       - 8111:8111
+    restart: unless-stopped
     healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:8111"]
       # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
@@ -50,12 +51,12 @@ services:
       - 9090:9090
     # needs root to be able to install OS package dependencies - 'sudo' not installed unless using the linux-sudo suffix, which is a lot bigger and similar result
     # Since version 2020.1, TeamCity agent Docker images run under a non-root user by default
-    #user: root:root
+    user: root:root
     environment:
       SERVER_URL: http://teamcity-server:8111
-      # this name is used to verify and automatically authorize the agent(s) in teamcity.sh so must be set
+      # AGENT_NAME is used to set the reported agent name and by teamcity.sh to automatically authorize the agent(s)
       AGENT_NAME: agent1
-      # XXX: currently authorize via API in teamcity.sh
+      # currently authorized via API in teamcity.sh
       #AGENT_TOKEN:
     healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:9090"]
@@ -65,14 +66,14 @@ services:
       start_period: 30s
       timeout: 10s
       retries: 5
-    restart: on-failure
+    restart: unless-stopped
     links:
       - teamcity-server
     #volumes:
       # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
       #- /tmp/teamcity/agent1/conf:/opt/buildagent/conf
-      # checked out sources
-      #- /tmp/teamcity/agent1/work:/opt/buildagent/work
+      # checked out sources - this needs 3GB to run builds so needs to be mounted - the docker image has 60GB and the mounts appear to only get 1GB not properly mapped to host but must be stuck in Docker VM overlay so omitting it
+      #- /tmp/teamcity-agent1-work:/opt/buildagent/work
       #
       # internal build agent caches
       # XXX: causes:  WARN - ig.BuildAgentConfigurablePaths - Failed to create directory: /opt/buildagent/system/.artifacts_cache
