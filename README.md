@@ -527,6 +527,7 @@ etc.
 
 #### CI/CD - Continuous Integration / Continuous Deployment
 
+- `azure_devops_api.sh` - queries [Azure DevOps](https://dev.azure.com/)'s API with authentication
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
   - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
@@ -540,7 +541,12 @@ etc.
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists TeamCity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 TeamCity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
-  - `teamcity_builds_download.sh` - downloads TeamCity build XML configurations to local files of the same name
+  - `teamcity_buildtypes_download.sh` - downloads TeamCity build type JSON configurations to local files
+  - `teamcity_buildtype_create.sh` - creates a TeamCity build type from a local JSON configuration (see `teamcity_buildtypes_download.sh`)
+  - `teamcity_projects.sh` - lists TeamCity project IDs and Names
+  - `teamcity_projects_download.sh` - downloads TeamCity project JSON configurations to local files
+  - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
+  - `teamcity_vcs_roots_download.sh` - downloads TeamCity VCS root JSON configurations to local files
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
@@ -577,7 +583,6 @@ etc.
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
-- `azure_devops_api.sh` - queries [Azure DevOps](https://dev.azure.com/)'s API with authentication
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
 - `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
