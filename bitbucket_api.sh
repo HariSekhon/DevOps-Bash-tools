@@ -95,12 +95,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-# arrays can't be exported so have to pass as a string and then split to array
-if [ -n "${CURL_OPTS:-}" ]; then
-    read -r -a CURL_OPTS <<< "$CURL_OPTS"
-else
-    read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
-fi
+curl_api_opts
 
 user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
 PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
