@@ -75,11 +75,16 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://dev.azure.com"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+# arrays can't be exported so have to pass as a string and then split to array
+if [ -n "${CURL_OPTS:-}" ]; then
+    read -r -a CURL_OPTS <<< "$CURL_OPTS"
+else
+    read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
+fi
 
 user="${AZURE_DEVOPS_USERNAME:-${AZURE_DEVOPS_USER:-}}"
 if [ -z "$user" ]; then
@@ -147,6 +152,4 @@ url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 url_path="${url_path/\{repo\}/$repo}"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
