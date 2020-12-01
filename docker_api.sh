@@ -38,14 +38,14 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 API Reference:
 
-https://docs.docker.com/registry/spec/api/
+    https://docs.docker.com/registry/spec/api/
 
 
 Examples:
 
 # Get all the tags for a given repository called 'harisekhon/hbase' on DockerHub's public registry:
 
-${0##*/} https://hub.docker.com/v2/repositories/harisekhon/hbase/tags
+    ${0##*/} https://hub.docker.com/v2/repositories/harisekhon/hbase/tags
 
 
 For authenticated queries against DockerHub which requires a more complicated OAuth or JWT workflow
@@ -76,11 +76,7 @@ shift || :
 if [[ "$url" =~ hub.docker.com ]]; then
     "$srcdir/dockerhub_api.sh" "$url" "$@"
 elif [ -n "${PASSWORD:-}" ]; then
-    # want splitting
-    # shellcheck disable=SC2086
-    "$srcdir/curl_auth.sh" "$url" "$@" $CURL_OPTS
+    "$srcdir/curl_auth.sh" "$url" "${CURL_OPTS[@]}" "$@"
 else
-    # want splitting
-    # shellcheck disable=SC2086
     curl "$url" "${CURL_OPTS[@]}" "$@"
 fi
