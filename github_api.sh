@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: /user
-#  args: /users/HariSekhon/repos
-#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
-#  args: /repos/:user/:repo/actions/workflows
+#  args: /user | jq .
+#  args: /users/HariSekhon/repos | jq .
+#  args: /repos/HariSekhon/DevOps-Bash-tools/actions/workflows | jq.
+#  args: /repos/:user/:repo/actions/workflows | jq.
 #
 #  Author: Hari Sekhon
 #  Date: 2020-02-12 23:43:00 +0000 (Wed, 12 Feb 2020)
@@ -39,12 +39,12 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 Set up a personal access token here:
 
-https://github.com/settings/tokens
+    https://github.com/settings/tokens
 
 
 API Reference:
 
-https://docs.github.com/en/rest/reference
+    https://docs.github.com/en/rest/reference
 
 
 Examples:
@@ -52,22 +52,22 @@ Examples:
 
 # Get currently authenticated user:
 
-${0##*/} /user
+    ${0##*/} /user
 
 
 # Get a specific user:
 
-${0##*/} /users/HariSekhon
+    ${0##*/} /users/HariSekhon
 
 
 # List a user's GitHub repos:
 
-${0##*/} /users/HariSekhon/repos
+    ${0##*/} /users/HariSekhon/repos
 
 
 # Get the GitHub Actions workflows for a given repo:
 
-${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
+    ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
 
 For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings. The following tokens in the form :token, <token>, {token} are replaced:
@@ -75,7 +75,7 @@ For convenience you can even copy and paste out of the documentation literally a
 Placeholders replaced by \$GITHUB_USERNAME / \$GITHUB_USER:                 owner, username, user
 Placeholders replaced by the local repo name of the current directory:    repo
 
-${0##*/} /repos/:user/:repo/actions/workflows
+    ${0##*/} /repos/:user/:repo/actions/workflows
 "
 
 # used by usage() in lib/utils.sh
@@ -84,11 +84,11 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://api.github.com"
 
-curl_api_opts
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+curl_api_opts
 
 user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
 if [ -z "$user" ]; then
