@@ -62,5 +62,5 @@ while read -r project_id project_name; do
     #"$srcdir/teamcity_api.sh" "/projects/$project_name" |
     "$srcdir/teamcity_api.sh" "/projects/$project_id" |
     # using jq just for formatting
-    jq . > "$filename" || :  # some projects get 400 errors, ignore these
+    jq . > "$filename"
 done
