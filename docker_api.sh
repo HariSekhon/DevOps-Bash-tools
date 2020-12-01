@@ -56,11 +56,11 @@ rather than basic authentication, this script calls the adjacent 'dockerhub_api.
 # shellcheck disable=SC2034
 usage_args="https://host:port/v2/... [<curl_options>]"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+curl_api_opts
 
 user="${DOCKER_USERNAME:-${DOCKER_USER:-}}"
 PASSWORD="${DOCKER_PASSWORD:-${DOCKER_TOKEN:-}}"
@@ -82,5 +82,5 @@ elif [ -n "${PASSWORD:-}" ]; then
 else
     # want splitting
     # shellcheck disable=SC2086
-    curl "$url" "$@" $CURL_OPTS
+    curl "$url" "${CURL_OPTS[@]}" "$@"
 fi
