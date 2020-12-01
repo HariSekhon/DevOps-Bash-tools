@@ -54,12 +54,16 @@ else
     # XXX: can't export arrays in Bash :-( - must pass as a string and split inside teamcity_api.sh
     export CURL_OPTS="-sS" # this overrides teamcity_api.sh to not include --fail so we can get decent error messages here
     # create new empty project
+    set +e
     "$srcdir/teamcity_api.sh" "/projects/" \
         -X POST \
         -H "Content-Type: text/plain" \
         -d "$project"
         # can't use this for a simpler response, not valid
         #-H "Accept: text/plain" \
-    # above doesn't output newline
+    # API doesn't output newline, so we insert one ourselves to not mess up terminal output
+    exitcode=$?
+    set -e
     echo
+    exit $exitcode
 fi
