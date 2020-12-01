@@ -38,12 +38,12 @@ Automatically url encodes the project name and description for you since the Git
 
 Example:
 
-${0##*/} HariSekhon/DevOps-Bash-tools    my new description
+    ${0##*/} HariSekhon/DevOps-Bash-tools    my new description
 
 
 If no args are given, will read project and description from standard input for easy chaining with other tools, can easily update multiple repositories this way, one project + description per line:
 
-echo <project> <description> | ${0##*/}
+    echo <project> <description> | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
