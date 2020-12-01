@@ -44,7 +44,7 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 API Reference:
 
-https://apidocs.codeship.com/v2
+    https://apidocs.codeship.com/v2
 
 
 Examples:
@@ -144,6 +144,4 @@ fi
 # unset to return to default setting for safety to avoid hard to debug changes of behaviour elsewhere
 shopt -u nocasematch
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
 "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
