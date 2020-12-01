@@ -63,7 +63,7 @@ usage_args="/path [<curl_options>]"
 #url_base="https://registry.hub.docker.com/v2"
 url_base="https://hub.docker.com/v2"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+curl_api_opts
 
 help_usage "$@"
 
@@ -88,17 +88,15 @@ url_path="${url_path//\/\/\//\/}"
 url_path="${url_path#/v2}"
 url_path="${url_path##/}"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
 if [ -n "${PASSWORD:-}" ]; then
     # since DockerHub has many different API addresses it's easier to use JWT which isn't limited to a predefined service address
     JWT=1
     if [ -n "${JWT:-}" ]; then
         #output="$("$srcdir/curl_auth.sh" https://hub.docker.com/v2/users/login/ \
         output="$(curl https://hub.docker.com/v2/users/login/ \
-                       $CURL_OPTS -X POST \
-                       -H "Content-Type: application/json" \
-                       -d '{"username": "'$user'", "password": "'$PASSWORD'"}'
+                       -X POST \
+                       "${CURL_OPTS[@]}" \
+                       -d '{"username": "'"$user"'", "password": "'"$PASSWORD"'"}'
         )"
         # JWT
         token="$(jq -r .token <<< "$output")"
@@ -118,8 +116,8 @@ if [ -n "${PASSWORD:-}" ]; then
     if [ -z "$token" ] || [ "$token" = null ]; then
         die "Authentication failed: $output"
     fi
-    "$srcdir/curl_auth.sh" "$url_base/$url_path" "$@" $CURL_OPTS
+    "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 else
     # proceed without authentication
-    curl "$url_base/$url_path" "$@" $CURL_OPTS
+    curl "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 fi
