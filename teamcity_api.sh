@@ -151,7 +151,12 @@ shift || :
 
 url_path="${url_path##/}"
 
-read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
+# arrays can't be exported so have to pass as a string and then split to array
+if [ -n "${CURL_OPTS:-}" ]; then
+    read -r -a CURL_OPTS <<< "$CURL_OPTS"
+else
+    read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
+fi
 
 # XML by default :-/
 if ! [[ "$*" =~ Accept: ]]; then
