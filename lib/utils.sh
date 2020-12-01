@@ -235,6 +235,28 @@ is_curl_min_version(){
     bc_bool "$curl_version >= $target_version"
 }
 
+curl_api_opts(){
+    # arrays can't be exported so have to pass as a string and then split to array
+    if [ -n "${CURL_OPTS:-}" ]; then
+        read -r -a CURL_OPTS <<< "${CURL_OPTS[@]}" # this @ notation works for both strings and arrays in case a future version of bash do export arrays this should still work
+    else
+        read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
+    fi
+
+    # case insensitive regex matching
+    shopt -s nocasematch
+    # XML by default :-/
+    if ! [[ "$*" =~ Accept: ]]; then
+        CURL_OPTS+=(-H "Accept: application/json")
+    fi
+    if ! [[ "$*" =~ Content-Type: ]]; then
+        CURL_OPTS+=(-H "Content-Type: application/json")
+    fi
+    # unset to return to default setting for safety to avoid hard to debug changes of behaviour elsewhere
+    shopt -u nocasematch
+    export CURL_OPTS
+}
+
 bc_bool(){
     # bc returns 1 when expression is true and zero otherwise, but this is counterintuitive
     # to regular shell scripting, let's use the actual output 1 for true, 0 for false
