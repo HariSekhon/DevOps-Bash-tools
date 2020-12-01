@@ -36,12 +36,12 @@ Automatically handles authentication via environment variable \$PINGDOM_TOKEN
 
 You must set up an access token here:
 
-https://my.pingdom.com/app/api-tokens
+    https://my.pingdom.com/app/api-tokens
 
 
 API Reference:
 
-https://docs.pingdom.com/api/
+    https://docs.pingdom.com/api/
 
 
 Examples:
@@ -49,57 +49,58 @@ Examples:
 
 # Get Pingdom checks and statuses:
 
-${0##*/} /checks
+    ${0##*/} /checks
 
 
 # Get detailed info on a specific check:
 
-${0##*/} /checks/<id>
+    ${0##*/} /checks/<id>
 
 
 # Get average uptime / response time for a specific check:
 
-${0##*/} /summary.average/<check_id>
+    ${0##*/} /summary.average/<check_id>
 
 
 # Get Pingdom actions such as status change emails and SMS (newest first):
 
-${0##*/} /actions
+    ${0##*/} /actions
 
 
 # Get your configured Maintenance windows and occurrences:
 
-${0##*/} /maintenance
-${0##*/} /maintenance.occurrences
+    ${0##*/} /maintenance
+    ${0##*/} /maintenance.occurrences
 
 
 # Recent Outages (last week by default, see pingdom_check_outages.sh for last year):
-${0##*/} /summary.outage/<check_id>
+
+    ${0##*/} /summary.outage/<check_id>
 
 
 # List all Pingdom probe servers
 
-${0##*/} /probes
+    ${0##*/} /probes
 
 
 # Get check results from all probes for a given check id (find which geographies a sight is being affected in). You will need to correlate this to the probe ids from from the /probes query
 
-${0##*/} /results/<check_id>
+    ${0##*/} /results/<check_id>
 
 
 # List teams and their members:
 
-${0##*/} /alerting/teams
+    ${0##*/} /alerting/teams
 
 
 # List alert contacts:
 
-${0##*/} /alerting/contacts
+    ${0##*/} /alerting/contacts
 
 
 # Get Credits remaining:
 
-${0##*/} /credits
+    ${0##*/} /credits
 "
 
 # used by usage() in lib/utils.sh
