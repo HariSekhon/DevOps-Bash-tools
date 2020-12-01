@@ -152,13 +152,18 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://api.cloudflare.com/client/v4"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
 check_env_defined "CLOUDFLARE_TOKEN"
 
 help_usage "$@"
 
 min_args 1 "$@"
+
+# arrays can't be exported so have to pass as a string and then split to array
+if [ -n "${CURL_OPTS:-}" ]; then
+    read -r -a CURL_OPTS <<< "$CURL_OPTS"
+else
+    read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
+fi
 
 url_path="$1"
 shift || :
@@ -169,4 +174,4 @@ export TOKEN="$CLOUDFLARE_TOKEN"
 
 # need CURL_OPTS splitting, safer than eval
 # shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" $CURL_OPTS "$url_base/$url_path" "$@"
+"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
