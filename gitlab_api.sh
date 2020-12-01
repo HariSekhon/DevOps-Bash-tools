@@ -126,11 +126,11 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://gitlab.com/api/v4"
 
-CURL_OPTS="-sS --fail --connect-timeout 3 ${CURL_OPTS:-}"
-
 help_usage "$@"
 
 min_args 1 "$@"
+
+curl_api_opts
 
 url_path="${1:-}"
 shift
@@ -186,6 +186,4 @@ export TOKEN="$GITLAB_TOKEN"
 # can also leave out to use OAuth compliant header "Authorization: Bearer <token>"
 export CURL_AUTH_HEADER="Private-Token:"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "$@" $CURL_OPTS
+"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
