@@ -13,30 +13,44 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Script to generate GIT_STATUS.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
-#
-# Usage:
-#
-# without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
-#
-#   GITHUB_USER=HariSekhon ./github_generate_status_page.sh
-#
-# with arguments will query those repo's README.md at the top level - if omitting the prefix will prepend $GITHUB_USER/
-#
-#   GITHUB_USER=HariSekhon ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
-#
-#   GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools
-#
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+top_N=100
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Script to generate GIT_STATUS.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
+
+
+# Examples:
+
+
+    Without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
+
+        GITHUB_USER=HariSekhon ./github_generate_status_page.sh
+
+
+    With arguments will query those repo's README.md at the top level - if omitting the prefix will prepend $GITHUB_USER/
+
+        GITHUB_USER=HariSekhon ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
+
+        GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<user/repo1> <user/repo2> ...]"
+
+help_usage "$@"
+
 trap 'echo ERROR >&2' exit
 
 file="GIT_STATUS.md"
-
-top_N=100
 
 repolist="$*"
 
