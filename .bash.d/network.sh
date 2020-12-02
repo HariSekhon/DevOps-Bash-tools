@@ -270,7 +270,7 @@ retry(){
     local cmd="$1"
     local host="${2##*@}"
     #local user="${2%%@*}"
-    local args="${*:3}"
+    local args=("${@:3}")
     if [ -z "$host" ]; then
         echo "You must supply a hostname or ip address to connect to"
         return 2
@@ -290,9 +290,8 @@ retry(){
             sleep 1
         done
     fi
-    [ "$cmd" = "ssh" ] && printargs= || printargs="$args"
-    # shellcheck disable=SC2086
-    until "$cmd" "$host" $args; do
+    [ "$cmd" = "ssh" ] && printargs="" || printargs="${args[*]}"
+    until "$cmd" "$host" "${args[@]}"; do
         sleep 1
         tstamp "trying $cmd $host $printargs"
     done
