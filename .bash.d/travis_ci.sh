@@ -46,17 +46,15 @@ travis_debug(){
     #else
     #    travis_debug_session.py -J "$1" ${@:2}
     #fi
-    opts=""
+    opts=()
     if [[ "$PWD" =~ /github/ ]]; then
         local repo
         repo="$(git_repo)"
         if [ -n "$repo" ]; then
-            opts="--repo $repo"
+            opts+=(--repo "$repo")
         fi
     fi
-    # want arg splitting
-    # shellcheck disable=SC2086
-    travis_debug_session.py $opts "$@"
+    travis_debug_session.py "${opts[@]}" "$@"
 }
 
 travis_log(){
