@@ -34,19 +34,18 @@ export GROOVY_TURN_OFF_JAVA_WARNINGS=true
 if isMac; then
     mac_export_java_home(){
         local version="$1"
-        local args
+        local args=()
         local java_home
         local java_library_base="/Library/Java/JavaVirtualMachines"
         local java_home_variable="JAVA_HOME"
         # for cross compiling to be found by gradle build
         if [ -n "$version" ]; then
-            args="-v 1.$version"
+            args+=(-v "1.$version")
             java_home_variable="JAVA${version}_HOME"
         fi
         if [ -x /usr/libexec/java_home ]; then
             # want arg splutting
-            # shellcheck disable=SC2086
-            java_home="$(/usr/libexec/java_home $args 2>/dev/null)"
+            java_home="$(/usr/libexec/java_home "${args[@]}" 2>/dev/null)"
             # $? is fine here thanks shellcheck
             # shellcheck disable=SC2181
             if [ $? -eq 0 ] && [ -d "$java_home" ]; then
