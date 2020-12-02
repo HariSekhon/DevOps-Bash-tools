@@ -259,20 +259,19 @@ ptop(){
     local pids
     #pids="$(pgrep -f "$(sed 's/ /|/g' <<< "$*")")"
     pids="$(pgrep -f "${*// /|}")"
-    local pid_args
+    local pid_args=()
     if isMac; then
         # shellcheck disable=SC2001
-        pid_args="$(sed 's/^/-pid /' <<< "$pids")"
+        read -r -a pid_args <<< "$(sed 's/^/-pid /' <<< "$pids")"
     else
         # shellcheck disable=SC2001
-        pid_args="$(sed 's/^/-p /' <<< "$pids")"
+        read -r -a pid_args <<< "$(sed 's/^/-p /' <<< "$pids")"
     fi
-    if [ -z "$pids" ]; then
+    if [ -z "${pids[*]}" ]; then
         echo "No matching programs found"
         return 1
     fi
-    # shellcheck disable=SC2086
-    top $pid_args
+    top "${pid_args[@]}"
 }
 
 topcommands(){
