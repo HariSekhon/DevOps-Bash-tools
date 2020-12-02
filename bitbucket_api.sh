@@ -141,6 +141,4 @@ url_path="${url_path/\{repo\}/$repo}"
 url_path="${url_path/<repo>/$repo}"
 url_path="${url_path/:repo/$repo}"
 
-# need CURL_OPTS splitting, safer than eval
-# shellcheck disable=SC2086
 "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
