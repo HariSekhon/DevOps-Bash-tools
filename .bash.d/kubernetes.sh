@@ -51,9 +51,11 @@ add_PATH "${KREW_ROOT:-$HOME/.krew}"
 # ============================================================================ #
 
 # 'k8s-app' label is set by dashboard creation but who uses that
-k8s_get_pod_opts="-o wide -L app,env --show-labels"
+# false positive, the comma doesn't separate args
+# shellcheck disable=SC2054
+k8s_get_pod_opts=(-o wide -L app,env --show-labels)
 
-alias po='k get po $k8s_get_pod_opts'
+alias po='k get po "${k8s_get_pod_opts[@]}"'
 alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
@@ -213,12 +215,12 @@ k8s_or_openshift(){
 
 oc_get_pods(){
     # shellcheck disable=SC2086
-    oc get pods $k8s_get_pod_opts
+    oc get pods "${k8s_get_pod_opts[@]}"
 }
 
 k8s_get_pods(){
     # shellcheck disable=SC2086
-    k get pods $k8s_get_pod_opts
+    k get pods "${k8s_get_pod_opts[@]}"
 }
 
 get_pods(){
@@ -255,7 +257,7 @@ watchpods(){
         echo
         echo 'Pods:'
         echo
-        kubectl $kubectl_opts get pods $k8s_get_pod_opts 2>&1
+        kubectl $kubectl_opts get pods " "${k8s_get_pod_opts[@]}" " 2>&1
         echo
     "
 }
