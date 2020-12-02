@@ -133,12 +133,10 @@ vres(){
 
 #alias vsusall="vsus $(vst | grep running | awk '{print $1}')"
 vsusall(){
-    local running_vms
-    running_vms="$(vst | grep running | awk '{print $1}')"
-    [ -n "$running_vms" ] || return 0
-    # want splitting
-    # shellcheck disable=SC2086
-    vsus $running_vms
+    local running_vms=()
+    read -r -a running_vms <<< "$(vst | grep running | awk '{print $1}')"
+    [ -n "${running_vms[*]}" ] || return 0
+    vsus "${running_vms[@]}"
 }
 alias vsusa=vsusall
 
