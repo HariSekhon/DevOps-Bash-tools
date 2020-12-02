@@ -98,53 +98,51 @@ alias menv='eval $(minikube docker-env)'
 
 # ============================================================================ #
 
-kubectl_opts="${KUBECTL_OPTS:-}"
+kubectl_opts=("${KUBECTL_OPTS:-}")
 # set K8S_NAMESPACE in local .bashrc or similar files for environments where your ~/.kube/config
 # gets regenerated daily with certification authentication from a kerberos login script, which
 # resets the 'kcd bigdata' namespace change. This way you automatically send the right namespace every time
 if [ "${K8S_NAMESPACE:-}" ]; then
-    kubectl_opts="-n $K8S_NAMESPACE"
+    kubectl_opts+=(-n "$K8S_NAMESPACE")
 fi
 # TODO: might split this later
-oc_opts="$kubectl_opts"
+oc_opts=("${kubectl_opts[@]}")
 
 # ============================================================================ #
 
 # oc() and kubectl() fix future invocations of k() to the each command if you want to explicitly switch between them
 oc(){
     export KUBERNETES_CLI=oc
-    # shellcheck disable=SC2086
-    command oc $oc_opts "$@"
+    command oc "${oc_opts[@]}" "$@"
 }
 
 kubectl(){
     export KUBERNETES_CLI=kubectl
     # shellcheck disable=SC2086
-    command kubectl $kubectl_opts "$@"
+    command kubectl "${kubectl_opts[@]}" "$@"
 }
 
 k(){
-    local opts
+    local opts=()
     # more efficient than forking to check history every time
     if [ -n "$KUBERNETES_CLI" ]; then
         case "$KUBERNETES_CLI" in
-            kubectl)    opts="$kubectl_opts"
+            kubectl)    opts+=("${kubectl_opts[@]}")
                         ;;
-                 oc)    opts="$oc_opts"
+                    oc)    opts+=("${oc_opts[@]}")
                         ;;
                     *)  echo "invalid command '$KUBERNETES_CLI' listed in \$KUBERNETES_CLI (must be either 'kubectl' or 'oc' depending on whether you are using straight Kubernetes or OpenShift). Fix the variable or unset it to auto-detect when calling the k() function"
                         return
                         ;;
         esac
-        # shellcheck disable=SC2086
-        command "$KUBERNETES_CLI" $opts "$@"
+        command "$KUBERNETES_CLI" "${opts[@]}" "$@"
     else
         # shellcheck disable=SC2086
         case "$(k8s_or_openshift)" in
-                openshift)   command oc $oc_opts "$@"
+                openshift)   command oc "${oc_opts[@]}" "$@"
                              export KUBERNETES_CLI=oc
                              ;;
-                    k8s|*)   command kubectl $kubectl_opts "$@"
+                    k8s|*)   command kubectl "${kubectl_opts[@]}" "$@"
                              export KUBERNETES_CLI=kubectl
                              ;;
         esac
@@ -257,7 +255,7 @@ watchpods(){
         echo
         echo 'Pods:'
         echo
-        kubectl $kubectl_opts get pods " "${k8s_get_pod_opts[@]}" " 2>&1
+        kubectl " "${kubectl_opts[@]}" " get pods " "${k8s_get_pod_opts[@]}" " 2>&1
         echo
     "
 }
