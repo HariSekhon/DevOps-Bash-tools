@@ -151,21 +151,20 @@ svnrevert(){
 }
 
 svnlog(){
-    local args=
-    local args2=
+    local args=()
+    local args2=()
     until [ $# -lt 1 ]; do
         case "$1" in
-            -*) args+="$1 "
+            -*) args+=("$1")
                 ;;
-             *) args2+="$1 "
+             *) args2+=("$1")
                 ;;
         esac
         shift
     done
-    # shellcheck disable=SC2086
-    svn up $args2 &&
+    svn up "${args2[@]}" &&
     read -r -p "press enter to see log" &&
-    svn log $args $args2 | less
+    svn log "${args[@]}" "${args2[@]}" | less
 }
 
 svnu(){
