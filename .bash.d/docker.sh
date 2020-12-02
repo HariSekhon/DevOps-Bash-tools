@@ -95,7 +95,7 @@ dcf(){
 
 #alias dockerr="docker run --rm -ti"
 function dockerrunrm(){
-    local args=""
+    local args=()
     local passed_first_non_switch_arg=0  # when this latch gets to level 3 we stop doing prefix processing to not adulterate ls -l / type args
     for x in "$@"; do
         if [ $passed_first_non_switch_arg -lt 3 ]; then
@@ -115,9 +115,8 @@ function dockerrunrm(){
                 ((passed_first_non_switch_arg+=1))
             fi
         fi
-        args="$args $x"
+        args+=("$x")
     done
-    args="${args# }"
     # Alpine 2 is dead in the water since the package list repos don't even load any more:
     #
     # # apk update
@@ -131,30 +130,28 @@ function dockerrunrm(){
     #    args="$args sh"
     #fi
     # want arg splitting
-    # shellcheck disable=SC2086
-    docker run --rm -ti -v "$PWD":/pwd -w /pwd $args
+    docker run --rm -ti -v "$PWD":/pwd -w /pwd "${args[@]}"
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
 
 docker_get_container_ids(){
     local exclude_file=~/docker-perm.txt
+    local args=()
     # if exclude file doesn't exist, grep fails entirely and we get no IDs returned, even pre-emptively replacing with /dev/null doesn't work, so omit the option entirely
     if [ -f "$exclude_file" ]; then
-        exclude_file=" -f $exclude_file"
+        args=(-f "$exclude_file")
     fi
-    # shellcheck disable=SC2086
     docker ps -a --format "{{.ID}} {{.Names}}" |
-    grep -vi $exclude_file 2>/dev/null |
+    grep -vi "${args[@]}" 2>/dev/null |
     awk '{print $1}'
 }
 
 dockerrmall(){
     # would use xargs -r / --no-run-if-empty but that is GNU only, doesn't work on Mac
-    local ids
-    ids="$(docker_get_container_ids)"
-    if [ -n "$ids" ]; then
-        # shellcheck disable=SC2086
-        docker rm -f $ids
+    local ids=()
+    read -r -a ids <<< "$(docker_get_container_ids)"
+    if [ -n "${ids[*]}" ]; then
+        docker rm -f "${ids[@]}"
     fi
 }
 
