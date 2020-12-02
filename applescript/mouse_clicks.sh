@@ -71,7 +71,6 @@ sleep "$start_delay"
 timestamp "starting"
 echo
 
-# shellcheck disable=SC2086
 for i in $(seq "$num"); do
     if [ -n "${coordinates:-}" ]; then
         for coordinate in "${coordinates[@]}"; do
