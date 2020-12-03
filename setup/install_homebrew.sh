@@ -32,7 +32,9 @@ else
     fi
     # automatically sending Enter to Continue
     if [ "$(uname -s)" = Linux ]; then
-        curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
+        # LinuxBrew has migrated to HomeBrew now
+        #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
+        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
         {
         if [ "$EUID" -eq 0 ]; then
             # Alpine has adduser
@@ -45,7 +47,7 @@ else
         fi
         }
     else
-        # now deprecated and replaced with the shell version belownow
+        # now deprecated and replaced with the shell version below
         #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
