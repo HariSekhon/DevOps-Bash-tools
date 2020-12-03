@@ -18,6 +18,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 if type -P brew &>/dev/null; then
     echo "HomeBrew already installed, skipping install..."
@@ -26,18 +27,18 @@ else
     echo "Installing HomeBrew"
     echo "==================="
     echo
-    if ! type -P git &>/dev/null; then
-        echo "Must have git installed before installing HomeBrew!"
-        exit 1
-    fi
+    #if ! type -P git &>/dev/null; then
+    #    echo "Must have git installed before installing HomeBrew!"
+    #    exit 1
+    #fi
+    "$srcdir/../install_packages.sh" bash git sudo
     # automatically sending Enter to Continue
     if [ "$(uname -s)" = Linux ]; then
         # LinuxBrew has migrated to HomeBrew now
         #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
         {
-        # requires 'sudo' command to install as non-root user now, what's the point :-/
-        #if [ "$EUID" -eq 0 ] && type -P sudo; then
+        # XXX: requires 'sudo' command to install now no matter whether run as root or a regular user :-/
         if [ "$EUID" -eq 0 ]; then
             echo "Installing HomeBrew on Linux as user linuxbrew"
             # Alpine has adduser
