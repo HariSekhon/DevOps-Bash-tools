@@ -10,7 +10,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Install Homebrew on Mac OS X
+# Install Homebrew on Mac OS X or Linux (used by AWS CLI on Linux)
 #
 # doesn't install on CentOS 6 any more
 #
@@ -41,9 +41,10 @@ else
             id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
             mkdir -p /home/linuxbrew
             chown -R linuxbrew /home/linuxbrew
-            su linuxbrew
+            su linuxbrew bash
         else
-            sh
+            # newer verions of HomeBrew require bash not sh due to use of [[
+            bash
         fi
         }
     else
