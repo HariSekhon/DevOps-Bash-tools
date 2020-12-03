@@ -58,5 +58,5 @@ else
     # do not quote cask, blank quotes break shells and there will never be any token splitting anyway
     # shellcheck disable=SC2046
     tr ' ' '\n' |
-    grep -Fx -f <(brew $([ -z "${CASK:-}" ] || echo cask) list) || :  # grep causes pipefail exit code breakages when it doesn't match
+    grep -Fx -f <(brew $([ -z "${CASK:-}" ] || echo cask) list) || :  # grep causes pipefail exit code breakages in calling when it doesn't match
 fi
