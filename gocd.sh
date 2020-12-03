@@ -53,12 +53,6 @@ url="$GOCD_URL/go/pipelines#!/"
 
 export COMPOSE_FILE="$srcdir/setup/gocd-docker-compose.yml"
 
-if [ -f setup/gocd_config_repo.json ]; then
-    repo_config=setup/gocd_config_repo.json
-else
-    repo_config="$srcdir/setup/gocd_config_repo.json"
-fi
-
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
 fi
@@ -112,27 +106,6 @@ while curl -sS "$GOCD_URL" | grep -q 'GoCD server is starting'; do
     fi
     sleep 3
 done
-echo >&2
-
-timestamp "(re)creating config repo:"
-echo >&2
-
-config_repo="$(jq -r '.id' "$repo_config")"
-
-# XXX: these config_repo endpoints don't work unless v3 is set
-timestamp "deleting config repo if already existing:"
-"$srcdir/gocd_api.sh" "/admin/config_repos/$config_repo" \
-     -H 'Accept:application/vnd.go.cd.v3+json' \
-     -X DELETE || :
-echo >&2
-echo >&2
-
-# XXX: these config_repo endpoints don't work unless v3 is set
-timestamp "creating config repo:"
-"$srcdir/gocd_api.sh" "/admin/config_repos" \
-     -H 'Accept:application/vnd.go.cd.v3+json' \
-     -X POST -d @"$repo_config"
-echo >&2
 echo >&2
 
 # needs this header, otherwise gets 404
@@ -192,3 +165,41 @@ echo
 if is_mac; then
     open "$url"
 fi
+
+repo_config=""
+filename="gocd_config_repo.json"
+if [ -f "setup/$filename" ]; then
+    repo_config="setup/$filename"
+elif [ -f "$filename" ]; then
+    repo_config="$filename"
+fi
+
+if [ -n "$repo_config" ]; then
+    timestamp "GoCD repo configuration file '$filename' not found"
+    echo >&2
+    timestamp "Skipping loading missing pipeline"
+    echo >&2
+    timestamp "Re-run this from the directory containing '$filename' or 'setup/$filename' to auto-load a pipeline"
+    exit 0
+fi
+
+timestamp "(re)creating config repo:"
+echo >&2
+
+config_repo="$(jq -r '.id' "$repo_config")"
+
+# XXX: these config_repo endpoints don't work unless v3 is set
+timestamp "deleting config repo if already existing:"
+"$srcdir/gocd_api.sh" "/admin/config_repos/$config_repo" \
+     -H 'Accept:application/vnd.go.cd.v3+json' \
+     -X DELETE || :
+echo >&2
+echo >&2
+
+# XXX: these config_repo endpoints don't work unless v3 is set
+timestamp "creating config repo:"
+"$srcdir/gocd_api.sh" "/admin/config_repos" \
+     -H 'Accept:application/vnd.go.cd.v3+json' \
+     -X POST -d @"$repo_config"
+echo >&2
+echo >&2
