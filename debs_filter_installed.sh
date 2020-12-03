@@ -41,4 +41,4 @@ help_usage "$@"
 export DEBIAN_FRONTEND=noninteractive
 
 process_package_args "$@" |
-grep -Fx -f <(installed_debs)
+grep -Fx -f <(installed_debs) || :  # grep causes pipefail exit code breakages in calling code when it doesn't match
