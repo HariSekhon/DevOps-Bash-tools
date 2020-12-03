@@ -36,12 +36,13 @@ else
         #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
         {
-        if [ "$EUID" -eq 0 ]; then
+        # requires 'sudo' command to install as non-root user now, what's the point :-/
+        if [ "$EUID" -eq 0 ] && type -P sudo; then
             # Alpine has adduser
             id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
             mkdir -p /home/linuxbrew
             chown -R linuxbrew /home/linuxbrew
-            # can't just pass bash, and shell -s needs to be fully qualified path
+            # can't just pass bash, and -s shell needs to be fully qualified path
             su linuxbrew -s /bin/bash
         else
             # newer verions of HomeBrew require bash not sh due to use of [[
