@@ -37,6 +37,7 @@
     ci  = commit
     p   = push
     st  = status
+    stq = !git_foreach_repo.sh git status | grep --color=no -e "=======" -e branch -e GitHub
     br  = branch
     ba  = branch -a
     bav = branch -a -vvv
