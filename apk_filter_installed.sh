@@ -52,4 +52,4 @@ trap 'rm -f "$installed_packages"' EXIT
 installed_apk > "$installed_packages"
 
 process_package_args "$@" |
-grep -Fx -f "$installed_packages" || :  # grep causes pipefail exit code breakages when it doesn't match
+grep -Fx -f "$installed_packages" || :  # grep causes pipefail exit code breakages in calling code when it doesn't match
