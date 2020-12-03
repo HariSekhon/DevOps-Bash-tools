@@ -38,6 +38,7 @@ else
         {
         # requires 'sudo' command to install as non-root user now, what's the point :-/
         if [ "$EUID" -eq 0 ] && type -P sudo; then
+            echo "Installing HomeBrew on Linux as user linuxbrew"
             # Alpine has adduser
             id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
             mkdir -p /home/linuxbrew
@@ -45,6 +46,7 @@ else
             # can't just pass bash, and -s shell needs to be fully qualified path
             su linuxbrew -s /bin/bash
         else
+            echo "Installing HomeBrew on Linux as user root"
             # newer verions of HomeBrew require bash not sh due to use of [[
             bash
         fi
