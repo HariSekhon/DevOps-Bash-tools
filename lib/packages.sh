@@ -32,6 +32,7 @@ _process_package_args(){
     for arg; do
         if [ -f "$arg" ] && file "$arg" | grep -q ASCII; then
             echo "adding packages from file:  $arg" >&2
+            # Bourne shell doesn't have arrays otherwise would use them here
             packages="$packages $(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d; /^[^[:alnum:]]/d' "$arg")"
             echo >&2
         else
