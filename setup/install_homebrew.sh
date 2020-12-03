@@ -41,7 +41,8 @@ else
             id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
             mkdir -p /home/linuxbrew
             chown -R linuxbrew /home/linuxbrew
-            su linuxbrew bash
+            # can't just pass bash, and shell -s needs to be fully qualified path
+            su linuxbrew -s /bin/bash
         else
             # newer verions of HomeBrew require bash not sh due to use of [[
             bash
