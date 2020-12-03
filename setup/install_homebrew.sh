@@ -27,11 +27,13 @@ else
     echo "Installing HomeBrew"
     echo "==================="
     echo
-    #if ! type -P git &>/dev/null; then
-    #    echo "Must have git installed before installing HomeBrew!"
-    #    exit 1
-    #fi
-    "$srcdir/../install_packages_if_absent.sh" bash git sudo
+    # root installs to first one, user installs to the latter
+    for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
+        if [ -d "$x" ]; then
+            export PATH="$PATH:$x"
+        fi
+    done
+    "$srcdir/../install_packages_if_absent.sh" bash curl git sudo
     if [ "$(uname -s)" = Linux ]; then
         # LinuxBrew has migrated to HomeBrew now
         #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
@@ -39,20 +41,22 @@ else
         {
         # XXX: requires 'sudo' command to install now no matter whether run as root or a regular user :-/
         if [ "$EUID" -eq 0 ]; then
-            echo "Installing HomeBrew on Linux as user linuxbrew"
+            user=linuxbrew
+            echo "Installing HomeBrew on Linux as user $user"
             # Alpine has adduser
-            id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
-            mkdir -p /home/linuxbrew
-            chown -R linuxbrew /home/linuxbrew
+            id "$user" || useradd "$user" || adduser -D "$user"
+            mkdir -p -v "/home/$user"
+            chown -R "$user" "/home/$user"
             # can't just pass bash, and -s shell needs to be fully qualified path
-            su linuxbrew -s /bin/bash
+            su "$user" -s /bin/bash
         else
-            echo "Installing HomeBrew on Linux as user root"
+            echo "Installing HomeBrew on Linux as user $USER"
             # newer verions of HomeBrew require bash not sh due to use of [[
             bash
         fi
         }
     else
+        echo "Installing HomeBrew on Mac as user $USER"
         # now deprecated and replaced with the shell version below
         #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
         bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
