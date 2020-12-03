@@ -61,7 +61,7 @@ process_package_args(){
     if [ -n "${*:-}" ]; then
         _process_package_args "$@"
     else
-        # shellcheck disable=SC2046
+        #echo "reading packages from stdin" >&2
         _process_package_args "$(cat)"
     fi
 }
