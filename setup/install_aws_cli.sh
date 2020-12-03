@@ -100,8 +100,8 @@ else
     # curl: (22) The requested URL returned error: 404 Not Found
     set +e
     brew install aws-sam-cli
-    echo
 fi
+echo
 
 echo "=========================="
 echo "Awless is unmaintained now, installing only optimistically and ignoring failures..."
