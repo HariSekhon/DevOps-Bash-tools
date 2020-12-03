@@ -58,11 +58,13 @@ _process_package_args(){
 }
 
 process_package_args(){
-    if [ -n "${*:-}" ]; then
+    if [ $# -gt 0 ]; then
         _process_package_args "$@"
     else
         #echo "reading packages from stdin" >&2
-        _process_package_args "$(cat)"
+        # need splitting
+        # shellcheck disable=SC2046
+        _process_package_args $(cat)
     fi
 }
 
