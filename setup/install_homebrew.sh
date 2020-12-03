@@ -37,7 +37,8 @@ else
         curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
         {
         # requires 'sudo' command to install as non-root user now, what's the point :-/
-        if [ "$EUID" -eq 0 ] && type -P sudo; then
+        #if [ "$EUID" -eq 0 ] && type -P sudo; then
+        if [ "$EUID" -eq 0 ]; then
             echo "Installing HomeBrew on Linux as user linuxbrew"
             # Alpine has adduser
             id linuxbrew || useradd linuxbrew || adduser -D linuxbrew
