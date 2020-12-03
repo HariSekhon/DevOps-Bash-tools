@@ -132,11 +132,22 @@ timestamp "fly login:"
 "$srcdir/fly.sh" login -c "$CONCOURSE_URL" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
+concourse_yml=".concourse_yml"
+
+if ! [ -f "$concourse_yml" ]; then
+    timestamp "Concourse configuration file '$concourse_yml' not found"
+    echo >&2
+    timestamp "Skipping loading missing pipeline"
+    echo >&2
+    timestamp "Re-run this from the directory containing '$concourse_yml' to auto-load a pipeline"
+    exit 0
+fi
+
 timestamp "updating pipeline: $pipeline"
-timestamp "loading config from $PWD/.concourse.yml"
+timestamp "loading config from $concourse_yml"
 # fly sp
 set +o pipefail
-yes | "$srcdir/fly.sh" set-pipeline -p "$pipeline" -c .concourse.yml
+yes | "$srcdir/fly.sh" set-pipeline -p "$pipeline" -c "$concourse_yml"
 set -o pipefail
 echo
 
