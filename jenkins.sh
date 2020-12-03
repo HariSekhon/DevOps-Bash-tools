@@ -73,12 +73,6 @@ export COMPOSE_FILE="$srcdir/setup/jenkins-docker-compose.yml"
 
 plugins_txt="$srcdir/setup/jenkins-plugins.txt"
 
-for filename in "$Jenkinsfile" "$job_xml"; do
-    if ! [ -f "$job_xml" ]; then
-        die "Jenkins configuration '$filename' not found - did you run this from the root of a standard repo?"
-    fi
-done
-
 if ! type docker-compose &>/dev/null; then
     "$srcdir/install_docker_compose.sh"
 fi
@@ -153,6 +147,17 @@ while [ "$SECONDS" -lt 300 ]; do
     fi
     timestamp "waiting for Jenkins to finish initializing and list plugins"
     sleep 1
+done
+
+for filename in "$Jenkinsfile" "$job_xml"; do
+    if ! [ -f "$filename" ]; then
+        timestamp "Jenkins configuration file '$filename' not found"
+        echo >&2
+        timestamp "Skipping loading missing pipeline"
+        echo >&2
+        timestamp "Re-run this from the root directory of a repo containing '$Jenkinsfile' and '$job_xml' to auto-load a pipeline"
+        exit 0
+    fi
 done
 
 # XXX: this fails if the plugins haven't been loaded properly
