@@ -39,4 +39,4 @@ usage_args="<packages>"
 help_usage "$@"
 
 process_package_args "$@" |
-grep -Fx -f <(installed_rpms)
+grep -Fx -f <(installed_rpms) || :  # grep causes pipefail exit code breakages when it doesn't match
