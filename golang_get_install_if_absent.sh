@@ -50,7 +50,7 @@ process_args(){
     done
 }
 
-if [ -n "${*:-}" ]; then
+if [ $# -gt 0 ]; then
     process_args "$@"
 else
     # shellcheck disable=SC2046
