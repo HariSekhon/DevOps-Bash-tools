@@ -47,6 +47,7 @@ if [ -n "${TAP:-}" ]; then
     fi
     installed_packages="$(brew list)"
     while read -r tap package; do
+        set +e  # grep causes pipefail exit code breakages in calling code when it doesn't match
         grep -Fxq "$package" <<< "$installed_packages" ||
         echo "$tap $package"
     done
@@ -54,5 +55,5 @@ else
     # do not quote cask, blank quotes break shells and there will never be any token splitting anyway
     # shellcheck disable=SC2046
     tr ' ' '\n' |
-    grep -vFx -f <(brew $([ -z "${CASK:-}" ] || echo cask) list)
+    grep -vFx -f <(brew $([ -z "${CASK:-}" ] || echo cask) list) || :  # grep causes pipefail exit code breakages when it doesn't match
 fi
