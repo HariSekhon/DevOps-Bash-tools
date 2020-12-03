@@ -46,6 +46,7 @@ services:
     hostname: teamcity-agent
     # 1.3GB docker image
     image: jetbrains/teamcity-agent:${VERSION:-2020.2}
+    # need the linux-sudo image for Docker-in-Docker - but this doesn't work due to iptables initialization error
     #image: jetbrains/teamcity-agent:${VERSION:-2020.2}-linux-sudo
     ports:
       - 9090:9090
@@ -58,6 +59,8 @@ services:
       AGENT_NAME: agent1
       # currently authorized via API in teamcity.sh
       #AGENT_TOKEN:
+      # need the linux-sudo image for Docker-in-Docker
+      DOCKER_IN_DOCKER: start
     healthcheck:
       #test: ["CMD", "curl", "-f", "http://localhost:9090"]
       # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
