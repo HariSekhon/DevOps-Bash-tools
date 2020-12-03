@@ -17,14 +17,20 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if type -P apk &>/dev/null; then
-    "$srcdir/apk_install_packages.sh" "$@"
-elif type -P apt-get &>/dev/null; then
-    "$srcdir/apt_install_packages.sh" "$@"
-elif type -P yum &>/dev/null; then
-    "$srcdir/yum_install_packages.sh" "$@"
-elif type -P brew &>/dev/null; then
-    "$srcdir/brew_install_packages.sh" "$@"
+packages=("$@")
+
+check_bin(){
+    type -P "$@" &>/dev/null
+}
+
+if check_bin apk; then
+    "$srcdir/apk_install_packages.sh" "${packages[@]}"
+elif check_bin apt-get; then
+    "$srcdir/apt_install_packages.sh" "${packages[@]}"
+elif check_bin yum; then
+    "$srcdir/yum_install_packages.sh" "${packages[@]}"
+elif check_bin brew; then
+    "$srcdir/brew_install_packages.sh" "${packages[@]}"
 else
     echo "Unsupported OS / Package Manager"
     exit 1
