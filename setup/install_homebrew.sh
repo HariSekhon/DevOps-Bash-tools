@@ -44,12 +44,7 @@ else
             echo "$cmds"
             # LinuxBrew has migrated to HomeBrew now
             #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh
-
-            # don't want interpolation
-            # shellcheck disable=SC2016
-            curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
-            # patch to pre-empt my fix at https://github.com/Homebrew/install/pull/365
-            sed 's/\$UID/\$EUID/g'
+            curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
         } |
         {
         # XXX: requires 'sudo' command to install now no matter whether run as root or a regular user :-/
