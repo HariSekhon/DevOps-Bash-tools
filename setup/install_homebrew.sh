@@ -31,8 +31,7 @@ else
     #    echo "Must have git installed before installing HomeBrew!"
     #    exit 1
     #fi
-    "$srcdir/../install_packages.sh" bash git sudo
-    # automatically sending Enter to Continue
+    "$srcdir/../install_packages_if_absent.sh" bash git sudo
     if [ "$(uname -s)" = Linux ]; then
         # LinuxBrew has migrated to HomeBrew now
         #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
