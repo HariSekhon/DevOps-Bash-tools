@@ -25,8 +25,8 @@ usage_description="
 Boots a GoCD CI cluster with server and agent(s) in Docker, and builds the current repo
 
 - boots GoCD server and agent(s) (one by default) in Docker
-- loads the config repo for the current git project (setup/gocd_config_repo.json)
 - authorizes the agent(s) to begin building
+- loads the config repo if gocd_config_repo.json is found in \$PWD or \$PWD/setup/
 - opens the GoCD web UI (on Mac only)
 
     ${0##*/} [up]
