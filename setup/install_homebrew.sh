@@ -35,13 +35,17 @@ else
     done
     "$srcdir/../install_packages_if_absent.sh" bash curl git sudo
     if [ "$(uname -s)" = Linux ]; then
-        opts=()
+        # if we're in debug mode enable set -x inside the HomeBrew script so we can see what inside it is causing breakage
+        cmds=""
         if [ -n "${DEBUG_HOMEBREW:-}" ]; then
-            opts+=(-x)
+            cmds="set -x"
         fi
-        # LinuxBrew has migrated to HomeBrew now
-        #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh |
-        curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh |
+        {
+            echo "$cmds"
+            # LinuxBrew has migrated to HomeBrew now
+            #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh
+            curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+        } |
         {
         # XXX: requires 'sudo' command to install now no matter whether run as root or a regular user :-/
         if [ "$EUID" -eq 0 ]; then
@@ -52,17 +56,17 @@ else
             mkdir -p -v "/home/$user"
             chown -R "$user" "/home/$user"
             # can't just pass bash, and -s shell needs to be fully qualified path
-            su "$user" -s /bin/bash "${opts[@]}"
+            su "$user" -s /bin/bash
         else
             echo "Installing HomeBrew on Linux as user $USER"
-            # newer verions of HomeBrew require bash not sh due to use of [[
-            bash "${opts[@]}"
+            # newer versions of HomeBrew require bash not sh due to use of [[
+            bash
         fi
         }
     else
         echo "Installing HomeBrew on Mac as user $USER"
         # now deprecated and replaced with the shell version below
         #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
-        bash "${opts[@]}" -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+        bash -c "$(echo "$cmds"; curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     fi
 fi
