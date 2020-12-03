@@ -32,6 +32,9 @@ build:
     # bash-tools/Makefile.in:272: recipe for target 'apt-packages' failed
     - rm -fv /etc/apt/sources.list.d/cassandra.sources.list*
     - rm -fv /etc/apt/sources.list.d/yarn.list*
+    # Basho repo is giving a '402 payment required' error
+    # https://github.com/Shippable/support/issues/5172
+    - rm -fv /etc/apt/sources.list.d/basho_riak.list
     #- shippable_retry make
     - setup/ci_bootstrap.sh
     - make init
