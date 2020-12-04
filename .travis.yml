@@ -48,10 +48,12 @@ before_install:
   - sudo rm -rf "${TRAVIS_ROOT}/var/lib/apt/lists/"*
 
 install:
-  - travis_retry make
+  #- travis_retry make
+  - make
 
 script:
-  - travis_retry make test
+  #- travis_retry make test
+  - make test
 
 after_success:
   # Alpine Github
