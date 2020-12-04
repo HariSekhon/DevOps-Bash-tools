@@ -540,6 +540,7 @@ etc.
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
   - `teamcity_agents.sh` - lists TeamCity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 TeamCity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
+  - `teamcity_buildtypes.sh` - lists TeamCity buildTypes (pipelines) along with the their project and IDs
   - `teamcity_buildtypes_download.sh` - downloads TeamCity build type JSON configurations to local files
   - `teamcity_buildtype_create.sh` - creates a TeamCity build type from a local JSON configuration (see `teamcity_buildtypes_download.sh`)
   - `teamcity_projects.sh` - lists TeamCity project IDs and Names
