@@ -37,7 +37,7 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-curl_api_opts
+curl_api_opts "$@"
 
 check_env_defined "CODESHIP_PASSWORD"
 

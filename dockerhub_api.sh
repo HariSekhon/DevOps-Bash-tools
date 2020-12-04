@@ -67,7 +67,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-curl_api_opts
+curl_api_opts "$@"
 
 user="${DOCKERHUB_USERNAME:-${DOCKERHUB_USER:-${DOCKER_USERNAME:-${DOCKER_USER:-}}}}"
 PASSWORD="${DOCKERHUB_PASSWORD:-${DOCKERHUB_TOKEN:-${DOCKER_PASSWORD:-${DOCKER_TOKEN:-}}}}"

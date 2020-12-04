@@ -125,7 +125,7 @@ check_env_defined TRAVIS_TOKEN
 
 export TOKEN="$TRAVIS_TOKEN"
 
-curl_api_opts
+curl_api_opts "$@"
 
 url_path="${1:-}"
 shift || :

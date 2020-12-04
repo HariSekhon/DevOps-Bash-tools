@@ -131,7 +131,7 @@ if [ -n "${repo:-}" ]; then
     url_path="${url_path/<repo>/$repo}"
 fi
 
-curl_api_opts
+curl_api_opts "$@"
 
 # case insensitive regex matching
 shopt -s nocasematch

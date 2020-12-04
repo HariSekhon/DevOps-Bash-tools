@@ -80,7 +80,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-curl_api_opts
+curl_api_opts "$@"
 
 user="${AZURE_DEVOPS_USERNAME:-${AZURE_DEVOPS_USER:-}}"
 if [ -z "$user" ]; then

@@ -158,7 +158,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-curl_api_opts
+curl_api_opts "$@"
 
 url_path="$1"
 shift || :

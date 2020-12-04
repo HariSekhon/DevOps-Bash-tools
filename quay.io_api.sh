@@ -62,7 +62,7 @@ check_env_defined "QUAY_TOKEN"
 
 export TOKEN="$QUAY_TOKEN"
 
-curl_api_opts
+curl_api_opts "$@"
 
 url_path="${1:-}"
 shift

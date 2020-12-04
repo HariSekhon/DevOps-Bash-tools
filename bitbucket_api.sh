@@ -95,7 +95,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-curl_api_opts
+curl_api_opts "$@"
 
 user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
 PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"

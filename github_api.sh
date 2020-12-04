@@ -88,7 +88,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-curl_api_opts
+curl_api_opts "$@"
 
 user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
 if [ -z "$user" ]; then
