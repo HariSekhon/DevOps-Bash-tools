@@ -43,8 +43,9 @@ else
         {
             echo "$cmds"
             # LinuxBrew has migrated to HomeBrew now
-            #curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh
-            curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
+            curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh
+            # but this requires newer curl and fails many CI builds - https://github.com/Homebrew/install/issues/367
+            #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh
         } |
         {
         # XXX: requires 'sudo' command to install now no matter whether run as root or a regular user :-/
