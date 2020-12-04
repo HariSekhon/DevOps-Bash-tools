@@ -28,7 +28,7 @@ Lists the last 100 Teamcity builds and their results via the Teamcity API
 
 Output format:
 
-<build_id>  <build_number>     <state>      <status>    <name>
+<Number>    <BuildType_ID>    <Build_ID>    <State>    <Status>
 
 Specify \$NO_HEADER to omit the header line
 
@@ -43,9 +43,9 @@ help_usage "$@"
 
 {
 if [ -z "${NO_HEADER:-}" ]; then
-    printf 'Build_ID\tBuild_Number\tState\tStatus\tName\n'
+    printf 'Num\tBuildType_ID\tBuild_ID\tState\tStatus\n'
 fi
 "$srcdir/teamcity_api.sh" /builds |
-jq -r '.build[] | [.id, .number, .state, .status, .buildTypeId] | @tsv'
+jq -r '.build[] | [.number, .buildTypeId, .id, .state, .status] | @tsv'
 } |
 column -t
