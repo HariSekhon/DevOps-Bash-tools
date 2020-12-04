@@ -20,9 +20,7 @@ os:
   - linux
   - osx
 
-#dist: trusty
-
-sudo: false
+osx_image: xcode12.2
 
 notifications:
   email: false
