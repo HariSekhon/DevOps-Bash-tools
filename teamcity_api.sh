@@ -151,7 +151,7 @@ shift || :
 
 url_path="${url_path##/}"
 
-curl_api_opts
+curl_api_opts "$@"
 
 # don't enforce as hard requirements here, instead try alternation further down and construct from what's available
 #check_env_defined "TEAMCITY_URL"
