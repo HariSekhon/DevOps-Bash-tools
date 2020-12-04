@@ -129,9 +129,9 @@ k(){
         case "$KUBERNETES_CLI" in
             kubectl)    opts+=("${kubectl_opts[@]}")
                         ;;
-                    oc)    opts+=("${oc_opts[@]}")
+                 oc)    opts+=("${oc_opts[@]}")
                         ;;
-                    *)  echo "invalid command '$KUBERNETES_CLI' listed in \$KUBERNETES_CLI (must be either 'kubectl' or 'oc' depending on whether you are using straight Kubernetes or OpenShift). Fix the variable or unset it to auto-detect when calling the k() function"
+                  *)    echo "invalid command '$KUBERNETES_CLI' listed in \$KUBERNETES_CLI (must be either 'kubectl' or 'oc' depending on whether you are using straight Kubernetes or OpenShift). Fix the variable or unset it to auto-detect when calling the k() function"
                         return
                         ;;
         esac
