@@ -177,7 +177,8 @@ git_to_azure_url(){
             url="$(perl -pe "s/\\/_git\\//\\/$project\\/_git\\//" <<< "$url")"
         fi
     fi
-    echo "$url"
+    # Azure DevOps URLS are sensitive to double slashes
+    echo "${url//\/\///}"
 }
 
 azure_to_git_url(){
