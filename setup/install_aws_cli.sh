@@ -77,7 +77,7 @@ if grep -q 'CentOS release [1-6][\.[:space:]]' /etc/system-release 2>/dev/null; 
 fi
 
 if is_CI && ! type -P brew && ! is_curl_min_version 7.41; then
-    echo "HomeBrew won't install with Curl < 7.41, which AWS SAM CLI depends on, skipping install in CI..."
+    echo "Skipping SAM CLI install due to curl version < 7.41 - HomeBrew won't install, which AWS SAM CLI depends on, so skipping to avoid breaking older CI builds..."
     exit 0
 fi
 # installs on Linux too as it is the AWS recommended method to install SAM CLI
