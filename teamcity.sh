@@ -33,6 +33,7 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
   - prints the TeamCity URL
   - opens the TeamCity web UI (on Mac only)
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
+  - sets the full name and email to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
   - opens the TeamCity web UI login page in browser (on Mac only)
 
     ${0##*/} [up]
@@ -48,6 +49,14 @@ The official docker images from JetBrains are huge so the first pull may take a 
 See Also:
 
     teamcity_api.sh - this script makes heavy use of it to handle API calls with authentication as part of the setup
+
+Advanced:
+
+You can configure TeamCity OAuth integration to store settings in a VCS such as GitHub under a Project's Settings -> Versioned Settings
+
+The GitHub OAuth integration is here:
+
+    https://github.com/settings/developers
 "
 
 # used by usage() in lib/utils.sh
@@ -217,6 +226,16 @@ else
     #       Invalid request. Please check the request URL and data are correct.
     echo >&2
     echo >&2
+    git_user="$(git config user.name)"
+    git_email="$(git config user.email)"
+    if [ -n "$git_user" ]; then
+        timestamp "Setting teamcity user $teamcity_user's git username to '$git_user'"
+        "$srcdir/teamcity_api.sh" "/users/$teamcity_user/name" -X PUT -d "$git_user" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
+    fi
+    if [ -n "$git_email" ]; then
+        timestamp "Setting teamcity user $teamcity_user's git email to '$git_email'"
+        "$srcdir/teamcity_api.sh" "/users/$teamcity_user/email" -X PUT -d "$git_email" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
+    fi
     timestamp "Setting teamcity user '$teamcity_user' as system administrator:"
     "$srcdir/teamcity_api.sh" "/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" -sSL --fail -X PUT > /dev/null
     # no newline returned
@@ -238,8 +257,8 @@ else
         echo "export TEAMCITY_TOKEN=$api_token"
         export TEAMCITY_TOKEN="$api_token"
     fi
-    echo >&2
 fi
+echo >&2
 
 if [ "$user_already_exists" = 0 ]; then
     timestamp "Login here with username '$teamcity_user' and password: \$TEAMCITY_PASSWORD (default: admin):"
@@ -317,8 +336,6 @@ for disconnected_agent in $disconnected_agents; do
     timestamp "deleting disconnected agent '$disconnected_agent'"
     "$srcdir/teamcity_api.sh" "/agents/$disconnected_agent" -X DELETE
 done
-
-# TODO: load pipeline
 
 echo >&2
 timestamp "TeamCity is up and ready"
