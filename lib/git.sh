@@ -149,13 +149,17 @@ git_to_azure_url(){
         url="${url/\/_git\//\/}"
         if ! [[ "$url" =~ v3/ ]]; then
             if [[ "$url" =~ ^ssh:// ]]; then
-                url="$(perl -pn -e 's/^(ssh:\/\/[^\/]+)\/(?!v3\/)/$1v3\//' <<< "$url")"
+                # add v3/ if not in URL already
+                url="$(perl -pn -e 's/^(ssh:\/\/[^\/]+)\/(?!v3\/)/$1\/v3\//' <<< "$url")"
             else
                 url="${url/:/:v3/}"
             fi
         fi
-        # if 3 sections then it's already in Azure format, just lowercase username, otherwise inject project just before repo name to conform to weird Azure DevOps urls
-        if grep -Eq '/[^/]+/[^/]+/[^/]+$' <<< "$url"; then
+        # if 4 sections then it's already in Azure format of [:/]v3/username/project/repo
+        # - in that case just lowercase the username
+        # else
+        # - otherwise also inject the project just before repo name to conform to weird Azure DevOps urls
+        if grep -Eq '[:/][^./]+/[^/]+/[^/]+/[^/]+$' <<< "$url"; then
             url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+\\/[^\\/]+)$/\\L\$1\\E\$2/" <<< "$url")"
         else
             url="$(perl -pe "s/(\\/[^\\/]+)(\\/[^\\/]+)$/\\L\$1\\E\\/$project\$2/" <<< "$url")"
