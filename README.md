@@ -12,7 +12,7 @@ Hari Sekhon - DevOps Bash Tools
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/network)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/commits/master)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-51k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-55k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 <!--
 BitBucket exposes HTML comments - open issue - works properly on GitHub/GitLab
@@ -102,7 +102,6 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 [![Debian 9](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Debian%209/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Debian+9%22)
 [![Debian 10](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Debian%2010/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Debian+10%22)
 [![CentOS](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CentOS/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CentOS%22)
-[![CentOS 6](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CentOS%206/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CentOS+6%22)
 [![CentOS 7](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CentOS%207/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CentOS+7%22)
 [![CentOS 8](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/CentOS%208/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22CentOS+8%22)
 [![Fedora](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Fedora/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Fedora%22)
@@ -123,7 +122,7 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 [git.io/bash-tools](https://git.io/bash-tools)
 
-500+ DevOps Shell Scripts and Advanced Bash environment.
+550+ DevOps Shell Scripts and Advanced Bash environment.
 
 Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
@@ -138,7 +137,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 - API scripts auto-handling authentication, tokens and other details to quickly query popular APIs with a few keystrokes just supplying the `/path/endpoint`
 - Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - aliases, functions, colouring, dynamic Git & shell behaviour enhancements, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
 - Installs the best systems packages - [AWS CLI](https://aws.amazon.com/cli/), [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest), [GCloud SDK](https://cloud.google.com/sdk), [Terraform](https://www.terraform.io/), [Kubernetes](https://kubernetes.io/) kubectl & kustomize, [jx](https://jenkins-x.io/), [jq](https://stedolan.github.io/jq/) etc... extensive package lists for servers and desktops for all major Linux distributions package managers and Mac
-  - `setup/` - contains even more scripts to download and install above software plus more, `mysql-connector-java.jar`, Mac OS X settings etc.
+  - `setup/` - contains even more scripts to download and install software, JDBC connectors, Mac OS X settings etc.
 - Utility Libraries used by many hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
   - `lib/` - scripting and CI library
