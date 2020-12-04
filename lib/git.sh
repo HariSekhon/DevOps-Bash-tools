@@ -152,7 +152,7 @@ git_to_azure_url(){
                 # add v3/ if not in URL already
                 url="$(perl -pn -e 's/^(ssh:\/\/[^\/]+)\/(?!v3\/)/$1\/v3\//' <<< "$url")"
             else
-                url="${url/:/:v3/}"
+                url="$(perl -pn -e 's/:\/?/:v3\//' <<< "$url")"
             fi
         fi
         # if 4 sections then it's already in Azure format of [:/]v3/username/project/repo
