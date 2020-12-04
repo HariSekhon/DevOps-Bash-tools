@@ -26,7 +26,7 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 for x in kubectl oc; do
     if type -P "$x" &>/dev/null; then
         # shellcheck disable=SC1090
-        source <("$x" completion bash)
+        source <(command "$x" completion bash)
     fi
 done
 
