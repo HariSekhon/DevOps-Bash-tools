@@ -13,13 +13,20 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
+# https://docs.travis-ci.com/user/customizing-the-build/
+
 version: ~> 1.0
 
+# https://docs.travis-ci.com/user/languages/minimal-and-generic/
 language: bash
+
+# https://docs.travis-ci.com/user/build-matrix/
 os:
   - linux
   - osx
 
+# https://docs.travis-ci.com/user/reference/osx/
+# macOS 10.15.7 - otherwise defaults to Mac macOS 10.13 with xcode9.4 otherwise - and HomeBrew update takes 50 minutes until the build times out :-/
 osx_image: xcode12.2
 
 notifications:
@@ -32,13 +39,17 @@ notifications:
 #before_cache:
 #  - test -f pytools_checks/Makefile || rm -fr pytools_checks
 
+# https://docs.travis-ci.com/user/caching/
 cache:
   - directories:
     - .cache          # yamllint disable-line rule:indentation
     - pytools_checks  # yamllint disable-line rule:indentation
 
+# https://docs.travis-ci.com/user/environment-variables/
 env:
   - PYTHONUNBUFFERED=1
+
+# https://docs.travis-ci.com/user/job-lifecycle/
 
 # avoid package checksum mismatches when installing packages
 before_install:
