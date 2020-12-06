@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a TeamCity project
 
-If the named project already exists, skips creation and returns success exit code zero
+Idempotent - if the named project already exists, skips creation and returns success exit code zero
 
 Uses the adjacent teamcity_api.sh
 
