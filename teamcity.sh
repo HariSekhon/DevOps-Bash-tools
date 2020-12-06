@@ -65,6 +65,7 @@ usage_args="[up|down|ui]"
 
 help_usage "$@"
 
+export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/setup/teamcity-docker-compose.yml"
 
 #teamcity_port="$(docker-compose config | sed -n '/teamcity-server:[[:space:]]*$/,$p' | awk '/- published: [[:digit:]]+/{print $3; exit}')"
