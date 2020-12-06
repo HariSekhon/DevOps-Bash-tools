@@ -38,6 +38,13 @@ help_usage "$@"
 check_env_defined "TEAMCITY_GITHUB_CLIENT_ID"
 check_env_defined "TEAMCITY_GITHUB_CLIENT_SECRET"
 
+if "$srcdir/teamcity_api.sh" /projects/_Root |
+   jq -r '.projectFeatures.projectFeature[].properties.property[] | select(.name == "displayName") | .value' |
+   grep -qi '^GitHub.com$'; then
+    timestamp "TeamCity GitHub OAuth provider in Root project already exists, skipping..."
+    exit 0
+fi
+
 timestamp "Creating TeamCity GitHub OAuth provider in Root project"
 "$srcdir/teamcity_api.sh" "/projects/_Root/projectFeatures" -X POST -d @<(cat <<EOF
     {
