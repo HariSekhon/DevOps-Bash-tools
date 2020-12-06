@@ -31,7 +31,9 @@ and also to avoid a prefix of (GitHub.com) from being added.
 
 Idempotent - if a provider called GitHub.com already exists, skips creation with success exit code zero.
 
-For TeamCity connectivity and authentication see adjacent script teamcity_api.sh
+Uses the adjacent teamcity_api.sh
+
+See teamcity_api.sh for required connection settings and authentication
 "
 
 # used by usage() in lib/utils.sh
