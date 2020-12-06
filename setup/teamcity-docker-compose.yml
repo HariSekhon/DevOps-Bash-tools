@@ -38,7 +38,7 @@ services:
     volumes:
       # for server.xml override:
       #- teamcity/conf:/opt/teamcity/conf
-      - ./teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
+      - ./teamcity/teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
       # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
       #- /tmp/teamcity/server/datadir:/data/teamcity_server/datadir
       #- /tmp/teamcity/server/logs:/opt/teamcity/logs
