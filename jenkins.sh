@@ -69,6 +69,7 @@ job_xml="setup/jenkins-job.xml"
 
 Jenkinsfile=Jenkinsfile
 
+export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/setup/jenkins-docker-compose.yml"
 
 plugins_txt="$srcdir/setup/jenkins-plugins.txt"
