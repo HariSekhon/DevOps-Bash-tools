@@ -50,7 +50,7 @@ for id in $vcs_root_ids; do
     shopt -s nocasematch
     if [[ "$url" =~ ^https://github.com/ ]]; then
         vcs_root_id="$id"
-        repo="${url#https://github.com/}"
+        repo="$(perl -pne 's|^https://github.com/||i' <<< "$url")"
     fi
     shopt -u nocasematch
 done
