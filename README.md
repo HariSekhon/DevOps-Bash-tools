@@ -547,6 +547,7 @@ etc.
   - `teamcity_buildtypes.sh` - lists TeamCity buildTypes (pipelines) along with the their project and IDs
   - `teamcity_buildtypes_download.sh` - downloads TeamCity build type JSON configurations to local files
   - `teamcity_buildtype_create.sh` - creates a TeamCity build type from a local JSON configuration (see `teamcity_buildtypes_download.sh`)
+  - `teamcity_buildtype_set_description_from_github.sh` - sync's Github repo description to TeamCity buildtype
   - `teamcity_projects.sh` - lists TeamCity project IDs and Names
   - `teamcity_projects_download.sh` - downloads TeamCity project JSON configurations to local files
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
