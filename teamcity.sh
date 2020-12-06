@@ -275,6 +275,12 @@ if [ "$user_already_exists" = 0 ]; then
     echo >&2
 fi
 
+if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" ]; then
+    # detects and skips creation if an OAuth provider named 'GitHub.com' already exists
+    "$srcdir/teamcity_create_github_oauth_provider.sh"
+    echo
+fi
+
 timestamp "getting list of expected agents"
 expected_agents="$(docker-compose config | awk '/^[[:space:]]+AGENT_NAME:/ {print $2}' | sed '/^[[:space:]]*$/d')"
 num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
