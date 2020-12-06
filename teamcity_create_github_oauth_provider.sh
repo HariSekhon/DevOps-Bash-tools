@@ -38,9 +38,13 @@ help_usage "$@"
 check_env_defined "TEAMCITY_GITHUB_CLIENT_ID"
 check_env_defined "TEAMCITY_GITHUB_CLIENT_SECRET"
 
+# calling the GitHub OAuth connector this name matches the default you'd set by hand, leading to better deduplication
+# and also it prevents a (GitHub.com) prefix for using any other name
+name="GitHub.com"
+
 if "$srcdir/teamcity_api.sh" /projects/_Root |
    jq -r '.projectFeatures.projectFeature[].properties.property[] | select(.name == "displayName") | .value' |
-   grep -qi '^GitHub.com$'; then
+   grep -Fxqi "$name"; then
     timestamp "TeamCity GitHub OAuth provider in Root project already exists, skipping..."
     exit 0
 fi
@@ -58,7 +62,7 @@ timestamp "Creating TeamCity GitHub OAuth provider in Root project"
           },
           {
             "name": "displayName",
-            "value": "GitHub.com"
+            "value": "$name"
           },
           {
             "name": "gitHubUrl",
