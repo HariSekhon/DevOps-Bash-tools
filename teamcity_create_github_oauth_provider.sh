@@ -85,3 +85,6 @@ timestamp "Creating TeamCity GitHub OAuth provider in Root project"
     }
 EOF
 )
+# API doesn't output newline
+echo
+timestamp "TeamCity GitHub OAuth provider created in Root project"
