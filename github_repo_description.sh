@@ -34,6 +34,8 @@ Output format:
 <repo>  <description>
 
 Can be piped to the stdin of gitlab_set_project_description.sh
+
+The given repo must be the current URL - cannot be a previous repo name link
 "
 
 # used by usage() in lib/utils.sh
@@ -51,6 +53,7 @@ if [ -z "$repo" ]; then
 fi
 
 repo="$(perl -pne 's|^https://github.com/||i' <<< "$repo")"
+repo="${repo##/}"
 
 "$srcdir/github_api.sh" "/repos/$repo" |
 jq -r '[.name, .description] | @tsv'
