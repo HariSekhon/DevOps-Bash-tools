@@ -84,7 +84,7 @@ timestamp "Creating TeamCity GitHub OAuth provider in Root project"
             "value": "$TEAMCITY_GITHUB_CLIENT_ID"
           },
           {
-            "name": "clientSecret",
+            "name": "secure:clientSecret",
             "value": "$TEAMCITY_GITHUB_CLIENT_SECRET"
           }
         ]
