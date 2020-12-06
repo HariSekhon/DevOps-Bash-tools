@@ -26,6 +26,11 @@ Creates a TeamCity GitHub OAuth provider configuration in the Root project
 
 Requires TEAMCITY_GITHUB_CLIENT_ID and TEAMCITY_GITHUB_CLIENT_SECRET environment variables to be declared
 
+Calls the provider GitHub.com as it would if created in the UI for better deduplication
+and also to avoid a prefix of (GitHub.com) from being added.
+
+Idempotent - if a provider called GitHub.com already exists, skips creation with success exit code zero.
+
 For TeamCity connectivity and authentication see adjacent script teamcity_api.sh
 "
 
