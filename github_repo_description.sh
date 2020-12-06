@@ -50,5 +50,7 @@ if [ -z "$repo" ]; then
     repo="$(git_repo)"
 fi
 
+repo="$(perl -pne 's|^https://github.com/||i' <<< "$repo")"
+
 "$srcdir/github_api.sh" "/repos/$repo" |
 jq -r '[.name, .description] | @tsv'
