@@ -16,7 +16,8 @@
 # sets TeamCity URL to the local docker and finds and loads the current container's superuser token to the environment for immediate use with teamcity_api.sh
 teamcity_local(){
     TEAMCITY_SUPERUSER_TOKEN="$(
-        docker-compose -f "$(dirname "${BASH_SOURCE[0]}")/../setup/teamcity-docker-compose.yml" \
+        # project name must match COMPOSE_PROJECT_NAME from teamcit.sh otherwise will fail to find token
+        docker-compose -p bash-tools -f "$(dirname "${BASH_SOURCE[0]}")/../setup/teamcity-docker-compose.yml" \
             logs teamcity-server | \
         grep -E -o 'Super user authentication token: [[:alnum:]]+' | \
         tail -n1 | \
