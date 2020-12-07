@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a TeamCity GitHub OAuth connection configuration in the Root project
 
-Requires TEAMCITY_GITHUB_CLIENT_ID and TEAMCITY_GITHUB_CLIENT_SECRET environment variables to be declared
+Requires \$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET environment variables to be declared
 
 Set up your GitHub OAuth application here to obtain these credentials:
 
