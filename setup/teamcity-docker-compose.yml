@@ -36,6 +36,8 @@ services:
       #TEAMCITY_SERVER_MEM_OPTS: "-Xmx2g -XX:MaxPermSize=270m -XX:ReservedCodeCacheSize=350m"
       TEAMCITY_SERVER_MEM_OPTS: "-Xmx512m"
     volumes:
+      # mount existing TeamCity CI configs - this works from a VCS integrated repo checkout too
+      #- ../../teamcity/.teamcity/HariSekhonGitHubProjects:/data/teamcity_server/datadir/config/projects/HariSekhonGitHubProjects
       # for server.xml override:
       #- teamcity/conf:/opt/teamcity/conf
       - ./teamcity/teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
