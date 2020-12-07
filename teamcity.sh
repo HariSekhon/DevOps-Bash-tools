@@ -36,6 +36,8 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
   - sets the full name, email, and VCS commit username to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
   - opens the TeamCity web UI login page in browser (on Mac only)
 - creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
+- if there is a TeamCity.vcs.json VCS configuration in the current directory, creates the VCS to use as a config sync repo
+  - if this is a private repo, you either need to put the credentials in the file temporarily, or set the password to blank, and edit it after boot
 
     ${0##*/} [up]
 
@@ -77,6 +79,10 @@ help_usage "$@"
 
 export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/setup/teamcity-docker-compose.yml"
+
+vcs_config="TeamCity.vcs.json"
+
+project="GitHub"
 
 #teamcity_port="$(docker-compose config | sed -n '/teamcity-server:[[:space:]]*$/,$p' | awk '/- published: [[:digit:]]+/{print $3; exit}')"
 
@@ -359,6 +365,7 @@ for agent in $unauthorized_agents; do
     done
     timestamp "WARNING: unauthorized agent '$agent' was not expected, not automatically authorizing"
 done
+echo >&2
 
 # this stops us accumulating huge numbers of agent-[[:digit:]] increments each time
 timestamp "deleting old disconnected agent references"
@@ -368,8 +375,37 @@ for disconnected_agent in $disconnected_agents; do
     timestamp "deleting disconnected agent '$disconnected_agent'"
     "$srcdir/teamcity_api.sh" "/agents/$disconnected_agent" -X DELETE
 done
-
 echo >&2
+
+if [ -f "$vcs_config" ]; then
+	vcs_id="$(jq -r .id < "$vcs_config")"
+    if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
+        timestamp "VCS root '$vcs_id' already exists, skipping creation"
+    else
+		project_id="$(jq -r .project.id < "$vcs_config")"
+		if [ "$project_id" != "_Root" ]; then
+			timestamp "Creating VCS container project '$project_id' if not already exists..."
+			"$srcdir/teamcity_create_project.sh" "$project_id"
+		fi
+        "$srcdir/teamcity_create_vcs_root.sh" "$vcs_config"
+		echo >&2
+		timestamp "Now creating primary project '$project'"
+		# XXX: TeamCity API doesn't yet support creating a project from a saved configuration via the API, see this ticket:
+		#
+		#      https://youtrack.jetbrains.com/issue/TW-43542
+		#
+		# So we create an empty project, then configure a VCS root to GitHub and reconfigure the project to pull from a GitHub repo
+		# TODO: get the project name from the config file
+		"$srcdir/teamcity_create_project.sh" "$project"
+    fi
+    echo >&2
+    timestamp "Configuring VCS versioning to import all buildTypes and VCS settings for project"
+	"$srcdir/teamcity_project_versioning_integration.sh" "$project"
+else
+    timestamp "no config found: $vcs_config - skipping VCS setup and versioning integration / import"
+fi
+echo >&2
+
 timestamp "TeamCity is up and ready"
 
 # XXX: requires the setting: build -> General Settings -> 'enable status widget' to permit unauthenticated status badge access
