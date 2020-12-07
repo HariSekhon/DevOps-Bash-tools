@@ -35,11 +35,13 @@ Good counterpart to check on what has been auto-loaded from GCP Secret Manager
 to Kubernetes secrets by gcp_secrets_to_kubernetes.sh
 
 Requires kubectl in \$PATH and configured
+
+Additional arguments are assumed to be kubectl options, useful for specifying --namespace
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<secret_name>"
+usage_args="<secret_name> [<kubectl_options>]"
 
 help_usage "$@"
 
