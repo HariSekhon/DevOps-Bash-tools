@@ -27,7 +27,7 @@ For a given TeamCity buildtype, finds the top GitHub VCS root and sync's the des
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<buildType>"
+usage_args="<buildType_id>"
 
 help_usage "$@"
 
