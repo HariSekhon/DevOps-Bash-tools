@@ -44,7 +44,7 @@ project="$1"
 
 toggle="${2:-enable}"
 
-if [ "$toggle" = disable ]; then
+if [[ "$toggle" =~ ^disabled?$ ]]; then
     value="false"
 else
     value="true"
