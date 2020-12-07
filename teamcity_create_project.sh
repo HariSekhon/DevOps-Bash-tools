@@ -53,8 +53,10 @@ min_args 1 "$@"
 project="$1"
 
 timestamp "checking if project '$project' already exists in TeamCity"
-projects="$("$srcdir/teamcity_api.sh" "/projects" | jq -r '.project[].name')"
-if grep -Fxq "$project" <<< "$projects"; then
+project_names="$("$srcdir/teamcity_api.sh" "/projects" | jq -r '.project[].name')"
+project_ids="$("$srcdir/teamcity_api.sh" "/projects" | jq -r '.project[].id')"
+if grep -Fxq "$project" <<< "$project_names" ||
+   grep -Fxq "$project" <<< "$project_ids"; then
     timestamp "project '$project' already exists in TeamCity"
 else
     # XXX: can't export arrays in Bash :-( - must pass as a string and split inside teamcity_api.sh
