@@ -54,7 +54,7 @@ project_id="$1"
 vcs_id="${2:-TeamCity}"
 
 feature_id="$("$srcdir/teamcity_api.sh" "/projects/$project_id" |
-              jq -r '.projectFeatures.projectFeature[] | select(.type == "versionedSettings") | .id')"
+              jq -r '.projectFeatures.projectFeature[]? | select(.type == "versionedSettings") | .id')"
 if [ -n "$feature_id" ]; then
     if [ -n "${TEAMCITY_FORCE_FEATURE_REPLACE:-}" ]; then
         timestamp "deleting all feature ids of type versionedSettings for project '$project_id'"
