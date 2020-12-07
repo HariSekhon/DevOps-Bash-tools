@@ -78,5 +78,5 @@ timestamp "creating TeamCity VCS root from '$config'"
 "$srcdir/teamcity_api.sh" "/vcs-roots" \
     -X POST \
     -d @"$config" \
-    "${opts[@]}"
+    "${opts[@]:-}"
 echo
