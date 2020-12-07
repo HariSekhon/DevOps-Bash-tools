@@ -404,7 +404,7 @@ echo >&2
 timestamp "Optimistically setting any buildTypes descriptions from their GitHub repos (ignoring failures)"
 "$srcdir/teamcity_buildtypes_set_description_from_github.sh" || :
 
+timestamp "Build status icons:  $TEAMCITY_URL/app/rest/builds/<build>/statusIcon.svg"
+timestamp "(requires the setting: build -> General Settings -> 'enable status widget' to permit unauthenticated status badge access)"
+echo
 timestamp "TeamCity is up and ready"
-
-# XXX: requires the setting: build -> General Settings -> 'enable status widget' to permit unauthenticated status badge access
-#echo "Build status icon:  $TEAMCITY_URL/app/rest/builds/$build_name/statusIcon.svg"
