@@ -35,6 +35,11 @@ See teamcity_api.sh for required connection settings and authentication
 If you need to delete a project you can call
 
     teamcity_api.sh /projects/NAME -X DELETE
+
+
+Unfortunately you can't yet create a project with all saved / exported settings via the API, see this ticket:
+
+    https://youtrack.jetbrains.com/issue/TW-43542
 "
 
 # used by usage() in lib/utils.sh
