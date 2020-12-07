@@ -541,7 +541,7 @@ etc.
   - `teamcity.sh` - boots TeamCity CI cluster in docker, just click proceed and accept the EULA and it does the rest, it even creates an admin user and an API token for you
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
   - `teamcity_create_project.sh` - creates a TeamCity project using the API
-  - `teamcity_create_github_oauth_provider.sh` - creates a TeamCity GitHub OAuth Provider configuration in the Root project
+  - `teamcity_create_github_oauth_connection.sh` - creates a TeamCity GitHub OAuth VCS connection in the Root project, useful for bootstrapping projects from VCS configs
   - `teamcity_agents.sh` - lists TeamCity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 TeamCity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
   - `teamcity_buildtypes.sh` - lists TeamCity buildTypes (pipelines) along with the their project and IDs
