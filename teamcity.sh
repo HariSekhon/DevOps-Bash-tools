@@ -307,11 +307,6 @@ if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" 
     echo
 fi
 
-timestamp "Optimistically setting any buildtypes from GitHub descriptions to match their GitHub repos (ignoring failures)"
-for buildtype_id in $("$srcdir/teamcity_buildtypes.sh" | tail -n +2 | awk '{print $1}'); do
-    "$srcdir/teamcity_buildtype_set_description_from_github.sh" "$buildtype_id" || :
-done
-
 timestamp "getting list of expected agents"
 expected_agents="$(docker-compose config | awk '/^[[:space:]]+AGENT_NAME:/ {print $2}' | sed '/^[[:space:]]*$/d')"
 num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
@@ -382,22 +377,22 @@ if [ -f "$vcs_config" ]; then
     if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
         timestamp "VCS root '$vcs_id' already exists, skipping creation"
     else
-		project_id="$(jq -r .project.id < "$vcs_config")"
-		if [ "$project_id" != "_Root" ]; then
-			timestamp "Creating VCS container project '$project_id' if not already exists..."
-			"$srcdir/teamcity_create_project.sh" "$project_id"
-		fi
+        project_id="$(jq -r .project.id < "$vcs_config")"
+        if [ "$project_id" != "_Root" ]; then
+            timestamp "Creating VCS container project '$project_id' if not already exists..."
+            "$srcdir/teamcity_create_project.sh" "$project_id"
+        fi
         "$srcdir/teamcity_create_vcs_root.sh" "$vcs_config"
-		echo >&2
-		timestamp "Now creating primary project '$project'"
-		# XXX: TeamCity API doesn't yet support creating a project from a saved configuration via the API, see this ticket:
-		#
-		#      https://youtrack.jetbrains.com/issue/TW-43542
-		#
-		# So we create an empty project, then configure a VCS root to GitHub and reconfigure the project to pull from a GitHub repo
-		# TODO: get the project name from the config file
-		"$srcdir/teamcity_create_project.sh" "$project"
+        echo >&2
     fi
+    #timestamp "Now creating primary project '$project'"
+    # XXX: TeamCity API doesn't yet support creating a project from a saved configuration via the API, see this ticket:
+    #
+    #      https://youtrack.jetbrains.com/issue/TW-43542
+    #
+    # So we create an empty project, then configure a VCS root to GitHub and reconfigure the project to pull from a GitHub repo
+    # TODO: get the project name from the config file
+    "$srcdir/teamcity_create_project.sh" "$project"
     echo >&2
     timestamp "Configuring VCS versioning to import all buildTypes and VCS settings for project"
 	"$srcdir/teamcity_project_versioning_integration.sh" "$project"
@@ -405,6 +400,9 @@ else
     timestamp "no config found: $vcs_config - skipping VCS setup and versioning integration / import"
 fi
 echo >&2
+
+timestamp "Optimistically setting any buildTypes descriptions from their GitHub repos (ignoring failures)"
+"$srcdir/teamcity_buildtypes_set_description_from_github.sh" || :
 
 timestamp "TeamCity is up and ready"
 
