@@ -64,6 +64,12 @@ shopt -s nocasematch
 if [[ "$config" =~ \.xml$ ]]; then
     # teamcity_api.sh defaults to JSON
     opts+=(-H "Accept: application/xml" -H "Content-Type: application/xml")
+else
+    vcs_id="$(jq -r .id < "$config")"
+    if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
+        timestamp "VCS root '$vcs_id' already exists, skipping creation"
+        exit 0
+    fi
 fi
 shopt -u nocasematch
 
