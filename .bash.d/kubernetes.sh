@@ -98,7 +98,10 @@ alias menv='eval $(minikube docker-env)'
 
 # ============================================================================ #
 
-kubectl_opts=("${KUBECTL_OPTS:-}")
+# results in a blank arg which breaks kubectl command
+#kubectl_opts=("${KUBECTL_OPTS:-}")
+# split KUBECTL_OPTS to array properly
+read -r -a kubectl_opts <<< "${KUBECTL_OPTS:-}"
 # set K8S_NAMESPACE in local .bashrc or similar files for environments where your ~/.kube/config
 # gets regenerated daily with certification authentication from a kerberos login script, which
 # resets the 'kcd bigdata' namespace change. This way you automatically send the right namespace every time
