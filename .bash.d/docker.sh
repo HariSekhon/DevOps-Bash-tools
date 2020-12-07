@@ -154,7 +154,7 @@ dockerrmall(){
     # would use xargs -r / --no-run-if-empty but that is GNU only, doesn't work on Mac
     local ids=()
     read -r -a ids <<< "$(docker_get_container_ids)"
-    if [ -n "${ids[*]}" ]; then
+    if [ ${#ids} -gt 0 ]; then
         docker rm -f "${ids[@]}"
     fi
 }
