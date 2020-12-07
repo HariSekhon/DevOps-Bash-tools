@@ -281,6 +281,11 @@ if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" 
     echo
 fi
 
+timestamp "Optimistically setting any buildtypes from GitHub descriptions to match their GitHub repos (ignoring failures)"
+for buildtype_id in $("$srcdir/teamcity_buildtypes.sh" | tail -n +2 | awk '{print $1}'); do
+    "$srcdir/teamcity_buildtype_set_description_from_github.sh" "$buildtype_id" || :
+done
+
 timestamp "getting list of expected agents"
 expected_agents="$(docker-compose config | awk '/^[[:space:]]+AGENT_NAME:/ {print $2}' | sed '/^[[:space:]]*$/d')"
 num_expected_agents="$(grep -c . <<< "$expected_agents" || :)"
