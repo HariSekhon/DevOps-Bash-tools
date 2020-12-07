@@ -555,6 +555,7 @@ etc.
   - `teamcity_project_vcs_versioning.sh` - quickly toggle VCS versioning on/off for a given TeamCity project (useful for testing without auto-committing)
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
   - `teamcity_vcs_roots_download.sh` - downloads TeamCity VCS root JSON configurations to local files
+  - See Also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
