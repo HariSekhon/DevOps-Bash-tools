@@ -135,7 +135,7 @@ vres(){
 vsusall(){
     local running_vms=()
     read -r -a running_vms <<< "$(vst | grep running | awk '{print $1}')"
-    [ -n "${running_vms[*]}" ] || return 0
+    [ ${#running_vms} -gt 0 ] || return 0
     vsus "${running_vms[@]}"
 }
 alias vsusa=vsusall
