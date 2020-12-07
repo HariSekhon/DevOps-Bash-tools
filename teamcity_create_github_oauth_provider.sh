@@ -22,14 +22,20 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a TeamCity GitHub OAuth provider configuration in the Root project
+Creates a TeamCity GitHub OAuth connection configuration in the Root project
 
 Requires TEAMCITY_GITHUB_CLIENT_ID and TEAMCITY_GITHUB_CLIENT_SECRET environment variables to be declared
+
+Set up your GitHub OAuth application here to obtain these credentials:
+
+    https://github.com/settings/developers
+
 
 Calls the provider GitHub.com as it would if created in the UI for better deduplication
 and also to avoid a prefix of (GitHub.com) from being added.
 
-Idempotent - if a provider called GitHub.com already exists, skips creation with success exit code zero.
+Idempotent - if a connection called GitHub.com already exists, skips creation and exits with success code zero.
+
 
 Uses the adjacent teamcity_api.sh
 
