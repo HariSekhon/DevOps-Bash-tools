@@ -64,7 +64,9 @@ TeamCity GitHub OAuth integration - set up your TeamCity OAuth credentials here:
 If \$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET are available in the environment it will configure a TeamCity VCS Root to GitHub.com
 
 
-If your GitHub OAuth connection has been created you can sync your Project configuration to/from Github under Project's Settings -> Versioned Settings
+If your GitHub OAuth connection has been created you can use this to create a TeamCity VCS in the Root project, and use that to sync your Project configuration to/from Github under Project's Settings -> Versioned Settings using the VCS referenced from the Root project.
+
+It's better to keep the TeamCity config VCS in the Root project because when you sync a project and it replaces the VCS json credential it breaks the GitHub sync and needs to be re-created. By putting it in the Root project and only enabling VCS sync on the sub-project you avoid this problem.
 "
 
 # used by usage() in lib/utils.sh
@@ -238,9 +240,13 @@ else
     git_user="$(git config user.name)"
     git_email="$(git config user.email)"
     if [ -n "$git_user" ]; then
-        timestamp "Setting teamcity user $teamcity_user's git username to '$git_user'"
+        timestamp "Setting teamcity user $teamcity_user's username to '$git_user'"
         "$srcdir/teamcity_api.sh" "/users/$teamcity_user/name" -X PUT -d "$git_user" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
-        # prints username without newline
+        # API echo's username without newline
+        echo
+        timestamp "Setting teamcity user $teamcity_user's VCS default username to '$git_user'"
+        "$srcdir/teamcity_api.sh" "/users/admin/properties/plugin:vcs:anyVcs:anyVcsRoot" -X PUT -d "$git_user" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
+        # API echo's username without newline
         echo
     fi
     if [ -n "$git_email" ]; then
@@ -255,6 +261,8 @@ else
     echo >&2
     api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens" -sSL | \
                  jq -r '.token[]' || :)"
+    # XXX: could create expiring self-deleting token here each time, but would make idempotence tricker
+    # due to timings and also use might want to use it in teamcity_api.sh later
     if [ -n "$api_token" ]; then
         timestamp "TeamCity user '$teamcity_user' already has an API token, skipping token creation"
         timestamp "since we cannot get existing token value out of the API, will load TEAMCITY_SUPERUSER_TOKEN to environment to use instead"
@@ -363,3 +371,6 @@ done
 
 echo >&2
 timestamp "TeamCity is up and ready"
+
+# XXX: requires the setting: build -> General Settings -> 'enable status widget' to permit unauthenticated status badge access
+#echo "Build status icon:  $TEAMCITY_URL/app/rest/builds/$build_name/statusIcon.svg"
