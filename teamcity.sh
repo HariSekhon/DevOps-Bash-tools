@@ -35,6 +35,7 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
   - sets the full name and email to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
   - opens the TeamCity web UI login page in browser (on Mac only)
+- creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
 
     ${0##*/} [up]
 
@@ -42,21 +43,28 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 
     ${0##*/} ui     - prints the TeamCity Server URL and on Mac automatically opens in browser
 
+
 Idempotent, you can re-run this and continue from any stage
+
 
 The official docker images from JetBrains are huge so the first pull may take a while
 
+
 See Also:
 
-    teamcity_api.sh - this script makes heavy use of it to handle API calls with authentication as part of the setup
+    teamcity_api.sh - makes heavy use of this script to handle setup API calls with authentication
+
 
 Advanced:
 
-You can configure TeamCity OAuth integration to store settings in a VCS such as GitHub under a Project's Settings -> Versioned Settings
-
-The GitHub OAuth integration is here:
+TeamCity GitHub OAuth integration - set up your TeamCity OAuth credentials here:
 
     https://github.com/settings/developers
+
+If \$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET are available in the environment it will configure a TeamCity VCS Root to GitHub.com
+
+
+If your GitHub OAuth connection has been created you can sync your Project configuration to/from Github under Project's Settings -> Versioned Settings
 "
 
 # used by usage() in lib/utils.sh
@@ -232,10 +240,14 @@ else
     if [ -n "$git_user" ]; then
         timestamp "Setting teamcity user $teamcity_user's git username to '$git_user'"
         "$srcdir/teamcity_api.sh" "/users/$teamcity_user/name" -X PUT -d "$git_user" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
+        # prints username without newline
+        echo
     fi
     if [ -n "$git_email" ]; then
         timestamp "Setting teamcity user $teamcity_user's git email to '$git_email'"
         "$srcdir/teamcity_api.sh" "/users/$teamcity_user/email" -X PUT -d "$git_email" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
+        # prints email without newline
+        echo
     fi
     timestamp "Setting teamcity user '$teamcity_user' as system administrator:"
     "$srcdir/teamcity_api.sh" "/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" -sSL --fail -X PUT > /dev/null
