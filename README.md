@@ -191,9 +191,9 @@ make
 - [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
 - [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager API & Cloudera Navigator API scripts
 - [Git - GitHub, GitLab, Bitbucket, Azure DevOps](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
-- [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment)
-  - Jenkins, Concourse, TeamCity, GoCD - one-touch boot & build, API query scripts, build pipeline configs for all 4 major self-host CI systems
-  - Azure DevOps, GitHub Actions, Travis CI, Circle CI, AppVeyor, BuildKite, Codefresh, CodeShip, Drone.io, Shippable, Wercker - API query scripts, build pipeline configs for nearly every major hosted CI system
+- [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - every major CI system:
+  - Jenkins, Concourse, TeamCity, GoCD - one-touch boot & build, API query scripts, build pipeline configs
+  - Azure DevOps, GitHub Actions, Travis CI, Circle CI, AppVeyor, BuildKite, Codefresh, CodeShip, Drone.io, Shippable, Wercker - API query scripts, build pipeline configs
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
