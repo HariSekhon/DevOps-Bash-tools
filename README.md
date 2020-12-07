@@ -193,7 +193,7 @@ make
 - [Git - GitHub, GitLab, Bitbucket, Azure DevOps](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for just about every major CI system:
   - Jenkins, Concourse, GoCD, TeamCity - one-touch boot & build
-  - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, Travis CI, Circle CI, AppVeyor, BuildKite, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker ...
+  - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker ...
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
