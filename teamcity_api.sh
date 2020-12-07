@@ -110,6 +110,11 @@ Remember you can check logs/teamcity-rest.log server log for these API requests
     ${0##*/} /builds?locator=status:SUCCESS,tag=dev
 
 
+# Get the build queue:
+
+    ${0##*/} /buildQueue
+
+
 # Get list of projects:
 
     ${0##*/} /projects
@@ -136,6 +141,10 @@ Remember you can check logs/teamcity-rest.log server log for these API requests
 
     ${0##*/} /cloud/profiles
 
+
+# Check your license details:
+
+    ${0##*/} /server/licensingData
 "
 
 # used by usage() in lib/utils.sh
