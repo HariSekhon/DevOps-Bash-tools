@@ -39,4 +39,6 @@ echo
 echo https://git.io/hari-ci
 } | tee "$file"
 
+"$srcdir/github_generate_starcharts.md.sh"
+
 trap '' exit
