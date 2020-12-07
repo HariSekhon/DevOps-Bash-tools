@@ -47,13 +47,13 @@ if [ $# -gt 0 ]; then
     done
 else
     "$srcdir/teamcity_api.sh" /buildTypes |
-    jq -r '.buildType[].name'
+    jq -r '.buildType[].id'
 fi |
 grep -v '^[[:space:]]*$' |
-while read -r build_name; do
-    filename="$build_name.json"
-    timestamp "downloading build '$build_name' to '$filename'"
-    "$srcdir/teamcity_api.sh" "/buildTypes/$build_name" |
+while read -r build_id; do
+    filename="$build_id.json"
+    timestamp "downloading build '$build_id' to '$filename'"
+    "$srcdir/teamcity_api.sh" "/buildTypes/$build_id" |
     # using jq just for formatting
     jq . > "$filename" || :  # some builds get 400 errors, ignore these
 done
