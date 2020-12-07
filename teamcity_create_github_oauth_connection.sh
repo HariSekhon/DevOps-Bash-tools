@@ -36,7 +36,7 @@ VCS Root created in the Root project can be seen here:
     \$TEAMCITY_URL/admin/editProject.html?projectId=_Root&tab=projectVcsRoots
 
 
-Calls the provider GitHub.com as it would if created in the UI for better deduplication
+Calls the connection GitHub.com as it would if created in the UI for better deduplication
 and also to avoid a prefix of (GitHub.com) from being added.
 
 
@@ -67,11 +67,11 @@ name="GitHub.com"
 if "$srcdir/teamcity_api.sh" /projects/_Root |
    jq -r '.projectFeatures.projectFeature[].properties.property[] | select(.name == "displayName") | .value' |
    grep -Fxqi "$name"; then
-    timestamp "TeamCity GitHub OAuth provider in Root project already exists, skipping..."
+    timestamp "TeamCity GitHub OAuth connection in Root project already exists, skipping..."
     exit 0
 fi
 
-timestamp "Creating TeamCity GitHub OAuth provider in Root project"
+timestamp "Creating TeamCity GitHub OAuth connection in Root project"
 "$srcdir/teamcity_api.sh" "/projects/_Root/projectFeatures" -X POST -d @<(cat <<EOF
     {
       "id": "GitHub",
@@ -109,4 +109,4 @@ EOF
 )
 # API doesn't output newline
 echo
-timestamp "TeamCity GitHub OAuth provider created in Root project"
+timestamp "TeamCity GitHub OAuth connection created in Root project"
