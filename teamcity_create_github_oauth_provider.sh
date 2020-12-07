@@ -31,8 +31,17 @@ Set up your GitHub OAuth application here to obtain these credentials:
     https://github.com/settings/developers
 
 
+VCS Root created in the Root project can be seen here:
+
+    \$TEAMCITY_URL/admin/editProject.html?projectId=_Root&tab=projectVcsRoots
+
+
 Calls the provider GitHub.com as it would if created in the UI for better deduplication
 and also to avoid a prefix of (GitHub.com) from being added.
+
+
+This is useful for (re)creating projects from scratch using VCS stored configuration
+
 
 Idempotent - if a connection called GitHub.com already exists, skips creation and exits with success code zero.
 
