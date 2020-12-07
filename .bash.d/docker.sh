@@ -142,7 +142,11 @@ docker_get_container_ids(){
         args=(-f "$exclude_file")
     fi
     docker ps -a --format "{{.ID}} {{.Names}}" |
-    grep -vi "${args[@]}" 2>/dev/null |
+    if [ ${#args} -gt 0 ]; then
+        grep -vi "${args[@]}" 2>/dev/null
+    else
+        cat
+    fi |
     awk '{print $1}'
 }
 
