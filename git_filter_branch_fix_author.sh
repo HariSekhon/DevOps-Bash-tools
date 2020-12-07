@@ -26,7 +26,7 @@ Rewrites the current Git branch using git filter-branch to change the Author/Com
 
 For each commit in the current branch history, if both:
 
-	- the Author or Committer Name matches the <old_name>
+    - the Author or Committer Name matches the <old_name>
     - the Author or Committer Email matches the <old_email>
 
 then both the Author and Committer names and emails are set to <new_name> and <new_email>
@@ -57,9 +57,9 @@ old_email="$1"
 new_email="$2"
 new_name="${3:-}"
 
-opts=""
+opts=()
 if [ -n "${FORCE_GIT_REWRITE:-}" ]; then
-    opts="-f"
+    opts+=(-f)
 fi
 
 for x in "$old_email" "$new_email"; do
