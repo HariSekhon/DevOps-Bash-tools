@@ -43,5 +43,12 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-"$srcdir/teamcity_api.sh" /vcs-roots |
-jq -r '.["vcs-root"][] | [.id, .name] | @tsv'
+output="$("$srcdir/teamcity_api.sh" /vcs-roots)"
+
+count="$(jq -r '.count' <<< "$output")"
+
+if [ "$count" -gt 0 ]; then
+    # XXX: this key vcs-roots doesn't exist if there are none configured, eg. during teamcity.sh bootstrap, resulting in the old error
+    # jq: error (at <stdin>:0): Cannot iterate over null (null)
+    jq -r '.["vcs-root"][] | [.id, .name] | @tsv' <<< "$output"
+fi
