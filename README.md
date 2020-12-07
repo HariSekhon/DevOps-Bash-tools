@@ -541,6 +541,7 @@ etc.
 - `gocd_api.sh` - queries the [GoCD](https://www.gocd.org/) API
 - `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) API scripts:
   - `teamcity.sh` - boots TeamCity CI cluster in docker, just click proceed and accept the EULA and it does the rest, it even creates an admin user and an API token for you
+  - See Also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
   - `teamcity_create_project.sh` - creates a TeamCity project using the API
   - `teamcity_create_github_oauth_connection.sh` - creates a TeamCity GitHub OAuth VCS connection in the Root project, useful for bootstrapping projects from VCS configs
@@ -558,7 +559,6 @@ etc.
   - `teamcity_project_vcs_versioning.sh` - quickly toggle VCS versioning on/off for a given TeamCity project (useful for testing without auto-committing)
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
   - `teamcity_vcs_roots_download.sh` - downloads TeamCity VCS root JSON configurations to local files
-  - See Also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
