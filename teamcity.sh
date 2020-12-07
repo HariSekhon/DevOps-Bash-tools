@@ -288,8 +288,8 @@ if [ "$user_already_exists" = 0 ]; then
 fi
 
 if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" ]; then
-    # detects and skips creation if an OAuth provider named 'GitHub.com' already exists
-    "$srcdir/teamcity_create_github_oauth_provider.sh"
+    # detects and skips creation if an OAuth connection named 'GitHub.com' already exists
+    "$srcdir/teamcity_create_github_oauth_connection.sh"
     echo
 fi
 
