@@ -554,6 +554,7 @@ etc.
   - `teamcity_buildtypes_set_description_from_github.sh` - sync's all TeamCity buildType descriptions from their GitHub repos where available
   - `teamcity_projects.sh` - lists TeamCity project IDs and Names
   - `teamcity_projects_download.sh` - downloads TeamCity project JSON configurations to local files
+  - `teamcity_project_versioning_integration.sh` - creates a project level VCS integration to track all configs to GitHub or similar
   - `teamcity_project_vcs_versioning.sh` - quickly toggle VCS versioning on/off for a given TeamCity project (useful for testing without auto-committing)
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
   - `teamcity_vcs_roots_download.sh` - downloads TeamCity VCS root JSON configurations to local files
