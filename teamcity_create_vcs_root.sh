@@ -33,6 +33,11 @@ The config file is the same format as downloaded by the adjacent script:
 but you will need to add the password back in to the file before upload (can be blank and set later in UI)
 
 
+Unfortunately TeamCity doesn't allow creating VCS roots using say the GitHub OAuth connection via the API,
+or at least I can find no reference to how to do this - so you might still need to create those type of VCS roots
+by hand or else switch to using another mechanism like SSH keys
+
+
 Uses the adjacent teamcity_api.sh
 
 See teamcity_api.sh for required connection settings and authentication
