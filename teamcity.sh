@@ -33,7 +33,7 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
   - prints the TeamCity URL
   - opens the TeamCity web UI (on Mac only)
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
-  - sets the full name and email to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
+  - sets the full name, email, and VCS commit username to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
   - opens the TeamCity web UI login page in browser (on Mac only)
 - creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
 
@@ -250,7 +250,7 @@ else
         echo
     fi
     if [ -n "$git_email" ]; then
-        timestamp "Setting teamcity user $teamcity_user's git email to '$git_email'"
+        timestamp "Setting teamcity user $teamcity_user's email to '$git_email'"
         "$srcdir/teamcity_api.sh" "/users/$teamcity_user/email" -X PUT -d "$git_email" -H 'Content-Type: text/plain'  -H 'Accept: text/plain'
         # prints email without newline
         echo
