@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 For a given TeamCity buildtype, finds the top GitHub VCS root and sync's the description from the GitHub repo to the TeamCity buildtype
+
+TeamCity buildType ID is case sensitive
+
+See Also:
+
+    teamcity_buildtypes.sh - lists the build types showing ID, project and name
 "
 
 # used by usage() in lib/utils.sh
