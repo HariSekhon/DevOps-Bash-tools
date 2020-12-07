@@ -551,6 +551,7 @@ etc.
   - `teamcity_buildtype_set_description_from_github.sh` - sync's Github repo description to TeamCity buildtype
   - `teamcity_projects.sh` - lists TeamCity project IDs and Names
   - `teamcity_projects_download.sh` - downloads TeamCity project JSON configurations to local files
+  - `teamcity_project_vcs_versioning.sh` - quickly toggle VCS versioning on/off for a given TeamCity project (useful for testing without auto-committing)
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
   - `teamcity_vcs_roots_download.sh` - downloads TeamCity VCS root JSON configurations to local files
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
