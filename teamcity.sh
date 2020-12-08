@@ -80,7 +80,7 @@ help_usage "$@"
 export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/setup/teamcity-docker-compose.yml"
 
-vcs_config="TeamCity.vcs.json"
+vcs_config=".teamcity.vcs.json"
 
 project="GitHub"
 
