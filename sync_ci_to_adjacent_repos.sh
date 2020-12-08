@@ -24,7 +24,13 @@ if [ -n "$*" ]; then
 else
     sed 's/#.*//; s/:/ /' "$srcdir/setup/repos.txt"
 fi |
-grep -v -e bash-tools -e '^[[:space:]]*$' |
+grep -vi -e bash-tools \
+         -e template \
+         -e playlist \
+         -e sql-scripts \
+         -e sql-keywords \
+         -e teamcity \
+         -e '^[[:space:]]*$' |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"
