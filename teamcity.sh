@@ -38,8 +38,9 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
   - sets the full name, email, and VCS commit username to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
   - opens the TeamCity web UI login page in browser (on Mac only)
 - creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
-- if there is a TeamCity.vcs.json VCS configuration in the current directory, creates the VCS to use as a config sync repo
+- if there is a .teamcity.vcs.json VCS configuration in the current directory, creates the VCS to use as a config sync repo
   - if this is a private repo, you either need to put the credentials in the file temporarily, or set the password to blank, and edit it after boot
+  - if GitHub OAuth connection credentials are available, will instead look for .teamcity.auth.vcs.json
 
     ${0##*/} [up]
 
@@ -83,6 +84,7 @@ export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/setup/teamcity-docker-compose.yml"
 
 vcs_config=".teamcity.vcs.json"
+vcs_config_auth=".teamcity.auth.vcs.json"
 
 project="GitHub"
 
@@ -105,10 +107,10 @@ if [ "$action" = up ]; then
     # only start the server, don't wait for the agent to download before triggering the URL to prompt user for initialization so it can progress while agent is downloading
     #docker-compose up -d teamcity-server "$@"
     docker-compose up -d "$@"
-    echo >&2
+    echo
 elif [ "$action" = restart ]; then
     docker-compose down
-    echo >&2
+    echo
     exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "TeamCity Server URL:  $TEAMCITY_URL"
@@ -118,7 +120,7 @@ elif [ "$action" = ui ]; then
     exit 0
 else
     docker-compose "$action" "$@"
-    echo >&2
+    echo
     exit 0
 fi
 
@@ -127,7 +129,7 @@ fi
 #when_url_content "$TEAMCITY_URL/login.html" '(?i:teamcity)'
 #when_ports_available 60 "${TEAMCITY_HOST:-localhost}" "${TEAMCITY_PORT:-8111}"
 when_url_content 60 "$TEAMCITY_URL" '.*'
-echo >&2
+echo
 
 # XXX: database.properties is mounted to skip the database step now
 is_setup_in_progress(){
@@ -140,13 +142,13 @@ is_setup_in_progress(){
 }
 
 timestamp "TeamCity Server URL:  $TEAMCITY_URL"
-echo >&2
+echo
 if is_setup_in_progress; then
     timestamp "Open TeamCity Server URL in web browser to continue, click proceed, accept EULA etc.."
-    echo >&2
+    echo
     if is_mac; then
         timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
-        echo >&2
+        echo
         open "$TEAMCITY_URL"
     fi
 fi
@@ -168,13 +170,13 @@ while is_setup_in_progress; do
     fi
     sleep 3
 done
-echo >&2
+echo
 
 # second run would break here as this wouldn't come again, must use .* search
 # just to check we are not getting a temporary 404 or something that happens before the EULA comes up
 #when_url_content 60 "$TEAMCITY_URL" "license.*agreement"
 when_url_content 60 "$TEAMCITY_URL" ".*"
-echo >&2
+echo
 
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for user to accept EULA"
@@ -188,7 +190,7 @@ while { curl -sSL "$TEAMCITY_URL" 2>/dev/null || : ; } |
     fi
     sleep 3
 done
-echo >&2
+echo
 
 SECONDS=0
 timestamp "waiting for up to $max_secs seconds for TeamCity to finish initializing"
@@ -218,7 +220,7 @@ export TEAMCITY_SUPERUSER_TOKEN
 
 timestamp "TeamCity superuser token: $TEAMCITY_SUPERUSER_TOKEN"
 timestamp "(this must be used with a blank username via basic auth if using the API)"
-echo >&2
+echo
 
 teamcity_user="${TEAMCITY_USER:-admin}"
 teamcity_password="${TEAMCITY_PASSWORD:-admin}"
@@ -243,8 +245,8 @@ else
     # no newline returned if error eg.
     #       Details: jetbrains.buildServer.server.rest.errors.BadRequestException: Cannot create user as user with the same username already exists, caused by: jetbrains.buildServer.users.DuplicateUserAccountException: The specified username 'admin' is already in use by some other user.
     #       Invalid request. Please check the request URL and data are correct.
-    echo >&2
-    echo >&2
+    echo
+    echo
     git_user="$(git config user.name)"
     git_email="$(git config user.email)"
     if [ -n "$git_user" ]; then
@@ -266,7 +268,7 @@ else
     timestamp "Setting teamcity user '$teamcity_user' as system administrator:"
     "$srcdir/teamcity_api.sh" "/users/username:$teamcity_user/roles/SYSTEM_ADMIN/g/" -sSL --fail -X PUT > /dev/null
     # no newline returned
-    echo >&2
+    echo
     api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens" -sSL | \
                  jq -r '.token[]' || :)"
     # XXX: could create expiring self-deleting token here each time, but would make idempotence tricker
@@ -278,7 +280,7 @@ else
         timestamp "Creating API token for user '$teamcity_user'"
         api_token="$("$srcdir/teamcity_api.sh" "/users/$teamcity_user/tokens/mytoken" -sSL --fail -X POST | jq -r '.value')"
         timestamp "here is your user API token, export this and then you can easily use teamcity_api.sh:"
-        echo >&2
+        echo
         # this takes precedence so disable it and use the user's api token instead
         unset TEAMCITY_SUPERUSER_TOKEN
         echo "export TEAMCITY_URL=$TEAMCITY_URL"
@@ -287,25 +289,19 @@ else
         export TEAMCITY_TOKEN="$api_token"
     fi
 fi
-echo >&2
+echo
 
 if [ "$user_already_exists" = 0 ]; then
     timestamp "Login here with username '$teamcity_user' and password: \$TEAMCITY_PASSWORD (default: admin):"
-    echo >&2
+    echo
     login_url="$TEAMCITY_URL/login.html"
     echo "$login_url"
     echo
     if is_mac; then
         timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
         open "$login_url"
-        echo >&2
+        echo
     fi
-    echo >&2
-fi
-
-if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" ]; then
-    # detects and skips creation if an OAuth connection named 'GitHub.com' already exists
-    "$srcdir/teamcity_create_github_oauth_connection.sh"
     echo
 fi
 
@@ -333,7 +329,7 @@ while true; do
     fi
     sleep 3
 done
-echo >&2
+echo
 
 timestamp "getting list of unauthorized agents"
 # using our new teamcity API token, let's agents waiting to be authorized
@@ -362,7 +358,7 @@ for agent in $unauthorized_agents; do
     done
     timestamp "WARNING: unauthorized agent '$agent' was not expected, not automatically authorizing"
 done
-echo >&2
+echo
 
 # this stops us accumulating huge numbers of agent-[[:digit:]] increments each time
 timestamp "deleting old disconnected agent references"
@@ -372,7 +368,16 @@ for disconnected_agent in $disconnected_agents; do
     timestamp "deleting disconnected agent '$disconnected_agent'"
     "$srcdir/teamcity_api.sh" "/agents/$disconnected_agent" -X DELETE
 done
-echo >&2
+echo
+
+if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" ]; then
+    # detects and skips creation if an OAuth connection named 'GitHub.com' already exists
+    "$srcdir/teamcity_create_github_oauth_connection.sh"
+    echo
+    timestamp "switching VCS config to '$vcs_config_auth'"
+    vcs_config="$vcs_config_auth"
+    echo
+fi
 
 if [ -f "$vcs_config" ]; then
     #timestamp "Now creating primary project '$project'"
@@ -383,7 +388,7 @@ if [ -f "$vcs_config" ]; then
     # So we create an empty project, then configure a VCS root to GitHub and reconfigure the project to pull from a GitHub repo
     # TODO: get the project name from the config file
     "$srcdir/teamcity_create_project.sh" "$project"
-    echo >&2
+    echo
 	vcs_id="$(jq -r .id < "$vcs_config")"
     if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
         timestamp "VCS root '$vcs_id' already exists, skipping creation"
@@ -397,13 +402,35 @@ if [ -f "$vcs_config" ]; then
         # UPDATE: seems this errors the first time yet still creates it and the second try skips as already exists
         retry 300 "$srcdir/teamcity_create_vcs_root.sh" "$vcs_config"
     fi
-    echo >&2
+    echo
     timestamp "Configuring VCS versioning to import all buildTypes and VCS settings for project"
 	"$srcdir/teamcity_project_versioning_integration.sh" "$project"
+    echo
+    echo
+    timestamp "NOTICE: you need to enable VCS authentication for write access to be able to sync project configs:"
+    echo
+    printf '\t%s\n' "$TEAMCITY_URL/admin/editVcsRoot.html?action=editVcsRoot&vcsRootId=$vcs_id"
+    echo
+    echo
+    timestamp "This is a limitation of the TeamCity API (as of Dec 2020), documented here:"
+    echo
+    printf '\t%s\n' "https://youtrack.jetbrains.com/issue/TW-69183"
+    echo
+    echo
+    timestamp "NOTICE: one you've enabled authenticated access to the VCS root you'll have to disable and re-enable the '$project' project's Versioned Settings to get the import dialog for config sync to start working"
+    echo
+    printf '\t%s\n' "$TEAMCITY_URL/admin/editProject.html?projectId=$project_id&tab=versionedSettings"
+    echo
+    echo
+    timestamp "This is a limitation of the TeamCity API (as of Dec 2020), documented here:"
+    echo
+    printf '\t%s\n' "https://youtrack.jetbrains.com/issue/TW-58754"
+    echo
+    echo
 else
     timestamp "no config found: $vcs_config - skipping VCS setup and versioning integration / import"
 fi
-echo >&2
+echo
 
 timestamp "Optimistically setting any buildTypes descriptions from their GitHub repos (ignoring failures)"
 "$srcdir/teamcity_buildtypes_set_description_from_github.sh" || :
