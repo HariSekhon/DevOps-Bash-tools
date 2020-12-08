@@ -81,7 +81,9 @@ set_project_description(){
     project="$("$srcdir/urlencode.sh" <<< "$project")"
     description="$("$srcdir/urlencode.sh" <<< "$description")"
 
-    "$srcdir/gitlab_api.sh" "/projects/$project" -X PUT --data "description=$description" >/dev/null
+    # this used to work with just -d "description=$description" when Accept and Content-Type headers were omitted
+    # but since curl_api_opts auto-sets headers to application/json this must be json or else get 400 bad request error
+    "$srcdir/gitlab_api.sh" "/projects/$project" -X PUT --data "{ \"description\": \"$description\" }" >/dev/null
 }
 
 if [ $# -gt 0 ]; then
