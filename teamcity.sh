@@ -40,7 +40,10 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 - creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
 - if there is a .teamcity.vcs.json VCS configuration in the current directory, creates the VCS to use as a config sync repo
   - if this is a private repo, you either need to put the credentials in the file temporarily, or set the password to blank, and edit it after boot
+    - currently must use authentication even if th repo is public:  https://youtrack.jetbrains.com/issue/TW-69183
   - if GitHub OAuth connection credentials are available, will instead look for .teamcity.auth.vcs.json
+  - you'll need to disable & re-enable the project's Versioned Settings to get the import dialog for your projects before it starts sync'ing
+    - this is another TeamCity limitation:  https://youtrack.jetbrains.com/issue/TW-58754
 
     ${0##*/} [up]
 
@@ -69,9 +72,11 @@ TeamCity GitHub OAuth integration - set up your TeamCity OAuth credentials here:
 If \$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET are available in the environment it will configure a TeamCity VCS Root to GitHub.com
 
 
-If your GitHub OAuth connection has been created you can use this to create a TeamCity VCS in the Root project, and use that to sync your Project configuration to/from Github under Project's Settings -> Versioned Settings using the VCS referenced from the Root project.
+If your GitHub OAuth connection has been created you can use this to create a TeamCity VCS in the Root project,
+and use that to sync your Project configuration to/from Github under Project's Settings -> Versioned Settings using the VCS referenced from the Root project.
 
-It's better to keep the TeamCity config VCS in the Root project because when you sync a project and it replaces the VCS json credential it breaks the GitHub sync and needs to be re-created. By putting it in the Root project and only enabling VCS sync on the sub-project you avoid this problem.
+It's better to keep the TeamCity config VCS in the Root project because when you sync a project and it replaces the VCS json credential it breaks the GitHub sync
+and needs to be re-created. By putting it in the Root project and only enabling VCS sync on the sub-project you avoid this problem.
 "
 
 # used by usage() in lib/utils.sh
