@@ -420,7 +420,7 @@ if [ -f "$vcs_config" ]; then
     echo
     timestamp "NOTICE: one you've enabled authenticated access to the VCS root you'll have to disable and re-enable the '$project' project's Versioned Settings to get the import dialog for config sync to start working"
     echo
-    printf '\t%s\n' "$TEAMCITY_URL/admin/editProject.html?projectId=$project_id&tab=versionedSettings"
+    printf '\t%s\n' "$TEAMCITY_URL/admin/editProject.html?projectId=$project&tab=versionedSettings"
     echo
     echo
     timestamp "This is a limitation of the TeamCity API (as of Dec 2020), documented here:"
