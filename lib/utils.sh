@@ -247,10 +247,10 @@ curl_api_opts(){
     # case insensitive regex matching
     shopt -s nocasematch
     # XML by default :-/
-    if ! [[ "$* ${CURL_OPTS[*]}" =~ Accept: ]]; then
+    if ! [[ "$* ${CURL_OPTS[*]:-}" =~ Accept: ]]; then
         CURL_OPTS+=(-H "Accept: application/json")
     fi
-    if ! [[ "$* ${CURL_OPTS[*]}" =~ Content-Type: ]]; then
+    if ! [[ "$* ${CURL_OPTS[*]:-}" =~ Content-Type: ]]; then
         CURL_OPTS+=(-H "Content-Type: application/json")
     fi
     # unset to return to default setting for safety to avoid hard to debug changes of behaviour elsewhere
