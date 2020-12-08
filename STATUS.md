@@ -9,7 +9,7 @@
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-463-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-475-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-219.8k-lightgrey?logo=codecademy)
 ![Last Generated](https://img.shields.io/badge/Last%20Generated-2020--12--08-lightgrey?logo=github)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
@@ -18,7 +18,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-17 original source git repos with 463 CI builds (430 hosted, 33 self-hosted):
+17 original source git repos with 475 CI builds (430 hosted, 45 self-hosted):
 
 ---
 # Advanced Nagios Plugins Collection
@@ -50,12 +50,14 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugins?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugins)
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugins?logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
+[![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Nagios-Plugins/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/Nagios-Plugins/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Nagios-Plugins)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Nagios-Plugins/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Nagios-Plugins/branch/master)
@@ -145,11 +147,13 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/Dockerfiles)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/u/harisekhon)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
+[![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/Dockerfiles/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Dockerfiles/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Dockerfiles/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/Dockerfiles/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Dockerfiles)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Dockerfiles/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Dockerfiles/branch/master)
@@ -225,12 +229,14 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/github)
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/pytools?logo=docker)](https://hub.docker.com/r/harisekhon/pytools/)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
+[![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Python-tools/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Python-tools/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Python-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/DevOps-Python-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/DevOps-Python-tools/branch/master)
@@ -409,11 +415,13 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/HAProxy-configs)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/_/haproxy)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
+[![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/HAProxy-configs/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/HAProxy-configs/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/HAProxy-configs/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/HAProxy-configs)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/HAProxy-configs/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/HAProxy-configs/branch/master)
@@ -484,12 +492,14 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/perl-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/perl-tools)
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/perl-tools?logo=docker)](https://hub.docker.com/r/harisekhon/perl-tools/)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
+[![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Perl-tools/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Perl-tools/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Perl-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/DevOps-Perl-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/DevOps-Perl-tools/branch/master)
@@ -564,6 +574,7 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 [![GitHub stars](https://img.shields.io/github/stars/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/network)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
+[![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/sql-scripts/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/SQL-scripts)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/HariSekhon/devops-bash-tools/src/master/STATUS.md)
@@ -604,6 +615,7 @@ Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication dete
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/Spotify-tools/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Spotify-tools/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Spotify-tools/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/Spotify-tools/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Spotify-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Spotify-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Spotify-tools/branch/master)
@@ -680,6 +692,7 @@ Perl Utility Library for my other repos
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/lib/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/lib/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/lib/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/lib/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/lib)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/lib/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/lib/branch/master)
@@ -790,6 +803,7 @@ Python / Jython Utility Library for my other repos
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/pylib/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/pylib/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/pylib/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/pylib/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/pylib)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/pylib/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/pylib/branch/master)
@@ -872,6 +886,7 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/Nagios-Plugin-Kafka/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Nagios-Plugin-Kafka)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/Nagios-Plugin-Kafka/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/Nagios-Plugin-Kafka/branch/master)
@@ -1044,6 +1059,7 @@ Java Utility library for my other repos
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/lib-java/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/lib-java/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/lib-java/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/lib-java/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/lib-java)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/lib-java/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/lib-java/branch/master)
@@ -1093,7 +1109,7 @@ Java Utility library for my other repos
 
 
 
-17 git repos summarized with 463 CI builds(430 hosted, 33 self-hosted)
+17 git repos summarized with 475 CI builds(430 hosted, 45 self-hosted)
 
 ---
 
