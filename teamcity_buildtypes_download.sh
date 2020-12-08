@@ -28,6 +28,10 @@ Exports all TeamCity BuildTypes (build pipelines) to local JSON configuration fi
 
 If arguments are specified then only downloads those named BuildTypes, otherwise finds and downloads all BuildTypes
 
+
+Resets buildNumberCounter to 1 in the JSON output to avoid this counter causing non-functional revision control changes
+
+
 Uses the adjacent teamcity_api.sh and jq (installed by 'make')
 
 See teamcity_api.sh for required connection settings and authentication
@@ -53,7 +57,10 @@ grep -v '^[[:space:]]*$' |
 while read -r build_id; do
     filename="$build_id.json"
     timestamp "downloading build '$build_id' to '$filename'"
-    "$srcdir/teamcity_api.sh" "/buildTypes/$build_id" |
+    output="$("$srcdir/teamcity_api.sh" "/buildTypes/$build_id")"
     # using jq just for formatting
-    jq . > "$filename" || :  # some builds get 400 errors, ignore these
+    #jq . > "$filename" || :  # some builds get 400 errors, ignore these
+    # reset the buildNumberCounter to 1 every time so that we don't incur pointless revision changes
+    build_number_counter_index="$(jq '.settings.property | map(.name == "buildNumberCounter") | index(true)' <<< "$output")"
+    jq -r ".settings.property[$build_number_counter_index].value = \"1\"" <<< "$output" > "$filename"
 done
