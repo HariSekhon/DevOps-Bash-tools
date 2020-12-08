@@ -79,7 +79,10 @@ set_project_description(){
 
     # url-encode project name otherwise GitLab API will fail to find project and return 404
     project="$("$srcdir/urlencode.sh" <<< "$project")"
-    description="$("$srcdir/urlencode.sh" <<< "$description")"
+    # don't URL encode this now that it is inside JSON
+    #description="$("$srcdir/urlencode.sh" <<< "$description")"
+    # just strip quotes to protect the JSON
+    description="${description//\"/}"
 
     # this used to work with just -d "description=$description" when Accept and Content-Type headers were omitted
     # but since curl_api_opts auto-sets headers to application/json this must be json or else get 400 bad request error
