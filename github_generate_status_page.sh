@@ -184,7 +184,7 @@ hosted_build_regex+='|img\.shields\.io/docker/build/'
 hosted_build_regex+='|img\.shields\.io/docker/cloud/build/'
 hosted_build_regex+='|img\.shields\.io/travis/'
 hosted_build_regex+='|img\.shields\.io/shippable/'
-hosted_build_regex+='|img.shields.io/wercker/ci/'
+hosted_build_regex+='|img\.shields\.io/wercker/ci/'
 hosted_build_regex+='|app\.buddy\.works/.*/pipelines/pipeline/.*/badge.svg'
 hosted_build_regex+='|\.semaphoreci\.com/badges/'
 # to check for any badges missed, just go
@@ -194,8 +194,8 @@ self_hosted_build_regex='\[\!\[[^]]+\]\(.*\)\]\(.*/blob/master/('
 self_hosted_build_regex+='Jenkinsfile'
 self_hosted_build_regex+='|.concourse.yml'
 self_hosted_build_regex+='|.gocd.yml'
-self_hosted_build_regex+='|img\.shields\.io/badge/TeamCity'
 self_hosted_build_regex+=')\)'
+self_hosted_build_regex+='|img\.shields\.io/badge/TeamCity'
 
 if [ -n "${DEBUG:-}" ]; then
     echo
