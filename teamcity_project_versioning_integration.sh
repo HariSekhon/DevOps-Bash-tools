@@ -67,6 +67,7 @@ if [ -n "$feature_id" ]; then
     fi
 fi
 
+# XXX: setting buildSettings to PREFER_VCS makes no different - TeamCity still demands write access to even load the config from VCS
 timestamp "Creating version integration settings to VCS '$vcs_id' for project '$project_id'"
 "$srcdir/teamcity_api.sh" "/projects/$project_id/projectFeatures" -X POST -d @<(cat <<EOF
       {
