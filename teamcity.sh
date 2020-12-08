@@ -390,10 +390,10 @@ if [ -f "$vcs_config" ]; then
     "$srcdir/teamcity_create_project.sh" "$project"
     echo
 	vcs_id="$(jq -r .id < "$vcs_config")"
+    project_id="$(jq -r .project.id < "$vcs_config")"
     if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
         timestamp "VCS root '$vcs_id' already exists, skipping creation"
     else
-        project_id="$(jq -r .project.id < "$vcs_config")"
         if [ "$project_id" != "_Root" ]; then
             timestamp "Creating VCS container project '$project_id' if not already exists..."
             "$srcdir/teamcity_create_project.sh" "$project_id"
@@ -408,6 +408,7 @@ if [ -f "$vcs_config" ]; then
     echo
     echo
     timestamp "NOTICE: you need to enable VCS authentication for write access to be able to sync project configs:"
+    timestamp "        (even if you have GitHub OAuth connection automated, you still need to click on the GitHub icon to initialize the sign-in)"
     echo
     printf '\t%s\n' "$TEAMCITY_URL/admin/editVcsRoot.html?action=editVcsRoot&vcsRootId=$vcs_id"
     echo
@@ -435,8 +436,11 @@ echo
 timestamp "Optimistically setting any buildTypes descriptions from their GitHub repos (ignoring failures)"
 "$srcdir/teamcity_buildtypes_set_description_from_github.sh" || :
 
-timestamp "Build status icons:  $TEAMCITY_URL/app/rest/builds/<build>/statusIcon.svg"
-timestamp "(requires the setting: build -> General Settings -> 'enable status widget' to permit unauthenticated status badge access)"
+timestamp "Build status icons:"
+echo
+printf '\t%s\n' "$TEAMCITY_URL/app/rest/builds/<build>/statusIcon.svg"
+echo
+timestamp "(requires this setting for each buildType:  General Settings -> 'enable status widget'  to permit unauthenticated status badge access)"
 echo
 echo
 timestamp "TeamCity is up and ready"
