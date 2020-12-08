@@ -17,11 +17,13 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
+# dipping into interactive library for opening browser to TeamCity to accept EULA
+# XXX: order is important here because there is an interactive library of retry() and a scripting library version of retry() and we want the latter, which must be imported second
 # shellcheck disable=SC1090
 . "$srcdir/.bash.d/network.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
@@ -373,6 +375,15 @@ done
 echo >&2
 
 if [ -f "$vcs_config" ]; then
+    #timestamp "Now creating primary project '$project'"
+    # XXX: TeamCity API doesn't yet support creating a project from a saved configuration via the API, see this ticket:
+    #
+    #      https://youtrack.jetbrains.com/issue/TW-43542
+    #
+    # So we create an empty project, then configure a VCS root to GitHub and reconfigure the project to pull from a GitHub repo
+    # TODO: get the project name from the config file
+    "$srcdir/teamcity_create_project.sh" "$project"
+    echo >&2
 	vcs_id="$(jq -r .id < "$vcs_config")"
     if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
         timestamp "VCS root '$vcs_id' already exists, skipping creation"
@@ -382,17 +393,10 @@ if [ -f "$vcs_config" ]; then
             timestamp "Creating VCS container project '$project_id' if not already exists..."
             "$srcdir/teamcity_create_project.sh" "$project_id"
         fi
-        "$srcdir/teamcity_create_vcs_root.sh" "$vcs_config"
-        echo >&2
+        # XXX: this fails when TeamCity has only just booted, probably due to some initialization timing, but works on second run, so just wait for it to succeed
+        # UPDATE: seems this errors the first time yet still creates it and the second try skips as already exists
+        retry 300 "$srcdir/teamcity_create_vcs_root.sh" "$vcs_config"
     fi
-    #timestamp "Now creating primary project '$project'"
-    # XXX: TeamCity API doesn't yet support creating a project from a saved configuration via the API, see this ticket:
-    #
-    #      https://youtrack.jetbrains.com/issue/TW-43542
-    #
-    # So we create an empty project, then configure a VCS root to GitHub and reconfigure the project to pull from a GitHub repo
-    # TODO: get the project name from the config file
-    "$srcdir/teamcity_create_project.sh" "$project"
     echo >&2
     timestamp "Configuring VCS versioning to import all buildTypes and VCS settings for project"
 	"$srcdir/teamcity_project_versioning_integration.sh" "$project"
@@ -406,5 +410,6 @@ timestamp "Optimistically setting any buildTypes descriptions from their GitHub 
 
 timestamp "Build status icons:  $TEAMCITY_URL/app/rest/builds/<build>/statusIcon.svg"
 timestamp "(requires the setting: build -> General Settings -> 'enable status widget' to permit unauthenticated status badge access)"
+echo
 echo
 timestamp "TeamCity is up and ready"
