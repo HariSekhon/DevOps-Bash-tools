@@ -29,6 +29,9 @@ cd "$srcdir"
 
 file="STATUS.md"
 
+echo
+echo "Generating STATUS.md"
+echo
 {
 "$srcdir/github_generate_status_page.sh"
 echo
@@ -39,6 +42,10 @@ echo
 echo https://git.io/hari-ci
 } | tee "$file"
 
+echo
+echo
+echo "Generating STARCHARTS.md"
+echo
 "$srcdir/github_generate_starcharts.md.sh"
 
 trap '' exit
