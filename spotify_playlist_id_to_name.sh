@@ -53,7 +53,9 @@ playlist_id_to_name(){
     if is_spotify_playlist_id "$playlist_id"; then
         playlist_name="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id" "$@" |
                     jq -r '.name' || :)"
-        if is_blank "$playlist_name" || [ "$playlist_name" = null ]; then
+        # it turns out a playlist name can be blank :-/
+        #if is_blank "$playlist_name" || [ "$playlist_name" = null ]; then
+        if [ "$playlist_name" = null ]; then
             echo "Error: failed to find playlist name matching ID '$playlist_id'" >&2
             exit 1
         fi
