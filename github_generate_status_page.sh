@@ -194,6 +194,7 @@ self_hosted_build_regex='\[\!\[[^]]+\]\(.*\)\]\(.*/blob/master/('
 self_hosted_build_regex+='Jenkinsfile'
 self_hosted_build_regex+='|.concourse.yml'
 self_hosted_build_regex+='|.gocd.yml'
+self_hosted_build_regex+='|img\.shields\.io/badge/TeamCity'
 self_hosted_build_regex+=')\)'
 
 if [ -n "${DEBUG:-}" ]; then
