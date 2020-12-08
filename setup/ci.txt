@@ -25,6 +25,7 @@ Jenkinsfile
 .gitlab-ci.yml
 .gocd.yml
 .semaphore/semaphore.yml
+.teamcity.vcs.json
 #.travis.yml
 azure-pipelines.yml
 bitbucket-pipelines.yml
