@@ -70,7 +70,7 @@ sort -u |
 sed '/^[[:space:]]*$/d' |
 while read -r build_id; do
     filename="$build_id.json"
-    timestamp "downloading build '$build_id' to '$filename'"
+    timestamp "Exporting build '$build_id' to '$filename'"
     output="$("$srcdir/teamcity_api.sh" "/buildTypes/$build_id")"
     # using jq just for formatting
     #jq . > "$filename" || :  # some builds get 400 errors, ignore these
