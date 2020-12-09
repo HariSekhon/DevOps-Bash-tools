@@ -61,8 +61,8 @@ notifications:
 # ========================================
 # https://docs.travis-ci.com/user/caching/
 
-#before_cache:
-#  - test -f pytools_checks/Makefile || rm -fr pytools_checks
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
 
 cache:
   - pip
