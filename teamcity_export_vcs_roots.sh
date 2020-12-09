@@ -73,7 +73,10 @@ while read -r vcs_root_id vcs_root_name; do
     timestamp "Exporting vcs_root '$vcs_root_name' to '$filename'"
     "$srcdir/teamcity_api.sh" "/vcs-roots/$vcs_root_id" |
     # using jq just for formatting
-    jq . > "$filename"
+    jq |
+    # normalize the href's as they can be /app/rest or /httpAuth/app/rest depending on how you query it
+    sed 's|/httpAuth/app/rest/|/app/rest/|' |
+    cat > "$filename"
 done
 
 trap '' EXIT

@@ -72,5 +72,8 @@ while read -r project_id project_name; do
     #"$srcdir/teamcity_api.sh" "/projects/$project_name" |
     "$srcdir/teamcity_api.sh" "/projects/$project_id" |
     # using jq just for formatting
-    jq . > "$filename"
+    jq |
+    # normalize the href's as they can be /app/rest or /httpAuth/app/rest depending on how you query it
+    sed 's|/httpAuth/app/rest/|/app/rest/|' |
+    cat > "$filename"
 done

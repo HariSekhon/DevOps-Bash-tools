@@ -76,7 +76,10 @@ while read -r build_id; do
     #jq . > "$filename" || :  # some builds get 400 errors, ignore these
     # reset the buildNumberCounter to 1 every time so that we don't incur pointless revision changes
     build_number_counter_index="$(jq '.settings.property | map(.name == "buildNumberCounter") | index(true)' <<< "$output")"
-    jq -r ".settings.property[$build_number_counter_index].value = \"1\"" <<< "$output" > "$filename"
+    jq -r ".settings.property[$build_number_counter_index].value = \"1\"" <<< "$output" |
+    # normalize the href's as they can be /app/rest or /httpAuth/app/rest depending on how you query it
+    sed 's|/httpAuth/app/rest/|/app/rest/|' |
+    cat > "$filename"
 done
 
 trap '' EXIT
