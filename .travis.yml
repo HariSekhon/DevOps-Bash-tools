@@ -48,15 +48,18 @@ notifications:
 #  only:
 #    - master
 
+# ========================================
+# https://docs.travis-ci.com/user/caching/
+
 #before_cache:
 #  - test -f pytools_checks/Makefile || rm -fr pytools_checks
 
-# https://docs.travis-ci.com/user/caching/
 cache:
   - directories:
     - .cache          # yamllint disable-line rule:indentation
     - pytools_checks  # yamllint disable-line rule:indentation
 
+# ==============================================
 # https://docs.travis-ci.com/user/job-lifecycle/
 
 # avoid package checksum mismatches when installing packages
