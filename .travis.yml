@@ -67,7 +67,7 @@ notifications:
 cache:
   - pip
   - directories:
-    - .cache
+    - $HOME/.cache
     - pytools_checks
 
 # ==============================================
