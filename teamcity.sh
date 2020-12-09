@@ -89,7 +89,7 @@ export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/setup/teamcity-docker-compose.yml"
 
 vcs_config=".teamcity.vcs.json"
-vcs_config_auth=".teamcity.auth.vcs.json"
+vcs_config_auth=".teamcity.vcs.auth.json"
 
 project="GitHub"
 
