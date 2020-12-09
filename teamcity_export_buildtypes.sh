@@ -28,7 +28,7 @@ Exports all TeamCity BuildTypes (build pipelines) to local JSON configuration fi
 
 If arguments are specified then only downloads those named BuildTypes, otherwise finds and downloads all BuildTypes
 
-If \$TEAMCITY_BUILDTYPES_PROJECT is set then filters to only export the buildTypes belonging to that project
+If \$TEAMCITY_BUILDTYPES_PROJECT is set then filters to only export the buildTypes belonging to that project. If the project doesn't exist no buildTypes will be found to export, but it will not error
 
 
 Resets buildNumberCounter to 1 in the JSON output to avoid this counter causing non-functional revision control changes
