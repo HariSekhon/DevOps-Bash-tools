@@ -40,10 +40,9 @@ services:
       #- ../../teamcity/.teamcity/HariSekhonGitHubProjects:/data/teamcity_server/datadir/config/projects/HariSekhonGitHubProjects
       # for server.xml override:
       #- teamcity/conf:/opt/teamcity/conf
-      - ./teamcity/teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
-      # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
-      #- /tmp/teamcity/server/datadir:/data/teamcity_server/datadir
-      #- /tmp/teamcity/server/logs:/opt/teamcity/logs
+      #- ./teamcity/teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
+      - ./teamcity/server/datadir:/data/teamcity_server/datadir
+      - ./teamcity/server/logs:/opt/teamcity/logs
   teamcity-agent:
     hostname: teamcity-agent
     # 1.3GB docker image
@@ -74,17 +73,22 @@ services:
     restart: unless-stopped
     links:
       - teamcity-server
-    #volumes:
-      # XXX: consider switching out of /tmp for better persistance to another Docker shared directory
-      #- /tmp/teamcity/agent1/conf:/opt/buildagent/conf
+    volumes:
+      # stops agent from booting with error:
+      # teamcity-agent_1   | cp: cannot stat '/opt/buildagent/conf/*.*': No such file or directory
+      #- ./teamcity/agent1/conf:/opt/buildagent/conf
+      #
       # checked out sources - this needs 3GB to run builds so needs to be mounted - the docker image has 60GB and the mounts appear to only get 1GB not properly mapped to host but must be stuck in Docker VM overlay so omitting it
-      #- /tmp/teamcity-agent1-work:/opt/buildagent/work
+      - ./teamcity/agent1/work:/opt/buildagent/work
+      #
+      - ./teamcity/agent1/logs:/opt/buildagent/logs
       #
       # internal build agent caches
       # XXX: causes:  WARN - ig.BuildAgentConfigurablePaths - Failed to create directory: /opt/buildagent/system/.artifacts_cache
       # XXX: causes agent to get stuck looping on bootstrap/upgrade process dying
-      #- /tmp/teamcity/agent1/system:/opt/buildagent/system
+      - ./teamcity/agent1/system:/opt/buildagent/system
       #
       # plugins
       # XXX: causes agent to get stuck looping on bootstrap/upgrade process dying
-      #- /tmp/teamcity/agent1/plugins:/opt/buildagent/plugins
+      #      looks like this crashes out and retries a few times until it succeeds - quicker to boot from scratch without this
+      #- ./teamcity/agent1/plugins:/opt/buildagent/plugins
