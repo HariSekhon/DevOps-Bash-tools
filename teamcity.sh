@@ -375,7 +375,7 @@ for disconnected_agent in $disconnected_agents; do
 done
 echo
 
-if [ -n "$TEAMCITY_GITHUB_CLIENT_ID" ] && [ -n "$TEAMCITY_GITHUB_CLIENT_SECRET" ]; then
+if [ -n "${TEAMCITY_GITHUB_CLIENT_ID:-}" ] && [ -n "${TEAMCITY_GITHUB_CLIENT_SECRET:-}" ]; then
     # detects and skips creation if an OAuth connection named 'GitHub.com' already exists
     "$srcdir/teamcity_create_github_oauth_connection.sh"
     echo
