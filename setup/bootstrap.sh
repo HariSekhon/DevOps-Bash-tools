@@ -66,6 +66,7 @@ else
     rmdir "$directory" 2>/dev/null || :
     if [ -d "$directory" ]; then
         cd "$directory"
+        git pull
     else
         git clone "$repo" "$directory"
         cd "$directory"
