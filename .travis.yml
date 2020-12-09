@@ -65,9 +65,10 @@ notifications:
 #  - test -f pytools_checks/Makefile || rm -fr pytools_checks
 
 cache:
+  - pip
   - directories:
-    - .cache          # yamllint disable-line rule:indentation
-    - pytools_checks  # yamllint disable-line rule:indentation
+    - .cache
+    - pytools_checks
 
 # ==============================================
 # https://docs.travis-ci.com/user/job-lifecycle/
