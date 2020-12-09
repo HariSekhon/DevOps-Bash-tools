@@ -68,6 +68,8 @@ cache:
   - pip
   - directories:
     - $HOME/.cache
+    - $HOME/.cpanm
+    - $HOME/.cpan
     - pytools_checks
 
 # ==============================================
