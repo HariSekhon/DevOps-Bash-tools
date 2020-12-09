@@ -34,16 +34,22 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 - waits for you to accept the EULA
   - prints the TeamCity URL
   - opens the TeamCity web UI (on Mac only)
+
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
   - sets the full name, email, and VCS commit username to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
   - opens the TeamCity web UI login page in browser (on Mac only)
+
 - creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
+  - this saves you having to use your own username and password for the GitHub VCS such as the config repo - just click the GitHub icon next to the VCS url to auto-authenticate
+
 - if there is a .teamcity.vcs.json VCS configuration in the current directory, creates the VCS to use as a config sync repo
   - if this is a private repo, you either need to put the credentials in the file temporarily, or set the password to blank, and edit it after boot
     - currently must use authentication even if th repo is public:  https://youtrack.jetbrains.com/issue/TW-69183
   - if GitHub OAuth connection credentials are available, will instead look for .teamcity.auth.vcs.json
   - you'll need to disable & re-enable the project's Versioned Settings to get the import dialog for your projects before it starts sync'ing
     - this is another TeamCity limitation:  https://youtrack.jetbrains.com/issue/TW-58754
+
+Usage:
 
     ${0##*/} [up]
 
@@ -69,10 +75,10 @@ TeamCity GitHub OAuth integration - set up your TeamCity OAuth credentials here:
 
     https://github.com/settings/developers
 
-If \$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET are available in the environment it will configure a TeamCity VCS Root to GitHub.com
+If \$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET are available in the environment it will configure a connection for your GitHub VCS roots authentication
 
 
-If your GitHub OAuth connection has been created you can use this to create a TeamCity VCS in the Root project,
+If your GitHub OAuth connection has been created you can use this to authenticate the TeamCity VCS root in the Root project,
 and use that to sync your Project configuration to/from Github under Project's Settings -> Versioned Settings using the VCS referenced from the Root project.
 
 It's better to keep the TeamCity config VCS in the Root project because when you sync a project and it replaces the VCS json credential it breaks the GitHub sync
@@ -81,7 +87,7 @@ and needs to be re-created. By putting it in the Root project and only enabling 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[up|down|ui]"
+usage_args="[ up | down | ui ]"
 
 help_usage "$@"
 
