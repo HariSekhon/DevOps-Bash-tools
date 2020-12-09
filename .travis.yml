@@ -34,6 +34,10 @@ osx_image: xcode12.2
 services:
   - docker
 
+# https://docs.travis-ci.com/user/environment-variables/
+env:
+  - PYTHONUNBUFFERED=1
+
 # https://docs.travis-ci.com/user/customizing-the-build/#building-specific-branches
 # https://docs.travis-ci.com/user/conditional-builds-stages-jobs
 #branches:
@@ -52,10 +56,6 @@ cache:
   - directories:
     - .cache          # yamllint disable-line rule:indentation
     - pytools_checks  # yamllint disable-line rule:indentation
-
-# https://docs.travis-ci.com/user/environment-variables/
-env:
-  - PYTHONUNBUFFERED=1
 
 # https://docs.travis-ci.com/user/job-lifecycle/
 
