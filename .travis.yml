@@ -23,7 +23,6 @@ version: ~> 1.0
 
 # ==============================================================
 # https://docs.travis-ci.com/user/languages/minimal-and-generic/
-# there's no 'language: bash'
 language: bash
 
 # =========================================
