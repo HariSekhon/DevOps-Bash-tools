@@ -31,6 +31,7 @@ os:
   - linux
   - osx
 
+# ==============================================
 # https://docs.travis-ci.com/user/reference/osx/
 # macOS 10.15.7 - otherwise defaults to Mac macOS 10.13 with xcode9.4 otherwise - and HomeBrew update takes 50 minutes until the build times out :-/
 osx_image: xcode12.2
