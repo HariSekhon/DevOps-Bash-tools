@@ -28,6 +28,9 @@ Exports all TeamCity VCS roots to local JSON configuration files for backup/rest
 
 If arguments are specified then only downloads those named VCS roots, otherwise finds and downloads all VCS roots
 
+If \$TEAMCITY_VCS_ROOTS_PROJECT is set then filters to only export the vcsRoots belonging to that project. If the project doesn't exit the API will return a 404 error
+
+
 Uses the adjacent teamcity_api.sh and jq (installed by 'make')
 
 See teamcity_api.sh for required connection settings and authentication
@@ -43,22 +46,34 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+# prevent silent failures
+trap 'echo ERROR' EXIT
+
 if [ $# -gt 0 ]; then
     for vcs_root_id in "$@"; do
         echo "$vcs_root_id"
     done
 else
-    "$srcdir/teamcity_api.sh" /vcs-roots |
+    url_path="/vcs-roots"
+    if [ -n "${TEAMCITY_VCS_ROOTS_PROJECT:-}" ]; then
+        # XXX: this will 404 if the project doesn't exist
+        url_path+="?locator=project:$TEAMCITY_VCS_ROOTS_PROJECT"
+    fi
+    "$srcdir/teamcity_api.sh" "$url_path" |
     jq -r '.["vcs-root"][] | [.id, .name] | @tsv'
 fi |
-grep -v '^[[:space:]]*$' |
+sort -u |
+# grep -v breaks pipe if no input eg. no vcs roots in _Root project
+sed '/^[[:space:]]*$/d' |
 while read -r vcs_root_id vcs_root_name; do
     # basing the filename off the ID instead of the Name is because it's more suitable for filenames
     # instead of 'github.com/harisekhon/blah (1)', 'MyProject_GithubComHariSekhonBlah1 ' is safer and easier to use in daily practice
     filename="$vcs_root_id.json"
     vcs_root_name="${vcs_root_name:-$vcs_root_id}"
-    timestamp "downloading vcs_root '$vcs_root_name' to '$filename'"
+    timestamp "Exporting vcs_root '$vcs_root_name' to '$filename'"
     "$srcdir/teamcity_api.sh" "/vcs-roots/$vcs_root_id" |
     # using jq just for formatting
     jq . > "$filename"
 done
+
+trap '' EXIT
