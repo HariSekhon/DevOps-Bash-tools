@@ -30,15 +30,19 @@ os:
 # macOS 10.15.7 - otherwise defaults to Mac macOS 10.13 with xcode9.4 otherwise - and HomeBrew update takes 50 minutes until the build times out :-/
 osx_image: xcode12.2
 
-# https://docs.travis-ci.com/user/notifications
-notifications:
-  email: false
+# https://docs.travis-ci.com/user/docker/
+services:
+  - docker
 
 # https://docs.travis-ci.com/user/customizing-the-build/#building-specific-branches
 # https://docs.travis-ci.com/user/conditional-builds-stages-jobs
 #branches:
 #  only:
 #    - master
+
+# https://docs.travis-ci.com/user/notifications
+notifications:
+  email: false
 
 #before_cache:
 #  - test -f pytools_checks/Makefile || rm -fr pytools_checks
