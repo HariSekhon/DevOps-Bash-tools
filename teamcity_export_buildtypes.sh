@@ -28,6 +28,8 @@ Exports all TeamCity BuildTypes (build pipelines) to local JSON configuration fi
 
 If arguments are specified then only downloads those named BuildTypes, otherwise finds and downloads all BuildTypes
 
+If \$TEAMCITY_BUILDTYPES_PROJECT is set then filters to only export the buildTypes belonging to that project
+
 
 Resets buildNumberCounter to 1 in the JSON output to avoid this counter causing non-functional revision control changes
 
@@ -45,15 +47,27 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+# prevent silent failures
+trap 'echo ERROR' EXIT
+
 if [ $# -gt 0 ]; then
     for build_name in "$@"; do
         echo "$build_name"
     done
 else
     "$srcdir/teamcity_api.sh" /buildTypes |
+    if [ -n "${TEAMCITY_BUILDTYPES_PROJECT:-}" ]; then
+        # this multiplies out the results
+        #jq -r "select(.buildType[].projectId == \"$TEAMCITY_BUILDTYPES_PROJECT\")"
+        jq -r "{ \"buildType\": [ .buildType[] | select(.projectId == \"$TEAMCITY_BUILDTYPES_PROJECT\") ] } | @json"
+    else
+        cat
+    fi |
     jq -r '.buildType[].id'
 fi |
-grep -v '^[[:space:]]*$' |
+sort -u |
+# grep -v breaks pipe if no input eg. no buildTypes in _Root project
+sed '/^[[:space:]]*$/d' |
 while read -r build_id; do
     filename="$build_id.json"
     timestamp "downloading build '$build_id' to '$filename'"
@@ -64,3 +78,5 @@ while read -r build_id; do
     build_number_counter_index="$(jq '.settings.property | map(.name == "buildNumberCounter") | index(true)' <<< "$output")"
     jq -r ".settings.property[$build_number_counter_index].value = \"1\"" <<< "$output" > "$filename"
 done
+
+trap '' EXIT
