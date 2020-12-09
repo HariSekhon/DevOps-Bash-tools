@@ -550,16 +550,16 @@ etc.
   - `teamcity_agents.sh` - lists TeamCity agents, their connected state, authorized state, whether enabled and up to date
   - `teamcity_builds.sh` - lists the last 100 TeamCity builds along with the their state (eg. `finished`) and status (eg. `SUCCESS`/`FAILURE`)
   - `teamcity_buildtypes.sh` - lists TeamCity buildTypes (pipelines) along with the their project and IDs
-  - `teamcity_buildtypes_download.sh` - downloads TeamCity buildType JSON configurations to local files
   - `teamcity_buildtype_create.sh` - creates a TeamCity buildType from a local JSON configuration (see `teamcity_buildtypes_download.sh`)
   - `teamcity_buildtype_set_description_from_github.sh` - sync's a TeamCity buildType's description from its Github repo description
   - `teamcity_buildtypes_set_description_from_github.sh` - sync's all TeamCity buildType descriptions from their GitHub repos where available
+  - `teamcity_export_projects.sh` - downloads TeamCity project configurations to local JSON files
+  - `teamcity_export_buildtypes.sh` - downloads TeamCity buildType configurations to local JSON files
+  - `teamcity_export_vcs_roots.sh` - downloads TeamCity VCS root configurations to local JSON files
   - `teamcity_projects.sh` - lists TeamCity project IDs and Names
-  - `teamcity_projects_download.sh` - downloads TeamCity project JSON configurations to local files
-  - `teamcity_project_versioning_integration.sh` - creates a project level VCS integration to track all configs to GitHub or similar
+  - `teamcity_project_set_versioned_settings.sh` - configures a project to track all changes to a VCS (eg. GitHub)
   - `teamcity_project_vcs_versioning.sh` - quickly toggle VCS versioning on/off for a given TeamCity project (useful for testing without auto-committing)
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
-  - `teamcity_vcs_roots_download.sh` - downloads TeamCity VCS root JSON configurations to local files
 - `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
