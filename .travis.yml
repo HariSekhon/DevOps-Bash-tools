@@ -68,9 +68,11 @@ cache:
   - pip
   - directories:
     - $HOME/.cache
-    - $HOME/.cpanm
     - $HOME/.cpan
+    - $HOME/.cpanm
+    - $HOME/.gem
     - pytools_checks
+    - bash-tools/pytools_checks
 
 # ==============================================
 # https://docs.travis-ci.com/user/job-lifecycle/
