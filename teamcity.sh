@@ -414,8 +414,8 @@ if [ -f "$vcs_config" ]; then
         retry 300 "$srcdir/teamcity_create_vcs_root.sh" "$vcs_config"
     fi
     echo
-    timestamp "Configuring VCS versioning to import all buildTypes and VCS settings for project"
-	"$srcdir/teamcity_project_versioning_integration.sh" "$project"
+    timestamp "Configuring project Versioned Settings to import all buildTypes and VCS"
+	"$srcdir/teamcity_project_set_versioned_settings.sh" "$project"
     echo
     echo
     timestamp "NOTICE: you need to enable VCS authentication for write access to be able to sync project configs:"
