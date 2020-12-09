@@ -26,7 +26,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Exports all TeamCity Projects to local JSON configuration files for backup/restore / migration purposes, or even just to backport changes to Git for revision control tracking
 
-If arguments are specified then only downloads those named Projects, otherwise finds and downloads all Projects
+If arguments are specified then only downloads those named Projects, otherwise finds and downloads all Projects settings.
+
+If a single project is given, the export filename is called project-settings.json in line with standard TeamCity exports, but if multiple projects are given or the project list is queried from TeamCity then the export file is called <project>.json to differentiate them.
+
 
 Uses the adjacent teamcity_api.sh and jq (installed by 'make')
 
@@ -43,6 +46,10 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+# use this to figure out if we should set filename to <project>.json or leave as the single standard project-config.json - this is important for bulk teamcity_export.sh per project to mimick the official TeamCity exports and Versioned Settings sync directory structure
+export projects=("$@")
+filename="project-config.json"
+
 if [ $# -gt 0 ]; then
     for project_id in "$@"; do
         echo "$project_id"
@@ -51,13 +58,16 @@ else
     "$srcdir/teamcity_api.sh" /projects |
     jq -r '.project[] | [.id, .name] | @tsv'
 fi |
-grep -v '^[[:space:]]*$' |
+# grep -v breaks pipe if no input, prefer sed
+sed '/^[[:space:]]*$/d' |
 while read -r project_id project_name; do
     # basing the filename off the ID instead of the Name is because it's more suitable for filenames
     # instead of '<Root>.json', '_Root.json' is safer and easier to use in daily practice
-    filename="$project_id.json"
+    if [ ${#projects[@]} -gt 1 ]; then
+        filename="$project_id.json"
+    fi
     project_name="${project_name:-$project_id}"
-    timestamp "downloading project '$project_name' to '$filename'"
+    timestamp "Exporting project '$project_name' config to '$filename'"
     #project_name="$("$srcdir/urlencode.sh" <<< "$project_name")"
     #"$srcdir/teamcity_api.sh" "/projects/$project_name" |
     "$srcdir/teamcity_api.sh" "/projects/$project_id" |
