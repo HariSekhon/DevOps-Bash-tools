@@ -38,15 +38,15 @@ services:
 env:
   - PYTHONUNBUFFERED=1
 
+# https://docs.travis-ci.com/user/notifications/
+notifications:
+  email: false
+
 # https://docs.travis-ci.com/user/customizing-the-build/#building-specific-branches
 # https://docs.travis-ci.com/user/conditional-builds-stages-jobs
 #branches:
 #  only:
 #    - master
-
-# https://docs.travis-ci.com/user/notifications
-notifications:
-  email: false
 
 #before_cache:
 #  - test -f pytools_checks/Makefile || rm -fr pytools_checks
