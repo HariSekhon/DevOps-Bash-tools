@@ -44,7 +44,7 @@ See Also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[up|down|ui]"
+usage_args="[ up | down | ui ]"
 
 help_usage "$@"
 
