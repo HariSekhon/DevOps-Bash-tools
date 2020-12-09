@@ -61,11 +61,15 @@ fi
 
 if [ "${srcdir##*/}" = setup ]; then
     cd "$srcdir/.."
-elif [ -d "$directory" ]; then
-    cd "$directory"
 else
-    git clone "$repo" "$directory"
-    cd "$directory"
+    # if this is an empty directory eg. a cache mount, then remove it to get a proper checkout
+    rmdir "$directory" 2>/dev/null || :
+    if [ -d "$directory" ]; then
+        cd "$directory"
+    else
+        git clone "$repo" "$directory"
+        cd "$directory"
+    fi
 fi
 
 make install
