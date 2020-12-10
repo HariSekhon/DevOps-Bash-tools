@@ -33,8 +33,10 @@ PS1=""
 # if inside Screen, set the screen escape inside PS1
 [ -n "$STY" ] && PS1="$SCREEN_ESCAPE"
 
+# defined in adjacent colors.sh
 # shellcheck disable=SC2154
 PS1_COLOUR="$txtgrn"
+# shellcheck disable=SC2154
 PS1_USER_COLOUR="$txtcyn"
 
 if [ $EUID -eq 0 ]; then
@@ -91,3 +93,12 @@ debug_bashrc(){
 debug_bash_profile(){
     PS4='+ $BASH_SOURCE:$LINENO:' bash -xlic '' 2>&1 | less
 }
+
+if isMac; then
+    # turn this off on mac thing - it heavily pollutes $DEBUG output and does nothing because we have a custom prompt
+    if [[ "${PROMPT_COMMAND:-}" =~ update_terminal_cwd ]]; then
+        unset PROMPT_COMMAND
+    fi
+
+    export SHELL_SESSION_HISTORY=0
+fi
