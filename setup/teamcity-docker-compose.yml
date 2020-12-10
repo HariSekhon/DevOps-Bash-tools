@@ -74,9 +74,8 @@ services:
     links:
       - teamcity-server
     volumes:
-      # stops agent from booting with error:
-      # teamcity-agent_1   | cp: cannot stat '/opt/buildagent/conf/*.*': No such file or directory
-      #- ./teamcity/agent1/conf:/opt/buildagent/conf
+      # for persisting the buildAgent.properties containing the agent id and autosaved authorization token
+      - ./teamcity/agent1/conf:/data/teamcity_agent/conf
       #
       # checked out sources - this needs 3GB to run builds so needs to be mounted - the docker image has 60GB and the mounts appear to only get 1GB not properly mapped to host but must be stuck in Docker VM overlay so omitting it
       - ./teamcity/agent1/work:/opt/buildagent/work
@@ -84,11 +83,7 @@ services:
       - ./teamcity/agent1/logs:/opt/buildagent/logs
       #
       # internal build agent caches
-      # XXX: causes:  WARN - ig.BuildAgentConfigurablePaths - Failed to create directory: /opt/buildagent/system/.artifacts_cache
-      # XXX: causes agent to get stuck looping on bootstrap/upgrade process dying
       - ./teamcity/agent1/system:/opt/buildagent/system
       #
       # plugins
-      # XXX: causes agent to get stuck looping on bootstrap/upgrade process dying
-      #      looks like this crashes out and retries a few times until it succeeds - quicker to boot from scratch without this
-      #- ./teamcity/agent1/plugins:/opt/buildagent/plugins
+      - ./teamcity/agent1/plugins:/opt/buildagent/plugins
