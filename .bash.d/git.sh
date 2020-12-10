@@ -555,7 +555,7 @@ gituu(){
     # avoiding xargs due to function reference:
     # gxargs: gitu: No such file or directory
     eval gitu "$(
-        git status --porcelain . |
+        git status --porcelain -s . |
         grep -e '^M' -e '^.M' |
         sed 's/^...//' |
         while read -r filename; do
