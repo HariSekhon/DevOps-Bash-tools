@@ -444,8 +444,8 @@ else
 fi
 echo
 
-timestamp "Optimistically setting any buildTypes descriptions from their GitHub repos (ignoring failures)"
-"$srcdir/teamcity_buildtypes_set_description_from_github.sh" || :
+#timestamp "Optimistically setting any buildTypes descriptions from their GitHub repos (ignoring failures)"
+#"$srcdir/teamcity_buildtypes_set_description_from_github.sh" || :
 
 timestamp "Build status icons:"
 echo
