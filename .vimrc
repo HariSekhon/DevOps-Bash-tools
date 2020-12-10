@@ -340,7 +340,9 @@ nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%:t"'<CR>
 nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
 nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull'<CR>
 nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push'<CR>
-nmap <silent> ;u :w<CR> :! grep -vi harisekhon "%" \| urlview <CR> :<CR>
+" write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
+" this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
+nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
 " pass current line as stdin to urlview to quickly go to this url
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 "nmap <silent> ;U :.w !urlview<CR><CR> :!reset<CR><CR>
