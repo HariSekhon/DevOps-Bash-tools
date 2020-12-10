@@ -74,7 +74,7 @@ services:
     links:
       - teamcity-server
     volumes:
-      # for persisting the buildAgent.properties containing the agent id and autosaved authorization token
+      # persist the buildAgent.properties containing the agent id and autosaved authorization token
       - ./teamcity/agent1/conf:/data/teamcity_agent/conf
       #
       # checked out sources - this needs 3GB to run builds so needs to be mounted - the docker image has 60GB and the mounts appear to only get 1GB not properly mapped to host but must be stuck in Docker VM overlay so omitting it
