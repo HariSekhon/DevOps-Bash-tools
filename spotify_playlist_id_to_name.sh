@@ -55,7 +55,9 @@ playlist_id_to_name(){
                     jq -r '.name' || :)"
         # it turns out a playlist name can be blank :-/
         #if is_blank "$playlist_name" || [ "$playlist_name" = null ]; then
-        if [ "$playlist_name" = null ]; then
+        if is_blank "$playlist_name"; then
+            echo "$playlist_id"
+        elif [ "$playlist_name" = null ]; then
             echo "Error: failed to find playlist name matching ID '$playlist_id'" >&2
             exit 1
         fi
