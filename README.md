@@ -553,6 +553,7 @@ etc.
   - `teamcity_buildtype_create.sh` - creates a TeamCity buildType from a local JSON configuration (see `teamcity_buildtypes_download.sh`)
   - `teamcity_buildtype_set_description_from_github.sh` - sync's a TeamCity buildType's description from its Github repo description
   - `teamcity_buildtypes_set_description_from_github.sh` - sync's all TeamCity buildType descriptions from their GitHub repos where available
+  - `teamcity_export.sh` - downloads TeamCity configs to local JSON files in per-project directories mimicking native TeamCity directory structure and file naming
   - `teamcity_export_project_config.sh` - downloads TeamCity project config to local JSON files
   - `teamcity_export_buildtypes.sh` - downloads TeamCity buildType config to local JSON files
   - `teamcity_export_vcs_roots.sh` - downloads TeamCity VCS root config to local JSON files
