@@ -527,21 +527,26 @@ gitu(){
         # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
         basedir="$(basedir "$filename")" || return 1
         pushd "$basedir" >/dev/null || return 1
-        if [ -z "$(git diff "${filename##*/}")" ]; then
-            popd &>/dev/null || :
-            continue
-        fi
-        git diff "${filename##*/}"
-        echo
-        read -r -p "Hit enter to commit '$filename' or Control-C to cancel" || return 1
-        echo
-        if git add "${filename##*/}" &&
-           echo "committing $filename" &&
-           git commit -m "updated ${filename##*/}" "${filename##*/}"; then
-            :
-        else
-            break
-        fi
+        # XXX: this is returning the full name not the basename
+        changed_files="$(git status --porcelain "${filename##*/}" |
+                 grep -e '^M' -e '^.M' |
+                 sed 's/^...//')"
+        # while read line would auto-accepting the readline and commit without prompt :-/
+        for changed_file in $changed_files; do
+            basename="${changed_file##*/}"
+            diff="$(git diff --color=always -- "$basename"; git diff --cached --color=always -- "$basename")"
+            if [ -z "$diff" ]; then
+                continue
+            fi
+            echo "$diff"
+            echo
+            read -r -p "Hit enter to commit '$basename' or Control-C to cancel" _
+            echo
+            git add -- "$basename" &&
+            echo "committing $basename" &&
+            git commit -m "updated $basename" -- "$basename" ||
+            return 1
+        done
         popd &>/dev/null || :
     done
     trap - $trap_codes
@@ -551,8 +556,8 @@ gituu(){
     # gxargs: gitu: No such file or directory
     eval gitu "$(
         git status --porcelain . |
-        grep '^.M' |
-        sed 's/...//' |
+        grep -e '^M' -e '^.M' |
+        sed 's/^...//' |
         while read -r filename; do
             echo "\"$filename\""
         done
