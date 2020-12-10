@@ -532,18 +532,19 @@ gitu(){
                  grep -e '^M' -e '^.M' |
                  sed 's/^...//')"
         # while read line would auto-accepting the readline and commit without prompt :-/
-        for basename in $changed_files; do
-            diff="$(git diff --color=always -- "$basename"; git diff --cached --color=always -- "$basename")"
+        for changed_filename in $changed_files; do
+            basename="${changed_filename##*/}"
+            diff="$(git diff --color=always -- "$changed_filename"; git diff --cached --color=always -- "$changed_filename")"
             if [ -z "$diff" ]; then
                 continue
             fi
             echo "$diff"
             echo
-            read -r -p "Hit enter to commit '$basename' or Control-C to cancel" _
+            read -r -p "Hit enter to commit '$changed_filename' or Control-C to cancel" _
             echo
-            git add -- "$basename" &&
-            echo "committing $basename" &&
-            git commit -m "updated $basename" -- "$basename" ||
+            git add -- "$changed_filename" &&
+            echo "committing $changed_filename" &&
+            git commit -m "updated $basename" -- "$changed_filename" ||
             return 1
         done
         popd &>/dev/null || :
