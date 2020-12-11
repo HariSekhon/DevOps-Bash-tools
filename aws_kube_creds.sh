@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -31,6 +31,9 @@ Requires AWS CLI to be set up and configured, as well as jq
 Can supply arguments to be passed to AWS CLI to set things like region eg.
 
     ${0##*/} --region us-west-1
+
+
+$usage_aws_cli_required
 
 
 See also:
