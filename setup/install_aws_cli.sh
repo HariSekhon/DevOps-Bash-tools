@@ -57,6 +57,8 @@ else
     echo
 fi
 
+"$srcdir/install_eksctl.sh"
+
 if type -P ecs-cli &>/dev/null; then
     echo "ECS CLI already installed"
 else
@@ -152,6 +154,7 @@ Done
 Installed locations:
 
 $(type -P aws)
+$(type -P eksctl)
 $(type -P sam)
 $(type -P awless)
 
