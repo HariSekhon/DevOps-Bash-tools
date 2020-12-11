@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -29,6 +29,9 @@ Output Format:
 <status>    <stack_description>
 
 StackId and StackNames are not included for brevity as they don't add descriptive value
+
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
