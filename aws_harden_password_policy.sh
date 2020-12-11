@@ -13,13 +13,29 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Strengthens password policy according to CIS Foundations Benchmark recommendations
-#
-# View password policy using adjacent script aws_password_policy.sh (automatically called at start and end of this script)
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Strengthens password policy according to CIS Foundations Benchmark recommendations
+
+View password policy using adjacent script aws_password_policy.sh (automatically called at start and end of this script)
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 echo
 echo "Existing Password Policy:"
