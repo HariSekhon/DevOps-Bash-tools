@@ -49,6 +49,7 @@ usage_args="[<aws_cli_opts>]"
 
 help_usage "$@"
 
+
 aws eks list-clusters "$@" |
 jq -r '.clusters[]' |
 while read -r cluster; do
