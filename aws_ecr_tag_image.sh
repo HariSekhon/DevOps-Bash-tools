@@ -21,7 +21,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -30,6 +30,10 @@ Tags an AWS ECR image with another tag without pulling + pushing the image
 If :<tag> isn't given, assumes 'latest'
 
 (this is easier to do on GCP as there is a supported command, hence the reason for this script)
+
+
+$usage_aws_cli_required
+
 
 Similar scripts:
 
