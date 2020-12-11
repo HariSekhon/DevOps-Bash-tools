@@ -31,7 +31,7 @@ WARNING: GCloud SDK switches your kubectl context to the last cluster you get cr
 See also:
 
     gke_kubectl.sh  - gets temporary credentials at runtime to an isolated config before running the kubectl command against the given cluster
-    kubectl.sh      - isolates kube config to fix kubectl commands to the given cluster to prevent race conditions apply kubectl changes to the wrong cluster
+    kubectl.sh      - isolates kube config to fix kubectl commands to the given cluster to prevent race conditions applying kubectl changes to the wrong cluster
 "
 
 # used by usage() in lib/utils.sh
