@@ -13,26 +13,42 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists AWS IAM users last used dates for password and access keys
-#
-# Output format is CSV with the following headers
-#
-# user,password_last_used,access_key_1_last_used_date,access_key_2_last_used_date
-#
-# Add
-#
-# | grep -B1 '<root_account>'
-#
-# to check your root account isn't being used
-#
-# See similar tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
-#
-# - https://github.com/harisekhon/devops-python-tools
-# - https://github.com/harisekhon/nagios-plugins
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists AWS IAM users last used dates for password and access keys
+
+Output format is CSV with the following headers
+
+user,password_last_used,access_key_1_last_used_date,access_key_2_last_used_date
+
+Add this to your command pipeline
+
+    | grep -B1 '<root_account>'
+
+to check your root account isn't being used
+
+See similar tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
+
+    - https://github.com/harisekhon/devops-python-tools
+    - https://github.com/harisekhon/nagios-plugins
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 "$srcdir/aws_iam_generate_credentials_report_wait.sh" >&2
 
