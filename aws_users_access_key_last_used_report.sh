@@ -13,20 +13,36 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Prints users access keys and their last used date using a credentials report (faster for many users)
-#
-# CSV Output format:
-#
-# user,access_key_1_active,access_key_1_last_used_date,access_key_2_active,access_key_2_last_used_date
-#
-#
-# See similar tools in DevOps Python Tools repo:
-#
-# https://github.com/harisekhon/devops-python-tools
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Prints users access keys and their last used date using a credentials report (faster for many users)
+
+CSV Output format:
+
+user,access_key_1_active,access_key_1_last_used_date,access_key_2_active,access_key_2_last_used_date
+
+
+See similar tools in DevOps Python Tools repo:
+
+    https://github.com/harisekhon/devops-python-tools
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 "$srcdir/aws_iam_generate_credentials_report_wait.sh" >&2
 
