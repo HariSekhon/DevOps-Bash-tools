@@ -41,8 +41,8 @@ services:
       # for server.xml override:
       #- teamcity/conf:/opt/teamcity/conf
       #- ./teamcity/teamcity-database.properties:/data/teamcity_server/datadir/config/database.properties
-      - ./teamcity/server/datadir:/data/teamcity_server/datadir
-      - ./teamcity/server/logs:/opt/teamcity/logs
+      - $HOME/teamcity/server/datadir:/data/teamcity_server/datadir
+      - $HOME/teamcity/server/logs:/opt/teamcity/logs
   teamcity-agent:
     hostname: teamcity-agent
     # 1.3GB docker image
@@ -75,15 +75,15 @@ services:
       - teamcity-server
     volumes:
       # persist the buildAgent.properties containing the agent id and autosaved authorization token
-      - ./teamcity/agent1/conf:/data/teamcity_agent/conf
+      - $HOME/teamcity/agent1/conf:/data/teamcity_agent/conf
       #
       # checked out sources - this needs 3GB to run builds so needs to be mounted - the docker image has 60GB and the mounts appear to only get 1GB not properly mapped to host but must be stuck in Docker VM overlay so omitting it
-      - ./teamcity/agent1/work:/opt/buildagent/work
+      - $HOME/teamcity/agent1/work:/opt/buildagent/work
       #
-      - ./teamcity/agent1/logs:/opt/buildagent/logs
+      - $HOME/teamcity/agent1/logs:/opt/buildagent/logs
       #
       # internal build agent caches
-      - ./teamcity/agent1/system:/opt/buildagent/system
+      - $HOME/teamcity/agent1/system:/opt/buildagent/system
       #
       # plugins
-      - ./teamcity/agent1/plugins:/opt/buildagent/plugins
+      - $HOME/teamcity/agent1/plugins:/opt/buildagent/plugins
