@@ -294,6 +294,7 @@ etc.
 
 - `aws_*.sh` - [AWS](https://aws.amazon.com/) scripts:
   - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
+  - `aws_billing_alarm.sh` - create a billing alarm against charges (usually the first thing you want to do on any account)
   - `aws_cloudtrails_cloudwatch.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their last delivery to [CloudWatch](https://aws.amazon.com/cloudwatch/features/) Logs (should be recent)
   - `aws_cloudtrails_event_selectors.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their event selectors to check each one has at least one event selector
   - `aws_cloudtrails_s3_accesslogging.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) buckets and their Access Logging prefix and target bucket. Checks [S3 access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) is enabled
