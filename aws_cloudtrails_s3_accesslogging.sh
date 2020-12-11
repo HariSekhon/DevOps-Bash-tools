@@ -42,8 +42,6 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 
 aws cloudtrail describe-trails --query 'trailList[*].S3BucketName' |
 jq -r '.[]' |
