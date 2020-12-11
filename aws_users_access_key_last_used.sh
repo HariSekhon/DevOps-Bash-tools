@@ -13,24 +13,41 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Prints users access keys and their last used date
-#
-# Output format, tab separated:
-#
-# <user>    <access_key>   <last_used_date>  <region>
-#
-#
-# See also:
-#
-# aws_users_access_key_last_used.sh - much quicker version for lots of users
-#
-#
-# See similar tools in DevOps Python Tools repo:
-#
-# https://github.com/harisekhon/devops-python-tools
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Prints users access keys and their last used date
+
+Output format, tab separated:
+
+<user>    <access_key>   <last_used_date>  <region>
+
+
+See Also:
+
+    aws_users_access_key_last_used.sh - much quicker version for lots of users
+
+
+See similar tools in DevOps Python Tools repo:
+
+    https://github.com/harisekhon/devops-python-tools
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 if [ $# -gt 0 ]; then
     users="$*"
