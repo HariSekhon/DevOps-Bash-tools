@@ -13,16 +13,33 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Finds policies granting full access in JSON format
-#
-# Takes a while to run (eg. ~18 mins for ~700 policies)
-#
-# If stderr is to terminal, prints progress counter in the form of num / total
-#
-# Recommend to redirect stdout to a file ( > file.txt ) and just watch progress counter on stderr in terminal
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Finds policies granting full access in JSON format
+
+Takes a while to run (eg. ~18 mins for ~700 policies)
+
+If stderr is to terminal, prints progress counter in the form of num / total
+
+Recommend to redirect stdout to a file ( > file.txt ) and just watch progress counter on stderr in terminal
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 echo "Getting policy list" >&2
 policies="$(
