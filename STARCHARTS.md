@@ -1,9 +1,9 @@
 # GitHub StarCharts Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-17-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2579-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1147-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-452-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2590-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1153-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-454-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -25,7 +25,7 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
-50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak, and DevOps tools built various distros: Alpine, CentOS, Debian, Fedora, Ubuntu
+50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak, TeamCity and DevOps tools built various distros: Alpine, CentOS, Debian, Fedora, Ubuntu
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Dockerfiles.svg)](https://starchart.cc/HariSekhon/Dockerfiles)
 
@@ -43,7 +43,7 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
 
-550+ DevOps Bash Scripts - AWS, GCP, Kubernetes, Kafka, Docker, APIs, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, Travis CI, Jenkins, Concourse, GitHub, GitLab, BitBucket, Azure DevOps, Spotify, MP3, LDAP, Code/Build Linting, package management for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced Config dotfiles: .bashrc, .vimrc, .gitconfig, .screenrc, .tmux.conf, .psqlrc ...
+550+ DevOps Bash Scripts - AWS, GCP, Kubernetes, Kafka, Docker, APIs, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, Travis CI, Jenkins, Concourse, GitHub, GitLab, BitBucket, Azure DevOps, TeamCity, Spotify, MP3, LDAP, Code/Build Linting, pkg mgmt for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .gitconfig, .screenrc, .tmux.conf, .psqlrc ...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
 
@@ -151,7 +151,7 @@ SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL system
 
 Link:  [HariSekhon/TeamCity-CI](https://github.com/HariSekhon/TeamCity-CI)
 
-TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity builds, API scripts & configs for every major CI system
+TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity builds, API scripts & configs for all major CI systems: Azure DevOps, GitHub Actions, GitLab CI, BitBucket CI, Travis CI, Circle CI, AppVeyor, BuildKite, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/TeamCity-CI.svg)](https://starchart.cc/HariSekhon/TeamCity-CI)
 
