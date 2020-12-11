@@ -13,16 +13,32 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Prints password policy in 'key = value' pairs for easy viewing / grepping
-#
-# Adjacent script
-#
-#   aws_harden_password_policy.sh
-#
-# calls this before and after changing the password policy to be hardened according to the CIS Foundations Benchmark recommendations
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Prints password policy in 'key = value' pairs for easy viewing / grepping
+
+See Also:
+
+    aws_harden_password_policy.sh - sets a hardeded password policy along CIS Foundations Benchmark recommendations
+                                    that script calls this one before and after changing the password policy
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 aws iam get-account-password-policy |
 jq -r '.PasswordPolicy | to_entries | map(.key + " = " + (.value | tostring)) | .[]'
