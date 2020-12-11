@@ -13,18 +13,37 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists AWS IAM users and their password last used date
-#
-# See also check_aws_users_password_last_used.py in the Advanced Nagios Plugins collection
-#
-# - https://github.com/harisekhon/nagios-plugins
-#
-# awless list users
-#
-# awless list users --format tsv | awk '{if($4 == "months" || $4 == "years") print}'
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists AWS IAM users and their password last used date
+
+See Also:
+
+    - check_aws_users_password_last_used.py in the Advanced Nagios Plugins collection
+
+        https://github.com/harisekhon/nagios-plugins
+
+    awless list users
+
+    awless list users --format tsv | awk '{if(\$4 == \"months\" || \$4 == \"years\") print}'
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 aws iam list-users |
 jq -r '.Users[] | [.UserName, .PasswordLastUsed] | @tsv' |
