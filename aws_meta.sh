@@ -16,6 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# intentionally not using lib/ so that this script is standalone and can be easily distributed to VMs without git cloning the whole repo
 usage(){
     echo "
 AWS EC2 Metadata API query shortcut
