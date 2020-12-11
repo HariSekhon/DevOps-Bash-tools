@@ -38,8 +38,6 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 
 #echo "Getting Cloud Trails" >&2
 aws cloudtrail describe-trails |
