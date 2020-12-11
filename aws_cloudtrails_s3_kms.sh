@@ -38,8 +38,6 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 
 aws cloudtrail describe-trails |
 # more efficient
