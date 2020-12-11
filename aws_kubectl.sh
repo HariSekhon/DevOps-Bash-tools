@@ -34,7 +34,7 @@ Eg. running:
 
 either by your hand or other concurrently executing scripts changes your global kubectl context to run on the given cluster, which could divert your command or concurrently long running scripts in other windows to run kubectl commands on the wrong cluster, leading to cross environment misconfigurations and real world outages (I've seen this personally)
 
-For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CLUSTER and ZONE variables
+For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CLUSTER and REGION variables
 
 Could also use main kube config with kubectl switches --cluster / --context (after configuring, see aws_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 "
@@ -54,7 +54,7 @@ min_args 3 "$@"
 
 # HARDCODE THESE for frequent shorter CLI usage
 CLUSTER="$1"  # eg. my-cluster
-ZONE="$2"     # eg. us-east-1
+REGION="$2"   # eg. us-east-1
 
 # REMOVE if hardcoding
 shift || :
@@ -66,7 +66,7 @@ export KUBECONFIG="/tmp/.kube/config.${EUID:-$UID}.$$"
 
 mkdir -pv "$(dirname "$KUBECONFIG")"
 
-aws eks update-kubeconfig --name "$CLUSTER" --zone "$ZONE"
+aws eks update-kubeconfig --name "$CLUSTER" --region "$REGION"
 echo >&2
 
 kubectl "$@"
