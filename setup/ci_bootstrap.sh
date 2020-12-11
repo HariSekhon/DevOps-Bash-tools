@@ -55,14 +55,15 @@ if [ "$(uname -s)" = Darwin ]; then
     #retry "$srcdir/install_homebrew.sh"
     if command -v brew 2>&1; then
         # fix for CI runners on Mac with shallow homebrew clone - which is failing all the BuildKite builds
-        if [ -d /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core ]; then
-            git_root="/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
-            # find out if Homebrew is a shallow git checkout and if so fix it
-            if [ -f "$(git -C "$git_root" rev-parse --git-dir)/shallow" ] ||
-               [ "$(git -C "$git_root" rev-parse --is-shallow-repository)" = true ]; then
-                git -C "$git_root" fetch --unshallow
+        for git_root in /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core /usr/local/Homebrew/Library/Taps/homebrew/homebrew-cask; do
+            if [ -d "$git_root" ]; then
+                # find out if Homebrew is a shallow git checkout and if so fix it
+                if [ -f "$(git -C "$git_root" rev-parse --git-dir)/shallow" ] ||
+                   [ "$(git -C "$git_root" rev-parse --is-shallow-repository)" = true ]; then
+                    git -C "$git_root" fetch --unshallow
+                fi
             fi
-        fi
+        done
         retry brew update
     fi
 elif [ "$(uname -s)" = Linux ]; then
