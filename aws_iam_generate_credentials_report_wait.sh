@@ -15,19 +15,36 @@
 
 # https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html
 
-# Generates an AWS IAM credentials report and waits for it to finish
-#
-# Called from adjacent scripts as a dependency so that they can then pull specific information from the report
-#
-# Requires iam:GenerateCredentialReport on resource: *
-#
-# See more AWS tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
-#
-# - https://github.com/harisekhon/devops-python-tools
-# - https://github.com/harisekhon/nagios-plugins
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Generates an AWS IAM credentials report and waits for it to finish
+
+Called from adjacent scripts as a dependency so that they can then pull specific information from the report
+
+Requires iam:GenerateCredentialReport on resource: *
+
+See more AWS tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
+
+- https://github.com/harisekhon/devops-python-tools
+- https://github.com/harisekhon/nagios-plugins
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 SECONDS=0
 MAX_SECONDS=60
