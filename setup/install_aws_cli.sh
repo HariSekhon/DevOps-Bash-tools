@@ -27,6 +27,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
+# shellcheck disable=SC1090
+. "$srcdir/../lib/ci.sh"
+
 #if type -P aws &>/dev/null &&
 #   type -P sam &>/dev/null &&
 #   type -P awless &>/dev/null; then

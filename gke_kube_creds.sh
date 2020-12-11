@@ -30,8 +30,9 @@ WARNING: GCloud SDK switches your kubectl context to the last cluster you get cr
 
 See also:
 
-    gke_kubectl.sh  - gets temporary credentials at runtime to an isolated config before running the kubectl command against the given cluster
-    kubectl.sh      - isolates kube config to fix kubectl commands to the given cluster to prevent race conditions apply kubectl changes to the wrong cluster
+    aws_kube_creds.sh - same as this script but for AWS EKS
+    gke_kubectl.sh    - gets temporary credentials at runtime to an isolated config before running the kubectl command against the given cluster
+    kubectl.sh        - isolates kube config to fix kubectl commands to the given cluster to prevent race conditions applying kubectl changes to the wrong cluster
 "
 
 # used by usage() in lib/utils.sh
@@ -42,7 +43,7 @@ help_usage "$@"
 
 gcloud container clusters list --format='value(name,zone)' |
 while read -r cluster zone; do
-    echo "Getting GKE creds for cluster '$cluster' in zone '$zone':"
+    echo "Getting GKE credentials for cluster '$cluster' in zone '$zone':"
     gcloud container clusters get-credentials "$cluster" --zone "$zone"
     echo
 done
