@@ -13,10 +13,29 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Finds and prints all policies directly attached to users (anti-best practice) instead of groups
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Finds and prints all policies directly attached to users instead of groups
+
+Policies directly attached to users is against best practice as it is harder to maintain
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 # prefix user column only if there is any output
 prefix_user(){
