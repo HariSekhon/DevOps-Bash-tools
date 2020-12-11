@@ -25,7 +25,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
 
-if type -P eksctl &>/dev/null; then
+if type -P eksctl 2>/dev/null; then
     echo "AWS eksctl already installed"
     exit 0
 fi
@@ -43,8 +43,11 @@ if [ "$uname_s" = Darwin ]; then
     brew install weaveworks/tap/eksctl
     brew upgrade eksctl && brew link --overwrite eksctl
 else
+    echo "downloading eksctl binary"
     curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+    echo "moving eksctl to $HOME/bin"
     mv /tmp/eksctl ~/bin
 fi
 
+echo -n "eksctl version:  "
 eksctl version
