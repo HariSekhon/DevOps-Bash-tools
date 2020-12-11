@@ -46,6 +46,7 @@ duplicates="$(
             -e 'MySQL' \
             -e 'PostgreSQL' \
             -e 'MariaDB' \
+            -e 'TeamCity' \
             -e '^=*$'
 )"
 set -eo pipefail
