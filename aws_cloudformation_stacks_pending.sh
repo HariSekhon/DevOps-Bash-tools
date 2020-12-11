@@ -40,7 +40,6 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
 
 aws cloudformation list-stacks |
 jq -r '.StackSummaries[] | [.StackStatus, .TemplateDescription] | @tsv' |
