@@ -39,6 +39,7 @@ duplicates="$(
             -e 'harisekhon/github' \
             -e 'harisekhon/centos-github' \
             -e 'StarTrack' \
+            -e 'STARCHARTS.md' \
             -e 'LinkedIn' \
             -e 'Spotify' \
             -e 'AWS Athena' \
