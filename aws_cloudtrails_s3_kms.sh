@@ -13,14 +13,33 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists Cloud Trails and whether their S3 buckets are KMS secured
-#
-# Output Format:
-#
-# CloudTrail_Name      S3_KMS_secured (boolean)     KMS_Key_Id
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists Cloud Trails and whether their S3 buckets are KMS secured
+
+Output Format:
+
+CloudTrail_Name      S3_KMS_secured (boolean)     KMS_Key_Id
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
 
 aws cloudtrail describe-trails |
 # more efficient
