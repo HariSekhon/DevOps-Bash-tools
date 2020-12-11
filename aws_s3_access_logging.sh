@@ -13,18 +13,35 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists S3 buckets and their access logging status
-#
-# Output Format:
-#
-# S3_Bucket      TargetPrefix    TargetBucket
-#
-# If access logging isn't configured on a bucket, outputs:
-#
-# S3_Bucket      S3_ACCESS_LOGGING_NOT_CONFIGURED
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists S3 buckets and their access logging status
+
+Output Format:
+
+S3_Bucket      TargetPrefix    TargetBucket
+
+If access logging isn't configured on a bucket, outputs:
+
+S3_Bucket      S3_ACCESS_LOGGING_NOT_CONFIGURED
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 buckets="$(aws s3 ls | cut -d' ' -f3-)"
 
