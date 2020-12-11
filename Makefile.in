@@ -155,14 +155,31 @@ printenv: git
 			printf "Git branch: "; git rev-parse --abbrev-ref HEAD; \
 			printf "Git commit: "; git log --pretty=format:"%ai  %cn  %H  %s" -n 1; echo; \
 			echo; \
-			if [ -f /.dockerenv  ]; then echo "Running inside Docker:"; ls -l /.dockerenv 2>/dev/null; fi; \
+			if [ -f /.dockerenv  ]; then i\
+				echo "Running inside Docker:"; \
+				ls -l /.dockerenv 2>/dev/null; \
+			fi; \
 			echo; \
-			echo "OS RELEASE:"; echo; uname -a || : ; echo; cat /etc/*release || : ; echo; \
+			echo "OS RELEASE:"; \
 			echo; \
-			unset MAKEFILE_USAGE; unset MAKEFILE_USAGE_COMMON; unset TERMCAP; \
-			echo "CI ENVIRONMENT:"; echo; env | sort -f ; echo;  \
+			uname -a || : ; \
 			echo; \
-			if which java 2>/dev/null; then which java; java -version; echo; fi; \
+			cat /etc/*release || : ; \
+			echo; \
+			unset MAKEFILE_USAGE; \
+			unset MAKEFILE_USAGE_COMMON; \
+			unset TERMCAP; \
+			echo; \
+			echo "CI ENVIRONMENT:"; \
+			echo; \
+			env | grep -vi -e PASS -e TOKEN -e KEY -e SECRET | sort -f; \
+			echo; \
+			echo; \
+			if which java 2>/dev/null; then \
+				which java; \
+				java -version; \
+				echo; \
+			fi; \
 			echo "PATH:"; echo "$$PATH" | tr ':' '\n'; \
 			echo; \
 		else \
