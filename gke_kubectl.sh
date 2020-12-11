@@ -38,6 +38,11 @@ either by your hand or other concurrently executing scripts changes your global 
 For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the PROJECT, CLUSTER and ZONE variables
 
 Could also use main kube config with kubectl switches --cluster / --context (after configuring, see gke_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
+
+
+See Also:
+
+    gke_kube_creds.sh - auto-populates the credentials for all GKE clusters for your kubectl is ready to rock on GCP
 "
 
 # used by usage() in lib/utils.sh
