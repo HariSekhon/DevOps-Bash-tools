@@ -28,11 +28,13 @@ Output format is CSV with the following headers
 
 user,password_last_used,access_key_1_last_used_date,access_key_2_last_used_date
 
+
 Add this to your command pipeline
 
     | grep -B1 '<root_account>'
 
 to check your root account isn't being used
+
 
 See similar tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
 
