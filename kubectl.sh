@@ -24,13 +24,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Runs a kubectl command safely fixed to a specific Kubernetes context by using an isolated fixed config for the lifetime of this script
 
-Avoids concurrency race conditions from other commands or scripts changing the kubectl context
+Avoids concurrency race conditions with other concurrently executing commands or scripts by avoiding using or changing the global kubectl context
 
 Eg. running:
 
-    kubectl config use-context 'gke_<project>_europe-west1-<cluster_name>'
+    kubectl config use-context '<name>'
 
-in another script or window would cause a concurrency race condition bug where your kubectl commands would fire against the new cluster instead, leading to cross environment misconfigurations and outages in real world usage
+either by your hand or in other concurrently executing scripts changes your global kubectl context to run on the given cluster, which could divert your command or concurrently long running scripts in other windows to run kubectl commands on the wrong cluster, leading to cross environment misconfigurations and real world outages (I've seen this personally)
 
 For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CONTEXT variable
 
