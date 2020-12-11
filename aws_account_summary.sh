@@ -51,8 +51,6 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 
 aws iam get-account-summary |
 jq -r '.SummaryMap | to_entries | map(.key + " = " + (.value | tostring)) | .[]' |
