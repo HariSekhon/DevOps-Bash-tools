@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Sets an AWS Billing Alarm as soon as you begin incurring any charges
 
-The alarm is set in the us-east-1 region (N. Virginia in the web console) because that is where the metric is stored for all accounts currently, regardless of which region you're using
+The alarm is set in the us-east-1 region (N. Virginia in the web console) because that is where the metric is stored for all accounts currently, regardless of which region you're actually using
 
 If you give an argument, will set the alert threshold to that amount of USD - an alarm is raised once it goes above that amount
 
@@ -33,7 +33,9 @@ The default threshold amount is 0.00 USD to alert on any charges for safety
 
 See the created alarm here:
 
-    https://console.aws.amazon.com/cloudwatch/home?region=us-east-1#alarmsV2:?
+    https://console.aws.amazon.com/cloudwatch/home?region=us-east-1
+
+(notice the region must be us-east-1)
 
 
 $usage_aws_cli_required
