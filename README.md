@@ -196,7 +196,7 @@ make
 
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
-- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, lots of IAM reports, config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS rotation, SSM, CloudTrail
+- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, lots of IAM reports, config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS rotation, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and email subscription
 - [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
 - [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
@@ -305,7 +305,7 @@ etc.
 
 - `aws_*.sh` - [AWS](https://aws.amazon.com/) scripts:
   - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
-  - `aws_billing_alarm.sh` - create a billing alarm against charges (usually the first thing you want to do on any account)
+  - `aws_billing_alarm.sh` - creates a [CloudWatch](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when you incur charges above a given threshold. This is often the first thing you want to do on an account
   - `aws_cloudtrails_cloudwatch.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their last delivery to [CloudWatch](https://aws.amazon.com/cloudwatch/features/) Logs (should be recent)
   - `aws_cloudtrails_event_selectors.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their event selectors to check each one has at least one event selector
   - `aws_cloudtrails_s3_accesslogging.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) buckets and their Access Logging prefix and target bucket. Checks [S3 access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) is enabled
