@@ -22,13 +22,19 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Sets an AWS Billing Alarm as soon as you begin incurring any charges
+Sets an AWS Billing Alarm in CloudWatch to trigger as soon as you begin incurring any charges
+
+Creates an SNS topic and subscription for the given email address and links it to the above CloudWatch Alarm to email you as soon as your billing charges go over
 
 The alarm is set in the us-east-1 region (N. Virginia in the web console) because that is where the metric is stored for all accounts currently, regardless of which region you're actually using
 
-If you give an argument, will set the alert threshold to that amount of USD - an alarm is raised once it goes above that amount
 
-The default threshold amount is 0.00 USD to alert on any charges for safety
+The first argument sets the alert threshold in USD - an alarm is raised once it goes above that amount
+The default threshold is 0.00 USD to alert on any charges for safety
+
+The second argument sets the email address to use in an SNS topic to notify you.
+If no email is given specified attempts to use the email from your local Git configuration.
+If neither is available, shows this usage mesage.
 
 
 See the created alarm here:
@@ -43,21 +49,45 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<threshold_amount_in_USD>"
+usage_args="<threshold_amount_in_USD> [<email_address>]"
 
 help_usage "$@"
 
 threshold="${1:-0.00}"
+email="${2:-$(git config user.email || :)}"
 
 if ! [[ "$threshold" =~ ^[[:digit:]]{1,4}(\.[[:digit:]]{1,2})?$ ]]; then
     usage "invalid threshold argument given - must be 0.01 - 9999.99 USD"
 fi
 
+if is_blank "$email"; then
+    usage "email address not specified and could not determine email from git config"
+fi
+
+# XXX: this has to be us-east-1 because this is where the billing data accumulates regardless of which region you actually use
+region="us-east-1"
+sns_topic="AWS_Charges"
+
+timestamp "Creating SNS topic to email '$email'"
+output="$(aws sns create-topic --name "$sns_topic" --region "$region")"
+
+# "arn:aws:sns:us-east-1:123456789012:AWS_Charges"
+sns_topic_arn="$(jq -r '.TopicArn' <<< "$output")"
+
+echo
+
+timestamp "Subscribing email address '$email' to topic '$sns_topic'"
+aws sns subscribe --topic-arn "$sns_topic_arn" --protocol email --notification-endpoint "$email" --region "$region"
+
+echo
+
+timestamp "Creating CloudWatch Alarm for AWS charges > $threshold USD"
 # --period 21600 = 6 hours (default)
 aws cloudwatch put-metric-alarm --alarm-name "AWS Charges" \
                                 --alarm-description "Alerts on AWS charges greater than $threshold USD" \
                                 --actions-enabled \
-                                --region us-east-1 \
+                                --alarm-actions "$sns_topic_arn" \
+                                --region "$region" \
                                 --namespace "AWS/Billing" \
                                 --metric-name "EstimatedCharges" \
                                 --threshold "$threshold" \
