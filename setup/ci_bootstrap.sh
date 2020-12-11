@@ -59,7 +59,7 @@ if [ "$(uname -s)" = Darwin ]; then
             git_root="/usr/local/Homebrew/Library/Taps/homebrew/homebrew-core"
             # find out if Homebrew is a shallow git checkout and if so fix it
             if [ -f "$(git -C "$git_root" rev-parse --git-dir)/shallow" ] ||
-               git -C "$git_root" rev-parse --is-shallow-repository; then
+               [ "$(git -C "$git_root" rev-parse --is-shallow-repository)" = true ]; then
                 git -C "$git_root" fetch --unshallow
             fi
         fi
