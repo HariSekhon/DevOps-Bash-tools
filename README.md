@@ -363,14 +363,14 @@ etc.
     - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
     - see also [cloudbuild.yml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
-  - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
-    - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
-    - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
-    - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
   - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
+  - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
+    - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
+    - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
+    - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
   - `gcp_sql_*.sh` - [Cloud SQL](https://cloud.google.com/sql) scripts:
     - `gcp_sql_backup.sh` - creates Cloud SQL backups
     - `gcp_sql_export.sh` - creates Cloud SQL exports to [GCS](https://cloud.google.com/storage)
