@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -39,6 +39,10 @@ For frequent more convenient usage you will want to shorten the CLI by copying t
 Could also use main kube config with kubectl switches --cluster / --context (after configuring, see aws_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 
 
+$usage_aws_cli_required
+(kubectl is also installed as part of 'make aws')
+
+
 See Also:
 
     aws_kube_creds.sh - auto-populates the credentials for all EKS clusters for your kubectl is ready to rock on AWS
@@ -49,6 +53,7 @@ See Also:
 usage_args="<cluster> <zone> <kubectl_options>"
 
 help_usage "$@"
+
 
 # ============================================================
 # HARDCODE THIS SECTION FOR SHORTER CLI convenience
