@@ -19,6 +19,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# intentionally not using /lib so that this script is standalone and easier to distribute to VMs rather than requiring a full git clone of the repo
 usage(){
     cat <<EOF
 Executes the arguments as shell commands when the EC2 instance running this script is notified of Spot Termination
