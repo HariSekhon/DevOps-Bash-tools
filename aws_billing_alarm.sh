@@ -22,11 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Sets an AWS Billing Alarm in CloudWatch to trigger as soon as you begin incurring any charges
+Sets an AWS CloudWatch billing alarm to trigger as soon as you begin incurring any charges
 
 Creates an SNS topic and subscription for the given email address and links it to the above CloudWatch Alarm to email you as soon as your billing charges go over
 
-The alarm is set in the us-east-1 region (N. Virginia in the web console) because that is where the metric is stored for all accounts currently, regardless of which region you're actually using
+The alarm is set in the us-east-1 region (N. Virginia in the web console) because that is where the metric billing data accumulates, regardless of which region you actually use
 
 
 The first argument sets the alert threshold in USD - an alarm is raised once it goes above that amount
@@ -41,7 +41,7 @@ See the created alarm here:
 
     https://console.aws.amazon.com/cloudwatch/home?region=us-east-1
 
-(notice the region must be us-east-1)
+(notice the region must be us-east-1 as per description above)
 
 
 $usage_aws_cli_required
@@ -56,6 +56,11 @@ help_usage "$@"
 threshold="${1:-0.00}"
 email="${2:-$(git config user.email || :)}"
 
+# XXX: region has to be us-east-1 because this is where the billing metric data accumulates regardless of which region you actually use
+region="us-east-1"
+
+sns_topic="AWS_Charges"
+
 if ! [[ "$threshold" =~ ^[[:digit:]]{1,4}(\.[[:digit:]]{1,2})?$ ]]; then
     usage "invalid threshold argument given - must be 0.01 - 9999.99 USD"
 fi
@@ -63,10 +68,6 @@ fi
 if is_blank "$email"; then
     usage "email address not specified and could not determine email from git config"
 fi
-
-# XXX: this has to be us-east-1 because this is where the billing data accumulates regardless of which region you actually use
-region="us-east-1"
-sns_topic="AWS_Charges"
 
 timestamp "Creating SNS topic to email '$email'"
 output="$(aws sns create-topic --name "$sns_topic" --region "$region")"
