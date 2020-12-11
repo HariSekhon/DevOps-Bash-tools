@@ -41,7 +41,8 @@ if [ "$uname_s" = Darwin ]; then
     "$srcdir/install_homebrew.sh"
     brew tap weaveworks/tap
     brew install weaveworks/tap/eksctl
-    brew upgrade eksctl && brew link --overwrite eksctl
+    brew upgrade eksctl
+    brew link --overwrite eksctl
 else
     echo "downloading eksctl binary"
     curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
@@ -49,5 +50,7 @@ else
     mv /tmp/eksctl ~/bin
 fi
 
+echo "Installed"
+echo
 echo -n "eksctl version:  "
 eksctl version
