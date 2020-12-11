@@ -48,7 +48,7 @@ help_usage "$@"
 aws eks list-clusters "$@" |
 jq -r '.clusters[]' |
 while read -r cluster; do
-    echo "Getting GKE creds for cluster '$cluster':"
+    echo "Getting AWS EKS credentials for cluster '$cluster':"
     aws eks update-kubeconfig --name "$cluster" "$@"
     echo
 done
