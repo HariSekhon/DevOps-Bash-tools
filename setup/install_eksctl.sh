@@ -54,3 +54,7 @@ echo "Installed"
 echo
 echo -n "eksctl version:  "
 eksctl version
+
+echo
+echo
+"$srcdir/install_kubectl.sh"
