@@ -37,6 +37,12 @@ For frequent more convenient usage you will want to shorten the CLI by copying t
 The kubectl context specified should already be configured in your primary kubectl config which is copied to an isolated config to fix it before running your kubectl actions
 
 Could also use explicit kubectl switches --cluster / --context, but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
+
+
+See Also:
+
+    - aws_kubectl.sh - similar to this script but also downloads the AWS EKS credential
+    - gke_kubectl.sh - similar to this script but also downloads the GCP GKE credential
 "
 
 # used by usage() in lib/utils.sh
