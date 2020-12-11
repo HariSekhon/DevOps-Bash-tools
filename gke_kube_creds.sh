@@ -43,7 +43,7 @@ help_usage "$@"
 
 gcloud container clusters list --format='value(name,zone)' |
 while read -r cluster zone; do
-    echo "Getting GKE creds for cluster '$cluster' in zone '$zone':"
+    echo "Getting GKE credentials for cluster '$cluster' in zone '$zone':"
     gcloud container clusters get-credentials "$cluster" --zone "$zone"
     echo
 done
