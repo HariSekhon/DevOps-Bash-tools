@@ -91,6 +91,7 @@ aws cloudwatch put-metric-alarm --alarm-name "AWS Charges" \
                                 --region "$region" \
                                 --namespace "AWS/Billing" \
                                 --metric-name "EstimatedCharges" \
+                                --dimensions "Name=Currency,Value=USD" \
                                 --threshold "$threshold" \
                                 --comparison-operator "GreaterThanThreshold" \
                                 --statistic Maximum \
