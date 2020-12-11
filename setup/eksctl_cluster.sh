@@ -33,6 +33,10 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+"$srcdir/install_eksctl.sh"
+echo
+
+timestamp "Creating AWS EKS cluster via eksctl"
 eksctl create cluster --name mycluster \
                       --version 1.16 \
                       --region us-east-1 \
