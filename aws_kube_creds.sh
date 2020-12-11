@@ -35,8 +35,9 @@ Can supply arguments to be passed to AWS CLI to set things like region eg.
 
 See also:
 
-    gke_kube_creds.sh  - same as this script but for GCP GKE clusters
     kubectl.sh         - isolates kube config to fix kubectl commands to the given cluster to prevent race conditions from applying kubectl changes to the wrong cluster
+    aws_kubectl.sh     - same as above but also gets the credential
+    gke_kube_creds.sh  - same as this script but for GCP GKE clusters
 "
 
 # used by usage() in lib/utils.sh
