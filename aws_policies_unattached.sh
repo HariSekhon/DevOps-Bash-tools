@@ -13,10 +13,29 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Lists all unattached policies
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lists all unattached policies
+
+These unattached should probably be cleaned up (removed)
+
+
+$usage_aws_cli_required
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
 
 aws iam list-policies |
 # get json to allow to filter later
