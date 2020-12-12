@@ -24,6 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists CloudFormation stacks not marked as completed
 
+Useful with the 'watch' command or in a loop as a latch (hint: use grep) to check until there are no pending CloudFormation stacks before continuing
+
+
 Arguments are fed to AWS CLI eg. to set --region
 
 Output Format:
