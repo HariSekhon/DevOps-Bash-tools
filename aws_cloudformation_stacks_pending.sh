@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists CloudFormation stacks not marked as completed
 
+Arguments are fed to AWS CLI eg. to set --region
+
 Output Format:
 
 <status>    <stack_description>
@@ -36,11 +38,11 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<aws_cli_options>]"
 
 help_usage "$@"
 
 
-aws cloudformation list-stacks |
+aws cloudformation list-stacks "$@" |
 jq -r '.StackSummaries[] | [.StackStatus, .TemplateDescription] | @tsv' |
 grep -Ev '^([[:alnum:]_]+)?COMPLETE'
