@@ -45,7 +45,7 @@ See also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<aws_cli_opts>]"
+usage_args="[<aws_cli_options>]"
 
 help_usage "$@"
 
