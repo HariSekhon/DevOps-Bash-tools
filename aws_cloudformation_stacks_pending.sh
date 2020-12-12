@@ -28,9 +28,7 @@ Arguments are fed to AWS CLI eg. to set --region
 
 Output Format:
 
-<status>    <stack_description>
-
-StackId and StackNames are not included for brevity as they don't add descriptive value
+<status>    <stack_name>    <stack_description>
 
 
 $usage_aws_cli_required
@@ -44,5 +42,5 @@ help_usage "$@"
 
 
 aws cloudformation list-stacks "$@" |
-jq -r '.StackSummaries[] | [.StackStatus, .TemplateDescription] | @tsv' |
+jq -r '.StackSummaries[] | [.StackStatus, .StackName, .TemplateDescription] | @tsv' |
 grep -Ev '^([[:alnum:]_]+)?COMPLETE'
