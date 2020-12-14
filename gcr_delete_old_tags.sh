@@ -26,7 +26,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Deletes tags old than N days for a given GCR image
 
-to clean out old CI image builds to save GCS storage costs on old CI images you no longer use
+Useful to clean out old CI image builds to save GCS storage costs on old CI images you no longer use
+
+
+Prompts with the list of image:tags that it will delete before proceeding for safety.
 
 
 See Also:
@@ -43,5 +46,20 @@ help_usage "$@"
 
 num_args 2 "$@"
 
-"$srcdir/gcr_tags_old.sh" "$@" |
-xargs gcloud container images delete -q --force-delete-tags
+image_tags="$("$srcdir/gcr_tags_old.sh" "$@")"
+
+echo
+echo "List of image:tags that will be deleted:"
+echo
+echo "$image_tags"
+echo
+
+read -r -p 'Are you sure you want to delete these image:tags listed above? (y/N) ' answer
+echo
+
+if [ "$answer" != "y" ]; then
+    echo "Aborting..."
+    exit 1
+fi
+
+xargs gcloud container images delete -q --force-delete-tags <<< "$image_tags"
