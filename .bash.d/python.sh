@@ -23,6 +23,9 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
+# silence those annoying Python 2 cryptography warnings that mess up our programs outputs
+export PYTHONWARNINGS=ignore::UserWarning
+
 if ! type add_PATHS &>/dev/null ; then
     # shellcheck disable=SC1090
     . "$bash_tools/.bash.d/paths.sh"
