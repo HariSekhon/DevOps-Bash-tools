@@ -374,6 +374,7 @@ etc.
     - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
     - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
+    - `gcr_tags_old.sh` - lists tags older than N days a given GCR docker image
     - see also [cloudbuild.yml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
   - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
