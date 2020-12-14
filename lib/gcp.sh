@@ -29,9 +29,10 @@ else
     gcloud_formatting='"[box,title=\"$title\"]"'
 fi
 
-gcr_image_regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+$'
-gcr_image_tag_regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+:.+$'
-gcr_image_optional_tag_regex='^([^\.]+\.)?gcr\.io/[^/]+/[^:]+(:.+)?$'
+# not anchoring here any more so that we can use these to compose more complex regex - client should anchor regex in matches
+gcr_image_regex='([^\.]+\.)?gcr\.io/[^/]+/[^:]+'
+gcr_image_tag_regex="$gcr_image_regex:.+"
+gcr_image_optional_tag_regex="$gcr_image_regex(:.+)?"
 
 gcp_info(){
     local title="$1"
