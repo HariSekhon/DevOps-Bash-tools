@@ -28,9 +28,9 @@ Lists old tags for a given GCR image > \$days old
 
 The \$days threshold defaults to (365 * 2) ie. 2 years old
 
-You can grep and pipe this to
+You can grep and pipe this output to
 
-    gloud container images delete -q --force-delete-tags
+    | xargs gcloud container images delete -q --force-delete-tags
 
 to clean out old CI image builds to save GCS storage costs on old CI images you no longer use
 
