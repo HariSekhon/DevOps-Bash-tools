@@ -69,7 +69,7 @@ if is_blank "$email"; then
     usage "email address not specified and could not determine email from git config"
 fi
 
-timestamp "Creating SNS topic to email '$email'"
+timestamp "Creating SNS topic to email '$email' in region '$region'"
 output="$(aws sns create-topic --name "$sns_topic" --region "$region")"
 
 # "arn:aws:sns:us-east-1:123456789012:AWS_Charges"
@@ -77,12 +77,12 @@ sns_topic_arn="$(jq -r '.TopicArn' <<< "$output")"
 
 echo
 
-timestamp "Subscribing email address '$email' to topic '$sns_topic'"
+timestamp "Subscribing email address '$email' to topic '$sns_topic' in region '$region'"
 aws sns subscribe --topic-arn "$sns_topic_arn" --protocol email --notification-endpoint "$email" --region "$region"
 
 echo
 
-timestamp "Creating CloudWatch Alarm for AWS charges > $threshold USD"
+timestamp "Creating CloudWatch Alarm for AWS charges > $threshold USD in region '$region'"
 # --period 21600 = 6 hours (default)
 aws cloudwatch put-metric-alarm --alarm-name "AWS Charges" \
                                 --alarm-description "Alerts on AWS charges greater than $threshold USD" \
