@@ -16,10 +16,10 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+gcp_lib_srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/utils.sh"
+. "$gcp_lib_srcdir/utils.sh"
 
 gcp_info_noninteractive_help="You should only this script non-interactively / in pipes once you have tested it locally on the command line because some services may prompt you for choices, eg. Cloud Run, which you should save to your GCloud SDK config settings first"
 
