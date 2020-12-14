@@ -56,8 +56,8 @@ fi
 
 # $gcr_image_regex is defined in lib/gcp.sh
 # shellcheck disable=SC2154
-if ! [[ "$image" =~ $gcr_image_regex ]]; then
-    usage "unrecognized GCR image name - should be in a format matching this regex: $gcr_image_regex"
+if ! [[ "$image" =~ ^$gcr_image_regex$ ]]; then
+    usage "unrecognized GCR image name - should be in a format matching this regex: ^$gcr_image_regex$"
 fi
 
 gcloud container images list-tags "$image" --format=json |
