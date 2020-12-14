@@ -33,6 +33,11 @@ You can grep and pipe this to
     gloud container images delete -q --force-delete-tags
 
 to clean out old CI image builds to save GCS storage costs on old CI images you no longer use
+
+
+See Also:
+
+    gcr_tags_timestamps.sh - lists tags and timestamps - useful for comparing with the output from this script
 "
 
 # used by usage() in lib/utils.sh
