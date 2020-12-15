@@ -43,6 +43,11 @@ git_repo_name(){
     sed 's|.*/||'
 }
 
+git_repo_name_lowercase(){
+    git_repo_name |
+    tr '[:upper:]' '[:lower:]'
+}
+
 git_root(){
     git rev-parse --show-toplevel
 }
