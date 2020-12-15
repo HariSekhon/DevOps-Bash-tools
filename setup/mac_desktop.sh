@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
+echo "Install XCode CLI tools"
+xcode-select --install
+
 run(){
     echo "Running $srcdir/$1"
     QUICK=1 "$srcdir/$1"
@@ -47,5 +50,3 @@ if [[ "$USER" =~ hari|sekhon ]]; then
 fi
 echo
 "$srcdir/shell_link.sh"
-
-xcode-select --install
