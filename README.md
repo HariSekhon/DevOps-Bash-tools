@@ -609,6 +609,7 @@ etc.
   - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
   - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of any cancelled pipelines
   - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of any failed pipelines (useful if you killed an agent and want to re-run them)
+  - `buildkite_retry_jobs_dead_agents.sh` - triggers job retries where jobs failed due to killed agents, continuing builds from that point and replacing their false negative failed status with the real final status, slightly better than rebuilding entire jobs which happen under a new build
   - `buildkite_recreate_pipeline.sh` - recreates a pipeline to wipe out all stats (see url and badge caveats in `--help`)
   - `buildkite_running_builds.sh` - lists running builds and the agent they're running on
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
