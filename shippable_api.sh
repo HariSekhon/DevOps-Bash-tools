@@ -39,9 +39,9 @@ help_usage "$@"
 url_path="${1##/}"
 shift || :
 
-if is_curl_min_version 7.55; then
-    # hide token from process list if curl is new enough to support this trick
-    curl -sSH 'Accept: application/json' -H @<(cat <<< "Authorization: apiToken $SHIPPABLE_TOKEN") "https://api.shippable.com/$url_path" "$@"
-else
-    curl -sSH 'Accept: application/json' -H "Authorization: apiToken $SHIPPABLE_TOKEN" "https://api.shippable.com/$url_path" "$@"
-fi
+export TOKEN="$SHIPPABLE_TOKEN"
+
+# non-standard auth header
+export CURL_AUTH_HEADER="Authorization: apiToken"
+
+"$srcdir/curl_auth.sh" -sS --fail "https://api.shippable.com/$url_path" "$@"
