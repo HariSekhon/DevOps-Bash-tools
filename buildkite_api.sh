@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: user | jq
 #
 #  Author: Hari Sekhon
 #  Date: 2020-04-01 18:17:59 +0100 (Wed, 01 Apr 2020)
@@ -26,25 +27,25 @@ Queries BuildKite API, auto-populating \$BUILDKITE_TOKEN from environment and AP
 
 https://buildkite.com/docs/apis/rest-api
 
-eg.
+Examples:
 
-buildkite_api.sh user | jq
+    ${0##*/} user | jq
 
-buildkite_api.sh organizations | jq
+    ${0##*/} organizations | jq
 
-buildkite_api.sh organizations/hari-sekhon/pipelines | jq
+    ${0##*/} organizations/hari-sekhon/pipelines | jq
 
-buildkite_api.sh organizations/hari-sekhon/pipelines/devops-bash-tools | jq
+    ${0##*/} organizations/hari-sekhon/pipelines/devops-bash-tools | jq
 
-buildkite_api.sh builds | jq
+    ${0##*/} builds | jq
 
-buildkite_api.sh organizations/hari-sekhon/builds | jq
+    ${0##*/} organizations/hari-sekhon/builds | jq
 
-buildkite_api.sh organizations/hari-sekhon/pipelines/devops-bash-tools/builds/<num> | jq
+    ${0##*/} organizations/hari-sekhon/pipelines/devops-bash-tools/builds/<num> | jq
 
-buildkite_api.sh organizations/hari-sekhon/agents | jq
+    ${0##*/} organizations/hari-sekhon/agents | jq
 
-buildkite_api.sh organizations/hari-sekhon/emojis | jq
+    ${0##*/} organizations/hari-sekhon/emojis | jq
 "
 
 # used by usage() in lib/utils.sh
@@ -71,9 +72,6 @@ shift || :
 url_path="${url_path#$url_base}"
 url_path="${url_path##/}"
 
-if is_curl_min_version 7.55; then
-    # hide token from process list if curl version is new enough to support this trick
-    curl -sSH 'Accept: application/json' -H @<(cat <<< "Authorization: Bearer $BUILDKITE_TOKEN") "https://api.buildkite.com/v2/$url_path" "$@"
-else
-    curl -sSH 'Accept: application/json' -H "Authorization: Bearer $BUILDKITE_TOKEN" "https://api.buildkite.com/v2/$url_path" "$@"
-fi
+export TOKEN="$BUILDKITE_TOKEN"
+
+"$srcdir/curl_auth.sh" -sS --fail "$url_base/$url_path" "$@"
