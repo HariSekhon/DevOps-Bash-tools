@@ -932,4 +932,5 @@ buildkite_browse(){
     repo="$(git_repo | tr '[:upper:]' '[:lower:]')"
     browser "https://buildkite.com/$BUILDKITE_ORGANIZATION/$repo"
 }
-alias bk=buildkite_browse
+# bk is used by buildkite cli now
+alias bkb=buildkite_browse
