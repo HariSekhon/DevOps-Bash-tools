@@ -166,7 +166,8 @@ if [ "$num_repos" != "$actual_repos" ]; then
     exit 1
 fi
 
-hosted_build_regex='travis-ci.+\.svg'
+hosted_build_regex='\[.+('
+hosted_build_regex+='travis-ci.+\.svg'
 hosted_build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
 hosted_build_regex+='|dev\.azure\.com/.+/_apis/build/status'
 hosted_build_regex+='|app\.codeship\.com/projects/.+/status'
@@ -176,6 +177,8 @@ hosted_build_regex+='|cloud\.drone\.io/api/badges/.+/status.svg'
 hosted_build_regex+='|g\.codefresh\.io/api/badges/pipeline/'
 hosted_build_regex+='|api\.shippable\.com/projects/.+/badge'
 hosted_build_regex+='|app\.wercker\.com/status/'
+hosted_build_regex+='|img\.shields\.io/.*/buildspec.yml'
+hosted_build_regex+='|img\.shields\.io/.*/cloudbuild.yaml'
 hosted_build_regex+='|img\.shields\.io/.+/pipeline'
 hosted_build_regex+='|img\.shields\.io/.+/build/'
 hosted_build_regex+='|img\.shields\.io/buildkite/'
@@ -187,6 +190,7 @@ hosted_build_regex+='|img\.shields\.io/shippable/'
 hosted_build_regex+='|img\.shields\.io/wercker/ci/'
 hosted_build_regex+='|app\.buddy\.works/.*/pipelines/pipeline/.*/badge.svg'
 hosted_build_regex+='|\.semaphoreci\.com/badges/'
+hosted_build_regex+=')'
 # to check for any badges missed, just go
 #grep -Ev "$hosted_build_regex" GIT_STATUS.md
 
