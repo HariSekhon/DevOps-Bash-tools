@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/buildkite.sh"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -49,9 +49,9 @@ if [ "$num" -lt 1 ] || [ "$num" -gt 100 ]; then
     usage "num builds must be an integer between 1 and 100"
 fi
 
-# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
-user_org="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
+user_org="$(buildkite_org)"
 
+# shellcheck disable=SC2154
 "$srcdir/buildkite_api.sh" "/organizations/$user_org/pipelines/$pipeline/builds?state=failed&per_page=$num" |
 jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |
 while read -r name number url; do
