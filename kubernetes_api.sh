@@ -58,9 +58,8 @@ shift
 # could also extract the k8s certs from ~/.kube/config (not shown in kubectl config view, would have to json parse outside), and then do
 # curl "$api_server" --cert encoded.crt --key encoded.key --cacert encoded-ca.crt
 
-if is_curl_min_version 7.55; then
-    # hide token from process list if curl is new enough to support this trick
-    curl -k -H @<(cat <<< "Authorization: Bearer $token") "$api_server$path" "$@"
-else
-    curl -k -H "Authorization: Bearer $token" "$api_server$path" "$@"
-fi
+export TOKEN="$token"
+
+# XXX: have to use -k to not verify the certificate here because often it is self-signed
+#"$srcdir/curl_auth.sh" -k "$api_server$path" "$@"
+"$srcdir/curl_auth.sh" "$api_server$path" "$@"
