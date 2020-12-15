@@ -47,6 +47,7 @@ firewall_rule_name="gke-$cluster_name-masters-to-cert-manager"
 
 export CLOUDSDK_CORE_PROJECT="$project"
 
+echo "Getting details for cluster '$cluster_name'"
 #gcloud container clusters describe "$cluster"
 master_cidr_block="$(gcloud container clusters describe "$cluster_name" --format='get(privateClusterConfig.masterIpv4CidrBlock)')"
 network="$(gcloud container clusters describe "$cluster_name" --format='value(networkConfig.network.basename())')"
@@ -69,6 +70,7 @@ gcloud compute firewall-rules list \
                                 )'
 echo
 
+echo "Getting target tags"
 target_tags="$(gcloud compute firewall-rules list --filter "name~^gke-$cluster_name" --format 'get(targetTags.list())' | sort -u)"
 
 echo "Determined target tags to be:"
@@ -79,7 +81,7 @@ echo
 if gcloud compute firewall-rules list --filter "name=$firewall_rule_name" --format 'get(name)' | grep -q .; then
     echo "GCP firewall rule '$firewall_rule_name' for cert manager already exists. If this is not working for you, check the target tags, port etc haven't changed"
 else
-    echo "Adding a GCP firewall rule called '$firewall_rule_name' to permit GKE cluster '$cluster_name' master nodes to access cert manager pods on port $port:"
+    timestamp "Adding a GCP firewall rule called '$firewall_rule_name' to permit GKE cluster '$cluster_name' master nodes to access cert manager pods on port $port:"
     gcloud compute firewall-rules create "$firewall_rule_name" \
                                            --network "$network" \
                                            --action ALLOW \
