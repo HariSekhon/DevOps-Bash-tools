@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/buildkite.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_description="
@@ -35,9 +38,9 @@ usage_args="<pipeline> [<num_builds>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-pipeline="$1"
+pipeline="${1:-$(git_repo_name_lowercase)}"
 
 num="${2:-10}"
 
