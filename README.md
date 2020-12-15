@@ -380,6 +380,7 @@ etc.
   - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
+    - `gke_cert_manager_firewall_rule.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr and network)
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
