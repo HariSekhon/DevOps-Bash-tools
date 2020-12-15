@@ -47,3 +47,5 @@ if [[ "$USER" =~ hari|sekhon ]]; then
 fi
 echo
 "$srcdir/shell_link.sh"
+
+xcode-select --install
