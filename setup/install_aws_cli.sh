@@ -112,16 +112,16 @@ else
     set +e
     brew install aws-sam-cli
 fi
-echo
-
-echo "=========================="
-echo "Awless is unmaintained now, installing only optimistically and ignoring failures..."
-echo "=========================="
-set +e
 
 if type -P awless &>/dev/null; then
     echo "Awless already installed"
 else
+    echo
+    echo "=========================="
+    echo "Awless is unmaintained now, installing only optimistically and ignoring failures..."
+    echo "=========================="
+    echo
+    set +e
     echo "Installing AWLess"
     if [ "$uname_s" = Darwin ]; then
         # this brew install fails on Linux even when brew is installed and works for SAM CLI
