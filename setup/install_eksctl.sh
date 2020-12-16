@@ -25,7 +25,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
 
-if type -P eksctl 2>/dev/null; then
+if type -P eksctl &>/dev/null; then
     echo "AWS eksctl already installed"
     exit 0
 fi
