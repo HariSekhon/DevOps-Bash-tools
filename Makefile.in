@@ -366,7 +366,7 @@ yum-packages:
 	"$(BASH_TOOLS)/yum_install_packages.sh" findutils
 
 	# if on Amazon Linux 2 install epel this way
-	if type -P amazon-linux-extras; do \
+	if type -P amazon-linux-extras; then \
 		$(SUDO) amazon-linux-extras install epel -y; \
 	fi
 	$(BASH_TOOLS)/setup/install_epel_repo.sh
