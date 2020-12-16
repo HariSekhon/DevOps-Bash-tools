@@ -365,6 +365,10 @@ yum-packages:
 	# needed for Fedora to have find and xargs to use below
 	"$(BASH_TOOLS)/yum_install_packages.sh" findutils
 
+	# if on Amazon Linux 2 install epel this way
+	if type -P amazon-linux-extras; do \
+		$(SUDO) amazon-linux-extras install epel -y; \
+	fi
 	$(BASH_TOOLS)/setup/install_epel_repo.sh
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
