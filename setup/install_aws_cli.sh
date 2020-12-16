@@ -37,6 +37,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 #    exit 0
 #fi
 
+echo
 echo "Installing AWS CLI tools"
 echo
 
