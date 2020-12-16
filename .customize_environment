@@ -24,9 +24,8 @@
 # called as root by GCP
 
 set -euxo pipefail
-srcdir="$(dirname $0)"
 
-bash_tools="$srcdir/github/bash-tools"
+bash_tools="$HOME/github/bash-tools"
 
 if ! [ -d "$bash_tools" ]; then
     parent_dir="${bash_tools%/*}"
