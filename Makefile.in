@@ -363,7 +363,7 @@ apt-packages-python:
 .PHONY: yum-packages
 yum-packages:
 	# needed for Fedora to have find and xargs to use below
-	yum install -y findutils
+	"$(BASH_TOOLS)/yum_install_packages.sh" findutils
 
 	$(BASH_TOOLS)/setup/install_epel_repo.sh
 
