@@ -156,6 +156,7 @@ Done
 Installed locations:
 
 $(type -P aws)
+$(type -P ecs-cli)
 $(type -P eksctl)
 $(type -P sam)
 $(type -P awless)
