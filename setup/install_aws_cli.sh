@@ -85,9 +85,6 @@ if is_CI && ! type -P brew && ! is_curl_min_version 7.41; then
     echo "Skipping SAM CLI install due to curl version < 7.41 - HomeBrew won't install, which AWS SAM CLI depends on, so skipping to avoid breaking older CI builds..."
     exit 0
 fi
-# installs on Linux too as it is the AWS recommended method to install SAM CLI
-"$srcdir/install_homebrew.sh"
-echo
 
 # root installs to first one, user installs to the latter
 for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
@@ -99,6 +96,10 @@ done
 if type -P sam &>/dev/null; then
     echo "AWS SAM CLI already installed"
 else
+    # installs on Linux too as it is the AWS recommended method to install SAM CLI
+    "$srcdir/install_homebrew.sh"
+    echo
+
     echo "Installing AWS SAM CLI"
     # AWS installs SAM CLI the same way on Linux + Mac
     brew tap aws/tap
