@@ -37,6 +37,9 @@ mkdir /tmp/aws_customize_environment.lock || return
 
 {
 
+    date
+    echo
+
     bash ~/.aws_customize_environment &&
 
     sudo UMASK=0044 touch "$completion_semaphore" &
