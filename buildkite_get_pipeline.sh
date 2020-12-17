@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: devops-bash-tools
 #
 #  Author: Hari Sekhon
 #  Date: 2020-04-04 14:33:52 +0100 (Sat, 04 Apr 2020)
@@ -41,7 +42,6 @@ usage_args="<pipeline> [<curl_options>]"
 # remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
-check_env_defined BUILDKITE_TOKEN
 check_env_defined BUILDKITE_ORGANIZATION
 
 help_usage "$@"
