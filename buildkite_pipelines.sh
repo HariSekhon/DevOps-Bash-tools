@@ -33,12 +33,6 @@ eg. trigger a build of each pipeline:
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
-# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
-BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
-
-check_env_defined BUILDKITE_TOKEN
-check_env_defined BUILDKITE_ORGANIZATION
-
 help_usage "$@"
 
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines" | jq -r '.[].slug'
+"$srcdir/buildkite_api.sh" "/organizations/{organization}/pipelines" | jq -r '.[].slug'

@@ -35,11 +35,11 @@ Uses buildkite_get_pipeline.sh and buildkite_create_pipeline.sh adjacent scripts
 
 Pipeline name is case sensitive and can be found via:
 
-buildkite_api.sh organizations/\$BUILDKITE_ORGANIZATION/pipelines | jq -r '.[].slug'
+buildkite_api.sh /organizations/{organization}/pipelines | jq -r '.[].slug'
 
 Organization name is also case sensitive and can be found via:
 
-buildkite_api.sh organizations | jq -r '.[].slug'
+buildkite_api.sh /organizations | jq -r '.[].slug'
 
 "
 
@@ -76,7 +76,7 @@ echo "saving pipeline '$pipeline' to local file '$config_file'"
 check_json_result "$config_file"
 
 echo "deleting pipeline '$pipeline'"
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline" -X DELETE "$@" | tee "$tmp"
+"$srcdir/buildkite_api.sh" "/organizations/{organization}/pipelines/$pipeline" -X DELETE "$@" | tee "$tmp"
 check_json_result "$tmp"
 
 echo "recreating pipeline '$pipeline'"

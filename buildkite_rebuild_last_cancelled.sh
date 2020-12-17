@@ -33,16 +33,12 @@ May fail with Forbidden if your trial account has expired (renew or contact supp
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
-BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
-
-check_env_defined BUILDKITE_ORGANIZATION
-
 help_usage "$@"
 
-"$srcdir/buildkite_api.sh" "organizations/$BUILDKITE_ORGANIZATION/pipelines" "$@" |
+"$srcdir/buildkite_api.sh" "organizations/{organization}/pipelines" "$@" |
 jq -r '.[].slug' |
 while read -r pipeline; do
-    "$srcdir/buildkite_api.sh" "organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline/builds?state=canceled" "$@" |
+    "$srcdir/buildkite_api.sh" "organizations/{organization}/pipelines/$pipeline/builds?state=canceled" "$@" |
     jq -r 'limit(1; .[] | [.pipeline.slug, .number, .url] | @tsv)' |
     while read -r name number url; do
         url="${url#https://api.buildkite.com/v2/}"

@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/buildkite.sh"
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/git.sh"
@@ -52,10 +52,8 @@ if [ "$num" -lt 1 ] || [ "$num" -gt 100 ]; then
     usage "num builds must be an integer between 1 and 100"
 fi
 
-user_org="$(buildkite_org)"
-
 # shellcheck disable=SC2154
-"$srcdir/buildkite_api.sh" "/organizations/$user_org/pipelines/$pipeline/builds?state=failed&per_page=$num" |
+"$srcdir/buildkite_api.sh" "/organizations/{organization}/pipelines/$pipeline/builds?state=failed&per_page=$num" |
 jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |
 while read -r name number url; do
     echo -n "Rebuilding $name build number $number:  "

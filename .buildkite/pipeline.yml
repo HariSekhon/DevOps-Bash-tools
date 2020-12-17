@@ -23,15 +23,43 @@ steps:
   - command: setup/ci_bootstrap.sh
     label: ci bootstrap
     timeout: 30  # brew can take 10 mins just to do a brew update
+    branches: master
+    retry:
+      automatic:
+        - exit_status: -1  # Agent was lost
+          limit: 2
+        - exit_status: 255 # Forced agent shutdown
+          limit: 2
   - wait
   - command: make init
     label: init
     timeout: 2
+    branches: master
+    retry:
+      automatic:
+        - exit_status: -1  # Agent was lost
+          limit: 2
+        - exit_status: 255 # Forced agent shutdown
+          limit: 2
   - wait
   - command: make ci
     label: build
     timeout: 60
+    branches: master
+    retry:
+      automatic:
+        - exit_status: -1  # Agent was lost
+          limit: 2
+        - exit_status: 255 # Forced agent shutdown
+          limit: 2
   - wait
   - command: make test
     label: test
     timeout: 120
+    branches: master
+    retry:
+      automatic:
+        - exit_status: -1  # Agent was lost
+          limit: 2
+        - exit_status: 255 # Forced agent shutdown
+          limit: 2

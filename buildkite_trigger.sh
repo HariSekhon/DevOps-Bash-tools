@@ -36,26 +36,20 @@ Otherwise tries to infer from the current Git repository remote origin URL
 # shellcheck disable=SC2034
 usage_args="<pipeline> [<curl_options>]"
 
-# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
-BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
-
-check_env_defined BUILDKITE_TOKEN
-check_env_defined BUILDKITE_ORGANIZATION
-
 help_usage "$@"
 
 if [ $# -gt 0 ]; then
     pipeline="$1"
     shift
 else
-    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-$(git_repo_name)}}"
+    pipeline="${BUILDKITE_PIPELINE:-${PIPELINE:-$(git_repo_name_lowercase)}}"
 fi
 
 if [ -z "$pipeline" ]; then
     usage "\$BUILDKITE_PIPELINE not defined and no argument given"
 fi
 
-"$srcdir/buildkite_api.sh" "/organizations/$BUILDKITE_ORGANIZATION/pipelines/$pipeline/builds" \
+"$srcdir/buildkite_api.sh" "/organizations/{organization}/pipelines/$pipeline/builds" \
     -X "POST" \
     -F "commit=${BUILDKITE_COMMIT:-HEAD}" \
     -F "branch=${BUILDKITE_BRANCH:-master}" \

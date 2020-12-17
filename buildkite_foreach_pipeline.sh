@@ -29,10 +29,8 @@ All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
 
-{username}, {user}      => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
-{organization}, {org}   => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
-{name}                  => the pipeline name without the user/organization prefix
-{pipeline}              => the pipeline name with the user/organization prefix
+{organization}          => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
+{pipeline}              => the pipeline name
 
 eg.
     ${0##*/} echo user={user} name={name} pipeline={pipeline}
@@ -47,20 +45,13 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
-prefix="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
-
-while read -r name; do
-    pipeline="$prefix/$name"
-    echo "# ============================================================================ #" >&2
-    echo "# $pipeline" >&2
-    echo "# ============================================================================ #" >&2
+while read -r pipeline; do
+    if [ -n "${NO_HEADING:-}" ]; then
+        echo "# ============================================================================ #" >&2
+        echo "# $pipeline" >&2
+        echo "# ============================================================================ #" >&2
+    fi
     cmd="$cmd_template"
-    cmd="${cmd//\{username\}/$prefix}"
-    cmd="${cmd//\{user\}/$prefix}"
-    cmd="${cmd//\{organization\}/$prefix}"
-    cmd="${cmd//\{org\}/$prefix}"
     cmd="${cmd//\{pipeline\}/$pipeline}"
-    cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
 done < <("$srcdir/buildkite_pipelines.sh")

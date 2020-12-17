@@ -22,7 +22,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034
 usage_description="
-Creates a BuildKite pipeline from a JSON configuration provided either as an argument or on stdin
+Updates a BuildKite pipeline from a JSON configuration provided either as an argument or on stdin
 
 This JSON file can be created from a configuration downloaded by buildkite_get_pipeline.sh
 
@@ -32,10 +32,6 @@ Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="pipeline.json [<curl_options>]"
-
-# will attempt to parse from pipeline JSON if not given
-# remember to set this eg. BUILDKITE_ORGANIZATION="hari-sekhon"
-BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
 help_usage "$@"
 
@@ -54,7 +50,6 @@ if [ -z "$BUILDKITE_ORGANIZATION" ]; then
     BUILDKITE_ORGANIZATION="$(jq -r '.url' <<< "$pipeline_config" | sed 's|https://api.buildkite.com/v.*/organizations/||; s|/pipelines/.*||')"
 fi
 
-check_env_defined BUILDKITE_TOKEN
 check_env_defined BUILDKITE_ORGANIZATION
 
 if [ -z "$pipeline" ]; then

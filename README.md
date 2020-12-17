@@ -606,6 +606,8 @@ etc.
   - `buildkite_pipelines.sh` - lists Buildkite pipelines
   - `buildkite_create_pipeline.sh` - create a Buildkite pipeline from a JSON configuration (like from `buildkite_get_pipeline.sh` or `buildkite_save_pipelines.sh`)
   - `buildkite_get_pipeline.sh` - gets details for a specific Buildkite pipeline in JSON format
+  - `buildkite_pipeline_skip_settings.sh` - lists the skip intermediate build settings for one or more given BuildKite pipelines
+  - `buildkite_pipeline_set_skip_settings.sh` - configures given or all BuildKite pipelines to skip intermediate builds and cancel running builds in favour of latest build
   - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
   - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of any cancelled pipelines
   - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of any failed pipelines (useful if you killed an agent and want to re-run them)
@@ -613,6 +615,9 @@ etc.
   - `buildkite_recreate_pipeline.sh` - recreates a pipeline to wipe out all stats (see url and badge caveats in `--help`)
   - `buildkite_running_builds.sh` - lists running builds and the agent they're running on
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
+  - `buildkite_set_pipeline_description.sh` - sets the description of one or more pipelines using the BuildKite API
+  - `buildkite_set_pipeline_description_from_github.sh` - sets a Buildkite pipeline description to match its source GitHub repo
+  - `buildkite_sync_pipeline_descriptions_from_github.sh` - for all BuildKite pipelines sets each description to match its source GitHub repo
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication

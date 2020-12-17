@@ -22,7 +22,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/buildkite.sh"
+. "$srcdir/lib/utils.sh"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -31,7 +31,7 @@ Triggers job retries jobs within builds where Failed status was due to a dead or
 
 This is slightly better than retrying the failed builds because it restarts those builds from point of agent failure and replaces the Failed status with the real final status
 
-Really BuildKite should do auto-retries in this scenario are raised here, but this is quick workaround using the Build and Job API endpoints
+Really BuildKite should auto-retry in this scenario, which can be configured but is not the default, and this script is a quick workaround to retry failed jobs
 
 https://forum.buildkite.community/t/reschedule-builds-on-other-agents-rather-than-fail-builds-when-agents-time-out-or-are-killed-machine-shut-down-or-put-to-sleep/1388
 
@@ -43,14 +43,12 @@ usage_args="[<pipeline>]"
 
 help_usage "$@"
 
-user_org="$(buildkite_org)"
-
 pipeline="${1:-}"
 
 url_path="/builds"
 
 if [ -n "$pipeline" ]; then
-    url_path="/$user_org/pipelines/$pipeline/builds"
+    url_path="/{organization}/pipelines/$pipeline/builds"
 fi
 
 "$srcdir/buildkite_api.sh" "$url_path" |
@@ -61,5 +59,5 @@ jq -r '.[] |
        @tsv' |
 while read -r build_number job_id pipeline_slug; do
     timestamp "retrying '$pipeline_slug' build '$build_number' job '$job_id'"
-    "$srcdir/buildkite_api.sh" "/organizations/$user_org/pipelines/$pipeline_slug/builds/$build_number/jobs/$job_id/retry" -X PUT >/dev/null
+    "$srcdir/buildkite_api.sh" "/organizations/{organization}/pipelines/$pipeline_slug/builds/$build_number/jobs/$job_id/retry" -X PUT >/dev/null
 done
