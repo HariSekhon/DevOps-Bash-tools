@@ -613,6 +613,7 @@ etc.
   - `buildkite_recreate_pipeline.sh` - recreates a pipeline to wipe out all stats (see url and badge caveats in `--help`)
   - `buildkite_running_builds.sh` - lists running builds and the agent they're running on
   - `buildkite_save_pipelines.sh` - saves all BuildKite pipelines in your `$BUILDKITE_ORGANIZATION` to local JSON files in `$PWD/.buildkite-pipelines/`
+  - `buildkite_set_pipeline_description.sh` - sets the description of one or more pipelines using the BuildKite API
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
