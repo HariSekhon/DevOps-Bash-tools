@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2015
+# shellcheck disable=SC2015,SC1090
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -20,16 +20,23 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-# shellcheck source=.bash.d/functions.sh
 . "$srcdir/.bash.d/functions.sh"
 
-# shellcheck source=.bash.d/git.sh
 . "$srcdir/.bash.d/git.sh"
 
 section "Git Author Name + Email Checks"
+
+# XXX: some 3rd party services have changed their names - exclude them from tripping this check here
+ignored_names="
+snyk bot
+"
+
+ignored_emails="
+@pyup.io$
+@snyk.io$
+"
 
 start_time="$(start_timer)"
 
@@ -75,13 +82,35 @@ git_log_names_emails(){
 emails="$(git_log_emails)"
 names_emails="$(git_log_names_emails)"
 
+filter_ignored_names(){
+    local regex
+    for name in $ignored_names; do
+        regex+="|$name"
+    done
+    regex="${regex#|}"
+    grep -Ev "$ignored_names" || :
+}
+
+filter_ignored_emails(){
+    local regex
+    for email in $ignored_emails; do
+        regex+="|$email"
+    done
+    regex="${regex#|}"
+    grep -Ev "$ignored_emails" || :
+}
+
 check_multiple_names_per_email(){
     local err=0
     emails="${emails:-$(git_log_emails)}"
     names_emails="${names_emails:-(git_log_names_emails)}"
     for email in $emails; do
         #names_for_same_email="$(grep "[[:space:]]$email$" <<< "$names_emails" | perl -p -e 's/\s\S*?$//')"
-        names_for_same_email="$(grep -Ei "[[:space:]]$email$" <<< "$names_emails" | grep -v -e '@pyup.io$' -e '@snyk.io$' | normalize_spaces | remove_last_column | sort -u || :)"
+        names_for_same_email="$(grep -Ei "[[:space:]]$email$" <<< "$names_emails" |
+                                filter_ignored_emails |
+                                normalize_spaces |
+                                remove_last_column |
+                                sort -u || :)"
         # don't quote otherwise have to trim wc output for comparison
         # shellcheck disable=SC2046
         if [ $(wc -l <<< "$names_for_same_email") -eq 1 ]; then
@@ -96,7 +125,9 @@ check_multiple_names_per_email(){
 
 check_multiple_emails_per_name(){
     local err=0
-    names="$(git_log_names | perl -p -e 's/[\s.-]+/[[:space:].-]*/' | sort -u)"
+    names="$(git_log_names | filter_ignored_names)"
+    # generalize the spaces/dots/dashes to an ERE format regex in case the same name has changed slightly
+    names="$(perl -p -e 's/[\s.-]+/[[:space:].-]*/' <<< "$names" | sort -u)"
     names_emails="${names_emails:-(git_log_names_emails)}"
     while read -r name_regex; do
         # $email_regex defined in lib
