@@ -21,6 +21,8 @@
 
 # see log at /var/log/customize_environment
 
+# called as root using sudo by .bash.d/aws-cloudshell.sh
+
 set -euxo pipefail
 
 bash_tools="$HOME/github/bash-tools"
