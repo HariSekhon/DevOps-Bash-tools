@@ -56,6 +56,8 @@ define MAKEFILE_USAGE
     make azure                  installs Azure CLI
     make gcp                    installs Google Cloud SDK
 
+    make aws-shell              sets up AWS Cloud Shell: installs core packages and links configs
+                                (maintains itself across future Cloud Shells via .aws_customize_environment hook)
     make gcp-shell              sets up GCP Cloud Shell: installs core packages and links configs
                                 (maintains itself across future Cloud Shells via .customize_environment hook)
     make azure-shell            sets up Azure Cloud Shell (limited compared to gcp-shell, doesn't install OS packages since there is no sudo)
@@ -195,6 +197,11 @@ npm-desktop: npm
 .PHONY: aws
 aws: system-packages python-version
 	@setup/install_aws_cli.sh
+
+.PHONY: aws-shell
+aws-shell:
+	@if [ "${AWS_EXECUTION_ENV:-}" != "CloudShell" ]; then echo "Not running inside AWS Cloud Shell"; exit 1; fi
+	@$(MAKE) system-packages aws link
 
 .PHONY: azure
 azure: system-packages
