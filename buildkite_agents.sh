@@ -44,11 +44,7 @@ the agent name to the same as the hostname for intuitive results and auto-add so
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
-BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
-
-check_env_defined BUILDKITE_ORGANIZATION
-
 help_usage "$@"
 
-"$srcdir/buildkite_api.sh" "organizations/$BUILDKITE_ORGANIZATION/agents" "$@" |
+"$srcdir/buildkite_api.sh" "organizations/{organization}/agents" "$@" |
 jq -r '.[] | [.name, .hostname, .ip_address, .created_at, .user_agent, (.meta_data | join(",")) ] | @tsv'
