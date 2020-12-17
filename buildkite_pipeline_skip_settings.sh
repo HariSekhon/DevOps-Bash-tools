@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: devops-bash-tools
 #
 #  Author: Hari Sekhon
 #  Date: 2020-12-17 15:07:11 +0000 (Thu, 17 Dec 2020)
@@ -28,32 +27,44 @@ Lists the cancel settings for a given BuildKite pipeline
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<pipeline>"
+usage_args="[<pipeline>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
-
 pipeline="${1:-}"
 
-echo "Pipeline '$pipeline':"
-"$srcdir/buildkite_get_pipeline.sh" "$pipeline" |
-jq -r '[ .skip_queued_branch_builds,
-         if .skip_queued_branch_builds_filter == "" then
-             "all"
-         else
-             .skip_queued_branch_builds_filter
-         end,
-         .cancel_running_branch_builds,
-         if .cancel_running_branch_builds_filter == "" then
-             "all"
-         else
-             .cancel_running_branch_builds_filter
-         end
-       ] | @tsv' |
-while read -r skip_queued skip_branches cancel_running cancel_filter; do
-    echo "Skip Intermediate Builds: $skip_queued"
-    echo "Skip Intermediate Branches: $skip_branches"
-    echo "Cancel Intermediate Builds: $cancel_running"
-    echo "Cancel Intermediate Branches: $cancel_filter"
-done
+get_pipeline_settings(){
+    local pipeline="$1"
+    echo "Pipeline '$pipeline':"
+    "$srcdir/buildkite_get_pipeline.sh" "$pipeline" |
+    jq -r '[ .skip_queued_branch_builds,
+             if .skip_queued_branch_builds_filter == "" then
+                 "all"
+             else
+                 .skip_queued_branch_builds_filter
+             end,
+             .cancel_running_branch_builds,
+             if .cancel_running_branch_builds_filter == "" then
+                 "all"
+             else
+                 .cancel_running_branch_builds_filter
+             end
+           ] | @tsv' |
+    while read -r skip_queued skip_branches cancel_running cancel_filter; do
+        echo "Skip Intermediate Builds: $skip_queued"
+        echo "Skip Intermediate Branches: $skip_branches"
+        echo "Cancel Intermediate Builds: $cancel_running"
+        echo "Cancel Intermediate Branches: $cancel_filter"
+    done
+    echo
+}
+
+if [ $# -gt 0 ]; then
+    for pipeline in "$@"; do
+        get_pipeline_settings "$pipeline"
+    done
+else
+    for pipeline in $("$srcdir/buildkite_pipelines.sh"); do
+        get_pipeline_settings "$pipeline"
+    done
+fi
