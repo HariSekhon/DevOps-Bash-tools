@@ -44,7 +44,7 @@ if [ -d "$lockdir" ] && ! [ -f "$completion_semaphore" ]; then
 fi
 
 # used as a mutex lock
-mkdir "$lockdir" || return
+mkdir "$lockdir" 2>/dev/null || return
 
 sudo bash <<EOF
     {
