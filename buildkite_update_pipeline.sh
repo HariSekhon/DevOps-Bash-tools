@@ -22,7 +22,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034
 usage_description="
-Creates a BuildKite pipeline from a JSON configuration provided either as an argument or on stdin
+Updates a BuildKite pipeline from a JSON configuration provided either as an argument or on stdin
 
 This JSON file can be created from a configuration downloaded by buildkite_get_pipeline.sh
 
