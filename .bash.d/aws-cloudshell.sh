@@ -22,6 +22,8 @@ fi
 
 customize_script=~/.aws_customize_environment
 
+lockdir=/tmp/aws_customize_environment.lock
+
 completion_semaphore="/.aws_customize_environment_completed"
 
 if ! [ -f "$customize_script" ]; then
@@ -33,15 +35,19 @@ if [ -f "$completion_semaphore" ]; then
 fi
 
 # used as a mutex lock
-mkdir /tmp/aws_customize_environment.lock || return
+mkdir "$lockdir" || return
 
-{
+sudo bash <<EOF
+    {
 
-    date
-    echo
+        date
+        echo
 
-    bash ~/.aws_customize_environment &&
+        bash "$customize_script" &&
 
-    sudo UMASK=0044 touch "$completion_semaphore" &
+        rmdir "$lockdir" &&
 
-} > /var/log/customize_environment 2>&1
+        sudo UMASK=0044 touch "$completion_semaphore" &
+
+    } > /var/log/customize_environment 2>&1
+EOF
