@@ -34,6 +34,15 @@ if [ -f "$completion_semaphore" ]; then
     return
 fi
 
+# XXX: if the lockdir is more than 2 hours old and the completion semaphore wasn't found, remove the lockdir to try again
+if [ -d "$lockdir" ] && ! [ -f "$completion_semaphore" ]; then
+    lockdir_epoch="$(stat -c %Y "$lockdir")"
+    current_epoch="$(date +%s)"
+    if [ $((current_epoch - lockdir_epoch)) -gt 7200 ]; then
+        rmdir "$lockdir"
+    fi
+fi
+
 # used as a mutex lock
 mkdir "$lockdir" || return
 
