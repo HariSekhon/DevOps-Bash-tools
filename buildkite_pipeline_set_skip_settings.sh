@@ -41,7 +41,7 @@ set_pipeline_settings(){
     "$srcdir/buildkite_pipeline_skip_settings.sh" "$pipeline"
 }
 
-if [ $# -gt 1 ]; then
+if [ $# -gt 0 ]; then
     for pipeline in "$@"; do
         set_pipeline_settings "$pipeline"
     done
