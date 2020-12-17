@@ -606,6 +606,7 @@ etc.
   - `buildkite_pipelines.sh` - lists Buildkite pipelines
   - `buildkite_create_pipeline.sh` - create a Buildkite pipeline from a JSON configuration (like from `buildkite_get_pipeline.sh` or `buildkite_save_pipelines.sh`)
   - `buildkite_get_pipeline.sh` - gets details for a specific Buildkite pipeline in JSON format
+  - `buildkite_pipeline_skip_settings.sh` - lists the skip intermediate build settings for one or more given BuildKite pipelines
   - `buildkite_pipeline_set_skip_settings.sh` - configures given or all BuildKite pipelines to skip intermediate builds and cancel running builds in favour of latest build
   - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
   - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of any cancelled pipelines
