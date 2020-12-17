@@ -39,7 +39,6 @@ set_pipeline_settings(){
     "$srcdir/buildkite_api.sh" "/organizations/{organization}/pipelines/$pipeline" -X PATCH -d '{ "skip_queued_branch_builds": true, "cancel_running_branch_builds": true }' >/dev/null
     echo
     "$srcdir/buildkite_pipeline_skip_settings.sh" "$pipeline"
-    echo
 }
 
 if [ $# -gt 1 ]; then
