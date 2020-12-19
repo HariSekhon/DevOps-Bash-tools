@@ -31,6 +31,8 @@ Jenkinsfile
 azure-pipelines.yml
 bitbucket-pipelines.yml
 buddy.yml
+buildspec.yml
+codebuild.yml
 codefresh.yml
 shippable.yml
 wercker.yml
