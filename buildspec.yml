@@ -57,8 +57,5 @@ phases:
       - echo Build started on `date`
       - make
       - echo Build completed on `date`
-  post_build:
-    commands:
-      - echo Running Tests on `date`
       - make test
-      - echo Tests Completed on `date`
+      - echo Tests completed on `date`
