@@ -1,0 +1,64 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-12-19 15:32:28 +0000 (Sat, 19 Dec 2020)
+#
+#  https://github.com/HariSekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                           A W S   C o d e B u i l d
+# ============================================================================ #
+
+# References:
+#
+#     https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+
+
+version: 0.2
+
+# only on Linux, the user to run as - global setting, alternatively set inside a phase section below for localized user
+#run-as: linux-username
+
+env:
+  shell: bash
+  # don't store sensitive stuff like AWS secret keys in variables, use parameter-store or secrets-manager
+  # any environment variables replace existing environment variables, ie. beware if setting PATH that it'll replace the existing PATH with a non-interpolated literal
+  # project env vars take precedence over these, with start build vars taking highest precedence
+  #variables:
+  #  DEBUG: "1"
+  #exported-variables:
+  #  - DEBUG
+
+phases:
+  # install prerequisites / languages / frameworks / packages to allow build to work
+  install:
+    #commands:
+    #  - setup/ci_bootstrap.sh
+    # languages to install
+    runtime-versions:
+      #java: openjdk11
+      # AWS LTS release of OpenJDK 11
+      java: corretto11
+      golang: 1.14
+      python: 3.8
+      ruby: 2.7
+  # eg. sign in to Amazon ECR or install package dependencies
+  pre_build:
+    commands:
+      - setup/ci_bootstrap.sh
+  build:
+    commands:
+      - echo Build started on `date`
+      - make
+      - echo Build completed on `date`
+  post_build:
+    commands:
+      - echo Running Tests on `date`
+      - make test
+      - echo Tests Completed on `date`
