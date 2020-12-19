@@ -86,7 +86,7 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 [![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/devops-bash-tools?logo=gitlab&label=GitLab%20CI)](https://gitlab.com/HariSekhon/DevOps-Bash-tools/pipelines)
 [![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-bash-tools/master?logo=bitbucket&label=BitBucket%20CI)](https://bitbucket.org/harisekhon/devops-bash-tools/addon/pipelines/home#!/)
 [![AWS CodeBuild](https://img.shields.io/badge/AWS%20CodeBuild-ready-blue?logo=amazon%20aws)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/buildspec.yml)
-[![GCP Cloud Build](https://img.shields.io/badge/GCP%20Cloud%20Build-ready-blue?logo=google%20cloud)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/cloudbuild.yml)
+[![GCP Cloud Build](https://img.shields.io/badge/GCP%20Cloud%20Build-ready-blue?logo=google%20cloud)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/cloudbuild.yaml)
 
 [![Repo on Azure DevOps](https://img.shields.io/badge/repo-Azure%20DevOps-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub/_git/DevOps-Bash-tools)
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-2088FF?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools)
@@ -378,7 +378,7 @@ etc.
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
     - `gcr_tags_old.sh` - lists tags older than N days for a given GCR docker image
     - `gcr_delete_old_tags.sh` - deletes tags older than N days for a given GCR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
-    - see also [cloudbuild.yml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
+    - see also [cloudbuild.yaml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
   - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
