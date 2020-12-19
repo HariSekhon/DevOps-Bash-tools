@@ -87,18 +87,25 @@ if is_CI && ! type -P brew && ! is_curl_min_version 7.41; then
     exit 0
 fi
 
-# root installs to first one, user installs to the latter
-for x in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
-    if [ -d "$x" ]; then
-        export PATH="$PATH:$x"
-    fi
-done
+# when installing homebrew this doesn't detect the missing directory so doesn't add it to path, and after homebrew this needs to be called again
+load_homebrew_path(){
+    local directory
+    # root installs to first one, user installs to the latter
+    for directory in /home/linuxbrew/.linuxbrew/bin ~/.linuxbrew/bin; do
+        if [ -d "$directory" ]; then
+            export PATH="$PATH:$directory"
+        fi
+    done
+}
+
+load_homebrew_path
 
 if type -P sam &>/dev/null; then
     echo "AWS SAM CLI already installed"
 else
     # installs on Linux too as it is the AWS recommended method to install SAM CLI
     "$srcdir/install_homebrew.sh"
+    load_homebrew_path
     echo
 
     echo "Installing AWS SAM CLI"
