@@ -15,10 +15,10 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/utils.sh"
+. "$libdir/utils.sh"
 
 # used in client scripts
 # shellcheck disable=SC2034
