@@ -19,6 +19,11 @@
 #
 #     https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
 
+# Operating System should be set to Ubuntu, not Amazon Linux 2
+# - this is both recommended since programming language runtimes are now included in standard image of ubuntu, but also to avoid this error:
+#
+#     /usr/bin/amazon-linux-extras
+#     /root/.pyenv/versions/3.8.3/bin/python: No module named amazon_linux_extras
 
 version: 0.2
 
