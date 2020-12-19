@@ -38,6 +38,12 @@ ignored_emails="
 @snyk.io$
 "
 
+if ! isGit .; then
+    echo "Running from a non-git directory '$PWD' - skipping author + email checks as git log is not available"
+    echo
+    exit 0
+fi
+
 start_time="$(start_timer)"
 
 #author_name="${GIT_AUTHOR_NAME:-${USER:-`whoami`}}"
