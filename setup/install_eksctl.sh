@@ -45,7 +45,7 @@ if [ "$uname_s" = Darwin ]; then
     brew link --overwrite eksctl
 else
     echo "downloading eksctl binary"
-    curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+    curl -sSL --fail "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
     echo "moving eksctl to $HOME/bin"
     mv /tmp/eksctl ~/bin
 fi
