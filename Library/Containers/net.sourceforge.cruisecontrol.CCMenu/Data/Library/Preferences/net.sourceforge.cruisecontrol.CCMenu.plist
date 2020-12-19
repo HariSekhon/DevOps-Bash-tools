@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>HideSuccessfulBuilds</key>
+	<false/>
 	<key>NSStatusItem Preferred Position Item-0</key>
 	<real>458.5</real>
 	<key>PlaySound Broken</key>
@@ -34,14 +36,6 @@
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/lib-java/cc.xml?branch=master</string>
 		</dict>
-        <!--
-		<dict>
-			<key>projectName</key>
-			<string>HariSekhon/spark-apps</string>
-			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/spark-apps/cc.xml?branch=master</string>
-		</dict>
-        -->
 		<dict>
 			<key>projectName</key>
 			<string>HariSekhon/Nagios-Plugins</string>
@@ -56,7 +50,7 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-            <string>HariSekhon/Kubernetes-templates</string>
+			<string>HariSekhon/Kubernetes-templates</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/Kubernetes-templates/cc.xml?branch=master</string>
 		</dict>
@@ -68,13 +62,13 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-            <string>HariSekhon/SQL-keywords</string>
+			<string>HariSekhon/SQL-keywords</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/SQL-keywords/cc.xml?branch=master</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
-            <string>HariSekhon/SQL-scripts</string>
+			<string>HariSekhon/SQL-scripts</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/SQL-scripts/cc.xml?branch=master</string>
 		</dict>
@@ -86,7 +80,7 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-            <string>HariSekhon/Templates</string>
+			<string>HariSekhon/Templates</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/Templates/cc.xml?branch=master</string>
 		</dict>
@@ -94,13 +88,13 @@
 			<key>projectName</key>
 			<string>HariSekhon/Spotify-tools</string>
 			<key>serverUrl</key>
-            <string>https://api.travis-ci.org/repos/HariSekhon/Spotify-tools/cc.xml?branch=master</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Spotify-tools/cc.xml?branch=master</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
 			<string>HariSekhon/Spotify-Playlists</string>
 			<key>serverUrl</key>
-            <string>https://api.travis-ci.org/repos/HariSekhon/Spotify-Playlists/cc.xml?branch=master</string>
+			<string>https://api.travis-ci.org/repos/HariSekhon/Spotify-Playlists/cc.xml?branch=master</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
@@ -154,5 +148,9 @@
 	<string>Sosumi</string>
 	<key>Sound Successful</key>
 	<string>Sosumi</string>
+	<key>UseColorInMenuBar</key>
+	<true/>
+	<key>UseSymbolsForAllStatesInMenuBar</key>
+	<true/>
 </dict>
 </plist>
