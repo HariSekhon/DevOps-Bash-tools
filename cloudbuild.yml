@@ -1,0 +1,41 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-12-19 16:27:26 +0000 (Sat, 19 Dec 2020)
+#
+#  https://github.com/HariSekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                         G C P   C l o u d   B u i l d
+# ============================================================================ #
+
+# References:
+#
+#     https://cloud.google.com/cloud-build/docs/build-config
+#
+#     https://cloud.google.com/cloud-build/docs/build-debug-locally
+
+
+# gcloud builds submit --config cloudbuild.yaml .
+#
+# cloud-build-local --config cloudbuild.yml --dryrun=false .
+
+# tars $PWD to bucket called ${PROJECT_ID}_cloudbuild
+
+timeout: 3600s
+
+steps:
+  - name: ubuntu:18.04
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        setup/ci_bootstrap.sh &&
+        make build test
+    timeout: 3600s
