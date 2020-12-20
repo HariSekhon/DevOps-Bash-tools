@@ -32,7 +32,7 @@ azure-pipelines.yml
 bitbucket-pipelines.yml
 buddy.yml
 buildspec.yml
-codebuild.yaml
+cloudbuild.yaml
 codefresh.yml
 shippable.yml
 wercker.yml
