@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-17-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2590-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1153-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-454-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2616-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1162-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-456-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -99,7 +99,7 @@ Perl Utility Library for my other repos
 
 Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernetes-templates)
 
-Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus Kustomize & patches...
+Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus patches, Kustomize, Cert Manager with ACME Let's Encrypt...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Kubernetes-templates.svg)](https://starchart.cc/HariSekhon/Kubernetes-templates)
 
@@ -126,7 +126,7 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 
 Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
 
-Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
+Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, CodeBuild, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Templates.svg)](https://starchart.cc/HariSekhon/Templates)
 
@@ -153,7 +153,7 @@ SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL system
 
 Link:  [HariSekhon/TeamCity-CI](https://github.com/HariSekhon/TeamCity-CI)
 
-TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity builds, API scripts & configs for all major CI systems: Azure DevOps, GitHub Actions, GitLab CI, BitBucket CI, Travis CI, Circle CI, AppVeyor, BuildKite, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker...
+TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity builds, API scripts & configs for most major CI systems: Azure DevOps, GitHub Actions, GitLab CI, BitBucket CI, Travis CI, Circle CI, AWS CodeBuild, GCP Cloud Build, AppVeyor, BuildKite, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/TeamCity-CI.svg)](https://starchart.cc/HariSekhon/TeamCity-CI)
 
