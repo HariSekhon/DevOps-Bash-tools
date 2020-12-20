@@ -28,7 +28,7 @@
 
 # tars $PWD to bucket called ${PROJECT_ID}_cloudbuild
 
-timeout: 3600s
+timeout: 3660s
 
 steps:
   - name: ubuntu:18.04
