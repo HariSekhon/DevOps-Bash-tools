@@ -22,7 +22,6 @@ curl
 #direnv
 git
 golang
-golang-race-detector-runtime
 iputils-ping
 jq
 libperl-dev    # needed for PAR:Packer
