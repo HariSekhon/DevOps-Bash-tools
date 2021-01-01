@@ -32,10 +32,20 @@ echo
 # uniq -d will cause silent pipe failure without dups otherwise
 set +eo pipefail
 duplicates="$(
+    {
+    # exact README lines
     "$srcdir/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
     sort |
-    uniq -d |
-    grep -v -e 'STATUS.md' \
+    uniq -d
+
+    # any URLs
+    "$srcdir/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
+    grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:#&,+-]*' |
+    sort |
+    uniq -d
+    } |
+    grep -vi \
+            -e 'STATUS.md' \
             -e 'harisekhon/github' \
             -e 'harisekhon/centos-github' \
             -e 'StarTrack' \
@@ -47,7 +57,11 @@ duplicates="$(
             -e 'PostgreSQL' \
             -e 'MariaDB' \
             -e 'TeamCity' \
-            -e '^=*$'
+            -e '^=*$' \
+            -e 'https://sonarcloud.io/dashboard' \
+            -e 'https://hub.docker.com/' \
+            -e 'https://img.shields.io/badge/' \
+            -e 'https://github.com/HariSekhon/[[:alnum:]-]*$'
 )"
 set -eo pipefail
 
