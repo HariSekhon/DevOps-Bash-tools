@@ -58,6 +58,7 @@ duplicates="$(
             -e 'MariaDB' \
             -e 'TeamCity' \
             -e '^=*$' \
+            -e 'https://aws.amazon.com' \
             -e 'https://sonarcloud.io/dashboard' \
             -e 'https://hub.docker.com/' \
             -e 'https://img.shields.io/badge/' \
