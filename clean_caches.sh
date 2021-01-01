@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -24,7 +24,7 @@
 #   curl -s https://raw.githubusercontent.com/HariSekhon/bash-tools/master/clean_caches.sh | sh
 #
 
-set -euo pipefail
+set -eu  #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
 # not using any of myl libraries or path dependencies to allow the above self-contained curl to shell to work for calling from Dockerfile
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -75,13 +75,13 @@ echo "Deleting Caches"
 # Run native OS cache cleaning commands
 #
 # rm -fr is done in the next block
-#if type -P apk &>/dev/null; then
+#if type apk >/dev/null 2>&1 2>&1; then
 #    rm -rf /var/cache/apk
-if type -P apt-get &>/dev/null; then
+if type apt-get >/dev/null 2>&1; then
     # could accidentally remove things it shouldn't
     #apt-get autoremove -y
     apt-get clean
-elif type -P yum &>/dev/null; then
+elif type yum >/dev/null 2>&1; then
     # could accidentally remove things it shouldn't
     #yum autoremove -y
     yum clean all
@@ -91,24 +91,27 @@ fi
 # Delete OS Cache locations
 #
 # safer than for loop - don't risk word splitting with rm
+echo "$cache_list" |
 while read -r directory; do
     [ -n "$directory" ] || continue
     rm -rf "$directory"
-done <<< "$cache_list"
+done
 
 echo "Deleting Personal Caches"
 # =============================================================
 # Delete Personal Cache locations & Programming Language Caches
 #
+echo "$personal_cache_list"
 while read -r directory; do
     [ -n "$directory" ] || continue
     # ~ more reliable than $HOME which could be unset
     rm -rf ~/"$directory"
-    if [ $EUID != 0 ]; then
-        if type -P sudo &>/dev/null; then
+    # shellcheck disable=SC2039
+    if [ ${EUID:-$UID:$(id -u)} != 0 ]; then
+        if type sudo >/dev/null 2>&1; then
             sudo -n rm -rf "/root/$directory"
         fi
     fi
-done <<< "$personal_cache_list"
+done
 
 echo "Finished deleting caches"
