@@ -15,6 +15,9 @@
 
 direnv
 
+# on Ubuntu but not Debian
+golang-race-detector-runtime
+
 # Ubuntu 20.04 has Python3, python installs Python2 but python-pip package is no longer available
 python
 python3
