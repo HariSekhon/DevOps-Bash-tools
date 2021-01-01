@@ -155,7 +155,7 @@ printenv: git
 			printf "Git branch: "; git rev-parse --abbrev-ref HEAD; \
 			printf "Git commit: "; git log --pretty=format:"%ai  %cn  %H  %s" -n 1; echo; \
 			echo; \
-			if [ -f /.dockerenv  ]; then i\
+			if [ -f /.dockerenv  ]; then \
 				echo "Running inside Docker:"; \
 				ls -l /.dockerenv 2>/dev/null; \
 			fi; \
