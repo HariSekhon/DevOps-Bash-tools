@@ -52,12 +52,6 @@ no_more_opts "$@"
 
 min_args 1 "$@"
 
-name="${1:-}"
-
-if [ -z "$name" ]; then
-    usage
-fi
-
 add_origin_url(){
     local name="$1"
     local domain="unconfigured"
@@ -91,22 +85,24 @@ add_origin_url(){
     git remote set-url --add origin "$url"
 }
 
-if [ "$name" = "github" ] ||
-   [ "$name" = "gitlab" ] ||
-   [ "$name" = "bitbucket" ] ||
-   [ "$name" = "azure" ]; then
-    add_origin_url "$name"
-    echo >&2
-    # TMI
-    #git remote show origin
-    git remote -v | grep '^origin' | sed 's|://.*@|://|'
-elif [ "$name" = "all" ]; then
-    for name in github gitlab bitbucket azure; do
+for name in "$@"; do
+    if [ "$name" = "github" ] ||
+       [ "$name" = "gitlab" ] ||
+       [ "$name" = "bitbucket" ] ||
+       [ "$name" = "azure" ]; then
         add_origin_url "$name"
-    done
-    echo >&2
-    #git remote show origin
-    git remote -v | grep '^origin' | sed 's|://.*@|://|'
-else
-    usage
-fi
+        echo >&2
+        # TMI
+        #git remote show origin
+        git remote -v | grep '^origin' | sed 's|://.*@|://|'
+    elif [ "$name" = "all" ]; then
+        for name in github gitlab bitbucket azure; do
+            add_origin_url "$name"
+        done
+        echo >&2
+        #git remote show origin
+        git remote -v | grep '^origin' | sed 's|://.*@|://|'
+    else
+        usage
+    fi
+done
