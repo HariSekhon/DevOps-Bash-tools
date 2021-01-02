@@ -523,7 +523,7 @@ python-version:
 golang-version:
 	@echo && \
 	which go && \
-	ls -l `which go` && \
+	ls -l $$(readlink `which go`) && \
 	echo && \
 	go version || : ; \
 	echo
