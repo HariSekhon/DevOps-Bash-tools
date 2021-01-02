@@ -15,6 +15,10 @@
 
 direnv
 
+# prevents this error:
+# bash-tools/lib/utils.sh: line 41: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8): No such file or directory
+locales-all
+
 # on Ubuntu but not Debian
 golang-race-detector-runtime
 
