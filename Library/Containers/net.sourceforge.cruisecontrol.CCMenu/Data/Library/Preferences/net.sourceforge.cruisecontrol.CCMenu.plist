@@ -98,21 +98,27 @@
 		</dict>
 		<dict>
 			<key>projectName</key>
-			<string>HariSekhon/DevOps-Perl-tools</string>
-			<key>serverUrl</key>
-			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Perl-tools/cc.xml?branch=master</string>
-		</dict>
-		<dict>
-			<key>projectName</key>
 			<string>HariSekhon/DevOps-Bash-tools</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repositories/HariSekhon/DevOps-Bash-tools/cc.xml?branch=master</string>
 		</dict>
 		<dict>
 			<key>projectName</key>
+			<string>HariSekhon/DevOps-Perl-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Perl-tools/cc.xml?branch=master</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
 			<string>HariSekhon/DevOps-Python-tools</string>
 			<key>serverUrl</key>
 			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Python-tools/cc.xml?branch=master</string>
+		</dict>
+		<dict>
+			<key>projectName</key>
+			<string>HariSekhon/DevOps-Golang-tools</string>
+			<key>serverUrl</key>
+			<string>https://api.travis-ci.org/repos/HariSekhon/DevOps-Golang-tools/cc.xml?branch=master</string>
 		</dict>
 	</array>
 	<key>SendNotification Broken</key>
