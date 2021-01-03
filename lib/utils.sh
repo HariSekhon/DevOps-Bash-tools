@@ -228,11 +228,31 @@ is_latest_version(){
     return 1
 }
 
+curl_version(){
+    curl --version | awk '{print $2; exit}' | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+'
+}
 is_curl_min_version(){
     local target_version="$1"
     local curl_version
-    curl_version="$(curl --version | awk '{print $2; exit}' | grep -Eo '[[:digit:]]+\.[[:digit:]]+')"
+    curl_version="$(curl_version)"
     bc_bool "$curl_version >= $target_version"
+}
+
+golang_version(){
+    go version | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+'
+}
+go_version(){
+    golang_version
+}
+
+is_golang_min_version(){
+    local target_version="$1"
+    local go_version
+    go_version="$(go_version)"
+    bc_bool "$go_version >= $target_version"
+}
+is_go_min_version(){
+    is_golang_min_version "$@"
 }
 
 curl_api_opts(){
