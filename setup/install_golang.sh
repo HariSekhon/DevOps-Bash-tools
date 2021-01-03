@@ -40,4 +40,4 @@ echo
 echo "To make use of it set the following:"
 echo
 echo "export PATH=\"$install_location/go/bin:\$PATH\""
-echo "export GOROOT=\"$install_location\""
+echo "export GOROOT=\"$install_location/go\""
