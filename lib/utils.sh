@@ -264,7 +264,7 @@ is_min_version(){
     local target_version=($2)
     local i
     for ((i=0; i < ${#target_version[@]}; i++)); do
-        if [[ -z "${version[i]}" ]]; then
+        if [[ -z "${version[i]:-}" ]]; then
             # fill empty fields with zeros
             version[i]=0
         fi
