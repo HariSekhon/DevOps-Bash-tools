@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
-![Original Repos](https://img.shields.io/badge/Repos-17-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2616-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1162-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-456-blue?logo=github)
+![Original Repos](https://img.shields.io/badge/Repos-18-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2649-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1188-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-463-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -126,9 +126,18 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 
 Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
 
-Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, CodeBuild, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
+Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Templates.svg)](https://starchart.cc/HariSekhon/Templates)
+
+---
+## Hari Sekhon - DevOps Golang Tools
+
+Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Golang-tools)
+
+DevOps Golang tools
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
 
 ---
 ## Hari Sekhon - Spotify Playlists
