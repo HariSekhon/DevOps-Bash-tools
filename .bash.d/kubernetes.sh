@@ -59,6 +59,7 @@ alias po='k get po "${k8s_get_pod_opts[@]}"'
 alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
+alias kd=kdesc
 alias ke=kubeexec
 alias kg='k get'
 alias ka='k apply'
