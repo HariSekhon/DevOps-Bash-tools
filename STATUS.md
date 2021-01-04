@@ -1,17 +1,17 @@
 # GitHub Status Page
 
-![Original Repos](https://img.shields.io/badge/Repos-17-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2616-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1162-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-456-blue?logo=github)
+![Original Repos](https://img.shields.io/badge/Repos-18-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2649-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1188-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-463-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-491-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-536-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-219.8k-lightgrey?logo=codecademy)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-2020--12--20-lightgrey?logo=github)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-2021--01--04-lightgrey?logo=github)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 
@@ -19,7 +19,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-17 original source git repos with 491 CI builds (446 hosted, 45 self-hosted):
+18 original source git repos with 536 CI builds (488 hosted, 48 self-hosted):
 
 ---
 # Advanced Nagios Plugins Collection
@@ -66,8 +66,8 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![CircleCI](https://circleci.com/gh/HariSekhon/Nagios-Plugins.svg?style=svg)](https://circleci.com/gh/HariSekhon/Nagios-Plugins)
 [![Codeship Status for HariSekhon/Nagios-Plugins](https://app.codeship.com/projects/e23f19f0-3c5f-0138-3476-32bf6ef9714a/status?branch=master)](https://app.codeship.com/projects/387256)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff5152/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/Nagios-Plugins/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FNagios%20Plugins?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e344353f5db981385bf4&pipeline=Nagios%20Plugins&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/60cb2e7e00658d466df3957953eacfc6e1b61d606ed7a5d657/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/nagios-plugins)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FNagios%20Plugins?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e344353f5db981385bf4&pipeline=Nagios%20Plugins&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![buddy pipeline](https://app.buddy.works/harisekhon/nagios-plugins/pipelines/pipeline/246986/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/nagios-plugins/pipelines/pipeline/246986)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Nagios-Plugins/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Nagios-Plugins)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Nagios-Plugins.svg)](https://harisekhon.semaphoreci.com/projects/Nagios-Plugins)
@@ -103,6 +103,8 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Fedora](https://github.com/HariSekhon/Nagios-Plugins/workflows/Fedora/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Fedora%22)
 [![Alpine](https://github.com/HariSekhon/Nagios-Plugins/workflows/Alpine/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Alpine%22)
 [![Alpine 3](https://github.com/HariSekhon/Nagios-Plugins/workflows/Alpine%203/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Alpine+3%22)
+
+[![Python versions](https://img.shields.io/badge/Python-2.7+-3776AB?logo=python&logoColor=white)](https://github.com/HariSekhon/Nagios-Plugins)
 [![Python 2.7](https://github.com/HariSekhon/Nagios-Plugins/workflows/Python%202.7/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Python+2.7%22)
 [![Python 3.5](https://github.com/HariSekhon/Nagios-Plugins/workflows/Python%203.5/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Python+3.5%22)
 [![Python 3.6](https://github.com/HariSekhon/Nagios-Plugins/workflows/Python%203.6/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Python+3.6%22)
@@ -110,6 +112,8 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Python 3.8](https://github.com/HariSekhon/Nagios-Plugins/workflows/Python%203.8/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Python+3.8%22)
 [![PyPy 2](https://github.com/HariSekhon/Nagios-Plugins/workflows/PyPy%202/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22PyPy+2%22)
 [![PyPy 3](https://github.com/HariSekhon/Nagios-Plugins/workflows/PyPy%203/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22PyPy+3%22)
+
+[![Perl versions](https://img.shields.io/badge/Perl-5.10+-39457E?logo=perl)](https://github.com/HariSekhon/Nagios-Plugins)
 [![Perl](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl%22)
 [![Perl 5.10](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.10/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.10%22)
 [![Perl 5.12](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.12/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.12%22)
@@ -164,8 +168,8 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 [![CircleCI](https://circleci.com/gh/HariSekhon/Dockerfiles.svg?style=svg)](https://circleci.com/gh/HariSekhon/Dockerfiles)
 [![Codeship Status for HariSekhon/Dockerfiles](https://app.codeship.com/projects/915368e0-3c5f-0138-52ff-1ecbdb7eccb9/status?branch=master)](https://app.codeship.com/projects/387249)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/Dockerfiles/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDockerfiles?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e32c9604d7520e95ee26&pipeline=Dockerfiles&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/503cefcbf7f8c60c2826d7a22a22496d1187a4839b71619914/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/dockerfiles)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDockerfiles?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e32c9604d7520e95ee26&pipeline=Dockerfiles&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Dockerfiles/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Dockerfiles)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Dockerfiles.svg)](https://harisekhon.semaphoreci.com/projects/Dockerfiles)
 [![Wercker](https://app.wercker.com/status/26a0f1151450a0de3d8a339345b70019/s/master "wercker status")](https://app.wercker.com/harisekhon/dockerfiles/runs)
@@ -285,6 +289,8 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 [![Fedora](https://github.com/HariSekhon/DevOps-Python-tools/workflows/Fedora/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22Fedora%22)
 [![Alpine](https://github.com/HariSekhon/DevOps-Python-tools/workflows/Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22Alpine%22)
 [![Alpine 3](https://github.com/HariSekhon/DevOps-Python-tools/workflows/Alpine%203/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22Alpine+3%22)
+
+[![Python versions](https://img.shields.io/badge/Python-2.7+-3776AB?logo=python&logoColor=white)](https://github.com/HariSekhon/DevOps-Python-tools)
 [![Python 2.7](https://github.com/HariSekhon/DevOps-Python-tools/workflows/Python%202.7/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22Python+2.7%22)
 [![Python 3.5](https://github.com/HariSekhon/DevOps-Python-tools/workflows/Python%203.5/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22Python+3.5%22)
 [![Python 3.6](https://github.com/HariSekhon/DevOps-Python-tools/workflows/Python%203.6/badge.svg)](https://github.com/HariSekhon/DevOps-Python-tools/actions?query=workflow%3A%22Python+3.6%22)
@@ -349,8 +355,8 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Bash-tools)
 [![Codeship Status for HariSekhon/DevOps-Bash-tools](https://app.codeship.com/projects/1b13b490-38c2-0138-ed09-4a04e28a9ab8/status?branch=master)](https://app.codeship.com/projects/386508)
 [![Shippable](https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e53eaeea284e010982eaa6e&pipeline=DevOps-Bash-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/f11bdd9690a9bac9a8edc6094dc2f2b9af3218a7a15d4ec17d/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/devops-bash-tools)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Bash-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e53eaeea284e010982eaa6e&pipeline=DevOps-Bash-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Buddy](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/248539/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-bash-tools/pipelines/pipeline/248539)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Bash-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Bash-tools)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Bash-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Bash-tools)
@@ -437,8 +443,8 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![CircleCI](https://circleci.com/gh/HariSekhon/HAProxy-configs.svg?style=svg)](https://circleci.com/gh/HariSekhon/HAProxy-configs)
 [![Codeship Status for HariSekhon/HAProxy-configs](https://app.codeship.com/projects/6e6d6a50-3c5f-0138-6969-1ecbdb7eccb9/status?branch=master)](https://app.codeship.com/projects/387248)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/HAProxy-configs/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FHAProxy-configs?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e31b3953b7fe454b7904&pipeline=HAProxy-configs&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/0eaa69ea93cc6695ecd48013d1daf895e0e9a7bcef068b7324/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/haproxy-configs)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FHAProxy-configs?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e31b3953b7fe454b7904&pipeline=HAProxy-configs&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/HAProxy-configs/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/HAProxy-configs)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/HAProxy-configs.svg)](https://harisekhon.semaphoreci.com/projects/HAProxy-configs)
 [![Wercker](https://app.wercker.com/status/3eab52046f673b476fa5e54adb5dfbba/s/master "wercker status")](https://app.wercker.com/harisekhon/haproxy-configs/runs)
@@ -518,8 +524,8 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Perl-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Perl-tools)
 [![Codeship Status for HariSekhon/DevOps-Perl-tools](https://app.codeship.com/projects/c9e3bf70-3c5f-0138-d157-661d474a0ccb/status?branch=master)](https://app.codeship.com/projects/387254)
 [![Shippable](https://img.shields.io/shippable/5e52c6364c324200063326d5/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/DevOps-Perl-tools/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Perl-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e2a9c1d3cf1248fa485b&pipeline=DevOps-Perl-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/0a23f5b0b09f6b2a913e3e3fa258494edb0e8dcda2b40e19fa/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/devops-perl-tools)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Perl-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e2a9c1d3cf1248fa485b&pipeline=DevOps-Perl-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![buddy pipeline](https://app.buddy.works/harisekhon/devops-perl-tools/pipelines/pipeline/246987/badge.svg?token=7f63afa3c423a65e6e39a79be0386959e98c4105ea1e20f7f8b05d6d6b587038 "buddy pipeline")](https://app.buddy.works/harisekhon/devops-perl-tools/pipelines/pipeline/246987)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Perl-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Perl-tools)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Perl-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Perl-tools)
@@ -555,6 +561,8 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Fedora](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Fedora/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Fedora%22)
 [![Alpine](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Alpine%22)
 [![Alpine 3](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Alpine%203/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Alpine+3%22)
+
+[![Perl versions](https://img.shields.io/badge/Perl-5.10+-39457E?logo=perl)](https://github.com/harisekhon/DevOps-Perl-tools)
 [![Perl](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl%22)
 [![Perl 5.10](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.10/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.10%22)
 [![Perl 5.12](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.12/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.12%22)
@@ -636,8 +644,8 @@ Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication dete
 [![CircleCI](https://circleci.com/gh/HariSekhon/Spotify-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/Spotify-tools)
 [![Codeship Status for HariSekhon/Spotify-tools](https://app.codeship.com/projects/44957fe0-3c5f-0138-07d2-66210e546d42/status?branch=master)](https://app.codeship.com/projects/387244)
 [![Shippable](https://img.shields.io/shippable/5e52c637b15ffc00071d8f84/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/Spotify-tools/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FSpotify-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5ec401171350573576125f8d&pipeline=Spotify-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&rightbar=steps&advanced=0&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/cb0dcf2e1eed7a2c3d6035b8c5ca1bf4a741c1153b89688fcf/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/Spotify-tools)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FSpotify-tools?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5ec401171350573576125f8d&pipeline=Spotify-tools&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&rightbar=steps&advanced=0&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Spotify-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Spotify-tools)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Spotify-tools.svg)](https://harisekhon.semaphoreci.com/projects/Spotify-tools)
 [![Wercker](https://app.wercker.com/status/c46a517909343e278c9ce354164394ae/s/master "wercker status")](https://app.wercker.com/harisekhon/Spotify-tools/runs)
@@ -714,8 +722,8 @@ Perl Utility Library for my other repos
 [![CircleCI](https://circleci.com/gh/HariSekhon/lib.svg?style=svg)](https://circleci.com/gh/HariSekhon/lib)
 [![Codeship Status for HariSekhon/lib](https://app.codeship.com/projects/44957fe0-3c5f-0138-07d2-66210e546d42/status?branch=master)](https://app.codeship.com/projects/387244)
 [![Shippable](https://img.shields.io/shippable/5e52c6364c324200063326d5/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/lib/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Flib?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e2c43953b7316b4b7903&pipeline=lib&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/ee85ef275ba64807fc2efce47336b0e0d92a1cba7fcc94b584/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/lib)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Flib?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e2c43953b7316b4b7903&pipeline=lib&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/lib/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/lib)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/lib.svg)](https://harisekhon.semaphoreci.com/projects/lib)
 [![Wercker](https://app.wercker.com/status/7af643f46ecad1311bc1200fd42e509b/s/master "wercker status")](https://app.wercker.com/harisekhon/lib/runs)
@@ -826,8 +834,8 @@ Python / Jython Utility Library for my other repos
 [![CircleCI](https://circleci.com/gh/HariSekhon/pylib.svg?style=svg)](https://circleci.com/gh/HariSekhon/pylib)
 [![Codeship Status for HariSekhon/pylib](https://app.codeship.com/projects/47db8760-3c4f-0138-d157-661d474a0ccb/status?branch=master)](https://app.codeship.com/projects/387232)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff5152/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/pylib/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Fpylib?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e2f89604d74f0c95ee24&pipeline=pylib&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/7cc15b95df0f0478ccecd598dffa756d1460f68914b6d3083d/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/pylib)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Fpylib?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e2f89604d74f0c95ee24&pipeline=pylib&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/pylib/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/pylib)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/pylib.svg)](https://harisekhon.semaphoreci.com/projects/pylib)
 [![Wercker](https://app.wercker.com/status/abfa58ca784a2d86cc417be3615f2d3a/s/master "wercker status")](https://app.wercker.com/harisekhon/pylib/runs)
@@ -911,8 +919,8 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 [![CircleCI](https://circleci.com/gh/HariSekhon/Nagios-Plugin-Kafka.svg?style=svg)](https://circleci.com/gh/HariSekhon/Nagios-Plugin-Kafka)
 [![Codeship Status for HariSekhon/Nagios-Plugin-Kafka](https://app.codeship.com/projects/faff7930-3c5f-0138-8a0b-32bf6ef9714a/status?branch=master)](https://app.codeship.com/projects/387257)
 [![Shippable](https://img.shields.io/shippable/5e52c63620adbf000670adf6/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/Nagios-Plugin-Kafka/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FNagios%20Plugin%20Kafka?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e3573953b779e04b7907&pipeline=Nagios%20Plugin%20Kafka&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/835ba032422b5aa6c1df641e6a7989ac93bb8a34fcca735243/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/nagios-plugin-kafka)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FNagios%20Plugin%20Kafka?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e3573953b779e04b7907&pipeline=Nagios%20Plugin%20Kafka&projects=GitHub&projectId=5e52ca8ea284e00f882ea992&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/Nagios-Plugin-Kafka/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/Nagios-Plugin-Kafka)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/Nagios-Plugin-Kafka.svg)](https://harisekhon.semaphoreci.com/projects/Nagios-Plugin-Kafka)
 [![Wercker](https://app.wercker.com/status/fe4f87bf98f31e4c22a3041c0966644b/s/master "wercker status")](https://app.wercker.com/harisekhon/nagios-plugin-kafka/runs)
@@ -958,7 +966,7 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 
 Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
 
-Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, CodeBuild, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
+Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/templates/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Templates)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
@@ -970,6 +978,97 @@ Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, CodeBuil
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/Templates?logo=github)](https://github.com/HariSekhon/Templates/commits/master)
 
 [git.io/code-templates](https://git.io/code-templates)
+
+
+---
+# Hari Sekhon - DevOps Golang Tools
+
+Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Golang-tools)
+
+DevOps Golang tools
+
+[![Codacy](https://api.codacy.com/project/badge/Grade/f7af72140c3b408b9659207ced17544f)](https://www.codacy.com/app/harisekhon/devops-golang-tools)
+[![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Golang-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Golang-tools)
+[![Language grade: Golang](https://img.shields.io/lgtm/grade/golang/g/HariSekhon/DevOps-Golang-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Golang-tools/context:golang)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
+[![Code Inspector Grade](https://www.code-inspector.com/project/7517/status/svg)](https://frontend.code-inspector.com/project/7517/dashboard)
+[![Code Inspector Score](https://www.code-inspector.com/project/7517/score/svg)](https://frontend.code-inspector.com/project/7517/dashboard)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/HariSekhon/DevOps-Golang-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Golang-tools/alerts/)
+[![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-golang-tools?logo=github)](https://github.com/harisekhon/devops-golang-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-golang-tools?logo=github)](https://github.com/harisekhon/devops-golang-tools/network)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Golang-tools?logo=github)](https://github.com/HariSekhon/DevOps-Golang-tools/commits/master)
+
+
+
+
+
+[![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Golang-tools)
+[![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Golang-tools)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/github/)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/github)
+
+
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/Jenkinsfile)
+[![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/.concourse.yml)
+[![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/.gocd.yml)
+
+[![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Golang-tools/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Golang-tools)
+[![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/DevOps-Golang-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/DevOps-Golang-tools/branch/master)
+[![Drone](https://img.shields.io/drone/build/HariSekhon/DevOps-Golang-tools/master?logo=drone&label=Drone)](https://cloud.drone.io/HariSekhon/DevOps-Golang-tools)
+[![CircleCI](https://circleci.com/gh/HariSekhon/DevOps-Golang-tools.svg?style=svg)](https://circleci.com/gh/HariSekhon/DevOps-Golang-tools)
+[![Codeship Status for HariSekhon/DevOps-Golang-tools](https://app.codeship.com/projects/11baaaff-5962-45dd-8a7d-477f60632c16/status?branch=master)](https://app.codeship.com/projects/387251)
+[![Shippable](https://img.shields.io/shippable/5fef7292052b6d00060ce99d/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/DevOps-Golang-tools/dashboard/jobs)
+[![BuildKite](https://img.shields.io/buildkite/e2deddfa45087ac7984c456cb93319ef434ac996c7c1006833/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/devops-golang-tools)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2FDevOps-Golang-tools?key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&date=1609528430541)](https://g.codefresh.io/pipelines/edit/new/builds?id=5fef73e62e168ebc6dd24d07&pipeline=DevOps-Golang-tools&projects=GitHub&projectId=5fef73e62e168ebc6dd24d07&context=github&filter=page:1;pageSize:10;timeFrameStart:week)
+[![Wercker](https://app.wercker.com/status/0a1cc64a81b6e218ea4f662341aea1cc/s/master "wercker status")](https://app.wercker.com/harisekhon/DevOps-Golang-tools/runs)
+[![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/DevOps-Golang-tools/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/DevOps-Golang-tools)
+[![Semaphore](https://harisekhon.semaphoreci.com/badges/DevOps-Golang-tools.svg)](https://harisekhon.semaphoreci.com/projects/DevOps-Golang-tools)
+
+[![Azure DevOps Pipeline](https://dev.azure.com/harisekhon/GitHub/_apis/build/status/DevOps-Golang-tools?branchName=master)](https://dev.azure.com/harisekhon/GitHub/_build/latest?definitionId=13&branchName=master)
+[![BitBucket Pipeline](https://img.shields.io/bitbucket/pipelines/harisekhon/devops-golang-tools/master?logo=bitbucket&label=BitBucket%20CI)](https://bitbucket.org/harisekhon/devops-golang-tools/addon/pipelines/home#!/)
+[![GitLab Pipeline](https://img.shields.io/gitlab/pipeline/harisekhon/DevOps-Golang-tools?logo=gitlab&label=GitLab%20CI)](https://gitlab.com/HariSekhon/DevOps-Golang-tools/pipelines)
+[![AWS CodeBuild](https://img.shields.io/badge/AWS%20CodeBuild-ready-blue?logo=amazon%20aws)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/buildspec.yml)
+[![GCP Cloud Build](https://img.shields.io/badge/GCP%20Cloud%20Build-ready-blue?logo=google%20cloud)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/cloudbuild.yaml)
+
+[![Repo on Azure DevOps](https://img.shields.io/badge/repo-Azure%20DevOps-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub/_git/DevOps-Golang-tools)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-2088FF?logo=github)](https://github.com/HariSekhon/DevOps-Golang-tools)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon/DevOps-Golang-tools)
+[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon/DevOps-Golang-tools)
+
+[![GitHub Actions Ubuntu](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/GitHub%20Actions%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22GitHub+Actions+Ubuntu%22)
+[![Mac](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Mac%22)
+[![Mac 10.15](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Mac%2010.15/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Mac+10.15%22)
+[![Ubuntu](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Ubuntu%22)
+[![Ubuntu 14.04](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Ubuntu%2014.04/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Ubuntu+14.04%22)
+[![Ubuntu 16.04](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Ubuntu%2016.04/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Ubuntu+16.04%22)
+[![Ubuntu 18.04](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Ubuntu%2018.04/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Ubuntu+18.04%22)
+[![Ubuntu 20.04](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Ubuntu%2020.04/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Ubuntu+20.04%22)
+[![Debian](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Debian/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Debian%22)
+[![Debian 8](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Debian%208/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Debian+8%22)
+[![Debian 9](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Debian%209/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Debian+9%22)
+[![Debian 10](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Debian%2010/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Debian+10%22)
+[![CentOS](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/CentOS/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22CentOS%22)
+[![CentOS 7](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/CentOS%207/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22CentOS+7%22)
+[![CentOS 8](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/CentOS%208/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22CentOS+8%22)
+[![Fedora](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Fedora/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Fedora%22)
+[![Alpine](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Alpine/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Alpine%22)
+[![Alpine 3](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Alpine%203/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Alpine+3%22)
+
+[![Golang versions](https://img.shields.io/badge/Golang-1.9+-00ADD8?logo=go)](https://github.com/HariSekhon/DevOps-Golang-tools)
+[![Golang](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+latest%22)
+[![Golang 1.9](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.9/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.9%22)
+[![Golang 1.10](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.10/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.10%22)
+[![Golang 1.11](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.11/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.11%22)
+[![Golang 1.12](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.12/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.12%22)
+[![Golang 1.13](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.13/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.13%22)
+[![Golang 1.14](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.14/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.14%22)
+[![Golang 1.15](https://github.com/HariSekhon/DevOps-Golang-tools/workflows/Golang%201.15/badge.svg)](https://github.com/HariSekhon/DevOps-Golang-tools/actions?query=workflow%3A%22Golang+1.15%22)
+
+[git.io/go-tools](https://git.io/go-tools)
 
 
 ---
@@ -1088,8 +1187,8 @@ Java Utility library for my other repos
 [![CircleCI](https://circleci.com/gh/HariSekhon/lib-java.svg?style=svg)](https://circleci.com/gh/HariSekhon/lib-java)
 [![Codeship Status for HariSekhon/lib-java](https://app.codeship.com/projects/59b2b9f0-3c5f-0138-d2dc-1a2635a521f6/status?branch=master)](https://app.codeship.com/projects/387246)
 [![Shippable](https://img.shields.io/shippable/5e52c63645c70f0007ff514e/master?label=Shippable&logo=jfrog)](https://app.shippable.com/github/HariSekhon/lib-java/dashboard/jobs)
-[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Flib-java?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e3089604d75cec95ee25&pipeline=lib-java&filter=page:1;pageSize:10;timeFrameStart:week)
 [![BuildKite](https://img.shields.io/buildkite/453eb82cca3de2c18bb45b07765e1736051856ff42b0598884/master?label=BuildKite&logo=buildkite)](https://buildkite.com/hari-sekhon/lib-java)
+[![Codefresh](https://g.codefresh.io/api/badges/pipeline/harisekhon/GitHub%2Flib-java?branch=master&key=eyJhbGciOiJIUzI1NiJ9.NWU1MmM5OGNiM2FiOWUzM2Y3ZDZmYjM3.O69674cW7vYom3v5JOGKXDbYgCVIJU9EWhXUMHl3zwA&type=cf-1)](https://g.codefresh.io/pipelines/edit/new/builds?id=5e58e3089604d75cec95ee25&pipeline=lib-java&filter=page:1;pageSize:10;timeFrameStart:week)
 [![Cirrus CI](https://img.shields.io/cirrus/github/HariSekhon/lib-java/master?logo=Cirrus%20CI&label=Cirrus%20CI)](https://cirrus-ci.com/github/HariSekhon/lib-java)
 [![Semaphore](https://harisekhon.semaphoreci.com/badges/lib-java.svg)](https://harisekhon.semaphoreci.com/projects/lib-java)
 [![Wercker](https://app.wercker.com/status/9f72e3856e29563c4225ca4bdce46cf9/s/master "wercker status")](https://app.wercker.com/harisekhon/lib-java/runs)
@@ -1131,7 +1230,7 @@ Java Utility library for my other repos
 
 
 
-17 git repos summarized with 491 CI builds(446 hosted, 45 self-hosted)
+18 git repos summarized with 536 CI builds(488 hosted, 48 self-hosted)
 
 ---
 
