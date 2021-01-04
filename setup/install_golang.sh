@@ -28,6 +28,8 @@ tmp_tar="$(mktemp)"
 
 url="https://golang.org/dl/go$version.$uname_s-amd64.tar.gz"
 
+mkdir -p -v "$install_location"
+
 echo "$(date '+%F %T')  Downloading $url"
 wget -cqO "$tmp_tar" "$url"
 
