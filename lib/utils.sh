@@ -235,7 +235,8 @@ is_curl_min_version(){
     local target_version="$1"
     local curl_version
     curl_version="$(curl_version)"
-    bc_bool "$curl_version >= $target_version"
+    #bc_bool "$curl_version >= $target_version"
+    is_min_version "$curl_version" "$target_version"
 }
 
 golang_version(){
@@ -249,10 +250,36 @@ is_golang_min_version(){
     local target_version="$1"
     local go_version
     go_version="$(go_version)"
-    bc_bool "$go_version >= $target_version"
+    is_min_version "$go_version" "$target_version"
 }
 is_go_min_version(){
     is_golang_min_version "$@"
+}
+
+is_min_version(){
+    local IFS=.
+    # shellcheck disable=SC2206
+    local version=($1)
+    # shellcheck disable=SC2206
+    local target_version=($2)
+    local i
+    for ((i=0; i < ${#target_version[@]}; i++)); do
+        if [[ -z "${version[i]}" ]]; then
+            # fill empty fields with zeros
+            version[i]=0
+        fi
+        if (( target_version[i] > version[i] )); then
+            return 1
+        fi
+    done
+    return 0
+}
+
+bc_bool(){
+    # bc returns 1 when expression is true and zero otherwise, but this is counterintuitive
+    # to regular shell scripting, let's use the actual output 1 for true, 0 for false
+    # echo rather than <<< to show expression to evaluate in trace debugging
+    echo "$@" | bc -l | grep -q 1
 }
 
 curl_api_opts(){
@@ -276,13 +303,6 @@ curl_api_opts(){
     # unset to return to default setting for safety to avoid hard to debug changes of behaviour elsewhere
     shopt -u nocasematch
     export CURL_OPTS
-}
-
-bc_bool(){
-    # bc returns 1 when expression is true and zero otherwise, but this is counterintuitive
-    # to regular shell scripting, let's use the actual output 1 for true, 0 for false
-    # echo rather than <<< to show expression to evaluate in trace debugging
-    echo "$@" | bc -l | grep -q 1
 }
 
 # useful for cutting down on number of noisy docker tests which take a long time but more importantly
