@@ -20,7 +20,7 @@ services:
   teamcity-server:
     hostname: teamcity-server
     # 2GB docker image
-    image: jetbrains/teamcity-server:${VERSION:-2020.2}
+    image: jetbrains/teamcity-server:${VERSION:-2020.2.1}
     ports:
       - 8111:8111
     restart: unless-stopped
@@ -46,9 +46,9 @@ services:
   teamcity-agent:
     hostname: teamcity-agent
     # 1.3GB docker image
-    image: jetbrains/teamcity-agent:${VERSION:-2020.2}
+    image: jetbrains/teamcity-agent:${VERSION:-2020.2.1}
     # need the linux-sudo image for Docker-in-Docker - but this doesn't work due to iptables initialization error
-    #image: jetbrains/teamcity-agent:${VERSION:-2020.2}-linux-sudo
+    #image: jetbrains/teamcity-agent:${VERSION:-2020.2.1}-linux-sudo
     ports:
       - 9090:9090
     # needs root to be able to install OS package dependencies - 'sudo' not installed unless using the linux-sudo suffix, which is a lot bigger and similar result
