@@ -22,9 +22,9 @@ doesn't detect shell code properly
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker)](https://github.com/HariSekhon/Dockerfiles)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -37,8 +37,8 @@ doesn't detect shell code properly
 [![Ubuntu](https://img.shields.io/badge/Linux-Ubuntu-orange?logo=ubuntu&logoColor=white)](https://ubuntu.com/)
 
 <!-- TODO: fix
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
 [![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 -->
 
