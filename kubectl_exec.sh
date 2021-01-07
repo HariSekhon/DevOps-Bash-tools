@@ -34,6 +34,7 @@ Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
 First arg is the pod's name as an extended regex (ERE)
 Optional second arg is the container's name as an extended regex (ERE)
 Subsequent args from the first dash are passed straight to 'kubectl get pods' to set namespace, label filters etc.
+If there is no 3rd arg onwards, passes --all-namespaces to 'kubectl get pods' in order to find a matching pod, otherwise you should specify --namespace
 
 Examples:
 
