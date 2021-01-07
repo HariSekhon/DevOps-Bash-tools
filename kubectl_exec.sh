@@ -47,7 +47,7 @@ Examples:
 
 See also:
 
-    kubectl_exec.sh
+    kubectl_exec2.sh
 
 for a version with one less arg that works strictly on pod filters
 
