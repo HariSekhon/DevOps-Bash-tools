@@ -46,8 +46,6 @@ See also:
     kubectl_exec.sh
 
 for a different approaching using just a partial pod name and optional partial container name, auto-determines the namespace, it's simpler and less typing in most cases
-
-There is similar stuff in the .bash.d/kubernetes.sh interactive library
 "
 
 # used by usage() in lib/utils.sh
