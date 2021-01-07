@@ -51,8 +51,6 @@ See also:
     kubectl_exec2.sh
 
 for a version with one less arg that works strictly on pod filters
-
-There is similar stuff in the .bash.d/kubernetes.sh interactive library
 "
 
 # used by usage() in lib/utils.sh
