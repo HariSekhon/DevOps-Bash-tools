@@ -24,20 +24,21 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Kubectl exec's to the first pod matching the given filter criteria
 
+Useful to not have to first look up deployment pod names which have random string suffixes
+and quickly jump in to any pod in a namespace/deployment to debug a web farm etc.
+
 Shows the full auto-generated 'kubectl exec' command for clarity
 
 Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
-
-This is useful to quickly jump in to any pod in a namespace/deployment to debug a web farm etc.
 
 First arg is the optional pod container name (if no container is specified we'll pick the first one and show you in the kubectl output)
 Subsequent args from the first dash are passed straight to 'kubectl get pods' to set namespace, label filters etc.
 
 Examples:
 
-${0##*/} -n prod -l app=nginx
+    ${0##*/} -n prod -l app=nginx
 
-${0##*/} sidecar-container -n prod -l app=nginx
+    ${0##*/} sidecar-container -n prod -l app=nginx
 
 
 See also:
