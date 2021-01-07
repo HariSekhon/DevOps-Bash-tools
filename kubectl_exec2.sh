@@ -43,7 +43,7 @@ Examples:
 
 See also:
 
-    kubectl_exec_grep.sh
+    kubectl_exec.sh
 
 for a different approaching using just a partial pod name and optional partial container name, auto-determines the namespace, it's simpler and less typing in most cases
 
