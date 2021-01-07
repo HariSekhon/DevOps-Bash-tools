@@ -76,18 +76,22 @@ fi
 
 kubectl cluster-info &>/dev/null || die "Failed to connect to Kubernetes cluster!"
 
-pod="$(kubectl get pods "$@" -o 'jsonpath={.items[*].metadata.name}' | tr ' ' '\n' | grep -E -m 1 "$pod_regex" || :)"
+pod="$(kubectl get pods "${@:---all-namespaces}" -o 'jsonpath={range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}' | tr ' ' '\n' | grep -E -m 1 "$pod_regex" || :)"
 
 if [ -z "$pod" ]; then
     die "No matching pods found, perhaps you forgot to pass the --namespace? (tip: specify -A / --all-namespaces if lazy, it'll filter by pod name)"
 fi
 
 # auto-determine namespace because specifying it is annoying
-namespace="$(kubectl get pods --all-namespaces | grep -E "^[^[:space:]]+[[:space:]]+[^[:space:]]*${pod}" | awk '{print $1; exit}' || :)"
+# done via extended jsonpath above now to make 1 less query
+#namespace="$(kubectl get pods --all-namespaces | grep -E "^[^[:space:]]+[[:space:]]+[^[:space:]]*${pod}" | awk '{print $1; exit}' || :)"
 
-if [ -z "$namespace" ]; then
-    die "failed to auto-determine namespace for pod '$pod'"
-fi
+#if [ -z "$namespace" ]; then
+#    die "failed to auto-determine namespace for pod '$pod'"
+#fi
+
+namespace="${pod%%[[:space:]]*}"
+pod="${pod##*[[:space:]]}"
 
 # auto-determine container from regex if given or just take first container
 container="$(kubectl get pods -n "$namespace" "$pod" -o 'jsonpath={.spec.containers[*].name}' | grep -m 1 "$container_regex" | awk '{print $1}' || :)"
