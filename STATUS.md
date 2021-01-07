@@ -1,17 +1,17 @@
 # GitHub Status Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-18-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2649-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1188-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-463-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2655-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1189-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-464-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-536-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-537-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-219.8k-lightgrey?logo=codecademy)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-2021--01--04-lightgrey?logo=github)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-2021--01--07-lightgrey?logo=github)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 
@@ -19,7 +19,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-18 original source git repos with 536 CI builds (488 hosted, 48 self-hosted):
+18 original source git repos with 537 CI builds (488 hosted, 49 self-hosted):
 
 ---
 # Advanced Nagios Plugins Collection
@@ -47,9 +47,10 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/Nagios-Plugins)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/Nagios-Plugins)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugins?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugins)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugins?logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugins?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/nagios-plugins)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugins?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/nagios-plugins/)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -136,7 +137,7 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
-50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak, TeamCity and DevOps tools built various distros: Alpine, CentOS, Debian, Fedora, Ubuntu
+50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak, TeamCity and DevOps tools built on the major Linux distros: Alpine, CentOS, Debian, Fedora, Ubuntu
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/de6229f2d2ba4945acde9f86f59d2c66)](https://www.codacy.com/app/harisekhon/Dockerfiles)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Dockerfiles/badge)](https://www.codefactor.io/repository/github/harisekhon/Dockerfiles)
@@ -152,7 +153,7 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/Dockerfiles)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/Dockerfiles)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/u/harisekhon)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/u/harisekhon)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -233,9 +234,10 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Python-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Python-tools)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/github/)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/github)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/pytools?logo=docker)](https://hub.docker.com/r/harisekhon/pytools/)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github/)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/pytools?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/pytools/)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -326,8 +328,9 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -427,7 +430,7 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/HAProxy-configs)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/HAProxy-configs)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/_/haproxy)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/_/haproxy)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -505,9 +508,10 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/harisekhon/DevOps-Perl-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/harisekhon/DevOps-Perl-tools)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/perl-tools/)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/perl-tools?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/perl-tools)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/perl-tools?logo=docker)](https://hub.docker.com/r/harisekhon/perl-tools/)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/perl-tools/)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/perl-tools?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/perl-tools)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/perl-tools?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/perl-tools/)
 [![StarTrack](https://img.shields.io/badge/Star-Track-blue?logo=github)](https://seladb.github.io/StarTrack-js/#/preload?r=HariSekhon,Nagios-Plugins&r=HariSekhon,Dockerfiles&r=HariSekhon,DevOps-Python-tools&r=HariSekhon,DevOps-Perl-tools&r=HariSekhon,DevOps-Bash-tools&r=HariSekhon,HAProxy-configs&r=HariSekhon,SQL-scripts)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 
@@ -705,9 +709,10 @@ Perl Utility Library for my other repos
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/harisekhon/lib#hari-sekhon---perl-library)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/harisekhon/lib#hari-sekhon---perl-library)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/github/)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/github)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/centos-github?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github/)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/centos-github?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/centos-github)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
@@ -778,7 +783,7 @@ Perl Utility Library for my other repos
 
 Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernetes-templates)
 
-Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus patches, Kustomize, Cert Manager with ACME Let's Encrypt...
+Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus patches, Kustomize, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/kubernetes-templates/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/Kubernetes-templates)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
@@ -786,8 +791,11 @@ Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into t
 [![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-2088FF?logo=github)](https://github.com/HariSekhon/Kubernetes-Templates)
 [![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon/Kubernetes-Templates)
 [![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon/Kubernetes-Templates)
+
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/Kubernetes-templates?logo=github)](https://github.com/HariSekhon/Kubernetes-templates/commits/master)
-[![Lines of Config](https://img.shields.io/badge/lines%20of%20config-1.8k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/Templates)
+[![Lines of Config](https://img.shields.io/badge/lines%20of%20config-2.6k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/Kubernetes-templates)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Kubernetes-templates?logo=github)](https://github.com/HariSekhon/Kubernetes-templates//stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Kubernetes-templates?logo=github)](https://github.com/HariSekhon/Kubernetes-templates/network)
 
 [git.io/k8s-templates](https://git.io/k8s-templates)
 
@@ -819,9 +827,10 @@ Python / Jython Utility Library for my other repos
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/pylib#hari-sekhon---python--jython-library)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/pylib#hari-sekhon---python--jython-library)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/github/)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/github)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/centos-github?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github/)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/centos-github?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/centos-github)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
@@ -906,9 +915,10 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugin-kafka?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugin-kafka?logo=docker)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/nagios-plugin-kafka?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/nagios-plugin-kafka?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/nagios-plugin-kafka)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
@@ -1011,14 +1021,16 @@ DevOps Golang tools
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Golang-tools)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Golang-tools)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/github/)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/github)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github/)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/github)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Golang-tools/blob/master/.gocd.yml)
+[![TeamCity](https://img.shields.io/badge/TeamCity-ready-blue?logo=teamcity)](https://github.com/HariSekhon/TeamCity-CI)
 
 [![Travis CI](https://img.shields.io/travis/harisekhon/DevOps-Golang-tools/master?logo=travis&label=Travis%20CI)](https://travis-ci.org/HariSekhon/DevOps-Golang-tools)
 [![AppVeyor](https://img.shields.io/appveyor/build/harisekhon/DevOps-Golang-tools/master?logo=appveyor&label=AppVeyor)](https://ci.appveyor.com/project/HariSekhon/DevOps-Golang-tools/branch/master)
@@ -1174,9 +1186,10 @@ Java Utility library for my other repos
 
 [![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/lib-java)
 [![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/lib-java)
-[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github)
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker)](https://hub.docker.com/r/harisekhon/centos-github)
-[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/centos-github?logo=docker)](https://hub.docker.com/r/harisekhon/centos-github)
+[![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/centos-github)
+[![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
+[![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/centos-github?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/centos-github)
+[![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/centos-github?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/centos-github)
 
 
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
@@ -1234,7 +1247,7 @@ Java Utility library for my other repos
 
 
 
-18 git repos summarized with 536 CI builds(488 hosted, 48 self-hosted)
+18 git repos summarized with 537 CI builds(488 hosted, 49 self-hosted)
 
 ---
 
