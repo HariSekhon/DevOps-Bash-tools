@@ -29,7 +29,7 @@ and quickly jump in to any pod in a namespace/deployment to debug a web farm etc
 
 Shows the full auto-generated 'kubectl exec' command for clarity
 
-Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
+Execs to bash if available, otherwise /bin/sh
 
 First arg is the optional pod container name (if no container is specified we'll pick the first one and show you in the kubectl output)
 Subsequent args from the first dash are passed straight to 'kubectl get pods' to set namespace, label filters etc.
@@ -81,6 +81,6 @@ if [ -z "$container" ]; then
     container="$(kubectl get pods -n "$namespace" "$pod" -o 'jsonpath={.spec.containers[*].name}' | grep -m 1 "." | awk '{print $1}' || :)"
 fi
 
-cmd="kubectl exec -ti --namespace \"$namespace\" \"$pod\" --container \"$container\" /bin/sh"
+cmd="kubectl exec -ti --namespace \"$namespace\" \"$pod\" --container \"$container\" -- /bin/sh -c 'if type bash 2>/dev/null; then exec bash; else exec sh; fi'"
 echo "$cmd"
 eval "$cmd"
