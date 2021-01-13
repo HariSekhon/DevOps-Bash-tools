@@ -29,7 +29,7 @@ and quickly jump in to any pod in a namespace/deployment to debug a web farm etc
 
 Shows the full auto-generated 'kubectl exec' command for clarity
 
-Execs /bin/sh because we can't be sure /bin/bash exists in a lot of containers
+Execs to bash if available, otherwise /bin/sh
 
 First arg is the pod's name as an extended regex (ERE)
 Optional second arg is the container's name as an extended regex (ERE)
@@ -99,6 +99,6 @@ if [ -z "$container" ]; then
     die "failed to get container name matching regex '$container_regex' for pod '$pod'"
 fi
 
-cmd="kubectl exec -ti --namespace \"$namespace\" \"$pod\" --container \"$container\" /bin/sh"
+cmd="kubectl exec -ti --namespace \"$namespace\" \"$pod\" --container \"$container\" -- /bin/sh -c 'if type bash 2>/dev/null; then exec bash; else exec sh; fi'"
 echo "$cmd"
 eval "$cmd"
