@@ -73,9 +73,10 @@ kustomization.yaml) kustomize build
                     ;;
             *.tf)   terraform plan
                     ;;
-               *)   if [[ "$filename" =~ .*\.ya?ml$ ]] &&
-                       grep -q '^kind:' "$filename" &&
-                       grep -q '^apiVersion:' "$filename"; then
+               *)   if [[ "$filename" =~ \.ya?ml$ ]] &&
+                       grep -q '^apiVersion:' "$filename" &&
+                       grep -q '^kind:'       "$filename"; then
+                        # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
                         kubectl apply -f "$filename"
                         exit 0
                     fi
