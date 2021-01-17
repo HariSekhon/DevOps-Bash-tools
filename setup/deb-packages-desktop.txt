@@ -204,7 +204,7 @@ ncftp
 nemesis
 nepenthes
 net-snmp
-net-tools
+net-tools  # netstat
 netbeans
 netcat
 netdiscover

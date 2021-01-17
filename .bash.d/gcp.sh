@@ -35,6 +35,8 @@ fi
 
 # having to retype this way too much
 alias gal="gcloud auth login"
+# often bugs me to do this
+alias gcu="gcloud components update"
 
 alias gce="gcloud compute"
 alias gke="gcloud container clusters"

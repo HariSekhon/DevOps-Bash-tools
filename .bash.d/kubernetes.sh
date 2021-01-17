@@ -59,7 +59,9 @@ alias po='k get po "${k8s_get_pod_opts[@]}"'
 alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
-alias ke=kubeexec
+alias kd=kdesc
+alias ke=kubectl_exec.sh
+alias keg=kubectl_exec_grep.sh
 alias kg='k get'
 alias ka='k apply'
 alias kl='k logs'
@@ -273,13 +275,6 @@ kdp(){
 
 kdelp(){
     k delete pod "$@"
-}
-
-kubeexec(){
-    local pod
-    pod="$(get_pod "$1")"
-    shift
-    k exec -ti "$pod" "$@" /bin/sh
 }
 
 # Getting token works on stock Kubernetes but not OpenShift due to stricter defaults

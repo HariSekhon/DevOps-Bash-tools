@@ -38,7 +38,11 @@ export PATH="$PATH:/usr/local/bin"
 export TRAP_SIGNALS="INT QUIT TRAP ABRT TERM EXIT"
 
 # prevents illegal byte encoding errors when piping to filenames with unicode characters
-export LC_ALL=en_US.UTF-8
+# doesn't work in CentOS 8 docker, gets this error
+# bash: warning: setlocale: LC_ALL: cannot change locale (en_US.UTF-8)
+#export LC_ALL=en_US.UTF-8
+# but this works
+export LANG=en_US.UTF-8
 
 if [ -z "${run_count:-}" ]; then
     run_count=0

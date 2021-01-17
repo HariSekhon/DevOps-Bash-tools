@@ -30,6 +30,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
  . "$srcdir/../.bash.d/functions.sh"
 
+# defer expansion
+# shellcheck disable=SC2016
 trap_cmd 'exitcode=$?; echo; echo "Exit Code: $exitcode"'
 
 if [ $# -eq 0 ]; then
@@ -71,7 +73,14 @@ kustomization.yaml) kustomize build
                     ;;
             *.tf)   terraform plan
                     ;;
-               *)   if ! [ -x "$filename" ]; then
+               *)   if [[ "$filename" =~ \.ya?ml$ ]] &&
+                       grep -q '^apiVersion:' "$filename" &&
+                       grep -q '^kind:'       "$filename"; then
+                        # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
+                        kubectl apply -f "$filename"
+                        exit 0
+                    fi
+                    if ! [ -x "$filename" ]; then
                         echo "ERROR: file '$filename' is not set executable!" >&2
                         exit 1
                     fi
