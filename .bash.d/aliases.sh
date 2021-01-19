@@ -182,7 +182,7 @@ if [ -d "$github" ]; then
         z="${z//./_}"
         z="${z// /}"
         export "$z"="$x"
-        if ! type -P "$y"; then
+        if ! type -P "$y" &>/dev/null; then
             # shellcheck disable=SC2139,SC2140
             alias "$y"="sti $y; cd $github/$y"
         fi
