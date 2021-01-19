@@ -97,7 +97,9 @@ debug_bash_profile(){
 if isMac; then
     # turn this off on mac thing - it heavily pollutes $DEBUG output and does nothing because we have a custom prompt
     if [[ "${PROMPT_COMMAND:-}" =~ update_terminal_cwd ]]; then
-        unset PROMPT_COMMAND
+        # this unsets direnv's hook
+        #unset PROMPT_COMMAND
+        export PROMPT_COMMAND="${PROMPT_COMMAND//update_terminal_cwd/ }"
     fi
 
     export SHELL_SESSION_HISTORY=0
