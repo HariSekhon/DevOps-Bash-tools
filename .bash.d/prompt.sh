@@ -99,7 +99,8 @@ if isMac; then
     if [[ "${PROMPT_COMMAND:-}" =~ update_terminal_cwd ]]; then
         # this unsets direnv's hook
         #unset PROMPT_COMMAND
-        export PROMPT_COMMAND="${PROMPT_COMMAND//update_terminal_cwd/ }"
+        export PROMPT_COMMAND="${PROMPT_COMMAND//update_terminal_cwd/}"
+        export PROMPT_COMMAND="${PROMPT_COMMAND#;}"
     fi
 
     export SHELL_SESSION_HISTORY=0
