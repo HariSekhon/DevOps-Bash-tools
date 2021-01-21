@@ -41,7 +41,7 @@ num_args 2 "$@"
 project="$1"
 cluster_name="$2"
 
-port=10250
+PORT=10250
 
 firewall_rule_name="gke-$cluster_name-masters-to-cert-manager"
 
@@ -81,13 +81,13 @@ echo
 if gcloud compute firewall-rules list --filter "name=$firewall_rule_name" --format 'get(name)' | grep -q .; then
     echo "GCP firewall rule '$firewall_rule_name' for cert manager already exists. If this is not working for you, check the target tags, port etc haven't changed"
 else
-    timestamp "Adding a GCP firewall rule called '$firewall_rule_name' to permit GKE cluster '$cluster_name' master nodes to access cert manager pods on port $port:"
+    timestamp "Adding a GCP firewall rule called '$firewall_rule_name' to permit GKE cluster '$cluster_name' master nodes to access cert manager pods on port $PORT:"
     gcloud compute firewall-rules create "$firewall_rule_name" \
                                            --network "$network" \
                                            --action ALLOW \
                                            --direction INGRESS \
                                            --source-ranges "$master_cidr_block" \
-                                           --rules TCP:"$port" \
+                                           --rules TCP:"$PORT" \
                                            --target-tags "$target_tags"  # is one in my testing, might need editing if more than one
     echo
     echo "Done."
