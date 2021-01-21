@@ -119,7 +119,7 @@ removed_branches(){
     cut -c 3- |
     awk '$4 ~ /gone\]/ {print $1}'
 }
-alias prune="removed_branches | xargs git branch -d"
+alias prune="removed_branches | xargs -r git branch -d"
 
 # don't use this unless you are a git pro and understand unwinding history and merge conflicts
 alias GRH="git reset HEAD^"
