@@ -73,6 +73,8 @@ kustomization.yaml) kustomize build
                     ;;
             *.tf)   terraform plan
                     ;;
+            *.md)   bash -ic "cd '$dirname'; gitbrowse"
+                    ;;
                *)   if [[ "$filename" =~ \.ya?ml$ ]] &&
                        grep -q '^apiVersion:' "$filename" &&
                        grep -q '^kind:'       "$filename"; then
