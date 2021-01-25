@@ -173,33 +173,28 @@ alias bitb='cd $bitbucket'
 # used to gitbrowse to bitbucket now in git.sh
 #alias bb=bitbucket
 
-if [ -d "$github" ]; then
-    for x in "$github/"*; do
-        [ -d "$x" ] || continue
-        y="${x##*/}"
-        y="${y// /}"
-        z="${y//-/_}"
-        z="${z//./_}"
-        z="${z// /}"
-        export "$z"="$x"
-        if ! type -P "$y" &>/dev/null; then
-            # shellcheck disable=SC2139,SC2140
-            alias "$y"="sti $y; cd $github/$y"
-        fi
-    done
-fi
+for basedir in "$github" "$bitbucket"; do
+    if [ -d "$basedir" ]; then
+        for directory in "$basedir/"*; do
+            [ -d "$directory" ] || continue
+            name="${directory##*/}"
+            name="${name//-/_}"
+            name="${name//./_}"
+            name="${name// /}"
+            # alias terraform /tf -> terra
+            if [[ "$name" =~ ^terraform|tf$ ]]; then
+                name="terra"
+            fi
+            export "$name"="$directory"
+            # don't clash with any binaries
+            if ! type -P "$name" &>/dev/null; then
+                # shellcheck disable=SC2139,SC2140
+                alias "$name"="sti $name; cd $directory"
+            fi
+        done
+    fi
+done
 
-if [ -d "$bitbucket" ]; then
-    for x in "$bitbucket/"*; do
-        [ -d "$x" ] || continue
-        y=${x##*/}
-        z="${y//-/_}"
-        z="${z//./_}"
-        export "$z"="$x"
-        # shellcheck disable=SC2139,SC2140
-        alias "$y"="sti $y; cd $bitbucket/$y"
-    done
-fi
 
 doc_alias(){
     local docpath="$1"
