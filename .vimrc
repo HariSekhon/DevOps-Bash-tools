@@ -274,7 +274,7 @@ if has("autocmd")
     " TODO: needs fix to allow multiple inline yaml docs in 1 file
     "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; validate_yaml.py "%"<CR>
     au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; js-yaml "%" >/dev/null && echo YAML OK<CR>
-    au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR>:!clear; cd "%:p:h" && { terraform fmt -diff; terraform validate; } \| more -R<CR>
+    au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR>:call TerraformValidate()<CR>
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
@@ -503,7 +503,8 @@ function! WriteRun()
     " doesn't work, probably due to no first class support so just get file extension
     "elseif &filetype == 'tf'
     elseif expand('%:e') == 'tf'
-        :call TerraformPlan()
+        ":call TerraformPlan()
+        :call TerraformApply()
     elseif expand('%:t') == 'Makefile'
         :call Make()
     elseif expand('%:t') == 'Dockerfile'
@@ -564,15 +565,18 @@ function! Make(...)
 endfunction
 
 " Hashicorp Terraform
-function! TerraformPlan()
-    " '%:p:h' is dirname
-    :! bash -c 'cd "%:p:h" && terraform plan'
+function! TerraformValidate()
+    :!clear; bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; { terraform fmt -diff; terraform validate; } | more -R'
 endfunction
 
-"function! TerraformApply()
-"    " '%:p:h' is dirname
-"    :! bash -c 'cd "%:p:h" && terraform apply'
-"endfunction
+function! TerraformPlan()
+    " '%:p:h' is dirname
+    :! bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; terraform plan'
+endfunction
+
+function! TerraformApply()
+    :! bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; terraform apply'
+endfunction
 
 " GCP Google Cloud Build
 function! CloudBuild()
