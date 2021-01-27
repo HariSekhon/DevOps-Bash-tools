@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: google.com yahoo.com
 #
 #  Author: Hari Sekhon
 #  Date: 2019-04-11 18:48:01 +0100 (Thu, 11 Apr 2019)
@@ -13,22 +14,35 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Verifies the HTTPS SSL certificate of each host argument
-#
-# For a much better version of this see check_ssl_cert.pl in the Advanced Nagios Plugins Collection:
-#
-# check_ssl_cert.pl checks expiry days remaining, domain, SAN + SNI
-#
-# https://github.com/harisekhon/nagios-plugins
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-if [ $# -lt 1 ]; then
-    echo "usage: ${0##*/} host[:port] [host2[:port]] ..."
-    echo
-    exit 3
-fi
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034
+usage_description="
+Verifies the SSL certificate for each host given as arguments, using OpenSSL
+
+Port defaults to 443 if not given
+
+
+For a much better version of this see check_ssl_cert.pl in the Advanced Nagios Plugins Collection:
+
+    check_ssl_cert.pl - checks Expiry days remaining, Domain, Subject Alternative Names, SNI
+
+    https://github.com/harisekhon/nagios-plugins
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="host1[:port] [ host2:[:port]] [host3:[port]] ... ]"
+
+help_usage "$@"
+
+min_args 1 "$@"
+
 
 exitcode=0
 
