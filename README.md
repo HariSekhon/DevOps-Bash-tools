@@ -337,6 +337,7 @@ etc.
   - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
   - `aws_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
   - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
+  - `setup/eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
 
 #### GCP - Google Cloud Platform
 
