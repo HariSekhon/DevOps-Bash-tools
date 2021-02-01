@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://cloud.google.com/sql/docs/postgres/sql-proxy
+
 # Installs Google Cloud SQL Proxy to $HOME/bin
 #
 # only supports 64-bit Linux / Mac (who uses 32-bit any more?)
