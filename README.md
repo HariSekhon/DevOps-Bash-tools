@@ -394,7 +394,7 @@ etc.
     - `gcp_sql_export.sh` - creates Cloud SQL exports to [GCS](https://cloud.google.com/storage)
     - `gcp_sql_enable_automated_backups.sh` - enable automated daily Cloud SQL  backups
     - `gcp_sql_enable_point_in_time_recovery.sh` - enable point-in-time recovery with write-ahead logs
-    - `gcp_sql_proxy.sh` - quickly installs & boots a [Cloud SQL Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy) to all Cloud SQL instances in given or all GCP projects for fast convenient `psql` / `mysql` access via local sockets
+    - `gcp_sql_proxy.sh` - runs a [Cloud SQL Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy) to all Cloud SQL instances in given or all GCP projects for fast convenient `psql` / `mysql` access via local sockets. Installs Cloud SQL Proxy is not available
     - `gcp_sql_running_primaries.sh` - lists primary running Cloud SQL instances
     - `gcp_sql_service_accounts.sh` - lists Cloud SQL instance service accounts. Useful for copying to [IAM](https://cloud.google.com/iam) to grant permissions (eg. Storage Object Creator for SQL export backups to GCS)
     - `gcp_sql_create_readonly_service_account.sh` - creates a service account with read-only permissions to Cloud SQL eg. to run export backups to GCS
