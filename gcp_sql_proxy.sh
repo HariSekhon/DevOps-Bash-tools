@@ -24,7 +24,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Opens a Cloud SQL Proxy for all instances in given or all GCP Projects
 
-Populates \$HOME/cloud_sql.socks/ directory with all your Cloud SQL instances sockets to make it quicker and easy to connect than 'gcloud sql connect'
+Populates \$HOME/cloud_sql.socks/ directory with all your Cloud SQL instances sockets to make it quicker and easier to connect than slow 'gcloud sql connect'
 
 
 Auto-installs Google Cloud SQL Proxy if not found in \$PATH
