@@ -90,6 +90,12 @@ for sql_instance in $sql_instances; do
     timestamp "Getting list of databases for SQL instance '$sql_instance'"
     databases="$(gcloud sql databases list --instance="$sql_instance" --format='get(name)')"
     for database in $databases; do
+        # skip information schema, not allowed to dump this on MySQL, fails with:
+        # ERROR: (gcloud.sql.export.sql) [ERROR_RDBMS] mysqldump: Dumping 'information_schema' DB content is not supported
+        [ "$database" = "information_schema" ] && continue
+        # skip these MySQL built-in DBs too
+        [ "$database" = "sys" ] && continue
+        [ "$database" = "performance_schema" ] && continue
         timestamp "Exporting SQL instance '$sql_instance' database '$database'"
         # adding .gz will auto-encrypt the bucket
         gcloud sql export sql "$sql_instance" "gs://$gcs_bucket/backups/sql/$sql_instance--$database--$(date '+%F_%H%M').sql.gz" --database "$database"  # --offload
