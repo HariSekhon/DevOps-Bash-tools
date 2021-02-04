@@ -414,4 +414,14 @@ link_latest(){
 #export ACTIVATOR_HOME=/usr/local/activator-dist
 #add_PATH "$ACTIVATOR_HOME"
 
+dedupe_paths(){
+    local PATH_tmp=""
+    while read -r path; do
+        add_PATH PATH_tmp "$path"
+    done < <(tr ':' '\n' <<< "$PATH")
+    export PATH="$PATH_tmp"
+}
+
+dedupe_paths
+
 export PATHS_SET=1
