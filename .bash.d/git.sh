@@ -639,6 +639,9 @@ push(){
         return 1
     fi
 }
+pushu(){
+    push "$@" --set-upstream origin "$(git branch | awk '/^\*/{print $2}')"
+}
 
 switchbranch(){
     if isGit "."; then
