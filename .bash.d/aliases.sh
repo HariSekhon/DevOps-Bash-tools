@@ -314,6 +314,9 @@ export desk="$desktop"
 alias desktop='cd "$desktop"'
 alias desk=desktop
 
+export bin=~/bin
+alias bin="cd $bin"
+
 alias todo='ti T; $EDITOR ~/TODO'
 alias TODO="todo"
 alias don='ti D; $EDITOR ~/DONE'
