@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# args: all
 #
 #  Author: Hari Sekhon
 #  Date: 2019/09/20
@@ -18,9 +19,17 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "$0")"
 
 #TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.12.29}}"
-TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.14.5}}"
+TERRAFORM_VERSION="${1:-${TERRAFORM_VERSION:-${VERSION:-0.14.5}}}"
+
+if [ "$TERRAFORM_VERSION" = all ]; then
+    for install_script_version in "$srcdir/"install_terraform[[:digit:]]*.sh; do
+        "$install_script_version"
+    done
+fi
+
 echo "TERRAFORM_VERSION = $TERRAFORM_VERSION"
 echo
 
