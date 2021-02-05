@@ -34,6 +34,8 @@ If no project is specified as the 3rd arg, uploads to the Root project:
 This is useful for (re)connecting VCS configurations using SSH auth which can be used to load entire teamcity projects
 
 
+The SSH private key must be in standard PEM format to be accepted by TeamCity (generated via 'ssh-keygen -m PEM') rather than new non-standard OpenSSH format
+
 Idempotent - if the named SSH key already exists, will replace it and exit with success code zero
 "
 
