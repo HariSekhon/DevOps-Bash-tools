@@ -389,6 +389,7 @@ etc.
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
     - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
   - `gcp_firewall_disable_default_rules.sh` - disables those lax GCP default network "allow all" firewall rules
+  - `gcp_firewall_risky_rules.sh` - lists risky GCP firewall rules that are enabled and allow traffic from 0.0.0.0/0
   - `gcp_sql_*.sh` - [Cloud SQL](https://cloud.google.com/sql) scripts:
     - `gcp_sql_backup.sh` - creates Cloud SQL backups
     - `gcp_sql_export.sh` - creates Cloud SQL exports to [GCS](https://cloud.google.com/storage)
