@@ -18,8 +18,25 @@
 # ============================================================================ #
 
 alias tf=terraform
-
 #complete -C /Users/hari/bin/terraform terraform
-terraform_bin="$(type -P terraform)"
-complete -C "$terraform_bin" terraform
-complete -C "$terraform_bin" tf
+
+generate_terraform_autocomplete(){
+    local terraform_bin
+    local terraform_version_number
+
+    for terraform_bin in ~/bin/terraform[[:digit:]]*; do
+        [ -x "$terraform_bin" ] || continue
+        terraform_version_number="${terraform_bin##*/terraform}"
+        # expand now
+        # shellcheck disable=SC2139,SC2140
+        alias "tf${terraform_version_number}"="$terraform_bin"
+        complete -C "$terraform_bin" terraform
+        complete -C "$terraform_bin" tf
+    done
+
+    terraform_bin="$(type -P terraform)"
+    complete -C "$terraform_bin" terraform
+    complete -C "$terraform_bin" tf
+}
+
+generate_terraform_autocomplete
