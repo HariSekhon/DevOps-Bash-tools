@@ -24,6 +24,14 @@ TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.14.5}}"
 echo "TERRAFORM_VERSION = $TERRAFORM_VERSION"
 echo
 
+binary="terraform"
+major_version=""
+if [ -n "${VERSIONED_INSTALL:-}" ]; then
+    major_version="${TERRAFORM_VERSION#0.}"
+    major_version="${major_version%%.*}"
+    binary="terraform$major_version"
+fi
+
 os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 echo "OS detected as $os"
 echo
@@ -31,10 +39,10 @@ echo
 if [ -z "${UPDATE_TERRAFORM:-}" ]; then
     # command -v catches aliases, not suitable
     # shellcheck disable=SC2230
-    if type -P terraform &>/dev/null; then
-        echo "Terraform is already installed and available in \$PATH"
+    if type -P "$binary" &>/dev/null; then
+        echo "Terraform binary '$binary' is already installed and available in \$PATH"
         echo
-        echo "To update terraform, set the below and then re-run this script"
+        echo "To add or overwrite regardless, set the below variable and then re-run this script:"
         echo
         echo "export UPDATE_TERRAFORM=1"
         exit 0
@@ -66,6 +74,8 @@ if [ -e "$install_path" ] && ! [ -d "$install_path" ]; then
 fi
 mkdir -pv "$install_path"
 echo
+
+install_path+="/$binary"
 
 # common alias mv='mv -i' would force a prompt we don't want, even with -f
 unalias mv &>/dev/null || :
