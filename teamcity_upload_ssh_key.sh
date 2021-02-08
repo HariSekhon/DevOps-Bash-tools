@@ -87,7 +87,7 @@ teamcity_curl_auth(){
 }
 
 
-timestamp "Uploading TeamCity SSH key '$ssh_private_key' to project '$project_id' to TeamCity server at '$url_base'"
+timestamp "Uploading TeamCity SSH key '$ssh_private_key' to project '$project_id' called '$name' on TeamCity server at '$url_base'"
 output="$(teamcity_curl_auth /admin/sshKeys.html -X POST \
                                                  -F "action=createSshKey" \
                                                  -F "projectId=$project_id" \
