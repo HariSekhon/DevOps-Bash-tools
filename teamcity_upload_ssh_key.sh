@@ -38,6 +38,8 @@ This is useful for (re)connecting VCS configurations using SSH auth which can be
 
 The SSH private key must be in standard PEM format to be accepted by TeamCity (generated via 'ssh-keygen -m PEM') rather than new non-standard OpenSSH format
 
+    https://youtrack.jetbrains.com/issue/TW-53615
+
 Idempotent - if the named SSH key already exists, will replace it and exit with success code zero
 "
 
