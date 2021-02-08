@@ -1,0 +1,65 @@
+{
+  "id": "TeamCity",
+  "name": "TeamCity",
+  "vcsName": "jetbrains.git",
+  "href": "/app/rest/vcs-roots/id:TeamCity",
+  "project": {
+    "id": "_Root",
+    "name": "<Root project>",
+    "description": "Contains all other projects",
+    "href": "/app/rest/projects/id:_Root",
+    "webUrl": "http://localhost:8111/project.html?projectId=_Root"
+  },
+  "properties": {
+    "count": 11,
+    "property": [
+      {
+        "name": "agentCleanFilesPolicy",
+        "value": "ALL_UNTRACKED"
+      },
+      {
+        "name": "agentCleanPolicy",
+        "value": "ON_BRANCH_CHANGE"
+      },
+      {
+        "name": "authMethod",
+        "value": "TEAMCITY_SSH_KEY"
+      },
+      {
+        "name": "branch",
+        "value": "refs/heads/master"
+      },
+      {
+        "name": "ignoreKnownHosts",
+        "value": "true"
+      },
+      {
+        "name": "submoduleCheckout",
+        "value": "CHECKOUT"
+      },
+      {
+        "name": "teamcitySshKey",
+        "value": "VCS SSH Key"
+      },
+      {
+        "name": "url",
+        "value": "github.com:HariSekhon/TeamCity-CI"
+      },
+      {
+        "name": "useAlternates",
+        "value": "true"
+      },
+      {
+        "name": "username",
+        "value": "git"
+      },
+      {
+        "name": "usernameStyle",
+        "value": "USERID"
+      }
+    ]
+  },
+  "vcsRootInstances": {
+    "href": "/app/rest/vcs-root-instances?locator=vcsRoot:(id:TeamCity)"
+  }
+}
