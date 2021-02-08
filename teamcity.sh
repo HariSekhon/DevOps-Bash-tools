@@ -83,6 +83,9 @@ and use that to sync your Project configuration to/from Github under Project's S
 
 It's better to keep the TeamCity config VCS in the Root project because when you sync a project and it replaces the VCS json credential it breaks the GitHub sync
 and needs to be re-created. By putting it in the Root project and only enabling VCS sync on the sub-project you avoid this problem.
+
+
+Tested on TeamCity 2020.1, 2020.2
 "
 
 # used by usage() in lib/utils.sh
