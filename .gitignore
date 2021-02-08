@@ -371,9 +371,9 @@ fluxbox/debian007.jpg
 # internal repos
 git/
 git/*
-# public repos
-github/
-github/*
+# public repos - clashes with TeamCity-CI repo's .teamcity/GitHub
+#github/
+#github/*
 gitolite-admin/
 gitroot/
 GNUstep
