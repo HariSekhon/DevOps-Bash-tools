@@ -39,7 +39,7 @@ retry(){
         "$@" &&
         break;
         echo
-        if [ $count -ge $max_tries ]; then
+        if [ "$count" -ge "$max_tries" ]; then
             echo "$count tries failed, aborting..."
             exit 1
         fi
