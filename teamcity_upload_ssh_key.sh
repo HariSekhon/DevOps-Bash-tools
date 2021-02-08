@@ -26,6 +26,8 @@ Uploads SSH private key to TeamCity via the Web UI
 
 There's no TeamCity Rest API support for SSH key management at the time of writing so this script posts to the Web UI :'-(
 
+    https://youtrack.jetbrains.com/issue/TW-42311
+
 If no project is specified as the 3rd arg, uploads to the Root project:
 
     \$TEAMCITY_URL/admin/editProject.html?projectId=_Root&tab=ssh-manager#
