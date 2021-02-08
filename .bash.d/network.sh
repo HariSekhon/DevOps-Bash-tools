@@ -32,6 +32,51 @@ alias p="ping"
 pingwait="-w"
 isMac && pingwait="-W"
 
+alias ping_google="while true; do ping www.google.com && break; sleep 1 || break; done"
+alias g=ping_google
+
+# watch_url.pl is in DevOps-Perl-tools repo which should be in $PATH
+alias watchu="watch_url.pl"
+# watch google
+# https because http often gets intercepted by routers + proxies giving false 200 OKs where there is an internet issue
+alias wg="watch_url.pl https://google.com"
+
+# ============================================================================ #
+#                         Y o u r   I P   A d d r e s s
+# ============================================================================ #
+
+# local/internal IP address
+myip(){
+    ifconfig | grep 'inet[[:space:]]' | grep -v 127.0.0.1 | awk '{print $2}'
+}
+
+# public IP address
+ifconfigco(){
+    curl ifconfig.co
+    # something else to consider with jq for lat/long coordinates, ASN, country etc
+    #curl ifconfig.co/json
+}
+
+ipinfo(){
+    # returns json without /ip with region, reverse dns hostname, city, region, country, lat/long coordinates, org, postcode, timezone
+    curl ipinfo.io/ip
+}
+
+ipify(){
+    curl http://api.ipify.org/
+    echo
+}
+
+# doesn't welcome automation / curl - requires captchas now so obsolete
+#whatismyip(){
+#    #lynx -dump $(lynx -dump www.whatismyip.com | tail -n 1)
+#    lynx -useragent="Mozilla" -dump www.whatismyip.com 2>/dev/null | awk '/Your Public IPv[46] is:/ {print $6}'
+#}
+
+# ============================================================================ #
+#                               F u n c t i o n s
+# ============================================================================ #
+
 checkhost(){
     if [ -z "$1" ]; then
         echo "usage: checkhost hostname/ip"
@@ -42,15 +87,6 @@ checkhost(){
         return 1
     fi
 }
-
-alias ping_google="while true; do ping www.google.com && break; sleep 1 || break; done"
-alias g=ping_google
-
-# watch_url.pl is in DevOps-Perl-tools repo which should be in $PATH
-alias watchu="watch_url.pl"
-# watch google
-# https because http often gets intercepted by routers + proxies giving false 200 OKs where there is an internet issue
-alias wg="watch_url.pl https://google.com"
 
 n(){
     if type -P host &>/dev/null; then
@@ -150,31 +186,6 @@ z(){
         echo "Couldn't find gateway, cannot test upstream connectivity!"
         return 1
     fi
-}
-
-myip(){
-    ifconfig | grep 'inet[[:space:]]' | grep -v 127.0.0.1 | awk '{print $2}'
-}
-
-ifconfigco(){
-    curl ifconfig.co
-    # something else to consider with jq for lat/long coordinates, ASN, country etc
-    #curl ifconfig.co/json
-}
-
-ipinfo(){
-    # returns json without /ip with region, reverse dns hostname, city, region, country, lat/long coordinates, org, postcode, timezone
-    curl ipinfo.io/ip
-}
-
-ipify(){
-    curl http://api.ipify.org/
-    echo
-}
-
-whatismyip(){
-    #lynx -dump $(lynx -dump www.whatismyip.com | tail -n 1)
-    lynx -useragent="Mozilla" -dump www.whatismyip.com 2>/dev/null | awk '/Your Public IPv[46] is:/ {print $6}'
 }
 
 browser(){
