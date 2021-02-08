@@ -24,9 +24,11 @@ SOCKDIR=~/cloud_sql.socks
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Opens a Cloud SQL Proxy for all instances in given or all GCP Projects
+Opens a Cloud SQL Proxy for all instances in given GCP Project(s) or all GCP Projects
 
-Populates \$HOME/cloud_sql.socks/ directory with all your Cloud SQL instances sockets to make it quicker and easier to connect than slow 'gcloud sql connect'
+Populates \$HOME/cloud_sql.socks/ directory with all your Cloud SQL instances sockets
+
+Makes it quicker and easier to connect than slow 'gcloud sql connect' commands (which also requires a public IP address attached to your SQL instance)
 
 
 Usage:
@@ -51,7 +53,7 @@ For production long-lived proxying, use dedicated Cloud SQL Proxy instances with
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<projects>"
+usage_args="[<projects>]"
 
 help_usage "$@"
 
