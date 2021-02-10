@@ -18,6 +18,8 @@
 # ============================================================================ #
 
 alias tf=terraform
+alias tfp='tf plan'
+alias tfa='tf apply'
 #complete -C /Users/hari/bin/terraform terraform
 
 generate_terraform_autocomplete(){
