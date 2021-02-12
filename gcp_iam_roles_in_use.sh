@@ -26,7 +26,13 @@ Quick list of unique GCP IAM roles in use in the current GCP project or across a
 
 Useful for quick lookups of IAM policy role names which are different from the human readable names in the GCP UI
 
-eg. when backporting GCP IAM permissions to Terraform
+eg. when backporting GCP IAM permissions to Terraform:
+
+    gcloud projects get-iam-policy \"\$(gcloud config list --format='get(core.project)')\" > /tmp/iam_policy.yaml
+    ${0##*/} > /tmp/iam_roles_reference.txt
+    vim -O /tmp/iam_policy.yaml /tmp/iam_roles_reference.txt
+    # in another window edit the Terraform IAM and screen/tmux back and forth from this reference
+
 
 You can optionally specify the GCP project, otherwise infers your currently set core.project
 
