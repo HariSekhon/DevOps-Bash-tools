@@ -51,6 +51,7 @@ usage_args=""
 help_usage "$@"
 
 project="$(gcloud config list --format="value(core.project)")"
+not_blank "$project" || die "ERROR: GCloud SDK core.project property not set"
 name="${GOOGLE_SERVICE_ACCOUNT:-cloud-function-sql-backup}"
 service_account="$name@$project.iam.gserviceaccount.com"
 
