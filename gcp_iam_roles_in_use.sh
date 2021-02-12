@@ -47,9 +47,7 @@ if [ -z "$project" ]; then
     project="$(gcloud config list --format='get(core.project)')"
 fi
 
-if [ -z "$project" ]; then
-    die "GCP project not specified and core.project property not set in config"
-fi
+not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project property not set"
 
 get_roles(){
     local project="$1"
