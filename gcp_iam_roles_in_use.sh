@@ -47,7 +47,7 @@ if is_blank "$project"; then
     project="$(gcloud config list --format='get(core.project)')"
 fi
 
-not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project property not set"
+not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project property not set in config"
 
 get_roles(){
     local project="$1"
