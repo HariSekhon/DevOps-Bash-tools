@@ -43,7 +43,7 @@ help_usage "$@"
 
 project="${1:-}"
 
-if [ -z "$project" ]; then
+if is_blank "$project"; then
     project="$(gcloud config list --format='get(core.project)')"
 fi
 
