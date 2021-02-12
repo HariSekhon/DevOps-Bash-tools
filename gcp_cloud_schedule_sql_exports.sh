@@ -51,6 +51,10 @@ help_usage "$@"
 no_more_opts "$@"
 
 project_id="$(gcloud config list --format="value(core.project)")"
+if [ -z "$project_id" ]; then
+    die "GCP core.project property not set in config"
+fi
+
 bucket="${BUCKET:-${project_id}-sql-backups}"
 cron="${CLOUD_SCHEDULER_CRON:-0 2 * * *}"
 topic="${PUBSUB_TOPIC:-cloud-sql-backups}"
