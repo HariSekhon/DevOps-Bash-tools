@@ -41,25 +41,27 @@ help_usage "$@"
 list_vm_service_account(){
     local instance="$1"
     local zone="${2:-}"
-    local zone_opt
+    local opts=()
     if [ -n "$zone" ]; then
-        zone_opt="--zone $zone"
+        opts+=(--zone "$zone")
     fi
-    # want splitting
-    # shellcheck disable=SC2086
-    gcloud compute instances describe "$instance" $zone_opt --format='table[no-heading](name, serviceAccounts.email.join(","))'
+    # outputs the results to stderr when no zone is specified
+    gcloud compute instances describe "$instance" "${opts[@]}" --format='table[no-heading](name, serviceAccounts.email.join(","))' 2>&1 #|
+    # GCloud SDK changes behaviour to error out if piped!
+    #grep -Ev '^No zone specified. Using zone \[[[:alnum:]-]+\] for instance:' || :
 }
 
-get_instances_name_zone(){
-    gcloud compute instances list --format='table[no-heading](name, zone.basename())'
-}
+#get_instances_name_zone(){
+#    gcloud compute instances list --format='table[no-heading](name, zone.basename())'
+#}
 
 if [ $# -gt 0 ]; then
     for arg; do
         list_vm_service_account "$arg"
     done
 else
-    while read -r name zone; do
-        list_vm_service_account "$name" "$zone"
-    done < <(get_instances_name_zone)
+    #while read -r name zone; do
+    #    list_vm_service_account "$name" "$zone"
+    #done < <(get_instances_name_zone)
+    gcloud compute instances list --format='table[no-heading](name, serviceAccounts.email.join(","))'
 fi
