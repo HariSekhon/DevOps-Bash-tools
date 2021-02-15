@@ -243,14 +243,21 @@ isGit(){
         return 0
     else
         # This is because git command doesn't return correctly when running from outside git root, complains there is not .git
-        pushd "$(dirname "$target")" >/dev/null || return 1
-        # subdirs which are not handled by Git fail isGit
-        # returns false for a newly added not committed dir
-        #if git log -1 "$target" 2>/dev/null | grep -q '.*'; then
-        if [ -n "$(git log -1 "$(basename "$target")" 2>/dev/null)" ]; then
-            # shellcheck disable=SC2164
-            popd &>/dev/null
-            return 0
+        if [ -d "$target" ]; then
+            pushd "$target" >/dev/null || return 1
+            if [ -n "$(git log -1 . 2>/dev/null)" ]; then
+                # shellcheck disable=SC2164
+                popd &>/dev/null
+                return 0
+            fi
+        else
+            pushd "$(dirname "$target")" >/dev/null || return 1
+            #if git log -1 "$target" 2>/dev/null | grep -q '.*'; then
+            if [ -n "$(git log -1 "$(basename "$target")" 2>/dev/null)" ]; then
+                # shellcheck disable=SC2164
+                popd &>/dev/null
+                return 0
+            fi
         fi
         # shellcheck disable=SC2164
         popd &>/dev/null
