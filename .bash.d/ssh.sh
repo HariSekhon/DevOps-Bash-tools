@@ -142,7 +142,7 @@ issh(){
         return 1
     fi
     cleankey "$@"
-    ssh "root@$*" -oStrictHostKeyChecking=no
+    ssh -oStrictHostKeyChecking=no "$@"
 }
 
 bouncessh(){
