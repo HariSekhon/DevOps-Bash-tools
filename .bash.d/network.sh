@@ -289,7 +289,7 @@ retry(){
     if [ "$cmd" = "ssh" ] || [ "$cmd" = "rdp" ]; then
         whenup "$host" || return 1
     fi
-    [ "$cmd" = "ssh" ] && host="root@$host"
+    #[ "$cmd" = "ssh" ] && host="root@$host"
     if [ "$cmd" = "ssh" ]; then
         until port "${host##*@}" 22 >/dev/null; do
             tstamp "trying $host port 22"
