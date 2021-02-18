@@ -39,7 +39,7 @@ See Also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<kubernetes_secret_name> <kubernetes_namespace> <gcp_secret_1> [<gcp_secret_2> ...]"
+usage_args="<kubernetes_namespace> <kubernetes_secret_name> <gcp_secret_1> [<gcp_secret_2> ...]"
 
 help_usage "$@"
 
@@ -63,8 +63,8 @@ get_latest_version(){
     head -n1
 }
 
-kubernetes_secret="$1"
-namespace="$2"
+namespace="$1"
+kubernetes_secret="$2"
 shift || :
 shift || :
 
