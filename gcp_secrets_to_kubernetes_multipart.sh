@@ -70,7 +70,7 @@ shift || :
 
 if kubectl get secret "$kubernetes_secret" -n "$namespace" &>/dev/null; then
     timestamp "kubernetes secret '$kubernetes_secret' already exists in namespace '$namespace', skipping creation..." >&2
-    exit 1
+    exit 0
 fi
 
 # auto base64 encodes the $value - you must base64 encode it yourself if putting it in via yaml
