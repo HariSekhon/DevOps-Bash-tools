@@ -26,6 +26,8 @@ Find GCP roles that have been granted directly to a user in the current / given 
 
 Useful to find IAM permissions in violation of best practice group-oriented management
 
+If you set \$DUMP_ROLES will output a JSON output for each role so you can see the offending user members
+
 
 Requires GCloud SDK to be installed and configured
 "
@@ -46,4 +48,12 @@ not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.pro
 
 gcloud projects get-iam-policy "$project" --format=json |
 jq -r ".bindings[] | select(.members[] | test(\"^user:\")) | .role" |
-sort -u
+sort -u |
+if [ -n "${DUMP_ROLES:-}" ]; then
+    while read -r role; do
+        gcloud projects get-iam-policy "$project" --format=json |
+        jq -r ".bindings[] | select(.role == \"$role\")"
+    done
+else
+    cat
+fi
