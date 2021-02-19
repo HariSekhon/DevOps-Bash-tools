@@ -424,6 +424,7 @@ etc.
       - `gcp_iam_identities_in_use.sh` - lists GCP IAM identities (users/groups/serviceAccounts) in use in the current or all projects
       - `gcp_iam_roles_granted_to_identity.sh` - lists GCP IAM roles granted to identities matching the regex (users/groups/serviceAccounts) in the current or all projects
       - `gcp_iam_roles_with_direct_user_grants.sh` - lists GCP IAM roles which have been granted directly to users in violation of best-practice group-based management
+      - `gcp_iam_roles_granted_too_widely.sh` - lists GCP IAM roles which have been granted to allAuthenticatedUsers or even worse allUsers (unauthenticated) in one or all projects
       - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
 
 #### Kubernetes
