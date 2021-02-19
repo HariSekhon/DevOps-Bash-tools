@@ -456,7 +456,7 @@ etc.
   - `kubernetes_running_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubernetes_running_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubernetes_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
-  - see also the Google Kubernetes Engine section in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) above
+  - see also the Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
   - see also the [Kubernetes templates](https://github.com/HariSekhon/Kubernetes-templates) repo
 
 #### Docker
