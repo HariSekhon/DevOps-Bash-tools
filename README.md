@@ -371,6 +371,7 @@ etc.
   - `gcp_iam_roles_in_use.sh` - lists GCP IAM roles in use in the current or all projects
   - `gcp_iam_identities_in_use.sh` - lists GCP IAM identities (users/groups/serviceAccounts) in use in the current or all projects
   - `gcp_iam_roles_granted_to_identity.sh` - lists GCP IAM roles granted to identities matching the regex (users/groups/serviceAccounts) in the current or all projects
+  - `gcp_iam_roles_with_direct_user_grants.sh` - lists GCP IAM roles which have been granted directly to users in violation of best-practice group-based management
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
