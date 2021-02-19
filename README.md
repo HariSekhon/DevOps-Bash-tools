@@ -364,18 +364,12 @@ etc.
   - `gcp_secrets_*.sh` - [Google Secret Manager](https://cloud.google.com/secret-manager) scripts:
     - `gcp_secrets_to_kubernetes.sh` - loads GCP secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also `kubernetes_get_secret_values.sh` to debug the actual values that got loaded
     - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple GCP secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
-  - GCP [IAM](https://cloud.google.com/iam) scripts:
-    - `gcp_service_account*.sh`:
-      - `gcp_service_account_credential_to_secret.sh` - creates GCP service account and exports a credential key to GCP Secret Manager (useful to stage or combine with `gcp_secrets_to_kubernetes.sh`)
-      - `gcp_service_accounts_credential_keys.sh` - lists all service account credential keys and expiry dates, can `grep 9999-12-31T23:59:59Z` to find non-expiring keys
-      - `gcp_service_accounts_credential_keys_age.sh` - lists all service account credential keys age in days
-      - `gcp_service_accounts_credential_keys_expired.sh` - lists expired service account credential keys that should be removed and recreated if needed
-    - `gcp_iam_*.sh`:
-      - `gcp_iam_roles_in_use.sh` - lists GCP IAM roles in use in the current or all projects
-      - `gcp_iam_identities_in_use.sh` - lists GCP IAM identities (users/groups/serviceAccounts) in use in the current or all projects
-      - `gcp_iam_roles_granted_to_identity.sh` - lists GCP IAM roles granted to identities matching the regex (users/groups/serviceAccounts) in the current or all projects
-      - `gcp_iam_roles_with_direct_user_grants.sh` - lists GCP IAM roles which have been granted directly to users in violation of best-practice group-based management
-      - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
+    - `gcp_service_account_credential_to_secret.sh` - creates GCP service account and exports a credential key to GCP Secret Manager (useful to stage or combine with `gcp_secrets_to_kubernetes.sh`)
+  - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
+    - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
+    - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
+    - `gke_cert_manager_firewall_rule.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr and network)
+    - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
@@ -387,11 +381,6 @@ etc.
     - `gcr_tags_old.sh` - lists tags older than N days for a given GCR docker image
     - `gcr_delete_old_tags.sh` - deletes tags older than N days for a given GCR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
     - see also [cloudbuild.yaml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
-  - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
-    - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
-    - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
-    - `gke_cert_manager_firewall_rule.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr and network)
-    - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
@@ -424,6 +413,18 @@ etc.
     - `bigquery_generate_query_biggest_tables_across_datasets_by_row_count.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by row count
     - `bigquery_generate_query_biggest_tables_across_datasets_by_size.sh` - generates a BigQuery SQL query to find the top 10 biggest tables by size
     - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight BigQuery SQL scripts
+  - GCP [IAM](https://cloud.google.com/iam) scripts:
+    - `gcp_service_account*.sh`:
+      - `gcp_service_account_credential_to_secret.sh` - creates GCP service account and exports a credential key to GCP Secret Manager (useful to stage or combine with `gcp_secrets_to_kubernetes.sh`)
+      - `gcp_service_accounts_credential_keys.sh` - lists all service account credential keys and expiry dates, can `grep 9999-12-31T23:59:59Z` to find non-expiring keys
+      - `gcp_service_accounts_credential_keys_age.sh` - lists all service account credential keys age in days
+      - `gcp_service_accounts_credential_keys_expired.sh` - lists expired service account credential keys that should be removed and recreated if needed
+    - `gcp_iam_*.sh`:
+      - `gcp_iam_roles_in_use.sh` - lists GCP IAM roles in use in the current or all projects
+      - `gcp_iam_identities_in_use.sh` - lists GCP IAM identities (users/groups/serviceAccounts) in use in the current or all projects
+      - `gcp_iam_roles_granted_to_identity.sh` - lists GCP IAM roles granted to identities matching the regex (users/groups/serviceAccounts) in the current or all projects
+      - `gcp_iam_roles_with_direct_user_grants.sh` - lists GCP IAM roles which have been granted directly to users in violation of best-practice group-based management
+      - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
 
 #### Kubernetes
 
