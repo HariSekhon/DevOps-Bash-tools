@@ -42,6 +42,14 @@ You could also use this to find any roles granted on a user-basis against group-
 
     ${0##*/} ^user:
 
+Find roles granted too widely to all authenticated users, searching across all your projects:
+
+    ${0##*/} group:allAuthenticatedUsers all
+
+Find roles granted too widely to all unauthenticated users, searching across all your projects:
+
+    ${0##*/} group:allUsers all
+
 
 Requires GCloud SDK to be installed and configured
 "
