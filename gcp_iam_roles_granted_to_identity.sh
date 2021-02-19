@@ -40,7 +40,7 @@ but is interpreted as a regex so you could just use a substring match like 'hari
 
 You could also use this to find any roles granted on a user-basis against group-oriented policy eg.
 
-    ${0##*/} user:
+    ${0##*/} ^user:
 
 
 Requires GCloud SDK to be installed and configured
