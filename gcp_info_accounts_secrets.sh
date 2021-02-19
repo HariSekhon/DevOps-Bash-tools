@@ -67,6 +67,18 @@ EOF
 gcp_info "Service Accounts" gcloud iam service-accounts list
 
 
+cat <<EOF
+
+
+# ============================================================================ #
+#                         I A M   P e r m i s s i o n s
+# ============================================================================ #
+
+EOF
+
+"$srcdir/gcp_iam_roles_granted_too_widely.sh"
+
+
 # Secrets
 cat <<EOF
 
