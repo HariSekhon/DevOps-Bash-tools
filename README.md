@@ -369,6 +369,8 @@ etc.
   - `gcp_service_accounts_credential_keys_age.sh` - lists all service account credential keys age in days
   - `gcp_service_accounts_credential_keys_expired.sh` - lists expired service account credential keys that should be removed and recreated if needed
   - `gcp_iam_roles_in_use.sh` - lists GCP IAM roles in use in the current or all projects
+  - `gcp_iam_identities_in_use.sh` - lists GCP IAM identities (users/groups/serviceAccounts) in use in the current or all projects
+  - `gcp_iam_roles_granted_to_identity.sh` - lists GCP IAM roles granted to identities matching the regex (users/groups/serviceAccounts) in the current or all projects
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
