@@ -57,8 +57,9 @@ not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.pro
 
 get_roles(){
     local project="$1"
-    gcloud projects get-iam-policy "$project" |
-    awk '/^[[:space:]]+role:[[:space:]]/{print $2}'
+    gcloud projects get-iam-policy "$project" --format=json |
+    #awk '/^[[:space:]]+role:[[:space:]]/{print $2}'
+    jq -r '.bindings[].role'
 }
 
 if [ "$project" = "all" ] ;then
