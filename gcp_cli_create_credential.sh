@@ -36,6 +36,9 @@ The following optional arguments can be given:
 - credential file path          (default: \$HOME/.gcloud/\$name-\$project-credential.json)
 - project                       (default: gcloud config's currently configured project setting core.project)
 
+This can also be used as a backup credential - this way if something accidentally happens to your primary user account
+or this service account, you can always use the other to repair access without having to rely on colleagues who be away
+
 Idempotent - safe to re-run, will skip service accounts and keyfiles that already exist
 "
 
