@@ -39,6 +39,10 @@ Requires either \$JENKINS_URL or \$JENKINS_HOST + \$JENKINS_PORT which defaults 
 
 If you require SSL, specify full \$JENKINS_URL
 
+
+Might not work on Jenkins 2.176.2 onwards, see:
+
+    https://www.jenkins.io/doc/upgrade-guide/2.176/#SECURITY-626
 "
 
 # used by usage() in lib/utils.sh
