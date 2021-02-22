@@ -48,12 +48,13 @@ services:
       # skips creating admin user or prompting to install plugins
       #JAVA_OPTS: -Dhudson.footerURL=https://github.com/harisekhon -Djenkins.install.runSetupWizard=false
       JAVA_OPTS: -Dhudson.footerURL=https://github.com/harisekhon
-  jenkins-agent:
-    hostname: jenkins-agent
-    # doesn't have an lts tag at the moment
-    image: jenkins/inbound-agent:latest
-    restart: unless-stopped
-    environment:
-      JENKINS_AGENT_NAME: agent1
-      JENKINS_URL: http://jenkins-server:8080
-      JENKINS_SECRET: ${JENKINS_SECRET:-none}
+#  jenkins-agent:
+#    hostname: jenkins-agent
+#    # doesn't have an lts tag at the moment
+#    image: jenkins/inbound-agent:latest
+#    restart: unless-stopped
+#    environment:
+#      JENKINS_AGENT_NAME: agent1
+#      JENKINS_URL: http://jenkins-server:8080
+#      # need to get this from the web UI, then uncomment and set in environment - it's not visible in the Rest API :'-(
+#      JENKINS_SECRET: ${JENKINS_SECRET:-none}
