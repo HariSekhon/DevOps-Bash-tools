@@ -26,15 +26,18 @@ Queries the Jenkins Rest API
 
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
-Automatically handles authentication via environment variables \$JENKINS_USERNAME / \$JENKINS_USER and \$JENKINS_PASSWORD,
-and obtains the Jenkins-Crumb cookie from a pre-request
-
 Requires either \$JENKINS_URL or \$JENKINS_HOST + \$JENKINS_PORT which defaults to localhost and port 8080
 
 If you require SSL, specify full \$JENKINS_URL
 
+Automatically handles authentication via environment variables:
 
-Might not work on Jenkins 2.176.2 onwards, see:
+- \$JENKINS_USERNAME / \$JENKINS_USER
+- \$JENKINS_TOKEN or \$JENKINS_PASSWORD
+
+If using JENKINS_PASSWORD, obtains the Jenkins-Crumb cookie from a pre-request
+
+On Jenkins 2.176.2 onwards, you must set JENKINS_TOKEN instead of using a password, see
 
     https://www.jenkins.io/doc/upgrade-guide/2.176/#SECURITY-626
 "
@@ -63,8 +66,12 @@ shopt -u nocasematch
 JENKINS_URL="${JENKINS_URL%%/}"
 
 export USERNAME="${JENKINS_USERNAME:-${JENKINS_USER:-}}"
-export PASSWORD="${JENKINS_PASSWORD:-${JENKINS_TOKEN:-}}"
+if [ -n "${JENKINS_TOKEN:-}" ]; then
+    export PASSWORD="$JENKINS_TOKEN"
+else
+    export PASSWORD="${JENKINS_PASSWORD:-${JENKINS_TOKEN:-}}"
+    crumb="$("$srcdir/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
+    CURL_OPTS+=(-H "Jenkins-Crumb: $crumb")
+fi
 
-crumb="$("$srcdir/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
-
-"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" -H "Jenkins-Crumb: $crumb" "${CURL_OPTS[@]}" "$@"
+"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" "${CURL_OPTS[@]}" "$@"
