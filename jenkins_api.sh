@@ -45,7 +45,12 @@ If you require SSL, specify full \$JENKINS_URL
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
-JENKINS_URL="http://${JENKINS_URL:-${JENKINS_HOST:-localhost}:${JENKINS_PORT:-8080}}"
+JENKINS_URL="${JENKINS_URL:-http://${JENKINS_HOST:-localhost}:${JENKINS_PORT:-8080}}"
+shopt -s nocasematch
+if ! [[ "$JENKINS_URL" =~ https?:// ]]; then
+    JENKINS_URL="http://$JENKINS_URL"
+fi
+shopt -u nocasematch
 
 curl_api_opts "$@"
 
