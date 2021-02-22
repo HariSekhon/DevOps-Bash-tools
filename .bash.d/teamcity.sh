@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# ============================================================================ #
+#                                T e a m C i t y
+# ============================================================================ #
+
 # sets TeamCity URL to the local docker and finds and loads the current container's superuser token to the environment for immediate use with teamcity_api.sh
 teamcity_local(){
     TEAMCITY_SUPERUSER_TOKEN="$(
