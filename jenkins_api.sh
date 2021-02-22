@@ -51,6 +51,11 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+url_path="${1:-}"
+url_path="${url_path##/}"
+
+shift || :
+
 JENKINS_URL="${JENKINS_URL:-http://${JENKINS_HOST:-localhost}:${JENKINS_PORT:-8080}}"
 shopt -s nocasematch
 if ! [[ "$JENKINS_URL" =~ https?:// ]]; then
@@ -61,11 +66,6 @@ JENKINS_URL="${JENKINS_URL%%/}"
 
 export USERNAME="${JENKINS_USERNAME:-${JENKINS_USER:-}}"
 export PASSWORD="${JENKINS_PASSWORD:-${JENKINS_TOKEN:-}}"
-
-url_path="${1:-}"
-url_path="${url_path##/}"
-
-shift || :
 
 crumb="$("$srcdir/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
 
