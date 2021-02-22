@@ -12,6 +12,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://github.com/jenkinsci/docker/blob/master/README.md
+
 version: '3'
 
 services:
