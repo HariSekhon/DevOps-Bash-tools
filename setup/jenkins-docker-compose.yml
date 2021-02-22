@@ -35,16 +35,25 @@ services:
     #  - ./setup/jenkins-plugins.txt:/usr/share/jenkins/ref/plugins.txt
     user: root:root
     # gets 403 without -Djenkins.install.runSetupWizard=false
-    #healthcheck:
-    #  #test: ["CMD", "curl", "-f", "http://localhost:8080"]
-    #  # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
-    #  test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8080}"
-    #  interval: 30s
-    #  #start_period: 30s  # version 3.4+
-    #  timeout: 10s
-    #  retries: 5
+    healthcheck:
+      #test: ["CMD", "curl", "-f", "http://localhost:8080/login"]
+      # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
+      test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8080/login}"
+      interval: 30s
+      start_period: 30s  # version 3.4+
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
     environment:
       # skips creating admin user or prompting to install plugins
       #JAVA_OPTS: -Dhudson.footerURL=https://github.com/harisekhon -Djenkins.install.runSetupWizard=false
       JAVA_OPTS: -Dhudson.footerURL=https://github.com/harisekhon
-  #jenkins-slave:
+  jenkins-agent:
+    hostname: jenkins-agent
+    # doesn't have an lts tag at the moment
+    image: jenkins/inbound-agent:latest
+    restart: unless-stopped
+    environment:
+      JENKINS_AGENT_NAME: agent1
+      JENKINS_URL: http://jenkins-server:8080
+      JENKINS_SECRET: ${JENKINS_SECRET:-none}
