@@ -26,7 +26,8 @@ alias jenkins-cli='jenkins_cli.sh'
 jenkins_local(){
     JENKINS_SUPERUSER_PASSWORD="$(
         docker-compose -p bash-tools -f "$(dirname "${BASH_SOURCE[0]}")/../setup/jenkins-docker-compose.yml" \
-            exec jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword
+            exec -T jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword </dev/null
+            # use terminal or gets carriage return and would have to tr -d '\r'
     )"
 
     export JENKINS_USER=admin
