@@ -13,6 +13,15 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# ============================================================================ #
+#                                 J e n k i n s
+# ============================================================================ #
+
+#alias jenkins_cli='java -jar ~/jenkins-cli.jar -s http://jenkins:8080'
+alias jenkins-cli='jenkins_cli.sh'
+
+#alias backup_jenkins="rsync -av root@jenkins:/jenkins_backup/*.zip '~/jenkins_backup/'"
+
 # sets Jenkins URL to the local docker and finds and loads the current container's superuser token to the environment for immediate use with jenkins_api.sh
 jenkins_local(){
     JENKINS_SUPERUSER_PASSWORD="$(
