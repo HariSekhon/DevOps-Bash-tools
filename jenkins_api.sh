@@ -13,12 +13,6 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-#  args: /user | jq .
-#  args: /workspaces | jq .
-#  args: /repositories/harisekhon | jq .
-#  args: /repositories/harisekhon/devops-bash-tools/pipelines/ | jq .
-#  args: /repositories/harisekhon/devops-bash-tools -X PUT -H 'Content-Type: application/json' -d '{"description": "some words"}'
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
