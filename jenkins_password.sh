@@ -13,6 +13,12 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# Gets the Jenkins password out of the Docker Compose jenkins-server
+
+# Might need the compose project name matching the instantiation, eg.
+#
+# export COMPOSE_PROJECT_NAME="bash-tools"
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
