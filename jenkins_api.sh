@@ -51,6 +51,7 @@ if ! [[ "$JENKINS_URL" =~ https?:// ]]; then
     JENKINS_URL="http://$JENKINS_URL"
 fi
 shopt -u nocasematch
+JENKINS_URL="${JENKINS_URL%%/}"
 
 curl_api_opts "$@"
 
