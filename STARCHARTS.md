@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
-![Original Repos](https://img.shields.io/badge/Repos-18-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2655-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1189-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-464-blue?logo=github)
+![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2756-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1231-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-492-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -59,6 +59,15 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 [![Stargazers over time](https://starchart.cc/HariSekhon/HAProxy-configs.svg)](https://starchart.cc/HariSekhon/HAProxy-configs)
 
 ---
+## SQL Scripts
+
+Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
+
+100+ SQL Scripts - PostgreSQL, MySQL, Google BigQuery, MariaDB, AWS Athena. DevOps / DBA / Analytics / performance engineering. Google BigQuery ML machine learning classification.
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/SQL-scripts.svg)](https://starchart.cc/HariSekhon/SQL-scripts)
+
+---
 ## Hari Sekhon - DevOps Perl Tools
 
 Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-tools)
@@ -66,15 +75,6 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 25+ DevOps CLI Tools - Kubernetes & Code templates, Log Anonymizer, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles), Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, Nginx stats & HTTP(S) URL watchers for load-balanced web farms, Linux tools etc.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Perl-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Perl-tools)
-
----
-## SQL Scripts
-
-Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
-
-100+ SQL Scripts - PostgreSQL, MySQL, Google BigQuery, MariaDB, AWS Athena - for DevOps & Analytics - Google BigQuery ML machine learning classification, DBA, DevOps, performance engineering
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/SQL-scripts.svg)](https://starchart.cc/HariSekhon/SQL-scripts)
 
 ---
 ## Spotify Tools
@@ -99,7 +99,7 @@ Perl Utility Library for my other repos
 
 Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernetes-templates)
 
-Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus patches, Kustomize, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates
+Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus CI/CD Jenkins & TeamCity, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates, patches, Kustomize etc.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Kubernetes-templates.svg)](https://starchart.cc/HariSekhon/Kubernetes-templates)
 
@@ -138,6 +138,15 @@ Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Gol
 DevOps Golang tools
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
+
+---
+## Terraform Templates
+
+Link:  [HariSekhon/Terraform-templates](https://github.com/HariSekhon/Terraform-templates)
+
+Terraform templates for AWS / GCP / Azure
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/Terraform-templates.svg)](https://starchart.cc/HariSekhon/Terraform-templates)
 
 ---
 ## Hari Sekhon - Spotify Playlists
