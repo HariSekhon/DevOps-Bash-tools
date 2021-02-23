@@ -133,6 +133,9 @@ fi
 
 # Make sure to customize Anaconda installation and de-select Modify Path otherwise it'll change the bash profile
 
+# XXX: WARNING - this will appear earlier in the $PATH than the python bin paths, so if you have it installed, you should use it
+#                otherwise pylint for example may be called from anaconda/bin but not have the pip modules necessary to check files, leading to CI breakages
+
 # for the 'conda' command
 add_PATH ~/anaconda/bin
 
