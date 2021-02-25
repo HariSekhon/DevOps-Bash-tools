@@ -35,7 +35,7 @@ Eg. running:
 either by your hand or in other concurrently executing scripts changes your global kubectl context to run on the given cluster, which could divert your command or concurrently long running scripts in other windows to run kubectl commands on the wrong cluster, leading to cross environment misconfigurations and real world outages (I've seen this personally)
 
 
-For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the PROJECT, CLUSTER and ZONE variables
+For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CONTEXT or PROJECT, CLUSTER and ZONE variables
 
 Could also use main kube config with kubectl switches --cluster / --context (after configuring, see gke_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 
@@ -63,18 +63,38 @@ PROJECT="$1"  # used explicitly for easier tracking/debugging rather relying on 
 CLUSTER="$2"  # eg. <myproject>-europe-west1
 ZONE="$3"     # eg. europe-west1
 
+# if set and available in original kube config, will just copy config and switch to this context (faster and less noisy than re-pulling creds from GKE)
+CONTEXT="gke_$CLUSTER-$CLUSTER"
+
 # REMOVE if hardcoding
 shift || :
 shift || :
 shift || :
 # ============================================================
 
+tmpdir="/tmp/.kube"
+
+mkdir -pv "$tmpdir"
+
+default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
+original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
+
 # protect against race conditions and guarantee we will only make changes to the right k8s cluster
-export KUBECONFIG="/tmp/.kube/config.${EUID:-$UID}.$$"
+export KUBECONFIG="$tmpdir/config.${EUID:-$UID}.$$"
 
-mkdir -pv "$(dirname "$KUBECONFIG")"
-
-gcloud container clusters get-credentials "$CLUSTER" --zone "$ZONE" --project "$PROJECT"
-echo >&2
+# if original kube config contains the context, copy and reuse it (faster and less noisy than re-pulling the creds from GKE), especially when called in script iterations
+if [ -f "$original_kubeconfig" ] &&
+   [ -n "${CONTEXT:-}" ] &&
+   KUBECONFIG="$original_kubeconfig" kubectl config get-contexts -o name | grep -Fxq "$CONTEXT"; then
+    # copy to isolate existing config with context info
+    cp -f "$original_kubeconfig" "$KUBECONFIG"
+    # switch context if not already the current context (avoids repeating "switching context" output noise when this script it called iteratively in loop by other scripts)
+    if [ "$(kubectl config current-context)" != "$CONTEXT" ]; then
+        kubectl config use-context "$CONTEXT"
+    fi
+else
+    gcloud container clusters get-credentials "$CLUSTER" --zone "$ZONE" --project "$PROJECT"
+    echo >&2
+fi
 
 kubectl "$@"
