@@ -64,13 +64,21 @@ CONTEXT="$1"
 shift || :
 # ============================================================
 
-# protect against race conditions and guarantee we will only make changes to the right k8s cluster
-kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
-mkdir -pv "$(dirname "$kubeconfig")"
-cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
-export KUBECONFIG="$kubeconfig"
+tmpdir="/tmp/.kube"
 
-kubectl config use-context "$CONTEXT"
-echo
+mkdir -pv "$tmpdir"
+
+default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
+original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
+
+# protect against race conditions and guarantee we will only make changes to the right k8s cluster
+export KUBECONFIG="$tmpdir/config.${EUID:-$UID}.$$"
+
+cp -f "$original_kubeconfig" "$KUBECONFIG"
+
+# switch context if not already the current context (avoids repeating "switching context" output noise when this script it called iteratively in loop by other scripts)
+if [ "$(kubectl config current-context)" != "$CONTEXT" ]; then
+    kubectl config use-context "$CONTEXT"
+fi
 
 kubectl "$@"
