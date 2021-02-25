@@ -431,7 +431,7 @@ etc.
 #### Kubernetes
 
 - `kubernetes_*.sh` - [Kubernetes](https://kubernetes.io/) scripts:
-  - `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes context with full isolation to prevent race conditions between shells and scripts that result from changing global `~/.kube/config` context
+  - `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
     - cluster-info
     - master component statuses
