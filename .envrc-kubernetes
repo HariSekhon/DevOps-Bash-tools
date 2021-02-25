@@ -26,7 +26,7 @@ original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
 # reload safety - do not source from new tmpdir - not necessary for direnv but useful for local sourcing tests
 #if [[ "$original_kubeconfig" =~ $tmpdir ]]; then
 #    echo "ignoring \$KUBECONFIG=$original_kubeconfig, using default home location $default_kubeconfig"
-#    original_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
+#    original_kubeconfig="$default_kubeconfig"
 #fi
 
 # isolate the kubernetes context to avoid a race condition affecting any other shells or scripts
