@@ -32,7 +32,7 @@ original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
 # isolate the kubernetes context to avoid a race condition affecting any other shells or scripts
 export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$"
 
-# load your real
+# load your real kube config to isolated staging area to source the context info
 #cp ~/.kube/config "$KUBECONFIG"
 cp "$original_kubeconfig" "$KUBECONFIG"
 
