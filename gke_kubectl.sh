@@ -34,8 +34,9 @@ Eg. running:
 
 either by your hand or in other concurrently executing scripts changes your global kubectl context to run on the given cluster, which could divert your command or concurrently long running scripts in other windows to run kubectl commands on the wrong cluster, leading to cross environment misconfigurations and real world outages (I've seen this personally)
 
+If GKE_CONTEXT is set in the environment and matches a pre-existing context, skips pulling GKE creds to speed and noise reduction.
 
-For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CONTEXT or PROJECT, CLUSTER and ZONE variables
+For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the CONTEXT (use gke_kube_creds.sh to pre-populate the context and credentials) or PROJECT, CLUSTER and ZONE variables if pulling GKE creds.
 
 Could also use main kube config with kubectl switches --cluster / --context (after configuring, see gke_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 
@@ -64,7 +65,7 @@ CLUSTER="$2"  # eg. <myproject>-europe-west1
 ZONE="$3"     # eg. europe-west1
 
 # if set and available in original kube config, will just copy config and switch to this context (faster and less noisy than re-pulling creds from GKE)
-CONTEXT="gke_$CLUSTER-$CLUSTER"
+CONTEXT="${GKE_CONTEXT:-gke_$CLUSTER-$CLUSTER}"
 
 # REMOVE if hardcoding
 shift || :
