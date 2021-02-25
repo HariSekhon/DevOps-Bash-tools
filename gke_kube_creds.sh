@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates kubectl credentials and contexts for all GKE clusters in the current GCP project
+Generates kubectl credentials and contexts for all GKE clusters in the current or given GCP project
 
 This is fast way to get set up in new environments, or even just add any new GKE clusters to your existing \$HOME/.kube/config
 
@@ -37,9 +37,15 @@ See also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<project_id>]"
 
 help_usage "$@"
+
+project_id="${1:-}"
+
+if [ -n "${project_id:-}" ]; then
+    export CLOUDSDK_CORE_PROJECT="$project_id"
+fi
 
 gcloud container clusters list --format='value(name,zone)' |
 while read -r cluster zone; do
