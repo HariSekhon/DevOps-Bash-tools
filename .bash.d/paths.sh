@@ -421,9 +421,13 @@ link_latest(){
 
 dedupe_paths(){
     local PATH_tmp=""
-    while read -r path; do
+    # <( ) only works in Bash, but breaks when sourced from sh
+    # while read -r path; do
+    #done < <(tr ':' '\n' <<< "$PATH")
+    local IFS=':'
+    for path in $PATH; do
         add_PATH PATH_tmp "$path"
-    done < <(tr ':' '\n' <<< "$PATH")
+    done
     export PATH="$PATH_tmp"
 }
 
