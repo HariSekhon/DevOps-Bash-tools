@@ -17,6 +17,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 sudo=""
 [ $EUID -eq 0 ] || sudo=sudo
@@ -56,5 +57,6 @@ fi
 echo
 python -V
 echo
+"$srcdir/pip_fix_version.sh"
 pip -V
 echo
