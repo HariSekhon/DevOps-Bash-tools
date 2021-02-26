@@ -31,7 +31,8 @@ original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
 
 # isolate the kubernetes context to avoid a race condition affecting any other shells or scripts
 # epoch is added because $$ and $PPID are direnv sub-processes and may be reused later, so using epoch to add uniqueness
-export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$(date +%s)"
+epoch="$(date +%s)"
+export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
 
 # load your real kube config to isolated staging area to source the context info
 #cp ~/.kube/config "$KUBECONFIG"
