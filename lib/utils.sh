@@ -1041,7 +1041,17 @@ die_if_error_field(){
         exit 1
     fi
     if has_error_field "$*"; then
-        echo "$*" >&2
+        echo "ERROR: $*" >&2
         exit 1
+    fi
+}
+
+warn_if_error_field(){
+    if [ -z "$*" ]; then
+        echo "no json string passed to warn_if_error_field()" >&2
+        exit 1
+    fi
+    if has_error_field "$*"; then
+        echo "WARNING: $*" >&2
     fi
 }
