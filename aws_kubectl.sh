@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/aws.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a kubectl command safely fixed to an AWS EKS cluster by generating an isolated fixed config for the lifetime of this script
@@ -71,10 +74,7 @@ shift || :
 shift || :
 # ============================================================
 
-# protect against race conditions and guarantee we will only make changes to the right k8s cluster
-export KUBECONFIG="/tmp/.kube/config.${EUID:-$UID}.$$"
-
-mkdir -pv "$(dirname "$KUBECONFIG")"
+kube_config_isolate
 
 aws eks update-kubeconfig --name "$CLUSTER" --region "$REGION"
 echo >&2
