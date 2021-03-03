@@ -29,8 +29,9 @@ Runs a GCP CI Build using Google Cloud Build
 
 Environment variables to set in the CI/CD system:
 
-CLOUDSDK_CORE_PROJECT - project ID of your GCP project
-APP                   - name of the app / docker image to build
+CLOUDSDK_CORE_PROJECT   - project ID of your GCP project
+APP                     - name of the app / docker image to build
+GCP_SERVICEACCOUNT_KEY  - the contents of a credentials.json for a serviceaccount with permissions to GCR + GKE
 
 Primarily written for Jenkins and TeamCity, but should work with minor alterations in other CI/CD tools (see lib/gcp_ci.sh which infers branch and build details)
 "
@@ -42,6 +43,7 @@ usage_args=""
 # CLOUDSDK_CORE_PROJECT and APP should be set by the CI/CD system
 # BUILD is inferred from the Git commit that triggered the CI/CD system
 check_env_defined "CLOUDSDK_CORE_PROJECT"
+check_env_defined "GCP_SERVICEACCOUNT_KEY"
 check_env_defined "APP"
 check_env_defined "BUILD"
 
