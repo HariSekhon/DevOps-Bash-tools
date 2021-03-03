@@ -35,8 +35,14 @@ epoch="$(date +%s)"
 export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
 
 # load your real kube config to isolated staging area to source the context info
-#cp ~/.kube/config "$KUBECONFIG"
-cp "$original_kubeconfig" "$KUBECONFIG"
+if [ -f "$original_kubeconfig" ]; then
+    #cp ~/.kube/config "$KUBECONFIG"
+    cp "$original_kubeconfig" "$KUBECONFIG"
+elif [ -f "$PWD/.kube/config" ]; then
+    cp "$PWD/.kube/config" "$KUBECONFIG"
+else
+    echo "WARNING: failed to find either $original_kubeconfig or $PWD/.kube/config"
+fi
 
 # XXX: replace MYCONTEXT
 kubectl config use-context MYCONTEXT
