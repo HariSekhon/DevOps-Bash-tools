@@ -97,7 +97,7 @@ if [[ "$url_path" =~ {organization} ]]; then
 fi
 
 if [[ "$url_path" =~ {pipeline} ]]; then
-    if [ -z "\$BUILDKITE_PIPELINE" ]; then
+    if [ -z "$BUILDKITE_PIPELINE" ]; then
         usage "\$BUILDKITE_PIPELINE is not set, cannot do replacement of {pipeline} given in the url path"
     fi
     url_path="${url_path//\{pipeline\}/$BUILDKITE_PIPELINE}"
