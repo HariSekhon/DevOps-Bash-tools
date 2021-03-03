@@ -30,6 +30,7 @@ Runs a GCP CI Build using Google Cloud Build
 Environment variables to set in the CI/CD system:
 
 CLOUDSDK_CORE_PROJECT - project ID of your GCP project
+APP                   - name of the app / docker image to build
 
 Primarily written for Jenkins and TeamCity, but should work with minor alterations in other CI/CD tools (see lib/gcp_ci.sh which infers branch and build details)
 "
