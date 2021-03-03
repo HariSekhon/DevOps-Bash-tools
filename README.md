@@ -382,7 +382,7 @@ etc.
     - `gcr_tags_old.sh` - lists tags older than N days for a given GCR docker image
     - `gcr_delete_old_tags.sh` - deletes tags older than N days for a given GCR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
     - see also [cloudbuild.yaml](https://github.com/HariSekhon/Templates/blob/master/cloudbuild.yaml) in the [Templates](https://github.com/HariSekhon/Templates) repo
-  - CI/CD on GCP - using Google Cloud Build and GKE from traditional portable CI/CD systems like Jenkins / TeamCity:
+  - CI/CD on GCP - trigger Google Cloud Build and GKE Kubernetes deployments from orthogonal CI/CD systems like Jenkins / TeamCity:
     - `gcp_ci_build.sh` - script template for CI/CD to trigger Google Cloud Build to build docker container image with extra datetime and latest tagging
     - `gcp_ci_deploy_k8s.sh` - script template for CI/CD to deploy GCR docker image to GKE Kubernetes using Kustomize
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
