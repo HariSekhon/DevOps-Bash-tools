@@ -24,6 +24,27 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Checking README badges for duplicates and incorrect links"
 
+ignored_lines_regex="
+STATUS.md
+harisekhon/github
+harisekhon/centos-github
+StarTrack
+STARCHARTS.md
+LinkedIn
+Spotify
+AWS Athena
+MySQL
+PostgreSQL
+MariaDB
+TeamCity
+^=*$
+https://aws.amazon.com
+https://sonarcloud.io/dashboard
+https://hub.docker.com/
+https://img.shields.io/badge/
+https://github.com/HariSekhon/[[:alnum:]-]*$
+"
+
 start_time="$(start_timer)"
 
 echo "checking for duplicates:"
@@ -39,30 +60,12 @@ duplicates="$(
     uniq -d
 
     # any URLs
-    "$srcdir/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
-    grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:#&,+-]*' |
-    sort |
-    uniq -d
+    #"$srcdir/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
+    #grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:#&,+-]*' |
+    #sort |
+    #uniq -d
     } |
-    grep -vi \
-            -e 'STATUS.md' \
-            -e 'harisekhon/github' \
-            -e 'harisekhon/centos-github' \
-            -e 'StarTrack' \
-            -e 'STARCHARTS.md' \
-            -e 'LinkedIn' \
-            -e 'Spotify' \
-            -e 'AWS Athena' \
-            -e 'MySQL' \
-            -e 'PostgreSQL' \
-            -e 'MariaDB' \
-            -e 'TeamCity' \
-            -e '^=*$' \
-            -e 'https://aws.amazon.com' \
-            -e 'https://sonarcloud.io/dashboard' \
-            -e 'https://hub.docker.com/' \
-            -e 'https://img.shields.io/badge/' \
-            -e 'https://github.com/HariSekhon/[[:alnum:]-]*$'
+    grep -vi $(IFS=$'\n'; for line in $ignored_lines_regex; do [[ "$line" =~ ^[[:space:]]*$ ]] && continue; printf "%s" " -e '$line'"; done)
 )"
 set -eo pipefail
 
