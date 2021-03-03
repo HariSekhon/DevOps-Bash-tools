@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a kubectl command safely fixed to a specific Kubernetes context by using an isolated fixed config for the lifetime of this script
@@ -64,17 +67,7 @@ CONTEXT="$1"
 shift || :
 # ============================================================
 
-tmpdir="/tmp/.kube"
-
-mkdir -pv "$tmpdir"
-
-default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
-original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
-
-# protect against race conditions and guarantee we will only make changes to the right k8s cluster
-export KUBECONFIG="$tmpdir/config.${EUID:-$UID}.$$"
-
-cp -f "$original_kubeconfig" "$KUBECONFIG"
+kube_config_isolate
 
 # switch context if not already the current context (avoids repeating "switching context" output noise when this script it called iteratively in loop by other scripts)
 if [ "$(kubectl config current-context)" != "$CONTEXT" ]; then
