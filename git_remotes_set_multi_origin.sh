@@ -96,8 +96,8 @@ for name in "$@"; do
         #git remote show origin
         git remote -v | grep '^origin' | sed 's|://.*@|://|'
     elif [ "$name" = "all" ]; then
-        for name in github gitlab bitbucket azure; do
-            add_origin_url "$name"
+        for name2 in github gitlab bitbucket azure; do
+            add_origin_url "$name2"
         done
         echo >&2
         #git remote show origin
