@@ -52,6 +52,8 @@ echo
 
 # uniq -d will cause silent pipe failure without dups otherwise
 set +eo pipefail
+# want splitting for args
+# shellcheck disable=SC2046
 duplicates="$(
     {
     # exact README lines
