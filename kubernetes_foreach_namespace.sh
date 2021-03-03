@@ -21,6 +21,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Run a command against each Kubernetes namespace on the current cluster / kubectl context
@@ -49,11 +52,7 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-# XXX: critical to protect current environment from imperative kubectl concurrency race conditions because changes the current namespace - so isolate to only this script's environment
-kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
-mkdir -pv "$(dirname "$kubeconfig")"
-cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
-export KUBECONFIG="$kubeconfig"
+kube_config_isolate
 
 current_context="$(kubectl config current-context)"
 
