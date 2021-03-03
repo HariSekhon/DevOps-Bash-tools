@@ -51,7 +51,7 @@ help_usage "$@"
 no_more_opts "$@"
 
 project_id="$(gcloud config list --format="value(core.project)")"
-not_blank "$project" || die "ERROR: GCloud SDK core.project property not set in config"
+not_blank "$project_id" || die "ERROR: GCloud SDK core.project property not set in config"
 
 bucket="${BUCKET:-${project_id}-sql-backups}"
 cron="${CLOUD_SCHEDULER_CRON:-0 2 * * *}"
