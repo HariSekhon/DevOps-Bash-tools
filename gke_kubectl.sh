@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a kubectl command safely fixed to a GKE cluster by generating an isolated fixed config for the lifetime of this script
@@ -73,22 +76,11 @@ shift || :
 shift || :
 # ============================================================
 
-tmpdir="/tmp/.kube"
-
-mkdir -pv "$tmpdir"
-
-default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
-original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
-
-# protect against race conditions and guarantee we will only make changes to the right k8s cluster
-export KUBECONFIG="$tmpdir/config.${EUID:-$UID}.$$"
+kube_config_isolate
 
 # if original kube config contains the context, copy and reuse it (faster and less noisy than re-pulling the creds from GKE), especially when called in script iterations
-if [ -f "$original_kubeconfig" ] &&
-   [ -n "${CONTEXT:-}" ] &&
-   KUBECONFIG="$original_kubeconfig" kubectl config get-contexts -o name | grep -Fxq "$CONTEXT"; then
-    # copy to isolate existing config with context info
-    cp -f "$original_kubeconfig" "$KUBECONFIG"
+if [ -n "${CONTEXT:-}" ] &&
+   kubectl config get-contexts -o name | grep -Fxq "$CONTEXT"; then
     # switch context if not already the current context (avoids repeating "switching context" output noise when this script it called iteratively in loop by other scripts)
     if [ "$(kubectl config current-context)" != "$CONTEXT" ]; then
         kubectl config use-context "$CONTEXT"
