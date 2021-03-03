@@ -20,7 +20,8 @@ set -euo pipefail
 # XXX: prevents race conditions from changes in global context
 kube_config_isolate(){
     local tmp="/tmp/.kube"
-    local original_kubeconfig="${KUBECONFIG:-$HOME/.kube/config}"
+    local default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
+    local original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
 
     mkdir -pv "$tmp"
 
