@@ -128,6 +128,7 @@ delete_from_playlist(){
     local output
     output="$("$srcdir/spotify_api.sh" "$url_path" -X DELETE -d "$json_payload")"
     #die_if_error_field "$output"
+    warn_if_error_field "$output"
     ((count+=${#@}))
     # don't take the new snapshot ID - use the one from before we start deleting for consistency otherwise the second round of deletes will fail
     #snapshot_id="$(jq -r '.snapshot_id' <<< "$output")"
