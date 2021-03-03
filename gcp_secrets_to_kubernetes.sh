@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Loads given list of GCP Secret Manager secrets to the current Kubernetes cluster with the same name
@@ -53,11 +56,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-# XXX: fix kube cluster to protect consistency against k8s race conditions
-kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
-mkdir -p "$(dirname "$kubeconfig")"
-cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
-export KUBECONFIG="$kubeconfig"
+kube_config_isolate
 
 # XXX: fix the GCP project for the duration of the script for consistency
 project="$(gcloud config list --format='get(core.project)')"
@@ -107,6 +106,8 @@ else
         load_secret "$secret"
     done < <(gcloud secrets list --format='value(name)' \
                                  --filter="labels.kubernetes-cluster=$current_cluster \
+                                           AND NOT \
+                                           labels.kubernetes-multipart-secret ~ . \
                                            AND NOT \
                                            labels.kubernetes-multi-part-secret ~ .")
 fi
