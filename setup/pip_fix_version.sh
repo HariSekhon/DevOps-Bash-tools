@@ -32,7 +32,10 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 
 if ! pip --version >/dev/null 2>&1; then
+    echo "pip --version failed"
     if python --version 2>&1 | grep -q '^Python 2'; then
+        echo "Python is legacy version 2"
+        echo "Installing pip < 21.0 to be able to run"
         easy_install 'pip < 21.0'
     fi
 fi
