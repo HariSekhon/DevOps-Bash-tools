@@ -62,7 +62,7 @@ if [ $# -gt 0 ]; then
 else
     projects="$(gcloud projects list --format='get(project_id)')"
 fi
-not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project property not set"
+not_blank "$projects" || die "ERROR: no project specified and GCloud SDK core.project property not set"
 
 export PATH="$PATH:"~/bin
 
