@@ -1,0 +1,157 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2021-03-02 18:59:07 +0000 (Tue, 02 Mar 2021)
+#
+#  https://github.com/HariSekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                    G C P   C I   S h a r e d   L i b a r y
+# ============================================================================ #
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+#srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+
+# ============================================================================ #
+#       J e n k i n s   /   T e a m C i t y   B r a n c h   +   B u i l d
+# ============================================================================ #
+
+# Jenkins provides GIT_BRANCH, TeamCity doesn't so normalize and determine it if not automatically set
+if [ -z "${GIT_BRANCH:-}" ]; then
+    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+fi
+
+# Jenkins provides $GIT_COMMIT, TeamCity provides $BUILD_VCS_NUMBER
+BUILD="${GIT_COMMIT:-${BUILD_VCS_NUMBER:-$(git show-ref --hash HEAD)}}"
+
+# ============================================================================ #
+#                    G C P   P r o j e c t   +   R e g i o n
+# ============================================================================ #
+
+# If Project isn't set in the CI/CD environment (safest way as it doesn't have a race condition with global on-disk gcloud config), then infer it
+set_gcp_project(){
+    if [ -z "${CLOUDSDK_CORE_PROJECT:-}" ]; then
+        if [[ "$GIT_BRANCH" =~ ^(dev|staging)$ ]]; then
+            export CLOUDSDK_CORE_PROJECT="$MYPROJECT-$GIT_BRANCH"
+        elif [ "$GIT_BRANCH" = production ]; then
+            # production project has a non-uniform project id, so override it
+            export CLOUDSDK_CORE_PROJECT="$MYPROJECT-prod"
+        else
+            # assume it is a feature branch being deployed to the Dev project
+            export CLOUDSDK_CORE_PROJECT="$MYPROJECT-dev"
+        fi
+    fi
+}
+
+set_gcp_compute_region(){
+    local region="${1:-europe-west1}"
+    if [ -z "${CLOUDSDK_COMPUTE_REGION:-}" ]; then
+        # Set default region where you GKE cluster is going to be
+        export CLOUDSDK_COMPUTE_REGION="$region"
+        # Do an override if you have a project that is in a different region to the rest
+    #    if [ "$CLOUDSDK_CORE_PROJECT" = "$MYPROJECT-staging" ]; then
+    #        # Staging's location is different
+    #        export CLOUDSDK_COMPUTE_REGION="europe-west4"
+    #    fi
+    fi
+}
+
+# ============================================================================ #
+#           Print the Environment in every build for easier debugging
+# ============================================================================ #
+
+printenv(){
+    echo "Environment:"
+    env | sort
+}
+
+# ============================================================================ #
+#                               F u n c t i o n s
+# ============================================================================ #
+
+gcp_login(){
+    local credentials_json="$1"
+    if ! [ -f "$credentials_json" ]; then
+        # XXX: it's hard to copy the contents of this around so it's easiest to do via:
+        #
+        #   base64 credentials.json | pbcopy
+        #
+        # and then paste that into the CI/CD environment variables for the build
+        #
+        base64 --decode <<< "$GCP_SERVICEACCOUNT_KEY" > "$credentials_json"
+    fi
+    gcloud auth activate-service-account --key-file="$credentials_json"
+}
+
+gke_login(){
+	local cluster_name="$1"
+    # if running the CI build on the same k8s cluster as the deployment will go to - this is often not the case and not reliable to be detected either since we are often running these builds inside docker images and it would rely on correctly configuring the environment variables to be able to detect this. Instead just open the GKE's cluster's master networks to the projects external NAT IP
+    #local opts=(--internal-ip)
+    local opts=()
+    gcloud container clusters get-credentials "$cluster_name" "${opts[@]}"
+}
+
+enable_kaniko(){
+    #gcloud config set builds/use_kaniko True
+    export CLOUDSDK_BUILDS_USE_KANIKO=True
+}
+
+list_container_tags(){
+    local image="$1"
+    local build="$2"  # Git hashref that triggered CI build
+    # --format=text returns blank if no match tag for the docker image exists, which is convenient for testing such tags_exist_for_container_image() below
+    gcloud container images list-tags --filter="tags:${build}" --format=text "gcr.io/$CLOUDSDK_CORE_PROJECT/$image"
+}
+
+tags_exist_for_container_image(){
+	# since list_container_tags returns blank if this build hashref doesn't exist, we can use this as a simple test
+    [ -n "$(list_container_tags "$APP" "$BUILD")" ]
+}
+
+gcloud_builds_submit(){
+    local build="$1"
+    local cloudbuild_yaml="${2:-cloudbuild.yaml}"
+    gcloud builds submit --project "$CLOUDSDK_CORE_PROJECT" --config "$cloudbuild_yaml" --substitutions _REGISTRY="gcr.io/$CLOUDSDK_CORE_PROJECT,_BUILD=$build" --timeout=3600
+}
+
+# yamls contain tag 'latest', we replace this with the build hashref matching the docker images just built as part of the build pipeline
+replace_latest_with_build(){
+    local build="$1"
+    sed -i "s/\\([[:space:]]newTag:[[:space:]]*\"*\\)latest/\1$build/g" -- kustomization.yaml
+    sed -i "s/commit=latest/commit=$build/g" -- kustomization.yaml
+}
+
+download_kustomize(){
+	#curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+    # better to fix version in case later versions change behaviour or syntax
+    curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+    chmod u+x ./kustomize
+}
+
+kubernetes_deploy(){
+    local app="$1"
+    kubectl apply -f .
+    kubectl rollout status "deployment/$app" -n "$app" --timeout=120s
+}
+
+kustomize_kubernetes_deploy(){
+    local app="$1"
+    local namespace="$2"
+    # XXX: DANGER: this would replace $RABBITMQ_HOME - needs more testing to support 'feature staging' / 'feature dev' - but envsubst doesn't support default values
+    #./kustomize build . | envsubst | kubectl apply -f -
+    ./kustomize build . | kubectl apply -f -
+    kubectl annotate "deployment/$app" -n "$namespace" kubernetes.io/change-cause="$(date '+%F %H:%M')  CI deployment: app $app build ${BUILD:-}"
+    kubectl rollout status "deployment/$app" -n "$namespace" --timeout=900s
+
+    # could also run the deployment via Google Cloud Build
+    #gcloud builds submit --project "$CLOUDSDK_CORE_PROJECT" --config="../../cloudbuild-deploy.yaml" --no-source
+}
