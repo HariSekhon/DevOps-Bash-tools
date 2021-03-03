@@ -21,6 +21,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Run a command against each configured Kubernetes kubectl context (cluster)
@@ -53,11 +56,7 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-# XXX: critical to protect current environment from imperative kubectl concurrency race conditions because changes the current context - so isolate to only this script's environment
-kubeconfig="/tmp/.kube/config.${EUID:-$UID}.$$"
-mkdir -pv "$(dirname "$kubeconfig")"
-cp -f "${KUBECONFIG:-$HOME/.kube/config}" "$kubeconfig"
-export KUBECONFIG="$kubeconfig"
+kube_config_isolate
 
 # don't need to store this any more as we now switch the KUBECONFIG which is only used for the lifetime of this script
 #original_context="$(kubectl config current-context)"
