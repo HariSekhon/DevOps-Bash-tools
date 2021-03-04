@@ -663,6 +663,7 @@ etc.
   - `cloudflare_foreach_zone.sh` - executes a templated command for each Cloudflare zone, replacing the `{zone_id}` and `{zone_name}` in each iteration (useful for chaining with `cloudflare_api.sh`, used by adjacent `cloudflare_*_all_zones.sh` scripts)
   - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
+  - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
   - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
