@@ -22,8 +22,10 @@
 
 
 pipeline {
+
     // run pipeline any agent
     agent any
+
     // can't do this when running jenkins in docker itself, gets '.../script.sh: docker: not found'
 //    agent {
 //      docker {
@@ -42,7 +44,7 @@ pipeline {
         timestamps()
 
         // timeout entire pipeline after 4 hours
-        timeout(time: 4, unit: 'HOURS')
+        timeout(time: 2, unit: 'HOURS')
 
         //retry entire pipeline 3 times
         //retry(3)
@@ -110,12 +112,6 @@ pipeline {
     post {
         always {
             echo 'Always'
-            //deleteDir() // clean up workspace
-
-            // collect JUnit reports for Jenkins UI
-            //junit 'build/reports/**/*.xml'
-            // collect artifacts to Jenkins for analysis
-            //archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
         }
         success {
             echo 'SUCCESS!'
