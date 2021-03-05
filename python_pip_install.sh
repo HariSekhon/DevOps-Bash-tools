@@ -28,7 +28,9 @@ srcdir="$(dirname "$0")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/python.sh"
 
-opts="${PIP_OPTS:-}"
+# want arg splitting
+# shellcheck disable=SC2206
+opts=(${PIP_OPTS:-})
 
 usage(){
     echo "Installs Python PyPI modules using Pip, taking in to account library paths, virtual envs etc"
@@ -47,16 +49,18 @@ for arg; do
     esac
 done
 
-pip_modules=""
+pip_modules=()
 
 process_args(){
     for arg; do
         if [ -f "$arg" ]; then
             echo "adding pip modules from file:  $arg"
-            pip_modules="$pip_modules $(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg")"
+            # want splitting
+            # shellcheck disable=SC2207
+            pip_modules+=($(sed 's/#.*//;/^[[:space:]]*$$/d' "$arg"))
             echo
         else
-            pip_modules="$pip_modules $arg"
+            pip_modules+=("$arg")
         fi
     done
 }
@@ -68,18 +72,20 @@ else
     process_args $(cat)
 fi
 
-if [ -z "${pip_modules// }" ]; then
+if [ -z "${pip_modules[*]}" ]; then
     usage
 fi
 
-pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
+# want splitting
+# shellcheck disable=SC2207
+pip_modules=($(tr '[:space:]' ' \n' <<< "${pip_modules[@]}" | sort -u | tr '\n' ' '))
 
 echo "Installing Python PyPI Modules"
 echo
 
 if is_CI; then
     #echo "running in quiet mode for CI to minimize log noise"
-    opts="$opts -q"
+    opts+=(-q)
 fi
 
 sudo=""
@@ -95,12 +101,12 @@ user_opt(){
         echo "inside virtualenv, ignoring --user switch which wouldn't work"
         sudo=""
     else
-        opts="$opts --user"
+        opts+=(--user)
         sudo=""
     fi
 }
 
-envopts=""
+envopts=()
 export LDFLAGS=""
 if [ "$(uname -s)" = "Darwin" ]; then
     # setting these caused compile errors failing to find stdio.h when pip installing requests-kerberos
@@ -129,7 +135,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
 #        #export LIBRARY_PATH="${LIBRARY_PATH:-}:$brew_prefix/lib"
 #
 #        # need to send OPENSSL_INCLUDE and OPENSSL_LIB through sudo explicitly using prefix
-#        envopts="OPENSSL_INCLUDE=$OPENSSL_INCLUDE OPENSSL_LIB=$OPENSSL_LIB" # LDFLAGS=$LDFLAGS CFLAGS=$CFLAGS CPPFLAGS=$CPPFLAGS"
+#        envopts=(OPENSSL_INCLUDE="$OPENSSL_INCLUDE" OPENSSL_LIB="$OPENSSL_LIB") # LDFLAGS="$LDFLAGS" CFLAGS="$CFLAGS" CPPFLAGS="$CPPFLAGS")
 #    fi
     # avoids Mac's System Integrity Protection built in to OS X El Capitan and later
     user_opt
@@ -139,17 +145,17 @@ elif [ -n "${PYTHON_USER_INSTALL:-}" ] ||
 fi
 
 if [ -n "${NO_FAIL:-}" ]; then
-    for pip_module in $pip_modules; do
+    for pip_module in "${pip_modules[@]}"; do
         # pip defined in lib/python.sh
         # shellcheck disable=SC2154
-        echo "$sudo $pip install $opts $pip_module"
+        echo "$sudo $pip install ${opts[*]} $pip_module"
         # want splitting of opts
-        # shellcheck disable=SC2086
-        eval $sudo $envopts "$pip" install $opts "$pip_module"
+        # shellcheck disable=SC2068
+        $sudo ${envopts[@]:-} "$pip" install "${opts[@]}" "$pip_module"
     done
 else
-    echo "$sudo $pip install $opts $pip_modules"
+    echo "$sudo $pip install ${opts[*]} ${pip_modules[*]}"
     # want splitting of opts and modules
-    # shellcheck disable=SC2086
-    eval $sudo $envopts "$pip" install $opts $pip_modules
+    # shellcheck disable=SC2068
+    $sudo ${envopts[@]:-} "$pip" install "${opts[@]}" "${pip_modules[@]}"
 fi
