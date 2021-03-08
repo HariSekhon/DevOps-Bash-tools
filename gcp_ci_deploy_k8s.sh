@@ -33,6 +33,7 @@ Runs a GCP CI/CD Deploy to GKE Kubernetes
 Environment variables to set in the CI/CD system:
 
 APP						- name of your application
+BUILD                   - should be automatically set to the Git hash on Jenkins or TeamCity
 CLUSTER_NAME			- name of your GKE cluster
 CLOUDSDK_CORE_PROJECT   - project ID of your GCP project
 CLOUDSDK_COMPUTE_REGION - GCP region of your GKE cluster
