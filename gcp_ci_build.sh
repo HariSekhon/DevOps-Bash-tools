@@ -30,6 +30,7 @@ Runs a GCP CI Build using Google Cloud Build
 Environment variables to set in the CI/CD system:
 
 APP                     - name of the app / docker image to build
+BUILD                   - should be automatically set to the Git hash on Jenkins or TeamCity
 CLOUDSDK_CORE_PROJECT   - project ID of your GCP project
 GCP_SERVICEACCOUNT_KEY  - the contents of a credentials.json for a serviceaccount with permissions to GCR + GKE
 
