@@ -98,23 +98,35 @@ while read -r directory; do
     [ -n "$directory" ] || continue
     [ -e "$directory" ] || continue
     echo "* removing $directory"
-    rm -rf "$directory"
+    rm -rf "$directory" || :
+    [ -e "$directory" ] || continue
+    # shellcheck disable=SC2039
+    if [ ${EUID:-$UID:$(id -u)} != 0 ]; then
+        if type sudo >/dev/null 2>&1; then
+            sudo -n rm -rf "$directory"
+        fi
+    fi
 done
 
 echo "Deleting Personal Caches"
 # =============================================================
 # Delete Personal Cache locations & Programming Language Caches
 #
-echo "$personal_cache_list"
+echo "$personal_cache_list" |
 while read -r directory; do
     [ -n "$directory" ] || continue
-    [ -e ~/"$directory" ] || continue
-    echo "* removing ~/$directory"
+    user_home_cache=~/"$directory"
+    [ -e "$user_home_cache" ] || continue
+    echo "* removing $user_home_cache"
     # ~ more reliable than $HOME which could be unset
-    rm -rf ~/"$directory"
+    rm -rf "$user_home_cache" || :
     # shellcheck disable=SC2039
     if [ ${EUID:-$UID:$(id -u)} != 0 ]; then
         if type sudo >/dev/null 2>&1; then
+            # in case user home directory is owned by root, do a late stage removal as root
+            sudo -n rm -rf "$user_home_cache"
+            [ -e "/root/$directory" ] || continue
+            echo "* removing /root/$directory"
             sudo -n rm -rf "/root/$directory"
         fi
     fi
