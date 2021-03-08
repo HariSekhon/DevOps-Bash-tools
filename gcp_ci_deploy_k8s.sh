@@ -32,11 +32,11 @@ Runs a GCP CI/CD Deploy to GKE Kubernetes
 
 Environment variables to set in the CI/CD system:
 
+APP						- name of your application
 CLUSTER_NAME			- name of your GKE cluster
 CLOUDSDK_CORE_PROJECT   - project ID of your GCP project
 CLOUDSDK_COMPUTE_REGION - GCP region of your GKE cluster
 GCP_SERVICEACCOUNT_KEY  - the contents of a credentials.json for a serviceaccount with permissions to run Google Cloud Build
-APP						- name of your application
 
 Primarily written for Jenkins and TeamCity, but should work with minor alterations in other CI/CD tools (see lib/gcp_ci.sh which infers branch and build details)
 "
@@ -47,12 +47,12 @@ usage_args=""
 
 # BUILD is inferred from the Git commit that triggered the CI/CD system
 # The rest of these should be set by the CI/CD system
+check_env_defined "APP"
+check_env_defined "BUILD"
 check_env_defined "CLOUDSDK_CORE_PROJECT"
 check_env_defined "CLOUDSDK_COMPUTE_REGION"
 check_env_defined "GKE_CLUSTER"
 check_env_defined "GCP_SERVICEACCOUNT_KEY"
-check_env_defined "APP"
-check_env_defined "BUILD"
 
 help_usage "$@"
 
