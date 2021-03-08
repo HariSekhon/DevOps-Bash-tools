@@ -17,6 +17,10 @@ if type -P direnv &>/dev/null && ! type _direnv_hook &>/dev/null; then
     eval "$(direnv hook bash)"
 fi
 
+# direnv seems to inserts a double semi-colon which breaks PROMPT_COMMAND
+#export PROMPT_COMMAND="${PROMPT_COMMAND%%;;*}"
+export PROMPT_COMMAND="${PROMPT_COMMAND//;;/;}"
+
 #alias envrc='$EDITOR .envrc && direnv allow .'
 # same effect as above
 alias envrc='direnv edit'
