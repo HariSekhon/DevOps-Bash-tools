@@ -80,10 +80,12 @@ echo "Deleting Caches"
 if type apt-get >/dev/null 2>&1; then
     # could accidentally remove things it shouldn't
     #apt-get autoremove -y
+    echo "* apt-get clean"
     apt-get clean
 elif type yum >/dev/null 2>&1; then
     # could accidentally remove things it shouldn't
     #yum autoremove -y
+    echo "* yum clean all"
     yum clean all
 fi
 
@@ -94,6 +96,8 @@ fi
 echo "$cache_list" |
 while read -r directory; do
     [ -n "$directory" ] || continue
+    [ -e "$directory" ] || continue
+    echo "* removing $directory"
     rm -rf "$directory"
 done
 
@@ -104,6 +108,8 @@ echo "Deleting Personal Caches"
 echo "$personal_cache_list"
 while read -r directory; do
     [ -n "$directory" ] || continue
+    [ -e ~/"$directory" ] || continue
+    echo "* removing ~/$directory"
     # ~ more reliable than $HOME which could be unset
     rm -rf ~/"$directory"
     # shellcheck disable=SC2039
