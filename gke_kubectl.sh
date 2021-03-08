@@ -97,10 +97,10 @@ if [ -n "${GKE_CONTEXT:-}" ] &&
    kubectl config get-contexts -o name | grep -Fxq "$GKE_CONTEXT"; then
     # switch context if not already the current context (avoids repeating "switching context" output noise when this script it called iteratively in loop by other scripts)
     if [ "$(kubectl config current-context)" != "$GKE_CONTEXT" ]; then
-        kubectl config use-context "$GKE_CONTEXT"
+        kubectl config use-context "$GKE_CONTEXT" >&2
     fi
 else
-    gcloud container clusters get-credentials "$GKE_CLUSTER"  # --region "$CLOUDSDK_COMPUTE_REGION" --project "$CLOUDSDK_CORE_PROJECT"
+    gcloud container clusters get-credentials "$GKE_CLUSTER" >&2  # --region "$CLOUDSDK_COMPUTE_REGION" --project "$CLOUDSDK_CORE_PROJECT"
     echo >&2
 fi
 
