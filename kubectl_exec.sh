@@ -93,7 +93,7 @@ namespace="${pod%%[[:space:]]*}"
 pod="${pod##*[[:space:]]}"
 
 # auto-determine container from regex if given or just take first container
-container="$(kubectl get pods -n "$namespace" "$pod" -o 'jsonpath={.spec.containers[*].name}' | grep -m 1 "$container_regex" | awk '{print $1}' || :)"
+container="$(kubectl get pods -n "$namespace" "$pod" -o 'jsonpath={range .spec.containers[*]}{.name}{"\n"}' | grep -m 1 "$container_regex" | awk '{print $1}' || :)"
 
 if [ -z "$container" ]; then
     die "failed to get container name matching regex '$container_regex' for pod '$pod'"
