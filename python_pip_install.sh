@@ -151,11 +151,11 @@ if [ -n "${NO_FAIL:-}" ]; then
         echo "$sudo $pip install ${opts[*]:-} $pip_module"
         # want splitting of opts
         # shellcheck disable=SC2068
-        $sudo ${envopts[@]:-} "$pip" install "${opts[@]}" "$pip_module"
+        $sudo ${envopts[@]:-} "$pip" install ${opts[@]:-} "$pip_module"
     done
 else
     echo "$sudo $pip install ${opts[*]:-} ${pip_modules[*]}"
     # want splitting of opts and modules
     # shellcheck disable=SC2068
-    $sudo ${envopts[@]:-} "$pip" install "${opts[@]}" "${pip_modules[@]}"
+    $sudo ${envopts[@]:-} "$pip" install ${opts[@]:-} "${pip_modules[@]}"
 fi
