@@ -148,13 +148,13 @@ if [ -n "${NO_FAIL:-}" ]; then
     for pip_module in "${pip_modules[@]}"; do
         # pip defined in lib/python.sh
         # shellcheck disable=SC2154
-        echo "$sudo $pip install ${opts[*]} $pip_module"
+        echo "$sudo $pip install ${opts[*]:-} $pip_module"
         # want splitting of opts
         # shellcheck disable=SC2068
         $sudo ${envopts[@]:-} "$pip" install "${opts[@]}" "$pip_module"
     done
 else
-    echo "$sudo $pip install ${opts[*]} ${pip_modules[*]}"
+    echo "$sudo $pip install ${opts[*]:-} ${pip_modules[*]}"
     # want splitting of opts and modules
     # shellcheck disable=SC2068
     $sudo ${envopts[@]:-} "$pip" install "${opts[@]}" "${pip_modules[@]}"
