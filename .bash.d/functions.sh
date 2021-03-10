@@ -66,6 +66,11 @@ pg(){
     grep -v grep
 }
 
+deccp(){
+    decomment.sh "$@" |
+    copy_to_clipboard
+}
+
 rmdirempty(){
     find "${1:-.}" -type d -empty -exec rmdir "{}" \;
 }
@@ -414,7 +419,7 @@ proxy(){
     export SBT_OPTS="$JAVA_OPTS"
 }
 
-paste_clipboard(){
+copy_to_clipboard(){
     if isMac; then
         cat | pbcopy
     elif isLinux; then
