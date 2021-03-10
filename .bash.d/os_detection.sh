@@ -72,6 +72,23 @@ isAzureCloudShell(){
     return 1
 }
 
+# for compatibility to use the same names as non-interactive lib/
+is_linux(){
+    isLinux "$@"
+}
+
+is_mac(){
+    isMac "$@"
+}
+
+is_google_cloud_shell(){
+    isGoogleCloudShell "$@"
+}
+
+is_azure_cloud_shell(){
+    isAzureCloudShell "$@"
+}
+
 # make this safe to import in set -e scripts
 isLinux || :
 isMac || :
