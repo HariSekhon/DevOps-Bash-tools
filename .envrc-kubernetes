@@ -16,6 +16,9 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+# XXX: Edit this
+CONTEXT=MYCONTEXT
+
 tmpdir="/tmp/.kube"
 
 mkdir -pv "$tmpdir"
@@ -44,5 +47,4 @@ else
     echo "WARNING: failed to find either $original_kubeconfig or $PWD/.kube/config" >&2
 fi
 
-# XXX: replace MYCONTEXT
-kubectl config use-context MYCONTEXT
+kubectl config use-context "$CONTEXT"
