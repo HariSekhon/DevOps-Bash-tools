@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
 # XXX: Edit this
-CONTEXT=MYCONTEXT
+CONTEXT=mycontext
 
 tmpdir="/tmp/.kube"
 
