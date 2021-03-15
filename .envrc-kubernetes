@@ -45,7 +45,7 @@ elif [ -f "$default_kubeconfig" ]; then
 elif [ -f "$PWD/.kube/config" ]; then
     cp "$PWD/.kube/config" "$KUBECONFIG"
 else
-    echo "WARNING: failed to find either $original_kubeconfig or $PWD/.kube/config" >&2
+    echo "WARNING: failed to find either $original_kubeconfig or $default_kubeconfig or $PWD/.kube/config" >&2
 fi
 
 kubectl config use-context "$CONTEXT"
