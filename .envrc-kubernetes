@@ -39,8 +39,9 @@ export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
 
 # load your real kube config to isolated staging area to source the context info
 if [ -f "$original_kubeconfig" ]; then
-    #cp ~/.kube/config "$KUBECONFIG"
     cp "$original_kubeconfig" "$KUBECONFIG"
+elif [ -f "$default_kubeconfig" ]; then
+    cp "$default_kubeconfig" "$KUBECONFIG"
 elif [ -f "$PWD/.kube/config" ]; then
     cp "$PWD/.kube/config" "$KUBECONFIG"
 else
