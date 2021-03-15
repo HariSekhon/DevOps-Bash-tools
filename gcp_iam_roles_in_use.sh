@@ -37,6 +37,10 @@ eg. when backporting GCP IAM permissions to Terraform:
 You can optionally specify the GCP project, otherwise infers your currently set core.project
 
 If you specify 'all' for project, will return a sorted superset list from all projects
+
+If the role you're looking for isn't currently in use, you may want to browse all role names in SDK format for use in Terraform via:
+
+  gcloud iam roles list --format='get(name)'
 "
 
 # used by usage() in lib/utils.sh
