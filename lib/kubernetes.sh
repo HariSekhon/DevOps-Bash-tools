@@ -29,6 +29,10 @@ kube_config_isolate(){
 
     if [ -f "$original_kubeconfig" ]; then
         cp -f "$original_kubeconfig" "$kubeconfig"
+    elif [ -f "$default_kubeconfig" ]; then
+        cp -f "$default_kubeconfig" "$kubeconfig"
+    elif [ -f "$PWD/.kube/config" ]; then
+        cp -f "$PWD/.kube/config" "$kubeconfig"
     fi
 
     export KUBECONFIG="$kubeconfig"
