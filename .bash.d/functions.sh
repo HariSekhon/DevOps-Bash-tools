@@ -71,6 +71,10 @@ deccp(){
     copy_to_clipboard
 }
 
+decdiff(){
+    diff <(decomment.sh "$1") <(decomment.sh "$2") "${@:3}"
+}
+
 rmdirempty(){
     find "${1:-.}" -type d -empty -exec rmdir "{}" \;
 }
