@@ -72,7 +72,7 @@ deccp(){
 }
 
 decdiff(){
-    diff <(decomment.sh "$1") <(decomment.sh "$2") "${@:3}"
+    diff <(decomment.sh "$1" | sed 's/[[:space:]]*$//') <(decomment.sh "$2" | sed 's/[[:space:]]*$//') "${@:3}"
 }
 
 rmdirempty(){
