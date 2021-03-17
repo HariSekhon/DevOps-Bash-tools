@@ -277,18 +277,6 @@ alias tg='traceroute www.google.com'
 #alias sec='ps -ef| grep -e arpwatc[h] -e swatc[h] -e scanlog[d]'
 
 
-# using variable and single alias definition to work around my bash duplicate defs auto checks which would flag the same alias defined twice in two different files, even if only one is sourced depending on the OS
-if isMac; then
-    clipboard=pbcopy
-else
-    clipboard=xclip
-fi
-# shellcheck disable=SC2139
-alias clipboard="$clipboard"
-alias clip=clipboard
-unset -v clipboard
-
-
 export lab=~/lab
 alias lab='cd $lab'
 
