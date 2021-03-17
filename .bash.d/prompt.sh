@@ -100,8 +100,13 @@ if isMac; then
         # this unsets direnv's hook
         #unset PROMPT_COMMAND
         PROMPT_COMMAND="${PROMPT_COMMAND//update_terminal_cwd;/}"
-        export PROMPT_COMMAND
     fi
+    # stripping update_terminal_cwd can leave some weird broken PROMPT_COMMAND start due to interaction with direnv, so strip it without forking to sed/perl
+    while [[ "${PROMPT_COMMAND:-}" =~ ^[[:space:]]|^\; ]]; do
+        PROMPT_COMMAND="${PROMPT_COMMAND##[[:space:]]}"
+        PROMPT_COMMAND="${PROMPT_COMMAND##;}"
+    done
+    export PROMPT_COMMAND
 
     export SHELL_SESSION_HISTORY=0
 fi
