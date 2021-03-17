@@ -80,13 +80,13 @@ gcp_login
 
 gke_login "$GKE_CLUSTER"
 
-# GIT_BRANCH is provided via lib.sh for both Jenkins and TeamCity
+# BRANCH_NAME is provided via lib.sh for both Jenkins and TeamCity
 # git branches (dev / staging / production) should all match the k8s directory structure
 #
 # for Feature Branch builds using a non-uniform git branch name and non-uniform location on disk,
 # simply set the CI/CD environment's working directory for this build instead and this will do nothing
-if [ -d "k8s/$GIT_BRANCH" ]; then
-    cd "k8s/$GIT_BRANCH"
+if [ -d "k8s/$BRANCH_NAME" ]; then
+    cd "k8s/$BRANCH_NAME"
 elif ! [ -f kustomization.yaml ] &&
      [ -d "k8s/dev" ]; then
     # if we haven't been set into a $PWD with a kustomization, check for k8s/dev and use it by default
