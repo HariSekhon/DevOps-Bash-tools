@@ -66,9 +66,31 @@ pg(){
     grep -v grep
 }
 
+copy_to_clipboard(){
+    if isMac; then
+        cat | pbcopy
+    elif isLinux; then
+        cat | xclip
+    else
+        echo "ERROR: OS is not Darwin/Linux"
+        return 1
+    fi
+}
+
+unalias clip &>/dev/null
+# args are optional
+# shellcheck disable=SC2120
+clip(){
+    if [ $# -gt 0 ]; then
+        copy_to_clipboard < "$1"
+    else
+        copy_to_clipboard
+    fi
+}
+
 deccp(){
     decomment.sh "$@" |
-    copy_to_clipboard
+    clip
 }
 
 decdiff(){
@@ -421,17 +443,6 @@ proxy(){
     JAVA_OPTS="${JAVA_OPTS%%-Dhttp.proxyHost*}"
     export JAVA_OPTS="$JAVA_OPTS -Dhttp.proxyHost=$proxy_host -Dhttp.proxyPort=$proxy_port -Dhttp.proxyUser=$proxy_user -Dhttp.proxyPassword=$proxy_password -Dhttps.proxyHost=$proxy_host -Dhttps.proxyPort=$proxy_port_ssl -DnonProxyHosts='$JAVA_NO_PROXY'"
     export SBT_OPTS="$JAVA_OPTS"
-}
-
-copy_to_clipboard(){
-    if isMac; then
-        cat | pbcopy
-    elif isLinux; then
-        cat | xclip
-    else
-        echo "ERROR: OS is not Darwin/Linux"
-        return 1
-    fi
 }
 
 readlink(){
