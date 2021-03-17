@@ -25,9 +25,9 @@ set -euo pipefail
 #       J e n k i n s   /   T e a m C i t y   B r a n c h   +   B u i l d
 # ============================================================================ #
 
-# Jenkins provides GIT_BRANCH, TeamCity doesn't so normalize and determine it if not automatically set
-if [ -z "${GIT_BRANCH:-}" ]; then
-    GIT_BRANCH="$(git rev-parse --abbrev-ref HEAD)"
+# Jenkins provides BRANCH_NAME, TeamCity doesn't so normalize and determine it if not automatically set
+if [ -z "${BRANCH_NAME:-}" ]; then
+    BRANCH_NAME="$(git rev-parse --abbrev-ref HEAD)"
 fi
 
 # Jenkins provides $GIT_COMMIT, TeamCity provides $BUILD_VCS_NUMBER
@@ -40,9 +40,9 @@ BUILD="${GIT_COMMIT:-${BUILD_VCS_NUMBER:-$(git show-ref --hash HEAD)}}"
 # If Project isn't set in the CI/CD environment (safest way as it doesn't have a race condition with global on-disk gcloud config), then infer it
 set_gcp_project(){
     if [ -z "${CLOUDSDK_CORE_PROJECT:-}" ]; then
-        if [[ "$GIT_BRANCH" =~ ^(dev|staging)$ ]]; then
-            export CLOUDSDK_CORE_PROJECT="$MYPROJECT-$GIT_BRANCH"
-        elif [ "$GIT_BRANCH" = production ]; then
+        if [[ "$BRANCH_NAME" =~ ^(dev|staging)$ ]]; then
+            export CLOUDSDK_CORE_PROJECT="$MYPROJECT-$BRANCH_NAME"
+        elif [ "$BRANCH_NAME" = production ]; then
             # production project has a non-uniform project id, so override it
             export CLOUDSDK_CORE_PROJECT="$MYPROJECT-prod"
         else
