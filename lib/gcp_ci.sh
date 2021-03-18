@@ -113,6 +113,8 @@ list_container_tags(){
     local build="$2"  # Git hashref that triggered CI build
     # --format=text returns blank if no match tag for the docker image exists, which is convenient for testing such tags_exist_for_container_image() below
     gcloud container images list-tags --filter="tags:${build}" --format=text "gcr.io/$CLOUDSDK_CORE_PROJECT/$image"
+    # will get this error if you try running this is via DooD, switching to normal K8s pod template in pipeline solves this:
+    # ERROR: gcloud crashed (MetadataServerException): HTTP Error 404: Not Found
 }
 
 tags_exist_for_container_image(){
@@ -124,6 +126,8 @@ gcloud_builds_submit(){
     local build="$1"
     local cloudbuild_yaml="${2:-cloudbuild.yaml}"
     gcloud builds submit --project "$CLOUDSDK_CORE_PROJECT" --config "$cloudbuild_yaml" --substitutions _REGISTRY="gcr.io/$CLOUDSDK_CORE_PROJECT,_BUILD=$build" --timeout=3600
+    # will get this error if you try running this is via DooD, switching to normal K8s pod template in pipeline solves this:
+    # ERROR: gcloud crashed (MetadataServerException): HTTP Error 404: Not Found
 }
 
 # yamls contain tag 'latest', we replace this with the build hashref matching the docker images just built as part of the build pipeline
