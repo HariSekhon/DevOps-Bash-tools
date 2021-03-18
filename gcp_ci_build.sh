@@ -60,6 +60,8 @@ printenv
 #set_gcp_project
 
 # provide a credentials.json file argument to this function or provide if in a GCP_SERVICEACCOUNT_KEY environment variable via the CI/CD system
+# necessary so you can log in to different projects and maintain IAM permissions isolation for safety
+# do not use the same serviceaccount with permissions across projects, you can cross contaminate and make mistakes, deploy the wrong environment etc.
 gcp_login
 
 # if it's not already built, submit a Google Cloud Build to build the docker images
