@@ -78,8 +78,10 @@ printenv(){
 #                               F u n c t i o n s
 # ============================================================================ #
 
+# necessary so you can log in to different projects and maintain IAM permissions isolation for safety
+# do not use the same serviceaccount with permissions across projects, you can cross contaminate and make mistakes, deploy the wrong environment etc.
 gcp_login(){
-    local credentials_json="$1"
+    local credentials_json="${1:-}"
     if ! [ -f "$credentials_json" ]; then
         # XXX: it's hard to copy the contents of this around so it's easiest to do via:
         #
