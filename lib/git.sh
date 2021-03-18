@@ -106,7 +106,8 @@ foreachbranch(){
 }
 
 mybranch(){
-    git branch | awk '/^\*/ {print $2; exit}'
+    #git branch | awk '/^\*/ {print $2; exit}'
+    git rev-parse --abbrev-ref HEAD
 }
 
 # shouldn't need to use this any more, git_check_branches_upstream.py from DevOps Python Tools repo has a --fix flag which will do this for all branches if they have no upstream set - https://github.com/harisekhon/devops-python-tools
