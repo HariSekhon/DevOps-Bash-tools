@@ -28,6 +28,8 @@ usage_description="
 Merges Git 'staging' branch to 'dev' branch for CI automated backports
 
 Designed to be called only by a CI build system to automatically keep Dev branch up to date with Staging branch
+
+Requires Git authentication such as an SSH key, SSH Agent to already be present and configured on the agent via the CI system's secrets
 "
 
 # used by usage() in lib/utils.sh
