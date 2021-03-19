@@ -192,7 +192,7 @@ if has("autocmd")
 
     au BufNewFile,BufRead Makefile set noet
     au BufNewFile,BufRead *.md set ts=2 sw=2 sts=2 et
-    au BufNewFile,BufRead *Jenkinsfile* set filetype=groovy
+    au BufNewFile,BufRead *Jenkinsfile* set filetype=groovy ts=2 sw=2 sts=2 et
 
     au BufNewFile,BufRead LICENSE set tw=80
 
