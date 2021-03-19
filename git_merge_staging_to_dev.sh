@@ -20,6 +20,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/ci.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Merges Git 'staging' branch to 'dev' branch for CI automated backports
@@ -47,7 +50,7 @@ cd "$(dirname "$0")"
 
 # needed to check in
 git config user.email "platform-engineering@localhost"
-git config user.name "Jenkins"
+git config user.name "$(CI_name)"  # lib/ci.sh CI_name function will return something appropriate
 
 git config core.sparseCheckout false
 
