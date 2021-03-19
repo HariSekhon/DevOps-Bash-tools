@@ -77,7 +77,7 @@ copy_to_clipboard(){
     fi
 }
 
-unalias clip &>/dev/null
+unalias clip &>/dev/null || :
 # args are optional
 # shellcheck disable=SC2120
 clip(){
