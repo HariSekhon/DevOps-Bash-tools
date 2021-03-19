@@ -49,6 +49,15 @@ is_appveyor(){
     return 1
 }
 
+# https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/
+is_bitbucket_ci(){
+    # also CI but not really specific, caught in is_CI generic
+    if [ -n "${BITBUCKET_BUILD_NUMBER:-}" ]; then
+        return 0
+    fi
+    return 1
+}
+
 # https://buddy.works/docs/pipelines/environment-variables#default-environment-variables
 is_buddy_works_ci(){
     # also BUDDY but a bit too generic for my liking
@@ -235,29 +244,85 @@ is_CI(){
        [ -n "${BUILD_NUMBER:-}" ] ||
        [ -n "${BUILD_URL:-}" ] ||
        is_jenkins ||
+       is_teamcity ||
        is_travis ||
        is_circle_ci ||
        is_github_workflow ||
        is_gitlab_ci ||
        is_azure_devops ||
        is_appveyor ||
+       is_bitbucket_ci ||
        is_buildkite ||
        is_buddy_works_ci ||
        is_codeship ||
        is_codefresh ||
        is_concourse ||
        is_cirrus_ci ||
-       is_drone_io||
+       is_drone_io ||
        is_gocd ||
        is_scrutinizer_ci ||
        is_semmle ||
        is_semaphore_ci ||
        is_shippable_ci ||
-       is_teamcity ||
        is_tfs_ci; then
         return 0
     fi
     return 1
+}
+
+CI_name(){
+    if [ -n "${CI_NAME:-}" ]; then
+        echo "$CI_NAME"
+    elif is_jenkins; then
+        echo "Jenkins"
+    elif is_teamcity; then
+        echo "TeamCity"
+    elif is_travis; then
+        echo "Travis CI"
+    elif is_circle_ci; then
+        echo "Circle CI"
+    elif is_github_workflow; then
+        echo "GitHub Actions"
+    elif is_gitlab_ci; then
+        echo "Gitlab CI"
+    elif is_azure_devops; then
+        echo "Azure DevOps"
+    elif is_appveyor; then
+        echo "AppVeyor"
+    elif is_bitbucket_ci; then
+        echo "Bitbucket Pipelines"
+    elif is_buildkite; then
+        echo "BuildKite"
+    elif is_buddy_works_ci; then
+        echo "Buddy CI"
+    elif is_codeship; then
+        echo "CodeShip"
+    elif is_codefresh; then
+        echo "Codefresh"
+    elif is_concourse; then
+        echo "Concourse"
+    elif is_cirrus_ci; then
+        echo "Cirrus CI"
+    elif is_drone_io; then
+        echo "Drone CI"
+    elif is_gocd; then
+        echo "GoCD"
+    elif is_scrutinizer_ci; then
+        echo "Scrutinizer"
+    elif is_semmle; then
+        echo "Semmle"
+    elif is_semaphore_ci; then
+        echo "Semaphore CI"
+    elif is_shippable_ci; then
+        echo "Shippable"
+    elif is_tfs_ci; then
+        echo "TFS CI"
+    elif is_CI; then
+        echo "CI"
+    else
+        echo "Not a recognized CI system"
+        return 1
+    fi
 }
 
 if is_travis; then
