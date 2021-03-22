@@ -25,9 +25,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Merges Git 'staging' branch to 'dev' branch for CI automated backports
+Merges one Git branch into another branch for a local checkout
 
-Designed to be called only by a CI build system to automatically backport via merge any changes to Staging branch into Dev branch eg.
+Designed to be called by a CI build system to automatically backport via merge any changes in Staging branch into Dev branch eg.
 
     ${0##*/} staging dev
 
@@ -54,9 +54,9 @@ if is_CI; then
     # XXX: can edit this to your company domain and team email address
     git config user.email "platform-engineering@localhost"
     git config user.name "$(CI_name)"  # lib/ci.sh CI_name function will return something appropriate
-else
-    echo "This script is designed to only be run from CI!!"
-    exit 1
+#else
+#    echo "This script is designed to only be run from CI!!"
+#    exit 1
 fi
 
 # only apply to own repo
