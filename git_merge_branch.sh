@@ -74,14 +74,15 @@ mkdir -pv ~/.ssh
 # needed for git pull to work
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-GIT_BRANCH="${GIT_BRANCH:-${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}}"
-
-if [[ "$GIT_BRANCH" =~ ^origin/ ]]; then
-    git checkout "${GIT_BRANCH#origin/}" --force
-fi
-
-# needed to get remote branches before checking one out locally
-git pull --no-edit
+#GIT_BRANCH="${GIT_BRANCH:-${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}}"
+#
+#if [[ "$GIT_BRANCH" =~ ^origin/ ]]; then
+#    git checkout "${GIT_BRANCH#origin/}" --force
+#fi
+#
+## needed to get list of remote branches before checking one out locally
+#git pull --no-edit
+git fetch
 
 git checkout "$from_branch" --force
 git pull --no-edit
