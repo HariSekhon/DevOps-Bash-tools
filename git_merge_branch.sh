@@ -25,13 +25,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Merges one Git branch into another branch for a local checkout
+Merges one Git branch into another branch in a local Git checkout
 
 Designed to be called by a CI build system to automatically backport via merge any changes in Staging branch into Dev branch eg.
 
     ${0##*/} staging dev
 
-Requires executing inside an SSH Git cloned repo and an SSH key being present on the CI Agent that executes the job.
+Requires executing inside a Git SSH cloned repo and an SSH key being present on the CI Agent that executes this job.
 Set the CI job to clone the repo via SSH and use the CI system's secrets mechanism for the SSH key.
 "
 
