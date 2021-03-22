@@ -27,7 +27,7 @@ set -euo pipefail
 
 # Jenkins provides BRANCH_NAME, TeamCity doesn't so normalize and determine it if not automatically set
 if [ -z "${BRANCH_NAME:-}" ]; then
-    BRANCH_NAME="${GIT_BRANCH:-(git rev-parse --abbrev-ref HEAD)}"
+    BRANCH_NAME="${GIT_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
 fi
 
 # Jenkins provides $GIT_COMMIT, TeamCity provides $BUILD_VCS_NUMBER
