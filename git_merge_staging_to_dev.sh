@@ -27,21 +27,33 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Merges Git 'staging' branch to 'dev' branch for CI automated backports
 
-Designed to be called only by a CI build system to automatically keep Dev branch up to date with Staging branch
+Designed to be called only by a CI build system to automatically backport via merge any changes to Staging branch into Dev branch eg.
 
-Requires Git authentication such as an SSH key, SSH Agent to already be present and configured on the agent via the CI system's secrets
+    ${0##*/} staging dev
+
+Requires executing inside an SSH Git cloned repo and an SSH key being present on the CI Agent that executes the job.
+Set the CI job to clone the repo via SSH and use the CI system's secrets mechanism for the SSH key.
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="<from_branch> <to_branch>"
 
 help_usage "$@"
+
+num_args 2 "$@"
+
+from_branch="$1"
+to_branch="$2"
 
 set -x
 
 if is_CI; then
     :  # running in CI as expected
+    # needed to check in
+    # XXX: can edit this to your company domain and team email address
+    git config user.email "platform-engineering@localhost"
+    git config user.name "$(CI_name)"  # lib/ci.sh CI_name function will return something appropriate
 else
     echo "This script is designed to only be run from CI!!"
     exit 1
@@ -49,10 +61,6 @@ fi
 
 # only apply to own repo
 cd "$(dirname "$0")"
-
-# needed to check in
-git config user.email "platform-engineering@localhost"
-git config user.name "$(CI_name)"  # lib/ci.sh CI_name function will return something appropriate
 
 git config core.sparseCheckout false
 
@@ -66,14 +74,14 @@ mkdir -pv ~/.ssh
 # needed for git pull to work
 ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-# needed to get remotes to checkout staging
+# needed to get remote branches before checking one out locally
 git pull --no-edit
 
-git checkout staging --force
+git checkout "$from_branch" --force
 git pull --no-edit
 
-git checkout dev --force
+git checkout "$to_branch" --force
 git pull --no-edit
-git merge staging --no-edit
+git merge "$from_branch" --no-edit
 
 git push
