@@ -40,6 +40,8 @@ BUILD="${GIT_COMMIT:-${BUILD_VCS_NUMBER:-$(git show-ref --hash HEAD)}}"
 # If Project isn't set in the CI/CD environment (safest way as it doesn't have a race condition with global on-disk gcloud config), then infer it
 set_gcp_project(){
     if [ -z "${CLOUDSDK_CORE_PROJECT:-}" ]; then
+        # in Jenkins the branch is prefixed with origin/
+        BRANCH_NAME="${BRANCH_NAME#origin/}"
         if [[ "$BRANCH_NAME" =~ ^(dev|staging)$ ]]; then
             export CLOUDSDK_CORE_PROJECT="$MYPROJECT-$BRANCH_NAME"
         elif [ "$BRANCH_NAME" = production ]; then
