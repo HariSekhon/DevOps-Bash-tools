@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Quick list of unique GCP IAM roles in use in the current GCP project or across all projects
+Quick list of unique project-level GCP IAM roles in use in the current GCP project or across all projects
 
 Useful for quick lookups of IAM policy role names which are different from the human readable names in the GCP UI
 
@@ -32,6 +32,9 @@ eg. when backporting GCP IAM permissions to Terraform:
     ${0##*/} > /tmp/iam_roles_reference.txt
     vim -O /tmp/iam_policy.yaml /tmp/iam_roles_reference.txt
     # in another window edit the Terraform IAM and screen/tmux back and forth from this reference
+
+
+NOTICE: does not include roles assigned to say individual GCS buckets, only those assigned at the project level to users, groups or serviceAccounts.
 
 
 You can optionally specify the GCP project, otherwise infers your currently set core.project
