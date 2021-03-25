@@ -18,6 +18,8 @@ set -euo pipefail
 
 # XXX: Edit this
 CONTEXT=mycontext
+# if set will also set the namespace for extra convenience
+#NAMESPACE=jenkins
 
 tmpdir="/tmp/.kube"
 
@@ -54,3 +56,7 @@ else
 fi
 
 kubectl config use-context "$CONTEXT"
+
+if [ -n "${NAMESPACE:-}" ]; then
+    kubectl config set-context "$CONTEXT" --namespace "$NAMESPACE"
+fi
