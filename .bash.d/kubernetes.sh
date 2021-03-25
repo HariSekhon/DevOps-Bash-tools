@@ -25,8 +25,13 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 for x in kubectl oc; do
     if type -P "$x" &>/dev/null; then
+        # doesn't work
         # shellcheck disable=SC1090
-        source <(command "$x" completion bash)
+        #source <(command "$x" completion bash)
+        if ! [ -f ~/.bash.autocomplete.d/"$x.sh" ]; then
+            command "$x" completion bash > ~/.bash.autocomplete.d/"$x.sh"
+            . ~/.bash.autocomplete.d/"$x.sh"
+        fi
     fi
 done
 
