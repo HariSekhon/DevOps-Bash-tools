@@ -29,6 +29,7 @@ for x in kubectl oc; do
         # shellcheck disable=SC1090
         #source <(command "$x" completion bash)
         if ! [ -f ~/.bash.autocomplete.d/"$x.sh" ]; then
+            mkdir -pv ~/.bash.autocomplete.d
             command "$x" completion bash > ~/.bash.autocomplete.d/"$x.sh"
             . ~/.bash.autocomplete.d/"$x.sh"
         fi
@@ -54,6 +55,11 @@ fi
 add_PATH "${KREW_ROOT:-$HOME/.krew}"
 
 # ============================================================================ #
+
+# replaced by function further down
+#alias k=kubectl
+# still need this autocomplete
+complete -F __start_kubectl k
 
 # 'k8s-app' label is set by dashboard creation but who uses that
 # false positive, the comma doesn't separate args
