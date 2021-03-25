@@ -84,6 +84,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# shellcheck disable=SC1090
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 
 # ============================================================================ #
@@ -140,6 +141,7 @@ if [ $EUID -eq 0 ]; then
     sudo=""
 fi
 
+# shellcheck disable=SC1090
 type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # ============================================================================ #
@@ -160,6 +162,15 @@ done
 if [ -d "$HOME/.bash.d" ]; then
     shopt -s nullglob
     for src in "$HOME/.bash.d/"*.sh; do
+        # shellcheck disable=SC1090
+        . "$src"
+    done
+    shopt -u nullglob
+fi
+if [ -d "$HOME/.bash.autocomplete.d" ]; then
+    shopt -s nullglob
+    for src in "$HOME/.bash.autocomplete.d/"*.sh; do
+        # shellcheck disable=SC1090
         . "$src"
     done
     shopt -u nullglob
