@@ -46,7 +46,7 @@ pipeline {
         // timeout entire pipeline after 4 hours
         timeout(time: 2, unit: 'HOURS')
 
-        //retry entire pipeline 3 times
+        //retry entire pipeline 3 times on any failure, often more efficient to use retries in each stage / step
         //retry(3)
     }
 
