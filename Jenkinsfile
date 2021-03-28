@@ -32,6 +32,7 @@
 
 
 pipeline {
+  // to run on Docker or Kubernetes, see the master Jenkinsfile template listed at the top
   agent any
 
   options {
