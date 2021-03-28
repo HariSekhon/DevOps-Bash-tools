@@ -54,7 +54,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+        echo "Running ${env.JOB_NAME} Build ${env.BUILD_ID} on ${env.JENKINS_URL}"
         echo 'Building...'
         timeout(time: 10, unit: 'MINUTES') {
           retry(3) {
