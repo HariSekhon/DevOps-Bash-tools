@@ -16,10 +16,10 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-# XXX: Edit this
-CONTEXT=mycontext
+# XXX: Edit this - hardcode for localized convenience
+CONTEXT="${1:-mycontext}"
 # if set will also set the namespace for extra convenience
-#NAMESPACE=jenkins
+NAMESPACE="${2:-}"
 
 tmpdir="/tmp/.kube"
 
