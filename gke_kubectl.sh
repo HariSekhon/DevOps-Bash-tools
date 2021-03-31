@@ -68,7 +68,7 @@ min_args 1 "$@"
 # HARDCODE THIS SECTION FOR SHORTER CLI convenience
 # REMOVE if hardcoding
 
-#GKE_CONTEXT=gke_<myproject>_<myregion>_<name>
+#GKE_CONTEXT=gke_<myproject>_<myregion>_<clustername>
 
 if [ -z "${GKE_CONTEXT:-}" ]; then
 
