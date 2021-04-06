@@ -31,9 +31,9 @@ echo
 if ! [ -e "$BASE/groovy" ]; then
     mkdir -p "$BASE"
     cd "$BASE"
-    wget -t 100 --retry-connrefused "https://dl.bintray.com/groovy/maven/apache-groovy-binary-$GROOVY_VERSION.zip" && \
-    unzip "apache-groovy-binary-$GROOVY_VERSION.zip" && \
-    ln -sv "groovy-$GROOVY_VERSION" groovy && \
+    wget -t 100 --retry-connrefused "https://dl.bintray.com/groovy/maven/apache-groovy-binary-$GROOVY_VERSION.zip"
+    unzip "apache-groovy-binary-$GROOVY_VERSION.zip"
+    ln -sv "groovy-$GROOVY_VERSION" groovy
     rm -f "apache-groovy-binary-$GROOVY_VERSION.zip"
     echo
     echo "Groovy Install done"
