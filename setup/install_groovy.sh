@@ -40,14 +40,16 @@ if ! [ -e "$BASE/groovy" ]; then
 else
     echo "$BASE/groovy already exists - doing nothing"
 fi
-if ! [ -e /etc/profile.d/groovy.sh ]; then
-    echo "Adding /etc/profile.d/groovy.sh"
-    # shell execution tracing comes out in the file otherwise
-    set +x
-    cat >> /etc/profile.d/groovy.sh <<EOF
+if [ -d /etc/profile.d/groovy.sh ]; then
+    if ! [ -e /etc/profile.d/groovy.sh ]; then
+        echo "Adding /etc/profile.d/groovy.sh"
+        # shell execution tracing comes out in the file otherwise
+        set +x
+        cat >> /etc/profile.d/groovy.sh <<EOF
 export GROOVY_HOME=/opt/groovy
 export PATH=\$PATH:\$GROOVY_HOME/bin
 EOF
+    fi
 fi
 
 echo
