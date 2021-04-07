@@ -87,8 +87,14 @@ load_secret(){
             timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
             return
         fi
-        latest_version="$(get_latest_secret_version "$secret")"
-        value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
+        # secrets created without a value are an odd use case but it has happened, so ignore and load blank value
+        latest_version="$(get_latest_secret_version "$secret" || :)"
+        if [ -n "$latest_version" ]; then
+            value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
+        else
+            timestamp "WARNING: no versions found for GCP secret '$secret', using blank secret value"
+            value=""
+        fi
         timestamp "creating kubernetes secret '$secret' in namespace '$namespace'"
         # kubectl create secret automatically base64 encodes the $value
         # if you did this in yaml you'd have to base64 encode it yourself in the yaml
