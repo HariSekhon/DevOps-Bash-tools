@@ -92,6 +92,10 @@ fi
 
 kube_config_isolate
 
+if ! gcloud auth application-default print-access-token >/dev/null; then
+    gcloud auth application-default login
+fi
+
 # if original kube config contains the context, copy and reuse it (faster and less noisy than re-pulling the creds from GKE), especially when called in script iterations
 if [ -n "${GKE_CONTEXT:-}" ] &&
    kubectl config get-contexts -o name | grep -Fxq "$GKE_CONTEXT"; then
