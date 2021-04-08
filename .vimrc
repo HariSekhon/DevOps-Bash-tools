@@ -41,6 +41,7 @@ set mls=15  " modelines - Controls how many lines to check for modeline, systems
 set nocp    " nocompatible
 set nofen   "nofoldenable
 set nohls   " nohlsearch
+set nojs    " nojoinspaces - only use 1 space even when J joining lines even when line ends in a special char
 "set nu      " number (column on left)
 set ru      " ruler
 set sm      " showmatch. show matching brackets {}
