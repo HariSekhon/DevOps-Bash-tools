@@ -33,9 +33,11 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-name=dnsutils
+name="dnsutils-${USER:-$(whoami)}"
 
-if kubectl get po "$name" "$@" &>/dev/null; then
+if kubectl get po "$name" "$@" -o json 2>/dev/null |
+   jq -r 'select(.status.phase == "Running")' |
+   grep -q . &>/dev/null; then
     kubectl exec -ti "$name" "$@" -- /bin/bash
 else
     kubectl run -ti --rm --restart=Never "$name" --image=tutum/dnsutils "$@" -- /bin/bash
