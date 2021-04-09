@@ -33,9 +33,11 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-name=busybox
+name="busybox-$USER"
 
-if kubectl get po "$name" "$@" &>/dev/null; then
+if kubectl get po "$name" "$@" -o json 2>/dev/null |
+   jq -r 'select(.status.phase == "Running")' |
+   grep -q . &>/dev/null; then
     kubectl exec -ti "$name" "$@" -- /bin/sh
 else
     kubectl run -ti --rm --restart=Never "$name" --image=busybox "$@" -- /bin/sh
