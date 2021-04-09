@@ -33,7 +33,7 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-name="busybox-$USER"
+name="busybox-${USER:-$(whoami)}"
 
 if kubectl get po "$name" "$@" -o json 2>/dev/null |
    jq -r 'select(.status.phase == "Running")' |
