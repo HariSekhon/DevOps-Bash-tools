@@ -70,12 +70,12 @@ fi
 
 timestamp="$(gcloud container images list-tags "$docker_image" --limit 10 --format='get(timestamp.datetime)' --filter="tags=$tag")"
 if [ -z "$timestamp" ]; then
-	echo "Failed to determine timestamp from Cloud Build for image '$docker_image' with tag '$tag'"
-	exit 1
+    echo "Failed to determine timestamp from Cloud Build for image '$docker_image' with tag '$tag'"
+    exit 1
 fi
 if ! [[ "$timestamp" =~ ^[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}[[:space:]][[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2}[+-][[:digit:]]{2}:[[:digit:]]{2}$ ]]; then
-	echo "Cloud Build timestamp not in expect YYYY-MM-DD HH:MM:SS[+-]HH:MM format, API may have changed"
-	exit 1
+    echo "Cloud Build timestamp not in expect YYYY-MM-DD HH:MM:SS[+-]HH:MM format, API may have changed"
+    exit 1
 fi
 
 if is_mac; then
@@ -92,7 +92,7 @@ date="${timestamp%T*}"
 echo "tagging docker image $docker_image:$tag with extra tags: $date $timestamp"
 # --quiet otherwise prompts Y/n which would hang build
 gcloud container images add-tag --quiet \
-	"$docker_image:$tag" \
-		"$docker_image:$date" \
-		"$docker_image:$timestamp"
-		#"$docker_image:latest"  # there is also gcr_tag_latest.sh adjacent now
+    "$docker_image:$tag" \
+        "$docker_image:$date" \
+        "$docker_image:$timestamp"
+        #"$docker_image:latest"  # there is also gcr_tag_latest.sh adjacent now
