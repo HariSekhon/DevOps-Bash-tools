@@ -34,6 +34,7 @@ buddy.yml
 buildspec.yml
 cloudbuild.yaml
 codefresh.yml
+codeship.yml
 shippable.yml
 wercker.yml
 setup/gocd_config_repo.json
