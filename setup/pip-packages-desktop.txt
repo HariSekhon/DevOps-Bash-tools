@@ -24,6 +24,7 @@ awscli
 beautifulsoup4
 bitbucket-cli
 cfn-lint
+codeship-yaml
 flake8
 #gitlab-python  # Python 3 only by the look of it
 gitsome
