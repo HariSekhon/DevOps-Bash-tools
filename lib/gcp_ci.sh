@@ -98,7 +98,7 @@ gcp_login(){
 }
 
 gke_login(){
-	local cluster_name="$1"
+    local cluster_name="$1"
     # if running the CI build on the same k8s cluster as the deployment will go to - this is often not the case and not reliable to be detected either since we are often running these builds inside docker images and it would rely on correctly configuring the environment variables to be able to detect this. Instead just open the GKE's cluster's master networks to the projects external NAT IP
     #local opts=(--internal-ip)
     local opts=()
@@ -120,7 +120,7 @@ list_container_tags(){
 }
 
 tags_exist_for_container_image(){
-	# since list_container_tags returns blank if this build hashref doesn't exist, we can use this as a simple test
+    # since list_container_tags returns blank if this build hashref doesn't exist, we can use this as a simple test
     [ -n "$(list_container_tags "$APP" "$BUILD")" ]
 }
 
@@ -140,7 +140,7 @@ replace_latest_with_build(){
 }
 
 download_kustomize(){
-	#curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
+    #curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
     # better to fix version in case later versions change behaviour or syntax
     curl -o kustomize --location https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
     chmod u+x ./kustomize
