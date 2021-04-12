@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2756-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1231-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-492-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-2896-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1283-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-527-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -72,7 +72,7 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 
 Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-tools)
 
-25+ DevOps CLI Tools - Kubernetes & Code templates, Log Anonymizer, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles), Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, Nginx stats & HTTP(S) URL watchers for load-balanced web farms, Linux tools etc.
+25+ DevOps CLI Tools - Anonymizer, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles), Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, Nginx stats & HTTP(S) URL watchers for load-balanced web farms, Linux tools etc.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Perl-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Perl-tools)
 
@@ -104,6 +104,15 @@ Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into t
 [![Stargazers over time](https://starchart.cc/HariSekhon/Kubernetes-templates.svg)](https://starchart.cc/HariSekhon/Kubernetes-templates)
 
 ---
+## Code & Config Templates
+
+Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
+
+Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/Templates.svg)](https://starchart.cc/HariSekhon/Templates)
+
+---
 ## Hari Sekhon - Python / Jython Library
 
 Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
@@ -122,15 +131,6 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
 
 ---
-## Code & Config Templates
-
-Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
-
-Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/Templates.svg)](https://starchart.cc/HariSekhon/Templates)
-
----
 ## Hari Sekhon - DevOps Golang Tools
 
 Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Golang-tools)
@@ -140,6 +140,15 @@ DevOps Golang tools
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
 
 ---
+## Hari Sekhon - Spotify Playlists
+
+Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
+
+240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
+
+---
 ## Terraform Templates
 
 Link:  [HariSekhon/Terraform-templates](https://github.com/HariSekhon/Terraform-templates)
@@ -147,15 +156,6 @@ Link:  [HariSekhon/Terraform-templates](https://github.com/HariSekhon/Terraform-
 Terraform templates for AWS / GCP / Azure
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Terraform-templates.svg)](https://starchart.cc/HariSekhon/Terraform-templates)
-
----
-## Hari Sekhon - Spotify Playlists
-
-Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
-
-240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo. 
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
 ---
 ## SQL Keywords
