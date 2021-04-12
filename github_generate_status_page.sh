@@ -189,6 +189,7 @@ hosted_build_regex+='|img\.shields\.io/travis/'
 hosted_build_regex+='|img\.shields\.io/shippable/'
 hosted_build_regex+='|img\.shields\.io/wercker/ci/'
 hosted_build_regex+='|app\.buddy\.works/.*/pipelines/pipeline/.*/badge.svg'
+hosted_build_regex+='|img\.shields\.io/badge/Buddy'
 hosted_build_regex+='|\.semaphoreci\.com/badges/'
 hosted_build_regex+=')'
 # to check for any badges missed, just go
