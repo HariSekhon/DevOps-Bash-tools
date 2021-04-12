@@ -46,3 +46,16 @@ mp3infoheadtail(){
         mediainfo "$filename"
     done
 }
+
+mp3set(){
+    if [ $# != 2 ]; then
+        echo "usage: mp3set <artist> <album>"
+        return 1
+    fi
+    local artist="$1"
+    local album="$2"
+    mp3_set_artist.sh "$artist"
+    mp3_set_album.sh  "$album"
+    mp3_set_track_order.sh
+    mp3_set_track_name.sh
+}

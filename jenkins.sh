@@ -116,7 +116,7 @@ else
 fi
 
 when_jenkins_up(){
-    when_url_content 90 "$JENKINS_URL" '(?i:jenkins|hudson)'
+    when_url_content 90 "$JENKINS_URL/login" '(?i:jenkins|hudson)'
     echo
 }
 
