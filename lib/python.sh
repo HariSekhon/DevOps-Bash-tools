@@ -91,7 +91,7 @@ install_pip_manually(){
         export OPENSSL_LIB="$brew_prefix/opt/openssl/lib"
     fi
     if "$python" -V 2>&1 | grep -q '^Python 2'; then
-        curl -sS https://bootstrap.pypa.io/2.7/get-pip.py -o get-pip.py
+        curl -sS https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
     else
         curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
     fi
