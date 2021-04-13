@@ -39,7 +39,7 @@ set listchars=tab:>-,eol:$,trail:.,extends:# " changes the list characters, make
 set ml      " modeline - respect the vim: stuff at the stop of files, often off for root
 set mls=15  " modelines - Controls how many lines to check for modeline, systems often set this to 0
 set nocp    " nocompatible
-set nofen   "nofoldenable
+set nofen   " nofoldenable
 set nohls   " nohlsearch
 set nojs    " nojoinspaces - only use 1 space even when J joining lines even when line ends in a special char
 "set nu      " number (column on left)
@@ -181,6 +181,10 @@ if has("autocmd")
 
     " on write - auto-strip trailing whitespace on lines and remove trailing whitespace only lines end at of file
     autocmd BufWritePre * %s/\s\+$//e | %s#\($\n\s*\)\+\%$##e
+
+    " save and restore folds
+    autocmd BufWinLeave *.* mkview
+    autocmd BufWinEnter *.* silent loadview
 
     " doubles up with nmap ;l
     "au BufWritePost *.tf,*.tfvars :!clear; cd "%:p:h" && terraform fmt -diff; terraform validate
