@@ -20,6 +20,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # If using other services, infer the environment variables to put below by reading:
 #
 #   gcloud topic configurations
+#       or
+#   gcloud config set --help
 
 # XXX: Edit
 export CLOUDSDK_CORE_PROJECT=myproject
