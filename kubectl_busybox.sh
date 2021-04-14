@@ -35,10 +35,23 @@ help_usage "$@"
 
 name="busybox-${USER:-$(whoami)}"
 
-if kubectl get po "$name" "$@" -o json 2>/dev/null |
-   jq -r 'select(.status.phase == "Running")' |
-   grep -q . &>/dev/null; then
-    kubectl exec -ti "$name" "$@" -- /bin/sh
-else
+pod_json="$(kubectl get pod "$name" "$@" -o json 2>/dev/null || :)"
+
+run(){
     kubectl run -ti --rm --restart=Never "$name" --image=busybox "$@" -- /bin/sh
+}
+
+if [ -n "$pod_json" ]; then
+    if jq -e 'select(.status.phase == "Running")' <<< "$pod_json" >/dev/null; then
+        exec kubectl exec -ti "$name" "$@" -- /bin/sh
+    elif jq -e 'select(.status.phase == "Succeeded")' <<< "$pod_json" >/dev/null; then
+        kubectl delete pod "$name" "$@"
+        run "$@"
+    else
+        echo "ERROR: Pod already exists. Check its state and remove it?"
+        kubectl get pod "$name" "$@"
+        exit 1
+    fi
+else
+    run "$@"
 fi
