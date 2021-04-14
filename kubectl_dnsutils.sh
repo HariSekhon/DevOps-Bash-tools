@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a quick tutum/dnsutils pod on Kubernetes to debug networking / dns
@@ -35,10 +38,4 @@ help_usage "$@"
 
 name="dnsutils-${USER:-$(whoami)}"
 
-if kubectl get po "$name" "$@" -o json 2>/dev/null |
-   jq -r 'select(.status.phase == "Running")' |
-   grep -q . &>/dev/null; then
-    kubectl exec -ti "$name" "$@" -- /bin/bash
-else
-    kubectl run -ti --rm --restart=Never "$name" --image=tutum/dnsutils "$@" -- /bin/bash
-fi
+run_static_pod "$name" "$@"
