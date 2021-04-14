@@ -126,6 +126,7 @@ alias GRH="git reset HEAD^"
 
 alias master="switchbranch master"
 alias prod="switchbranch prod"
+alias production="switchbranch production"
 alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
