@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/kubernetes.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs a quick busybox pod on Kubernetes to debug networking / dns
@@ -35,23 +38,4 @@ help_usage "$@"
 
 name="busybox-${USER:-$(whoami)}"
 
-pod_json="$(kubectl get pod "$name" "$@" -o json 2>/dev/null || :)"
-
-run(){
-    kubectl run -ti --rm --restart=Never "$name" --image=busybox "$@" -- /bin/sh
-}
-
-if [ -n "$pod_json" ]; then
-    if jq -e 'select(.status.phase == "Running")' <<< "$pod_json" >/dev/null; then
-        exec kubectl exec -ti "$name" "$@" -- /bin/sh
-    elif jq -e 'select(.status.phase == "Succeeded")' <<< "$pod_json" >/dev/null; then
-        kubectl delete pod "$name" "$@"
-        run "$@"
-    else
-        echo "ERROR: Pod already exists. Check its state and remove it?"
-        kubectl get pod "$name" "$@"
-        exit 1
-    fi
-else
-    run "$@"
-fi
+run_static_pod "$name" "$@"
