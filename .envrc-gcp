@@ -17,6 +17,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
+# If using other services, infer the environment variables to put below by reading:
+#
+#   gcloud topic configurations
+
 # XXX: Edit
 export CLOUDSDK_CORE_PROJECT=myproject
 export CLOUDSDK_COMPUTE_REGION=europe-west2
