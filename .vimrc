@@ -182,9 +182,9 @@ if has("autocmd")
     " on write - auto-strip trailing whitespace on lines and remove trailing whitespace only lines end at of file
     autocmd BufWritePre * %s/\s\+$//e | %s#\($\n\s*\)\+\%$##e
 
-    " save and restore folds
-    autocmd BufWinLeave *.* mkview
-    autocmd BufWinEnter *.* silent loadview
+    " writes a vim script that saves and restore folds, ts/sts/sw options etc
+    "autocmd BufWinLeave *.* mkview
+    "autocmd BufWinEnter *.* silent loadview
 
     " doubles up with nmap ;l
     "au BufWritePost *.tf,*.tfvars :!clear; cd "%:p:h" && terraform fmt -diff; terraform validate
