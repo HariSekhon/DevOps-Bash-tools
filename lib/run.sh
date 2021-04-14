@@ -69,10 +69,12 @@ else
                     ;;
 kustomization.yaml) kustomize build
                     ;;
+            .envrc) cd "$dirname" && direnv allow .
+                    ;;
             *.go)   eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
                     ;;
-            *.tf)   if [ -d "%:p:h"/.terraform ]; then
-                        cd "%:p:h"
+            *.tf)   if [ -d "$dirname"/.terraform ]; then
+                        cd "$dirname"
                     fi
                     #terraform plan
                     terraform apply
