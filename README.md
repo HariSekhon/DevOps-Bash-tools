@@ -342,6 +342,8 @@ etc.
 #### GCP - Google Cloud Platform
 
 - [Google Cloud](https://cloud.google.com/) scripts - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
+  - `.envrc-gcp` - copy to `.envrc` for `direnv` to auto-load GCP configuration settings such as Project, Region, Zone, GKE cluster name or anything else supported by GCloud SDK to shorten `gcloud` commands or GCloud SDK apps
+    - also calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using Terraform immediately. Run once for each project and combine with `direnv` for fast easy management of multiple GCP projects
   - `gcp_cli_create_credential.sh` - creates a GCloud SDK CLI service account with full owner permissions to all projects, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using it. Avoids having to reauth to `gcloud auth login` every day.
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
@@ -434,7 +436,7 @@ etc.
 #### Kubernetes
 
 - `kubernetes_*.sh` - [Kubernetes](https://kubernetes.io/) scripts:
-  - `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
+  - `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
     - cluster-info
     - master component statuses
