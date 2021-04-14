@@ -19,8 +19,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # XXX: Edit
 export CLOUDSDK_CORE_PROJECT=myproject
-export CLOUDSDK_CORE_REGION=europe-west2
+export CLOUDSDK_COMPUTE_REGION=europe-west2
 export GKE_CLUSTER=mycluster
 
 # shellcheck disable=SC1090
-. "$srcdir/.envrc-kubernetes" "gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_CORE_REGION}_${GKE_CLUSTER}"
+. "$srcdir/.envrc-kubernetes" "gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${GKE_CLUSTER}"
