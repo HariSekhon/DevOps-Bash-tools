@@ -114,7 +114,7 @@ context(){ k config current-context; }
 # contexts has this info and is more useful
 #alias clusters="k config get-clusters"
 
-alias kcd='k config set-context $(kubectl config current-context) --namespace'
+alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
 
 alias menv='eval $(minikube docker-env)'
 
