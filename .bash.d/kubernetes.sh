@@ -85,6 +85,7 @@ alias kbuild='kustomize build'
 alias kustomizebuilddiff='kbuild | kubectl diff -f -'
 alias kbuilddiff=kustomizebuilddiff
 alias kbuildd=kbuilddiff
+alias kbd=kbuildd
 #alias kustomizebuildapply='kbuild | kubectl apply -f -'
 alias kbuildapply=kustomizebuildapply
 alias kbuilda=kbuildapply
