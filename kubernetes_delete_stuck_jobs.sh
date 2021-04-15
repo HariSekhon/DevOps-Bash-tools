@@ -48,7 +48,7 @@ echo
 echo "$header"
 echo "$stuck_jobs"
 echo
-read -r -p "Are you sure you want to delete these jobs? (y/N)" answer
+read -r -p "Are you sure you want to delete these jobs? (y/N) " answer
 
 shopt -s nocasematch
 
@@ -60,4 +60,4 @@ fi
 timestamp "Deleting stuck kubernetes jobs"
 
 awk '!/^NAME/{print $1}' <<< "$stuck_jobs" |
-xargs kubectl delete jobs
+xargs kubectl delete jobs "$@"
