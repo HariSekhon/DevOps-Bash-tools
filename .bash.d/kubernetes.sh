@@ -91,7 +91,12 @@ alias kbuilda=kbuildapply
 alias kba=kbuilda
 
 kustomizebuildapply(){
-    kustomizebuilddiff | more
+    local diff
+    diff="$(kustomizebuilddiff)"
+    if [ -z "$diff" ]; then
+        return 0
+    fi
+    more <<< "$diff"
     echo
     read -r -p "Are you sure you want to apply this change set? (y/N) " answer
     answer="${answer//[:space:]]/}"
