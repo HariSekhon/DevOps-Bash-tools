@@ -95,6 +95,7 @@ kustomizebuildapply(){
     local diff
     diff="$(kustomizebuilddiff)"
     if [ -z "$diff" ]; then
+        echo "No Kubernetes changes" >&2
         return 0
     fi
     more <<< "$diff"
