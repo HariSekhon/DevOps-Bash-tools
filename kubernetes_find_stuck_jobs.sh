@@ -40,7 +40,7 @@ help_usage "$@"
 kubectl get jobs "$@" |
 while read -r name completions duration age; do
     if [[ "$completions" =~ ^0 ]] &&
-       [[ "$duration" =~ h|d ]] &&
+       [[ "$duration" =~ h|d|[[:digit:]]{3}m ]] &&
        [ "$duration" = "$age" ]; then
         echo "$name $completions $duration $age"
     elif [ "$name" = NAME ]; then
