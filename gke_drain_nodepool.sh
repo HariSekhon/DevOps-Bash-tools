@@ -80,7 +80,7 @@ nodes="$(
 
 echo >&2
 timestamp "disabling autoscaling for node pool '$node_pool'"
-gcloud container node-pools update --no-enable-autoscaling preemptible
+gcloud container node-pools update --no-enable-autoscaling "$node_pool"
 
 echo >&2
 timestamp "cordoning nodes:"
