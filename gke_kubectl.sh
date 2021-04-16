@@ -39,14 +39,15 @@ either by your hand or in other concurrently executing scripts changes your glob
 
 If GKE_CONTEXT is set in the environment and matches a pre-existing context, skips pulling GKE creds for speed and noise reduction.
 
-if GKE_CONTEXT is not set then requires the following to be set in the environment in order to obtain the credentials to the GKE cluster:
+If GKE_CONTEXT is not set then requires the following to be set in the environment in order to obtain the credentials to the GKE cluster (will try to auto-infer from gcloud config if not set):
 
-GKE_CLUSTER             - the name of your GKE cluster
-CLOUDSDK_CORE_PROJECT   - the project in which your GKE cluster resides (will try to auto-infer from gcloud config if not set)
-CLOUDSDK_COMPUTE_REGION - the region in which to find your GKE cluster (will try to auto-infer from  gcloud config if not set)
-                          If the CLOUDSDK variables are not set and cannot be inferred from gcloud config, then errors out. If they are set though, they may be pointing to the wrong project or region so it is recommended to set them
+CLOUDSDK_CONTAINER_CLUSTER  - the name of your GKE cluster
+CLOUDSDK_CORE_PROJECT       - the project in which your GKE cluster resides
+CLOUDSDK_COMPUTE_REGION     - the region in which to find your GKE cluster
 
-For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the GKE_CONTEXT (use gke_kube_creds.sh to pre-populate the context and credentials) or CLOUDSDK_CORE_PROJECT, CLOUDSDK_COMPUTE_REGION and GKE_CLUSTER variables if pulling GKE creds.
+If the CLOUDSDK variables are not set and cannot be inferred from gcloud config, then errors out. If they are set though, they may be pointing to the wrong project or region so it is recommended to set them
+
+For frequent more convenient usage you will want to shorten the CLI by copying this script to a local copy in each cluster's yaml config directory and hardcoding the GKE_CONTEXT (use gke_kube_creds.sh to pre-populate the context and credentials) or CLOUDSDK_CORE_PROJECT, CLOUDSDK_COMPUTE_REGION and CLOUDSDK_CONTAINER_CLUSTER variables if pulling GKE creds.
 
 Could also use main kube config with kubectl switches --cluster / --context (after configuring, see gke_kube_creds.sh), but this is more convenient, especially when hardcoded for the local copy in each cluster's k8s yaml dir
 
@@ -77,16 +78,17 @@ if [ -z "${GKE_CONTEXT:-}" ]; then
     # HARDCODE THESE for frequent shorter CLI usage
     #CLOUDSDK_CORE_PROJECT=myproject
     #CLOUDSDK_COMPUTE_REGION=europe-west1
-    #GKE_CLUSTER="$2"  # eg. <myproject>-europe-west1
+    #CLOUDSDK_CONTAINER_CLUSTER="$2"  # eg. <myproject>-europe-west1
 
-    check_env_defined GKE_CLUSTER
+    CLOUDSDK_CONTAINER_CLUSTER="${CLOUDSDK_CONTAINER_CLUSTER:-$(gcloud config list --format="get(container.cluster)")}"
     CLOUDSDK_CORE_PROJECT="${CLOUDSDK_CORE_PROJECT:-$(gcloud config list --format="get(core.project)")}"
     CLOUDSDK_COMPUTE_REGION="${CLOUDSDK_COMPUTE_REGION:-$(gcloud config list --format="get(compute.region)")}"
+    check_env_defined CLOUDSDK_CONTAINER_CLUSTER
     check_env_defined CLOUDSDK_CORE_PROJECT
     check_env_defined CLOUDSDK_COMPUTE_REGION
 
     # if set and available in original kube config, will just copy config and switch to this context (faster and less noisy than re-pulling creds from GKE)
-    GKE_CONTEXT="gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${GKE_CLUSTER}"
+    GKE_CONTEXT="gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${CLOUDSDK_CONTAINER_CLUSTER}"
 fi
 # ============================================================
 
@@ -104,7 +106,7 @@ if [ -n "${GKE_CONTEXT:-}" ] &&
         kubectl config use-context "$GKE_CONTEXT" >&2
     fi
 else
-    gcloud container clusters get-credentials "$GKE_CLUSTER" >&2  # --region "$CLOUDSDK_COMPUTE_REGION" --project "$CLOUDSDK_CORE_PROJECT"
+    gcloud container clusters get-credentials "$CLOUDSDK_CONTAINER_CLUSTER" --region "$CLOUDSDK_COMPUTE_REGION" --project "$CLOUDSDK_CORE_PROJECT" >&2
     echo >&2
 fi
 
