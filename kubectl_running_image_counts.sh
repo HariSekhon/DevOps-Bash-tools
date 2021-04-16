@@ -33,7 +33,7 @@ usage_args=""
 
 help_usage "$@"
 
-kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}' |
+kubectl get pods --all-namespaces --field-selector status.phase=Running -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}' |
 sort |
 uniq -c |
 sort -k1nr
