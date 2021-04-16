@@ -92,5 +92,5 @@ done
 echo >&2
 for node in $nodes; do
     timestamp "draining node '$node'"
-    "$srcdir/gke_kubectl.sh" drain "$node"
+    "$srcdir/gke_kubectl.sh" drain "$node"  # &  # could parallelize this - respects pod disruption budgets
 done
