@@ -41,9 +41,9 @@ If GKE_CONTEXT is set in the environment and matches a pre-existing context, ski
 
 If GKE_CONTEXT is not set then requires the following to be set in the environment in order to obtain the credentials to the GKE cluster (will try to auto-infer from gcloud config if not set):
 
-CLOUDSDK_CONTAINER_CLUSTER  - the name of your GKE cluster
-CLOUDSDK_CORE_PROJECT       - the project in which your GKE cluster resides
-CLOUDSDK_COMPUTE_REGION     - the region in which to find your GKE cluster
+CLOUDSDK_CORE_PROJECT       - project containing your GKE cluster
+CLOUDSDK_COMPUTE_REGION     - region containing your GKE cluster
+CLOUDSDK_CONTAINER_CLUSTER  - name of your GKE cluster
 
 If the CLOUDSDK variables are not set and cannot be inferred from gcloud config, then errors out. If they are set though, they may be pointing to the wrong project or region so it is recommended to set them
 
@@ -80,12 +80,12 @@ if [ -z "${GKE_CONTEXT:-}" ]; then
     #CLOUDSDK_COMPUTE_REGION=europe-west1
     #CLOUDSDK_CONTAINER_CLUSTER="$2"  # eg. <myproject>-europe-west1
 
-    CLOUDSDK_CONTAINER_CLUSTER="${CLOUDSDK_CONTAINER_CLUSTER:-$(gcloud config list --format="get(container.cluster)")}"
     CLOUDSDK_CORE_PROJECT="${CLOUDSDK_CORE_PROJECT:-$(gcloud config list --format="get(core.project)")}"
     CLOUDSDK_COMPUTE_REGION="${CLOUDSDK_COMPUTE_REGION:-$(gcloud config list --format="get(compute.region)")}"
-    check_env_defined CLOUDSDK_CONTAINER_CLUSTER
+    CLOUDSDK_CONTAINER_CLUSTER="${CLOUDSDK_CONTAINER_CLUSTER:-$(gcloud config list --format="get(container.cluster)")}"
     check_env_defined CLOUDSDK_CORE_PROJECT
     check_env_defined CLOUDSDK_COMPUTE_REGION
+    check_env_defined CLOUDSDK_CONTAINER_CLUSTER
 
     # if set and available in original kube config, will just copy config and switch to this context (faster and less noisy than re-pulling creds from GKE)
     GKE_CONTEXT="gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${CLOUDSDK_CONTAINER_CLUSTER}"
