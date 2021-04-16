@@ -25,7 +25,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Taints/untaints all nodes in the given GKE nodepool with your taint spec
+Taints/untaints all nodes in the given GKE nodepool on the current cluster with your taint spec
+
+See:
+
+    kubectl taint nodes --help
+
+for the taint spec
 "
 
 # used by usage() in lib/utils.sh
@@ -36,17 +42,17 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-if [ $# -eq 2 ]; then
+if [ $# -eq 3 ]; then
     export GCLOUD_CONTAINER_CLUSTER="$1"
     node_pool="$2"
-elif [ $# -eq 1 ]; then
+    shift || :
+    shift || :
+elif [ $# -eq 2 ]; then
     node_pool="$1"
+    shift || :
 else
     usage
 fi
-
-node_pool="$1"
-shift || :
 
 kube_config_isolate
 
