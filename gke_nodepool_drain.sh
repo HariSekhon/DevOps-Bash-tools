@@ -24,6 +24,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Drains all Kubernetes nodes from a given GKE cluster's nodepool
 
+Useful to decommission an entire nodepool to delete or recreate it (eg. with different taints)
+
 You must have a second node pool with sufficient capacity / autoscaling max nodes to be able to accommodate the evicted pods
 
 - finds instance groups in a node pool
@@ -41,8 +43,6 @@ Requires:
       or gcloud config to pull the GKE creds dynamically (slower)
 
 If CLOUDSDK_CONTAINER_CLUSTER is set then you don't have to specify the cluster name
-
-This is so that you can shut down the pool
 "
 
 # used by usage() in lib/utils.sh
@@ -62,21 +62,7 @@ else
     usage
 fi
 
-timestamp "finding instance groups in node pool '$node_pool'"
-instance_groups="$(
-    gcloud container node-pools describe "$node_pool" --format=json |
-    jq -r '.instanceGroupUrls[] | sub("^.*/"; "")'
-)"
-
-echo >&2
-nodes="$(
-    for instance_group in $instance_groups; do
-        #timestamp "finding zone of instance group '$instance_group'"
-        timestamp "finding nodes in instance group '$instance_group'"
-        zone="$(gcloud compute instance-groups list --filter="name=$instance_group" --format='get(zone)' | sed 's|^.*/||')"
-        gcloud compute instance-groups list-instances "$instance_group" --zone "$zone" --format='value(NAME)'  # doesn't find it without zone, and NAME must be capitalized too
-    done
-)"
+nodes="$(VERBOSE=1 "$srcdir/gke_nodepool_nodes.sh" "$node_pool")"
 
 echo >&2
 timestamp "disabling autoscaling for node pool '$node_pool'"
