@@ -37,14 +37,13 @@ You must have a second node pool with sufficient capacity / autoscaling max node
 Requires:
 
     - GCloud SDK to be installed and configured
+      - requires core/project and compute/region to be set in your gcloud config
+        or else environment variables CLOUDSDK_CORE_PROJECT and CLOUDSDK_COMPUTE_REGION
     - uses adjacent scripts:
       - gke_nodepool_nodes.sh - lists all nodes in the given nodepool
       - gke_kubectl.sh - for safe kubectl with isolated context
-    - Your GKE context should already be set up in kubectl (ses gke_kube_creds.sh to do this for you),
-      otherwise you must have \$CLOUDSDK_CORE_PROJECT and \$CLOUDSDK_COMPUTE_REGION in the environment
-      or gcloud config to pull the GKE creds dynamically (slower)
 
-If CLOUDSDK_CONTAINER_CLUSTER is set then you don't have to specify the cluster name
+If gcloud config container/cluster or CLOUDSDK_CONTAINER_CLUSTER are set then you don't have to specify the cluster name
 "
 
 # used by usage() in lib/utils.sh
@@ -64,7 +63,7 @@ else
     usage
 fi
 
-nodes="$(VERBOSE=1 "$srcdir/gke_nodepool_nodes.sh" "$node_pool")"
+nodes="$(VERBOSE=1 "$srcdir/gke_nodepool_nodes2.sh" "$node_pool")"
 
 echo >&2
 timestamp "disabling autoscaling for node pool '$node_pool'"
