@@ -30,8 +30,10 @@ Lists all Kubernetes nodes in a given GKE cluster's nodepool
 Requires:
 
     - GCloud SDK to be installed and configured
+      - requires core/project and compute/region to be set in your gcloud config
+        or else environment variables CLOUDSDK_CORE_PROJECT and CLOUDSDK_COMPUTE_REGION
 
-If CLOUDSDK_CONTAINER_CLUSTER is set then you don't have to specify the cluster name
+If gcloud config container/cluster or CLOUDSDK_CONTAINER_CLUSTER are set then you don't have to specify the cluster name
 "
 
 # used by usage() in lib/utils.sh
