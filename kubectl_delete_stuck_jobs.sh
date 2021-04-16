@@ -35,7 +35,7 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-stuck_jobs="$(kubectl_find_stuck_jobs.sh "$@")"
+stuck_jobs="$(kubectl_jobs_stuck.sh "$@")"
 header="$(head -n1 <<< "$stuck_jobs")"
 stuck_jobs="$(tail -n +2 <<< "$stuck_jobs")"
 
