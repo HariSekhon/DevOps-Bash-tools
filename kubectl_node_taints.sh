@@ -29,7 +29,7 @@ Lists Kubernetes nodes and their taints
 
 Output Format:
 
-<node_name>     <key>=<value>       <effect>
+<node_name>     <key>=<value>:<effect>
 
 Requires kubectl to be installed and configured
 "
@@ -47,7 +47,6 @@ jq -r '
     .items[] |
     { "name": .metadata.name, "taint": .spec.taints[]? } |
     select(.taint) |
-    [ .name, .taint.key + "=" + .taint.value, .taint.effect ] |
+    [ .name, .taint.key + "=" + .taint.value + ":" + .taint.effect ] |
     @tsv
-' |
-column -t
+'
