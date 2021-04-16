@@ -460,6 +460,7 @@ etc.
   - `kubectl_exec2.sh` - finds and execs to the first Kubernetes pod matching given pod filters, optionally specifying the container to exec to, and shows the full generated `kubectl exec` command line for clarity
   - `kubectl_pods_per_node.sh` - lists number of pods per node sorted descending
   - `kubectl_pods_important.sh` - lists important pods and their nodes to check on scheduling
+  - `kubectl_pods_colocated.sh` - lists pods from deployments/statefulsets that are colocated on the same node
   - `kubectl_jobs_stuck.sh` - finds Kubernetes jobs stuck for hours or days with no completions
   - `kubectl_jobs_delete_stuck.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
   - `kubectl_images.sh` - lists Kubernetes container images running on the current cluster
