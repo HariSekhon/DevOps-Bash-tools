@@ -46,6 +46,7 @@ kubectl get nodes -o json |
 jq -r '
     .items[] |
     { "name": .metadata.name, "taint": .spec.taints[]? } |
+    select(.taint) |
     [ .name, .taint.key + "=" + .taint.value, .taint.effect ] |
     @tsv
 ' |
