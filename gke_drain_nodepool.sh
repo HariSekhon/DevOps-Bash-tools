@@ -77,6 +77,7 @@ timestamp "disabling autoscaling for node pool '$node_pool'"
 gcloud container node-pools update --no-enable-autoscaling preemptible
 
 echo >&2
+timestamp "cordoning nodes:"
 for node in $nodes; do
     #timestamp "cordoning node '$node'"
     "$srcdir/gke_kubectl.sh" cordon "$node"
