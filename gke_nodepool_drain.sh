@@ -77,8 +77,8 @@ for node in $nodes; do
     "$srcdir/gke_kubectl.sh" cordon "$node"
 done
 
-echo >&2
 for node in $nodes; do
+    echo >&2
     timestamp "draining node '$node'"
     "$srcdir/gke_kubectl.sh" drain "$node"  # &  # could parallelize this - respects pod disruption budgets
 done
