@@ -35,6 +35,7 @@ You must have a second node pool with sufficient capacity / autoscaling max node
 Requires:
 
     - GCloud SDK to be installed and configured
+    - gke_kubectl.sh (adjacent) - for safe kubectl with isolated context
     - Your GKE context should already be set up in kubectl (ses gke_kube_creds.sh to do this for you),
       otherwise you must have \$CLOUDSDK_CORE_PROJECT and \$CLOUDSDK_COMPUTE_REGION in the environment
       or gcloud config to pull the GKE creds dynamically (slower)
