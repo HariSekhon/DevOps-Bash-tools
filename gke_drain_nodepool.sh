@@ -59,6 +59,7 @@ instance_groups="$(
     jq -r '.instanceGroupUrls[] | sub("^.*/"; "")'
 )"
 
+echo >&2
 nodes="$(
     for instance_group in $instance_groups; do
         #timestamp "finding zone of instance group '$instance_group'"
@@ -68,10 +69,14 @@ nodes="$(
     done
 )"
 
+echo >&2
 for node in $nodes; do
-    echo kubectl cordon "$node"
+    #timestamp "cordoning node '$node'"
+    "$srcdir/gke_kubectl.sh" cordon "$node"
 done
 
+echo >&2
 for node in $nodes; do
-    echo kubectl drain "$node"
+    timestamp "draining node '$node'"
+    "$srcdir/gke_kubectl.sh" drain "$node"
 done
