@@ -37,5 +37,5 @@ help_usage "$@"
 #
 # https://kubernetes.io/docs/tasks/access-application-cluster/list-all-running-container-images/
 
-kubectl get pods --all-namespaces -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}' |
+kubectl get pods --all-namespaces --field-selector status.phase=Running -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.image}{"\n"}' |
 sort -u
