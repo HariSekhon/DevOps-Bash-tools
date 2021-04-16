@@ -40,7 +40,7 @@ Requires:
       - requires core/project and compute/region to be set in your gcloud config
         or else environment variables CLOUDSDK_CORE_PROJECT and CLOUDSDK_COMPUTE_REGION
     - uses adjacent scripts:
-      - gke_nodepool_nodes.sh - lists all nodes in the given nodepool
+      - gke_nodepool_nodes2.sh - lists all nodes in the given nodepool
       - gke_kubectl.sh - for safe kubectl with isolated context
 
 If gcloud config container/cluster or CLOUDSDK_CONTAINER_CLUSTER are set then you don't have to specify the cluster name
