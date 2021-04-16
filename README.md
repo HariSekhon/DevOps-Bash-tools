@@ -458,12 +458,13 @@ etc.
   - `kubeadm_join_cmd2.sh` - outputs `kubeadm join` command manually (calculates cert hash + generates new token) to join an existing Kubernetes cluster
   - `kubectl_exec.sh` - finds and execs to the first Kubernetes pod matching the given name regex, optionally specifying the container name regex to exec to, and shows the full generated `kubectl exec` command line for clarity
   - `kubectl_exec2.sh` - finds and execs to the first Kubernetes pod matching given pod filters, optionally specifying the container to exec to, and shows the full generated `kubectl exec` command line for clarity
-  - `kubectl_pods_per_nodes.sh` - lists number of pods per node sorted descending
-  - `kubectl_find_stuck_jobs.sh` - finds Kubernetes jobs stuck for hours or days with no completions
-  - `kubectl_delete_stuck_jobs.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
-  - `kubectl_running_images.sh` - lists Kubernetes container images running on the current cluster
-  - `kubectl_running_image_counts.sh` - lists Kubernetes container images running counts sorted descending
-  - `kubectl_get_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
+  - `kubectl_pods_per_node.sh` - lists number of pods per node sorted descending
+  - `kubectl_pods_important.sh` - lists important pods and their nodes to check on scheduling
+  - `kubectl_jobs_stuck.sh` - finds Kubernetes jobs stuck for hours or days with no completions
+  - `kubectl_jobs_delete_stuck.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
+  - `kubectl_images.sh` - lists Kubernetes container images running on the current cluster
+  - `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
+  - `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
   - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
   - see also the [Kubernetes templates](https://github.com/HariSekhon/Kubernetes-templates) repo
 
