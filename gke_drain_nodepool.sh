@@ -24,8 +24,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Drains all Kubernetes nodes from a given GKE cluster's nodepool
 
+You must have a second node pool with sufficient capacity / autoscaling max nodes to be able to accommodate the evicted pods
+
 - finds instance groups in a node pool
 - finds nodes in each instance group
+- disables autoscaling for the node pool (to prevent booting new nodes to migrate pods to)
 - cordons all nodes (to prevent pod migrations to other nodes in the same pool)
 - drains pods from each node in sequence
 
@@ -68,6 +71,10 @@ nodes="$(
         gcloud compute instance-groups list-instances "$instance_group" --zone "$zone" --format='value(NAME)'  # doesn't find it without zone, and NAME must be capitalized too
     done
 )"
+
+echo >&2
+timestamp "disabling autoscaling for node pool '$node_pool'"
+gcloud container node-pools update --no-enable-autoscaling preemptible
 
 echo >&2
 for node in $nodes; do
