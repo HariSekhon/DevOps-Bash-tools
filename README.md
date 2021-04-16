@@ -372,7 +372,8 @@ etc.
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
     - `gke_cert_manager_firewall_rule.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr and network)
-    - `gke_nodepool_nodes.sh` - lists all nodes in a given nodepool
+    - `gke_nodepool_nodes.sh` - lists all nodes in a given nodepool on the current GKE cluster via kubectl labels (fast)
+    - `gke_nodepool_nodes2.sh` - lists all nodes in a given nodepool on a given GKE cluster via GCloud SDK (slow, iterates instance groups)
     - `gke_nodepool_drain.sh` - drains all nodes in a given nodepool (to decommission or rebuild the node pool, for example with different taints)
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
