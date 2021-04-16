@@ -45,7 +45,7 @@ kube_config_isolate
 kubectl get nodes -o json |
 jq -r '
     .items[] |
-    { "name": .metadata.name, "taint": .spec.taints[] } |
+    { "name": .metadata.name, "taint": .spec.taints[]? } |
     [ .name, .taint.key + "=" + .taint.value, .taint.effect ] |
     @tsv
 ' |
