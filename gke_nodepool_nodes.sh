@@ -22,51 +22,21 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists all Kubernetes nodes in a given GKE cluster's nodepool
+Lists all Kubernetes nodes for a given nodepool on the current GKE cluster by filtering for the corresponding label
 
-- finds instance groups in a node pool
-- finds nodes in each instance group
+Requires kubectl to be installed and configured
 
-Requires:
-
-    - GCloud SDK to be installed and configured
-
-If CLOUDSDK_CONTAINER_CLUSTER is set then you don't have to specify the cluster name
+If you run this on a non-GKE cluster, will return no nodes as there will be no nodes with the matching labels
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<cluster_name>] <node_pool_name>"
+usage_args="<node_pool_name>"
 
 help_usage "$@"
 
 min_args 1 "$@"
 
-if [ $# -eq 2 ]; then
-    export GCLOUD_CONTAINER_CLUSTER="$1"
-    node_pool="$2"
-elif [ $# -eq 1 ]; then
-    node_pool="$1"
-else
-    usage
-fi
+node_pool="$1"
 
-if [ -n "${VERBOSE:-}" ]; then
-    timestamp "finding instance groups in node pool '$node_pool'"
-fi
-instance_groups="$(
-    gcloud container node-pools describe "$node_pool" --format=json |
-    jq -r '.instanceGroupUrls[] | sub("^.*/"; "")'
-)"
-
-if [ -n "${VERBOSE:-}" ]; then
-    echo >&2
-fi
-for instance_group in $instance_groups; do
-    if [ -n "${VERBOSE:-}" ]; then
-        #timestamp "finding zone of instance group '$instance_group'"
-        timestamp "finding nodes in instance group '$instance_group'"
-    fi
-    zone="$(gcloud compute instance-groups list --filter="name=$instance_group" --format='get(zone)' | sed 's|^.*/||')"
-    gcloud compute instance-groups list-instances "$instance_group" --zone "$zone" --format='value(NAME)'  # doesn't find it without zone, and NAME must be capitalized too
-done
+kubectl get nodes -l cloud.google.com/gke-nodepool="$node_pool" -o name
