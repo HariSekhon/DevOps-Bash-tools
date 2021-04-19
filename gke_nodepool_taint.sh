@@ -33,9 +33,9 @@ See:
 
 for the taint spec
 
-This is similar to but slightly easier than typing:
+This is just slightly easier than typing:
 
-    kubectl taint -l cloud.google.com/gke-nodepool=<node_pool_name> ...
+    kubectl taint nodes -l cloud.google.com/gke-nodepool=<node_pool_name> ...
 "
 
 # used by usage() in lib/utils.sh
