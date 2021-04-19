@@ -25,18 +25,28 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists Kubernetes nodes and their taints
+Lists Kubernetes nodes and their taints, one taint per line
 
 Output Format:
 
 <node_name>     <key>=<value>:<effect>
 
+
 Requires kubectl to be installed and configured
+
+
+See Also:
+
+    kubectl_node_labels.sh - list nodes and their labels, one label per line
+
+    kubectl taint nodes -l key=value <taint_spec>
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args=""
+
+num_args 0 "$@"
 
 help_usage "$@"
 
