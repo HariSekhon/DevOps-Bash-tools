@@ -32,32 +32,25 @@ See:
     kubectl taint nodes --help
 
 for the taint spec
+
+This is similar to but slightly easier than typing:
+
+    kubectl taint -l cloud.google.com/gke-nodepool=<node_pool_name> ...
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<cluster_name>] <node_pool_name> <taint_spec>"
+usage_args="<node_pool_name> <taint_spec>"
 
 help_usage "$@"
 
-min_args 1 "$@"
+num_args 2 "$@"
 
-if [ $# -eq 3 ]; then
-    export GCLOUD_CONTAINER_CLUSTER="$1"
-    node_pool="$2"
-    shift || :
-    shift || :
-elif [ $# -eq 2 ]; then
-    node_pool="$1"
-    shift || :
-else
-    usage
-fi
+node_pool="$1"
+shift || :
 
-kube_config_isolate
+#kube_config_isolate
 
-nodes="$(VERBOSE=1 "$srcdir/gke_nodepool_nodes.sh" "$node_pool")"
+#nodes="$(VERBOSE=1 "$srcdir/gke_nodepool_nodes.sh" "$node_pool")"
 
-# want splitting
-# shellcheck disable=SC2086
-kubectl taint nodes $nodes "$@"
+kubectl taint nodes -l cloud.google.com/gke-nodepool="$node_pool" "$@"
