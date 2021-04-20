@@ -76,8 +76,13 @@ for node in $nodes; do
     "$srcdir/gke_kubectl.sh" cordon "$node"
 done
 
+force=""
+if [ "${FORCE:-1}" ]; then
+    force="--force"
+fi
+
 for node in $nodes; do
     echo >&2
     timestamp "draining node '$node'"
-    "$srcdir/gke_kubectl.sh" drain "$node"  # &  # could parallelize this - respects pod disruption budgets
+    "$srcdir/gke_kubectl.sh" drain "$node" $force  # &  # could parallelize this - respects pod disruption budgets
 done
