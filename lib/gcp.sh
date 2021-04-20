@@ -63,3 +63,11 @@ gcp_info(){
         fi
     fi
 }
+
+# avoid race conditions on changing the configuration
+# (it's still possible to change the settings within the configuration, use CLOUDSDK_CORE_PROJECT and similar overrides on an as needed basis)
+gcloud_export_active_configuration(){
+    local active_configuration
+    active_configuration="$(gcloud config configurations list --format='get(name)' --filter='is_active = True')"
+    export CLOUDSDK_ACTIVE_CONFIG_NAME="$active_configuration"
+}
