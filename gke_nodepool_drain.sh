@@ -84,5 +84,5 @@ fi
 for node in $nodes; do
     echo >&2
     timestamp "draining node '$node'"
-    "$srcdir/gke_kubectl.sh" drain "$node" $force  # &  # could parallelize this - respects pod disruption budgets
+    "$srcdir/gke_kubectl.sh" drain "$node" $force --ignore-daemonsets  # &  # could parallelize this - respects pod disruption budgets
 done
