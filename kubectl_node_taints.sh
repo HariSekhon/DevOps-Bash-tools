@@ -40,6 +40,8 @@ See Also:
     kubectl_node_labels.sh - list nodes and their labels, one label per line
 
     kubectl taint nodes -l key=value <taint_spec>
+eg.
+    kubectl taint nodes -l cloud.google.com/gke-preemptible=true preemptible=true:NoSchedule
 "
 
 # used by usage() in lib/utils.sh
