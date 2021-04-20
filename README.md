@@ -367,6 +367,7 @@ etc.
   - `gcp_secrets_*.sh` - [Google Secret Manager](https://cloud.google.com/secret-manager) scripts:
     - `gcp_secrets_to_kubernetes.sh` - loads GCP secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also `kubernetes_get_secret_values.sh` to debug the actual values that got loaded
     - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple GCP secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
+    - `gcp_secrets_update_lable.sh` - updates all GCP secrets in current project matching label key=value with a new label value
     - `gcp_service_account_credential_to_secret.sh` - creates GCP service account and exports a credential key to GCP Secret Manager (useful to stage or combine with `gcp_secrets_to_kubernetes.sh`)
   - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
