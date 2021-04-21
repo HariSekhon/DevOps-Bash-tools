@@ -80,6 +80,10 @@ alias kl='k logs'
 alias kshell='kube-shell'
 alias kubesh='kube-shell'
 
+# scripts at top level, automatically included in $PATH
+alias labels="kubectl_node_labels.sh"
+alias taints="kubectl_node_taints.sh"
+
 # kustomize
 alias kbuild='kustomize build'
 alias kustomizebuilddiff='kbuild | kubectl diff -f -'
