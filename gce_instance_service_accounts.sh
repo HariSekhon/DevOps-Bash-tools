@@ -51,17 +51,10 @@ list_vm_service_account(){
     #grep -Ev '^No zone specified. Using zone \[[[:alnum:]-]+\] for instance:' || :
 }
 
-#get_instances_name_zone(){
-#    gcloud compute instances list --format='table[no-heading](name, zone.basename())'
-#}
-
 if [ $# -gt 0 ]; then
     for arg; do
         list_vm_service_account "$arg"
     done
 else
-    #while read -r name zone; do
-    #    list_vm_service_account "$name" "$zone"
-    #done < <(get_instances_name_zone)
     gcloud compute instances list --format='table[no-heading](name, serviceAccounts.email.join(","))'
 fi
