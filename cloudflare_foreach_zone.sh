@@ -46,6 +46,9 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+"$srcdir/cloudflare_api.sh" zones |
+jq -r '.result[] | [.id, .name] | @tsv' |
+sed "s/'/\\\\'/g" |
 while read -r zone_id zone_name; do
     if [ -z "${NO_HEADING:-}" ]; then
         echo "# ============================================================================ #" >&2
@@ -58,4 +61,4 @@ while read -r zone_id zone_name; do
     cmd="${cmd//\{id\}/$zone_id}"
     cmd="${cmd//\{name\}/$zone_name}"
     eval "$cmd"
-done < <("$srcdir/cloudflare_api.sh" zones | jq -r '.result[] | [.id, .name] | @tsv' | sed "s/'/\\\\'/g")
+done
