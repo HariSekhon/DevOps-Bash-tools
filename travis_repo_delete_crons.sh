@@ -52,6 +52,7 @@ if [ -z "$repo" ]; then
 fi
 
 timestamp "Deleting all cron jobs for repo '$repo'"
+"$srcdir/travis_repo_crons.sh" "$repo" "$@" |
 while read -r cron_id rest; do
     "$srcdir/travis_delete_cron.sh" "$cron_id" "$@"
-done < <("$srcdir/travis_repo_crons.sh" "$repo" "$@")
+done
