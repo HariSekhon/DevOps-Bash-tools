@@ -51,4 +51,6 @@ fi |
 while read -r service_account_email; do
     gcloud iam service-accounts get-iam-policy "$service_account_email" --format=json |
     jq -r ".bindings[]? | [ \"$service_account_email\", .members[]?, .role] | @tsv"
-done
+done #|
+# tidier but delays output - can pipe to this column yourself if you want this trade off
+#column -t
