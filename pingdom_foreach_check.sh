@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo check id = {id} and name = {name}
+#  args: 'echo "check id = {id} and name = {name}"'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-24 15:25:27 +0100 (Mon, 24 Aug 2020)
@@ -51,6 +51,8 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+"$srcdir/pingdom_api.sh" /checks |
+jq -r '.checks[] | [.id, .name] | @tsv' |
 while read -r check_id check_name; do
     if [ -z "${NO_HEADING:-}" ]; then
         echo "# ============================================================================ #" >&2
@@ -63,4 +65,4 @@ while read -r check_id check_name; do
     cmd="${cmd//\{id\}/$check_id}"
     cmd="${cmd//\{name\}/$check_name}"
     eval "$cmd"
-done < <("$srcdir/pingdom_api.sh" /checks | jq -r '.checks[] | [.id, .name] | @tsv')
+done
