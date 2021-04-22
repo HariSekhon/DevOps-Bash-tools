@@ -422,6 +422,7 @@ link_latest(){
 dedupe_paths(){
     local PATH_tmp=""
     # <( ) only works in Bash, but breaks when sourced from sh
+    # <( ) also ignores errors which don't get passed through the /dev/fd
     # while read -r path; do
     #done < <(tr ':' '\n' <<< "$PATH")
     local IFS=':'
