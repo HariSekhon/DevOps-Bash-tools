@@ -50,12 +50,18 @@ check_env_defined "CLOUDFLARE_TOKEN"
 export CURL_AUTH_HEADER="X-Auth-Key:"
 export TOKEN="$CLOUDFLARE_TOKEN"
 
-"$srcdir/curl_auth.sh" "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache" \
-    -sS -X POST \
-    -H "Content-Type: application/json" \
-    -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
-    --data '{"purge_everything":true}' |
-    jq
+        # don't use this, let curl_auth.sh do it more securely without leaving breadcrumbs on the local machine
+        #-H "X-Auth-Key: $CLOUDFLARE_TOKEN" \
 
-    # don't use this, let curl_auth.sh do it more securely without leaving breadcrumbs on the local machine
-    #-H "X-Auth-Key: $CLOUDFLARE_TOKEN" \
+output="$(
+    "$srcdir/curl_auth.sh" "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache" \
+        -sS -X POST \
+        -H "Content-Type: application/json" \
+        -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
+        --data '{"purge_everything":true}' |
+        jq
+)"
+
+echo "$output"
+
+jq -e '.success == true' <<< "$output"
