@@ -24,6 +24,7 @@ if ! [ -f "$mappings" ]; then
 fi
 
 sed_script="$(
+    tr ':' ' ' < "$mappings" |
     while read -r import_name module_name rest; do
         if ! [[ "$import_name" =~ ^[A-Za-z0-9/_.-]+$ ]]; then
             echo "import name '$import_name' did not match expected alphanumeric regex!" >&2
@@ -34,7 +35,7 @@ sed_script="$(
             continue
         fi
         echo "s/$module_name/${import_name//\//\\/}/;"
-    done < <(tr ':' ' ' < "$mappings")
+    done
 )"
 
 if [ $# -gt 0 ]; then
