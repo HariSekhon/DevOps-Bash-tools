@@ -85,6 +85,7 @@ get_workspace_repos(){
     done
 }
 
+get_repos |
 while read -r workspace name repo; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
@@ -94,4 +95,4 @@ while read -r workspace name repo; do
     cmd="${cmd//\{name\}/$name}"
     cmd="${cmd//\{repo\}/$repo}"
     eval "$cmd"
-done < <(get_repos)
+done
