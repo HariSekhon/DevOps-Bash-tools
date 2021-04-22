@@ -47,6 +47,7 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+"$srcdir/travis_repos.sh" |
 while read -r repo; do
     user="${repo%%/*}"
     name="${repo##*/}"
@@ -64,4 +65,4 @@ while read -r repo; do
     if [ -z "${NO_HEADING:-}" ]; then
         echo >&2
     fi
-done < <("$srcdir/travis_repos.sh")
+done
