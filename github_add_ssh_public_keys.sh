@@ -70,10 +70,11 @@ add_ssh_public_keys_from_file(){
     #elif ! [ -f "$public_key_file" ]; then
     #    die "ERROR: file not found: $public_key_file"
     fi
+    sed 's/#.*//; /^[[:space:]]*$/d' "$public_key_file" |
     while read -r public_key; do
         [[ "$public_key" =~ ^ssh- ]] || die "invalid SSH key in file '$public_key_file': $public_key"
         add_ssh_public_key "$public_key"
-    done < <(sed 's/#.*//; /^[[:space:]]*$/d' "$public_key_file")
+    done
 }
 
 add_ssh_public_key(){
