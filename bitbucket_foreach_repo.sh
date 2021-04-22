@@ -48,9 +48,10 @@ min_args 1 "$@"
 cmd_template="$*"
 
 get_repos(){
+    get_workspaces |
     while read -r workspace; do
         get_workspace_repos "$workspace"
-    done < <(get_workspaces)
+    done
 }
 
 get_workspaces(){
