@@ -34,6 +34,7 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
+sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"
@@ -49,4 +50,4 @@ while read -r repo dir; do
     else
         git clone "${git_url}${repo}" "$dir"
     fi
-done < <(sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt")
+done
