@@ -78,13 +78,14 @@ output(){
 while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
     #die_if_error_field "$output"
+    jq -r '.items[].track.uri' <<< "$output" |
     while read -r this_uri; do
         if [ "$this_uri" = "$uri" ]; then
             echo "$offset"
             exit 0
         fi
         ((offset += 1))
-    done < <(jq -r '.items[].track.uri' <<< "$output")
+    done
     url_path="$(get_next "$output")"
 done
 exit 1
