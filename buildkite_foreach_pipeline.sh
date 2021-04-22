@@ -45,6 +45,7 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+"$srcdir/buildkite_pipelines.sh" |
 while read -r pipeline; do
     if [ -n "${NO_HEADING:-}" ]; then
         echo "# ============================================================================ #" >&2
@@ -54,4 +55,4 @@ while read -r pipeline; do
     cmd="$cmd_template"
     cmd="${cmd//\{pipeline\}/$pipeline}"
     eval "$cmd"
-done < <("$srcdir/buildkite_pipelines.sh")
+done
