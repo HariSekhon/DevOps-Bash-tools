@@ -34,6 +34,7 @@ Environment variables to set in the CI/CD system:
 
 APP                     - name of your application
 BUILD                   - should be automatically set to the Git hash on Jenkins or TeamCity
+ENVIRONMENT             - dev/staging/production - corresponding to a local k8s/<environment> directory in the checkout
 CLUSTER_NAME            - name of your GKE cluster
 CLOUDSDK_CORE_PROJECT   - project ID of your GCP project
 CLOUDSDK_COMPUTE_REGION - GCP region of your GKE cluster
