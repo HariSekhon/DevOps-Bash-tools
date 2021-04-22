@@ -32,13 +32,14 @@ section "Running Vagrant Shell Provisioner Script - Base"
 pushd /vagrant
 
 mkdir -p /root/.ssh
+sed 's/#.*//; /^[[:space:]]*$/d' /home/vagrant/.ssh/authorized_keys |
 while read -r line; do
     if ! [ -f /root/.ssh/authorized_keys ] ||
        ! grep -Fqx "$line" /root/.ssh/authorized_keys; then
         echo "adding SSH authorized key to /root/.ssh/authorized_keys: $line"
         echo "$line" >> /root/.ssh/authorized_keys
     fi
-done < <(sed 's/#.*//; /^[[:space:]]*$/d' /home/vagrant/.ssh/authorized_keys)
+done
 
 pushd "$bash_tools"
 echo >&2
