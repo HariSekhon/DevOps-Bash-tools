@@ -52,6 +52,7 @@ cmd_template="$*"
 
 user="$(get_github_user)"
 
+get_github_repos "$user" |
 while read -r name; do
     repo="$user/$name"
     echo "# ============================================================================ #" >&2
@@ -63,4 +64,4 @@ while read -r name; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
-done < <(get_github_repos "$user")
+done
