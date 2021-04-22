@@ -20,6 +20,7 @@ srcdir="$(dirname "$0")"
 run(){
     local repofile="$1"
     echo "processing repos from file: $repofile"
+    sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$repofile" |
     while read -r _ dir; do
         #if ! echo "$repo" | grep -q "/"; then
         #    repo="HariSekhon/$repo"
@@ -32,7 +33,7 @@ run(){
             fi
             popd
         fi
-    done < <(sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$repofile")
+    done
 }
 
 if [ $# -gt 0 ]; then
