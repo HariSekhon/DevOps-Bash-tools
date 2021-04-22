@@ -72,6 +72,7 @@ get_repos(){
     done
 }
 
+get_repos |
 while read -r name repo; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
@@ -83,4 +84,4 @@ while read -r name repo; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
-done < <(get_repos)
+done
