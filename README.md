@@ -380,6 +380,7 @@ etc.
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
+    - `gcr_tag_branch.sh` - tags a given GCR docker `image:tag` with the branch from which it was built without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
     - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
     - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given GCR docker image as `latest` without pulling or pushing the docker image
