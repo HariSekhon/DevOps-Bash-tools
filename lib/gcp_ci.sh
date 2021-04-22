@@ -25,7 +25,8 @@ set -euo pipefail
 #       J e n k i n s   /   T e a m C i t y   B r a n c h   +   B u i l d
 # ============================================================================ #
 
-# Jenkins provides BRANCH_NAME, TeamCity doesn't so normalize and determine it if not automatically set
+# Jenkins provides $BRANCH_NAME only in MultiBranch builds, otherwise use $GIT_BRANCH
+# TeamCity doesn't provide this so will fall back to git rev-parse
 if [ -z "${BRANCH_NAME:-}" ]; then
     BRANCH_NAME="${GIT_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
 fi
