@@ -65,6 +65,8 @@ set_namespace(){
     kubectl config set-context "$current_context" --namespace "$namespace"
 }
 
+#kubectl get namespaces -o name | sed 's,namespace/,,' |
+kubectl get namespaces -o 'jsonpath={range .items[*]}{.metadata.name}{"\n"}' |
 while read -r namespace; do
     #if [[ "$context" =~ kube-system ]]; then
     #    echo "Skipping context '$context'..."
@@ -81,5 +83,4 @@ while read -r namespace; do
     cmd="${cmd_template//\{namespace\}/$namespace}"
     eval "$cmd"
     echo
-#done < <(kubectl get namespaces -o name | sed 's,namespace/,,')
-done < <(kubectl get namespaces -o 'jsonpath={range .items[*]}{.metadata.name}{"\n"}')
+done
