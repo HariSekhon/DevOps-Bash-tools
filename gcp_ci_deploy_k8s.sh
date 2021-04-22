@@ -50,6 +50,7 @@ usage_args=""
 # The rest of these should be set by the CI/CD system
 check_env_defined "APP"
 check_env_defined "BUILD"
+check_env_defined "ENVIRONMENT"
 check_env_defined "CLOUDSDK_CORE_PROJECT"
 check_env_defined "CLOUDSDK_COMPUTE_REGION"
 check_env_defined "GKE_CLUSTER"
@@ -82,18 +83,7 @@ gcp_login
 
 gke_login "$GKE_CLUSTER"
 
-# BRANCH_NAME is provided via lib.sh for both Jenkins and TeamCity
-# git branches (dev / staging / production) should all match the k8s directory structure
-#
-# for Feature Branch builds using a non-uniform git branch name and non-uniform location on disk,
-# simply set the CI/CD environment's working directory for this build instead and this will do nothing
-if [ -d "k8s/$BRANCH_NAME" ]; then
-    cd "k8s/$BRANCH_NAME"
-elif ! [ -f kustomization.yaml ] &&
-     [ -d "k8s/dev" ]; then
-    # if we haven't been set into a $PWD with a kustomization, check for k8s/dev and use it by default
-    cd "k8s/dev"
-fi
+cd "k8s/$ENVIRONMENT"
 
 replace_latest_with_build "$BUILD"
 
