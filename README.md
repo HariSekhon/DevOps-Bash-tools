@@ -673,6 +673,7 @@ etc.
   - `cloudflare_dnssec.sh` - lists the Cloudflare DNSSec status for all zones
   - `cloudflare_foreach_account.sh` - executes a templated command for each Cloudflare account, replacing the `{account_id}` and `{account_name}` in each iteration (useful for chaining with `cloudflare_api.sh`)
   - `cloudflare_foreach_zone.sh` - executes a templated command for each Cloudflare zone, replacing the `{zone_id}` and `{zone_name}` in each iteration (useful for chaining with `cloudflare_api.sh`, used by adjacent `cloudflare_*_all_zones.sh` scripts)
+  - `cloudflare_purge_cache.sh` - purges the entire Cloudflare cache
   - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
