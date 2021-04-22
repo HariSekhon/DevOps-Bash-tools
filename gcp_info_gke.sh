@@ -97,7 +97,7 @@ list_gke_deployments(){
 #                         G K E   D e p l o y m e n t s
 # ============================================================================ #
 EOF
-
+    gcloud container clusters list --format='value(name,zone)' |
     while read -r cluster zone; do
         cat <<EOF
 
@@ -109,7 +109,7 @@ EOF
         gcloud container clusters get-credentials "$cluster" --zone "$zone"
         echo
         "$srcdir/kubernetes_info.sh"
-    done < <(gcloud container clusters list --format='value(name,zone)')
+    done
 }
 
 
