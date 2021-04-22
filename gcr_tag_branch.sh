@@ -56,6 +56,7 @@ tag="${image_tag##*:}"
 if [ -z "${BRANCH_NAME:-}" ]; then
     BRANCH_NAME="${GIT_BRANCH:-$(git rev-parse --abbrev-ref HEAD)}"
 fi
+BRANCH_NAME="${BRANCH_NAME##*/}"
 
 echo "tagging docker image $docker_image:$tag as 'latest'"
 # --quiet otherwise prompts Y/n which would hang build
