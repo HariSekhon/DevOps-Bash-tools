@@ -32,7 +32,16 @@ Service accounts must be given by email as standard, eg:
 
 Output:
 
-    <
+    <service_account_email>     <member>      <role>
+
+
+Where member could be a service account such as
+
+    serviceAccount:jenkins@<project>.iam.gserviceaccount.com
+
+or a GKE Workload identity definition such as
+
+    serviceAccount:<project>.svc.id.goog[k8s_namespace/k8s_service_account]
 "
 
 # used by usage() in lib/utils.sh
