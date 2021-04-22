@@ -83,6 +83,7 @@ load_secret(){
     local namespace
     namespaces="$(gcloud secrets describe "$secret" --format='get(labels.kubernetes-namespace)')"
     namespaces="${namespaces:-$current_namespace}"
+    tr ',' '\n' <<< "$namespaces" |
     while read -r namespace; do
         [ -z "$namespace" ] && continue
         if kubectl get secret "$secret" -n "$namespace" &>/dev/null; then
@@ -102,7 +103,7 @@ load_secret(){
         # if you did this in yaml you'd have to base64 encode it yourself in the yaml
         #         could alternatively make this --from-literal="value=$value"
         kubectl create secret generic "$secret" --from-literal="$secret=$value" -n "$namespace"
-    done < <(tr ',' '\n' <<< "$namespaces")
+    done
 }
 
 if [ $# -gt 0 ]; then
@@ -110,12 +111,13 @@ if [ $# -gt 0 ]; then
         load_secret "$arg"
     done
 else
+    gcloud secrets list --format='value(name)' \
+                        --filter="labels.kubernetes-cluster=$current_cluster \
+                                  AND NOT \
+                                  labels.kubernetes-multipart-secret ~ . \
+                                  AND NOT \
+                                  labels.kubernetes-multi-part-secret ~ ." |
     while read -r secret; do
         load_secret "$secret"
-    done < <(gcloud secrets list --format='value(name)' \
-                                 --filter="labels.kubernetes-cluster=$current_cluster \
-                                           AND NOT \
-                                           labels.kubernetes-multipart-secret ~ . \
-                                           AND NOT \
-                                           labels.kubernetes-multi-part-secret ~ .")
+    done
 fi
