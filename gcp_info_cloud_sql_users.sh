@@ -64,9 +64,10 @@ EOF
 
 # might need this one instead sqladmin.googleapis.com
 if is_service_enabled sql-component.googleapis.com; then
+    gcloud sql instances list --format='get(name)' --filter 'state = RUNNABLE' |
     while read -r instance; do
         gcp_info "Cloud SQL users for instance '$instance'" gcloud sql users list --instance "$instance"
-    done < <(gcloud sql instances list --format='get(name)' --filter 'state = RUNNABLE')
+    done
 else
     echo "Cloud SQL API (sql-component.googleapis.com) is not enabled, skipping..."
 fi
