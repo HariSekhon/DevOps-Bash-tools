@@ -61,6 +61,7 @@ kube_config_isolate
 # don't need to store this any more as we now switch the KUBECONFIG which is only used for the lifetime of this script
 #original_context="$(kubectl config current-context)"
 
+kubectl config get-contexts -o name |
 while read -r context; do
     if [[ "$context" =~ docker|minikube|minishift ]]; then
         echo "Skipping context '$context'..."
@@ -77,4 +78,4 @@ while read -r context; do
     cmd="${cmd_template//\{context\}/$context}"
     eval "$cmd"
     echo
-done < <(kubectl config get-contexts -o name)
+done
