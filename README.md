@@ -431,6 +431,7 @@ etc.
       - `gcp_service_accounts_credential_keys.sh` - lists all service account credential keys and expiry dates, can `grep 9999-12-31T23:59:59Z` to find non-expiring keys
       - `gcp_service_accounts_credential_keys_age.sh` - lists all service account credential keys age in days
       - `gcp_service_accounts_credential_keys_expired.sh` - lists expired service account credential keys that should be removed and recreated if needed
+      - `gcp_service_account_members.sh` - lists all members and roles authorized to use any service accounts. Useful for finding GKE Workload Identity mappings
     - `gcp_iam_*.sh`:
       - `gcp_iam_roles_in_use.sh` - lists GCP IAM roles in use in the current or all projects
       - `gcp_iam_identities_in_use.sh` - lists GCP IAM identities (users/groups/serviceAccounts) in use in the current or all projects
