@@ -64,6 +64,7 @@ cmd_template="$*"
 #    trap "gcloud config unset project" EXIT
 #fi
 
+gcloud projects list --format="value(project_id,name)" |
 while read -r project_id project_name; do
     echo "# ============================================================================ #" >&2
     echo "# GCP Project ID = $project_id -- Name = $project_name" >&2
@@ -80,4 +81,4 @@ while read -r project_id project_name; do
     echo >&2
     echo >&2
 #                                          or projectId
-done < <(gcloud projects list --format="value(project_id,name)")
+done
