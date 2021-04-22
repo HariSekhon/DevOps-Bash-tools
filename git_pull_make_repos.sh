@@ -60,6 +60,7 @@ if ! type -P git &>/dev/null ||
     "$srcdir/install_packages.sh" git make
 fi
 
+sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/setup/repos.txt" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"
@@ -86,4 +87,4 @@ while read -r repo dir; do
         done
     fi
     popd
-done < <(sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/setup/repos.txt")
+done
