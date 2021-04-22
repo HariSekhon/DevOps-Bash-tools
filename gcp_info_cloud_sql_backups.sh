@@ -60,9 +60,10 @@ EOF
 
 # might need this one instead sqladmin.googleapis.com
 if is_service_enabled sql-component.googleapis.com; then
+    gcloud sql instances list --format='get(name)' |
     while read -r instance; do
         gcp_info "Cloud SQL backups for instance '$instance'" gcloud sql backups list --instance "$instance"
-    done < <(gcloud sql instances list --format='get(name)')
+    done
 else
     echo "Cloud SQL API (sql-component.googleapis.com) is not enabled, skipping..."
 fi
