@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds orphaned disks across one or all GCP Projects using GCloud SDK
+Finds orphaned disks across one or more GCP Projects using GCloud SDK
 
 This is done by finding disks in each project with no 'users' (instances attached)
 
