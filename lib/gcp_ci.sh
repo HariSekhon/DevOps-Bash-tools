@@ -156,9 +156,11 @@ kubernetes_deploy(){
 kustomize_kubernetes_deploy(){
     local app="$1"
     local namespace="$2"
+    # append to PATH to be able to find just downloaded ./kustomize
+    PATH="$PATH:." kubectl_create_namespaces.sh
     # XXX: DANGER: this would replace $RABBITMQ_HOME - needs more testing to support 'feature staging' / 'feature dev' - but envsubst doesn't support default values
-    #./kustomize build . | envsubst | kubectl apply -f -
-    ./kustomize build . | kubectl apply -f -
+    #PATH="$PATH:." kustomize build . | envsubst | kubectl apply -f -
+    PATH="$PATH:." kustomize build . | kubectl apply -f -
     kubectl annotate "deployment/$app" -n "$namespace" kubernetes.io/change-cause="$(date '+%F %H:%M')  CI deployment: app $app build ${BUILD:-}"
     kubectl rollout status "deployment/$app" -n "$namespace" --timeout=900s
 
