@@ -162,7 +162,16 @@ kustomize_kubernetes_deploy(){
     #PATH="$PATH:." kustomize build . | envsubst | kubectl apply -f -
     PATH="$PATH:." kustomize build . | kubectl apply -f -
     kubectl annotate "deployment/$app" -n "$namespace" kubernetes.io/change-cause="$(date '+%F %H:%M')  CI deployment: app $app build ${BUILD:-}"
-    kubectl rollout status "deployment/$app" -n "$namespace" --timeout=900s
+    local deployments
+    deployments="$(kubectl get deploy,sts -n "$namespace" --output name)"
+	# $deployment contains deployment.apps/ or statefulset.apps/ prefixes
+    trap 'echo "ERROR: kubernetes $namespace $deployment is BROKEN - possible misconfiguration or bad code is preventing pods from coming up after a reasonable timeframe of retries, please see GKE container logs" >&2' EXIT
+    # using a global shared timeout rather than a --timeout="${timeout}s" for each kubectl rollout as that multiplies by the amount of deployments and statefulsets which should have been working
+    TMOUT=600
+    for deployment in $deployments; do
+        kubectl rollout status "$deployment" -n "$namespace"
+    done
+    trap '' EXIT
 
     # could also run the deployment via Google Cloud Build
     #gcloud builds submit --project "$CLOUDSDK_CORE_PROJECT" --config="../../cloudbuild-deploy.yaml" --no-source
