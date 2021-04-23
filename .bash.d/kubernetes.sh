@@ -68,6 +68,7 @@ k8s_get_pod_opts=(-o wide -L app,env --show-labels)
 
 #alias po='k get po "${k8s_get_pod_opts[@]}"'
 alias po='k get po'
+alias poc='po | grep -v Completed'
 alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
