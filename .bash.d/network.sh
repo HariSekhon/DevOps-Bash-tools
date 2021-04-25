@@ -121,6 +121,9 @@ tping(){
         sleep 1
     done
 }
+tpinggw(){
+    tping "$(get_gw)"
+}
 
 port(){
     if [ -z "$2" ]; then
