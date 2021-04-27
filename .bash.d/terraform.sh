@@ -20,6 +20,8 @@
 alias tf=terraform
 alias tfp='tf plan'
 alias tfa='tf apply'
+alias tfip='tf init && tfp'
+alias tfia='tf init && tfa'
 #complete -C /Users/hari/bin/terraform terraform
 
 generate_terraform_autocomplete(){
