@@ -74,6 +74,7 @@ alias kapp=kapply
 alias wp=watchpods
 alias kd=kdesc
 alias ke=kubectl_exec.sh
+alias ke2=kubectl_exec2.sh
 alias keg=kubectl_exec_grep.sh
 alias kg='k get'
 alias ka='k apply'
