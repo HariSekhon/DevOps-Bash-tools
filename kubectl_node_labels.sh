@@ -35,7 +35,7 @@ Output Format:
 ...
 
 
-This format is much easier to read and work with while scripting that the single line monstrocity returned by:
+This format is much easier to read and work with while scripting than the single line monstrocity returned by:
 
     kubectl get nodes --show-labels
 
