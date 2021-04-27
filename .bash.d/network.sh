@@ -108,7 +108,7 @@ tping(){
     while true; do
         #echo -n "`date '+%F %T'`   "
         local output
-        output="$(ping -c 1 "$pingwait" 2 "$1" |
+        output="$(ping -c 1 "$pingwait" 2 "$@" |
                   grep -v -e statistics \
                           -e "transmitted" \
                           -e "rtt min/avg/max/mdev" \
@@ -120,6 +120,9 @@ tping(){
         echo "$(date '+%F %T')   ${output:-no response from $1}"
         sleep 1
     done
+}
+tpinggw(){
+    tping "$(get_gw)" "$@"
 }
 
 port(){
