@@ -68,7 +68,6 @@ k8s_get_pod_opts=(-o wide -L app,env --show-labels)
 
 #alias po='k get po "${k8s_get_pod_opts[@]}"'
 alias po='k get po'
-alias poc='po | grep -v Completed'
 alias kapply='k apply -f'
 alias kapp=kapply
 alias wp=watchpods
@@ -81,6 +80,12 @@ alias ka='k apply'
 alias kl='k logs'
 alias kshell='kube-shell'
 alias kubesh='kube-shell'
+
+#alias poc='po | grep -v Completed'
+unalias poc &>/dev/null
+poc(){
+    po "$@" | grep -v Completed
+}
 
 # scripts at top level, automatically included in $PATH
 alias labels="kubectl_node_labels.sh"
