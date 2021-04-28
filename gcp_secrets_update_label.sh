@@ -30,6 +30,13 @@ gcp_secrets_to_kubernetes.sh
 This script is useful for say bulk moving secrets to a new namespace by updating all the kubernetes-namespace labels:
 
     ${0##*/} kubernetes-namespace <oldname> <newname>
+
+
+Requires GCloud SDK to be installed and configured
+
+See Also:
+
+    gcp_secrets_labels.sh - lists labels one per line to review before/after mass changing label values
 "
 
 # used by usage() in lib/utils.sh
