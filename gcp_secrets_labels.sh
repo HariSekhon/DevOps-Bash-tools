@@ -24,6 +24,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists GCP Secrets labels in tabular form suitable for quick reviews and shell pipelines
 
+Does not list secrets without labels as this is primarily a label review tool
+
 
 Output Format:
 
