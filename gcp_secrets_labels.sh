@@ -24,6 +24,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists GCP Secrets labels in tabular form suitable for quick reviews and shell pipelines
 
+Useful to review available labels before doing mass changes using gcp_secrets_update_label.sh (eg. when migrating Kubernetes namespaces)
+
 Output Format:
 
 <secret1_name>   <label_key1>=<label_value1>
@@ -33,6 +35,11 @@ Output Format:
 
 
 Requires GCloud SDK to be installed and configured
+
+
+See Also:
+
+    gcp_secrets_update_label.sh
 "
 
 # used by usage() in lib/utils.sh
