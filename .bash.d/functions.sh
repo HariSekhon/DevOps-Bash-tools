@@ -573,7 +573,7 @@ unbak(){
             dirname="."
         fi
         # don't use -t switch, we want the newest by name, not one that got touched recently
-        bakfile="$(find "$dirname" -path ".*/$filename.bak.*" -o -path ".*/$filename.*.bak" 2>/dev/null | sort | tail -n 1)"
+        bakfile="$(find "$dirname" -path "*/$filename.bak.*" -o -path "*/$filename.*.bak" 2>/dev/null | sort | tail -n 1)"
         echo "restoring $bakfile"
         cp -av "$bakfile" "$dirname/$filename"
     done
