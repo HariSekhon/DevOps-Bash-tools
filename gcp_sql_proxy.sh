@@ -74,6 +74,11 @@ mkdir -p -v "$SOCKDIR"
 
 projects="${projects//[[:space:]]/,}"
 
+# prompt for Application Default credentials if not already found
+if ! gcloud auth application-default print-access-token &>/dev/null; then
+    gcloud auth application-default login
+fi
+
 cmd=(cloud_sql_proxy -projects "$projects" -dir "$SOCKDIR")
 
 echo "${cmd[*]}"
