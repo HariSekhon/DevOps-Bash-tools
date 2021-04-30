@@ -31,15 +31,22 @@ os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
 url="https://dl.google.com/cloudsql/cloud_sql_proxy.$os.amd64"
 
-cd /tmp
+tmpfile="$(mktemp)"
 
 echo "Downloading Google Cloud SQL Proxy"
-wget -qO cloud_sql_proxy "$url"
+if type wget &>/dev/null; then
+    wget -qO "$tmpfile" "$url"
+elif type curl &>/dev/null; then
+    curl -sS "$url" > "$tmpfile"
+else
+    echo "Error: neither wget nor curl were found in your \$PATH, cannot download cloud_sql_proxy"
+    exit 1
+fi
 
 echo "setting executable"
-chmod +x cloud_sql_proxy
+chmod +x "$tmpfile"
 
 echo "moving to ~/bin"
-mv cloud_sql_proxy ~/bin
+mv "$tmpfile" ~/bin/cloud_sql_proxy
 
 echo "Done. Don't forget to add $HOME/bin to \$PATH"
