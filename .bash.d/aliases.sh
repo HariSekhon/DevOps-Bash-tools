@@ -89,7 +89,7 @@ alias dec="decomment.sh"
 
 alias hosts='sudo $EDITOR /etc/hosts'
 
-alias path="echo \$PATH | tr ':' '\\n' | more"
+alias path="echo \$PATH | tr ':' '\\n' | less"
 alias paths=path
 
 alias tmp="cd /tmp"
