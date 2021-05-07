@@ -54,7 +54,15 @@ until [ $# -lt 1 ]; do
                         ;;
                   -*)   usage
                         ;;
-                    *)  scripts+=("$1")
+                    *)  if [[ "$1" =~ \.py[co] ]]; then
+                            filename="$1"
+                            filename="${filename%.pyc}"
+                            filename="${filename%.pyo}"
+                            filename="$filename.py"
+                            scripts+=("$filename")
+                        else
+                            scripts+=("$1")
+                        fi
                         ;;
     esac
     shift || :
@@ -81,7 +89,11 @@ pip_modules="$(
     $pip_modules_import
     $pip_modules_from_import
 EOF
-    grep -Ev "$exclude_regex" || :
+    if [ -n "$exclude_regex" ]; then
+        grep -Ev "$exclude_regex" || :
+    else
+        cat
+    fi
 )"
 
 pip_modules="$("$srcdir/python_translate_import_to_module.sh" <<< "$pip_modules")"
