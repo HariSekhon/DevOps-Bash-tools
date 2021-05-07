@@ -704,6 +704,7 @@ etc.
 - `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
 - `python_pip_install.sh` - bulk installs PyPI modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, VirtualEnvs / Anaconda / GitHub Workflows/ Google Cloud Shell, Mac vs Linux library paths, and ignore failure option
 - `python_pip_install_if_absent.sh` - installs PyPI modules not already in Python libary path (OS or pip installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
+- `python_pip_install_for_script.sh` - installs PyPI modules for given script(s) if not already installed
 - `python_pip_reinstall_all_modules.sh` - reinstalls all PyPI modules which can fix some issues
 - `pythonpath.sh` - prints all Python libary search paths, one per line
 - `python_find_library_path.sh` - finds directory where a PyPI module is installed - without args finds the Python library base
