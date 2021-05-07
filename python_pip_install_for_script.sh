@@ -34,6 +34,9 @@ Will break on custom local modules since they won't be found on PyPI, use --excl
 
 Eg.
     ${0##*/} *.py --exclude harisekhon  # excludes my personal local library which is not on PyPI
+
+
+If you supply .pyc or .pyo filenames, it will infer to .py instead. This is useful if calling from a Makefile looking for .pyc or .pyo dynamic targets
 "
 
 # used by usage() in lib/utils.sh
