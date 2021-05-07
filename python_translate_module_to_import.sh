@@ -15,7 +15,26 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Translates Python pip modules to import names
+
+Used by adjacent script python_pip_install_if_absent.sh to check if a module is available somewhere in the path by trying to import it
+
+
+Reads from standard input if no args are given
+"
+
+# shellcheck disable=SC2034
+usage_args="[<module1> <module2> ...]"
+
+help_usage "$@"
+
 
 mappings="$srcdir/resources/pipreqs_mapping.txt"
 
