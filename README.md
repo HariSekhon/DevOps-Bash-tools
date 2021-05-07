@@ -710,7 +710,7 @@ etc.
 - `python_find_library_executable.sh` - finds directory where a PyPI module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
 - `python_find_unused_pip_modules.sh` - finds PyPI modules that aren't used by any programs in the current directory tree
 - `python_find_duplicate_pip_requirements.sh` - finds duplicate PyPI modules listed for install under the directory tree (useful for deduping module installs in a project and across submodules)
-- `python_module_to_import_name.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
+- `python_translate_module_to_import.sh` - converts PyPI module names to Python import names, used by `python_find_unused_pip_modules.sh`
 - `python_pyinstaller.sh` - creates [PyInstaller](https://www.pyinstaller.org/) self-contained Python programs with Python interpreter and all PyPI modules included
 - `python_pypi_versions.sh` - prints all available versions of a given PyPi module using the API
 
