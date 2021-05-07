@@ -50,7 +50,7 @@ sed_script="$(
             continue
         fi
         if ! [[ "$module_name" =~ ^[A-Za-z0-9_.-]+$ ]]; then
-            echo "import name '$module_name' did not match expected alphanumeric regex!" >&2
+            echo "import module name '$module_name' did not match expected alphanumeric regex!" >&2
             continue
         fi
         echo "s/$module_name/${import_name//\//\\/}/;"
