@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: yaml
 #
 #  Author: Hari Sekhon
 #  Date: 2019-02-19 01:55:24 +0000 (Tue, 19 Feb 2019)
