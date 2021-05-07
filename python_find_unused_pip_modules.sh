@@ -52,7 +52,7 @@ pip_modules="$(
      s/[[:space:]]*$//;
      /^[[:space:]]*$/d;' $requirements_files |
      sort -u |
-     "$srcdir/python_module_to_import_name.sh"
+     "$srcdir/python_translate_module_to_import.sh"
 )"
 
 while read -r module; do
