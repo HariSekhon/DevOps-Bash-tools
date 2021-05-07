@@ -82,8 +82,8 @@ pip_modules_import="$(
     sort -u
 )"
 pip_modules_from_import="$(
-    grep -Eho '^[[:space:]]*from[[:space:]][^[[:space:]_]+' "${scripts[@]}" |
-    sed 's/^[[:space:]]*from[[:space:]]*//' |
+    grep -Eho '^[[:space:]]*from[[:space:]][^[[:space:]_]+[[:space:]]+import[[:space:]]+[^[:space:]]+$' "${scripts[@]}" |
+    sed 's/^[[:space:]]*from[[:space:]]*//; s/[[:space:]][[:space:]]*import[[:space:]].*$//' |
     sort -u
 )"
 
