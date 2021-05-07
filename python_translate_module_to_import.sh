@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: PyYAML
+#  args: PyYAML GitPython
 #
 #  Author: Hari Sekhon
 #  Date: 2019-02-19 01:55:24 +0000 (Tue, 19 Feb 2019)
@@ -54,7 +54,7 @@ sed_script="$(
             echo "import module name '$module_name' did not match expected alphanumeric regex!" >&2
             continue
         fi
-        echo "s|$module_name|$import_name|;"
+        echo "s|^$module_name$|$import_name|;"
     done
 )"
 
