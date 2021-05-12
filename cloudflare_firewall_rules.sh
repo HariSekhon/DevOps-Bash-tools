@@ -24,8 +24,6 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Cloudflare Firewall Rules for a given Zone ID
 
-Useful for backporting Firewall Rules to Terraform and importing by firewall rule ID
-
 In --verbose mode also also lists the filter expression at the end
 
 Output:
