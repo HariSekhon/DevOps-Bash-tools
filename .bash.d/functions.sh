@@ -567,11 +567,9 @@ unbak(){
         [ -n "$filename" ] || { echo "usage: unbak filename"; return 1; }
         #[ -f "$filename" ] || { echo "file '$filename' does not exist"; return 1; }
         local bakfile
-        local dirname="${filename%/*}"
+        local dirname
+        dirname="$(dirname "$filename")"
         filename="${filename##*/}"
-        if [ -z "$dirname" ]; then
-            dirname="."
-        fi
         # don't use -t switch, we want the newest by name, not one that got touched recently
         bakfile="$(find "$dirname" -path "*/$filename.bak.*" -o -path "*/$filename.*.bak" 2>/dev/null | sort | tail -n 1)"
         echo "restoring $bakfile"
