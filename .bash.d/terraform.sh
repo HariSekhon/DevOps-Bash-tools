@@ -24,6 +24,16 @@ alias tfip='tf init && tfp'
 alias tfia='tf init && tfa'
 #complete -C /Users/hari/bin/terraform terraform
 
+if [ -n "${github:-}" ]; then
+    for x in terraform-templates terraform tf; do
+        if [ -d "$github/$x" ]; then
+            # shellcheck disable=SC2139
+            alias tft="cd '$github/$x'"
+            break
+        fi
+    done
+fi
+
 generate_terraform_autocomplete(){
     local terraform_bin
     local terraform_version_number
