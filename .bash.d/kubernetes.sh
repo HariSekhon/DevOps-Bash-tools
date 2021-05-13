@@ -78,6 +78,7 @@ alias keg=kubectl_exec_grep.sh
 alias kg='k get'
 alias ka='k apply'
 alias kl='k logs'
+alias ktp='k top po'
 alias kshell='kube-shell'
 alias kubesh='kube-shell'
 
