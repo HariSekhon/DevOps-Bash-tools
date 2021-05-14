@@ -86,6 +86,7 @@ load_secret(){
     tr ',' '\n' <<< "$namespaces" |
     while read -r namespace; do
         [ -z "$namespace" ] && continue
+        namespace="${NAMESPACE_OVERRIDE:-$namespace}"
         if kubectl get secret "$secret" -n "$namespace" &>/dev/null; then
             timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
             return
