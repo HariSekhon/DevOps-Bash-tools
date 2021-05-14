@@ -149,8 +149,9 @@ download_kustomize(){
 
 kubernetes_deploy(){
     local app="$1"
+    local namespace="$2"
     kubectl apply -f .
-    kubectl rollout status "deployment/$app" -n "$app" --timeout=120s
+    kubectl rollout status "deployment/$app" -n "$namespace" --timeout=120s
 }
 
 kustomize_kubernetes_deploy(){
