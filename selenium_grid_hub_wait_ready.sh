@@ -41,7 +41,7 @@ if [ -n "$max_secs" ] &&
 	timestamp "setting timeout to $max_secs secs"
 	TMOUT="$max_secs"
 	# shellcheck disable=SC2064
-	trap "echo 'Timed out waiting for Selenium Grid Hub to come up after $max_secs secs' >&2; exit 1" EXIT
+	trap_cmd "echo 'Timed out waiting for Selenium Grid Hub to come up after $max_secs secs' >&2; exit 1"
 fi
 
 while :; do
