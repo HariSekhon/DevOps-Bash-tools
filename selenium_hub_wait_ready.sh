@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Waits for Selenium Grid to be ready
+Waits for Selenium Grid Hub status to be ready
 "
 
 # used by usage() in lib/utils.sh
