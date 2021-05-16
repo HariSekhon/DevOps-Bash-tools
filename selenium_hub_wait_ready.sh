@@ -36,6 +36,9 @@ min_args 1 "$@"
 hub_url="$1"
 max_secs="${2:-}"
 
+hub_url="${hub_url%%/}"
+hub_url="${hub_url%/wd/hub}"
+
 if [ -n "$max_secs" ] &&
    [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
 	timestamp "setting timeout to $max_secs secs"
