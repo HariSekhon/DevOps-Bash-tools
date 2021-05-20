@@ -25,8 +25,12 @@ usage_description="
 Waits for Selenium Grid Hub status to be ready
 
 If Selenium hub url isn't given, can construct it from
-\$SELENIUM_HUB_URL or \$SELENIUM_HUB_HOST:\$SELENIUM_HUB_PORT
-if \$SELENIUM_HUB_SSL is set, or \$SELENIUM_HUB_PORT is 443, will enable https
+
+    \$SELENIUM_HUB_URL
+        or
+    http://\$SELENIUM_HUB_HOST:\$SELENIUM_HUB_PORT
+
+If \$SELENIUM_HUB_SSL is set, or \$SELENIUM_HUB_PORT is 443, will enable https
 
 Max secs may use environment variable \$MAX_SECS, or defaults to 300
 "
