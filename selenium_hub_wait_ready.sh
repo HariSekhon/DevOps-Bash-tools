@@ -23,6 +23,12 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Waits for Selenium Grid Hub status to be ready
+
+If Selenium hub url isn't given, can construct it from
+\$SELENIUM_HUB_URL or \$SELENIUM_HUB_HOST:\$SELENIUM_HUB_PORT
+if \$SELENIUM_HUB_SSL is set, or \$SELENIUM_HUB_PORT is 443, will enable https
+
+Max secs may use environment variable \$MAX_SECS, or defaults to 300
 "
 
 # used by usage() in lib/utils.sh
@@ -31,10 +37,24 @@ usage_args="<selenium_grid_hub_url> [<max_secs>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-hub_url="$1"
-max_secs="${2:-}"
+if [ $# -gt 0 ]; then
+    hub_url="$1"
+else
+    if [ -n "${SELENIUM_HUB_URL:-}" ]; then
+        hub_url="$SELENIUM_HUB_URL"
+    elif [ -n "${SELENIUM_HUB_HOST:-}" ]; then
+        hub_url="http://$SELENIUM_HUB_HOST:${SELENIUM_HUB_PORT:-4444}"
+        if [ -n "${SELENIUM_HUB_SSL:-}" ] ||
+           [ "${SELENIUM_HUB_PORT:-}" = 443 ]; then
+            hub_url="https://${hub_url#http://}"
+        fi
+    else
+        usage "selenium hub url not given and \$SELENIUM_HUB_URL / \$SELENIUM_HUB_HOST not set"
+    fi
+fi
+max_secs="${2:-${MAX_SECS:-300}}"
 
 hub_url="${hub_url%%/}"
 hub_url="${hub_url%/wd/hub}"
