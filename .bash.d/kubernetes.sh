@@ -73,6 +73,7 @@ alias powc='poc -o wide'
 alias pocw='poc -o wide'
 alias kapply='k apply -f'
 alias kapp=kapply
+alias kdel='k delete'
 alias wp=watchpods
 alias kd=kdesc
 alias ke=kubectl_exec.sh
