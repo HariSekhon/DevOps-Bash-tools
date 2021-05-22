@@ -99,7 +99,7 @@ if isMac; then
     if [[ "${PROMPT_COMMAND:-}" =~ update_terminal_cwd ]]; then
         # this unsets direnv's hook
         #unset PROMPT_COMMAND
-        PROMPT_COMMAND="${PROMPT_COMMAND//update_terminal_cwd/}"
+        PROMPT_COMMAND="${PROMPT_COMMAND//update_terminal_cwd;/}"
     fi
     # stripping update_terminal_cwd can leave some weird broken PROMPT_COMMAND start due to interaction with direnv, so strip it without forking to sed/perl
     while [[ "${PROMPT_COMMAND:-}" =~ ^[[:space:]]|^\; ]]; do
