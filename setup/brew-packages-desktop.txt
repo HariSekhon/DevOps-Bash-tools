@@ -92,6 +92,7 @@ gradle-completion
 #groovysdk  # see near end
 hadolint
 haproxy
+helm
 htop
 hub
 #hugo  # static website generator - https://gohugo.io/getting-started/quick-start/
@@ -110,7 +111,6 @@ jython
 kompose
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
-kubernetes-helm
 kustomize
 #lame  # mp3 encoder
 launchctl-completion
