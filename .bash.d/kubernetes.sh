@@ -23,7 +23,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 
-for x in kubectl oc helm; do
+for x in kubectl oc helm flux; do
     if type -P "$x" &>/dev/null; then
         # doesn't work
         # shellcheck disable=SC1090
