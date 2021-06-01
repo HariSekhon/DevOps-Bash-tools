@@ -35,7 +35,7 @@ eg.
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<project>]"
+usage_args="[<project_id>]"
 
 help_usage "$@"
 
