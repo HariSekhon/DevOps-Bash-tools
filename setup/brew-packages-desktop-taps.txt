@@ -17,5 +17,7 @@ wallix/awless           awless
 wercker/wercker         wercker-cli
 golangci/tap            golangci-lint
 
+#fluxcd/tap              flux
+
 #codefresh-io/cli        codefresh
 #sambadevi/powerlevel9k  powerlevel9k
