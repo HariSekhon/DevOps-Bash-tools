@@ -25,7 +25,8 @@ type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 # adds GCloud CLI tools to $PATH
 if [ -f ~/google-cloud-sdk/path.bash.inc ]; then
-    source ~/google-cloud-sdk/path.bash.inc
+    #source ~/google-cloud-sdk/path.bash.inc
+    add_PATH ~/google-cloud-sdk/bin  # appends rather than above which prepends to \$PATH, messing up kubectl version requirement for fluxcd
 fi
 
 # Bash completion for GCloud CLI tools
