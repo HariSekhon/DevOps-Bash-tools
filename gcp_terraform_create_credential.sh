@@ -67,7 +67,7 @@ mkdir -pv "$(dirname "$keyfile")"
 if [ -f "$keyfile" ]; then
     echo "Credentials keyfile '$keyfile' already exists"
 else
-    gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json"
+    gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json" --project "$project"
 fi
 
 echo "Granting Owner permissions to service account '$service_account' on project '$project'"
