@@ -429,6 +429,12 @@ read_secret(){
     export secret
 }
 
+if is_mac; then
+    readlink(){
+        command greadlink "$@"
+    }
+fi
+
 # fails interactive import without this
 function run++ () {
     #if [[ "$run_count" =~ ^[[:digit:]]+$ ]]; then
