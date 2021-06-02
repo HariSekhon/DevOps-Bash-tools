@@ -50,10 +50,10 @@ min_args 3 "$@"
 
 kube_config_isolate
 
-# XXX: fix the GCP project for the duration of the script for consistency
-project="$(gcloud config list --format='get(core.project)')"
-not_blank "$project" || die "ERROR: GCloud SDK core.project value not set"
-export CLOUDSDK_CORE_PROJECT="$project"
+# XXX: sets the GCP project for the duration of the script for consistency purposes (relying on gcloud config could lead to race conditions)
+project="$(gcloud config list --format='get(core.project)' || :)"
+export CLOUDSDK_CORE_PROJECT="${CLOUDSDK_CORE_PROJECT:-$project}"
+not_blank "$CLOUDSDK_CORE_PROJECT" || die "ERROR: \$CLOUDSDK_CORE_PROJECT / GCloud SDK config core.project value not set"
 
 get_latest_version(){
     local secret="$1"
