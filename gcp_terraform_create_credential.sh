@@ -64,12 +64,6 @@ echo "Granting Owner permissions to service account '$service_account' on projec
 # some projects may require --condition=None in non-interactive mode
 gcloud projects add-iam-policy-binding "$project" --member="serviceAccount:$service_account" --role=roles/owner --condition=None >/dev/null
 
-if is_mac; then
-    readlink(){
-        command greadlink "$@"
-    }
-fi
-
 keyfile="$(readlink -e "$keyfile")"
 
 echo
