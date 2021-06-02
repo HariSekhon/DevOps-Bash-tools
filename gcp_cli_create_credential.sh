@@ -74,12 +74,6 @@ for project in $(gcloud projects list --format='get(project_id)'); do
     gcloud projects add-iam-policy-binding "$project" --member="serviceAccount:$service_account" --role='roles/owner' --condition=None >/dev/null
 done
 
-if is_mac; then
-    readlink(){
-        command greadlink "$@"
-    }
-fi
-
 keyfile="$(readlink -e "$keyfile")"
 
 echo
