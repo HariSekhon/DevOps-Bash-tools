@@ -34,7 +34,7 @@ The following optional arguments can be given:
 
 - service account name prefix   (default: \$USER-cli)
 - credential file path          (default: \$HOME/.gcloud/\$name-\$project-credential.json)
-- project                       (default: gcloud config's currently configured project setting core.project)
+- project                       (default: \$CLOUDSDK_CORE_PROJECT or gcloud config's currently configured project setting core.project)
 
 This can also be used as a backup credential - this way if something accidentally happens to your primary user account
 or this service account, you can always use the other to repair access without having to rely on colleagues who be away
@@ -52,9 +52,9 @@ help_usage "$@"
 
 name="${1:-$USER-cli}"
 
-project="${3:-$(gcloud config list --format='get(core.project)')}"
+project="${3:-${CLOUDSDK_CORE_PROJECT:-$(gcloud config list --format='get(core.project)')}}"
 
-# XXX: fix the GCP project for the duration of the script for consistency
+# XXX: sets the GCP project for the duration of the script for consistency purposes (relying on gcloud config could lead to race conditions)
 not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project value not set"
 export CLOUDSDK_CORE_PROJECT="$project"
 
