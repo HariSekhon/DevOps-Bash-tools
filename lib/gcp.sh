@@ -53,7 +53,7 @@ gcp_info(){
     fi
     if [[ "$*" =~ --format ]]; then
         # eval formatting for table only to get late evaluated $title
-        "${@//--format=table(/--format=table$(eval echo "$gcloud_formatting")(}"
+        "${@//--format=table\(/--format=table$(eval echo "$gcloud_formatting")\(}"
     else
         # formatting has to be eval'd in order to pick up latest $title as a late binding
         # better than eval'ing the entire command line to evaluate $title in the formatting string interpolation
@@ -70,4 +70,34 @@ gcloud_export_active_configuration(){
     local active_configuration
     active_configuration="$(gcloud config configurations list --format='get(name)' --filter='is_active = True')"
     export CLOUDSDK_ACTIVE_CONFIG_NAME="$active_configuration"
+}
+
+gcp_serviceaccount_exists(){
+    local service_account="$1"
+    gcloud iam service-accounts list --format='get(email)' --filter="email:$service_account" |
+    grep -Fxq "$service_account"
+}
+
+gcp_create_serviceaccount_if_not_exists(){
+    local name="$1"
+    local project="$2"
+    local description="${3:-}"
+    local service_account="$name@$project.iam.gserviceaccount.com"
+
+    if gcp_serviceaccount_exists "$service_account"; then
+        echo "Service account '$service_account' already exists" >&2
+    else
+        gcloud iam service-accounts create "$name" --description="$description" --project "$project"
+    fi
+}
+
+gcp_create_credential_if_not_exists(){
+    local serviceaccount="$1"
+    local keyfile="$2"
+    mkdir -pv "$(dirname "$keyfile")"
+    if [ -f "$keyfile" ]; then
+        echo "Credentials keyfile '$keyfile' already exists" >&2
+    else
+        gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json"
+    fi
 }
