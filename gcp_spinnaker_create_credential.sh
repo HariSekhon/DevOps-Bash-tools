@@ -23,11 +23,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Creates a GCP service account for Spinnaker deployments in the current or specified GCP project, then
-creates and downloads the credentials json and even prints the command to configure your environment your Spinnaker Hal environment:
+creates and downloads the credentials json and even prints the commands to configure your Spinnaker Halyard CLI:
 
 hal config storage gcs edit --project \$PROJECT --bucket-location \$BUCKET_LOCATION --json-path \$KEYFILE
-
 hal config storage edit --type gcs
+
+hal config artifact gcs account add \$PROJECT --json-path \$KEYFILE
+hal config artifact gcs enable
 
 
 The following optional arguments can be given:
@@ -74,7 +76,13 @@ cat <<EOF
 
 You can now continue to configure Spinnaker Halyard CLI with these details:
 
-hal config storage gcs edit --project "$project" --bucket-location "\$BUCKET_LOCATION" --json-path "$keyfile"
+Needed to store Application settings + Pipelines:
 
+hal config storage gcs edit --project "$project" --bucket-location "\$BUCKET_LOCATION" --json-path "$keyfile"
 hal config storage edit --type gcs
+
+Optional - only needed if using artifacts stored on GCS:
+
+hal config artifact gcs account add "$project" --json-path "$keyfile"
+hal config artifact gcs enable
 EOF
