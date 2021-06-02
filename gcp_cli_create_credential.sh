@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/gcp.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -60,21 +60,11 @@ export CLOUDSDK_CORE_PROJECT="$project"
 
 keyfile="${2:-$HOME/.gcloud/$name-$project-credential.json}"
 
+gcp_create_serviceaccount_if_not_exists "$name" "$project" "$USER's service account for CLI usage"
+
 service_account="$name@$project.iam.gserviceaccount.com"
 
-if gcloud iam service-accounts list --format='get(email)' | grep -Fxq "$service_account"; then
-    timestamp "Service account '$service_account' already exists"
-else
-    gcloud iam service-accounts create "$name" --description="$USER's service account for CLI usage" --project "$project"
-fi
-
-mkdir -pv "$(dirname "$keyfile")"
-
-if [ -f "$keyfile" ]; then
-    timestamp "Credentials keyfile '$keyfile' already exists"
-else
-    gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json" --project "$project"
-fi
+gcp_create_credential_if_not_exists "$service_account" "$keyfile"
 
 timestamp "Granting Owner permissions to service account '$service_account' on all projects"
 
