@@ -61,7 +61,7 @@ help_usage "$@"
 kube_config_isolate
 
 # XXX: sets the GCP project for the duration of the script for consistency purposes (relying on gcloud config could lead to race conditions)
-project="$(gcloud config list --format='get(core.project)')"
+project="$(gcloud config list --format='get(core.project)' || :)"
 export CLOUDSDK_CORE_PROJECT="${CLOUDSDK_CORE_PROJECT:-$project}"
 not_blank "$CLOUDSDK_CORE_PROJECT" || die "ERROR: no project specified and \$CLOUDSDK_CORE_PROJECT / GCloud SDK config core.project value not set"
 
