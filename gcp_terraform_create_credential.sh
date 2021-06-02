@@ -31,7 +31,7 @@ The following optional arguments can be given:
 
 - service account name prefix   (default: \$USER-terraform)
 - credential file path          (default: \$HOME/.gcloud/\$name-\$project-credential.json)
-- project                       (default: gcloud config's currently configured project setting core.project)
+- project                       (default: \CLOUDSDK_CORE_PROJECT or gcloud config's currently configured project setting core.project)
 
 Idempotent - safe to re-run, will skip service accounts and keyfiles that already exist
 "
@@ -46,7 +46,7 @@ help_usage "$@"
 
 name="${1:-$USER-terraform}"
 
-project="${3:-$(gcloud config list --format='get(core.project)')}"
+project="${3:-${CLOUDSDK_CORE_PROJECT:-$(gcloud config list --format='get(core.project)')}}"
 
 # XXX: fix the GCP project for the duration of the script for consistency
 not_blank "$project" || die "ERROR: no project specified and GCloud SDK core.project value not set"
