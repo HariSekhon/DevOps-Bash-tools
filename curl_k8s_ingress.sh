@@ -48,6 +48,8 @@ min_args 1 "$@"
 url="$1"
 shift || :
 
+shopt -s nocasematch
+
 if ! [[ "$url" =~ :// ]]; then
     url="http://$url"
 fi
@@ -70,7 +72,15 @@ fi
 # TODO: extend this to detect and return the IPs of other ingress controllers if deployed eg. older nginx-ingress, traefik, haproxy etc.
 IP="$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o 'jsonpath={.spec.loadBalancerIP}')"
 
-url="${url/:\/\/$host/://$IP}"
+if [[ "$url" =~ ^http:// ]]; then
+    port=80
+else
+    port=443
+fi
+
+# this works for path routing but not SSL verification, forcing you to use -k and not debugging the certificate
+#url="${url/:\/\/$host/://$IP}"
+#curl -H "Host: $host" "$url" "$@"
 
 set -x
-curl -H "Host: $host" "$url" "$@"
+curl "$url" --resolve "$host:$port:$IP" "$@"
