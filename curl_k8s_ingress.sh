@@ -78,7 +78,7 @@ else
     port=443
 fi
 
-# this works for path routing but not SSL verification, forcing you to use -k and not debugging the certificate
+# this works for ingress path routing but not SSL verification, forcing you to use -k and not debugging the certificate
 #url="${url/:\/\/$host/://$IP}"
 #curl -H "Host: $host" "$url" "$@"
 
