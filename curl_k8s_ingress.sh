@@ -22,9 +22,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Curls the current Kubernetes cluster's Nginx Ingress controller's external IP address and fakes the host header
+Curls the current Kubernetes cluster's Nginx Ingress controller's external IP address using the given URL
 
-Useful for debugging Ingress SSL certificates directly to bypass CDN addresses such as Cloudflare
+Useful for debugging Ingress Routing + SSL certificates directly by bypassing DNS -> CDN addresses such as Cloudflare
 
 Requires kubectl to be installed and configured with the target cluster selected as the current context
 in order to find the Ingress Controller's external IP address
