@@ -26,7 +26,10 @@ Curls the current Kubernetes cluster's Nginx Ingress controller's external IP ad
 
 Useful for debugging Ingress SSL certificates directly to bypass CDN addresses such as Cloudflare
 
-Make sure to specify the correct prefix eg. https:// and path suffix so that you don't hit a 302 redirect back to the CDN address
+Tips:
+
+    - Make sure to specify the correct prefix eg. https:// and path suffix so that you don't hit a 302 redirect back to the CDN address
+    - Use '-kv' curl switches to see the cert and header info
 
 Prints the curl command inferred as it is used so you can see what you're doing
 "
