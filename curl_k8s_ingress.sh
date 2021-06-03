@@ -26,6 +26,9 @@ Curls the current Kubernetes cluster's Nginx Ingress controller's external IP ad
 
 Useful for debugging Ingress SSL certificates directly to bypass CDN addresses such as Cloudflare
 
+Requires kubectl to be installed and configured with the target cluster selected as the current context
+in order to find the Ingress Controller's external IP address
+
 Tips:
 
     - Make sure to specify the correct prefix eg. https:// and path suffix so that you don't hit a 302 redirect back to the CDN address
