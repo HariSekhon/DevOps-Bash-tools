@@ -649,6 +649,7 @@ etc.
   - `buildkite_pipeline_skip_settings.sh` - lists the skip intermediate build settings for one or more given BuildKite pipelines
   - `buildkite_pipeline_set_skip_settings.sh` - configures given or all BuildKite pipelines to skip intermediate builds and cancel running builds in favour of latest build
   - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
+  - `buildkite_cancel_running_builds.sh` - cancels BuildKite running builds (to clear them and restart new later eg. after agent / environment change / fix)
   - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of any cancelled pipelines
   - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of any failed pipelines (useful if you killed an agent and want to re-run them)
   - `buildkite_retry_jobs_dead_agents.sh` - triggers job retries where jobs failed due to killed agents, continuing builds from that point and replacing their false negative failed status with the real final status, slightly better than rebuilding entire jobs which happen under a new build
