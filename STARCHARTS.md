@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-2896-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1283-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-527-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3005-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1340-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-555-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -36,7 +36,7 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
 Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Python-tools)
 
-80+ DevOps & Data CLI Tools - AWS, GCP, GCF Python Cloud Function, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, AWS CloudFormation, Elasticsearch, Solr etc.
+80+ DevOps & Data CLI Tools - AWS, GCP, GCF Python Cloud Functions, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, AWS CloudFormation, Elasticsearch, Solr etc.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Python-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Python-tools)
 
@@ -95,13 +95,13 @@ Perl Utility Library for my other repos
 [![Stargazers over time](https://starchart.cc/HariSekhon/lib.svg)](https://starchart.cc/HariSekhon/lib)
 
 ---
-## Kubernetes Templates
+## Kubernetes configs
 
-Link:  [HariSekhon/Kubernetes-templates](https://github.com/HariSekhon/Kubernetes-templates)
+Link:  [HariSekhon/Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs)
 
-Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for production deployments - plus CI/CD Jenkins & TeamCity, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates, patches, Kustomize etc.
+Kubernetes YAML configs - Best Practices, Tips & Tricks are baked right into the templates for production deployments on AWS, GCP & Azure. GKE, Cloud SQL, CI/CD, Jenkins, TeamCity, Spinnaker, Selenium Grid, FluxCD, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates, patches, Kustomize etc.
 
-[![Stargazers over time](https://starchart.cc/HariSekhon/Kubernetes-templates.svg)](https://starchart.cc/HariSekhon/Kubernetes-templates)
+[![Stargazers over time](https://starchart.cc/HariSekhon/Kubernetes-configs.svg)](https://starchart.cc/HariSekhon/Kubernetes-configs)
 
 ---
 ## Code & Config Templates
@@ -122,15 +122,6 @@ Python / Jython Utility Library for my other repos
 [![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
 
 ---
-## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
-
-Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
-
-Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
-
----
 ## Hari Sekhon - DevOps Golang Tools
 
 Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Golang-tools)
@@ -140,13 +131,13 @@ DevOps Golang tools
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
 
 ---
-## Hari Sekhon - Spotify Playlists
+## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
-Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
+Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
 
-240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
+Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
 
-[![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
+[![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
 
 ---
 ## Terraform Templates
@@ -156,6 +147,15 @@ Link:  [HariSekhon/Terraform-templates](https://github.com/HariSekhon/Terraform-
 Terraform templates for AWS / GCP / Azure
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Terraform-templates.svg)](https://starchart.cc/HariSekhon/Terraform-templates)
+
+---
+## Hari Sekhon - Spotify Playlists
+
+Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
+
+240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
 ---
 ## SQL Keywords
