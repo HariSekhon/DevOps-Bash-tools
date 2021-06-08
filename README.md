@@ -157,7 +157,7 @@ etc... extensive package lists for servers and desktops for most major Linux dis
   - `lib/` - scripting and CI library
 - [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 100+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) + [CloudTrail](https://aws.amazon.com/cloudtrail/), [Google BigQuery](https://cloud.google.com/bigquery)
 - [Templates](https://github.com/HariSekhon/Templates) - templates for common programming languages and build configs
-- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
+- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
 See Also: [similar DevOps repos](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/README.md#see-also) in other languages
 
@@ -217,7 +217,7 @@ make
 - [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
 - [Data Format Conversion & Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-format-conversion--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
-- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
+- [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
 #### Linux & Mac:
 
@@ -480,7 +480,7 @@ etc.
   - `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
   - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
-  - see also the [Kubernetes templates](https://github.com/HariSekhon/Kubernetes-templates) repo
+  - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
 
 #### Docker
 
@@ -852,7 +852,7 @@ etc.
 
 * [Templates](https://github.com/HariSekhon/Templates) - dozens of Code & Config templates - AWS, GCP, Docker, Jenkins, Terraform, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions Workflows, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, M4 etc.
 
-* [Kubernetes templates](https://github.com/HariSekhon/Kubernetes-templates) - Kubernetes YAML templates - Best Practices, Tips & Tricks are baked right into the templates for future deployments
+* [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs - Best Practices, Tips & Tricks are baked right into the templates for future deployments
 
 * [The Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 450+ programs for Nagios monitoring your Hadoop & NoSQL clusters. Covers every Hadoop vendor's management API and every major NoSQL technology (HBase, Cassandra, MongoDB, Elasticsearch, Solr, Riak, Redis etc.) as well as message queues (Kafka, RabbitMQ), continuous integration (Jenkins, Travis CI) and traditional infrastructure (SSL, Whois, DNS, Linux)
 
