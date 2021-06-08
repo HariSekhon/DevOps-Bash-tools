@@ -157,7 +157,7 @@ get_postgres_versions(){
     if is_CI; then
         echo "CI detected - using randomized sample of PostgreSQL versions to test against:" >&2
         {
-        shuf | head -n 2
+        shuf | head -n 1
         echo 9.1  # most problematic / incompatible versions should always be tested
         echo 9.5
         echo latest
