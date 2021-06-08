@@ -41,8 +41,9 @@ All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
 
-{repo} - with the repo name (eg. HariSekhon/DevOps-Bash-tools)
-{dir}  - with the directory on disk (eg. /Users/hari/github/bash-tools)
+{repo} - repo name with user/org prefix (eg. HariSekhon/DevOps-Bash-tools)
+{name} - repo name without the user/org prefix (eg. DevOps-Bash-tools)
+{dir}  - directory on disk (eg. /Users/hari/github/bash-tools)
 
 eg. ${0##*/} 'echo {repo} is found at {dir}'
 
@@ -93,6 +94,7 @@ execute_repo(){
     repo_dir="${repo_dir##*:}"
     repo_dir="$srcdir/../$repo_dir"
     repo="${repo%%:*}"
+    local name="${repo##*/}"
     if ! [ -d "$repo_dir" ]; then
         #git clone "$git_url/$repo" "$repo_dir"
         return
@@ -105,6 +107,7 @@ execute_repo(){
         echo "# ============================================================================ #" >&2
     fi
     cmd="${cmd//\{repo\}/$repo}"
+    cmd="${cmd//\{name\}/$name}"
     cmd="${cmd//\{dir\}/$repo_dir}"
     eval "$cmd"
     if [[ "$cmd" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
