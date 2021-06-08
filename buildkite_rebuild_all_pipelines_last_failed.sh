@@ -37,3 +37,14 @@ usage_args=""
 help_usage "$@"
 
 "$srcdir/buildkite_foreach_pipeline.sh" "$srcdir/buildkite_rebuild_failed_builds.sh" '{pipeline}' 1
+
+# All Failed builds in history
+#
+#"$srcdir/buildkite_api.sh" "builds?state=failed" "$@" |
+#jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |
+#while read -r name number url; do
+#    url="${url#https://api.buildkite.com/v2/}"
+#    echo -n "Rebuilding $name build number $number:  "
+#    "$srcdir/buildkite_api.sh" "$url/rebuild" -X PUT |
+#    jq -r '.state'
+#done
