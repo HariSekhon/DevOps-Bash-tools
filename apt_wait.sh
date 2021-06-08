@@ -31,8 +31,8 @@ locks="
 
 unattended_upgrade_log="/var/log/unattended-upgrades/unattended-upgrades.log"
 
-sudo=sudo
-[ $EUID = 0 ] && sudo=sudo
+sudo=""
+[ $EUID = 0 ] || sudo=sudo
 
 check_bin(){
     if ! type -P "$1" &>/dev/null; then
