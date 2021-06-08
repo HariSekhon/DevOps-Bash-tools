@@ -30,7 +30,7 @@
 # order repos by dependent submodule repos first
 SQL-scripts:sql
 SQL-keywords:sql-keywords
-Kubernetes-templates:k8s
+Kubernetes-configs:k8s
 Terraform-templates:terraform
 Templates:templates
 TeamCity-CI:teamcity
