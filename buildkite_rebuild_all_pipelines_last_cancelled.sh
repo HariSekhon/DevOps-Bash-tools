@@ -23,6 +23,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Rebuilds the last cancelled build for each pipeline in BuildKite via its API
+
+See adjacent scripts for more details:
+
+    buildkite_foreach_pipeline.sh
+    buildkite_rebuild_failed_builds.sh
 "
 
 # used by usage() in lib/utils.sh
@@ -33,6 +38,8 @@ help_usage "$@"
 
 "$srcdir/buildkite_foreach_pipeline.sh" "$srcdir/buildkite_rebuild_cancelled_builds.sh" '{pipeline}' 1
 
+# All Cancelled builds in history
+#
 #"$srcdir/buildkite_api.sh" "builds?state=canceled" "$@" |
 #jq -r '.[] | [.pipeline.slug, .number, .url] | @tsv' |
 #while read -r name number url; do
