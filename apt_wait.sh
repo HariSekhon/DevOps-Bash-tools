@@ -60,7 +60,7 @@ while true; do
        $sudo fuser "$unattended_upgrade_log" &>/dev/null; then
         echo "apt unattended upgrade log in use ($unattended_upgrade_log), waiting..." >&2
         sleep "$sleep_secs"
-        continue 2
+        continue
     fi
     break
 done
