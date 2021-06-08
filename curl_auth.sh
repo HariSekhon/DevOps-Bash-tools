@@ -65,7 +65,7 @@ if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
     # ==============================================
     # option 1
 
-    # works on Mac but not on Linux, so going back to parsing the hostname and dynamic loading
+    # needs newer version of curl, otherwise fall back to parsing the hostname and dynamically created netrc contents
     # curl 7.64.1 (x86_64-apple-darwin19.0) libcurl/7.64.1 (SecureTransport) LibreSSL/2.8.3 zlib/1.2.11 nghttp2/1.39.2
     # curl 7.35.0 (x86_64-pc-linux-gnu) libcurl/7.35.0 OpenSSL/1.0.1f zlib/1.2.8 libidn/1.28 librtmp/2.3
     if [ -z "${TOKEN:-}" ] &&
