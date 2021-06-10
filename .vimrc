@@ -137,6 +137,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 "Plugin 'fatih/vim-go'
 
+" comment at start of line instead of code indentation level
+" doesn't work: https://github.com/preservim/nerdcommenter/issues/467
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+
 let g:gitgutter_enabled = 0
 " keep setting if reloading, otherwise default to 1 for enabled
 "let g:pluginname_setting = get(g:, 'gitgutter_enabled', 1)
@@ -305,7 +310,8 @@ endif
 nmap <silent> ;a :,!anonymize.py -a<CR>
 nmap          ;A :,!hexanonymize.py --case --hex-only<CR>
 nmap <silent> ;b :!git blame "%"<CR>
-nmap <silent> ;c :,!center.py<CR>
+nmap <silent> ;c :call ToggleComments()<CR>
+nmap <silent> ;C :,!center.py<CR>
 nmap <silent> ;e :,!center.py -s<CR>
 " parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
@@ -328,7 +334,9 @@ nmap          ;n :n<CR>
 nmap          ;o :!git log -p "%"<CR>
 nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
-nmap          ;P :call TogglePaste()<CR>
+"nmap          ;P :call TogglePaste()<CR>
+nmap          ;P :set paste!<CR>
+nmap          ;t :set list!<CR>
 nmap          ;q :q<CR>
 nmap          ;r :call WriteRun()<CR>
 nmap          ;R :call WriteRunDebug()<CR>
@@ -393,15 +401,16 @@ function! ToggleSyntax()
     endif
 endfunction
 
-"function! ToggleComment()
-"    let comment_prefix = '^' . b:comment_char
-"    echo comment_prefix
-"    if getline('.') =~ comment_prefix
-"        :s/^\=get(b:comment_char)//
-"    else
-"        :s/^/\=get(b:comment_char)/
-"    endif
-"endfunction
+function! ToggleComments()
+    :let comment_char = '#'
+    :let comment_prefix = '^' . comment_char
+    echo comment_prefix
+    if getline('.') =~ comment_prefix
+        :s/^\=:comment_char//
+    else
+        :s/^/\=:comment_char/
+    endif
+endfunction
 
 " setting this high keeps cursor in middle of screen
 ":set so=999
@@ -413,13 +422,14 @@ function! ToggleScrollLock()
     endif
 endfunction
 
-function! TogglePaste()
-    if &paste > 0
-        :set nopaste
-    else
-        :set paste
-    endif
-endfunction
+" simpler to call: set paste!
+"function! TogglePaste()
+"    if &paste > 0
+"        :set nopaste
+"    else
+"        :set paste
+"    endif
+"endfunction
 
 " changing this setting has no effect on vim gutter in real time
 function! ToggleGutter()
