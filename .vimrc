@@ -317,7 +317,8 @@ nmap <silent> ;e :,!center.py -s<CR>
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 nmap <silent> ;E :call WriteRunLine()<CR> :!reset<CR><CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
-nmap <silent> ;D :Done<CR>
+"nmap <silent> ;D :Done<CR>
+nmap <silent> ;D :%!decomment.sh<CR>
 nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
 "nmap <silent> ;h :call Hr()<CR>
 nmap <silent> ;h :Hr<CR>
