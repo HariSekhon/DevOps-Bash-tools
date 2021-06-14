@@ -24,7 +24,7 @@ date "+%F %T  downloading kustomize"
 # now installs to /private and fails as user :-/
 #curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
-VERSION="4.1.3"
+VERSION="${1:-4.1.3}"
 
 os="$(uname -s | tr '[:upper:]' '[:lower:]')"
 
