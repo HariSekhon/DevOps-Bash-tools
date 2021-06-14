@@ -34,11 +34,16 @@ cd /tmp
 
 wget "$url" -O kustomize.tar.gz
 
+date "+%F %T  unpacking kustomize"
 tar zxvf kustomize.tar.gz
 
 mkdir -pv ~/bin
 unalias mv &>/dev/null || :
 mv -vf kustomize ~/bin/
 
-# called as part of download script
-#~/bin/kustomize version -
+rm -f kustomize.tar.gz
+
+echo
+
+# called as part of download script - call manually now
+~/bin/kustomize version -
