@@ -46,11 +46,16 @@ Examples:
     Get global Route 53 Healthcheck IPs:
 
         ${0##*/} GLOBAL ROUTE53_HEALTHCHECKS
+
+    Get all Route 53 Healthcheck IPs in all regions:
+
+        ${0##*/} all ROUTE53_HEALTHCHECKS
+
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<region> <service>]"
+usage_args="[<region> <service> | list]"
 
 help_usage "$@"
 
@@ -68,7 +73,7 @@ fi
 
 curl -sS "$url" |
 jq -r ".prefixes[]" |
-if [ -n "$region" ]; then
+if [ -n "$region" ] && [ "$region" != all ]; then
     #jq -r ".prefixes[] | select(.region == \"$region\") | .ip_prefix"
     jq -r "select(.region == \"$region\")"
 else
