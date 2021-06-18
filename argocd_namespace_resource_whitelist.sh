@@ -56,6 +56,9 @@ while read -r group kind; do
     if [ "$group" = v1 ]; then
         group=""
     fi
-    echo "  - group: '$group'"
-    echo "    kind: '$kind'"
+    if [ "$group" = "" ]; then
+        group="''"
+    fi
+    echo "  - group: $group"
+    echo "    kind: $kind"
 done
