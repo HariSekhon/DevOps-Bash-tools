@@ -27,6 +27,8 @@ Returns all the AWS IPs for a given Region and Service using the AWS ip-range js
 
     https://ip-ranges.amazonaws.com/ip-ranges.json
 
+To get and use these IPs directly in Terraform, see https://github.com/HariSekhon/Terraform
+
 Examples:
 
     Lists all regions and their services to filter on:
