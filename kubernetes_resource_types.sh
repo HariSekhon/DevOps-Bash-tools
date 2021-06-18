@@ -24,12 +24,12 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Filter program to get all unique Kubernetes resources types out of a Kubernetes yaml or Kustomize build output
 
-Yaml can be supplied as a file argument or via standard input. If not file is given, waits for stdin like a standard unix filter program.
+Yaml can be supplied as a file argument or via standard input. If no file is given, waits for stdin like a standard unix filter program
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<file.yaml>]"
+usage_args="[<file.yaml> <file2.yaml> ...]"
 
 help_usage "$@"
 
