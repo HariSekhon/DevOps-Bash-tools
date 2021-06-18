@@ -54,6 +54,14 @@ fi
 
 add_PATH "${KREW_ROOT:-$HOME/.krew}"
 
+for x in "$bash_tools"/kubernetes*.sh; do
+    x="${x##*/}"
+    name="${x#kubernetes_}"
+    eval "k8s_${name}(){
+        '$x' \"\$@\"
+    }"
+done
+
 # ============================================================================ #
 
 # replaced by function further down
