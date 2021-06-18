@@ -72,16 +72,30 @@ if [ "$region" = list ]; then
 fi
 
 curl -sS "$url" |
-jq -r ".prefixes[]" |
-if [ -n "$region" ] && [ "$region" != all ]; then
-    #jq -r ".prefixes[] | select(.region == \"$region\") | .ip_prefix"
-    jq -r "select(.region == \"$region\")"
-else
-    cat
-fi |
-if [ -n "$service" ] && [ "$service" != all ]; then
-    jq -r "select(.service == \"$service\")"
-else
-    cat
-fi |
-jq -r '.ip_prefix'
+#jq -r ".prefixes[]" |
+#if [ -n "$region" ] && [ "$region" != all ]; then
+#    #jq -r ".prefixes[] | select(.region == \"$region\") | .ip_prefix"
+#    jq -r "select(.region == \"$region\")"
+#else
+#    cat
+#fi |
+#if [ -n "$service" ] && [ "$service" != all ]; then
+#    jq -r "select(.service == \"$service\")"
+#else
+#    cat
+#fi |
+#jq -r '.ip_prefix'
+jq -r "
+    .prefixes[] |
+    if(\"$region\" != \"\" and \"$region\" != \"all\") then
+        select(.region == \"$region\")
+    else
+        .
+    end |
+    if(\"$service\" != \"\" and \"$service\" != \"all\") then
+        select(.service == \"$service\")
+    else
+        .
+    end |
+    .ip_prefix
+"  # end jq script
