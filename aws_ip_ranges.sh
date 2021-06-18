@@ -59,11 +59,17 @@ usage_args="[<region> <service> | list]"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 url="https://ip-ranges.amazonaws.com/ip-ranges.json"
 region="${1:-}"
 service="${2:-}"
+
+# All regions are lowercase except for GLOBAL
+region="$(tr '[:upper:]' '[:lower:]' <<< "$region")"
+if [ "$region" = global ]; then
+    region=GLOBAL
+fi
+# All Services are uppercase
+service="$(tr '[:lower:]' '[:upper:]' <<< "$service")"
 
 if [ "$region" = list ]; then
     curl -sS "$url" |
