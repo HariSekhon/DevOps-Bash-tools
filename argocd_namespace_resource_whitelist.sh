@@ -28,6 +28,10 @@ Yaml can be supplied as a file argument or via standard input. If no file is giv
 
 Outputs Yaml for the namespaceResourceWhitelist section of argocd-project.yaml
 
+A full argocd-project.yaml is already provided at the URL below with all the most common object permissions already populated via the output from this script against my production environment
+
+    https://github.com/HariSekhon/Kubernetes-configs
+
 Uses adjacent script kubernetes_resource_types.sh
 
 Tested on ArgoCD 2.0.3
@@ -44,6 +48,7 @@ help_usage "$@"
 echo "  namespaceResourceWhitelist:"
 "$srcdir/kubernetes_resource_types.sh" "$@" |
 while read -r group kind; do
+    # Cluster resources, ignore these
     if [[ "$kind" =~ Namespace|PriorityClass|StorageClass ]]; then
         continue
     fi
