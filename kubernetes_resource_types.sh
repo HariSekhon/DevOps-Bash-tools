@@ -36,6 +36,7 @@ help_usage "$@"
 #min_args 1 "$@"
 
 awk '/^(api|kind)/{print $2}' "$@" |
+# sed N joins every 2 lines
 sed 'N;s/\n/ /' |
 column -t |
 sort -u
