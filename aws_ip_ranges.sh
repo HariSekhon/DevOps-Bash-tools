@@ -60,11 +60,15 @@ url="https://ip-ranges.amazonaws.com/ip-ranges.json"
 region="${1:-}"
 service="${2:-}"
 
+if [ "$region" = list ]; then
+    curl -sS "$url" |
+    jq -r '.prefixes[] | [.region, .service] | @tsv' | sort -u
+    exit 0
+fi
+
 curl -sS "$url" |
 jq -r ".prefixes[]" |
-if [ "$region" == list ]; then
-    jq -r '[.region, .service] | @tsv' | sort -u >&2
-elif [ -n "$region" ]; then
+if [ -n "$region" ]; then
     #jq -r ".prefixes[] | select(.region == \"$region\") | .ip_prefix"
     jq -r "select(.region == \"$region\")"
 else
