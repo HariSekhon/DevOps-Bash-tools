@@ -25,6 +25,28 @@ usage_description="
 Filter program to get all unique Kubernetes resources types out of a Kubernetes yaml or Kustomize build output
 
 Yaml can be supplied as a file argument or via standard input. If no file is given, waits for stdin like a standard unix filter program
+
+Output Format:
+
+<group>     <object_kind>
+
+Sorted by object kind
+
+eg.
+
+v1                          ConfigMap
+batch/v1beta1               CronJob
+apps/v1                     Deployment
+autoscaling/v1              HorizontalPodAutoscaler
+extensions/v1beta1          Ingress
+v1                          Namespace
+policy/v1beta1              PodDisruptionBudget
+scheduling.k8s.io/v1        PriorityClass
+v1                          Service
+v1                          ServiceAccount
+apps/v1                     StatefulSet
+storage.k8s.io/v1           StorageClass
+autoscaling.k8s.io/v1beta2  VerticalPodAutoscaler
 "
 
 # used by usage() in lib/utils.sh
@@ -38,5 +60,5 @@ help_usage "$@"
 awk '/^(api|kind)/{print $2}' "$@" |
 # sed N joins every 2 lines
 sed 'N;s/\n/ /' |
-column -t |
-sort -u
+sort -k2 -u |
+column -t
