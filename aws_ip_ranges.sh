@@ -79,7 +79,7 @@ if [ -n "$region" ] && [ "$region" != all ]; then
 else
     cat
 fi |
-if [ -n "$service" ]; then
+if [ -n "$service" ] && [ "$service" != all ]; then
     jq -r "select(.service == \"$service\")"
 else
     cat
