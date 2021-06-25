@@ -31,6 +31,7 @@ For each commit in the current branch history, if both:
 
 then both the Author and Committer names and emails are set to <new_name> and <new_email>
 
+<git_options> - passed literally to git filter-branch after -- can use this to only rewrite a revision range, eg. <starting_hashref>..<ending_hashref>
 
 Must be called from the top level directory of the repository
 
@@ -47,7 +48,7 @@ If there is already a git filter-branch rewrite backup in .git/refs/original, gi
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<old_email> <new_email> [<new_name>]"
+usage_args="<old_email> <new_email> [<new_name>] [<git_options>]"
 
 help_usage "$@"
 
@@ -56,6 +57,11 @@ min_args 2 "$@"
 old_email="$1"
 new_email="$2"
 new_name="${3:-}"
+shift || :
+shift || :
+if [ -n "$new_name" ]; then
+    shift || :
+fi
 
 opts=()
 if [ -n "${FORCE_GIT_REWRITE:-}" ]; then
@@ -105,4 +111,4 @@ git filter-branch "${opts[@]}" --tag-name-filter cat --env-filter \
         export GIT_COMMITTER_EMAIL='$new_email'
     fi
     " \
-    -- --all
+    -- --all "$@"
