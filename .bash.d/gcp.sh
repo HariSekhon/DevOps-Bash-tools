@@ -20,7 +20,7 @@
 
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 # adds GCloud CLI tools to $PATH
@@ -44,6 +44,7 @@ alias gke="gcloud container clusters"
 alias gc="gcloud container"
 alias gbs="gcloud builds submit --tag"
 alias bqq="bq query"
+alias gssh="gcloud compute ssh"
 
 # when switching an alias to a function during re-source without un-aliasing, declare function explicitly to avoid errors
 function gcloudconfig(){

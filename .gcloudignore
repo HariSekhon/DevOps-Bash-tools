@@ -20,7 +20,8 @@
 # https://cloud.google.com/sdk/gcloud/reference/topic/gcloudignore
 
 # ============================================
-# Ignore uploading these to Google App Engin, Cloud Build, Cloud Functions
+# Ignore uploading these to Google Cloud Build, Cloud Functions, App Engine etc.
+
 #
 # there is a much bigger list in the adjacent .gitignore, some of which may be worth porting in to here too
 #
@@ -32,6 +33,7 @@
 
 # since .* doesn't work, unlike .dockerignore we must specify the common dot files to exclude below
 
+# .git seems to be ignored by default judging by cloud build uploaded tarball size
 .git/
 .hg/
 .svn/

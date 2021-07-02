@@ -43,7 +43,7 @@ help_usage "$@"
 
 no_more_opts "$@"
 
-awk '/namespace:/{print $2}' "$@" |
+awk '/^[[:space:]]*namespace:[[:space:]]*[a-z0-9]([-a-z0-9]*[a-z0-9])?[[:space:]]*$/{print $2}' "$@" |
 sort -u |
 while read -r namespace; do
     if kubectl get ns "$namespace" &>/dev/null; then

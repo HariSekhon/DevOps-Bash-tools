@@ -317,6 +317,7 @@ etc.
   - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
   - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
   - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
+  - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
   - `aws_kube_creds.sh` - auto-loads all AWS EKS clusters credentials in the current or given --region so your kubectl is ready to rock on AWS
   - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given AWS EKS cluster using config isolation to avoid concurrency race conditions
@@ -849,7 +850,7 @@ etc.
 
 ### See Also:
 
-* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 80+ DevOps CLI tools for AWS, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
+* [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 80+ DevOps CLI tools for AWS, GCP, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
 
 * [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 100+ SQL Scripts - PostgreSQL, MySQL, AWS Athena, Google BigQuery
 
