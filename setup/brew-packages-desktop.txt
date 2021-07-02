@@ -185,6 +185,7 @@ ruby-completion
 screen  # get newer version for -Q switch, will use different sockets directory
 s3cmd
 scalastyle
+skaffold
 skopeo
 shpotify
 snappy
