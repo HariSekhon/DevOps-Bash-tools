@@ -310,8 +310,8 @@ endif
 nmap <silent> ;a :,!anonymize.py -a<CR>
 nmap          ;A :,!hexanonymize.py --case --hex-only<CR>
 nmap <silent> ;b :!git blame "%"<CR>
-nmap <silent> ;c :call ToggleComments()<CR>
-nmap <silent> ;C :,!center.py<CR>
+"nmap <silent> ;c :call ToggleComments()<CR>
+nmap <silent> ;c :,!center.py<CR>
 nmap <silent> ;e :,!center.py -s<CR>
 " parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
