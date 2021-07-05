@@ -20,7 +20,7 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
 # Enables colourized return codes in prompt_func
@@ -56,6 +56,23 @@ new(){
     fi
     command new.pl "$@"
     title "$LAST_TITLE"
+}
+
+# generates bash autocompletion if not available
+# sources bash autocompletion from local standardized path
+autocomplete(){
+    local name="$1"
+    if type -P "$name" &>/dev/null; then
+        # doesn't work
+        # shellcheck disable=SC1090
+        #source <(command "$name" completion bash)
+        if ! [ -f ~/.bash.autocomplete.d/"$name.sh" ]; then
+            mkdir -pv ~/.bash.autocomplete.d
+            command "$name" completion bash > ~/.bash.autocomplete.d/"$name.sh"
+        fi
+        # shellcheck disable=SC1090
+        . ~/.bash.autocomplete.d/"$name.sh"
+    fi
 }
 
 pg(){
@@ -230,7 +247,7 @@ user(){
     read -r -p 'user: ' USERNAME
     export USERNAME
     if [ -z "${PASSWORD:-}" ]; then
-        pass
+        pass PASSWORD
     fi
 }
 
