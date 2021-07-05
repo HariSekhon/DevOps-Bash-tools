@@ -19,8 +19,10 @@
 
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
+# shellcheck disable=SC1090,SC1091
+type autocomplete &>/dev/null || . "$srcdir/.bash.d/functions.sh"
 
 # ==================
 # AWS CLI completion
@@ -40,16 +42,12 @@ alias s3='aws s3'
 alias awl=awless
 alias assh="awless ssh"
 
-if type -P awless &>/dev/null; then
-    # standard completion
-    if ! type _awless_start &>/dev/null; then
-        eval "$(awless completion bash)"
-    fi
-    # make completion work with awl alias above
-    if ! type _awl_start &>/dev/null; then
-        eval "$(awless completion bash | sed 's/awless/awl/g')"
-    fi
+autocomplete awless
+# make completion work with awl alias above
+if ! [ -f ~/.bash.autocomplete.d/awl.sh ]; then
+    sed 's/awless/awl/g' ~/.bash.autocomplete.d/awless.sh > ~/.bash.autocomplete.d/awl.sh
 fi
+autocomplete awl
 
 # ==================
 
