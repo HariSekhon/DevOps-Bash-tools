@@ -62,14 +62,15 @@ new(){
 # sources bash autocompletion from local standardized path
 autocomplete(){
     local name="$1"
-    if type -P "$name" &>/dev/null; then
+    if [ -f ~/.bash.autocomplete.d/"$name.sh" ]; then
+        # shellcheck disable=SC1090
+        . ~/.bash.autocomplete.d/"$name.sh"
+    elif type -P "$name" &>/dev/null; then
         # doesn't work
         # shellcheck disable=SC1090
         #source <(command "$name" completion bash)
-        if ! [ -f ~/.bash.autocomplete.d/"$name.sh" ]; then
-            mkdir -pv ~/.bash.autocomplete.d
-            command "$name" completion bash > ~/.bash.autocomplete.d/"$name.sh"
-        fi
+        mkdir -pv ~/.bash.autocomplete.d
+        command "$name" completion bash > ~/.bash.autocomplete.d/"$name.sh"
         # shellcheck disable=SC1090
         . ~/.bash.autocomplete.d/"$name.sh"
     fi
