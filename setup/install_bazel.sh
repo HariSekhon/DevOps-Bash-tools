@@ -16,7 +16,7 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-BAZEL_VERSION=3.2.0
+BAZEL_VERSION="${1:-3.2.0}"
 
 export PATH="$PATH:$HOME/bin"
 
