@@ -22,7 +22,7 @@ export PATH="$PATH:$HOME/bin"
 
 if type -P bazel &>/dev/null; then
     if bazel version | grep -q "^Build label: $BAZEL_VERSION$"; then
-        echo "Bazel is already installed and the right version"
+        echo "Bazel is already installed and the right version: $BAZEL_VERSION"
         exit 0
     fi
 fi
