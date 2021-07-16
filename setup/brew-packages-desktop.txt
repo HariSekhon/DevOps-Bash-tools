@@ -49,6 +49,7 @@ autossh
 #aws-iam-authenticator
 bash  # version 5, not old version 3 from Apple due to licensing
 bash-completion
+bazel
 brew-cask-completion
 cfssl
 #cfn-lint
