@@ -21,8 +21,10 @@ BAZELISK_VERSION="${1:-1.10.1}"
 export PATH="$PATH:$HOME/bin"
 
 if type -P bazelisk &>/dev/null; then
-    echo "Bazelisk is already installed"
-    exit 0
+    if bazelisk version | grep -q "^Bazelisk version: v$BAZELISK_VERSION$"; then
+        echo "Bazelisk is already installed and the right version: $BAZELISK_VERSION"
+        exit 0
+    fi
 fi
 
 platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
