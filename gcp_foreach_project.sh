@@ -36,8 +36,10 @@ The following command template tokens are replaced in each iteration:
 Project ID:     {id}    {project_id}
 Project Name:   {name}  {project_name}
 
+
 eg.
     ${0##*/} 'echo GCP project has id {id} and name {name}'
+
 
 For a more useful example, see:
 
