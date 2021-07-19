@@ -43,11 +43,11 @@ usage_args=""
 help_usage "$@"
 
 
-aws cloudtrail describe-trails --query 'trailList[*].S3BucketName' |
+aws cloudtrail describe-trails --query 'trailList[*].S3BucketName' --output json |
 jq -r '.[]' |
 while read -r name; do
     printf '%s\t' "$name"
-    output="$(aws s3api get-bucket-logging --bucket "$name" |
+    output="$(aws s3api get-bucket-logging --bucket "$name" --output json |
     jq -r '.LoggingEnabled | [.TargetPrefix, .TargetBucket] | @tsv')"
     if [ -z "$output" ]; then
         echo "S3_ACCESS_LOGGING_NOT_CONFIGURED"
