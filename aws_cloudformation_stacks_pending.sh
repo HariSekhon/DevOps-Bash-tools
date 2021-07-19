@@ -44,6 +44,6 @@ usage_args="[<aws_cli_options>]"
 help_usage "$@"
 
 
-aws cloudformation list-stacks --output json "$@" |
+aws cloudformation list-stacks --output json --no-paginate "$@" |
 jq -r '.StackSummaries[] | [.StackStatus, .StackName, .TemplateDescription] | @tsv' |
 grep -Ev '^([[:alnum:]_]+)?COMPLETE'
