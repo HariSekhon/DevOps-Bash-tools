@@ -42,11 +42,11 @@ help_usage "$@"
 
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails |
+aws cloudtrail describe-trails --output json |
 jq -r '.trailList[].Name' |
 while read -r name; do
     echo -n "$name "
-    aws cloudtrail get-event-selectors --trail-name "$name" |
+    aws cloudtrail get-event-selectors --trail-name "$name" --output json |
     jq -r '.EventSelectors[] | [.IncludeManagementEvents, .ReadWriteType, .DataResources[]] | @tsv'
 done |
 sort |
