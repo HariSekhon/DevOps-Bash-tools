@@ -40,6 +40,6 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws iam list-virtual-mfa-devices |
+aws iam list-virtual-mfa-devices --no-paginate |
 jq -r '.VirtualMFADevices[] | [.User.UserName, .SerialNumber] | @tsv' |
 column -t
