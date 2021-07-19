@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo region is {region}'
+#  args: 'echo region is {region}'
 #
 #  Author: Hari Sekhon
 #  Date: 2021-07-19 14:59:58 +0100 (Mon, 19 Jul 2021)
@@ -35,10 +35,18 @@ All arguments become the command template
 
 The following command template tokens are replaced in each iteration:
 
-Project ID:     {region}
+AWS Region:     {region}
+
 
 eg.
     ${0##*/} 'echo AWS region is {region}'
+
+
+Find EC2 instances across regions:
+
+    ${0##*/} aws ec2 describe-instances
+
+    ${0##*/} 'aws ec2 describe-instances | jq -r \".Reservations | length\"'
 "
 
 # used by usage() in lib/utils.sh
