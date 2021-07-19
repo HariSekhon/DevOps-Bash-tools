@@ -40,6 +40,7 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 echo "Getting policy list" >&2
 policies="$(
