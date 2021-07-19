@@ -48,6 +48,8 @@ buckets="$(aws s3 ls | cut -d' ' -f3-)"
 num_buckets="$(wc -l <<< "$buckets")"
 num_buckets="${num_buckets//[[:space:]]}"
 
+export AWS_DEFAULT_OUTPUT=json
+
 echo "Fetching access logging status for each of $num_buckets buckets (this may take a while):" >&2
 while read -r name; do
     printf '%s\t' "$name"
