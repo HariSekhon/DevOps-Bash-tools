@@ -40,7 +40,7 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws kms list-keys |
+aws kms list-keys --no-paginate |
 jq -r '.Keys[].KeyId' |
 while read -r key; do
     printf '%s\t' "$key"
