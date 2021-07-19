@@ -37,10 +37,14 @@ The following command template tokens are replaced in each iteration:
 
 AWS Region:     {region}
 
+If \$AWS_ALL_REGIONS is defined and not empty then iterates all regions, even those not enabled for the current account
 
-eg.
+
+Examples:
+
     ${0##*/} 'echo AWS region is {region}'
 
+    AWS_ALL_REGIONS=1 ${0##*/} 'echo AWS region is {region}'
 
 Find EC2 instances across regions:
 
@@ -60,7 +64,12 @@ min_args 1 "$@"
 cmd_template="$*"
 
 
-aws ec2 describe-regions |
+# --all-regions iterates all regions whether or not they are enabled for the current account
+if [ -n "${AWS_ALL_REGIONS:-}" ]; then
+    aws ec2 describe-regions --all-regions
+else
+    aws ec2 describe-regions
+fi |
 jq -r '.Regions[] | .RegionName' |
 while read -r region; do
     echo "# ============================================================================ #" >&2
