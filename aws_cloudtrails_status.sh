@@ -40,11 +40,11 @@ help_usage "$@"
 
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails |
+aws cloudtrail describe-trails --output json |
 jq -r '.trailList[] | [.Name, .IsMultiRegionTrail, .LogFileValidationEnabled] | @tsv' |
 while read -r name is_multi_region is_validation_enabled; do
     is_logging="$(
-        aws cloudtrail get-trail-status --name "$name" |
+        aws cloudtrail get-trail-status --name "$name" --output json |
         jq -r '.IsLogging'
     )"
     echo "$name $is_logging $is_multi_region $is_validation_enabled"
