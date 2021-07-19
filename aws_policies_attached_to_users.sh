@@ -49,11 +49,11 @@ prefix_user(){
 
 echo "output will be formatted in to columns at end" >&2
 echo "getting user list" >&2
-aws iam list-users |
+aws iam list-users --output json |
 jq -r '.Users[].UserName' |
 while read -r user; do
     echo "querying user $user" >&2
-    aws iam list-attached-user-policies --user-name "$user" | jq -r '.AttachedPolicies[] | [.PolicyName, .PolicyArn] | @tsv' | prefix_user
-    aws iam list-user-policies --user-name "$user" | jq -r '.PolicyNames[] | [.PolicyName, .PolicyArn] | @tsv' | prefix_user
+    aws iam list-attached-user-policies --user-name "$user" --output json | jq -r '.AttachedPolicies[] | [.PolicyName, .PolicyArn] | @tsv' | prefix_user
+    aws iam list-user-policies --user-name "$user" --output json | jq -r '.PolicyNames[] | [.PolicyName, .PolicyArn] | @tsv' | prefix_user
 done |
 column -t
