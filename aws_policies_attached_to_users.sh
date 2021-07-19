@@ -51,7 +51,7 @@ export AWS_DEFAULT_OUTPUT=json
 
 echo "output will be formatted in to columns at end" >&2
 echo "getting user list" >&2
-aws iam list-users |
+aws iam list-users --no-paginate |
 jq -r '.Users[].UserName' |
 while read -r user; do
     echo "querying user $user" >&2
