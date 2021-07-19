@@ -40,5 +40,5 @@ usage_args=""
 help_usage "$@"
 
 
-aws iam get-account-password-policy |
+aws iam get-account-password-policy --output json |
 jq -r '.PasswordPolicy | to_entries | map(.key + " = " + (.value | tostring)) | .[]'
