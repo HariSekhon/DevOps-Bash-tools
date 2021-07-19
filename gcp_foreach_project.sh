@@ -80,5 +80,4 @@ while read -r project_id project_name; do
     eval "$cmd"
     echo >&2
     echo >&2
-#                                          or projectId
 done
