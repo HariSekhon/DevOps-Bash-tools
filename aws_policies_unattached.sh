@@ -36,6 +36,7 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 aws iam list-policies |
 # get json to allow to filter later
