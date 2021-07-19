@@ -39,6 +39,6 @@ usage_args=""
 help_usage "$@"
 
 
-aws configservice describe-configuration-recorder-status --output json |
+aws configservice describe-configuration-recorder-status --output json --no-paginate |
 jq -r '.ConfigurationRecordersStatus[] | [.name, .recording, .lastStatus] | @tsv' |
 column -t
