@@ -315,6 +315,7 @@ etc.
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
   - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
+  - `aws_foreach_region.sh` - executes a templated command against each AWS region, replacing `{region}` in each iteration
   - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
   - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
   - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
@@ -364,7 +365,7 @@ etc.
       - `gcp_service_apis.sh` - lists all available [GCP](https://cloud.google.com/) Services, APIs and their states (enabled/disabled), and provides `is_service_enabled()` function used throughout the adjacent scripts to avoid errors and only show relevant enabled services
     - `gcp_info_accounts_secrets.sh` - [IAM](https://cloud.google.com/iam) Service Accounts, [Secret Manager](https://cloud.google.com/secret-manager) secrets
   - `gcp_info_all_projects.sh` - same as above but for all detected projects
-  - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, switching `core/project` and replacing `{project_id}` and `{project_name}` in each iteration - powerful, use with care! (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
+  - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, replacing `{project_id}` and `{project_name}` in each iteration (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
   - `gcp_find_orphaned_disks.sh` - lists orphaned disks across one or more GCP projects (not attached to any compute instance)
   - `gcp_secrets_*.sh` - [Google Secret Manager](https://cloud.google.com/secret-manager) scripts:
     - `gcp_secrets_to_kubernetes.sh` - loads GCP secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also `kubernetes_get_secret_values.sh` to debug the actual values that got loaded
@@ -463,7 +464,7 @@ etc.
   - `kubectl.sh` - runs kubectl commands safely fixed to a given context using config isolation to avoid concurrency race conditions
   - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
   - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
-    - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters! Powerful stuff, use with care.
+    - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters!
   - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
   - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
   - `kubeadm_join_cmd.sh` - outputs `kubeadm join` command (generates new token) to join an existing Kubernetes cluster (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
