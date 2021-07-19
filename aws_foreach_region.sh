@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run a command against each AWS region in the current account
+Run a command against each AWS region enabled for the current account
 
 You may want to use this to run an AWS CLI command against all regions to find resources or perform scripting across regions
 
