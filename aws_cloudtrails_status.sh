@@ -38,13 +38,14 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails --output json |
+aws cloudtrail describe-trails |
 jq -r '.trailList[] | [.Name, .IsMultiRegionTrail, .LogFileValidationEnabled] | @tsv' |
 while read -r name is_multi_region is_validation_enabled; do
     is_logging="$(
-        aws cloudtrail get-trail-status --name "$name" --output json |
+        aws cloudtrail get-trail-status --name "$name" |
         jq -r '.IsLogging'
     )"
     echo "$name $is_logging $is_multi_region $is_validation_enabled"
