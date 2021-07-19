@@ -55,6 +55,7 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 echo "output will be formatted in to columns at end" >&2
 echo "getting user list" >&2
