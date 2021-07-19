@@ -38,13 +38,14 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails --output json |
+aws cloudtrail describe-trails |
 jq -r '.trailList[].Name' |
 while read -r name; do
     printf '%s\t' "$name"
-    output="$(aws cloudtrail get-trail-status --name "$name" --output json | jq -r '.LatestcloudwatchLogdDeliveryTime')"
+    output="$(aws cloudtrail get-trail-status --name "$name" | jq -r '.LatestcloudwatchLogdDeliveryTime')"
     if [ -n "$output" ]; then
         echo "$output"
         echo "$output"
