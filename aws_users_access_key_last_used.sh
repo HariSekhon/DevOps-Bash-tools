@@ -55,7 +55,7 @@ if [ $# -gt 0 ]; then
 else
     echo "output will be formatted in to columns at end" >&2
     echo "getting user list" >&2
-    users="$(aws iam list-users | jq -r '.Users[].UserName')"
+    users="$(aws iam list-users --no-paginate | jq -r '.Users[].UserName')"
 fi
 
 while read -r username; do
