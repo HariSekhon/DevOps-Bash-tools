@@ -46,4 +46,4 @@ help_usage "$@"
 
 aws cloudformation list-stacks --output json --no-paginate "$@" |
 jq -r '.StackSummaries[] | [.StackStatus, .StackName, .TemplateDescription] | @tsv' |
-grep -Ev '^([[:alnum:]_]+)?COMPLETE'
+{ grep -Ev '^([[:alnum:]_]+)?COMPLETE' || : ; }
