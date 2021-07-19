@@ -63,12 +63,13 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
+export AWS_DEFAULT_OUTPUT=json
 
 # --all-regions iterates all regions whether or not they are enabled for the current account
 if [ -n "${AWS_ALL_REGIONS:-}" ]; then
-    aws ec2 describe-regions --output json --all-regions
+    aws ec2 describe-regions --all-regions
 else
-    aws ec2 describe-regions --output json
+    aws ec2 describe-regions
 fi |
 jq -r '.Regions[] | .RegionName' |
 while read -r region; do
