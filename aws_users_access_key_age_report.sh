@@ -70,6 +70,8 @@ help_usage "$@"
 #    base64_decode="base64 -d"
 #fi
 
+export AWS_DEFAULT_OUTPUT=json
+
 aws iam get-credential-report --query 'Content' --output text |
 base64 --decode |
 cut -d, -f1,9,10,14,15
