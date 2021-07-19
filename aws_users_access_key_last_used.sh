@@ -48,6 +48,7 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 if [ $# -gt 0 ]; then
     users="$*"
