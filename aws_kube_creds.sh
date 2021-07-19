@@ -50,7 +50,7 @@ usage_args="[<aws_cli_options>]"
 help_usage "$@"
 
 
-aws eks list-clusters "$@" |
+aws eks list-clusters "$@" --output json |
 jq -r '.clusters[]' |
 while read -r cluster; do
     echo "Getting AWS EKS credentials for cluster '$cluster':"
