@@ -39,7 +39,7 @@ usage_args=""
 help_usage "$@"
 
 
-aws cloudtrail describe-trails |
+aws cloudtrail describe-trails --output json |
 # more efficient
 jq -r '.trailList[] | [.Name, has("KmsKeyId"), .KmsKeyId // "N/A"] | @tsv' |
 #jq -r '.trailList[] | [.Name, .KmsKeyId] | @tsv' |
