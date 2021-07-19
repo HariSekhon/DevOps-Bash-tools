@@ -39,6 +39,6 @@ usage_args=""
 help_usage "$@"
 
 
-aws configservice describe-configuration-recorders --output json |
+aws configservice describe-configuration-recorders --output json --no-paginate |
 jq -r '.ConfigurationRecorders[] | [.name, .recordingGroup.allSupported, .recordingGroup.includeGlobalResourceTypes] | @tsv' |
 column -t
