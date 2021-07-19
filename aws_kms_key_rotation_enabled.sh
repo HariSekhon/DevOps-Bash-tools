@@ -38,11 +38,12 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
-aws kms list-keys --output json |
+aws kms list-keys |
 jq -r '.Keys[].KeyId' |
 while read -r key; do
     printf '%s\t' "$key"
-    aws kms get-key-rotation-status --key-id "$key" --output json |
+    aws kms get-key-rotation-status --key-id "$key" |
     jq -r '.KeyRotationEnabled' || :  # continue leaving blank if no permissions on a given key
 done
