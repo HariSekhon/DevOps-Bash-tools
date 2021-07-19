@@ -66,9 +66,9 @@ cmd_template="$*"
 
 # --all-regions iterates all regions whether or not they are enabled for the current account
 if [ -n "${AWS_ALL_REGIONS:-}" ]; then
-    aws ec2 describe-regions --all-regions
+    aws ec2 describe-regions --output json --all-regions
 else
-    aws ec2 describe-regions
+    aws ec2 describe-regions --output json
 fi |
 jq -r '.Regions[] | .RegionName' |
 while read -r region; do
