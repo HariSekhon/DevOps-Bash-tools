@@ -70,7 +70,7 @@ if is_blank "$email"; then
 fi
 
 timestamp "Creating SNS topic to email '$email' in region '$region'"
-output="$(aws sns create-topic --name "$sns_topic" --region "$region")"
+output="$(aws sns create-topic --name "$sns_topic" --region "$region" --output json)"
 
 # "arn:aws:sns:us-east-1:123456789012:AWS_Charges"
 sns_topic_arn="$(jq -r '.TopicArn' <<< "$output")"
