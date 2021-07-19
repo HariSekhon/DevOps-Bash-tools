@@ -40,11 +40,11 @@ help_usage "$@"
 
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails |
+aws cloudtrail describe-trails --output json |
 jq -r '.trailList[].Name' |
 while read -r name; do
     printf '%s\t' "$name"
-    output="$(aws cloudtrail get-trail-status --name "$name" | jq -r '.LatestcloudwatchLogdDeliveryTime')"
+    output="$(aws cloudtrail get-trail-status --name "$name" --output json | jq -r '.LatestcloudwatchLogdDeliveryTime')"
     if [ -n "$output" ]; then
         echo "$output"
         echo "$output"
