@@ -52,6 +52,6 @@ usage_args=""
 help_usage "$@"
 
 
-aws iam get-account-summary |
+aws iam get-account-summary --output json |
 jq -r '.SummaryMap | to_entries | map(.key + " = " + (.value | tostring)) | .[]' |
 sort
