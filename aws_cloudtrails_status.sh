@@ -41,7 +41,7 @@ help_usage "$@"
 export AWS_DEFAULT_OUTPUT=json
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails |
+aws cloudtrail describe-trails --no-paginate |
 jq -r '.trailList[] | [.Name, .IsMultiRegionTrail, .LogFileValidationEnabled] | @tsv' |
 while read -r name is_multi_region is_validation_enabled; do
     is_logging="$(
