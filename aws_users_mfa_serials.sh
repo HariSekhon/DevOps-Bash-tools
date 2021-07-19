@@ -38,6 +38,7 @@ usage_args=""
 
 help_usage "$@"
 
+export AWS_DEFAULT_OUTPUT=json
 
 aws iam list-virtual-mfa-devices |
 jq -r '.VirtualMFADevices[] | [.User.UserName, .SerialNumber] | @tsv' |
