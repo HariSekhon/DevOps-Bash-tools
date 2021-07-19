@@ -46,7 +46,7 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws iam list-users |
+aws iam list-users --no-paginate |
 jq -r '.Users[] | [.UserName, .PasswordLastUsed] | @tsv' |
 #while read -r username password_last_used; do
 #    printf '%s\t%s\n' "$username" "${password_last_used:-N/A}"
