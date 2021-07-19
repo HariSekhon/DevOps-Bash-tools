@@ -54,7 +54,7 @@ MAX_SECONDS=60
 
 # you must run this to generate the report before you can get this info, seems to be ready a couple secs later
 while true; do
-    if aws iam generate-credential-report |
+    if aws iam generate-credential-report --output json |
     jq -r .State |
     tee /dev/stderr |
     grep -q COMPLETE; then
