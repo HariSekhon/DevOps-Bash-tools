@@ -51,8 +51,7 @@ usage_args=""
 
 help_usage "$@"
 
-export AWS_DEFAULT_OUTPUT=json
 
-aws iam get-account-summary |
+aws iam get-account-summary --output=json |
 jq -r '.SummaryMap | to_entries | map(.key + " = " + (.value | tostring)) | .[]' |
 sort
