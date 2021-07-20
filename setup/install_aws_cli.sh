@@ -54,7 +54,15 @@ if type -P aws &>/dev/null; then
     echo "AWS CLI already installed"
 else
     echo "Installing AWS CLI"
-    PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
+    # old AWS CLI v1 - doesn't support AWS SSO
+    #PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
+    pushd /tmp
+    #curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+    wget -c "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
+    unzip -o awscli-bundle.zip
+    # needs to find Python 3 first in the path to work
+    PATH="/usr/local/opt/python/libexec/bin:$PATH" ./awscli-bundle/install -b ~/bin/aws
+    popd
     echo
 fi
 
