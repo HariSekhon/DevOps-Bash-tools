@@ -92,6 +92,7 @@ alias gbrowse=gitbrowse
 alias gb='gitbrowse github'
 alias gl='gitbrowse gitlab'
 alias bb='gitbrowse bitbucket'
+alias azd='gitbrowse azure'
 alias github_actions='gitbrowse github actions'
 alias github_workflows='github_actions'
 alias gha='github_actions'
@@ -158,7 +159,7 @@ gitbrowse(){
                 grep "$filter" |
                 awk '/git@|https:/{print $2}' |
                 head -n1 |
-                sed 's|^ssh://||; s|^git@|| ; s|^|https://|; s/\.git$//;' |
+                sed 's|^ssh://||; s|^https://||; s|^git@|| ; s|^|https://|; s/\.git$//;' |
                 perl -pe 's/:(?!\/\/)/\//')"
     if [ $# -gt 0 ] &&
        [ -z "$url_base" ]; then
