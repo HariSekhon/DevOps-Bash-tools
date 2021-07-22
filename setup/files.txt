@@ -17,6 +17,7 @@
 
 .ansible.cfg
 .athenacli/athenaclirc
+.aws/config
 .aws/shell/awsshellrc
 .aws_customize_environment
 .Codefresh/cli-config/config.yaml
