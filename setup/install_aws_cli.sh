@@ -27,7 +27,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/../lib/ciutils.sh"
+
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/ci.sh"
 
 #if type -P aws &>/dev/null &&
@@ -41,7 +44,6 @@ echo
 echo "Installing AWS CLI tools"
 echo
 
-uname_s="$(uname -s)"
 mkdir -p ~/bin
 
 # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
@@ -58,10 +60,18 @@ else
     #PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
     pushd /tmp
     #curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-    wget -c "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
-    unzip -o awscli-bundle.zip
+    #wget -c "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
+    #unzip -o awscli-bundle.zip
     # needs to find Python 3 first in the path to work
-    PATH="/usr/local/opt/python/libexec/bin:$PATH" ./awscli-bundle/install -b ~/bin/aws
+    #PATH="/usr/local/opt/python/libexec/bin:$PATH" ./awscli-bundle/install -b ~/bin/aws
+    if is_mac; then
+        wget -c "https://awscli.amazonaws.com/AWSCLIV2.pkg" -O "AWSCLIV2.pkg"
+        sudo installer -pkg AWSCLIV2.pkg -target /
+    else
+        wget -c "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
+        unzip -o awscliv2.zip
+        sudo ./aws/install
+    fi
     popd
     echo
 fi
@@ -72,7 +82,7 @@ if type -P ecs-cli &>/dev/null; then
     echo "ECS CLI already installed"
 else
     echo "Installing AWS ECS CLI"
-    if [ "$uname_s" = Darwin ]; then
+    if is_mac; then
         wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-darwin-amd64-latest
     else
         wget -O ~/bin/ecs-cli https://amazon-ecs-cli.s3.amazonaws.com/ecs-cli-linux-amd64-latest
@@ -138,7 +148,7 @@ else
     echo
     set +e
     echo "Installing AWLess"
-    if [ "$uname_s" = Darwin ]; then
+    if is_mac; then
         # this brew install fails on Linux even when brew is installed and works for SAM CLI
         brew tap wallix/awless
         echo
