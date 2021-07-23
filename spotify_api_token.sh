@@ -131,28 +131,21 @@ redirect_uri='http://localhost:12345/callback'
 #
 #output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
 
-if not_blank "${SPOTIFY_PRIVATE:-}"; then
-    # authorization code flow
-    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
-    # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
-    {
-    if is_mac; then
-        open "$url"
-    else
-        echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
-        echo
-        echo "$url"
-        echo
-    fi
+callback_port=12345
 
+callback(){
+    {
     log "waiting to catch callback"
+    local timestamp
     timestamp="$(date '+%F %T')"
+    local netcat_switches
     netcat_switches="-l localhost 12345"
     # GNU netcat has different switches :-/
     # also errors out so we have to ignore its error code
     if nc --version 2>&1 | grep -q GNU; then
-        netcat_switches="-l -p 12345 --close"
+        netcat_switches="-l -p $callback_port --close"
     fi
+    #local response
     # need opt splitting
     # shellcheck disable=SC2086
     response="$(nc $netcat_switches <<EOF || :
@@ -163,6 +156,7 @@ EOF
     )"
     log "callback caught"
 
+    local code
     code="$(grep -Eo "GET.*code=([^?]+)" <<< "$response" | sed 's/.*code=//; s/[&[:space:]].*$//' || :)"
     if is_blank "$code"; then
         echo "failed to parse code, authentication failure or authorization denied?"
@@ -176,13 +170,41 @@ EOF
     #basic_auth_token="$(base64 <<< "$SPOTIFY_ID:$SPOTIFY_SECRET")"
 
     #curl -H "Authorization: Basic $basic_auth_token" -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri" https://accounts.spotify.com/api/token
-    # won't appear in process list
+    # curl_auth.sh prevents auth token appearing in process list
+    local output
     output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/curl_auth.sh" https://accounts.spotify.com/api/token -sSL -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri")"
 
     # output everything that isn't the token to stderr as it's almost certainly user information or errors and we don't want that to be captured by client scripts
     } >&2
+    echo "$output"
+}
+
+# Authorization Code Flow
+if not_blank "${SPOTIFY_PRIVATE:-}"; then
+    # clean up subprocesses to prevent netcat from being left behind as an orphan and blocking future runs
+    # shellcheck disable=SC2064
+    trap "kill -- -$$" EXIT
+    callback | jq -r '.access_token' &
+    sleep 1
+    if ! pgrep -q -P $$; then
+        die "Callback exited prematurely, port $callback_port may have been already bound, not launching authorization to prevent possible credential interception"
+    fi
+    trap -- EXIT
+    {
+    # authorization code flow
+    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
+    # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
+    if is_mac; then
+        open "$url"
+    else
+        echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
+        echo
+        echo "$url"
+        echo
+    fi
+    } >&2
+    wait
+else
+    #die_if_error_field "$output"
+    jq -r '.access_token' <<< "$output"
 fi
-
-#die_if_error_field "$output"
-
-jq -r '.access_token' <<< "$output"
