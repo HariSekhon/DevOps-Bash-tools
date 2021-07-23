@@ -481,6 +481,7 @@ etc.
   - `kubectl_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
   - `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
+  - `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, prompts with a diff of the proposed changes, and then applies if you accept them
   - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
   - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
 
