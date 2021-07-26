@@ -36,6 +36,12 @@ fi
 #alias s3='s3cmd'
 alias s3='aws s3'
 
+# easily set a profile env var
+aws_profile(){
+    export AWS_PROFILE="$*"
+}
+alias awsp=awsprofile
+
 # ==================
 # AWLess completion
 
