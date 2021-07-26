@@ -42,6 +42,18 @@ aws_profile(){
 }
 alias awsp=awsprofile
 
+# loads creds from a CLI cache file (eg. for AWS SSO) into environment variables
+awscreds(){
+    # should be something like ~/.aws/cli/cached/[hash].json
+    local cred_cache_file="$1"
+    AWS_ACCESS_KEY_ID="$(jq -r .Credentials.AccessKeyId < "$cred_cache_file")"
+    AWS_SECRET_ACCESS_KEY="$(jq -r .Credentials.SecretAccessKey < "$cred_cache_file")"
+    AWS_SESSION_TOKEN="$(jq -r .Credentials.SessionToken < "$cred_cache_file")"
+    export AWS_ACCESS_KEY_ID
+    export AWS_SECRET_ACCESS_KEY
+    export AWS_SESSION_TOKEN
+}
+
 # ==================
 # AWLess completion
 
