@@ -91,9 +91,11 @@
 .audacious/log
 .audacious/playlist.xspf
 .awless/
+# AWS Access + Secret keys are stored in here
 .aws/credentials
 .aws/config
 .aws/token
+# SSO Access + Secret Keys & STS are stored in .json files in here
 .aws/cli/cache/
 .aws/shell/
 .bashrc_dynamichosts
