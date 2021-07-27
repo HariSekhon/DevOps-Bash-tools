@@ -177,9 +177,9 @@
 
 [color "diff-highlight"]
   #oldNormal = red bold
-  oldHighlight = normal red
+  oldHighlight = black red
   #newNormal = green bold
-  newHighlight = normal green
+  newHighlight = black green
 
 [diff-so-fancy]
   stripLeadingSymbols = false
