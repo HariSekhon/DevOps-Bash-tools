@@ -54,9 +54,12 @@ min_args 1 "$@"
 check_id="$1"
 shift || :
 
+{
+echo "hour,latency_ms"
 # could set from=<epoch>&to=<epoch> - defaults to 1 week to now
 "$srcdir/pingdom_api.sh" "/summary.hoursofday/$check_id" "$@" |
-jq -r '.hoursofday[] | [.hour, .avgresponse] | @csv' |
+jq -r '.hoursofday[] | [.hour, .avgresponse] | @csv'
+} |
 if [ -n "${TSV:-}" ]; then
     column -t -s , |
     sed 's/"//g'
