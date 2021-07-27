@@ -29,8 +29,9 @@ AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-eu-west-2}"  # XXX: Edit default fallb
 export AWS_DEFAULT_REGION
 export AWS_DEFAULT_OUTPUT=json
 
-# XXX: Edit
+# XXX: Edit, or remove if only have 1 cluster in account, will auto-determine below
 export EKS_CLUSTER="mycluster"
+
 # If EKS_CLUSTER isn't set and there is only one EKS cluster in this account and region, then use it - smart, but slower, prefer setting it explicitly for speed
 if [ -z "${EKS_CLUSTER:-}" ]; then
     eks_clusters=()
