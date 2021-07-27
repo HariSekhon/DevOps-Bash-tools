@@ -46,6 +46,7 @@ if [ -n "${EKS_CLUSTER:-}" ]; then
     # kubectl context is easily created by running adjacent aws_kube_creds.sh script first
     export EKS_CONTEXT="arn:aws:eks:$AWS_DEFAULT_REGION:$AWS_ACCOUNT:cluster/$EKS_CLUSTER"
 
+    # XXX: safer to inline .envrc-kubernetes if you're worried about changes to it bypassing 'direnv allow' authorization
     # shellcheck disable=SC1090
     . "$srcdir/.envrc-kubernetes" "$EKS_CONTEXT"
 fi
