@@ -1,0 +1,40 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2021-07-27 12:42:32 +0100 (Tue, 27 Jul 2021)
+#
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  https://github.com/HariSekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+set -euo pipefail
+[ -n "${debug:-}" ] && set -x
+#srcdir="$(dirname "${bash_source[0]}")"
+
+# XXX: Edit
+export AWS_PROFILE="default"
+
+# XXX: Edit
+export AWS_DEFAULT_REGION="eu-west-2"
+export AWS_DEFAULT_OUTPUT=json
+
+# XXX: Edit
+export EKS_CONTEXT="MYCONTEXT"
+
+# shellcheck disable=SC1090
+. "$srcdir/.envrc-kubernetes" "$EKS_CONTEXT"
+
+# better to load this dynamically from credentials, using functions in .bash.d/aws.sh
+#export AWS_ACCESS_KEY_ID=...
+#export AWS_SECRET_ACCESS_KEY=...
+#export AWS_SESSION_TOKEN=...
+
+#export AWS_CONFIG_FILE=~/.aws/config
+#export AWS_SHARED_CREDENTIALS_FILE=~/.aws/credentials
+#export AWS_MAX_ATTEMPTS=3
