@@ -21,6 +21,8 @@
 #
 # if svn.sh and hg.sh functions are enabled, detects and calls svn and mercurial commands if inside those repos so some of the same commands work dynamically
 
+bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
+
 if [ -f ~/.github_token  ]; then
     GITHUB_TOKEN="$(cat ~/.github_token)"
     export GITHUB_TOKEN
@@ -36,7 +38,7 @@ fi
 
 if ! type basedir &>/dev/null; then
     # shellcheck disable=SC1090
-    . "$(dirname "${BASH_SOURCE[0]}")/functions.sh"
+    . "$bash_tools/.bash.d/functions.sh"
 fi
 
 # set location where you check out all the github repos
