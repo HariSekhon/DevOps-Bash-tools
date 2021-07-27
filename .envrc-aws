@@ -36,7 +36,8 @@ if [ -z "${EKS_CLUSTER:-}" ]; then
     eks_clusters=()
     while IFS='' read -r line; do
         eks_clusters+=("$line")
-    done < <(aws eks list-clusters --output=json | jq -r '.clusters[]')
+    #done < <(aws eks list-clusters --output=json | jq -r '.clusters[]')
+    done < <(aws eks list-clusters --query 'clusters[]' --output text)
     if [ "${#eks_clusters[@]}" -eq 1 ]; then
         export EKS_CLUSTER="${eks_clusters[*]}"
     fi
