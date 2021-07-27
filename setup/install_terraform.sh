@@ -24,6 +24,8 @@ srcdir="$(dirname "$0")"
 #TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.12.29}}"
 TERRAFORM_VERSION="${1:-${TERRAFORM_VERSION:-${VERSION:-0.14.5}}}"
 
+cd /tmp
+
 if [ "$TERRAFORM_VERSION" = all ]; then
     for install_script_version in "$srcdir/"install_terraform[[:digit:]]*.sh; do
         "$install_script_version"
