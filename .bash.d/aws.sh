@@ -43,6 +43,7 @@ aws_profile(){
 alias awsp=awsprofile
 
 # loads creds from a CLI cache file (eg. for AWS SSO) into environment variables
+# better done via direnv
 awscreds(){
     # should be something like ~/.aws/cli/cached/[hash].json
     local cred_cache_file="$1"
@@ -82,14 +83,16 @@ autocomplete awl
 
 # ============================================================================ #
 
+# Old: new direnv now
+#
 # ec2dre - ec2-describe-regions - list regions you have access to and put them here
 # TODO: pull a more recent list and have aliases/functions auto-generated from that to export
-aws_eu(){
-    export EC2_URL=ec2.eu-west-1.amazonaws.com
-}
-aws_useast(){
-    export EC2_URL=ec2.us-east-1.amazonaws.com
-}
+#aws_eu(){
+#    export EC2_URL=ec2.eu-west-1.amazonaws.com
+#}
+#aws_useast(){
+#    export EC2_URL=ec2.us-east-1.amazonaws.com
+#}
 #aws_eu
 
 # ============================================================================ #
