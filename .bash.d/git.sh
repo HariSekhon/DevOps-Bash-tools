@@ -161,8 +161,16 @@ gitbrowse(){
                 grep "$filter" |
                 awk '/git@|https:/{print $2}' |
                 head -n1 |
-                sed 's|^ssh://||; s|^https://||; s|^git@|| ; s|^|https://|; s/\.git$//;' |
+                sed 's|^ssh://||;
+                     s|^https://||;
+                     s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
+                     s|^git@||;
+                     s|^|https://|;
+                     s/\.git$//;' |
                 perl -pe 's/:(?!\/\/)/\//')"
+    if [[ "$url_base" =~ dev.azure.com ]]; then
+        url_base="${url_base%/*}/_git/${url_base##*/}"
+    fi
     if [ $# -gt 0 ] &&
        [ -z "$url_base" ]; then
         echo "git remote url not found for $filter"
