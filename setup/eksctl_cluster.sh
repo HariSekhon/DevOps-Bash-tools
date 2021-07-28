@@ -36,8 +36,9 @@ help_usage "$@"
 "$srcdir/install_eksctl.sh"
 echo
 
+# cluster will be called "eksctl-$name-cluster", in this case "eksctl-test-cluster"
 timestamp "Creating AWS EKS cluster via eksctl"
-eksctl create cluster --name mycluster \
+eksctl create cluster --name test \
                       --version 1.16 \
                       --region us-east-1 \
                       --nodegroup-name standard-workers \
