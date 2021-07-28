@@ -32,7 +32,7 @@ Environment variables to configure:
 EKS_CLUSTER - default: 'test'
 EKS_VERSION - default: 1.21 - you should probably set this to the latest supported to avoid having to upgrade later
 AWS_DEFAULT_REGION - default: 'eu-west-2'
-AWS_ZONES - defaults to zones a and b in AWS_DEFAULT_REGION - may need to tweak them anyway to work around a lack of capacity in zones. Must match AWS_DEFAULT_REGION
+AWS_ZONES - defaults to zones a, b and c in AWS_DEFAULT_REGION - may need to tweak them anyway to work around a lack of capacity in zones. Must match AWS_DEFAULT_REGION
 "
 
 # used by usage() in lib/utils.sh
@@ -54,7 +54,7 @@ timestamp "Creating AWS EKS cluster via eksctl"
 eksctl create cluster --name "${EKS_CLUSTER:-test}" \
                       --version "${EKS_VERSION:-1.21}" \
                       --region "$AWS_DEFAULT_REGION" \
-                      --zones "${AWS_ZONES:-${AWS_DEFAULT_REGION}a,${AWS_DEFAULT_REGION}b}" \
+                      --zones "${AWS_ZONES:-${AWS_DEFAULT_REGION}a,${AWS_DEFAULT_REGION}b,${AWS_DEFAULT_REGION}c}" \
                       --managed \
                       --nodegroup-name standard-workers \
                         --node-type t3.micro \
