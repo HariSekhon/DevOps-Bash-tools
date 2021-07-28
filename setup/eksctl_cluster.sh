@@ -23,6 +23,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Sets up a test AWS EKS cluster using eksctl with 3 worker nodes in a 1-4 node AutoScaling group
+
+Takes about 20 minutes - uses CloudFormation to first create a stack with an EKS cluster management plane, then another stack with a node group,
+and finally configures kubectl config with a context in the form of \$email@\$clustername.\$region.eksctl.io
 "
 
 # used by usage() in lib/utils.sh
