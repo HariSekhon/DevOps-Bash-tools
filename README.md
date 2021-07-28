@@ -377,7 +377,7 @@ etc.
     - `gcp_secrets_update_lable.sh` - updates all GCP secrets in current project matching label key=value with a new label value
     - `gcp_service_account_credential_to_secret.sh` - creates GCP service account and exports a credential key to GCP Secret Manager (useful to stage or combine with `gcp_secrets_to_kubernetes.sh`)
   - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
-    - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current project so your kubectl is ready to rock on GCP
+    - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current / given / all projects so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
     - `gke_cert_manager_firewall_rule.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr and network)
     - `gke_nodepool_nodes.sh` - lists all nodes in a given nodepool on the current GKE cluster via kubectl labels (fast)
