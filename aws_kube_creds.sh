@@ -30,7 +30,7 @@ Requires AWS CLI to be set up and configured, as well as jq
 
 Can supply arguments to be passed to AWS CLI to set things like region eg.
 
-    ${0##*/} --region us-west-1
+    ${0##*/} --region eu-west-2
 
 
 $usage_aws_cli_required
