@@ -163,6 +163,7 @@ gitbrowse(){
                 awk '/git@|https:/{print $2}' |
                 head -n1 |
                 sed 's|^ssh://||;
+                     s|^https://.*@||;
                      s|^https://||;
                      s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
                      s|^git@||;
