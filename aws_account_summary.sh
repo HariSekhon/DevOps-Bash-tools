@@ -47,10 +47,15 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<aws_profile>]"
 
 help_usage "$@"
 
+profile="${1:-}"
+
+if [ -n "$profile" ]; then
+    export AWS_PROFILE="$profile"
+fi
 
 aws iam get-account-summary --output=json |
 jq -r '.SummaryMap | to_entries | map(.key + " = " + (.value | tostring)) | .[]' |
