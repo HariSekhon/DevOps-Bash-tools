@@ -33,6 +33,10 @@ if [ -n "$aws_completer" ]; then
     complete -C "$aws_completer" aws
 fi
 
+autocomplete eksctl
+
+# ==================
+
 #alias s3='s3cmd'
 alias s3='aws s3'
 
