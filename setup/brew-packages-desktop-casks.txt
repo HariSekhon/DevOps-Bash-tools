@@ -13,6 +13,7 @@ docker
 #iterm2
 firefox-developer-edition
 google-chrome
+google-cloud-sdk
 keepassxc
 keka
 minikube
