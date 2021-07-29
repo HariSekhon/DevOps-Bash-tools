@@ -37,7 +37,7 @@ AWS_ZONES - defaults to zones a, b and c in AWS_DEFAULT_REGION - may need to twe
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<cluster_name> <kubernetes_version> <region>]"
 
 help_usage "$@"
 
@@ -46,13 +46,15 @@ help_usage "$@"
 "$srcdir/install_eksctl.sh"
 echo
 
+EKS_CLUSTER="${1:-${EKS_CLUSTER:-test}}"
+EKS_VERSION="${2:-${EKS_VERSION:-1.21}}"
 # set a default here as needed to infer zones if not set
-AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-eu-west2}"
+AWS_DEFAULT_REGION="${3:-${AWS_DEFAULT_REGION:-eu-west2}}"
 
 # cluster will be called "eksctl-$name-cluster", in this case "eksctl-test-cluster"
 timestamp "Creating AWS EKS cluster via eksctl"
-eksctl create cluster --name "${EKS_CLUSTER:-test}" \
-                      --version "${EKS_VERSION:-1.21}" \
+eksctl create cluster --name "$EKS_CLUSTER" \
+                      --version "$EKS_VERSION" \
                       --region "$AWS_DEFAULT_REGION" \
                       --zones "${AWS_ZONES:-${AWS_DEFAULT_REGION}a,${AWS_DEFAULT_REGION}b,${AWS_DEFAULT_REGION}c}" \
                       --managed \
