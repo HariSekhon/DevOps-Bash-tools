@@ -73,7 +73,7 @@ if kubectl diff "$@" <<< "$yaml"; then
 fi
 
 echo
-read -r -p "Deploy the above changes? (y/N) " answer < /dev/tty
+read -r -p "Deploy the above changes? (y/N) " answer < /dev/tty  # < $(tty)
 shopt -s nocasematch
 if [[ ! "$answer" =~ ^y|yes$ ]]; then
     echo "Aborting..."
