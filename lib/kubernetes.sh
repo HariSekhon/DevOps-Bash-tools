@@ -44,7 +44,7 @@ kube_context(){
     local current_context
     current_context="$(kubectl config current-context)"
     if [ "$context" != "$current_context" ]; then
-        kubectl config use-context "$context"
+        kubectl config use-context "$context" >&2
     fi
 }
 
