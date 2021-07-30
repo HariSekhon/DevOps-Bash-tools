@@ -30,6 +30,11 @@ Runs kustomize build, precreates any namespaces, prompts you with a diff to the 
 
 Must be run from the Kustomize directory
 
+Uses adjacent scripts:
+
+    kubectl_diff_apply.sh
+    kubectl_create_namespaces.sh
+
 If a kubectl context is given as an arg, uses adjacent kubectl.sh to prevent race conditions, see kubectl.sh for more details
 "
 
@@ -55,23 +60,25 @@ yaml="$(kustomize build)"
 echo "Pre-creating any namespaces so that diff can succeed"
 "$srcdir/kubectl_create_namespaces.sh" <<< "$yaml"
 
-echo "Diff from live running cluster:"
-echo
+"$srcdir/kubectl_diff_apply.sh" -f - <<< "$yaml"
 
-if kubectl diff -f - <<< "$yaml"; then
-    echo "No changes to deploy"
-    exit 0
-fi
-
-echo
-read -r -p "Deploy the above changes? (y/N) " answer
-shopt -s nocasematch
-if [[ ! "$answer" =~ ^y|yes$ ]]; then
-    echo "Aborting..."
-    exit 1
-fi
-shopt -u nocasematch
-echo
-echo
-
-kubectl apply -f - "$@" <<< "$yaml"
+#echo "Diff from live running cluster:"
+#echo
+#
+#if kubectl diff -f - <<< "$yaml"; then
+#    echo "No changes to deploy"
+#    exit 0
+#fi
+#
+#echo
+#read -r -p "Deploy the above changes? (y/N) " answer
+#shopt -s nocasematch
+#if [[ ! "$answer" =~ ^y|yes$ ]]; then
+#    echo "Aborting..."
+#    exit 1
+#fi
+#shopt -u nocasematch
+#echo
+#echo
+#
+#kubectl apply -f - "$@" <<< "$yaml"
