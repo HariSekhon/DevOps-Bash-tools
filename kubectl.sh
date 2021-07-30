@@ -70,8 +70,6 @@ shift || :
 kube_config_isolate
 
 # switch context if not already the current context (avoids repeating "switching context" output noise when this script it called iteratively in loop by other scripts)
-if [ "$(kubectl config current-context)" != "$CONTEXT" ]; then
-    kubectl config use-context "$CONTEXT" >&2
-fi
+kube_context "$CONTEXT"
 
 kubectl "$@"
