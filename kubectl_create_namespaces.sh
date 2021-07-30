@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Reads kubernetes yaml from stdin, extracts all namespace names and creates the namespaces with kubectl
+Reads kubernetes yaml from stdin, extracts all namespace names and creates the namespaces via kubectl in the current context
 
 This is needed because on blank installs doing something like
 
@@ -33,11 +33,13 @@ fails with an error like:
     Error from server (NotFound): namespaces \"blah\" not found
 
 Instead you can first pipe it through this script to precreate the namespaces so the kubectl diff succeeds
+
+This script is best used as part of other scripts such as kustomize_diff_apply.sh where the kube config and context are isolated and set to avoid race conditions by depending on global kube config which could be concurrently naively changed during execution by other scripts/shells
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<file.yaml> <file2.yaml>]"
+usage_args="[<file.yaml> <file2.yaml> ...]"
 
 help_usage "$@"
 
