@@ -38,6 +38,16 @@ kube_config_isolate(){
     export KUBECONFIG="$kubeconfig"
 }
 
+# run 'kubectl config use-context' only if not already on the disired context, in order to minimize noise
+kube_context(){
+    local context="$1"
+    local current_context
+    current_context="$(kubectl config current-context)"
+    if [ "$context" != "$current_context" ]; then
+        kubectl config use-context "$context"
+    fi
+}
+
 run_static_pod(){
     local name="$1"
     shift || :
