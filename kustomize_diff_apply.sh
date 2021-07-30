@@ -39,13 +39,12 @@ usage_args="<kubectl_context> <kubectl_options>"
 
 help_usage "$@"
 
-kubectl=(kubectl)
-
 context="${1:-}"
 shift || :
 
 if [ -n "$context" ]; then
-    kubectl=("$srcdir/kubectl.sh" "$context")
+    kube_config_isolate
+    kube_context "$context"
 fi
 
 echo "Deploying K8s configs from directory $PWD"
@@ -59,7 +58,7 @@ echo "Pre-creating any namespaces so that diff can succeed"
 echo "Diff from live running cluster:"
 echo
 
-if "${kubectl[@]}" diff -f - <<< "$yaml"; then
+if kubectl diff -f - <<< "$yaml"; then
     echo "No changes to deploy"
     exit 0
 fi
@@ -75,4 +74,4 @@ shopt -u nocasematch
 echo
 echo
 
-"${kubectl[@]}" apply -f - "$@" <<< "$yaml"
+kubectl apply -f - "$@" <<< "$yaml"
