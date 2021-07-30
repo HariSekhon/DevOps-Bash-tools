@@ -26,9 +26,10 @@ Creates a GCP service account for GCloud SDK CLI to avoid having to re-login eve
 
 Grants this service account 'owner' rights to all projects
 
-Creates and downloads a json credential and even prints the command to activate the credential
+Creates and downloads a json credential and even prints the commands to activate the credential
 
-export GOOGLE_CREDENTIALS=\$HOME/.gcloud/\$name-\$project-credential.json
+export GOOGLE_CREDENTIALS=\"\$HOME/.gcloud/\$name-\$project-credential.json\"
+gcloud auth activate-service-account --key-file=\"\$GOOGLE_CREDENTIALS\"
 
 The following optional arguments can be given:
 
@@ -80,4 +81,6 @@ echo
 echo "Set this in your environment to use this long-term credential in your CLI:"
 echo
 echo "export GOOGLE_CREDENTIALS=$keyfile"
+echo
+echo "gcloud auth activate-service-account --key-file=\"\$GOOGLE_CREDENTIALS\""
 echo
