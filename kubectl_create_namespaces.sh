@@ -24,17 +24,20 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Reads kubernetes yaml from stdin, extracts all namespace names and creates the namespaces via kubectl in the current context
 
-This is needed because on blank installs doing something like
-
-    kustomize build | kubectl diff -f -
-
-fails with an error like:
+This is needed because on blank installs doing a 'kubectl diff' can result in the following error:
 
     Error from server (NotFound): namespaces \"blah\" not found
 
-Instead you can first pipe it through this script to precreate the namespaces so the kubectl diff succeeds
+Instead you can first precreate the namespaces if they don't already exist, after which the diff will succeed:
 
-This script is best used as part of other scripts such as kustomize_diff_apply.sh where the kube config and context are isolated and set to avoid race conditions by depending on global kube config which could be concurrently naively changed during execution by other scripts/shells
+    ${0##*/} file.yaml file2.yaml ...
+
+or
+
+    kustomize build | ${0##*/}
+
+
+Since this script applies to the current kubectl context, it is best used as part of other scripts such as kustomize_diff_apply.sh where the kube config and context are isolated and set to avoid race conditions by depending on global kube config which could be concurrently naively changed during execution by other scripts/shells
 "
 
 # used by usage() in lib/utils.sh
@@ -45,10 +48,12 @@ help_usage "$@"
 
 no_more_opts "$@"
 
-awk '/^[[:space:]]*namespace:[[:space:]]*[a-z0-9]([-a-z0-9]*[a-z0-9])?[[:space:]]*$/{print $2}' "$@" |
-sort -u |
-while read -r namespace; do
-    if kubectl get ns "$namespace" &>/dev/null; then
+namespaces="$(awk '/^[[:space:]]*namespace:[[:space:]]*[a-z0-9]([-a-z0-9]*[a-z0-9])?[[:space:]]*$/{print $2}' "$@" | sort -u)"
+
+current_namespaces="$(kubectl get namespaces -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}')"
+
+for namespace in $namespaces; do
+    if grep -Fxq "$namespace" <<< "$current_namespaces"; then
         echo "namespace '$namespace' aleady exists"
     else
         kubectl create namespace "$namespace"
