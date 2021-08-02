@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Prints AWS account summary in 'key = value' pairs for easy viewing / grepping
 
-Useful information in here is whether the root account has MFA enabled and no access keys:
+Useful information in here includes account id, name, root account email is whether the root account has MFA enabled and no access keys:
 
 AccountAccessKeysPresent = 0
 AccountMFAEnabled = 1
@@ -57,6 +57,15 @@ if [ -n "$profile" ]; then
     export AWS_PROFILE="$profile"
 fi
 
-aws iam get-account-summary --output=json |
+export AWS_DEFAULT_OUTPUT=json
+
+account_id="$(aws sts get-caller-identity --query Account --output text | tr -d '\r')"
+echo "AccountID = $account_id"
+account_info="$(aws organizations describe-account --account-id "$account_id")"
+account_name="$(jq -r '.Account.Name' <<< "$account_info")"
+echo "AccountName = $account_name"
+account_email="$(jq -r '.Account.Email' <<< "$account_info")"
+echo "AccountEmail = $account_email"
+aws iam get-account-summary |
 jq -r '.SummaryMap | to_entries | map(.key + " = " + (.value | tostring)) | .[]' |
 sort
