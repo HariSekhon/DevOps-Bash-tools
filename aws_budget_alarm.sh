@@ -22,22 +22,20 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates an AWS Budget with an alarm at 80% forecasted use of total monthly budget
+Creates an AWS Budget with an alarm if forecasted to go over 80% of total monthly budget, and another alarm if over 90% of monthly budget
 
-Creates an SNS topic and subscription for the given email address and links it to the above AWS Budgets Alarm to email you as soon as your billing charges are anticipated to go over the threshold
-
-The alarm is set in the us-east-1 region (N. Virginia in the web console)
+Creates an SNS topic and subscription for the given email address and links it to the above AWS Budgets Alarm to email you as soon as your billing charges are anticipated to go over the threshold. It also modifies the SNS topic's access policy to be accessible from the AWS Budgets service.
 
 
-The first argument sets the alert budget in USD - an alarm is raised once it goes above that amount
-The default budget is 1.00 USD
+The first argument sets the total monthly budget in USD - the 80% and 90% threshold alarms are based on that
+The default budget is 0.00 USD (will trigger a notification on any expenditure)
 
 The second argument sets the email address to use in an SNS topic to notify you.
 If no email is given specified attempts to use the email from your local Git configuration.
 If neither is available, shows this usage mesage.
 
 
-    See the created AWS Budget here (Global):
+See the created AWS Budget here (Global):
 
     https://console.aws.amazon.com/billing/home#/budgets/overview
 
@@ -51,7 +49,7 @@ usage_args="<budget_amount_in_USD> [<email_address>]"
 
 help_usage "$@"
 
-budget="${1:-1.00}"
+budget="${1:-0.00}"
 email="${2:-$(git config user.email || :)}"
 
 region="us-east-1"
