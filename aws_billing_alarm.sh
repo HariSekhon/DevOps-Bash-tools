@@ -36,6 +36,9 @@ The second argument sets the email address to use in an SNS topic to notify you.
 If no email is given specified attempts to use the email from your local Git configuration.
 If neither is available, shows this usage mesage.
 
+XXX: You must also enable Receive Billing Alerts in the Billing Preferences page for the CloudWatch metrics to be populated by AWS Billing:
+
+    https://console.aws.amazon.com/billing/home?#/preferences
 
 See the created alarm here:
 
