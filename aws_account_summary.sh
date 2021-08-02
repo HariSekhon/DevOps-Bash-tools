@@ -61,11 +61,14 @@ export AWS_DEFAULT_OUTPUT=json
 
 account_id="$(aws sts get-caller-identity --query Account --output text | tr -d '\r')"
 echo "AccountID = $account_id"
-account_info="$(aws organizations describe-account --account-id "$account_id")"
-account_name="$(jq -r '.Account.Name' <<< "$account_info")"
-echo "AccountName = $account_name"
-account_email="$(jq -r '.Account.Email' <<< "$account_info")"
-echo "AccountEmail = $account_email"
+# XXX: might not have permissions to run this one, skip it if so
+account_info="$(aws organizations describe-account --account-id "$account_id" || :)"
+if [ -n "$account_info" ]; then
+    account_name="$(jq -r '.Account.Name' <<< "$account_info")"
+    echo "AccountName = $account_name"
+    account_email="$(jq -r '.Account.Email' <<< "$account_info")"
+    echo "AccountEmail = $account_email"
+fi
 aws iam get-account-summary |
 jq -r '.SummaryMap | to_entries | map(.key + " = " + (.value | tostring)) | .[]' |
 sort
