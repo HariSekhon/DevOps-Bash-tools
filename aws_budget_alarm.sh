@@ -28,7 +28,7 @@ Creates an SNS topic and subscription for the given email address and links it t
 
 
 The first argument sets the total monthly budget in USD - the 80% and 90% threshold alarms are based on that
-The default budget is 0.00 USD (will trigger a notification on any expenditure)
+The default budget is 0.01 USD (will trigger a notification on any expenditure)
 
 The second argument sets the email address to use in an SNS topic to notify you.
 If no email is given specified attempts to use the email from your local Git configuration.
@@ -49,7 +49,7 @@ usage_args="<budget_amount_in_USD> [<email_address>]"
 
 help_usage "$@"
 
-budget="${1:-0.00}"
+budget="${1:-0.01}"
 email="${2:-$(git config user.email || :)}"
 
 region="us-east-1"
