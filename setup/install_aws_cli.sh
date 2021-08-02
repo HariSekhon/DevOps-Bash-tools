@@ -66,11 +66,15 @@ else
     #PATH="/usr/local/opt/python/libexec/bin:$PATH" ./awscli-bundle/install -b ~/bin/aws
     if is_mac; then
         wget -c "https://awscli.amazonaws.com/AWSCLIV2.pkg" -O "AWSCLIV2.pkg"
-        sudo installer -pkg AWSCLIV2.pkg -target /
+        # defined in utils.sh lib
+        # shellcheck disable=SC2154
+        $sudo installer -pkg AWSCLIV2.pkg -target /
     else
         wget -c "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
         unzip -o awscliv2.zip
-        sudo ./aws/install
+        # defined in utils.sh lib
+        # shellcheck disable=SC2154
+        $sudo ./aws/install
     fi
     popd
     echo
