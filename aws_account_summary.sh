@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Prints AWS account summary in 'key = value' pairs for easy viewing / grepping
 
-Useful information in here includes account id, name, root account email is whether the root account has MFA enabled and no access keys:
+Useful information includes whether the root account has MFA enabled and no access keys:
 
 AccountAccessKeysPresent = 0
 AccountMFAEnabled = 1
@@ -41,7 +41,8 @@ If you don't have AWS Organizations permissions, you'll probably get an error li
 
     An error occurred (AccessDeniedException) when calling the DescribeAccount operation: You don't have permissions to access this resource.
 
-This may happen for example when you're using an AWS SSO account that doesn't have privileges at the Organization level to describe the account
+This may happen for example when you're using an AWS SSO account that doesn't have privileges at the Organization level to describe the account.
+This can be safely ignored, the rest of the IAM account summary info containing details such as MFA devices, users and policies etc will be there.
 
 
 See Also:
