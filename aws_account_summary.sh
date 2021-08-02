@@ -36,6 +36,14 @@ MFADevicesInUse = 6
 ...
 Users = 14
 
+
+If you don't have AWS Organizations permissions, you'll probably get an error like this, in which case the account name and root account email won't be printed:
+
+    An error occurred (AccessDeniedException) when calling the DescribeAccount operation: You don't have permissions to access this resource.
+
+This may happen for example when you're using an AWS SSO account that doesn't have privileges at the Organization level to describe the account
+
+
 See Also:
 
     aws_users_mfa_active_report.sh (adjacent)
