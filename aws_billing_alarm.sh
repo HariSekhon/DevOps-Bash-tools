@@ -43,6 +43,10 @@ See the created alarm here:
 
 (notice the region must be us-east-1 as per description above)
 
+See Also:
+
+    aws_budget_alarm.sh - newer method of doing this using AWS Budgets
+
 
 $usage_aws_cli_required
 "
