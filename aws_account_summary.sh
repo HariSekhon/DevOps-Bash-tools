@@ -51,6 +51,7 @@ usage_args="[<aws_profile>]"
 
 help_usage "$@"
 
+# XXX: can't set this to account_id as account summary info only works on a profile basis
 profile="${1:-}"
 
 if [ -n "$profile" ]; then
