@@ -1,0 +1,27 @@
+{
+	"BudgetName": "AWS_Charges",
+	"BudgetType": "COST",
+	"BudgetLimit": {
+		"Amount": "<BUDGET>",
+		"Unit": "USD"
+	},
+	"CostFilters": {},
+	"CostTypes": {
+		"IncludeTax": true,
+		"IncludeSubscription": true,
+		"UseBlended": false,
+		"IncludeRefund": false,
+		"IncludeCredit": false,
+		"IncludeUpfront": true,
+		"IncludeRecurring": true,
+		"IncludeOtherSubscription": true,
+		"IncludeSupport": true,
+		"IncludeDiscount": true,
+		"UseAmortized": false
+	},
+	"TimeUnit": "MONTHLY",
+	"TimePeriod": {
+		"Start": "2021-08-01T01:00:00+01:00",
+		"End": "2087-06-15T01:00:00+01:00"
+	}
+}
