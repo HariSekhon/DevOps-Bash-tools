@@ -18,7 +18,37 @@
 	"Notification": {
 	  "NotificationType": "ACTUAL",
 	  "ComparisonOperator": "GREATER_THAN",
-	  "Threshold": 90.0,
+	  "Threshold": 80.0,
+	  "ThresholdType": "PERCENTAGE",
+	  "NotificationState": "ALARM"
+	},
+	"Subscribers": [
+	  {
+		"SubscriptionType": "SNS",
+		"Address": "<SNS_ARN>"
+	  }
+	]
+	},
+	{
+	"Notification": {
+	  "NotificationType": "FORECASTED",
+	  "ComparisonOperator": "GREATER_THAN",
+	  "Threshold": 100.0,
+	  "ThresholdType": "PERCENTAGE",
+	  "NotificationState": "ALARM"
+	},
+	"Subscribers": [
+	  {
+		"SubscriptionType": "SNS",
+		"Address": "<SNS_ARN>"
+	  }
+	]
+	},
+	{
+	"Notification": {
+	  "NotificationType": "ACTUAL",
+	  "ComparisonOperator": "GREATER_THAN",
+	  "Threshold": 100.0,
 	  "ThresholdType": "PERCENTAGE",
 	  "NotificationState": "ALARM"
 	},
