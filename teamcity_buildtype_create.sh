@@ -53,7 +53,7 @@ fi
 timestamp "determining project from build file"
 project="$(jq -r '.project.name' < "$build_file")"
 
-"$srcdir/teamcity_create_project_if_not_exists.sh" "$project"
+"$srcdir/teamcity_create_project.sh" "$project"
 echo
 
 timestamp "uploading build '$build_file' to TeamCity"
