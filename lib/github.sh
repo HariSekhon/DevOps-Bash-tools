@@ -16,7 +16,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "$0")" && pwd)"
+srcdir_github_lib="$(cd "$(dirname "$0")" && pwd)"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
@@ -26,7 +26,7 @@ get_github_user(){
         echo "$GITHUB_USER"
     else
         # get currently authenticated user
-        "$srcdir/../github_api.sh" /user | jq -r .username
+        "$srcdir_github_lib/../github_api.sh" /user | jq -r .username
     fi
 }
 
@@ -37,7 +37,7 @@ get_github_repos(){
     fi
     local page=1
     while true; do
-        if ! output="$("$srcdir/github_api.sh" "/users/$user/repos?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir_github_lib/../github_api.sh" "/users/$user/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
