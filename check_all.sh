@@ -97,6 +97,7 @@ WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
 #. "$srcdir/check_sbt_build.sh"
 
 . "$srcdir/check_bash_syntax.sh"
+. "$srcdir/check_bash_references.sh"
 
 . "$srcdir/check_bash_arrays.sh"
 
