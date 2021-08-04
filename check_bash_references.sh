@@ -22,22 +22,26 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Checks for broken script references in scripts in the current directory, where they are referenced via \$srcdir/scriptname.sh
+Checks for broken script references in scripts in the current or given directories, where they are referenced via \$srcdir/scriptname.sh
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<dirs_to_check>]"
 
 help_usage "$@"
 
-
-for script in $(git grep --max-depth 0 '^[^#]*srcdir/[[:alnum:]_]*.sh' . |
-                grep -o 'srcdir/[[:alnum:]_]*.sh' |
-                sed 's/srcdir/./g' |
-                sort -u); do
-    if ! [ -f "$script" ]; then
-        echo "FAILED to find script $script"
-        exit 1
-    fi
+for x in "${@:-.}"; do
+    pushd "$x" &>/dev/null
+    for script in $(git grep --max-depth 0 '^[^#]*srcdir/[[:alnum:]_]*.sh' -- . |
+                    grep -v "${0##*/}:.*\\\$srcdir/scriptname.sh" |
+                    grep -o 'srcdir/[[:alnum:]_]*.sh' |
+                    sed 's/srcdir/./g' |
+                    sort -u); do
+        if ! [ -f "$script" ]; then
+            echo "FAILED to find script $script"
+            exit 1
+        fi
+    done
+    popd &>/dev/null
 done
