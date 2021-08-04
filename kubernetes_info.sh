@@ -93,12 +93,12 @@ echo
 echo
 echo "# Running container images:"
 echo
-"$srcdir/kubernetes_running_images.sh"
+"$srcdir/kubectl_images.sh"
 echo
 echo
 echo "# Running container image counts:"
 echo
-"$srcdir/kubernetes_running_image_counts.sh"
+"$srcdir/kubectl_image_counts.sh"
 echo
 echo
 # pods might be too numerous with high replica counts and low value info, but there is always a chance that people launched pods without deployments, you can comment it out if you're confident that isn't the case
