@@ -52,7 +52,7 @@ if [ -n "$context" ]; then
     kube_context "$context"
 fi
 
-echo "Deploying K8s configs from directory $PWD"
+echo "Deploying Kustommize kubernetes configs from directory: $PWD"
 echo
 
 yaml="$(kustomize build)"
