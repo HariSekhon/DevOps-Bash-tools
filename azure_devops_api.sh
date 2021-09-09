@@ -40,6 +40,8 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 # Set up a personal access token here:
 
     https://dev.azure.com/\$AZURE_DEVOPS_USER/_usersSettings/tokens
+        or
+    https://dev.azure.com/\$AZURE_DEVOPS_ORGANIZATION/_usersSettings/tokens
 
 
 # API Reference:
