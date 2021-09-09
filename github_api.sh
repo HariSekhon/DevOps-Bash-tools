@@ -65,6 +65,11 @@ Examples:
     ${0##*/} /users/HariSekhon/repos
 
 
+# List an organization's GitHub repos:
+
+    ${0##*/} /orgs/MyOrg/repos
+
+
 # Get the GitHub Actions workflows for a given repo:
 
     ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
