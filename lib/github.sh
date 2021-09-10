@@ -16,7 +16,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir_github_lib="$(cd "$(dirname "$0")" && pwd)"
+srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
