@@ -19,9 +19,6 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
-
-# shellcheck disable=SC1090
 . "$srcdir/lib/github.sh"
 
 # shellcheck disable=SC2034,SC2154
