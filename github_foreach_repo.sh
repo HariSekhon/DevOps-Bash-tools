@@ -30,14 +30,18 @@ Run a command for each original non-fork GitHub repo
 
 All arguments become the command template
 
+\$GITHUB_ORGANIZATION / \$GITHUB_USER - the user or organization to iterate the repos on - if not specified then determines the currently authenticated github user from your \$GITHUB_TOKEN
+
 The command template replaces the following for convenience in each iteration:
 
-{username}, {user}    => your authenticated user
+{organization}, {org} => the organization account being iterated
+{username}, {user}    => the user account being iterated
 {name}                => the repo name without the user prefix
 {repo}                => the repo name with the user prefix
 
 eg.
     ${0##*/} echo user={user} name={name} repo={repo}
+    ${0##*/} echo org={org} name={name} repo={repo}
 "
 
 # used by usage() in lib/utils.sh
@@ -50,17 +54,20 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-user="$(get_github_user)"
+user="${GITHUB_USER:-$(get_github_user)}"
+user_or_org="${GITHUB_ORGANIZATION:-$user}"
 
-get_github_repos "$user" |
+get_github_repos "$user_or_org" "${GITHUB_ORGANIZATION:-}" |
 while read -r name; do
-    repo="$user/$name"
+    repo="$user_or_org/$name"
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
-    cmd="${cmd//\{username\}/$user}"
-    cmd="${cmd//\{user\}/$user}"
+    cmd="${cmd//\{username\}/${user:-}}"
+    cmd="${cmd//\{user\}/${user:-}}"
+    cmd="${cmd//\{organization\}/${GITHUB_ORGANIZATION:-}}"
+    cmd="${cmd//\{org\}/${GITHUB_ORGANIZATION:-}}"
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
