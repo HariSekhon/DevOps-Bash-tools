@@ -38,7 +38,7 @@ The command template replaces the following for convenience in each iteration:
 
 eg.
     ${0##*/} echo user={user} name={name} repo={repo}
-    ${0##*/} echo org={org} name={name} repo={repo}
+    ${0##*/} echo org={org}   name={name} repo={repo}
 "
 
 # used by usage() in lib/utils.sh
