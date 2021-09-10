@@ -26,6 +26,8 @@ Migrates Azure DevOps repos to GitHub
 
 Idempotent - will find missing repos and migrate any missing ones across
 
+If specifying a single repo, can optionally rename the destination repo on GitHub
+
 Requirements:
 
 - Azure DevOps and GitHub credentials in your environment variables - see these adjacent scripts for details:
