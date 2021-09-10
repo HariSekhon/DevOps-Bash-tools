@@ -19,7 +19,7 @@ set -euo pipefail
 srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir_github_lib/../lib/utils.sh"
 
 get_github_user(){
     if [ -n "${GITHUB_USER:-}" ]; then
@@ -35,9 +35,16 @@ get_github_repos(){
     if [ -z "$user" ]; then
         user="$(get_github_user)"
     fi
+    local is_org="${2:-}"
+    local prefix
+    if [ -n "$is_org" ]; then
+        prefix="orgs"
+    else
+        prefix="users"
+    fi
     local page=1
     while true; do
-        if ! output="$("$srcdir_github_lib/../github_api.sh" "/users/$user/repos?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir_github_lib/../github_api.sh" "/$prefix/$user/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
