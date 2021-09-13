@@ -81,6 +81,12 @@ migrate_repo(){
         fi
         git fetch --all
         git push github --all
+        # handles situation where github has added commits to the main branch - only handles the 'main' branch, would be more complicated to figure out which branches
+        #if ! git push github --all; then
+        #    git --work-tree="$PWD" checkout main
+        #    git --work-tree="$PWD" pull github main
+        #    git push github --all
+        #fi
         git push github --tags
         popd >/dev/null
         popd >/dev/null
