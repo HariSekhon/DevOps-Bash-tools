@@ -575,7 +575,7 @@ etc.
   - `github_delete_ssh_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
-  - `github_repos_disable_wiki.sh` - disables the Wiki on one or more given repos to prevent documentation fragmentation and make people use the centralized documentation tool eg. Confluent or Slite
+  - `github_repos_disable_wiki.sh` - disables the Wiki on one or more given repos to prevent documentation fragmentation and make people use the centralized documentation tool eg. Confluence or Slite
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
