@@ -25,6 +25,10 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Disables one or more given Azure DevOps repos (for after a migration to GitHub to prevent writes to the wrong server being left behind)
+
+For authentication and other details see:
+
+    azure_devops_api.sh --help
 "
 
 # used by usage() in lib/utils.sh
