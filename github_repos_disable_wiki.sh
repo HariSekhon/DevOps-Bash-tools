@@ -24,7 +24,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Disables the Wiki on one or more given GitHub repos (to prevent scattered documentation instead of using say Confluent or Slite)
+Disables the Wiki on one or more given GitHub repos (to prevent scattered documentation instead of using say Confluence or Slite)
 
 For authentication and other details see:
 
