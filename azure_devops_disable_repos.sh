@@ -54,7 +54,8 @@ disable_repo(){
     set -euo pipefail
     id="$(jq -e -r .id <<< "$response")"
     timestamp "disabling Azure DevOps organization '$org' project '$project' repo '$repo'"
-    "$srcdir/azure_devops_api.sh" "/$org/$project/_apis/git/repositories/$id?api-version=6.1-preview.1" -X PATCH -d '{"isDisabled": true}'
+    "$srcdir/azure_devops_api.sh" "/$org/$project/_apis/git/repositories/$id?api-version=6.1-preview.1" -X PATCH -d '{"isDisabled": true}' |
+    jq -e -r '[ "Disabled: ", .isDisabled ] | @tsv'
 }
 
 for repo in "$@"; do
