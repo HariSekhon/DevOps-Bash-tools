@@ -32,14 +32,14 @@ cd /tmp
 #fi
 
 date "+%F %T  downloading kubectl"
-curl -sSLO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/$platform/amd64/kubectl"
+wget -O kubectl.$$ "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/$platform/amd64/kubectl"
 
 date "+%F %T  downloaded kubectl"
 date "+%F %T  chmod'ing and moving to ~/bin"
-chmod +x kubectl
+chmod +x kubectl.$$
 mkdir -pv ~/bin
 unalias mv &>/dev/null || :
-mv -vf kubectl ~/bin/
+mv -vf kubectl.$$ ~/bin/kubectl
 echo
 ~/bin/kubectl version --client
 
@@ -51,9 +51,9 @@ echo
 echo
 kubectl_cert_manager="kubectl-cert_manager"
 date "+%F %T  downloading kubectl cert-manager plugin"
-curl -sSLo kubectl-cert-manager.tar.gz "https://github.com/jetstack/cert-manager/releases/download/v$cert_manager_version/kubectl-cert_manager-$platform-amd64.tar.gz"
+curl -sSLo kubectl-cert-manager.$$.tar.gz "https://github.com/jetstack/cert-manager/releases/download/v$cert_manager_version/kubectl-cert_manager-$platform-amd64.tar.gz"
 date "+%F %T  downloaded kubectl cert-manager plugin"
-tar xzf kubectl-cert-manager.tar.gz
+tar xzf kubectl-cert-manager.$$.tar.gz
 date "+%F %T  chmod'ing and moving to ~/bin"
 chmod +x "$kubectl_cert_manager"
 mv -vf "$kubectl_cert_manager" ~/bin/
