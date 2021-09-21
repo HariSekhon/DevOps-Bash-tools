@@ -22,11 +22,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Filter program to generate ArgoCD namespace resource whitelist from a give Kubernetes yaml or Kustomize build output
+Filter program to generate ArgoCD namespace resource whitelist from a given Kubernetes YAML or Kustomize build output
 
-Yaml can be supplied as a file argument or via standard input. If no file is given, waits for stdin like a standard unix filter program
+YAML can be supplied as a file argument or via standard input. If no file is given, waits for stdin like a standard unix filter program
 
-Outputs Yaml for the namespaceResourceWhitelist section of argocd-project.yaml
+Outputs YAML for the namespaceResourceWhitelist section of argocd-project.yaml
 
 A full argocd-project.yaml is already provided at the URL below with all the most common object permissions already populated via the output from this script against my production environment
 
