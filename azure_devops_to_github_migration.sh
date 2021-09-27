@@ -63,7 +63,7 @@ migrate_repo(){
     timestamp "migrating '$azure_repo' -> '$github_repo'"
     if ! "$srcdir/github_api.sh" "/repos/$github_organization/$github_repo" &>/dev/null; then
         timestamp "creating github repo '$github_repo'"
-        "$srcdir/github_api.sh" "/orgs/$github_organization/repos" -X POST -d "{\"name\": \"$github_repo\"}" >/dev/null
+        "$srcdir/github_api.sh" "/orgs/$github_organization/repos" -X POST -d "{\"name\": \"$github_repo\", \"private\": true}" >/dev/null
     fi
     # API seems to not update the size field for ages, just do the clone anyway
     #if "$srcdir/github_api.sh" "/repos/$github_organization/$github_repo" | jq -e '.size == 0' >/dev/null; then
