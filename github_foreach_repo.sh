@@ -68,4 +68,5 @@ while read -r name; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$name}"
     eval "$cmd"
+    echo >&2
 done
