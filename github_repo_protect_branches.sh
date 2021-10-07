@@ -33,11 +33,21 @@ settings='
 }
 '
 
+default_branches_to_protect="
+    main
+    master
+    develop
+    dev
+    staging
+    production
+"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Enables branch protection for one or more branches in the given GitHub repo (prevents deleting the branch or force pushing over it)
 
-If not branch is specified, applies to the 'master', 'main', 'develop' branches by default if they are found in the repo
+If not branch is specified, the applies branches protections to any of the following branches if they're found:
+$default_branches_to_protect
 
 XXX: Beware this could reset certain protection settings on the branch when run, such as enabling/disabling PR approvals due to the way the API bundles them together.
      This is the complete list of settings sent, which you'd need to modify near the top of this code to change:
@@ -77,7 +87,7 @@ if [ $# -gt 0 ]; then
 else
     timestamp "no branches specified, getting branch list"
     branches="$("$srcdir/github_api.sh" "/repos/$org/$repo/branches" | jq -r '.[].name')"
-    for branch in main master develop; do
+    for branch in $default_branches_to_protect; do
         timestamp "checking for branch '$branch'"
         if grep -Fxq "$branch" <<< "$branches"; then
             protect_repo_branch "$branch"
