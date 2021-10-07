@@ -71,7 +71,7 @@ protect_repo_branch(){
 }
 
 if [ $# -gt 0 ]; then
-    for repo in "$@"; do
+    for branch in "$@"; do
         protect_repo_branch "$branch"
     done
 else
