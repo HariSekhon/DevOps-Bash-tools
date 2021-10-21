@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Counts the number of running pods of each name on the current Kubernetes cluster in the current namespace
+Lists Kubernetes pods running counts by name sorted descending on the current Kubernetes cluster in the current namespace
 
 Specify the --namespace or use --all-namespaces to get the total across all namespaces, including the kube-system namespace
 
