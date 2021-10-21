@@ -36,4 +36,5 @@ usage_args="<--namespace blah | --all-namespaces>"
 help_usage "$@"
 
 kubectl get pods "$@" --field-selector status.phase=Running -o jsonpath='{range .items[*]}{range .spec.containers[*]}{.name}{"\n"}' |
-wc -l
+wc -l |
+sed 's/[[:space:]]*//'
