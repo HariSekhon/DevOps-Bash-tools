@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Counts the total number of running pods on the current Kubernetes cluster in the current namespace
 
-Specify the --namespace or use --all-namespaces to get the total across all namespaces, including the kube-system containers
+Specify the --namespace or use --all-namespaces to get the total across all namespaces, including the kube-system namespace
 
 Requires kubectl to be in \$PATH and configured
 "
