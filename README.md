@@ -486,10 +486,9 @@ etc.
   - `kubectl_jobs_delete_stuck.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
   - `kubectl_images.sh` - lists Kubernetes container images running on the current cluster
   - `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
-  - `kubectl_pod_counts.sh` - lists Kubernetes pods running counts by name sorted descending
   - `kubectl_pod_count.sh` - lists Kubernetes pods total running count
-  - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
   - `kubectl_container_count.sh` - lists Kubernetes containers total running count
+  - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
   - `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
   - `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, prompts with a diff of the proposed changes, and then applies if you accept them. See also `kubectl_diff_apply.sh`
   - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
