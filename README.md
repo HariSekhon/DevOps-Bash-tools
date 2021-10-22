@@ -317,7 +317,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to [AWS ECR](https://aws.amazon.com/ecr/) with both Git `hashref` and `latest` tags
+  - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to [AWS ECR](https://aws.amazon.com/ecr/) with both Git `<hashref>` and `latest` tags
   - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
   - `aws_foreach_project.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
   - `aws_foreach_region.sh` - executes a templated command against each AWS region enabled for the current account, replacing `{region}` in each iteration. Combine with AWS CLI or scripts to find resources across regions
