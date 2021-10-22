@@ -28,9 +28,7 @@ usage_description="
 Tags an AWS ECR image with another tag without pulling + pushing the image
 
 If :<tag> isn't given, assumes 'latest'
-
-(this is easier to do on GCP as there is a supported command, hence the reason for this script)
-
+If the environment variable FORCE is set, will remove the new tag reference to ensure the new tagging takes effect
 
 $usage_aws_cli_required
 
@@ -60,12 +58,18 @@ if ! [[ "$image_tag" =~ : ]] &&
     tag="latest"
 fi
 
+
+
 tstamp "getting manifest for image '$image:$tag'"
 manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageTag=$tag" --query 'images[].imageManifest' --output text)"
 
 tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
-aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest"
+if [ -n "${FORCE:-}" ]; then
+    tstamp "deleting new tag reference '$new_tag' if already present to ensure tagging succeeds"
+    aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$new_tag" >/dev/null || :
+fi
+aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" >/dev/null
 
 tstamp "tags for image '$image:$tag' are now:"
 aws ecr describe-images --repository-name "$image" --output json --no-paginate |
-jq -r '.imageDetails[] | select(.imageTags[] == "latest") | .imageTags[]'
+jq -r ".imageDetails[] | select(.imageTags) | select(.imageTags[] == \"$tag\") | .imageTags[]"
