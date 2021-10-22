@@ -22,9 +22,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Builds the local docker image using the Dockerfile and pushes it to the ECR registry and repo
+Builds the local docker image using the Dockerfile in the current directory and pushes it to the AWS ECR registry
 
-Tags the build using the Git hashref as well as 'latest' and pushes both tags to ECR for tracking purposes
+Tags the docker image using the Git full hashref as well as 'latest' and pushes both tags to AWS ECR
 
 Requires AWS CLI to be installed and configured, as well as Docker to be running locally
 "
@@ -40,7 +40,8 @@ min_args 2 "$@"
 ECR="$1"
 REPO="$2"
 
-aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin "$ECR"
+# $AWS_DEFAULT_REGION should be set in env or profile
+aws ecr get-login-password | docker login --username AWS --password-stdin "$ECR"
 
 hashref="$(git rev-parse HEAD)"
 
