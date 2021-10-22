@@ -24,7 +24,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Builds the local docker image using the Dockerfile in the current directory and pushes it to the AWS ECR registry
 
-Tags the docker image using the Git full hashref as well as 'latest' and pushes both tags to AWS ECR
+Tags the docker image using the Git full hashref as well as 'latest', plus any Git tags if found for easy versioning support, and pushes all tags to AWS ECR
 
 Requires AWS CLI to be installed and configured, as well as Docker to be running locally
 "
@@ -44,10 +44,16 @@ REPO="$2"
 aws ecr get-login-password | docker login --username AWS --password-stdin "$ECR"
 
 hashref="$(git rev-parse HEAD)"
+tags="$(git tag --points-at HEAD)"
 
 docker build -t "$ECR/$REPO:$hashref" .
 
-docker tag "$ECR/$REPO:$hashref" "$ECR/$REPO:latest"
+for tag in latest $tags; do
+    docker tag "$ECR/$REPO:$hashref" "$ECR/$REPO:$tag"
+done
 
 docker push "$ECR/$REPO:$hashref"
-docker push "$ECR/$REPO:latest"
+
+for tag in latest $tags; do
+    docker push "$ECR/$REPO:$tag"
+done
