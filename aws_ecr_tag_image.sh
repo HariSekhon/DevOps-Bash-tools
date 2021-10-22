@@ -35,6 +35,8 @@ $usage_aws_cli_required
 
 Similar scripts:
 
+    aws_ecr_tag_image.sh - same as this script but locates the image to tag using a digest
+
     docker_registry_tag_image.sh - for private Docker Registries
 
     gcr_*.sh - scripts for Google Container Registry
