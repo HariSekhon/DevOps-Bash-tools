@@ -59,9 +59,11 @@ if ! [[ "$image_tag" =~ : ]] &&
 fi
 
 
-
 tstamp "getting manifest for image '$image:$tag'"
 manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageTag=$tag" --query 'images[].imageManifest' --output text)"
+if is_blank "$manifest"; then
+    die "ERROR: no manifest returned, did you specify a valid image tag?"
+fi
 
 tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
 if [ -n "${FORCE:-}" ]; then
