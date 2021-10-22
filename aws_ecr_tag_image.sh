@@ -67,11 +67,11 @@ if is_blank "$manifest"; then
     die "ERROR: no manifest returned, did you specify a valid image tag?"
 fi
 
-tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
 if [ -n "${FORCE:-}" ]; then
     tstamp "deleting new tag reference '$new_tag' if already present to ensure tagging succeeds"
     aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$new_tag" >/dev/null || :
 fi
+tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
 aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" >/dev/null
 
 tstamp "tags for image '$image:$tag' are now:"
