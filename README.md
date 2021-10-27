@@ -333,6 +333,7 @@ etc.
   - `aws_policies_attached_to_users.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) directly attached to users (anti-best practice) instead of groups
   - `aws_policies_granting_full_access.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) granting full access (anti-best practice)
   - `aws_policies_unattached.sh` - lists unattached [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html)
+  - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
   - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
