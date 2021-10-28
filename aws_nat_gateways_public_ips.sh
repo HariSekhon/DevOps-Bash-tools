@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the public IP addresses of your AWS NAT Gateways - useful to give a list of IPs to clients to permit through firewalls
+Lists the public IP addresses of your AWS NAT Gateways - useful to give a list of IPs to clients to permit through firewalls for webhooks or similar calls
 "
 
 # used by usage() in lib/utils.sh
