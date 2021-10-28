@@ -33,6 +33,8 @@ usage_args=""
 
 help_usage "$@"
 
-curl -sSL https://dnsjson.com/all.knownips.circleci.com/A.json |
-jq -r '.results.records[]' |
-sort -n
+#curl -sSL https://dnsjson.com/all.knownips.circleci.com/A.json |
+#jq -r '.results.records[]' |
+#sort -n
+
+"$srcdir/dnsjson.sh" all.knownips.circleci.com
