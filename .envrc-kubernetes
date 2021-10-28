@@ -16,8 +16,12 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
+if [ "$1" = "${BASH_SOURCE[0]##*/}" ]; then
+    shift
+fi
+
 # XXX: Edit this - hardcode for localized convenience
-CONTEXT="${1:-MYCONTEXT}"
+CONTEXT="${1:-docker-desktop}"
 # if set will also set the namespace for extra convenience
 NAMESPACE="${2:-}"
 #NAMESPACE="jenkins"
