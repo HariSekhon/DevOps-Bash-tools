@@ -329,6 +329,7 @@ etc.
   - `aws_kube_creds.sh` - auto-loads all AWS EKS clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
   - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given AWS EKS cluster using config isolation to avoid concurrency race conditions
   - `aws_meta.sh` - [AWS EC2 Metadata API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) query shortcut. See also the official [ec2-metadata](https://aws.amazon.com/code/ec2-instance-metadata-query-tool/) shell script with more features
+  - `aws_nat_gateways_public_ips.sh` - lists the public IPs of all NAT gateways. Useful to give to clients to permit through firewalls for webhooks or similar calls
   - `aws_password_policy.sh` - prints [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in `key = value` pairs for easy viewing / grepping (used by `aws_harden_password_policy.sh` before and after to show the differences)
   - `aws_policies_attached_to_users.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) directly attached to users (anti-best practice) instead of groups
   - `aws_policies_granting_full_access.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) granting full access (anti-best practice)
