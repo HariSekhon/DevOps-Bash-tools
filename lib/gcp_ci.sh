@@ -134,7 +134,7 @@ gcloud_builds_submit(){
 }
 
 # yamls contain tag 'latest', we replace this with the build hashref matching the docker images just built as part of the build pipeline
-# Better is to use Jenkins to update the kustomization with the hashref as part of a GitOps workflow
+# Better is to use CI/CD to update the kustomization.yaml with the hashref as part of a GitOps workflow - see my Jenkins shared library https://github.com/HariSekhon/Templates/tree/master/vars
 replace_latest_with_build(){
     local build="$1"
     sed -i "s/\\([[:space:]]newTag:[[:space:]]*\"*\\)latest/\\1$build/g" -- kustomization.yaml
