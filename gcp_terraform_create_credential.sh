@@ -31,7 +31,7 @@ The following optional arguments can be given:
 
 - service account name prefix   (default: \$USER-terraform)
 - credential file path          (default: \$HOME/.gcloud/\$name-\$project-credential.json)
-- project                       (default: \CLOUDSDK_CORE_PROJECT or gcloud config's currently configured project setting core.project)
+- project                       (default: \$CLOUDSDK_CORE_PROJECT or gcloud config's currently configured project setting core.project)
 
 Idempotent - safe to re-run, will skip service accounts and keyfiles that already exist
 "
