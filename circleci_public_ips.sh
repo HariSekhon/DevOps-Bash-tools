@@ -24,12 +24,14 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists CircleCI public IP addresses eg. for autopopulating firewall rules
+Lists CircleCI public IP addresses eg. for auto-populating firewall rules
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args=""
+
+help_usage "$@"
 
 curl -sSL https://dnsjson.com/all.knownips.circleci.com/A.json |
 jq -r '.results.records[]' |
