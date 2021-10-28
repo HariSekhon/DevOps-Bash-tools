@@ -136,7 +136,7 @@ gcloud_builds_submit(){
 # yamls contain tag 'latest', we replace this with the build hashref matching the docker images just built as part of the build pipeline
 replace_latest_with_build(){
     local build="$1"
-    sed -i "s/\\([[:space:]]newTag:[[:space:]]*\"*\\)latest/\1$build/g" -- kustomization.yaml
+    sed -i "s/\\([[:space:]]newTag:[[:space:]]*\"*\\)latest/\\1$build/g" -- kustomization.yaml
     sed -i "s/commit=latest/commit=$build/g" -- kustomization.yaml
 }
 
