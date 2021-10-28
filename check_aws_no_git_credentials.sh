@@ -40,10 +40,10 @@ echo "checking $(pwd)"
 echo
 
 matches="$(git grep -Ei \
-    -e 'AWS_ACCESS_KEY.*=.*[[:alnum:]]+' \
-    -e 'AWS_SECRET_KEY.*=.*[[:alnum:]]+' \
-    -e 'AWS_SECRET_ACCESS_KEY.*=.*[[:alnum:]]+' \
-    -e 'AWS_SESSION_TOKEN.*=.*[[:alnum:]]+' \
+    -e 'AWS_ACCESS_KEY.*=[^$].*[[:alnum:]]+' \
+    -e 'AWS_SECRET_KEY.*=[^$].*[[:alnum:]]+' \
+    -e 'AWS_SECRET_ACCESS_KEY.*=[^$].*[[:alnum:]]+' \
+    -e 'AWS_SESSION_TOKEN.*=[^$].*[[:alnum:]]+' \
     || :
 )"
 if [ -f .gitallowed ]; then
