@@ -9,7 +9,7 @@
         "Service": "budgets.amazonaws.com"
       },
       "Action": "SNS:Publish",
-      "Resource": "<SNS_ARN>"
+      "Resource": "<AWS_SNS_ARN>"
     },
     {
       "Sid": "__default_statement_ID",
@@ -28,10 +28,10 @@
         "SNS:Publish",
         "SNS:Receive"
       ],
-      "Resource": "<SNS_ARN>",
+      "Resource": "<AWS_SNS_ARN>",
       "Condition": {
         "StringEquals": {
-          "AWS:SourceOwner": "<AWS_ACCOUNT>"
+          "AWS:SourceOwner": "<AWS_ACCOUNT_ID>"
         }
       }
     }
