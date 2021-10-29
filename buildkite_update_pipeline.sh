@@ -22,11 +22,9 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034
 usage_description="
-Updates a BuildKite pipeline from a JSON configuration provided either as an argument or on stdin
+Updates a BuildKite pipeline from a full JSON configuration provided either as an argument or on stdin
 
 This JSON file can be created from a configuration downloaded by buildkite_get_pipeline.sh
-
-Used by buildkite_recreate_pipeline.sh to wipe out old history and reset stats
 "
 
 # used by usage() in lib/utils.sh
