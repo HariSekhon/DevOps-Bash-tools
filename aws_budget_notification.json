@@ -10,7 +10,7 @@
 	"Subscribers": [
 	  {
 		"SubscriptionType": "SNS",
-		"Address": "<SNS_ARN>"
+		"Address": "<AWS_SNS_ARN>"
 	  }
 	]
 	},
@@ -25,7 +25,7 @@
 	"Subscribers": [
 	  {
 		"SubscriptionType": "SNS",
-		"Address": "<SNS_ARN>"
+		"Address": "<AWS_SNS_ARN>"
 	  }
 	]
 	},
@@ -40,7 +40,7 @@
 	"Subscribers": [
 	  {
 		"SubscriptionType": "SNS",
-		"Address": "<SNS_ARN>"
+		"Address": "<AWS_SNS_ARN>"
 	  }
 	]
 	},
@@ -55,7 +55,7 @@
 	"Subscribers": [
 	  {
 		"SubscriptionType": "SNS",
-		"Address": "<SNS_ARN>"
+		"Address": "<AWS_SNS_ARN>"
 	  }
 	]
 	}
