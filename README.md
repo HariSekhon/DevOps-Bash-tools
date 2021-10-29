@@ -677,6 +677,7 @@ etc.
   - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
   - `buildkite_cancel_running_builds.sh` - cancels BuildKite running builds (to clear them and restart new later eg. after agent / environment change / fix)
   - `buildkite_pipeline_disable_forked_pull_requests.sh` - disables forked pull request builds on a BuildKite pipeline to protect your build environment from arbitrary code execution security vulnerabilities
+  - `buildkite_pipelines_vulnerable_forked_pull_requests.sh` - prints the status of each pipeline, should all return false, otherwise run the above script to close the vulnerability
   - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of last N cancelled builds in current pipeline
   - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of last N failed builds in current pipeline (eg. after agent restart / environment change / fix)
   - `buildkite_rebuild_all_pipelines_last_cancelled.sh` - triggers rebuilds of the last cancelled build in each pipeline in the organization
