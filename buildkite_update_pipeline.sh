@@ -39,7 +39,7 @@ if [ $# -ge 1 ] && [ -f "$1" ]; then
     pipeline_config="$(cat "$1")"
     shift
 else
-    echo "config file argument not given, reading config from stdin"
+    echo "config file argument not given, reading config from stdin" >&2
     pipeline_config="$(cat)"
 fi
 
