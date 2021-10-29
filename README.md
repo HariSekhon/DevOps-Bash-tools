@@ -699,6 +699,7 @@ etc.
 #### Internet Services
 
 - `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
+- `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
   - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
