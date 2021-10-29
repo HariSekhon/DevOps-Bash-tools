@@ -28,7 +28,7 @@ Extracts the access token from the AWS SSO cache, then uses that to get credenti
 
 If role is 'list', will list the available roles and exit so you can see what roles are valid to enter for that argument.
 
-Account id can be specified via the environment variable \$AWS_ACCOUNT or if \$AWS_PROFILE is set then will attempt to infer from the \$AWS_CONFIG_FILE file (~/.aws/config), otherwise must be specified as a second argument
+Account id can be specified via the environment variable \$AWS_ACCOUNT_ID or if \$AWS_PROFILE is set then will attempt to infer from the \$AWS_CONFIG_FILE file (~/.aws/config), otherwise must be specified as a second argument
 
 
 You must have already logged in first:
@@ -47,7 +47,7 @@ help_usage "$@"
 min_args 1 "$@"
 
 role="$1"
-account_id="${AWS_ACCOUNT:-}"
+account_id="${AWS_ACCOUNT_ID:-}"
 
 if [ -z "$account_id" ]; then
     if [ -n "${AWS_PROFILE:-}" ]; then
