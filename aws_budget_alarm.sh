@@ -108,4 +108,4 @@ if grep -Fxq "$budget_name" <<< "$budgets"; then
 fi
 
 timestamp "Creating AWS Budget with $budget USD budget and 80% forecasted threshold alarm"
-aws budgets create-budget --account-id "$account_id" --budget "$(sed "s/<BUDGET>/$budget/" "$srcdir/aws_budget.json")" --notifications-with-subscribers "$(sed "s/<AWS_SNS_ARN>/$sns_topic_arn/" "$srcdir/aws_budget_notification.json")"
+aws budgets create-budget --account-id "$account_id" --budget "$(sed "s/<AWS_BUDGET_AMOUNT>/$budget/" "$srcdir/aws_budget.json")" --notifications-with-subscribers "$(sed "s/<AWS_SNS_ARN>/$sns_topic_arn/" "$srcdir/aws_budget_notification.json")"
