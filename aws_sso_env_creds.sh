@@ -26,39 +26,41 @@ Gets AWS SSO session credentials as shell export commands for exporting into ano
 
 Extracts the access token from the AWS SSO cache, then uses that to get credentials for the specified role.
 
-If role is 'list', will list the available roles and exit so you can see what roles are valid to enter for that argument.
-
-Account id can be specified via the environment variable \$AWS_ACCOUNT_ID or if \$AWS_PROFILE is set then will attempt to infer from the \$AWS_CONFIG_FILE file (~/.aws/config), otherwise must be specified as a second argument
+If role is 'list', will list the available roles and exit so you can see what roles are valid to enter for that argument, eg. AWSAdministratorAccess or AWSPowerUserAccess
 
 
 You must have already logged in first:
 
     aws sso login
 
+You may want to 'export AWS_PROFILE=...' if you have multiple logged in SSO profiles and want to select the right one.
+
 This script will take the latest creds file from ~/.aws/sso/cache
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<role_name> [<account_id>]"
+usage_args="<role_name>"
 
 help_usage "$@"
 
 min_args 1 "$@"
 
 role="$1"
-account_id="${AWS_ACCOUNT_ID:-}"
+account_id="$(aws sts get-caller-identity --query Account --output text)"
 
-if [ -z "$account_id" ]; then
-    if [ -n "${AWS_PROFILE:-}" ]; then
-        timestamp "attempting to infer account id from AWS Profile '$AWS_PROFILE'"
-        account_id="$(sed -n "/^\\[profile $AWS_PROFILE\\]/,/sso_account_id/p" "${AWS_CONFIG_FILE:-~/.aws/config}" | awk -F= '/sso_account_id/{print $2}')"
-    fi
-fi
-if [ -z "$account_id" ]; then
-    min_args 2 "$@"
-    account_id="$2"
-fi
+#account_id="${AWS_ACCOUNT_ID:-}"
+#
+#if [ -z "$account_id" ]; then
+#    if [ -n "${AWS_PROFILE:-}" ]; then
+#        timestamp "attempting to infer account id from AWS Profile '$AWS_PROFILE'"
+#        account_id="$(sed -n "/^\\[profile $AWS_PROFILE\\]/,/sso_account_id/p" "${AWS_CONFIG_FILE:-~/.aws/config}" | awk -F= '/sso_account_id/{print $2}')"
+#    fi
+#fi
+#if [ -z "$account_id" ]; then
+#    min_args 2 "$@"
+#    account_id="$2"
+#fi
 
 # shellcheck disable=SC2012
 latest_cache="$(ls -tr ~/.aws/sso/cache/* | sed '/botocore/d' | tail -n 1)"
