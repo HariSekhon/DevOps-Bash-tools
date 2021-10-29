@@ -26,7 +26,7 @@ Patches a BuildKite pipeline from a partial JSON configuration provided either a
 
 This JSON can be adapted from the download obtained by buildkite_get_pipeline.sh
 
-Used by buildkite_disable_forked_pull_requests.sh to protect your build environment from arbitrary code execution security vulnerabilities via Pull Requests
+Used by buildkite_pipeline_disable_forked_pull_requests.sh to protect your build environment from arbitrary code execution security vulnerabilities via Pull Requests
 "
 
 # used by usage() in lib/utils.sh
