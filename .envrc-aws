@@ -22,8 +22,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # XXX: Edit - crucial to set to the right environment, the rest of the inferred settings below depend on this
 export AWS_PROFILE="default"
 
-AWS_ACCOUNT="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
-export AWS_ACCOUNT
+AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
+export AWS_ACCOUNT_ID
 AWS_DEFAULT_REGION="$(aws configure get region || :)"  # use region configured in profile by default
 AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-eu-west-2}"  # XXX: Edit default fallback region
 export AWS_DEFAULT_REGION
@@ -46,7 +46,7 @@ fi
 
 if [ -n "${EKS_CLUSTER:-}" ]; then
     # kubectl context is easily created by running adjacent aws_kube_creds.sh script first
-    export EKS_CONTEXT="arn:aws:eks:$AWS_DEFAULT_REGION:$AWS_ACCOUNT:cluster/$EKS_CLUSTER"
+    export EKS_CONTEXT="arn:aws:eks:$AWS_DEFAULT_REGION:$AWS_ACCOUNT_ID:cluster/$EKS_CLUSTER"
 
     # XXX: safer to inline .envrc-kubernetes if you're worried about changes to it bypassing 'direnv allow' authorization
     # shellcheck disable=SC1090
