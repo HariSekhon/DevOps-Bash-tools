@@ -42,9 +42,11 @@ min_args 1 "$@"
 queue="$1"
 hours="${2:-24}"
 
+script_basename="${0##*/}"
+
 "$srcdir/aws_batch_stale_jobs.sh" "$queue" "$hours" |
 jq -r '.[].jobId' |
 while read -r job_id; do
     timestamp "Terminating job '$job_id'"
-    aws batch terminate-job --job-id "$job_id" --reason "Job running longer than $hours hours"
+    aws batch terminate-job --job-id "$job_id" --reason "Job terminated by script $script_basename after running for longer than $hours hours"
 done
