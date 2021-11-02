@@ -50,7 +50,7 @@ epoch_millis="$(date +%s)000"
 
 before_epoch_millis="$((epoch_millis - millis))"
 
-# --filters should work according to docs, but is unrecognized by AWS CLIv2 and doesn't appear in local CLI help either, must be a documentation bug / unsupported:
+# --filters only works on newer versions of CLIv2 so jq processing is more reliable across environments:
 #
 #   https://github.com/aws/aws-cli/issues/6526
 #
