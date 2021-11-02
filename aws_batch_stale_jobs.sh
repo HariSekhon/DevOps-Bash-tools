@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds AWS Batch jobs in a given queue older than N hours (default: 24)
+Lists AWS Batch jobs in a given queue older than N hours (default: 24)
 
 Useful to find jobs that have become too long running, eg. more than 24 hours, or jobs far exceeding their expected time, including jobs that can get stuck with memory allocation errors on shared VMs
 
