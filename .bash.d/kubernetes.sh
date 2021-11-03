@@ -160,8 +160,12 @@ oc(){
 
 kubectl(){
     export KUBERNETES_CLI=kubectl
-    # shellcheck disable=SC2086
-    command kubectl "${kubectl_opts[@]}" "$@"
+    # if empty causes 'bash: kubectl_opts[@]: unbound variable', and can't use "${kubectl_opts[@]:-}" default because this results in a blank arg which ruins commands
+    if [ -n "${kubectl_opts[*]:-}" ]; then
+        command kubectl "${kubectl_opts[@]}" "$@"
+    else
+        command kubectl "$@"
+    fi
 }
 
 k(){
