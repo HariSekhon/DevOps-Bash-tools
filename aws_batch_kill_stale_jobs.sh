@@ -45,8 +45,8 @@ hours="${2:-24}"
 script_basename="${0##*/}"
 
 "$srcdir/aws_batch_stale_jobs.sh" "$queue" "$hours" |
-jq -r '.[].jobId' |
-while read -r job_id; do
-    timestamp "Terminating job '$job_id'"
+jq -r '.[] | [.jobId,.jobName] | @tsv' |
+while read -r job_id job_name; do
+    timestamp "Terminating job id: '$job_id', name: '$job_name'"
     aws batch terminate-job --job-id "$job_id" --reason "Job terminated by script $script_basename after running for longer than $hours hours"
 done
