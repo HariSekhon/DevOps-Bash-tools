@@ -24,9 +24,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists AWS Batch jobs in a given queue older than N hours (default: 24)
 
+Includes jobs stuck in pending and runnable states as these are usually stuck due to an environment/configuration issue if they've been pending for a long time
+
 Useful to find jobs that have become too long running, eg. more than 24 hours, or jobs far exceeding their expected time, including jobs that can get stuck with memory allocation errors on shared VMs
 
-Returns JSON for further processing
+Returns JSON list of jobs for further processing
 
 Requires AWS CLI to be configured and authenticated
 "
@@ -56,7 +58,9 @@ before_epoch_millis="$((epoch_millis - millis))"
 #
 #aws batch list-jobs --job-queue "$queue" --filters "name=BEFORE_CREATED_AT,values=$before_epoch" --no-paginate
 
-aws batch list-jobs --job-queue "$queue" --no-paginate |
-jq ".jobSummaryList[] | select(.createdAt <= $before_epoch_millis)" |
+for state in SUBMITTED PENDING RUNNABLE STARTING RUNNING; do
+    aws batch list-jobs --job-queue "$queue" --job-status "$state" --no-paginate |
+    jq ".jobSummaryList[] | select(.createdAt <= $before_epoch_millis)"
+done |
 # slurp items back into an array
 jq -s .
