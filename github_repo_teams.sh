@@ -40,7 +40,7 @@ For many personal repos where you haven't invited collaborators, you will get no
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo> [<curl_options>]"
+usage_args="<repo>"
 
 help_usage "$@"
 
