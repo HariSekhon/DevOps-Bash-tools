@@ -36,6 +36,7 @@ get_github_repos(){
         user="$(get_github_user)"
     fi
     local is_org="${2:-}"
+    local filter="${3:-.}"
     local prefix
     if [ -n "$is_org" ]; then
         prefix="orgs"
@@ -53,7 +54,7 @@ get_github_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq -r '.[] | select(.fork | not) | .name' <<< "$output"
+        jq -r ".[] | select(.fork | not) | $filter | .name" <<< "$output"
         ((page+=1))
     done
 }
