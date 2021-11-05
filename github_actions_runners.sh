@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2021-11-05 11:50:20 +0000 (Fri, 05 Nov 2021)
+#  Date: 2020-02-12 16:21:52 +0000 (Wed, 12 Feb 2020)
 #
 #  https://github.com/harisekhon/bash-tools
 #
@@ -41,7 +41,7 @@ See Also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo_or_organization> [<runner_config_options>]"
+usage_args="<repo_or_organization>"
 
 help_usage "$@"
 
@@ -55,4 +55,5 @@ if [[ "$repo_or_org" =~ / ]]; then
 else # it's an org
     "$srcdir/github_api.sh" "/orgs/$repo_or_org/actions/runners"
 fi |
-jq -r '.runners[] | [.id, .status, .busy, .os, .name, ([.labels[].name]|join(",")) ] | @tsv'
+jq -r '.runners[] | [.id, .status, .busy, .os, .name, ([.labels[].name]|join(",")) ] | @tsv' |
+column -t
