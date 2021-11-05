@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# https://docs.github.com/en/rest/reference/actions#create-a-registration-token-for-an-organization
+#
+# https://docs.github.com/en/rest/reference/actions#create-a-registration-token-for-a-repository
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -31,13 +35,14 @@ See Also:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo_or_organization>"
+usage_args="<repo_or_organization> [<runner_config_options>]"
 
 help_usage "$@"
 
 min_args 1 "$@"
 
 repo_or_org="$1"
+shift
 
 if [[ "$repo_or_org" =~ / ]]; then
     token="$("$srcdir/github_api.sh" "/repos/$repo_or_org/actions/runners/registration-token" -X POST | jq -r '.token')"
@@ -45,4 +50,10 @@ else # it's an org
     token="$("$srcdir/github_api.sh" "/orgs/$repo_or_org/actions/runners/registration-token" -X POST | jq -r '.token')"
 fi
 
-docker run -ti harisekhon/github-actions-runner --url "https://github.com/$repo_or_org" --token "$token" --unattended
+docker run -ti \
+           --rm \
+           -v /var/run/docker.sock:/var/run/docker.sock \
+           harisekhon/github-actions-runner \
+           --url "https://github.com/$repo_or_org" \
+           --token "$token" \
+           --unattended "$@"
