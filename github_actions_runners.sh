@@ -51,10 +51,11 @@ repo_or_org="$1"
 shift
 
 if [[ "$repo_or_org" =~ / ]]; then
-    "$srcdir/github_api.sh" "/repos/$repo_or_org/actions/runners"
+    prefix="repos"
 else # it's an org
-    "$srcdir/github_api.sh" "/orgs/$repo_or_org/actions/runners"
-fi |
+    prefix="orgs"
+fi
+"$srcdir/github_api.sh" "/$prefix/$repo_or_org/actions/runners" |
 jq -r '.runners[] | [.id, .status, .busy, .os, .name, ([.labels[].name]|join(",")) ] | @tsv' |
 sort -n |
 column -t
