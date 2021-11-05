@@ -56,4 +56,5 @@ else # it's an org
     "$srcdir/github_api.sh" "/orgs/$repo_or_org/actions/runners"
 fi |
 jq -r '.runners[] | [.id, .status, .busy, .os, .name, ([.labels[].name]|join(",")) ] | @tsv' |
+sort -n |
 column -t
