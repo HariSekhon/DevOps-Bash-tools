@@ -27,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads, configures and runs GitHub Actions Runner to run on the local machine
 
+# XXX: WARNING: GitHub advises self-hosted runners only be used for Private repos to prevent arbitrary code execution on your runners via Pull Requests (or you can set 'Allow local actions only' in the Actions Runners configuration in the repo or org)
+
 Repo URL can be supplied via \$GITHUB_ACTIONS_REPO, otherwise attempts to infer from the local checkout's git remote url
 
 Token can be supplied as either first argument or via environment variable \$GITHUB_ACTIONS_RUNNER_TOKEN
