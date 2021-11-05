@@ -28,8 +28,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates a GitHub Actions Runner token for the given Repo or Organization via the GitHub API and then runs a Dockerized GitHub Actions runner with the appropriate configuration
 
-# XXX: WARNING: GitHub advises self-hosted runners only be used for Private repos to prevent arbitrary code execution on your runners via Pull Requests (or you can set 'Allow local actions only' in the Actions Runners configuration in the repo or org)
-
 See Also:
 
     https://github.com/HariSekhon/Kubernetes-configs - for running GitHub Actions Runners in Kubernetes
