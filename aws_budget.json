@@ -2,7 +2,7 @@
 	"BudgetName": "AWS_Charges",
 	"BudgetType": "COST",
 	"BudgetLimit": {
-		"Amount": "<BUDGET>",
+		"Amount": "<AWS_BUDGET_AMOUNT>",
 		"Unit": "USD"
 	},
 	"CostFilters": {},

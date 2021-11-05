@@ -125,7 +125,7 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 [git.io/bash-tools](https://git.io/bash-tools)
 
-550+ DevOps Shell Scripts and Advanced Bash environment.
+600+ DevOps Shell Scripts and Advanced Bash environment.
 
 Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
@@ -310,6 +310,8 @@ etc.
   - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
   - `aws_billing_alarm.sh` - creates a [CloudWatch](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when you incur charges above a given threshold. This is often the first thing you want to do on an account
   - `aws_budget_alarm.sh` - creates an [AWS Budgets](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when both when you start incurring forecasted charges of over 80% of your budget, and 90% actual usage. This is often the first thing you want to do on an account
+  - `aws_batch_stale_jobs.sh` - lists [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
+  - `aws_batch_kill_stale_jobs.sh` - finds and kills [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
   - `aws_cloudtrails_cloudwatch.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their last delivery to [CloudWatch](https://aws.amazon.com/cloudwatch/features/) Logs (should be recent)
   - `aws_cloudtrails_event_selectors.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their event selectors to check each one has at least one event selector
   - `aws_cloudtrails_s3_accesslogging.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) buckets and their Access Logging prefix and target bucket. Checks [S3 access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) is enabled
@@ -587,6 +589,7 @@ etc.
   - `github_repo_stars.sh` - fetches the stars, forks and watcher counts for a given repo
   - `github_repo_teams.sh` - fetches the GitHub Enterprise teams or personal invited collaborators as well as their permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_protect_branches.sh` - enables branch protections on the given repo. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`
+  - `github_repos_public.sh` - lists public repos for a user or organization. Useful to periodically scan and account for any public repos
   - `github_repos_disable_wiki.sh` - disables the Wiki on one or more given repos to prevent documentation fragmentation and make people use the centralized documentation tool eg. Confluence or Slite
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
@@ -671,10 +674,14 @@ etc.
   - `buildkite_pipelines.sh` - lists Buildkite pipelines
   - `buildkite_create_pipeline.sh` - create a Buildkite pipeline from a JSON configuration (like from `buildkite_get_pipeline.sh` or `buildkite_save_pipelines.sh`)
   - `buildkite_get_pipeline.sh` - gets details for a specific Buildkite pipeline in JSON format
+  - `buildkite_update_pipeline.sh` - updates a BuildKite pipeline from a configuration provided via stdin or from a file saved via `buildkite_get_pipeline.sh`
+  - `buildkite_patch_pipeline.sh` - updates a BuildKite pipeline from a partial configuration provided as an arg, via stdin, or from a file saved via `buildkite_get_pipeline.sh`
   - `buildkite_pipeline_skip_settings.sh` - lists the skip intermediate build settings for one or more given BuildKite pipelines
   - `buildkite_pipeline_set_skip_settings.sh` - configures given or all BuildKite pipelines to skip intermediate builds and cancel running builds in favour of latest build
   - `buildkite_cancel_scheduled_builds.sh` - cancels BuildKite scheduled builds (to clear a backlog due to offline agents and just focus on new builds)
   - `buildkite_cancel_running_builds.sh` - cancels BuildKite running builds (to clear them and restart new later eg. after agent / environment change / fix)
+  - `buildkite_pipeline_disable_forked_pull_requests.sh` - disables forked pull request builds on a BuildKite pipeline to protect your build environment from arbitrary code execution security vulnerabilities
+  - `buildkite_pipelines_vulnerable_forked_pull_requests.sh` - prints the status of each pipeline, should all return false, otherwise run the above script to close the vulnerability
   - `buildkite_rebuild_cancelled_builds.sh` - triggers rebuilds of last N cancelled builds in current pipeline
   - `buildkite_rebuild_failed_builds.sh` - triggers rebuilds of last N failed builds in current pipeline (eg. after agent restart / environment change / fix)
   - `buildkite_rebuild_all_pipelines_last_cancelled.sh` - triggers rebuilds of the last cancelled build in each pipeline in the organization
@@ -697,6 +704,7 @@ etc.
 #### Internet Services
 
 - `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
+- `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
   - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API

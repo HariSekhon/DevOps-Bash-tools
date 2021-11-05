@@ -84,14 +84,14 @@ echo
 
 # https://docs.aws.amazon.com/cli/latest/reference/sns/set-topic-attributes.html
 timestamp "Updating access policy on SNS topic '$sns_topic' to allow AWS Budgets to use it"
-aws sns set-topic-attributes --topic-arn "$sns_topic_arn" --attribute-name Policy --attribute-value "$(sed "s/<SNS_ARN>/$sns_topic_arn/; s/<AWS_ACCOUNT>/$account_id/" "$srcdir/aws_budget_sns_access_policy.json")" --region "$region"
+aws sns set-topic-attributes --topic-arn "$sns_topic_arn" --attribute-name Policy --attribute-value "$(sed "s/<AWS_SNS_ARN>/$sns_topic_arn/; s/<AWS_ACCOUNT_ID>/$account_id/" "$srcdir/aws_budget_sns_access_policy.json")" --region "$region"
 
 echo
 
 # https://awscli.amazonaws.com/v2/documentation/api/latest/reference/budgets/create-budget.html
 
 timestamp "Checking for existing AWS Budgets"
-budgets="$(aws budgets describe-budgets --account-id "$AWS_ACCOUNT" --query 'Budgets[*].BudgetName' --output text)"
+budgets="$(aws budgets describe-budgets --account-id "$account_id" --query 'Budgets[*].BudgetName' --output text)"
 
 echo
 
@@ -99,7 +99,7 @@ budget_name="$(jq -r .BudgetName < "$srcdir/aws_budget.json")"
 if grep -Fxq "$budget_name" <<< "$budgets"; then
 	if [ -n "${REPLACE_BUDGET:-}" ]; then
 		timestamp "deleting budget '$budget' to replace it"
-		aws budgets delete-budget --account-id "$AWS_ACCOUNT" --budget-name "$budget_name"
+		aws budgets delete-budget --account-id "$account_id" --budget-name "$budget_name"
 		echo
 	else
 		echo "AWS Budget '$budget' already exists - you must delete it before running this"
@@ -108,4 +108,4 @@ if grep -Fxq "$budget_name" <<< "$budgets"; then
 fi
 
 timestamp "Creating AWS Budget with $budget USD budget and 80% forecasted threshold alarm"
-aws budgets create-budget --account-id "$account_id" --budget "$(sed "s/<BUDGET>/$budget/" "$srcdir/aws_budget.json")" --notifications-with-subscribers "$(sed "s/<SNS_ARN>/$sns_topic_arn/" "$srcdir/aws_budget_notification.json")"
+aws budgets create-budget --account-id "$account_id" --budget "$(sed "s/<AWS_BUDGET_AMOUNT>/$budget/" "$srcdir/aws_budget.json")" --notifications-with-subscribers "$(sed "s/<AWS_SNS_ARN>/$sns_topic_arn/" "$srcdir/aws_budget_notification.json")"
