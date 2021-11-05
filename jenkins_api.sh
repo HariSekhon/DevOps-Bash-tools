@@ -32,8 +32,8 @@ If you require SSL, specify full \$JENKINS_URL
 
 Automatically handles authentication via environment variables:
 
-- \$JENKINS_USERNAME / \$JENKINS_USER
-- \$JENKINS_TOKEN or \$JENKINS_PASSWORD
+- \$JENKINS_USER_ID / \$JENKINS_USERNAME / \$JENKINS_USER
+- \$JENKINS_API_TOKEN / \$JENKINS_TOKEN  / \$JENKINS_PASSWORD
 
 If using JENKINS_PASSWORD, obtains the Jenkins-Crumb cookie from a pre-request
 
@@ -65,7 +65,8 @@ fi
 shopt -u nocasematch
 JENKINS_URL="${JENKINS_URL%%/}"
 
-export USERNAME="${JENKINS_USERNAME:-${JENKINS_USER:-}}"
+export USERNAME="${JENKINS_USER_ID:${JENKINS_USERNAME:-${JENKINS_USER:-}}}"
+JENKINS_TOKEN="${JENKINS_API_TOKEN:-${JENKINS_TOKEN:-}}"
 if [ -n "${JENKINS_TOKEN:-}" ]; then
     export PASSWORD="$JENKINS_TOKEN"
 else
