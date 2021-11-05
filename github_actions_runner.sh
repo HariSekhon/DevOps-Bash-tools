@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates a GitHub Actions Runner token for the given Repo or Organization via the GitHub API and then run a Dockerized GitHub Actions runner with the appropriate configuration
+Generates a GitHub Actions Runner token for the given Repo or Organization via the GitHub API and then runs a Dockerized GitHub Actions runner with the appropriate configuration
 "
 
 # used by usage() in lib/utils.sh
