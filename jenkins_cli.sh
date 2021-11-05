@@ -40,8 +40,9 @@ if [ -z "${JENKINS_URL:-}" ]; then
     export JENKINS_URL="$http://$host:$port"
 fi
 
-JENKINS_USER="${JENKINS_USER:-admin}"
+JENKINS_USER="${JENKINS_USER_ID:-${JENKINS_USER:-admin}}"
 
+JENKINS_PASSWORD="${JENKINS_API_TOKEN:-${JENKINS_TOKEN:-${JENKINS_PASSWORD:-}}}"
 if [ -z "${JENKINS_PASSWORD:-}" ]; then
     JENKINS_PASSWORD="$("$srcdir/jenkins_password.sh" || :)"
 fi
