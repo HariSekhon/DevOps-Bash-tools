@@ -45,10 +45,11 @@ repo_or_org="$1"
 shift
 
 if [[ "$repo_or_org" =~ / ]]; then
-    token="$("$srcdir/github_api.sh" "/repos/$repo_or_org/actions/runners/registration-token" -X POST | jq -r '.token')"
+    prefix="repos"
 else # it's an org
-    token="$("$srcdir/github_api.sh" "/orgs/$repo_or_org/actions/runners/registration-token" -X POST | jq -r '.token')"
+    prefix="orgs"
 fi
+token="$("$srcdir/github_api.sh" "/$prefix/$repo_or_org/actions/runners/registration-token" -X POST | jq -r '.token')"
 
 docker run -ti \
            --rm \
