@@ -34,7 +34,7 @@ If running manually then these environment variables must be set:
 \$JENKINS_USER_ID / \$JENKINS_USER
 \$JENKINS_API_TOKEN / \$JENKINS_TOKEN /\$JENKINS_PASSWORD
 
-Only finds and checks files called '*Jenkinsfiles*' in the directory paths given, or the current directory tree if no dirs are specified as args
+Only finds and checks files that match the name glob '*Jenkinsfile*' in the directory paths given, or under the current directory tree if no dirs are specified as args
 
 Limitation: the validator doesn't recognized parameterized pipelines imported via a Jenkins Shared Library. Such valid Jenkinsfiles fail validation with this error: \"did not contain the 'pipeline' step'\"
 "
