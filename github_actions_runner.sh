@@ -27,7 +27,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads, configures and runs GitHub Actions Runner
 
-Token can be supplied as either first argument or via environment variable \$GITHUB_ACTIONS_RUNNER_VERSION
+Token can be supplied as either first argument or via environment variable \$GITHUB_ACTIONS_RUNNER_TOKEN
+
+Version can be specified via the environment variable \$GITHUB_ACTIONS_RUNNER_VERSION
 
 Repo is taken from either \$GITHUB_ACTIONS_REPO or inferred from first github remote from local repo
 "
@@ -38,7 +40,7 @@ usage_args="[<GITHUB_ACTIONS_RUNNER_TOKEN>]"
 
 help_usage "$@"
 
-VERSION="${GITHUB_ACTIONS_RUNNER_VERSION:-${GITHUB_ACTIONS_VERSION:-${VERSION:-2.168.0}}}"
+VERSION="${GITHUB_ACTIONS_RUNNER_VERSION:-${GITHUB_ACTIONS_VERSION:-${VERSION:-2.284.0}}}"
 
 GITHUB_ACTIONS_RUNNER_TOKEN="${1:-${GITHUB_ACTIONS_RUNNER_TOKEN:-}}"
 
