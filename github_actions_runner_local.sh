@@ -25,13 +25,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Downloads, configures and runs GitHub Actions Runner
+Downloads, configures and runs GitHub Actions Runner to run on the local machine
+
+Repo URL can be supplied via \$GITHUB_ACTIONS_REPO, otherwise attempts to infer from the local checkout's git remote url
 
 Token can be supplied as either first argument or via environment variable \$GITHUB_ACTIONS_RUNNER_TOKEN
 
 Version can be specified via the environment variable \$GITHUB_ACTIONS_RUNNER_VERSION
-
-Repo is taken from either \$GITHUB_ACTIONS_REPO or inferred from first github remote from local repo
 "
 
 # used by usage() in lib/utils.sh
