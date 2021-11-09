@@ -502,7 +502,7 @@ _gitaddimport() {
     local filenames
     filenames="$(strip_basedirs "$basedir" "$@")";
     while read -r filename; do
-        if ! [ -f "$filename" ]; then
+        if ! [ -e "$filename" ]; then
             echo "ERROR: $filename does not exist" >&2
             return 1
         elif git status -s "$filename" | grep -q '^[?A]'; then
