@@ -575,6 +575,7 @@ etc.
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_actions_runner.sh` - generates a [GitHub Actions](https://github.com/features/actions) self-hosted runner token for a given Repo or Organization via the GitHub API and then runs a dockerized GitHub Actions runner with the appropriate configuration
   - `github_actions_runner_local.sh` - downloads, configures and runs a local GitHub Actions Runner for Linux or Mac
+  - `github_actions_runner_token.sh` - generates a GitHub Actions runner token to register a new self-hosted runner
   - `github_actions_runners.sh` - lists GitHub Actions self-hosted runners for a given Repo or Organization
   - `github_actions_delete_offline_runners.sh` - deletes offline GitHub Actions self-hosted runners. Useful to clean up short-lived runners eg. Docker, Kubernetes
   - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
