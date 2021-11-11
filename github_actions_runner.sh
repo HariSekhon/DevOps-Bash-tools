@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: harisekhon/spark-apps
 #
 #  Author: Hari Sekhon
 #  Date: 2021-11-05 04:25:16 +0000 (Fri, 05 Nov 2021)
@@ -44,12 +45,7 @@ min_args 1 "$@"
 repo_or_org="$1"
 shift
 
-if [[ "$repo_or_org" =~ / ]]; then
-    prefix="repos"
-else # it's an org
-    prefix="orgs"
-fi
-token="$("$srcdir/github_api.sh" "/$prefix/$repo_or_org/actions/runners/registration-token" -X POST | jq -r '.token')"
+token="$("$srcdir/github_actions_runner_token.sh" "$repo_or_org")"
 
 docker run -ti \
            --rm \
