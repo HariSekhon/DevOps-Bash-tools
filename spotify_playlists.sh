@@ -67,16 +67,17 @@ fi
 
 shift || :
 
-if not_blank "${SPOTIFY_PRIVATE:-}"; then
-    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
-    # $limit/$offset defined in lib/spotify.sh
-    # shellcheck disable=SC2154
-    url_path="/v1/me/playlists?limit=$limit&offset=0"  # never use $offset - it will prevent playlists being found
-else
+# redirects to fetching your own playlists instead of the named user if you happen to have the a stronger spotify private access token
+#if not_blank "${SPOTIFY_PRIVATE:-}"; then
+#    # /v1/me/playlists gets an authorization error and '/v1/users/me/playlists' returns the wrong user, an actual literal user called 'me'
+#    # $limit/$offset defined in lib/spotify.sh
+#    # shellcheck disable=SC2154
+#    url_path="/v1/me/playlists?limit=$limit&offset=0"  # never use $offset - it will prevent playlists being found
+#else
     # $limit/$offset defined in lib/spotify.sh
     # shellcheck disable=SC2154
     url_path="/v1/users/$spotify_user/playlists?limit=$limit&offset=0"  # never use $offset
-fi
+#fi
 
 output(){
     jq '.items[]' <<< "$output" |
