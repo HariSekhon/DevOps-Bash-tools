@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -34,6 +34,10 @@ usage_args="<playlist_name_or_id>"
 help_usage "$@"
 
 min_args 1 "$@"
+
+export SPOTIFY_PRIVATE=1
+
+spotify_token
 
 timestamp "calling spotify_delete_duplicates_in_playlist.sh:"
 "$srcdir/spotify_delete_duplicates_in_playlist.sh" "$@"
