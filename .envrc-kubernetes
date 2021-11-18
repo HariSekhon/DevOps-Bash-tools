@@ -60,8 +60,11 @@ else
 " >&2
 fi
 
-kubectl config use-context "$CONTEXT"
+if command -v kubectl &>/dev/null &&
+     kubectl config get-contexts -o name | grep -Fxq "$CONTEXT"; then
+    kubectl config use-context "$CONTEXT"
 
-if [ -n "${NAMESPACE:-}" ]; then
-    kubectl config set-context "$CONTEXT" --namespace "$NAMESPACE"
+    if [ -n "${NAMESPACE:-}" ]; then
+        kubectl config set-context "$CONTEXT" --namespace "$NAMESPACE"
+    fi
 fi
