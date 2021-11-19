@@ -7,6 +7,8 @@
 
 # tap                   package
 
+FairwindsOps/tap        polaris
+
 # do via install script to load token
 #buildkite/buildkite     buildkite
 
