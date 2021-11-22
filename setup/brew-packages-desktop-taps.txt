@@ -8,6 +8,7 @@
 # tap                   package
 
 FairwindsOps/tap        polaris
+FairwindsOps/tap        pluto
 
 # do via install script to load token
 #buildkite/buildkite     buildkite
