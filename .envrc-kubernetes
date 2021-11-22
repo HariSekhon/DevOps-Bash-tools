@@ -61,7 +61,7 @@ else
 fi
 
 if command -v kubectl &>/dev/null &&
-     kubectl config get-contexts -o name | grep -Fxq "$CONTEXT"; then
+     kubectl config get-contexts -o name 2>/dev/null | grep -Fxq "$CONTEXT"; then
     kubectl config use-context "$CONTEXT"
 
     if [ -n "${NAMESPACE:-}" ]; then
