@@ -24,9 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Reads a value from the command line and saves it to AWS Secrets Manager without echo'ing it on the screen
 
-first argument is used as name - if not given prompts for it
-second argument is used as value - if not given prompts for it (recommended for secrets)
-third or more args are passed to 'aws secretsmanager'
+First argument is used as secret name - if not given prompts for it
+Second argument is used as secret string value - if not given prompts for it with a non-echo'ing prompt (recommended)
+Third or more args are passed to 'aws secretsmanager'
 
 
 $usage_aws_cli_required
