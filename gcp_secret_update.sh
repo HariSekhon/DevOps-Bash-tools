@@ -41,22 +41,11 @@ help_usage "$@"
 min_args 1 "$@"
 
 name="$1"
+secret="${2:-}"
 shift || :
 
-if [ -z "$value" ]; then
-    # doesn't echo, let's print a star per character instead as it's nicer feedback
-    #read -s -p "Enter value: " value
-
-    value=""
-    prompt="Enter value: "
-    while IFS= read -p "$prompt" -r -s -n 1 char; do
-        if [[ "$char" == $'\0' ]]; then
-            break
-        fi
-        prompt='*'
-        value="${value}${char}"
-    done
-    echo
+if [ -z "$secret" ]; then
+    read_secret
 fi
 
-gcloud secrets versions add "$name" --data-file - "$@" <<< "$value"
+gcloud secrets versions add "$name" --data-file - "$@" <<< "$secret"
