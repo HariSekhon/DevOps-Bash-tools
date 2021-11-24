@@ -164,7 +164,9 @@ alias ht='headtail.py'
 # ============================================================================ #
 
 export github=~/github
-alias github="sti github; cd $github";
+alias github="sti github; cd '$github'";
+export work="$github/work"
+alias work="sti work; cd '$work'"
 
 export bitbucket=~/bitbucket
 alias bitb='cd $bitbucket'
