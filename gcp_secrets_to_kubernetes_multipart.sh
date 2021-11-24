@@ -55,13 +55,6 @@ project="$(gcloud config list --format='get(core.project)' || :)"
 export CLOUDSDK_CORE_PROJECT="${CLOUDSDK_CORE_PROJECT:-$project}"
 not_blank "$CLOUDSDK_CORE_PROJECT" || die "ERROR: \$CLOUDSDK_CORE_PROJECT / GCloud SDK config core.project value not set"
 
-get_latest_version(){
-    local secret="$1"
-    gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' |
-    sort -k1nr |
-    head -n1
-}
-
 namespace="$1"
 kubernetes_secret="$2"
 shift || :
@@ -76,9 +69,7 @@ fi
 kubectl_cmd="kubectl create secret generic '$kubernetes_secret' -n '$namespace'"
 
 for gcp_secret; do
-    latest_secret_version="$(get_latest_version "$gcp_secret")"
-
-    value="$(gcloud secrets versions access "$latest_secret_version" --secret="$gcp_secret")"
+    value="$("$srcdir/gcp_secret_get.sh" "$secret")"
 
     # this is all really annoying because there is no right answer to this convention
     # because GCP Secret Manager won't let you use dots so mangle jwt-private-pem => jwt-private.pem
