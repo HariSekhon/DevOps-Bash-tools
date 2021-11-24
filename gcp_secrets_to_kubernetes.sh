@@ -71,13 +71,6 @@ current_cluster="$(awk '{print $3}' <<< "$kubectl_context")"
 current_namespace="$(awk '{print $5}' <<< "$kubectl_context")"
 current_namespace="${current_namespace:-default}"
 
-get_latest_secret_version(){
-    local secret="$1"
-    gcloud secrets versions list "$secret" --filter='state = enabled' --format='value(name)' |
-    sort -k1nr |
-    head -n1
-}
-
 load_secret(){
     local secret="$1"
     local namespace
@@ -91,14 +84,15 @@ load_secret(){
             timestamp "kubernetes secret '$secret' already exists in namespace '$namespace', skipping creation..."
             return
         fi
-        # secrets created without a value are an odd use case but it has happened, so ignore and load blank value
-        latest_version="$(get_latest_secret_version "$secret" || :)"
-        if [ -n "$latest_version" ]; then
-            value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
-        else
-            timestamp "WARNING: no versions found for GCP secret '$secret', using blank secret value"
-            value=""
-        fi
+        ## secrets created without a value are an odd use case but it has happened, so ignore and load blank value
+        #latest_version="$(get_latest_secret_version "$secret" || :)"
+        #if [ -n "$latest_version" ]; then
+        #    value="$(gcloud secrets versions access "$latest_version" --secret="$secret")"
+        #else
+        #    timestamp "WARNING: no versions found for GCP secret '$secret', using blank secret value"
+        #    value=""
+        #fi
+        value="$("$srcdir/gcp_secret_get.sh" "$secret")"
         timestamp "creating kubernetes secret '$secret' in namespace '$namespace'"
         # kubectl create secret automatically base64 encodes the $value
         # if you did this in yaml you'd have to base64 encode it yourself in the yaml
