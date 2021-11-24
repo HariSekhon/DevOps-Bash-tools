@@ -342,6 +342,8 @@ etc.
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
   - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/). Useful for uploading a password without exposing it on your screen
   - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) secret. Useful for uploading a password without exposing it on your screen
+  - `aws_secret_get.sh` - gets a secret value for a given secret from AWS Secrets Manager
+  - `aws_secrets_list.sh` - returns a list of AWS Secrets Manager secrets, one per line
   - `aws_users.sh` - list your [AWS IAM](https://aws.amazon.com/iam/) users
   - `aws_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
   - `aws_users_access_key_age_report.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age using a bulk credentials report (faster for many users)
