@@ -24,8 +24,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Reads a value from the command line and saves it to AWS Systems Manager Parameter Store
 
-usage: aws_ssm_put_param.sh [<key>] [<value>]
-
 first argument is used as key - if not given prompts for it
 second argument is used as value - if not given prompts for it (recommended for secrets)
 
@@ -35,7 +33,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<key>] [<value>]"
 
 help_usage "$@"
 
