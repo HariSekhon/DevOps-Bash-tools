@@ -38,15 +38,10 @@ usage_args="<name> [<secret> <aws_options>]"
 
 help_usage "$@"
 
+min_args 1 "$@"
 
-name="${1:-}"
-value="${2:-}"
+name="$1"
 shift || :
-shift || :
-
-if [ -z "$name" ]; then
-    read -r -p "Enter name: " name
-fi
 
 if [ -z "$value" ]; then
     # doesn't echo, let's print a star per character instead as it's nicer feedback
