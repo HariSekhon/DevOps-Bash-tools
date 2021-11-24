@@ -33,17 +33,13 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<key>] [<value>]"
+usage_args="<key> [<value>]"
 
 help_usage "$@"
 
+min_args 1 "$@"
 
-key="${1:-}"
-value="${2:-}"
-
-if [ -z "$key" ]; then
-    read -r -p "Enter key: " key
-fi
+key="$1"
 
 if [ -z "$value" ]; then
     # doesn't echo, let's print a star per character instead as it's nicer feedback
