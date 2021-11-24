@@ -386,7 +386,7 @@ etc.
     - `gcp_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given GCP Secrets Manager secret. Useful for uploading a password without exposing it on your screen
     - `gcp_secret_get.sh` - finds the latest version of a given GCP Secret Manager secret and returns its value. Used by adjacent scripts
     - `gcp_secret_add_k8s_labelled.sh` - same as `gcp_secret_add.sh` but also labels the secret with the current kubectl cluster name and namespace for later use by `gcp_secrets_to_kubernetes.sh`
-    - `gcp_secret_label_k8s.sh` - labels a given existing GCP secret with the current kubernetes cluster name and namespace for later use by `gcp_secrets_to_kubernetes.sh`
+    - `gcp_secret_label_k8s.sh` - labels a given existing GCP secret with the current kubectl cluster name and namespace for later use by `gcp_secrets_to_kubernetes.sh`
     - `gcp_secrets_to_kubernetes.sh` - loads GCP secrets to Kubernetes secrets in a 1-to-1 mapping. Can specify a list of secrets or auto-loads all GCP secrets with labels `kubernetes-cluster` and `kubernetes-namespace` matching the current `kubectl` context (`kcd` to the right namespace first, see `.bash.d/kubernetes`). See also `kubernetes_get_secret_values.sh` to debug the actual values that got loaded
     - `gcp_secrets_to_kubernetes_multipart.sh` - creates a Kubernetes secret from multiple GCP secrets (used to put `private.pem` and `public.pem` into the same secret to appear as files on volume mounts for apps in pods to use)
     - `gcp_secrets_labels.sh` - lists GCP Secrets and their labels, one per line suitable for quick views or shell pipelines
