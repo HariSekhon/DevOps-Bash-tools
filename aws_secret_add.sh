@@ -34,7 +34,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<name> [<secret> --description 'blah' <more_aws_options>]"
+usage_args="<name> [<secret> --description 'blah' <aws_options>]"
 
 help_usage "$@"
 
