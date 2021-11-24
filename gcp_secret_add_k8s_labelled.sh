@@ -47,6 +47,7 @@ secret="${2:-}"
 shift || :
 shift || :
 
+# assumes the context and cluster name are the same which they usually are for AWS, GCP, docker-desktop and minikube
 read -r kubernetes_cluster kubernetes_namespace \
     < <(kubectl config get-contexts | awk '/*/{print $2" "$NF}')
 
