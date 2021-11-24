@@ -43,6 +43,7 @@ min_args 1 "$@"
 name="$1"
 secret="${2:-}"
 shift || :
+shift || :
 
 if [ -z "$secret" ]; then
     read_secret
