@@ -28,6 +28,10 @@ First argument is used as secret name - if not given prompts for it
 Second argument must be a binary file such as a QR Code screenshot - this is converted to base 64 because AWS only permits ASCII characters in this value
 Third or more args are passed to 'aws secretsmanager'
 
+To retrieve the binary file back, you can do this:
+
+    aws_secret_get.sh my-qr-code | base64 --decode > qr-code.png
+
 
 $usage_aws_cli_required
 "
