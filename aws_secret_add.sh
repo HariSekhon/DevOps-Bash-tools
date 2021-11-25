@@ -25,7 +25,9 @@ usage_description="
 Reads a value from the command line and saves it to AWS Secrets Manager without echo'ing it on the screen
 
 First argument is used as secret name - if not given prompts for it
-Second argument is used as secret string value - if not given prompts for it with a non-echo'ing prompt (recommended)
+Second argument is used as secret string value
+    - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
+    - if not given prompts for it with a non-echo'ing prompt (recommended)
 Third or more args are passed to 'aws secretsmanager'
 
 
@@ -47,6 +49,10 @@ shift || :
 
 if [ -z "$secret" ]; then
     read_secret
+fi
+
+if [ -f "$secret" ]; then
+    secret="$(cat "$secret")"
 fi
 
 aws secretsmanager create-secret --name "$name" --secret-string "$secret" "$@"
