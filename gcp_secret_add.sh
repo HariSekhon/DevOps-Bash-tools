@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/gcp.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -31,7 +31,7 @@ Second argument is used as secret string value
 Third or more args are passed to 'gcloud secrets'
 
 
-GCloud SDK must be installed and configured
+$usage_gcloud_sdk_required
 "
 
 # used by usage() in lib/utils.sh
