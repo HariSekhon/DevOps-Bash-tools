@@ -28,7 +28,7 @@ First argument is used as secret name - if not given prompts for it
 Second or more args are passed to 'gcloud secrets'
 
 
-GCloud SDK must be installed and configured
+GCloud SDK and kubectl must both be installed and configured
 "
 
 # used by usage() in lib/utils.sh
