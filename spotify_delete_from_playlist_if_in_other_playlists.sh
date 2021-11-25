@@ -25,6 +25,10 @@ usage_description="
 Deletes tracks from the given playlist if their URIs are found in the subsequently given playlists
 
 This is useful to delete things from TODO playlists that are already in a bunch of other playlists
+
+The first playlist is the one to delete the tracks in, this will be your TODO playlist
+
+Subsequent playlist args are the source playlists to check for already existing tracks
 "
 
 # used by usage() in lib/utils.sh
