@@ -27,6 +27,8 @@ Retrieves a secret value from a given AWS Secrets Manager secret name
 First argument is used as secret name - if not given prompts for it
 Second or more args are passed to 'aws secretsmanager'
 
+Will check for and output Secret String or Secret Binary
+
 
 $usage_aws_cli_required
 "
@@ -43,4 +45,4 @@ name="$1"
 shift || :
 
 aws secretsmanager get-secret-value --secret-id "$name" "$@" |
-jq -r .SecretString
+jq -r 'if .SecretString then .SecretString else .SecretBinary end'
