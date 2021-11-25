@@ -18,18 +18,20 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/gcp.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Reads a value from the command line without echo'ing it on the screen and updates the given GCP Secret Manager secret
 
 First argument is used as secret name - if not given prompts for it
-Second argument is used as secret string value - if not given prompts for it with a non-echo'ing prompt (recommended)
+Second argument is used as secret string value
+    - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
+    - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
 Third or more args are passed to 'gcloud secrets'
 
 
-GCloud SDK must be installed and configured
+$usage_gcloud_sdk_required
 "
 
 # used by usage() in lib/utils.sh
@@ -47,6 +49,10 @@ shift || :
 
 if [ -z "$secret" ]; then
     read_secret
+fi
+
+if [ -f "$secret" ]; then
+    secret="$(cat "$secret")"
 fi
 
 gcloud secrets versions add "$name" --data-file - "$@" <<< "$secret"
