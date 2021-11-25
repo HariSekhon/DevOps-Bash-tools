@@ -27,7 +27,7 @@ Reads a value from the command line and saves it to AWS Secrets Manager without 
 First argument is used as secret name - if not given prompts for it
 Second argument is used as secret string value
     - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
-    - if not given prompts for it with a non-echo'ing prompt (recommended)
+    - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
 Third or more args are passed to 'aws secretsmanager'
 
 
