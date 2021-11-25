@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -41,6 +41,10 @@ min_args 2 "$@"
 
 playlist_to_delete_from="$1"
 shift || :
+
+export SPOTIFY_PRIVATE=1
+
+spotify_token
 
 for playlist in "$@"; do
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist"
