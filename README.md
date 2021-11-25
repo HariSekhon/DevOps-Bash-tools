@@ -343,7 +343,7 @@ etc.
   - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/). Useful for uploading a password without exposing it on your screen
   - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
   - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) secret. Useful for uploading a password without exposing it on your screen
-  - `aws_secret_get.sh` - gets a secret value for a given secret from AWS Secrets Manager
+  - `aws_secret_get.sh` - gets a secret value for a given secret from AWS Secrets Manager, retrieving either a secure string or secure binary depending on which is available
   - `aws_secrets_list.sh` - returns a list of AWS Secrets Manager secrets, one per line
   - `aws_users.sh` - list your [AWS IAM](https://aws.amazon.com/iam/) users
   - `aws_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
