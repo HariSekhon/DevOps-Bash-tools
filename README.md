@@ -812,6 +812,7 @@ etc.
 - `spotify_artists_followed*.sh` - lists all followed artists in URI or human readable formats
 - `spotify_artist_tracks.sh` - gets all track URIs for a given artist, from both albums and single for chain loading to playlists
 - `spotify_follow_artists.sh` - follows artists for the given URIs from files or standard input
+- `spotify_follow_top_artists.sh` - follows all artists in your current Spotify top artists list
 - `spotify_follow_liked_artists.sh` - follows artists with N or more tracks in your `Liked Songs`
 - `spotify_set_tracks_uri_to_liked.sh` - sets a list of spotify track URIs to 'Liked' so they appear in the `Liked Songs` playlist. Useful for marking all the tracks in your best playlists as favourite tracks, or for porting historical `Starred` tracks to the newer `Liked Songs`
 - `spotify_foreach_playlist.sh` - executes a templated command against all playlists, replacing `{playlist}` and `{playlist_id}` in each iteration
