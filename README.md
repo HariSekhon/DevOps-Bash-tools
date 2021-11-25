@@ -341,6 +341,7 @@ etc.
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
   - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/). Useful for uploading a password without exposing it on your screen
+  - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
   - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) secret. Useful for uploading a password without exposing it on your screen
   - `aws_secret_get.sh` - gets a secret value for a given secret from AWS Secrets Manager
   - `aws_secrets_list.sh` - returns a list of AWS Secrets Manager secrets, one per line
