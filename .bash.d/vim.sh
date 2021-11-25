@@ -53,9 +53,10 @@ alias ggrepv=gitgrepvim
 grepvim(){
     # want splitting
     # shellcheck disable=SC2046
-    vim $(grep -i "$1" "$@" | sed 's/:.*//' | sort -u)
+    vim $(grep -li "$1" "$@" | sort -u)
 }
 alias grepv=grepvim
+alias vimgrep=grepvim
 
 # vim which
 vw(){
