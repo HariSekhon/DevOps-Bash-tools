@@ -25,6 +25,8 @@ gcp_info_noninteractive_help="You should only this script non-interactively / in
 
 gcp_info_formatting_help="In interactive mode, prints fancy boxes around GCP info to be easier on the eye. In non-interactive mode it skips formatting so it's easier to parse or process with other commands like grep / awk etc. Non-interactive mode happens automatically when the output is piped or redirected to a file or another command, or when \$NO_FORMATTING=1 is set in environment"
 
+usage_gcloud_sdk_required="GCloud SDK must be installed and configured"
+
 if is_piped || [ -n "${NO_FORMATTING:-}" ]; then
     gcloud_formatting=''
 else
