@@ -487,6 +487,7 @@ etc.
   - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
     - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters!
   - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
+  - `kubernetes_autoscaler_release.sh` - finds the latest Kubernetes Autoscaler release that matches your local Kubernetes cluster version using kubectl and the GitHub API. Useful for quickly finding the image override version for `eks-cluster-autoscaler-kustomization.yaml` in the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
   - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
   - `kubeadm_join_cmd.sh` - outputs `kubeadm join` command (generates new token) to join an existing Kubernetes cluster (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
   - `kubeadm_join_cmd2.sh` - outputs `kubeadm join` command manually (calculates cert hash + generates new token) to join an existing Kubernetes cluster
