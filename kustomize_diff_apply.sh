@@ -55,7 +55,7 @@ fi
 echo "Deploying Kustommize kubernetes configs from directory: $PWD"
 echo
 
-yaml="$(kustomize build)"
+yaml="$(kustomize build --enable-helm)"
 
 echo "Pre-creating any namespaces so that diff can succeed"
 "$srcdir/kubectl_create_namespaces.sh" <<< "$yaml"
