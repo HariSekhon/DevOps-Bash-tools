@@ -328,8 +328,8 @@ etc.
   - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
   - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
-  - `aws_kube_creds.sh` - auto-loads all AWS EKS clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
-  - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given AWS EKS cluster using config isolation to avoid concurrency race conditions
+  - `aws_kube_creds.sh` - auto-loads all [AWS EKS](https://aws.amazon.com/eks/) clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
+  - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given [AWS EKS](https://aws.amazon.com/eks/) cluster using config isolation to avoid concurrency race conditions
   - `aws_meta.sh` - [AWS EC2 Metadata API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) query shortcut. See also the official [ec2-metadata](https://aws.amazon.com/code/ec2-instance-metadata-query-tool/) shell script with more features
   - `aws_nat_gateways_public_ips.sh` - lists the public IPs of all NAT gateways. Useful to give to clients to permit through firewalls for webhooks or similar calls
   - `aws_password_policy.sh` - prints [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in `key = value` pairs for easy viewing / grepping (used by `aws_harden_password_policy.sh` before and after to show the differences)
@@ -469,6 +469,7 @@ etc.
 
 - `kubernetes_*.sh` - [Kubernetes](https://kubernetes.io/) scripts:
   - `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
+  - `eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
   - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
     - cluster-info
     - master component statuses
