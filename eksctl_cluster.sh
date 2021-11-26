@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/../lib/utils.sh"
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -43,8 +43,10 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-"$srcdir/install_eksctl.sh"
-echo
+if ! command -v eksctl &>/dev/null; then
+    "$srcdir/setup/install_eksctl.sh"
+    echo
+fi
 
 EKS_CLUSTER="${1:-${EKS_CLUSTER:-test}}"
 EKS_VERSION="${2:-${EKS_VERSION:-1.21}}"
