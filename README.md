@@ -467,47 +467,46 @@ etc.
 
 #### Kubernetes
 
-- `kubernetes_*.sh` - [Kubernetes](https://kubernetes.io/) scripts:
-  - `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
-  - `eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
-  - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
-    - cluster-info
-    - master component statuses
-    - nodes
-    - namespaces
-    - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
-    - storage classes, persistent volumes, persistent volume claims
-    - service accounts, resource quotas, network policies, pod security policies
-    - container images running
-    - container images running counts descending
-    - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
-  - `kubectl.sh` - runs kubectl commands safely fixed to a given context using config isolation to avoid concurrency race conditions
-  - `kubectl_diff_apply.sh` - generates a diff and prompts to apply. See also `kustomize_diff_apply.sh`
-  - `kubectl_create_namespaces` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
-  - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
-  - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
-    - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters!
-  - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
-  - `kubernetes_autoscaler_release.sh` - finds the latest Kubernetes Autoscaler release that matches your local Kubernetes cluster version using kubectl and the GitHub API. Useful for quickly finding the image override version for `eks-cluster-autoscaler-kustomization.yaml` in the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
-  - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
-  - `kubeadm_join_cmd.sh` - outputs `kubeadm join` command (generates new token) to join an existing Kubernetes cluster (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
-  - `kubeadm_join_cmd2.sh` - outputs `kubeadm join` command manually (calculates cert hash + generates new token) to join an existing Kubernetes cluster
-  - `kubectl_exec.sh` - finds and execs to the first Kubernetes pod matching the given name regex, optionally specifying the container name regex to exec to, and shows the full generated `kubectl exec` command line for clarity
-  - `kubectl_exec2.sh` - finds and execs to the first Kubernetes pod matching given pod filters, optionally specifying the container to exec to, and shows the full generated `kubectl exec` command line for clarity
-  - `kubectl_pods_per_node.sh` - lists number of pods per node sorted descending
-  - `kubectl_pods_important.sh` - lists important pods and their nodes to check on scheduling
-  - `kubectl_pods_colocated.sh` - lists pods from deployments/statefulsets that are colocated on the same node
-  - `kubectl_node_labels.sh` - lists nodes and their labels, one per line, easier to read visually or pipe in scripting
-  - `kubectl_node_taints.sh` - lists nodes and their taints
-  - `kubectl_jobs_stuck.sh` - finds Kubernetes jobs stuck for hours or days with no completions
-  - `kubectl_jobs_delete_stuck.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
-  - `kubectl_images.sh` - lists Kubernetes container images running on the current cluster
-  - `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
-  - `kubectl_pod_count.sh` - lists Kubernetes pods total running count
-  - `kubectl_container_count.sh` - lists Kubernetes containers total running count
-  - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
-  - `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
-  - `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, prompts with a diff of the proposed changes, and then applies if you accept them. See also `kubectl_diff_apply.sh`
+- `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
+- `eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
+- `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
+  - cluster-info
+  - master component statuses
+  - nodes
+  - namespaces
+  - deployments, replicasets, replication controllers, statefulsets, daemonsets, horizontal pod autoscalers
+  - storage classes, persistent volumes, persistent volume claims
+  - service accounts, resource quotas, network policies, pod security policies
+  - container images running
+  - container images running counts descending
+  - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
+- `kubectl.sh` - runs kubectl commands safely fixed to a given context using config isolation to avoid concurrency race conditions
+- `kubectl_diff_apply.sh` - generates a diff and prompts to apply. See also `kustomize_diff_apply.sh`
+- `kubectl_create_namespaces` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
+- `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
+- `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
+  - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters!
+- `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
+- `kubernetes_autoscaler_release.sh` - finds the latest Kubernetes Autoscaler release that matches your local Kubernetes cluster version using kubectl and the GitHub API. Useful for quickly finding the image override version for `eks-cluster-autoscaler-kustomization.yaml` in the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
+- `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
+- `kubeadm_join_cmd.sh` - outputs `kubeadm join` command (generates new token) to join an existing Kubernetes cluster (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
+- `kubeadm_join_cmd2.sh` - outputs `kubeadm join` command manually (calculates cert hash + generates new token) to join an existing Kubernetes cluster
+- `kubectl_exec.sh` - finds and execs to the first Kubernetes pod matching the given name regex, optionally specifying the container name regex to exec to, and shows the full generated `kubectl exec` command line for clarity
+- `kubectl_exec2.sh` - finds and execs to the first Kubernetes pod matching given pod filters, optionally specifying the container to exec to, and shows the full generated `kubectl exec` command line for clarity
+- `kubectl_pods_per_node.sh` - lists number of pods per node sorted descending
+- `kubectl_pods_important.sh` - lists important pods and their nodes to check on scheduling
+- `kubectl_pods_colocated.sh` - lists pods from deployments/statefulsets that are colocated on the same node
+- `kubectl_node_labels.sh` - lists nodes and their labels, one per line, easier to read visually or pipe in scripting
+- `kubectl_node_taints.sh` - lists nodes and their taints
+- `kubectl_jobs_stuck.sh` - finds Kubernetes jobs stuck for hours or days with no completions
+- `kubectl_jobs_delete_stuck.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
+- `kubectl_images.sh` - lists Kubernetes container images running on the current cluster
+- `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
+- `kubectl_pod_count.sh` - lists Kubernetes pods total running count
+- `kubectl_container_count.sh` - lists Kubernetes containers total running count
+- `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
+- `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
+- `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, prompts with a diff of the proposed changes, and then applies if you accept them. See also `kubectl_diff_apply.sh`
 - `helm_template.sh` - templates a Helm chart for Kustomize deployments
 - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
 - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
