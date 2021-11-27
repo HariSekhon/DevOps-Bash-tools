@@ -44,7 +44,7 @@ for workflow_name in $workflows; do
     {
     output="$(
         printf '%s\t' "$workflow_name"
-        "$srcdir/github_workflow_runs.sh" "$workflow_name" |
+        "$srcdir/github_actions_workflow_runs.sh" "$workflow_name" |
         jq -r 'limit(1; .workflow_runs[] | .conclusion?)'
     )"
     echo "$output"
