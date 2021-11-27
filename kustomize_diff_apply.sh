@@ -36,6 +36,9 @@ Uses adjacent scripts:
     kubectl_create_namespaces.sh
 
 If a kubectl context is given as an arg, uses adjacent kubectl.sh to prevent race conditions, see kubectl.sh for more details
+
+
+Requires Kustomize 4.x for --enable-helm support
 "
 
 # used by usage() in lib/utils.sh
