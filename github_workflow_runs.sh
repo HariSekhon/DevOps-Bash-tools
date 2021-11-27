@@ -28,7 +28,7 @@ srcdir="$(dirname "$0")"
 usage_description="
 Script to get GitHub Workflow runs for a given Workflow ID (or name.yaml) via the API
 
-Workflow ID can be either a number (see output of adjacent github_workflows.sh), or the name of the workflow yaml file, with or without the .yaml extension
+Workflow ID can be either a number (see output of adjacent github_actions_workflows.sh), or the name of the workflow yaml file, with or without the .yaml extension
 
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
 
