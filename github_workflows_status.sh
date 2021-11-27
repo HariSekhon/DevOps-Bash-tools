@@ -34,7 +34,7 @@ If no repo arg is given and is inside a git repo then takes determines the repo 
 usage_args="<repo> [<workflow_id>]"
 
 workflows="$(
-    "$srcdir/github_workflows.sh" "$@" |
+    "$srcdir/github_actions_workflows.sh" "$@" |
     jq -r '.workflows[].path' |
     sed 's|.github/workflows/||;s|\.yaml$||'
 )"
