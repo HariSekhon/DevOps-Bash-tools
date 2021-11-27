@@ -20,9 +20,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
-# not using anything from here directly
-#. "$srcdir/lib/kubernetes.sh"
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/kubernetes.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
