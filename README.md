@@ -593,6 +593,7 @@ etc.
   - `github_actions_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
   - `github_actions_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_actions_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
+  - `github_actions_workflows_state.sh` - lists GitHub Actions workflows enabled/disabled states (GitHub now disables workflows after 6 months without a commit)
   - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
   - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
