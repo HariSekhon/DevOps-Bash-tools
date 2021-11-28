@@ -26,7 +26,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034
 usage_description="
-Lists GitHub Actions Workflow runs for a given Workflow ID (or name.yaml) via the API
+Returns GitHub Actions Workflow runs for a given Workflow ID (or name.yaml) via the API
 
 Workflow ID can be either a number (see output of adjacent github_actions_workflows.sh), or the name of the workflow yaml file, with or without the .yaml extension
 
