@@ -33,6 +33,8 @@ If no repo arg is given and is inside a git repo then takes determines the repo 
 # shellcheck disable=SC2034
 usage_args="<repo> [<workflow_id>]"
 
+help_usage "$@"
+
 workflows="$(
     "$srcdir/github_actions_workflows.sh" "$@" |
     jq -r '.workflows[].path' |
