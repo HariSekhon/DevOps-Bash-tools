@@ -55,7 +55,7 @@ shift || :
 
 cmd_template="$*"
 
-"$srcdir/github_actions_workflows.sh" |
+"$srcdir/github_actions_workflows.sh" "$repo" |
 jq -r '.workflows[] | [.id, .name] | @tsv' |
 while read -r id state workflow; do
     echo "# ============================================================================ #" >&2
