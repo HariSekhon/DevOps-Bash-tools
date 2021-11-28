@@ -69,4 +69,4 @@ if ! [[ $repo =~ / ]]; then
     repo="$USER/$repo"
 fi
 
-"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
+"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id?per_page=100"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
