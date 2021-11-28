@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: devops-bash-tools echo user={user} repo={repo} name={name} workflow_name={workflow} id={id} state={state}
+#  args: devops-bash-tools echo user={user} repo={repo} name={name} workflow_name={workflow} id={id}
 #
 #  Author: Hari Sekhon
 #  Date: 2021-11-27 11:21:14 +0000 (Sat, 27 Nov 2021)
@@ -55,11 +55,8 @@ shift || :
 
 cmd_template="$*"
 
-user="${GITHUB_USER:-$(get_github_user)}"
-user_or_org="${GITHUB_ORGANIZATION:-$user}"
-
-"$srcdir/github_api.sh" "/repos/$user_or_org/$repo/actions/workflows" |
-jq -r '.workflows[] | [.id, ..name] | @tsv' |
+"$srcdir/github_actions_workflows.sh" |
+jq -r '.workflows[] | [.id, .name] | @tsv' |
 while read -r id state workflow; do
     echo "# ============================================================================ #" >&2
     echo "# $workflow" >&2
