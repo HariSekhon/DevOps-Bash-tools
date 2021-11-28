@@ -36,11 +36,10 @@ The command template replaces the following for convenience in each iteration:
 {repo}                => the repo name with the user prefix
 {workflow}, {name}    => the workflow name
 {id}                  => the workflow id
-{state}               => the workflow state (enabled/disable)
 
 eg.
-    ${0##*/} devops-bash-tools echo user={user} repo={repo} name={name} workflow_name={workflow} id={id} state={state}
-    ${0##*/} devops-bash-tools echo org={org}   repo={repo} name={name} workflow_name={workflow} id={id} state={state}
+    ${0##*/} devops-bash-tools echo user={user} repo={repo} name={name} workflow_name={workflow} id={id}
+    ${0##*/} devops-bash-tools echo org={org}   repo={repo} name={name} workflow_name={workflow} id={id}
 "
 
 # used by usage() in lib/utils.sh
@@ -60,7 +59,7 @@ user="${GITHUB_USER:-$(get_github_user)}"
 user_or_org="${GITHUB_ORGANIZATION:-$user}"
 
 "$srcdir/github_api.sh" "/repos/$user_or_org/$repo/actions/workflows" |
-jq -r '.workflows[] | [.id, .state, .name] | @tsv' |
+jq -r '.workflows[] | [.id, ..name] | @tsv' |
 while read -r id state workflow; do
     echo "# ============================================================================ #" >&2
     echo "# $workflow" >&2
@@ -74,7 +73,6 @@ while read -r id state workflow; do
     cmd="${cmd//\{name\}/$workflow}"
     cmd="${cmd//\{workflow\}/$workflow}"
     cmd="${cmd//\{id\}/$id}"
-    cmd="${cmd//\{state\}/$state}"
     eval "$cmd"
     echo >&2
 done
