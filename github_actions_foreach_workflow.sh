@@ -57,7 +57,7 @@ cmd_template="$*"
 
 "$srcdir/github_actions_workflows.sh" "$repo" |
 jq -r '.workflows[] | [.id, .name] | @tsv' |
-while read -r id state workflow; do
+while read -r id workflow; do
     echo "# ============================================================================ #" >&2
     echo "# $workflow" >&2
     echo "# ============================================================================ #" >&2
