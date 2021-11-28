@@ -25,7 +25,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists GitHub Actions Workflows via the API
+Returns GitHub Actions Workflows json via the API
 
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
 
