@@ -62,7 +62,7 @@ for arg; do
     esac
 done
 
-USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
+USER="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
 PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
 
 if ! [[ $repo =~ / ]]; then
