@@ -35,7 +35,7 @@ The command template replaces the following for convenience in each iteration:
 {username}, {user}    => the user account being iterated
 {repo}                => the repo name with the user prefix
 {workflow}, {name}    => the workflow name
-{id}                  => the workflow id
+{id}, {workflow_id}   => the workflow id
 
 eg.
     ${0##*/} devops-bash-tools echo user={user} repo={repo} name={name} workflow_name={workflow} id={id}
@@ -69,6 +69,7 @@ while read -r id workflow; do
     cmd="${cmd//\{repo\}/$repo}"
     cmd="${cmd//\{name\}/$workflow}"
     cmd="${cmd//\{workflow\}/$workflow}"
+    cmd="${cmd//\{workflow_id\}/$id}"
     cmd="${cmd//\{id\}/$id}"
     eval "$cmd"
     echo >&2
