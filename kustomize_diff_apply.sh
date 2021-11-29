@@ -20,9 +20,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
-# not using anything from here directly
-#. "$srcdir/lib/kubernetes.sh"
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/kubernetes.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -36,6 +35,9 @@ Uses adjacent scripts:
     kubectl_create_namespaces.sh
 
 If a kubectl context is given as an arg, uses adjacent kubectl.sh to prevent race conditions, see kubectl.sh for more details
+
+
+Requires Kustomize 4.x for --enable-helm support
 "
 
 # used by usage() in lib/utils.sh

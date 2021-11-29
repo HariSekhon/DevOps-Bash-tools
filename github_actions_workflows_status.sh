@@ -22,7 +22,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Script to get GitHub Workflow runs status via the API
+Lists GitHub Actions Workflows run status via the API
 
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
 
@@ -33,8 +33,10 @@ If no repo arg is given and is inside a git repo then takes determines the repo 
 # shellcheck disable=SC2034
 usage_args="<repo> [<workflow_id>]"
 
+help_usage "$@"
+
 workflows="$(
-    "$srcdir/github_workflows.sh" "$@" |
+    "$srcdir/github_actions_workflows.sh" "$@" |
     jq -r '.workflows[].path' |
     sed 's|.github/workflows/||;s|\.yaml$||'
 )"
@@ -44,7 +46,7 @@ for workflow_name in $workflows; do
     {
     output="$(
         printf '%s\t' "$workflow_name"
-        "$srcdir/github_workflow_runs.sh" "$workflow_name" |
+        "$srcdir/github_actions_workflow_runs.sh" "$workflow_name" |
         jq -r 'limit(1; .workflow_runs[] | .conclusion?)'
     )"
     echo "$output"

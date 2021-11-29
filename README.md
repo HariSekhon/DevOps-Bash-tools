@@ -584,14 +584,18 @@ etc.
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
   - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
+  - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
   - `github_actions_runner.sh` - generates a [GitHub Actions](https://github.com/features/actions) self-hosted runner token for a given Repo or Organization via the GitHub API and then runs a dockerized GitHub Actions runner with the appropriate configuration
   - `github_actions_runner_local.sh` - downloads, configures and runs a local GitHub Actions Runner for Linux or Mac
   - `github_actions_runner_token.sh` - generates a GitHub Actions runner token to register a new self-hosted runner
   - `github_actions_runners.sh` - lists GitHub Actions self-hosted runners for a given Repo or Organization
   - `github_actions_delete_offline_runners.sh` - deletes offline GitHub Actions self-hosted runners. Useful to clean up short-lived runners eg. Docker, Kubernetes
-  - `github_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
-  - `github_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
-  - `github_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
+  - `github_actions_workflows.sh` - lists GitHub Actions workflows for a given repo (or auto-infers local repository)
+  - `github_actions_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
+  - `github_actions_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
+  - `github_actions_workflows_state.sh` - lists GitHub Actions workflows enabled/disabled states (GitHub now disables workflows after 6 months without a commit)
+  - `github_actions_workflow_enable.sh` - enables a given GitHub Actions workflow
+  - `github_actions_workflows_enable_all.sh` - enables all GitHub Actions workflows in a given repo. Useful to undo GitHub disabling all workflows in a repo after 6 months without a commit
   - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
   - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools

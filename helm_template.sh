@@ -45,8 +45,9 @@ chart="$2"
 shift || :
 shift || :
 
+# doesn't really matter what this repo name is as long as it's consistent and can infer what it should be from the chart call
 repo="${chart%%/*}"
-release_name="${chart##*/}"
+release_name="${chart##*/}"  # for simplicity the release name can be the same as the chart, which is fine for most cases
 
 if ! helm repo list | grep -q "^${repo}[[:space:]]"; then
     helm repo add "$repo" "$repo_url"

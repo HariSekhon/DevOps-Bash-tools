@@ -25,7 +25,7 @@ srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Script to get GitHub Workflows via the API
+Returns GitHub Actions Workflows json via the API
 
 If no repo arg is given and is inside a git repo then takes determines the repo from the first git remote listed
 
@@ -62,11 +62,12 @@ for arg; do
     esac
 done
 
-USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
+USER="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
 PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-${PASSWORD:-}}}"
 
 if ! [[ $repo =~ / ]]; then
     repo="$USER/$repo"
 fi
 
-"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
+# XXX: would need to iterate pages if you have more than 100 workflows
+"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id?per_page=100"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
