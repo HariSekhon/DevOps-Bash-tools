@@ -98,7 +98,7 @@ alias labels="kubectl_node_labels.sh"
 alias taints="kubectl_node_taints.sh"
 
 # kustomize
-alias kbuild='kustomize build'
+alias kbuild='kustomize build --enable-helm'
 alias kustomizebuilddiff='kbuild | kubectl diff -f -'
 alias kbuilddiff=kustomizebuilddiff
 alias kbuildd=kbuilddiff
