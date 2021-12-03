@@ -636,6 +636,7 @@ etc.
 - `azure_devops_to_github_migration.sh` - migrates one or all Azure DevOps git repos to GitHub, including all branches and sets the default branch to match via the APIs to maintain the same checkout behaviour
 - `azure_devops_disable_repos.sh` - disables one or more given Azure DevOps repos (to prevent further pushes to them after migration to GitHub)
 - `circleci_api.sh` - queries [CircleCI](https://circleci.com/)'s API with authentication
+- `circleci_project_set_env_var.sh` - creates / replaces CircleCI project level environment variables via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
