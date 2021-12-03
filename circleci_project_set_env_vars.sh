@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates CircleCI Project level environment variable(s) from args or stdin
+Adds / updates CircleCI project-level environment variable(s) from args or stdin
 
 If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
@@ -68,7 +68,7 @@ add_env_var(){
     fi
     local name="${env_var%%=*}"
     local value="${env_var#*=}"
-    timestamp "adding/replacing environment variable '$name' to project '$project_slug'"
+    timestamp "adding/updating environment variable '$name' to project '$project_slug'"
     "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$name\", \"value\": \"$value\"}" | jq .
 }
 
