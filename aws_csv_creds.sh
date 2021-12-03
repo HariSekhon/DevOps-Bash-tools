@@ -22,10 +22,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints AWS credentials from a CSV file as shell export statements
-
+Prints AWS credentials from a standard AWS CSV export file as shell export statements
 
 Useful to quickly switch your shell to some exported credentials from a service account for testing access / permissions
+
+Expected format is that of the AWS 'Download .csv file' when you create an AWS access key in the console
 
 
 Example:
