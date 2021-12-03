@@ -25,6 +25,7 @@ usage_description="
 Prints AWS credentials from a standard AWS CSV export file as shell export statements
 
 Useful to quickly switch your shell to some exported credentials from a service account for testing access / permissions
+or pipe to upload to a CI/CD system via an API eg. circleci_project_set_env_vars.sh
 
 Expected format is that of the AWS 'Download .csv file' when you create an AWS access key in the console
 
