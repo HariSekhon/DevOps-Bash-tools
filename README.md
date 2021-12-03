@@ -653,7 +653,7 @@ etc.
   - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
     - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
-- `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) API scripts:
+- `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
   - `teamcity.sh` - boots TeamCity CI cluster in docker, just click proceed and accept the EULA and it does the rest, it even creates an admin user and an API token for you
   - See Also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
