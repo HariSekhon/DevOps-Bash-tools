@@ -319,6 +319,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
+  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing access / permissions
   - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to [AWS ECR](https://aws.amazon.com/ecr/) with not just the `latest` docker tag but also the current Git hashref and Git tags
   - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
   - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an [AWS ECR](https://aws.amazon.com/ecr/) image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
