@@ -26,7 +26,16 @@ Creates CircleCI Project level environment variable(s) from args or stdin
 
 If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
-export AWS_ACCESS_KEY_ID=AKIA... | ${0##*/} github/HariSekhon/DevOps-Bash-tools
+Examples:
+
+    ${0##*/} github/HariSekhon/DevOps-Bash-tools AWS_ACCESS_KEY_ID=AKIA...
+
+    export AWS_ACCESS_KEY_ID=AKIA... | ${0##*/} github/HariSekhon/DevOps-Bash-tools
+
+
+    Loads both AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY via stdin:
+
+        aws_csv_creds.sh credentials_exported.csv | ${0##*/} github/HariSekhon/DevOps-Bash-tools
 "
 
 # used by usage() in lib/utils.sh
