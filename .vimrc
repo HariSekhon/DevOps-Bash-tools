@@ -558,7 +558,7 @@ function! WriteRunLine()
         " TODO: consider switching this to go build and then run the binary as
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
-        :.w ! sed 's/^[[:space:]]*\#// ; s|\$0|./%| ; s|\${0\#\#\*\/}|./%|' | xargs go run 2>&1 | less
+        :.w ! sed 's/^[[:space:]]*\#// ; s|\$0|%:p| ; s|\${0\#\#\*\/}|%:p|' | xargs go run 2>&1 | less
     elseif expand('%:t') == 'Makefile' " || expand('%:t') == 'Makefile.in'
         let target = split(getline('.'), ':')[0]
         call Make(target)
@@ -567,7 +567,7 @@ function! WriteRunLine()
         " super crafy hack to get jq options injected via jq() function from interactive profile without doing
         " bash -i which causes prompt issues and 'no job control' message, and tee'ing to /dev/stderr instead of
         " using set -x which would exposing the inner workings and obscure the executed command
-        .w ! sed 's/^[[:space:]]*\#// ; s|\$0|./%| ; s|\${0\#\#\*\/}|./%|' | bash -c '. $bash_tools/.bash.d/aliases.sh; . $bash_tools/.bash.d/functions.sh; eval "$(cat | tee /dev/stderr)"' 2>&1 | less
+        .w ! sed 's/^[[:space:]]*\#// ; s|\$0|%:p| ; s|\${0\#\#\*\/}|%:p|' | bash -c '. $bash_tools/.bash.d/aliases.sh; . $bash_tools/.bash.d/functions.sh; eval "$(cat | tee /dev/stderr)"' 2>&1 | less
     endif
     :silent exec "!echo; read -p 'Press enter to return to vim'"
 endfunction
