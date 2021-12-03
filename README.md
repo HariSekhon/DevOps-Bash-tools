@@ -319,7 +319,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing access / permissions or pipe to upload to a CI/CD system via an API (eg. `circleci_project_set_env_var.sh`)
+  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing access / permissions or pipe to upload to a CI/CD system via an API (eg. `circleci_project_set_env_vars.sh`)
   - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to [AWS ECR](https://aws.amazon.com/ecr/) with not just the `latest` docker tag but also the current Git hashref and Git tags
   - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
   - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an [AWS ECR](https://aws.amazon.com/ecr/) image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
@@ -636,7 +636,7 @@ etc.
 - `azure_devops_to_github_migration.sh` - migrates one or all Azure DevOps git repos to GitHub, including all branches and sets the default branch to match via the APIs to maintain the same checkout behaviour
 - `azure_devops_disable_repos.sh` - disables one or more given Azure DevOps repos (to prevent further pushes to them after migration to GitHub)
 - `circleci_api.sh` - queries [CircleCI](https://circleci.com/)'s API with authentication
-- `circleci_project_set_env_var.sh` - creates / replaces CircleCI project level environment variables via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+- `circleci_project_set_env_vars.sh` - creates / replaces CircleCI project level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
