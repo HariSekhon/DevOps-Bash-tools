@@ -633,6 +633,8 @@ etc.
 - `azure_devops_foreach_repo.sh` - executes a templated command for each Azure DevOps repo, replacing `{user}`, `{org}`, `{project}` and `{repo}` in each iteration
 - `azure_devops_to_github_migration.sh` - migrates one or all Azure DevOps git repos to GitHub, including all branches and sets the default branch to match via the APIs to maintain the same checkout behaviour
 - `azure_devops_disable_repos.sh` - disables one or more given Azure DevOps repos (to prevent further pushes to them after migration to GitHub)
+- `circleci_api.sh` - queries [CircleCI](https://circleci.com/)'s API with authentication
+- `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
   - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
