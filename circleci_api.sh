@@ -49,6 +49,26 @@ Examples:
 
     ${0##*/} /me | jq .
 
+
+# Get a project:
+
+    ${0##*/} /project/<vcs>/<user_or_org>/<repo>
+
+    ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools | jq .
+
+
+# Get environment variables for a project:
+
+    ${0##*/} /project/<vcs>/<user_or_org>/<repo>/envvar
+
+    ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/envvar | jq .
+
+
+# Create / replace a project environment variable:
+
+    ${0##*/} /project/<vcs>/<user_or_org>/<repo>/envvar -X POST -d '{\"name\": \"AWS_ACCESS_KEY_ID\", \"value\": \"AKIA...\"}'
+
+    ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/envvar -X POST -d '{\"name\": \"AWS_ACCESS_KEY_ID\", \"value\": \"AKIA...\"}' | jq .
 "
 
 # used by usage() in lib/utils.sh
