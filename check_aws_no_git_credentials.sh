@@ -40,18 +40,20 @@ echo "checking $(pwd)"
 echo
 
 matches="$(git grep -Ei \
-    -e 'AWS_ACCESS_KEY.*=[^$].*[[:alnum:]]+' \
-    -e 'AWS_SECRET_KEY.*=[^$].*[[:alnum:]]+' \
-    -e 'AWS_SECRET_ACCESS_KEY.*=[^$].*[[:alnum:]]+' \
-    -e 'AWS_SESSION_TOKEN.*=[^$].*[[:alnum:]]+' \
+    -e 'AWS_ACCESS_KEY.*=["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SECRET_KEY.*=["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SECRET_ACCESS_KEY.*=["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SESSION_TOKEN.*=["'"'"']*[^$][[:alnum:]]{4,}' \
     || :
 )"
 if [ -f .gitallowed ]; then
-    # makes not difference, .gitallowed is exempted next anyway
+    # makes no difference, .gitallowed is exempted next anyway
     #matches="$(grep -Ev -f .gitallowed <<< "$matches" | grep -Fv -f .gitallowed || :)"
     matches="$(grep -Ev -f .gitallowed <<< "$matches" || :)"
 fi
-matches="$(grep -Ev -e "^${0##*/}:[[:space:]]+-e[[:space:]]+'AWS_" -e '^.bash.d/aws.sh:' -e '^.gitallowed:' <<< "$matches" || :)"
+#matches="$(grep -Ev -e "^${0##*/}:[[:space:]]+-e[[:space:]]+'AWS_" \
+#                    -e '^.gitallowed:' \
+#                    <<< "$matches" || :)"
 if [ -n "$matches" ]; then
         # dangerous, fails silently and suppressed legitimate matches
         #grep -v -f "$gitallowed" |
