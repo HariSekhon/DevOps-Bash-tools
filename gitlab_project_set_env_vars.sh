@@ -91,7 +91,7 @@ add_env_var(){
             -H 'Content-Type: multipart/form-data'
             # must override the default -H 'Content-Type: application/json' in curl_api_opts() in lib/utils.sh  to avoid 400 or 406 errors from the API
     fi |
-    jq '.value = "REDACTED"'
+    jq '.value = "REDACTED"'  # echo's back the variable value in plaintext
 }
 
 
