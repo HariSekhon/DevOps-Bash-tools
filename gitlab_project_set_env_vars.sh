@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Adds GitLab CI project-level masked environment variable(s) from args or stdin
+Adds / updates GitLab CI project-level masked environment variable(s) from args or stdin
 
 If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
@@ -58,6 +58,7 @@ fi
 
 project_slug="${project_slug//\//%2F}"
 
+existing_env_vars="$("$srcdir/gitlab_api.sh" "projects/$project_slug/variables" | jq -r '.[].key')"
 
 add_env_var(){
     local env_var="$1"
@@ -68,15 +69,26 @@ add_env_var(){
     if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
         usage "invalid environment key=value argument given: $env_var"
     fi
-    local name="${env_var%%=*}"
+    local key="${env_var%%=*}"
     local value="${env_var#*=}"
-    timestamp "adding GitLab environment variable '$name' to project '$project_slug'"
     local masked=true
     if [ "${#value}" -lt 8 ]; then  # avoids 400 errors from the API if sending < 8 chars with masked=true
         masked=false
     fi
-    # could also use a project_id
-    "$srcdir/gitlab_api.sh" "projects/$project_slug/variables?masked=$masked" -X POST -F "key=$name" -F "value=$value" -H 'Content-Type: multipart/form-data' >/dev/null # echo's value back in plaintext
+    if grep -Fxq "$key" <<< "$existing_env_vars"; then
+        timestamp "updating GitLab environment variable '$key' in project '$project_slug'"
+        "$srcdir/gitlab_api.sh" "projects/$project_slug/variables/$key?masked=$masked" -X PUT \
+            -F "value=$value" \
+            -H 'Content-Type: multipart/form-data' # >/dev/null # echo's value back in plaintext
+    else
+        timestamp "adding GitLab environment variable '$key' to project '$project_slug'"
+        # could also use a project_id                                           # change if needing protected variables
+        "$srcdir/gitlab_api.sh" "projects/$project_slug/variables?masked=$masked&protected=false" -X POST \
+            -F "key=$key" \
+            -F "value=$value" \
+            -H 'Content-Type: multipart/form-data' >/dev/null # echo's value back in plaintext
+            # must override the default -H 'Content-Type: application/json' in curl_api_opts() in lib/utils.sh  to avoid 400 or 406 errors from the API
+    fi
 }
 
 
