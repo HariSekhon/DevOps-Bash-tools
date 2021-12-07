@@ -32,9 +32,9 @@ if [ -f ~/.gitlab_token  ]; then
     GITLAB_API_PRIVATE_TOKEN="$(cat ~/.gitlab_token)"
     export GITLAB_API_PRIVATE_TOKEN
 fi
-if [ -z "${GITLAB_API_ENDPOINT:-}" ]; then
-    export GITLAB_API_ENDPOINT="https://gitlab.com/api/v3"
-fi
+#if [ -z "${GITLAB_API_ENDPOINT:-}" ]; then
+#    export GITLAB_API_ENDPOINT="https://gitlab.com/api/v4"
+#fi
 
 if ! type basedir &>/dev/null; then
     # shellcheck disable=SC1090
