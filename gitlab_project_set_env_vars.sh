@@ -43,7 +43,7 @@ XXX: Caveat - GitLab only masks variables 8 characters or longer and they are re
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<project_slug> [<key>=<value> <key2>=<value2> ...]"
+usage_args="<project_slug_or_id> [<key>=<value> <key2>=<value2> ...]"
 
 help_usage "$@"
 
@@ -52,12 +52,12 @@ min_args 1 "$@"
 project_slug="$1"
 shift || :
 
+if ! [[ "$project_slug" =~ ^[[:digit:]]+$|^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
+    usage "project-slug given '$project_slug' does not conform to id or <user_or_org>/<repo> format"
+fi
+
 project_slug="${project_slug//\//%2F}"
 
-
-if ! [[ "$project_slug" =~ ^[[:alnum:]%-]+$ ]]; then
-    usage "project-slug given '$project_slug' does not conform to <user_or_org>/<repo> format"
-fi
 
 add_env_var(){
     local env_var="$1"
@@ -75,6 +75,7 @@ add_env_var(){
     if [ "${#value}" -lt 8 ]; then  # avoids 400 errors from the API if sending < 8 chars with masked=true
         masked=false
     fi
+    # could also use a project_id
     "$srcdir/gitlab_api.sh" "projects/$project_slug/variables?masked=$masked" -X POST -F "key=$name" -F "value=$value" -H 'Content-Type: multipart/form-data' >/dev/null # echo's value back in plaintext
 }
 
