@@ -54,7 +54,7 @@ project_slug="${project_slug%%/}"
 
 
 if ! [[ "$project_slug" =~ ^[[:alnum:]]+/[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
-    usage "project-slug given '$project_slug' does not confirm to <vcs>/<user_or_org>/<repo> format"
+    usage "project-slug given '$project_slug' does not conform to <vcs>/<user_or_org>/<repo> format"
 fi
 
 add_env_var(){
