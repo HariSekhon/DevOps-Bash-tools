@@ -319,7 +319,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `circleci_project_set_env_vars.sh`)
+  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `gitlab_project_set_env_vars.sh`, `circleci_project_set_env_vars.sh`)
   - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to [AWS ECR](https://aws.amazon.com/ecr/) with not just the `latest` docker tag but also the current Git hashref and Git tags
   - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
   - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an [AWS ECR](https://aws.amazon.com/ecr/) image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
@@ -613,9 +613,10 @@ etc.
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
+  - `gitlab_project_set_description.sh` - sets the description for one or more projects using the GitLab API
+  - `gitlab_project_set_env_vars.sh` - adds GitLab project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
-  - `gitlab_set_project_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `gitlab_get_ssh_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API
   - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
