@@ -71,7 +71,17 @@ Specify project ID or name (url-encoded otherwise will return 404 and fail to fi
     ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools -X PUT -d 'description=test'
 
 
-# List a project's CI pipelines, sorted by newest run first:
+# List a project's CI pipeline environment variables (careful this even returns 'masked' variable values in plaintext):
+
+    ${0##*/} /projects/HariSekhon%2fDevOps-Bash-tools/variables
+
+
+# Delete all environment variables for a given CI pipeline (see also gitlab_project_set_env_vars.sh to load them):
+
+    ${0##*/} /projects/HariSekhon%2fDevOps-Bash-tools/variables | jq -r '.[].key' | while read -r key; do ${0##*/} \"/projects/HariSekhon%2fDevOps-Bash-tools/variables/\$key\" -X DELETE; done
+
+
+# List a project's CI pipeline runs, sorted by newest run first:
 
     ${0##*/} /projects/HariSekhon%2FDevOps-Bash-tools/pipelines
 
