@@ -81,16 +81,17 @@ add_env_var(){
         timestamp "updating GitLab environment variable '$key' in project '$project_slug'"
         "$srcdir/gitlab_api.sh" "projects/$project_slug/variables/$key?masked=$masked" -X PUT \
             -F "value=$value" \
-            -H 'Content-Type: multipart/form-data' # >/dev/null # echo's value back in plaintext
+            -H 'Content-Type: multipart/form-data'
     else
         timestamp "adding GitLab environment variable '$key' to project '$project_slug'"
         # could also use a project_id                                           # change if needing protected variables
         "$srcdir/gitlab_api.sh" "projects/$project_slug/variables?masked=$masked&protected=false" -X POST \
             -F "key=$key" \
             -F "value=$value" \
-            -H 'Content-Type: multipart/form-data' >/dev/null # echo's value back in plaintext
+            -H 'Content-Type: multipart/form-data'
             # must override the default -H 'Content-Type: application/json' in curl_api_opts() in lib/utils.sh  to avoid 400 or 406 errors from the API
-    fi
+    fi |
+    jq '.value = "REDACTED"'
 }
 
 
