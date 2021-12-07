@@ -56,10 +56,21 @@ Examples:
 
     ${0##*/} /{organization}/{project}/_apis/git/repositories  | jq .
 
+    ${0##*/} /harisekhon/GitHub/_apis/git/repositories  | jq .
+
 
 # List a user or organization's Azure DevOps Pipelines:
 
     ${0##*/} /{username}/{project}/_apis/pipelines | jq .
+
+    ${0##*/} /harisekhon/GitHub/_apis/pipelines | jq .
+
+
+# Get a specific pipeline (has an href to the build yaml):
+
+    ${0##*/} /{username}/{project}/_apis/pipelines/{id} | jq .
+
+    ${0##*/} /harisekhon/GitHub/_apis/pipelines/1 | jq .
 
 
 For convenience the following tokens in the form :token, <token>, {token} are replaced:
