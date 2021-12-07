@@ -29,7 +29,7 @@ the same name on GitLab via the GitLab API
 
 If repos are given as arguments, then only sync's those repos, otherwise queries the GitHub API and iterates all repos
 
-For more details see github_repo_description.sh, gitlab_set_project_description.sh for tuning options around authentication, user/organization for each site etc.
+For more details see github_repo_description.sh, gitlab_project_set_description.sh for tuning options around authentication, user/organization for each site etc.
 "
 
 # used by usage() in lib/utils.sh
@@ -48,6 +48,6 @@ else
     "$srcdir/git_foreach_repo.sh" "github_repo_description.sh '{repo}'"
 fi |
 while read -r repo description; do
-    "$srcdir/gitlab_set_project_description.sh" <<< "$repo $description"
+    "$srcdir/gitlab_project_set_description.sh" <<< "$repo $description"
     "$srcdir/bitbucket_set_repo_description.sh" <<< "$repo $description"
 done
