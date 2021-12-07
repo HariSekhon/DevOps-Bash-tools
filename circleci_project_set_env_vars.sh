@@ -68,7 +68,7 @@ add_env_var(){
     fi
     local name="${env_var%%=*}"
     local value="${env_var#*=}"
-    timestamp "adding/updating environment variable '$name' to project '$project_slug'"
+    timestamp "adding/updating CircleCI environment variable '$name' to project '$project_slug'"
     "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$name\", \"value\": \"$value\"}" | jq .
 }
 
