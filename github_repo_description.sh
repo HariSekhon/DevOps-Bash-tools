@@ -33,7 +33,7 @@ Output format:
 
 <repo>  <description>
 
-Can be piped to the stdin of gitlab_set_project_description.sh
+Can be piped to the stdin of gitlab_project_set_description.sh
 
 The given repo must be the current URL - cannot be a previous repo name link
 "
