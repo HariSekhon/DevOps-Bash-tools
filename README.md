@@ -614,7 +614,7 @@ etc.
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
   - `gitlab_project_set_description.sh` - sets the description for one or more projects using the GitLab API
-  - `gitlab_project_set_env_vars.sh` - adds GitLab project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `gitlab_project_set_env_vars.sh` - adds / updates GitLab project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
   - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent tools
