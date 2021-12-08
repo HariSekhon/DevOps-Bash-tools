@@ -40,6 +40,11 @@ min_args 2 "$@"
 ECR="$1"
 REPO="$2"
 
+if is_CI; then
+    docker version
+    echo
+fi
+
 # $AWS_DEFAULT_REGION should be set in env or profile
 aws ecr get-login-password | docker login --username AWS --password-stdin "$ECR"
 
