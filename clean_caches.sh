@@ -56,6 +56,14 @@ cache_list="
 # .m2     => Maven
 # .sbt    => SBT
 
+if [ -z "${GOPATH-}" ]; then
+    if [ -d ~/go ]; then
+        GOPATH=~/go
+    else
+        GOPATH="notfound"  # to avoid deleting root level dirs which might be something else
+    fi
+fi
+
 personal_cache_list="
 .cache
 .cpan
@@ -63,6 +71,12 @@ personal_cache_list="
 .gem
 .gradle
 .groovy
+go/pkg
+go/src/golang.org
+go/src/github.com
+$GOPATH/pkg
+$GOPATH/src/golang.org
+$GOPATH/src/github.com
 .ivy
 .ivy2
 .m2
@@ -89,6 +103,7 @@ elif type yum >/dev/null 2>&1; then
     yum clean all
 fi
 
+echo "Deleting OS Caches"
 # =========================
 # Delete OS Cache locations
 #
@@ -115,7 +130,11 @@ echo "Deleting Personal Caches"
 echo "$personal_cache_list" |
 while read -r directory; do
     [ -n "$directory" ] || continue
-    user_home_cache=~/"$directory"
+    if [[ "$directory" =~ ^/ ]]; then
+        user_home_cache="$directory"
+    else
+        user_home_cache=~/"$directory"
+    fi
     [ -e "$user_home_cache" ] || continue
     echo "* removing $user_home_cache"
     # ~ more reliable than $HOME which could be unset
