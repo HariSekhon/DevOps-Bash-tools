@@ -69,10 +69,10 @@ add_env_var(){
     if grep -q "^${key}[[:space:]]" <<< "$existing_env_vars"; then
         local variable_uuid
         variable_uuid="$(awk "/^${key}[[:space:]]/{print \$2}" <<< "$existing_env_vars" | sed 's/{//;s/}//')"
-        timestamp "updating Bitbucket environment variable '$key' in '$workspace_repo_slug'"
+        timestamp "updating Bitbucket environment variable '$key' in repo '$workspace_repo_slug'"
         "$srcdir/bitbucket_api.sh" "/repositories/$workspace_repo_slug/pipelines_config/variables/%7B${variable_uuid}%7D" -X PUT -d "{\"key\": \"$key\", \"value\": \"$value\", \"secured\": true}"
     else
-        timestamp "adding Bitbucket environment variable '$key' to '$workspace_repo_slug'"
+        timestamp "adding Bitbucket environment variable '$key' to repo '$workspace_repo_slug'"
         "$srcdir/bitbucket_api.sh" "/repositories/$workspace_repo_slug/pipelines_config/variables/" -X POST -d "{\"key\": \"$key\", \"value\": \"$value\", \"secured\": true}"
     fi
 }
