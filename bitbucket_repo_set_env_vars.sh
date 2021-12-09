@@ -30,6 +30,7 @@ If no second argument is given, reads environment variables from standard input,
 
 Workspace is case insensitive
 Repo slug is case sensitive and must be in lowercase
+Variable keys are case-sensitive - a change in case will create a new one
 
 Examples:
 
