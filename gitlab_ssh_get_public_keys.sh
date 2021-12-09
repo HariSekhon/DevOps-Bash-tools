@@ -31,7 +31,7 @@ You can regenerate a token with the right permissions here:
 
 To get other named users's public SSH keys see:
 
-    gitlab_get_user_ssh_public_keys.sh
+    gitlab_ssh_get_user_public_keys.sh
 
 
 ${0##*/}

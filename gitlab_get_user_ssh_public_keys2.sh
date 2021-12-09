@@ -21,7 +21,7 @@ Fetches a GitLab user's public SSH key(s) via HTTP
 
 User can be given as first argument, or environment variables \$GITLAB_USER or \$USER
 
-Technically should use the GitLab API, see instead:  gitlab_get_user_ssh_public_keys.sh
+Technically should use the GitLab API, see instead:  gitlab_ssh_get_user_public_keys.sh
 
 ${0##*/} <user>
 EOF

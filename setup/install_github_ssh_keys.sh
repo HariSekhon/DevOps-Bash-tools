@@ -23,7 +23,7 @@ srcdir="$(dirname "$0")"
 home="${HOME:-$(cd && pwd)}"
 authorized_keys="${AUTHORIZED_KEYS:-$home/.ssh/authorized_keys}"
 
-"$srcdir/../github_get_user_ssh_public_keys.sh" |
+"$srcdir/../github_ssh_get_user_public_keys.sh" |
 while read -r ssh_key; do
     # skip comment lines
     [ -z "$(sed 's/#.*//; /^[[:space:]]*$/d' <<< "$ssh_key")" ] && continue

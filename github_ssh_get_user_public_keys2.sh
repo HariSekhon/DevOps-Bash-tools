@@ -21,7 +21,7 @@ Fetches a GitHub user's public SSH key(s) via HTTP
 
 User can be given as first argument, or environment variables \$GITHUB_USER or \$USER
 
-Technically should use the GitHub API, see instead:  github_get_user_ssh_public_keys.sh
+Technically should use the GitHub API, see instead:  github_ssh_get_user_public_keys.sh
 
 
 ${0##*/} <user>

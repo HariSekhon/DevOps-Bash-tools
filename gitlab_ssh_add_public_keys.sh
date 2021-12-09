@@ -30,11 +30,11 @@ If no SSH public key is given, defaults to using ~/.ssh/id_rsa.pub
 
 If a dash is given, reads the SSH public key(s) from standard input, ignoring comment lines so you can chain with tools like the adjacent scripts:
 
-    github_get_user_ssh_public_keys.sh
-    gitlab_get_user_ssh_public_keys.sh
-    github_get_ssh_public_keys.sh
-    gitlab_get_ssh_public_keys.sh
-    bitbucket_get_ssh_public_keys.sh
+    github_ssh_get_user_public_keys.sh
+    gitlab_ssh_get_user_public_keys.sh
+    github_ssh_get_public_keys.sh
+    gitlab_ssh_get_public_keys.sh
+    bitbucket_ssh_get_public_keys.sh
 
 Will return a 400 error if the SSH public key is invalid or has already been added.
 The script detects already existing keys and skips them to avoid this error
@@ -60,7 +60,7 @@ help_usage "$@"
 #min_args 1 "$@"
 
 echo "# Getting existing SSH public keys to skip any keys that already exist (to avoid 400 errors)" >&2
-ssh_public_keys="$("$srcdir/gitlab_get_ssh_public_keys.sh")"
+ssh_public_keys="$("$srcdir/gitlab_ssh_get_public_keys.sh")"
 
 add_ssh_public_keys_from_file(){
     local public_key_file="$1"

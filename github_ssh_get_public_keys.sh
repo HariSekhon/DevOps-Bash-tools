@@ -31,7 +31,7 @@ You can edit the permissions your token has here:
 
 To get other named users's public SSH keys see:
 
-    github_get_user_ssh_public_keys.sh
+    github_ssh_get_user_public_keys.sh
 
 
 ${0##*/}
