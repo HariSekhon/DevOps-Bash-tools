@@ -597,10 +597,10 @@ etc.
   - `github_actions_workflows_state.sh` - lists GitHub Actions workflows enabled/disabled states (GitHub now disables workflows after 6 months without a commit)
   - `github_actions_workflow_enable.sh` - enables a given GitHub Actions workflow
   - `github_actions_workflows_enable_all.sh` - enables all GitHub Actions workflows in a given repo. Useful to undo GitHub disabling all workflows in a repo after 6 months without a commit
-  - `github_get_user_ssh_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
-  - `github_get_ssh_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
-  - `github_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
-  - `github_delete_ssh_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
+  - `github_ssh_get_user_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
+  - `github_ssh_get_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
+  - `github_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
+  - `github_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
@@ -617,10 +617,10 @@ etc.
   - `gitlab_project_set_env_vars.sh` - adds / updates GitLab project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
-  - `gitlab_get_user_ssh_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent tools
-  - `gitlab_get_ssh_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API
-  - `gitlab_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
-  - `gitlab_delete_ssh_public_keys.sh` - deletes given SSH keys from the currently authenticated GitLab account by key id or title regex match
+  - `gitlab_ssh_get_user_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent tools
+  - `gitlab_ssh_get_public_keys.sh` - fetches the currently authenticated GitLab user's public SSH keys via the API
+  - `gitlab_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
+  - `gitlab_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitLab account by key id or title regex match
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
 - `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
@@ -628,8 +628,9 @@ etc.
   - `bitbucket_workspace_set_env_vars.sh` - adds / updates Bitbucket workspace-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `bitbucket_repo_set_env_vars.sh` - adds / updates Bitbucket repo-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `bitbucket_repo_set_description.sh` - sets the description for one or more repos using the BitBucket API
-  - `bitbucket_get_ssh_public_keys.sh` - fetches the currently authenticated BitBucket user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
-  - `bitbucket_add_ssh_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
+  - `bitbucket_ssh_get_public_keys.sh` - fetches the currently authenticated BitBucket user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
+  - `bitbucket_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
+  - `bitbucket_ssh_delete_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
 
 #### CI/CD - Continuous Integration / Continuous Deployment
 
