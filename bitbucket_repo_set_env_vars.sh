@@ -28,7 +28,8 @@ Adds / updates Bitbucket Pipelines repo-level secured environment variable(s) fr
 
 If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
-The repo_slug is case sensitive and must be in lowercase
+Workspace is case insensitive
+Repo slug is case sensitive and must be in lowercase
 
 Examples:
 
