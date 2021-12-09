@@ -24,7 +24,14 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Builds the local docker image using the Dockerfile in the current directory and pushes it to the AWS ECR registry
 
-Tags the docker image using the Git full hashref as well as 'latest', plus any Git tags if found for easy versioning support, and pushes all tags to AWS ECR
+Tags the docker image with the following and pushes all tags to AWS ECR:
+
+	- latest
+	- Git full hashref
+	- Git branch
+    - any Git tags, if found, for easy versioning support
+	- date (YYYY-MM-DD)
+	- datetimestamp (YYYYMMDDThhmmssZ] in UTC
 
 Requires AWS CLI to be installed and configured, as well as Docker to be running locally
 "
@@ -40,20 +47,36 @@ min_args 2 "$@"
 ECR="$1"
 REPO="$2"
 
+if is_CI; then
+    docker version
+    echo
+fi
+
+echo "* AWS ECR -> Docker login"
 # $AWS_DEFAULT_REGION should be set in env or profile
 aws ecr get-login-password | docker login --username AWS --password-stdin "$ECR"
+echo
 
+echo "* Determining tags"
 hashref="$(git rev-parse HEAD)"
-tags="$(git tag --points-at HEAD)"
+# branch tag date datetimestamp                                  # must use -u switch since --utc only works on Linux and not Mac
+tags="$(git rev-parse --abbrev-ref HEAD) $(git tag --points-at HEAD) $(date -u '+%F') $(date -u '+%FT%H%M%SZ')"
+echo
 
 docker build -t "$ECR/$REPO:$hashref" .
+echo
 
 for tag in latest $tags; do
+	echo "* Tagging as '$tag'"
     docker tag "$ECR/$REPO:$hashref" "$ECR/$REPO:$tag"
+	echo
 done
 
 docker push "$ECR/$REPO:$hashref"
+echo
 
 for tag in latest $tags; do
+	echo "* Pushing tag '$tag'"
     docker push "$ECR/$REPO:$tag"
+	echo
 done
