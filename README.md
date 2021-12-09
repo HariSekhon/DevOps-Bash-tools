@@ -601,6 +601,7 @@ etc.
   - `github_ssh_get_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
   - `github_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
   - `github_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
+  - `github_gpg_get_user_public_keys.sh` - fetches a given GitHub user's public GPG keys via the API
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
