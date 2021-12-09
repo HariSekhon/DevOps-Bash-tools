@@ -20,7 +20,9 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # XXX: Edit - crucial to set to the right environment, the rest of the inferred settings below depend on this
-export AWS_PROFILE="default"
+if [ -z "${CI:-}" ]; then
+    export AWS_PROFILE="default"
+fi
 
 AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
 export AWS_ACCOUNT_ID
