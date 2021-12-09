@@ -49,6 +49,9 @@ https://developer.atlassian.com/bitbucket/api/2/reference/
 https://developer.atlassian.com/bitbucket/api/2/reference/resource/
 
 
+XXX: NOTE: The API is inconsistent in places, some endpoints require a trailing slash otherwise they 404, others cannot have a trailing slash otherwise they 404 the other way
+
+
 Examples:
 
 
