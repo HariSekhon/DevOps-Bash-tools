@@ -23,6 +23,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 #       or
 #   gcloud config set --help
 
+if [ -z "${CI:-}" ]; then
+    # gcloud config configurations list
+    export CLOUDSDK_ACTIVE_CONFIG_NAME="dev"
+fi
+
 # XXX: Edit
 export CLOUDSDK_CORE_PROJECT=myproject
 
