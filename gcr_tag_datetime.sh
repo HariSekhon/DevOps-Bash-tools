@@ -36,6 +36,14 @@ YYYY-MM-DDTHHMMSSZ  (standard ISO UTC time without semi-colons which are invalid
 
 The timestamp will be normalized to UTC
 
+
+Similar scripts:
+
+    aws_ecr_*.sh - scripts for AWS Elastic Container Registry
+
+    gcr_*.sh - scripts for Google Container Registry
+
+
 Requires GCloud SDK to be installed and configured
 "
 
