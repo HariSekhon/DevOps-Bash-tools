@@ -29,7 +29,7 @@ The \$days threshold defaults to (365 * 2) ie. 2 years old
 
 You can grep and pipe this output to
 
-    | xargs aws_ecr_delete_tag.sh
+    | xargs -L1 aws_ecr_delete_tag.sh
 
 to clean out old CI image builds to save S3 storage costs on old CI images you no longer use
 
