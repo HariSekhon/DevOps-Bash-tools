@@ -45,7 +45,7 @@ Similar scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image> <digest> <new_tag>"
+usage_args="<image> <digest> <new_tag> [<aws_cli_options>]"
 
 help_usage "$@"
 
@@ -60,18 +60,18 @@ if ! [[ "$digest" =~ : ]]; then
 fi
 
 tstamp "getting manifest for image '$image' with digest '$digest'"
-manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageDigest=$digest" --query 'images[].imageManifest' --output text)"
+manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageDigest=$digest" --query 'images[].imageManifest' --output text "$@")"
 if is_blank "$manifest"; then
     die "ERROR: no manifest returned, did you specify a valid digest?"
 fi
 
 if [ -n "${FORCE:-}" ]; then
     tstamp "deleting new tag reference '$new_tag' if already present to ensure tagging succeeds"
-    aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$new_tag" >/dev/null || :
+    aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$new_tag" "$@" >/dev/null || :
 fi
 tstamp "tagging image '$image' with digest '$digest' with new tag '$new_tag'"
-aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" >/dev/null
+aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" "$@" >/dev/null
 
 tstamp "tags for image '$image' with digest '$digest' are now:"
-aws ecr describe-images --repository-name "$image" --output json |
+aws ecr describe-images --repository-name "$image" --output json "$@" |
 jq -r ".imageDetails[] | select(.imageDigest) | select(.imageDigest == \"$digest\") | .imageTags[]"
