@@ -28,6 +28,8 @@ usage_description="
 Runs a quick busybox pod on Kubernetes to debug networking / dns
 
 Shares the same busybox pod for successive invocations of this script for speed
+
+Arguments become options to 'kubectl run'
 "
 
 # used by usage() in lib/utils.sh
