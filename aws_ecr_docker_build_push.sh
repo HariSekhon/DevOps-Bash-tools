@@ -50,7 +50,7 @@ REPO="$2"
 if ! [[ "$ECR" =~ ^[[:digit:]]+.dkr.ecr.[[:alnum:]-]+.amazonaws.com$ ]]; then
     usage "Invalid ECR address given:  $ECR"
 fi
-if ! [[ "$REPO" =~ ^[[:alnum:]-]+$ ]]; then
+if ! [[ "$REPO" =~ ^[[:alnum:]/-]+$ ]]; then
     usage "Invalid Repo name given:  $REPO"
 fi
 
