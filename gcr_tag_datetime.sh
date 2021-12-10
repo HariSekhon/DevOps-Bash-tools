@@ -78,12 +78,6 @@ if ! [[ "$timestamp" =~ ^[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}[[:space:]]
     exit 1
 fi
 
-if is_mac; then
-    date(){
-        gdate "$@"
-    }
-fi
-
 # normalize to UTC
 timestamp="$(date --utc --date="$timestamp" '+%FT%H%M%SZ')"
 
