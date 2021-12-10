@@ -42,7 +42,7 @@ usage_args="<ecr_registry> <repo>"
 
 help_usage "$@"
 
-min_args 2 "$@"
+num_args 2 "$@"
 
 ECR="$1"
 REPO="$2"
