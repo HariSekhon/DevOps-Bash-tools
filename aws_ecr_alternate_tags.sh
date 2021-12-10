@@ -36,11 +36,6 @@ If the image isn't found in GCR, will return nothing and no error code since thi
 $usage_aws_cli_required
 
 
-If you want to remove an extra tag from an existing image:
-
-    aws ecr batch-delete-image --repository-name <image> --image-ids \"imageTag=<tag>\"
-
-
 Similar scripts:
 
     aws_ecr_*.sh - scripts for AWS Elastic Container Registry
