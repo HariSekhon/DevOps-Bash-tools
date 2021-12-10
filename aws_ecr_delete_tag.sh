@@ -42,7 +42,7 @@ usage_args="<image>:<tag> [<aws_cli_options>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+min_args 1 "$@"
 
 image_tag="$1"
 shift || :
