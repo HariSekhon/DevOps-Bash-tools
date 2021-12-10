@@ -14,8 +14,6 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-retag.html
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
