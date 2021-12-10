@@ -31,6 +31,14 @@ Does this via metadata API calls to  avoids network transfer from any docker pul
 If a GCR image has multiple tags, will take the longest tag which is assumed to be the most specific and
 therefore most likely to avoid collisions and race conditions of other tag updates happening concurrently
 
+
+Similar scripts:
+
+    aws_ecr_*.sh - scripts for AWS Elastic Container Registry
+
+    gcr_*.sh - scripts for Google Container Registry
+
+
 Requires GCloud SDK to be installed and configured
 "
 
