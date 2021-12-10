@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Tags a given GCR docker image:tag with the branch name from which it was built without pulling and pushing the docker image
+Tags a given GCR docker image:tag with the current branch name without pulling and pushing the docker image
 
 Requires GCloud SDK to be installed and configured
 "
