@@ -51,12 +51,6 @@ usage_args=""
 
 help_usage "$@"
 
-if is_mac; then
-    date(){
-        command gdate "$@"
-    }
-fi
-
 service_accounts="$(gcloud iam service-accounts list --format='get(email)')"
 
 now="$(date '+%s')"
