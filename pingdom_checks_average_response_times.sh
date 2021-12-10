@@ -44,12 +44,6 @@ usage_args="[<curl_options>]"
 
 help_usage "$@"
 
-if is_mac; then
-    date(){
-        gdate "$@"
-    }
-fi
-
 epoch_1_week_ago="$(date "+%s" -d "1 week ago")"
 
 "$srcdir/pingdom_api.sh" /checks "$@" |
