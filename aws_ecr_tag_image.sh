@@ -70,7 +70,7 @@ if is_blank "$manifest"; then
 fi
 
 if [ -n "${FORCE:-}" ]; then
-    "$srcdir/aws_ecr_delete_tag.sh" "$image" "$new_tag" "$@" >/dev/null || :
+    "$srcdir/aws_ecr_delete_tag.sh" "$image:$new_tag" "$@" >/dev/null || :
 fi
 tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
 aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" "$@" >/dev/null
