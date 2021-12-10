@@ -70,7 +70,7 @@ if [ -z "$tag" ] ||
     tag="latest"
 fi
 
-timestamp="$(aws ecr describe-images --repository-name "$image" --images-ids "imageTag=$tag" "$@" | jq -r '.imageDetails[].imagePushedAt' | sort -r | head -n1)"
+timestamp="$(aws ecr describe-images --repository-name "$image" --image-ids "imageTag=$tag" "$@" | jq -r '.imageDetails[].imagePushedAt' | sort -r | head -n1)"
 if [ -z "$timestamp" ]; then
     echo "Failed to determine timestamp from ECR for image '$image' with tag '$tag'"
     exit 1
