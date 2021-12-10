@@ -49,4 +49,9 @@ tag="$2"
 shift || :
 shift || :
 
-aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$tag" "$@"
+timestamp "deleting tag '$tag' for ECR image '$image'"
+# negate the result of the pipe
+aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$tag" "$@" |
+if jq -e '.failures[0]'; then
+    exit 1
+fi
