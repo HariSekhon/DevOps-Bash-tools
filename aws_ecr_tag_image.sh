@@ -49,7 +49,7 @@ Similar scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image>:<tag> <new_tag>"
+usage_args="<image>:<tag> <new_tag> [<aws_cli_options>]"
 
 help_usage "$@"
 
@@ -57,6 +57,8 @@ min_args 2 "$@"
 
 image_tag="$1"
 new_tag="$2"
+shift || :
+shift || :
 
 image="${image_tag%%:*}"
 tag="${image_tag##*:}"
@@ -67,18 +69,18 @@ fi
 
 
 tstamp "getting manifest for image '$image:$tag'"
-manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageTag=$tag" --query 'images[].imageManifest' --output text)"
+manifest="$(aws ecr batch-get-image --repository-name "$image" --image-ids "imageTag=$tag" --query 'images[].imageManifest' --output text "$@")"
 if is_blank "$manifest"; then
     die "ERROR: no manifest returned, did you specify a valid image tag?"
 fi
 
 if [ -n "${FORCE:-}" ]; then
     tstamp "deleting new tag reference '$new_tag' if already present to ensure tagging succeeds"
-    aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$new_tag" >/dev/null || :
+    aws ecr batch-delete-image --repository-name "$image" --image-ids "imageTag=$new_tag" "$@" >/dev/null || :
 fi
 tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
-aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" >/dev/null
+aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" "$@" >/dev/null
 
 tstamp "tags for image '$image:$tag' are now:"
-aws ecr describe-images --repository-name "$image" --output json |
+aws ecr describe-images --repository-name "$image" --output json "$@" |
 jq -r ".imageDetails[] | select(.imageTags) | select(.imageTags[] == \"$tag\") | .imageTags[]"
