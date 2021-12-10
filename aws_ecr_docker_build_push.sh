@@ -66,8 +66,21 @@ echo
 
 echo "* Determining tags"
 hashref="$(git rev-parse HEAD)"
-# branch tag date datetimestamp                                  # must use -u switch since --utc only works on Linux and not Mac
-tags="$(git rev-parse --abbrev-ref HEAD) $(git tag --points-at HEAD) $(date -u '+%F') $(date -u '+%FT%H%M%SZ')"
+#
+# adding tags:
+#
+# - git branch
+# - any git tags
+# - date
+# - datetimestamp
+#
+# use -u switch since --utc only works on Linux and not Mac
+tags="
+$(git rev-parse --abbrev-ref HEAD)
+$(git tag --points-at HEAD)
+$(date -u '+%F')
+$(date -u '+%FT%H%M%SZ')
+"
 echo
 
 docker build -t "$ECR/$REPO:$hashref" .
@@ -79,10 +92,7 @@ for tag in latest $tags; do
 	echo
 done
 
-docker push "$ECR/$REPO:$hashref"
-echo
-
-for tag in latest $tags; do
+for tag in "$hashref" latest $tags; do
 	echo "* Pushing tag '$tag'"
     docker push "$ECR/$REPO:$tag"
 	echo
