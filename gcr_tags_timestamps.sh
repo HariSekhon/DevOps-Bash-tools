@@ -39,7 +39,7 @@ Requires GCloud SDK to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[gcr.io/]<project_id>/<image>:<tag>"
+usage_args="[gcr.io/]<project_id>/<image>"
 
 help_usage "$@"
 
