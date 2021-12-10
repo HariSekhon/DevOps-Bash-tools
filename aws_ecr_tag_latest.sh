@@ -42,7 +42,7 @@ usage_args="<image>:<tag> [<aws_cli_options>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+min_args 1 "$@"
 
 image_tag="$1"
 shift || :
@@ -57,4 +57,4 @@ if is_blank "$tag"; then
     usage "tag suffix is blank"
 fi
 
-FORCE=1 "$srcdir/aws_ecr_tag_image.sh" "$docker_image:$tag" "latest"
+FORCE=1 "$srcdir/aws_ecr_tag_image.sh" "$docker_image:$tag" "latest" "$@"
