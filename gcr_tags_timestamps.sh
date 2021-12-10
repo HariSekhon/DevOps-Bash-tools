@@ -34,6 +34,14 @@ Each timestamp and tag for the given image is output tab separated on a separate
 
 If the image isn't found in GCR, will return nothing and no error code since this is the default GCloud SDK behaviour
 
+
+Similar scripts:
+
+    aws_ecr_*.sh - scripts for AWS Elastic Container Registry
+
+    gcr_*.sh - scripts for Google Container Registry
+
+
 Requires GCloud SDK to be installed and configured
 "
 
