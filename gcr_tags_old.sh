@@ -72,13 +72,6 @@ fi
 # 2 years old images by default
 days_threshold="${2:-$((365 * 2))}"
 
-# use GNU date on Mac, better than BSD date
-if is_mac; then
-    date(){
-        command gdate "$@"
-    }
-fi
-
 date_threshold="$(date --date="$days_threshold days ago")"
 
 gcloud container images list-tags "$image" \
