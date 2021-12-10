@@ -320,12 +320,14 @@ etc.
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
   - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `gitlab_project_set_env_vars.sh`, `circleci_project_set_env_vars.sh`, `bitbucket_repo_set_env_vars.sh` / `bitbucket_workspace_set_env_vars.sh`)
-  - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to [AWS ECR](https://aws.amazon.com/ecr/) with not just the `latest` docker tag but also the current Git hashref and Git tags
-  - `aws_ecr_tag_image.sh` - tags an [AWS ECR](https://aws.amazon.com/ecr/) image with another tag without pulling and pushing it
-  - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an [AWS ECR](https://aws.amazon.com/ecr/) image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
-  - `aws_ecr_list_tags.sh` - lists all the tags for a given AWS ECR docker image
-  - `aws_ecr_alternate_tags.sh` - lists all the tags for a given AWS ECR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
-  - `aws_ecr_newest_image_tags.sh` - lists the tags for the given AWS ECR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
+  - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
+    - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
+    - `aws_ecr_list_tags.sh` - lists all the tags for a given ECR docker image
+    - `aws_ecr_alternate_tags.sh` - lists all the tags for a given ECR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
+    - `aws_ecr_newest_image_tags.sh` - lists the tags for the given ECR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
+    - `aws_ecr_tag_image.sh` - tags an ECR image with another tag without pulling and pushing it
+    - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an ECR image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
+    - `aws_ecr_tag_branch.sh` - tags a given ECR `image:tag` with the current Git branch without pulling or pushing the docker image
   - `aws_foreach_project.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
   - `aws_foreach_region.sh` - executes a templated command against each AWS region enabled for the current account, replacing `{region}` in each iteration. Combine with AWS CLI or scripts to find resources across regions
   - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
@@ -344,20 +346,22 @@ etc.
   - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
-  - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/). Useful for uploading a password without exposing it on your screen
-  - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
-  - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) secret. Useful for uploading a password without exposing it on your screen
-  - `aws_secret_get.sh` - gets a secret value for a given secret from AWS Secrets Manager, retrieving either a secure string or secure binary depending on which is available
-  - `aws_secrets_list.sh` - returns a list of AWS Secrets Manager secrets, one per line
-  - `aws_users.sh` - list your [AWS IAM](https://aws.amazon.com/iam/) users
-  - `aws_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
-  - `aws_users_access_key_age_report.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age using a bulk credentials report (faster for many users)
-  - `aws_users_access_key_last_used.sh` - prints AWS users [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) last used date
-  - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
-  - `aws_users_last_used_report.sh` - lists AWS users password/access keys last used dates
-  - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
-  - `aws_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
-  - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
+  - `aws_secret*.sh` - AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) scripts:
+    - `aws_secrets_list.sh` - returns the list of secrets, one per line
+    - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to Secrets Manager. Useful for uploading a password without exposing it on your screen
+    - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to Secrets Manager as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
+    - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given Secrets Manager secret. Useful for uploading a password without exposing it on your screen
+    - `aws_secret_get.sh` - gets a secret value for a given secret from Secrets Manager, retrieving either a secure string or secure binary depending on which is available
+  - `aws_users*.sh` - [AWS IAM](https://aws.amazon.com/iam/) user auditing scripts:
+    - `aws_users.sh` - list your IAM users
+    - `aws_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
+    - `aws_users_access_key_age_report.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age using a bulk credentials report (faster for many users)
+    - `aws_users_access_key_last_used.sh` - prints AWS users [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) last used date
+    - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
+    - `aws_users_last_used_report.sh` - lists AWS users password/access keys last used dates
+    - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
+    - `aws_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
+    - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
   - `setup/eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
 
 #### GCP - Google Cloud Platform
@@ -407,7 +411,7 @@ etc.
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
-    - `gcr_tag_branch.sh` - tags a given GCR docker `image:tag` with the branch from which it was built without pulling or pushing the docker image
+    - `gcr_tag_branch.sh` - tags a given GCR docker `image:tag` with the current Git branch without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
     - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
     - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given GCR docker image as `latest` without pulling or pushing the docker image
