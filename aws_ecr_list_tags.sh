@@ -31,11 +31,6 @@ Each tag for the given image is output on a separate line for easy further pipin
 $usage_aws_cli_required
 
 
-If you want to remove an extra tag from an existing image:
-
-    aws ecr batch-delete-image --repository-name <image> --image-ids \"imageTag=<tag>\"
-
-
 Similar scripts:
 
     aws_ecr_*.sh - scripts for AWS Elastic Container Registry
