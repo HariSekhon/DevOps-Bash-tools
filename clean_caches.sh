@@ -26,7 +26,7 @@
 
 set -eu  #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
-# not using any of myl libraries or path dependencies to allow the above self-contained curl to shell to work for calling from Dockerfile
+# not using any of my libraries or path dependencies to allow the above self-contained curl to shell to work for calling from Dockerfiles
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # OS package management caches
