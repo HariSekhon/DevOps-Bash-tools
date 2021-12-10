@@ -52,12 +52,6 @@ min_args 1 "$@"
 check_id="$1"
 shift || :
 
-if is_mac; then
-    date(){
-        gdate "$@"
-    }
-fi
-
 epoch_1_year_ago="$(date "+%s" -d "1 year ago")"
 
 "$srcdir/pingdom_api.sh" "/summary.outage/$check_id?from=$epoch_1_year_ago" "$@" |
