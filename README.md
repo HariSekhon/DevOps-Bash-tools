@@ -325,6 +325,7 @@ etc.
   - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an [AWS ECR](https://aws.amazon.com/ecr/) image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
   - `aws_ecr_list_tags.sh` - lists all the tags for a given AWS ECR docker image
   - `aws_ecr_alternate_tags.sh` - lists all the tags for a given AWS ECR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
+  - `aws_ecr_newest_image_tags.sh` - lists the tags for the given AWS ECR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
   - `aws_foreach_project.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
   - `aws_foreach_region.sh` - executes a templated command against each AWS region enabled for the current account, replacing `{region}` in each iteration. Combine with AWS CLI or scripts to find resources across regions
   - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
