@@ -58,6 +58,6 @@ if [ -z "${BRANCH_NAME:-}" ]; then
 fi
 BRANCH_NAME="${BRANCH_NAME##*/}"
 
-echo "tagging docker image $docker_image:$tag as 'latest'"
+echo "tagging docker image $docker_image:$tag with branch '$BRANCH_NAME'"
 # --quiet otherwise prompts Y/n which would hang build
 gcloud container images add-tag --quiet "$docker_image:$tag" "$docker_image:$BRANCH_NAME"
