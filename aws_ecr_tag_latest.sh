@@ -57,4 +57,4 @@ if is_blank "$tag"; then
     usage "tag suffix is blank"
 fi
 
-"$srcdir/aws_ecr_tag_image.sh" "$docker_image:$tag" "latest"
+FORCE=1 "$srcdir/aws_ecr_tag_image.sh" "$docker_image:$tag" "latest"
