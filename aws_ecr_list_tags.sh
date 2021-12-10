@@ -54,6 +54,6 @@ num_args 1 "$@"
 image="$1"
 shift || :
 
-aws ecr list-images --repository "$image" |
+aws ecr list-images --repository "$image" "$@" |
 jq -r '.imageIds[].imageTag | select(.)' |
 sort
