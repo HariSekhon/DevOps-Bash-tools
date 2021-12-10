@@ -36,6 +36,13 @@ See Also:
 
     gcr_tags_old.sh        - used by this script, lists all image:tag older than N days
     gcr_tags_timestamps.sh - lists tags and timestamps - useful for comparing with the output from gcr_tags_old.sh
+
+    gcr_*.sh - scripts for Google Container Registry
+
+    aws_ecr_*.sh - scripts for AWS Elastic Container Registry
+
+
+Requires GCloud SDK to be installed and configured
 "
 
 # used by usage() in lib/utils.sh
