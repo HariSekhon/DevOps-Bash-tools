@@ -38,6 +38,13 @@ to clean out old CI image builds to save GCS storage costs on old CI images you 
 See Also:
 
     gcr_tags_timestamps.sh - lists tags and timestamps - useful for comparing with the output from this script
+
+    gcr_*.sh - scripts for Google Container Registry
+
+    aws_ecr_*.sh - scripts for AWS Elastic Container Registry
+
+
+Requires GCloud SDK to be installed and configured
 "
 
 # used by usage() in lib/utils.sh
