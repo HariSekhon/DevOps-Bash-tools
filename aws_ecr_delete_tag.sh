@@ -38,16 +38,20 @@ Similar scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image> <tag> [<aws_cli_options>]"
+usage_args="<image>:<tag> [<aws_cli_options>]"
 
 help_usage "$@"
 
-num_args 2 "$@"
+num_args 1 "$@"
 
-image="$1"
-tag="$2"
+image_tag="$1"
 shift || :
-shift || :
+
+image="${image_tag%%:*}"
+tag="${image_tag##*:}"
+if [ -z "$tag" ] || [ "$tag" = "$image" ]; then
+    usage "tag not given"
+fi
 
 timestamp "deleting tag '$tag' for ECR image '$image'"
 # negate the result of the pipe
