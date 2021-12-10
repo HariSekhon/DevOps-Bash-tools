@@ -40,7 +40,7 @@ If you want to remove an extra tag from an existing image:
 
 Similar scripts:
 
-    aws_ecr_tag_image.sh - same as this script but locates the image to tag using a digest
+    aws_ecr_tag_image_by_digest.sh - same as this script but locates the image to tag using a digest
 
     docker_registry_tag_image.sh - for private Docker Registries
 
