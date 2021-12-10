@@ -85,5 +85,7 @@ timestamp="$(date --utc --date="$timestamp" '+%FT%H%M%SZ')"
 
 date="${timestamp%T*}"
 
+"$srcdir/aws_ecr_delete_tag.sh" "$image" "$date" >/dev/null || :
+"$srcdir/aws_ecr_delete_tag.sh" "$image" "$timestamp" >/dev/null || :
 "$srcdir/aws_ecr_tag_image.sh" "$image:$tag" "$date" "$@"
 "$srcdir/aws_ecr_tag_image.sh" "$image:$tag" "$timestamp" "$@"
