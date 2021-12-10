@@ -26,6 +26,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Tags a given GCR docker image:tag with the current branch name without pulling and pushing the docker image
 
+
+Similar scripts:
+
+    aws_ecr_*.sh - scripts for AWS Elastic Container Registry
+
+    gcr_*.sh - scripts for Google Container Registry
+
+
 Requires GCloud SDK to be installed and configured
 "
 
