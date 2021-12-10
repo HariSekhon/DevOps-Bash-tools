@@ -74,7 +74,7 @@ if [ -z "$timestamp" ]; then
     exit 1
 fi
 if ! [[ "$timestamp" =~ ^[[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2}[[:space:]][[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2}[+-][[:digit:]]{2}:[[:digit:]]{2}$ ]]; then
-    echo "Cloud Build timestamp not in expect YYYY-MM-DD HH:MM:SS[+-]HH:MM format, API may have changed"
+    echo "ECR timestamp not in expect YYYY-MM-DD HH:MM:SS[+-]HH:MM format, API may have changed"
     exit 1
 fi
 
