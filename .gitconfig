@@ -220,3 +220,4 @@
     #patterns = hari|sekhon
     allowed = AKIAIOSFODNN7EXAMPLE
     allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    #allowed = AWS_ACCOUNT_ID
