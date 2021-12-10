@@ -145,12 +145,6 @@ if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
     fi
 fi
 
-if is_mac; then
-    date(){
-        command gdate "$@"
-    }
-fi
-
 check_repos(){
     for repo in "$@"; do
         # very concise gives exactly the head hashref but no date
