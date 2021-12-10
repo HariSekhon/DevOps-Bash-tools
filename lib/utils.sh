@@ -433,6 +433,9 @@ if is_mac; then
     readlink(){
         command greadlink "$@"
     }
+    date(){
+        command gdate "$@"
+    }
 fi
 
 # fails interactive import without this
