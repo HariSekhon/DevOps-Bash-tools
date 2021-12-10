@@ -56,10 +56,10 @@ before_epoch_millis="$((epoch_millis - millis))"
 #
 #   https://github.com/aws/aws-cli/issues/6526
 #
-#aws batch list-jobs --job-queue "$queue" --filters "name=BEFORE_CREATED_AT,values=$before_epoch" --no-paginate
+#aws batch list-jobs --job-queue "$queue" --filters "name=BEFORE_CREATED_AT,values=$before_epoch"
 
 for state in SUBMITTED PENDING RUNNABLE STARTING RUNNING; do
-    aws batch list-jobs --job-queue "$queue" --job-status "$state" --no-paginate |
+    aws batch list-jobs --job-queue "$queue" --job-status "$state" |
     jq ".jobSummaryList[] | select(.createdAt <= $before_epoch_millis)"
 done |
 # slurp items back into an array

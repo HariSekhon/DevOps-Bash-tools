@@ -53,7 +53,7 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws eks list-clusters --no-paginate "$@" |
+aws eks list-clusters "$@" |
 jq -r '.clusters[]' |
 while read -r cluster; do
     echo "Getting AWS EKS credentials for cluster '$cluster':"

@@ -80,5 +80,5 @@ tstamp "tagging image '$image:$tag' with new tag '$new_tag'"
 aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" >/dev/null
 
 tstamp "tags for image '$image:$tag' are now:"
-aws ecr describe-images --repository-name "$image" --output json --no-paginate |
+aws ecr describe-images --repository-name "$image" --output json |
 jq -r ".imageDetails[] | select(.imageTags) | select(.imageTags[] == \"$tag\") | .imageTags[]"

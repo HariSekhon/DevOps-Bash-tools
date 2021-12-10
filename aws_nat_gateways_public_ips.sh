@@ -33,5 +33,5 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-aws ec2 describe-nat-gateways --no-paginate |
+aws ec2 describe-nat-gateways |
 jq -r '.NatGateways[].NatGatewayAddresses[].PublicIp'

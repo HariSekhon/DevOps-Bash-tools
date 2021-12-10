@@ -45,7 +45,7 @@ export AWS_DEFAULT_OUTPUT=json
 echo "Getting policy list" >&2
 policies="$(
     # get json to allow to filter later
-    aws iam list-policies --no-paginate |
+    aws iam list-policies |
     jq -r '.Policies[] | [.Arn, .DefaultVersionId] | @tsv' # | head -n 10 || :
 )"
 

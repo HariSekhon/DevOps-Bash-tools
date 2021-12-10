@@ -43,7 +43,7 @@ help_usage "$@"
 export AWS_DEFAULT_OUTPUT=json
 
 #echo "Getting Cloud Trails" >&2
-aws cloudtrail describe-trails --no-paginate |
+aws cloudtrail describe-trails |
 jq -r '.trailList[].Name' |
 while read -r name; do
     echo -n "$name "

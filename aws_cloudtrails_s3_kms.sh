@@ -40,7 +40,7 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws cloudtrail describe-trails --no-paginate |
+aws cloudtrail describe-trails |
 # more efficient
 jq -r '.trailList[] | [.Name, has("KmsKeyId"), .KmsKeyId // "N/A"] | @tsv' |
 #jq -r '.trailList[] | [.Name, .KmsKeyId] | @tsv' |

@@ -38,7 +38,7 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws iam list-policies --no-paginate |
+aws iam list-policies |
 # get json to allow to filter later
 #jq -r '.Policies[] | select(.IsAttachable==true) | select (.AttachmentCount==0)'
 jq -r '.Policies[] | select(.IsAttachable==true) | select (.AttachmentCount==0) | [.PolicyId, .PolicyName, .CreateDate, .UpdateDate] | @tsv' |

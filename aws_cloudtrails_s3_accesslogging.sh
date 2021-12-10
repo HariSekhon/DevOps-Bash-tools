@@ -44,7 +44,7 @@ help_usage "$@"
 
 export AWS_DEFAULT_OUTPUT=json
 
-aws cloudtrail describe-trails --query 'trailList[*].S3BucketName' --no-paginate |
+aws cloudtrail describe-trails --query 'trailList[*].S3BucketName' |
 jq -r '.[]' |
 while read -r name; do
     printf '%s\t' "$name"

@@ -73,5 +73,5 @@ tstamp "tagging image '$image' with digest '$digest' with new tag '$new_tag'"
 aws ecr put-image --repository-name "$image" --image-tag "$new_tag" --image-manifest "$manifest" >/dev/null
 
 tstamp "tags for image '$image' with digest '$digest' are now:"
-aws ecr describe-images --repository-name "$image" --output json --no-paginate |
+aws ecr describe-images --repository-name "$image" --output json |
 jq -r ".imageDetails[] | select(.imageDigest) | select(.imageDigest == \"$digest\") | .imageTags[]"
