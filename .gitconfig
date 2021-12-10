@@ -220,4 +220,5 @@
     #patterns = hari|sekhon
     allowed = AKIAIOSFODNN7EXAMPLE
     allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+    # better to add to private repos .git/config only
     #allowed = AWS_ACCOUNT_ID
