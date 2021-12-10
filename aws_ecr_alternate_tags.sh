@@ -52,13 +52,14 @@ Similar scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image>:<tag>"
+usage_args="<image>:<tag> [<aws_cli_options>]"
 
 help_usage "$@"
 
 num_args 1 "$@"
 
 image_tag="$1"
+shift || :
 
 image="${image_tag%%:*}"
 tag="${image_tag##*:}"
@@ -66,6 +67,6 @@ if [ -z "$tag" ] || [ "$tag" = "$image" ]; then
     tag="latest"
 fi
 
-aws ecr describe-images --repository-name "$image" --image-ids "imageTag=$tag" |
+aws ecr describe-images --repository-name "$image" --image-ids "imageTag=$tag" "$@" |
 jq -r '.imageDetails[].imageTags[]' |
 sort
