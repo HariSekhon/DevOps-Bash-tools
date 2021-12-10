@@ -323,13 +323,14 @@ etc.
   - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
     - `aws_ecr_list_tags.sh` - lists all the tags for a given ECR docker image
-    - `aws_ecr_alternate_tags.sh` - lists all the tags for a given ECR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
     - `aws_ecr_newest_image_tags.sh` - lists the tags for the given ECR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
+    - `aws_ecr_alternate_tags.sh` - lists all the tags for a given ECR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
     - `aws_ecr_tag_image.sh` - tags an ECR image with another tag without pulling and pushing it
     - `aws_ecr_tag_image_by_digest.sh` - same as above but tags an ECR image found via digest (more accurate as reference by existing tag can be a moving target). Useful to recover images that have become untagged
+    - `aws_ecr_tag_latest.sh` - tags a given ECR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `aws_ecr_tag_branch.sh` - tags a given ECR `image:tag` with the current Git branch without pulling or pushing the docker image
     - `aws_ecr_tag_datetime.sh` - tags a given ECR docker image with its creation date and UTC timestamp (when it was uploaded to ECR) without pulling or pushing the docker image
-    - `aws_ecr_tag_latest.sh` - tags a given ECR docker `image:tag` as `latest` without pulling or pushing the docker image
+    - `aws_ecr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given ECR docker image as `latest` without pulling or pushing the docker image
     - `aws_ecr_tags_timestamps.sh` - lists all the tags and their timestamps for a given ECR docker image
     - `aws_ecr_tags_old.sh` - lists tags older than N days for a given ECR docker image
     - `aws_ecr_delete_old_tags.sh` - deletes tags older than N days for a given ECR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
@@ -415,13 +416,13 @@ etc.
     - `gke_nodepool_drain.sh` - drains all nodes in a given nodepool (to decommission or rebuild the node pool, for example with different taints)
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
   - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
+    - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
+    - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
+    - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
     - `gcr_tag_latest.sh` - tags a given GCR docker `image:tag` as `latest` without pulling or pushing the docker image
     - `gcr_tag_branch.sh` - tags a given GCR docker `image:tag` with the current Git branch without pulling or pushing the docker image
     - `gcr_tag_datetime.sh` - tags a given GCR docker image with its creation date and UTC timestamp (when it was uploaded or created by [Google Cloud Build](https://cloud.google.com/cloud-build)) without pulling or pushing the docker image
-    - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
     - `gcr_tag_newest_image_as_latest.sh` - finds and tags the newest build of a given GCR docker image as `latest` without pulling or pushing the docker image
-    - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
-    - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_tags_timestamps.sh` - lists all the tags and their timestamps for a given GCR docker image
     - `gcr_tags_old.sh` - lists tags older than N days for a given GCR docker image
     - `gcr_delete_old_tags.sh` - deletes tags older than N days for a given GCR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
