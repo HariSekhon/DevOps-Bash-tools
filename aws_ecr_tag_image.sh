@@ -33,11 +33,6 @@ If the environment variable FORCE is set, will remove the new tag reference to e
 $usage_aws_cli_required
 
 
-If you want to remove an extra tag from an existing image:
-
-    aws ecr batch-delete-image --repository-name <image> --image-ids \"imageTag=<tag>\"
-
-
 Similar scripts:
 
     aws_ecr_tag_image_by_digest.sh - same as this script but locates the image to tag using a digest
