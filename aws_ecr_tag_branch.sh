@@ -60,5 +60,4 @@ if [ -z "${BRANCH_NAME:-}" ]; then
 fi
 BRANCH_NAME="${BRANCH_NAME##*/}"
 
-"$srcdir/aws_ecr_delete_tag.sh" "$docker_image" "$BRANCH_NAME" >/dev/null || :
-"$srcdir/aws_ecr_tag_image.sh" "$docker_image:$tag" "$BRANCH_NAME"
+FORCE=1 "$srcdir/aws_ecr_tag_image.sh" "$docker_image:$tag" "$BRANCH_NAME"
