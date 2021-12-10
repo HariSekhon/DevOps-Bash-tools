@@ -78,4 +78,6 @@ if [ "$answer" != "y" ]; then
     exit 1
 fi
 
-xargs -L1 "aws_ecr_delete_tag.sh" "$@" <<< "$image_tags"
+for image_tag in $image_tags; do
+    "$srcdir/aws_ecr_delete_tag.sh" "$image_tag" "$@"
+done
