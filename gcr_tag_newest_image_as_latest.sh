@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds the newest build of a given GCR docker image by creation date and tags it as 'latest'
 
-Does this via metadata API calls to  avoids network transfer from any docker pull / docker push
+Does this via metadata API calls to avoid network transfer from any docker pull / docker push
 
 If a GCR image has multiple tags, will take the longest tag which is assumed to be the most specific and
 therefore most likely to avoid collisions and race conditions of other tag updates happening concurrently
