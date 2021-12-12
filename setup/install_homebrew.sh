@@ -59,13 +59,13 @@ else
             # can't just pass bash, and -s shell needs to be fully qualified path
             su "$user" -s /bin/bash
         else
-            echo "Installing HomeBrew on Linux as user $USER"
+            echo "Installing HomeBrew on Linux as user ${USER:-whoami}"
             # newer versions of HomeBrew require bash not sh due to use of [[
             bash
         fi
         }
     else
-        echo "Installing HomeBrew on Mac as user $USER"
+        echo "Installing HomeBrew on Mac as user ${USER:-whoami}"
         # now deprecated and replaced with the shell version below
         #curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | ruby
         bash -c "$(echo "$cmds"; curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
