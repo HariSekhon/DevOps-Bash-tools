@@ -36,8 +36,9 @@ jobs:
       - image: cimg/base:2021.04
     steps:
       - checkout
-      - setup_remote_docker
-        #version: 20.10.11
+      - setup_remote_docker:
+          version: 20.10.11
+          docker_layer_caching: true
       - run: setup/ci_bootstrap.sh
       - run: make init
       - run: make
