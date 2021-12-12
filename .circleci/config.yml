@@ -38,7 +38,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
-          docker_layer_caching: true
+          #docker_layer_caching: true  # ignored on free plan
       - run: setup/ci_bootstrap.sh
       - run: make init
       - run: make
