@@ -14,27 +14,34 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# https://circleci.com/docs/2.0/configuration-reference
+# Master Template with more advanced config:
+#
+#   https://github.com/HariSekhon/Templates/blob/master/circleci_config.yml
+
+# Reference:
+#
+#   https://circleci.com/docs/2.0/configuration-reference
 
 version: 2.1
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+    - build
+
 jobs:
   build:
-    # technically a docker image is a better choice than machine
-    # but we want to introduce some native environment variation
-    # between build systems in order to test the repo's build automation is robust
-    machine:
-      image: default
-      #image: ubuntu-1604:201903-01
-      # set to an actual docker image when running locally using circle_ci_job.sh
-      # docker image must have git installed to do the checkout
-      # so using harisekhon/dev:ubuntu instead of base ubuntu image
-      #image: harisekhon/dev:ubuntu
+    docker:
+      - image: cimg/base:2021.04
     steps:
       - checkout
+      - setup_remote_docker
+        #version: 20.10.11
       - run: setup/ci_bootstrap.sh
       - run: make init
       - run: make
-      # to allow docker networking to work
-      - run: sudo sysctl net.ipv4.ip_forward=1
-      - run: sudo service docker restart
+      # to allow docker networking to work if using machine VM
+      #- run: sudo sysctl net.ipv4.ip_forward=1
+      #- run: sudo service docker restart
       - run: make test
