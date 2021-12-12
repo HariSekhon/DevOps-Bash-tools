@@ -657,6 +657,7 @@ etc.
 - `circleci_*.sh` - [CircleCI](https://circleci.com/) scripts:
   - `circleci_api.sh` - queries CircleCI's API with authentication
   - `circleci_project_set_env_vars.sh` - adds / updates CircleCI project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `circleci_local_execute.sh` - installs CircleCI CLI and executes `.circleci/config.yml` locally
   - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
 - `drone_api.sh` - queries [Drone.io](https://drone.io/)'s API with authentication
