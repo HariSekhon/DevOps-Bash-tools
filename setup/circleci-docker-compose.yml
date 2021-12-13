@@ -27,6 +27,8 @@ version: '2.2'
 services:
   circleci:
     image: circleci/runner:launch-agent
+    # or replace with an image with built-in dependencies - see https://github/harisekhon/Dockerfiles
+    #image: harisekhon/circleci-runner
     environment:
       CIRCLECI_API_TOKEN: $CIRCLECI_API_TOKEN     # use the token output by the 'runner resource-class create' command above
       CIRCLECI_RESOURCE_CLASS: ${CIRCLECI_RESOURCE_CLASS:-harisekhon/docker}  # <org>/<runner_name>
