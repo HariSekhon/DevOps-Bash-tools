@@ -38,11 +38,7 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.11
-          #docker_layer_caching: true  # ignored on free plan
       - run: setup/ci_bootstrap.sh
       - run: make init
       - run: make
-      # to allow docker networking to work if using machine VM
-      #- run: sudo sysctl net.ipv4.ip_forward=1
-      #- run: sudo service docker restart
       - run: make test
