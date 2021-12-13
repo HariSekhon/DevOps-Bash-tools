@@ -30,7 +30,9 @@ If 2 keys already exist, decide which key to replace using these heuristics in t
 - unused key
 - oldest usage (ie. not the key we're currently using to authenticate)
 
-Alterantively you can specify an access key id to delete as an argument, but if there is only 1 access key it won't delete it for safety (will output warning)
+Alternatively you can specify an access key id to delete as an argument, but if there is only 1 access key it won't delete it for safety (will output warning)
+
+If there is only 1 access key, a 2nd key is created but no key is deleted for safety to prevent you cutting yourself off as standard usage is to rotate through 2 access keys
 
 
 $usage_aws_cli_required
