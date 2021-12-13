@@ -337,6 +337,7 @@ etc.
   - `aws_foreach_project.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
   - `aws_foreach_region.sh` - executes a templated command against each AWS region enabled for the current account, replacing `{region}` in each iteration. Combine with AWS CLI or scripts to find resources across regions
   - `aws_harden_password_policy.sh` - strengthens [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) according to [CIS Foundations Benchmark](https://d1.awsstatic.com/whitepapers/compliance/AWS_CIS_Foundations_Benchmark.pdf) recommendations
+  - `aws_iam_replace_access_key.sh` - replaces the non-current IAM access key (Inactive, Not Used, longer time since used, or an explicitly given key), outputting the new key as shell export statements (useful for piping to the same tools listed for `aws_csv_creds.sh` above)
   - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
   - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
