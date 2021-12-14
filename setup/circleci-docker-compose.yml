@@ -31,4 +31,4 @@ services:
     #image: harisekhon/circleci-runner
     environment:
       CIRCLECI_API_TOKEN: $CIRCLECI_API_TOKEN     # use the token output by the 'runner resource-class create' command above
-      CIRCLECI_RESOURCE_CLASS: ${CIRCLECI_RESOURCE_CLASS:-harisekhon/docker-runner}  # <org>/<runner_name>
+      CIRCLECI_RESOURCE_CLASS: ${CIRCLECI_RESOURCE_CLASS:-harisekhon/docker-runner}  # <namespace>/<resource>
