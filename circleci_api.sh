@@ -57,6 +57,19 @@ Examples:
     ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools | jq .
 
 
+# Get a list of pipeline runs for a project:
+
+    ${0##*/} /project/<vcs>/<user_or_org>/<repo>/pipeline
+
+    ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/pipeline | jq .
+
+    # just the pipelines triggered by you
+
+    ${0##*/} /project/<vcs>/<user_or_org>/<repo>/pipeline/mine
+
+    ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/pipeline/mine | jq .
+
+
 # Get environment variables for a project:
 
     ${0##*/} /project/<vcs>/<user_or_org>/<repo>/envvar
