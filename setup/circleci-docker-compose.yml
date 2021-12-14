@@ -16,7 +16,7 @@
 
 # Set up runner token:
 #
-#   circleci runner resource-class create <org>/<name> "description" --generate-token
+#   circleci runner resource-class create <namespace>/<resource> "description" --generate-token
 #
 # eg.
 #
