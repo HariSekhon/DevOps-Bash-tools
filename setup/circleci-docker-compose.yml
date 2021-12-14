@@ -22,6 +22,10 @@
 #
 #   circleci runner resource-class create harisekhon/docker-runner "Docker Runner" --generate-token
 
+# For a much more advanced setup ready to go on Kubernetes with auto-scaling, see
+#
+#   https://github.com/HariSekhon/Kubernetes-configs
+
 version: '2.2'
 
 services:
