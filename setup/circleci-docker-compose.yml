@@ -20,7 +20,7 @@
 #
 # eg.
 #
-#   circleci runner resource-class create harisekhon/docker "Docker Runner" --generate-token
+#   circleci runner resource-class create harisekhon/docker-runner "Docker Runner" --generate-token
 
 version: '2.2'
 
