@@ -40,17 +40,20 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<aws_access_key_id>]"
+usage_args="[<aws_access_key_id> <aws_cli_options>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
 
 access_key_id_to_delete="${1:-}"
+if [ $# -gt 0 ]; then
+    shift || :
+fi
 
 export AWS_DEFAULT_OUTPUT=json
 
-keys="$(aws iam list-access-keys)"
+keys="$(aws iam list-access-keys "$@")"
 
 num_keys="$(jq -r '.AccessKeyMetadata | length' <<< "$keys")"
 if ! [[ "$num_keys" =~ ^[[:digit:]]+$ ]]; then
@@ -71,7 +74,7 @@ elif [ "$num_keys" -eq 2 ]; then
                 access_key_id_to_delete="$access_key_id"
                 break
             fi
-            last_used_date="$(aws iam get-access-key-last-used --access-key-id "$access_key_id" |
+            last_used_date="$(aws iam get-access-key-last-used --access-key-id "$access_key_id" "$@" |
                               jq -r '.AccessKeyLastUsed.LastUsedDate')"
             if [ "$last_used_date" = null ]; then
                 access_key_id_to_delete="$access_key_id"
@@ -95,12 +98,12 @@ elif [ "$num_keys" -eq 2 ]; then
         die "Couldn't determine which access key to delete, aborting..."
     fi
     timestamp "Deleting AWS access key '$access_key_id_to_delete'"
-    #aws iam update-access-key --access-key-id "$access_key_id_to_delete" --status Inactive
-    aws iam delete-access-key --access-key-id "$access_key_id_to_delete"
+    #aws iam update-access-key --access-key-id "$access_key_id_to_delete" --status Inactive "$@"
+    aws iam delete-access-key --access-key-id "$access_key_id_to_delete" "$@"
     echo >&2
 fi
 
-aws iam create-access-key |
+aws iam create-access-key "$@" |
 jq -r '
     .AccessKey |
     [ "export AWS_ACCESS_KEY_ID=" + .AccessKeyId, "export AWS_SECRET_ACCESS_KEY=" + .SecretAccessKey ] |
