@@ -34,6 +34,8 @@ Alternatively you can specify an access key id to delete as an argument, but if 
 
 If there is only 1 access key, a 2nd key is created but no key is deleted for safety to prevent you cutting yourself off as standard usage is to rotate through 2 access keys
 
+If the first argument given starts with a dash it is inferred to be an AWS CLI option instead of an access key ID to replace and the above heuristic is used to figure out which key to replace
+
 
 $usage_aws_cli_required
 "
@@ -46,9 +48,11 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-access_key_id_to_delete="${1:-}"
-if [ $# -gt 0 ]; then
-    shift || :
+if ! [[ "${1:-}" =~ ^- ]]; then
+    access_key_id_to_delete="${1:-}"
+    if [ $# -gt 0 ]; then
+        shift || :
+    fi
 fi
 
 export AWS_DEFAULT_OUTPUT=json
