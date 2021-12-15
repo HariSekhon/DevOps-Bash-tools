@@ -74,7 +74,7 @@ hashref="$(git rev-parse HEAD)"
 # - date
 # - datetimestamp
 #
-# use -u switch since --utc only works on Linux and not Mac
+# must use date -u switch since --utc only works on Linux and not Mac
 tags="
 $(git rev-parse --abbrev-ref HEAD)
 $(git tag --points-at HEAD)
