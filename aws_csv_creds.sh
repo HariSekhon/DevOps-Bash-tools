@@ -51,7 +51,7 @@ if ! [ -f "$csv" ]; then
     die "File not found: $csv"
 fi
 
-if ! grep -Fq 'AKIA'; then
+if ! grep -Fq 'AKIA' "$csv"; then
     die "Access Key not found in file '$csv'"
 fi
 
