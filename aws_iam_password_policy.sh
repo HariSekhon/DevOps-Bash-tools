@@ -26,8 +26,8 @@ Prints password policy in 'key = value' pairs for easy viewing / grepping
 
 See Also:
 
-    aws_harden_password_policy.sh - sets a hardeded password policy along CIS Foundations Benchmark recommendations
-                                    that script calls this one before and after changing the password policy
+    aws_iam_harden_password_policy.sh - sets a hardeded password policy along CIS Foundations Benchmark recommendations
+                                        that script calls this one before and after changing the password policy
 
 
 $usage_aws_cli_required
