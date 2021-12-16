@@ -30,9 +30,11 @@ or pipe to upload to a CI/CD system via an API eg. circleci_project_set_env_vars
 Expected format is that of the AWS 'Download .csv file' when you create an AWS access key in the console
 
 
-Example:
+Examples:
 
-    eval \$(${0##*/} new_user_credentials.csv)
+    eval \$(${0##*/} new_user_credentials.csv)  # format downloaded when creating a user
+
+    eval \$(${0##*/} hari_accessKeys.csv)       # format downloaded when creating an access key
 "
 
 # used by usage() in lib/utils.sh
