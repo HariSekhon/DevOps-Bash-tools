@@ -31,7 +31,7 @@ user,access_key_1_active,access_key_1_last_rotated,access_key_2_active,access_ke
 
 See Also:
 
-    aws_users_access_key_age.sh
+    aws_iam_users_access_key_age.sh
 
 
     aws_users_access_key_age.py - in DevOps Python Tools which is able to filter by age and status
