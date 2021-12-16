@@ -31,7 +31,7 @@ Output format, tab separated:
 
 See Also:
 
-    aws_users_access_key_last_used.sh - much quicker version for lots of users
+    aws_iam_users_access_key_last_used.sh - much quicker version for lots of users
 
 
 See similar tools in DevOps Python Tools repo:
