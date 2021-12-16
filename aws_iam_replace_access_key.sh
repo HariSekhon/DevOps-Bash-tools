@@ -48,6 +48,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+access_key_id_to_delete=""
 if ! [[ "${1:-}" =~ ^- ]]; then
     access_key_id_to_delete="${1:-}"
     if [ $# -gt 0 ]; then
