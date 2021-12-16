@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints AWS credentials from a standard AWS CSV export file as shell export statements
+Prints AWS credentials from a standard AWS CSV export file or access key export CSV as shell export statements
 
 Useful to quickly switch your shell to some exported credentials from a service account for testing permissions
 or pipe to upload to a CI/CD system via an API eg. circleci_project_set_env_vars.sh
@@ -49,8 +49,21 @@ if ! [ -f "$csv" ]; then
     die "File not found: $csv"
 fi
 
+if ! grep -Fq 'AKIA'; then
+    die "Access Key not found in file '$csv'"
+fi
+
 # access keys are prefixed with AKIA, skips header row
-awk -F, '/AKIA/{
-    print "export AWS_ACCESS_KEY_ID="$3
-    print "export AWS_SECRET_ACCESS_KEY="$4
-}' "$csv"
+if grep -Fxq 'Access key ID,Secret access key' "$csv"; then
+    awk -F, '/AKIA/{
+        print "export AWS_ACCESS_KEY_ID="$1
+        print "export AWS_SECRET_ACCESS_KEY="$2
+    }' "$csv"
+elif grep -Fxq 'User name,Password,Access key ID,Secret access key,Console login link' "$csv"; then
+    awk -F, '/AKIA/{
+        print "export AWS_ACCESS_KEY_ID="$3
+        print "export AWS_SECRET_ACCESS_KEY="$4
+    }' "$csv"
+else
+    die "unrecognized CSV header line, may have changed so code may need an update"
+fi
