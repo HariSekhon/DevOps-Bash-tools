@@ -345,6 +345,15 @@ etc.
     - `aws_iam_policies_granting_full_access.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) granting full access (anti-best practice)
     - `aws_iam_policies_unattached.sh` - lists unattached [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html)
     - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
+    - `aws_iam_users.sh` - list your IAM users
+    - `aws_iam_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
+    - `aws_iam_users_access_key_age_report.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age using a bulk credentials report (faster for many users)
+    - `aws_iam_users_access_key_last_used.sh` - prints AWS users [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) last used date
+    - `aws_iam_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
+    - `aws_iam_users_last_used_report.sh` - lists AWS users password/access keys last used dates
+    - `aws_iam_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
+    - `aws_iam_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
+    - `aws_iam_users_pw_last_used.sh` - lists AWS users and their password last used date
   - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
   - `aws_kube_creds.sh` - auto-loads all [AWS EKS](https://aws.amazon.com/eks/) clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
@@ -361,16 +370,6 @@ etc.
     - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to Secrets Manager as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
     - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given Secrets Manager secret. Useful for uploading a password without exposing it on your screen
     - `aws_secret_get.sh` - gets a secret value for a given secret from Secrets Manager, retrieving either a secure string or secure binary depending on which is available
-  - `aws_users*.sh` - [AWS IAM](https://aws.amazon.com/iam/) user auditing scripts:
-    - `aws_users.sh` - list your IAM users
-    - `aws_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
-    - `aws_users_access_key_age_report.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age using a bulk credentials report (faster for many users)
-    - `aws_users_access_key_last_used.sh` - prints AWS users [access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) last used date
-    - `aws_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
-    - `aws_users_last_used_report.sh` - lists AWS users password/access keys last used dates
-    - `aws_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
-    - `aws_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
-    - `aws_users_pw_last_used.sh` - lists AWS users and their password last used date
   - `setup/eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
 
 #### GCP - Google Cloud Platform
