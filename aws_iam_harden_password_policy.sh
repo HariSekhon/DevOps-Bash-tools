@@ -40,7 +40,7 @@ help_usage "$@"
 echo
 echo "Existing Password Policy:"
 echo
-"$srcdir/aws_password_policy.sh"
+"$srcdir/aws_iam_password_policy.sh"
 echo
 echo
 echo "Setting Hardened Password Policy:"
@@ -58,4 +58,4 @@ echo
 echo
 echo "New Password Policy:"
 echo
-"$srcdir/aws_password_policy.sh"
+"$srcdir/aws_iam_password_policy.sh"
