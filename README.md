@@ -305,6 +305,7 @@ etc.
 #### AWS - Amazon Web Services
 
 - [AWS](https://aws.amazon.com/) scripts - `aws_*.sh`:
+  - `aws_cli_create_credential.sh` - creates a AWS CLI user account with Administrator permissions, creates an access key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Avoids having to reauth to `aws sso login` every day.
   - `.envrc-aws` - copy to `.envrc` for `direnv` to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
