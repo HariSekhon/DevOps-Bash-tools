@@ -79,7 +79,8 @@ elif [ "$num_keys" -eq 2 ]; then
                 access_key_id_to_delete="$access_key_id"
                 break
             fi
-            last_used_date="$(aws iam get-access-key-last-used --access-key-id "$access_key_id" "$@" |
+            # not passing "$@" because if --user-name is specified it is only relevant to other commands
+            last_used_date="$(aws iam get-access-key-last-used --access-key-id "$access_key_id" |
                               jq -r '.AccessKeyLastUsed.LastUsedDate')"
             if [ "$last_used_date" = null ]; then
                 access_key_id_to_delete="$access_key_id"
@@ -103,8 +104,9 @@ elif [ "$num_keys" -eq 2 ]; then
         die "Couldn't determine which access key to delete, aborting..."
     fi
     timestamp "Deleting AWS access key '$access_key_id_to_delete'"
-    #aws iam update-access-key --access-key-id "$access_key_id_to_delete" --status Inactive "$@"
-    aws iam delete-access-key --access-key-id "$access_key_id_to_delete" "$@"
+    # not passing "$@" because if --user-name is specified it is only relevant to other commands
+    #aws iam update-access-key --access-key-id "$access_key_id_to_delete" --status Inactive
+    aws iam delete-access-key --access-key-id "$access_key_id_to_delete"
     echo >&2
 fi
 
