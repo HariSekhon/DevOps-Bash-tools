@@ -40,6 +40,10 @@ Set up a personal access token here - may need to click 'Enable SSO' next to eac
 API Reference:
 
     https://circleci.com/docs/api/v2/
+    https://circleci.com/docs/api/v1/
+
+
+The CircleCI API isn't very mature, so sometimes you need to go back and use the v1.1 API instead of the default v2 API, so if the path starts with /v1.1 it'll use that API instead
 
 
 Examples:
@@ -48,6 +52,11 @@ Examples:
 # Get currently authenticated user:
 
     ${0##*/} /me | jq .
+
+
+# List projects (requires v1.1 API, no endpoint in v2 yet):
+
+    ${0##*/} /v1.1/projects | jq .
 
 
 # Get a project:
@@ -102,6 +111,9 @@ export CURL_AUTH_HEADER="Circle-Token:"
 url_path="${1:-}"
 shift
 
+if [[ "$url_path" =~ ^/?v[[:digit:]]+(\.[[:digit:]]+)?/ ]]; then
+    url_base="${url_base%%/v2}"
+fi
 url_path="${url_path//$url_base}"
 url_path="${url_path##/}"
 
