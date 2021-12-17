@@ -90,7 +90,7 @@ aws_access_keys_to_csv(){
 
 # reads export commands and outputs ~/aws/credentials file format to stdout to save
 aws_access_keys_exports_to_credentials(){
-    local profile="${AWS_DEFAULT_PROFILE:-default}"
+    local profile="${AWS_PROFILE:-default}"
     local env_var
     local key
     local value
