@@ -54,7 +54,7 @@ if [ -n "$context" ]; then
     kube_context "$context"
 fi
 
-echo "Deploying Kustommize kubernetes configs from directory: $PWD"
+echo "Deploying Kustomize kubernetes configs from directory: $PWD"
 echo
 
 yaml="$(kustomize build --enable-helm)"
