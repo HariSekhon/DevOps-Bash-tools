@@ -25,6 +25,10 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists CircleCI public IP addresses eg. for auto-populating firewall rules
+
+You will also need to enable 'circleci_ip_ranges: true' in your job to use these fixed IPs (requires paid plan):
+
+    https://circleci.com/docs/2.0/configuration-reference/#circleciipranges
 "
 
 # used by usage() in lib/utils.sh
