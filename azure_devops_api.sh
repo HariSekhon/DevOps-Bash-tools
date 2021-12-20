@@ -128,7 +128,7 @@ export PASSWORD
 #    echo "using authenticated access" >&2
 #fi
 
-url_path="${1:-}"
+url_path="$1"
 shift || :
 
 url_path="${url_path//$url_base}"
