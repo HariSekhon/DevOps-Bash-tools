@@ -129,7 +129,7 @@ export PASSWORD
 #fi
 
 url_path="${1:-}"
-shift
+shift || :
 
 url_path="${url_path//$url_base}"
 url_path="${url_path##/}"
