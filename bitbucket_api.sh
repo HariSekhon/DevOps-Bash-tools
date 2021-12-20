@@ -176,7 +176,7 @@ else
 fi
 export PASSWORD
 
-url_path="${1:-}"
+url_path="$1"
 url_path="${url_path##*:\/\/bitbucket.org\/api\/v4}"
 url_path="${url_path##/}"
 
