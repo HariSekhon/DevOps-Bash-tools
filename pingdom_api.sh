@@ -122,8 +122,8 @@ else
     CURL_OPTS=(-sS --fail --connect-timeout 3)
 fi
 
-url_path="${1:-}"
-shift
+url_path="$1"
+shift || :
 
 url_path="${url_path##/}"
 
