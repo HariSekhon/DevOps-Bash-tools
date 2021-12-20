@@ -180,7 +180,7 @@ url_path="${1:-}"
 url_path="${url_path##*:\/\/bitbucket.org\/api\/v4}"
 url_path="${url_path##/}"
 
-shift
+shift || :
 
 repo=$(git_repo 2>/dev/null | sed 's/.*\///' || :)
 
