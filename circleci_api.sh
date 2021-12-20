@@ -100,7 +100,7 @@ export TOKEN="${CIRCLECI_TOKEN:-}"
 export CURL_AUTH_HEADER="Circle-Token:"
 
 url_path="${1:-}"
-shift
+shift || :
 
 url_path="${url_path//$url_base}"
 url_path="${url_path##/}"
