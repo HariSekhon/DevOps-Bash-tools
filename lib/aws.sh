@@ -47,10 +47,11 @@ aws_create_access_key_if_not_exists(){
         timestamp "Access Keys CSV '$access_keys_csv' already exists" >&2
         "$libdir/../aws_csv_creds.sh" "$access_keys_csv"
     else
-       local exports
-       exports="$("$libdir/../aws_iam_replace_access_key.sh" --user-name "$user")"
-       aws_access_keys_to_csv <<< "$exports" >> "$access_keys_csv"
-       echo "$exports"
+        local exports
+        timestamp "Creating access key, removing an old one if necessary" >&2
+        exports="$("$libdir/../aws_iam_replace_access_key.sh" --user-name "$user")"
+        aws_access_keys_to_csv <<< "$exports" >> "$access_keys_csv"
+        echo "$exports"
     fi
 }
 
@@ -90,7 +91,7 @@ aws_access_keys_to_csv(){
 
 # reads export commands and outputs ~/aws/credentials file format to stdout to save
 aws_access_keys_exports_to_credentials(){
-    local profile="${AWS_DEFAULT_PROFILE:-default}"
+    local profile="${AWS_PROFILE:-default}"
     local env_var
     local key
     local value
