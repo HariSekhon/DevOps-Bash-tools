@@ -33,27 +33,17 @@ usage_description="Auto-determines the Kubernetes API server and kube-system API
 # shellcheck disable=SC2034
 usage_args="/path <curl_options>"
 
-if [ $# -lt 1 ]; then
-    # shellcheck disable=SC2119
-    usage
-fi
+help_usage "$@"
 
-for x in "$@"; do
-    # shellcheck disable=SC2119
-    case "$x" in
-        -h|--help) usage
-        ;;
-    esac
-done
+min_args 1 "$@"
 
-check_bin curl
+curl_api_opts "$@"
 
 token="$(k8s_get_token)"
 api_server="$(k8s_get_api)"
 
-path="${1:-}"
-
-shift
+path="$1"
+shift || :
 
 # could also extract the k8s certs from ~/.kube/config (not shown in kubectl config view, would have to json parse outside), and then do
 # curl "$api_server" --cert encoded.crt --key encoded.key --cacert encoded-ca.crt
