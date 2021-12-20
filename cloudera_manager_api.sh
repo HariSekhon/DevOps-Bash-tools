@@ -62,7 +62,7 @@ url_path="$1"
 url_path="/${url_path##/}"
 
 # remove $1 so we can pass remaining args to curl_auth.sh
-shift
+shift || :
 
 # https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cn_navigator_api_overview.html#api-version-compatility
 api_version="${CLOUDERA_API_VERSION:-7}"
