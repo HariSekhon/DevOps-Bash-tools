@@ -120,7 +120,7 @@ export PASSWORD
 #fi
 
 url_path="${1:-}"
-shift
+shift || :
 
 url_path="${url_path//https:\/\/api.github.com}"
 url_path="${url_path##/}"
