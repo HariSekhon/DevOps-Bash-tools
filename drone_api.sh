@@ -76,8 +76,8 @@ min_args 1 "$@"
 
 curl_api_opts "$@"
 
-url_path="${1:-}"
-shift
+url_path="$1"
+shift || :
 
 url_path="${url_path##*:\/\/cloud.drone.io\/api}"
 url_path="${url_path##/}"
