@@ -64,8 +64,8 @@ export TOKEN="$QUAY_TOKEN"
 
 curl_api_opts "$@"
 
-url_path="${1:-}"
-shift
+url_path="$1"
+shift || :
 
 url_path="${url_path//https:\/\/quay.io\/api\/v1/}"
 url_path="${url_path##/}"
