@@ -142,8 +142,8 @@ min_args 1 "$@"
 
 curl_api_opts "$@"
 
-url_path="${1:-}"
-shift
+url_path="$1"
+shift || :
 
 url_path="${url_path##*:\/\/api.gitlab.com\/api\/v4}"
 url_path="${url_path##/}"
