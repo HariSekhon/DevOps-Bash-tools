@@ -99,7 +99,7 @@ curl_api_opts "$@"
 export TOKEN="${CIRCLECI_TOKEN:-}"
 export CURL_AUTH_HEADER="Circle-Token:"
 
-url_path="${1:-}"
+url_path="$1"
 shift || :
 
 url_path="${url_path//$url_base}"
