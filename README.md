@@ -774,6 +774,7 @@ etc.
   - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
 - `terraform_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) scripts:
+  - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
   - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud via the API, or optionally one or more of the ranges used by different functions
 
 #### Perl
