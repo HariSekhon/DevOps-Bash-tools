@@ -48,7 +48,7 @@ if [ -z "$org" ]; then
     usage "no terraform organization given and TERRAFORM_ORGANIZATION not set"
 fi
 
-# XXX: TODO: add pagination if > 1 page of varsets
+# TODO: add pagination support
 if [ -n "$varset_id" ]; then
     if ! [[ "$varset_id" =~ ^varset-[[:alnum:]]+$ ]]; then
         usage "invalid varset id given: $varset_id - should be in format varset-[[:alnum:]]+"
@@ -59,7 +59,7 @@ else
 fi
 
 while read -r varset_id varset_name; do
-    # XXX: TODO: add pagination if > 1 page of variables
+    # TODO: add pagination support
     "$srcdir/terraform_cloud_api.sh" "/varsets/$varset_id/relationships/vars"  |
     jq -r ".data[] | [\"$varset_id\", \"$varset_name\", .id, .attributes.category, .attributes.key, .attributes.value] | @tsv" |
     column -t
