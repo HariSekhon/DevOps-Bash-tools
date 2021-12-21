@@ -63,6 +63,8 @@ min_args 1 "$@"
 
 curl_api_opts "$@"
 
+check_env_defined TERRAFORM_TOKEN
+
 export TOKEN="$TERRAFORM_TOKEN"
 
 url_path="${1:-}"
