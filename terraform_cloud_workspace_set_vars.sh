@@ -41,7 +41,7 @@ Examples:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<workspace_id> <key>=<value> <key2>=<value2> ...]"
+usage_args="<workspace_id> [<key>=<value> <key2>=<value2> ...]"
 
 help_usage "$@"
 
