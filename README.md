@@ -207,7 +207,8 @@ make
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for most major CI systems:
   - Jenkins, Concourse, GoCD, TeamCity - one-touch boot & build
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker ...
-- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom, Terraform Cloud
+  - Terraform Cloud
+- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
 - [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
@@ -745,6 +746,17 @@ etc.
   - `buildkite_sync_pipeline_descriptions_from_github.sh` - for all BuildKite pipelines sets each description to match its source GitHub repo
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
+- `terraform_cloud_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) API scripts:
+  - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
+  - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
+  - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
+  - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level sensitive environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `terraform_cloud_workspace_delete_vars.sh` - deletes one or more Terraform workspace-level variables
+  - `terraform_cloud_varsets.sh` - lists Terraform Cloud variable sets
+  - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in all variables sets for the given organization
+  - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
+  - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud via the API, or optionally one or more of the ranges used by different functions
 
 #### Internet Services
 
@@ -773,17 +785,6 @@ etc.
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
   - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
-- `terraform_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) API scripts:
-  - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
-  - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
-  - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
-  - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level sensitive environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
-  - `terraform_cloud_workspace_delete_vars.sh` - deletes one or more Terraform workspace-level variables
-  - `terraform_cloud_varsets.sh` - lists Terraform Cloud variable sets
-  - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in all variables sets for the given organization
-  - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
-  - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
-  - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud via the API, or optionally one or more of the ranges used by different functions
 
 #### Perl
 
