@@ -320,7 +320,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `gitlab_project_set_env_vars.sh`, `circleci_project_set_env_vars.sh`, `bitbucket_repo_set_env_vars.sh` / `bitbucket_workspace_set_env_vars.sh`). Supports new user and new access key csv file formats.
+  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `gitlab_project_set_env_vars.sh`, `circleci_project_set_env_vars.sh`, `bitbucket_repo_set_env_vars.sh` / `bitbucket_workspace_set_env_vars.sh`, `terraform_cloud_workpace_set_vars.sh`). Supports new user and new access key csv file formats.
   - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
     - `aws_ecr_list_tags.sh` - lists all the tags for a given ECR docker image
@@ -777,6 +777,7 @@ etc.
   - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
   - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
   - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
+  - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud via the API, or optionally one or more of the ranges used by different functions
 
 #### Perl
