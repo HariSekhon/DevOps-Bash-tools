@@ -773,11 +773,12 @@ etc.
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
   - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
-- `terraform_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) scripts:
+- `terraform_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) API scripts:
   - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
   - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
   - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
   - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level sensitive environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `terraform_cloud_workspace_delete_vars.sh` - deletes one or more Terraform workspace-level variable(s)
   - `terraform_cloud_varsets.sh` - lists Terraform Cloud variable sets
   - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in all variables sets for the given organization
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
