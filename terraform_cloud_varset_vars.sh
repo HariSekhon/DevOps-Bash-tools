@@ -50,9 +50,9 @@ fi
 
 # XXX: TODO: add pagination if > 1 page of varsets
 if [ -n "$varset_id" ]; then
-    variable_sets="$("$srcdir/terraform_cloud_api.sh" "organizations/$org/varsets" | jq -r '.data[] | [.id, .attributes.name] | @tsv')"
-else
     variable_sets="$("$srcdir/terraform_cloud_api.sh" "organizations/$org/varsets/$varset_id" | jq -r '.data[] | [.id, .attributes.name] | @tsv')"
+else
+    variable_sets="$("$srcdir/terraform_cloud_api.sh" "organizations/$org/varsets" | jq -r '.data[] | [.id, .attributes.name] | @tsv')"
 fi
 
 while read -r varset_id varset_name; do
