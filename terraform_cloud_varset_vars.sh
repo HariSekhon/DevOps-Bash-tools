@@ -28,7 +28,7 @@ Lists Terraform Cloud variables in all variable sets for a given organiztion
 
 Output:
 
-<id>    <type>      <name>      <value>
+<varset_id>     <varset_name>   <id>    <type>      <name>      <value>
 "
 
 # used by usage() in lib/utils.sh
