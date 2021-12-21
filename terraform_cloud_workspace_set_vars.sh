@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  arg: :workspace
+#  args: :workspace haritest=myvalue
 #
 #  Author: Hari Sekhon
 #  Date: 2021-12-21 13:30:39 +0000 (Tue, 21 Dec 2021)
