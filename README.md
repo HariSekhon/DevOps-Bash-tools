@@ -776,6 +776,7 @@ etc.
 - `terraform_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) scripts:
   - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
   - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
+  - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
   - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud via the API, or optionally one or more of the ranges used by different functions
 
 #### Perl
