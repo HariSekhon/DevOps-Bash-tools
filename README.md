@@ -599,7 +599,7 @@ etc.
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts.
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout all my repos
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
-  - `github_api.sh` - queryies the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
+  - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
   - `github_actions_runner.sh` - generates a [GitHub Actions](https://github.com/features/actions) self-hosted runner token for a given Repo or Organization via the GitHub API and then runs a dockerized GitHub Actions runner with the appropriate configuration
@@ -672,7 +672,7 @@ etc.
   - `fly.sh` - shortens `fly` command to not have to specify target all the time
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
   - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/) - launches docker container, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
-  - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL` and authentication from `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
+  - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL` and authentication using `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
     - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
 - `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
@@ -718,6 +718,7 @@ etc.
   - `travis_repos_delete_caches.sh` - deletes all caches for all repos
   - `travis_lint.sh` - lints a given `.travis.yml` using the API
 - `buildkite_*.sh` - [BuildKite](https://buildkite.com/) API scripts:
+  - `buildkite_api.sh` - queries the BuildKite API, handling authentication using `$BUILDKITE_TOKEN`
   - `buildkite_pipelines.sh` - list buildkite pipelines for your `$BUILDKITE_ORGANIZATION` / `$BUILDKITE_USER`
   - `buildkite_foreach_pipeline.sh` - executes a templated command for each Buildkite pipeline, replacing the `{user}` and `{pipeline}` in each iteration
   - `buildkite_agent.sh` - runs a buildkite agent locally on Linux or Mac, or in Docker with choice of Linux distros
@@ -747,7 +748,7 @@ etc.
   - `buildkite_trigger.sh` - triggers BuildKite build job for a given pipeline
   - `buildkite_trigger_all.sh` - same as above but for all pipelines
 - `terraform_cloud_*.sh` - [Terraform Cloud](https://www.terraform.io/cloud) API scripts:
-  - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
+  - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication using `$TERRAFORM_TOKEN`
   - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud
   - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
   - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
@@ -763,7 +764,7 @@ etc.
 - `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
-  - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication from `$CLOUDFLARE_TOKEN`
+  - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication using `$CLOUDFLARE_TOKEN`
   - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
   - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
   - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
