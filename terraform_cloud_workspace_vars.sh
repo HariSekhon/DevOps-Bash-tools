@@ -45,6 +45,7 @@ if [ -z "$workspace_id" ]; then
     usage "no terraform workspace id given and TERRAFORM_WORKSPACE not set"
 fi
 
+# TODO: add pagination support
 "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars" |
 jq -r '.data[] | [.id, .attributes.category, .attributes.key, .attributes.value] | @tsv' |
 column -t
