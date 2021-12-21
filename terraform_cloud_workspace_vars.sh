@@ -46,4 +46,5 @@ if [ -z "$workspace_id" ]; then
 fi
 
 "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars" |
-jq -r '.data[] | [.id, .attributes.category, .attributes.key, .attributes.value] | @tsv' | column -t
+jq -r '.data[] | [.id, .attributes.category, .attributes.key, .attributes.value] | @tsv' |
+column -t
