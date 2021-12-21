@@ -41,7 +41,7 @@ if [ -z "$workspace_id" ]; then
     usage "no terraform workspace id given"
 fi
 
-"$srcdir/terraform_cloud_workspace_vars.sh" |
+"$srcdir/terraform_cloud_workspace_vars.sh" "$workspace_id" |
 while read -r id _ name _; do
     for var in "$@"; do
         if [ "$var" = "$name" ]; then
