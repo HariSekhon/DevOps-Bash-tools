@@ -777,9 +777,10 @@ etc.
   - `terraform_cloud_api.sh` - queries the Cloudflare API, handling authentication from `$TERRAFORM_TOKEN`
   - `terraform_cloud_workspaces.sh` - lists Terraform Cloud workspaces
   - `terraform_cloud_workspace_vars.sh` - lists Terraform Cloud workspace variables
-  - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level sensitive environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varsets.sh` - lists Terraform Cloud variable sets
   - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in all variables sets for the given organization
+  - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for Terraform Cloud via the API, or optionally one or more of the ranges used by different functions
 
 #### Perl
