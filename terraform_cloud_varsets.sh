@@ -45,5 +45,6 @@ if [ -z "$org" ]; then
     usage "no terraform organization given and TERRAFORM_ORGANIZATION not set"
 fi
 
+# TODO: add pagination support
 "$srcdir/terraform_cloud_api.sh" "/organizations/$org/varsets" |
 jq -r '.data[] | [.id, .attributes.name] | @tsv'
