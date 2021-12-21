@@ -33,7 +33,7 @@ Output:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<terraform_organization>]"
+usage_args="[<organization>]"
 
 help_usage "$@"
 
