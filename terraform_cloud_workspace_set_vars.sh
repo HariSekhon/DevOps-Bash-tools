@@ -54,8 +54,7 @@ if [ -z "$workspace_id" ]; then
     usage "no terraform workspace id given"
 fi
 
-env_vars="$("$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars" |
-            jq -r '.data[] | [.id, .attributes.key, .attributes.value] | @tsv')"
+env_vars="$("$srcdir/terraform_cloud_workspace_vars.sh" "$workspace_id")"
 
 add_env_var(){
     local env_var="$1"
@@ -69,7 +68,7 @@ add_env_var(){
     local name="${env_var%%=*}"
     local value="${env_var#*=}"
     local id
-    id="$(awk "\$2 == \"$name\" {print \$1}" <<< "$env_vars")"
+    id="$(awk "\$3 == \"$name\" {print \$1}" <<< "$env_vars")"
     if [ -n "$id" ]; then
         timestamp "updating Terraform environment variable '$name' (id: '$id') in workspace '$workspace_id'"
         "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars/$id" \
