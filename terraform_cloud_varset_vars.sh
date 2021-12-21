@@ -26,6 +26,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Terraform Cloud variables in all variable sets for a given organiztion
 
+\$TERRAFORM_ORGANIZATION and \$TERRAFORM_VARSET_ID can be used instead of arguments
+
 Output:
 
 <varset_id>     <varset_name>   <id>    <type>      <name>      <value>
@@ -33,20 +35,25 @@ Output:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<organization>]"
+usage_args="[<organization> <varset_id>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
 
 org="${1:-${TERRAFORM_ORGANIZATION:-}}"
+varset_id="${2:-${TERRAFORM_VARSET_ID:-}}"
 
 if [ -z "$org" ]; then
     usage "no terraform organization given and TERRAFORM_ORGANIZATION not set"
 fi
 
 # XXX: TODO: add pagination if > 1 page of varsets
-variable_sets="$("$srcdir/terraform_cloud_api.sh" "organizations/$org/varsets" | jq -r '.data[] | [.id, .attributes.name] | @tsv')"
+if [ -n "$varset_id" ]; then
+    variable_sets="$("$srcdir/terraform_cloud_api.sh" "organizations/$org/varsets" | jq -r '.data[] | [.id, .attributes.name] | @tsv')"
+else
+    variable_sets="$("$srcdir/terraform_cloud_api.sh" "organizations/$org/varsets/$varset_id" | jq -r '.data[] | [.id, .attributes.name] | @tsv')"
+fi
 
 while read -r varset_id varset_name; do
     # XXX: TODO: add pagination if > 1 page of variables
