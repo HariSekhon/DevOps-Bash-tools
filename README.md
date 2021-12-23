@@ -359,6 +359,10 @@ etc.
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
   - `aws_kube_creds.sh` - auto-loads all [AWS EKS](https://aws.amazon.com/eks/) clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
   - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given [AWS EKS](https://aws.amazon.com/eks/) cluster using config isolation to avoid concurrency race conditions
+  - `aws_logs_*.sh` - some useful log queries in last N hours (24 by default):
+    - `aws_logs_batch_jobs.sh` - lists AWS Batch job submission requests and their callers
+    - `aws_logs_ec2_spot.sh` - lists AWS EC2 Spot fleet creation requests, their caller and first tag value for origin hint
+    - `aws_logs_ecs_tasks.sh` - lists AWS ECS task run requests, their callers and job definitions
   - `aws_meta.sh` - [AWS EC2 Metadata API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) query shortcut. See also the official [ec2-metadata](https://aws.amazon.com/code/ec2-instance-metadata-query-tool/) shell script with more features
   - `aws_nat_gateways_public_ips.sh` - lists the public IPs of all NAT gateways. Useful to give to clients to permit through firewalls for webhooks or similar calls
   - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
