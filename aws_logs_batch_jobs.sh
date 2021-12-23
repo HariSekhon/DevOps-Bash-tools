@@ -30,9 +30,9 @@ Example:
 
     ${0##*/}
 
-    ${0##*/} 48
+    ${0##*/} 48      # 48 hours ago to present
 
-    ${0##*/} 48 --end-time=\$(date +%s --date='12 hours ago')000
+    ${0##*/} 24 12   # 24 hours ago to 12 hours ago
 
 
 Output Format:
@@ -52,27 +52,46 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-hours=24
+hours_ago_start=24
+hours_ago_end=0
 
 if [ -n "${1:-}" ] &&
    ! [[ "${1:-}" =~ ^- ]]; then
-    hours="$1"
+    hours_ago_start="$1"
     shift || :
 fi
 
-if ! [[ "$hours" =~ ^[[:digit:]]+$ ]]; then
-    usage "invalid value given for hours argument, must be an integer"
+if [ -n "${1:-}" ] &&
+   ! [[ "${1:-}" =~ ^- ]]; then
+    hours_ago_end="$1"
+    shift || :
 fi
 
+if ! [[ "$hours_ago_start" =~ ^[[:digit:]]+$ ]]; then
+    usage "invalid value given for hours ago start argument, must be an integer"
+fi
+
+if ! [[ "$hours_ago_end" =~ ^[[:digit:]]+$ ]]; then
+    usage "invalid value given for hours ago end argument, must be an integer"
+fi
+
+
 aws logs filter-log-events --log-group-name aws-controltower/CloudTrailLogs \
-                           --start-time "$(date '+%s' --date="$hours hours ago")000" \
+                           --start-time "$(date '+%s' --date="$hours_ago_start hours ago")000" \
+                           --end-time "$(date '+%s' --date="$hours_ago_end hours ago")000" \
                            --filter-pattern '{ ($.eventSource = "batch.amazonaws.com") && ($.eventName = "SubmitJob") }' \
                            "$@" |
                            #--max-items 1 \
                            # --region eu-west-2  # set AWS_DEFAULT_REGION or pass --region via $@
                            #--end-time "$(date '+%s')000" \
 jq -r '.events[].message' |
-#jq -r -s .
+if [ -n "${DEBUG:-}" ]; then
+    data="$(cat)"
+    jq -r -s . <<< "$data" >&2
+    cat <<< "$data"
+else
+    cat
+fi |
 jq -r -s '.[] |
           [
             .eventTime,
