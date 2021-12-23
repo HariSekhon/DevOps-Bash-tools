@@ -360,7 +360,7 @@ etc.
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
   - `aws_kube_creds.sh` - auto-loads all [AWS EKS](https://aws.amazon.com/eks/) clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
   - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given [AWS EKS](https://aws.amazon.com/eks/) cluster using config isolation to avoid concurrency race conditions
-  - `aws_logs_*.sh` - some useful log queries in last N hours (24 by default):
+  - `aws_logs_*.sh` - some useful log queries in last N hours (24 hours by default):
     - `aws_logs_batch_jobs.sh` - lists AWS Batch job submission requests and their callers
     - `aws_logs_ec2_spot.sh` - lists AWS EC2 Spot fleet creation requests, their caller and first tag value for origin hint
     - `aws_logs_ecs_tasks.sh` - lists AWS ECS task run requests, their callers and job definitions
