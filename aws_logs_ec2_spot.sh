@@ -88,7 +88,9 @@ aws logs filter-log-events --log-group-name aws-controltower/CloudTrailLogs \
                            # --region eu-west-2  # set AWS_DEFAULT_REGION or pass --region via $@
 jq -r '.events[].message' |
 if [ -n "${DEBUG:-}" ]; then
-    jq -r -s . >&2
+    data="$(cat)"
+    jq -r -s . <<< "$data" >&2
+    cat <<< "$data"
 else
     cat
 fi |
