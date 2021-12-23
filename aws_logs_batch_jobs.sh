@@ -24,7 +24,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Searches CloudWatch Logs for AWS Batch job submit requests in the last N hours to find who is running large expensive jobs
 
-Defaults to finding logs in the last 24 hours but can optionally take an hours argument to search the last N hours, and can optionally take other AWS CLI options such as --end-time to narrow the search further
+Defaults to finding logs in the last 24 hours but can optionally take an hours argument to search the last N hours
 
 Example:
 
