@@ -31,6 +31,7 @@ Creates an IAM access key (deleting an older unused key if necessary), writes a 
 The following optional arguments can be given:
 
 - user name         (default: \$USER-cli)
+- keyfile           (default: ~/.aws/keys/\${user}_accessKeys.csv) - be careful if specifying this, a non-existent keyfile will create a new key, deleting the older of 2 existing keys if necessary to be able to create this
 
 This can also be used as a backup credential - this way if something accidentally happens to your AWS SSO you can still get into your account
 
@@ -42,7 +43,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<name>]"
+usage_args="[<name> <keyfile>]"
 
 help_usage "$@"
 
