@@ -30,9 +30,9 @@ Example:
 
     ${0##*/}
 
-    ${0##*/} 48
+    ${0##*/} 48      # 48 hours ago to present
 
-    ${0##*/} 48 12
+    ${0##*/} 24 12   # 24 hours ago to 12 hours ago
 
 
 Output Format:
