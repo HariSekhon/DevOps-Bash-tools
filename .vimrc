@@ -265,7 +265,7 @@ if has("autocmd")
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     au FileType sh                        nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| more -R<CR>
 
-    " these tools are in the https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
+    " these tools are in the https://github.com/HariSekhon/DevOps-Python-Tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
     au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
     au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
