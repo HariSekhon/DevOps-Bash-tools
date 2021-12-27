@@ -24,6 +24,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Deletes all empty directories under the current or given directory
 
+On Mac pre-deletes .DS_Store files to prevent otherwise empty directories from being retained
+
 Tested on Mac OS X
 "
 
@@ -44,6 +46,7 @@ starting_directory="${1:-.}"
 
 # Mac's rmdir command doesn't have a --verbose switch for feedback, so use GNU version instead
 if is_mac; then
+    find "$starting_directory" -type f -name .DS_Store -delete
     find "$starting_directory" -type d -empty -depth -exec grmdir -v {} \;
 else
     find "$starting_directory" -type d -empty -depth -exec rmdir -v {} \;
