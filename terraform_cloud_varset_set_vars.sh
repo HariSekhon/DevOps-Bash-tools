@@ -25,7 +25,21 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Adds / updates Terraform Cloud variables for a given variable set from args or stdin
 
-Variables are marked as sensitive as the primary use case for this is uploading AWS access key credentials from things like aws_csv_creds.sh:
+By default, creates variables as Environment Variables and marks them as Sensitive for safety as the primary use case for this code was easy uploading AWS access key credentials from things like aws_csv_creds.sh
+
+If you want to create Terraform variables instead:
+
+    export TERRAFORM_VARIABLES=1
+    export TERRAFORM_VARIABLES_HCL=1  # mark the variables as HCL code (implies TERRAFORM_VARIABLES=1)
+
+If you want to mark the variables as non-sensitive:
+
+    export TERRAFORM_VARIABLES_SENSITIVE=false
+
+
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of variable sets and their IDs
+
 
 Examples:
 
@@ -56,6 +70,25 @@ if ! [[ "$varset_id" =~ ^varset-[[:alnum:]]+$ ]]; then
     usage "invalid varset id given: $varset_id - should be in format varset-[[:alnum:]]+"
 fi
 
+if [ -n "${TERRAFORM_VARIABLES_HCL:-}" ]; then
+    TERRAFORM_VARIABLES=1
+    hcl=true
+else
+    hcl=false
+fi
+
+if [ -n "${TERRAFORM_VARIABLES:-}" ]; then
+    category="terraform"
+else
+    category="env"
+fi
+
+if [ "${TERRAFORM_VARIABLES_SENSITIVE:-}" = false ]; then
+    sensitive=false
+else
+    sensitive=true
+fi
+
 varsets_env_vars="$("$srcdir/terraform_cloud_varset_vars.sh" "$org" "$varset_id")"
 
 add_env_var(){
@@ -70,7 +103,7 @@ add_env_var(){
     local name="${env_var%%=*}"
     local value="${env_var#*=}"
     local id
-    id="$(awk "\$1 == \"$varset_id\" && \$4 == \"env\" && \$5 == \"$name\" {print \$3}" <<< "$varsets_env_vars")"
+    id="$(awk "\$1 == \"$varset_id\" && \$4 == \"env\" && \$6 == \"$name\" {print \$3}" <<< "$varsets_env_vars")"
     varset_name="$(awk "\$1 == \"$varset_id\" {print \$2; exit}" <<< "$varsets_env_vars")"
     if [ -n "$id" ]; then
         timestamp "updating Terraform environment variable '$name' (id: '$id') in variable set '$varset_name' (id '$varset_id')"
@@ -83,7 +116,9 @@ add_env_var(){
                         \"attributes\": {
                             \"key\": \"$name\",
                             \"value\": \"$value\",
-                            \"sensitive\": true
+                            \"category\": \"$category\",
+                            \"hcl\": $hcl,
+                            \"sensitive\": $sensitive
                         },
                         \"type\":\"vars\"
                     }
@@ -99,13 +134,14 @@ add_env_var(){
                         \"attributes\": {
                             \"key\": \"$name\",
                             \"value\": \"$value\",
-                            \"category\": \"env\",
-                            \"hcl\": false,
-                            \"sensitive\": true
+                            \"category\": \"$category\",
+                            \"hcl\": $hcl,
+                            \"sensitive\": $sensitive
                         },
                         \"type\":\"vars\"
                     }
-                }" >/dev/null
+                }" |
+                jq_debug_pipe_dump >/dev/null
         #echo  # JSON output doesn't end in a newline
     fi
     echo
