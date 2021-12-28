@@ -1065,13 +1065,25 @@ warn_if_error_field(){
     fi
 }
 
-# filter command, passthrough if debug mode isn't enabled
+# ==============================
+# pipe debugging filter commands, straight passthrough whether debug mode is enabled or not
 jq_debug_pipe_dump(){
     if [ -n "${DEBUG:-}" ]; then
         data="$(cat)"
         jq -r . <<< "$data" >&2
         echo "$data"
     else
-        cat
+        cat  # needed for straight passthrough in non-debug mode
     fi
 }
+
+jq_debug_pipe_dump_slurp(){
+    if [ -n "${DEBUG:-}" ]; then
+        data="$(cat)"
+        jq -r -s . <<< "$data" >&2
+        echo "$data"
+    else
+        cat  # needed for straight passthrough in non-debug mode
+    fi
+}
+# ==============================
