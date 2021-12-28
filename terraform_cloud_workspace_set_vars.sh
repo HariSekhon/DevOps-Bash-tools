@@ -25,7 +25,19 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Adds / updates Terraform Cloud workspace variables for a given workspace id from args or stdin
 
-Variables are marked as sensitive as the primary use case for this is uploading AWS access key credentials from things like aws_csv_creds.sh:
+By default it creates variables as Environment Variables and marks them as Sensitive for safety as the primary use case for this code was easy uploading AWS access key credentials from things like aws_csv_creds.sh
+
+If you want to create Terraform variables instead:
+
+    export TERRAFORM_VARIABLES=1
+    export TERRAFORM_VARIABLES_HCL=1  # mark the variables as HCL code (implies TERRAFORM_VARIABLES=1)
+
+If you want to mark the variables as non-sensitive:
+
+    export TERRAFORM_VARIABLES_SENSITIVE=false
+
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of workspaces and their IDs
 
 Examples:
 
@@ -54,6 +66,25 @@ if [ -z "$workspace_id" ]; then
     usage "no terraform workspace id given"
 fi
 
+if [ -n "${TERRAFORM_VARIABLES_HCL:-}" ]; then
+    TERRAFORM_VARIABLES=1
+    hcl=true
+else
+    hcl=false
+fi
+
+if [ -n "${TERRAFORM_VARIABLES:-}" ]; then
+    category="terraform"
+else
+    category="env"
+fi
+
+if [ "${TERRAFORM_VARIABLES_SENSITIVE:-}" = false ]; then
+    sensitive=false
+else
+    sensitive=true
+fi
+
 env_vars="$("$srcdir/terraform_cloud_workspace_vars.sh" "$workspace_id")"
 
 add_env_var(){
@@ -68,7 +99,7 @@ add_env_var(){
     local name="${env_var%%=*}"
     local value="${env_var#*=}"
     local id
-    id="$(awk "\$3 == \"$name\" {print \$1}" <<< "$env_vars")"
+    id="$(awk "\$4 == \"$name\" {print \$1}" <<< "$env_vars")"
     if [ -n "$id" ]; then
         timestamp "updating Terraform environment variable '$name' (id: '$id') in workspace '$workspace_id'"
         "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars/$id" \
@@ -80,7 +111,9 @@ add_env_var(){
                         \"attributes\": {
                             \"key\": \"$name\",
                             \"value\": \"$value\",
-                            \"sensitive\": true
+                            \"category\": \"$category\",
+                            \"hcl\": $hcl,
+                            \"sensitive\": $sensitive
                         },
                         \"type\":\"vars\"
                     }
@@ -96,9 +129,9 @@ add_env_var(){
                         \"attributes\": {
                             \"key\": \"$name\",
                             \"value\": \"$value\",
-                            \"category\": \"env\",
-                            \"hcl\": false,
-                            \"sensitive\": true
+                            \"category\": \"$category\",
+                            \"hcl\": $hcl,
+                            \"sensitive\": $sensitive
                         },
                         \"type\":\"vars\"
                     }
