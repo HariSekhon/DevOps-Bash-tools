@@ -26,11 +26,14 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Terraform Cloud variables in all variable sets for a given organiztion
 
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of variable sets and their IDs
+
 \$TERRAFORM_ORGANIZATION and \$TERRAFORM_VARSET_ID can be used instead of arguments
 
 Output:
 
-<varset_id>     <varset_name>   <id>    <type>      <name>      <value>
+<varset_id>    <varset_name>    <id>    <type>    <sensitive>    <name>    <value>
 "
 
 # used by usage() in lib/utils.sh
@@ -61,6 +64,6 @@ fi
 while read -r varset_id varset_name; do
     # TODO: add pagination support
     "$srcdir/terraform_cloud_api.sh" "/varsets/$varset_id/relationships/vars"  |
-    jq -r ".data[] | [\"$varset_id\", \"$varset_name\", .id, .attributes.category, .attributes.key, .attributes.value] | @tsv" |
+    jq -r ".data[] | [\"$varset_id\", \"$varset_name\", .id, .attributes.category, .attributes.sensitive, .attributes.key, .attributes.value] | @tsv" |
     column -t
 done <<< "$variable_sets"
