@@ -26,12 +26,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Terraform Cloud workspace variables for a given workspace id
 
-See terraform_cloud_workspaces.sh to get the list of workspaces and their IDs
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of workspaces and their IDs
 
 
 Output:
 
-<id>    <type>      <name>      <value>
+<id>    <type>      <sensitive>     <name>      <value>
 "
 
 # used by usage() in lib/utils.sh
@@ -50,5 +51,6 @@ fi
 
 # TODO: add pagination support
 "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars" |
-jq -r '.data[] | [.id, .attributes.category, .attributes.key, .attributes.value] | @tsv' |
+jq_debug_pipe_dump |
+jq -r '.data[] | [.id, .attributes.category, .attributes.sensitive, .attributes.key, .attributes.value] | @tsv' |
 column -t
