@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Wraps AWS logs command, inserting a more human friendly hours ago optional args to generate the --start-time and --end-time epochs in milliseconds
+Search CloudWatch Logs, inserting a more human friendly hours ago optional args to generate the --start-time and --end-time epochs in milliseconds
 
 Defaults to finding logs in the last 24 hours but can optionally take an hours argument to search the last N hours
 
@@ -39,9 +39,7 @@ Examples:
     ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"  ... # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
 
 
-Output Format:
-
-<timestamp>     <job_id>    <user>    <job_name>
+Output Format in AWS JSON
 
 
 $usage_aws_cli_required
@@ -54,6 +52,8 @@ usage_args="[<hours_ago_start> <hours_ago_end> <aws_cli_options>]"
 help_usage "$@"
 
 min_args 4 "$@"
+
+export AWS_DEFAULT_OUTPUT=json
 
 hours_ago_start=24
 hours_ago_end=0
