@@ -26,6 +26,10 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Terraform Cloud workspaces for a given organization
 
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of workspaces and their IDs
+
+
 Output:
 
 <id>    <name>
@@ -47,4 +51,5 @@ fi
 
 # TODO: add pagination support
 "$srcdir/terraform_cloud_api.sh" "/organizations/$org/workspaces" |
+jq_debug_pipe_dump |
 jq -r '.data[] | [.id, .attributes.name] | @tsv'
