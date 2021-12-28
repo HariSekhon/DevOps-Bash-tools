@@ -34,7 +34,7 @@ Example:
 
     ${0##*/} 24 3   # 24 hours ago to 3 hours ago
 
-    # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
+    # explicitly calculated dates in millisecond epochs (hence the suffixed 000), using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
     ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"
 
 
