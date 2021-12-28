@@ -119,7 +119,8 @@ add_env_var(){
                         },
                         \"type\":\"vars\"
                     }
-                }" > /dev/null
+                }" |
+                jq_debug_pipe_dump >/dev/null
         #echo  # JSON output doesn't end in a newline
     else
         timestamp "adding Terraform environment variable '$name' in workspace '$workspace_id'"
@@ -137,7 +138,8 @@ add_env_var(){
                         },
                         \"type\":\"vars\"
                     }
-                }" >/dev/null
+                }" |
+                jq_debug_pipe_dump >/dev/null
         #echo  # JSON output doesn't end in a newline
     fi
     echo
