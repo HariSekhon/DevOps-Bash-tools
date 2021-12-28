@@ -26,6 +26,11 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Terraform Cloud variable sets for a given organization
 
+See terraform_cloud_organizations.sh to get a list of organization IDs
+
+\$TERRAFORM_ORGANIZATION can be set instead of providing an argument
+
+
 Output:
 
 <id>    <name>
