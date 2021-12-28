@@ -1064,3 +1064,14 @@ warn_if_error_field(){
         echo "WARNING: $*" >&2
     fi
 }
+
+# filter command, passthrough if debug mode isn't enabled
+jq_debug_pipe_dump(){
+    if [ -n "${DEBUG:-}" ]; then
+        data="$(cat)"
+        jq . <<< "$data" >&2
+        echo "$data"
+    else
+        cat
+    fi
+}
