@@ -34,15 +34,14 @@ Example:
 
     ${0##*/} 24 3   # 24 hours ago to 3 hours ago
 
-    ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"  # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
+    # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
+    ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"
 
 
 Output Format:
 
 <timestamp>     <user>    <task_definition:version>
-
 eg.
-
 2021-12-23T02:05:34Z    aws-batch       MyJob:11
 
 
@@ -51,7 +50,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<see aws_logs.sh for defails>]"
+usage_args="[<hours_ago_start> <hours_ago_end> <aws_cli_options>]"
 
 help_usage "$@"
 
