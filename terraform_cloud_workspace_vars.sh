@@ -32,7 +32,7 @@ See terraform_cloud_varsets.sh to get a list of workspaces and their IDs
 
 Output:
 
-<id>    <type>      <sensitive>     <name>      <value>
+<id>    <type>    <sensitive>    <name>    <value>
 "
 
 # used by usage() in lib/utils.sh
