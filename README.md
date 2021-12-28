@@ -761,7 +761,7 @@ etc.
   - `terraform_cloud_workspace_set_vars.sh` - adds / updates Terraform workspace-level sensitive environment/terraform variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_workspace_delete_vars.sh` - deletes one or more Terraform workspace-level variables
   - `terraform_cloud_varsets.sh` - lists Terraform Cloud variable sets
-  - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in all variables sets for the given organization
+  - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in on or all variables sets for the given organization
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment/terraform variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
 
