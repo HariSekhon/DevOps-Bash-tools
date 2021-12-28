@@ -47,7 +47,7 @@ if [ -z "$varset_id" ]; then
 fi
 
 "$srcdir/terraform_cloud_varset_vars.sh" "$org" "$varset_id" |
-while read -r varset_id varset_name id _ name _; do
+while read -r varset_id varset_name id _ _ name _; do
     for var in "$@"; do
         if [ "$var" = "$name" ]; then
             timestamp "deleting variable '$name' (id '$id') in varset '$varset_name' (id '$varset_id')"
