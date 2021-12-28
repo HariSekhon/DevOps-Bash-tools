@@ -23,7 +23,10 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Deletes one or more variables in a given Terraform Cloud variable set
+Deletes one or more variables in a given Terraform Cloud variable set id
+
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of variable sets and their IDs
 "
 
 # used by usage() in lib/utils.sh
