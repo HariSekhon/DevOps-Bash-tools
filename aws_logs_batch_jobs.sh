@@ -34,6 +34,8 @@ Example:
 
     ${0##*/} 24 12   # 24 hours ago to 12 hours ago
 
+    ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"  # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
+
 
 Output Format:
 
@@ -75,23 +77,22 @@ if ! [[ "$hours_ago_end" =~ ^[[:digit:]]+$ ]]; then
     usage "invalid value given for hours ago end argument, must be an integer"
 fi
 
+if ! [[ "$*" =~ --start-time ]]; then
+    args+=( --start-time "$(date '+%s' --date="$hours_ago_start hours ago")000" )
+fi
+if ! [[ "$*" =~ --end-time ]]; then
+    args+=( --end-time "$(date '+%s' --date="$hours_ago_end hours ago")000" )
+fi
 
 aws logs filter-log-events --log-group-name aws-controltower/CloudTrailLogs \
-                           --start-time "$(date '+%s' --date="$hours_ago_start hours ago")000" \
-                           --end-time "$(date '+%s' --date="$hours_ago_end hours ago")000" \
                            --filter-pattern '{ ($.eventSource = "batch.amazonaws.com") && ($.eventName = "SubmitJob") }' \
+                           ${args[@]:+"${args[@]}"} \
                            "$@" |
                            #--max-items 1 \
                            # --region eu-west-2  # set AWS_DEFAULT_REGION or pass --region via $@
                            #--end-time "$(date '+%s')000" \
 jq -r '.events[].message' |
-if [ -n "${DEBUG:-}" ]; then
-    data="$(cat)"
-    jq -r -s . <<< "$data" >&2
-    cat <<< "$data"
-else
-    cat
-fi |
+jq_debug_pipe_dump_slurp |
 jq -r -s '.[] |
           [
             .eventTime,
