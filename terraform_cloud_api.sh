@@ -164,7 +164,7 @@ shift || :
 url_path="${url_path//https:\/\/app.terraform.io\/api\/v2}"
 url_path="${url_path##/}"
 
-if [[ "$url_path" =~ [\{:]?org(anization)?(_?name)?\}? ]]; then
+if [[ "$url_path" =~ [\{:]org(anization)?(_?name)?\}? ]]; then
     if [ -n "${TERRAFORM_ORGANIZATION:-}" ]; then
         url_path="${url_path//:organization_name/$TERRAFORM_ORGANIZATION}"
         url_path="${url_path//:organization/$TERRAFORM_ORGANIZATION}"
@@ -177,7 +177,7 @@ if [[ "$url_path" =~ [\{:]?org(anization)?(_?name)?\}? ]]; then
     fi
 fi
 
-if [[ "$url_path" =~ [\{:]?workspace(_?id)?\}? ]]; then
+if [[ "$url_path" =~ [\{:]workspace(_?id)?\}? ]]; then
     if [ -n "${TERRAFORM_WORKSPACE:-}" ]; then
         url_path="${url_path//:workspace_id/$TERRAFORM_WORKSPACE}"
         url_path="${url_path//:workspace/$TERRAFORM_WORKSPACE}"
