@@ -30,9 +30,9 @@ Example:
 
     ${0##*/}
 
-    ${0##*/} 48      # 48 hours ago to present
+    ${0##*/} 48     # 48 hours ago to present
 
-    ${0##*/} 24 12   # 24 hours ago to 12 hours ago
+    ${0##*/} 24 3   # 24 hours ago to 3 hours ago
 
     ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"  # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
 
@@ -46,54 +46,20 @@ eg.
 2021-12-23T02:05:34Z    aws-batch       MyJob:11
 
 
-
 $usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<hours_ago_start> <hours_ago_end> <aws_cli_options>]"
+usage_args="[<see aws_logs.sh for defails>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
 
-hours_ago_start=24
-hours_ago_end=0
-
-if [ -n "${1:-}" ] &&
-   ! [[ "${1:-}" =~ ^- ]]; then
-    hours_ago_start="$1"
-    shift || :
-fi
-
-if [ -n "${1:-}" ] &&
-   ! [[ "${1:-}" =~ ^- ]]; then
-    hours_ago_end="$1"
-    shift || :
-fi
-
-if ! [[ "$hours_ago_start" =~ ^[[:digit:]]+$ ]]; then
-    usage "invalid value given for hours ago start argument, must be an integer"
-fi
-
-if ! [[ "$hours_ago_end" =~ ^[[:digit:]]+$ ]]; then
-    usage "invalid value given for hours ago end argument, must be an integer"
-fi
-
-if ! [[ "$*" =~ --start-time ]]; then
-    args+=( --start-time "$(date '+%s' --date="$hours_ago_start hours ago")000" )
-fi
-if ! [[ "$*" =~ --end-time ]]; then
-    args+=( --end-time "$(date '+%s' --date="$hours_ago_end hours ago")000" )
-fi
-
-aws logs filter-log-events --log-group-name aws-controltower/CloudTrailLogs \
-                           --filter-pattern '{ ($.eventSource = "ecs.amazonaws.com") && ($.eventName = "RunTask") }' \
-                           ${args[@]:+"${args[@]}"} \
-                           "$@" |
-                           #--max-items 1 \
-                           # --region eu-west-2  # set AWS_DEFAULT_REGION or pass --region via $@
+"$srcdir/aws_logs.sh" --log-group-name aws-controltower/CloudTrailLogs \
+                      --filter-pattern '{ ($.eventSource = "ecs.amazonaws.com") && ($.eventName = "RunTask") }' \
+                      "$@" |
 jq -r '.events[].message' |
 jq_debug_pipe_dump_slurp |
 # 2021-12-23T02:05:34Z    aws-batch       arn:aws:ecs:eu-west-2:123456789012:task-definition/MyJob:11
