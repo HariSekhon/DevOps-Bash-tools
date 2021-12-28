@@ -40,4 +40,5 @@ help_usage "$@"
 
 # TODO: add pagination support
 "$srcdir/terraform_cloud_api.sh" "/organizations" |
+jq_debug_pipe_dump |
 jq -r '.data[].id'
