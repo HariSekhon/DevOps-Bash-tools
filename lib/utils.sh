@@ -1069,7 +1069,7 @@ warn_if_error_field(){
 jq_debug_pipe_dump(){
     if [ -n "${DEBUG:-}" ]; then
         data="$(cat)"
-        jq . <<< "$data" >&2
+        jq -r . <<< "$data" >&2
         echo "$data"
     else
         cat
