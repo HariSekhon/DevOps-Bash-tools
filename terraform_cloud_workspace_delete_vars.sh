@@ -24,6 +24,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Deletes one or more variables in a given Terraform Cloud workspace
+
+See terraform_cloud_organizations.sh to get a list of organization IDs
+See terraform_cloud_varsets.sh to get a list of workspaces and their IDs
 "
 
 # used by usage() in lib/utils.sh
@@ -42,7 +45,7 @@ if [ -z "$workspace_id" ]; then
 fi
 
 "$srcdir/terraform_cloud_workspace_vars.sh" "$workspace_id" |
-while read -r id _ name _; do
+while read -r id _ _ name _; do
     for var in "$@"; do
         if [ "$var" = "$name" ]; then
             timestamp "deleting variable '$name' (id '$id') in workspace id '$workspace_id'"
