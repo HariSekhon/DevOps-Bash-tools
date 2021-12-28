@@ -26,6 +26,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Lists Terraform Cloud workspace variables for a given workspace id
 
+See terraform_cloud_workspaces.sh to get the list of workspaces and their IDs
+
+
 Output:
 
 <id>    <type>      <name>      <value>
