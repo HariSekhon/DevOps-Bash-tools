@@ -1070,7 +1070,7 @@ warn_if_error_field(){
 jq_debug_pipe_dump(){
     if [ -n "${DEBUG:-}" ]; then
         data="$(cat)"
-        jq -r . <<< "$data" >&2
+        jq -r . <<< "$data" >&2 || :
         echo "$data"
     else
         cat  # needed for straight passthrough in non-debug mode
@@ -1080,7 +1080,7 @@ jq_debug_pipe_dump(){
 jq_debug_pipe_dump_slurp(){
     if [ -n "${DEBUG:-}" ]; then
         data="$(cat)"
-        jq -r -s . <<< "$data" >&2
+        jq -r -s . <<< "$data" >&2 || :
         echo "$data"
     else
         cat  # needed for straight passthrough in non-debug mode
