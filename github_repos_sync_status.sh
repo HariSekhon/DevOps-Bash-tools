@@ -138,8 +138,9 @@ check_azure_devops(){
 github_user="$(get_github_user)"
 
 # need gitlab user
-if [ $check_gitlab = 1 ] || [ $check_bitbucket = 0 ]; then
-    if [ -z "${GITLAB_USERNAME:-${GITLAB_USER:-}}" ]; then
+if check_gitlab; then
+    gitlab_user="${GITLAB_USERNAME:-${GITLAB_USER:-}}"
+    if [ -z "$gitlab_user" ]; then
         gitlab_user="$("$srcdir/gitlab_api.sh" "/user" | jq -r '.username')"
         gitlab_user="${gitlab_user:-<user>}"
     fi
