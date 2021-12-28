@@ -30,9 +30,9 @@ Example:
 
     ${0##*/}
 
-    ${0##*/} 48      # 48 hours ago to present
+    ${0##*/} 48     # 48 hours ago to present
 
-    ${0##*/} 24 12   # 24 hours ago to 12 hours ago
+    ${0##*/} 24 3   # 24 hours ago to 3 hours ago
 
     ${0##*/} --start-time \"\$(date +%s --date='2021-12-21')000\" --end-time \"\$(date +%s --date='2021-12-23')000\"  # explicitly calculated dates, using standard AWS CLI options (now you see why I default to the simple hours ago optional args)
 
@@ -40,7 +40,9 @@ Example:
 Output Format:
 
 <timestamp>     <job_id>    <user>    <job_name>
-
+eg.
+2021-12-22T19:28:57Z    12a345b6-c789-0de1-f2a3-4b567cdef8ab    hari@domain.com       my_job_1
+2021-12-22T20:22:17Z    123ab4cd-e5f6-789a-b012-34c5d67e8f90    MyBatchRole/1ab2c34567890123d45e678f901a2b34  my_report_postprocess
 
 
 $usage_aws_cli_required
@@ -48,49 +50,15 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<hours> <aws_cli_options>]"
+usage_args="[<hours_ago_start> <hours_ago_end> <aws_cli_options>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
 
-hours_ago_start=24
-hours_ago_end=0
-
-if [ -n "${1:-}" ] &&
-   ! [[ "${1:-}" =~ ^- ]]; then
-    hours_ago_start="$1"
-    shift || :
-fi
-
-if [ -n "${1:-}" ] &&
-   ! [[ "${1:-}" =~ ^- ]]; then
-    hours_ago_end="$1"
-    shift || :
-fi
-
-if ! [[ "$hours_ago_start" =~ ^[[:digit:]]+$ ]]; then
-    usage "invalid value given for hours ago start argument, must be an integer"
-fi
-
-if ! [[ "$hours_ago_end" =~ ^[[:digit:]]+$ ]]; then
-    usage "invalid value given for hours ago end argument, must be an integer"
-fi
-
-if ! [[ "$*" =~ --start-time ]]; then
-    args+=( --start-time "$(date '+%s' --date="$hours_ago_start hours ago")000" )
-fi
-if ! [[ "$*" =~ --end-time ]]; then
-    args+=( --end-time "$(date '+%s' --date="$hours_ago_end hours ago")000" )
-fi
-
-aws logs filter-log-events --log-group-name aws-controltower/CloudTrailLogs \
-                           --filter-pattern '{ ($.eventSource = "batch.amazonaws.com") && ($.eventName = "SubmitJob") }' \
-                           ${args[@]:+"${args[@]}"} \
-                           "$@" |
-                           #--max-items 1 \
-                           # --region eu-west-2  # set AWS_DEFAULT_REGION or pass --region via $@
-                           #--end-time "$(date '+%s')000" \
+"$srcdir/aws_logs.sh" --log-group-name aws-controltower/CloudTrailLogs \
+                      --filter-pattern '{ ($.eventSource = "batch.amazonaws.com") && ($.eventName = "SubmitJob") }' \
+                      "$@" |
 jq -r '.events[].message' |
 jq_debug_pipe_dump_slurp |
 jq -r -s '.[] |
