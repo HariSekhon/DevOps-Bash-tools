@@ -51,7 +51,9 @@ help_usage "$@"
 
 user="${1:-$USER-cli}"
 
-access_keys_csv="${2:-$HOME/.aws/keys/${user}_accessKeys.csv}"
+aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
+
+access_keys_csv="${2:-$HOME/.aws/keys/${user}_${aws_account_id}_accessKeys.csv}"
 
 export AWS_DEFAULT_OUTPUT=json
 
@@ -59,7 +61,7 @@ aws_create_user_if_not_exists "$user"
 
 exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 
-timestamp "Granting Administrator permissions to account '$user'"
+timestamp "Granting Administrator permissions on account '$aws_account_id' to user '$user'"
 aws iam attach-user-policy --user-name "$user" --policy-arn 'arn:aws:iam::aws:policy/AdministratorAccess'
 
 echo
