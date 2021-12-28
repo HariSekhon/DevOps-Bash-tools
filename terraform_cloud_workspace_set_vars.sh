@@ -25,7 +25,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Adds / updates Terraform Cloud workspace variables for a given workspace id from args or stdin
 
-By default it creates variables as Environment Variables and marks them as Sensitive for safety as the primary use case for this code was easy uploading AWS access key credentials from things like aws_csv_creds.sh
+By default, creates variables as Environment Variables and marks them as Sensitive for safety as the primary use case for this code was easy uploading AWS access key credentials from things like aws_csv_creds.sh
 
 If you want to create Terraform variables instead:
 
@@ -36,8 +36,10 @@ If you want to mark the variables as non-sensitive:
 
     export TERRAFORM_VARIABLES_SENSITIVE=false
 
+
 See terraform_cloud_organizations.sh to get a list of organization IDs
 See terraform_cloud_varsets.sh to get a list of workspaces and their IDs
+
 
 Examples:
 
