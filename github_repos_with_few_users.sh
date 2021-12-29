@@ -37,7 +37,7 @@ Output format:
 
 Output format if \$VERBOSE is set (timestamped logs are sent to stderr):
 
-2021-12-29 18:09:57  checking repos for 'harisekhon' with <= 1 users
+2021-12-29 18:09:57  checking repos for '<org>' with <= 1 users
 2021-12-29 18:09:57  checking repo: <org>/<repo1>
 2021-12-29 18:09:57  checking repo: <org>/<repo2>
 2021-12-29 18:09:58  checking repo: <org>/<repo3>
