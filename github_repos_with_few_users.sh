@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: 2
 #
 #  Author: Hari Sekhon
 #  Date: 2021-12-29 18:08:23 +0000 (Wed, 29 Dec 2021)
@@ -26,13 +27,20 @@ Finds GitHub repo with few users, which in Enterprises is a sign that a user has
 
 The default user threshold if not given is 1
 
-Output format (timestamped progress is sent to stderr, results are sent to stdout):
+
+Output format:
+
+<org>/<repo3>
+<org>/<repo5>
+...
+
+
+Output format if \$VERBOSE is set (timestamped logs are sent to stderr):
 
 2021-12-29 18:09:57  checking repo: <org>/<repo1>
 2021-12-29 18:09:57  checking repo: <org>/<repo2>
 2021-12-29 18:09:58  checking repo: <org>/<repo3>
-<org>/<repo3>    <user>     <permission>
-<org>/<repo3>    <user2>    <permission>
+<org>/<repo3>
 2021-12-29 18:10:00  checking repo: <org>/<repo4>
 ...
 "
@@ -54,12 +62,7 @@ user_or_org="${GITHUB_ORGANIZATION:-$user}"
 
 get_github_repos "$user_or_org" "${GITHUB_ORGANIZATION:-}" |
 while read -r repo; do
-    timestamp "checking repo: $user_or_org/$repo"
+    log "checking repo: $user_or_org/$repo"
     "$srcdir/github_api.sh" "/repos/$user_or_org/$repo/collaborators" |
-     jq -r "
-        select(length <= $minimum_number_of_users) |
-        .[] |
-        [\"$repo\", .login, .role_name] |
-        @tsv" |
-     column -t
+     jq -r "select(length <= $minimum_number_of_users) | \"$repo\""
 done
