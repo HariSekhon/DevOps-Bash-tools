@@ -15,6 +15,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://www.terraform.io/cloud-docs/api-docs/workspaces
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
