@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists a GitHub repo's collaborators (users granted access via teams, or outside invited collaborators) and their permissions using the GitHub API
+Lists a GitHub repo's collaborators (users granted access via teams, or outside invited collaborators) and their role name permissions using the GitHub API
 
 If no repo is given, infers from local repo's git remotes
 
@@ -53,5 +53,6 @@ if [ -z "$repo" ]; then
 fi
 
 "$srcdir/github_api.sh" "/repos/$repo/collaborators" |
+jq_debug_pipe_dump |
 jq -r ".[] | [\"$repo\", .login, .role_name] | @tsv" |
 column -t
