@@ -37,6 +37,7 @@ Output format:
 
 Output format if \$VERBOSE is set (timestamped logs are sent to stderr):
 
+2021-12-29 18:09:57  checking repos for 'harisekhon' with <= 1 users
 2021-12-29 18:09:57  checking repo: <org>/<repo1>
 2021-12-29 18:09:57  checking repo: <org>/<repo2>
 2021-12-29 18:09:58  checking repo: <org>/<repo3>
@@ -59,6 +60,8 @@ fi
 
 user="${GITHUB_USER:-$(get_github_user)}"
 user_or_org="${GITHUB_ORGANIZATION:-$user}"
+
+log "checking repos for '$user_or_org' with <= $minimum_number_of_users users"
 
 get_github_repos "$user_or_org" "${GITHUB_ORGANIZATION:-}" |
 while read -r repo; do
