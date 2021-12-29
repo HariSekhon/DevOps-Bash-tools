@@ -26,14 +26,15 @@ Finds GitHub repo with few users, which in Enterprises is a sign that a user has
 
 The default user threshold if not given is 1
 
-Output format:
+Output format (timestamped progress is sent to stderr, results are sent to stdout):
 
-# checking repo: <repo>
-# checking repo2: <repo2>
-# checking repo3: <repo3>
-<repo3>    <user>     <permission>
-<repo3>    <user2>    <permission>
-# checking repo4: <repo4>
+2021-12-29 18:09:57  checking repo: <org>/<repo1>
+2021-12-29 18:09:57  checking repo: <org>/<repo2>
+2021-12-29 18:09:58  checking repo: <org>/<repo3>
+<org>/<repo3>    <user>     <permission>
+<org>/<repo3>    <user2>    <permission>
+2021-12-29 18:10:00  checking repo: <org>/<repo4>
+...
 "
 
 # used by usage() in lib/utils.sh
@@ -53,7 +54,7 @@ user_or_org="${GITHUB_ORGANIZATION:-$user}"
 
 get_github_repos "$user_or_org" "${GITHUB_ORGANIZATION:-}" |
 while read -r repo; do
-    echo "# checking repo: $user_or_org/$repo"
+    timestamp "checking repo: $user_or_org/$repo"
     "$srcdir/github_api.sh" "/repos/$user_or_org/$repo/collaborators" |
      jq -r "
         select(length <= $minimum_number_of_users) |
