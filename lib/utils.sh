@@ -1071,7 +1071,7 @@ jq_debug_pipe_dump(){
     if [ -n "${DEBUG:-}" ]; then
         data="$(cat)"
         jq -r . <<< "$data" >&2 || :
-        echo "$data"
+        cat <<< "$data"
     else
         cat  # needed for straight passthrough in non-debug mode
     fi
@@ -1081,7 +1081,7 @@ jq_debug_pipe_dump_slurp(){
     if [ -n "${DEBUG:-}" ]; then
         data="$(cat)"
         jq -r -s . <<< "$data" >&2 || :
-        echo "$data"
+        call <<< "$data"
     else
         cat  # needed for straight passthrough in non-debug mode
     fi
