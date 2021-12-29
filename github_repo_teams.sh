@@ -25,13 +25,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists a GitHub repo's teams or invited collaborators and their permissions using the GitHub API
+Lists a GitHub repo's teams and their permissions using the GitHub API
 
 If no repo is given, infers from local repo's git remotes
 
 Output format:
 
-<repo>  <team>   <permission>
+<repo>  <team1>  <permission>
 <repo>  <team2>  <permission>
 
 This is most useful for GitHub Enterprise repos that are part of an organization to audit access across repos, especially when combined with github_foreach_repo.sh.
