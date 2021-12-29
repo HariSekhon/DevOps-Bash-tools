@@ -53,6 +53,5 @@ if [ -z "$repo" ]; then
 fi
 
 "$srcdir/github_api.sh" "/repos/$repo/collaborators" |
-jq_debug_pipe_dump |
 jq -r ".[] | [\"$repo\", .login, .role_name] | @tsv" |
 column -t
