@@ -627,7 +627,8 @@ etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
   - `github_repo_stars.sh` - fetches the stars, forks and watcher counts for a given repo
-  - `github_repo_teams.sh` - fetches the GitHub Enterprise teams or personal invited collaborators as well as their permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
+  - `github_repo_teams.sh` - fetches the GitHub Enterprise teams and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
+  - `github_repo_collaborators.sh` - fetches users and outside invited collaborators and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_protect_branches.sh` - enables branch protections on the given repo. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`
   - `github_repos_public.sh` - lists public repos for a user or organization. Useful to periodically scan and account for any public repos
   - `github_repos_disable_wiki.sh` - disables the Wiki on one or more given repos to prevent documentation fragmentation and make people use the centralized documentation tool eg. Confluence or Slite
