@@ -184,7 +184,7 @@ for basedir in "$github" "$bitbucket"; do
             name="${name//./_}"
             name="${name// /}"
             # alias terraform /tf -> terra
-            if [[ "$name" =~ ^terraform|tf$ ]]; then
+            if [[ "$name" =~ ^(terraform|tf)$ ]]; then
                 name="terra"
             fi
             export "$name"="$directory"
@@ -192,6 +192,9 @@ for basedir in "$github" "$bitbucket"; do
             if ! type -P "$name" &>/dev/null; then
                 # shellcheck disable=SC2139,SC2140
                 alias "$name"="sti $name; cd $directory"
+            elif ! type -P "g$name" &>/dev/null; then
+                # shellcheck disable=SC2139,SC2140
+                alias "g$name"="sti $name; cd $directory"
             fi
         done
     fi
