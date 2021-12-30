@@ -366,6 +366,7 @@ nmap <silent> ;U :.w !urlopen.sh<CR><CR>
 "nmap          ;\ :source ~/.vimrc<CR>
 "nmap          ;/ :source ~/.vimrc<CR>
 nmap          ;v :source ~/.vimrc<CR>
+nmap          ;V :call WriteRunVerbose()<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
 nmap          ;§ :call ToggleScrollLock()<CR>
@@ -545,6 +546,12 @@ function! WriteRun()
         " instead of args headers
         :! "$bash_tools/lib/run.sh" "%:p" 2>&1 | less
     endif
+endfunction
+
+function! WriteRunVerbose()
+    :let $VERBOSE=1
+    :call WriteRun()
+    :let $VERBOSE=""
 endfunction
 
 function! WriteRunDebug()
