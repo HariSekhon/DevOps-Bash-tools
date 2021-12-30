@@ -30,7 +30,7 @@ Creates an IAM access key (deleting an older unused key if necessary), writes a 
 
 The following optional arguments can be given:
 
-- user name         (default: terraform)
+- user name         (default: \$USER-terraform)
 - keyfile           (default: ~/.aws/keys/\${user}_\${aws_account_id}_accessKeys.csv) - be careful if specifying this, a non-existent keyfile will create a new key, deleting the older of 2 existing keys if necessary to be able to create this
 
 Idempotent - safe to re-run, will skip creating a user that already exists or CSV export that already exists
@@ -47,7 +47,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-user="${1:-terraform}"
+user="${1:-$USER-terraform}"
 
 # done as part of aws_cli_create_credential.sh now
 #aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
