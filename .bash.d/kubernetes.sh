@@ -86,6 +86,8 @@ alias kl='k logs'
 alias ktp='k top po'
 alias kshell='kube-shell'
 alias kubesh='kube-shell'
+alias kubeconfig='$EDITOR "${KUBECONFIG:-~/.kube/config}"'
+alias kubeconf=kubeconfig
 
 #alias poc='po | grep -v Completed'
 unalias poc &>/dev/null
