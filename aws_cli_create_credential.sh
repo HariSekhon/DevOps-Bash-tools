@@ -61,8 +61,15 @@ aws_create_user_if_not_exists "$user"
 
 exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 
-timestamp "Granting Administrator permissions on account '$aws_account_id' to user '$user'"
-aws iam attach-user-policy --user-name "$user" --policy-arn 'arn:aws:iam::aws:policy/AdministratorAccess'
+admin_group="Admins"
+if aws iam list-groups | jq -e ".Groups[] | select(.GroupName == \"$admin_group\")" >/dev/null; then
+    timestamp "Adding user '$user' to group '$admin_group' on account '$aws_account_id'"
+    aws iam add-user-to-group --user-name "$user" --group-name "$admin_group"
+else
+    timestamp "Admin group '$admin_group' not found in to account '$aws_account_id'"
+    timestamp "Granting Administrator policy permissions directly to user '$user' in account '$aws_account_id'"
+    aws iam attach-user-policy --user-name "$user" --policy-arn 'arn:aws:iam::aws:policy/AdministratorAccess'
+fi
 
 echo
 echo "Set the following export commands in your environment to begin using this access key in your CLI immediately:"
