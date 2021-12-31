@@ -39,10 +39,13 @@ else
     if type -P circleci &>/dev/null; then
         if is_CI; then
             echo "using circleci from location: $(type -P circleci)"
-            set +e
         fi
-        find . -path '*/.circleci/config.yml' -exec circleci config validate {} \;
-        set -e
+        find . -path '*/.circleci/config.yml' |
+        while read -r config; do
+            timestamp "checking CircleCI config: $config"
+            circleci config validate "$config"
+            echo >&2
+        done
     else
         echo "WARNING: skipping Circle check as circleci command not found in \$PATH ($PATH)"
     fi
