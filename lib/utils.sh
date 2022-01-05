@@ -266,16 +266,16 @@ get_arch(){
 
 curl(){
     local opts=()
-    if ! is_tty || is_piped; then
+    if is_piped || is_CI; then
         opts+=(-sS)
     fi
     command curl ${opts:+"${opts[@]}"} "$@"
 }
 
 wget(){
-    local opts=()
-    if ! is_tty || is_piped; then
-        opts+=(-q)
+    local opts=(-c)
+    if is_piped || is_CI; then
+        opts+=(--no-verbose)  # -q suppresses the error messages we need to debug, leading to silent exits
     fi
     command wget ${opts:+"${opts[@]}"} "$@"
 }
