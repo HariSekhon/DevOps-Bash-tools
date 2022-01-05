@@ -87,7 +87,7 @@ timestamp "Setting executable"
 chmod +x "$download_file"
 echo
 
-destination="${3:-$download_file}"
+destination="${3:-${download_file##*/}}"
 
 if ! [[ "$destination" =~ ^/ ]]; then
     if [ $EUID = 0 ]; then
