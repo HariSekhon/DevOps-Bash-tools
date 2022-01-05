@@ -166,6 +166,7 @@ fi
 # shellcheck disable=SC2154
 add_PATH "$github/bash-tools"
 add_PATH "$github/bash-tools/applescript"
+add_PATH "$github/bash-tools/setup"
 add_PATH "$github/go-tools"
 add_PATH "$github/go-tools/bin"
 add_PATH "$github/perl-tools"
