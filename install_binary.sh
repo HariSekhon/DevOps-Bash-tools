@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: 'https://s3.amazonaws.com/cloudbees-core-cli/master/cloudbees-{os}-{arch}.tar.gz' cloudbees
 #
 #  Author: Hari Sekhon
 #  Date: 2022-01-05 11:25:17 +0000 (Wed, 05 Jan 2022)
@@ -41,11 +42,8 @@ min_args 1 "$@"
 
 url="$1"
 
-os="$(uname -s | tr '[:upper:]' '[:lower:]')"
-arch="$(uname -m)"
-if [ "$arch" = x86_64 ]; then
-    arch=amd64  # files are conventionally named amd64 not x86_64
-fi
+os="$(get_os)"
+arch="$(get_arch)"
 
 url="${url//\{os\}/$os}"
 url="${url//\{arch\}/$arch}"
