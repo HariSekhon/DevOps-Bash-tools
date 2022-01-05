@@ -538,7 +538,7 @@ function! WriteRun()
     elseif expand('%:t') =~ 'cloudbuild.*\.ya\?ml'
         :call CloudBuild()
     elseif expand('%:t') == 'kustomization.yaml'
-        :! bash -c 'cd "%:p:h" && kustomize build' 2>&1 | less
+        :! bash -c 'cd "%:p:h" && kustomize build --enable-helm' 2>&1 | less
     elseif expand('%:t') == '.envrc'
         :! bash -c 'cd "%:p:h" && direnv allow .' 2>&1 | less
     else
