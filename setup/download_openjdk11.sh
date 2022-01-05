@@ -58,6 +58,9 @@ download "$url"
 echo
 
 target_dir="${PWD:-$(pwd)}/jdk-$version"
+if is_mac; then
+    target_dir+="/Contents/Home"
+fi
 
 if [ -d "$target_dir" ]; then
     timestamp "Target directory already exists, aborting"
@@ -74,7 +77,7 @@ cat <<EOF
 
 Set your environment as follows:
 
-export JAVA_HOME="jdk-$version"
+export JAVA_HOME="$target_dir"
 export PATH="\$PATH:\$JAVA_HOME/bin"
 
 EOF
