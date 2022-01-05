@@ -25,7 +25,12 @@ fi
 # https://jenkins.io/doc/book/pipeline/jenkinsfile/#using-environment-variables
 is_jenkins(){
     # also BUILD_ID, BUILD_NUMBER, BUILD_URL but less specific, caught in is_CI generic
-    if [ -n "${JENKINS_URL:-}" ]; then
+    # JENKINS_URL is set in client side environment for various CLIs and scripts, can't rely on just that
+    if [ -n "${JENKINS_URL:-}" ] &&
+       [ -n "${EXECUTOR_NUMBER:-}" ] &&
+       [ -n "${JOB_NAME:-}" ] &&
+       [ -n "${BUILD_ID:-}" ] &&
+       [ -n "${BUILD_URL:-}" ]; then
         return 0
     fi
     return 1
