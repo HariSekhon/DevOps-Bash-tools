@@ -67,7 +67,7 @@ else
                     ;;
   cloudbuild*.y*ml) gcloud builds submit --config "$basename" .
                     ;;
-kustomization.yaml) kustomize build
+kustomization.yaml) kustomize build --enable-helm
                     ;;
             .envrc) cd "$dirname" && direnv allow .
                     ;;
