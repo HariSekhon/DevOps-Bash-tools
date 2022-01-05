@@ -224,6 +224,48 @@ else
 fi
 export sudo
 
+# XXX: there are other tarball extensions for other compression algorithms but these are the 2 very standard ones we always use: gzip or bz2
+has_tarball_extension(){
+    local filename="$1"
+    # .tgz
+    # .tbz
+    # .tar.gz
+    # .tar.bz2
+    #[[ "$filename" =~ \.(tgz|tbz|tar(\.(gz|bz2))?)$ ]]
+    has_tarball_gzip_extension "$filename" ||
+    has_tarball_bzip2_extension "$filename"
+}
+
+has_tarball_gzip_extension(){
+    local filename="$1"
+    # .tgz
+    # .tar.gz
+    [[ "$filename" =~ \.(tgz|tar\.gz)$ ]]
+}
+
+has_tarball_bzip2_extension(){
+    local filename="$1"
+    # .tbz
+    # .tar.bz2
+    [[ "$filename" =~ \.(tbz|tar\.bz2)$ ]]
+}
+
+curl(){
+    local opts=()
+    if ! is_tty || is_piped; then
+        opts+=(-sS)
+    fi
+    command curl ${opts:+"${opts[@]}"} "$@"
+}
+
+wget(){
+    local opts=()
+    if ! is_tty || is_piped; then
+        opts+=(-q)
+    fi
+    command wget ${opts:+"${opts[@]}"} "$@"
+}
+
 is_latest_version(){
     # permit .* as we often replace version if latest with .* to pass regex version tests, which allows this to be called any time
     if [ "$version" = "latest" ] || [ "$version" = ".*" ]; then
