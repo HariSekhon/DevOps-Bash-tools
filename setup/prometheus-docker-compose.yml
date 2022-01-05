@@ -1,0 +1,34 @@
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  Author: Hari Sekhon
+#  Date: 2022-01-05 16:42:37 +0000 (Wed, 05 Jan 2022)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+version: '3'
+
+services:
+  prometheus:
+    hostname: prometheus
+    image: prom/prometheus:${VERSION:-latest}
+    ports:
+      - ${PROMETHEUS_PORT:-9090}:9090
+    volumes:
+      - ${PROMETHEUS_CONFIG:-./prometheus.yml}:/etc/prometheus/prometheus.yml
+    #environment:
+#    healthcheck:
+#      # doesn't have curl
+#      #test: ["CMD", "curl", "-f", "http://localhost:9090"]
+#      # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
+#      test: "${DOCKER_HEALTHCHECK:-curl -f http://localhost:9090}"
+#      interval: 30s
+#      #start_period: 30s  # version 3.4+
+#      timeout: 10s
+#      retries: 5
