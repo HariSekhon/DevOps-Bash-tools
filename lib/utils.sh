@@ -256,7 +256,8 @@ get_os(){
 }
 
 get_arch(){
-    local arch="$(uname -m)"
+    local arch
+    arch="$(uname -m)"
     if [ "$arch" = x86_64 ]; then
         arch=amd64  # files are conventionally named amd64 not x86_64
     fi
@@ -277,6 +278,18 @@ wget(){
         opts+=(-q)
     fi
     command wget ${opts:+"${opts[@]}"} "$@"
+}
+
+download(){
+    local url="$1"
+    local download_file="${2:-${url##*/}}"
+    if type -P wget &>/dev/null; then
+        wget -O "$download_file" "$url"
+    elif type -P curl &>/dev/null; then
+        curl -L -o "$download_file" "$url"
+    else
+        die "wget / curl not installed - cannot download"
+    fi
 }
 
 is_latest_version(){
