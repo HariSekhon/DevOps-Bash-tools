@@ -250,6 +250,19 @@ has_tarball_bzip2_extension(){
     [[ "$filename" =~ \.(tbz|tar\.bz2)$ ]]
 }
 
+get_os(){
+    uname -s |
+    tr '[:upper:]' '[:lower:]'
+}
+
+get_arch(){
+    local arch="$(uname -m)"
+    if [ "$arch" = x86_64 ]; then
+        arch=amd64  # files are conventionally named amd64 not x86_64
+    fi
+    echo "$arch"
+}
+
 curl(){
     local opts=()
     if ! is_tty || is_piped; then
