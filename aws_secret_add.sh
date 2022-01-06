@@ -28,7 +28,7 @@ First argument is used as secret name - if not given prompts for it
 Second argument is used as secret string value if it doesn't start with option swtich double dashes -- and a letter
     - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
     - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
-Remainin args are passed directly to 'aws secretsmanager'
+Remaining args are passed directly to 'aws secretsmanager'
 
 Examples:
 
