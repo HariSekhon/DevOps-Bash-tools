@@ -79,7 +79,15 @@ timestamp "Setting executable"
 chmod +x "$download_file"
 echo
 
-destination="${3:-${download_file##*/}}"
+destination="${3:-}"
+if [ -z "$destination" ]; then
+    destination="${download_file##*/}"
+    destination="${destination%%.$$}"
+    # if there are any -darwin-amd64 or -amd64-darwin suffixes remove them either way around (this is why $os is stripped before and after)
+    destination="${destination%%-$os}"
+    destination="${destination%%-$arch}"
+    destination="${destination%%-$os}"
+fi
 
 if ! [[ "$destination" =~ ^/ ]]; then
     if [ $EUID = 0 ]; then
