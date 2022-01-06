@@ -30,7 +30,7 @@ Second argument is used as secret string value if it doesn't start with option s
     - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
 Remainin args are passed directly to 'aws secretsmanager'
 
-Example:
+Examples:
 
     ${0##*/} myname
 
