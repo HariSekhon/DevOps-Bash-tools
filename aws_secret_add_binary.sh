@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Adds a given binary file to AWS Secrets Manager as base64 - this is only possible via the CLI or SDK as it's not supported in the AWS Console UI at this time
 
-First argument is used as secret name - if not given prompts for it
+First argument is used as secret name
 Second argument must be a binary file such as a QR Code screenshot - this is converted to base 64 because AWS only permits ASCII characters in this value
 Remaining args are passed directly to 'aws secretsmanager'
 
