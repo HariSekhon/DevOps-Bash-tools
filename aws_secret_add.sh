@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Reads a value from the command line and saves it to AWS Secrets Manager without echo'ing it on the screen
 
-First argument is used as secret name - if not given prompts for it
+First argument is used as secret name
 Second argument is used as secret string value if it doesn't start with option swtich double dashes -- and a letter
     - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
     - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
