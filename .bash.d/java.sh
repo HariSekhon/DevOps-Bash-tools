@@ -31,6 +31,8 @@ add_PATH CLASSPATH ~/bin/java
 # turn off those annoying Java 11 warnings when using Groovy scripting
 export GROOVY_TURN_OFF_JAVA_WARNINGS=true
 
+alias rmclass='rm -fv *.class'
+
 if isMac; then
     mac_export_java_home(){
         local version="$1"
