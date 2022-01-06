@@ -31,7 +31,7 @@ help_usage "$@"
 directory="${1:-.}"
 shift ||:
 
-filelist="$(find "$directory" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort)"
+filelist="$(find "$directory" -maxdepth 2 -type f -iname '*.py' -o -type f -iname '*.jy' | sort)"
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
     exit 0
