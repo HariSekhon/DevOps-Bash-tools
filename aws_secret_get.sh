@@ -24,8 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Retrieves a secret value from a given AWS Secrets Manager secret name
 
-First argument is used as secret name - if not given prompts for it
-Second or more args are passed to 'aws secretsmanager'
+First argument is used as secret name
+Remaining args are passed directly to 'aws secretsmanager'
 
 Will check for and output Secret String or Secret Binary
 
