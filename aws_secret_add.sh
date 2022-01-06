@@ -39,7 +39,9 @@ Example:
     ${0##*/} myname --description 'test credential'
 
     # For accessing in Jenkins via https://plugins.jenkins.io/aws-secrets-manager-credentials-provider/
-    ${0##*/} mypass --tags 'Key=jenkins:credentials:type,Value=usernamePassword' 'Key=jenkins:credentials:username,Value=hari'
+    ${0##*/} mysecretstring --tags 'Key=jenkins:credentials:type,Value=string'
+    ${0##*/} mypass         --tags 'Key=jenkins:credentials:type,Value=usernamePassword'  'Key=jenkins:credentials:username,Value=hari'
+    ${0##*/} mysshkey       --tags 'Key=jenkins:credentials:type,Value=sshUserPrivateKey' 'Key=jenkins:credentials:username,Value=hari'
 
 $usage_aws_cli_required
 "
