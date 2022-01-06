@@ -75,6 +75,7 @@ add_env_var(){
     local value="${env_var#*=}"
     local masked=true
     if [ "${#value}" -lt 8 ]; then  # avoids 400 errors from the API if sending < 8 chars with masked=true
+        echo "WARNING: value for key '$key' is less than 8 characters so can't be masked in GitLab" >&2
         masked=false
     fi
     if grep -Fxq "$key" <<< "$existing_env_vars"; then
