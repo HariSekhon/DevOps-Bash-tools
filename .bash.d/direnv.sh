@@ -27,3 +27,6 @@ export PROMPT_COMMAND="${PROMPT_COMMAND//;;/;}"
 #alias envrc='$EDITOR .envrc && direnv allow .'
 # same effect as above
 alias envrc='direnv edit'
+
+# allow all .envrc under your current root - use only inside trusted repos
+alias direnvallowall='find . -name .envrc -exec direnv allow {} \;'
