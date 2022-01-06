@@ -37,4 +37,5 @@ usage_args="[<aws_options>]"
 help_usage "$@"
 
 aws secretsmanager list-secrets "$@" |
+jq_debug_pipe_dump |
 jq -r '.SecretList[].Name'
