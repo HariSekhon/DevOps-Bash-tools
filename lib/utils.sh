@@ -1134,6 +1134,13 @@ warn_if_error_field(){
 }
 
 # ==============================
+
+# not wrapping this because in some rare cases we may need to pipe through jq_debug_pipe_dump_slurp instead and this would break (eg. aws_logs_*.sh)
+#jq(){
+#    jq_debug_pipe_dump |
+#    jq "$@"
+#}
+
 # pipe debugging filter commands, straight passthrough whether debug mode is enabled or not
 jq_debug_pipe_dump(){
     if [ -n "${DEBUG:-}" ]; then
