@@ -199,7 +199,8 @@ ssllabs-scan
 sslscan
 ssh-copy-id
 #subversion  # pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
-tfenv  # terraform version manager inspired by rbenv
+tfenv  # Terraform version manager inspired by rbenv
+tfsec  # Terraform static analysis by AquaSec
 thrift
 tidy-html5
 tree
