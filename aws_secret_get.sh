@@ -29,6 +29,10 @@ Second or more args are passed to 'aws secretsmanager'
 
 Will check for and output Secret String or Secret Binary
 
+Example:
+
+    ${0##*/} my-secret
+
 
 $usage_aws_cli_required
 "
