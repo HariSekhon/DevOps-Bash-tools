@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists AWS Secrets Manager secrets, one per line
 
-Any args are passed to 'aws secretsmanager'
+Any args are passed directly to 'aws secretsmanager'
 
 
 $usage_aws_cli_required
