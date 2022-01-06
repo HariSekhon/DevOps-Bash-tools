@@ -26,7 +26,7 @@ Adds a given binary file to AWS Secrets Manager as base64 - this is only possibl
 
 First argument is used as secret name - if not given prompts for it
 Second argument must be a binary file such as a QR Code screenshot - this is converted to base 64 because AWS only permits ASCII characters in this value
-Third or more args are passed to 'aws secretsmanager'
+Remaining args are passed directly to 'aws secretsmanager'
 
 Example:
 
