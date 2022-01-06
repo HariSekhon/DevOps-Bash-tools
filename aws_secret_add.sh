@@ -25,11 +25,21 @@ usage_description="
 Reads a value from the command line and saves it to AWS Secrets Manager without echo'ing it on the screen
 
 First argument is used as secret name - if not given prompts for it
-Second argument is used as secret string value
+Second argument is used as secret string value if it doesn't start with option swtich double dashes -- and a letter
     - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
     - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
-Third or more args are passed to 'aws secretsmanager'
+Remainin args are passed directly to 'aws secretsmanager'
 
+Example:
+
+    ${0##*/} myname
+
+    ${0##*/} myname myvalue
+
+    ${0##*/} myname --description 'test credential'
+
+    # For accessing in Jenkins via https://plugins.jenkins.io/aws-secrets-manager-credentials-provider/
+    ${0##*/} mypass --tags 'Key=jenkins:credentials:type,Value=usernamePassword' 'Key=jenkins:credentials:username,Value=hari'
 
 $usage_aws_cli_required
 "
@@ -43,9 +53,12 @@ help_usage "$@"
 min_args 1 "$@"
 
 name="$1"
-secret="${2:-}"
 shift || :
-shift || :
+# perhaps somebody wants a secret value starting with a dash
+if ! [[ "${2:-}" =~ ^--[[:alpha:]]+ ]]; then
+    secret="${2:-}"
+    shift || :
+fi
 
 if [ -z "$secret" ]; then
     read_secret
