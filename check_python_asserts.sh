@@ -24,7 +24,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$srcdir/lib/python.sh"
 
 # maxdepth 2 to avoid recursing submodules which have their own checks
-files="$(find_python_jython_files -maxdepth 2)"
+files="$(find_python_jython_files . -maxdepth 2)"
 
 if [ -z "$files" ]; then
     return 0 &>/dev/null || :
