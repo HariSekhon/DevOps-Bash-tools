@@ -36,20 +36,20 @@ section "Python - find and alert on any usage of assert outside of /test/"
 start_time="$(start_timer)"
 
 found=0
-for x in $files; do
+while read -r filename; do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     # exclude pytests
-    [[ "$x" = ./test/* ]] && continue
+    [[ "$filename" = ./test/* ]] && continue
     echo -n '.'
-    if grep -E '^[[:space:]]+\bassert\b' "$x"; then
+    if grep -E '^[[:space:]]+\bassert\b' "$filename"; then
         echo
-        echo "WARNING: $x contains 'assert'!! This could be disabled at runtime by PYTHONOPTIMIZE=1 / -O / -OO and should not be used!! "
+        echo "WARNING: $filename contains 'assert'!! This could be disabled at runtime by PYTHONOPTIMIZE=1 / -O / -OO and should not be used!! "
         found=1
         #if ! is_CI; then
         #    exit 1
         #fi
     fi
-done
+done <<< "$files"
 
 time_taken "$start_time"
 
