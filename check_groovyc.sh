@@ -24,6 +24,8 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Recurses a given directory tree or \$PWD, finding all Groovy files and validating them using 'groovyc'
+
+Useful for doing basic linting on Groovy repos and Jenkinsfile shared libraries
 "
 
 help_usage "$@"
