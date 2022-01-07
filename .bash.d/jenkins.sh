@@ -34,3 +34,5 @@ jenkins_local(){
     export JENKINS_PASSWORD="$JENKINS_SUPERUSER_PASSWORD"
     export JENKINS_URL="http://localhost:8080"
 }
+
+alias jenkinspass="jenkins_password.sh | copy_to_clipboard"
