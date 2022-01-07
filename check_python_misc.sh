@@ -20,7 +20,12 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+# shellcheck source=lib/utils.sh
+. "$srcdir/lib/python.sh"
+
+files="$(find_python_jython_files)"
+
+if [ -z "$files" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -45,7 +50,7 @@ check(){
     fi
 }
 
-for filename in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
+for filename in $files; do
     type isExcluded &>/dev/null && isExcluded "$filename" && echo -n '-' && continue
     echo -n '.'
     check "quit() calls" '^[^#]*\bquit\b' "$filename"
