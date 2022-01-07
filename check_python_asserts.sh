@@ -37,7 +37,7 @@ start_time="$(start_timer)"
 
 found=0
 while read -r filename; do
-    type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
+    type isExcluded &>/dev/null && isExcluded "$filename" && echo -n '-' && continue
     # exclude pytests
     [[ "$filename" = ./test/* ]] && continue
     echo -n '.'
