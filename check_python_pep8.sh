@@ -36,13 +36,13 @@ section "Python PEP8 checking all Python / Jython files"
 
 start_time="$(start_timer)"
 
-for x in $files; do
-    type isExcluded &>/dev/null && isExcluded "$x" && continue
+while read -r filename; do
+    type isExcluded &>/dev/null && isExcluded "$filename" && continue
     type -P pep8 &>/dev/null || sudo pip install pep8
     # E265 - spaces after # - I prefer no space it makes it easier to commented code vs actual comments
     # E402 - import must be at top of file, but I like to do dynamic sys.path.append
-    pep8 --show-source --show-pep8 --max-line-length=120 --ignore=E402,E265 "$x" | more
-done
+    pep8 --show-source --show-pep8 --max-line-length=120 --ignore=E402,E265 "$filename" | more
+done <<< "$files"
 
 time_taken "$start_time"
 section2 "Python PEP8 Completed Successfully"
