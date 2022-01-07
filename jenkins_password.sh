@@ -36,6 +36,9 @@ elif docker ps &>/dev/null; then
     #JENKINS_PASSWORD="$(kubectl exec -ti -n jenkins "$pod" -- cat /var/jenkins_home/secrets/initialAdminPassword)"
 elif kubectl get secret -n jenkins jenkins &>/dev/null; then
     JENKINS_PASSWORD="$(kubectl get secret -n jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode)"
+else
+    echo "ERROR: failed to determine JENKINS_PASSWORD from docker-compose or kubernetes" >&2
+    exit 1
 fi
 
 # if sourced, export JENKINS_PASSWORD, if subshell, echo it
