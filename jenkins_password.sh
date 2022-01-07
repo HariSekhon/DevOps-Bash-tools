@@ -13,11 +13,11 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# Gets the Jenkins password out of the Docker Compose jenkins-server
+# Gets the Jenkins initial admin password out of the Docker Compose jenkins-server container or Kubernetes jenkins helm deployment secret
 
-# Might need the compose project name matching the instantiation, eg.
+# For docker-compose you might need the compose project name matching the instantiation, eg.
 #
-# export COMPOSE_PROJECT_NAME="bash-tools"
+#   export COMPOSE_PROJECT_NAME="bash-tools"
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -27,9 +27,15 @@ config="$srcdir/setup/jenkins-docker-compose.yml"
 
 if [ -n "${JENKINS_PASSWORD:-}" ]; then
     echo "using \$JENKINS_PASSWORD from environment" >&2
-else
+elif docker ps &>/dev/null; then
     # </dev/null stops this swallowing stdin which we need for jenkins_cli.sh create-job
     JENKINS_PASSWORD="$(docker-compose -f "$config" exec -T jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword </dev/null)"
+#elif kubectl get po -n jenkins -l app.kubernetes.io/component=jenkins-controller -o name 2>/dev/null | grep -q .; then
+    #pod="$(kubectl get po -n jenkins -l app.kubernetes.io/component=jenkins-controller -o name)"
+    # doesn't exist
+    #JENKINS_PASSWORD="$(kubectl exec -ti -n jenkins "$pod" -- cat /var/jenkins_home/secrets/initialAdminPassword)"
+elif kubectl get secret -n jenkins jenkins &>/dev/null; then
+    JENKINS_PASSWORD="$(kubectl get secret -n jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode)"
 fi
 
 # if sourced, export JENKINS_PASSWORD, if subshell, echo it
