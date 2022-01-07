@@ -89,8 +89,6 @@ alias kubesh='kube-shell'
 alias kubeconfig='$EDITOR "${KUBECONFIG:-~/.kube/config}"'
 alias kubeconf=kubeconfig
 
-alias argopass="argocd_password.sh | copy_to_clipboard"
-
 #alias poc='po | grep -v Completed'
 unalias poc &>/dev/null
 poc(){
@@ -138,6 +136,10 @@ context(){ k config current-context; }
 alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
 
 alias menv='eval $(minikube docker-env)'
+
+kubectl_namespace(){
+    kubectl config get-contexts | awk '/^\*/{print $5}'
+}
 
 # ============================================================================ #
 
