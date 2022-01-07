@@ -42,5 +42,5 @@ fi
 #if [[ "$_" != "$0" ]]; then
     export JENKINS_PASSWORD
 #else
-    echo "$JENKINS_PASSWORD"
+    echo -n "$JENKINS_PASSWORD"  # no newline so we can pipe straight to pbcopy / xclip or similar
 #fi
