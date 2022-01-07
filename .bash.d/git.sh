@@ -635,7 +635,7 @@ gituu(){
 #}
 
 push(){
-    pull "$@" || return 1
+    pull || return 1
     if isGit .; then
         echo "> git push $*"
         #for remote in $(git remote); do
