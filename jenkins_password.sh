@@ -37,7 +37,7 @@ elif docker ps &>/dev/null; then
 elif kubectl get secret -n jenkins jenkins &>/dev/null; then
     JENKINS_PASSWORD="$(kubectl get secret -n jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode)"
 else
-    echo "ERROR: failed to determine JENKINS_PASSWORD from docker-compose or kubernetes" >&2
+    echo "ERROR: failed to determine JENKINS_PASSWORD from environment, docker-compose or kubernetes" >&2
     exit 1
 fi
 
