@@ -21,7 +21,10 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$srcdir/lib/utils.sh"
 
 set +o pipefail
-filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t' | grep -v /templates/ | sort)"
+filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o \
+                                       -type f -iname '*.pm' -o \
+                                       -type f -iname '*.t' |
+            grep -v /templates/ | sort)"
 set -o pipefail
 
 if [ -z "$filelist" ]; then
