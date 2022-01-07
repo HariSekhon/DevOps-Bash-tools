@@ -659,7 +659,7 @@ progs2(){
 findpy(){
     # not passing function f()
     # shellcheck disable=SC2033
-    find "${@:-.}" -type f -iname '*.py' -o -iname '*.jy' |
+    find "${@:-.}" -type f -iname '*.py' -o -type f -iname '*.jy' |
     grep -vf ~/code_regex_exclude.txt
 }
 
