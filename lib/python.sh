@@ -213,3 +213,23 @@ inside_virtualenv(){
     fi
     return 1
 }
+
+find_python_files(){
+    local startpath="${1:-.}"
+    shift || :
+    find "$startpath" "$@" -type f -iname '*.py' |
+    sort
+}
+find_jython_files(){
+    local startpath="${1:-.}"
+    shift || :
+    find "$startpath" "$@" -type f -iname '*.jy' |
+    sort
+}
+find_python_jython_files(){
+    local startpath="${1:-.}"
+    shift || :
+    find "$startpath" "$@" -type f -iname '*.py' -o \
+                           -type f -iname '*.jy' |
+    sort
+}
