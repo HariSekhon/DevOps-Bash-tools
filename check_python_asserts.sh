@@ -20,7 +20,8 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy')" ]; then
+if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o \
+                                      -type f -iname '*.jy')" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -30,7 +31,8 @@ section "Python - find and alert on any usage of assert outside of /test/"
 start_time="$(start_timer)"
 
 found=0
-for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | sort); do
+for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o \
+                                      -type f -iname '*.jy' | sort); do
     type isExcluded &>/dev/null && isExcluded "$x" && echo -n '-' && continue
     # exclude pytests
     [[ "$x" = ./test/* ]] && continue
