@@ -21,6 +21,9 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck disable=SC1090
 . "$srcdir/lib/utils.sh"
 
+# shellcheck source=lib/utils.sh
+. "$srcdir/lib/python.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Recurses a given directory tree or \$PWD, finding all Python and Jython files and validating them using PyLint
@@ -31,8 +34,10 @@ help_usage "$@"
 directory="${1:-.}"
 shift ||:
 
-filelist="$(find "$directory" -maxdepth 2 -type f -iname '*.py' -o -type f -iname '*.jy' | sort)"
-if [ -z "$filelist" ]; then
+# maxdepth 2 to avoid recursing submodules which have their own checks
+files="$(find_python_jython_files "$directory" -maxdepth 2)"
+
+if [ -z "$files" ]; then
     return 0 &>/dev/null || :
     exit 0
 fi
@@ -56,7 +61,7 @@ else
             #prog_list="$prog_list $filename"
             echo "pylint -E $filename $*"
             pylint -E "$filename" "$@"
-        done <<< "$filelist"
+        done <<< "$files"
         #echo
         #echo "Checking for coding errors:"
         #echo
