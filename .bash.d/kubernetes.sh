@@ -89,6 +89,8 @@ alias kubesh='kube-shell'
 alias kubeconfig='$EDITOR "${KUBECONFIG:-~/.kube/config}"'
 alias kubeconf=kubeconfig
 
+alias argopass="argocd_password.sh | copy_to_clipboard"
+
 #alias poc='po | grep -v Completed'
 unalias poc &>/dev/null
 poc(){
