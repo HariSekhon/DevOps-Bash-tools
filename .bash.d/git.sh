@@ -298,8 +298,8 @@ st(){
     #    echo "> vagrant status"
     #    vagrant status
     # shellcheck disable=SC2166
-    if [ "$target_basename" = "github" ] ||
-       [ "$target" = "." -a "$PWD" = ~/github ]; then
+    if [ "$target" = "." ] &&
+       [ "${PWD##*/}" = github ]; then
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
@@ -314,7 +314,9 @@ st(){
             # shellcheck disable=SC2164
             popd &>/dev/null
         done
-    elif [ "$target" = "." ] && [ "$PWD" = ~/github/work ]; then
+    elif [ "$target" = "." ] &&
+       { [ "${PWD##*/}" = work ] ||
+         ls ./*/.git &>/dev/null ; }; then
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
@@ -451,12 +453,13 @@ pull(){
             # shellcheck disable=SC2164
             popd &>/dev/null
         done
-    elif [ "$PWD" = ~/github/work ]; then
+    elif [ "${PWD##*/}" = work ] ||
+         ls ./*/.git &>/dev/null; then
         for x in *; do
             [ -d "$x" ] || continue
             hr
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
-            echo "> work $x: git pull --all --no-edit $*"
+            echo "> Work $x: git pull --all --no-edit $*"
             #echo "> work $x: git submodule update --init --recursive"
             if [ -n "${GIT_PULL_IN_BACKGROUND:-}" ]; then
                 git_pull "$@" &
@@ -635,6 +638,7 @@ gituu(){
 #}
 
 push(){
+    # shellcheck disable=SC2119
     pull || return 1
     if isGit .; then
         echo "> git push $*"
