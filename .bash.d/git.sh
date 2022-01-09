@@ -315,8 +315,8 @@ st(){
             popd &>/dev/null
         done
     elif [ "$target" = "." ] &&
-       { [ "${PWD##*/}" = work ] ||
-         ls ./*/.git &>/dev/null ; }; then
+         [ "${PWD##*/}" = work ]; then
+         #ls ./*/.git &>/dev/null; then  # matches inside repos with submodules unfortunately
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
@@ -453,8 +453,8 @@ pull(){
             # shellcheck disable=SC2164
             popd &>/dev/null
         done
-    elif [ "${PWD##*/}" = work ] ||
-         ls ./*/.git &>/dev/null; then
+    elif [ "${PWD##*/}" = work ]; then
+         #ls ./*/.git &>/dev/null; then  # matches inside repos with submodules unfortunately
         for x in *; do
             [ -d "$x" ] || continue
             hr
