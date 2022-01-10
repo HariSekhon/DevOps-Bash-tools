@@ -22,7 +22,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns the latest version of a given 'owner/repo' via the GitHub API
+Returns the latest release name/version for a given 'owner/repo' via the GitHub API
+
+If a repo has no releases, gets a 404 error
 
 Requires curl and jq to be installed
 "
