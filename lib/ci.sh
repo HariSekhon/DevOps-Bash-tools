@@ -334,3 +334,8 @@ if is_travis; then
     #export DOCKER_HOST="${DOCKER_HOST:-localhost}"
     export HOST="${HOST:-localhost}"
 fi
+
+if is_CI; then
+    # used by Artifactory JFrog CLI to disable interactive prompts and progress bar - https://www.jfrog.com/confluence/display/CLI/JFrog+CLI#JFrogCLI-EnvironmentVariables
+    export CI=true
+fi
