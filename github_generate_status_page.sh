@@ -189,6 +189,7 @@ hosted_build_regex+='|img\.shields\.io/cirrus/'
 hosted_build_regex+='|img\.shields\.io/docker/build/'
 hosted_build_regex+='|img\.shields\.io/docker/cloud/build/'
 hosted_build_regex+='|img\.shields\.io/travis/'
+hosted_build_regex+='|img.shields.io/badge/TravisCI'
 hosted_build_regex+='|img\.shields\.io/shippable/'
 hosted_build_regex+='|img\.shields\.io/wercker/ci/'
 hosted_build_regex+='|app\.buddy\.works/.*/pipelines/pipeline/.*/badge.svg'
@@ -255,7 +256,7 @@ if [ "$original_sources" = 1 ]; then
 fi
 printf 'git repos with %s CI builds (%s hosted, %s self-hosted):\n\n' "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
 cat "$tempfile"
-printf '\n%s git repos summarized with %s CI builds(%s hosted, %s self-hosted) across 22 different CI systems\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
+printf '\n%s git repos summarized with %s CI builds (%s hosted, %s self-hosted) across 22 different CI systems\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
 } | tee "$file"
 
 trap '' exit
