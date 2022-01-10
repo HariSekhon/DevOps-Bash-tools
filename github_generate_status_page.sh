@@ -57,7 +57,7 @@ repolist="$*"
 # this leads to confusion as it generates some randomly unexpected output by querying a github user who happens to have the same name as your local user eg. hari, so force explicit now
 #USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
 if [ -z "${GITHUB_USER:-}" ] ; then
-    GITHUB_USER="$(get_github_user)"
+    GITHUB_USER="$(get_github_user || :)"
 fi
 if [ -z "${GITHUB_USER:-}" ] ; then
     echo "\$GITHUB_USER not set!"
