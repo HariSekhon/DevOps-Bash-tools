@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/../lib/github.sh"
+. "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -38,7 +38,7 @@ version="${1:-latest}"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version via GitHub API"
-    version="$(github_latest_release "anchore/syft")"
+    version="$("$srcdir/../github_latest_release.sh" "anchore/syft")"
     timestamp "latest version is '$version'"
 else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
