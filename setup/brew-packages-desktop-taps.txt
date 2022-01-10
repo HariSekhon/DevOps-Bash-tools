@@ -12,6 +12,7 @@ FairwindsOps/tap        pluto
 FairwindsOps/tap        nova
 
 #anchore/grype           grype
+#anchore/syft            syft
 
 # do via install script to load token
 #buildkite/buildkite     buildkite
