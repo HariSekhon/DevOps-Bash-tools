@@ -38,7 +38,7 @@ version="${1:-latest}"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version via GitHub API"
-    version="$("$srcdir/../github_latest_release.sh" "anchore/syft")"
+    version="$("$srcdir/../github_repo_latest_release.sh" "anchore/syft")"
     timestamp "latest version is '$version'"
 else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
