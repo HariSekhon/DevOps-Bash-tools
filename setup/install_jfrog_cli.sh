@@ -13,10 +13,17 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://jfrog.com/getcli/
+
 # https://www.jfrog.com/confluence/display/CLI/JFrog+CLI
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+#srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-curl -fL https://install-cli.jfrog.io | sh
+tmp="$(mktemp -d)"
+cd "$tmp"
+
+curl -fL https://getcli.jfrog.io | bash -s v2
+echo
+mv -iv jfrog ~/bin/jfrog
