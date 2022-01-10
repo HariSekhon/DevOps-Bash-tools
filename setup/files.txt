@@ -30,6 +30,7 @@
 .git-templates/git-secrets/hooks/*
 .gitconfig
 .gitignore
+.grype.yaml
 .inputrc
 .mdlrc
 .my.cnf
