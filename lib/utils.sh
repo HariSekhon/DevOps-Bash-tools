@@ -347,6 +347,10 @@ is_min_version(){
     return 0
 }
 
+is_semver(){
+    [[ "$1" =~ ^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$ ]]
+}
+
 bc_bool(){
     # bc returns 1 when expression is true and zero otherwise, but this is counterintuitive
     # to regular shell scripting, let's use the actual output 1 for true, 0 for false
