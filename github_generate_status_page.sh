@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/github.sh"
 
 top_N=100
 
@@ -30,12 +30,12 @@ Script to generate GIT_STATUS.md containing the headers and status badges of the
 # Examples:
 
 
-    Without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
+    Without arguments queries for all non-fork repos for your \$GITHUB_USER and iterate them up to $top_N to generate the page
 
         GITHUB_USER=HariSekhon ./github_generate_status_page.sh
 
 
-    With arguments will query those repo's README.md at the top level - if omitting the prefix will prepend $GITHUB_USER/
+    With arguments will query those repo's README.md at the top level - if omitting the prefix will prepend \$GITHUB_USER/
 
         GITHUB_USER=HariSekhon ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
 
@@ -56,6 +56,9 @@ repolist="$*"
 
 # this leads to confusion as it generates some randomly unexpected output by querying a github user who happens to have the same name as your local user eg. hari, so force explicit now
 #USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
+if [ -z "${GITHUB_USER:-}" ] ; then
+    GITHUB_USER="$(get_github_user)"
+fi
 if [ -z "${GITHUB_USER:-}" ] ; then
     echo "\$GITHUB_USER not set!"
     exit 1
