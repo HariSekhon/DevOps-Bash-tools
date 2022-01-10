@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/github.sh"
 
 top_N=20
 
@@ -30,7 +30,7 @@ Script to generate STARCHARTS.md containing the star graphs of the Top N GitHub 
 # Examples:
 
 
-    Without arguments queries for all non-fork repos for your $GITHUB_USER and iterate them up to $top_N to generate the page
+    Without arguments queries for all non-fork repos for your \$GITHUB_USER and iterate them up to $top_N to generate the page
 
         GITHUB_USER=HariSekhon ./github_generate_status_page.sh
 "
@@ -48,6 +48,9 @@ file="STARCHARTS.md"
 # this leads to confusion as it generates some randomly unexpected output by querying a github user who happens to have the same name as your local user eg. hari, so force explicit now
 #USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
 if [ -z "${GITHUB_USER:-}" ] ; then
+    GITHUB_USER="$(get_github_user || :)"
+fi
+if is_blank "${GITHUB_USER:-}" || [ "$GITHUB_USER" = null ]; then
     echo "\$GITHUB_USER not set!"
     exit 1
 fi
