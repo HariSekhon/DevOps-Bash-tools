@@ -26,7 +26,7 @@ get_github_user(){
         echo "$GITHUB_USER"
     else
         # get currently authenticated user
-        "$srcdir_github_lib/../github_api.sh" /user | jq -r .username
+        "$srcdir_github_lib/../github_api.sh" /user | jq -r .login
     fi
 }
 
