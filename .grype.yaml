@@ -113,7 +113,9 @@ log:
 
   # the log level; note: detailed logging suppress the ETUI
   # same as GRYPE_LOG_LEVEL env var
-  level: "error"
+  #
+  # prevents specifying -v on the command line, although GRYPE_LOG_LEVEL still works
+  #level: "error"
 
   # location to write the log file (default is not to have a log file)
   # same as GRYPE_LOG_FILE env var
