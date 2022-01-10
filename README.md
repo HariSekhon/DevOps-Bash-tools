@@ -626,6 +626,7 @@ etc.
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
+  - `github_repo_latest_release.sh` - returns the latest release name for a given GitHub repo via the GitHub API
   - `github_repo_stars.sh` - fetches the stars, forks and watcher counts for a given repo
   - `github_repo_teams.sh` - fetches the GitHub Enterprise teams and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_collaborators.sh` - fetches a repo's granted users and outside invited collaborators as well as their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
