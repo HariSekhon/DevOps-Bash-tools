@@ -252,7 +252,7 @@ if [ "$original_sources" = 1 ]; then
 fi
 printf 'git repos with %s CI builds (%s hosted, %s self-hosted):\n\n' "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
 cat "$tempfile"
-printf '\n%s git repos summarized with %s CI builds(%s hosted, %s self-hosted)\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
+printf '\n%s git repos summarized with %s CI builds(%s hosted, %s self-hosted) across 22 different CI systems\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds"
 } | tee "$file"
 
 trap '' exit
