@@ -59,7 +59,7 @@ repolist="$*"
 if [ -z "${GITHUB_USER:-}" ] ; then
     GITHUB_USER="$(get_github_user || :)"
 fi
-if [ -z "${GITHUB_USER:-}" ] ; then
+if is_blank "${GITHUB_USER:-}" || [ "$GITHUB_USER" = null ]; then
     echo "\$GITHUB_USER not set!"
     exit 1
 fi
