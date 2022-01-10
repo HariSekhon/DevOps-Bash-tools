@@ -657,6 +657,10 @@ timestamp(){
 }
 tstamp(){ timestamp "$@"; }
 
+warn(){
+    timestamp "WARNING: $*"
+}
+
 log(){
     if [ -n "${VERBOSE:-}" ]; then
         timestamp "$@"
