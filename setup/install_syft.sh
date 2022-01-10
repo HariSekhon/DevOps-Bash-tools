@@ -37,9 +37,9 @@ help_usage "$@"
 version="${1:-latest}"
 
 if [ "$version" = latest ]; then
-    timestamp "determining latest version via GitHub API"
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
     version="$("$srcdir/../github_repo_latest_release.sh" "anchore/syft")"
-    timestamp "latest version is '$version'"
+    timestamp "latest version = '$version'"
 else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
     [[ "$version" =~ ^v ]] || version="v$version"
