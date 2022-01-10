@@ -348,7 +348,10 @@ is_min_version(){
 }
 
 is_semver(){
-    [[ "$1" =~ ^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$ ]]
+    # shellcheck disable=SC2178
+    local version="$1"
+    local allowed_prefix="${2:-v}"
+    [[ "$version" =~ ^${allowed_prefix}?[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$ ]]
 }
 
 bc_bool(){
