@@ -58,9 +58,3 @@ get_github_repos(){
         ((page+=1))
     done
 }
-
-github_latest_release(){
-    local owner_repo="$1"  # owner/repo format
-    curl -sL "https://api.github.com/repos/$owner_repo/releases/latest" |
-    jq -r .name
-}
