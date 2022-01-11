@@ -41,6 +41,10 @@ if ! type basedir &>/dev/null; then
     . "$bash_tools/.bash.d/functions.sh"
 fi
 
+if type -P gh &>/dev/null; then
+    autocomplete gh -s
+fi
+
 # set location where you check out all the github repos
 export github=~/github
 
@@ -433,6 +437,7 @@ stq(){
 #}
 
 # simpler replacement function to above
+# shellcheck disable=SC2120
 pull(){
     # shellcheck disable=SC2166
     if [ "${PWD##*/}" = github ]; then
