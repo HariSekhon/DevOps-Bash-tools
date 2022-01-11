@@ -64,6 +64,7 @@ if [ -z "${GOPATH-}" ]; then
     fi
 fi
 
+#  ~/.groovy/grapes
 personal_cache_list="
 .cache
 .cpan
