@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3005-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1340-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-555-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3446-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1525-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-647-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -23,11 +23,11 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugins.svg)](https://starchart.cc/HariSekhon/Nagios-Plugins)
 
 ---
-## Big Data, NoSQL & DevOps Docker Images
+## # DevOps, CI/CD, Big Data & NoSQL Docker Images
 
 Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
-50+ DockerHub public images for Docker & Kubernetes - Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak, TeamCity and DevOps tools built on the major Linux distros: Alpine, CentOS, Debian, Fedora, Ubuntu
+50+ DockerHub public images for Docker & Kubernetes - DevOps, GitHub Actions, CircleCI, Jenkins, TeamCity, Alpine, CentOS, Debian, Fedora, Ubuntu, Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Dockerfiles.svg)](https://starchart.cc/HariSekhon/Dockerfiles)
 
@@ -45,7 +45,7 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
 
-550+ DevOps Bash Scripts - AWS, GCP, Kubernetes, Kafka, Docker, APIs, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, Travis CI, Jenkins, Concourse, GitHub, GitLab, BitBucket, Azure DevOps, TeamCity, Spotify, MP3, LDAP, Code/Build Linting, pkg mgmt for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .gitconfig, .screenrc, .tmux.conf, .psqlrc ...
+700+ DevOps Bash Scripts - AWS, GCP, Kubernetes, Kafka, Docker, APIs, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, Travis CI, Jenkins, Concourse, GitHub, GitLab, BitBucket, Azure DevOps, TeamCity, Spotify, MP3, LDAP, Code/Build Linting, pkg mgmt for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .gitconfig, .screenrc, .tmux.conf, .psqlrc ...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
 
@@ -54,7 +54,7 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 
 Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
 
-80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
+80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Kubernetes, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/HAProxy-configs.svg)](https://starchart.cc/HariSekhon/HAProxy-configs)
 
@@ -86,20 +86,11 @@ Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication dete
 [![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-tools.svg)](https://starchart.cc/HariSekhon/Spotify-tools)
 
 ---
-## Hari Sekhon - Perl Library
-
-Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
-
-Perl Utility Library for my other repos
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/lib.svg)](https://starchart.cc/HariSekhon/lib)
-
----
 ## Kubernetes configs
 
 Link:  [HariSekhon/Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs)
 
-Kubernetes YAML configs - Best Practices, Tips & Tricks are baked right into the templates for production deployments on AWS, GCP & Azure. GKE, Cloud SQL, CI/CD, Jenkins, TeamCity, Spinnaker, Selenium Grid, FluxCD, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates, patches, Kustomize etc.
+Advanced Kubernetes YAML configs - Best Practices, Tips & Tricks from production environments. AWS, GCP, Azure, GKE, EKS, AKS, Cloud SQL, CI/CD, Jenkins, TeamCity, BuildKite, GitHub Actions, ArgoCD, Spinnaker, Selenium Grid, FluxCD, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates, patches, Helm + Kustomize
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Kubernetes-configs.svg)](https://starchart.cc/HariSekhon/Kubernetes-configs)
 
@@ -108,18 +99,18 @@ Kubernetes YAML configs - Best Practices, Tips & Tricks are baked right into the
 
 Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
 
-Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
+DevOps Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, CircleCI, GitHub Actions, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Templates.svg)](https://starchart.cc/HariSekhon/Templates)
 
 ---
-## Hari Sekhon - Python / Jython Library
+## Hari Sekhon - Perl Library
 
-Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
+Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
 
-Python / Jython Utility Library for my other repos
+Perl Utility Library for my other repos
 
-[![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
+[![Stargazers over time](https://starchart.cc/HariSekhon/lib.svg)](https://starchart.cc/HariSekhon/lib)
 
 ---
 ## Hari Sekhon - DevOps Golang Tools
@@ -131,22 +122,13 @@ DevOps Golang tools
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
 
 ---
-## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
-
-Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
-
-Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
-
----
 ## Terraform Templates
 
-Link:  [HariSekhon/Terraform-templates](https://github.com/HariSekhon/Terraform-templates)
+Link:  [HariSekhon/Terraform](https://github.com/HariSekhon/Terraform)
 
 Terraform templates for AWS / GCP / Azure
 
-[![Stargazers over time](https://starchart.cc/HariSekhon/Terraform-templates.svg)](https://starchart.cc/HariSekhon/Terraform-templates)
+[![Stargazers over time](https://starchart.cc/HariSekhon/Terraform.svg)](https://starchart.cc/HariSekhon/Terraform)
 
 ---
 ## Hari Sekhon - Spotify Playlists
@@ -158,13 +140,22 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 [![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
 ---
-## SQL Keywords
+## Hari Sekhon - Python / Jython Library
 
-Link:  [HariSekhon/SQL-keywords](https://github.com/HariSekhon/SQL-keywords)
+Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 
-SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL systems - MySQL, PostgreSQL, Oracle, SQL Server, Presto / AWS Athena, Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra, Couchbase N1QL, Pig Latin, Neo4j Cypher, Dockerfiles - Used by sqlcase.pl to auto-recase SQL scripts, Dockerfiles etc.
+Python / Jython Utility Library for my other repos
 
-[![Stargazers over time](https://starchart.cc/HariSekhon/SQL-keywords.svg)](https://starchart.cc/HariSekhon/SQL-keywords)
+[![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
+
+---
+## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
+
+Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
+
+Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
 
 ---
 ## TeamCity CI Config
@@ -174,6 +165,15 @@ Link:  [HariSekhon/TeamCity-CI](https://github.com/HariSekhon/TeamCity-CI)
 TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity builds, API scripts & configs for most major CI systems: Azure DevOps, GitHub Actions, GitLab CI, BitBucket CI, Travis CI, Circle CI, AWS CodeBuild, GCP Cloud Build, AppVeyor, BuildKite, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/TeamCity-CI.svg)](https://starchart.cc/HariSekhon/TeamCity-CI)
+
+---
+## SQL Keywords
+
+Link:  [HariSekhon/SQL-keywords](https://github.com/HariSekhon/SQL-keywords)
+
+SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL systems - MySQL, PostgreSQL, Oracle, SQL Server, Presto / AWS Athena, Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra, Couchbase N1QL, Pig Latin, Neo4j Cypher, Dockerfiles - Used by sqlcase.pl to auto-recase SQL scripts, Dockerfiles etc.
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/SQL-keywords.svg)](https://starchart.cc/HariSekhon/SQL-keywords)
 
 ---
 ## Hari Sekhon Java Library
