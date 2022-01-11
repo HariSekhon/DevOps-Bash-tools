@@ -56,6 +56,8 @@ if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
         usage "binary file path must be specified if downloading a tarball or zip file ('$package')"
     fi
     binary="$2"
+    binary="${binary//\{os\}/$os}"
+    binary="${binary//\{arch\}/$arch}"
 fi
 
 timestamp "Downloading"
@@ -85,8 +87,11 @@ if [ -z "$destination" ]; then
     destination="${destination%%.$$}"
     # if there are any -darwin-amd64 or -amd64-darwin suffixes remove them either way around (this is why $os is stripped before and after)
     destination="${destination%%-$os}"
+    destination="${destination%%_$os}"
     destination="${destination%%-$arch}"
+    destination="${destination%%_$arch}"
     destination="${destination%%-$os}"
+    destination="${destination%%_$os}"
 fi
 
 if ! [[ "$destination" =~ ^/ ]]; then
