@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: anchore/grype
 #
 #  Author: Hari Sekhon
 #  Date: 2022-01-10 18:33:13 +0000 (Mon, 10 Jan 2022)
@@ -48,4 +49,5 @@ owner_repo="$1"
 #fi
 
 curl -sSL --fail "https://api.github.com/repos/$owner_repo/releases/latest" |
-jq -r .name
+jq_debug_pipe_dump |
+jq -r .tag_name
