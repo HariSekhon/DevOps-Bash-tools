@@ -45,6 +45,10 @@ if type -P gh &>/dev/null; then
     autocomplete gh -s
 fi
 
+# find out who your 'gh' CLI is authenticating as - useful if you have multiple Personal Access Tokens for different environments
+alias githubwhoami='github_api.sh /user | jq -r .login'
+alias ghwhoami='github_api.sh /user | jq -r .login'
+
 # set location where you check out all the github repos
 export github=~/github
 
