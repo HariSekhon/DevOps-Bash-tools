@@ -75,6 +75,9 @@ if has_tarball_extension "$package"; then
     fi
     download_file="$binary"
     echo
+elif [[ "$package" =~ \.zip$ ]]; then
+    unzip "$download_file"
+    download_file="$binary"
 fi
 
 timestamp "Setting executable"
@@ -105,7 +108,7 @@ install_path="${destination%/*}"
 if [ -e "$install_path" ] && ! [ -d "$install_path" ]; then
     die "ERROR: install path $install_path is not a directory, aborting!"
 fi
-mkdir -pv "$install_path"
+mkdir -p -v "$install_path"
 echo
 
 timestamp "Moving to bin"
