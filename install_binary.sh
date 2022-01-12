@@ -101,6 +101,12 @@ if ! [[ "$destination" =~ ^/ ]]; then
         destination=~/bin/"$destination"
     fi
 fi
+install_path="${destination%/*}"
+if [ -e "$install_path" ] && ! [ -d "$install_path" ]; then
+    die "ERROR: install path $install_path is not a directory, aborting!"
+fi
+mkdir -pv "$install_path"
+echo
 
 timestamp "Moving to bin"
 unalias mv &>/dev/null || :
