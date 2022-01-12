@@ -20,7 +20,7 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/github.sh"
 
 settings='
 {
@@ -86,17 +86,7 @@ if [ $# -gt 0 ]; then
     done
 else
     timestamp "no branches specified, getting branch list"
-    branches="$(page=1
-        while [ -n "$page" ]; do
-            data="$("$srcdir/github_api.sh" "/repos/$org/$repo/branches?page=$page&per_page=100" | jq -r 'select(.[])')"
-            if [ -z "$data" ]; then
-                break
-            fi
-            jq_debug_pipe_dump <<< "$data"
-            jq -r '.[].name' <<< "$data"
-            ((page+=1))
-        done
-    )"
+    branches="$(get_github_repo_branches "$org/$repo")"
     for branch in $default_branches_to_protect; do
         timestamp "checking for branch '$branch'"
         if grep -Fxq "$branch" <<< "$branches"; then
