@@ -54,7 +54,27 @@ get_github_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
+        jq_debug_pipe_dump <<< "$output"
         jq -r ".[] | select(.fork | not) | $filter | .name" <<< "$output"
+        ((page+=1))
+    done
+}
+
+get_github_repo_branches(){
+    local repo="$1"
+    local page=1
+    while true; do
+        if ! output="$("$srcdir_github_lib/../github_api.sh" "/repos/$repo/branches?page=$page&per_page=100")"; then
+            echo "ERROR" >&2
+            exit 1
+        fi
+        if [ -z "$(jq '.[]' <<< "$output")" ]; then
+            break
+        elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
+            exit 1
+        fi
+        jq_debug_pipe_dump <<< "$output"
+        jq -r ".[].name" <<< "$output"
         ((page+=1))
     done
 }
