@@ -93,19 +93,11 @@ env_vars="$("$srcdir/terraform_cloud_workspace_vars.sh" "$workspace_id")"
 
 add_env_var(){
     local env_var="$1"
-    env_var="${env_var%%#*}"
-    env_var="${env_var##[[:space:]]}"
-    env_var="${env_var##export}"
-    env_var="${env_var##[[:space:]]}"
-    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
-        usage "invalid environment key=value argument given: $env_var"
-    fi
-    local name="${env_var%%=*}"
-    local value="${env_var#*=}"
+    parse_export_key_value "$env_var"
     local id
-    id="$(awk "\$4 == \"$name\" {print \$1}" <<< "$env_vars")"
+    id="$(awk "\$4 == \"$key\" {print \$1}" <<< "$env_vars")"
     if [ -n "$id" ]; then
-        timestamp "updating Terraform environment variable '$name' (id: '$id') in workspace '$workspace_id'"
+        timestamp "updating Terraform environment variable '$key' (id: '$id') in workspace '$workspace_id'"
         "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars/$id" \
             -X PATCH \
             -H "Content-Type: application/vnd.api+json" \
@@ -113,7 +105,7 @@ add_env_var(){
                     \"data\": {
                         \"id\": \"$id\",
                         \"attributes\": {
-                            \"key\": \"$name\",
+                            \"key\": \"$key\",
                             \"value\": \"$value\",
                             \"category\": \"$category\",
                             \"hcl\": $hcl,
@@ -125,14 +117,14 @@ add_env_var(){
                 jq_debug_pipe_dump >/dev/null
         #echo  # JSON output doesn't end in a newline
     else
-        timestamp "adding Terraform environment variable '$name' in workspace '$workspace_id'"
+        timestamp "adding Terraform environment variable '$key' in workspace '$workspace_id'"
         "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars" \
             -X POST \
             -H "Content-Type: application/vnd.api+json" \
             -d "{
                     \"data\": {
                         \"attributes\": {
-                            \"key\": \"$name\",
+                            \"key\": \"$key\",
                             \"value\": \"$value\",
                             \"category\": \"$category\",
                             \"hcl\": $hcl,
