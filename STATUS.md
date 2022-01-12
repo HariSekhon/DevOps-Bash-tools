@@ -1,8 +1,8 @@
 # GitHub Status Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3446-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1525-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3447-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1526-blue?logo=github)
 ![Followers](https://img.shields.io/badge/Followers-647-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
@@ -11,7 +11,7 @@
 
 [![CI Builds](https://img.shields.io/badge/CI%20Builds-546-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-224.8k-lightgrey?logo=codecademy)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--01--10-lightgrey?logo=github)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--01--11-lightgrey?logo=github)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 
@@ -19,7 +19,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-19 original source git repos with 546 CI builds (497 hosted, 49 self-hosted):
+19 original source git repos with 546 CI builds (497 hosted, 49 self-hosted) across 22 different CI systems:
 
 ---
 # Advanced Nagios Plugins Collection
