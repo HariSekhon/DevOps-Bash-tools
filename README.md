@@ -320,7 +320,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `gitlab_project_set_env_vars.sh`, `circleci_project_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`). Supports new user and new access key csv file formats.
+  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `github_actions_repo*_set_secret.sh`, `gitlab_project_set_env_vars.sh`, `circleci_project_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`). Supports new user and new access key csv file formats.
   - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
     - `aws_ecr_list_tags.sh` - lists all the tags for a given ECR docker image
@@ -606,6 +606,7 @@ etc.
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
   - `github_actions_repo_set_secret.sh` - sets a secret in the given repo from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `github_actions_repo_env_set_secret.sh` - sets a secret in the given repo and environment from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `github_actions_runner.sh` - generates a [GitHub Actions](https://github.com/features/actions) self-hosted runner token for a given Repo or Organization via the GitHub API and then runs a dockerized GitHub Actions runner with the appropriate configuration
   - `github_actions_runner_local.sh` - downloads, configures and runs a local GitHub Actions Runner for Linux or Mac
   - `github_actions_runner_token.sh` - generates a GitHub Actions runner token to register a new self-hosted runner
