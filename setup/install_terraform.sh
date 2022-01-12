@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# args: all
+#  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
 #  Date: 2019/09/20
@@ -19,34 +19,56 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
-#TERRAFORM_VERSION="${TERRAFORM_VERSION:-${VERSION:-0.12.29}}"
-#TERRAFORM_VERSION="${1:-${TERRAFORM_VERSION:-${VERSION:-0.14.5}}}"
-TERRAFORM_VERSION="${1:-${TERRAFORM_VERSION:-${VERSION:-1.0.3}}}"
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Terraform
+
+Optionall specify an exact version to install as an argument (defaults to finding and using the latest version)
+
+If the 'terraform' binary is already found on \$PATH, aborts for safety as Terraform version upgrades affect the state file
+
+Set UPDATE_TERRAFORM=1 in the environment to upgrade the Terraform version
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
+
+help_usage "$@"
+
+#version="${1:-${TERRAFORM_VERSION:-${VERSION:-0.12.29}}}"
+#version="${1:-${TERRAFORM_VERSION:-${VERSION:-0.14.5}}}"
+#version="${1:-${TERRAFORM_VERSION:-${VERSION:-1.1.2}}}"
+version="${1:-${TERRAFORM_VERSION:-latest}}"
+
+owner_repo="hashicorp/terraform"
+
+if [ "$version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="${version#v}"
+    timestamp "latest version is '$version'"
+else
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
+fi
 
 cd /tmp
 
-if [ "$TERRAFORM_VERSION" = all ]; then
-    for install_script_version in "$srcdir/"install_terraform[[:digit:]]*.sh; do
-        "$install_script_version"
-    done
-fi
-
-echo "TERRAFORM_VERSION = $TERRAFORM_VERSION"
+echo "version = $version"
 echo
 
 binary="terraform"
 major_version=""
 if [ -n "${VERSIONED_INSTALL:-}" ]; then
-    major_version="${TERRAFORM_VERSION#0.}"
+    major_version="${version#0.}"
     major_version="${major_version%%.*}"
     binary="terraform$major_version"
 fi
-
-os="$(uname -s | tr '[:upper:]' '[:lower:]')"
-echo "OS detected as $os"
-echo
 
 if [ -z "${UPDATE_TERRAFORM:-}" ]; then
     # command -v catches aliases, not suitable
@@ -61,37 +83,4 @@ if [ -z "${UPDATE_TERRAFORM:-}" ]; then
     fi
 fi
 
-url="https://releases.hashicorp.com/terraform/$TERRAFORM_VERSION/terraform_${TERRAFORM_VERSION}_${os}_amd64.zip"
-
-echo "Downloading Terraform from $url"
-wget -O terraform.zip "$url"
-echo
-
-# stops Zip getting stuck - or use 'unzip -o' (verified switch on Mac OS X and Linux - Alpine / CentOS / Debian / Ubuntu)
-#unalias rm
-#rm -fv terraform
-
-echo "Unzipping"
-unzip -o terraform.zip
-echo
-
-if [ $EUID -eq 0 ]; then
-    install_path=/usr/local/bin
-else
-    install_path=~/bin
-fi
-if [ -e "$install_path" ] && ! [ -d "$install_path" ]; then
-    echo "WARNING: install path $install_path is not a directory, aborting!"
-    exit 1
-fi
-mkdir -pv "$install_path"
-echo
-
-install_path+="/$binary"
-
-# common alias mv='mv -i' would force a prompt we don't want, even with -f
-unalias mv &>/dev/null || :
-mv -fv terraform "$install_path"
-echo
-echo "Please ensure $install_path is in your \$PATH"
-echo "(this is done automatically if sourcing this repo's .bashrc, which also gives you the 'tf' shortcut alias)"
+"$srcdir/../install_binary.sh" "https://releases.hashicorp.com/terraform/$version/terraform_${version}_{os}_{arch}.zip" terraform
