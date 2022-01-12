@@ -61,15 +61,7 @@ existing_env_vars="$("$srcdir/bitbucket_api.sh" "/workspaces/$workspace/pipeline
 
 add_env_var(){
     local env_var="$1"
-    env_var="${env_var%%#*}"
-    env_var="${env_var##[[:space:]]}"
-    env_var="${env_var##export}"
-    env_var="${env_var##[[:space:]]}"
-    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
-        usage "invalid environment key=value argument given: $env_var"
-    fi
-    local key="${env_var%%=*}"
-    local value="${env_var#*=}"
+    parse_export_key_value "$env_var"
     if grep -q "^${key}[[:space:]]" <<< "$existing_env_vars"; then
         local variable_uuid
         variable_uuid="$(awk "/^${key}[[:space:]]/{print \$2}" <<< "$existing_env_vars" | sed 's/{//;s/}//')"
