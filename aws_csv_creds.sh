@@ -55,12 +55,14 @@ if ! grep -Fq 'AKIA' "$csv"; then
     die "Access Key not found in file '$csv'"
 fi
 
-# access keys are prefixed with AKIA, skips header row
+# for CSV created at access key creation time
 if grep -Fxq 'Access key ID,Secret access key' "$csv"; then
+    # access keys are prefixed with AKIA, skips header row by selecting the row with the AKIA key
     awk -F, '/AKIA/{
         print "export AWS_ACCESS_KEY_ID="$1
         print "export AWS_SECRET_ACCESS_KEY="$2
     }' "$csv"
+# for CSV created at user creation time
 elif tr -d '\r' < "$csv" | grep -Fxq 'User name,Password,Access key ID,Secret access key,Console login link'; then
     awk -F, '/AKIA/{
         print "export AWS_ACCESS_KEY_ID="$3
