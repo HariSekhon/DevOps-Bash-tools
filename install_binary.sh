@@ -109,6 +109,7 @@ mkdir -pv "$install_path"
 echo
 
 timestamp "Moving to bin"
+# common alias mv='mv -i' would force a prompt we don't want, even with -f
 unalias mv &>/dev/null || :
 mv -fv "$download_file" "$destination"
 echo
