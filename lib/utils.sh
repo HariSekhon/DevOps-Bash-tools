@@ -1089,6 +1089,19 @@ is_float(){
     [[ "$arg" =~ ^[[:digit:]]+(\.[[:digit:]]+)?$ ]]
 }
 
+parse_export_key_value(){
+    local env_vars="$1"
+    env_var="${env_var%%#*}"
+    env_var="${env_var##[[:space:]]}"
+    env_var="${env_var##export}"
+    env_var="${env_var##[[:space:]]}"
+    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
+        die "invalid environment key=value argument given: $env_var"
+    fi
+    key="${env_var%%=*}"
+    value="${env_var#*=}"
+}
+
 # ============================================================================ #
 #                                   JSON utils
 # ============================================================================ #
