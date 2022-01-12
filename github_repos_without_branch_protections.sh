@@ -26,6 +26,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Finds repos for the given user or organization that have no branch protections enabled
 
+\$GITHUB_ORGANIZATION must be set if querying an organization
+
 For authentication and other details see:
 
     github_api.sh --help
