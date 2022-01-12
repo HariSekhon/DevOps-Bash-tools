@@ -95,9 +95,11 @@ add_env_var(){
     local env_var="$1"
     parse_export_key_value "$env_var"
     local id
+    # shellcheck disable=SC2154
     id="$(awk "\$4 == \"$key\" {print \$1}" <<< "$env_vars")"
     if [ -n "$id" ]; then
         timestamp "updating Terraform environment variable '$key' (id: '$id') in workspace '$workspace_id'"
+        # shellcheck disable=SC2154
         "$srcdir/terraform_cloud_api.sh" "/workspaces/$workspace_id/vars/$id" \
             -X PATCH \
             -H "Content-Type: application/vnd.api+json" \
