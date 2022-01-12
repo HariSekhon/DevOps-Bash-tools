@@ -1,8 +1,8 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3446-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1525-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3447-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1526-blue?logo=github)
 ![Followers](https://img.shields.io/badge/Followers-647-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
