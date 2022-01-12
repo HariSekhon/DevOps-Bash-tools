@@ -62,7 +62,9 @@ fi
 add_env_var(){
     local env_var="$1"
     parse_export_key_value "$env_var"
+    # shellcheck disable=SC2154
     timestamp "adding/updating CircleCI environment variable '$name' to project '$project_slug'"
+    # shellcheck disable=SC2154
     "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$name\", \"value\": \"$value\"}" | jq .
 }
 
