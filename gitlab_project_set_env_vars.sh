@@ -64,20 +64,14 @@ existing_env_vars="$("$srcdir/gitlab_api.sh" "projects/$project_slug/variables" 
 
 add_env_var(){
     local env_var="$1"
-    env_var="${env_var%%#*}"
-    env_var="${env_var##[[:space:]]}"
-    env_var="${env_var##export}"
-    env_var="${env_var##[[:space:]]}"
-    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
-        usage "invalid environment key=value argument given: $env_var"
-    fi
-    local key="${env_var%%=*}"
-    local value="${env_var#*=}"
+    parse_export_key_value "$env_var"
     local masked=true
+    # shellcheck disable=SC2154
     if [ "${#value}" -lt 8 ]; then  # avoids 400 errors from the API if sending < 8 chars with masked=true
         echo "WARNING: value for key '$key' is less than 8 characters so can't be masked in GitLab" >&2
         masked=false
     fi
+    # shellcheck disable=SC2154
     if grep -Fxq "$key" <<< "$existing_env_vars"; then
         timestamp "updating GitLab environment variable '$key' in project '$project_slug'"
         "$srcdir/gitlab_api.sh" "projects/$project_slug/variables/$key?masked=$masked" -X PUT \
