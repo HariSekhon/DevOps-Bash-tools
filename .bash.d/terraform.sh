@@ -19,7 +19,10 @@
 
 if ! [ -d ~/.tfenv/bin ] && is_mac; then
     mkdir -p -v ~/.tfenv
-    ln -sv "$(ls -d /usr/local/Cellar/tfenv/*/bin | head -n1)" ~/.tfenv/bin
+    tfenv_bin="$(ls -d /usr/local/Cellar/tfenv/*/bin 2>/dev/null | head -n1)"
+    if [ -d "$tfenv_bin" ]; then
+        ln -sv "$tfenv_bin" ~/.tfenv/bin
+    fi
 fi
 
 add_PATH ~/.tfenv/bin
