@@ -17,6 +17,17 @@
 #                               T e r r a f o r m
 # ============================================================================ #
 
+if ! [ -d ~/.tfenv/bin ] && is_mac; then
+    mkdir -p -v ~/.tfenv
+    ln -sv "$(ls -d /usr/local/Cellar/tfenv/*/bin | head -n1)" ~/.tfenv/bin
+fi
+
+add_PATH ~/.tfenv/bin
+
+if [ -d ~/.tfenv/bin ]; then
+    export TERRAGRUNT_TFPATH=~/.tfenv/bin
+fi
+
 alias tf=terraform
 alias tfp='tf plan'
 alias tfa='tf apply'
