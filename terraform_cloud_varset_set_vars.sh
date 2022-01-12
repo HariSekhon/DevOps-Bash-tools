@@ -97,10 +97,12 @@ add_env_var(){
     local env_var="$1"
     parse_export_key_value "$env_var"
     local id
+    # shellcheck disable=SC2154
     id="$(awk "\$1 == \"$varset_id\" && \$4 == \"env\" && \$6 == \"$key\" {print \$3}" <<< "$varsets_env_vars")"
     varset_name="$(awk "\$1 == \"$varset_id\" {print \$2; exit}" <<< "$varsets_env_vars")"
     if [ -n "$id" ]; then
         timestamp "updating Terraform environment variable '$key' (id: '$id') in variable set '$varset_name' (id '$varset_id')"
+        # shellcheck disable=SC2154
         "$srcdir/terraform_cloud_api.sh" "/varsets/$varset_id/relationships/vars/$id" \
             -X PATCH \
             -H "Content-Type: application/vnd.api+json" \
