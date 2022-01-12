@@ -61,7 +61,7 @@ if grep -Fxq 'Access key ID,Secret access key' "$csv"; then
         print "export AWS_ACCESS_KEY_ID="$1
         print "export AWS_SECRET_ACCESS_KEY="$2
     }' "$csv"
-elif grep -Fxq 'User name,Password,Access key ID,Secret access key,Console login link' "$csv"; then
+elif tr -d '\r' < "$csv" | grep -Fxq 'User name,Password,Access key ID,Secret access key,Console login link'; then
     awk -F, '/AKIA/{
         print "export AWS_ACCESS_KEY_ID="$3
         print "export AWS_SECRET_ACCESS_KEY="$4
