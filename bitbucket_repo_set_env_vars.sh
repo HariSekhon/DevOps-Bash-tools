@@ -60,6 +60,7 @@ existing_env_vars="$("$srcdir/bitbucket_api.sh" "/repositories/$workspace_repo_s
 add_env_var(){
     local env_var="$1"
     parse_export_key_value "$env_var"
+    # shellcheck disable=SC2154
     if grep -q "^${key}[[:space:]]" <<< "$existing_env_vars"; then
         local variable_uuid
         variable_uuid="$(awk "/^${key}[[:space:]]/{print \$2}" <<< "$existing_env_vars" | sed 's/{//;s/}//')"
