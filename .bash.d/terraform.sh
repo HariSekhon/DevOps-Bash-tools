@@ -24,6 +24,12 @@ alias tfip='tf init && tfp'
 alias tfia='tf init && tfa'
 #complete -C /Users/hari/bin/terraform terraform
 
+alias tg=terragrunt
+alias tgp='tg plan'
+alias tga='tg apply'
+alias tgip='tg init && tgp'
+alias tgia='tg init && tga'
+
 if [ -n "${github:-}" ]; then
     for x in terraform-templates terraform tf; do
         if [ -d "$github/$x" ]; then
@@ -34,23 +40,23 @@ if [ -n "${github:-}" ]; then
     done
 fi
 
-generate_terraform_autocomplete(){
-    local terraform_bin
-    local terraform_version_number
-
-    for terraform_bin in ~/bin/terraform[[:digit:]]*; do
-        [ -x "$terraform_bin" ] || continue
-        terraform_version_number="${terraform_bin##*/terraform}"
-        # expand now
-        # shellcheck disable=SC2139,SC2140
-        alias "tf${terraform_version_number}"="$terraform_bin"
-        complete -C "$terraform_bin" terraform
-        complete -C "$terraform_bin" tf
-    done
-
-    terraform_bin="$(type -P terraform)"
-    complete -C "$terraform_bin" terraform
-    complete -C "$terraform_bin" tf
-}
-
-generate_terraform_autocomplete
+#generate_terraform_autocomplete(){
+#    local terraform_bin
+#    local terraform_version_number
+#
+#    for terraform_bin in ~/bin/terraform[[:digit:]]*; do
+#        [ -x "$terraform_bin" ] || continue
+#        terraform_version_number="${terraform_bin##*/terraform}"
+#        # expand now
+#        # shellcheck disable=SC2139,SC2140
+#        alias "tf${terraform_version_number}"="$terraform_bin"
+#        complete -C "$terraform_bin" terraform
+#        complete -C "$terraform_bin" tf
+#    done
+#
+#    terraform_bin="$(type -P terraform)"
+#    complete -C "$terraform_bin" terraform
+#    complete -C "$terraform_bin" tf
+#}
+#
+#generate_terraform_autocomplete
