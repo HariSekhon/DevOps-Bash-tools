@@ -58,8 +58,8 @@ min_args 1 "$@"
 owner_repo="$1"
 shift || :
 
-if ! [[ "$owner_repo" =~ ^[[:digit:]]+$|^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
-    usage "owner_repo given '$owner_repo' does not conform to id or <user_or_org>/<repo> format"
+if ! [[ "$owner_repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
+    usage "owner_repo given '$owner_repo' does not conform <user_or_org>/<repo> format"
 fi
 
 # don't need to check for existing secrets as the API is a set (add/update) operation anyway
