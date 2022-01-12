@@ -86,7 +86,17 @@ if [ $# -gt 0 ]; then
     done
 else
     timestamp "no branches specified, getting branch list"
-    branches="$("$srcdir/github_api.sh" "/repos/$org/$repo/branches" | jq -r '.[].name')"
+    branches="$(page=1
+        while [ -n "$page" ]; do
+            data="$("$srcdir/github_api.sh" "/repos/$org/$repo/branches?page=$page&per_page=100" | jq -r 'select(.[])')"
+            if [ -z "$data" ]; then
+                break
+            fi
+            jq_debug_pipe_dump <<< "$data"
+            jq -r '.[].name' <<< "$data"
+            ((page+=1))
+        done
+    )"
     for branch in $default_branches_to_protect; do
         timestamp "checking for branch '$branch'"
         if grep -Fxq "$branch" <<< "$branches"; then
