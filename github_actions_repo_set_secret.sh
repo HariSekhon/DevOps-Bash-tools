@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: harisekhon/devops-bash-tools haritest=stuff haritest2=stuff2
 #
 #  Author: Hari Sekhon
 #  Date: 2021-12-03 17:41:23 +0000 (Fri, 03 Dec 2021)
@@ -71,16 +72,9 @@ fi
 
 add_secret(){
     local env_var="$1"
-    env_var="${env_var%%#*}"
-    env_var="${env_var##[[:space:]]}"
-    env_var="${env_var##export}"
-    env_var="${env_var##[[:space:]]}"
-    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
-        usage "invalid environment key=value argument given: $env_var"
-    fi
-    local key="${env_var%%=*}"
-    local value="${env_var#*=}"
+    parse_export_key_value "$env_var"
     value="$(base64 <<< "$value")"
+    # shellcheck disable=SC2154
     timestamp "setting GitHub secret '$key' in repo '$owner_repo'"
     # https://docs.github.com/en/rest/reference/actions#create-or-update-a-repository-secret--code-samples
     # won't work, gets error:
