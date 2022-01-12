@@ -91,6 +91,7 @@ gnupg2
 gnuplot
 gradle
 gradle-completion
+graphviz
 #groovy  # see near end
 #groovysdk  # see near end
 hadolint
