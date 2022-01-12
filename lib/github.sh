@@ -54,8 +54,8 @@ get_github_repos(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq_debug_pipe_dump <<< "$output"
-        jq -r ".[] | select(.fork | not) | $filter | .name" <<< "$output"
+        jq_debug_pipe_dump <<< "$output" |
+        jq -r ".[] | select(.fork | not) | $filter | .name"
         ((page+=1))
     done
 }
@@ -73,8 +73,8 @@ get_github_repo_branches(){
         elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
             exit 1
         fi
-        jq_debug_pipe_dump <<< "$output"
-        jq -r ".[].name" <<< "$output"
+        jq_debug_pipe_dump <<< "$output" |
+        jq -r ".[].name"
         ((page+=1))
     done
 }
