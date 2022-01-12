@@ -61,15 +61,7 @@ fi
 
 add_env_var(){
     local env_var="$1"
-    env_var="${env_var%%#*}"
-    env_var="${env_var##[[:space:]]}"
-    env_var="${env_var##export}"
-    env_var="${env_var##[[:space:]]}"
-    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
-        usage "invalid environment key=value argument given: $env_var"
-    fi
-    local name="${env_var%%=*}"
-    local value="${env_var#*=}"
+    parse_export_key_value "$env_var"
     timestamp "adding/updating CircleCI environment variable '$name' to project '$project_slug'"
     "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$name\", \"value\": \"$value\"}" | jq .
 }
