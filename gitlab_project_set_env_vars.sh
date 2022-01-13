@@ -76,7 +76,7 @@ add_env_var(){
     parse_export_key_value "$env_var"
     local masked=true
     # shellcheck disable=SC2154
-    if [ "${GITLAB_VARIABLES_UNMASKED=1}" ]; then
+    if [ "${GITLAB_VARIABLES_UNMASKED:-}" = 1 ]; then
         echo "WARNING: value for key '$key' will not be masked because GITLAB_VARIABLES_UNMASKED is set in the environment" >&2
         masked=false
     elif [ "${#value}" -lt 8 ]; then  # avoids 400 errors from the API if sending < 8 chars with masked=true
