@@ -66,6 +66,7 @@ add_env_var(){
     # shellcheck disable=SC2154
     timestamp "adding/updating CircleCI environment variable '$key' to project '$project_slug'"
     # shellcheck disable=SC2154
+    # XXX: this is a POST at the project level but a PUT at the context level (else 404 error)
     "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$key\", \"value\": \"$value\"}" | jq .
 }
 
