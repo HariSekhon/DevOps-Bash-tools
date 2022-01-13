@@ -35,10 +35,14 @@ Examples:
 
     echo AWS_ACCESS_KEY_ID=AKIA... | ${0##*/} HariSekhon/DevOps-Bash-tools testenv
 
+    echo AWS_ACCESS_KEY_ID=AKIA... | gh secret set -R HariSekhon/DevOps-Bash-tools --env testenv -f -
+
 
     Loads both AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY via stdin:
 
         aws_csv_creds.sh credentials_exported.csv | ${0##*/} HariSekhon/DevOps-Bash-tools testenv
+
+        aws_csv_creds.sh credentials_exported.csv | gh secret set -R HariSekhon/DevOps-Bash-tools --env testenv -f -
 
 
 Requires the GitHub CLI 'gh' to be installed and available in the \$PATH
