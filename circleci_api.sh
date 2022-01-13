@@ -91,6 +91,20 @@ Examples:
     ${0##*/} /project/<vcs>/<user_or_org>/<repo>/envvar -X POST -d '{\"name\": \"AWS_ACCESS_KEY_ID\", \"value\": \"AKIA...\"}'
 
     ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/envvar -X POST -d '{\"name\": \"AWS_ACCESS_KEY_ID\", \"value\": \"AKIA...\"}' | jq .
+
+
+# List contexts for a user or organization (this org id is different to a user id even for a user's context):
+#                                          (organization ID can be found on organization settings page as it is not currently exposed in the API)
+#                                          (find organization ID here: https://app.circleci.com/settings/organization/VCS/MY_USER_OR_ORG/contexts)
+#                                                                  eg. https://app.circleci.com/settings/organization/github/HariSekhon/contexts
+
+    ${0##*/} '/context/<context_id>/environment-variable' | jq .
+
+
+# Use the context ID from the above output to list environment variable secrets from the given context ID:
+
+    ${0##*/} /context/c2321a8a-c188-4568-aac7-aef89cb7a6e2/environment-variable | jq .
+
 "
 
 # used by usage() in lib/utils.sh
