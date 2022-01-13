@@ -1095,6 +1095,7 @@ parse_export_key_value(){
     env_var="${env_var##[[:space:]]}"
     env_var="${env_var##export}"
     env_var="${env_var##[[:space:]]}"
+    env_var="${env_var%%[[:space:]]}"
     if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
         die "invalid environment key=value argument given: $env_var"
     fi
