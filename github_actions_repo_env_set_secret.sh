@@ -79,7 +79,10 @@ add_secret(){
     timestamp "setting GitHub secret '$key' in repo '$owner_repo' environment '$environment_name'"
     # XXX: no way to generate this encrypted value in Bash at this time, all language bindings but no Libsodium CLI so use GitHub CLI instead
     # https://docs.github.com/en/rest/reference/actions#create-or-update-an-environment-secret
-    command gh secret set -R "$owner_repo" --env "$environment_name" "$key" <<< "$value"
+    #
+    # XXX: there is some kind of bug in GitHub CLI - the secret doesn't work when fed through stdin, only through --body
+    #command gh secret set -R "$owner_repo" --env "$environment_name" "$key" <<< "$value"
+    command gh secret set -R "$owner_repo" --env "$environment_name" "$key" --body "$value"
 }
 
 
