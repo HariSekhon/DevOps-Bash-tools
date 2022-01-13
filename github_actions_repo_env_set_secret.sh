@@ -31,7 +31,7 @@ If no third argument is given, reads environment variables from standard input, 
 
 Examples:
 
-    ${0##*/} github/HariSekhon/DevOps-Bash-tools testenv AWS_ACCESS_KEY_ID=AKIA...
+    ${0##*/} HariSekhon/DevOps-Bash-tools testenv AWS_ACCESS_KEY_ID=AKIA...
 
     echo AWS_ACCESS_KEY_ID=AKIA... | ${0##*/} HariSekhon/DevOps-Bash-tools testenv
 
