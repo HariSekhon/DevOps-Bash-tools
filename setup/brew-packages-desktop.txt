@@ -54,6 +54,7 @@ bazelisk  # bazel wrapper downloader like mvnw/gradlew, addes 'bazel' to $PATH s
 brew-cask-completion
 cfssl
 #cfn-lint
+checkov
 checkstyle
 circleci
 cmatrix
