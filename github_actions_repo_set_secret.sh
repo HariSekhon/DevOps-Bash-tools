@@ -73,7 +73,6 @@ fi
 add_secret(){
     local env_var="$1"
     parse_export_key_value "$env_var"
-    value="$(base64 <<< "$value")"
     # shellcheck disable=SC2154
     timestamp "setting GitHub secret '$key' in repo '$owner_repo'"
     # https://docs.github.com/en/rest/reference/actions#create-or-update-a-repository-secret--code-samples
