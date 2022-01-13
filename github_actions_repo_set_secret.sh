@@ -88,6 +88,7 @@ add_secret(){
     #    XXX: no way to generate this encrypted value in Bash at this time, all language bindings but no Libsodium CLI so use GitHub CLI instead
     #
     # XXX: there is some kind of bug in GitHub CLI - the secret doesn't work when fed through stdin, only through --body
+    #      https://github.com/cli/cli/issues/5031
     #command gh secret set -R "$owner_repo" "$key" <<< "$value"
     command gh secret set -R "$owner_repo" "$key" --body "$value"
 }
