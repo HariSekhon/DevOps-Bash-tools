@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: github/HariSekhon/DevOps-Bash-tools haritest=stuff
 #
 #  Author: Hari Sekhon
 #  Date: 2021-12-03 17:41:23 +0000 (Fri, 03 Dec 2021)
@@ -63,9 +64,9 @@ add_env_var(){
     local env_var="$1"
     parse_export_key_value "$env_var"
     # shellcheck disable=SC2154
-    timestamp "adding/updating CircleCI environment variable '$name' to project '$project_slug'"
+    timestamp "adding/updating CircleCI environment variable '$key' to project '$project_slug'"
     # shellcheck disable=SC2154
-    "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$name\", \"value\": \"$value\"}" | jq .
+    "$srcdir/circleci_api.sh" "/project/$project_slug/envvar" -X POST -d "{\"name\": \"$key\", \"value\": \"$value\"}" | jq .
 }
 
 
