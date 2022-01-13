@@ -63,6 +63,11 @@ Examples:
     ${0##*/} /users/HariSekhon/projects
 
 
+# List a user's GitLab groups (contexts for sharing environment variables across projects):
+
+    ${0##*/} /groups | jq .
+
+
 Specify project ID or name (url-encoded otherwise will return 404 and fail to find project)
 
 
