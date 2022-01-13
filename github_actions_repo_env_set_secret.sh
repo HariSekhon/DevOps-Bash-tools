@@ -81,6 +81,7 @@ add_secret(){
     # https://docs.github.com/en/rest/reference/actions#create-or-update-an-environment-secret
     #
     # XXX: there is some kind of bug in GitHub CLI - the secret doesn't work when fed through stdin, only through --body
+    #      https://github.com/cli/cli/issues/5031
     #command gh secret set -R "$owner_repo" --env "$environment_name" "$key" <<< "$value"
     command gh secret set -R "$owner_repo" --env "$environment_name" "$key" --body "$value"
 }
