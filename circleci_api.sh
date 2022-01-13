@@ -79,11 +79,13 @@ Examples:
     ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/pipeline/mine | jq .
 
 
-# Get environment variables for a project:
+# Get environment variables for a project (see circleci_project_set_env_vars.sh to easily set them):
 
     ${0##*/} /project/<vcs>/<user_or_org>/<repo>/envvar
 
     ${0##*/} /project/github/HariSekhon/DevOps-Bash-tools/envvar | jq .
+
+# see circleci_project_set_env_vars.sh to easily set these variables
 
 
 # Create / replace a project environment variable:
@@ -101,10 +103,11 @@ Examples:
     ${0##*/} '/context/<context_id>/environment-variable' | jq .
 
 
-# Use the context ID from the above output to list environment variable secrets from the given context ID:
+# Use the context ID from the above output to list environment variable secrets from the given context ID
 
     ${0##*/} /context/c2321a8a-c188-4568-aac7-aef89cb7a6e2/environment-variable | jq .
 
+# see circleci_context_set_env_vars.sh to easily set these variables
 "
 
 # used by usage() in lib/utils.sh
