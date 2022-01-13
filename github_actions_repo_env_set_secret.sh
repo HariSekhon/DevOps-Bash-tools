@@ -75,7 +75,6 @@ fi
 add_secret(){
     local env_var="$1"
     parse_export_key_value "$env_var"
-    value="$(base64 <<< "$value")"
     # shellcheck disable=SC2154
     timestamp "setting GitHub secret '$key' in repo '$owner_repo' environment '$environment_name'"
     # XXX: no way to generate this encrypted value in Bash at this time, all language bindings but no Libsodium CLI so use GitHub CLI instead
