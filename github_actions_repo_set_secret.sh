@@ -86,7 +86,10 @@ add_secret(){
     #    -H 'Accept: application/vnd.github.v3+json' \
     #    -d "{\"encrypted_value\":\"$value\"}"
     #    XXX: no way to generate this encrypted value in Bash at this time, all language bindings but no Libsodium CLI so use GitHub CLI instead
-    command gh secret set -R "$owner_repo" "$key" <<< "$value"
+    #
+    # XXX: there is some kind of bug in GitHub CLI - the secret doesn't work when fed through stdin, only through --body
+    #command gh secret set -R "$owner_repo" "$key" <<< "$value"
+    command gh secret set -R "$owner_repo" "$key" --body "$value"
 }
 
 
