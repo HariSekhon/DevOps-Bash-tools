@@ -320,7 +320,7 @@ etc.
   - `aws_cloudtrails_status.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) status - if logging, multi-region and log file validation enabled
   - `aws_config_all_types.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, checking all resource types are supported (should be true) and includes global resources (should be true)
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
-  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `github_actions_repo*_set_secret.sh`, `gitlab_project_set_env_vars.sh`, `circleci_*_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`). Supports new user and new access key csv file formats.
+  - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `github_actions_repo*_set_secret.sh`, `gitlab_*_set_env_vars.sh`, `circleci_*_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`). Supports new user and new access key csv file formats.
   - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
     - `aws_ecr_list_tags.sh` - lists all the tags for a given ECR docker image
@@ -642,6 +642,7 @@ etc.
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
   - `gitlab_project_set_description.sh` - sets the description for one or more projects using the GitLab API
   - `gitlab_project_set_env_vars.sh` - adds / updates GitLab project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `gitlab_group_set_env_vars.sh` - adds / updates GitLab group-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
   - `gitlab_ssh_get_user_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent tools
