@@ -60,7 +60,7 @@ if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     binary="${binary//\{arch\}/$arch}"
 fi
 
-timestamp "Downloading"
+timestamp "Downloading: '$url'"
 download "$url" "$download_file"
 
 if has_tarball_extension "$package"; then
@@ -80,7 +80,7 @@ elif [[ "$package" =~ \.zip$ ]]; then
     download_file="$binary"
 fi
 
-timestamp "Setting executable"
+timestamp "Setting executable: $download_file"
 chmod +x "$download_file"
 echo
 
@@ -111,7 +111,7 @@ fi
 mkdir -p -v "$install_path"
 echo
 
-timestamp "Moving to bin"
+timestamp "Moving to destination: $destination"
 # common alias mv='mv -i' would force a prompt we don't want, even with -f
 unalias mv &>/dev/null || :
 mv -fv "$download_file" "$destination"
