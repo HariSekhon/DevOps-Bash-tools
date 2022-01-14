@@ -129,7 +129,7 @@ Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
 Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
 
-#### Summary:
+#### Summary
 
 - Scripts for many popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#inventory) below for more details
 - Advanced configs for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
@@ -218,7 +218,7 @@ make
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
 - [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
-#### Linux & Mac:
+#### Linux & Mac
 
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
@@ -880,7 +880,7 @@ etc.
 - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
 - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
 
-#### More Linux & Mac:
+#### More Linux & Mac
 
 - [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
@@ -954,7 +954,7 @@ etc.
 - `json2yaml.sh` - converts JSON to YAML
 - `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) section above)
 
-### See Also:
+### See Also
 
 * [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 80+ DevOps CLI tools for AWS, GCP, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
 
