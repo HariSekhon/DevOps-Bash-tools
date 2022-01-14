@@ -64,7 +64,8 @@ fi
 # if not set in context, must be 'default'
 namespace="${namespace:-default}"
 
-jobdir="${PWD:-$(pwd)}/.kubectl_job_definitions"
+#jobdir="${PWD:-$(pwd)}/.kubectl_job_definitions"
+jobdir="$srcdir/.kubectl_job_definitions"
 mkdir -p -v "$jobdir"
 
 # XXX: jobs with the same name in different namespaces will clash here as namespace is not captured
