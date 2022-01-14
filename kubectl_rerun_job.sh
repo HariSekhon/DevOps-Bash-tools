@@ -68,7 +68,6 @@ namespace="${namespace:-default}"
 jobdir="$srcdir/.kubectl_job_definitions"
 mkdir -p -v "$jobdir"
 
-# XXX: jobs with the same name in different namespaces will clash here as namespace is not captured
 jobfile="$jobdir/$namespace.$job_name.json"
 
 # backup the job because job recreation will fail after it is deleted if any of the fields prevent re-creation
