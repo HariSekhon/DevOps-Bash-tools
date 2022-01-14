@@ -1,17 +1,17 @@
 # GitHub Status Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-19-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3447-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1526-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-647-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3453-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1527-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-649-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-546-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-547-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-224.8k-lightgrey?logo=codecademy)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--01--11-lightgrey?logo=github)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--01--14-lightgrey?logo=github)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 
@@ -19,7 +19,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-19 original source git repos with 546 CI builds (497 hosted, 49 self-hosted) across 22 different CI systems:
+19 original source git repos with 547 CI builds (498 hosted, 49 self-hosted) across 22 different CI systems:
 
 ---
 # Advanced Nagios Plugins Collection
@@ -30,6 +30,8 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 
 [![Codacy](https://api.codacy.com/project/badge/Grade/e6fcf7cb4dcc4905ab0a4cb91567fdda)](https://www.codacy.com/app/harisekhon/nagios-plugins)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugins/badge)](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugins)
+[![Codiga Grade](https://api.codiga.io/project/8841/status/svg)](https://app.codiga.io/project/8841/dashboard)
+[![Codiga Score](https://api.codiga.io/project/8841/score/svg)](https://app.codiga.io/project/8841/dashboard)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HariSekhon/Nagios-Plugins.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/Nagios-Plugins/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugins&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugins)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugins&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugins)
@@ -217,8 +219,10 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 
 80+ DevOps & Data CLI Tools - AWS, GCP, GCF Python Cloud Functions, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, AWS CloudFormation, Elasticsearch, Solr etc.
 
-[![Codacy](https://api.codacy.com/project/badge/Grade/f7af72140c3b408b9659207ced17544f)](https://www.codacy.com/app/harisekhon/devops-python-tools)
+[![Codacy](https://app.codacy.com/project/badge/Grade/40a82d53f3394f4b99aa6eccb08e3c8d)](https://www.codacy.com/gh/HariSekhon/DevOps-Python-tools/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Python-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Python-tools)
+[![Codiga Grade](https://api.codiga.io/project/8839/status/svg)](https://app.codiga.io/project/8839/dashboard)
+[![Codiga Score](https://api.codiga.io/project/8839/score/svg)](https://app.codiga.io/project/8839/dashboard)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HariSekhon/DevOps-Python-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Python-tools/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Python-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Python-tools)
@@ -312,14 +316,14 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 
 700+ DevOps Bash Scripts - AWS, GCP, Kubernetes, Kafka, Docker, APIs, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, Travis CI, Jenkins, Concourse, GitHub, GitLab, BitBucket, Azure DevOps, TeamCity, Spotify, MP3, LDAP, Code/Build Linting, pkg mgmt for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .gitconfig, .screenrc, .tmux.conf, .psqlrc ...
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c61193dd7dcc418b85149bddf93362e4)](https://www.codacy.com/app/harisekhon/bash-tools)
+[![Codacy](https://app.codacy.com/project/badge/Grade/dffc1bfd13404c95b5a0ab97fd47974e)](https://www.codacy.com/gh/HariSekhon/DevOps-Bash-tools/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/devops-bash-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/devops-bash-tools)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
-[![Code Inspector Grade](https://www.code-inspector.com/project/8840/status/svg)](https://frontend.code-inspector.com/project/8840/dashboard)
-[![Code Inspector Score](https://www.code-inspector.com/project/8840/score/svg)](https://frontend.code-inspector.com/project/8840/dashboard)
+[![Codiga Grade](https://api.codiga.io/project/8840/status/svg)](https://app.codiga.io/project/8840/dashboard)
+[![Codiga Score](https://api.codiga.io/project/8840/score/svg)](https://app.codiga.io/project/8840/dashboard)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/network)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/commits/master)
@@ -528,14 +532,14 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 
 25+ DevOps CLI Tools - Anonymizer, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles), Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, Nginx stats & HTTP(S) URL watchers for load-balanced web farms, Linux tools etc.
 
-[![Codacy](https://api.codacy.com/project/badge/Grade/1769cc854b5246968ee2bae1818f771a)](https://www.codacy.com/app/harisekhon/devops-perl-tools)
+[![Codacy](https://app.codacy.com/project/badge/Grade/366f2da87b794566bbf194092752f25a)](https://www.codacy.com/gh/HariSekhon/DevOps-Perl-tools/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Perl-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Perl-tools)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Perl-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Perl-tools)
-[![Code Inspector Grade](https://www.code-inspector.com/project/4745/status/svg)](https://frontend.code-inspector.com/project/4745/dashboard)
-[![Code Inspector Score](https://www.code-inspector.com/project/4745/score/svg)](https://frontend.code-inspector.com/project/4745/dashboard)
+[![Codiga Grade](https://api.codiga.io/project/4745/status/svg)](https://app.codiga.io/project/4745/dashboard)
+[![Codiga Score](https://api.codiga.io/project/4745/score/svg)](https://app.codiga.io/project/4745/dashboard)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-perl-tools?logo=github)](https://github.com/harisekhon/devops-perl-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-perl-tools?logo=github)](https://github.com/harisekhon/devops-perl-tools/network)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Perl-tools?logo=github)](https://github.com/HariSekhon/DevOps-Perl-tools/commits/master)
@@ -624,7 +628,7 @@ Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
 
 Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication detection / removal, API search queries, API automation etc.
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bf879eba5f1c4fd89f92b0f9407b345e)](https://www.codacy.com/app/harisekhon/spotify-tools)
+[![Codacy](https://app.codacy.com/project/badge/Grade/afe697b0ce3f4df79f16b4b3d2ded54b)](https://www.codacy.com/gh/HariSekhon/Spotify-tools/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/spotify-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/spotify-tools)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Spotify-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_Spotify-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Spotify-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_Spotify-tools)
@@ -830,15 +834,15 @@ Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Gol
 
 DevOps Golang tools
 
-[![Codacy](https://api.codacy.com/project/badge/Grade/f7af72140c3b408b9659207ced17544f)](https://www.codacy.com/app/harisekhon/devops-golang-tools)
+[![Codacy](https://app.codacy.com/project/badge/Grade/7b64fbfcff2240b9b18c6754c22d39bb)](https://www.codacy.com/gh/HariSekhon/DevOps-Golang-tools/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/DevOps-Golang-tools/badge)](https://www.codefactor.io/repository/github/harisekhon/DevOps-Golang-tools)
 [![Language grade: Golang](https://img.shields.io/lgtm/grade/golang/g/HariSekhon/DevOps-Golang-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Golang-tools/context:golang)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Golang-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Golang-tools)
-[![Code Inspector Grade](https://www.code-inspector.com/project/7517/status/svg)](https://frontend.code-inspector.com/project/7517/dashboard)
-[![Code Inspector Score](https://www.code-inspector.com/project/7517/score/svg)](https://frontend.code-inspector.com/project/7517/dashboard)
+[![Codiga Grade](https://api.codiga.io/project/7517/status/svg)](https://app.codiga.io/project/7517/dashboard)
+[![Codiga Score](https://api.codiga.io/project/7517/score/svg)](https://app.codiga.io/project/7517/dashboard)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/HariSekhon/DevOps-Golang-tools.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/DevOps-Golang-tools/alerts/)
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-golang-tools?logo=github)](https://github.com/harisekhon/devops-golang-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-golang-tools?logo=github)](https://github.com/harisekhon/devops-golang-tools/network)
@@ -924,6 +928,7 @@ Link:  [HariSekhon/Terraform](https://github.com/HariSekhon/Terraform)
 
 Terraform templates for AWS / GCP / Azure
 
+[![tfsec](https://github.com/HariSekhon/Terraform/actions/workflows/tfsec.yaml/badge.svg)](https://github.com/HariSekhon/Terraform/actions/workflows/tfsec.yaml)
 [![Travis CI](https://img.shields.io/badge/TravisCI-legacy-lightgrey?logo=travis&label=Travis%20CI)](https://github.com/HariSekhon/Terraform-templates/blob/master/.travis.yml)
 [![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 [![Repo on Azure DevOps](https://img.shields.io/badge/repo-Azure%20DevOps-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub/_git/Terraform-templates)
@@ -969,7 +974,7 @@ Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
 
 Python / Jython Utility Library for my other repos
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/cfc553fcdbc94491b3c8c56797dcd189)](https://www.codacy.com/app/harisekhon/pylib)
+[![Codacy](https://app.codacy.com/project/badge/Grade/cfc553fcdbc94491b3c8c56797dcd189)](https://www.codacy.com/gh/HariSekhon/pylib/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/pylib/badge/master)](https://www.codefactor.io/repository/github/harisekhon/pylib/overview/master)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/HariSekhon/pylib.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/pylib/context:python)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_pylib&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_pylib)
@@ -1065,7 +1070,7 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 
 Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
 
-[![Codacy](https://api.codacy.com/project/badge/Grade/de500bf4f90d401ba5c98ed903c8a612)](https://www.codacy.com/app/harisekhon/nagios-plugin-kafka)
+[![Codacy](https://app.codacy.com/project/badge/Grade/2f6cc8cba0ef4007a3f736bf45ae60f8)](https://www.codacy.com/gh/HariSekhon/Nagios-Plugin-Kafka/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugin-Kafka/badge)](https://www.codefactor.io/repository/github/harisekhon/Nagios-Plugin-Kafka)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugin-Kafka&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugin-Kafka)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_Nagios-Plugin-Kafka&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_Nagios-Plugin-Kafka)
@@ -1198,7 +1203,7 @@ Link:  [HariSekhon/lib-java](https://github.com/HariSekhon/lib-java)
 
 Java Utility library for my other repos
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b929aef71cb34ede9decf79459aa936d)](https://www.codacy.com/app/harisekhon/lib-java)
+[![Codacy](https://app.codacy.com/project/badge/Grade/b929aef71cb34ede9decf79459aa936d)](https://www.codacy.com/gh/HariSekhon/lib-java/dashboard)
 [![CodeFactor](https://www.codefactor.io/repository/github/harisekhon/lib-java/badge)](https://www.codefactor.io/repository/github/harisekhon/lib-java)
 [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/HariSekhon/lib-java.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/HariSekhon/lib-java/context:java)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_lib-java&metric=alert_status)](https://sonarcloud.io/dashboard?id=HariSekhon_lib-java)
@@ -1275,7 +1280,7 @@ Java Utility library for my other repos
 
 
 
-19 git repos summarized with 546 CI builds (497 hosted, 49 self-hosted) across 22 different CI systems
+19 git repos summarized with 547 CI builds (498 hosted, 49 self-hosted) across 22 different CI systems
 
 ---
 
