@@ -60,7 +60,7 @@ if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     binary="${binary//\{arch\}/$arch}"
 fi
 
-timestamp "Downloading: '$url'"
+timestamp "Downloading: $url"
 download "$url" "$download_file"
 
 if has_tarball_extension "$package"; then
