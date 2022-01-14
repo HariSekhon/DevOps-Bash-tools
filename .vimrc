@@ -206,19 +206,19 @@ if has("autocmd")
 
     au BufNewFile,BufRead LICENSE set tw=80
 
-    "au BufRead,BufNewFile perl set ts=4 st=4
-    "au BufRead,BufNewFile *.pl set ts=4 st=4
+    au BufRead,BufNewFile perl set ts=4 st=4 et
+    au BufRead,BufNewFile *.pl set ts=4 st=4 et
 
     "au BufNew,BufRead *.pp set syntax=conf
     " filetype is better than syntax since it figures out indentation and tab completion etc and the ruby is better than conf since it gives more syntax highlighting
-    au BufNew,BufRead *.pp set filetype=ruby sts=2 sw=2 ts=2
+    au BufNew,BufRead *.pp set filetype=ruby sts=2 sw=2 ts=2 et
 
-    au BufNew,BufRead *.tf set sts=2 sw=2 ts=2 filetype=conf
-    au BufNew,BufRead *.yml set sts=2 sw=2 ts=2
-    au BufNew,BufRead *.yaml set sts=2 sw=2 ts=2
+    au BufNew,BufRead *.tf set sts=2 sw=2 ts=2 et filetype=conf
+    au BufNew,BufRead *.yml set sts=2 sw=2 ts=2 et
+    au BufNew,BufRead *.yaml set sts=2 sw=2 ts=2 et
 
-    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  set filetype=groovy
-    au BufNew,BufRead *.jsh  set filetype=java
+    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh set filetype=groovy
+    au BufNew,BufRead *.jsh set filetype=java
 
     "au BufNew,BufRead *.rb set filetype=ruby sts=2 sw=2 ts=2
 
