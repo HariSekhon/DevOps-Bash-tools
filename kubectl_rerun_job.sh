@@ -24,8 +24,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Backups up and then re-runs a given Kubernetes job
 
-Backups are taken to the \$PWD/.kubectl_job_definitions/ directory before re-creating the job, just in case, as a
-delete operation must happen before the re-creation and if the re-creation fails the job definition would otherwise be lost
+Backups are taken to the source directory of this script under the .kubectl_job_definitions/ directory before re-creating the job,
+just in case, as a delete operation must happen before the re-creation and if the re-creation fails the job definition would otherwise be lost
 
 Example:
 
