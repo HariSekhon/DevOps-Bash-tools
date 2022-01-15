@@ -40,11 +40,13 @@ echo "checking $(pwd)"
 echo
 
 matches="$(git grep -Ei \
-    -e 'AWS_ACCESS_KEY.*=["'"'"']*[^$][[:alnum:]]{4,}' \
-    -e 'AWS_SECRET_KEY.*=["'"'"']*[^$][[:alnum:]]{4,}' \
-    -e 'AWS_SECRET_ACCESS_KEY.*=["'"'"']*[^$][[:alnum:]]{4,}' \
-    -e 'AWS_SESSION_TOKEN.*=["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_ACCESS_KEY.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SECRET_KEY.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SECRET_ACCESS_KEY.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SESSION_TOKEN.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    | grep -Fv 'credentials(' \
     || :
+    # credentials excludes Jenkinsfile environment variables sourced from credential sources
 )"
 if [ -f .gitallowed ]; then
     # makes no difference, .gitallowed is exempted next anyway
