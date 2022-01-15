@@ -34,13 +34,14 @@ An optional binary destination can be given to name the file - if the file name 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<url> [<binary_path_in_zip_or_tarball> <binary_destination_name>]"
+usage_args="<url> [<binary_path_in_zip_or_tarball>] [<binary_destination_name>]"
 
 help_usage "$@"
 
 min_args 1 "$@"
 
 url="$1"
+shift || :
 
 os="$(get_os)"
 arch="$(get_arch)"
@@ -55,7 +56,8 @@ if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     if [ $# -lt 2 ]; then
         usage "binary file path must be specified if downloading a tarball or zip file ('$package')"
     fi
-    binary="$2"
+    binary="$1"
+    shift || :
     binary="${binary//\{os\}/$os}"
     binary="${binary//\{arch\}/$arch}"
 fi
@@ -84,7 +86,7 @@ timestamp "Setting executable: $download_file"
 chmod +x "$download_file"
 echo
 
-destination="${3:-}"
+destination="${1:-}"
 if [ -z "$destination" ]; then
     destination="${download_file##*/}"
     destination="${destination%%.$$}"
