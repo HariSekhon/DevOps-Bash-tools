@@ -31,14 +31,18 @@ If no second argument is given, reads environment variables from standard input,
 
 Examples:
 
-    ${0##*/} github/HariSekhon/DevOps-Bash-tools AWS_ACCESS_KEY_ID=AKIA...
+    ${0##*/} HariSekhon/DevOps-Bash-tools AWS_ACCESS_KEY_ID=AKIA...
 
     echo AWS_ACCESS_KEY_ID=AKIA... | ${0##*/} HariSekhon/DevOps-Bash-tools
+
+    echo AWS_ACCESS_KEY_ID=AKIA... | gh secret set -R HariSekhon/DevOps-Bash-tools -f -
 
 
     Loads both AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY via stdin:
 
         aws_csv_creds.sh credentials_exported.csv | ${0##*/} HariSekhon/DevOps-Bash-tools
+
+        aws_csv_creds.sh credentials_exported.csv | gh secret set -R HariSekhon/DevOps-Bash-tools -f -
 
 
 Requires the GitHub CLI 'gh' to be installed and available in the \$PATH
