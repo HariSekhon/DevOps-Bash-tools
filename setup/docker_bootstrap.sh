@@ -15,21 +15,21 @@
 
 # Alpine / Wget:
 #
-# wget -O- https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
+#   wget -O- https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/docker_bootstrap.sh | sh
 #
 # Curl:
 #
-# curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/bootstrap.sh | sh
+#   curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/docker_bootstrap.sh | sh
 
 set -eux
 
-repo="$(env | grep ^PATH= | sed 's/.*github\///; s/:.*//')"
+basedir="/github"
 
-github="/github"
+repo="$(echo "$PATH" | tr ':' '\n' | grep "^$basedir/" | sed 's|/github/||' | head -n1)"
 
-mkdir -pv "$github"
+mkdir -pv "$basedir"
 
-cd "$github"
+cd "$basedir"
 
 if type -P apt-get >/dev/null 2>&1; then
     apt-get update
@@ -44,7 +44,7 @@ if [ "$repo" = python-tools ]; then
     ln -sv python-tools pytools
 fi
 
-cd "$github/$repo"
+cd "$basedir/$repo"
 
 make test
 
