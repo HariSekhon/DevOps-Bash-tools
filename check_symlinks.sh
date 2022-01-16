@@ -43,9 +43,13 @@ start_time="$(start_timer)"
 
 failing_symlinks=0
 while read -r symlink; do
-    target="$(readlink -f "$symlink")"
+    target="$(readlink -f "$symlink" || :)"
     echo -n '.'
-    if ! [ -e "$target" ]; then
+    if [ -z "$target" ]; then
+        echo
+        echo "WARNING: symlink '$symlink' target could not be resolved" >&2
+        ((failing_symlinks+=1))
+    elif ! [ -e "$target" ]; then
         echo
         echo "WARNING: symlink '$symlink' => '$target' - target does not exist" >&2
         ((failing_symlinks+=1))
