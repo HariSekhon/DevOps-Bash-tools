@@ -40,7 +40,7 @@ fi
 
 curl -sS "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
 
-if [ "$repo" = python-tools ]; then
+if [ "$repo" = pytools ]; then
     ln -sv python-tools pytools
 fi
 
