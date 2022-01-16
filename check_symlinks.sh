@@ -43,8 +43,10 @@ start_time="$(start_timer)"
 
 failing_symlinks=0
 while read -r symlink; do
-    target="$(readlink -f "$symlink" || :)"
+    # readlink -f fails to return anything if a parent dir component doesn't exist
+    target="$(readlink -m "$symlink" || :)"
     echo -n '.'
+    # shouldn't happen now switched from readlink -f to readlink -m
     if [ -z "$target" ]; then
         echo
         echo "WARNING: symlink '$symlink' target could not be resolved" >&2
