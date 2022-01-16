@@ -37,7 +37,7 @@ if type -P apt-get >/dev/null 2>&1; then
     export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get install -y curl
-if type -P yum >/dev/null 2>&1; then
+elif type -P yum >/dev/null 2>&1; then
     yum install -y curl
 elif type -P apk >/dev/null 2>&1; then
     apk add --no-cache curl
