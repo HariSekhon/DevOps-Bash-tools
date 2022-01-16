@@ -29,6 +29,11 @@ basedir="/github"
 
 repo="$(echo "$PATH" | tr ':' '\n' | grep "^$basedir/" | sed 's|/github/||' | head -n1)"
 
+if [ -z "$repo" ]; then
+    echo "ERROR: could not determine repo from \$PATH components, no /github/<name> was found in \$PATH: $PATH"
+    exit 1
+fi
+
 mkdir -pv "$basedir"
 
 cd "$basedir"
