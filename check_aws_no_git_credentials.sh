@@ -40,10 +40,9 @@ echo "checking $(pwd)"
 echo
 
 matches="$(git grep -Ei \
-    -e 'AWS_ACCESS_KEY.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
-    -e 'AWS_SECRET_KEY.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
-    -e 'AWS_SECRET_ACCESS_KEY.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
-    -e 'AWS_SESSION_TOKEN.*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_ACCESS_KEY_ID[[:space:]]*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SECRET_ACCESS_KEY[[:space:]]*[=:]["'"'"']*[^$][[:alnum:]]{4,}' \
+    -e 'AWS_SESSION_TOKEN[[:space:]]*[=]:["'"'"']*[^$][[:alnum:]]{4,}' \
     | grep -Fv 'credentials(' \
     || :
     # credentials excludes Jenkinsfile environment variables sourced from credential sources
