@@ -32,6 +32,7 @@ mkdir -pv "$basedir"
 cd "$basedir"
 
 if type -P apt-get >/dev/null 2>&1; then
+    export DEBIAN_FRONTEND=noninteractive
     apt-get update
     apt-get install -y curl
 elif type -P apk >/dev/null 2>&1; then
