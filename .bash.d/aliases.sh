@@ -278,7 +278,7 @@ alias t='$EDITOR ~/tmp'
 #alias y=yes
 alias t2='$EDITOR ~/tmp2'
 alias t3='$EDITOR ~/tmp3'
-alias tg='traceroute www.google.com'
+#alias tg='traceroute www.google.com'
 #alias sec='ps -ef| grep -e arpwatc[h] -e swatc[h] -e scanlog[d]'
 
 
