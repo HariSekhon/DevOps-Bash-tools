@@ -39,7 +39,7 @@ elif type -P apk >/dev/null 2>&1; then
     apk add --no-cache curl
 fi
 
-curl -sS "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
+curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
 
 if [ "$repo" = pytools ]; then
     ln -sv python-tools "$basedir/pytools"
@@ -49,4 +49,4 @@ cd "$basedir/$repo"
 
 make test
 
-curl -sS https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh | sh
+curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh | sh
