@@ -53,11 +53,21 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_symlinks.sh"
 
+"$srcdir/check_no_tabs.sh"
+
 "$srcdir/check_aws_no_git_credentials.sh"
 
 "$srcdir/check_git_no_merge_remnants.sh"
 
 "$srcdir/check_git_commit_authors.sh"
+
+if [ -z "${NO_JSON_CHECK:-}" ]; then
+    "$srcdir/check_json.sh"
+fi
+
+if [ -z "${NO_YAML_CHECK:-}" ]; then
+    "$srcdir/check_yaml.sh"
+fi
 
 "$srcdir/check_bash_duplicate_defs.sh" || :
 
@@ -76,24 +86,50 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_vagrantfiles.sh"
 
+if [ -z "${NO_DOCKERFILE_CHECK:-}" ]; then
+    "$srcdir/check_dockerfiles.sh"
+fi
+
+if [ -z "${NO_DOCKER_COMPOSE_CHECK:-}" ]; then
+    "$srcdir/check_docker_compose.sh"
+fi
+
+if [ -z "${NO_ANSIBLE_PLAYBOOK_CHECK:-}" ]; then
+    "$srcdir/check_ansible_playbooks.sh"
+fi
+
 # this is usually run after build, no point testing again
-#"$srcdir/check_maven_pom.sh"
+if [ -z "${NO_MAVEN_POM_CHECK:-}" ]; then
+    "$srcdir/check_maven_pom.sh"
+fi
 
 if [ -z "${NO_PERL_SYNTAX_CHECK:-}" ]; then
     "$srcdir/check_perl_syntax.sh"
 fi
 
-"$srcdir/check_ruby_syntax.sh"
+if [ -z "${NO_RUBY_SYNTAX_CHECK:-}" ]; then
+    "$srcdir/check_ruby_syntax.sh"
+fi
 
-"$srcdir/python_compile.sh"
+if [ -z "${NO_PYTHON_COMPILE:-}" ]; then
+    "$srcdir/python_compile.sh"
+fi
 
-"$srcdir/check_python_misc.sh"
+if [ -z "${NO_PYTHON_MISC_CHECK:-}" ]; then
+    "$srcdir/check_python_misc.sh"
+fi
 
-WARN_ONLY=1 "$srcdir/check_python_asserts.sh"
+if [ -z "${NO_PYTHON_ASSERT_CHECK:-}" ]; then
+    WARN_ONLY=1 "$srcdir/check_python_asserts.sh"
+fi
 
-"$srcdir/check_python_exception_pass.sh"
+if [ -z "${NO_PYTHON_EXCEPTION_PASS_CHECK:-}" ]; then
+    "$srcdir/check_python_exception_pass.sh"
+fi
 
-"$srcdir/check_python_pylint.sh"
+if [ -z "${NO_PYTHON_PYLINT_CHECK:-}" ]; then
+    "$srcdir/check_python_pylint.sh"
+fi
 
 #"$srcdir/python3.sh"
 
@@ -101,6 +137,9 @@ WARN_ONLY=1 "$srcdir/check_python_asserts.sh"
 #. "$srcdir/check_sbt_build.sh"
 
 "$srcdir/check_bash_syntax.sh"
+
+# want splitting
+# shellcheck disable=SC2046
 "$srcdir/check_bash_references.sh" . $(for x in setup lib; do [ -f "$x" ] && echo "$x"; done)
 
 "$srcdir/check_bash_arrays.sh"
@@ -122,17 +161,6 @@ fi
 
 # too heavy to run all the time, isExcluded on every file has really bad performance
 "$srcdir/check_whitespace.sh"
-
-"$srcdir/check_no_tabs.sh"
-
-"$srcdir/check_dockerfiles.sh"
-
-"$srcdir/check_docker_compose.sh"
-
-# TODO: enable later and tweak configs
-#. "$srcdir/check_ansible_playbooks.sh"
-#. "$srcdir/check_json.sh"
-#. "$srcdir/check_yaml.sh"
 
 #"$srcdir/check_pytools.sh"
 
