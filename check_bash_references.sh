@@ -35,7 +35,7 @@ for x in "${@:-.}"; do
     pushd "$x" &>/dev/null
     for script in $(git grep --max-depth 0 '^[^#]*srcdir/[[:alnum:]_]*.sh' -- . |
                     grep -v "${0##*/}:.*\\\$srcdir/scriptname.sh" |
-                    grep -o 'srcdir/[[:alnum:]_]*.sh' |
+                    grep -Eo 'srcdir/[[:alnum:]_/-]*\.sh' |
                     sed 's/srcdir/./g' |
                     sort -u); do
         if ! [ -f "$script" ]; then
