@@ -28,6 +28,7 @@
 #
 
 # order repos by dependent submodule repos first
+Jenkins:jenkins
 SQL-scripts:sql
 SQL-keywords:sql-keywords
 Kubernetes-configs:k8s
