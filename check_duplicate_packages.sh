@@ -76,7 +76,8 @@ else
         echo
     done
     if [ $found_files -eq 0 ]; then
-        usage "No package files found, please specify explicit path to *-packages*.txt"
+        #usage "No package files found, please specify explicit path to *-packages*.txt"
+        warn "No package files found, please specify explicit path to *-packages*.txt"
     fi
 fi
 
