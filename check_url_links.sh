@@ -61,6 +61,11 @@ while read -r filename; do
     check_url_links "$filename"
 done
 
+if [ "$broken_links" != 0 ]; then
+    echo
+    die "$broken_links broken links detected!"
+fi
+
 time_taken "$start_time"
 section2 "URL links passed"
 echo
