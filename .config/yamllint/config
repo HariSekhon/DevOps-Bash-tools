@@ -19,3 +19,4 @@ extends: default
 rules:
   line-length: disable
   comments: disable
+  comments-indentation: disable
