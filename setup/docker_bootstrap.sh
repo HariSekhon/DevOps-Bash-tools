@@ -41,14 +41,15 @@ mkdir -pv "$basedir"
 
 cd "$basedir"
 
-if ! type -P curl >/dev/null 2>&1; then
-    if type -P apt-get >/dev/null 2>&1; then
+# type -P doesn't work in bourne shell
+if ! command -v curl >/dev/null 2>&1; then
+    if command -v apt-get >/dev/null 2>&1; then
         export DEBIAN_FRONTEND=noninteractive
         apt-get update
         apt-get install -y curl
-    elif type -P yum >/dev/null 2>&1; then
+    elif command -v yum >/dev/null 2>&1; then
         yum install -y curl
-    elif type -P apk >/dev/null 2>&1; then
+    elif command -v apk >/dev/null 2>&1; then
         apk add --no-cache curl
     fi
 fi
