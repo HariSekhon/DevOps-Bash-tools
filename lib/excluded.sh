@@ -30,8 +30,9 @@ isExcluded(){
     # shellcheck disable=SC2049
     [[ "$prog" =~ ^\* ]] && return 0
     [[ "$prog" =~ ^# ]]  && return 0
-    [[ "$prog" =~ /\. ]] && return 0
-    [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
+    #[[ "$prog" =~ /\. ]] && return 0
+    [[ "$prog" =~ /\.git ]] && return 0
+    [[ "$prog" =~ ^\.git ]] && return 0
     [[ "$prog" =~ /templates/ ]] && return 0
     [[ "$prog" =~ TODO ]] && return 0
     [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
