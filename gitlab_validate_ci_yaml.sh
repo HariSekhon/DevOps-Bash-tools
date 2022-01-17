@@ -26,6 +26,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Validates a given GitLab CI config via the GitLab APIv4
 
+Gitlab now requires authentication for this endpoint, see gitlab_api.sh for details
+
 Example:
 
 ${0##*/} .gitlab-ci.yml
@@ -63,9 +65,9 @@ json_content="$("$srcdir/yaml2json.sh" <<< "$content")"
 # escape quotes and must not have any indentations and be on one line
 json_content_escaped="$(sed 's/"/\\"/g;s/^[[:space:]]*//;' <<< "$json_content" | tr -d '\n')"
 
-# doesn't need to be authenticated
-#"$srcdir/gitlab_api.sh" /ci/lint -X POST --header "Content-Type: application/json" --data "{\"content\": \"$json_content_escaped\"}" | jq -r .status
-result="$(curl -sS --fail https://gitlab.com/api/v4/ci/lint -X POST --header "Content-Type: application/json" --data "{\"content\": \"$json_content_escaped\"}" | jq -r .status)"
+# now needs to be authenticated
+#result="$(curl -sS --fail https://gitlab.com/api/v4/ci/lint -X POST --header "Content-Type: application/json" --data "{\"content\": \"$json_content_escaped\"}" | jq -r .status)"
+result="$("$srcdir/gitlab_api.sh" /ci/lint -X POST -d "{\"content\": \"$json_content_escaped\"}" | jq -r .status)"
 echo "$result"
 if [ "$result" != valid ]; then
     exit 1
