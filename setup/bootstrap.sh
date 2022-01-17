@@ -42,12 +42,15 @@ elif [ "$(uname -s)" = Linux ]; then
     if type apk >/dev/null 2>&1; then
         $sudo apk --no-cache add bash git make curl
     elif type apt-get >/dev/null 2>&1; then
+        if [ -n "${CI:-}" ]; then
+            export DEBIAN_FRONTEND=noninteractive
+        fi
         opts=""
         if [ -z "${PS1:-}" ]; then
             opts="-qq"
         fi
         $sudo apt-get update $opts
-        $sudo apt-get install $opts -y git make curl
+        $sudo apt-get install $opts -y git make curl --no-install-recommends
     elif type yum >/dev/null 2>&1; then
         $sudo yum install -y git make curl
     else
