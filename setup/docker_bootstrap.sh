@@ -71,6 +71,6 @@ cd "$basedir/$repo"
 
 make test
 
-curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > /clean_cache.sh
+curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > /clean_caches.sh
 
 sh /clean_caches.sh
