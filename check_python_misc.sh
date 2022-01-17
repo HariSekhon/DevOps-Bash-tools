@@ -54,7 +54,7 @@ check(){
 while read -r filename; do
     type isExcluded &>/dev/null && isExcluded "$filename" && echo -n '-' && continue
     echo -n '.'
-    check "quit() calls" '^[^#]*\bquit\b' "$filename"
+    check "quit() calls" '^[^#\.]*\bquit\b' "$filename"
     check "self.self references" '^[^#]*\bself\.self\b' "$filename"
     #check "'assert'!! This could be disabled at runtime by PYTHONOPTIMIZE=1 / -O / -OO and should not be used" '^[[:space:]]+\bassert\b' "$filename"
 done <<< "$files"
