@@ -79,7 +79,7 @@ bash_tools_start_time="$(start_timer)"
 # this is usually run after build, no point testing again
 #"$srcdir/check_maven_pom.sh"
 
-if [ -z "${NO_PERL_SYNTAX:}" ]; then
+if [ -z "${NO_PERL_SYNTAX:-}" ]; then
     "$srcdir/check_perl_syntax.sh"
 fi
 
