@@ -69,7 +69,9 @@ fi
 
 cd "$basedir/$repo"
 
-make test
+if [ -z "${NO_TESTS:-}" ]; then
+    make test
+fi
 
 curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > /clean_caches.sh
 
