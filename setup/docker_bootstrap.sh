@@ -41,7 +41,7 @@ mkdir -pv "$basedir"
 
 cd "$basedir"
 
-if ! type -P curl >/dev/nulll 2>&1; then
+if ! type -P curl >/dev/null 2>&1; then
     if type -P apt-get >/dev/null 2>&1; then
         export DEBIAN_FRONTEND=noninteractive
         apt-get update
