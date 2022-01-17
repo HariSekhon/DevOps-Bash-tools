@@ -45,9 +45,6 @@ bash_tools_start_time="$(start_timer)"
 # do help afterwards for Spark to be downloaded, and then help will find and use downloaded spark for SPARK_HOME
 #"$srcdir/help.sh"
 
-# this is usually run after build, no point testing again
-#. "$srcdir/check_gradle_build.sh"
-
 # don't run this here, it needs to be called explicitly otherwise will fail 'make test deep-clean'
 #"$srcdir/check_docker_clean.sh"
 
@@ -101,6 +98,11 @@ fi
 # this is usually run after build, no point testing again
 if [ -z "${NO_MAVEN_POM_CHECK:-}" ]; then
     "$srcdir/check_maven_pom.sh"
+fi
+
+# this is usually run after build, no point testing again
+if [ -z "${NO_GRADLE_BUILD_CHECK:-}" ]; then
+    "$srcdir/check_gradle_build.sh"
 fi
 
 if [ -z "${NO_PERL_SYNTAX_CHECK:-}" ]; then
