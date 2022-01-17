@@ -72,36 +72,36 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_tests_run_qualified.sh"
 
-. "$srcdir/check_makefiles.sh"
+"$srcdir/check_makefiles.sh"
 
-. "$srcdir/check_vagrantfiles.sh"
+"$srcdir/check_vagrantfiles.sh"
 
 # this is usually run after build, no point testing again
-#. "$srcdir/check_maven_pom.sh"
+#"$srcdir/check_maven_pom.sh"
 
-. "$srcdir/check_perl_syntax.sh"
+"$srcdir/check_perl_syntax.sh"
 
-. "$srcdir/check_ruby_syntax.sh"
+"$srcdir/check_ruby_syntax.sh"
 
-. "$srcdir/python_compile.sh"
+"$srcdir/python_compile.sh"
 
-. "$srcdir/check_python_misc.sh"
+"$srcdir/check_python_misc.sh"
 
-WARN_ONLY=1 . "$srcdir/check_python_asserts.sh"
+WARN_ONLY=1 "$srcdir/check_python_asserts.sh"
 
-. "$srcdir/check_python_exception_pass.sh"
+"$srcdir/check_python_exception_pass.sh"
 
-. "$srcdir/check_python_pylint.sh"
+"$srcdir/check_python_pylint.sh"
 
 #"$srcdir/python3.sh"
 
 # this is usually run after build, no point testing again
 #. "$srcdir/check_sbt_build.sh"
 
-. "$srcdir/check_bash_syntax.sh"
-. "$srcdir/check_bash_references.sh" . setup lib
+"$srcdir/check_bash_syntax.sh"
+"$srcdir/check_bash_references.sh" . setup lib
 
-. "$srcdir/check_bash_arrays.sh"
+"$srcdir/check_bash_arrays.sh"
 
 "$srcdir/check_readme_badges.sh"
 
@@ -116,16 +116,16 @@ if ! is_CI &&
     "$srcdir/check_shippable_readme_ids.sh"
 fi
 
-. "$srcdir/check_tld_chars.sh"
+"$srcdir/check_tld_chars.sh"
 
 # too heavy to run all the time, isExcluded on every file has really bad performance
-. "$srcdir/check_whitespace.sh"
+"$srcdir/check_whitespace.sh"
 
-. "$srcdir/check_no_tabs.sh"
+"$srcdir/check_no_tabs.sh"
 
-. "$srcdir/check_dockerfiles.sh"
+"$srcdir/check_dockerfiles.sh"
 
-. "$srcdir/check_docker_compose.sh"
+"$srcdir/check_docker_compose.sh"
 
 # TODO: enable later and tweak configs
 #. "$srcdir/check_ansible_playbooks.sh"
