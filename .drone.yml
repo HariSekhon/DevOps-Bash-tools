@@ -23,21 +23,22 @@
 #
 # drone exec [--pipeline default] [--include=thisstep] [--exclude=thatstep]
 
+---
 kind: pipeline
 type: docker
 name: default
 
 steps:
-- name: build
-  image: ubuntu:18.04
-#  environment:
-#    DEBUG: 1
-  commands:
-  - setup/ci_bootstrap.sh
-  - make init
-  - make ci
-  - make test
+  - name: build
+    image: ubuntu:18.04
+    #environment:
+    #  DEBUG: 1
+    commands:
+      - setup/ci_bootstrap.sh
+      - make init
+      - make ci
+      - make test
 
 trigger:
   branch:
-  - master
+    - master
