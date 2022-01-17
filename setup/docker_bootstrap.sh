@@ -24,6 +24,9 @@
 #   curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/docker_bootstrap.sh | sh
 
 set -eux
+if [ "${SHELL##*/}" = "bash" ]; then
+    set -o pipefail
+fi
 
 basedir="/github"
 
@@ -38,14 +41,16 @@ mkdir -pv "$basedir"
 
 cd "$basedir"
 
-if type -P apt-get >/dev/null 2>&1; then
-    export DEBIAN_FRONTEND=noninteractive
-    apt-get update
-    apt-get install -y curl
-elif type -P yum >/dev/null 2>&1; then
-    yum install -y curl
-elif type -P apk >/dev/null 2>&1; then
-    apk add --no-cache curl
+if ! type -P curl >/dev/nulll 2>&1; then
+    if type -P apt-get >/dev/null 2>&1; then
+        export DEBIAN_FRONTEND=noninteractive
+        apt-get update
+        apt-get install -y curl
+    elif type -P yum >/dev/null 2>&1; then
+        yum install -y curl
+    elif type -P apk >/dev/null 2>&1; then
+        apk add --no-cache curl
+    fi
 fi
 
 curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
