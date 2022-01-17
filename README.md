@@ -599,6 +599,7 @@ etc.
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
+  - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts.
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout all my repos
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
