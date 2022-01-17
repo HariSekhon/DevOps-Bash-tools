@@ -99,7 +99,7 @@ WARN_ONLY=1 "$srcdir/check_python_asserts.sh"
 #. "$srcdir/check_sbt_build.sh"
 
 "$srcdir/check_bash_syntax.sh"
-"$srcdir/check_bash_references.sh" . setup lib
+"$srcdir/check_bash_references.sh" . $(for x in setup lib; do [ -f "$x" ] && echo "$x"; done)
 
 "$srcdir/check_bash_arrays.sh"
 
