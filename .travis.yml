@@ -19,6 +19,7 @@
 
 # https://docs.travis-ci.com/user/customizing-the-build/
 
+---
 version: ~> 1.0
 
 # ==============================================================
@@ -67,11 +68,11 @@ before_cache:
 cache:
   - pip
   - directories:
-    - $HOME/.cache
-    - $HOME/.cpan
-    - $HOME/.cpanm
-    - $HOME/.gem
-    - pytools_checks
+      - $HOME/.cache
+      - $HOME/.cpan
+      - $HOME/.cpanm
+      - $HOME/.gem
+      - pytools_checks
 
 # ==============================================
 # https://docs.travis-ci.com/user/job-lifecycle/
