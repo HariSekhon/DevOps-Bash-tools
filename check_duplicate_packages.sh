@@ -32,6 +32,10 @@ for x in "$@"; do
     esac
 done
 
+section "Duplicate Packages Check"
+
+start_time="$(start_timer)"
+
 found=0
 
 find_dups(){
@@ -79,3 +83,6 @@ fi
 if [ $found -gt 0 ]; then
     exit 1
 fi
+
+time_taken "$start_time"
+section2 "Passed - no duplicate packages found"
