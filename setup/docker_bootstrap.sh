@@ -57,11 +57,11 @@ fi
 # bourne shell won't detect subshell failure, so better to break this to detectable parts
 #curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
 
+trap 'command rm -fv /bootstrap.sh /clean_caches.sh' INT QUIT TRAP ABRT TERM EXIT
+
 curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" > /bootstrap.sh
 
 sh bootstrap.sh
-
-rm bootstrap.sh
 
 if [ "$repo" = pytools ]; then
     ln -sv "$basedir/python-tools" "$basedir/pytools"
@@ -74,5 +74,3 @@ make test
 curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > clean_cache.sh
 
 sh clean_caches.sh
-
-rm clean_caches.sh
