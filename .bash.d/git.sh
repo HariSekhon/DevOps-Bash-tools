@@ -573,7 +573,7 @@ gitu(){
             if [ -z "$diff" ]; then
                 continue
             fi
-            echo "$diff" | more -R
+            echo "$diff" | more -FR
             echo
             read -r -p "Hit enter to commit '$changed_filename' or Control-C to cancel" _
             echo
