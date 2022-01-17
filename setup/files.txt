@@ -24,6 +24,7 @@
 .config/flake8
 .config/htop/htoprc
 .config/pycodestyle
+.config/yamllint/config
 .customize_environment
 .editorconfig
 .gemrc
