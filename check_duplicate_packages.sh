@@ -62,7 +62,7 @@ if [ -n "$*" ]; then
 else
     found_files=0
     for x in rpm deb apk brew portage; do
-        package_files="$(find . -maxdepth 3 -name "$x*-packages*.txt" | grep -v desktop)"
+        package_files="$(find . -maxdepth 3 -name "$x*-packages*.txt" | grep -v desktop || :)"
         if [ -z "$package_files" ]; then
             continue
         fi
