@@ -12,10 +12,12 @@
 #  http://www.linkedin.com/in/harisekhon
 #
 
+# sourced by check_dockefiles.sh
+
 ignored:
-  # Maintainer is fine
-  - DL4000
-  # dev images build on upstream latest tag
+  # Maintainer is deprecated
+  #- DL4000
+  # FROM latest - dev images build on upstream latest tag intentionally
   - DL3007
   # apk add versions need not be pinned
   - DL3018
