@@ -61,7 +61,7 @@ trap 'command rm -fv /bootstrap.sh /clean_caches.sh' INT QUIT TRAP ABRT TERM EXI
 
 curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" > /bootstrap.sh
 
-sh bootstrap.sh
+sh /bootstrap.sh
 
 if [ "$repo" = pytools ]; then
     ln -sv "$basedir/python-tools" "$basedir/pytools"
@@ -71,6 +71,6 @@ cd "$basedir/$repo"
 
 make test
 
-curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > clean_cache.sh
+curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > /clean_cache.sh
 
-sh clean_caches.sh
+sh /clean_caches.sh
