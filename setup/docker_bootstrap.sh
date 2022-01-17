@@ -24,7 +24,7 @@
 #   curl https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/docker_bootstrap.sh | sh
 
 set -eux
-if [ "${SHELL##*/}" = "bash" ]; then
+if [ -n "${SHELL:-}" ] && [ "${SHELL##*/}" = "bash" ]; then
     set -o pipefail
 fi
 
@@ -53,7 +53,14 @@ if ! type -P curl >/dev/nulll 2>&1; then
     fi
 fi
 
-curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
+# bourne shell won't detect subshell failure, so better to break this to detectable parts
+#curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" | sh
+
+curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/bootstrap.sh" > /bootstrap.sh
+
+sh bootstrap.sh
+
+rm bootstrap.sh
 
 if [ "$repo" = pytools ]; then
     ln -sv "$basedir/python-tools" "$basedir/pytools"
@@ -63,4 +70,8 @@ cd "$basedir/$repo"
 
 make test
 
-curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh | sh
+curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > clean_cache.sh
+
+sh clean_caches.sh
+
+rm clean_caches.sh
