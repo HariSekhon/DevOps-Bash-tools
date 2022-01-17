@@ -26,6 +26,6 @@ shellcheck:
 
 # http://help.houndci.com/en/articles/2138524-golint
 golint:
-    enabled: false
+  enabled: false
 
 #fail_on_violations: true
