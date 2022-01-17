@@ -30,6 +30,11 @@ fi
 
 section "GitLab CI Yaml Lint Check"
 
+if [ -z "${GITLAB_TOKEN:-}" ]; then
+    echo "WARNING: \$GITLAB_TOKEN not found in environment and this API endpoint now requires authentication, skipping..." >&2
+    exit 0
+fi
+
 start_time="$(start_timer)"
 
 while read -r yaml; do
