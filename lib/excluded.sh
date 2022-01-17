@@ -41,7 +41,7 @@ isExcluded(){
     is_CI && return 1
     # shellcheck disable=SC2230
     if type -P git &>/dev/null; then
-        commit="$(git log "$prog" | head -n1 | grep 'commit')"
+        commit="$(git log "$prog" 2>/dev/null | head -n1 | grep 'commit' || :)"
         if [ -z "$commit" ]; then
             return 0
         fi
