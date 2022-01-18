@@ -30,8 +30,9 @@ isExcluded(){
     # shellcheck disable=SC2049
     [[ "$prog" =~ ^\* ]] && return 0
     [[ "$prog" =~ ^# ]]  && return 0
-    [[ "$prog" =~ /\. ]] && return 0
-    [[ "$prog" =~ ^\.[[:alnum:]] ]] && return 0
+    #[[ "$prog" =~ /\. ]] && return 0
+    [[ "$prog" =~ /\.git ]] && return 0
+    [[ "$prog" =~ ^\.git ]] && return 0
     [[ "$prog" =~ /templates/ ]] && return 0
     [[ "$prog" =~ TODO ]] && return 0
     [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
@@ -41,7 +42,7 @@ isExcluded(){
     is_CI && return 1
     # shellcheck disable=SC2230
     if type -P git &>/dev/null; then
-        commit="$(git log "$prog" | head -n1 | grep 'commit')"
+        commit="$(git log "$prog" 2>/dev/null | head -n1 | grep 'commit' || :)"
         if [ -z "$commit" ]; then
             return 0
         fi

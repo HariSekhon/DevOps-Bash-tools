@@ -60,6 +60,8 @@ domain_regex='\b(([A-Za-z0-9](-?[A-Za-z0-9])*)\.)+[A-Za-z]{2,}\b'
 email_regex='\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
 # shellcheck disable=SC2034
 ip_regex='[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
+# shellcheck disable=SC2034
+url_regex='https?://[[:alnum:]@:%\._\+~#?&/=-]+'
 
 wrong_port=1111
 
@@ -1090,7 +1092,7 @@ is_float(){
 }
 
 parse_export_key_value(){
-    local env_vars="$1"
+    local env_var="$1"
     env_var="${env_var%%#*}"
     env_var="${env_var##[[:space:]]}"
     env_var="${env_var##export}"
@@ -1099,7 +1101,9 @@ parse_export_key_value(){
     if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
         die "invalid environment key=value argument given: $env_var"
     fi
+    # shellcheck disable=SC2034
     key="${env_var%%=*}"
+    # shellcheck disable=SC2034
     value="${env_var#*=}"
 }
 

@@ -16,6 +16,7 @@
 
 # https://docs.gocd.org/current/configuration/configuration_reference.html
 
+---
 format_version: 3
 pipelines:
   devops-bash-tools:
@@ -30,60 +31,60 @@ pipelines:
         auto_update: true
         branch: master
     stages:
-    - build-and-test:
-        fetch_materials: true
-        keep_artifacts: false
-        clean_workspace: false
-        approval:
-          type: success
-          allow_only_on_success: false
-        jobs:
-#          apt-update:
-#            timeout: 10
-#            tasks:
-#            - exec:
-#                command: apt
-#                arguments:
-#                  - update
-#                run_if: passed
-#          install-make:
-#            timeout: 10
-#            tasks:
-#            - exec:
-#                command: apt
-#                arguments:
-#                  - install
-#                  - -qy
-#                  - git
-#                  - make
-#                run_if: passed
-          ci-bootstrap:
-            timeout: 10
-            tasks:
-            - exec:
-                command: setup/ci_bootstrap.sh
-                run_if: passed
-          init:
-            timeout: 10
-            tasks:
-            - exec:
-                command: make
-                arguments:
-                  - init
-                run_if: passed
-          build:
-            timeout: 60
-            tasks:
-            - exec:
-                command: make
-                arguments:
-                  - ci
-                run_if: passed
-          test:
-            timeout: 60
-            tasks:
-            - exec:
-                command: make
-                arguments:
-                  - test
-                run_if: passed
+      - build-and-test:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            #apt-update:
+            #  timeout: 10
+            #  tasks:
+            #  - exec:
+            #      command: apt
+            #      arguments:
+            #        - update
+            #      run_if: passed
+            #install-make:
+            #  timeout: 10
+            #  tasks:
+            #  - exec:
+            #      command: apt
+            #      arguments:
+            #        - install
+            #        - -qy
+            #        - git
+            #        - make
+            #      run_if: passed
+            ci-bootstrap:
+              timeout: 10
+              tasks:
+                - exec:
+                    command: setup/ci_bootstrap.sh
+                    run_if: passed
+            init:
+              timeout: 10
+              tasks:
+                - exec:
+                    command: make
+                    arguments:
+                      - init
+                    run_if: passed
+            build:
+              timeout: 60
+              tasks:
+                - exec:
+                    command: make
+                    arguments:
+                      - ci
+                    run_if: passed
+            test:
+              timeout: 60
+              tasks:
+                - exec:
+                    command: make
+                    arguments:
+                      - test
+                    run_if: passed

@@ -87,3 +87,4 @@ fi
 
 time_taken "$start_time"
 section2 "Passed - no duplicate packages found"
+echo

@@ -14,45 +14,45 @@
 #
 
 resources:
-- name: github
-  icon: github-circle
-  type: git
-  source:
-    uri: https://github.com/harisekhon/devops-bash-tools
-    branch: master
-#- name: daily
-#  type: time
-#  source:
-#    interval: 1d
+  - name: github
+    icon: github-circle
+    type: git
+    source:
+      uri: https://github.com/harisekhon/devops-bash-tools
+      branch: master
+  #- name: daily
+  #  type: time
+  #  source:
+  #    interval: 1d
 
 # https://concourse-ci.org/golang-library-example.html
 
 jobs:
-- name: build
-  public: false
-  plan:
-    - get: github  # from resource above
-      trigger: true
-      #version: every  # build every git commit, default: latest
-    - task: build
-      config:
-        platform: linux
-        image_resource:
-          type: docker-image
-          source:
-            repository: ubuntu
-            tag: latest
-        inputs:
-          - name: github
-            path: code
-        params:
-          CONCOURSE: 1
-        run:
-          path: /bin/bash
-          args:
-            - -c
-            - |
-              cd code &&
-              setup/ci_bootstrap.sh &&
-              make init &&
-              make ci test
+  - name: build
+    public: false
+    plan:
+      - get: github  # from resource above
+        trigger: true
+        #version: every  # build every git commit, default: latest
+      - task: build
+        config:
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: ubuntu
+              tag: latest
+          inputs:
+            - name: github
+              path: code
+          params:
+            CONCOURSE: 1
+          run:
+            path: /bin/bash
+            args:
+              - -c
+              - |
+                cd code &&
+                setup/ci_bootstrap.sh &&
+                make init &&
+                make ci test

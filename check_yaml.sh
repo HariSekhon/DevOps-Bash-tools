@@ -39,6 +39,8 @@ fi
 
 section "YAML Syntax Checks"
 
+export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
+
 start_time="$(start_timer)"
 
 if [ -n "${NOSYNTAXCHECK:-}" ]; then

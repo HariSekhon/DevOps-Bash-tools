@@ -62,6 +62,11 @@ fi
 
 if [ -z "${NO_YAML_CHECK:-}" ]; then
     "$srcdir/check_yaml.sh"
+    if [ -n "${VALIDATE_YAML_BASIC:-}" ]; then
+        if type -P validate_yaml.py &>/dev/null; then
+            validate_yaml.py .
+        fi
+    fi
 fi
 
 "$srcdir/check_bash_duplicate_defs.sh" || :
