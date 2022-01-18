@@ -72,7 +72,7 @@ build:
 	@echo ================
 	@$(MAKE) git-summary
 	@$(MAKE) init
-	@$(MAKE) system-packages aws
+	@$(MAKE) system-packages aws pip
 
 .PHONY: init
 init: git
