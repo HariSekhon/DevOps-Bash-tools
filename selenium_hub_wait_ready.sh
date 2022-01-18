@@ -65,19 +65,19 @@ hub_url="${hub_url%/wd/hub}"
 
 if [ -n "$max_secs" ] &&
    [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
-	timestamp "setting timeout to $max_secs secs"
-	TMOUT="$max_secs"
-	# shellcheck disable=SC2064
-	trap_cmd "echo 'Timed out waiting for Selenium Grid Hub to come up after $max_secs secs' >&2; exit 1"
+    timestamp "setting timeout to $max_secs secs"
+    TMOUT="$max_secs"
+    # shellcheck disable=SC2064
+    trap_cmd "echo 'Timed out waiting for Selenium Grid Hub to come up after $max_secs secs' >&2; exit 1"
 fi
 
 while :; do
-	status="$(curl -sSL "$hub_url/wd/hub/status")"
-	ready="$(jq -r '.value.ready' <<< "$status" || die "FAILED to parse Selenium Hub response: $status" >&2)"
-	if [[ "$ready" =~ true ]]; then
-		timestamp "Selenium Grid Hub is up"
-		break
-	fi
+    status="$(curl -sSL "$hub_url/wd/hub/status")"
+    ready="$(jq -r '.value.ready' <<< "$status" || die "FAILED to parse Selenium Hub response: $status" >&2)"
+    if [[ "$ready" =~ true ]]; then
+        timestamp "Selenium Grid Hub is up"
+        break
+    fi
     timestamp 'Waiting for Selenium Grid Hub to be ready'
     sleep 1
 done
