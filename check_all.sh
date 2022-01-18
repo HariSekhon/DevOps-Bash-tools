@@ -77,6 +77,14 @@ fi
 
 "$srcdir/check_non_executable_scripts.sh"
 
+"$srcdir/check_bash_syntax.sh"
+
+# want splitting
+# shellcheck disable=SC2046
+"$srcdir/check_bash_references.sh" . $(for x in setup lib; do [ -f "$x" ] && echo "$x"; done)
+
+"$srcdir/check_bash_arrays.sh"
+
 "$srcdir/check_tests_run_qualified.sh"
 
 "$srcdir/check_makefiles.sh"
@@ -137,14 +145,6 @@ fi
 
 # this is usually run after build, no point testing again
 #. "$srcdir/check_sbt_build.sh"
-
-"$srcdir/check_bash_syntax.sh"
-
-# want splitting
-# shellcheck disable=SC2046
-"$srcdir/check_bash_references.sh" . $(for x in setup lib; do [ -f "$x" ] && echo "$x"; done)
-
-"$srcdir/check_bash_arrays.sh"
 
 "$srcdir/check_readme_badges.sh"
 
