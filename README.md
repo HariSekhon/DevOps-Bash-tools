@@ -39,7 +39,6 @@ doesn't detect shell code properly
 <!-- TODO: fix
 [![DockerHub Build Automated](https://img.shields.io/docker/automated/harisekhon/bash-tools?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![Docker Build Status](https://img.shields.io/docker/cloud/build/harisekhon/bash-tools?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools/builds)
-[![MicroBadger](https://images.microbadger.com/badges/image/harisekhon/bash-tools.svg)](http://microbadger.com/#/images/harisekhon/bash-tools)
 -->
 
 <!--
