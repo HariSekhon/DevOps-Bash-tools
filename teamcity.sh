@@ -424,7 +424,7 @@ if [ -f "$vcs_config" ]; then
     # TODO: get the project name from the config file
     "$srcdir/teamcity_create_project.sh" "$project"
     echo
-	vcs_id="$(jq -r .id < "$vcs_config")"
+    vcs_id="$(jq -r .id < "$vcs_config")"
     project_id="$(jq -r .project.id < "$vcs_config")"
     if "$srcdir/teamcity_vcs_roots.sh" | grep -qi "^${vcs_id}[[:space:]]"; then
         timestamp "VCS root '$vcs_id' already exists, skipping creation"
@@ -439,7 +439,7 @@ if [ -f "$vcs_config" ]; then
     fi
     echo
     timestamp "Configuring project Versioned Settings to import all buildTypes and VCS"
-	"$srcdir/teamcity_project_set_versioned_settings.sh" "$project"
+    "$srcdir/teamcity_project_set_versioned_settings.sh" "$project"
     echo
     echo
     timestamp "NOTICE: you need to enable VCS authentication for write access to be able to sync project configs:"

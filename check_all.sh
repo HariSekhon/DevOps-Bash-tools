@@ -50,8 +50,6 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_symlinks.sh"
 
-"$srcdir/check_no_tabs.sh"
-
 "$srcdir/check_aws_no_git_credentials.sh"
 
 "$srcdir/check_git_no_merge_remnants.sh"
@@ -81,6 +79,14 @@ fi
 "$srcdir/check_duplicate_dependencies.sh"
 
 "$srcdir/check_non_executable_scripts.sh"
+
+"$srcdir/check_bash_syntax.sh"
+
+# want splitting
+# shellcheck disable=SC2046
+"$srcdir/check_bash_references.sh" . $(for x in setup lib; do [ -f "$x" ] && echo "$x"; done)
+
+"$srcdir/check_bash_arrays.sh"
 
 "$srcdir/check_tests_run_qualified.sh"
 
@@ -143,14 +149,6 @@ fi
 # this is usually run after build, no point testing again
 #. "$srcdir/check_sbt_build.sh"
 
-"$srcdir/check_bash_syntax.sh"
-
-# want splitting
-# shellcheck disable=SC2046
-"$srcdir/check_bash_references.sh" . $(for x in setup lib; do [ -f "$x" ] && echo "$x"; done)
-
-"$srcdir/check_bash_arrays.sh"
-
 "$srcdir/check_readme_badges.sh"
 
 "$srcdir/check_circleci_config.sh"
@@ -165,6 +163,8 @@ if ! is_CI &&
 fi
 
 "$srcdir/check_tld_chars.sh"
+
+"$srcdir/check_no_tabs.sh"
 
 # too heavy to run all the time, isExcluded on every file has really bad performance
 "$srcdir/check_whitespace.sh"

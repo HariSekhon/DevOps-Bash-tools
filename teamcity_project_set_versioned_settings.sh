@@ -37,9 +37,9 @@ If you want to force feature replacement of an already existing versionSetting c
 
 See Also:
 
-	teamcity_api.sh - for connection and authentication requirements, used by this script
-	teamcity_projects.sh - lists projects and their IDs
-	teamcity_vcs_roots.sh - lists VCS roots and their IDs
+    teamcity_api.sh - for connection and authentication requirements, used by this script
+    teamcity_projects.sh - lists projects and their IDs
+    teamcity_vcs_roots.sh - lists VCS roots and their IDs
 "
 
 # used by usage() in lib/utils.sh

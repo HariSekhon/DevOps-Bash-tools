@@ -108,10 +108,10 @@ imagemagick
 ipcalc
 iperf
 ipython
+jsonlint  # in brew-packages.txt
 jenkins-x/jx/jx
 #jpeg
 #jq  # in brew-packages.txt
-jsonlint
 jython
 kompose
 #kubectl  # old version, download binary or use GCloud SDK version
@@ -223,7 +223,7 @@ watch
 #x265
 #xvid
 xz
-yamllint
+yamllint  # in brew-packages.txt
 youtube-dl
 zsh
 

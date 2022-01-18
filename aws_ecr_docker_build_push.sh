@@ -26,12 +26,12 @@ Builds the local docker image using the Dockerfile in the current directory and 
 
 Tags the docker image with the following and pushes all tags to AWS ECR:
 
-	- latest
-	- Git full hashref
-	- Git branch
+    - latest
+    - Git full hashref
+    - Git branch
     - any Git tags, if found, for easy versioning support
-	- date (YYYY-MM-DD)
-	- datetimestamp (YYYYMMDDThhmmssZ] in UTC
+    - date (YYYY-MM-DD)
+    - datetimestamp (YYYYMMDDThhmmssZ] in UTC
 
 Requires AWS CLI to be installed and configured, as well as Docker to be running locally
 "
@@ -87,13 +87,13 @@ docker build -t "$ECR/$REPO:$hashref" .
 echo
 
 for tag in latest $tags; do
-	echo "* Tagging as '$tag'"
+    echo "* Tagging as '$tag'"
     docker tag "$ECR/$REPO:$hashref" "$ECR/$REPO:$tag"
-	echo
+    echo
 done
 
 for tag in "$hashref" latest $tags; do
-	echo "* Pushing tag '$tag'"
+    echo "* Pushing tag '$tag'"
     docker push "$ECR/$REPO:$tag"
-	echo
+    echo
 done

@@ -97,14 +97,14 @@ echo
 
 budget_name="$(jq -r .BudgetName < "$srcdir/aws_budget.json")"
 if grep -Fxq "$budget_name" <<< "$budgets"; then
-	if [ -n "${REPLACE_BUDGET:-}" ]; then
-		timestamp "deleting budget '$budget' to replace it"
-		aws budgets delete-budget --account-id "$account_id" --budget-name "$budget_name"
-		echo
-	else
-		echo "AWS Budget '$budget' already exists - you must delete it before running this"
-		exit 0
-	fi
+    if [ -n "${REPLACE_BUDGET:-}" ]; then
+        timestamp "deleting budget '$budget' to replace it"
+        aws budgets delete-budget --account-id "$account_id" --budget-name "$budget_name"
+        echo
+    else
+        echo "AWS Budget '$budget' already exists - you must delete it before running this"
+        exit 0
+    fi
 fi
 
 timestamp "Creating AWS Budget with $budget USD budget and 80% forecasted threshold alarm"

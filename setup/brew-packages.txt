@@ -26,6 +26,7 @@ gnu-sed
 gnu-tar
 go
 grep  # gnu version better than Mac version
+jsonlint
 jq
 jwhois
 openssl
@@ -36,6 +37,7 @@ shellcheck
 #terraform # old 0.11 masking newer 0.12 from install_terraform.sh
 wget
 whois
+yamllint
 yq
 
 # Mac already provides unzip - brew is keg only and doesn't link anyway to avoid clashes

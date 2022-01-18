@@ -29,6 +29,11 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 section "Travis CI Yaml Lint Check"
 
+if ! [ -f .travis.yml ]; then
+    echo "No .travis.yml found, skipping Travis CI check"
+    exit 0
+fi
+
 start_time="$(start_timer)"
 
 #if is_travis; then

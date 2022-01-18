@@ -166,7 +166,7 @@ kustomize_kubernetes_deploy(){
     kubectl annotate "deployment/$app" -n "$namespace" kubernetes.io/change-cause="$(date '+%F %H:%M')  CI deployment: app $app build ${BUILD:-}"
     local deployments
     deployments="$(kubectl get deploy,sts -n "$namespace" --output name)"
-	# $deployment contains deployment.apps/ or statefulset.apps/ prefixes
+    # $deployment contains deployment.apps/ or statefulset.apps/ prefixes
     trap 'echo "ERROR: kubernetes $namespace $deployment is BROKEN - possible misconfiguration or bad code is preventing pods from coming up after a reasonable timeframe of retries, please see GKE container logs" >&2' EXIT
     # using a global shared timeout rather than a --timeout="${timeout}s" for each kubectl rollout as that multiplies by the amount of deployments and statefulsets which should have been working
     TMOUT=600
