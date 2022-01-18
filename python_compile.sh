@@ -50,16 +50,16 @@ start_time="$(start_timer)"
 # -3  - warn on Python 3 incompatibilies that 2to3 cannot easily fix
 # -t  - warn on inconsistent use of tabs
 
-opts=""
+opts=()
 
 if "$python" -V 2>&1 | grep -q 'Python 2'; then
-    opts="$opts -3"
+    opts+=(-3)
 fi
 
 if ! is_travis &&
    ! type -P pypy &>/dev/null &&
    ! type -P python | grep -qi pypy; then
-    opts="$opts -t"
+       opts+=(-t)
 fi
 
 if [ -n "${NOCOMPILE:-}" ]; then
@@ -70,14 +70,14 @@ else
     if [ -n "${FAST:-}" ]; then
         # want opt expansion
         # shellcheck disable=SC2086
-        "$python" $opts -m compileall "${1:-.}" || :
+        "$python" ${opts:+"${opts[@]}"} -m compileall "${1:-.}" || :
     else
         for x in $filelist; do
             type isExcluded &>/dev/null && isExcluded "$x" && continue
             echo "compiling $x"
             # want opt expansion
             # shellcheck disable=SC2086
-            "$python" -O $opts -m py_compile "$x"
+            "$python" -O ${opts:+"${opts[@]}"} -m py_compile "$x"
         done
     fi
 fi
