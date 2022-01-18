@@ -50,8 +50,6 @@ bash_tools_start_time="$(start_timer)"
 
 "$srcdir/check_symlinks.sh"
 
-"$srcdir/check_no_tabs.sh"
-
 "$srcdir/check_aws_no_git_credentials.sh"
 
 "$srcdir/check_git_no_merge_remnants.sh"
@@ -160,6 +158,8 @@ if ! is_CI &&
 fi
 
 "$srcdir/check_tld_chars.sh"
+
+"$srcdir/check_no_tabs.sh"
 
 # too heavy to run all the time, isExcluded on every file has really bad performance
 "$srcdir/check_whitespace.sh"
