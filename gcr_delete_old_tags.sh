@@ -55,6 +55,8 @@ num_args 2 "$@"
 
 image_tags="$("$srcdir/gcr_tags_old.sh" "$@")"
 
+days="$2"
+
 if [ -z "$image_tags" ]; then
     echo "No image:tags older than $days old"
     exit 0
