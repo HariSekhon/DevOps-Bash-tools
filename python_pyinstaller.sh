@@ -37,14 +37,14 @@ section "Compiling and bundling Python code using PyInstaller"
 
 start_time="$(start_timer)"
 
-opts="${PYINSTALLER_OPTS:-}"
+opts=(${PYINSTALLER_OPTS:-})
 
-opts="$opts -y"
+opts+=(-y)
 if [ -d pylib ]; then
-    opts="$opts --paths pylib"
+    opts+=(--paths pylib)
     if [ -d pylib/resources ]; then
         for filename in pylib/resources/*; do
-            opts="$opts --add-data $filename:resources"
+            opts+=(--add-data "$filename:resources")
         done
     fi
 fi
@@ -54,7 +54,7 @@ for filename in $filelist; do
     echo "compiling $filename => dist/$filename"
     # want opt expansion
     # shellcheck disable=SC2086
-    pyinstaller $opts "$filename"
+    pyinstaller ${opts:+"${opts[@]}"} "$filename"
     echo
 done
 
