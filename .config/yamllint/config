@@ -24,3 +24,9 @@ rules:
   line-length: disable
   comments: disable
   comments-indentation: disable
+  #indentation:
+  #  ignore: |
+  #    vagrant/kubernetes/calico.yaml
+  #empty-lines:
+  #  ignore: |
+  #    vagrant/kubernetes/calico.yaml
