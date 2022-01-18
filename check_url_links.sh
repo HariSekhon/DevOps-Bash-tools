@@ -37,7 +37,7 @@ section "URL Link Checks"
 
 start_time="$(start_timer)"
 
-startpath="${1:-}"
+startpath="${1:-.}"
 shift || :
 
 broken_links=0
