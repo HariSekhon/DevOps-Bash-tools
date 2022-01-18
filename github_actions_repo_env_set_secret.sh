@@ -87,6 +87,8 @@ add_secret(){
     # XXX: there is some kind of bug in GitHub CLI - the secret doesn't work when fed through stdin, only through --body
     #      https://github.com/cli/cli/issues/5031
     #command gh secret set -R "$owner_repo" --env "$environment_name" "$key" <<< "$value"
+    # shellcheck disable=SC2154
+    # $value is defined in parse_export_key_value()
     command gh secret set -R "$owner_repo" --env "$environment_name" "$key" --body "$value"
 }
 
