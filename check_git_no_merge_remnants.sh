@@ -36,7 +36,9 @@ regex='^([<]<<<<<<|>>>>>>[>])'
 
 echo "searching for '$regex' under $PWD:"
 echo
-if grep -IER "$regex" --devices=skip . 2>/dev/null; then
+# slow, may scan filesystem containing large files - can waste minutes of time
+#if grep -IER "$regex" --devices=skip --exclude-dir={.git} . 2>/dev/null; then
+if git grep -IE "$regex" . 2>/dev/null; then
     echo
     echo "FOUND Git / Diff merge remnants!"
     exit 1
