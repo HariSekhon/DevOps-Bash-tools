@@ -45,7 +45,6 @@ broken_links=0
 check_url_links(){
     local filename="$1"
     # shellcheck disable=SC2154
-    grep -Eo "$url_regex" "$filename" |
     while read -r url; do
         if ! curl -sSI "$url" >/dev/null; then
             ((broken_links+=1))
@@ -53,7 +52,7 @@ check_url_links(){
             echo "Broken Link: $url" >&2
         fi
         echo -n .
-    done
+    done < <(grep -Eo "$url_regex" "$filename")
 }
 
 find -L "$startpath" -type f "$@" |
