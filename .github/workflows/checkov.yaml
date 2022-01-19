@@ -1,0 +1,42 @@
+#
+#  Author: Hari Sekhon
+#  Date: Tue Feb 4 09:53:28 2020 +0000
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/harisekhon/templates
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                 C h e c k o v   G i t H u b   W o r k f l o w
+# ============================================================================ #
+
+# Static analysis of Terraform code - publishes report to GitHub Security tab
+
+# https://github.com/bridgecrewio/checkov-action
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+
+jobs:
+  checkov:
+    name: Checkov
+    uses: HariSekhon/GitHub-Actions/.github/workflows/checkov.yaml@master
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
