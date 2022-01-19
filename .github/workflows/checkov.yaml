@@ -19,6 +19,9 @@
 
 # https://github.com/bridgecrewio/checkov-action
 
+---
+name: Checkov
+
 on:
   push:
     branches:
