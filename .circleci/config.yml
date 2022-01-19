@@ -34,7 +34,7 @@ jobs:
   build:
     docker:
       - image: cimg/base:2021.04
-    resource_class: medium
+    resource_class: small
     steps:
       - checkout
       - setup_remote_docker:
