@@ -30,7 +30,9 @@ rules:
   comments-indentation: disable
   colons:
     ignore: |
-      */test/test.yaml
+      #*/ doesn't work for pylib/test/test/.yaml - must be a bug
+      #*/test/test.yaml
+      *test/test.yaml
   indentation:
     ignore: |
       */vagrant/kubernetes/calico.yaml
