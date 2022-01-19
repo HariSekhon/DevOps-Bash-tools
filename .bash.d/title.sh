@@ -37,6 +37,7 @@ isscreen(){
 
 screentitle(){
     if isscreen; then
+        # shellcheck disable=SC1003
         printf '\033k%s\033\\' "${*:- }"
         # or
         # screen -X title "$*"
