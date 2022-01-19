@@ -14,9 +14,6 @@
 ---
 name: Alpine 3
 
-#env:
-#  DEBUG: 1
-
 on:
   push:
     branches:
@@ -26,21 +23,7 @@ on:
 
 jobs:
   build:
-    #name: build
-    timeout-minutes: 20
-    runs-on: ubuntu-latest
-    container: alpine:3
-    env:
-      repo: bash-tools
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-      - name: install git & make
-        run: apk add --no-cache git make
-      - name: init
-        run: make init
-      - name: build
-        run: make ci
-      - name: test
-        run: make test
+    name: build
+    uses: HariSekhon/GitHub-Actions/.github/workflows/alpine3.yaml@master
+    #with:
+    #  debug: 1
