@@ -17,11 +17,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# use .yamllint in $PWD or default to $srcdir/yamllint/config
-export XDG_CONFIG_HOME="$srcdir"
-
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
+
+# use .yamllint in $PWD or default to $srcdir/yamllint/config
+#export XDG_CONFIG_HOME="$srcdir"
+
+#export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
+export YAMLLINT_CONFIG_FILE="${YAMLLINT_CONFIG_FILE:-$srcdir/.yamllint.yaml}"
 
 #if [ $# -gt 0 ]; then
 #    filelist="$*"
@@ -38,9 +41,6 @@ if [ -z "$filelist" ]; then
 fi
 
 section "YAML Syntax Checks"
-
-#export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
-export YAMLLINT_CONFIG_FILE="${YAMLLINT_CONFIG_FILE:-$srcdir/.yamllint.yaml}"
 
 start_time="$(start_timer)"
 
@@ -67,7 +67,8 @@ else
         isExcluded "$x" && continue
         printf "%-${max_len}s " "$x:"
         set +eo pipefail
-        output="$(yamllint "$x")"
+        # doesn't pick up the config without an explicit -c ...
+        output="$(yamllint -c "$YAMLLINT_CONFIG_FILE" "$x")"
         # shellcheck disable=SC2181
         if [ $? -eq 0 ]; then
             echo "OK"
