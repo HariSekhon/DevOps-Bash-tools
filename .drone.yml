@@ -1,5 +1,5 @@
 ---
-# XXX: putting this separator causesfurther down with code causes a parsing bug in drone lint
+# XXX: putting this separator further down with code causes a parsing bug in drone lint
 #
 #  Author: Hari Sekhon
 #  Date: 2020-02-29 12:05:52 +0000 (Sat, 29 Feb 2020)
