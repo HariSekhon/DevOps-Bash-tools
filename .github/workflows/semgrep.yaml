@@ -34,7 +34,7 @@ on:
     - cron: '0 0 * * 1'
 
 jobs:
-  Semgrep:
+  semgrep:
     name: Semgrep
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
     permissions:
