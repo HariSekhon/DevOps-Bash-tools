@@ -26,6 +26,8 @@ else
 fi |
 grep -vi -e bash-tools \
          -e template \
+         -e jenkins \
+         -e github-actions \
          -e playlist \
          -e sql-scripts \
          -e sql-keywords \
