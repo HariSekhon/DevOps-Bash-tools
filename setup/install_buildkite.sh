@@ -29,8 +29,8 @@ section "Installing BuildKite Agent"
 export PATH="$PATH:/usr/local/bin"
 
 if is_linux; then
-	# unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
-	[ -n "${HOME:-}" ] || HOME=~
+    # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+    [ -n "${HOME:-}" ] || HOME=~
     export PATH="$PATH:$HOME/.buildkite-agent/bin"
 fi
 
