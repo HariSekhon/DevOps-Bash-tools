@@ -19,11 +19,26 @@ srcdir="$(dirname "$0")"
 
 cd "$srcdir"
 
-if [ -n "$*" ]; then
-    echo "$@"
-else
-    sed 's/#.*//; s/:/ /' ../../setup/repos.txt
-fi |
+sync_file(){
+    local filename="$1"
+    target="../../../$dir/.github/workflows/$filename"
+    if [ -f "$target.disabled" ]; then
+        target="$target.disabled"
+    fi
+    if [ -f "$target" ] || [ -n "${NEW:-}" ]; then
+        targetdir="${target%/*}"
+        mkdir -p -v "$targetdir"
+        echo "syncing $filename -> $target"
+        perl -p -e "s/(DevOps-)?Bash-tools/$repo/i" "$filename" > "$target"
+        if [[ "$repo" =~ nagios-plugins ]]; then
+            timeout=240
+            perl -pi -e "s/(^\\s*timeout-minutes:).*/\\1 $timeout/" "$target"
+            perl -pi -e 's/(^[[:space:]]+make$)/\1 build zookeeper/' "$target"
+        fi
+    fi
+}
+
+sed 's/#.*//; s/:/ /' ../../setup/repos.txt |
 grep -v -e bash-tools -e '^[[:space:]]*$' |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
@@ -34,23 +49,13 @@ while read -r repo dir; do
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    for filename in *.yaml; do
-        target="../../../$dir/.github/workflows/$filename"
-        if [ -f "$target.disabled" ]; then
-            target="$target.disabled"
-        fi
-        if [ -n "${ALL:-}" ] || grep -Eq '^[[:space:]]*(container|python-version):' "$filename"; then
-            if [ -n "${NEW:-}" ] || [ -f "$target" ]; then
-                echo "syncing $filename -> $target"
-                timeout=60
-                if [[ "$repo" =~ nagios-plugins ]]; then
-                    timeout=240
-                fi
-                sed "s/bash-tools/$repo/;s/timeout-minutes:.*/timeout-minutes: $timeout/" "$filename" > "$target"
-                if [ "$repo" = "nagios-plugins" ]; then
-                    perl -pi -e 's/(^[[:space:]]+make$)/\1 build zookeeper/' "$target"
-                fi
-            fi
-        fi
-    done
+    if [ $# -gt 0 ]; then
+        for filename in "$@"; do
+            sync_file "$filename"
+        done
+    else
+        for filename in *.yaml; do
+            sync_file "$filename"
+        done
+    fi
 done
