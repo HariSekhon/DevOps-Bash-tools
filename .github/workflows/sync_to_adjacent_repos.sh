@@ -21,6 +21,16 @@ cd "$srcdir"
 
 sync_file(){
     local filename="$1"
+    local repo="$2"
+    local dir="${3:-}"
+    if [ -z "$dir" ]; then
+        dir="$repo"
+    fi
+    dir="$(tr '[:upper:]' '[:lower:]' <<< "$dir")"
+    if ! [ -d "../../../$dir" ]; then
+        echo "WARNING: repo dir $dir not found, skipping..."
+        return 0
+    fi
     target="../../../$dir/.github/workflows/$filename"
     if [ -f "$target.disabled" ]; then
         target="$target.disabled"
@@ -41,21 +51,13 @@ sync_file(){
 sed 's/#.*//; s/:/ /' ../../setup/repos.txt |
 grep -v -e bash-tools -e '^[[:space:]]*$' |
 while read -r repo dir; do
-    if [ -z "$dir" ]; then
-        dir="$repo"
-    fi
-    repo="$(tr '[:upper:]' '[:lower:]' <<< "$repo")"
-    if ! [ -d "../../../$dir" ]; then
-        echo "WARNING: repo dir $dir not found, skipping..."
-        continue
-    fi
     if [ $# -gt 0 ]; then
         for filename in "$@"; do
-            sync_file "$filename"
+            sync_file "$filename" "$repo" "$dir"
         done
     else
         for filename in *.yaml; do
-            sync_file "$filename"
+            sync_file "$filename" "$repo" "$dir"
         done
     fi
 done
