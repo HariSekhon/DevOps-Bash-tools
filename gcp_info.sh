@@ -35,7 +35,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/gcp.sh"
 
-# shellcheck disable=SC2034,SC2154
+# shellcheck disable=SC2034,SC2154,SC1117
 usage_description="
 Lists GCP deployed resources in the current or specified GCP Project
 
