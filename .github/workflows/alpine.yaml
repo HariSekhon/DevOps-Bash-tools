@@ -30,18 +30,15 @@ jobs:
     timeout-minutes: 20
     runs-on: ubuntu-latest
     container: alpine
-    env:
-      repo: bash-tools
     steps:
-    # untars repo in docker container so git submodule update fails
-    #- uses: actions/checkout@v2
-    - name: install git & make
-      run: apk add --no-cache git make
-    - name: git clone
-      run: cd /tmp && git clone "https://github.com/harisekhon/$repo"
-    - name: init
-      run: cd "/tmp/$repo" && git submodule update --init --recursive
-    - name: build
-      run: cd "/tmp/$repo" && make ci
-    - name: test
-      run: cd "/tmp/$repo" && make test
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: install git & make
+        run: apk add --no-cache git make
+      - name: init
+        run: make init
+      - name: build
+        run: make ci
+      - name: test
+        run: make test
