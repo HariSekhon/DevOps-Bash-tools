@@ -20,6 +20,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 #. "$srcdir/lib/utils.sh"
 
+if [ -z "${SHIPPABLE_TOKEN:-}" ]; then
+    echo "Shippable token not set, skipping shippable check"
+    exit 0
+fi
 echo "Checking Shippable README.md Project Badge"
 # https://img.shields.io/shippable/5e52c634d79b7d00077bf5ed/master?label=Shippable)](https://app.shippable.com/github/HariSekhon/DevOps-Bash-tools/dashboard/jobs
 find . -name README.md -exec grep -Eo 'img.shields.io/shippable/.*app.shippable.com/[^/]+/[^/]+/[^/]+' {} \; |
