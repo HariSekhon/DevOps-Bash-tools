@@ -48,6 +48,11 @@ while read -r repo dir; do
     sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/ci.txt" |
     while read -r filename; do
         target="../$dir/$filename"
+        if [ -f "$target" ] || [ -n "${NEW:-}" ]; then
+            :
+        else
+            continue
+        fi
         mkdir -pv "${target%/*}"
         echo "syncing $filename -> $target"
         perl -pe "s/(devops-)*bash-tools/$repo/i" "$filename" > "$target"
