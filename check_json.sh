@@ -52,6 +52,7 @@ else
     ((max_len + 1))
     for x in $filelist; do
         isExcluded "$x" && continue
+        [[ "$x" =~ multirecord ]] && continue
         printf "%-${max_len}s " "$x:"
         set +eo pipefail
         output="$(jsonlint "$x")"
