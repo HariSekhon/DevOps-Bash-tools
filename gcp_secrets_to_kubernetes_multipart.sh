@@ -69,7 +69,7 @@ fi
 kubectl_cmd="kubectl create secret generic '$kubernetes_secret' -n '$namespace'"
 
 for gcp_secret; do
-    value="$("$srcdir/gcp_secret_get.sh" "$secret")"
+    value="$("$srcdir/gcp_secret_get.sh" "$gcp_secret")"
 
     # this is all really annoying because there is no right answer to this convention
     # because GCP Secret Manager won't let you use dots so mangle jwt-private-pem => jwt-private.pem
