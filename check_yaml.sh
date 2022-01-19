@@ -39,7 +39,8 @@ fi
 
 section "YAML Syntax Checks"
 
-export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
+#export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
+export YAMLLINT_CONFIG_FILE="$srcdir/.yamllint.yaml"
 
 start_time="$(start_timer)"
 
