@@ -37,7 +37,7 @@ section "Compiling and bundling Python code using PyInstaller"
 
 start_time="$(start_timer)"
 
-opts=(${PYINSTALLER_OPTS:-})
+opts=(${PYINSTALL_OPTS:+"$PYINSTALLER_OPTS"})
 
 opts+=(-y)
 if [ -d pylib ]; then
