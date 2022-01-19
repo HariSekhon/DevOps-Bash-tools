@@ -40,6 +40,7 @@ help_usage "$@"
 basedir="$PWD"
 
 
+# shellcheck disable=SC2103
 if [ $# -gt 0 ]; then
     for project_id in "$@"; do
         echo "$project_id"
