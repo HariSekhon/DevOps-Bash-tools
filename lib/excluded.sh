@@ -47,6 +47,11 @@ isExcluded(){
     [[ "$prog" =~ /inc/Module/.*\.pm ]] && return 0
     # imported, minimal editing restricted to essentials only
     [[ "$prog" =~ getawless.sh ]] && return 0
+    if [ -n "${EXCLUDE_FILES_REGEX:-}" ]; then
+        if [[ "$prog" =~ $EXCLUDE_FILES_REGEX ]]; then
+            return 0
+        fi
+    fi
     # this external git check is expensive, skip it when in CI as using fresh git checkouts
     is_CI && return 1
     # shellcheck disable=SC2230
