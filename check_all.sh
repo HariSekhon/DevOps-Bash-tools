@@ -48,6 +48,10 @@ bash_tools_start_time="$(start_timer)"
 # don't run this here, it needs to be called explicitly otherwise will fail 'make test deep-clean'
 #"$srcdir/check_docker_clean.sh"
 
+if [ -f tests/excluded.sh ]; then
+    export BASH_EXCLUDED_FILES_FUNCTION=tests/excluded.sh
+fi
+
 "$srcdir/check_symlinks.sh"
 
 "$srcdir/check_aws_no_git_credentials.sh"
