@@ -25,6 +25,7 @@ if type isExcluded &>/dev/null; then
 fi
 
 if [ -n "${BASH_EXCLUDE_FILES_FUNCTION:-}" ] &&
+   [ -f "$BASH_EXCLUDE_FILES_FUNCTION" ] &&
    [[ "$BASH_EXCLUDE_FILES_FUNCTION" =~ \.sh$ ]] &&
    grep -q 'isExcluded()' "$BASH_EXCLUDE_FILES_FUNCTION"; then
     # shellcheck disable=SC1090
