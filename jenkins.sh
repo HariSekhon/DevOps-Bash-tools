@@ -125,7 +125,11 @@ when_jenkins_up
 timestamp "Installing plugins"
 # would be slow to do this via jenkins-cli
 # sed 's/#.*//; s/:.*//; /^[[:space:]]*$/d' setup/jenkins-plugins.txt | while read plugin; do jenkins_cli.sh install-plugin "$plugin"; done
+#
+# Old: deprecated, but still more portable across existing versions
 docker-compose exec -T jenkins-server /usr/local/bin/install-plugins.sh < "$plugins_txt"
+# New: later switch to
+#docker-compose exec -T jenkins-server /bin/jenkins-plugin-cli -f "$plugins_txt"
 echo
 
 # if this fails then the the CLI commands will also fail because they use a similar mechanism to find the admin password from the container to authenticate with the Jenkins API
