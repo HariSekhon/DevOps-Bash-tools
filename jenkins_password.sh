@@ -36,6 +36,8 @@ elif docker ps &>/dev/null; then
     #JENKINS_PASSWORD="$(kubectl exec -ti -n jenkins "$pod" -- cat /var/jenkins_home/secrets/initialAdminPassword)"
 elif kubectl get secret -n jenkins jenkins &>/dev/null; then
     JENKINS_PASSWORD="$(kubectl get secret -n jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode)"
+elif [ -f /var/jenkins_home/secrets/initialAdminPassword ]; then
+    JENKINS_PASSWORD="$(cat /var/jenkins_home/secrets/initialAdminPassword)"
 fi
 
 if [ -z "${JENKINS_PASSWORD:-}" ]; then
