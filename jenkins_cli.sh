@@ -48,7 +48,11 @@ if [ -z "${JENKINS_PASSWORD:-}" ]; then
 fi
 
 if ! [ -s "$jar" ]; then
-    wget -O "$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
+    if type -P wget &>/dev/null; then
+        wget -cO "$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
+    else
+        curl -sSf >"$jar" "$JENKINS_URL/jnlpJars/jenkins-cli.jar"
+    fi
 fi
 
 # -s "$JENKINS_URL" is implicit
