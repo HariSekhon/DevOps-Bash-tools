@@ -30,8 +30,13 @@ unless running within Jenkins CI job or the following environment variables are 
 
 If running manually then these environment variables must be set:
 
-\$JENKINS_URL / \$JENKINS_HOST + \$JENKINS_PORT (default: 8080)
-\$JENKINS_USER_ID / \$JENKINS_USER
+\$JENKINS_URL (default: http://localhost:8080)
+        or
+    \$JENKINS_HOST (default: localhost)
+        and
+    \$JENKINS_PORT (default: 8080)
+
+\$JENKINS_USER_ID   / \$JENKINS_USER
 \$JENKINS_API_TOKEN / \$JENKINS_TOKEN /\$JENKINS_PASSWORD
 
 Only finds and checks files that match the name glob '*Jenkinsfile*' in the directory paths given, or under the current directory tree if no dirs are specified as args
