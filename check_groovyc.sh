@@ -33,7 +33,7 @@ help_usage "$@"
 directory="${1:-.}"
 shift ||:
 
-filelist="$(find "$directory" -maxdepth 2 -type f -iname '*.groovy' | sort)"
+filelist="$(find "$directory" -type f -iname '*.groovy' | sort)"
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
     exit 0
