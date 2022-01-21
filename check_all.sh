@@ -122,6 +122,14 @@ if [ -z "${NO_GRADLE_BUILD_CHECK:-}" ]; then
     "$srcdir/check_gradle_build.sh"
 fi
 
+if [ -z "${NO_GROOVY_CHECK:-}" ]; then
+    "$srcdir/check_groovyc.sh"
+fi
+
+if [ -z "${NO_JAVA_CHECK:-}" ]; then
+    "$srcdir/check_javac.sh"
+fi
+
 if [ -z "${NO_PERL_SYNTAX_CHECK:-}" ]; then
     "$srcdir/check_perl_syntax.sh"
 fi
