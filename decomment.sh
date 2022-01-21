@@ -30,13 +30,15 @@ for arg; do
     esac
 done
 
-if [ "$()" = "<" ]; then
+if [ "$(head -n1 "$@" | cut -f 1 | head -n1)" = "<" ]; then
     if type -P decomment-xml.pl &>/dev/null; then
         decomment-xml.pl "$@"
     else
         echo "decomment-xml.pl from DevOps Perl Tools repo not found in \$PATH - ensure you have downloaded and built it before running this against XML files"
         exit 1
     fi
+elif [ "$(head -n1 "$@" | cut -f 1-2 | head -n1)" = "--" ]; then
+    sed 's/--.*$//; /^[[:space:]]*$/d' "$@"
 else
     sed 's/#.*$//;
          s/^[[:space:]]*\/\/.*$//;
