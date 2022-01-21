@@ -66,26 +66,31 @@ echo
 
 echo "* Determining tags"
 hashref="$(git rev-parse HEAD)"
-#
+git_branch="$(git rev-parse --abbrev-ref HEAD)"
+git_tag="$(git tag --points-at HEAD)"
+# must use date -u switch since --utc only works on Linux and not Mac
+date="$(date -u '+%F')"
+timestamp="$(date -u '+%FT%H%M%SZ')"
+
 # adding tags:
 #
-# - git branch
-# - any git tags
-# - date
-# - datetimestamp
-#
-# must use date -u switch since --utc only works on Linux and not Mac
 tags="
-$(git rev-parse --abbrev-ref HEAD)
-$(git tag --points-at HEAD)
-$(date -u '+%F')
-$(date -u '+%FT%H%M%SZ')
+$git_branch
+$git_tag
+$date
+$timestamp
 "
 echo
 
 export DOCKER_BUILDKIT=1
 
-docker build -t "$ECR/$REPO:$hashref" . --cache-from "$ECR/$REPO:latest" --build-arg BUILDKIT_INLINE_CACHE=1
+docker build -t "$ECR/$REPO:$hashref" . \
+             --build-arg BUILDKIT_INLINE_CACHE=1 \
+             --cache-from "$ECR/$REPO:latest" \
+             --cache-from "$ECR/$REPO:$git_branch" \
+             ${git_tag:+--cache-from "$ECR/$REPO:$git_tag"} \
+             --cache-from "$ECR/$REPO:$date" \
+             --cache-from "$ECR/$REPO:$timestamp"
 echo
 
 for tag in latest $tags; do
