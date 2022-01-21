@@ -122,13 +122,16 @@ if [ -z "${NO_GRADLE_BUILD_CHECK:-}" ]; then
     "$srcdir/check_gradle_build.sh"
 fi
 
-if [ -z "${NO_GROOVY_CHECK:-}" ]; then
+# =======
+# XXX: not enabling by default because too simplistic for real projects, likely to cause cross-reference breakages
+if [ -z "${GROOVYC_CHECK:-}" ]; then
     "$srcdir/check_groovyc.sh"
 fi
 
-if [ -z "${NO_JAVA_CHECK:-}" ]; then
+if [ -z "${JAVAC_CHECK:-}" ]; then
     "$srcdir/check_javac.sh"
 fi
+# =======
 
 if [ -z "${NO_PERL_SYNTAX_CHECK:-}" ]; then
     "$srcdir/check_perl_syntax.sh"
