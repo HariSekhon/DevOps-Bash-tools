@@ -25,7 +25,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 usage_description="
 Recurses a given directory tree or \$PWD, finding all Java files and validating them using 'javac'
 
-Useful for doing basic linting
+Probably overly simplistic for a Java project, check a real linter instead
 "
 
 help_usage "$@"
