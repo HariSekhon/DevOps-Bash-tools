@@ -83,7 +83,9 @@ $(date -u '+%FT%H%M%SZ')
 "
 echo
 
-docker build -t "$ECR/$REPO:$hashref" .
+export DOCKER_BUILDKIT=1
+
+docker build -t "$ECR/$REPO:$hashref" . --cache-from "$ECR/$REPO:latest" --build-arg BUILDKIT_INLINE_CACHE=1
 echo
 
 for tag in latest $tags; do
