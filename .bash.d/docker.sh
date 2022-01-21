@@ -29,6 +29,8 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 #    alias docker="podman"
 #fi
 
+export DOCKER_BUILDKIT=1
+
 alias dc=docker-compose
 alias dps='docker ps'
 alias dpsa='docker ps -a'
