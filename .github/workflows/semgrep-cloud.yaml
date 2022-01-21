@@ -1,0 +1,39 @@
+#
+#  Author: Hari Sekhon
+#  Date: Tue Feb 4 09:53:28 2020 +0000
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/harisekhon/templates
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# ============================================================================ #
+#                  S e m g r e p   C l o u d   W o r k f l o w
+# ============================================================================ #
+
+# Logs results to https://semgrep.dev/
+
+---
+name: Semgrep Cloud
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+
+jobs:
+  semgrep:
+    name: Semgrep Cloud
+    uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep-cloud.yaml@master
