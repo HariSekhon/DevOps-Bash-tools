@@ -25,7 +25,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 usage_description="
 Recurses a given directory tree or \$PWD, finding all Groovy files and validating them using 'groovyc'
 
-Useful for doing basic linting on Groovy repos and Jenkinsfile shared libraries
+Useful for doing basic linting on simple self-contained Groovy scripts such as Jenkins Shared Libraries
 "
 
 help_usage "$@"
