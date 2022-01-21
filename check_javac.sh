@@ -49,12 +49,12 @@ if type -P javac &>/dev/null; then
         echo "javac $filename $*"
         javac "$filename" "$@"
     done <<< "$filelist"
-    hr; echo
 else
     echo "WARNING: javac not found in \$PATH, skipping Java checks"
     exit 0
 fi
 
+echo
 time_taken "$start_time"
 section2 "Java checks passed"
 echo
