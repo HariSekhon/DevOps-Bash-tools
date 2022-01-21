@@ -50,6 +50,9 @@ if type -P groovyc &>/dev/null; then
         groovyc "$filename" "$@"
     done <<< "$filelist"
     hr; echo
+else
+    echo "WARNING: groovyc not found in \$PATH, skipping Groovy checks"
+    exit 0
 fi
 
 time_taken "$start_time"
