@@ -70,4 +70,4 @@ if ! [[ $repo =~ / ]]; then
 fi
 
 # XXX: would need to iterate pages if you have more than 100 workflows
-"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id?per_page=100"  # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
+"$srcdir/github_api.sh" "/repos/$repo/actions/workflows$workflow_id?per_page=100" -L # | jq -r '.workflows[].path' | sed 's|.github/workflows/||;s|\.yaml$||'
