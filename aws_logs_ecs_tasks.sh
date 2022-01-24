@@ -56,9 +56,9 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-"$srcdir/aws_logs.sh" --log-group-name aws-controltower/CloudTrailLogs \
-                      --filter-pattern '{ ($.eventSource = "ecs.amazonaws.com") && ($.eventName = "RunTask") }' \
-                      "$@" |
+"$srcdir/aws_logs.sh" "$@" \
+                      --log-group-name aws-controltower/CloudTrailLogs \
+                      --filter-pattern '{ ($.eventSource = "ecs.amazonaws.com") && ($.eventName = "RunTask") }' |
 jq -r '.events[].message' |
 jq_debug_pipe_dump_slurp |
 # 2021-12-23T02:05:34Z    aws-batch       arn:aws:ecs:eu-west-2:123456789012:task-definition/MyJob:11
