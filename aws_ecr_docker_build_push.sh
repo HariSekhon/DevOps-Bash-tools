@@ -79,7 +79,6 @@ $git_branch
 $git_tags
 $date
 $timestamp
-latest
 "
 echo
 
@@ -88,16 +87,19 @@ export DOCKER_BUILDKIT=1
 # shellcheck disable=SC2046
 docker build -t "$ECR/$REPO:$hashref" . \
              --build-arg BUILDKIT_INLINE_CACHE=1 \
+             --cache-from "$ECR/$REPO:latest" \
+             --cache-from "$ECR/$REPO:$hashref" \
              $(for tag in $tags; do echo -n " --cache-from $ECR/$REPO:$tag"; done)
 echo
 
-for tag in $tags; do
+for tag in latest $tags; do
     echo "* Tagging as '$tag'"
     docker tag "$ECR/$REPO:$hashref" "$ECR/$REPO:$tag"
     echo
 done
 
-for tag in "$hashref" $tags; do
+# pushing latest last intentionally for a more atomic update
+for tag in "$hashref" $tags latest; do
     echo "* Pushing tag '$tag'"
     docker push "$ECR/$REPO:$tag"
     echo
