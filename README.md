@@ -336,7 +336,7 @@ etc.
     - `aws_ecr_tags_timestamps.sh` - lists all the tags and their timestamps for a given ECR docker image
     - `aws_ecr_tags_old.sh` - lists tags older than N days for a given ECR docker image
     - `aws_ecr_delete_old_tags.sh` - deletes tags older than N days for a given ECR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
-  - `aws_foreach_project.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
+  - `aws_foreach_profile.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
   - `aws_foreach_region.sh` - executes a templated command against each AWS region enabled for the current account, replacing `{region}` in each iteration. Combine with AWS CLI or scripts to find resources across regions
   - `aws_iam_*.sh` - [AWS IAM](https://aws.amazon.com/iam/) scripts:
     - `aws_iam_password_policy.sh` - prints [AWS password policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html) in `key = value` pairs for easy viewing / grepping (used by `aws_harden_password_policy.sh` before and after to show the differences)
