@@ -67,7 +67,7 @@ echo
 echo "* Determining tags"
 hashref="$(git rev-parse HEAD)"
 git_branch="$(git rev-parse --abbrev-ref HEAD)"
-git_tag="$(git tag --points-at HEAD)"
+git_tags="$(git tag --points-at HEAD)"  # can return multiple tags
 # must use date -u switch since --utc only works on Linux and not Mac
 date="$(date -u '+%F')"
 timestamp="$(date -u '+%FT%H%M%SZ')"
@@ -76,30 +76,28 @@ timestamp="$(date -u '+%FT%H%M%SZ')"
 #
 tags="
 $git_branch
-$git_tag
+$git_tags
 $date
 $timestamp
+latest
 "
 echo
 
 export DOCKER_BUILDKIT=1
 
+# shellcheck disable=SC2046
 docker build -t "$ECR/$REPO:$hashref" . \
              --build-arg BUILDKIT_INLINE_CACHE=1 \
-             --cache-from "$ECR/$REPO:latest" \
-             --cache-from "$ECR/$REPO:$git_branch" \
-             ${git_tag:+--cache-from "$ECR/$REPO:$git_tag"} \
-             --cache-from "$ECR/$REPO:$date" \
-             --cache-from "$ECR/$REPO:$timestamp"
+             $(for tag in $tags; do echo -n " --cache-from $ECR/$REPO:$tag"; done)
 echo
 
-for tag in latest $tags; do
+for tag in $tags; do
     echo "* Tagging as '$tag'"
     docker tag "$ECR/$REPO:$hashref" "$ECR/$REPO:$tag"
     echo
 done
 
-for tag in "$hashref" latest $tags; do
+for tag in "$hashref" $tags; do
     echo "* Pushing tag '$tag'"
     docker push "$ECR/$REPO:$tag"
     echo
