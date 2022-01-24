@@ -56,9 +56,9 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-"$srcdir/aws_logs.sh" --log-group-name aws-controltower/CloudTrailLogs \
-                      --filter-pattern '{ ($.eventSource = "ec2.amazonaws.com") && ($.eventName = "CreateFleet") }' \
-                      "$@" |
+"$srcdir/aws_logs.sh" "$@" \
+                      --log-group-name aws-controltower/CloudTrailLogs \
+                      --filter-pattern '{ ($.eventSource = "ec2.amazonaws.com") && ($.eventName = "CreateFleet") }' |
 jq -r '.events[].message' |
 jq_debug_pipe_dump_slurp |
 jq -r -s '.[] |
