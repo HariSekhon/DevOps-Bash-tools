@@ -106,13 +106,13 @@ urls="$(
         # $url_regex defined in lib/utils.sh
         # shellcheck disable=SC2154
         { grep -Eo "$url_regex" "$filename" || : ; } |
-        grep -Eiv \
+        { grep -Eiv \
              -e 'localhost' \
              -e 'domain\.com' \
              -e 'linkedin\.com' \
              -e '127.0.0.1' \
              -e '\.\.\.' \
-             -e 'x\.x\.x\.x' |
+             -e 'x\.x\.x\.x' || : ; } |
         if [ -n "${URL_LINKS_IGNORED:-}" ]; then
             grep -Eivf <(sed 's/^[[:space:]]*//;
                               s/[[:space:]]*$//;
@@ -136,7 +136,7 @@ urls="$(
     sort -uf
 )"
 
-url_count="$(wc -l <<< "$urls" | sed 's/[[:space:]]//g')"
+url_count="$(wc -l <<< "$urls" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
 
 timestamp "Checking $url_count unique URLs"
 echo >&2
