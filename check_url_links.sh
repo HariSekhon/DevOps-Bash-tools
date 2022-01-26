@@ -69,8 +69,11 @@ urls="$(
     while read -r filename; do
         # $url_regex defined in lib/utils.sh
         # shellcheck disable=SC2154
-        grep -Eo "$url_regex" "$filename" | grep -v -e localhost -e 127.0.0.1
-    done < <(find -L "$startpath" -type f "$@") |
+        grep -Eo "$url_regex" "$filename" |
+        grep -Ev -e 'localhost' \
+                 -e '127.0.0.1' \
+                 -e 'x\.x\.x\.x'
+    done < <(find -L "$startpath" -type f "$@" | grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/') |
     sort -u
 )"
 
