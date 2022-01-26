@@ -32,6 +32,12 @@ Accepts HTTP 2xx/3xx status codes as well as the following to avoid false positi
 - HTTP 405 (method not allowed, ie. HEAD)
 - HTTP 429 (rate limiting)
 
+Ignores:
+- Private addresses (localhost, .local, .svc, .cluster.local)
+- Loopback IP (127.0.0.1)
+- Private IPs (10.x.x.x, 172.16.x.x, 192.168.x.x)
+- APIPA IPs (169.254.x.x)
+
 To ignore links created with variables or otherwise composed in a way we can't straight test them, you can set URL_LINKS_IGNORED to a list, one per line of the URLs
 To ignore links without dots in them, ie. not public URLs such as domains or IP addresses, which are most likely internal shortname services, set IGNORE_URLS_WITHOUT_DOTS to any value
 
@@ -109,7 +115,14 @@ urls="$(
         { grep -Eiv \
              -e 'localhost' \
              -e 'domain\.com' \
+             -e '\.svc$' \
+             -e '.local$' \
+             -e '\.cluster\.local' \
              -e 'linkedin\.com' \
+             -e '(169\.254\.)' \
+             -e '(172\.16\.)' \
+             -e '(192\.168\.)' \
+             -e '10\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+' \
              -e '127.0.0.1' \
              -e '\.\.\.' \
              -e 'x\.x\.x\.x' || : ; } |
