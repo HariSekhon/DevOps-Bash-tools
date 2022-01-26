@@ -23,6 +23,8 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Checks for broken links in a given file or directory tree
+
+Sends HEAD requests and follows redirects - as long as the link redirects and succeeds it'll still pass
 "
 
 # used by usage() in lib/utils.sh
@@ -42,23 +44,39 @@ shift || :
 
 broken_links=0
 
-check_url_links(){
-    local filename="$1"
-    # shellcheck disable=SC2154
-    while read -r url; do
-        if ! curl -sSI "$url" >/dev/null; then
-            ((broken_links+=1))
-            echo >&2
-            echo "Broken Link: $url" >&2
-        fi
-        echo -n .
-    done < <(grep -Eo "$url_regex" "$filename")
+trap_cmd echo
+
+check_url_link(){
+    local url="$1"
+    local output
+    output='.'
+    if is_verbose || is_debug; then
+        echo -n "$url => "
+        output='%{http_code}'
+    fi
+    if ! command curl -sSIL "$url" -o /dev/null -w "$output"; then
+        ((broken_links+=1))
+        echo >&2
+        echo "Broken Link: $url"
+        echo >&2
+    fi
+    if is_verbose || is_debug; then
+        echo
+    fi
 }
 
-find -L "$startpath" -type f "$@" |
-while read -r filename; do
-    check_url_links "$filename"
-done
+urls="$(
+    while read -r filename; do
+        # $url_regex defined in lib/utils.sh
+        # shellcheck disable=SC2154
+        grep -Eo "$url_regex" "$filename" | grep -v -e localhost -e 127.0.0.1
+    done < <(find -L "$startpath" -type f "$@") |
+    sort -u
+)"
+
+while read -r url; do
+    check_url_link "$url"
+done <<< "$urls"
 
 if [ "$broken_links" != 0 ]; then
     echo
