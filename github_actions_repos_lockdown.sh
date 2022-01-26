@@ -25,6 +25,8 @@ usage_description="
 Secures the allowed GitHub Actions across all repos for the user
 
 If you have an Organization, I recommend you set this organization-wide instead, but for individual users this is handy to automate tightenting up your security
+
+TODO: restrict token permissions to default to minimal content read only, but the GitHub API does not support managing this at time of writing
 "
 
 # used by usage() in lib/utils.sh
