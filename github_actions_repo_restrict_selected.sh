@@ -23,11 +23,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Restricts the allowed GitHub Actions to only those created by GitHub and verified creators using the GitHub API
+
+If you have an Organization, I recommend you set this organization-wide instead, but for individual users this is handy to automate tightenting up your security
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo>"
+usage_args="<user>/<repo>"
 
 help_usage "$@"
 
