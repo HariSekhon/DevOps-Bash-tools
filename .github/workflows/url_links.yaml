@@ -32,5 +32,9 @@ jobs:
     name: URL Links
     uses: HariSekhon/GitHub-Actions/.github/workflows/url_links.yaml@master
     with:
+      ignore_urls_without_dots: 'true'  # any value enables this
       url_links_ignored: |
         https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv
+        somerepository.com
+        mycompany
+        https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
