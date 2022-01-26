@@ -75,12 +75,14 @@ shift || :
 
 trap_cmd 'echo >&2'
 
+check_bin curl
+
 check_url_link(){
     local url="$1"
     if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
         echo -n "$url => "
     fi
-    status_code="$(command curl -sSILf --retry 3 --retry-delay 2 "$url" -o /dev/null -w "%{http_code}" || :)"
+    status_code="$(command curl -sSILf --retry 3 --retry-delay 2 "$url" -o /dev/null -w "%{http_code}" 2>/dev/null || :)"
     if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
         echo "$status_code"
     else
