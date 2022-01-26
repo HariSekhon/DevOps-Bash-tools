@@ -1116,7 +1116,7 @@ parse_export_key_value(){
 # ============================================================================ #
 
 is_blank(){
-    local arg="$*"
+    local arg="${*:-}"
     arg="${arg##[[:space:]]}"
     arg="${arg%%[[:space:]]}"
     [ -z "$arg" ]
