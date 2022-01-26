@@ -28,6 +28,8 @@ Sends HEAD requests and follows redirects - as long as the link redirects and su
 
 Accepts HTTP 2xx/3xx status codes as well as HTTP 429 (rate limiting) to avoid false positives
 
+To ignore links created with variables or otherwise composed in a way we can't straight test them, you can set URL_LINKS_IGNORED to a list, one per line of the URLs
+
 If run in CI, runs 'git ls-files' to avoid scanning other local checkouts or git  submodules
 
 Examples:
@@ -81,6 +83,13 @@ check_url_link(){
     fi
 }
 
+# Mac's BSD grep has a bug around -f ignores
+if is_mac; then
+    grep(){
+        command ggrep "$@"
+    }
+fi
+
 # filtering out LinkedIn.com which prevents crawling with HTTP/2 999 code
 #               GitHub Actions Marketplace may return 429 code for too many requests
                 #-e 'https://github\.com/marketplace' \
@@ -95,7 +104,14 @@ urls="$(
              -e 'linkedin\.com' \
              -e '127.0.0.1' \
              -e '\.\.\.' \
-             -e 'x\.x\.x\.x'
+             -e 'x\.x\.x\.x' |
+        if [ -n "${URL_LINKS_IGNORED:-}" ]; then
+            grep -Eivf <(sed 's/^[[:space:]]*//;
+                              s/[[:space:]]*$//;
+                              /^[[:space:]]*$/d' <<< "$URL_LINKS_IGNORED")
+        else
+            cat
+        fi
     done < <(
         if is_CI; then
             git ls-files "$startpath" "$@"
