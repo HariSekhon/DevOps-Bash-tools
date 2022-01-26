@@ -61,7 +61,7 @@ email_regex='\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
 # shellcheck disable=SC2034
 ip_regex='[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
 # shellcheck disable=SC2034
-url_regex='https?://[[:alnum:]@:%\._\+~#?&/=-]+'
+url_regex='https?://[[:alnum:]@%\._\+~#?&/=-]+'  # TODO: improve
 
 wrong_port=1111
 
