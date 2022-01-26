@@ -52,7 +52,7 @@ check_url_link(){
         echo -n "$url => "
         output='%{http_code}\n'
     fi
-    if ! command curl -sSIL "$url" -o /dev/null -w "$output"; then
+    if ! command curl -sSILf "$url" -o /dev/null -w "$output"; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
@@ -60,17 +60,23 @@ check_url_link(){
     fi
 }
 
+# filtering out LinkedIn.com which prevents crawling with HTTP/2 999 code
+#               GitHub Actions Marketplace may return 429 code for too many requests
+                #-e 'https://github\.com/marketplace' \
 urls="$(
     while read -r filename; do
         # $url_regex defined in lib/utils.sh
         # shellcheck disable=SC2154
         grep -Eo "$url_regex" "$filename" |
-        grep -Ev -e 'localhost' \
-                 -e 'domain\.com' \
-                 -e '127.0.0.1' \
-                 -e 'x\.x\.x\.x'
+        grep -Eiv \
+             -e 'localhost' \
+             -e 'domain\.com' \
+             -e 'linkedin\.com' \
+             -e '127.0.0.1' \
+             -e '\.\.\.' \
+             -e 'x\.x\.x\.x'
     done < <(find -L "$startpath" -type f "$@" | grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/') |
-    sort -u
+    sort -uf
 )"
 
 url_count="$(wc -l <<< "$urls" | sed 's/[[:space:]]//g')"
