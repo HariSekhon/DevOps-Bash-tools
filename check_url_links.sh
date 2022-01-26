@@ -75,6 +75,7 @@ check_url_link(){
     else
         echo -n '.'
     fi
+    # GitHub returns HTTP 429 for too many requests
     if ! [[ $status_code =~ ^(429|[23][[:digit:]]{2})$ ]]; then
         echo >&2
         echo "Broken Link: $url" >&2
@@ -91,7 +92,7 @@ if is_mac; then
 fi
 
 # filtering out LinkedIn.com which prevents crawling with HTTP/2 999 code
-#               GitHub Actions Marketplace may return 429 code for too many requests
+#               GitHub returns HTTP 429 for too many requests
                 #-e 'https://github\.com/marketplace' \
 urls="$(
     while read -r filename; do
