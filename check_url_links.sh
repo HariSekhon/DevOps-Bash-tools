@@ -41,7 +41,8 @@ Ignores:
 To ignore links created with variables or otherwise composed in a way we can't straight test them, you can set URL_LINKS_IGNORED to a list, one per line of the URLs
 To ignore links without dots in them, ie. not public URLs such as domains or IP addresses, which are most likely internal shortname services, set IGNORE_URLS_WITHOUT_DOTS to any value
 
-If run in CI, runs 'git ls-files' to avoid scanning other local checkouts or git  submodules
+If run in CI, runs 'git ls-files' to avoid scanning other local checkouts or git submodules
+If you want to filter to specific files only, such a README.md, you can set URL_LINKS_FILE_FILTER='README.md' by name or path or ERE regex
 
 Examples:
 
@@ -122,6 +123,17 @@ timestamp "Aggregating unique URLs from files under '$startpath'"
 #               GitHub returns HTTP 429 for too many requests
                 #-e 'https://github\.com/marketplace' \
 urls="$(
+    if is_CI; then
+        git ls-files "$startpath" "$@"
+    else
+        find -L "$startpath" -type f "$@" |
+        { grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/' || : ; }
+    fi |
+    if [ -n "${URL_LINKS_FILE_FILTER:-}" ]; then
+        grep -E "$URL_LINKS_FILE_FILTER" || :
+    else
+        cat
+    fi |
     while read -r filename; do
         [ -f "$filename" ] || continue  # protects against symlinks to dirs returned by 'git ls-files'
         # $url_regex defined in lib/utils.sh
@@ -151,21 +163,21 @@ urls="$(
             cat
         fi |
         if [ -n "${IGNORE_URLS_WITHOUT_DOTS:-}" ]; then
-            { grep -E 'https?://[^/]+\.[^/]+' || : ; }
+            grep -E 'https?://[^/]+\.[^/]+' || :
         else
             cat
         fi
-    done < <(
-        if is_CI; then
-            git ls-files "$startpath" "$@"
-        else
-            find -L "$startpath" -type f "$@" |
-            { grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/' || : ; }
-        fi
-    ) |
+    done |
     sort -uf
 )"
+urls="${urls##[[:space:]]}"
+urls="${urls%%[[:space:]]}"
 echo >&2
+
+if is_blank "$urls"; then
+    echo "No URLs found" >&2
+    exit 0
+fi
 
 url_count="$(wc -l <<< "$urls" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
 
