@@ -66,6 +66,7 @@ urls="$(
         # shellcheck disable=SC2154
         grep -Eo "$url_regex" "$filename" |
         grep -Ev -e 'localhost' \
+                 -e 'domain\.com' \
                  -e '127.0.0.1' \
                  -e 'x\.x\.x\.x'
     done < <(find -L "$startpath" -type f "$@" | grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/') |
