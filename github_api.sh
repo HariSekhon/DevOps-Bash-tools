@@ -75,12 +75,14 @@ Examples:
     ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
 
-For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings. The following tokens in the form :token, <token>, {token} are replaced:
+# For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings. The following tokens in the form :token, <token>, {token} are replaced:
 
-Placeholders replaced by \$GITHUB_USERNAME / \$GITHUB_USER:                 owner, username, user
-Placeholders replaced by the local repo name of the current directory:    repo
+# Placeholders replaced by \$GITHUB_USERNAME / \$GITHUB_USER:                 owner, username, user
+# Placeholders replaced by the local repo name of the current directory:    repo
 
     ${0##*/} /repos/:user/:repo/actions/workflows
+
+    ${0##*/} /users/{username}/settings/billing/actions
 "
 
 # used by usage() in lib/utils.sh
