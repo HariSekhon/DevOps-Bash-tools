@@ -20,7 +20,7 @@
 # https://semgrep.dev/docs/semgrep-ci/sample-ci-configs/#github-actions
 
 ---
-name: Semgrep
+name: Semgrep GitHub
 
 on:
   push:
@@ -37,5 +37,5 @@ on:
 
 jobs:
   semgrep:
-    name: Semgrep
+    name: Semgrep GitHub
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
