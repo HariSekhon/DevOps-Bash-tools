@@ -487,6 +487,10 @@ is_debug(){
     [ -n "${DEBUG:-}" ]
 }
 
+is_verbose(){
+    [ -n "${VERBOSE:-}" ]
+}
+
 pass(){
     read_secret "password"
     export PASSWORD="$secret"
@@ -671,7 +675,7 @@ warn(){
 }
 
 log(){
-    if [ -n "${VERBOSE:-}" ]; then
+    if is_verbose; then
         timestamp "$@"
     fi
 }
