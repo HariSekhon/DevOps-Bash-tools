@@ -42,9 +42,7 @@ start_time="$(start_timer)"
 startpath="${1:-.}"
 shift || :
 
-broken_links=0
-
-trap_cmd echo
+trap_cmd 'echo >&2'
 
 check_url_link(){
     local url="$1"
@@ -55,10 +53,10 @@ check_url_link(){
         output='%{http_code}'
     fi
     if ! command curl -sSIL "$url" -o /dev/null -w "$output"; then
-        ((broken_links+=1))
         echo >&2
         echo "Broken Link: $url"
         echo >&2
+        return 1
     fi
     if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
         echo
@@ -77,19 +75,24 @@ urls="$(
     sort -u
 )"
 
-export -f check_url_link
+url_count="$(wc -l <<< "$urls" | sed 's/[[:space:]]//g')"
+
+timestamp "Checking $url_count unique URLs"
+echo >&2
+
 tests=$(
 while read -r url; do
     echo "check_url_link '$url'"
 done <<< "$urls"
 )
-parallel -j 10 <<< "$tests"
 
-if [ "$broken_links" != 0 ]; then
-    echo
-    die "$broken_links broken links detected!"
+export -f check_url_link
+if ! parallel -j 10 <<< "$tests"; then
+    echo >&2
+    echo >&2
+    die "ERROR: Broken links detected!"
 fi
 
 time_taken "$start_time"
 section2 "URL links passed"
-echo
+echo >&2
