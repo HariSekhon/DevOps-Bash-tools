@@ -40,7 +40,7 @@ The given repo must be the current URL - cannot be a previous repo name link
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo> [<curl_options>]"
+usage_args="<repo>"
 
 help_usage "$@"
 
