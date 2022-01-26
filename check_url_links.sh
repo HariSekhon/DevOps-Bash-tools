@@ -26,6 +26,8 @@ Checks for broken URL links in a given file or directory tree
 
 Sends HEAD requests and follows redirects - as long as the link redirects and succeeds it'll still pass, as this is most relevant to users and READMEs
 
+Accepts HTTP 2xx/3xx status codes as well as HTTP 429 (rate limiting) to avoid false positives
+
 If run in CI, runs 'git ls-files' to avoid scanning other local checkouts or git  submodules
 
 Examples:
@@ -68,7 +70,13 @@ check_url_link(){
         echo -n "$url => "
         output='%{http_code}\n'
     fi
-    if ! command curl -sSILf --retry 3 --retry-delay 2 "$url" -o /dev/null -w "$output"; then
+    status_code="$(command curl -sSILf --retry 3 --retry-delay 2 "$url" -o /dev/null -w "%{http_code}" || :)"
+    if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
+        echo "$status_code"
+    else
+        echo -n '.'
+    fi
+    if ! [[ $status_code =~ ^(429|[23][[:digit:]]{2})$ ]]; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
@@ -127,6 +135,6 @@ if [ $exit_code -eq 0 ]; then
 else
     echo "ERROR: Broken links detected!" >&2
     echo >&2
-    section2 "URL links FAILED"
+    section2 "URL Links FAILED"
     exit 1
 fi
