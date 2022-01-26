@@ -25,6 +25,10 @@ usage_description="
 Restricts the allowed GitHub Actions in the given repo to only those created by GitHub and verified partner companies (eg. AWS, Docker) using the GitHub API
 
 If you have an Organization, I recommend you set this organization-wide instead, but for individual users this is handy to automate tightenting up your security
+
+See Also:
+
+    github_actions_repo_actions_allow.sh - applies this to all repos
 "
 
 # used by usage() in lib/utils.sh
