@@ -68,7 +68,7 @@ check_url_link(){
         echo -n "$url => "
         output='%{http_code}\n'
     fi
-    if ! command curl -sSILf "$url" -o /dev/null -w "$output"; then
+    if ! command curl -sSILf --retry 3 --retry-delay 2 "$url" -o /dev/null -w "$output"; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
