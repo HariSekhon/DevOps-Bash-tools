@@ -50,16 +50,13 @@ check_url_link(){
     output='.'
     if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
         echo -n "$url => "
-        output='%{http_code}'
+        output='%{http_code}\n'
     fi
     if ! command curl -sSIL "$url" -o /dev/null -w "$output"; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
         return 1
-    fi
-    if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
-        echo
     fi
 }
 
