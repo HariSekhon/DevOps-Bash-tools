@@ -26,9 +26,14 @@ Checks for broken URL links in a given file or directory tree
 
 Sends HEAD requests and follows redirects - as long as the link redirects and succeeds it'll still pass, as this is most relevant to users and READMEs
 
-Accepts HTTP 2xx/3xx status codes as well as HTTP 429 (rate limiting) to avoid false positives
+Accepts HTTP 2xx/3xx status codes as well as the following to avoid false positives:
+- HTTP 401 (unauthorized)
+- HTTP 403 (forbidden)
+- HTTP 405 (method not allowed, ie. HEAD)
+- HTTP 429 (rate limiting)
 
 To ignore links created with variables or otherwise composed in a way we can't straight test them, you can set URL_LINKS_IGNORED to a list, one per line of the URLs
+To ignore links without dots in them, ie. not public URLs such as domains or IP addresses, which are most likely internal shortname services, set IGNORE_URLS_WITHOUT_DOTS to any value
 
 If run in CI, runs 'git ls-files' to avoid scanning other local checkouts or git  submodules
 
@@ -75,8 +80,9 @@ check_url_link(){
     else
         echo -n '.'
     fi
+    # DockerHub https://registry.hub.docker.com/v2 returns 401
     # GitHub returns HTTP 429 for too many requests
-    if ! [[ $status_code =~ ^(429|[23][[:digit:]]{2})$ ]]; then
+    if ! [[ $status_code =~ ^([23][[:digit:]]{2}|401|405|429)$ ]]; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
@@ -96,9 +102,10 @@ fi
                 #-e 'https://github\.com/marketplace' \
 urls="$(
     while read -r filename; do
+        [ -f "$filename" ] || continue  # protects against symlinks to dirs returned by 'git ls-files'
         # $url_regex defined in lib/utils.sh
         # shellcheck disable=SC2154
-        grep -Eo "$url_regex" "$filename" |
+        { grep -Eo "$url_regex" "$filename" || : ; } |
         grep -Eiv \
              -e 'localhost' \
              -e 'domain\.com' \
@@ -109,7 +116,12 @@ urls="$(
         if [ -n "${URL_LINKS_IGNORED:-}" ]; then
             grep -Eivf <(sed 's/^[[:space:]]*//;
                               s/[[:space:]]*$//;
-                              /^[[:space:]]*$/d' <<< "$URL_LINKS_IGNORED")
+                              /^[[:space:]]*$/d' <<< "$URL_LINKS_IGNORED") || :
+        else
+            cat
+        fi |
+        if [ -n "${IGNORE_URLS_WITHOUT_DOTS:-}" ]; then
+            { grep '\.' || : ; }
         else
             cat
         fi
@@ -117,7 +129,8 @@ urls="$(
         if is_CI; then
             git ls-files "$startpath" "$@"
         else
-            find -L "$startpath" -type f "$@" | grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/'
+            find -L "$startpath" -type f -a -not -type L "$@" |
+            { grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/' || : ; }
         fi
     ) |
     sort -uf
