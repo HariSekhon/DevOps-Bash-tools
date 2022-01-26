@@ -129,7 +129,7 @@ urls="$(
         if is_CI; then
             git ls-files "$startpath" "$@"
         else
-            find -L "$startpath" -type f -a -not -type L "$@" |
+            find -L "$startpath" -type f "$@" |
             { grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/' || : ; }
         fi
     ) |
