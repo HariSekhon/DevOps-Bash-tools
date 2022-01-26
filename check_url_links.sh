@@ -22,14 +22,30 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Checks for broken links in a given file or directory tree
+Checks for broken URL links in a given file or directory tree
 
-Sends HEAD requests and follows redirects - as long as the link redirects and succeeds it'll still pass
+Sends HEAD requests and follows redirects - as long as the link redirects and succeeds it'll still pass, as this is most relevant to users and READMEs
+
+If run in CI, runs 'git ls-files' to avoid scanning other local checkouts or git  submodules
+
+Examples:
+
+    # Scan all URLs in all files under your \$PWD, or in CI all committed files under your \$PWD
+
+        ${0##*/}
+
+    # Scan URLs in all files found under the 'src' directory
+
+        ${0##*/} src
+
+    # Scan URLs in all files called README.md under your local directory (local mode only, not CI)
+
+        ${0##*/} . -name README.md
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<file_or_directory> <find_options>]"
+usage_args="[<file_or_directory> <find_or_git_options>]"
 
 help_usage "$@"
 
@@ -75,7 +91,13 @@ urls="$(
              -e '127.0.0.1' \
              -e '\.\.\.' \
              -e 'x\.x\.x\.x'
-    done < <(find -L "$startpath" -type f "$@" | grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/') |
+    done < <(
+        if is_CI; then
+            git ls-files "$startpath" "$@"
+        else
+            find -L "$startpath" -type f "$@" | grep -v -e '/\.git/' -e '/\.svn/' -e '/\.hg/'
+        fi
+    ) |
     sort -uf
 )"
 
