@@ -29,6 +29,10 @@ Allows select 3rd party GitHub Actions in the given repo using the GitHub API
 If you have an Organization, I recommend you set this organization-wide instead, but for individual users this is handy to automate tightenting up your security
 
 The list of actions is taken from the adjacent file '${ALLOW_FILE#$srcdir/}'
+
+See Also:
+
+    github_actions_repo_actions_allow.sh - applies this to all repos
 "
 
 # used by usage() in lib/utils.sh
