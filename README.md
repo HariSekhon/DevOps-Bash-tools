@@ -610,6 +610,7 @@ etc.
   - `github_actions_repo_set_secret.sh` - sets a secret in the given repo from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `github_actions_repo_env_set_secret.sh` - sets a secret in the given repo and environment from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `github_actions_repo_restrict_actions.sh` - restricts GitHub Actions in the given repo to only running actions from GitHub and verfied partner companies (.eg AWS, Docker)
+  - `github_actions_repo_actions_allow.sh` - allows select 3rd party GitHub Actions in the given repo
   - `github_actions_runner.sh` - generates a [GitHub Actions](https://github.com/features/actions) self-hosted runner token for a given Repo or Organization via the GitHub API and then runs a dockerized GitHub Actions runner with the appropriate configuration
   - `github_actions_runner_local.sh` - downloads, configures and runs a local GitHub Actions Runner for Linux or Mac
   - `github_actions_runner_token.sh` - generates a GitHub Actions runner token to register a new self-hosted runner
