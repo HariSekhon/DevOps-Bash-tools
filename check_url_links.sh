@@ -54,7 +54,7 @@ check_url_link(){
     fi
     if ! command curl -sSIL "$url" -o /dev/null -w "$output"; then
         echo >&2
-        echo "Broken Link: $url"
+        echo "Broken Link: $url" >&2
         echo >&2
         return 1
     fi
@@ -86,13 +86,21 @@ while read -r url; do
 done <<< "$urls"
 )
 
+# export function to use in parallel
 export -f check_url_link
-if ! parallel -j 10 <<< "$tests"; then
-    echo >&2
-    echo >&2
-    die "ERROR: Broken links detected!"
-fi
 
-time_taken "$start_time"
-section2 "URL links passed"
+set +e
+parallel -j 10 <<< "$tests"
+exit_code=$?
+set -e
 echo >&2
+time_taken "$start_time"
+echo >&2
+if [ $exit_code -eq 0 ]; then
+    section2 "URL links passed"
+else
+    echo "ERROR: Broken links detected!" >&2
+    echo >&2
+    section2 "URL links FAILED"
+    exit 1
+fi
