@@ -608,7 +608,7 @@ etc.
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
   - `github_actions_in_use.sh` - lists all GitHub Actions and versions in use in the current repo, useful to combine with `github_actions_repo_actions_allow.sh` and `github_actions_repos_lockdown.sh`
-  - `github_actions_repos_lockdown.sh` - secures GitHub Actions settings across all user repos to only GitHub, verified partners and selected 3rd party actions. Uses `github_actions_repo_restrict_actions.sh` and `github_actions_repo_actions_allow.sh`
+  - `github_actions_repos_lockdown.sh` - secures GitHub Actions settings across all user repos to only GitHub, verified partners and selected 3rd party actions
   - `github_actions_repo_set_secret.sh` - sets a secret in the given repo from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `github_actions_repo_env_set_secret.sh` - sets a secret in the given repo and environment from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `github_actions_repo_restrict_actions.sh` - restricts GitHub Actions in the given repo to only running actions from GitHub and verfied partner companies (.eg AWS, Docker)
