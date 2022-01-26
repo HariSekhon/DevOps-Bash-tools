@@ -186,6 +186,11 @@ fi
 # too heavy to run all the time, isExcluded on every file has really bad performance
 "$srcdir/check_whitespace.sh"
 
+# ========================================
+# Expensive checks, do separately in CI/CD
+#
+#"$srcdir/check_url_links.sh"
+
 #"$srcdir/check_pytools.sh"
 
 #for script in $(find . -name 'test*.sh'); do
