@@ -50,7 +50,7 @@ check_url_link(){
     local url="$1"
     local output
     output='.'
-    if is_verbose || is_debug; then
+    if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
         echo -n "$url => "
         output='%{http_code}'
     fi
@@ -60,7 +60,7 @@ check_url_link(){
         echo "Broken Link: $url"
         echo >&2
     fi
-    if is_verbose || is_debug; then
+    if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
         echo
     fi
 }
@@ -77,9 +77,13 @@ urls="$(
     sort -u
 )"
 
+export -f check_url_link
+tests=$(
 while read -r url; do
-    check_url_link "$url"
+    echo "check_url_link '$url'"
 done <<< "$urls"
+)
+parallel -j 10 <<< "$tests"
 
 if [ "$broken_links" != 0 ]; then
     echo
