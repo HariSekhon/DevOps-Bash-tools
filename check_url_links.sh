@@ -56,6 +56,17 @@ Examples:
     # Scan URLs in all files called README.md under your local directory (local mode only, not CI)
 
         ${0##*/} . -name README.md
+
+    # Ignore URLs we know won't work because they're samples / fake or constructed with variables we can't determine etc:
+
+        export URL_LINKS_IGNORED='
+            http://myplaceholder
+            nonexistent.com
+            https://hooks.slack.com/services/YOUR/SLACK/WEBHOOK
+            https://some.website.com/downloads/v\$version/some.tar.gz
+        '
+
+        ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
@@ -118,10 +129,12 @@ urls="$(
         { grep -Eo "$url_regex" "$filename" || : ; } |
         { grep -Eiv \
              -e 'localhost' \
-             -e 'domain\.com' \
              -e '\.svc$' \
              -e '.local$' \
              -e '\.cluster\.local' \
+             -e 'domain\.com' \
+             -e 'acmecorp\.com' \
+             -e 'example\.com' \
              -e 'linkedin\.com' \
              -e '(169\.254\.)' \
              -e '(172\.16\.)' \
@@ -138,7 +151,7 @@ urls="$(
             cat
         fi |
         if [ -n "${IGNORE_URLS_WITHOUT_DOTS:-}" ]; then
-            { grep '\.' || : ; }
+            { grep -E 'https?://[^/]+\.[^/]+' || : ; }
         else
             cat
         fi
