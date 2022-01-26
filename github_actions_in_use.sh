@@ -24,7 +24,13 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Finds all GitHub Actions in use from the .github/workflows directory across all workflows in the current repository
 
-This is useful to combine with github_actions_repo_actions_allow.sh and github_actions_repos_lockdown.sh
+This is useful to combine with
+
+    github_actions_repo_actions_allow.sh
+        and
+    github_actions_repos_lockdown.sh
+
+Add these actions you need to ~/.github/workflows/allowed-actions.txt and then run github_actions_repos_lockdown.sh
 "
 
 # used by usage() in lib/utils.sh
