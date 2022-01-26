@@ -80,13 +80,13 @@ check_bin curl
 check_url_link(){
     local url="$1"
     if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
-        echo -n "$url => "
+        echo -n "$url => " >&2
     fi
     status_code="$(command curl -sSILf --retry 3 --retry-delay 2 "$url" -o /dev/null -w "%{http_code}" 2>/dev/null || :)"
     if [ -n "${VERBOSE:-}" ] || [ -n "${DEBUG:-}" ]; then
-        echo "$status_code"
+        echo "$status_code" >&2
     else
-        echo -n '.'
+        echo -n '.' >&2
     fi
     # DockerHub https://registry.hub.docker.com/v2 returns 401
     # GitHub returns HTTP 429 for too many requests
@@ -94,6 +94,7 @@ check_url_link(){
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
+        echo 1
         return 1
     fi
 }
@@ -105,6 +106,7 @@ if is_mac; then
     }
 fi
 
+timestamp "Aggregating unique URLs from files under '$startpath'"
 # filtering out LinkedIn.com which prevents crawling with HTTP/2 999 code
 #               GitHub returns HTTP 429 for too many requests
                 #-e 'https://github\.com/marketplace' \
@@ -150,6 +152,7 @@ urls="$(
     ) |
     sort -uf
 )"
+echo >&2
 
 url_count="$(wc -l <<< "$urls" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
 
@@ -165,17 +168,18 @@ done <<< "$urls"
 # export function to use in parallel
 export -f check_url_link
 
-set +e
-parallel -j 10 <<< "$tests"
+set +eo pipefail
+tally="$(parallel -j 10 <<< "$tests")"
 exit_code=$?
-set -e
+set -eo pipefail
+count="$(awk '{sum+=$1} END{print sum}' <<< "$tally")"
 echo >&2
 time_taken "$start_time"
 echo >&2
 if [ $exit_code -eq 0 ]; then
     section2 "URL links passed"
 else
-    echo "ERROR: Broken links detected!" >&2
+    echo "ERROR: $count broken links detected!" >&2
     echo >&2
     section2 "URL Links FAILED"
     exit 1
