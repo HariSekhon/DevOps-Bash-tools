@@ -62,6 +62,15 @@ timestamp "Enabling the following 3rd party GitHub Actions on repo '$repo':"
 echo
 echo "$actions_allowed"
 echo
+
 # convert to array of strings for the API
-actions_allowed_array="$(printf "[%s]" "$(while read -r action; do echo "\"$action\", "; done <<< "$actions_allowed" | sed 's/, //')")"
-"$srcdir/github_api.sh" "/repos/$repo/actions/permissions/selected-actions" -X PUT -d "{\"patterns_allowed\": $actions_allowed_array}"  # don't quote array, it contains the quotes already
+#actions_allowed_json_array="$(printf "[%s]" "$(while read -r action; do echo "\"$action\", "; done <<< "$actions_allowed" | sed 's/, //')")"
+
+actions_allowed_json_array="["
+while read -r action; do
+    actions_allowed_json_array+="\"$action\", "
+done <<< "$actions_allowed"
+actions_allowed_json_array="${actions_allowed_json_array%, }"
+actions_allowed_json_array+="]"
+
+"$srcdir/github_api.sh" "/repos/$repo/actions/permissions/selected-actions" -X PUT -d "{\"patterns_allowed\": $actions_allowed_json_array}"  # don't quote array, it contains the quotes already
