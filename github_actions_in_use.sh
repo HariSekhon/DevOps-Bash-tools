@@ -52,4 +52,4 @@ sed '
     s/#.*$//;
     /\.github/d
 ' |
-sort -u
+sort -fu
