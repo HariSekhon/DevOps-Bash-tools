@@ -55,7 +55,7 @@ process_contents(){
 grep_github_actions(){
     # filtering out anything with .github in it as that will be a .github/workflows/file.yaml, not an action
     { grep -Eo '^[^#]+[[:space:]]uses:.+@[^#[:space:]]+' || : ; } |
-    sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; /\.github/d'
+    sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; /\.github/d; s/#.*$//'
 }
 
 timestamp "Checking repo '$repo'"
