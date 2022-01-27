@@ -43,7 +43,7 @@ help_usage "$@"
 
 git_root="$(git_root)"
 
-grep -Rho 'uses:.*@.*' "$git_root/.github/workflows/" |
-grep -v .github |
-sed 's/^uses:[[:space:]]*//' |
+# filtering out anything with .github in it as that will be a .github/workflows/file.yaml, not an action
+grep -ERho '^[^#]+[[:space:]]uses:.*@[^#]+' "$git_root/.github/workflows/" |
+sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; /\.github/d'  |
 sort -u
