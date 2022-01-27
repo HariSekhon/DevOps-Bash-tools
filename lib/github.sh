@@ -23,7 +23,8 @@ srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 is_github_owner_repo(){
     local repo="$1"
-    [[ "$repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]
+    # .github repo is valid
+    [[ "$repo" =~ ^[[:alnum:]-]+/[[:alnum:].-]+$ ]]
 }
 
 get_github_user(){
