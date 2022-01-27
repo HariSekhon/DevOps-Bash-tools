@@ -42,3 +42,6 @@ jobs:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
     if: github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'docker'
+    permissions:
+      contents: read
+      packages: write
