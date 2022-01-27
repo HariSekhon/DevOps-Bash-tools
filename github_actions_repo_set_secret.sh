@@ -21,7 +21,7 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/github.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -57,13 +57,13 @@ help_usage "$@"
 # requires the GitHub CLI
 check_bin gh
 
-min_args 1 "$@"
+#min_args 1 "$@"
 
-owner_repo="$1"
+owner_repo="${1:-$(get_github_repo)}"
 shift || :
 
 if ! [[ "$owner_repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
-    usage "owner_repo given '$owner_repo' does not conform <user_or_org>/<repo> format"
+    usage "owner_repo '$owner_repo' does not conform <user_or_org>/<repo> format"
 fi
 
 # don't need to check for existing secrets as the API is a set (add/update) operation anyway
