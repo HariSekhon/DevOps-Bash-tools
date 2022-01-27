@@ -46,7 +46,7 @@ if ! command -v curl >/dev/null 2>&1; then
     if command -v apt-get >/dev/null 2>&1; then
         export DEBIAN_FRONTEND=noninteractive
         apt-get update
-        apt-get install -y curl
+        apt-get install -y curl  # --no-install-recommends  # will omit ca-certificates which will break the ability to curl the bootstrap script further down
     elif command -v yum >/dev/null 2>&1; then
         yum install -y curl
     elif command -v apk >/dev/null 2>&1; then
