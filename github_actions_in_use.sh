@@ -50,6 +50,7 @@ grep -ERho '^[^#]+[[:space:]]uses:.+@[^#[:space:]]+' "$git_root/.github/workflow
 sed '
     s/^[^#]*[[:space:]]uses:[[:space:]]*//;
     s/#.*$//;
+    s/[[:space:]]*$//;
     /\.github/d
 ' |
 sort -fu
