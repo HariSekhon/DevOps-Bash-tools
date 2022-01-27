@@ -21,6 +21,11 @@ srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir_github_lib/../lib/utils.sh"
 
+is_github_owner_repo(){
+    local repo="$1"
+    [[ "$repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]
+}
+
 get_github_user(){
     if [ -n "${GITHUB_USER:-}" ]; then
         echo "$GITHUB_USER"
