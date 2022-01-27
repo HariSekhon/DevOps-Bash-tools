@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all GitHub Actions in use from the .github/workflows directory across all workflows in the current repository
+Finds all GitHub Actions directly referenced in the .github/workflows in the current repository
 
 This is useful to combine with
 
@@ -31,6 +31,8 @@ This is useful to combine with
     github_actions_repos_lockdown.sh
 
 Add these actions you need to ~/.github/workflows/allowed-actions.txt and then run github_actions_repos_lockdown.sh
+
+Caveat: does not detect GitHub Actions referenced in reusable workflows - for that instead use github_actions_in_use_repo.sh which follows GitHub Reusable Workflows references in GitHub via the API
 "
 
 # used by usage() in lib/utils.sh
