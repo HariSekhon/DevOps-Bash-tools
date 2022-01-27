@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all GitHub Actions directly referenced in the .github/workflows in the current repository
+Finds all GitHub Actions directly referenced in the .github/workflows in the current local repo checkout
 
 This is useful to combine with
 
