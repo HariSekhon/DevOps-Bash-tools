@@ -57,11 +57,15 @@ help_usage "$@"
 # requires the GitHub CLI
 check_bin gh
 
-min_args 2 "$@"
+min_args 1 "$@"
 
-owner_repo="$1"
-environment_name="$2"
-shift || :
+if [ $# -eq 1 ]; then
+    environment_name="$1"
+else
+    owner_repo="$1"
+    environment_name="$2"
+    shift || :
+fi
 shift || :
 
 if ! [[ "$owner_repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
