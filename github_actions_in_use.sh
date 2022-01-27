@@ -47,5 +47,5 @@ git_root="$(git_root)"
 
 # filtering out anything with .github in it as that will be a .github/workflows/file.yaml, not an action
 grep -ERho '^[^#]+[[:space:]]uses:.+@[^#[:space:]]+' "$git_root/.github/workflows/" |
-sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; /\.github/d'  |
+sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; /\.github/d; s/#.*$//' |
 sort -u
