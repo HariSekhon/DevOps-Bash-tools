@@ -12,7 +12,7 @@
 #
 
 ---
-name: Alpine
+name: Alpine 2.6
 
 on:
   push:
