@@ -55,7 +55,13 @@ process_contents(){
 grep_github_actions(){
     # filtering out anything with .github in it as that will be a .github/workflows/file.yaml, not an action
     { grep -Eo '^[^#]+[[:space:]]uses:.+@[^#[:space:]]+' || : ; } |
-    sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; /\.github/d; s/#.*$//'
+    sed '
+        s/^[^#]*[[:space:]]uses:[[:space:]]*//;
+        s/#.*$//;
+        s/[[:space:]]*$//;
+        /\.github/d;
+    ' |
+    sort -fu
 }
 
 timestamp "Checking repo '$repo'"
@@ -79,6 +85,7 @@ if "$srcdir/github_api.sh" "/repos/$repo/contents/.github/workflows" &>/dev/null
         { grep -Eo '^[^#]+[[:space:]]uses:.+/.github/workflows/.+@[^#[:space:]]+' || : ; } <<< "$contents" |
         sed 's/^[^#]*[[:space:]]uses:[[:space:]]*//; s/#.*$//;' |
         while read -r reusable_workflow; do
+            timestamp "Checking reusable workflow: $reusable_workflow"
             reusable_workflow="${reusable_workflow/.github/contents/.github}"
             reusable_workflow="${reusable_workflow/@/?ref=}"
             "$srcdir/github_api.sh" "/repos/$reusable_workflow" |
