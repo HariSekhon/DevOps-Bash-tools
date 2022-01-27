@@ -11,37 +11,20 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-name: Alpine 2.6
-
-#env:
-#  DEBUG: 1
+---
+name: Alpine
 
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 7 * * *'
+    - cron: '0 7 * * *'
 
 jobs:
   build:
-    #name: build
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    container: alpine:2.6
-    env:
-      repo: bash-tools
-    steps:
-    # untars repo in docker container so git submodule update fails
-    #- uses: actions/checkout@v2
-    - name: install git & make
-      run: apk add --no-cache git make ca-certificates perl
-    - name: git clone
-      run: cd /tmp && git clone "https://github.com/harisekhon/$repo"
-    - name: init
-      run: cd "/tmp/$repo" && git submodule update --init --recursive
-    - name: build
-      run: cd "/tmp/$repo" && make ci
-    - name: test
-      run: cd "/tmp/$repo" && make test
+    name: Alpine
+    uses: HariSekhon/GitHub-Actions/.github/workflows/alpine2.6.yaml@master
+    #with:
+    #  debug: 1
