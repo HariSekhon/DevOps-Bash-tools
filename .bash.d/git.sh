@@ -678,6 +678,11 @@ push(){
 pushu(){
     push "$@" --set-upstream origin "$(git branch | awk '/^\*/{print $2}')"
 }
+pushr(){
+    for remote in $(git remote); do
+        git push "$remote"
+    done
+}
 
 switchbranch(){
     if isGit "."; then
