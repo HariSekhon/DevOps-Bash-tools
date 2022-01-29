@@ -680,7 +680,9 @@ pushu(){
 }
 pushr(){
     for remote in $(git remote); do
+        echo "> git push \"$remote\""
         git push "$remote"
+        echo
     done
 }
 
