@@ -33,6 +33,7 @@ help_usage "$@"
 directory="${1:-.}"
 shift ||:
 
+echo "Checking for Groovy files"
 filelist="$(find "$directory" -type f -iname '*.groovy' | sort)"
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
@@ -41,20 +42,57 @@ fi
 
 section "G r o o v y"
 
-start_time="$(start_timer)"
-
-if type -P groovyc &>/dev/null; then
-    while read -r filename; do
-        isExcluded "$filename" && continue
-        echo "groovyc $filename $*"
-        groovyc "$filename" "$@"
-    done <<< "$filelist"
-else
+if ! type -P groovyc &>/dev/null; then
     echo "WARNING: groovyc not found in \$PATH, skipping Groovy checks"
+    echo
     exit 0
 fi
 
+start_time="$(start_timer)"
+
+check_groovyc(){
+    local filename="$1"
+    shift || :
+    #isExcluded "$filename" && return 0
+    echo "groovyc $filename $*" >&2
+    if ! groovyc "$filename" "$@" >&2; then
+        echo 1
+        exit 1
+    fi
+}
+
+tests="$(
+    while read -r filename; do
+        echo "check_groovyc \"$filename\""
+    done <<< "$filelist"
+)"
+
+cpu_count="$(cpu_count)"
+multiplier=1  # doesn't get faster increasing this in tests, perhaps even slightly slower due to context switching
+parallelism="$((cpu_count * multiplier))"
+
+echo "found $cpu_count cores, running $parallelism parallel jobs"
 echo
+
+# export functions to use in parallel
+export -f check_groovyc
+
+set +eo pipefail
+tally="$(parallel -j "$parallelism" <<< "$tests")"
+exit_code=$?
+set -eo pipefail
+
+count="$(awk '{sum+=$1} END{print sum}' <<< "$tally")"
+
+echo >&2
 time_taken "$start_time"
-section2 "Groovy checks passed"
-echo
+echo >&2
+
+if [ $exit_code -eq 0 ]; then
+    section2 "Groovy checks passed"
+else
+    echo "ERROR: $count broken groovy files detected!" >&2
+    echo >&2
+    section2 "Groovy checks FAILED"
+    exit 1
+fi
