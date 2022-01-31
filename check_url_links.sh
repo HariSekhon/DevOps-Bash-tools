@@ -197,10 +197,13 @@ set +eo pipefail
 tally="$(parallel -j 10 <<< "$tests")"
 exit_code=$?
 set -eo pipefail
+
 count="$(awk '{sum+=$1} END{print sum}' <<< "$tally")"
+
 echo >&2
 time_taken "$start_time"
 echo >&2
+
 if [ $exit_code -eq 0 ]; then
     section2 "URL links passed"
 else
