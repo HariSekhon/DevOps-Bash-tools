@@ -27,6 +27,7 @@ Checks for broken URL links in a given file or directory tree
 Sends HEAD requests and follows redirects - as long as the link redirects and succeeds it'll still pass, as this is most relevant to users and READMEs
 
 Accepts HTTP 2xx/3xx status codes as well as the following to avoid false positives:
+- HTTP 400 (bad request) - it's a valid API URL but we're not sending the required parameters/headers/post body
 - HTTP 401 (unauthorized)
 - HTTP 403 (forbidden)
 - HTTP 405 (method not allowed, ie. HEAD)
@@ -102,7 +103,7 @@ check_url_link(){
     fi
     # DockerHub https://registry.hub.docker.com/v2 returns 401
     # GitHub returns HTTP 429 for too many requests
-    if ! [[ $status_code =~ ^([23][[:digit:]]{2}|401|405|429)$ ]]; then
+    if ! [[ $status_code =~ ^([23][[:digit:]]{2}|400|401|405|429)$ ]]; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
