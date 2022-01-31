@@ -53,6 +53,7 @@ start_time="$(start_timer)"
 check_groovyc(){
     local filename="$1"
     shift || :
+    # this requires far too many function exports for all called CI functions
     #isExcluded "$filename" && return 0
     echo "groovyc $filename $*" >&2
     if ! groovyc "$filename" "$@" >&2; then
