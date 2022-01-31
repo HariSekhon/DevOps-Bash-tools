@@ -185,6 +185,7 @@ tick_msg(){
 }
 
 cpu_count(){
+    local cpu_count
     if type -P nproc &>/dev/null; then
         nproc
     elif is_mac; then
