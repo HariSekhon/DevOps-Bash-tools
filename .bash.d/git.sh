@@ -450,7 +450,7 @@ pull(){
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             if git remote -v | grep -qi "${GITHUB_USER:-${GIT_USER:-${USER:-}}}"; then
                 hr
-                echo "> GitHub $x: git pull --all --no-edit $*"
+                echo "> GitHub $x: git pull --no-edit $*"
                 #echo "> GitHub $x: git submodule update --init --recursive"
                 if [ -n "${GIT_PULL_IN_BACKGROUND:-}" ]; then
                     git_pull "$@" &
@@ -468,7 +468,7 @@ pull(){
             [ -d "$x" ] || continue
             hr
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
-            echo "> Work $x: git pull --all --no-edit $*"
+            echo "> Work $x: git pull --no-edit $*"
             #echo "> work $x: git submodule update --init --recursive"
             if [ -n "${GIT_PULL_IN_BACKGROUND:-}" ]; then
                 git_pull "$@" &
@@ -479,7 +479,7 @@ pull(){
             popd &>/dev/null
         done
     else
-        echo "> git pull --all --no-edit $*"
+        echo "> git pull --no-edit $*"
         echo "> git submodule update --init --recursive"
         git_pull "$@"
     fi
@@ -487,7 +487,7 @@ pull(){
 
 git_pull(){
     echo
-    git pull --all --no-edit "$@"
+    git pull --no-edit "$@"
     echo
     git submodule update --init --recursive
     echo
