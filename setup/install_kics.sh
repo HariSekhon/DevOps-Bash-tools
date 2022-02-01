@@ -52,12 +52,28 @@ if [ "$arch" = "amd64" ]; then
     arch="x64"
 fi
 
-cd ~/bin
+# tarballs unpacks locally so create dir
+installdir=~/bin/"kics_${version}"
+
+mkdir -pv "$installdir"
+
+cd "$installdir"
 
 tarball="kics_${version}_${os}_$arch.tar.gz"
 
 wget -c "https://github.com/Checkmarx/kics/releases/download/v$version/$tarball"
+echo
 
-tar zxvf "$tarball"
+echo "unpacking tarball to: $PWD"
+tar zxf "$tarball"
+echo
 
-ln -sfv "kics_${version}_${os}_$arch/kics" kics
+echo "removing tarball:"
+rm -v "$tarball"
+echo
+
+echo "symlinking install dir:"
+ln -sfv "$installdir" ~/bin/kics
+echo
+
+echo "Ensure $installdir is added to your \$PATH"
