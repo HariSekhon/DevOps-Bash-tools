@@ -33,6 +33,9 @@ section "C o n c o u r s e"
 start_time="$(start_timer)"
 
 if type -P fly &>/dev/null; then
+    type -P fly
+    fly --version
+    echo
     find "${1:-.}" -name "$config" |
     while read -r config; do
         echo "Validating $config"
