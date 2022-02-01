@@ -73,9 +73,9 @@ else
         fi
     fi
     if type -P travis &>/dev/null; then
-        if is_CI; then
-            echo "using travis from location: $(type -P travis)"
-        fi
+        type -P travis
+        travis version
+        echo
         # Travis CI is getting upstream errors randomly, eg.
         # server error (500: "Sorry, we experienced an error.\n\nrequest_id:16146a4f-677e-4314-888d-149617bdae2d\n")
         set +e
