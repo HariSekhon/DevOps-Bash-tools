@@ -20,9 +20,16 @@ echo "==========================================================================
 echo "                              S B T   I n s t a l l"
 echo "================================================================================"
 
-SBT_VERSION=${1:-${SBT_VERSION:-0.13.12}}
+SBT_VERSION=${1:-${SBT_VERSION:-1.6.1}}
 
-BASE=/opt
+am_root(){
+    [ "${EUID:-${UID:-$(id -n)}}" = 0 ]
+}
+if am_root; then
+    BASE=/opt
+else
+    BASE=~/bin
+fi
 
 echo
 date '+%F %T  Starting...'
@@ -46,7 +53,7 @@ else
     if ! [ -e "$BASE/sbt" ]; then
         mkdir -p "$BASE"
         cd "$BASE"
-        wget -t 10 --retry-connrefused "https://dl.bintray.com/sbt/native-packages/sbt/$SBT_VERSION/sbt-$SBT_VERSION.tgz" && \
+        wget -t 10 --retry-connrefused "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" && \
         tar zxvf "sbt-$SBT_VERSION.tgz" && \
         rm -f "sbt-$SBT_VERSION.tgz"
         echo
@@ -54,14 +61,18 @@ else
     else
         echo "$BASE/sbt already exists - doing nothing"
     fi
-    if ! [ -e /etc/profile.d/sbt.sh ]; then
-        echo "Adding /etc/profile.d/sbt.sh"
-        # shell execution tracing comes out in the file otherwise
-        set +x
-        cat >> /etc/profile.d/sbt.sh <<EOF
+    if am_root; then
+        if ! [ -e /etc/profile.d/sbt.sh ]; then
+            echo "Adding /etc/profile.d/sbt.sh"
+            # shell execution tracing comes out in the file otherwise
+            set +x
+            cat >> /etc/profile.d/sbt.sh <<EOF
 export SBT_HOME=/opt/sbt
 export PATH=\$PATH:\$SBT_HOME/bin
 EOF
+        fi
+    else
+        echo "Ensure you have ~/bin/sbt/bin set in your \$PATH"
     fi
 fi
 
