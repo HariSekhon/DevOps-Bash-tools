@@ -52,6 +52,9 @@ elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping PyLint error checks"
 else
     if type -P pylint &>/dev/null; then
+        type -P pylint
+        pylint --version
+        echo
         # Can't do this in one pass because pylint -E raises wrong-import-position when it doesn't individually and refuses to respect --disable
         #prog_list="
         while read -r filename; do
