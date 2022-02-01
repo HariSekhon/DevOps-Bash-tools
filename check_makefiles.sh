@@ -33,6 +33,9 @@ section "M a k e"
 start_time="$(start_timer)"
 
 if type -P make &>/dev/null; then
+    type -P make
+    make --version
+    echo
     while read -r makefile; do
         pushd "$(dirname "$makefile")" >/dev/null
         echo "Validating $makefile"
