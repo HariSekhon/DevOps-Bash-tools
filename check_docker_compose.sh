@@ -44,8 +44,8 @@ else
     fi
     docker-compose --version
     echo
-    if [[ "$(docker-compose --version)" =~ [[:space:]]2\. ]]; then
-        echo 'Docker compose version is too old to validate syntax, skipping...'
+    if is_bitbucket_ci; then
+        echo 'Docker compose version on BitBucket is too old to validate syntax, skipping...'
         echo
         exit 0
     fi
