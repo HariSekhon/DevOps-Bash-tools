@@ -36,6 +36,9 @@ start_time="$(start_timer)"
 unset VAGRANT_HOME
 
 if type -P vagrant &>/dev/null; then
+    type -P vagrant
+    vagrant --version
+    echo
     echo "Validating Vagrantfiles:"
     echo
     while read -r vagrantfile; do
