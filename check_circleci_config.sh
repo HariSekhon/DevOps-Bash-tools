@@ -37,9 +37,10 @@ if is_inside_docker; then
     echo "Running inside Docker, skipping Circle lint check"
 else
     if type -P circleci &>/dev/null; then
-        if is_CI; then
-            echo "using circleci from location: $(type -P circleci)"
-        fi
+        type -P circleci
+        printf "version: "
+        circleci version
+        echo
         find . -path '*/.circleci/config.yml' |
         while read -r config; do
             timestamp "checking CircleCI config: $config"
