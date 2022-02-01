@@ -31,6 +31,9 @@ section "Docker Compose Syntax Checks"
 
 start_time="$(start_timer)"
 
+docker-compose --version
+echo
+
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
     echo "\$NOSYNTAXCHECK environment variable set, skipping docker-compose syntax checks"
     echo
