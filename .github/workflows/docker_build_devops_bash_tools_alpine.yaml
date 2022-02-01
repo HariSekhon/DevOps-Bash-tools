@@ -31,6 +31,7 @@ jobs:
         with:
           repository: HariSekhon/Dockerfiles
           path: Dockerfiles
+      - run: ls -lR /
   docker_build:
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
