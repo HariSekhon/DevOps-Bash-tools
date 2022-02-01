@@ -42,6 +42,10 @@ else
         echo "jsonlint not found in \$PATH, not running JSON syntax checks"
         return 0 &>/dev/null || exit 0
     fi
+    type -P jsonlint
+    printf "version: "
+    jsonlint --version
+    echo
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
