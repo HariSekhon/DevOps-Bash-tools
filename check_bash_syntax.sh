@@ -32,6 +32,9 @@ fi
 
 section "Shell Syntax Checks"
 
+bash --version
+echo
+
 check_shell_syntax(){
     echo -n "checking shell syntax: $1 "
     if grep -q '#!/bin/bas[h]' "$1"; then
@@ -69,8 +72,6 @@ start_time="$(start_timer)"
 
 if ! type -P shellcheck &>/dev/null; then
     echo "WARNING: shellcheck not installed, will only do basic checks"
-    echo
-    bash --version
     echo
 fi
 
