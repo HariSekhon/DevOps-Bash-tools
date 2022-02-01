@@ -139,8 +139,10 @@ urls="$(
         [ -f "$filename" ] || continue  # protects against symlinks to dirs returned by 'git ls-files'
         # $url_regex defined in lib/utils.sh
         # shellcheck disable=SC2154
-        { grep -Eo "$url_regex" "$filename" || : ; } |
+        { grep -E "$url_regex" "$filename" || : ; } |
+        #sed 's/#.*//; /^[[:space:]]*$/d' |
         { grep -Eiv \
+             -e '\$' \
              -e 'localhost' \
              -e '\.svc$' \
              -e '.local$' \
@@ -156,6 +158,7 @@ urls="$(
              -e '127.0.0.1' \
              -e '\.\.\.' \
              -e 'x\.x\.x\.x' || : ; } |
+        { grep -Eo "$url_regex" || : ; } |
         if [ -n "${URL_LINKS_IGNORED:-}" ]; then
             grep -Eivf <(sed 's/^[[:space:]]*//;
                               s/[[:space:]]*$//;
@@ -199,7 +202,7 @@ tally="$(parallel -j 10 <<< "$tests")"
 exit_code=$?
 set -eo pipefail
 
-count="$(awk '{sum+=$1} END{print sum}' <<< "$tally")"
+broken_count="$(awk '{sum+=$1} END{print sum}' <<< "$tally")"
 
 echo >&2
 time_taken "$start_time"
@@ -208,7 +211,7 @@ echo >&2
 if [ $exit_code -eq 0 ]; then
     section2 "URL links passed"
 else
-    echo "ERROR: $count broken links detected!" >&2
+    echo "ERROR: $broken_count/$url_count broken links detected!" >&2
     echo >&2
     section2 "URL Links FAILED"
     exit 1
