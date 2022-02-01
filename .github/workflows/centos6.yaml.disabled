@@ -13,6 +13,7 @@
 
 # Not supporting RHEL6 any more because it doesn't have GNU parallel package
 
+---
 name: CentOS 6
 
 #env:
@@ -23,8 +24,7 @@ on:
     branches:
       - master
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 7 * * *'
+    - cron: '0 7 * * *'
 
 jobs:
   build:

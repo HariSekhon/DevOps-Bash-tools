@@ -11,6 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+---
 name: Ubuntu 16.04
 
 #env:
@@ -21,8 +22,7 @@ on: # [push]
     branches:
       - master
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 7 * * *'
+    - cron: '0 7 * * *'
 
 jobs:
   build:
