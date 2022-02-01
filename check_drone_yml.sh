@@ -37,6 +37,9 @@ if is_inside_docker; then
     echo "Running inside Docker, skipping Drone CI yaml lint check"
 else
     if type -P drone &>/dev/null; then
+        type -P drone
+        drone --version
+        echo
         if is_CI; then
             echo "using drone from location: $(type -P drone)"
             set +e
