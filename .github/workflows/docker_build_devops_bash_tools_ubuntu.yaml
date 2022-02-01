@@ -30,10 +30,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: HariSekhon/Dockerfiles
+          path: Dockerfiles
   docker_build:
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
-    needs: [checkout_dockerfiles]
+    needs:
+      - checkout_dockerfiles
     with:
       repo: harisekhon/bash-tools
       tags: ubuntu
