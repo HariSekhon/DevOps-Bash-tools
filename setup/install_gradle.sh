@@ -47,7 +47,7 @@ else
     echo
     echo "Gradle Install done"
 fi
-if [ "${EUID:-${UID:-$(id -n)}}" = 0 ]; then
+if am_root; then
     ln -sv "gradle-$GRADLE_VERSION" gradle
     if ! [ -e /etc/profile.d/gradle.sh ]; then
         echo "Adding /etc/profile.d/gradle.sh"
