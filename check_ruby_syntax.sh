@@ -31,6 +31,9 @@ section "Ruby Syntax Checks"
 start_time="$(start_timer)"
 
 if type -P ruby &>/dev/null; then
+    type -P ruby
+    ruby --version
+    echo
     for x in $(find "${1:-.}" -maxdepth 2 -type f -iname '*.rb' | sort); do
         isExcluded "$x" && continue
         echo -n "$x: "
