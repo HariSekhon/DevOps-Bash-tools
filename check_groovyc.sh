@@ -50,6 +50,9 @@ fi
 
 start_time="$(start_timer)"
 
+groovy --version
+echo
+
 check_groovyc(){
     local filename="$1"
     shift || :
