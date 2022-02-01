@@ -14,6 +14,8 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+# This is a simplistic check, see Semgrep workflows under .github/workflows for more comprehensive check
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
