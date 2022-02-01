@@ -38,8 +38,8 @@ elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping CSON syntax checks"
     echo
 else
-    if ! command -v jsonlint &>/dev/null; then
-        echo "jsonlint not found in \$PATH, not running CSON syntax checks"
+    if ! command -v python-cson &>/dev/null; then
+        echo 'python-cson not found in $PATH, not running CSON syntax checks'
         return 0 &>/dev/null || exit 0
     fi
     max_len=0
