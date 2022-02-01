@@ -44,6 +44,9 @@ section "J a v a"
 start_time="$(start_timer)"
 
 if type -P javac &>/dev/null; then
+    type -P javac
+    javac -version
+    echo
     while read -r filename; do
         isExcluded "$filename" && continue
         echo "javac $filename $*"
