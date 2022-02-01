@@ -33,6 +33,9 @@ section "S B T"
 start_time="$(start_timer)"
 
 if type -P sbt &>/dev/null; then
+    type -P sbt
+    sbt --version
+    echo
     grep -v '/target/' <<< "$build_files" |
     sort |
     while read -r build_sbt; do
