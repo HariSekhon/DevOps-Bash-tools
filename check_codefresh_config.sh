@@ -34,6 +34,9 @@ section "C o d e f r e s h"
 start_time="$(start_timer)"
 
 if type -P codefresh &>/dev/null; then
+    type -P codefresh
+    codefresh version
+    echo
     if [ -n "${CODEFRESH_KEY:-}" ]; then
         while read -r config; do
             echo "Validating $config"
