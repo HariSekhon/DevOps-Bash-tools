@@ -31,9 +31,6 @@ section "Docker Compose Syntax Checks"
 
 start_time="$(start_timer)"
 
-docker-compose --version
-echo
-
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
     echo "\$NOSYNTAXCHECK environment variable set, skipping docker-compose syntax checks"
     echo
@@ -45,6 +42,8 @@ else
         echo "docker-compose not found in \$PATH, not running syntax checks"
         return 0 &>/dev/null || exit 0
     fi
+    docker-compose --version
+    echo
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
