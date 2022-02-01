@@ -103,7 +103,7 @@ check_url_link(){
     fi
     # DockerHub https://registry.hub.docker.com/v2 returns 401
     # GitHub returns HTTP 429 for too many requests
-    if ! [[ $status_code =~ ^([23][[:digit:]]{2}|400|401|405|429)$ ]]; then
+    if ! [[ "$status_code" =~ ^([23][[:digit:]]{2}|400|401|405|429)$ ]]; then
         echo >&2
         echo "Broken Link: $url" >&2
         echo >&2
