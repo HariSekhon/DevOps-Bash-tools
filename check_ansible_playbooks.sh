@@ -42,6 +42,8 @@ else
         echo "ansible-lint not found in \$PATH, not running Ansible syntax checks"
         return 0 &>/dev/null || exit 0
     fi
+    ansible-lint --version
+    echo
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
