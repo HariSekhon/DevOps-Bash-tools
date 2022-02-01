@@ -45,6 +45,8 @@ else
         echo "hadolint not found in \$PATH, not running Dockerfile syntax checks"
         return 0 &>/dev/null || exit 0
     fi
+    hadolint --version
+    echo
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
