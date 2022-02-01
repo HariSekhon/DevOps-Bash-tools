@@ -70,6 +70,8 @@ start_time="$(start_timer)"
 if ! type -P shellcheck &>/dev/null; then
     echo "WARNING: shellcheck not installed, will only do basic checks"
     echo
+    bash --version
+    echo
 fi
 
 if [ $# -gt 0 ]; then
