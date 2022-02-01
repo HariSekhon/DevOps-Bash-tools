@@ -36,6 +36,15 @@ section "Perl Syntax Checks"
 
 start_time="$(start_timer)"
 
+if ! type -P perl &>/dev/null; then
+    echo "Perl is not installed, skipping checks"
+    exit 0
+fi
+
+type -P perl
+perl --version
+echo
+
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
     echo "\$NOSYNTAXCHECK environment variable set, skipping perl syntax checks"
     echo
