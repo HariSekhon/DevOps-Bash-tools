@@ -55,6 +55,9 @@ else
         echo "yamllint not found in \$PATH, not running YAML syntax checks"
         return 0 &>/dev/null || exit 0
     fi
+    type -P yamllint
+    yamllint --version
+    echo
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
