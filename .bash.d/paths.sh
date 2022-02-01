@@ -92,7 +92,11 @@ add_PATH "$bash_tools"
 add_PATH ~/bin
 for x in ~/bin/*; do
     [ -d "$x" ] || continue
-    add_PATH "$x"
+    if [ -d "$x/bin" ]; then
+        add_PATH "$x/bin"
+    else
+        add_PATH "$x"
+    fi
 done
 
 # Serverless.com framework
