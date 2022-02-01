@@ -33,6 +33,9 @@ section "G r a d l e"
 start_time="$(start_timer)"
 
 if type -P gradle &>/dev/null; then
+    type -P gradle
+    gradle --version
+    echo
     grep -v '/build/' <<< "$build_files" |
     sort |
     while read -r build_gradle; do
