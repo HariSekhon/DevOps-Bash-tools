@@ -44,6 +44,11 @@ else
     fi
     docker-compose --version
     echo
+    if [[ "$(docker-compose --version)" =~ [[:space:]]2\. ]]; then
+        echo 'Docker compose version is too old to validate syntax, skipping...'
+        echo
+        exit 0
+    fi
     max_len=0
     for x in $filelist; do
         if [ ${#x} -gt $max_len ]; then
