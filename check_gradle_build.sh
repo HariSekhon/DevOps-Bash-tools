@@ -37,7 +37,12 @@ if type -P gradle &>/dev/null; then
     sort |
     while read -r build_gradle; do
         echo "Validating $build_gradle"
-        gradle -b "$build_gradle" -m clean build || exit $?
+        #gradle -b "$build_gradle" -m clean build || exit $?
+        # Gradle 8 doesn't let you specify -b, expects build.gradle
+        dir="$(dirname "$build_gradle")"
+        cd "$dir"
+        #gradle -b "$build_gradle" -m clean build || exit $?
+        gradle -m clean build || exit $?
     done
 else
     echo "Gradle not found in \$PATH, skipping gradle checks"
