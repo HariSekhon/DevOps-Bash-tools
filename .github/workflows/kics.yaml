@@ -11,6 +11,7 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
+---
 name: Kics
 
 on:
@@ -30,3 +31,7 @@ jobs:
   kics:
     name: Kics
     uses: HariSekhon/GitHub-Actions/.github/workflows/kics.yaml@master
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
