@@ -33,6 +33,9 @@ section "M a v e n"
 start_time="$(start_timer)"
 
 if type -P mvn &>/dev/null; then
+    type -P mvn
+    mvn --version
+    echo
     grep -v '/target/' <<< "$poms" |
     while read -r pom; do
         echo "Validating $pom"
