@@ -33,3 +33,7 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:
       target: harisekhon/bash-tools
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
