@@ -39,7 +39,7 @@ jobs:
   semgrep:
     name: Semgrep GitHub
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
-    permission:
+    permissions:
       actions: read
       contents: read
       security-events: write
