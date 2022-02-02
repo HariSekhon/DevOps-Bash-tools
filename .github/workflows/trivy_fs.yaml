@@ -1,0 +1,35 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2022-02-02 11:27:37 +0000 (Wed, 02 Feb 2022)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+---
+name: Trivy Filesystem Scan
+
+on:
+  push:
+    branches:
+      - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 1'
+
+jobs:
+  trivy:
+    name: Trivy Filesystem Scan
+    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy_fs.yaml@master
+    permissions:
+      contents: read
