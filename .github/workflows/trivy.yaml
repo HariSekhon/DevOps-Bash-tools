@@ -12,7 +12,7 @@
 #
 
 ---
-name: Trivy
+name: Trivy Docker Image Scan
 
 on:
   push:
@@ -29,7 +29,7 @@ on:
 
 jobs:
   trivy:
-    name: Trivy
+    name: Trivy Docker Image Scan
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:
       docker_image: harisekhon/bash-tools
