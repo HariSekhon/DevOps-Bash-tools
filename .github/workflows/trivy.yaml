@@ -32,7 +32,7 @@ jobs:
     name: Trivy
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:
-      target: harisekhon/bash-tools
+      docker_image: harisekhon/bash-tools
       severity: ''
     permissions:
       contents: read
