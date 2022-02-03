@@ -37,7 +37,7 @@ get_github_repo(){
 is_github_owner_repo(){
     local repo="$1"
     # .github repo is valid
-    [[ "$repo" =~ ^[[:alnum:]-]+/[[:alnum:].-]+$ ]]
+    [[ "$repo" =~ ^[[:alnum:]-]+/[[:alnum:]._-]+$ ]]
 }
 
 get_github_user(){
