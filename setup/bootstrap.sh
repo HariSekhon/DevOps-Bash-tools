@@ -52,6 +52,11 @@ elif [ "$(uname -s)" = Linux ]; then
         $sudo apt-get update $opts
         $sudo apt-get install $opts -y git make curl wget --no-install-recommends
     elif type yum >/dev/null 2>&1; then
+        if grep -qi 'NAME=.*CentOS' /etc/*release; then
+            echo "CentOS EOL detected, replacing base URL to vault to re-enable package installs"
+            $sudo sed -i 's/^[[:space:]]*mirrorlist/#mirrorlist/' /etc/yum.repos.d/CentOS-Linux-*
+            $sudo sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Linux-*
+        fi
         $sudo yum install -y git make curl wget
     else
         echo "Package Manager not found on Linux, cannot bootstrap"
