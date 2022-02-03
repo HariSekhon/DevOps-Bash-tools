@@ -40,7 +40,7 @@ if [ "$(uname -s)" = Darwin ]; then
 elif [ "$(uname -s)" = Linux ]; then
     echo "Bootstrapping on Linux:  $repo"
     if type apk >/dev/null 2>&1; then
-        $sudo apk --no-cache add bash git make curl
+        $sudo apk --no-cache add bash git make curl wget
     elif type apt-get >/dev/null 2>&1; then
         if [ -n "${CI:-}" ]; then
             export DEBIAN_FRONTEND=noninteractive
@@ -50,9 +50,9 @@ elif [ "$(uname -s)" = Linux ]; then
             opts="-qq"
         fi
         $sudo apt-get update $opts
-        $sudo apt-get install $opts -y git make curl --no-install-recommends
+        $sudo apt-get install $opts -y git make curl wget --no-install-recommends
     elif type yum >/dev/null 2>&1; then
-        $sudo yum install -y git make curl
+        $sudo yum install -y git make curl wget
     else
         echo "Package Manager not found on Linux, cannot bootstrap"
         exit 1
