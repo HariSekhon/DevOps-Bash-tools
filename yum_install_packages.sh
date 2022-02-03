@@ -87,6 +87,12 @@ $(sed 's/^python[23]-/python3-/' <<< "$packages")"
     fi
 fi
 
+if grep -qi 'NAME=.*CentOS' /etc/*release; then
+    echo "CentOS EOL detected, replacing base URL to vault to re-enable package installs"
+    sed -i 's/^[[:space:]]*mirrorlist/#mirrorlist/' /etc/yum.repos.d/CentOS-Linux-*
+    sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Linux-*
+fi
+
 SUDO=""
 # shellcheck disable=SC2039
 [ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
