@@ -506,15 +506,15 @@ _gitaddimport() {
     local action="$1"
     shift;
     [ -z "$*" ] && return 1
-    local basedir;
-    basedir="$(basedir "$@")" && local trap_codes="INT ERR";
-    # shellcheck disable=SC2064,SC2086
-    trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes;
-    pushd "$basedir" > /dev/null || return 1;
-    # shellcheck disable=SC2086
-    local filenames
-    filenames="$(strip_basedirs "$basedir" "$@")";
-    while read -r filename; do
+    local basedir
+    local trap_codes="INT ERR"
+    for filename in "$@"; do
+        basedir="$(basedir "$filename")"
+        # shellcheck disable=SC2064,SC2086
+        trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes;
+        pushd "$basedir" > /dev/null || return 1;
+        # shellcheck disable=SC2086
+        filename="$(strip_basedirs "$basedir" "$filename")";
         if ! [ -e "$filename" ]; then
             echo "ERROR: $filename does not exist" >&2
             return 1
@@ -531,7 +531,7 @@ _gitaddimport() {
             echo "ERROR: '$filename' already in git" >&2
             return 1
         fi
-    done <<< "$filenames"
+    done
     popd > /dev/null || :
 }
 
