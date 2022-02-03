@@ -13,6 +13,8 @@
 
 # Installs SDKMan
 
+# https://sdkman.io/install
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
