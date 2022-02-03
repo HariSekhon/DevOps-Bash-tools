@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the status of all workflows
+Lists the last completed status of all GitHub Actions workflows
 
 Requires GitHub CLI to be installed and configured with a \$GITHUB_TOKEN
 "
