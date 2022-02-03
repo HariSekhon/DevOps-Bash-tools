@@ -24,7 +24,7 @@ if [ "${NO_FAIL:-}" ]; then
     set +eo pipefail
 fi
 
-if grep -qi "NAME=Fedora" /etc/*release; then
+if grep -qi 'NAME=.*Fedora' /etc/*release; then
     echo "Detected Fedora, skipping epel install..."
     exit 0
 fi
