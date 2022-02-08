@@ -44,7 +44,7 @@ else
     fi
     type -P jsonlint
     printf "version: "
-    jsonlint --version
+    jsonlint --version || :
     echo
     max_len=0
     for x in $filelist; do
