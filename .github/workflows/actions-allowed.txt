@@ -20,3 +20,5 @@
 # technically should fix to a SHA, but I trust these authors, if I didn't, I wouldn't run their actions at all
 
 returntocorp/semgrep-action@v1
+fairwindsops/pluto/github-action@*
+megalinter/megalinter@v5
