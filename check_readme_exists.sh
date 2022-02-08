@@ -51,5 +51,5 @@ for x in README README.md; do
     fi
 done
 
-echo 'README file not found!'
+echo 'WARNING: README file not found!'
 exit 1
