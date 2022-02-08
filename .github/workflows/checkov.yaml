@@ -39,3 +39,7 @@ jobs:
   checkov:
     name: Checkov
     uses: HariSekhon/GitHub-Actions/.github/workflows/checkov.yaml@master
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
