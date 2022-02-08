@@ -37,7 +37,7 @@ on:
 
 jobs:
   semgrep:
-    name: Semgrep GitHub
+    name: Semgrep GitHub Security Tab
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
     permissions:
       actions: read
