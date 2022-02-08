@@ -51,5 +51,5 @@ for x in LICENSE LICENSE.txt; do
     fi
 done
 
-echo 'LICENSE file not found!'
+echo 'WARNING: LICENSE file not found!'
 exit 1
