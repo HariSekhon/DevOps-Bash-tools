@@ -24,7 +24,7 @@ on:
 
 jobs:
   build:
-    name: Ubuntu 20
+    name: Ubuntu 20.04
     uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu20.yaml@master
     #with:
     #  debug: 1
