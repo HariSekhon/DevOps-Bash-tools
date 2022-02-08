@@ -32,6 +32,7 @@ perl
 procps
 psmisc  # for fuser for apt_wait.sh
 ruby-dev  # to build Travis CI gem
+shellcheck
 time
 wget
 # included in distro
