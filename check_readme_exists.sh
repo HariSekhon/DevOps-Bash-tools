@@ -44,9 +44,12 @@ cd "$git_root"
 for x in README README.md; do
     if [ -s "$x" ]; then
         echo "OK: $x file found"
-        break
+        exit 0
     elif [ -f "$x" ]; then
         echo "WARNING: $x file found but it is empty! "
         exit 1
     fi
 done
+
+echo 'README file not found!'
+exit 1
