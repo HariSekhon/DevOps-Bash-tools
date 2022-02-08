@@ -32,7 +32,7 @@ The list of actions is taken from the adjacent file '${ALLOW_FILE#$srcdir/}'
 
 See Also:
 
-    github_actions_repo_actions_allow.sh - applies this to all repos
+    github_actions_repos_lockdown.sh - applies this to all repos
 "
 
 # used by usage() in lib/utils.sh
