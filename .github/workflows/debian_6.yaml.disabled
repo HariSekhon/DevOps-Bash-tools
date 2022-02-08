@@ -14,40 +14,17 @@
 ---
 name: Debian 6
 
-#env:
-#  DEBUG: 1
-
-on: # [push]
+on:
   push:
     branches:
       - master
+  workflow_dispatch:
   schedule:
     - cron: '0 7 * * *'
 
 jobs:
   build:
-    #name: build
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    container: debian:6
-    env:
-      repo: bash-tools
-    steps:
-    # untars repo in docker container so git submodule update fails
-    #- uses: actions/checkout@v2
-    - name: switch apt sources to archive
-      run: |
-        sed -i 's/deb.debian.org/archive.debian.org/' /etc/apt/sources.list
-        sed -i 's/security.debian.org/archive.debian.org/' /etc/apt/sources.list
-    - name: install git & make
-      run: |
-        apt-get update -q || :  # will fail on security updates
-        apt-get install -qy git make
-    - name: git clone
-      run: cd /tmp && git clone "https://github.com/harisekhon/$repo"
-    - name: init
-      run: cd "/tmp/$repo" && git submodule update --init --recursive
-    - name: build
-      run: cd "/tmp/$repo" && make ci
-    - name: test
-      run: cd "/tmp/$repo" && make test
+    name: Debian 6
+    uses: HariSekhon/GitHub-Actions/.github/workflows/debian6.yaml@master
+    #with:
+    #  debug: 1
