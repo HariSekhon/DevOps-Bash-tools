@@ -188,6 +188,7 @@ cpu_count(){
     local cpu_count
     if type -P nproc &>/dev/null; then
         nproc
+        return
     elif is_mac; then
         cpu_count="$(sysctl -n hw.ncpu)"
     else
