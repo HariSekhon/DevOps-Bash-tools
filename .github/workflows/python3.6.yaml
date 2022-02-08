@@ -14,40 +14,17 @@
 ---
 name: Python 3.6
 
-#env:
-#  DEBUG: 1
-
 on:
   push:
     branches:
       - master
+  workflow_dispatch:
   schedule:
     - cron: '0 7 * * *'
 
 jobs:
   build:
-    #name: build
-    timeout-minutes: 60
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        #python-version: [2.7, 3.5, 3.6, 3.7, 3.8, pypy2, pypy3]
-        python-version: [3.6]
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v1
-      with:
-        python-version: ${{ matrix.python-version }}
-    - uses: actions/cache@v1
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-bash-tools  # -${{ hashFiles('**/requirements.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-pip-bash-tools
-    - name: init
-      run: make init
-    - name: build
-      run: make ci
-    - name: test
-      run: make test
+    name: Python 3.6
+    uses: HariSekhon/GitHub-Actions/.github/workflows/python3.6.yaml@master
+    #with:
+    #  debug: 1
