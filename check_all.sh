@@ -54,6 +54,9 @@ if ! [ -n "${BASH_EXCLUDED_FILES_FUNCTION:-}" ]; then
     fi
 fi
 
+"$srcdir/check_license_exists.sh"
+"$srcdir/check_readme_exists.sh"
+
 "$srcdir/check_symlinks.sh"
 
 "$srcdir/check_aws_no_git_credentials.sh"
