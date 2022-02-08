@@ -19,6 +19,7 @@
 
 # technically should fix to a SHA, but I trust these authors, if I didn't, I wouldn't run their actions at all
 
-returntocorp/semgrep-action@v1
+checkmarx/kics-action@*
 fairwindsops/pluto/github-action@*
 megalinter/megalinter@v5
+returntocorp/semgrep-action@v1
