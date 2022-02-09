@@ -166,6 +166,7 @@ gitbrowse(){
     local url_base
     url_base="$(git remote -v |
                 grep "$filter" |
+                grep origin |
                 awk '/git@|https:/{print $2}' |
                 head -n1 |
                 sed 's|^ssh://||;
@@ -179,8 +180,7 @@ gitbrowse(){
     if [[ "$url_base" =~ dev.azure.com ]]; then
         url_base="${url_base%/*}/_git/${url_base##*/}"
     fi
-    if [ $# -gt 0 ] &&
-       [ -z "$url_base" ]; then
+    if [ -z "$url_base" ]; then
         echo "git remote url not found for $filter"
         return 1
     fi
