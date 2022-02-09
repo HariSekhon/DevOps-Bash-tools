@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-20-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3527-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1542-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-659-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3535-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1544-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-662-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -23,7 +23,7 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugins.svg)](https://starchart.cc/HariSekhon/Nagios-Plugins)
 
 ---
-## # DevOps, CI/CD, Big Data & NoSQL Docker Images
+## # Dockerfiles for DevOps, CI/CD, Big Data & NoSQL
 
 Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 
