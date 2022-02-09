@@ -65,6 +65,7 @@ check_groovyc(){
     fi
 }
 
+echo "building file list" >&2
 tests="$(
     while read -r filename; do
         echo "check_groovyc \"$filename\""
