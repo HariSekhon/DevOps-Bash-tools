@@ -45,6 +45,10 @@ fi
 
 gh run list -L 200 ${args:+"${args[@]}"} \
             --json name,status,databaseId \
-            -q '.[] | select(.status != "completed") | .databaseId' |
-xargs -L1 echo gh run cancel ${args:+"${args[@]}"} |
+            -q '.[] | select(.status != "completed") | [.databaseId, .name] | @tsv' |
+#xargs -L1 echo gh run cancel ${args:+"${args[@]}"} |
+while read -r id name; do
+    timestamp "Cancelling workflow: $name"
+    echo gh run cancel ${args:+"${args[@]}"} "$id"
+done |
 parallel -j 10
