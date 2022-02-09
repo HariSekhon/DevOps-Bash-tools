@@ -31,7 +31,7 @@ jobs:
       repo: harisekhon/bash-tools
       tags: alpine
       dockerfile-repo: HariSekhon/Dockerfiles
-      context: /home/runner/work/DevOps-Bash-tools/DevOps-Bash-tools/Dockerfiles/devops-bash-tools-alpine
+      context: Dockerfiles/devops-bash-tools-alpine
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
