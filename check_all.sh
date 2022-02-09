@@ -127,11 +127,11 @@ fi
 
 # =======
 # XXX: not enabling by default because too simplistic for real projects, likely to cause cross-reference breakages
-if [ -z "${GROOVYC_CHECK:-}" ]; then
+if [ -n "${GROOVYC_CHECK:-}" ]; then
     "$srcdir/check_groovyc.sh"
 fi
 
-if [ -z "${JAVAC_CHECK:-}" ]; then
+if [ -n "${JAVAC_CHECK:-}" ]; then
     "$srcdir/check_javac.sh"
 fi
 # =======
