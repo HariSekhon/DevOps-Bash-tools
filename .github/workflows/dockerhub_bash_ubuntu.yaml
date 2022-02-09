@@ -29,7 +29,7 @@ jobs:
       - checkout_dockerfiles
     with:
       repo: harisekhon/bash-tools
-      tags: ubuntu
+      tags: ubuntu latest
       dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-ubuntu
     secrets:
