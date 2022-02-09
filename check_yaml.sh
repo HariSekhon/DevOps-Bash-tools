@@ -42,53 +42,95 @@ fi
 
 section "YAML Syntax Checks"
 
-start_time="$(start_timer)"
-
 if [ -n "${NOSYNTAXCHECK:-}" ]; then
     echo "\$NOSYNTAXCHECK environment variable set, skipping YAML syntax checks"
     echo
+    exit 0
 elif [ -n "${QUICK:-}" ]; then
     echo "\$QUICK environment variable set, skipping YAML syntax checks"
     echo
-else
-    if ! command -v yamllint &>/dev/null; then
-        echo "yamllint not found in \$PATH, not running YAML syntax checks"
-        return 0 &>/dev/null || exit 0
-    fi
-    type -P yamllint
-    yamllint --version
-    echo
-    max_len=0
-    for x in $filelist; do
-        if [ ${#x} -gt $max_len ]; then
-            max_len=${#x}
-        fi
-    done
-    # to account for the semi colon
-    ((max_len + 1))
-    for x in $filelist; do
-        isExcluded "$x" && continue
-        printf "%-${max_len}s " "$x:"
-        set +eo pipefail
-        # doesn't pick up the config without an explicit -c ...
-        output="$(yamllint -c "$YAMLLINT_CONFIG_FILE" "$x")"
-        # shellcheck disable=SC2181
-        if [ $? -eq 0 ]; then
-            echo "OK"
-        else
-            echo "FAILED"
-            if [ -z "${QUIET:-}" ]; then
-                echo
-                echo "$output"
-                echo
-            fi
-            if [ -z "${NOEXIT:-}" ]; then
-                return 1 &>/dev/null || exit 1
-            fi
-        fi
-        set -eo pipefail
-    done
-    time_taken "$start_time"
-    section2 "All YAML files passed syntax check"
+    exit 0
 fi
+
+
+if ! command -v yamllint &>/dev/null; then
+    echo "yamllint not found in \$PATH, not running YAML syntax checks"
+    exit 0
+fi
+
+start_time="$(start_timer)"
+
+type -P yamllint
+yamllint --version
 echo
+
+export max_len=0
+for x in $filelist; do
+    if [ ${#x} -gt $max_len ]; then
+        max_len=${#x}
+    fi
+done
+# to account for the colon
+((max_len + 1))
+
+check_yaml(){
+    local filename="$1"
+    printf "%-${max_len}s " "$filename:" >&2
+    set +eo pipefail
+    # doesn't pick up the config without an explicit -c ...
+    output="$(yamllint -c "$YAMLLINT_CONFIG_FILE" "$filename")"
+    result=$?
+    set -eo pipefail
+    # shellcheck disable=SC2181
+    if [ $result -eq 0 ]; then
+        echo "OK" >&2
+    else
+        echo "FAILED" >&2
+        if [ -z "${QUIET:-}" ]; then
+            echo >&2
+            sed "s|^|$filename: |" <<< "$output" >&2
+            echo >&2
+        fi
+        echo 1
+        exit 1
+    fi
+}
+
+echo "building file list" >&2
+tests="$(
+    for filename in $filelist; do
+        isExcluded "$filename" && continue
+        echo "check_yaml $filename"
+    done
+)"
+
+cpu_count="$(cpu_count)"
+multiplier=1  # doesn't get faster increasing this in tests, perhaps even slightly slower due to context switching
+parallelism="$((cpu_count * multiplier))"
+parallelism=1
+
+echo "found $cpu_count cores, running $parallelism parallel jobs"
+echo
+
+# export functions to use in parallel
+export -f check_yaml
+
+set +eo pipefail
+tally="$(parallel -j "$parallelism" <<< "$tests")"
+exit_code=$?
+set -eo pipefail
+
+count="$(awk '{sum+=$1} END{print sum}' <<< "$tally")"
+
+echo >&2
+time_taken "$start_time"
+echo >&2
+
+if [ $exit_code -eq 0 ]; then
+    section2 "All YAML files passed syntax check"
+else
+    echo "ERROR: $count broken yaml files detected!" >&2
+    echo >&2
+    section2 "YAML checks failed"
+    exit 1
+fi
