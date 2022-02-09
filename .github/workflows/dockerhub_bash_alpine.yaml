@@ -12,7 +12,7 @@
 #
 
 ---
-name: Docker Build DevOps Bash Tools (Alpine)
+name: DockerHub Build (Alpine)
 
 on:
   push:
@@ -22,16 +22,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  checkout_dockerfiles:
-    name: Checkout Dockerfiles
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: HariSekhon/Dockerfiles
-          path: Dockerfiles
-      - run: 'ls -lR / || :'
   docker_build:
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
@@ -40,6 +30,7 @@ jobs:
     with:
       repo: harisekhon/bash-tools
       tags: alpine
+      dockerfile-repo: HariSekhon/Dockerfiles
       context: /home/runner/work/DevOps-Bash-tools/DevOps-Bash-tools/Dockerfiles/devops-bash-tools-alpine
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
