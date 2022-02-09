@@ -107,7 +107,6 @@ tests="$(
 cpu_count="$(cpu_count)"
 multiplier=1  # doesn't get faster increasing this in tests, perhaps even slightly slower due to context switching
 parallelism="$((cpu_count * multiplier))"
-parallelism=1
 
 echo "found $cpu_count cores, running $parallelism parallel jobs"
 echo
