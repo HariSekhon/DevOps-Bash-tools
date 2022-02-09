@@ -25,6 +25,21 @@ srcdir="$(dirname "$0")"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Find where one or more CLI programs are installed by searching all the perl library locations
+
+Especially useful when perl tools get installed to places not in your \$PATH - where the 'which' command can't help
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<program> [<program2> <program3> ...]"
+
+help_usage "$@"
+
+min_args 1 "$@"
+
 perl="${PERL:-perl}"
 
 perl_path=""
@@ -38,18 +53,6 @@ done < <("$perl" -e 'print join("\n", @INC);')
 
 if [ -d ~/perl5/bin ]; then
     perl_path="$perl_path:"~/perl5/bin
-fi
-
-if [ $# -lt 1 ]; then
-    cat <<EOF
-Find where one or more CLI programs are installed by searching all the perl library locations
-
-Especially useful when perl tools get installed to places not in your \$PATH - where the 'which' command can't help
-
-usage: ${0##*/} <program> [<program2> <program3> ...]
-
-EOF
-    exit 1
 fi
 
 export PATH="$perl_path:$PATH"
