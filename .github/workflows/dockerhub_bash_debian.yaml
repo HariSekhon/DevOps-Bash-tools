@@ -12,7 +12,7 @@
 #
 
 ---
-name: Docker Build DevOps Bash Tools (Debian)
+name: DockerHub Build (Debian)
 
 on:
   push:
@@ -22,15 +22,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  checkout_dockerfiles:
-    name: Checkout Dockerfiles
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          repository: HariSekhon/Dockerfiles
-          path: Dockerfiles
   docker_build:
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
@@ -39,6 +30,7 @@ jobs:
     with:
       repo: harisekhon/bash-tools
       tags: debian
+      dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-debian
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
