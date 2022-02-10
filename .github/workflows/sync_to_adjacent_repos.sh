@@ -23,6 +23,7 @@ sync_file(){
     local filename="$1"
     local repo="$2"
     local dir="${3:-}"
+    [ "$filename" = validate.yaml ] && continue
     if [ -z "$dir" ]; then
         dir="$repo"
     fi
@@ -40,11 +41,11 @@ sync_file(){
         mkdir -p -v "$targetdir"
         echo "syncing $filename -> $target"
         perl -p -e "s/(DevOps-)?Bash-tools/$repo/i" "$filename" > "$target"
-        if [[ "$repo" =~ nagios-plugins ]]; then
-            timeout=240
-            perl -pi -e "s/(^\\s*timeout-minutes:).*/\\1 $timeout/" "$target"
-            perl -pi -e 's/(^[[:space:]]+make$)/\1 build zookeeper/' "$target"
-        fi
+        #if [[ "$repo" =~ nagios-plugins ]]; then
+        #    timeout=240
+        #    perl -pi -e "s/(^\\s*timeout-minutes:).*/\\1 $timeout/" "$target"
+        #    perl -pi -e 's/(^[[:space:]]+make$)/\1 build zookeeper/' "$target"
+        #fi
     fi
 }
 
