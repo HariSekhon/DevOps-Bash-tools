@@ -25,6 +25,7 @@ on:
 jobs:
   build:
     name: Ubuntu 16.04
-    uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu16.yaml@master
-    #with:
-    #  debug: 1
+    uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu.yaml@master
+    with:
+      version: 16.04
+      #debug: 1
