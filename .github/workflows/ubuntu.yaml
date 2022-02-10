@@ -26,5 +26,6 @@ jobs:
   build:
     name: Ubuntu
     uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu.yaml@master
-    #with:
-    #  debug: 1
+    with:
+      version: latest
+      #debug: 1
