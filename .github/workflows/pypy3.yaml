@@ -23,7 +23,7 @@ on:
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: false  # build auto-cancellation - enabling this causes false-positive badge failure statuses
+  cancel-in-progress: true
 
 jobs:
   build:
