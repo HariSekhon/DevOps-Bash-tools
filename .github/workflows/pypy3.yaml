@@ -4,7 +4,7 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #
@@ -24,6 +24,7 @@ on:
 jobs:
   build:
     name: PyPy3
-    uses: HariSekhon/GitHub-Actions/.github/workflows/pypy3.yaml@master
-    #with:
-    #  debug: 1
+    uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
+    with:
+      version: pypy3
+      #debug: 1
