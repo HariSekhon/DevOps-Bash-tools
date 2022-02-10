@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/git.sh"
+. "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
