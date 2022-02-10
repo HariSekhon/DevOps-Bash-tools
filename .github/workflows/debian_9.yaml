@@ -22,6 +22,10 @@ on:
   schedule:
     - cron: '0 7 * * *'
 
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: false  # build auto-cancellation - enabling this causes false-positive badge failure statuses
+
 jobs:
   build:
     name: Debian 9
