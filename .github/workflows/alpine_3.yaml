@@ -25,6 +25,7 @@ on:
 jobs:
   build:
     name: Alpine 3
-    uses: HariSekhon/GitHub-Actions/.github/workflows/alpine3.yaml@master
-    #with:
-    #  debug: 1
+    uses: HariSekhon/GitHub-Actions/.github/workflows/alpine.yaml@master
+    with:
+      version: 3
+      #debug: 1
