@@ -26,5 +26,6 @@ jobs:
   build:
     name: Mac
     uses: HariSekhon/GitHub-Actions/.github/workflows/mac.yaml@master
-    #with:
-    #  debug: 1
+    with:
+      version: latest
+      #debug: 1
