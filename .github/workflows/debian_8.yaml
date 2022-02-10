@@ -25,6 +25,7 @@ on:
 jobs:
   build:
     name: Debian 8
-    uses: HariSekhon/GitHub-Actions/.github/workflows/debian8.yaml@master
-    #with:
-    #  debug: 1
+    uses: HariSekhon/GitHub-Actions/.github/workflows/debian.yaml@master
+    with:
+      version: 8
+      #debug: 1
