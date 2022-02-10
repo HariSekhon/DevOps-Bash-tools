@@ -3,15 +3,15 @@
 ![Original Repos](https://img.shields.io/badge/Repos-21-blue?logo=github)
 ![Stars](https://img.shields.io/badge/Stars-3535-blue?logo=github)
 ![Forks](https://img.shields.io/badge/Forks-1551-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-662-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-663-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-598-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-607-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-231.0k-lightgrey?logo=codecademy)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--02--09-lightgrey?logo=github)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--02--10-lightgrey?logo=github)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 
@@ -19,7 +19,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-21 original source git repos with 598 CI builds (549 hosted, 49 self-hosted) across 22 different CI systems:
+21 original source git repos with 607 CI builds (558 hosted, 49 self-hosted) across 22 different CI systems:
 
 ---
 # Advanced Nagios Plugins Collection
@@ -130,6 +130,9 @@ Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
 [![Perl 5.24](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.24/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.24%22)
 [![Perl 5.26](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.26/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.26%22)
 [![Perl 5.28](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.28/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.28%22)
+[![Perl 5.30](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.30/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.30%22)
+[![Perl 5.32](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.32/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.32%22)
+[![Perl 5.34](https://github.com/HariSekhon/Nagios-Plugins/workflows/Perl%205.34/badge.svg)](https://github.com/HariSekhon/Nagios-Plugins/actions?query=workflow%3A%22Perl+5.34%22)
 
 
 
@@ -636,6 +639,9 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 [![Perl 5.24](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.24/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.24%22)
 [![Perl 5.26](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.26/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.26%22)
 [![Perl 5.28](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.28/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.28%22)
+[![Perl 5.30](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.30/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.30%22)
+[![Perl 5.32](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.32/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.32%22)
+[![Perl 5.34](https://github.com/HariSekhon/DevOps-Perl-tools/workflows/Perl%205.34/badge.svg)](https://github.com/HariSekhon/DevOps-Perl-tools/actions?query=workflow%3A%22Perl+5.34%22)
 
 [git.io/perl-tools](https://git.io/perl-tools)
 
@@ -860,6 +866,9 @@ Perl Utility Library for my other repos
 [![Perl 5.24](https://github.com/HariSekhon/lib/workflows/Perl%205.24/badge.svg)](https://github.com/HariSekhon/lib/actions?query=workflow%3A%22Perl+5.24%22)
 [![Perl 5.26](https://github.com/HariSekhon/lib/workflows/Perl%205.26/badge.svg)](https://github.com/HariSekhon/lib/actions?query=workflow%3A%22Perl+5.26%22)
 [![Perl 5.28](https://github.com/HariSekhon/lib/workflows/Perl%205.28/badge.svg)](https://github.com/HariSekhon/lib/actions?query=workflow%3A%22Perl+5.28%22)
+[![Perl 5.30](https://github.com/HariSekhon/lib/workflows/Perl%205.30/badge.svg)](https://github.com/HariSekhon/lib/actions?query=workflow%3A%22Perl+5.30%22)
+[![Perl 5.32](https://github.com/HariSekhon/lib/workflows/Perl%205.32/badge.svg)](https://github.com/HariSekhon/lib/actions?query=workflow%3A%22Perl+5.32%22)
+[![Perl 5.34](https://github.com/HariSekhon/lib/workflows/Perl%205.34/badge.svg)](https://github.com/HariSekhon/lib/actions?query=workflow%3A%22Perl+5.34%22)
 
 
 ---
@@ -1387,7 +1396,7 @@ Java Utility library for my other repos
 
 
 
-21 git repos summarized with 598 CI builds (549 hosted, 49 self-hosted) across 22 different CI systems
+21 git repos summarized with 607 CI builds (558 hosted, 49 self-hosted) across 22 different CI systems
 
 ---
 
