@@ -26,5 +26,6 @@ jobs:
   build:
     name: CentOS
     uses: HariSekhon/GitHub-Actions/.github/workflows/centos.yaml@master
-    #with:
-    #  debug: 1
+    with:
+      version: latest
+      #debug: 1
