@@ -26,5 +26,6 @@ jobs:
   build:
     name: Debian
     uses: HariSekhon/GitHub-Actions/.github/workflows/debian.yaml@master
-    #with:
-    #  debug: 1
+    with:
+      version: latest
+      #debug: 1
