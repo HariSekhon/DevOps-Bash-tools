@@ -43,7 +43,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<username> <keyfile>]"
+usage_args="[<username> <keyfile> <group_or_policy>]"
 
 help_usage "$@"
 
@@ -55,20 +55,24 @@ aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
 
 access_keys_csv="${2:-$HOME/.aws/keys/${user}_${aws_account_id}_accessKeys.csv}"
 
+group="${3:-Admins}"
+policy="${3:-AdministratorAccess}"
+
 export AWS_DEFAULT_OUTPUT=json
 
 aws_create_user_if_not_exists "$user"
 
 exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 
-admin_group="Admins"
-if aws iam list-groups | jq -e ".Groups[] | select(.GroupName == \"$admin_group\")" >/dev/null; then
-    timestamp "Adding user '$user' to group '$admin_group' on account '$aws_account_id'"
-    aws iam add-user-to-group --user-name "$user" --group-name "$admin_group"
+if aws iam list-groups | jq -e ".Groups[] | select(.GroupName == \"$group\")" >/dev/null; then
+    timestamp "Adding user '$user' to group '$group' on account '$aws_account_id'"
+    aws iam add-user-to-group --user-name "$user" --group-name "$group"
+elif aws iam list-policies | jq -e ".Policies[] | select(.PolicyName == \"$policy\")" >/dev/null; then
+    #timestamp "Group '$group' not found in to account '$aws_account_id'"
+    timestamp "Granting policy '$policy' permissions directly to user '$user' in account '$aws_account_id'"
+    aws iam attach-user-policy --user-name "$user" --policy-arn "arn:aws:iam::aws:policy/$policy"
 else
-    timestamp "Admin group '$admin_group' not found in to account '$aws_account_id'"
-    timestamp "Granting Administrator policy permissions directly to user '$user' in account '$aws_account_id'"
-    aws iam attach-user-policy --user-name "$user" --policy-arn 'arn:aws:iam::aws:policy/AdministratorAccess'
+    die "Neither group '$group' nor policy '$policy' was found to assign to user '$user' in account '$aws_account_id'"
 fi
 
 echo
