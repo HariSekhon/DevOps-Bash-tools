@@ -608,6 +608,7 @@ etc.
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{user}` and `{repo}` in each iteration
   - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
+  - `github_actions_aws_create_load_credential.sh` - creates an AWS user with group/policy, generates and downloads access keys, and uploads them to the given repo
   - `github_actions_in_use.sh` - lists GitHub Actions directly referenced in the .github/workflows in the current local repo checkout
   - `github_actions_in_use_repo.sh` - lists GitHub Actions for a given repo via the API, including following imported reusable workflows
   - `github_actions_in_use_across_repos.sh` - lists GitHub Actions in use across all your repos
