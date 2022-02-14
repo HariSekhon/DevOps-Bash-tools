@@ -31,6 +31,7 @@ All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
 
+{owner}               => the user or organization that owns the repo
 {organization}, {org} => the organization account being iterated
 {username}, {user}    => the user account being iterated
 {name}                => the repo name without the user prefix
@@ -61,6 +62,7 @@ while read -r name; do
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
     cmd="$cmd_template"
+    cmd="${cmd//\{owner\}/$user_or_org}"
     cmd="${cmd//\{username\}/${user:-}}"
     cmd="${cmd//\{user\}/${user:-}}"
     cmd="${cmd//\{organization\}/${GITHUB_ORGANIZATION:-}}"
