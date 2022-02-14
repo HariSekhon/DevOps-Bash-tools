@@ -31,15 +31,16 @@ All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
 
-{owner}               => the user or organization that owns the repo
-{organization}, {org} => the organization account being iterated
-{username}, {user}    => the user account being iterated
-{name}                => the repo name without the user prefix
-{repo}                => the repo name with the user prefix
+{owner}               => the user or organization that owns the repo eg. HariSekhon or MyOrg, whichever owns the repo
+{organization}, {org} => the organization account being iterated eg. MyOrg
+{username}, {user}    => the user account you are authenticated as eg. HariSekhon
+{name}                => the repo name without the owner prefix eg. DevOps-Bash-tools
+{repo}                => the repo name with the owner prefix eg. HariSekhon/DevOps-Bash-tools or MyOrg/DevOps-Bash-tools
 
 eg.
-    ${0##*/} echo user={user} name={name} repo={repo}
-    ${0##*/} echo org={org}   name={name} repo={repo}
+    ${0##*/} echo owner={owner}  name={name} repo={repo}
+    ${0##*/} echo user={user}    name={name} repo={repo}  # the user you are authenticated as may not be the owner for organization repos, safer to use {owner}
+    ${0##*/} echo org={org}      name={name} repo={repo}
 "
 
 # used by usage() in lib/utils.sh
