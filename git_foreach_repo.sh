@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo {repo} is found at {dir}
+#  args: echo owner={owner} repo={repo} is found at dir={dir}
 #
 #  Author: Hari Sekhon
 #  Date: 2016-01-17 12:14:06 +0000 (Sun, 17 Jan 2016)
@@ -41,9 +41,9 @@ All arguments become the command template
 
 The command template replaces the following for convenience in each iteration:
 
-{repo} - repo name with user/org prefix (eg. HariSekhon/DevOps-Bash-tools)
-{name} - repo name without the user/org prefix (eg. DevOps-Bash-tools)
-{dir}  - directory on disk (eg. /Users/hari/github/bash-tools)
+{owner} - repo owner eg. HariSekhon
+{repo}  - repo name without the user/org prefix (eg. DevOps-Bash-tools)
+{dir}   - directory on disk (eg. /Users/hari/github/bash-tools)
 
 eg. ${0##*/} 'echo {repo} is found at {dir}'
 
@@ -85,29 +85,37 @@ else
 fi
 
 execute_repo(){
-    local repo="$1"
+    local owner_repo="$1"
     local cmd="${*:2}"
-    if ! echo "$repo" | grep -q "/"; then
-        repo="HariSekhon/$repo"
-    fi
-    repo_dir="${repo##*/}"
+    local owner
+    local repo="${owner_repo##*/}"
+    repo_dir="$repo"
     repo_dir="${repo_dir##*:}"
     repo_dir="$srcdir/../$repo_dir"
     repo="${repo%%:*}"
-    local name="${repo##*/}"
     if ! [ -d "$repo_dir" ]; then
         #git clone "$git_url/$repo" "$repo_dir"
         return
+    fi
+    if grep -q "/" <<< "$owner_repo"; then
+        owner="${owner_repo%/*}"
+    else
+        #owner_repo="HariSekhon/$repo"
+        owner="$(cd "$repo_dir"; git remotes | awk '{print $2}' | sed 's|/[^/]*$||; s|/[^/]*/_git||; s|.*[/:]||' | head -n1)"
+        if [ -z "$owner" ]; then
+            die "Failed to find owner for repo '$repo' at dir '$repo_dir'"
+        fi
+        owner_repo="$owner/$repo"
     fi
     pushd "$repo_dir" >/dev/null
     repo_dir="$PWD"
     if [ -z "${GIT_FOREACH_REPO_NO_HEADERS:-}" ]; then
         echo "# ============================================================================ #" >&2
-        echo "# $repo - $repo_dir" >&2
+        echo "# $owner_repo - $repo_dir" >&2
         echo "# ============================================================================ #" >&2
     fi
+    cmd="${cmd//\{owner\}/$owner}"
     cmd="${cmd//\{repo\}/$repo}"
-    cmd="${cmd//\{name\}/$name}"
     cmd="${cmd//\{dir\}/$repo_dir}"
     eval "$cmd"
     if [[ "$cmd" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
