@@ -615,6 +615,7 @@ etc.
   - `github_actions_repos_lockdown.sh` - secures GitHub Actions settings across all user repos to only GitHub, verified partners and selected 3rd party actions
   - `github_actions_repo_set_secret.sh` - sets a secret in the given repo from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `github_actions_repo_env_set_secret.sh` - sets a secret in the given repo and environment from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `github_actions_repo_secrets_overriding_org.sh` - finds any secrets for a repo that are overriding organization level secrets. Useful to combine with `github_foreach_repo.sh` for auditing
   - `github_actions_repo_restrict_actions.sh` - restricts GitHub Actions in the given repo to only running actions from GitHub and verfied partner companies (.eg AWS, Docker)
   - `github_actions_repo_actions_allow.sh` - allows select 3rd party GitHub Actions in the given repo
   - `github_actions_runner.sh` - generates a [GitHub Actions](https://github.com/features/actions) self-hosted runner token for a given Repo or Organization via the GitHub API and then runs a dockerized GitHub Actions runner with the appropriate configuration
