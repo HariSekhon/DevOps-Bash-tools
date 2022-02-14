@@ -52,6 +52,10 @@ git_root(){
     git rev-parse --show-toplevel
 }
 
+is_in_git_repo(){
+    git_root &>/dev/null
+}
+
 allbranches(){
     if type -P uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
