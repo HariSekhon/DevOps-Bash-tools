@@ -39,7 +39,7 @@ staging
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates Pull Requests to update the current repo if it is a fork from it's original source
+Creates Pull Requests to update the given or current repo if it is a fork from its original source repo
 
 Creates Pull Requests for branches given as arguments or if else by default the following branches if they are found:
 $BRANCHES_TO_PR
@@ -50,37 +50,39 @@ $BRANCHES_TO_AUTOMERGE
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<branches>]"
+usage_args="[<owner>/<repo> <branches>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
+
+owner_repo="${1:-}"
+shift || :
 branches="${*:-$BRANCHES_TO_PR}"
 
-if ! is_in_git_repo; then
-    die "Not in a git repository checkout"
+if is_blank "$owner_repo"; then
+    if ! is_in_git_repo; then
+        die "No repo given and not in a git repository checkout to infer it"
+    fi
+    owner_repo='{owner}/{repo}'
 fi
 
-repo_data="$(gh api '/repos/{owner}/{repo}')"
+repo_data="$(gh api "/repos/$owner_repo")"
 
 is_fork="$(jq -r '.fork' <<< "$repo_data")"
-
-if [ "$is_fork" != true ]; then
-    die "Not within a forked repo, cannot raise a pull request from an original source repo"
-fi
-
 owner="$(jq -r '.owner.login' <<< "$repo_data")"
 repo="$(jq -r '.name' <<< "$repo_data")"
 
+if [ "$is_fork" != true ]; then
+    die "Repo '$owner_repo' is not a forked repo, cannot raise a pull request from an original source repo"
+fi
+
 fork_source_owner="$(jq -r '.source.owner.login' <<< "$repo_data")"
-
 fork_source_repo="$(jq -r '.source.full_name' <<< "$repo_data")"
-
 fork_source_default_branch="$(jq -r '.source.default_branch' <<< "$repo_data")"
 
-
 for branch in $branches; do
-    if ! gh api "/repos/{owner}/{repo}/branches" -q '.[].name' | grep -Fxq "$branch"; then
+    if ! gh api "/repos/$owner/$repo/branches" -q '.[].name' | grep -Fxq "$branch"; then
         timestamp "No local fork branch '$branch' found, skipping PR"
         echo >&2
         continue
@@ -92,7 +94,7 @@ for branch in $branches; do
     fi
     base="$branch"
     head="$fork_source_owner":"$fork_source_branch"
-    total_commits="$(gh api "/repos/{owner}/{repo}/compare/$base...$head" -q '.total_commits')"
+    total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
     if [ "$total_commits" -gt 0 ]; then
         timestamp "Creating Pull Request from upstream source repo for branch '$base'"
         output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" )"
