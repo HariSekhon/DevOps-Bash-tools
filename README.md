@@ -1107,8 +1107,9 @@ make python
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
 
+    make github-cli             installs GitHub CLI
     make kubernetes             installs kubectl and kustomize to ~/bin/
-    make terraform              installs major terraform versions to ~/bin/ (useful during upgrades or switching between environments)
+    make terraform              installs Terraform to ~/bin/
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX TPM and plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon GitHub repos
