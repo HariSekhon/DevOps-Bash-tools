@@ -28,7 +28,7 @@ define MAKEFILE_USAGE
 
   Repo specific options:
 
-    make install                builds all script dependencies, installs AWS CLI, symlinks all config files to $$HOME and adds sourcing of bash profile
+    make install                builds all script dependencies, installs AWS CLI, GitHub CLI, symlinks all config files to $$HOME and adds sourcing of bash profile
 
     make link                   symlinks all config files to $$HOME and adds sourcing of bash profile
     make unlink                 removes all symlinks pointing to this repo's config files and removes the sourcing lines from .bashrc and .bash_profile
@@ -46,8 +46,9 @@ define MAKEFILE_USAGE
 
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
 
-    make kubernetes             installs kubectl and kustomize to ~/bin/
-    make terraform              installs major terraform versions to ~/bin/ (useful during upgrades or switching between environments)
+    make github-cli             installs GitHub CLI
+    make kubernetes             installs Kubernetes kubectl and kustomize to ~/bin/
+    make terraform              installs Terraform to ~/bin/
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX TPM and plugin for kubernetes context
     make ccmenu                 installs and (re)configures CCMenu to watch this and all other major HariSekhon GitHub repos
@@ -72,7 +73,7 @@ build:
 	@echo ================
 	@$(MAKE) git-summary
 	@$(MAKE) init
-	@$(MAKE) system-packages aws
+	@$(MAKE) system-packages aws github-cli
 
 .PHONY: init
 init: git
@@ -81,7 +82,7 @@ init: git
 	@echo
 
 .PHONY: install
-install: build link aws
+install: build link aws github-cli
 	@:
 
 .PHONY: uninstall
@@ -221,6 +222,13 @@ gcp: system-packages
 gcp-shell:
 	@if [ -z "${DEVSHELL_PROJECT_ID:-}" ]; then echo "Not running inside Google Cloud Shell"; exit 1; fi
 	@$(MAKE) system-packages link
+
+.PHONY: github-cli
+github-cli: ~/bin/gh
+	@:
+
+~/bin/gh:
+	setup/install_github_cli.sh
 
 .PHONY: kubernetes
 kubernetes: kubectl kustomize
