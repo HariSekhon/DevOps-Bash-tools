@@ -96,7 +96,13 @@ for branch in $branches; do
     head="$fork_source_owner":"$fork_source_branch"
     total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
     if [ "$total_commits" -gt 0 ]; then
-        existing_pr="$(gh pr list -R "$owner/$repo" --json headRefName,headRepository,headRepositoryOwner,isCrossRepository,state,title,url,changedFiles,baseRefName,commits,number -q '.[] | select(.baseRefName == "production") | select(.headRefName == "master") | select(.headRepositoryOwner.login == "HariSekhon")')"
+        existing_pr="$(gh pr list -R "$owner/$repo" \
+            --json baseRefName,changedFiles,commits,headRefName,headRepository,headRepositoryOwner,isCrossRepository,number,state,title,url \
+            -q ".[] |
+                select(.baseRefName == \"$base\") |
+                select(.headRefName == \"$fork_source_branch\") |
+                select(.headRepositoryOwner.login == \"$fork_source_owner\")
+        ")"
         existing_pr_url="$(jq -r '.url' <<< "$existing_pr")"
         if [ -n "$existing_pr" ]; then
             timestamp "Branch '$base' already has an existing pull request ($existing_pr_url), skipping PR"
