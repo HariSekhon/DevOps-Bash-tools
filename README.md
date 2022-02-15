@@ -1108,7 +1108,7 @@ make python
     make ls-scripts             print list of scripts in this project, ignoring code libraries in lib/ and .bash.d/
 
     make github-cli             installs GitHub CLI
-    make kubernetes             installs kubectl and kustomize to ~/bin/
+    make kubernetes             installs Kubernetes kubectl and kustomize to ~/bin/
     make terraform              installs Terraform to ~/bin/
     make vim                    installs Vundle and plugins
     make tmux                   installs TMUX TPM and plugin for kubernetes context
