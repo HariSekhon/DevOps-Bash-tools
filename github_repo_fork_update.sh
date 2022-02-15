@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2022-02-14 11:32:21 +0000 (Mon, 14 Feb 2022)
+#
+#  https://github.com/HariSekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(dirname "${BASH_SOURCE[0]}")"
+
+# shellcheck disable=SC1090
+. "$srcdir/lib/git.sh"
+
+BRANCHES_TO_PR="
+master
+main
+develop
+dev
+staging
+production
+"
+
+BRANCHES_TO_AUTOMERGE="
+master
+main
+develop
+dev
+staging
+"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Creates Pull Requests to update the current repo if it is a fork from it's original source
+
+Creates Pull Requests for branches given as arguments or if else by default the following branches if they are found:
+$BRANCHES_TO_PR
+
+Auto-merges the PRs for the following branches if GITHUB_FORK_AUTOMERGE is set to any value:
+$BRANCHES_TO_AUTOMERGE
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<branches>]"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+branches="${*:-$BRANCHES_TO_PR}"
+
+if ! is_in_git_repo; then
+    die "Not in a git repository checkout"
+fi
+
+repo_data="$(gh api '/repos/{owner}/{repo}')"
+
+is_fork="$(jq -r '.fork' <<< "$repo_data")"
+
+if [ "$is_fork" != true ]; then
+    die "Not within a forked repo, cannot raise a pull request from an original source repo"
+fi
+
+owner="$(jq -r '.owner.login' <<< "$repo_data")"
+repo="$(jq -r '.name' <<< "$repo_data")"
+
+fork_source_owner="$(jq -r '.source.owner.login' <<< "$repo_data")"
+
+fork_source_repo="$(jq -r '.source.full_name' <<< "$repo_data")"
+
+fork_source_default_branch="$(jq -r '.source.default_branch' <<< "$repo_data")"
+
+
+for branch in $branches; do
+    if ! gh api "/repos/{owner}/{repo}/branches" -q '.[].name' | grep -Fxq "$branch"; then
+        timestamp "No local fork branch '$branch' found, skipping PR"
+        echo >&2
+        continue
+    fi
+    if gh api "/repos/$fork_source_repo/branches" -q '.[].name' | grep -Fxq "$branch"; then
+        fork_source_branch="$branch"
+    else
+        fork_source_branch="$fork_source_default_branch"
+    fi
+    base="$branch"
+    head="$fork_source_owner":"$fork_source_branch"
+    total_commits="$(gh api "/repos/{owner}/{repo}/compare/$base...$head" -q '.total_commits')"
+    if [ "$total_commits" -gt 0 ]; then
+        timestamp "Creating Pull Request from upstream source repo for branch '$base'"
+        output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" )"
+        pr_url="$(grep '/pull/' <<< "$output")"
+        if grep -Fxq "$branch" <<< "$BRANCHES_TO_AUTOMERGE"; then
+            gh pr merge --merge "$pr_url"
+        fi
+    else
+        timestamp "Branch '$base' is already up to date with upstream, skipping PR"
+        echo >&2
+    fi
+done
