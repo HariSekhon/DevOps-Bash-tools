@@ -20,7 +20,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 # shellcheck disable=SC1090
 . "$srcdir/lib/git.sh"
 
-BRANCHES_TO_PR="
+BRANCHES_TO_PR_DEFAULT="
 master
 main
 develop
@@ -41,8 +41,8 @@ staging
 usage_description="
 Creates Pull Requests to update the given or current repo if it is a fork from its original source repo
 
-Creates Pull Requests for branches given as arguments or if else by default the following branches if they are found:
-$BRANCHES_TO_PR
+Creates Pull Requests for branches given as arguments or set in \$BRANCHES_TO_PR, or else by default the following branches if they are found:
+$BRANCHES_TO_PR_DEFAULT
 
 Auto-merges the PRs for branches set in \$BRANCHES_TO_AUTOMERGE or the following default branches:
 $BRANCHES_TO_AUTOMERGE_DEFAULT
@@ -58,7 +58,7 @@ help_usage "$@"
 
 owner_repo="${1:-}"
 shift || :
-branches="${*:-$BRANCHES_TO_PR}"
+branches="${*:-${BRANCHES_TO_PR:-$BRANCHES_TO_PR_DEFAULT}}"
 branches_to_automerge="${BRANCHES_TO_AUTOMERGE:-$BRANCHES_TO_AUTOMERGE_DEFAULT}"
 
 if is_blank "$owner_repo"; then
