@@ -112,7 +112,7 @@ for branch in $branches; do
         timestamp "Creating Pull Request from upstream source repo for branch '$base'"
         output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" )"
         pr_url="$(grep '/pull/' <<< "$output")"
-        if grep -Fxq "$branch" <<< "$BRANCHES_TO_AUTOMERGE"; then
+        if [ -n "${GITHUB_FORK_AUTOMERGE:-}" ] && grep -Fxq "$branch" <<< "$BRANCHES_TO_AUTOMERGE"; then
             gh pr merge --merge "$pr_url"
         fi
     else
