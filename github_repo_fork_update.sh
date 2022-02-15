@@ -96,6 +96,13 @@ for branch in $branches; do
     head="$fork_source_owner":"$fork_source_branch"
     total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
     if [ "$total_commits" -gt 0 ]; then
+        existing_pr="$(gh pr list -R "$owner/$repo" --json headRefName,headRepository,headRepositoryOwner,isCrossRepository,state,title,url,changedFiles,baseRefName,commits,number -q '.[] | select(.baseRefName == "production") | select(.headRefName == "master") | select(.headRepositoryOwner.login == "HariSekhon")')"
+        existing_pr_url="$(jq -r '.url' <<< "$existing_pr")"
+        if [ -n "$existing_pr" ]; then
+            timestamp "Branch '$base' already has an existing pull request ($existing_pr_url), skipping PR"
+            echo >&2
+            continue
+        fi
         timestamp "Creating Pull Request from upstream source repo for branch '$base'"
         output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" )"
         pr_url="$(grep '/pull/' <<< "$output")"
