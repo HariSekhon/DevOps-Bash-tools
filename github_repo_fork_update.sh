@@ -29,7 +29,7 @@ staging
 production
 "
 
-BRANCHES_TO_AUTOMERGE="
+BRANCHES_TO_AUTOMERGE_DEFAULT="
 master
 main
 develop
@@ -44,13 +44,13 @@ Creates Pull Requests to update the given or current repo if it is a fork from i
 Creates Pull Requests for branches given as arguments or if else by default the following branches if they are found:
 $BRANCHES_TO_PR
 
-Auto-merges the PRs for the following branches if GITHUB_FORK_AUTOMERGE is set to any value:
-$BRANCHES_TO_AUTOMERGE
+Auto-merges the PRs for branches set in \$BRANCHES_TO_AUTOMERGE or the following default branches:
+$BRANCHES_TO_AUTOMERGE_DEFAULT
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<owner>/<repo> <branches>]"
+usage_args="[<owner>/<repo> <branch1> <branch2> <branch3> ...]"
 
 help_usage "$@"
 
@@ -59,6 +59,7 @@ help_usage "$@"
 owner_repo="${1:-}"
 shift || :
 branches="${*:-$BRANCHES_TO_PR}"
+branches_to_automerge="${BRANCHES_TO_AUTOMERGE:-$BRANCHES_TO_AUTOMERGE_DEFAULT}"
 
 if is_blank "$owner_repo"; then
     if ! is_in_git_repo; then
@@ -112,7 +113,7 @@ for branch in $branches; do
         timestamp "Creating Pull Request from upstream source repo for branch '$base'"
         output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" )"
         pr_url="$(grep '/pull/' <<< "$output")"
-        if [ -n "${GITHUB_FORK_AUTOMERGE:-}" ] && grep -Fxq "$branch" <<< "$BRANCHES_TO_AUTOMERGE"; then
+        if grep -Fxq "$branch" <<< "$branches_to_automerge"; then
             gh pr merge --merge "$pr_url"
         fi
     else
