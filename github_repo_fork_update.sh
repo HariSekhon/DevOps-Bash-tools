@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/git.sh"
+. "$srcdir/lib/github.sh"
 
 BRANCHES_TO_PR_DEFAULT="
 master
@@ -83,12 +83,16 @@ fork_source_repo="$(jq -r '.source.full_name' <<< "$repo_data")"
 fork_source_default_branch="$(jq -r '.source.default_branch' <<< "$repo_data")"
 
 for branch in $branches; do
-    if ! gh api "/repos/$owner/$repo/branches" -q '.[].name' | grep -Fxq "$branch"; then
+    # use function to iterate pages
+    #if ! gh api "/repos/$owner/$repo/branches?per_page=100" -q '.[].name' | grep -Fxq "$branch"; then
+    if ! get_github_repo_branches "$owner/$repo" | grep -Fxq "$branch"; then
         timestamp "No local fork branch '$branch' found, skipping PR"
         echo >&2
         continue
     fi
-    if gh api "/repos/$fork_source_repo/branches" -q '.[].name' | grep -Fxq "$branch"; then
+    # use function to iterate pages
+    #if gh api "/repos/$fork_source_repo/branches?per_page=100" -q '.[].name' | grep -Fxq "$branch"; then
+    if get_github_repo_branches "$fork_source_repo" | grep -Fxq "$branch"; then
         fork_source_branch="$branch"
     else
         fork_source_branch="$fork_source_default_branch"
