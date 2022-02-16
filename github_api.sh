@@ -32,7 +32,7 @@ usage_description="
 Queries the GitHub.com API
 
 Automatically handles authentication via environment variables \$GITHUB_USERNAME / \$GITHUB_USER
-and \$GITHUB_TOKEN / \$GITHUB_PASSWORD (the latter is deprecated)
+and \$GH_TOKEN / \$GITHUB_TOKEN / \$GITHUB_PASSWORD (password is deprecated)
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
@@ -106,7 +106,7 @@ if [ -z "$user" ]; then
     #fi
 fi
 
-PASSWORD="${GITHUB_PASSWORD:-${GITHUB_TOKEN:-}}"
+PASSWORD="${GH_TOKEN:-${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}}"
 
 if [ -z "${PASSWORD:-}" ]; then
     PASSWORD="$(git remote -v | awk '/https:\/\/[[:alnum:]]+@github\.com/{print $2; exit}' | sed 's|https://||;s/@.*//')"
