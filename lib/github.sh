@@ -23,7 +23,7 @@ srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 get_github_repo(){
     git remote -v 2>/dev/null |
-	grep github.com |
+    grep github.com |
     awk '{print $2}' |
     head -n1 |
     sed '
