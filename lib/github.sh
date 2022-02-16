@@ -19,7 +19,10 @@ set -euo pipefail
 srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir_github_lib/../lib/utils.sh"
+. "$srcdir_github_lib/utils.sh"
+
+# shellcheck disable=SC1090
+. "$srcdir_github_lib/git.sh"
 
 get_github_repo(){
     git remote -v 2>/dev/null |
