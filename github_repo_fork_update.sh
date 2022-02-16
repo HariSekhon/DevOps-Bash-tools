@@ -106,7 +106,7 @@ for branch in $branches; do
         ")"
         existing_pr_url="$(jq -r '.url' <<< "$existing_pr")"
         if [ -n "$existing_pr" ]; then
-            timestamp "Branch '$base' already has an existing pull request ($existing_pr_url), skipping PR"
+            timestamp "Branch '$base' already has an existing pull request, skipping PR: $existing_pr_url"
             echo >&2
             continue
         fi
