@@ -114,9 +114,12 @@ for branch in $branches; do
         # --no-maintainer-edit is important, otherwise member ci account gets error (and yes there is a double 'Fork collab' error in GitHub CLI's error message):
         # pull request create failed: GraphQL: Fork collab Fork collab can't be granted by someone without permission (createPullRequest)
         output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" --no-maintainer-edit)"
+        echo >&2
         pr_url="$(grep '/pull/' <<< "$output")"
         if grep -Fxq "$branch" <<< "$branches_to_automerge"; then
+            timestamp "Merging Pull Request #${pr_url##*/} from upstream source repo for branch '$base'"
             gh pr merge --merge "$pr_url"
+            echo >&2
         fi
     else
         timestamp "Branch '$base' is already up to date with upstream, skipping PR"
