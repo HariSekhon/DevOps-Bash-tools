@@ -45,8 +45,7 @@ Creates Pull Requests for branches given as arguments or set in \$BRANCHES_TO_PR
 $BRANCHES_TO_PR_DEFAULT
 
 Auto-merges the PRs for branches set in \$BRANCHES_TO_AUTOMERGE or the following default branches:
-$BRANCHES_TO_AUTOMERGE_DEFAULT
-"
+$BRANCHES_TO_AUTOMERGE_DEFAULT"
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
