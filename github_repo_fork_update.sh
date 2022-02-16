@@ -21,20 +21,20 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 . "$srcdir/lib/github.sh"
 
 BRANCHES_TO_PR_DEFAULT="
-master
-main
-develop
-dev
-staging
-production
+    master
+    main
+    develop
+    dev
+    staging
+    production
 "
 
 BRANCHES_TO_AUTOMERGE_DEFAULT="
-master
-main
-develop
-dev
-staging
+    master
+    main
+    develop
+    dev
+    staging
 "
 
 # shellcheck disable=SC2034,SC2154
@@ -119,7 +119,7 @@ for branch in $branches; do
         output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script: ${0##*/}" --no-maintainer-edit)"
         echo >&2
         pr_url="$(grep '/pull/' <<< "$output")"
-        if grep -Fxq "$branch" <<< "$branches_to_automerge"; then
+        if tr '[:space:]' '\n' <<< "$branches_to_automerge" | sed '/^[[:space:]]*$/d' | grep -Fxq "$branch"; then
             timestamp "Merging Pull Request #${pr_url##*/} from upstream source repo for branch '$base'"
             gh pr merge --merge "$pr_url"
             echo >&2
