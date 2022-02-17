@@ -121,7 +121,12 @@ if [ "$total_commits" -gt 0 ]; then
     timestamp "Creating Pull Request from head '$head' into base branch '$base'"
     # --no-maintainer-edit is important, otherwise member ci account gets error (and yes there is a double 'Fork collab' error in GitHub CLI's error message):
     # pull request create failed: GraphQL: Fork collab Fork collab can't be granted by someone without permission (createPullRequest)
-    gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge $head branch to $base branch" --body "Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo." --no-maintainer-edit
+    gh pr create -R "$owner/$repo" \
+                 --base "$base" \
+                 --head "$head" \
+                 --title "Merge $head branch into $base branch" \
+                 --body "Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo." \
+                 --no-maintainer-edit
     echo >&2
 else
     timestamp "Branch '$base' is already up to date with upstream, skipping PR"
