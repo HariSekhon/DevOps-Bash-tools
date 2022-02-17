@@ -25,7 +25,7 @@ usage_description="
 Creates a GitHub Pull Request idempotently by first checking for an existing PR between the branches,
 and also checking if there are the necessary commits between the branches, to avoid common errors from blindly raising PRs
 
-Useful to automate code promotion across environments (eg. Staging branch -> Production branch)
+Useful to automate audited code promotion across environments (eg. Staging branch -> Production branch)
 
 Also works across repo forks if the head branch contains an '<owner>:' prefix
 
