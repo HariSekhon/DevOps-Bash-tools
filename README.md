@@ -607,6 +607,8 @@ etc.
 - `github_*.sh` - [GitHub](https://github.com/) API scripts:
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{owner}`/`{name}` or `{repo}` placeholders in each iteration
+  - `github_create_pull_request.sh` - creates a Pull Request idempotently by first checking for an existing PR between the branches, and also checking if there is are the necessary commits between the branches, to avoid common errors from blindly raising PRs. Useful for automating code promotion to production
+  - `github_merge_branch.sh` - merges one branch into another branch via a Pull Request for full audit tracking. Useful for automated code promotion between environments or backport hotfixes from Production or Staging to trunk branches such as master, main, dev or develop
   - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
   - `github_actions_aws_create_load_credential.sh` - creates an AWS user with group/policy, generates and downloads access keys, and uploads them to the given repo
   - `github_actions_in_use.sh` - lists GitHub Actions directly referenced in the .github/workflows in the current local repo checkout
