@@ -12,7 +12,7 @@
 #
 
 ---
-name: Fork Update
+name: Fork Update PR
 
 on:
   workflow_dispatch:
@@ -21,12 +21,14 @@ on:
         type: string
         required: false
   schedule:
-    - cron: '0 10 * * 2'
+    # fork-sync happens for default branch every hour, so just after that, run PRs for branches
+    - cron: '2 10 * * 2'
 
 jobs:
-  fork_update:
-    name: Fork Update
-    uses: HariSekhon/GitHub-Actions/.github/workflows/fork-update.yaml@master
+  fork_update_pr:
+    if: github.repository_owner != 'HariSekhon'
+    name: Fork Update PR
+    uses: HariSekhon/GitHub-Actions/.github/workflows/fork-update-pr.yaml@master
     with:
       debug: ${{ github.event.inputs.debug }}
     permissions:
