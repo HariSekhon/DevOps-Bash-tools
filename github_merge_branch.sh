@@ -30,8 +30,8 @@ The HEAD branch is the branch you want to merge FROM, eg. 'my-feature-branch'
 The BASE branch is the branch you want to merge INTO, eg. 'master' or 'main'
 
 One very good use case for this script, aside from just quickly PR and merge from your branch,
-is to use in automation to automatically backport changes such as hotfixes from higher environments
-such as Staging or Production branches back into your main trunk branch such as master, main, dev or develop branches
+is to automatically backport changes such as hotfixes from higher environments (eg. Production)
+back into your main trunk branch such as master, main, dev or develop branches
 
 Requires GitHub CLI to be installed and configured
 
