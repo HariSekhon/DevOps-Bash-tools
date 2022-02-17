@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository_owner == 'HariSekhon'
     name: Fedora
     uses: HariSekhon/GitHub-Actions/.github/workflows/fedora.yaml@master
     #with:

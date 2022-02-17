@@ -29,5 +29,6 @@ on:
 
 jobs:
   validate:
+    if: github.repository_owner == 'HariSekhon'
     name: Validate
     uses: HariSekhon/GitHub-Actions/.github/workflows/validate.yaml@master

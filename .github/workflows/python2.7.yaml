@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository_owner == 'HariSekhon'
     name: Python 2.7
     uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
     with:

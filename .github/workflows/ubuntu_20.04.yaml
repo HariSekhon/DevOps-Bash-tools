@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository_owner == 'HariSekhon'
     name: Ubuntu 20.04
     uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu.yaml@master
     with:

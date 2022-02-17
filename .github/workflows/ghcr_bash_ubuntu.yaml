@@ -27,6 +27,7 @@ concurrency:
 
 jobs:
   docker_build:
+    if: github.repository_owner == 'HariSekhon'
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build_ghcr.yaml@master
     with:

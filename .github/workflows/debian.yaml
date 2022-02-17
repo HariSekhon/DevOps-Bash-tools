@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository_owner == 'HariSekhon'
     name: Debian
     uses: HariSekhon/GitHub-Actions/.github/workflows/debian.yaml@master
     with:

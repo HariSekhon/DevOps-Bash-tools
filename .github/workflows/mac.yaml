@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository_owner == 'HariSekhon'
     name: Mac
     uses: HariSekhon/GitHub-Actions/.github/workflows/mac.yaml@master
     with:

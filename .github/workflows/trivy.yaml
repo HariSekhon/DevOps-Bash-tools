@@ -29,6 +29,7 @@ on:
 
 jobs:
   trivy:
+    if: github.repository_owner == 'HariSekhon'
     name: Trivy Docker Image Scan
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:

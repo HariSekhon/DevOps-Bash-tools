@@ -29,6 +29,7 @@ on:
 
 jobs:
   trivy:
+    if: github.repository_owner == 'HariSekhon'
     name: Trivy Filesystem Scan
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy_fs.yaml@master
     permissions:
