@@ -81,7 +81,7 @@ owner="$(jq -r '.owner.login' <<< "$repo_data")"
 repo="$(jq -r '.name' <<< "$repo_data")"
 
 if [ "$is_fork" != true ]; then
-    die "Repo '$owner_repo' is not a forked repo, cannot raise a pull request from an original source repo"
+    die "Repo '$owner/$repo' is not a forked repo, cannot raise a pull request from an original source repo"
 fi
 
 fork_source_owner="$(jq -r '.source.owner.login' <<< "$repo_data")"
