@@ -39,7 +39,7 @@ BRANCHES_TO_AUTOMERGE_DEFAULT="
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates Pull Requests to update the given or current repo if it is a fork from its original source repo
+Updates the current or given repo fork via Pull Requests for full audit tracking
 
 Creates Pull Requests for branches given as arguments or set in \$BRANCHES_TO_PR, or else by default the following branches if they are found:
 $BRANCHES_TO_PR_DEFAULT
@@ -52,6 +52,7 @@ Requires GitHub CLI to be installed and configured
 See also:
 
     github_repo_fork_recreate.sh - recreates a forked repo to clean out PRs and reset branches to be clean fast-forward merges
+    gh repo sync - sync's a repo but lacks the auditing of Pull Requests
 "
 
 # used by usage() in lib/utils.sh
