@@ -1077,14 +1077,23 @@ check_env_defined(){
 }
 
 
+is_yes(){
+    shopt -s nocasematch
+    if [[ "$1" =~ ^(y|yes)$ ]]; then
+        shopt -u nocasematch
+        return 0
+    else
+        shopt -u nocasematch
+        return 1
+    fi
+}
+
 check_yes(){
     local answer="$1"
-    shopt -s nocasematch
-    if ! [[ "$answer" =~ ^(y|yes)$ ]]; then
+    if ! is_yes "$answer"; then
         echo "Aborting..." >&2
         exit 1
     fi
-    shopt -u nocasematch
 }
 
 is_int(){
