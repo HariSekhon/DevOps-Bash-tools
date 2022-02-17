@@ -24,14 +24,16 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Merges one branch into another in the current or given repo, creating and merging Pull Requests for full audit tracking all changes
 
+Useful to automate code promotion across environments (eg. merge Staging branch into Production branch as part of release)
+or to automatically backport hotfixes from Production branch to trunk branches eg. master or main to keep the dev/staging/QA environments
+an accurate representation of production code base
+
+Also works across repo forks if the head branch contains an '<owner>:' prefix
+
 Useful Git terminology reminder:
 
 The HEAD branch is the branch you want to merge FROM, eg. 'my-feature-branch'
 The BASE branch is the branch you want to merge INTO, eg. 'master' or 'main'
-
-One very good use case for this script, aside from just quickly PR and merge from your branch,
-is to automatically backport changes such as hotfixes from higher environments (eg. Production)
-back into your main trunk branch such as master, main, dev or develop branches
 
 Requires GitHub CLI to be installed and configured
 
