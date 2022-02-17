@@ -33,6 +33,8 @@ One very good use case for this script, aside from just quickly PR and merge fro
 is to use in automation to automatically backport changes such as hotfixes from higher environments
 such as Staging or Production branches back into your main trunk branch such as master, main, dev or develop branches
 
+Requires GitHub CLI to be installed and configured
+
 Depends on adjacent script:
 
     github_create_pull_request.sh
