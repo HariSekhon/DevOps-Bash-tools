@@ -22,17 +22,17 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a GitHub Pull Request, first checking if there is already a PR between the branches,
-and also checks if there are actual commit differences between the branches to avoid common errors from blindly raising PRs
+Creates a GitHub Pull Request idempotently by first checking for an existing PR between the branches,
+and also checking if there are the necessary commits between the branches, to avoid common errors from blindly raising PRs
 
-Helpful to automate creating Pull Requests across environments
+Useful to automate code promotion across environments
 
 Also works across repo forks if the head branch contains an '<owner>:' prefix
 
 Useful Git terminology reminder:
 
-The BASE branch is the branch you want to merge INTO, eg. 'production'
 The HEAD branch is the branch you want to merge FROM, eg. 'staging' for audited code promotion
+The BASE branch is the branch you want to merge INTO, eg. 'production'
 
 Used by adjacent scripts:
 
