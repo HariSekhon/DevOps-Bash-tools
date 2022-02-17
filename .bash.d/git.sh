@@ -531,8 +531,8 @@ _gitaddimport() {
             echo "ERROR: '$filename' already in git" >&2
             #return 1
         fi
+        popd > /dev/null || return 1
     done
-    popd > /dev/null || :
 }
 
 gitadd(){
