@@ -94,6 +94,7 @@ for branch in $branches; do
         echo >&2
         continue
     fi
+
     # use function to iterate pages
     #if gh api "/repos/$fork_source_repo/branches?per_page=100" -q '.[].name' | grep -Fxq "$branch"; then
     if get_github_repo_branches "$fork_source_repo" | grep -Fxq "$branch"; then
@@ -101,36 +102,13 @@ for branch in $branches; do
     else
         fork_source_branch="$fork_source_default_branch"
     fi
+
     base="$branch"
-    head="$fork_source_owner":"$fork_source_branch"
-    total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
-    if [ "$total_commits" -gt 0 ]; then
-        existing_pr="$(gh pr list -R "$owner/$repo" \
-            --json baseRefName,changedFiles,commits,headRefName,headRepository,headRepositoryOwner,isCrossRepository,number,state,title,url \
-            -q ".[] |
-                select(.baseRefName == \"$base\") |
-                select(.headRefName == \"$fork_source_branch\") |
-                select(.headRepositoryOwner.login == \"$fork_source_owner\")
-        ")"
-        existing_pr_url="$(jq -r '.url' <<< "$existing_pr")"
-        if [ -n "$existing_pr" ]; then
-            timestamp "Branch '$base' already has an existing pull request, skipping PR: $existing_pr_url"
-            echo >&2
-            continue
-        fi
-        timestamp "Creating Pull Request from upstream source repo for branch '$base'"
-        # --no-maintainer-edit is important, otherwise member ci account gets error (and yes there is a double 'Fork collab' error in GitHub CLI's error message):
-        # pull request create failed: GraphQL: Fork collab Fork collab can't be granted by someone without permission (createPullRequest)
-        output="$(gh pr create -R "$owner/$repo" --base "$base" --head "$head" --title "Merge upstream $fork_source_branch branch to $base" --body "Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo." --no-maintainer-edit)"
-        echo >&2
-        pr_url="$(grep '/pull/' <<< "$output")"
-        if tr '[:space:]' '\n' <<< "$branches_to_automerge" | sed '/^[[:space:]]*$/d' | grep -Fxq "$branch"; then
-            timestamp "Merging Pull Request #${pr_url##*/} from upstream source repo for branch '$base'"
-            gh pr merge --merge "$pr_url"
-            echo >&2
-        fi
+    head="$fork_source_owner:$fork_source_branch"
+
+    if tr '[:space:]' '\n' <<< "$branches_to_automerge" | sed '/^[[:space:]]*$/d' | grep -Fxq "$branch"; then
+        "$srcdir/github_merge_branch.sh" "$owner_repo" "$head" "$base"
     else
-        timestamp "Branch '$base' is already up to date with upstream, skipping PR"
-        echo >&2
+        "$srcdir/github_create_pull_request.sh" "$owner_repo" "$head" "$base"
     fi
 done
