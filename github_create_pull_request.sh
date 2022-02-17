@@ -34,6 +34,8 @@ Useful Git terminology reminder:
 The HEAD branch is the branch you want to merge FROM, eg. 'staging' for audited code promotion
 The BASE branch is the branch you want to merge INTO, eg. 'production'
 
+Requires GitHub CLI to be installed and configured
+
 Used by adjacent scripts:
 
     github_merge_branch.sh
