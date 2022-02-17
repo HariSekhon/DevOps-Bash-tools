@@ -24,9 +24,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Merges one branch into another in the current or given repo, creating and merging Pull Requests for full audit tracking all changes
 
-Useful to automate code promotion across environments (eg. merge Staging branch into Production branch as part of release)
-or to automatically backport hotfixes from Production branch to trunk branches eg. master or main to keep the dev/staging/QA environments
-an accurate representation of production code base
+Useful to automate code promotion across environment branches or to automatically backport hotfixes from Production branch to dev / trunk branches
 
 Also works across repo forks if the head branch contains an '<owner>:' prefix
 
