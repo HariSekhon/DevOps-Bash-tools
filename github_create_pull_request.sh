@@ -44,11 +44,11 @@ Used by adjacent scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<owner>/<repo>] <from_head_branch> <to_base_branch>"
+usage_args="[<owner>/<repo> <from_head_branch> <to_base_branch>]"
 
 help_usage "$@"
 
-min_args 2 "$@"
+#min_args 2 "$@"
 max_args 3 "$@"
 
 owner_repo=""
@@ -57,12 +57,12 @@ if [ $# -eq 3 ]; then
     shift || :
 fi
 
-head="$1"
-base="$2"
+head="${1:-}"
+base="${2:-}"
 
 if is_blank "$owner_repo"; then
     if ! is_in_git_repo; then
-        die "No repo given and not in a git repository checkout to infer it"
+        die "Repo not specified and not in a git repository checkout to infer it"
     fi
     owner_repo='{owner}/{repo}'
 fi
@@ -71,6 +71,28 @@ repo_data="$(gh api "/repos/$owner_repo")"
 
 owner="$(jq -r '.owner.login' <<< "$repo_data")"
 repo="$(jq -r '.name' <<< "$repo_data")"
+
+if is_blank "$base"; then
+    timestamp "Base branch not specified, inferring to be default branch from repo"
+    base="$(jq -r '.default_branch' <<< "$repo_data")"
+    timestamp "Using default branch '$base' as base branch"
+fi
+
+if is_blank "$head"; then
+    if ! is_in_git_repo; then
+        die "Head branch not specified and not in a git repository checkout to infer it"
+    fi
+    checkout_owner_repo="$(gh api '/repos/{owner}/{repo}' | jq -r '.full_name')"
+    if [ "$owner/$repo" != "$checkout_owner_repo" ]; then
+        die "ERROR: Head branch not specified and current git repository checkout we are within ($checkout_owner_repo) does not match the target repo ($owner/$repo), so cannot use local branch name to infer it"
+    fi
+    timestamp "Head branch not specified, inferring to be current branch from repo checkout"
+    head="$(git rev-parse --abbrev-ref HEAD)"
+    timestamp "Head branch was inferred from local git checkout branch to be '$head'"
+    if [ "$head" = "$base" ]; then
+        die "Cannot create pull request from head branch '$head' to base branch '$base' because they are the same branch! "
+    fi
+fi
 
 if [[ "$head" =~ : ]]; then
     head_owner="${head%%:*}"
