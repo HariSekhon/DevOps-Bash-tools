@@ -47,6 +47,8 @@ $BRANCHES_TO_PR_DEFAULT
 Auto-merges the PRs for branches set in \$BRANCHES_TO_AUTOMERGE or the following default branches:
 $BRANCHES_TO_AUTOMERGE_DEFAULT
 
+Requires GitHub CLI to be installed and configured
+
 See also:
 
     github_repo_fork_recreate.sh - recreates a forked repo to clean out PRs and reset branches to be clean fast-forward merges
