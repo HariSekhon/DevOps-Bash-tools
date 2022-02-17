@@ -31,8 +31,8 @@ Also works across repo forks if the head branch contains an '<owner>:' prefix
 
 Useful Git terminology reminder:
 
-The Base branch is the branch you want to merge into, eg. 'production'
-The Head branch is the branch you want to merge from, eg. 'staging' for audited code promotion
+The BASE branch is the branch you want to merge INTO, eg. 'production'
+The HEAD branch is the branch you want to merge FROM, eg. 'staging' for audited code promotion
 
 Used by adjacent scripts:
 
@@ -42,7 +42,7 @@ Used by adjacent scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<owner>/<repo>] <base_branch> <head_branch>"
+usage_args="[<owner>/<repo>] <from_head_branch> <to_base_branch>"
 
 help_usage "$@"
 
@@ -55,8 +55,8 @@ if [ $# -eq 3 ]; then
     shift || :
 fi
 
-base="$1"
-head="$2"
+head="$1"
+base="$2"
 
 if is_blank "$owner_repo"; then
     if ! is_in_git_repo; then
