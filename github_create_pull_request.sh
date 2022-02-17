@@ -25,14 +25,14 @@ usage_description="
 Creates a GitHub Pull Request idempotently by first checking for an existing PR between the branches,
 and also checking if there are the necessary commits between the branches, to avoid common errors from blindly raising PRs
 
-Useful to automate code promotion across environments
+Useful to automate code promotion across environments (eg. Staging branch -> Production branch)
 
 Also works across repo forks if the head branch contains an '<owner>:' prefix
 
 Useful Git terminology reminder:
 
-The HEAD branch is the branch you want to merge FROM, eg. 'staging' for audited code promotion
-The BASE branch is the branch you want to merge INTO, eg. 'production'
+The HEAD branch is the branch you want to merge FROM, eg. 'my-feature-branch'
+The BASE branch is the branch you want to merge INTO, eg. 'master' or 'main'
 
 Requires GitHub CLI to be installed and configured
 
