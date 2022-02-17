@@ -53,3 +53,6 @@ if [ "$os" = darwin ]; then
 fi
 
 "$srcdir/../install_binary.sh" "https://github.com/cli/cli/releases/download/v$version/gh_${version}_${os}_{arch}.tar.gz" "gh_${version}_${os}_{arch}/bin/gh"
+
+echo
+gh version
