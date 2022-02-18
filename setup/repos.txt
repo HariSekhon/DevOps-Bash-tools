@@ -33,7 +33,7 @@ Jenkins:jenkins
 SQL-scripts:sql
 SQL-keywords:sql-keywords
 Kubernetes-configs:k8s
-Terraform-templates:terraform
+Terraform:terraform
 Templates:templates
 TeamCity-CI:teamcity
 DevOps-Bash-tools:bash-tools
