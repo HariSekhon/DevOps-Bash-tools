@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   docker_build:
-    if: github.event.repository.fork == false
+    if: github.event.repository.fork == false && github.ref_type == 'branch' && ( github.ref_name == github.event.repository.default_branch || github.ref_name == 'docker' )
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build_ghcr.yaml@master
     with:
@@ -35,7 +35,6 @@ jobs:
       tags: ubuntu latest
       dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-ubuntu
-    if: github.ref_name == 'master' || github.ref_name == 'main' || github.ref_name == 'docker'
     permissions:
       contents: read
       packages: write
