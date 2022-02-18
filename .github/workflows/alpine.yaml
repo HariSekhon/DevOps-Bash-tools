@@ -30,7 +30,7 @@ jobs:
   build:
     if: github.event.repository.fork == false
     name: Alpine
-    uses: HariSekhon/GitHub-Actions/.github/workflows/alpine.yaml@master
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      version: latest
+      container: alpine:latest
       #debug: 1
