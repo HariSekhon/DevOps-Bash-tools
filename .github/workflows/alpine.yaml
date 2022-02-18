@@ -28,7 +28,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Alpine
     uses: HariSekhon/GitHub-Actions/.github/workflows/alpine.yaml@master
     with:

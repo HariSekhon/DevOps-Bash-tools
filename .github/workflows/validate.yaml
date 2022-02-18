@@ -29,6 +29,6 @@ on:
 
 jobs:
   validate:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Validate
     uses: HariSekhon/GitHub-Actions/.github/workflows/validate.yaml@master

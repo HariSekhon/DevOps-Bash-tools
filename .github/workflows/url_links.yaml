@@ -29,7 +29,7 @@ on:
 
 jobs:
   url_links:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: URL Links
     uses: HariSekhon/GitHub-Actions/.github/workflows/url_links.yaml@master
     with:

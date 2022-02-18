@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: PyPy3
     uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
     with:

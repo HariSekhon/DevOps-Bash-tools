@@ -37,7 +37,7 @@ on:
 
 jobs:
   checkov:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Checkov
     uses: HariSekhon/GitHub-Actions/.github/workflows/checkov.yaml@master
     permissions:

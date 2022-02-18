@@ -28,7 +28,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: CentOS 8
     uses: HariSekhon/GitHub-Actions/.github/workflows/centos.yaml@master
     with:

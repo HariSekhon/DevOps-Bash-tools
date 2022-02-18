@@ -28,7 +28,7 @@ concurrency:
 
 jobs:
   build:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Debian 8
     uses: HariSekhon/GitHub-Actions/.github/workflows/debian.yaml@master
     with:

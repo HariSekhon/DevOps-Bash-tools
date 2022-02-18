@@ -35,7 +35,7 @@ on:
 
 jobs:
   semgrep:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Semgrep Cloud
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep-cloud.yaml@master
     secrets:

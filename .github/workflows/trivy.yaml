@@ -29,7 +29,7 @@ on:
 
 jobs:
   trivy:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Trivy Docker Image Scan
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:

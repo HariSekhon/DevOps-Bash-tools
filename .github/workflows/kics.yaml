@@ -29,7 +29,7 @@ on:
 
 jobs:
   kics:
-    if: github.repository_owner == 'HariSekhon'
+    if: github.event.repository.fork == false
     name: Kics
     uses: HariSekhon/GitHub-Actions/.github/workflows/kics.yaml@master
     permissions:
