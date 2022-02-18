@@ -27,10 +27,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  make:
     if: github.event.repository.fork == false
-    name: Debian 6
-    uses: HariSekhon/GitHub-Actions/.github/workflows/debian.yaml@master
+    name: Make
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      version: 6
+      container: debian:6
       #debug: 1

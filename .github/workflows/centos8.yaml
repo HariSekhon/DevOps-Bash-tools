@@ -27,10 +27,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  make:
     if: github.event.repository.fork == false
-    name: CentOS 8
-    uses: HariSekhon/GitHub-Actions/.github/workflows/centos.yaml@master
+    name: Make
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      version: 8
+      container: centos:8
       #debug: 1

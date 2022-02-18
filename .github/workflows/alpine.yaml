@@ -27,9 +27,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  make:
     if: github.event.repository.fork == false
-    name: Alpine
+    name: Make
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       container: alpine:latest
