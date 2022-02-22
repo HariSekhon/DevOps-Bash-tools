@@ -26,6 +26,10 @@ on:
         required: false
         default: false
 
+permissions:
+  contents: read
+  packages: write
+
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
@@ -40,6 +44,3 @@ jobs:
       tags: ubuntu latest
       dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-ubuntu
-    permissions:
-      contents: read
-      packages: write

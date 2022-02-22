@@ -26,6 +26,10 @@ on:
         required: false
         default: false
 
+permissions:
+  contents: read
+  packages: write
+
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
@@ -43,6 +47,3 @@ jobs:
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-    permissions:
-      contents: read
-      packages: write

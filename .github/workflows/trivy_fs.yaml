@@ -32,10 +32,12 @@ on:
   schedule:
     - cron: '0 0 * * 1'
 
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   trivy:
     if: github.event.repository.fork == false
     name: Trivy Filesystem Scan
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy_fs.yaml@master
-    permissions:
-      contents: read

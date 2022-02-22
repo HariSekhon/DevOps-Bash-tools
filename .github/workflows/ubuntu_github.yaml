@@ -37,4 +37,4 @@ jobs:
     name: Make
     uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu_github.yaml@master
     with:
-    #  debug: true
+      debug: ${{ github.event.inputs.debug }}

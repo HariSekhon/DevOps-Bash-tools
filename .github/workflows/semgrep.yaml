@@ -40,12 +40,17 @@ on:
   schedule:
     - cron: '0 0 * * 1'
 
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   semgrep:
     if: github.event.repository.fork == false
     name: Semgrep GitHub Security Tab
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
-    permissions:
-      actions: read
-      contents: read
-      security-events: write

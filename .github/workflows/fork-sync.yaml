@@ -24,6 +24,13 @@ on:
   schedule:
     - cron: '0 * * * *'
 
+permissions:
+  contents: write
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   fork_sync:
     if: github.repository_owner != 'HariSekhon'
@@ -31,5 +38,3 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/fork-sync.yaml@master
     with:
       debug: ${{ github.event.inputs.debug }}
-    permissions:
-      contents: write
