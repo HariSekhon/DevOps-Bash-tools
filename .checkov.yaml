@@ -30,12 +30,14 @@ directory:
 skip-path:
   - sql
   - templates
+  - vagrant/kubernetes/calico.yaml
+  - vagrant/kubernetes/LFS258
 docker-image: harisekhon/bash-tools
 framework:
   - all
 no-guide: true
 output: cli
 quiet: true
-#repo-id: bridgecrew/sample-repo
+repo-id: HariSekhon/DevOps-Bash-tools
 skip-suppressions: true
 soft-fail: true
