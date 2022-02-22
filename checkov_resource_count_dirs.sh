@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Counts the number of resources Checkov is scanning across all given repo directories
+Counts the number of resources Checkov is scanning across all given repos
 
 Useful to estimate Bridgecrew Cloud costs for all repos which are charged per resource
 
@@ -32,6 +32,9 @@ Any customization to the 'checkov' settings must use local .checkov.yaml config 
 such as which directories to scan or skip, see this working config for example:
 
     https://github.com/HariSekhon/Templates/blob/master/.checkov.yaml
+
+
+Each given repo dir should be the root of the repo so that .checkov.yaml can be found
 
 
 Uses adjacent script:
@@ -44,13 +47,14 @@ Requires Checkov, awk and jq to be installed
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<dir1> [<dir2> <dir3> ...]"
+usage_args="<repo_dir1> [<repo_dir2> <repo_dir3> ...]"
 
 help_usage "$@"
 
 min_args 1 "$@"
 
 for dir in "$@"; do
+    timestamp "Scanning Checkov resources in directory '$dir'"
     "$srcdir/checkov_resource_count.sh" "$dir"
 done |
 awk '{ total += $1 } END { print total }'
