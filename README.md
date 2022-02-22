@@ -787,8 +787,10 @@ etc.
   - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in on or all variables sets for the given organization
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment/terraform variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
-- `checkov_resource_count.sh` - counts the number of resources [Checkov](https://www.checkov.io/) is scanning in the current or given directory. Useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource
-- `checkov_resource_count_all.sh` - counts the total number of resources [Checkov](https://www.checkov.io/) is scanning across all given repos
+- [Checkov](https://www.checkov.io/):
+  - resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
+    - `checkov_resource_count.sh` - counts the number of resources Checkov is scanning in the current or given directory
+    - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repos
 
 #### Internet Services
 
