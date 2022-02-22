@@ -73,8 +73,9 @@ jq_count="$(
         ' <<< "$json_data"
 )"
 
+# opening brace must be on same line as the /regex_filter/, otherwise will apply to all lines
+# substr to strip the trailing json comma from 'resource_count: <number>,'
 awk_count="$(
-    # opening brace must be on same line as the /regex_filter/, otherwise will apply to all lines
     awk '/resource_count/ {
             resource_count = substr($2, 0, length($2) - 1)
             total_resource_count += resource_count
