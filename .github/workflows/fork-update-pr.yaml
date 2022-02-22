@@ -18,8 +18,9 @@ on:
   workflow_dispatch:
     inputs:
       debug:
-        type: string
+        type: boolean
         required: false
+        default: false
   schedule:
     # fork-sync happens for default branch every hour, so just after that, run PRs for branches
     - cron: '2 10 * * 2'

@@ -18,6 +18,11 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
   schedule:
     - cron: '0 7 * * *'
 
@@ -32,4 +37,4 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
     with:
       version: pypy2
-      #debug: 1
+      debug: ${{ github.event.inputs.debug }}

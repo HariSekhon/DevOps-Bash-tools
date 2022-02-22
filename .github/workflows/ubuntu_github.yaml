@@ -19,6 +19,11 @@ on:
     branches:
       - master
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
   schedule:
     - cron: '0 7 * * *'
 
@@ -31,5 +36,5 @@ jobs:
     if: github.event.repository.fork == false
     name: Make
     uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu_github.yaml@master
-    #with:
-    #  debug: 1
+    with:
+    #  debug: true

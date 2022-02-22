@@ -20,6 +20,11 @@ on:
       - master
       - main
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
