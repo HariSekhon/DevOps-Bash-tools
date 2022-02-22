@@ -45,6 +45,8 @@ jobs:
     if: github.event.repository.fork == false
     name: Checkov
     uses: HariSekhon/GitHub-Actions/.github/workflows/checkov.yaml@master
+    with:
+      debug: ${{ inputs.debug || github.event.inputs.debug }}
     permissions:
       actions: read
       contents: read
