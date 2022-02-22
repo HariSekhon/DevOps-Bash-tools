@@ -4,7 +4,7 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/HariSekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #
@@ -12,25 +12,23 @@
 #
 
 ---
-name: Debian 7
+name: JSON
 
 on:
   push:
     branches:
       - master
+      - main
+  pull_request:
+    branches:
+      - master
+      - main
   workflow_dispatch:
   schedule:
-    - cron: '0 7 * * *'
-
-concurrency:
-  group: ${{ github.ref }}-${{ github.workflow }}
-  cancel-in-progress: true
+    - cron: '0 0 * * 1'
 
 jobs:
-  make:
+  check_json:
     if: github.event.repository.fork == false
-    name: Make
-    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
-    with:
-      container: debian:7
-      #debug: 1
+    name: Check JSON
+    uses: HariSekhon/GitHub-Actions/.github/workflows/json.yaml@master

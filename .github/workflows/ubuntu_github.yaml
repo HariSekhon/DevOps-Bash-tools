@@ -27,9 +27,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  make:
     if: github.event.repository.fork == false
-    name: GitHub Ubuntu
+    name: Make
     uses: HariSekhon/GitHub-Actions/.github/workflows/ubuntu_github.yaml@master
     #with:
     #  debug: 1

@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-20-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3535-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1544-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-663-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3554-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1562-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-666-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -50,15 +50,6 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
 
 ---
-## Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
-
-Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
-
-80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Kubernetes, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/HAProxy-configs.svg)](https://starchart.cc/HariSekhon/HAProxy-configs)
-
----
 ## SQL Scripts
 
 Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
@@ -66,6 +57,15 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 100+ SQL Scripts - PostgreSQL, MySQL, Google BigQuery, MariaDB, AWS Athena. DevOps / DBA / Analytics / performance engineering. Google BigQuery ML machine learning classification.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/SQL-scripts.svg)](https://starchart.cc/HariSekhon/SQL-scripts)
+
+---
+## Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
+
+Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
+
+80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Kubernetes, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/HAProxy-configs.svg)](https://starchart.cc/HariSekhon/HAProxy-configs)
 
 ---
 ## Hari Sekhon - DevOps Perl Tools
@@ -140,15 +140,6 @@ Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Play
 [![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
 ---
-## Hari Sekhon - Python / Jython Library
-
-Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
-
-Python / Jython Utility Library for my other repos
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
-
----
 ## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
 Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
@@ -156,6 +147,15 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
+
+---
+## Hari Sekhon - Python / Jython Library
+
+Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
+
+Python / Jython Utility Library for my other repos
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
 
 ---
 ## # Jenkinsfile & Jenkins Shared Library
