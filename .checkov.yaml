@@ -22,6 +22,10 @@
 # This is not well documented but the fields seem to be the same as:
 #
 #   checkov --help
+#
+# See master template at:
+#
+#   https://github.com/HariSekhon/Templates/blob/master/.checkov.yaml
 
 ---
 compact: true
