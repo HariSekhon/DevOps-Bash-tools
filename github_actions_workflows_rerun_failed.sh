@@ -22,7 +22,9 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Re-runs the last failed run of each workflow for the current of given GitHub repo
+Re-runs the last failed run of each workflow for the current or given GitHub repo
+
+Requires GitHub CLI to be installed and configured
 "
 
 # used by usage() in lib/utils.sh
