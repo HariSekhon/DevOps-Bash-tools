@@ -37,4 +37,4 @@ jobs:
     name: Fork Sync
     uses: HariSekhon/GitHub-Actions/.github/workflows/fork-sync.yaml@master
     with:
-      debug: ${{ github.event.inputs.debug }}
+      debug: ${{ github.event.inputs.debug || false }}

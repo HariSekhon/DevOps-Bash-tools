@@ -38,4 +38,4 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       container: centos:8
-      debug: ${{ github.event.inputs.debug }}
+      debug: ${{ github.event.inputs.debug || false }}

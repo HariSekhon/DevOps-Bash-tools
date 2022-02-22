@@ -38,4 +38,4 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
     with:
       version: 3.6
-      debug: ${{ github.event.inputs.debug }}
+      debug: ${{ github.event.inputs.debug || false }}

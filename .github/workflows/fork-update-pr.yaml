@@ -39,4 +39,4 @@ jobs:
     name: Fork Update PR
     uses: HariSekhon/GitHub-Actions/.github/workflows/fork-update-pr.yaml@master
     with:
-      debug: ${{ github.event.inputs.debug }}
+      debug: ${{ github.event.inputs.debug || false }}
