@@ -58,9 +58,9 @@ while read -r repo dir; do
         mkdir -pv "${target%/*}"
         echo "syncing $filename -> $target"
         perl -pe "s/(devops-)*bash-tools/$repo/i" "$filename" > "$target"
-        if [ "$repo" = "nagios-plugins" ]; then
-            perl -pi -e 's/(^[[:space:]]+make ci$)/\1 ci zookeeper-retry/' "$target"
-        fi
+        #if [ "$repo" = "nagios-plugins" ]; then
+        #    perl -pi -e 's/(^[[:space:]]+make ci$)/\1 ci zookeeper-retry/' "$target"
+        #fi
     done
 done
 "$srcdir/.github/workflows/sync_to_adjacent_repos.sh" "$@"
