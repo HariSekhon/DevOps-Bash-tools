@@ -23,7 +23,6 @@ sync_file(){
     local filename="$1"
     local repo="$2"
     local dir="${3:-}"
-    [ "$filename" = validate.yaml ] && continue
     if [ -z "$dir" ]; then
         dir="$repo"
     fi
