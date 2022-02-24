@@ -595,6 +595,9 @@ endfunction
 
 " Hashicorp Terraform
 function! TerraformValidate()
+    " remove terraform plan copy-pasted removals for fast backporting
+    :%s/ [-~] //e
+    :%s/ -> .*//e
     :!clear; bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; { terraform fmt -diff; terraform validate; } | more -R'
 endfunction
 
