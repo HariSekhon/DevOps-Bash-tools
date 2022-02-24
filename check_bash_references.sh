@@ -4,7 +4,7 @@
 #  Author: Hari Sekhon
 #  Date: 2021-08-04 18:08:01 +0100 (Wed, 04 Aug 2021)
 #
-#  https://github.com/HariSekhon/Nagios-Plugins
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
