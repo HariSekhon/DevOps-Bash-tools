@@ -19,6 +19,11 @@ srcdir="$(dirname "$0")"
 
 cd "$srcdir"
 
+if [ $# -eq 0 ];then
+    echo "usage: <file1> <file2> ..."
+    exit 1
+fi
+
 sync_file(){
     local filename="$1"
     local repo="$2"
