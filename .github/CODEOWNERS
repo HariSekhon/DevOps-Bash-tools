@@ -18,9 +18,11 @@
 # Good in theory, to alert on PR changes to these code paths, but for public repos which may be forked and run .github/workflows/fork-update.yaml, this will result in a lot of spam
 
 # * includes changes under .github/
+#
+# paths are case sensitive
 
-#*      @harisekhon
-#*      @myorg/platform-engineering  # team based is the way to go
+#*      @harisekhon                  # username or email address
+#*      @myorg/platform-engineering  # team based is the way to go - team must have Write access to the repo regardless of if individuals have access
 #*      @myorg/devops
 #k8s    @myorg/devops
 #src/*  @myorg/developers
