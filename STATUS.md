@@ -1,17 +1,17 @@
 # GitHub Status Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-21-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3554-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1569-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-666-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3563-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1577-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-670-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-608-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
-![Lines of Code](https://img.shields.io/badge/lines%20of%20code-231.0k-lightgrey?logo=codecademy)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--02--18-lightgrey?logo=github)
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-613-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+![Lines of Code](https://img.shields.io/badge/lines%20of%20code-244.0k-lightgrey?logo=codecademy)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-2022--02--24-lightgrey?logo=github)
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
 
@@ -19,7 +19,7 @@
 
 This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
-21 original source git repos with 608 CI builds (559 hosted, 49 self-hosted) across 22 different CI systems:
+21 original source git repos with 613 CI builds (564 hosted, 49 self-hosted) across 22 different CI systems:
 
 ---
 # Advanced Nagios Plugins Collection
@@ -337,7 +337,7 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools?logo=github)](https://github.com/harisekhon/devops-bash-tools/network)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/commits/master)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-60k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-73k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
 
 
 
@@ -394,6 +394,12 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 [![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon/DevOps-Bash-tools)
 [![Validation](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/validate.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/validate.yaml)
 [![Semgrep](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/semgrep.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/semgrep.yaml)
+
+[![DockerHub Build (Alpine)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_alpine.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_alpine.yaml)
+[![DockerHub Build (CentOS)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_centos.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_centos.yaml)
+[![DockerHub Build (Debian)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_debian.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_debian.yaml)
+[![DockerHub Build (Fedora)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_fedora.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_fedora.yaml)
+[![DockerHub Build (Ubuntu)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_ubuntu.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/dockerhub_bash_ubuntu.yaml)
 
 [![GitHub Actions Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/GitHub%20Actions%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22GitHub+Actions+Ubuntu%22)
 [![Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Mac%22)
@@ -998,33 +1004,6 @@ Terraform templates for AWS / GCP / Azure
 
 
 ---
-# Hari Sekhon - Spotify Playlists
-
-Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
-
-240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
-
-[![Spotify Profile](https://img.shields.io/badge/Spotify%20Profile-HariSekhon-brightgreen?logo=spotify&style=social)](https://open.spotify.com/user/harisekhon)
-[![Playlists](https://img.shields.io/badge/Playlists-240+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
-[![Tracks](https://img.shields.io/badge/Tracks-36,600+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
-[![Unique Tracks](https://img.shields.io/badge/Unique%20Tracks-17,500+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
-
-[![Validation](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/validate.yaml/badge.svg)](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/validate.yaml)
-[![Semgrep](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/semgrep.yaml/badge.svg)](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/semgrep.yaml)
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
-[![Travis CI](https://img.shields.io/badge/TravisCI-legacy-lightgrey?logo=travis&label=Travis%20CI)](https://github.com/HariSekhon/Spotify-Playlists/blob/master/.travis.yml)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/commits/master)
-[![License](https://img.shields.io/github/license/HariSekhon/Spotify-Playlists)](https://github.com/HariSekhon/Spotify-Playlists/blob/master/LICENSE)
-
-[![Repo on Azure DevOps](https://img.shields.io/badge/repo-Azure%20DevOps-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub/_git/Spotify-Playlists)
-[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-2088FF?logo=github)](https://github.com/HariSekhon/Spotify-Playlists)
-[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon/Spotify-Playlists)
-[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon/Spotify-Playlists)
-
-[git.io/spotify-playlists](https://git.io/spotify-playlists)
-
-
----
 # Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
 Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
@@ -1106,6 +1085,33 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 [![Gradle](https://github.com/HariSekhon/Nagios-Plugin-Kafka/workflows/Gradle/badge.svg)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/actions?query=workflow%3A%22Gradle%22)
 
 [git.io/nagios-plugin-kafka](https://git.io/nagios-plugin-kafka)
+
+
+---
+# Hari Sekhon - Spotify Playlists
+
+Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
+
+240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
+
+[![Spotify Profile](https://img.shields.io/badge/Spotify%20Profile-HariSekhon-brightgreen?logo=spotify&style=social)](https://open.spotify.com/user/harisekhon)
+[![Playlists](https://img.shields.io/badge/Playlists-240+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
+[![Tracks](https://img.shields.io/badge/Tracks-36,600+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
+[![Unique Tracks](https://img.shields.io/badge/Unique%20Tracks-17,500+-blue?logo=spotify)](https://open.spotify.com/user/harisekhon)
+
+[![Validation](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/validate.yaml/badge.svg)](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/validate.yaml)
+[![Semgrep](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/semgrep.yaml/badge.svg)](https://github.com/HariSekhon/Spotify-playlists/actions/workflows/semgrep.yaml)
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![Travis CI](https://img.shields.io/badge/TravisCI-legacy-lightgrey?logo=travis&label=Travis%20CI)](https://github.com/HariSekhon/Spotify-Playlists/blob/master/.travis.yml)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/commits/master)
+[![License](https://img.shields.io/github/license/HariSekhon/Spotify-Playlists)](https://github.com/HariSekhon/Spotify-Playlists/blob/master/LICENSE)
+
+[![Repo on Azure DevOps](https://img.shields.io/badge/repo-Azure%20DevOps-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub/_git/Spotify-Playlists)
+[![Repo on GitHub](https://img.shields.io/badge/repo-GitHub-2088FF?logo=github)](https://github.com/HariSekhon/Spotify-Playlists)
+[![Repo on GitLab](https://img.shields.io/badge/repo-GitLab-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon/Spotify-Playlists)
+[![Repo on BitBucket](https://img.shields.io/badge/repo-BitBucket-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon/Spotify-Playlists)
+
+[git.io/spotify-playlists](https://git.io/spotify-playlists)
 
 
 ---
@@ -1397,7 +1403,7 @@ Java Utility library for my other repos
 
 
 
-21 git repos summarized with 608 CI builds (559 hosted, 49 self-hosted) across 22 different CI systems
+21 git repos summarized with 613 CI builds (564 hosted, 49 self-hosted) across 22 different CI systems
 
 ---
 
