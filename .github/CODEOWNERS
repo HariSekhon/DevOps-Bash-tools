@@ -19,4 +19,8 @@
 
 # * includes changes under .github/
 
-#* @harisekhon
+#*      @harisekhon
+#*      @myorg/platform-engineering  # team based is the way to go
+#*      @myorg/devops
+#k8s    @myorg/devops
+#src/*  @myorg/developers
