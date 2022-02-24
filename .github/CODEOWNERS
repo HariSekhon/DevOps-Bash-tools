@@ -17,12 +17,22 @@
 
 # Good in theory, to alert on PR changes to these code paths, but for public repos which may be forked and run .github/workflows/fork-update.yaml, this will result in a lot of spam
 
-# * includes changes under .github/
+# Tips:
 #
-# paths are case sensitive
+# * includes changes under .github/
+# dir/* only matches first level file changes but doesn't recurse
+# dir/ recurses
+#
+# - CODEOWNERS in base branch of PR determines review request
+# - paths are case sensitive
+# - last match wins, use * at top for overall owner then override with more specific teams
 
-#*      @harisekhon                  # username or email address
-#*      @myorg/platform-engineering  # team based is the way to go - team must have Write access to the repo regardless of if individuals have access
-#*      @myorg/devops
-#k8s    @myorg/devops
-#src/*  @myorg/developers
+#*          @harisekhon                  # username or email address
+#*          @myorg/platform-engineering  # team based is the way to go - team must have Write access to the repo regardless of if individuals have access
+#*          @myorg/devops
+#k8s        @myorg/devops @myorg/sre-team
+#apps/      @myorg/developers
+#apps/dir2  # ignores dir2 as no owner/team specified on this line
+#src/       @myorg/developers
+#docs/      docs@example.com
+#.github/workflows  @ci-cd-team
