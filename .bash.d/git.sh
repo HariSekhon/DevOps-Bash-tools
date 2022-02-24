@@ -305,7 +305,7 @@ st(){
     #    vagrant status
     # shellcheck disable=SC2166
     if [ "$target" = "." ] &&
-       [ "${PWD##*/}" = github ]; then
+       [ "$PWD" = "$HOME/github" ]; then
         hr
         for x in "$target"/*; do
             [ -d "$x" ] || continue
