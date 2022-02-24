@@ -17,4 +17,6 @@
 
 # Good in theory, to alert on PR changes to these code paths, but for public repos which may be forked and run .github/workflows/fork-update.yaml, this will result in a lot of spam
 
+# * includes changes under .github/
+
 #* @harisekhon
