@@ -18,18 +18,20 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/git.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Checks for any errors in the current or given GitHub repo's committed CODEOWNERS file
+
+By default checks the CODEOWNERS for the default branch, unless a second argument is given specifying another branch name
 
 Requires GitHub CLI and jq to be installed
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<owner>/<repo>]"
+usage_args="[<owner>/<repo> <ref>]"
 
 help_usage "$@"
 
@@ -49,12 +51,20 @@ if is_blank "$owner_repo"; then
     echo >&2
 fi
 
+if is_blank "$ref"; then
+    timestamp "ref not specified, attempting to determine from current branch"
+    ref="$(mybranch)"
+    timestamp "determined current branch to be '$ref'"
+    echo >&2
+fi
+
 url="/repos/$owner_repo/codeowners/errors"
+
 if ! is_blank "$ref"; then
     url+="?ref=$ref"
 fi
 
-timestamp "Checking for CODEOWNERS errors via the GitHub API"
+timestamp "Checking for CODEOWNERS errors in ref '$ref' via the GitHub API"
 data="$(gh api "$url")"
 
 error_count="$(jq -r '.error | length' <<< "$data")"
