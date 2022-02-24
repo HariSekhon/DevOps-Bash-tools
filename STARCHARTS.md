@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-20-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3554-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1562-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-666-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3563-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1570-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-670-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -131,15 +131,6 @@ Terraform templates for AWS / GCP / Azure
 [![Stargazers over time](https://starchart.cc/HariSekhon/Terraform.svg)](https://starchart.cc/HariSekhon/Terraform)
 
 ---
-## Hari Sekhon - Spotify Playlists
-
-Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
-
-240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
-
----
 ## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
 Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
@@ -147,6 +138,15 @@ Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plu
 Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka.svg)](https://starchart.cc/HariSekhon/Nagios-Plugin-Kafka)
+
+---
+## Hari Sekhon - Spotify Playlists
+
+Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
+
+240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
 ---
 ## Hari Sekhon - Python / Jython Library
