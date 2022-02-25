@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all non-fork GitHub repos for the current or given user or organization which are not found in the adjacent *.tf code in the current directory
+Finds all non-fork GitHub repos for the current or given user or organization which are not found in ./*.tf code
 
 Useful to catch if anyone has created any unmanaged repos
 
