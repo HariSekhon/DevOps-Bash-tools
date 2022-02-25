@@ -51,6 +51,6 @@ repos="$(
 
 for repo in $repos; do
     # search without the dot prefix which isn't allowed in Terraform code identifiers
-    grep -Eq 'resource[[:space:]]+"github_repository"[[:space:]]+"'"${repo#.}"'"' ./*.tf ||
+    grep -Eq '^[[:space:]]*resource[[:space:]]+"github_repository"[[:space:]]+"'"${repo#.}"'"' ./*.tf ||
     echo "$repo"
 done
