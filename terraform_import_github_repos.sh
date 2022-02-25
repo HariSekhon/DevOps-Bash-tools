@@ -24,8 +24,6 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Finds all github_repository references in ./*.tf code not in Terraform state and imports them
 
-The owner should be specified as the first arg, otherwise uses authenticated user or \$GITHUB_ORGANIZATION environment variable if found
-
 Requires the github_repository identifiers in *.tf code to match the GitHub repo name, which does not work with repos which have dots in them eg. '.github'. Those rare exceptions must be imported manually.
 
 
