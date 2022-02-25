@@ -801,11 +801,11 @@ etc.
 
 #### Internet Services
 
-- `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
+- `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication using `$CLOUDFLARE_TOKEN`
-  - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
+  - `cloudflare_ip_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
   - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
   - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
   - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones
