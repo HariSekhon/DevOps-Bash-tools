@@ -56,7 +56,7 @@ timestamp "getting terraform state"
 terraform_state_list="$(terraform state list)"
 echo >&2
 
-timestamp "getting github repos from $PWD/*.tf code"
+timestamp "getting github teams from $PWD/*.tf code"
 grep -E '^[[:space:]]*resource[[:space:]]+"github_team"' ./*.tf |
 awk '{gsub("\"", "", $3); print $3}' |
 while read -r team; do
