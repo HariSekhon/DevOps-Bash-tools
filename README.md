@@ -798,6 +798,7 @@ etc.
   - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in on or all variables sets for the given organization
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment/terraform variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
+- `terraform_*.sh` - [Terraform](https://www.terraform.io/) scripts:
   - `terraform_import.sh` - finds given resource type in `./*.tf` code that are not in Terraform state and imports them
   - `terraform_import_github_repos.sh` - finds all `github_repository` in `./*.tf` code that are not in Terraform state and imports them. See also `github_repos_not_in_terraform.sh`
   - `terraform_import_github_teams.sh` - finds all `github_team` in `./*.tf` code that are not in Terraform state, then queries the GitHub API for their IDs and imports them. See also `github_teams_not_in_terraform.sh`
