@@ -26,7 +26,7 @@ Finds all non-fork GitHub repos for the current or given user or organization wh
 
 Useful to catch if anyone has created any unmanaged repos
 
-This relies on the terraform code identified being the same as the GitHub repo name, or in cases of repos with a leading dot such as '.github', without the dot prefix
+This relies on the terraform code identifiers being the same as the GitHub repo name, or in cases of repos with a leading dot such as '.github', without the dot prefix
 
 Requires GitHub CLI to be installed and configured
 "
