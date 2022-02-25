@@ -519,6 +519,9 @@ if is_mac; then
     date(){
         command gdate "$@"
     }
+    xargs(){
+        command gxargs "$@"
+    }
 fi
 
 # fails interactive import without this
