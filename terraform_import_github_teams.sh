@@ -24,7 +24,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Finds all github_team references in ./*.tf code and then queries the GitHub API for their IDs and if they exist imports them to Terraform state
 
-The GitHub Organization must be specified as the first arg or found in \$GITHUB_ORGANIZATION environment varible
+The GitHub Organization must be specified as the first arg or found in \$GITHUB_ORGANIZATION environment variable
 
 Requires the github_repository identifiers in *.tf code to match the GitHub team slug in the GitHub API
 
