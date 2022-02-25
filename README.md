@@ -647,6 +647,7 @@ etc.
   - `github_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_gpg_get_user_public_keys.sh` - fetches a given GitHub user's public GPG keys via the API
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
   - `github_repo_latest_release.sh` - returns the latest release name for a given GitHub repo via the GitHub API
