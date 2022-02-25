@@ -199,6 +199,7 @@ done <<< "$urls"
 
 # export function to use in parallel
 export -f check_url_link
+export SHELL=/bin/bash  # Debian docker container doesn't set this and defaults to sh, failing to find exported function
 
 set +eo pipefail
 tally="$(parallel -j 10 <<< "$tests")"
