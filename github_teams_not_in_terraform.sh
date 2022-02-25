@@ -42,10 +42,10 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-org="${1:-$GITHUB_ORGANIZATION}"
+org="${1:-${GITHUB_ORGANIZATION:-}}"
 
 if is_blank "$org"; then
-    usage
+    usage "Organization not specifieid"
 fi
 
 teams="$(
