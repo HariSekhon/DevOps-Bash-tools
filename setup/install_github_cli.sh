@@ -29,6 +29,8 @@ Installs GitHub CLI
 # shellcheck disable=SC2034
 usage_args="[<version>]"
 
+export PATH="$PATH:$HOME/bin"
+
 help_usage "$@"
 
 #min_args 1 "$@"
