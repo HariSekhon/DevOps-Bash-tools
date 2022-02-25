@@ -45,7 +45,8 @@ for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null | t
     export PATH="$PATH:$ruby_bin"
 done
 
-if [ -z "${QUICK:-}" ] &&
+if ! is_CI &&
+   [ -z "${QUICK:-}" ] &&
    [ -z "${NONINTERACTIVE:-}" ]; then
     travis login
     travis token
