@@ -61,7 +61,7 @@ grep -E '^[[:space:]]*resource[[:space:]]+"github_team"' ./*.tf |
 awk '{gsub("\"", "", $3); print $3}' |
 while read -r team; do
     echo >&2
-    if grep -Fq "github_team.$team" <<< "$terraform_state_list"; then
+    if grep -q "github_team.$team$" <<< "$terraform_state_list"; then
         echo "team '$team' already in terraform state, skipping..." >&2
         continue
     fi
