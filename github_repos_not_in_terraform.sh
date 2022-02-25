@@ -43,7 +43,7 @@ owner="${1:-}"
 
 repos="$(
     gh repo list ${owner:+"$owner"} \
-            -L 500 \
+            -L 99999 \
             --json name,isFork \
             -q '.[] | select(.isFork == false) | .name' |
     sort -f
