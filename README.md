@@ -662,6 +662,7 @@ etc.
   - `github_repos_with_few_teams.sh` - finds repos with few or no teams (default: 0), which in Enterprises is a sign that a user has created a repo without assigning team privileges
   - `github_repos_without_branch_protections.sh` - finds repos without any branch protection rules (use `github_repo_protect_branches.sh` on such repos)
   - `github_repos_not_in_terraform.sh` - finds all non-fork repos for current or given user/organization which are not found in `$PWD/*.tf` Terraform code
+  - `github_teams_not_in_terraform.sh` - finds all teams for given organization which are not found in `$PWD/*.tf` Terraform code
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
