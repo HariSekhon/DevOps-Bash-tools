@@ -81,6 +81,7 @@ echo
 
 # export functions to use in parallel
 export -f check_groovyc
+export SHELL=/bin/bash  # Debian docker container doesn't set this and defaults to sh, failing to find exported function
 
 set +eo pipefail
 tally="$(parallel -j "$parallelism" <<< "$tests")"
