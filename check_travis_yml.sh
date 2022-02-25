@@ -81,7 +81,8 @@ else
         set +e
         if is_CI; then
             # get past shell completion install prompt in CI
-            echo "n" | travis lint
+            #echo "n" | travis lint
+            travis lint --no-interactive
         else
             travis lint
         fi
