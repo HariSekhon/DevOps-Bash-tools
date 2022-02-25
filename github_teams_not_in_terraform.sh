@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all GitHub organization teams which are not found in the adjacent *.tf code in the current directory
+Finds all GitHub organization teams which are not found in ./*.tf code
 
 Useful to catch teams sync'd from an IdP like AAD that require referencing in team repo assignments
 
