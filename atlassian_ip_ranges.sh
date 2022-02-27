@@ -53,7 +53,7 @@ fi
 
 url="https://ip-ranges.atlassian.com/"
 
-curl -sSL "$url" |
+curl -sSf "$url" |
 #jq -r '.items[] | [.network, .mask_len | tostring ] | join("/")'
 jq -r '.items[] | .cidr' |
 if [ -n "${IPV4_ONLY:-}" ]; then

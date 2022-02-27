@@ -647,6 +647,7 @@ etc.
   - `github_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_gpg_get_user_public_keys.sh` - fetches a given GitHub user's public GPG keys via the API
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
   - `github_repo_latest_release.sh` - returns the latest release name for a given GitHub repo via the GitHub API
@@ -660,6 +661,8 @@ etc.
   - `github_repos_with_few_users.sh` - finds repos with few or no users (default: 1), which in Enterprises is a sign that a user has created a repo without assigning team privileges
   - `github_repos_with_few_teams.sh` - finds repos with few or no teams (default: 0), which in Enterprises is a sign that a user has created a repo without assigning team privileges
   - `github_repos_without_branch_protections.sh` - finds repos without any branch protection rules (use `github_repo_protect_branches.sh` on such repos)
+  - `github_repos_not_in_terraform.sh` - finds all non-fork repos for current or given user/organization which are not found in `$PWD/*.tf` Terraform code
+  - `github_teams_not_in_terraform.sh` - finds all teams for given organization which are not found in `$PWD/*.tf` Terraform code
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
@@ -795,17 +798,22 @@ etc.
   - `terraform_cloud_varset_vars.sh` - lists Terraform Cloud variables in on or all variables sets for the given organization
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment/terraform variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
+- `terraform_*.sh` - [Terraform](https://www.terraform.io/) scripts:
+  - `terraform_import.sh` - finds given resource type in `./*.tf` code that are not in Terraform state and imports them
+  - `terraform_import_github_repos.sh` - finds all `github_repository` in `./*.tf` code that are not in Terraform state and imports them. See also `github_repos_not_in_terraform.sh`
+  - `terraform_import_github_teams.sh` - finds all `github_team` in `./*.tf` code that are not in Terraform state, then queries the GitHub API for their IDs and imports them. See also `github_teams_not_in_terraform.sh`
+  - `terraform_import_github_team_repos.sh` - finds all `github_team_repository` in Terraform plan that would be added, then queries the GitHub API for the repos and team IDs and if they both exist then imports them to Terraform state
 - [Checkov](https://www.checkov.io/) resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
   - `checkov_resource_count.sh` - counts the number of resources Checkov is scanning in the current or given directory
   - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repos
 
 #### Internet Services
 
-- `atlassian_cidr_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
+- `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication using `$CLOUDFLARE_TOKEN`
-  - `cloudflare_cidr_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
+  - `cloudflare_ip_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
   - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
   - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
   - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones

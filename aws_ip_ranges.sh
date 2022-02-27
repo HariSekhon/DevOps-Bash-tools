@@ -79,7 +79,7 @@ if [ "$region" = list ]; then
     exit 0
 fi
 
-curl -sS "$url" |
+curl -sSf "$url" |
 #jq -r ".prefixes[]" |
 #if [ -n "$region" ] && [ "$region" != all ]; then
 #    #jq -r ".prefixes[] | select(.region == \"$region\") | .ip_prefix"

@@ -91,7 +91,7 @@ Examples:
     ${0##*/} /accounts/<account_id>/virtual_dns
 
 
-# List the IPv4 and IPv6 cidr ranges for Cloudflare (see cloudflare_cidr_ranges.sh for a ready parsed example of this):
+# List the IPv4 and IPv6 cidr ranges for Cloudflare (see cloudflare_ip_ranges.sh for a ready parsed example of this):
 
     ${0##*/} /ips | jq .
 
