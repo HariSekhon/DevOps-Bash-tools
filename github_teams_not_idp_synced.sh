@@ -26,6 +26,8 @@ Finds all GitHub organization teams that are not sync'd from na IdP like Azure A
 
 Org can be given as an arg or taken from environment variable \$GITHUB_ORGANIZATION
 
+if \$QUIET is set then won't print progress to stderr, just the non-IdP sync'd teams tn stdout
+
 
 Requires GitHub CLI to be installed and configured
 "
@@ -48,17 +50,23 @@ for((page=1;; page++)); do
     if [ "$page" -gt 100 ]; then
         die "Hit over 100 pages of teams, possible infinite loop, exiting..."
     fi
-    timestamp "getting list of teams page $page"
+    if [ -z "${QUIET:-}" ]; then
+        timestamp "getting list of teams page $page"
+    fi
     data="$(gh api "/orgs/$org/teams?per_page=100&page=$page" | jq_debug_pipe_dump)"
     if jq_is_empty_list <<< "$data"; then
         break
     fi
     jq -r '.[].slug' <<< "$data" |
     while read -r team; do
-        timestamp "checking team '$team'"
+        if [ -z "${QUIET:-}" ]; then
+            timestamp "checking team '$team'"
+        fi
         team_mappings="$(gh api "/orgs/$org/teams/$team/team-sync/group-mappings" | jq_debug_pipe_dump)"
         if jq -e 'select((.groups | length) == 0)' <<< "$team_mappings" >/dev/null; then
-            timestamp "WARNING: team '$team' is not sync'd' from an IdP!"
+            if [ -z "${QUIET:-}" ]; then
+                timestamp "WARNING: team '$team' is not sync'd' from an IdP!"
+            fi
             echo "$team"
         fi
     done
