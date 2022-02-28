@@ -17,6 +17,7 @@ bash
 bc
 coreutils
 curl
+findutils
 gcc
 git
 go
