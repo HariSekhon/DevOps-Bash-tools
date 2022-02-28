@@ -53,7 +53,7 @@ else
             user=linuxbrew
             echo "Installing HomeBrew on Linux as user $user"
             # Alpine has adduser
-            id "$user" || useradd "$user" || adduser -D "$user"
+            id "$user" 2>/dev/null || useradd "$user" || adduser -D "$user"
             mkdir -p -v "/home/$user"
             chown -R "$user" "/home/$user"
             # can't just pass bash, and -s shell needs to be fully qualified path
