@@ -664,6 +664,7 @@ etc.
   - `github_repos_not_in_terraform.sh` - finds all non-fork repos for current or given user/organization which are not found in `$PWD/*.tf` Terraform code
   - `github_teams_not_in_terraform.sh` - finds all teams for given organization which are not found in `$PWD/*.tf` Terraform code
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
+  - `github_teams_not_idp_synced.sh` - finds GitHub teams that aren't sync'd from an IdP like Azure AD. These should usually be migrated or removed
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
