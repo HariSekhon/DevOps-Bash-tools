@@ -1211,4 +1211,8 @@ jq_debug_pipe_dump_slurp(){
         cat  # needed for straight passthrough in non-debug mode
     fi
 }
+
+jq_is_empty_list(){
+    jq -e 'length == 0' >/dev/null
+}
 # ==============================
