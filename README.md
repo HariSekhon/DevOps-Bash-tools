@@ -803,9 +803,9 @@ etc.
   - `terraform_import_github_repos.sh` - finds all `github_repository` in `./*.tf` code that are not in Terraform state and imports them. See also `github_repos_not_in_terraform.sh`
   - `terraform_import_github_teams.sh` - finds all `github_team` in `./*.tf` code that are not in Terraform state, then queries the GitHub API for their IDs and imports them. See also `github_teams_not_in_terraform.sh`
   - `terraform_import_github_team_repos.sh` - finds all `github_team_repository` in Terraform plan that would be added, then queries the GitHub API for the repos and team IDs and if they both exist then imports them to Terraform state
-- [Checkov](https://www.checkov.io/) resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
+- `checkov_resource*.sh` - [Checkov](https://www.checkov.io/) resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
   - `checkov_resource_count.sh` - counts the number of resources Checkov is scanning in the current or given directory
-  - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repos
+  - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repo checkouts
 
 #### Internet Services
 
