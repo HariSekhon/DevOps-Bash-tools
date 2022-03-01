@@ -29,6 +29,7 @@ Terraform Plan is used because the team_id is also needed for import but is ofte
 
 The GitHub Organization must be specified as the first arg or found in \$GITHUB_ORGANIZATION environment variable
 
+If \$TERRAFORM_PRINT_ONLY is set to any value, prints the commands to stdout to collect so you can check, collect into a text file or pipe to a shell or further manipulate, ignore errors etc.
 
 Requires Terraform and GitHub CLI to be installed and configured. Tested on Terraform 1.1.6
 "
@@ -80,5 +81,9 @@ while read -r team_repo repo team_id; do
     fi
     cmd="terraform import github_team_repository.$team_repo $team_id:$repo"
     timestamp "$cmd"
-    $cmd
+    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
+        echo "$cmd"
+    else
+        $cmd
+    fi
 done
