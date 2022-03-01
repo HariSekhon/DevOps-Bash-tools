@@ -61,17 +61,16 @@ grep -E "^[[:space:]]*# $resource_type\\..+\\[\"[^\"]+\"\\] will be created" <<<
 awk '{print $2}' |
 while read -r resource_path; do
     echo >&2
-    if grep -Fxq "$resource_path" <<< "$terraform_state_list"; then
-        echo "'$resource_path' already in terraform state, skipping..." >&2
-        continue
-    fi
-    resource="${resource_path##*[\"}"
-    resource="${resource%%\"]*}"
-    cmd="terraform import $resource_path $resource"
+    # <resource_type>.resource2[resource1] - resource 1 is usually the differentiator, eg. github repo, whereas resource2 is usually what is applied to each one, such as the same branch
+    resource1="${resource_path##*[\"}"
+    resource1="${resource1%%\"]*}"
+    resource2="${resource_path%%[*}"
+    resource2="${resource2##*.}"
+    cmd="terraform import '$resource_path' '$resource1:$resource2'"
     timestamp "$cmd"
     if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
         echo "$cmd"
     else
-        $cmd
+        eval "$cmd"
     fi
 done
