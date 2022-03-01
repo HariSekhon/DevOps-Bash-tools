@@ -29,6 +29,7 @@ Will do nothing if the resource_type you specify doesn't match anything in the l
 This is a general case importer that will only cover basic use cases such as GitHub repos where the names usually match the terraform IDs
 (except for things like '.github' repo which is not a valid terraform identifier. Those must still be imported manually)
 
+If \$TERRAFORM_PLAN is set to any value, gets the resources from the Terraform Plan rather than ./*.tf
 If \$TERRAFORM_PRINT_ONLY is set to any value, prints the commands to stdout to collect so you can check, collect into a text file or pipe to a shell or further manipulate, ignore errors etc.
 
 
@@ -52,12 +53,21 @@ timestamp "getting terraform state"
 terraform_state_list="$(terraform state list)"
 echo >&2
 
-timestamp "getting '$resource_type' from $PWD/*.tf code"
-grep -E "^[[:space:]]*resource[[:space:]]+\"$resource_type\"" ./*.tf |
+if [ -n "${TERRAFORM_PLAN:-}" ]; then
+    timestamp "getting terraform plan"
+    plan="$(terraform plan -no-color)"
+    echo >&2
+
+    timestamp "getting '$resource_type' from terraform plan output"
+    grep -E "^[[:space:]]*resource[[:space:]]+\"$resource_type\"" <<< "$plan"
+else
+    timestamp "getting '$resource_type' from $PWD/*.tf code"
+    grep -E "^[[:space:]]*resource[[:space:]]+\"$resource_type\"" ./*.tf
+fi |
 awk '{gsub("\"", "", $3); print $3}' |
 while read -r resource; do
     echo >&2
-    if grep -q "$resource_type\.$resource$" <<< "$terraform_state_list"; then
+    if grep -q "$resource_type\\.$resource$" <<< "$terraform_state_list"; then
         echo "'$resource_type.$resource' already in terraform state, skipping..." >&2
         continue
     fi
