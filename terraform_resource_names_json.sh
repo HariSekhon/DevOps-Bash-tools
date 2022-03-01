@@ -19,13 +19,16 @@ set -euo pipefail
 # sourcing lib.sh results in Terraform errors 'is_verbose: command not found'
 
 usage="
-Terraform external program that returns a list of top-level resource names for a given type
+Terraform external program that returns a list of root module resource names for a given resource_type
 
-Workaround for Terraform Splat expressions not supporting top level resource names
+Workaround for Terraform Splat expressions not supporting top level resources
 
     https://github.com/hashicorp/terraform/issues/19931
 
-Returns a JSON output in format 'map[string]=string' where both the key and value are the name of the resource
+Returns a JSON output in format 'map[string]=string' where the key is set to the id and the value is set to the name or selected attribute value of the resource
+
+Returns a non-zero error code if the resource_type or the attribute are not found which will be picked up by Terraform to error out
+
 
 Example:
 
@@ -48,20 +51,39 @@ Terraform:
 Requires Terraform and jq to be installed and configured
 
 
-usage: ${0##*/} <resource_type>
+usage: ${0##*/} <resource_type> [<attribute>]
 "
 
-if [ $# != 1 ] || [[ "$1" =~ ^- ]]; then
+if [ $# -lt 1 ] ||
+   [ $# -gt 2 ] ||
+   [[ "$1" =~ ^- ]] ||
+   [[ "${2:-}" =~ ^- ]]; then
     echo "$usage"
     exit 3
 fi
 
 resource_type="$1"
+attribute="${2:-name}"
 
-terraform state list  |
-grep "^$resource_type\\." |
-awk -F. '{print $2}' |
-jq -MR -s -c 'split("\n")[] |
-              select(. != "") |
-              { (.) : . }' |
-jq -n 'reduce inputs as $in (null; . + $in)'
+#terraform state list  |
+#grep "^$resource_type\\." |
+#awk -F. '{print $2}' |
+#while read -r resource; do
+#    # Terraform state outputs control chars, remove them so grep will work - hard to remove all escape sequences and slow
+#    # we need literal escapes here
+#    # shellcheck disable=SC1117
+#    terraform state show "$resource_type.$resource" |
+#    sed "s,\x1B\[[0-9;]*[a-zA-Z],,g" |
+#    # nested attributes, eg. branches have greater depth - this code is brittle but Terraform doesn't support -json for terraform state show unfortunately
+#    grep -E "^    ${attribute}[[:space:]]+= " |
+#    awk -F= '{print $2}' |
+#    sed 's/^"//;s/"$//'
+#done |
+
+terraform show -json -no-color |
+jq -er "
+    .values.root_module.resources[] |
+    select(.type == \"$resource_type\") |
+    select(.values.id) |
+    { (.values.id) : .values.$attribute }" |
+jq -en 'reduce inputs as $in (null; . + $in)'
