@@ -28,6 +28,8 @@ The GitHub Organization must be specified as the first arg or found in \$GITHUB_
 
 Requires the github_repository identifiers in *.tf code to match the GitHub team slug in the GitHub API
 
+If \$TERRAFORM_PRINT_ONLY is set to any value, prints the commands to stdout to collect so you can check, collect into a text file or pipe to a shell or further manipulate, ignore errors etc.
+
 
 Requires Terraform and GitHub CLI to be installed and configured
 
@@ -61,7 +63,7 @@ grep -E '^[[:space:]]*resource[[:space:]]+"github_team"' ./*.tf |
 awk '{gsub("\"", "", $3); print $3}' |
 while read -r team; do
     echo >&2
-    if grep -q "github_team.$team$" <<< "$terraform_state_list"; then
+    if grep -q "github_team\\.$team$" <<< "$terraform_state_list"; then
         echo "team '$team' already in terraform state, skipping..." >&2
         continue
     fi
@@ -73,5 +75,9 @@ while read -r team; do
     fi
     cmd="terraform import github_team.$team $id"
     timestamp "$cmd"
-    $cmd
+    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
+        echo "$cmd"
+    else
+        $cmd
+    fi
 done
