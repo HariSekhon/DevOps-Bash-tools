@@ -29,6 +29,8 @@ Will do nothing if the resource_type you specify doesn't match anything in the l
 This is a general case importer that will only cover basic use cases such as GitHub repos where the names usually match the terraform IDs
 (except for things like '.github' repo which is not a valid terraform identifier. Those must still be imported manually)
 
+If \$TERRAFORM_PRINT_ONLY is set to any value, prints the commands to stdout to collect so you can check, collect into a text file or pipe to a shell or further manipulate, ignore errors etc.
+
 
 Requires Terraform to be installed and configured
 "
@@ -55,11 +57,15 @@ grep -E "^[[:space:]]*resource[[:space:]]+\"$resource_type\"" ./*.tf |
 awk '{gsub("\"", "", $3); print $3}' |
 while read -r resource; do
     echo >&2
-    if grep -q "$resource_type.$resource$" <<< "$terraform_state_list"; then
+    if grep -q "$resource_type\.$resource$" <<< "$terraform_state_list"; then
         echo "'$resource_type.$resource' already in terraform state, skipping..." >&2
         continue
     fi
     cmd="terraform import $resource_type.$resource $resource"
     timestamp "$cmd"
-    $cmd
+    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
+        echo "$cmd"
+    else
+        $cmd
+    fi
 done
