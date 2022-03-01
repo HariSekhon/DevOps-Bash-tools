@@ -26,6 +26,8 @@ Finds all github_repository references in ./*.tf code not in Terraform state and
 
 Requires the github_repository identifiers in *.tf code to match the GitHub repo name, which does not work with repos which have dots in them eg. '.github'. Those rare exceptions must be imported manually.
 
+If \$TERRAFORM_PRINT_ONLY is set to any value, prints the commands to stdout to collect so you can check, collect into a text file or pipe to a shell or further manipulate, ignore errors etc.
+
 
 Requires Terraform to be installed and configured
 
@@ -60,5 +62,9 @@ while read -r repo; do
     fi
     cmd="terraform import github_repository.$repo $repo"
     timestamp "$cmd"
-    $cmd
+    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
+        echo "$cmd"
+    else
+        $cmd
+    fi
 done
