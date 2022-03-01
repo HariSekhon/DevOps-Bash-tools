@@ -95,6 +95,10 @@ else
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
+    # XXX: bugfix for 'illegal byte sequence error' for weird unicode chars in the filename
+    filename="$(sed 's/[^[:alnum:][:space:]!"$&'"'"'()+,.\/:<_|–\∕-]/-/g' <<< "$filename")"
+    #echo "Saving to filename: $filename"
+
     echo -n "=> Description "
     description_file="$backup_dir/$filename.description"
     "$srcdir/spotify_playlist_json.sh" "$playlist_id" | jq -r '.description' | tr -d '\n' > "$description_file"
