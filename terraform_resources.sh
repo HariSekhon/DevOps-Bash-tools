@@ -27,7 +27,7 @@ Workaround for Terraform Splat expressions not supporting top level resources
 
 Returns a JSON output in format 'map[string]=string' where the key is set to the id and the value is set to the name or selected attribute value of the resource
 
-Returns a non-zero error code if the resource_type or the attribute are not found which will be picked up by Terraform to error out
+Returns a non-zero error code if the resource_type is not found which will be picked up by Terraform to error out, but a missing attribute will get a null value
 
 
 Example:
