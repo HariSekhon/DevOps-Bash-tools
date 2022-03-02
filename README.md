@@ -800,11 +800,11 @@ etc.
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment/terraform variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
 - `terraform_*.sh` - [Terraform](https://www.terraform.io/) scripts:
-  - `terraform_import.sh` - finds given resource type in `./*.tf` code that are not in Terraform state and imports them
-  - `terraform_import_github_repos.sh` - finds all `github_repository` in `./*.tf` code that are not in Terraform state and imports them. See also `github_repos_not_in_terraform.sh`
-  - `terraform_import_github_teams.sh` - finds all `github_team` in `./*.tf` code that are not in Terraform state, then queries the GitHub API for their IDs and imports them. See also `github_teams_not_in_terraform.sh`
+  - `terraform_import.sh` - finds given resource type in `./*.tf` code or Terraform plan output that are not in Terraform state and imports them
+  - `terraform_import_github_repos.sh` - finds all `github_repository` in `./*.tf` code or Terraform plan output that are not in Terraform state and imports them. See also `github_repos_not_in_terraform.sh`
+  - `terraform_import_github_teams.sh` - finds all `github_team` in `./*.tf` code or Terraform plan output that are not in Terraform state, then queries the GitHub API for their IDs and imports them. See also `github_teams_not_in_terraform.sh`
   - `terraform_import_github_team_repos.sh` - finds all `github_team_repository` in Terraform plan that would be added, then queries the GitHub API for the repos and team IDs and if they both exist then imports them to Terraform state
-  - `terraform_resources.sh` - external program to provide data resource of all top-level resources for a given resource type and attribute to work around Terraform splat expression limitation ([#19931](https://github.com/hashicorp/terraform/issues/19931))
+  - `terraform_resources.sh` - external program to get all resource ids and attribute for a given resource type to work around Terraform splat expression limitation ([#19931](https://github.com/hashicorp/terraform/issues/19931))
 - `checkov_resource_*.sh` - [Checkov](https://www.checkov.io/) resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
   - `checkov_resource_count.sh` - counts the number of resources Checkov is scanning in the current or given directory
   - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repo checkouts
