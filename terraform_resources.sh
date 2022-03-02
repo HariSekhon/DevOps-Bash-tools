@@ -19,7 +19,7 @@ set -euo pipefail
 # sourcing lib.sh results in Terraform errors 'is_verbose: command not found'
 
 usage="
-Terraform external program that returns a list of root module resource names for a given resource_type
+Terraform external program that returns a list of resource ids and attribute for a given resource_type
 
 Workaround for Terraform Splat expressions not supporting top level resources
 
@@ -82,7 +82,12 @@ attribute="${2:-name}"
 
 terraform show -json -no-color |
 jq -er "
-    .values.root_module.resources[] |
+    .values.root_module |
+      [
+        .resources[],
+        .child_modules[].resources[]
+      ] |
+    flatten[] |
     select(.type == \"$resource_type\") |
     select(.values.id) |
     { (.values.id) : .values.$attribute }" |
