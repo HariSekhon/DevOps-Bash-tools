@@ -32,7 +32,7 @@ Requires \$CIRCLECI_TOKEN in the environment
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
-Set up a personal access token here - may need to click 'Enable SSO' next to each token to access corporation organizations with SSO (eg. Azure AAD SSO):
+Set up a personal access token here:
 
     https://app.circleci.com/settings/user/tokens
 
