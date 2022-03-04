@@ -68,3 +68,7 @@ if command -v kubectl &>/dev/null &&
         kubectl config set-context "$CONTEXT" --namespace "$NAMESPACE"
     fi
 fi
+
+#export ARGOCD_SERVER="argocd.mycompany.com"
+#export ARGOCD_OPTS="${ARGOCD_OPTS:-} --grpc-web"
+#export ARGOCD_AUTH_TOKEN="$ARGOCD_AUTH_TOKEN_MYCOMPANY_OR_ENV"
