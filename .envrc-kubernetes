@@ -25,6 +25,18 @@
 #   .envrc-aws
 #   .envrc-gcp
 
+# direnv stdlib - loads .envrc from parent dir up to /
+#
+# useful to accumulate parent and child directory .envrc settings eg. adding Kubernetes namespace, ArgoCD app etc.
+#
+# bypasses security authorization though - use with care
+#source_up
+#
+# source_up must be loaded before set -u otherwise gets this error:
+#
+#   direnv: loading .envrc
+#   /bin/bash: line 226: $1: unbound variable
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
