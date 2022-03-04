@@ -15,6 +15,18 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                              A W S   D i r e n v
+# ============================================================================ #
+
+# https://direnv.net/man/direnv-stdlib.1.html
+
+# See Also:
+#
+#   .envrc
+#   .envrc-gcp
+#   .envrc-kubernetes
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
