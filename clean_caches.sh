@@ -82,6 +82,7 @@ $GOPATH/src/github.com
 .ivy2
 .m2
 .sbt
+Library/Caches/Homebrew
 "
 
 
@@ -102,6 +103,8 @@ elif type yum >/dev/null 2>&1; then
     #yum autoremove -y
     echo "* yum clean all"
     yum clean all
+elif type brew >/dev/null 2>&1; then
+    brew cleanup
 fi
 
 echo "Deleting OS Caches"
