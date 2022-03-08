@@ -27,6 +27,9 @@ on:
   schedule:
     - cron: '0 7 * * *'
 
+permissions:
+  contents: read
+
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
   cancel-in-progress: true
@@ -38,4 +41,5 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       container: centos:7
+      caches: yum pip cpanm
       debug: ${{ github.event.inputs.debug || false }}
