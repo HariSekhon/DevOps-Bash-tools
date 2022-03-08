@@ -32,6 +32,9 @@ on:
   schedule:
     - cron: '0 0 * * 1'
 
+permissions:
+  contents: read
+
 jobs:
   check_json:
     if: github.event.repository.fork == false
