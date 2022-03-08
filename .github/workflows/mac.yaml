@@ -32,10 +32,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  make:
     if: github.event.repository.fork == false
-    name: Mac
-    uses: HariSekhon/GitHub-Actions/.github/workflows/mac.yaml@master
+    name: Make
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      version: latest
+      runs-on: macos-latest
+      caches: pip cpanm
       debug: ${{ github.event.inputs.debug || false }}
