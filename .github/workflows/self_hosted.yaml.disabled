@@ -24,6 +24,9 @@ on: # [push]
     # * is a special character in YAML so you have to quote this string
     - cron:  '0 7 * * *'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     #name: build
