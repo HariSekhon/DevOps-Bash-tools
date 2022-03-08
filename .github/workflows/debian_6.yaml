@@ -41,5 +41,6 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       container: debian:6
-      caches: apt pip cpanm
+      # causes nodejs errors
+      #caches: apt pip cpanm
       debug: ${{ github.event.inputs.debug || false }}
