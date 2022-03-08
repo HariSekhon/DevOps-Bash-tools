@@ -38,4 +38,5 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       container: debian:latest
+      caches: apt pip cpanm
       debug: ${{ github.event.inputs.debug || false }}
