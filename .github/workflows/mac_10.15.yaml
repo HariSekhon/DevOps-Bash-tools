@@ -41,5 +41,5 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       runs-on: macos-10.15
-      caches: pip cpanm
+      caches: brew pip cpanm
       debug: ${{ github.event.inputs.debug || false }}
