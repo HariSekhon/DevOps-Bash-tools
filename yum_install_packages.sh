@@ -87,10 +87,11 @@ $(sed 's/^python[23]-/python3-/' <<< "$packages")"
     fi
 fi
 
-if grep -qi 'NAME=.*CentOS' /etc/*release; then
+# CentOS is EOL - but for some reason CentOS 7 works without this, while CentOS 6 and 8 need archive
+if grep -qi 'NAME=.*CentOS' /etc/*release && grep -q '^VERSION="[68]"$' /etc/*release; then
     echo "CentOS EOL detected, replacing yum base URL to vault to re-enable package installs"
-    sed -i 's/^[[:space:]]*mirrorlist/#mirrorlist/' /etc/yum.repos.d/CentOS-Linux-*
-    sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-Linux-*
+    sed -i 's/^[[:space:]]*mirrorlist/#mirrorlist/' /etc/yum.repos.d/CentOS-*
+    sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-*
 fi
 
 SUDO=""
