@@ -25,7 +25,7 @@ alias jenkins-cli='jenkins_cli.sh'
 # sets Jenkins URL to the local docker and finds and loads the current container's superuser token to the environment for immediate use with jenkins_api.sh
 jenkins_local(){
     JENKINS_SUPERUSER_PASSWORD="$(
-        docker-compose -p bash-tools -f "$(dirname "${BASH_SOURCE[0]}")/../setup/jenkins-docker-compose.yml" \
+        docker-compose -p bash-tools -f "$(dirname "${BASH_SOURCE[0]}")/../docker-compose/jenkins.yml" \
             exec -T jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword </dev/null
             # use terminal or gets carriage return and would have to tr -d '\r'
     )"
