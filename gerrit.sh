@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Runs Gerrit via setup/gerrit-docker-compose.yml
+Runs Gerrit via docker-compose/gerrit.yml
 "
 
 # used by usage() in lib/utils.sh
@@ -52,7 +52,7 @@ gerrit_local(){
 
 gerrit_docker(){
     #docker run -d -ti -p 8080:8080 -p 29418:29418 gerritcodereview/gerrit:"$GERRIT_VERSION"
-    VERSION="$GERRIT_VERSION" docker-compose -f "$srcdir/setup/gerrit-docker-compose.yml" up -d
+    VERSION="$GERRIT_VERSION" docker-compose -f "$srcdir/docker-compose/gerrit.yml" up -d
 }
 
 gerrit_docker
