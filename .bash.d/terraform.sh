@@ -37,6 +37,7 @@ alias tfa='tf apply'
 alias tfip='tf init && tfp'
 alias tfia='tf init && tfa'
 alias tfaa='tfa -auto-approve'
+alias tfiaa='tfia -auto-approve'
 #complete -C /Users/hari/bin/terraform terraform
 
 alias tg=terragrunt
