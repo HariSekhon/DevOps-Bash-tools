@@ -1,0 +1,38 @@
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  Author: Hari Sekhon
+#  Date: 2022-03-09 17:28:12 +0000 (Wed, 09 Mar 2022)
+#
+#  https://github.com/harisekhon/bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  https://www.linkedin.com/in/harisekhon
+#
+
+# https://www.keycloak.org/getting-started/getting-started-docker
+
+version: '3'
+
+services:
+  keycloak:
+    hostname: keycloak
+    command:
+      - start-dev
+    image: quay.io/keycloak/keycloak:${VERSION:-17.0.0}
+    ports:
+      - ${KEYCLOAK_PORT:-8080}:8080
+    healthcheck:
+      #test: ["CMD", "curl", "-f", "http://localhost:8080/admin"]
+      # export DOCKER_HEALTHCHECK=/bin/true in development to bypass healthcheck
+      test: "${DOCKER_HEALTHCHECK:-curl http://localhost:8080/admin}"
+      interval: 30s
+      start_period: 30s  # version 3.4+
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin}
