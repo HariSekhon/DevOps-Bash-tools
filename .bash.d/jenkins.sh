@@ -32,7 +32,9 @@ jenkins_local(){
 
     export JENKINS_USER=admin
     export JENKINS_PASSWORD="$JENKINS_SUPERUSER_PASSWORD"
-    export JENKINS_TOKEN="$JENKINS_SUPERUSER_PASSWORD"
+    export JENKINS_TOKEN="$JENKINS_PASSWORD"
+    export JENKINS_API_TOKEN="$JENKINS_PASSWORD"
+    export JENKINS_USER_ID="$JENKINS_USER"
     export JENKINS_URL="http://localhost:8080"
 }
 
