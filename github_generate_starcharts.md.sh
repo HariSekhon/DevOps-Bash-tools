@@ -91,7 +91,7 @@ head(){
 }
 
 tempfile="$(mktemp)"
-trap 'echo ERROR >&2; rm -f $tempfile' exit
+trap 'echo ERROR >&2; rm -vf $tempfile' exit
 
 {
 actual_repos=0
@@ -118,11 +118,16 @@ for repo in $repolist; do
     echo "fetching GitHub README.md for '$repo'" >&2
     echo "---"
     echo "---" >&2
-    title="$(curl -sS --fail "https://raw.githubusercontent.com/$repo/master/README.md" | { head -n1; cat >/dev/null; } )"
+    title="$(curl -sS --fail "https://raw.githubusercontent.com/$repo/master/README.md" | { head -n1 | sed 's/^#*//'; cat >/dev/null; } )"
     printf '## %s\n' "$title"
+    printf '
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/%s)
+[![GitHub stars](https://img.shields.io/github/stars/%s?logo=github)](https://github.com/%s/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/%s?logo=github)](https://github.com/%s/network)
+' "$repo" "$repo" "$repo" "$repo" "$repo"
     echo
-    printf '%s\n' "Link:  [$repo](https://github.com/$repo)"
-    echo
+    #printf '%s\n' "Link:  [$repo](https://github.com/$repo)"
+    #echo
     printf '%s\n' "$description"
     echo
     printf '%s\n' "[![Stargazers over time](https://starchart.cc/$repo.svg)](https://starchart.cc/$repo)"
@@ -157,4 +162,6 @@ EOF
 cat "$tempfile"
 } | tee "$file"
 
-trap '' exit
+rm "$tempfile"
+
+untrap
