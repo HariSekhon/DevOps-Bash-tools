@@ -20,7 +20,7 @@ srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-filelist="$(find "${1:-.}" -type f -name '*docker-compose*.y*ml' | sort)"
+filelist="$(find "${1:-.}" -type f -iname '*docker-compose*.y*ml' -o -type f -ipath '*/docker-compose/*.y*ml' | sort)"
 
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null ||
