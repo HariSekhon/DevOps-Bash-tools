@@ -69,12 +69,17 @@ else
             done
         else
             echo "WARNING: skipping Travis install as gem command was not found in \$PATH"
-            echo
         fi
+        echo
     fi
     if type -P travis &>/dev/null; then
+        echo 'Travis path:'
+        echo
         type -P travis
-        travis version
+        echo
+        echo 'Travis version:'
+        echo
+        travis version --no-interactive
         echo
         # Travis CI is getting upstream errors randomly, eg.
         # server error (500: "Sorry, we experienced an error.\n\nrequest_id:16146a4f-677e-4314-888d-149617bdae2d\n")
