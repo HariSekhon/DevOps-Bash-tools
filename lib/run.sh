@@ -53,6 +53,11 @@ basename="${filename##*/}"
 
 cd "$dirname"
 
+docker_compose_up(){
+    export COMPOSE_FILE="$filename"
+    docker-compose up
+}
+
 if [ -n "$run_cmd" ]; then
     eval "$run_cmd"
 else
@@ -64,6 +69,8 @@ else
                     else
                         docker build .
                     fi
+                    ;;
+docker-compose*.y*ml) docker_compose_up
                     ;;
   cloudbuild*.y*ml) gcloud builds submit --config "$basename" .
                     ;;
@@ -81,7 +88,9 @@ kustomization.yaml) kustomize build --enable-helm
                     ;;
             *.md)   bash -ic "cd '$dirname'; gitbrowse"
                     ;;
-               *)   if [[ "$filename" =~ \.ya?ml$ ]] &&
+               *)   if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
+                        docker_compose_up
+                    elif [[ "$filename" =~ \.ya?ml$ ]] &&
                        grep -q '^apiVersion:' "$filename" &&
                        grep -q '^kind:'       "$filename"; then
                         # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
