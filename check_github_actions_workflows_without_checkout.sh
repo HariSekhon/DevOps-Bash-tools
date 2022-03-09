@@ -68,7 +68,8 @@ while read -r filename; do
         die "ERROR: file not found: $filename"
     fi
     echo "checking $filename"
-    if ! grep -Eq '^[^#]*(checkout|clone)' "$filename"; then
+    if ! grep -Eq '^[^#]*(checkout|clone)' "$filename" &&
+       ! grep -Eq '^[[:space:]]+uses:[[:space:]]*.+/.github/workflows/.+@.+' "$filename"; then
         echo
         echo "WARNING: no checkout detected in: $filename"
         echo
