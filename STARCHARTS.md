@@ -1,9 +1,9 @@
 # GitHub StarCharts
 
 ![Original Repos](https://img.shields.io/badge/Repos-20-blue?logo=github)
-![Stars](https://img.shields.io/badge/Stars-3563-blue?logo=github)
-![Forks](https://img.shields.io/badge/Forks-1570-blue?logo=github)
-![Followers](https://img.shields.io/badge/Followers-670-blue?logo=github)
+![Stars](https://img.shields.io/badge/Stars-3577-blue?logo=github)
+![Forks](https://img.shields.io/badge/Forks-1590-blue?logo=github)
+![Followers](https://img.shields.io/badge/Followers-680-blue?logo=github)
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
@@ -16,16 +16,20 @@
 ---
 ## Advanced Nagios Plugins Collection
 
-Link:  [HariSekhon/Nagios-Plugins](https://github.com/HariSekhon/Nagios-Plugins)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Nagios-Plugins)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Nagios-Plugins?logo=github)](https://github.com/HariSekhon/Nagios-Plugins/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Nagios-Plugins?logo=github)](https://github.com/HariSekhon/Nagios-Plugins/network)
 
 450+ AWS, Hadoop, Cloud, Kafka, Docker, Elasticsearch, RabbitMQ, Redis, HBase, Solr, Cassandra, ZooKeeper, HDFS, Yarn, Hive, Presto, Drill, Impala, Consul, Spark, Jenkins, Travis CI, Git, MySQL, Linux, DNS, Whois, SSL Certs, Yum Security Updates, Kubernetes, Cloudera etc...
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Nagios-Plugins.svg)](https://starchart.cc/HariSekhon/Nagios-Plugins)
 
 ---
-## # Dockerfiles for DevOps, CI/CD, Big Data & NoSQL
+##  Dockerfiles for DevOps, CI/CD, Big Data & NoSQL
 
-Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Dockerfiles)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Dockerfiles?logo=github)](https://github.com/HariSekhon/Dockerfiles/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Dockerfiles?logo=github)](https://github.com/HariSekhon/Dockerfiles/network)
 
 50+ DockerHub public images for Docker & Kubernetes - DevOps, GitHub Actions, CircleCI, Jenkins, TeamCity, Alpine, CentOS, Debian, Fedora, Ubuntu, Hadoop, Kafka, ZooKeeper, HBase, Cassandra, Solr, SolrCloud, Presto, Apache Drill, Nifi, Spark, Consul, Riak
 
@@ -34,7 +38,9 @@ Link:  [HariSekhon/Dockerfiles](https://github.com/HariSekhon/Dockerfiles)
 ---
 ## Hari Sekhon - DevOps Python Tools
 
-Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Python-tools)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/DevOps-Python-tools)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/DevOps-Python-tools?logo=github)](https://github.com/HariSekhon/DevOps-Python-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/DevOps-Python-tools?logo=github)](https://github.com/HariSekhon/DevOps-Python-tools/network)
 
 80+ DevOps & Data CLI Tools - AWS, GCP, GCF Python Cloud Functions, Log Anonymizer, Spark, Hadoop, HBase, Hive, Impala, Linux, Docker, Spark Data Converters & Validators (Avro/Parquet/JSON/CSV/INI/XML/YAML), Travis CI, AWS CloudFormation, Elasticsearch, Solr etc.
 
@@ -43,7 +49,9 @@ Link:  [HariSekhon/DevOps-Python-tools](https://github.com/HariSekhon/DevOps-Pyt
 ---
 ## Hari Sekhon - DevOps Bash Tools
 
-Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/network)
 
 700+ DevOps Bash Scripts - AWS, GCP, Kubernetes, Kafka, Docker, APIs, Hadoop, SQL, PostgreSQL, MySQL, Hive, Impala, Travis CI, Jenkins, Concourse, GitHub, GitLab, BitBucket, Azure DevOps, TeamCity, Spotify, MP3, LDAP, Code/Build Linting, pkg mgmt for Linux, Mac, Python, Perl, Ruby, NodeJS, Golang, Advanced dotfiles: .bashrc, .vimrc, .gitconfig, .screenrc, .tmux.conf, .psqlrc ...
 
@@ -52,7 +60,9 @@ Link:  [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-
 ---
 ## SQL Scripts
 
-Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/SQL-scripts)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/SQL-scripts?logo=github)](https://github.com/HariSekhon/SQL-scripts/network)
 
 100+ SQL Scripts - PostgreSQL, MySQL, Google BigQuery, MariaDB, AWS Athena. DevOps / DBA / Analytics / performance engineering. Google BigQuery ML machine learning classification.
 
@@ -61,7 +71,9 @@ Link:  [HariSekhon/SQL-scripts](https://github.com/HariSekhon/SQL-scripts)
 ---
 ## Advanced HAProxy Configs for Big Data, NoSQL, Web and Infrastructure technologies
 
-Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-configs)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/HAProxy-configs)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/HAProxy-configs?logo=github)](https://github.com/HariSekhon/HAProxy-configs/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/HAProxy-configs?logo=github)](https://github.com/HariSekhon/HAProxy-configs/network)
 
 80+ HAProxy Configs for Hadoop, Big Data, NoSQL, Docker, Kubernetes, Elasticsearch, SolrCloud, HBase, MySQL, PostgreSQL, Apache Drill, Hive, Presto, Impala, Hue, ZooKeeper, SSH, RabbitMQ, Redis, Riak, Cloudera, OpenTSDB, InfluxDB, Prometheus, Kibana, Graphite, Rancher etc.
 
@@ -70,7 +82,9 @@ Link:  [HariSekhon/HAProxy-configs](https://github.com/HariSekhon/HAProxy-config
 ---
 ## Hari Sekhon - DevOps Perl Tools
 
-Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-tools)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/DevOps-Perl-tools)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/DevOps-Perl-tools?logo=github)](https://github.com/HariSekhon/DevOps-Perl-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/DevOps-Perl-tools?logo=github)](https://github.com/HariSekhon/DevOps-Perl-tools/network)
 
 25+ DevOps CLI Tools - Anonymizer, SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles), Hadoop HDFS & Hive tools, Solr/SolrCloud CLI, Nginx stats & HTTP(S) URL watchers for load-balanced web farms, Linux tools etc.
 
@@ -79,7 +93,9 @@ Link:  [HariSekhon/DevOps-Perl-tools](https://github.com/HariSekhon/DevOps-Perl-
 ---
 ## Kubernetes configs
 
-Link:  [HariSekhon/Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Kubernetes-configs)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Kubernetes-configs?logo=github)](https://github.com/HariSekhon/Kubernetes-configs/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Kubernetes-configs?logo=github)](https://github.com/HariSekhon/Kubernetes-configs/network)
 
 Advanced Kubernetes YAML configs - Best Practices, Tips & Tricks from production environments. AWS, GCP, Azure, GKE, EKS, AKS, Cloud SQL, CI/CD, Jenkins, TeamCity, BuildKite, GitHub Actions, ArgoCD, Spinnaker, Selenium Grid, FluxCD, Cert Manager with ACME Let's Encrypt for free ingress auto SSL certificates, patches, Helm + Kustomize
 
@@ -88,7 +104,9 @@ Advanced Kubernetes YAML configs - Best Practices, Tips & Tricks from production
 ---
 ## Spotify Tools
 
-Link:  [HariSekhon/Spotify-tools](https://github.com/HariSekhon/Spotify-tools)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Spotify-tools)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Spotify-tools?logo=github)](https://github.com/HariSekhon/Spotify-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Spotify-tools?logo=github)](https://github.com/HariSekhon/Spotify-tools/network)
 
 Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication detection / removal, API search queries, API automation etc.
 
@@ -97,7 +115,9 @@ Spotify Tools - Playlists Backups, Spotify CLI, URI translator, duplication dete
 ---
 ## Code & Config Templates
 
-Link:  [HariSekhon/Templates](https://github.com/HariSekhon/Templates)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Templates)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Templates?logo=github)](https://github.com/HariSekhon/Templates/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Templates?logo=github)](https://github.com/HariSekhon/Templates/network)
 
 DevOps Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, CircleCI, GitHub Actions, Lambda, AWS CodeBuild, GCP Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, Vagrantfile, M4 etc...
 
@@ -106,34 +126,42 @@ DevOps Templates for Kubernetes, AWS, GCP, Terraform, Docker, Jenkins, CircleCI,
 ---
 ## Hari Sekhon - Perl Library
 
-Link:  [HariSekhon/lib](https://github.com/HariSekhon/lib)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/lib)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/lib?logo=github)](https://github.com/HariSekhon/lib/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/lib?logo=github)](https://github.com/HariSekhon/lib/network)
 
 Perl Utility Library for my other repos
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/lib.svg)](https://starchart.cc/HariSekhon/lib)
 
 ---
-## Hari Sekhon - DevOps Golang Tools
-
-Link:  [HariSekhon/DevOps-Golang-tools](https://github.com/HariSekhon/DevOps-Golang-tools)
-
-DevOps Golang tools
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
-
----
 ## Terraform Templates
 
-Link:  [HariSekhon/Terraform](https://github.com/HariSekhon/Terraform)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Terraform)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Terraform?logo=github)](https://github.com/HariSekhon/Terraform/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Terraform?logo=github)](https://github.com/HariSekhon/Terraform/network)
 
 Terraform templates for AWS / GCP / Azure
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Terraform.svg)](https://starchart.cc/HariSekhon/Terraform)
 
 ---
+## Hari Sekhon - DevOps Golang Tools
+
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/DevOps-Golang-tools)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/DevOps-Golang-tools?logo=github)](https://github.com/HariSekhon/DevOps-Golang-tools/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/DevOps-Golang-tools?logo=github)](https://github.com/HariSekhon/DevOps-Golang-tools/network)
+
+DevOps Golang tools
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Golang-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Golang-tools)
+
+---
 ## Kafka Scala API - Advanced Nagios Plugin / CLI Tool with Kerberos support
 
-Link:  [HariSekhon/Nagios-Plugin-Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Nagios-Plugin-Kafka?logo=github)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Nagios-Plugin-Kafka?logo=github)](https://github.com/HariSekhon/Nagios-Plugin-Kafka/network)
 
 Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 0.9+ native Java API)
 
@@ -142,34 +170,42 @@ Kafka Scala API CLI / Advanced Nagios Plugin, with Kerberos support (uses Kafka 
 ---
 ## Hari Sekhon - Spotify Playlists
 
-Link:  [HariSekhon/Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Spotify-Playlists)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/network)
 
 240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
 ---
-## Hari Sekhon - Python / Jython Library
+##  Jenkinsfile & Jenkins Shared Library
 
-Link:  [HariSekhon/pylib](https://github.com/HariSekhon/pylib)
-
-Python / Jython Utility Library for my other repos
-
-[![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
-
----
-## # Jenkinsfile & Jenkins Shared Library
-
-Link:  [HariSekhon/Jenkins](https://github.com/HariSekhon/Jenkins)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/Jenkins)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Jenkins?logo=github)](https://github.com/HariSekhon/Jenkins/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Jenkins?logo=github)](https://github.com/HariSekhon/Jenkins/network)
 
 Advanced Jenkinsfile & Jenkins Shared Library (Groovy)
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Jenkins.svg)](https://starchart.cc/HariSekhon/Jenkins)
 
 ---
+## Hari Sekhon - Python / Jython Library
+
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/pylib)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/pylib?logo=github)](https://github.com/HariSekhon/pylib/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/pylib?logo=github)](https://github.com/HariSekhon/pylib/network)
+
+Python / Jython Utility Library for my other repos
+
+[![Stargazers over time](https://starchart.cc/HariSekhon/pylib.svg)](https://starchart.cc/HariSekhon/pylib)
+
+---
 ## TeamCity CI Config
 
-Link:  [HariSekhon/TeamCity-CI](https://github.com/HariSekhon/TeamCity-CI)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/TeamCity-CI)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/TeamCity-CI?logo=github)](https://github.com/HariSekhon/TeamCity-CI/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/TeamCity-CI?logo=github)](https://github.com/HariSekhon/TeamCity-CI/network)
 
 TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity builds, API scripts & configs for most major CI systems: Azure DevOps, GitHub Actions, GitLab CI, BitBucket CI, Travis CI, Circle CI, AWS CodeBuild, GCP Cloud Build, AppVeyor, BuildKite, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker...
 
@@ -178,16 +214,20 @@ TeamCity CI configs - plus links to one-touch Jenkins, GoCD, Concourse, TeamCity
 ---
 ## SQL Keywords
 
-Link:  [HariSekhon/SQL-keywords](https://github.com/HariSekhon/SQL-keywords)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/SQL-keywords)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/SQL-keywords?logo=github)](https://github.com/HariSekhon/SQL-keywords/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/SQL-keywords?logo=github)](https://github.com/HariSekhon/SQL-keywords/network)
 
 SQL keywords and built-in functions for most major RDBMS, MPP SQL & NoSQL systems - MySQL, PostgreSQL, Oracle, SQL Server, Presto / AWS Athena, Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra, Couchbase N1QL, Pig Latin, Neo4j Cypher, Dockerfiles - Used by sqlcase.pl to auto-recase SQL scripts, Dockerfiles etc.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/SQL-keywords.svg)](https://starchart.cc/HariSekhon/SQL-keywords)
 
 ---
-## # GitHub Actions
+##  GitHub Actions
 
-Link:  [HariSekhon/GitHub-Actions](https://github.com/HariSekhon/GitHub-Actions)
+[![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/HariSekhon/GitHub-Actions)
+[![GitHub stars](https://img.shields.io/github/stars/HariSekhon/GitHub-Actions?logo=github)](https://github.com/HariSekhon/GitHub-Actions/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/HariSekhon/GitHub-Actions?logo=github)](https://github.com/HariSekhon/GitHub-Actions/network)
 
 GitHub Actions master template and GitHub Actions Shared Workflows
 
