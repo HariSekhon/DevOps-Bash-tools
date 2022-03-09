@@ -54,8 +54,7 @@ basename="${filename##*/}"
 cd "$dirname"
 
 docker_compose_up(){
-    export COMPOSE_FILE="$filename"
-    docker-compose up
+    docker-compose -f "$filename" up
 }
 
 if [ -n "$run_cmd" ]; then
