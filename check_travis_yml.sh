@@ -77,10 +77,10 @@ else
         echo
         type -P travis
         echo
-        echo 'Travis version:'
-        echo
+        echo -n 'Travis version:  '
         travis version --no-interactive
         echo
+        echo -n 'Travis lint:  '
         # Travis CI is getting upstream errors randomly, eg.
         # server error (500: "Sorry, we experienced an error.\n\nrequest_id:16146a4f-677e-4314-888d-149617bdae2d\n")
         set +e
