@@ -731,6 +731,7 @@ gitl(){
 gitlp(){
     git log -p "$@"
 }
+alias gitlp1="gitlp -1"
 
 gitl2(){
     git log --all --graph --decorate --stat "$@"
