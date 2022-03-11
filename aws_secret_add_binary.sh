@@ -30,11 +30,11 @@ Remaining args are passed directly to 'aws secretsmanager'
 
 Example:
 
-    ${0##*/} my-qr-code qr-code-screenshot.png
+    ${0##*/} mysecret qr-code-screenshot.png
 
-    # To retrieve the binary file back::
+# To retrieve the binary file back:
 
-    aws_secret_get.sh my-qr-code | base64 --decode > qr-code.png
+    aws_secret_get.sh mysecret | base64 --decode > qr-code.png
 
 
 $usage_aws_cli_required
