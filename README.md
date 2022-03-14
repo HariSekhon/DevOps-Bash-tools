@@ -414,6 +414,7 @@ etc.
   - `gcp_find_orphaned_disks.sh` - lists orphaned disks across one or more GCP projects (not attached to any compute instance)
   - `gcp_secret*.sh` - [Google Secret Manager](https://cloud.google.com/secret-manager) scripts:
     - `gcp_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to GCP Secrets Manager. Useful for uploading a password without exposing it on your screen
+    - `gcp_secret_add_binary.sh` - uploads a binary file to GCP Secrets Manager by base64 encoding it first. Useful for uploading QR code screenshots. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
     - `gcp_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given GCP Secrets Manager secret. Useful for uploading a password without exposing it on your screen
     - `gcp_secret_get.sh` - finds the latest version of a given GCP Secret Manager secret and returns its value. Used by adjacent scripts
     - `gcp_secret_label_k8s.sh` - labels a given existing GCP secret with the current kubectl cluster name and namespace for later use by `gcp_secrets_to_kubernetes.sh`
