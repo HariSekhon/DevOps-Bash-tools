@@ -814,6 +814,7 @@ etc.
 #### Internet Services
 
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
+- `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication using `$CLOUDFLARE_TOKEN`
