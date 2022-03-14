@@ -77,17 +77,5 @@ while read -r team; do
         echo "team '$team' already in terraform state, skipping..." >&2
         continue
     fi
-    timestamp "querying team '$team'"
-    id="$(gh api "/orgs/$org/teams/$team" | jq -r 'select(.id) | .id' || :)"
-    if [ -z "$id" ]; then
-        warn "team '$team' not found in GitHub API, skipping..."
-        continue
-    fi
-    cmd="terraform import github_team.$team $id"
-    timestamp "$cmd"
-    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "$cmd"
-    else
-        $cmd
-    fi
+    "$srcdir/terraform_import_github_team.sh" "github_team.$team" "$team" "$org"
 done
