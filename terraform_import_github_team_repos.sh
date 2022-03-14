@@ -44,7 +44,7 @@ org="${1:-${GITHUB_ORGANIZATION:-}}"
 dir="${2:-.}"
 
 if is_blank "$org"; then
-    usage "Organization not specifieid"
+    usage "Organization not specified"
 fi
 
 cd "$dir"
