@@ -803,6 +803,7 @@ etc.
 - `terraform_*.sh` - [Terraform](https://www.terraform.io/) scripts:
   - `terraform_import.sh` - finds given resource type in `./*.tf` code or Terraform plan output that are not in Terraform state and imports them
   - `terraform_import_github_repos.sh` - finds all `github_repository` in `./*.tf` code or Terraform plan output that are not in Terraform state and imports them. See also `github_repos_not_in_terraform.sh`
+  - `terraform_import_github_team.sh` - imports a given GitHub team into a given Terraform state resource, by first querying the GitHub API for the team ID needed to import into Terraform
   - `terraform_import_github_teams.sh` - finds all `github_team` in `./*.tf` code or Terraform plan output that are not in Terraform state, then queries the GitHub API for their IDs and imports them. See also `github_teams_not_in_terraform.sh`
   - `terraform_import_github_team_repos.sh` - finds all `github_team_repository` in Terraform plan that would be added, then queries the GitHub API for the repos and team IDs and if they both exist then imports them to Terraform state
   - `terraform_resources.sh` - external program to get all resource ids and attribute for a given resource type to work around Terraform splat expression limitation ([#19931](https://github.com/hashicorp/terraform/issues/19931))
