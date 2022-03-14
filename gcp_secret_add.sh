@@ -49,10 +49,16 @@ shift || :
 
 if [ -z "$secret" ]; then
     read_secret
+    #if [ -f "$secret" ]; then
+    #    read -p "Given secret has been found as a local filename, are you sure you want to add this file?" answer
+    #    if ! is_yes "$answer"; then
+    #        die 'Aborting...'
+    #    fi
+    #fi
 fi
 
 if [ -f "$secret" ]; then
-    secret="$(cat "$secret")"
+    gcloud secrets create "$name" --data-file "$secret" "$@"
+else
+    gcloud secrets create "$name" --data-file - "$@" <<< "$secret"
 fi
-
-gcloud secrets create "$name" --data-file - "$@" <<< "$secret"
