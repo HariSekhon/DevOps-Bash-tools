@@ -32,7 +32,7 @@ Example:
 
     ${0##*/} mysecret qr-code-screenshot.png
 
-# to retrieve the binary file back:
+# To retrieve the binary file back:
 
     gcp_secret_get.sh mysecret | base64 --decode > qr-code.png
 
