@@ -63,5 +63,5 @@ if [ -f "$secret" ]; then
     secret="$(cat "$secret")"
 fi
 
-# XXX: consider switching to update-secret to allow modifying description and other details
-aws secretsmanager put-secret-value --secret-id "$name" --secret-string "$secret" "$@"
+# put-secret doesn't allow changing the --description or other details
+aws secretsmanager update-secret --secret-id "$name" --secret-string "$secret" "$@"
