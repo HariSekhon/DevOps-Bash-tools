@@ -36,12 +36,13 @@ Examples:
 
     ${0##*/} myname myvalue
 
+
 $usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<name> [<secret> <aws_options>]"
+usage_args="<name> [<secret> --description 'My changed description' <aws_options>]"
 
 help_usage "$@"
 
