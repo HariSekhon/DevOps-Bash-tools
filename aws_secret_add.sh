@@ -55,12 +55,12 @@ help_usage "$@"
 min_args 1 "$@"
 
 name="$1"
-shift || :
 # perhaps somebody wants a secret value starting with a dash
 if ! [[ "${2:-}" =~ ^--[[:alpha:]]+ ]]; then
     secret="${2:-}"
     shift || :
 fi
+shift || :
 
 if [ -z "$secret" ]; then
     read_secret
