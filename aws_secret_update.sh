@@ -25,7 +25,9 @@ usage_description="
 Reads a value from the command line without echo'ing it on the screen and updates the given AWS Secrets Manager secret
 
 First argument is used as secret name
-Second argument is used as secret string value - if not given prompts for it with a non-echo'ing prompt (recommended)
+Second argument is used as secret string value if it doesn't start with option swtich double dashes -- and a letter
+    - if this argument is a file, such as an SSH key, reads the file content and saves it as the secret value
+    - if not given prompts for it with a non-echo'ing prompt (recommended for passwords)
 Remaining args are passed directly to 'aws secretsmanager'
 
 Examples:
@@ -46,12 +48,20 @@ help_usage "$@"
 min_args 1 "$@"
 
 name="$1"
-secret="${2:-}"
-shift || :
+# perhaps somebody wants a secret value starting with a dash
+if ! [[ "${2:-}" =~ ^--[[:alpha:]]+ ]]; then
+    secret="${2:-}"
+    shift || :
+fi
 shift || :
 
 if [ -z "$secret" ]; then
     read_secret
 fi
 
+if [ -f "$secret" ]; then
+    secret="$(cat "$secret")"
+fi
+
+# XXX: consider switching to update-secret to allow modifying description and other details
 aws secretsmanager put-secret-value --secret-id "$name" --secret-string "$secret" "$@"
