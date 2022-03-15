@@ -57,4 +57,5 @@ if ! [ -f "$file" ]; then
     die "File not found: $file"
 fi
 
+# put-secret doesn't allow changing the --description or other details
 aws secretsmanager update-secret --secret-id "$name" --secret-binary "$(base64 "$file")" "$@"
