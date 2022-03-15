@@ -382,7 +382,8 @@ etc.
     - `aws_secrets_list.sh` - returns the list of secrets, one per line
     - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to Secrets Manager. Useful for uploading a password without exposing it on your screen
     - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to Secrets Manager as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
-    - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given Secrets Manager secret. Useful for uploading a password without exposing it on your screen
+    - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given Secrets Manager secret. Useful for updating a password without exposing it on your screen
+    - `aws_secret_update_binary.sh` - base64 encodes a given file's contents and updates a given Secrets Manager secret. Useful for updating a QR code screenshot for a root account
     - `aws_secret_get.sh` - gets a secret value for a given secret from Secrets Manager, retrieving either a secure string or secure binary depending on which is available
   - `setup/eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
 
