@@ -378,6 +378,7 @@ etc.
   - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
   - `aws_sqs_check.sh` - sends a test message to an [SQS](https://aws.amazon.com/sqs/) queue, retrieves it to check and then deletes it via the receipt handle id
+  - `aws_sqs_delete_message.sh` - deletes 1-10 messages from a given [SQS](https://aws.amazon.com/sqs/) queue (to help clear out test messages)
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
   - `aws_secret*.sh` - AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) scripts:
     - `aws_secrets_list.sh` - returns the list of secrets, one per line
