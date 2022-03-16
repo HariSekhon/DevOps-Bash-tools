@@ -24,11 +24,16 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Prints AWS credentials from a standard AWS CSV export file or access key export CSV as shell export statements
 
+Supports new user and new access key csv file formats eg. 'Download .csv file' when you create an AWS access key in the console
+
 Useful to quickly switch your shell to some exported credentials from a service account for testing permissions
-or pipe to upload to a CI/CD system via an API eg. circleci_project_set_env_vars.sh
+or pipe to upload to a CI/CD system via an API, eg. the adjacent scripts:
 
-Expected format is that of the AWS 'Download .csv file' when you create an AWS access key in the console
-
+    github_actions_repo*_set_secret.sh
+    gitlab_*_set_env_vars.sh
+    circleci_*_set_env_vars.sh
+    bitbucket_*_set_env_vars.sh
+    terraform_cloud_*_set_vars.sh
 
 Examples:
 
