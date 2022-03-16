@@ -27,7 +27,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Creates a Kuberbetes secret from key=value args or stdin
 
-If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
+If no third or more arguments are given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
 Examples:
 
