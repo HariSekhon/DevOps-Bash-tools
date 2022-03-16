@@ -25,7 +25,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Adds / updates GitHub repo-level secrets from args or stdin, for use in GitHub Actions
+Adds / updates GitHub repo-level secrets from key=value args or stdin, for use in GitHub Actions
 
 If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
