@@ -323,7 +323,6 @@ etc.
   - `aws_budget_alarm.sh` - creates an [AWS Budgets](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when both when you start incurring forecasted charges of over 80% of your budget, and 90% actual usage. This is often the first thing you want to do on an account
   - `aws_batch_stale_jobs.sh` - lists [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
   - `aws_batch_kill_stale_jobs.sh` - finds and kills [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
-  - `aws_check_sqs.sh` - sends a test message to an [SQS](https://aws.amazon.com/sqs/) queue, retrieves it to check and then deletes it via the receipt handle id
   - `aws_cloudtrails_cloudwatch.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their last delivery to [CloudWatch](https://aws.amazon.com/cloudwatch/features/) Logs (should be recent)
   - `aws_cloudtrails_event_selectors.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their event selectors to check each one has at least one event selector
   - `aws_cloudtrails_s3_accesslogging.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) buckets and their Access Logging prefix and target bucket. Checks [S3 access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) is enabled
@@ -378,6 +377,7 @@ etc.
   - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
   - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
+  - `aws_sqs_check.sh` - sends a test message to an [SQS](https://aws.amazon.com/sqs/) queue, retrieves it to check and then deletes it via the receipt handle id
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
   - `aws_secret*.sh` - AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) scripts:
     - `aws_secrets_list.sh` - returns the list of secrets, one per line
