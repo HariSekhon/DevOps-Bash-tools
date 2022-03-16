@@ -34,6 +34,7 @@ or pipe to upload to a CI/CD system via an API, eg. the adjacent scripts:
     circleci_*_set_env_vars.sh
     bitbucket_*_set_env_vars.sh
     terraform_cloud_*_set_vars.sh
+    kubectl_kv_to_secret.sh
 
 Examples:
 
