@@ -34,9 +34,17 @@ Output format:
 Good counterpart to check on what has been auto-loaded from GCP Secret Manager
 to Kubernetes secrets by gcp_secrets_to_kubernetes.sh
 
-Requires kubectl in \$PATH and configured
+See Also:
+
+    gcp_secrets_to_kubernetes.sh - loads from GCP Secret Manager to Kubernetes secret
+
+    kubectl_kv_to_secret,sh - creates a Kuberbetes secret from key=value args or stdin, environment export commands (eg. piped from aws_csv_creds.sh)
+
 
 Additional arguments are assumed to be kubectl options, useful for specifying --namespace
+
+
+Requires kubectl in \$PATH and configured
 "
 
 # used by usage() in lib/utils.sh
