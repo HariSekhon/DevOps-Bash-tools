@@ -23,7 +23,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all roles in the given or current project which are assigned to any identity  (user/group/serviceAccount) matching the given regex
+Finds all roles in the given or current project which are assigned to any identity (user/group/serviceAccount) matching the given regex
 
 For best matching the identity should be in the standard GCP format eg.
 
