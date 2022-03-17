@@ -41,6 +41,12 @@ Examples:
         aws_csv_creds.sh credentials_exported.csv | ${0##*/} mynamespace mysecret
 
 
+See Also:
+
+    kubectl_secret_values.sh - dumps all key value pairs, base64 decoded, for a given Kubernetes secret
+
+
+
 Requires kubectl to be installed and available in the \$PATH
 "
 
