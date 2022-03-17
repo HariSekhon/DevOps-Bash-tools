@@ -50,10 +50,10 @@ get_unused_identities(){
     identities_in_use="$("$srcdir/gcp_iam_identities_in_use.sh" "$project" | grep '^serviceAccount:' | sed 's/^[^:]*://')"
     gcloud iam service-accounts list --format='get(email)' --project "$project" |
     while read -r email; do
-        # don't include in-built service accounts like <project>@appspot.gserviceaccount.com which you ca't remove and don't appear in GCP Console
-        if ! [[ "$email" =~ \.iam\.gserviceaccount\.com$ ]]; then
-            continue
-        fi
+        # don't include <project>@appspot.gserviceaccount.com, but this was manageable in console
+        #if ! [[ "$email" =~ \.iam\.gserviceaccount\.com$ ]]; then
+        #    continue
+        #fi
         if ! grep -Fixq "$email" <<< "$identities_in_use"; then
             echo "$email"
         fi
