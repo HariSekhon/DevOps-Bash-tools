@@ -18,18 +18,30 @@ set -euo pipefail
 srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Deletes 1-10 AWS SQS messages from a given queue URL
+Deletes 1-10 AWS SQS messages from a given SQS queue URL
 
 Defaults to 1 message, max 10 messages
+
+
+Queue URL argument can be copied from SQS queue page and should look similar to:
+
+    https://sqs.<region>.amazonaws.com/<account_number>/myname.fifo
+
+    eg.
+
+    https://sqs.\$AWS_DEFAULT_REGION.amazonaws.com/\$AWS_ACCOUNT_ID/myname.fifo
+
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="queue_url [<num_of_messages>]"
+usage_args="<queue_url> [<num_messages>]"
 
 help_usage "$@"
 
