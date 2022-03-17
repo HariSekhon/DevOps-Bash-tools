@@ -496,6 +496,7 @@ etc.
       - `gcp_iam_roles_granted_too_widely.sh` - lists GCP IAM roles which have been granted to allAuthenticatedUsers or even worse allUsers (unauthenticated) in one or all projects
       - `gcp_iam_roles_with_direct_user_grants.sh` - lists GCP IAM roles which have been granted directly to users in violation of best-practice group-based management
       - `gcp_iam_serviceaccount_members.sh` - lists members with permissions to use each GCP service account
+      - `gcp_iam_serviceaccounts_without_permissions.sh` - finds service accounts without IAM permissionns, useful to detect obsolete service accounts after a 90 day unused permissions clean out
       - `gcp_iam_workload_identities.sh` - lists GKE Workload Identity integrations, uses `gcp_iam_serviceaccount_members.sh`
       - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
 
