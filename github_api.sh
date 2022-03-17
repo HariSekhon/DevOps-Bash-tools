@@ -134,7 +134,7 @@ repo=$(git_repo | sed 's/.*\///')
 if [ -n "$user" ]; then
     url_path="${url_path/:owner/$user}"
     url_path="${url_path/<owner>/$user}"
-    url_path="${url_path/\{owner\}/$user}"
+    #url_path="${url_path/\{owner\}/$user}"
     url_path="${url_path/:username/$user}"
     url_path="${url_path/<username>/$user}"
     url_path="${url_path/\{username\}/$user}"
@@ -144,7 +144,7 @@ if [ -n "$user" ]; then
 fi
 url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
-url_path="${url_path/\{repo\}/$repo}"
+#url_path="${url_path/\{repo\}/$repo}"
 
 "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@" |
 jq_debug_pipe_dump
