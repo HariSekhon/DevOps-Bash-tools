@@ -28,11 +28,16 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 usage_description="
 Queries the DataDog API
 
-Requires \$DD_API_KEY / \$DATADOG_TOKEN to be set in the environment. Set up an organization API key here and copy the key (not the key id):
+Requires \$DD_API_KEY / \$DATADOG_TOKEN to be set in the environment
+If \$DD_APP_KEY is set, will also be sent in requests
+
+Create an organization API key here:
 
     https://app.datadoghq.eu/organization-settings/api-keys
 
-If \$DD_APP_KEY is set, will also be sent, can create here:
+        (hint: copy the key, not the key id):
+
+Create \$DD_APP_KEY here:
 
     https://app.datadoghq.eu/organization-settings/application-keys
         or
@@ -54,6 +59,7 @@ Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 API Reference:
 
     https://docs.datadoghq.com/api/latest/
+
 
 Defaults to /v2 API, but if /vN is specified, then uses that API instead, eg. prefixing /v1 to API endpoints that are only available in v1 such as /v1/org
 
