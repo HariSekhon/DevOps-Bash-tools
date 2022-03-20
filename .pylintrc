@@ -274,7 +274,15 @@ ignored-modules=
 # List of classes names for which member attributes should not be checked
 # (useful for classes with attributes dynamically set). This supports can work
 # with qualified names.
-ignored-classes=
+#
+# avoids the following error:
+#
+# pylint -E ./check_zookeeper_version.py
+#
+# E: 69,12: Instance of '_socketobject' has no 'sendall' member (no-member)
+# E: 70,19: Instance of '_socketobject' has no 'recv' member (no-member)
+#
+ignored-classes=SQLObject,_socketobject
 
 # List of members which are set dynamically and missed by pylint inference
 # system, and so shouldn't trigger E1101 when accessed. Python regular
