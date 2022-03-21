@@ -53,8 +53,10 @@ fi
 
 if is_blank "$ref"; then
     timestamp "ref not specified, attempting to determine from current branch"
-    ref="$(mybranch)"
-    timestamp "determined current branch to be '$ref'"
+    #ref="$(mybranch)"
+    #timestamp "determined current branch to be '$ref'"
+    ref="$(gh api "/repos/$owner_repo" | jq -r .default_branch)"
+    timestamp "determined default branch to be '$ref'"
     echo >&2
 fi
 
