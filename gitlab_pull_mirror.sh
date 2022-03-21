@@ -46,7 +46,7 @@ if [ -n "${GITLAB_USER:-}" ]; then
     user="$GITLAB_USER"
 else
     # get currently authenticated user
-    user="$(gitlab_api.sh /user | jq -r .username)"
+    user="$("$srcdir/gitlab_api.sh" /user | jq -r .username)"
 fi
 
 if [ $# -gt 0 ]; then
