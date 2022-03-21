@@ -25,6 +25,12 @@ usage_description="
 Creates a GitLab project (repo) as a mirror import from another repo URL
 
 Would configure auto-mirroring to stay in-sync too but that is a premium feature in the API
+
+URL can contain authentication information in the form:
+
+    https://<username>:<password>@<url>/<owner>/<repo>
+eg.
+    ${0##*/} devops-bash-tools https://harisekhon:mypass@github.com/harisekhon/devops-bash-tools
 "
 
 # used by usage() in lib/utils.sh
