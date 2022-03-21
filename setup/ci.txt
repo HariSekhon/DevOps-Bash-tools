@@ -24,6 +24,7 @@ Jenkinsfile
 .drone.yml
 .gitlab-ci.yml
 .gocd.yml
+.pylintrc
 .semaphore/semaphore.yml
 .teamcity.vcs.json
 .teamcity.auth.vcs.json
