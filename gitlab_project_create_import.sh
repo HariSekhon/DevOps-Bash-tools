@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a GitLab project (repo) as a mirror import from another repo URL
 
-Would configure auto-mirroring to stay in-sync too but that is a premium feature in the API
+If on GitLab Premium will configure auto-mirroring to stay in-sync too
 
 URL can contain authentication information in the form:
 
@@ -53,6 +53,7 @@ import_url="$2"
 
 timestamp "Creating GitLab repo '$name'"
 #"$srcdir/gitlab_api.sh" "/projects/user/$user" -X POST \
+# this will mirror automatically on Premium
 "$srcdir/gitlab_api.sh" "/projects" -X POST \
     -d "{
     \"name\": \"$name\",
@@ -61,7 +62,8 @@ timestamp "Creating GitLab repo '$name'"
 }"
 echo >&2
 
-# XXX: only available in premium unfortunately
+# not needed, create mirror option does the same
+# XXX: only available in Premium unfortunately
 #timestamp "Configuring repo mirroring from '$import_url'"
 #"$srcdir/gitlab_api.sh" "/projects/$user/$name/mirror/pull" -X POST \
 #    -d "{
