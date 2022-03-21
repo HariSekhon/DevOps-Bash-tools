@@ -58,10 +58,10 @@ id="$(gh api "/orgs/$org/teams/$team" | jq -r 'select(.id) | .id' || :)"
 if [ -z "$id" ]; then
     die "ERROR: team '$team' not found in GitHub API"
 fi
-cmd="terraform import '$resource' '$id'"
-timestamp "$cmd"
+cmd=(terraform import "'$resource'" "$id")
+timestamp "${cmd[*]}"
 if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-    echo "$cmd"
+    echo "${cmd[*]}"
 else
-    eval "$cmd"
+    eval "${cmd[@]}"
 fi
