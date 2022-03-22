@@ -74,6 +74,9 @@ Examples:
 
     ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
 
+# List repository invitations:
+
+    ${0##*/} /user/repository_invitations
 
 # For convenience you can even copy and paste out of the documentation literally and have the script auto-determine the right settings. The following tokens in the form :token, <token>, {token} are replaced:
 
