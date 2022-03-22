@@ -39,6 +39,8 @@ Each repo will have the same name in GitLab as it does on GitHub
 
 Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set as well as a locally available SSH key for cloning/pull/push
 
+In a GitHub Organization, only repos the user can read will be mirrored, others won't be returned in the list of GitHub repos to even try (as an outside collaborator user)
+
 Source GitHub and Destination GitLab accounts, in order or priority:
 
     \$GITHUB_ORGANIZATION, \$GITHUB_USER or owner of the \$GITHUB_TOKEN
@@ -141,7 +143,8 @@ for repo in $repos; do
 done
 
 if [ $failed -gt 0 ]; then
-    die "ERROR: $failed GitHub repos failed to mirror to GitLab ($succeeded succeeded)"
+    timestamp "ERROR: $failed GitHub repos failed to mirror to GitLab ($succeeded succeeded)"
+    exit 1
 fi
 
 timestamp "GitHub to GitLab mirroring completed successfully for $succeeded repos"
