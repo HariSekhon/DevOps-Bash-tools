@@ -52,6 +52,16 @@ get_github_user(){
     fi
 }
 
+github_result_has_more_pages(){
+    local output="$1"
+    if [ -z "$(jq '.[]' <<< "$output")" ]; then
+        return 1
+    elif jq -r '.message' <<< "$output" >&2 2>/dev/null; then
+        exit 1
+    fi
+    return 0
+}
+
 get_github_repos(){
     local user="${1:-}"
     if [ -z "$user" ]; then
