@@ -132,7 +132,12 @@ mirror_repo(){
 }
 
 for repo in $repos; do
-    mirror_repo "$repo" || ((failed+=1))
+    if ! mirror_repo "$repo"; then
+        echo >&2
+        timestamp "ERROR: Failed to mirror repo '$repo' to GitLab" >&2
+        echo >&2
+        ((failed+=1))
+    fi
 done
 
 if [ $failed -gt 0 ]; then
