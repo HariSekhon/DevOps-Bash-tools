@@ -63,9 +63,9 @@ github_result_has_more_pages(){
 }
 
 get_github_repos(){
-    local user="${1:-}"
-    if [ -z "$user" ]; then
-        user="$(get_github_user)"
+    local owner="${1:-}"
+    if [ -z "$owner" ]; then
+        owner="$(get_github_user)"
     fi
     local is_org="${2:-}"
     local filter="${3:-.}"
@@ -77,7 +77,7 @@ get_github_repos(){
     fi
     local page=1
     while true; do
-        if ! output="$("$srcdir_github_lib/../github_api.sh" "/$prefix/$user/repos?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir_github_lib/../github_api.sh" "/$prefix/$owner/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
