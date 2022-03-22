@@ -35,7 +35,8 @@ Cron this script as per your preferred backup schedule
 
 If no repos are given, iterates all non-fork repos for the current user or GitHub organization
 
-Each repo will have the same name in GitLab as it does on GitHub
+Each repo will have the same name in GitLab as it does on GitHub, but characters other than alphanumeric/dash/underscores will be replaced by underscore,
+and any leading special characters will be removed to meet GitLab's repo naming requirements eg. a repo called '.test' on GitHub will mirrored to just 'test' on GitLab
 
 Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set as well as a locally available SSH key for cloning/pull/push
 
@@ -99,13 +100,15 @@ failed=0
 
 mirror_repo(){
     local repo="$1"
-    gitlab_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$repo")"
-    timestamp "Checking GitLab repo '$gitlab_owner/$repo' exists"
-    if ! "$srcdir/gitlab_api.sh" "/projects/$gitlab_repo" >/dev/null; then
-        timestamp "Creating GitLab repo '$gitlab_owner/$repo'"
+    # GitLab doesn't allow repo name like .github, only alnum, dashes and underscores, and not starting funny chars either
+    gitlab_repo="$(sed 's/[^[:alnum:]_-]/_/g; s/^[^[:alnum:]]//' <<< "$repo")"
+    gitlab_owner_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$gitlab_repo")"
+    timestamp "Checking GitLab repo '$gitlab_owner/$gitlab_repo' exists"
+    if ! "$srcdir/gitlab_api.sh" "/projects/$gitlab_owner_repo" >/dev/null; then
+        timestamp "Creating GitLab repo '$gitlab_owner/$gitlab_repo'"
         # only available for admins
-        #"$srcdir/gitlab_api.sh" "/projects/user/$gitlab_id" -X POST -d "{ \"name\": \"$repo\", \"visibility\": \"private\" }" >/dev/null
-        "$srcdir/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$repo\", \"visibility\": \"private\" }" >/dev/null
+        #"$srcdir/gitlab_api.sh" "/projects/user/$gitlab_id" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
+        "$srcdir/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
         echo >&2
     fi
     if [ -d "$repo.git" ]; then
@@ -119,7 +122,7 @@ mirror_repo(){
     fi
     if ! git remotes -v | awk '{print $1}' | grep -Fxq gitlab; then
         timestamp "Adding GitLab remote origin"
-        git remotes add gitlab git@gitlab.com:"$gitlab_owner/$repo"
+        git remotes add gitlab git@gitlab.com:"$gitlab_owner/$gitlab_repo"
         echo >&2
     fi
     timestamp "Pushing all branches to GitLab"
