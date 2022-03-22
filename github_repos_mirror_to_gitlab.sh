@@ -92,9 +92,11 @@ mkdir -p -v "$tmpdir"
 cd "$tmpdir"
 echo >&2
 
-count=0
+succeeded=0
+failed=0
 
-for repo in $repos; do
+mirror_repo(){
+    local repo="$1"
     gitlab_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$repo")"
     timestamp "Checking GitLab repo '$gitlab_owner/$repo' exists"
     if ! "$srcdir/gitlab_api.sh" "/projects/$gitlab_repo" >/dev/null; then
@@ -106,12 +108,12 @@ for repo in $repos; do
     fi
     if [ -d "$repo.git" ]; then
         timestamp "Using existing clone in directory '$repo.git'"
-        pushd "$repo.git" >/dev/null
-        git remote update origin
+        pushd "$repo.git" >/dev/null || return 1
+        git remote update origin || return 1
     else
         timestamp "Cloning GitHub repo to directory '$repo.git'"
-        git clone --mirror "git@github.com:$owner/$repo.git"
-        pushd "$repo.git" >/dev/null
+        git clone --mirror "git@github.com:$owner/$repo.git" || return 1
+        pushd "$repo.git" >/dev/null || return 1
     fi
     if ! git remotes -v | awk '{print $1}' | grep -Fxq gitlab; then
         timestamp "Adding GitLab remote origin"
@@ -119,14 +121,22 @@ for repo in $repos; do
         echo >&2
     fi
     timestamp "Pushing all branches to GitLab"
-    git push --all gitlab
+    git push --all gitlab || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
     timestamp "Pushing all tags to GitLab"
-    git push --tags gitlab
+    git push --tags gitlab || return 1
     # more dangerous, force overwrites remote repo refs
-    #git push --mirror gitlab
-    popd >/dev/null
+    #git push --mirror gitlab || return 1
+    popd >/dev/null || return 1
     echo >&2
-    ((count+=1))
+    ((succeeded+=1))
+}
+
+for repo in $repos; do
+    mirror_repo "$repo" || ((failed+=1))
 done
 
-timestamp "GitHub to GitLab mirroring completed successfully for $count repos"
+if [ $failed -gt 0 ]; then
+    die "ERROR: $failed GitHub repos failed to mirror to GitLab ($succeeded succeeded)"
+fi
+
+timestamp "GitHub to GitLab mirroring completed successfully for $succeeded repos"
