@@ -39,7 +39,7 @@ see the related script:
 See Also:
 
     git_remotes_add_origin_providers.sh  - creates remotes for easy individual pull/pushes or git pull --all
-    git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
+    git_sync_repos_upstream.sh           - for sync'ing all repos to another provider
 "
 
 # used by usage() in lib/utils.sh
