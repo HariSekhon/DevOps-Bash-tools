@@ -83,6 +83,8 @@ mkdir -p -v "$tmpdir"
 cd "$tmpdir"
 echo >&2
 
+count=0
+
 for repo in $repos; do
     gitlab_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$repo")"
     timestamp "Checking GitLab repo '$gitlab_owner/$repo' exists"
@@ -115,6 +117,7 @@ for repo in $repos; do
     #git push --mirror gitlab
     popd >/dev/null
     echo >&2
+    ((count+=1))
 done
 
-timestamp "GitHub to GitLab mirroring completed successfully"
+timestamp "GitHub to GitLab mirroring completed successfully for $count repos"
