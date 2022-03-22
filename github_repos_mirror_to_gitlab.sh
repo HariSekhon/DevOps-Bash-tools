@@ -30,8 +30,10 @@ Each repo will have the same name in GitLab as it does on GitHub
 
 Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set as well as a locally available SSH key for cloning/pull/push
 
-\$GITHUB_ORGANIZATION takes priority if set, otherwise uses \$GITHUB_USER or owner of the \$GITHUB_TOKEN
-\$GITLAB_OWNER should be set if not mirroring to the owner of the \$GITLAB_TOKEN
+Source GitHub and Destination GitLab accounts, in order or priority:
+
+    \$GITHUB_ORGANIZATION, \$GITHUB_USER or owner of the \$GITHUB_TOKEN
+    \$GITLAB_OWNER, \$GITLAB_USER or the owner of the \$GITLAB_TOKEN
 "
 
 # used by usage() in lib/utils.sh
