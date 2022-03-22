@@ -381,7 +381,7 @@ etc.
   - `aws_sqs_delete_message.sh` - deletes 1-10 messages from a given [SQS](https://aws.amazon.com/sqs/) queue (to help clear out test messages)
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
   - `aws_secret*.sh` - AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) scripts:
-    - `aws_secrets_list.sh` - returns the list of secrets, one per line
+    - `aws_secret_list.sh` - returns the list of secrets, one per line
     - `aws_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to Secrets Manager. Useful for uploading a password without exposing it on your screen
     - `aws_secret_add_binary.sh` - base64 encodes a given file's contents and saves it to Secrets Manager as a binary secret. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
     - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given Secrets Manager secret. Useful for updating a password without exposing it on your screen
