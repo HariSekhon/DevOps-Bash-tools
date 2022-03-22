@@ -85,7 +85,7 @@ else
 fi
 
 # not using mktemp because we want to reuse this staging area between runs for efficiency
-tmpdir="/tmp/github_to_gitlab_mirroring"
+tmpdir="/tmp/github_to_gitlab_mirroring_$owner"
 
 timestamp "Switching to '$tmpdir' directory for mirror staging"
 mkdir -p -v "$tmpdir"
