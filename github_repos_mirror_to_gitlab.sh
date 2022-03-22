@@ -22,7 +22,7 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Mirrors all or more given repos from GitHub to GitLab via SSH using mirror clones
+Mirrors all or more given repos from GitHub to GitLab via APIs and SSH mirror clones
 
 Useful to create/sync GitHub backup repos on GitLab for DR purposes
 
