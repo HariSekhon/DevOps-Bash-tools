@@ -132,7 +132,7 @@ url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out of documentation pages
 
-repo=$(git_repo | sed 's/.*\///')
+repo=$(git_repo | sed 's/.*\///' || :)
 
 if [ -n "$user" ]; then
     url_path="${url_path/:owner/$user}"
