@@ -48,8 +48,7 @@ min_args 1 "$@"
 
 cmd_template="$*"
 
-user="${GITHUB_USER:-$(get_github_user)}"
-user_or_org="${GITHUB_ORGANIZATION:-$user}"
+user_or_org="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
 
 get_github_repos "$user_or_org" "${GITHUB_ORGANIZATION:-}" |
 while read -r repo; do
