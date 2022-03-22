@@ -39,6 +39,10 @@ retmode(){
     fi
 }
 
+cddir(){
+    cd "$(dirname "$1")"
+}
+
 jq(){
     command jq -CS "$@"
 }
