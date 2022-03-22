@@ -34,11 +34,11 @@ To pull from multiple Repo providers in a single command:
 
 see the related script:
 
-    git_remotes_add_public_repos.sh
+    git_remotes_add_origin_providers.sh
 
 See Also:
 
-    git_remotes_add_public_repos.sh  - creates remotes for easy individual pull/pushes or git pull --all
+    git_remotes_add_origin_providers.sh  - creates remotes for easy individual pull/pushes or git pull --all
     git_sync_repos_upstream.sh       - for sync'ing all repos to another provider
 "
 
