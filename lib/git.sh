@@ -143,7 +143,7 @@ git_provider_env(){
     fi
 }
 
-# Azure DevOps has non-uniform URLs compared to the 3 main Git repos so here are general conversion rules used by git_remotes_add_public_repos.sh / git_remotes_set_multi_origin.sh
+# Azure DevOps has non-uniform URLs compared to the 3 main Git repos so here are general conversion rules used by git_remotes_add_origin_providers.sh / git_remotes_set_multi_origin.sh
 git_to_azure_url(){
     local url="$1"
     # XXX: you should set $AZURE_DEVOPS_PROJECT in your environment or call your project GitHub as I have - there is no portable way to infer this from other repos since they don't have this hierarchy level - querying the API might work if there is only a single project, but this might get overly complicated if requiring additional authentication
