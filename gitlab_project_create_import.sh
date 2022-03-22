@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a GitLab project (repo) as a mirror import from another repo URL
 
-If on GitLab Premium will configure auto-mirroring to stay in-sync too
+If on GitLab Premium will configure auto-mirroring to stay in-sync too (can only manually configure for public repos on free tier, API doesn't support configuring even public repos on free)
 
 URL can contain authentication information in the form:
 
