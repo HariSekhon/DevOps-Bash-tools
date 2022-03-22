@@ -662,6 +662,7 @@ etc.
   - `github_repo_collaborators.sh` - fetches a repo's granted users and outside invited collaborators as well as their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_protect_branches.sh` - enables branch protections on the given repo. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`
   - `github_repo_fork_update.sh` - updates a forked repo by creating pull requests for full audit tracking and auto-merges PRs for non-production branches
+  - `github_repos_mirror_to_gitlab.sh` - creates/syncs GitHub backup repos on GitLab for DR purposes
   - `github_repos_public.sh` - lists public repos for a user or organization. Useful to periodically scan and account for any public repos
   - `github_repos_disable_wiki.sh` - disables the Wiki on one or more given repos to prevent documentation fragmentation and make people use the centralized documentation tool eg. Confluence or Slite
   - `github_repos_with_few_users.sh` - finds repos with few or no users (default: 1), which in Enterprises is a sign that a user has created a repo without assigning team privileges
@@ -669,7 +670,7 @@ etc.
   - `github_repos_without_branch_protections.sh` - finds repos without any branch protection rules (use `github_repo_protect_branches.sh` on such repos)
   - `github_repos_not_in_terraform.sh` - finds all non-fork repos for current or given user/organization which are not found in `$PWD/*.tf` Terraform code
   - `github_teams_not_in_terraform.sh` - finds all teams for given organization which are not found in `$PWD/*.tf` Terraform code
-  - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
+  - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket / Azure DevOps are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
   - `github_teams_not_idp_synced.sh` - finds GitHub teams that aren't sync'd from an IdP like Azure AD. These should usually be migrated or removed
 - `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
