@@ -39,7 +39,7 @@ elif [ -n "${QUICK:-}" ]; then
     echo
 else
     if ! command -v python-cson &>/dev/null; then
-        echo 'python-cson not found in $PATH, not running CSON syntax checks'
+        echo "python-cson not found in \$PATH, not running CSON syntax checks"
         return 0 &>/dev/null || exit 0
     fi
     max_len=0
