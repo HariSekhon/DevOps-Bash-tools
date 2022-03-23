@@ -131,9 +131,9 @@ mirror_repo(){
         pushd "$repo.git" >/dev/null || return 1
     fi
 
-    if ! git remotes -v | awk '{print $1}' | grep -Fxq gitlab; then
+    if ! git remote -v | awk '{print $1}' | grep -Fxq gitlab; then
         timestamp "Adding GitLab remote origin"
-        git remotes add gitlab "https://$gitlab_owner:$GITLAB_TOKEN@gitlab.com/$gitlab_owner/$gitlab_repo.git"
+        git remote add gitlab "https://$gitlab_owner:$GITLAB_TOKEN@gitlab.com/$gitlab_owner/$gitlab_repo.git"
     fi
 
     timestamp "Pushing all branches to GitLab"
