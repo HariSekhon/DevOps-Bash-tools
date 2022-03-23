@@ -27,6 +27,7 @@ jq
 libperl-dev    # needed for PAR:Packer
 libxml2-utils  # needed for xmllint
 make
+openssh-client
 parallel
 perl
 procps
