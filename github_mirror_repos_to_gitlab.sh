@@ -103,6 +103,7 @@ mirror_repo(){
     # GitLab doesn't allow repo name like .github, only alnum, dashes and underscores, and not starting funny chars either
     gitlab_repo="$(sed 's/[^[:alnum:]_-]/_/g; s/^[^[:alnum:]]//' <<< "$repo")"
     gitlab_owner_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$gitlab_repo")"
+
     timestamp "Checking GitLab repo '$gitlab_owner/$gitlab_repo' exists"
     if ! "$srcdir/gitlab_api.sh" "/projects/$gitlab_owner_repo" >/dev/null; then
         timestamp "Creating GitLab repo '$gitlab_owner/$gitlab_repo'"
@@ -111,6 +112,13 @@ mirror_repo(){
         "$srcdir/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
         echo >&2
     fi
+
+    timestamp "Checking GitHub repo for description to copy"
+    "$srcdir/github_repo_description.sh" "$owner/$repo" |
+    sed "s/^$repo/$gitlab_repo/" |
+    # timestamp not needed here as gitlab_project_set_description.sh will output if it is setting the repo description
+    "$srcdir/gitlab_project_set_description.sh"
+
     if [ -d "$repo.git" ]; then
         timestamp "Using existing clone in directory '$repo.git'"
         pushd "$repo.git" >/dev/null || return 1
@@ -120,17 +128,22 @@ mirror_repo(){
         git clone --mirror "git@github.com:$owner/$repo.git" || return 1
         pushd "$repo.git" >/dev/null || return 1
     fi
+
     if ! git remotes -v | awk '{print $1}' | grep -Fxq gitlab; then
         timestamp "Adding GitLab remote origin"
         git remotes add gitlab git@gitlab.com:"$gitlab_owner/$gitlab_repo"
         echo >&2
     fi
+
     timestamp "Pushing all branches to GitLab"
     git push --all gitlab || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
+
     timestamp "Pushing all tags to GitLab"
     git push --tags gitlab || return 1
+
     # more dangerous, force overwrites remote repo refs
     #git push --mirror gitlab || return 1
+
     popd >/dev/null || return 1
     echo >&2
     ((succeeded+=1))
