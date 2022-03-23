@@ -38,15 +38,14 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-page=1
-while true; do
+for (( page=1; page <= 100; page++)); do
     if ! output="$("$srcdir/github_api.sh" "/user/repository_invitations?page=$page&per_page=100")"; then
         echo "ERROR" >&2
         exit 1
     fi
-    github_result_has_more_pages "$output" || break
     jq_debug_pipe_dump <<< "$output" |
     jq -r '.[] | select(.expired == false) | [.id, .repository.full_name] | @tsv'
+    github_result_has_more_pages "$output" || break
 done |
 while read -r id owner_repo; do
     if [ $# -gt 0 ]; then
