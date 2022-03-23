@@ -15,14 +15,15 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+# gets absolute rather than relative path, for when we pushd later, otherwise relative $srcdir references will break
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/github.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Mirrors all or given repos from GitHub to GitLab via APIs and SSH mirror clones
+Mirrors all or given repos from GitHub to GitLab via APIs and HTTPS mirror clones
 
 Useful to create/sync GitHub backup repos on GitLab for DR purposes
 
@@ -38,8 +39,7 @@ If no repos are given, iterates all non-fork repos for the current user or GitHu
 Each repo will have the same name in GitLab as it does on GitHub, but characters other than alphanumeric/dash/underscores will be replaced by underscore,
 and any leading special characters will be removed to meet GitLab's repo naming requirements eg. a repo called '.test' on GitHub will mirrored to just 'test' on GitLab
 
-Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set as well as a locally available SSH key for cloning/pull/push.
-Set GIT_SSH_COMMAND='ssh -i ~/.ssh/some-other-private-key' if you need to customize the SSH behaviour such as specifying a particular SSH private key
+Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set
 
 In a GitHub Organization, only repos the user can read will be mirrored, others won't be returned in the list of GitHub repos to even try (as an outside collaborator user)
 
@@ -63,7 +63,8 @@ help_usage "$@"
 timestamp "Starting GitHub to GitLab mirroring"
 echo >&2
 
-owner="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
+user="${GITHUB_USER:-$(get_github_user)}}"
+owner="${GITHUB_ORGANIZATION:-$user}"
 gitlab_owner="${GITLAB_OWNER:-${GITLAB_USER:-$("$srcdir/gitlab_api.sh" /user | jq -r .username)}}"
 
 if is_blank "$owner"; then
@@ -126,13 +127,13 @@ mirror_repo(){
         git remote update origin || return 1
     else
         timestamp "Cloning GitHub repo to directory '$repo.git'"
-        git clone --mirror "git@github.com:$owner/$repo.git" || return 1
+        git clone --mirror "https://$user:$GITHUB_TOKEN@github.com/$owner/$repo.git" || return 1
         pushd "$repo.git" >/dev/null || return 1
     fi
 
     if ! git remotes -v | awk '{print $1}' | grep -Fxq gitlab; then
         timestamp "Adding GitLab remote origin"
-        git remotes add gitlab git@gitlab.com:"$gitlab_owner/$gitlab_repo"
+        git remotes add gitlab "https://$gitlab_owner:$GITLAB_TOKEN@gitlab.com/$gitlab_owner/$gitlab_repo.git"
     fi
 
     timestamp "Pushing all branches to GitLab"
