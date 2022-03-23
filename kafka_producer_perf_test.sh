@@ -15,7 +15,7 @@
 
 set -u
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # sources heap, kerberos, brokers, zookeepers etc
 # shellcheck source=.bash.d/kafka.sh

@@ -19,7 +19,7 @@ set -u
 #[ -n "${DEBUG:-}" ] &&
 set -x
 
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ "$(uname -s)" = Darwin ]; then
     if ! type -P minikube &>/dev/null; then

@@ -17,7 +17,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 "$srcdir/../python_pip_install.sh" "snakebite-py3[kerberos]" ||
 "$srcdir/../python_pip_install.sh" "snakebite-py3" ||

@@ -41,7 +41,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # XXX: Edit - crucial to set to the right environment, the rest of the inferred settings below depend on this
 if [ -z "${CI:-}" ]; then

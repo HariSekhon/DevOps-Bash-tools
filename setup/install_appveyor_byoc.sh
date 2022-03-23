@@ -33,7 +33,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if ! type -P pwsh &>/dev/null; then
     "$srcdir/install_powershell.sh"

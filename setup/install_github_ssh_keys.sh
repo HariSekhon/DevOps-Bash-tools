@@ -18,7 +18,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 home="${HOME:-$(cd && pwd)}"
 authorized_keys="${AUTHORIZED_KEYS:-$home/.ssh/authorized_keys}"
