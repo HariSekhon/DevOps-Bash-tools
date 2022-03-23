@@ -48,10 +48,6 @@ dir="${2:-.}"
 
 cd "$dir"
 
-timestamp "getting terraform state"
-terraform_state_list="$(terraform state list)"
-echo >&2
-
 timestamp "getting terraform plan"
 plan="$(terraform plan -no-color)"
 echo >&2
