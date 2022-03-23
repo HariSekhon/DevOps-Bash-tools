@@ -63,15 +63,15 @@ set_repo_description(){
     local description="${*:2}"
 
     if ! [[ "$repo" =~ / ]]; then
-        log "no username prefix in repo '$repo', will auto-add it"
+        log "No username prefix in repo '$repo', will auto-add it"
         # refuse bitbucket_user between function calls for efficiency to save additional queries to the BitBucket API
         if [ -z "${bitbucket_user:-}" ]; then
-            log "attempting to infer username"
+            log "Attempting to infer username"
             if [ -n "${BITBUCKET_USER:-}" ]; then
                 bitbucket_user="$BITBUCKET_USER"
-                log "using username '$bitbucket_user' from \$BITBUCKET_USER"
+                log "Using username '$bitbucket_user' from \$BITBUCKET_USER"
             else
-                log "querying BitBucket API for currently authenticated username"
+                log "Querying BitBucket API for currently authenticated username"
                 bitbucket_user="$("$srcdir/bitbucket_api.sh" /user | jq -r .username)"
                 log "BitBucket API returned username '$bitbucket_user'"
             fi
@@ -79,7 +79,7 @@ set_repo_description(){
         repo="$bitbucket_user/$repo"
     fi
 
-    timestamp "setting BitBucket repo '$repo' description to '$description'"
+    timestamp "Setting BitBucket repo '$repo' description to '$description'"
 
     #description="$("$srcdir/urlencode.sh" <<< "$description")"
 
