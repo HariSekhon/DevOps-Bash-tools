@@ -25,6 +25,7 @@ grep
 jq
 libxml2-utils  # needed for xmllint
 make
+openssh-client
 parallel
 perl
 perl-app-cpanminus
