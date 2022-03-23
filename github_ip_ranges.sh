@@ -56,10 +56,10 @@ url="https://api.github.com/meta"
 data="$(curl -sSf "$url")"
 
 if [ "$ip_service" ]; then
-    jq -r ".$ip_service[]" <<< "$data"
+    jq -r ".${ip_service}[]" <<< "$data"
 else
     for service in "${ip_services[@]}"; do
-        jq -r ".$service[]" <<< "$data"
+        jq -r ".${service}[]" <<< "$data"
     done
 fi |
 sort -nu
