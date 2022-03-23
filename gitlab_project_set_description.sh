@@ -62,12 +62,12 @@ set_project_description(){
         log "No username prefix in project '$project', will auto-add it"
         # refuse gitlab_user between function calls for efficiency to save additional queries to the GitLab API
         if [ -z "${gitlab_user:-}" ]; then
-            log "attempting to infer username"
+            log "Attempting to infer username"
             if [ -n "${GITLAB_USER:-}" ]; then
                 gitlab_user="$GITLAB_USER"
-                log "using username '$gitlab_user' from \$GITLAB_USER"
+                log "Using username '$gitlab_user' from \$GITLAB_USER"
             else
-                log "querying GitLab API for currently authenticated username"
+                log "Querying GitLab API for currently authenticated username"
                 gitlab_user="$("$srcdir/gitlab_api.sh" /user | jq -r .username)"
                 log "GitLab API returned username '$gitlab_user'"
             fi
