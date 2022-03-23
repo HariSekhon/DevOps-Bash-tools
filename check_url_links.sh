@@ -161,7 +161,7 @@ urls="$(
         { grep -Eo "$url_regex" || : ; } |
         if [ -n "${URL_LINKS_IGNORED:-}" ]; then
             grep -Eivf <(
-                tr '[[:space:]]' '\n' <<< "$URL_LINKS_IGNORED" |
+                tr '[:space:]' '\n' <<< "$URL_LINKS_IGNORED" |
                 sed 's/^[[:space:]]*//;
                      s/[[:space:]]*$//;
                      /^[[:space:]]*$/d'
