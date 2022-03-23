@@ -138,9 +138,9 @@
     context     = white
     filename    = cyan
     function    = yellow
-    linenumber  = green
-    match       = red
-    selected    = yellow
+    linenumber  = white
+    match       = white magenta
+    selected    = green
     separator   = white
 
 [color "status"]
@@ -177,9 +177,9 @@
 
 [color "diff-highlight"]
   #oldNormal = red bold
-  oldHighlight = black magenta  # red doesn't contrast well with black fg writing or black terminal, cyan is too light
+  oldHighlight = white red  # black doesn't contrast well with red bg, use white
   #newNormal = green bold
-  newHighlight = black green
+  newHighlight = white magenta
 
 [diff-so-fancy]
   stripLeadingSymbols = false
