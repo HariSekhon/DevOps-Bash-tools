@@ -40,7 +40,7 @@ retmode(){
 }
 
 cddir(){
-    cd "$(dirname "$1")"
+    cd "$(dirname "$1")" || return 1
 }
 
 jq(){
