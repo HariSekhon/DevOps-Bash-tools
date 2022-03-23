@@ -144,20 +144,11 @@
     separator   = white
 
 [color "status"]
-    added       = magenta
-    changed     = red
+    added       = white blue
+    changed     = magenta
     untracked   = cyan
     branch      = magenta blink
     nobranch    = red blink
-
-# diff-so-fancy but I prefer most of my old preferences
-#[color "diff"]
-#  meta = 11
-#  frag = magenta bold
-#  commit = yellow bold
-#  old = red bold
-#  new = green bold
-#  whitespace = red reverse
 
 # ============================================================================ #
 #                           D i f f - s o - f a n c y
@@ -183,6 +174,15 @@
 
 [diff-so-fancy]
   stripLeadingSymbols = false
+
+# diff-so-fancy but I prefer most of my old preferences
+#[color "diff"]
+#  meta = 11
+#  frag = magenta bold
+#  commit = yellow bold
+#  old = red bold
+#  new = green bold
+#  whitespace = red reverse
 
 # ============================================================================ #
 
