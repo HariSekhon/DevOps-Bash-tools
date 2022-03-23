@@ -16,6 +16,7 @@
 bash
 bc
 #binutils  # contains old C tools like 'strings'
+bind-utils # host / nslookup / dig commands
 curl
 #direnv
 gcc
