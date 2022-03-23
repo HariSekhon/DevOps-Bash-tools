@@ -322,7 +322,7 @@ nmap <silent> ;e :,!center.py -s<CR>
 nmap <silent> ;E :call WriteRunLine()<CR> :!reset<CR><CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 "nmap <silent> ;D :Done<CR>
-nmap <silent> ;D :%!decomment.sh<CR>
+nmap <silent> ;D :%!decomment.sh %<CR>
 nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
 "nmap <silent> ;h :call Hr()<CR>
 nmap <silent> ;h :Hr<CR>
@@ -335,7 +335,7 @@ nmap <silent> ;j :JHr<CR>
 " done automatically on write now
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
 nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
-nmap          ;n :n<CR>
+nmap          ;n :w<CR> :n<CR>
 nmap          ;o :!git log -p "%"<CR>
 nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
