@@ -146,7 +146,7 @@
 .DS_Store
 .dvdcss/
 # contains things like auth tokens
-.envrc*
+#.envrc*
 .erlang.cookie
 .evolution
 .fluxbox/backgrounds
@@ -1149,7 +1149,7 @@ _deps
 
 ### direnv ###
 .direnv
-.envrc
+#.envrc
 
 ### CodeBlocks ###
 # specific to CodeBlocks IDE
