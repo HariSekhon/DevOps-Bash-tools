@@ -38,7 +38,8 @@ If no repos are given, iterates all non-fork repos for the current user or GitHu
 Each repo will have the same name in GitLab as it does on GitHub, but characters other than alphanumeric/dash/underscores will be replaced by underscore,
 and any leading special characters will be removed to meet GitLab's repo naming requirements eg. a repo called '.test' on GitHub will mirrored to just 'test' on GitLab
 
-Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set as well as a locally available SSH key for cloning/pull/push
+Requires \$GITHUB_TOKEN AND \$GITLAB_TOKEN to be set as well as a locally available SSH key for cloning/pull/push.
+Set GIT_SSH_COMMAND='ssh -i ~/.ssh/some-other-private-key' if you need to customize the SSH behaviour such as specifying a particular SSH private key
 
 In a GitHub Organization, only repos the user can read will be mirrored, others won't be returned in the list of GitHub repos to even try (as an outside collaborator user)
 
@@ -100,8 +101,8 @@ failed=0
 
 mirror_repo(){
     local repo="$1"
-    # GitLab doesn't allow repo name like .github, only alnum, dashes and underscores, and not starting funny chars either
-    gitlab_repo="$(sed 's/[^[:alnum:]_-]/_/g; s/^[^[:alnum:]]//' <<< "$repo")"
+    # GitLab doesn't allow repo name like .github, only alnum, dashes and underscores, and not starting with unusual characters either
+    gitlab_repo="$(sed 's/[^[:alnum:]_-]/_/g; s/^[^[:alnum:]]*//' <<< "$repo")"
     gitlab_owner_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$gitlab_repo")"
 
     timestamp "Checking GitLab repo '$gitlab_owner/$gitlab_repo' exists"
