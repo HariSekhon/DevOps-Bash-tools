@@ -177,7 +177,7 @@
 
 [color "diff-highlight"]
   #oldNormal = red bold
-  oldHighlight = black red
+  oldHighlight = black magenta  # red doesn't contrast well with black fg writing or black terminal, cyan is too light
   #newNormal = green bold
   newHighlight = black green
 
