@@ -59,7 +59,7 @@ set_project_description(){
     local description="${*:2}"
 
     if ! [[ "$project" =~ / ]]; then
-        log "no username prefix in project '$project', will auto-add it"
+        log "No username prefix in project '$project', will auto-add it"
         # refuse gitlab_user between function calls for efficiency to save additional queries to the GitLab API
         if [ -z "${gitlab_user:-}" ]; then
             log "attempting to infer username"
@@ -75,7 +75,7 @@ set_project_description(){
         project="$gitlab_user/$project"
     fi
 
-    timestamp "setting GitLab project '$project' description to '$description'" >&2
+    timestamp "Setting GitLab project '$project' description to '$description'" >&2
 
     # url-encode project name otherwise GitLab API will fail to find project and return 404
     project="$("$srcdir/urlencode.sh" <<< "$project")"
