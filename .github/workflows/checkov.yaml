@@ -51,4 +51,4 @@ jobs:
     name: Checkov
     uses: HariSekhon/GitHub-Actions/.github/workflows/checkov.yaml@master
     with:
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}

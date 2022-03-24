@@ -42,4 +42,4 @@ jobs:
     with:
       container: alpine:3
       caches: apk pip cpanm
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}

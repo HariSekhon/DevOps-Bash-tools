@@ -42,4 +42,4 @@ jobs:
     with:
       runs-on: macos-10.15
       caches: brew pip cpanm
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}

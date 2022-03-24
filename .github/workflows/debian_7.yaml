@@ -43,4 +43,4 @@ jobs:
       container: debian:7
       # causes nodejs errors
       #caches: apt pip cpanm
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}

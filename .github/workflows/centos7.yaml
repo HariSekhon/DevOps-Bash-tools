@@ -42,4 +42,4 @@ jobs:
     with:
       container: centos:7
       caches: yum pip cpanm
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}

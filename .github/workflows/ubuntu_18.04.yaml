@@ -42,4 +42,4 @@ jobs:
     with:
       container: ubuntu:18.04
       caches: apt pip cpanm
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}
