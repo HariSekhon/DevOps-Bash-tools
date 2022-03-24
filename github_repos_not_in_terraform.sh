@@ -51,7 +51,10 @@ repos="$(
 )"
 
 for repo in $repos; do
+    # literal terraform resource github_repository are easy to find, but assumes the resource name is the same as the repo name
     # search without the dot prefix which isn't allowed in Terraform code identifiers
     grep -Eq '^[[:space:]]*resource[[:space:]]+"github_repository"[[:space:]]+"'"${repo#.}"'"' ./*.tf ||
+    # but if using a module such as github_repo (https://github.com/HariSekhon/Terraform) then need to find names in a repos.tf file, not very portable, may need tuning if you do something different
+    grep -Eq "^[[:space:]]+name[[:space:]]*=[[:space:]]*\"$repo\"[[:space:]]*$" repos.tf 2>/dev/null ||
     echo "$repo"
 done
