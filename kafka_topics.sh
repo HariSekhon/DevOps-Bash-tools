@@ -26,4 +26,4 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # it's assigned in .bash.d/kafka.sh
 # shellcheck disable=SC2154,SC2086
-kafka-topics.sh $bootstrap_server "$@"
+exec kafka-topics.sh $bootstrap_server "$@"
