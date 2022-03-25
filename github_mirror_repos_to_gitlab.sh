@@ -63,7 +63,7 @@ help_usage "$@"
 timestamp "Starting GitHub to GitLab mirroring"
 echo >&2
 
-user="${GITHUB_USER:-$(get_github_user)}}"
+user="${GITHUB_USER:-$(get_github_user)}"
 owner="${GITHUB_ORGANIZATION:-$user}"
 gitlab_owner="${GITLAB_OWNER:-${GITLAB_USER:-$("$srcdir/gitlab_api.sh" /user | jq -r .username)}}"
 
