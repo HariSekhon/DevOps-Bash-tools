@@ -4,13 +4,13 @@
 #  Author: Hari Sekhon
 #  Date: 2020-02-07 15:01:31 +0000 (Fri, 07 Feb 2020)
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 set -euo pipefail
@@ -20,26 +20,31 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/github.sh"
 
-top_N=100
+top_N="${TOP_N:-100}"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Script to generate GIT_STATUS.md containing the headers and status badges of the Top N rated by stars GitHub repos across all CI platforms on a single page
+Script to generate a Markdown page containing the headers and CI/CD status badges of the Top N rated by stars GitHub repos
 
 
-# Examples:
+Examples:
 
 
-    Without arguments queries for all non-fork repos for your \$GITHUB_USER and iterate them up to $top_N to generate the page
+    Without arguments queries for all non-fork repos for your \$GITHUB_ORGANIZATION or \$GITHUB_USER and iterates up to $top_N of them to generate the page
 
-        GITHUB_USER=HariSekhon ./github_generate_status_page.sh
+        ./github_generate_status_page.sh
 
 
-    With arguments will query those repo's README.md at the top level - if omitting the prefix will prepend \$GITHUB_USER/
+    With arguments will query those repo's README.md at the top level - if omitting the owner prefix will prepend \$GITHUB_ORGANIZATION/ or \$GITHUB_USER/
 
-        GITHUB_USER=HariSekhon ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  HariSekhon/DevOps-Perl-tools
+        GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools SomeOtherCoolGuy/his-repo
 
-        GITHUB_USER=HariSekhon ./github_generate_status_page.sh  DevOps-Python-tools  DevOps-Perl-tools
+        GITHUB_ORGANIZATION=my-org ./github_generate_status_page.sh  HariSekhon/DevOps-Python-tools  some-org-repo
+
+Supported Environment Variables:
+
+    EXCLUDE_REPOS - an ERE regex or repos to exclude
+    TOP_N         - an integer of the top N number of repos to include, ranked by star count
 "
 
 # used by usage() in lib/utils.sh
@@ -50,25 +55,31 @@ help_usage "$@"
 
 trap 'echo ERROR >&2' exit
 
-file="GIT_STATUS.md"
+is_int "$top_N" || die "Invalid TOP_N '$top_N' specified, must be an integer"
 
 repolist="$*"
 
 # this leads to confusion as it generates some randomly unexpected output by querying a github user who happens to have the same name as your local user eg. hari, so force explicit now
 #USER="${GITHUB_USER:-${USERNAME:-${USER}}}"
-if [ -z "${GITHUB_USER:-}" ] ; then
-    GITHUB_USER="$(get_github_user || :)"
-fi
+GITHUB_USER="${GITHUB_USER:-$(get_github_user || :)}"
 if is_blank "${GITHUB_USER:-}" || [ "$GITHUB_USER" = null ]; then
-    echo "\$GITHUB_USER not set!"
-    exit 1
+    die "\$GITHUB_USER not set and could not infer user from token!"
+fi
+OWNER="${GITHUB_ORGANIZATION:-$GITHUB_USER}"
+if is_blank "${OWNER:-}" || [ "$OWNER" = null ]; then
+    die "\$GITHUB_ORGANIZATION / \$GITHUB_USER not set and could not infer user from token!"
+fi
+
+prefix="users"
+if [ -n "${GITHUB_ORGANIZATION:-}" ]; then
+    prefix="orgs"
 fi
 
 get_repos(){
     page=1
     while true; do
         echo "fetching GitHub repos - page $page" >&2
-        if ! output="$("$srcdir/github_api.sh" "/users/$GITHUB_USER/repos?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir/github_api.sh" "/$prefix/$OWNER/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
@@ -87,7 +98,15 @@ get_repos(){
 original_sources=0
 
 if [ -z "$repolist" ]; then
-    repolist="$(get_repos | grep -v spark-apps | sort -k2nr -k3nr | awk '{print $1}' | head -n "$top_N")"
+    repolist="$(get_repos |
+                if [ -n "${EXCLUDE_REPOS:-}" ]; then
+                    grep -Ev "$EXCLUDE_REPOS" || :
+                else
+                    cat
+                fi |
+                sort -k2nr -k3nr |
+                awk '{print $1}' |
+                head -n "$top_N")"
     original_sources=1
 fi
 
@@ -115,12 +134,12 @@ actual_repos=0
 total_stars=0
 total_forks=0
 echo "getting followers" >&2
-followers="$("$srcdir/github_api.sh" /users/harisekhon | jq -r .followers)"
+followers="$("$srcdir/github_api.sh" "/$prefix/$OWNER" | jq -r .followers)"
 
 echo "---" >&2
 for repo in $repolist; do
     if ! [[ "$repo" =~ / ]]; then
-        repo="$GITHUB_USER/$repo"
+        repo="$OWNER/$repo"
     fi
     echo "fetching GitHub repo info for '$repo'" >&2
     repo_json="$("$srcdir/github_api.sh" "/repos/$repo")"
@@ -197,7 +216,7 @@ hosted_build_regex+='|img\.shields\.io/badge/Buddy'
 hosted_build_regex+='|\.semaphoreci\.com/badges/'
 hosted_build_regex+=')'
 # to check for any badges missed, just go
-#grep -Ev "$hosted_build_regex" GIT_STATUS.md
+#grep -Ev "$hosted_build_regex" README.md
 
 self_hosted_build_regex='\[\!\[[^]]+\]\(.*\)\]\(.*/blob/master/('
 self_hosted_build_regex+='Jenkinsfile'
@@ -221,35 +240,75 @@ num_self_hosted_builds="$(grep -Ec "$self_hosted_build_regex" "$tempfile" || :)"
 
 num_builds=$((num_hosted_builds + num_self_hosted_builds))
 
-lines_of_code="$(grep -Ei 'img.shields.io/badge/lines%20of%20code-[[:digit:]]+(\.[[:digit:]]+)?k' "$tempfile" | sed 's|.*img.shields.io/badge/lines%20of%20code-||; s/[[:alpha:]].*$//'| tr '\n' '+' | sed 's/+$//' | bc -l)"
+lines_of_code="$(grep -Ei 'img.shields.io/badge/lines%20of%20code-[[:digit:]]+(\.[[:digit:]]+)?k' "$tempfile" |
+                 sed 's|.*img.shields.io/badge/lines%20of%20code-||; s/[[:alpha:]].*$//'|
+                 tr '\n' '+' |
+                 sed 's/+$//' |
+                 bc -l || echo "unknown")"
 
-{
 cat <<EOF
-# GitHub Status Page
+# CI/CD Status Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-$actual_repos-blue?logo=github)
 ![Stars](https://img.shields.io/badge/Stars-$total_stars-blue?logo=github)
 ![Forks](https://img.shields.io/badge/Forks-$total_forks-blue?logo=github)
 ![Followers](https://img.shields.io/badge/Followers-$followers-blue?logo=github)
+EOF
+
+is_owner_harisekhon(){
+    shopt -s nocasematch
+    [[ "$OWNER" =~ ^HariSekhon$ ]]
+}
+
+if is_owner_harisekhon; then
+    cat<<EOF
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-2088FF?logo=github)](https://harisekhon.github.io/CI-CD/)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+EOF
+fi
+
+cat <<EOF
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
+EOF
+
+if [ "$lines_of_code" != unknown ]; then
+    cat <<EOF
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-${lines_of_code}k-lightgrey?logo=codecademy)
+EOF
+fi
+
+cat <<EOF
 ![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
                                                                   # "$srcdir/urlencode.sh" |
                                                                   # need to escape dashes to avoid shields.io interpreting them as field separators
                                                                   sed 's/-/--/g')-lightgrey?logo=github)
+EOF
+
+if is_owner_harisekhon; then
+    cat <<-EOF
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
-[![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-HariSekhon-blue?logo=github)](https://gitstar-ranking.com/HariSekhon)
+EOF
+fi
+
+cat <<EOF
+[![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-$OWNER-blue?logo=github)](https://gitstar-ranking.com/$OWNER)
+EOF
+
+if is_owner_harisekhon; then
+    cat <<EOF
 
 [git.io/hari-ci](https://git.io/hari-ci) generated by \`${0##*/}\` in [HariSekhon/DevOps-Bash-tools](https://github.com/HariSekhon/DevOps-Bash-tools)
 
-This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
+This page usually loads better on [BitBucket](https://bitbucket.org/harisekhon/ci-cd/src/master/README.md) due to less aggressive proxy timeouts cutting off badge loading than GitHub / GitLab
 
 EOF
+
+fi
+
 printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
@@ -258,6 +317,5 @@ num_CI_systems=22
 printf 'git repos with %s CI builds (%s hosted, %s self-hosted) across %s different CI systems:\n\n' "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds" "$num_CI_systems"
 cat "$tempfile"
 printf '\n%s git repos summarized with %s CI builds (%s hosted, %s self-hosted) across %s different CI systems\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds" "$num_CI_systems"
-} | tee "$file"
 
 trap '' exit
