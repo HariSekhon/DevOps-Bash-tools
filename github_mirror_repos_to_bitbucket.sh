@@ -47,7 +47,7 @@ Source GitHub and Destination BitBucket accounts, in order or priority:
 
     \$GITHUB_ORGANIZATION, \$GITHUB_USER or owner of the \$GITHUB_TOKEN
     \$BITBUCKET_OWNER, \$BITBUCKET_USER or the owner of the \$BITBUCKET_TOKEN
-    \$BITBUCKET_WORKSPACE - the container where the repositories are created
+    \$BITBUCKET_WORKSPACE - the container where the repositories are created, can auto-determine if there is only one workspace owned by the \$BITBUCKET_USER
 "
 
 # used by usage() in lib/utils.sh
