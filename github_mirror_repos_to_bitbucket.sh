@@ -155,6 +155,9 @@ mirror_repo(){
 }
 
 for repo in $repos; do
+    if [[ "$repo" =~ / ]]; then
+        die "Repo '$repo' should be specified without owner prefix"
+    fi
     if ! mirror_repo "$repo"; then
         echo >&2
         timestamp "ERROR: Failed to mirror repo '$repo' to BitBucket" >&2
