@@ -255,27 +255,6 @@ cat <<EOF
 ![Followers](https://img.shields.io/badge/Followers-$followers-blue?logo=github)
 EOF
 
-is_owner_harisekhon(){
-    shopt -s nocasematch
-    [[ "$OWNER" =~ ^HariSekhon$ ]]
-}
-
-if is_owner_harisekhon; then
-    cat<<EOF
-[![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
-[![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
-[![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
-[![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
-[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-2088FF?logo=github)](https://harisekhon.github.io/CI-CD/)
-[![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
-
-EOF
-fi
-
-cat <<EOF
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
-EOF
-
 if ! is_blank "$lines_of_code" &&
    [ "$lines_of_code" != unknown ]; then
     cat <<EOF
@@ -283,12 +262,10 @@ if ! is_blank "$lines_of_code" &&
 EOF
 fi
 
-cat <<EOF
-![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
-                                                                  # "$srcdir/urlencode.sh" |
-                                                                  # need to escape dashes to avoid shields.io interpreting them as field separators
-                                                                  sed 's/-/--/g')-lightgrey?logo=github)
-EOF
+is_owner_harisekhon(){
+    shopt -s nocasematch
+    [[ "$OWNER" =~ ^HariSekhon$ ]]
+}
 
 if is_owner_harisekhon; then
     cat <<-EOF
@@ -299,6 +276,28 @@ fi
 cat <<EOF
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-$OWNER-blue?logo=github)](https://gitstar-ranking.com/$OWNER)
 EOF
+
+if is_owner_harisekhon; then
+    cat<<EOF
+
+[![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
+[![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
+[![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
+[![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
+[![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-2088FF?logo=github)](https://harisekhon.github.io/CI-CD/)
+
+EOF
+
+cat <<EOF
+[![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
+[![Generate README](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
+                                                                  # "$srcdir/urlencode.sh" |
+                                                                  # need to escape dashes to avoid shields.io interpreting them as field separators
+                                                                  sed 's/-/--/g')-lightgrey?logo=github)
+[![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
+EOF
+fi
 
 #if is_owner_harisekhon; then
 #    cat <<EOF
@@ -311,6 +310,7 @@ EOF
 #
 #fi
 
+echo
 printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
