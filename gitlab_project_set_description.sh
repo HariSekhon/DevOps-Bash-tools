@@ -60,7 +60,7 @@ set_project_description(){
 
     if ! [[ "$project" =~ / ]]; then
         log "No username prefix in project '$project', will auto-add it"
-        # refuse gitlab_user between function calls for efficiency to save additional queries to the GitLab API
+        # reuse gitlab_user between function calls for efficiency to save additional queries to the GitLab API
         if [ -z "${gitlab_user:-}" ]; then
             log "Attempting to infer username"
             if [ -n "${GITLAB_USER:-}" ]; then
