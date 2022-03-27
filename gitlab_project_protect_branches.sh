@@ -53,7 +53,7 @@ usage_args="<project> [<branch> <branch2> <branch3> ...]"
 
 help_usage "$@"
 
-#min_args 2 "$@"
+min_args 1 "$@"
 
 project="$1"
 shift || :
