@@ -73,11 +73,12 @@ if ! [[ "$project" =~ / ]]; then
 fi
 
 # url-encode project name otherwise GitLab API will fail to find project and return 404
+project_name="$project"
 project="$("$srcdir/urlencode.sh" <<< "$project")"
 
 protect_project_branch(){
     local branch="$1"
-    timestamp "protecting GitLab project '$project' branch '$branch'"
+    timestamp "protecting GitLab project '$project_name' branch '$branch'"
     # gets  409 error if there is already branch protection, so remove and reapply it to ensure it is applied with these settings
     "$srcdir/gitlab_api.sh" "/projects/$project/protected_branches/$branch" -X DELETE &>/dev/null || :
     "$srcdir/gitlab_api.sh" "/projects/$project/protected_branches?name=$branch&allow_force_push=false&code_owner_approval_required=true" -X POST >/dev/null
