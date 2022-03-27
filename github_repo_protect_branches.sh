@@ -46,7 +46,7 @@ default_branches_to_protect="
 usage_description="
 Enables branch protection for one or more branches in the given GitHub repo (prevents deleting the branch or force pushing over it)
 
-If not branch is specified, the applies branches protections to any of the following branches if they're found:
+If no branch is specified, then applies branches protections to any of the following branches if they're found:
 $default_branches_to_protect
 
 XXX: Beware this could reset certain protection settings on the branch when run, such as enabling/disabling PR approvals due to the way the API bundles them together.
