@@ -145,12 +145,18 @@ mirror_repo(){
     # more dangerous, force overwrites remote repo refs
     #git push --mirror gitlab || return 1
 
+    timestamp "Enabling branch protections on GitLab mirror repo '$gitlab_owner/$gitlab_repo'"
+    "$srcdir/gitlab_project_protect_branches.sh" "$gitlab_owner/$gitlab_repo"
+
     popd >/dev/null || return 1
     echo >&2
     ((succeeded+=1))
 }
 
 for repo in $repos; do
+    if [[ "$repo" =~ / ]]; then
+        die "Repo '$repo' should be specified without owner prefix"
+    fi
     if ! mirror_repo "$repo"; then
         echo >&2
         timestamp "ERROR: Failed to mirror repo '$repo' to GitLab" >&2
