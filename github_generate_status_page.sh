@@ -276,7 +276,8 @@ cat <<EOF
 [![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
 EOF
 
-if [ "$lines_of_code" != unknown ]; then
+if ! is_blank "$lines_of_code" &&
+   [ "$lines_of_code" != unknown ]; then
     cat <<EOF
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-${lines_of_code}k-lightgrey?logo=codecademy)
 EOF
