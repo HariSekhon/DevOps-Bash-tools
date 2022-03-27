@@ -70,6 +70,11 @@ Examples:
     # Specify project ID or name (url-encoded otherwise will return 404 and fail to find project)
 
 
+# List a project's protected branches:
+
+    ${0##*/} /projects/HariSekhon%2fDevOps-Bash-tools/protected_branches | jq .
+
+
 # List a user's GitLab groups (contexts for sharing environment variables across projects):
 
     ${0##*/} /groups | jq .
