@@ -62,21 +62,21 @@ For authentication and other details see:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<organization> <repo> [<branch> <branch2> <branch3> ...]"
+usage_args="<owner> <repo> [<branch> <branch2> <branch3> ...]"
 
 help_usage "$@"
 
 min_args 2 "$@"
 
-org="$1"
+owner="$1"
 repo="$2"
 shift || :
 shift || :
 
 protect_repo_branch(){
     local branch="$1"
-    timestamp "protecting GitHub organization '$org' repo '$repo' branch '$branch'"
-    "$srcdir/github_api.sh" "/repos/$org/$repo/branches/$branch/protection" -X PUT -d "$settings" >/dev/null
+    timestamp "protecting GitHub repo '$owner/$repo' branch '$branch'"
+    "$srcdir/github_api.sh" "/repos/$owner/$repo/branches/$branch/protection" -X PUT -d "$settings" >/dev/null
     timestamp "protection applied to branch '$branch'"
 }
 
@@ -86,7 +86,7 @@ if [ $# -gt 0 ]; then
     done
 else
     timestamp "no branches specified, getting branch list"
-    branches="$(get_github_repo_branches "$org/$repo")"
+    branches="$(get_github_repo_branches "$owner/$repo")"
     for branch in $default_branches_to_protect; do
         timestamp "checking for branch '$branch'"
         if grep -Fxq "$branch" <<< "$branches"; then
