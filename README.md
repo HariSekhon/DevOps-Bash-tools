@@ -681,7 +681,7 @@ etc.
   - `gitlab_project_set_env_vars.sh` - adds / updates GitLab project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `gitlab_group_set_env_vars.sh` - adds / updates GitLab group-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `gitlab_project_create_import.sh` - creates a GitLab repo as an import from a given URL, and mirrors if on GitLab Premium (can only manually configure for public repos on free tier, API doesn't support configuring even public repos on free)
-  - `github_project_protect_branches.sh` - enables branch protections on the given project. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`, `dev`, `staging`, `production`
+  - `gitlab_project_protect_branches.sh` - enables branch protections on the given project. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`, `dev`, `staging`, `production`
   - `gitlab_project_mirrors.sh` - lists each GitLab repo and whether it is a mirror or not
   - `gitlab_pull_mirror.sh` - trigger a GitLab pull mirroring for a given project's repo, or auto-infers project name from the local git repo
   - `gitlab_ssh_get_user_public_keys.sh` - fetches a given GitLab user's public SSH keys via the API, with identifying comments, for piping to `~/.ssh/authorized_keys` or adjacent tools
