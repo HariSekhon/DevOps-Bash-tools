@@ -40,6 +40,7 @@ help_usage "$@"
 kubectl api-resources |
 grep '[[:space:]]true[[:space:]]' |
 awk '{print $1}' |
+sort -fu |
 while read -r resource; do
     # Error from server (MethodNotAllowed): the server does not allow this method on the requested resource
     [ "$resource" = "bindings" ] && continue
