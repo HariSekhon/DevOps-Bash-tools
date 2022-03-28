@@ -518,6 +518,7 @@ etc.
 - `kubectl.sh` - runs kubectl commands safely fixed to a given context using config isolation to avoid concurrency race conditions
 - `kubectl_diff_apply.sh` - generates a diff and prompts to apply. See also `kustomize_diff_apply.sh`
 - `kubectl_create_namespaces` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
+- `kubectl_get_all.sh` - finds all namespaced Kubernetes objects and requests them for the current or given namespace. Useful because `kubectl get all` misses a lof of object types
 - `kubectl_kv_to_secret.sh` - creates a Kuberbetes secret from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
 - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
 - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
