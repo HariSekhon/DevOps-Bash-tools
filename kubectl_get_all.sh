@@ -45,6 +45,7 @@ while read -r resource; do
     [ "$resource" = "bindings" ] && continue
     [ "$resource" = "localsubjectaccessreviews" ] && continue
     echo "$resource:"
-    kubectl get "$resource" "$@" # || :
+    kubectl get "$resource" "$@" 2>&1 |
+    sed '/No resources found/d'
     echo
 done
