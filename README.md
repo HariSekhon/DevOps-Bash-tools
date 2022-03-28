@@ -516,10 +516,12 @@ etc.
   - container images running counts descending
   - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
 - `kubectl.sh` - runs kubectl commands safely fixed to a given context using config isolation to avoid concurrency race conditions
-- `kubectl_diff_apply.sh` - generates a diff and prompts to apply. See also `kustomize_diff_apply.sh`
+- `kubectl_diff_apply.sh` - generates a kubectl diff and prompts to apply
+- `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, shows a kubectl diff of the proposed changes, and prompts to apply
 - `kubectl_create_namespaces` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
 - `kubectl_get_all.sh` - finds all namespaced Kubernetes objects and requests them for the current or given namespace. Useful because `kubectl get all` misses a lof of object types
 - `kubectl_kv_to_secret.sh` - creates a Kuberbetes secret from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+- `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
 - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
 - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
   - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters!
@@ -542,8 +544,6 @@ etc.
 - `kubectl_pod_count.sh` - lists Kubernetes pods total running count
 - `kubectl_container_count.sh` - lists Kubernetes containers total running count
 - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
-- `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
-- `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, prompts with a diff of the proposed changes, and then applies if you accept them. See also `kubectl_diff_apply.sh`
 - `helm_template.sh` - templates a Helm chart for Kustomize deployments
 - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
 - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
