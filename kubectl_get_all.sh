@@ -31,21 +31,34 @@ Requires Kubectl to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="´[-n <namespace>]"
+usage_args="[-n <namespace> | -A | --all-namespaces] [ <kubectl_get_options> ]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
 
-kubectl api-resources |
-grep '[[:space:]]true[[:space:]]' |
-awk '{print $1}' |
+non_gettable_resources="
+bindings
+localsubjectaccessreviews
+localsubjectaccessreviews.authorization.k8s.io
+selfsubjectaccessreviews.authorization.k8s.io
+selfsubjectrulesreviews.authorization.k8s.io
+subjectaccessreviews.authorization.k8s.io
+tokenreviews.authentication.k8s.io
+"
+
+if [[ "$*" =~ -A|--all-namespaces ]]; then
+    kubectl api-resources -o name
+else
+    kubectl api-resources --namespaced=true -o name
+fi |
 sort -fu |
 while read -r resource; do
     # Error from server (MethodNotAllowed): the server does not allow this method on the requested resource
-    [ "$resource" = "bindings" ] && continue
-    [ "$resource" = "localsubjectaccessreviews" ] && continue
-    echo "$resource:"
+    for non_gettable_resource in $non_gettable_resources; do
+        [ "$resource" = "$non_gettable_resource" ] && continue 2
+    done
+    echo "# $resource:"
     kubectl get "$resource" "$@" 2>&1 |
     sed '/No resources found/d'
     echo
