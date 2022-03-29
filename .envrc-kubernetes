@@ -50,46 +50,47 @@ CONTEXT="${1:-docker-desktop}"
 NAMESPACE="${2:-}"
 #NAMESPACE="jenkins"
 
-tmpdir="/tmp/.kube"
+if command -v kubectl &>/dev/null; then
+    tmpdir="/tmp/.kube"
 
-mkdir -pv "$tmpdir"
+    mkdir -pv "$tmpdir"
 
-default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
-original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
+    default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
+    original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
 
-# reload safety - do not source from new tmpdir - not necessary for direnv but useful for local sourcing tests
-#if [[ "$original_kubeconfig" =~ $tmpdir ]]; then
-#    echo "ignoring \$KUBECONFIG=$original_kubeconfig, using default home location $default_kubeconfig"
-#    original_kubeconfig="$default_kubeconfig"
-#fi
+    # reload safety - do not source from new tmpdir - not necessary for direnv but useful for local sourcing tests
+    #if [[ "$original_kubeconfig" =~ $tmpdir ]]; then
+    #    echo "ignoring \$KUBECONFIG=$original_kubeconfig, using default home location $default_kubeconfig"
+    #    original_kubeconfig="$default_kubeconfig"
+    #fi
 
-# isolate the kubernetes context to avoid a race condition affecting any other shells or scripts
-# epoch is added because $$ and $PPID are direnv sub-processes and may be reused later, so using epoch to add uniqueness
-epoch="$(date +%s)"
-export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
+    # isolate the kubernetes context to avoid a race condition affecting any other shells or scripts
+    # epoch is added because $$ and $PPID are direnv sub-processes and may be reused later, so using epoch to add uniqueness
+    epoch="$(date +%s)"
+    export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
 
-# load your real kube config to isolated staging area to source the context info
-if [ -f "$original_kubeconfig" ]; then
-    cp "$original_kubeconfig" "$KUBECONFIG"
-elif [ -f "$default_kubeconfig" ]; then
-    cp "$default_kubeconfig" "$KUBECONFIG"
-elif [ -f "$PWD/.kube/config" ]; then
-    cp "$PWD/.kube/config" "$KUBECONFIG"
-else
-    echo "WARNING: failed to find one of:
+    # load your real kube config to isolated staging area to source the context info
+    if [ -f "$original_kubeconfig" ]; then
+        cp "$original_kubeconfig" "$KUBECONFIG"
+    elif [ -f "$default_kubeconfig" ]; then
+        cp "$default_kubeconfig" "$KUBECONFIG"
+    elif [ -f "$PWD/.kube/config" ]; then
+        cp "$PWD/.kube/config" "$KUBECONFIG"
+    else
+        echo "WARNING: failed to find one of:
 
-    $original_kubeconfig
-    $default_kubeconfig
-    $PWD/.kube/config
-" >&2
-fi
+        $original_kubeconfig
+        $default_kubeconfig
+        $PWD/.kube/config
+    " >&2
+    fi
 
-if command -v kubectl &>/dev/null &&
-     kubectl config get-contexts -o name 2>/dev/null | grep -Fxq "$CONTEXT"; then
-    kubectl config use-context "$CONTEXT"
+    if kubectl config get-contexts -o name 2>/dev/null | grep -Fxq "$CONTEXT"; then
+        kubectl config use-context "$CONTEXT"
 
-    if [ -n "${NAMESPACE:-}" ]; then
-        kubectl config set-context "$CONTEXT" --namespace "$NAMESPACE"
+        if [ -n "${NAMESPACE:-}" ]; then
+            kubectl config set-context "$CONTEXT" --namespace "$NAMESPACE"
+        fi
     fi
 fi
 
