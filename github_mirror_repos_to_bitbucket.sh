@@ -101,6 +101,7 @@ fi
 tmpdir="/tmp/github_to_bitbucket_mirroring/$owner"
 
 if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
+    timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi
 
