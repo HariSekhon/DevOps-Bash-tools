@@ -153,6 +153,8 @@ mirror_repo(){
     ((succeeded+=1))
 }
 
+failed_repos=""
+
 for repo in $repos; do
     if [[ "$repo" =~ / ]]; then
         die "Repo '$repo' should be specified without owner prefix"
@@ -160,13 +162,14 @@ for repo in $repos; do
     if ! mirror_repo "$repo"; then
         echo >&2
         timestamp "ERROR: Failed to mirror repo '$repo' to GitLab" >&2
+        failed_repos+=" $repo"
         echo >&2
         ((failed+=1))
     fi
 done
 
 if [ $failed -gt 0 ]; then
-    timestamp "ERROR: $failed GitHub repos failed to mirror to GitLab ($succeeded succeeded)"
+    timestamp "ERROR: $failed GitHub repos failed to mirror to GitLab ($succeeded succeeded). Failed repos: $failed_repos"
     exit 1
 fi
 
