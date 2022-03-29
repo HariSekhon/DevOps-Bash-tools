@@ -95,7 +95,7 @@ aws_access_keys_exports_to_credentials(){
     local env_var
     local key
     local value
-    echo "[$profile]"
+    echo "[profile $profile]"
     while read -r line; do
         is_blank "$line" && continue
         env_var="${line%%#*}"
