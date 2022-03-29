@@ -47,6 +47,8 @@ Source GitHub and Destination GitLab accounts, in order or priority:
 
     \$GITHUB_ORGANIZATION, \$GITHUB_USER or owner of the \$GITHUB_TOKEN
     \$GITLAB_OWNER, \$GITLAB_USER or the owner of the \$GITLAB_TOKEN
+
+If \$CLEAR_CACHE_GITHUB_MIRROR is set to any value, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
 "
 
 # used by usage() in lib/utils.sh
@@ -91,6 +93,10 @@ fi
 
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_to_gitlab_mirroring/$owner"
+
+if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
+    rm -fr "$tmpdir"
+fi
 
 timestamp "Switching to '$tmpdir' directory for mirror staging"
 mkdir -p -v "$tmpdir"
