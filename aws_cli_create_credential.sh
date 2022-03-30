@@ -64,7 +64,7 @@ aws_create_user_if_not_exists "$user"
 
 exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 
-if aws iam list-groups | jq -e ".Groups[] | select(.GroupName == \"$group\")" >/dev/null; then
+if aws iam list-groups | jq -r '.Groups[].GroupName' | grep -Fixq "$group"; then
     timestamp "Adding user '$user' to group '$group' on account '$aws_account_id'"
     aws iam add-user-to-group --user-name "$user" --group-name "$group"
 elif aws iam list-policies | jq -e ".Policies[] | select(.PolicyName == \"$policy\")" >/dev/null; then
