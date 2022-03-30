@@ -24,6 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Prints AWS credentials from a standard AWS CSV export file or access key export CSV as shell export statements
 
+    export AWS_ACCESS_KEY_ID=AKIA...
+    export AWS_SECRET_ACCESS_KEY=...
+
 Supports new user and new access key csv file formats eg. 'Download .csv file' when you create an AWS access key in the console
 
 Useful to quickly switch your shell to some exported credentials from a service account for testing permissions
