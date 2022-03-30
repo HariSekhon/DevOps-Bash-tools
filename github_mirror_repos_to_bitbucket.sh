@@ -170,7 +170,7 @@ for repo in $repos; do
         die "Repo '$repo' should be specified without owner prefix"
     fi
     if ! mirror_repo "$repo"; then
-        popd >/dev/null
+        popd >/dev/null || :
         timestamp "Mirroring failed, clearing cache and trying again"
         rm -fr "$tmpdir/$repo.git"
         if ! mirror_repo "$repo"; then
