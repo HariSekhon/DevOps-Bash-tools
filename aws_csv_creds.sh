@@ -54,11 +54,11 @@ min_args 1 "$@"
 csv="$1"
 
 if ! [ -f "$csv" ]; then
-    die "File not found: $csv"
+    die "ERROR: File not found: $csv"
 fi
 
 if ! grep -Fq 'AKIA' "$csv"; then
-    die "Access Key not found in file '$csv'"
+    die "ERROR: Access Key not found in file '$csv'"
 fi
 
 # for CSV created at access key creation time
@@ -75,5 +75,5 @@ elif tr -d '\r' < "$csv" | grep -Fxq 'User name,Password,Access key ID,Secret ac
         print "export AWS_SECRET_ACCESS_KEY="$4
     }' "$csv"
 else
-    die "unrecognized CSV header line, may have changed so code may need an update"
+    die "ERROR: unrecognized CSV header line, may have changed so code may need an update"
 fi
