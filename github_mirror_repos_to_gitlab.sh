@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Mirrors all or given repos from GitHub to GitLab via APIs and HTTPS mirror clones
 
-Useful to create/sync GitHub backup repos on GitLab for DR purposes
+Useful to create/sync GitHub repos to GitLab for migration or to cron for fast free DR purposes. Includes repo descriptions but not PRs/Wikis/Releases
 
 Especially in dynamic environments where people are adding new repos, avoids having to maintain configurations as finds and iterates all non-fork repos by default
 Can't use Terraform to dynamically create these backups because a simple commented/deleted code mistake would bypass prevent_destroy and delete your backup repos as well as your originals!
