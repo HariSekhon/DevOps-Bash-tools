@@ -199,7 +199,7 @@ npm-desktop: npm
 .PHONY: aws
 aws: system-packages python-version
 	@setup/install_aws_cli.sh
-	grep '^git-remote-codecommit' requirements.txt | ./python_pip_install_if_absent.sh
+	@grep '^git-remote-codecommit' requirements.txt | ./python_pip_install_if_absent.sh
 
 .PHONY: aws-shell
 aws-shell:
