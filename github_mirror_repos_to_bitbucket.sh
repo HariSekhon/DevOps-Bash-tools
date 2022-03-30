@@ -122,7 +122,7 @@ mirror_repo(){
     timestamp "Checking BitBucket repo '$bitbucket_owner/$bitbucket_repo' exists"
     if ! "$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" >/dev/null; then
         timestamp "Creating BitBucket repo '$bitbucket_owner/$bitbucket_repo'"
-        "$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" -X POST -d "{ \"scm\": \"git\", \"key\": \"$bitbucket_workspace\" }" >/dev/null
+        "$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" -X POST -d "{ \"scm\": \"git\", \"key\": \"$bitbucket_workspace\" }" >/dev/null || return 1
         echo >&2
     fi
 
