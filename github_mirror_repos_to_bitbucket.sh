@@ -170,11 +170,16 @@ for repo in $repos; do
         die "Repo '$repo' should be specified without owner prefix"
     fi
     if ! mirror_repo "$repo"; then
-        echo >&2
-        timestamp "ERROR: Failed to mirror repo '$repo' to BitBucket" >&2
-        failed_repos+=" $repo"
-        echo >&2
-        ((failed+=1))
+        popd >/dev/null
+        timestamp "Mirroring failed, clearing cache and trying again"
+        rm -fr "$tmpdir/$repo.git"
+        if ! mirror_repo "$repo"; then
+            echo >&2
+            timestamp "ERROR: Failed to mirror repo '$repo' to BitBucket" >&2
+            failed_repos+=" $repo"
+            echo >&2
+            ((failed+=1))
+        fi
     fi
 done
 
