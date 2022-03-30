@@ -67,7 +67,7 @@ exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 if aws iam list-groups | jq -r '.Groups[].GroupName' | grep -Fixq "$group"; then
     timestamp "Adding user '$user' to group '$group' on account '$aws_account_id'"
     aws iam add-user-to-group --user-name "$user" --group-name "$group"
-elif aws iam list-policies | jq -e ".Policies[] | select(.PolicyName == \"$policy\")" >/dev/null; then
+elif aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fixq "$policy"; then
     #timestamp "Group '$group' not found in to account '$aws_account_id'"
     timestamp "Granting policy '$policy' permissions directly to user '$user' in account '$aws_account_id'"
     aws iam attach-user-policy --user-name "$user" --policy-arn "arn:aws:iam::aws:policy/$policy"
