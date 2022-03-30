@@ -42,6 +42,13 @@ Examples:
     # format downloaded from the user's IAM -> Security Credentials -> section HTTPS Git credentials for AWS CodeCommit
 
     eval \$(${0##*/} hari_codecommit_credentials.csv)
+
+
+You can then use these credentials in commands, but note that if the \$GIT_PASSWORD contains slashes you will need to urlencode it:
+
+    GIT_PASSWORD_URLENCODED=\"\$(urlencode.sh <<< \"\$GIT_PASSWORD\")\"
+
+    git clone \"https://\$GIT_USER:\$GIT_PASSWORD_URLENCODED@git-codecommit.eu-west-2.amazonaws.com/v1/repos/myrepo\"
 "
 
 # used by usage() in lib/utils.sh
