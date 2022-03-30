@@ -118,7 +118,7 @@ mirror_repo(){
         timestamp "Creating GitLab repo '$gitlab_owner/$gitlab_repo'"
         # only available for admins
         #"$srcdir/gitlab_api.sh" "/projects/user/$gitlab_id" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
-        "$srcdir/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
+        "$srcdir/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null || return 1
         echo >&2
     fi
 
