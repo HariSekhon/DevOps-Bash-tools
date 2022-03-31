@@ -237,7 +237,8 @@
 #
 # GCloud SDK adds this to .git/config in a repo cloned via:
 #
-# # not sure why it adds a duplicate blank helper, might just be a bug
+# # having a blank helper before the real help prevents this error when pushing:
+# # bad input: ..........
 #[credential "https://source.developers.google.com/"]
 #	helper =
 #	helper = !gcloud auth git-helper --account=hari@<project>.iam.gserviceaccount.com --ignore-unknown $@
