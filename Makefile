@@ -82,7 +82,7 @@ init: git
 	@echo
 
 .PHONY: install
-install: build link aws github-cli
+install: build link aws gcp github-cli
 	@:
 
 .PHONY: uninstall
