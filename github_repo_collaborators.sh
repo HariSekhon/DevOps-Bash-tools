@@ -21,7 +21,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck source=lib/git.sh
-. "$srcdir/lib/git.sh"
+. "$srcdir/lib/github.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -49,7 +49,7 @@ help_usage "$@"
 repo="${1:-}"
 
 if [ -z "$repo" ]; then
-    repo="$(git_repo)"
+    repo="$(get_github_repo)"
 fi
 
 "$srcdir/github_api.sh" "/repos/$repo/collaborators" |
