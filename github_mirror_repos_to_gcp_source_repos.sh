@@ -90,7 +90,7 @@ else
 fi
 
 # not using mktemp because we want to reuse this staging area between runs for efficiency
-tmpdir="/tmp/github_mirroring_to_gcp_source_repos/$owner"
+tmpdir="/tmp/github_mirror_to_gcp_source_repos/$owner"
 
 if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
     timestamp "Removing cache: $tmpdir"
