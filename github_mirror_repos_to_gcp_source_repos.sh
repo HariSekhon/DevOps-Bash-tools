@@ -145,7 +145,10 @@ mirror_repo(){
     if ! git remote -v | awk '{print $1}' | grep -Fxq gcp; then
         timestamp "Adding GCP remote origin"
         git remote add gcp "https://source.developers.google.com/p/$CLOUDSDK_CORE_PROJECT/r/$gcp_repo"
-        git config credential.https://source.developers.google.com/.helper "!gcloud auth git-helper --account=$account --ignore-unknown \$@"
+        # having a blank helper before the real help prevents:
+        # bad input: ..........
+        git config --replace-all credential.https://source.developers.google.com/.helper ''
+        git config --add         credential.https://source.developers.google.com/.helper "!gcloud auth git-helper --account=$account --ignore-unknown \$@"
     fi
 
     timestamp "Pushing all branches to GCP Source Repo"
