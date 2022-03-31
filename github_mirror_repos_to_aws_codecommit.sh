@@ -27,7 +27,7 @@ Mirrors all or given repos from GitHub to AWS CodeCommit via AWS CLI and Git HTT
 
 Useful to create/sync GitHub repos to AWS CodeCommit for migration or to cron for fast free DR purposes
 
-Includes all branches and tags, but not description/PRs/Wikis/Releases
+Includes repo descriptions and all branches and tags, but not PRs/Wikis/Releases
 
 Especially useful to backup dynamic environments where people are adding new repos all the time, avoids having to maintain configurations as finds and iterates all non-fork repos by default
 Can't use Terraform to dynamically create these backups because a simple commented/deleted code mistake would bypass prevent_destroy and delete your backup repos as well as your originals!
