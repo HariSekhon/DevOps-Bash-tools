@@ -59,8 +59,11 @@ check_bin gh
 
 #min_args 1 "$@"
 
-owner_repo="${1:-$(get_github_repo)}"
-shift || :
+if [ -n "${1:-}" ] && ! [[ "$1" =~ = ]]; then
+    owner_repo="$1"
+    shift || :
+fi
+owner_repo="${owner_repo:-$(get_github_repo)}"
 
 if ! [[ "$owner_repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
     usage "owner_repo '$owner_repo' does not conform <user_or_org>/<repo> format"
