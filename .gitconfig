@@ -222,3 +222,22 @@
     allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
     # better to add to private repos .git/config only
     #allowed = AWS_ACCOUNT_ID
+
+# ============================================================================ #
+#                 G C P   S o u r c e   R e p o s i t o r i e s
+# ============================================================================ #
+
+# GCloud SDK command clone and sets up the repo auth:
+#
+#   gcloud source repos clone "$repo" --project="$project"
+#
+# Remote origin:
+#
+#   https://source.developers.google.com/p/$project/r/$repo
+#
+# GCloud SDK adds this to .git/config in a repo cloned via:
+#
+# # not sure why it adds a duplicate blank helper, might just be a bug
+#[credential "https://source.developers.google.com/"]
+#	helper =
+#	helper = !gcloud auth git-helper --account=hari@<project>.iam.gserviceaccount.com --ignore-unknown $@
