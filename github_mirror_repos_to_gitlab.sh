@@ -94,7 +94,7 @@ else
 fi
 
 # not using mktemp because we want to reuse this staging area between runs for efficiency
-tmpdir="/tmp/github_to_gitlab_mirroring/$owner"
+tmpdir="/tmp/github_mirror_to_gitlab/$owner"
 
 if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
     timestamp "Removing cache: $tmpdir"
@@ -156,6 +156,12 @@ mirror_repo(){
 
     timestamp "Enabling branch protections on GitLab mirror repo '$gitlab_owner/$gitlab_repo'"
     "$srcdir/gitlab_project_protect_branches.sh" "$gitlab_owner/$gitlab_repo"
+
+    timestamp "Getting GitHub repo '$repo' default branch"
+    local default_branch
+    default_branch="$("$srcdir/github_api.sh" "/repos/$owner/$repo" | jq -r '.default_branch')"
+    timestamp "Setting GitLab repo '$gitlab_owner/$gitlab_repo' default branch to '$default_branch'"
+    "$srcdir/gitlab_api.sh" "/projects/$gitlab_owner_repo" -X PUT -d '{"default_branch": "'"$default_branch"'"}' >/dev/null
 
     popd >/dev/null || return 1
     echo >&2
