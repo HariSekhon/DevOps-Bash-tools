@@ -177,8 +177,14 @@ fi
 export PASSWORD
 
 url_path="$1"
-url_path="${url_path##*:\/\/bitbucket.org\/api\/v4}"
+url_path="${url_path##*:\/\/bitbucket.org\/}"
+url_path="${url_path#2.0}"
 url_path="${url_path##/}"
+
+# to support other API versions
+#if [[ "$url_path" =~ ^[[:digit:]] ]]; then
+#    url_base="${url_base%/2.0}"
+#fi
 
 shift || :
 
