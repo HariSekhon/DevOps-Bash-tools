@@ -90,7 +90,7 @@ else
 fi
 
 # not using mktemp because we want to reuse this staging area between runs for efficiency
-tmpdir="/tmp/github_to_aws_codecommmit_mirroring/$owner"
+tmpdir="/tmp/github_mirror_to_aws_codecommmit/$owner"
 
 if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
     timestamp "Removing cache: $tmpdir"
@@ -160,6 +160,12 @@ mirror_repo(){
     # TODO: if AWS CodeCommit supports protected branches in future
     #timestamp "Enabling branch protections on AWS mirror repo '$aws_repo'"
     #"$srcdir/aws_codecommit_protect_branches.sh" "$aws_repo"
+
+    timestamp "Getting GitHub repo '$repo' default branch"
+    local default_branch
+    default_branch="$("$srcdir/github_api.sh" "/repos/$owner/$repo" | jq -r '.default_branch')"
+    timestamp "Setting AWS CodeCommit repo '$aws_repo' default branch to '$default_branch'"
+    aws codecommit update-default-branch --repository-name "$aws_repo" --default-branch-name "$default_branch"
 
     popd >/dev/null || return 1
     echo >&2
