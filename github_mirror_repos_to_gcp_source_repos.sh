@@ -164,6 +164,13 @@ mirror_repo(){
     #timestamp "Enabling branch protections on GCP mirror repo '$gcp_repo'"
     #"$srcdir/gcp_source_repo_protect_branches.sh" "$gcp_repo"
 
+    # XXX: GCloud SDK is too rudimentary, doesn't support setting default branch
+    #timestamp "Getting GitHub repo '$repo' default branch"
+    #local default_branch
+    #default_branch="$("$srcdir/github_api.sh" "/repos/$owner/$repo" | jq -r '.default_branch')"
+    #timestamp "Setting GCP Source Repo '$gcp_repo' default branch to '$default_branch'"
+    # # gcloud source repos update  ... so default branch switch
+
     popd >/dev/null || return 1
     echo >&2
     ((succeeded+=1))
