@@ -100,7 +100,7 @@ else
 fi
 
 # not using mktemp because we want to reuse this staging area between runs for efficiency
-tmpdir="/tmp/github_to_bitbucket_mirroring/$owner"
+tmpdir="/tmp/github_mirror_to_bitbucket/$owner"
 
 if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
     timestamp "Removing cache: $tmpdir"
@@ -157,6 +157,17 @@ mirror_repo(){
 
     # more dangerous, force overwrites remote repo refs
     #git push --mirror bitbucket || return 1
+
+    #timestamp "Getting GitHub repo '$repo' default branch"
+    #local default_branch
+    #default_branch="$("$srcdir/github_api.sh" "/repos/$owner/$repo" | jq -r '.default_branch')"
+    #timestamp "Setting BitBucket repo '$aws_repo' default branch to '$default_branch'"
+    #
+    # XXX: returns 200 OK but doesn't change the default branch - might be bug in BitBucket API
+    #
+    #       https://community.atlassian.com/t5/Bitbucket-questions/Setting-the-default-branch-with-REST-API/qaq-p/1336362#U1989031
+    #
+    #"$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner/$bitbucket_repo" -X PUT -d '{"mainbranch": { "name": "'"$default_branch"'", "type": "branch" } }' >/dev/null
 
     popd >/dev/null || return 1
     echo >&2
