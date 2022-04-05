@@ -25,7 +25,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Mirrors all or given repos from GitHub to GCP Source Repos via GCloud SDK and Git HTTPS mirror clones
 
-Useful to create/sync GitHub repos to GCP Source Repos for migration or to cron for fast free DR purposes
+Useful to create/sync GitHub repos to GCP Source Repos for migration or to cron for fast almost free DR purposes
+(almost \$0 GCP charges compared to \$100-\$400+ per month for Rewind / BackHub)
 
 Includes all branches and tags, but not description/PRs/Wikis/Releases
 
