@@ -25,7 +25,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Mirrors all or given repos from GitHub to AWS CodeCommit via AWS CLI and Git HTTPS mirror clones
 
-Useful to create/sync GitHub repos to AWS CodeCommit for migration or to cron for fast free DR purposes
+Useful to create/sync GitHub repos to AWS CodeCommit for migration or to cron for fast almost free DR purposes
+(almost \$0 AWS charges compared to \$100-\$400+ per month for Rewind / BackHub)
 
 Includes repo descriptions and all branches and tags, but not PRs/Wikis/Releases
 
