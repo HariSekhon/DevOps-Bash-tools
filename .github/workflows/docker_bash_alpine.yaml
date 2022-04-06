@@ -12,7 +12,7 @@
 #
 
 ---
-name: DockerHub Build (Alpine)
+name: Docker Build (Alpine)
 
 on:
   push:
