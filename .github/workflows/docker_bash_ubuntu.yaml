@@ -42,7 +42,9 @@ jobs:
     with:
       # GitHub Actions doesn't yet support referencing env context in uses
       repo_tags: |
+        harisekhon/bash-tools:latest
         harisekhon/bash-tools:ubuntu
+        ghcr.io/harisekhon/bash-tools:latest
         ghcr.io/harisekhon/bash-tools:ubuntu
       dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-ubuntu
