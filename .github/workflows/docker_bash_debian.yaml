@@ -12,7 +12,7 @@
 #
 
 ---
-name: DockerHub Build (Debian)
+name: Docker Build (Debian)
 
 on:
   push:
@@ -40,8 +40,10 @@ jobs:
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
     with:
-      repo: harisekhon/bash-tools
-      tags: debian
+      # GitHub Actions doesn't yet support referencing env context in uses
+      repo_tags: |
+        harisekhon/bash-tools:debian
+        ghcr.io/harisekhon/bash-tools:debian
       dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-debian
     secrets:
