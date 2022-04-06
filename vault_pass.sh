@@ -13,15 +13,32 @@
 #  https://www.linkedin.com/in/harisekhon
 #
 
-# source vault_pass.sh to load cred to environment for multiple ansible_playbook_vault runs without having to enter password each time
+# Usage:
+#
+#   source vault_pass.sh
+#
+# to load cred to environment for multiple ansible_playbook_vault runs without having to enter password each time
+#
+# See Also:
+#
+#   the pass() function in .bash.d/functions.sh
 
 set -u
 [ -n "${DEBUG:-}" ] && set -x
 
 if [ -n "${PS1:-}" ]; then
-    read -s -r -p "password: " VAULT_PASS
+    #read -s -r -p "password: " VAULT_PASS
+    prompt="Enter password: "
+    password=""
+    while IFS= read -p "$prompt" -r -s -n 1 char; do
+        if [[ "$char" == $'\0' ]]; then
+            break
+        fi
+        prompt='*'
+        password="${password}${char}"
+    done
     echo
-    export VAULT_PASS
+    export VAULT_PASS="$password"
     echo "exported \$VAULT_PASS"
     echo "ready to be called from ansible --vault-id"
 elif [ -n "${VAULT_PASS:-}" ]; then
