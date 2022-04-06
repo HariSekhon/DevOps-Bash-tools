@@ -247,6 +247,7 @@ lines_of_code_counts="$(
     tr '\n' '+' |
     sed 's/+$//' || :
 )"
+# on Mac piping to | bc -l works, but on Linux breaks, but <<< works
 lines_of_code="$(bc -l <<< "$lines_of_code_counts" || echo "unknown")"
 
 cat <<EOF
