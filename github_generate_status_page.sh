@@ -241,11 +241,13 @@ num_self_hosted_builds="$(grep -Ec "$self_hosted_build_regex" "$tempfile" || :)"
 
 num_builds=$((num_hosted_builds + num_self_hosted_builds))
 
-lines_of_code="$(grep -Ei 'img.shields.io/badge/lines%20of%20code-[[:digit:]]+(\.[[:digit:]]+)?k' "$tempfile" |
-                 sed 's|.*img.shields.io/badge/lines%20of%20code-||; s/[[:alpha:]].*$//'|
-                 tr '\n' '+' |
-                 sed 's/+$//' |
-                 bc -l || echo "unknown")"
+lines_of_code_counts="$(
+    grep -Ei 'img.shields.io/badge/lines%20of%20code-[[:digit:]]+(\.[[:digit:]]+)?k' "$tempfile" |
+    sed 's|.*img.shields.io/badge/lines%20of%20code-||; s/[[:alpha:]].*$//'|
+    tr '\n' '+' |
+    sed 's/+$//' || :
+)"
+lines_of_code="$(bc -l <<< "$lines_of_code_counts" || echo "unknown")"
 
 cat <<EOF
 # CI/CD Status Page
