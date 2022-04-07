@@ -58,7 +58,7 @@ For AWS CodeCommit requires:
 In a GitHub Organization, only repos the user can read will be mirrored, others won't be returned in the list of GitHub repos to even try (as an outside collaborator user)
 
 
-If \$CLEAR_CACHE_GITHUB_MIRROR=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+If \$CLEAR_CACHE=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
 
 if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
 "
@@ -95,7 +95,7 @@ fi
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_mirror_to_aws_codecommmit/$owner"
 
-if [ "${CLEAR_CACHE_GITHUB_MIRROR:-}" = true ]; then
+if [ "${CLEAR_CACHE:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi

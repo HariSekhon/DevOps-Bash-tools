@@ -50,7 +50,7 @@ Source GitHub and Destination GitLab accounts, in order or priority:
     \$GITHUB_ORGANIZATION, \$GITHUB_USER or owner of the \$GITHUB_TOKEN
     \$GITLAB_OWNER, \$GITLAB_USER or the owner of the \$GITLAB_TOKEN
 
-If \$CLEAR_CACHE_GITHUB_MIRROR=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+If \$CLEAR_CACHE=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
 
 if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
 "
@@ -98,7 +98,7 @@ fi
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_mirror_to_gitlab/$owner"
 
-if [ "${CLEAR_CACHE_GITHUB_MIRROR:-}" = true ]; then
+if [ "${CLEAR_CACHE:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi

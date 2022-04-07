@@ -51,7 +51,7 @@ Source GitHub and Destination BitBucket accounts, in order or priority:
     \$BITBUCKET_OWNER, \$BITBUCKET_USER or the owner of the \$BITBUCKET_TOKEN
     \$BITBUCKET_WORKSPACE - the container where the repositories are created, can auto-determine if there is only one workspace owned by the \$BITBUCKET_USER
 
-If \$CLEAR_CACHE_GITHUB_MIRROR=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+If \$CLEAR_CACHE=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
 
 if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
 "
@@ -104,7 +104,7 @@ fi
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_mirror_to_bitbucket/$owner"
 
-if [ "${CLEAR_CACHE_GITHUB_MIRROR:-}" = true ]; then
+if [ "${CLEAR_CACHE:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi
