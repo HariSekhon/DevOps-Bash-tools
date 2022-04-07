@@ -60,7 +60,7 @@ In a GitHub Organization, only repos the user can read will be mirrored, others 
 
 If \$CLEAR_CACHE=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
 
-if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
+If \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs and deletes removed branches). Not the default for safety.
 "
 
 # used by usage() in lib/utils.sh
