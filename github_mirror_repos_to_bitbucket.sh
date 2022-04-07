@@ -51,7 +51,9 @@ Source GitHub and Destination BitBucket accounts, in order or priority:
     \$BITBUCKET_OWNER, \$BITBUCKET_USER or the owner of the \$BITBUCKET_TOKEN
     \$BITBUCKET_WORKSPACE - the container where the repositories are created, can auto-determine if there is only one workspace owned by the \$BITBUCKET_USER
 
-If \$CLEAR_CACHE_GITHUB_MIRROR is set to any value, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+If \$CLEAR_CACHE_GITHUB_MIRROR=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+
+if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
 "
 
 # used by usage() in lib/utils.sh
@@ -102,7 +104,7 @@ fi
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_mirror_to_bitbucket/$owner"
 
-if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
+if [ "${CLEAR_CACHE_GITHUB_MIRROR:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi
@@ -149,14 +151,17 @@ mirror_repo(){
         git remote add bitbucket "https://$bitbucket_owner:$BITBUCKET_TOKEN@bitbucket.org/$bitbucket_owner/$bitbucket_repo.git"
     fi
 
-    timestamp "Pushing all branches to BitBucket"
-    git push --all bitbucket || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
+    if [ "${FORCE_MIRROR:-}" = true ]; then
+        # more dangerous, force overwrites remote repo refs
+        timestamp "Force mirroring to Bitbucket (overwrite)"
+        git push --mirror bitbucket || return 1
+    else
+        timestamp "Pushing all branches to BitBucket"
+        git push --all bitbucket || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
 
-    timestamp "Pushing all tags to BitBucket"
-    git push --tags bitbucket || return 1
-
-    # more dangerous, force overwrites remote repo refs
-    #git push --mirror bitbucket || return 1
+        timestamp "Pushing all tags to BitBucket"
+        git push --tags bitbucket || return 1
+    fi
 
     #timestamp "Getting GitHub repo '$repo' default branch"
     #local default_branch

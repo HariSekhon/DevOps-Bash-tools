@@ -58,7 +58,9 @@ For GCP Source Repos requires:
 In a GitHub Organization, only repos the user can read will be mirrored, others won't be returned in the list of GitHub repos to even try (as an outside collaborator user)
 
 
-If \$CLEAR_CACHE_GITHUB_MIRROR is set to any value, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+If \$CLEAR_CACHE_GITHUB_MIRROR=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+
+if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
 "
 
 # used by usage() in lib/utils.sh
@@ -93,7 +95,7 @@ fi
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_mirror_to_gcp_source_repos/$owner"
 
-if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
+if [ "${CLEAR_CACHE_GITHUB_MIRROR:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi
@@ -152,14 +154,17 @@ mirror_repo(){
         git config --add         credential.https://source.developers.google.com/.helper "!gcloud auth git-helper --account=$account --ignore-unknown \$@"
     fi
 
-    timestamp "Pushing all branches to GCP Source Repo"
-    git push --all gcp || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
+    if [ "${FORCE_MIRROR:-}" = true ]; then
+        # more dangerous, force overwrites remote repo refs
+        timestamp "Force mirroring to GCP Source Repo (overwrite)"
+        git push --mirror gcp || return 1
+    else
+        timestamp "Pushing all branches to GCP Source Repo"
+        git push --all gcp || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
 
-    timestamp "Pushing all tags to GCP Source Repo"
-    git push --tags gcp || return 1
-
-    # more dangerous, force overwrites remote repo refs
-    #git push --mirror gcp || return 1
+        timestamp "Pushing all tags to GCP Source Repo"
+        git push --tags gcp || return 1
+    fi
 
     # TODO: if GCP Source Repos supports protected branches in future
     #timestamp "Enabling branch protections on GCP mirror repo '$gcp_repo'"

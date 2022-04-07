@@ -50,7 +50,9 @@ Source GitHub and Destination GitLab accounts, in order or priority:
     \$GITHUB_ORGANIZATION, \$GITHUB_USER or owner of the \$GITHUB_TOKEN
     \$GITLAB_OWNER, \$GITLAB_USER or the owner of the \$GITLAB_TOKEN
 
-If \$CLEAR_CACHE_GITHUB_MIRROR is set to any value, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+If \$CLEAR_CACHE_GITHUB_MIRROR=true, deletes the /tmp cache and uses a fresh clone mirror. This can sometimes clear push errors.
+
+if \$FORCE_MIRROR=true, runs a mirror operation (overwrites refs). Not the default for safety.
 "
 
 # used by usage() in lib/utils.sh
@@ -96,7 +98,7 @@ fi
 # not using mktemp because we want to reuse this staging area between runs for efficiency
 tmpdir="/tmp/github_mirror_to_gitlab/$owner"
 
-if [ -n "${CLEAR_CACHE_GITHUB_MIRROR:-}" ]; then
+if [ "${CLEAR_CACHE_GITHUB_MIRROR:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
     rm -fr "$tmpdir"
 fi
@@ -145,14 +147,17 @@ mirror_repo(){
         git remote add gitlab "https://$gitlab_owner:$GITLAB_TOKEN@gitlab.com/$gitlab_owner/$gitlab_repo.git"
     fi
 
-    timestamp "Pushing all branches to GitLab"
-    git push --all gitlab || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
+    if [ "${FORCE_MIRROR:-}" = true ]; then
+        # more dangerous, force overwrites remote repo refs
+        timestamp "Force mirroring to GitLab (overwrite)"
+        git push --mirror gitlab || return 1
+    else
+        timestamp "Pushing all branches to GitLab"
+        git push --all gitlab || return 1  # XXX: without return 1 the function ignores errors, even with set -e inside the function
 
-    timestamp "Pushing all tags to GitLab"
-    git push --tags gitlab || return 1
-
-    # more dangerous, force overwrites remote repo refs
-    #git push --mirror gitlab || return 1
+        timestamp "Pushing all tags to GitLab"
+        git push --tags gitlab || return 1
+    fi
 
     timestamp "Enabling branch protections on GitLab mirror repo '$gitlab_owner/$gitlab_repo'"
     "$srcdir/gitlab_project_protect_branches.sh" "$gitlab_owner/$gitlab_repo"
