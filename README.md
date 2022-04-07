@@ -53,7 +53,7 @@ awkward URLs more nicely replaced with shields.io
 [![Drone](https://cloud.drone.io/api/badges/HariSekhon/DevOps-Bash-tools/status.svg)](https://cloud.drone.io/HariSekhon/DevOps-Bash-tools)
 -->
 
-[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md)
+[![CI Builds Overview](https://img.shields.io/badge/CI%20Builds-Overview%20Page-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
 [![Jenkins](https://img.shields.io/badge/Jenkins-ready-blue?logo=jenkins&logoColor=white)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/Jenkinsfile)
 [![Concourse](https://img.shields.io/badge/Concourse-ready-blue?logo=concourse)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.concourse.yml)
 [![GoCD](https://img.shields.io/badge/GoCD-ready-blue?logo=go)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.gocd.yml)
@@ -135,14 +135,14 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
-Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md).
+Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 400+ [CI builds](https://harisekhon.github.io/CI-CD/).
 
 #### Summary
 
 - Scripts for many popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#inventory) below for more details
 - Advanced configs for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
-- CI configs for most major Continuous Integration products (see [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page)
-- CI scripts for a drop-in framework of standard checks to run in all [CI builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md), CI detection, accounting for installation differences across CI environments, root vs user, virtualenvs etc.
+- CI configs for most major Continuous Integration products (see [CI builds](https://harisekhon.github.io/CI-CD/) page)
+- CI scripts for a drop-in framework of standard checks to run in all [CI builds](https://harisekhon.github.io/CI-CD/), CI detection, accounting for installation differences across CI environments, root vs user, virtualenvs etc.
 - API scripts auto-handling authentication, tokens and other details to quickly query popular APIs with a few keystrokes just supplying the `/path/endpoint`
 - Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - aliases, functions, colouring, dynamic Git & shell behaviour enhancements, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
 - Installs the best systems packages -
@@ -158,7 +158,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 [jq](https://stedolan.github.io/jq/)
 etc... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
   - `setup/` - contains even more scripts to download and install software, JDBC connectors, Mac OS X settings etc.
-- Utility Libraries used by many hundreds of scripts and [builds](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
+- Utility Libraries used by many hundreds of scripts and [builds](https://harisekhon.github.io/CI-CD/) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
   - `lib/` - scripting and CI library
 - [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 100+ scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [AWS Athena](https://aws.amazon.com/athena/) + [CloudTrail](https://aws.amazon.com/cloudtrail/), [Google BigQuery](https://cloud.google.com/bigquery)
@@ -659,7 +659,7 @@ etc.
   - `github_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
   - `github_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_gpg_get_user_public_keys.sh` - fetches a given GitHub user's public GPG keys via the API
-  - `github_generate_status_page.sh` - generates a [STATUS.md](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_generate_status_page.sh` - generates a [STATUS.md](https://harisekhon.github.io/CI-CD/) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
@@ -965,7 +965,7 @@ etc.
 
 #### Builds, Languages & Linting
 
-- `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://bitbucket.org/harisekhon/devops-bash-tools/src/master/STATUS.md). Some examples:
+- `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://harisekhon.github.io/CI-CD/). Some examples:
 
   - Programming language linting:
 
