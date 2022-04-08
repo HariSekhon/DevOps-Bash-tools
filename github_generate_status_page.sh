@@ -290,9 +290,6 @@ if is_owner_harisekhon; then
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-2088FF?logo=github)](https://harisekhon.github.io/CI-CD/)
 
-EOF
-
-cat <<EOF
 [![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
 [![Generate README](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml)
 [![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
@@ -300,6 +297,7 @@ cat <<EOF
                                                                   # "$srcdir/urlencode.sh" |
                                                                   # need to escape dashes to avoid shields.io interpreting them as field separators
                                                                   sed 's/-/--/g')-yellowgreen?logo=github)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/CI-CD?logo=github)](https://github.com/HariSekhon/CI-CD/commits/master)
 EOF
 fi
 
