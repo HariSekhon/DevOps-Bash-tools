@@ -19,14 +19,16 @@ on:
     branches:
       - master
       - main
-    paths-ignore:
-      - **/README.md
+    paths:
+      - CODEOWNERS
+      - .github/CODEOWNERS
   pull_request:
     branches:
       - master
       - main
-    paths-ignore:
-      - **/README.md
+    paths:
+      - CODEOWNERS
+      - .github/CODEOWNERS
   workflow_dispatch:
     inputs:
       debug:
