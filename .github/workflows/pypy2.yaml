@@ -43,7 +43,7 @@ jobs:
   build:
     if: github.event.repository.fork == false
     name: PyPy2
-    uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      version: pypy2
+      python-version: pypy2
       debug: ${{ github.event.inputs.debug }}

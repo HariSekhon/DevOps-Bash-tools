@@ -43,7 +43,7 @@ jobs:
   build:
     if: github.event.repository.fork == false
     name: PyPy3
-    uses: HariSekhon/GitHub-Actions/.github/workflows/python.yaml@master
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      version: pypy3
+      python-version: pypy3
       debug: ${{ github.event.inputs.debug }}
