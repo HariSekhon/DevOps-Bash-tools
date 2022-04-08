@@ -29,6 +29,7 @@ Jenkinsfile
 .teamcity.vcs.json
 .teamcity.auth.vcs.json
 #.travis.yml
+.werckerignore
 azure-pipelines.yml
 bitbucket-pipelines.yml
 buddy.yml
