@@ -75,7 +75,7 @@ echo
 
 if is_CI; then
     echo "attempting to upgrade pip to solve common CI/CD problems"
-    PIP_OPTS="--upgrade" "$srcdir/python_pip_install.sh" pip || :
+    "$python" -m pip install --upgrade pip || :
     echo
 fi
 
