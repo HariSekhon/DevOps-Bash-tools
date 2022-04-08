@@ -17,6 +17,8 @@ on:
   push:
     branches:
       - master
+    paths-ignore:
+      - README.md
   workflow_dispatch:
     inputs:
       debug:
