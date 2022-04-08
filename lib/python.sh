@@ -206,9 +206,9 @@ inside_virtualenv(){
         return 0
     # CircleCI uses /opt/circleci/.pyenv/shims/python
     # Codeship path when using virtualenv
-    elif command -v "$python" | grep -Eqi '/\.pyenv/|/shims/'; then
+    elif command -v "$python" | grep -Eqi '/\.pyenv/|/shims/|/home/'; then
         return 0
-    elif command -v "$pip" | grep -Eqi '/\.pyenv/|/shims/'; then
+    elif command -v "$pip" | grep -Eqi '/\.pyenv/|/shims/|/home/'; then
         return 0
     fi
     return 1
