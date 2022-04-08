@@ -295,11 +295,11 @@ EOF
 cat <<EOF
 [![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
 [![Generate README](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml)
+[![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
 ![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
                                                                   # "$srcdir/urlencode.sh" |
                                                                   # need to escape dashes to avoid shields.io interpreting them as field separators
-                                                                  sed 's/-/--/g')-lightgrey?logo=github)
-[![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
+                                                                  sed 's/-/--/g')-yellowgreen?logo=github)
 EOF
 fi
 
