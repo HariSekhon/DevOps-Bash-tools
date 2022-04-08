@@ -200,7 +200,7 @@ npm-desktop: npm
 aws: system-packages python-version
 	@setup/install_aws_cli.sh
 	@# needed for github_mirror_repos_to_aws_codecommit.sh and dependent GitHub Actions workflows
-	@grep '^git-remote-codecommit' requirements.txt | ./python_pip_install_if_absent.sh
+	@grep '^git-remote-codecommit' requirements.txt | ./python_pip_install_if_absent.sh || :
 
 .PHONY: aws-shell
 aws-shell:
