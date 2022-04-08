@@ -76,7 +76,7 @@ echo
 if is_CI; then
     echo "attempting to upgrade pip to solve common CI/CD problems"
     sudo='sudo'
-    if [ "${EUID:${UID:$(id -u)}}" = 0 ]; then
+    if [ "${EUID:-${UID:-$(id -u)}}" = 0 ]; then
         sudo=''
     fi
     "$sudo" "$python" -m pip install --upgrade pip || :
