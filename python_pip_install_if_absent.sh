@@ -73,15 +73,22 @@ pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 echo "Installing Python PyPI Modules that are not already installed"
 echo
 
-if is_CI; then
-    echo "attempting to upgrade pip to solve common CI/CD problems"
-    sudo='sudo'
-    if [ "${EUID:-${UID:-$(id -u)}}" = 0 ]; then
-        sudo=''
-    fi
-    "$sudo" "$python" -m pip install --upgrade pip || :
-    echo
-fi
+# doesn't solve the problem on CircleCI:
+#
+# Traceback (most recent call last):
+#   File "/home/circleci/.local/bin/pip", line 5, in <module>
+#     from pip._internal.cli.main import main
+# ImportError: No module named pip._internal.cli.main
+#
+#if is_CI; then
+#    echo "attempting to upgrade pip to solve common CI/CD problems"
+#    sudo='sudo'
+#    if [ "${EUID:-${UID:-$(id -u)}}" = 0 ]; then
+#        sudo=''
+#    fi
+#    "$sudo" "$python" -m pip install --upgrade pip || :
+#    echo
+#fi
 
 for pip_module in $pip_modules; do
     python_module="$("$srcdir/python_translate_module_to_import.sh" <<< "$pip_module")"
