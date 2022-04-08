@@ -20,15 +20,15 @@ on:
       - master
       - main
     paths:
-      - **/*.yml
-      - **/*.yaml
+      - '**/*.yml'
+      - '**/*.yaml'
   pull_request:
     branches:
       - master
       - main
     paths:
-      - **/*.yml
-      - **/*.yaml
+      - '**/*.yml'
+      - '**/*.yaml'
   workflow_dispatch:
     inputs:
       debug:

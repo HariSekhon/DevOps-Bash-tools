@@ -18,11 +18,11 @@ on:
     branches:
       - master
     paths-ignore:
-      - **/*.md
-      - **/*.pl
-      - **/*.rb
-      - **/*.go
-      - **/*.sh
+      - '**/*.md'
+      - '**/*.pl'
+      - '**/*.rb'
+      - '**/*.go'
+      - '**/*.sh'
   workflow_dispatch:
     inputs:
       debug:
