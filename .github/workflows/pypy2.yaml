@@ -19,6 +19,10 @@ on:
       - master
     paths-ignore:
       - **/README.md
+      - **/*.pl
+      - **/*.rb
+      - **/*.go
+      - **/*.sh
   workflow_dispatch:
     inputs:
       debug:
