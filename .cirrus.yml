@@ -19,7 +19,8 @@ container:
   image: ubuntu:18.04
 
 task:
-  skip: "!changesInclude('**/*.md')"
+  # doesn't work properly
+  #skip: "!changesInclude('**/*.md')"
   script:
     - setup/ci_bootstrap.sh
     - make init
