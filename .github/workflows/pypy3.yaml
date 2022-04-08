@@ -11,12 +11,24 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+---
 name: PyPy 3
 
 on:
   push:
     branches:
       - master
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.pl'
+      - '**/*.rb'
+      - '**/*.go'
+      - '**/*.sh'
+  pull_request:
+    branches:
+      - master
+      - main
     paths-ignore:
       - '**/*.md'
       - '**/*.pl'

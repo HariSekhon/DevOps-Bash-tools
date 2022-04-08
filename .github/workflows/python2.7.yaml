@@ -18,6 +18,17 @@ on:
   push:
     branches:
       - master
+      - main
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.pl'
+      - '**/*.rb'
+      - '**/*.go'
+      - '**/*.sh'
+  pull_request:
+    branches:
+      - master
+      - main
     paths-ignore:
       - '**/*.md'
       - '**/*.pl'
