@@ -26,7 +26,7 @@ execution_time_limit:
 blocks:
   - name: Linux build
     run:
-      when: "branch = 'master'"
+      when: "branch = 'master' AND change_in('/', {exclude: ['**/*.md']})"
     #execution_time_limit:
     #  hours: 2
     task:
