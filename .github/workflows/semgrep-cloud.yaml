@@ -26,13 +26,13 @@ on:
       - master
       - main
     paths-ignore:
-      - README.md
+      - **/README.md
   pull_request:
     branches:
       - master
       - main
     paths-ignore:
-      - README.md
+      - **/README.md
   workflow_dispatch:
     inputs:
       debug:

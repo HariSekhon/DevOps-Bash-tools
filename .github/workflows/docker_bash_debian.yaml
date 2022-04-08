@@ -20,7 +20,7 @@ on:
       - master
       - main
     paths-ignore:
-      - README.md
+      - **/README.md
   workflow_dispatch:
     inputs:
       debug:
