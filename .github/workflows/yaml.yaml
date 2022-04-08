@@ -19,14 +19,16 @@ on:
     branches:
       - master
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - **/*.yml
+      - **/*.yaml
   pull_request:
     branches:
       - master
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - **/*.yml
+      - **/*.yaml
   workflow_dispatch:
     inputs:
       debug:
