@@ -58,4 +58,5 @@ jobs:
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       python-version: 3.8
+      caches: apt pip
       debug: ${{ github.event.inputs.debug }}
