@@ -37,9 +37,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  make:
+  build:
     if: github.event.repository.fork == false
-    name: Make
+    name: Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
       container: debian:10
