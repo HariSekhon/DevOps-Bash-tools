@@ -19,14 +19,14 @@ on:
     branches:
       - master
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - **/*.json
   pull_request:
     branches:
       - master
       - main
-    paths-ignore:
-      - README.md
+    paths:
+      - **/*.json
   workflow_dispatch:
     inputs:
       debug:
