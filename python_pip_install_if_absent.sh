@@ -73,6 +73,12 @@ pip_modules="$(tr ' ' ' \n' <<< "$pip_modules" | sort -u | tr '\n' ' ')"
 echo "Installing Python PyPI Modules that are not already installed"
 echo
 
+if is_CI; then
+    echo "attempting to upgrade pip to solve common CI/CD problems"
+    PIP_OPTS="--upgrade" "$srcdir/python_pip_install.sh" pip || :
+    echo
+fi
+
 for pip_module in $pip_modules; do
     python_module="$("$srcdir/python_translate_module_to_import.sh" <<< "$pip_module")"
 
