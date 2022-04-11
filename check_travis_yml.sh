@@ -78,7 +78,11 @@ else
         type -P travis
         echo
         echo -n 'Travis version:  '
-        travis version --no-interactive
+        if ! travis version --no-interactive; then
+            echo
+            echo "WARNING: Travis Gem / install broken, skipping check"
+            exit 1
+        fi
         echo
         echo -n 'Travis lint:  '
         # Travis CI is getting upstream errors randomly, eg.
