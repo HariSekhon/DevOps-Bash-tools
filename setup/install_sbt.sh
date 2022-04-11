@@ -42,7 +42,8 @@ if command -v yum 2>/dev/null; then
     yum install -y --nogpgcheck sbt
 elif command -v apt-get 2>/dev/null; then
     apt-get update
-    apt-get install -y openjdk-8-jdk scala gnupg2
+    openjdk="$(apt-cache search openjdk | grep -Eo 'openjdk-[[:digit:]]+-jdk' | head -n1)"
+    apt-get install -y "$openjdk" scala gnupg2
     echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
     apt-get install -y --no-install-recommends apt-transport-https
     apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
