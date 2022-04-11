@@ -16,7 +16,10 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# during 'curl | bash' ... $BASH_SOURCE isn't set
+if [ -n "${BASH_SOURCE[0]:-}" ]; then
+    srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+fi
 
 git_url="${GIT_URL:-https://github.com}"
 
@@ -47,7 +50,8 @@ if [ -z "${JAVA_HOME:-}" ]; then
 fi
 
 if ! type -P git &>/dev/null ||
-   ! type -P make &>/dev/null; then
+   ! type -P make &>/dev/null &&
+   [ -n "${srcdir:-}" ]; then
 #    if type -P yum &>/dev/null; then
 #        yum install -y git make
 #    elif type -P apt-get &>/dev/null; then
@@ -60,7 +64,14 @@ if ! type -P git &>/dev/null ||
     "$srcdir/install_packages.sh" git make
 fi
 
-sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/setup/repos.txt" |
+if [ -n "${REPOS:-}" ]; then
+    tr '[:space:]' '\n' <<< "$REPOS"
+elif [ -n "${srcdir:-}" ]; then
+    sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/setup/repos.txt"
+else
+    echo "\$REPOS not set and \$srcdir not set/available, possibly due to 'curl ... | bash' usage, cannot determine list of repos to pull and build" >&2
+    exit 1
+fi |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"
