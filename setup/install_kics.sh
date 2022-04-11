@@ -22,7 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs Kics
+Installs Kics 1.5.1 (the last version to support downloadable binaries)
+
+It's recommended to use the docker image instead now
 "
 
 # used by usage() in lib/utils.sh
@@ -33,7 +35,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-version="${1:-latest}"
+# the last version to support downloadable binaries
+version="${1:-1.5.1}"
 
 owner_repo="Checkmarx/kics"
 
@@ -73,7 +76,7 @@ rm -v "$tarball"
 echo
 
 echo "symlinking install dir:"
-ln -sfv "$installdir" ~/bin/kics
+ln -sfhv "$installdir" ~/bin/kics
 echo
 
-echo "Ensure $installdir is added to your \$PATH"
+echo "Ensure $HOME/bin/kics is added to your \$PATH"
