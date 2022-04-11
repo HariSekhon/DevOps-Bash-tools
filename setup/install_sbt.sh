@@ -27,8 +27,10 @@ am_root(){
 }
 if am_root; then
     BASE=/opt
+    sudo=""
 else
     BASE=~/bin
+    sudo=sudo
 fi
 
 echo
@@ -41,14 +43,17 @@ if command -v yum 2>/dev/null; then
     yum install -y java-sdk
     yum install -y --nogpgcheck sbt
 elif command -v apt-get 2>/dev/null; then
-    apt-get update
-    openjdk="$(apt-cache search openjdk | grep -Eo 'openjdk-[[:digit:]]+-jdk' | head -n1)"
-    apt-get install -y "$openjdk" scala gnupg2
-    echo "deb https://dl.bintray.com/sbt/debian /" | tee -a /etc/apt/sources.list.d/sbt.list
-    apt-get install -y --no-install-recommends apt-transport-https
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 642AC823
-    apt-get update
-    apt-get install -y sbt
+    $sudo apt-get update
+    openjdk="`apt-cache search openjdk | grep -Eo 'openjdk-[[:digit:]]+-jdk' | head -n1`"
+    $sudo apt-get install -y "$openjdk" scala gnupg2
+    echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
+    echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee /etc/apt/sources.list.d/sbt_old.list
+    $sudo apt-get install -y apt-transport-https curl gnupg
+    curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" |
+        $sudo -H gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/scalasbt-release.gpg --import
+    $sudo chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg
+    $sudo apt-get update
+    $sudo apt-get install -y sbt
 else
     echo "No mainstream package managers detected, doing tarball install"
     if ! [ -e "$BASE/sbt" ]; then
