@@ -74,7 +74,7 @@ shift || :
 
 owner_repo="${owner_repo:-$(get_github_repo)}"
 
-if ! [[ "$owner_repo" =~ ^[[:alnum:]-]+/[[:alnum:]-]+$ ]]; then
+if ! is_github_owner_repo "$owner_repo"; then
     usage "owner_repo given '$owner_repo' does not conform <user_or_org>/<repo> format"
 fi
 
