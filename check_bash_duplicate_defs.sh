@@ -82,7 +82,7 @@ check_duplicate_aliases(){
         echo "Duplicate aliases detected across input files!"
         echo
         for x in $alias_dups; do
-            grep -Eno "^[[:space:]]*alias[[:space:]]+${x}=" "$@" 2>/dev/null || :
+            grep -En "^[[:space:]]*alias[[:space:]]+${x}=" "$@" 2>/dev/null || :
         done
         echo
         echo
