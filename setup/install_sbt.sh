@@ -44,7 +44,7 @@ if command -v yum 2>/dev/null; then
     yum install -y --nogpgcheck sbt
 elif command -v apt-get 2>/dev/null; then
     $sudo apt-get update
-    openjdk="`apt-cache search openjdk | grep -Eo 'openjdk-[[:digit:]]+-jdk' | head -n1`"
+    openjdk="$(apt-cache search openjdk | grep -Eo 'openjdk-[[:digit:]]+-jdk' | head -n1)"
     $sudo apt-get install -y "$openjdk" scala gnupg2
     echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" | sudo tee /etc/apt/sources.list.d/sbt.list
     echo "deb https://repo.scala-sbt.org/scalasbt/debian /" | sudo tee /etc/apt/sources.list.d/sbt_old.list
