@@ -178,7 +178,7 @@ fi
 "$srcdir/check_codefresh_config.sh"
 "$srcdir/check_drone_yml.sh"
 "$srcdir/check_gitlab_ci_yml.sh"
-"$srcdir/check_travis_yml.sh" || :
+"$srcdir/check_travis_yml.sh" || :  # broken library dependency highline on Fedora
 if ! is_CI &&
    [ -n "${SHIPPABLE_TOKEN:-}" ]; then
     "$srcdir/check_shippable_readme_ids.sh"
