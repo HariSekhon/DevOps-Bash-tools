@@ -49,8 +49,9 @@ help_usage "$@"
 context="${1:-}"
 shift || :
 
+kube_config_isolate
+
 if [ -n "$context" ]; then
-    kube_config_isolate
     kube_context "$context"
 fi
 
