@@ -47,6 +47,8 @@ concurrency:
 
 jobs:
   kics:
-    if: github.event.repository.fork == false
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
     name: Kics
     uses: HariSekhon/GitHub-Actions/.github/workflows/kics.yaml@master
