@@ -22,7 +22,7 @@ on:
         required: false
         default: false
   schedule:
-    - cron: '0 9 * * *'
+    - cron: '30 9 * * 2'
 
 permissions:
   contents: write
