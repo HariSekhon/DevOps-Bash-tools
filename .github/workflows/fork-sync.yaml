@@ -33,6 +33,8 @@ concurrency:
 
 jobs:
   fork_sync:
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == true
     if: github.repository_owner != 'HariSekhon'
     name: Fork Sync
     uses: HariSekhon/GitHub-Actions/.github/workflows/fork-sync.yaml@master
