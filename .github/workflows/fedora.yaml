@@ -38,7 +38,9 @@ concurrency:
 
 jobs:
   build:
-    if: github.event.repository.fork == false
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
     name: Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
