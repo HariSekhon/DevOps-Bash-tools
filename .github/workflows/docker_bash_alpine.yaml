@@ -38,7 +38,11 @@ concurrency:
 
 jobs:
   docker_build:
-    if: github.event.repository.fork == false && github.ref_type == 'branch' && ( github.ref_name == github.event.repository.default_branch || github.ref_name == 'docker' )
+    # github.event.repository context not available in scheduled workflows
+    if: |
+      github.repository_owner == 'HariSekhon' &&
+      github.ref_type == 'branch' &&
+      ( github.ref_name == github.event.repository.default_branch || github.ref_name == 'docker' )
     name: Docker Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/docker_build.yaml@master
     with:
