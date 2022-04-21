@@ -35,6 +35,8 @@ concurrency:
 
 jobs:
   fork_update_pr:
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == true
     if: github.repository_owner != 'HariSekhon'
     name: Fork Update PR
     uses: HariSekhon/GitHub-Actions/.github/workflows/fork-update-pr.yaml@master
