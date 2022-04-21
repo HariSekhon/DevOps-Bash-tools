@@ -41,7 +41,9 @@ concurrency:
 
 jobs:
   url_links:
-    if: github.event.repository.fork == false
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
     name: URL Links
     uses: HariSekhon/GitHub-Actions/.github/workflows/url_links.yaml@master
     with:
