@@ -51,7 +51,9 @@ concurrency:
 
 jobs:
   semgrep:
-    if: github.event.repository.fork == false
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
     name: Semgrep Cloud
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep-cloud.yaml@master
     secrets:
