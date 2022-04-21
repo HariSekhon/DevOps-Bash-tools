@@ -47,6 +47,8 @@ concurrency:
 
 jobs:
   check_yaml:
-    if: github.event.repository.fork == false
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
     name: Check YAML
     uses: HariSekhon/GitHub-Actions/.github/workflows/yaml.yaml@master
