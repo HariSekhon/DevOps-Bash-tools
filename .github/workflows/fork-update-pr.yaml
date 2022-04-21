@@ -22,8 +22,8 @@ on:
         required: false
         default: false
   schedule:
-    # fork-sync happens for default branch every hour, so just after that, run PRs for branches
-    - cron: '2 10 * * 2'
+    # fork-sync happens 9:30 every tuesday, so after that run PRs for branches
+    - cron: '0 10 * * 2'
 
 permissions:
   contents: write
