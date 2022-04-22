@@ -31,6 +31,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 export DOCKER_BUILDKIT=1
 
+alias dh=hub-tool
 alias dc=docker-compose
 alias dps='docker ps'
 alias dpsa='docker ps -a'
