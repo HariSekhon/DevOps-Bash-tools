@@ -38,7 +38,7 @@ Example:
 
 If no second arg is given, will read repo description from standard input
 
-    echo <description> | ${0##*/} HariSekhon/my-repo
+    cat README.md | ${0##*/} HariSekhon/my-repo
 "
 
 # used by usage() in lib/utils.sh
