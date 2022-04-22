@@ -28,11 +28,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Queries the DockerHub.com API v2
 
-Automatically handles getting a JWT authentication token if you've got auth environment variables:
-Caveat: doesn't yet work with the new DockerHub 2FA which hasn't been well thought out and kills automated API work
+Automatically handles getting an authentication token if you've got auth environment variables:
 
 \$DOCKERHUB_USERNAME / \$DOCKERHUB_USER  / \$DOCKER_USERNAME / \$DOCKER_USER
 \$DOCKERHUB_PASSWORD / \$DOCKERHUB_TOKEN / \$DOCKER_PASSWORD / \$DOCKER_TOKEN
+\$DOCKERHUB_2FA_CODE (if set, does a 2nd level 2FA auth call with this code to get a token before calling the API endpoint)
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
@@ -99,9 +99,17 @@ if [ -n "${PASSWORD:-}" ]; then
                        "${CURL_OPTS[@]}" \
                        -d '{"username": "'"$user"'", "password": "'"$PASSWORD"'"}'
         )"
-        # JWT
         token="$(jq -r .token <<< "$output")"
-        export JWT_TOKEN="$token"
+        if [ -n "${DOCKERHUB_2FA_CODE:-}" ]; then
+            output="$(curl https://hub.docker.com/v2/users/2fa-login/ \
+                           -X POST \
+                           "${CURL_OPTS[@]}" \
+                           -d '{"login_2fa_token": "'"$token"'", "code": "'"$DOCKERHUB_2FA_CODE"'"}'
+            )"
+            token="$(jq -r .token <<< "$output")"
+        fi
+        # automatically picked up by curl_auth.sh further down
+        export TOKEN="$token"
     else
         # OAuth2
         output="$("$srcdir/curl_auth.sh" https://auth.docker.io/token -X GET \
