@@ -29,6 +29,7 @@ usage_description="
 Queries the DockerHub.com API v2
 
 Automatically handles getting a JWT authentication token if you've got auth environment variables:
+Caveat: doesn't yet work with the new DockerHub 2FA which hasn't been well thought out and kills automated API work
 
 \$DOCKERHUB_USERNAME / \$DOCKERHUB_USER  / \$DOCKER_USERNAME / \$DOCKER_USER
 \$DOCKERHUB_PASSWORD / \$DOCKERHUB_TOKEN / \$DOCKER_PASSWORD / \$DOCKER_TOKEN
