@@ -75,7 +75,7 @@ set_project_description(){
         project="$gitlab_user/$project"
     fi
 
-    timestamp "Setting GitLab project '$project' description to '$description'" >&2
+    timestamp "Setting GitLab project '$project' description to '$description'"
 
     # url-encode project name otherwise GitLab API will fail to find project and return 404
     project="$("$srcdir/urlencode.sh" <<< "$project")"
