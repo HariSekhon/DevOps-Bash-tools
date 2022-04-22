@@ -109,7 +109,7 @@ if [ -n "${PASSWORD:-}" ]; then
             token="$(jq -r .token <<< "$output")"
         fi
         # automatically picked up by curl_auth.sh further down
-        export TOKEN="$token"
+        export JWT_TOKEN="$token"
     else
         # OAuth2
         output="$("$srcdir/curl_auth.sh" https://auth.docker.io/token -X GET \
