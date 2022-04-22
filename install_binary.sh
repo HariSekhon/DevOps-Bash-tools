@@ -50,7 +50,10 @@ url="${url//\{os\}/$os}"
 url="${url//\{arch\}/$arch}"
 
 package="${url##*/}"
-download_file="/tmp/$package.$$"
+tmp="/tmp"
+download_file="$tmp/$package.$$"
+
+trap_cmd "rm -f '$download_file'"
 
 if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     if [ $# -lt 1 ]; then
@@ -67,6 +70,7 @@ download "$url" "$download_file"
 
 if has_tarball_extension "$package"; then
     timestamp "Extracting package"
+    cd "$tmp"
     if has_tarball_gzip_extension "$package"; then
         tar xvzf "$download_file"
     elif has_tarball_bzip2_extension "$package"; then
