@@ -61,7 +61,7 @@ shift || :
 shift || :
 
 if kubectl get secret "$kubernetes_secret" -n "$namespace" &>/dev/null; then
-    timestamp "kubernetes secret '$kubernetes_secret' already exists in namespace '$namespace', skipping creation..." >&2
+    timestamp "Kubernetes secret '$kubernetes_secret' already exists in namespace '$namespace', skipping creation..."
     exit 0
 fi
 
