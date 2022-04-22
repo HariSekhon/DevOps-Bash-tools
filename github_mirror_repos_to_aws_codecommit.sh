@@ -190,7 +190,7 @@ for repo in $repos; do
         rm -fr "$tmpdir/$repo.git"
         if ! mirror_repo "$repo"; then
             echo >&2
-            timestamp "ERROR: Failed to mirror repo '$repo' to AWS" >&2
+            timestamp "ERROR: Failed to mirror repo '$repo' to AWS"
             failed_repos+=" $repo"
             echo >&2
             ((failed+=1))
