@@ -49,7 +49,7 @@ set_pipeline_description(){
     local pipeline_slug="$1"
     local description="${*:2}"
 
-    timestamp "setting BuildKite pipeline '$pipeline_slug' description to '$description'" >&2
+    timestamp "Setting BuildKite pipeline '$pipeline_slug' description to '$description'"
 
     # this used to work with just -d "description=$description" when Accept and Content-Type headers were omitted
     # but since curl_api_opts auto-sets headers to application/json this must be json or else get 400 bad request error
