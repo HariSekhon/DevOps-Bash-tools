@@ -19,13 +19,20 @@ srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 export TERRAFORM_VERSION=1.1.9
 
+tfenv_list_sed(){
+    sed 's/^\*[[:space:]]*//; s/(.*//; s/[[:space:]]//g'
+}
+
 if type -P tfenv &>/dev/null; then
-    if ! tfenv list | sed 's/^\*[[:space:]]*//; s/(.*//; s/[[:space:]]//g' | grep -Fxq "$TERRAFORM_VERSION"; then
+    if ! tfenv list | tfenv_list_sed | grep -Fxq "$TERRAFORM_VERSION"; then
         echo "Terraform version '$TERRAFORM_VERSION' not installed in tfenv, installing now..."
         tfenv install "$TERRAFORM_VERSION"
     fi
-    # XXX: Careful, this will switch globally and could cause race conditions with other shells / scripts on the same machine
-    tfenv use "$TERRAFORM_VERSION"
+    current_version="$(tfenv list | grep '^\*' | tfenv_list_sed)"
+    if [ "$current_version" != "$TERRAFORM_VERSION" ]; then
+        # XXX: Careful, this will switch globally and could cause race conditions with other shells / scripts on the same machine
+        tfenv use "$TERRAFORM_VERSION"
+    fi
 fi
 
 # XXX: set these or other variables for Terraform code to find
