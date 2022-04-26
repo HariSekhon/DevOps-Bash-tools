@@ -23,17 +23,38 @@ tfenv_list_sed(){
     sed 's/^\*[[:space:]]*//; s/(.*//; s/[[:space:]]//g'
 }
 
-if type -P tfenv &>/dev/null; then
-    if ! tfenv list | tfenv_list_sed | grep -Fxq "$TERRAFORM_VERSION"; then
-        echo "Terraform version '$TERRAFORM_VERSION' not installed in tfenv, installing now..."
-        tfenv install "$TERRAFORM_VERSION"
+tfenv_setup(){
+    local version="${1:-${TERRAFORM_VERSION:-}}"
+    if [ -z "$version" ]; then
+        return 0
     fi
+    if ! type -P tfenv &>/dev/null; then
+        return 0
+    fi
+    if ! tfenv list | tfenv_list_sed | grep -Fxq "$version"; then
+        echo "Terraform version '$version' not installed in tfenv, installing now..."
+        tfenv install "$version"
+    fi
+    local current_version
     current_version="$(tfenv list | grep '^\*' | tfenv_list_sed)"
-    if [ "$current_version" != "$TERRAFORM_VERSION" ]; then
+    if [ "$current_version" != "$version" ]; then
         # XXX: Careful, this will switch globally and could cause race conditions with other shells / scripts on the same machine
-        tfenv use "$TERRAFORM_VERSION"
+        tfenv use "$version"
     fi
-fi
+}
+
+tfenv_setup "$TERRAFORM_VERSION"
+
+# =================================================================================
+# for deployment/<environment> subdirectories, all you need in their .envrc is this
+#
+#   source_up
+#
+#   export TERRAFORM_VERSION=1.1.9
+#
+#   tfenv_setup "$TERRAFORM_VERSION"
+#
+# =================================================================================
 
 # XXX: set these or other variables for Terraform code to find
 export CLOUDFLARE_EMAIL=hari@...
