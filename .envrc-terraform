@@ -44,7 +44,7 @@ export CLOUDFLARE_API_KEY=...  # generate here: https://dash.cloudflare.com/prof
 export TF_VAR_cloudflare_email="$CLOUDFLARE_EMAIL"
 export TF_VAR_cloudflare_api_key="$CLOUDFLARE_API_KEY"  # must be a key, not a token using the link above
 
-# interfere with GitHub provider
+# GITHUB_* environment variables may interfere with GitHub provider, so unset them
 for env_var in $(env | awk -F= '$1 ~ /GITHUB/ {print $1}'); do
     unset "$env_var"
 done
