@@ -15,7 +15,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "${BASH_SOURCE[0]}")"
+#srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 export TERRAFORM_VERSION=1.1.9
 
