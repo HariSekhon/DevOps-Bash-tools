@@ -22,6 +22,7 @@ curl
 #direnv
 git
 golang
+groovy  # needed by check_groovyc.sh in Jenkins shared library CI/CD workflow in GitHub Actions
 iputils-ping
 jq
 less
