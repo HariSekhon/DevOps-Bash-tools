@@ -21,6 +21,8 @@ on:
       - main
     paths:
       - '**/*.py'
+      - pylib
+      - requirements.txt
       - .github/workflows/python3.10.yaml
   pull_request:
     branches:
@@ -28,6 +30,8 @@ on:
       - main
     paths:
       - '**/*.py'
+      - pylib
+      - requirements.txt
       - .github/workflows/python3.10.yaml
   workflow_dispatch:
     inputs:
