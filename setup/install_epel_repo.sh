@@ -8,7 +8,7 @@
 #        2012-06-25 15:20:39 +0100
 #           (originally an alias in .bashrc)
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #

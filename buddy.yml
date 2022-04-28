@@ -4,7 +4,7 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -19,7 +19,7 @@
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "master"
   ref_type: "BRANCH"
-  target_site_url: "https://github.com/harisekhon/devops-bash-tools"
+  target_site_url: "https://github.com/HariSekhon/DevOps-Bash-tools"
   trigger_condition: "ALWAYS"
   actions:
   - action: "Execute: make ci test"

@@ -17,7 +17,7 @@
   <properties>
     <hudson.plugins.jira.JiraProjectProperty plugin="jira@3.0.14"/>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.5">
-      <projectUrl>https://github.com/harisekhon/devops-bash-tools/</projectUrl>
+      <projectUrl>https://github.com/HariSekhon/DevOps-Bash-tools/</projectUrl>
       <displayName></displayName>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
@@ -37,7 +37,7 @@
       <configVersion>2</configVersion>
       <userRemoteConfigs>
         <hudson.plugins.git.UserRemoteConfig>
-          <url>https://github.com/harisekhon/devops-bash-tools</url>
+          <url>https://github.com/HariSekhon/DevOps-Bash-tools</url>
         </hudson.plugins.git.UserRemoteConfig>
       </userRemoteConfigs>
       <branches>

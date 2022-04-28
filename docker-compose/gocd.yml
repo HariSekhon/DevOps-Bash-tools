@@ -3,7 +3,7 @@
 #  Author: Hari Sekhon
 #  Date: 2020-03-27 17:37:46 +0000 (Fri, 27 Mar 2020)
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -29,7 +29,7 @@ services:
       timeout: 10s
       retries: 5
     #environment:
-    #  CONFIG_GIT_REPO: ${CONFIG_GIT_REPO:-https://github.com/harisekhon/bash-tools}
+    #  CONFIG_GIT_REPO: ${CONFIG_GIT_REPO:-https://github.com/HariSekhon/DevOps-Bash-tools}
     #  CONFIG_GIT_BRANCH: ${CONFIG_GIT_BRANCH:-master}
 
   # XXX: containers should be called gocd-agent as gocd.sh uses this to count the number of expected agents and wait for them to connect before authorizing them

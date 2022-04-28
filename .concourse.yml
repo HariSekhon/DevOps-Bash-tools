@@ -4,7 +4,7 @@
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -18,7 +18,7 @@ resources:
     icon: github-circle
     type: git
     source:
-      uri: https://github.com/harisekhon/devops-bash-tools
+      uri: https://github.com/HariSekhon/DevOps-Bash-tools
       branch: master
   #- name: daily
   #  type: time

@@ -6,7 +6,7 @@
 #  (forked from private repo from 2013)
 #  Original Date: 2013-03-18 16:38:04 +0000 (Mon, 18 Mar 2013)
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #

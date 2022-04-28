@@ -2,7 +2,7 @@
 #  Author: Hari Sekhon
 #  Date: 2020-03-29 00:54:51 +0000 (Sun, 29 Mar 2020)
 #
-#  https://github.com/harisekhon/devops-bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying LICENSE file
 #

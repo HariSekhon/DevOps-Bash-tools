@@ -4,7 +4,7 @@
 //  Author: Hari Sekhon
 //  Date: 2017-06-28 12:39:02 +0200 (Wed, 28 Jun 2017)
 //
-//  https://github.com/harisekhon/bash-tools
+//  https://github.com/HariSekhon/DevOps-Bash-tools
 //
 //  License: see accompanying Hari Sekhon LICENSE file
 //
@@ -49,7 +49,7 @@ pipeline {
   stages {
     stage ('Checkout') {
       steps {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/harisekhon/devops-bash-tools']]])
+        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '', url: 'https://github.com/HariSekhon/DevOps-Bash-tools']]])
       }
     }
 

@@ -4,7 +4,7 @@
   "material": {
     "type": "git",
     "attributes": {
-  	"url": "https://github.com/harisekhon/bash-tools",
+  	"url": "https://github.com/HariSekhon/DevOps-Bash-tools",
   	"branch": "master",
   	"auto_update": true
     }

@@ -4,7 +4,7 @@
 #
 #  vim:ts=4:sts=4:sw=4:noet
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #

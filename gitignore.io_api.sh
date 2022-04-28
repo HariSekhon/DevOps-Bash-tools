@@ -5,7 +5,7 @@
 #  Date: Wed Sep 18 14:34:59 2019 +0100
 #        (forked from .bash.d/git.sh)
 #
-#  https://github.com/HariSekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #

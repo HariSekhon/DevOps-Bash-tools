@@ -4,7 +4,7 @@
 #  Author: Hari Sekhon
 #  Date: 2019-11-19 16:43:00 +0000 (Tue, 19 Nov 2019)
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
@@ -31,7 +31,7 @@ if ! [ -d "$bash_tools" ]; then
     parent_dir="${bash_tools%/*}"
     mkdir -pv "$parent_dir"
     pushd "$parent_dir"
-    git clone https://github.com/harisekhon/bash-tools "$bash_tools"
+    git clone https://github.com/HariSekhon/DevOps-Bash-tools "$bash_tools"
     popd
 fi
 

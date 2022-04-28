@@ -6,7 +6,7 @@
 #  forked from pylib's Makefile from:
 #  Original Date: 2013-01-06 15:45:00 +0000 (Sun, 06 Jan 2013)
 #
-#  https://github.com/harisekhon/bash-tools
+#  https://github.com/HariSekhon/DevOps-Bash-tools
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
