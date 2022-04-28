@@ -39,7 +39,7 @@ For more documentation see the comments at the top of impala_shell.sh
 
 For a better version written in Python see DevOps Python tools repo:
 
-    https://github.com/harisekhon/devops-python-tools
+    https://github.com/HariSekhon/DevOps-Python-tools
 
 you will need to comment out / remove 'set -o pipefail' below to skip errors if you aren't authorized to use
 any of the databases to avoid the script exiting early upon encountering any authorization error such:

@@ -48,7 +48,7 @@ For more documentation see the comments at the top of impala_shell.sh
 
 For a better version written in Python see DevOps Python tools repo:
 
-    https://github.com/harisekhon/devops-python-tools
+    https://github.com/HariSekhon/DevOps-Python-tools
 "
 
 # used by usage() in lib/utils.sh

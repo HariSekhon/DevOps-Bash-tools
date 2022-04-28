@@ -6,7 +6,7 @@
 #  Author: Hari Sekhon
 #  Date: 2020-07-23 23:26:15 +0100 (Thu, 23 Jul 2020)
 #
-#  https://github.com/harisekhon/spotify-playlists
+#  https://github.com/HariSekhon/Spotify-Playlists
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #

@@ -44,7 +44,7 @@ For Hive < 3.0 - consider using adjacent impala_list_tables.sh instead as it is 
 
 For a better version written in Python see DevOps Python tools repo:
 
-    https://github.com/harisekhon/devops-python-tools
+    https://github.com/HariSekhon/DevOps-Python-tools
 
 Hive doesn't suffer from db authz issue listing metadata like Impala, which gets:
 

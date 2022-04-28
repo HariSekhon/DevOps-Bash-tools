@@ -59,7 +59,7 @@ See also:
 
   https://cwiki.apache.org/confluence/display/Hive/HiveServer2+Clients#HiveServer2Clients-Usinghive-site.xmltoautomaticallyconnecttoHiveServer2
 
-  hive_foreach_table.py / impala_foreach_table.py and similar tools in DevOps Python Tools repo - https://github.com/harisekhon/devops-python-tools
+  hive_foreach_table.py / impala_foreach_table.py and similar tools in DevOps Python Tools repo - https://github.com/HariSekhon/DevOps-Python-tools
 "
 
 # used by usage() in lib/utils.sh

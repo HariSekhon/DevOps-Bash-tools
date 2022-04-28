@@ -32,7 +32,7 @@ find_duplicate_files.py
 
 in the DevOps Python tools repo:
 
-https://github.com/harisekhon/devops-python-tools
+https://github.com/HariSekhon/DevOps-Python-tools
 "
 
 # used by usage() in lib/utils.sh

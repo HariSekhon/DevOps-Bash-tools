@@ -31,7 +31,7 @@ user,access_key_1_active,access_key_1_last_used_date,access_key_2_active,access_
 
 See similar tools in DevOps Python Tools repo:
 
-    https://github.com/harisekhon/devops-python-tools
+    https://github.com/HariSekhon/DevOps-Python-tools
 
 
 $usage_aws_cli_required

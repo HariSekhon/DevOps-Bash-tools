@@ -35,9 +35,9 @@ If using dedicated coordinators then consider setting IMPALA_HOST to one of thos
 
 See also:
 
-  find_active_impalad.py - https://github.com/harisekhon/devops-python-tools
+  find_active_impalad.py - https://github.com/HariSekhon/DevOps-Python-tools
 
-  HAProxy Configs for Impala and many other technologies - https://github.com/harisekhon/haproxy-configs
+  HAProxy Configs for Impala and many other technologies - https://github.com/HariSekhon/HAProxy-configs
 
 
 If you get an error such as:
@@ -108,7 +108,7 @@ if [ -n "${IMPALA_HOST:-}" ]; then
 elif [ -f "$topology_map" ]; then
     #echo "picking random impala from hadoop topology map" >&2
     # nodes in the topology map that aren't masters, namenodes, controlnodes etc probably have impalad running on them, so pick one at random to connect to
-    # or alternatively use HAProxy config for load balanced impala clusters - see https://github.com/harisekhon/haproxy-configs
+    # or alternatively use HAProxy config for load balanced impala clusters - see https://github.com/HariSekhon/HAProxy-configs
     impalad="$(
         awk -F'"' '/<node name="[A-Za-z]/{print $2}' "$topology_map" |
         grep -Ev '^[^.]*(name|master|control)' |

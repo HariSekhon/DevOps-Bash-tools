@@ -37,7 +37,7 @@ For more documentation see the comments at the top of impala_shell.sh
 
 For a better version written in Python see DevOps Python tools repo:
 
-https://github.com/harisekhon/devops-python-tools
+https://github.com/HariSekhon/DevOps-Python-tools
 
 'set -o pipefail' is not enabled in order to skip authorization errors such as that documented in impala_list_tables.sh
 and also ignore errors from the 'select count(*)' in the loop as Impala often has metadata errors such as:

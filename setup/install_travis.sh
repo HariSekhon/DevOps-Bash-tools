@@ -14,7 +14,7 @@
 #
 # putting the $TRAVIS_TOKEN in your environment is useful for the travis tools available in
 #
-#  https://github.com/harisekhon/devops-python-tools
+#  https://github.com/HariSekhon/DevOps-Python-tools
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x

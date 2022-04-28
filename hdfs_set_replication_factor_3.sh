@@ -40,7 +40,7 @@ and
 hdfs_find_replication_factor_1.py in DevOps Python tools repo which can
 also reset these found files back to replication factor 3 to fix the issue
 
-https://github.com/harisekhon/devops-python-tools
+https://github.com/HariSekhon/DevOps-Python-tools
 
 
 usage: ${0##*/} <file_or_directory_paths>

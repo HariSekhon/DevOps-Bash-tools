@@ -19,7 +19,7 @@
 
 # This is only for local use, there is a much better Python version in my DevOps Python Tools repo:
 #
-#  https://github.com/harisekhon/devops-python-tools
+#  https://github.com/HariSekhon/DevOps-Python-tools
 
 set -euo pipefail
 

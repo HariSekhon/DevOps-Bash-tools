@@ -28,7 +28,7 @@ See Also:
 
     - check_aws_users_password_last_used.py in the Advanced Nagios Plugins collection
 
-        https://github.com/harisekhon/nagios-plugins
+        https://github.com/HariSekhon/Nagios-Plugins
 
     awless list users
 

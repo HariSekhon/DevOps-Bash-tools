@@ -48,7 +48,7 @@ This can be safely ignored, the rest of the IAM account summary info containing 
 See Also:
 
     aws_iam_users_mfa_active_report.sh (adjacent)
-    check_aws_root_account.py   -   in The Advanced Nagios Plugins collection (https://github.com/harisekhon/nagios-plugins)
+    check_aws_root_account.py   -   in The Advanced Nagios Plugins collection (https://github.com/HariSekhon/Nagios-Plugins)
 
 
 $usage_aws_cli_required

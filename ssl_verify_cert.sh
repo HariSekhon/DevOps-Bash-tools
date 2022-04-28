@@ -32,7 +32,7 @@ For a much better version of this see check_ssl_cert.pl in the Advanced Nagios P
 
     check_ssl_cert.pl - checks Expiry days remaining, Domain, Subject Alternative Names, SNI
 
-    https://github.com/harisekhon/nagios-plugins
+    https://github.com/HariSekhon/Nagios-Plugins
 "
 
 # used by usage() in lib/utils.sh

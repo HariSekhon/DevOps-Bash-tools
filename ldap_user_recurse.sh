@@ -34,7 +34,7 @@ Uses Microsoft Active Directory LDAP extension, so is not portable to other LDAP
 
 See the python version in the DevOps Python Tools repo for a more generalized version with nicer control and output
 
-https://github.com/harisekhon/devops-python-tools
+https://github.com/HariSekhon/DevOps-Python-tools
 
 
 usage: $script <user_dn> [<attribute_filter>]

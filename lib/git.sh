@@ -114,7 +114,7 @@ mybranch(){
     git rev-parse --abbrev-ref HEAD
 }
 
-# shouldn't need to use this any more, git_check_branches_upstream.py from DevOps Python Tools repo has a --fix flag which will do this for all branches if they have no upstream set - https://github.com/harisekhon/devops-python-tools
+# shouldn't need to use this any more, git_check_branches_upstream.py from DevOps Python Tools repo has a --fix flag which will do this for all branches if they have no upstream set - https://github.com/HariSekhon/DevOps-Python-tools
 set_upstream(){
     git branch --set-upstream-to "origin/$(mybranch)" "$(mybranch)"
 }

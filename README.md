@@ -321,7 +321,7 @@ etc.
   - `aws_terraform_create_credential.sh` - creates a AWS terraform service account with Administrator permissions for Terraform Cloud or other CI/CD systems to run Terraform plan and apply, since no CI/CD systems can work with AWS SSO workflows. Stores the access key as both CSV and prints shell export commands and credentials file config as above
   - `.envrc-aws` - copy to `.envrc` for `direnv` to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
-  - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/harisekhon/nagios-plugins))
+  - `aws_account_summary.sh` - prints AWS account summary in `key = value` pairs for easy viewing / grepping of things like `AccountMFAEnabled`, `AccountAccessKeysPresent`, useful for checking whether the root account has MFA enabled and no access keys, comparing number of users vs number of MFA devices etc. (see also `check_aws_root_account.py` in [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins))
   - `aws_billing_alarm.sh` - creates a [CloudWatch](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when you incur charges above a given threshold. This is often the first thing you want to do on an account
   - `aws_budget_alarm.sh` - creates an [AWS Budgets](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when both when you start incurring forecasted charges of over 80% of your budget, and 90% actual usage. This is often the first thing you want to do on an account
   - `aws_batch_stale_jobs.sh` - lists [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
@@ -570,7 +570,7 @@ etc.
 
 #### Big Data & NoSQL
 
-- `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/harisekhon/devops-perl-tools) repo.
+- `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/HariSekhon/DevOps-Perl-tools) repo.
 - `zookeeper*.sh` - [Apache ZooKeeper](https://zookeeper.apache.org/) scripts:
   - `zookeeper_client.sh` - shortens `zookeeper-client` command by auto-populating the zookeeper quorum from the environment variable `$ZOOKEEPERS` or else parsing the zookeeper quorum from `/etc/**/*-site.xml` to make it faster and easier to connect
   - `zookeeper_shell.sh` - shortens Kafka's `zookeeper-shell` command by auto-populating the zookeeper quorum from the environment variable `$KAFKA_ZOOKEEPERS` and optionally `$KAFKA_ZOOKEEPER_ROOT` to make it faster and easier to connect
@@ -595,7 +595,7 @@ etc.
   - `impala_tables_column_counts.sh` - lists the column count per Impala table
 - `hdfs_*.sh` - Hadoop [HDFS](https://en.wikipedia.org/wiki/Apache_Hadoop#Hadoop_distributed_file_system) scripts:
   - `hdfs_checksum*.sh` - walks an HDFS directory tree and outputs HDFS native checksums (faster) or portable externally comparable CRC32, in serial or in parallel to save time
-  - `hdfs_find_replication_factor_1.sh` / `hdfs_set_replication_factor_3.sh` - finds HDFS files with replication factor 1 / sets HDFS files with replication factor <=2 to replication factor 3 to repair replication safety and avoid no replica alarms during maintenance operations (see also Python API version in the [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) repo)
+  - `hdfs_find_replication_factor_1.sh` / `hdfs_set_replication_factor_3.sh` - finds HDFS files with replication factor 1 / sets HDFS files with replication factor <=2 to replication factor 3 to repair replication safety and avoid no replica alarms during maintenance operations (see also Python API version in the [DevOps Python Tools](https://github.com/HariSekhon/DevOps-Python-tools) repo)
   - `hdfs_file_size.sh` / `hdfs_file_size_including_replicas.sh` - quickly differentiate HDFS files raw size vs total replicated size
   - `hadoop_random_node.sh` - picks a random Hadoop cluster worker node, like a cheap CLI load balancer, useful in scripts when you want to connect to any worker etc. See also the read [HAProxy Load Balancer configurations](https://github.com/HariSekhon/HAProxy-configs) which focuses on master nodes
 - `cloudera_*.sh` - [Cloudera](https://www.cloudera.com/) scripts:
@@ -998,7 +998,7 @@ etc.
 #### Data Format Conversion & Validation
 
 - `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against column positions
-- Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/harisekhon/devops-python-tools):
+- Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
 
   - CSV
   - JSON
@@ -1014,7 +1014,7 @@ etc.
 
 ### See Also
 
-- [DevOps Python Tools](https://github.com/harisekhon/devops-python-tools) - 80+ DevOps CLI tools for AWS, GCP, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
+- [DevOps Python Tools](https://github.com/HariSekhon/DevOps-Python-tools) - 80+ DevOps CLI tools for AWS, GCP, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
 
 - [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) - 100+ SQL Scripts - PostgreSQL, MySQL, AWS Athena, Google BigQuery
 
@@ -1022,7 +1022,7 @@ etc.
 
 - [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs - Best Practices, Tips & Tricks are baked right into the templates for future deployments
 
-- [The Advanced Nagios Plugins Collection](https://github.com/harisekhon/nagios-plugins) - 450+ programs for Nagios monitoring your Hadoop & NoSQL clusters. Covers every Hadoop vendor's management API and every major NoSQL technology (HBase, Cassandra, MongoDB, Elasticsearch, Solr, Riak, Redis etc.) as well as message queues (Kafka, RabbitMQ), continuous integration (Jenkins, Travis CI) and traditional infrastructure (SSL, Whois, DNS, Linux)
+- [The Advanced Nagios Plugins Collection](https://github.com/HariSekhon/Nagios-Plugins) - 450+ programs for Nagios monitoring your Hadoop & NoSQL clusters. Covers every Hadoop vendor's management API and every major NoSQL technology (HBase, Cassandra, MongoDB, Elasticsearch, Solr, Riak, Redis etc.) as well as message queues (Kafka, RabbitMQ), continuous integration (Jenkins, Travis CI) and traditional infrastructure (SSL, Whois, DNS, Linux)
 
 - [DevOps Perl Tools](https://github.com/harisekhon/perl-tools) - 25+ DevOps CLI tools for Hadoop, HDFS, Hive, Solr/SolrCloud CLI, Log Anonymizer, Nginx stats & HTTP(S) URL watchers for load balanced web farms, Dockerfiles & SQL ReCaser (MySQL, PostgreSQL, AWS Redshift, Snowflake, Apache Drill, Hive, Impala, Cassandra CQL, Microsoft SQL Server, Oracle, Couchbase N1QL, Dockerfiles, Pig Latin, Neo4j, InfluxDB), Ambari FreeIPA Kerberos, Datameer, Linux...
 

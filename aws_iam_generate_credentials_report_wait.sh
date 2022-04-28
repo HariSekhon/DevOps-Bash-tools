@@ -35,8 +35,8 @@ See Also:
 
     more AWS tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
 
-    - https://github.com/harisekhon/devops-python-tools
-    - https://github.com/harisekhon/nagios-plugins
+    - https://github.com/HariSekhon/DevOps-Python-tools
+    - https://github.com/HariSekhon/Nagios-Plugins
 
 
 $usage_aws_cli_required

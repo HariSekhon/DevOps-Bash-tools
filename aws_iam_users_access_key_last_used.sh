@@ -36,7 +36,7 @@ See Also:
 
 See similar tools in DevOps Python Tools repo:
 
-    https://github.com/harisekhon/devops-python-tools
+    https://github.com/HariSekhon/DevOps-Python-tools
 
 
 $usage_aws_cli_required

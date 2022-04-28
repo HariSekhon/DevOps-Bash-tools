@@ -19,9 +19,9 @@
 #
 # See also:
 #
-#   find_active_*.py - https://github.com/harisekhon/devops-python-tools
+#   find_active_*.py - https://github.com/HariSekhon/DevOps-Python-tools
 #
-#   HAProxy Configs for many Hadoop and other technologies - https://github.com/harisekhon/haproxy-configs
+#   HAProxy Configs for many Hadoop and other technologies - https://github.com/HariSekhon/HAProxy-configs
 #
 
 set -euo pipefail
