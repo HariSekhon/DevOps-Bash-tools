@@ -38,7 +38,7 @@ Opens the first URL found in the given file arguments or standard input
 
 Used by .vimrc to instantly open a URL on the given line in the editor
 
-Very useful for quickly referencing inline documentation links in config files and templates such as those found at https://github.com/HariSekhon/templates
+Very useful for quickly referencing inline documentation links in config files and templates such as those found at https://github.com/HariSekhon/Templates
 "
 
 # used by usage() in lib/utils.sh

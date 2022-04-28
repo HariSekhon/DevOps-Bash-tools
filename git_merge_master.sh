@@ -4,7 +4,7 @@
 #  Author: Hari Sekhon
 #  Date: 2017-11-21 10:43:47 +0100 (Tue, 21 Nov 2017)
 #
-#  https://github.com/harisekhon/Dockerfiles
+#  https://github.com/HariSekhon/Dockerfiles
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #

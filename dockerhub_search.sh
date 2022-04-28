@@ -35,7 +35,7 @@ See also:
 
     dockerhub_search.py
 
-in the DevOps Python tools repo - https://github.com/HariSekhon/devops-python-tools
+in the DevOps Python tools repo - https://github.com/HariSekhon/DevOps-Python-tools
 "
 
 # used by usage() in lib/utils.sh

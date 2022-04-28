@@ -36,7 +36,7 @@ Example:
 
 See also:
 
-- dockerhub_show_tags.py in the DevOps Python tools repo:  https://github.com/HariSekhon/devops-python-tools
+- dockerhub_show_tags.py in the DevOps Python tools repo:  https://github.com/HariSekhon/DevOps-Python-tools
 
     ddockerhub_show_tags.py harisekhon/hbase
 
