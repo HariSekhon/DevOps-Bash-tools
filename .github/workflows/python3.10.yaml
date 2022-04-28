@@ -21,12 +21,14 @@ on:
       - main
     paths:
       - '**/*.py'
+      - .github/workflows/python3.10.yaml
   pull_request:
     branches:
       - master
       - main
     paths:
       - '**/*.py'
+      - .github/workflows/python3.10.yaml
   workflow_dispatch:
     inputs:
       debug:
