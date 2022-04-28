@@ -10,7 +10,7 @@
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # https://docs.cloudera.com/documentation/enterprise/5-10-x/topics/navigator_data_mgmt.html#xd_583c10bfdbd326ba-7dae4aa6-147c30d0933--7b44

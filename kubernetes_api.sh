@@ -10,7 +10,7 @@
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # You might also be interested in find_active_kubernetes_api.py in DevOps Python tools repo - https://github.com/HariSekhon/DevOps-Python-tools

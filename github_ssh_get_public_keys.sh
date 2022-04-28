@@ -7,7 +7,7 @@
 #
 #  License: see accompanying LICENSE file
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # https://docs.github.com/en/free-pro-team@latest/rest/reference/users#list-public-ssh-keys-for-the-authenticated-user

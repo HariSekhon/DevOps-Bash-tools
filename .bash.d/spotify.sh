@@ -10,7 +10,7 @@
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # exports SPOTIFY_ACCESS_TOKEN so all the user private data spotify tools (../spotify_*.sh) can use it easily without re-prompting ia browser

@@ -10,7 +10,7 @@
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # Builds a git repo (taken from the first /github/<name> component in $PATH) inside a docker image at /github and then runs tests and cleans the caches to minimize the docker image size

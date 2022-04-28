@@ -7,7 +7,7 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # ============================================================================ #

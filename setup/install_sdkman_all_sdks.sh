@@ -7,7 +7,7 @@
 #
 #  License: see accompanying LICENSE file
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # Installs SDKman's most commonly used build tools e.g Java, Scala, Groovy + Maven, SBT, Gradle

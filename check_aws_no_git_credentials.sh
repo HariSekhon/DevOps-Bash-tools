@@ -11,7 +11,7 @@
 #
 #  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # This is a simplistic check, see Semgrep workflows under .github/workflows for more comprehensive check

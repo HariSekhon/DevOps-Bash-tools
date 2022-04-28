@@ -8,7 +8,7 @@
 #
 #  License: see accompanying LICENSE file
 #
-#  https://www.linkedin.com/in/harisekhon
+#  https://www.linkedin.com/in/HariSekhon
 #
 
 # Download InfoBlox DDI OVA and calls it to trigger the import to VirtualBox pop up
