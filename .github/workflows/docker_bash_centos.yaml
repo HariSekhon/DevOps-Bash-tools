@@ -53,6 +53,7 @@ jobs:
         ghcr.io/harisekhon/bash-tools:centos
       dockerfile-repo: HariSekhon/Dockerfiles
       context: Dockerfiles/devops-bash-tools-centos
+      debug: ${{ github.event.inputs.debug }}
     secrets:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
