@@ -21,6 +21,7 @@ on:
       - main
     paths-ignore:
       - '**/*.md'
+      - .github/
   workflow_dispatch:
     inputs:
       debug:
