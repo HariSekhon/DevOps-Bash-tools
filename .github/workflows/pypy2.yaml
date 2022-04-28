@@ -19,22 +19,14 @@ on:
     branches:
       - master
       - main
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.pl'
-      - '**/*.rb'
-      - '**/*.go'
-      - '**/*.sh'
+    paths:
+      - '**/*.py'
   pull_request:
     branches:
       - master
       - main
-    paths-ignore:
-      - '**/*.md'
-      - '**/*.pl'
-      - '**/*.rb'
-      - '**/*.go'
-      - '**/*.sh'
+    paths:
+      - '**/*.py'
   workflow_dispatch:
     inputs:
       debug:
