@@ -519,6 +519,9 @@ if is_mac; then
     date(){
         command gdate "$@"
     }
+    sed(){
+        command gsed "$@"
+    }
     xargs(){
         command gxargs "$@"
     }
