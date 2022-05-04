@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Replaces URLs in git files with capitalized equivalents to uniformity and easier reading
+Replaces URLs in git files with capitalized equivalents for uniformity and easier reading
 "
 
 # used by usage() in lib/utils.sh
@@ -59,4 +59,4 @@ for filename in $(git ls-files); do
     [ -L "$filename" ] && continue
     echo "$filename"
 done |
-xargs gsed -i "$sed_script"
+xargs sed -i "$sed_script"
