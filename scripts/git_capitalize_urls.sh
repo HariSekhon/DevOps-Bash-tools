@@ -32,7 +32,7 @@ usage_args=""
 help_usage "$@"
 
 sed_script="
-s|https://www.linkedin.com/in/harisekhon|https://www.linkedin.com/in/HariSekhon|gi;
+s|https://www.linkedin.com/in/HariSekhon|https://www.linkedin.com/in/HariSekhon|gi;
 
 $(
     sed 's/#.*//; /^[[:space:]]*$/d; s/:/ /' "$srcdir/../setup/repos.txt" |
@@ -59,4 +59,8 @@ for filename in $(git ls-files); do
     [ -L "$filename" ] && continue
     echo "$filename"
 done |
-xargs sed -i "$sed_script"
+if is_mac; then
+    xargs gsed -i "$sed_script"
+else
+    xargs sed -i "$sed_script"
+fi
