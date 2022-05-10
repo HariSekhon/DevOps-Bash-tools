@@ -42,7 +42,7 @@ $(
         fi
         if [ -n "$shortname" ]; then
             echo "s|https://github.com/harisekhon/$shortname$|https://github.com/HariSekhon/$repo|gi;"
-            #echo "s|https://github.com/harisekhon/$shortname/|https://github.com/HariSekhon/$repo/|gi;"
+            echo "s|https://github.com/harisekhon/$shortname/|https://github.com/HariSekhon/$repo/|gi;"
         fi
         echo
     done
