@@ -32,7 +32,7 @@ matches the current kubectl context's cluster and which do not have the label ku
 these must be combined using gcp_secrets_to_kubernetes_multipart.sh instead)
 
 For each secret, checks for a label called 'kubernetes-namespace', and if set, then creates the secret in that namespace,
-otherwise loads to the current namespace. This can even be a comma separated list of namespace and will create the secret in each one
+otherwise loads to the current namespace. This can even be a comma separated list of namespaces and will create the secret in each one
 
 Remember to execute this from the right GCP project configured to get the right secrets
 and with the right Kubernetes context selected to load to the right cluster
