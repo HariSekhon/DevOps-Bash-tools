@@ -1,9 +1,9 @@
 [submodule "SQL"]
 	path = SQL
-	url = https://github.com/HariSekhon/SQL
+	url = https://github.com/HariSekhon/SQL-scripts
 [submodule "sql"]
 	path = sql
-	url = https://github.com/HariSekhon/SQL
+	url = https://github.com/HariSekhon/SQL-scripts
 [submodule "templates"]
 	path = templates
 	url = https://github.com/HariSekhon/Templates
