@@ -32,14 +32,15 @@ Output Format:
 
 By default returns only public playlists owned by given Spotify user
 
-Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return only followed playlists
-
 \$SPOTIFY_USER must be defined in environment or given as first arg unless \$SPOTIFY_PRIVATE=1 is set, in which case it's inferred from the auth token
 
 Gets public playlists by default
 To also get private playlists - export SPOTIFY_PRIVATE=1
 To get only private playlists - export SPOTIFY_PRIVATE_ONLY=1
 To get only public playlists  - export SPOTIFY_PUBLIC_ONLY=1
+
+To also get followed playlists - export SPOTIFY_PLAYLISTS_FOLLOWED=1
+To get only followed playlists - export SPOTIFY_PLAYLISTS_FOLLOWED_ONLY=1
 
 $usage_auth_help
 "
@@ -49,6 +50,10 @@ $usage_auth_help
 usage_args="<spotify_user> [<curl_options>]"
 
 help_usage "$@"
+
+if [ -n "${SPOTIFY_PLAYLISTS_FOLLOWED_ONLY:-}" ]; then
+    export SPOTIFY_PLAYLISTS_FOLLOWED=1
+fi
 
 if [ -n "${SPOTIFY_PRIVATE_ONLY:-}" ]; then
     export SPOTIFY_PRIVATE=1
@@ -88,10 +93,12 @@ output(){
     else
         cat
     fi |
-    if is_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
-        jq "select(.owner.id == \"$spotify_user\")"
-    else
+    if [ -n "${SPOTIFY_PLAYLISTS_FOLLOWED_ONLY:-}" ]; then
         jq "select(.owner.id != \"$spotify_user\")"
+    elif [ -n "${SPOTIFY_PLAYLISTS_FOLLOWED:-}" ]; then
+        cat
+    else
+        jq "select(.owner.id == \"$spotify_user\")"
     fi |
     jq -r "[.id, .name] | @tsv"
 }
