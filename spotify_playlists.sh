@@ -32,7 +32,7 @@ Output Format:
 
 By default returns only public playlists owned by given Spotify user
 
-Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return all followed playlists as well
+Set \$SPOTIFY_PLAYLISTS_FOLLOWED in the environment to return only followed playlists
 
 \$SPOTIFY_USER must be defined in environment or given as first arg unless \$SPOTIFY_PRIVATE=1 is set, in which case it's inferred from the auth token
 
@@ -91,7 +91,7 @@ output(){
     if is_blank "${SPOTIFY_PLAYLISTS_FOLLOWED:-}"; then
         jq "select(.owner.id == \"$spotify_user\")"
     else
-        cat
+        jq "select(.owner.id != \"$spotify_user\")"
     fi |
     jq -r "[.id, .name] | @tsv"
 }
