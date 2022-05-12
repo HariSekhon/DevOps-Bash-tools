@@ -34,7 +34,11 @@ help_usage "$@"
 min_args 1 "$@"
 
 for filename in "$@"; do
+    # dereference symlinks, lib/utils.sh uses greadlink if on mac
+    filename="$(readlink -m "$filename")"
+
     "$srcdir/check_yaml.sh" "$filename"
+
     if type -P datree &>/dev/null; then
         section "Datree Kubernetes Check"
         datree test "$filename"
