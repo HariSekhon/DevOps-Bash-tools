@@ -61,45 +61,45 @@ if [ -n "$run_cmd" ]; then
     eval "$run_cmd"
 else
     case "$basename" in
-        Makefile)   make
-                    ;;
-      Dockerfile)   if [ -f Makefile ]; then
-                        make
-                    else
-                        docker build .
-                    fi
-                    ;;
-docker-compose*.y*ml) docker_compose_up
-                    ;;
-  cloudbuild*.y*ml) gcloud builds submit --config "$basename" .
-                    ;;
-kustomization.yaml) kustomize build --enable-helm
-                    ;;
-            .envrc) cd "$dirname" && direnv allow .
-                    ;;
-            *.go)   eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
-                    ;;
-            *.tf)   #terraform plan
-                    terraform apply
-                    ;;
-            *.md)   bash -ic "cd '$dirname'; gitbrowse"
-                    ;;
-               *)   if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
-                        docker_compose_up
-                    elif [[ "$filename" =~ \.ya?ml$ ]] &&
-                       grep -q '^apiVersion:' "$filename" &&
-                       grep -q '^kind:'       "$filename"; then
-                        # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
-                        kubectl apply -f "$filename"
-                        exit 0
-                    fi
-                    if ! [ -x "$filename" ]; then
-                        echo "ERROR: file '$filename' is not set executable!" >&2
-                        exit 1
-                    fi
-                    args="$("$srcdir/args_extract.sh" "$filename")"
-                    echo "'$filename'" "$args" >&2
-                    eval "'$filename'" "$args"
-                    ;;
+             Makefile)  make
+                        ;;
+           Dockerfile)  if [ -f Makefile ]; then
+                            make
+                        else
+                            docker build .
+                        fi
+                        ;;
+*docker-compose*.y*ml)  docker_compose_up
+                        ;;
+     cloudbuild*.y*ml)  gcloud builds submit --config "$basename" .
+                        ;;
+   kustomization.yaml)  kustomize build --enable-helm
+                        ;;
+               .envrc)  cd "$dirname" && direnv allow .
+                        ;;
+                 *.go)  eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
+                        ;;
+                 *.tf)  #terraform plan
+                        terraform apply
+                        ;;
+                 *.md)  bash -ic "cd '$dirname'; gitbrowse"
+                        ;;
+                    *)  if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
+                            docker_compose_up
+                        elif [[ "$filename" =~ \.ya?ml$ ]] &&
+                           grep -q '^apiVersion:' "$filename" &&
+                           grep -q '^kind:'       "$filename"; then
+                            # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
+                            kubectl apply -f "$filename"
+                            exit 0
+                        fi
+                        if ! [ -x "$filename" ]; then
+                            echo "ERROR: file '$filename' is not set executable!" >&2
+                            exit 1
+                        fi
+                        args="$("$srcdir/args_extract.sh" "$filename")"
+                        echo "'$filename'" "$args" >&2
+                        eval "'$filename'" "$args"
+                        ;;
     esac
 fi
