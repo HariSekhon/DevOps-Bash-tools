@@ -296,6 +296,7 @@ if has("autocmd")
     au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| more -R<CR>
     au BufNew,BufRead serverless.yml nmap ;l :w<CR>:!clear; cd "%:p:h" && serverless print<CR>
     au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint "%" \| more -R<CR>
+    au BufNew,BufRead *docker-compose*.y*ml nmap ;l :w<CR>:!clear; docker-compose -f "%" config \| more -R<CR>
     au BufNew,BufRead *Jenkinsfile*  nmap ;l :w<CR>:!clear; check_jenkinsfiles.sh "%" \| more -R<CR>
     " vagrant validate doesn't take an -f argument so it must be an exact match in order to validate the right thing
     " otherwise you will get an error or false positive
@@ -547,7 +548,7 @@ function! WriteRun()
         ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
         " but this now works for config files too which can have run headers
         " instead of args headers
-        :! "$bash_tools/lib/run.sh" "%:p" 2>&1 | less
+        :! "$bash_tools/run.sh" "%:p" 2>&1 | less
     endif
 endfunction
 
