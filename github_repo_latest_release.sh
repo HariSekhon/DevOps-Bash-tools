@@ -48,6 +48,10 @@ owner_repo="$1"
 #    die "Invalid owner/repo argument given: $owner_repo"
 #fi
 
-curl -sSL --fail "https://api.github.com/repos/$owner_repo/releases/latest" |
+if [ -n "${GITHUB_TOKEN:-}" ]; then
+    "$srcdir/github_api.sh" "/repos/$owner_repo/releases/latest"
+else
+    curl -sSL --fail "https://api.github.com/repos/$owner_repo/releases/latest"
+fi |
 jq_debug_pipe_dump |
 jq -r .tag_name
