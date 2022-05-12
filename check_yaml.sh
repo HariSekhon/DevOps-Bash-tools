@@ -32,7 +32,7 @@ export YAMLLINT_CONFIG_FILE="${YAMLLINT_CONFIG_FILE:-$srcdir/.yamllint.yaml}"
     # can point to test.json as an explicit argument
     # could check *.json too but in DevOps Python Tools repo multirecord.json would break as this cannot handle multi-json record files
     #filelist="$(find "${1:-.}" -type f -name '*.y*ml' -o -type f -name '*.json' | sort)"
-    filelist="$(find -H "${1:-.}" -type f -name '*.y*ml' | sort)"
+    filelist="$(find "${1:-.}" -type f -name '*.y*ml' | sort)"
 #fi
 
 if [ -z "$filelist" ]; then
