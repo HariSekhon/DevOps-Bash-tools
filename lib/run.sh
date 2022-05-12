@@ -79,10 +79,7 @@ kustomization.yaml) kustomize build --enable-helm
                     ;;
             *.go)   eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
                     ;;
-            *.tf)   if [ -d "$dirname"/.terraform ]; then
-                        cd "$dirname"
-                    fi
-                    #terraform plan
+            *.tf)   #terraform plan
                     terraform apply
                     ;;
             *.md)   bash -ic "cd '$dirname'; gitbrowse"
