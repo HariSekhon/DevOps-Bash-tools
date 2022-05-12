@@ -30,14 +30,24 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
  . "$srcdir/.bash.d/functions.sh"
 
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Lints one or more files
+
+Auto-determines the file types, parses any lint headers and calls appropriate scripts and tools
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="file1 [file2 file3 ...]"
+
+help_usage "$@"
+
+min_args 1 "$@"
+
 # defer expansion
 # shellcheck disable=SC2016
 trap_cmd 'exitcode=$?; echo; echo "Exit Code: $exitcode"'
-
-if [ $# -eq 0 ]; then
-    echo "usage: ${0##*/} <filename>"
-    exit 3
-fi
 
 filename="$1"
 
@@ -90,22 +100,7 @@ else
                         ;;
                  *.md)  mdl "$basename"
                         ;;
-                    *)  if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
-                            docker_compose_up
-                        elif [[ "$filename" =~ \.ya?ml$ ]] &&
-                           grep -q '^apiVersion:' "$filename" &&
-                           grep -q '^kind:'       "$filename"; then
-                            # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
-                            kubectl apply -f "$filename"
-                            exit 0
-                        fi
-                        if ! [ -x "$filename" ]; then
-                            echo "ERROR: file '$filename' is not set executable!" >&2
-                            exit 1
-                        fi
-                        args="$("$srcdir/args_extract.sh" "$filename")"
-                        echo "'$filename'" "$args" >&2
-                        eval "'$filename'" "$args"
+                    *)  die "Cannot lint unrecognized file type for file: $filename"
                         ;;
     esac
 fi
