@@ -660,6 +660,13 @@ run_test_versions(){
     echo
 }
 
+# example:
+#
+# lint: k8s
+parse_lint_hint(){
+    perl -ne 'if(/^\s*(#|\/\/|--)\s*lint:/){s/^\s*(#|\/\/)\s*lint:\s*//; print $_; exit}' "$@"
+}
+
 # =================================
 
 stat_bytes(){
