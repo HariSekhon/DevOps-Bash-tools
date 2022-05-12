@@ -22,22 +22,32 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
- . "$srcdir/../lib/utils.sh"
+ . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC1090
- . "$srcdir/../.bash.d/aliases.sh"
+ . "$srcdir/.bash.d/aliases.sh"
 
 # shellcheck disable=SC1090
- . "$srcdir/../.bash.d/functions.sh"
+ . "$srcdir/.bash.d/functions.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Runs one or more files
+
+Auto-determines the file types, any run or arg headers and executes each file using the appropriate script or CLI tool
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="file1 [file2 file3 ...]"
+
+help_usage "$@"
+
+min_args 1 "$@"
 
 # defer expansion
 # shellcheck disable=SC2016
 trap_cmd 'exitcode=$?; echo; echo "Exit Code: $exitcode"'
-
-if [ $# -eq 0 ]; then
-    echo "usage: ${0##*/} <filename>"
-    exit 3
-fi
 
 filename="$1"
 
@@ -77,7 +87,7 @@ else
                         ;;
                .envrc)  cd "$dirname" && direnv allow .
                         ;;
-                 *.go)  eval go run "'$filename'" "$("$srcdir/args_extract.sh" "$filename")"
+                 *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
                         ;;
                  *.tf)  #terraform plan
                         terraform apply
@@ -97,7 +107,7 @@ else
                             echo "ERROR: file '$filename' is not set executable!" >&2
                             exit 1
                         fi
-                        args="$("$srcdir/args_extract.sh" "$filename")"
+                        args="$("$srcdir/lib/args_extract.sh" "$filename")"
                         echo "'$filename'" "$args" >&2
                         eval "'$filename'" "$args"
                         ;;
