@@ -660,6 +660,15 @@ run_test_versions(){
     echo
 }
 
+# examples:
+#
+# #  run: kubectl apply -f file.yaml
+# // run: go run file.go
+# -- run: psql -f file.sql
+parse_run_args(){
+    perl -ne 'if(/^\s*(#|\/\/|--)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$@"
+}
+
 # example:
 #
 # lint: k8s

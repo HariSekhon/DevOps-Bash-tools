@@ -46,7 +46,7 @@ filename="$1"
 # #  run: kubectl apply -f file.yaml
 # // run: go run file.go
 # -- run: psql -f file.sql
-run_cmd="$("$srcdir/parse_run_args.sh" "$filename")"
+run_cmd="$(parse_run_args "$filename")"
 
 dirname="$(dirname "$filename")"
 basename="${filename##*/}"
