@@ -290,7 +290,7 @@ if is_owner_harisekhon; then
 [![GitLab Profile](https://img.shields.io/badge/GitLab-HariSekhon-FCA121?logo=gitlab)](https://gitlab.com/HariSekhon)
 [![BitBucket Profile](https://img.shields.io/badge/BitBucket-HariSekhon-0052CC?logo=bitbucket)](https://bitbucket.org/HariSekhon)
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-2088FF?logo=github)](https://harisekhon.github.io/CI-CD/)
-[![Netlify](https://img.shields.io/badge/Netlify-00C7B7?logo=netlify)](https://harisekhon.netlify.app/)
+[![Netlify](https://img.shields.io/badge/Netlify-site-00C7B7?logo=netlify)](https://harisekhon.netlify.app/)
 
 [![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
 [![Generate README](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml)
