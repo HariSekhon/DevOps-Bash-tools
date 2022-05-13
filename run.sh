@@ -81,6 +81,8 @@ else
                         ;;
 *docker-compose*.y*ml)  docker_compose_up
                         ;;
+              Gemfile)  bundle install
+                        ;;
      cloudbuild*.y*ml)  gcloud builds submit --config "$basename" .
                         ;;
    kustomization.yaml)  kustomize build --enable-helm
