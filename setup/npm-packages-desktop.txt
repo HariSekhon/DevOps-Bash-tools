@@ -16,4 +16,5 @@
 
 codefresh
 js-yaml
+netlify-cli
 nodemon
