@@ -267,6 +267,10 @@ if ! is_blank "$lines_of_code" &&
 EOF
 fi
 
+cat <<EOF
+[![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-$OWNER-blue?logo=github)](https://gitstar-ranking.com/$OWNER)
+EOF
+
 is_owner_harisekhon(){
     shopt -s nocasematch
     [[ "$OWNER" =~ ^HariSekhon$ ]]
@@ -277,10 +281,6 @@ if is_owner_harisekhon; then
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 EOF
 fi
-
-cat <<EOF
-[![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-$OWNER-blue?logo=github)](https://gitstar-ranking.com/$OWNER)
-EOF
 
 if is_owner_harisekhon; then
     cat<<EOF
