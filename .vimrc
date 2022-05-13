@@ -307,7 +307,7 @@ if has("autocmd")
     " if a "lint:" header is found then run lint.sh - this allows for more complex file types like Kubernetes yaml
     " which can then be linted for yaml as well as k8s schema
     if filereadable(expand("%:p")) && match(readfile(expand("%:p")),"lint:")
-       au BufNew,BufRead *  nmap ;l :w<CR>:!clear; lint.sh "%" \| more -R<CR>
+        au BufNew,BufRead *  nmap ;l :w<CR>:!clear; lint.sh "%" \| more -R<CR>
     endif
 endif
 
@@ -541,6 +541,9 @@ function! WriteRun()
         else
             :! docker build "%:p:h"
         endif
+    elseif expand('%:t') == 'Gemfile'
+        " "%:p:h" is dirname
+        :! cd "%:p:h" && bundle install
     "elseif ! empty(matchstr(expand('%:t'), 'cloudbuild.*.yaml'))
     elseif expand('%:t') =~ 'cloudbuild.*\.ya\?ml'
         :call CloudBuild()
