@@ -126,7 +126,8 @@ head(){
 }
 
 tempfile="$(mktemp)"
-trap 'echo ERROR >&2; rm -f $tempfile' exit
+tempfile_header="$(mktemp)"
+trap 'echo ERROR >&2; rm -f "$tempfile" "$tempfile_header"' exit
 
 {
 actual_repos=0
@@ -188,6 +189,15 @@ if [ "$num_repos" != "$actual_repos" ]; then
     exit 1
 fi
 
+lines_of_code_counts="$(
+    grep -Ei 'img.shields.io/badge/lines%20of%20code-[[:digit:]]+(\.[[:digit:]]+)?k' "$tempfile" |
+    sed 's|.*img.shields.io/badge/lines%20of%20code-||; s/[[:alpha:]].*$//'|
+    tr '\n' '+' |
+    sed 's/+$//' || :
+)"
+# on Mac piping to | bc -l works, but on Linux breaks, but <<< works
+lines_of_code="$(bc -l <<< "$lines_of_code_counts" || echo "unknown")"
+
 hosted_build_regex='\[.+('
 hosted_build_regex+='travis-ci.+\.svg'
 hosted_build_regex+='|github\.com/.+/workflows/.+/badge\.svg'
@@ -231,27 +241,18 @@ if [ -n "${DEBUG:-}" ]; then
     echo
     echo "Hosted Builds:"
     echo
-    grep -E "$hosted_build_regex" "$tempfile" >&2 || :
+    grep -E "$hosted_build_regex" "$tempfile" "$tempfile_header" >&2 || :
     echo
     echo "Self-Hosted Builds:"
     echo
-    grep -E "$self_hosted_build_regex" "$tempfile" >&2 || :
+    grep -E "$self_hosted_build_regex" "$tempfile" "$tempfile_header" >&2 || :
 fi
 num_hosted_builds="$(grep -Ec "$hosted_build_regex" "$tempfile" || :)"
 num_self_hosted_builds="$(grep -Ec "$self_hosted_build_regex" "$tempfile" || :)"
 
 num_builds=$((num_hosted_builds + num_self_hosted_builds))
 
-lines_of_code_counts="$(
-    grep -Ei 'img.shields.io/badge/lines%20of%20code-[[:digit:]]+(\.[[:digit:]]+)?k' "$tempfile" |
-    sed 's|.*img.shields.io/badge/lines%20of%20code-||; s/[[:alpha:]].*$//'|
-    tr '\n' '+' |
-    sed 's/+$//' || :
-)"
-# on Mac piping to | bc -l works, but on Linux breaks, but <<< works
-lines_of_code="$(bc -l <<< "$lines_of_code_counts" || echo "unknown")"
-
-cat <<EOF
+cat > "$tempfile_header" <<EOF
 # CI/CD Status Page
 
 ![Original Repos](https://img.shields.io/badge/Repos-$actual_repos-blue?logo=github)
@@ -262,12 +263,12 @@ EOF
 
 if ! is_blank "$lines_of_code" &&
    [ "$lines_of_code" != unknown ]; then
-    cat <<EOF
+    cat >> "$tempfile_header" <<EOF
 ![Lines of Code](https://img.shields.io/badge/lines%20of%20code-${lines_of_code}k-lightgrey?logo=codecademy)
 EOF
 fi
 
-cat <<EOF
+cat >> "$tempfile_header" <<EOF
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-$OWNER-blue?logo=github)](https://gitstar-ranking.com/$OWNER)
 EOF
 
@@ -277,13 +278,16 @@ is_owner_harisekhon(){
 }
 
 if is_owner_harisekhon; then
-    cat <<-EOF
+    cat >> "$tempfile_header" <<-EOF
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
 EOF
 fi
 
 if is_owner_harisekhon; then
-    cat<<EOF
+    # XXX: workaround to include Readme Generate, GitHub Pages and Netlify builds here because we cannot precalculate them from $tempfile_header as they are added after the CI Builds count is needed here
+    # XXX: must update this if editing this header to add/remove any builds
+    ((num_builds += 3))
+    cat >> "$tempfile_header" <<EOF
 
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
 [![GitHub Profile](https://img.shields.io/badge/GitHub-HariSekhon-2088FF?logo=github)](https://github.com/HariSekhon)
@@ -315,6 +319,7 @@ fi
 #
 #fi
 
+cat "$tempfile_header"
 echo
 printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
