@@ -35,7 +35,14 @@ fi
 
 autocomplete eksctl
 
-# ==================
+# =====================
+# Elastic Beanstalk CLI (easier to use than AWS CLI)
+
+if [ -d ~/.ebcli-virtual-env/executables/ ]; then
+    add_PATH ~/.ebcli-virtual-env/executables/
+fi
+
+# =====================
 
 #alias s3='s3cmd'
 alias s3='aws s3'
