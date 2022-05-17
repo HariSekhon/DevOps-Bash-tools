@@ -42,3 +42,19 @@ fi
 python3="$(type -P python3)"
 
 "$python3" ./aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py -p "$python3"
+
+# -p /usr/local/bin/python3 avoids this error:
+#
+#    Traceback (most recent call last):
+#      File "/Library/Python/2.7/site-packages/virtualenv.py", line 37, in <module>
+#        import ConfigParser
+#    ModuleNotFoundError: No module named 'ConfigParser'
+#
+#    During handling of the above exception, another exception occurred:
+#
+#    Traceback (most recent call last):
+#      File "/Library/Python/2.7/site-packages/virtualenv.py", line 39, in <module>
+#        import configparser as ConfigParser
+#      File "/Library/Python/2.7/site-packages/configparser/__init__.py", line 11, in <module>
+#        raise ImportError('This package should not be accessible on Python 3. '
+#    ImportError: This package should not be accessible on Python 3. Either you are trying to run from the python-future src folder or your installation of python-future is corrupted.
