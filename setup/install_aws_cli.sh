@@ -12,7 +12,7 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Installs AWS CLI
+# Installs AWS CLI, eksctl and ECS CLI
 
 # You might need to first:
 #
