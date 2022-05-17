@@ -41,6 +41,36 @@ fi
 
 python3="$(type -P python3)"
 
+if is_linux; then
+    if type -P apt-get; then
+        apt-get install -y \
+            build-essential \
+            zlib1g-dev \
+            libssl-dev \
+            libncurses-dev \
+            libffi-dev \
+            libsqlite3-dev \
+            libreadline-dev \
+            libbz2-dev
+    elif type -P yum; then
+        yum group install -y "Development Tools"
+        yum install -y \
+            zlib-devel \
+            openssl-devel \
+            ncurses-devel \
+            libffi-devel \
+            sqlite-devel.x86_64 \
+            readline-devel.x86_64 \
+            bzip2-devel.x86_64
+    fi
+elif is_mac; then
+    brew install zlib openssl readline
+    CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
+    LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib"
+    export CFLAGS
+    export LDFLAGS
+fi
+
 "$python3" ./aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py -p "$python3"
 
 # -p /usr/local/bin/python3 avoids this error:
