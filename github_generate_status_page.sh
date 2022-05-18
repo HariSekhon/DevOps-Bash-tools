@@ -126,8 +126,9 @@ head(){
 }
 
 tempfile="$(mktemp)"
+tempfile_summary="$(mktemp)"
 tempfile_header="$(mktemp)"
-trap 'echo ERROR >&2; rm -f "$tempfile" "$tempfile_header"' exit
+#trap 'echo ERROR >&2; rm -f "$tempfile" "$tempfile_summary" "$tempfile_header"' exit
 
 {
 actual_repos=0
@@ -237,18 +238,38 @@ self_hosted_build_regex+='|.gocd.yml'
 self_hosted_build_regex+=')\)'
 self_hosted_build_regex+='|img\.shields\.io/badge/TeamCity'
 
+num_CI_systems=22
+
+is_owner_harisekhon(){
+    shopt -s nocasematch
+    [[ "$OWNER" =~ ^HariSekhon$ ]]
+}
+
+if is_owner_harisekhon; then
+    cat >> "$tempfile_summary" <<EOF
+[![Generate README](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml)
+[![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/853ef60c-c01b-4b83-99ba-8fda541f850f/deploy-status)](https://app.netlify.com/sites/harisekhon/deploys)
+[![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/CI-CD?logo=github)](https://github.com/HariSekhon/CI-CD/commits/master)
+![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
+                                                                  # "$srcdir/urlencode.sh" |
+                                                                  # need to escape dashes to avoid shields.io interpreting them as field separators
+                                                                  sed 's/-/--/g')-yellowgreen?logo=github)
+EOF
+fi
+
 if [ -n "${DEBUG:-}" ]; then
     echo
     echo "Hosted Builds:"
     echo
-    grep -E "$hosted_build_regex" "$tempfile" "$tempfile_header" >&2 || :
+    grep -Eh "$hosted_build_regex" "$tempfile" "$tempfile_header" || :
     echo
     echo "Self-Hosted Builds:"
     echo
-    grep -E "$self_hosted_build_regex" "$tempfile" "$tempfile_header" >&2 || :
-fi
-num_hosted_builds="$(grep -Ec "$hosted_build_regex" "$tempfile" || :)"
-num_self_hosted_builds="$(grep -Ec "$self_hosted_build_regex" "$tempfile" || :)"
+    grep -Eh "$self_hosted_build_regex" "$tempfile" "$tempfile_header" || :
+fi >&2
+num_hosted_builds="$(grep -Ehc "$hosted_build_regex" "$tempfile" "$tempfile_summary" | tr '\n' '+' | sed 's/+$/\n/' | bc -l | sed 's/[[:space:]]//g')"
+num_self_hosted_builds="$(grep -Ehc "$self_hosted_build_regex" "$tempfile" "$tempfile_summary" | tr '\n' '+' | sed 's/+$/\n/' | bc -l | sed 's/[[:space:]]//g')"
 
 num_builds=$((num_hosted_builds + num_self_hosted_builds))
 
@@ -272,11 +293,6 @@ cat >> "$tempfile_header" <<EOF
 [![GitStar Ranking Profile](https://img.shields.io/badge/GitStar%20Ranking-$OWNER-blue?logo=github)](https://gitstar-ranking.com/$OWNER)
 EOF
 
-is_owner_harisekhon(){
-    shopt -s nocasematch
-    [[ "$OWNER" =~ ^HariSekhon$ ]]
-}
-
 if is_owner_harisekhon; then
     cat >> "$tempfile_header" <<-EOF
 [![StarCharts](https://img.shields.io/badge/Star-Charts-blue?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/STARCHARTS.md)
@@ -286,7 +302,7 @@ fi
 if is_owner_harisekhon; then
     # XXX: workaround to include Readme Generate, GitHub Pages and Netlify builds here because we cannot precalculate them from $tempfile_header as they are added after the CI Builds count is needed here
     # XXX: must update this if editing this header to add/remove any builds
-    ((num_builds += 3))
+    ((num_CI_systems += 1))  # for Netlify
     cat >> "$tempfile_header" <<EOF
 
 [![Azure DevOps Profile](https://img.shields.io/badge/Azure%20DevOps-HariSekhon-0078D7?logo=azure%20devops)](https://dev.azure.com/harisekhon/GitHub)
@@ -296,15 +312,8 @@ if is_owner_harisekhon; then
 [![GitHub Pages](https://img.shields.io/badge/GitHub-Pages-2088FF?logo=github)](https://harisekhon.github.io/CI-CD/)
 [![Netlify](https://img.shields.io/badge/Netlify-site-00C7B7?logo=netlify)](https://harisekhon.netlify.app/)
 
-[![CI Builds](https://img.shields.io/badge/CI%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
-[![Generate README](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/readme.yaml)
-[![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
-![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
-                                                                  # "$srcdir/urlencode.sh" |
-                                                                  # need to escape dashes to avoid shields.io interpreting them as field separators
-                                                                  sed 's/-/--/g')-yellowgreen?logo=github)
-[![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/CI-CD?logo=github)](https://github.com/HariSekhon/CI-CD/commits/master)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/853ef60c-c01b-4b83-99ba-8fda541f850f/deploy-status)](https://app.netlify.com/sites/harisekhon/deploys)
+[![CI/CD Builds](https://img.shields.io/badge/CI%2FCD%20Builds-$num_builds-blue?logo=circleci)](https://harisekhon.github.io/CI-CD/)
+$(cat "$tempfile_summary")
 EOF
 fi
 
@@ -325,9 +334,8 @@ printf "%s " "$num_repos"
 if [ "$original_sources" = 1 ]; then
     printf "original source "
 fi
-num_CI_systems=22
-printf 'git repos with %s CI builds (%s hosted, %s self-hosted) across %s different CI systems:\n\n' "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds" "$num_CI_systems"
+printf 'git repos with %s CI builds (%s hosted, %s self-hosted) across %s different CI/CD systems:\n\n' "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds" "$num_CI_systems"
 cat "$tempfile"
-printf '\n%s git repos summarized with %s CI builds (%s hosted, %s self-hosted) across %s different CI systems\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds" "$num_CI_systems"
+printf '\n%s git repos summarized with %s CI builds (%s hosted, %s self-hosted) across %s different CI/CD systems\n' "$actual_repos" "$num_builds" "$num_hosted_builds" "$num_self_hosted_builds" "$num_CI_systems"
 
 trap '' exit
