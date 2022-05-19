@@ -317,7 +317,7 @@ etc.
 #### AWS - Amazon Web Services
 
 - [AWS](https://aws.amazon.com/) scripts - `aws_*.sh`:
-  - `aws_cli_create_credential.sh` - creates an AWS serviceaccount programmatic-only user for CI/CD or CLI with Admin permissions (or other group or policy), creates an AWS Access Key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Useful trick to avoid CLI reauth to `aws sso login` every day.
+  - `aws_cli_create_credential.sh` - creates an AWS service account user for CI/CD or CLI with Admin permissions (or other group or policy), creates an AWS Access Key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Useful trick to avoid CLI reauth to `aws sso login` every day.
   - `aws_terraform_create_credential.sh` - creates a AWS terraform service account with Administrator permissions for Terraform Cloud or other CI/CD systems to run Terraform plan and apply, since no CI/CD systems can work with AWS SSO workflows. Stores the access key as both CSV and prints shell export commands and credentials file config as above
   - `.envrc-aws` - copy to `.envrc` for `direnv` to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
