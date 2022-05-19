@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates an AWS service account for AWS CLI to avoid having to re-login every day via SSO with 'aws sso login'
+Creates an AWS service account for CI/CD automation or AWS CLI to avoid having to re-login every day via SSO with 'aws sso login'
 
-Grants this service account Administator privileges in the current AWS account
+Grants this service account Administator privileges in the current AWS account unless an alternative group or policy is specified
 
 Creates an IAM access key (deleting an older unused key if necessary), writes a CSV just as the UI download would, and outputs both shell export commands and configuration in the format for copying to your AWS profile in ~/.aws/credentials
 
@@ -32,6 +32,7 @@ The following optional arguments can be given:
 
 - user name         (default: \$USER-cli)
 - keyfile           (default: ~/.aws/keys/\${user}_\${aws_account_id}_accessKeys.csv) - be careful if specifying this, a non-existent keyfile will create a new key, deleting the older of 2 existing keys if necessary to be able to create this
+- group/policy      (default: Admins group or falls through to AdministratorAccess policy - checks for this group name first, or else policy by this name)
 
 This can also be used as a backup credential - this way if something accidentally happens to your AWS SSO you can still get into your account
 
