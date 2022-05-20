@@ -108,6 +108,7 @@ if [ $# -gt 0 ]; then
     done
 else
     while read -r line; do
+        [ -n "$line" ] || continue
         add_secret "$line"
     done
 fi
