@@ -87,3 +87,18 @@ fi
 #export AWS_CONFIG_FILE=~/.aws/config
 #export AWS_SHARED_CREDENTIALS_FILE=~/.aws/credentials
 #export AWS_MAX_ATTEMPTS=3
+
+aws_access_key_env(){
+    env="$1"
+    for key in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY; do
+        varname="${env}_${key}"
+        if [ -n "${!varname:-}" ]; then
+            export "$key"="${!varname}"
+        fi
+    done
+}
+
+#aws_access_key_env "DEV"
+#aws_access_key_env "STAGING"
+#aws_access_key_env "PROD"
+#aws_access_key_env "MGMT"
