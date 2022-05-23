@@ -38,13 +38,17 @@ kube_config_isolate(){
     export KUBECONFIG="$kubeconfig"
 }
 
-# run 'kubectl config use-context' only if not already on the disired context, in order to minimize noise
+# run 'kubectl config use-context' only if not already on the desired context, in order to minimize noise
 kube_context(){
     local context="$1"
+    local namespace="${2:-}"
     local current_context
     current_context="$(kubectl config current-context)"
     if [ "$context" != "$current_context" ]; then
         kubectl config use-context "$context" >&2
+        if [ -n "$namespace" ]; then
+            kubectl config set-context "$context" --namespace "$namespace"
+        fi
     fi
 }
 
