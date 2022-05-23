@@ -42,6 +42,7 @@ for filename in "$@"; do
     if type -P datree &>/dev/null; then
         section "Datree Kubernetes Check"
         datree test "$filename"
+        echo
         section2 "Datree Kubernetes Check Passed"
     fi
 done
