@@ -1135,9 +1135,11 @@ parse_export_key_value(){
     env_var="${env_var##export}"
     env_var="${env_var##[[:space:]]}"
     env_var="${env_var%%[[:space:]]}"
-    if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
-        die "invalid environment key=value argument given: $env_var"
-    fi
+    # when using this in kubectl_kv_to_secret.sh we may want 'some-thing=ENV_VAR'
+    # to be able to name the Kubernetes secret key, eg. buildkite-agent-token="$BUILDKITE_AGENT_TOKEN"
+    #if ! [[ "$env_var" =~ ^[[:alpha:]][[:alnum:]_]+=.+$ ]]; then
+    #    die "invalid environment key=value argument given: $env_var"
+    #fi
     # shellcheck disable=SC2034
     key="${env_var%%=*}"
     # shellcheck disable=SC2034
