@@ -306,9 +306,10 @@ if has("autocmd")
 
     " if a "lint:" header is found then run lint.sh - this allows for more complex file types like Kubernetes yaml
     " which can then be linted for yaml as well as k8s schema
-    if filereadable(expand("%:p")) && match(readfile(expand("%:p")),"lint:")
-        au BufNew,BufRead *  nmap ;l :w<CR>:!clear; lint.sh "%" \| more -R<CR>
-    endif
+    " XXX: this is overriding all linting regardless of this expansion - instead use a different hotkey L for fast vs full linting
+    "if filereadable(expand("%:p")) && match(readfile(expand("%:p")),"lint:")
+    "    au BufNew,BufRead *  nmap ;l :w<CR>:!clear; lint.sh "%" \| more -R<CR>
+    "endif
 endif
 
 
@@ -361,7 +362,8 @@ nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
 nmap          ;/ :w<CR> :! bash -ic 'add "%"'<CR>
 nmap          ;g :w<CR> :! bash -ic 'cd "%:p:h" && st'<CR>
 nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%:t"'<CR>
-nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
+"nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
+nmap          ;L :w<CR> :! lint.sh %<CR>
 nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull'<CR>
 nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push'<CR>
 " write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
