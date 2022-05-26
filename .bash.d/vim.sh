@@ -58,6 +58,18 @@ grepvim(){
 alias grepv=grepvim
 alias vimgrep=grepvim
 
+filesvim(){
+    # want splitting
+    # shellcheck disable=SC2046
+    local files
+    files=($(find . -iname "$@" | sort -u))
+    if [ -n "${files[*]}" ]; then
+        vim "${files[@]}"
+    fi
+}
+alias fvim=filesvim
+alias vimf=fvim
+
 # vim which
 vw(){
     local path
