@@ -33,6 +33,7 @@ help_usage "$@"
 
 sed_script="
 s|https://www.linkedin.com/in/HariSekhon|https://www.linkedin.com/in/HariSekhon|gi;
+s|https://ghcr.io/harisekhon/|https://ghcr.io/HariSekhon/|gi;
 
 $(
     sed 's/#.*//; /^[[:space:]]*$/d; s/:/ /' "$srcdir/../setup/repos.txt" |
