@@ -28,7 +28,7 @@ Creates an S3 bucket with the following optimizations:
 - Enables Versioning
 - Enables MFA Delete protection (only if your CLI is MFA authenticated)
 - Enables Server Side Encryption
-- Optionally locks out any additional given user/group/role ARNs
+- Creates Bucket Policy to lock out any given user/group/role ARNs (optional)
 
 Idempotent: skips bucket creation if already exists, applies versioning, encryption, MFA delete, and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
 
