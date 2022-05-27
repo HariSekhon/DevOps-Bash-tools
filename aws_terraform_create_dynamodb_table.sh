@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a DynamoDB table for Terraform state locking
 
-Skips creation with a warning if the table already exists
+Exits with an error if the table already exists
 
 
 $usage_aws_cli_required
@@ -45,7 +45,7 @@ shift || :
 export AWS_DEFAULT_OUTPUT=json
 
 if aws dynamodb list-tables "$@" | jq -r '.TableNames[]' | grep -Fxq "$table"; then
-    die "WARNING: table '$table' already exists"
+    die "ERROR: table '$table' already exists"
 fi
 
 aws dynamodb create-table --table-name "$table" \
