@@ -30,7 +30,7 @@ Creates an S3 bucket for storing Terraform state with the following optimization
 - Locks out Power Users
 - Optionally locks out any additional given user/group/role arns
 
-Idempotent: skips bucket creation is already exists, applies versioning and encryption, applies bucket policy is none exists
+Idempotent: skips bucket creation is already exists, applies versioning and encryption, applies bucket policy is none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
 
 Region: will create the bucket in your configured region, to override locally set \$AWS_DEFAULT_REGION
 
@@ -49,6 +49,8 @@ min_args 1 "$@"
 bucket="$1"
 shift || :
 
+arns_to_block=("$@")
+
 export AWS_DEFAULT_OUTPUT=json
 
 if ! aws s3 ls "s3://$bucket" &>/dev/null; then
@@ -59,23 +61,38 @@ fi
 
 timestamp "Enabling S3 versioning"
 aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration 'Status=Enabled'
+timestamp "Versioning enabled"
+echo >&2
+
+timestamp "Enabling S3 MFA Delete (only works if you are MFA authenticated)"
+if aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration 'MFADelete=Enabled,Status=Enabled'; then
+    timestamp "MFA Delete enabled"
+else
+    timestamp "WARNING: MFA Delete setting failed, must enable manually if not calling this script from an MFA enabled session"
+fi
 echo >&2
 
 timestamp "Enabling S3 server-side encryption"
 aws s3api put-bucket-encryption --bucket "$bucket" --server-side-encryption-configuration '{"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}'
+timestamp "Encryption enabled"
 echo >&2
 
 timestamp "Enabling S3 Block Public Access"
 aws s3api put-public-access-block --bucket "$bucket" --public-access-block-configuration 'BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true'
+timestamp "Blocked public access"
 echo >&2
 
 timestamp "Checking for Power User role"
 power_user_arn="$(aws iam list-roles | jq -r '.Roles[].Arn' | grep -i AWSPowerUserAccess || :)"
-
 if [ -n "$power_user_arn" ]; then
     timestamp "Power User role ARN found:  $power_user_arn"
-    timestamp "Checking for existing S3 bucket policy"
-    if [ -n "$(aws s3api get-bucket-policy --bucket "$bucket" --query Policy --output text 2>/dev/null)" ]; then
+fi
+echo >&2
+
+if [ -n "$power_user_arn" ] || [ -n "${arns_to_block[*]}" ]; then
+    if [ -z "${OVERWRITE_BUCKET_POLICY:-}" ] && \
+       timestamp "Checking for existing S3 bucket policy" && \
+       [ -n "$(aws s3api get-bucket-policy --bucket "$bucket" --query Policy --output text 2>/dev/null)" ]; then
         timestamp "WARNING: bucket policy already exists, not overwriting for safety, must edit manually"
     else
         timestamp "Creating bucket policy to lock out Power Users"
@@ -85,7 +102,7 @@ if [ -n "$power_user_arn" ]; then
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DisallowPowerUsers",
+      "Sid": "DisallowedUserGroupRoleArns",
       "Action": "s3:*",
       "Effect": "Deny",
       "Resource": [
@@ -94,7 +111,13 @@ if [ -n "$power_user_arn" ]; then
       ],
       "Principal": {
         "AWS": [
-          "$power_user_arn"
+$(
+    for arn in "${arns_to_block[@]}"; do
+        # pad by 10 spaces using an empty first arg
+        printf '%10s"%s",\n' "" "$arn"
+    done |
+    sed '$ s/,$//'
+)
         ]
       }
     }
