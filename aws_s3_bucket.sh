@@ -26,11 +26,11 @@ usage_description="
 Creates an S3 bucket with the following optimizations:
 
 - Enables Versioning
-- Enables MFA Delete protection (only if you CLI is MFA authenticated)
+- Enables MFA Delete protection (only if your CLI is MFA authenticated)
 - Enables Server Side Encryption
 - Optionally locks out any additional given user/group/role ARNs
 
-Idempotent: skips bucket creation is already exists, applies versioning and encryption, applies bucket policy is none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
+Idempotent: skips bucket creation if already exists, applies versioning, encryption, MFA delete, and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
 
 Region: will create the bucket in your configured region, to override locally set \$AWS_DEFAULT_REGION
 
@@ -53,11 +53,13 @@ arns_to_block=("$@")
 
 export AWS_DEFAULT_OUTPUT=json
 
-if ! aws s3 ls "s3://$bucket" &>/dev/null; then
-	timestamp "Creating S3 bucket"
+if aws s3 ls "s3://$bucket" &>/dev/null; then
+    timestamp "Bucket '$bucket' already exists"
+else
+	timestamp "Creating S3 bucket:  $bucket"
 	aws s3 mb "s3://$bucket" || :
-	echo >&2
 fi
+echo >&2
 
 timestamp "Enabling S3 versioning"
 aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration 'Status=Enabled'
