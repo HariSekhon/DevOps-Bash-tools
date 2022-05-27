@@ -26,11 +26,10 @@ usage_description="
 Creates an S3 bucket with the following optimizations:
 
 - Enables Versioning
-- Enables MFA Delete protection (only if your CLI is MFA authenticated)
 - Enables Server Side Encryption
 - Creates Bucket Policy to lock out any given user/group/role ARNs (optional)
 
-Idempotent: skips bucket creation if already exists, applies versioning, encryption, MFA delete, and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
+Idempotent: skips bucket creation if already exists, applies versioning, encryption, and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
 
 Region: will create the bucket in your configured region, to override locally set \$AWS_DEFAULT_REGION
 
@@ -66,13 +65,13 @@ aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration 'S
 timestamp "Versioning enabled"
 echo >&2
 
-timestamp "Enabling S3 MFA Delete (only works if you are MFA authenticated)"
-if aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration 'MFADelete=Enabled,Status=Enabled'; then
-    timestamp "MFA Delete enabled"
-else
-    timestamp "WARNING: MFA Delete setting failed, must enable manually if not calling this script from an MFA enabled session"
-fi
-echo >&2
+#timestamp "Enabling S3 MFA Delete (only works if you are MFA authenticated)"
+#if aws s3api put-bucket-versioning --bucket "$bucket" --versioning-configuration 'MFADelete=Enabled,Status=Enabled'; then
+#    timestamp "MFA Delete enabled"
+#else
+#    timestamp "WARNING: MFA Delete setting failed, must enable manually if not calling this script from an MFA enabled session"
+#fi
+#echo >&2
 
 timestamp "Enabling S3 server-side encryption"
 aws s3api put-bucket-encryption --bucket "$bucket" --server-side-encryption-configuration '{"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}'
