@@ -27,10 +27,14 @@ Creates an S3 bucket for storing Terraform state with the following optimization
 
 - Enables Versioning
 - Enables Encryption
-- Locks out Power Users
-- Optionally locks out any additional given user/group/role arns
+- Enables Versioning
+- Enables MFA Delete protection (only if your CLI is MFA authenticated)
+- Enables Server Side Encryption
+- Creates Bucket Policy to lock out:
+  - Power Users role
+  - any additional given user/group/role ARNs (optional)
 
-Idempotent: skips bucket creation is already exists, applies versioning and encryption, applies bucket policy is none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
+Idempotent: skips bucket creation if already exists, applies versioning, encryption, MFA delete, and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
 
 Region: will create the bucket in your configured region, to override locally set \$AWS_DEFAULT_REGION
 
