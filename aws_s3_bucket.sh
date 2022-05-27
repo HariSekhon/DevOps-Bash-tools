@@ -84,7 +84,7 @@ aws s3api put-public-access-block --bucket "$bucket" --public-access-block-confi
 timestamp "Blocked public access"
 echo >&2
 
-if [ -n "${arns_to_block[*]}" ]; then
+if [ -n "${arns_to_block[*]:-}" ]; then
     if [ -z "${OVERWRITE_BUCKET_POLICY:-}" ] && \
        timestamp "Checking for existing S3 bucket policy" && \
        [ -n "$(aws s3api get-bucket-policy --bucket "$bucket" --query Policy --output text 2>/dev/null)" ]; then
