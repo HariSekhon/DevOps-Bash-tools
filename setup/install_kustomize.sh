@@ -13,41 +13,52 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-set -euo pipefail
-[ -n "${DEBUG:-}" ] && set -x
-
-cd /tmp
-
 # https://kubernetes-sigs.github.io/kustomize/installation/binaries/
 
-date "+%F %T  downloading kustomize"
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Kustomize
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
+#version="${1:-4.4.1}"
+version="${1:-latest}"
+
+owner_repo="kubernetes-sigs/kustomize"
+
+if [ "$version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release_filter.sh" "$owner_repo" "kustomize")"
+    version="${version##*/}"
+    timestamp "latest version is '$version'"
+else
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
+    [[ "$version" =~ ^v ]] || version="v$version"
+fi
+
 # now installs to /private and fails as user :-/
 #curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
 # Kustomize 3.5.x gets an error like this when using kustomization.yaml with a double slash in the URL:
 #
 #     Error: accumulating resources: accumulateFile "accumulating resources from 'github.com/argoproj/argo-cd//manifests/cluster-install?ref=v2.0.3': evalsymlink failure on '/tmp/git@repo/argocd/overlay/github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.0.3' : lstat /tmp/git@repo/argocd/overlay/github.com: no such file or directory", accumulateDirector: "recursed accumulation of path '/tmp/kustomize-881686007/repo': accumulating resources: accumulateFile \"accumulating resources from '../namespace-install': evalsymlink failure on '/tmp/kustomize-881686007/namespace-install' : lstat /tmp/kustomize-881686007/namespace-install: no such file or directory\", loader.New \"Error loading ../namespace-install with git: url lacks host: ../namespace-install, dir: evalsymlink failure on '/tmp/kustomize-881686007/namespace-install' : lstat /tmp/kustomize-881686007/namespace-install: no such file or directory, get: invalid source string: ../namespace-install\""
-#
-VERSION="${1:-4.4.1}"
 
-os="$(uname -s | tr '[:upper:]' '[:lower:]')"
-
-url="https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv$VERSION/kustomize_v${VERSION}_${os}_amd64.tar.gz"
-
-cd /tmp
-
-wget "$url" -O kustomize.tar.gz
-
-date "+%F %T  unpacking kustomize"
-tar zxvf kustomize.tar.gz
-
-mkdir -pv ~/bin
-unalias mv &>/dev/null || :
-mv -vf kustomize ~/bin/
-
-rm -f kustomize.tar.gz
-
-echo
+"$srcdir/../install_binary.sh" "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F$version/kustomize_${version}_{os}_amd64.tar.gz" kustomize
 
 # called as part of download script - call manually now
+echo
 ~/bin/kustomize version -
