@@ -43,10 +43,9 @@ min_args 1 "$@"
 
 owner_repo="$1"
 
-# TODO: find authoritative source on what is allowed in these names before enabling this
-#if ! [[ "$owner_repo" =~ ^[[:alnum:]-]+[[:alnum:]-]+$ ]]; then
-#    die "Invalid owner/repo argument given: $owner_repo"
-#fi
+if ! is_github_owner_repo "$owner_repo"; then
+    die "Invalid owner/repo argument given: $owner_repo"
+fi
 
 if [ -n "${GITHUB_TOKEN:-}" ]; then
     "$srcdir/github_api.sh" "/repos/$owner_repo/releases/latest"
