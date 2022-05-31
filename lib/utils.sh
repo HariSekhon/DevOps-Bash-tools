@@ -1091,6 +1091,12 @@ no_more_opts(){
     any_opt_usage "$@"
 }
 
+no_more_args(){
+    if [ -n "${1:-}" ]; then
+        usage "too many args given:  $*"
+    fi
+}
+
 check_env_defined(){
     local env="$1"
     if [ -z "${!env:-}" ]; then
