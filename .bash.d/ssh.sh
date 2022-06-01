@@ -227,6 +227,7 @@ cleankey(){
 
 keyremove(){
     for x in "$@"; do
+        # shellcheck disable=SC1117
         ssh -o "PasswordAuthentication no" "$x" '
             for y in ~/.ssh/authorized_keys*; do
                 if [ -f "$y" ]; then
