@@ -79,7 +79,7 @@ aws s3api put-bucket-encryption --bucket "$bucket" --server-side-encryption-conf
 timestamp "Encryption enabled"
 echo >&2
 
-"$srcdir/aws_s3_block_public_access.sh" "$bucket"
+"$srcdir/aws_s3_buckets_block_public_access.sh" "$bucket"
 
 if [ -n "${arns_to_block[*]:-}" ]; then
     if [ -z "${OVERWRITE_BUCKET_POLICY:-}" ] && \
