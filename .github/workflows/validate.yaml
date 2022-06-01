@@ -33,8 +33,8 @@ on:
         type: boolean
         required: false
         default: false
-  schedule:
-    - cron: '0 0 * * 1'
+  #schedule:
+  #  - cron: '0 0 * * 1'
 
 permissions:
   contents: read
@@ -51,4 +51,4 @@ jobs:
     name: Validate
     uses: HariSekhon/GitHub-Actions/.github/workflows/validate.yaml@master
     with:
-      debug: ${{ inputs.debug }}
+      debug: ${{ github.event.inputs.debug }}
