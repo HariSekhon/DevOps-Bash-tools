@@ -32,6 +32,13 @@ fi
 
 section "Shell Syntax Checks"
 
+start_time="$(start_timer)"
+
+if ! type -P shellcheck &>/dev/null; then
+    echo "WARNING: shellcheck not installed, will only do basic checks"
+    echo
+fi
+
 bash --version
 echo
 
@@ -67,13 +74,6 @@ recurse_dir(){
         check_shell_syntax "$x"
     done
 }
-
-start_time="$(start_timer)"
-
-if ! type -P shellcheck &>/dev/null; then
-    echo "WARNING: shellcheck not installed, will only do basic checks"
-    echo
-fi
 
 if [ $# -gt 0 ]; then
     for x in "$@"; do
