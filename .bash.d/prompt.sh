@@ -26,6 +26,7 @@
 # replace \033 with \e as it's directly supported in PS1
 
 # need 'Defaults env_keep=STY' for this to not trigger on sudo su
+# shellcheck disable=SC1117
 SCREEN_ESCAPE="\[\ek\e\\\\\]"
 
 PS1=""
@@ -51,6 +52,7 @@ fi
 #   \h      host
 # shellcheck disable=SC2154
 # export PS1+="\[$PS1_COLOUR\]\t \[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
+# shellcheck disable=SC1117
 export PS1+="\[$PS1_COLOUR\]\t \[$PS1_USER_COLOUR\]\u\[$txtwht\]@\[$bldgrn\]\h:\[$bldpur\]\$(git branch 2>/dev/null | awk '/^\\*/{print \$2\" \"}')\[$bldblu\]\w \[$PS1_COLOUR\]> \[$txtrst\]"
 
 #if type kube_ps1 &>/dev/null; then
