@@ -1018,7 +1018,7 @@ etc.
   - YAML
 
 - `json2yaml.sh` - converts JSON to YAML
-- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git--github--gitlab--bitbucket) section above)
+- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) section above)
 
 ### See Also
 
