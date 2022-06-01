@@ -23,6 +23,7 @@ echo "==========================================================================
 SBT_VERSION=${1:-${SBT_VERSION:-1.6.1}}
 
 am_root(){
+    # shellcheck disable=SC2039
     [ "${EUID:-${UID:-$(id -n)}}" = 0 ]
 }
 if am_root; then
