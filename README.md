@@ -673,7 +673,8 @@ etc.
   - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
-  - `github_repo_latest_release.sh` - returns the latest release name for a given GitHub repo via the GitHub API
+  - `github_repo_latest_release.sh` - returns the latest release tag for a given GitHub repo via the GitHub API
+  - `github_repo_latest_release_filter.sh` - returns the latest release tag matching a given regex filter for a given GitHub repo via the GitHub API. Useful for getting the latest version of things like Kustomize which has other releases for kyaml
   - `github_repo_stars.sh` - fetches the stars, forks and watcher counts for a given repo
   - `github_repo_teams.sh` - fetches the GitHub Enterprise teams and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_collaborators.sh` - fetches a repo's granted users and outside invited collaborators as well as their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
