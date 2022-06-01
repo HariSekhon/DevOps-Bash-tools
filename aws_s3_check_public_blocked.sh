@@ -56,7 +56,11 @@ export AWS_DEFAULT_OUTPUT=json
 num_buckets=0
 num_non_compliant_buckets=0
 
-parallelism=20
+parallelism="$(cpu_count)"
+if [ "$parallelism" -gt 20 ]; then
+    # cap the parallelism to not spam AWS API and risk getting blocked
+    parallelism=10
+fi
 
 if [ -n "${NOPARALLEL:-}" ]; then
     parallelism=1
