@@ -50,3 +50,5 @@ jobs:
     if: github.repository_owner == 'HariSekhon'
     name: Validate
     uses: HariSekhon/GitHub-Actions/.github/workflows/validate.yaml@master
+    with:
+      debug: ${{ inputs.debug }}
