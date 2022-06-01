@@ -35,8 +35,6 @@ on:
         type: boolean
         required: false
         default: false
-  schedule:
-    - cron: '0 0 * * 1'
 
 permissions:
   contents: read
@@ -53,4 +51,4 @@ jobs:
     name: ShellCheck
     uses: HariSekhon/GitHub-Actions/.github/workflows/shellcheck.yaml@master
     with:
-      debug: ${{ inputs.debug }}
+      debug: ${{ github.event.inputs.debug }}
