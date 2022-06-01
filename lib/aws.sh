@@ -24,6 +24,10 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_aws_cli_required="AWS CLI is required to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
+aws_account_id(){
+    aws sts get-caller-identity --query Account --output text
+}
+
 aws_user_exists(){
     local user="$1"
     aws iam list-users | jq -e -r ".Users[] | select(.UserName == \"$user\")" >/dev/null
