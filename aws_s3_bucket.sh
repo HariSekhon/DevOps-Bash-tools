@@ -25,11 +25,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates an S3 bucket with the following optimizations:
 
+- Blocks Public Access
 - Enables Versioning
 - Enables Server Side Encryption
 - Creates Bucket Policy to lock out any given user/group/role ARNs (optional)
 
-Idempotent: skips bucket creation if already exists, applies versioning, encryption, and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
+Idempotent: skips bucket creation if already exists, applies versioning, encryption, blocks public access and applies bucket policy if none exists of if \$OVERWRITE_BUCKET_POLICY is set to any value
 
 Region: will create the bucket in your configured region, to override locally set \$AWS_DEFAULT_REGION
 
@@ -78,10 +79,7 @@ aws s3api put-bucket-encryption --bucket "$bucket" --server-side-encryption-conf
 timestamp "Encryption enabled"
 echo >&2
 
-timestamp "Enabling S3 Block Public Access"
-aws s3api put-public-access-block --bucket "$bucket" --public-access-block-configuration 'BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true'
-timestamp "Blocked public access"
-echo >&2
+"$srcdir/aws_s3_block_public_access.sh" "$bucket"
 
 if [ -n "${arns_to_block[*]:-}" ]; then
     if [ -z "${OVERWRITE_BUCKET_POLICY:-}" ] && \
