@@ -71,10 +71,10 @@ fi
                 #s/\(ERROR:\)/$RED\1$NOCOLOR/g;
                 #s/^\(\.psqlrc loaded\)/$GREEN\1$NOCOLOR/;
 export PAGER="$sed '
-                s/^\(([0-9]\+ rows*)\)/$GREEN\1$NOCOLOR/;
-                s/^\(-\[\ RECORD\ [0-9]\+\ \][-+]\+\)/$GREEN\1$NOCOLOR/;
+                s/^\\(([0-9]\\+ rows*)\\)/$GREEN\\1$NOCOLOR/;
+                s/^\\(-\\[\\ RECORD\\ [0-9]\\+\\ \\][-+]\\+\\)/$GREEN\\1$NOCOLOR/;
                 s/|/$GREEN|$NOCOLOR/g;
-                s/^\([-+]\+\)/$GREEN\1$NOCOLOR/
+                s/^\\([-+]\\+\\)/$GREEN\\1$NOCOLOR/
                 ' 2>&1 |
               $pager"
 
