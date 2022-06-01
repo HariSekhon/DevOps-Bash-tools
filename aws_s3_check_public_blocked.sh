@@ -74,7 +74,7 @@ max_bucket_name_len="$(aws s3api list-buckets | jq -rM '.Buckets[].Name | length
 # XXX: has to be exported for subshell parallel function below to access it
 export format_string='%-25s\t%-15s\t'"%-${max_bucket_name_len}s"'\t%-16s\t%-17s\t%-18s\t%s\n'
 
-if [ -z "${QUIET:-}" ]; then
+if [ -z "${QUIET:-}" ] || is_piped; then
     # false positive, the format string is carefully constructed
     # shellcheck disable=SC2059
     printf "$format_string" 'Creation Timestamp' Region Bucket BlockPublicAcls IgnorePublicAcls BlockPublicPolicy RestrictPublicBuckets >&2
@@ -137,16 +137,18 @@ done < <(parallel -j "$parallelism" <<< "$commands")
 if [ -z "${QUIET:-}" ]; then
     end_time="$(date +%s)"
     time_taken="$((end_time - start_time))"
-    echo
-    echo "Time taken: $time_taken secs"
-    echo
-    if [ $num_buckets -eq 0 ]; then
-        echo "WARNING: no buckets found"
-        exit 1
-    elif [ $num_non_compliant_buckets -eq 0 ]; then
-        echo "OK: All $num_buckets buckets found to be compliant blocking public access"
-    else
-        echo "WARNING: $num_non_compliant_buckets/$num_buckets buckets found without public access blocked!"
-        exit 2
+    echo >&2
+    echo "Time taken: $time_taken secs" >&2
+    echo >&2
+fi
+if [ $num_buckets -eq 0 ]; then
+    echo "WARNING: no buckets found" >&2
+    exit 1
+elif [ $num_non_compliant_buckets -eq 0 ]; then
+    if [ -z "${QUIET:-}" ]; then
+        echo "OK: All $num_buckets buckets found to be compliant blocking public access" >&2
     fi
+else
+    echo "WARNING: $num_non_compliant_buckets/$num_buckets buckets found without public access blocked!" >&2
+    exit 2
 fi
