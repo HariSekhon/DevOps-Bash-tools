@@ -55,6 +55,7 @@ aws_create_access_key_if_not_exists(){
         timestamp "Creating access key, removing an old one if necessary"
         exports="$("$libdir/../aws_iam_replace_access_key.sh" --user-name "$user")"
         aws_access_keys_to_csv <<< "$exports" >> "$access_keys_csv"
+        timestamp "Created access key and saved to CSV:  $access_keys_csv"
         echo "$exports"
     fi
 }
