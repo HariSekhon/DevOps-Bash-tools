@@ -665,6 +665,7 @@ etc.
   - `github_actions_workflows_enable_all.sh` - enables all GitHub Actions workflows in a given repo. Useful to undo GitHub disabling all workflows in a repo after 6 months without a commit
   - `github_actions_workflows_trigger_all.sh` - triggers all workflows for the given repo
   - `github_actions_workflows_cancel_all_runs.sh` - cancels all workflow runs for the given repo
+  - `github_actions_workflows_cancel_waiting_runs.sh` - cancels workflow runs that are in waiting state, eg. waiting for old deployment approvals
   - `github_ssh_get_user_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `github_ssh_get_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
   - `github_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
