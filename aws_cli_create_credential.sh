@@ -65,6 +65,8 @@ aws_create_user_if_not_exists "$user"
 
 exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 
+# causes a failure in the if policy test condition, probably due to early exit on one of the pipe commands
+set +o pipefail
 if aws iam list-groups | jq -r '.Groups[].GroupName' | grep -Fixq "$group"; then
     timestamp "Adding user '$user' to group '$group' on account '$aws_account_id'"
     aws iam add-user-to-group --user-name "$user" --group-name "$group"
@@ -75,6 +77,7 @@ elif aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fixq "$polic
 else
     die "Neither group '$group' nor policy '$policy' was found to assign to user '$user' in account '$aws_account_id'"
 fi
+set -o pipefail
 
 echo
 echo "Set the following export commands in your environment to begin using this access key in your CLI immediately:"
