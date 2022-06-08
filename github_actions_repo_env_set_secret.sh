@@ -50,7 +50,7 @@ Requires the GitHub CLI 'gh' to be installed and available in the \$PATH
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<owner_repo_or_id> <environment_name> [<key>=<value> <key2>=<value2> ...]"
+usage_args="[<owner_repo_or_id>] <environment_name> [<key>=<value> <key2>=<value2> ...]"
 
 help_usage "$@"
 
