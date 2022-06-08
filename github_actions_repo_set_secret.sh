@@ -27,7 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Adds / updates GitHub repo-level secrets from key=value args or stdin, for use in GitHub Actions
 
-If no second argument is given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
+If 'owner/repo' isn't specified as the first argument, attempts to infer from the local git repo
+If no subsequent key=value pair arguments are given, reads environment variables from standard input, one per line in 'key=value' format or 'export key=value' shell format
 
 Examples:
 
