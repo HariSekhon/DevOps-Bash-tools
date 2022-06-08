@@ -136,6 +136,7 @@ alias prune="removed_branches | xargs -r git branch -d"
 alias GRH="git reset HEAD^"
 
 alias master="switchbranch master"
+alias main="switchbranch main"
 alias prod="switchbranch prod"
 alias production="switchbranch production"
 alias staging="switchbranch staging"
