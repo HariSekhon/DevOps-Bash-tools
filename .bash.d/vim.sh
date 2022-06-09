@@ -59,9 +59,10 @@ alias grepv=grepvim
 alias vimgrep=grepvim
 
 filesvim(){
-    local files
-    #files=($(find . -iname "$@" | sort -u))
-    read -r -a files < <(find . -iname "$@" | sort -u)
+    local files=()
+    # mapfile not available on Mac and read -a only takes first result
+    # shellcheck disable=SC2207
+    IFS=$'\n' files=($(find . -iname "$@" | sort -u))
     if [ -n "${files[*]}" ]; then
         vim "${files[@]}"
     fi
