@@ -45,7 +45,7 @@ workflow_dir="$git_root/.github/workflows"
 
 # false positive
 # shellcheck disable=SC2016
-if git grep '^[[:space:]]\+run:.*${{' "$workflow_dir"; then
+if git grep '^[[:space:]]\+run:.*${{' "$workflow_dir/"*.yaml "$workflow_dir/"*.yml; then
     echo
     die "WARNING: possible script injection vectors detected under '$workflow_dir'"
 else
