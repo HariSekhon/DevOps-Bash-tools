@@ -88,6 +88,7 @@ fi
 #export AWS_SHARED_CREDENTIALS_FILE=~/.aws/credentials
 #export AWS_MAX_ATTEMPTS=3
 
+# to quickly export prefixed AWS environment keys if they exist for simple overrides, see examples below
 aws_access_key_env(){
     env="$1"
     for key in AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY; do
