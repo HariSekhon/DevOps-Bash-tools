@@ -67,6 +67,8 @@ fi
 
 "$srcdir/check_github_actions_workflows_without_checkout.sh" || :
 
+"$srcdir/check_github_actions_workflow_injection.sh"
+
 if [ -z "${NO_JSON_CHECK:-}" ]; then
     "$srcdir/check_json.sh"
 fi
