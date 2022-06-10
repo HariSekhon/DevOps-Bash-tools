@@ -98,6 +98,7 @@ if [ -z "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
     fi
 fi
 
+# alternatively see gke_kube_context() function in .envrc-kubernetes
 if [ -n "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
     # kubectl context is easily created by running adjacent aws_kube_creds.sh script first
 
