@@ -220,7 +220,7 @@ make
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker ...
   - Terraform Cloud
   - Checkov / Bridgecrew Cloud
-- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom, DataDog
+- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom, NGrok, DataDog
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
 - [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
@@ -858,6 +858,7 @@ etc.
   - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
+- `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
   - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
