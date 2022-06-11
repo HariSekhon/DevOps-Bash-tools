@@ -42,7 +42,25 @@ API Reference:
 
 Examples:
 
+List API Keys:
+
     ${0##*/} /api_keys | jq .
+
+List Agents:
+
+    ${0##*/} /agent_ingresses | jq .
+
+List Tunnels:
+
+    ${0##*/} /tunnel_sessions | jq .
+
+List FailOver Backends:
+
+    ${0##*/} /backends/failover | jq .
+
+List HTTP Response Backends:
+
+    ${0##*/} /backends/http_response | jq .
 "
 
 # used by usage() in lib/utils.sh
