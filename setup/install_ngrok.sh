@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Installs NGrok CLI
 
-If \$NGROK_TOKEN is set, configures authentication too
+If \$NGROK_AUTHTOKEN or \$NGROK_TOKEN is set, configures authentication using that token, in that order of precedence
 
 https://dashboard.ngrok.com/get-started/your-authtoken
 "
