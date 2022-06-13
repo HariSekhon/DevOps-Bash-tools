@@ -29,6 +29,7 @@ grep  # gnu version better than Mac version
 jsonlint
 jq
 jwhois
+libxml2  # needed for xmllint
 openssl
 parallel
 python  # Mac usually comes with Python, but pip was missing in Semaphore CI
