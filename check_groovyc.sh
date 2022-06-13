@@ -59,10 +59,16 @@ check_groovyc(){
     # this requires far too many function exports for all called CI functions
     #isExcluded "$filename" && return 0
     echo "groovyc $filename $*" >&2
+    classfile_base="${filename##*/}"
+    classfile_base="${classfile_base%.groovy}"
+    # doens't stop class files being left behind in script $PWD, not directory containing "$filename"
+    #if ! groovyc --temp /tmp "$filename" "$@" >&2; then
     if ! groovyc "$filename" "$@" >&2; then
+        rm -f "$classfile_base"*.class
         echo 1
         exit 1
     fi
+    rm -f "$classfile_base"*.class
 }
 
 echo "building file list" >&2
@@ -75,6 +81,8 @@ tests="$(
 cpu_count="$(cpu_count)"
 multiplier=1  # doesn't get faster increasing this in tests, perhaps even slightly slower due to context switching
 parallelism="$((cpu_count * multiplier))"
+# 4 cores is counted as 8 due to hyperthreading, but this isn't any faster
+#parallelism="$((cpu_count / 2))"
 
 echo "found $cpu_count cores, running $parallelism parallel jobs"
 echo
