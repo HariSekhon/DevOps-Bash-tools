@@ -78,12 +78,15 @@ crt
 key
 http
 css
+go.sum
 svg
 tsx
 LICENSE
 )
 
 # XXX: tune this if needed, currently the trade off is will find things like ARGOCD_<blah> but won't find something without an underscore like DEBUG=1
+# looser, finds more, but also a lot more noise
+#environment_variable_bre_regex='[[:upper:]_]\{4,\}[^[:alnum:]_]'
 environment_variable_bre_regex='[[:upper:]]\{2,\}_[[:upper:]_]\{3,\}'
 
 dockerfile_keywords="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/lib/dockerfile_keywords.txt")"
