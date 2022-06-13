@@ -73,6 +73,15 @@ if [ -z "${NO_JSON_CHECK:-}" ]; then
     "$srcdir/check_json.sh"
 fi
 
+if [ -z "${NO_XML_CHECK:-}" ]; then
+    "$srcdir/check_xml.sh"
+    if [ -n "${VALIDATE_XML_BASIC:-}" ]; then
+        if type -P validate_xml.py &>/dev/null; then
+            validate_xml.py .
+        fi
+    fi
+fi
+
 if [ -z "${NO_YAML_CHECK:-}" ]; then
     "$srcdir/check_yaml.sh"
     if [ -n "${VALIDATE_YAML_BASIC:-}" ]; then
