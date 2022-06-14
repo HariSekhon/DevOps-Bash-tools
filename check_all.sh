@@ -187,11 +187,21 @@ fi
 if [ -z "${NO_CIRCLECI_CHECK:-}" ]; then
     "$srcdir/check_circleci_config.sh"
 fi
-"$srcdir/check_concourse_config.sh"
-"$srcdir/check_codefresh_config.sh"
-"$srcdir/check_drone_yml.sh"
-"$srcdir/check_gitlab_ci_yml.sh"
-"$srcdir/check_travis_yml.sh" || :  # broken library dependency highline on Fedora
+if [ -z "${NO_CONCOURSE_CHECK:-}" ]; then
+    "$srcdir/check_concourse_config.sh"
+fi
+if [ -z "${NO_CODEFRESH_CHECK:-}" ]; then
+    "$srcdir/check_codefresh_config.sh"
+fi
+if [ -z "${NO_DRONE_CHECK:-}" ]; then
+    "$srcdir/check_drone_yml.sh"
+fi
+if [ -z "${NO_GITLAB_CHECK:-}" ]; then
+    "$srcdir/check_gitlab_ci_yml.sh"
+fi
+if [ -z "${NO_TRAVISCI_CHECK:-}" ]; then
+    "$srcdir/check_travis_yml.sh" || :  # broken library dependency highline on Fedora
+fi
 if ! is_CI &&
    [ -n "${SHIPPABLE_TOKEN:-}" ]; then
     "$srcdir/check_shippable_readme_ids.sh"
