@@ -99,7 +99,7 @@ check_yaml(){
 echo "building file list" >&2
 tests="$(
     for filename in $filelist; do
-        #isExcluded "$filename" && continue
+        isExcluded "$filename" && continue
         echo "check_yaml $filename"
     done
 )"
