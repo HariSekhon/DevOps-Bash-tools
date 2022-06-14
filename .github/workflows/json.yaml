@@ -21,12 +21,14 @@ on:
       - main
     paths:
       - '**/*.json'
+      - .github/workflows/json.yaml
   pull_request:
     branches:
       - master
       - main
     paths:
       - '**/*.json'
+      - .github/workflows/json.yaml
   workflow_dispatch:
     inputs:
       debug:
