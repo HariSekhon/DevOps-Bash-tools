@@ -184,7 +184,9 @@ fi
 
 "$srcdir/check_readme_badges.sh"
 
-"$srcdir/check_circleci_config.sh"
+if [ -z "${NO_CIRCLECI_CHECK:-}" ]; then
+    "$srcdir/check_circleci_config.sh"
+fi
 "$srcdir/check_concourse_config.sh"
 "$srcdir/check_codefresh_config.sh"
 "$srcdir/check_drone_yml.sh"
