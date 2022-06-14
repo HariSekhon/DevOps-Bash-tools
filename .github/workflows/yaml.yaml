@@ -22,6 +22,7 @@ on:
     paths:
       - '**/*.yml'
       - '**/*.yaml'
+      - .github/workflows/yaml.yaml
   pull_request:
     branches:
       - master
@@ -29,6 +30,7 @@ on:
     paths:
       - '**/*.yml'
       - '**/*.yaml'
+      - .github/workflows/yaml.yaml
   workflow_dispatch:
     inputs:
       debug:
