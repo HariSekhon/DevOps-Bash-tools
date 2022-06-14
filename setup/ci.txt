@@ -25,6 +25,7 @@ Jenkinsfile
 .gitlab-ci.yml
 .gocd.yml
 .pylintrc
+#.scrutinizer.yml
 .semaphore/semaphore.yml
 .teamcity.vcs.json
 .teamcity.auth.vcs.json
