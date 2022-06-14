@@ -20,6 +20,42 @@ on:
       - master
     paths-ignore:
       - '**/*.md'
+      - '.github/workflows/*'
+      - '!.github/workflows/alpine.yaml'
+      - '**/Dockerfile'
+      - '**/Jenkinsfile'
+      - '**/.envrc*'
+      - .checkov.yaml
+      - .dockerignore
+      - .gcloudignore
+      - .editorconfig
+      - '.gitconfig*'
+      - .gitignore
+      - .grype.yaml
+      - .hound.yml
+      - .terraformignore
+      - Jenkinsfile
+      - .appveyor.yml
+      - .buildkite/pipeline.yml
+      - .circleci/config.yml
+      - .cirrus.yml
+      - .concourse.yml
+      - .drone.yml
+      - .gitlab-ci.yml
+      - .gocd.yml
+      - .scrutinizer.yml
+      - .semaphore/semaphore.yml
+      - .travis.yml
+      - .werckerignore
+      - azure-pipelines.yml
+      - bitbucket-pipelines.yml
+      - buddy.yml
+      - buildspec.yml
+      - cloudbuild.yaml
+      - codefresh.yml
+      - codeship.yml
+      - shippable.yml
+      - wercker.yml
   workflow_dispatch:
     inputs:
       debug:
