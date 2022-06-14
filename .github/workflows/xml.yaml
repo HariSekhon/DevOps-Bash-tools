@@ -21,12 +21,14 @@ on:
       - main
     paths:
       - '**/*.xml'
+      - .github/workflows/xml.yaml
   pull_request:
     branches:
       - master
       - main
     paths:
       - '**/*.xml'
+      - .github/workflows/xml.yaml
   workflow_dispatch:
     inputs:
       debug:
