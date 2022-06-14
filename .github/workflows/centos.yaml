@@ -20,6 +20,8 @@ on:
       - master
     paths-ignore:
       - '**/*.md'
+      - '.github/workflows/*'
+      - '!.github/workflows/centos.yaml'
       - '**/Dockerfile'
       - '**/Jenkinsfile'
       - '**/.envrc*'
