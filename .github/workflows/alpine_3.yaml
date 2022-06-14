@@ -20,6 +20,8 @@ on:
       - master
     paths-ignore:
       - '**/*.md'
+      - '.github/workflows/*'
+      - '!.github/workflows/alpine_3.yaml'
       - '**/Dockerfile'
       - '**/Jenkinsfile'
       - '**/.envrc*'
