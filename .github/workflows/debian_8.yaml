@@ -20,6 +20,8 @@ on:
       - master
     paths-ignore:
       - '**/*.md'
+      - '.github/workflows/*'
+      - '!.github/workflows/debian_8.yaml'
       - '**/Dockerfile'
       - '**/Jenkinsfile'
       - '**/.envrc*'
