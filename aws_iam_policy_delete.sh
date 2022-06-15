@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Deletes an IAM policy by first deleting all prior versions and attachments to users, groups and roles
+Deletes an IAM policy by first handling all prerequisite steps of deleting all prior versions and detaching all users, groups and roles
 
 Because doing a straight delete will fail with an error like this:
 
