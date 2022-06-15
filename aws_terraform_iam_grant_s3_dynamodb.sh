@@ -130,3 +130,5 @@ create_policy "$dynamodb_policy" "$dynamodb_policy_document"
 create_policy "$s3_policy" "$s3_policy_document"
 attach_policy "$dynamodb_policy"
 attach_policy "$s3_policy"
+
+timestamp "Done"
