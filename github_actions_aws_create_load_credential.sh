@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/github.sh"
 
+# shellcheck disable=SC1090
+. "$srcdir/lib/aws.sh"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Creates an AWS user, generates and downloads an access key and uploads it to the given GitHub repo
@@ -52,10 +55,13 @@ if ! gh repo view "$owner_repo" >/dev/null; then
     die "GitHub repo '$owner_repo' was not found!"
 fi
 
-aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
+#aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
+aws_account_id="$(aws_account_id)"
 
 keyfile=~/.aws/keys/"${repo}_${aws_account_id}_accessKeys.csv"
 
-"$srcdir/aws_cli_create_credential.sh" "github-actions-$repo" "$keyfile" "$group_or_policy"
+user="github-actions-$repo"
+
+"$srcdir/aws_cli_create_credential.sh" "$user" "$group_or_policy" "$keyfile"
 "$srcdir/aws_csv_creds.sh" "$keyfile" |
 "$srcdir/github_actions_repo_set_secret.sh" "$owner_repo"
