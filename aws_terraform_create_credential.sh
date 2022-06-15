@@ -52,4 +52,4 @@ user="${1:-$USER-terraform}"
 # done as part of aws_cli_create_credential.sh now
 #aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
 
-"$srcdir/aws_cli_create_credential.sh" "$user" # "$HOME/.aws/keys/${user}_${aws_account_id}_accessKeys.csv" # default location now
+"$srcdir/aws_cli_create_credential.sh" "$user" #  AdministratorAccess  "$HOME/.aws/keys/${user}_${aws_account_id}_accessKeys.csv" # default location now
