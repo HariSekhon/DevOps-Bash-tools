@@ -102,7 +102,7 @@ if aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fxq "$s3_polic
 else
     timestamp "Creating Terraform S3 Policy '$s3_policy'"
     aws iam create-policy --policy-name "$s3_policy" --policy-document "$s3_policy_document"
-    timestamp "Ppolicy created"
+    timestamp "Policy created"
 fi
 set -o pipefail
 
