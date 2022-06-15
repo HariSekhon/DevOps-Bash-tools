@@ -101,7 +101,7 @@ grant_group_or_policy(){
 }
 
 if [ -n "$groups_or_policies" ]; then
-    for group_or_policy in ${groups_or_policies/,/ }; do
+    for group_or_policy in ${groups_or_policies//,/ }; do
         grant_group_or_policy "$group_or_policy"
     done
 else
