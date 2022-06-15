@@ -59,48 +59,11 @@ s3_policy_document="$(cat <<EOF
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "TerraformS3Buckets",
+            "Sid": "TerraformS3Bucket",
             "Effect": "Allow",
             "Action": [
-                "s3:CreateAccessPoint",
-                "s3:PutAnalyticsConfiguration",
-                "s3:PutAccelerateConfiguration",
-                "s3:PutAccessPointConfigurationForObjectLambda",
-                "s3:DeleteObjectVersion",
-                "s3:RestoreObject",
-                "s3:DeleteAccessPoint",
-                "s3:CreateBucket",
-                "s3:DeleteAccessPointForObjectLambda",
-                "s3:ReplicateObject",
-                "s3:PutEncryptionConfiguration",
-                "s3:DeleteBucketWebsite",
-                "s3:AbortMultipartUpload",
-                "s3:PutLifecycleConfiguration",
-                "s3:UpdateJobPriority",
-                "s3:DeleteObject",
-                "s3:CreateMultiRegionAccessPoint",
-                "s3:DeleteBucket",
-                "s3:PutBucketVersioning",
-                "s3:PutIntelligentTieringConfiguration",
-                "s3:PutMetricsConfiguration",
-                "s3:PutBucketOwnershipControls",
-                "s3:PutReplicationConfiguration",
-                "s3:DeleteMultiRegionAccessPoint",
-                "s3:PutObjectLegalHold",
-                "s3:InitiateReplication",
-                "s3:UpdateJobStatus",
-                "s3:PutBucketCORS",
-                "s3:PutInventoryConfiguration",
+                "s3:GetObject",
                 "s3:PutObject",
-                "s3:PutBucketNotification",
-                "s3:DeleteStorageLensConfiguration",
-                "s3:PutBucketWebsite",
-                "s3:PutBucketRequestPayment",
-                "s3:PutObjectRetention",
-                "s3:PutBucketLogging",
-                "s3:CreateAccessPointForObjectLambda",
-                "s3:PutBucketObjectLockConfiguration",
-                "s3:ReplicateDelete"
             ],
             "Resource": [
                 "arn:aws:s3:::*tf-state*",
@@ -144,9 +107,9 @@ create_policy(){
     if aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fxq "$policy"; then
         timestamp "WARNING: policy '$policy' already exists, not creating..."
     else
-        timestamp "Creating Terraform DynamoDB Policy '$policy'"
+        timestamp "Creating Terraform policy '$policy'"
         aws iam create-policy --policy-name "$policy" --policy-document "$policy_document"
-        timestamp "DynamoDB policy created"
+        timestamp "Policy created"
     fi
     set -o pipefail
 	echo
