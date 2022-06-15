@@ -38,8 +38,15 @@ alias tfip='tf init && tfp'
 alias tfia='tf init && tfa'
 alias tfaa='tfa -auto-approve'
 alias tfiaa='tfia -auto-approve'
-alias tffu='tf force-unlock -force'
 #complete -C /Users/hari/bin/terraform terraform
+
+alias tffu='tf force-unlock -force'
+# self-determine the lock - risky because running it twice will look like it hangs
+#tffu(){
+#    local lock_id
+#    lock_id="$(terraform plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+#    terraform force-unlock -force "$lock_id"
+#}
 
 alias tg=terragrunt
 alias tgp='tg plan'
