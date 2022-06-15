@@ -34,6 +34,14 @@ Optional:
 - group or policy   (default: Admins group if found, else AdministratorAccess standard AWS-managed policy)
 - keyfile           (default: ~/.aws/keys/\${user}_\${aws_account_id}_accessKeys.csv) - be careful if specifying this, a non-existent keyfile will create a new key, deleting the older of 2 existing keys if necessary to be able to create this
 
+Examples:
+
+    # create buckets, tables and user with all IAM policies for an account called 'myaccount' and a user called 'github-actions-myrepo'
+
+        ${0##*/} myaccount github-actions-terraform  # gets AdministratorAccess by default
+
+        ${0##*/} myaccount github-actions-terraform-plan ReadOnly
+
 "
 
 # used by usage() in lib/utils.sh
@@ -54,7 +62,7 @@ bucket="terraform-state-$account_name"
 table="terraform-state-$account_name"
 
 # must match the name generated in aws_terraform_create_dynamodb_table.sh
-policy="Terraform-DynamoDB-Lock-Table-$table"
+dynamodb_policy="Terraform-DynamoDB-Lock-Table-$table"
 
 "$srcdir/aws_terraform_create_s3_bucket.sh" "$bucket"
 
@@ -64,4 +72,38 @@ echo
 
 echo
 
-"$srcdir/aws_terraform_create_credential.sh" "$user" "$policy"${group_or_policy:+,"$group_or_policy"} ${keyfile:+"$keyfile"}
+s3_policy="Terraform-S3-Bucket-$bucket"
+
+timestamp "Generating policy document '$s3_policy'"
+s3_policy_document="$(cat <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "TerraformS3Bucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::$bucket/*"
+            ]
+        }
+    ]
+}
+EOF
+)"
+
+timestamp "Checking if policy '$s3_policy' exists"
+set +o pipefail  # early termination from the pipeline will fail the check otherwise
+if aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fxq "$s3_policy"; then
+    timestamp "WARNING: policy '$s3_policy' already exists, not creating..."
+else
+    timestamp "Creating Terraform S3 Policy '$s3_policy'"
+    aws iam create-policy --policy-name "$s3_policy" --policy-document "$s3_policy_document"
+    timestamp "Ppolicy created"
+fi
+set -o pipefail
+
+"$srcdir/aws_terraform_create_credential.sh" "$user" "$s3_policy,$dynamodb_policy"${group_or_policy:+,"$group_or_policy"} ${keyfile:+"$keyfile"}
