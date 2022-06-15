@@ -50,7 +50,7 @@ export AWS_DEFAULT_OUTPUT=json
 aws_account_id="$(aws_account_id)"
 aws_region="$(aws_region)"
 
-timestamp "Checking for existing table"
+timestamp "Checking for existing DynamoDB table '$table'"
 if aws dynamodb list-tables "$@" | jq -r '.TableNames[]' | grep -Fxq "$table"; then
     timestamp "WARNING: table '$table' already exists in region '$aws_region', not creating..."
 else
