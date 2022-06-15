@@ -44,7 +44,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<username> [<group_or_policy> <keyfile>]"
+usage_args="<username> [<group1,group2,policy1,policy2...> <keyfile>]"
 
 help_usage "$@"
 
@@ -52,8 +52,11 @@ help_usage "$@"
 
 user="${1:-$USER-cli}"
 
-group="${2:-Admins}"
-policy="${2:-AdministratorAccess}"
+#group="${2:-Admins}"
+#policy="${2:-AdministratorAccess}"
+groups_or_policies="${2:-}"
+default_group="Admins"
+default_policy="AdministratorAccess"
 
 aws_account_id="$(aws_account_id)"
 
@@ -65,22 +68,51 @@ aws_create_user_if_not_exists "$user"
 
 exports="$(aws_create_access_key_if_not_exists "$user" "$access_keys_csv")"
 
-# causes a failure in the if policy test condition, probably due to early exit on one of the pipe commands
-set +o pipefail
-if aws iam list-groups | jq -r '.Groups[].GroupName' | grep -Fixq "$group"; then
-    timestamp "Adding user '$user' to group '$group' on account '$aws_account_id'"
-    aws iam add-user-to-group --user-name "$user" --group-name "$group"
-elif aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fixq "$policy"; then
-    #timestamp "Group '$group' not found in to account '$aws_account_id'"
-    timestamp "Determining ARN for policy '$policy'"
-    policy_arn="$(aws iam list-policies | jq -r ".Policies[] | select(.PolicyName == \"$policy\") | .Arn")"
-    timestamp "Determined policy ARN:  $policy_arn"
-    timestamp "Granting policy '$policy' permissions directly to user '$user' in account '$aws_account_id'"
-    aws iam attach-user-policy --user-name "$user" --policy-arn "$policy_arn"
+group_exists(){
+    # causes a failure in the if policy test condition, probably due to early exit on one of the pipe commands
+    set +o pipefail
+    aws iam list-groups | jq -r '.Groups[].GroupName' | grep -Fixq "$1" || return 1
+    set -o pipefail
+}
+
+policy_exists(){
+    # causes a failure in the if policy test condition, probably due to early exit on one of the pipe commands
+    set +o pipefail
+    aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fixq "$1" || return 1
+    set -o pipefail
+}
+
+grant_group_or_policy(){
+    local group_or_policy="$1"
+    if group_exists "$group_or_policy"; then
+        group="$group_or_policy"
+        timestamp "Adding user '$user' to group '$group' on account '$aws_account_id'"
+        aws iam add-user-to-group --user-name "$user" --group-name "$group"
+    elif policy_exists "$group_or_policy"; then
+        policy="$group_or_policy"
+        timestamp "Determining ARN for policy '$policy'"
+        policy_arn="$(aws iam list-policies | jq -r ".Policies[] | select(.PolicyName == \"$policy\") | .Arn")"
+        timestamp "Determined policy ARN:  $policy_arn"
+        timestamp "Granting policy '$policy' permissions directly to user '$user' in account '$aws_account_id'"
+        aws iam attach-user-policy --user-name "$user" --policy-arn "$policy_arn"
+    else
+        die "Group/Policy '$group_or_policy' not found in account '$aws_account_id'"
+    fi
+}
+
+if [ -n "$groups_or_policies" ]; then
+    for group_or_policy in ${groups_or_policies/,/ }; do
+        grant_group_or_policy "$group_or_policy"
+    done
 else
-    die "Neither group '$group' nor policy '$policy' was found to assign to user '$user' in account '$aws_account_id'"
+    if group_exists "$default_group"; then
+        grant_group_or_policy "$default_group"
+    elif policy_exists "$default_policy"; then
+        grant_group_or_policy "$policy"
+    else
+        die "Neither default group '$default_group', nor default policy '$default_policy' in account '$aws_account_id'"
+    fi
 fi
-set -o pipefail
 
 echo
 echo "Set the following export commands in your environment to begin using this access key in your CLI immediately:"
