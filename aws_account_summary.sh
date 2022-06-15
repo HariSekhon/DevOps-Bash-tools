@@ -72,7 +72,7 @@ export AWS_DEFAULT_OUTPUT=json
 account_id="$(aws sts get-caller-identity --query Account --output text | tr -d '\r')"
 echo "AccountID = $account_id"
 # XXX: might not have permissions to run this one, skip it if so
-account_info="$(aws organizations describe-account --account-id "$account_id" || { echo "Missing permission to describe AWS Organization"; echo; } >&2 )"
+account_info="$(aws organizations describe-account --account-id "$account_id" || { echo; echo "Missing permission to describe AWS Organization"; echo; } >&2 )"
 if [ -n "$account_info" ]; then
     account_name="$(jq -r '.Account.Name' <<< "$account_info")"
     echo "AccountName = $account_name"
