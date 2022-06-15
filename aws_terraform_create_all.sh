@@ -105,5 +105,6 @@ else
     timestamp "Policy created"
 fi
 set -o pipefail
+echo
 
 "$srcdir/aws_terraform_create_credential.sh" "$user" "$s3_policy,$dynamodb_policy"${group_or_policy:+,"$group_or_policy"} ${keyfile:+"$keyfile"}
