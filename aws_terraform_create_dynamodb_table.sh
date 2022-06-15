@@ -93,5 +93,5 @@ if aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fxq "$policy";
 else
 	timestamp "Creating Terraform DynamoDB Policy '$policy'"
     aws iam create-policy --policy-name "$policy" --policy-document "$policy_document"
-	timestmap "DynamoDB policy created"
+	timestamp "DynamoDB policy created"
 fi
