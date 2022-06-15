@@ -367,6 +367,7 @@ etc.
     - `aws_iam_policies_attached_to_users.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) directly attached to users (anti-best practice) instead of groups
     - `aws_iam_policies_granting_full_access.sh` - finds [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html) granting full access (anti-best practice)
     - `aws_iam_policies_unattached.sh` - lists unattached [AWS IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage.html)
+    - `aws_iam_policy_delete.sh` - deletes an IAM policy, by first handling all prerequisite steps of deleting all prior versions and all detaching all users, groups and roles
     - `aws_iam_generate_credentials_report_wait.sh` - generates an AWS IAM [credentials report](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_getting-report.html)
     - `aws_iam_users.sh` - list your IAM users
     - `aws_iam_users_access_key_age.sh` - prints AWS users [access key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) status and age (see also `aws_users_access_key_age.py` in [DevOps Python tools](https://github.com/HariSekhon/DevOps-Python-tools) which can filter by age and status)
