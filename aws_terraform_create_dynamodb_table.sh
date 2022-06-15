@@ -67,7 +67,7 @@ echo
 
 policy="Terraform-DynamoDB-Lock-Table-$table"
 
-timestamp "Generating policy '$policy' policy document"
+timestamp "Generating policy document '$policy'"
 policy_document="$(cat <<EOF
 {
     "Version": "2012-10-17",
