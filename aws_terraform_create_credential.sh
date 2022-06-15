@@ -24,16 +24,27 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates an AWS terraform service account for Terraform Cloud or other CI/CD systems to run terraform plan and apply
 
-Grants this service account Administator privileges in the current AWS account
+Grants this service account Administator privileges in the current AWS account unless a different group or policy is specified as a second argument
 
 Creates an IAM access key (deleting an older unused key if necessary), writes a CSV just as the UI download would, and outputs both shell export commands and configuration in the format for copying to your AWS profile in ~/.aws/credentials
 
 The following optional arguments can be given:
 
 - user name         (default: \$USER-terraform)
+- group or policy   (default: Admins group if found, else AdministratorAccess standard AWS-managed policy)
 - keyfile           (default: ~/.aws/keys/\${user}_\${aws_account_id}_accessKeys.csv) - be careful if specifying this, a non-existent keyfile will create a new key, deleting the older of 2 existing keys if necessary to be able to create this
 
 Idempotent - safe to re-run, will skip creating a user that already exists or CSV export that already exists
+
+Examples:
+
+    # creates user 'github-actions-MYREPO' with full AdministratorAccess and saves the key in ~/.aws/keys/
+
+        ${0##*/} github-actions-MYREPO
+
+    # creates a read-only user 'github-actions-MYREPO-readonly' with ReadOnlyAccess standard AWS-managed policy attached for GitHub Actions environment secret that can be automatically used in Pull Request workflows without approval, saves key to ~/.aws/keys/
+
+        ${0##*/} github-actions-MYREPO-readonly ReadOnlyAccess
 
 
 $usage_aws_cli_required
@@ -41,7 +52,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<username> <keyfile>]"
+usage_args="[<username> <group_or_policy> <keyfile>]"
 
 help_usage "$@"
 
