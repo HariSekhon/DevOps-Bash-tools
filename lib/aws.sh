@@ -29,7 +29,16 @@ aws_account_id(){
 }
 
 aws_region(){
-    aws configure get region
+    # region actually used by the CLI, but some accounts running scripts may not have permissions to this
+    # aws ec2 describe-availability-zones --output text --query 'AvailabilityZones[0].[RegionName]'
+    if [ -n "${AWS_DEFAULT_REGION:-}" ]; then
+        echo "$AWS_DEFAULT_REGION"
+        return
+    fi
+    if ! aws configure get region; then
+        echo "FAILED to get AWS region in aws_region() function in lib/aws.sh" >&2
+        return 1
+    fi
 }
 
 aws_user_exists(){
