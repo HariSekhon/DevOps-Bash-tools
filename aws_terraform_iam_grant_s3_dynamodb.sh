@@ -23,7 +23,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates IAM policies for DynamoDB and S3 buckets containing 'terraform-state' or 'tf-state' in their name
+Creates IAM policies for S3 buckets and DynamoDB tables containing 'terraform-state' or 'tf-state' in their name
+
+Attaches these policies to the specified user, which must already exist (run aws_terraform_create_credential.sh first)
 
 Necessary for limited privilege CI/CD accounts such as GitHub Actions pull request Terraform Plan only workflows using a Read Only account
 
