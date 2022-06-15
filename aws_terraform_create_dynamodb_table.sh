@@ -25,6 +25,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a DynamoDB table for Terraform state locking
 
+Also creates a policy for a permission limited Terraform account to use to lock/unlock the table.
+This is useful when creating a Read Only account for GitHub Actions environment secret for Pull Requests to not need workflow approval
+
 Exits with an error if the table already exists
 
 
@@ -44,12 +47,51 @@ shift || :
 
 export AWS_DEFAULT_OUTPUT=json
 
+aws_account_id="$(aws_account_id)"
+aws_region="$(aws_region)"
+
+timestamp "Checking for existing table"
 if aws dynamodb list-tables "$@" | jq -r '.TableNames[]' | grep -Fxq "$table"; then
-    die "ERROR: table '$table' already exists"
+    timestamp "WARNING: table '$table' already exists in region '$aws_region', not creating..."
+else
+	timestamp "Creating Terraform DynamoDB table '$table' in region '$aws_region'"
+    aws dynamodb create-table --table-name "$table" \
+                              --key-schema AttributeName=LockID,KeyType=HASH \
+                              --attribute-definitions AttributeName=LockID,AttributeType=S \
+                              --billing-mode PAY_PER_REQUEST \
+                              "$@"
+	timestamp "DynamoDB table created"
 fi
 
-aws dynamodb create-table --table-name "$table" \
-                          --key-schema AttributeName=LockID,KeyType=HASH \
-                          --attribute-definitions AttributeName=LockID,AttributeType=S \
-                          --billing-mode PAY_PER_REQUEST \
-                          "$@"
+echo
+
+policy="Terraform-DynamoDB-Lock-Table-$table"
+
+timestamp "Generating policy '$policy' policy document"
+policy_document="$(cat <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "TerraformLock",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:DeleteItem"
+            ],
+            "Resource": "arn:aws:dynamodb:$aws_region:$aws_account_id:table/$table"
+        }
+    ]
+}
+EOF
+)"
+
+timestamp "Checking for existing policy"
+set +o pipefail  # early termination from the pipeline will fail the check otherwise
+if aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fxq "$policy"; then
+    timestamp "WARNING: policy '$policy' already exists, not creating..."
+else
+	timestamp "Creating Terraform DynamoDB Policy '$policy'"
+    aws iam create-policy --policy-name "$policy" --policy-document "$policy_document"
+	timestmap "DynamoDB policy created"
+fi
