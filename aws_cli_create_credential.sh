@@ -98,6 +98,7 @@ grant_group_or_policy(){
     else
         die "Group/Policy '$group_or_policy' not found in account '$aws_account_id'"
     fi
+    echo
 }
 
 if [ -n "$groups_or_policies" ]; then
