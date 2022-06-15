@@ -53,7 +53,7 @@ aws_account_id="$(aws_account_id)"
 dynamodb_policy="Terraform-DynamoDB-Lock-Tables"
 s3_policy="Terraform-S3-Buckets"
 
-timestamp "Generating S3 policy '$s3_policy' policy document"
+timestamp "Generating S3 policy document '$s3_policy'"
 s3_policy_document="$(cat <<EOF
 {
     "Version": "2012-10-17",
@@ -63,7 +63,7 @@ s3_policy_document="$(cat <<EOF
             "Effect": "Allow",
             "Action": [
                 "s3:GetObject",
-                "s3:PutObject",
+                "s3:PutObject"
             ],
             "Resource": [
                 "arn:aws:s3:::*tf-state*",
@@ -75,7 +75,7 @@ s3_policy_document="$(cat <<EOF
 EOF
 )"
 
-timestamp "Generating DynamoDB policy '$dynamodb_policy' policy document"
+timestamp "Generating DynamoDB policy document '$dynamodb_policy'"
 dynamodb_policy_document="$(cat <<EOF
 {
     "Version": "2012-10-17",
