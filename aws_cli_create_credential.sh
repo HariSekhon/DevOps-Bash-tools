@@ -72,8 +72,11 @@ if aws iam list-groups | jq -r '.Groups[].GroupName' | grep -Fixq "$group"; then
     aws iam add-user-to-group --user-name "$user" --group-name "$group"
 elif aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fixq "$policy"; then
     #timestamp "Group '$group' not found in to account '$aws_account_id'"
+    timestamp "Determining ARN for policy '$policy'"
+    policy_arn="$(aws iam list-policies | jq -r ".Policies[] | select(.PolicyName == \"$policy\") | .Arn")"
+    timestamp "Determined policy ARN:  $policy_arn"
     timestamp "Granting policy '$policy' permissions directly to user '$user' in account '$aws_account_id'"
-    aws iam attach-user-policy --user-name "$user" --policy-arn "arn:aws:iam::aws:policy/$policy"
+    aws iam attach-user-policy --user-name "$user" --policy-arn "$policy_arn"
 else
     die "Neither group '$group' nor policy '$policy' was found to assign to user '$user' in account '$aws_account_id'"
 fi
