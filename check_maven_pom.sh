@@ -32,6 +32,12 @@ section "M a v e n"
 
 start_time="$(start_timer)"
 
+opts=()
+
+if is_CI; then
+    opts+=(-B)
+fi
+
 if type -P mvn &>/dev/null; then
     type -P mvn
     mvn --version
@@ -39,7 +45,7 @@ if type -P mvn &>/dev/null; then
     grep -v '/target/' <<< "$poms" |
     while read -r pom; do
         echo "Validating $pom"
-        mvn validate -f "$pom" || exit $?
+        mvn validate ${opts:+"${opts[@]}"} -f "$pom" || exit $?
         echo
     done
 else
