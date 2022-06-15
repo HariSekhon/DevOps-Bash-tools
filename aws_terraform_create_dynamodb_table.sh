@@ -28,7 +28,7 @@ Creates a DynamoDB table for Terraform state locking
 Also creates a policy for a permission limited Terraform account to use to lock/unlock the table.
 This is useful when creating a Read Only account for GitHub Actions environment secret for Pull Requests to not need workflow approval
 
-Exits with an error if the table already exists
+Idempotent - skips creation of table and policy if they already exist
 
 
 $usage_aws_cli_required
