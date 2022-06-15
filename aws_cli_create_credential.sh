@@ -44,7 +44,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<username> <keyfile> <group_or_policy>]"
+usage_args="<username> [<group_or_policy> <keyfile>]"
 
 help_usage "$@"
 
@@ -52,12 +52,12 @@ help_usage "$@"
 
 user="${1:-$USER-cli}"
 
-aws_account_id="$(aws sts get-caller-identity --query Account --output text)"
+group="${2:-Admins}"
+policy="${2:-AdministratorAccess}"
 
-access_keys_csv="${2:-$HOME/.aws/keys/${user}_${aws_account_id}_accessKeys.csv}"
+aws_account_id="$(aws_account_id)"
 
-group="${3:-Admins}"
-policy="${3:-AdministratorAccess}"
+access_keys_csv="${3:-$HOME/.aws/keys/${user}_${aws_account_id}_accessKeys.csv}"
 
 export AWS_DEFAULT_OUTPUT=json
 
