@@ -28,6 +28,10 @@ aws_account_id(){
     aws sts get-caller-identity --query Account --output text
 }
 
+aws_region(){
+    aws configure get region
+}
+
 aws_user_exists(){
     local user="$1"
     aws iam list-users | jq -e -r ".Users[] | select(.UserName == \"$user\")" >/dev/null
