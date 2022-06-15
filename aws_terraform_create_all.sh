@@ -26,7 +26,7 @@ Creates a Terraform CLI machine account, S3 bucket and DynamoDB locking table wi
 
 Required:
 
-- account name - used to create S3 bucket, DynamoDB table and policy suffixed with this name
+- account name      used to suffix S3 bucket, DynamoDB table and policy names
 
 Optional:
 
@@ -52,6 +52,8 @@ keyfile="${4:-}"
 
 bucket="terraform-state-$account_name"
 table="terraform-state-$account_name"
+
+# must match the name generated in aws_terraform_create_dynamodb_table.sh
 policy="Terraform-DynamoDB-Lock-Table-$table"
 
 "$srcdir/aws_terraform_create_s3_bucket.sh" "$bucket"
