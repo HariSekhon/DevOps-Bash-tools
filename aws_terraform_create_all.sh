@@ -64,6 +64,4 @@ echo
 
 echo
 
-"$srcdir/aws_terraform_create_credential.sh" "$user" ${group_or_policy:+"$group_or_policy"} ${keyfile:+"$keyfile"}
-echo
-"$srcdir/aws_terraform_create_credential.sh" "$user" "$policy" ${keyfile:+"$keyfile"}
+"$srcdir/aws_terraform_create_credential.sh" "$user" "$policy"${group_or_policy:+,"$group_or_policy"} ${keyfile:+"$keyfile"}
