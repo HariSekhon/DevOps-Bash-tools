@@ -43,11 +43,14 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<bucket_name> [<disallowed_users>]"
+usage_args="<bucket_name> [<ARNs_to_block_access_from>]"
 
 help_usage "$@"
 
 min_args 1 "$@"
+
+bucket="$1"
+shift || :
 
 timestamp "Checking for Power User role"
 power_user_arn="$(aws iam list-roles | jq -r '.Roles[].Arn' | grep -i AWSPowerUserAccess || :)"
@@ -56,4 +59,4 @@ if [ -n "$power_user_arn" ]; then
 fi
 echo >&2
 
-"$srcdir/aws_s3_bucket.sh" "$@" ${power_user_arn:+"$power_user_arn"}
+"$srcdir/aws_s3_bucket.sh" "$bucket" "$@" ${power_user_arn:+"$power_user_arn"}
