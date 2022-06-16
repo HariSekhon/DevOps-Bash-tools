@@ -77,7 +77,7 @@ if has_tarball_extension "$package"; then
         tar xvjf "$download_file"
     fi
     if ! [ -f "$binary" ]; then
-        die "Failed to extract binary '$binary' from '$download_file'"
+        die "Failed to find binary '$binary' in unpacked '$download_file' - is the given binary filename correct?"
     fi
     download_file="$binary"
     echo
