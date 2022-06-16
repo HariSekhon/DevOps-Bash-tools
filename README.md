@@ -139,7 +139,7 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 
 [git.io/bash-tools](https://git.io/bash-tools)
 
-750+ DevOps Shell Scripts and Advanced Bash environment.
+800+ DevOps Shell Scripts and Advanced Bash environment.
 
 Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
@@ -1032,7 +1032,7 @@ etc.
 - `json2yaml.sh` - converts JSON to YAML
 - `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) section above)
 
-### See Also
+## Related Repositories
 
 - [DevOps Python Tools](https://github.com/HariSekhon/DevOps-Python-tools) - 80+ DevOps CLI tools for AWS, GCP, Hadoop, HBase, Spark, Log Anonymizer, Ambari Blueprints, AWS CloudFormation, Linux, Docker, Spark Data Converters & Validators (Avro / Parquet / JSON / CSV / INI / XML / YAML), Elasticsearch, Solr, Travis CI, Pig, IPython
 
@@ -1041,6 +1041,8 @@ etc.
 - [Templates](https://github.com/HariSekhon/Templates) - dozens of Code & Config templates - AWS, GCP, Docker, Jenkins, Terraform, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions Workflows, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml, M4 etc.
 
 - [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs - Best Practices, Tips & Tricks are baked right into the templates for future deployments
+
+- [Terraform](https://github.com/HariSekhon/Terraform) - Terraform templates for AWS / GCP / Azure / GitHub management
 
 - [The Advanced Nagios Plugins Collection](https://github.com/HariSekhon/Nagios-Plugins) - 450+ programs for Nagios monitoring your Hadoop & NoSQL clusters. Covers every Hadoop vendor's management API and every major NoSQL technology (HBase, Cassandra, MongoDB, Elasticsearch, Solr, Riak, Redis etc.) as well as message queues (Kafka, RabbitMQ), continuous integration (Jenkins, Travis CI) and traditional infrastructure (SSL, Whois, DNS, Linux)
 
