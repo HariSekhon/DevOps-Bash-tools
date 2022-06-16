@@ -37,7 +37,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-version="${2:-latest}"
+#version="${1:-1.1.0}"
+version="${1:-latest}"
 
 owner_repo="cert-manager/cert-manager"
 
@@ -51,7 +52,9 @@ elif [[ "$version" =~ ^v ]]; then
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/kubectl-cert_manager-{os}-{arch}.tar.gz" kubectl-cert_manager
+binary="kubectl-cert_manager"
+
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/kubectl-cert_manager-{os}-{arch}.tar.gz" "$binary"
 
 echo
-~/bin/kubectl-cert-manager version
+~/bin/"$binary" version
