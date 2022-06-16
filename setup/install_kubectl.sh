@@ -15,12 +15,30 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cert_manager_version="1.1.0"
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
 
-platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Kubernetes 'kubectl' CLI
+"
 
-cd /tmp
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<kubectl_version> <cert_manager_plugin_version>]"
+
+export PATH="$PATH:$HOME/bin"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
+kubectl_version="${1:-latest}"
+
+#cert_manager_version="${2:-1.1.0}"
+cert_manager_version="${2:-latest}"
 
 # =======================================================
 # https://kubernetes.io/docs/tasks/tools/install-kubectl/
@@ -31,32 +49,36 @@ cd /tmp
 #    curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"
 #fi
 
-date "+%F %T  downloading kubectl"
-wget -O kubectl.$$ "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/$platform/amd64/kubectl"
+if [ "$kubectl_version" = latest ]; then
+    kubectl_version="$(curl -sSL https://dl.k8s.io/release/stable.txt)"
+    kubectl_version="${kubectl_version#v}"
+    timestamp "latest version is '$kubectl_version'"
+else
+    is_semver "$kubectl_version" || die "non-semver version argument given: '$kubectl_version' - should be in format: N.N.N"
+fi
 
-date "+%F %T  downloaded kubectl"
-date "+%F %T  chmod'ing and moving to ~/bin"
-chmod +x kubectl.$$
-mkdir -pv ~/bin
-unalias mv &>/dev/null || :
-mv -vf kubectl.$$ ~/bin/kubectl
+"$srcdir/../install_binary.sh" "https://dl.k8s.io/release/v$kubectl_version/bin/{os}/{arch}/kubectl"
+
 echo
 ~/bin/kubectl version --client
-
+echo
 
 # =======================================================
 # https://cert-manager.io/docs/usage/kubectl-plugin/
 
-echo
-echo
-kubectl_cert_manager="kubectl-cert_manager"
-date "+%F %T  downloading kubectl cert-manager plugin"
-curl -sSLo kubectl-cert-manager.$$.tar.gz "https://github.com/jetstack/cert-manager/releases/download/v$cert_manager_version/kubectl-cert_manager-$platform-amd64.tar.gz"
-date "+%F %T  downloaded kubectl cert-manager plugin"
-tar xzf kubectl-cert-manager.$$.tar.gz
-date "+%F %T  chmod'ing and moving to ~/bin"
-chmod +x "$kubectl_cert_manager"
-mv -vf "$kubectl_cert_manager" ~/bin/
+owner_repo="cert-manager/cert-manager"
+
+if [ "$cert_manager_version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    cert_manager_version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    cert_manager_version="${cert_manager_version#v}"
+    timestamp "latest version is '$cert_manager_version'"
+elif [[ "$kubectl_version" =~ ^v ]]; then
+    cert_manager_version="v$cert_manager_version"
+    is_semver "$cert_manager_version" || die "non-semver version argument given: '$cert_manager_version' - should be in format: N.N.N"
+fi
+
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$cert_manager_version/kubectl-cert_manager-{os}-{arch}.tar.gz" kubectl-cert_manager
 
 echo
-~/bin/"$kubectl_cert_manager" version
+~/bin/kubectl-cert-manager version
