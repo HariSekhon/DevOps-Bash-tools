@@ -689,6 +689,7 @@ etc.
   - `github_repo_teams.sh` - fetches the GitHub Enterprise teams and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_collaborators.sh` - fetches a repo's granted users and outside invited collaborators as well as their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_protect_branches.sh` - enables branch protections on the given repo. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`, `dev`, `staging`, `production`
+  - `github_repo_fork_sync.sh` - sync's current or given fork, then runs `github_repo_fork_update.sh` to cascade changes to major branches via Pull Requests for auditability
   - `github_repo_fork_update.sh` - updates a forked repo by creating pull requests for full audit tracking and auto-merges PRs for non-production branches
   - `github_repos_public.sh` - lists public repos for a user or organization. Useful to periodically scan and account for any public repos
   - `github_repos_disable_wiki.sh` - disables the Wiki on one or more given repos to prevent documentation fragmentation and make people use the centralized documentation tool eg. Confluence or Slite
