@@ -22,7 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Sync's the current fork repo or from the original source repo sync's the first fork repo that matches the given ERE regex using a repo sync and calling the fork-update-pr workflow to raise Pull Requests from trunk to the major branches
+Sync's the current fork repo or from the original source repo sync's all repos matching the given ERE regex
+
+First calls a repo sync of the trunk branch, then and calls github_repo_fork_update.sh to raise Pull Requests from trunk to the major branches
+
+If \$GITHUB_FORK_REGEX is specified, then the first argument can be omitted
 
 Requires GitHub CLI to be installed and configured
 "
@@ -35,29 +39,40 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-regex="${1:-${GITHUB_FORK_REPO:-}}"
+regex="${1:-${GITHUB_FORK_REGEX:-}}"
 
+timestamp "Determining if running from within a forked repo checkout"
 is_fork="$(gh api "/repos/{owner}/{repo}" -q '.fork')"
 
 if [ "$is_fork" = true ]; then
-    fork_repo='{owner}/{repo}'
+    timestamp "Confirmed running from within a forked repo checkout"
+    fork_repos='{owner}/{repo}'
 else
+    timestamp "Not running from a forked repo checkout"
     if [ -z "$regex" ]; then
         usage "not running in a fork repo and no regex given to select a fork to sync"
     fi
 
+    timestamp "Getting all forked repos matching regex '$regex'"
     set +o pipefail
-    fork_repo="$(gh api '/repos/{owner}/{repo}/forks' -q '.[].full_name' | grep -Eim1 "$regex")"
+    fork_repos="$(gh api '/repos/{owner}/{repo}/forks' -q '.[].full_name' | grep -Ei "$regex")"
     set -o pipefail
 
-    if [ -z "$fork_repo" ]; then
-        die "Failed to find a fork repo matching regex '$regex'"
+    if [ -z "$fork_repos" ]; then
+        die "Failed to find an forked repos matching regex '$regex'"
     fi
 fi
 
-gh repo sync "$fork_repo"
+for owner_repo in $fork_repos; do
+    echo
+    timestamp "Sync'ing fork $owner_repo"
+    gh repo sync "$owner_repo"
+    echo
+    timestamp "Raising Pull Requests to major branches for fork $owner_repo"
+    "$srcdir/github_repo_fork_update.sh" "$owner_repo"
+done
 
-"$srcdir/github_repo_fork_update.sh" "$fork_repo"
+timestamp "Fork Sync done"
 
 #gh workflow -R "$fork_repo" run fork-update-pr.yaml -f debug=false
 #
