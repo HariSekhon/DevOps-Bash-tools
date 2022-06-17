@@ -26,7 +26,7 @@ Sync's the current fork repo or from the original source repo sync's all repos m
 
 First calls a repo sync of the trunk branch, then and calls github_repo_fork_update.sh to raise Pull Requests from trunk to the major branches
 
-If \$GITHUB_FORK_REGEX is specified, then the first argument can be omitted
+If not running in a fork checkout but the \$GITHUB_FORK_REGEX environment is set to any value, then the first argument regex can be omitted
 
 Requires GitHub CLI to be installed and configured
 "
