@@ -21,44 +21,8 @@ set -euo pipefail
 # terraform state pull | jq -r .terraform_version
 export TERRAFORM_VERSION=1.1.9
 
-tfenv_list_sed(){
-    sed 's/^\*[[:space:]]*//; s/(.*//; s/[[:space:]]//g'
-}
-
-# tfenv installs automatically if TFENV_AUTO_INSTALL=true (default)
-#tfenv_setup(){
-#    local version="${1:-${TERRAFORM_VERSION:-}}"
-#    if [ -z "$version" ]; then
-#        return 0
-#    fi
-#    if ! type -P tfenv &>/dev/null; then
-#        return 0
-#    fi
-#    if ! tfenv list | tfenv_list_sed | grep -Fxq "$version"; then
-#        echo "Terraform version '$version' not installed in tfenv, installing now..."
-#        tfenv install "$version"
-#    fi
-#    local current_version
-#    current_version="$(tfenv list | grep '^\*' | tfenv_list_sed)"
-#    if [ "$current_version" != "$version" ]; then
-#        # XXX: Careful, this will switch globally and could cause race conditions with other shells / scripts on the same machine
-#        tfenv use "$version"
-#    fi
-#}
-#
-#tfenv_setup "$TERRAFORM_VERSION"
-
-# =================================================================================
-# for deployment/<environment> subdirectories, all you need in their .envrc is this
-#
-#   export TERRAFORM_VERSION=1.1.9
-#   export TFENV_AUTO_INSTALL=true
-#
-#   #source_up
-#   # tfenv does this automatically
-#   #tfenv_setup "$TERRAFORM_VERSION"
-#
-# =================================================================================
+export TFENV_TERRAFORM_VERSION="$TERRAFORM_VERSION"
+export TFENV_AUTO_INSTALL=true
 
 # XXX: set these or other variables for Terraform code to find
 export CLOUDFLARE_EMAIL=hari@...
