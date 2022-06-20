@@ -50,7 +50,7 @@ gitlab_ci_yml=".gitlab-ci.yml"
 if [ $# -gt 0 ]; then
     filename="$1"
     if ! [[ "$filename" =~ $gitlab_ci_yml$ ]]; then
-        die "invalid filename given, must be called 'gitlab_ci_yml', instead got:  $filename"
+        die "invalid filename given, must be called '$gitlab_ci_yml', instead got:  $filename"
     fi
 elif [ -f "$gitlab_ci_yml" ]; then
     filename="$gitlab_ci_yml"
