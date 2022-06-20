@@ -21,6 +21,7 @@ set -euo pipefail
 # terraform state pull | jq -r .terraform_version
 export TERRAFORM_VERSION=1.1.9
 
+# overrides .terraform-version file to make this single source of truth
 export TFENV_TERRAFORM_VERSION="$TERRAFORM_VERSION"
 export TFENV_AUTO_INSTALL=true
 
