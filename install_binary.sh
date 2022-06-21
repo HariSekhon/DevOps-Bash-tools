@@ -82,7 +82,7 @@ if has_tarball_extension "$package"; then
     download_file="$binary"
     echo
 elif [[ "$package" =~ \.zip$ ]]; then
-    unzip "$download_file"
+    unzip -o "$download_file"
     download_file="$binary"
 fi
 
