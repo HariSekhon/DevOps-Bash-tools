@@ -255,8 +255,8 @@ if has("autocmd")
     "au CursorHold,CursorHoldI * checktime
     "au FocusGained,BufEnter * :checktime
 
-    " TODO: groovy/java CLI linters
-    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"<CR>
+    " TODO: any better groovy/java CLI linters
+    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"; rm "%:p:h"/*.class <CR>
 
     " TODO: often these don't trigger on window switching between different file types
 
