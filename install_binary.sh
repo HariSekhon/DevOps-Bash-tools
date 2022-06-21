@@ -73,7 +73,7 @@ download "$url" "$download_file"
 if has_tarball_extension "$package"; then
     timestamp "Extracting tarball package"
     if ! type -P tar &>/dev/null; then
-        "$srcdir/install_package.sh" tar
+        "$srcdir/install_packages.sh" tar
     fi
     cd "$tmp"
     if has_tarball_gzip_extension "$package"; then
@@ -89,7 +89,7 @@ if has_tarball_extension "$package"; then
 elif [[ "$package" =~ \.zip$ ]]; then
     timestamp "Extracting zip package"
     if ! type -P unzip &>/dev/null; then
-        "$srcdir/install_package.sh" unzip
+        "$srcdir/install_packages.sh" unzip
     fi
     cd "$tmp"
     unzip -o "$download_file"
