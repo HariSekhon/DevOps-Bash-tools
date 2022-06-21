@@ -85,17 +85,20 @@ printenv(){
 # do not use the same serviceaccount with permissions across projects, you can cross contaminate and make mistakes, deploy the wrong environment etc.
 gcp_login(){
     local credentials_json="${1:-}"
-    if [ -z "$credentials_json" ] ||
-       ! [ -f "$credentials_json" ]; then
+    if [ -n "$credentials_json" ] &&
+       [ -f "$credentials_json" ]; then
+        gcloud auth activate-service-account --key-file="$credentials_json"
+    elif [ -n "${GCP_SERVICEACCOUNT_KEY:-}" ]; then
         # XXX: it's hard to copy the contents of this around so it's easiest to do via:
         #
         #   base64 credentials.json | pbcopy
         #
         # and then paste that into the CI/CD environment variables for the build
         #
-        base64 --decode <<< "$GCP_SERVICEACCOUNT_KEY" > "$credentials_json"
+        gcloud auth activate-service-account --key-file=<(base64 --decode <<< "$GCP_SERVICEACCOUNT_KEY")
+    else
+        die "no credentials.json file passed to gcp_login() and \$GCP_SERVICEACCOUNT_KEY not set in environment"
     fi
-    gcloud auth activate-service-account --key-file="$credentials_json"
 }
 
 gke_login(){
