@@ -30,11 +30,8 @@ Useful for doing basic linting on simple self-contained Groovy scripts such as J
 
 help_usage "$@"
 
-directory="${1:-.}"
-shift ||:
-
 echo "Checking for Groovy files"
-filelist="$(find "$directory" -type f -iname '*.groovy' | sort)"
+filelist="$(for directory in "${@:-.}"; do find "$directory" -type f -iname '*.groovy'; done | sort -u)"
 if [ -z "$filelist" ]; then
     return 0 &>/dev/null || :
     exit 0
