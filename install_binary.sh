@@ -82,6 +82,7 @@ if has_tarball_extension "$package"; then
     download_file="$binary"
     echo
 elif [[ "$package" =~ \.zip$ ]]; then
+    cd "$tmp"
     unzip -o "$download_file"
     download_file="$binary"
 fi
@@ -120,7 +121,7 @@ echo
 timestamp "Moving to install dir:"
 # common alias mv='mv -i' would force a prompt we don't want, even with -f
 unalias mv &>/dev/null || :
-mv -fv "$download_file" "$destination"
+mv -fv "$tmp/$download_file" "$destination"
 echo
 
 timestamp "Installation complete"
