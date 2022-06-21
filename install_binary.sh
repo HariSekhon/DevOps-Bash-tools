@@ -50,8 +50,10 @@ url="${url//\{os\}/$os}"
 url="${url//\{arch\}/$arch}"
 
 package="${url##*/}"
-tmp="/tmp"
-download_file="$tmp/$package.$$"
+tmp="/tmp/install_binary.$$"
+download_file="$tmp/$package"
+
+mkdir -p -v "$tmp"
 
 trap_cmd "rm -f '$download_file'"
 
@@ -116,7 +118,7 @@ if [ -e "$install_path" ] && ! [ -d "$install_path" ]; then
     die "ERROR: install path $install_path is not a directory, aborting!"
 fi
 mkdir -p -v "$install_path"
-echo
+#echo
 
 timestamp "Moving to install dir:"
 # common alias mv='mv -i' would force a prompt we don't want, even with -f
