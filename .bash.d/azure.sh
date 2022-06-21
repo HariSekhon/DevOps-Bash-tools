@@ -23,6 +23,11 @@ srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 #type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
+# Azure CLI from script install, installs to $HOME/lib and $HOME/bin
+if [ -f ~/lib/azure-cli/az.completion ]; then
+    source ~/lib/azure-cli/az.completion
+fi
+
 # assh is an alias to awless ssh
 azssh(){
     local ip
