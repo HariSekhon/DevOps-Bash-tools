@@ -71,7 +71,10 @@ timestamp "Downloading: $url"
 download "$url" "$download_file"
 
 if has_tarball_extension "$package"; then
-    timestamp "Extracting package"
+    timestamp "Extracting tarball package"
+    if ! type -P tar &>/dev/null; then
+        "$srcdir/install_package.sh" tar
+    fi
     cd "$tmp"
     if has_tarball_gzip_extension "$package"; then
         tar xvzf "$download_file"
@@ -84,6 +87,10 @@ if has_tarball_extension "$package"; then
     download_file="$binary"
     echo
 elif [[ "$package" =~ \.zip$ ]]; then
+    timestamp "Extracting zip package"
+    if ! type -P unzip &>/dev/null; then
+        "$srcdir/install_package.sh" unzip
+    fi
     cd "$tmp"
     unzip -o "$download_file"
     download_file="$binary"
