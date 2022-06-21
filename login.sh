@@ -23,9 +23,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/lib/gcp.sh"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/gcp_ci.sh"
-
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs logins to well known Cloud platforms (AWS, GCP, GitHub, DockerHub etc) if any relevant authentication tokens are found for them in the environment
