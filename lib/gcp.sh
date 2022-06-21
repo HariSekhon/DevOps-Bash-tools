@@ -103,3 +103,36 @@ gcp_create_credential_if_not_exists(){
         gcloud iam service-accounts keys create "$keyfile" --iam-account="$service_account" --key-file-type="json"
     fi
 }
+
+# necessary so you can log in to different projects and maintain IAM permissions isolation for safety
+# do not use the same serviceaccount with permissions across projects, you can cross contaminate and make mistakes, deploy the wrong environment etc.
+gcp_login(){
+    local credentials_json="${1:-}"
+    if [ -n "$credentials_json" ] &&
+       [ -f "$credentials_json" ]; then
+        gcloud auth activate-service-account --key-file="$credentials_json"
+    elif [ -n "${GCP_SERVICEACCOUNT_KEY:-}" ]; then
+        # XXX: it's hard to copy the contents of this around so it's easiest to do via:
+        #
+        #   base64 credentials.json | pbcopy
+        #
+        # and then paste that into the CI/CD environment variables for the build
+        #
+        gcloud auth activate-service-account --key-file=<(base64 --decode <<< "$GCP_SERVICEACCOUNT_KEY")
+    else
+        die "no credentials.json file passed to gcp_login() and \$GCP_SERVICEACCOUNT_KEY not set in environment"
+    fi
+}
+
+gke_login(){
+    local cluster_name="$1"
+    # if running the CI build on the same k8s cluster as the deployment will go to - this is often not the case and not reliable to be detected either since we are often running these builds inside docker images and it would rely on correctly configuring the environment variables to be able to detect this. Instead just open the GKE's cluster's master networks to the projects external NAT IP
+    #local opts=(--internal-ip)
+    local opts=()
+    gcloud container clusters get-credentials "$cluster_name" "${opts[@]}"
+}
+
+enable_kaniko(){
+    #gcloud config set builds/use_kaniko True
+    export CLOUDSDK_BUILDS_USE_KANIKO=True
+}
