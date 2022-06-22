@@ -47,11 +47,6 @@ else
     [[ "$version" =~ ^v ]] || version="v$version"
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/pluto/releases/download/$version/pluto_${version#v}_{os}_{arch}.tar.gz" pluto
+export RUN_VERSION_ARG=1
 
-echo
-if am_root; then
-    /usr/local/bin/pluto version
-else
-    ~/bin/pluto version
-fi
+"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/pluto/releases/download/$version/pluto_${version#v}_{os}_{arch}.tar.gz" pluto
