@@ -221,7 +221,14 @@ is_interactive(){
     return 1
 }
 
-if [ $EUID -eq 0 ]; then
+am_root(){
+    if [ "${EUID:-${UID:-$(id -u)}}" -eq 0 ]; then
+        return 0
+    fi
+    return 1
+}
+
+if am_root; then
     sudo=""
 else
     sudo=sudo
