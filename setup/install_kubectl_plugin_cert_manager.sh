@@ -54,11 +54,7 @@ fi
 
 binary="kubectl-cert_manager"
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/kubectl-cert_manager-{os}-{arch}.tar.gz" "$binary"
+# can rusult in error trying to contact k8s cluster
+#export RUN_VERSION_ARG=1
 
-echo
-if am_root; then
-    /usr/local/bin/"$binary" version
-else
-    ~/bin/"$binary" version
-fi
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/kubectl-cert_manager-{os}-{arch}.tar.gz" "$binary"
