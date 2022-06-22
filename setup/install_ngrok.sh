@@ -54,4 +54,8 @@ if [ -n "${TOKEN:-}" ]; then
 fi
 
 echo
-ngrok version
+if am_root; then
+    /usr/local/bin/ngrok version
+else
+    ~/bin/ngrok version
+fi
