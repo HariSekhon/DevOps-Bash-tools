@@ -51,11 +51,6 @@ if [ "$arch" = amd64 ]; then
     arch=x86_64
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/docker/compose/releases/download/$version/docker-compose-{os}-$arch" "docker-compose"
+export RUN_VERSION_ARG=1
 
-echo
-if am_root; then
-    /usr/local/bin/docker-compose version
-else
-    ~/bin/docker-compose version
-fi
+"$srcdir/../install_binary.sh" "https://github.com/docker/compose/releases/download/$version/docker-compose-{os}-$arch" "docker-compose"
