@@ -84,3 +84,10 @@ if [ -z "${UPDATE_TERRAFORM:-}" ]; then
 fi
 
 "$srcdir/../install_binary.sh" "https://releases.hashicorp.com/terraform/$version/terraform_${version}_{os}_{arch}.zip" terraform
+
+echo
+if am_root; then
+    /usr/local/bin/terraform version
+else
+    ~/bin/terraform version
+fi
