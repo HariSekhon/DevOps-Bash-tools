@@ -54,4 +54,8 @@ fi
 "$srcdir/../install_binary.sh" "https://github.com/docker/compose/releases/download/$version/docker-compose-{os}-$arch" "docker-compose"
 
 echo
-docker-compose version
+if am_root; then
+    /usr/local/bin/docker-compose version
+else
+    ~/bin/docker-compose version
+fi
