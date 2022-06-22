@@ -49,5 +49,8 @@ fi
 "$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/polaris/releases/download/$version/polaris_{os}_{arch}.tar.gz" polaris
 
 echo
-export PATH="$PATH:$HOME/bin"
-polaris version
+if am_root; then
+    /usr/local/bin/polaris version
+else
+    ~/bin/polaris version
+fi
