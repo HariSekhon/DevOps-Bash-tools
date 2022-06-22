@@ -130,7 +130,7 @@ mkdir -p -v "$install_path"
 timestamp "Moving to install dir:"
 # common alias mv='mv -i' would force a prompt we don't want, even with -f
 unalias mv &>/dev/null || :
-mv -fv "$tmp/$download_file" "$destination"
+mv -fv "$download_file" "$destination"
 echo
 
 timestamp "Installation complete"
