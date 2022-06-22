@@ -49,5 +49,8 @@ fi
 "$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/nova/releases/download/$version/nova_${version#v}_{os}_{arch}.tar.gz" nova
 
 echo
-export PATH="$PATH:$HOME/bin"
-nova version
+if am_root; then
+    /usr/local/bin/nova version
+else
+    ~/bin/nova version
+fi
