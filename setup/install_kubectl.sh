@@ -47,12 +47,6 @@ else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
+export RUN_VERSION_ARG=1
+
 "$srcdir/../install_binary.sh" "https://dl.k8s.io/release/v$version/bin/{os}/{arch}/kubectl"
-
-echo
-
-if am_root; then
-    /usr/local/bin/kubectl version --client
-else
-    ~/bin/kubectl version --client
-fi
