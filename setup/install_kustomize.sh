@@ -61,4 +61,8 @@ fi
 
 # called as part of download script - call manually now
 echo
-~/bin/kustomize version -
+if am_root; then
+    /usr/local/bin/kustomize version
+else
+    ~/bin/kustomize version
+fi
