@@ -57,4 +57,8 @@ binary="kubectl-cert_manager"
 "$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/kubectl-cert_manager-{os}-{arch}.tar.gz" "$binary"
 
 echo
-~/bin/"$binary" version
+if am_root; then
+    /usr/local/bin/"$binary" version
+else
+    ~/bin/"$binary" version
+fi
