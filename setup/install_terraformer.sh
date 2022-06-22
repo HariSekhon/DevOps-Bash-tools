@@ -48,3 +48,10 @@ else
 fi
 
 "$srcdir/../install_binary.sh" "https://github.com/GoogleCloudPlatform/terraformer/releases/download/$version/terraformer-$asset-{os}-{arch}" terraformer
+
+echo
+if am_root; then
+    /usr/local/bin/terraformer version
+else
+    ~/bin/terraformer version
+fi
