@@ -53,12 +53,6 @@ package="${url##*/}"
 tmp="/tmp/install_binary.$$"
 download_file="$tmp/$package"
 
-mkdir -p -v "$tmp"
-
-trap_cmd "rm -f '$download_file'"
-
-cd "$tmp"
-
 if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     if [ $# -lt 1 ]; then
         usage "binary file path must be specified if downloading a tarball or zip file ('$package')"
@@ -68,6 +62,12 @@ if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     binary="${binary//\{os\}/$os}"
     binary="${binary//\{arch\}/$arch}"
 fi
+
+mkdir -p -v "$tmp"
+
+trap_cmd "rm -f '$download_file'"
+
+cd "$tmp"
 
 timestamp "Downloading: $url"
 download "$url" "$download_file"
