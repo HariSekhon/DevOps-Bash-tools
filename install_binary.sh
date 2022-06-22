@@ -55,9 +55,9 @@ download_file="$tmp/$package"
 
 mkdir -p -v "$tmp"
 
-cd "$tmp"
-
 trap_cmd "rm -f '$download_file'"
+
+cd "$tmp"
 
 if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     if [ $# -lt 1 ]; then
