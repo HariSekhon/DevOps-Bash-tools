@@ -114,7 +114,7 @@ if [ -z "$destination" ]; then
 fi
 
 if ! [[ "$destination" =~ ^/ ]]; then
-    if [ $EUID = 0 ]; then
+    if am_root; then
         destination="/usr/local/bin/$destination"
     else
         destination=~/bin/"$destination"
