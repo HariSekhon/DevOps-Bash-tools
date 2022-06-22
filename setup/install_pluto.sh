@@ -50,5 +50,8 @@ fi
 "$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/pluto/releases/download/$version/pluto_${version#v}_{os}_{arch}.tar.gz" pluto
 
 echo
-export PATH="$PATH:$HOME/bin"
-pluto version
+if am_root; then
+    /usr/local/bin/pluto version
+else
+    ~/bin/pluto version
+fi
