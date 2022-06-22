@@ -55,6 +55,8 @@ download_file="$tmp/$package"
 
 mkdir -p -v "$tmp"
 
+cd "$tmp"
+
 trap_cmd "rm -f '$download_file'"
 
 if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
@@ -75,7 +77,6 @@ if has_tarball_extension "$package"; then
     if ! type -P tar &>/dev/null; then
         "$srcdir/install_packages.sh" tar
     fi
-    cd "$tmp"
     if has_tarball_gzip_extension "$package"; then
         tar xvzf "$download_file"
     elif has_tarball_bzip2_extension "$package"; then
@@ -91,7 +92,6 @@ elif [[ "$package" =~ \.zip$ ]]; then
     if ! type -P unzip &>/dev/null; then
         "$srcdir/install_packages.sh" unzip
     fi
-    cd "$tmp"
     unzip -o "$download_file"
     download_file="$binary"
 fi
