@@ -46,11 +46,6 @@ else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/polaris/releases/download/$version/polaris_{os}_{arch}.tar.gz" polaris
+export RUN_VERSION_ARG=1
 
-echo
-if am_root; then
-    /usr/local/bin/polaris version
-else
-    ~/bin/polaris version
-fi
+"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/polaris/releases/download/$version/polaris_{os}_{arch}.tar.gz" polaris
