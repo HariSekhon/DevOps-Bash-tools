@@ -234,7 +234,19 @@ if [ -n "$*" ]; then
                         ;;
                   gcp)  gcp
                         ;;
+                azure)  azure
+                        ;;
+                  ecr)  ecr
+                        ;;
+                  gcr)  gcr
+                        ;;
+                  gar)  gar
+                        ;;
+                  acr)  acr
+                        ;;
                gitlab)  gitlab
+                        ;;
+                 quay)  quay
                         ;;
         esac
     done
