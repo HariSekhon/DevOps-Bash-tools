@@ -28,12 +28,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Installs Terraform
 
-Optionall specify an exact version to install as an argument (defaults to finding and using the latest version)
-
-If the 'terraform' binary is already found on \$PATH, aborts for safety as Terraform version upgrades affect the state file
-
-Set UPDATE_TERRAFORM=1 in the environment to upgrade the Terraform version
+Can optionally specify an exact version to install instead of latest (auto-determines latest release)
 "
+#If the 'terraform' binary is already found on \$PATH, aborts for safety as Terraform version upgrades affect the state file
+#Set UPDATE_TERRAFORM=1 in the environment to upgrade the Terraform version
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -57,31 +55,18 @@ else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-cd /tmp
-
-echo "version = $version"
-echo
-
-binary="terraform"
-major_version=""
-if [ -n "${VERSIONED_INSTALL:-}" ]; then
-    major_version="${version#0.}"
-    major_version="${major_version%%.*}"
-    binary="terraform$major_version"
-fi
-
-if [ -z "${UPDATE_TERRAFORM:-}" ]; then
-    # command -v catches aliases, not suitable
-    # shellcheck disable=SC2230
-    if type -P "$binary" &>/dev/null; then
-        echo "Terraform binary '$binary' is already installed and available in \$PATH"
-        echo
-        echo "To add or overwrite regardless, set the below variable and then re-run this script:"
-        echo
-        echo "export UPDATE_TERRAFORM=1"
-        exit 0
-    fi
-fi
+#if [ -z "${UPDATE_TERRAFORM:-}" ]; then
+#    # command -v catches aliases, not suitable
+#    # shellcheck disable=SC2230
+#    if type -P "$binary" &>/dev/null; then
+#        echo "Terraform binary '$binary' is already installed and available in \$PATH"
+#        echo
+#        echo "To add or overwrite regardless, set the below variable and then re-run this script:"
+#        echo
+#        echo "export UPDATE_TERRAFORM=1"
+#        exit 0
+#    fi
+#fi
 
 export RUN_VERSION_ARG=1
 
