@@ -138,4 +138,7 @@ timestamp "Installation complete"
 if [ -n "${RUN_VERSION_ARG:-}" ]; then
     echo
     "$destination" version
+elif [ -n "${RUN_VERSION_OPT:-}" ]; then
+    echo
+    "$destination" --version
 fi
