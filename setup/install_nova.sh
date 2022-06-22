@@ -46,11 +46,6 @@ else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/nova/releases/download/$version/nova_${version#v}_{os}_{arch}.tar.gz" nova
+export RUN_VERSION_ARG=1
 
-echo
-if am_root; then
-    /usr/local/bin/nova version
-else
-    ~/bin/nova version
-fi
+"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/nova/releases/download/$version/nova_${version#v}_{os}_{arch}.tar.gz" nova
