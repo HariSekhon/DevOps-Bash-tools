@@ -51,4 +51,8 @@ fi
 "$srcdir/../install_binary.sh" "https://github.com/docker/hub-tool/releases/download/$version/hub-tool-{os}-{arch}.tar.gz" hub-tool/hub-tool
 
 echo
-hub-tool version
+if am_root; then
+    /usr/local/bin/hub-tool version
+else
+    ~/bin/hub-tool version
+fi
