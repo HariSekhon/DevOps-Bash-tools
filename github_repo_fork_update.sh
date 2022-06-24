@@ -29,13 +29,14 @@ BRANCHES_TO_PR_DEFAULT="
     production
 "
 
-BRANCHES_TO_AUTOMERGE_DEFAULT="
-    master
-    main
-    develop
-    dev
-    staging
-"
+# make this more explicit for user
+BRANCHES_TO_AUTOMERGE_DEFAULT="none"
+#    master
+#    main
+#    develop
+#    dev
+#    staging
+#"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
