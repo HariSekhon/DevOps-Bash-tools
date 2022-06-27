@@ -222,10 +222,7 @@ is_interactive(){
 }
 
 am_root(){
-    if [ "${EUID:-${UID:-$(id -u)}}" -eq 0 ]; then
-        return 0
-    fi
-    return 1
+    [ "${EUID:-${UID:-$(id -u)}}" -eq 0 ]
 }
 
 if am_root; then
