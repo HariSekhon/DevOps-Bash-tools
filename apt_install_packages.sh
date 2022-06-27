@@ -57,9 +57,9 @@ if ! type "$apt" >/dev/null 2>&1; then
 fi
 
 sudo=""
-# $EUID is not defined in posix sh
-# shellcheck disable=SC2039
-[ "${EUID:-$(id -u)}" != 0 ] && sudo=sudo
+if ! am_root; then
+    sudo=sudo
+fi
 
 opts=""
 if [ -f /.dockerenv ]; then
