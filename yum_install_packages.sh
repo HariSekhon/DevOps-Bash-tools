@@ -94,19 +94,20 @@ if grep -qi 'NAME=.*CentOS' /etc/*release && grep -q '^VERSION="[68]"$' /etc/*re
     sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-*
 fi
 
-SUDO=""
-# shellcheck disable=SC2039
-[ "${EUID:-$(id -u)}" != 0 ] && SUDO=sudo
+sudo=""
+if ! am_root; then
+    sudo=sudo
+fi
 
 if [ -n "${NO_FAIL:-}" ]; then
     if type -P dnf &>/dev/null; then
         # dnf exits if any of the packages aren't found so do them individually and ignore failures
         for package in $packages; do
-            rpm -q "$package" || $SUDO dnf install -y "$package" || :
+            rpm -q "$package" || $sudo dnf install -y "$package" || :
         done
     else
         # shellcheck disable=SC2086
-        $SUDO yum install -y $packages || :
+        $sudo yum install -y $packages || :
     fi
 else
     # dnf exists with a proper error code on any error so faster to do all packages together
@@ -117,7 +118,7 @@ else
     else
         # must install separately to check install succeeded because yum install returns 0 when some packages installed and others didn't
         for package in $packages; do
-            rpm -q "$package" || $SUDO yum install -y "$package"
+            rpm -q "$package" || $sudo yum install -y "$package"
         done
     fi
 fi
