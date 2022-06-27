@@ -75,9 +75,9 @@ fi
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
 sudo=""
-# $EUID isn't available in /bin/sh in Alpine
-# shellcheck disable=SC2039
-[ "${EUID:-$(id -u)}" != 0 ] && sudo=sudo
+if ! am_root; then
+    sudo=sudo
+fi
 
 opts=""
 if is_CI; then
