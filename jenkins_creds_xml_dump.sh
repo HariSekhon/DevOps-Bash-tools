@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Dumps the XML configs of all credentials in the global system store using jenkins_cli.sh
+
+Uses adjacent jenkins_cli.sh - see there for more details on required connection settings / environment variables
 "
 
 # used by usage() in lib/utils.sh
@@ -33,4 +35,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-"$srcdir/jenkins_cli.sh" -webSocket list-credentials-as-xml system::system::jenkins
+store="${1:-system::system::jenkins}"
+
+# -webSocket is needed if Jenkins is behind a reverse proxy such as Kubernetes Ingress, otherwise Jenkins CLI hangs
+#"$srcdir/jenkins_cli.sh" -webSocket list-credentials-as-xml system::system::jenkins
+"$srcdir/jenkins_cli.sh" -webSocket list-credentials-as-xml "$store"
