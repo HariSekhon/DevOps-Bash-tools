@@ -55,8 +55,6 @@ create_credential(){
   <password>$password</password>
   <usernameSecret>false</usernameSecret>
 </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>"
-    echo "$xml"
-    set -x
     "$srcdir/jenkins_cli.sh" create-credentials-by-xml "$store" "$domain" <<< "$xml"
 }
 
