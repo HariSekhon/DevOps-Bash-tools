@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists Jenkins Credentials in the given credential store and domain
 
-Defaults to the 'system' provider's global domain '_'
+Defaults to the 'system' provider's store and global domain '_'
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
 
