@@ -16,6 +16,7 @@
 
 # XXX: IMPORTANT: if Jenkins is behind a reverse proxy such as Kubernetes Ingress, you will probably need to add the '-webSocket' argument, otherwise it Jenkins CLI will hang
 #
+#      Tip: set this in JENKINS_CLI_ARGS to not have to specify it all the time
 #
 # Examples:
 #
@@ -93,4 +94,4 @@ fi
 # cannot load jenkins job from stdin if doing this
 #java -jar "$jar" -auth @/dev/fd/0 "$@" <<< "$JENKINS_USER:$JENKINS_PASSWORD"
 #java -jar "$jar" -auth "$JENKINS_USER:$JENKINS_PASSWORD" "$@"
-java -jar "$jar" -s "$JENKINS_URL" -auth @<(cat <<< "$JENKINS_USER:$JENKINS_PASSWORD") "$@"
+java -jar "$jar" -s "$JENKINS_URL" -auth @<(cat <<< "$JENKINS_USER:$JENKINS_PASSWORD") ${JENKINS_CLI_ARGS:-} "$@"
