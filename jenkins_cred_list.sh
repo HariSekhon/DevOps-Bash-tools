@@ -37,6 +37,8 @@ help_usage "$@"
 
 store="${1:-system}"
 domain="${2:-_}"
+shift || :
+shift || :
 
 "$srcdir/jenkins_api.sh" "/credentials/store/$store/domain/$domain/api/json?tree=credentials\\[id\\]" "$@" |
 jq -r '.credentials[].id' |
