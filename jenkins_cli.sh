@@ -22,31 +22,31 @@
 #
 #   # See all CLI options:
 #
-#       jenkins_cli.sh -webSocket help
+#       jenkins_cli.sh help
 #
 #   # Show your authenticated user:
 #
-#       jenkins_cli.sh -webSocket who-am-i
+#       jenkins_cli.sh who-am-i
 #
 #   # List Plugins:
 #
-#       jenkins_cli.sh -webSocket list-plugins
+#       jenkins_cli.sh list-plugins
 #
 #   # List Jobs (Pipelines):
 #
-#       jenkins_cli.sh -webSocket list-jobs
+#       jenkins_cli.sh list-jobs
 #
 #   # List Credential Providers:
 #
-#       jenkins_cli.sh -webSocket list-credentials-providers
+#       jenkins_cli.sh list-credentials-providers
 #
 #   # List Credentials in the default global in-built credential store:
 #
-#       jenkins_cli.sh -webSocket list-credentials system::system::jenkins
+#       jenkins_cli.sh list-credentials system::system::jenkins
 #
 #   # Dump all Credentials configurations in the default in-build credentials store in XML format:
 #
-#       jenkins_cli.sh -webSocket list-credentials-as-xml system::system::jenkins
+#       jenkins_cli.sh list-credentials-as-xml system::system::jenkins
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
