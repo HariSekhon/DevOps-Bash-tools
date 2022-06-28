@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: -webSocket help
 #
 #  Author: Hari Sekhon
 #  Date: 2020-03-28 12:56:30 +0000 (Sat, 28 Mar 2020)
@@ -12,6 +13,39 @@
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
+
+# XXX: IMPORTANT: if Jenkins is behind a reverse proxy such as Kubernetes Ingress, you will probably need to add the '-webSocket' argument, otherwise it Jenkins CLI will hang
+#
+#
+# Examples:
+#
+#   # See all CLI options:
+#
+#       jenkins_cli.sh -webSocket help
+#
+#   # Show your authenticated user:
+#
+#       jenkins_cli.sh -webSocket who-am-i
+#
+#   # List Plugins:
+#
+#       jenkins_cli.sh -webSocket list-plugins
+#
+#   # List Jobs (Pipelines):
+#
+#       jenkins_cli.sh -webSocket list-jobs
+#
+#   # List Credential Providers:
+#
+#       jenkins_cli.sh -webSocket list-credentials-providers
+#
+#   # List Credentials in the default global in-built credential store:
+#
+#       jenkins_cli.sh -webSocket list-credentials system::system::jenkins
+#
+#   # Dump all Credentials configurations in the default in-build credentials store in XML format:
+#
+#       jenkins_cli.sh -webSocket list-credentials-as-xml system::system::jenkins
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
@@ -59,4 +93,4 @@ fi
 # cannot load jenkins job from stdin if doing this
 #java -jar "$jar" -auth @/dev/fd/0 "$@" <<< "$JENKINS_USER:$JENKINS_PASSWORD"
 #java -jar "$jar" -auth "$JENKINS_USER:$JENKINS_PASSWORD" "$@"
-java -jar "$jar" -auth @<(cat <<< "$JENKINS_USER:$JENKINS_PASSWORD") "$@"
+java -jar "$jar" -s "$JENKINS_URL" -auth @<(cat <<< "$JENKINS_USER:$JENKINS_PASSWORD") "$@"
