@@ -27,7 +27,7 @@ Creates a Jenkins credential in the given credential store and domain
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
-Uses the adjacent jenkins_li.sh - see there for authentication details
+Uses the adjacent jenkins_cli.sh - see there for authentication details
 "
 
 # used by usage() in lib/utils.sh
