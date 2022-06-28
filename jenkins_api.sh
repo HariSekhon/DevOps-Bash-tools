@@ -75,4 +75,4 @@ else
     CURL_OPTS+=(-H "Jenkins-Crumb: $crumb")
 fi
 
-"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@"
