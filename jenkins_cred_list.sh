@@ -27,6 +27,17 @@ Lists Jenkins Credentials in the given credential store and domain
 Defaults to the 'system' provider's global domain '_'
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
+
+
+The returned credential IDs are what you should be specifying in your Jenkinsfile pipeline:
+
+    environment {
+        MYVAR = credentials('some-id')
+    }
+
+See master Jenkinsfile for more examples:
+
+    https://github.com/HariSekhon/Jenkins/blob/master/Jenkinsfile
 "
 
 # used by usage() in lib/utils.sh
