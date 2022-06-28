@@ -40,6 +40,12 @@ If using JENKINS_PASSWORD, obtains the Jenkins-Crumb cookie from a pre-request
 On Jenkins 2.176.2 onwards, you must set JENKINS_TOKEN instead of using a password, see
 
     https://www.jenkins.io/doc/upgrade-guide/2.176/#SECURITY-626
+
+Example:
+
+    # List Credentials in the Global System Provider Store:
+
+    ${0##*/} '/credentials/store/system/domain/_/api/json?tree=credentials\[id\]' | jq .
 "
 
 # used by usage() in lib/utils.sh
