@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: -webSocket help
+#  args: help
 #
 #  Author: Hari Sekhon
 #  Date: 2020-03-28 12:56:30 +0000 (Sat, 28 Mar 2020)
