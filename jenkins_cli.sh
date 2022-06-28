@@ -24,6 +24,10 @@
 #
 #       jenkins_cli.sh help
 #
+#   # Get Jenkins version:
+#
+#       jenkins_cli.sh version
+#
 #   # Show your authenticated user:
 #
 #       jenkins_cli.sh who-am-i
