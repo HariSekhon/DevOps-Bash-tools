@@ -84,7 +84,7 @@ create_credential(){
         domain_name='GLOBAL'
     fi
     local xml="<org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl>
-  <scope>$domain</scope>
+  <scope>$domain_name</scope>
   <id>$id</id>
   <description>$description</description>
   <secret>$secret</secret>
