@@ -40,15 +40,15 @@ Uses the adjacent jenkins_api.sh - see there for authentication details
 
 Examples:
 
-	# create a credential with id 'my-k8s-sa':
+    # create a credential with id 'my-k8s-sa':
 
-    	${0##*/} my-k8s-sa 'My Description'
+        ${0##*/} my-k8s-sa 'My Description'
 
     # or piped from standard input:
 
         # export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
 
-		echo my-k8s-sa=my description | ${0##*/}
+        echo my-k8s-sa=my description | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
