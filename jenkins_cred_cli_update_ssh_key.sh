@@ -96,7 +96,7 @@ update_credential(){
     <privateKey>$private_key</privateKey>
   </privateKeySource>
 </com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>"
-    timestamp "Creating Jenkins ssh key credential '$id' in store '$store' domain '$domain_name'"
+    timestamp "Updating Jenkins ssh key credential '$id' in store '$store' domain '$domain_name'"
     "$srcdir/jenkins_cli.sh" update-credentials-by-xml "$store" "$domain" "$id" <<< "$xml"
     timestamp "Secret '$id' updated"
 }
