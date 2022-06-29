@@ -68,8 +68,8 @@ kube_config_isolate
 key_values=()
 
 add_kv(){
-    local env_var="$1"
-    parse_export_key_value "$env_var"
+    local key_value="$1"
+    parse_export_key_value "$key_value"
     key_values+=("--from-literal=$key=$value")
 }
 
