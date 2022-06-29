@@ -38,9 +38,9 @@ Uses the adjacent jenkins_cli.sh - see there for authentication details
 
 Examples:
 
-	# update a credential with id 'aws-access-key-id', and text 'AKIA...':
+    # update a credential with id 'aws-access-key-id', and text 'AKIA...':
 
-    	${0##*/} aws-access-key-id AKIA...
+        ${0##*/} aws-access-key-id AKIA...
 
     # with a description, leaving the store and domain as the default global one:
 
@@ -50,10 +50,10 @@ Examples:
 
         # export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
 
-		echo 'AWS_ACCESS_KEY_ID=AKIA...' | ${0##*/}
-		echo 'AWS_SECRET_ACCESS_KEY=...' | ${0##*/}
+        echo 'AWS_ACCESS_KEY_ID=AKIA...' | ${0##*/}
+        echo 'AWS_SECRET_ACCESS_KEY=...' | ${0##*/}
 
-	# using aws_csv_creds.sh to load the credentials from a standard AWS credential download:
+    # using aws_csv_creds.sh to load the credentials from a standard AWS credential download:
 
         aws_csv_creds.sh ~/.aws/keys/downloaded_access_key_creds.csv | ${0##*/}
 "
