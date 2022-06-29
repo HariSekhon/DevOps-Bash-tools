@@ -34,6 +34,17 @@ In cases where you are reading secrets from stdin, you can set the store and dom
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
 
 Uses the adjacent jenkins_cli.sh - see there for authentication details
+
+
+Example:
+
+    # create a credential with id 'hari-ssh-key', username 'hari' and load the private key contents from my ~/.ssh/id_rsa file:
+
+        ${0##*/} hari-ssh-key hari ~/.ssh/id_rsa
+
+    # with a description, leaving the store and domain as the default global one:
+
+        ${0##*/} hari-ssh-key hari ~/.ssh/id_rsa '' '' 'My SSH Key'
 "
 
 # used by usage() in lib/utils.sh
