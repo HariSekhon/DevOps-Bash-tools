@@ -745,11 +745,29 @@ etc.
 - `shippable_api.sh` - queries [Shippable](https://www.shippable.com/)'s API with authentication
 - `wercker_app_api.sh` - queries [Wercker](https://app.wercker.com/)'s Applications API with authentication
 - `gocd_api.sh` - queries [GoCD](https://www.gocd.org/)'s API
-- `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/), launches in docker, (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`), detects and enables agent(s) to start building. Call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
-- `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/), launches in docker, configures pipeline from `$PWD/.concourse.yml`, triggers build, tails results in terminal, prints recent build statuses at end. Call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
-  - `fly.sh` - shortens `fly` command to not have to specify target all the time
+- `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/)
+    - launches in Docker
+    - (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`)
+    - detects and enables agent(s) to start building
+    - call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
+- `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/)
+  - launches in Docker
+  - configures pipeline from `$PWD/.concourse.yml`
+  - triggers build
+  - tails results in terminal
+  - prints recent build statuses at end
+  - call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
+- `fly.sh` - shortens [Concourse](https://concourse-ci.org/) `fly` command to not have to specify target all the time
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
-  - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/) - launches docker container, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
+  - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/)
+    - launches Docker container
+    - installs plugins
+    - validates `Jenkinsfile`
+    - configures job from `$PWD/setup/jenkins-job.xml`
+    - sets Pipeline to git remote origin's `Jenkinsfile`
+    - triggers build
+    - tails results in terminal
+    - call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
   - `jenkins_api.sh` - queries the Jenkins Rest API, handling crumb pre-authentication, using `$JENKINS_URL`, or constructing it from `$JENKINS_HOST` and `$JENKINS_PORT`, and variations of `JENKINS_USER` and `$JENKINS_PASSWORD`
     - `jenkins_cred_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
@@ -795,8 +813,11 @@ etc.
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
 - `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
-  - `teamcity.sh` - boots TeamCity CI cluster in docker, just click proceed and accept the EULA and it does the rest, it even creates an admin user and an API token for you
-  - See Also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo
+  - `teamcity.sh` - one-touch TeamCity CI cluster:
+    - launches Docker container
+    - click proceed and accept the EULA
+    - creates an admin user and an API token for you
+    - see also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo for importing pipelines
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
   - `teamcity_create_project.sh` - creates a TeamCity project using the API
   - `teamcity_create_github_oauth_connection.sh` - creates a TeamCity GitHub OAuth VCS connection in the Root project, useful for bootstrapping projects from VCS configs
