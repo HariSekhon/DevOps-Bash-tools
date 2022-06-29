@@ -112,18 +112,18 @@ create_policy(){
         timestamp "Policy created"
     fi
     set -o pipefail
-	echo
+    echo
 }
 
 attach_policy(){
     local policy="$1"
-	timestamp "Attaching policy '$policy' to user '$user'"
+    timestamp "Attaching policy '$policy' to user '$user'"
     timestamp "Determining ARN for policy '$policy'"
     policy_arn="$(aws iam list-policies | jq -r ".Policies[] | select(.PolicyName == \"$policy\") | .Arn")"
     timestamp "Determined policy ARN:  $policy_arn"
     timestamp "Granting policy '$policy' permissions directly to user '$user' in account '$aws_account_id'"
     aws iam attach-user-policy --user-name "$user" --policy-arn "$policy_arn"
-	echo
+    echo
 }
 
 create_policy "$dynamodb_policy" "$dynamodb_policy_document"
