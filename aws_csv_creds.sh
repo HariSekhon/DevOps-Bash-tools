@@ -32,6 +32,7 @@ Supports new user and new access key csv file formats eg. 'Download .csv file' w
 Useful to quickly switch your shell to some exported credentials from a service account for testing permissions
 or pipe to upload to a CI/CD system via an API, eg. the adjacent scripts:
 
+    jenkins_cred_add*.sh
     github_actions_repo*_set_secret.sh
     gitlab_*_set_env_vars.sh
     circleci_*_set_env_vars.sh
