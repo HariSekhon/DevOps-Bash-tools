@@ -28,7 +28,7 @@ Plan: 1 to add, 1 to change, 1 to destroy.
 module.mymodule.aws_iam_policy.mypolicy: Destroying... [id=arn:aws:iam::***:policy/mypolicy]
 ╷
 │Error: error deleting IAM policy arn:aws:iam::***:policy/mypolicy: DeleteConflict: Cannot delete a policy attached to entities.
-│	status code: 409, request id: 1f9ca3ee-48fb-4e5e-9e58-5c266e29e9be
+│    status code: 409, request id: 1f9ca3ee-48fb-4e5e-9e58-5c266e29e9be
 
 "
 
@@ -47,7 +47,7 @@ policy_arn="arn:aws:iam::$aws_account_id:policy/$policy"
 find_entities(){
     local entity_type="$1"
     aws iam list-entities-for-policy --policy-arn "$policy_arn" |
-	jq_debug_pipe_dump |
+    jq_debug_pipe_dump |
     jq -r ".Policy${entity_type}s[].${entity_type}Name" |
     while read -r entity; do
         printf '%s\t%s\n' "$entity_type" "$entity"
