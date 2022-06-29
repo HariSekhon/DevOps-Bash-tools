@@ -814,8 +814,13 @@ etc.
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
 - `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
   - `teamcity.sh` - one-touch [TeamCity CI](https://www.jetbrains.com/teamcity/) cluster:
-    - launches Docker container
+    - launches Docker containers with server and 1 agent
     - click proceed and accept the EULA
+    - waits for server to initialize
+    - waits for agent to register
+    - authorizes agent
+    - creates a VCS Root if `$PWD` has a `.teamcity.vcs.json` / `.teamcity.vcs.ssh.json` / `.teamcity.vcs.oauth.json` and corresponding `$TEAMCITY_SSH_KEY` or `$TEAMCITY_GITHUB_CLIENT_ID`+`$TEAMCITY_GITHUB_CLIENT_SECRET` environment variables
+    - creates a Project and imports all settings and builds from the VCS Root
     - creates an admin user and an API token for you
     - see also: [TeamCity CI](https://github.com/HariSekhon/TeamCity-CI) config repo for importing pipelines
   - `teamcity_api.sh` - queries TeamCity's API, auto-handling authentication and other quirks of the API
