@@ -67,7 +67,7 @@ update_credential(){
     if [ "$domain_name" = '_' ]; then
         domain_name='GLOBAL'
     fi
-    xml="<org.jenkinsci.plugins.kubernetes.credentials.FileSystemServiceAccountCredential>
+    local xml="<org.jenkinsci.plugins.kubernetes.credentials.FileSystemServiceAccountCredential>
   <scope>GLOBAL</scope>
   <id>$id</id>
   <description>$description</description>
