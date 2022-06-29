@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: haritest-cli-credential hari mypassword
+#  args: haritest-cli-credential hari mypassword "" "" "my description"
 #
 #  Author: Hari Sekhon
 #  Date: 2022-06-28 18:34:34 +0100 (Tue, 28 Jun 2022)
@@ -76,7 +76,7 @@ create_credential(){
 }
 
 if [ -n "$password" ]; then
-    create_credential "$id" "$user"="$password"
+    create_credential "$id" "$user"="$password" "$description"
 else
     while read -r id user_password; do
         if [ -z "${user_password:-}" ] && [[ "$id" =~ = ]]; then
@@ -87,6 +87,6 @@ else
             timestamp "WARNING: invalid line detected, skipping creating credential"
             continue
         fi
-        create_credential "$id" "$user_password"
+        create_credential "$id" "$user_password" "$description"
     done < <(sed 's/^[[:space:]]*export[[:space:]]*//; /^[[:space:]]*$/d')
 fi
