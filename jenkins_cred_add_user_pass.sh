@@ -32,7 +32,7 @@ Defaults to the 'system' provider's store and global domain '_'
 If credential id, user and password aren't given as arguments, then reads from stdin, reading in KEY=VALUE
 or standard shell export format - useful for piping from tools like aws_csv_creds.sh
 
-If standard input does not have an id field, the id will be generated from the username lowercased with -user-pass appended.
+If standard input does not have an id field, the id will be generated from the username lowercased with '-user-pass' appended.
 
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
@@ -95,7 +95,7 @@ create_credential(){
   <usernameSecret>false</usernameSecret>
 </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>"
     timestamp "Creating Jenkins username/password credential '$id' in store '$store' domain '$domain_name'"
-    "$srcdir/jenkins_api.sh" "/credentials/store/$store/domain/$domain/createCredentials" -X POST -H "content-type: application/xml" -d @<(cat <<< "$xml") ${curl_args:+"${curl_args[@]}"}
+    "$srcdir/jenkins_api.sh" "/credentials/store/$store/domain/$domain/createCredentials" -X POST -H "Content-Type: application/xml" -d @<(cat <<< "$xml") ${curl_args:+"${curl_args[@]}"}
     timestamp "Secret '$id' created"
 }
 
