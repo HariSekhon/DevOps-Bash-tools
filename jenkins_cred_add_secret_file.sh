@@ -69,8 +69,6 @@ description="${5:-}"
 for _ in {1..5}; do shift || : ; done
 curl_args=("$@")
 
-export CURL_OPTS="-i"
-
 create_credential(){
     local key_value="$1"
     local description="${2:-}"
