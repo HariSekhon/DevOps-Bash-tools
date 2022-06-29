@@ -14,6 +14,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://github.com/jenkinsci/credentials-plugin/blob/master/docs/user.adoc#creating-a-credentials
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
