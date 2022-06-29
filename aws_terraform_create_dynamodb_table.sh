@@ -54,13 +54,13 @@ timestamp "Checking for existing DynamoDB table '$table'"
 if aws dynamodb list-tables "$@" | jq -r '.TableNames[]' | grep -Fxq "$table"; then
     timestamp "WARNING: table '$table' already exists in region '$aws_region', not creating..."
 else
-	timestamp "Creating Terraform DynamoDB table '$table' in region '$aws_region'"
+    timestamp "Creating Terraform DynamoDB table '$table' in region '$aws_region'"
     aws dynamodb create-table --table-name "$table" \
                               --key-schema AttributeName=LockID,KeyType=HASH \
                               --attribute-definitions AttributeName=LockID,AttributeType=S \
                               --billing-mode PAY_PER_REQUEST \
                               "$@"
-	timestamp "DynamoDB table created"
+    timestamp "DynamoDB table created"
 fi
 
 echo
@@ -91,7 +91,7 @@ set +o pipefail  # early termination from the pipeline will fail the check other
 if aws iam list-policies | jq -r '.Policies[].PolicyName' | grep -Fxq "$policy"; then
     timestamp "WARNING: policy '$policy' already exists, not creating..."
 else
-	timestamp "Creating Terraform DynamoDB Policy '$policy'"
+    timestamp "Creating Terraform DynamoDB Policy '$policy'"
     aws iam create-policy --policy-name "$policy" --policy-document "$policy_document"
-	timestamp "DynamoDB policy created"
+    timestamp "DynamoDB policy created"
 fi
