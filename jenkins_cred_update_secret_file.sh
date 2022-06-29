@@ -94,7 +94,9 @@ update_credential(){
   <secret>$secret</secret>
 </org.jenkinsci.plugins.plaincredentials.impl.StringCredentialsImpl>"
     timestamp "Updating Jenkins secret file credential '$id' in store '$store' domain '$domain_name'"
+    # can break on files with DOS line endings
     #"$srcdir/jenkins_api.sh" "/credentials/store/$store/domain/$domain/credential/$id/config.xml" -X POST -H "Content-Type: application/xml" -d @<(cat <<< "$xml") ${curl_args:+"${curl_args[@]}"}
+    # this works either way
     "$srcdir/jenkins_api.sh" "/credentials/store/$store/domain/$domain/credential/$id/config.xml" -X POST -H "Content-Type: application/xml" -d "$xml" ${curl_args:+"${curl_args[@]}"}
     timestamp "Secret '$id' updated"
 }
