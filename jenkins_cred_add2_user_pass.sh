@@ -50,7 +50,7 @@ Examples:
 
     # or piped from standard input:
 
-        #export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN in this use case if not using system global store
+        #export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
 
         echo 'hari=mypassword' | ${0##*/}
 "
