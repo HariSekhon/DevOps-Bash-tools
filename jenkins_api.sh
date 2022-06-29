@@ -45,7 +45,7 @@ Example:
 
     # List Credentials in the Global System Provider Store:
 
-        ${0##*/} '/credentials/store/system/domain/_/api/json?tree=credentials\[id\]' | jq .
+        ${0##*/} '/credentials/store/system/domain/_/api/json?tree=credentials\\[id\\]' | jq .
 
     # Retrieve the config of a given credential by its ID, in this case 'haritest':
 
