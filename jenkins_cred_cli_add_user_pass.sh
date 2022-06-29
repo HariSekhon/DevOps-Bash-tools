@@ -71,6 +71,7 @@ description="${6:-}"
 create_credential(){
     local id="$1"
     local key_value="$2"
+    local description="${3:-}"
     parse_export_key_value "$key_value"
     # key/value are exported by above function
     # shellcheck disable=SC2154
