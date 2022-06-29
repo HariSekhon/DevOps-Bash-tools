@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: haritest-cli-credential hari mypassword "" "" "my description"
+#  args: haritest-cli-credential hari mypassword "" "" "My Test Username + Password"
 #
 #  Author: Hari Sekhon
 #  Date: 2022-06-28 18:34:34 +0100 (Tue, 28 Jun 2022)
