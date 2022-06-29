@@ -81,7 +81,7 @@ create_credential(){
     if [ "$domain_name" = '_' ]; then
         domain_name='GLOBAL'
     fi
-    xml="<com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
+    local xml="<com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>
   <scope>$domain_name</scope>
   <id>$id</id>
   <description>$description</description>
