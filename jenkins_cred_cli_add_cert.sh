@@ -27,8 +27,8 @@ Creates a Jenkins Certificate Credential in the given credential store and domai
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
-If credential id and PKCS#12 keystore file aren't given as arguments, then reads from stdin, reading in KEY=VALUE
-or standard shell export format - useful for shell piping
+If credential id and PKCS#12 keystore file aren't given as arguments, then reads from stdin, reading in
+'ID=/path/to/keystore Description' or standard shell export format - useful for shell piping
 
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
@@ -53,7 +53,7 @@ Examples:
 
     # or piped from standard input:
 
-        # export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
+        # export KEYSTORE_PASSWORD, JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
 
 		echo my-certificate-keystore=~/Downloads/test.p12 | ${0##*/}
 "
@@ -99,7 +99,7 @@ create_credential(){
   </keyStoreSource>
   <password>$keystore_password</password>
 </com.cloudbees.plugins.credentials.impl.CertificateCredentialsImpl>"
-    timestamp "Creating Jenkins secret file credential '$id' in store '$store' domain '$domain_name'"
+    timestamp "Creating Jenkins certificate keystore credential '$id' in store '$store' domain '$domain_name'"
     "$srcdir/jenkins_cli.sh" create-credentials-by-xml "$store" "$domain" <<< "$xml"
     timestamp "Secret '$id' created"
 }
