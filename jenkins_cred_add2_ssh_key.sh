@@ -38,7 +38,7 @@ In cases where you are reading secrets from stdin, you can set the store and dom
 Uses the adjacent jenkins_cli.sh - see there for authentication details
 
 
-Example:
+Examples:
 
     # create a credential with id 'hari-ssh-key', username 'hari' and load the private key contents from my ~/.ssh/id_rsa file:
 
@@ -50,7 +50,7 @@ Example:
 
     # or piped from standard input:
 
-        #export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN in this use case if not using system global store
+        #export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin if not using system global store
 
         echo hari=~/.ssh/id_rsa | ${0##*/}
 "
