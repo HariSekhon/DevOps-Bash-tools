@@ -79,8 +79,8 @@ fi
 #repo_public_key_id="$(jq -r '.key_id' <<< "$repo_public_key_data")"
 
 add_secret(){
-    local env_var="$1"
-    parse_export_key_value "$env_var"
+    local key_value="$1"
+    parse_export_key_value "$key_value"
     # shellcheck disable=SC2154
     timestamp "setting GitHub secret '$key' in repo '$owner_repo'"
     # https://docs.github.com/en/rest/reference/actions#create-or-update-a-repository-secret--code-samples
