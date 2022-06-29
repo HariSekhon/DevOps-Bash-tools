@@ -86,7 +86,7 @@ create_credential(){
     if [ "$domain_name" = '_' ]; then
         domain_name='GLOBAL'
     fi
-    xml="<com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>
+    local xml="<com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>
   <scope>$domain</scope>
   <id>$id</id>
   <description>$description</description>
