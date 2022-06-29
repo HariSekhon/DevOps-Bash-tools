@@ -47,6 +47,12 @@ Example:
     # with a description, leaving the store and domain as the default global one:
 
         ${0##*/} hari-ssh-key hari ~/.ssh/id_rsa '' '' 'My SSH Key'
+
+    # or piped from standard input:
+
+        #export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN in this use case if not using system global store
+
+        echo hari=~/.ssh/id_rsa | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
@@ -72,14 +78,15 @@ create_credential(){
     local user="$key"
     # shellcheck disable=SC2154
     local private_key="$value"
-	if [ -f "$private_key" ]; then
-		private_key="$(cat "$private_key")"
-	fi
+    if [ -f "$private_key" ]; then
+        timestamp "Reading private key from file '$private_key'"
+        private_key="$(cat "$private_key")"
+    fi
     local domain_name="$domain"
     if [ "$domain_name" = '_' ]; then
         domain_name='GLOBAL'
     fi
-	xml="<com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>
+    xml="<com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>
   <scope>$domain</scope>
   <id>$id</id>
   <description>$description</description>
