@@ -38,19 +38,19 @@ Uses the adjacent jenkins_cli.sh - see there for authentication details
 
 Examples:
 
-	# create a credential with id 'aws-access-key-csv', and file ~/.aws/keys/jenkins_accessKeys.csv:
+    # create a credential with id 'aws-access-key-csv', and file ~/.aws/keys/jenkins_accessKeys.csv:
 
-    	${0##*/} aws-access-key-csv ~/.aws/keys/jenkins_accessKeys.csv
+        ${0##*/} aws-access-key-csv ~/.aws/keys/jenkins_accessKeys.csv
 
     # with a description, leaving the store and domain as the default global one:
 
-    	${0##*/} aws-access-key-csv ~/.aws/keys/jenkins_accessKeys.csv '' '' 'My AWS Access Key CSV'
+        ${0##*/} aws-access-key-csv ~/.aws/keys/jenkins_accessKeys.csv '' '' 'My AWS Access Key CSV'
 
     # or piped from standard input:
 
         # export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
 
-		echo aws-access-key-csv=~/.aws/keys/jenkins_accessKeys.csv | ${0##*/}
+        echo aws-access-key-csv=~/.aws/keys/jenkins_accessKeys.csv | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
