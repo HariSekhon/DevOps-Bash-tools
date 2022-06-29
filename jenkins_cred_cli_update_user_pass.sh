@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Updates the given Jenkins credential in the given credential store and domain
+Updates the given Jenkins Username/Password Credential in the given credential store and domain
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
