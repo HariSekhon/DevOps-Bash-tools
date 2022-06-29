@@ -27,7 +27,7 @@ Creates a Jenkins SSH Key Credential in the given credential store and domain
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
-If credential, user and password aren't given as arguments, then reads from stdin, reading in KEY=VALUE
+If credential id, user and private_key aren't given as arguments, then reads from stdin, reading in KEY=VALUE
 or standard shell export format - useful for piping from tools like aws_csv_creds.sh
 
 If standard input does not have an id field, the id will be generated from the username lowercased with '-ssh-key' appended
