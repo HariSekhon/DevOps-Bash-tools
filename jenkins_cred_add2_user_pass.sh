@@ -89,7 +89,7 @@ create_credential(){
   <password>$password</password>
   <usernameSecret>false</usernameSecret>
 </com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl>"
-    timestamp "Creating Jenkins username/password secret '$id' in store '$store' domain '$domain_name'"
+    timestamp "Creating Jenkins username/password credential '$id' in store '$store' domain '$domain_name'"
     "$srcdir/jenkins_cli.sh" create-credentials-by-xml "$store" "$domain" <<< "$xml"
     timestamp "Secret '$id' created"
 }
