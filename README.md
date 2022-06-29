@@ -745,12 +745,12 @@ etc.
 - `shippable_api.sh` - queries [Shippable](https://www.shippable.com/)'s API with authentication
 - `wercker_app_api.sh` - queries [Wercker](https://app.wercker.com/)'s Applications API with authentication
 - `gocd_api.sh` - queries [GoCD](https://www.gocd.org/)'s API
-- `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/)
+- `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/):
     - launches in Docker
     - (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`)
     - detects and enables agent(s) to start building
     - call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
-- `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/)
+- `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/):
   - launches in Docker
   - configures pipeline from `$PWD/.concourse.yml`
   - triggers build
@@ -759,7 +759,7 @@ etc.
   - call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `fly.sh` - shortens [Concourse](https://concourse-ci.org/) `fly` command to not have to specify target all the time
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
-  - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/)
+  - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/):
     - launches Docker container
     - installs plugins
     - validates `Jenkinsfile`
@@ -813,7 +813,7 @@ etc.
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
 - `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
-  - `teamcity.sh` - one-touch TeamCity CI cluster:
+  - `teamcity.sh` - one-touch [TeamCity CI](https://www.jetbrains.com/teamcity/) cluster:
     - launches Docker container
     - click proceed and accept the EULA
     - creates an admin user and an API token for you
