@@ -43,19 +43,19 @@ Examples:
         openssl req -x509 -nodes -newkey rsa:2048 -keyout test.key -out test.crt -subj '/CN=test.com'
         openssl pkcs12 -export -inkey test.key -in test.crt -passout pass: -out test.p12
 
-	# create a credential with id 'aws-access-key-csv', and file ~/.aws/keys/jenkins_accessKeys.csv:
+    # create a credential with id 'aws-access-key-csv', and file ~/.aws/keys/jenkins_accessKeys.csv:
 
-    	${0##*/} my-certificate-keystore ~/Downloads/test.p12
+        ${0##*/} my-certificate-keystore ~/Downloads/test.p12
 
     # with a description, leaving the store and domain as the default global one:
 
-    	${0##*/} my-certificate-keystore ~/Downloads/test.p12 '' '' 'My Certificate Keystore'
+        ${0##*/} my-certificate-keystore ~/Downloads/test.p12 '' '' 'My Certificate Keystore'
 
     # or piped from standard input:
 
         # export KEYSTORE_PASSWORD, JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN if using stdin but not using system global store
 
-		echo my-certificate-keystore=~/Downloads/test.p12 | ${0##*/}
+        echo my-certificate-keystore=~/Downloads/test.p12 | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
