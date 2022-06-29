@@ -56,8 +56,8 @@ export AWS_DEFAULT_OUTPUT=json
 if aws s3 ls "s3://$bucket" &>/dev/null; then
     timestamp "Bucket '$bucket' already exists"
 else
-	timestamp "Creating S3 bucket:  $bucket"
-	aws s3 mb "s3://$bucket" || :
+    timestamp "Creating S3 bucket:  $bucket"
+    aws s3 mb "s3://$bucket" || :
 fi
 echo >&2
 
@@ -122,6 +122,6 @@ $(
 }
 EOF
 )"
-		timestamp "Bucket policy created"
+        timestamp "Bucket policy created"
     fi
 fi
