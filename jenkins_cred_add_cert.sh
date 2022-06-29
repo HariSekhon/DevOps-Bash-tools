@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: hari-test-cli-cert ~/Downloads/test.p12 "" "" "" "My Cert Keystore"
+#  args: hari-test-api-cert ~/Downloads/test.p12 "" "" "" "My Cert Keystore"
 #
 #  Author: Hari Sekhon
 #  Date: 2022-06-28 18:34:34 +0100 (Tue, 28 Jun 2022)
