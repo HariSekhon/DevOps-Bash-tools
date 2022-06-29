@@ -38,7 +38,7 @@ In cases where you are reading secrets from stdin, you can set the store and dom
 Uses the adjacent jenkins_cli.sh - see there for authentication details
 
 
-Example:
+Examples:
 
     # create a credential with id 'hari-user-pass', username 'hari' and password 'mypassword':
 
