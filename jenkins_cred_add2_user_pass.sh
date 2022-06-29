@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: haritest-cli-credential hari mypassword "" "" "My Test Username + Password"
+#  args: hari-test-cli-user-pass hari mypassword "" "" "My Test Username + Password"
 #
 #  Author: Hari Sekhon
 #  Date: 2022-06-28 18:34:34 +0100 (Tue, 28 Jun 2022)
@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a Jenkins credential in the given credential store and domain
+Creates a Jenkins Username/Password Credential in the given credential store and domain
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
