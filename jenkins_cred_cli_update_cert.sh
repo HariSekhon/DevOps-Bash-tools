@@ -90,7 +90,7 @@ update_credential(){
     if [ "$domain_name" = '_' ]; then
         domain_name='GLOBAL'
     fi
-	xml="<com.cloudbees.plugins.credentials.impl.CertificateCredentialsImpl>
+	local xml="<com.cloudbees.plugins.credentials.impl.CertificateCredentialsImpl>
   <scope>$domain</scope>
   <id>$id</id>
   <description>$description</description>
