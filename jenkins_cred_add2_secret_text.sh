@@ -27,7 +27,7 @@ Creates a Jenkins Secret Text Credential in the given credential store and domai
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
-If credential id, user and password aren't given as arguments, then reads from stdin, reading in KEY=VALUE
+If credential id and secret text aren't given as arguments, then reads from stdin, reading in KEY=VALUE
 or standard shell export format - useful for piping from tools like aws_csv_creds.sh
 
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
