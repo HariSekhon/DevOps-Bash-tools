@@ -750,8 +750,22 @@ etc.
   - `fly.sh` - shortens `fly` command to not have to specify target all the time
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
   - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/) - launches docker container, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
-  - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL` and authentication using `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup
+  - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL`, `$JENKINS_CLI_ARGS` and authentication using `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup and the following scripts:
     - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
+    - `jenkins_cred_cli_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
+    - `jenkins_cred_cli_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
+    - `jenkins_cred_cli_add_secret_file.sh` - creates a Jenkins secret file credential from a file
+    - `jenkins_cred_cli_add_secret_text.sh` - creates a Jenkins secret string credential from a string or a file
+    - `jenkins_cred_cli_add_ssh_key.sh` - creates a Jenkins SSH key credential from a string or an SSH private key file
+    - `jenkins_cred_cli_add_user_pass.sh` - creates a Jenkins username/password credential
+    - `jenkins_cred_cli_delete.sh` - deletes a given Jenkins credential by id
+    - `jenkins_cred_cli_list.sh` - lists Jenkins credentials IDs and Names
+    - `jenkins_cred_cli_update_cert.sh` - updates a Jenkins certificate credential from a PKCS#12 keystore
+    - `jenkins_cred_cli_update_kubernetes_sa.sh` - updates a Jenkins Kubernetes service account credential
+    - `jenkins_cred_cli_update_secret_file.sh` - updates a Jenkins secret file credential from a file
+    - `jenkins_cred_cli_update_secret_text.sh` - updates a Jenkins secret string credential from a string or a file
+    - `jenkins_cred_cli_update_ssh_key.sh` - updates a Jenkins SSH key credential from a string or an SSH private key file
+    - `jenkins_cred_cli_update_user_pass.sh` - updates a Jenkins username/password credential
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
 - `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
   - `teamcity.sh` - boots TeamCity CI cluster in docker, just click proceed and accept the EULA and it does the rest, it even creates an admin user and an API token for you
