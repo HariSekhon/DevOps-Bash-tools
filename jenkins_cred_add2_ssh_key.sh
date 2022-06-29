@@ -30,6 +30,8 @@ Defaults to the 'system::system::jenkins' provider store and global domain '_'
 If credential, user and password aren't given as arguments, then reads from stdin, reading in KEY=VALUE
 or standard shell export format - useful for piping from tools like aws_csv_creds.sh
 
+If standard input does not have an id field, the id will be generated from the username lowercased with '-ssh-key' appended
+
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
 
@@ -98,7 +100,7 @@ else
     while read -r id user_privatekey description; do
         if [ -z "${user_privatekey:-}" ] && [[ "$id" =~ = ]]; then
             user_privatekey="$id"
-            id="${id%%=*}"
+            id="${id%%=*}-ssh-key"
             id="$(tr '[:upper:]' '[:lower:]' <<< "$id")"
         else
             timestamp "WARNING: invalid line detected, skipping creating credential"
