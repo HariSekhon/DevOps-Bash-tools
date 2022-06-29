@@ -30,10 +30,29 @@ Defaults to the 'system::system::jenkins' provider store and global domain '_'
 If credential id, user and password aren't given as arguments, then reads from stdin, reading in KEY=VALUE
 or standard shell export format - useful for piping from tools like aws_csv_creds.sh
 
+If standard input does not have an id field, the id will be generated from the username lowercased with -user-pass appended.
+
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
 
 Uses the adjacent jenkins_cli.sh - see there for authentication details
+
+
+Example:
+
+    # create a credential with id 'hari-user-pass', username 'hari' and password 'mypassword':
+
+        ${0##*/} hari-user-pass hari mypassword
+
+    # with a description, leaving the store and domain as the default global one:
+
+        ${0##*/} hari-user-pass hari mypassword '' '' 'My Username + Password'
+
+    # or piped from standard input:
+
+        #export JENKINS_SECRET_STORE and JENKINS_SECRET_DOMAIN in this use case if not using system global store
+
+        echo 'hari=mypassword' | ${0##*/}
 "
 
 # used by usage() in lib/utils.sh
@@ -81,7 +100,7 @@ else
     while read -r id user_password; do
         if [ -z "${user_password:-}" ] && [[ "$id" =~ = ]]; then
             user_password="$id"
-            id="${id%%=*}"
+            id="${id%%=*}-user-pass"
             id="$(tr '[:upper:]' '[:lower:]' <<< "$id")"
         else
             timestamp "WARNING: invalid line detected, skipping creating credential"
