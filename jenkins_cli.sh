@@ -98,4 +98,7 @@ fi
 # cannot load jenkins job from stdin if doing this
 #java -jar "$jar" -auth @/dev/fd/0 "$@" <<< "$JENKINS_USER:$JENKINS_PASSWORD"
 #java -jar "$jar" -auth "$JENKINS_USER:$JENKINS_PASSWORD" "$@"
+
+# want splitting
+# shellcheck disable=SC2086
 java -jar "$jar" -s "$JENKINS_URL" -auth @<(cat <<< "$JENKINS_USER:$JENKINS_PASSWORD") ${JENKINS_CLI_ARGS:-} "$@"
