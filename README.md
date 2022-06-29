@@ -750,6 +750,7 @@ etc.
   - `fly.sh` - shortens `fly` command to not have to specify target all the time
 - `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
   - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/) - launches docker container, installs plugins, validates `Jenkinsfile`, configures jobs from `$PWD/setup/jenkins-job.xml` and sets Pipeline to git remote origin's `Jenkinsfile`, triggers build, tails results in terminal. Call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
+  - `jenkins_api.sh` - queries the Jenkins Rest API, handling crumb pre-authentication, using `$JENKINS_URL`, or constructing it from `$JENKINS_HOST` and `$JENKINS_PORT`, and variations of `JENKINS_USER` and `$JENKINS_PASSWORD`
   - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL`, `$JENKINS_CLI_ARGS` and authentication using `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup and the following scripts:
     - `jenkins_cred_cli_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_cli_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
