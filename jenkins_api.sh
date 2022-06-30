@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Queries the Jenkins Rest API
 
+Handles obtaining the CRSF protection token Jenkins-Crumb for you
+
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
 Requires either \$JENKINS_URL or \$JENKINS_HOST + \$JENKINS_PORT which defaults to localhost and port 8080
