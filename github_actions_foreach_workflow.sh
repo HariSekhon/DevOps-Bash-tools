@@ -27,6 +27,8 @@ Run a command for each GitHub Actions workflow in the given repo
 
 All arguments after the repo become the command template
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the workflow id/names and exit after the first iteration
+
 \$GITHUB_ORGANIZATION / \$GITHUB_USER - the user or organization to iterate the repos on - if not specified then determines the currently authenticated github user from your \$GITHUB_TOKEN
 
 The command template replaces the following for convenience in each iteration:
