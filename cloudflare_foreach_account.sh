@@ -27,6 +27,8 @@ Run a command against each Cloudflare account
 
 All arguments become the command template
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the account id/names and exit after the first iteration
+
 The command template replaces the following for convenience in each iteration:
 
 {id}   - with the account id   <-- this is the one you want for chaining API queries with cloudflare_api.sh
