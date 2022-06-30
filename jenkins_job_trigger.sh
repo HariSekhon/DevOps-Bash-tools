@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Triggers a Jenkins build job via the Jenkins API
 
+Tested on Jenkins 2.319
+
 Uses the adjacent jenkins_api.sh - see there for authentication details
 "
 
