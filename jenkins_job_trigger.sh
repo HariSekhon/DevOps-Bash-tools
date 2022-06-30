@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Triggers a Jenkins build job via the Jenkins API
 
+The Jenkins job configuration option 'Trigger builds remotely (e.g., from scripts)' can be used to generate a token just for this job/pipeline, or you can use your personal API token
+
 Tested on Jenkins 2.319
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
@@ -40,5 +42,5 @@ min_args 1 "$@"
 job="$1"
 shift || :
 
-"$srcdir/jenkins_api.sh" "/job/$job/build" -X POST "$@"
+"$srcdir/jenkins_api.sh" "/job/$job/build?cause=Triggered by ${0##*/}" -X POST "$@"
 timestamp "Triggered Jenkins job '$job'"
