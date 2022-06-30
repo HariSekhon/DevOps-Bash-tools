@@ -24,6 +24,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists the latest builds and their statuses for all the Jenkins jobs/pipelines
 
+Output Format:
+
+<timestamp>    <duration>    <build_number>    <result>    <name>
+
+
 Uses jenkins_api.sh - see there for authentication and connection details
 "
 
