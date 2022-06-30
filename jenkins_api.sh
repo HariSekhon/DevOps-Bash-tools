@@ -52,6 +52,12 @@ Example:
     # Retrieve the config of a given credential by its ID, in this case 'haritest':
 
         ${0##*/} '/credentials/store/system/domain/_/credential/haritest/config.xml'
+
+    # Delete a Jenkins job/pipeline called 'test':
+
+        ${0##*/} /job/test/ -X DELETE -i
+
+    # See many adjacent jenkins_*.sh scripts that use this script to make many common actions easier
 "
 
 # used by usage() in lib/utils.sh
