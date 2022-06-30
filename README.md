@@ -774,6 +774,7 @@ etc.
     - `jenkins_job_disable.sh` - disables a Jenkins job/pipeline by name
     - `jenkins_job_trigger.sh` - triggers a Jenkins job/pipeline by name
     - `jenkins_job_trigger_with_params.sh` - triggers a Jenkins job/pipeline with parameters which can be passed as `--data KEY=VALUE`
+    - `jenkins_job_description.sh` - gets or sets a Jenkins job/pipeline's description
     - `jenkins_builds.sh` - lists Jenkins latest builds for every job/pipeline
     - `jenkins_cred_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
