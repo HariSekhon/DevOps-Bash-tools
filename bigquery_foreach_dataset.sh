@@ -27,6 +27,8 @@ Execute a command against all Google BigQuery dataset IDs in the current project
 
 Command can contain {dataset} placeholder which will be replaced with the id for each dataset
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the dataset IDs and exit after the first iteration
+
 Requires GCloud SDK which must be configured and authorized for the project
 
 Tested on Google BigQuery
