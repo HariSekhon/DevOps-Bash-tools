@@ -31,6 +31,8 @@ Defaults to the 'system' provider's store and global domain '_'
 
 To obtain the credential ID, use jenkins_cred_list.sh
 
+Tested on Jenkins 2.319 with Credentials plugin 2.5
+
 Uses the adjacent jenkins_api.sh - see there for authentication details
 "
 
