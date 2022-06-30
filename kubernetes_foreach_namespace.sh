@@ -32,7 +32,7 @@ Can chain with kubernetes_foreach_context.sh
 
 This is powerful so use carefully!
 
-Requires 'kubectl' to be configured and available in \$PATH
+WARNING: do not run any command reading from standard input, otherwise it will consume the namespace names and exit after the first iteration
 
 All arguments become the command template
 
@@ -40,6 +40,9 @@ Replaces {namespace} if present in the command template with the namespace in ea
 
 eg.
     ${0##*/} gcp_secrets_to_kubernetes.sh
+
+
+Requires 'kubectl' to be configured and available in \$PATH
 "
 
 # used by usage() in lib/utils.sh
