@@ -27,6 +27,8 @@ Run a command for each Azure DevOps repo
 
 All arguments become the command template
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the repo names and exit after the first iteration
+
 \$AZURE_DEVOPS_ORGANIZATION / \$AZURE_DEVOPS_USER - the user or organization to iterate the repos on
 \$AZURE_DEVOPS_PROJECT - the Azure DevOps project to iterate the repo on
 
