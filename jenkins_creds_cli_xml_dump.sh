@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Dumps the XML configs of all credentials in the global system store using jenkins_cli.sh
 
+Tested on Jenkins 2.319 with Credentials plugin 2.5
+
 Uses adjacent jenkins_cli.sh - see there for more details on required connection settings / environment variables
 "
 
