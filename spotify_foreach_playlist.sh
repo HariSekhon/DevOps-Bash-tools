@@ -28,6 +28,8 @@ The command must be quoted as the first argument and is templated, replacing the
 
 Useful for combining with other spotify_*.sh scripts, such as downloading all the 'Artist - Track' names or all the Spotify URIs as backups
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the playlist id/names and exit after the first iteration
+
 Requires \$SPOTIFY_USER be set in the environment or else given as the second arg
 
 $usage_playlist_help
