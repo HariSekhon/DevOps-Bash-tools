@@ -29,6 +29,8 @@ Output Format:
 <timestamp>    <duration>    <build_number>    <result>    <name>
 
 
+Tested on Jenkins 2.319
+
 Uses jenkins_api.sh - see there for authentication and connection details
 "
 
