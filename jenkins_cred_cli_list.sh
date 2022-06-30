@@ -26,6 +26,8 @@ Lists Jenkins credentials in the given credential store using jenkins_cli.sh
 
 Defaults to the system::system::jenkins global in-built store
 
+Tested on Jenkins 2.319 with Credentials plugin 2.5
+
 Uses adjacent jenkins_cli.sh - see there for more details on required connection settings / environment variables
 "
 
