@@ -698,6 +698,11 @@ timestamp(){
 }
 tstamp(){ timestamp "$@"; }
 
+seconds_to_hours(){
+    local secs="$1"
+    printf '%d:%02d:%02d\n' $((secs/3600)) $((secs%3600/60)) $((secs%60))
+}
+
 warn(){
     timestamp "WARNING: $*"
 }
