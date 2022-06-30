@@ -27,6 +27,8 @@ Execute a command against all Google BigQuery tables in all datasets in the curr
 
 Command can contain {project}, {dataset} / {schema} and {table} placeholders which will be replaced for each table
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the dataset names and exit after the first iteration
+
 Requires GCloud SDK which must be configured and authorized for the project
 
 Tested on Google BigQuery
