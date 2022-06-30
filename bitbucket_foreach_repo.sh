@@ -27,6 +27,8 @@ Run a command for each BitBucket repo
 
 All arguments become the command template
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the workspace/user/repo names and exit after the first iteration
+
 The command template replaces the following for convenience in each iteration:
 
 {workspace}   =>   the workspace the repo is in
