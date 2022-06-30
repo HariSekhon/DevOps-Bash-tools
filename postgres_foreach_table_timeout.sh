@@ -30,6 +30,9 @@ FILTER environment variable will restrict to matching fully qualified tables (<d
 
 Auto-skips information_schema and pg_catalog schemas for safety
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the db/schema/table names and exit after the first iteration
+
+
 Tested on AWS RDS PostgreSQL 9.5.15
 "
 
