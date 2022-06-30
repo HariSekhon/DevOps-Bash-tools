@@ -26,6 +26,8 @@ Triggers a Jenkins build job with parameters via the Jenkins API
 
 To specify parameters, add --data KEY=VALUE format arguments
 
+The Jenkins job configuration option 'Trigger builds remotely (e.g., from scripts)' can be used to generate a token just for this job/pipeline, or you can use your personal API token
+
 Tested on Jenkins 2.319
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
@@ -42,5 +44,5 @@ min_args 1 "$@"
 job="$1"
 shift || :
 
-"$srcdir/jenkins_api.sh" "/job/$job/buildWithParameters" -X POST "$@"
+"$srcdir/jenkins_api.sh" "/job/$job/buildWithParameters?cause=Triggered by ${0##*/}" -X POST "$@"
 timestamp "Triggered Jenkins job '$job'"
