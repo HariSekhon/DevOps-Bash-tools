@@ -770,6 +770,7 @@ etc.
     - call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
   - `jenkins_api.sh` - queries the Jenkins Rest API, handles authentication, pre-fetches CSFR protection token crumb, supports many environment variables such as `$JENKINS_URL` for ease of use
     - `jenkins_jobs.sh` - lists Jenkins jobs (pipelines)
+    - `jenkins_foreach_job.sh` - runs a templated command for each Jenkins job
     - `jenkins_job_config.sh` - gets or sets a Jenkins job's config
     - `jenkins_job_description.sh` - gets or sets a Jenkins job's description
     - `jenkins_job_enable.sh` - enables a Jenkins job by name
