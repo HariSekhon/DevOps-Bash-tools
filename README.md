@@ -769,6 +769,8 @@ etc.
     - tails results in terminal
     - call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
   - `jenkins_api.sh` - queries the Jenkins Rest API, handling crumb pre-authentication, using `$JENKINS_URL`, or constructing it from `$JENKINS_HOST` and `$JENKINS_PORT`, and variations of `JENKINS_USER` and `$JENKINS_PASSWORD`
+    - `jenkins_jobs.sh` - lists Jenkins jobs/pipelines
+    - `jenkins_builds.sh` - lists Jenkins latest builds for every job/pipeline
     - `jenkins_cred_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
     - `jenkins_cred_add_secret_file.sh` - creates a Jenkins secret file credential from a file
