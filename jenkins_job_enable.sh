@@ -33,7 +33,7 @@ Uses the adjacent jenkins_api.sh - see there for authentication details
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<job_name> <curl_options>]"
+usage_args="<job_name> [<curl_options>]"
 
 help_usage "$@"
 
