@@ -29,6 +29,8 @@ You may want to use this to run an AWS CLI command against all regions to find r
 
 This is powerful so use carefully!
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the region names and exit after the first iteration
+
 Requires AWS CLI to be installed and configured and 'aws' to be in the \$PATH
 
 All arguments become the command template
