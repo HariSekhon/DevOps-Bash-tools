@@ -30,6 +30,9 @@ FILTER environment variable will restrict to matching fully qualified tables (<d
 
 Auto-skips information_schema, performance_schema, sys and mysql databases for safety
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the db/table names and exit after the first iteration
+
+
 Tested on MySQL 8.0.15
 "
 
