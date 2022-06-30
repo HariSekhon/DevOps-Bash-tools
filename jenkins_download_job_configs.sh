@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Dumps all Jenkins job configs to files of the same name in the \$PWD via the Jenkins API
+Downloads all Jenkins job configs to files of the same name in the current directory via the Jenkins API
 
 Tested on Jenkins 2.319
 
@@ -39,5 +39,5 @@ timestamp "Backing up all Jenkins job configs to current directory: $PWD"
 
 "$srcdir/jenkins_foreach_job.sh" "
     '$srcdir/jenkins_job_config.sh' '{job}' > '{job}.xml' &&
-    echo 'Backed up config to file: $PWD/{job}.xml'
+    echo 'Downloaded config to file: $PWD/{job}.xml'
     "
