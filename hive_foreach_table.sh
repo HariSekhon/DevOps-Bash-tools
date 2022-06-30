@@ -28,7 +28,11 @@ Query can contain {db} and {table} placeholders which will be replaced for each 
 
 FILTER environment variable will restrict to matching fully qualified tables (<db>.<table>)
 
+WARNING: do not run any subshell command reading from standard input, otherwise it will consume the db/table names and exit after the first iteration
+
+
 Tested on Hive 1.1.0 on CDH 5.10, 5.16
+
 
 For a better version written in Python see DevOps Python tools repo:
 
