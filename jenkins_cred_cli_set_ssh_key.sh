@@ -35,6 +35,8 @@ If standard input does not have an id field, the id will be generated from the u
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
 
+Tested on Jenkins 2.319 with Credentials plugin 2.5
+
 Uses the adjacent jenkins_cli.sh - see there for authentication details
 
 
