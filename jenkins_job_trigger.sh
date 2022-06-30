@@ -39,3 +39,4 @@ job="$1"
 shift || :
 
 "$srcdir/jenkins_api.sh" "/job/$job/build" -X POST "$@"
+timestamp "Triggered Jenkins job '$job'"
