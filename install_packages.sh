@@ -32,6 +32,6 @@ elif check_bin yum; then
 elif check_bin brew; then
     "$srcdir/brew_install_packages.sh" "${packages[@]}"
 else
-    echo "Unsupported OS / Package Manager"
+    echo "ERROR: No recognized package manager found to install packages with"
     exit 1
 fi
