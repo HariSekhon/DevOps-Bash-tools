@@ -23,18 +23,21 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run a command for each Jenkins Job obtained via the Jenkins CLI
+Run a command for each Jenkins Job name obtained via the Jenkins CLI
 
 All arguments become the command template
 
-Tested on Jenkins 2.319
+WARNING: do not run any command reading from standard input, otherwise it will consume the job names and exit after the first iteration
+
 
 Uses the adjacent jenkins_cli.sh - see there for authentication details
-
 
 The command template replaces the following for convenience in each iteration:
 
 {job}    => the job name
+
+
+Tested on Jenkins 2.319
 
 
 Example:
