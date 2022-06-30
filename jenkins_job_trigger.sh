@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://wiki.jenkins-ci.org/display/JENKINS/Remote+access+API
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
