@@ -32,9 +32,7 @@ Can chain with kubernetes_foreach_namespace.sh
 
 This is powerful so use carefully!
 
-See Also: gke_kube_creds.sh to auto-create all your contexts for all clusters on Google Kubernetes Engine!
-
-Requires 'kubectl' to be configured and available in \$PATH
+WARNING: do not run any command reading from standard input, otherwise it will consume the context names and exit after the first iteration
 
 All arguments become the command template
 
@@ -44,6 +42,11 @@ eg.
     ${0##*/} kubectl get pods
 
 Since lab contexts like Docker Desktop, Minikube etc are often offline and likely to hang, they are skipped. Deleted GKE clusters you'll need to remove from your kubeconfig yourself before calling this
+
+See Also: gke_kube_creds.sh to auto-create all your contexts for all clusters on Google Kubernetes Engine!
+
+
+Requires 'kubectl' to be configured and available in \$PATH
 "
 
 # used by usage() in lib/utils.sh
