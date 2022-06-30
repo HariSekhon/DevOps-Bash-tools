@@ -769,14 +769,14 @@ etc.
     - tails results in terminal
     - call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
   - `jenkins_api.sh` - queries the Jenkins Rest API, handles authentication, pre-fetches CSFR protection token crumb, supports many environment variables such as `$JENKINS_URL` for ease of use
-    - `jenkins_jobs.sh` - lists Jenkins jobs/pipelines
-    - `jenkins_job_config.sh` - gets or sets a Jenkins job/pipeline's config
-    - `jenkins_job_description.sh` - gets or sets a Jenkins job/pipeline's description
-    - `jenkins_job_enable.sh` - enables a Jenkins job/pipeline by name
-    - `jenkins_job_disable.sh` - disables a Jenkins job/pipeline by name
-    - `jenkins_job_trigger.sh` - triggers a Jenkins job/pipeline by name
-    - `jenkins_job_trigger_with_params.sh` - triggers a Jenkins job/pipeline with parameters which can be passed as `--data KEY=VALUE`
-    - `jenkins_builds.sh` - lists Jenkins latest builds for every job/pipeline
+    - `jenkins_jobs.sh` - lists Jenkins jobs (pipelines)
+    - `jenkins_job_config.sh` - gets or sets a Jenkins job's config
+    - `jenkins_job_description.sh` - gets or sets a Jenkins job's description
+    - `jenkins_job_enable.sh` - enables a Jenkins job by name
+    - `jenkins_job_disable.sh` - disables a Jenkins job by name
+    - `jenkins_job_trigger.sh` - triggers a Jenkins job by name
+    - `jenkins_job_trigger_with_params.sh` - triggers a Jenkins job with parameters which can be passed as `--data KEY=VALUE`
+    - `jenkins_builds.sh` - lists Jenkins latest builds for every job
     - `jenkins_cred_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
     - `jenkins_cred_add_secret_file.sh` - creates a Jenkins secret file credential from a file
