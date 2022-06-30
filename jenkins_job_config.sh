@@ -29,11 +29,26 @@ Gets or Sets the Jenkins job/pipeline config via the Jenkins API
 Tested on Jenkins 2.319
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
+
+
+Example:
+
+    # Get the current job's configuration:
+
+        ${0##*/} myJob
+
+    # Set a new job configuration:
+
+        ${0##*/} myJob myConfig.xml
+
+    # Pretty-print through xmllint:
+
+        ${0##*/} myJob | xmllint --format
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<job_name>"
+usage_args="<job_name> [<config.xml>]"
 
 help_usage "$@"
 
