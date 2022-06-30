@@ -27,6 +27,8 @@ Run a command against each GCP project in the current account
 
 This is powerful so use carefully!
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the project id/names and exit after the first iteration
+
 Requires GCloud SDK to be installed and configured and 'gcloud' to be in the \$PATH
 
 All arguments become the command template
