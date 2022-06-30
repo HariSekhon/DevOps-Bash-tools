@@ -35,6 +35,8 @@ or standard shell export format - useful for shell piping
 In cases where you are reading secrets from stdin, you can set the store and domain via the environment variables
 \$JENKINS_SECRET_STORE and \$JENKINS_SECRET_DOMAIN
 
+Tested on Jenkins 2.319 with Credentials plugin 2.5
+
 Uses the adjacent jenkins_api.sh - see there for authentication details
 
 
