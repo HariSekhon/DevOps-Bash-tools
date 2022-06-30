@@ -771,6 +771,7 @@ etc.
   - `jenkins_api.sh` - queries the Jenkins Rest API, handles authentication, pre-fetches CSFR protection token crumb, supports many environment variables such as `$JENKINS_URL` for ease of use
     - `jenkins_jobs.sh` - lists Jenkins jobs (pipelines)
     - `jenkins_foreach_job.sh` - runs a templated command for each Jenkins job
+    - `jenkins_jobs_download_configs.sh` - downloads all Jenkins job configs to xml files of the same name
     - `jenkins_job_config.sh` - gets or sets a Jenkins job's config
     - `jenkins_job_description.sh` - gets or sets a Jenkins job's description
     - `jenkins_job_enable.sh` - enables a Jenkins job by name
