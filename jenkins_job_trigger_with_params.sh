@@ -26,6 +26,8 @@ Triggers a Jenkins build job with parameters via the Jenkins API
 
 To specify parameters, add --data KEY=VALUE format arguments
 
+Tested on Jenkins 2.319
+
 Uses the adjacent jenkins_api.sh - see there for authentication details
 "
 
