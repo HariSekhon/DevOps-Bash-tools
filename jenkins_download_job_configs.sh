@@ -35,7 +35,7 @@ usage_args=""
 
 help_usage "$@"
 
-timestamp "Backing up all Jenkins job configs to current directory: $PWD"
+timestamp "Downloading all Jenkins job configs to current directory: $PWD"
 
 "$srcdir/jenkins_foreach_job.sh" "
     '$srcdir/jenkins_job_config.sh' '{job}' > '{job}.xml' &&
