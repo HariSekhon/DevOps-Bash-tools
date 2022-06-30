@@ -27,6 +27,8 @@ Run a command against each AWS named profile configured for the local AWS CLIv2
 
 This is powerful so use carefully!
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the profile names and exit after the first iteration
+
 Requires AWS CLIv2 to be installed and configured (older AWS CLIv1 that is installed via pip doesn't support this)
 
 All arguments become the command template
