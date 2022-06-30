@@ -27,6 +27,8 @@ Run a command for each Travis CI repo
 
 All arguments become the command template
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the repo names and exit after the first iteration
+
 The command template replaces the following for convenience in each iteration:
 
 {username}, {user}    => your authenticated user / organization
