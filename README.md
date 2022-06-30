@@ -768,7 +768,7 @@ etc.
     - triggers build
     - tails results in terminal
     - call from any repo top level directory with a `Jenkinsfile` pipeline and `setup/jenkins-job.xml` (all mine have it)
-  - `jenkins_api.sh` - queries the Jenkins Rest API, handling crumb pre-authentication, using `$JENKINS_URL`, or constructing it from `$JENKINS_HOST` and `$JENKINS_PORT`, and variations of `JENKINS_USER` and `$JENKINS_PASSWORD`
+  - `jenkins_api.sh` - queries the Jenkins Rest API, handles authentication, pre-fetches CSFR protection token crumb, supports many environment variables such as `$JENKINS_URL` for ease of use
     - `jenkins_jobs.sh` - lists Jenkins jobs/pipelines
     - `jenkins_job_trigger.sh` - trigger a Jenkins job/pipeline by name
     - `jenkins_job_trigger_with_params.sh` - trigger a Jenkins job/pipeline with parameters which can be passed as `--data KEY=VALUE`
