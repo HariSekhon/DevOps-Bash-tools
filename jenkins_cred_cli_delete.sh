@@ -27,6 +27,8 @@ Deletes a Jenkins Credential in the given credential store and domain
 
 Defaults to the 'system::system::jenkins' provider store and global domain '_'
 
+Tested on Jenkins 2.319 with Credentials plugin 2.5
+
 Uses the adjacent jenkins_cli.sh - see there for authentication details
 "
 
