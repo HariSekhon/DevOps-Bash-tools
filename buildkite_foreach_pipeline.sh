@@ -27,6 +27,8 @@ Run a command for each Buildkite pipeline
 
 All arguments become the command template
 
+WARNING: do not run any command reading from standard input, otherwise it will consume the pipeline names and exit after the first iteration
+
 The command template replaces the following for convenience in each iteration:
 
 {organization}          => \$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER
