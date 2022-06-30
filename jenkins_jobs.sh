@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists Jenkins Job/Pipeline Names
+Lists Jenkins Job/Pipeline Names via the Jenkins API
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
 "
