@@ -22,10 +22,10 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/utils-bourne.sh"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/ci.sh"
@@ -57,11 +57,6 @@ apt="apt-get"
 if ! type "$apt" >/dev/null 2>&1; then
     echo "$apt not found in \$PATH ($PATH), cannot install apt packages!"
     exit 1
-fi
-
-sudo=""
-if ! am_root; then
-    sudo=sudo
 fi
 
 opts=""
@@ -120,7 +115,9 @@ packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 # requires fuser which might not already be installed, catch-22 situation if wanting to use this for everything including bootstraps
 #"$srcdir/apt_wait.sh"
 
-# shellcheck disable=SC2086
+# sudo set in lib/utils-bourne.sh
+# want splitting of $opts
+# shellcheck disable=SC2154,SC2086
 [ -n "${NO_UPDATE:-}" ] || $sudo "$apt" $opts update
 
 if [ -n "${NO_FAIL:-}" ]; then
