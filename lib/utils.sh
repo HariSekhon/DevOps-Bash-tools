@@ -23,6 +23,8 @@ if [ "${bash_tools_utils_imported:-0}" = 1 ]; then
 fi
 bash_tools_utils_imported=1
 
+. "$srcdir_bash_tools_utils/utils-bourne.sh"
+
 export PATH="$PATH:/usr/local/bin"
 
 . "$srcdir_bash_tools_utils/ci.sh"
@@ -220,17 +222,6 @@ is_interactive(){
     esac
     return 1
 }
-
-am_root(){
-    [ "${EUID:-${UID:-$(id -u)}}" -eq 0 ]
-}
-
-if am_root; then
-    sudo=""
-else
-    sudo=sudo
-fi
-export sudo
 
 # XXX: there are other tarball extensions for other compression algorithms but these are the 2 very standard ones we always use: gzip or bz2
 has_tarball_extension(){
