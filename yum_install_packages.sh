@@ -98,15 +98,12 @@ if grep -qi 'NAME=.*CentOS' /etc/*release && grep -q '^VERSION="[68]"$' /etc/*re
     sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-*
 fi
 
-sudo=""
-if ! am_root; then
-    sudo=sudo
-fi
-
 if [ -n "${NO_FAIL:-}" ]; then
     if type -P dnf &>/dev/null; then
         # dnf exits if any of the packages aren't found so do them individually and ignore failures
         for package in $packages; do
+            # sudo set in lib/utils-bourne.sh
+            # shellcheck disable=SC2154
             rpm -q "$package" || $sudo dnf install -y "$package" || :
         done
     else
