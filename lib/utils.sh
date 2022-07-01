@@ -275,7 +275,7 @@ get_arch(){
 curl(){
     local opts=()
     if is_piped || is_CI; then
-        opts+=(-sS)
+        opts+=(-sSf)
     fi
     command curl ${opts:+"${opts[@]}"} "$@"
 }
