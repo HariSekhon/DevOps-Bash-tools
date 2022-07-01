@@ -25,6 +25,9 @@ set -eu
 srcdir="$(dirname "$0")"
 
 # shellcheck disable=SC1090
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090
 . "$srcdir/lib/ci.sh"
 
 usage(){
