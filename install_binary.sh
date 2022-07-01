@@ -83,7 +83,7 @@ if has_tarball_extension "$package"; then
         tar xvjf "$download_file"
     fi
     if ! [ -f "$binary" ]; then
-        die "Failed to find binary '$binary' in unpacked '$download_file' - is the given binary filename correct?"
+        die "Failed to find binary '$binary' in unpacked '$download_file' - is the given binary filename / path correct?"
     fi
     download_file="$binary"
     echo
@@ -103,7 +103,8 @@ echo
 destination="${1:-}"
 if [ -z "$destination" ]; then
     destination="${download_file##*/}"
-    destination="${destination%%.$$}"
+    # no longer suffixing with $$, used in $tmp instead
+    #destination="${destination%%.$$}"
     # if there are any -darwin-amd64 or -amd64-darwin suffixes remove them either way around (this is why $os is stripped before and after)
     destination="${destination%%-$os}"
     destination="${destination%%_$os}"
