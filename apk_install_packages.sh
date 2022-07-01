@@ -22,10 +22,10 @@
 
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(dirname "$0")"
+srcdir="$(cd "$(dirname "$0")" && pwd)"
 
 # shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/utils-bourne.sh"
 
 # shellcheck disable=SC1090
 . "$srcdir/lib/ci.sh"
@@ -77,17 +77,14 @@ fi
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
-sudo=""
-if ! am_root; then
-    sudo=sudo
-fi
-
 opts=""
 if is_CI; then
     #opts="--quiet"  # doesn't print packages installed but still has a progress bar
     opts="--no-progress"  # prints packages installed but not progress bar filling up logs
 fi
 
+# sudo set in lib/utils-bourne.sh
+# shellcheck disable=SC2154
 [ -n "${NO_UPDATE:-}" ] || $sudo apk update $opts
 
 # [[ ]] and <<< not available in sh
