@@ -294,7 +294,7 @@ download(){
     if type -P wget &>/dev/null; then
         wget -O "$download_file" "$url"
     elif type -P curl &>/dev/null; then
-        curl -L -o "$download_file" "$url"
+        curl -sSLf -o "$download_file" "$url"
     else
         die "wget / curl not installed - cannot download"
     fi
