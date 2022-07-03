@@ -195,11 +195,11 @@ gcr(){
 }
 
 acr(){
-    if [ -n "${ACR_NAME:-}" ]; then
+    if [ -n "${ACR_REGISTRY_NAME:-}" ]; then
         echo "Logging in to Azure Container Registry:"
         #local TOKEN
         #TOKEN="$(az acr credential show --name "$registry_name")"
-        az acr login --name "$ACR_NAME.azurecr.io"
+        az acr login --name "$ACR_REGISTRY_NAME.azurecr.io"
         echo
     fi
 }
