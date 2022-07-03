@@ -99,10 +99,8 @@ ghcr(){
         return
     fi
     echo "Logging in to GitHub Container Registry (GHCR):"
-    if [ -n "${GH_TOKEN:-}" ]; then
-        docker login ghcr.io -u "$GITHUB_USER" --password-stdin <<< "$GH_TOKEN"
-    elif [ -n "${GITHUB_TOKEN:-}" ]; then
-        docker login ghcr.io -u "$GITHUB_USER" --password-stdin <<< "$GITHUB_TOKEN"
+    if [ -n "${GH_TOKEN:-}" ] || [ -n "${GITHUB_TOKEN:-}" ]; then
+        docker login ghcr.io -u "$GITHUB_USER" --password-stdin <<< "${GH_TOKEN:-$GITHUB_TOKEN}"
     fi
     echo
 }
