@@ -109,7 +109,7 @@ aws(){
     if [ -n "${AWS_ACCESS_KEY_ID:-}" ] &&
        [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] ||
        grep -Fxq "[${AWS_PROFILE:-nonexistent}]" ~/.aws/credentials 2>/dev/null; then
-        echo "AWS Cloud auth:"
+        echo "AWS CLI auth:"
         command aws sts get-caller-identity
         echo
     fi
