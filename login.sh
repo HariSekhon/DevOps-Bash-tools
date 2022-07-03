@@ -43,6 +43,10 @@ Currently supports:
   - Google Container Registry (GCR)
   - Google Artifact Registry (GAR)
   - Quay.io Container Registry (quay)
+
+See Also:
+
+    login.groovy in repo: https://github.com/HariSekhon/Jenkins
 "
 
 # used by usage() in lib/utils.sh
