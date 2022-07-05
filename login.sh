@@ -43,6 +43,10 @@ Currently supports:
   - Google Container Registry (GCR)
   - Google Artifact Registry (GAR)
   - Quay.io Container Registry (quay)
+
+See Also:
+
+    login.groovy in repo: https://github.com/HariSekhon/Jenkins
 "
 
 # used by usage() in lib/utils.sh
@@ -95,10 +99,8 @@ ghcr(){
         return
     fi
     echo "Logging in to GitHub Container Registry (GHCR):"
-    if [ -n "${GH_TOKEN:-}" ]; then
-        docker login ghcr.io -u "$GITHUB_USER" --password-stdin <<< "$GH_TOKEN"
-    elif [ -n "${GITHUB_TOKEN:-}" ]; then
-        docker login ghcr.io -u "$GITHUB_USER" --password-stdin <<< "$GITHUB_TOKEN"
+    if [ -n "${GH_TOKEN:-}" ] || [ -n "${GITHUB_TOKEN:-}" ]; then
+        docker login ghcr.io -u "$GITHUB_USER" --password-stdin <<< "${GH_TOKEN:-$GITHUB_TOKEN}"
     fi
     echo
 }
@@ -107,7 +109,7 @@ aws(){
     if [ -n "${AWS_ACCESS_KEY_ID:-}" ] &&
        [ -n "${AWS_SECRET_ACCESS_KEY:-}" ] ||
        grep -Fxq "[${AWS_PROFILE:-nonexistent}]" ~/.aws/credentials 2>/dev/null; then
-        echo "AWS Cloud auth:"
+        echo "AWS CLI auth:"
         command aws sts get-caller-identity
         echo
     fi
@@ -193,11 +195,11 @@ gcr(){
 }
 
 acr(){
-    if [ -n "${ACR_NAME:-}" ]; then
+    if [ -n "${ACR_REGISTRY_NAME:-}" ]; then
         echo "Logging in to Azure Container Registry:"
         #local TOKEN
         #TOKEN="$(az acr credential show --name "$registry_name")"
-        az acr login --name "$ACR_NAME.azurecr.io"
+        az acr login --name "$ACR_REGISTRY_NAME.azurecr.io"
         echo
     fi
 }
