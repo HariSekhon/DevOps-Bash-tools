@@ -583,7 +583,7 @@ etc.
   - `dockerhub_search.sh` - searches with a configurable number of returned items (older docker cli was limited to 25 results)
   - `clean_caches.sh` - cleans out OS package and programming language caches, call near end of `Dockerfile` to reduce Docker image size
   - see also the [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo
-- `quay.io_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
+- `quay_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
 
 #### Big Data & NoSQL
 
