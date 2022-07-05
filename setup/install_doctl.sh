@@ -52,3 +52,14 @@ fi
 export RUN_VERSION_ARG=1
 
 "$srcdir/../install_binary.sh" "https://github.com/digitalocean/doctl/releases/download/v$version/doctl-$version-{os}-{arch}.tar.gz" doctl
+
+if [ -n "${DIGITAL_OCEAN_TOKEN:-}" ]; then
+    if [ -f "$HOME/Library/Application Support/doctl/config.yaml" ]; then
+        if ! grep -Eq 'access-token: .{3,}' "$HOME/Library/Application Support/doctl/config.yaml"; then
+            echo
+            echo "Setting up authentication"
+            echo
+            "$srcdir/doctl_auth_init.exp"
+        fi
+    fi
+fi
