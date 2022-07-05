@@ -1,0 +1,20 @@
+#!/usr/local/bin/expect -f
+
+set force_conservative 0  ;# set to 1 to force conservative mode even if
+			  ;# script wasn't run conservatively originally
+if {$force_conservative} {
+	set send_slow {1 .1}
+	proc send {ignore arg} {
+		sleep .1
+		exp_send -s -- $arg
+	}
+}
+
+set timeout -1
+spawn doctl auth init
+match_max 100000
+expect -exact "Please authenticate doctl for use with your DigitalOcean account. You can generate a token in the control panel at https://cloud.digitalocean.com/account/api/tokens\r
+\r
+Enter your access token: "
+send -- "$env(DIGITAL_OCEAN_TOKEN)\n"
+expect eof
