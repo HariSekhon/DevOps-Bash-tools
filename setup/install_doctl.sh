@@ -29,6 +29,10 @@ If you're on Mac and you have \$DIGITAL_OCEAN_TOKEN set in your environment, wil
 To generate an API token:
 
     https://cloud.digitalocean.com/account/api/tokens
+
+CLI Command Reference:
+
+    https://docs.digitalocean.com/reference/doctl/reference/
 "
 
 # used by usage() in lib/utils.sh
