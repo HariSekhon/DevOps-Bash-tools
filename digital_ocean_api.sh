@@ -50,6 +50,10 @@ Examples:
 
         ${0##*/} /customers/my/balance | jq .
 
+    # List the projects in your account:
+
+        ${0##*/} /projects | jq .
+
     # List the SSH keys in your account:
 
         ${0##*/} /account/keys | jq .
@@ -73,7 +77,6 @@ Examples:
     # List all droplets:
 
         ${0##*/} /droplets | jq .
-
 "
 
 # used by usage() in lib/utils.sh
