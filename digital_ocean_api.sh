@@ -74,6 +74,10 @@ Examples:
 
         ${0##*/} /load_balancers | jq .
 
+    # List all block storage volumes:
+
+        ${0##*/} /volumes | jq .
+
     # List all droplets:
 
         ${0##*/} /droplets | jq .
