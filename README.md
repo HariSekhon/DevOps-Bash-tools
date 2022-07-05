@@ -158,6 +158,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 [GCloud SDK](https://cloud.google.com/sdk),
 [Terraform](https://www.terraform.io/),
 [Kubernetes](https://kubernetes.io/)
+[GitHub CLI](https://github.com/cli/cli),
 [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) &
 [kustomize](https://kustomize.io/),
 [eksctl](https://eksctl.io/),
@@ -223,7 +224,7 @@ make
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker ...
   - Terraform Cloud
   - Checkov / Bridgecrew Cloud
-- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, Pingdom, NGrok, DataDog
+- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Digital Ocean, Cloudflare, Pingdom, NGrok, DataDog
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
 - [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
