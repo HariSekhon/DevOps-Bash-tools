@@ -70,6 +70,7 @@ dnsmasq
 dnstop
 docker-completion
 docker-compose-completion
+doctl  # Digital Ocean CLI
 dos2unix
 drone-cli
 e2fsprogs
