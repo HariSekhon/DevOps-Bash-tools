@@ -935,7 +935,7 @@ etc.
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
-  - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication using `$CLOUDFLARE_TOKEN`
+  - `cloudflare_api.sh` - queries the Cloudflare API with authentication
   - `cloudflare_ip_ranges.sh` - lists Cloudflare's IPv4 and/or IPv6 cidr ranges via its API
   - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
   - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
@@ -953,7 +953,7 @@ etc.
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API with authentication
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
-  - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
+  - `pingdom_api.sh` - queries the Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) API with authentication
   - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
   - `pingdom_checks.sh` - show all Pingdom checks, status and latencies
   - `pingdom_checks_outages.sh` / `pingdom_checks_outages.sh` - show one or all Pingdom checks outage histories for the last year
