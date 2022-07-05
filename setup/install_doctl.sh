@@ -26,7 +26,7 @@ Installs Digital Ocean CLI
 
 If you're on Mac and you have \$DIGITAL_OCEAN_TOKEN set in your environment, will configure it for the default context automatically if no access tokens are configured in your 'Library/Application Support/doctl/config.yaml'
 
-To generate an API token:
+Generate a personal access token here:
 
     https://cloud.digitalocean.com/account/api/tokens
 
@@ -62,6 +62,8 @@ fi
 export RUN_VERSION_ARG=1
 
 "$srcdir/../install_binary.sh" "https://github.com/digitalocean/doctl/releases/download/v$version/doctl-$version-{os}-{arch}.tar.gz" doctl
+
+DIGITAL_OCEAN_TOKEN="${DIGITAL_OCEAN_TOKEN:-${DIGITALOCEAN_TOKEN:-}}"
 
 if [ -n "${DIGITAL_OCEAN_TOKEN:-}" ]; then
     if [ -f "$HOME/Library/Application Support/doctl/config.yaml" ]; then
