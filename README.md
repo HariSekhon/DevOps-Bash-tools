@@ -954,7 +954,7 @@ etc.
 - `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API with authentication
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - queries the Solarwinds [Pingdom](https://www.pingdom.com/) API with authentication
-  - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
+  - `pingdom_foreach_check.sh` - executes a templated command against each Pingdom check, replacing the `{check_id}` and `{check_name}` in each iteration
   - `pingdom_checks.sh` - show all Pingdom checks, status and latencies
   - `pingdom_checks_outages.sh` / `pingdom_checks_outages.sh` - show one or all Pingdom checks outage histories for the last year
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
