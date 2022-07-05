@@ -1264,6 +1264,7 @@ make python
     make aws                    installs AWS CLI tools
     make azure                  installs Azure CLI
     make gcp                    installs Google Cloud SDK
+    make digital-ocean          installs Digital Ocean CLI
 
     make aws-shell              sets up AWS Cloud Shell: installs core packages and links configs
                                 (maintains itself across future Cloud Shells via .aws_customize_environment hook)
