@@ -232,6 +232,13 @@ github-cli: ~/bin/gh
 ~/bin/gh:
 	setup/install_github_cli.sh
 
+.PHONY:
+digital-ocean: ~/bin/doctl
+	@:
+
+~/bin/doctl:
+	setup/install_digital_ocean_cli.sh
+
 .PHONY: kubernetes
 kubernetes: kubectl kustomize
 	@:
