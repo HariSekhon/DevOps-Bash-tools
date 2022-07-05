@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Installs Digital Ocean CLI
+
+If you're on Mac and you have \$DIGITAL_OCEAN_TOKEN set in your environment, will configure it for the default context automatically if no access tokens are configured in your 'Library/Application Support/doctl/config.yaml'
+
+To generate an API token:
+
+    https://cloud.digitalocean.com/account/api/tokens
 "
 
 # used by usage() in lib/utils.sh
