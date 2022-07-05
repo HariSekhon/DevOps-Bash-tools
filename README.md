@@ -933,7 +933,6 @@ etc.
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`setup/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
-- `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:
   - `cloudflare_api.sh` - queries the Cloudflare API, handling authentication using `$CLOUDFLARE_TOKEN`
@@ -950,7 +949,9 @@ etc.
   - `cloudflare_ssl_verified.sh` - gets the Cloudflare zone SSL verification status for a given zone
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
-- `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API
+- `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
+- `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
+- `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API with authentication
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - Solarwinds [Pingdom](https://www.pingdom.com/) [API](https://docs.pingdom.com/api/) query script
   - `pingdom_foreach_check.sh` - executes a templated command against each [Pingdom](https://www.pingdom.com/) check, replacing the `{check_id}` and `{check_name}` in each iteration
@@ -959,7 +960,6 @@ etc.
   - `pingdom_checks_average_response_times.sh` - shows the average response times for all Pingdom checks for the last week
   - `pingdom_check_latency_by_hour.sh` / `pingdom_checks_latency_by_hour.sh` - shows the average latency for one or all Pingdom checks broken down by hour of the day, over the last week
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
-- `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
 - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for [Terraform Cloud](https://www.terraform.io/cloud) via the API, or optionally one or more of the ranges used by different functions
 
 #### Perl
