@@ -41,5 +41,5 @@ help_usage "$@"
 
 store="${1:-system::system::jenkins}"
 
-# -webSocket is needed if Jenkins is behind a reverse proxy such as Kubernetes Ingress, otherwise Jenkins CLI hangs
-"$srcdir/jenkins_cli.sh" -webSocket list-credentials "$store"
+# 'export JENKINS_CLI_ARGS=-webSocket' is needed if Jenkins is behind a reverse proxy such as Kubernetes Ingress, otherwise Jenkins CLI hangs
+"$srcdir/jenkins_cli.sh" list-credentials "$store"
