@@ -26,4 +26,5 @@ if [ -n "${DATREE_TOKEN:-}" ]; then
 fi
 
 echo
+echo -n "Datree version: "
 datree version
