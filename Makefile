@@ -237,7 +237,7 @@ digital-ocean: ~/bin/doctl
 	@:
 
 ~/bin/doctl:
-	setup/install_digital_ocean_cli.sh
+	setup/install_doctl.sh
 
 .PHONY: kubernetes
 kubernetes: kubectl kustomize
