@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Queries the Digital Ocean API
 
-Automatically handles authentication via environment variables \$DIGITAL_OCEAN_TOKEN or \$DIGITALOCEAN_TOKEN
+Automatically handles authentication via environment variables \$DIGITALOCEAN_ACCESS_TOKEN, \$DIGITALOCEAN_TOKEN or \$DIGITAL_OCEAN_TOKEN in that order of priority
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
@@ -95,11 +95,11 @@ min_args 1 "$@"
 
 curl_api_opts "$@"
 
-DIGITAL_OCEAN_TOKEN="${DIGITAL_OCEAN_TOKEN:-${DIGITALOCEAN_TOKEN:-}}"
+DIGITALOCEAN_ACCESS_TOKEN="${DIGITALOCEAN_ACCESS_TOKEN:-${DIGITALOCEAN_TOKEN:-${DIGITAL_OCEAN_TOKEN:-}}}"
 
-check_env_defined DIGITAL_OCEAN_TOKEN
+check_env_defined DIGITALOCEAN_ACCESS_TOKEN
 
-export TOKEN="${DIGITAL_OCEAN_TOKEN:-}"
+export TOKEN="${DIGITALOCEAN_ACCESS_TOKEN:-}"
 
 url_path="${1:-}"
 shift || :
