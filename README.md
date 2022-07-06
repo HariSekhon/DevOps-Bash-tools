@@ -390,6 +390,7 @@ etc.
     - `aws_logs_ecs_tasks.sh` - lists AWS ECS task run requests, their callers and job definitions
   - `aws_meta.sh` - [AWS EC2 Metadata API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) query shortcut. See also the official [ec2-metadata](https://aws.amazon.com/code/ec2-instance-metadata-query-tool/) shell script with more features
   - `aws_nat_gateways_public_ips.sh` - lists the public IPs of all NAT gateways. Useful to give to clients to permit through firewalls for webhooks or similar calls
+  - `aws_route53_check_ns_records.sh` - checks AWS [Route 53](https://aws.amazon.com/route53/) public hosted zones NS servers are delegated in the public DNS hierarchy and that there are no rogue NS servers delegated not matching the Route 53 zone configuration
   - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
   - `aws_s3_bucket.sh` - creates an S3 bucket, blocks public access, enables versioning, encryption, and optionally locks out any given user/group/role ARNs via a bucket policy for safety (eg. to stop Power Users accessing a sensitive bucket like Terraform state)
   - `aws_s3_buckets_block_public_access.sh` - blocks public access to one or more given S3 buckets or files containing bucket names, one per line
@@ -398,8 +399,8 @@ etc.
   - `aws_s3_check_account_public_blocked.sh` - checks S3 public access is blocked at the AWS account level
   - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
-  - `aws_sqs_check.sh` - sends a test message to an [SQS](https://aws.amazon.com/sqs/) queue, retrieves it to check and then deletes it via the receipt handle id
-  - `aws_sqs_delete_message.sh` - deletes 1-10 messages from a given [SQS](https://aws.amazon.com/sqs/) queue (to help clear out test messages)
+  - `aws_sqs_check.sh` - sends a test message to an [AWS SQS](https://aws.amazon.com/sqs/) queue, retrieves it to check and then deletes it via the receipt handle id
+  - `aws_sqs_delete_message.sh` - deletes 1-10 messages from a given [AWS SQS](https://aws.amazon.com/sqs/) queue (to help clear out test messages)
   - `aws_ssm_put_param.sh` - reads a value from a command line argument or non-echo prompt and saves it to AWS [Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html). Useful for uploading a password without exposing it on your screen
   - `aws_secret*.sh` - AWS [Secrets Manager](https://aws.amazon.com/secrets-manager/) scripts:
     - `aws_secret_list.sh` - returns the list of secrets, one per line
