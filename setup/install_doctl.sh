@@ -25,6 +25,7 @@ usage_description="
 Installs Digital Ocean CLI
 
 If you're on Mac and you have \$DIGITAL_OCEAN_TOKEN set in your environment, will configure it for the default context automatically if no access tokens are configured in your 'Library/Application Support/doctl/config.yaml'
+If you have a token \$DIGITALOCEAN_ACCESS_TOKEN this won't be needed because doctl will pick it up automatically so you don't need to configure the config.yml
 
 Generate a personal access token here:
 
