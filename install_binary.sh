@@ -81,7 +81,7 @@ if has_tarball_extension "$package"; then
         tar xvjf "$download_file"
     fi
     if ! [ -f "$binary" ]; then
-        die "Failed to find binary '$binary' in unpacked '$download_file' - is the given binary filename / path correct?"
+        die "Failed to find binary '$binary' in unpacked tarball '$download_file' - is the given binary filename / path correct?"
     fi
     download_file="$binary"
     echo
@@ -91,6 +91,9 @@ elif [[ "$package" =~ \.zip$ ]]; then
         "$srcdir/install_packages.sh" unzip
     fi
     unzip -o "$download_file"
+    if ! [ -f "$binary" ]; then
+        die "Failed to find binary '$binary' in unpacked zip '$download_file' - is the given binary filename / path correct?"
+    fi
     download_file="$binary"
 fi
 
