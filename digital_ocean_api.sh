@@ -104,8 +104,10 @@ export TOKEN="${DIGITALOCEAN_ACCESS_TOKEN:-}"
 url_path="${1:-}"
 shift || :
 
-url_path="${url_path//https:\/\/api.digitalocean.com}"
-#url_path="${url_path#v2}"
+if [[ "$url_path" =~ ^/?v[[:digit:]]+/ ]]; then
+    url_base="${url_base%%/v2}"
+fi
+url_path="${url_path//$url_base}"
 url_path="${url_path##/}"
 
 "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@" |
