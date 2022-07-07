@@ -66,8 +66,10 @@ export RUN_VERSION_ARG=1
 
 DIGITAL_OCEAN_TOKEN="${DIGITAL_OCEAN_TOKEN:-${DIGITALOCEAN_TOKEN:-}}"
 
-if [ -n "${DIGITAL_OCEAN_TOKEN:-}" ]; then
-    if [ -f "$HOME/Library/Application Support/doctl/config.yaml" ]; then
+if [ -n "${DIGITAL_OCEAN_TOKEN:-}" ] &&
+    # if $DIGITALOCEAN_ACCESS_TOKEN is there the output will change ti 'Validating token... OK' and expect script will break
+   [ -z "${DIGITALOCEAN_ACCESS_TOKEN:-}" ]; then
+    if is_mac; then
         if ! grep -Eq 'access-token: .{3,}' "$HOME/Library/Application Support/doctl/config.yaml"; then
             echo
             echo "Setting up authentication"
