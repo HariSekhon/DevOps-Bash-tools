@@ -678,16 +678,7 @@ push(){
 }
 pushu(){
     push "$@" --set-upstream origin "$(git branch | awk '/^\*/{print $2}')"
-    if isMac; then
-        if git remote -v | grep -q '^origin.*github.com[/:]'; then
-            local owner_repo
-            local branch
-            owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//')"
-            branch="$(currentbranch)"
-            echo "Opening Pull Request"
-            open "https://github.com/$owner_repo/pull/new/$branch"
-        fi
-    fi
+    github_pull_request
 }
 pushr(){
     for remote in $(git remote); do
@@ -696,6 +687,21 @@ pushr(){
         echo
     done
 }
+
+github_pull_request(){
+    if git remote -v | grep -q '^origin.*github.com[/:]'; then
+        local owner_repo
+        local branch
+        owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//')"
+        branch="$(currentbranch)"
+        url="https://github.com/$owner_repo/pull/new/$branch"
+        if isMac; then
+            echo "Opening Pull Request"
+            open "$url"
+        fi
+    fi
+}
+alias pr=github_pull_request
 
 currentbranch(){
     git rev-parse --abbrev-ref HEAD
