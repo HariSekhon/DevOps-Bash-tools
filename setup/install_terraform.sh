@@ -11,12 +11,6 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Installs Terraform on Mac / Linux
-#
-# If running as root, installs to /usr/local/bin
-#
-# If running as non-root, installs to $HOME/bin
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -30,6 +24,7 @@ Installs Terraform
 
 Can optionally specify an exact version to install instead of latest (auto-determines latest release)
 "
+
 #If the 'terraform' binary is already found on \$PATH, aborts for safety as Terraform version upgrades affect the state file
 #Set UPDATE_TERRAFORM=1 in the environment to upgrade the Terraform version
 
