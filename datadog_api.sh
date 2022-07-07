@@ -61,7 +61,7 @@ API Reference:
     https://docs.datadoghq.com/api/latest/
 
 
-Defaults to /v2 API, but if /vN is specified, then uses that API instead, eg. prefixing /v1 to API endpoints that are only available in v1 such as /v1/org
+Defaults to /v2 API, but if /vN is specified, then uses that API instead, eg. prefixing /v1 to API endpoints that are only available in v1 such as /v1/validate or /v1/org
 
 
 Examples:
