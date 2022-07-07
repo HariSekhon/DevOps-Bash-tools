@@ -39,7 +39,7 @@ pythonpath(){
 # enable this to avoid creating .pyc files (sometimes they trip you up executing outdated python code)
 # export PYTHONDONTWRITEBYTECODE=1
 
-if isMac; then
+if is_mac; then
     # try to find pip in brew installed Python versions since it is
     # not in /System/Library/Frameworks/Python.framework/Versions/2.7/bin
     for dir in /usr/local/Cellar/python*; do

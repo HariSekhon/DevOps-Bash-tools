@@ -47,7 +47,7 @@ isSvn(){
 }
 
 svn(){
-    if isMac; then
+    if is_mac; then
         export stat_formatopt=f
     else
         export stat_formatopt=c

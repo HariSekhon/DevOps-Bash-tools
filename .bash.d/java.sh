@@ -34,7 +34,7 @@ export GROOVY_TURN_OFF_JAVA_WARNINGS=true
 #alias rmclass='rm -fv *.class'
 alias rmclass='find . -type f -name "*.class" -exec rm -fv {} \;'
 
-if isMac; then
+if is_mac; then
     mac_export_java_home(){
         local version="$1"
         local args=()
@@ -75,7 +75,7 @@ if isMac; then
         mac_export_java_home
         mac_export_java_home 7
     fi
-elif isLinux; then
+elif is_linux; then
     if [ -z "$JAVA_HOME" ]; then
         # RHEL / CentOS
         if type -P alternatives &>/dev/null; then

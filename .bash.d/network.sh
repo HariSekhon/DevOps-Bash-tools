@@ -30,7 +30,7 @@ alias ping="ping -n"
 alias p="ping"
 
 pingwait="-w"
-isMac && pingwait="-W"
+is_mac && pingwait="-W"
 
 alias ping_google="while true; do ping www.google.com && break; sleep 1 || break; done"
 alias g=ping_google
@@ -194,7 +194,7 @@ z(){
 browser(){
     if [ -n "${BROWSER:-}" ]; then
         "$BROWSER" "$@"
-    elif isMac; then
+    elif is_mac; then
         open "${*:-http://google.com}"
     else
         echo "\$BROWSER environment variable not set and not on Mac OSX, not sure which browser to use, aborting..."
@@ -220,7 +220,7 @@ isupme(){
 }
 
 chrome(){
-    if isMac; then
+    if is_mac; then
         # opens in most recent Chrome window
         # could use one of these: --new --args --incognito --new-window
         open -a 'Google Chrome' "${*:-http://www.google.com}"
@@ -232,7 +232,7 @@ chrome(){
 }
 
 ff(){
-    if isMac; then
+    if is_mac; then
         open -a 'Firefox' "http://${*:-www.google.com}"
     else
         checkprog firefox || return 1
@@ -314,7 +314,7 @@ retry(){
 
 
 rdp(){
-    if isMac; then
+    if is_mac; then
         "/Applications/Remote Desktop Connection.app/Contents/MacOS/Remote Desktop Connection" "$@" &
     else
         [ -n "$1" ] || return 1
@@ -377,7 +377,7 @@ revnc(){
 # ============================================================================ #
 
 
-if isLinux; then
+if is_linux; then
 
     ipl(){
         iptables -L | nl
@@ -390,7 +390,7 @@ fi
 #                                 M a c   O S X
 # ============================================================================ #
 
-if ! isMac; then
+if ! is_mac; then
     return
 fi
 

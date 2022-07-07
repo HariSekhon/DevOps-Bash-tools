@@ -17,7 +17,7 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # not supported in the tmux terminal in GCP Cloud Shell
-#if ! isMac &&
+#if ! is_mac &&
 #   ! isGoogleCloudShell &&
 #   [ "${TERM:-}" != "xterm-256color" ]; then
 #    setterm -blank 0

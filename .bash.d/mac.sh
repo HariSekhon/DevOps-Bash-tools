@@ -25,7 +25,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
-isMac || return
+is_mac || return
 
 alias osash="osascript -i"
 alias osashell=osash

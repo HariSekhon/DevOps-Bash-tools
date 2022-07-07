@@ -25,7 +25,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 [ -f ~/.docker_vars ] && . ~/.docker_vars
 
-#if isLinux && type podman &>/dev/null; then
+#if is_linux && type -P podman &>/dev/null; then
 #    alias docker="podman"
 #fi
 

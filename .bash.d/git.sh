@@ -695,7 +695,7 @@ github_pull_request(){
         owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//')"
         branch="$(currentbranch)"
         url="https://github.com/$owner_repo/pull/new/$branch"
-        if isMac; then
+        if is_mac; then
             echo "Opening Pull Request"
             open "$url"
         fi

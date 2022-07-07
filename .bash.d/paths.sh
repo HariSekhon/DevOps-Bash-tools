@@ -182,7 +182,7 @@ add_PATH "$github/nagios-plugin-kafka"
 add_PATH "$github/spotify"
 add_PATH "$github/spotify-tools"
 
-if isLinux; then
+if is_linux; then
     add_PATH ~/.buildkite-agent/bin
 fi
 
@@ -204,7 +204,7 @@ link_latest(){
             return 1
         fi
         [ -e "$path_noversion" ] && [ ! -L "$path_noversion" ] && continue
-        if isMac; then
+        if is_mac; then
             local ln_opts="-h"
         else
             local ln_opts="-T"
@@ -250,7 +250,7 @@ link_latest(){
 #add_PATH "/usr/nagios/libexec"
 #add_PATH "/usr/nagios/libexec/contrib"
 
-#if isMac; then
+#if is_mac; then
 #    # MacPort and Octave installation
 #    add_PATH /opt/local/bin
 #
@@ -327,7 +327,7 @@ link_latest(){
 #export MESOS_HOME=/usr/local/mesos
 #add_PATH "$MESOS_HOME/bin"
 
-#if isMac; then
+#if is_mac; then
 #    export MESOS_NATIVE_JAVA_LIBRARY=/usr/local/mesos/src/.libs/libmesos.dylib
 #else
 #    # check this path

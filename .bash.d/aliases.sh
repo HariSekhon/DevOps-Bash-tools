@@ -123,7 +123,7 @@ alias clhist='HISTSIZE=0; HISTSIZE=5000'
 alias nohist='unset HISTFILE'
 
 export LS_OPTIONS='-F'
-if isMac; then
+if is_mac; then
     export CLICOLOR=1 # equiv to using -G switch when calling
 else
     export LS_OPTIONS="$LS_OPTIONS --color=auto"
@@ -245,7 +245,7 @@ alias tmpl=templates
 
 # using brew version on Mac
 pmd_opts="-R rulesets/java/quickstart.xml -f text"
-if isMac; then
+if is_mac; then
     # yes evaluate $pmd_opts here
     # shellcheck disable=SC2139
     pmd="pmd $pmd_opts"

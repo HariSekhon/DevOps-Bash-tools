@@ -60,7 +60,7 @@ fi
 # /usr/local/go/src/runtime/internal/sys (from $GOROOT)
 # /Users/hari/github/go-tools/src/runtime/internal/sys (from $GOPATH)
 if type -P go &>/dev/null; then
-    if isMac; then
+    if is_mac; then
         GOROOT="$(dirname "$(dirname "$(greadlink -f "$(type -P go)")")")"
     else
         GOROOT="$(dirname "$(dirname "$(readlink -f "$(type -P go)")")")"

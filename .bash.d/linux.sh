@@ -26,7 +26,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090
 . "$bash_tools/.bash.d/os_detection.sh"
 
-isLinux || return
+is_linux || return
 
 alias reloadXdefaults="xrdb ~/.Xdefaults"
 
@@ -36,7 +36,7 @@ alias reloadXdefaults="xrdb ~/.Xdefaults"
 # TODO:  change this to keysym as keycodes can change between keyboards, to find keymaps do
 # xmodmap -pkie
 
-if [ -n "$DISPLAY" ] && ! isMac; then
+if [ -n "$DISPLAY" ] && ! is_mac; then
     # This caused the left to be remapped, must test and handle better
     #xmodmap -e 'keycode 113 = Pointer_Button2'
     #xmodmap -e 'keycode 113 = Left NoSymbol Left'

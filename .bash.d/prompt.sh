@@ -96,7 +96,7 @@ debug_bash_profile(){
     PS4='+ $BASH_SOURCE:$LINENO:' bash -xlic '' 2>&1 | less
 }
 
-if isMac; then
+if is_mac; then
     # turn this off on mac thing - it heavily pollutes $DEBUG output and does nothing because we have a custom prompt
     if [[ "${PROMPT_COMMAND:-}" =~ update_terminal_cwd ]]; then
         # this unsets direnv's hook

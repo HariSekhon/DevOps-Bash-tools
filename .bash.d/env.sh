@@ -70,7 +70,7 @@ export varfile=~/.bash_vars
 
 # ============================================================================ #
 
-if isMac; then
+if is_mac; then
     #BROWSER=open
     unset BROWSER
 elif type -P google-chrome &>/dev/null; then
@@ -90,7 +90,7 @@ fi
 # don't export BROWSER on Mac, trigger python bug:
 # AttributeError: 'MacOSXOSAScript' object has no attribute 'basename'
 # from python's webbrowser library
-if ! isMac; then
+if ! is_mac; then
     export BROWSER
 fi
 
