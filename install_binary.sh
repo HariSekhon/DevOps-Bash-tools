@@ -41,7 +41,6 @@ help_usage "$@"
 min_args 1 "$@"
 
 url="$1"
-shift || :
 
 os="$(get_os)"
 arch="$(get_arch)"
@@ -57,8 +56,7 @@ if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
     if [ $# -lt 1 ]; then
         usage "binary file path must be specified if downloading a tarball or zip file ('$package')"
     fi
-    binary="$1"
-    shift || :
+    binary="$2"
     binary="${binary//\{os\}/$os}"
     binary="${binary//\{arch\}/$arch}"
 fi
@@ -100,7 +98,7 @@ timestamp "Setting executable: $download_file"
 chmod +x "$download_file"
 echo
 
-destination="${1:-}"
+destination="${3:-${2:-}}"
 if [ -z "$destination" ]; then
     destination="${download_file##*/}"
     # no longer suffixing with $$, used in $tmp instead
