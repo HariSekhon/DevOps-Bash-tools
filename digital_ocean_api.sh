@@ -40,6 +40,9 @@ API Reference:
     https://docs.digitalocean.com/reference/api/
 
 
+Defaults to /v2 API, but if /vN is specified, then uses that API instead, eg. prefixing /v1 to API endpoints that are only available in /v1 or if a new /v3 API gets released
+
+
 Examples:
 
     # Get your account details:
