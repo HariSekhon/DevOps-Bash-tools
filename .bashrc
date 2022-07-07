@@ -66,7 +66,7 @@ bash_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # enable color support for ls
 if [ "$TERM" != "dumb" ] && \
-   ! isMac; then
+   ! is_mac; then
     eval "$(dircolors -b)"
 fi
 
