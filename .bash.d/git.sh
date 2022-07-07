@@ -691,10 +691,14 @@ pushr(){
 github_pull_request(){
     if git remote -v | grep -q '^origin.*github.com[/:]'; then
         local owner_repo
-        local branch
+        local current_branch
+        local default_branch
         owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//')"
-        branch="$(currentbranch)"
-        url="https://github.com/$owner_repo/pull/new/$branch"
+        current_branch="$(currentbranch)"
+        default_branch="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
+        #url="https://github.com/$owner_repo/pull/new/$branch"
+        # from your current branch to the default branch by default
+        url="https://github.com/$owner_repo/compare/$default_branch...$current_branch"
         if is_mac; then
             echo "Opening Pull Request"
             open "$url"
