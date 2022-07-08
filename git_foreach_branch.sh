@@ -26,6 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #. "$srcdir/.bash.d/functions.sh"
 . "$srcdir/.bash.d/git.sh"
 
+# shellcheck disable=SC2034
 usage_description="
 Run a command against each Git branch in the current repo checkout
 
