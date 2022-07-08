@@ -74,11 +74,11 @@ isAzureCloudShell(){
 
 # for compatibility to use the same names as non-interactive lib/
 is_linux(){
-    isLinux "$@"
+    isLinux
 }
 
 is_mac(){
-    isMac "$@"
+    isMac
 }
 
 is_google_cloud_shell(){
