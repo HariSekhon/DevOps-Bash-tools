@@ -36,6 +36,8 @@ section "Python PEP8 checking all Python / Jython files"
 
 start_time="$(start_timer)"
 
+# $sudo defined in lib/util.sh
+# shellcheck disable=SC2154
 type -P pep8 &>/dev/null || $sudo pip install pep8
 type -P pep8
 pep8 --version
