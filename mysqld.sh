@@ -147,7 +147,7 @@ if [ -n "${MYSQL_RESTART:-}" ]; then
     docker_pull "$docker_image:$version"
 
     timestamp "killing existing MySQL container:"
-    docker rm -f "$container_name" 2>/dev/null || :
+    docker rm -f -- "$container_name" 2>/dev/null || :
 fi
 
 if ! docker_container_exists "$container_name"; then
