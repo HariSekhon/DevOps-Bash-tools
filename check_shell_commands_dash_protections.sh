@@ -35,8 +35,9 @@ help_usage "$@"
 
 check(){
     local cmd="$1"
-    command git grep "\\<$cmd[[:space:]]" |
-    grep -v -- '--'
+    command git grep -E "\\<$cmd[[:space:]]+" |
+    grep -v -e '--' \
+            -e "${0##*/}"
 }
 
 for cmd in cp mv ln; do
