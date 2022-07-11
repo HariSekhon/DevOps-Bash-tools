@@ -23,6 +23,7 @@ fi
 bash_tools_utils_bourne_imported=1
 
 am_root(){
+    # shellcheck disable=SC2039
     [ "${EUID:-${UID:-$(id -u)}}" -eq 0 ]
 }
 
