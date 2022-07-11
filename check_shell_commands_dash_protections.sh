@@ -35,7 +35,7 @@ help_usage "$@"
 
 check(){
     local cmd="$1"
-    command git grep -E "\\<$cmd[[:space:]]+" |
+    command git grep -E "^[^#]*\\<$cmd[[:space:]]+" |
     grep -v -e '--' \
             -e "${0##*/}:" \
             -e '\.gitconfig:' \
