@@ -27,13 +27,13 @@
 #                                    E n v s
 # ============================================================================ #
 
-## ln -s  /usr/local/hadoop-x.y.z /usr/local/hadoop
-## ln -s  /usr/local/hbase-x.y.z /usr/local/hadoop
-## ln -s /usr/local/zookeeper-x.y.z /usr/local/zookeeper
+## ln -s -- /usr/local/hadoop-x.y.z /usr/local/hadoop
+## ln -s -- /usr/local/hbase-x.y.z /usr/local/hadoop
+## ln -s -- /usr/local/zookeeper-x.y.z /usr/local/zookeeper
 #
 # #find /usr/local -type d -name 'hadoop-*' -o -type d -name 'hbase-*' -o -type d -name 'zookeeper-*' -maxdepth 1 | while read path; do sudo ln -vfsh "$path" "${path%%-*}"; done
 # link_latest '/usr/local/hadoop-*' '/usr/local/hbase-*' '/usr/local/pig-*' '/usr/local/zookeeper-*'
-# chown -R hari /usr/local/{hadoop,hbase,zookeeper}
+# chown -R hari -- /usr/local/{hadoop,hbase,zookeeper}
 # re-enabled HADOOP_HOME for Kite SDK
 
 #export HADOOP_HOME="/usr/local/hadoop"    # Deprecated. Annoying error msgs
