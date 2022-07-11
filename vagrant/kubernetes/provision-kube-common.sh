@@ -53,7 +53,7 @@ echo >&2
 
 if ! [ -d /templates ] &&
    [ -d /github/perl-tools/templates ]; then
-    ln -sv /github/perl-tools/templates /
+    ln -sv -- /github/perl-tools/templates /
 fi
 
 popd
