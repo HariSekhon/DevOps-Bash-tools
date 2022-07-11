@@ -36,7 +36,7 @@ topdir="$(git_root)"
 
 cd "$topdir"
 
-cp -iv .git/config ".git/config.$(date +%F_%H%M%S).bak"
+cp -iv -- .git/config ".git/config.$(date +%F_%H%M%S).bak"
 
 # XXX: only replace first / with : since we're setting to git@ prefix without ssh:// prefix - if ssh://git@ then it uses slashes throughout
 perl -pi -e 's/(https:\/\/[^\/]+)\//\1:/;
