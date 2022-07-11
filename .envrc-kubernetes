@@ -76,11 +76,11 @@ kube_context(){
 
         # load your real kube config to isolated staging area to source the context info
         if [ -f "$original_kubeconfig" ]; then
-            cp "$original_kubeconfig" "$KUBECONFIG"
+            cp -- "$original_kubeconfig" "$KUBECONFIG"
         elif [ -f "$default_kubeconfig" ]; then
-            cp "$default_kubeconfig" "$KUBECONFIG"
+            cp -- "$default_kubeconfig" "$KUBECONFIG"
         elif [ -f "$PWD/.kube/config" ]; then
-            cp "$PWD/.kube/config" "$KUBECONFIG"
+            cp -- "$PWD/.kube/config" "$KUBECONFIG"
         else
             echo "WARNING: failed to find one of:
 
