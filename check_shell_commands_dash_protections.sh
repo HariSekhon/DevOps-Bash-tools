@@ -43,6 +43,6 @@ check(){
             -e '\.conf:'
 }
 
-for cmd in cp mv ln; do
+for cmd in cp mv rm ln; do
     check "$cmd"
 done
