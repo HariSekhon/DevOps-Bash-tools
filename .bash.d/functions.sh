@@ -580,7 +580,7 @@ bak(){
             sleep 1
             bakfile="$filename.bak.$(date '+%F_%T' | sed 's/:/-/g')"
         done
-        cp -av "$filename" "$bakfile"
+        cp -av -- "$filename" "$bakfile"
     done
 }
 
@@ -597,7 +597,7 @@ unbak(){
         # don't use -t switch, we want the newest by name, not one that got touched recently
         bakfile="$(find "$dirname" -path "*/$filename.bak.*" -o -path "*/$filename.*.bak" 2>/dev/null | sort | tail -n 1)"
         echo "restoring $bakfile"
-        cp -av "$bakfile" "$dirname/$filename"
+        cp -av -- "$bakfile" "$dirname/$filename"
     done
 }
 
@@ -611,7 +611,7 @@ orig(){
         [ -f "$filename.org" ] && { echo "$filename.orig already exists, aborting..."; return 1; }
     done
     for filename in "$@"; do
-        cp -av "$filename" "$filename.orig"
+        cp -av -- "$filename" "$filename.orig"
     done
 }
 
@@ -631,7 +631,7 @@ unorig(){
         fi
     done
     for filename in "$@"; do
-        cp -av "$filename" "${filename%.orig}"
+        cp -av -- "$filename" "${filename%.orig}"
     done
 }
 
