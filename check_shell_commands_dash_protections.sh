@@ -37,7 +37,8 @@ check(){
     local cmd="$1"
     command git grep -E "\\<$cmd[[:space:]]+" |
     grep -v -e '--' \
-            -e "${0##*/}"
+            -e "${0##*/}" \
+            -e '\.conf:'
 }
 
 for cmd in cp mv ln; do
