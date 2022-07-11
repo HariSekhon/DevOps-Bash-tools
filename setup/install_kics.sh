@@ -76,7 +76,7 @@ rm -v "$tarball"
 echo
 
 echo "symlinking install dir:"
-ln -sfhv "$installdir" ~/bin/kics
+ln -sfhv -- "$installdir" ~/bin/kics
 echo
 
 echo "Ensure $HOME/bin/kics is added to your \$PATH"
