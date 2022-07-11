@@ -48,7 +48,7 @@ else
     echo "Gradle Install done"
 fi
 if am_root; then
-    ln -sv "gradle-$GRADLE_VERSION" gradle
+    ln -sv -- "gradle-$GRADLE_VERSION" gradle
     if ! [ -e /etc/profile.d/gradle.sh ]; then
         echo "Adding /etc/profile.d/gradle.sh"
         # shell execution tracing comes out in the file otherwise
@@ -59,7 +59,7 @@ export PATH=\$PATH:\$GRADLE_HOME/bin
 EOF
     fi
 else
-    ln -fsv ~/bin/"gradle-$GRADLE_VERSION"/bin/gradle ~/bin
+    ln -fsv -- ~/bin/"gradle-$GRADLE_VERSION"/bin/gradle ~/bin
     echo "Ensure you have ~/bin set in your \$PATH"
 fi
 
