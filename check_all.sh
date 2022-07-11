@@ -110,6 +110,8 @@ fi
 
 "$srcdir/check_bash_arrays.sh"
 
+"$srcdir/check_shell_commands_dash_protections.sh"
+
 "$srcdir/check_tests_run_qualified.sh"
 
 "$srcdir/check_makefiles.sh"
