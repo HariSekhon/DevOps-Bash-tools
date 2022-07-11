@@ -84,17 +84,17 @@ svnkw(){
 }
 
 svnadd(){
-    svn add "$@" &&
+    svn add -- "$@" &&
     svnkw "$@"
 }
 
 svni(){
-    svn pe svn:ignore "${@:-.}"
+    svn pe svn:ignore -- "${@:-.}"
 }
 
 svnaddci(){
     svnadd "$@" &&
-    svn ci -m "added $*" "$@"
+    svn ci -m "added $*" -- "$@"
 }
 
 svnci() {
@@ -107,47 +107,47 @@ svnci() {
     [ -z "$svncimsg" ] && return 1
     svncimsg="${svncimsg%, }"
     svncimsg="added $svncimsg"
-    svn add "$@" &&
+    svn add -- "$@" &&
     svn ci -m "$svncimsg" "$@"
 }
 
 svnrm(){
-    svn rm "$@" &&
-    svn ci -m "removed $*" "$*"
+    svn rm -- "$@" &&
+    svn ci -m "removed $*" -- "$@"
 }
 
 svnrmf(){
-    svn rm --force "$@" &&
-    svn ci -m "removed $*" "$@"
+    svn rm --force -- "$@" &&
+    svn ci -m "removed $*" -- "$@"
 }
 
 svnrename(){
     svn up "$(dirname "$1")" "$(dirname "$2")"
-    svn mv "$1" "$2" &&
-    svn ci -m "renamed $1 to $2" "$1" "$2"
+    svn mv -- "$1" "$2" &&
+    svn ci -m "renamed $1 to $2" -- "$1" "$2"
 }
 
 svnrename2(){
     local svn_url
     svn_url=$(svn info "$1" | grep "^URL: " | sed 's/^URL: //')
     [ -n "$svn_url" ] || return
-    svn rename -m "renamed $1 to $2" "$svn_url" "$(dirname "$svn_url")/$2"
-    svn up "$1" "$2"
+    svn rename -m "renamed $1 to $2" -- "$svn_url" "$(dirname "$svn_url")/$2"
+    svn up -- "$1" "$2"
 }
 
 svnmkdir(){
-    svn mkdir --parents "$@" &&
-    svn ci -m "created directory $*" "$@"
+    svn mkdir --parents -- "$@" &&
+    svn ci -m "created directory $*" -- "$@"
 }
 
 svnmv(){
     svn up "$(dirname "$1")" "$(dirname "$2")"
-    svn mv "$1" "$2" &&
-    svn ci -m "moved $1 to $2" "$1" "$2"
+    svn mv -- "$1" "$2" &&
+    svn ci -m "moved $1 to $2" -- "$1" "$2"
 }
 
 svnrevert(){
-    svn revert "$@"
+    svn revert -- "$@"
 }
 
 svnlog(){
@@ -169,10 +169,10 @@ svnlog(){
 
 svnu(){
     [ -n "$1" ] || { echo "ERROR: must supply arg"; return 1; }
-    [ "$(svn diff  "$@" | wc -l)" -gt 0 ] || return
-    svn diff "$@" | more &&
+    [ "$(svn diff -- "$@" | wc -l)" -gt 0 ] || return
+    svn diff -- "$@" | more &&
     read -r &&
-    svn ci -m "updated $*" "$@"
+    svn ci -m "updated $*" -- "$@"
 }
 
 svne(){
@@ -198,7 +198,7 @@ rmnonsvn(){
     svn st |
     grep "^?" |
     awk '{print $2}' |
-    xargs rm -f
+    xargs rm -f --
 }
 
 svndifflast(){
@@ -212,7 +212,7 @@ svndifflast(){
         #let rev_last=$rev-1
         (( rev_last = rev - 1 ))
     fi
-    svn diff -r "$rev_last:$rev" "$@" |
+    svn diff -r "$rev_last:$rev" -- "$@" |
     more
 }
 #alias sdl=svndifflast
@@ -232,7 +232,7 @@ svndiffcumulative(){
     for x in $(eval echo "{25470..$HEAD}"); do
         ((y=x+1))
         echo -n "svn $x => $y: "
-        svn diff -r "$x:$y" "$url"
+        svn diff -r -- "$x:$y" "$url"
     done
 }
 alias svndiffcum="svndiffcumulative"
