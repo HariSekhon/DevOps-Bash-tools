@@ -75,29 +75,29 @@ hgci(){
     [ -z "$hgcimsg" ] && return 1
     hgcimsg="${hgcimsg%, }"
     hgcimsg="added $hgcimsg"
-    hg add "$@" &&
+    hg add -- "$@" &&
     echo "committing $*"
-    hg ci -m "$hgcimsg" "$@"
+    hg ci -m "$hgcimsg" -- "$@"
 }
 
 hgrm(){
-    hg rm "$@" &&
-    hg  ci -m "removed $*" "$@"
+    hg rm -- "$@" &&
+    hg ci -m "removed $*" -- "$@"
 }
 
 hgrevertrm(){
     hg revert "$@"
-    rm -v "$@"
+    rm -v -- "$@"
 }
 
 hgrename(){
-    hg mv "$1" "$2" &&
-    hg  ci -m "renamed $1 to $2" "$1" "$2"
+    hg mv -- "$1" "$2" &&
+    hg ci -m "renamed $1 to $2" -- "$1" "$2"
 }
 
 hgmv(){
-    hg  mv "$1" "$2" &&
-    hg  ci -m "moved $1 to $2" "$1" "$2"
+    hg mv -- "$1" "$2" &&
+    hg ci -m "moved $1 to $2" -- "$1" "$2"
 }
 
 hgl(){
@@ -106,11 +106,11 @@ hgl(){
 
 hgu(){
     [ -n "$1" ] || { echo "ERROR: must supply arg"; return 1; }
-    [ "$(hg  diff "$@" | wc -l)" -gt 0 ] || return
-    hg diff "$@" | more &&
+    [ "$(hg diff "$@" | wc -l)" -gt 0 ] || return
+    hg diff -- "$@" | more &&
     read -r &&
     echo "committing $*" &&
-    hg ci -m "updated $*" "$@"
+    hg ci -m "updated $*" -- "$@"
 }
 
 #hhgu(){
@@ -190,6 +190,6 @@ hgunshelve(){
 hgdiff(){
     local filename="${1:-}"
     [ -n "$filename" ] || { echo "usage: hgdiff filename"; return 1; }
-    hg diff "$filename" > "/tmp/hgdiff.tmp"
+    hg diff -- "$filename" > "/tmp/hgdiff.tmp"
     diffnet.pl "/tmp/hgdiff.tmp"
 }
