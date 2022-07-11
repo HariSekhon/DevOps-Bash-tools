@@ -28,11 +28,11 @@ kube_config_isolate(){
     kubeconfig="$tmp/config.${EUID:-$UID}.$$"
 
     if [ -f "$original_kubeconfig" ]; then
-        cp -f "$original_kubeconfig" "$kubeconfig"
+        cp -f -- "$original_kubeconfig" "$kubeconfig"
     elif [ -f "$default_kubeconfig" ]; then
-        cp -f "$default_kubeconfig" "$kubeconfig"
+        cp -f -- "$default_kubeconfig" "$kubeconfig"
     elif [ -f "$PWD/.kube/config" ]; then
-        cp -f "$PWD/.kube/config" "$kubeconfig"
+        cp -f -- "$PWD/.kube/config" "$kubeconfig"
     fi
 
     export KUBECONFIG="$kubeconfig"
