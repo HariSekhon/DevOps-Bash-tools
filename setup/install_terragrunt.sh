@@ -53,4 +53,4 @@ fi
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../install_binary.sh" "https://github.com/gruntwork-io/terragrunt/releases/download/v$version/terragrunt_{os}_{arch}" terragrunt
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/terragrunt_{os}_{arch}" terragrunt
