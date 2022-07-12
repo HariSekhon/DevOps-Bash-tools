@@ -31,21 +31,9 @@ usage_args="[<version>]"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-3.0.2}"
 version="${1:-latest}"
 
-owner_repo="FairwindsOps/nova"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
-
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/nova_${version#v}_{os}_{arch}.tar.gz" nova
+"$srcdir/../github_install_binary.sh" FairwindsOps/nova 'nova_{version}_{os}_{arch}.tar.gz' "$version" nova
