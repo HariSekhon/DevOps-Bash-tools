@@ -53,7 +53,7 @@ tmp="/tmp/install_binary.$$"
 download_file="$tmp/$package"
 
 if [[ "$package" =~ \.zip$ ]] || has_tarball_extension "$package"; then
-    if [ $# -lt 1 ]; then
+    if [ $# -lt 2 ]; then
         usage "binary file path must be specified if downloading a tarball or zip file ('$package')"
     fi
     binary="$2"
