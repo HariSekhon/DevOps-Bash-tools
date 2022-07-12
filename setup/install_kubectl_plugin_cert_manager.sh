@@ -35,26 +35,12 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-1.1.0}"
 version="${1:-latest}"
-
-owner_repo="cert-manager/cert-manager"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    version="${version#v}"
-    timestamp "latest version is '$version'"
-elif [[ "$version" =~ ^v ]]; then
-    version="v$version"
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
 
 binary="kubectl-cert_manager"
 
 # can rusult in error trying to contact k8s cluster
 #export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/kubectl-cert_manager-{os}-{arch}.tar.gz" "$binary"
+"$srcdir/../github_install_binary.sh" cert-manager/cert-manager 'kubectl-cert_manager-{os}-{arch}.tar.gz' "$version" "$binary"
