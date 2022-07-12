@@ -429,7 +429,7 @@ apk-packages-remove:
 	for x in apk-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
 	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apk_remove_packages.sh"
-	$(SUDO) rm -fr /var/cache/apk/*
+	$(SUDO) rm -fr -- /var/cache/apk/*
 
 .PHONY: apt-packages-remove
 apt-packages-remove:
