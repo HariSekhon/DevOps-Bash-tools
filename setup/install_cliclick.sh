@@ -46,9 +46,9 @@ echo "Building cliclick"
 make
 
 echo
-mv -iv cliclick ~/bin
+mv -iv -- cliclick ~/bin
 
 echo
-rm -fr "cliclick-$VERSION" "cliclick-$VERSION.zip"
+rm -fr -- "cliclick-$VERSION" "cliclick-$VERSION.zip"
 
 echo "cliclick is now available at ~/bin - ensure that location is in $PATH"
