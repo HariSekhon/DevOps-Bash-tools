@@ -36,6 +36,9 @@ help_usage "$@"
 #version="${1:-2.4.0}"
 version="${1:-latest}"
 
-export RUN_VERSION_ARG=1
+#export RUN_VERSION_ARG=1
 
 "$srcdir/../github_install_binary.sh" argoproj/argo-cd "argocd-{os}-{arch}" "$version"
+
+echo
+argocd version --client
