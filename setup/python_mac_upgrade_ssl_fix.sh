@@ -19,7 +19,7 @@ sudo=""
 
 #brew update && brew upgrade && brew install openssl
 cd /usr/local/Cellar/openssl/*/lib
-sudo cp libssl.1.0.0.dylib libcrypto.1.0.0.dylib /usr/local/lib/
+sudo cp -- libssl.1.0.0.dylib libcrypto.1.0.0.dylib /usr/local/lib/
 cd /usr/local/lib
 [ -f libssl.dylib ] ||
     $sudo ln -s -- libssl.1.0.0.dylib libssl.dylib
