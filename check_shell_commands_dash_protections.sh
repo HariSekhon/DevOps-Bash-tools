@@ -38,9 +38,11 @@ check(){
     command git grep -E "^[^#]*\\<$cmd[[:space:]]+" |
     grep -v -e '--' \
             -e "${0##*/}:" \
+            -e "alias $cmd" \
             -e '\.gitconfig:' \
             -e '\.gitignore:' \
-            -e '\.conf:'
+            -e '\.conf:' \
+    || :
 }
 
 for cmd in cp mv rm ln; do
