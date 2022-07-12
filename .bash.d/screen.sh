@@ -71,7 +71,7 @@ screenbuf(){
     tmp="$(mktemp /tmp/screen-exchange.XXXXXX)"
     cat > "$tmp"
     screen -X readbuf "$tmp"
-    rm "$tmp";
+    rm -- "$tmp";
 }
 alias sb=screenbuf
 
