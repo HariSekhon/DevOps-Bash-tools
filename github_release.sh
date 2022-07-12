@@ -26,9 +26,12 @@ Creates a GitHub Release and Git Tag, auto-incrementing the default vYYYY.NN rel
 
 The first argument is the version, which is recommended to set to vN.N.N eg. v1.0.0 as per semantic versioning standards
 
-If the first argument is 'date', will determine the next available release in the format vYYYY-MM-DD.NN where NN is incremented from 1
-If the first argument is 'month', will determine the next available release in the format vYYYY-MM.NN
+If the first argument is 'date', will determine the next available release in the format vYYYYMMDD.NN where NN is incremented from 1
+If the first argument is 'month', will determine the next available release in the format vYYYYMM.NN
 If the first argument is 'year', will determine the next available release in the format vYYYY.NN (the default if no version is specified)
+
+These formats don't have dashes in them like ISO dates so that if you move from YYYY to YYYYMM format or YYYYMMDD format, GitHub will recognize the newer format as the Latest release
+
 
 $usage_github_cli_required
 "
@@ -55,10 +58,10 @@ if [ "$version" = year ]; then
     version="${prefix}$(date '+%Y')"
     generate_version=1
 elif [ "$version" = month ]; then
-    version="${prefix}$(date '+%Y-%m')"
+    version="${prefix}$(date '+%Y%m')"
     generate_version=1
 elif [ "$version" = day ]; then
-    version="${prefix}$(date '+%F')"
+    version="${prefix}$(date '+%Y%m%d')"
     generate_version=1
 fi
 
