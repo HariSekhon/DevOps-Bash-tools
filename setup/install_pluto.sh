@@ -49,4 +49,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/pluto/releases/download/$version/pluto_${version#v}_{os}_{arch}.tar.gz" pluto
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/pluto_${version#v}_{os}_{arch}.tar.gz" pluto
