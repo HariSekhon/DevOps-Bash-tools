@@ -35,11 +35,11 @@ cd /tmp
 
 wget -O MouseTools.zip http://www.hamsoftengineering.com/assets/MouseTools.zip
 
-unzip -o MouseTools.zip
+unzip -o -- MouseTools.zip
 
-mv -iv MouseTools ~/bin
+mv -iv -- MouseTools ~/bin
 
-rm MouseTools.zip
+rm -- MouseTools.zip
 
 echo
 echo "MouseTools is now available at ~/bin - ensure that location is in $PATH"
