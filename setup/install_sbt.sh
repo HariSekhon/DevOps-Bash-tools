@@ -65,7 +65,7 @@ else
         cd "$BASE"
         wget -t 10 --retry-connrefused "https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz" && \
         tar zxvf "sbt-$SBT_VERSION.tgz" && \
-        rm -f "sbt-$SBT_VERSION.tgz"
+        rm -f -- "sbt-$SBT_VERSION.tgz"
         echo
         echo "SBT Install done"
     else
