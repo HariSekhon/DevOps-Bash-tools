@@ -31,22 +31,9 @@ usage_args="[<version>]"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-0.30.0}"
 version="${1:-latest}"
 
-owner_repo="docker/hub-tool"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-    [[ "$version" =~ ^v ]] || version="v$version"
-fi
-
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/hub-tool-{os}-{arch}.tar.gz" hub-tool/hub-tool
+"$srcdir/../github_install_binary.sh" docker/hub-tool "hub-tool-{os}-{arch}.tar.gz" "$version" hub-tool/hub-tool
