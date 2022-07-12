@@ -58,14 +58,14 @@ else
         # defined in utils.sh lib
         # shellcheck disable=SC2154
         $sudo installer -pkg AWSCLIV2.pkg -target /
-        rm -fr AWSCLIV2.pkg
+        rm -fr -- AWSCLIV2.pkg
     else
         wget -c "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -O "awscliv2.zip"
         unzip -o awscliv2.zip
         # defined in utils.sh lib
         # shellcheck disable=SC2154
         $sudo ./aws/install
-        rm -fr aws awscliv2.zip
+        rm -fr -- aws awscliv2.zip
     fi
     popd
     echo
