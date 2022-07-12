@@ -366,10 +366,10 @@ launch_container(){
             return 1
         fi
         # reuse container it's faster
-        #docker rm -f "$container" &>/dev/null
+        #docker rm -f -- "$container" &>/dev/null
         #sleep 1
         if [[ "$container" = *test* ]]; then
-            docker rm -f "$container" &>/dev/null || :
+            docker rm -f -- "$container" &>/dev/null || :
         fi
         if ! is_docker_container_running "$container"; then
             # This is just to quiet down the CI logs from useless download clutter as docker pull/run doesn't have a quiet switch as of 2016 Q3
@@ -410,7 +410,7 @@ delete_container(){
             echo "$msg"
         fi
         echo -n "Deleting container "
-        docker rm -f "$container"
+        docker rm -f -- "$container"
         untrap
     fi
 }
