@@ -63,7 +63,7 @@ elif [ "$version" = day ]; then
 fi
 
 if [ "$generate_version" = 1 ]; then
-    latest_releases="$(gh release list --exclude-drafts | awk '{print $1}')"
+    latest_releases="$(gh release list -L 200 --exclude-drafts | awk '{print $1}')"
 
     number="$(grep -Eo "^$version"'\.\d+' <<< "$latest_releases" | head -n 1 | sed "s/^$version\\.//" || echo 1)"
 
