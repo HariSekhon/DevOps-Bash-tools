@@ -284,7 +284,7 @@ test:
 
 .PHONY: clean
 clean:
-	@rm -fv setup/terraform.zip
+	@rm -fv -- setup/terraform.zip
 
 .PHONY: ls-scripts
 ls-scripts:
