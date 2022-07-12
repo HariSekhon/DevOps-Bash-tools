@@ -27,11 +27,13 @@ Installs a GitHub repo's release binary to \$HOME/bin or /usr/local/bin, unpacki
 If the release file is a tarball or zip file then it'll auto-unpack it, but you must specify the path to the binary in the unpack
 
 If version is not specified, determine the latest release and installs that
+
+If the release URL title/path is more complicated than the convention of following the version number, such as is the case for Kustomize, then you'd need to call install_binary.sh with the URL path instead of using this script, see setup/install_kustomize.sh
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<owner>/<repo> <release_file_tarball_zip> [<path/to/unpacked/binary> <version> <install_path>]"
+usage_args="<owner>/<repo> <release_file_tarball_zip> [<version> <path/to/unpacked/binary> <install_path>]"
 
 export PATH="$PATH:$HOME/bin"
 
