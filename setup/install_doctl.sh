@@ -62,7 +62,7 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/digitalocean/doctl/releases/download/v$version/doctl-$version-{os}-{arch}.tar.gz" doctl
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/doctl-$version-{os}-{arch}.tar.gz" doctl
 
 DIGITAL_OCEAN_TOKEN="${DIGITAL_OCEAN_TOKEN:-${DIGITALOCEAN_TOKEN:-}}"
 
