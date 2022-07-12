@@ -1,0 +1,1 @@
+install_cert_manager_cli.sh
