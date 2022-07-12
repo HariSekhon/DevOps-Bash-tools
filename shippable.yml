@@ -30,11 +30,11 @@ build:
     # W: GPG error: http://dl.yarnpkg.com/debian stable Release: The following signatures were invalid: KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983  KEYEXPIRED 1580619281  KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983  KEYEXPIRED 1507181400  KEYEXPIRED 1546376218  KEYEXPIRED 1546372003  KEYEXPIRED 1580619281  KEYEXPIRED 1580607983
     # E: The repository 'http://dl.yarnpkg.com/debian stable Release' is no longer signed.
     # bash-tools/Makefile.in:272: recipe for target 'apt-packages' failed
-    - rm -fv /etc/apt/sources.list.d/cassandra.sources.list*
-    - rm -fv /etc/apt/sources.list.d/yarn.list*
+    - rm -fv -- /etc/apt/sources.list.d/cassandra.sources.list*
+    - rm -fv -- /etc/apt/sources.list.d/yarn.list*
     # Basho repo is giving a '402 payment required' error
     # https://github.com/Shippable/support/issues/5172
-    - rm -fv /etc/apt/sources.list.d/basho_riak.list
+    - rm -fv -- /etc/apt/sources.list.d/basho_riak.list
     #- shippable_retry make
     - setup/ci_bootstrap.sh
     - make init
