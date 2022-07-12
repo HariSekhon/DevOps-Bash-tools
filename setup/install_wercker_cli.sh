@@ -18,26 +18,21 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-source "$srcdir/../lib/utils.sh"
+. "$srcdir/../lib/utils.sh"
 
-curl_opts=""
-if is_CI; then
-    curl_opts="-sS"
-fi
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Wercker CLI
+"
 
-if is_linux; then
-    echo "downloading latest stable version of wercker for Linux..."
-    curl $curl_opts -L https://s3.amazonaws.com/downloads.wercker.com/cli/stable/linux_amd64/wercker -o ~/bin/wercker.tmp
-elif is_mac; then
-    echo "downloading latest stable version of wercker for Mac..."
-    curl $curl_opts -L https://s3.amazonaws.com/downloads.wercker.com/cli/stable/darwin_amd64/wercker -o ~/bin/wercker.tmp
-else
-    echo "OS is not Linux / Mac, not installing wercker CLI"
-    exit 0
-fi
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
 
-unalias mv &>/dev/null || :
+export PATH="$PATH:$HOME/bin"
 
-mv -vf ~/bin/wercker{.tmp,}
+help_usage "$@"
 
-chmod -v u+x ~/bin/wercker
+export RUN_VERSION_ARG=1
+
+"$srcdir/../install_binary.sh" "https://s3.amazonaws.com/downloads.wercker.com/cli/stable/{os}_{arch}/wercker"
