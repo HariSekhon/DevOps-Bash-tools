@@ -47,6 +47,6 @@ echo "setting executable"
 chmod +x "$tmpfile"
 
 echo "moving to ~/bin"
-mv -fv "$tmpfile" ~/bin/cloud_sql_proxy
+mv -fv -- "$tmpfile" ~/bin/cloud_sql_proxy
 
 echo "Done. Don't forget to add $HOME/bin to \$PATH"
