@@ -17,29 +17,48 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-if [ -z "${FORCE:-}" ] && type -P jx &>/dev/null; then
-    echo "jx is already available in \$PATH, skipping"
-    exit 0
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs JenkinsX CLI
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
+
+export PATH="$PATH:$HOME/bin"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
+#version="${1:-2.4.0}"
+version="${1:-latest}"
+
+owner_repo="jenkins-x/jx"
+
+if [ "$version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="${version#v}"
+    timestamp "latest version is '$version'"
+else
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-cd /tmp
+os="$(get_os)"
+if [ "$os" = darwin ]; then
+    os=macOS
+fi
 
-latest_version="$(curl -sS "https://github.com/jenkins-x/jx/releases/latest" | sed 's#.*tag/\(.*\)\".*#\1#')"
-platform="$(uname -s)"
+export RUN_VERSION_ARG=1
 
-date "+%F %T  downloading jx"
-wget -qcO jx.tgz "https://github.com/jenkins-x/jx/releases/download/$latest_version/jx-$platform-amd64.tar.gz"
-date "+%F %T  downloaded jx"
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/jx-{os}-{arch}.tar.gz" jx
 
-date "+%F %T  unpacking jx"
-tar xzvf jx.tgz jx
-
-date "+%F %T  chmod'ing and moving to ~/bin"
-chmod +x jx
-
-mkdir -pv ~/bin
-unalias mv &>/dev/null || :
-mv -vf jx ~/bin/
-
-~/bin/jx version --short
+echo >&2
+jx version --short
