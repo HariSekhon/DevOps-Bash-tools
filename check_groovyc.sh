@@ -61,11 +61,11 @@ check_groovyc(){
     # doens't stop class files being left behind in script $PWD, not directory containing "$filename"
     #if ! groovyc --temp /tmp "$filename" "$@" >&2; then
     if ! groovyc "$filename" "$@" >&2; then
-        rm -f "$classfile_base"*.class
+        rm -f -- "$classfile_base"*.class
         echo 1
         exit 1
     fi
-    rm -f "$classfile_base"*.class
+    rm -f -- "$classfile_base"*.class
 }
 
 echo "building file list" >&2
