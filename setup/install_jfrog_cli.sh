@@ -26,4 +26,4 @@ cd "$tmp"
 
 curl -fL https://getcli.jfrog.io | bash -s v2
 echo
-mv -iv jfrog ~/bin/jfrog
+mv -iv -- jfrog ~/bin/jfrog
