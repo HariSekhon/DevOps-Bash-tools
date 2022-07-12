@@ -63,7 +63,7 @@ notifications:
 # https://docs.travis-ci.com/user/caching/
 
 before_cache:
-  - rm -f $HOME/.cache/pip/log/debug.log
+  - rm -f -- "$HOME/.cache/pip/log/debug.log"
 
 cache:
   - pip
@@ -79,8 +79,8 @@ cache:
 
 # avoid package checksum mismatches when installing packages
 before_install:
-  - sudo rm -f "${TRAVIS_ROOT}/etc/apt/apt.conf.d/99-travis-apt-proxy"
-  - sudo rm -rf "${TRAVIS_ROOT}/var/lib/apt/lists/"*
+  - sudo rm -f  -- "${TRAVIS_ROOT}/etc/apt/apt.conf.d/99-travis-apt-proxy"
+  - sudo rm -rf -- "${TRAVIS_ROOT}/var/lib/apt/lists/"*
 
 install:
   #- travis_retry make
