@@ -43,4 +43,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" cli/cli "gh_{version}_${os}_{arch}.tar.gz" "gh_{version}_${os}_{arch}/bin/gh" "$version"
+"$srcdir/../github_install_binary.sh" cli/cli "gh_{version}_${os}_{arch}.tar.gz" "$version" "gh_{version}_${os}_{arch}/bin/gh"
