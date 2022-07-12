@@ -90,7 +90,7 @@ blocks:
           # - for version in $(rbenv versions | grep -v system | sed 's/^\*//'); do yes | rbenv uninstall "$version"; rbenv install "$version"; done
           #
           # fix for python vs pip version mismatch
-          - ln -svf /usr/local/bin/python3 /usr/local/bin/python
+          - ln -svf -- /usr/local/bin/python3 /usr/local/bin/python
       jobs:
         - name: build
           commands:
