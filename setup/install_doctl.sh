@@ -44,25 +44,12 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-1.78.0}"
 version="${1:-latest}"
 
-owner_repo='digitalocean/doctl'
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    version="${version#v}"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
-
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/doctl-$version-{os}-{arch}.tar.gz" doctl
+"$srcdir/../github_install_binary.sh" digitalocean/doctl 'doctl-{version}-{os}-{arch}.tar.gz' "$version" doctl
 
 DIGITAL_OCEAN_TOKEN="${DIGITAL_OCEAN_TOKEN:-${DIGITALOCEAN_TOKEN:-}}"
 
