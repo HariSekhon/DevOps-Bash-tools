@@ -17,7 +17,22 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-curl -sS https://raw.githubusercontent.com/dronir/SpotifyControl/master/SpotifyControl > /tmp/spotify
-chmod -v +x /tmp/spotify
-mv -v /tmp/spotify ~/bin
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs SpotifyControl CLI
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+export PATH="$PATH:$HOME/bin"
+
+help_usage "$@"
+
+"$srcdir/../install_binary.sh" "https://raw.githubusercontent.com/dronir/SpotifyControl/master/SpotifyControl"
