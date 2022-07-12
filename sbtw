@@ -40,9 +40,9 @@ if ! test -d "$bootdir/sbt-$SBT_VERSION"; then
     pushd "$bootdir"
     wget -O "sbt.tgz" "$URL"
     tar zxf "sbt.tgz"
-    mv sbt "sbt-$SBT_VERSION"
+    mv -- sbt "sbt-$SBT_VERSION"
     #mv sbt/bin/sbt-launcher.jar "$JAR"
-    rm -f "sbt.tgz"
+    rm -f -- "sbt.tgz"
     popd
 fi
 
