@@ -72,7 +72,7 @@ tar zxf "$tarball"
 echo
 
 echo "removing tarball:"
-rm -v "$tarball"
+rm -fv -- "$tarball"
 echo
 
 echo "symlinking install dir:"
