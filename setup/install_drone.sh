@@ -48,4 +48,4 @@ fi
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../install_binary.sh" "https://github.com/harness/drone-cli/releases/latest/download/drone_{os}_{arch}.tar.gz" drone
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/latest/download/drone_{os}_{arch}.tar.gz" drone
