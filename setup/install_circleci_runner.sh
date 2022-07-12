@@ -71,4 +71,4 @@ sha256sum --check
 
 chmod +x "$file"
 
-cp -v "$file" "$prefix/circleci-launch-agent"
+cp -v -- "$file" "$prefix/circleci-launch-agent"
