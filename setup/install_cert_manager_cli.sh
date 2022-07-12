@@ -33,20 +33,7 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-1.6.1}"
 version="${1:-latest}"
 
-owner_repo="cert-manager/cert-manager"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    version="${version#v}"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
-
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/cmctl-{os}-{arch}.tar.gz" cmctl
+"$srcdir/../github_install_binary.sh" cert-manager/cert-manager "cmctl-{os}-{arch}.tar.gz" cmctl "$version"
