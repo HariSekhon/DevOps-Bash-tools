@@ -53,4 +53,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/docker/compose/releases/download/$version/docker-compose-{os}-$arch" "docker-compose"
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/docker-compose-{os}-$arch" "docker-compose"
