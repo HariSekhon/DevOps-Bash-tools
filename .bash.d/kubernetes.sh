@@ -31,7 +31,7 @@ done
 if [ -f ~/.minishift.env ]; then
     # remove .minishift.env if it causes errors, which can happen if it was generated when there was no MiniShift VM running
     # shellcheck disable=SC1090
-    . ~/.minishift.env || rm -f ~/.minishift.env
+    . ~/.minishift.env || rm -f -- ~/.minishift.env
 fi
 
 #if [ -f "/usr/local/opt/kube-ps1/share/kube-ps1.sh" ]; then
