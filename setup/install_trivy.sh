@@ -66,4 +66,4 @@ fi
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../install_binary.sh" "https://github.com/aquasecurity/trivy/releases/download/$version/trivy_${version#v}_${os}-${arch}.tar.gz" trivy
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/trivy_${version#v}_${os}-${arch}.tar.gz" trivy
