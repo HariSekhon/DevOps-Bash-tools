@@ -45,4 +45,4 @@ chmod +x container-diff
 
 mkdir -pv ~/bin
 
-mv -iv container-diff ~/bin
+mv -iv -- container-diff ~/bin
