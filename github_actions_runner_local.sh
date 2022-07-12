@@ -85,7 +85,7 @@ if ! [ -f "$tar" ]; then
 fi
 
 if ! [ -f config.sh ]; then
-    tar xzf "$tar" || rm -fv "$tar"
+    tar xzf "$tar" || rm -fv -- "$tar"
 fi
 
 if ! [ -f .credentials ] ||
