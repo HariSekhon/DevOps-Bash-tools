@@ -49,4 +49,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/GoogleCloudPlatform/terraformer/releases/download/$version/terraformer-$asset-{os}-{arch}" terraformer
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/terraformer-$asset-{os}-{arch}" terraformer
