@@ -46,6 +46,6 @@ while read -r pipeline; do
         exit 1
     fi
     # similar behaviour to bak function
-    cp -av "$json_file" "$json_file.bak.$timestamp"
+    cp -av -- "$json_file" "$json_file.bak.$timestamp"
     echo
 done
