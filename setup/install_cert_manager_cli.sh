@@ -37,3 +37,6 @@ help_usage "$@"
 version="${1:-latest}"
 
 "$srcdir/../github_install_binary.sh" cert-manager/cert-manager "cmctl-{os}-{arch}.tar.gz" cmctl "$version"
+
+echo
+cmctl version --client
