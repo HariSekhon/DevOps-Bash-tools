@@ -48,7 +48,7 @@ tmp="$(mktemp)"
 
 # want splitting
 # shellcheck disable=SC2086
-trap 'rm "$tmp"' $TRAP_SIGNALS
+trap 'rm -- "$tmp"' $TRAP_SIGNALS
 
 # --spider = don't download
 # -r = recursive
