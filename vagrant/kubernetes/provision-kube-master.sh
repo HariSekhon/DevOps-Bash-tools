@@ -84,12 +84,12 @@ timestamp "Configuring kubectl:"
 mkdir -pv ~/.kube /home/vagrant/.kube /vagrant/.kube
 for kube_config in ~/.kube/config /home/vagrant/.kube/config; do
     if ! [ -f "$kube_config" ]; then
-        cp -vf /etc/kubernetes/admin.conf "$kube_config"
+        cp -vf -- /etc/kubernetes/admin.conf "$kube_config"
     fi
 done
 chown -v "$(id -u):$(id -g)" ~/.kube/config
 chown -v vagrant:vagrant /home/vagrant/.kube/config
-cp -vf ~/.kube/config /vagrant/.kube/config
+cp -vf -- ~/.kube/config /vagrant/.kube/config
 echo >&2
 
 timestamp "Applying CNI $selected_cni:"
