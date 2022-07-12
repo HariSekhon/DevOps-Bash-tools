@@ -30,21 +30,8 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-2.4.0}"
 version="${1:-latest}"
-
-owner_repo="docker/compose"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-    version="v$version"
-fi
 
 arch="$(get_arch)"
 if [ "$arch" = amd64 ]; then
@@ -53,4 +40,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/docker-compose-{os}-$arch" "docker-compose"
+"$srcdir/../github_install_binary.sh" docker/compose "docker-compose-{os}-$arch" "$version" docker-compose
