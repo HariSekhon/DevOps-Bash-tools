@@ -67,7 +67,7 @@ get_pytools(){
         popd
     else
         pushd "$srcdir"
-        rm -fr pytools_checks
+        rm -fr -- pytools_checks
         git clone https://github.com/harisekhon/pytools pytools_checks
         pushd pytools_checks
         NOJAVA=1 make
