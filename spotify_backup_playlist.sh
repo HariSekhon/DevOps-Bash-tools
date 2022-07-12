@@ -105,7 +105,7 @@ else
     if [ -f "$description_file" ]; then
         # if file is blank then no description is set, remove the useless file
         if ! [ -s "$description_file" ]; then
-            rm -f "$description_file"
+            rm -f -- "$description_file"
         fi
     fi
 
