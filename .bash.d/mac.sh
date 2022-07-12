@@ -127,7 +127,7 @@ brewupdate(){
         echo "remove the following to brew update"
         brew update 2>&1 | tee /dev/stderr | grep '^[[:space:]]*Library/Formula/' |
         while read -r formula; do
-            echo rm -fv "/usr/local/$formula"
+            echo rm -fv -- "/usr/local/$formula"
         done
         return 1
     fi
