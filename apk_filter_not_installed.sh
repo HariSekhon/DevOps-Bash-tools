@@ -47,7 +47,7 @@ for arg; do
 done
 
 installed_packages="$(mktemp)"
-trap 'rm -f "$installed_packages"' EXIT
+trap 'rm -f -- "$installed_packages"' EXIT
 
 installed_apk > "$installed_packages"
 
