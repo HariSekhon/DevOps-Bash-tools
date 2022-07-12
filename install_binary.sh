@@ -34,7 +34,7 @@ An optional binary destination can be given to name the file - if the file name 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<url> [<binary_path_in_zip_or_tarball>] [<binary_destination_name>]"
+usage_args="<url> [<binary_path_in_zip_or_tarball> <install_path>]"
 
 help_usage "$@"
 
