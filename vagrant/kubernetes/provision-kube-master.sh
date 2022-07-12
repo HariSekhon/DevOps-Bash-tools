@@ -69,7 +69,7 @@ if ! netstat -lnt | grep -q :10248; then
     timestamp "Bootstrapping kubernetes master:"
     echo >&2
     # remove stale old generated join script so worker(s) awaits new one
-    rm -fv "$kubeadm_join"
+    rm -fv -- "$kubeadm_join"
     echo >&2
     # kubeadm-config.yml is in vagrant dir mounted at /vagrant
     kubeadm init --node-name "$(hostname -f)" --config=kubeadm-config.yaml --upload-certs | tee /vagrant/logs/kubeadm-init.out # save output for review
