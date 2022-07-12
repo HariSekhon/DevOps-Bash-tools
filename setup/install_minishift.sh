@@ -43,7 +43,7 @@ if [ "$(uname -s)" = Darwin ]; then
     fi
     # .bash.d/kubernetes.sh automatically sources this so 'oc' command is available in all new shells
     # fails if no running minishift VM - in which case remove the .minishift.env to avoid errors on every new shell
-    minishift oc-env > ~/.minishift.env || rm -f ~/.minishift.env
+    minishift oc-env > ~/.minishift.env || rm -f -- ~/.minishift.env
 else
     echo "Only Mac is supported at this time"
     exit 1
