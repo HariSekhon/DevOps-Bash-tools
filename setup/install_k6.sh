@@ -33,27 +33,17 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-0.39.0}"
 version="${1:-latest}"
-
-owner_repo='grafana/k6'
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    version="${version#v}"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
 
 export RUN_VERSION_ARG=1
 
 os="$(get_os)"
-if [ "$os" = darwin ]; then
+package='k6-v{version}-{os}-{arch}.tar.gz'
+if is_mac; then
+    # Mac packages has both macos instead of darwin, and zip instead of tarball
     os=macos
+    package="k6-v{version}-$os-{arch}.zip"
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/k6-v$version-$os-{arch}.zip" "k6-v$version-$os-{arch}/k6" k6
+"$srcdir/../github_install_binary.sh" grafana/k6 "$package" "$version" "k6-v{version}-${os}-{arch}/k6" k6
