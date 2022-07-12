@@ -15,21 +15,40 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-version="latest"
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
 
-platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs ArgoCD CLI
+"
 
-cd /tmp
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
 
-date "+%F %T  downloading argocd"
-wget -O argocd.$$ "https://github.com/argoproj/argo-cd/releases/$version/download/argocd-$platform-amd64"
+export PATH="$PATH:$HOME/bin"
 
-date "+%F %T  downloaded argocd"
-date "+%F %T  chmod'ing and moving to ~/bin"
-chmod +x argocd.$$
-mkdir -pv ~/bin
-unalias mv &>/dev/null || :
-mv -vf argocd.$$ ~/bin/argocd
-echo
-~/bin/argocd version
+help_usage "$@"
+
+#min_args 1 "$@"
+
+#version="${1:-2.4.0}"
+version="${1:-latest}"
+
+owner_repo="argoproj/argo-cd"
+
+if [ "$version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="${version#v}"
+    timestamp "latest version is '$version'"
+else
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
+fi
+
+export RUN_VERSION_ARG=1
+
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/argocd-{os}-{arch}"
