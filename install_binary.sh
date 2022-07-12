@@ -101,7 +101,7 @@ timestamp "Setting executable: $download_file"
 chmod +x "$download_file"
 echo
 
-destination="${3:-${2:-}}"
+destination="${3:-}"
 if [ -z "$destination" ]; then
     destination="${download_file##*/}"
     # no longer suffixing with $$, used in $tmp instead
