@@ -60,7 +60,7 @@ download_audit_logs(){
     local log_bytes
     # expand now
     # shellcheck disable=SC2064
-    trap "tstamp ERROR; tstamp 'Removing partial log file for restartability without audit gaps: '; rm -fv '$log'" exit
+    trap "tstamp ERROR; tstamp 'Removing partial log file for restartability without audit gaps: '; rm -fv -- '$log'" exit
     if validate_log "$log"; then
         tstamp "Skipping previously completed log $log..."
         echo >&2
