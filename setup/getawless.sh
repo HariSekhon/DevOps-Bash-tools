@@ -54,7 +54,7 @@ chmod +x ./awless
 echo ""
 echo "awless successfully installed to ./awless"
 echo ""
-echo "don't forget to add it to your path, with, for example, 'sudo mv awless /usr/local/bin/' "
+echo "don't forget to add it to your path, with, for example, 'sudo mv -- awless /usr/local/bin/' "
 echo ""
 echo "then, for autocompletion, run:"
 echo "    [bash] echo 'source <(awless completion bash)' >> ~/.bashrc"
