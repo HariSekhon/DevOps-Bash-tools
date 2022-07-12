@@ -40,17 +40,6 @@ help_usage "$@"
 #version="${1:-${TERRAGRUNT_VERSION:-${VERSION:-0.38.4}}}"
 version="${1:-${TERRAGRUNT_VERSION:-latest}}"
 
-owner_repo="gruntwork-io/terragrunt"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    version="${version#v}"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
-
 export RUN_VERSION_OPT=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/terragrunt_{os}_{arch}" terragrunt
+"$srcdir/../github_install_binary.sh" gruntwork-io/terragrunt 'terragrunt_{os}_{arch}' "$version" terragrunt
