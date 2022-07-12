@@ -31,23 +31,10 @@ usage_args="[<version>]"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 version="${1:-latest}"
-
-owner_repo="docker/scan-cli-plugin"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-    [[ "$version" =~ ^v ]] || version="v$version"
-fi
 
 install_dir=~/.docker/cli-plugins
 
 mkdir -p -v "$install_dir"
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/docker-scan_{os}_{arch}" "$install_dir/docker-scan"
+"$srcdir/../github_install_binary.sh" docker/scan-cli-plugin 'docker-scan_{os}_{arch}' "$version" "$install_dir/docker-scan"
