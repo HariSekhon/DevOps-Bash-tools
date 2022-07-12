@@ -134,7 +134,7 @@ docker_rm_when_last_connection(){
     #if [ "$(pgrep -lf "bash.*${0##*/}" | grep -c .)" -lt 2 ]; then
     #if [ "$(ps -ef | grep -c "[b]ash.*${0##*/}")" -lt 2 ]; then
         timestamp "last session closing, deleting container:"
-        docker rm -f "$container_name"
+        docker rm -f -- "$container_name"
     fi
 }
 
