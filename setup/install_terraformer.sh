@@ -31,22 +31,10 @@ usage_args="[<version> <specific>]"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-0.8.18}"
 version="${1:-latest}"
 asset="${2:-all}"
 
-owner_repo="GoogleCloudPlatform/terraformer"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
-
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/terraformer-$asset-{os}-{arch}" terraformer
+"$srcdir/../github_install_binary.sh" GoogleCloudPlatform/terraformer "terraformer-$asset-{os}-{arch}" "$version" terraformer
