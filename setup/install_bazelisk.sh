@@ -15,26 +15,45 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-BAZELISK_VERSION="${1:-1.10.1}"
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs Bazelisk CLI
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
 
 export PATH="$PATH:$HOME/bin"
 
-if type -P bazelisk &>/dev/null; then
-    if bazelisk version | grep -q "^Bazelisk version: v$BAZELISK_VERSION$"; then
-        echo "Bazelisk is already installed and the right version: $BAZELISK_VERSION"
-        exit 0
-    fi
+help_usage "$@"
+
+#min_args 1 "$@"
+
+#version="${1:-1.10.1}"
+version="${1:-latest}"
+
+owner_repo="bazelbuild/bazelisk"
+
+if [ "$version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="${version#v}"
+    timestamp "latest version is '$version'"
+else
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
+os="$(get_os)"
+if [ "$os" = darwin ]; then
+    os=macOS
+fi
 
-cd /tmp
+export RUN_VERSION_ARG=1
 
-wget -O bazelisk "https://github.com/bazelbuild/bazelisk/releases/download/v$BAZELISK_VERSION/bazelisk-$platform-amd64"
-
-chmod +x bazelisk
-mkdir -pv ~/bin
-mv -v bazelisk ~/bin
-
-bazelisk version
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/bazelisk-{os}-{arch}" bazelisk
