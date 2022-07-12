@@ -559,7 +559,9 @@ gitu(){
     #targets=("$(strip_basedirs "$basedir" "$targets")")
     for filename in "$@"; do
         # follow symlinks to the actual files because diffing symlinks returns no changes
-        filename="$(resolve_symlinks "$filename")"
+        if [ "$filename" != . ]; then
+            filename="$(resolve_symlinks "$filename")"
+        fi
         # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
         basedir="$(basedir "$filename")" || return 1
         pushd "$basedir" >/dev/null || return 1
@@ -723,17 +725,17 @@ switchbranch(){
 }
 
 gitrm(){
-    git rm "$@" &&
+    git rm -- "$@" &&
     git commit -m "removed $*" "$@"
 }
 
 gitrename(){
-    git mv "$1" "$2" &&
+    git mv -- "$1" "$2" &&
     git commit -m "renamed $1 to $2" "$1" "$2"
 }
 
 gitmv(){
-    git mv "$1" "$2" &&
+    git mv -- "$1" "$2" &&
     git commit -m "moved $1 to $2" "$1" "$2"
 }
 
@@ -940,7 +942,7 @@ git_rm_untracked(){
             # this doesn't help because you are still stuck with \xxx chars throughout
             #filename="${filename#\"}"
             #filename="${filename%\"}"
-            rm -v "$filename" || break
+            rm -v -- "$filename" || break
         done
     done
 }
