@@ -100,7 +100,7 @@ tmpdir="/tmp/github_mirror_to_gitlab/$owner"
 
 if [ "${CLEAR_CACHE:-}" = true ]; then
     timestamp "Removing cache: $tmpdir"
-    rm -fr "$tmpdir"
+    rm -fr -- "$tmpdir"
 fi
 
 timestamp "Switching to '$tmpdir' directory for mirror staging"
@@ -182,7 +182,7 @@ for repo in $repos; do
     if ! mirror_repo "$repo"; then
         popd >/dev/null || :
         timestamp "Mirroring failed, clearing cache and trying again"
-        rm -fr "$tmpdir/$repo.git"
+        rm -fr -- "$tmpdir/$repo.git"
         if ! mirror_repo "$repo"; then
             echo >&2
             timestamp "ERROR: Failed to mirror repo '$repo' to GitLab"
