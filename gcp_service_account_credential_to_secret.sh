@@ -55,7 +55,7 @@ not_blank "$CLOUDSDK_CORE_PROJECT" || die "ERROR: \$CLOUDSDK_CORE_PROJECT / GClo
 description="${3:-}"
 
 keyfile="/tmp/$name-$project-credential.json.$$"
-trap_cmd "rm -f '$keyfile'"
+trap_cmd "rm -f -- '$keyfile'"
 
 service_account="$name@$project.iam.gserviceaccount.com"
 
