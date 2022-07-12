@@ -43,9 +43,9 @@ owner_repo="$1"
 
 release_file="$2"
 
-binary="$3"
+version="${3:-latest}"
 
-version="${4:-latest}"
+binary="${4:-}"
 
 install_path="${5:-}"
 
