@@ -65,7 +65,7 @@ timestamp "Configuring kubectl:"
 mkdir -pv ~/.kube /home/vagrant/.kube
 for kube_config in ~/.kube/config /home/vagrant/.kube/config; do
     if ! [ -f "$kube_config" ]; then
-        cp -vf /vagrant/.kube/config "$kube_config"
+        cp -vf -- /vagrant/.kube/config "$kube_config"
     fi
 done
 chown -v "$(id -u):$(id -g)" ~/.kube/config
