@@ -39,27 +39,9 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-2.4.0}"
 version="${1:-latest}"
 
-owner_repo="weaveworks/eksctl"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    version="${version#v}"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-fi
-
-os="$(get_os)"
-if [ "$os" = darwin ]; then
-    os=macOS
-fi
-
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/eksctl_{os}_{arch}.tar.gz" eksctl
+"$srcdir/../github_install_binary.sh" weaveworks/eksctl 'eksctl_{os}_{arch}.tar.gz' "$version" eksctl
