@@ -211,7 +211,7 @@ link_latest(){
         fi
         # if you're in 'admin' group on Mac you don't really need to sudo here
         # shellcheck disable=SC2154
-        $sudo ln -vfs $ln_opts "$path" "$path_noversion"
+        $sudo ln -vfs $ln_opts -- "$path" "$path_noversion"
     done
 }
 
