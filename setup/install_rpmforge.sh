@@ -49,4 +49,4 @@ rpm_url="$(
 
 wget -t 5 --retry-connrefused -O /tmp/repoforge.rpm "$rpm_url"
 $sudo rpm -ivh /tmp/repoforge.rpm
-rm -f /tmp/repoforge.rpm
+rm -f -- /tmp/repoforge.rpm
