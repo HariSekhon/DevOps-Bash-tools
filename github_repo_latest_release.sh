@@ -53,4 +53,5 @@ else
     curl -sSL --fail "https://api.github.com/repos/$owner_repo/releases/latest"
 fi |
 jq_debug_pipe_dump |
-jq -r .tag_name
+jq -e -r .tag_name ||
+die "Failed to determine latest release"
