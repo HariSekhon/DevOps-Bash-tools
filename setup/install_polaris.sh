@@ -48,4 +48,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/FairwindsOps/polaris/releases/download/$version/polaris_{os}_{arch}.tar.gz" polaris
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/polaris_{os}_{arch}.tar.gz" polaris
