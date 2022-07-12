@@ -48,7 +48,7 @@ rm_if_binary(){
     grep 'charset=binary' |
     grep -v '[[:space:]]inode/directory;[[:space:]]' |
     sed 's/:.*//' |
-    xargs rm -fv
+    xargs rm -fv --
 }
 
 # Finds and removes 'foo' binary for 'foo.go' adjacent compiled programs
