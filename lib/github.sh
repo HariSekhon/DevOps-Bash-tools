@@ -24,6 +24,8 @@ srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir_github_lib/git.sh"
 
+usage_github_cli_required="Requires GitHub CLI to be installed and configured, as well as jq"
+
 get_github_repo(){
     git remote -v 2>/dev/null |
     grep github.com |
