@@ -47,13 +47,13 @@ else
     wget -t 100 --retry-connrefused -c -O "$zipfile" "$URL"
     echo
     echo "unzipping parquet-tools"
-    unzip "$zipfile"
+    unzip -- "$zipfile"
     echo
     echo "chmod'ing 0755 parquet-tools-*"
     chmod 0755 parquet-tools-*
     echo
     echo "removing zipfile"
-    rm -f "$zipfile"
+    rm -f -- "$zipfile"
     echo
     echo "Done"
 fi
