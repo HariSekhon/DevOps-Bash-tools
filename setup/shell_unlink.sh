@@ -29,7 +29,7 @@ echo
 
 for filename in $conf_files .gitignore_global; do
     if [ -L ~/"$filename" ]; then
-        rm -fv ~/"$filename" || :
+        rm -fv -- ~/"$filename" || :
     fi
 done
 
