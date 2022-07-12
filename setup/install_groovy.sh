@@ -41,7 +41,7 @@ if ! [ -e "$BASE/groovy" ]; then
     wget -t 100 --retry-connrefused "https://groovy.jfrog.io/artifactory/dist-release-local/groovy-zips/apache-groovy-binary-$GROOVY_VERSION.zip"
     unzip "apache-groovy-binary-$GROOVY_VERSION.zip"
     ln -sv -- "groovy-$GROOVY_VERSION" groovy
-    rm -f "apache-groovy-binary-$GROOVY_VERSION.zip"
+    rm -f -- "apache-groovy-binary-$GROOVY_VERSION.zip"
     echo
     echo "Groovy Install done"
 else
