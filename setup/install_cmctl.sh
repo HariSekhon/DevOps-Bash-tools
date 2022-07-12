@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: 1.6.1
-#  args:
 #
 #  Author: Hari Sekhon
 #  Date: 2022-01-05 18:51:40 +0000 (Wed, 05 Jan 2022)
@@ -31,19 +29,24 @@ Installs Cert Manager CLI 'cmctl'
 # shellcheck disable=SC2034
 usage_args="[<version>]"
 
+export PATH="$PATH:$HOME/bin"
+
 help_usage "$@"
 
 #min_args 1 "$@"
 
+#version="${1:-1.6.1}"
 version="${1:-latest}"
 
-if [ "$version" != latest ] &&
-   ! [[ "$version" =~ ^v ]]; then
-    version="v$version"
-fi
+owner_repo="cert-manager/cert-manager"
 
 if [ "$version" = latest ]; then
-    "$srcdir/../install_binary.sh" "https://github.com/jetstack/cert-manager/releases/latest/download/cmctl-{os}-{arch}.tar.gz" cmctl
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="${version#v}"
+    timestamp "latest version is '$version'"
 else
-    "$srcdir/../install_binary.sh" "https://github.com/jetstack/cert-manager/releases/download/$version/cmctl-{os}-{arch}.tar.gz" cmctl
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
+
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/cmctl-{os}-{arch}.tar.gz" cmctl
