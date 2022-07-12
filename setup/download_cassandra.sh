@@ -51,7 +51,7 @@ echo "Extracting tarball:"
 tar zxf "$TAR"
 
 echo "Removing tarball:"
-rm -fv "$TAR"
+rm -fv -- "$TAR"
 
 # check tarball was extracted to the right place, helps ensure it's the right version and the link will work
 if ! test -d "apache-cassandra-$CASSANDRA_VERSION"; then
@@ -60,9 +60,9 @@ if ! test -d "apache-cassandra-$CASSANDRA_VERSION"; then
 fi
 
 echo "Symlinking cassandra:"
-ln -sv "apache-cassandra-$CASSANDRA_VERSION" cassandra
+ln -sv -- "apache-cassandra-$CASSANDRA_VERSION" cassandra
 
 if [ -f /.dockerenv ]; then
     echo "Running inside docker, removing docs:"
-    rm -rf cassandra/doc cassandra/javadoc
+    rm -rf -- cassandra/doc cassandra/javadoc
 fi
