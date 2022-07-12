@@ -49,4 +49,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/docker/hub-tool/releases/download/$version/hub-tool-{os}-{arch}.tar.gz" hub-tool/hub-tool
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/hub-tool-{os}-{arch}.tar.gz" hub-tool/hub-tool
