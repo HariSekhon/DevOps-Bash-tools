@@ -111,6 +111,8 @@ if [ -z "$destination" ]; then
     destination="${destination%%_$os}"
     destination="${destination%%-$arch}"
     destination="${destination%%_$arch}"
+    destination="${destination%%-x86_64}"  # $arch is amd64, we must check to strip this explicitly extra
+    destination="${destination%%_x86_64}"
     destination="${destination%%-$os}"
     destination="${destination%%_$os}"
 fi
