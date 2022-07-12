@@ -50,4 +50,4 @@ install_dir=~/.docker/cli-plugins
 
 mkdir -p -v "$install_dir"
 
-"$srcdir/../install_binary.sh" "https://github.com/docker/scan-cli-plugin/releases/download/$version/docker-scan_{os}_{arch}" "$install_dir/docker-scan"
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/docker-scan_{os}_{arch}" "$install_dir/docker-scan"
