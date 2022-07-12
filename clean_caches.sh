@@ -92,7 +92,7 @@ echo "Deleting Caches"
 #
 # rm -fr is done in the next block
 #if type apk >/dev/null 2>&1 2>&1; then
-#    rm -rf /var/cache/apk
+#    rm -rf -- /var/cache/apk
 if type apt-get >/dev/null 2>&1; then
     # could accidentally remove things it shouldn't
     #apt-get autoremove -y
@@ -117,12 +117,12 @@ while read -r directory; do
     [ -n "$directory" ] || continue
     [ -e "$directory" ] || continue
     echo "* removing $directory"
-    rm -rf "$directory" || :
+    rm -rf -- "$directory" || :
     [ -e "$directory" ] || continue
     # shellcheck disable=SC2039
     if [ "${EUID:-${UID:-$(id -u)}}" != 0 ]; then
         if type sudo >/dev/null 2>&1; then
-            sudo -n rm -rf "$directory"
+            sudo -n rm -rf -- "$directory"
         fi
     fi
 done
@@ -143,15 +143,15 @@ while read -r directory; do
     [ -e "$user_home_cache" ] || continue
     echo "* removing $user_home_cache"
     # ~ more reliable than $HOME which could be unset
-    rm -rf "$user_home_cache" || :
+    rm -rf -- "$user_home_cache" || :
     # shellcheck disable=SC2039
     if [ "${EUID:-${UID:-$(id -u)}}" != 0 ]; then
         if type sudo >/dev/null 2>&1; then
             # in case user home directory is owned by root, do a late stage removal as root
-            sudo -n rm -rf "$user_home_cache"
+            sudo -n rm -rf -- "$user_home_cache"
             [ -e "/root/$directory" ] || continue
             echo "* removing /root/$directory"
-            sudo -n rm -rf "/root/$directory"
+            sudo -n rm -rf -- "/root/$directory"
         fi
     fi
 done
