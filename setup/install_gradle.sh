@@ -43,7 +43,7 @@ else
     cd "$BASE"
     wget -c -t 10 --retry-connrefused "https://services.gradle.org/distributions/gradle-$GRADLE_VERSION-bin.zip"
     unzip "gradle-$GRADLE_VERSION-bin.zip"
-    rm -f "gradle-$GRADLE_VERSION-bin.zip"
+    rm -f -- "gradle-$GRADLE_VERSION-bin.zip"
     echo
     echo "Gradle Install done"
 fi
