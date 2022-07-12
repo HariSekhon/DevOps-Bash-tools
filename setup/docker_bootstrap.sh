@@ -64,7 +64,7 @@ curl -sSf "https://raw.githubusercontent.com/HariSekhon/$repo/master/setup/boots
 sh /bootstrap.sh
 
 if [ "$repo" = pytools ]; then
-    ln -sv "$basedir/python-tools" "$basedir/pytools"
+    ln -sv -- "$basedir/python-tools" "$basedir/pytools"
 fi
 
 cd "$basedir/$repo"
