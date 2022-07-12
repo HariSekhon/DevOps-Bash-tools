@@ -56,4 +56,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/cli/cli/releases/download/v$version/gh_${version}_${os}_{arch}.tar.gz" "gh_${version}_${os}_{arch}/bin/gh"
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/gh_${version}_${os}_{arch}.tar.gz" "gh_${version}_${os}_{arch}/bin/gh"
