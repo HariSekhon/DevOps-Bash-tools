@@ -64,7 +64,7 @@ else
         else
             curl -sS https://raw.githubusercontent.com/wallix/awless/master/getawless.sh | bash
         fi
-        mv -iv awless ~/bin/
+        mv -iv -- awless ~/bin/
     fi
 fi
 
