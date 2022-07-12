@@ -75,7 +75,7 @@ while read -r db schema table; do
 #"$srcdir/psql.sh" "$@"
     filename="$logdir/$db.$schema.$table.csv"
     tstamp "Exporting $db.$schema.$table:  "
-    rm -fv "$filename"  # would get overwritten anyway but removing to detect when psql errors out without non-zero exit code
+    rm -fv -- "$filename"  # would get overwritten anyway but removing to detect when psql errors out without non-zero exit code
     psql.sh -c "\\copy (SELECT * FROM \"$db\".\"$schema\".\"$table\") TO '$filename' WITH (FORMAT CSV, HEADER);"
     if ! [ -f "$filename" ]; then
         tstamp "ERROR: EXPORT FAILED"
@@ -84,14 +84,14 @@ while read -r db schema table; do
     # empty
     if ! [ -s "$filename" ]; then
         tstamp "${filename##*/} is empty, removing..."
-        rm -f "$filename"
+        rm -f -- "$filename"
         echo >&2
         continue
     fi
     # only a header line
     if wc -l "$filename" | grep -q '^1[[:space:]]'; then
         tstamp "${filename##*/} has only header line, removing..."
-        rm -f "$filename"
+        rm -f -- "$filename"
         echo >&2
         continue
     fi
