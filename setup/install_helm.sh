@@ -15,20 +15,40 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-#srcdir="$(dirname "${BASH_SOURCE[0]}")"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-VERSION="${1:-3.7.1}"
+# shellcheck disable=SC1090
+. "$srcdir/../lib/utils.sh"
 
-platform="$(uname -s | tr '[:upper:]' '[:lower:]')"
-arch="$(uname -m)"
-if [ "$arch" = x86_64 ]; then
-    arch="amd64"
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Installs GitHub CLI
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
+
+export PATH="$PATH:$HOME/bin"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
+#version="${1:-3.7.1}"
+version="${1:-latest}"
+
+owner_repo="helm/helm"
+
+if [ "$version" = latest ]; then
+    timestamp "determining latest version of '$owner_repo' via GitHub API"
+    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="${version#v}"
+    timestamp "latest version is '$version'"
+else
+    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-cd /tmp
-wget -O helm.tar.gz "https://get.helm.sh/helm-v$VERSION-$platform-$arch.tar.gz"
+export RUN_VERSION_ARG=1
 
-tar zxvf helm.tar.gz
-
-chmod +x "$platform-$arch/helm"
-mv -iv "$platform-$arch/helm" ~/bin/
+"$srcdir/../install_binary.sh" "https://get.helm.sh/helm-v$version-{os}-{arch}.tar.gz" "{os}-{arch}/helm"
