@@ -69,7 +69,7 @@ check_json_result(){
 tmp="$(mktemp)"
 # want splitting
 # shellcheck disable=SC2086
-trap 'rm "$tmp"' $TRAP_SIGNALS
+trap 'rm -- "$tmp"' $TRAP_SIGNALS
 
 echo "saving pipeline '$pipeline' to local file '$config_file'"
 "$srcdir/buildkite_get_pipeline.sh" "$pipeline" > "$config_file"
