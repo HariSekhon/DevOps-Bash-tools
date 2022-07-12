@@ -44,9 +44,9 @@
 ---
 install:
   # these cause package installation breakages due to GPG or 403 errors, old addresses etc.
-  - sudo rm -fv /etc/apt/sources.list.d/cli_assets_heroku_com_branches_stable_apt.list
-  - sudo rm -fv /etc/apt/sources.list.d/apache_bintray_com_couchdb_deb.list
-  - sudo rm -fv /etc/apt/sources.list.d/www_apache_org_dist_cassandra_debian.list
+  - sudo rm -fv -- /etc/apt/sources.list.d/cli_assets_heroku_com_branches_stable_apt.list
+  - sudo rm -fv -- /etc/apt/sources.list.d/apache_bintray_com_couchdb_deb.list
+  - sudo rm -fv -- /etc/apt/sources.list.d/www_apache_org_dist_cassandra_debian.list
   - make
 #before_script:
 #  - somecommand
