@@ -22,14 +22,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 sudo=""
 [ $EUID -eq 0 ] || sudo=sudo
 
-#$sudo ln -sv `type -P python2` /usr/local/bin/python
+#$sudo ln -sv -- `type -P python2` /usr/local/bin/python
 
 alternatives(){
     # not available on Alpine
     if type -P alternatives &>/dev/null; then
         $sudo alternatives --set python "$@"
     else
-        $sudo ln -sv "$1" /usr/local/bin/python
+        $sudo ln -sv -- "$1" /usr/local/bin/python
     fi
 }
 
@@ -59,9 +59,9 @@ if ! type -P pip; then
     if [ -f /usr/local/bin/pip ]; then
         echo "/usr/local/bin/pip already exists, not symlinking - check your \$PATH includes /usr/local/bin (\$PATH = $PATH)"
     elif [ -n "$pip3" ]; then
-        $sudo ln -sv "$pip3" /usr/local/bin/pip
+        $sudo ln -sv -- "$pip3" /usr/local/bin/pip
     elif [ -n "$pip2" ]; then
-        $sudo ln -sv "$pip2" /usr/local/bin/pip
+        $sudo ln -sv -- "$pip2" /usr/local/bin/pip
     else
         $sudo easy_install pip || :
     fi
