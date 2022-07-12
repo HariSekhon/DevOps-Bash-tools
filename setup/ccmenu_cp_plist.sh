@@ -23,9 +23,9 @@ plist_file="net.sourceforge.cruisecontrol.CCMenu.plist"
 
 cd "$srcdir/.."
 
-cp -vf ~/"$plist_dir/$plist_file" "$PWD/$plist_dir/$plist_file"
+cp -vf -- ~/"$plist_dir/$plist_file" "$PWD/$plist_dir/$plist_file"
 plutil -convert xml1 "$PWD/$plist_dir/$plist_file"
 echo
 
 echo "git diff $PWD/$plist_dir/$plist_file"
-git diff  "$PWD/$plist_dir/$plist_file"
+git diff "$PWD/$plist_dir/$plist_file"
