@@ -37,9 +37,9 @@ usage_args="<playlist_new_name> <playlist_existing_name>"
 help_usage "$@"
 
 commit_rename(){
-    mv -vf "$1" "$2"
+    mv -vf -- "$1" "$2"
     cd spotify
-    mv -vf "$1" "$2"
+    mv -vf -- "$1" "$2"
     cd ..
 
     "$srcdir/spotify_commit_playlists.sh" "$2"
