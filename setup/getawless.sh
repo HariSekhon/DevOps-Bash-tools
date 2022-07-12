@@ -48,7 +48,7 @@ else
 fi
 
 echo "removing $FILENAME"
-rm $FILENAME
+rm -- "$FILENAME"
 chmod +x ./awless
 
 echo ""
