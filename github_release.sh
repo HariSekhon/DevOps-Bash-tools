@@ -32,6 +32,8 @@ If the first argument is 'year', will determine the next available release in th
 
 These formats don't have dashes in them like ISO dates so that if you move from YYYY to YYYYMM format or YYYYMMDD format, GitHub will recognize the newer format as the Latest release
 
+If you later return to short format releases of just year or month, GitHub won't detect them as the Latest release during my testing.
+
 
 $usage_github_cli_required
 "
