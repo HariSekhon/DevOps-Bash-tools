@@ -685,6 +685,7 @@ etc.
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://harisekhon.github.io/CI-CD/) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
   - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
+  - `github_release.sh` - creates a GitHub Release, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
   - `github_repo_latest_release.sh` - returns the latest release tag for a given GitHub repo via the GitHub API
   - `github_repo_latest_release_filter.sh` - returns the latest release tag matching a given regex filter for a given GitHub repo via the GitHub API. Useful for getting the latest version of things like Kustomize which has other releases for kyaml
