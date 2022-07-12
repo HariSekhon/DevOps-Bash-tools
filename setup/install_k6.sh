@@ -56,4 +56,4 @@ if [ "$os" = darwin ]; then
     os=macos
 fi
 
-"$srcdir/../install_binary.sh" "https://github.com/grafana/k6/releases/download/v$version/k6-v$version-$os-{arch}.zip" "k6-v$version-$os-{arch}/k6" k6
+"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/v$version/k6-v$version-$os-{arch}.zip" "k6-v$version-$os-{arch}/k6" k6
