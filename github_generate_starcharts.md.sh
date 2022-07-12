@@ -91,7 +91,7 @@ head(){
 }
 
 tempfile="$(mktemp)"
-trap 'echo ERROR >&2; rm -vf $tempfile' exit
+trap 'echo ERROR >&2; rm -vf -- "$tempfile"' exit
 
 {
 actual_repos=0
@@ -162,6 +162,6 @@ EOF
 cat "$tempfile"
 } | tee "$file"
 
-rm "$tempfile"
+rm -f -- "$tempfile"
 
 untrap
