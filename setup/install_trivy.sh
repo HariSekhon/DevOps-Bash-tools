@@ -31,21 +31,8 @@ usage_args=""
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 #version="${1:-0.22.0}"
 version="${1:-latest}"
-
-owner_repo="aquasecurity/trivy"
-
-if [ "$version" = latest ]; then
-    timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
-    timestamp "latest version is '$version'"
-else
-    is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
-    [[ "$version" =~ ^v ]] || version="v$version"
-fi
 
 os="$(uname -s)"
 arch="$(uname -m)"
@@ -66,4 +53,4 @@ fi
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/trivy_${version#v}_${os}-${arch}.tar.gz" trivy
+"$srcdir/../github_install_binary.sh" aquasecurity/trivy "trivy_{version}_${os}-${arch}.tar.gz" "$version" trivy
