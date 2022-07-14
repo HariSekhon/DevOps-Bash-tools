@@ -36,14 +36,22 @@ usage_args="<git_branch> [<dir1> <dir2> <dir3> ...]"
 
 help_usage "$@"
 
-min_args 2 "$@"
+min_args 1 "$@"
 
-current_branch="$(current_branch)"
+original_branch="$(current_branch)"
 base_branch="$1"
 shift || :
 
-timestamp "Collecting kustomize build outputs for directories in current branch '$current_branch' head: $*"
-for dir in "$@"; do
+dirs=("$@")
+if [ -z "${dirs[*]:-}" ]; then
+    dirs+=("$PWD")
+fi
+
+trap_cmd "popd &>/dev/null; git checkout '$original_branch' &>/dev/null; git stash pop &>/dev/null || :"
+
+timestamp "Collecting kustomize build outputs for directories in current branch '$original_branch': $*"
+echo
+for dir in "${dirs[@]}"; do
     mkdir -p "/tmp/$dir.$$"
     pushd "$dir"
     kustomize build --enable-helm > "/tmp/$dir.$$/head"
@@ -52,35 +60,40 @@ done
 echo
 
 timestamp "Stashing any uncommitted changes in current branch that might prevent a branch switch"
+echo
 git stash
 echo
 
 timestamp "Switching to base branch: $base_branch"
-git checkout "$base_branch"
+git checkout --quiet "$base_branch"
 echo
 
 timestamp "Collecting kustomize build outputs for directories in base branch '$base_branch': $*"
-for dir in "$@"; do
+echo
+for dir in "${dirs[@]}"; do
     pushd "$dir"
     kustomize build --enable-helm > "/tmp/$dir.$$/base"
     popd
 done
 echo
 
-timestamp "Switching back to original branch: $current_branch"
-git checkout "$current_branch"
+timestamp "Switching back to original branch: $original_branch"
+git checkout --quiet "$original_branch"
 echo
 
 timestamp "Restoring any stashed changes"
+echo
 git stash pop || :
 echo
 
-timestamp "Differences per directory from base branch '$base_branch' to head current branch '$current_branch':"
+timestamp "Differences per directory from base branch '$base_branch' to head current branch '$original_branch':"
 echo
-for dir in "$@"; do
+for dir in "${dirs[@]}"; do
     echo "Directory: $dir"
     echo
     diff "/tmp/$dir.$$/base" "/tmp/$dir.$$/head" || :
     echo
     echo
 done
+
+untrap
