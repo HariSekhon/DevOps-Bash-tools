@@ -29,7 +29,7 @@ unless \$GITHUB_OWNER_REPO is set in the environment or '-R <owner>/<repo>' are 
 
 The first argument is the version, which is recommended to set to vN.N.N eg. v1.0.0 as per semantic versioning standards
 
-If the first argument is 'date', will determine the next available release in the format vYYYYMMDD.NN where NN is incremented from 1
+If the first argument is 'day' or 'date', will determine the next available release in the format vYYYYMMDD.NN where NN is incremented from 1
 If the first argument is 'month', will determine the next available release in the format vYYYYMM.NN
 If the first argument is 'year', will determine the next available release in the format vYYYY.NN (the default if no version is specified)
 
@@ -73,7 +73,7 @@ if [ "$version" = year ]; then
 elif [ "$version" = month ]; then
     version="${prefix}$(date '+%Y%m')"
     generate_version=1
-elif [ "$version" = day ]; then
+elif [ "$version" = day ] [ "$version" = date ]; then
     version="${prefix}$(date '+%Y%m%d')"
     generate_version=1
 fi
