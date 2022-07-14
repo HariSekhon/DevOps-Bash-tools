@@ -56,6 +56,10 @@ is_in_git_repo(){
     git_root &>/dev/null
 }
 
+current_branch(){
+    git rev-parse --abbrev-ref HEAD
+}
+
 allbranches(){
     if type -P uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
