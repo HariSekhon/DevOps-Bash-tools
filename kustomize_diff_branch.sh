@@ -26,6 +26,8 @@ Runs kustomize build in the current vs the target base Git branch, for all direc
 
 Useful to validate kustomization.yaml refactoring, such as changing bases, switching to tagged external bases and wanting to ensure the refactor is a no-op
 
+If no directories are given, assumes to kustomize build in the local directory
+
 
 Requires Kustomize 4.x for --enable-helm support
 "
