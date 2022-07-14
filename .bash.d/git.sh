@@ -696,7 +696,7 @@ github_pull_request(){
         local current_branch
         local default_branch
         owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//')"
-        current_branch="$(currentbranch)"
+        current_branch="$(current_branch)"
         default_branch="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
         #url="https://github.com/$owner_repo/pull/new/$branch"
         # from your current branch to the default branch by default
@@ -709,9 +709,10 @@ github_pull_request(){
 }
 alias pr=github_pull_request
 
-currentbranch(){
+current_branch(){
     git rev-parse --abbrev-ref HEAD
 }
+alias currentbranch=current_branch
 
 switchbranch(){
     if isGit "."; then
