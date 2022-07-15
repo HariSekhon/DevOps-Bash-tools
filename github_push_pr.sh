@@ -32,6 +32,7 @@ usage_args="[<target_base_branch> <title> <description>]"
 help_usage "$@"
 
 #min_args 1 "$@"
+max_args 3 "$@"
 
 check_github_origin
 
@@ -47,7 +48,9 @@ output="$("$srcdir/github_pull_request_create.sh" "$current_branch" "$base_branc
 
 echo "$output"
 
-url="$(grep -Eom1 'https://github.com/[[:alnum:]/_-]+/pull/[[:digit:]]+' <<< "$output" || :)"
+# defined in lib/github.sh
+# shellcheck disable=SC2154
+url="$(grep -Eom1 "$github_pull_request_url_regex" <<< "$output" || :)"
 
 if [ -z "$url" ]; then
     die "Failed to parse Pull Request URL from output"
