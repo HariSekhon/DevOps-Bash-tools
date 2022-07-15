@@ -22,12 +22,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Pushes the current branch to GitHub origin, setting upstream branch to the same name as the current and then raises a Pull Request to the base branch
+Pushes the current branch to GitHub origin, sets upstream branch, then raises a Pull Request to the given or default branch
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<title> <description>"
+usage_args="[<target_base_branch> <title> <description>]"
 
 help_usage "$@"
 
@@ -35,16 +35,15 @@ help_usage "$@"
 
 check_github_origin
 
-current_branch="$(current_branch)"
+base_branch="${1:-$(default_branch)}"
+export GITHUB_PULL_REQUEST_TITLE="${2:-}"
+export GITHUB_PULL_REQUEST_BODY="${3:-}"
 
-default_branch="$(default_branch)"
+current_branch="$(current_branch)"
 
 git push --set-upstream origin "$(current_branch)"
 
-export GITHUB_PULL_REQUEST_TITLE="${1:-}"
-export GITHUB_PULL_REQUEST_BODY="${2:-}"
-
-output="$("$srcdir/github_pull_request_create.sh" "$current_branch" "$default_branch" 2>&1)"
+output="$("$srcdir/github_pull_request_create.sh" "$current_branch" "$base_branch" 2>&1)"
 
 echo "$output"
 
