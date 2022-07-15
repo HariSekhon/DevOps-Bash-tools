@@ -24,8 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Opens a GitHub Pull Request preview page from the current local branch to the default branch
 
-Useful to call from aliases/functions to quickly push a new branch, preview and raise a PR with a mere couple keystrokes
-See .bash.d/git.sh for where this is used
+Optionally you can specify the head and base target branch yourself as arguments
+
+Useful to call from aliases/functions to quickly open a PR. See .bash.d/git.sh where this is used via github_push_pr_preview.sh to automated this workflow with a handful of keystrokes
 
 Prints the Pull Request URL, and if on Mac or if \$BROWSER is set then opens it for you in your default browser
 
@@ -34,7 +35,7 @@ Assumes that GitHub is the remote origin, and checks for this for safety
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<target_base_branch> <head_branch>]"
 
 help_usage "$@"
 
@@ -49,9 +50,8 @@ owner_repo="$(github_origin_owner_repo)"
 #    die 'Failed to find origin remote pointing to github.com! Are we in a github checkout?'
 #fi
 
-current_branch="$(current_branch)"
-
-default_branch="$(default_branch)"
+default_branch="${1:-$(default_branch)}"
+current_branch="${2:-$(current_branch)}"
 
 #url="https://github.com/$owner_repo/pull/new/$branch"
 # from your current branch to the default branch by default
