@@ -114,6 +114,6 @@ for branch in $branches; do
     if tr '[:space:]' '\n' <<< "$branches_to_automerge" | sed '/^[[:space:]]*$/d' | grep -Fxq "$branch"; then
         "$srcdir/github_merge_branch.sh" "$owner_repo" "$head" "$base"
     else
-        "$srcdir/github_create_pull_request.sh" "$owner_repo" "$head" "$base"
+        "$srcdir/github_pull_request_create.sh" "$owner_repo" "$head" "$base"
     fi
 done

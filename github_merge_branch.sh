@@ -37,7 +37,7 @@ Requires GitHub CLI to be installed and configured
 
 Depends on adjacent script:
 
-    github_create_pull_request.sh
+    github_pull_request_create.sh
 
 Used by adjacent script:
 
@@ -53,7 +53,7 @@ help_usage "$@"
 min_args 2 "$@"
 max_args 3 "$@"
 
-output="$("$srcdir/github_create_pull_request.sh" "$@")"
+output="$("$srcdir/github_pull_request_create.sh" "$@")"
 
 if [ -n "$output" ]; then
     pr_url="$(grep '/pull/' <<< "$output" || die "Failed to generate Pull Request or couldn't find pull URL in output")"
