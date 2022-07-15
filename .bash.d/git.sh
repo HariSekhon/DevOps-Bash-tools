@@ -678,8 +678,10 @@ push(){
         return 1
     fi
 }
-alias pushu="$bash_tools/github_push_pr_preview.sh"
-alias pushup="$bash_tools/github_push_pr.sh"
+alias pushu='$bash_tools/github_push_pr_preview.sh'
+alias pushup='$bash_tools/github_push_pr.sh'
+alias pushupmerge='GITHUB_MERGE_PULL_REQUEST=true $bash_tools/github_push_pr.sh'
+alias pushupm=pushupmerge
 
 pushr(){
     for remote in $(git remote); do
