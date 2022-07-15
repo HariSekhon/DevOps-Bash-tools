@@ -50,11 +50,10 @@ echo "$output"
 
 # defined in lib/github.sh
 # shellcheck disable=SC2154
-url="$(grep -Eom1 "$github_pull_request_url_regex" <<< "$output" || :)"
-
-if [ -z "$url" ]; then
-    die "Failed to parse Pull Request URL from output"
-fi
+url="$(
+    grep -Eom1 "$github_pull_request_url_regex" <<< "$output" ||
+    die "Failed to generate Pull Request or couldn't find pull request URL in output"
+)"
 
 echo
 if is_mac; then
