@@ -40,6 +40,16 @@ get_github_repo(){
     '
 }
 
+is_github_origin(){
+    git remote -v | grep -q '^origin.*github.com[/:]'
+}
+
+check_github_origin(){
+    if ! is_github_origin; then
+        die 'GitHub is not set as remote origin in current repo!'
+    fi
+}
+
 github_origin_owner_repo(){
     local owner_repo
     owner_repo="$(
