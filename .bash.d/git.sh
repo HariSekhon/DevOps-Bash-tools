@@ -678,10 +678,9 @@ push(){
         return 1
     fi
 }
-pushu(){
-    push "$@" --set-upstream origin "$(git branch | awk '/^\*/{print $2}')"
-    github_pull_request
-}
+alias pushu="$bash_tools/github_push_pr_preview.sh"
+alias pushup="$bash_tools/github_push_pr.sh"
+
 pushr(){
     for remote in $(git remote); do
         echo "> git push \"$remote\""
@@ -690,24 +689,7 @@ pushr(){
     done
 }
 
-github_pull_request(){
-    if git remote -v | grep -q '^origin.*github.com[/:]'; then
-        local owner_repo
-        local current_branch
-        local default_branch
-        owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//')"
-        current_branch="$(current_branch)"
-        default_branch="$(git remote show origin | sed -n '/HEAD branch/s/.*: //p')"
-        #url="https://github.com/$owner_repo/pull/new/$branch"
-        # from your current branch to the default branch by default
-        url="https://github.com/$owner_repo/compare/$default_branch...$current_branch"
-        if is_mac; then
-            echo "Opening Pull Request"
-            open "$url"
-        fi
-    fi
-}
-alias pr=github_pull_request
+alias pr=github_pull_request.sh
 
 current_branch(){
     git rev-parse --abbrev-ref HEAD
