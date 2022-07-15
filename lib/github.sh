@@ -142,3 +142,9 @@ get_github_repo_branches(){
         ((page+=1))
     done
 }
+
+parse_pull_request_url(){
+    local text="$1"
+    grep -Eom1 "$github_pull_request_url_regex" <<< "$text" ||
+    die "Failed to parse pull request URL"
+}
