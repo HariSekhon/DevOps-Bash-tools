@@ -39,6 +39,6 @@ check_github_origin
 
 current_branch="$(current_branch)"
 
-git push "$@" --set-upstream origin "$current_branch"
+git push --set-upstream origin "$current_branch"
 
 "$srcdir/github_pull_request_preview.sh" "$@"
