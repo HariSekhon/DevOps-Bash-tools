@@ -102,10 +102,21 @@ else
     head_name="$head"
 fi
 
+body_template=""
+if [ "$owner_repo" = '{owner}/{repo}' ]; then
+    # we are raising for the local repo
+    git_root="$(git_root)"
+    pr_template="$git_root/.github/pull_request_template.md"
+    if [ -f "$pr_template" ]; then
+        body_template="$(cat "$pr_template")"
+    fi
+fi
+
 title="${GITHUB_PULL_REQUEST_TITLE:-Merge $head branch into $base branch}"
-body="${GITHUB_PULL_REQUEST_BODY:-Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo}"
+body="${GITHUB_PULL_REQUEST_BODY:-${body_template:-Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo}}"
 
 total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
+
 if [ "$total_commits" -gt 0 ]; then
     # check for existing PR between these branches before creating another
     existing_pr="$(gh pr list -R "$owner/$repo" \
