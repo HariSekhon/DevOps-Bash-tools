@@ -40,6 +40,7 @@ usage_args="[<target_base_branch> <head_branch>]"
 help_usage "$@"
 
 #min_args 1 "$@"
+max_args 2 "$@"
 
 check_github_origin
 
