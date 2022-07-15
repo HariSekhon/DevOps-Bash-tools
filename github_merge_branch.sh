@@ -56,12 +56,7 @@ max_args 3 "$@"
 output="$("$srcdir/github_pull_request_create.sh" "$@")"
 
 if [ -n "$output" ]; then
-    # defined in lib/github.sh
-    # shellcheck disable=SC2154
-    url="$(
-        grep -Eom1 "$github_pull_request_url_regex" <<< "$output" ||
-        die "Failed to generate Pull Request or couldn't find pull request URL in output"
-    )"
+    url="$(parse_pull_request_url "$output")"
     timestamp "Merging Pull Request $url"
     gh pr merge --merge "$url"
     echo >&2
