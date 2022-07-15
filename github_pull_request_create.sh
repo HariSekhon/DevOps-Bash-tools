@@ -34,6 +34,10 @@ Useful Git terminology reminder:
 The HEAD branch is the branch you want to merge FROM, eg. 'my-feature-branch'
 The BASE branch is the branch you want to merge INTO, eg. 'master' or 'main'
 
+If \$GITHUB_PULL_REQUEST_TITLE or \$GITHUB_PULL_REQUEST_BODY environment variables are set, those values will be used to generate the pull request
+If \$GITHUB_PULL_REQUEST_BODY is not set, but .github/pull_request_template.md is present at the top of the current checkout repo, will use that for the body. If the template body contains Jira ticket number token templates such as AA-XXXXX or AA-NNNNN and the current branch is prefixed with a matching alpha-number token, then those tokens will be replaced with the real Jira number from the branch
+
+
 Requires GitHub CLI to be installed and configured
 
 Used by adjacent scripts:
@@ -109,6 +113,18 @@ if [ "$owner_repo" = '{owner}/{repo}' ]; then
     pr_template="$git_root/.github/pull_request_template.md"
     if [ -f "$pr_template" ]; then
         body_template="$(cat "$pr_template")"
+        # if branch prefix matches an AA-XXXXX or AA-NNNNN token placeholder in the body, replace it
+        branch_prefix="$(grep -Eom1 '^[[:alpha:]]{2,}-[[:digit:]]{3,}-' <<< "$head" | sed 's/-$//' || :)"
+        if [[ "$branch_prefix" =~ ^[[:alpha:]]{2,}-[[:digit:]]{3,}$ ]]; then
+            match1="${branch_prefix//[[:digit:]]/X}"
+            match2="${branch_prefix//[[:digit:]]/N}"
+            # doesn't work for replacements below
+            #shopt -s nocasematch
+            #body_template="${body_template//$match1/$branch_prefix}"
+            #body_template="${body_template//$match2/$branch_prefix}"
+            #shopt -u nocasematch
+            body_template="$(sed "s/\\($match1\\|$match2\\)/$branch_prefix/gi" <<< "$body_template")"
+        fi
     fi
 fi
 
@@ -117,8 +133,8 @@ body="${GITHUB_PULL_REQUEST_BODY:-${body_template:-Created automatically by scri
 
 total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
 
-if [ "$total_commits" -gt 0 ]; then
-    # check for existing PR between these branches before creating another
+get_pr_url(){
+    local existing_pr
     existing_pr="$(gh pr list -R "$owner/$repo" \
         --json baseRefName,changedFiles,commits,headRefName,headRepository,headRepositoryOwner,isCrossRepository,number,state,title,url \
         -q ".[] |
@@ -126,9 +142,18 @@ if [ "$total_commits" -gt 0 ]; then
             select(.headRefName == \"$head_name\") |
             select(.headRepositoryOwner.login == \"$head_owner\")
     ")"
-    existing_pr_url="$(jq -r '.url' <<< "$existing_pr")"
     if [ -n "$existing_pr" ]; then
-        timestamp "Branch '$base' already has an existing pull request from '$head', skipping PR: $existing_pr_url"
+        jq -r '.url' <<< "$existing_pr"
+    else
+        echo ""
+    fi
+}
+
+if [ "$total_commits" -gt 0 ]; then
+    # check for existing PR between these branches before creating another
+    existing_pr_url="$(get_pr_url)"
+    if [ -n "$existing_pr_url" ]; then
+        timestamp "Branch '$base' already has an existing pull request from '$head', skipping creating PR: $existing_pr_url"
         echo >&2
         exit 0
     fi
@@ -143,6 +168,6 @@ if [ "$total_commits" -gt 0 ]; then
                  --no-maintainer-edit
     echo >&2
 else
-    timestamp "Branch '$base' is already up to date with upstream, skipping PR"
+    timestamp "Branch '$base' is already up to date with upstream, skipping creating PR"
     echo >&2
 fi
