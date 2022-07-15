@@ -51,18 +51,16 @@ echo "$output"
 url="$(grep -Eom1 'https://github.com/[[:alnum:]/_-]+/pull/[[:digit:]]+' <<< "$output" || :)"
 
 if [ -z "$url" ]; then
-    die "Pull request URL not found in output"
+    die "Failed to parse Pull Request URL from output"
 fi
 
+echo
 if is_mac; then
-    echo
     echo "Opening Pull Request"
     open "$url"
 elif [ -n "${BROWSER:-}" ]; then
-    echo
     echo "Opening Pull Request using \$BROWSER"
     "$BROWSER" "$url"
 else
-    echo
     echo "\$BROWSER environment variable not set and not on Mac to use default browser, not opening browser"
 fi
