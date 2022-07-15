@@ -70,4 +70,7 @@ elif [ -n "${BROWSER:-}" ]; then
     echo
     echo "Opening Pull Request using \$BROWSER"
     "$BROWSER" "$url"
+else
+    echo
+    echo "\$BROWSER environment variable not set and not on Mac to use default browser, not opening browser"
 fi
