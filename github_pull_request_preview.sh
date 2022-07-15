@@ -40,9 +40,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-if ! git remote -v | grep -q '^origin.*github.com[/:]'; then
-    die 'GitHub is not set as remote origin in current repo!'
-fi
+check_github_origin
 
 owner_repo="$(github_origin_owner_repo)"
 
