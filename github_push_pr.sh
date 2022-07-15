@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Pushes the current branch to GitHub origin, sets upstream branch, then raises a Pull Request to the given or default branch
+
+If \$GITHUB_MERGE_PULL_REQUEST=true then will automatically merge the pull request as well
 "
 
 # used by usage() in lib/utils.sh
@@ -49,6 +51,12 @@ output="$("$srcdir/github_pull_request_create.sh" "$current_branch" "$base_branc
 echo "$output"
 
 url="$(parse_pull_request_url "$output")"
+
+if [ "$GITHUB_MERGE_PULL_REQUEST" = true ]; then
+    timestamp "Merging Pull Request:  $url"
+    gh pr merge --merge "$url"
+    echo
+fi
 
 echo
 if is_mac; then
