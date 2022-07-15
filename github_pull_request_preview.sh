@@ -44,10 +44,14 @@ if ! git remote -v | grep -q '^origin.*github.com[/:]'; then
     die 'GitHub is not set as remote origin in current repo!'
 fi
 
-owner_repo="$(git remote -v | grep -m1 '^origin.*github.com[/:]' | sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//' || :)"
+owner_repo="$(github_origin_owner_repo)"
 
 if [ -z "$owner_repo" ]; then
     die 'Failed to find origin remote pointing to github.com! Are we in a github checkout?'
+fi
+
+if ! is_github_owner_repo "$owner_repo"; then
+    die "<owner>/<repo> '$owner_repo' does not match expected format"
 fi
 
 current_branch="$(current_branch)"
