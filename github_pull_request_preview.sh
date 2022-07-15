@@ -46,13 +46,10 @@ fi
 
 owner_repo="$(github_origin_owner_repo)"
 
-if [ -z "$owner_repo" ]; then
-    die 'Failed to find origin remote pointing to github.com! Are we in a github checkout?'
-fi
-
-if ! is_github_owner_repo "$owner_repo"; then
-    die "<owner>/<repo> '$owner_repo' does not match expected format"
-fi
+# checks are done inside github_origin_owner_repo() now
+#if [ -z "$owner_repo" ]; then
+#    die 'Failed to find origin remote pointing to github.com! Are we in a github checkout?'
+#fi
 
 current_branch="$(current_branch)"
 
