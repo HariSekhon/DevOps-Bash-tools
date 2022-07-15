@@ -45,7 +45,11 @@ github_origin_owner_repo(){
     owner_repo="$(
         git remote -v |
         grep -m1 '^origin.*github.com[/:]' |
-        sed 's|.*github.com[:/]||; s/\.git.*//; s/[[:space:]].*//' ||
+        sed '
+            s|.*github.com[:/]||;
+            s/\.git.*//;
+            s/[[:space:]].*//
+        ' ||
         :
     )"
     is_github_owner_repo "$owner_repo" || die "<owner>/<repo> '$owner_repo' does not match expected format"
