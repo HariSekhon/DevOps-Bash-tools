@@ -57,7 +57,7 @@ output="$("$srcdir/github_pull_request_create.sh" "$@")"
 
 if [ -n "$output" ]; then
     url="$(parse_pull_request_url "$output")"
-    timestamp "Merging Pull Request $url"
+    timestamp "Merging Pull Request:  $url"
     gh pr merge --merge "$url"
     echo >&2
 fi
