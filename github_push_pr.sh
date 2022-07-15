@@ -53,7 +53,7 @@ echo "$output"
 
 url="$(parse_pull_request_url "$output")"
 
-if [ "$GITHUB_MERGE_PULL_REQUEST" = true ]; then
+if [ "${GITHUB_MERGE_PULL_REQUEST:-}" = true ]; then
     echo
     timestamp "Merging Pull Request:  $url"
     gh pr merge --merge "$url"
