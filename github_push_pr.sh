@@ -46,16 +46,17 @@ current_branch="$(current_branch)"
 
 git push --set-upstream origin "$(current_branch)"
 
+echo
 output="$("$srcdir/github_pull_request_create.sh" "$current_branch" "$base_branch" 2>&1)"
-
+echo
 echo "$output"
 
 url="$(parse_pull_request_url "$output")"
 
 if [ "$GITHUB_MERGE_PULL_REQUEST" = true ]; then
+    echo
     timestamp "Merging Pull Request:  $url"
     gh pr merge --merge "$url"
-    echo
 fi
 
 echo
