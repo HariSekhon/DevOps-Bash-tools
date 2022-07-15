@@ -102,6 +102,9 @@ else
     head_name="$head"
 fi
 
+title="${GITHUB_PULL_REQUEST_TITLE:-Merge $head branch into $base branch}"
+body="${GITHUB_PULL_REQUEST_BODY:-Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo}"
+
 total_commits="$(gh api "/repos/$owner/$repo/compare/$base...$head" -q '.total_commits')"
 if [ "$total_commits" -gt 0 ]; then
     # check for existing PR between these branches before creating another
@@ -122,10 +125,10 @@ if [ "$total_commits" -gt 0 ]; then
     # --no-maintainer-edit is important, otherwise member ci account gets error (and yes there is a double 'Fork collab' error in GitHub CLI's error message):
     # pull request create failed: GraphQL: Fork collab Fork collab can't be granted by someone without permission (createPullRequest)
     gh pr create -R "$owner/$repo" \
-                 --base "$base" \
-                 --head "$head" \
-                 --title "Merge $head branch into $base branch" \
-                 --body "Created automatically by script \`${0##*/}\` in the [DevOps Bash tools](https://github.com/HariSekhon/DevOps-Bash-tools) repo." \
+                 --base  "$base"   \
+                 --head  "$head"   \
+                 --title "$title"  \
+                 --body  "$body"   \
                  --no-maintainer-edit
     echo >&2
 else
