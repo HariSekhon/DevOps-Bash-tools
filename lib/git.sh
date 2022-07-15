@@ -60,6 +60,11 @@ current_branch(){
     git rev-parse --abbrev-ref HEAD
 }
 
+default_branch(){
+    git remote show origin |
+    sed -n '/HEAD branch/ s/.\+:[[:space:]]\+//p'
+}
+
 allbranches(){
     if type -P uniq_order_preserved.pl &>/dev/null; then
         local uniq=uniq_order_preserved.pl
