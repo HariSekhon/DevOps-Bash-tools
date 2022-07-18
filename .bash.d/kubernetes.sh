@@ -88,7 +88,18 @@ alias kshell='kube-shell'
 alias kubesh='kube-shell'
 alias kubeconfig='$EDITOR "${KUBECONFIG:-~/.kube/config}"'
 alias kubeconf=kubeconfig
-alias dat='datree test --only-k8s-files --ignore-missing-schemas'
+#alias dat='datree test --only-k8s-files --ignore-missing-schemas'
+dat(){
+    if [ $# -eq 0 ]; then
+        find . -type f -iname '*.y*ml' |
+        # datree doesn't handle jsonpatch well
+        grep -v jsonpatch |
+        tr '\n' '\0' |
+        xargs -0 datree test --only-k8s-files --ignore-missing-schemas
+    else
+        datree test --only-k8s-files --ignore-missing-schemas "$@"
+    fi
+}
 
 #alias poc='po | grep -v Completed'
 unalias poc &>/dev/null
