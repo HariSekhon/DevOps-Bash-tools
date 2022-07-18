@@ -40,8 +40,13 @@ for filename in "$@"; do
     "$srcdir/check_yaml.sh" "$filename"
 
     if type -P datree &>/dev/null; then
-        section "Datree Kubernetes Check"
-        datree test --only-k8s-files --ignore-missing-schemas "$filename"
+        if [[ "$filename" =~ kustomization.ya?ml$ ]]; then
+            section "Datree Kubernetes Kustomize Check"
+            datree kustomize test "$(dirname "$filename")"
+        else
+            section "Datree Kubernetes Check"
+            datree test --only-k8s-files --ignore-missing-schemas "$filename"
+        fi
         echo
         section2 "Datree Kubernetes Check Passed"
     fi
