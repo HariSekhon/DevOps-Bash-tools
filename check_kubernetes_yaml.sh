@@ -41,7 +41,7 @@ for filename in "$@"; do
 
     if type -P datree &>/dev/null; then
         section "Datree Kubernetes Check"
-        datree test "$filename"
+        datree test --only-k8s-files --ignore-missing-schemas "$filename"
         echo
         section2 "Datree Kubernetes Check Passed"
     fi
