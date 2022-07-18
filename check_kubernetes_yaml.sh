@@ -40,7 +40,8 @@ for filename in "$@"; do
     "$srcdir/check_yaml.sh" "$filename"
 
     if type -P datree &>/dev/null; then
-        if [[ "$filename" =~ kustomization.ya?ml$ ]]; then
+        # only relevant if named exactly kustomization.yaml
+        if [[ "$filename" =~ ^(.*/)kustomization.ya?ml$ ]]; then
             section "Datree Kubernetes Kustomize Check"
             datree kustomize test "$(dirname "$filename")"
         else
