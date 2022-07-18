@@ -92,8 +92,8 @@ alias kubeconf=kubeconfig
 dat(){
     if [ $# -eq 0 ]; then
         find . -type f -iname '*.y*ml' |
-        # datree doesn't handle jsonpatch well
-        grep -v jsonpatch |
+        # datree doesn't handle patches well
+        grep -v patch |
         tr '\n' '\0' |
         xargs -0 datree test --only-k8s-files --ignore-missing-schemas
     else
