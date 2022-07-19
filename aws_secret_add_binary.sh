@@ -37,6 +37,11 @@ Example:
     aws_secret_get.sh mysecret | base64 --decode > qr-code.png
 
 
+Caveat: your QR pic cannot be too big or complex or it'll result in too large a base64 string which gives this error:
+
+    An error occurred (ValidationException) when calling the CreateSecret operation: 1 validation error detected: Value at 'secretBinary' failed to satisfy constraint: Member must have length less than or equal to 65536
+
+
 $usage_aws_cli_required
 "
 
