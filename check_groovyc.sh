@@ -56,7 +56,7 @@ check_groovyc(){
     # this requires far too many function exports for all called CI functions
     #isExcluded "$filename" && return 0
     if grep -E "^@NonCPS" "$filename"; then
-        # can't test this annotation without 'import com.cloudbees.groovy.cps.NonCPS'
+        # can't test this Jenkins annotation without 'import com.cloudbees.groovy.cps.NonCPS'
         return
     fi
     echo "groovyc $filename $*" >&2
