@@ -547,17 +547,13 @@ gitimport(){
 
 # shellcheck disable=SC2086
 gitu(){
-    if [ -z "$1" ]; then
-        echo "usage: gitu <file> <file2> ..."
-        return 3
-    fi
     local basedir
     local trap_codes="INT ERR"
     # expand now
     # shellcheck disable=SC2064
     trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes
     #targets=("$(strip_basedirs "$basedir" "$targets")")
-    for filename in "$@"; do
+    for filename in "${@:-.}"; do
         # follow symlinks to the actual files because diffing symlinks returns no changes
         if [ "$filename" != . ]; then
             filename="$(resolve_symlinks "$filename")"
