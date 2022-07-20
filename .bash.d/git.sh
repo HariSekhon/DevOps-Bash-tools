@@ -687,7 +687,7 @@ pushr(){
     done
 }
 
-alias pr=github_pull_request.sh
+alias pr=github_pull_request_create.sh
 
 current_branch(){
     git rev-parse --abbrev-ref HEAD
