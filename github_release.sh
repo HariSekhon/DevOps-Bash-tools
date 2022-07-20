@@ -37,6 +37,8 @@ These formats don't have dashes in them like ISO dates so that if you move from 
 
 If you later return to short format releases of just year or month, GitHub won't detect them as the Latest release (determined via testing).
 
+WARNING: if you delete a GitHub release, the tag is left in the repo. If you then create a new release automatically defaulting to the version that was just deleted and it reuses the old git tag, you could end up with a release pointing to an old tag rather than the current commit
+
 
 Requires GitHub CLI to be installed and configured
 "
