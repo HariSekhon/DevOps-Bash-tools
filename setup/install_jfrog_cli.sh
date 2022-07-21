@@ -24,6 +24,19 @@ set -euo pipefail
 tmp="$(mktemp -d)"
 cd "$tmp"
 
-curl -fL https://getcli.jfrog.io | bash -s v2
+# both give the same actual binary
+
+# installs as 'jfrog' in ~/bin
+#curl -fL https://getcli.jfrog.io | bash -s v2
+#mv -iv -- jfrog ~/bin/jfrog
+
+# installs as 'jf' in /usr/local/bin
+curl -fL "https://install-cli.jfrog.io" | sh
+
 echo
-mv -iv -- jfrog ~/bin/jfrog
+jf --version
+
+if [ -n "${JFROG_TOKEN:-}" ]; then
+    echo
+    jf setup "$JFROG_TOKEN"
+fi
