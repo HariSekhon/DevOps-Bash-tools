@@ -119,6 +119,8 @@ if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
     add_PATH "/home/linuxbrew/.linuxbrew/bin"
 fi
 
+add_PATH ~/.pulumi/bin
+
 # do the same with MANPATH
 if [ -d ~/man ]; then
     MANPATH=~/man:"${MANPATH:-}"
