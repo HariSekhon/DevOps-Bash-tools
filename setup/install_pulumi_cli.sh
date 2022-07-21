@@ -19,3 +19,5 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # installs to ~/.pulumi/bin/
 curl -fsSL https://get.pulumi.com | sh
+echo
+~/.pulumi/bin/pulumi version
