@@ -56,5 +56,5 @@ fi
 for playlist in "$@"; do
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist"
 done |
-grep -f <("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from") |
+grep -Fxf <("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from") |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
