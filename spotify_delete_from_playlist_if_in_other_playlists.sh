@@ -46,7 +46,15 @@ export SPOTIFY_PRIVATE=1
 
 spotify_token
 
+# BSD grep has a bug in grep -f, rely on GNU grep instead
+if is_mac; then
+    grep(){
+        command ggrep "$@"
+    }
+fi
+
 for playlist in "$@"; do
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist"
 done |
+grep -f <("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from") |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
