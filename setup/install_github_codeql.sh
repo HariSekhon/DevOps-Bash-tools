@@ -47,7 +47,7 @@ fi
 
 # github/codeql only has source not binary, and it cannot be extracted via github_install_binary.sh - it must be run from the bundle, which is ~500MB
 
-#                           64 - there are no i386 or other binaries
+                          # 64 - there are no i386 or other binaries
 tarball="codeql-bundle-${os}64.tar.gz"
 
 #tmp="$(mktemp -d)"
