@@ -50,7 +50,13 @@ fi
 #                           64 - there are no i386 or other binaries
 tarball="codeql-bundle-${os}64.tar.gz"
 
-cd /tmp
+#tmp="$(mktemp -d)"
+#trap_cmd 'rm -fr "$tmp"'
+
+# better for caching, use flock instead
+tmp=/tmp
+
+cd "$tmp"
 
 timestamp "Downloading latest codeql tarball"
 echo
@@ -59,7 +65,8 @@ echo
 
 timestamp "Extracting tarball"
 echo
-tar -xvzf ./"$tarball" -C ~/bin/
+rm -fr -- ./codeql
+tar -xvzf ./"$tarball"  # -C ~/bin/  # mv is more atomic, otherwise concurrent operations using codeql might break
 echo
 
 unalias rm &>/dev/null || :
@@ -70,10 +77,11 @@ echo
 rm -fv -- "$tarball"
 echo
 
-#timestamp "Moving CodeQL to \$HOME/bin/"
-#echo
-#mv -fv -- codeql/ ~/bin/
-#echo
+timestamp "Moving CodeQL to \$HOME/bin/"
+echo
+rm -fr -- ~/bin/codeql
+mv -fv -- codeql/ ~/bin/
+echo
 
 echo "Version:"
 ~/bin/codeql/codeql version
