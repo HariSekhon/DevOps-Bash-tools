@@ -141,6 +141,17 @@ alias kba=kbuilda
 # workaround for the fact that kustomize doesn't accept other filenames
 kustomize_build_file(){
     local kustomization="$1"
+    # because shell completion will stop at the prefix, so allow us to just enter and have it figure out what we're doing
+    if ! [ -f "$kustomization" ];then
+        if [ -f "${kustomization}kustomization.yaml" ]; then
+            kustomization+="kustomization.yaml"
+        elif [ -f "${kustomization}kustomization.yml" ]; then
+            kustomization+="kustomization.yml"
+        else
+            echo "File not found: $kustomization" >&2
+            return 1
+        fi
+    fi
     local prefix="${kustomization%kustomization.y*ml}"
     prefix="${prefix%-}"
     prefix="${prefix%_}"
