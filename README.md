@@ -452,6 +452,7 @@ etc.
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current / given / all projects so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
     - `gke_firewall_rule_cert_manager.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr, network and target tags)
+    - `gke_firewall_rule_kubeseal.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) controller for `kubeseal` to work (auto-determines the master cidr, network and target tags)
     - `gke_nodepool_nodes.sh` - lists all nodes in a given nodepool on the current GKE cluster via kubectl labels (fast)
     - `gke_nodepool_nodes2.sh` - same as above via GCloud SDK (slow, iterates instance groups)
     - `gke_nodepool_taint.sh` - taints/untaints all nodes in a given GKE nodepool on the current cluster (see `kubectl_node_taints.sh` for a quick way to see taints)
