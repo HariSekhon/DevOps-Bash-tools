@@ -88,6 +88,32 @@ alias kshell='kube-shell'
 alias kubesh='kube-shell'
 alias kubeconfig='$EDITOR "${KUBECONFIG:-~/.kube/config}"'
 alias kubeconf=kubeconfig
+
+alias use="k config use-context"
+alias contexts="k config get-contexts"
+#alias context="k config current-context"
+context(){ k config current-context; }
+# contexts has this info and is more useful
+#alias clusters="k config get-clusters"
+
+alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
+
+alias menv='eval $(minikube docker-env)'
+
+# scripts at top level, automatically included in $PATH
+alias labels="kubectl_node_labels.sh"
+alias taints="kubectl_node_taints.sh"
+
+kubectl_namespace(){
+    kubectl config get-contexts | awk '/^\*/{print $5}'
+}
+
+#alias poc='po | grep -v Completed'
+unalias poc &>/dev/null
+poc(){
+    po "$@" | grep -v Completed
+}
+
 #alias dat='datree test --only-k8s-files --ignore-missing-schemas'
 dat(){
     if [ $# -eq 0 ]; then
@@ -101,16 +127,6 @@ dat(){
     fi
 }
 
-#alias poc='po | grep -v Completed'
-unalias poc &>/dev/null
-poc(){
-    po "$@" | grep -v Completed
-}
-
-# scripts at top level, automatically included in $PATH
-alias labels="kubectl_node_labels.sh"
-alias taints="kubectl_node_taints.sh"
-
 # kustomize
 alias kbuild='kustomize build --enable-helm'
 alias kustomizebuilddiff='kbuild | kubectl diff -f -'
@@ -121,6 +137,25 @@ alias kbd=kbuildd
 alias kbuildapply=kustomizebuildapply
 alias kbuilda=kbuildapply
 alias kba=kbuilda
+
+# workaround for the fact that kustomize doesn't accept other filenames
+kustomize_build_file(){
+    local kustomization="$1"
+    local prefix="${kustomization%kustomization.y*ml}"
+    prefix="${prefix%-}"
+    prefix="${prefix%_}"
+    command cp -v -- "$prefix"*.yaml /tmp/
+    cd /tmp || return 1
+    echo
+    command mv -v -- "$kustomization" kustomization.yaml
+    echo
+    kbuild
+    local result=$?
+    echo
+    cd - || return 1
+    return $result
+}
+alias kbuildf=kustomize_build_file
 
 kustomizebuildapply(){
     local diff
@@ -136,21 +171,6 @@ kustomizebuildapply(){
     if [[ "$answer" =~ ^Y|y|yes$ ]]; then
         kbuild | kubectl apply -f -
     fi
-}
-
-alias use="k config use-context"
-alias contexts="k config get-contexts"
-#alias context="k config current-context"
-context(){ k config current-context; }
-# contexts has this info and is more useful
-#alias clusters="k config get-clusters"
-
-alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
-
-alias menv='eval $(minikube docker-env)'
-
-kubectl_namespace(){
-    kubectl config get-contexts | awk '/^\*/{print $5}'
 }
 
 # ============================================================================ #
