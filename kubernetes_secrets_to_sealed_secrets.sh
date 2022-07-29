@@ -82,3 +82,5 @@ while read -r secret; do
 
     echo
 done
+
+echo "Completed. Don't forget to commit all sealed-secrets-*.yaml to Git"
