@@ -30,3 +30,5 @@ golangci/tap            golangci-lint
 
 #codefresh-io/cli        codefresh
 #sambadevi/powerlevel9k  powerlevel9k
+
+#tektoncd/tools         tektoncd-cli
