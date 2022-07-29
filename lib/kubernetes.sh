@@ -43,12 +43,31 @@ kube_context(){
     local context="$1"
     local namespace="${2:-}"
     local current_context
-    current_context="$(kubectl config current-context)"
+    current_context="$(kube_current_context)"
     if [ "$context" != "$current_context" ]; then
         kubectl config use-context "$context" >&2
-        if [ -n "$namespace" ]; then
-            kubectl config set-context "$context" --namespace "$namespace"
-        fi
+    fi
+    kube_namespace "$namespace"
+}
+
+
+kube_current_context(){
+    kubectl config current-context
+}
+
+kube_current_namespace(){
+    kubectl config get-contexts |
+    awk "/$(kube_current_context)/ {print \$NF}"
+}
+
+kube_namespace(){
+    local namespace="$1"
+    local current_namespace
+    current_namespace="$(current_namespace)"
+    if [ "$namespace" != "$current_namespace" ]; then
+        local current_context
+        current_context="$(kube_current_context)"
+        kubectl config set-context "$current_context" --namespace "$namespace" >&2
     fi
 }
 
