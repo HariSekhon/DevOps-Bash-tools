@@ -63,7 +63,7 @@ kube_current_namespace(){
 kube_namespace(){
     local namespace="$1"
     local current_namespace
-    current_namespace="$(current_namespace)"
+    current_namespace="$(kube_current_namespace)"
     if [ "$namespace" != "$current_namespace" ]; then
         local current_context
         current_context="$(kube_current_context)"
