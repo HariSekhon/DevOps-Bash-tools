@@ -33,7 +33,7 @@ Output:
 <name>      <annotation>=<value>
 
 
-Kubectl needs to be in the \$PATH and configured
+Kubectl needs to be installed in the \$PATH and configured with the right context
 "
 
 # used by usage() in lib/utils.sh
