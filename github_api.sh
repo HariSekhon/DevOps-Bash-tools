@@ -100,7 +100,14 @@ min_args 1 "$@"
 
 curl_api_opts "$@"
 
+url_path="$1"
+shift || :
+
+url_path="${url_path//https:\/\/api.github.com}"
+url_path="${url_path##/}"
+
 user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
+
 if [ -z "$user" ]; then
     user="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@github\.com/{print $2; exit}' | sed 's|https://||;s/@.*//;s/:.*//' || :)"
     # curl_auth.sh does this automatically
@@ -123,12 +130,6 @@ export PASSWORD
 #if [ -n "${PASSWORD:-}" ]; then
 #    echo "using authenticated access" >&2
 #fi
-
-url_path="${1:-}"
-shift || :
-
-url_path="${url_path//https:\/\/api.github.com}"
-url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out of documentation pages
 
