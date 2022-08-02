@@ -242,8 +242,11 @@ git_repo(){
     git_user_repo | sed 's|.*/||'
 }
 
-github_user_repo(){
+github_owner_repo(){
     git remote -v | awk '/github.com/{print $2}' | head -n1 | git_repo_strip
+}
+github_user_repo(){
+    github_owner_repo
 }
 
 github_repo(){
