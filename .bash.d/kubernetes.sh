@@ -128,6 +128,9 @@ dat(){
         datree test --only-k8s-files --ignore-missing-schemas "$@"
     fi
 }
+datkust(){
+    datree_kustomize_all.sh . -- --enable-helm
+}
 
 # kustomize
 alias kbuild='kustomize build --enable-helm'
