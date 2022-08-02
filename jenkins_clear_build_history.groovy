@@ -27,6 +27,8 @@
 // XXX: Edit this to the name of your job pipeline
 def jobName = "My Dev Pipeline"
 def job = Jenkins.instance.getItem(jobName)
-job.getBuilds().each { it.delete() }
+//job.getBuilds().each { it.delete() }
+// more groovy
+job.builds().each { it.delete() }
 job.nextBuildNumber = 1
 job.save()
