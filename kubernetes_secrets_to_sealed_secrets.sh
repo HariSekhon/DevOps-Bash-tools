@@ -77,7 +77,7 @@ while read -r secret; do
 
     timestamp "Annotating secret '$secret' to be managed by sealed-secrets controller"
 
-    kubectl annotate secrets "$secret" 'sealedsecrets.bitnami.com/managed="true"' --overwrite
+    kubectl annotate secrets "$secret" 'sealedsecrets.bitnami.com/managed=true' --overwrite
 
     timestamp "Creating sealed secret '$secret'"
 
