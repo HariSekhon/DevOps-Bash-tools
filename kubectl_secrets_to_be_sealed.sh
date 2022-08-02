@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns secrets that have the annotation sealedsecrets.bitnami.com/managed=\"true\" set, ie. waiting to be replaced by Bitnami Sealed Secrets
+Returns all secrets that have the annotation sealedsecrets.bitnami.com/managed=\"true\" set, ie. waiting to be replaced by Bitnami Sealed Secrets
 
 Useful to track progress in migrations to Sealed Secrets
 
@@ -38,16 +38,8 @@ Requires kubectl to be install in the \$PATH and configured with the right conte
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<namespace>"
+usage_args="<kubectl_options>"
 
 help_usage "$@"
 
-namespace="${1:-}"
-
-kube_config_isolate
-
-if [ -n "$namespace" ]; then
-    kube_namespace "$namespace"
-fi
-
-"$srcdir/kubectl_get_annotation.sh" secrets sealedsecrets.bitnami.com/managed '"true"'
+"$srcdir/kubectl_get_annotation.sh" secrets sealedsecrets.bitnami.com/managed '"true"' "$@"
