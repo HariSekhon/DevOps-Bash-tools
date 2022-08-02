@@ -63,4 +63,10 @@ while read -r kustomization; do
     #echo
 done < <(find "$path" -type f -name 'kustomization.y*ml')
 
+if [ "$final_exit_code" = 0 ]; then
+    echo "Success"
+else
+    echo "Failures detected"
+    echo "Exit Code: $final_exit_code"
+fi
 exit "$final_exit_code"
