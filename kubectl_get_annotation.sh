@@ -30,7 +30,7 @@ This script makes it easy to do in the current namespace
 
 Output:
 
-<name>      <annotation>=<value>
+<namespace>    <name>    <annotation>=<value>
 
 
 Kubectl needs to be installed in the \$PATH and configured with the right context
@@ -56,7 +56,7 @@ value_escaped="${value//\"/\\\"}"
 
 # can't decompose this line across lines unfortunately for clarity, fails to parse
 if [ -n "$value" ]; then
-    kubectl get "$kind" "$@" -o jsonpath="{range .items[?(@.metadata.annotations.$annotation_escaped==\"$value_escaped\")]}{.metadata.name}{\"\\t$annotation=\"}{.metadata.annotations.$annotation_escaped}{\"\\n\"}" | column -t
+    kubectl get "$kind" "$@" -o jsonpath="{range .items[?(@.metadata.annotations.$annotation_escaped==\"$value_escaped\")]}{.metadata.namespace}{\"\\t\"}{.metadata.name}{\"\\t$annotation=\"}{.metadata.annotations.$annotation_escaped}{\"\\n\"}" | column -t
 else
-    kubectl get "$kind" "$@" -o jsonpath="{range .items[?(@.metadata.annotations.$annotation_escaped)]}{.metadata.name}{\"\\t$annotation=\"}{.metadata.annotations.$annotation_escaped}{\"\\n\"}" | column -t
+    kubectl get "$kind" "$@" -o jsonpath="{range .items[?(@.metadata.annotations.$annotation_escaped)]}{.metadata.namespace}{\"\\t\"}{.metadata.name}{\"\\t$annotation=\"}{.metadata.annotations.$annotation_escaped}{\"\\n\"}" | column -t
 fi
