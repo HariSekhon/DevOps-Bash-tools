@@ -51,7 +51,7 @@ final_exit_code=0
 
 while read -r kustomization; do
 	dir="$(dirname "$kustomization")"
-    echo "Datree Kustomization Test: $kustomization:"
+    echo "Datree Kustomization Test: $kustomization"
 	set +e
 	datree kustomize test "$dir" "$@"
 	exitcode=$?
