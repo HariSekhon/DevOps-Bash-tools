@@ -222,9 +222,8 @@ make
 - [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for most major CI systems:
   - Jenkins, Concourse, GoCD, TeamCity - one-touch boot & build
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable, Wercker ...
-  - Terraform Cloud
+  - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
-  - Octopus Deploy
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Digital Ocean, Cloudflare, Pingdom, NGrok, DataDog
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
