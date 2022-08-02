@@ -91,10 +91,13 @@ fork_source_owner="$(jq -r '.source.owner.login' <<< "$repo_data")"
 fork_source_repo="$(jq -r '.source.full_name' <<< "$repo_data")"
 fork_source_default_branch="$(jq -r '.source.default_branch' <<< "$repo_data")"
 
+fork_repo_branches="$(get_github_repo_branches "$owner/$repo")"
+source_repo_branches="$(get_github_repo_branches "$fork_source_repo")"
+
 for branch in $branches; do
     # use function to iterate pages
     #if ! gh api "/repos/$owner/$repo/branches?per_page=100" -q '.[].name' | grep -Fxq "$branch"; then
-    if ! get_github_repo_branches "$owner/$repo" | grep -Fxq "$branch"; then
+    if ! grep -Fxq "$branch" <<< "$fork_repo_branches"; then
         timestamp "No local fork branch '$branch' found, skipping PR"
         echo >&2
         continue
@@ -102,7 +105,7 @@ for branch in $branches; do
 
     # use function to iterate pages
     #if gh api "/repos/$fork_source_repo/branches?per_page=100" -q '.[].name' | grep -Fxq "$branch"; then
-    if get_github_repo_branches "$fork_source_repo" | grep -Fxq "$branch"; then
+    if grep -Fxq "$branch" <<< "$source_repo_branches"; then
         fork_source_branch="$branch"
     else
         fork_source_branch="$fork_source_default_branch"
