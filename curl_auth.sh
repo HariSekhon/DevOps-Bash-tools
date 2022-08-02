@@ -117,7 +117,7 @@ fi
 
 if [ -n "${KRB5:-${KERBEROS:-}}" ]; then
     command curl -u : --negotiate "$@"
-elif [ -n "${TOKEN:-}" ]; then
+elif [ -n "${TOKEN:-${JWT_TOKEN:-}}" ]; then
     if [ -n "${JWT_TOKEN:-}" ]; then
         auth_header="${CURL_AUTH_HEADER:-Authorization: JWT} $JWT_TOKEN"
     else
