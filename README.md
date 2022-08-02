@@ -752,6 +752,8 @@ etc.
   - `circleci_api.sh` - queries CircleCI's API with authentication
   - `circleci_project_set_env_vars.sh` - adds / updates CircleCI project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `circleci_context_set_env_vars.sh` - adds / updates CircleCI context-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
+  - `circleci_project_delete_env_vars.sh` - deletes CircleCI project-level environment variable(s) via the API
+  - `circleci_context_delete_env_vars.sh` - deletes CircleCI context-level environment variable(s) via the API
   - `circleci_local_execute.sh` - installs CircleCI CLI and executes `.circleci/config.yml` locally
   - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `codeship_api.sh` - queries [CodeShip](https://codeship.com/)'s API with authentication
