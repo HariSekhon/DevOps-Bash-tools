@@ -29,11 +29,18 @@
 //				job.nextBuildNumber = 3815
 
 // XXX: Edit this to the name of your job pipeline
-def jobName = "My Dev Pipeline"
-def job = Jenkins.instance.getItem(jobName)
+String jobName = "My Dev Pipeline"
+
+//def job = Jenkins.instance.getItem(jobName)
+// also handles Multibranch Pipelines
+//def job = Jenkins.instance.getItemByFullName("$jobName/master")
+def job = Jenkins.instance.getItemByFullName(jobName)
+
+// deletes the previous build history
 //job.getBuilds().each { it.delete() }
-// more groovy
-job.builds().each { it.delete() }
+job.builds().each { it.delete() }  // more groovyish
+
 // XXX: don't reset this build number as it can break the Milestone plugin for this job, see comment above for more details
 //job.nextBuildNumber = 1
-//job.save()
+
+job.save()
