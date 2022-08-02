@@ -23,6 +23,10 @@
 //			[2022-08-02T16:14:46.501Z] Canceled since build #3814 already got here
 //
 //			https://issues.jenkins.io/browse/JENKINS-38641
+//
+//			one fix is of course to do
+//
+//				job.nextBuildNumber = 3815
 
 // XXX: Edit this to the name of your job pipeline
 def jobName = "My Dev Pipeline"
@@ -30,5 +34,6 @@ def job = Jenkins.instance.getItem(jobName)
 //job.getBuilds().each { it.delete() }
 // more groovy
 job.builds().each { it.delete() }
-job.nextBuildNumber = 1
-job.save()
+// XXX: don't reset this build number as it can break the Milestone plugin for this job, see comment above for more details
+//job.nextBuildNumber = 1
+//job.save()
