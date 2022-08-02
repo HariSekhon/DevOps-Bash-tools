@@ -45,6 +45,8 @@ if type -P gh &>/dev/null; then
     autocomplete gh -s
 fi
 
+type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+
 add_PATH ~/bin/codeql
 
 # find out who your 'gh' CLI is authenticating as - useful if you have multiple Personal Access Tokens for different environments
