@@ -31,9 +31,9 @@ If no second argument is given, reads environment variables from standard input,
 
 Examples:
 
-    ${0##*/} github/HariSekhon/DevOps-Bash-tools AWS_ACCESS_KEY_ID=AKIA...
+    ${0##*/} github/HariSekhon/DevOps-Bash-tools AWS_ACCESS_KEY_ID...
 
-    echo AWS_ACCESS_KEY_ID=AKIA... | ${0##*/} github/HariSekhon/DevOps-Bash-tools
+    echo AWS_ACCESS_KEY_ID | ${0##*/} github/HariSekhon/DevOps-Bash-tools
 
 
     Loads both AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY via stdin:
@@ -65,9 +65,7 @@ delete_env_var(){
     parse_export_key_value "$env_var"
     # shellcheck disable=SC2154
     timestamp "deleting CircleCI environment variable '$key' in project '$project_slug'"
-    # shellcheck disable=SC2154
-    # XXX: this is a POST at the project level but a PUT at the context level (else 404 error)
-    "$srcdir/circleci_api.sh" "/project/$project_slug/envvar/$key" -X DELETE | jq .message
+    "$srcdir/circleci_api.sh" "/project/$project_slug/envvar/$key" -X DELETE | jq -r .message
 }
 
 
