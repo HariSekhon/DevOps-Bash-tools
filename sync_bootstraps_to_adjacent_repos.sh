@@ -19,6 +19,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "$srcdir"
 
+filelist="
+setup/bootstrap.sh
+setup/ci_bootstrap.sh
+setup/ci_git_set_dir_safe.sh
+"
+
 if [ -n "$*" ]; then
     echo "$@"
 else
@@ -39,7 +45,7 @@ while read -r repo dir; do
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    for filename in setup/bootstrap.sh setup/ci_bootstrap.sh; do
+    for filename in $filelist; do
         target="../$dir/$filename"
         mkdir -pv "${target%/*}"
         echo "syncing $filename -> $target"
