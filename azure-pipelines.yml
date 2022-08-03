@@ -49,8 +49,8 @@ steps:
       sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c '
         set -ex
         cd /code
-        git config --global --add safe.directory /code
         setup/ci_bootstrap.sh
+        git config --global --add safe.directory "$PWD"
         make init
         make ci test
       '
