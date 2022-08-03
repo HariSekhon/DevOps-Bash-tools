@@ -41,8 +41,13 @@ dir="${1:-.}"
 
 cd "$dir"
 
+echo "Setting directory as safe: $PWD"
 git config --global --add safe.directory "$PWD"
 
 while read -r submodule_dir; do
-    git config --global --add safe.directory "$PWD/$submodule_dir"
+    dir="$PWD/$submodule_dir"
+    echo "Setting directory as safe: $dir"
+    git config --global --add safe.directory "$dir"
 done < <(git submodule | awk '{print $2}')
+
+echo "Done"
