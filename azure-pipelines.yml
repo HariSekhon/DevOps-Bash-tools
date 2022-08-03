@@ -49,6 +49,7 @@ steps:
       sudo docker run -v "$PWD":/code ubuntu:18.04 /bin/bash -c '
         set -ex
         cd /code
+        apt install -y git
         git config --global --add safe.directory /code
         setup/ci_bootstrap.sh
         make init
