@@ -65,7 +65,7 @@ cd "$dirname"
 
 docker_compose_up(){
     local dc_args=()
-    local env_file="${filename%.*}"
+    local env_file="${filename%.*}.env"
     if [ -f "$env_file" ]; then
         dc_args+=(--env-file "$env_file")
     fi
