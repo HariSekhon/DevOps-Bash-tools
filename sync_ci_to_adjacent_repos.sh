@@ -31,14 +31,13 @@ grep -vi -e bash-tools \
          -e '^[[:space:]]*$' |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
-        dir="$repo"
+        dir="$(tr '[:upper:]' '[:lower:]' <<< "$repo")"
     fi
     # filtered above
     #if ls -lLdi "$dir" "$srcdir" | awk '{print $1}' | uniq -d | grep -q .; then
     #    echo "skipping $dir as it's our directory"
     #    continue
     #fi
-    repo="$(tr '[:upper:]' '[:lower:]' <<< "$repo")"
     if ! [ -d "../$dir" ]; then
         echo "WARNING: repo dir $dir not found, skipping..."
         continue

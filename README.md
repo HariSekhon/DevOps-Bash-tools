@@ -105,8 +105,9 @@ Wercker throttles Shields.io resulting in "invalid response data" - do not use S
 [![Docker Build (Ubuntu)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_ubuntu.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_ubuntu.yaml)
 
 [![GitHub Actions Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/GitHub%20Actions%20Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22GitHub+Actions+Ubuntu%22)
-[![Mac](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Mac/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Mac%22)
-[![Mac 10.15](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Mac%2010.15/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Mac+10.15%22)
+[![Mac](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac.yaml)
+[![Mac 11](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_11.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_11.yaml)
+[![Mac 12](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_12.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_12.yaml)
 [![Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu%22)
 [![Ubuntu 14.04](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu%2014.04/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu+14.04%22)
 [![Ubuntu 16.04](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu%2016.04/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu+16.04%22)

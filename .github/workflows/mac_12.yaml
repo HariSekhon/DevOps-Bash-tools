@@ -12,7 +12,7 @@
 #
 
 ---
-name: Mac 10.15
+name: Mac 12
 
 on:
   push:
@@ -80,6 +80,6 @@ jobs:
     name: Build
     uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
     with:
-      runs-on: macos-10.15
+      runs-on: macos-12
       caches: brew pip cpanm
       debug: ${{ github.event.inputs.debug }}

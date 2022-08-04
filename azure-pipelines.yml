@@ -50,7 +50,7 @@ steps:
         set -ex
         cd /code
         setup/ci_bootstrap.sh
-        git config --global --add safe.directory "$PWD"
+        setup/ci_git_set_dir_safe.sh
         make init
         make ci test
       '
