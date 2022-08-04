@@ -58,6 +58,7 @@ filename="$1"
 # -- run: psql -f file.sql
 run_cmd="$(parse_run_args "$filename")"
 
+filename="$(readlink -f "$filename")"
 dirname="$(dirname "$filename")"
 basename="${filename##*/}"
 
