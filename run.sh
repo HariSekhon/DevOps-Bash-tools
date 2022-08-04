@@ -64,7 +64,12 @@ basename="${filename##*/}"
 cd "$dirname"
 
 docker_compose_up(){
-    docker-compose -f "$filename" up "$@"
+    local dc_args=()
+    local env_file="${filename%.*}"
+    if [ -f "$env_file" ]; then
+        dc_args+=(--env-file "$env_file")
+    fi
+    docker-compose -f "$filename" up ${dc_args:+"${dc_args[@]}"}
 }
 
 if [ -n "$run_cmd" ]; then
@@ -79,12 +84,7 @@ else
                             docker build .
                         fi
                         ;;
-*docker-compose*.y*ml)  docker_compose_args=()
-                        env_file="${filename%.*}"
-                        if [ -f "$env_file" ]; then
-                            docker_compose_args+=(--env-file "$env_file")
-                        fi
-                        docker_compose_up ${docker_compose_args:+"${docker_compose_args[@]}"}
+*docker-compose*.y*ml)  docker_compose_up
                         ;;
               Gemfile)  bundle install
                         ;;
