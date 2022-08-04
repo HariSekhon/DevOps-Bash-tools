@@ -21,6 +21,8 @@ image: Ubuntu
 #
 #   https://github.com/appveyor/ci/issues/3833
 #
+#   https://www.appveyor.com/docs/getting-started-with-appveyor-for-linux/#configuring-language-stack
+#
 stack: jdk 15
 
 skip_commits:
