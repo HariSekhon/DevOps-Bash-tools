@@ -69,7 +69,7 @@ docker_compose_up(){
     if [ -f "$env_file" ]; then
         dc_args+=(--env-file "$env_file")
     fi
-    docker-compose -f "$filename" up ${dc_args:+"${dc_args[@]}"}
+    docker-compose -f "$filename" ${dc_args:+"${dc_args[@]}"} up
 }
 
 if [ -n "$run_cmd" ]; then
