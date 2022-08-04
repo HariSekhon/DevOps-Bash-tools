@@ -50,7 +50,9 @@ steps:
         set -ex
         cd /code
         setup/ci_bootstrap.sh
-        setup/ci_git_set_dir_safe.sh
+        if [ -x setup/ci_git_set_dir_safe.sh ]; then
+          setup/ci_git_set_dir_safe.sh
+        fi
         make init
         make ci test
       '
