@@ -17,6 +17,12 @@
 
 image: Ubuntu
 
+# workaround for default JDK9 have old CA certs:
+#
+#   https://github.com/appveyor/ci/issues/3833
+#
+stack: jdk 15
+
 skip_commits:
   files:
     - docs/*
