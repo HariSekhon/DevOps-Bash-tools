@@ -92,7 +92,7 @@ else
                         ;;
    kustomization.yaml)  kustomize build --enable-helm
                         ;;
-               .envrc)  cd "$dirname" && direnv allow .
+               .envrc)  direnv allow .
                         ;;
                  *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
                         ;;
