@@ -1,0 +1,72 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2022-08-04 14:53:17 +0100 (Thu, 04 Aug 2022)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# https://octopus.com/docs/installation/octopus-server-linux-container/docker-compose-linux
+
+# Reset:
+#
+#   docker rm -f bash-tools_octopus-server_1 bash-tools_octopus-db-mssql_1
+#   docker volume ls -q | xargs docker volume rm
+
+---
+version: '3'
+services:
+   octopus-db-mssql:
+    image: mcr.microsoft.com/mssql/server
+    environment:
+      SA_PASSWORD: ${SA_PASSWORD}
+      ACCEPT_EULA: 'Y'
+    ports:
+      - 1401:1433
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "${SA_PASSWORD}", "-Q", "select 1"]
+      interval: 10s
+      retries: 10
+    volumes:
+      - sqlvolume:/var/opt/mssql
+   octopus-server:
+    image: octopusdeploy/octopusdeploy:${OCTOPUS_SERVER_TAG:-latest}
+    privileged: ${PRIVILEGED}  # needs true if DISABLE_DIND=N in environment section
+    #user: octopus  # or 'root'
+    user: ${OCTOPUS_USER}
+    environment:
+      ACCEPT_EULA: 'Y'
+      #OCTOPUS_SERVER_NODE_NAME: ${OCTOPUS_SERVER_NODE_NAME}
+      DB_CONNECTION_STRING: Server=octopus-db-mssql,1433;Database=OctopusDeploy;User=sa;Password=${SA_PASSWORD}
+      ADMIN_USERNAME: ${ADMIN_USERNAME}  # default: admin
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}  # default: 0ct@pu55! - but instead blank seems to disable authentication provider, see env file for error message
+      ADMIN_EMAIL: ${ADMIN_EMAIL}  # defaults to octopus@example.local
+      OCTOPUS_SERVER_BASE64_LICENSE: ${OCTOPUS_SERVER_BASE64_LICENSE}  # default: creates a free 12 month license
+      MASTER_KEY: ${MASTER_KEY}  # if blank will generate one when the DB is created
+      ADMIN_API_KEY: ${ADMIN_API_KEY}
+      DISABLE_DIND: ${DISABLE_DIND}
+    ports:
+      - 8080:8080
+      - 11111:10943
+    depends_on:
+      - octopus-db-mssql
+    volumes:
+      - repository:/repository
+      - artifacts:/artifacts
+      - taskLogs:/taskLogs
+      - cache:/cache
+      - import:/import
+volumes:
+  repository:
+  artifacts:
+  taskLogs:
+  cache:
+  import:
+  sqlvolume:
