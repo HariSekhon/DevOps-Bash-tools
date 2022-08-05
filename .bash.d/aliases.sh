@@ -159,6 +159,8 @@ alias screen='screen -T $TERM'
 # my pytools github repo
 alias ht='headtail.py'
 
+alias run='run.sh'
+
 # ============================================================================ #
 #                      G i t H u b   /   B i t B u c k e t
 # ============================================================================ #
