@@ -100,6 +100,7 @@ alias fetch='git fetch'
 alias stash="git stash"
 alias tag="githg tag"
 alias tags='git tag'
+alias tagr='git_tag_release.sh'
 alias gitlogwc='git log --oneline | wc -l'
 alias um=updatemodules
 #type browse &>/dev/null || alias browse=gbrowse
