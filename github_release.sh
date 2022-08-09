@@ -77,7 +77,7 @@ if [ "$version" = year ]; then
 elif [ "$version" = month ]; then
     version="${prefix}$(date '+%Y%m')"
     generate_version=1
-elif [ "$version" = day ] [ "$version" = date ]; then
+elif [ "$version" = day ] || [ "$version" = date ]; then
     version="${prefix}$(date '+%Y%m%d')"
     generate_version=1
 fi
