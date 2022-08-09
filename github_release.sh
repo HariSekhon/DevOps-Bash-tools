@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a GitHub Release and Git Tag, auto-incrementing the default vYYYY.NN release if one isn't given
+Creates a GitHub Release and Git Tag for the current repo checkout, auto-incrementing the default vYYYY.NN release if one isn't given
 
 Determines the GitHub repository to create a release in from the local checkout from which it is executed,
 unless \$GITHUB_OWNER_REPO is set in the environment or '-R <owner>/<repo>' are given as the final args
@@ -31,7 +31,9 @@ The first argument is the version, which is recommended to set to vN.N.N eg. v1.
 
 If the first argument is 'day' or 'date', will determine the next available release in the format vYYYYMMDD.NN where NN is incremented from 1
 If the first argument is 'month', will determine the next available release in the format vYYYYMM.NN
-If the first argument is 'year', will determine the next available release in the format vYYYY.NN (the default if no version is specified)
+If the first argument is 'year', will determine the next available release in the format vYYYY.NN
+
+If no argument is given, defaults to generating a 'year' version in the format vYYYY.NN
 
 These formats don't have dashes in them like ISO dates so that if you move from YYYY to YYYYMM format or YYYYMMDD format, GitHub will recognize the newer format as the Latest release
 
@@ -75,7 +77,7 @@ if [ "$version" = year ]; then
 elif [ "$version" = month ]; then
     version="${prefix}$(date '+%Y%m')"
     generate_version=1
-elif [ "$version" = day ] [ "$version" = date ]; then
+elif [ "$version" = day ] || [ "$version" = date ]; then
     version="${prefix}$(date '+%Y%m%d')"
     generate_version=1
 fi
