@@ -116,6 +116,7 @@ jenkins-x/jx/jx
 jython
 k6
 kompose
+kops
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
 kubeseal  # Bitnami Sealed Secrets
