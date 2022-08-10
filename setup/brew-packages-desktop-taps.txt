@@ -13,6 +13,8 @@ FairwindsOps/tap        polaris
 FairwindsOps/tap        pluto
 FairwindsOps/tap        nova
 
+derailed/k9s            k9s
+
 #anchore/grype           grype
 #anchore/syft            syft
 
