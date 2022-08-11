@@ -157,15 +157,18 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 [AWS CLI](https://aws.amazon.com/cli/),
 [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
 [GCloud SDK](https://cloud.google.com/sdk),
+[Digital Ocean CLI](https://docs.digitalocean.com/reference/doctl/),
 [Terraform](https://www.terraform.io/),
-[Kubernetes](https://kubernetes.io/)
+[Terragrunt](https://terragrunt.gruntwork.io/),
 [GitHub CLI](https://github.com/cli/cli),
+[Kubernetes](https://kubernetes.io/)
 [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) &
 [kustomize](https://kustomize.io/),
+[Helm](https://helm.sh/),
 [eksctl](https://eksctl.io/),
-[jx](https://jenkins-x.io/),
+[Docker-Compose](https://docs.docker.com/compose/),
 [jq](https://stedolan.github.io/jq/)
-etc... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
+and many others... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
   - `setup/` - contains even more scripts to download and install software, JDBC connectors, Mac OS X settings etc.
 - Utility Libraries used by many hundreds of scripts and [builds](https://harisekhon.github.io/CI-CD/) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
