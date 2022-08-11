@@ -30,6 +30,9 @@ Restarts all deployments and statefulsets in the current or given namespace
 Useful for example to restart all the ArgoCD components if it's stuck
 
 Can optionally specify an ERE regex filter on the deployment or statefulset name
+
+
+Requires kubectl to be installed and configured
 "
 
 # used by usage() in lib/utils.sh
