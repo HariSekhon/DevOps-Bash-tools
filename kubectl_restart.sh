@@ -28,13 +28,16 @@ usage_description="
 Restarts all deployments and statefulsets in the current or given namespace
 
 Useful for example to restart all the ArgoCD components if it's stuck
+
+Can optionally specify an ERE regex filter on the deployment or statefulset name
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<namespace>]"
+usage_args="[<namespace> <filter>]"
 
 namespace="${1:-}"
+filter="${2:-}"
 
 kube_config_isolate
 
@@ -43,6 +46,7 @@ if [ -n "$namespace" ]; then
 fi
 
 kubectl get deploy,sts -o name |
+{ grep -E "$filter" || : ; } |
 while read -r type_name; do
     # type_name is like deployment.apps/argocd-server or statefulset.apps/argocd-application-controller
     # and can be passed to kubectl as is
