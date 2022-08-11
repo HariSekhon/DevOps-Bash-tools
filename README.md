@@ -546,6 +546,7 @@ etc.
 - `kubectl_create_namespaces` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
 - `kubectl_get_all.sh` - finds all namespaced Kubernetes objects and requests them for the current or given namespace. Useful because `kubectl get all` misses a lof of object types
 - `kubectl_get_annotation.sh` - find a type of object with a given annotation
+- `kubectl_restart.sh` - restarts all or filtered deployments/statefulsets in the current or given namespace. Useful when debugging or clearing application problems
 - `kubectl_kv_to_secret.sh` - creates a Kuberbetes secret from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
 - `kubectl_secret_values.sh` - prints the keys and base64 decoded values within a given Kubernetes secret for quick debugging of Kubernetes secrets. See also: `gcp_secrets_to_kubernetes.sh`
 - `kubectl_secrets_download.sh` - downloads all secrets in current or given namespace to local files of the same name, useful as a backup before migrating to Sealed Secrets
