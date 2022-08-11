@@ -50,7 +50,6 @@ kube_context(){
     kube_namespace "$namespace"
 }
 
-
 kube_current_context(){
     kubectl config current-context
 }
