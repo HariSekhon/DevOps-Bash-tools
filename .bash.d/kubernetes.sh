@@ -172,6 +172,7 @@ kustomize_build_file(){
     return $result
 }
 alias kbuildf=kustomize_build_file
+alias kbf=kbuildf
 
 kustomizebuildapply(){
     local diff
@@ -187,6 +188,19 @@ kustomizebuildapply(){
     if [[ "$answer" =~ ^Y|y|yes$ ]]; then
         kbuild | kubectl apply -f -
     fi
+}
+
+# copies kustomization and values files while stripping their comments and filename prefixes
+kustcp(){
+    local name="$1"
+    local dir="$2"
+    echo "Copying $name-kustomization.yaml to $dir/kustomization.yaml"
+    decomment "$name-kustomization.yaml" > "$dir/kustomization.yaml"
+    echo "Copying $name-values.yaml to $dir/values.yaml"
+    decomment "$name-values.yaml" > "$dir/values.yaml"
+    echo "Replacing values filename reference in kustomization.yaml"
+    perl -pi -e "s/$name-values\\.yaml/values.yaml/" "$dir/kustomization.yaml"
+    echo "Done"
 }
 
 # ============================================================================ #
