@@ -50,7 +50,7 @@ if [ -n "$objects_not_namespaced" ]; then
     yaml_objects_without_namespace="$(yq 'select(.kind | test("^('"$regex"')$") | not)' <<< "$yaml_objects_without_namespace")"
 fi
 
-num_objects_without_namespace="$(grep -c '^kind:' <<< "$yaml_objects_without_namespace")"
+num_objects_without_namespace="$(grep -c '^kind:' <<< "$yaml_objects_without_namespace" || :)"
 
 if [ "$num_objects_without_namespace" = 0 ]; then
     echo "OK: all objects have a namespace specified" >&2
