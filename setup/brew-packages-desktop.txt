@@ -115,6 +115,7 @@ jenkins-x/jx/jx
 #jq  # in brew-packages.txt
 jython
 k6
+kind  # Kubernetes in Docker
 kompose
 kops
 #kubectl  # old version, download binary or use GCloud SDK version
