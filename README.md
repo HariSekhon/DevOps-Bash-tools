@@ -546,7 +546,8 @@ etc.
 - `kubectl_diff_apply.sh` - generates a kubectl diff and prompts to apply
 - `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, shows a kubectl diff of the proposed changes, and prompts to apply
 - `kustomize_diff_branch.sh` - runs Kustomize build against the current and target base branch for current or all given directories, then shows the diff for each directory. Useful to detect differences when refactoring, such as switching to tagged bases
-- `kubectl_create_namespaces` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
+- `kubectl_create_namespaces.sh` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
+- `kubernetes_check_objects_namespace.sh` - checks Kubernetes yaml(s) for objects without namespaces specified, which can easily result in deployments to the wrong namespace
 - `kubectl_get_all.sh` - finds all namespaced Kubernetes objects and requests them for the current or given namespace. Useful because `kubectl get all` misses a lof of object types
 - `kubectl_get_annotation.sh` - find a type of object with a given annotation
 - `kubectl_restart.sh` - restarts all or filtered deployments/statefulsets in the current or given namespace. Useful when debugging or clearing application problems
