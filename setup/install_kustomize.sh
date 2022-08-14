@@ -40,6 +40,8 @@ version="${1:-latest}"
 
 owner_repo="kubernetes-sigs/kustomize"
 
+# XXX can't use github_install_binary.sh because Kustomize repo intermixes kustomize and kyaml releases, so much filter the latest version, then strip the kustomize/ prefix in the version tag
+
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
     version="$("$srcdir/../github_repo_latest_release_filter.sh" "$owner_repo" "kustomize")"
