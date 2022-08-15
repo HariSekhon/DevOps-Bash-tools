@@ -43,4 +43,4 @@ cd "$dir"
 
 yaml="$(kustomize build --enable-helm)"
 
-"$srcdir/kubernetes_check_objects_namespaces.sh" <<< "$yaml"
+"$srcdir/kubernetes_check_objects_namespaced.sh" <<< "$yaml"
