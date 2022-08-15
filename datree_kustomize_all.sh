@@ -44,6 +44,10 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+# XXX: this code has now been added to the official Datree docs:
+#
+#   https://hub.datree.io/integrations/kustomize-support#testing-multiple-kustomizations
+
 path="${1:-.}"
 shift || :
 
@@ -66,7 +70,6 @@ done < <(find "$path" -type f -name 'kustomization.y*ml')
 if [ "$final_exit_code" = 0 ]; then
     echo "Success"
 else
-    echo "Failures detected"
-    echo "Exit Code: $final_exit_code"
+    echo "Violations found, returning exit code $final_exit_code"
 fi
 exit "$final_exit_code"
