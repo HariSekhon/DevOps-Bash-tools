@@ -146,6 +146,10 @@ alias kba=kbuilda
 # workaround for the fact that kustomize doesn't accept other filenames
 kustomize_build_file(){
     local kustomization="$1"
+    if [ -z "$kustomization" ]; then
+        echo "usage: kustomize_build_file <something>-kustomization.yaml" >&2
+        return 1
+    fi
     # because shell completion will stop at the prefix, so allow us to just enter and have it figure out what we're doing
     if ! [ -f "$kustomization" ];then
         if [ -f "${kustomization}kustomization.yaml" ]; then
@@ -173,6 +177,12 @@ kustomize_build_file(){
 }
 alias kbuildf=kustomize_build_file
 alias kbf=kbuildf
+kbfa(){
+    kbuildf "$@" >/dev/null || return 1
+    cd /tmp >&2 || return 1
+    kustomizebuildapply
+    cd - >&2 || return 1
+}
 
 kustomizebuildapply(){
     local diff
