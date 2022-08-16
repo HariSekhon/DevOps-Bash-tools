@@ -29,12 +29,15 @@ Installs K3s mini kubernetes distribution and adds it to the kubectl config
 # shellcheck disable=SC2034
 usage_args=""
 
-timestamp "Installing K3s"
-curl -sfL https://get.k3s.io | sh -
-
+k3s_yaml="/etc/rancher/k3s/k3s.yaml"
 kubeconfig="${KUBECONFIG:-~/.kube/config}"
 
-timestamp "Copying /etc/rancher/k3s/k3s.yaml to $kubeconfig"
-mkdir -p ~/.kube
+timestamp "Installing K3s"
 
-cat /etc/rancher/k3s/k3s.yaml >> "$kubeconfig"
+curl -sfL https://get.k3s.io | sh -
+
+timestamp "Copying $k3s_yaml to $kubeconfig so we can use regular 'kubectl' instead of 'k3s kubectl'"
+
+mkdir -pv "$(dirname "$kubeconfig")"
+
+cat "$k3s_yaml" >> "$kubeconfig"
