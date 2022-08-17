@@ -24,17 +24,56 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Queries the Octopus Deploy API
 
-\$OCTOPUS_URL should be set to your server
+Requires the following environment variables to be set:
 
-API Reference:
+    \$OCTOPUS_URL / \$OCTOPUS_CLI_SERVER - including the http scheme eg. http://localhost:8080
+    \$OCTOPUS_TOKEN / \$OCTOPUS_CLI_API_KEY - your personal API key generated in your profile
+
+
+Generate your API key at Profile -> My API Keys, eg:
+
+    http://localhost:8080/app#/Spaces-1/users/me/apiKeys
+
+
+API Swagger Reference can be found at \$OCTOPUS_URL/swaggerui, eg:
+
+    http://localhost:8080/swaggerui/index.html
+
+
+API Documentation:
 
     https://octopus.com/docs/octopus-rest-api
 
+
+Examples:
+
+    # list the other endpoints
+    ${0##*/} /
+
+    ${0##*/} /authentication
+    ${0##*/} /configuration
+    ${0##*/} /dashboard
+    ${0##*/} /dashboardconfiguration
+    ${0##*/} /machines
+    ${0##*/} /featuresConfiguration
+    ${0##*/} /licenses/licenses-current
+    ${0##*/} /packages
+    ${0##*/} /projects
+    ${0##*/} /tasks
+    ${0##*/} /workers
+
+
+See Also:
+
+    setup/install_octo.sh - Installs the Octopus Deploy CLI
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
+
+OCTOPUS_URL="${OCTOPUS_URL:-${OCTOPUS_CLI_SERVER:-}}"
+OCTOPUS_TOKEN="${OCTOPUS_TOKEN:-${OCTOPUS_CLI_API_KEY:-}}"
 
 check_env_defined "OCTOPUS_URL"
 check_env_defined "OCTOPUS_TOKEN"
@@ -49,9 +88,9 @@ url_path="$1"
 shift || :
 
 export TOKEN="$OCTOPUS_TOKEN"
-export CURL_AUTH_HEADER="X-Octopus-ApiKey"
+export CURL_AUTH_HEADER="X-Octopus-ApiKey:"
 
-url_base="$OCTOPUS_URL"
+url_base="$OCTOPUS_URL/api"
 
 "$srcdir/curl_auth.sh" "$url_base/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
 jq_debug_pipe_dump
