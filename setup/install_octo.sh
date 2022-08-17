@@ -35,6 +35,8 @@ help_usage "$@"
 
 version="${1:-9.0.0}"
 
+export PATH+=':'~/bin
+
 os="$(get_os)"
 if [ "$os" = darwin ]; then
     os=osx
@@ -46,3 +48,34 @@ if [ "$arch" = amd64 ]; then
 fi
 
 "$srcdir/../install_binary.sh" "https://download.octopusdeploy.com/octopus-tools/$version/OctopusTools.$version.$os-$arch.tar.gz" octo
+
+# mkdir -pv ~/.bash.autocomplete.d/
+#octo install-autocomplete --shell bash --dryRun > ~/.bash.autocomplete.d/octo.sh
+#
+# gets this error:
+#
+#    Octopus CLI, version 9.0.0
+#
+#    DRY RUN
+#    Installing auto-complete scripts for Bash
+#    Installing scripts in /Users/hari/.bashrc
+#    Updating profile at /Users/hari/.bashrc
+#    Preview of script changes:
+#
+#    System.IndexOutOfRangeException: Index was outside the bounds of the array.
+#       at Serilog.Parsing.MessageTemplateParser.ParsePropertyToken(Int32 startAt, String messageTemplate, Int32& next)
+#       at Serilog.Parsing.MessageTemplateParser.Tokenize(String messageTemplate)+MoveNext()
+#       at System.Collections.Generic.LargeArrayBuilder`1.AddRange(IEnumerable`1 items)
+#       at System.Collections.Generic.EnumerableHelpers.ToArray[T](IEnumerable`1 source)
+#       at Serilog.Events.MessageTemplate..ctor(String text, IEnumerable`1 tokens)
+#       at Serilog.Parsing.MessageTemplateParser.Parse(String messageTemplate)
+#       at Serilog.Core.Pipeline.MessageTemplateCache.Parse(String messageTemplate)
+#       at Serilog.Parameters.MessageTemplateProcessor.Process(String messageTemplate, Object[] messageTemplateParameters, MessageTemplate& parsedTemplate, IEnumerable`1& properties)
+#       at Serilog.Core.Logger.Write(LogEventLevel level, Exception exception, String messageTemplate, Object[] propertyValues)
+#       at Serilog.Core.Logger.Information(Exception exception, String messageTemplate, Object[] propertyValues)
+#       at Serilog.Core.Logger.Information(String messageTemplate, Object[] propertyValues)
+#       at Octopus.CommandLine.CommandOutputProvider.Information(String template, Object[] propertyValues)
+#       at Octopus.CommandLine.ShellCompletion.ShellCompletionInstaller.Install(Boolean dryRun)
+#       at Octopus.CommandLine.Commands.InstallAutoCompleteCommand.Execute(String[] commandLineArguments)
+#       at Octopus.Cli.CliProgram.Run(String[] args)
+#    Exit code: -3
