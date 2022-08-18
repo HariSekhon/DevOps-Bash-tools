@@ -27,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds empty namespaces in the current Kubernetes cluster context and deletes them
 
+Uses adjacent script kubectl_empty_namespaces.sh
+
 Kubectl must be installed and configured
 "
 
