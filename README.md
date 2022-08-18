@@ -581,7 +581,8 @@ etc.
 - `kubectl_pod_count.sh` - lists Kubernetes pods total running count
 - `kubectl_container_count.sh` - lists Kubernetes containers total running count
 - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
-- `kubectl_delete_empty_namespaces.sh` - checks each namespace for the usual objects using `kubectl get all` and if no objects are found, deletes the namespace
+- `kubectl_empty_namespaces.sh` - finds namespaces without any of the usual objects using `kubectl get all`
+- `kubectl_delete_empty_namespaces.sh` - removes empty namespaces, uses `kubectl_empty_namespaces.sh`
 - `helm_template.sh` - templates a Helm chart for Kustomize deployments
 - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
 - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
