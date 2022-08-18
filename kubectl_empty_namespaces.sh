@@ -25,7 +25,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds empty namespaces in the current Kubernetes cluster context and deletes them
+Finds empty namespaces in the current Kubernetes cluster context
+
+Outputs empty namespaces one per line to stdout, while outputting timestamped progress to stderr, so stdout can still be
+passed straight in a command pipe to act on those namespaces
+
+Used by adjacent script kubectl_delete_empty_namespaces.sh
 
 Kubectl must be installed and configured
 "
