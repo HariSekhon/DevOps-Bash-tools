@@ -134,14 +134,11 @@ datkust(){
 
 # kustomize
 alias kbuild='kustomize build --enable-helm'
-alias kustomizebuilddiff='kbuild | kubectl diff -f -'
+alias kustomizebuilddiff='kbuild | kubectl_create_namespaces.sh; kbuild | kubectl diff -f -'
 alias kbuilddiff=kustomizebuilddiff
 alias kbuildd=kbuilddiff
 alias kbd=kbuildd
-#alias kustomizebuildapply='kbuild | kubectl apply -f -'
-alias kbuildapply=kustomizebuildapply
-alias kbuilda=kbuildapply
-alias kba=kbuilda
+alias kda=kustomize_diff_apply.sh
 
 # workaround for the fact that kustomize doesn't accept other filenames
 kustomize_build_file(){
@@ -180,24 +177,8 @@ alias kbf=kbuildf
 kbfa(){
     kbuildf "$@" >/dev/null || return 1
     cd /tmp >&2 || return 1
-    kustomizebuildapply
+    kustomize_diff_apply.sh
     cd - >&2 || return 1
-}
-
-kustomizebuildapply(){
-    local diff
-    diff="$(kustomizebuilddiff)"
-    if [ -z "$diff" ]; then
-        echo "No Kubernetes changes" >&2
-        return 0
-    fi
-    more <<< "$diff"
-    echo
-    read -r -p "Are you sure you want to apply this change set? (y/N) " answer
-    answer="${answer//[:space:]]/}"
-    if [[ "$answer" =~ ^Y|y|yes$ ]]; then
-        kbuild | kubectl apply -f -
-    fi
 }
 
 # copies kustomization and values files while stripping their comments and filename prefixes
