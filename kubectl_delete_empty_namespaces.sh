@@ -38,21 +38,8 @@ help_usage "$@"
 
 kube_config_isolate
 
-timestamp "Getting list of namespaces"
-#kubectl get ns -o name |
-#sed 's|namespace/||' |
-kubectl get namespaces -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}' |
+"$srcdir/kubectl_empty_namespaces.sh" |
 while read -r namespace; do
-    if [[ "$namespace" =~ ^kube- ]]; then
-        continue
-    fi
-    timestamp "Checking namespace '$namespace'"
-    # quicker, but doesn't return all objects - should return the usual candidates though
-    objects="$(kubectl get all -n "$namespace" -o name)"
-    # slow but safer
-    #objects="$("$srcdir/kubectl_get_all.sh" -n "$namespace" | sed 's/#.*//| /^[[:space:]]*$/d')"
-    if [ -z "$objects" ]; then
-        timestamp "Deleting empty namespace '$namespace'"
-        kubectl delete namespace "$namespace"
-    fi
+    timestamp "Deleting empty namespace '$namespace'"
+    kubectl delete namespace "$namespace"
 done
