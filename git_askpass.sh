@@ -14,6 +14,10 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://git-scm.com/docs/gitcredentials
+
+# https://git-scm.com/docs/git-credential
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
