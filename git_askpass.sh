@@ -25,15 +25,24 @@ usage(){
     cat <<EOF
 GIT_ASKPASS credential script to allow loading credentials from environment variables to Git dynamically
 
+The \$GIT_ASKPASS environment variable should be set to the location of this script to have Git call it automatically
+
 This program is designed to be called by the 'git' command in the form of:
 
     git credential get
 
+which calls this script like so:
 
-Environment variables that are returned:
+    ${0##*/} get
 
-    GIT_USERNAME / GIT_USER
-    GIT_TOKEN / GIT_PASSWORD
+
+Environment variables used if available, in precedence order from left to right:
+
+    username = \$GIT_USERNAME, \$GIT_USER
+    password = \$GIT_TOKEN, \$GIT_PASSWORD
+
+
+usage: ${0##*/} get
 EOF
     exit 3
 }
