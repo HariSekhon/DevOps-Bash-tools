@@ -59,5 +59,7 @@ output_variable(){
     done
 }
 
-output_variable username "$username_variables"
-output_variable password "$password_variables"
+if [ "$1" = get ]; then
+    output_variable username "$username_variables"
+    output_variable password "$password_variables"
+fi
