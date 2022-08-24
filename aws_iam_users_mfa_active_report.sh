@@ -36,6 +36,9 @@ Add this to your command pipeline
 to check your root account isn't being used
 
 
+Uses the adjacent script aws_iam_generate_credentials_report_wait.sh
+
+
 See similar tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
 
     - https://github.com/HariSekhon/DevOps-Python-tools
