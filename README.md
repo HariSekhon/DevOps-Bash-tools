@@ -382,6 +382,7 @@ etc.
     - `aws_iam_users_access_key_last_used_report.sh` - same as above using bulk credentials report (faster for many users)
     - `aws_iam_users_last_used_report.sh` - lists AWS users password/access keys last used dates
     - `aws_iam_users_mfa_active_report.sh` - lists AWS users password enabled and [MFA](https://aws.amazon.com/iam/features/mfa/) enabled status
+    - `aws_iam_users_without_mfa.sh` - lists AWS users with password enabled but no MFA
     - `aws_iam_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
     - `aws_iam_users_pw_last_used.sh` - lists AWS users and their password last used date
   - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
