@@ -661,6 +661,7 @@ etc.
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts.
   - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout all my repos
+  - `git_askpass.sh` - credential helper script to use environment variables for git authentication
 - `github_*.sh` - [GitHub](https://github.com/) API / CLI scripts:
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_install_binary.sh` - installs a binary from GitHub releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
