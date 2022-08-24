@@ -27,7 +27,7 @@ Lists AWS IAM users with passwords enabled but without MFA enabled
 Outputs a list of users, one per line.
 
 
-Uses the adjacnet script aws_iam_users_mfa_active_report.sh
+Uses the adjacent script aws_iam_users_mfa_active_report.sh
 
 
 See similar tools in the DevOps Python Tools repo and The Advanced Nagios Plugins Collection:
