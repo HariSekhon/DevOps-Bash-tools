@@ -29,7 +29,11 @@ The \$GIT_ASKPASS environment variable should be set to the location of this scr
 
 This program is designed to be called by the 'git' command in the form of:
 
-    git credential get
+    git credential fill
+
+Full example command:
+
+    echo url=https://github.com | GIT_ASKPASS=$0 git credential fill
 
 which calls this script like so:
 
