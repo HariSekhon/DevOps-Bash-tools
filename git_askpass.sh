@@ -19,7 +19,9 @@
 # https://git-scm.com/docs/git-credential
 
 set -euo pipefail
+# doesn't seem to pass through DEBUG environment variable when called via 'git credential fill' - will need to set -x explicitly
 [ -n "${DEBUG:-}" ] && set -x
+#set -x
 
 usage(){
     cat <<EOF
@@ -79,4 +81,18 @@ output_variable(){
 if [ "$1" = get ]; then
     output_variable username "$username_variables"
     output_variable password "$password_variables"
+
+# have observed Git version 2.27.0 in ArgoCD calling the GIT_ASKPASS program twice with these 2 first arguments:
+#
+#   'Username for '\''https://github.com'\''
+#
+# and
+#
+#   'Password for '\''https://github.com'\''
+#
+# and then taking the entire first line returned as the value
+elif [[ "$*" =~ Username ]]; then
+    output_variable username "$username_variables" | sed 's/^username=//'
+elif [[ "$*" =~ Password ]]; then
+    output_variable password "$password_variables" | sed 's/^password=//'
 fi
