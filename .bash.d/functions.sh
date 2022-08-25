@@ -442,6 +442,7 @@ whichall(){
     shift || :
     which -a "$bin" |
     while read -r bin; do
+        echo -n "$bin: "
         "$bin" "$@"
     done
 }
