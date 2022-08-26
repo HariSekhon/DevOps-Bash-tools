@@ -44,6 +44,10 @@ vimfiletypes(){
 }
 
 gitgrepvim(){
+    if [ $# -lt 2 ]; then
+        echo "usage: gitgrepvim <pattern>"
+        return 3
+    fi
     # want splitting
     # shellcheck disable=SC2046
     vim $(git grep -i "$*" | sed 's/:.*//' | sort -u)
@@ -51,6 +55,10 @@ gitgrepvim(){
 alias ggrepv=gitgrepvim
 
 grepvim(){
+    if [ $# -lt 2 ]; then
+        echo "usage: grepvim <pattern> <files>"
+        return 3
+    fi
     # want splitting
     # shellcheck disable=SC2046
     vim $(grep -li "$1" "$@" | sort -u)
