@@ -25,7 +25,7 @@
 ---
 version: '3'
 services:
-   octopus-db-mssql:
+  octopus-db-mssql:
     image: mcr.microsoft.com/mssql/server
     environment:
       SA_PASSWORD: ${SA_PASSWORD}
@@ -33,12 +33,12 @@ services:
     ports:
       - 1401:1433
     healthcheck:
-      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "${SA_PASSWORD}", "-Q", "select 1"]
+      test: ["CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "${SA_PASSWORD}", "-Q", "select 1"]
       interval: 10s
       retries: 10
     volumes:
       - sqlvolume:/var/opt/mssql
-   octopus-server:
+  octopus-server:
     image: octopusdeploy/octopusdeploy:${OCTOPUS_SERVER_TAG:-latest}
     privileged: ${PRIVILEGED}  # needs true if DISABLE_DIND=N in environment section
     #user: octopus  # or 'root'
