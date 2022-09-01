@@ -56,7 +56,7 @@ while read -r repo_url name version values_file; do
         # might fail here if you've already installed a repo with this name, in which case, fix your repos, we don't want to remove/modify your existing repos
         helm repo add "$name" "$repo_url"
     fi
-    timestamp "Installing Helm chart '$name' from '$repo_url'"
+    timestamp "Installing Helm chart '$name' version '$version' from '$repo_url'"
     helm install "$name" "$name/$name" --version "$version" --create-namespace --namespace "$name" ${values_file:+--values "$values_file"}
     echo
 done
