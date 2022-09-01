@@ -55,4 +55,4 @@ jobs:
     name: Check YAML
     uses: HariSekhon/GitHub-Actions/.github/workflows/yaml.yaml@master
     with:
-      debug: ${{ github.event.inputs.debug }}
+      debug: ${{ github.event.inputs.debug || false }}
