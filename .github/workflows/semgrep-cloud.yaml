@@ -59,4 +59,4 @@ jobs:
     secrets:
       SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_TOKEN }}
     with:
-      debug: ${{ github.event.inputs.debug }}
+      debug: ${{ github.event.inputs.debug || false }}
