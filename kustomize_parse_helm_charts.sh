@@ -50,6 +50,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-type -P yq &>/dev/null || "$srcdir/install_yq.sh"
+type -P yq &>/dev/null || "$srcdir/setup/install_yq.sh"
 
 yq '.helmCharts[] | [.repo, .name, .version, .valuesFile] | @tsv' "$@"
