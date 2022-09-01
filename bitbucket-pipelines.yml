@@ -13,9 +13,18 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# https://confluence.atlassian.com/x/5Q4SMw
-# Only use spaces to indent your .yml configuration.
-# -----
+# ============================================================================ #
+#                B i t b u c k e t   C I / C D   P i p e l i n e
+# ============================================================================ #
+
+# Reference:
+#
+#   https://support.atlassian.com/bitbucket-cloud/docs/configure-bitbucket-pipelinesyml/
+
+# Languages:
+#
+#   https://confluence.atlassian.com/x/5Q4SMw
+
 # You can specify a custom docker image from Docker Hub as your build environment.
 image: atlassian/default-image:2
 
