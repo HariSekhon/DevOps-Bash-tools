@@ -49,4 +49,4 @@ jobs:
     name: Check JSON
     uses: HariSekhon/GitHub-Actions/.github/workflows/json.yaml@master
     with:
-      debug: ${{ github.event.inputs.debug || false }}
+      debug: ${{ github.event.inputs.debug }}
