@@ -46,7 +46,8 @@ min_args 1 "$@"
 type -P helm &>/dev/null || "$srcdir/setup/install_helm.sh"
 type -P yq &>/dev/null || "$srcdir/setup/install_yq.sh"
 
-helm_repos="$(helm repo list -o yaml | yq -r '.[].url')"
+# if there are no repositories to show will return exit code 1 so || :
+helm_repos="$(helm repo list -o yaml | yq -r '.[].url' || :)"
 
 "$srcdir/kustomize_parse_helm_charts.sh" "$@" |
 while read -r repo_url name version values_file; do
