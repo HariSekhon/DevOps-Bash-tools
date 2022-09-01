@@ -32,7 +32,7 @@ Uses adjacent script kustomize_parse_helm_charts.sh and is used in CI/CD GitHub 
     https://github.com/HariSekhon/Kubernetes-configs CI/CD GitHub Actions
 
 
-Requires yq and installs it if not found
+Requires Helm and yq to be installed and installs them if not found
 "
 
 # used by usage() in lib/utils.sh
@@ -43,6 +43,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+type -P helm &>/dev/null || "$srcdir/install_helm.sh"
 type -P yq &>/dev/null || "$srcdir/install_yq.sh"
 
 helm_repos="$(helm repo list -o yaml | yq -r '.[].url')"
