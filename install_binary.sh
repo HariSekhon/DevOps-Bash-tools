@@ -118,7 +118,7 @@ if [ -z "$destination" ]; then
 fi
 
 if ! [[ "$destination" =~ ^/ ]]; then
-    if am_root; then
+    if am_root || [ -w /usr/local/bin ]; then
         destination="/usr/local/bin/$destination"
     else
         destination=~/bin/"$destination"
