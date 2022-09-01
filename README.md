@@ -329,7 +329,7 @@ etc.
 - [AWS](https://aws.amazon.com/) scripts - `aws_*.sh`:
   - `aws_cli_create_credential.sh` - creates an AWS service account user for CI/CD or CLI with Admin permissions (or other group or policy), creates an AWS Access Key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Useful trick to avoid CLI reauth to `aws sso login` every day.
   - `aws_terraform_create_credential.sh` - creates a AWS terraform service account with Administrator permissions for Terraform Cloud or other CI/CD systems to run Terraform plan and apply, since no CI/CD systems can work with AWS SSO workflows. Stores the access key as both CSV and prints shell export commands and credentials file config as above
-  - `.envrc-aws` - copy to `.envrc` for `direnv` to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
+  - `.envrc-aws` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `aws_terraform_create_s3_bucket.sh` - creates a Terraform S3 bucket for storing the backend state, locks out public access, enables versioning, encryption, and locks out Power Users role and optionally any given user/group/role ARNs via a bucket policy for safety
   - `aws_terraform_create_dynamodb_table.sh` - creates a Terraform locking table in DynamoDB for use with the S3 backend, plus custom IAM policy which can be applied to less privileged accounts
@@ -419,9 +419,9 @@ etc.
 #### GCP - Google Cloud Platform
 
 - [Google Cloud](https://cloud.google.com/) scripts - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
-  - `.envrc-gcp` - copy to `.envrc` for `direnv` to auto-load GCP configuration settings such as Project, Region, Zone, GKE cluster kubectl context or any other GCloud SDK setting to shorten `gcloud` commands. Applies to the local shell environment only to avoid race conditions caused by naively changing the global gcloud config at `~/.config/gcloud/active_config`
+  - `.envrc-gcp` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load GCP configuration settings such as Project, Region, Zone, GKE cluster kubectl context or any other GCloud SDK setting to shorten `gcloud` commands. Applies to the local shell environment only to avoid race conditions caused by naively changing the global gcloud config at `~/.config/gcloud/active_config`
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
-  - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using Terraform immediately. Run once for each project and combine with `direnv` for fast easy management of multiple GCP projects
+  - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using Terraform immediately. Run once for each project and combine with [direnv](https://direnv.net/) for fast easy management of multiple GCP projects
   - `gcp_cli_create_credential.sh` - creates a GCloud SDK CLI service account with full owner permissions to all projects, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using it. Avoids having to reauth to `gcloud auth login` every day.
   - `gcp_spinnaker_create_credential.sh` - creates a [Spinnaker](https://spinnaker.io/) service account with permissions on the current project, creates and downloads a credential key json and even prints the Halyard CLI configuration commands to use it
   - `gcp_info.sh` - huge [Google Cloud](https://cloud.google.com/) inventory of deployed resources within the current project - Cloud SDK info plus all of the following (detects which services are enabled to query):
@@ -530,7 +530,7 @@ etc.
 
 #### Kubernetes
 
-- `.envrc-kubernetes` - copy to `.envrc` for `direnv` to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
+- `.envrc-kubernetes` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
 - `eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
 - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
   - cluster-info
