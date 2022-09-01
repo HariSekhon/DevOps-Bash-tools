@@ -53,4 +53,5 @@ min_args 1 "$@"
 type -P yq &>/dev/null || "$srcdir/setup/install_yq.sh"
 
 yq '.helmCharts[] | [.repo, .name, .version, .valuesFile] | @tsv' "$@" --no-doc --no-colors |
-sed '/^[[:space:]]*$/d'
+sed '/^[[:space:]]*$/d' |
+column -t
