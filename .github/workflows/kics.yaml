@@ -52,3 +52,5 @@ jobs:
     if: github.repository_owner == 'HariSekhon'
     name: Kics
     uses: HariSekhon/GitHub-Actions/.github/workflows/kics.yaml@master
+    with:
+      debug: ${{ github.event.inputs.debug }}
