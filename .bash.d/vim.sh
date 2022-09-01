@@ -61,7 +61,7 @@ grepvim(){
     fi
     # want splitting
     # shellcheck disable=SC2046
-    vim $(grep -li "$1" "$@" | sort -u)
+    vim $(grep -l "$1" "$@" | sort -u)
 }
 alias grepv=grepvim
 alias vimgrep=grepvim
