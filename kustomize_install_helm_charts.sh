@@ -43,8 +43,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-type -P helm &>/dev/null || "$srcdir/install_helm.sh"
-type -P yq &>/dev/null || "$srcdir/install_yq.sh"
+type -P helm &>/dev/null || "$srcdir/setup/install_helm.sh"
+type -P yq &>/dev/null || "$srcdir/setup/install_yq.sh"
 
 helm_repos="$(helm repo list -o yaml | yq -r '.[].url')"
 
