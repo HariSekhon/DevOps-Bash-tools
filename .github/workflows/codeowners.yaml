@@ -52,3 +52,5 @@ jobs:
     if: github.repository_owner == 'HariSekhon'
     name: Validate CODEOWNERS
     uses: HariSekhon/GitHub-Actions/.github/workflows/codeowners.yaml@master
+    with:
+      debug: ${{ github.event.inputs.debug }}
