@@ -57,11 +57,19 @@ else
     done
     # to account for the semi colon
     ((max_len + 1))
-    for x in $filelist; do
-        isExcluded "$x" && continue
-        printf "%-${max_len}s " "$x:"
+    for docker_compose_path in $filelist; do
+        isExcluded "$docker_compose_path" && continue
+        printf "%-${max_len}s " "$docker_compose_path:"
+        docker_compose_dir="$(dirname "$docker_compose_path")"
+        docker_compose_basename="${docker_compose_path##*/}"
+        pushd "$docker_compose_dir" &>/dev/null
+        env=()
+        # if there is a matching .env file use it instead of the default, this will fill in missing variables
+        if [ -f "${docker_compose_basename%.*}.env" ]; then
+            env+=(--env-file "${docker_compose_basename%.*}.env")
+        fi
         set +eo pipefail
-        output="$(docker-compose -f "$x" config >/dev/null)"
+        output="$(docker-compose -f "$docker_compose_basename" ${env:+"${env[@]}"} config >/dev/null)"
         # shellcheck disable=SC2181
         if [ $? -eq 0 ]; then
             echo "OK"
@@ -77,6 +85,7 @@ else
             fi
         fi
         set -eo pipefail
+        popd &>/dev/null
     done
     time_taken "$start_time"
     section2 "All docker-compose files passed syntax check"
