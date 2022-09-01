@@ -54,3 +54,5 @@ jobs:
     if: github.repository_owner == 'HariSekhon'
     name: Check YAML
     uses: HariSekhon/GitHub-Actions/.github/workflows/yaml.yaml@master
+    with:
+      debug: ${{ github.event.inputs.debug }}
