@@ -60,3 +60,5 @@ jobs:
     if: github.repository_owner == 'HariSekhon'
     name: Semgrep GitHub Security Tab
     uses: HariSekhon/GitHub-Actions/.github/workflows/semgrep.yaml@master
+    with:
+      debug: ${{ github.event.inputs.debug }}
