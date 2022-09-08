@@ -31,9 +31,13 @@
 // XXX: Edit this to the name of your job pipeline
 String jobName = "My Dev Pipeline"
 
+// Simple Job
 //def job = Jenkins.instance.getItem(jobName)
-// also handles Multibranch Pipelines
+//
+// XXX: must specify the branch for Multibranch Pipelines
 //def job = Jenkins.instance.getItemByFullName("$jobName/master")
+//
+// but this method can also handle simple jobs so use it for everything
 def job = Jenkins.instance.getItemByFullName(jobName)
 
 // deletes the previous build history
