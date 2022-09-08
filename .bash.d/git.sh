@@ -191,6 +191,11 @@ gitbrowse(){
         echo "git remote url not found for $filter"
         return 1
     fi
+    if [[ "$url_base" =~ github.com ]]; then
+        if [ -n "$path" ]; then
+            path="blob/master/$path"
+        fi
+    fi
     browser "$url_base/$path"
 }
 
