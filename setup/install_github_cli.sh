@@ -23,6 +23,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Installs GitHub CLI
+
+Once installed, configure authentication by creating a Personal Access Token (PAT) here:
+
+    https://github.com/settings/tokens
+
+and then exporting that as an environment variable - either GH_TOKEN or GITHUB_TOKEN (the former has higher precedence so is recommended):
+
+    export GH_TOKEN=...
 "
 
 # used by usage() in lib/utils.sh
