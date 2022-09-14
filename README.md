@@ -981,6 +981,7 @@ etc.
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
+- `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API with authentication
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
