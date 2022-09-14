@@ -46,33 +46,33 @@ API Reference:
 Examples:
 
 
-# Get health (check API key is valid):
+    # Get health (check API key is valid):
 
-    ${0##*/} /health | jq .
+        ${0##*/} /health | jq .
 
-# Lists Secret Incidents:
+    # Lists Secret Incidents:
 
-    ${0##*/} /incidents/secrets | jq .
+        ${0##*/} /incidents/secrets | jq .
 
-# Get Specific Secret Incident:
+    # Get Specific Secret Incident:
 
-    ${0##*/} /incidents/secrets/{incident_id} | jq .
+        ${0##*/} /incidents/secrets/{incident_id} | jq .
 
-# List Secret Occurrences:
+    # List Secret Occurrences:
 
-    ${0##*/} /occurrences/secrets | jq .
+        ${0##*/} /occurrences/secrets | jq .
 
-# List Sources - repos and their open incidence counts, last scanned date, health (safe/at_risk), visibility (public/private), type (eg. github):
+    # List Sources - repos and their open incidence counts, last scanned date, health (safe/at_risk), visibility (public/private), type (eg. github):
 
-    ${0##*/} /sources | jq .
+        ${0##*/} /sources | jq .
 
-# List Members:
+    # List Members:
 
-    ${0##*/} /members | jq .
+        ${0##*/} /members | jq .
 
-# List Invitations:
+    # List Invitations:
 
-    ${0##*/} /invitations | jq .
+        ${0##*/} /invitations | jq .
 "
 
 # used by usage() in lib/utils.sh
