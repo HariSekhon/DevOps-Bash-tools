@@ -24,6 +24,9 @@
 
     #whitespace = trailing-space,space-before-tab
 
+[pull]
+    rebase = false
+
 [push]
 #   default = current
     default = simple
