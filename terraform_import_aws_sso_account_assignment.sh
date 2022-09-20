@@ -68,7 +68,7 @@ xargs -n6 echo |
 sed 's/\[/["/; s/\]/"]/' |
 while read -r name instance_arn permission_set_arn principal_id principal_type target_id; do
     [ -n "$target_id" ] || continue
-    timestamp "Importing aws sso account assignment '$name'"
+    timestamp "Importing $name"
     cmd="terraform import '$name' \"$principal_id,$principal_type,$target_id,AWS_ACCOUNT,$permission_set_arn,$instance_arn\""
     echo "$cmd"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
