@@ -52,7 +52,7 @@ xargs -n4 echo |
 sed 's/\[/["/; s/\]/"]/' |
 while read -r name instance_arn managed_policy_arn permission_set_arn; do
     [ -n "$permission_set_arn" ] || continue
-    timestamp "Importing aws_sso managed policy attachment '$name'"
+    timestamp "Importing $name"
     cmd="terraform import '$name' \"$managed_policy_arn,$permission_set_arn,$instance_arn\""
     echo "$cmd"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
