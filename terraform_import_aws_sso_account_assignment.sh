@@ -63,8 +63,9 @@ terraform plan -no-color |
 sed -n '/# aws_ssoadmin_account_assignment\..* will be created/,/}/ p' |
 awk '/# aws_ssoadmin_account_assignment/ {print $2};
      /instance_arn|permission_set_arn|principal_id|principal_type|target_id/ {print $4}' |
-sed 's/"//g' |
+sed 's/^"//; s/"$//' |
 xargs -n6 echo |
+sed 's/\[/["/; s/\]/"]/' |
 while read -r name instance_arn permission_set_arn principal_id principal_type target_id; do
     [ -n "$target_id" ] || continue
     timestamp "Importing aws sso account assignment '$name'"
