@@ -698,6 +698,7 @@ etc.
   - `github_actions_workflow_runs.sh` - lists GitHub Actions workflow runs for a given workflow id or name
   - `github_actions_workflows_status.sh` - lists all GitHub Actions workflows and their statuses for a given repo
   - `github_actions_workflows_state.sh` - lists GitHub Actions workflows enabled/disabled states (GitHub now disables workflows after 6 months without a commit)
+  - `github_actions_workflows_disabled.sh` - lists GitHub Actions workflows that are disabled. Combine with `github_foreach_repo.sh` to scan all repos to find disabled workflows
   - `github_actions_workflow_enable.sh` - enables a given GitHub Actions workflow
   - `github_actions_workflows_enable_all.sh` - enables all GitHub Actions workflows in a given repo. Useful to undo GitHub disabling all workflows in a repo after 6 months without a commit
   - `github_actions_workflows_trigger_all.sh` - triggers all workflows for the given repo
