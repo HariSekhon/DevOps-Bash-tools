@@ -60,14 +60,15 @@ cd "$dir"
 
 terraform plan -no-color |
 #grep -FA8 '+ resource "aws_ssoadmin_account_assignment" ' |
-sed -n '/+ resource "aws_ssoadmin_account_assignment" /,/}/ p' |
-awk '/aws_ssoadmin_account_assignment|instance_arn|permission_set_arn|principal_id|principal_type|target_id/ {print $4}' |
+sed -n '/# aws_ssoadmin_account_assignment\..* will be created/,/}/ p' |
+awk '/# aws_ssoadmin_account_assignment/ {print $2};
+     /instance_arn|permission_set_arn|principal_id|principal_type|target_id/ {print $4}' |
 sed 's/"//g' |
 xargs -n6 echo |
 while read -r name instance_arn permission_set_arn principal_id principal_type target_id; do
-    [ -z "$target_id" ] || continue
+    [ -n "$target_id" ] || continue
     timestamp "Importing aws sso account assignment '$name'"
-    cmd="terraform import \"aws_ssoadmin_account_assignment.$name\" \"$principal_id,$principal_type,$target_id,AWS_ACCOUNT,$permission_set_arn,$instance_arn\""
+    cmd="terraform import '$name' \"$principal_id,$principal_type,$target_id,AWS_ACCOUNT,$permission_set_arn,$instance_arn\""
     echo "$cmd"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         eval "$cmd"
