@@ -44,13 +44,16 @@ cd "$dir"
 #terraform show -json plan.zip
 
 terraform plan -no-color |
-sed -n '/+ resource "aws_ssoadmin_managed_policy_attachment" /,/}/ p' |
-awk '/aws_ssoadmin_managed_policy_attachment|instance_arn|managed_policy_arn|permission_set_arn/ {print $4}' |
-sed 's/"//g' |
+sed -n '/# aws_ssoadmin_managed_policy_attachment\..* will be created/,/}/ p' |
+awk '/# aws_ssoadmin_managed_policy_attachment/ {print $2};
+     /instance_arn|managed_policy_arn|permission_set_arn/ {print $4}' |
+sed 's/^"//; s/"$//' |
 xargs -n4 echo |
+sed 's/\[/["/; s/\]/"]/' |
 while read -r name instance_arn managed_policy_arn permission_set_arn; do
+    [ -n "$permission_set_arn" ] || continue
     timestamp "Importing aws_sso managed policy attachment '$name'"
-    cmd="terraform import \"aws_ssoadmin_managed_policy_attachment.$name\" \"$managed_policy_arn,$permission_set_arn,$instance_arn\""
+    cmd="terraform import '$name' \"$managed_policy_arn,$permission_set_arn,$instance_arn\""
     echo "$cmd"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         eval "$cmd"
