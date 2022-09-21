@@ -66,6 +66,14 @@ grepvim(){
 alias grepv=grepvim
 alias vimgrep=grepvim
 
+vimchanged(){
+    local git_root
+    git_root="$(git_root)"
+    # want splitting
+    # shellcheck disable=SC2046
+    vim "$@" $(git status --porcelain | awk '/^.M/ {$1=""; print}' | sed "s|^[[:space:]]|$git_root/|")
+}
+
 filesvim(){
     local files=()
     # mapfile not available on Mac and read -a only takes first result
