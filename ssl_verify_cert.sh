@@ -18,14 +18,14 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
 usage_description="
 Verifies the SSL certificate for each host given as arguments, using OpenSSL
 
-Port defaults to 443 if not given
+Port defaults to 443 if not specified
 
 
 For a much better version of this see check_ssl_cert.pl in the Advanced Nagios Plugins Collection:
@@ -42,7 +42,6 @@ usage_args="host1[:port] [ host2:[:port]] [host3:[port]] ... ]"
 help_usage "$@"
 
 min_args 1 "$@"
-
 
 exitcode=0
 
