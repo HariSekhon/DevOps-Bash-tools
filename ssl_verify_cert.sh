@@ -37,7 +37,7 @@ For a much better version of this see check_ssl_cert.pl in the Advanced Nagios P
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="host1[:port] [ host2:[:port]] [host3:[port]] ... ]"
+usage_args="host1[:port] [ host2:[:port]] [host3[:port]] ... ]"
 
 help_usage "$@"
 
