@@ -18,7 +18,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
@@ -30,7 +30,7 @@ Port defaults to 443 if not given
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="host1[:port] [ host2:[:port]] [host3:[port]] ... ]"
+usage_args="host1[:port] [ host2:[:port]] [host3[:port]] ... ]"
 
 help_usage "$@"
 
