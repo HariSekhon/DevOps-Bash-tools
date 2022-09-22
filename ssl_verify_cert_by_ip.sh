@@ -24,11 +24,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Verifieds the SSL certificate of each FQDN vs the endpoint IP via curl
 
+Useful to test Kubernetes ingresses or Cloudflare Proxied sources for Full Strict SSL Mode (see also curl_k8s_ingress.sh)
+
 Port defaults to 443 if not specified
 
-If any of the arguments are a file, then reads the contents of that file as the 'FQDN,IP,Port' tuples, one per line either comma or space separated.
-
-This is useful to bulk check addresses backing a CDN like Cloudflare Proxied or Kubernetes Ingresses (see also curl_k8s_ingress.sh)
+If any of the arguments are a file, then reads the contents of that file as the 'FQDN,IP,Port' tuples, one per line either comma or space separated. Useful for bulk testing.
 
 
 For a better version of this see check_ssl_cert.pl in the Advanced Nagios Plugins Collection:
