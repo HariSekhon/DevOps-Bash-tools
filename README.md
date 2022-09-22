@@ -303,6 +303,7 @@ etc.
 - `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
+- `ssl_verify_cert_by_ip.sh` - verifies SSL certificates on specific IP addresses, useful to test SSL sources addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also `curl_k8s_ingress.sh`)
 - `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
 - `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
 - `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
