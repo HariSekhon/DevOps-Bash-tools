@@ -36,6 +36,8 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
+image="tutum/dnsutils"
+
 name="dnsutils-${USER:-$(whoami)}"
 
-run_static_pod "$name" "$@"
+run_static_pod "$name" "$image" "$@"
