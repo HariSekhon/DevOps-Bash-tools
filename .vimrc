@@ -338,6 +338,7 @@ nmap          ;H :call WriteHelp()<CR>
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;I :PluginInstall<CR>
 nmap <silent> ;j :JHr<CR>
+nmap          ;k :w<CR> :! check_kubernetes_yaml.sh %<CR>
 "nmap <silent> ;' :call Sq()<CR>
 " done automatically on write now
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
@@ -355,7 +356,6 @@ nmap          ;R :call WriteRunDebug()<CR>
 "nmap          ;R :!run.sh %:p<CR>
 "nmap <silent> ;s :call ToggleSyntax()<CR>
 nmap <silent> ;s :,!sqlcase.pl<CR>
-"nmap          ;u :call HgGitU()<CR>
 "nmap          ;; :call HgGitU()<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
