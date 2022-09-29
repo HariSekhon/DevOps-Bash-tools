@@ -35,6 +35,8 @@ Iterates all non-service-account-token secrets, and for each one:
 
 Useful to migrate existing secrets to sealed secrets which are safe to commit to Git
 
+You can run kubectl_secrets_download.sh to take backups of your secrets to local files before running this
+
 
 Requires kubectl and kubeseal to both be in the \$PATH and configured
 "
