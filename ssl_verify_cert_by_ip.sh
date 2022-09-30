@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Verifieds the SSL certificate of each FQDN vs the endpoint IP via curl
 
-Useful to test Kubernetes ingresses or Cloudflare Proxied sources for Full Strict SSL Mode (see also curl_k8s_ingress.sh)
+Useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also curl_k8s_ingress.sh)
 
 Port defaults to 443 if not specified
 
