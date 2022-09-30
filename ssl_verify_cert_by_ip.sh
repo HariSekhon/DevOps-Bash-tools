@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Verifieds the SSL certificate of each FQDN vs the endpoint IP via curl
+Verifies the SSL certificates for FQDN at particular IP addresses via curl
 
 Useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also curl_k8s_ingress.sh)
 
