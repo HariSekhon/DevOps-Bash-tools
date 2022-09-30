@@ -25,9 +25,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs a quick tutum/dnsutils pod on Kubernetes to debug networking / dns
+Runs a quick Alpine pod on Kubernetes to debug things
 
-Shares the same dnsutils pod for successive invocations of this script for speed
+Shares the same alpine pod for successive invocations of this script for speed
+
+Arguments become options to 'kubectl run'
 "
 
 # used by usage() in lib/utils.sh
@@ -36,8 +38,8 @@ usage_args="[<kubectl_options>]"
 
 help_usage "$@"
 
-image="tutum/dnsutils"
+image="alpine"
 
-name="dnsutils-${USER:-$(whoami)}"
+name="alpine-${USER:-$(whoami)}"
 
 run_static_pod "$name" "$image" "$@"

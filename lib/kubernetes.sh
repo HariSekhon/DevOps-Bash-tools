@@ -72,12 +72,14 @@ kube_namespace(){
 
 run_static_pod(){
     local name="$1"
+    local image="$2"
+    shift || :
     shift || :
     local pod_json
     pod_json="$(kubectl get pod "$name" "$@" -o json 2>/dev/null || :)"
 
     run(){
-        kubectl run -ti --rm --restart=Never "$name" --image=busybox "$@" -- /bin/sh
+        kubectl run -ti --rm --restart=Never "$name" --image="$image" "$@" -- /bin/sh
     }
 
     if [ -n "$pod_json" ]; then
