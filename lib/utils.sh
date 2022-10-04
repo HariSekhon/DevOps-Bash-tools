@@ -134,7 +134,7 @@ type isExcluded &>/dev/null || . "$srcdir_bash_tools_utils/excluded.sh"
 check_bin(){
     local bin="${1:-}"
     if ! type -P "$bin" &>/dev/null; then
-        echo "command '$bin' not found in \$PATH ($PATH)"
+        echo "command '$bin' not found in \$PATH ($PATH)" >&2
         if is_CI; then
             timestamp "Running in CI, searching entire system for '$bin'"
             find / -type f -name "$bin" 2>/dev/null
