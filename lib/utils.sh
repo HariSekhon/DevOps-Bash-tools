@@ -146,6 +146,7 @@ check_bin(){
 
 check_output(){
     local expected="$1"
+    # shellcheck disable=SC2178
     local cmd="${*:2}"
     # do not 2>&1 it will cause indeterministic output even with python -u so even tail -n1 won't work
     echo "check_output:  $cmd"
@@ -303,6 +304,7 @@ curl_version(){
     curl --version | awk '{print $2; exit}' | grep -Eom1 '[[:digit:]]+\.[[:digit:]]+'
 }
 is_curl_min_version(){
+    # shellcheck disable=SC2178
     local target_version="$1"
     local curl_version
     curl_version="$(curl_version)"
@@ -318,6 +320,7 @@ go_version(){
 }
 
 is_golang_min_version(){
+    # shellcheck disable=SC2178
     local target_version="$1"
     local go_version
     go_version="$(go_version)"
@@ -625,6 +628,7 @@ run_test_versions(){
     test_versions_ordered="$test_versions"
     if [ -z "${NO_VERSION_REVERSE:-}" ]; then
         # tail -r works on Mac but not Travis CI Ubuntu Trusty
+        # shellcheck disable=SC2119
         test_versions_ordered="$(tr ' ' '\n' <<< "$test_versions" | tac | tr '\n' ' ')"
     fi
     local start_time
@@ -856,11 +860,14 @@ when_ports_down(){
         nc_opts="-z"
     fi
     local nc_cmd="nc -v -w $retry_interval $nc_opts $host < /dev/null"
-    cmd=""
+    # shellcheck disable=SC2178
+    local cmd=""
     for x in $ports; do
+        # shellcheck disable=SC2178
         cmd="$cmd ! $nc_cmd $x &>/dev/null && "
     done
-    local cmd="${cmd% && }"
+    # shellcheck disable=SC2178
+    cmd="${cmd% && }"
     # shellcheck disable=SC2086
     plural_str $ports
     timestamp "waiting for up to $max_secs secs for port$plural '$ports' to go down, retrying at $retry_interval sec intervals"
