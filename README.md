@@ -1112,6 +1112,8 @@ etc.
 
 #### Builds, Languages & Linting
 
+- `lint.sh` - lints one or more files, auto-determines the file types, parses lint headers and calls appropriate scripts and tools. Integrated with my custom `.vimrc`
+- `run.sh` - runs one or more files, auto-determines the file types, any run or arg headers and executes each file using the appropriate script or CLI tool. Integrated with my custom `.vimrc`
 - `check_*.sh` - extensive collection of generalized tests - these run against all my GitHub repos via [CI](https://harisekhon.github.io/CI-CD/). Some examples:
 
   - Programming language linting:
