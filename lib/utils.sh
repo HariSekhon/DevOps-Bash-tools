@@ -175,7 +175,7 @@ check_exit_code(){
         fi
     done
     if [ "$failed" != 0 ]; then
-        echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'"
+        echo "WRONG EXIT CODE RETURNED! Expected: '$expected_exit_codes', got: '$exit_code'" >&2
         return 1
     fi
 }
@@ -634,7 +634,7 @@ run_test_versions(){
         run_count=0
         eval "$test_func" "$version"
         if [ $run_count -eq 0 ]; then
-            echo "NO TEST RUNS DETECTED!"
+            echo "NO TEST RUNS DETECTED!" >&2
             exit 1
         fi
         ((total_run_count+=run_count))
@@ -752,21 +752,21 @@ when_ports_available(){
     local ports="${*:2}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
-        echo "$FUNCNAME: host \$2 not set"
+        echo "$FUNCNAME: host \$2 not set" >&2
         exit 1
     elif [ -z "$ports" ]; then
-        echo "$FUNCNAME: ports \$3 not set"
+        echo "$FUNCNAME: ports \$3 not set" >&2
         exit 1
     else
         for port in $ports; do
             if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
-                echo "$FUNCNAME: invalid non-numeric port argument '$port'"
+                echo "$FUNCNAME: invalid non-numeric port argument '$port'" >&2
                 exit 1
             fi
         done
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'" >&2
         exit 1
     fi
     # Mac nc doesn't have -z switch like Linux GNU version and we can't rely on one being found first in $PATH
@@ -832,21 +832,21 @@ when_ports_down(){
     local ports="${*:2}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$host" ]; then
-        echo "$FUNCNAME: host \$2 not set"
+        echo "$FUNCNAME: host \$2 not set" >&2
         return 1
     elif [ -z "$ports" ]; then
-        echo "$FUNCNAME: ports \$3 not set"
+        echo "$FUNCNAME: ports \$3 not set" >&2
         return 1
     else
         for port in $ports; do
             if ! [[ "$port" =~ ^[[:digit:]]+$ ]]; then
-                echo "$FUNCNAME: invalid non-numeric port argument '$port'"
+                echo "$FUNCNAME: invalid non-numeric port argument '$port'" >&2
                 return 1
             fi
         done
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'" >&2
         return 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
@@ -906,14 +906,14 @@ when_url_content(){
     local args="${*:3}"
     local retry_interval="${RETRY_INTERVAL:-1}"
     if [ -z "$url" ]; then
-        echo "$FUNCNAME: url \$2 not set"
+        echo "$FUNCNAME: url \$2 not set" >&2
         exit 1
     elif [ -z "$expected_regex" ]; then
-        echo "$FUNCNAME: expected content \$3 not set"
+        echo "$FUNCNAME: expected content \$3 not set" >&2
         exit 1
     fi
     if ! [[ "$retry_interval" =~ ^[[:digit:]]+$ ]]; then
-        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'"
+        echo "$FUNCNAME: invalid non-numeric \$RETRY_INTERVAL '$retry_interval'" >&2
         exit 1
     fi
     #local max_tries=$(($max_secs / $retry_interval))
