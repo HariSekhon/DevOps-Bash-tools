@@ -82,5 +82,6 @@ fi
 #url="${url/:\/\/$host/://$IP}"
 #curl -H "Host: $host" "$url" "$@"
 
-set -x
-curl "$url" --resolve "$host:$port:$IP" "$@"
+cmd=(curl "$url" --resolve "$host:$port:$IP" "$@")
+echo "${cmd[*]}"
+"${cmd[@]}"
