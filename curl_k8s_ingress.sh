@@ -70,7 +70,14 @@ if [[ "$host" =~ : ]]; then
 fi
 
 # TODO: extend this to detect and return the IPs of other ingress controllers if deployed eg. older nginx-ingress, traefik, haproxy etc.
-IP="$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o 'jsonpath={.spec.loadBalancerIP}')"
+#
+# XXX: on some clusters appears under '.spec.loadBalancerIP' and others '.status.loadBalancer.ingress[].ip' so try both
+IP="$(kubectl get svc ingress-nginx-controller -n ingress-nginx -o 'jsonpath={.spec.loadBalancerIP}{.status.loadBalancer.ingress[].ip}')"
+if [ -z "$IP" ]; then
+    # support_msg defined in lib/utils-bourne.sh
+    # shellcheck disable=SC2154
+    die "Failed to determine Kubernetes ingress IP address - possibly not using ingress-nginx, in which case this code needs extending. $support_msg"
+fi
 
 if [[ "$url" =~ ^http:// ]]; then
     port=80
