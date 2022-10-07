@@ -23,7 +23,7 @@ fi
 bash_tools_utils_bourne_imported=1
 
 am_root(){
-    # shellcheck disable=SC2039
+    # shellcheck disable=SC2039,SC3028
     [ "${EUID:-${UID:-$(id -u)}}" -eq 0 ]
 }
 
@@ -33,3 +33,5 @@ else
     sudo=sudo
 fi
 export sudo
+
+export support_msg="Please raise a GitHub Issue at https://github.com/HariSekhon/DevOps-Bash-tools/issues"
