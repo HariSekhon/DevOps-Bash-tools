@@ -560,6 +560,7 @@ etc.
 - `kubectl_secrets_download.sh` - downloads all secrets in current or given namespace to local files of the same name, useful as a backup before migrating to Sealed Secrets
 - `kubernetes_secret_to_sealed_secret.sh` - generates a [Bitnami Sealed Secret](https://github.com/bitnami-labs/sealed-secrets) from an existing secret
 - `kubernetes_secrets_to_sealed_secrets.sh` - generates [Bitnami Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets) from all existing secrets found in the current or given namespace
+- `kubectl_secrets_annotate_to_be_sealed.sh` - annotates secrets in current or given namespace to allow being overwritten by Sealed Secrets (useful to sync ArgoCD health)
 - `kubectl_secrets_not_sealed.sh` - finds secrets with no SealedSecret ownerReferences
 - `kubectl_secrets_to_be_sealed.sh` - finds secrets pending overwrite by Sealed Secrets with the managed annotation
 - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
