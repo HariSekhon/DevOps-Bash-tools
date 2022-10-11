@@ -25,6 +25,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds files matching the given name across all repos in the current organization or user using the GitHub API & CLI
 
+Output Format:
+
+<owner>/<repo>    <file_path>
+<owner>/<repo2>   <file_path2>
+
 
 Requires GitHub CLI to be installed and configured, as well as the adjacent github_api.sh script
 "
