@@ -41,4 +41,4 @@ filename="$1"
 owner_repo="${2:-":owner/:repo"}"
 
 gh api "/repos/$owner_repo/git/trees/HEAD?recursive=1" |
-jq -r ".tree[].path | select(. | test(\"$filename\") )"
+jq -r ".tree[]?.path | select(. | test(\"$filename\") )"
