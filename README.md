@@ -718,12 +718,14 @@ etc.
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_release.sh` - creates a GitHub Release, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
+  - `github_repo_find_files.sh` - finds files matching a regex in the current or given GitHub repo via the GitHub API
   - `github_repo_latest_release.sh` - returns the latest release tag for a given GitHub repo via the GitHub API
   - `github_repo_latest_release_filter.sh` - returns the latest release tag matching a given regex filter for a given GitHub repo via the GitHub API. Useful for getting the latest version of things like Kustomize which has other releases for kyaml
   - `github_repo_stars.sh` - fetches the stars, forks and watcher counts for a given repo
   - `github_repo_teams.sh` - fetches the GitHub Enterprise teams and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_collaborators.sh` - fetches a repo's granted users and outside invited collaborators as well as their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_protect_branches.sh` - enables branch protections on the given repo. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`, `dev`, `staging`, `production`
+  - `github_repos_find_files.sh` - finds files matching a regex across all repos in the current GitHub organization or user account
   - `github_repo_fork_sync.sh` - sync's current or given fork, then runs `github_repo_fork_update.sh` to cascade changes to major branches via Pull Requests for auditability
   - `github_repo_fork_update.sh` - updates a forked repo by creating pull requests for full audit tracking and auto-merges PRs for non-production branches
   - `github_repos_public.sh` - lists public repos for a user or organization. Useful to periodically scan and account for any public repos
