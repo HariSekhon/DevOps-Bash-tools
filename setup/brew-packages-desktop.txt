@@ -66,6 +66,7 @@ csshx
 diff-so-fancy
 diffpdf
 direnv
+dive  # analyze docker image layers
 dnsmasq
 dnstop
 docker-completion
