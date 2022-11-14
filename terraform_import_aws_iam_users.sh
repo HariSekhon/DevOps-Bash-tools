@@ -40,8 +40,6 @@ dir="${1:-.}"
 
 cd "$dir"
 
-#group_arn_mapping="$(aws iam list-groups | jq -r '.Groups[] | [.GroupName, .Arn] | @tsv' | column -t)"
-
 terraform plan -no-color |
 sed -n '/# aws_iam_user\..* will be created/,/}/ p' |
 #sed -n '/tags = {/,/}/d; p' |
