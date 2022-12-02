@@ -84,7 +84,7 @@ for i in $(seq "$num"); do
             # tool no longer available online
             #MouseTools -leftClick -x "$x" -y "$y"
             cliclick "c:$x,$y"
-            sleep "$sleep_secs"
+            sleep "$sleep_secs.$RANDOM"
         done
     else
         timestamp "mouse click $i at current mouse location"
