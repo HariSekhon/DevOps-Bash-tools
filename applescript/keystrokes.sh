@@ -68,10 +68,10 @@ echo
 for i in $(seq "$num"); do
     for key in "${keys[@]}"; do
         if [[ "$key" =~ ^[[:digit:]][[:digit:]]+$ ]]; then
-            timestamp "keycode $i of $key"
+            timestamp "keystroke $i keycode $key"
             osascript -e "tell application \"System Events\" to key code $key"
         else
-            timestamp "keystroke $i of $key"
+            timestamp "keystroke $i key $key"
             osascript -e "tell application \"System Events\" to keystroke \"$key\""
         fi
         sleep "$sleep_secs.$RANDOM"  # add $RANDOM up to 1 second jitter to make it harder to spot that this is perfectly automated clicking
