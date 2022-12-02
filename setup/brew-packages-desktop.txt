@@ -57,6 +57,7 @@ cfssl
 checkov
 checkstyle
 circleci
+cliclick
 cmatrix
 colordiff
 cowsay
