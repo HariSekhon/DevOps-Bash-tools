@@ -58,6 +58,10 @@ shift || :
 
 read -r -a coordinates <<< "$@"
 
+if ! type -P cliclick &>/dev/null; then
+    brew install cliclick
+fi
+
 if [ -n "${coordinates:-}" ]; then
     for coordinate in "${coordinates[@]}"; do
         if ! [[ "$coordinate" =~ ^[[:digit:]]+,[[:digit:]]+$ ]]; then
@@ -77,12 +81,15 @@ for i in $(seq "$num"); do
             x="${coordinate%,*}"
             y="${coordinate#*,}"
             timestamp "mouse click $i at $x , $y"
-            MouseTools -leftClick -x "$x" -y "$y"
+            # tool no longer available online
+            #MouseTools -leftClick -x "$x" -y "$y"
+            cliclick "c:$x,$y"
             sleep "$sleep_secs"
         done
     else
         timestamp "mouse click $i at current mouse location"
-        MouseTools -leftClick
+        #MouseTools -leftClick
+        cliclick "c:."
         sleep "$sleep_secs.$RANDOM"  # add $RANDOM up to 1 second jitter to make it harder to spot that this is perfectly automated clicking
     fi
 done
