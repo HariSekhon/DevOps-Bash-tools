@@ -13,6 +13,8 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# XXX: looks like this tool has disappeared from the website
+
 # Installs MouseTools on Mac OS X
 #
 # http://www.hamsoftengineering.com/codeSharing/MouseTools/MouseTools.html
