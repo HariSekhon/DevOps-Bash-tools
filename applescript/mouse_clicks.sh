@@ -80,14 +80,14 @@ for i in $(seq "$num"); do
         for coordinate in "${coordinates[@]}"; do
             x="${coordinate%,*}"
             y="${coordinate#*,}"
-            timestamp "mouse click $i at $x , $y"
+            timestamp "mouse click $i/$num at $x , $y"
             # tool no longer available online
             #MouseTools -leftClick -x "$x" -y "$y"
             cliclick "c:$x,$y"
             sleep "$sleep_secs.$RANDOM"
         done
     else
-        timestamp "mouse click $i at current mouse location"
+        timestamp "mouse click $i/$num at current mouse location"
         #MouseTools -leftClick
         cliclick "c:."
         sleep "$sleep_secs.$RANDOM"  # add $RANDOM up to 1 second jitter to make it harder to spot that this is perfectly automated clicking
