@@ -83,6 +83,6 @@ for i in $(seq "$num"); do
     else
         timestamp "mouse click $i at current mouse location"
         MouseTools -leftClick
-        sleep "$sleep_secs"
+        sleep "$sleep_secs.$RANDOM"  # add $RANDOM up to 1 second jitter to make it harder to spot that this is perfectly automated clicking
     fi
 done
