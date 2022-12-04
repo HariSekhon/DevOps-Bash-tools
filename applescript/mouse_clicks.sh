@@ -34,6 +34,9 @@ Sleeps for \$SLEEP_SECS (default: 1) between clicks to allow UIs to update and p
 
 Starts clicking after \$START_DELAYS seconds (default: 5) to give time to alt-tab back to your UI application and position the cursor
 
+If given num is negative, will run indefinitely until Control-C'd
+
+
 ${0##*/} <num> [<coordinates> <coordinates> <coordinates> ...]"
     exit 3
 }
@@ -46,7 +49,7 @@ num="$1"
 start_delay="${START_DELAY:-5}"
 sleep_secs="${SLEEP_SECS:-1}"
 
-if ! [[ "$num" =~ ^[[:digit:]]+$ ]]; then
+if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
     usage "invalid non-integer '$num' given for first argument"
 fi
 
@@ -75,7 +78,12 @@ sleep "$start_delay"
 timestamp "starting $num mouse clicks"
 echo
 
-for i in $(seq "$num"); do
+for ((i=1; ; i++)); do
+    # if given num is negative, will run for infinity until Control-C'd
+    if [ "$num" -ge 0 ] &&
+       [ "$i" -gt "$num" ]; then
+        break
+    fi
     if [ -n "${coordinates:-}" ]; then
         for coordinate in "${coordinates[@]}"; do
             x="${coordinate%,*}"
