@@ -15,6 +15,10 @@
 
 # Returns the name and title of the current foreground app
 #
+# Borrowed from:
+#
+#   https://stackoverflow.com/questions/5292204/macosx-get-foremost-window-title
+#
 # Tested on macOS 10.7 and 11.7
 
 global frontApp, frontAppName, windowTitle
