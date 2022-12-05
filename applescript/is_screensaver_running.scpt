@@ -16,6 +16,8 @@
 # Returns 'true' or 'false' as to whether screensaver is running
 #
 # Useful to avoid sending clicks or keystrokes during screensaver, as this makes it hard to login
+#
+# XXX: Caveat: doesn't work on locked screen when screensaver isn't running so not comprehensive
 
 tell application "System Events"
     get running of screen saver preferences
