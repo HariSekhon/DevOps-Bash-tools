@@ -26,6 +26,8 @@ Useful to avoid automated keystrokes or mouse_clicks while on locked screen whic
 
 """
 
+from __future__ import print_function
+
 import sys
 import Quartz
 
@@ -34,8 +36,8 @@ if __name__ == '__main__':
     # pylint: disable=no-member
     d = Quartz.CGSessionCopyCurrentDictionary()
     if 'CGSSessionScreenIsLocked' in d and d['CGSSessionScreenIsLocked'] == 1:
-        print 'true'
+        print('true')
         sys.exit(0)
     else:
-        print 'false'
+        print('false')
         sys.exit(1)
