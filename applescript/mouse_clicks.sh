@@ -17,15 +17,11 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
-usage(){
-    if [ -n "$*" ]; then
-        echo "usage error: $*" >&2
-        echo >&2
-    fi
-    echo "
+# shellcheck disable=SC2034,SC2154
+usage_description="
 Automates Mouse Clicks to automate tedious UI actions
 
 Performs N mouse clicks at the sequence of X,Y coordinates given or the current mouse location if no coordinates
@@ -35,15 +31,15 @@ Sleeps for \$SLEEP_SECS (default: 1) between clicks to allow UIs to update and p
 Starts clicking after \$START_DELAYS seconds (default: 5) to give time to alt-tab back to your UI application and position the cursor
 
 If given num is negative, will run indefinitely until Control-C'd
+"
 
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<num> [<coordinates> <coordinates> <coordinates> ...]"
 
-${0##*/} <num> [<coordinates> <coordinates> <coordinates> ...]"
-    exit 3
-}
+help_usage "$@"
 
-if [ $# -lt 1 ]; then
-    usage
-fi
+min_args 1 "$@"
 
 num="$1"
 start_delay="${START_DELAY:-5}"
