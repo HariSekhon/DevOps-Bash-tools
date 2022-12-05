@@ -49,7 +49,11 @@ if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
     usage "invalid non-integer '$num' given for first argument"
 fi
 
-if ! [[ "$sleep_secs" =~ ^[[:digit:]]+(\.[[:digit:]]+)?$ ]]; then
+if ! is_float "$start_delay"; then
+    usage "invalid non-float '$START_DELAY' found in environment for \$START_DELAY"
+fi
+
+if ! is_float "$sleep_secs"; then
     usage "invalid non-float '$SLEEP_SECS' found in environment for \$SLEEP_SECS"
 fi
 
