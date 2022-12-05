@@ -20,12 +20,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
-usage(){
-    if [ -n "$*" ]; then
-        echo "usage error: $*" >&2
-        echo >&2
-    fi
-    echo "
+# shellcheck disable=SC2034,SC2154
+usage_description="
 Automates Keyboard strokes to automate tedious UI actions
 
 Performs N keyboard key code presses
@@ -37,15 +33,15 @@ Sleeps for \$SLEEP_SECS (default: 1) between clicks to allow UIs to update and p
 Starts each keystroke after \$START_DELAYS seconds (default: 5) to give time to alt-tab back to your UI application and position the cursor
 
 If given num is negative, will run indefinitely until Control-C'd
+"
 
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<num> [<keycode> <keycode> <keycode> ...]"
 
-${0##*/} <num> [<keycode> <keycode> <keycode> ...]"
-    exit 3
-}
+help_usage "$@"
 
-if [ $# -lt 1 ]; then
-    usage
-fi
+min_args 1 "$@"
 
 num="$1"
 start_delay="${START_DELAY:-5}"
@@ -77,7 +73,7 @@ for ((i=1; ; i++)); do
     for key in "${keys[@]}"; do
         if [[ "$key" =~ ^[[:digit:]][[:digit:]]+$ ]]; then
             timestamp "keystroke $i/$num keycode $key"
-            osascript -e "tell application \"System Events\" to key code $key"
+            osascript -e "tell application \"System Events\" to key code $key" || :
         else
             timestamp "keystroke $i/$num key $key"
             osascript -e "tell application \"System Events\" to keystroke \"$key\""
