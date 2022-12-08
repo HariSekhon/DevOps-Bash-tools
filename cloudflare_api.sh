@@ -27,7 +27,9 @@ usage_description="
 Queries the Cloudflare API (v4)
 
 
-Requires \$CLOUDFLARE_TOKEN be available in the environment, generation a token here:
+Requires either \$CLOUDFLARE_TOKEN or \$CLOUDFLARE_EMAIL and \$CLOUDFLARE_API_KEY be available in the environment
+
+Token can be generated here, or the Global API Key can be retrieved from this same page:
 
     https://dash.cloudflare.com/profile/api-tokens
 
@@ -152,8 +154,6 @@ usage_args="/path [<curl_options>]"
 
 url_base="https://api.cloudflare.com/client/v4"
 
-check_env_defined "CLOUDFLARE_TOKEN"
-
 help_usage "$@"
 
 min_args 1 "$@"
@@ -165,6 +165,14 @@ shift || :
 
 url_path="${url_path##/}"
 
-export TOKEN="$CLOUDFLARE_TOKEN"
-
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+if ! is_blank "${CLOUDFLARE_TOKEN:-}"; then
+    export TOKEN="$CLOUDFLARE_TOKEN"
+    "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+elif ! is_blank "${CLOUDFLARE_EMAIL:-}" &&
+     ! is_blank "${CLOUDFLARE_API_KEY:-}"; then
+    export X_AUTH_EMAIL="X-Auth-Email: $CLOUDFLARE_EMAIL"
+    export X_AUTH_API_KEY="X-Auth-Key: $CLOUDFLARE_API_KEY"
+    curl "$url_base/$url_path" "${CURL_OPTS[@]}" -H @<(cat <<< "$X_AUTH_EMAIL") -H @<(cat <<< "$X_AUTH_API_KEY") "$@"
+else
+    usage "CLOUDFLARE_TOKEN or CLOUDFLARE_EMAIL/CLOUDFLARE_API_KEY environment variables not specified"
+fi
