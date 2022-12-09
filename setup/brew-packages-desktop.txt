@@ -57,6 +57,7 @@ cfssl
 checkov
 checkstyle
 circleci
+clamav
 cliclick
 cmatrix
 colordiff
