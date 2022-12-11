@@ -33,6 +33,10 @@ EKS_CLUSTER - default: 'test'
 EKS_VERSION - default: 1.21 - you should probably set this to the latest supported to avoid having to upgrade later
 AWS_DEFAULT_REGION - default: 'eu-west-2'
 AWS_ZONES - defaults to zones a, b and c in AWS_DEFAULT_REGION (eg. 'eu-west-2a,eu-west-2b,eu-west-2c') - may need to tweak them anyway to work around a lack of capacity in zones. Must match AWS_DEFAULT_REGION
+
+See Also:
+
+    eksctl.yaml - in HariSekhon/Templates repo
 "
 
 # used by usage() in lib/utils.sh
@@ -54,8 +58,7 @@ EKS_VERSION="${2:-${EKS_VERSION:-1.21}}"
 AWS_DEFAULT_REGION="${3:-${AWS_DEFAULT_REGION:-eu-west2}}"
 AWS_ZONES="${4:-${AWS_DEFAULT_REGION}a,${AWS_DEFAULT_REGION}b,${AWS_DEFAULT_REGION}c}"
 
-# shellcheck disable=SC2013
-for zone in $(sed 's/,/ /g' <<< "$AWS_ZONES"); do
+for zone in ${AWS_ZONES//,/ }; do
     region="${zone::${#zone}-1}"
     if [ "$region" != "$AWS_DEFAULT_REGION" ]; then
         usage "invalid zone '$zone' given, must match region '$AWS_DEFAULT_REGION'"
