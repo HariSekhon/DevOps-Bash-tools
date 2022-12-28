@@ -80,6 +80,7 @@ e2fsprogs
 eksctl
 expect
 etcd
+#ext4fuse  # to read Linux partitions eg. on external hard drives
 ffmpeg
 fish
 fortune
@@ -157,6 +158,7 @@ nmap
 #octave
 #openjpeg
 #oniguruma  # regex library
+#osxfuse  # required to be installed before 'ext4fuse' package
 p7zip
 packer-completion
 pandoc
