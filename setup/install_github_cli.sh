@@ -47,6 +47,10 @@ version="${1:-latest}"
 os="$(get_os)"
 if [ "$os" = darwin ]; then
     os=macOS
+    if [ "$(arch)" = arm64 ]; then
+        echo "GitHub CLI doesn't support ARM architecture yet, skipping..."
+        exit 0
+    fi
 fi
 
 export RUN_VERSION_ARG=1
