@@ -234,6 +234,7 @@ watch
 xz
 yamllint  # in brew-packages.txt
 youtube-dl
+zoom
 zsh
 
 # runtime only
