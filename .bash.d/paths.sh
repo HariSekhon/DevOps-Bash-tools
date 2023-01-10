@@ -105,6 +105,11 @@ if [ -d ~/.serverless/bin ]; then
 fi
 
 # HomeBrew on Linux
+if [ -d /opt/homebrew/bin ]; then
+    add_PATH /opt/homebrew/bin
+fi
+
+# HomeBrew on Linux
 if [ -d ~/.linuxbrew/bin ]; then
     add_PATH ~/.linuxbrew/bin
 fi
