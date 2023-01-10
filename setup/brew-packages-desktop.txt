@@ -41,6 +41,7 @@ amazon-sam-cli
 ansible
 ansible-lint
 argocd
+asdf
 #atomicparsley  # mp4 cli tool
 autoconf
 autojump
