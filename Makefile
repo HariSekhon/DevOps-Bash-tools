@@ -118,7 +118,11 @@ desktop: install
 	@if [ -x /sbin/apk ];        then $(MAKE) apk-packages-desktop; fi
 	@if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages-desktop; fi
 	@if [ -x /usr/bin/yum ];     then $(MAKE) yum-packages-desktop; fi
-	@if [ -x /usr/local/bin/brew -a `uname` = Darwin ]; then $(MAKE) homebrew-packages-desktop; fi
+	@if [ `uname` = Darwin ]; then \
+		if type brew >/dev/null 2>/dev/null; then \
+			$(MAKE) homebrew-packages-desktop; \
+		fi; \
+	fi
 	@# do these late so that we have the above system packages installed first to take priority and not install from source where we don't need to
 	@$(MAKE) perl-desktop
 	@$(MAKE) golang-desktop
