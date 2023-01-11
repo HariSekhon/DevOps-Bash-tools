@@ -124,7 +124,14 @@ if [ -d "/home/linuxbrew/.linuxbrew/bin" ]; then
     add_PATH "/home/linuxbrew/.linuxbrew/bin"
 fi
 
-add_PATH ~/.pulumi/bin
+# Rancher Desktop
+if [ -d ~/.rd/bin ]; then
+    add_PATH ~/.rd/bin
+fi
+
+if [ -d ~/.pulumi/bin ]; then
+    add_PATH ~/.pulumi/bin
+fi
 
 # do the same with MANPATH
 if [ -d ~/man ]; then
