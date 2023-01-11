@@ -61,6 +61,7 @@ circleci
 cliclick
 cmatrix
 colordiff
+colima  # CLI Docker container runtime (use 'docker' client after 'colima start')
 cowsay
 #coreutils # in brew-packages.txt
 csshx
