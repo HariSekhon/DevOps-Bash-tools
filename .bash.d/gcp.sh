@@ -34,6 +34,8 @@ if [ -f ~/google-cloud-sdk/completion.bash.inc ]; then
     source ~/google-cloud-sdk/completion.bash.inc
 fi
 
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
+
 # having to retype this way too much
 alias gal="gcloud auth login"
 # often bugs me to do this
