@@ -111,6 +111,7 @@ id3v2  # mp3 tag cli editor
 #id3lib  # mp3 tag manipulation
 iftop
 imagemagick
+infracost  # Cloud cost estimator for Terraform code
 ipcalc
 iperf
 ipython
