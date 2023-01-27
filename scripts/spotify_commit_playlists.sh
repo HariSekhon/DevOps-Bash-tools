@@ -124,7 +124,7 @@ else
         cd playlists
     fi
     git status --porcelain |
-    grep '^.M' |
+    { grep '^.M' || :; } |
     sed 's/^...//; s,spotify/,,; s/^"//; s/"$//' |
     sort -u |
     while read -r playlist; do
