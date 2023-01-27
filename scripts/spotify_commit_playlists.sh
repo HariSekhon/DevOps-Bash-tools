@@ -58,6 +58,7 @@ commit_playlist(){
        ! [ -f "spotify/$playlist" ]; then
         return
     fi
+    timestamp "Checking playlist: $playlist"
     if git status -s "$playlist" "spotify/$playlist" | grep -q '^[?A]'; then
         git add "$playlist" "spotify/$playlist"
         git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
