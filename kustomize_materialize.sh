@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds all Kustomizations and materializes the full resultant YAML in an adjacent file called kustomization.materialized.yaml
+Recursively finds all Kustomizations and materializes the full resultant YAML in an adjacent file called kustomization.materialized.yaml in each directory
 
-Useful for checking the YAML with linting tools like FairwindsOps Pluto for detecting deprecated API objects affecting your Kubernetes cluster upgrades
+Useful for checking the YAML with linting tools like FairwindsOps Pluto to detect deprecated API objects inherited from embedded dHelm charts affecting your Kubernetes cluster upgrades
 
 Parallelized for performance, with Helm support enabled, requires 'kustomize' binary to be in the \$PATH
 "
