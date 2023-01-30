@@ -46,6 +46,7 @@ dir="${1:-.}"
 
 pluto_detect_kustomize_materialize(){
     kustomization_path="$1"
+    echo "========================================"
     echo "$kustomization_path"
     pushd "$(dirname "$kustomization_path")" >/dev/null
     #if [[ "$kustomization" =~ ^eks- ]]; then
@@ -57,7 +58,7 @@ pluto_detect_kustomize_materialize(){
     echo "Materialized YAML -> $PWD/kustomization.materialized.yaml"
     pluto detect-files -d .
     popd >/dev/null
-    echo
+    echo >&2
 }
 export -f pluto_detect_kustomize_materialize
 
