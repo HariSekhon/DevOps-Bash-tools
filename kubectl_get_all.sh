@@ -28,7 +28,7 @@ Useful to scan the current namespace for all resources since 'kubectl get all' o
 
 Can set KUBECTL_GET_ALL_SEPARATOR environment variable, useful like this:
 
-    KUBECTL_GET_ALL_SEPARATOR='---' ${0##*/} -o yaml > dump.yaml
+    KUBECTL_GET_ALL_SEPARATOR='---' ${0##*/} --all-namespaces -o yaml > dump.yaml
 
 Useful to be able to scan live Kubernetes objects with file linting tools like Pluto to detect deprecated live objects on the cluster affecting your Kubernetes cluster upgrades
 
