@@ -45,7 +45,7 @@ dumpfile="$dir/all.yaml"
 mkdir -pv "$dir"
 
 timestamp "Dumping all live Kubernetes objects to $dumpfile (this will take a few minutes)"
-"$srcdir/kubectl_get_all.sh" -o yaml > "$dumpfile"
+"$srcdir/kubectl_get_all.sh" --all-namespaces -o yaml > "$dumpfile"
 echo >&2
 
 timestamp "Scanning dumped objects with Pluto"
