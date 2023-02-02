@@ -26,6 +26,13 @@ Find all Kubernetes API namespaced resource types and queries the current namesp
 
 Useful to scan the current namespace for all resources since 'kubectl get all' only returns select API objects
 
+Can set KUBECTL_GET_ALL_SEPARATOR environment variable, useful like this:
+
+    KUBECTL_GET_ALL_SEPARATOR='---' ${0##*/} -o yaml > dump.yaml
+
+Useful to be able to scan live Kubernetes objects with file linting tools like Pluto to detect deprecated live objects on the cluster affecting your Kubernetes cluster upgrades
+
+
 Requires Kubectl to be installed and configured
 "
 
@@ -58,7 +65,10 @@ while read -r resource; do
     for non_gettable_resource in $non_gettable_resources; do
         [ "$resource" = "$non_gettable_resource" ] && continue 2
     done
-    echo "# $resource:"
+    if [ -n "${KUBECTL_GET_ALL_SEPARATOR:-}" ]; then
+        echo "$KUBECTL_GET_ALL_SEPARATOR"
+    fi
+    echo "# $resource:" >&2
     kubectl get "$resource" "$@" 2>&1 |
     sed '/No resources found/d'
     echo
