@@ -26,11 +26,13 @@ Recursively finds all Kustomizations and materializes the full resultant YAML in
 
 The runs 'pluto detect-files -d .' in each directory to detect deprecated API objects inherited from embedded Helm charts affecting your Kubernetes cluster upgrades
 
-Parallelized for performance, with Helm support enabled, requires 'kustomize' binary to be in the \$PATH
-
-Workaround for this recursion issue in Pluto:
+Pluto is run per directory as a workaround for this recursion issue:
 
     https://github.com/FairwindsOps/pluto/issues/444
+
+Parallelized for performance, with Helm support enabled.
+
+Requires 'kustomize' and 'pluto' binaries to be in the \$PATH
 "
 
 # used by usage() in lib/utils.sh
