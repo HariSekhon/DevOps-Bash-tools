@@ -25,7 +25,9 @@ usage_description="
 Renames all IAM user accounts from one domain to another
 
 Useful after company mergers / migrations where you go from firstname.lastname@company1.com to firstname.lastname@company2.com
-Despite using AWS SSO you may still need this for your root management account's IAM users.
+(even if using mostly AWS SSO you may still need this for your root management account's IAM users)
+
+Group memberships and permissions are retained
 
 Expects that the user@ prefix portion (eg. first.last@) stays the same before and after company migration
 
