@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Renames all IAM user accounts from one domain to another
 
-Useful after company mergers / migrations where you go from firstname.lastname@company1.com to firstname.lastname@company2.com. Even when using AWS SSO you may need this for your root management account users.
+Useful after company mergers / migrations where you go from firstname.lastname@company1.com to firstname.lastname@company2.com
+Despite using AWS SSO you may still need this for your root management account's IAM users.
 
 Expects that the user@ prefix portion (eg. first.last@) stays the same before and after company migration
 
