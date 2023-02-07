@@ -47,7 +47,7 @@ new_domain="$2"
 
 aws iam list-users |
 jq -r '.Users[].UserName' |
-{ grep "$old_domain$" || : ; } |
+{ grep "@$old_domain$" || : ; } |
 while read -r username; do
     new_username="${username/$old_domain/$new_domain}"
     timestamp "Renaming $username -> $new_username"
