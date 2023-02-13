@@ -41,9 +41,9 @@ mkdir -p ~/bin
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
 
-if type -P aws &>/dev/null; then
-    echo "AWS CLI already installed"
-else
+#if type -P aws &>/dev/null; then
+#    echo "AWS CLI already installed"
+#else
     echo "Installing AWS CLI"
     # old AWS CLI v1 - doesn't support AWS SSO
     #PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
@@ -69,7 +69,10 @@ else
     fi
     popd
     echo
-fi
+    echo -n "AWS CLI version: "
+    aws --version
+    echo
+#fi
 
 "$srcdir/install_eksctl.sh"
 
