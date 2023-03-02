@@ -13,7 +13,7 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Quick command line URL encoding for use in curl queries and such
+# Quick command line URL encoding
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
