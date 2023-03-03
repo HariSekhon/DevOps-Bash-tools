@@ -51,9 +51,11 @@ timestamp "Dumping all live Kubernetes objects to $dumpfile (this will take a fe
 echo >&2
 
 timestamp "Scanning dumped objects with Pluto"
+echo >&2
 # returns exit code 3 when deprecated objects are found so doesn't run the next detect-all-in-cluster without ignoring the exit code
 pluto detect-files -d "$dir" || :
 echo >&2
 
 timestamp "Scanning live cluster as real-world testing shows this finds different results"
+echo >&2
 pluto detect-all-in-cluster
