@@ -121,7 +121,6 @@ jenkins-x/jx/jx
 #jq  # in brew-packages.txt
 jython
 k6
-k9s
 kind  # Kubernetes in Docker
 kompose
 kops
