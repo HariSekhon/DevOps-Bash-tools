@@ -26,7 +26,9 @@ Finds live deprecated objects in the current Kubernetes cluster
 
 Dumps all Kubernetes objects from the current kubectl cluster context to a directory in /tmp and then runs Pluto against it to detect deprecated API objects affecting your Kubernetes cluster upgrades
 
-Requires 'kubectl' and 'pluto' binaries to be in the \$PATH and kubectl context configured and selected
+Newer versions of Pluto can 'pluto detect-all-in-cluster', but on real-world clusters I've found that this finds different deprecated API objects compared to dumped objects, so this script has been updated to do both for comparison
+
+Requires 'kubectl' and a recent 'pluto' binary to be in the \$PATH (newer Pluto is required for the second pass of detect-all-in-cluster), as well as the kubectl context configured and set as current context
 "
 
 # used by usage() in lib/utils.sh
@@ -49,4 +51,9 @@ timestamp "Dumping all live Kubernetes objects to $dumpfile (this will take a fe
 echo >&2
 
 timestamp "Scanning dumped objects with Pluto"
-pluto detect-files -d "$dir"
+# returns exit code 3 when deprecated objects are found so doesn't run the next detect-all-in-cluster without ignoring the exit code
+pluto detect-files -d "$dir" || :
+echo >&2
+
+timestamp "Scanning live cluster as real-world testing shows this finds different results"
+pluto detect-all-in-cluster
