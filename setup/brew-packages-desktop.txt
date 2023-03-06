@@ -190,9 +190,11 @@ pwgen
 #pyenv
 r
 rbenv
+#rclone  # like rsync for S3 / GCS / SFTP / HDFS / SMB / HTTP
 rdesktop
 #redis
 #readline  # in brew-packages.txt
+#restic  # backup program, tracks versions, backups to a local repo dir / SFTP / Restic server http(s) / S3 / GCS / MinIO / Rclone
 rlwrap
 #rtmpdump
 ruby  # Mac ruby is too old to install Travis CI
