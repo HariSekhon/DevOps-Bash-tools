@@ -47,7 +47,7 @@ type -P helm &>/dev/null || "$srcdir/setup/install_helm.sh"
 type -P yq &>/dev/null || "$srcdir/setup/install_yq.sh"
 
 # if there are no repositories to show will return exit code 1 so || :
-helm_repos="$(helm repo list -o yaml | yq -r '.[].url' || :)"
+helm_repos="$(helm repo list -o yaml | yq -r '.[] | [.name, .url] | @tsv' || :)"
 
 "$srcdir/kustomize_parse_helm_charts.sh" "$@" |
 while read -r repo_url name version values_file; do
