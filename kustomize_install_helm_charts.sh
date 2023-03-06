@@ -51,7 +51,7 @@ helm_repos="$(helm repo list -o yaml | yq -r '.[].url' || :)"
 
 "$srcdir/kustomize_parse_helm_charts.sh" "$@" |
 while read -r repo_url name version values_file; do
-    if ! grep -Eq "$$name[[:space:]]+$repo_url[[:space:]]*$" <<< "$helm_repos"; then
+    if ! grep -Eq "^$name[[:space:]]+$repo_url[[:space:]]*$" <<< "$helm_repos"; then
         timestamp "Adding Helm repo '$repo_url' as name '$name'"
         # might fail here if you've already installed a repo with this name, in which case, fix your repos, we don't want to remove/modify your existing repos
         helm repo add "$name" "$repo_url"
