@@ -34,6 +34,9 @@ Output Format:
 <repo_url>    <chart_name>     <chart_version>    <values_file>
 
 
+Any field not found or commented out like valuesFile in kustomization.yaml will return 'null' for that field
+
+
 Used by adjacent script kustomize_install_helm_charts.sh in CI/CD GitHub Actions for repo:
 
     https://github.com/HariSekhon/Kubernetes-configs
