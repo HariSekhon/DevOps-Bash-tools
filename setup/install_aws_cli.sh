@@ -64,7 +64,7 @@ export PATH="$PATH:$HOME/bin"
         unzip -o awscliv2.zip
         # defined in utils.sh lib
         # shellcheck disable=SC2154
-        $sudo ./aws/install
+        $sudo ./aws/install --update
         rm -fr -- aws awscliv2.zip
     fi
     popd
