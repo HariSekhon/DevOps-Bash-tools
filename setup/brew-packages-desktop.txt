@@ -120,6 +120,7 @@ jenkins-x/jx/jx
 #jpeg
 #jq  # in brew-packages.txt
 jython
+k3d  # wrapper for k3s
 k6
 kind  # Kubernetes in Docker
 kompose
