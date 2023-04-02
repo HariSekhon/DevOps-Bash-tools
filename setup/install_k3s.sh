@@ -16,6 +16,14 @@
 # XXX: doesn't install on new M1 Apple chip
 #
 #   [ERROR]  Can not find systemd or openrc to use as a process supervisor for k3s
+#
+# GitHub issue:
+#
+#   https://github.com/k3s-io/k3s/issues/734
+#
+# Workaround - use k3d instead:
+#
+#   install_k3d.sh
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
