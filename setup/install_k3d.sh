@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2022-08-16 10:15:52 +0100 (Tue, 16 Aug 2022)
+#  Date: 2023-04-01 00:05:05 +0100 (Sat, 01 Apr 2023)
 #
 #  https://github.com/HariSekhon/DevOps-Bash-tools
 #
@@ -22,22 +22,19 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs K3s mini kubernetes distribution and adds it to the kubectl config
+Installs K3d wrapper for k3s mini kubernetes distribution
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<version_tag>]"
 
-k3s_yaml="/etc/rancher/k3s/k3s.yaml"
-kubeconfig="${KUBECONFIG:-~/.kube/config}"
+version="${1:-}"
 
-timestamp "Installing K3s"
+if [ -n "$version" ]; then
+    export TAG="$version"
+fi
 
-curl -sfL https://get.k3s.io | sh -
+timestamp "Installing K3d"
 
-timestamp "Copying $k3s_yaml to $kubeconfig so we can use regular 'kubectl' instead of 'k3s kubectl'"
-
-mkdir -pv "$(dirname "$kubeconfig")"
-
-cat "$k3s_yaml" >> "$kubeconfig"
+curl -sSf https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash

@@ -111,6 +111,7 @@ id3v2  # mp3 tag cli editor
 #id3lib  # mp3 tag manipulation
 iftop
 imagemagick
+infracost  # Cloud cost estimator for Terraform code
 ipcalc
 iperf
 ipython
@@ -119,6 +120,7 @@ jenkins-x/jx/jx
 #jpeg
 #jq  # in brew-packages.txt
 jython
+k3d  # wrapper for k3s
 k6
 kind  # Kubernetes in Docker
 kompose
@@ -189,9 +191,11 @@ pwgen
 #pyenv
 r
 rbenv
+#rclone  # like rsync for S3 / GCS / SFTP / HDFS / SMB / HTTP
 rdesktop
 #redis
 #readline  # in brew-packages.txt
+#restic  # backup program, tracks versions, backups to a local repo dir / SFTP / Restic server http(s) / S3 / GCS / MinIO / Rclone
 rlwrap
 #rtmpdump
 ruby  # Mac ruby is too old to install Travis CI

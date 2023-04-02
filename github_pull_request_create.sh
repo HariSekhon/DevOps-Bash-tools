@@ -114,7 +114,7 @@ if [ "$owner_repo" = '{owner}/{repo}' ]; then
     if [ -f "$pr_template" ]; then
         body_template="$(cat "$pr_template")"
         # if branch prefix matches an AA-XXXXX or AA-NNNNN token placeholder in the body, replace it
-        branch_prefix="$(grep -Eom1 '^[[:alpha:]]{2,}-[[:digit:]]{3,}-' <<< "$head" | sed 's/-$//' || :)"
+        branch_prefix="$(grep -Eom1 '^[[:alpha:]]{2,}-[[:digit:]]{3,}(-|$)' <<< "$head" | sed 's/-$//' || :)"
         if [[ "$branch_prefix" =~ ^[[:alpha:]]{2,}-[[:digit:]]{3,}$ ]]; then
             match1="${branch_prefix//[[:digit:]]/X}"
             match2="${branch_prefix//[[:digit:]]/N}"
