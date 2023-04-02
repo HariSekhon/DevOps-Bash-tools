@@ -106,19 +106,19 @@ else
     packages="$(tr ' ' '\n' <<< "$packages" | sort -u | tr '\n' ' ')"
 fi
 
-cask=""
+opts=""
 if [ -n "${CASK:-}" ]; then
-    cask=cask
+    opts="--cask"
 fi
 
 # Fails if any of the packages are already installed, so you'll probably want to ignore and continue and detect missing
 # package later in build system if it's a problem eg. resulting in missing headers later in build
 if [ -n "${NO_FAIL:-}" ]; then
     for package in $packages; do
-        brew $cask install "$package" || :
+        brew install $opts "$package" || :
     done
 else
     # want splitting
     # shellcheck disable=SC2086
-    brew $cask install $packages
+    brew install $opts $packages
 fi
