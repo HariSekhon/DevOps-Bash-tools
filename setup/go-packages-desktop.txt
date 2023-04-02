@@ -12,7 +12,7 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# List of Golang software to install via 'go get -u', one per line
+# List of Golang software to install via 'go install', one per line, and if not @version is suffixed, will assume @latest
 
 golang.org/x/tools/cmd/goimports
 github.com/remind101/assume-role
