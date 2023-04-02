@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# XXX: doesn't install on new M1 Apple chip
+#
+#   [ERROR]  Can not find systemd or openrc to use as a process supervisor for k3s
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
