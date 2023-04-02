@@ -32,7 +32,7 @@ Installs Mac Homebrew package lists if the packages aren't already installed
 
 $package_args_description
 
-Tested on CentOS
+Tested on macOS
 "
 
 # used by usage() in lib/utils.sh
