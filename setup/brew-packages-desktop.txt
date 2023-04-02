@@ -67,7 +67,7 @@ cowsay
 csshx
 #ctags
 diff-so-fancy
-diffpdf
+diff-pdf
 direnv
 dive  # analyze docker image layers
 dnsmasq
