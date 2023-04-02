@@ -154,9 +154,9 @@ homebrew: system-packages brew
 
 .PHONY: brew
 brew:
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop.txt
-	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-casks.txt
-	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop-casks.txt
+	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop-taps.txt
 
 .PHONY: perl-desktop
 perl-desktop: system-packages cpan-desktop
