@@ -1042,8 +1042,8 @@ etc.
 
 #### Golang
 
-- `golang_get_install.sh` - bulk installs Golang modules from mix of arguments / file lists / stdin
-- `golang_get_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
+- `golang_install.sh` - bulk installs Golang modules from mix of arguments / file lists / stdin
+- `golang_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
 - `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete you `bin/` etc as these are often real deployed applications rather than development binaries
 
 #### MP3
