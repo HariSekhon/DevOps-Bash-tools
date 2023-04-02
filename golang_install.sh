@@ -23,6 +23,10 @@ usage(){
     echo
     echo "Takes a list of go tool names as arguments or .txt files containing lists of tools (one per line)"
     echo
+    echo "To skip Golang tools that fail to install, set this in environment:"
+    echo
+    echo "export GOLANG_SKIP_FAILURES=1"
+    echo
     echo "usage: ${0##*} <list_of_tools>"
     echo
     exit 3
@@ -92,5 +96,9 @@ for go_tool in $go_tools; do
     echo "$envopts $go install $opts $go_tool"
     # want splitting of opts and tools
     # shellcheck disable=SC2086
-    eval $envopts "$go" install $opts "$go_tool"
+    if [ -n "${GOLANG_SKIP_FAILURES:-}" ]; then
+        set +eo pipefail
+        eval $envopts "$go" install $opts "$go_tool"
+        set +eu pipefail
+    fi
 done
