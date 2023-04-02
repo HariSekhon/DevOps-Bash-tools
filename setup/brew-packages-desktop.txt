@@ -37,7 +37,7 @@ https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
 # Install HomeBrew Desktop packages - one per line
 ack
 amazon-ecs-cli
-amazon-sam-cli
+#amazon-sam-cli  # no longer found
 ansible
 ansible-lint
 argocd
