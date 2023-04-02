@@ -20,7 +20,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage(){
     echo "Installs Golang tools not already installed"
     echo
-    echo "Leverages adjacent golang_get_install.sh which takes in to account library paths etc"
+    echo "Leverages adjacent golang_install.sh which takes in to account library paths etc"
     echo
     echo "Takes a list of go tool names as arguments or .txt files containing lists of tools (one per line)"
     echo
@@ -78,6 +78,6 @@ for go_tool in $go_tools; do
     else
         echo "installing go tool '$go_tool'"
         echo
-        "$srcdir/golang_get_install.sh" "$go_tool"
+        "$srcdir/golang_install.sh" "$go_tool"
     fi
 done
