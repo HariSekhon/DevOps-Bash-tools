@@ -176,7 +176,7 @@ go-desktop: system-packages go
 
 .PHONY: go
 go:
-	NO_FAIL=1 $(BASH_TOOLS)/golang_get_install_if_absent.sh setup/go-packages-desktop.txt
+	NO_FAIL=1 $(BASH_TOOLS)/golang_install_if_absent.sh setup/go-packages-desktop.txt
 
 .PHONY: ruby-desktop
 ruby-desktop: system-packages gem-desktop
