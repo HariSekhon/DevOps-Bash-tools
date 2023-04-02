@@ -225,7 +225,7 @@ tree
 tmux
 urlview  # used by tmux plugin tmux-urlview, and also my advanced .vimrc
 unix2dos
-unrar
+#unrar  # no longer available
 utimer
 vagrant-completion
 vault  # Hashicorp
