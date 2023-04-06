@@ -10,6 +10,7 @@ atom
 ccmenu
 codeship/taps/jet
 docker
+#insomnia  # Kong Rest API testing client desktop app
 #iterm2
 firefox-developer-edition
 google-chrome
