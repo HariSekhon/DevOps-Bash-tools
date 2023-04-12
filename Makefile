@@ -154,8 +154,10 @@ homebrew: system-packages brew
 
 .PHONY: brew
 brew:
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop.txt
-	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-casks.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop-casks.txt
+	@# doesn't pass the packages correctly yet
+	@#NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 
 .PHONY: perl-desktop
@@ -202,7 +204,7 @@ npm-desktop: npm
 
 .PHONY: aws
 aws: system-packages python-version
-	@setup/install_aws_cli.sh
+	@if ! command -v aws; then setup/install_aws_cli.sh; fi
 	@# needed for github_mirror_repos_to_aws_codecommit.sh and dependent GitHub Actions workflows
 	@grep '^git-remote-codecommit' requirements.txt | ./python_pip_install_if_absent.sh || :
 

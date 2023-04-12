@@ -25,7 +25,7 @@ derailed/k9s            k9s
 buildkite/cli           bk
 dbcli/tap               athenacli
 wallix/awless           awless
-wercker/wercker         wercker-cli
+#wercker/wercker         wercker-cli  # EOL - github repo password protected now, causes install to hang on username/password prompt
 golangci/tap            golangci-lint
 
 #fluxcd/tap              flux

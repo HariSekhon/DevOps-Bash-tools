@@ -37,7 +37,7 @@ https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
 # Install HomeBrew Desktop packages - one per line
 ack
 amazon-ecs-cli
-amazon-sam-cli
+#amazon-sam-cli  # no longer found
 ansible
 ansible-lint
 argocd
@@ -67,7 +67,7 @@ cowsay
 csshx
 #ctags
 diff-so-fancy
-diffpdf
+diff-pdf
 direnv
 dive  # analyze docker image layers
 dnsmasq
@@ -225,7 +225,7 @@ tree
 tmux
 urlview  # used by tmux plugin tmux-urlview, and also my advanced .vimrc
 unix2dos
-unrar
+#unrar  # no longer available
 utimer
 vagrant-completion
 vault  # Hashicorp
