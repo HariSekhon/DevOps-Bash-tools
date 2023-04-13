@@ -50,7 +50,9 @@ if [ -n "${PYTHON:-}" ]; then
     python="$PYTHON"
 else
     #python="$(command -v "$python" || command -v "python3" || command -v "python2" || :)"
-    python="$(command -v python 2>/dev/null || :)"
+    #python="$(command -v python 2>/dev/null || :)"
+    # XXX: bug, on new M1 Macs command -v appears to return 'python' where it is not installed, possibly inherited, whereas command without -v returns blank to correctly fall through to python3
+    python="$(command python 2>/dev/null || :)"
     python2="$(command -v python2 2>/dev/null || :)"
     python3="$(command -v python3 2>/dev/null || :)"
     if [ -z "$python" ]; then
