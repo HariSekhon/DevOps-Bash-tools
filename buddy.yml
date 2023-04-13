@@ -15,6 +15,7 @@
 
 # https://buddy.works/docs/yaml/yaml-schema
 
+---
 - pipeline: "Build"
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "master"
@@ -22,22 +23,22 @@
   target_site_url: "https://github.com/HariSekhon/DevOps-Bash-tools"
   trigger_condition: "ALWAYS"
   actions:
-  - action: "Execute: make ci test"
-    type: "BUILD"
-    working_directory: "/buddy/devops-bash-tools"
-    docker_image_name: "library/ubuntu"
-    docker_image_tag: "18.04"
-    #setup_commands:
-    # this step gets cached, which results in
-    # E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
-    #  - apt update
-    #  - apt install -qy git make
-    execute_commands:
-      - setup/ci_bootstrap.sh
-      - make init
-      - make ci
-      - make test
-    volume_mappings:
-      - "/:/buddy/devops-bash-tools"
-    shell: "BASH"
-    trigger_condition: "ALWAYS"
+    - action: "Execute: make ci test"
+      type: "BUILD"
+      working_directory: "/buddy/devops-bash-tools"
+      docker_image_name: "library/ubuntu"
+      docker_image_tag: "18.04"
+      #setup_commands:
+      # this step gets cached, which results in
+      # E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?
+      #  - apt update
+      #  - apt install -qy git make
+      execute_commands:
+        - setup/ci_bootstrap.sh
+        - make init
+        - make ci
+        - make test
+      volume_mappings:
+        - "/:/buddy/devops-bash-tools"
+      shell: "BASH"
+      trigger_condition: "ALWAYS"
