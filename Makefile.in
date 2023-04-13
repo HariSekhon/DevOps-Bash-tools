@@ -33,7 +33,8 @@ endif
 
 CODE_FILES := $(shell if type git >/dev/null 2>&1; then git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done; fi)
 
-CPANM = cpanm
+CPANM := cpanm
+PIP := pip3
 
 FATPACKS_DIR := fatpacks
 
