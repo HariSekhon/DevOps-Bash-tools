@@ -20,7 +20,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck source=lib/utils.sh
 . "$srcdir/lib/utils.sh"
 
-python="${PYTHON:-python}"
+# shellcheck source=lib/utils.sh
+. "$srcdir/lib/python.sh"
+
+python="${PYTHON:-${python:-python}}"
 
 set +o pipefail
 filelist="$(find "${1:-.}" -maxdepth 2 -type f -iname '*.py' -o -iname '*.jy' | grep -v /templates/ | sort)"
@@ -31,7 +34,9 @@ if [ -z "$filelist" ]; then
     echo
     echo "usage: ${0##*/} <python_file_or_directory>"
     echo
+    # shellcheck disable=SC2317
     return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
     exit 0
 fi
 
