@@ -22,7 +22,7 @@ pool:
   # there is no /dev/stderr on this azure build!
   #vmImage: 'ubuntu-latest'
   # Ubuntu 16.04 required for docker container support, looks like 18.04 works too
-  vmImage: 'ubuntu-18.04'
+  vmImage: 'ubuntu-22.04'
 
 # unprivileged container without sudo, cannot install dependencies
 #container: ubuntu:18.04
