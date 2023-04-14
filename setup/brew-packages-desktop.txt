@@ -98,7 +98,7 @@ gnupg2
 gnuplot
 gradle
 gradle-completion
-graphviz  # for the 'dot' command (use with terraform graph)
+graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
 #groovy  # see near end
 #groovysdk  # see near end
 hadolint
