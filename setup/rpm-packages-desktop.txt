@@ -73,6 +73,7 @@ git-core
 gitk
 gkrellm
 gksu
+graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
 gt5
 gvim
 heartbeat
