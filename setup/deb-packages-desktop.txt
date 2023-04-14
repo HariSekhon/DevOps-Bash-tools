@@ -119,6 +119,7 @@ gnupg
 gnupg-agent
 gparted
 gpm
+graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
 grub
 gt5
 gvim
