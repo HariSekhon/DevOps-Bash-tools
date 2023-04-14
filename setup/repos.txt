@@ -44,6 +44,7 @@ lib
 pylib
 lib-java:libj
 
+Diagrams-as-Code:diagrams
 DevOps-Golang-tools:go-tools
 DevOps-Perl-tools:perl-tools
 DevOps-Python-tools:pytools

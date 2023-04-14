@@ -17,6 +17,8 @@
 #                                C o d e S h i p
 # ============================================================================ #
 
+# LEGACY - CloudBees has removed free plans as of 1st March 2023
+
 # 3rd party way of doing IaC on CodeShip CI as the free edition doesn't support this
 
 # https://github.com/painless-software/codeship-yaml

@@ -151,8 +151,12 @@ kustomize_build_file(){
     if ! [ -f "$kustomization" ];then
         if [ -f "${kustomization}kustomization.yaml" ]; then
             kustomization+="kustomization.yaml"
+        elif [ -f "${kustomization}-kustomization.yaml" ]; then
+            kustomization+="-kustomization.yaml"
         elif [ -f "${kustomization}kustomization.yml" ]; then
             kustomization+="kustomization.yml"
+        elif [ -f "${kustomization}-kustomization.yml" ]; then
+            kustomization+="-kustomization.yml"
         else
             echo "File not found: $kustomization" >&2
             return 1
