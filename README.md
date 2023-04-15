@@ -1193,6 +1193,8 @@ etc.
 - [Lib-Java](https://github.com/HariSekhon/lib-java) - Java utility library
 - [Nagios Plugin Kafka](https://github.com/HariSekhon/Nagios-Plugin-Kafka) - Kafka Nagios Plugin written in Scala with Kerberos support
 
+- [Diagrams-as-Code](https://github.com/HariSekhon/Diagrams-as-Code) - Cloud & Open Source architecture diagrams with Python source code provided - automatically regenerated via GitHub Actions CI/CD - AWS, GCP, Kubernetes, ArgoCD, Kong API Gateway, Nginx, Redis, PostgreSQL, Kafka, Spark, web farms, event processing...
+
 [Pre-built Docker images](https://hub.docker.com/u/harisekhon/) are available for those repos (which include this one as a submodule) and the ["docker available"](https://hub.docker.com/r/harisekhon/centos-github/)  icon above links to an [uber image](https://hub.docker.com/r/harisekhon/centos-github/) which contains all my github repos pre-built. There are [Centos](https://hub.docker.com/r/harisekhon/centos-github/), [Alpine](https://hub.docker.com/r/harisekhon/alpine-github/), [Debian](https://hub.docker.com/r/harisekhon/debian-github/) and [Ubuntu](https://hub.docker.com/r/harisekhon/ubuntu-github/) versions of this uber Docker image containing all repos.
 
 #### Individual Setup Parts
