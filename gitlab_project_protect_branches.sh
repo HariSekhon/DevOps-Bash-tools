@@ -116,6 +116,7 @@ else
     for branch in $default_branches_to_protect; do
         timestamp "checking for branch '$branch'"
         if grep -Fxq "$branch" <<< "$branches"; then
+            timestamp "protecting branch '$branch'"
             protect_project_branch "$branch"
         fi
     done
