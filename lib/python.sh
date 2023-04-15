@@ -158,7 +158,7 @@ check_python_pip_versions_match(){
                 pip="$pip3"
                 check_python_pip_versions_match
             elif [ "${python_version:0:1}" = 2 ]; then
-                if [ -n "$pip2" ]; then
+                if [ -n "${pip2:-}" ]; then
                     pip="$pip2"
                 else
                     # python2-pip removed from Ubuntu / Alpine repos :-(
@@ -168,7 +168,7 @@ check_python_pip_versions_match(){
                 check_python_pip_versions_match
             # switching to python3 will lead programs with /usr/env/python defaulting to python 2 to fail to find pip modules
             #elif [ "${python_version:0:1}" = 2 ] &&
-            #     [ -n "$python3" ]; then
+            #     [ -n "${python3:-}" ]; then
             #    python="$python3"
             #    check_python_pip_versions_match
             else
