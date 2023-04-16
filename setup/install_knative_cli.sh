@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# https://knative.dev/docs/client/install-kn/
+#
+# https://knative.dev/docs/client/kn-plugins/#list-of-knative-plugins
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -24,7 +28,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Installs Knative CLI on Mac using Brew for kn and func
 
-Then determines the latest func version from GitHub and downloads the release binary to 'kn-func' to use as a kn plugin
+Then determines the latest versions of the following plugins and installs them from the GitHub release pages:
+
+    func
+    kn-operator
 "
 
 # used by usage() in lib/utils.sh
@@ -56,6 +63,13 @@ echo
 timestamp "Downloading func latest release as fn plugin"
 
 "$srcdir/../github_install_binary.sh" knative/func "func_{os}_{arch}" "$version" kn-func
+
+"$srcdir/../github_install_binary.sh" knative-sandbox/kn-plugin-operator "kn-operator-{os}-{arch}" "$version" kn-operator
+
+echo "Knative plugins installed:"
+echo
+kn plugin list
+echo
 
 echo -n "Knative func plugin version: "
 kn func version
