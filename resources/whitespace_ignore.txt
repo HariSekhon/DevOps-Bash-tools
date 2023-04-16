@@ -13,6 +13,9 @@
 \.bz2$
 \.class$
 \.plist$
+\.png$
+\.jpg$
+\.jpeg$
 /target/
 /fatpacks/
 /build/
@@ -25,6 +28,3 @@ dependency-reduced-pom.xml
 check_memcached_stats.cfg-pnp4nagios
 /spark-.*-bin-hadoop.*/
 -bin\b
-*.png
-*.jpg
-*.jpeg
