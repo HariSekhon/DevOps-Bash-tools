@@ -62,6 +62,7 @@ cliclick
 cmatrix
 colordiff
 colima  # CLI Docker container runtime (use 'docker' client after 'colima start')
+cosign
 cowsay
 #coreutils # in brew-packages.txt
 csshx
@@ -124,6 +125,8 @@ k3d  # wrapper for k3s
 k6
 kind  # Kubernetes in Docker
 kompose
+knative/client/kn
+knative-sandbox/kn-plugins/quickstart
 kops
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
