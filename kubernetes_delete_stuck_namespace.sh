@@ -26,6 +26,10 @@ Forcibly deletes a Kubernetes namespace that is stuck deleting
 
 Written to get rid of Knative namespaces knative-eventing, knative-serving and kourier-system which were all permanently stuck trying to delete
 
+Doesn't do the actual deletion of the namespace, but deletes the finalizers to allow a namespace already stuck in deletion to be removed
+
+WARNING: do not run this on a normal healthy namespace that you care about, as it will wipe out the finalizers
+
 Various solutions to this problem can be found here:
 
     https://stackoverflow.com/questions/52369247/namespace-stuck-as-terminating-how-i-removed-it
