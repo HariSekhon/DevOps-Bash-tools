@@ -568,6 +568,7 @@ etc.
 - `kubernetes_api.sh` - finds Kubernetes API and runs your curl arguments against it, auto-getting authorization token and auto-populating OAuth authentication header
 - `kubernetes_autoscaler_release.sh` - finds the latest Kubernetes Autoscaler release that matches your local Kubernetes cluster version using kubectl and the GitHub API. Useful for quickly finding the image override version for `eks-cluster-autoscaler-kustomization.yaml` in the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
 - `kubernetes_etcd_backup.sh` - creates a timestamped backup of the Kubernetes Etcd database for a kubeadm cluster
+- `kubernetes_delete_stuck_namespace.sh` - to forcibly delete those pesky kubernetes namespaces of 3rd party apps like Knative that get stuck and hang indefinitely on the finalizers during deletion
 - `kubeadm_join_cmd.sh` - outputs `kubeadm join` command (generates new token) to join an existing Kubernetes cluster (used in [vagrant kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools/tree/master/vagrant/kubernetes) provisioning scripts)
 - `kubeadm_join_cmd2.sh` - outputs `kubeadm join` command manually (calculates cert hash + generates new token) to join an existing Kubernetes cluster
 - `kubectl_exec.sh` - finds and execs to the first Kubernetes pod matching the given name regex, optionally specifying the container name regex to exec to, and shows the full generated `kubectl exec` command line for clarity
