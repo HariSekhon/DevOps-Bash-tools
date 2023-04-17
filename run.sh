@@ -102,6 +102,9 @@ else
                         ;;
                  *.md)  bash -ic "cd '$dirname'; gitbrowse"
                         ;;
+                 *.gv)  file_png="${filename%.gv}.png"
+                        dot -T png "$filename" -o "$file_png" >/dev/null && open "$file_png"
+                        ;;
                     *)  if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
                             docker_compose_up
                         elif [[ "$filename" =~ \.ya?ml$ ]] &&
