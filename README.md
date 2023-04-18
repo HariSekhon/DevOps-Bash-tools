@@ -102,8 +102,6 @@ awkward URLs more nicely replaced with shields.io
 [![Mac 11](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_11.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_11.yaml)
 [![Mac 12](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_12.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/mac_12.yaml)
 [![Ubuntu](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu%22)
-[![Ubuntu 14.04](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu%2014.04/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu+14.04%22)
-[![Ubuntu 16.04](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu%2016.04/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu+16.04%22)
 [![Ubuntu 18.04](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu%2018.04/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu+18.04%22)
 [![Ubuntu 20.04](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Ubuntu%2020.04/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Ubuntu+20.04%22)
 [![Debian](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Debian/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Debian%22)
