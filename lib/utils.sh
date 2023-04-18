@@ -368,8 +368,8 @@ curl_api_opts(){
     if [ -n "${CURL_OPTS:-}" ]; then
         read -r -a CURL_OPTS <<< "${CURL_OPTS[@]}" # this @ notation works for both strings and arrays in case a future version of bash do export arrays this should still work
     else
-        #read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
-        CURL_OPTS=(-sS --fail --connect-timeout 3)
+        #read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 10"
+        CURL_OPTS=(-sS --fail --connect-timeout 10)
     fi
 
     # case insensitive regex matching
