@@ -12,6 +12,7 @@
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=security_rating)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=HariSekhon_DevOps-Bash-tools)
 [![Codiga Grade](https://api.codiga.io/project/8840/status/svg)](https://app.codiga.io/project/8840/dashboard)
 [![Codiga Score](https://api.codiga.io/project/8840/score/svg)](https://app.codiga.io/project/8840/dashboard)
 
