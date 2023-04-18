@@ -42,6 +42,7 @@ args=()
 if [ $# -gt 0 ]; then
     repo="$1"
     shift || :
+    owner_repo="$repo"
     args+=(-R "$repo")
 fi
 
