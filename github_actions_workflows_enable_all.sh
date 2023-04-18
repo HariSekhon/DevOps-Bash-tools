@@ -21,7 +21,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC1090,SC1091
-. "$srcdir/lib/git.sh"
+. "$srcdir/lib/github.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -41,7 +41,7 @@ max_args 1 "$@"
 repo="${1:-}"
 
 if [ -z "$repo" ]; then
-    repo="$(git_repo)"
+    repo="$(get_github_repo)"
 fi
 
 USER="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
