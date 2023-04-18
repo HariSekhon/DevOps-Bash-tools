@@ -17,8 +17,11 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/git.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -29,13 +32,17 @@ Use to re-enable all your workflows as GitHub has started disabling workflows in
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<repo>"
+usage_args="[<repo>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+max_args 1 "$@"
 
-repo="$1"
+repo="${1:-}"
+
+if [ -z "$repo" ]; then
+    repo="$(git_repo)"
+fi
 
 USER="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
 
