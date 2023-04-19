@@ -93,7 +93,6 @@ awkward URLs more nicely replaced with shields.io
 [![Kics](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/kics.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/kics.yaml)
 
 [![Docker Build (Alpine)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_alpine.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_alpine.yaml)
-[![Docker Build (CentOS)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_centos.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_centos.yaml)
 [![Docker Build (Debian)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_debian.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_debian.yaml)
 [![Docker Build (Fedora)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_fedora.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_fedora.yaml)
 [![Docker Build (Ubuntu)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_ubuntu.yaml/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions/workflows/docker_bash_ubuntu.yaml)
