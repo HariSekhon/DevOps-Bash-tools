@@ -34,8 +34,8 @@ endif
 CODE_FILES := $(shell if type git >/dev/null 2>&1; then git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done; fi)
 
 CPANM := cpanm
-PIP := pip3
-PYTHON := python3
+export PIP := pip3
+export PYTHON := python3
 
 FATPACKS_DIR := fatpacks
 
