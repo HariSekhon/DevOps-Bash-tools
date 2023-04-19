@@ -29,7 +29,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #. "$srcdir/lib/python.sh"
 
 python="${PYTHON:-python}"
-python="$(type -P "$python")"
+python="$(type -P "$python" || die "'$python' not found")"
 
 python_path=""
 
