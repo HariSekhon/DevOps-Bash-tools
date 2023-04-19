@@ -35,6 +35,7 @@ CODE_FILES := $(shell if type git >/dev/null 2>&1; then git ls-files | while rea
 
 CPANM := cpanm
 PIP := pip3
+PYTHON := python3
 
 FATPACKS_DIR := fatpacks
 
