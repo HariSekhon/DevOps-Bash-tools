@@ -46,8 +46,10 @@ while read -r symlink; do
     # readlink -f fails to return anything if a parent dir component doesn't exist
     target="$(readlink -m "$symlink" || :)"
     echo -n '.'
+    if [[ "$target" =~ /.git/ ]]; then
+        continue
     # shouldn't happen now switched from readlink -f to readlink -m
-    if [ -z "$target" ]; then
+    elif [ -z "$target" ]; then
         echo
         echo "WARNING: symlink '$symlink' target could not be resolved" >&2
         ((failing_symlinks+=1))
