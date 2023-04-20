@@ -51,6 +51,10 @@ output="$("$srcdir/github_pull_request_create.sh" "$current_branch" "$base_branc
 echo "$output"
 echo
 
+if [ -z "$output" ]; then
+    die "Pull request not created"
+fi
+
 url="$(parse_pull_request_url "$output")"
 
 if [ "${GITHUB_MERGE_PULL_REQUEST:-}" = true ]; then
