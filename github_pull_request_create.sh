@@ -153,7 +153,9 @@ if [ "$total_commits" -gt 0 ]; then
     # check for existing PR between these branches before creating another
     existing_pr_url="$(get_pr_url)"
     if [ -n "$existing_pr_url" ]; then
-        timestamp "Branch '$base' already has an existing pull request from '$head', skipping creating PR: $existing_pr_url"
+        timestamp "Branch '$base' already has an existing pull request from '$head', skipping creating PR:"
+        echo >&2
+        echo "$existing_pr_url"
         echo >&2
         exit 0
     fi
