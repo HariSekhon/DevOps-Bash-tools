@@ -67,3 +67,13 @@ jq -r '
 #    gsub("cluster-autoscaler-chart-"; "chart ") |
 #    gsub("cluster-autoscaler-"; "kubernetes ")
 #' <<< "$output"
+echo
+if type -P helm &>/dev/null; then
+    echo "Helm Chart: "
+    echo
+    if ! helm repo list | grep -q '^cluster-autoscaler[[:space:]]'; then
+        helm repo add cluster-autoscaler https://kubernetes.github.io/autoscaler
+    fi
+    helm search repo cluster-autoscaler -l |
+    grep -m 1 "$version"
+fi
