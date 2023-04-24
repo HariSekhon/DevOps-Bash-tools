@@ -162,10 +162,12 @@ alias ht='headtail.py'
 alias run='run.sh'
 
 # ============================================================================ #
-#                      G i t H u b   /   B i t B u c k e t
+#           GitHub / GitLab / BitBucket / Azure DevOps repo checkouts
 # ============================================================================ #
 
 export github=~/github
+export gitlab=~/gitlab
+export azure_devops=~/azure-devops
 alias github="sti github; cd '$github'";
 export work="$github/work"
 alias work="sti work; cd '$work'"
@@ -177,26 +179,37 @@ alias bitb='cd $bitbucket'
 # used to gitbrowse to bitbucket now in git.sh
 #alias bb=bitbucket
 
-for basedir in "$github" "$bitbucket"; do
+aliasdir(){
+    local directory="$1"
+    local suffix="${2:-}"
+    [ -d "$directory" ] || return
+    name="${directory##*/}"
+    name="${name//-/_}"
+    name="${name//./_}"
+    name="${name// /}"
+    # alias terraform /tf -> terra
+    if [[ "$name" =~ ^(terraform|tf)$ ]]; then
+        name="terra"
+    fi
+    export "$name"="$directory"
+    # don't clash with any binaries
+    if ! type -P "${name}${suffix}" &>/dev/null; then
+        # shellcheck disable=SC2139,SC2140
+        alias "${name}${suffix}"="sti $name; cd $directory"
+    elif ! type -P "g${name}${suffix}" &>/dev/null; then
+        # shellcheck disable=SC2139,SC2140
+        alias "g${name}${suffix}"="sti $name; cd $directory"
+    fi
+}
+
+for basedir in "$github" "$gitlab" "$bitbucket" "$azure_devops"; do
     if [ -d "$basedir" ]; then
         for directory in "$basedir/"*; do
-            [ -d "$directory" ] || continue
-            name="${directory##*/}"
-            name="${name//-/_}"
-            name="${name//./_}"
-            name="${name// /}"
-            # alias terraform /tf -> terra
-            if [[ "$name" =~ ^(terraform|tf)$ ]]; then
-                name="terra"
-            fi
-            export "$name"="$directory"
-            # don't clash with any binaries
-            if ! type -P "$name" &>/dev/null; then
-                # shellcheck disable=SC2139,SC2140
-                alias "$name"="sti $name; cd $directory"
-            elif ! type -P "g$name" &>/dev/null; then
-                # shellcheck disable=SC2139,SC2140
-                alias "g$name"="sti $name; cd $directory"
+            aliasdir "$directory"
+            if [[ "$directory" =~ /work$ ]]; then
+                for workdir in "$directory/"*; do
+                    aliasdir "$workdir" "w"  # work dirs should have a w suffix
+                done
             fi
         done
     fi
