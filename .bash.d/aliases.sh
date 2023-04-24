@@ -182,7 +182,7 @@ alias bitb='cd $bitbucket'
 aliasdir(){
     local directory="$1"
     local suffix="${2:-}"
-    [ -d "$directory" ] || return
+    [ -d "$directory" ] || return 0
     name="${directory##*/}"
     name="${name//-/_}"
     name="${name//./_}"
