@@ -49,6 +49,7 @@ alias s3='aws s3'
 alias dockerecr='aws ecr get-login-password | docker login -u AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com'
 
 alias awscon='aws_consoler -o'
+alias awsc='awscon'
 
 # easily set a profile env var
 aws_profile(){
