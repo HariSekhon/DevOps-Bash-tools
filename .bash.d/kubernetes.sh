@@ -274,7 +274,7 @@ kexec(){
         return 1
     fi
     for ((i=0;i<100;i++)); do
-        line="$(k get po | grep -F "$name")"
+        line="$(k get po | grep -m1 -F "$name")"
         if [ -z "$line" ]; then
             echo "No pod matching name $name found!"
             return 1
