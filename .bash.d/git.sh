@@ -480,7 +480,7 @@ pull(){
          grep -Fxq "$PWD" <<< "${GIT_BASEDIRS:-}"; then
          #ls ./*/.git &>/dev/null; then  # matches inside repos with submodules unfortunately
         for x in *; do
-            [ -d "$x" ] || continue
+            [ -d "$x/.git" ] || continue
             hr
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             echo "> Work $x: git pull --no-edit $*"
