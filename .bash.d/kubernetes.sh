@@ -286,6 +286,7 @@ kexec(){
         echo "waiting for pod to start running..."
         sleep 1
     done
+    echo kubectl exec -ti "\"$name\"" -- /bin/sh
     k exec -ti "$name" -- /bin/sh
 }
 
