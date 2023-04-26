@@ -39,7 +39,7 @@ usage_args=""
 
 help_usage "$@"
 
-kubectl get deploy,sts,ds -A -o json |
+kubectl get deploy,sts,ds --all-namespaces -o json |
 # jq trick {} expands out the sub-array elements
 jq -r '
     .items[] |
