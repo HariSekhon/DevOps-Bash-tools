@@ -26,6 +26,8 @@ Filter program to get all unique Kubernetes resources types out of a Kubernetes 
 
 Yaml can be supplied as a file argument or via standard input. If no file is given, waits for stdin like a standard unix filter program
 
+Useful to find objects to grant an ArgoCD project permissions to manage for an app you are adding to ArgoCD
+
 Output Format:
 
 <group>     <object_kind>
