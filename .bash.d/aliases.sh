@@ -191,12 +191,16 @@ aliasdir(){
     if [[ "$name" =~ ^(terraform|tf)$ ]]; then
         name="terra"
     fi
-    export "$name"="$directory"
+    if [ -z "${!name}" ]; then
+        export "$name"="$directory"
+    fi
     # don't clash with any binaries
-    if ! type -P "${name}${suffix}" &>/dev/null; then
+    #if ! type -P "${name}${suffix}" &>/dev/null; then
+    # don't clash with binaries or any previous defined aliases or functions
+    if ! type "${name}${suffix}" &>/dev/null; then
         # shellcheck disable=SC2139,SC2140
         alias "${name}${suffix}"="sti $name; cd $directory"
-    elif ! type -P "g${name}${suffix}" &>/dev/null; then
+    elif ! type "g${name}${suffix}" &>/dev/null; then
         # shellcheck disable=SC2139,SC2140
         alias "g${name}${suffix}"="sti $name; cd $directory"
     fi
