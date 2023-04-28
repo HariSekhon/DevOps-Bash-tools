@@ -40,7 +40,8 @@
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 
-if [ "${1##*/}" = "${BASH_SOURCE[0]##*/}" ]; then
+arg="${1:-}"
+if [ "${arg##*/}" = "${BASH_SOURCE[0]##*/}" ]; then
     shift
 fi
 
