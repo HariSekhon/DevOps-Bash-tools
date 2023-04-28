@@ -73,11 +73,11 @@ while read -r repo_url name version values_file; do
         helm repo add "$name" "$repo_url"
     fi
     timestamp "Installing Helm chart '$name' version '$version' from '$repo_url'"
-    if [ -n "${SKIP_ERRORS:-1}" ]; then
+    if [ -n "${SKIP_ERRORS:-}" ]; then
         set +e
     fi
     helm install "$name" "$name/$name" --version "$version" --create-namespace --namespace "$name" ${values_file:+--values "$values_file"}
-    if [ -n "${SKIP_ERRORS:-1}" ]; then
+    if [ -n "${SKIP_ERRORS:-}" ]; then
         set -e
     fi
     echo
