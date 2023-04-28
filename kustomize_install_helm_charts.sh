@@ -26,8 +26,9 @@ Installs the Helm Charts from one or more Kustomize kustomization.yaml files usi
 
 All arguments are passed straight to yq and must be kustomization.yaml files or valid --options
 
-If SKIP_EXISTING_HELM_INSTALLATIONS is set to any value, then will skip those installations (useful for CI/CD retries without failing on existing installation from previous run)
-If SKIP_ERRORS is set to any value, will ignore failures to install each helm chart, such as webhooks failing to contact cert-manager (useful for CI/CD runs where you just want the charts installed to test outdated release versions such as https://github.com/HariSekhon/Kubernetes-configs/actions/workflows/kustomize-nova.yaml)
+Environment variables:
+  - if \$SKIP_EXISTING_HELM_INSTALLATIONS is set to any value, then will skip those installations (useful for CI/CD retries without failing on existing installation from previous run)
+  - if \$SKIP_ERRORS is set to any value, will ignore failures to install each helm chart, such as webhooks failing to contact cert-manager (useful for CI/CD runs where you just want the charts installed to test outdated release versions with Nova such as https://github.com/HariSekhon/Kubernetes-configs/actions/workflows/kustomize-nova.yaml)
 
 Uses adjacent script kustomize_parse_helm_charts.sh and is used in CI/CD GitHub Actions for repo:
 
