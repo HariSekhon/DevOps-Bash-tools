@@ -236,7 +236,7 @@ k(){
     # more efficient than forking to check history every time
     if [ -n "$KUBERNETES_CLI" ]; then
         case "$KUBERNETES_CLI" in
-            kubectl)    opts+=("${kubectl_opts[@]:-}")
+            kubectl)    opts+=("${kubectl_opts[@]}")
                         ;;
                  oc)    opts+=("${oc_opts[@]:-}")
                         ;;
@@ -251,7 +251,7 @@ k(){
                 openshift)   command oc "${oc_opts[@]}" "$@"
                              export KUBERNETES_CLI=oc
                              ;;
-                    k8s|*)   command kubectl "${kubectl_opts[@]:-}" "$@"
+                    k8s|*)   command kubectl "${kubectl_opts[@]}" "$@"
                              export KUBERNETES_CLI=kubectl
                              ;;
         esac
@@ -390,7 +390,7 @@ watchpods(){
         echo
         echo 'Pods:'
         echo
-        kubectl " "${kubectl_opts[@]:-}" " get pods " "${k8s_get_pod_opts[@]:-}" " 2>&1
+        kubectl " "${kubectl_opts[@]}" " get pods " "${k8s_get_pod_opts[@]:-}" " 2>&1
         echo
     "
 }
