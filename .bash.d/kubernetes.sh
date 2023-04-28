@@ -211,7 +211,7 @@ if [ "${K8S_NAMESPACE:-}" ]; then
     kubectl_opts+=(-n "$K8S_NAMESPACE")
 fi
 # TODO: might split this later
-oc_opts=("${kubectl_opts[@]}")
+oc_opts=("${kubectl_opts[@]:-}")
 
 # ============================================================================ #
 
@@ -236,9 +236,9 @@ k(){
     # more efficient than forking to check history every time
     if [ -n "$KUBERNETES_CLI" ]; then
         case "$KUBERNETES_CLI" in
-            kubectl)    opts+=("${kubectl_opts[@]}")
+            kubectl)    opts+=("${kubectl_opts[@]:-}")
                         ;;
-                 oc)    opts+=("${oc_opts[@]}")
+                 oc)    opts+=("${oc_opts[@]:-}")
                         ;;
                   *)    echo "invalid command '$KUBERNETES_CLI' listed in \$KUBERNETES_CLI (must be either 'kubectl' or 'oc' depending on whether you are using straight Kubernetes or OpenShift). Fix the variable or unset it to auto-detect when calling the k() function"
                         return
@@ -251,7 +251,7 @@ k(){
                 openshift)   command oc "${oc_opts[@]}" "$@"
                              export KUBERNETES_CLI=oc
                              ;;
-                    k8s|*)   command kubectl "${kubectl_opts[@]}" "$@"
+                    k8s|*)   command kubectl "${kubectl_opts[@]:-}" "$@"
                              export KUBERNETES_CLI=kubectl
                              ;;
         esac
@@ -390,7 +390,7 @@ watchpods(){
         echo
         echo 'Pods:'
         echo
-        kubectl " "${kubectl_opts[@]}" " get pods " "${k8s_get_pod_opts[@]}" " 2>&1
+        kubectl " "${kubectl_opts[@]:-}" " get pods " "${k8s_get_pod_opts[@]:-}" " 2>&1
         echo
     "
 }
