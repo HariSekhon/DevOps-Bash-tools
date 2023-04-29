@@ -168,7 +168,7 @@ kustomize_build_file(){
     command cp -v -- "$prefix"*.yaml /tmp/ >&2
     cd /tmp >&2 || return 1
     echo >&2
-    command mv -v -- "$kustomization" kustomization.yaml >&2
+    command mv -v -- "${kustomization##*/}" kustomization.yaml >&2
     echo >&2
     kbuild
     local result=$?
@@ -313,6 +313,19 @@ klogs(){
     done
     echo kubectl logs "$@" "\"$name\""
     k logs "$@" "$name"
+}
+
+kfwd(){
+    local filter="$1"
+    local port="$2"
+    local hostport="$3"
+    shift
+    shift
+    shift
+    # mind need splitting if it's a filter
+    # shellcheck disable=SC2086
+    kubectl port-forward $filter "$port" "$hostport" &
+    open "http://localhost:$hostport"
 }
 
 # looks like both of these work on OpenShift context
