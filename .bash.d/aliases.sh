@@ -191,7 +191,7 @@ aliasdir(){
     if [[ "$name" =~ ^(terraform|tf)$ ]]; then
         name="terra"
     fi
-    if [ -z "${!name}" ]; then
+    if [ -z "${!name:-}" ]; then
         export "$name"="$directory"
     fi
     # don't clash with any binaries
