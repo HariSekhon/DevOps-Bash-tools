@@ -57,8 +57,8 @@ fi
 
 # Only do password mechanism and netrc_contents workaround if not using Kerberos
 if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
-    if [ -z "${PASSWORD:-}" ] &&
-       [ -z "${TOKEN:-}" ]; then
+    if is_blank "${PASSWORD:-}" &&
+       is_blank "${TOKEN:-}"; then
         pass
     fi
 
@@ -68,7 +68,7 @@ if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
     # needs newer version of curl, otherwise fall back to parsing the hostname and dynamically created netrc contents
     # curl 7.64.1 (x86_64-apple-darwin19.0) libcurl/7.64.1 (SecureTransport) LibreSSL/2.8.3 zlib/1.2.11 nghttp2/1.39.2
     # curl 7.35.0 (x86_64-pc-linux-gnu) libcurl/7.35.0 OpenSSL/1.0.1f zlib/1.2.8 libidn/1.28 librtmp/2.3
-    if [ -z "${TOKEN:-}" ] &&
+    if is_blank "${TOKEN:-}" &&
        is_curl_min_version 7.64; then
         netrc_contents="default login $USERNAME password $PASSWORD"
     fi
@@ -91,7 +91,7 @@ if [ -z "${KRB5:-${KERBEROS:-}}" ]; then
 
     # Instead of generating this for all known hosts above just do it for the host extracted from the args url now
 
-    if [ -z "${TOKEN:-}" ] &&
+    if is_blank "${TOKEN:-}" &&
        [ -z "${netrc_contents:-}" ]; then
         if ! [[ "$*" =~ :// ]]; then
             usage "http(s):// not specified in URL"
@@ -117,8 +117,8 @@ fi
 
 if [ -n "${KRB5:-${KERBEROS:-}}" ]; then
     command curl -u : --negotiate "$@"
-elif [ -n "${TOKEN:-${JWT_TOKEN:-}}" ]; then
-    if [ -n "${JWT_TOKEN:-}" ]; then
+elif ! is_blank "${TOKEN:-${JWT_TOKEN:-}}"; then
+    if ! is_blank "${JWT_TOKEN:-}"; then
         auth_header="${CURL_AUTH_HEADER:-Authorization: JWT} $JWT_TOKEN"
     else
         # OAuth2
