@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -62,7 +62,7 @@ if ! [[ "${2:-}" =~ ^--[[:alpha:]]+ ]]; then
 fi
 shift || :
 
-if [ -z "$secret" ]; then
+if [ -z "${secret:-}" ]; then
     read_secret
 fi
 
