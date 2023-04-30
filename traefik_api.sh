@@ -32,7 +32,7 @@ TRAEFIK_API_PORT defaults to '443'
 TRAEFIK_API_PROTOCOL defaults to 'https'
 
 TRAEFIK_TOKEN (optional) if API is secured with a middleware JWT authentication token
-If using HTTP basic auth set TRAEFIK_TOKEN=' ' with a blank and instead set USERNAME/PASSWORD environment variables
+If using HTTP basic auth set TRAEFIK_TOKEN=' ' with a blank and instead set USERNAME/PASSWORD environment variables, otherwise it'll use \$USERNAME from your shell and prompt for a password
 
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
