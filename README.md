@@ -988,6 +988,7 @@ etc.
 - `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `kong_api.sh` - queries the [Kong API Gateway](https://docs.konghq.com/gateway/latest/)'s Admin API, handling authentication if enabled
+- `traefik_api.sh` - queries the [Traefik](https://traefik.io/) API, handling authentication if enabled
 - `ngrok_api.sh` - queries the [NGrok](https://ngrok.com/) API with authentication
 - `pingdom_*.sh` - [Pingdom](https://www.pingdom.com/) API queries and reports for status, latency, average response times, latency averages by hour, SMS credits, outages periods and durations over the last year etc.
   - `pingdom_api.sh` - queries the Solarwinds [Pingdom](https://www.pingdom.com/) API with authentication
