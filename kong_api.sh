@@ -39,7 +39,6 @@ KONG_TOKEN (optional) if Admin API is secured with RBAC (Enterprise only)
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
-
 API Reference:
 
     https://docs.konghq.com/gateway/latest/admin-api/
