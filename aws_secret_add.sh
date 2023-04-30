@@ -36,7 +36,7 @@ Examples:
 
     ${0##*/} myname myvalue
 
-    ${0##*/} myname --description 'test credential'
+    ${0##*/} myname myvalue --description 'test credential'
 
     # For accessing in Jenkins via https://plugins.jenkins.io/aws-secrets-manager-credentials-provider/
     ${0##*/} mysecretstring --tags 'Key=jenkins:credentials:type,Value=string'
@@ -63,6 +63,7 @@ fi
 shift || :
 
 if [ -z "${secret:-}" ]; then
+    echo "Secret not given as second arg"
     read_secret
 fi
 
