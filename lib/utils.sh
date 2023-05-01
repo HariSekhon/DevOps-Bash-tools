@@ -251,15 +251,44 @@ has_tarball_bzip2_extension(){
 }
 
 get_os(){
-    uname -s |
-    tr '[:upper:]' '[:lower:]'
+    local os
+    os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+    if [ -n "${OS_DARWIN:-}" ]; then
+        if is_mac; then
+            os="$OS_DARWIN"
+        fi
+    elif [ -n "${OS_LINUX:-}" ]; then
+        if is_linux; then
+            os="$OS_LINUX"
+        fi
+    fi
+    echo "$os"
 }
 
 get_arch(){
     local arch
     arch="$(uname -m)"
     if [ "$arch" = x86_64 ]; then
-        arch=amd64  # files are conventionally named amd64 not x86_64
+        arch=amd64  # files are conventionally usually named amd64 not x86_64
+    fi
+    if [ -n "${ARCH_X86_64:-}" ]; then
+        if [ "$arch" = amd64 ] || [ "$arch" = x86_64 ]; then
+            arch="$ARCH_X86_64"
+        fi
+    elif [ -n "${ARCH_X86:-}" ]; then
+        if [ "$arch" = i386 ]; then
+            arch="$ARCH_X86"
+        fi
+    elif [ -n "${ARCH_ARM64:-}" ]; then
+        if [ "$arch" = arm64 ]; then
+            arch="$ARCH_ARM64"
+        fi
+    elif [ -n "${ARCH_ARM:-}" ]; then
+        if [ "$arch" = arm ]; then
+            arch="$ARCH_ARM"
+        fi
+    elif [ -n "${ARCH_OVERRIDE:-}" ]; then
+        arch="$ARCH_OVERRIDE"
     fi
     echo "$arch"
 }
