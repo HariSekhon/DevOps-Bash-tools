@@ -68,15 +68,15 @@ autocomplete(){
     local name="$1"
     shift || :
     if [ -f ~/.bash.autocomplete.d/"$name.sh" ]; then
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         . ~/.bash.autocomplete.d/"$name.sh"
     elif type -P "$name" &>/dev/null; then
         # doesn't work
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         #source <(command "$name" completion bash)
         mkdir -pv ~/.bash.autocomplete.d
         command "$name" completion "$@" bash > ~/.bash.autocomplete.d/"$name.sh"
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         . ~/.bash.autocomplete.d/"$name.sh"
     fi
 }

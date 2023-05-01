@@ -27,7 +27,7 @@ gpg_agent(){
             # looks like gpg-agent not longer outputs the pid to stdout to capture
             #GPG_ENV_FILE=~/.gpg-agent.env
             #if [ -f "$GPG_ENV_FILE" ]; then
-                # shellcheck disable=SC1090
+                # shellcheck disable=SC1090,SC1091
                 #. "$GPG_ENV_FILE" > /dev/null
 
                 #GPG_AGENT_PID="${GPG_AGENT_INFO#*:}"

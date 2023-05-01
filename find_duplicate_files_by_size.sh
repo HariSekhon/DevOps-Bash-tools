@@ -39,7 +39,7 @@ https://github.com/HariSekhon/DevOps-Python-tools
 # shellcheck disable=SC2034
 usage_args="[<dir1> <dir2> ...]"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"

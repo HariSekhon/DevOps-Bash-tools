@@ -27,12 +27,12 @@ to keep the Spotify backups in sync
 # shellcheck disable=SC2034
 usage_args="<playlist_old_name> <playlist_new_name>"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../.bash.d/git.sh"
 
 rename(){

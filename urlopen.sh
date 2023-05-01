@@ -17,18 +17,18 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 # vendor's bash completion and other external sources aren't written defensively enough,
 # ignoring error codes from commands and testing undefined variables :'-(
 set +euo pipefail
 # auto-wraps xargs to gxargs for --no-run-if-empty
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$srcdir/.bash.d/mac.sh"
 
 # providers browser abstraction for Linux + Mac
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/.bash.d/network.sh"
 set -euo pipefail
 

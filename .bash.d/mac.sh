@@ -22,7 +22,7 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
 is_mac || return
@@ -117,7 +117,7 @@ alias dua=duall
 if type -P brew &>/dev/null; then
     brew_prefix="$(brew --prefix)"
     if [ -f "$brew_prefix/etc/bash_completion" ]; then
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         . "$brew_prefix/etc/bash_completion"
     fi
 fi

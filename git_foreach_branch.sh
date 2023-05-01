@@ -21,7 +21,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/lib/git.sh"
 
 # access to useful functions and aliases
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$srcdir/.bash.d/aliases.sh"
 #. "$srcdir/.bash.d/functions.sh"
 . "$srcdir/.bash.d/git.sh"

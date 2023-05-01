@@ -22,12 +22,12 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
 # similar to what zsh does by default
 if [ -f ~/.bashenv ]; then
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . ~/.bashenv
 fi
 
@@ -63,7 +63,7 @@ export LC_ALL=en_US.UTF-8
 
 # Clever dynamic environment variables, set using var() function sourced between shells
 export varfile=~/.bash_vars
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f "$varfile" ] && . "$varfile"
 
 #export DISTCC_DIR="/var/tmp/portage/.distcc/"
@@ -107,7 +107,7 @@ var(){
 vars(){
     "$EDITOR" "$varfile"
     chmod 0600 "$varfile"
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$varfile"
 }
 

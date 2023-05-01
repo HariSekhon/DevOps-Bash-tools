@@ -44,10 +44,10 @@ Requires DevOps-Perl-tools to be in \$PATH for diffnet.pl
 # shellcheck disable=SC2034
 usage_args="[<playlist>]"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$srcdir/.bash.d/git.sh"
 
 help_usage "$@"

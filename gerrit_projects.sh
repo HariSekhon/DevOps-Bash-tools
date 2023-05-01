@@ -42,7 +42,7 @@ The following environment variables should be set before running:
 # shellcheck disable=SC2034
 usage_args="[<curl_options>]"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 host="${GERRIT_HOST:-localhost}"

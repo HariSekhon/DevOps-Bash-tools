@@ -19,10 +19,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # dipping into interactive library for opening browser to TeamCity to accept EULA
 # XXX: order is important here because there is an interactive library of retry() and a scripting library version of retry() and we want the latter, which must be imported second
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/.bash.d/network.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034

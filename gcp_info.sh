@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  shellcheck disable=SC1090
+#  shellcheck disable=SC1090,SC1091
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-13 19:38:39 +0100 (Thu, 13 Aug 2020)
@@ -29,10 +29,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/gcp.sh"
 
 # shellcheck disable=SC2034,SC2154,SC1117

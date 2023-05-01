@@ -30,7 +30,7 @@ done
 # minishift oc-env > ~/.minishift.env
 if [ -f ~/.minishift.env ]; then
     # remove .minishift.env if it causes errors, which can happen if it was generated when there was no MiniShift VM running
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . ~/.minishift.env || rm -f -- ~/.minishift.env
 fi
 

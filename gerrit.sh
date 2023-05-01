@@ -26,7 +26,7 @@ Runs Gerrit via docker-compose/gerrit.yml
 # shellcheck disable=SC2034
 usage_args="arg [<options>]"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 GERRIT_VERSION="3.1.3"

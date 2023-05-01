@@ -18,7 +18,7 @@ set -euo pipefail
 # gets absolute rather than relative path, for when we pushd later, otherwise relative $srcdir references will break
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/github.sh"
 
 # shellcheck disable=SC2034,SC2154

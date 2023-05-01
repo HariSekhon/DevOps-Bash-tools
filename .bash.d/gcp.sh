@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  shellcheck disable=SC1090
+#  shellcheck disable=SC1090,SC1091
 #
 #  Author: Hari Sekhon
 #  Date: 2019-11-14 22:22:35 +0000 (Thu, 14 Nov 2019)

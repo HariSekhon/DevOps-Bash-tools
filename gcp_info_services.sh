@@ -17,10 +17,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/gcp.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -57,7 +57,7 @@ EOF
 
 if ! type is_service_enabled &>/dev/null; then
     echo "getting list of all services & APIs (will use this to determine which services to list based on what is enabled)" >&2
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$srcdir/gcp_service_apis.sh" >/dev/null
     echo >&2
     echo >&2

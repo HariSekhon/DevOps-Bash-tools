@@ -21,7 +21,7 @@ fi
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(dirname "$0")"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/packages.sh"
 
 # shellcheck disable=SC2154

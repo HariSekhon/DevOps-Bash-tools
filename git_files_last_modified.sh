@@ -30,7 +30,7 @@ Requires git to be in the \$PATH
 # shellcheck disable=SC2034
 usage_args="[<files_or_dirs>]"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"

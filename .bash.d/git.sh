@@ -37,7 +37,7 @@ fi
 #fi
 
 if ! type basedir &>/dev/null; then
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$bash_tools/.bash.d/functions.sh"
 fi
 
@@ -205,7 +205,7 @@ install_git_completion(){
     fi
 }
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
 
 # usage: gi python,perl,go

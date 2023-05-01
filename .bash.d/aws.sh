@@ -211,7 +211,7 @@ aws_env(){
     )"
     if [ -f "$aws_token" ]; then
         echo "sourcing $aws_token"
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         source "$aws_token"
     fi
 }

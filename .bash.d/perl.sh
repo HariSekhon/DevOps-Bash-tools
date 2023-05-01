@@ -20,7 +20,7 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$bash_tools/.bash.d/os_detection.sh"
 
 if ! type add_PATHS &>/dev/null ; then

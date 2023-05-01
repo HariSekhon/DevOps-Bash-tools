@@ -24,10 +24,10 @@ set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "$0")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils-bourne.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/ci.sh"
 
 usage(){

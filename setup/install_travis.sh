@@ -20,10 +20,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/ci.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/os.sh"
 
 # fix version of Travis CI since it has a dependency on SSL and we need to detect and switch the SSL version for certain Mac environments, eg. Semaphore CI
