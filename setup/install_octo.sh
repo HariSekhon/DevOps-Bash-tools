@@ -37,17 +37,10 @@ version="${1:-9.0.0}"
 
 export PATH+=':'~/bin
 
-os="$(get_os)"
-if [ "$os" = darwin ]; then
-    os=osx
-fi
+export OS_DARWIN=osx
+export ARCH_X86_64=x64
 
-arch="$(get_arch)"
-if [ "$arch" = amd64 ]; then
-    arch=x64
-fi
-
-"$srcdir/../install_binary.sh" "https://download.octopusdeploy.com/octopus-tools/$version/OctopusTools.$version.$os-$arch.tar.gz" octo
+"$srcdir/../install_binary.sh" "https://download.octopusdeploy.com/octopus-tools/$version/OctopusTools.$version.{os}-{arch}.tar.gz" octo
 
 # mkdir -pv ~/.bash.autocomplete.d/
 #octo install-autocomplete --shell bash --dryRun > ~/.bash.autocomplete.d/octo.sh
