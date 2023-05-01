@@ -44,21 +44,15 @@ help_usage "$@"
 #version="${1:-2.4.0}"
 version="${1:-latest}"
 
-os="$(get_os)"
-arch="$(arch)"
 ext="tar.gz"
-if [ "$os" = darwin ]; then
-    os=macOS
+
+export ARCH_X86_64=amd64
+export OS_DARWIN=macOS
+
+if is_mac; then
     ext="zip"
-    #if [ "$arch" = arm64 ]; then
-    #    #echo "GitHub CLI doesn't support ARM architecture yet, skipping... use brew to install GitHub CLI"
-    #    #exit 0
-    #
-    #    # amd64 binaries work too
-    #    arch=amd64
-    #fi
 fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" cli/cli "gh_{version}_${os}_${arch}.$ext" "$version" "gh_{version}_${os}_${arch}/bin/gh"
+"$srcdir/../github_install_binary.sh" cli/cli "gh_{version}_{os}_{arch}.$ext" "$version" "gh_{version}_{os}_{arch}/bin/gh"
