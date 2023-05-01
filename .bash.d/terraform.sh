@@ -17,11 +17,11 @@
 #                               T e r r a f o r m
 # ============================================================================ #
 
-if ! [ -d ~/.tfenv/bin ] && is_mac; then
+if ! [ -e ~/.tfenv/bin ] && is_mac; then
     mkdir -p -v ~/.tfenv
     tfenv_bin="$(find /usr/local/Cellar/tfenv -type d -name bin 2>/dev/null | head -n1)"
     if [ -d "$tfenv_bin" ]; then
-        ln -sv -- "$tfenv_bin" ~/.tfenv/bin
+        ln -sfv -- "$tfenv_bin" ~/.tfenv/bin
     fi
 fi
 
