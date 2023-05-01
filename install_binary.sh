@@ -34,6 +34,8 @@ export OS_LINUX=Linux     # because some packages titlecase this
 
 export ARCH_X86_64=amd64  # because some packages use 'amd64' instead of 'x86_64'
 export ARCH_X86=x86       # because some packages use 'x86' instead of 'i386'
+export ARCH_ARM64=ARM64   # because some packages use uppercase 'ARM64' instead of 'arm64'
+export ARCH_ARM=ARM       # because some packages use uppercase 'ARM' instead of 'arm'
 export ARCH_OVERRIDE=all  # because some packages use a random universal arch rather than 'x86_64' or 'i386'
 
 If a zip or tarball is given, will be unpacked in /tmp and the binary path specified will be copied to bin
@@ -53,28 +55,6 @@ url="$1"
 
 os="$(get_os)"
 arch="$(get_arch)"
-
-if [ -n "${OS_DARWIN:-}" ]; then
-    if is_mac; then
-        os="$OS_DARWIN"
-    fi
-elif [ -n "${OS_LINUX:-}" ]; then
-    if is_linux; then
-        os="$OS_LINUX"
-    fi
-fi
-
-if [ -n "${ARCH_X86_64:-}" ]; then
-    if [ "$arch" = x86_64 ]; then
-        arch="$ARCH_X86_64"
-    fi
-elif [ -n "${ARCH_X86:-}" ]; then
-    if [ "$arch" = i386 ]; then
-        arch="$ARCH_X86"
-    fi
-elif [ -n "${ARCH_OVERRIDE:-}" ]; then
-    arch="$ARCH_OVERRIDE"
-fi
 
 url="${url//\{os\}/$os}"
 url="${url//\{arch\}/$arch}"
