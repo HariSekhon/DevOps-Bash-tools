@@ -292,6 +292,10 @@ kexec(){
     k exec -ti "$name" -- /bin/sh
 }
 
+klog(){
+    local name="$1"
+    k logs -f -n "$name" "deploy/$name"
+}
 klogs(){
     local lines
     local name="${1//\//-}"
