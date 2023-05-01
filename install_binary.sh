@@ -27,10 +27,14 @@ Downloads and installs a binary from a given URL and extraction path to /usr/loc
 
 The URL can be parameterized with {os} and {arch} tokens to be replaced by the current OS (linux/darwin) or Architecture (amd64/arm)
 
-Environment overrides for {os} and {arch} if their values are Darwin or x86_64 respectively:
+Environment overrides for {os} and {arch} if their values are Darwin, Linux, x86_64 or i386 respectively, in this order of priority:
 
-export OS_DARWIN=macOS
-export ARCH_86_64=amd64
+export OS_DARWIN=macOS    # because some packages use 'macOS' while others use 'darwin'
+export OS_LINUX=Linux     # because some packages titlecase this
+
+export ARCH_X86_64=amd64  # because some packages use 'amd64' instead of 'x86_64'
+export ARCH_X86=x86       # because some packages use 'x86' instead of 'i386'
+export ARCH_OVERRIDE=all  # because some packages use a random universal arch rather than 'x86_64' or 'i386'
 
 If a zip or tarball is given, will be unpacked in /tmp and the binary path specified will be copied to bin
 
@@ -54,11 +58,19 @@ if [ -n "${OS_DARWIN:-}" ]; then
     if is_mac; then
         os="$OS_DARWIN"
     fi
+elif [ -n "${OS_LINUX:-}" ]; then
+    if is_linux; then
+        os="$OS_LINUX"
+    fi
 fi
 
 if [ -n "${ARCH_X86_64:-}" ]; then
     if [ "$arch" = x86_64 ]; then
         arch="$ARCH_X86_64"
+    fi
+elif [ -n "${ARCH_X86:-}" ]; then
+    if [ "$arch" = i386 ]; then
+        arch="$ARCH_X86"
     fi
 elif [ -n "${ARCH_OVERRIDE:-}" ]; then
     arch="$ARCH_OVERRIDE"
