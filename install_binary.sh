@@ -60,6 +60,8 @@ if [ -n "${ARCH_X86_64:-}" ]; then
     if [ "$arch" = x86_64 ]; then
         arch="$ARCH_X86_64"
     fi
+elif [ -n "${ARCH_OVERRIDE:-}" ]; then
+    arch="$ARCH_OVERRIDE"
 fi
 
 url="${url//\{os\}/$os}"
