@@ -31,6 +31,12 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 export DOCKER_BUILDKIT=1
 
+# for new M1 Macs which otherwise fail to build with errors like this:
+#
+#   AWS CLI version: qemu-x86_64: Could not open '/lib64/ld-linux-x86-64.so.2': No such file or directory
+#
+export DOCKER_DEFAULT_PLATFORM=linux/amd64
+
 alias dh=hub-tool
 alias dc=docker-compose
 alias dps='docker ps'
