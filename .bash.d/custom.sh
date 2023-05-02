@@ -56,5 +56,6 @@ alias pyll="tll /pylib"
 alias tol="tll /tools"
 alias to2="tool2"
 
-alias d2="Dockerfiles2"
+# clashes with the D2 diagramming language
+#alias d2="Dockerfiles2"
 alias Dockerfilesl="tll /Dockerfiles"
