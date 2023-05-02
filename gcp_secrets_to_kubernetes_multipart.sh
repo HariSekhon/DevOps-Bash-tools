@@ -35,6 +35,8 @@ Loads to the specified explicit Kubernetes namespace since multiple GCP secrets 
 
 See Also:
 
+    External Secrets - https://github.com/HariSekhon/Kubernetes-configs
+
     gcp_secrets_to_kubernetes.sh - for linear 1-to-1 secret auto-loading
 
     kubernetes_get_secret_values.sh - for checking what was auto-loaded into a given kubernetes secret
