@@ -117,6 +117,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'airblade/vim-gitgutter'
+"Plugin 'fatih/vim-go'
 Plugin 'hashivim/vim-consul'
 "Plugin 'hashivim/vim-nomadproject'
 "Plugin 'hashivim/vim-ottoproject'
@@ -131,11 +132,11 @@ Plugin 'juliosueiras/vim-terraform-completion'
 " and braces that often break edits or require more keystrokes to remove than saved
 "Plugin 'jiangmiao/auto-pairs'
 Plugin 'preservim/nerdcommenter'
-Plugin 'tmux-plugins/vim-tmux'
+Plugin 'terrastruct/d2-vim'
 "Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-"Plugin 'fatih/vim-go'
+Plugin 'tmux-plugins/vim-tmux'
 
 " comment at start of line instead of code indentation level
 " doesn't work: https://github.com/preservim/nerdcommenter/issues/467
@@ -323,7 +324,8 @@ nmap          ;A :,!hexanonymize.py --case --hex-only<CR>
 nmap <silent> ;b :!git blame "%"<CR>
 "nmap <silent> ;c :call ToggleComments()<CR>
 nmap <silent> ;c :,!center.py<CR>
-nmap <silent> ;e :,!center.py -s<CR>
+nmap <silent> ;e :,!center.py --space<CR>
+nmap <silent> ;C :,!center.py --unspace<CR>
 " parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
 nmap <silent> ;E :call WriteRunLine()<CR> :!reset<CR><CR>
