@@ -95,6 +95,8 @@ else
                         ;;
                .envrc)  direnv allow .
                         ;;
+                 *.d2)  d2 --dark-theme 200 "$basename" "/tmp/$basename.svg" && open "/tmp/$basename.svg"
+                        ;;
                  *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
                         ;;
                  *.tf)  #terraform plan
