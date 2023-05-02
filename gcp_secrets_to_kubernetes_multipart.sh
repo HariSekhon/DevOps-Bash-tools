@@ -35,7 +35,13 @@ Loads to the specified explicit Kubernetes namespace since multiple GCP secrets 
 
 See Also:
 
-    External Secrets - https://github.com/HariSekhon/Kubernetes-configs
+    Alternatives:
+
+        Sealed Secrets   - https://github.com/bitnami-labs/sealed-secrets
+
+        External Secrets - https://external-secrets.io/
+
+            both of which are available in my Kubernetes repo - https://github.com/HariSekhon/Kubernetes-configs
 
     gcp_secrets_to_kubernetes.sh - for linear 1-to-1 secret auto-loading
 
