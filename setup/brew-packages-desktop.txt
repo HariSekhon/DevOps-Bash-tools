@@ -67,6 +67,7 @@ cowsay
 #coreutils # in brew-packages.txt
 csshx
 #ctags
+d2  # declarative diagram language
 diff-so-fancy
 diff-pdf
 direnv
