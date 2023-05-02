@@ -703,6 +703,17 @@ pushr(){
 
 alias pr=github_pull_request_create.sh
 
+alias mup=masterupdateprune
+masterupdateprune(){
+    local master_branch="master"
+    if git branch | sed 's/^..//' | grep -Fx main; then
+        master_branch="main"
+    fi
+    git checkout "$master_branch"
+    pull
+    prune
+}
+
 current_branch(){
     git rev-parse --abbrev-ref HEAD
 }
