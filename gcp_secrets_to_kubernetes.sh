@@ -43,6 +43,8 @@ any other naive kubernetes processes that might change the global kubectl contex
 
 See Also:
 
+    External Secrets - https://github.com/HariSekhon/Kubernetes-configs
+
     gke_kube_creds.sh - to create the Kubernetes cluster contexts in kubectl for your GKE clusters - you need to be using the correct kubectl context before running this script
 
     gcp_secrets_to_kubernetes_multipart.sh - for creating more complex multi-key-value secrets
