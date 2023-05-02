@@ -93,6 +93,8 @@ else
                         ;;
               #.envrc)  cd "$dirname" && direnv allow .
               #         ;;
+                 *.d2)  d2 fmt "$basename"
+                        ;;
                  *.go)  go fmt -w "$basename"
                         ;;
                  *.tf)  terraform fmt -diff
