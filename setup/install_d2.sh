@@ -25,6 +25,8 @@ usage_description="
 Installs the D2 diagram scripting language
 
     https://d2lang.com/
+
+    https://github.com/terrastruct/d2/blob/master/docs/INSTALL.md
 "
 
 # used by usage() in lib/utils.sh
@@ -33,4 +35,12 @@ usage_args=""
 
 help_usage "$@"
 
+# This shows that on Mac it'll simply install d2 via homebrew
+#
+#   curl -fsSL https://d2lang.com/install.sh | sh -s -- --dry-run
+
 curl -fsSL https://d2lang.com/install.sh | sh -s --
+
+# can also install via go but won't get the man page
+#
+# go install oss.terrastruct.com/d2@latest
