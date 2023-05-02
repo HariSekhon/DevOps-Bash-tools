@@ -43,7 +43,13 @@ any other naive kubernetes processes that might change the global kubectl contex
 
 See Also:
 
-    External Secrets - https://github.com/HariSekhon/Kubernetes-configs
+    Alternatives:
+
+        Sealed Secrets   - https://github.com/bitnami-labs/sealed-secrets
+
+        External Secrets - https://external-secrets.io/
+
+            both of which are available in my Kubernetes repo - https://github.com/HariSekhon/Kubernetes-configs
 
     gke_kube_creds.sh - to create the Kubernetes cluster contexts in kubectl for your GKE clusters - you need to be using the correct kubectl context before running this script
 
