@@ -27,6 +27,8 @@ Installs the D2 diagram scripting language
     https://d2lang.com/
 
     https://github.com/terrastruct/d2/blob/master/docs/INSTALL.md
+
+    https://github.com/terrastruct/tala#installation
 "
 
 # used by usage() in lib/utils.sh
@@ -40,6 +42,9 @@ help_usage "$@"
 #   curl -fsSL https://d2lang.com/install.sh | sh -s -- --dry-run
 
 curl -fsSL https://d2lang.com/install.sh | sh -s --
+
+# Install proprietary Tala layout engine too
+curl -fsSL https://d2lang.com/install.sh | sh -s -- --tala
 
 # can also install via go but won't get the man page
 #
