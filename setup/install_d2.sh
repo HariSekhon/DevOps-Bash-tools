@@ -43,8 +43,16 @@ help_usage "$@"
 
 curl -fsSL https://d2lang.com/install.sh | sh -s --
 
+# ==========================================
 # Install proprietary Tala layout engine too
-curl -fsSL https://d2lang.com/install.sh | sh -s -- --tala
+#curl -fsSL https://d2lang.com/install.sh | sh -s -- --tala
+#
+# belay that order, ends up with horrible:
+#
+#   WARNING: THIS COPY OF TALA IS UNLICENSED AND IS FOR EVALUATION PURPOSES ONLY
+#
+# for every run of d2 even when not using the tala layout
+# ==========================================
 
 # can also install via go but won't get the man page
 #
