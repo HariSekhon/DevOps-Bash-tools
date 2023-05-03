@@ -35,4 +35,5 @@ golangci/tap            golangci-lint
 
 #tektoncd/tools         tektoncd-cli
 
-terrastruct/tap         tala
+# don't install this, see install_d2.sh for details why
+#terrastruct/tap         tala
