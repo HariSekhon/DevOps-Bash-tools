@@ -360,7 +360,9 @@ st(){
             echo "> git status $target $*" >&2
             #git -c color.status=always status -sb . "$@"
             git -c color.status=always status . "$@"
+            echo
             echo "Revision: $(git rev-parse HEAD)"
+            echo
         else
             pushd "$target_dirname" >/dev/null || { echo "Error: failed to pushed to '$target_dirname'"; return 1; }
             echo "> git status $target $*" >&2
