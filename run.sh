@@ -75,6 +75,9 @@ docker_compose_up(){
 
 if [ -n "$run_cmd" ]; then
     eval "$run_cmd"
+# fails to do the open for d2 diagrams
+#elif test -x "$basename"; then
+#    ./"$basename"
 else
     case "$basename" in
              Makefile)  make
@@ -95,7 +98,14 @@ else
                         ;;
                .envrc)  direnv allow .
                         ;;
-                 *.d2)  d2 --dark-theme 200 "$basename" "/tmp/$basename.svg" && open "/tmp/$basename.svg"
+                 *.d2)  image="${basename%.d2}.svg"
+                        if test -x "$basename"; then
+                            # use its shebang line to get the settings like --theme or --layout elk eg. for github_actions_cicd.d2 in https://github.com/HariSekhon/Diagrams-as-Code
+                            ./"$basename"
+                            open "$image"
+                        else
+                            d2 --dark-theme 200 "$basename" "/tmp/$image" && open "/tmp/$image"
+                        fi
                         ;;
                  *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
                         ;;
