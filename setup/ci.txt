@@ -38,6 +38,7 @@ buildspec.yml
 cloudbuild.yaml
 codefresh.yml
 codeship.yml
+kics.config
 shippable.yml
 wercker.yml
 setup/gocd_config_repo.json
