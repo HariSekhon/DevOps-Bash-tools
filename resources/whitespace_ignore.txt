@@ -13,6 +13,7 @@
 \.bz2$
 \.class$
 \.plist$
+\.svg$
 \.png$
 \.jpg$
 \.jpeg$
