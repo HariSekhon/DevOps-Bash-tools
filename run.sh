@@ -102,10 +102,10 @@ else
                         if test -x "$basename"; then
                             # use its shebang line to get the settings like --theme or --layout elk eg. for github_actions_cicd.d2 in https://github.com/HariSekhon/Diagrams-as-Code
                             ./"$basename"
-                            open "$image"
                         else
-                            d2 --dark-theme 200 "$basename" "/tmp/$image" && open "/tmp/$image"
+                            d2 --dark-theme 200 "$basename" "$image"
                         fi
+                        open "$image"
                         ;;
                  *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
                         ;;
