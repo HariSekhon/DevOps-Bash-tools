@@ -54,13 +54,13 @@ shift || :
 final_exit_code=0
 
 while read -r kustomization; do
-	dir="$(dirname "$kustomization")"
+    dir="$(dirname "$kustomization")"
     echo "Datree Kustomization Test: $kustomization"
-	set +e
-	datree kustomize test "$dir" "$@"
-	exitcode=$?
-	set -e
-	if [ "$exitcode" -gt "$final_exit_code" ]; then
+    set +e
+    datree kustomize test "$dir" "$@"
+    exitcode=$?
+    set -e
+    if [ "$exitcode" -gt "$final_exit_code" ]; then
         final_exit_code="$exitcode"
     fi
     # Datree outputs enough space at the end of each run already
