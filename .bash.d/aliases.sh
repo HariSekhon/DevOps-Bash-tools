@@ -179,6 +179,8 @@ alias bitb='cd $bitbucket'
 # used to gitbrowse to bitbucket now in git.sh
 #alias bb=bitbucket
 
+alias diag=diagrams
+
 aliasdir(){
     local directory="$1"
     local suffix="${2:-}"
