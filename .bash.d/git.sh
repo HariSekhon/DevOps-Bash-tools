@@ -159,9 +159,9 @@ git_root(){
 }
 
 gitgc(){
-    cd "$(git_root)"
+    cd "$(git_root)" || :
     if ! [ -d .git ]; then
-        echo "not at top of a git repo, not .git/ directory found"
+        echo "not in a git repo, no .git/ directory and git root dir not found"
         return 1
     fi
     du -sh .git
