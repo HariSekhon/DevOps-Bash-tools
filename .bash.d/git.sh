@@ -168,6 +168,12 @@ gitgc(){
     du -sh .git
 }
 
+git_default_branch(){
+    git remote show origin |
+    #awk '/^[[:space:]]*HEAD branch:[[:space:]]/{print $3}'
+    sed -n '/HEAD branch/s/.*: //p'
+}
+
 git_url_base(){
     local filter="${1:-.*}"
     git remote -v |
@@ -196,16 +202,37 @@ gitbrowse(){
         echo "git remote url not found for filter '$filter' or 'origin'"
         return 1
     fi
-    if [[ "$url_base" =~ dev.azure.com ]]; then
-        url_base="${url_base%/*}/_git/${url_base##*/}"
-    fi
     if [[ "$url_base" =~ github.com ]]; then
         if [ -n "$path" ]; then
             path="blob/master/$path"
+        else
             path+="#readme"
         fi
+    else
+        if [ -z "$path" ]; then
+            local default_branch
+            default_branch="$(git_default_branch)"
+        fi
+        if [[ "$url_base" =~ gitlab.com ]]; then
+            if [ -z "$path" ]; then
+                url_base+="/-/blob/$default_branch/README.md"
+            fi
+        elif [[ "$url_base" =~ dev.azure.com ]]; then
+            url_base="${url_base%/*}/_git/${url_base##*/}"
+            if [ -z "$path" ]; then
+                url_base+="?path=/README.md&_a=preview"
+            fi
+        elif [[ "$url_base" =~ bitbucket.org ]]; then
+            if [ -z "$path" ]; then
+                url_base+="/src/$default_branch/README.md"
+            fi
+        fi
     fi
-    browser "$url_base/$path"
+    url="$url_base"
+    if [ -n "$path" ]; then
+        url+="/$path"
+    fi
+    browser "$url"
 }
 
 install_git_completion(){
