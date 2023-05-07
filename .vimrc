@@ -380,7 +380,8 @@ nmap <silent> ;U :.w !urlopen.sh<CR><CR>
 " breaks ;; nmap
 "nmap          ;\ :source ~/.vimrc<CR>
 "nmap          ;/ :source ~/.vimrc<CR>
-nmap          ;v :source ~/.vimrc<CR>
+"nmap          ;v :source ~/.vimrc<CR>
+nmap          ;v :call SourceVimrc()<CR>
 nmap          ;V :call WriteRunVerbose()<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
@@ -411,6 +412,15 @@ endif
 " ============================================================================ "
 "                               F u n c t i o n s
 " ============================================================================ "
+
+function! SourceVimrc()
+    :source ~/.vimrc
+    let vim_tags = system("grep vim: " + expand("%") + " | sed 's/\#//; s/vim:/set /; s/:/ /g'")
+    echom &vim_tags
+    "execute "normal!" . &vim_tags
+    ":! grep vim: expand("%") | sed 's/\#//'
+    :set ts sts sw et filetype
+endfunction
 
 function! ToggleSyntax()
     if exists("g:syntax_on")
