@@ -159,6 +159,7 @@ git_root(){
 }
 
 gitgc(){
+    cd "$(git_root)"
     if ! [ -d .git ]; then
         echo "not at top of a git repo, not .git/ directory found"
         return 1
