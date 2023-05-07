@@ -45,6 +45,7 @@ if type -P gh &>/dev/null; then
     autocomplete gh -s
 fi
 
+# shellcheck disable=SC1091
 type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 add_PATH ~/bin/codeql
@@ -167,33 +168,41 @@ gitgc(){
     du -sh .git
 }
 
-gitbrowse(){
+git_url_base(){
     local filter="${1:-.*}"
+    git remote -v |
+    { grep "$filter" || : ; }|
+    awk '/git@|https:/{print $2}' |
+    head -n1 |
+    sed 's|^ssh://||;
+         s|^https://.*@||;
+         s|^https://||;
+         s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
+         s|^git@||;
+         s|^|https://|;
+         s/\.git$//;' |
+    perl -pe 's/:(?!\/\/)/\//'
+}
+
+gitbrowse(){
+    local filter="${1:-origin}"
     local path="${2:-}"
     local url_base
-    url_base="$(git remote -v |
-                grep "$filter" |
-                grep origin |
-                awk '/git@|https:/{print $2}' |
-                head -n1 |
-                sed 's|^ssh://||;
-                     s|^https://.*@||;
-                     s|^https://||;
-                     s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
-                     s|^git@||;
-                     s|^|https://|;
-                     s/\.git$//;' |
-                perl -pe 's/:(?!\/\/)/\//')"
-    if [[ "$url_base" =~ dev.azure.com ]]; then
-        url_base="${url_base%/*}/_git/${url_base##*/}"
+    url_base="$(git_url_base "$filter")"
+    if [ -z "$url_base" ] && [ "$filter" != origin ]; then
+        url_base="$(git_url_base "origin")"
     fi
     if [ -z "$url_base" ]; then
-        echo "git remote url not found for $filter"
+        echo "git remote url not found for filter '$filter' or 'origin'"
         return 1
+    fi
+    if [[ "$url_base" =~ dev.azure.com ]]; then
+        url_base="${url_base%/*}/_git/${url_base##*/}"
     fi
     if [[ "$url_base" =~ github.com ]]; then
         if [ -n "$path" ]; then
             path="blob/master/$path"
+            path+="#readme"
         fi
     fi
     browser "$url_base/$path"
@@ -959,7 +968,7 @@ git_rm_untracked(){
 foreachrepo(){
     local repolist="${REPOLIST:-$bash_tools/setup/repos.txt}"
     while read -r repo; do
-        eval "$@"
+        "$@"
     done < <(sed 's/#.*$//; s/.*://; /^[[:space:]]*$/d' "$repolist")
 }
 
