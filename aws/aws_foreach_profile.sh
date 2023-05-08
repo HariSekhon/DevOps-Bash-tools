@@ -52,17 +52,15 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 aws configure list-profiles --output text |
 while read -r profile; do
     echo "# ============================================================================ #" >&2
     echo "# AWS profile = $profile" >&2
     echo "# ============================================================================ #" >&2
     export AWS_PROFILE="$profile"
-    cmd="$cmd_template"
-    cmd="${cmd//\{profile\}/$profile}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{profile\}/$profile}")
+    "${cmd[@]}"
     echo >&2
     echo >&2
 done
