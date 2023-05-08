@@ -68,7 +68,7 @@ while read -r project_id project_name; do
     fi
     project_name="${project_name:-$project_id}"
     timestamp "Exporting project '$project_name' config to '$filename'"
-    #project_name="$("$srcdir/urlencode.sh" <<< "$project_name")"
+    #project_name="$("$srcdir/../bin/urlencode.sh" <<< "$project_name")"
     #"$srcdir/teamcity_api.sh" "/projects/$project_name" |
     "$srcdir/teamcity_api.sh" "/projects/$project_id" |
     # using jq just for formatting

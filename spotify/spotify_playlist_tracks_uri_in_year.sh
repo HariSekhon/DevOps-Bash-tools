@@ -98,10 +98,10 @@ while not_null "$url_path"; do
         # Spotify API can handle single quotes (strips them out) but breaks if you URL encode them! So remove them rather than URL encode
         artist="${artist//\'/}"
         # to be able to query artists with unicode characters eg. Blue Öyster Cult
-        artist="$("$srcdir/urlencode.sh" <<< "$artist")"
+        artist="$("$srcdir/../bin/urlencode.sh" <<< "$artist")"
         # strip single quotes as raw single quotes qork but url encoding single quotes breaks the API
         track="${track//\'/}"
-        track="$("$srcdir/../spotify-tools/normalize_tracknames.pl" <<< "$track" | "$srcdir/urlencode.sh")"
+        track="$("$srcdir/../spotify-tools/normalize_tracknames.pl" <<< "$track" | "$srcdir/../bin/urlencode.sh")"
         # XXX: this track isn't found with but is if you leave off the artist: and track: prefixes then you find the other versions of it which are found in the API - this is a better trade off than finding nothing
         #
         #      artist:Nadia track:Call My Name

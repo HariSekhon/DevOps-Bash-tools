@@ -78,9 +78,9 @@ set_project_description(){
     timestamp "Setting GitLab project '$project' description to '$description'"
 
     # url-encode project name otherwise GitLab API will fail to find project and return 404
-    project="$("$srcdir/urlencode.sh" <<< "$project")"
+    project="$("$srcdir/../bin/urlencode.sh" <<< "$project")"
     # don't URL encode this now that it is inside JSON
-    #description="$("$srcdir/urlencode.sh" <<< "$description")"
+    #description="$("$srcdir/../bin/urlencode.sh" <<< "$description")"
     # just strip quotes to protect the JSON
     description="${description//\"/}"
 

@@ -143,7 +143,7 @@ mirror_repo(){
         if [ -n "${AWS_GIT_USER:-}" ] &&
            [ -n "${AWS_GIT_PASSWORD:-}" ]; then
             timestamp "Using AWS git user and url encoded password"
-            AWS_GIT_PASSWORD_URLENCODED="$("$srcdir/urlencode.sh" <<< "$AWS_GIT_PASSWORD")"
+            AWS_GIT_PASSWORD_URLENCODED="$("$srcdir/../bin/urlencode.sh" <<< "$AWS_GIT_PASSWORD")"
             git remote add aws "https://$AWS_GIT_USER:$AWS_GIT_PASSWORD_URLENCODED@git-codecommit.$AWS_DEFAULT_REGION.amazonaws.com/v1/repos/$repo"
         else
             timestamp "Using AWS credentials via git-remote-codecommit"

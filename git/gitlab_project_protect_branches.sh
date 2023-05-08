@@ -74,7 +74,7 @@ fi
 
 # url-encode project name otherwise GitLab API will fail to find project and return 404
 project_name="$project"
-project="$("$srcdir/urlencode.sh" <<< "$project")"
+project="$("$srcdir/../bin/urlencode.sh" <<< "$project")"
 
 allow_force_push=false
 code_owner_approval_required=true

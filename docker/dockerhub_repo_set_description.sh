@@ -60,7 +60,7 @@ fi
 timestamp "Setting DockerHub repo '$owner_repo' description to '$description'"
 
 # don't URL encode this as it's inside JSON
-#description="$("$srcdir/urlencode.sh" <<< "$description")"
+#description="$("$srcdir/../bin/urlencode.sh" <<< "$description")"
 # just strip quotes to protect the JSON
 description="${description//\"/}"
 

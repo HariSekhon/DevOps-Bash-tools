@@ -115,7 +115,7 @@ mirror_repo(){
     local repo="$1"
     # GitLab doesn't allow repo name like .github, only alnum, dashes and underscores, and not starting with unusual characters either
     gitlab_repo="$(sed 's/[^[:alnum:]_-]/_/g; s/^[^[:alnum:]]*//' <<< "$repo")"
-    gitlab_owner_repo="$("$srcdir/urlencode.sh" <<< "$gitlab_owner/$gitlab_repo")"
+    gitlab_owner_repo="$("$srcdir/../bin/urlencode.sh" <<< "$gitlab_owner/$gitlab_repo")"
 
     timestamp "Checking GitLab repo '$gitlab_owner/$gitlab_repo' exists"
     if ! "$srcdir/gitlab_api.sh" "/projects/$gitlab_owner_repo" >/dev/null; then

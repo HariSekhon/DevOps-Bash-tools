@@ -251,7 +251,7 @@ if is_owner_harisekhon; then
 [![pages-build-deployment](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/HariSekhon/CI-CD/actions/workflows/pages/pages-build-deployment)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/853ef60c-c01b-4b83-99ba-8fda541f850f/deploy-status)](https://app.netlify.com/sites/harisekhon/deploys)
 ![Last Generated](https://img.shields.io/badge/Last%20Generated-$(date +%F |
-                                                                  # "$srcdir/urlencode.sh" |
+                                                                  # "$srcdir/../bin/urlencode.sh" |
                                                                   # need to escape dashes to avoid shields.io interpreting them as field separators
                                                                   sed 's/-/--/g')-yellowgreen?logo=github)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/CI-CD?logo=github)](https://github.com/HariSekhon/CI-CD/commits/master)

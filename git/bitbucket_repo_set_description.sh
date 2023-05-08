@@ -81,7 +81,7 @@ set_repo_description(){
 
     timestamp "Setting BitBucket repo '$repo' description to '$description'"
 
-    #description="$("$srcdir/urlencode.sh" <<< "$description")"
+    #description="$("$srcdir/../bin/urlencode.sh" <<< "$description")"
 
     "$srcdir/bitbucket_api.sh" "/repositories/$repo" -X PUT -H 'Content-Type: application/json' --data "{ \"description\": \"$description\" }" >/dev/null
 }
