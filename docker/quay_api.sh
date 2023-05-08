@@ -70,4 +70,4 @@ shift || :
 url_path="${url_path//https:\/\/quay.io\/api\/v1/}"
 url_path="${url_path##/}"
 
-"$srcdir/curl_auth.sh" -L "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" -L "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
