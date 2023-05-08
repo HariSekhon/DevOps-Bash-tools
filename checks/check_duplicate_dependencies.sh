@@ -30,7 +30,7 @@ pip_requirements_files="$(find . -maxdepth 2 -name requirements.txt)"
 if [ -n "$pip_requirements_files" ]; then
     echo "Pip PyPI requirements files found: "$pip_requirements_files
     echo "checking for duplicates"
-    "$srcdir/python/python_find_duplicate_pip_requirements.sh" $pip_requirements_files
+    "$srcdir/../python/python_find_duplicate_pip_requirements.sh" $pip_requirements_files
     echo
 fi
 
@@ -39,7 +39,7 @@ cpan_requirements_files="$(find . -maxdepth 3 -name 'cpan-requirements*.txt')"
 if [ -n "$cpan_requirements_files" ]; then
     echo "Perl CPAN requirements files found: "$cpan_requirements_files
     echo "checking for duplicates"
-    "$srcdir/perl/perl_find_duplicate_cpan_requirements.sh" $cpan_requirements_files
+    "$srcdir/../perl/perl_find_duplicate_cpan_requirements.sh" $cpan_requirements_files
     echo
 fi
 
@@ -51,7 +51,7 @@ fi
 #÷        if [ -n "$requirements_files" ]; then
 #÷            echo "$pkg requirements files found: "$requirements_files
 #÷            echo "checking for duplicates"
-#÷            "$srcdir/bin/find_duplicate_lines.sh" $requirements_files
+#÷            "$srcdir/../bin/find_duplicate_lines.sh" $requirements_files
 #÷            echo
 #÷        fi
 #÷    done
