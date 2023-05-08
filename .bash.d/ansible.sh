@@ -51,4 +51,4 @@ alias a=ansible
 alias ansible="ansible $ansible_opts"
 alias ansible_playbook="ansible-playbook $ansible_opts"
 #alias ansible_playbook_vault="ansible-playbook $ansible_opts --ask-vault-pass"
-alias ansible_playbook_vault="ansible-playbook $ansible_opts --vault-id '$bash_tools/vault_pass.sh'"
+alias ansible_playbook_vault="ansible-playbook $ansible_opts --vault-id '$bash_tools/bin/vault_pass.sh'"
