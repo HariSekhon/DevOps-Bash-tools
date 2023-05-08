@@ -53,8 +53,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 user="${AZURE_DEVOPS_USER:-}"
 user_or_org="${AZURE_DEVOPS_ORGANIZATION:-$user}"
 
@@ -71,13 +69,13 @@ while read -r name; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
-    cmd="$cmd_template"
-    cmd="${cmd//\{username\}/${user:-}}"
-    cmd="${cmd//\{user\}/${user:-}}"
-    cmd="${cmd//\{organization\}/${AZURE_DEVOPS_ORGANIZATION:-}}"
-    cmd="${cmd//\{org\}/${AZURE_DEVOPS_ORGANIZATION:-}}"
-    cmd="${cmd//\{project\}/${AZURE_DEVOPS_PROJECT:-}}"
-    cmd="${cmd//\{repo\}/$repo}"
-    cmd="${cmd//\{name\}/$name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{username\}/${user:-}}")
+    cmd=("${cmd[@]//\{user\}/${user:-}}")
+    cmd=("${cmd[@]//\{organization\}/${AZURE_DEVOPS_ORGANIZATION:-}}")
+    cmd=("${cmd[@]//\{org\}/${AZURE_DEVOPS_ORGANIZATION:-}}")
+    cmd=("${cmd[@]//\{project\}/${AZURE_DEVOPS_PROJECT:-}}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    cmd=("${cmd[@]//\{name\}/$name}")
+    "${cmd[@]}"
 done
