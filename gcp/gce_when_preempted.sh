@@ -55,7 +55,7 @@ fi
 
 if output="$(curl -sS -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/preempted?wait_for_change=true")"; then
     if grep -q TRUE <<< "$output"; then
-        eval "$@"
+        "$@"
     else
         echo "not preempted, skipping commands"
         exit 1
