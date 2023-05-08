@@ -33,11 +33,11 @@ echo
 echo "Generating STATUS.md"
 echo
 {
-"$srcdir/github_generate_status_page.sh"
+"$srcdir/../git/github_generate_status_page.sh"
 echo
 echo "---"
 echo
-#"$srcdir/docker_generate_status_page.sh"
+#"$srcdir/../docker/docker_generate_status_page.sh"
 echo
 echo https://git.io/hari-ci
 } | tee "$file"
@@ -46,6 +46,6 @@ echo
 echo
 echo "Generating STARCHARTS.md"
 echo
-"$srcdir/github_generate_starcharts.md.sh"
+"$srcdir/../git/github_generate_starcharts.md.sh"
 
 trap '' exit
