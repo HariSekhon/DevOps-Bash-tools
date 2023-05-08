@@ -66,7 +66,7 @@
 #
 # Since this can easily take an hour or two per year of logs to download, you may want to add progress dots like so:
 #
-#   ./cloudera_navigator_audit_logs.sh service==impala -k | ./progress_dots.sh > navigator_audit_log_impala.csv
+#   ./cloudera_navigator_audit_logs.sh service==impala -k | ../bin/progress_dots.sh > navigator_audit_log_impala.csv
 #
 #
 # or if you want full curl interactive progress on stderr:
