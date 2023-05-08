@@ -46,8 +46,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 "$srcdir/cloudflare_api.sh" accounts |
 jq -r '.result[] | [.id, .name] | @tsv' |
 sed "s/'/\\\\'/g" |
@@ -57,10 +55,10 @@ while read -r account_id account_name; do
         echo "# $account_id - $account_name" >&2
         echo "# ============================================================================ #" >&2
     fi
-    cmd="$cmd_template"
-    cmd="${cmd//\{account_id\}/$account_id}"
-    cmd="${cmd//\{account_name\}/$account_name}"
-    cmd="${cmd//\{id\}/$account_id}"
-    cmd="${cmd//\{name\}/$account_name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{account_id\}/$account_id}")
+    cmd=("${cmd[@]//\{account_name\}/$account_name}")
+    cmd=("${cmd[@]//\{id\}/$account_id}")
+    cmd=("${cmd[@]//\{name\}/$account_name}")
+    "${cmd[@]}"
 done
