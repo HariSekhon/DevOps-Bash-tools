@@ -55,11 +55,13 @@ fi
 for filename in $conf_files; do
     if [[ "$filename" =~ / ]]; then
         dirname="${filename%/*}"
+        dirname2="${dirname#configs}"
+        dirname2="${dirname2#/}"
         filename="${filename##*/}"
-        mkdir -pv ~/"$dirname"
+        mkdir -pv ~/"$dirname2"
         # want opt expansion
         # shellcheck disable=SC2086
-        ln -sv $opts -- "$PWD/$dirname/$filename" ~/"$dirname"/ || :
+        ln -sv $opts -- "$PWD/$dirname/$filename" ~/"$dirname2"/ || :
     else
         # want opt expansion
         # shellcheck disable=SC2086
