@@ -338,6 +338,9 @@ isGit(){
     fi
 }
 
+git_revision(){
+    echo "Revision: $(git rev-parse HEAD)"
+}
 
 st(){
   # shellcheck disable=SC2086
@@ -398,7 +401,7 @@ st(){
             #git -c color.status=always status -sb . "$@"
             git -c color.status=always status . "$@"
             echo
-            echo "Revision: $(git rev-parse HEAD)"
+            git_revision
             echo
         else
             pushd "$target_dirname" >/dev/null || { echo "Error: failed to pushed to '$target_dirname'"; return 1; }
@@ -751,6 +754,8 @@ masterupdateprune(){
     git checkout "$master_branch"
     pull
     prune
+    git_revision
+    echo
 }
 
 current_branch(){
