@@ -29,8 +29,8 @@ configs/.customize_environment
 configs/.editorconfig
 configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
-git/.gitconfig
-configs/.gitignore
+.gitconfig
+.gitignore
 configs/.grype.yaml
 configs/.inputrc
 configs/.mdlrc
