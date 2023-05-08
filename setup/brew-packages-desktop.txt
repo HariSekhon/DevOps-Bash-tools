@@ -233,7 +233,8 @@ unix2dos
 utimer
 vagrant-completion
 vault  # Hashicorp
-#vim  # unneeded as vim is already installed - pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+# old Mac vim not
+vim  # Mac's vim not syntax highlighting Bash properly on macOS Big Sur 11.7 https://github.com/vim/vim/issues/11937 - watch brew version pulls in a lot of dependencies though including Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
 #vscode
 watch
 #wget  # in brew-packages.txt
