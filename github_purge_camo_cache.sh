@@ -25,18 +25,29 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Purges all GitHub camo caches for things like CI/CD badges
 
+If no owner/repo arg is given, attempts to determine the GitHub repo from the current git repo's origin
+
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-anonymized-urls#removing-an-image-from-camos-cache
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<owner>/<repo>"
+usage_args="[<owner>/<repo>]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+#min_args 1 "$@"
+max_args 1 "$@"
 
-owner_repo="$1"
+if [ $# -gt 0 ]; then
+    owner_repo="$1"
+else
+    if is_github_origin; then
+        owner_repo="$(github_origin_owner_repo)"
+    else
+        usage "no <owner>/<repo> arg given and current directory doesn't appear to be a GitHub clone to auto-determine it"
+    fi
+fi
 
 if ! is_github_owner_repo "$owner_repo"; then
 	usage "Invalid owner/repo given: $owner_repo"
