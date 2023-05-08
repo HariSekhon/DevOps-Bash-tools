@@ -28,6 +28,8 @@ echo "removing symlinks to dot files in \$HOME directory: $HOME"
 echo
 
 for filename in $conf_files .gitignore_global; do
+    filename="${filename#configs}"
+    filename="${filename#/}"
     if [ -L ~/"$filename" ]; then
         rm -fv -- ~/"$filename" || :
     fi
