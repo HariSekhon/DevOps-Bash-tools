@@ -197,7 +197,7 @@ if [[ "$url_path" =~ [\{:]?user(_?id)?\}? ]]; then
         url_path="${url_path//\{userid\}/$TERRAFORM_USER_ID}"
         url_path="${url_path//\{user_id\}/$TERRAFORM_USER_ID}"
     else
-        user_id="$("$srcdir/curl_auth.sh" "${CURL_OPTS[@]}" "$url_base/account/details" | jq -r .data.id)"
+        user_id="$("$srcdir/../bin/curl_auth.sh" "${CURL_OPTS[@]}" "$url_base/account/details" | jq -r .data.id)"
         url_path="${url_path//:user_id/$user_id}"
         url_path="${url_path//:userid/$user_id}"
         url_path="${url_path//:user/$user_id}"
@@ -207,4 +207,4 @@ if [[ "$url_path" =~ [\{:]?user(_?id)?\}? ]]; then
     fi
 fi
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"

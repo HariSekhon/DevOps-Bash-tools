@@ -67,4 +67,4 @@ shift || :
 # https://docs.cloudera.com/documentation/enterprise/6/6.3/topics/cn_navigator_api_overview.html#api-version-compatility
 api_version="${CLOUDERA_API_VERSION:-7}"
 
-"$srcdir/curl_auth.sh" "$CLOUDERA_MANAGER/api/v${api_version}${url_path}" -sS --fail --connect-timeout 5 "$@"
+"$srcdir/../bin/curl_auth.sh" "$CLOUDERA_MANAGER/api/v${api_version}${url_path}" -sS --fail --connect-timeout 5 "$@"

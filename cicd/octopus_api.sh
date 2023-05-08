@@ -92,5 +92,5 @@ export CURL_AUTH_HEADER="X-Octopus-ApiKey:"
 
 url_base="$OCTOPUS_URL/api"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
 jq_debug_pipe_dump

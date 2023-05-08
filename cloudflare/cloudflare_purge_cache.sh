@@ -54,7 +54,7 @@ export TOKEN="$CLOUDFLARE_TOKEN"
         #-H "X-Auth-Key: $CLOUDFLARE_TOKEN" \
 
 output="$(
-    "$srcdir/curl_auth.sh" "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache" \
+    "$srcdir/../bin/curl_auth.sh" "https://api.cloudflare.com/client/v4/zones/$zone_id/purge_cache" \
         -sS -X POST \
         -H "Content-Type: application/json" \
         -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \

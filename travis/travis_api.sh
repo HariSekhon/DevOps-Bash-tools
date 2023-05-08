@@ -135,4 +135,4 @@ url_path="${url_path##/}"
 
 export CURL_AUTH_HEADER="Authorization: token"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" -H 'Travis-API-Version: 3' "${CURL_OPTS[@]}" "$@"

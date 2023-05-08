@@ -82,7 +82,7 @@ teamcity_curl_auth(){
         # XXX: superuser token can only be used with blank user which cannot be used with curl_auth.sh
         curl -u ":$TEAMCITY_SUPERUSER_TOKEN" "$url_base/$url_path" "${curl_opts[@]}" "$@"
     else
-        "$srcdir/curl_auth.sh" "$url_base/$url_path" "${curl_opts[@]}" "$@"
+        "$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${curl_opts[@]}" "$@"
     fi
 }
 

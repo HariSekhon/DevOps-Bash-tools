@@ -105,7 +105,7 @@ url_base+="/go/api"
 
 if [ -n "${GOCD_TOKEN:-}" ]; then
     export TOKEN="$GOCD_TOKEN"
-    "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+    "$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 else
     curl "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 fi

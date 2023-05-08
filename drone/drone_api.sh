@@ -90,4 +90,4 @@ export TOKEN="$DRONE_TOKEN"
 # this works
 #curl "${CURL_OPTS[@]}" -H @<(cat <<< "Authorization: Bearer $DRONE_TOKEN") "$url_base/$url_path" "$@"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"

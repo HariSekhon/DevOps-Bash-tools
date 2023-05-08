@@ -44,4 +44,4 @@ export TOKEN="$SHIPPABLE_TOKEN"
 # non-standard auth header
 export CURL_AUTH_HEADER="Authorization: apiToken"
 
-"$srcdir/curl_auth.sh" -sS --fail "https://api.shippable.com/$url_path" "$@"
+"$srcdir/../bin/curl_auth.sh" -sS --fail "https://api.shippable.com/$url_path" "$@"

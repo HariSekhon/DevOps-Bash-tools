@@ -89,8 +89,8 @@ if [ -n "${JENKINS_TOKEN:-}" ]; then
     export PASSWORD="$JENKINS_TOKEN"
 else
     export PASSWORD="${JENKINS_PASSWORD:-${JENKINS_TOKEN:-}}"
-    crumb="$("$srcdir/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
+    crumb="$("$srcdir/../bin/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
     CURL_OPTS+=(-H "Jenkins-Crumb: $crumb")
 fi
 
-"$srcdir/curl_auth.sh" "$JENKINS_URL/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@"
+"$srcdir/../bin/curl_auth.sh" "$JENKINS_URL/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@"

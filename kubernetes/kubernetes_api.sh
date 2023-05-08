@@ -51,5 +51,5 @@ shift || :
 export TOKEN="$token"
 
 # XXX: have to use -k to not verify the certificate here because often it is self-signed
-#"$srcdir/curl_auth.sh" -k "$api_server$path" "$@"
-"$srcdir/curl_auth.sh" "$api_server$path" "$@"
+#"$srcdir/../bin/curl_auth.sh" -k "$api_server$path" "$@"
+"$srcdir/../bin/curl_auth.sh" "$api_server$path" "$@"

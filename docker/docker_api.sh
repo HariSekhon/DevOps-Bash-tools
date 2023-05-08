@@ -76,7 +76,7 @@ shift || :
 if [[ "$url" =~ hub.docker.com ]]; then
     "$srcdir/dockerhub_api.sh" "$url" "$@"
 elif [ -n "${PASSWORD:-}" ]; then
-    "$srcdir/curl_auth.sh" "$url" "${CURL_OPTS[@]}" "$@"
+    "$srcdir/../bin/curl_auth.sh" "$url" "${CURL_OPTS[@]}" "$@"
 else
     curl "$url" "${CURL_OPTS[@]}" "$@"
 fi

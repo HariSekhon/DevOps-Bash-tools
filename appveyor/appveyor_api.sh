@@ -54,4 +54,4 @@ shift || :
 
 export TOKEN="$APPVEYOR_TOKEN"
 
-"$srcdir/curl_auth.sh" -sS --fail "https://ci.appveyor.com/api/$url_path" "$@"
+"$srcdir/../bin/curl_auth.sh" -sS --fail "https://ci.appveyor.com/api/$url_path" "$@"

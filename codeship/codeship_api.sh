@@ -144,4 +144,4 @@ fi
 # unset to return to default setting for safety to avoid hard to debug changes of behaviour elsewhere
 shopt -u nocasematch
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"

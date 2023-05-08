@@ -97,7 +97,7 @@ scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+*$//')"
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 #
 if is_blank "${SPOTIFY_PRIVATE:-}"; then
-    output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/curl_auth.sh" -sSL -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
+    output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/../bin/curl_auth.sh" -sSL -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
 fi
 
 # ============================================================================ #
@@ -172,7 +172,7 @@ EOF
     #curl -H "Authorization: Basic $basic_auth_token" -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri" https://accounts.spotify.com/api/token
     # curl_auth.sh prevents auth token appearing in process list
     local output
-    output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/curl_auth.sh" https://accounts.spotify.com/api/token -sSL -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri")"
+    output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/../bin/curl_auth.sh" https://accounts.spotify.com/api/token -sSL -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri")"
 
     # output everything that isn't the token to stderr as it's almost certainly user information or errors and we don't want that to be captured by client scripts
     } >&2

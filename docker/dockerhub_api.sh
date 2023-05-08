@@ -93,7 +93,7 @@ if [ -n "${PASSWORD:-}" ]; then
     # since DockerHub has many different API addresses it's easier to use JWT which isn't limited to a predefined service address
     JWT=1
     if [ -n "${JWT:-}" ]; then
-        #output="$("$srcdir/curl_auth.sh" https://hub.docker.com/v2/users/login/ \
+        #output="$("$srcdir/../bin/curl_auth.sh" https://hub.docker.com/v2/users/login/ \
         output="$(curl https://hub.docker.com/v2/users/login/ \
                        -X POST \
                        "${CURL_OPTS[@]}" \
@@ -112,7 +112,7 @@ if [ -n "${PASSWORD:-}" ]; then
         export JWT_TOKEN="$token"
     else
         # OAuth2
-        output="$("$srcdir/curl_auth.sh" https://auth.docker.io/token -X GET \
+        output="$("$srcdir/../bin/curl_auth.sh" https://auth.docker.io/token -X GET \
                                          -H 'Content-Type: application/x-www-form-urlencoded' \
                                          -H 'Www-Authenticate: Bearer realm="https://auth.docker.io/token",service="hub.docker.com"' \
                                          -d "grant_type=password&access_type=online&client_id=${0##*}&service=hub.docker.com" # alternative: registry.docker.io
@@ -125,7 +125,7 @@ if [ -n "${PASSWORD:-}" ]; then
     if [ -z "$token" ] || [ "$token" = null ]; then
         die "Authentication failed: $output"
     fi
-    "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+    "$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 else
     # proceed without authentication
     curl "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"

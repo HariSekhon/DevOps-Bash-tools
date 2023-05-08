@@ -210,4 +210,4 @@ export TOKEN="$GITLAB_TOKEN"
 # can also leave out to use OAuth compliant header "Authorization: Bearer <token>"
 export CURL_AUTH_HEADER="Private-Token:"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"

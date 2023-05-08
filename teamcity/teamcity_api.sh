@@ -225,7 +225,7 @@ if [ -n "${TEAMCITY_SUPERUSER_TOKEN:-}" ]; then
     # XXX: superuser token can only be used with blank user which cannot be used with curl_auth.sh
     curl -u ":$TEAMCITY_SUPERUSER_TOKEN" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 else
-    "$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+    "$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 fi
 #chmod 0600 "$cookie_jar"
 

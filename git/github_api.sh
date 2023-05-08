@@ -150,5 +150,5 @@ url_path="${url_path/:repo/$repo}"
 url_path="${url_path/<repo>/$repo}"
 #url_path="${url_path/\{repo\}/$repo}"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
 jq_debug_pipe_dump

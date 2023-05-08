@@ -69,13 +69,13 @@ fi
 
 JENKINS_URL="${JENKINS_URL%%/}"
 
-#crumb="$("$srcdir/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
+#crumb="$("$srcdir/../bin/curl_auth.sh" -sS --fail "$JENKINS_URL/crumbIssuer/api/json" | jq -r '.crumb')"
 
 echo "Validating Jenkinsfiles:"
 echo
 while read -r jenkinsfile; do
     echo -n "$jenkinsfile => "
-    #"$srcdir/curl_auth.sh" "$JENKINS_URL/pipeline-model-converter/validate" -sS --fail -X POST -F "jenkinsfile=<Jenkinsfile" -H "Jenkins-Crumb: $crumb"
+    #"$srcdir/../bin/curl_auth.sh" "$JENKINS_URL/pipeline-model-converter/validate" -sS --fail -X POST -F "jenkinsfile=<Jenkinsfile" -H "Jenkins-Crumb: $crumb"
     #"$srcdir/jenkins_api.sh" "/pipeline-model-converter/validate" -X POST -F "jenkinsfile=<Jenkinsfile"
     #"$srcdir/jenkins_api.sh" "/pipeline-model-converter/validate" -X POST -F "jenkinsfile=<$jenkinsfile"
     # 'export JENKINS_CLI_ARGS=-webSocket' is needed if Jenkins is behind a reverse proxy such as Kubernetes Ingress, otherwise Jenkins CLI hangs

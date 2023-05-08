@@ -71,4 +71,4 @@ export TOKEN="$SPOTIFY_ACCESS_TOKEN"
 
 # the Spotify API is very unreliable and often gets 502 errors
 # seen 20 x HTTP 500 errors from the API in a row :-/
-MAX_RETRIES="30" retry 300 "$srcdir/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"
+MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"

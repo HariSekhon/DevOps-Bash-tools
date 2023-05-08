@@ -84,7 +84,7 @@ export TOKEN="$BUILDKITE_TOKEN"
 BUILDKITE_ORGANIZATION="${BUILDKITE_ORGANIZATION:-${BUILDKITE_USER:-}}"
 
 if [[ "$url_path" =~ {organization} ]]; then
-    organizations="$("$srcdir/curl_auth.sh" -sS --fail "$url_base/organizations" | jq -r '.[].slug')"
+    organizations="$("$srcdir/../bin/curl_auth.sh" -sS --fail "$url_base/organizations" | jq -r '.[].slug')"
     num_organizations="$(wc -w <<< "$organizations" | sed 's/[[:space:]]//g')"
     if [ "$num_organizations" -eq 0 ]; then
         usage "\$BUILDKITE_ORGANIZATION / \$BUILDKITE_USER not set and could not find any organizations for the \$BUILDKITE_TOKEN"
@@ -103,4 +103,4 @@ if [[ "$url_path" =~ {pipeline} ]]; then
     url_path="${url_path//\{pipeline\}/$BUILDKITE_PIPELINE}"
 fi
 
-"$srcdir/curl_auth.sh" -sS --fail "$url_base/$url_path" "$@"
+"$srcdir/../bin/curl_auth.sh" -sS --fail "$url_base/$url_path" "$@"

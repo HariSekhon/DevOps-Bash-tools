@@ -129,7 +129,7 @@ url_path="${url_path##/}"
 
 export TOKEN="$PINGDOM_TOKEN"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
 
 # args: /checks | jq .
 # args: /checks/<check_id>

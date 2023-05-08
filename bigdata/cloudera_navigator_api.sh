@@ -69,4 +69,4 @@ shift || :
 
 api_version="${CLOUDERA_API_VERSION:-10}"
 
-"$srcdir/curl_auth.sh" "$CLOUDERA_NAVIGATOR/api/v${api_version}${url_path}" -sS --fail --connect-timeout 5 "$@"
+"$srcdir/../bin/curl_auth.sh" "$CLOUDERA_NAVIGATOR/api/v${api_version}${url_path}" -sS --fail --connect-timeout 5 "$@"

@@ -50,7 +50,7 @@ export USER="$user"
 export PASSWORD="$CODESHIP_PASSWORD"
 
 # has to be basic auth, don't allow token to be used as it will result in a 401
-output="$(NO_TOKEN_AUTH=1 "$srcdir/curl_auth.sh" https://api.codeship.com/v2/auth -X POST "${CURL_OPTS[@]}" "$@")"
+output="$(NO_TOKEN_AUTH=1 "$srcdir/../bin/curl_auth.sh" https://api.codeship.com/v2/auth -X POST "${CURL_OPTS[@]}" "$@")"
 
 die_if_error_field "$output"
 
