@@ -64,4 +64,4 @@ while read -r repo dir; do
         #fi
     done
 done
-"$srcdir/.github/workflows/sync_to_adjacent_repos.sh" "$@"
+"$srcdir/../.github/workflows/sync_to_adjacent_repos.sh" "$@"
