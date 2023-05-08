@@ -121,7 +121,7 @@ redirect_uri='http://localhost:12345/callback'
 #        command shasum "$@"
 #    }
 #fi
-#code_challenge="$("$srcdir/random_string.sh" 128 | sha1sum -a 256 | base64)"
+#code_challenge="$("$srcdir/../bin/random_string.sh" 128 | sha1sum -a 256 | base64)"
 #output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge")"
 
 # ============================================================================ #
