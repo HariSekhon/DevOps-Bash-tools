@@ -66,7 +66,7 @@ fi
 CONCOURSE_URL="$protocol://$CONCOURSE_HOST:$CONCOURSE_PORT"
 
 export COMPOSE_PROJECT_NAME="bash-tools"
-export COMPOSE_FILE="$srcdir/docker-compose/concourse.yml"
+export COMPOSE_FILE="$srcdir/../docker-compose/concourse.yml"
 
 export FLY_TARGET="ci"
 

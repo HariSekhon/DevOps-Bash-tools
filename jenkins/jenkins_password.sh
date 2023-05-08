@@ -23,7 +23,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-config="$srcdir/docker-compose/jenkins.yml"
+config="$srcdir/../docker-compose/jenkins.yml"
 
 if [ -n "${JENKINS_PASSWORD:-}" ]; then
     echo "using \$JENKINS_PASSWORD from environment" >&2

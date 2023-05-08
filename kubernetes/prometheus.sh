@@ -34,7 +34,7 @@ help_usage "$@"
 #min_args 1 "$@"
 
 export COMPOSE_PROJECT_NAME="bash-tools"
-export COMPOSE_FILE="$srcdir/docker-compose/prometheus.yml"
+export COMPOSE_FILE="$srcdir/../docker-compose/prometheus.yml"
 export PROMETHEUS_URL="http://localhost:9090"
 export PROMETHEUS_CONFIG="${2:-$srcdir/setup/prometheus.yml}"
 

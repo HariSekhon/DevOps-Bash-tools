@@ -52,7 +52,7 @@ gerrit_local(){
 
 gerrit_docker(){
     #docker run -d -ti -p 8080:8080 -p 29418:29418 gerritcodereview/gerrit:"$GERRIT_VERSION"
-    VERSION="$GERRIT_VERSION" docker-compose -f "$srcdir/docker-compose/gerrit.yml" up -d
+    VERSION="$GERRIT_VERSION" docker-compose -f "$srcdir/../docker-compose/gerrit.yml" up -d
 }
 
 gerrit_docker

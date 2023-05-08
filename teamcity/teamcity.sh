@@ -95,7 +95,7 @@ usage_args="[ up | down | ui ]"
 help_usage "$@"
 
 export COMPOSE_PROJECT_NAME="bash-tools"
-export COMPOSE_FILE="$srcdir/docker-compose/teamcity.yml"
+export COMPOSE_FILE="$srcdir/../docker-compose/teamcity.yml"
 
 vcs_config=".teamcity.vcs.json"
 # OAuth connection

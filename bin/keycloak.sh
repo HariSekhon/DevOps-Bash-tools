@@ -52,7 +52,7 @@ export KEYCLOAK_PORT=8080
 export KEYCLOAK_URL="http://$KEYCLOAK_HOST:$KEYCLOAK_PORT/admin"
 
 export COMPOSE_PROJECT_NAME="bash-tools"
-export COMPOSE_FILE="$srcdir/docker-compose/keycloak.yml"
+export COMPOSE_FILE="$srcdir/../docker-compose/keycloak.yml"
 
 if ! type docker-compose &>/dev/null; then
     "$srcdir/setup/install_docker_compose.sh"
