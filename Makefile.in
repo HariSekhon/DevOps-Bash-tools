@@ -192,7 +192,7 @@ printenv: git
 git-summary: init
 	@echo
 	@echo "Git summary:"
-	@$(BASH_TOOLS)/git_summary_line.sh
+	@$(BASH_TOOLS)/git/git_summary_line.sh
 	@echo
 
 .PHONY: ci
