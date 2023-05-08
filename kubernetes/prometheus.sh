@@ -36,10 +36,10 @@ help_usage "$@"
 export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/../docker-compose/prometheus.yml"
 export PROMETHEUS_URL="http://localhost:9090"
-export PROMETHEUS_CONFIG="${2:-$srcdir/setup/prometheus.yml}"
+export PROMETHEUS_CONFIG="${2:-$srcdir/../setup/prometheus.yml}"
 
 if ! type docker-compose &>/dev/null; then
-    "$srcdir/setup/install_docker_compose.sh"
+    "$srcdir/../setup/install_docker_compose.sh"
 fi
 
 action="${1:-up}"

@@ -72,10 +72,10 @@ Jenkinsfile=Jenkinsfile
 export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/../docker-compose/jenkins.yml"
 
-plugins_txt="$srcdir/setup/jenkins-plugins.txt"
+plugins_txt="$srcdir/../setup/jenkins-plugins.txt"
 
 if ! type docker-compose &>/dev/null; then
-    "$srcdir/setup/install_docker_compose.sh"
+    "$srcdir/../setup/install_docker_compose.sh"
 fi
 
 action="${1:-up}"

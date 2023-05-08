@@ -34,7 +34,7 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
-sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt" |
+sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/../setup/repos.txt" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
         dir="$repo"

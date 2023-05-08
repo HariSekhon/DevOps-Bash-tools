@@ -44,7 +44,7 @@ help_usage "$@"
 #min_args 1 "$@"
 
 if ! command -v eksctl &>/dev/null; then
-    "$srcdir/setup/install_eksctl.sh"
+    "$srcdir/../setup/install_eksctl.sh"
     echo
 fi
 

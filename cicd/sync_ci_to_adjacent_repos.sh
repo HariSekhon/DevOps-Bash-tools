@@ -19,7 +19,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 cd "$srcdir"
 
-sed 's/#.*//; s/:/ /' "$srcdir/setup/repos.txt" |
+sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt" |
 grep -vi -e bash-tools \
          -e template \
          -e jenkins \
@@ -47,7 +47,7 @@ while read -r repo dir; do
             echo "$filename"
         done
     else
-        sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/ci.txt"
+        sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/ci.txt"
     fi |
     while read -r filename; do
         target="../$dir/$filename"

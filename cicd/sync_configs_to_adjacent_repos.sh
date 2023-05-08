@@ -22,7 +22,7 @@ cd "$srcdir"
 if [ -n "$*" ]; then
     echo "$@"
 else
-    sed 's/#.*//; s/:/ /' "$srcdir/setup/repos.txt"
+    sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt"
 fi |
 grep -vi -e bash-tools \
          -e playlist \
@@ -36,7 +36,7 @@ while read -r repo dir; do
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/repo-configs.txt" |
+    sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/repo-configs.txt" |
     while read -r filename; do
         target="../$dir/$filename"
         if [ -f "$target" ] || [ -n "${NEW:-}" ]; then

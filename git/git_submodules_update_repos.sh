@@ -25,7 +25,7 @@ mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
 
-repofile="$srcdir/setup/repos.txt"
+repofile="$srcdir/../setup/repos.txt"
 
 if [ $# -gt 0 ]; then
     repolist="$*"

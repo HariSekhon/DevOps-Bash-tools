@@ -71,7 +71,7 @@ if [ -z "${NO_TEST:-}" ]; then
     opts="$opts test"
 fi
 
-repofile="$srcdir/setup/repos.txt"
+repofile="$srcdir/../setup/repos.txt"
 
 repolist="${REPOS:-}"
 if [ -n "$repolist" ]; then

@@ -47,7 +47,7 @@ HOMEBREW_PACKAGES_TAP="${TAP:-}"
 process_package_args "$@" |
 if [ -n "${HOMEBREW_PACKAGES_TAP:-}" ]; then
     while read -r tap package; do
-        grep -Eq "^#?${tap}[[:space:]]+$package$" <(sed 's/#.*//; /^[[:digit:]]*$/d' "$srcdir/setup/"brew-packages*taps.txt) ||
+        grep -Eq "^#?${tap}[[:space:]]+$package$" <(sed 's/#.*//; /^[[:digit:]]*$/d' "$srcdir/../setup/"brew-packages*taps.txt) ||
         echo "$tap $package"
     done
 else
@@ -55,10 +55,10 @@ else
     # shellcheck disable=SC2046
     tr ' ' '\n' |
     # Mac's grep is buggy, doesn't matches utimer unless sort -r to try it before '^r$' - but then gives false positives on other packages
-    #grep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt | sort)
-    command ggrep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/setup/"brew-packages*.txt) |
+    #grep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/../setup/"brew-packages*.txt | sort)
+    command ggrep -vFx -f <(sed 's/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//; /^[[:space:]]*$/d' "$srcdir/../setup/"brew-packages*.txt) |
     while read -r package; do
-        grep -Eqi "^#${package}([[:space:]]|$)" "$srcdir/setup/"brew-packages*.txt || echo "$package"
+        grep -Eqi "^#${package}([[:space:]]|$)" "$srcdir/../setup/"brew-packages*.txt || echo "$package"
     done |
     sort -u
 fi

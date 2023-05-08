@@ -38,4 +38,4 @@ help_usage "$@"
 #min_args 1 "$@"
 
 # this script is standalone without lib dependency so can be called directly from bootstrapped CI before submodules, since that is the exact problem that needs to be solved to allow CI/CD systems with incorrect ownership of the checkout directory to be able to checkout the necessary git submodules
-"$srcdir/setup/ci_git_set_dir_safe.sh" "${1:-.}"
+"$srcdir/../setup/ci_git_set_dir_safe.sh" "${1:-.}"

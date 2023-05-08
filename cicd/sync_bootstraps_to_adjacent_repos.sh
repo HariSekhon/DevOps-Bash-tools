@@ -28,7 +28,7 @@ setup/ci_git_set_dir_safe.sh
 if [ -n "$*" ]; then
     echo "$@"
 else
-    sed 's/#.*//; s/:/ /' "$srcdir/setup/repos.txt"
+    sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt"
 fi |
 grep -v -e bash-tools -e '^[[:space:]]*$' |
 while read -r repo dir; do

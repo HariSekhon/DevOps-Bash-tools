@@ -41,5 +41,5 @@ if [ $# -gt 0 ]; then
         run "$x"
     done
 else
-    run "$srcdir/setup/repos.txt"
+    run "$srcdir/../setup/repos.txt"
 fi

@@ -19,7 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/files.txt")"
+conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt")"
 
 setup_file(){
     local filename="$1"
@@ -68,7 +68,7 @@ for filename in $conf_files; do
         ln -sv $opts -- "$PWD/$filename" ~ || continue
         # if we link .vimrc then run the vundle install and get plugins to prevent vim errors every startup
         if [ "$filename" = .vimrc ]; then
-            "$srcdir/setup/install_vundle.sh" || :
+            "$srcdir/../setup/install_vundle.sh" || :
         fi
     fi
 done

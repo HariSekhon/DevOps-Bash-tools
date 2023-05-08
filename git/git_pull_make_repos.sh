@@ -67,7 +67,7 @@ fi
 if [ -n "${REPOS:-}" ]; then
     tr '[:space:]' '\n' <<< "$REPOS"
 elif [ -n "${srcdir:-}" ]; then
-    sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/setup/repos.txt"
+    sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' < "$srcdir/../setup/repos.txt"
 else
     echo "\$REPOS not set and \$srcdir not set/available, possibly due to 'curl ... | bash' usage, cannot determine list of repos to pull and build" >&2
     exit 1

@@ -156,13 +156,13 @@ if ! docker_container_exists "$container_name"; then
         --name "$container_name" \
         $docker_opts \
         -e POSTGRES_PASSWORD="$password" \
-        -v "$srcdir/setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
+        -v "$srcdir/../setup/postgresql.conf:/etc/postgresql/postgresql.conf" \
         $docker_sql_mount_switches \
         "$docker_image":"$version" \
         $(if [ "${version:0:1}" = 8 ] || [ "${version:0:3}" = '9.0' ]; then echo postgres; fi) \
         -c 'config_file=/etc/postgresql/postgresql.conf'
         # can't mount postgresql.conf here because it prevents /var/lib/postgresql/data from being initialized
-        #-v "$srcdir/setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf"
+        #-v "$srcdir/../setup/postgresql.conf:/var/lib/postgresql/data/postgresql.conf"
 fi
 
 wait_for_postgres_ready "$container_name"

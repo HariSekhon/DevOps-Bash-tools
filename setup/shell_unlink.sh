@@ -19,7 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/setup/files.txt")"
+conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt")"
 
 # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
 [ -n "${HOME:-}" ] || HOME=~

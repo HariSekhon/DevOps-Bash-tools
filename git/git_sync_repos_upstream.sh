@@ -60,7 +60,7 @@ else
     usage
 fi
 
-#sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/setup/repos.txt" |
+#sed 's/#.*//; s/:/ /; /^[[:space:]]*$/d' "$srcdir/../setup/repos.txt" |
 echo "DevOps-Golang-tools go-tools" |
 while read -r repo dir; do
     if [ -z "$dir" ]; then

@@ -18,7 +18,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-repofile="$srcdir/setup/repos.txt"
+repofile="$srcdir/../setup/repos.txt"
 
 if [ -f "$repofile" ]; then
     echo "processing repos from local file: $repofile" >&2

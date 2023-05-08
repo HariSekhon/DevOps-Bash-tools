@@ -160,7 +160,7 @@ if ! docker_container_exists "$container_name"; then
         -e MYSQL_ROOT_PASSWORD="$password" \
         $docker_sql_mount_switches \
         "$docker_image":"$version"
-        #-v "$srcdir/setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
+        #-v "$srcdir/../setup/mysql/conf.d/my.cnf:/etc/mysql/conf.d/" \
 
 fi
 
