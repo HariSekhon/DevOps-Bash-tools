@@ -56,8 +56,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 # don't need to capture and replace project in config as done in environment variable now as it's much safer as it's limited to only this script and its child processes
 #current_project="$(gcloud config list --format="value(core.project)")"
 #if [ -n "$current_project" ]; then
@@ -76,12 +74,12 @@ while read -r project_id project_name; do
     # XXX: this would cause a concurrency race condition bug between other scripts and sessions that could be dangerous
     #gcloud config set project "$project_id"
     export CLOUDSDK_CORE_PROJECT="$project_id"
-    cmd="$cmd_template"
-    cmd="${cmd//\{project_id\}/$project_id}"
-    cmd="${cmd//\{project_name\}/$project_name}"
-    cmd="${cmd//\{id\}/$project_id}"
-    cmd="${cmd//\{name\}/$project_name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{project_id\}/$project_id}")
+    cmd=("${cmd[@]//\{project_name\}/$project_name}")
+    cmd=("${cmd[@]//\{id\}/$project_id}")
+    cmd=("${cmd[@]//\{name\}/$project_name}")
+    "${cmd[@]}"
     echo >&2
     echo >&2
 done
