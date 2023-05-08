@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: HariSekhon/DevOps-Bash-tools
 #
 #  Author: Hari Sekhon
 #  Date: 2023-05-08 18:00:53 +0100 (Mon, 08 May 2023)
@@ -23,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Purges all GitHub camo caches for things like CI/CD badges
+
+https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-anonymized-urls#removing-an-image-from-camos-cache
 "
 
 # used by usage() in lib/utils.sh
@@ -46,9 +49,7 @@ curl -sL "$url" |
 grep -Eo '<img src="https?://camo.githubusercontent.com/[^"]+' |
 sed -e 's/<img src="//' |
 while read -r camo_url; do
-
     timestamp "Purging: $camo_url"
     echo "curl -sX PURGE '$camo_url' &>/dev/null"
-
 done |
 parallel -j 10
