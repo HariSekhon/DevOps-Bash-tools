@@ -55,24 +55,22 @@ min_args 2 "$@"
 repo="$1"
 shift || :
 
-cmd_template="$*"
-
 "$srcdir/github_actions_workflows.sh" "$repo" |
 jq -r '.workflows[] | [.id, .name] | @tsv' |
 while read -r id workflow; do
     echo "# ============================================================================ #" >&2
     echo "# $workflow" >&2
     echo "# ============================================================================ #" >&2
-    cmd="$cmd_template"
-    cmd="${cmd//\{username\}/${user:-}}"
-    cmd="${cmd//\{user\}/${user:-}}"
-    cmd="${cmd//\{organization\}/${GITHUB_ORGANIZATION:-}}"
-    cmd="${cmd//\{org\}/${GITHUB_ORGANIZATION:-}}"
-    cmd="${cmd//\{repo\}/$repo}"
-    cmd="${cmd//\{name\}/$workflow}"
-    cmd="${cmd//\{workflow\}/$workflow}"
-    cmd="${cmd//\{workflow_id\}/$id}"
-    cmd="${cmd//\{id\}/$id}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{username\}/${user:-}}")
+    cmd=("${cmd[@]//\{user\}/${user:-}}")
+    cmd=("${cmd[@]//\{organization\}/${GITHUB_ORGANIZATION:-}}")
+    cmd=("${cmd[@]//\{org\}/${GITHUB_ORGANIZATION:-}}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    cmd=("${cmd[@]//\{name\}/$workflow}")
+    cmd=("${cmd[@]//\{workflow\}/$workflow}")
+    cmd=("${cmd[@]//\{workflow_id\}/$id}")
+    cmd=("${cmd[@]//\{id\}/$id}")
+    "${cmd[@]}"
     echo >&2
 done
