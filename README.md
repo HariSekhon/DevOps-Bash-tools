@@ -704,6 +704,7 @@ etc.
   - `github_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitHub account by key id or title regex match
   - `github_gpg_get_user_public_keys.sh` - fetches a given GitHub user's public GPG keys via the API
   - `github_generate_status_page.sh` - generates a [STATUS.md](https://harisekhon.github.io/CI-CD/) page by merging all the README.md headers for all of a user's non-forked GitHub repos or a given list of any repos etc.
+  - `github_purge_camo_cache.sh` - fetches a repo's base page and sends a PURGE HTTP request to each camo url to clear the badge caches
   - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_release.sh` - creates a GitHub Release, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
