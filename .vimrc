@@ -29,6 +29,7 @@ set visualbell
 "set all
 
 set ai      " autoindent
+set backspace=indent,eol,start " fixes not being able to backspace not typed during current insert mode session
 set bg=dark " background
 set et      " expandtab
 set ic      " ignorecase
