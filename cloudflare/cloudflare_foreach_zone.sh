@@ -46,8 +46,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 "$srcdir/cloudflare_api.sh" zones |
 jq -r '.result[] | [.id, .name] | @tsv' |
 sed "s/'/\\\\'/g" |
@@ -57,10 +55,10 @@ while read -r zone_id zone_name; do
         echo "# $zone_id - $zone_name" >&2
         echo "# ============================================================================ #" >&2
     fi
-    cmd="$cmd_template"
-    cmd="${cmd//\{zone_id\}/$zone_id}"
-    cmd="${cmd//\{zone_name\}/$zone_name}"
-    cmd="${cmd//\{id\}/$zone_id}"
-    cmd="${cmd//\{name\}/$zone_name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{zone_id\}/$zone_id}")
+    cmd=("${cmd[@]//\{zone_name\}/$zone_name}")
+    cmd=("${cmd[@]//\{id\}/$zone_id}")
+    cmd=("${cmd[@]//\{name\}/$zone_name}")
+    "${cmd[@]}"
 done
