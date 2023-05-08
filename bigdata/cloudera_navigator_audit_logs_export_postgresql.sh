@@ -57,7 +57,7 @@ tstamp "Exporting Cloudera Navigator logs from PostgreSQL database:"
 echo >&2
 
 # doesn't seem to like \copy no matter how many backslashes
-#"$srcdir/postgres_foreach_table.sh" "
+#"$srcdir/../postgres/postgres_foreach_table.sh" "
 #select replace('exporting {table}', '\"', '');
 #\\copy (SELECT * FROM {db}.{schema}.{table}) TO replace('cloudera_navigator_logs/{db}.{schema}.{table}.csv', '\"', '') WITH (FORMAT CSV, HEADER);
 #" "$@"
@@ -67,7 +67,7 @@ echo >&2
 mkdir -pv "$logdir"
 
 time {
-"$srcdir/postgres_list_tables.sh" "$@" |
+"$srcdir/../postgres/postgres_list_tables.sh" "$@" |
 while read -r db schema table; do
 #    echo "SELECT 'Exporting $db.$schema.$table' AS progress;"
 #    echo "\\copy (SELECT * FROM \"$db\".\"$schema\".\"$table\") TO 'cloudera_navigator_logs/$db.$schema.$table.csv' WITH (FORMAT CSV, HEADER);"
