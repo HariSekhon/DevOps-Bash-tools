@@ -168,7 +168,7 @@ output_local_uri(){
         artist="${artist//+/ }"
         track="$artist - $track"
     fi
-    "$srcdir/urldecode.sh" <<< "$track"
+    "$srcdir/../bin/urldecode.sh" <<< "$track"
 }
 
 output(){
