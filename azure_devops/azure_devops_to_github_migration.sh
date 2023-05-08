@@ -61,12 +61,12 @@ migrate_repo(){
     # mutate naming convention here if required as part of the migration
     #github_repo="${github_repo/old/new}"
     timestamp "migrating '$azure_repo' -> '$github_repo'"
-    if ! "$srcdir/github_api.sh" "/repos/$github_organization/$github_repo" &>/dev/null; then
+    if ! "$srcdir/../git/github_api.sh" "/repos/$github_organization/$github_repo" &>/dev/null; then
         timestamp "creating github repo '$github_repo'"
-        "$srcdir/github_api.sh" "/orgs/$github_organization/repos" -X POST -d "{\"name\": \"$github_repo\", \"private\": true}" >/dev/null
+        "$srcdir/../git/github_api.sh" "/orgs/$github_organization/repos" -X POST -d "{\"name\": \"$github_repo\", \"private\": true}" >/dev/null
     fi
     # API seems to not update the size field for ages, just do the clone anyway
-    #if "$srcdir/github_api.sh" "/repos/$github_organization/$github_repo" | jq -e '.size == 0' >/dev/null; then
+    #if "$srcdir/../git/github_api.sh" "/repos/$github_organization/$github_repo" | jq -e '.size == 0' >/dev/null; then
     #    timestamp "repo is empty, cloning across"
         tmp="/tmp/azure_to_github_migration.$EUID" #.$$" - reuse the checkouts for now at the expense of potential race conditions
         mkdir -p "$tmp"
@@ -93,7 +93,7 @@ migrate_repo(){
         timestamp "getting azure repo default branch"
         default_branch="$("$srcdir/azure_devops_api.sh" "/$azure_devops_organization/$azure_devops_project/_apis/git/repositories/$azure_repo" | jq -r '.defaultBranch' | sed 's/.*\///')"
         timestamp "setting github repo default branch to '$default_branch'"
-        "$srcdir/github_api.sh" "/repos/$github_organization/$github_repo" -X PATCH -d "{\"default_branch\": \"$default_branch\"}" >/dev/null
+        "$srcdir/../git/github_api.sh" "/repos/$github_organization/$github_repo" -X PATCH -d "{\"default_branch\": \"$default_branch\"}" >/dev/null
         timestamp "migrated '$azure_repo' -> '$github_repo'"
         echo >&2
     #fi
@@ -106,7 +106,7 @@ else
     timestamp "fetching list of Azure DevOps repos in organization '$azure_devops_organization' project '$azure_devops_project'"
     azure_devops_repos="$("$srcdir/azure_devops_api.sh" "/$azure_devops_organization/$azure_devops_project/_apis/git/repositories" | jq -r '.value[].name')"
     timestamp "fetching list of GitHub repos in organization '$github_organization'"
-    #github_repos="$("$srcdir/github_api.sh" "/orgs/$github_organization/repos" | jq -r '.[].name')"
+    #github_repos="$("$srcdir/../git/github_api.sh" "/orgs/$github_organization/repos" | jq -r '.[].name')"
     github_repos="$(get_github_repos "$github_organization" "is_organization")"
 
     # use GNU grep to avoid buggy Mac -f behaviour
