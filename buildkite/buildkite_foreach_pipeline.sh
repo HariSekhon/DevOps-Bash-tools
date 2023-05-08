@@ -45,8 +45,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 "$srcdir/buildkite_pipelines.sh" |
 while read -r pipeline; do
     if [ -n "${NO_HEADING:-}" ]; then
@@ -54,7 +52,7 @@ while read -r pipeline; do
         echo "# $pipeline" >&2
         echo "# ============================================================================ #" >&2
     fi
-    cmd="$cmd_template"
-    cmd="${cmd//\{pipeline\}/$pipeline}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{pipeline\}/$pipeline}")
+    "${cmd[@]}"
 done
