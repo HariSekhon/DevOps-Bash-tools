@@ -48,10 +48,10 @@ if [[ "${1:-}" =~ -.* ]]; then
     usage
 fi
 
-#if ! curl -sS -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/" &>/dev/null; then
-#    echo "This script must be run from within a GCE instance as that is the only place the GCP GCE Metadata API is available"
-#    exit 2
-#fi
+if ! curl -sS -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/" &>/dev/null; then
+    echo "This script must be run from within a GCE instance as that is the only place the GCP GCE Metadata API is available"
+    exit 2
+fi
 
 if output="$(curl -sS -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/preempted?wait_for_change=true")"; then
     if grep -q TRUE <<< "$output"; then
