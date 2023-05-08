@@ -86,7 +86,7 @@ download_audit_logs(){
         #time {
         # don't let a random 401 stop from downloading other logs, can go back and fill in the gaps later by re-running
         # Navigator returns zero byte logs without headers without error so this || : is not the cause of not catching zero byte logs, which we have to check for separately anyway
-        "$srcdir/cloudera_navigator_audit_logs.sh" "$year-$month-01T00:00:00" "$end_year-$end_month-01T00:00:00" "service==$service" "$@" | "$srcdir/progress_dots.sh" > "$log" || :
+        "$srcdir/cloudera_navigator_audit_logs.sh" "$year-$month-01T00:00:00" "$end_year-$end_month-01T00:00:00" "service==$service" "$@" | "$srcdir/../bin/progress_dots.sh" > "$log" || :
         log_bytes="$(stat_bytes "$log")"
         tstamp "$log = $log_bytes bytes"
         if [ "$log_bytes" = 0 ]; then
