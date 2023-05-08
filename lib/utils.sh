@@ -87,7 +87,7 @@ hr3(){
 section(){
     name="$*"
     hr
-    "$srcdir_bash_tools_utils/../center.sh" "$@"
+    "$srcdir_bash_tools_utils/../bin/center.sh" "$@"
     hr
     if [ -n "${PROJECT:-}" ]; then
         echo "PROJECT: $PROJECT"
@@ -113,11 +113,11 @@ section3(){
 }
 
 hr2echo(){
-    "$srcdir_bash_tools_utils/../center.sh" "$@" 50
+    "$srcdir_bash_tools_utils/../bin/center.sh" "$@" 50
 }
 
 hr3echo(){
-    "$srcdir_bash_tools_utils/../center.sh" "$@" 40
+    "$srcdir_bash_tools_utils/../bin/center.sh" "$@" 40
 }
 
 #set +o pipefail
