@@ -47,8 +47,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 get_repos(){
     get_workspaces |
     while read -r workspace; do
@@ -92,9 +90,9 @@ while read -r workspace name repo; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
-    cmd="$cmd_template"
-    cmd="${cmd//\{workspace\}/$workspace}"
-    cmd="${cmd//\{name\}/$name}"
-    cmd="${cmd//\{repo\}/$repo}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{workspace\}/$workspace}")
+    cmd=("${cmd[@]//\{name\}/$name}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    "${cmd[@]}"
 done
