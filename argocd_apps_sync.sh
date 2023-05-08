@@ -29,7 +29,7 @@ Requires ArgoCD CLI to be installed and configured for authentication
 You may also want to set some environment variables such as:
 
     export ARGOCD_SERVER='argocd.domain.com'
-    export ARGOCD_OPTS='--grpc-web'
+    export ARGOCD_OPTS='--grpc-web --timeout 600'
 "
 
 # used by usage() in lib/utils.sh
@@ -46,6 +46,12 @@ argocd app list |
 awk '{print $1}' |
 { grep -E "$filter" || : ; } |
 while read -r app; do
-    argocd app sync "$app"
-    #argocd app wait "$app" --sync --operation --health --timeout 600
+    echo "Syncing app '$app':"
+    echo
+    cmd=(argocd app sync "$app")
+    echo "${cmd[*]}"
+    echo
+    "${cmd[@]}"
+    echo
+    echo
 done
