@@ -48,8 +48,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 owner="${GITHUB_ORGANIZATION:-${GITHUB_USER:-$(get_github_user)}}"
 
 get_github_repos "$owner" "${GITHUB_ORGANIZATION:-}" |
@@ -58,9 +56,9 @@ while read -r repo; do
     echo "# ============================================================================ #" >&2
     echo "# $owner_repo" >&2
     echo "# ============================================================================ #" >&2
-    cmd="$cmd_template"
-    cmd="${cmd//\{owner\}/$owner}"
-    cmd="${cmd//\{repo\}/$repo}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{owner\}/$owner}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    "${cmd[@]}"
     echo >&2
 done
