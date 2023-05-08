@@ -157,7 +157,7 @@ brew:
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/packages/brew_install_packages_if_absent.sh setup/brew-packages-desktop.txt
 	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/packages/brew_install_packages_if_absent.sh setup/brew-packages-desktop-casks.txt
 	@# doesn't pass the packages correctly yet
-	@#NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
+	@#NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/packages/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/packages/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 
 .PHONY: perl-desktop
