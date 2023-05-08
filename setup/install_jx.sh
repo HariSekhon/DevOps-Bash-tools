@@ -40,7 +40,7 @@ version="${1:-latest}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" jenkins-x/jx 'jx-{os}-{arch}.tar.gz' "$version" jx
+"$srcdir/../git/github_install_binary.sh" jenkins-x/jx 'jx-{os}-{arch}.tar.gz' "$version" jx
 
 echo >&2
 jx version --short

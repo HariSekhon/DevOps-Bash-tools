@@ -48,4 +48,4 @@ package="k6-v{version}-{os}-{arch}.$ext"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" grafana/k6 "$package" "$version" "k6-v{version}-{os}-{arch}/k6" k6
+"$srcdir/../git/github_install_binary.sh" grafana/k6 "$package" "$version" "k6-v{version}-{os}-{arch}/k6" k6

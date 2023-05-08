@@ -36,4 +36,4 @@ version="${1:-latest}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" FairwindsOps/polaris 'polaris_{os}_{arch}.tar.gz' "$version" polaris
+"$srcdir/../git/github_install_binary.sh" FairwindsOps/polaris 'polaris_{os}_{arch}.tar.gz' "$version" polaris

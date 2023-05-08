@@ -40,4 +40,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" docker/compose "docker-compose-{os}-$arch" "$version"
+"$srcdir/../git/github_install_binary.sh" docker/compose "docker-compose-{os}-$arch" "$version"

@@ -38,4 +38,4 @@ version="${1:-latest}"
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../github_install_binary.sh" mikefarah/yq 'yq_{os}_{arch}' "$version"
+"$srcdir/../git/github_install_binary.sh" mikefarah/yq 'yq_{os}_{arch}' "$version"

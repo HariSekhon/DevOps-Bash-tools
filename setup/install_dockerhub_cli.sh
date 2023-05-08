@@ -36,4 +36,4 @@ version="${1:-latest}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" docker/hub-tool "hub-tool-{os}-{arch}.tar.gz" "$version" hub-tool/hub-tool
+"$srcdir/../git/github_install_binary.sh" docker/hub-tool "hub-tool-{os}-{arch}.tar.gz" "$version" hub-tool/hub-tool

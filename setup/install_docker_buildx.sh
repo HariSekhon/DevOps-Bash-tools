@@ -50,4 +50,4 @@ install_dir=~/.docker/cli-plugins
 
 mkdir -p -v "$install_dir"
 
-"$srcdir/../github_install_binary.sh" docker/buildx "buildx-$version.{os}-{arch}" "$version" docker-buildx "$install_dir/docker-buildx"
+"$srcdir/../git/github_install_binary.sh" docker/buildx "buildx-$version.{os}-{arch}" "$version" docker-buildx "$install_dir/docker-buildx"

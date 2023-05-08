@@ -38,7 +38,7 @@ version="${1:-latest}"
 
 #export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" argoproj/argo-cd "argocd-{os}-{arch}" "$version"
+"$srcdir/../git/github_install_binary.sh" argoproj/argo-cd "argocd-{os}-{arch}" "$version"
 
 echo
 argocd version --client

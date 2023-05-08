@@ -44,4 +44,4 @@ version="${1:-latest}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" weaveworks/eksctl 'eksctl_{os}_{arch}.tar.gz' "$version" eksctl
+"$srcdir/../git/github_install_binary.sh" weaveworks/eksctl 'eksctl_{os}_{arch}.tar.gz' "$version" eksctl
