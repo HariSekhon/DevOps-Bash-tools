@@ -62,4 +62,4 @@ fi
 release_file="${release_file//\{version\}/${version#v}}"
 binary="${binary//\{version\}/${version#v}}"
 
-"$srcdir/../bin/install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/$release_file" ${binary:+"$binary"} ${install_path:+"$install_path"}
+"$srcdir/../packages/install_binary.sh" "https://github.com/$owner_repo/releases/download/$version/$release_file" ${binary:+"$binary"} ${install_path:+"$install_path"}
