@@ -138,11 +138,11 @@ apk-packages-desktop: system-packages
 
 .PHONY: apt-packages-desktop
 apt-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/apt_install_packages.sh setup/deb-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/packages/apt_install_packages.sh setup/deb-packages-desktop.txt
 
 .PHONY: yum-packages-desktop
 yum-packages-desktop: system-packages
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/yum_install_packages.sh setup/rpm-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/packages/yum_install_packages.sh setup/rpm-packages-desktop.txt
 
 .PHONY: homebrew-packages-desktop
 homebrew-packages-desktop: system-packages homebrew
@@ -154,11 +154,11 @@ homebrew: system-packages brew
 
 .PHONY: brew
 brew:
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop.txt
-	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/brew_install_packages_if_absent.sh setup/brew-packages-desktop-casks.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/packages/brew_install_packages_if_absent.sh setup/brew-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/packages/brew_install_packages_if_absent.sh setup/brew-packages-desktop-casks.txt
 	@# doesn't pass the packages correctly yet
 	@#NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
-	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
+	NO_FAIL=1 NO_UPDATE=1 TAP=1 $(BASH_TOOLS)/packages/brew_install_packages.sh setup/brew-packages-desktop-taps.txt
 
 .PHONY: perl-desktop
 perl-desktop: system-packages cpan-desktop
@@ -166,7 +166,7 @@ perl-desktop: system-packages cpan-desktop
 
 .PHONY: cpan-desktop
 cpan-desktop: cpan
-	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
+	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh setup/cpan-packages-desktop.txt
 
 .PHONY: golang-desktop
 golang-desktop: system-packages go-desktop
@@ -178,7 +178,7 @@ go-desktop: system-packages go
 
 .PHONY: go
 go:
-	NO_FAIL=1 $(BASH_TOOLS)/golang_install_if_absent.sh setup/go-packages-desktop.txt
+	NO_FAIL=1 $(BASH_TOOLS)/packages/golang_install_if_absent.sh setup/go-packages-desktop.txt
 
 .PHONY: ruby-desktop
 ruby-desktop: system-packages gem-desktop
@@ -186,27 +186,27 @@ ruby-desktop: system-packages gem-desktop
 
 .PHONY: gem-desktop
 gem-desktop: gem
-	NO_FAIL=1 $(BASH_TOOLS)/ruby_gem_install_if_absent.sh setup/gem-packages-desktop.txt
+	NO_FAIL=1 $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh setup/gem-packages-desktop.txt
 
 .PHONY: python-desktop
 python-desktop: system-packages pip-desktop
 
 .PHONY: pip
 pip-desktop: pip
-	PIP=$(PIP) ./python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
+	PIP=$(PIP) ./python/python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
 
 .PHONY: nodejs-desktop
 nodejs-desktop: system-packages npm-desktop
 
 .PHONY: npm-desktop
 npm-desktop: npm
-	$(BASH_TOOLS)/nodejs_npm_install_if_absent.sh $(BASH_TOOLS)/setup/npm-packages-desktop.txt
+	$(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh $(BASH_TOOLS)/setup/npm-packages-desktop.txt
 
 .PHONY: aws
 aws: system-packages python-version
 	@if ! command -v aws; then setup/install_aws_cli.sh; fi
 	@# needed for github_mirror_repos_to_aws_codecommit.sh and dependent GitHub Actions workflows
-	@grep '^git-remote-codecommit' requirements.txt | PIP=$(PIP) ./python_pip_install_if_absent.sh || :
+	@grep '^git-remote-codecommit' requirements.txt | PIP=$(PIP) ./python/python_pip_install_if_absent.sh || :
 
 .PHONY: aws-shell
 aws-shell:
@@ -286,7 +286,7 @@ tmux: ~/.tmux/plugins/tpm ~/.tmux/plugins/kube.tmux
 
 .PHONY: test
 test:
-	./check_all.sh
+	./checks/check_all.sh
 
 .PHONY: clean
 clean:
@@ -331,4 +331,4 @@ pip-mapping: pipreqs-mapping
 
 .PHONY: status-page
 status-page:
-	./generate_status_page.sh; . .bash.d/git.sh; gitu STATUS.md
+	./cicd/generate_status_page.sh; . .bash.d/git.sh; gitu STATUS.md
