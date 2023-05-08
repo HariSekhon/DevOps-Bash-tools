@@ -24,7 +24,7 @@ set -euo pipefail
 
 bash_tools="/bash"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 source "$bash_tools/lib/utils.sh"
 
 section "Running Vagrant Shell Provisioner Script - Base"
@@ -48,10 +48,10 @@ timestamp "stripping 127.0.1.1 from /etc/hosts to avoid hostname resolve clash"
 sed -ibak '/127.0.1.1/d' /etc/hosts
 
 timestamp "adding /etc/hosts entries from Vagrantfile"
-./vagrant_hosts.sh /vagrant/Vagrantfile | ./grep_or_append.sh /etc/hosts
+./vagrant/vagrant_hosts.sh /vagrant/Vagrantfile | ./bin/grep_or_append.sh /etc/hosts
 
 timestamp "disabling swap"
-./disable_swap.sh
+./bin/disable_swap.sh
 echo >&2
 
 timestamp "custom shell configuration and config linking as user '$USER':"
@@ -71,6 +71,6 @@ timestamp "installing: $packages"
 
 # want splitting
 # shellcheck disable=SC2086
-./install_packages_if_absent.sh $packages
+./packages/install_packages_if_absent.sh $packages
 
 } 2>&1 | tee -a /vagrant/logs/provision.log
