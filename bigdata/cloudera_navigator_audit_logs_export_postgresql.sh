@@ -72,7 +72,7 @@ while read -r db schema table; do
 #    echo "SELECT 'Exporting $db.$schema.$table' AS progress;"
 #    echo "\\copy (SELECT * FROM \"$db\".\"$schema\".\"$table\") TO 'cloudera_navigator_logs/$db.$schema.$table.csv' WITH (FORMAT CSV, HEADER);"
 #done |
-#"$srcdir/psql.sh" "$@"
+#"$srcdir/../postgres/psql.sh" "$@"
     filename="$logdir/$db.$schema.$table.csv"
     tstamp "Exporting $db.$schema.$table:  "
     rm -fv -- "$filename"  # would get overwritten anyway but removing to detect when psql errors out without non-zero exit code
