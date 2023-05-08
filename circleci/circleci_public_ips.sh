@@ -41,4 +41,4 @@ help_usage "$@"
 #jq -r '.results.records[]' |
 #sort -n
 
-"$srcdir/dnsjson.sh" all.knownips.circleci.com
+"$srcdir/../bin/dnsjson.sh" all.knownips.circleci.com
