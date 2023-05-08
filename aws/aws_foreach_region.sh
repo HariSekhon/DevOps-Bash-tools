@@ -63,8 +63,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 export AWS_DEFAULT_OUTPUT=json
 
 # --all-regions iterates all regions whether or not they are enabled for the current account
@@ -79,9 +77,9 @@ while read -r region; do
     echo "# AWS region = $region" >&2
     echo "# ============================================================================ #" >&2
     export AWS_DEFAULT_REGION="$region"
-    cmd="$cmd_template"
-    cmd="${cmd//\{region\}/$region}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{region\}/$region}")
+    "${cmd[@]}"
     echo >&2
     echo >&2
 done
