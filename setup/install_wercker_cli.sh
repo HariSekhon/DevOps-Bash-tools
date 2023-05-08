@@ -35,4 +35,4 @@ help_usage "$@"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://s3.amazonaws.com/downloads.wercker.com/cli/stable/{os}_{arch}/wercker"
+"$srcdir/../packages/install_binary.sh" "https://s3.amazonaws.com/downloads.wercker.com/cli/stable/{os}_{arch}/wercker"

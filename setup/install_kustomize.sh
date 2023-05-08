@@ -61,4 +61,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/kustomize%2F$version/kustomize_${version}_{os}_amd64.tar.gz" kustomize
+"$srcdir/../packages/install_binary.sh" "https://github.com/$owner_repo/releases/download/kustomize%2F$version/kustomize_${version}_{os}_amd64.tar.gz" kustomize

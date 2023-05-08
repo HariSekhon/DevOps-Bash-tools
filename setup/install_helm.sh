@@ -51,4 +51,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://get.helm.sh/helm-v$version-{os}-{arch}.tar.gz" "{os}-{arch}/helm"
+"$srcdir/../packages/install_binary.sh" "https://get.helm.sh/helm-v$version-{os}-{arch}.tar.gz" "{os}-{arch}/helm"

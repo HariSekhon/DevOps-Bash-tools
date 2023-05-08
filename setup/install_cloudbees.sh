@@ -35,4 +35,4 @@ help_usage "$@"
 
 #version="${1:-latest}"
 
-"$srcdir/../install_binary.sh" 'https://s3.amazonaws.com/cloudbees-core-cli/master/cloudbees-{os}-{arch}.tar.gz' cloudbees
+"$srcdir/../packages/install_binary.sh" 'https://s3.amazonaws.com/cloudbees-core-cli/master/cloudbees-{os}-{arch}.tar.gz' cloudbees

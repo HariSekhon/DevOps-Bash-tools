@@ -35,4 +35,4 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-"$srcdir/../install_binary.sh" "https://raw.githubusercontent.com/dronir/SpotifyControl/master/SpotifyControl"
+"$srcdir/../packages/install_binary.sh" "https://raw.githubusercontent.com/dronir/SpotifyControl/master/SpotifyControl"

@@ -65,4 +65,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://releases.hashicorp.com/terraform/$version/terraform_${version}_{os}_{arch}.zip" terraform
+"$srcdir/../packages/install_binary.sh" "https://releases.hashicorp.com/terraform/$version/terraform_${version}_{os}_{arch}.zip" terraform
