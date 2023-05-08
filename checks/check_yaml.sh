@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #export XDG_CONFIG_HOME="$srcdir"
 
 #export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
-export YAMLLINT_CONFIG_FILE="${YAMLLINT_CONFIG_FILE:-$srcdir/.yamllint.yaml}"
+export YAMLLINT_CONFIG_FILE="${YAMLLINT_CONFIG_FILE:-$srcdir/../configs/.yamllint.yaml}"
 
 #if [ $# -gt 0 ]; then
 #    filelist="$*"
