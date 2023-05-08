@@ -201,7 +201,7 @@ ci: printenv
 
 .PHONY: build-retry
 build-retry: git
-	$(BASH_TOOLS)/retry.sh $(MAKE) build
+	$(BASH_TOOLS)/bin/retry.sh $(MAKE) build
 
 # won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: main
@@ -251,7 +251,7 @@ git-clean: git
 
 .PHONY: gitignore
 gitignore:
-	$(BASH_TOOLS)/update_gitignore.io.sh
+	$(BASH_TOOLS)/git/update_gitignore.io.sh
 
 .PHONY: btest
 btest: bash-test
@@ -259,7 +259,7 @@ btest: bash-test
 
 .PHONY: bash-test
 bash-test:
-	$(BASH_TOOLS)/check_all.sh
+	$(BASH_TOOLS)/checks/check_all.sh
 
 .PHONY: push
 push:
@@ -430,20 +430,20 @@ system-packages-remove:
 apk-packages-remove:
 	for x in apk-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apk_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/apk_remove_packages.sh"
 	$(SUDO) rm -fr -- /var/cache/apk/*
 
 .PHONY: apt-packages-remove
 apt-packages-remove:
 	for x in deb-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apt_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/apt_remove_packages.sh"
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
 	for x in rpm-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/yum_remove_packages.sh"
 
 .PHONY: cpan
 cpan::
@@ -491,7 +491,7 @@ pip-user::
 
 .PHONY: fatpacks
 fatpacks:
-	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+	$(BASH_TOOLS)/perl/perl_generate_fatpacks.sh *.pl
 	@echo
 	@if [ -d lib/resources ]; then \
 		cp -av -- lib/resources fatpacks/; \
@@ -514,7 +514,7 @@ fatpack: fatpacks
 
 .PHONY: python-compile
 python-compile:
-	$(BASH_TOOLS)/python_compile.sh
+	$(BASH_TOOLS)/python/python_compile.sh
 
 .PHONY: pycompile
 pycompile: python-compile
@@ -539,7 +539,7 @@ go-version: golang-version
 
 .PHONY: golang-clean
 golang-clean:
-	@$(BASH_TOOLS)/golang_rm_binaries.sh
+	@$(BASH_TOOLS)/packages/golang_rm_binaries.sh
 
 .PHONY: go-clean
 go-clean: golang-clean
@@ -599,7 +599,7 @@ run: docker-run
 
 .PHONY: concourse
 concourse:
-	$(BASH_TOOLS)/concourse.sh
+	$(BASH_TOOLS)/cicd/concourse.sh
 
 .PHONY: fly
 fly: concourse
@@ -663,23 +663,23 @@ dockerhub-status:
 # For quick testing only - for actual Dockerfile builds see https://hub.docker.com/u/harisekhon and Dockerfiles source repo https://github.com/HariSekhon/Dockerfiles
 .PHONY: docker-alpine
 docker-alpine:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh alpine
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh alpine
 
 .PHONY: docker-debian
 docker-debian:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh debian
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh debian
 
 .PHONY: docker-centos
 docker-centos:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh centos
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh centos
 
 .PHONY: docker-fedora
 docker-fedora:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh fedora
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh fedora
 
 .PHONY: docker-ubuntu
 docker-ubuntu:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
 travis:
