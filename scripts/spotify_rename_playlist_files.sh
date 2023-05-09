@@ -39,8 +39,8 @@ rename(){
     local from="$1"
     local to="$2"
 
-    from="$("$srcdir/../spotify_playlist_to_filename.sh" "$from")"
-    to="$("$srcdir/../spotify_playlist_to_filename.sh" "$to")"
+    from="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$from")"
+    to="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$to")"
 
     gitrename "$from" "$to"
 
