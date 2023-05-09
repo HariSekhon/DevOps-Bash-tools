@@ -70,3 +70,5 @@ done
 
 untrap
 echo "All srcdir references checked: OK"
+echo
+echo
