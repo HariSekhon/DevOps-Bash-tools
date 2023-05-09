@@ -34,7 +34,7 @@ else
         fi
     done
     # can't install until homebrew is installed, and these should already be present
-    #"$srcdir/../install_packages_if_absent.sh" bash curl git sudo
+    #"$srcdir/../packages/install_packages_if_absent.sh" bash curl git sudo
     cmds=""
     if [ "$(uname -s)" = Linux ]; then
         # if we're in debug mode enable set -x inside the HomeBrew script so we can see what inside it is causing breakage
