@@ -37,4 +37,4 @@ install_dir=~/.docker/cli-plugins
 
 mkdir -p -v "$install_dir"
 
-"$srcdir/../git/github_install_binary.sh" docker/scan-cli-plugin 'docker-scan_{os}_{arch}' "$version" "$install_dir/docker-scan"
+"$srcdir/../github/github_install_binary.sh" docker/scan-cli-plugin 'docker-scan_{os}_{arch}' "$version" "$install_dir/docker-scan"

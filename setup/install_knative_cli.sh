@@ -62,9 +62,9 @@ echo
 
 timestamp "Downloading func latest release as fn plugin"
 
-"$srcdir/../git/github_install_binary.sh" knative/func "func_{os}_{arch}" "$version" kn-func
+"$srcdir/../github/github_install_binary.sh" knative/func "func_{os}_{arch}" "$version" kn-func
 
-"$srcdir/../git/github_install_binary.sh" knative-sandbox/kn-plugin-operator "kn-operator-{os}-{arch}" "$version" kn-operator
+"$srcdir/../github/github_install_binary.sh" knative-sandbox/kn-plugin-operator "kn-operator-{os}-{arch}" "$version" kn-operator
 
 echo "Knative plugins installed:"
 echo

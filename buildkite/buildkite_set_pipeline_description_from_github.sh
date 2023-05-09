@@ -45,7 +45,7 @@ fi
 
 repo="${repo##github.com/}"
 
-"$srcdir/../git/github_repo_description.sh" "$repo" |
+"$srcdir/../github/github_repo_description.sh" "$repo" |
 while read -r repo description; do
     "$srcdir/buildkite_set_pipeline_description.sh" "$pipeline" "$description"
 done

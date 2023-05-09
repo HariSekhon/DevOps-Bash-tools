@@ -49,7 +49,7 @@ version="${1:-latest}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../git/github_install_binary.sh" digitalocean/doctl 'doctl-{version}-{os}-{arch}.tar.gz' "$version" doctl
+"$srcdir/../github/github_install_binary.sh" digitalocean/doctl 'doctl-{version}-{os}-{arch}.tar.gz' "$version" doctl
 
 DIGITAL_OCEAN_TOKEN="${DIGITAL_OCEAN_TOKEN:-${DIGITALOCEAN_TOKEN:-}}"
 

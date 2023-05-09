@@ -36,4 +36,4 @@ version="${1:-latest}"
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../git/github_install_binary.sh" aquasecurity/tfsec 'tfsec-{os}-{arch}' "$version"
+"$srcdir/../github/github_install_binary.sh" aquasecurity/tfsec 'tfsec-{os}-{arch}' "$version"

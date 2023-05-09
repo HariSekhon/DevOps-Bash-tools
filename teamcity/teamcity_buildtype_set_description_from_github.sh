@@ -66,6 +66,6 @@ if [ -z "$vcs_root_id" ]; then
 fi
 
 timestamp "Sync'ing TeamCity buildtype '$buildtype' description from GitHub repo '$repo'"
-github_description="$("$srcdir/../git/github_repo_description.sh" "$repo" | cut -d $'\t' -f2-)"
+github_description="$("$srcdir/../github/github_repo_description.sh" "$repo" | cut -d $'\t' -f2-)"
 "$srcdir/teamcity_api.sh" "/buildTypes/$buildtype/description" -X PUT -d "$github_description" -H "Content-Type: text/plain" -H "Accept: text/plain" >/dev/null
 timestamp "Description set to '$github_description'"

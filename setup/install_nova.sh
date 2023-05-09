@@ -36,4 +36,4 @@ version="${1:-latest}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../git/github_install_binary.sh" FairwindsOps/nova 'nova_{version}_{os}_{arch}.tar.gz' "$version" nova
+"$srcdir/../github/github_install_binary.sh" FairwindsOps/nova 'nova_{version}_{os}_{arch}.tar.gz' "$version" nova

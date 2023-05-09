@@ -37,4 +37,4 @@ asset="${2:-all}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../git/github_install_binary.sh" GoogleCloudPlatform/terraformer "terraformer-$asset-{os}-{arch}" "$version" terraformer
+"$srcdir/../github/github_install_binary.sh" GoogleCloudPlatform/terraformer "terraformer-$asset-{os}-{arch}" "$version" terraformer

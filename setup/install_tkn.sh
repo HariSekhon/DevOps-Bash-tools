@@ -46,4 +46,4 @@ export RUN_VERSION_ARG=1
 
 package="tkn_{version}_{os}_{arch}.tar.gz"
 
-"$srcdir/../git/github_install_binary.sh" tektoncd/cli "$package" "$version" tkn
+"$srcdir/../github/github_install_binary.sh" tektoncd/cli "$package" "$version" tkn

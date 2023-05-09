@@ -43,4 +43,4 @@ binary="kubectl-cert_manager"
 # can rusult in error trying to contact k8s cluster
 #export RUN_VERSION_ARG=1
 
-"$srcdir/../git/github_install_binary.sh" cert-manager/cert-manager 'kubectl-cert_manager-{os}-{arch}.tar.gz' "$version" "$binary"
+"$srcdir/../github/github_install_binary.sh" cert-manager/cert-manager 'kubectl-cert_manager-{os}-{arch}.tar.gz' "$version" "$binary"

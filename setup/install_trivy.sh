@@ -43,4 +43,4 @@ export ARCH_ARM="ARM"
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../git/github_install_binary.sh" aquasecurity/trivy "trivy_{version}_{os}-{arch}.tar.gz" "$version" trivy
+"$srcdir/../github/github_install_binary.sh" aquasecurity/trivy "trivy_{version}_{os}-{arch}.tar.gz" "$version" trivy

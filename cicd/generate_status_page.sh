@@ -33,7 +33,7 @@ echo
 echo "Generating STATUS.md"
 echo
 {
-"$srcdir/../git/github_generate_status_page.sh"
+"$srcdir/../github/github_generate_status_page.sh"
 echo
 echo "---"
 echo
@@ -46,6 +46,6 @@ echo
 echo
 echo "Generating STARCHARTS.md"
 echo
-"$srcdir/../git/github_generate_starcharts.md.sh"
+"$srcdir/../github/github_generate_starcharts.md.sh"
 
 trap '' exit
