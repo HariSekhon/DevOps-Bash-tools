@@ -189,8 +189,8 @@ check_repos(){
             fi
         fi
         if check_bitbucket; then
-            #bitbucket_commits=$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master?pagelen=1" 2>/dev/null || : )"
-            bitbucket_commits="$("$srcdir/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" 2>/dev/null || : )"
+            #bitbucket_commits=$("$srcdir/../bitbucket/bitbucket_api.sh" "/repositories/<user>/$repo/refs/branches/master?pagelen=1" 2>/dev/null || : )"
+            bitbucket_commits="$("$srcdir/../bitbucket/bitbucket_api.sh" "/repositories/<user>/$repo/commits/master?pagelen=1" 2>/dev/null || : )"
             if [ $compare_by_date = 1 ]; then
                 # BitBucket returns +00:00 timezone
                 bitbucket_master_ref="$(jq -r '.values[0].date' <<< "$bitbucket_commits")"

@@ -73,7 +73,7 @@ echo >&2
 
 user="${GITHUB_USER:-$(get_github_user)}"
 owner="${GITHUB_ORGANIZATION:-$user}"
-bitbucket_owner="${BITBUCKET_OWNER:-${BITBUCKET_USER:-$("$srcdir/bitbucket_api.sh" /user | jq -r .username)}}"
+bitbucket_owner="${BITBUCKET_OWNER:-${BITBUCKET_USER:-$("$srcdir/../bitbucket/bitbucket_api.sh" /user | jq -r .username)}}"
 bitbucket_workspace="${BITBUCKET_WORKSPACE:-}"
 
 if is_blank "$owner"; then
@@ -85,7 +85,7 @@ fi
 
 if is_blank "$bitbucket_workspace"; then
     timestamp "Attempting to auto-determine BitBucket workspace from user if only one exists"
-    bitbucket_workspace="$("$srcdir/bitbucket_api.sh" '/user/permissions/workspaces?q=permission="owner"' | jq -r '.values[].workspace.slug')"
+    bitbucket_workspace="$("$srcdir/../bitbucket/bitbucket_api.sh" '/user/permissions/workspaces?q=permission="owner"' | jq -r '.values[].workspace.slug')"
     if is_blank "$bitbucket_workspace"; then
         die "Failed to determine BitBucket workspace"
     fi
@@ -124,9 +124,9 @@ mirror_repo(){
     bitbucket_owner_repo="$bitbucket_owner/$bitbucket_repo"
 
     timestamp "Checking BitBucket repo '$bitbucket_owner/$bitbucket_repo' exists"
-    if ! "$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" >/dev/null; then
+    if ! "$srcdir/../bitbucket/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" >/dev/null; then
         timestamp "Creating BitBucket repo '$bitbucket_owner/$bitbucket_repo'"
-        "$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" -X POST -d "{ \"scm\": \"git\", \"key\": \"$bitbucket_workspace\" }" >/dev/null || return 1
+        "$srcdir/../bitbucket/bitbucket_api.sh" "/repositories/$bitbucket_owner_repo" -X POST -d "{ \"scm\": \"git\", \"key\": \"$bitbucket_workspace\" }" >/dev/null || return 1
         echo >&2
     fi
 
@@ -134,7 +134,7 @@ mirror_repo(){
     "$srcdir/github_repo_description.sh" "$owner/$repo" |
     sed "s/^$repo/$bitbucket_repo/" |
     # timestamp not needed here as bitbucket_project_set_description.sh will output if it is setting the repo description
-    "$srcdir/bitbucket_repo_set_description.sh"
+    "$srcdir/../bitbucket/bitbucket_repo_set_description.sh"
 
     if [ -d "$repo.git" ]; then
         timestamp "Using existing clone in directory '$repo.git'"
@@ -172,7 +172,7 @@ mirror_repo(){
     #
     #       https://community.atlassian.com/t5/Bitbucket-questions/Setting-the-default-branch-with-REST-API/qaq-p/1336362#U1989031
     #
-    #"$srcdir/bitbucket_api.sh" "/repositories/$bitbucket_owner/$bitbucket_repo" -X PUT -d '{"mainbranch": { "name": "'"$default_branch"'", "type": "branch" } }' >/dev/null
+    #"$srcdir/../bitbucket/bitbucket_api.sh" "/repositories/$bitbucket_owner/$bitbucket_repo" -X PUT -d '{"mainbranch": { "name": "'"$default_branch"'", "type": "branch" } }' >/dev/null
 
     popd >/dev/null || return 1
     echo >&2

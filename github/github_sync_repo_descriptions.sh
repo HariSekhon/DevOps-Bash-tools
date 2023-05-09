@@ -49,5 +49,5 @@ else
 fi |
 while read -r repo description; do
     "$srcdir/gitlab_project_set_description.sh" <<< "$repo $description"
-    "$srcdir/bitbucket_repo_set_description.sh" <<< "$repo $description"
+    "$srcdir/../bitbucket/bitbucket_repo_set_description.sh" <<< "$repo $description"
 done
