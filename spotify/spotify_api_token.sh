@@ -39,7 +39,7 @@ Many scripts utilize this code and will automatically generate the authenticatio
 
 For private tokens which require authorization pop-ups, if you want to avoid these on every run of these spotify scripts, you can preload a private authorized token in to your shell for an hour like so:
 
-export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/../spotify_api_token.sh')
+export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/../spotify/spotify_api_token.sh')
 
 
 Generate an App client ID and secret for SPOTIFY_ID and SPOTIFY_SECRET environment variables here:
