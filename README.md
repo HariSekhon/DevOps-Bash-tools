@@ -227,7 +227,7 @@ make
 
 #### Linux & Mac
 
-`bin/` and `configs/` directories
+`bin/` and `configs/` directories:
 
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
