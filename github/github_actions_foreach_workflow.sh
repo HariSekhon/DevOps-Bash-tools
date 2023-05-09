@@ -71,6 +71,8 @@ while read -r id workflow; do
     cmd=("${cmd[@]//\{workflow\}/$workflow}")
     cmd=("${cmd[@]//\{workflow_id\}/$id}")
     cmd=("${cmd[@]//\{id\}/$id}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo >&2
 done

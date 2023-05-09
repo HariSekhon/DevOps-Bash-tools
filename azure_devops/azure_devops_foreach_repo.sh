@@ -77,5 +77,7 @@ while read -r name; do
     cmd=("${cmd[@]//\{project\}/${AZURE_DEVOPS_PROJECT:-}}")
     cmd=("${cmd[@]//\{repo\}/$repo}")
     cmd=("${cmd[@]//\{name\}/$name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done

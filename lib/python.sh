@@ -56,9 +56,9 @@ else
     python2="$(type -P python2 2>/dev/null || :)"
     python3="$(type -P python3 2>/dev/null || :)"
     if [ -z "$python" ]; then
-        if [ -n "$python3" ]; then
+        if [ -n "${python3:-}" ]; then
             python="$python3"
-        elif [ -n "$python2" ]; then
+        elif [ -n "${python2:-}" ]; then
             python="$python2"
         else
             echo "ERROR: 'command -v python' failed to find python" >&2
@@ -76,7 +76,7 @@ else
     if [ -z "$pip" ]; then
         if [ -n "$pip3" ]; then
             pip="$pip3"
-        elif [ -n "$pip2" ]; then
+        elif [ -n "${pip2:-}" ]; then
             pip="$pip2"
         else
             echo "pip not found, falling back to trying just 'pip'" >&2
@@ -154,7 +154,7 @@ check_python_pip_versions_match(){
        [ -n "${pip_python_version:-}" ]; then
         if [ "$python_version" != "$pip_python_version" ]; then
             if [ "${python_version:0:1}" = 3 ] &&
-               [ -n "$pip3" ]; then
+               [ -n "${pip3:-}" ]; then
                 pip="$pip3"
                 check_python_pip_versions_match
             elif [ "${python_version:0:1}" = 2 ]; then

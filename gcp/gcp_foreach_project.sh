@@ -79,7 +79,9 @@ while read -r project_id project_name; do
     cmd=("${cmd[@]//\{project_name\}/$project_name}")
     cmd=("${cmd[@]//\{id\}/$project_id}")
     cmd=("${cmd[@]//\{name\}/$project_name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo >&2
     echo >&2
 done

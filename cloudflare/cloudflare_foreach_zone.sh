@@ -60,5 +60,7 @@ while read -r zone_id zone_name; do
     cmd=("${cmd[@]//\{zone_name\}/$zone_name}")
     cmd=("${cmd[@]//\{id\}/$zone_id}")
     cmd=("${cmd[@]//\{name\}/$zone_name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done

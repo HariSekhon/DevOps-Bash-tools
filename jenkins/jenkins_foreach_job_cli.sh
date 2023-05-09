@@ -60,6 +60,8 @@ while read -r job; do
     echo "# ============================================================================ #" >&2
     cmd=("$@")
     cmd=("${cmd[@]//\{job\}/$job}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo >&2
 done

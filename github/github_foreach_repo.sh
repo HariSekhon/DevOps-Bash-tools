@@ -59,6 +59,8 @@ while read -r repo; do
     cmd=("$@")
     cmd=("${cmd[@]//\{owner\}/$owner}")
     cmd=("${cmd[@]//\{repo\}/$repo}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo >&2
 done
