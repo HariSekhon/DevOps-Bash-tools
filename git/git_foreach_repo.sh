@@ -66,9 +66,9 @@ min_args 1 "$@"
 
 #cd "$git_base_dir"
 
-opts="${OPTS:-}"
+opts=("${OPTS:-}")
 if [ -z "${NO_TEST:-}" ]; then
-    opts="$opts test"
+    opts+=("test")
 fi
 
 repofile="$srcdir/../setup/repos.txt"
@@ -86,7 +86,8 @@ fi
 
 execute_repo(){
     local owner_repo="$1"
-    local cmd="${*:2}"
+    shift || :
+    local cmd=("$@")
     local owner
     local repo="${owner_repo##*/}"
     repo_dir="$repo"
@@ -114,11 +115,11 @@ execute_repo(){
         echo "# $owner_repo - $repo_dir" >&2
         echo "# ============================================================================ #" >&2
     fi
-    cmd="${cmd//\{owner\}/$owner}"
-    cmd="${cmd//\{repo\}/$repo}"
-    cmd="${cmd//\{dir\}/$repo_dir}"
-    eval "$cmd"
-    if [[ "$cmd" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
+    cmd=("${cmd[@]//\{owner\}/$owner}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    cmd=("${cmd[@]//\{dir\}/$repo_dir}")
+    "${cmd[@]}"
+    if [[ "${cmd[*]}" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
         # throttle hitting the GitHub / GitLab / Bitbucket APIs too often as they may error out
         sleep 0.05
     fi
