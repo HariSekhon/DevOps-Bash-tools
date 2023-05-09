@@ -62,9 +62,7 @@ while read -r repo; do
     fi
     cmd=(terraform import "github_repository.$repo" "$repo")
     timestamp "${cmd[*]}"
-    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "${cmd[@]}"
-    else
+    if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
 done
