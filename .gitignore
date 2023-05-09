@@ -371,8 +371,8 @@ fatlib/
 fluxbox-themes
 fluxbox/debian007.jpg
 # internal repos
-git/
-git/*
+#git/
+#git/*
 # public repos - clashes with TeamCity-CI repo's .teamcity/GitHub
 #github/
 #github/*
