@@ -46,7 +46,7 @@ export PATH="$PATH:$HOME/bin"
 #else
     echo "Installing AWS CLI"
     # old AWS CLI v1 - doesn't support AWS SSO
-    #PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
+    #PYTHON_USER_INSTALL=1 "$srcdir/../python/python_pip_install.sh" awscli
     pushd /tmp
     #curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
     #wget -c "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
