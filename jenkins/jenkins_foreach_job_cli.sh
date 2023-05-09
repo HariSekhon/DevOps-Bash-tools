@@ -53,15 +53,13 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 "$srcdir/jenkins_cli.sh" list-jobs |
 while read -r job; do
     echo "# ============================================================================ #" >&2
     echo "# $job" >&2
     echo "# ============================================================================ #" >&2
-    cmd="$cmd_template"
-    cmd="${cmd//\{job\}/$job}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{job\}/$job}")
+    "${cmd[@]}"
     echo >&2
 done
