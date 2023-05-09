@@ -56,10 +56,10 @@ while read -r policy name; do
     if is_blank "$arn"; then
         die "Failed to determine policy ARN"
     fi
-    cmd="terraform import '$policy' '$arn'"
-    echo "$cmd"
+    cmd=(terraform import "$policy" "$arn")
+    echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        eval "$cmd"
+        "${cmd[@]}"
     fi
     echo >&2
 done
