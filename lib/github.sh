@@ -81,7 +81,7 @@ get_github_user(){
         echo "$GITHUB_USER"
     else
         # get currently authenticated user
-        "$srcdir_github_lib/../github_api.sh" /user | jq -r .login
+        "$srcdir_github_lib/../github/github_api.sh" /user | jq -r .login
     fi
 }
 
@@ -110,7 +110,7 @@ get_github_repos(){
     fi
     local page=1
     while true; do
-        if ! output="$("$srcdir_github_lib/../github_api.sh" "/$prefix/$owner/repos?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir_github_lib/../github/github_api.sh" "/$prefix/$owner/repos?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
