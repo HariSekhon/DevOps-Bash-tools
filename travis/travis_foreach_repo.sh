@@ -61,7 +61,9 @@ while read -r repo; do
     cmd=("${cmd[@]//\{user\}/$user}")
     cmd=("${cmd[@]//\{repo\}/$repo}")
     cmd=("${cmd[@]//\{name\}/$name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     if [ -z "${NO_HEADING:-}" ]; then
         echo >&2
     fi
