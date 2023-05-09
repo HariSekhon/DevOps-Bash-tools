@@ -83,5 +83,7 @@ while read -r name repo; do
     cmd=("${cmd[@]//\{project\}/$repo}")
     cmd=("${cmd[@]//\{repo\}/$repo}")
     cmd=("${cmd[@]//\{name\}/$name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done
