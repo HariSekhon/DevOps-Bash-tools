@@ -81,6 +81,6 @@ if [ -z "$container" ]; then
     container="$(kubectl get pods -n "$namespace" "$pod" -o 'jsonpath={.spec.containers[*].name}' | grep -m 1 "." | awk '{print $1}' || :)"
 fi
 
-cmd="kubectl exec -ti --namespace \"$namespace\" \"$pod\" --container \"$container\" -- /bin/sh -c 'if type bash >/dev/null 2>&1; then exec bash; else exec sh; fi'"
-echo "$cmd"
-eval "$cmd"
+cmd=(kubectl exec -ti --namespace "$namespace" "$pod" --container "$container" -- /bin/sh -c 'if type bash >/dev/null 2>&1; then exec bash; else exec sh; fi')
+echo "${cmd[@]}"
+"${cmd[@]}"
