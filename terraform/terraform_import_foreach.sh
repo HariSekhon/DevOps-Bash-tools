@@ -62,11 +62,11 @@ while read -r resource_path; do
     resource1="${resource1%%\"]*}"
     resource2="${resource_path%%[*}"
     resource2="${resource2##*.}"
-    cmd="terraform import '$resource_path' '$resource1:$resource2'"
-    timestamp "$cmd"
+    cmd=(terraform import "$resource_path" "$resource1:$resource2")
+    timestamp "${cmd[*]}"
     if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "$cmd"
+        echo "${cmd[@]}"
     else
-        eval "$cmd"
+        "${cmd[@]}"
     fi
 done
