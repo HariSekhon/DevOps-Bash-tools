@@ -54,5 +54,7 @@ while read -r pipeline; do
     fi
     cmd=("$@")
     cmd=("${cmd[@]//\{pipeline\}/$pipeline}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done
