@@ -3,7 +3,7 @@
 #  Date: 2011-06-01 16:58:33 +0000 (Wed, 01 Jun 2011)
 #
 
-# run: CASK=1 ../brew_install_packages.sh brew-packages-desktop-casks.txt
+# run: CASK=1 ../packages/brew_install_packages.sh brew-packages-desktop-casks.txt
 
 anaconda
 atom
