@@ -59,9 +59,8 @@ while read -r group name; do
     # shellcheck disable=SC2178
     cmd=(terraform import "$group" "$name")
     # shellcheck disable=SC2128
-    echo "${cmd[@]}"
+    timestamp "${cmd[*]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        # shellcheck disable=SC2128
         "${cmd[@]}"
     fi
     echo >&2
