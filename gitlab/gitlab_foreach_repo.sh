@@ -48,8 +48,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 if [ -n "${GITLAB_USER:-}" ]; then
     user="$GITLAB_USER"
 else
@@ -79,11 +77,11 @@ while read -r name repo; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
-    cmd="$cmd_template"
-    cmd="${cmd//\{username\}/$user}"
-    cmd="${cmd//\{user\}/$user}"
-    cmd="${cmd//\{project\}/$repo}"
-    cmd="${cmd//\{repo\}/$repo}"
-    cmd="${cmd//\{name\}/$name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{username\}/$user}")
+    cmd=("${cmd[@]//\{user\}/$user}")
+    cmd=("${cmd[@]//\{project\}/$repo}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    cmd=("${cmd[@]//\{name\}/$name}")
+    "${cmd[@]}"
 done
