@@ -52,12 +52,12 @@ while read -r user name; do
     [ -n "$name" ] || continue
     timestamp "Importing user: $name"
     # shellcheck disable=SC2178
-    cmd="terraform import '$user' '$name'"
+    cmd=(terraform import "$user" "$name")
     # shellcheck disable=SC2128
-    echo "$cmd"
+    echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         # shellcheck disable=SC2128
-        eval "$cmd"
+        "${cmd[@]}"
     fi
     echo >&2
 done
