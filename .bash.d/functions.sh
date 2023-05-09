@@ -134,6 +134,15 @@ checkprog(){
     fi
 }
 
+function count() {
+    local total="$1"
+    for ((i = total; i > 0; i--)); do
+        sleep 1
+        printf "Time remaining %d secs\r" "$i"
+    done
+    bell
+}
+
 dum(){
     du -max "${@:-.}" |
     sort -k1n |
@@ -176,9 +185,8 @@ unquote(){
     ' "$@"
 }
 
-bell_done(){
-    eval "$@"
-    print '\a'
+bell(){
+    echo -e '\a'
 }
 
 resolve_symlinks(){
@@ -244,7 +252,7 @@ strip_basedirs(){
     local basedir="$1"
     shift
     while read -r filename; do
-        filename="${filename#${basedir%%/}/}"
+        filename="${filename#"${basedir%%/}"/}"
         filename="${filename##/}"
         echo "$filename"
     done <<< "$@"
@@ -393,7 +401,7 @@ foreachfile(){
         [ -p "$file"   ] && continue
         [ -S "$file"   ] && continue
         [ -L "$file"   ] && continue
-        eval "$@"
+        "$@"
     done
 }
 
@@ -570,7 +578,7 @@ alias tstamp=timestamp
 
 timestampcmd(){
     local output
-    output="$(eval "$@" 2>&1)"
+    output="$("$@" 2>&1)"
     timestamp "$output"
 }
 alias tstampcmd=timestampcmd
@@ -650,7 +658,7 @@ unorig(){
 strLastIndexOf(){
     local str="$1"
     local substr="$2"
-    local remainder="${str##*$substr}"
+    local remainder="${str##*"$substr"}"
     local lastIndex=$((${#str} - ${#remainder}))
     echo $lastIndex
 }
