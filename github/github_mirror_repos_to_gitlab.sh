@@ -71,7 +71,7 @@ echo >&2
 
 user="${GITHUB_USER:-$(get_github_user)}"
 owner="${GITHUB_ORGANIZATION:-$user}"
-gitlab_owner="${GITLAB_OWNER:-${GITLAB_USER:-$("$srcdir/gitlab_api.sh" /user | jq -r .username)}}"
+gitlab_owner="${GITLAB_OWNER:-${GITLAB_USER:-$("$srcdir/../gitlab/gitlab_api.sh" /user | jq -r .username)}}"
 
 if is_blank "$owner"; then
     die "Failed to determine GitHub owner"
@@ -81,7 +81,7 @@ if is_blank "$gitlab_owner"; then
 fi
 
 #timestamp "Getting GitLab id in case we need to create any repos in GitLab"
-#gitlab_id="$("$srcdir/gitlab_api.sh" "/users?username=$gitlab_owner" | jq -r '.[0].id')"
+#gitlab_id="$("$srcdir/../gitlab/gitlab_api.sh" "/users?username=$gitlab_owner" | jq -r '.[0].id')"
 #echo >&2
 #if is_blank "$gitlab_id"; then
 #    die "Failed to determine GitLab id"
@@ -118,11 +118,11 @@ mirror_repo(){
     gitlab_owner_repo="$("$srcdir/../bin/urlencode.sh" <<< "$gitlab_owner/$gitlab_repo")"
 
     timestamp "Checking GitLab repo '$gitlab_owner/$gitlab_repo' exists"
-    if ! "$srcdir/gitlab_api.sh" "/projects/$gitlab_owner_repo" >/dev/null; then
+    if ! "$srcdir/../gitlab/gitlab_api.sh" "/projects/$gitlab_owner_repo" >/dev/null; then
         timestamp "Creating GitLab repo '$gitlab_owner/$gitlab_repo'"
         # only available for admins
-        #"$srcdir/gitlab_api.sh" "/projects/user/$gitlab_id" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
-        "$srcdir/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null || return 1
+        #"$srcdir/../gitlab/gitlab_api.sh" "/projects/user/$gitlab_id" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null
+        "$srcdir/../gitlab/gitlab_api.sh" "/projects" -X POST -d "{ \"name\": \"$gitlab_repo\", \"visibility\": \"private\" }" >/dev/null || return 1
         echo >&2
     fi
 
@@ -130,7 +130,7 @@ mirror_repo(){
     "$srcdir/github_repo_description.sh" "$owner/$repo" |
     sed "s/^$repo/$gitlab_repo/" |
     # timestamp not needed here as gitlab_project_set_description.sh will output if it is setting the repo description
-    "$srcdir/gitlab_project_set_description.sh"
+    "$srcdir/../gitlab/gitlab_project_set_description.sh"
 
     if [ -d "$repo.git" ]; then
         timestamp "Using existing clone in directory '$repo.git'"
@@ -160,13 +160,13 @@ mirror_repo(){
     fi
 
     timestamp "Enabling branch protections on GitLab mirror repo '$gitlab_owner/$gitlab_repo'"
-    "$srcdir/gitlab_project_protect_branches.sh" "$gitlab_owner/$gitlab_repo"
+    "$srcdir/../gitlab/gitlab_project_protect_branches.sh" "$gitlab_owner/$gitlab_repo"
 
     timestamp "Getting GitHub repo '$repo' default branch"
     local default_branch
     default_branch="$("$srcdir/github_api.sh" "/repos/$owner/$repo" | jq -r '.default_branch')"
     timestamp "Setting GitLab repo '$gitlab_owner/$gitlab_repo' default branch to '$default_branch'"
-    "$srcdir/gitlab_api.sh" "/projects/$gitlab_owner_repo" -X PUT -d '{"default_branch": "'"$default_branch"'"}' >/dev/null
+    "$srcdir/../gitlab/gitlab_api.sh" "/projects/$gitlab_owner_repo" -X PUT -d '{"default_branch": "'"$default_branch"'"}' >/dev/null
 
     popd >/dev/null || return 1
     echo >&2
