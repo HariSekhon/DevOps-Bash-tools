@@ -79,7 +79,7 @@ while read -r jenkinsfile; do
     #"$srcdir/jenkins_api.sh" "/pipeline-model-converter/validate" -X POST -F "jenkinsfile=<Jenkinsfile"
     #"$srcdir/jenkins_api.sh" "/pipeline-model-converter/validate" -X POST -F "jenkinsfile=<$jenkinsfile"
     # 'export JENKINS_CLI_ARGS=-webSocket' is needed if Jenkins is behind a reverse proxy such as Kubernetes Ingress, otherwise Jenkins CLI hangs
-    "$srcdir/jenkins_cli.sh" declarative-linter < "$jenkinsfile"
+    "$srcdir/../jenkins/jenkins_cli.sh" declarative-linter < "$jenkinsfile"
 done <<< "$jenkinsfiles"
 
 time_taken "$start_time"
