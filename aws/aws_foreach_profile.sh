@@ -60,7 +60,9 @@ while read -r profile; do
     export AWS_PROFILE="$profile"
     cmd=("$@")
     cmd=("${cmd[@]//\{profile\}/$profile}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo >&2
     echo >&2
 done
