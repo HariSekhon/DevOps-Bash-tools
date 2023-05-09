@@ -108,7 +108,7 @@ EOF
 EOF
         gcloud container clusters get-credentials "$cluster" --zone "$zone"
         echo
-        "$srcdir/kubernetes_info.sh"
+        "$srcdir/../kubernetes/kubernetes_info.sh"
     done
 }
 
