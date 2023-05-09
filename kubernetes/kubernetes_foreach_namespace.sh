@@ -83,6 +83,8 @@ while read -r namespace; do
     set_namespace "$namespace"
     cmd=("$@")
     cmd=("${cmd[@]//\{namespace\}/$namespace}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo
 done
