@@ -56,7 +56,6 @@ while read -r user name; do
     # shellcheck disable=SC2128
     echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        # shellcheck disable=SC2128
         "${cmd[@]}"
     fi
     echo >&2
