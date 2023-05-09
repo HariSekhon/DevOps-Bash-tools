@@ -54,7 +54,7 @@ while read -r user name; do
     # shellcheck disable=SC2178
     cmd=(terraform import "$user" "$name")
     # shellcheck disable=SC2128
-    echo "${cmd[@]}"
+    timestamp "${cmd[*]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
