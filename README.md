@@ -227,6 +227,8 @@ make
 
 #### Linux & Mac
 
+`bin/` and `configs/` directories
+
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
   - `.screenrc` - fancy [screen](https://www.gnu.org/software/screen/) configuration including advanced colour bar, large history, hotkey reloading, auto-blanking etc.
@@ -312,7 +314,7 @@ etc.
 
 #### AWS - Amazon Web Services
 
-- [AWS](https://aws.amazon.com/) scripts - `aws_*.sh`:
+- [AWS](https://aws.amazon.com/) scripts - `aws/*.sh`:
   - `aws_cli_create_credential.sh` - creates an AWS service account user for CI/CD or CLI with Admin permissions (or other group or policy), creates an AWS Access Key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Useful trick to avoid CLI reauth to `aws sso login` every day.
   - `aws_terraform_create_credential.sh` - creates a AWS terraform service account with Administrator permissions for Terraform Cloud or other CI/CD systems to run Terraform plan and apply, since no CI/CD systems can work with AWS SSO workflows. Stores the access key as both CSV and prints shell export commands and credentials file config as above
   - `.envrc-aws` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
@@ -400,11 +402,11 @@ etc.
     - `aws_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given Secrets Manager secret. Useful for updating a password without exposing it on your screen
     - `aws_secret_update_binary.sh` - base64 encodes a given file's contents and updates a given Secrets Manager secret. Useful for updating a QR code screenshot for a root account
     - `aws_secret_get.sh` - gets a secret value for a given secret from Secrets Manager, retrieving either a secure string or secure binary depending on which is available
-  - `setup/eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
+  - `eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
 
 #### GCP - Google Cloud Platform
 
-- [Google Cloud](https://cloud.google.com/) scripts - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
+- [Google Cloud](https://cloud.google.com/) scripts - `gcp/*.sh` directory - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
   - `.envrc-gcp` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load GCP configuration settings such as Project, Region, Zone, GKE cluster kubectl context or any other GCloud SDK setting to shorten `gcloud` commands. Applies to the local shell environment only to avoid race conditions caused by naively changing the global gcloud config at `~/.config/gcloud/active_config`
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using Terraform immediately. Run once for each project and combine with [direnv](https://direnv.net/) for fast easy management of multiple GCP projects
@@ -516,6 +518,8 @@ etc.
 
 #### Kubernetes
 
+`kubernetes/` directory:
+
 - `.envrc-kubernetes` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
 - `eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
 - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
@@ -588,6 +592,8 @@ etc.
 
 #### Docker
 
+`docker/` directory:
+
 - `docker_*.sh` / `dockerhub_*.sh` - [Docker](https://www.docker.com/) / [DockerHub](https://hub.docker.com/) API scripts:
   - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
   - `docker_api.sh` - queries a Docker Registry with optional basic authentication if `$DOCKER_USER` & `$DOCKER_PASSWORD` are set
@@ -603,6 +609,8 @@ etc.
 - `quay_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
 
 #### Big Data & NoSQL
+
+`bigdata/` and `kafka/` directories:
 
 - `kafka_*.sh` - scripts to make [Kafka](http://kafka.apache.org/) CLI usage easier including auto-setting Kerberos to source TGT from environment and auto-populating broker and zookeeper addresses. These are auto-added to the `$PATH` when `.bashrc` is sourced. For something similar for [Solr](https://lucene.apache.org/solr/), see `solr_cli.pl` in the [DevOps Perl Tools](https://github.com/HariSekhon/DevOps-Perl-tools) repo.
 - `zookeeper*.sh` - [Apache ZooKeeper](https://zookeeper.apache.org/) scripts:
@@ -642,7 +650,7 @@ etc.
 
 #### Git - GitHub, GitLab, Bitbucket, Azure DevOps
 
-- `git*.sh` - [Git](https://git-scm.com/) scripts:
+- `git/*.sh` - [Git](https://git-scm.com/) scripts:
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
   - `git_foreach_modified.sh` - executes a command against each file with git modified status
@@ -660,7 +668,7 @@ etc.
   - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout all my repos
   - `git_askpass.sh` - credential helper script to use environment variables for git authentication
-- `github_*.sh` - [GitHub](https://github.com/) API / CLI scripts:
+- `github/*.sh` - [GitHub](https://github.com/) API / CLI scripts:
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_install_binary.sh` - installs a binary from GitHub releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{owner}`/`{name}` or `{repo}` placeholders in each iteration
@@ -730,7 +738,7 @@ etc.
   - `github_teams_not_in_terraform.sh` - finds all teams for given organization which are not found in `$PWD/*.tf` Terraform code
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket / Azure DevOps are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
   - `github_teams_not_idp_synced.sh` - finds GitHub teams that aren't sync'd from an IdP like Azure AD. These should usually be migrated or removed
-- `gitlab_*.sh` - [GitLab](https://gitlab.com/) API scripts:
+- `gitlab/*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
   - `gitlab_project_set_description.sh` - sets the description for one or more projects using the GitLab API
@@ -745,7 +753,7 @@ etc.
   - `gitlab_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitLab account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
   - `gitlab_ssh_delete_public_keys.sh` - deletes given SSH keys from the currently authenticated GitLab account by key id or title regex match
   - `gitlab_validate_ci_yaml.sh` - validates a `.gitlab-ci.yml` file via the GitLab API
-- `bitbucket_*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
+- `bitbucket/*.sh` - [BitBucket](https://bitbucket.org/) API scripts:
   - `bitbucket_api.sh` - queries the BitBucket [API](https://developer.atlassian.com/bitbucket/api/2/reference/resource/). Can infer BitBucket user, repo and authentication token from local checkout or environment (`$BITBUCKET_USER`, `$BITBUCKET_TOKEN`)
   - `bitbucket_foreach_repo.sh` - executes a templated command for each BitBucket repo, replacing the `{user}` and `{repo}` in each iteration
   - `bitbucket_workspace_set_env_vars.sh` - adds / updates Bitbucket workspace-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
@@ -757,13 +765,15 @@ etc.
 
 #### CI/CD - Continuous Integration / Continuous Deployment
 
+Some CI/CD have their own directories such as Terraform, Jenkins, TeamCity, Azure DevOps, BuildKite, CircleCI, TravisCI etc... while the remainder are found in the `cicd/` directory:
+
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
-- `azure_devops_*.sh` - [Azure DevOps](https://dev.azure.com/) scripts:
+- `azure_devops/*.sh` - [Azure DevOps](https://dev.azure.com/) scripts:
   - `azure_devops_api.sh` - queries Azure DevOps's API with authentication
   - `azure_devops_foreach_repo.sh` - executes a templated command for each Azure DevOps repo, replacing `{user}`, `{org}`, `{project}` and `{repo}` in each iteration
   - `azure_devops_to_github_migration.sh` - migrates one or all Azure DevOps git repos to GitHub, including all branches and sets the default branch to match via the APIs to maintain the same checkout behaviour
   - `azure_devops_disable_repos.sh` - disables one or more given Azure DevOps repos (to prevent further pushes to them after migration to GitHub)
-- `circleci_*.sh` - [CircleCI](https://circleci.com/) scripts:
+- `circleci/*.sh` - [CircleCI](https://circleci.com/) scripts:
   - `circleci_api.sh` - queries CircleCI's API with authentication
   - `circleci_project_set_env_vars.sh` - adds / updates CircleCI project-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `circleci_context_set_env_vars.sh` - adds / updates CircleCI context-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
@@ -789,7 +799,7 @@ etc.
   - prints recent build statuses at end
   - call from any repo top level directory with a `.concourse.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `fly.sh` - shortens [Concourse](https://concourse-ci.org/) `fly` command to not have to specify target all the time
-- `jenkins_*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
+- `jenkins/*.sh` - [Jenkins CI](https://jenkins.io/) scripts:
   - `jenkins.sh` - one-touch [Jenkins CI](https://jenkins.io/):
     - launches Docker container
     - installs plugins
@@ -855,7 +865,7 @@ etc.
     - `jenkins_cred_cli_set_user_pass.sh` - creates or updates a Jenkins username/password credential
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
-- `teamcity_*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
+- `teamcity/*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
   - `teamcity.sh` - one-touch [TeamCity CI](https://www.jetbrains.com/teamcity/) cluster:
     - launches Docker containers with server and 1 agent
     - click proceed and accept the EULA
@@ -885,7 +895,7 @@ etc.
   - `teamcity_project_set_versioned_settings.sh` - configures a project to track all changes to a VCS (eg. GitHub)
   - `teamcity_project_vcs_versioning.sh` - quickly toggle VCS versioning on/off for a given TeamCity project (useful for testing without auto-committing)
   - `teamcity_vcs_roots.sh` - lists TeamCity VCS root IDs and Names
-- `travis_*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
+- `travis/*.sh` - [Travis CI](https://travis-ci.org/) API scripts (one of my all-time favourite CI systems):
   - `travis_api.sh` - queries the Travis CI API with authentication using `$TRAVIS_TOKEN`
   - `travis_repos.sh` - lists Travis CI repos
   - `travis_foreach_repo.sh` - executes a templated command against all Travis CI repos
@@ -905,7 +915,7 @@ etc.
   - `travis_repos_delete_crons.sh` - deletes all crons for all repos
   - `travis_repos_delete_caches.sh` - deletes all caches for all repos
   - `travis_lint.sh` - lints a given `.travis.yml` using the API
-- `buildkite_*.sh` - [BuildKite](https://buildkite.com/) API scripts:
+- `buildkite/*.sh` - [BuildKite](https://buildkite.com/) API scripts:
   - `buildkite_api.sh` - queries the BuildKite API, handling authentication using `$BUILDKITE_TOKEN`
   - `buildkite_pipelines.sh` - list buildkite pipelines for your `$BUILDKITE_ORGANIZATION` / `$BUILDKITE_USER`
   - `buildkite_foreach_pipeline.sh` - executes a templated command for each Buildkite pipeline, replacing the `{user}` and `{pipeline}` in each iteration
@@ -969,6 +979,8 @@ etc.
 
 #### Internet Services
 
+Mostly found in the `bin/` general directory, except for Pingdom and Terraform which are in `pingdom/` and `terraform/` directories respectively:
+
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`setup/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
@@ -1007,6 +1019,8 @@ etc.
 
 #### Perl
 
+`perl/` directory:
+
 - `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
 - `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
 - `perlpath.sh` - prints all Perl libary search paths, one per line
@@ -1017,6 +1031,8 @@ etc.
 - `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
 
 #### Python
+
+`python/` directory:
 
 - `python_compile.sh` - byte-compiles Python scripts and libraries into `.pyo` optimized files
 - `python_pip_install.sh` - bulk installs PyPI modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, VirtualEnvs / Anaconda / GitHub Workflows/ Google Cloud Shell, Mac vs Linux library paths, and ignore failure option
@@ -1035,11 +1051,15 @@ etc.
 
 #### Golang
 
+`packages/` directory:
+
 - `golang_install.sh` - bulk installs Golang modules from mix of arguments / file lists / stdin
 - `golang_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
 - `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete you `bin/` etc as these are often real deployed applications rather than development binaries
 
 #### MP3
+
+`mp3/` directory:
 
 - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
 - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
@@ -1047,7 +1067,9 @@ etc.
 
 #### Spotify
 
-40+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo):
+40+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo).
+
+`spotify/` directory:
 
 - `spotify_playlists*.sh` - list playlists in either `<id> <name>` or JSON format
 - `spotify_playlist_tracks*.sh` - gets playlist contents as track URIs / `Artists - Track` / CSV format - useful for backups or exports between music systems
@@ -1087,6 +1109,8 @@ etc.
 
 #### More Linux & Mac
 
+`bin/`, `setup/` and `packages/` directories:
+
 - [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
   - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
   - install if absent scripts for Python, Perl, Ruby, NodeJS and Golang packages - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
@@ -1114,6 +1138,8 @@ etc.
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 #### Builds, Languages & Linting
+
+`bin/`, `checks/`, `cicd/` or language specific directories:
 
 - `lint.sh` - lints one or more files, auto-determines the file types, parses lint headers and calls appropriate scripts and tools. Integrated with my custom `.vimrc`
 - `run.sh` - runs one or more files, auto-determines the file types, any run or arg headers and executes each file using the appropriate script or CLI tool. Integrated with my custom `.vimrc`
@@ -1145,6 +1171,8 @@ etc.
     - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
 
 #### Data Format Conversion & Validation
+
+`bin/` directory:
 
 - `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against column positions
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
