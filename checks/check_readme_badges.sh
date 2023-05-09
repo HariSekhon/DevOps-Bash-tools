@@ -58,12 +58,12 @@ duplicates="$(
     {
     # exact README lines
     # shellcheck disable=SC1117
-    "$srcdir/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
+    "$srcdir/../git/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
     sort |
     uniq -d
 
     # any URLs
-    #"$srcdir/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
+    #"$srcdir/../git/git_foreach_repo.sh" "grep -Eho '\[\!\[.*\]\(.*\)\]\(.*\)' README.md" |
     #grep -Eo '(http|https)://[a-zA-Z0-9./?=_%:#&,+-]*' |
     #sort |
     #uniq -d
