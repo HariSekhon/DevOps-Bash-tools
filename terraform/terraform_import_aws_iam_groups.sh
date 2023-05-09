@@ -57,12 +57,12 @@ while read -r group name; do
     #    die "Failed to determine group ARN"
     #fi
     # shellcheck disable=SC2178
-    cmd="terraform import '$group' '$name'"
+    cmd=(terraform import "$group" "$name")
     # shellcheck disable=SC2128
-    echo "$cmd"
+    echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         # shellcheck disable=SC2128
-        eval "$cmd"
+        "${cmd[@]}"
     fi
     echo >&2
 done
