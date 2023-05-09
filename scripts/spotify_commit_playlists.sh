@@ -104,7 +104,7 @@ find_net_removals(){
             fi
             continue
         fi
-        track="$("$srcdir/../spotify_uri_to_name.sh" <<< "$uri")"
+        track="$("$srcdir/../spotify/spotify_uri_to_name.sh" <<< "$uri")"
         if grep -Fxq "$track" "$playlist"; then
             if [ -n "${VERBOSE:-}" ]; then
                 echo "skipping removed URI for track '$track' which is found in $playlist (must have been replaced with a different URI)" >&2
