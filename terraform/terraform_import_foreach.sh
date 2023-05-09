@@ -64,9 +64,7 @@ while read -r resource_path; do
     resource2="${resource2##*.}"
     cmd=(terraform import "$resource_path" "$resource1:$resource2")
     timestamp "${cmd[*]}"
-    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "${cmd[@]}"
-    else
+    if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
 done
