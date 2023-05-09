@@ -53,10 +53,10 @@ sed 's/\[/["/; s/\]/"]/' |
 while read -r name instance_arn permission_set_arn; do
     [ -n "$permission_set_arn" ] || continue
     timestamp "Importing $name"
-    cmd="terraform import '$name' \"$permission_set_arn,$instance_arn\""
-    echo "$cmd"
+    cmd=(terraform import "$name" "$permission_set_arn,$instance_arn")
+    echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        eval "$cmd"
+        "${cmd[@]}"
     fi
     echo >&2
 done
