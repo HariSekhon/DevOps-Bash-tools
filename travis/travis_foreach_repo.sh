@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo user={user} name={name} repo={repo}
+#  args: bash -c 'echo user={user} name={name} repo={repo}'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-30 23:53:57 +0100 (Wed, 30 Sep 2020)
@@ -47,8 +47,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 "$srcdir/travis_repos.sh" |
 while read -r repo; do
     user="${repo%%/*}"
@@ -58,12 +56,12 @@ while read -r repo; do
         echo "# $repo" >&2
         echo "# ============================================================================ #" >&2
     fi
-    cmd="$cmd_template"
-    cmd="${cmd//\{username\}/$user}"
-    cmd="${cmd//\{user\}/$user}"
-    cmd="${cmd//\{repo\}/$repo}"
-    cmd="${cmd//\{name\}/$name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{username\}/$user}")
+    cmd=("${cmd[@]//\{user\}/$user}")
+    cmd=("${cmd[@]//\{repo\}/$repo}")
+    cmd=("${cmd[@]//\{name\}/$name}")
+    "${cmd[@]}"
     if [ -z "${NO_HEADING:-}" ]; then
         echo >&2
     fi
