@@ -71,7 +71,7 @@ if ! is_int "$port"; then
 fi
 
 # ca_crt path validated in here
-crt_hash="$("$srcdir/crt_hash.sh" "$ca_crt")"
+crt_hash="$("$srcdir/../bin/crt_hash.sh" "$ca_crt")"
 
 token="$(kubeadm token create)"
 
