@@ -29,7 +29,7 @@ echo "Checking Shippable README.md Project Badge"
 find . -name README.md -exec grep -Eo 'img.shields.io/shippable/.*app.shippable.com/[^/]+/[^/]+/[^/]+' {} \; |
 sed 's,img.shields.io/shippable/,,; s,[^[:alnum:]].*app.shippable.com/[^/]*/, ,' |
 while read -r id name; do
-    "$srcdir/shippable_projects.sh" "$id" "$@" |
+    "$srcdir/../shippable/shippable_projects.sh" "$id" "$@" |
     while read -r id2 owner repo; do
         if [ "$id" != "$id2" ]; then
             echo "id '$id' != returned id '$id2'"
