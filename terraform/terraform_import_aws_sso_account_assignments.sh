@@ -70,7 +70,7 @@ while read -r name instance_arn permission_set_arn principal_id principal_type t
     [ -n "$target_id" ] || continue
     timestamp "Importing $name"
     cmd=(terraform import "$name" "$principal_id,$principal_type,$target_id,AWS_ACCOUNT,$permission_set_arn,$instance_arn")
-    echo "${cmd[@]}"
+    timestamp "${cmd[*]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
