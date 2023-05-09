@@ -78,6 +78,8 @@ while read -r context; do
     kubectl config use-context "$context"
     cmd=("$@")
     cmd=("${cmd[@]//\{context\}/$context}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo
 done
