@@ -57,7 +57,7 @@ while read -r policy name; do
         die "Failed to determine policy ARN"
     fi
     cmd=(terraform import "$policy" "$arn")
-    echo "${cmd[@]}"
+    timestamp "${cmd[*]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
