@@ -60,8 +60,6 @@ if [ -z "$id" ]; then
 fi
 cmd=(terraform import "'$resource'" "$id")
 timestamp "${cmd[*]}"
-if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-    echo "${cmd[*]}"
-else
-    eval "${cmd[@]}"
+if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
+    "${cmd[@]}"
 fi
