@@ -150,6 +150,19 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+#up(){
+#    local times="${1:-1}"
+#    if ! [[ "$times" =~ ^[[:digit:]]$ ]]; then
+#        echo "How many directories to go up"
+#        echo
+#        echo "usage: up <num>"
+#        return 1
+#    fi
+#    while [ "$times" -gt 0 ]; do
+#        cd ..
+#        times=$((times - 1))
+#    done
+#}
 # use bare 'cd' instead, it's more standard
 #alias ~='cd ~'
 
