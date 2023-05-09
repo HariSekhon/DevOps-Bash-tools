@@ -28,7 +28,7 @@ if type -P circleci &>/dev/null; then
 fi
 
 if is_mac; then
-    "$srcdir/../brew_install_packages.sh" circleci
+    "$srcdir/../packages/brew_install_packages.sh" circleci
 else
     curl -fLSs https://circle.ci/cli | DESTDIR=~/bin bash
 fi
