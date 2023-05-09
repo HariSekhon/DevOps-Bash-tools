@@ -64,5 +64,7 @@ while read -r check_id check_name; do
     cmd=("${cmd[@]//\{check_name\}/$check_name}")
     cmd=("${cmd[@]//\{id\}/$check_id}")
     cmd=("${cmd[@]//\{name\}/$check_name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done
