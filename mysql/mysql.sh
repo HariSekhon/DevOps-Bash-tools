@@ -48,36 +48,37 @@ for arg; do
     esac
 done
 
-opts="${MYSQL_OPTS:-}"
+#opts=(${MYSQL_OPTS:-})
+read -r -a opts MYSQL_OPTS
 
 MYSQL_HOST="${MYSQL_HOST:-${HOST:-}}"
 if [ -n "${MYSQL_HOST:-}" ]; then
-    opts="$opts -h $MYSQL_HOST"
+    opts+=(-h "$MYSQL_HOST")
 fi
 
 MYSQL_PORT="${MYSQL_TCP_PORT:-${MYSQL_PORT:-${PORT:-}}}"
 if [ -n "${MYSQL_PORT:-}" ]; then
-    opts="$opts -P $MYSQL_PORT"
+    opts+=(-P "$MYSQL_PORT")
 fi
 
 MYSQL_USER="${MYSQL_USER:-${DBI_USER:-${USER:-}}}"
 if [ -n "${MYSQL_USER:-}" ]; then
-    opts="$opts -u $MYSQL_USER"
+    opts+=(-u "$MYSQL_USER")
 fi
 
 MYSQL_PASSWORD="${MYSQL_PWD:-${MYSQL_PASSWORD:-${PASSWORD:-}}}"
 if [ -n "${MYSQL_PASSWORD:-}" ]; then
     echo "WARNING: not auto-adding -p<password> for safety" >&2
     echo "exporting MYSQL_PWD instead but this is deprecated and may not work in future versions" >&2
-    #opts="$opts -p$MYSQL_PASSWORD"
+    #opts+=(-p"$MYSQL_PASSWORD")
     export MYSQL_PWD="$MYSQL_PASSWORD"
 fi
 
 MYSQL_DATABASE="${MYSQL_DATABASE:-${DATABASE:-}}"
 if [ -n "${MYSQL_DATABASE:-}" ]; then
-    opts="$opts -d $MYSQL_DATABASE"
+    opts+=(-d "$MYSQL_DATABASE")
 fi
 
 # split opts
 # shellcheck disable=SC2086
-exec mysql $opts "$@"
+exec mysql "${opts[@]}" "$@"
