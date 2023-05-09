@@ -73,7 +73,6 @@ while read -r resource; do
     fi
     cmd=(terraform import "$resource_type.$resource" "$resource")
     timestamp "${cmd[*]}"
-    echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
