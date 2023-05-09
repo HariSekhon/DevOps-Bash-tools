@@ -40,7 +40,7 @@ owner_repo="anchore/grype"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="$("$srcdir/../github/github_repo_latest_release.sh" "$owner_repo")"
     timestamp "latest version is '$version'"
 else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
