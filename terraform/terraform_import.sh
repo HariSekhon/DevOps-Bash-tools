@@ -71,11 +71,11 @@ while read -r resource; do
         echo "'$resource_type.$resource' already in terraform state, skipping..." >&2
         continue
     fi
-    cmd="terraform import $resource_type.$resource $resource"
-    timestamp "$cmd"
+    cmd=(terraform import "$resource_type.$resource" "$resource")
+    timestamp "${cmd[*]}"
     if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "$cmd"
+        echo "${cmd[@]}"
     else
-        $cmd
+        "${cmd[@]}"
     fi
 done
