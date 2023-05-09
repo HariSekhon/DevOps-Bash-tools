@@ -94,5 +94,7 @@ while read -r workspace name repo; do
     cmd=("${cmd[@]//\{workspace\}/$workspace}")
     cmd=("${cmd[@]//\{name\}/$name}")
     cmd=("${cmd[@]//\{repo\}/$repo}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done
