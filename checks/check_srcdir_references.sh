@@ -33,6 +33,8 @@ usage_args="arg [<options>]"
 
 help_usage "$@"
 
+section "Check SrcDir References"
+
 trap_cmd "echo 'FAILED!'"
 
 git grep -lE 'srcdir/.+\.sh' |
@@ -67,3 +69,4 @@ while read -r scriptpath; do
 done
 
 untrap
+echo "All srcdir references checked: OK"
