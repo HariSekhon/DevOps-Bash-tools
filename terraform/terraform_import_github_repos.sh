@@ -60,11 +60,11 @@ while read -r repo; do
         echo "repository '$repo' already in terraform state, skipping..." >&2
         continue
     fi
-    cmd="terraform import github_repository.$repo $repo"
-    timestamp "$cmd"
+    cmd=(terraform import "github_repository.$repo" "$repo")
+    timestamp "${cmd[*]}"
     if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "$cmd"
+        echo "${cmd[@]}"
     else
-        $cmd
+        "${cmd[@]}"
     fi
 done
