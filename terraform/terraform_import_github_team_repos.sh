@@ -79,11 +79,9 @@ while read -r team_repo repo team_id; do
         warn "team id '$team_id' not found in GitHub API, skipping..."
         continue
     fi
-    cmd="terraform import github_team_repository.$team_repo $team_id:$repo"
-    timestamp "$cmd"
-    if [ -n "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        echo "$cmd"
-    else
-        $cmd
+    cmd=(terraform import "github_team_repository.$team_repo" "$team_id:$repo")
+    timestamp "${cmd[*]}"
+    if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
+        "${cmd[@]}"
     fi
 done
