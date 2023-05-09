@@ -53,8 +53,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 kube_config_isolate
 
 current_context="$(kubectl config current-context)"
@@ -83,7 +81,8 @@ while read -r namespace; do
     # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
     #trap "echo; echo 'Reverting context to original namespace: $original_namespace' ; set_namespace '$original_namespace'" EXIT
     set_namespace "$namespace"
-    cmd="${cmd_template//\{namespace\}/$namespace}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{namespace\}/$namespace}")
+    "${cmd[@]}"
     echo
 done
