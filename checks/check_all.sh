@@ -160,7 +160,7 @@ if [ -z "${NO_RUBY_SYNTAX_CHECK:-}" ]; then
 fi
 
 if [ -z "${NO_PYTHON_COMPILE:-}" ]; then
-    "$srcdir/python_compile.sh"
+    "$srcdir/../python/python_compile.sh"
 fi
 
 if [ -z "${NO_PYTHON_MISC_CHECK:-}" ]; then
@@ -179,7 +179,7 @@ if [ -z "${NO_PYTHON_PYLINT_CHECK:-}" ]; then
     "$srcdir/check_python_pylint.sh"
 fi
 
-#"$srcdir/python3.sh"
+#"$srcdir/../python/python3.sh"
 
 # this is usually run after build, no point testing again
 #. "$srcdir/check_sbt_build.sh"
