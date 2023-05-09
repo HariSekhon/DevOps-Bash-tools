@@ -214,8 +214,8 @@ check_repos(){
         if check_azure_devops; then
             # Bug in Azure DevOps API: returns commits in timestamped order to second resolution,so if two commits have the same timestamp, you may get the wrong one
             # https://developercommunity.visualstudio.com/content/problem/508507/azure-devops-rest-api-returns-commits-in-incorrect.html
-            azure_devops_commits="$("$srcdir/azure_devops_api.sh" "/{user}/{project}/_apis/git/repositories/$repo/commits?api-version=6.1-preview.1&searchCriteria.\$top=1&searchCriteria.compareVersion.version=master&searchCriteria.compareVersion.versionType=branch"  2>/dev/null || :)"
-            azure_devops_commits="$("$srcdir/azure_devops_api.sh" "/{user}/{project}/_apis/git/repositories/$repo/commits?\$top=1&branch=master"  2>/dev/null || :)"
+            azure_devops_commits="$("$srcdir/../azure_devops/azure_devops_api.sh" "/{user}/{project}/_apis/git/repositories/$repo/commits?api-version=6.1-preview.1&searchCriteria.\$top=1&searchCriteria.compareVersion.version=master&searchCriteria.compareVersion.versionType=branch"  2>/dev/null || :)"
+            azure_devops_commits="$("$srcdir/../azure_devops/azure_devops_api.sh" "/{user}/{project}/_apis/git/repositories/$repo/commits?\$top=1&branch=master"  2>/dev/null || :)"
             if [ $compare_by_date = 1 ]; then
                 azure_devops_master_ref="$(jq -r '.value[0].committer.date' <<< "$azure_devops_commits")"
                 if [ -n "$azure_devops_master_ref" ] && [ "$azure_devops_master_ref" != null ]; then
