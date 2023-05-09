@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: 'echo -n "kubectl namespace: "; kubectl config get-contexts | awk "/^\*/{print \$5\" \"\$3}"; echo "var \{namespace\}: {namespace}"'
+#  args: bash -c 'echo -n "kubectl context: "; kubectl config get-contexts | awk "/^\*/{print \$5\" \"\$3}"; echo "namespace: {namespace}"'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-09-08 19:20:40 +0100 (Tue, 08 Sep 2020)
