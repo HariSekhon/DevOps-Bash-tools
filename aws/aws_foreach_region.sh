@@ -79,7 +79,9 @@ while read -r region; do
     export AWS_DEFAULT_REGION="$region"
     cmd=("$@")
     cmd=("${cmd[@]//\{region\}/$region}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
     echo >&2
     echo >&2
 done
