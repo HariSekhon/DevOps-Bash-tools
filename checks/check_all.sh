@@ -102,6 +102,8 @@ fi
 
 "$srcdir/check_non_executable_scripts.sh"
 
+"$srcdir/check_srcdir_references.sh"
+
 "$srcdir/check_bash_syntax.sh"
 
 # want splitting
