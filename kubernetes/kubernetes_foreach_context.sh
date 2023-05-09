@@ -57,8 +57,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 kube_config_isolate
 
 # don't need to store this any more as we now switch the KUBECONFIG which is only used for the lifetime of this script
@@ -78,7 +76,8 @@ while read -r context; do
     # XXX: no longer reset because we isolate the environment above via redirecting KUBECONFIG and simply let it expire at the end of this script
     #trap "echo; echo 'Reverting to original context:' ; kubectl config use-context '$original_context'" EXIT
     kubectl config use-context "$context"
-    cmd="${cmd_template//\{context\}/$context}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{context\}/$context}")
+    "${cmd[@]}"
     echo
 done
