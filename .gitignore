@@ -346,8 +346,8 @@ bin/contrib/*
 bin/desktops
 bin/firewalls
 bin/servers
-bitbucket/
-bitbucket/*
+#bitbucket/
+#bitbucket/*
 boxes/
 Box Documents/
 # contains webhook URL which should not be committed publicly
