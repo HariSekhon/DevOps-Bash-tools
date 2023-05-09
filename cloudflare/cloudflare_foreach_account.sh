@@ -60,5 +60,7 @@ while read -r account_id account_name; do
     cmd=("${cmd[@]//\{account_name\}/$account_name}")
     cmd=("${cmd[@]//\{id\}/$account_id}")
     cmd=("${cmd[@]//\{name\}/$account_name}")
-    "${cmd[@]}"
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
+    eval "${cmd[@]}"
 done
