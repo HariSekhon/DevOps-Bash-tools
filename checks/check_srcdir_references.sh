@@ -37,12 +37,15 @@ trap_cmd "echo 'FAILED!'"
 
 git grep -lE 'srcdir/.+\.sh' |
 grep -v '^\.bash\.d/' |
+grep -v 'check_bash_references.sh' |
 while read -r scriptpath; do
     pushd "$(dirname "$scriptpath")" >/dev/null
-    srcdirpaths="$(grep -Eo 'srcdir/[^"'"'"'[:space:]]+.sh' "${scriptpath##*/}" | sed 's|^srcdir/||')"
+    srcdirpaths="$({ grep -Eo '^[^#]*\$srcdir/[^"'"'"'[:space:]]+.sh' "${scriptpath##*/}" || : ; } |
+                   { grep -Eo -e 'srcdir/[^"'\''[:space:]]+\.sh' -e 'srcdir/[^"'\''[:space:]]*bashrc' || : ; } |
+                   sed 's|^srcdir/||')"
     for srcdirpath in $srcdirpaths; do
-        srcdirpath="$(readlink -f "$srcdirpath" || :)"
-        if ! test -f "$srcdirpath"; then
+        srcdirpath2="$(readlink -f "$srcdirpath" || :)"
+        if ! test -f "$srcdirpath2"; then
             echo "$scriptpath"
             timestamp "broken srcdir path: $srcdirpath"
         fi
