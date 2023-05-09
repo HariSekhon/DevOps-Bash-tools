@@ -86,11 +86,9 @@ add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
 add_PATH "/usr/local/bin"
 add_PATH "/usr/local/opt/python/libexec/bin"  # Mac brew installed Python, must be ahead of ~/anaconda/bin below
-add_PATH ~/.jx/bin
-#add_PATH "${JX_HOME:-$HOME/.jx}/bin"
 add_PATH "$bash_tools"
 add_PATH ~/bin
-for x in ~/bin/*; do
+for x in "$bash_tools"/* ~/bin/*; do
     [ -d "$x" ] || continue
     if [ -d "$x/bin" ]; then
         add_PATH "$x/bin"
@@ -132,6 +130,9 @@ fi
 if [ -d ~/.pulumi/bin ]; then
     add_PATH ~/.pulumi/bin
 fi
+
+#add_PATH "${JX_HOME:-$HOME/.jx}/bin"
+add_PATH ~/.jx/bin
 
 # do the same with MANPATH
 if [ -d ~/man ]; then
