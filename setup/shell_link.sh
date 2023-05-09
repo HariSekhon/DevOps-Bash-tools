@@ -25,11 +25,11 @@ conf_files="$(sed 's/#.*//; /^[[:space:]]*$/d' "$bash_tools/setup/files.txt")"
 
 setup_file(){
     local filename="$1"
-    if grep -Eq "^[[:space:]]*(source|\\.)[[:space:]]+$srcdir/$filename" ~/"$filename" 2>/dev/null; then
+    if grep -Eq "^[[:space:]]*(source|\\.)[[:space:]]+$bash_tools/$filename" ~/"$filename" 2>/dev/null; then
         echo "$filename already sourced in ~/$filename"
     else
-        echo "injecting into ~/$filename: source $srcdir/$filename"
-        echo "source $srcdir/$filename" >> ~/"$filename"
+        echo "injecting into ~/$filename: source $bash_tools/$filename"
+        echo "source $bash_tools/$filename" >> ~/"$filename"
     fi
 }
 
