@@ -43,7 +43,7 @@ owner_repo="hashicorp/terraform"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="$("$srcdir/../github/github_repo_latest_release.sh" "$owner_repo")"
     version="${version#v}"
     timestamp "latest version is '$version'"
 else

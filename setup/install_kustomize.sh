@@ -44,7 +44,7 @@ owner_repo="kubernetes-sigs/kustomize"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release_filter.sh" "$owner_repo" "kustomize")"
+    version="$("$srcdir/../github/github_repo_latest_release_filter.sh" "$owner_repo" "kustomize")"
     version="${version##*/}"
     timestamp "latest version is '$version'"
 else
