@@ -118,6 +118,8 @@ execute_repo(){
     cmd=("${cmd[@]//\{owner\}/$owner}")
     cmd=("${cmd[@]//\{repo\}/$repo}")
     cmd=("${cmd[@]//\{dir\}/$repo_dir}")
+    # need eval'ing to able to inline quoted script
+    # shellcheck disable=SC2294
     eval "${cmd[@]}"
     if [[ "${cmd[*]}" =~ github_.*.sh|gitlab_.*.sh|bitbucket_*.sh ]]; then
         # throttle hitting the GitHub / GitLab / Bitbucket APIs too often as they may error out
