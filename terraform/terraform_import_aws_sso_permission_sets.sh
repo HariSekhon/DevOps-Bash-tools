@@ -136,10 +136,10 @@ while read -r id instance_arn name; do
         die "Failed to resolve permset arn for '$name'"
     fi
     timestamp "Importing $name"
-    cmd="terraform import '$id' \"$permset_arn,$instance_arn\""
-    echo "$cmd"
+    cmd=(terraform import "$id" "$permset_arn,$instance_arn")
+    echo "${cmd[@]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
-        eval "$cmd"
+        "${cmd[@]}"
     fi
     echo >&2
 done
