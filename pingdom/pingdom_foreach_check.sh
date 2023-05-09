@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: 'echo "check id = {id} and name = {name}"'
+#  args: bash -c 'echo "check id = {id} and name = {name}"'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-24 15:25:27 +0100 (Mon, 24 Aug 2020)
@@ -51,8 +51,6 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-cmd_template="$*"
-
 "$srcdir/pingdom_api.sh" /checks |
 jq -r '.checks[] | [.id, .name] | @tsv' |
 while read -r check_id check_name; do
@@ -61,10 +59,10 @@ while read -r check_id check_name; do
         echo "# $check_id - $check_name" >&2
         echo "# ============================================================================ #" >&2
     fi
-    cmd="$cmd_template"
-    cmd="${cmd//\{check_id\}/$check_id}"
-    cmd="${cmd//\{check_name\}/$check_name}"
-    cmd="${cmd//\{id\}/$check_id}"
-    cmd="${cmd//\{name\}/$check_name}"
-    eval "$cmd"
+    cmd=("$@")
+    cmd=("${cmd[@]//\{check_id\}/$check_id}")
+    cmd=("${cmd[@]//\{check_name\}/$check_name}")
+    cmd=("${cmd[@]//\{id\}/$check_id}")
+    cmd=("${cmd[@]//\{name\}/$check_name}")
+    "${cmd[@]}"
 done
