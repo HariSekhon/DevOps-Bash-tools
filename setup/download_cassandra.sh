@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if ! type -P wget &>/dev/null ||
      type -P apk; then  # Alpine built-in wget isn't good enough
-    "$srcdir/../install_packages.sh" wget
+    "$srcdir/../packages/install_packages.sh" wget
 fi
 
 #/usr/lib/jvm/jre/bin/
