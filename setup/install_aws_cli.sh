@@ -43,7 +43,12 @@ export PATH="$PATH:$HOME/bin"
 
 #if type -P aws &>/dev/null; then
 #    echo "AWS CLI already installed"
-#else
+if type -P apk &>/dev/null; then
+    if ! grep -q 'https://dl-cdn.alpinelinux.org/alpine/edge/testing' /etc/apk/repositories; then
+        echo -e -n "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+    fi
+    apk add aws-cli-v2@testing --no-cache
+else
     echo "Installing AWS CLI"
     # old AWS CLI v1 - doesn't support AWS SSO
     #PYTHON_USER_INSTALL=1 "$srcdir/../python/python_pip_install.sh" awscli
@@ -72,7 +77,7 @@ export PATH="$PATH:$HOME/bin"
     echo -n "AWS CLI version: "
     aws --version
     echo
-#fi
+fi
 
 "$srcdir/install_eksctl.sh"
 
