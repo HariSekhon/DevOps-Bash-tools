@@ -137,7 +137,7 @@ while read -r id instance_arn name; do
     fi
     timestamp "Importing $name"
     cmd=(terraform import "$id" "$permset_arn,$instance_arn")
-    echo "${cmd[@]}"
+    timestamp "${cmd[*]}"
     if [ -z "${TERRAFORM_PRINT_ONLY:-}" ]; then
         "${cmd[@]}"
     fi
