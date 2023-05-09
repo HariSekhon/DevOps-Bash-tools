@@ -227,7 +227,7 @@ make
 
 #### Linux & Mac
 
-`bin/` and `configs/` directories:
+Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
@@ -297,7 +297,10 @@ etc.
 
 #### Databases
 
+`mysql/`, `postgres/`, `sql/` and `bin/` directories:
+
 - [sql/](https://github.com/HariSekhon/SQL-scripts) - 100+ SQL scripts for [PostgreSQL](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [Google BigQuery](https://cloud.google.com/bigquery) and [AWS Athena](https://aws.amazon.com/athena/) [CloudTrail](https://aws.amazon.com/cloudtrail/) logs integration
+- `sqlite.sh` - one-touch [SQLite](https://www.sqlite.org/index.html), starts sqlite3 shell with sample 'chinook' database loaded
 - `mysql*.sh` - [MySQL](https://www.mysql.com/) scripts:
   - `mysql.sh` - shortens `mysql` command to connect to [MySQL](https://www.mysql.com/) by auto-populating switches from both standard environment variables like `$MYSQL_TCP_PORT`, `$DBI_USER`, `$MYSQL_PWD` (see [doc](https://dev.mysql.com/doc/refman/8.0/en/environment-variables.html)) and other common environment variables like `$MYSQL_HOST` / `$HOST`, `$MYSQL_USER` / `$USER`, `$MYSQL_PASSWORD` / `$PASSWORD`, `$MYSQL_DATABASE` / `$DATABASE`
   - `mysql_foreach_table.sh` - executes a SQL query against every table, replacing `{db}` and `{table}` in each iteration eg. `select count(*) from {table}`
@@ -305,7 +308,6 @@ etc.
   - `mysqld.sh` - one-touch [MySQL](https://www.mysql.com/), boots docker container + drops in to `mysql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `source /sql/<name>.sql`. Optionally loads sample 'chinook' database
   - see also the [SQL Scripts](https://github.com/HariSekhon/SQL-scripts) repo for many more straight MySQL SQL scripts
 - `mariadb.sh` - one-touch [MariaDB](https://mariadb.org/), boots docker container + drops in to `mysql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `source /sql/<name>.sql`. Optionally loads sample 'chinook' database
-- `sqlite.sh` - one-touch [SQLite](https://www.sqlite.org/index.html), starts sqlite3 shell with sample 'chinook' database loaded
 - `postgres*.sh` / `psql.sh` - [PostgreSQL](https://www.postgresql.org/) scripts:
   - `postgres.sh` - one-touch [PostgreSQL](https://www.postgresql.org/), boots docker container + drops in to `psql` shell, with `/sql` scripts mounted in container for easy sourcing eg. `\i /sql/<name>.sql`. Optionally loads sample 'chinook' database
   - `psql.sh` - shortens `psql` command to connect to [PostreSQL](https://www.postgresql.org/) by auto-populating switches from environment variables, using both standard postgres supported environment variables like `$PG*` (see [doc](https://www.postgresql.org/docs/12/libpq-envars.html)) as well as other common environment variables like `$POSTGRESQL_HOST` / `$POSTGRES_HOST` / `$HOST`, `$POSTGRESQL_USER` / `$POSTGRES_USER` / `$USER`, `$POSTGRESQL_PASSWORD` / `$POSTGRES_PASSWORD` / `$PASSWORD`, `$POSTGRESQL_DATABASE` / `$POSTGRES_DATABASE` / `$DATABASE`
@@ -314,7 +316,9 @@ etc.
 
 #### AWS - Amazon Web Services
 
-- [AWS](https://aws.amazon.com/) scripts - `aws/*.sh`:
+`aws/` directory:
+
+- [AWS](https://aws.amazon.com/) scripts - `aws_*.sh`:
   - `aws_cli_create_credential.sh` - creates an AWS service account user for CI/CD or CLI with Admin permissions (or other group or policy), creates an AWS Access Key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Useful trick to avoid CLI reauth to `aws sso login` every day.
   - `aws_terraform_create_credential.sh` - creates a AWS terraform service account with Administrator permissions for Terraform Cloud or other CI/CD systems to run Terraform plan and apply, since no CI/CD systems can work with AWS SSO workflows. Stores the access key as both CSV and prints shell export commands and credentials file config as above
   - `.envrc-aws` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
@@ -406,7 +410,9 @@ etc.
 
 #### GCP - Google Cloud Platform
 
-- [Google Cloud](https://cloud.google.com/) scripts - `gcp/*.sh` directory - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
+`gcp/` directory:
+
+- [Google Cloud](https://cloud.google.com/) scripts - `gcp_*.sh` / `gce_*.sh` / `gke_*.sh` / `gcr_*.sh` / `bigquery_*.sh`:
   - `.envrc-gcp` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load GCP configuration settings such as Project, Region, Zone, GKE cluster kubectl context or any other GCloud SDK setting to shorten `gcloud` commands. Applies to the local shell environment only to avoid race conditions caused by naively changing the global gcloud config at `~/.config/gcloud/active_config`
     - calls `.envrc-kubernetes` to set the `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
   - `gcp_terraform_create_credential.sh` - creates a service account for [Terraform](https://www.terraform.io/) with full permissions, creates and downloads a credential key json and even prints the `export GOOGLE_CREDENTIALS` command to configure your environment to start using Terraform immediately. Run once for each project and combine with [direnv](https://direnv.net/) for fast easy management of multiple GCP projects
@@ -521,7 +527,7 @@ etc.
 `kubernetes/` directory:
 
 - `.envrc-kubernetes` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load the right Kubernetes `kubectl` context isolated to current shell to prevent race conditions between shells and scripts caused by otherwise naively changing the global `~/.kube/config` context
-- `eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
+- `aws/eksctl_cluster.sh` - quickly spins up an [AWS EKS](https://aws.amazon.com/eks/) cluster using `eksctl` with some sensible defaults
 - `kubernetes_info.sh` - huge [Kubernetes](https://kubernetes.io/) inventory listing of deployed resources across all namespaces in the current cluster / kube context:
   - cluster-info
   - master component statuses
@@ -650,6 +656,8 @@ etc.
 
 #### Git - GitHub, GitLab, Bitbucket, Azure DevOps
 
+`git/`, `github/`, `gitlab/`, `bitbucket/` and `azure_devops/` directories:
+
 - `git/*.sh` - [Git](https://git-scm.com/) scripts:
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
@@ -765,7 +773,7 @@ etc.
 
 #### CI/CD - Continuous Integration / Continuous Deployment
 
-Some CI/CD have their own directories such as Terraform, Jenkins, TeamCity, Azure DevOps, BuildKite, CircleCI, TravisCI etc... while the remainder are found in the `cicd/` directory:
+`jenkins/`, `terraform/`, `teamcity/`, `buildkite/`, `circlci/`, `travis/`, `azure_devops/`, ...,  `cicd/` directories:
 
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
 - `azure_devops/*.sh` - [Azure DevOps](https://dev.azure.com/) scripts:
@@ -979,7 +987,7 @@ Some CI/CD have their own directories such as Terraform, Jenkins, TeamCity, Azur
 
 #### Internet Services
 
-Mostly found in the `bin/` general directory, except for Pingdom and Terraform which are in `pingdom/` and `terraform/` directories respectively:
+`bin/`, `pingdom/`, `terraform/` directories:
 
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`setup/install_doctl.sh`)
