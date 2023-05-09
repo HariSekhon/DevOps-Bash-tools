@@ -60,7 +60,7 @@ fi
 
 content="$(sed 's/#.*//; /^[[:space:]]*$/d' "$filename")"
 
-json_content="$("$srcdir/yaml2json.sh" <<< "$content")"
+json_content="$("$srcdir/../bin/yaml2json.sh" <<< "$content")"
 
 # escape quotes and must not have any indentations and be on one line
 json_content_escaped="$(sed 's/"/\\"/g;s/^[[:space:]]*//;' <<< "$json_content" | tr -d '\n')"
