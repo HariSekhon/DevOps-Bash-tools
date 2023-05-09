@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: 'echo -n "kubectl context: "; kubectl config current-context; echo "var \{context\}: {context}"'
+#  args: bash -c 'echo -n "kubectl context: "; kubectl config current-context; echo "context: {context}"'
 #
 #  Author: Hari Sekhon
 #  Date: 2020-08-26 16:18:30 +0100 (Wed, 26 Aug 2020)
