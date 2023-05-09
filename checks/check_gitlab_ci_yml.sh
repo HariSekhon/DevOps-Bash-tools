@@ -39,7 +39,7 @@ start_time="$(start_timer)"
 
 while read -r yaml; do
     printf 'Validating %s:\t' "$yaml"
-    "$srcdir/gitlab_validate_ci_yaml.sh" "$yaml"
+    "$srcdir/../gitlab/gitlab_validate_ci_yaml.sh" "$yaml"
 done <<< "$yamls"
 
 time_taken "$start_time"
