@@ -61,7 +61,7 @@ if ! type -P git &>/dev/null ||
 #        apk update
 #        apk add git make
 #    fi
-    "$srcdir/install_packages.sh" git make
+    "$srcdir/../packages/install_packages.sh" git make
 fi
 
 if [ -n "${REPOS:-}" ]; then
