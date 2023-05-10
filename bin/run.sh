@@ -102,7 +102,7 @@ else
                             # use its shebang line to get the settings like --theme or --layout elk eg. for github_actions_cicd.d2 in https://github.com/HariSekhon/Diagrams-as-Code
                             ./"$basename"
                             # shellcheck disable=SC2012
-                            latest_image="$(ls -t "${basename%.d2}".{png,svg} | head -n1)"
+                            latest_image="$(ls -t "${basename%.d2}".{png,svg} 2>/dev/null | head -n1 || :)"
                         else
                             image="${basename%.d2}.svg"
                             d2 --dark-theme 200 "$basename" "$image"
