@@ -56,29 +56,34 @@ if [ -n "${SKIP_EXISTING_HELM_INSTALLATIONS:-}" ]; then
     helm_installations="$(helm ls -A -o json | jq -r '.[].name')"
 fi
 
-"$srcdir/kustomize_parse_helm_charts.sh" "$@" |
-while read -r repo_url name version values_file; do
-    if [ -n "${SKIP_EXISTING_HELM_INSTALLATIONS:-}" ]; then
-        if grep -Fxq "$name" <<< "$helm_installations"; then
-            timestamp "Skipping existing Helm installation: $name"
-            continue
+for kustomization in "$@"; do
+    pushd "$(dirname "$kustomization")" >/dev/null
+    kustomization="${kustomization##*/}"
+    "$srcdir/kustomize_parse_helm_charts.sh" "$kustomization" |
+    while read -r repo_url name version values_file; do
+        if [ -n "${SKIP_EXISTING_HELM_INSTALLATIONS:-}" ]; then
+            if grep -Fxq "$name" <<< "$helm_installations"; then
+                timestamp "Skipping existing Helm installation: $name"
+                continue
+            fi
         fi
-    fi
-    if [ "$values_file" = null ]; then
-        values_file=""
-    fi
-    if ! grep -Eq "^${name}[[:space:]]+${repo_url}[[:space:]]*$" <<< "$helm_repos"; then
-        timestamp "Adding Helm repo '$repo_url' as name '$name'"
-        # might fail here if you've already installed a repo with this name, in which case, fix your repos, we don't want to remove/modify your existing repos
-        helm repo add "$name" "$repo_url"
-    fi
-    timestamp "Installing Helm chart '$name' version '$version' from '$repo_url'"
-    if [ -n "${SKIP_ERRORS:-}" ]; then
-        set +e
-    fi
-    helm install "$name" "$name/$name" --version "$version" --create-namespace --namespace "$name" ${values_file:+--values "$values_file"}
-    if [ -n "${SKIP_ERRORS:-}" ]; then
-        set -e
-    fi
-    echo
+        if [ "$values_file" = null ]; then
+            values_file=""
+        fi
+        if ! grep -Eq "^${name}[[:space:]]+${repo_url}[[:space:]]*$" <<< "$helm_repos"; then
+            timestamp "Adding Helm repo '$repo_url' as name '$name'"
+            # might fail here if you've already installed a repo with this name, in which case, fix your repos, we don't want to remove/modify your existing repos
+            helm repo add "$name" "$repo_url"
+        fi
+        timestamp "Installing Helm chart '$name' version '$version' from '$repo_url'"
+        if [ -n "${SKIP_ERRORS:-}" ]; then
+            set +e
+        fi
+        helm install "$name" "$name/$name" --version "$version" --create-namespace --namespace "$name" ${values_file:+--values "$values_file"}
+        if [ -n "${SKIP_ERRORS:-}" ]; then
+            set -e
+        fi
+        echo
+    done
+    popd >/dev/null
 done
