@@ -174,6 +174,8 @@ timestamp "Replacing references"
 sed_script="$(
         for prefix in $prefixes; do
             echo "s|bash-tools/${prefix}_|bash-tools/$prefix/${prefix}_|g;"
+            echo "s|bash_tools/${prefix}_|bash_tools/$prefix/${prefix}_|g;"
+            echo "s|master/${prefix}_|master/$prefix/${prefix}_|g;"
         done
         while read -r directory prefix; do
             if [ -z "$directory" ]; then
@@ -181,8 +183,12 @@ sed_script="$(
             fi
             # catch prefixes
             echo "s|bash-tools/${prefix}_|bash-tools/$directory/${prefix}_|g;"
+            echo "s|bash_tools/${prefix}_|bash_tools/$directory/${prefix}_|g;"
+            echo "s|master/${prefix}_|master/$directory/${prefix}_|g;"
             # catch whole scripts
             echo "s|bash-tools/${prefix}\\>|bash-tools/$directory/${prefix}|g;"
+            echo "s|bash_tools/${prefix}\\>|bash_tools/$directory/${prefix}|g;"
+            echo "s|master/${prefix}\\>|master/$directory/${prefix}|g;"
         done <<< "$mappings"
 )"
 
