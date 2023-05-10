@@ -155,6 +155,7 @@ kubernetes datree
 kubernetes helm
 kubernetes kubeadm
 kubernetes kubectl
+kubernetes kustomize
 kubernetes pluto
 kubernetes prometheus.sh
 
