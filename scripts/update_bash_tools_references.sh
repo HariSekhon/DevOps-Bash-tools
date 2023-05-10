@@ -131,6 +131,8 @@ bin vault
 bin word_frequency.sh
 bin yaml2json.sh
 
+configs .vimrc
+
 cicd checkov_resource_count.sh
 cicd checkov_resource_count_all.sh
 cicd codefresh_cancel_delayed_builds.sh
