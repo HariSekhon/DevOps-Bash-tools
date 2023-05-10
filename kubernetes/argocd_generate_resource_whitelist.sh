@@ -57,21 +57,22 @@ if [ -n "$yaml_file" ]; then
 fi
 
 echo "clusterResourceWhitelist:"
-awk '$(NF-1) ~/false/ {print $(NF-2)" "$NF}' <<< "$api_resources" |
+awk '$(NF-1) ~/false/ {print $NF" "$(NF-2)}' <<< "$api_resources" |
 if [ -n "$yaml_file" ]; then
     # pass through api_resources and strip trailing /v1 as it's redundant vs file contents
-    sed 's|/v1[[:space:]]| |'
+    sed 's|/v1$| |'
     # add resources from yaml
     yq '.spec.clusterResourceWhitelist[] |
-        [ .group | sub("^$", "v1"), .kind] |
+        [ .kind, .group | sub("^$", "v1")] |
         @tsv' "$yaml_file"
 else
     # pass through api_resources and strip trailing /v1 as it's redundant vs file contents
-    sed 's|/v1[[:space:]]| |'
+    sed 's|/v1$| |'
 fi |
-sort -k2,2 -u |
-while read -r api_version kind; do
-    echo "  - group: $api_version"
+column -t |
+sort -u |
+while read -r kind group; do
+    echo "  - group: $group"
     echo "    kind: $kind"
 done |
 if [ -n "$yaml_file" ]; then
@@ -79,21 +80,22 @@ if [ -n "$yaml_file" ]; then
 fi
 echo
 echo "namespaceResourceWhitelist:"
-awk '$(NF-1) ~/true/ {print $(NF-2)" "$NF}' <<< "$api_resources" |
+awk '$(NF-1) ~/true/ {print $NF" "$(NF-2)}' <<< "$api_resources" |
 if [ -n "$yaml_file" ]; then
     # pass through api_resources and strip trailing /v1 as it's redundant vs file contents
-    sed 's|/v1[[:space:]]| |'
+    sed 's|/v1$| |'
     # add resources from yaml
     yq '.spec.namespaceResourceWhitelist[] |
-        [ .group | sub("^$", "v1"), .kind] |
+        [ .kind, .group | sub("^$", "v1")] |
         @tsv' "$yaml_file"
 else
     # pass through api_resources and strip trailing /v1 as it's redundant vs file contents
-    sed 's|/v1[[:space:]]| |'
+    sed 's|/v1$| |'
 fi |
-sort -k2,2 -u |
-while read -r api_version kind; do
-    echo "  - group: $api_version"
+column -t |
+sort -u |
+while read -r kind group; do
+    echo "  - group: $group"
     echo "    kind: $kind"
 done |
 if [ -n "$yaml_file" ]; then
