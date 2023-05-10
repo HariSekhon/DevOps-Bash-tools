@@ -35,10 +35,15 @@ max_args 1 "$@"
 
 dir="${1:-.}"
 
+exitcode=0
+
 find "$dir" -type l |
 while read -r symlink; do
     target="$(readlink -f "$symlink")"
     if ! [ -e "$target" ]; then
         echo "Symlink broken: $symlink -> $target"
+        exitcode=1
     fi
 done
+
+exit $exitcode
