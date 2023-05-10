@@ -747,11 +747,11 @@ alias pr=github_pull_request_create.sh
 
 alias mup=masterupdateprune
 masterupdateprune(){
-    local master_branch="master"
-    if git branch | sed 's/^..//' | grep -Fx main; then
-        master_branch="main"
-    fi
-    git checkout "$master_branch"
+    #local master_branch="master"
+    #if git branch | sed 's/^..//' | grep -Fx main; then
+    #    master_branch="main"
+    #fi
+    git checkout "$(git_default_branch)"
     pull
     prune
     git_revision
