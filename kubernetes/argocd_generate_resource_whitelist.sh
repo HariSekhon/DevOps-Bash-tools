@@ -72,6 +72,10 @@ fi |
 column -t |
 sort -u |
 while read -r kind group; do
+    # ArgoCD doesn't show pods for v1 Pod, only '' Pod in the project resource whitelist
+    if [ "$group" = "v1" ]; then
+        group="''"
+    fi
     echo "  - group: $group"
     echo "    kind: $kind"
 done |
@@ -95,6 +99,9 @@ fi |
 column -t |
 sort -u |
 while read -r kind group; do
+    if [ "$group" = "v1" ]; then
+        group="''"
+    fi
     echo "  - group: $group"
     echo "    kind: $kind"
 done |
