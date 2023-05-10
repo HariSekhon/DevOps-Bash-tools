@@ -81,6 +81,8 @@ while read -r kind group; do
 done |
 if [ -n "$yaml_file" ]; then
     yq -i ".spec.clusterResourceWhitelist = $(yq '.' -o json)" "$yaml_file"
+else
+    cat
 fi
 echo
 echo "namespaceResourceWhitelist:"
@@ -107,4 +109,6 @@ while read -r kind group; do
 done |
 if [ -n "$yaml_file" ]; then
     yq -i ".spec.namespaceResourceWhitelist = $(yq '.' -o json)" "$yaml_file"
+else
+    cat
 fi
