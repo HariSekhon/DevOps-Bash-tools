@@ -98,14 +98,17 @@ else
                         ;;
                .envrc)  direnv allow .
                         ;;
-                 *.d2)  image="${basename%.d2}.svg"
-                        if test -x "$basename"; then
+                 *.d2)  if test -x "$basename"; then
                             # use its shebang line to get the settings like --theme or --layout elk eg. for github_actions_cicd.d2 in https://github.com/HariSekhon/Diagrams-as-Code
                             ./"$basename"
+                            # shellcheck disable=SC2012
+                            latest_image="$(ls -t "${basename%.d2}".{png,svg} 2>/dev/null | head -n1 || :)"
                         else
+                            image="${basename%.d2}.svg"
                             d2 --dark-theme 200 "$basename" "$image"
+                            latest_image="$image"
                         fi
-                        open "$image"
+                        open "$latest_image"
                         ;;
                  *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
                         ;;
