@@ -24,7 +24,7 @@ spotifysession(){
     spotify_token_expire_timer &
     # defined in ../.bashrc
     # shellcheck disable=SC2154
-    SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$bash_tools/spotify_api_token.sh")"
+    SPOTIFY_ACCESS_TOKEN="$(SPOTIFY_PRIVATE=1 "$bash_tools/spotify/spotify_api_token.sh")"
     export SPOTIFY_ACCESS_TOKEN
     timestamp "starting spotify session shell"
     "$SHELL"
