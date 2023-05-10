@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: Makefile README.md Jenkinsfile *.yaml *.yml */*.sh *.sh
 #
 #  Author: Hari Sekhon
 #  Date: 2023-05-10 00:44:52 +0100 (Wed, 10 May 2023)
