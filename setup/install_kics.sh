@@ -64,7 +64,8 @@ cd "$installdir"
 
 tarball="kics_${version}_${os}_$arch.tar.gz"
 
-wget -c "https://github.com/Checkmarx/kics/releases/download/v$version/$tarball"
+# wget isn't available on GCloud SDK container
+curl -sSLf -o "$tarball" "https://github.com/Checkmarx/kics/releases/download/v$version/$tarball"
 echo
 
 echo "unpacking tarball to: $PWD"
