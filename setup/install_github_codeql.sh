@@ -66,7 +66,7 @@ echo
 timestamp "Extracting tarball"
 echo
 rm -fr -- ./codeql
-tar xvzf -- ./"$tarball"  # -C ~/bin/  # mv is more atomic, otherwise concurrent operations using codeql might break
+tar xvzf ./"$tarball"  # -C ~/bin/  # mv is more atomic, otherwise concurrent operations using codeql might break
 echo
 
 unalias rm &>/dev/null || :
