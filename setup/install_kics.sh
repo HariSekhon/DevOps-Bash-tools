@@ -77,7 +77,9 @@ rm -fv -- "$tarball"
 echo
 
 echo "symlinking install dir:"
-ln -sfhv -- "$installdir" ~/bin/kics
+ln -sfhv -- "$installdir" ~/bin/kics ||
+# GCloud SDK version of 'ln' command doesn't have the -h switch
+ln -sfv -- "$installdir" ~/bin/kics
 echo
 
 echo "Ensure $HOME/bin/kics is added to your \$PATH"
