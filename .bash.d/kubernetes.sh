@@ -22,7 +22,6 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090,SC1091
 #type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
-
 for x in kubectl oc helm flux; do
     autocomplete "$x"
 done
