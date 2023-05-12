@@ -42,6 +42,7 @@ github="${github:-$HOME/github}"
 add_PATH(){
     export PATH="$PATH:$1"
     # this clever stuff kills performance and I want my shell to open faster
+    # it's not worth saving a few duplicates in $PATH
     #local env_var
     #local path
     #if [ $# -gt 1 ]; then
