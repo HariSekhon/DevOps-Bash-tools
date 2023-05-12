@@ -22,7 +22,7 @@
 
 # this is sourced in .bashrc before .bash.d/*.sh because add_PATH() is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads before it gets to this point in the .bash.d/*.sh lexically ordered list
 
-if type add_PATHS &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
+if type add_PATH &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
     return
 fi
 
