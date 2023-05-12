@@ -58,6 +58,7 @@ cfssl
 checkov
 checkstyle
 circleci
+clair  # container vulnerability scanner by quay.io
 cliclick
 cmatrix
 colordiff
