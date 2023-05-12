@@ -43,6 +43,7 @@ add_PATH(){
     export PATH="$PATH:$1"
     # this clever stuff kills performance and I want my shell to open faster
     # it's not worth saving a few duplicates in $PATH
+    # was used by dedupe paths at the end of this file
     #local env_var
     #local path
     #if [ $# -gt 1 ]; then
@@ -446,19 +447,20 @@ link_latest(){
 #export ACTIVATOR_HOME=/usr/local/activator-dist
 #add_PATH "$ACTIVATOR_HOME"
 
-dedupe_paths(){
-    local PATH_tmp=""
-    # <( ) only works in Bash, but breaks when sourced from sh
-    # <( ) also ignores errors which don't get passed through the /dev/fd
-    # while read -r path; do
-    #done < <(tr ':' '\n' <<< "$PATH")
-    local IFS=':'
-    for path in $PATH; do
-        add_PATH PATH_tmp "$path"
-    done
-    export PATH="$PATH_tmp"
-}
+# required complex logic in add_PATH
+#dedupe_paths(){
+#    local PATH_tmp=""
+#    # <( ) only works in Bash, but breaks when sourced from sh
+#    # <( ) also ignores errors which don't get passed through the /dev/fd
+#    # while read -r path; do
+#    #done < <(tr ':' '\n' <<< "$PATH")
+#    local IFS=':'
+#    for path in $PATH; do
+#        add_PATH PATH_tmp "$path"
+#    done
+#    export PATH="$PATH_tmp"
+#}
 
-dedupe_paths
+#dedupe_paths
 
 export PATHS_SET=1
