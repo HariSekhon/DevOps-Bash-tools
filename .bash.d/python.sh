@@ -27,7 +27,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 export PYTHONWARNINGS=ignore::UserWarning
 
 # shellcheck disable=SC1090,SC1091
-#type add_PATHS &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # see the effect of inserting a path like so
 # PYTHONPATH=/path/to/blah pythonpath
