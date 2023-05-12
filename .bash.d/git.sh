@@ -46,7 +46,7 @@ if type -P gh &>/dev/null; then
 fi
 
 # shellcheck disable=SC1091
-type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+#type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 add_PATH ~/bin/codeql
 
