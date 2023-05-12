@@ -75,7 +75,7 @@ export LESS="-RFXig --tabs=4"
 # will require LESS="-R"
 if type -P pygmentize &>/dev/null; then
     # shellcheck disable=SC2016
-    export LESSOPEN='| "$bash_tools/pygmentize.sh" "%s"'
+    export LESSOPEN='| "$bash_tools/python/pygmentize.sh" "%s"'
 fi
 alias l='less'
 alias m='more'
