@@ -21,7 +21,7 @@
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090,SC1091
-type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+#type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # env var takes preference, then cwd, then $HOME, then /etc/ansible/ansible.cfg
 # $srcdir set in .bashrc
