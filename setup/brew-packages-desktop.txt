@@ -49,7 +49,7 @@ autossh
 #awsume
 #aws-iam-authenticator
 bash  # version 5, not old version 3 from Apple due to licensing
-bash-completion
+#bash-completion  # slows down spawning new shells which I do frequently
 #bazel
 bazelisk  # bazel wrapper downloader like mvnw/gradlew, addes 'bazel' to $PATH so conflicts with bazel package above
 brew-cask-completion
@@ -100,7 +100,7 @@ gh  # GitHub CLI
 gnupg2
 gnuplot
 gradle
-gradle-completion
+#gradle-completion  # forces bash-completion which slows down my shells
 graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
 #groovy  # see near end
 #groovysdk  # see near end
