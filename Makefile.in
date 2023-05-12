@@ -478,7 +478,7 @@ npm-optional::
 
 .PHONY: pip
 pip::
-	find . -maxdepth 3 -path '*/requirements.txt' | PIP=$(PIP) xargs $(BASH_TOOLS)/packages/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/requirements.txt' | PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
 	@$(MAKE) pip-optional
 
 .PHONY: pip-optional
