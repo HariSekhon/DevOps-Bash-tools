@@ -25,6 +25,8 @@ usage_description="
 Pushes the current branch to GitHub origin, sets upstream branch, then raises a Pull Request to the given or default branch
 
 If \$GITHUB_MERGE_PULL_REQUEST=true then will automatically merge the pull request as well
+
+If \$GITHUB_MERGE_PULL_REQUEST_AS_ADMIN=true then will merge as admin to bypass branch merge protection
 "
 
 # used by usage() in lib/utils.sh
@@ -58,8 +60,12 @@ fi
 url="$(parse_pull_request_url "$output")"
 
 if [ "${GITHUB_MERGE_PULL_REQUEST:-}" = true ]; then
+    args=""
+    if [ "${GITHUB_MERGE_PULL_REQUEST_AS_ADMIN:-}" = true ]; then
+        args="--admin"
+    fi
     timestamp "Merging Pull Request:  $url"
-    gh pr merge --merge "$url"
+    gh pr merge --merge "$url" $args
 fi
 
 if is_mac; then
