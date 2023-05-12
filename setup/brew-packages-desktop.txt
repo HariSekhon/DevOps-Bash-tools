@@ -58,7 +58,7 @@ cfssl
 checkov
 checkstyle
 circleci
-clair  # container vulnerability scanner by quay.io
+#clair  # container vulnerability scanner by quay.io - this is the server, not clairctl
 cliclick
 cmatrix
 colordiff
