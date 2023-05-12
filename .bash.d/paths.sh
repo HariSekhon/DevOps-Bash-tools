@@ -96,14 +96,15 @@ add_PATH "/usr/local/bin"
 add_PATH "/usr/local/opt/python/libexec/bin"  # Mac brew installed Python, must be ahead of ~/anaconda/bin below
 add_PATH "$bash_tools"
 add_PATH ~/bin
-for x in "$bash_tools"/* ~/bin/*; do
-    [ -d "$x" ] || continue
-    if [ -d "$x/bin" ]; then
-        add_PATH "$x/bin"
-    else
+while read -r x; do
+    # much less noisy to just just find the right dirs instead of testing lots of files
+    #[ -d "$x" ] || continue
+    #if [ -d "$x/bin" ]; then
+    #    add_PATH "$x/bin"
+    #else
         add_PATH "$x"
-    fi
-done
+    #fi
+done < <(for x in "$bash_tools" ~/bin; do find "$x" -maxdepth 2 -type d -name bin; done)
 
 # Serverless.com framework
 if [ -d ~/.serverless/bin ]; then
