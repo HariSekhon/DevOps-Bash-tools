@@ -51,6 +51,10 @@ add_PATH(){
     fi
     path="${path%/}"
     path="${path//[[:space:]]/}"
+    if [[ "$path" =~ \$ ]]; then
+        echo "WARNING: skipping add path '$path' for safety"
+        return
+    fi
     if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
         # shellcheck disable=SC2140
         eval "$env_var"="${!env_var}:$path"
