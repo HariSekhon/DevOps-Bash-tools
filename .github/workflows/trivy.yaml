@@ -1,6 +1,6 @@
 #
 #  Author: Hari Sekhon
-#  Date: 2022-02-02 11:27:37 +0000 (Wed, 02 Feb 2022)
+#  Date: Date: 2022-02-02 11:27:37 +0000 (Wed, 02 Feb 2022)
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
@@ -11,8 +11,12 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                                   T r i v y
+# ============================================================================ #
+
 ---
-name: Trivy Filesystem Scan
+name: Trivy
 
 on:
   push:
@@ -37,7 +41,9 @@ on:
     - cron: '0 0 * * 1'
 
 permissions:
+  actions: read
   contents: read
+  security-events: write
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -49,4 +55,6 @@ jobs:
     #if: github.event.repository.fork == false
     if: github.repository_owner == 'HariSekhon'
     name: Trivy Filesystem Scan
-    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy_fs.yaml@master
+    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
+    with:
+      debug: ${{ github.event.inputs.debug }}
