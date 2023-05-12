@@ -31,7 +31,7 @@ progress_char='-'
 [ -n "${DEBUG:-}" ] && progress_char=''
 
 files_with_tabs=0
-for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/resources/whitespace_ignore.txt" -f "$srcdir/resources/tabs_ignore.txt" | sort); do
+for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/../resources/whitespace_ignore.txt" -f "$srcdir/../resources/tabs_ignore.txt" | sort); do
     isExcluded "$filename" && continue
     [[ "$filename" =~ .*/check_(no_tabs|whitespace).sh$|.terminal$ ]] && continue
     printf "%s" "$progress_char"
