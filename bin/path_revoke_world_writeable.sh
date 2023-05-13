@@ -39,5 +39,7 @@ while read -r directory; do
     [ -d "$directory" ] || continue
     # $sudo is assigned in lib depending on whether you have root perms or not
     # shellcheck disable=SC2154
+    # try without sudo first as you'll probably be able to
+    chmod -v o-w "$directory" ||
     $sudo chmod -v o-w "$directory"
 done
