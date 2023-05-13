@@ -221,6 +221,7 @@
     #patterns = (\bhari|sekhon\b)(!.*@gmail.com)
     # only applies to contents, not metadata to prevent wrong author commits
     #patterns = hari|sekhon
+    # trivy:ignore:aws-access-key-id
     allowed = AKIAIOSFODNN7EXAMPLE
     allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
     # better to add to private repos .git/config only
