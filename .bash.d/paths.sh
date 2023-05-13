@@ -22,7 +22,7 @@
 
 # this is sourced in .bashrc before .bash.d/*.sh because add_PATH() is used extensively everywhere to deduplicate $PATHs across disparate code and also reloads before it gets to this point in the .bash.d/*.sh lexically ordered list
 
-if type add_PATHS &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
+if type add_PATH &>/dev/null && [ -n "${PATHS_SET:-}" ]; then
     return
 fi
 
@@ -40,27 +40,35 @@ github="${github:-$HOME/github}"
 
 #export PATH="${PATH%%:~/github*}"
 add_PATH(){
-    local env_var
-    local path
-    if [ $# -gt 1 ]; then
-        env_var="$1"
-        path="$2"
-    else
-        env_var=PATH
-        path="${1:-}"
-    fi
-    path="${path%/}"
-    path="${path//[[:space:]]/}"
-    if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
-        # shellcheck disable=SC2140
-        eval "$env_var"="${!env_var}:$path"
-    fi
-    # to prevent Empty compile time value given to use lib at /Users/hari/perl5/lib/perl5/perl5lib.pm line 17.
-    #PERL5LIB="${PERL5LIB##:}"
-    # fix for Codeship having a space after one of the items in their $PATH, causing the second half of the $PATH to error out as a command
-    eval "$env_var"="${!env_var//[[:space:]]/}"
-    eval "$env_var"="${!env_var##:}"
-    export "${env_var?env_var not defined in add_PATH}"
+    export PATH="$PATH:$1"
+    # this clever stuff kills performance and I want my shell to open faster
+    # it's not worth saving a few duplicates in $PATH
+    # was used by dedupe paths at the end of this file
+    #local env_var
+    #local path
+    #if [ $# -gt 1 ]; then
+    #    env_var="$1"
+    #    path="$2"
+    #else
+    #    env_var=PATH
+    #    path="${1:-}"
+    #fi
+    #path="${path%/}"
+    #path="${path//[[:space:]]/}"
+    #if [[ "$path" =~ \$ ]]; then
+    #    echo "WARNING: skipping add path '$path' for safety"
+    #    return
+    #fi
+    #if ! [[ "${!env_var}" =~ (^|:)$path(:|$) ]]; then
+    #    # shellcheck disable=SC2140
+    #    eval "$env_var"="${!env_var}:$path"
+    #fi
+    ## to prevent Empty compile time value given to use lib at /Users/hari/perl5/lib/perl5/perl5lib.pm line 17.
+    ##PERL5LIB="${PERL5LIB##:}"
+    ## fix for Codeship having a space after one of the items in their $PATH, causing the second half of the $PATH to error out as a command
+    #eval "$env_var"="${!env_var//[[:space:]]/}"
+    #eval "$env_var"="${!env_var##:}"
+    #export "${env_var?env_var not defined in add_PATH}"
 }
 
 # use 'which -a'
@@ -88,14 +96,15 @@ add_PATH "/usr/local/bin"
 add_PATH "/usr/local/opt/python/libexec/bin"  # Mac brew installed Python, must be ahead of ~/anaconda/bin below
 add_PATH "$bash_tools"
 add_PATH ~/bin
-for x in "$bash_tools"/* ~/bin/*; do
-    [ -d "$x" ] || continue
-    if [ -d "$x/bin" ]; then
-        add_PATH "$x/bin"
-    else
+while read -r x; do
+    # much less noisy to just just find the right dirs instead of testing lots of files
+    #[ -d "$x" ] || continue
+    #if [ -d "$x/bin" ]; then
+    #    add_PATH "$x/bin"
+    #else
         add_PATH "$x"
-    fi
-done
+    #fi
+done < <(for x in "$bash_tools" ~/bin; do find "$x" -maxdepth 2 -type d -name bin; done)
 
 # Serverless.com framework
 if [ -d ~/.serverless/bin ]; then
@@ -184,8 +193,9 @@ fi
 # $github defined in aliases.sh
 # shellcheck disable=SC2154
 add_PATH "$github/bash-tools"
-add_PATH "$github/bash-tools/applescript"
-add_PATH "$github/bash-tools/setup"
+while read -r x; do
+    add_PATH "$x"
+done < <(find "$github/bash-tools" -maxdepth 1 -type d)
 add_PATH "$github/go-tools"
 add_PATH "$github/go-tools/bin"
 add_PATH "$github/perl-tools"
@@ -439,19 +449,20 @@ link_latest(){
 #export ACTIVATOR_HOME=/usr/local/activator-dist
 #add_PATH "$ACTIVATOR_HOME"
 
-dedupe_paths(){
-    local PATH_tmp=""
-    # <( ) only works in Bash, but breaks when sourced from sh
-    # <( ) also ignores errors which don't get passed through the /dev/fd
-    # while read -r path; do
-    #done < <(tr ':' '\n' <<< "$PATH")
-    local IFS=':'
-    for path in $PATH; do
-        add_PATH PATH_tmp "$path"
-    done
-    export PATH="$PATH_tmp"
-}
+# required complex logic in add_PATH
+#dedupe_paths(){
+#    local PATH_tmp=""
+#    # <( ) only works in Bash, but breaks when sourced from sh
+#    # <( ) also ignores errors which don't get passed through the /dev/fd
+#    # while read -r path; do
+#    #done < <(tr ':' '\n' <<< "$PATH")
+#    local IFS=':'
+#    for path in $PATH; do
+#        add_PATH PATH_tmp "$path"
+#    done
+#    export PATH="$PATH_tmp"
+#}
 
-dedupe_paths
+#dedupe_paths
 
 export PATHS_SET=1

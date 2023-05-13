@@ -33,7 +33,7 @@ progress_char='-'
 whitespace_only_files_found=0
 trailing_whitespace_files_found=0
 trailing_whitespace_bar_files_found=0
-for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/resources/whitespace_ignore.txt" | sort); do
+for filename in $(find "${1:-.}" -type f | grep -Evf "$srcdir/../resources/whitespace_ignore.txt" | sort); do
     isExcluded "$filename" && continue
     printf "%s" "$progress_char"
     # [[:space:]] matches \r in Windows files which we don't want, use explicit character class instead to exclude \r

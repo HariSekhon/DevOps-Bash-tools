@@ -221,7 +221,10 @@
     #patterns = (\bhari|sekhon\b)(!.*@gmail.com)
     # only applies to contents, not metadata to prevent wrong author commits
     #patterns = hari|sekhon
+    # These are sample keys so ignore false positives from scanning tools
+    # trivy:ignore:aws-access-key-id
     allowed = AKIAIOSFODNN7EXAMPLE
+    # trivy:ignore:aws-access-key-id
     allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
     # better to add to private repos .git/config only
     #allowed = AWS_ACCOUNT_ID

@@ -37,7 +37,7 @@ usage_args="[<module1> <module2> ...]"
 help_usage "$@"
 
 
-mappings="$srcdir/resources/pipreqs_mapping.txt"
+mappings="$srcdir/../resources/pipreqs_mapping.txt"
 
 if ! [ -f "$mappings" ]; then
     wget -O "$mappings" https://raw.githubusercontent.com/bndr/pipreqs/master/pipreqs/mapping

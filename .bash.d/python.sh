@@ -26,10 +26,8 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # silence those annoying Python 2 cryptography warnings that mess up our programs outputs
 export PYTHONWARNINGS=ignore::UserWarning
 
-if ! type add_PATHS &>/dev/null ; then
-    # shellcheck disable=SC1090,SC1091
-    . "$bash_tools/.bash.d/paths.sh"
-fi
+# shellcheck disable=SC1090,SC1091
+type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # see the effect of inserting a path like so
 # PYTHONPATH=/path/to/blah pythonpath

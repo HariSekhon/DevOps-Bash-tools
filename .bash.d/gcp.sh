@@ -21,7 +21,7 @@
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 # shellcheck disable=SC1090,SC1091
-type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
+#type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 # adds GCloud CLI tools to $PATH
 if [ -f ~/google-cloud-sdk/path.bash.inc ]; then
