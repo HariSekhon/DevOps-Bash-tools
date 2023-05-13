@@ -194,6 +194,9 @@ python-desktop: system-packages pip-desktop
 .PHONY: pip
 pip-desktop: pip
 	PIP=$(PIP) ./python/python_pip_install_if_absent.sh setup/pip-packages-desktop.txt
+	if uname -s | grep -q Darwin; then \
+		PIP=$(PIP) ./python/python_pip_install_if_absent.sh setup/pip-packages-mac.txt; \
+	fi
 
 .PHONY: nodejs-desktop
 nodejs-desktop: system-packages npm-desktop
