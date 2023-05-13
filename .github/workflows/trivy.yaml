@@ -1,6 +1,6 @@
 #
 #  Author: Hari Sekhon
-#  Date: Date: 2022-02-02 11:27:37 +0000 (Wed, 02 Feb 2022)
+#  Date: 2022-02-02 11:27:37 +0000 (Wed, 02 Feb 2022)
 #
 #  vim:ts=2:sts=2:sw=2:et
 #
@@ -54,7 +54,7 @@ jobs:
     # github.event.repository context not available in scheduled workflows
     #if: github.event.repository.fork == false
     if: github.repository_owner == 'HariSekhon'
-    name: Trivy Filesystem Scan
+    name: Trivy
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:
       debug: ${{ github.event.inputs.debug }}
