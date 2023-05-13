@@ -152,6 +152,7 @@ alias dev="switchbranch dev"
 
 # edit all GitHub READMEs
 alias readmes='$EDITOR $(git_foreach_repo.sh '"'"'echo $PWD/README.md'"')"
+alias ureadmes='git_foreach_repo.sh '"'"'gitu README.md || :'"'"
 
 # equivalent of hg root
 git_root(){
