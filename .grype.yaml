@@ -24,7 +24,7 @@
 ---
 check-for-app-update: true
 fail-on-severity: high
-output: "table"
+output: table
 quiet: false
 exclude:
   - .gitconfig
