@@ -270,7 +270,7 @@ if has("autocmd")
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
     au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
-    au BufNew,BufRead *.d2         nmap ;l :w<CR>:!clear; d2 fmt "%"<CR>:1s/^# \!\//#\!\//<CR>
+    au BufNew,BufRead *.d2         nmap ;l :w<CR>:!clear; d2 fmt "%" <CR> :edit <CR> :1s/^# \!\//#\!\// <CR>
     au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
     au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
     au BufNew,BufRead *.php        nmap ;l :w<CR>:!clear; php5 -l "%"<CR>
