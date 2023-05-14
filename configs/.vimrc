@@ -555,7 +555,7 @@ function! WriteRun()
         ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
         " but this now works for config files too which can have run headers
         " instead of args headers
-        :! "$bash_tools/bin/run.sh" "%:p" 2>&1 | less
+        :! "run.sh" "%:p" 2>&1 | less
     elseif &filetype == 'go'
         " TODO: consider switching this to go build and then run the binary as
         " this gets stdout only at the end so things like welcome.go don't get
