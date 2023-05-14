@@ -62,7 +62,7 @@ while read -r line; do
             s/^/#/
         '
     )"
-    indentation=$(( indent_width * ( level - 3 ) ))
+    indentation=$(( indent_width * ( level - 2 ) ))
     if [ $indentation -gt 0 ]; then
         printf "%${indentation}s" " "
     fi
