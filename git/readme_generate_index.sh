@@ -37,12 +37,18 @@ max_args 1 "$@"
 
 readme="${1:-README.md}"
 
+indent_width=2
+
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
 grep '^#' "$readme" |
 tail -n +2 |
+# don't include main headings
+#sed '/^#[[:space:]]/d' |
 # don't include the Index title itself either
 sed '/^[#[:space:]]*Index$/d' |
 while read -r line; do
+    level="$(grep -Eo '^#+' <<< "$line" | tr -d '[:space:]' | wc -c)"
+    level="${level//[[:space:]]}"
     title="${line##*# }"
     # create relative links of just the anchor and not the repo URL prefix, it's more portable
     link="$(
@@ -51,10 +57,14 @@ while read -r line; do
         ' <<< "$line" |
         tr '[:upper:]' '[:lower:]' |
         sed '
-            s/[[:space:]]/-/g;
-            s/[^[:alnum:]]/-/g;
+            s/[^[:alnum:][:space:]-]//g;
+            s/[[:space:]-]/-/g;
             s/^/#/
         '
     )"
-    echo "- [$title]($link)"
+    indentation=$(( indent_width * ( level - 2 ) ))
+    if [ $indentation -gt 0 ]; then
+        printf "%${indentation}s" " "
+    fi
+    printf -- "- [%s](%s)\n" "$title" "$link"
 done
