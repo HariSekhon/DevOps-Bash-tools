@@ -1,6 +1,6 @@
 aws-consoler>=1.1.0
 checkov>=2.0.618
-git-remote-codecommit>=1.16
+#git-remote-codecommit>=1.16
 grip>=4.6.1
 jsonlint>=0.1
 pylint>=1.9.5

@@ -199,7 +199,7 @@ make
 
 `make install` sets your shell profile to source this repo. See [Individual Setup Parts](https://github.com/HariSekhon/DevOps-Bash-tools#Individual-Setup-Parts) below for more install/uninstall options.
 
-## Inventory
+## Index
 
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
