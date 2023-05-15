@@ -83,9 +83,9 @@ run_static_pod(){
     }
 
     if [ -n "$pod_json" ]; then
-        if jq -e 'select(.status.phase == "Running")' <<< "$pod_json" >/dev/null; then
+        if jq -e '.status.phase == "Running"' <<< "$pod_json" >/dev/null; then
             exec kubectl exec -ti "$name" "$@" -- /bin/sh
-        elif jq -e 'select(.status.phase == "Succeeded")' <<< "$pod_json" >/dev/null; then
+        elif jq -e '.status.phase == "Succeeded" or .status.phase == "Failed"' <<< "$pod_json" >/dev/null; then
             kubectl delete pod "$name" "$@"
             run "$@"
         else
