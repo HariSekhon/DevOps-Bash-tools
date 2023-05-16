@@ -78,6 +78,7 @@ alias kdelf='kdel -f'
 alias wp=watchpods
 alias kd=kdesc
 alias ke=kubectl_exec.sh
+alias kexec=kubectl_exec.sh
 alias ke2=kubectl_exec2.sh
 alias keg=kubectl_exec_grep.sh
 alias kg='k get'
@@ -313,30 +314,31 @@ krun(){
     k run --generator=run-pod/v1 "$name" --image "$image" -ti -- /bin/sh
 }
 
-kexec(){
-    local lines
-    local name="${1//\//-}"
-    if [ -z "$name" ]; then
-        echo "usage: kexec <name>"
-        return 1
-    fi
-    for ((i=0;i<100;i++)); do
-        lines="$(k get po | grep -F "$name")"
-        if [ -z "$lines" ]; then
-            echo "No pods matching name $name found!"
-            return 1
-        fi
-        name="$(awk '$3 ~ /Running/{print $1; exit}' <<< "$lines")"
-        if [ -n "$name" ]; then
-            break
-        fi
-        echo "waiting for pod to start running..."
-        sleep 1
-    done
-    local cmd=(kubectl exec -ti "$name" "$@" -- /bin/sh -c 'if type bash >/dev/null 2>&1; then exec bash; else exec sh; fi')
-    echo "${cmd[*]}"
-    "${cmd[@]}"
-}
+# use ../kubernetes/kubectl_exec.sh via alias instead
+#kexec(){
+#    local lines
+#    local name="${1//\//-}"
+#    if [ -z "$name" ]; then
+#        echo "usage: kexec <name>"
+#        return 1
+#    fi
+#    for ((i=0;i<100;i++)); do
+#        lines="$(k get po | grep -F "$name")"
+#        if [ -z "$lines" ]; then
+#            echo "No pods matching name $name found!"
+#            return 1
+#        fi
+#        name="$(awk '$3 ~ /Running/{print $1; exit}' <<< "$lines")"
+#        if [ -n "$name" ]; then
+#            break
+#        fi
+#        echo "waiting for pod to start running..."
+#        sleep 1
+#    done
+#    local cmd=(kubectl exec -ti "$name" "$@" -- /bin/sh -c 'if type bash >/dev/null 2>&1; then exec bash; else exec sh; fi')
+#    echo "${cmd[*]}"
+#    "${cmd[@]}"
+#}
 
 klog(){
     local name="$1"
