@@ -77,6 +77,7 @@ while read -r project_id project_name; do
     cmd=("$@")
     cmd=("${cmd[@]//\{project_id\}/$project_id}")
     cmd=("${cmd[@]//\{project_name\}/$project_name}")
+    cmd=("${cmd[@]//\{project\}/$project_id}")
     cmd=("${cmd[@]//\{id\}/$project_id}")
     cmd=("${cmd[@]//\{name\}/$project_name}")
     # need eval'ing to able to inline quoted script
