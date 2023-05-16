@@ -90,7 +90,7 @@ alias kubesh='kube-shell'
 alias kubeconfig='$EDITOR "${KUBECONFIG:-~/.kube/config}"'
 alias kubeconf=kubeconfig
 
-alias use="k config use-context"
+#alias use="k config use-context"
 alias contexts="k config get-contexts"
 #alias context="k config current-context"
 context(){ k config current-context; }
@@ -103,13 +103,55 @@ alias namespace='k config get-contexts | awk "/$(kubectl config current-context)
 alias kwhere="{ echo -n 'context: '; context; echo -n 'namespace: '; namespace; }"
 alias con='kwhere'
 
-alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
+#alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
 
 alias menv='eval $(minikube docker-env)'
 
 # scripts at top level, automatically included in $PATH
 alias labels="kubectl_node_labels.sh"
 alias taints="kubectl_node_taints.sh"
+
+unalias kcd 2>/dev/null
+kcd(){
+    if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+        echo "usage: kcd <namespace>" >&2
+        return 1
+    fi
+    local namespace="$1"
+    echo "Switching to namespace '$namespace'"
+    k config set-context "$(kubectl config current-context)" --namespace "$namespace"
+}
+
+unalias use 2>/dev/null
+use(){
+    if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+        echo "usage: use <context> [<namespace>]" >&2
+        return 1
+    fi
+    local context="$1"
+    local namespace="${2:-}"
+    local contexts
+    contexts="$(k config get-contexts -o name)"
+    if ! grep -Fxq "$context" <<< "$contexts"; then
+        #echo "No matching contexts, inferring first partial match"
+        context="$(grep -Em1 "$context" <<< "$contexts" || :)"
+        if [ -z "$context" ]; then
+            echo "Couldn't find any matching context name" >&2
+            return 1
+        fi
+        #echo "Inferred context to be '$context'"
+    fi
+    #local args=()
+    #if [ -n "$namespace" ]; then
+    #    args+=(--namespace "$namespace")
+    #fi
+    #k config use-context "$context" "${args[@]}"
+    # less efficient, but more verbose
+    k config use-context "$context"
+    if [ -n "$namespace" ]; then
+        kcd "$namespace"
+    fi
+}
 
 kubectl_namespace(){
     kubectl config get-contexts | awk '/^\*/{print $5}'
