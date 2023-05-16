@@ -94,6 +94,7 @@ add_PATH "/usr/sbin"
 add_PATH "/usr/local/sbin"
 add_PATH "/usr/local/bin"
 add_PATH "/usr/local/opt/python/libexec/bin"  # Mac brew installed Python, must be ahead of ~/anaconda/bin below
+add_PATH "/opt/homebrew/bin/"  # on new M1 Macs
 add_PATH "$bash_tools"
 add_PATH ~/bin
 while read -r x; do
