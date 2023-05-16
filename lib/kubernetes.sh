@@ -88,6 +88,11 @@ run_static_pod(){
         elif jq -e '.status.phase == "Succeeded" or .status.phase == "Failed"' <<< "$pod_json" >/dev/null; then
             kubectl delete pod "$name" "$@"
             run "$@"
+        # This is what shows as ContainerCreating in kubectl get pods
+        elif jq -e '.status.phase == "Pending"' <<< "$pod_json" >/dev/null; then
+            echo "Pod pending..."
+            sleep 3
+            run_static_pod "$name" "$image" "$@"
         else
             echo "ERROR: Pod already exists. Check its state and remove it?"
             kubectl get pod "$name" "$@"
