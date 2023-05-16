@@ -56,7 +56,8 @@ db:
 
   # location to write the vulnerability database cache
   # same as GRYPE_DB_CACHE_DIR env var
-  cache-dir: "$XDG_CACHE_HOME/grype/db"
+  # XXX: this is coming out literally leaves these $XDG_CACHE_HOME dirs everywhere
+  #cache-dir: "$XDG_CACHE_HOME/grype/db"
 
   # URL of the vulnerability database
   # same as GRYPE_DB_UPDATE_URL env var
