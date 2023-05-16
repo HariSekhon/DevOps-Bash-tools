@@ -78,10 +78,14 @@ kube_context(){
         # load your real kube config to isolated staging area to source the context info
         if [ -f "$original_kubeconfig" ]; then
             cp -- "$original_kubeconfig" "$KUBECONFIG"
+            # race condition - kubectl config get-contexts fails to find the context and switch in many runs without this sleep
+            sleep 0.1
         elif [ -f "$default_kubeconfig" ]; then
             cp -- "$default_kubeconfig" "$KUBECONFIG"
+            sleep 0.1
         elif [ -f "$PWD/.kube/config" ]; then
             cp -- "$PWD/.kube/config" "$KUBECONFIG"
+            sleep 0.1
         else
             echo "WARNING: failed to find one of:
 
