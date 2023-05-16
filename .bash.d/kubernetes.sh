@@ -94,12 +94,14 @@ alias use="k config use-context"
 alias contexts="k config get-contexts"
 #alias context="k config current-context"
 context(){ k config current-context; }
-alias con=context
+#alias con=context
 alias cons=contexts
 # contexts has this info and is more useful
 #alias clusters="k config get-clusters"
 
 alias namespace='k config get-contexts | awk "/$(kubectl config current-context)/ {print \$NF}"'
+alias kwhere="{ echo -n 'context: '; context; echo -n 'namespace: '; namespace; }"
+alias con='kwhere'
 
 alias kcd='k config set-context "$(kubectl config current-context)" --namespace'
 
