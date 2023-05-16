@@ -356,7 +356,9 @@ klogs(){
             echo "No pods matching name $name found!"
             return 1
         fi
-        name="$(awk '$3 ~ /Running/{print $1; exit}' <<< "$lines")"
+        # often want to see the logs of the last pod restart in 'Crashing' status
+        #name="$(awk '$3 ~ /Running/{print $1; exit}' <<< "$lines")"
+        name="$(awk '{print $1; exit}' <<< "$lines")"
         if [ -n "$name" ]; then
             break
         fi
