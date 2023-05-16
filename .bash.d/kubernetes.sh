@@ -291,8 +291,9 @@ kexec(){
         echo "waiting for pod to start running..."
         sleep 1
     done
-    echo kubectl exec -ti "\"$name\"" -- /bin/sh
-    k exec -ti "$name" -- /bin/sh
+    local cmd=(kubectl exec -ti "$name" "$@" -- /bin/sh -c 'if type bash >/dev/null 2>&1; then exec bash; else exec sh; fi')
+    echo "${cmd[*]}"
+    "${cmd[@]}"
 }
 
 klog(){
