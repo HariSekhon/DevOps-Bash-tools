@@ -78,14 +78,10 @@ kube_context(){
         # load your real kube config to isolated staging area to source the context info
         if [ -f "$original_kubeconfig" ]; then
             cp -- "$original_kubeconfig" "$KUBECONFIG"
-            # race condition - kubectl config get-contexts fails to find the context and switch in many runs without this sleep
-            sleep 0.1
         elif [ -f "$default_kubeconfig" ]; then
             cp -- "$default_kubeconfig" "$KUBECONFIG"
-            sleep 0.1
         elif [ -f "$PWD/.kube/config" ]; then
             cp -- "$PWD/.kube/config" "$KUBECONFIG"
-            sleep 0.1
         else
             echo "WARNING: failed to find one of:
 
@@ -95,7 +91,22 @@ kube_context(){
         " >&2
         fi
 
-        if kubectl config get-contexts -o name 2>/dev/null | grep -Fxq "$context"; then
+        # race condition - kubectl config get-contexts fails to find the context and switch in many runs without this sleep
+        context_found=0
+        for ((i=0;i<10;i++)); do
+            # surprisingly unreliable - if kubectl config get-contexts -o name | grep -Fxq "$context" can miss even after these succeed
+            #if [ -s "$KUBECONFIG" ]; then
+            #if cmp --quiet "$from_kubeconfig" "$KUBECONFIG"; then
+            if kubectl config get-contexts -o name | grep -Fxq "$context"; then
+                context_found=1
+                break
+            fi
+            sleep 0.1
+        done
+
+        # this randomly misses the context, and not even 'sync; sync; sleep 1' is reliable to stop that happening in testing
+        #if kubectl config get-contexts -o name 2>/dev/null | grep -Fxq "$context"; then
+        if [ "$context_found" = 1 ]; then
             kubectl config use-context "$CONTEXT"
 
             if [ -n "${namespace:-}" ]; then
