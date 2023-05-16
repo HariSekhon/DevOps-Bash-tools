@@ -421,8 +421,12 @@ kdesc(){
     k describe "$@"
 }
 
+# kdesc pod with grep filter on name for fast describing a pod in the current or given namespace
 kdp(){
-    kdesc pods "$@"
+    local filter="${1:-.*}"
+    shift || :
+    pod="$(k get po -o name "$@" | grep -Em 1 "$filter")" || return
+    kdesc "$pod" "$@"
 }
 
 kdelp(){
