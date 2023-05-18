@@ -583,6 +583,8 @@ etc.
 - `kubectl_image_counts.sh` - lists Kubernetes container images running counts sorted descending
 - `kubectl_image_deployments.sh` - lists which deployments, statefulsets or daemonsets container images belong to. Useful to find which deployment, statefulset or daemonset to upgrade to replace a container image eg. when replacing deprecated the k8s.gcr.io registry with registry.k8s.io
 - `kubectl_pod_count.sh` - lists Kubernetes pods total running count
+- `kubectl_pod_labels.sh` - lists Kubernetes pods and their labels, one label per line for easier shell script piping for further actions
+- `kubectl_pod_ips.sh` - lists Kubernetes pods and their pod IP addresses
 - `kubectl_container_count.sh` - lists Kubernetes containers total running count
 - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
 - `kubectl_empty_namespaces.sh` - finds namespaces without any of the usual objects using `kubectl get all`
