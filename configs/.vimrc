@@ -348,7 +348,7 @@ nmap          ;k :w<CR> :! check_kubernetes_yaml.sh %<CR>
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
 nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
 nmap          ;n :w<CR> :n<CR>
-nmap          ;o :!git log -p "%"<CR>
+nmap          ;o :!cd "%:p:h" && git log -p "%:t"<CR>
 nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
 "nmap          ;P :call TogglePaste()<CR>
@@ -386,6 +386,7 @@ nmap          ;v :call SourceVimrc()<CR>
 nmap          ;V :call WriteRunVerbose()<CR>
 nmap          ;w :w<CR>
 "nmap          ;x :x<CR>
+nmap          ;y :w !pbcopy<CR><CR>
 nmap          ;z :call ToggleDebug()<CR>
 nmap          ;§ :call ToggleScrollLock()<CR>
 
