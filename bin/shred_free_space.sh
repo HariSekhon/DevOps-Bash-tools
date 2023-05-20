@@ -51,7 +51,10 @@ on Linux:
     wipe
 
     sfill   works similar to this script except does 2 overwrites - DoD secure standard is 7 overwrites
+
     sswap   overwrites your swap device
+
+    sdmem   overwrites your RAM to prevent warm boot attacks retrieving sensitive credentials or data
 "
 
 # used by usage() in lib/utils.sh
@@ -74,7 +77,7 @@ trap_cmd "if [ -f \"$tmpfile\" ]; then timestamp 'Removing tmpfile \"$tmpfile\"'
 timestamp "Writing tmpfile '$PWD/$tmpfile'"
 for (( i = 0; i < passes; i++ )); do
     timestamp "overwrite pass 1..."
-    echo dd if=/dev/urandom of="shredfile.binary"
+    dd if=/dev/urandom of="shredfile.binary"
     timestamp "Removing tmpfile '$tmpfile'"
     rm -f "$tmpfile"
 done
