@@ -81,7 +81,7 @@ trap_cmd "if [ -f \"$tmpfile\" ]; then timestamp 'Removing tmpfile \"$tmpfile\"'
 timestamp "Writing tmpfile '$PWD/$tmpfile'"
 for (( i = 0; i < passes; i++ )); do
     timestamp "overwrite pass 1..."
-    dd if=/dev/urandom of="shredfile.binary"
+    dd if=/dev/urandom of="shredfile.binary" || :  # will hit out of space error and error out otherwise
     timestamp "Removing tmpfile '$tmpfile'"
     rm -f "$tmpfile"
 done
