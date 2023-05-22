@@ -63,10 +63,14 @@ usage_args=" [<dir> <passes>]"
 
 help_usage "$@"
 
-max_args 1 "$@"
+max_args 2 "$@"
 
 dir="${1:-.}"
 passes="${2:-1}"
+
+if ! [ -d "$dir" ]; then
+    die "Directory '$dir' does not exit"
+fi
 
 cd "$dir"
 
