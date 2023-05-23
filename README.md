@@ -1079,13 +1079,15 @@ etc.
 - `golang_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
 - `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete you `bin/` etc as these are often real deployed applications rather than development binaries
 
-#### MP3
+#### Media
 
-`mp3/` directory:
+`media/` directory:
 
 - `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
 - `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
 - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
+- `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
+- `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
 
 #### Spotify
 
