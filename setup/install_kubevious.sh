@@ -45,4 +45,4 @@ fi
 
 export RUN_VERSION_OPTION=1
 
-"$srcdir/../github/github_install_binary.sh" kubevious/cli "kubevious-macos-x64" "$version"
+"$srcdir/../github/github_install_binary.sh" kubevious/cli "kubevious-{os}-{arch}" "$version"
