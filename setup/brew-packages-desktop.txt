@@ -133,6 +133,7 @@ kops
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
 kubeseal  # Bitnami Sealed Secrets
+kubevious  # validation linter for Kubernetes yaml
 kustomize
 #lame  # mp3 encoder
 launchctl-completion
