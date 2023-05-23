@@ -82,12 +82,15 @@ kube_context(){
             cp -- "$default_kubeconfig" "$KUBECONFIG"
         elif [ -f "$PWD/.kube/config" ]; then
             cp -- "$PWD/.kube/config" "$KUBECONFIG"
+        elif [ -f "/etc/rancher/k3s/k3s.yaml" ]; then
+            cp -- "/etc/rancher/k3s/k3s.yaml" "$KUBECONFIG"
         else
             echo "WARNING: failed to find one of:
 
             $original_kubeconfig
             $default_kubeconfig
             $PWD/.kube/config
+            /etc/rancher/k3s/k3s.yaml
         " >&2
         fi
 
