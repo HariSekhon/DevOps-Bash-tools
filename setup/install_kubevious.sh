@@ -43,6 +43,6 @@ if [ -f /etc/alpine-release ]; then
     export OS_LINUX=alpine
 fi
 
-export RUN_VERSION_OPTION=1
+export RUN_VERSION_OPT=1
 
 "$srcdir/../github/github_install_binary.sh" kubevious/cli "kubevious-{os}-{arch}" "$version"
