@@ -7,6 +7,8 @@
 
 # tap                   package
 
+hashicorp/tap           packer
+
 Checkmarx/tap           kics
 
 FairwindsOps/tap        polaris
