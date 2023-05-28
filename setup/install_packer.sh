@@ -47,7 +47,10 @@ else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"
 fi
 
-export RUN_VERSION_OPT=1
+# gives just version number
+#export RUN_VERSION_OPT=1
+# prefixes with Packer
+export RUN_VERSION_ARG=1
 
 # https://releases.hashicorp.com/packer/1.8.7/packer_1.8.7_darwin_amd64.zip
 "$srcdir/../packages/install_binary.sh" "https://releases.hashicorp.com/packer/$version/packer_${version}_{os}_{arch}.zip" packer
