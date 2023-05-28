@@ -148,6 +148,10 @@ yum-packages-desktop: system-packages
 homebrew-packages-desktop: system-packages homebrew
 	@:
 
+.PHONY: brew-packages-desktop
+brew-packages-desktop: homebrew-packages-desktop
+	@:
+
 .PHONY: homebrew
 homebrew: system-packages brew
 	@:
