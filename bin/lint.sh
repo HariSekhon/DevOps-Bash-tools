@@ -100,6 +100,10 @@ else
                  *.tf)  terraform fmt -diff
                         terraform validate
                         ;;
+ *.pkr.hcl|*.pkr.json)  packer init "$filename" &&
+                        packer validate "$filename" &&
+                        packer fmt "$filename"
+                        ;;
                  *.md)  mdl "$basename"
                         ;;
                     *)  die "Cannot lint unrecognized file type for file: $filename"
