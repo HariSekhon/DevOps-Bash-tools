@@ -552,13 +552,7 @@ endfunction
 
 function! WriteRun()
     :w
-    if executable('run.sh')
-        " this only works for scripts
-        ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
-        " but this now works for config files too which can have run headers
-        " instead of args headers
-        :! "run.sh" "%:p" 2>&1 | less
-    elseif &filetype == 'go'
+    if &filetype == 'go'
         " TODO: consider switching this to go build and then run the binary as
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
@@ -568,7 +562,7 @@ function! WriteRun()
     elseif expand('%:e') == 'tf'
         ":call TerraformPlan()
         :call TerraformApply()
-    elseif expand('%:t') =~ '\.pkr.(hcl|json)$'
+    elseif expand('%:t') =~ '.*\.pkr\.\(hcl\|json\)'
         :! packer build "%:p:h"
     elseif expand('%:t') == 'Makefile'
         :call Make()
@@ -589,6 +583,12 @@ function! WriteRun()
         :! bash -c 'cd "%:p:h" && kustomize build --enable-helm' 2>&1 | less
     elseif expand('%:t') == '.envrc'
         :! bash -c 'cd "%:p:h" && direnv allow .' 2>&1 | less
+    elseif executable('run.sh')
+        " this only works for scripts
+        ":! eval "%:p" `$bash_tools/lib/args_extract.sh "%:p"`  2>&1 | less
+        " but this now works for config files too which can have run headers
+        " instead of args headers
+        :! "run.sh" "%:p" 2>&1 | less
     else
         echo "unsupported file type and run.sh not found in PATH"
     endif
