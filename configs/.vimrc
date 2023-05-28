@@ -289,7 +289,7 @@ if has("autocmd")
     "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; js-yaml "%" >/dev/null && echo YAML OK<CR>
     au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; yamllint "%" && echo YAML OK<CR>
     au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR>:call TerraformValidate()<CR>
-    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;l :w<CR>:!packer init % && packer validate % <CR>
+    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;l :w<CR>:!packer init "%" && packer validate "%" && packer fmt "%" <CR>
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
