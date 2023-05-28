@@ -563,7 +563,7 @@ function! WriteRun()
         ":call TerraformPlan()
         :call TerraformApply()
     elseif expand('%:t') =~ '\.pkr\.\(hcl\|json\)'
-        :! packer build "%:p:h"
+        :! packer build "%:p"
     elseif expand('%:t') == 'Makefile'
         :call Make()
     elseif expand('%:t') == 'Dockerfile'
