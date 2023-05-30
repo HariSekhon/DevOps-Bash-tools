@@ -102,7 +102,7 @@ else
                         ;;
  *.pkr.hcl|*.pkr.json)  packer init "$filename" &&
                         packer validate "$filename" &&
-                        packer fmt "$filename"
+                        packer fmt -diff "$filename"
                         ;;
                  *.md)  mdl "$basename"
                         ;;
