@@ -66,6 +66,7 @@ csync2
 cvs
 davl
 ddrescue
+debconf-utils  # for debconf-get-selections --installer
 debootstrap
 debsecan
 denyhosts
