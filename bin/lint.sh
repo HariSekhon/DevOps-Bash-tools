@@ -88,7 +88,8 @@ else
   #                     ;;
   #kustomization.yaml)  yamllint "$basename"
   #                     ;;
-               *.y*ml)  #yamllint "$filename"
+*.y*ml|autoinstall-user-data)
+                        #yamllint "$filename"
                         check_yaml.sh "$basename"
                         ;;
               #.envrc)  cd "$dirname" && direnv allow .
