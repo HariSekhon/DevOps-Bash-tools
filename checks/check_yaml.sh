@@ -26,16 +26,31 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #export YAMLLINT_CONFIG_FILE="$srcdir/.config/yamllint/config"
 export YAMLLINT_CONFIG_FILE="${YAMLLINT_CONFIG_FILE:-$srcdir/../configs/.yamllint.yaml}"
 
-#if [ $# -gt 0 ]; then
-#    filelist="$*"
-#else
-    # can point to test.json as an explicit argument
-    # could check *.json too but in DevOps Python Tools repo multirecord.json would break as this cannot handle multi-json record files
-    #filelist="$(find "${1:-.}" -type f -name '*.y*ml' -o -type f -name '*.json' | sort)"
-    filelist="$(find "${1:-.}" -type f -name '*.y*ml' | sort)"
-#fi
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Checks a yaml file or recurses a directory of yamls
+"
 
-if [ -z "$filelist" ]; then
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="file1 [file2 file3 ...]"
+
+help_usage "$@"
+
+#min_args 1 "$@"
+
+filelist=()
+
+for arg in "${@:-.}"; do
+    if [ -d "$arg" ]; then
+        filelist+=( "$(find "$arg" -type f -name '*.y*ml' | sort)" )
+    else
+        filelist+=("$arg")
+    fi
+done
+
+if [ -z "${filelist[*]}" ]; then
+    # shellcheck disable=SC2317
     return 0 &>/dev/null ||
     exit 0
 fi
@@ -66,8 +81,8 @@ echo
 
 export max_len=0
 for x in $filelist; do
-    if [ ${#x} -gt $max_len ]; then
-        max_len=${#x}
+    if [ "${#x}" -gt "$max_len" ]; then
+        max_len="${#x}"
     fi
 done
 # to account for the colon
@@ -88,6 +103,7 @@ check_yaml(){
         echo "FAILED" >&2
         if [ -z "${QUIET:-}" ]; then
             echo >&2
+            # shellcheck disable=SC2001
             sed "s|^|$filename: |" <<< "$output" >&2
             echo >&2
         fi
@@ -99,7 +115,8 @@ check_yaml(){
 echo "building file list" >&2
 tests="$(
     for filename in $filelist; do
-        isExcluded "$filename" && continue
+        # very expensive git log and regex matches against every file
+        #isExcluded "$filename" && continue
         echo "check_yaml $filename"
     done
 )"
