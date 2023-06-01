@@ -12,7 +12,7 @@ codeship/taps/jet
 docker
 #insomnia  # Kong Rest API testing client desktop app
 #iterm2
-firefox-developer-edition
+#firefox-developer-edition
 google-chrome
 google-cloud-sdk
 keepassxc

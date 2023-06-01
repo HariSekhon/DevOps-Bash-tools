@@ -24,9 +24,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 #type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # env var takes preference, then cwd, then $HOME, then /etc/ansible/ansible.cfg
-# $srcdir set in .bashrc
-# shellcheck disable=SC2154
-export ANSIBLE_CONFIG="$bash_tools/.ansible.cfg"
+export ANSIBLE_CONFIG=~/.ansible.cfg  # symlinked to $bash_tools/configs/.ansible.cfg
 
 if [ -n "${ANSIBLE_HOME:-}" ]; then
     add_PATH PYTHONPATH "$ANSIBLE_HOME/lib"
