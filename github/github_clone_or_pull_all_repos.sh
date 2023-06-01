@@ -87,3 +87,4 @@ while read -r repo; do
     echo
 done
 untrap
+timestamp "All github repos cloned and up to date for owner '$owner'"
