@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: pylib
 #
 #  Author: Hari Sekhon
 #  Date: 2023-06-03 00:02:53 +0100 (Sat, 03 Jun 2023)
@@ -18,7 +19,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090,SC1091
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/bitbucket.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -54,15 +55,7 @@ if ! [[ "$repo" =~ / ]]; then
     log "No username prefix in repo '$repo', will auto-add it"
     # refuse bitbucket_user between function calls for efficiency to save additional queries to the BitBucket API
     if [ -z "${bitbucket_user:-}" ]; then
-        log "Attempting to infer username"
-        if [ -n "${BITBUCKET_USER:-}" ]; then
-            bitbucket_user="$BITBUCKET_USER"
-            log "Using username '$bitbucket_user' from \$BITBUCKET_USER"
-        else
-            log "Querying BitBucket API for currently authenticated username"
-            bitbucket_user="$("$srcdir/bitbucket_api.sh" /user | jq -r .username)"
-            log "BitBucket API returned username '$bitbucket_user'"
-        fi
+        bitbucket_user="$(get_bitbucket_user)"
     fi
     repo="$bitbucket_user/$repo"
 fi
