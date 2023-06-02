@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-cd "$srcdir"
+cd "$srcdir/.."
 
 sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt" |
 grep -vi -e bash-tools \
