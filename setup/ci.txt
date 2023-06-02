@@ -34,8 +34,8 @@ Jenkinsfile
 azure-pipelines.yml
 bitbucket-pipelines.yml
 buddy.yml
-buildspec.yml
-cloudbuild.yaml
+cicd/buildspec.yml
+cid/cloudbuild.yaml
 codefresh.yml
 codeship.yml
 kics.config
