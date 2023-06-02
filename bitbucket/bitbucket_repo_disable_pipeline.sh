@@ -69,4 +69,4 @@ fi
 
 timestamp "Disabling pipeline for BitBucket repo '$repo'"
 
-"$srcdir/bitbucket_api.sh" "/repositories/$repo/pipelines_config" -X PUT -H 'Content-Type: application/json' --data '{ "enabled": false }' # >/dev/null
+"$srcdir/bitbucket_api.sh" "/repositories/$repo/pipelines_config" -X PUT -H 'Content-Type: application/json' --data '{ "enabled": false }' >/dev/null
