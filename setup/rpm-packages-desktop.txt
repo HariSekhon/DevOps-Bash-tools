@@ -164,7 +164,7 @@ router-audit-tool
 rpm-build
 rpmlint
 sbd
-screen
+#screen  # removed in favour of tmux :'-(
 sguil-client
 sguil-sensor
 sguil-server
