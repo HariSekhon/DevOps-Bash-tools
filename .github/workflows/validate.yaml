@@ -11,6 +11,12 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                              V a l i d a t i o n
+# ============================================================================ #
+
+# Run all custom validations against files in the repo
+
 ---
 name: Validation
 
