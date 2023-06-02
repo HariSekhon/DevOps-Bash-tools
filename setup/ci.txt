@@ -39,6 +39,7 @@ cloudbuild.yaml
 codefresh.yml
 codeship.yml
 kics.config
+sonar-project.properties
 shippable.yml
 wercker.yml
 setup/gocd_config_repo.json
