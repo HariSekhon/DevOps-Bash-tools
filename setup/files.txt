@@ -15,6 +15,9 @@
 
 # Files to link to $HOME, one per line
 
+.gitconfig
+.gitignore
+.pylintrc
 configs/.ansible.cfg
 configs/.athenacli/athenaclirc
 #.aws/config
@@ -29,8 +32,6 @@ configs/.customize_environment
 configs/.editorconfig
 configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
-.gitconfig
-.gitignore
 configs/.grype.yaml
 configs/.inputrc
 configs/.mdlrc
@@ -38,7 +39,6 @@ configs/.my.cnf
 configs/.perlcriticrc
 configs/.perlcritic_forbidden_modules
 configs/.psqlrc
-configs/.pylintrc
 configs/.rabbitmqadmin.conf
 configs/.sawsrc
 configs/.screenrc
