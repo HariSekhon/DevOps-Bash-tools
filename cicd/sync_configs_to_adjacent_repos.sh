@@ -36,7 +36,7 @@ while read -r repo dir; do
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/repo-configs.txt" |
+    sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt" |
     while read -r filename; do
         target="../$dir/$filename"
         if [ -f "$target" ] || [ -n "${NEW:-}" ]; then
