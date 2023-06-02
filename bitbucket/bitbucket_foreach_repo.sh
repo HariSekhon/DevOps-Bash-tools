@@ -90,6 +90,7 @@ while read -r workspace name repo; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
+    echo >&2
     cmd=("$@")
     cmd=("${cmd[@]//\{workspace\}/$workspace}")
     cmd=("${cmd[@]//\{name\}/$name}")
@@ -97,4 +98,5 @@ while read -r workspace name repo; do
     # need eval'ing to able to inline quoted script
     # shellcheck disable=SC2294
     eval "${cmd[@]}"
+    echo >&2
 done
