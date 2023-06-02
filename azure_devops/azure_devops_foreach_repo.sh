@@ -69,6 +69,7 @@ while read -r name; do
     echo "# ============================================================================ #" >&2
     echo "# $repo" >&2
     echo "# ============================================================================ #" >&2
+    echo >&2
     cmd=("$@")
     cmd=("${cmd[@]//\{username\}/${user:-}}")
     cmd=("${cmd[@]//\{user\}/${user:-}}")
@@ -80,4 +81,5 @@ while read -r name; do
     # need eval'ing to able to inline quoted script
     # shellcheck disable=SC2294
     eval "${cmd[@]}"
+    echo >&2
 done
