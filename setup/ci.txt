@@ -50,4 +50,5 @@ setup/jenkins-job.xml
 setup/ci_bootstrap.sh
 
 teamcity/.teamcity.vcs.json
-teamcity/.teamcity.auth.vcs.json
+teamcity/.teamcity.vcs.oauth.json
+teamcity/.teamcity.vcs.ssh.json
