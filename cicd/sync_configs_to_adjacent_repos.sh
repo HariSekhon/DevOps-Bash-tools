@@ -29,9 +29,8 @@ grep -vi -e bash-tools \
          -e '^[[:space:]]*$' |
 while read -r repo dir; do
     if [ -z "$dir" ]; then
-        dir="$repo"
+        dir="$(tr '[:upper:]' '[:lower:]' <<< "$repo")"
     fi
-    repo="$(tr '[:upper:]' '[:lower:]' <<< "$repo")"
     if ! [ -d "../$dir" ]; then
         echo "WARNING: repo dir $dir not found, skipping..."
         continue
