@@ -782,6 +782,10 @@ etc.
   - `bitbucket_workspace_set_env_vars.sh` - adds / updates Bitbucket workspace-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `bitbucket_repo_set_env_vars.sh` - adds / updates Bitbucket repo-level environment variable(s) via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `bitbucket_repo_set_description.sh` - sets the description for one or more repos using the BitBucket API
+  - `bitbucket_enable_pipelines.sh` - enables the CI/CD pipelines for all repos
+  - `bitbucket_disable_pipelines.sh` - disables the CI/CD pipelines for all repos
+  - `bitbucket_repo_enable_pipeline.sh` - enables the CI/CD pipeline for a given repo
+  - `bitbucket_repo_disable_pipeline.sh` - disables the CI/CD pipeline for a given repo
   - `bitbucket_ssh_get_public_keys.sh` - fetches the currently authenticated BitBucket user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `bitbucket_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
   - `bitbucket_ssh_delete_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
