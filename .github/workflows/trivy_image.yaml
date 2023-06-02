@@ -11,6 +11,12 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                 T r i v y   D o c k e r   I m a g e   S c a n
+# ============================================================================ #
+
+# Scan the docker image for this repo
+
 ---
 name: Trivy Docker Image Scan
 
