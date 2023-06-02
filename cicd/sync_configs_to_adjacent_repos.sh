@@ -38,6 +38,9 @@ while read -r repo dir; do
     fi
     sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt" |
     while read -r filename; do
+        if [ "$filename" = .gitignore ]; then
+            continue
+        fi
         target="../$dir/$filename"
         if [ -f "$target" ] || [ -n "${NEW:-}" ]; then
             :
