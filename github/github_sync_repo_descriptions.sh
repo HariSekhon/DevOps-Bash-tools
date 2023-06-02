@@ -45,7 +45,7 @@ if [ -n "$*" ]; then
         "$srcdir/github_repo_description.sh" "$repo"
     done
 else
-    "$srcdir/../git/git_foreach_repo.sh" "github_repo_description.sh '{owner}/{repo}'"
+    "$srcdir/github_foreach_repo.sh" "github_repo_description.sh '{owner}/{repo}'" 2>/dev/null
 fi |
 while read -r repo description; do
     "$srcdir/../gitlab/gitlab_project_set_description.sh" <<< "$repo $description"
