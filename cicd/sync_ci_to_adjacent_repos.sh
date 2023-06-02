@@ -21,7 +21,6 @@ cd "$srcdir/.."
 
 sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt" |
 grep -vi -e bash-tools \
-         -e template \
          -e jenkins \
          -e github-actions \
          -e playlist \
