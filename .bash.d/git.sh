@@ -551,6 +551,17 @@ git_pull(){
     echo
 }
 
+alias coj="git_branch_jira_ticket"
+git_branch_jira_ticket(){
+    local ticket="$1"
+    local branch="${ticket##*/}"
+    if git branch | sed 's/^..//' | grep -Fxq "$branch"; then
+        git checkout "$branch"
+    else
+        git checkout -b "$branch"
+    fi
+}
+
 checkout(){
     if isGit "."; then
         git checkout "$@";
