@@ -36,14 +36,9 @@ cicd/buildspec.yml
 cicd/cloudbuild.yaml
 
 codefresh.yml
-codeship.yml
 kics.config
 sonar-project.properties
 shippable.yml
-
-# defunct, and moved to wercker
-#wercker.yml
-#.werckerignore
 
 setup/gocd_config_repo.json
 setup/jenkins-job.xml
@@ -52,3 +47,8 @@ setup/ci_bootstrap.sh
 teamcity/.teamcity.vcs.json
 teamcity/.teamcity.vcs.oauth.json
 teamcity/.teamcity.vcs.ssh.json
+
+# defunct
+#codeship/codeship.yml
+#wercker/wercker.yml
+#wercker/.werckerignore
