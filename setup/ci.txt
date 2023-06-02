@@ -20,7 +20,6 @@ Jenkinsfile
 .buildkite/pipeline.yml
 .circleci/config.yml
 .cirrus.yml
-.concourse.yml
 .drone.yml
 .gitlab-ci.yml
 .gocd.yml
@@ -34,6 +33,7 @@ Jenkinsfile
 azure-pipelines.yml
 bitbucket-pipelines.yml
 buddy.yml
+cicd/.concourse.yml
 cicd/buildspec.yml
 cid/cloudbuild.yaml
 codefresh.yml
