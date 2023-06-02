@@ -881,7 +881,7 @@ updatemodules(){
             if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
                 pushd "$submodule" || continue
                 git stash
-                git checkout master
+                git checkout "$(git_default_branch)"
                 git pull --no-edit
                 git submodule update
                 # shellcheck disable=SC2164
