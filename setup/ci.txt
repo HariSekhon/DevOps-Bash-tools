@@ -32,8 +32,6 @@ buddy.yml
 
 cicd/.concourse.yml
 cicd/.gocd.yml
-cicd/.teamcity.vcs.json
-cicd/.teamcity.auth.vcs.json
 cicd/buildspec.yml
 cicd/cloudbuild.yaml
 
@@ -50,3 +48,6 @@ shippable.yml
 setup/gocd_config_repo.json
 setup/jenkins-job.xml
 setup/ci_bootstrap.sh
+
+teamcity/.teamcity.vcs.json
+teamcity/.teamcity.auth.vcs.json
