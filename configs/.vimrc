@@ -290,6 +290,7 @@ if has("autocmd")
     au BufNew,BufRead *.yml,*.yaml,autoinstall-user-data nmap ;l :w<CR>:!clear; yamllint "%" && echo YAML OK<CR>
     au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR>:call TerraformValidate()<CR>
     au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;l :w<CR>:!packer init "%" && packer validate "%" && packer fmt -diff "%" <CR>
+    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;f :w<CR>:!packer fmt -diff "%" <CR>
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
     au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| more -R<CR>
@@ -335,7 +336,7 @@ nmap <silent> ;E :call WriteRunLine()<CR> :!reset<CR><CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 "nmap <silent> ;D :Done<CR>
 nmap <silent> ;D :%!decomment.sh %<CR>
-nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
+#nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
 "nmap <silent> ;h :call Hr()<CR>
 nmap <silent> ;h :Hr<CR>
 nmap          ;H :call WriteHelp()<CR>
