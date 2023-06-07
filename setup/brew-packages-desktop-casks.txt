@@ -19,6 +19,7 @@ keepassxc
 keka
 minikube
 minishift
+multipass  # instant Ubuntu VMs
 podman
 postman
 powershell
