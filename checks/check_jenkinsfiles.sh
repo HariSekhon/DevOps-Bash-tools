@@ -52,7 +52,15 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-jenkinsfiles="$(find "${1:-.}" -maxdepth 3 -name '*Jenkinsfile*')"
+jenkinsfiles=()
+
+for arg in "${@:-.}"; do
+    if [ -d "$arg" ]; then
+        jenkinsfiles+=( "$(find "${1:-.}" -maxdepth 3 -name '*Jenkinsfile*')" )
+    else
+        jenkinsfiles+=("$arg")
+    fi
+done
 
 if [ -z "$jenkinsfiles" ]; then
     return 0 &>/dev/null || :
