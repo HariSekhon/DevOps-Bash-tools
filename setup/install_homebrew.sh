@@ -18,7 +18,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if type -P brew &>/dev/null; then
     echo "HomeBrew already installed, skipping install..."
