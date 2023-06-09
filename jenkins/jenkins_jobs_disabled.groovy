@@ -19,4 +19,4 @@
 //
 // Jenkins -> Manage Jenkins -> Script Console
 
-jenkins.model.Jenkins.instance.items.findAll { it.isDisabled() }.each{ println it.name }.size
+jenkins.model.Jenkins.instance.items.findAll { it.isDisabled() }.each { println it.name }.size
