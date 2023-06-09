@@ -60,8 +60,8 @@ echo
 
 export max_len=0
 for x in $filelist; do
-    if [ ${#x} -gt $max_len ]; then
-        max_len=${#x}
+    if [ "${#x}" -gt "$max_len" ]; then
+        max_len="${#x}"
     fi
 done
 # to account for the colon
@@ -75,7 +75,7 @@ check_xml(){
     result=$?
     set -eo pipefail
     # shellcheck disable=SC2181
-    if [ $result -eq 0 ]; then
+    if [ "$result" -eq 0 ]; then
         echo "OK" >&2
     else
         echo "FAILED" >&2
