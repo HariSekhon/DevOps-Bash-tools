@@ -56,7 +56,7 @@ jenkinsfiles=()
 
 for arg in "${@:-.}"; do
     if [ -d "$arg" ]; then
-        jenkinsfiles+=( "$(find "${1:-.}" -maxdepth 3 -name '*Jenkinsfile*')" )
+        jenkinsfiles+=( "$(find "${1:-.}" -maxdepth 3 -name '*Jenkinsfile*' | grep -v '.groovy$')" )
     else
         jenkinsfiles+=("$arg")
     fi
