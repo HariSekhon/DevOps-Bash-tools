@@ -55,7 +55,7 @@ AWS_DEFAULT_REGION="${3:-${AWS_DEFAULT_REGION:-eu-west2}}"
 AWS_ZONES="${4:-${AWS_DEFAULT_REGION}a,${AWS_DEFAULT_REGION}b,${AWS_DEFAULT_REGION}c}"
 
 # shellcheck disable=SC2013
-for zone in $(sed 's/,/ /g' <<< "$AWS_ZONES"); do
+for zone in ${AWS_ZONES//,/ }; do
     region="${zone::${#zone}-1}"
     if [ "$region" != "$AWS_DEFAULT_REGION" ]; then
         usage "invalid zone '$zone' given, must match region '$AWS_DEFAULT_REGION'"
