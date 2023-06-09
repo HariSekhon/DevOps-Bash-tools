@@ -54,8 +54,8 @@ elif [ -n "${QUICK:-}" ]; then
 else
     max_len=0
     for x in $filelist; do
-        if [ ${#x} -gt $max_len ]; then
-            max_len=${#x}
+        if [ "${#x}" -gt "$max_len" ]; then
+            max_len="${#x}"
         fi
     done
     # to account for the semi colon
