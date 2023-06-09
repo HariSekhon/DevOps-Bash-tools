@@ -41,8 +41,7 @@ String jobName = "My Dev Pipeline"
 def job = Jenkins.instance.getItemByFullName(jobName)
 
 // deletes the previous build history
-//job.getBuilds().each { it.delete() }
-job.builds().each { it.delete() }  // more groovyish
+job.getBuilds().each { it.delete() }
 
 // XXX: don't reset this build number as it can break the Milestone plugin for this job, see comment above for more details
 //job.nextBuildNumber = 1
