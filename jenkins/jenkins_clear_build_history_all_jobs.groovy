@@ -34,8 +34,7 @@ jenkins.model.Jenkins.instance.items.findAll().each {
 	println
 	def jobName = it.name
 	def job = Jenkins.instance.getItem(jobName)
-	//job.getBuilds().each { it.delete() }
-	job.builds().each { it.delete() }
+	job.getBuilds().each { it.delete() }
 	job.nextBuildNumber = 1
 	job.save()
 }
