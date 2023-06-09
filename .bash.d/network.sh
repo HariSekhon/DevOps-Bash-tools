@@ -513,7 +513,7 @@ checkwifi(){
     [ -z "$wifi_failures" ] && wifi_failures=0
     for((i=1;i<=3;i++)); do
         if ping -c1 -W1 4.2.2.1 >/dev/null; then
-            if [ $wifi_failures -gt 0 ]; then
+            if [ "$wifi_failures" -gt 0 ]; then
                 tstamp "wifi recovered from $wifi_failures failures"
             fi
             wifi_failures=0
