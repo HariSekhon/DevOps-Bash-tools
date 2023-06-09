@@ -58,4 +58,4 @@ for _ in $(seq "$tries"); do
         break
     fi
 done
-exit $result
+exit "$result"
