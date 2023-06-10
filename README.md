@@ -217,7 +217,7 @@ make
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
 - [AI & IPaaS](https://github.com/HariSekhon/DevOps-Bash-tools#ai---ipaas) - OpenAI (ChatGPT), Make.com
-- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Pingdom
+- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
 - [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
@@ -1008,7 +1008,7 @@ etc.
 
 #### AI & IPaaS
 
-`ai/` directory:
+`ai/` and `ipaas/` directories:
 
 - `openai_api.sh` - queries the [OpenAI](https://openai.com/) (ChatGPT) API with authentication
 - `make_api.sh` - queries the [Make.com](https://www.make.com) API with authentication
