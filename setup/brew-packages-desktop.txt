@@ -36,6 +36,7 @@ https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
 
 # Install HomeBrew Desktop packages - one per line
 ack
+act  # runs GitHub Actions locally
 amazon-ecs-cli
 #amazon-sam-cli  # no longer found
 ansible
