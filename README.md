@@ -216,7 +216,7 @@ make
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable ...
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
-- [AI & IPaaS](https://github.com/HariSekhon/DevOps-Bash-tools#ai---ipaas) - OpenAI (ChatGPT), Make.com
+- [AI & IPaaS](https://github.com/HariSekhon/DevOps-Bash-tools#ai--ipaas) - OpenAI (ChatGPT), Make.com
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
