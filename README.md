@@ -216,7 +216,7 @@ make
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable ...
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
-- [AI](https://github.com/HariSekhon/DevOps-Bash-tools#ai) - OpenAI Rest API script with authentication handling
+- [AI & IPaaS](https://github.com/HariSekhon/DevOps-Bash-tools#ai---ipaas) - OpenAI (ChatGPT), Make.com
 - [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Pingdom
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
@@ -1006,11 +1006,12 @@ etc.
   - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repo checkouts
 - `octopus_api.sh` - queries the [Octopus Deploy](https://octopus.com/) API
 
-#### AI
+#### AI & IPaaS
 
 `ai/` directory:
 
-- `openai_api.sh` - queries the OpenAI [API](https://platform.openai.com/docs/api-reference/introduction), handling authentication via environment variables
+- `openai_api.sh` - queries the [OpenAI](https://openai.com/) (ChatGPT) API with authentication
+- `make_api.sh` - queries the [Make.com](https://www.make.com) API with authentication
 
 #### Internet Services
 
