@@ -31,7 +31,7 @@ vncwho() {
 
 vnc(){
     local host_port="$1"
-    if ! [[ "$host_port" =~ : ]]; then
+    if [[ "$host_port" =~ ^[[:digit:]]+$ ]]; then
         host_port="localhost:$1"
     fi
     if test -x "/Applications/VNC Viewer.app/Contents/MacOS/vncviewer"; then
