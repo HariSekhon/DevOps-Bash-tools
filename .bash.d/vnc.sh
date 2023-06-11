@@ -23,6 +23,10 @@
 # shellcheck disable=SC1090,SC1091
 #. "$bash_tools/.bash.d/os_detection.sh"
 
+if [ -d "/Applications/VNC Viewer.app/Contents/MacOS" ]; then
+    export PATH+=":/Applications/VNC Viewer.app/Contents/MacOS"
+fi
+
 vncwho() {
     netstat -tW |
     grep ".*:5900 .*:.*" |
