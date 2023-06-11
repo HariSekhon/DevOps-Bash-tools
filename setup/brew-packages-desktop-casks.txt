@@ -26,3 +26,4 @@ powershell
 spotify
 vagrant
 virtualbox
+vnc-viewer
