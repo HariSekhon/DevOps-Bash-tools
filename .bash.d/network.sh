@@ -340,42 +340,9 @@ rerdp(){
 }
 
 
-vncwho() {
-    netstat -tW |
-    grep ".*:5900 .*:.*" |
-    awk '{a=$5; split(a,b,":"); print b[1]}'
-}
-
-vnc(){
-    if type -P krdc &>/dev/null; then
-        krdc "vnc:/$1" &
-    elif type -P vncviewer &>/dev/null; then
-        vncviewer "$1" &
-    else
-        echo "could not find krdc or vncviewer in \$PATH"
-        return 1
-    fi
-}
-
-revnc(){
-    if [ -z "$1" ]; then
-        echo "You must supply a hostname or ip address to connect to"
-        return 1
-    fi
-    while ! ping -c 1 "$pingwait" 1 "$1" &>/dev/null; do
-        sleep 1
-    done
-    timestamp "machine is up"
-    until vnc "$1"; do
-        sleep 1
-        timestamp "retrying $1"
-    done
-}
-
 # ============================================================================ #
 #                                   L i n u x
 # ============================================================================ #
-
 
 if is_linux; then
 
