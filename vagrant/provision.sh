@@ -21,15 +21,14 @@ mkdir -pv /vagrant/logs
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-bash_tools="/bash"
+bash_tools="/github/bash-tools"
 
 # shellcheck disable=SC1090,SC1091
 source "$bash_tools/lib/utils.sh"
 
 section "Running Vagrant Shell Provisioner Script - Base"
-
-pushd /vagrant
 
 mkdir -p /root/.ssh
 sed 's/#.*//; /^[[:space:]]*$/d' /home/vagrant/.ssh/authorized_keys |
@@ -48,10 +47,10 @@ timestamp "stripping 127.0.1.1 from /etc/hosts to avoid hostname resolve clash"
 sed -ibak '/127.0.1.1/d' /etc/hosts
 
 timestamp "adding /etc/hosts entries from Vagrantfile"
-./vagrant/vagrant_hosts.sh /vagrant/Vagrantfile | ./bin/grep_or_append.sh /etc/hosts
+"$bash_tools/vagrant/vagrant_hosts.sh" /vagrant/Vagrantfile | "$bash_tools/bin/grep_or_append.sh" /etc/hosts
 
 timestamp "disabling swap"
-./bin/disable_swap.sh
+"$bash_tools/bin/disable_swap.sh"
 echo >&2
 
 timestamp "custom shell configuration and config linking as user '$USER':"
@@ -71,6 +70,6 @@ timestamp "installing: $packages"
 
 # want splitting
 # shellcheck disable=SC2086
-./packages/install_packages_if_absent.sh $packages
+"$bash_tools/packages/install_packages_if_absent.sh" $packages
 
-} 2>&1 | tee -a /vagrant/logs/provision.log
+} 2>&1 | tee -a "/vagrant/logs/provision-$HOSTNAME.log"
