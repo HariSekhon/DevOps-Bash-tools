@@ -36,6 +36,7 @@ SQL-keywords:sql-keywords
 Kubernetes-configs:k8s
 Terraform:terraform
 Packer-templates:pack
+Vagrant-templates:vag
 Templates:templates
 TeamCity-CI:teamcity
 DevOps-Bash-tools:bash-tools
