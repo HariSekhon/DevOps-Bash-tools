@@ -100,6 +100,46 @@ alias cons=contexts
 # contexts has this info and is more useful
 #alias clusters="k config get-clusters"
 
+kube_config_isolate(){
+    local tmpdir="/tmp/.kube"
+
+    mkdir -pv "$tmpdir"
+
+    local default_kubeconfig="${HOME:-$(cd ~ && pwd)}/.kube/config"
+    local original_kubeconfig="${KUBECONFIG:-$default_kubeconfig}"
+
+    # reload safety - do not source from new tmpdir - not necessary for direnv but useful for local sourcing tests
+    #if [[ "$original_kubeconfig" =~ $tmpdir ]]; then
+    #    echo "ignoring \$KUBECONFIG=$original_kubeconfig, using default home location $default_kubeconfig"
+    #    original_kubeconfig="$default_kubeconfig"
+    #fi
+
+    # isolate the kubernetes context to avoid a race condition affecting any other shells or scripts
+    # epoch is added because $$ and $PPID are direnv sub-processes and may be reused later, so using epoch to add uniqueness
+    local epoch
+    epoch="$(date +%s)"
+    export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
+
+    # load your real kube config to isolated staging area to source the context info
+    if [ -f "$original_kubeconfig" ]; then
+        cp -v -- "$original_kubeconfig" "$KUBECONFIG"
+    elif [ -f "$default_kubeconfig" ]; then
+        cp -v -- "$default_kubeconfig" "$KUBECONFIG"
+    elif [ -f "$PWD/.kube/config" ]; then
+        cp -v -- "$PWD/.kube/config" "$KUBECONFIG"
+    elif [ -f "/etc/rancher/k3s/k3s.yaml" ]; then
+        cp -v -- "/etc/rancher/k3s/k3s.yaml" "$KUBECONFIG"
+    else
+        echo "WARNING: failed to find one of:
+
+        $original_kubeconfig
+        $default_kubeconfig
+        $PWD/.kube/config
+        /etc/rancher/k3s/k3s.yaml
+    " >&2
+    fi
+}
+
 alias namespace='k config get-contexts | awk "/$(kubectl config current-context)/ {print \$NF}"'
 alias kwhere="{ echo -n 'context: '; context; echo -n 'namespace: '; namespace; }"
 alias con='kwhere'
