@@ -35,7 +35,8 @@ vncwho() {
 
 vnc(){
     local host_port="$1"
-    if ! [[ "$host_port" =~ : ]]; then
+    # if just a port number is given, then it's shorthand for localhost:<port_number> eg. for copying and pasting Qemu's randomly generated VNC port
+    if [[ "$host_port" =~ ^[[:digit:]]+$ ]]; then
         host_port="localhost:$1"
     fi
     if test -x "/Applications/VNC Viewer.app/Contents/MacOS/vncviewer"; then
