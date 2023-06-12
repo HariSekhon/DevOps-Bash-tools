@@ -13,3 +13,6 @@
 [submodule "packer"]
 	path = packer
 	url = https://github.com/HariSekhon/Packer-templates
+[submodule "kubernetes-configs"]
+	path = kubernetes-configs
+	url = https://github.com/HariSekhon/Kubernetes-configs
