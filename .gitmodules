@@ -10,3 +10,6 @@
 [submodule "vagrant-configs"]
 	path = vagrant-configs
 	url = https://github.com/HariSekhon/Vagrant-templates
+[submodule "packer"]
+	path = packer
+	url = https://github.com/HariSekhon/Packer-templates
