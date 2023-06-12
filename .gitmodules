@@ -7,3 +7,6 @@
 [submodule "templates"]
 	path = templates
 	url = https://github.com/HariSekhon/Templates
+[submodule "vagrant-configs"]
+	path = vagrant-configs
+	url = https://github.com/HariSekhon/Vagrant-templates
