@@ -140,7 +140,7 @@ kube_config_isolate(){
     fi
 }
 
-alias namespace='k config get-contexts | awk "/$(kubectl config current-context)/ {print \$NF}"'
+alias namespace='k config get-contexts | grep -F "$(kubectl config current-context)" | awk "{print \$5}"'
 alias kwhere="{ echo -n 'context: '; context; echo -n 'namespace: '; namespace; }"
 alias con='kwhere'
 
