@@ -197,6 +197,7 @@ pwgen
 #pipenv
 #pyenv
 r
+rancher-cli
 rbenv
 #rclone  # like rsync for S3 / GCS / SFTP / HDFS / SMB / HTTP
 rdesktop
