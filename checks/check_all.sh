@@ -100,7 +100,7 @@ fi
 
 "$srcdir/check_duplicate_dependencies.sh"
 
-"$srcdir/check_non_executable_scripts.sh"
+"$srcdir/check_shebang_non_executable.sh"
 
 "$srcdir/check_srcdir_references.sh"
 
