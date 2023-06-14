@@ -31,7 +31,7 @@ usage_description="Auto-determines the Kubernetes API server and kube-system API
 
 # used by utils.sh usage()
 # shellcheck disable=SC2034
-usage_args="/path <curl_options>"
+usage_args="/path [<curl_options>]"
 
 help_usage "$@"
 
