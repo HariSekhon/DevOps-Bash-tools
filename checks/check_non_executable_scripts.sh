@@ -25,25 +25,30 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 section "Finding Non Executable Scripts"
 
 # These shouldn't be executable even if they have #! lines for syntax reasons
-exceptions="
-.env
-.envrc
-"
+exceptions='
+\.bash\.d
+env$
+\.env
+\.envrc
+shrc$
+.login$
+.logout$
+'
 exceptions_regex=""
 for exception in $exceptions; do
     exceptions_regex="$exceptions_regex|$exception"
 done
-exceptions_regex="(${exceptions_regex#|})$"
+exceptions_regex="(${exceptions_regex#|})"
 
-#filter_is_git_committed(){
-#    while read -r filename; do
-#        pushd "$(dirname "$filename")" &>/dev/null
-#        set +o pipefail
-#        git status --porcelain "$filename" | grep -q '^??' || echo "$filename"
-#        set -o pipefail
-#        popd &>/dev/null
-#    done
-#}
+filter_is_git_committed(){
+    while read -r filename; do
+        pushd "$(dirname "$filename")" &>/dev/null
+        set +o pipefail
+        git status --porcelain "$filename" | grep -q '^??' || echo "$filename"
+        set -o pipefail
+        popd &>/dev/null
+    done
+}
 
 # only if at start of file, not part why through like %pre / %post sections of anaconda-ks.cfg kickstart file
 filter_is_shebang(){
@@ -62,6 +67,7 @@ non_executable_scripts="$(
     xargs grep -l '^#!' |
     grep -Ev "$exceptions_regex" |
     filter_is_shebang |
+    filter_is_git_committed |
     tee /dev/stderr
 )"
 set -o pipefail
