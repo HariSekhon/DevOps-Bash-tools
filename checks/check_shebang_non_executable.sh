@@ -31,8 +31,10 @@ env$
 \.env
 \.envrc
 shrc$
-.login$
-.logout$
+\..*login$
+\..*logout$
+\.bak
+\.pm$
 '
 exceptions_regex=""
 for exception in $exceptions; do
