@@ -24,6 +24,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 section "Finding Non Executable Scripts"
 
+# These shouldn't be executable even if they have #! lines for syntax reasons
+exceptions="
+.env
+.envrc
+"
+exceptions_regex=""
+for exception in $exceptions; do
+    exceptions_regex="$exceptions_regex|$exception"
+done
+exceptions_regex="(${exceptions_regex#|})$"
+
 #filter_is_git_committed(){
 #    while read -r filename; do
 #        pushd "$(dirname "$filename")" &>/dev/null
@@ -49,6 +60,7 @@ set +o pipefail
 non_executable_scripts="$(
     eval find "${1:-$PWD}" -maxdepth 2 -type f -not -perm -u+x |
     xargs grep -l '^#!' |
+    grep -Ev "$exceptions_regex" |
     filter_is_shebang |
     tee /dev/stderr
 )"
