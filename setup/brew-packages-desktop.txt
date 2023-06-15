@@ -152,6 +152,7 @@ maven-shell
 #md5sha1sum  # clashes with coreutils
 media-info  # read mp3 tags
 mercurial
+ubuntu/microk8s/microk8s
 midnight-commander
 #mitmproxy
 mosh
