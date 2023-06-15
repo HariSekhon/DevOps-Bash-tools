@@ -27,3 +27,4 @@ spotify
 vagrant
 virtualbox
 vnc-viewer
+wireshark  # installs GUI, without cask only install CLI utils like tshark
