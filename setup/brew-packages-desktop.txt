@@ -245,7 +245,7 @@ vim  # Mac's vim not syntax highlighting Bash properly on macOS Big Sur 11.7 htt
 watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
-wireshark
+wireshark  # only install tshark CLI, must --cask for Wireshark
 #x264
 #x265
 #xvid
