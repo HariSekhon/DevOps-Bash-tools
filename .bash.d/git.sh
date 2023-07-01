@@ -793,11 +793,19 @@ gitrm(){
 }
 
 gitrename(){
+    if [ $# -ne 2 ]; then
+        echo "usage: gitrename <original_filename> <new_filename>"
+        return 1
+    fi
     git mv -- "$1" "$2" &&
     git commit -m "renamed $1 to $2" "$1" "$2"
 }
 
 gitmv(){
+    if [ $# -ne 2 ]; then
+        echo "usage: gitmv <original_filename> <new_filename>"
+        return 1
+    fi
     git mv -- "$1" "$2" &&
     git commit -m "moved $1 to $2" "$1" "$2"
 }
