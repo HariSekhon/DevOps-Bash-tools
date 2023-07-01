@@ -21,7 +21,7 @@ on:
     paths-ignore:
       - '**/*.md'
       - '.github/workflows/*'
-      - '!.github/workflows/debian_11.yaml'
+      - '!.github/workflows/debian_12.yaml'
       - '**/Dockerfile'
       - '**/Jenkinsfile'
       - '**/.envrc*'
