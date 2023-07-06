@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/git.sh"
+
 git_url="${GIT_URL:-https://github.com}"
 
 git_base_dir=~/github
@@ -62,8 +65,16 @@ run(){
         pushd "$repo_dir"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
         git pull --no-edit
-        git submodule update --init --remote --recursive
+        #git submodule update --init --remote --recursive --force
         for submodule in $(git submodule | awk '{print $2}'); do
+            if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
+                pushd "$submodule" || continue
+                git stash
+                git checkout "$(default_branch)"
+                git pull --no-edit
+                git submodule update
+                popd
+            fi
             echo
             echo "committing latest hashref for submodule $submodule"
             git ci -m "updated submodule $submodule" "$submodule" || :
