@@ -273,6 +273,8 @@ if has("autocmd")
     au BufNew,BufRead *.d2         nmap ;l :w<CR>:!clear; d2 fmt "%" <CR> :edit <CR> :1s/^# \!\//#\!\// <CR>
     au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| more -R<CR>
     au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
+    " doesn't work on ansible inventory anyway
+    "au FileType       ini          nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
     au BufNew,BufRead *.php        nmap ;l :w<CR>:!clear; php5 -l "%"<CR>
     " this acts as both a validation as well as a fast way of being able to edit the plist
     " trying to convert to json results in an error "invalid object in plist for destination format"

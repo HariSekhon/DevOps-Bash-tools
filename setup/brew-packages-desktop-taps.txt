@@ -9,6 +9,8 @@
 
 hashicorp/tap           packer
 
+ariga/tap               atlas
+
 Checkmarx/tap           kics
 
 FairwindsOps/tap        polaris
