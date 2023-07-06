@@ -70,8 +70,10 @@ run(){
             if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
                 pushd "$submodule" || continue
                 git stash
-                git checkout "$(default_branch)"
-                git pull --no-edit
+                default_branch="$(default_branch)"
+                git checkout "$default_branch"
+                git pull --no-edit ||
+                git reset --hard origin/"$default_branch"
                 git submodule update
                 popd
             fi
