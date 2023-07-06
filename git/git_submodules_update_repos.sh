@@ -80,6 +80,7 @@ run(){
             echo
             echo "committing latest hashref for submodule $submodule"
             git ci -m "updated submodule $submodule" "$submodule" || :
+            echo
         done
         echo
         [ -n "${NO_PUSH:-}" ] || git push
