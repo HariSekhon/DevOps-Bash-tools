@@ -65,7 +65,7 @@ run(){
         pushd "$repo_dir"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
         git pull --no-edit
-        #git submodule update --init --remote --recursive --force
+        git submodule update --init --remote --recursive --force ||
         for submodule in $(git submodule | awk '{print $2}'); do
             if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
                 pushd "$submodule" || continue
@@ -78,6 +78,8 @@ run(){
                 popd
             fi
             echo
+        done
+        for submodule in $(git submodule | awk '{print $2}'); do
             echo "committing latest hashref for submodule $submodule"
             git ci -m "updated submodule $submodule" "$submodule" || :
             echo
