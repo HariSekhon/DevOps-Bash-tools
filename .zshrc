@@ -72,6 +72,8 @@ autoload U colors && colors
 # expand wilcard expansion on unquoted variables like Bash
 setopt GLOB_SUBST
 
+export PATH="$PATH:/opt/homebrew/bin/"
+
 # ============================================================================ #
 #                                   Oh-My-ZSH
 # ============================================================================ #
