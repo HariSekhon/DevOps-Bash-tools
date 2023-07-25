@@ -15,6 +15,7 @@ docker
 #firefox-developer-edition
 google-chrome
 google-cloud-sdk
+intellij-idea-ce
 keepassxc
 keka
 minikube
