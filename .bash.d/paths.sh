@@ -155,6 +155,11 @@ fi
 #    add_PATH /Applications/SnowSQL.app/Contents/MacOS
 #fi
 
+# so that you can open files in IntelliJ from the command line: idea <filename>
+if [ -d "/Applications/IntelliJ IDEA CE.app/Contents/MacOS" ]; then
+    add_PATH "/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+fi
+
 
 # ============================================================================ #
 #                                A n a c o n d a
