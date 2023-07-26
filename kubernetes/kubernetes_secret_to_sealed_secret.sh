@@ -35,7 +35,7 @@ Useful to migrate existing secrets to sealed secrets which are safe to commit to
 
 See kubernetes_secrets_to_sealed_secrets.sh to quickly migrate all your secrets to sealed secrets
 
-Use kubectl_secrets_download.sh to take a backup of secrets first
+Use kubectl_secrets_download.sh to take a backup of existing kubernetes secrets first
 
 
 Requires kubectl and kubeseal to both be in the \$PATH and configured
