@@ -133,7 +133,7 @@ timestamp "fly login:"
 "$srcdir/fly.sh" login -c "$CONCOURSE_URL" -u "$CONCOURSE_USER" -p "$CONCOURSE_PASSWORD"
 echo
 
-concourse_yml=".concourse_yml"
+concourse_yml=".concourse.yml"
 
 if ! [ -f "$concourse_yml" ]; then
     timestamp "Concourse configuration file '$concourse_yml' not found"
