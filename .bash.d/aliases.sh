@@ -108,8 +108,8 @@ alias bt='sti bt; cd $bt'
 export bashd="$bash_tools/.bash.d"
 alias bashd='sti bashd; cd $bashd'
 
-#alias cleanshell='exec env - bash --rcfile /dev/null'
-alias cleanshell='exec env - bash --norc --noprofile'
+#alias cleanshell='env - bash --rcfile /dev/null'
+alias cleanshell='env - bash --norc --noprofile'
 alias newshell='exec bash'
 alias rr='newshell'
 
