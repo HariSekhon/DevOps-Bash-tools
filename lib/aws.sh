@@ -62,11 +62,11 @@ aws_create_access_key_if_not_exists(){
     mkdir -pv "$(dirname "$access_keys_csv")"
     if [ -f "$access_keys_csv" ] && grep -Fq AKIA "$access_keys_csv"; then
         timestamp "Access Keys CSV '$access_keys_csv' already exists"
-        "$libdir/../aws_csv_creds.sh" "$access_keys_csv"
+        "$libdir/../aws/aws_csv_creds.sh" "$access_keys_csv"
     else
         local exports
         timestamp "Creating access key, removing an old one if necessary"
-        exports="$("$libdir/../aws_iam_replace_access_key.sh" --user-name "$user")"
+        exports="$("$libdir/../aws/aws_iam_replace_access_key.sh" --user-name "$user")"
         aws_access_keys_to_csv <<< "$exports" >> "$access_keys_csv"
         timestamp "Created access key and saved to CSV:  $access_keys_csv"
         echo "$exports"
