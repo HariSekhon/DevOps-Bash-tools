@@ -65,7 +65,7 @@ apps="$(argocd app list -o name | sed 's|argocd/||')"
 # App-of-Apps which would re-enable the app must be disabled first
 for base_app in argocd apps; do
     if grep -Fxq 'argocd' <<< "$apps"; then
-        timestamp "$msg '$app'"
+        timestamp "$msg '$base_app'"
         argocd app set "$base_app" --sync-policy "$automated_or_none"
     fi
     echo >&2
