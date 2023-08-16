@@ -17,6 +17,7 @@
 
 .gitconfig
 .gitignore
+.mdlrc
 .pylintrc
 configs/.ansible.cfg
 configs/.athenacli/athenaclirc
@@ -34,7 +35,6 @@ configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
 configs/.grype.yaml
 configs/.inputrc
-configs/.mdlrc
 configs/.my.cnf
 configs/.perlcriticrc
 configs/.perlcritic_forbidden_modules

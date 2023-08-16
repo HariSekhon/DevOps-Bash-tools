@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads all Kubernetes secrets in the current or given namespace to files in the local directory named secret-<name>.yaml
 
-Useful for backing up all your live secrets before migrating to Sealed Secrets
+Useful for backing up all your live secrets before migrating to Sealed Secrets or External Secrets
 "
 
 # used by usage() in lib/utils.sh
