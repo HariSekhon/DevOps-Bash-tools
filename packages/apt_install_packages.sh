@@ -69,7 +69,7 @@ if is_CI; then
     opts="$opts -q"
     echo
     echo "/etc/apt/sources.list:"
-    cat /etc/apt/sources.list
+    cat /etc/apt/sources.list ||:
     echo
     for x in /etc/apt/sources.list.d/*; do
         [ -f "$x" ] || continue
