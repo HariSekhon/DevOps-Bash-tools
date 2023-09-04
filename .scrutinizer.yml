@@ -14,7 +14,7 @@
 #
 
 build:
-  image: ubuntu:16.04
+  image: default-bionic
   nodes:
     auto:
       commands:
