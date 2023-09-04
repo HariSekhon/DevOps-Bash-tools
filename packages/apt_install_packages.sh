@@ -23,7 +23,6 @@
 set -eu
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "$0")" && pwd)"
-set -x
 
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils-bourne.sh"
@@ -50,6 +49,7 @@ done
 
 echo "Installing Deb Packages"
 
+export NEEDRESTART_MODE=a
 export DEBIAN_FRONTEND=noninteractive
 
 #apt="apt"
@@ -112,10 +112,6 @@ fi
 
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
-
-export NEEDRESTART_MODE=a
-export DEBIAN_FRONTEND=noninteractive
-export DEBIAN_PRIORITY=critical
 
 # requires fuser which might not already be installed, catch-22 situation if wanting to use this for everything including bootstraps
 #"$srcdir/apt_wait.sh"
