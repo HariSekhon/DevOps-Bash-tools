@@ -14,11 +14,10 @@
 #
 
 build:
+  image: ubuntu:16.04
   nodes:
     auto:
       commands:
-        # not working
-        #- checkout-code ~/build
         - repo="${SCRUTINIZER_PROJECT#*/}"; git clone "https://github.com/$repo" build
         - cd ~/build
         - pwd
