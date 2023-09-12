@@ -37,6 +37,7 @@ Example:
     gcp_secret_get.sh mysecret | base64 --decode > qr-code.png
 
 Warning: this has been tested and works to instantiate other team members virtual MFA on their phones for GitHub.com, even a year later, but Azure AD seems to expire the QR code
+         https://stackoverflow.com/questions/73578781/qr-code-got-expire-with-azure-verifiable-credential
 
 
 $usage_gcloud_sdk_required
