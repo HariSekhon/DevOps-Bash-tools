@@ -69,7 +69,7 @@ if [ -n "$namespace" ]; then
     kube_namespace "$namespace"
 fi
 
-if [ "${namespace:-}" ]; then
+if [ -z "${namespace:-}" ]; then
     namespace="$(kube_current_namespace)"
 fi
 
