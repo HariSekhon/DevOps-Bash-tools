@@ -118,7 +118,16 @@ if gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
     timestamp "Checking Kubernetes secret '$secret' content matches GCP secret '$secret' content"
     timestamp "Getting GCP secret '$secret' value"
     gcp_secret_value="$("$srcdir/../gcp/gcp_secret_get.sh" "$secret")"
-    if [ "$gcp_secret_value" = "$k8s_secret_value" ]; then
+    # if it's GCP service account key
+    if grep -Fq '"type": "service_account"' <<< "$gcp_secret_value"; then
+        # doesn't work
+        #if [ "$(jq -Mr <<< "$gcp_secret_value")" = "$(jq -Mr <<< "$k8s_secret_value")" ]; then
+        # if there are no whitespace differences between the service account keys then accept
+        if [ -n "$(diff -w <(echo "$gcp_secret_value") <(echo "$k8s_secret_value") )" ]; then
+            timestamp "ERROR: GCP secret service account json does not match existing Kubernetes secret service account json"
+            exit 1
+        fi
+    elif [ "$gcp_secret_value" = "$k8s_secret_value" ]; then
         timestamp "GCP and Kubernetes secret values match"
     else
         timestamp "ERROR: GCP secret value does not match existing Kubernetes secret value - careful manual reconciliation required"
