@@ -35,8 +35,8 @@ For every secret, performs the following actions via kubernetes_secrets_to_exter
   - if it does, validates that its content matches the existing secret in Kubernetes
 - creates external secret in the same namespace
 - omits:
-  - kubernetes\.io/service-account-token
-  - secrets ending in *-tls because they are usually generated and managed by Cert Manager automatically
+  - type kubernetes.io/service-account-token
+  - type tls with Cert Manager annotation
 
 Useful to migrate existing secrets to external secrets referencing GCP Secret Manager
 
