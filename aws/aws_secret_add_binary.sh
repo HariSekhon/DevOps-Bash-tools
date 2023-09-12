@@ -42,6 +42,7 @@ Caveat: your QR pic cannot be too big or complex or it'll result in too large a 
     An error occurred (ValidationException) when calling the CreateSecret operation: 1 validation error detected: Value at 'secretBinary' failed to satisfy constraint: Member must have length less than or equal to 65536
 
 Workaround: instead of screenshotting, save the QR code png via right-click download, it'll result in a much smaller original png download which will be able to be saved to AWS Secrets Manager
+Warning: this has been tested and works to instantiate other team members virtual MFA on their phones for GitHub.com, even a year later, but Azure AD seems to expire the QR code
 
 
 $usage_aws_cli_required
