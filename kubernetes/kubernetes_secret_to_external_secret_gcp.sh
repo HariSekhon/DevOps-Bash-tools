@@ -60,11 +60,6 @@ secret="$1"
 namespace="${2:-}"
 context="${3:-}"
 
-if [[ "$secret" =~ kubernetes\.io/service-account-token ]]; then
-    echo "WARNING: skipping touching secret '$secret' for safety"
-    exit 0
-fi
-
 kube_config_isolate
 
 if [ -n "$context" ]; then
@@ -78,12 +73,12 @@ if [ "${namespace:-}" ]; then
     namespace="$(kube_current_namespace)"
 fi
 
-yaml="external-secret-$secret.yaml"
+yaml_file="external-secret-$secret.yaml"
 
 timestamp "Generating external secret for secret '$secret'"
 
 # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
-k8s_secret_value="$(kubectl get secret "$secret" -o json | jq -r ".data[\"$secret\"]")"
+k8s_secret_value="$(kubectl get secret "$secret" -o json | jq -r ".data[\"$secret\"]" | base64 --decode)"
 
 if [ -z "$k8s_secret_value" ]; then
     timestamp "ERROR: failed to get Kubernetes secret value for '$secret' key '$secret'"
@@ -112,7 +107,9 @@ spec:
         key: $secret  # GCP Secret Manager secret
 "
 
-timestamp "Generated:  $yaml"
+echo "$yaml" > "$yaml_file"
+
+timestamp "Generated external-secret yaml file:  $yaml_file"
 
 timestamp "Checking GCP Secret Manager for secret '$secret'"
 
@@ -129,11 +126,11 @@ if gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
     fi
 else
     timestamp "GCP secret '$secret' doesn't exist"
-    timestamp "Creating GCP secret '$secret' from the content of the Kubernetes secret '$secret'"
+    timestamp "CREATING GCP secret '$secret' from the content of the Kubernetes secret '$secret'"
     "$srcdir/../gcp/gcp_secret_add.sh" "$secret" "$k8s_secret_value"
     timestamp "GCP secret '$secret' created"
 fi
 
 timestamp "Applying external secret '$secret'"
 
-kubectl apply -f "$yaml"
+kubectl apply -f "$yaml_file"
