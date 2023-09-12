@@ -73,6 +73,21 @@ if [ "${namespace:-}" ]; then
 fi
 
 for secret in $(kubectl get secrets -o name | sed 's|^secret/||'); do
+    secret_json="$(kubectl get secret "$secret" -o json)"
+    secret_type="$(jq -r '.type' <<< "$secret_json")"
+    if [ "$secret_type" = "kubernetes.io/service-account-token" ]; then
+        timestamp "Skipping touching service account token secret '$secret' for safety"
+        echo
+        continue
+    fi
+    if [ "$secret_type" = "kubernetes.io/tls" ]; then
+        tls_cert_manager_issuer="$(jq -r '.metadata.annotations."cert-manager.io/issuer-name"' <<< "$secret_json")"
+        if [ -n "$tls_cert_manager_issuer" ]; then
+            timestamp "Skipping touching tls secret '$secret' because its managed by Cert Manager"
+            echo
+            continue
+        fi
+    fi
     "$srcdir/kubernetes_secret_to_external_secret_gcp.sh" "$secret"
     echo
 done
