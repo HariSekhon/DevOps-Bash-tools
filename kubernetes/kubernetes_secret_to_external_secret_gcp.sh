@@ -86,7 +86,7 @@ if [ -z "$k8s_secret_value" ]; then
 fi
 
 # https://github.com/HariSekhon/Kubernetes-configs/blob/master/external-secret.yaml
-yaml="
+yaml="---
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
