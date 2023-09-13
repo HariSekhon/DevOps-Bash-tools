@@ -109,6 +109,10 @@ spec:
 
 echo "$yaml" > "$yaml_file"
 
+if [ -n "${GENERATE_YAML_ONLY:-}" ]; then
+    exit 0
+fi
+
 timestamp "Generated external-secret yaml file:  $yaml_file"
 
 timestamp "Checking GCP Secret Manager for secret '$secret'"
