@@ -108,7 +108,10 @@ spec:
         key: $secret  # GCP Secret Manager secret
 "
 
-echo "$yaml" > "$yaml_file"
+# remove the sed line if you want to leave the comments in the generated files
+echo "$yaml" \
+    | sed 's/#.*$//; s/[[:space:]]*$//; /^[[:space:]]*$/d' \
+    > "$yaml_file"
 
 if [ -n "${GENERATE_YAML_ONLY:-}" ]; then
     exit 0
