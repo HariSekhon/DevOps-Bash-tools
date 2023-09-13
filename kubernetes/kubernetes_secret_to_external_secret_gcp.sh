@@ -27,10 +27,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a Kubernetes external secret yaml from a given secret in the current or given namespace
 
-- generates external secret yaml
+- generates external secret yaml - if GENERATE_YAML_ONLY env var is set to any value, then stops here
 - checks the GCP Secret Manager secret exists
   - if it doesn't, creates it
   - if it does, validates that its content matches the existing secret in Kubernetes
+  - if there is a difference and OVERWRITE_GCP_SECRET env var is set to any value, creates a new version and uses that - XXX: use this carefully
 - creates external secret in the same namespace
 
 Useful to migrate existing secrets to external secrets referencing GCP Secret Manager
@@ -133,6 +134,9 @@ if gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
         fi
     elif [ "$gcp_secret_value" = "$k8s_secret_value" ]; then
         timestamp "GCP and Kubernetes secret values match"
+    elif [ "${OVERWRITE_GCP_SECRET:-}" ]; then
+        timestamp "UPDATING GCP secret '$secret' value"
+        gcloud secrets versions add "$secret" --data-file=- <<< "$k8s_secret_value"
     else
         timestamp "ERROR: GCP secret value does not match existing Kubernetes secret value - careful manual reconciliation required"
         exit 1
