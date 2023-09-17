@@ -222,7 +222,7 @@ make
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
 - [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
-- [Media](https://github.com/HariSekhon/DevOps-Bash-tools#media) - MP3 metadata editing, grouping and ordering of albums and audiobooks, mkv/avi to mp4 converters
+- [Media](https://github.com/HariSekhon/DevOps-Bash-tools#media) - MP3 metadata editing, grouping and ordering of albums and audiobooks, mkv/avi to mp4 converters, YouTube channel download
 - [Spotify](https://github.com/HariSekhon/DevOps-Bash-tools#spotify) - 40+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, followed artists, top artists, top tracks etc.
 - [More Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#more-linux--mac) - more systems administration scripts, package installation automation
 - [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
@@ -1104,6 +1104,7 @@ etc.
 - `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
 - `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
+- `youtube_download_channel.sh` - downloads all videos from a given YouTube channel URL
 
 #### Spotify
 
