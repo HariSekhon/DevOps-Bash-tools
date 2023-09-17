@@ -33,5 +33,7 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+# https://github.com/yt-dlp/yt-dlp#output-template
+
 #yt-dlp -f mp4 -cw -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
 yt-dlp -f mp4 -cw -o "%(autonumber)s - %(title)s.%(ext)s" -v "$1"
