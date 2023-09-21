@@ -80,8 +80,26 @@ yaml_file="external-secret-$secret.yaml"
 
 timestamp "Generating external secret for secret '$secret'"
 
+k8s_secret_json="$(kubectl get secret "$secret" -o json)"
+
+if [ -z "$k8s_secret_json" ]; then
+    timestamp "ERROR: failed to get Kubernetes secret json"
+    exit 1
+fi
+
+keys="$(jq -r '.data | keys[]' <<< "$k8s_secret_json")"
+if [ -z "$keys" ]; then
+    timestamp "ERROR: fails to get keys for secret"
+    exit 1
+fi
+num_keys="$(wc -l <<< "$keys" | sed 's/[[:space:]]//g')"
+if [ "$num_keys" != 1 ]; then
+    timestamp "ERROR: more than 1 key in secret, not handling"
+    exit 1
+fi
+
 # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
-k8s_secret_value="$(kubectl get secret "$secret" -o json | jq -r ".data[\"$secret\"]" | base64 --decode)"
+k8s_secret_value="$(jq -r ".data[\"$secret\"]" <<< "$k8s_secret_json" | base64 --decode)"
 
 if [ -z "$k8s_secret_value" ]; then
     timestamp "ERROR: failed to get Kubernetes secret value for '$secret' key '$secret'"
