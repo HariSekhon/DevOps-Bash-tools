@@ -143,6 +143,7 @@ export -f check_secret
 while read -r secret; do
     echo "check_secret '$secret'"
 done <<< "$secrets" |
-parallel | sort -k5r
+parallel |
+sort -k5r
 
 exit $exitcode
