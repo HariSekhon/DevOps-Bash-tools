@@ -27,6 +27,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Compares each Kubernetes secret to GCP Secret Manager
 
+Assumes each secret has a key of the same name. If it doesn't, but secret only has one key, uses that.
+If multiple keys exists and none match the secret name marks it as a failure MULTIPLE_KEYS_IN_SECRET_NO_MATCHING_KEY_NAME
+
 Checks
 
 - that the kubernetes secret exists in GCP Secret Manager
@@ -91,14 +94,6 @@ check_secret(){
     local gcp_secret_value
     printf "Kubernetes secret %-${max_len}s => " "$secret"
 
-    # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
-    k8s_secret_value="$(kubectl get secret "$secret" -o json | jq -r ".data[\"$secret\"]" | base64 --decode)"
-
-    if [ -z "$k8s_secret_value" ]; then
-        echo "FAILED_TO_GET_K8s_SECRET"
-        return 1
-    fi
-
     local secret_json
     local secret_type
     secret_json="$(kubectl get secret "$secret" -o json)"
@@ -113,6 +108,30 @@ check_secret(){
             echo "skip_tls_cert_manager"
             return
         fi
+    fi
+
+    local keys
+    keys="$(jq -r '.data | keys[]' <<< "$secret_json")"
+    if [ -z "$keys" ]; then
+        echo "FAILED_TO_GET_SECRET_KEYS"
+        return 1
+    fi
+    if grep -Fxq "$secret" <<< "$keys"; then
+        # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
+        k8s_secret_value="$(jq -r ".data[\"$secret\"]" <<< "$secret_json" | base64 --decode)"
+    else
+        if [ "$(wc -l <<< "$keys" | sed 's/[[:space:]]//g')" -eq 1 ]; then
+            # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
+            k8s_secret_value="$(jq -r ".data[\"$keys\"]" <<< "$secret_json" | base64 --decode)"
+        else
+            echo "MULTIPLE_KEYS_IN_SECRET_NO_MATCHING_KEY_NAME"
+            return 1
+        fi
+    fi
+
+    if [ -z "$k8s_secret_value" ]; then
+        echo "FAILED_TO_GET_K8s_SECRET"
+        return 1
     fi
 
     if ! gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
