@@ -110,34 +110,34 @@ check_secret(){
         fi
     fi
 
-    local keys
-    keys="$(jq -r '.data | keys[]' <<< "$secret_json")"
-    if [ -z "$keys" ]; then
-        echo "FAILED_TO_GET_SECRET_KEYS"
-        return 1
-    fi
-    if grep -Fxq "$secret" <<< "$keys"; then
-        # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
-        k8s_secret_value="$(jq -r ".data[\"$secret\"]" <<< "$secret_json" | base64 --decode)"
-    else
-        if [ "$(wc -l <<< "$keys" | sed 's/[[:space:]]//g')" -eq 1 ]; then
-            # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
-            k8s_secret_value="$(jq -r ".data[\"$keys\"]" <<< "$secret_json" | base64 --decode)"
-        else
-            echo "MULTIPLE_KEYS_IN_SECRET_NO_MATCHING_KEY_NAME"
-            return 1
-        fi
-    fi
-
-    if [ -z "$k8s_secret_value" ]; then
-        echo "FAILED_TO_GET_K8s_SECRET"
-        return 1
-    fi
-
     if ! gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
         echo "MISSING_ON_GCP"
         return 1
     else
+        local keys
+        keys="$(jq -r '.data | keys[]' <<< "$secret_json")"
+        if [ -z "$keys" ]; then
+            echo "FAILED_TO_GET_SECRET_KEYS"
+            return 1
+        fi
+        if grep -Fxq "$secret" <<< "$keys"; then
+            # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
+            k8s_secret_value="$(jq -r ".data[\"$secret\"]" <<< "$secret_json" | base64 --decode)"
+        else
+            if [ "$(wc -l <<< "$keys" | sed 's/[[:space:]]//g')" -eq 1 ]; then
+                # if the secret has a dash in it, then you need to quote it whether .data."$secret" or .data["$secret"]
+                k8s_secret_value="$(jq -r ".data[\"$keys\"]" <<< "$secret_json" | base64 --decode)"
+            else
+                echo "MULTIPLE_KEYS_IN_SECRET_NO_MATCHING_KEY_NAME"
+                return 1
+            fi
+        fi
+
+        if [ -z "$k8s_secret_value" ]; then
+            echo "FAILED_TO_GET_K8s_SECRET"
+            return 1
+        fi
+
         gcp_secret_value="$("$srcdir/../gcp/gcp_secret_get.sh" "$secret")"
         # if it's GCP service account key
         if grep -Fq '"type": "service_account"' <<< "$gcp_secret_value"; then
