@@ -73,6 +73,7 @@ d2  # declarative diagram language
 diff-so-fancy
 diff-pdf
 direnv
+disk-inventory-x
 dive  # analyze docker image layers
 dnsmasq
 dnstop
