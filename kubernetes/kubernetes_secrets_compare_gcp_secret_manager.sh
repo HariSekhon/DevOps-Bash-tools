@@ -96,7 +96,7 @@ check_secret(){
 
     if [ -z "$k8s_secret_value" ]; then
         echo "FAILED_TO_GET_K8s_SECRET"
-        exit 1
+        return 1
     fi
 
     local secret_json
@@ -117,14 +117,14 @@ check_secret(){
 
     if ! gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
         echo "MISSING_ON_GCP"
-        exit 1
+        return 1
     else
         gcp_secret_value="$("$srcdir/../gcp/gcp_secret_get.sh" "$secret")"
         # if it's GCP service account key
         if grep -Fq '"type": "service_account"' <<< "$gcp_secret_value"; then
             if [ -n "$(diff -w <(echo "$gcp_secret_value") <(echo "$k8s_secret_value") )" ]; then
                 echo "MISMATCHED_GCP_SERVICE_ACCOUNT_VALUE"
-                exit 1
+                return 1
             else
                 echo "ok_gcp_service_account_value"
             fi
@@ -132,7 +132,7 @@ check_secret(){
             echo "ok_gcp_value_matches"
         else
             echo "MISMATCHED_GCP_VALUE"
-            exit 1
+            return 1
         fi
     fi
 }
