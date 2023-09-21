@@ -84,6 +84,7 @@ done <<< "$secrets"
 
 exitcode=0
 
+# shellcheck disable=SC2317
 check_secret(){
     local secret="$1"
     local k8s_secret_value
@@ -95,47 +96,53 @@ check_secret(){
 
     if [ -z "$k8s_secret_value" ]; then
         echo "FAILED_TO_GET_K8s_SECRET"
-        exitcode=1
+        exit 1
     fi
 
+    local secret_json
+    local secret_type
     secret_json="$(kubectl get secret "$secret" -o json)"
     secret_type="$(jq -r '.type' <<< "$secret_json")"
     if [ "$secret_type" = "kubernetes.io/service-account-token" ]; then
-        echo "SKIP_K8s_SERVICE_ACCOUNT"
+        echo "skip_k8s_service_account"
         return
     fi
     if [ "$secret_type" = "kubernetes.io/tls" ]; then
         tls_cert_manager_issuer="$(jq -r '.metadata.annotations."cert-manager.io/issuer-name"' <<< "$secret_json")"
         if [ -n "$tls_cert_manager_issuer" ]; then
-            echo "SKIP_TLS_CERT_MANAGER"
+            echo "skip_tls_cert_manager"
             return
         fi
     fi
 
     if ! gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
         echo "MISSING_ON_GCP"
-        exitcode=1
+        exit 1
     else
         gcp_secret_value="$("$srcdir/../gcp/gcp_secret_get.sh" "$secret")"
         # if it's GCP service account key
         if grep -Fq '"type": "service_account"' <<< "$gcp_secret_value"; then
             if [ -n "$(diff -w <(echo "$gcp_secret_value") <(echo "$k8s_secret_value") )" ]; then
                 echo "MISMATCHED_GCP_SERVICE_ACCOUNT_VALUE"
-                exitcode=1
+                exit 1
             else
-                echo "OK_GCP_SERVICE_ACCOUNT_VALUE"
+                echo "ok_gcp_service_account_value"
             fi
         elif [ "$gcp_secret_value" = "$k8s_secret_value" ]; then
-            echo "OK_GCP_VALUE_MATCHES"
+            echo "ok_gcp_value_matches"
         else
             echo "MISMATCHED_GCP_VALUE"
-            exitcode=1
+            exit 1
         fi
     fi
 }
 
+export srcdir
+export max_len
+export -f check_secret
 while read -r secret; do
-    check_secret "$secret"
-done <<< "$secrets"
+    echo "check_secret '$secret'"
+done <<< "$secrets" |
+parallel | sort -k5r
 
 exit $exitcode
