@@ -7,6 +7,7 @@
 
 anaconda
 atom
+barrier
 ccmenu
 codeship/taps/jet
 docker
