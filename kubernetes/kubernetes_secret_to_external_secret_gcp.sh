@@ -27,6 +27,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a Kubernetes external secret yaml from a given secret in the current or given namespace
 
+Assumes each secret has a key of the same name
+
 - generates external secret yaml - if GENERATE_YAML_ONLY env var is set to any value, then stops here
 - checks the GCP Secret Manager secret exists
   - if it doesn't, creates it
