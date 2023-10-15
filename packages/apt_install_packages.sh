@@ -49,6 +49,7 @@ done
 
 echo "Installing Deb Packages"
 
+export NEEDRESTART_MODE=a
 export DEBIAN_FRONTEND=noninteractive
 
 #apt="apt"
