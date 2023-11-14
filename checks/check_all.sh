@@ -102,7 +102,12 @@ fi
 
 "$srcdir/check_shebang_non_executable.sh"
 
-"$srcdir/check_srcdir_references.sh"
+# false alerts on the second line of this construct
+#
+# if [ -x $srcdir/script.sh ]; then
+#     $srcdir/script.sh
+#
+#"$srcdir/check_srcdir_references.sh"
 
 "$srcdir/check_bash_syntax.sh"
 
