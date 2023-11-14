@@ -42,9 +42,12 @@ grep -v '^\.bash\.d/' |
 grep -v 'check_bash_references.sh' |
 while read -r scriptpath; do
     pushd "$(dirname "$scriptpath")" >/dev/null
-    srcdirpaths="$({ grep -Eo '^[^#]*\$srcdir/[^"'"'"'[:space:]]+.sh' "${scriptpath##*/}" || : ; } |
-                   { grep -Eo -e 'srcdir/[^"'\''[:space:]]+\.sh' -e 'srcdir/[^"'\''[:space:]]*bashrc' || : ; } |
-                   sed 's|^srcdir/||')"
+    srcdirpaths="$(
+        { grep -v -e ' -x ' -e ' -f ' "${scriptpath##*/}" || : ; } |
+        { grep -Eo '^[^#]*\$srcdir/[^"'"'"'[:space:]]+.sh' || : ; } |
+        { grep -Eo -e 'srcdir/[^"'\''[:space:]]+\.sh' -e 'srcdir/[^"'\''[:space:]]*bashrc' || : ; } |
+        sed 's|^srcdir/||'
+    )"
     for srcdirpath in $srcdirpaths; do
         srcdirpath2="$(readlink -f "$srcdirpath" || :)"
         if ! test -f "$srcdirpath2"; then
