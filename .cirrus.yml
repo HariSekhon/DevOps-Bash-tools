@@ -23,8 +23,8 @@ container:
   image: ubuntu:18.04
 
 task:
-  # doesn't work properly
-  #skip: "!changesInclude('**/*.md')"
+  env:
+    TMPDIR: /var/tmp
   script:
     - setup/ci_bootstrap.sh
     - make init
