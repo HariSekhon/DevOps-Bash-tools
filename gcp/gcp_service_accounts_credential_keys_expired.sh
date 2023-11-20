@@ -1,4 +1,4 @@
-#!/u)sr/bin/env bash
+#!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
