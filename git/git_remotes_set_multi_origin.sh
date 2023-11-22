@@ -67,7 +67,16 @@ add_origin_url(){
     if [ -n "$url" ]; then
         echo "copied existing remote url for $name as is including any access tokens to named remote $name"
     else
-        url="$(git remote -v | awk '{print $2}' | grep -Ei 'bitbucket.org|github.com|gitlab.com|dev.azure.com' | head -n 1 | perl -pe "s/^((\\w+:\\/\\/)?(git@)?)[^\\/:]+/\$1$domain/")"
+        url="$(
+            git remote -v |
+            awk '{print $2}' |
+            grep -Ei 'bitbucket.org|github.com|gitlab.com|dev.azure.com' |
+            head -n 1 |
+            perl -pe "
+                s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/;
+                #s/^(git@)[^:]+/\$1$domain/
+            "
+        )"
         # XXX: Azure DevOps has non-uniform URLs compared to the 3 main Git repos
         if [ "$name" = "azure" ]; then
             url="$(git_to_azure_url "$url")"
