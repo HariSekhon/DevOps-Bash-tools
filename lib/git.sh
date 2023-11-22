@@ -203,10 +203,14 @@ git_to_azure_url(){
 
 azure_to_git_url(){
     local url="$1"
-    #url="${url/:v3\//:}"
-    url="${url/\/_git\//\/}"
-    # XXX: strip the middle component out from git@ssh.dev.azure.com:v3/harisekhon/GitHub/DevOps-Bash-tools
-    url="$(perl -pe 's/v3\/([\/:][^\/:]+)(\/[^\/]+)(\/[^\/]+)$/$1$3/' <<< "$url")"
+    url="${url/:v3\//:}"
+    #url="${url/\/_git\//\/}"
+    # XXX: strip the middle component out from Azure URLs that aren't found in other major Git providers like GitHub / GitLab / Bitbucket:
+    #
+    #   git@ssh.dev.azure.com:v3/harisekhon/GitHub/DevOps-Bash-tools
+    #   https://dev.azure.com/harisekhon/GitHub/_git/DevOps-Bash-tools
+    #
+    url="$(perl -pe 's/([\/:][^\/:]+)\/[^\/]+\/_git(\/[^\/]+)$/$1$2/' <<< "$url")"
     echo "$url"
 }
 
