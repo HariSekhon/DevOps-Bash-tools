@@ -74,7 +74,7 @@ add_origin_url(){
             head -n 1 |
             perl -pe "
                 s/^(\\w+:\\/\\/)[^\\/]+/\$1$domain/;
-                #s/^(git@)[^:]+/\$1$domain/
+                s/^(git@)[^:]+/\$1$domain/
             "
         )"
         # XXX: Azure DevOps has non-uniform URLs compared to the 3 main Git repos
