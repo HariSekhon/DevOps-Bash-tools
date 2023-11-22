@@ -97,6 +97,7 @@ gcc
 gem-completion
 gh  # GitHub CLI
 #git  # comes with macOS XCode
+git-lfs
 #gnu-sed  # in brew-packages.txt
 #gnupg
 gnupg2
