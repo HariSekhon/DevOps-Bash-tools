@@ -248,3 +248,8 @@
 #[credential "https://source.developers.google.com/"]
 #	helper =
 #	helper = !gcloud auth git-helper --account=hari@<project>.iam.gserviceaccount.com --ignore-unknown $@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
