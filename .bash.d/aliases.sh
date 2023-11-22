@@ -257,8 +257,10 @@ doc_alias(){
     #    echo "WARNING: $docfile conflicts with existing alias, duplicate doc '$docfile' among ~/docs, ~/github/docs, ~/bitbucket/docs?"
     #    return
     #fi
+    local shortname="${docfile%.md}"
+    local shortname="${shortname%.txt}"
     # shellcheck disable=SC2139,SC2140
-    alias "$prefix$docfile"="ti ${docpath##*/}; \$EDITOR $docpath"
+    alias "${prefix}${shortname}"="ti ${docpath##*/}; \$EDITOR $docpath"
 }
 
 for x in ~/docs/* "$github"/docs/* "$bitbucket"/docs/*; do
