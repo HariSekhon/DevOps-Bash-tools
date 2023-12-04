@@ -50,6 +50,8 @@ To boot a specific version of Wordpress:
 
 export VERSION=6.4
 
+Note some plugins will break the Live Preview of themes, such as the Yoast SEO plugin, which must be deactivated
+
 Tested on Wordpress 6.4
 "
 
