@@ -964,8 +964,15 @@ when_url_content(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number+=1))
             timestamp "$try_number trying $url"
-            # shellcheck disable=SC2086
-            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
+            #
+            # tac reads full content to prevent grep closing stdin from causing this curl error:
+            #
+            #   curl: (23) Failure writing output to destination
+            #
+            # ignore tac exit code from breaking the pipefail
+            #
+            # shellcheck disable=SC2086,SC2119
+            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | { tac || : ; } | grep -Eq -- "$expected_regex"; then
                 timestamp "URL content detected '$expected_regex'"
                 found=1
                 break
