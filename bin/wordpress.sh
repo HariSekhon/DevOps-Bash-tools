@@ -50,9 +50,12 @@ To boot a specific version of Wordpress:
 
 export VERSION=6.4
 
-Note some plugins will break the Live Preview of themes and must be deactivated, such as:
+Note some plugins will break the Live Preview of themes and must be temporarily deactivated to see them, such as:
 
 Antispam Bee
+Broken Link Checker
+Jetpack Boost
+IONOS Security
 Yoast SEO plugin
 
 Tested on Wordpress 6.4
