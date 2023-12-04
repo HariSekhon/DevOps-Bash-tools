@@ -31,17 +31,20 @@ export WORDPRESS_URL="http://${DOCKER_HOST:-localhost}:8080"
 export COMPOSE_PROJECT_NAME="bash-tools"
 export DOCKER_CONTAINER="$COMPOSE_PROJECT_NAME-wordpress-1"
 export COMPOSE_FILE="$srcdir/../docker-compose/wordpress.yml"
-export UPLOAD_MAX_FILESIZE=256M
+export WORDPRESS_HTACCESS_FILE="$srcdir/wordpress.htaccess"
+export WORDPRESS_HTACCESS_PATH="/var/www/html/.htaccess"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Boots a quick Wordpress blog container
 
-Increases Wordpress php upload_max_filesize to $UPLOAD_MAX_FILESIZE to be able to restore an XML export file
+Copies .htaccess settings from the adjacent file to increase upload sizes for restoring backups:
+
+    $WORDPRESS_HTACCESS_FILE
 
 On Mac also opens the Wordpress URL in the default browser:
 
-  $WORDPRESS_URL
+    $WORDPRESS_URL
 
 To boot a specific version of Wordpress:
 
@@ -69,8 +72,8 @@ if [ "$action" = up ]; then
     echo
     when_url_content 60 "$WORDPRESS_URL" '.*'
     echo
-    timestamp "Setting php_value upload_max_filesize 256M"
-    docker container exec -it "$DOCKER_CONTAINER" bash -c "echo 'php_value upload_max_filesize $UPLOAD_MAX_FILESIZE' > '/var/www/html/.htaccess'"
+    timestamp "Copying $WORDPRESS_HTACCESS_FILE into wordpress container $WORDPRESS_HTACCESS_PATH"
+    docker cp "$WORDPRESS_HTACCESS_FILE" "$DOCKER_CONTAINER":"$WORDPRESS_HTACCESS_PATH"
     echo
     exec "${BASH_SOURCE[0]}" ui
 elif [ "$action" = restart ]; then
