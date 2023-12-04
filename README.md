@@ -218,7 +218,7 @@ make
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
 - [AI & IPaaS](https://github.com/HariSekhon/DevOps-Bash-tools#ai--ipaas) - OpenAI (ChatGPT), Make.com
-- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom
+- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress
 - [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
 - [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
 - [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
@@ -1057,6 +1057,7 @@ etc.
   - `pingdom_sms_credits.sh` - gets the remaining number of Pingdom SMS credits
 - `terraform_cloud_api.sh` - queries [Terraform Cloud](https://www.terraform.io/cloud) API with authentication
 - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for [Terraform Cloud](https://www.terraform.io/cloud) via the API, or optionally one or more of the ranges used by different functions
+- `wordpress.sh` - boots Wordpress in docker with a MySQL backend, and increases the upload_max_filesize to be able to restore a real world sized export backup
 
 #### Perl
 
