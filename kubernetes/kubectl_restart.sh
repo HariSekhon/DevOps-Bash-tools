@@ -39,6 +39,8 @@ Requires kubectl to be installed and configured
 # shellcheck disable=SC2034
 usage_args="[<namespace> <filter>]"
 
+help_usage "$@"
+
 namespace="${1:-}"
 filter="${2:-}"
 
