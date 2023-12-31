@@ -291,6 +291,7 @@ etc.
 - `find_duplicate_files*.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `find_broken_links.sh` - find broken links with delays to avoid tripping defenses
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
+- `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
