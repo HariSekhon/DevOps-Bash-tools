@@ -206,7 +206,7 @@ make
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
 - [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
-- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
+- [GCP - Google Cloud Platform](#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
 - [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
 - [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
 - [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
