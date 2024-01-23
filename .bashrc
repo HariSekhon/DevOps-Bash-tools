@@ -60,6 +60,8 @@ if [ -z "${HOME:-}" ]; then
 fi
 
 bash_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# needed to inherit by things like vim script execution from within files using libraries rooted at this location
+export bash_tools
 
 # shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
