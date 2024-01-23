@@ -74,7 +74,8 @@ for((page=1;; page++)); do
         for category_id in $category_ids; do
             category_slug="$(awk "/^${category_id}[[:space:]]/{print \$2}" <<< "$category_map")"
             tag_slug="$category_slug"
-            tag_id="$(awk "/[[:space:]]$tag_slug$/{print \$1}" <<< "$tag_map")"
+            tag_id="$(awk "/[[:space:]]$tag_slug$/{print \$1}" <<< "$tag_map" || :)"
+            [ -z "$tag_id" ] && continue
             if ! grep -Fxq "$tag_id" <<< "$tag_ids"; then
                 timestamp "post '$post_slug' is missing tag '$tag_slug'"
                 #new_tags+=$'\n'"$tag_id"
