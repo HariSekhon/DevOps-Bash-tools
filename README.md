@@ -1059,6 +1059,8 @@ etc.
 - `terraform_cloud_api.sh` - queries [Terraform Cloud](https://www.terraform.io/cloud) API with authentication
 - `terraform_cloud_ip_ranges.sh` - returns the list of IP ranges for [Terraform Cloud](https://www.terraform.io/cloud) via the API, or optionally one or more of the ranges used by different functions
 - `wordpress.sh` - boots Wordpress in docker with a MySQL backend, and increases the upload_max_filesize to be able to restore a real world sized export backup
+- `wordpress_api.sh` - queries the Wordpress API with authentication
+- `wordpress_posts_without_category_tags.sh` - checks posts (articles) for categories without corresponding tags and prints the posts and their missing tags
 
 #### Perl
 
