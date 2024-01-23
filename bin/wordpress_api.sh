@@ -30,6 +30,9 @@ Queries the Wordpress API v2
 
 Requires WORDPRESS_URL, WORDPRESS_USER and WORDPRESS_PASSWORD environment variables to be defined
 
+Automatically adds the /wp-json/wp/v2/ prefix for convenience
+
+
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
@@ -134,11 +137,17 @@ fi
 # shellcheck disable=SC2295
 #url_path="${url_path##""$WORDPRESS_URL""}"
 url_path="${url_path##$WORDPRESS_URL}"
+
 url_path="${url_path##/}"
-url_path="${url_path##wp-json/}"
-url_path="${url_path##wp/}"
-url_path="${url_path##v2/}"
-url_path="wp-json/wp/v2/$url_path"
+if [[ "$url_path" =~ /v1/|/wp-site-health/ ]]; then
+    WORDPRESS_NO_PREFIX=1
+fi
+if [ -z "${WORDPRESS_NO_PREFIX:-}" ]; then
+    url_path="${url_path##wp-json/}"
+    url_path="${url_path##wp/}"
+    url_path="${url_path##v2/}"
+    url_path="wp-json/wp/v2/$url_path"
+fi
 
 export USERNAME="$WORDPRESS_USER"
 export PASSWORD="$WORDPRESS_PASSWORD"
