@@ -50,6 +50,7 @@ alias be2=bashrc2
 alias be3=bashrc3
 alias ve=vimrc
 alias se=screenrc
+alias creds='$EDITOR ~/.env/creds'
 # keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
 #alias emacs="emacs -nw"
 #em(){ emacs "$@" ; }
