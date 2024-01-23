@@ -66,6 +66,21 @@ export varfile=~/.bash_vars
 # shellcheck disable=SC1090,SC1091
 [ -f "$varfile" ] && . "$varfile"
 
+# Secret Credentials
+#
+#   separate cred files so if you accidentally expose it on a screen
+#   to colleagues or on a presentation or screen share
+#   you don't have to change all of your passwords
+#   which you would have to if using the above ~/.bash_vars file
+if [ -d ~/.env/creds ]; then
+    for credfile in ~/.env/creds/*; do
+        if [ -f "$credfile" ]; then
+            # shellcheck disable=SC1090,SC1091
+            . "$credfile"
+        fi
+    done
+fi
+
 #export DISTCC_DIR="/var/tmp/portage/.distcc/"
 
 # ============================================================================ #
