@@ -19,8 +19,8 @@
 
 # Travis bash autocomplete
 # adapted from Travis ruby gem auto-added to end of ~/.bashrc
-# shellcheck disable=SC1090
-[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
+# shellcheck disable=SC1090,SC1091
+#[ -f ~/.travis/travis.sh ] && source ~/.travis/travis.sh
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 

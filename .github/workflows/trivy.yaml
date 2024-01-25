@@ -11,8 +11,14 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                                   T r i v y
+# ============================================================================ #
+
+# Scan files in the local repo
+
 ---
-name: Trivy Docker Image Scan
+name: Trivy
 
 on:
   push:
@@ -37,7 +43,9 @@ on:
     - cron: '0 0 * * 1'
 
 permissions:
+  actions: read
   contents: read
+  security-events: write
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
@@ -48,8 +56,7 @@ jobs:
     # github.event.repository context not available in scheduled workflows
     #if: github.event.repository.fork == false
     if: github.repository_owner == 'HariSekhon'
-    name: Trivy Docker Image Scan
+    name: Trivy
     uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
     with:
-      docker_image: harisekhon/bash-tools
-      severity: ''
+      debug: ${{ github.event.inputs.debug }}

@@ -1,0 +1,94 @@
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  Author: Hari Sekhon
+#  Date: 2020-03-21 11:14:07 +0000 (Sat, 21 Mar 2020)
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help improve or steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                                    G o C D
+# ============================================================================ #
+
+# https://github.com/tomzo/gocd-yaml-config-plugin#setup
+
+# https://docs.gocd.org/current/configuration/configuration_reference.html
+
+---
+format_version: 3
+pipelines:
+  devops-bash-tools:
+    group: defaultGroup
+    label_template: ${COUNT}
+    lock_behavior: none
+    display_order: -1
+    materials:
+      git:
+        git: https://github.com/HariSekhon/DevOps-Bash-tools
+        shallow_clone: false
+        auto_update: true
+        branch: master
+    stages:
+      - build-and-test:
+          fetch_materials: true
+          keep_artifacts: false
+          clean_workspace: false
+          approval:
+            type: success
+            allow_only_on_success: false
+          jobs:
+            #apt-update:
+            #  timeout: 10
+            #  tasks:
+            #  - exec:
+            #      command: apt
+            #      arguments:
+            #        - update
+            #      run_if: passed
+            #install-make:
+            #  timeout: 10
+            #  tasks:
+            #  - exec:
+            #      command: apt
+            #      arguments:
+            #        - install
+            #        - -qy
+            #        - git
+            #        - make
+            #      run_if: passed
+            ci-bootstrap:
+              timeout: 10
+              tasks:
+                - exec:
+                    command: setup/ci_bootstrap.sh
+                    run_if: passed
+            init:
+              timeout: 10
+              tasks:
+                - exec:
+                    command: make
+                    arguments:
+                      - init
+                    run_if: passed
+            build:
+              timeout: 60
+              tasks:
+                - exec:
+                    command: make
+                    arguments:
+                      - ci
+                    run_if: passed
+            test:
+              timeout: 60
+              tasks:
+                - exec:
+                    command: make
+                    arguments:
+                      - test
+                    run_if: passed

@@ -20,7 +20,7 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
 # vim() function is in title.sh as it is tightly integrated with the functions in there and not necessary otherwise

@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -42,7 +42,7 @@ owner_repo="Checkmarx/kics"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="$("$srcdir/../github/github_repo_latest_release.sh" "$owner_repo")"
     timestamp "latest version is '$version'"
     version="${version#v}"
 else
@@ -64,7 +64,8 @@ cd "$installdir"
 
 tarball="kics_${version}_${os}_$arch.tar.gz"
 
-wget -c "https://github.com/Checkmarx/kics/releases/download/v$version/$tarball"
+# wget isn't available on GCloud SDK container
+curl -sSLf -o "$tarball" "https://github.com/Checkmarx/kics/releases/download/v$version/$tarball"
 echo
 
 echo "unpacking tarball to: $PWD"
@@ -76,7 +77,9 @@ rm -fv -- "$tarball"
 echo
 
 echo "symlinking install dir:"
-ln -sfhv -- "$installdir" ~/bin/kics
+ln -sfhv -- "$installdir" ~/bin/kics ||
+# GCloud SDK version of 'ln' command doesn't have the -h switch
+ln -sfv -- "$installdir" ~/bin/kics
 echo
 
 echo "Ensure $HOME/bin/kics is added to your \$PATH"

@@ -87,7 +87,7 @@ hr3(){
 section(){
     name="$*"
     hr
-    "$srcdir_bash_tools_utils/../center.sh" "$@"
+    "$srcdir_bash_tools_utils/../bin/center.sh" "$@"
     hr
     if [ -n "${PROJECT:-}" ]; then
         echo "PROJECT: $PROJECT"
@@ -113,11 +113,11 @@ section3(){
 }
 
 hr2echo(){
-    "$srcdir_bash_tools_utils/../center.sh" "$@" 50
+    "$srcdir_bash_tools_utils/../bin/center.sh" "$@" 50
 }
 
 hr3echo(){
-    "$srcdir_bash_tools_utils/../center.sh" "$@" 40
+    "$srcdir_bash_tools_utils/../bin/center.sh" "$@" 40
 }
 
 #set +o pipefail
@@ -251,15 +251,44 @@ has_tarball_bzip2_extension(){
 }
 
 get_os(){
-    uname -s |
-    tr '[:upper:]' '[:lower:]'
+    local os
+    os="$(uname -s | tr '[:upper:]' '[:lower:]')"
+    if [ -n "${OS_DARWIN:-}" ]; then
+        if is_mac; then
+            os="$OS_DARWIN"
+        fi
+    elif [ -n "${OS_LINUX:-}" ]; then
+        if is_linux; then
+            os="$OS_LINUX"
+        fi
+    fi
+    echo "$os"
 }
 
 get_arch(){
     local arch
     arch="$(uname -m)"
     if [ "$arch" = x86_64 ]; then
-        arch=amd64  # files are conventionally named amd64 not x86_64
+        arch=amd64  # files are conventionally usually named amd64 not x86_64
+    fi
+    if [ -n "${ARCH_X86_64:-}" ]; then
+        if [ "$arch" = amd64 ] || [ "$arch" = x86_64 ]; then
+            arch="$ARCH_X86_64"
+        fi
+    elif [ -n "${ARCH_X86:-}" ]; then
+        if [ "$arch" = i386 ]; then
+            arch="$ARCH_X86"
+        fi
+    elif [ -n "${ARCH_ARM64:-}" ]; then
+        if [ "$arch" = arm64 ]; then
+            arch="$ARCH_ARM64"
+        fi
+    elif [ -n "${ARCH_ARM:-}" ]; then
+        if [ "$arch" = arm ]; then
+            arch="$ARCH_ARM"
+        fi
+    elif [ -n "${ARCH_OVERRIDE:-}" ]; then
+        arch="$ARCH_OVERRIDE"
     fi
     echo "$arch"
 }
@@ -368,8 +397,8 @@ curl_api_opts(){
     if [ -n "${CURL_OPTS:-}" ]; then
         read -r -a CURL_OPTS <<< "${CURL_OPTS[@]}" # this @ notation works for both strings and arrays in case a future version of bash do export arrays this should still work
     else
-        #read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 3"
-        CURL_OPTS=(-sS --fail --connect-timeout 3)
+        #read -r -a CURL_OPTS <<< "-sS --fail --connect-timeout 10"
+        CURL_OPTS=(-sS --fail --connect-timeout 10)
     fi
 
     # case insensitive regex matching
@@ -935,8 +964,15 @@ when_url_content(){
         while [ "$SECONDS" -lt "$max_secs" ]; do
             ((try_number+=1))
             timestamp "$try_number trying $url"
-            # shellcheck disable=SC2086
-            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | grep -Eq -- "$expected_regex"; then
+            #
+            # tac reads full content to prevent grep closing stdin from causing this curl error:
+            #
+            #   curl: (23) Failure writing output to destination
+            #
+            # ignore tac exit code from breaking the pipefail
+            #
+            # shellcheck disable=SC2086,SC2119
+            if curl -skL --connect-timeout 1 --max-time 5 ${args:-} "$url" | { tac || : ; } | grep -Eq -- "$expected_regex"; then
                 timestamp "URL content detected '$expected_regex'"
                 found=1
                 break

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# shellcheck disable=SC2230
+# shellcheck disable=SC2230,SC2317
 #
 #  Author: Hari Sekhon
 #  Date: early 2019
@@ -18,6 +18,7 @@ set -euo pipefail
 
 echo "InfoBlox DDI doesn't boot when the specs are downsized to fit on a Mac. You would need to install the OVA to a full VMware with 128GB RAM etc"
 echo "Rest of script will not execute, but the code is left for reference"
+
 exit 1
 
 INFOBLOX_URL=https://go.infoblox.com/downloads/vnios/8.4.4/nios-8.4.4-386831-2019-08-02-03-45-48-ddi.ova

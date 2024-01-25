@@ -1,0 +1,61 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2022-02-02 11:27:37 +0000 (Wed, 02 Feb 2022)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                 T r i v y   D o c k e r   I m a g e   S c a n
+# ============================================================================ #
+
+# Scan the docker image for this repo
+
+---
+name: Trivy Docker Image Scan
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - '**/*.md'
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: '0 0 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  trivy:
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
+    name: Trivy Docker Image Scan
+    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
+    with:
+      docker_image: harisekhon/bash-tools
+      severity: ''

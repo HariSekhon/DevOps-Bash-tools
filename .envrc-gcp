@@ -105,6 +105,6 @@ if [ -n "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
     export GKE_CONTEXT="gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${CLOUDSDK_CONTAINER_CLUSTER}"
 
     # XXX: safer to inline .envrc-kubernetes if you're worried about changes to it bypassing 'direnv allow' authorization
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$srcdir/.envrc-kubernetes" "$GKE_CONTEXT"
 fi

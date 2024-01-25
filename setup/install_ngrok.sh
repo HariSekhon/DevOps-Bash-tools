@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -44,7 +44,7 @@ version="${1:-v3-stable}"
 export RUN_VERSION_ARG=1
 
 # XXX: passing 'v2-stable' as version the URL gets updated but it still downloads v3, not sure how to predict this :-/
-"$srcdir/../install_binary.sh" "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-$version-{os}-{arch}.zip" "ngrok"
+"$srcdir/../packages/install_binary.sh" "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-$version-{os}-{arch}.zip" "ngrok"
 
 TOKEN="${NGROK_AUTHTOKEN:-${NGROK_TOKEN:-}}"
 

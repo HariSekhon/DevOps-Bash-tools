@@ -20,10 +20,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/ci.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/os.sh"
 
 # fix version of Travis CI since it has a dependency on SSL and we need to detect and switch the SSL version for certain Mac environments, eg. Semaphore CI
@@ -38,7 +38,7 @@ if is_mac; then
     fi
 fi
 
-"$srcdir/../ruby_gem_install_if_absent.sh" travis
+"$srcdir/../packages/ruby_gem_install_if_absent.sh" travis
 
 # add ruby to paths temporarily (logic borrowed from advanced bashrc code in .bash.d/paths.sh)
 for ruby_bin in $(find ~/.gem/ruby -maxdepth 2 -name bin -type d 2>/dev/null | tac); do

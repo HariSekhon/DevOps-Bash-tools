@@ -13,14 +13,18 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                               C i r r u s   C I
+# ============================================================================ #
+
 # https://cirrus-ci.org/guide/writing-tasks/
 
 container:
   image: ubuntu:18.04
 
 task:
-  # doesn't work properly
-  #skip: "!changesInclude('**/*.md')"
+  env:
+    TMPDIR: /var/tmp
   script:
     - setup/ci_bootstrap.sh
     - make init

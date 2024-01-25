@@ -32,7 +32,7 @@ if ! type sdk &>/dev/null; then
 fi
 
 if [ -s ~/.sdkman/bin/sdkman-init.sh ]; then
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . ~/.sdkman/bin/sdkman-init.sh
 fi
 

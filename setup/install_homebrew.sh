@@ -18,7 +18,7 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if type -P brew &>/dev/null; then
     echo "HomeBrew already installed, skipping install..."
@@ -33,10 +33,11 @@ else
             export PATH="$PATH:$x"
         fi
     done
-    "$srcdir/../install_packages_if_absent.sh" bash curl git sudo
+    # can't install until homebrew is installed, and these should already be present
+    #"$srcdir/../packages/install_packages_if_absent.sh" bash curl git sudo
+    cmds=""
     if [ "$(uname -s)" = Linux ]; then
         # if we're in debug mode enable set -x inside the HomeBrew script so we can see what inside it is causing breakage
-        cmds=""
         if [ -n "${DEBUG_HOMEBREW:-}" ]; then
             cmds="set -x"
         fi

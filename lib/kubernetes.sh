@@ -78,22 +78,30 @@ run_static_pod(){
     local pod_json
     pod_json="$(kubectl get pod "$name" "$@" -o json 2>/dev/null || :)"
 
-    run(){
-        kubectl run -ti --rm --restart=Never "$name" --image="$image" "$@" -- /bin/sh
+    local cmd=(/bin/sh -c 'if type bash >/dev/null 2>&1; then exec bash; else exec sh; fi')
+
+    launch_static_pod(){
+        exec kubectl run -ti --rm --restart=Never "$name" --image="$image" "$@" -- "${cmd[@]}"
     }
 
     if [ -n "$pod_json" ]; then
-        if jq -e 'select(.status.phase == "Running")' <<< "$pod_json" >/dev/null; then
-            exec kubectl exec -ti "$name" "$@" -- /bin/sh
-        elif jq -e 'select(.status.phase == "Succeeded")' <<< "$pod_json" >/dev/null; then
+        if jq -e '.status.phase == "Running"' <<< "$pod_json" >/dev/null; then
+            kubectl exec -ti "$name" "$@" -- "${cmd[@]}"
+        elif jq -e '.status.phase == "Succeeded" or .status.phase == "Failed"' <<< "$pod_json" >/dev/null; then
             kubectl delete pod "$name" "$@"
-            run "$@"
+            sleep 3
+            launch_static_pod "$@"
+        # This is what shows as ContainerCreating in kubectl get pods
+        elif jq -e '.status.phase == "Pending"' <<< "$pod_json" >/dev/null; then
+            echo "Pod pending..."
+            sleep 3
+            run_static_pod "$name" "$image" "$@"
         else
             echo "ERROR: Pod already exists. Check its state and remove it?"
             kubectl get pod "$name" "$@"
             return 1
         fi
     else
-        run "$@"
+        launch_static_pod "$@"
     fi
 }

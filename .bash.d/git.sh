@@ -37,7 +37,7 @@ fi
 #fi
 
 if ! type basedir &>/dev/null; then
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$bash_tools/.bash.d/functions.sh"
 fi
 
@@ -45,9 +45,10 @@ if type -P gh &>/dev/null; then
     autocomplete gh -s
 fi
 
-type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+# shellcheck disable=SC1091
+#type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
-add_PATH ~/bin/codeql
+#add_PATH ~/bin/codeql
 
 # find out who your 'gh' CLI is authenticating as - useful if you have multiple Personal Access Tokens for different environments
 alias githubwhoami='github_api.sh /user | jq -r .login'
@@ -114,6 +115,7 @@ alias gha='gitbrowse github actions'
 alias ghw='github_workflows'
 alias wf='cd $(git_root)/.github/workflows/'
 alias ggrep="git grep"
+alias gfr='git_foreach_repo.sh'
 alias remotes='git remote -v'
 alias remote='remotes'
 # much quicker to just 'cd $github; f <pattern>'
@@ -150,7 +152,8 @@ alias stage=staging
 alias dev="switchbranch dev"
 
 # edit all GitHub READMEs
-alias readmes="\$EDITOR \$(git_foreach_repo.sh echo '\$PWD/README.md')"
+alias readmes='$EDITOR $(git_foreach_repo.sh '"'"'echo $PWD/README.md'"')"
+alias ureadmes='git_foreach_repo.sh '"'"'gitu README.md || :'"'"
 
 # equivalent of hg root
 git_root(){
@@ -158,8 +161,9 @@ git_root(){
 }
 
 gitgc(){
+    cd "$(git_root)" || :
     if ! [ -d .git ]; then
-        echo "not at top of a git repo, not .git/ directory found"
+        echo "not in a git repo, no .git/ directory and git root dir not found"
         return 1
     fi
     du -sh .git
@@ -167,36 +171,71 @@ gitgc(){
     du -sh .git
 }
 
-gitbrowse(){
+git_default_branch(){
+    git remote show origin |
+    #awk '/^[[:space:]]*HEAD branch:[[:space:]]/{print $3}'
+    sed -n '/HEAD branch/s/.*: //p'
+}
+
+git_url_base(){
     local filter="${1:-.*}"
+    git remote -v |
+    { grep "$filter" || : ; }|
+    awk '/git@|https:/{print $2}' |
+    head -n1 |
+    sed 's|^ssh://||;
+         s|^https://.*@||;
+         s|^https://||;
+         s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
+         s|^git@||;
+         s|^|https://|;
+         s/\.git$//;' |
+    perl -pe 's/:(?!\/\/)/\//'
+}
+
+gitbrowse(){
+    local filter="${1:-origin}"
     local path="${2:-}"
     local url_base
-    url_base="$(git remote -v |
-                grep "$filter" |
-                grep origin |
-                awk '/git@|https:/{print $2}' |
-                head -n1 |
-                sed 's|^ssh://||;
-                     s|^https://.*@||;
-                     s|^https://||;
-                     s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
-                     s|^git@||;
-                     s|^|https://|;
-                     s/\.git$//;' |
-                perl -pe 's/:(?!\/\/)/\//')"
-    if [[ "$url_base" =~ dev.azure.com ]]; then
-        url_base="${url_base%/*}/_git/${url_base##*/}"
+    url_base="$(git_url_base "$filter")"
+    if [ -z "$url_base" ] && [ "$filter" != origin ]; then
+        url_base="$(git_url_base "origin")"
     fi
     if [ -z "$url_base" ]; then
-        echo "git remote url not found for $filter"
+        echo "git remote url not found for filter '$filter' or 'origin'"
         return 1
     fi
     if [[ "$url_base" =~ github.com ]]; then
         if [ -n "$path" ]; then
             path="blob/master/$path"
+        else
+            path+="#readme"
+        fi
+    else
+        if [ -z "$path" ]; then
+            local default_branch
+            default_branch="$(git_default_branch)"
+        fi
+        if [[ "$url_base" =~ gitlab.com ]]; then
+            if [ -z "$path" ]; then
+                url_base+="/-/blob/$default_branch/README.md"
+            fi
+        elif [[ "$url_base" =~ dev.azure.com ]]; then
+            url_base="${url_base%/*}/_git/${url_base##*/}"
+            if [ -z "$path" ]; then
+                url_base+="?path=/README.md&_a=preview"
+            fi
+        elif [[ "$url_base" =~ bitbucket.org ]]; then
+            if [ -z "$path" ]; then
+                url_base+="/src/$default_branch/README.md"
+            fi
         fi
     fi
-    browser "$url_base/$path"
+    url="$url_base"
+    if [ -n "$path" ]; then
+        url+="/$path"
+    fi
+    browser "$url"
 }
 
 install_git_completion(){
@@ -205,7 +244,7 @@ install_git_completion(){
     fi
 }
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f ~/.git-completion.bash ] && . ~/.git-completion.bash
 
 # usage: gi python,perl,go
@@ -301,6 +340,9 @@ isGit(){
     fi
 }
 
+git_revision(){
+    echo "Revision: $(git rev-parse HEAD)"
+}
 
 st(){
   # shellcheck disable=SC2086
@@ -356,15 +398,17 @@ st(){
             pushd "$target" >/dev/null || { echo "Error: failed to pushd to $target"; return 1; }
             echo "> git stash list" >&2
             git stash list && echo
-            #"$bash_tools/git_summary_line.sh"
+            #"$bash_tools/git/git_summary_line.sh"
             echo "> git status $target $*" >&2
             #git -c color.status=always status -sb . "$@"
             git -c color.status=always status . "$@"
-            echo "Revision: $(git rev-parse HEAD)"
+            echo
+            git_revision
+            echo
         else
             pushd "$target_dirname" >/dev/null || { echo "Error: failed to pushed to '$target_dirname'"; return 1; }
             echo "> git status $target $*" >&2
-            #"$bash_tools/git_summary_line.sh"
+            #"$bash_tools/git/git_summary_line.sh"
             git -c color.status=always status "$target_basename" "$@"
         fi
         #git status "$target" "${*:2}"
@@ -480,7 +524,7 @@ pull(){
          grep -Fxq "$PWD" <<< "${GIT_BASEDIRS:-}"; then
          #ls ./*/.git &>/dev/null; then  # matches inside repos with submodules unfortunately
         for x in *; do
-            [ -d "$x" ] || continue
+            [ -d "$x/.git" ] || continue
             hr
             pushd "$x" >/dev/null || { echo "failed to pushd to '$x'"; return 1; }
             echo "> Work $x: git pull --no-edit $*"
@@ -506,6 +550,17 @@ git_pull(){
     echo
     git submodule update --init --recursive
     echo
+}
+
+alias coj="git_branch_jira_ticket"
+git_branch_jira_ticket(){
+    local ticket="$1"
+    local branch="${ticket##*/}"
+    if git branch | sed 's/^..//' | grep -Fxq "$branch"; then
+        git checkout "$branch"
+    else
+        git checkout -b "$branch"
+    fi
 }
 
 checkout(){
@@ -688,9 +743,9 @@ push(){
         return 1
     fi
 }
-alias pushu='$bash_tools/github_push_pr_preview.sh'
-alias pushup='$bash_tools/github_push_pr.sh'
-alias pushupmerge='GITHUB_MERGE_PULL_REQUEST=true $bash_tools/github_push_pr.sh'
+alias pushu='$bash_tools/github/github_push_pr_preview.sh'
+alias pushup='$bash_tools/github/github_push_pr.sh'
+alias pushupmerge='GITHUB_MERGE_PULL_REQUEST=true $bash_tools/github/github_push_pr.sh'
 alias pushupm=pushupmerge
 
 pushr(){
@@ -702,6 +757,19 @@ pushr(){
 }
 
 alias pr=github_pull_request_create.sh
+
+alias mup=masterupdateprune
+masterupdateprune(){
+    #local master_branch="master"
+    #if git branch | sed 's/^..//' | grep -Fx main; then
+    #    master_branch="main"
+    #fi
+    git checkout "$(git_default_branch)"
+    pull
+    prune
+    git_revision
+    echo
+}
 
 current_branch(){
     git rev-parse --abbrev-ref HEAD
@@ -725,11 +793,19 @@ gitrm(){
 }
 
 gitrename(){
+    if [ $# -ne 2 ]; then
+        echo "usage: gitrename <original_filename> <new_filename>"
+        return 1
+    fi
     git mv -- "$1" "$2" &&
     git commit -m "renamed $1 to $2" "$1" "$2"
 }
 
 gitmv(){
+    if [ $# -ne 2 ]; then
+        echo "usage: gitmv <original_filename> <new_filename>"
+        return 1
+    fi
     git mv -- "$1" "$2" &&
     git commit -m "moved $1 to $2" "$1" "$2"
 }
@@ -814,7 +890,7 @@ updatemodules(){
             if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
                 pushd "$submodule" || continue
                 git stash
-                git checkout master
+                git checkout "$(git_default_branch)"
                 git pull --no-edit
                 git submodule update
                 # shellcheck disable=SC2164
@@ -946,7 +1022,7 @@ git_rm_untracked(){
 foreachrepo(){
     local repolist="${REPOLIST:-$bash_tools/setup/repos.txt}"
     while read -r repo; do
-        eval "$@"
+        "$@"
     done < <(sed 's/#.*$//; s/.*://; /^[[:space:]]*$/d' "$repolist")
 }
 

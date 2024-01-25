@@ -14,11 +14,10 @@
 #
 
 build:
+  image: default-bionic
   nodes:
     auto:
       commands:
-        # not working
-        #- checkout-code ~/build
         - repo="${SCRUTINIZER_PROJECT#*/}"; git clone "https://github.com/$repo" build
         - cd ~/build
         - pwd

@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -34,23 +34,13 @@ help_usage "$@"
 #version="${1:-0.22.0}"
 version="${1:-latest}"
 
-os="$(uname -s)"
-arch="$(uname -m)"
-
-if [ "$os" = Darwin ]; then
-    os="macOS"
-fi
-
-if [ "$arch" = x86_64 ]; then
-    arch="64bit"
-elif [ "$arch" = i386 ]; then
-    arch="32bit"
-elif [[ "$arch" =~ arm ]]; then
-    arch="$(tr '[:lower:]' '[:upper:]' <<< "$arch")"
-else
-    die "unsupported architecture detected: $arch"
-fi
+export OS_DARWIN=macOS
+export OS_LINUX=Linux
+export ARCH_X86_64="64bit"
+export ARCH_X86="32bit"
+export ARCH_ARM64="ARM64"  # Trivy packages uppercase arm
+export ARCH_ARM="ARM"
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../github_install_binary.sh" aquasecurity/trivy "trivy_{version}_${os}-${arch}.tar.gz" "$version" trivy
+"$srcdir/../github/github_install_binary.sh" aquasecurity/trivy "trivy_{version}_{os}-{arch}.tar.gz" "$version" trivy

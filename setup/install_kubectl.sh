@@ -19,7 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -52,7 +52,7 @@ fi
 # The connection to the server localhost:8080 was refused - did you specify the right host or port?
 #export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://dl.k8s.io/release/v$version/bin/{os}/{arch}/kubectl"
+"$srcdir/../packages/install_binary.sh" "https://dl.k8s.io/release/v$version/bin/{os}/{arch}/kubectl"
 
 echo
 if am_root; then

@@ -20,13 +20,11 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
-type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+# shellcheck disable=SC1090,SC1091
+#type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # env var takes preference, then cwd, then $HOME, then /etc/ansible/ansible.cfg
-# $srcdir set in .bashrc
-# shellcheck disable=SC2154
-export ANSIBLE_CONFIG="$bash_tools/.ansible.cfg"
+export ANSIBLE_CONFIG=~/.ansible.cfg  # symlinked to $bash_tools/configs/.ansible.cfg
 
 if [ -n "${ANSIBLE_HOME:-}" ]; then
     add_PATH PYTHONPATH "$ANSIBLE_HOME/lib"
@@ -51,4 +49,4 @@ alias a=ansible
 alias ansible="ansible $ansible_opts"
 alias ansible_playbook="ansible-playbook $ansible_opts"
 #alias ansible_playbook_vault="ansible-playbook $ansible_opts --ask-vault-pass"
-alias ansible_playbook_vault="ansible-playbook $ansible_opts --vault-id '$bash_tools/vault_pass.sh'"
+alias ansible_playbook_vault="ansible-playbook $ansible_opts --vault-id '$bash_tools/bin/vault_pass.sh'"

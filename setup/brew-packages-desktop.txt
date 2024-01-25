@@ -36,11 +36,13 @@ https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
 
 # Install HomeBrew Desktop packages - one per line
 ack
+act  # runs GitHub Actions locally
 amazon-ecs-cli
-amazon-sam-cli
+#amazon-sam-cli  # no longer found
 ansible
 ansible-lint
 argocd
+asdf
 #atomicparsley  # mp4 cli tool
 autoconf
 autojump
@@ -48,7 +50,7 @@ autossh
 #awsume
 #aws-iam-authenticator
 bash  # version 5, not old version 3 from Apple due to licensing
-bash-completion
+#bash-completion  # slows down spawning new shells which I do frequently
 #bazel
 bazelisk  # bazel wrapper downloader like mvnw/gradlew, addes 'bazel' to $PATH so conflicts with bazel package above
 brew-cask-completion
@@ -58,16 +60,21 @@ checkov
 checkstyle
 circleci
 clamav
+#clair  # container vulnerability scanner by quay.io - this is the server, not clairctl
 cliclick
 cmatrix
 colordiff
+colima  # CLI Docker container runtime (use 'docker' client after 'colima start')
+cosign
 cowsay
 #coreutils # in brew-packages.txt
 csshx
 #ctags
+d2  # declarative diagram language
 diff-so-fancy
-diffpdf
+diff-pdf
 direnv
+disk-inventory-x
 dive  # analyze docker image layers
 dnsmasq
 dnstop
@@ -81,6 +88,7 @@ e2fsprogs
 eksctl
 expect
 etcd
+#ext4fuse  # to read Linux partitions eg. on external hard drives
 ffmpeg
 fish
 fortune
@@ -90,13 +98,14 @@ gcc
 gem-completion
 gh  # GitHub CLI
 #git  # comes with macOS XCode
+git-lfs
 #gnu-sed  # in brew-packages.txt
 #gnupg
 gnupg2
 gnuplot
 gradle
-gradle-completion
-graphviz  # for the 'dot' command (use with terraform graph)
+#gradle-completion  # forces bash-completion which slows down my shells
+graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
 #groovy  # see near end
 #groovysdk  # see near end
 hadolint
@@ -109,6 +118,7 @@ id3v2  # mp3 tag cli editor
 #id3lib  # mp3 tag manipulation
 iftop
 imagemagick
+infracost  # Cloud cost estimator for Terraform code
 ipcalc
 iperf
 ipython
@@ -117,13 +127,17 @@ jenkins-x/jx/jx
 #jpeg
 #jq  # in brew-packages.txt
 jython
+k3d  # wrapper for k3s
 k6
 kind  # Kubernetes in Docker
 kompose
+knative/client/kn
+knative-sandbox/kn-plugins/quickstart
 kops
 #kubectl  # old version, download binary or use GCloud SDK version
 kubernetes-cli
 kubeseal  # Bitnami Sealed Secrets
+kubevious  # validation linter for Kubernetes yaml
 kustomize
 #lame  # mp3 encoder
 launchctl-completion
@@ -141,6 +155,7 @@ maven-shell
 #md5sha1sum  # clashes with coreutils
 media-info  # read mp3 tags
 mercurial
+ubuntu/microk8s/microk8s
 midnight-commander
 #mitmproxy
 mosh
@@ -158,6 +173,7 @@ nmap
 #octave
 #openjpeg
 #oniguruma  # regex library
+#osxfuse  # required to be installed before 'ext4fuse' package
 p7zip
 packer-completion
 pandoc
@@ -185,10 +201,13 @@ pwgen
 #pipenv
 #pyenv
 r
+rancher-cli
 rbenv
+#rclone  # like rsync for S3 / GCS / SFTP / HDFS / SMB / HTTP
 rdesktop
 #redis
 #readline  # in brew-packages.txt
+#restic  # backup program, tracks versions, backups to a local repo dir / SFTP / Restic server http(s) / S3 / GCS / MinIO / Rclone
 rlwrap
 #rtmpdump
 ruby  # Mac ruby is too old to install Travis CI
@@ -202,6 +221,7 @@ semgrep
 skaffold
 skopeo
 shpotify
+smartmontools
 snappy
 sonar-completion
 sonar-scanner
@@ -209,6 +229,7 @@ sqlite
 ssllabs-scan
 sslscan
 ssh-copy-id
+stats  # fancier Activity Monitor
 #subversion  # pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
 tfenv  # Terraform version manager inspired by rbenv
 tfsec  # Terraform static analysis by AquaSec
@@ -218,21 +239,24 @@ tree
 tmux
 urlview  # used by tmux plugin tmux-urlview, and also my advanced .vimrc
 unix2dos
-unrar
+#unrar  # no longer available
 utimer
 vagrant-completion
 vault  # Hashicorp
-#vim  # unneeded as vim is already installed - pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+# old Mac vim not
+vim  # Mac's vim not syntax highlighting Bash properly on macOS Big Sur 11.7 https://github.com/vim/vim/issues/11937 - watch brew version pulls in a lot of dependencies though including Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
 #vscode
 watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
+wireshark  # only install tshark CLI, must --cask for Wireshark
 #x264
 #x265
 #xvid
 xz
 yamllint  # in brew-packages.txt
 youtube-dl
+zoom
 zsh
 
 # runtime only

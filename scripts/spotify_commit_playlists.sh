@@ -44,10 +44,10 @@ Requires DevOps-Perl-tools to be in \$PATH for diffnet.pl
 # shellcheck disable=SC2034
 usage_args="[<playlist>]"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$srcdir/.bash.d/git.sh"
 
 help_usage "$@"
@@ -58,6 +58,7 @@ commit_playlist(){
        ! [ -f "spotify/$playlist" ]; then
         return
     fi
+    timestamp "Checking playlist: $playlist"
     if git status -s "$playlist" "spotify/$playlist" | grep -q '^[?A]'; then
         git add "$playlist" "spotify/$playlist"
         git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
@@ -103,7 +104,7 @@ find_net_removals(){
             fi
             continue
         fi
-        track="$("$srcdir/../spotify_uri_to_name.sh" <<< "$uri")"
+        track="$("$srcdir/../spotify/spotify_uri_to_name.sh" <<< "$uri")"
         if grep -Fxq "$track" "$playlist"; then
             if [ -n "${VERBOSE:-}" ]; then
                 echo "skipping removed URI for track '$track' which is found in $playlist (must have been replaced with a different URI)" >&2
@@ -123,7 +124,7 @@ else
         cd playlists
     fi
     git status --porcelain |
-    grep '^.M' |
+    { grep '^.M' || :; } |
     sed 's/^...//; s,spotify/,,; s/^"//; s/"$//' |
     sort -u |
     while read -r playlist; do

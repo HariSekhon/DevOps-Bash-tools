@@ -3,24 +3,30 @@
 #  Date: 2011-06-01 16:58:33 +0000 (Wed, 01 Jun 2011)
 #
 
-# run: CASK=1 ../brew_install_packages.sh brew-packages-desktop-casks.txt
+# run: CASK=1 ../packages/brew_install_packages.sh brew-packages-desktop-casks.txt
 
 anaconda
 atom
+barrier
 ccmenu
 codeship/taps/jet
 docker
+#insomnia  # Kong Rest API testing client desktop app
 #iterm2
-firefox-developer-edition
+#firefox-developer-edition
 google-chrome
 google-cloud-sdk
+intellij-idea-ce
 keepassxc
 keka
 minikube
 minishift
+multipass  # instant Ubuntu VMs
 podman
 postman
 powershell
 spotify
 vagrant
 virtualbox
+vnc-viewer
+wireshark  # installs GUI, without cask only install CLI utils like tshark

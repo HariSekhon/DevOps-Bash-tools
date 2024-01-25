@@ -27,6 +27,8 @@ if [ "$(uname -s)" != Darwin ]; then
 fi
 
 if type -P brew &>/dev/null; then
+    # doesn't work - xcode-select can't detect it, let it install itself to fix
+    #if ! which python ; then sudo mkdir -pv /usr/local/bin ; sudo ln -sfv /usr/bin/python3 /usr/local/bin/python; fi
     # grep -q causes a pipefail via early pipe close which exits the script early without fixing
     if python -c 'import hashlib' 2>&1 | tee /dev/stderr | grep 'unsupported hash type'; then
         echo "Attempting to upgrade homebrew packages depending on upgraded OpenSSL linkage break"

@@ -30,3 +30,5 @@ alias envrc='direnv edit'
 
 # allow all .envrc under your current root - use only inside trusted repos
 alias direnvallowall='find . -name .envrc -exec direnv allow {} \;'
+alias da='direnv allow'
+alias daa='direnvallowall'

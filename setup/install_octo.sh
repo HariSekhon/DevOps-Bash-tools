@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -37,17 +37,10 @@ version="${1:-9.0.0}"
 
 export PATH+=':'~/bin
 
-os="$(get_os)"
-if [ "$os" = darwin ]; then
-    os=osx
-fi
+export OS_DARWIN=osx
+export ARCH_X86_64=x64
 
-arch="$(get_arch)"
-if [ "$arch" = amd64 ]; then
-    arch=x64
-fi
-
-"$srcdir/../install_binary.sh" "https://download.octopusdeploy.com/octopus-tools/$version/OctopusTools.$version.$os-$arch.tar.gz" octo
+"$srcdir/../packages/install_binary.sh" "https://download.octopusdeploy.com/octopus-tools/$version/OctopusTools.$version.{os}-{arch}.tar.gz" octo
 
 # mkdir -pv ~/.bash.autocomplete.d/
 #octo install-autocomplete --shell bash --dryRun > ~/.bash.autocomplete.d/octo.sh

@@ -11,6 +11,12 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                               F o r k   S y n c
+# ============================================================================ #
+
+# For a fork of the original repo, activate to keep it up to date via straight GitHub sync to the default branch
+
 ---
 name: Fork Sync
 

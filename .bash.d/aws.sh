@@ -22,7 +22,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090,SC1091
 type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 # shellcheck disable=SC1090,SC1091
-type autocomplete &>/dev/null || . "$bash_tools/.bash.d/functions.sh"
+#type autocomplete &>/dev/null || . "$bash_tools/.bash.d/functions.sh"
 
 # ==================
 # AWS CLI completion
@@ -33,7 +33,7 @@ if [ -n "$aws_completer" ]; then
     complete -C "$aws_completer" aws
 fi
 
-autocomplete eksctl
+#autocomplete eksctl
 
 # =====================
 # Elastic Beanstalk CLI (easier to use than AWS CLI)
@@ -49,6 +49,7 @@ alias s3='aws s3'
 alias dockerecr='aws ecr get-login-password | docker login -u AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com'
 
 alias awscon='aws_consoler -o'
+alias awsc='awscon'
 
 # easily set a profile env var
 aws_profile(){
@@ -77,12 +78,12 @@ awscreds(){
 alias awl=awless
 alias assh="awless ssh"
 
-autocomplete awless
+#autocomplete awless
 # make completion work with awl alias above
-if ! [ -f ~/.bash.autocomplete.d/awl.sh ]; then
-    sed 's/awless/awl/g' ~/.bash.autocomplete.d/awless.sh > ~/.bash.autocomplete.d/awl.sh
-fi
-autocomplete awl
+#if ! [ -f ~/.bash.autocomplete.d/awl.sh ]; then
+#    sed 's/awless/awl/g' ~/.bash.autocomplete.d/awless.sh > ~/.bash.autocomplete.d/awl.sh
+#fi
+#autocomplete awl
 
 # ==================
 
@@ -210,7 +211,7 @@ aws_env(){
     )"
     if [ -f "$aws_token" ]; then
         echo "sourcing $aws_token"
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         source "$aws_token"
     fi
 }

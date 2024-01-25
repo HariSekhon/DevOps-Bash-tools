@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -40,7 +40,7 @@ owner_repo="anchore/grype"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release.sh" "$owner_repo")"
+    version="$("$srcdir/../github/github_repo_latest_release.sh" "$owner_repo")"
     timestamp "latest version is '$version'"
 else
     is_semver "$version" || die "non-semver version argument given: '$version' - should be in format: N.N.N"

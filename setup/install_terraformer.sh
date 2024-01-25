@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -37,4 +37,4 @@ asset="${2:-all}"
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../github_install_binary.sh" GoogleCloudPlatform/terraformer "terraformer-$asset-{os}-{arch}" "$version" terraformer
+"$srcdir/../github/github_install_binary.sh" GoogleCloudPlatform/terraformer "terraformer-$asset-{os}-{arch}" "$version" terraformer

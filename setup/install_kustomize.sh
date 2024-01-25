@@ -19,7 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -44,7 +44,7 @@ owner_repo="kubernetes-sigs/kustomize"
 
 if [ "$version" = latest ]; then
     timestamp "determining latest version of '$owner_repo' via GitHub API"
-    version="$("$srcdir/../github_repo_latest_release_filter.sh" "$owner_repo" "kustomize")"
+    version="$("$srcdir/../github/github_repo_latest_release_filter.sh" "$owner_repo" "kustomize")"
     version="${version##*/}"
     timestamp "latest version is '$version'"
 else
@@ -61,4 +61,4 @@ fi
 
 export RUN_VERSION_ARG=1
 
-"$srcdir/../install_binary.sh" "https://github.com/$owner_repo/releases/download/kustomize%2F$version/kustomize_${version}_{os}_amd64.tar.gz" kustomize
+"$srcdir/../packages/install_binary.sh" "https://github.com/$owner_repo/releases/download/kustomize%2F$version/kustomize_${version}_{os}_amd64.tar.gz" kustomize

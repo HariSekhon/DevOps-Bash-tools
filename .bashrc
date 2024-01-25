@@ -60,8 +60,10 @@ if [ -z "${HOME:-}" ]; then
 fi
 
 bash_tools="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# needed to inherit by things like vim script execution from within files using libraries rooted at this location
+export bash_tools
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
 # enable color support for ls
@@ -84,7 +86,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f "$HOME/.aliases" ] && source "$HOME/.aliases"
 
 # ============================================================================ #
@@ -141,7 +143,7 @@ if [ $EUID -eq 0 ]; then
     sudo=""
 fi
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # ============================================================================ #
@@ -149,7 +151,7 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 # want this to fail is there is no match because we should always have local .bash.d/*.sh in this repo
 # shopt -s nullglob
 for src in "$bash_tools/.bash.d/"*.sh; do
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$src"
 done
 # shopt -u nullglob
@@ -157,12 +159,12 @@ done
 # added by travis gem - should be in ~/.bashrc so not needed to duplicate here
 #[ -f /Users/hari.sekhon/.travis/travis.sh ] && source /Users/hari.sekhon/.travis/travis.sh
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f "$HOME/.bashrc.local" ] && . "$HOME/.bashrc.local"
 if [ -d "$HOME/.bash.d" ]; then
     shopt -s nullglob
     for src in "$HOME/.bash.d/"*.sh; do
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         . "$src"
     done
     shopt -u nullglob
@@ -170,7 +172,7 @@ fi
 if [ -d "$HOME/.bash.autocomplete.d" ]; then
     shopt -s nullglob
     for src in "$HOME/.bash.autocomplete.d/"*.sh; do
-        # shellcheck disable=SC1090
+        # shellcheck disable=SC1090,SC1091
         . "$src"
     done
     shopt -u nullglob

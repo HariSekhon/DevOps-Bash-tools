@@ -25,7 +25,7 @@ ssh_agent(){
         local SSH_ENV_FILE=~/.ssh-agent.env
         if [ -f "${SSH_ENV_FILE:-}" ]; then
             # shellcheck source=~/.agent.env
-            # shellcheck disable=SC1090
+            # shellcheck disable=SC1090,SC1091
             . "$SSH_ENV_FILE" > /dev/null
 
             if ! kill -0 "$SSH_AGENT_PID" >/dev/null 2>&1; then

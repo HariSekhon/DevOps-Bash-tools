@@ -33,7 +33,9 @@ endif
 
 CODE_FILES := $(shell if type git >/dev/null 2>&1; then git ls-files | while read line; do test -f "$$line" || continue; echo "$$line"; done; fi)
 
-CPANM = cpanm
+CPANM := cpanm
+export PIP := pip3
+export PYTHON := python3
 
 FATPACKS_DIR := fatpacks
 
@@ -190,7 +192,7 @@ printenv: git
 git-summary: init
 	@echo
 	@echo "Git summary:"
-	@$(BASH_TOOLS)/git_summary_line.sh
+	@$(BASH_TOOLS)/git/git_summary_line.sh
 	@echo
 
 .PHONY: ci
@@ -199,7 +201,7 @@ ci: printenv
 
 .PHONY: build-retry
 build-retry: git
-	$(BASH_TOOLS)/retry.sh $(MAKE) build
+	$(BASH_TOOLS)/bin/retry.sh $(MAKE) build
 
 # won't be run the first time - will default to first target which will only then initialize submodules
 .PHONY: main
@@ -233,7 +235,7 @@ quick:
 
 .PHONY: git
 git:
-	type git 2>/dev/null || $(BASH_TOOLS)/install_packages.sh git
+	type git 2>/dev/null || $(BASH_TOOLS)/packages/install_packages.sh git
 
 .PHONY: submodules
 submodules: git
@@ -249,7 +251,7 @@ git-clean: git
 
 .PHONY: gitignore
 gitignore:
-	$(BASH_TOOLS)/update_gitignore.io.sh
+	$(BASH_TOOLS)/git/update_gitignore.io.sh
 
 .PHONY: btest
 btest: bash-test
@@ -257,7 +259,7 @@ btest: bash-test
 
 .PHONY: bash-test
 bash-test:
-	$(BASH_TOOLS)/check_all.sh
+	$(BASH_TOOLS)/checks/check_all.sh
 
 .PHONY: push
 push:
@@ -292,18 +294,18 @@ apk-packages:
 
 	for x in apk-packages.txt apk-packages-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/apk_install_packages.sh"
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 
 	for x in apk-packages-optional.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/packages/apk_install_packages.sh"
 
 .PHONY: apk-packages-perl
 apk-packages-perl:
 	for x in apk-packages-perl.txt apk-packages-perl-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/apk_install_packages.sh"
 	#for x in apk-packages-{optional,cpan,pip}.txt; do \
 
 	# don't put comments inside the for loop, breaks syntax expecting 'done'
@@ -312,19 +314,19 @@ apk-packages-perl:
 		if [ -z "$(PERLBREW_PERL)" ]; then \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
 		fi; \
-	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/packages/apk_install_packages.sh"
 
 .PHONY: apk-packages-python
 apk-packages-python:
 	for x in apk-packages-python.txt apk-packages-python-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/apk_install_packages.sh"
 	# no point installing system pip packages when they won't be found in virtualenv and will need to be pip installed anyway
 	for x in apk-packages-pip.txt; do \
 		if [ -z "$(PYTHON_VIRTUALENV)" ]; then \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
 		fi; \
-	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apk_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/packages/apk_install_packages.sh"
 
 .PHONY: apt-packages
 apt-packages:
@@ -332,41 +334,41 @@ apt-packages:
 
 	for x in deb-packages.txt deb-packages-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/apt_install_packages.sh"
 	#for x in deb-packages-{optional,cpan,pip}.txt; do \
 
 	for x in deb-packages-optional.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/packages/apt_install_packages.sh"
 
 .PHONY: apt-packages-perl
 apt-packages-perl:
 	for x in deb-packages-perl.txt deb-packages-perl-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/apt_install_packages.sh"
 	for x in deb-packages-cpan.txt; do \
 		if [ -z "$(PERLBREW_PERL)" ] && \
 		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
 		fi; \
-	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/packages/apt_install_packages.sh"
 
 .PHONY: apt-packages-python
 apt-packages-python:
 	for x in deb-packages-python.txt deb-packages-python-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/apt_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/apt_install_packages.sh"
 	for x in deb-packages-pip.txt; do \
 		if [ -z "$(PYTHON_VIRTUALENV)" ] && \
 		   [ -z "$(GOOGLE_CLOUD_SHELL)" ]; then \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
 		fi; \
-	done  | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/apt_install_packages.sh"
+	done  | NO_FAIL=1 NO_UPDATE=1 xargs "$(BASH_TOOLS)/packages/apt_install_packages.sh"
 
 .PHONY: yum-packages
 yum-packages:
 	# needed for Fedora to have find and xargs to use below
-	"$(BASH_TOOLS)/yum_install_packages.sh" findutils
+	"$(BASH_TOOLS)/packages/yum_install_packages.sh" findutils
 
 	# if on Amazon Linux 2 install epel this way
 	if type -P amazon-linux-extras; then \
@@ -377,35 +379,35 @@ yum-packages:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages.txt rpm-packages-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/yum_install_packages.sh"
 	for x in rpm-packages-optional.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/yum_install_packages.sh"
 
 .PHONY: yum-packages-perl
 yum-packages-perl:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages-perl.txt rpm-packages-perl-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/yum_install_packages.sh"
 	for x in rpm-packages-cpan.txt; do \
 		if [ -z "$(PERLBREW_PERL)" ]; then \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
 		fi; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/yum_install_packages.sh"
 
 .PHONY: yum-packages-python
 yum-packages-python:
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages-python.txt rpm-packages-python-dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | xargs "$(BASH_TOOLS)/yum_install_packages.sh"
+	done | xargs "$(BASH_TOOLS)/packages/yum_install_packages.sh"
 	. "$(BASH_TOOLS)/lib/python.sh"; \
 	set +o pipefail || : ; \
 	if ! inside_virtualenv; then \
 		for x in rpm-packages-pip.txt; do \
 			find . -maxdepth 3 -path "*/setup/$$x"; \
-		done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_install_packages.sh"; \
+		done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/yum_install_packages.sh"; \
 	fi
 
 .PHONY: homebrew-packages
@@ -413,7 +415,7 @@ homebrew-packages:
 	# Fails if any of the packages are already installed, ignore and continue - if it's a problem the latest build steps will fail with missing headers
 	for x in brew-packages.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/brew_install_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/brew_install_packages.sh"
 	@# fix for OpenSSL 1.0 -> 1.1 library linkage breaking python -c 'import hashlib', which break pips, eg:
 	@# https://stackoverflow.com/questions/20399331/error-importing-hashlib-with-python-2-7-but-not-with-2-6
 	$(BASH_TOOLS)/setup/brew_fix_openssl_dependencies.sh
@@ -428,29 +430,29 @@ system-packages-remove:
 apk-packages-remove:
 	for x in apk-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apk_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/apk_remove_packages.sh"
 	$(SUDO) rm -fr -- /var/cache/apk/*
 
 .PHONY: apt-packages-remove
 apt-packages-remove:
 	for x in deb-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/apt_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/apt_remove_packages.sh"
 
 .PHONY: yum-packages-remove
 yum-packages-remove:
 	for x in rpm-packages-{,perl-,python-}dev.txt; do \
 		find . -maxdepth 3 -path "*/setup/$$x"; \
-	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/yum_remove_packages.sh"
+	done | NO_FAIL=1 xargs "$(BASH_TOOLS)/packages/yum_remove_packages.sh"
 
 .PHONY: cpan
 cpan::
-	find . -maxdepth 3 -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs $(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh
 	@$(MAKE) cpan-optional
 
 .PHONY: cpan-optional
 cpan-optional::
-	find . -maxdepth 3 -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl_cpanm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh
 
 .PHONY: gems
 gems:: gem
@@ -458,30 +460,30 @@ gems:: gem
 
 .PHONY: gem
 gem::
-	find . -maxdepth 3 -path '*/setup/gem-requirements.txt' | xargs $(BASH_TOOLS)/ruby_gem_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/gem-requirements.txt' | xargs $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh
 	@$(MAKE) gem-optional
 
 .PHONY: gem-optional
 gem-optional::
-	find . -maxdepth 3 -path '*/setup/gem-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/gem-requirements-optional.txt' | NO_FAIL=1 PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
 
 .PHONY: npm
 npm::
-	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' -o -path '*/setup/npm-packages.txt' | $(BASH_TOOLS)/nodejs_npm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' -o -path '*/setup/npm-packages.txt' | $(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh
 	@$(MAKE) npm-optional
 
 .PHONY: npm-optional
 npm-optional::
-	find . -maxdepth 3 -path '*/setup/npm-requirements-optional.txt' | NO_FAIL=1 $(BASH_TOOLS)/nodejs_npm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/npm-requirements-optional.txt' | NO_FAIL=1 $(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh
 
 .PHONY: pip
 pip::
-	find . -maxdepth 3 -path '*/requirements.txt' | xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/requirements.txt' | PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
 	@$(MAKE) pip-optional
 
 .PHONY: pip-optional
 pip-optional::
-	find . -maxdepth 3 -path '*/requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/requirements-optional.txt' | NO_FAIL=1 PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
 
 .PHONY: pip-user
 pip-user::
@@ -489,7 +491,7 @@ pip-user::
 
 .PHONY: fatpacks
 fatpacks:
-	$(BASH_TOOLS)/perl_generate_fatpacks.sh *.pl
+	$(BASH_TOOLS)/perl/perl_generate_fatpacks.sh *.pl
 	@echo
 	@if [ -d lib/resources ]; then \
 		cp -av -- lib/resources fatpacks/; \
@@ -512,7 +514,7 @@ fatpack: fatpacks
 
 .PHONY: python-compile
 python-compile:
-	$(BASH_TOOLS)/python_compile.sh
+	$(BASH_TOOLS)/python/python_compile.sh
 
 .PHONY: pycompile
 pycompile: python-compile
@@ -537,7 +539,7 @@ go-version: golang-version
 
 .PHONY: golang-clean
 golang-clean:
-	@$(BASH_TOOLS)/golang_rm_binaries.sh
+	@$(BASH_TOOLS)/packages/golang_rm_binaries.sh
 
 .PHONY: go-clean
 go-clean: golang-clean
@@ -597,7 +599,7 @@ run: docker-run
 
 .PHONY: concourse
 concourse:
-	$(BASH_TOOLS)/concourse.sh
+	$(BASH_TOOLS)/cicd/concourse.sh
 
 .PHONY: fly
 fly: concourse
@@ -661,23 +663,23 @@ dockerhub-status:
 # For quick testing only - for actual Dockerfile builds see https://hub.docker.com/u/harisekhon and Dockerfiles source repo https://github.com/HariSekhon/Dockerfiles
 .PHONY: docker-alpine
 docker-alpine:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh alpine
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh alpine
 
 .PHONY: docker-debian
 docker-debian:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh debian
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh debian
 
 .PHONY: docker-centos
 docker-centos:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh centos
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh centos
 
 .PHONY: docker-fedora
 docker-fedora:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh fedora
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh fedora
 
 .PHONY: docker-ubuntu
 docker-ubuntu:
-	$(BASH_TOOLS)/docker_mount_build_exec.sh ubuntu
+	$(BASH_TOOLS)/docker/docker_mount_build_exec.sh ubuntu
 
 .PHONY: travis
 travis:

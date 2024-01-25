@@ -1,0 +1,62 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2020-02-04 21:40:04 +0000 (Tue, 04 Feb 2020)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+---
+name: Python 3.11
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - '**/*.py'
+      - pylib
+      - requirements.txt
+      - .github/workflows/python3.11.yaml
+  pull_request:
+    branches:
+      - master
+      - main
+    paths:
+      - '**/*.py'
+      - pylib
+      - requirements.txt
+      - .github/workflows/python3.11.yaml
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: '0 7 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
+    name: Python 3.11
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
+    with:
+      python-version: "3.11"
+      caches: apt pip
+      debug: ${{ github.event.inputs.debug }}

@@ -22,12 +22,12 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
 # similar to what zsh does by default
 if [ -f ~/.bashenv ]; then
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . ~/.bashenv
 fi
 
@@ -63,8 +63,23 @@ export LC_ALL=en_US.UTF-8
 
 # Clever dynamic environment variables, set using var() function sourced between shells
 export varfile=~/.bash_vars
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f "$varfile" ] && . "$varfile"
+
+# Secret Credentials
+#
+#   separate cred files so if you accidentally expose it on a screen
+#   to colleagues or on a presentation or screen share
+#   you don't have to change all of your passwords
+#   which you would have to if using the above ~/.bash_vars file
+if [ -d ~/.env/creds ]; then
+    for credfile in ~/.env/creds/*; do
+        if [ -f "$credfile" ]; then
+            # shellcheck disable=SC1090,SC1091
+            . "$credfile"
+        fi
+    done
+fi
 
 #export DISTCC_DIR="/var/tmp/portage/.distcc/"
 
@@ -107,7 +122,7 @@ var(){
 vars(){
     "$EDITOR" "$varfile"
     chmod 0600 "$varfile"
-    # shellcheck disable=SC1090
+    # shellcheck disable=SC1090,SC1091
     . "$varfile"
 }
 

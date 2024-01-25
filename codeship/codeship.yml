@@ -1,0 +1,58 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2021-04-12 18:33:44 +0100 (Mon, 12 Apr 2021)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                                C o d e S h i p
+# ============================================================================ #
+
+# LEGACY - CloudBees has removed free plans as of 1st March 2023
+
+# 3rd party way of doing IaC on CodeShip CI as the free edition doesn't support this
+
+# https://github.com/painless-software/codeship-yaml
+
+# Requires setting up the CodeShip commands like so:
+#
+#   pip install codeship-yaml
+#   codeship-yaml
+#
+# or seaparately in sections:
+#
+# Project Settings > Test Settings > Setup Commands:
+#
+#   pip install codeship-yaml
+#   codeship-yaml install
+#
+# Project Settings > Test Settings > Test Commands:
+#
+#   codeship-yaml before_script script
+#
+# Project Settings > Deployment > (branch name)
+#
+#   codeship-yaml after_success
+
+---
+install:
+  # these cause package installation breakages due to GPG or 403 errors, old addresses etc.
+  - sudo rm -fv -- /etc/apt/sources.list.d/cli_assets_heroku_com_branches_stable_apt.list
+  - sudo rm -fv -- /etc/apt/sources.list.d/apache_bintray_com_couchdb_deb.list
+  - sudo rm -fv -- /etc/apt/sources.list.d/www_apache_org_dist_cassandra_debian.list
+  - make
+#before_script:
+#  - somecommand
+script:
+  - make test
+#after_success:
+#  - echo "Now we can deploy"

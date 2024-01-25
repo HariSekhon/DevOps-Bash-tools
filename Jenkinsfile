@@ -1,4 +1,3 @@
-#!/usr/bin/env groovy
 //  vim:ts=4:sts=4:sw=4:et:filetype=groovy:syntax=groovy
 //
 //  Author: Hari Sekhon

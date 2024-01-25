@@ -73,6 +73,6 @@ if [ -z "${NO_TESTS:-}" ]; then
     make test
 fi
 
-curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/clean_caches.sh > /clean_caches.sh
+curl -sSf https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/bin/clean_caches.sh > /clean_caches.sh
 
 sh /clean_caches.sh

@@ -1,0 +1,60 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2023-05-13 01:07:56 +0100 (Sat, 13 May 2023)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                                   G r y p e
+# ============================================================================ #
+
+---
+name: Grype
+
+on:
+  push:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - '**/*.md'
+  pull_request:
+    branches:
+      - master
+      - main
+    paths-ignore:
+      - '**/*.md'
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: '0 0 * * 1'
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  Grype:
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
+    name: Grype
+    uses: HariSekhon/GitHub-Actions/.github/workflows/grype.yaml@master
+    with:
+      debug: ${{ github.event.inputs.debug }}

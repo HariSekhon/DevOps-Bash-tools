@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -36,7 +36,7 @@ help_usage "$@"
 #version="${1:-1.6.1}"
 version="${1:-latest}"
 
-"$srcdir/../github_install_binary.sh" cert-manager/cert-manager 'cmctl-{os}-{arch}.tar.gz' "$version" cmctl
+"$srcdir/../github/github_install_binary.sh" cert-manager/cert-manager 'cmctl-{os}-{arch}.tar.gz' "$version" cmctl
 
 echo
 cmctl version --client

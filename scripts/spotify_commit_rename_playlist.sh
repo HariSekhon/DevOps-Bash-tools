@@ -31,7 +31,7 @@ playlist file to the new playlist file to align with the spotify_backup*.sh expo
 # shellcheck disable=SC2034
 usage_args="<playlist_new_name> <playlist_existing_name>"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"

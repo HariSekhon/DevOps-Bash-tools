@@ -23,4 +23,4 @@
 #eval "$(grype completion bash)"
 
 # generates auto-completion file to avoid repeating running auto-completion command, and sources from there
-autocomplete grype
+#autocomplete grype

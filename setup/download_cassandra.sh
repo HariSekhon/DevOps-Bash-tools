@@ -19,12 +19,12 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$srcdir/bash-tools/lib/utils.sh"
 
 if ! type -P wget &>/dev/null ||
      type -P apk; then  # Alpine built-in wget isn't good enough
-    "$srcdir/../install_packages.sh" wget
+    "$srcdir/../packages/install_packages.sh" wget
 fi
 
 #/usr/lib/jvm/jre/bin/

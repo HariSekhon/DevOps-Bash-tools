@@ -12,7 +12,7 @@
   "configuration": [
     {
       "key": "file_pattern",
-      "value": "*.gocd.y*ml"
+      "value": "cicd/*.gocd.y*ml"
     }
   ],
   "rules": [

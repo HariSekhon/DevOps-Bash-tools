@@ -41,6 +41,7 @@ google-cloud-sdk-app-engine-java \
 google-cloud-sdk-app-engine-go \
 google-cloud-sdk-datalab \
 google-cloud-sdk-datastore-emulator \
+google-cloud-sdk-gke-gcloud-auth-plugin \
 google-cloud-sdk-pubsub-emulator \
 google-cloud-sdk-cbt \
 google-cloud-sdk-cloud-build-local \
@@ -58,6 +59,7 @@ google-cloud-sdk-datalab
 google-cloud-sdk-datastore-emulator
 google-cloud-sdk-cbt
 google-cloud-sdk-cloud-build-local
+google-cloud-sdk-gke-gcloud-auth-plugin
 google-cloud-sdk-pubsub-emulator
 kubectl
 "
@@ -99,6 +101,10 @@ elif [[ "$(uname -s)" =~ Darwin|Linux ]]; then
     chmod +x "$install_script"
     "$install_script" --disable-prompts --install-dir="$install_root_dir"
     gcloud components install kubectl
+    if [ "$(uname -s)" = Darwin ]; then
+        gcloud components install gke-gcloud-auth-plugin
+        gke-gcloud-auth-plugin --version
+    fi
 else
     echo "Unsupported OS '$(uname -s)'" >&2
     exit 1

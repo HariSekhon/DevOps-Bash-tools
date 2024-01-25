@@ -7,3 +7,12 @@
 [submodule "templates"]
 	path = templates
 	url = https://github.com/HariSekhon/Templates
+[submodule "vagrant-configs"]
+	path = vagrant-configs
+	url = https://github.com/HariSekhon/Vagrant-templates
+[submodule "packer"]
+	path = packer
+	url = https://github.com/HariSekhon/Packer-templates
+[submodule "kubernetes-configs"]
+	path = kubernetes-configs
+	url = https://github.com/HariSekhon/Kubernetes-configs

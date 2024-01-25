@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -36,19 +36,14 @@ help_usage "$@"
 #version="${1:-2.4.0}"
 version="${1:-latest}"
 
-os="$(get_os)"
-if [ "$os" = darwin ]; then
-    os=macOS
+export OS_DARWIN=Darwin
+
+if is_mac; then
+    export ARCH_OVERRIDE=all
 fi
 
 export RUN_VERSION_ARG=1
 
-os="$(uname -s)"
-arch="$(uname -m)"
-if [ "$os" = Darwin ]; then
-    arch=all
-fi
+package="tkn_{version}_{os}_{arch}.tar.gz"
 
-package="tkn_{version}_${os}_${arch}.tar.gz"
-
-"$srcdir/../github_install_binary.sh" tektoncd/cli "$package" "$version" tkn
+"$srcdir/../github/github_install_binary.sh" tektoncd/cli "$package" "$version" tkn

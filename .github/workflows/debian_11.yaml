@@ -1,0 +1,85 @@
+#
+#  Author: Hari Sekhon
+#  Date: Tue Feb 4 09:53:28 2020 +0000
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+---
+name: Debian 11
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**/*.md'
+      - '.github/workflows/*'
+      - '!.github/workflows/debian_11.yaml'
+      - '**/Dockerfile'
+      - '**/Jenkinsfile'
+      - '**/.envrc*'
+      - .checkov.yaml
+      - .dockerignore
+      - .gcloudignore
+      - .editorconfig
+      - '.gitconfig*'
+      - .gitignore
+      - .grype.yaml
+      - .hound.yml
+      - .terraformignore
+      - Jenkinsfile
+      - .appveyor.yml
+      - .buildkite/pipeline.yml
+      - .circleci/config.yml
+      - .cirrus.yml
+      - .concourse.yml
+      - .drone.yml
+      - .gitlab-ci.yml
+      - .gocd.yml
+      - .scrutinizer.yml
+      - .semaphore/semaphore.yml
+      - .travis.yml
+      - .werckerignore
+      - azure-pipelines.yml
+      - bitbucket-pipelines.yml
+      - buddy.yml
+      - buildspec.yml
+      - cloudbuild.yaml
+      - codefresh.yml
+      - codeship.yml
+      - shippable.yml
+      - wercker.yml
+  workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        required: false
+        default: false
+  schedule:
+    - cron: '0 7 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    # github.event.repository context not available in scheduled workflows
+    #if: github.event.repository.fork == false
+    if: github.repository_owner == 'HariSekhon'
+    name: Build
+    uses: HariSekhon/GitHub-Actions/.github/workflows/make.yaml@master
+    with:
+      container: debian:11
+      caches: apt pip cpanm
+      debug: ${{ github.event.inputs.debug }}

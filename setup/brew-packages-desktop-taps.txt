@@ -3,9 +3,13 @@
 #  Date: 2019-12-19 15:08:01 +0000 (Thu, 19 Dec 2019)
 #
 
-# run: TAP=1 ../brew_install_packages.sh brew-packages-desktop-taps.txt
+# run: TAP=1 ../packages/brew_install_packages.sh brew-packages-desktop-taps.txt
 
 # tap                   package
+
+hashicorp/tap           packer
+
+ariga/tap               atlas
 
 Checkmarx/tap           kics
 
@@ -25,7 +29,7 @@ derailed/k9s            k9s
 buildkite/cli           bk
 dbcli/tap               athenacli
 wallix/awless           awless
-wercker/wercker         wercker-cli
+#wercker/wercker         wercker-cli  # EOL - github repo password protected now, causes install to hang on username/password prompt
 golangci/tap            golangci-lint
 
 #fluxcd/tap              flux
@@ -34,3 +38,6 @@ golangci/tap            golangci-lint
 #sambadevi/powerlevel9k  powerlevel9k
 
 #tektoncd/tools         tektoncd-cli
+
+# don't install this, see install_d2.sh for details why
+#terrastruct/tap         tala

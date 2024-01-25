@@ -13,12 +13,24 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# XXX: doesn't install on new M1 Apple chip
+#
+#   [ERROR]  Can not find systemd or openrc to use as a process supervisor for k3s
+#
+# GitHub issue:
+#
+#   https://github.com/k3s-io/k3s/issues/734
+#
+# Workaround - use k3d instead:
+#
+#   install_k3d.sh
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
-. "$srcdir/lib/utils.sh"
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="

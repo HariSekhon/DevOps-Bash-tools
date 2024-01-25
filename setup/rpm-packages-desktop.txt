@@ -73,6 +73,7 @@ git-core
 gitk
 gkrellm
 gksu
+graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
 gt5
 gvim
 heartbeat
@@ -163,7 +164,7 @@ router-audit-tool
 rpm-build
 rpmlint
 sbd
-screen
+#screen  # removed in favour of tmux :'-(
 sguil-client
 sguil-sensor
 sguil-server

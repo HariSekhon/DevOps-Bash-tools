@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  shellcheck disable=SC1090
+#  shellcheck disable=SC1090,SC1091
 #
 #  Author: Hari Sekhon
 #  Date: 2020-03-06 16:36:42 +0000 (Fri, 06 Mar 2020)
@@ -20,7 +20,7 @@
 
 srcdir="${srcdir:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #type add_PATH &>/dev/null || . "$srcdir/.bash.d/paths.sh"
 
 # Azure CLI from script install, installs to $HOME/lib and $HOME/bin

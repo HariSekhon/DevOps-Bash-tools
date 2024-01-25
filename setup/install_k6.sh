@@ -17,7 +17,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/../lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -36,14 +36,16 @@ help_usage "$@"
 #version="${1:-0.39.0}"
 version="${1:-latest}"
 
-export RUN_VERSION_ARG=1
+# Mac packages has both macos instead of darwin, and zip instead of tarball
+export OS_DARWIN=macos
+ext="tar.gz"
 
-os="$(get_os)"
-package='k6-v{version}-{os}-{arch}.tar.gz'
 if is_mac; then
-    # Mac packages has both macos instead of darwin, and zip instead of tarball
-    os=macos
-    package="k6-v{version}-$os-{arch}.zip"
+    ext="zip"
 fi
 
-"$srcdir/../github_install_binary.sh" grafana/k6 "$package" "$version" "k6-v{version}-${os}-{arch}/k6" k6
+package="k6-v{version}-{os}-{arch}.$ext"
+
+export RUN_VERSION_ARG=1
+
+"$srcdir/../github/github_install_binary.sh" grafana/k6 "$package" "$version" "k6-v{version}-{os}-{arch}/k6" k6

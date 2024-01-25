@@ -20,14 +20,14 @@
 
 bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$bash_tools/.bash.d/os_detection.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 #. "$bash_tools/.bash.d/paths.sh"
 
 # manual local aliases
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 [ -f ~/.aliases ] && . ~/.aliases
 
 # bash_tools defined in .bashrc
@@ -41,8 +41,8 @@ alias bashrc='$EDITOR $bashrc && reload'
 alias bashrc2='$EDITOR $bashrc2 && reload'
 alias bashrclocal='$EDITOR $bashrc.local; reload'
 alias bashrc3=bashrclocal
-alias vimrc='$EDITOR $bash_tools/.vimrc'
-alias screenrc='$EDITOR $bash_tools/.screenrc'
+alias vimrc='$EDITOR ~/.vimrc'
+alias screenrc='$EDITOR ~/.screenrc'
 alias aliases='$EDITOR $bashd/aliases.sh'
 alias ae=aliases
 alias be=bashrc
@@ -50,6 +50,7 @@ alias be2=bashrc2
 alias be3=bashrc3
 alias ve=vimrc
 alias se=screenrc
+alias creds='$EDITOR ~/.env/creds'
 # keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
 #alias emacs="emacs -nw"
 #em(){ emacs "$@" ; }
@@ -75,7 +76,7 @@ export LESS="-RFXig --tabs=4"
 # will require LESS="-R"
 if type -P pygmentize &>/dev/null; then
     # shellcheck disable=SC2016
-    export LESSOPEN='| "$bash_tools/pygmentize.sh" "%s"'
+    export LESSOPEN='| "$bash_tools/python/pygmentize.sh" "%s"'
 fi
 alias l='less'
 alias m='more'
@@ -108,8 +109,8 @@ alias bt='sti bt; cd $bt'
 export bashd="$bash_tools/.bash.d"
 alias bashd='sti bashd; cd $bashd'
 
-#alias cleanshell='exec env - bash --rcfile /dev/null'
-alias cleanshell='exec env - bash --norc --noprofile'
+#alias cleanshell='env - bash --rcfile /dev/null'
+alias cleanshell='env - bash --norc --noprofile'
 alias newshell='exec bash'
 alias rr='newshell'
 
@@ -150,6 +151,19 @@ alias cd..='cd ..'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+#up(){
+#    local times="${1:-1}"
+#    if ! [[ "$times" =~ ^[[:digit:]]$ ]]; then
+#        echo "How many directories to go up"
+#        echo
+#        echo "usage: up <num>"
+#        return 1
+#    fi
+#    while [ "$times" -gt 0 ]; do
+#        cd ..
+#        times=$((times - 1))
+#    done
+#}
 # use bare 'cd' instead, it's more standard
 #alias ~='cd ~'
 
@@ -162,10 +176,12 @@ alias ht='headtail.py'
 alias run='run.sh'
 
 # ============================================================================ #
-#                      G i t H u b   /   B i t B u c k e t
+#           GitHub / GitLab / BitBucket / Azure DevOps repo checkouts
 # ============================================================================ #
 
 export github=~/github
+export gitlab=~/gitlab
+export azure_devops=~/azure-devops
 alias github="sti github; cd '$github'";
 export work="$github/work"
 alias work="sti work; cd '$work'"
@@ -177,26 +193,43 @@ alias bitb='cd $bitbucket'
 # used to gitbrowse to bitbucket now in git.sh
 #alias bb=bitbucket
 
-for basedir in "$github" "$bitbucket"; do
+alias diag=diagrams
+
+aliasdir(){
+    local directory="$1"
+    local suffix="${2:-}"
+    [ -d "$directory" ] || return 0
+    name="${directory##*/}"
+    name="${name//-/_}"
+    name="${name//./_}"
+    name="${name// /}"
+    # alias terraform /tf -> terra
+    if [[ "$name" =~ ^(terraform|tf)$ ]]; then
+        name="terra"
+    fi
+    if [ -z "${!name:-}" ]; then
+        export "$name"="$directory"
+    fi
+    # don't clash with any binaries
+    #if ! type -P "${name}${suffix}" &>/dev/null; then
+    # don't clash with binaries or any previous defined aliases or functions
+    if ! type "${name}${suffix}" &>/dev/null; then
+        # shellcheck disable=SC2139,SC2140
+        alias "${name}${suffix}"="sti $name; cd $directory"
+    elif ! type "g${name}${suffix}" &>/dev/null; then
+        # shellcheck disable=SC2139,SC2140
+        alias "g${name}${suffix}"="sti $name; cd $directory"
+    fi
+}
+
+for basedir in "$github" "$gitlab" "$bitbucket" "$azure_devops"; do
     if [ -d "$basedir" ]; then
         for directory in "$basedir/"*; do
-            [ -d "$directory" ] || continue
-            name="${directory##*/}"
-            name="${name//-/_}"
-            name="${name//./_}"
-            name="${name// /}"
-            # alias terraform /tf -> terra
-            if [[ "$name" =~ ^(terraform|tf)$ ]]; then
-                name="terra"
-            fi
-            export "$name"="$directory"
-            # don't clash with any binaries
-            if ! type -P "$name" &>/dev/null; then
-                # shellcheck disable=SC2139,SC2140
-                alias "$name"="sti $name; cd $directory"
-            elif ! type -P "g$name" &>/dev/null; then
-                # shellcheck disable=SC2139,SC2140
-                alias "g$name"="sti $name; cd $directory"
+            aliasdir "$directory"
+            if [[ "$directory" =~ /work$ ]]; then
+                for workdir in "$directory/"*; do
+                    aliasdir "$workdir" "w"  # work dirs should have a w suffix
+                done
             fi
         done
     fi
@@ -205,6 +238,7 @@ done
 
 doc_alias(){
     local docpath="$1"
+    local prefix="${2:-d}"
     [ -f "$docpath" ] || return 1
     docfile="${docpath##*/}"
     # slows down shell creation, will drain battery
@@ -224,12 +258,18 @@ doc_alias(){
     #    echo "WARNING: $docfile conflicts with existing alias, duplicate doc '$docfile' among ~/docs, ~/github/docs, ~/bitbucket/docs?"
     #    return
     #fi
+    local shortname="${docfile%.md}"
+    local shortname="${shortname%.txt}"
     # shellcheck disable=SC2139,SC2140
-    alias "d$docfile"="ti ${docpath##*/}; \$EDITOR $docpath"
+    alias "${prefix}${shortname}"="ti ${docpath##*/}; \$EDITOR $docpath"
 }
 
 for x in ~/docs/* "$github"/docs/* "$bitbucket"/docs/*; do
     doc_alias "$x" || :
+done
+
+for x in ~/knowledge/* "$github"/knowledge/* "$bitbucket"/knowledge/*; do
+    doc_alias "$x" k || :
 done
 
 # ============================================================================ #

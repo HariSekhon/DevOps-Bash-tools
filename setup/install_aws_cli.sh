@@ -41,12 +41,17 @@ mkdir -p ~/bin
 export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:$HOME/bin"
 
-if type -P aws &>/dev/null; then
-    echo "AWS CLI already installed"
+#if type -P aws &>/dev/null; then
+#    echo "AWS CLI already installed"
+if type -P apk &>/dev/null; then
+    if ! grep -q 'https://dl-cdn.alpinelinux.org/alpine/edge/testing' /etc/apk/repositories; then
+        echo -e -n "\n@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+    fi
+    apk add aws-cli-v2@testing --no-cache
 else
     echo "Installing AWS CLI"
     # old AWS CLI v1 - doesn't support AWS SSO
-    #PYTHON_USER_INSTALL=1 "$srcdir/../python_pip_install.sh" awscli
+    #PYTHON_USER_INSTALL=1 "$srcdir/../python/python_pip_install.sh" awscli
     pushd /tmp
     #curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
     #wget -c "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip"
@@ -64,10 +69,13 @@ else
         unzip -o awscliv2.zip
         # defined in utils.sh lib
         # shellcheck disable=SC2154
-        $sudo ./aws/install
+        $sudo ./aws/install --update
         rm -fr -- aws awscliv2.zip
     fi
     popd
+    echo
+    echo -n "AWS CLI version: "
+    aws --version
     echo
 fi
 
