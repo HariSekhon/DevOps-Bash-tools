@@ -30,6 +30,11 @@ is_mac || return
 alias osash="osascript -i"
 alias osashell=osash
 
+if [ -x /opt/homebrew/bin/brew ]; then
+    # shellcheck disable=SC2046
+    eval $(/opt/homebrew/bin/brew shellenv)
+fi
+
 date(){
     gdate "$@"
 }
