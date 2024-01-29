@@ -233,8 +233,11 @@ defaults write com.apple.screencapture disable-shadow -bool true
 #                                    D o c k
 # ============================================================================ #
 
-# auto-hide dock
+# auto-hide Dock
 defaults write com.apple.dock autohide -bool true
+
+# make Dock appear on all screens - this is important so that cmd-tab window switching appears there too as it follows the Dock screen
+defaults write com.apple.dock appswitcher-all-displays -bool true
 
 # hide non-active apps
 # XXX: careful this wipes out your Dock and reversing it to false doesn't restore your Dock items
