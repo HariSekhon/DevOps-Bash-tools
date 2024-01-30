@@ -43,6 +43,13 @@ defaults read > "$backup"
 
 # ============================================================================ #
 
+# set dark theme without requiring a restart - will prompt to allow Terminal to control System Events
+# - which is useful to enable anyway for Apple Scripting such as under ../applescript
+osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to 1'
+
+# toggle between light and dark theme by setting it to the opposite of its current setting
+#osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+
 # References:
 #
 # https://ss64.com/osx/defaults.html
