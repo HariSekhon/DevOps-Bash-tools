@@ -25,6 +25,8 @@ CPANM="${CPANM:-cpanm}"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Re-Installs all currently installed Perl CPAN modules using Cpanm, taking in to account library paths, perlbrew envs etc
+
+Useful for trying to recompile on Macs after migration assistant from an Intel Mac to an ARM Silicon Mac leaves your XS libraries broken as they're built for the wrong architecture
 "
 
 # used by usage() in lib/utils.sh
