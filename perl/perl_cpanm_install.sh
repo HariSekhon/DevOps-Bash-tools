@@ -72,7 +72,7 @@ cpan_modules="$(tr ' ' ' \n' <<< "$cpan_modules" | sort -u | tr '\n' ' ')"
 echo "Installing CPAN Modules"
 echo
 
-opts=""
+opts="${CPANM_OPTS:-}"
 if is_CI; then
     echo "running in quiet mode for CI to minimize log noise"
     opts="-q"
