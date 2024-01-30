@@ -43,7 +43,7 @@ DANGER: this rewrites Git history.
         Always have a backup.
         Do not do this on pushed branches unless you are an Expert and intend to
 
-If there is already a git filter-branch rewrite backup in .git/refs/original, git filter-branch will refused to proceed - specify \$FORCE_GIT_REWRITE=1 in the environment to force the rewrite
+If there is already a git filter-branch rewrite backup in .git/refs/original, git filter-branch will refuse to proceed - specify \$FORCE_GIT_REWRITE=1 in the environment to force the rewrite
 "
 
 # used by usage() in lib/utils.sh
