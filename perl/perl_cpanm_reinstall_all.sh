@@ -27,6 +27,10 @@ usage_description="
 Re-Installs all currently installed Perl CPAN modules using Cpanm, taking in to account library paths, perlbrew envs etc
 
 Useful for trying to recompile XS modules on Macs after migration assistant from an Intel Mac to an ARM Silicon Mac leaves your home XS libraries broken as they're built for the wrong architecture
+
+export PERL_USER_INSTALL=1
+
+to prevent it installing to the system but just overriding the home dir modules in this case
 "
 
 # used by usage() in lib/utils.sh
