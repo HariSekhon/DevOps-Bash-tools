@@ -186,7 +186,7 @@ git_url_base(){
     sed 's|^ssh://||;
          s|^https://.*@||;
          s|^https://||;
-         s|:[[:digit:]]*||;
+         s|:[[:digit:]][[:digit:]]*||;
          s/^git@ssh.dev.azure.com:v3/dev.azure.com/;
          s|^git@||;
          s|^|https://|;
