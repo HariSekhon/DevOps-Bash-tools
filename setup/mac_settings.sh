@@ -42,13 +42,15 @@ echo "backing up mac settings to $backup before applying new settings"
 defaults read > "$backup"
 
 # ============================================================================ #
+# Set Dark Theme without requiring restart
 
-# set dark theme without requiring a restart - will prompt to allow Terminal to control System Events
-# - which is useful to enable anyway for Apple Scripting such as under ../applescript
+# will prompt to allow Terminal to control System Events which is useful to enable anyway for Apple Scripting eg. ../applescript/*.scpt
 osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to 1'
 
 # toggle between light and dark theme by setting it to the opposite of its current setting
 #osascript -e 'tell app "System Events" to tell appearance preferences to set dark mode to not dark mode'
+
+# ============================================================================ #
 
 # References:
 #
