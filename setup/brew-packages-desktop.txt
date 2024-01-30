@@ -99,6 +99,7 @@ gem-completion
 gh  # GitHub CLI
 #git  # comes with macOS XCode
 git-lfs
+git-filter-repo  # recommended to use instead of 'git filter-branch' in its man page
 #gnu-sed  # in brew-packages.txt
 #gnupg
 gnupg2
