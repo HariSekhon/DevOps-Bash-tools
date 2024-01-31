@@ -56,7 +56,7 @@ log "* parsing json"
 version="$(jq -r ".plugins[] | select(.name == \"$plugin\") | .version" <<< "$json")"
 
 if is_blank "$version"; then
-    die "ERROR: plugin '$plugin' not found!"
+    die "ERROR: plugin '$plugin' not found! Have you provided the right plugin slug?"
 fi
 
 echo "$version"
