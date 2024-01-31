@@ -23,7 +23,7 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090,SC1091
 #. "$bash_tools/.bash.d/os_detection.sh"
 
-type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
+#type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
 # see the effect of inserting a path like so
 # PERL5LIB=/path/to/blah perlpath
@@ -35,7 +35,8 @@ perlpath(){
 #    add_PATH PERL5LIB /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl
 #fi
 if [ -d ~/perl5/lib/perl5 ]; then
-    add_PATH PERL5LIB ~/perl5/lib/perl5
+    #add_PATH PERL5LIB ~/perl5/lib/perl5
+    export PERL5LIB="$PERL5LIB:"~/perl5/lib/perl5
 fi
 if [ -d ~/perl5/bin ]; then
     add_PATH ~/perl5/bin
