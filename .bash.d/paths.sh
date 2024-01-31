@@ -455,20 +455,27 @@ link_latest(){
 #export ACTIVATOR_HOME=/usr/local/activator-dist
 #add_PATH "$ACTIVATOR_HOME"
 
-# required complex logic in add_PATH
-#dedupe_paths(){
-#    local PATH_tmp=""
-#    # <( ) only works in Bash, but breaks when sourced from sh
-#    # <( ) also ignores errors which don't get passed through the /dev/fd
-#    # while read -r path; do
-#    #done < <(tr ':' '\n' <<< "$PATH")
-#    local IFS=':'
-#    for path in $PATH; do
-#        add_PATH PATH_tmp "$path"
-#    done
-#    export PATH="$PATH_tmp"
-#}
+# slows down new shells
+dedupe_paths(){
+    local var="${1:-PATH}"
+    local path_tmp=""
+    # <( ) only works in Bash, but breaks when sourced from sh
+    # <( ) also ignores errors which don't get passed through the /dev/fd
+    # while read -r path; do
+    #done < <(tr ':' '\n' <<< "$PATH")
+    local IFS=':'
+    for path in ${!var}; do
+        if [[ "$path" =~ ^[[:space:]]*$ ]]; then
+            continue
+        fi
+        if ! [[ "$path_tmp" =~ :$path(:|$) ]]; then
+            path_tmp="$path_tmp:$path"
+        fi
+    done
+    eval export "$var"="\"$path_tmp\""
+}
 
+# call in z_final.sh
 #dedupe_paths
 
 export PATHS_SET=1
