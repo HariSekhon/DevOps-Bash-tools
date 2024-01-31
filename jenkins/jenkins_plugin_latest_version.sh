@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds the latest version of a given Jenkins plugin by querying:
+Finds the latest versions of Jenkins plugins given by args by querying:
 
     https://updates.jenkins.io/current/update-center.actual.json
 
@@ -36,9 +36,9 @@ usage_args="<plugin>"
 
 help_usage "$@"
 
-num_args 1 "$@"
+any_opt_usage "$@"
 
-plugin="$1"
+min_args 1 "$@"
 
 url="https://updates.jenkins.io/current/update-center.actual.json"
 
@@ -52,11 +52,21 @@ if [ -z "$json" ]; then
     die "json returned from url '$url' is blank!"
 fi
 
+
 log "* parsing json"
-version="$(jq -r ".plugins[] | select(.name == \"$plugin\") | .version" <<< "$json")"
+#version="$(jq -r ".plugins[] | select(.name == \"$plugin\") | .version" <<< "$json")"
+plugin_versions="$(jq -r '.plugins[] | .name + ":" + .version' <<< "$json")"
 
-if is_blank "$version"; then
-    die "ERROR: plugin '$plugin' not found! Have you provided the right plugin slug?"
-fi
+exitcode=0
 
-echo "$version"
+log "* printing plugin:version for each found plugin"
+for plugin in "$@"; do
+    if ! grep "^$plugin:" <<< "$plugin_versions"; then
+        warning "plugin '$plugin' not found! Have you provided the right plugin slug?"
+        exitcode=1
+    fi
+done
+
+#echo "$version"
+
+exit $exitcode
