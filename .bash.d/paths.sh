@@ -456,24 +456,24 @@ link_latest(){
 #add_PATH "$ACTIVATOR_HOME"
 
 # slows down new shells
-dedupe_paths(){
-    local var="${1:-PATH}"
-    local path_tmp=""
-    # <( ) only works in Bash, but breaks when sourced from sh
-    # <( ) also ignores errors which don't get passed through the /dev/fd
-    # while read -r path; do
-    #done < <(tr ':' '\n' <<< "$PATH")
-    local IFS=':'
-    for path in ${!var}; do
-        if [[ "$path" =~ ^[[:space:]]*$ ]]; then
-            continue
-        fi
-        if ! [[ "$path_tmp" =~ :$path(:|$) ]]; then
-            path_tmp="$path_tmp:$path"
-        fi
-    done
-    eval export "$var"="\"$path_tmp\""
-}
+#dedupe_paths(){
+#    local var="${1:-PATH}"
+#    local path_tmp=""
+#    # <( ) only works in Bash, but breaks when sourced from sh
+#    # <( ) also ignores errors which don't get passed through the /dev/fd
+#    # while read -r path; do
+#    #done < <(tr ':' '\n' <<< "$PATH")
+#    local IFS=':'
+#    for path in ${!var}; do
+#        if [[ "$path" =~ ^[[:space:]]*$ ]]; then
+#            continue
+#        fi
+#        if ! [[ "$path_tmp" =~ :$path(:|$) ]]; then
+#            path_tmp="$path_tmp:$path"
+#        fi
+#    done
+#    eval export "$var"="\"$path_tmp\""
+#}
 
 # call in z_final.sh
 #dedupe_paths
