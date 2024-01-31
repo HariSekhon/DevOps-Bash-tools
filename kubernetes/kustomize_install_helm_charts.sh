@@ -24,7 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Installs the Helm Charts from one or more Kustomize kustomization.yaml files using Helm CLI so that tools like Nova can be run on the live helm releases to detect outdated charts
 
-All arguments are passed straight to yq and must be kustomization.yaml files or valid --options
+All arguments are passed straight to yq and must be kustomization.yaml files
+
+If no argument is given attempts to use a kustomization.yaml in the current working directory for convenience
 
 Environment variables:
   - if \$SKIP_EXISTING_HELM_INSTALLATIONS is set to any value, then will skip those installations (useful for CI/CD retries without failing on existing installation from previous run)
@@ -40,11 +42,13 @@ Requires Helm and yq to be installed and installs them if not found
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="kustomization.yaml kustommization2.yaml..."
+usage_args="kustomization.yaml [kustomization2.yaml ...]"
 
 help_usage "$@"
 
-min_args 1 "$@"
+any_opt_usage "$@"
+
+#min_args 1 "$@"
 
 type -P helm &>/dev/null || "$srcdir/../setup/install_helm.sh"
 type -P yq &>/dev/null || "$srcdir/../setup/install_yq.sh"
@@ -56,7 +60,12 @@ if [ -n "${SKIP_EXISTING_HELM_INSTALLATIONS:-}" ]; then
     helm_installations="$(helm ls -A -o json | jq -r '.[].name')"
 fi
 
-for kustomization in "$@"; do
+# slow to do for every run, leave this as a rarely needed exercise for the caller
+#echo
+#helm repo update
+#echo
+
+for kustomization in "${@:-kustomization.yaml}"; do
     pushd "$(dirname "$kustomization")" >/dev/null
     kustomization="${kustomization##*/}"
     "$srcdir/kustomize_parse_helm_charts.sh" "$kustomization" |
@@ -72,8 +81,8 @@ for kustomization in "$@"; do
         fi
         if ! grep -Eq "^${name}[[:space:]]+${repo_url}[[:space:]]*$" <<< "$helm_repos"; then
             timestamp "Adding Helm repo '$repo_url' as name '$name'"
-            # might fail here if you've already installed a repo with this name, in which case, fix your repos, we don't want to remove/modify your existing repos
-            helm repo add "$name" "$repo_url"
+            # might fail here if you've already installed a repo with this name
+            helm repo add "$name" "$repo_url" || die "adding repo '$name' with url '$url' failed, fix your repos as we don't want to remove/modify your existing repos if there is a repo name clash"
         fi
         timestamp "Installing Helm chart '$name' version '$version' from '$repo_url'"
         if [ -n "${SKIP_ERRORS:-}" ]; then
