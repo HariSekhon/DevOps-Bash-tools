@@ -21,4 +21,4 @@
 # place to add last minute clean ups like path deduping
 
 # slows down new shells
-dedupe_paths
+#dedupe_paths
