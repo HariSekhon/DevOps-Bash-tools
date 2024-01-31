@@ -900,6 +900,7 @@ etc.
     - `jenkins_cred_cli_set_ssh_key.sh` - creates or updates a Jenkins SSH key credential from a string or an SSH private key file
     - `jenkins_cred_cli_set_user_pass.sh` - creates or updates a Jenkins username/password credential
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
+  - `jenkins_plugin_latest_version.sh` - finds the latest version of a given Jenkins plugin
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
 - `teamcity/*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
   - `teamcity.sh` - one-touch [TeamCity CI](https://www.jetbrains.com/teamcity/) cluster:
