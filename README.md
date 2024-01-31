@@ -607,6 +607,7 @@ etc.
 - `helm_template.sh` - templates a Helm chart for Kustomize deployments
 - `kustomize_parse_helm_charts.sh` - parses the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files into TSV format for further shell pipe processing
 - `kustomize_install_helm_charts.sh` - installs the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files the old fashioned Helm CLI way so that tools like [Nova](https://github.com/FairwindsOps/nova) can be used to detect outdated charts (used in [Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs) repo's [CI](https://github.com/HariSekhon/Kubernetes-configs/actions/workflows/nova.yaml))
+- `kustomize_update_helm_chart_versions.sh` - updates one or more `kustomization.yaml` files to the latest versions of any charts they contain
 - `kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` to `kustomization.materialized.yaml` in the same directories for scanning with tools like [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects inherited from embedded Helm charts. Parallelized for performance
 - `argocd_auto_sync.sh` - toggle Auto-sync on/off to allow repairs and maintenance operation for a given app and also disables / re-enables the App-of-Apps base apps to stop then re-enabling the app
 - `argocd_apps_sync.sh` - sync's all [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) apps matching an optional ERE regex filter on their names using the ArgoCD CLI
