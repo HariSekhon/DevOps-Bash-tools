@@ -36,7 +36,7 @@ perlpath(){
 #fi
 if [ -d ~/perl5/lib/perl5 ]; then
     #add_PATH PERL5LIB ~/perl5/lib/perl5
-    export PERL5LIB="$PERL5LIB:"~/perl5/lib/perl5
+    export PERL5LIB="$PERL5LIB:$HOME/perl5/lib/perl5"
 fi
 if [ -d ~/perl5/bin ]; then
     add_PATH ~/perl5/bin
