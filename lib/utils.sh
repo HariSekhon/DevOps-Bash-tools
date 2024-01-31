@@ -730,6 +730,9 @@ seconds_to_hours(){
 warn(){
     timestamp "WARNING: $*"
 }
+warning(){
+    warn "$@"
+}
 
 log(){
     if is_verbose; then
