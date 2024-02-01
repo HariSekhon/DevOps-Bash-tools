@@ -228,6 +228,8 @@ mkdir -p -v ~/Desktop/Screenshots
 # put them under a Screenshots folder, it's cleaner than having them all over your background
 defaults write com.apple.screencapture location -string ~/Desktop/Screenshots
 
+defaults write com.apple.screencapture "show-thumbnail" -bool "true"
+
 # save in PNG format (default, other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 #defaults write com.apple.screencapture type JPG
