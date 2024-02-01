@@ -224,7 +224,9 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 # ============================================================================ #
 
 # save screenshots to Desktop
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+mkdir -p -v ~/Desktop/Screenshots
+# put them under a Screenshots folder, it's cleaner than having them all over your background
+defaults write com.apple.screencapture location -string ~/Desktop/Screenshots
 
 # save in PNG format (default, other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
