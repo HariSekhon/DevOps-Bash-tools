@@ -95,7 +95,7 @@ Examples:
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
-url_base="https://${GITHUB_HOST:-api.github.com}"
+url_base="https://${GH_HOST:-${GITHUB_HOST:-api.github.com}}"
 
 help_usage "$@"
 
