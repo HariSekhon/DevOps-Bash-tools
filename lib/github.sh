@@ -62,7 +62,7 @@ github_origin_owner_repo(){
         git remote -v |
         grep -Em1 '^origin.*github\.${domain_regex}[/:]' |
         sed '
-            s|.*github.com[:/]||;
+            s|.*github\.${domain_regex}[:/]||;
             s/\.git.*//;
             s/[[:space:]].*//
         ' ||
