@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Pushes the current branch to GitLab origin, setting upstream branch, then opens a Pull Request preview
+Pushes the current branch to GitLab origin, setting upstream branch, then opens a Pull Request preview from current to default branch
 
 Assumes that GitLab is the remote origin, and checks for this for safety
 
