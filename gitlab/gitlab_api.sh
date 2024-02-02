@@ -151,7 +151,7 @@ local full 'user/repo' name of the current directory:      project, /projects/:i
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
-url_base="${GITLAB_HOST:-https://gitlab.com}/api/v4"
+url_base="${GL_HOST:-${GITLAB_HOST:-https://gitlab.com}}/api/v4"
 
 help_usage "$@"
 
