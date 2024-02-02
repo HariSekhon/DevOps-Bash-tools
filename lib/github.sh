@@ -45,7 +45,7 @@ get_github_repo(){
 }
 
 is_github_origin(){
-    git remote -v | grep -q '^origin.*github.com[/:]'
+    git remote -v | grep -q '^origin.*github\.com[/:]'
 }
 
 check_github_origin(){
