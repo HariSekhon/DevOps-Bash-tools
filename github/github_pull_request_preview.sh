@@ -26,7 +26,7 @@ Opens a GitHub Pull Request preview page from the current local branch to the de
 
 Optionally you can specify the head and base target branch yourself as arguments
 
-Useful to call from aliases/functions to quickly open a PR. See .bash.d/git.sh where this is used via github_push_pr_preview.sh to automated this workflow with a handful of keystrokes
+Useful to call from aliases/functions to quickly open a PR. See .bash.d/git.sh where this is used via github_push_pr_preview.sh to automate this workflow with a handful of keystrokes
 
 Prints the Pull Request URL, and if on Mac or if \$BROWSER is set then opens it for you in your default browser
 
