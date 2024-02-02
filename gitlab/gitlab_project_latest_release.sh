@@ -23,9 +23,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns the latest release name/version for a given 'owner/repo' via the GitLab API
+Returns the latest release name/version for a given 'owner/repo' project via the GitLab API
 
-If a repo has no releases, gets a 404 error
+If a project repo has no releases, gets a 404 error
 
 Requires curl and jq to be installed
 "
