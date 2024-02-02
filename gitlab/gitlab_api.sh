@@ -38,7 +38,7 @@ Queries the GitLab.com API (v4)
 Automatically handles authentication via environment variable \$GITLAB_TOKEN
 
 Optional: \$GITLAB_USER - used for some replacement tokens, prevents having to search git remotes or query the API for it
-          \$GITLAB_HOST - used to point to self-hosts GitLab servers
+          \$GITLAB_HOST - URL to point to self-hosts GitLab servers
 
 Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
@@ -151,7 +151,7 @@ local full 'user/repo' name of the current directory:      project, /projects/:i
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
-url_base="https://${GITLAB_HOST:-gitlab.com}/api/v4"
+url_base="${GITLAB_HOST:-https://gitlab.com}/api/v4"
 
 help_usage "$@"
 
