@@ -18,10 +18,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir_github_lib/utils.sh"
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 . "$srcdir_github_lib/git.sh"
 
 # shellcheck disable=SC2034
