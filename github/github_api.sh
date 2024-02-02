@@ -35,7 +35,7 @@ Automatically handles authentication via environment variables \$GITHUB_USERNAME
 and \$GH_TOKEN / \$GITHUB_TOKEN / \$GITHUB_PASSWORD (password is deprecated)
 
 Optional: \$GITHUB_USER - used for some replacement tokens, prevents having to search git remotes or query the API for it
-          \$GITHUB_HOST - used to point to self-hosts GitHub Enterprise servers
+          \$GH_HOST / \$GITHUB_HOST - FQDN used to point to self-hosts GitHub Enterprise servers
 
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
