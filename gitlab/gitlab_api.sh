@@ -162,7 +162,7 @@ curl_api_opts "$@"
 url_path="$1"
 shift || :
 
-url_path="${url_path##*:\/\/api.gitlab.com\/api\/v4}"
+url_path="${url_path##$url_base}"
 url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out - but documentation uses :id in different contexts to mean project id or user id so this is less useful than in github_api.sh
