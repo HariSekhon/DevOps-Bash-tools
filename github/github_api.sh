@@ -34,6 +34,9 @@ Queries the GitHub.com API
 Automatically handles authentication via environment variables \$GITHUB_USERNAME / \$GITHUB_USER
 and \$GH_TOKEN / \$GITHUB_TOKEN / \$GITHUB_PASSWORD (password is deprecated)
 
+Optional: \$GITHUB_USER - used for some replacement tokens, prevents having to search git remotes or query the API for it
+          \$GITHUB_HOST - used to point to self-hosts GitHub Enterprise servers
+
 Can specify \$CURL_OPTS for options to pass to curl or provide them as arguments
 
 
@@ -92,7 +95,7 @@ Examples:
 # shellcheck disable=SC2034
 usage_args="/path [<curl_options>]"
 
-url_base="https://api.github.com"
+url_base="https://${GITHUB_HOST:-api.github.com}"
 
 help_usage "$@"
 
@@ -103,7 +106,9 @@ curl_api_opts "$@"
 url_path="$1"
 shift || :
 
-url_path="${url_path//https:\/\/api.github.com}"
+# false positive, this works
+# shellcheck disable=SC2295
+url_path="${url_path##$url_base}"
 url_path="${url_path##/}"
 
 user="${GITHUB_USERNAME:-${GITHUB_USER:-}}"
