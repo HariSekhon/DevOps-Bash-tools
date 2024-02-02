@@ -55,12 +55,12 @@ Examples:
 
 # Get currently authenticated user:
 
-    ${0##*/} /user
+    ${0##*/} /user | jq .
 
 
 # List a user's GitLab projects (repos):
 
-    ${0##*/} /users/HariSekhon/projects
+    ${0##*/} /users/HariSekhon/projects | jq .
 
 
 # Update a project's description:
