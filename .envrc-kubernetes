@@ -123,6 +123,16 @@ gke_kube_context(){
     local CONTEXT
     # if CLOUDSDK_CONTAINER_CLUSTER and it's generated as a naming convention such as "${CLOUDSDK_CORE_PROJECT}-${CLOUDSDK_COMPUTE_REGION}"
     #export CLOUDSDK_CONTAINER_CLUSTER="${CLOUDSDK_CONTAINER_CLUSTER:-${CLOUDSDK_CORE_PROJECT}-${CLOUDSDK_COMPUTE_REGION}}"
+
+    # the context naming convention for GKE clusters imported via:
+    #
+    #   gcloud container clusters get-credentials "$cluster" --zone "$zone"
+    #
+    # use gke_kube_creds.sh to auto-populate this for all GKE clusters in the current project
+    # and gcp_foreach_project.sh to do this for all GCP projects. Both scripts are found here:
+    #
+    #   https://github.com/HariSekhon/DevOps-Bash-tools
+    #
     CONTEXT="gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${CLOUDSDK_CONTAINER_CLUSTER}"
     kube_context "$CONTEXT" "${NAMESPACE:-}"
 }
