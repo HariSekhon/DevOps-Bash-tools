@@ -162,6 +162,8 @@ curl_api_opts "$@"
 url_path="$1"
 shift || :
 
+# false positive, this works
+# shellcheck disable=SC2295
 url_path="${url_path##$url_base}"
 url_path="${url_path##/}"
 
