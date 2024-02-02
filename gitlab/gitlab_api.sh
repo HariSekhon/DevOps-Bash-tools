@@ -35,12 +35,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Queries the GitLab.com API (v4)
 
-Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
-
 Automatically handles authentication via environment variable \$GITLAB_TOKEN
 
 Optional: \$GITLAB_USER - used for some replacement tokens, prevents having to search git remotes or query the API for it
           \$GITLAB_HOST - used to point to self-hosts GitLab servers
+
+Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments to the script
 
 
 You must set up a personal access token here:
