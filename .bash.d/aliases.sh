@@ -41,6 +41,7 @@ alias bashrc='$EDITOR $bashrc && reload'
 alias bashrc2='$EDITOR $bashrc2 && reload'
 alias bashrclocal='$EDITOR $bashrc.local; reload'
 alias bashrc3=bashrclocal
+alias v='vim'
 alias vimrc='$EDITOR ~/.vimrc'
 alias screenrc='$EDITOR ~/.screenrc'
 alias aliases='$EDITOR $bashd/aliases.sh'
@@ -48,8 +49,8 @@ alias ae=aliases
 alias be=bashrc
 alias be2=bashrc2
 alias be3=bashrc3
-alias ve=vimrc
 alias se=screenrc
+alias ve=vimrc
 alias creds='$EDITOR ~/.env/creds'
 # keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
 #alias emacs="emacs -nw"
