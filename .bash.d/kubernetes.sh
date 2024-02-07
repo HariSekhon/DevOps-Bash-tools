@@ -587,3 +587,25 @@ kclusters(){
 kclustersapply(){
     kclusters apply -f "$@"  # eg. manifests
 }
+
+# inspired by my class 'when' functions in when.sh
+whenpodup(){
+    local name="${1:-}"
+    shift || :
+    if [ -z "$name" ]; then
+        echo "usage: whenpodup <name>"
+        return 1
+    fi
+    local count=0
+    while ! kubectl get pods "$name" -o 'jsonpath={.status.phase}' | grep -q 'Running'; do
+        ((count+=1))
+        timestamp "waiting for pod '$name' to come up..."
+        if [ $count -gt 22 ]; then
+            sleep 10
+        else
+            sleep 5
+        fi
+    done
+    timestamp "pod '$name' is up"
+    "$@"
+}
