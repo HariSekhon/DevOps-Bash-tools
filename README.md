@@ -882,6 +882,7 @@ etc.
     - `jenkins_cred_set_user_pass.sh` - creates or updates a Jenkins username/password credential
   - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL`, `$JENKINS_CLI_ARGS` and authentication using `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup and the following scripts:
     - `jenkins_foreach_job_cli.sh` - runs a templated command for each Jenkins job
+    - `jenkins_create_parallel_test_job_runs.sh` - creates a sample freestyle parameterized test job and launches N parallel runs to test scaling and parallelization of Jenkins on Kubernetes
     - `jenkins_jobs_download_configs_cli.sh` - downloads all Jenkins job configs to xml files of the same name
     - `jenkins_cred_cli_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_cli_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
