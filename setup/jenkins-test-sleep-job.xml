@@ -49,6 +49,7 @@ echo
 env | sort
 echo
 echo Starting
+echo &quot;UNIQUE_VALUE=$UNIQUE_VALUE&quot;
 SLEEP_SECONDS=&quot;$(($SLEEP_MINUTES * 60))&quot;
 echo &quot;Sleeping for $SLEEP_MINUTES minutes ($SLEEP_SECONDS seconds)&quot;
 sleep &quot;$SLEEP_SECONDS&quot;
