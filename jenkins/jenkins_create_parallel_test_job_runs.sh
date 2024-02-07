@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a test sleep job and launches N instances of it immediately to test Jenkins ability to auto-scale and parallelize agents on Jenkins on Kubernetes
+Creates a freestyle parameterized test sleep job and launches N parallel runs of it to test scaling and parallelization of Jenkins on Kubernetes agents
 
 Runs 10 jobs by default which run for 10 minutes each
 
