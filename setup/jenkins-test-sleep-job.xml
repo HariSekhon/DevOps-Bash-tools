@@ -17,7 +17,7 @@
         <hudson.model.StringParameterDefinition>
           <name>UNIQUE_VALUE</name>
           <description>Enter anything unique to queue multiple copies of this job to force parallelization</description>
-          <defaultValue>1</defaultValue>
+          <defaultValue>default value</defaultValue>
           <trim>false</trim>
         </hudson.model.StringParameterDefinition>
         <hudson.model.ChoiceParameterDefinition>
