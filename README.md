@@ -158,7 +158,8 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 [Docker-Compose](https://docs.docker.com/compose/),
 [jq](https://stedolan.github.io/jq/)
 and many others... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
-  - `setup/` - contains even more scripts to download and install software, JDBC connectors, Mac OS X settings etc.
+  - `install/ - contains installation scripts for various software
+  - `setup/` - contains even more setup scripts and config, package lists, Mac OS X settings etc.
 - Utility Libraries used by many hundreds of scripts and [builds](https://harisekhon.github.io/CI-CD/) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
   - `lib/` - scripting and CI library
@@ -1165,13 +1166,13 @@ etc.
 
 #### More Linux & Mac
 
-`bin/`, `setup/` and `packages/` directories:
+`bin/`, `install/`, `packages/`, `setup/` directories:
 
 - [Linux](https://en.wikipedia.org/wiki/Linux) / [Mac](https://en.wikipedia.org/wiki/MacOS) systems administration scripts:
-  - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
+  - `install/` - installation scripts for various OS packages (RPM, Deb, Apk) for various Linux distros ([Redhat RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/))
   - install if absent scripts for Python, Perl, Ruby, NodeJS and Golang packages - good for minimizing the number of source code installs by first running the OS install scripts and then only building modules which aren't already detected as installed (provided by system packages), speeding up builds and reducing the likelihood of compile failures
-  - install scripts for [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
-  - OS / Distro Package Management:
+  - install scripts for tarballs, Golang binaries, random 3rd party installers, [Jython](https://www.jython.org/) and build tools like [Gradle](https://gradle.org/) and [SBT](https://www.scala-sbt.org/) for when Linux distros don't provide packaged versions or where the packaged versions are too old
+  - `packages/` - OS / Distro Package Management:
     - `install_packages.sh` - installs package lists from arguments, files or stdin on major linux distros and Mac, detecting the package manager and invoking the right install commands, with `sudo` if not root. Works on [RHEL](https://www.redhat.com/en) / [CentOS](https://www.centos.org/) / [Fedora](https://getfedora.org/), [Debian](https://www.debian.org/) / [Ubuntu](https://ubuntu.com/), [Alpine](https://alpinelinux.org/), and [Mac Homebrew](https://brew.sh/). Leverages and supports all features of the distro / OS specific install scripts listed below
     - `install_packages_if_absent.sh` - installs package lists if they're not already installed, saving time and minimizing install logs / CI logs, same support list as above
     - Redhat RHEL / CentOS:
