@@ -30,7 +30,9 @@ alias cd_vagrant='cd "$vagrant"'
 alias cdv=cd_vagrant
 alias vhome=cd_vagrant
 #alias v='cd_vagrant; vagrant'
-alias v='vagrant'
+# 'v' is aliased to vim now as it's used much more often
+#alias v='vagrant'
+alias vag='vagrant'
 #alias vf='cd_vagrant; vim Vagrantfile; vagrant_gen_etc_hosts; eval "$(vagrant_gen_aliases)"'
 alias vst='vagrant status'
 alias vrun='vst | grep running'
