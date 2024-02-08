@@ -77,13 +77,13 @@ kube_context(){
 
         # load your real kube config to isolated staging area to source the context info
         if [ -f "$original_kubeconfig" ]; then
-            cp -- "$original_kubeconfig" "$KUBECONFIG"
+            cp -f -- "$original_kubeconfig" "$KUBECONFIG"
         elif [ -f "$default_kubeconfig" ]; then
             cp -- "$default_kubeconfig" "$KUBECONFIG"
         elif [ -f "$PWD/.kube/config" ]; then
             cp -- "$PWD/.kube/config" "$KUBECONFIG"
         elif [ -f "/etc/rancher/k3s/k3s.yaml" ]; then
-            cp -- "/etc/rancher/k3s/k3s.yaml" "$KUBECONFIG"
+            cp -f -- "/etc/rancher/k3s/k3s.yaml" "$KUBECONFIG"
         else
             echo "WARNING: failed to find one of:
 
@@ -96,7 +96,8 @@ kube_context(){
 
         # race condition - kubectl config get-contexts fails to find the context and switch in many runs without this sleep
         context_found=0
-        for ((i=0;i<10;i++)); do
+        local i
+        for ((i=0; i < 10; i++)); do
             # surprisingly unreliable - if kubectl config get-contexts -o name | grep -Fxq "$context" can miss even after these succeed
             #if [ -s "$KUBECONFIG" ]; then
             #if cmp --quiet "$from_kubeconfig" "$KUBECONFIG"; then
