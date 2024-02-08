@@ -67,7 +67,7 @@ not_blank "$projects" || die "ERROR: no project specified and GCloud SDK core.pr
 export PATH="$PATH:"~/bin
 
 if ! type -P cloud_sql_proxy &>/dev/null; then
-    "$srcdir/../setup/install_cloud_sql_proxy.sh"
+    "$srcdir/../install/install_cloud_sql_proxy.sh"
 fi
 
 mkdir -p -v "$SOCKDIR"

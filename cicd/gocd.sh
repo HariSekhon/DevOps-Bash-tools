@@ -55,7 +55,7 @@ export COMPOSE_PROJECT_NAME="bash-tools"
 export COMPOSE_FILE="$srcdir/../docker-compose/gocd.yml"
 
 if ! type docker-compose &>/dev/null; then
-    "$srcdir/../setup/install_docker_compose.sh"
+    "$srcdir/../install/install_docker_compose.sh"
 fi
 
 action="${1:-up}"

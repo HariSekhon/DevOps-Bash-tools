@@ -28,7 +28,7 @@ fi
 export PATH="$PATH:/opt/appveyor/host-agent"
 
 if ! type -P appveyor-host-agent &>/dev/null; then
-    "$srcdir/../setup/install_appveyor_byoc.sh"
+    "$srcdir/../install/install_appveyor_byoc.sh"
     clear
 fi
 

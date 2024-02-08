@@ -68,7 +68,7 @@ usage_args="[ up | down | ui ]"
 help_usage "$@"
 
 if ! type docker-compose &>/dev/null; then
-    "$srcdir/../setup/install_docker_compose.sh"
+    "$srcdir/../install/install_docker_compose.sh"
 fi
 
 action="${1:-up}"

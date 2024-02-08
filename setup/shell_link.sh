@@ -70,7 +70,7 @@ for filename in $conf_files; do
         ln -sv $opts -- "$PWD/$filename" ~ || continue
         # if we link .vimrc then run the vundle install and get plugins to prevent vim errors every startup
         if [ "$filename" = .vimrc ]; then
-            "$srcdir/../setup/install_vundle.sh" || :
+            "$srcdir/../install/install_vundle.sh" || :
         fi
     fi
 done

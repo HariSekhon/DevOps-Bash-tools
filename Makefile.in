@@ -374,7 +374,7 @@ yum-packages:
 	if type -P amazon-linux-extras; then \
 		$(SUDO) amazon-linux-extras install epel -y; \
 	fi
-	$(BASH_TOOLS)/setup/install_epel_repo.sh
+	$(BASH_TOOLS)/install/install_epel_repo.sh
 
 	# installing packages individually to catch package install failure, otherwise yum succeeds even if it misses a package
 	for x in rpm-packages.txt rpm-packages-dev.txt; do \

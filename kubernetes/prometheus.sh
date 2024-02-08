@@ -39,7 +39,7 @@ export PROMETHEUS_URL="http://localhost:9090"
 export PROMETHEUS_CONFIG="${2:-$srcdir/../setup/prometheus.yml}"
 
 if ! type docker-compose &>/dev/null; then
-    "$srcdir/../setup/install_docker_compose.sh"
+    "$srcdir/../install/install_docker_compose.sh"
 fi
 
 action="${1:-up}"

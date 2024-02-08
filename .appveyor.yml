@@ -54,7 +54,7 @@ on_finish:
   #
   #     https://github.com/appveyor/ci/pull/3385
   #
-  #- sh: curl -sflL 'https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/setup/install_openssh.sh' | bash -e -
+  #- sh: curl -sflL 'https://raw.githubusercontent.com/HariSekhon/DevOps-Bash-tools/master/install/install_openssh.sh' | bash -e -
   #
   # https://www.appveyor.com/docs/how-to/ssh-to-build-worker/
   - sh: if [ "$APPVEYOR_SSH_BLOCK" = true ]; then curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -; fi

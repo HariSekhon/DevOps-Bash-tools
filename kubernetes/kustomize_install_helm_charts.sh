@@ -50,8 +50,8 @@ any_opt_usage "$@"
 
 #min_args 1 "$@"
 
-type -P helm &>/dev/null || "$srcdir/../setup/install_helm.sh"
-type -P yq &>/dev/null || "$srcdir/../setup/install_yq.sh"
+type -P helm &>/dev/null || "$srcdir/../install/install_helm.sh"
+type -P yq &>/dev/null || "$srcdir/../install/install_yq.sh"
 
 # if there are no repositories to show will return exit code 1 so || :
 helm_repos="$(helm repo list -o yaml | yq -r '.[] | [.name, .url] | @tsv' || :)"

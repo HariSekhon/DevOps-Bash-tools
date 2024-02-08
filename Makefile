@@ -230,8 +230,8 @@ azure-shell: link
 
 .PHONY: gcp
 gcp: system-packages
-	@./setup/install_gcloud_sdk.sh
-	@./setup/install_cloud_sql_proxy.sh
+	@./install/install_gcloud_sdk.sh
+	@./install/install_cloud_sql_proxy.sh
 
 .PHONY: gcp-shell
 gcp-shell:

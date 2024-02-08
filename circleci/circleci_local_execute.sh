@@ -32,7 +32,7 @@ usage(){
 }
 
 if ! type -P circleci &>/dev/null; then
-    "$srcdir/../setup/install_circleci.sh"
+    "$srcdir/../install/install_circleci.sh"
 fi
 
 if [ $# -gt 1 ]; then

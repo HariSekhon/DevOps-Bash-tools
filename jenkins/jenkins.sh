@@ -75,7 +75,7 @@ export COMPOSE_FILE="$srcdir/../docker-compose/jenkins.yml"
 plugins_txt="$srcdir/../setup/jenkins-plugins.txt"
 
 if ! type docker-compose &>/dev/null; then
-    "$srcdir/../setup/install_docker_compose.sh"
+    "$srcdir/../install/install_docker_compose.sh"
 fi
 
 action="${1:-up}"
