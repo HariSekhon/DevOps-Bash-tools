@@ -65,7 +65,7 @@ Examples:
 
 See Also:
 
-    setup/install_octo.sh - Installs the Octopus Deploy CLI
+    install/install_octo.sh - Installs the Octopus Deploy CLI
 "
 
 # used by usage() in lib/utils.sh

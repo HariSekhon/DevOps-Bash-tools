@@ -262,7 +262,7 @@ environment,
 CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/) etc),
 port and HTTP url availability content checks etc.
 Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
-- `setup/install_*.sh` - various simple to use installation scripts for common technologies like
+- `install/install_*.sh` - various simple to use installation scripts for common technologies like
 [AWS CLI](https://aws.amazon.com/cli/),
 [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
 [GCloud SDK](https://cloud.google.com/sdk),
@@ -1031,7 +1031,7 @@ etc.
 `bin/`, `pingdom/`, `terraform/` directories:
 
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
-  - see also the Digital Ocean CLI `doctl` (`setup/install_doctl.sh`)
+  - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
 - `circleci_public_ips.sh` - lists [CircleCI](https://circleci.com) public IP addresses via dnsjson.com
 - `cloudflare_*.sh` - [Cloudflare](https://www.cloudflare.com/) API queries and reports:

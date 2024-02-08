@@ -28,7 +28,7 @@ If the release file is a tarball or zip file then it'll auto-unpack it, but you 
 
 If version is not specified, determine the latest release and installs that
 
-If the release URL title/path is more complicated than the convention of following the version number, such as is the case for Kustomize, then you'd need to call install_binary.sh with the URL path instead of using this script, see setup/install_kustomize.sh
+If the release URL title/path is more complicated than the convention of following the version number, such as is the case for Kustomize, then you'd need to call install_binary.sh with the URL path instead of using this script, see install/install_kustomize.sh
 "
 
 # used by usage() in lib/utils.sh

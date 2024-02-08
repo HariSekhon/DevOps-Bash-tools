@@ -262,7 +262,7 @@ zsh
 
 # runtime only
 #groovy
-# GDK - use SDKMan instead (setup/install_sdkman.sh)
+# GDK - use SDKMan instead (install/install_sdkman.sh)
 #groovysdk
 # done by SDKMan now
 #maven

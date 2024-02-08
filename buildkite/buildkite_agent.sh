@@ -76,7 +76,7 @@ fi
 #                                  D o c k e r
 # ============================================================================ #
 
-# only necessary for Docker, installed agent will have config file containing this token from setup/install_buildkite.sh
+# only necessary for Docker, installed agent will have config file containing this token from install/install_buildkite.sh
 check_env_defined BUILDKITE_AGENT_TOKEN
 
 # latest, alpine, centos, ubuntu, stable, stable-latest, stable-ubuntu etc - see dockerhub_show_tags.py from adjacent DevOps Python tools repo

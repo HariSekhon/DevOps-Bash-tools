@@ -38,7 +38,7 @@ fi
 #sudo setmixer -V pcm 100
 
 # ============================================================================ #
-# This should be automatically added to ~/.bash_profile when you install SDKman (setup/install_sdkman.sh):
+# This should be automatically added to ~/.bash_profile when you install SDKman (install/install_sdkman.sh):
 #
 ##THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 #export SDKMAN_DIR="/Users/hari.sekhon/.sdkman"
