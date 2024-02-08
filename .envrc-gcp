@@ -49,17 +49,27 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #       or
 #   gcloud config set --help
 
-if [ -z "${CI:-}" ]; then
-    config=dev
-    # protect from setting this if the config does exist
-    # - not needed, it'll only affect the view in
-    # 'gcloud config configurations list'
-    # but the last settings will still be in effect so shouldn't mess up anybody GCloud SDK CLI if set to the wrong thing
-    # so save the extra fork
-    #if gcloud config configurations list --format='get(name)' | grep -q "^$config$"; then
-        export CLOUDSDK_ACTIVE_CONFIG_NAME="$config"
-    #fi
-fi
+gcloud_config(){
+    local config="${1:-}"
+    if [ -z "$config" ]; then
+        echo "no config passed to gcloud_config() function" >&2
+        return 1
+    fi
+    if [ -z "${CI:-}" ]; then
+        return
+    fi
+    # don't waste time if not using GCloud SDK, ie. not found in $PATH
+    if type -P gcloud; then
+        # protect from setting this if the config does exist as this can cause auth problems by unsetting the core.account
+        if gcloud config configurations list --format='get(name)' | grep -q "^$config$"; then
+            export CLOUDSDK_ACTIVE_CONFIG_NAME="$config"
+        fi
+    fi
+}
+
+#gcloud_config dev
+#gcloud_config staging
+#gcloud_config production
 
 # XXX: Edit
 export CLOUDSDK_CORE_PROJECT=myproject
