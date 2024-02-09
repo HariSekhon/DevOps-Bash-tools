@@ -29,6 +29,8 @@ Changes all of the current repo's remote URLs from ssh:// or git@ (SSH) to https
 
 Has some extra rules for conversion to Azure DevOps https path format since this differs from standard GitHub / GitLab / Bitbucket type paths
 
+If you travel and lot, sometimes you can only git push through HTTPS due to egress port filtering in hotels or corporate firewalls
+
 Used to include authentication tokens in the generated URLs if found in the environment
 
 However, it's better to instead run the below script to get the HTTPS API tokens dynamically from environment variables:
