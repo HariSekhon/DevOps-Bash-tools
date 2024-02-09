@@ -76,14 +76,20 @@ kube_context(){
         export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
 
         # load your real kube config to isolated staging area to source the context info
+        local src_kubeconfig
         if [ -f "$original_kubeconfig" ]; then
-            cp -f -- "$original_kubeconfig" "$KUBECONFIG"
+            src_kubeconfig="$original_kubeconfig"
         elif [ -f "$default_kubeconfig" ]; then
-            cp -- "$default_kubeconfig" "$KUBECONFIG"
+            src_kubeconfig="$default_kubeconfig"
         elif [ -f "$PWD/.kube/config" ]; then
-            cp -- "$PWD/.kube/config" "$KUBECONFIG"
+            src_kubeconfig="$PWD/.kube/config"
         elif [ -f "/etc/rancher/k3s/k3s.yaml" ]; then
-            cp -f -- "/etc/rancher/k3s/k3s.yaml" "$KUBECONFIG"
+            src_kubeconfig="/etc/rancher/k3s/k3s.yaml"
+        fi
+        if [ -n "$src_kubeconfig" ]; then
+            if [ "$src_kubeconfig" != "$KUBECONFIG" ]; then
+                cp -f -- "$src_kubeconfig" "$KUBECONFIG"
+            fi
         else
             echo "WARNING: failed to find one of:
 
