@@ -128,6 +128,11 @@ kube_context(){
 
 gke_kube_context(){
     local CONTEXT
+    for _ in CLOUDSDK_CORE_PROJECT CLOUDSDK_COMPUTE_REGION CLOUDSDK_CONTAINER_CLUSTER; do
+        if [ -z "${!_}" ]; then
+            echo "WARNING: \$$_ is not set" >&2
+        fi
+    done
     # if CLOUDSDK_CONTAINER_CLUSTER and it's generated as a naming convention such as "${CLOUDSDK_CORE_PROJECT}-${CLOUDSDK_COMPUTE_REGION}"
     #export CLOUDSDK_CONTAINER_CLUSTER="${CLOUDSDK_CONTAINER_CLUSTER:-${CLOUDSDK_CORE_PROJECT}-${CLOUDSDK_COMPUTE_REGION}}"
 
