@@ -191,7 +191,8 @@ git_url_base(){
          s|^git@||;
          s|^|https://|;
          s/\.git$//;
-         #s|/_git/|/|;
+         # Azure DevOps only puts this in https urls, not ssh, so strip for standardizing output
+         s|/_git/|/|;
          ' |
     perl -pe 's/:(?!\/\/)/\//'
 }
@@ -224,7 +225,7 @@ gitbrowse(){
                 url_base+="/-/blob/$default_branch/README.md"
             fi
         elif [[ "$url_base" =~ dev.azure.com ]]; then
-            #url_base="${url_base%/*}/_git/${url_base##*/}"
+            url_base="${url_base%/*}/_git/${url_base##*/}"
             if [ -z "$path" ]; then
                 url_base+="?path=/README.md&_a=preview"
             fi
