@@ -25,9 +25,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Changes all of the current repo's remote URLs from ssh:// or git@ (SSH) to https:// and includes authentication tokens for each one if found in the environment
+Changes all of the current repo's remote URLs from ssh:// or git@ (SSH) to https://
 
 Has some extra rules for conversion to Azure DevOps https path format since this differs from standard GitHub / GitLab / Bitbucket type paths
+
+Used to include authentication tokens in the generated URLs if found in the environment
+
+However, it's better to instead run the below script to get the HTTPS API tokens dynamically from environment variables:
+
+    git_remotes_set_https_creds_helpers.sh
 "
 
 help_usage "$@"
@@ -53,18 +59,20 @@ if [ -n "$azure_devops_url" ]; then
     sed -i.bak "s|$azure_devops_url|$azure_devops_url2|" .git/config
 fi
 
-# TODO: consider splitting this to its own cred loading script
-for x in github gitlab bitbucket azure; do
-    git_provider_env "$x"
-    # variables loaded by git_provider_env()
-    # inject user:token for https authentication
-    # shellcheck disable=SC2154
-    perl -pi -e "s/(?<!\\@)$domain/$user:$token\\@$domain/;" .git/config
-    # remove prefix if there is no $token eg. ':<blank>@'
-    # strip : prefix if there is no $user
-    perl -pi -e 's/\/\/[^:]*:\@/\/\//;
-                 s/\/\/:/\/\//;' .git/config
-done
+# not using this now - use git_remotes_set_https_creds_helpers.sh instead
+#embed_tokens(){
+#    for x in github gitlab bitbucket azure; do
+#        git_provider_env "$x"
+#        # variables loaded by git_provider_env()
+#        # inject user:token for https authentication
+#        # shellcheck disable=SC2154
+#        perl -pi -e "s/(?<!\\@)$domain/$user:$token\\@$domain/;" .git/config
+#        # remove prefix if there is no $token eg. ':<blank>@'
+#        # strip : prefix if there is no $user
+#        perl -pi -e 's/\/\/[^:]*:\@/\/\//;
+#                     s/\/\/:/\/\//;' .git/config
+#    done
+#}
 
 echo >&2
 git remotes -v
