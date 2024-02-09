@@ -23,7 +23,7 @@ plist_dir="Library/Containers/net.sourceforge.cruisecontrol.CCMenu/Data/Library/
 
 plist_file="net.sourceforge.cruisecontrol.CCMenu.plist"
 
-"$srcdir/install_homebrew.sh"
+"$srcdir/../install/install_homebrew.sh"
 echo
 
 if ! [ -f "$bin" ]; then
