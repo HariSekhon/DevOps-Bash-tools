@@ -30,7 +30,7 @@ Checks for the following environment variables and if they're set then set up th
 
 This is useful because Azure DevOps personal access tokens have a maximum expiry of 1 year so you don't want to hardcode them across two dozen git repo checkouts but rather all inherit the auth from the environment
 
-If you travel and lot, sometimes you can only git push through HTTPS due to egress port filtering in hotels
+If you travel and lot, sometimes you can only git push through HTTPS due to egress port filtering in hotels or corporate firewalls
 
 When combined with the adjacent scripts
 
