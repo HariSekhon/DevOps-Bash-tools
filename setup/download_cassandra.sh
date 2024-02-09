@@ -29,7 +29,7 @@ fi
 
 #/usr/lib/jvm/jre/bin/
 if ! type -P java &>/dev/null; then
-    "$srcdir/install_java.sh"
+    "$srcdir/../install/install_java.sh"
 fi
 
 CASSANDRA_VERSION="${CASSANDRA_VERSION:-3.11.4}"
