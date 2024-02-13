@@ -29,6 +29,7 @@ Output:
 <id>    <name>
 
 Uses cloudflare_api.sh - see there for authentication API key details
+Used by cloudflare_dns_record_*.sh
 "
 
 # used by usage() in lib/utils.sh
