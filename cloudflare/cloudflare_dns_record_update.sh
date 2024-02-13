@@ -29,7 +29,11 @@ Resolves the domain name to a zone ID first and then submits the request to crea
 https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-patch-dns-record
 
 Uses adjacent cloudflare_dns_record_create.sh
-"
+
+You might get this error:
+
+"'    {"success":false,"errors":[{"code":10000,"message":"PUT method not allowed for the api_token authentication scheme"}]}
+'
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
