@@ -56,8 +56,14 @@ if [ -z "$zone_id" ]; then
     die "Zone ID is empty, check code"
 fi
 
+if [ -n "${CLOUDFLARE_DNS_RECORD_UPDATE:-}" ]; then
+    request_type="PUT"
+else
+    request_type="POST"
+fi
+
 "$srcdir/cloudflare_api.sh" "zones/$zone_id/dns_records" \
-                            -X POST \
+                            -X "$request_type" \
                             -d "{
                                 \"content\": \"$ip\",
                                 \"name\": \"$hostname\",
