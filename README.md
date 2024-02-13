@@ -1042,6 +1042,10 @@ etc.
   - `cloudflare_custom_certificates.sh` - lists any custom SSL certificates in a given Cloudflare zone along with their status and expiry date
   - `cloudflare_dns_records.sh` - lists any Cloudflare DNS records for a zone, including the type and ttl
   - `cloudflare_dns_records_all_zones.sh` - same as above but for all zones
+  - `cloudflare_dns_record_create.sh` - creates a DNS record in the given domain
+  - `cloudflare_dns_record_update.sh` - updates a DNS record in the given domain
+  - `cloudflare_dns_record_delete.sh` - deletes a DNS record in the given domain
+  - `cloudflare_dns_record_details.sh` - lists the details for a DNS record in the given domain in JSON format for further pipe processing
   - `cloudflare_dnssec.sh` - lists the Cloudflare DNSSec status for all zones
   - `cloudflare_firewall_rules.sh` - lists Cloudflare Firewall rules, optionally with filter expression
   - `cloudflare_firewall_access_rules.sh` - lists Cloudflare Firewall Access rules, optionally with filter expression
