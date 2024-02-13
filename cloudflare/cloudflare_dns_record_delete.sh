@@ -52,7 +52,8 @@ fi
 dns_record_id="$(
     "$srcdir/cloudflare_api.sh" "/zones/$zone_id/dns_records?per_page=50000" |
     jq -r '.result[] | [.id, .name] | @tsv' |
-    grep -E -m 1 "^[[:alnum:]]+[[:space:]]+$hostname" |
+    grep -E "^[[:alnum:]]+[[:space:]]+$hostname" |
+    head -n 1 |
     sed 's/[[:space:]].*$//' ||
     die "Failed to record DNS record '$hostname' in domain '$domain' - are the hostname and domain name correct?"
 )"
