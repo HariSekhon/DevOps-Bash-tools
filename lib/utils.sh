@@ -1182,6 +1182,8 @@ is_float(){
 
 is_bool(){
     local arg="$1"
+    # intentionally not making this case insensitive in case APIs are touchy about this
+    # calling script can set case matching insensitivity if needed
     [[ "$arg" =~ ^true|false$ ]]
 }
 
