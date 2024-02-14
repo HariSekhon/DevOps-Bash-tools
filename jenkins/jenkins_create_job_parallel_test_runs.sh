@@ -55,7 +55,7 @@ elif [ "$num_jobs" -gt 100 ]; then
 fi
 
 timestamp "Checking if job '$job_name' already exists'"
-if jenkins_cli.sh list-jobs | grep -q '^test-sleep-job$'; then
+if jenkins_cli.sh list-jobs | grep -q "^$job_name$"; then
     timestamp "Job '$job_name' already exists, skipping creation"
 else
     timestamp "Job '$job_name' does not exist yet, creating..."
