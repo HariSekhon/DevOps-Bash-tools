@@ -20,6 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
+job_name='test-sleep-job'
+job_xml="$srcdir/../setup/jenkins-job-test-sleep-parameterized.xml"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Creates a freestyle parameterized test sleep job and launches N parallel runs of it to test scaling and parallelization of Jenkins on Kubernetes agents
@@ -28,7 +31,7 @@ Runs 10 jobs by default which run for 10 minutes each
 
 The job configuration where this is specified is in:
 
-    $srcdir/../setup/jenkins-test-sleep-job.xml
+    $job_xml
 
 Uses the adjacent script jenkins_cli.sh
 
@@ -50,9 +53,6 @@ if ! is_int "$num_jobs"; then
 elif [ "$num_jobs" -gt 100 ]; then
     usage "argument is greater than 100, this seems like a costly mistake. Edit the protection in this script if you really want to do this"
 fi
-
-job_name='test-sleep-job'
-job_xml="$srcdir/../setup/jenkins-job-test-sleep-parameterized.xml"
 
 timestamp "Checking if job '$job_name' already exists'"
 if jenkins_cli.sh list-jobs | grep -q '^test-sleep-job$'; then
