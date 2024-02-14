@@ -46,4 +46,6 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+export JENKINS_OVERWRITE_JOB=1
+
 "$srcdir/jenkins_create_run_job.sh" "$job_name" "$job_xml"
