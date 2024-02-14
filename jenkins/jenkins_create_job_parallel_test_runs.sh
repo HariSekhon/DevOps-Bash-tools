@@ -20,8 +20,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
-job_name='test-sleep-job'
-job_xml="$srcdir/../setup/jenkins-job-test-sleep-parameterized.xml"
+job_name='test-sleep-parallel'
+job_xml="$srcdir/../setup/jenkins-job-sleep-parallel-parameterized.xml"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
