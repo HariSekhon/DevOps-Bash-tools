@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Gets or Sets the Jenkins job/pipeline config via the Jenkins API
 
-Tested on Jenkins 2.319
+Tested on Jenkins 2.319 and 2.426
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
 
