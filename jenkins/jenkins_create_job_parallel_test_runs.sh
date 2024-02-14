@@ -54,6 +54,10 @@ elif [ "$num_jobs" -gt 100 ]; then
     usage "argument is greater than 100, this seems like a costly mistake. Edit the protection in this script if you really want to do this"
 fi
 
+if ! [ -f "$job_xml" ]; then
+    die "Job config file not found: $job_xml"
+fi
+
 timestamp "Checking if job '$job_name' already exists'"
 if jenkins_cli.sh list-jobs | grep -q "^$job_name$"; then
     timestamp "Job '$job_name' already exists, skipping creation"
