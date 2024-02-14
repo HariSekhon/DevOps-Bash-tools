@@ -52,7 +52,7 @@ elif [ "$num_jobs" -gt 100 ]; then
 fi
 
 job_name='test-sleep-job'
-job_xml="$srcdir/../setup/jenkins-test-sleep-job.xml"
+job_xml="$srcdir/../setup/jenkins-job-test-sleep-parameterized.xml"
 
 timestamp "Checking if job '$job_name' already exists'"
 if jenkins_cli.sh list-jobs | grep -q '^test-sleep-job$'; then
