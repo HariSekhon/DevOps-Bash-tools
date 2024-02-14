@@ -885,6 +885,7 @@ etc.
   - `jenkins_cli.sh` - shortens `jenkins-cli.jar` command by auto-inferring basic configuations, auto-downloading the CLI if absent, inferrings a bunch of Jenkins related variables like `$JENKINS_URL`, `$JENKINS_CLI_ARGS` and authentication using `$JENKINS_USER`/`$JENKINS_PASSWORD`, or finds admin password from inside local docker container. Used heavily by `jenkins.sh` one-shot setup and the following scripts:
     - `jenkins_foreach_job_cli.sh` - runs a templated command for each Jenkins job
     - `jenkins_create_job_parallel_test_runs.sh` - creates a freestyle parameterized test sleep job and launches N parallel runs of it to test scaling and parallelization of [Jenkins on Kubernetes](https://github.com/HariSekhon/Kubernetes-configs#jenkins-on-kubernetes) agents
+    - `jenkins_create_job_check_gcp_serviceaccount.sh` - creates a freestyle test job which runs a GCP Metadata query to determine the GCP serviceaccount the agent pod is operating under to check GKE Workload Identity integration
     - `jenkins_jobs_download_configs_cli.sh` - downloads all Jenkins job configs to xml files of the same name
     - `jenkins_cred_cli_add_cert.sh` - creates a Jenkins certificate credential from a PKCS#12 keystore
     - `jenkins_cred_cli_add_kubernetes_sa.sh` - creates a Jenkins Kubernetes service account credential
