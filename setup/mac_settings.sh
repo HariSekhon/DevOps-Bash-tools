@@ -72,6 +72,8 @@ osascript -e 'tell app "System Events" to tell appearance preferences to set dar
 # "Apple Global Domain" === NSGlobalDomain
 defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
+# don't switch spaces when going fullscreen - it just wastes time on the transition and annoying alt-tab behaviour
+defaults write NSGlobalDomain AppleSpacesSwitchOnActivate 0
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool true
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
