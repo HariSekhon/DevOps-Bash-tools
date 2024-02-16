@@ -60,7 +60,7 @@ if [ -n "$existing_mr" ]; then
     id="${id#!}"
     url="$(glab mr view "$id" | grep '^url:[[:space:]]' | sed 's/^url:[[:space:]]*//')"
 else
-    output="$(glab mr create --title "$title" ${description:+--description "$description"} "${description:---fill}" --yes --target-branch "$base_branch" --remove-source-branch)"
+    output="$(glab mr create --title "$title" ${description:+--description "$description"} "${description:---fill}" --yes --source-branch "$current_branch" --target-branch "$base_branch" --remove-source-branch)"
     echo "$output"
     echo
     if [ -z "$output" ]; then
