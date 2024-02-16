@@ -29,7 +29,7 @@ Output:
 <project_id>    <project_name>
 
 
-Stoage API:
+Storage API:
 
     https://cloud.google.com/storage/docs/json_api/v1/buckets/get
 
