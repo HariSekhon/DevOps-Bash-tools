@@ -43,6 +43,7 @@ filepath="$2"
 filepath="${2##/}"
 # must urlencode /paths/to/file
 filepath="$("$srcdir/../bin/urlencode.sh" <<< "$filepath")"
+# alternatives
 # from DevOps-Python-tools repo if in $PATH
 #filepath="$(urlencode.py <<< "$filepath")"
 # from DevOps-Perl-tools repo if in $PATH
