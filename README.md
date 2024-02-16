@@ -532,6 +532,7 @@ etc.
       - `gcp_iam_workload_identities.sh` - lists GKE Workload Identity integrations, uses `gcp_iam_serviceaccount_members.sh`
       - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
   - `gcs_bucket_project.sh` - finds the GCP project that a given bucket belongs to using the GCP Storage API
+  - `gcs_curl_file.sh` - retrieves a GCS file's contents from a given bucket and path using the GCP Storage API. Useful for starting shell pipelines or being called from other scripts
 
 #### Kubernetes
 
