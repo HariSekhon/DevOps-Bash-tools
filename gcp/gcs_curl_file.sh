@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Retrieves a GCS file's contents from a given bucket and path using GCP authentication to the Storage JSON API
 
-Useful for straight pipeline in shell pipelines or being called from other scripts such as terraform_backend_version.sh
+Useful for starting shell pipelines or being called from other scripts such as terraform_backend_version.sh
 
 Requires GCloud SDK and jq being installed as well as GCloud SDK being already authenticated with an account with permission to the bucket
 "
