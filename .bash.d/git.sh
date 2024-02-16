@@ -763,7 +763,16 @@ pushup(){
         "$bash_tools/github/github_push_pr.sh"
     fi
 }
-alias pushupmerge='GITHUB_MERGE_PULL_REQUEST=true $bash_tools/github/github_push_pr.sh'
+unalias pushupmerge 2>/dev/null || :
+pushupmerge(){
+    if git remote -v | grep -qi '^origin[[:space:]].*gitlab\.'; then
+        GITLAB_MERGE_PULL_REQUEST=true \
+        "$bash_tools/gitlab/gitlab_push_mr.sh"
+    else
+        GITHUB_MERGE_PULL_REQUEST=true \
+        "$bash_tools/github/github_push_pr.sh"
+    fi
+}
 alias pushupm=pushupmerge
 
 pushr(){
