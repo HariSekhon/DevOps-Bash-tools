@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Determines the Terraform state version from the local backend.tf file in the current terraform directory
 
-Parse the \$PWD/backend.tf file for the bucket and file path to the state file
+Parses a given backend.tf or \$PWD/backend.tf file for the bucket and file path to the state file in GCS
 
 Then curls that GCS file's contents nad parses it to get the state version
 
