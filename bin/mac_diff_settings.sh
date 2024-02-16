@@ -63,4 +63,5 @@ echo >&2
 echo "Diff:" >&2
 echo >&2
 
-diff -w "$before_snapshot_txt" "$after_snapshot_txt"
+diff -w "$before_snapshot_txt" "$after_snapshot_txt" &&
+echo "No changes"
