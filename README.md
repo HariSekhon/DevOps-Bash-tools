@@ -718,7 +718,7 @@ etc.
   - `github_pull_request_create.sh` - creates a Pull Request idempotently by first checking for an existing PR between the branches, and also checking if there are the necessary commits between the branches, to avoid common errors from blindly raising PRs. Useful to automate code promotion across environment branches. Also works across repo forks and is used by `github_repo_fork_update.sh`. Even populates github pull request template and does Jira ticket number replacement from branch prefix
   - `github_pull_request_preview.sh` - opens a GitHub Pull Request preview page from the current local branch to the given or default branch
   - `github_push_pr_preview.sh` - pushes to GitHub origin, sets upstream branch, then open a Pull Request preview from current branch to the given or default trunk branch in your browser
-  - `github_push_pr.sh` - pushes to Gitub origin, sets upstream branch, then idemopotently creates a Pull Request from current branch to the given or default trunk branch and opens the generated PR in your browser for review
+  - `github_push_pr.sh` - pushes to GitHub origin, sets upstream branch, then idemopotently creates a Pull Request from current branch to the given or default trunk branch and opens the generated PR in your browser for review
   - `github_merge_branch.sh` - merges one branch into another branch via a Pull Request for full audit tracking all changes. Useful to automate feature PRs, code promotion across environment branches, or backport hotfixes from Production or Staging to trunk branches such as master, main, dev or develop
   - `github_actions_foreach_workflow.sh` - executes a templated command for each workflow in a given GitHub repo, replacing `{name}`, `{id}` and `{state}` in each iteration
   - `github_actions_aws_create_load_credential.sh` - creates an AWS user with group/policy, generates and downloads access keys, and uploads them to the given repo
@@ -779,7 +779,8 @@ etc.
 - `gitlab/*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_install_binary.sh` - installs a binary from GitLab releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
-  - `gitlab_push_pr_preview.sh` - pushes to GitLab origin, sets upstream branch, then open a Pull Request preview from current to default branch
+  - `gitlab_push_mr_preview.sh` - pushes to GitLab origin, sets upstream branch, then open a Merge Request preview from current to default branch
+  - `github_push_mr.sh` - pushes to GitLab origin, sets upstream branch, then idemopotently creates a Merge Request from current branch to the given or default trunk branch and opens the generated MR in your browser for review
   - `gitlab_foreach_repo.sh` - executes a templated command for each GitLab project/repo, replacing the `{user}` and `{project}` in each iteration
   - `gitlab_project_latest_release.sh` - returns the latest release tag for a given GitLab project (repo) via the GitLab API
   - `gitlab_project_set_description.sh` - sets the description for one or more projects using the GitLab API
