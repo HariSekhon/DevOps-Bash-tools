@@ -28,11 +28,6 @@ Output:
 
 <project_id>    <project_name>
 
-
-Storage API:
-
-    https://cloud.google.com/storage/docs/json_api/v1/buckets/get
-
 Requires GCloud SDK and jq to be installed as well as GCloud SDK being already authenticated with an account with permission to storage.buckets.get and resourcemanager.projects.get in the project where the bucket lives (use a GCP owner account which has access to all your projects)
 "
 
@@ -51,6 +46,7 @@ access_token="$(gcloud auth print-access-token || die "Failed to get GCP access 
 export CURL_OPTS='-sS'
 export TOKEN="$access_token"
 
+# https://cloud.google.com/storage/docs/json_api/v1/buckets/get
 project_number="$(
     "$srcdir/../bin/curl_auth.sh" $CURL_OPTS "https://storage.googleapis.com/storage/v1/b/$bucket" |
     jq -r '.projectNumber'
