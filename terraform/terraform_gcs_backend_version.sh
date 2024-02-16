@@ -46,6 +46,7 @@ if ! [ -f "$backend_tf_file" ]; then
 fi
 
 log "Parsing $backend_tf_file for bucket and prefix"
+# TODO: check if backend "gcs" vs other clouds and extend this to AWS and Azure backends
 bucket="$(grep -m1 '^[[:space:]]*bucket[[:space:]]*=.*' "$backend_tf_file" | sed 's/.*=//; s/[[:space:]]//g; s/"//g' || die "Failed to parse bucket from $backend_tf_file")"
 prefix="$(grep -m1 '^[[:space:]]*prefix[[:space:]]*=.*' "$backend_tf_file" | sed 's/.*=//; s/[[:space:]]//g; s/"//g' || :)" # || die "Failed to parse bucket from $backend_tf_file")"
 
