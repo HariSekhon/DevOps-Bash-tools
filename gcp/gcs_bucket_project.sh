@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Uses the GCP Storage JSON API to find which GCP Project a given bucket belongs to
+Queries the GCP Storage JSON API to find which GCP Project a given GCS bucket belongs to
 
 Output:
 
@@ -33,8 +33,7 @@ Stoage API:
 
     https://cloud.google.com/storage/docs/json_api/v1/buckets/get
 
-Requires GCloud SDK CLI and being authenticated with permission to storage.buckets.get
-and resourcemanager.projects.get in the project where the bucket lives
+Requires GCloud SDK and jq to be installed as well as GCloud SDK being already authenticated with an account with permission to storage.buckets.get and resourcemanager.projects.get in the project where the bucket lives (use a GCP owner account which has access to all your projects)
 "
 
 # used by usage() in lib/utils.sh
