@@ -755,7 +755,7 @@ pushu(){
         "$bash_tools/github/github_push_pr_preview.sh"
     fi
 }
-unalias pushup
+unalias pushup 2>/dev/null || :
 pushup(){
     if git remote -v | grep -qi '^origin[[:space:]].*gitlab\.'; then
         "$bash_tools/github/github_push_mr.sh"
