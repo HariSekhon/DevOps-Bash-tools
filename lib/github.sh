@@ -47,7 +47,7 @@ get_github_repo(){
 is_github_origin(){
     git remote -v |
     # permitting generic domain regex for those self-hosting their own github enterprise servers
-    grep -q "^origin.*github\.${domain_regex}[/:]"
+    grep -Eq "^origin[[:space:]].+github\.${domain_regex}[/:]"
 }
 
 check_github_origin(){
