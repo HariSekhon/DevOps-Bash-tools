@@ -22,11 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Determines the Terraform state version from the local backend.tf file in the current terraform directory
+Determines the Terraform state version from the tfstate file in GCS from a given backend.tf file
 
-Parses a given backend.tf or \$PWD/backend.tf file for the bucket and file path to the state file in GCS
+Parses backend.tf for the bucket and file path to the tfstate file in GCS
 
-Then curls that GCS file's contents nad parses it to get the state version
+Then curls that GCS file's contents and parses it to get the state version
 
 This is important so that you know what terraform version to set without accidentally updating the client's terraform state, which can potentially break existing clients and CI/CD which will no longer be able to run using the older client version
 "
