@@ -70,6 +70,7 @@ osascript -e 'tell app "System Events" to tell appearance preferences to set dar
 # before dropping in to the new config to explore the full settings paths
 
 # "Apple Global Domain" === NSGlobalDomain
+defaults write NSGlobalDomain AppleActionOnDoubleClick Maximize
 defaults write NSGlobalDomain AppleInterfaceStyle -string Dark
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool true
 defaults write NSGlobalDomain AppleSpacesSwitchOnActivate 1
@@ -287,6 +288,8 @@ defaults write com.apple.dock no-bouncing -bool true
 
 # don't minimize to applications, it's more obvious when they're on the far right
 defaults write com.apple.dock minimize-to-application -bool false
+
+defaults write com.apple.dock mineffect scale  # faster than 'genie'
 
 # don't leave closed apps in the dock
 defaults write com.apple.dock show-recents -bool no
