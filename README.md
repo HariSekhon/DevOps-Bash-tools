@@ -294,6 +294,7 @@ etc.
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
+- `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
