@@ -43,6 +43,8 @@ filepath="$2"
 filepath="${2##/}"
 # must urlencode /paths/to/file
 filepath="$("$srcdir/../bin/urlencode.sh" <<< "$filepath")"
+# from DevOps-Python-tools repo if in $PATH
+#filepath="$(urlencode.py <<< "$filepath")"
 
 access_token="$(gcloud auth print-access-token || die "Failed to get GCP access token - you must be authenticated first")"
 
