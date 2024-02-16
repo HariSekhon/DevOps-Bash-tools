@@ -531,6 +531,7 @@ etc.
       - `gcp_iam_serviceaccounts_without_permissions.sh` - finds service accounts without IAM permissionns, useful to detect obsolete service accounts after a 90 day unused permissions clean out
       - `gcp_iam_workload_identities.sh` - lists GKE Workload Identity integrations, uses `gcp_iam_serviceaccount_members.sh`
       - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
+  - `gcs_bucket_project.sh` - finds the GCP project that a given bucket belongs to using the GCP Storage API
 
 #### Kubernetes
 
