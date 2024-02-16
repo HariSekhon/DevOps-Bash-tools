@@ -1004,6 +1004,7 @@ etc.
   - `terraform_cloud_varset_set_vars.sh` - adds / updates Terraform sensitive environment/terraform variable(s) in a given variable set via the API from `key=value` or shell export format, as args or via stdin (eg. piped from `aws_csv_creds.sh`)
   - `terraform_cloud_varset_delete_vars.sh` - deletes one or more Terraform variables in a given variable set
 - `terraform_*.sh` - [Terraform](https://www.terraform.io/) scripts:
+  - `terraform_gcs_backend_version.sh` - determines the Terraform state version from the tfstate file in a GCS bucket found in a local given `backend.tf`
   - `terraform_import.sh` - finds given resource type in `./*.tf` code or Terraform plan output that are not in Terraform state and imports them
   - `terraform_import_aws_iam_users.sh` - parses Terraform plan output to import new `aws_iam_user` additions into Terraform state
   - `terraform_import_aws_iam_groups.sh` - parses Terraform plan output to import new `aws_iam_group` additions into Terraform state
