@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Determines the Terraform state version from the tfstate file in GCS from a given backend.tf file
+Determines the Terraform state version from the tfstate file in a GCS bucket found in a local given backend.tf
 
 Parses backend.tf for the bucket and file path to the tfstate file in GCS
 
