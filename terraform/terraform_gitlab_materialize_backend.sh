@@ -26,16 +26,19 @@ TF_BACKEND
 TFENV
 "
 
+backend_scopes="
+dev
+development
+"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Fetches the GitLab CI/CD environment variable containing the backend.tf configuration to the local backend.tf so you can do terraform plans locally
+Downloads backend.tf contents from a GitLab CI/CD environment variable to be able to quickly iterate plans locally
 
-For companies that don't store their backend.tf in Git but instead materialized it inside the CI/CD system from an environment variable
-
-This allows to get quickly set up with the right backend.tf locally to do quicker iterations
+For companies that don't store their backend.tf in Git but instead materialize it inside the CI/CD system from an environment variable
 
 If variable is not specified defaults to searching for these variables in this order: $(tr '\n' ' ' <<< "$backend_variables")
-If environment is not specified defaults to searching for 'dev' or 'development'
+If environment scope is not specified defaults to searching for it in this order: $(tr '\n' ' ' <<< "$backend_scopes")
 
 Requires GitLab CLI to be installed and authenticated to list and fetch the backend environment variable, and should be executed from within the current terraform project folder so it defaults to the right GitLab project repo
 "
@@ -51,7 +54,7 @@ max_args 2 "$@"
 backend_tf_file="$PWD/backend.tf"
 
 variable="${1:-}"
-environment="${2:-}"
+scope="${2:-}"
 
 timestamp "Getting GitLab CI/CD variables"
 variables="$(glab variable list 2>&1)"
@@ -68,18 +71,22 @@ if [ -z "$variable" ]; then
     die "Failed to find variable with terraform backend in GitLab CI/CD, please specify variable manually"
 fi
 
-if [ -z "$environment" ]; then
-    if grep -q '[[:space:]]dev$' <<< "$variables"; then
-        environment='dev'
-    elif grep -q '[[:space:]]development$' <<< "$variables"; then
-        environment='development'
-    fi
+if [ -z "$scope" ]; then
+    for possible_scope in $backend_scopes; do
+        if grep -q "${variable}[[:space:]].*[[:space:]]${possible_scope}$" <<< "$variables"; then
+            scope="$possible_scope"
+            break
+        fi
+    done
+fi
+if [ -z "$scope" ]; then
+    die "GitLab variable '$variable' does not exist in any of the following scopes: $(tr '\n' ' ' <<< "$backend_scopes"). Please specify the scope manually as an argument"
 fi
 
 # false positive
 # shellcheck disable=SC2016
-timestamp "Getting backend config from GitLab variable '$variable' ${environment+environment '$environment'}"
-backend_config="$(glab variable get "$variable" ${environment+-s "$environment"} )"
+timestamp "Getting backend config from GitLab variable '$variable' ${scope+scope '$scope'}"
+backend_config="$(glab variable get "$variable" ${scope+-s "$scope"} )"
 
 timestamp "Variable contents:"
 echo >&2
