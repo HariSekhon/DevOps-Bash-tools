@@ -44,6 +44,7 @@ export LINES
 export COLUMNS
 
 # sets directories to cyan on default bg so they stand out more in dark terminal - see 'man ls' for more details
+# works on Mac - you may need to see 'man 5 dir_colors' on Linux
 export LSCOLORS="gx"
 
 # ENV refers to the file that sh attempts to read as a startup file (done on my Mac OSX Snow Leopard)
