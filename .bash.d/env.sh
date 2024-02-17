@@ -43,6 +43,9 @@ export INPUTRC=~/.inputrc
 export LINES
 export COLUMNS
 
+# sets directories to cyan on default bg so they stand out more in dark terminal - see 'man ls' for more details
+export LSCOLORS="gx"
+
 # ENV refers to the file that sh attempts to read as a startup file (done on my Mac OSX Snow Leopard)
 # Needs the following line added to sudoers for ENV to be passed through on sudo su
 #Defaults	env_keep += "ENV"
