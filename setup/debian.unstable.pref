@@ -1,0 +1,6 @@
+# 0 < P < 100: causes a version to be installed only if there is no
+# installed version of the package
+
+Package: *
+Pin: release a=unstable
+Pin-Priority: 50
