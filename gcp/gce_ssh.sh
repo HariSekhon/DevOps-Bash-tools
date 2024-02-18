@@ -63,4 +63,6 @@ unset CLOUDSDK_COMPUTE_ZONE
     fi
 #fi
 
+# would auto-determine the zone if in the right project and region but otherwise will interactively prompt
+# - this is why we auto-populate the zone above to give a very explicit error out while showing the currently inherited project and region
 gcloud compute ssh "$vm_name" ${zone:+--zone "$zone"} "$@"
