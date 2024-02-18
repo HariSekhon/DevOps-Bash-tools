@@ -608,7 +608,7 @@ etc.
   - `kubectl_curl.sh`
   - `kubectl_dnsutils.sh`
   - `kubectl_gcloud_sdk.sh`
-  - `kubectl_sa.sh` - launch a quick pod with the given service account to test permissions
+  - `kubectl_run_sa.sh` - launch a quick pod with the given service account to test permissions
 - `helm_template.sh` - templates a Helm chart for Kustomize deployments
 - `kustomize_parse_helm_charts.sh` - parses the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files into TSV format for further shell pipe processing
 - `kustomize_install_helm_charts.sh` - installs the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files the old fashioned Helm CLI way so that tools like [Nova](https://github.com/FairwindsOps/nova) can be used to detect outdated charts (used in [Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs) repo's [CI](https://github.com/HariSekhon/Kubernetes-configs/actions/workflows/nova.yaml))
