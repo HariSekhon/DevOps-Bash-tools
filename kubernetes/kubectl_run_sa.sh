@@ -25,9 +25,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs a quick pod on Kubernetes with the given serviceaccount to debug networking / dns
+Runs a quick pod on Kubernetes with the given serviceaccount to test private repo pull & other permissions
 
-Shares the same busybox pod for successive invocations of this script for speed
+Shares the same pod for successive invocations of this script for speed
 
 Arguments become options to 'kubectl run'
 "
