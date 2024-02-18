@@ -158,8 +158,8 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 [Docker-Compose](https://docs.docker.com/compose/),
 [jq](https://stedolan.github.io/jq/)
 and many others... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
-  - `install/` - contains installation scripts for various software
-  - `setup/` - contains even more setup scripts and config, package lists, Mac OS X settings etc.
+  - `install/` - contains many installation scripts for popular open source software and direct binary downloads from GitHub releases
+  - `setup/` - contains setup scripts, package lists, extra configs, Mac OS X settings etc.
 - Utility Libraries used by many hundreds of scripts and [builds](https://harisekhon.github.io/CI-CD/) across [repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories):
   - `.bash.d/` - interactive library
   - `lib/` - scripting and CI library
