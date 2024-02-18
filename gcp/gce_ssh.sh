@@ -22,20 +22,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs 'gcloud compute ssh' to a VM while auto-determining its zone first to override any inherited zone config eg. \$CLOUDSDK_COMPUTE_ZONE or 'gcloud config' setting
-
-This makes it easier to script iterating through VMs
+Runs 'gcloud compute ssh' to a VM while auto-determining its zone first to override any inherited zone config and make it easier to script iterating through VMs
 
 Otherwise if \$CLOUDSDK_COMPUTE_ZONE environment is inherited (eg. via .envrc) pointing to a different zone it results in this error:
 
     ERROR: (gcloud.compute.ssh) Could not fetch resource:
      - The resource 'projects/<MY_PROJECT>/zones/<ZONE>/instances/<VM_NAME>' was not found
 
-It may be easier to just try this first:
+or if no zone is set you can be prompted for a zone
 
-    unset CLOUDSDK_COMPUTE_ZONE
-
-Your GCP project and region should already be in your current 'gcloud config',
+Your GCP project and region should already be set in your current 'gcloud config',
 or export CLOUDSDK_CORE_PROJECT and CLOUDSDK_CORE_REGION environment variables,
 or supply explicit --project ... and --region ... arguments
 
@@ -53,11 +49,15 @@ min_args 1 "$@"
 vm_name="$1"
 shift || :
 
-#zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
-zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
+unset CLOUDSDK_COMPUTE_ZONE
 
-if [ -z "$zone" ]; then
-    die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong project/region?"
-fi
+# If gcloud config's compute/zone is set, then actively determines the zone of the VM first and overrides it specifically
+#if gcloud config get compute/zone 2>/dev/null | grep -q .; then
+    #zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
+    zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
+    if [ -z "$zone" ]; then
+        die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong project/region?"
+    fi
+#fi
 
-gcloud compute ssh "$vm_name" --zone "$zone" "$@"
+gcloud compute ssh "$vm_name" ${zone:+--zone "$zone"} "$@"
