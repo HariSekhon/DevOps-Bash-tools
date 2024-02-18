@@ -61,7 +61,9 @@ unset CLOUDSDK_COMPUTE_ZONE
     #zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
     zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
     if [ -z "$zone" ]; then
-        die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong project ('$(gcloud config get core/project 2>/dev/null)') / region ('$(gcloud config get compute/region 2>/dev/null)') ??"
+        die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect?
+or wrong project ('$(gcloud config get core/project 2>/dev/null)')?
+or wrong region ('$(gcloud config get compute/region 2>/dev/null)')?"
     fi
 #fi
 
