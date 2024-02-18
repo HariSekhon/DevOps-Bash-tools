@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs 'gcloud compute ssh' to a VM while auto-determining it's zone to make it easier to script iterating through VMs
+Runs 'gcloud compute ssh' to a VM while auto-determining its zone to make it easier to script iterating through VMs
 
 You should either set your GCP project and region should already be in your current 'gcloud config',
 or export CLOUDSDK_CORE_PROJECT and CLOUDSDK_CORE_REGION environment variables,
