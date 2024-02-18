@@ -48,4 +48,4 @@ if [ -z "$zone" ]; then
     die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong region or "
 fi
 
-gcloud compute ssh "$vm_name" --zone "$zone"
+gcloud compute ssh "$vm_name" --zone "$zone" "$@"
