@@ -29,11 +29,11 @@ Otherwise if \$CLOUDSDK_COMPUTE_ZONE environment is inherited (eg. via .envrc) p
     ERROR: (gcloud.compute.ssh) Could not fetch resource:
      - The resource 'projects/<MY_PROJECT>/zones/<ZONE>/instances/<VM_NAME>' was not found
 
-or if no zone is set you can be prompted for a zone
+or if in the wrong project or region you can be interactively prompted for a zone
 
 Your GCP project and region should already be set in your current 'gcloud config',
 or export CLOUDSDK_CORE_PROJECT and CLOUDSDK_CORE_REGION environment variables,
-or supply explicit --project ... and --region ... arguments
+or supply explicit --project ... and --region ... arguments to this script
 
 If the VM zone isn't found it resolves the project and region to remind you that you're probably in the wrong project / region
 while displaying them to make it more obvious that you've inherited the wrong config, to save you some debugging time
