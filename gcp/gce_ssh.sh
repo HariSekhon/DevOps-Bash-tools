@@ -35,7 +35,9 @@ Your GCP project and region should already be set in your current 'gcloud config
 or export CLOUDSDK_CORE_PROJECT and CLOUDSDK_CORE_REGION environment variables,
 or supply explicit --project ... and --region ... arguments
 
-If the VM zone isn't found it resolves the project and region to remind you that you're probably in the wrong project / region while displaying them to make it more obvious that you've inherited the wrong config and save you some debugging time and stopping you from getting stuck on the interactive zone prompt
+If the VM zone isn't found it resolves the project and region to remind you that you're probably in the wrong project / region
+while displaying them to make it more obvious that you've inherited the wrong config, to save you some debugging time
+and stopping you from getting stuck on the interactive zone prompt
 
 Requires GCloud SDK to be installed, configured and authenticated
 "
