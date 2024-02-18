@@ -484,6 +484,7 @@ etc.
     - `gcp_ci_build.sh` - script template for CI/CD to trigger Google Cloud Build to build docker container image with extra datetime and latest tagging
     - `gcp_ci_deploy_k8s.sh` - script template for CI/CD to deploy GCR docker image to GKE Kubernetes using Kustomize
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
+    - `gce_ssh.sh` - Runs `gcloud compute ssh` to a VM while auto-determining its zone to make it easier to script iterating through VMs
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
     - `gce_is_preempted.sh` - GCE VM return true/false if preempted, callable from other scripts
