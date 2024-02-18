@@ -46,7 +46,7 @@ shift || :
 zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
 
 if [ -z "$zone" ]; then
-    die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong region or "
+    die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong region or project?"
 fi
 
 gcloud compute ssh "$vm_name" --zone "$zone" "$@"
