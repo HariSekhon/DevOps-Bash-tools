@@ -45,6 +45,8 @@ image="${2:-busybox}"
 shift || :
 shift || :
 
-name="${image##*/}-${USER:-$(whoami)}"
+name="${image##*/}"
+name="${name%%:*}"
+name+="-${USER:-$(whoami)}"
 
 run_static_pod "$name" "$image" --overrides="{ \"spec\": { \"serviceAccount\": \"$service_account\" }  }" "$@"
