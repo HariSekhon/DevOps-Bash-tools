@@ -22,11 +22,22 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs 'gcloud compute ssh' to a VM while auto-determining its zone to make it easier to script iterating through VMs
+Runs 'gcloud compute ssh' to a VM while auto-determining its zone first to override any inherited zone config eg. \$CLOUDSDK_COMPUTE_ZONE or 'gcloud config' setting
 
-You should either set your GCP project and region should already be in your current 'gcloud config',
+This makes it easier to script iterating through VMs
+
+Otherwise if \$CLOUDSDK_COMPUTE_ZONE environment is inherited (eg. via .envrc) pointing to a different zone it results in this error:
+
+    ERROR: (gcloud.compute.ssh) Could not fetch resource:
+     - The resource 'projects/<MY_PROJECT>/zones/<ZONE>/instances/<VM_NAME>' was not found
+
+It may be easier to just try this first:
+
+    unset CLOUDSDK_COMPUTE_ZONE
+
+Your GCP project and region should already be in your current 'gcloud config',
 or export CLOUDSDK_CORE_PROJECT and CLOUDSDK_CORE_REGION environment variables,
-or supply --project ... and --region ... arguments
+or supply explicit --project ... and --region ... arguments
 
 Requires GCloud SDK to be installed, configured and authenticated
 "
