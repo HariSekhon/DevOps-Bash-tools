@@ -1,0 +1,7 @@
+# 500 <= P < 990: causes a version to be installed unless there is a
+# version available belonging to the target release or the installed
+# version is more recent
+
+Package: *
+Pin: release a=stable
+Pin-Priority: 900
