@@ -42,7 +42,8 @@ min_args 1 "$@"
 vm_name="$1"
 shift || :
 
-zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
+#zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
+zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
 
 if [ -z "$zone" ]; then
     die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong region or "
