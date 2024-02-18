@@ -58,6 +58,7 @@ unset CLOUDSDK_COMPUTE_ZONE
 # If gcloud config's compute/zone is set, then actively determines the zone of the VM first and overrides it specifically
 # Better to let it try to figure it out and exit with an explicit error reminding what project and region you are in
 #if gcloud config get compute/zone 2>/dev/null | grep -q .; then
+    timestamp "Determining zone for VM '$vm_name'"
     #zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
     zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
     if [ -z "$zone" ]; then
@@ -69,4 +70,5 @@ or wrong region ('$(gcloud config get compute/region 2>/dev/null)')?"
 
 # would auto-determine the zone if in the right project and region but otherwise will interactively prompt
 # - this is why we auto-populate the zone above to give a very explicit error out while showing the currently inherited project and region
+timestamp "gcloud compute ssh '$vm_name' ${zone:+--zone "'$zone'"} $*"
 gcloud compute ssh "$vm_name" ${zone:+--zone "$zone"} "$@"
