@@ -35,6 +35,8 @@ Your GCP project and region should already be set in your current 'gcloud config
 or export CLOUDSDK_CORE_PROJECT and CLOUDSDK_CORE_REGION environment variables,
 or supply explicit --project ... and --region ... arguments
 
+If the VM zone isn't found it resolves the project and region to remind you that you're probably in the wrong project / region while displaying them to make it more obvious that you've inherited the wrong config and save you some debugging time and stopping you from getting stuck on the interactive zone prompt
+
 Requires GCloud SDK to be installed, configured and authenticated
 "
 
@@ -52,11 +54,12 @@ shift || :
 unset CLOUDSDK_COMPUTE_ZONE
 
 # If gcloud config's compute/zone is set, then actively determines the zone of the VM first and overrides it specifically
+# Better to let it try to figure it out and exit with an explicit error reminding what project and region you are in
 #if gcloud config get compute/zone 2>/dev/null | grep -q .; then
     #zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
     zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
     if [ -z "$zone" ]; then
-        die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong project/region?"
+        die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect or wrong project ('$(gcloud config get core/project 2>/dev/null)') / region ('$(gcloud config get compute/region 2>/dev/null)') ??"
     fi
 #fi
 
