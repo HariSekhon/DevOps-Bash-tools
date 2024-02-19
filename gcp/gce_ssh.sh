@@ -39,6 +39,11 @@ If the VM zone isn't found it resolves the project and region to remind you that
 while displaying them to make it more obvious that you've inherited the wrong config, to save you some debugging time
 and stopping you from getting stuck on the interactive zone prompt
 
+Example iteration if you don't have direct access or SSH keys to a client's VMs,
+you can use this to SSH for loop like so using the standard gcloud compute ssh argument of '--command':
+
+    for x in {1..10}; do gce_ssh.sh vm-\$x --command 'systemctl restart MYAPP.service'; echo; done
+
 Requires GCloud SDK to be installed, configured and authenticated
 "
 
