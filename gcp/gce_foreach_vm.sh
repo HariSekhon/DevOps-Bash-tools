@@ -69,7 +69,7 @@ gcloud compute instances list --format='value(name,networkInterfaces[0].networkI
 grep -E "$filter" |
 while read -r name ip zone; do
     echo "# ========================================================================================================= #" >&2
-    echo "# GCP Project $project_id -- Region: $region -- Zone: $zone -- VM Name = $name -- IP = $ip" >&2
+    echo "# GCP VM = $name - IP = $ip, Project $project_id - Zone: $zone" >&2
     echo "# ========================================================================================================= #" >&2
     cmd=("$@")
     cmd=("${cmd[@]//\{vm_name\}/$name}")
