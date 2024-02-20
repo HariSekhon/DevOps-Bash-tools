@@ -60,6 +60,10 @@ export ENV=~/.bashrc
 # Run this to see available locales:
 #
 #   locale -a
+#
+# See details of a specific locale variable eg. time formats:
+#
+#   LC_ALL=C locale -ck LC_TIME
 
 # aterm doesn't support UTF-8 and you get horrible chars here and there
 # so don't use utf and aterm together. xterm works ok with utf8 though
