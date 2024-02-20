@@ -55,12 +55,17 @@ export ENV=~/.bashrc
 # aterm doesn't support UTF-8 and you get horrible chars here and there
 # so don't use utf and aterm together. xterm works ok with utf8 though
 #export LANG=en_GB
-#export LC_ALL=en_GB
+#
+# LANG becomes default value for any LC_xxx variables not set
 #export LANG=C
+#
+# overrides all other LC_xxx variables
 #export LC_ALL=C
-export LANGUAGE=en_US.UTF-8
+#
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+#export LC_ALL=en_GB
 # didn't seem to work
 #export LANG="en_GB.UTF-8"
 #export LC_ALL="en_GB.UTF-8"
