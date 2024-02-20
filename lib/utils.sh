@@ -1220,6 +1220,8 @@ is_blank(){
     arg="${arg##[[:space:]]}"
     arg="${arg%%[[:space:]]}"
     [ -z "$arg" ]
+    # or
+    #[[ "$arg" =~ ^[[:blank:]]*$ ]]
 }
 
 not_blank(){
