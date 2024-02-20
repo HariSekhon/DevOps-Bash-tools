@@ -528,6 +528,9 @@ pass(){
 read_secret(){
     secret=""
     prompt="Enter ${1:-secret value}: "
+    # doesn't echo any characters to the screen even in commands
+    #stty -echo
+    # this gives stars feedback which is nicer
     while IFS= read -p "$prompt" -r -s -n 1 char; do
         if [[ "$char" == $'\0' ]]; then
             break
@@ -535,6 +538,7 @@ read_secret(){
         prompt='*'
         secret="${secret}${char}"
     done
+    #stty echo
     echo
     export secret
 }
