@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: echo project id is {project_id}, VM name is '{name}', VM IP is '{ip}'
+#  args: echo project id is {project_id}, VM name is '{name}', VM IP is '{ip}' in region '$region' zone '$zone'
 #
 #  Author: Hari Sekhon
 #  Date: 2024-02-20 15:14:12 +0000 (Tue, 20 Feb 2024)
@@ -39,12 +39,14 @@ All remaining arguments become the command template
 
 The following command template tokens are replaced in each iteration:
 
-VM Name:      {name}  {vm_name}
-VM IP:        {ip}    {vm_ip}
-Project ID:   {project_id}
+VM Name:      {vm_name}     {name}
+VM IP:        {vm_ip}       {ip}
+Project ID:   {project_id}  {project}
+Region:       {region}
+Zone:         {zone}
 
 eg.
-    ${0##*/} '.*' 'echo VM name {name} has ip {ip}'
+    ${0##*/} '.*' 'echo VM name {name} has ip {ip} in project {project_id} region {region} zone {zone}'
 
 "
 
@@ -61,19 +63,23 @@ shift || :
 
 # for informational purposes in the header only
 project_id="$(gcloud config list --format='get(core.project)')"
+region="$(gcloud config list --format='get(compute.region)')"
 
-gcloud compute instances list --format='value(name,networkInterfaces[0].networkIP)' |
+gcloud compute instances list --format='value(name,networkInterfaces[0].networkIP,zone)' |
 grep -E "$filter" |
-while read -r name ip; do
-    echo "# ============================================================================ #" >&2
-    echo "# GCP Project $project_id -- VM Name = $name -- IP = $ip" >&2
-    echo "# ============================================================================ #" >&2
+while read -r name ip zone; do
+    echo "# ========================================================================================================= #" >&2
+    echo "# GCP Project $project_id -- Region: $region -- Zone: $zone -- VM Name = $name -- IP = $ip" >&2
+    echo "# ========================================================================================================= #" >&2
     cmd=("$@")
-    cmd=("${cmd[@]//\{project_id\}/$project_id}")
     cmd=("${cmd[@]//\{vm_name\}/$name}")
     cmd=("${cmd[@]//\{name\}/$name}")
     cmd=("${cmd[@]//\{vm_ip\}/$ip}")
     cmd=("${cmd[@]//\{ip\}/$ip}")
+    cmd=("${cmd[@]//\{project_id\}/$project_id}")
+    cmd=("${cmd[@]//\{project\}/$project_id}")
+    cmd=("${cmd[@]//\{region\}/$region}")
+    cmd=("${cmd[@]//\{zone\}/$zone}")
     # need eval'ing to able to inline quoted script
     # shellcheck disable=SC2294
     eval "${cmd[@]}"
