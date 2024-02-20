@@ -52,6 +52,15 @@ export LSCOLORS="gx"
 #Defaults	env_keep += "ENV"
 export ENV=~/.bashrc
 
+
+# ============================================================================ #
+#             L o c a l e   I n t e r n a t i o n a l i z a t i o n
+# ============================================================================ #
+
+# Run this to see available locales:
+#
+#   locale -a
+
 # aterm doesn't support UTF-8 and you get horrible chars here and there
 # so don't use utf and aterm together. xterm works ok with utf8 though
 #export LANG=en_GB
@@ -69,6 +78,8 @@ export LANGUAGE=en_US.UTF-8
 # didn't seem to work
 #export LANG="en_GB.UTF-8"
 #export LC_ALL="en_GB.UTF-8"
+
+# ============================================================================ #
 
 # Clever dynamic environment variables, set using var() function sourced between shells
 export varfile=~/.bash_vars
