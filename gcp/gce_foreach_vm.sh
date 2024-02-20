@@ -48,6 +48,11 @@ Zone:         {zone}
 eg.
     ${0##*/} '.*' 'echo VM name {name} has ip {ip} in project {project_id} region {region} zone {zone}'
 
+
+Get all the SSH Keys of the VMs into your known_hosts so SSH doesn't prompt the first time and you don't have to ssh -o StrictHostKeyChecking=no
+
+    ${0##*/} '.*' 'ssh-keyscan {ip} >> ~/.ssh/known_hosts'
+
 "
 
 # used by usage() in lib/utils.sh
