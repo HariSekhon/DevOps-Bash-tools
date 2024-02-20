@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run a command for each GCP VM instance in the current GCP project
+Run a command for each GCP VM instance matching the given name/ip regex in the current GCP project
 
 This is powerful so use carefully!
 
