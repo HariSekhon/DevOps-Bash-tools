@@ -76,7 +76,7 @@ fi
 #if gcloud config get compute/zone 2>/dev/null | grep -q .; then
     timestamp "Determining zone for VM '$vm_name'"
     #zone="$(gcloud compute instances list | awk "/^${vm_name}[[:space:]]/ {print \$2}")"
-    zone="$(gcloud compute instances list --filter="name: $vm_name" --format='value(zone)')"
+    zone="$(gcloud compute instances list --filter="name=$vm_name" --format='value(zone)')"
     if [ -z "$zone" ]; then
         die "Failed to determine zone for VM name '$vm_name' - perhaps VM name is incorrect?
 or wrong project ('$(gcloud config get core/project 2>/dev/null)')?
