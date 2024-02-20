@@ -53,6 +53,10 @@ Get all the SSH Keys of the VMs into your known_hosts so SSH doesn't prompt the 
 
     ${0##*/} '.*' 'ssh-keyscan {ip} >> ~/.ssh/known_hosts'
 
+If using SSH, stop it from eating each next record by putting < /dev/null at the end of the ssh command:
+
+    gce_foreach_vm.sh solr-be \"ssh hari_sekhon_domain_com@{ip} 'hostname; ifconfig | grep inet' < /dev/null\"
+
 "
 
 # used by usage() in lib/utils.sh
