@@ -44,12 +44,14 @@ you can use this to SSH for loop like so using the standard gcloud compute ssh a
 
     for x in {1..10}; do gce_ssh.sh vm-\$x --command 'sudo systemctl restart MYAPP.service'; echo; done
 
+You can also use an IP address of the VM for convenience which will get resolved to a VM name
+
 Requires GCloud SDK to be installed, configured and authenticated
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<vm_name> [<gcloud_sdk_args>]"
+usage_args="<vm_name_or_ip> [<gcloud_sdk_args>]"
 
 help_usage "$@"
 
@@ -59,6 +61,15 @@ vm_name="$1"
 shift || :
 
 unset CLOUDSDK_COMPUTE_ZONE
+
+if [[ "$vm_name" =~ ^[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+$ ]]; then
+    ip="$vm_name"
+    timestamp "Resolving IP '$ip' to VM name"
+    vm_name="$(gcloud compute instances list --filter="networkInterfaces[0].networkIP: $ip" --format='value(name)')"
+    if [ -z "$vm_name" ]; then
+        die "Failed to resolve '$ip' to VM name"
+    fi
+fi
 
 # If gcloud config's compute/zone is set, then actively determines the zone of the VM first and overrides it specifically
 # Better to let it try to figure it out and exit with an explicit error reminding what project and region you are in
