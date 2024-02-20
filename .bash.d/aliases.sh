@@ -52,6 +52,8 @@ alias be3=bashrc3
 alias se=screenrc
 alias ve=vimrc
 alias creds='$EDITOR ~/.env/creds'
+alias pbc=pbcopy
+alias pbp=pbpaste
 # keep emacs with no window, use terminal, not X, otherwise I'd run xemacs...
 #alias emacs="emacs -nw"
 #em(){ emacs "$@" ; }
