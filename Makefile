@@ -19,7 +19,7 @@ CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.txt)
 
 #CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
 #CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.bash[^/]*$$' -e '\.groovy$$' | sort)
-CODE_FILES = $(shell \
+CODE_FILES := $(shell \
 	if type git >/dev/null 2>&1; then \
 		git ls-files | \
 		grep -E -e '\.sh$$' -e '\.bash[^/]*$$' -e '\.groovy$$' | \
