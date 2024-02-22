@@ -31,18 +31,17 @@ else
 	INSIDE_DOCKER :=
 endif
 
-CODE_FILES := \
-	$(shell \
-		if type git >/dev/null 2>&1; then \
-			git ls-files | \
-			while read filepath; do \
-				test -f "$$filepath" || continue; \
-				test -d "$$filepath" & continue; \
-				test -L "$$filepath" & continue; \
-				echo "$$filepath"; \
-			done; \
-		fi \
-	)
+CODE_FILES := $(shell \
+	if type git >/dev/null 2>&1; then \
+		git ls-files | \
+		while read filepath; do \
+			test -f "$$filepath" || continue; \
+			test -d "$$filepath" & continue; \
+			test -L "$$filepath" & continue; \
+			echo "$$filepath"; \
+		done; \
+	fi \
+)
 
 CPANM := cpanm
 export PIP := pip3
