@@ -15,10 +15,12 @@ include Makefile.in
 
 REPO := HariSekhon/DevOps-Bash-tools
 
-#CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
-CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.bash[^/]*$$' -e '\.groovy$$' | sort)
-
 CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.txt)
+
+#CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
+#CODE_FILES := $(shell git ls-files | grep -E -e '\.sh$$' -e '\.bash[^/]*$$' -e '\.groovy$$' | sort)
+CODE_FILES = $(shell if type git >/dev/null 2>&1; then git ls-files | grep -E -e '\.sh$$' -e '\.bash[^/]*$$' -e '\.groovy$$' | sort | while read -r filepath; do test -f "$$filepath" || continue; test -d "$$filepath" && continue; test -L "$$filepath" && continue; echo "$$filepath"; done; else find . -type f; fi)
+
 
 BASH_PROFILE_FILES := $(shell echo .bashrc .bash_profile .bash.d/*.sh)
 
