@@ -42,5 +42,5 @@ min_args 1 "$@"
 job="$1"
 shift || :
 
+timestamp "Enabling Jenkins job '$job'"
 "$srcdir/jenkins_api.sh" "/job/$job/enable" -X POST "$@"
-timestamp "Enabled Jenkins job '$job'"
