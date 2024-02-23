@@ -23,16 +23,16 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 # shellcheck disable=SC1090,SC1091
 #type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
-# env var takes preference, then cwd, then $HOME, then /etc/ansible/ansible.cfg
+# order of precedence:
 #
-# the default order is:
-#
+#   $ANSIBLE_CONFIG
 #   $PWD/ansible.cfg
 #   $HOME/.ansible.cfg
 #   /etc/ansible/ansible.cfg
 #
 #
-# so don't set this because it'll cause issues in work repos which would otherwise default to $PWD/ansible.cfg
+# so don't set ANSIBLE_CONFIG because it'll cause issues in work repos
+# which would otherwise correctly default to $PWD/ansible.cfg
 #
 #export ANSIBLE_CONFIG=~/.ansible.cfg  # symlinked to $bash_tools/configs/.ansible.cfg
 
