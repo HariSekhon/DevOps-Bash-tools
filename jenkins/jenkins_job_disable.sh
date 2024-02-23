@@ -44,4 +44,3 @@ shift || :
 
 timestamp "Disabling Jenkins job '$job'"
 "$srcdir/jenkins_api.sh" "/job/$job/disable" -X POST "$@"
-timestamp "Disabled Jenkins job '$job'"
