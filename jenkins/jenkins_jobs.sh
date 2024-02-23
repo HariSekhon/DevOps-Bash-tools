@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Lists Jenkins Job/Pipeline Names via the Jenkins API
 
-Tested on Jenkins 2.319
+Tested on Jenkins 2.319 and 2.246
 
 Uses the adjacent jenkins_api.sh - see there for authentication details
 "
