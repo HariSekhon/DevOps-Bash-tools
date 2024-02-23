@@ -28,7 +28,7 @@ Disables all Jenkins jobs/pipelines with names matching a given regex via the Je
 
 Tested on Jenkins 2.319 and 2.246
 
-Remember to quote the job name regex filter to stop it matching your local files eg. '.*' to not match .envrc
+Remember to quote the job name regex filter to stop it matching your local files eg. '.*' to not match '. .. .envrc'
 
 Uses the adjacent jenkins_job_disable.sh jenkins_api.sh - see there for authentication details
 "
