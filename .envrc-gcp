@@ -138,3 +138,9 @@ if [ -n "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
     # shellcheck disable=SC1090,SC1091
     . "$srcdir/.envrc-kubernetes" "$GKE_CONTEXT"
 fi
+
+# pull the secret using this command whenever you need it:
+#
+#   gcp_secret_get.sh "$JENKINS_ADMIN_PASSWORD_GCP_SECRET" | copy_to_clipboard.sh
+#
+export JENKINS_ADMIN_PASSWORD_GCP_SECRET="jenkins-admin-password"
