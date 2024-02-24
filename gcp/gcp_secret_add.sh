@@ -31,6 +31,22 @@ Second argument is used as secret string value
 Remaining args are passed directly to 'gcloud secrets'
 
 
+If you get an error like this:
+
+ERROR: (gcloud.secrets.create) FAILED_PRECONDITION: Constraint constraints/gcp.resourceLocations violated for [orgpolicy:projects/123456789012] attempting to create a secret in [global]. For more information, see https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations.
+- '@type': type.googleapis.com/google.rpc.PreconditionFailure
+  violations:
+  - description: Constraint constraints/gcp.resourceLocations violated for [orgpolicy:projects/123456789012]
+      attempting to create a secret in [global]. For more information, see https://cloud.google.com/resource-manager/docs/organization-policy/defining-locations.
+    subject: orgpolicy:projects/123456789012
+    type: constraints/gcp.resourceLocations
+
+
+Then just append the following gcloud secrets args when calling this script to set a location (change --locations to your preferred):
+
+	--replication-policy user-managed --locations europe-west2
+
+
 $usage_gcloud_sdk_required
 "
 
