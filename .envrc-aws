@@ -103,3 +103,9 @@ aws_access_key_env(){
 #aws_access_key_env "STAGING"
 #aws_access_key_env "PROD"
 #aws_access_key_env "MGMT"
+
+# pull the secret using this command whenever you need it:
+#
+#   aws_secret_get.sh "$JENKINS_ADMIN_PASSWORD_AWS_SECRET" | copy_to_clipboard.sh
+#
+export JENKINS_ADMIN_PASSWORD_AWS_SECRET="jenkins-admin-password"
