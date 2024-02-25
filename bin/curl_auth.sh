@@ -27,7 +27,7 @@ for constructing the authentication string to be specific to the host as using n
 "
 
 
-# shellcheck source=lib/utils.sh
+# shellcheck source=lib/utils.sh disable=SC1091
 . "$srcdir/lib/utils.sh"
 
 # used by utils.sh usage()
