@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
-#  args: /api/version | jq .
+#  args: /api | jq .
 #
 #  Author: Hari Sekhon
 #  Date: 2024-02-20 10:22:32 +0000 (Tue, 20 Feb 2024)
