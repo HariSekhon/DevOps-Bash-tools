@@ -19,8 +19,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used by utils.sh usage()
 # shellcheck disable=SC2034
-usage_description="Runs curl with either Kerberos SpNego (if \$KRB5 is set) or
-a ram file descriptor using \$PASSWORD or \$TOKEN to avoid credentials being exposed via process list or command line logging
+usage_description="
+Runs curl with either Kerberos SpNego (if \$KRB5 is set) or a ram file descriptor using \$PASSWORD or \$TOKEN to avoid credentials being exposed via process list or command line logging
 
 Requires prefixing url with http:// or https:// to work on older versions of curl in order to parse hostname
 for constructing the authentication string to be specific to the host as using netrc default login doesn't always work
