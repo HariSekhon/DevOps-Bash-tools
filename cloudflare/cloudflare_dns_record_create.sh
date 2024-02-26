@@ -24,6 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates a DNS record in the given domain
 
+You must specify 'false' for the proxied argument or you will get a 400 error
+as those addresses cannot be proxied by Cloudflare
+
 Resolves the domain name to a zone ID first and then submits the request to create the requested record
 
 https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record
