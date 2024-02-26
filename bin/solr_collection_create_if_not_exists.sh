@@ -26,11 +26,17 @@ Creates a Solr Collection via the Solr API if it does not already exist
 
 Uses the adjacent script solr_api.sh - see it for required environment variables and authentication
 
+Assume a config of the same name already exists in ZooKeeper
+
 Set environment variables
 
 NUM_SHARDS              defaults to 3
 REPLICATION_FACTOR      defaults to 3
 NUM_SHARDS_PER_NODE     defaults to 9
+
+See Also
+
+    Solr CLI - https://github.com/HariSekhon/DevOps-Perl-tools
 "
 
 # used by usage() in lib/utils.sh
