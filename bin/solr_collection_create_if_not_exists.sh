@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a Solr Collection if it does not exist
+Creates a Solr Collection via the Solr API if it does not already exist
 
 Uses the adjacent script solr_api.sh - see it for required environment variables and authentication
 
@@ -49,8 +49,8 @@ MAX_SHARDS_PER_NODE="${MAX_SHARDS_PER_NODE:-9}"
 REPLICATION_FACTOR="${REPLICATION_FACTOR:-3}"
 
 timestamp "Checking if collection '$collection' already exists"
-if "$srcdir/solr_api.sh" "/solr/admin/collections?action=LIST" | jq -r '.collections[]' | grep -Fxq "$collection"; then
-    timestamp "Collection '$collection already exists, skipping create"
+if "$srcdir/solr_collection_check_exists.sh" "$collection"; then
+    timestamp "Skipping create"
 else
     "$srcdir/solr_api.sh" "/solr/admin/collections?action=CREATE&name=$collection&numShards=$NUM_SHARDS&maxShardsPerNode=$MAX_SHARDS_PER_NODE&replicationFactor=$REPLICATION_FACTOR&wt=xml&collection.configName=$collection&autoAddReplicas=true"
 fi
