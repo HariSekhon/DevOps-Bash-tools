@@ -25,6 +25,10 @@ usage_description="
 Checks if a given Solr collection exists via the Solr API
 
 Uses the adjacent script solr_api.sh - see it for required environment variables and authentication
+
+See Also
+
+    Solr CLI - https://github.com/HariSekhon/DevOps-Perl-tools
 "
 
 # used by usage() in lib/utils.sh
