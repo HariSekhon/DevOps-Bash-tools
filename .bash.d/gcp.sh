@@ -48,6 +48,7 @@ alias gbs="gcloud builds submit --tag"
 alias bqq="bq query"
 alias gssh="gcloud compute ssh"
 
+# open GCP Console in the current project and preferably on a relevant page if we can detect one
 gcpcon(){
     local project
     local path
