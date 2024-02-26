@@ -70,6 +70,10 @@ Examples:
 
         https://solr.apache.org/guide/solr/latest/configuration-guide/collections-api.html
 
+
+See Also
+
+    Solr CLI - https://github.com/HariSekhon/DevOps-Perl-tools
 "
 
 # used by usage() in lib/utils.sh
