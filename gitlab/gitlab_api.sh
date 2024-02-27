@@ -45,7 +45,7 @@ Can specify \$CURL_OPTS for options to pass to curl, or pass them as arguments t
 
 You must set up a personal access token here:
 
-    https://gitlab.com/profile/personal_access_tokens
+    https://gitlab.com/-/user_settings/personal_access_tokens
 
 
 API Reference:
