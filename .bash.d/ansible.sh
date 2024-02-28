@@ -30,7 +30,6 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 #   $HOME/.ansible.cfg
 #   /etc/ansible/ansible.cfg
 #
-#
 # so don't set ANSIBLE_CONFIG because it'll cause issues in work repos
 # which would otherwise correctly default to $PWD/ansible.cfg
 #
@@ -43,9 +42,10 @@ if [ -n "${ANSIBLE_HOME:-}" ]; then
     #add_PATH MANPATH "$ANSIBLE_HOME/docs/man"
 fi
 
-if [ -f ~/etc/ansible/hosts ]; then
-    export ANSIBLE_HOSTS=~/etc/ansible/hosts
-fi
+# don't set this in case it causes issues in work repos
+#if [ -f ~/etc/ansible/hosts ]; then
+#    export ANSIBLE_HOSTS=~/etc/ansible/hosts
+#fi
 
 # set in ~/.ansible.cfg now
 #export ANSIBLE_HOST_KEY_CHECKING=False
