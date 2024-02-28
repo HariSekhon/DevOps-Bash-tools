@@ -44,7 +44,8 @@ help_usage "$@"
 #max_args 1 "$@"
 
 regex="${1:-.*}"
+shift || :
 
-gcloud compute instances list --filter="name ~ $regex" --format='get(networkInterfaces[0].networkIP, name)' |
+gcloud compute instances list --filter="name ~ $regex" --format='get(networkInterfaces[0].networkIP, name)' "$@" |
 column -t |
 sort -k2
