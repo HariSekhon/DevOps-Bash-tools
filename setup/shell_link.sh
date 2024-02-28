@@ -35,6 +35,7 @@ setup_file(){
 
 setup_file .bashrc
 setup_file .bash_profile
+setup_file .bash_logout
 
 setup_file .zshrc
 setup_file .zprofile
