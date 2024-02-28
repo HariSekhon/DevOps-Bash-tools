@@ -31,6 +31,8 @@ Useful to doing direct SSH to hosts and especially for Ansible to speed up not g
 Output:
 
 <ip>    <vm_hostname>
+<ip>    <vm_hostname2>
+<ip>    <vm_hostname3>
 "
 
 # used by usage() in lib/utils.sh
