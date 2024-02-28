@@ -33,11 +33,14 @@ Output:
 <ip>    <vm_hostname>
 <ip>    <vm_hostname2>
 <ip>    <vm_hostname3>
+
+
+Used by gce_ssh_keyscan.sh which you might also want to use to pre-populate your SSH known_hosts
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<regex_filter> [<gcloud_cli_options>]"
+usage_args="[<regex_filter> <gcloud_cli_options>]"
 
 help_usage "$@"
 
