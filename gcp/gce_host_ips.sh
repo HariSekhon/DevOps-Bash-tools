@@ -39,4 +39,5 @@ help_usage "$@"
 regex="${1:-.*}"
 
 gcloud compute instances list --filter="name ~ $regex" --format='get(networkInterfaces[0].networkIP, name)' |
-column -t
+column -t |
+sort -k2
