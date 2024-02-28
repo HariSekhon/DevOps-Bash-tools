@@ -71,6 +71,7 @@ cowsay
 csshx
 #ctags
 d2  # declarative diagram language
+dialog  # create a curses interactive menu
 diff-so-fancy
 diff-pdf
 direnv
