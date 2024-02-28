@@ -486,8 +486,8 @@ etc.
     - `gcp_ci_deploy_k8s.sh` - script template for CI/CD to deploy GCR docker image to GKE Kubernetes using Kustomize
   - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
     - `gce_foreach_vm.sh` - run a command for each GCP VM instance matching the given name/ip regex in the current GCP project
-    - `gce_ssh.sh` - Runs `gcloud compute ssh` to a VM while auto-determining its zone first to override any inherited zone config and make it easier to script iterating through VMs
     - `gce_host_ips.sh` - prints the IPs and hostnames of all or a regex match of GCE VMs for use in /etc/hosts
+    - `gce_ssh.sh` - Runs `gcloud compute ssh` to a VM while auto-determining its zone first to override any inherited zone config and make it easier to script iterating through VMs
     - `gcs_ssh_keyscan.sh` - SSH keyscans all the GCE VMs returned from the above `gce_host_ips.sh` script and adds them to `~/.ssh/known_hosts`
     - `gce_meta.sh` - simple script to query the GCE metadata API from within Virtual Machines
     - `gce_when_preempted.sh` - GCE VM preemption latch script - can be executed any time to set one or more commands to execute upon preemption
