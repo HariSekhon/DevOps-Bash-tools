@@ -26,6 +26,11 @@ Outputs the hostnames and IP addresses of all or a given regex filter of Google 
 in the current project in a format that can be piped or copied into /etc/hosts
 
 Useful to doing direct SSH to hosts and especially for Ansible to speed up not going through IAP which is slow
+
+
+Output:
+
+<ip>    <vm_hostname>
 "
 
 # used by usage() in lib/utils.sh
