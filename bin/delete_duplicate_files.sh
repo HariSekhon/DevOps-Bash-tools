@@ -41,7 +41,7 @@ Tested on macOS
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<directory>"
+usage_args="[<directory>]"
 
 help_usage "$@"
 
@@ -71,6 +71,4 @@ while read -r -u 3 checksum filename; do
         fi
         log
     fi
-done 3< <(
-"$srcdir/find_duplicate_files_by_checksum.sh"
-)
+done 3< <( "$srcdir/find_duplicate_files_by_checksum.sh" )
