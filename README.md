@@ -286,6 +286,11 @@ Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make 
 etc.
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
+- `delete_duplicate_files.sh` - deletes duplicate files with (N) suffixes, commonly caused by web browser downloads,
+  in the given or current directory. Checks they're exact duplicates of a matching basename file without the (N) suffix with
+  the exact same checksum for safety. Prompts to delete per file. To auto-accept deletions, do
+  `yes | delete_duplicate_files.sh`. This is a fast way of cleaning up your `~/Downloads` directory and can be put your
+  user crontab
 - `curl_auth.sh` - shortens `curl` command by auto-loading your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
