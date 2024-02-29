@@ -24,9 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Deletes duplicate files with (N) suffixes in the given or current directory that are 100% exact duplicate matches by checksum
 
-Checks there is definitely a matching basename file without the (n) suffix with the exact same checksum for 100% safety
+Checks there is a matching basename file without the (N) suffix with the exact same checksum for safety
 
-Prompts to delete per file, to auto-accept deletions, do
+Prompts to delete per file. To auto-accept deletions, do
 
     yes | ${0##*/}
 
