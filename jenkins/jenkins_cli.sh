@@ -14,47 +14,92 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# XXX: IMPORTANT: if Jenkins is behind a reverse proxy such as Kubernetes Ingress, you will probably need to add the '-webSocket' argument, otherwise it Jenkins CLI will hang
-#
-#      Tip: set this in JENKINS_CLI_ARGS to not have to specify it all the time
-#
-# Examples:
-#
-#   # See all CLI options:
-#
-#       jenkins_cli.sh help
-#
-#   # Get Jenkins version:
-#
-#       jenkins_cli.sh version
-#
-#   # Show your authenticated user:
-#
-#       jenkins_cli.sh who-am-i
-#
-#   # List Plugins:
-#
-#       jenkins_cli.sh list-plugins
-#
-#   # List Jobs (Pipelines):
-#
-#       jenkins_cli.sh list-jobs
-#
-#   # List Credential Providers:
-#
-#       jenkins_cli.sh list-credentials-providers
-#
-#   # List Credentials in the default global in-built credential store:
-#
-#       jenkins_cli.sh list-credentials system::system::jenkins
-#
-#   # Dump all Credentials configurations in the default in-build credentials store in XML format:
-#
-#       jenkins_cli.sh list-credentials-as-xml system::system::jenkins
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Wraps the Jenkins CLI and handles using various environment variables for connection and authentication
+
+Downloads the jenkins-cli.jar from the \$JENKINS_URL on first run
+
+Configuration Environment Variables:
+
+(in order of descending precedence and matches jenkins-cli.jar)
+
+    JENKINS_URL  - https://jenkins.domain.com
+        or
+    JENKINS_HOST
+    JENKINS_PORT
+    JENKINS_SSL     (any value enables SSL)
+
+    JENKINS_USER_ID
+    JENKINS_TOKEN
+    (tries a username of admin if neither of the above two variables are set)
+
+    JENKINS_API_TOKEN
+    JENKINS_TOKEN
+    JENKINS_PASSWORD
+    (will attempt to find the password via jenkins_password.sh as a last ditch attempt if not set)
+
+    JENKINS_CLI_ARGS    (optional - any switches you want passed to the jenkins-cli.jar)
+
+IMPORTANT: if Jenkins is behind a reverse proxy such as Kubernetes Ingress, you will probably need to add the '-webSocket' argument, otherwise it Jenkins CLI will hang
+
+      Tip: set this in JENKINS_CLI_ARGS to not have to specify it every time
+
+Usage:
+
+    jenkins_cli.sh --help
+
+
+Everything else is passed directly to jenkins-cli.jar
+
+
+ Examples:
+
+   # See all Jenkins CLI options:
+
+       jenkins_cli.sh help
+
+   # Get Jenkins version:
+
+       jenkins_cli.sh version
+
+   # Show your authenticated user:
+
+       jenkins_cli.sh who-am-i
+
+   # List Plugins:
+
+       jenkins_cli.sh list-plugins
+
+   # List Jobs (Pipelines):
+
+       jenkins_cli.sh list-jobs
+
+   # List Credential Providers:
+
+       jenkins_cli.sh list-credentials-providers
+
+   # List Credentials in the default global in-built credential store:
+
+       jenkins_cli.sh list-credentials system::system::jenkins
+
+   # Dump all Credentials configurations in the default in-build credentials store in XML format:
+
+       jenkins_cli.sh list-credentials-as-xml system::system::jenkins
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
 
 # could set this to DNS CNAME 'jenkins', but often these says we run in docker
 DEFAULT_JENKINS_HOST=localhost
