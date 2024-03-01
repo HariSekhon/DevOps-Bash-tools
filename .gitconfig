@@ -58,8 +58,9 @@
     out     = log FETCH_HEAD..HEAD
     inp     = log -p HEAD..FETCH_HEAD
     outp    = log -p FETCH_HEAD..HEAD
-    ind     = diff HEAD..FETCH_HEAD
-    outd    = diff FETCH_HEAD..HEAD
+    # the results with multi-origin remotes are not reliable without a git pull first, even when only pulling from the primary GitHub origin
+    ind     = ! git pull && diff HEAD..FETCH_HEAD
+    outd    = ! git pull && git diff FETCH_HEAD..HEAD
     age     = for-each-ref --format '%(authordate:iso) %(refname:short)' --sort=-authordate refs/remotes refs/heads
 
     unstage = reset HEAD --
