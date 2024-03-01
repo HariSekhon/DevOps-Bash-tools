@@ -739,6 +739,8 @@ push(){
         # exposes your Github / GitLab / Bitbucket tokens on the screen, not secure, use printing above instead
         #git push -v "$@"
         git push "$@"
+        echo
+        st
     elif type isHg &>/dev/null && isHg .; then
         echo "> hg push $*"
         hg push "$@"
