@@ -39,7 +39,7 @@ Boots Jenkins CI in Docker, and builds the current repo
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the Jenkins Server URL and on Mac automatically opens in browser
+    ${0##*/} ui     - prints the Jenkins Server URL and automatically opens in browser
 
 Idempotent, you can re-run this and continue from any stage
 
