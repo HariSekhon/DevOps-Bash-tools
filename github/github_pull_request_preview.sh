@@ -28,7 +28,7 @@ Optionally you can specify the head and base target branch yourself as arguments
 
 Useful to call from aliases/functions to quickly open a PR. See .bash.d/git.sh where this is used via github_push_pr_preview.sh to automate this workflow with a handful of keystrokes
 
-Prints the Pull Request URL, and if on Mac or if \$BROWSER is set then opens it for you in your default browser
+Prints the Pull Request URL, and opens it for you in your default browser
 
 Assumes that GitHub is the remote origin, and checks for this for safety
 "
@@ -63,15 +63,14 @@ echo "Pull Request URL:"
 echo
 printf '\t%s\n' "$url"
 
-if is_mac; then
-    echo
-    echo "Opening Pull Request"
-    open "$url"
-elif [ -n "${BROWSER:-}" ]; then
-    echo
-    echo "Opening Pull Request using \$BROWSER"
-    "$BROWSER" "$url"
-else
-    echo
-    echo "\$BROWSER environment variable not set and not on Mac to use default browser, not opening browser"
-fi
+echo
+echo "Opening Pull Request"
+open "$url"
+#elif [ -n "${BROWSER:-}" ]; then
+#    echo
+#    echo "Opening Pull Request using \$BROWSER"
+#    "$BROWSER" "$url"
+#else
+#    echo
+#    echo "\$BROWSER environment variable not set and not on Mac to use default browser, not opening browser"
+#fi
