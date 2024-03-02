@@ -33,6 +33,10 @@ open(){
         xdg-open "$@"
     elif sensible-browser &>/dev/null; then
         sensible-browser "$@"
+    elif x-www-browser &>/dev/null; then
+        x-www-browser "$@"
+    elif gnome-open &>/dev/null; then
+        gnome-open "$@"
     else
         echo "Neither 'xdg-open' nor 'sensible-browser' were found in \$PATH - install one of them to automatically open this URL:"
         echo
