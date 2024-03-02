@@ -42,7 +42,7 @@ Copies .htaccess settings from the adjacent file to increase upload sizes for re
 
     $WORDPRESS_HTACCESS_FILE
 
-On Mac also opens the Wordpress URL in the default browser:
+Opens the Wordpress URL in the default browser:
 
     $WORDPRESS_URL
 
@@ -90,9 +90,7 @@ elif [ "$action" = restart ]; then
     exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "Wordpress URL:  $WORDPRESS_URL"
-    if is_mac; then
-        open "$WORDPRESS_URL"
-    fi
+    open "$WORDPRESS_URL"
 else
     docker-compose "$action" "$@"
     echo
