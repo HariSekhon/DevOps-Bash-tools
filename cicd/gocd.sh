@@ -27,13 +27,13 @@ Boots a GoCD CI cluster with server and agent(s) in Docker, and builds the curre
 - boots GoCD server and agent(s) (one by default) in Docker
 - authorizes the agent(s) to begin building
 - loads the config repo if gocd_config_repo.json is found in \$PWD or \$PWD/setup/
-- opens the GoCD web UI (on Mac only)
+- opens the GoCD web UI
 
     ${0##*/} [up]
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the GoCD Server URL and on Mac automatically opens in browser
+    ${0##*/} ui     - prints the GoCD Server URL and automatically opens in browser
 
 Idempotent, you can re-run this and continue from any stage
 
@@ -84,9 +84,7 @@ elif [ "$action" = restart ]; then
     exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "GoCD Server URL:  $GOCD_URL"
-    if is_mac; then
-        open "$GOCD_URL"
-    fi
+    open "$GOCD_URL"
     exit 0
 else
     docker-compose "$action" "$@"
@@ -163,9 +161,7 @@ timestamp "GoCD is up and ready"
 echo
 echo "GoCD Server URL:  $url"
 echo
-if is_mac; then
-    open "$url"
-fi
+open "$url"
 
 repo_config=""
 filename="gocd_config_repo.json"
