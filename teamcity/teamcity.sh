@@ -33,11 +33,11 @@ Boots TeamCity CI cluster with server and agent(s) in Docker, and builds the cur
 - authorizes the agent(s) to begin building
 - waits for you to accept the EULA
   - prints the TeamCity URL
-  - opens the TeamCity web UI (on Mac only)
+  - opens the TeamCity web UI
 
 - creates an administator-level user (\$TEAMCITY_USER, / \$TEAMCITY_PASSWORD - defaults to admin / admin)
   - sets the full name, email, and VCS commit username to Git's user.name and user.email if configured for TeamCity to Git VCS tracking integration
-  - opens the TeamCity web UI login page in browser (on Mac only)
+  - opens the TeamCity web UI login page in browser
 
 - creates a GitHub OAuth connection if credentials are available (\$TEAMCITY_GITHUB_CLIENT_ID and \$TEAMCITY_GITHUB_CLIENT_SECRET)
   - this saves you having to use your own username and password for the GitHub VCS such as the config repo - just click the GitHub icon next to the VCS url to auto-authenticate
@@ -55,7 +55,7 @@ Usage:
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the TeamCity Server URL and on Mac automatically opens in browser
+    ${0##*/} ui     - prints the TeamCity Server URL and automatically opens in browser
 
 
 Idempotent, you can re-run this and continue from any stage
@@ -133,9 +133,7 @@ elif [ "$action" = restart ]; then
     exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "TeamCity Server URL:  $TEAMCITY_URL"
-    if is_mac; then
-        open "$TEAMCITY_URL"
-    fi
+    open "$TEAMCITY_URL"
     exit 0
 else
     docker-compose "$action" "$@"
@@ -163,13 +161,9 @@ is_setup_in_progress(){
 timestamp "TeamCity Server URL:  $TEAMCITY_URL"
 echo
 if is_setup_in_progress; then
-    timestamp "Open TeamCity Server URL in web browser to continue, click proceed, accept EULA etc.."
+    timestamp "Opening TeamCity Server URL in web browser to continue, click proceed, accept EULA etc.."
     echo
-    if is_mac; then
-        timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
-        echo
-        open "$TEAMCITY_URL"
-    fi
+    open "$TEAMCITY_URL"
 fi
 
 # too late, agent won't arrive in the unauthorized list in time to be found and authorized before this script exits, agents must boot in parallel with server not later
@@ -316,11 +310,9 @@ if [ "$user_already_exists" = 0 ]; then
     login_url="$TEAMCITY_URL/login.html"
     echo "$login_url"
     echo
-    if is_mac; then
-        timestamp "detected running on Mac, opening TeamCity Server URL for you automatically"
-        open "$login_url"
-        echo
-    fi
+    timestamp "Ppening TeamCity Server URL"
+    open "$login_url"
+    echo
     echo
 fi
 
