@@ -29,13 +29,13 @@ Boots Keycloak in Docker
 - boots Keycloak container in Docker
 - configures admin user
 - prints admin credentials
-- prints Keycloak UI URL and on Mac opens it in browser
+- prints Keycloak UI URL and opens it in browser
 
     ${0##*/} [up]
 
     ${0##*/} down
 
-    ${0##*/} ui     - prints the KeycloakServer URL and on Mac automatically opens in browser
+    ${0##*/} ui     - prints the KeycloakServer URL and automatically opens in browser
 
 Idempotent, you can re-run this and continue from any stage
 "
@@ -76,9 +76,7 @@ elif [ "$action" = ui ]; then
     echo "Keycloak user: ${KEYCLOAK_ADMIN:-admin}"
     echo "Keycloak password: ${KEYCLOAK_ADMIN_PASSWORD:-admin}"
     echo
-    if is_mac; then
-        open "$KEYCLOAK_URL"
-    fi
+    open "$KEYCLOAK_URL"
     exit 0
 else
     docker-compose "$action" "$@"
