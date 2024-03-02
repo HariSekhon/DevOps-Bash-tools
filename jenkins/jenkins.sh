@@ -33,7 +33,7 @@ Boots Jenkins CI in Docker, and builds the current repo
   - using pipeline from \$PWD/Jenkinsfile
 - enables job
 - builds job
-- prints Jenkins UI URL and on Mac opens it in browser
+- prints Jenkins UI URL and opens it in browser
 
     ${0##*/} [up]
 
@@ -105,9 +105,7 @@ elif [ "$action" = restart ]; then
 elif [ "$action" = ui ]; then
     echo "Jenkins URL:  $JENKINS_URL"
     print_creds
-    if is_mac; then
-        open "$JENKINS_URL"
-    fi
+    open "$JENKINS_URL"
     exit 0
 else
     docker-compose "$action" "$@"
@@ -127,9 +125,12 @@ timestamp "Installing plugins"
 # sed 's/#.*//; s/:.*//; /^[[:space:]]*$/d' setup/jenkins-plugins.txt | while read plugin; do jenkins_cli.sh install-plugin "$plugin"; done
 #
 # Old: deprecated, but still more portable across existing versions
-docker-compose exec -T jenkins-server /usr/local/bin/install-plugins.sh < "$plugins_txt"
+docker-compose exec -T jenkins-server /usr/local/bin/install-plugins.sh < "$plugins_txt" ||
 # New: later switch to
-#docker-compose exec -T jenkins-server /bin/jenkins-plugin-cli -f "$plugins_txt"
+{
+    docker-compose cp "$plugins_txt" jenkins-server:/ &&
+    docker-compose exec -T jenkins-server /bin/jenkins-plugin-cli -f "${plugins_txt##*/}"
+} || :  # exits 1 warning about plugins already existing
 echo
 
 # if this fails then the the CLI commands will also fail because they use a similar mechanism to find the admin password from the container to authenticate with the Jenkins API
