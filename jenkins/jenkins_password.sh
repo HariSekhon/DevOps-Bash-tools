@@ -27,15 +27,21 @@ config="$srcdir/../docker-compose/jenkins.yml"
 
 if [ -n "${JENKINS_PASSWORD:-}" ]; then
     echo "using \$JENKINS_PASSWORD from environment" >&2
-elif docker ps 2>/dev/null | grep -q jenkins-server; then
+
+# weird bug on macOS 14.1 where grep -q is no longer matching but grep is, so >/dev/null instead
+elif docker ps 2>/dev/null | grep jenkins-server >/dev/null; then
+
     # </dev/null stops this swallowing stdin which we need for jenkins_cli.sh create-job
     JENKINS_PASSWORD="$(docker-compose -f "$config" exec -T jenkins-server cat /var/jenkins_home/secrets/initialAdminPassword </dev/null)"
+
 #elif kubectl get po -n jenkins -l app.kubernetes.io/component=jenkins-controller -o name 2>/dev/null | grep -q .; then
     #pod="$(kubectl get po -n jenkins -l app.kubernetes.io/component=jenkins-controller -o name)"
     # doesn't exist
     #JENKINS_PASSWORD="$(kubectl exec -ti -n jenkins "$pod" -- cat /var/jenkins_home/secrets/initialAdminPassword)"
+
 elif kubectl get secret -n jenkins jenkins &>/dev/null; then
     JENKINS_PASSWORD="$(kubectl get secret -n jenkins jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode)"
+
 elif [ -f /var/jenkins_home/secrets/initialAdminPassword ]; then
     JENKINS_PASSWORD="$(cat /var/jenkins_home/secrets/initialAdminPassword)"
 fi
