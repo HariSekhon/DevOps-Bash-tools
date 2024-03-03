@@ -25,22 +25,36 @@ bash_tools="${bash_tools:-$(dirname "${BASH_SOURCE[0]}")/..}"
 
 #type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 
+if [ -d ~/perl5/bin ]; then
+    add_PATH ~/perl5/bin
+fi
+
 # see the effect of inserting a path like so
 # PERL5LIB=/path/to/blah perlpath
 perlpath(){
     perl -e 'print join("\n", @INC);'
 }
 
+# XXX: Perl Taint mode resets and restricts the Perl Path to not use PERL5LIB for security
+#
+#   scripts like those in the Advanced Nagios Plugins Collection and DevOps-Perl-tools will need to add lib
+#
 #if [ -d /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl/ ]; then
 #    add_PATH PERL5LIB /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Perl
 #fi
 if [ -d ~/perl5/lib/perl5 ]; then
     #add_PATH PERL5LIB ~/perl5/lib/perl5
-    export PERL5LIB="$PERL5LIB:$HOME/perl5/lib/perl5"
+    #export PERL5LIB="$PERL5LIB:$HOME/perl5/lib/perl5"
+    if ! [[ "${PERL5LIB:-}" == *"$HOME/perl5/lib/perl5"* ]]; then
+        export PERL5LIB=~/perl5/lib/perl5"${PERL5LIB+:$PERL5LIB}"
+    fi
+
 fi
-if [ -d ~/perl5/bin ]; then
-    add_PATH ~/perl5/bin
+if ! [[ "${PERL_LOCAL_LIB_ROOT:-}" == *"$HOME/perl5"* ]]; then
+    export PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT+:$PERL_LOCAL_LIB_ROOT}"
 fi
+export PERL_MB_OPT="--install_base '$HOME/perl5'"
+export PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"
 
 alias lsperlbin='ls -d ~/perl5/bin/* 2>/dev/null'
 alias llperlbin='ls -ld ~/perl5/bin/* 2>/dev/null'
