@@ -129,6 +129,7 @@ defaults write com.apple.touchbar.agent.PresentationModeFnModes.appWithControlSt
 # tap to click
 defaults write com.apple.trackpad forceClick -bool false
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool false
+defaults write com.apple.AppleMultitouchTrackpad USBMouseStopsTrackpad -int 0
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool false
 
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -int 0
