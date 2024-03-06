@@ -97,6 +97,9 @@ if is_blank "$usb_drive"; then
     fi
     echo "Determined USB drive to be: '$usb_drive'"
     echo
+else
+    echo "You have selected disk '$usb_drive' from the above list"
+    echo
 fi
 
 if ! [[ "$usb_drive" =~ /dev/disk[[:digit:]]+$ ]]; then
@@ -121,4 +124,5 @@ echo
 timestamp 'Finished writing, ejecting'
 echo
 diskutil eject "$usb_drive"
+echo
 timestamp 'Done'
