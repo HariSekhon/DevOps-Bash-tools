@@ -30,7 +30,8 @@ The Etcher app is also recommended for a GUI solution:
 
     https://etcher.balena.io/
 
-UNetbootin is also a classic choice but it did not detect my USB stick on Mac:
+UNetbootin is also a classic choice with upstream distribution integration as well as downloaded ISO support
+but it did not detect my USB stick on Mac:
 
     https://unetbootin.github.io/
 
