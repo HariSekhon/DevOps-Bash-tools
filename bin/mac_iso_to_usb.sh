@@ -26,6 +26,10 @@ Converts a given ISO file to a USB bootable image and burns it onto a given or d
 
 Prompts to insert a USB drive, diffs which device this turns up as, then prompts for confirmation and continues write to it
 
+The Etcher app is also recommended for a GUI solution:
+
+    https://etcher.balena.io/
+
 Tested on macOS 14 Sonoma
 "
 
