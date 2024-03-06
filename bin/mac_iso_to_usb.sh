@@ -31,7 +31,7 @@ The Etcher app is also recommended for a GUI solution:
     https://etcher.balena.io/
 
 UNetbootin is also a classic choice with upstream distribution integration as well as downloaded ISO support
-but it did not detect my USB stick on Mac:
+If it doesn't detect your USB drive, use Disk Utility to format it as MS-DOS (FAT32) to get it to detect it
 
     https://unetbootin.github.io/
 
