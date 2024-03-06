@@ -25,6 +25,8 @@ usage_description="
 Converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 
 Prompts to insert a USB drive, diffs which device this turns up as, then prompts for confirmation and continues write to it
+
+Tested on macOS 14 Sonoma
 "
 
 # used by usage() in lib/utils.sh
