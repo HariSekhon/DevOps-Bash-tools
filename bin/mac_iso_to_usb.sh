@@ -109,4 +109,5 @@ sudo dd if="$img" of="$usb_drive" bs=1m
 echo
 
 timestamp 'Finished writing, ejecting'
+diskutil eject "$usb_drive"
 timestamp 'Done'
