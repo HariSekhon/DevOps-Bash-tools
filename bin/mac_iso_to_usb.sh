@@ -44,6 +44,10 @@ usage_args="<iso_file> [<usb_device>]"
 
 help_usage "$@"
 
+if ! is_mac; then
+    die "Only macOS is supported"
+fi
+
 min_args 1 "$@"
 max_args 2 "$@"
 
