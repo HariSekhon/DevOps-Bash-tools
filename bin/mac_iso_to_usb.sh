@@ -44,7 +44,8 @@ usage_args="<iso_file> [<usb_device>]"
 
 help_usage "$@"
 
-max_args 1 "$@"
+min_args 1 "$@"
+max_args 2 "$@"
 
 iso="$1"
 usb_drive="${2:-}"
