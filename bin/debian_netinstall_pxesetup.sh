@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Downloads and sets up the Debian Netboot Install PXE to /private/tftpboot on Mac
+
+Then download TftpServer to easily GUI start the macOS built-in tftpd server and you're good to go
 "
 
 # used by usage() in lib/utils.sh
