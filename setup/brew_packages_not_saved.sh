@@ -41,7 +41,7 @@ while read -r package; do
     [[ "$package" =~ ^python- ]] && continue
     #[[ "$package" =~ ^python@ ]] && continue
     [[ "$package" =~ @ ]] && continue
-    if ! grep -Eq "^$package([[:space:]].+)?$" brew*.txt; then
+    if ! grep -Eq "^#?$package([[:space:]].+)?$" brew*.txt; then
         echo "$package not found in setup/brew*"
     fi
 done
