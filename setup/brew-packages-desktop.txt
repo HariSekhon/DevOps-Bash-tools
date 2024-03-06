@@ -71,6 +71,7 @@ cowsay
 csshx
 #ctags
 d2  # declarative diagram language
+dhcping
 dialog  # create a curses interactive menu
 diff-so-fancy
 diff-pdf
@@ -220,6 +221,7 @@ screen  # get newer version for -Q switch, will use different sockets directory
 s3cmd
 scalastyle
 semgrep
+siege
 skaffold
 skopeo
 shpotify
