@@ -257,6 +257,7 @@ watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
 wireshark  # only install tshark CLI, must --cask for Wireshark
+xclip
 #x264
 #x265
 #xvid
