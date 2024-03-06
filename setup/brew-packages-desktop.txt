@@ -193,6 +193,7 @@ pinentry-mac
 pip-completion
 pipx
 #pk11-kit
+pluto  # by FairwindsOps - detect outdated Kubernetes API objects
 postgresql
 prestosql
 #protobuf
@@ -236,6 +237,7 @@ sslscan
 ssh-copy-id
 stats  # fancier Activity Monitor
 #subversion  # pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+#terraformer  # large, install only if actively using
 tfenv  # Terraform version manager inspired by rbenv
 tfsec  # Terraform static analysis by AquaSec
 thrift
