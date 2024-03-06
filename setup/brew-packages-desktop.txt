@@ -72,6 +72,7 @@ csshx
 #ctags
 d2  # declarative diagram language
 dhcping
+dhcpdump
 dialog  # create a curses interactive menu
 diff-so-fancy
 diff-pdf
