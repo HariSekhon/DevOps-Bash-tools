@@ -152,6 +152,7 @@ lolcat
 lynx
 #lzo
 #lz4
+m4  # classic macro processor
 #makedepend  # Makefile dependencies for C
 #maven
 maven-completion
