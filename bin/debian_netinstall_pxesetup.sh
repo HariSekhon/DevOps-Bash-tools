@@ -24,16 +24,28 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads and sets up the Debian Netboot Install PXE to /private/tftpboot on Mac
 
-Then download TftpServer to easily GUI start the macOS built-in tftpd server and you're good to go
+Complete TFP Solution:
+
+1. Run this script
+
+2. download TftpServer to easily GUI start the macOS built-in tftpd server and you're good to go
+
+3. start ISC DHCP server pointing to this machine
+
+See this page for more info:
+
+    https://github.com/HariSekhon/Knowledge-Base/blob/main/dhcp.md
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<arch>]"
 
 help_usage "$@"
 
 #min_args 1 "$@"
+
+ARCH="${1:-amd64}"
 
 dir="/private/tftpboot"
 
@@ -49,7 +61,7 @@ cd "$dir"
 
 export YOURMIRROR=deb.debian.org # A CDN backed by cloudflare and fastly currently
 #export ARCH=amd64
-export ARCH=i386
+#export ARCH=i386
 export DIST=stable
 
 wget http://"$YOURMIRROR"/debian/dists/$DIST/main/installer-"$ARCH"/current/images/netboot/netboot.tar.gz
@@ -61,7 +73,7 @@ sha256sum -c <(awk '/netboot\/netboot.tar.gz/{print $1 " netboot.tar.gz"}' SHA25
 # netboot.tar.gz: OK
 
 
-sha256sum -c <(awk '/[a-f0-9]{64}[[:space:]].*main\/installer-'$ARCH'\/current\/images\/SHA256SUMS/{print $1 " SHA256SUMS"}' Release)
+sha256sum -c <(awk '/[a-f0-9]{64}[[:space:]].*main\/installer-'"$ARCH"'\/current\/images\/SHA256SUMS/{print $1 " SHA256SUMS"}' Release)
 # SHA256SUMS: OK
 
 #gpg --verify Release.gpg Release
