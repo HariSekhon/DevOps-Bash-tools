@@ -74,7 +74,6 @@ jpeg-turbo
 jpeg-xl
 json-c
 jsoncpp
-krb5
 leptonica
 lima
 little-cms2
