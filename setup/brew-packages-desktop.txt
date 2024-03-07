@@ -227,6 +227,7 @@ s3cmd
 scalastyle
 semgrep
 siege
+#six  # Python 2 to 3 conversion
 skaffold
 skopeo
 shpotify
@@ -235,6 +236,7 @@ snappy
 sonar-completion
 sonar-scanner
 sqlite
+sqlparse  # SQL reformatter
 ssllabs-scan
 sslscan
 ssh-copy-id
@@ -260,13 +262,18 @@ watch
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
 wireshark  # only install tshark CLI, must --cask for Wireshark
+#webp
 xclip
 #x264
 #x265
 #xvid
 xz
 yamllint  # in brew-packages.txt
+#yara
 youtube-dl
+#zeromq
+#zlib
+#zstd
 zoom
 zsh
 
