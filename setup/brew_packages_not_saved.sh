@@ -60,6 +60,7 @@ timestamp "Excluding '$num_packages_excluded' packages"
 echo >&2
 
 brew list |
+sort -fu |
 grep -xvf <(echo "$saved_packages") |
 while read -r package; do
     [[ "$package" =~ ^lib ]] && continue
