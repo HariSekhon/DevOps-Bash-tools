@@ -206,6 +206,7 @@ pwgen
 #python  # in brew-packages.txt
 #pipenv
 #pyenv
+qemu
 r
 rancher-cli
 rbenv
