@@ -27,7 +27,7 @@
 # ":local_dir" is optional in case you want to shorten the local directory name, lowercase it or change it for any reason such as daily convenience
 #
 
-Docs:knowledge
+Knowledge-Base:knowledge
 # order repos by dependent submodule repos first
 GitHub-Actions:github-actions
 GitHub-Actions-Contexts:contexts
