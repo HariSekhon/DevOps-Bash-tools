@@ -35,13 +35,42 @@ num_args 0 "$@"
 
 cd "$srcdir"
 
+saved_packages="$(
+    {
+        sed 's/[[:space:]]#.*//; /^[[:space:]]*$/d' \
+            brew-packages.txt \
+            brew-packages-desktop*.txt \
+            brew-packages-ignore.txt |
+        awk '{print $NF}'
+
+        grep -Eo '^#[[:alnum:]-]+' \
+            brew-packages.txt \
+            brew-packages-desktop*.txt |
+        sed 's/^#//'
+
+        grep -Eo '^#[[:alnum:]-]+/[[:alnum:]-]+[[:space:]]+[[:alnum:]-]+[[:space:]]*$' \
+            brew-packages-desktop-taps.txt |
+        sed 's/[[:space:]]*$//; s/.*[[:space:]]//'
+    } |
+    sort -fu
+)"
+num_packages_excluded="$(wc -l <<< "$saved_packages" | sed 's/[[:space:]]*//')"
+
+timestamp "Excluding '$num_packages_excluded' packages"
+echo >&2
+
 brew list |
+grep -xvf <(echo "$saved_packages") |
 while read -r package; do
     [[ "$package" =~ ^lib ]] && continue
     [[ "$package" =~ ^python- ]] && continue
     #[[ "$package" =~ ^python@ ]] && continue
     [[ "$package" =~ @ ]] && continue
-    if ! grep -Eq "^#?$package([[:space:]].+)?$" brew*.txt; then
-        echo "$package"  # not found in setup/brew*"
-    fi
+    # easy but naive, creates two forks per package which is slow
+    # doing an single inline grep -v before this loop
+    #if ! grep -Eq "^#?$package([[:space:]].+)?$" brew*.txt; then
+        #if grep -Fxq "$package" brew-packages-ignore.txt; then
+            echo "$package"  # not found in setup/brew*"
+        #fi
+    #fi
 done
