@@ -126,6 +126,7 @@ infracost  # Cloud cost estimator for Terraform code
 ipcalc
 iperf
 ipython
+#isc-dhcp  # the classic DHCP daemon, use for bootstrapping PXE installing Debian Linux or similar as per https://github.com/HariSekhon/Knowledge-Base/blob/main/dhcp.md
 jsonlint  # in brew-packages.txt
 jenkins-x/jx/jx
 #jpeg
