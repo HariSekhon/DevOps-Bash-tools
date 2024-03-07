@@ -43,12 +43,12 @@ saved_packages="$(
             brew-packages-ignore.txt |
         awk '{print $NF}'
 
-        grep -Eo '^#[[:alnum:]-]+' \
+        grep -Eho '^#[[:alnum:]-]+' \
             brew-packages.txt \
             brew-packages-desktop*.txt |
         sed 's/^#//'
 
-        grep -Eo '^#[[:alnum:]-]+/[[:alnum:]-]+[[:space:]]+[[:alnum:]-]+[[:space:]]*$' \
+        grep -Eho '^#[[:alnum:]-]+/[[:alnum:]-]+[[:space:]]+[[:alnum:]-]+[[:space:]]*$' \
             brew-packages-desktop-taps.txt |
         sed 's/[[:space:]]*$//; s/.*[[:space:]]//'
     } |
