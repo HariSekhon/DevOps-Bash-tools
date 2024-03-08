@@ -176,6 +176,7 @@ netcat
 ngrep
 nmap
 #node  # NodeJS
+#ntfstool  # for accessing NTFS volumes - unsigned requires Security approval and installing kernel driver
 #octave
 #openjpeg
 #oniguruma  # regex library
