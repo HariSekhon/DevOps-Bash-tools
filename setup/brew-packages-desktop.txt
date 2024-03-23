@@ -41,6 +41,7 @@ amazon-ecs-cli
 #amazon-sam-cli  # no longer found
 ansible
 ansible-lint
+archey4  # displays system info in text
 argocd
 asdf
 #atomicparsley  # mp4 cli tool
