@@ -125,6 +125,14 @@ tpinggw(){
     tping "$(get_gw)" "$@"
 }
 
+# for trying to find those damn wifi capture portals that disappear but block your internet http proxying
+opengw(){
+    local gateway
+    gateway="$(get_gw)"
+    open "http://$gateway"
+    open "https://$gateway"
+}
+
 port(){
     if [ -z "$2" ]; then
         echo "You must supply a hostname/ip address to test followed by a port number"
