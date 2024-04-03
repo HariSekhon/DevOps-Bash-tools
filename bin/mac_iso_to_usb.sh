@@ -120,9 +120,11 @@ echo
 diskutil unmountDisk "$usb_drive" || :
 echo
 
+raw_usb_drive="${usb_drive/\/disk//rdisk}"
+
 timestamp 'Writing to USB drive'
 echo
-sudo dd if="$img" of="$usb_drive" bs=1m
+sudo dd if="$img" of="$raw_usb_drive" bs=1m
 echo
 
 timestamp 'Finished writing, ejecting'
