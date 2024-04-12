@@ -369,6 +369,10 @@ if ! is_mac; then
     return
 fi
 
+dnsservers(){
+    scutil --dns | grep 'nameserver\[[0-9]*\]' | sort -u
+}
+
 flushdns(){
     dscacheutil -flushcache
     sudo killall -HUP mDNSResponder
