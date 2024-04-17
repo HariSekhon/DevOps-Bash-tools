@@ -28,6 +28,7 @@ Currently this script just flushes the DNS cache to fix Chrome hitting ERR_NOT_F
 
 To set this up, edit the path to this script in the plist xml file and then load it:
 
+    cp -fv $srcdir/com.harisekhon.wakeup_script.plist ~/Library/LaunchAgents/
     launchctl load $srcdir/com.harisekhon.wakeup_script.plist
 "
 
