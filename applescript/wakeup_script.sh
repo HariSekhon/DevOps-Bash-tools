@@ -26,10 +26,9 @@ Script of actions to run whenever a Mac wakes up from sleep
 
 Currently this script just flushes the DNS cache to fix Chrome hitting ERR_NOT_FOUND errors when waking up on a VPN
 
-To set this up, run:
+To set this up, edit the path to this script in the plist xml file and then load it:
 
     launchctl load $srcdir/com.harisekhon.wakeup_script.plist
-
 "
 
 # used by usage() in lib/utils.sh
