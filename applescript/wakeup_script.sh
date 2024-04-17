@@ -42,7 +42,7 @@ num_args 0 "$@"
 
 {
 
-timestamp "Mac waking up, running script: $0"
+timestamp "Running Mac wake up script: $0"
 
 timestamp "Flushing DNS cache"
 dscacheutil -flushcache
