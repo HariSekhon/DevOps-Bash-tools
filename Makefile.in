@@ -281,7 +281,8 @@ system-packages: submodules
 	if [ -x /usr/bin/apt-get ]; then $(MAKE) apt-packages; fi
 	@# /usr/bin/yum is a symlink to dnf-3 on newer RHEL systems, so fails -x /usr/bin/yum
 	if [ -e /usr/bin/yum ];     then $(MAKE) yum-packages; fi
-	@# /usr/local/bin/brew on older macOS and /opt/homebrew/bin on newer macOS
+	@# /usr/local/bin/brew    on older macOS
+	@# /opt/homebrew/bin/brew on newer macOS
 	if which -a brew && [ `uname` = Darwin ]; then $(MAKE) homebrew-packages; fi
 
 .PHONY: system-packages-perl
