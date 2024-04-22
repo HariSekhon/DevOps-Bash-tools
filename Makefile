@@ -15,8 +15,6 @@ include Makefile.in
 
 REPO := HariSekhon/DevOps-Bash-tools
 
-export PATH := $(PATH):/opt/homebrew/bin
-
 CONF_FILES := $(shell sed "s/\#.*//; /^[[:space:]]*$$/d" setup/files.txt)
 
 #CODE_FILES := $(shell find . -type f -name '*.sh' -o -type f -name '.bash*' | sort)
