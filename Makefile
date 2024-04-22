@@ -175,6 +175,7 @@ homebrew: system-packages brew
 .PHONY: brew
 brew:
 	which -a brew || install/install_homebrew.sh
+	which -a wget || brew install wget
 	NO_FAIL=1 NO_UPDATE=1 $(BASH_TOOLS)/packages/brew_install_packages_if_absent.sh setup/brew-packages-desktop.txt
 	NO_FAIL=1 NO_UPDATE=1 CASK=1 $(BASH_TOOLS)/packages/brew_install_packages_if_absent.sh setup/brew-packages-desktop-casks.txt
 	@# doesn't pass the packages correctly yet
