@@ -124,9 +124,17 @@ unlink:
 mac-desktop: desktop
 	@setup/mac_desktop.sh
 
+.PHONY: mac
+mac: mac-desktop
+	@:
+
 .PHONY: linux-desktop
 linux-desktop: desktop
 	@setup/linux_desktop.sh
+
+.PHONY: linux
+linux: linux-desktop
+	@:
 
 .PHONY:
 ccmenu:
