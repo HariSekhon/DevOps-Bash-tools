@@ -34,9 +34,9 @@ export SEMAPHORE_CI_ORGANIZATION=harisekhon
 alias tll="travis_last_log.py"
 
 # can't set this to just the shorter 'go' or 'perl' because it'll clash with the actual commands
-alias goto=go-tools
+alias goto=go_tools
 alias pyt=pytools
-alias to=perl-tools
+alias to=perl_tools
 
 # shellcheck disable=SC2154
 export plugins="$github/nagios-plugins"
