@@ -89,7 +89,8 @@ build:
 	@echo ================
 	@$(MAKE) git-summary
 	@$(MAKE) init
-	@$(MAKE) system-packages aws github-cli
+	@$(MAKE) system-packages
+	@$(MAKE) aws github-cli
 
 .PHONY: init
 init: git
@@ -98,8 +99,10 @@ init: git
 	@echo
 
 .PHONY: install
-install: build link aws gcp github-cli pip
-	@:
+install: build
+	@$(MAKE) link
+	@$(MAKE) aws gcp
+	@$(MAKE) github-cli pip
 
 .PHONY: uninstall
 uninstall: unlink
