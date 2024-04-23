@@ -76,7 +76,7 @@ kube_context(){
         export KUBECONFIG="$tmpdir/config.${EUID:-${UID:-$(id -u)}}.$$.$epoch"
 
         # load your real kube config to isolated staging area to source the context info
-        local src_kubeconfig
+        local src_kubeconfig=""
         if [ -f "$original_kubeconfig" ]; then
             src_kubeconfig="$original_kubeconfig"
         elif [ -f "$default_kubeconfig" ]; then
