@@ -203,8 +203,11 @@ while read -r x; do
     add_PATH "$x"
 done < <(find "$github/bash-tools" -maxdepth 1 -type d)
 add_PATH "$github/go-tools"
+add_PATH "$github/go"
 add_PATH "$github/go-tools/bin"
+add_PATH "$github/go/bin"
 add_PATH "$github/perl-tools"
+add_PATH "$github/perl"
 add_PATH "$github/pytools"
 add_PATH "$github/tools"
 #add_PATH "$github/tool"
