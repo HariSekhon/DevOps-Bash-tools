@@ -33,9 +33,9 @@ export SEMAPHORE_CI_ORGANIZATION=harisekhon
 
 alias tll="travis_last_log.py"
 
-alias goto=go-tools
+alias goto=go
 alias pyt=pytools
-alias to=perl-tools
+alias to=perl
 
 # shellcheck disable=SC2154
 export plugins="$github/nagios-plugins"
