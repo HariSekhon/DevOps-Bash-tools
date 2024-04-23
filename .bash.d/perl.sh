@@ -32,7 +32,7 @@ fi
 # see the effect of inserting a path like so
 # PERL5LIB=/path/to/blah perlpath
 perlpath(){
-    perl -e 'print join("\n", @INC);'
+    perl -e 'print join("\n", @INC) . "\n";'
 }
 
 # XXX: Perl Taint mode resets and restricts the Perl Path to not use PERL5LIB for security
