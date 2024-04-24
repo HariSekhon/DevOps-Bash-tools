@@ -31,6 +31,11 @@ usage(){
     echo
     echo "Takes a list of python module names as arguments or .txt files containing lists of modules (one per line)"
     echo
+    echo "You may need to set this in your environment to install to system or user libraries in newer versions of pip:"
+    echo
+    echo "  export PIP_BREAK_SYSTEM_PACKAGES=1"
+    echo
+    echo
     echo "usage: ${0##*} <list_of_modules>"
     echo
     exit 3
