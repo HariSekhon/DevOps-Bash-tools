@@ -23,6 +23,10 @@ endif
 
 export PATH := $(PATH):/bin:/usr/bin:/sbin:/usr/sbin:/usr/local/bin:/opt/homebrew/bin
 
+# Python breaking backwards compatibility as usual - set this to use historic behaviour and treat the user like an adult
+# this way if the install is run for --user instead of in a virtualenv it'll still work
+export PIP_BREAK_SYSTEM_PACKAGES := 1
+
 DOCKER_IMAGE := harisekhon/github
 
 ifneq ("$(wildcard /.dockerenv)", "")
