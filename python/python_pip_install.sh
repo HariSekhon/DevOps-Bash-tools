@@ -98,7 +98,7 @@ if inside_virtualenv; then
     echo "inside virtualenv, not using sudo"
     sudo=""
 elif [ $EUID != 0 ]; then
-    sudo=sudo
+    sudo="sudo --preserve-env=PIP_BREAK_SYSTEM_PACKAGES"
 fi
 
 user_opt(){
