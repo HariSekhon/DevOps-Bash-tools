@@ -205,6 +205,12 @@ mac_terminal_settings="${mac_terminal_settings/<integer>72</<integer>$LINES<}"
 defaults write com.apple.Terminal "Window Settings" -dict-add Hari "$mac_terminal_settings"
 
 # ============================================================================ #
+#                              T a s k   B a r
+# ============================================================================ #
+
+defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -int 1
+
+# ============================================================================ #
 #               S c r e e n s a v e r   &   H o t   C o r n e r s
 # ============================================================================ #
 
