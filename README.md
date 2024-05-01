@@ -628,12 +628,17 @@ etc.
 - `kustomize_install_helm_charts.sh` - installs the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files the old fashioned Helm CLI way so that tools like [Nova](https://github.com/FairwindsOps/nova) can be used to detect outdated charts (used in [Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs) repo's [CI](https://github.com/HariSekhon/Kubernetes-configs/actions/workflows/nova.yaml))
 - `kustomize_update_helm_chart_versions.sh` - updates one or more `kustomization.yaml` files to the latest versions of any charts they contain
 - `kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` to `kustomization.materialized.yaml` in the same directories for scanning with tools like [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects inherited from embedded Helm charts. Parallelized for performance
-- `argocd_auto_sync.sh` - toggle Auto-sync on/off to allow repairs and maintenance operation for a given app and also disables / re-enables the App-of-Apps base apps to stop then re-enabling the app
-- `argocd_apps_sync.sh` - sync's all [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) apps matching an optional ERE regex filter on their names using the ArgoCD CLI
-- `argocd_apps_wait_sync.sh` - sync's all [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) apps matching an optional ERE regex filter on their names using the ArgoCD CLI's while also checking their health and operation
-- `argocd_generate_resource_whitelist.sh` - generates a yaml cluster and namespace resource whitelist for ArgoCD project config. If given an existing yaml, will merge in its original whitelists, dedupe, and write them back into the file using an in-place edit. Useful because ArgoCD 2.2+ doesn't show resources that aren't explicitly allowed, such as ReplicaSets and Pods
-- `pluto_detect_kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` as above and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
-- `pluto_detect_kubectl_dump_objects.sh` - dumps all live Kubernetes objects to /tmp all can run [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects on the cluster from any source
+- ArgoCD:
+  - `argocd_auto_sync.sh` - toggle Auto-sync on/off to allow repairs and maintenance operation for a given app and also disables / re-enables the App-of-Apps base apps to stop then re-enabling the app
+  - `argocd_apps_sync.sh` - sync's all [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) apps matching an optional ERE regex filter on their names using the ArgoCD CLI
+  - `argocd_apps_wait_sync.sh` - sync's all [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) apps matching an optional ERE regex filter on their names using the ArgoCD CLI's while also checking their health and operation
+  - `argocd_generate_resource_whitelist.sh` - generates a yaml cluster and namespace resource whitelist for ArgoCD project config. If given an existing yaml, will merge in its original whitelists, dedupe, and write them back into the file using an in-place edit. Useful because ArgoCD 2.2+ doesn't show resources that aren't explicitly allowed, such as ReplicaSets and Pods
+- Pluto:
+  - `pluto_detect_kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` as above and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
+  - `pluto_detect_kubectl_dump_objects.sh` - dumps all live Kubernetes objects to /tmp all can run [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects on the cluster from any source
+- Rancher:
+  - `rancher_api.sh` - queries the Rancher API with authentication
+  - `rancher_kube_creds.sh` - downloads all Rancher clusters credentials into subdirectories matching cluster names, with `.envrc` in each, so a quick `cd` into one and your kubectl is ready to rock
 - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
 - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
 
