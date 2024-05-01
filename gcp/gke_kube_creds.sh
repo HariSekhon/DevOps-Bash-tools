@@ -36,6 +36,7 @@ See also:
     gke_kubectl.sh         - same as above but also gets the credential
     gcp_foreach_project.sh - iterates all locally configured projects, used by the 'all' argument
     aws_kube_creds.sh      - same as this script but for AWS EKS
+    rancher_kube_creds.sh  - same as this script but for Rancher kubernetes clusters
 "
 
 # used by usage() in lib/utils.sh
