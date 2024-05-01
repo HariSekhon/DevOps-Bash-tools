@@ -294,19 +294,23 @@ get_arch(){
         if [ "$arch" = amd64 ] || [ "$arch" = x86_64 ]; then
             arch="$ARCH_X86_64"
         fi
-    elif [ -n "${ARCH_X86:-}" ]; then
+    fi
+    if [ -n "${ARCH_X86:-}" ]; then
         if [ "$arch" = i386 ]; then
             arch="$ARCH_X86"
         fi
-    elif [ -n "${ARCH_ARM64:-}" ]; then
+    fi
+    if [ -n "${ARCH_ARM64:-}" ]; then
         if [ "$arch" = arm64 ]; then
             arch="$ARCH_ARM64"
         fi
-    elif [ -n "${ARCH_ARM:-}" ]; then
+    fi
+    if [ -n "${ARCH_ARM:-}" ]; then
         if [ "$arch" = arm ]; then
             arch="$ARCH_ARM"
         fi
-    elif [ -n "${ARCH_OVERRIDE:-}" ]; then
+    fi
+    if [ -n "${ARCH_OVERRIDE:-}" ]; then
         arch="$ARCH_OVERRIDE"
     fi
     echo "$arch"
