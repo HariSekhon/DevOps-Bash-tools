@@ -13,6 +13,11 @@
 "
 " :source ~/.vimrc
 
+" if you cursor location and copy/paste register buffers are not saving
+" then ensure that your ~/.viminfo file is owned by your user:
+"
+"   sudo chown "$USER" ~/.viminfo
+
 syn on
 
 highlight StatusLine ctermfg=yellow ctermbg=darkgray
