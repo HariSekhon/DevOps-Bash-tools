@@ -77,26 +77,24 @@ kube_context(){
 
         # load your real kube config to isolated staging area to source the context info
         local src_kubeconfig=""
-        if [ -f "$original_kubeconfig" ]; then
-            src_kubeconfig="$original_kubeconfig"
-        elif [ -f "$default_kubeconfig" ]; then
-            src_kubeconfig="$default_kubeconfig"
-        elif [ -f "$PWD/.kube/config" ]; then
-            src_kubeconfig="$PWD/.kube/config"
-        elif [ -f "/etc/rancher/k3s/k3s.yaml" ]; then
-            src_kubeconfig="/etc/rancher/k3s/k3s.yaml"
-        fi
+        local kubeconfig_source_locations="
+            $original_kubeconfig
+            $default_kubeconfig
+            $PWD/.kube/config
+            /etc/rancher/k3s/k3s.yaml"
+        for kubeconfig in $kubeconfig_source_locations; do
+            if [ -f "$kubeconfig" ]; then
+                src_kubeconfig="$kubeconfig"
+                break
+            fi
+        done
         if [ -n "$src_kubeconfig" ]; then
             if [ "$src_kubeconfig" != "$KUBECONFIG" ]; then
                 cp -f -- "$src_kubeconfig" "$KUBECONFIG"
             fi
         else
             echo "WARNING: failed to find one of:" >&2
-            echo "
-            $original_kubeconfig
-            $default_kubeconfig
-            $PWD/.kube/config
-            /etc/rancher/k3s/k3s.yaml" | sort -u >&2
+            echo "$kubeconfig_source_locations" | sort -u >&2
             echo >&2
         fi
 
