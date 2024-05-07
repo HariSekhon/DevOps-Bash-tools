@@ -98,10 +98,10 @@ kube_context(){
             echo >&2
         fi
 
-        # race condition - kubectl config get-contexts fails to find the context and switch in many runs without this sleep
+        # race condition - 'kubectl config get-contexts' fails to find the context and switch in many runs without this sleep
         context_found=0
         local i
-        for ((i=0; i < 10; i++)); do
+        for ((i=0; i < 5; i++)); do
             # surprisingly unreliable - if kubectl config get-contexts -o name | grep -Fxq "$context" can miss even after these succeed
             #if [ -s "$KUBECONFIG" ]; then
             #if cmp --quiet "$from_kubeconfig" "$KUBECONFIG"; then
