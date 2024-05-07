@@ -164,6 +164,7 @@ media-info  # read mp3 tags
 mercurial
 ubuntu/microk8s/microk8s
 midnight-commander
+minio
 #mitmproxy
 mosh
 # nagios-plugins clashes
