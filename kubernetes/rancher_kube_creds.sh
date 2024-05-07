@@ -27,7 +27,9 @@ to a directory structure matching the cluster names under the current or given d
 
 This is fastest way to get set up with local kubectl access in new Rancher environments
 
-Generates a .envrc in each directory to quickly auto-load using direnv if no .envrc exists in each directory
+Generates a .envrc in each directory to quickly auto-load using direnv if no .envrc already exists
+
+Also generates a local kubeconfig.all in the top level directory with its own .envrc if you want to use that instead
 
 Requires Rancher CLI to be set up and configured, as well as jq
 
@@ -83,5 +85,24 @@ EOF
     echo
 done
 
-echo
 timestamp "Finished downloading Rancher kubeconfigs"
+
+echo
+timestamp "Merging configs into $PWD/kubeconfig.all"
+# shellcheck disable=SC2012
+# find . -maxdepth 2 -name kubeconfig
+KUBECONFIG=$(ls "$PWD"/*/kubeconfig | tr '\n' ':')
+export KUBECONFIG
+kubectl config view --merge --flatten > kubeconfig.all
+echo
+
+if ! [ -f .envrc ]; then
+    timestamp "Generating $PWD/.envrc"
+    cat >> .envrc <<-EOF
+    export KUBECONFIG="\$PWD/kubeconfig.all"
+EOF
+    direnv allow .envrc
+    echo
+fi
+
+timestamp "Done"
