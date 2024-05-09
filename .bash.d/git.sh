@@ -181,7 +181,7 @@ git_url_base(){
     local filter="${1:-.*}"
     git remote -v |
     { grep "$filter" || : ; }|
-    awk '/git@|https:/{print $2}' |
+    awk '/git@|https:\/\/|ssh:\/\//{print $2}' |
     head -n1 |
     sed 's|^ssh://||;
          s|^https://.*@||;
@@ -192,7 +192,9 @@ git_url_base(){
          s|^|https://|;
          s/\.git$//;
          # Azure DevOps only puts this in https urls, not ssh, so strip for standardizing output
-         s|/_git/|/|;
+         # Update: actually dont do this because we cannot differentiate internal Azure DevOps
+         # by internal fqdn urls so it is better to leave this in
+         #s|/_git/|/|;
          ' |
     perl -pe 's/:(?!\/\/)/\//'
 }
@@ -206,7 +208,12 @@ gitbrowse(){
         url_base="$(git_url_base "origin")"
     fi
     if [ -z "$url_base" ]; then
-        echo "git remote url not found for filter '$filter' or 'origin'"
+        echo -n "git remote url not found for filter '$filter'"
+        if [ "$filter" != "origin" ]; then
+            echo " or 'origin'"
+        else
+            echo
+        fi
         return 1
     fi
     if [[ "$url_base" =~ github.com ]]; then
@@ -225,7 +232,9 @@ gitbrowse(){
                 url_base+="/-/blob/$default_branch/README.md"
             fi
         elif [[ "$url_base" =~ dev.azure.com ]]; then
-            url_base="${url_base%/*}/_git/${url_base##*/}"
+            # don't re-add this as it's no longer stripped out in git_url_base
+            # because we cannot differentiate internal Azure Devops by fqdn so need to leave it in
+            #url_base="${url_base%/*}/_git/${url_base##*/}"
             if [ -z "$path" ]; then
                 url_base+="?path=/README.md&_a=preview"
             fi
