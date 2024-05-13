@@ -125,6 +125,7 @@ alias leetmode=l33tmode
 alias hist=history
 alias clhist='HISTSIZE=0; HISTSIZE=5000'
 alias nohist='unset HISTFILE'
+alias histgrep='history | grep'
 
 export LS_OPTIONS='-F'
 if is_mac; then
