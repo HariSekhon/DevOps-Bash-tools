@@ -79,20 +79,20 @@ provider="${1:-all}"
 global="${GIT_GLOBAL_CONFIG:+--global}"
 
 github_cred_helper(){
-    # not needed to authenticate in practice
-    #if [ -n "${GITHUB_USER:-}" ]; then
-        # GH_TOKEN is higher precedence in GitHub CLI so do the same here for consistency to avoid non-intuitive auth problems where one works and the other doesn't using different tokens
-        if [ -n "${GH_TOKEN:-${GITHUB_TOKEN:-}}" ]; then
-            timestamp "Setting credential helper for GitHub"
-            # env vars need to be evaluated dynamically not here
-            # $global must not be quoted because when it is empty this will break the command with a '' arg
-            # shellcheck disable=SC2016,SC2086
-            #git config credential.https://github.com.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
-            git config $global credential.https://github.com.helper '!f() { sleep 1; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
-        else
-            timestamp "NOT setting credential helper for GitHub since \$GH_TOKEN / \$GITHUB_TOKEN not found in environment"
-        fi
-    #fi
+    # GH_TOKEN is higher precedence in GitHub CLI so do the same here for consistency to avoid non-intuitive auth problems where one works and the other doesn't using different tokens
+    if [ -n "${GH_TOKEN:-${GITHUB_TOKEN:-}}" ]; then
+        timestamp "Setting credential helper for GitHub"
+        # env vars need to be evaluated dynamically not here
+        # $global must not be quoted because when it is empty this will break the command with a '' arg
+        # shellcheck disable=SC2016,SC2086
+        #git config credential.https://github.com.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
+        for fqdn in github.com gist.github.com; do
+            # username is not needed in practice when using a token, neither on github.com, nor on gist.github.com
+            git config $global "credential.https://$fqdn.helper" '!f() { sleep 1; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
+        done
+    else
+        timestamp "NOT setting credential helper for GitHub since \$GH_TOKEN / \$GITHUB_TOKEN not found in environment"
+    fi
 }
 
 gitlab_cred_helper(){
