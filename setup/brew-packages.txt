@@ -33,6 +33,7 @@ libxml2  # needed for xmllint
 openssl
 parallel
 python  # Mac usually comes with Python, but pip was missing in Semaphore CI
+python-setuptools  # because distutils was removed in Python 3.12 :-(
 readline
 shellcheck
 #terraform # old 0.11 masking newer 0.12 from install_terraform.sh
