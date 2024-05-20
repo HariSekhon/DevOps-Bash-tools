@@ -299,6 +299,7 @@ etc.
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
+- `log_timestamp_large_intervals.sh` - finds log lines whose timestamp intervals exceed the given number of seconds and outputs those log lines with the difference between the last and current timestamps
 - `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `copy_to_clipboard.sh - copies stdin or string arg to system clipboard on Linux or Mac
