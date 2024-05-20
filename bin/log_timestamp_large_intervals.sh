@@ -53,7 +53,10 @@ current_epoch=0
 last_line=""
 
 while read -r line; do
-    timestamp="${line:0:19}"  # must match the 'format' prefix above
+    # XXX: adjust this for other timestamp formats / lengths
+    timestamp="${line:0:19}"  # must match the timestamp prefix length
+    #timestamp="$(awk '{print $1}' <<< "$line")"  # needlessly expensive on forks and awk
+    #timestamp="${line%%[[:space:]]*}"  # cheaper, take only the first token, but timestamps can have no spaces in them in place of the T separator
     current_epoch="$(date -d "$timestamp" +"%s")"
 
     if [[ "$last_epoch" -eq 0 ]]; then
