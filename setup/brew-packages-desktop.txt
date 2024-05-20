@@ -72,11 +72,13 @@ cowsay
 csshx
 #ctags
 d2  # declarative diagram language
+dateutils  # strptime, dateadd, dateconv, datediff, dategrep, dateseq, datesort, datetest, datezone - https://www.fresse.org/dateutils/
 dhcping
 dhcpdump
 dialog  # create a curses interactive menu
 diff-so-fancy
 diff-pdf
+#diffutils  # GNU diff, diff3, sdiff, cmp commands - links to /opt/homebrew/bin/ and depending on $PATH ordering may supplant Mac's BSD diff
 direnv
 disk-inventory-x
 dive  # analyze docker image layers
