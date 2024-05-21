@@ -25,6 +25,8 @@ usage_description="
 Finds log lines whose timestamp intervals exceed the given number of seconds (default: 30)
 and outputs those log lines with the difference between the last and current timestamps
 
+Useful to find actions that are taking a long time from log files such as CI/CD logs
+
 Expects each log line in the file to be prefixed with the following format:
 
 YYYY-MM-DDTHH:MM:SS
