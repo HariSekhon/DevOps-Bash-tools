@@ -316,6 +316,9 @@ etc.
 - `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
 - `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
 
+See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
+and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
+
 #### Databases
 
 `mysql/`, `postgres/`, `sql/` and `bin/` directories:
@@ -428,6 +431,8 @@ etc.
     - `aws_secret_update_binary.sh` - base64 encodes a given file's contents and updates a given Secrets Manager secret. Useful for updating a QR code screenshot for a root account
     - `aws_secret_get.sh` - gets a secret value for a given secret from Secrets Manager, retrieving either a secure string or secure binary depending on which is available
   - `eksctl_cluster.sh` - downloads [eksctl](https://eksctl.io/) and creates an [AWS EKS](https://aws.amazon.com/eks/) Kubernetes cluster
+
+See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-Base/blob/main/aws.md).
 
 #### GCP - Google Cloud Platform
 
@@ -550,6 +555,8 @@ etc.
   - `gcs_bucket_project.sh` - finds the GCP project that a given bucket belongs to using the GCP Storage API
   - `gcs_curl_file.sh` - retrieves a GCS file's contents from a given bucket and path using the GCP Storage API. Useful for starting shell pipelines or being called from other scripts
 
+See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-Base/blob/main/gcp.md).
+
 #### Kubernetes
 
 `kubernetes/` directory:
@@ -643,6 +650,8 @@ etc.
 - see also Google Kubernetes Engine scripts in the [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools/#gcp---google-cloud-platform) section above
 - see also the [Kubernetes configs](https://github.com/HariSekhon/Kubernetes-configs) repo
 
+See also [Knowledge Base notes for Kubernetes](https://github.com/HariSekhon/Knowledge-Base/blob/main/kubernetes.md).
+
 #### Docker
 
 `docker/` directory:
@@ -660,6 +669,8 @@ etc.
   - `clean_caches.sh` - cleans out OS package and programming language caches, call near end of `Dockerfile` to reduce Docker image size
   - see also the [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo
 - `quay_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
+
+See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowledge-Base/blob/main/docker.md).
 
 #### Big Data & NoSQL
 
@@ -700,6 +711,8 @@ etc.
   - `cloudera_navigator_api.sh` - script to simplify querying [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) API using environment variables, prompts, authentication and sensible defaults. Built on top of `curl_auth.sh`
   - `cloudera_navigator_audit_logs.sh` - fetches [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for given service eg. hive/impala/hdfs via the API, simplifying date handling, authentication and common settings. Built on top of `cloudera_navigator_api.sh`
   - `cloudera_navigator_audit_logs_download.sh` - downloads [Cloudera Navigator](https://www.cloudera.com/products/product-components/cloudera-navigator.html) audit logs for each service by year. Skips existing logs, deletes partially downloaded logs on failure, generally retry safe (while true, Control-C, not `kill -9` obviously). Built on top of `cloudera_navigator_audit_logs.sh`
+
+See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowledge-Base/blob/main/hadoop.md).
 
 #### Git - GitHub, GitLab, Bitbucket, Azure DevOps
 
@@ -830,6 +843,8 @@ etc.
   - `bitbucket_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
   - `bitbucket_ssh_delete_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
 
+See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md).
+
 #### CI/CD - Continuous Integration / Continuous Deployment
 
 `jenkins/`, `terraform/`, `teamcity/`, `buildkite/`, `circlci/`, `travis/`, `azure_devops/`, ...,  `cicd/` directories:
@@ -937,6 +952,7 @@ etc.
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
   - `jenkins_plugins_latest_versions.sh` - finds the latest versions of given Jenkins plugins. Useful to programmatically upgrade your Jenkins on Kubernetes plugins defined in [values.yaml](https://github.com/HariSekhon/Kubernetes-configs/blob/master/jenkins/base/values.yaml#L150)
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
+  - See also [Knowledge Base notes for Jenkins](https://github.com/HariSekhon/Knowledge-Base/blob/main/jenkins.md).
 - `teamcity/*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
   - `teamcity.sh` - one-touch [TeamCity CI](https://www.jetbrains.com/teamcity/) cluster:
     - launches Docker containers with server and 1 agent
@@ -1046,10 +1062,13 @@ etc.
   - `terraform_import_github_team_repos.sh` - finds all `github_team_repository` in Terraform plan that would be added, then queries the GitHub API for the repos and team IDs and if they both exist then imports them to Terraform state
   - `terraform_resources.sh` - external program to get all resource ids and attribute for a given resource type to work around Terraform splat expression limitation ([#19931](https://github.com/hashicorp/terraform/issues/19931))
   - `terraform_managed_resource_types.sh` - quick parse of what Terraform resource types are found in `*.tf` files under the current or given directory tree. Useful to give you a quick glance of what services you are managing
+  - See also [Knowledge Base notes for Terraform](https://github.com/HariSekhon/Knowledge-Base/blob/main/terraform.md).
 - `checkov_resource_*.sh` - [Checkov](https://www.checkov.io/) resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
   - `checkov_resource_count.sh` - counts the number of resources Checkov is scanning in the current or given directory
   - `checkov_resource_count_all.sh` - counts the total number of resources Checkov is scanning across all given repo checkouts
 - `octopus_api.sh` - queries the [Octopus Deploy](https://octopus.com/) API
+
+See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledge-Base/blob/main/ci-cd.md).
 
 #### AI & IPaaS
 
@@ -1119,6 +1138,8 @@ etc.
 - `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
 - `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
 
+See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge-Base/blob/main/perl.md).
+
 #### Python
 
 `python/` directory:
@@ -1137,6 +1158,8 @@ etc.
 - `python_translate_module_to_import.sh` - converts PyPI module names to Python import names, used by `python_pip_install_if_absent.sh` and `python_find_unused_pip_modules.sh`
 - `python_pyinstaller.sh` - creates [PyInstaller](https://pypi.org/project/pyinstaller/) self-contained Python programs with Python interpreter and all PyPI modules included
 - `python_pypi_versions.sh` - prints all available versions of a given PyPi module using the API
+
+See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowledge-Base/blob/main/python.md).
 
 #### Golang
 
