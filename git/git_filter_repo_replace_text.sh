@@ -70,12 +70,7 @@ echo
 read -r -p "DANGER: are you absolutely sure? (y/N)  " answer
 echo
 
-shopt -s nocasematch
-if ! [[ "$answer" =~ ^(y|yes)$ ]]; then
-    echo "Aborting..."
-    exit 1
-fi
-shopt -u nocasematch
+is_yes "$answer" || die "Aborting"
 
 timestamp "Starting git filter-repo replacement"
 echo
