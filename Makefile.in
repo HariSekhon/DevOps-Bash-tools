@@ -476,12 +476,12 @@ gems:: gem
 
 .PHONY: gem
 gem::
-	find . -maxdepth 3 -path '*/setup/gem-requirements.txt' | xargs $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/gem-packages.txt' | xargs $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh
 	@$(MAKE) gem-optional
 
 .PHONY: gem-optional
 gem-optional::
-	find . -maxdepth 3 -path '*/setup/gem-requirements-optional.txt' | NO_FAIL=1 PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/gem-packages-optional.txt' | NO_FAIL=1 PIP=$(PIP) xargs $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh
 
 .PHONY: npm
 npm::
