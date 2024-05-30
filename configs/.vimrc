@@ -361,6 +361,8 @@ nmap          ;o :!cd "%:p:h" && git log -p "%:t"<CR>
 nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
 "nmap          ;P :call TogglePaste()<CR>
+"should be the same thing according to :help pastetoggle but results in vim startup error 'Not an editor command'
+"pastetoggle P
 nmap          ;P :set paste!<CR>
 nmap          ;t :set list!<CR>
 nmap          ;q :q<CR>
@@ -424,14 +426,26 @@ endif
 "                               F u n c t i o n s
 " ============================================================================ "
 
-function! SourceVimrc()
-    :source ~/.vimrc
-    let vim_tags = system("grep vim: " + expand("%") + " | sed 's/\#//; s/vim:/set /; s/:/ /g'")
-    echom &vim_tags
-    "execute "normal!" . &vim_tags
-    ":! grep vim: expand("%") | sed 's/\#//'
-    :set ts sts sw et filetype
-endfunction
+" avoids this error when trying to run ;-v nmap to re-source this vimrc:
+"
+"   E127: Cannot redefine function SourceVimrc: It is in use
+"
+"function! SourceVimrc()
+" This function won't reload as a result, must exit and restart vim
+if ! exists("*SourceVimrc")
+    function SourceVimrc()
+        :source ~/.vimrc
+        let vim_tags = system("grep vim: " + expand("%") + " | head -n1 | sed 's/^\"[[:space:]]*vim:/set /; s/:/ /g'")
+        " this breaks
+        "echo &vim_tags
+        "execute "normal!" . &vim_tags
+        ":! grep vim: expand("%") | sed 's/\#//'
+        :echo "\n"
+        :echo "Currently set options:"
+        :echo "\n"
+        :set ts sts sw et filetype
+    endfunction
+endif
 
 function! ToggleSyntax()
     if exists("g:syntax_on")
