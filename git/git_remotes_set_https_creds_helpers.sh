@@ -82,13 +82,14 @@ github_cred_helper(){
     # GH_TOKEN is higher precedence in GitHub CLI so do the same here for consistency to avoid non-intuitive auth problems where one works and the other doesn't using different tokens
     if [ -n "${GH_TOKEN:-${GITHUB_TOKEN:-}}" ]; then
         timestamp "Setting credential helper for GitHub"
-        # env vars need to be evaluated dynamically not here
-        # $global must not be quoted because when it is empty this will break the command with a '' arg
         # shellcheck disable=SC2016,SC2086
-        #git config credential.https://github.com.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
         for fqdn in github.com gist.github.com; do
-            # username is not needed in practice when using a token, neither on github.com, nor on gist.github.com
-            git config $global "credential.https://$fqdn.helper" '!f() { sleep 1; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
+            # username is not needed in practice when using a token, neither on github.com, nor on gist.github.com after the first time for https://<username>@github.com/...
+            # but put it back in because that first time leads to problems
+            #git config $global "credential.https://$fqdn.helper" '!f() { sleep 1; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
+            # env vars need to be evaluated dynamically not here
+            # $global must not be quoted because when it is empty this will break the command with a '' arg
+            git config $global credential.https://github.com.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
         done
     else
         timestamp "NOT setting credential helper for GitHub since \$GH_TOKEN / \$GITHUB_TOKEN not found in environment"
@@ -101,6 +102,7 @@ gitlab_cred_helper(){
             timestamp "Setting credential helper for GitLab"
             # shellcheck disable=SC2016,SC2086
             #git config credential.https://gitlab.com.helper '!f() { sleep 1; echo "username=${GITLAB_USER}"; echo "password=${GITLAB_TOKEN}"; }; f'
+            # $global must not be quoted because when it is empty this will break the command with a '' arg
             git config $global credential.https://gitlab.com.helper '!f() { sleep 1; echo "password=${GITLAB_TOKEN}"; }; f'
         else
             timestamp "NOT setting credential helper for GitLab since \$GITLAB_TOKEN not found in environment"
@@ -114,6 +116,7 @@ bitbucket_cred_helper(){
             timestamp "Setting credential helper for Bitbucket"
             # shellcheck disable=SC2016,SC2086
             #git config credential.https://bitbucket.org.helper '!f() { sleep 1; echo "username=${BITBUCKET_USER}"; echo "password=${BITBUCKET_TOKEN}"; }; f'
+            # $global must not be quoted because when it is empty this will break the command with a '' arg
             git config $global credential.https://bitbucket.org.helper '!f() { sleep 1; echo "password=${BITBUCKET_TOKEN}"; }; f'
         else
             timestamp "NOT setting credential helper for Bitbucket since \$BITBUCKET_TOKEN not found in environment"
@@ -127,6 +130,7 @@ azure_devops_cred_helper(){
             timestamp "Setting credential helper for Azure DevOps"
             # shellcheck disable=SC2016,SC2086
             #git config credential.https://dev.azure.com.helper '!f() { sleep 1; echo "username=${AZURE_DEVOPS_USER}"; echo "password=${AZURE_DEVOPS_TOKEN}"; }; f'
+            # $global must not be quoted because when it is empty this will break the command with a '' arg
             git config $global credential.https://dev.azure.com.helper '!f() { sleep 1; echo "password=${AZURE_DEVOPS_TOKEN}"; }; f'
         else
             timestamp "NOT setting credential helper for Azure DevOps since \$AZURE_DEVOPS_TOKEN not found in environment"
