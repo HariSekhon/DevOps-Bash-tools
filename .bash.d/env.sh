@@ -156,3 +156,17 @@ unvar(){
     perl -pi -e 's/^export '"$var"'=.*\n$//' "$varfile"
     unset "$var"
 }
+
+# ============================================================================ #
+
+unsetall(){
+    local match="${1:-.*}"
+    while read -r env_var; do
+        if [ "$env_var" = PATH ]; then
+            continue
+        fi
+        unset "$env_var"
+    done < <( env |
+        grep -i "$match" |
+        sed 's/=.*//' )
+}
