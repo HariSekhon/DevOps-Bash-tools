@@ -89,7 +89,7 @@ github_cred_helper(){
             #git config $global "credential.https://$fqdn.helper" '!f() { sleep 1; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
             # env vars need to be evaluated dynamically not here
             # $global must not be quoted because when it is empty this will break the command with a '' arg
-            git config $global credential.https://github.com.helper '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
+            git config $global "credential.https://$fqdn.helper" '!f() { sleep 1; echo "username=${GITHUB_USER}"; echo "password=${GH_TOKEN:-${GITHUB_TOKEN}}"; }; f'
         done
     else
         timestamp "NOT setting credential helper for GitHub since \$GH_TOKEN / \$GITHUB_TOKEN not found in environment"
