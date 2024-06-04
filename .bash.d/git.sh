@@ -392,7 +392,8 @@ st(){
         done
     elif { [ "$target" = "." ] &&
          [ "${PWD##*/}" = work ] ; } ||
-         grep -Fxq "$PWD" <<< "${GIT_BASEDIRS:-}"; then
+         grep -Fxq "$PWD" <<< "${GIT_BASEDIRS:-}" ||
+         [ -f .iterate ]; then
          #ls ./*/.git &>/dev/null; then  # matches inside repos with submodules unfortunately
         hr
         for x in "$target"/*; do
@@ -534,7 +535,8 @@ pull(){
             popd &>/dev/null
         done
     elif [ "${PWD##*/}" = work ] ||
-         grep -Fxq "$PWD" <<< "${GIT_BASEDIRS:-}"; then
+         grep -Fxq "$PWD" <<< "${GIT_BASEDIRS:-}" ||
+         [ -f .iterate ]; then
          #ls ./*/.git &>/dev/null; then  # matches inside repos with submodules unfortunately
         for x in *; do
             [ -d "$x/.git" ] || continue
