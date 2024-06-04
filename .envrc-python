@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: Mon Feb 22 17:42:01 2021 +0000
+#
+#  https://github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                                  D i r e n v
+# ============================================================================ #
+
+# .envrc to auto-load the virtualenv inside the 'venv' directory if present
+
+# https://direnv.net/man/direnv-stdlib.1.html
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# this is necessary because newer versions of pip no longer allow you to install PyPI packages in system-packages by default
+for venv in "$PWD/venv" "$HOME/venv"; do
+    if [ -f "$venv/bin/activate" ]; then
+        echo
+        echo "Virtualenv directory found in: $venv"
+        echo
+        echo "Activating Virtualenv inside the directory: $venv"
+
+        # shellcheck disable=SC1091
+        source "$venv/bin/activate"
+        echo
+    fi
+done
+
+# read .env too
+#dotenv
