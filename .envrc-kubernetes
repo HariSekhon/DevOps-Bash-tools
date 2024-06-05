@@ -93,9 +93,11 @@ kube_context(){
                 cp -f -- "$src_kubeconfig" "$KUBECONFIG"
             fi
         else
-            echo "WARNING: failed to find one of:" >&2
-            echo "$kubeconfig_source_locations" | sort -u >&2
-            echo >&2
+            if [[ "$PWD" =~ k8|kube ]]; then
+                echo "WARNING: failed to find one of:" >&2
+                echo "$kubeconfig_source_locations" | sort -u >&2
+                echo >&2
+            fi
         fi
 
         # race condition - 'kubectl config get-contexts' fails to find the context and switch in many runs without this sleep
