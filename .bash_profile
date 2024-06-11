@@ -37,9 +37,11 @@ fi
 
 #sudo setmixer -V pcm 100
 
+complete -C /usr/local/bin/terragrunt terragrunt
+
 # ============================================================================ #
 # This should be automatically added to ~/.bash_profile when you install SDKman (install/install_sdkman.sh):
 #
-##THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-#export SDKMAN_DIR="/Users/hari.sekhon/.sdkman"
-#[[ -s "/Users/<user>/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/<user>/.sdkman/bin/sdkman-init.sh"
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/hari.sekhon/.sdkman"
+[[ -s "/Users/<user>/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/<user>/.sdkman/bin/sdkman-init.sh"
