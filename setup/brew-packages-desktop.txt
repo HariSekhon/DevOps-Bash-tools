@@ -248,6 +248,8 @@ sslscan
 ssh-copy-id
 stats  # fancier Activity Monitor
 #subversion  # pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+#terraform  # use tfenv with direnv to match your company's version and avoid accidentally upgrading the tfstate
+terragrunt
 #terraformer  # large, install only if actively using
 tfenv  # Terraform version manager inspired by rbenv
 tfsec  # Terraform static analysis by AquaSec
