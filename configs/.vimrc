@@ -298,6 +298,7 @@ if has("autocmd")
     "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; js-yaml "%" >/dev/null && echo YAML OK<CR>
     au BufNew,BufRead *.yml,*.yaml,autoinstall-user-data nmap ;l :w<CR>:!clear; yamllint "%" && echo YAML OK<CR>
     au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR>:call TerraformValidate()<CR>
+    au BufNew,BufRead *.hcl                                 nmap ;l :w<CR>:call TerragruntValidate()<CR>
     au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;l :w<CR>:!packer init "%" && packer validate "%" && packer fmt -diff "%" <CR>
     au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;f :w<CR>:!packer fmt -diff "%" <CR>
 
@@ -666,6 +667,11 @@ function! TerraformValidate()
     :%s/^[[:space:]]*[-~][[:space:]]//e
     :%s/[[:space:]]->[[:space:]].*$//e
     :!clear; bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; { terraform fmt -diff; terraform validate; } | more -R'
+endfunction
+
+function! TerragruntValidate()
+    :%s/[[:space:]]->[[:space:]].*$//e
+    :!clear; bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; { terragrunt fmthcl --terragrunt-diff; terragrunt validate; } | more -R'
 endfunction
 
 function! TerraformPlan()
