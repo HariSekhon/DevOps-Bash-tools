@@ -32,7 +32,7 @@ github_pull_request_url_regex='https://github.com/[[:alnum:]/_-]+/pull/[[:digit:
 
 get_github_repo(){
     git remote -v 2>/dev/null |
-    grep -E "github\.${domain_regex}[/:]" |
+    grep -E "github\.[[:alnum:].-]+[/:]" |
     awk '{print $2}' |
     head -n1 |
     sed '
@@ -47,7 +47,7 @@ get_github_repo(){
 is_github_origin(){
     git remote -v |
     # permitting generic domain regex for those self-hosting their own github enterprise servers
-    grep -Eq "^origin[[:space:]].+github\.${domain_regex}[/:]"
+    grep -Eq "^origin[[:space:]].+github\.[[:alnum:].-]+[/:]"
 }
 
 check_github_origin(){
@@ -60,9 +60,9 @@ github_origin_owner_repo(){
     local owner_repo
     owner_repo="$(
         git remote -v |
-        grep -Em1 '^origin.*github\.${domain_regex}[/:]' |
+        grep -Em1 '^origin.*github\.[[:alnum:].-]+[/:]' |
         sed '
-            s|.*github\.${domain_regex}[:/]||;
+            s|.*github\.[[:alnum:].-]*[:/]||;
             s/\.git.*//;
             s/[[:space:]].*//
         ' ||
