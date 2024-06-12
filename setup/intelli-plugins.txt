@@ -1,0 +1,317 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2024-06-12 08:18:51 +0200 (Wed, 12 Jun 2024)
+#
+#  vim:ts=4:sts=4:sw=4:et:filetype=conf
+#
+#  https///github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                        I n t e l l i J   P l u g i n s
+# ============================================================================ #
+
+# Taken from https://github.com/HariSekhon/Knowledge-Base/blob/main/intellij.md
+
+
+# ============================================================================ #
+#        D o c k e r ,   K u b e r n e t e s   a n d   T e r r a f o r m
+# ============================================================================ #
+
+# Docker - https://plugins.jetbrains.com/plugin/7724-docker
+Docker
+
+# Terraform and HCL - https://plugins.jetbrains.com/plugin/7808-terraform-and-hcl
+org.intellij.plugins.hcl
+
+# only available in Ultimate Edition :-(
+# Kubernetes - https://plugins.jetbrains.com/plugin/10485-kubernetes
+#com.intellij.kubernetes
+
+
+# ============================================================================ #
+#                               L a n g u a g e s
+# ============================================================================ #
+
+# Shell Script - https://plugins.jetbrains.com/plugin/13122-shell-script
+com.jetbrains.sh
+
+# Bash Support  - https://plugins.jetbrains.com/plugin/4230-bashsupport
+BashSupport
+
+# Perl - https://plugins.jetbrains.com/plugin/7796-perl
+com.perl5
+
+# Go Linter (https://plugins.jetbrains.com/plugin/12496-go-linter
+com.ypwang.plugin.go-linter
+
+# See Python, NodeJS and Java sections further down
+
+
+# ============================================================================ #
+#        C o r e   E d i t i n g ,   G i t   &   F i l e   F o r m a t s
+# ============================================================================ #
+
+# .ignore - https://plugins.jetbrains.com/plugin/7495--ignore  - supports various `.ignore` files for different technologies
+mobi.hsz.idea.gitignore
+
+# Code Glance - https://plugins.jetbrains.com/plugin/7275-codeglance/  - adds a minimap of the file
+net.vektah.codeglance
+
+# Grep Console - https://plugins.jetbrains.com/plugin/7125-grep-console
+GrepConsole
+
+# BrowseWordAtCaret - https://plugins.jetbrains.com/plugin/201-browsewordatcaret
+BrowseWordAtCaret
+
+# Editor Config - https://plugins.jetbrains.com/plugin/7294-editorconfig/
+org.editorconfig.editorconfigjetbrains
+
+# GitLink - https://plugins.jetbrains.com/plugin/8183-gitlink/  - shortcut to open files on GitHub and other hosted repo providers
+uk.co.ben-gibson.remote.repository.mapper
+
+# Git Toolbox - https://plugins.jetbrains.com/plugin/7499-gittoolbox/  - automatic fetches, show status vs upsteam origin
+zielu.gittoolbox
+
+# CSV Editor - https://plugins.jetbrains.com/plugin/10037-csv-editor
+net.seesharpsoft.intellij.plugins.csv
+
+# JSON Parser - https://plugins.jetbrains.com/plugin/10650-json-parser  - validate & format JSON strings
+com.godwin.json.parser
+
+# CamelCase - https://plugins.jetbrains.com/plugin/7160-camelcase
+de.netnexus.camelcaseplugin
+
+# RegexpTester - https://plugins.jetbrains.com/plugin/2917-regexp-tester
+org.intellij.RegexpTester
+
+# Database Navigator - https://plugins.jetbrains.com/plugin/1800-database-navigator
+DBN
+
+# Markdown Navigator Enhanced - https://plugins.jetbrains.com/plugin/7896-markdown-navigator-enhanced/
+com.vladsch.idea.multimarkdown
+
+#  Zero Width Characters locator - https://plugins.jetbrains.com/plugin/7448-zero-width-characters-locator  - find characters that could break your code
+com.ultrahob.zerolength.plugin
+
+# Env files support - https://plugins.jetbrains.com/plugin/9525--env-files-support
+ru.adelf.idea.dotenv
+
+# String Manipulation - https://plugins.jetbrains.com/plugin/2162-string-manipulation
+String Manipulation
+
+# Rainbow Brackets - https://plugins.jetbrains.com/plugin/10080-rainbow-brackets
+izhangzhihao.rainbow.brackets
+
+# Rainbow CSV - https://plugins.jetbrains.com/plugin/12896-rainbow-csv
+com.andrey4623.rainbowcsv
+
+# Indent Rainbow - https://plugins.jetbrains.com/plugin/13308-indent-rainbow
+indent-rainbow.indent-rainbow
+
+# Return Highlighter - https://plugins.jetbrains.com/plugin/13303-return-highlighter
+com.github.lppedd.idea-return-highlighter
+
+
+# ============================================================================ #
+#                             U s a g e   S t a t s
+# ============================================================================ #
+
+# WakaTime - https://plugins.jetbrains.com/plugin/7425-wakatime  - stats on your usage
+com.wakatime.intellij.plugin
+
+# Code Time - https://plugins.jetbrains.com/plugin/10687-code-time/  - stats on your usage
+com.softwareco.intellij.plugin
+
+# Statistic - https://plugins.jetbrains.com/plugin/4509-statistic  - shows project stats, files, line count etc.
+Statistic
+
+
+# ============================================================================ #
+#                                   C l o u d
+# ============================================================================ #
+
+# AWS ToolKit - https://plugins.jetbrains.com/plugin/11349-aws-toolkit - Amazon CodeWhisperer integration
+aws.toolkit
+
+# Azure Toolkit for IntelliJ - https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij
+com.microsoft.tooling.msservices.intellij.azure
+
+# Google Cloud Code - https://plugins.jetbrains.com/plugin/8079-gemini-code-assist-cloud-code
+com.google.gct.core
+
+
+# ============================================================================ #
+#                                   C I / C D
+# ============================================================================ #
+
+# Jenkins Pipeline Linter - https://plugins.jetbrains.com/plugin/15699-jenkins-pipeline-linter
+com.github.mikesafonov.jenkins-linter-idea-plugin
+
+# Jenkins Control - https://plugins.jetbrains.com/plugin/6110-jenkins-control
+#Jenkins Control Plugin
+
+# Groovy - https://plugins.jetbrains.com/plugin/1524-groovy - for your Groovy Shared Library functions eg. https://github.com/HariSekhon/Jenkins
+#org.intellij.groovy  # sourced in the JVM section further down
+
+# Teamcity - https://plugins.jetbrains.com/plugin/1820-teamcity - just use Jenkins instead, see Jenkins-on_kubernetes: https://github.com/HariSekhon/Kubernetes-configs#Jenkins-on-Kubernetes
+#Jetbrains TeamCity Plugin
+
+# SonarLint - https://plugins.jetbrains.com/plugin/7973-sonarlint - use with SonarQube / SonarCloud
+org.sonarlint.idea
+
+# Synk Security - https://plugins.jetbrains.com/plugin/10972-snyk-security
+#io.snyk.snyk-intellij-plugin
+
+
+# ============================================================================ #
+#                O p t i o n a l   -   N i c e   t o   H a v e s
+# ============================================================================ #
+
+# IDEA Features Trainer - https://plugins.jetbrains.com/plugin/8554-ide-features-trainer  - teaches you the IDE
+training
+
+# Key Promoter X - https://plugins.jetbrains.com/plugin/9792-key-promoter-x  - teaches you keyboard shortcut when you click with the mouse
+"Key Promoter X"
+
+# Material Theme UI - https://plugins.jetbrains.com/plugin/8006-material-theme-ui
+com.chrisrm.idea.MaterialThemeUI
+
+# Extra Icons - https://plugins.jetbrains.com/plugin/11058-extra-icons  - adds icons for different file types
+lermitage.intellij.extra.icons
+
+# Atom Material Icons - https://plugins.jetbrains.com/plugin/10044-atom-material-icons  - nicer file icons
+com.mallowigi
+
+# Yet another emoji support - https://plugins.jetbrains.com/plugin/12512-yet-another-emoji-support
+com.github.shiraji.yaemoji
+
+# Mongo - https://plugins.jetbrains.com/plugin/7141-mongo-plugin
+#"Mongo Plugin"  # who uses Mongo any more?
+
+# Pieces - https://plugins.jetbrains.com/plugin/17328-pieces--save-search-share--reuse-code-snippets  - code snippets - you should be using libraries but unfortunately some languages have boilerplate for which library do not solve the repetition between programs. See also  HariSekhon/Templates - https://github.com/HariSekhon/Templates
+
+
+# ============================================================================ #
+#                                  P y t h o n
+# ============================================================================ #
+
+# Python - https://plugins.jetbrains.com/plugin/7322-python-community-edition - contains better support for Jython than PyCharm - cross-language navigation, completion and refactoring
+PythonCore
+
+# Requirements - https://plugins.jetbrains.com/plugin/10837-requirements
+ru.meanmail.plugin.requirements
+
+# PyLint - https://plugins.jetbrains.com/plugin/11084-pylint/
+com.leinardi.pycharm.pylint
+
+# Mypy - https://plugins.jetbrains.com/plugin/11086-mypy/
+com.leinardi.pycharm.mypy
+
+# Live Coding in Python - https://plugins.jetbrains.com/plugin/9742-live-coding-in-python/
+io.github.donkirkby.livepycharm
+
+# Python Enhancements - https://plugins.jetbrains.com/plugin/10194-python-enhancements/
+com.pythondce
+
+# Python Security - https://plugins.jetbrains.com/plugin/13609-python-security
+org.tonybaloney.security.pycharm-security
+
+# Python Annotations - https://plugins.jetbrains.com/plugin/12035-python-annotations
+ru.meanmail.plugin.pyannotations
+
+
+# ============================================================================ #
+#                                  N o d e J S
+# ============================================================================ #
+
+# NodeJS - https://plugins.jetbrains.com/plugin/6098#node-js
+NodeJS
+
+# ESLint - https://plugins.jetbrains.com/plugin/7494#eslint
+com.wix.eslint
+
+# Prettier - https://plugins.jetbrains.com/plugin/10456#prettier
+intellij.prettierJS
+
+# Quokka - https://plugins.jetbrains.com/plugin/9667#quokka  - rapid prototyping playground
+quokka.js
+
+
+# ============================================================================ #
+#                   Java / Groovy / Scala / Kotlin & JVM Tools
+# ============================================================================ #
+
+# Groovy - https://plugins.jetbrains.com/plugin/1524-groovy
+org.intellij.groovy
+
+# Scala - https://plugins.jetbrains.com/plugin/1347-scala
+org.intellij.scala
+
+# Kotlin - https://plugins.jetbrains.com/plugin/6954-kotlin
+org.jetbrains.kotlin
+
+# Maven Helper - https://plugins.jetbrains.com/plugin/7179-maven-helper
+MavenRunHelper
+
+# SBT - https://plugins.jetbrains.com/plugin/5007-sbt
+SBT
+
+# Gradle - https://plugins.jetbrains.com/plugin/13112-gradle
+com.intellij.gradle
+
+# Gradle/Maven Navigation - https://plugins.jetbrains.com/plugin/9857-gradle-maven-navigation
+tv.twelvetone.gradle.plugin.navigation
+
+# Sprint Boot Assistant - https://plugins.jetbrains.com/plugin/17747-spring-boot-assistant
+dev.flikas.idea.spring.boot.assistant.plugin
+# Lombok - https://plugins.jetbrains.com/plugin/6317-lombok  - automates generating getters/setters etc. Project Lombok - https://projectlombok.org/
+Lombook Plugin
+# JRebel - https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel  - auto-reload code changes
+# XRebel - https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel/  - performance profiling
+JRebelPlugin
+
+
+# ============================================================================ #
+#                               D e b u g g i n g
+# ============================================================================ #
+
+# SpotBugs - https://plugins.jetbrains.com/plugin/14014-spotbugs
+#org.jetbrains.plugins.spotbugs
+
+# LiveEdit - https://plugins.jetbrains.com/plugin/7007-live-edit  - shows changes instantly for JavaScript, HTML, can enable for NodeJS etc.
+#com.intellij.plugins.html.instantEditing
+
+# Lightrun - https://plugins.jetbrains.com/plugin/16477-lightrun  - for live running code debugging using  Lightrun - https://lightrun.com/
+#com.lightrun.idea.plugin.saas.LightrunPlugin
+
+# Rookout - https://plugins.jetbrains.com/plugin/12637-rookout
+#com.rookout.intellij-plugin
+
+
+# ============================================================================ #
+#                              A I   P l u g i n s
+# ============================================================================ #
+
+# JetBrains AI Assistant - https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
+  https://plugins.jetbrains.com/plugin/20724-ai-coding-assistant
+
+# AWS ToolKit - https://plugins.jetbrains.com/plugin/11349-aws-toolkit  - Amazon CodeWhisperer integration
+
+# TabNine - https://plugins.jetbrains.com/plugin/12798-tabnine-ai-code-completion--chat-in-java-js-ts-python--more  - AI code suggestions
+com.tabnine.TabNine
+
+# Codota AI Autocomplete for Java and JavaScript - https://plugins.jetbrains.com/plugin/7638-codota-ai-autocomplete-for-java-and-javascript
+ # `idea installPlugins com.codota.csp.intellij`
+
+# GitHub CoPilot - https://plugins.jetbrains.com/plugin/17718-github-copilot
+
+# AI Coding Assistant - https://plugins.jetbrains.com/plugin/20724-ai-coding-assistant
+
+# Codiumate - https://plugins.jetbrains.com/plugin/21206-codiumate--code-test-and-review-with-confidence--by-codiumai  - CodiumAI integration
