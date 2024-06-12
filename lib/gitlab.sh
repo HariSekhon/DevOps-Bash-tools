@@ -32,7 +32,7 @@ gitlab_pull_request_url_regex='https://gitlab.com/[[:alnum:]/_-]+/pull/[[:digit:
 
 get_gitlab_repo(){
     git remote -v 2>/dev/null |
-    grep -E "gitlab\.${domain_regex}[/:]" |
+    grep -E "gitlab\.[[:alnum:].-]+[/:]" |
     awk '{print $2}' |
     head -n1 |
     sed '
@@ -47,7 +47,7 @@ get_gitlab_repo(){
 is_gitlab_origin(){
     git remote -v |
     # permitting generic domain regex for those self-hosting their own gitlab servers
-    grep -Eq "^origin.*gitlab\.${domain_regex}[/:]"
+    grep -Eq "^origin.*gitlab\.[[:alnum:].-]+[/:]"
 }
 
 check_gitlab_origin(){
@@ -60,9 +60,9 @@ gitlab_origin_owner_repo(){
     local owner_repo
     owner_repo="$(
         git remote -v |
-        grep -Em1 '^origin.*gitlab\.${domain_regex}[/:]' |
+        grep -Em1 '^origin.*gitlab\.[[:alnum:].-]+[/:]' |
         sed '
-            s|.*gitlab\.${domain_regex}[:/]||;
+            s|.*gitlab\.[[:alnum:].-]*[:/]||;
             s/\.git.*//;
             s/[[:space:]].*//
         ' ||
