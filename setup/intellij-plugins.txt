@@ -300,7 +300,7 @@ JRebelPlugin
 # ============================================================================ #
 
 # JetBrains AI Assistant - https://plugins.jetbrains.com/plugin/22282-jetbrains-ai-assistant
-  https://plugins.jetbrains.com/plugin/20724-ai-coding-assistant
+https://plugins.jetbrains.com/plugin/20724-ai-coding-assistant
 
 # AWS ToolKit - https://plugins.jetbrains.com/plugin/11349-aws-toolkit  - Amazon CodeWhisperer integration
 
