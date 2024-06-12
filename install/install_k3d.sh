@@ -29,6 +29,8 @@ Installs K3d wrapper for k3s mini kubernetes distribution
 # shellcheck disable=SC2034
 usage_args="[<version_tag>]"
 
+help_usage "$@"
+
 version="${1:-}"
 
 if [ -n "$version" ]; then
