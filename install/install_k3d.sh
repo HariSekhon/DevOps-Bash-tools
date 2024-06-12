@@ -33,6 +33,8 @@ help_usage "$@"
 
 version="${1:-}"
 
+max_args "$@"
+
 if [ -n "$version" ]; then
     export TAG="$version"
 fi
