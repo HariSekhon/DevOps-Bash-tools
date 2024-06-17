@@ -27,6 +27,7 @@ section "Finding Non Executable Scripts"
 # These shouldn't be executable even if they have #! lines for syntax reasons
 exceptions='
 \.bash\.d
+/lib/
 env$
 \.env
 \.envrc
