@@ -223,6 +223,8 @@ fi
 # too heavy to run all the time, isExcluded on every file has really bad performance
 "$srcdir/check_whitespace.sh"
 
+"$srcdir/check_no_suid_guid_shell_scripts.sh"
+
 # ========================================
 # Expensive checks, do separately in CI/CD
 #
