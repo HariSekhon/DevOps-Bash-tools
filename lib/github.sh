@@ -72,6 +72,10 @@ github_origin_owner_repo(){
     echo "$owner_repo"
 }
 
+github_upstream_owner_repo(){
+    gh repo view --json parent | jq -r '.parent | .owner.login + "/" + .name'
+}
+
 is_github_owner_repo(){
     local repo="$1"
     # .github repo is valid
