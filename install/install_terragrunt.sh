@@ -43,3 +43,6 @@ version="${1:-${TERRAGRUNT_VERSION:-latest}}"
 export RUN_VERSION_OPT=1
 
 "$srcdir/../github/github_install_binary.sh" gruntwork-io/terragrunt 'terragrunt_{os}_{arch}' "$version" terragrunt
+
+#echo
+#terragrunt --install-autocomplete
