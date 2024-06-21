@@ -253,6 +253,7 @@ stats  # fancier Activity Monitor
 #terragrunt  # old, use install/install_terragrunt.sh to grab latest version to ~/bin instead
 #terraformer  # large, install only if actively using
 tfenv  # Terraform version manager inspired by rbenv
+tflint # Terraform linter
 tfsec  # Terraform static analysis by AquaSec
 thrift
 tidy-html5
