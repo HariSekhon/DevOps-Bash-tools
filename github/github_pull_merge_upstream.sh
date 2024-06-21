@@ -50,7 +50,7 @@ if [ $# -gt 0 ]; then
     upstream_owner_repo="$1"
     shift
 else
-    upstream_owner_repo="$(github_upstream_owner_repo)"
+    upstream_owner_repo="$(github_upstream_owner_repo || die "Not a forked repo?")"
 fi
 
 rebase="${GIT_REBASE:-false}"
