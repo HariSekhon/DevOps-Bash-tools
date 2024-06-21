@@ -73,7 +73,10 @@ github_origin_owner_repo(){
 }
 
 github_upstream_owner_repo(){
-    gh repo view --json parent | jq -r '.parent | .owner.login + "/" + .name'
+    local owner_repo
+    owner_repo="$(gh repo view --json parent | jq -r '.parent | .owner.login + "/" + .name')"
+    is_github_owner_repo "$owner_repo" || die "<owner>/<repo> '$owner_repo' does not match expected format"
+    echo "$owner_repo"
 }
 
 is_github_owner_repo(){
