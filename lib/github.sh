@@ -69,7 +69,7 @@ github_origin_owner_repo(){
         :
     )"
     if ! is_github_owner_repo "$owner_repo"; then
-        echo "<owner>/<repo> '$owner_repo' does not match expected format" >&2
+        echo "GitHub owner/repo '$owner_repo' does not match expected format" >&2
         return 1
     fi
     echo "$owner_repo"
@@ -79,7 +79,7 @@ github_upstream_owner_repo(){
     local owner_repo
     owner_repo="$(gh repo view --json parent | jq -r '.parent | .owner.login + "/" + .name')"
     if ! is_github_owner_repo "$owner_repo"; then
-        echo "<owner>/<repo> '$owner_repo' does not match expected format" >&2
+        echo "GitHub upstream owner/repo '$owner_repo' does not match expected format" >&2
         return 1
     fi
     echo "$owner_repo"
