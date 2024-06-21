@@ -4,7 +4,7 @@ checkov>=2.0.618
 grip>=4.6.1
 jsonlint>=0.1
 pylint>=1.9.5
-# can only be installed on macOS - moved to setup/pip-packages-macos.txt
+# can only be installed on macOS - moved to setup/pip-packages-mac.txt
 #pyobjc-framework-Quartz>=9.0.1
 semgrep>=0.78.0
 yamllint>=1.15.0
