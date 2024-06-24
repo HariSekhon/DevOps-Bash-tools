@@ -33,6 +33,10 @@ Set environment variable GIT_REBASE=true if you want the pulls and merge to curr
 if you really love violating VCS history integrity! Personally, not a fan. You can also end up in rebase hell for a series of
 commits that a default merge commit would have auto-resolved
 
+Read:
+
+    https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#the-evils-of-rebasing
+
 Requires GitHub CLI to be installed and authenticated, as well as jq
 "
 
