@@ -37,6 +37,10 @@ The BASE branch is the branch you want to merge INTO, eg. 'master' or 'main'
 If \$GITHUB_PULL_REQUEST_TITLE or \$GITHUB_PULL_REQUEST_BODY environment variables are set, those values will be used to generate the pull request
 If \$GITHUB_PULL_REQUEST_BODY is not set, but .github/pull_request_template.md is present at the top of the current checkout repo, will use that for the body. If the template body contains Jira ticket number token templates such as AA-XXXXX or AA-NNNNN and the current branch is prefixed with a matching alpha-number token, then those tokens will be replaced with the real Jira number from the branch
 
+To raise PRs across forks do:
+
+    ${0##*/} <upstream_repo> <your_forked_owner>:<your_forked_repo>:<your_feature_branch> <upstream_repo_base_trunk_branch_to_merge_to>
+
 
 Requires GitHub CLI to be installed and configured
 
