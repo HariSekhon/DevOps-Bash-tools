@@ -87,12 +87,12 @@ default_branch="$(default_branch)"
 # should be a straight fast-forward
 timestamp "Pulling default branch '$default_branch' from origin"
 echo
-git pull origin "$default_branch" "$default_branch" --rebase="$rebase"
+git pull origin "$default_branch" --rebase="$rebase"
 echo
 
-timestamp "Pulling from upstream $upstream_owner_repo"
+timestamp "Pulling default branch '$default_branch' from upstream $upstream_owner_repo"
 echo
-git pull upstream "$default_branch" "$default_branch" --rebase="$rebase"
+git fetch upstream "$default_branch:$default_branch"
 echo
 
 current_branch="$(git rev-parse --abbrev-ref HEAD)"
