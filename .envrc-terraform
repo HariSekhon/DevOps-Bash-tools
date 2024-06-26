@@ -13,6 +13,10 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# ============================================================================ #
+#                        T e r r a f o r m   D i r E n v
+# ============================================================================ #
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 #srcdir="$(dirname "${BASH_SOURCE[0]}")"
