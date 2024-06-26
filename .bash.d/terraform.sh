@@ -27,9 +27,14 @@ fi
 
 add_PATH ~/.tfenv/bin
 
-if [ -d ~/.tfenv/bin ]; then
-    export TERRAGRUNT_TFPATH=~/.tfenv/bin
-fi
+# do not do this, causes this error:
+#
+#   ERRO[0000] fork/exec /Users/hari/.tfenv/bin: no such file or directory
+#   ERRO[0000] Unable to determine underlying exit code, so Terragrunt will exit with error code 1
+#
+#if [ -d ~/.tfenv/bin ]; then
+#    export TERRAGRUNT_TFPATH=~/.tfenv/bin
+#fi
 
 alias tf=terraform
 alias tfp='tf plan'
