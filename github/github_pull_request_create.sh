@@ -36,6 +36,7 @@ The BASE branch is the branch you want to merge INTO, eg. 'master' or 'main'
 
 If \$GITHUB_PULL_REQUEST_TITLE or \$GITHUB_PULL_REQUEST_BODY environment variables are set, those values will be used to generate the pull request
 If \$GITHUB_PULL_REQUEST_BODY is not set, but .github/pull_request_template.md is present at the top of the current checkout repo, will use that for the body. If the template body contains Jira ticket number token templates such as AA-XXXXX or AA-NNNNN and the current branch is prefixed with a matching alpha-number token, then those tokens will be replaced with the real Jira number from the branch
+If \$GITHUB_PULL_REQUEST_AUTO_MERGE is set to any value then marks the pull request to be automatically merged once its pre-requisites like checks and peer review approval are passed
 
 To raise PRs across forks do:
 
@@ -127,6 +128,7 @@ if [ "$owner_repo" = '{owner}/{repo}' ]; then
             #body_template="${body_template//$match1/$branch_prefix}"
             #body_template="${body_template//$match2/$branch_prefix}"
             #shopt -u nocasematch
+            # shellcheck disable=SC2001
             body_template="$(sed "s/\\($match1\\|$match2\\)/$branch_prefix/gi" <<< "$body_template")"
         fi
     fi
@@ -171,7 +173,7 @@ if [ "$total_commits" -gt 0 ]; then
                  --head  "$head"   \
                  --title "$title"  \
                  --body  "$body"   \
-                 --no-maintainer-edit
+                 --no-maintainer-edit ${GITHUB_PULL_REQUEST_AUTO_MERGE:+--auto}
     echo >&2
 else
     timestamp "Branch '$base' is already up to date with upstream, skipping creating PR"
