@@ -179,9 +179,12 @@ if [ "$total_commits" -gt 0 ]; then
     fi
     if [ "$GITHUB_PULL_REQUEST_AUTO_MERGE" = true ]; then
         pr_url="$(get_pr_url)"
-        # do not quote as supplying unexpected empty args would likely break command
-        # shellcheck disable=SC2086
-        gh pr merge "$pr_url" --auto ${GITHUB_PULL_REQUEST_SQUASH:+--squash} ${GITHUB_PULL_REQUEST_SQUASH:---merge}
+        # not supporting Rebase on purpose - see https://medium.com/@harisekhon/the-evils-of-git-rebasing-beec34a607c7
+        merge_type="--merge"
+        if [ "${GITHUB_PULL_REQUEST_SQUASH:-}" = true ]; then
+            merge_type="--squash"
+        fi
+        gh pr merge "$pr_url" --auto "$merge_type"
     fi
     echo >&2
 else
