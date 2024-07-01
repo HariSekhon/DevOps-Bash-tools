@@ -179,6 +179,8 @@ if [ "$total_commits" -gt 0 ]; then
     fi
     if [ "$GITHUB_PULL_REQUEST_AUTO_MERGE" = true ]; then
         pr_url="$(get_pr_url)"
+        # do not quote as supplying unexpected empty args would likely break command
+        # shellcheck disable=SC2086
         gh pr merge "$pr_url" --auto ${GITHUB_PULL_REQUEST_SQUASH:+--squash} ${GITHUB_PULL_REQUEST_SQUASH:---merge}
     fi
     echo >&2
