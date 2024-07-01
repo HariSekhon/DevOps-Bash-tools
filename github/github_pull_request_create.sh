@@ -39,7 +39,7 @@ If \$GITHUB_PULL_REQUEST_BODY is not set, but .github/pull_request_template.md i
 
 If \$GITHUB_PULL_REQUEST_AUTO_MERGE is set to 'true' then marks the pull request to be automatically merged once its pre-requisites like checks and peer review approval are passed
 
-If \$GITHUB_PULL_REQUEST_SQUASH is set to any value, then marks the pull request to use a squash commit
+If \$GITHUB_PULL_REQUEST_SQUASH is set to any value, then marks the pull request to use a squash commit, otherwise defaults to merge
 
 To raise PRs across forks do:
 
@@ -179,7 +179,7 @@ if [ "$total_commits" -gt 0 ]; then
     fi
     if [ "$GITHUB_PULL_REQUEST_AUTO_MERGE" = true ]; then
         pr_url="$(get_pr_url)"
-        gh pr merge "$pr_url" --auto ${GITHUB_PULL_REQUEST_SQUASH:+--squash}
+        gh pr merge "$pr_url" --auto ${GITHUB_PULL_REQUEST_SQUASH:+--squash} ${GITHUB_PULL_REQUEST_SQUASH:---merge}
     fi
     echo >&2
 else
