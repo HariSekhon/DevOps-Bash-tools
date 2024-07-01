@@ -19,7 +19,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck source=lib/utils.sh
+# shellcheck source=lib/utils.sh disable=SC1091
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034
@@ -33,12 +33,12 @@ for x in "$@"; do
 done
 
 if [ $# -gt 0 ]; then
-    requirements_files="$*"
+    requirements_files=("$@")
 else
     # might be more confusing in pytools to find unused modules in subdirs like pylib, so just stick to local
     #requirements_files="$(find . -name requirements.txt)"
-    requirements_files="requirements.txt"
-    if [ -z "$requirements_files" ]; then
+    requirements_files=("requirements.txt")
+    if [ "${#requirements_files[@]}" = 0 ]; then
         usage "No requirements files found, please specify explicit path to requirements.txt"
     fi
 fi
@@ -50,7 +50,7 @@ pip_modules="$(
      s/[<>=].*//;
      s/^[[:space:]]*//;
      s/[[:space:]]*$//;
-     /^[[:space:]]*$/d;' $requirements_files |
+     /^[[:space:]]*$/d;' "${requirements_files[@]}" |
      sort -u |
      "$srcdir/python_translate_module_to_import.sh"
 )"
