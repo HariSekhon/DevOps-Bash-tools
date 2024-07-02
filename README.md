@@ -367,7 +367,7 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
   - `aws_codecommit_csv_creds.sh` - prints AWS [CodeCommit](https://aws.amazon.com/codecommit/) Git credentials from a CSV file as shell export statements. Similar use case and chaining as above
   - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
-    - `aws_ecr_list_repos.sh` - lists ECR repos and their docker image mutability and whether image scanning is enabled
+    - `aws_ecr_list_repos.sh` - lists ECR repos, and their docker image mutability and whether image scanning is enabled
     - `aws_ecr_list_tags.sh` - lists all the tags for a given ECR docker image
     - `aws_ecr_newest_image_tags.sh` - lists the tags for the given ECR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
     - `aws_ecr_alternate_tags.sh` - lists all the tags for a given ECR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
