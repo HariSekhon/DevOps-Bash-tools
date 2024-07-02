@@ -177,7 +177,7 @@ if [ "$total_commits" -gt 0 ]; then
                      --body  "$body"   \
                      --no-maintainer-edit
     fi
-    if [ "$GITHUB_PULL_REQUEST_AUTO_MERGE" = true ]; then
+    if [ "${GITHUB_PULL_REQUEST_AUTO_MERGE:-}" = true ]; then
         pr_url="$(get_pr_url)"
         # not supporting Rebase on purpose - see https://medium.com/@harisekhon/the-evils-of-git-rebasing-beec34a607c7
         merge_type="--merge"
