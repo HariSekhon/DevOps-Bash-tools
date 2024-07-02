@@ -90,14 +90,16 @@ echo
 git pull origin "$default_branch" --rebase="$rebase"
 echo
 
-timestamp "Pulling default branch '$default_branch' from upstream $upstream_owner_repo"
-echo
-git fetch upstream "$default_branch:$default_branch"
-echo
-
 current_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-if [ "$current_branch" != "develop" ]; then
+if [ "$current_branch" = "$default_branch" ]; then
+    timestamp "Pulling default branch '$default_branch' from upstream $upstream_owner_repo"
+    git pull upstream "$default_branch"
+else
+    timestamp "Fetching default branch '$default_branch' from upstream $upstream_owner_repo"
+    echo
+    git fetch upstream "$default_branch:$default_branch"
+    echo
     if [ "$rebase" = true ]; then
         timestamp "Rebasing current branch '$current_branch' from default branch '$default_branch'"
         git rebase "$default_branch"
