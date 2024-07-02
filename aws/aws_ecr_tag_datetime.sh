@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Tags a given GCR docker image with it's creation Date and Timestamp
+Tags a given ECR docker image with it's creation Date and Timestamp
 without pulling and pushing the docker image
 
 The timestamp is the created time (either uploaded or created by Google Cloud Build)
