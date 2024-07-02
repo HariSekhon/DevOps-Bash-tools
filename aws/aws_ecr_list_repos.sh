@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists all ECR repos and their docker image mutability and if image scanning is enabled
+Lists ECR repos, their docker image mutability and whether image scanning is enabled
 
 Output:
 
