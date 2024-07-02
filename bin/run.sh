@@ -123,6 +123,8 @@ else
                  *.gv)  file_png="${filename%.gv}.png"
                         dot -T png "$filename" -o "$file_png" >/dev/null && open "$file_png"
                         ;;
+            .pylintrc)  pylint ./*.py
+                        ;;
                     *)  if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
                             docker_compose_up
                         elif [[ "$filename" =~ \.ya?ml$ ]] &&
