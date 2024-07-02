@@ -42,7 +42,7 @@ Similar scripts:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image>:<tag> [<aws_cli_options>]"
+usage_args=""
 
 help_usage "$@"
 
