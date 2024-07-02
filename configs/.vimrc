@@ -318,7 +318,7 @@ if has("autocmd")
     au BufNew,BufRead Vagrantfile    nmap ;l :w<CR>:!clear; cd "%:p:h" && vagrant validate<CR>
     au BufNew,BufRead *.circleci/config.yml*  nmap ;l :w<CR>:!clear; check_circleci_config.sh \| more -R<CR>
     au BufNew,BufRead *circleci_config.yml*   nmap ;l :w<CR>:!clear; check_circleci_config.sh \| more -R<CR>
-    au BufNew,BufRead .pylintrc      nmap ;l :w<CR>:!clear; pylint *.py<CR>
+    au BufNew,BufRead .pylintrc      nmap ;l :w<CR>:!clear; pylint ./*.py<CR>
 
     " if a "lint:" header is found then run lint.sh - this allows for more complex file types like Kubernetes yaml
     " which can then be linted for yaml as well as k8s schema
