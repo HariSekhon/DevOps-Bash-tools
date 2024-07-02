@@ -36,6 +36,7 @@ for venv in "$PWD/venv" "$HOME/venv"; do
         # shellcheck disable=SC1091
         source "$venv/bin/activate"
         echo
+        break
     fi
 done
 
