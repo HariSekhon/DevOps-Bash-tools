@@ -41,14 +41,15 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
+max_args 1 "$@"
+
 #version="${1:-2.4.0}"
 version="${1:-latest}"
-
-ext="tar.gz"
 
 export ARCH_X86_64=amd64
 export OS_DARWIN=macOS
 
+ext="tar.gz"
 if is_mac; then
     ext="zip"
 fi
