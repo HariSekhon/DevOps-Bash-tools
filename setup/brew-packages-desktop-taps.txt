@@ -7,6 +7,7 @@
 
 # tap                   package
 
+hashicorp/tap           vault
 hashicorp/tap           packer
 
 ariga/tap               atlas
