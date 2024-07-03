@@ -10,6 +10,8 @@
 hashicorp/tap           vault
 hashicorp/tap           packer
 
+coder/coder             coder
+
 ariga/tap               atlas
 
 Checkmarx/tap           kics
