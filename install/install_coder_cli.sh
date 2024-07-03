@@ -54,4 +54,4 @@ if is_mac; then
     ext="zip"
 fi
 
-"$srcdir/../github/github_install_binary.sh" coder/coder "coder_{version}_{os}_{arch}.$ext" "$version" "coder_{version}_{os}_{arch}/bin/coder"
+"$srcdir/../github/github_install_binary.sh" coder/coder "coder_{version}_{os}_{arch}.$ext" "$version" coder
