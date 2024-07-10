@@ -68,6 +68,8 @@ dirty=""
 if git status --porcelain | grep -q . ; then
   if [ "${DOCKER_BUILD_HASH_CONTENTS:-}" = 1 ]; then
     git_root="$(git_root)"
+    # prepend the git root dir to each file because 'git status --porcelain' gives from relative root of repo
+    # then cat each file and pipe them all into md5sum to detect any content differences in the git repo for a unique hashref
     dirty="-dirty-$(git status --porcelain | cut -c 4- | sed "s|^|$git_root/|" | xargs cat | md5sum | cut -c 1-7)"
   else
     # if 7 char short hash is good enough for Git then it's good enough for me
