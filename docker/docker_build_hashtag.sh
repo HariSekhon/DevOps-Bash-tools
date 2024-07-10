@@ -67,7 +67,8 @@ fi
 dirty=""
 if git status --porcelain | grep -q . ; then
   if [ "${DOCKER_BUILD_HASH_CONTENTS:-}" = 1 ]; then
-    dirty="-dirty-$(git status --porcelain | cut -c 4- | xargs cat | md5sum | cut -c 1-7)"
+    git_root="$(git_root)"
+    dirty="-dirty-$(git status --porcelain | cut -c 4- | sed "s|^|$git_root/|" | xargs cat | md5sum | cut -c 1-7)"
   else
     # if 7 char short hash is good enough for Git then it's good enough for me
     dirty="-dirty-$(git status --porcelain | md5sum | cut -c 1-7)"
