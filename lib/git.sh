@@ -63,9 +63,11 @@ git_relative_dir(){
     if ! is_in_git_repo; then
         echo "Error: not in a git repo when trying to determine git_relative_dir()" >&2
     fi
-    local git_root_dir
-    git_root_dir="$(git_root_dir)"
-    echo "$git_root_dir/${PWD##$git_root/}"
+    local git_root
+    local git_root_basedir
+    git_root="$(git_root)"
+    git_root_basedir="$(git_root_basedir)"
+    echo "$git_root_basedir/${PWD##$git_root/}"
 }
 
 is_in_git_repo(){
