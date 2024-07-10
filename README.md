@@ -661,6 +661,7 @@ See also [Knowledge Base notes for Kubernetes](https://github.com/HariSekhon/Kno
 - `docker_*.sh` / `dockerhub_*.sh` - [Docker](https://www.docker.com/) / [DockerHub](https://hub.docker.com/) API scripts:
   - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
   - `docker_api.sh` - queries a Docker Registry with optional basic authentication if `$DOCKER_USER` & `$DOCKER_PASSWORD` are set
+  - `docker_build_hashtag.sh` - runs `docker build` and auto-generates docker image name and tag from relative Git path and commit short SHA and dirty sha if modified. Useful to compare docker image sizes between your clean and modified versions of `Dockerfile` or contents
   - `docker_registry_list_images.sh` - lists images in a given private Docker Registry
   - `docker_registry_list_tags.sh` - lists tags for a given image in a private Docker Registry
   - `docker_registry_get_image_manifest.sh` - gets a given image:tag manifest from a private Docker Registry
