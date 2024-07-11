@@ -243,8 +243,12 @@ npm-desktop: npm
 .PHONY: aws
 aws: system-packages python-version
 	@if ! command -v aws; then install/install_aws_cli.sh; fi
+#    @$(MAKE) codecommit
+#
+#.PHONY: codecommit
+#codecommit:
 	@# needed for github_mirror_repos_to_aws_codecommit.sh and dependent GitHub Actions workflows
-	@grep '^git-remote-codecommit' requirements.txt | { read v; [ "$$v" ] && { echo "$$v"; cat; } | xargs PIP=$(PIP) ./python/python_pip_install_if_absent.sh || :
+	@grep '^git-remote-codecommit' requirements.txt | { read v; [ "$$v" ] && { echo "$$v"; cat; }; } | xargs PIP=$(PIP) ./python/python_pip_install_if_absent.sh || :
 
 .PHONY: aws-shell
 aws-shell:
