@@ -42,13 +42,13 @@ If you really want the hash to change for any differing content changes, then se
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<context_path>]"
+usage_args="[<context_path> <docker_build_options>]"
 
 help_usage "$@"
 
-max_args 1 "$@"
-
 context_dir="${1:-.}"
+shift || :
+docker_build_options=("$@")
 
 if ! is_in_git_repo; then
     die "Not in a Git repo to auto-determine the Git short sha and relative path for docker image naming"
@@ -78,6 +78,6 @@ if git status --porcelain | grep -q . ; then
 fi
 
 set -x
-docker build "$context_dir" -t "${image_name}:${git_commit_short_sha}${dirty}"
+docker build "$context_dir" -t "${image_name}:${git_commit_short_sha}${dirty}" "${docker_build_options[@]}"
 
 docker images | grep "^$image_name"
