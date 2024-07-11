@@ -248,7 +248,13 @@ aws: system-packages python-version
 #.PHONY: codecommit
 #codecommit:
 	@# needed for github_mirror_repos_to_aws_codecommit.sh and dependent GitHub Actions workflows
-	@grep '^git-remote-codecommit' requirements.txt | { read v; [ "$$v" ] && { echo "$$v"; cat; } || exit 0; } | PIP=$(PIP) xargs ./python/python_pip_install_if_absent.sh || :
+	@if uname -s | grep -q Darwin; then \
+		xargs(){ \
+			gxargs "$$@"; \
+		}; \
+	fi; \
+	grep '^git-remote-codecommit' requirements.txt | \
+	PIP=$(PIP) xargs --no-run-if-empty ./python/python_pip_install_if_absent.sh || :
 
 .PHONY: aws-shell
 aws-shell:
