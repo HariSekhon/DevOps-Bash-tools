@@ -21,6 +21,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 #srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
+# XXX: beware that tfenv and tgswitch replace the terraform / terragrunt in the path and this is a race condition between different shells
+#	   it is not as good as the KUBECONFIG trick done in the .envrc-kubernetes
+
 # would auto-determine the version from the state file, but this commands seems to always return the version of your local binary pulling the state file, not the version from the actual terraform_version field in state file if you see when opening it up in the cloud bucket
 # terraform state pull | jq -r .terraform_version
 export TERRAFORM_VERSION=1.1.9
@@ -28,6 +31,14 @@ export TERRAFORM_VERSION=1.1.9
 # overrides .terraform-version file to make this single source of truth
 export TFENV_TERRAFORM_VERSION="$TERRAFORM_VERSION"
 export TFENV_AUTO_INSTALL=true
+
+# Terragrunt
+export TG_VERSION=0.39.2
+
+# if tgswitch is installed, trigger it to use the above TF_VERSION environment variable and switch to the correct version of Terragrunt
+if type -P tgswitch &>/dev/null; then
+    tgswitch
+fi
 
 # XXX: set these or other variables for Terraform code to find
 export CLOUDFLARE_EMAIL=hari@...
