@@ -10,6 +10,8 @@
 hashicorp/tap           vault
 hashicorp/tap           packer
 
+warrensbox/tap          tgswitch
+
 coder/coder             coder
 
 ariga/tap               atlas
