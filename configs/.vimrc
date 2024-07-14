@@ -672,7 +672,7 @@ endfunction
 
 function! TerragruntValidate()
     :%s/[[:space:]]->[[:space:]].*$//e
-    :!clear; bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; { terragrunt fmthcl --terragrunt-diff; terragrunt validate; } | more -R'
+    :!clear; bash -c 'if [ -d "%:p:h"/.terraform ]; then cd "%:p:h"; fi; { terragrunt hclfmt --terragrunt-diff; terragrunt validate; } | more -R'
 endfunction
 
 function! TerraformPlan()
