@@ -36,6 +36,7 @@ export TFENV_AUTO_INSTALL=true
 export TG_VERSION=0.39.2
 
 # if tgswitch is installed, trigger it to use the above TF_VERSION environment variable and switch to the correct version of Terragrunt
+# better than adding the ugly shell hook from the docs - https://github.com/warrensbox/tgswitch?tab=readme-ov-file#get-the-version-from-a-subdirectory
 if type -P tgswitch &>/dev/null; then
     tgswitch
 fi
