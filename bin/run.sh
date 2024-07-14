@@ -115,6 +115,8 @@ else
                  *.tf)  #terraform plan
                         terraform apply
                         ;;
+       terragrunt.hcl)  terragrunt apply
+                        ;;
  *.pkr.hcl|*.pkr.json)  packer init "$filename" &&
                         packer build "$filename"
                         ;;
