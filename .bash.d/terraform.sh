@@ -32,9 +32,11 @@ add_PATH ~/.tfenv/bin
 #   ERRO[0000] fork/exec /Users/hari/.tfenv/bin: no such file or directory
 #   ERRO[0000] Unable to determine underlying exit code, so Terragrunt will exit with error code 1
 #
-if [ -d ~/.tfenv/bin ]; then
+if [ -x ~/.tfenv/bin/terraform ]; then
     #export TERRAGRUNT_TFPATH=~/.tfenv/bin/  # it's full path to binary executable not a search $PATH!
     export TERRAGRUNT_TFPATH=~/.tfenv/bin/terraform
+elif ! [ -x "$TERRAGRUNT_TFPATH" ]; then
+    unset TERRAGRUNT_TFPATH
 fi
 
 alias tf=terraform
