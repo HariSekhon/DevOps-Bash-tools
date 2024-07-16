@@ -58,6 +58,7 @@ aws_profile(){
 alias awsp=awsprofile
 
 alias aws_whoami="aws sts get-caller-identity"
+alias awhoami=aws_whoami
 
 # loads creds from a CLI cache file (eg. for AWS SSO) into environment variables
 # better done via direnv
