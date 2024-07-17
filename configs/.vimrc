@@ -333,9 +333,9 @@ endif
 "                           K e y b i n d i n g s
 " ============================================================================ "
 
-"nmap <silent> ;c :call Cformat()<CR>
-nmap <silent> ;a :,!anonymize.py -a<CR>
-nmap          ;A :,!hexanonymize.py --case --hex-only<CR>
+"nmap <silent> ;c :call Cformat() <CR>
+nmap <silent> ;a :,!anonymize.py -a <CR>
+nmap          ;A :,!hexanonymize.py --case --hex-only <CR>
 nmap <silent> ;b :!git blame "%"<CR>
 "nmap <silent> ;c :call ToggleComments()<CR>
 nmap <silent> ;c :,!center.py<CR>
@@ -343,10 +343,10 @@ nmap <silent> ;e :,!center.py --space<CR>
 nmap <silent> ;C :,!center.py --unspace<CR>
 " parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
-nmap <silent> ;E :call WriteRunLine()<CR> :!reset<CR><CR>
+nmap <silent> ;E :call WriteRunLine()<CR> :!reset <CR><CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 "nmap <silent> ;D :Done<CR>
-nmap <silent> ;D :%!decomment.sh %<CR>
+nmap <silent> ;D :%!decomment.sh "%" <CR>
 "nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
 "nmap <silent> ;h :call Hr()<CR>
 nmap <silent> ;h :Hr<CR>
@@ -354,14 +354,15 @@ nmap          ;H :call WriteHelp()<CR>
 " this inserts Hr literally
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;I :PluginInstall<CR>
+nmap          ;i :'<,'>!readme_generate_index.sh "%" <CR>
 nmap <silent> ;j :JHr<CR>
-nmap          ;k :w<CR> :! check_kubernetes_yaml.sh %<CR>
+nmap          ;k :w<CR> :! check_kubernetes_yaml.sh "%" <CR>
 "nmap <silent> ;' :call Sq()<CR>
 " done automatically on write now
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
-nmap <silent> ;' :w<CR> :!clear; git diff "%"<CR>
+nmap <silent> ;' :w<CR> :!clear; git diff "%" <CR>
 nmap          ;n :w<CR> :n<CR>
-nmap          ;o :!cd "%:p:h" && git log -p "%:t"<CR>
+nmap          ;o :!cd "%:p:h" && git log -p "%:t" <CR>
 nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
 "nmap          ;P :call TogglePaste()<CR>
@@ -377,15 +378,15 @@ nmap          ;R :call WriteRunDebug()<CR>
 nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :call HgGitU()<CR>
 " command not found
-"nmap          ;; :! . ~/.bashrc; gitu "%"<CR>
-nmap          ;; :w<CR> :! bash -ic 'gitu "%"'<CR>
-nmap          ;/ :w<CR> :! bash -ic 'add "%"'<CR>
-nmap          ;g :w<CR> :! bash -ic 'cd "%:p:h" && st'<CR>
-nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%:t"'<CR>
-"nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p'<CR>
+"nmap          ;; :! . ~/.bashrc; gitu "%" <CR>
+nmap          ;; :w<CR> :! bash -ic 'gitu "%"' <CR>
+nmap          ;/ :w<CR> :! bash -ic 'add "%"' <CR>
+nmap          ;g :w<CR> :! bash -ic 'cd "%:p:h" && st' <CR>
+nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%:t"' <CR>
+"nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p' <CR>
 nmap          ;L :w<CR> :! lint.sh %<CR>
-nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull'<CR>
-nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push'<CR>
+nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull' <CR>
+nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push' <CR>
 " write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
 " this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
 nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
