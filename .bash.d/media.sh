@@ -24,6 +24,11 @@ webp_to_png(){
     # catches case insensitive and we already validated the filename is a case insentive .webp above
     basename="${filename%.*}"
     newname="$basename.png"
+    # dwebp overwrites the -o outfile so add extra protection here
+    if [ -f "$newname" ]; then
+        echo "File '$filename' already exists, not overwriting for safety"
+        return 1
+    fi
     echo "Converting '$filename' to '$newname'"
     dwebp "$filename" -o "$basename.png"
 }
