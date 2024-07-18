@@ -56,6 +56,7 @@ csv
 dmg
 doc
 docx
+img
 iso
 jpeg
 jpg
@@ -91,34 +92,36 @@ move_files_of_extension(){
     local file_extension="$1"
     timestamp "Processing files or extension '$file_extension'"
     echo >&2
-    local subdirectory
+    local subdir
     case "$file_extension" in
-           doc|docx|odp|rtf)    subdirectory="DOC"
+           doc|docx|odp|rtf)    subdir="DOC"
                                 ;;
-                   ppt|pptx)    subdirectory="POWERPOINT"
+                   ppt|pptx)    subdir="POWERPOINT"
                                 ;;
-                   xls|xlsx)    subdirectory="EXCEL"
+                   xls|xlsx)    subdir="EXCEL"
                                 ;;
-                        log)    subdirectory="LOGS"
+                    img|iso)    subdir="ISO"
                                 ;;
-            crt|key|p12|pem)    subdirectory="SSL_CERTS"
+                        log)    subdir="LOGS"
                                 ;;
-      jpg|jpeg|png|webp|svg)    subdirectory="PICS"
+            crt|key|p12|pem)    subdir="SSL_CERTS"
                                 ;;
-tar|tar.gz|tar.bz2|tgz|tbz2)    subdirectory="TARBALLS"
+      jpg|jpeg|png|webp|svg)    subdir="PICS"
                                 ;;
-                          *)    subdirectory="$(tr '[:lower:]' '[:upper:]' <<< "$file_extension")"
+tar|tar.gz|tar.bz2|tgz|tbz2)    subdir="TARBALLS"
+                                ;;
+                          *)    subdir="$(tr '[:lower:]' '[:upper:]' <<< "$file_extension")"
 
     esac
 
-    mkdir -p -v "$subdirectory"
+    mkdir -p -v "$subdir"
 
     #yes no |
     find . -maxdepth 1 \
            -type f \
            -iname "*.$file_extension" \
            -mtime +"${DOWNLOADS_ORGANIZE_OLD_DAYS_THRESHOLD:-7}" \
-           -exec mv -iv "{}" "$subdirectory/" \;  # trailing slash is important to enforce directory move and not accidental rename behaviour
+           -exec mv -iv "{}" "$subdir/" \;  # trailing slash is important to enforce directory move and not accidental rename behaviour
     echo >&2
 }
 
