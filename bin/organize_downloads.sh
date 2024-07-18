@@ -51,6 +51,7 @@ file_extension="${1:-}"
 # Common file extensions cluttering my ~/Downloads directory
 file_extensions=(
 cer
+cert
 crt
 csv
 dmg
@@ -104,7 +105,7 @@ move_files_of_extension(){
                                 ;;
                         log)    subdir="LOGS"
                                 ;;
-            crt|key|p12|pem)    subdir="SSL_CERTS"
+       crt|cert|key|p12|pem)    subdir="SSL_CERTS"
                                 ;;
       jpg|jpeg|png|webp|svg)    subdir="PICS"
                                 ;;
