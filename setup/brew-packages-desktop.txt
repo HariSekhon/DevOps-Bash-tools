@@ -119,6 +119,7 @@ graphviz  # for the 'dot' command (use with terraform graph), and also github.co
 hadolint
 haproxy
 helm
+hexyl  # hex command line viewer - https://github.com/sharkdp/hexyl
 htop
 hub
 #hugo  # static website generator - https://gohugo.io/getting-started/quick-start/
