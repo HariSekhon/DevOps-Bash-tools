@@ -78,6 +78,7 @@ gt5
 gvim
 heartbeat
 hexedit
+hexyl  # hex viewer - https://github.com/sharkdp/hexyl
 honeyd
 hostapd
 incron
