@@ -41,7 +41,9 @@ if [ "$version" = latest ]; then
     timestamp "Determined latest version of PostgreSQL JDBC driver to be version '$version'"
 fi
 
-download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
+# avoid race condition between different sites updating at different times and pull from GitHub releases where we determined latest version to be from
+#download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
+download_url="https://github.com/pgjdbc/pgjdbc/releases/download/REL$version/postgresql-$version.jar"
 
 timestamp "Downloading PostgreSQL JDBC version '$version' from $download_url"
 echo >&2
