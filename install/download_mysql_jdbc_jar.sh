@@ -13,12 +13,50 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Useful to quickly get the MySQL connector jar eg. to upload to Kubernetes
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-MYSQL_VERSION="${1:-8.0.22}"
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/../lib/utils.sh"
 
-curl -sSL --fail "https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-$MYSQL_VERSION.tar.gz" |
-tar zxvf - -C . --strip 1 "mysql-connector-java-$MYSQL_VERSION/mysql-connector-java-$MYSQL_VERSION.jar"
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Quickly determines and downloads latest MySQL JDBC jar or an explicitly given version
+
+Useful to get the jar to upload to data integration 3rd party directories or Docker images or Kubernetes
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
+
+latest="9.0.0"
+
+#version="${1:-8.0.22}"
+version="${1:-$latest}"
+
+# TODO: figure out a way of determining what the latest MySQL JDBC connector version is
+
+if [ "$version" = "$latest" ]; then
+    download_url="https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-j-$version.tar.gz"
+else
+    download_url="https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j-$version.tar.gz"
+fi
+
+timestamp "Downloading MySQL JDBC version '$version' from $download_url"
+echo >&2
+
+tarball="mysql-connector-j-$version.tar.gz"
+
+if type -P wget; then
+    wget -cO "$tarball" "$download_url"
+else
+    tmpfile="$(mktemp).tar.gz"
+    curl --fail "$download_url" > "$tmpfile"
+    unalias mv &>/dev/null || :
+    mv -fv "$tmpfile" "$tarball"
+fi
+tar zxvf "$tarball" -C . --strip 1 "mysql-connector-j-$version/mysql-connector-j-$version.jar"
+
+timestamp "Download complete"
