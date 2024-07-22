@@ -172,6 +172,7 @@ gvim
 gxmessage
 heartbeat
 hexedit
+#hexyl  # hex viewer - https://github.com/sharkdp/hexyl - requires sudo eselect repository enable dm9pZCAq && sudo emerge --sync dm9pZCAq && sudo emerge sys-apps/hexyl::dm9pZCAq
 honeyd
 hostapd
 hping
