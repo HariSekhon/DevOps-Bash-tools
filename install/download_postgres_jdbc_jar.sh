@@ -13,15 +13,46 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Useful to quickly download the PostgreSQL JDBC jar
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-POSTGRESQL_JDBC_VERSION="${1:-42.2.18}"
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/../lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Quickly determines and downloads latest PostgreSQL JDBC jar or an explicitly given version
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<version>]"
+
+#version="${1:-42.2.18}"
+version="${1:-latest}"
+
+github_owner_repo="pgjdbc/pgjdbc"
+
+if [ "$version" = latest ]; then
+    timestamp "Determining latest version of PostgreSQL JDBC driver available"
+    version="$(github_repo_latest_release.sh "$github_owner_repo")"
+    version="${version#REL}"
+    timestamp "Determined latest version of PostgreSQL JDBC driver to be version '$version'"
+fi
+
+download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
+
+timestamp "Downloading PostgreSQL JDBC version '$version' from $download_url"
+echo >&2
 
 if type -P wget; then
-    wget -O "postgresql-$POSTGRESQL_JDBC_VERSION.jar" "https://jdbc.postgresql.org/download/postgresql-$POSTGRESQL_JDBC_VERSION.jar"
+    wget -cO "postgresql-jdbc-$version.jar" "$download_url"
 else
-    curl --fail "https://jdbc.postgresql.org/download/postgresql-$POSTGRESQL_JDBC_VERSION.jar" > "postgresql-$POSTGRESQL_JDBC_VERSION.jar"
+    tmpfile="$(mktemp)"
+    curl --fail "$download_url" > "$tmpfile"
+    unalias mv &>/dev/null || :
+    mv -fv "$tmpfile" "postgresql-jdbc-$version.jar"
 fi
+
+timestamp "Download complete"
