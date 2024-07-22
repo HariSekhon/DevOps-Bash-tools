@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Quickly determines and downloads latest PostgreSQL JDBC jar or an explicitly given version
+
+Useful to get the jar to upload to data integration 3rd party directories or Docker images or Kubernetes
 "
 
 # used by usage() in lib/utils.sh
@@ -48,13 +50,15 @@ download_url="https://github.com/pgjdbc/pgjdbc/releases/download/REL$version/pos
 timestamp "Downloading PostgreSQL JDBC version '$version' from $download_url"
 echo >&2
 
+jar="postgresql-jdbc-$version.jar"
+
 if type -P wget; then
-    wget -cO "postgresql-jdbc-$version.jar" "$download_url"
+    wget -cO "$jar" "$download_url"
 else
     tmpfile="$(mktemp)"
     curl --fail "$download_url" > "$tmpfile"
     unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "postgresql-jdbc-$version.jar"
+    mv -fv "$tmpfile" "$jar"
 fi
 
 timestamp "Download complete"
