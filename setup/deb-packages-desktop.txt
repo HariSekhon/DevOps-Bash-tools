@@ -127,6 +127,7 @@ gvim
 harden-doc
 heartbeat
 hexedit
+hexyl  # hex viewer - https://github.com/sharkdp/hexyl
 honeyd
 hostapd
 hping2
