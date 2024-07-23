@@ -159,8 +159,7 @@ show_jinfo_classpath(){
     hr
 }
 
-#if ! process_list="$(jps 2>/dev/null)"; then
-if : ; then
+if ! process_list="$(jps 2>/dev/null)"; then
 	echo "WARNING: jps failed, perhaps not in \$PATH? (\$PATH = $PATH)" >&2
 	echo "WARNING: Falling back to ps command" >&2
 	process_list="$(ps -e -o pid,user,command)"
