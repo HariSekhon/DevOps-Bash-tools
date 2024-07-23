@@ -25,7 +25,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Program to print all the command line classpaths of Java processes based on a given command process regex
+Prints all the command line classpaths of Java processes
+
+Optionally filter Java processes by a giving a regex
 "
 
 # used by usage() in lib/utils.sh
