@@ -66,7 +66,7 @@ replace_classpath_with_token(){
 
 show_cli_classpath(){
     local cmd="$1"
-    [[ "$cmd" =~ \bjava\b ]] || return
+    [[ "$cmd" =~ java ]] || return
     args="${cmd#*java }"
     cmd="$(replace_classpath_with_token "$cmd")"
 	echo
