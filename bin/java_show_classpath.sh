@@ -104,9 +104,9 @@ show_jinfo_classpath(){
         echo "command: $(ps -f -p "$pid" | tail -n +2 | sed 's/^[[:space:]]*//')"
         echo
     else
-        if ! [[ "$cmd" =~ \<java\> ]]; then
+        if ! [[ "$cmd" =~ [[:\<:]]java[[:\>:]] ]]; then
             # shellcheck disable=SC2028
-            echo "skipping $cmd since it doesn't match regex \\<java\\>"
+            echo "skipping $cmd since it doesn't match regex [[:\\<:]]java[[:\\>:]]"
             return
         fi
         cmd="$(replace_classpath_with_token "$cmd")"
