@@ -60,15 +60,15 @@ is_jps_output(){
     [[ "$1" =~ ^([[:digit:]]+)[[:space:]]+([[:alnum:]]*)$ ]]
 }
 
-replace_classpath_with_token(){
-    sed 's/[[:space:]]-\(cp\|classpath\)[[:space:]=]\+.\+[[:space:]]/ <CLASSPATHS> /' <<< "$1"
-}
+#replace_classpath_with_token(){
+#    sed 's/[[:space:]]-\(cp\|classpath\)[[:space:]=]\+.\+[[:space:]]/ <CLASSPATHS> /' <<< "$1"
+#}
 
 show_cli_classpath(){
     local cmd="$1"
     [[ "$cmd" =~ java ]] || return
     args="${cmd#*java }"
-    cmd="$(replace_classpath_with_token "$cmd")"
+    #cmd="$(replace_classpath_with_token "$cmd")"
 	echo
     echo "command:  $cmd"
     echo
@@ -109,7 +109,7 @@ show_jinfo_classpath(){
             echo "skipping $cmd since it doesn't match regex 'java'"
             return
         fi
-        cmd="$(replace_classpath_with_token "$cmd")"
+        #cmd="$(replace_classpath_with_token "$cmd")"
         echo
         echo "command:  $cmd"
         if [[ "$cmd" =~ ^[[:space:]]*[[:alnum:]]+[[:space:]]+[[:digit:]]+[[:space:]]+ ]]; then
