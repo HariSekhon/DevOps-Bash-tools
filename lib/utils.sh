@@ -1214,6 +1214,13 @@ is_bool(){
     [[ "$arg" =~ ^true|false$ ]]
 }
 
+# [[ regex
+is_regex(){
+    local regex="$1"
+    # right side must not be quoted in order to be properly interpreted as regex
+    [[ "$regex" =~ $regex ]]
+}
+
 parse_export_key_value(){
     local env_var="$1"
     env_var="${env_var%%#*}"
