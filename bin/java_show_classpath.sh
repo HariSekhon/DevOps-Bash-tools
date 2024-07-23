@@ -104,9 +104,9 @@ show_jinfo_classpath(){
         echo "command: $(ps -f -p "$pid" | tail -n +2 | sed 's/^[[:space:]]*//')"
         echo
     else
-        if ! [[ "$cmd" =~ \bjava\b ]]; then
+        if ! [[ "$cmd" =~ \<java\> ]]; then
             # shellcheck disable=SC2028
-            echo "skipping $cmd since it doesn't match regex \\bjava\\b"
+            echo "skipping $cmd since it doesn't match regex \\<java\\>"
             return
         fi
         cmd="$(replace_classpath_with_token "$cmd")"
@@ -173,8 +173,8 @@ while IFS= read -r line; do
         else
             show_jinfo_classpath "$line"
         fi
-    #elif grep -Eq "\\bjava\\b.*$command_regex" <<< "$line"; then
-    elif [[ "$line" =~ \bjava\b.*$command_regex ]]; then
+    #elif grep -Eq "\<java\>.*$command_regex" <<< "$line"; then
+    elif [[ "$line" =~ \<java\>.*$command_regex ]]; then
         #show_jinfo_classpath "$line"
         show_cli_classpath "$line"
     fi
