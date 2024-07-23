@@ -61,7 +61,7 @@ is_jps_output(){
 }
 
 replace_classpath_with_token(){
-    sed 's/[[:space:]]-\(cp\|classpath\)[[:space:]=]\+[^ ]\+\([[:space:]]\|$\)/ <CLASSPATHS> /' <<< "$1"
+    sed 's/[[:space:]]-\(cp\|classpath\)[[:space:]=]\+.\+[[:space:]]/ <CLASSPATHS> /' <<< "$1"
 }
 
 show_cli_classpath(){
@@ -74,7 +74,7 @@ show_cli_classpath(){
     echo
     count=0
 	# XXX: will break upon directories in classpath containing a space, but this should be rare on unix systems
-    classpaths="$(grep -Eo -- '[[:space:]]-(cp|classpath)[[:space:]]*([^[:space:]]+)')"
+    classpaths="$(grep -Eo -- '-(cp|classpath)[=[:space:]]+(.+)[[:space:]]' <<< "$args" || die "Failed to find classpath in args '$args'")"
 	classpaths="${classpaths## }"
 	classpaths="${classpaths##-cp}"
 	classpaths="${classpaths##-classpath}"
@@ -159,7 +159,8 @@ show_jinfo_classpath(){
     hr
 }
 
-if ! process_list="$(jps 2>/dev/null)"; then
+#if ! process_list="$(jps 2>/dev/null)"; then
+if : ; then
 	echo "WARNING: jps failed, perhaps not in \$PATH? (\$PATH = $PATH)" >&2
 	echo "WARNING: Falling back to ps command" >&2
 	process_list="$(ps -e -o pid,user,command)"
@@ -175,7 +176,7 @@ while IFS= read -r line; do
         else
             show_jinfo_classpath "$line"
         fi
-    elif [[ "$line" =~ java.*$command_regex ]]; then
+    elif [[ "$line" =~ java[[:space:]].*$command_regex ]]; then
         #show_jinfo_classpath "$line"
         show_cli_classpath "$line"
     fi
