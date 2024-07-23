@@ -138,6 +138,8 @@ show_jinfo_classpath(){
             line="${line#*=}"
             line="${line# }"
             count=0
+            # jinfo escapes the colon separators with backslashes
+            line="$(sed 's/\\:/:/g' <<< "$line")"
             IFS=':' read -r -a classpaths <<< "$line"
             for classpath in "${classpaths[@]}"; do
                 [ -z "$classpath" ] && continue
