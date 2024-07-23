@@ -173,7 +173,6 @@ while IFS= read -r line; do
         else
             show_jinfo_classpath "$line"
         fi
-    #elif grep -Eq "\<java\>.*$command_regex" <<< "$line"; then
     elif [[ "$line" =~ [[:\<:]]java[[:\>:]].*$command_regex ]]; then
         #show_jinfo_classpath "$line"
         show_cli_classpath "$line"
