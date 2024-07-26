@@ -87,14 +87,15 @@ default_branch="$(default_branch)"
 # should be a straight fast-forward
 timestamp "Pulling default branch '$default_branch' from origin"
 echo
-git pull origin "$default_branch" --rebase="$rebase"
+# --no-edit option isn't available to rebase
+git pull origin "$default_branch" --rebase="$rebase" --no-edit
 echo
 
 current_branch="$(git rev-parse --abbrev-ref HEAD)"
 
 if [ "$current_branch" = "$default_branch" ]; then
     timestamp "Pulling default branch '$default_branch' from upstream $upstream_owner_repo"
-    git pull upstream "$default_branch"
+    git pull upstream "$default_branch" --no-edit
 else
     timestamp "Fetching default branch '$default_branch' from upstream $upstream_owner_repo"
     echo
@@ -105,6 +106,6 @@ else
         git rebase "$default_branch"
     else
         timestamp "Merging default branch '$default_branch' into current branch '$current_branch'"
-        git merge "$default_branch"
+        git merge "$default_branch" --no-edit
     fi
 fi
