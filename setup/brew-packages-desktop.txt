@@ -198,6 +198,7 @@ parquet-tools
 perltidy
 pgcli
 pgformatter
+pigz  # parallel gzip
 pinentry
 pinentry-mac
 pip-completion
