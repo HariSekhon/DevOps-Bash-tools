@@ -241,6 +241,7 @@ php5-cli
 phrack-all
 pidgin
 pidgin-sipe
+pigz  # parallel gzip
 pinentry-gtk
 piozone
 pound
