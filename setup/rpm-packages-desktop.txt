@@ -146,6 +146,7 @@ PEAR-PHP_Shell
 perl-doc
 pidgin
 pidgin-sipe
+pigz  # parallel gzip
 piozone
 pound
 psh
