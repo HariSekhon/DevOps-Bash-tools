@@ -309,6 +309,7 @@ PEAR-PHP_Shell
 perl-doc
 pidgin
 pidgin-sipe
+pigz  # parallel gzip
 pinentry
 piozone
 pipebench
