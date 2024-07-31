@@ -75,10 +75,34 @@ github_origin_owner_repo(){
     echo "$owner_repo"
 }
 
+github_repo_set_default(){
+    # this command has poor behaviour - returns exit code 0 whether set or not, and the error string is sent to stdout instead of stderr, and we don't want to
+    #
+    #   https://github.com/cli/cli/issues/9398
+    #
+    # returns blank when in a pipe
+    if ! gh repo set-default --view | grep -q '.'; then
+        local origin
+        origin="$(git remote -v | awk '/^origin[[:space:]]/{print $2; exit}')"
+        if [ -n "$origin" ]; then
+            timestamp "GitHub CLI setting repo default to '$origin'"
+            gh repo set-default "$origin"
+        else
+            gh repo set-default --view >&2
+            echo "GitHub CLI default repo not set" >&2
+            return 1
+        fi
+    fi
+}
+
 github_upstream_owner_repo(){
     local owner_repo
+    github_repo_set_default
     owner_repo="$(gh repo view --json parent | jq -r '.parent | .owner.login + "/" + .name')"
-    if ! is_github_owner_repo "$owner_repo"; then
+    if [ "$owner_repo" = / ]; then
+        echo "Failed to determine upstream owner/repo" >&2
+        return 1
+    elif ! is_github_owner_repo "$owner_repo"; then
         echo "GitHub upstream owner/repo '$owner_repo' does not match expected format" >&2
         return 1
     fi
