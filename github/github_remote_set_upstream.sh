@@ -25,7 +25,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-In a forked GitHub repo's checkout, determines the origin of the fork using GitHub CLI and configures a git remote to the upstream
+In a forked GitHub repo's checkout, determine the origin of the fork using GitHub CLI and configure a git remote to the upstream
+
+Useful to be able to easily pull updates from the original source repo
 "
 
 # used by usage() in lib/utils.sh
