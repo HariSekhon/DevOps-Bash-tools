@@ -63,23 +63,7 @@ if ! is_bool "$rebase"; then
     usage "GIT_REBASE environment variable must be set to 'true' or 'false'"
 fi
 
-# follow the clone checkout scheme eg. https:// or ssh://
-#
-# this helps remote workers like me avoiding proxy / wifi hotspot restrictions using HTTPS clones instead of SSH
-timestamp "Determining git base url"
-echo
-github_url_base="$(
-    git remote -v |
-    awk '/origin/ { print $2; exit }' |
-    sed 's|\(.*github.com[:/]\).*|\1|'
-)"
-
-if git remote -v | grep -q '^upstream'; then
-    timestamp "Git remote 'upstream' already exists, not creating"
-else
-    timestamp "Adding git remote 'upstream' to be able to pull directly from original source repo we are forked from"
-    git remote add upstream "${github_url_base}${upstream_owner_repo}"
-fi
+"$srcdir/github_remote_set_upstream.sh" "$upstream_owner_repo"
 echo
 
 default_branch="$(default_branch)"
