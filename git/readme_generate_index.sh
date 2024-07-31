@@ -49,6 +49,9 @@ sed '/^[#[:space:]]*Index$/d' |
 while read -r line; do
     level="$(grep -Eo '^#+' <<< "$line" | tr -d '[:space:]' | wc -c)"
     level="${level//[[:space:]]}"
+    if [ "$level" -gt 3 ]; then
+        continue
+    fi
     title="${line##*# }"
     # create relative links of just the anchor and not the repo URL prefix, it's more portable
     link="$(
