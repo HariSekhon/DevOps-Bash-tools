@@ -76,7 +76,7 @@ github_origin_owner_repo(){
 }
 
 github_repo_set_default(){
-    # this command has poor behaviour - returns exit code 0 whether set or not, and the error string is sent to stdout instead of stderr, and we don't want to
+    # this command has poor behaviour - returns exit code 0 whether set or not, and the error string is sent to stdout instead of stderr, although it returns blank when in a pipe
     #
     #   https://github.com/cli/cli/issues/9398
     #
