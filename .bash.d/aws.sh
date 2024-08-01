@@ -42,7 +42,11 @@ if [ -d ~/.ebcli-virtual-env/executables/ ]; then
     add_PATH ~/.ebcli-virtual-env/executables/
 fi
 
-# =====================
+# ============================================================================ #
+#                   A l i a s e s   a n d   F u n c t i o n s
+# ============================================================================ #
+
+alias awsl='aws sso login'
 
 #alias s3='s3cmd'
 alias s3='aws s3'
