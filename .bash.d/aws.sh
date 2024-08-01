@@ -57,6 +57,8 @@ alias awsc='awscon'
 
 # easily set a profile env var
 aws_profile(){
+    # false positive
+    # shellcheck disable=SC2317
     export AWS_PROFILE="$*"
 }
 alias awsp=awsprofile
