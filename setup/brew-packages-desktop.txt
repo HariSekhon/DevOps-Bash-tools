@@ -55,6 +55,7 @@ bash  # version 5, not old version 3 from Apple due to licensing
 #bazel
 bazelisk  # bazel wrapper downloader like mvnw/gradlew, addes 'bazel' to $PATH so conflicts with bazel package above
 brew-cask-completion
+#duckdb  # open-source in-memory columnar RDBMS, see Knowledge Base for more details: https://github.com/HariSekhon/Knowledge-Base
 cfssl
 #cfn-lint
 checkov
