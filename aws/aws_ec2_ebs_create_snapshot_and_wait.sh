@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a snapshot of a given EBS volume ID and waits for it to complete
+Creates a snapshot of a given EBS volume ID and waits for it to complete with exponential backoff
 
 Useful to take before enlarging EBS volumes as a backup in case anything goes wrong
 
