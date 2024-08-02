@@ -81,7 +81,7 @@ sleep_secs=5
 # loop indefinitely until we explicitly break using time check
 while : ; do
     if [ "$SECONDS" -gt 7200 ]; then
-        die "Spent 2 hours waiting for EBS snapshot to complete!"
+        die "Timed out waiting 2 hours for EBS snapshot to complete!"
     fi
     if get_aws_pending_snapshots | tee /dev/stderr | grep -Fq "$description"; then
         echo
