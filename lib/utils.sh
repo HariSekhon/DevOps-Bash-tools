@@ -1234,13 +1234,19 @@ exponential(){
         echo "ERROR: non-integer passed as first arg to exponential() function!" >&2
         return 1
     fi
-    local result
-    result="$((int * 2))"
     if [ -n "$max" ]; then
         if ! is_int "$max"; then
             echo "ERROR: non-integer passed as second arg to exponential() function!" >&2
             return 1
         fi
+        if [ "$int" -ge "$max" ]; then
+            echo "$max"
+            return
+        fi
+    fi
+    local result
+    result="$((int * 2))"
+    if [ -n "$max" ]; then
         if [ "$result" -gt "$max" ]; then
             result="$max"
         fi
