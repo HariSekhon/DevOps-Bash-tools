@@ -65,8 +65,11 @@ timestamp "Finding EC2 instance name for instance ID '$instance_id'"
 # shellcheck disable=SC2016
 instance_name="$(aws ec2 describe-instances --instance-ids "$instance_id" --query 'Reservations[*].Instances[*].{InstanceID:InstanceId,Name:Tags[?Key==`Name`].Value|[0]}' --output json | jq -r '.[].[].Name' | head -n 1)"
 
+# automatically prefix the description with the instance name
+description="$instance_name: $description"
+
 timestamp "Taking snapshot of volume '$volume_id' on EC2 instance '$instance_name' with description '$description'"
-snapshot="$(aws ec2 create-snapshot --volume-id "$volume_id" --description "$instance_name: $description" --output json)"
+snapshot="$(aws ec2 create-snapshot --volume-id "$volume_id" --description "$description" --output json)"
 snapshot_id="$(jq -r '.SnapshotId' <<< "$snapshot")"
 echo
 
@@ -81,7 +84,7 @@ while : ; do
     if [ "$SECONDS" -gt 7200 ]; then
         die "Spent 2 hours waiting for EBS snapshot to complete!"
     fi
-    if get_aws_pending_snapshots | tee /dev/stderr | grep -q '.'; then
+    if get_aws_pending_snapshots | tee /dev/stderr | grep -Fq "$description"; then
         echo
         sleep "$WATCH_SLEEP_SECS"
     fi
