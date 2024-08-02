@@ -128,3 +128,12 @@ aws_access_keys_exports_to_credentials(){
         echo "$(tr '[:upper:]' '[:lower:]' <<< "$key")=$value"
     done
 }
+
+aws_validate_volume_id(){
+    local volume_id="$1"
+    if ! [[ "$volume_id" =~ ^vol-[[:alnum:]]{17}$ ]]; then
+        usage "
+    Invalid volume ID given, expected format: vol-xxxxxxxxxxxxxxxxx,
+                                   but given: $volume_id"
+    fi
+}
