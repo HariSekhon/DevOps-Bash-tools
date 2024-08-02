@@ -370,6 +370,7 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
   - `aws_ec2_ebs_*.sh` - AWS EC2 [EBS](https://aws.amazon.com/ebs/) scripts:
     - `aws_ec2_ebs_volumes.sh` - list EC2 instances and their EBS volumes in the current region
     - `aws_ec2_ebs_create_snapshot_and_wait.sh - creates a snapshot of a given EBS volume ID and waits for it to complete with exponential backoff
+    - `aws_ec2_ebs_resize_and_wait.sh - resizes an EBS volume and waits for it to complete both modifying and optimizing with exponential backoff
   - `aws_ecr_*.sh` - AWS [ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
     - `aws_ecr_list_repos.sh` - lists ECR repos, and their docker image mutability and whether image scanning is enabled
