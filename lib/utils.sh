@@ -1227,6 +1227,27 @@ is_regex(){
     [[ "$regex" =~ $regex ]]
 }
 
+exponential(){
+    local int="$1"
+    local max="${2:-}"
+    if ! is_int "$int"; then
+        echo "ERROR: non-integer passed as first arg to exponential() function!" >&2
+        return 1
+    fi
+    local result
+    result="$((int * 2))"
+    if [ -n "$max" ]; then
+        if ! is_int "$max"; then
+            echo "ERROR: non-integer passed as second arg to exponential() function!" >&2
+            return 1
+        fi
+        if [ "$result" -gt "$max" ]; then
+            result="$max"
+        fi
+    fi
+    echo "$result"
+}
+
 parse_export_key_value(){
     local env_var="$1"
     env_var="${env_var%%#*}"
