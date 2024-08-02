@@ -86,3 +86,6 @@ while : ; do
         sleep "$WATCH_SLEEP_SECS"
     fi
 done
+
+echo
+timestamp "Snapshot completed"
