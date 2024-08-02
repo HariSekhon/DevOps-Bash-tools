@@ -18,17 +18,18 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090,SC1091
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-List EC2 instance names and their EBS volumes in the current region
+List EC2 instances and their EBS volumes in the current region
 
 Ouptut:
 
 <instance_id>  <instance_name>  <volume_id>  <volume_name>  <volume_size_GB>  <device>  <encrypted>  <delete_on_termination>  <attached/detached>  <attached_time>
 
-Requires AWS CLI to be installed and configured
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
