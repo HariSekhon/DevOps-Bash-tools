@@ -367,6 +367,7 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
   - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `jenkins_cred_add*.sh`, `github_actions_repo*_set_secret.sh`, `gitlab_*_set_env_vars.sh`, `circleci_*_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`, `kubectl_kv_to_secret.sh`). Supports new user and new access key csv file formats.
   - `aws_codecommit_csv_creds.sh` - prints AWS [CodeCommit](https://aws.amazon.com/codecommit/) Git credentials from a CSV file as shell export statements. Similar use case and chaining as above
+  - `aws_ec2_ebs_volumes.sh` - list EC2 instances and their EBS volumes in the current region
   - `aws_ecr_*.sh` - [AWS ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
     - `aws_ecr_list_repos.sh` - lists ECR repos, and their docker image mutability and whether image scanning is enabled
