@@ -61,7 +61,7 @@ while read -r instance_id instance_name; do
             attach_time="$(jq -r '.AttachTime' <<< "$attachment" | grep '.' || echo "N/A")"
             delete_on_termination="$(jq -r '.DeleteOnTermination' <<< "$attachment")"
 
-            echo "$instance_id  $instance_name  $volume_id $volume_name ${volume_size}GB $device $encrypted $delete_on_termination $status $attach_time"
+            echo "$instance_id $instance_name $volume_id $volume_name ${volume_size}GB $device $encrypted $delete_on_termination $status $attach_time"
         done < <(jq -c '.Attachments[]' <<< "$volume")
     done  <<< "$volume_info"
 done < <(
