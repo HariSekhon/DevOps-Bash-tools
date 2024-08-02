@@ -470,7 +470,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
   - `gcp_info_all_projects.sh` - same as above but for all detected projects
   - `gcp_foreach_project.sh` - executes a templated command across all GCP projects, replacing `{project_id}` and `{project_name}` in each iteration (used by `gcp_info_all_projects.sh` to call `gcp_info.sh`)
   - `gcp_find_orphaned_disks.sh` - lists orphaned disks across one or more GCP projects (not attached to any compute instance)
-  - `gcp_secret*.sh` - [Google Secret Manager](https://cloud.google.com/secret-manager) scripts:
+  - `gcp_secret*.sh` - Google [Secret Manager](https://cloud.google.com/secret-manager) scripts:
     - `gcp_secret_add.sh` - reads a value from a command line argument or non-echo prompt and saves it to GCP Secrets Manager. Useful for uploading a password without exposing it on your screen
     - `gcp_secret_add_binary.sh` - uploads a binary file to GCP Secrets Manager by base64 encoding it first. Useful for uploading QR code screenshots. Useful for uploading things like QR code screenshots for sharing MFA to recovery admin accounts
     - `gcp_secret_update.sh` - reads a value from a command line argument or non-echo prompt and updates a given GCP Secrets Manager secret. Useful for uploading a password without exposing it on your screen
@@ -481,7 +481,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
     - `gcp_secrets_labels.sh` - lists GCP Secrets and their labels, one per line suitable for quick views or shell pipelines
     - `gcp_secrets_update_lable.sh` - updates all GCP secrets in current project matching label key=value with a new label value
     - `gcp_service_account_credential_to_secret.sh` - creates GCP service account and exports a credential key to GCP Secret Manager (useful to stage or combine with `gcp_secrets_to_kubernetes.sh`)
-  - `gke_*.sh` - [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
+  - `gke_*.sh` - Google [Kubernetes Engine](https://cloud.google.com/kubernetes-engine) scripts
     - `gke_kube_creds.sh` - auto-loads all GKE clusters credentials in the current / given / all projects so your kubectl is ready to rock on GCP
     - `gke_kubectl.sh` - runs kubectl commands safely fixed to a given GKE cluster using config isolation to avoid concurrency race conditions
     - `gke_firewall_rule_cert_manager.sh` - creates a GCP firewall rule for a given GKE cluster's masters to access [Cert Manager](https://cert-manager.io/) admission webhook (auto-determines the master cidr, network and target tags)
@@ -491,7 +491,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
     - `gke_nodepool_taint.sh` - taints/untaints all nodes in a given GKE nodepool on the current cluster (see `kubectl_node_taints.sh` for a quick way to see taints)
     - `gke_nodepool_drain.sh` - drains all nodes in a given nodepool (to decommission or rebuild the node pool, for example with different taints)
     - `gke_persistent_volumes_disk_mappings.sh` - lists GKE kubernetes persistent volumes to GCP persistent disk names, along with PVC and namespace, useful when investigating, resizing PVs etc.
-  - `gcr_*.sh` - [Google Container Registry](https://cloud.google.com/container-registry) scripts:
+  - `gcr_*.sh` - Google [Container Registry](https://cloud.google.com/container-registry) scripts:
     - `gcr_list_tags.sh` - lists all the tags for a given GCR docker image
     - `gcr_newest_image_tags.sh` - lists the tags for the given GCR docker image with the newest creation date (can use this to determine which image version to tag as `latest`)
     - `gcr_alternate_tags.sh` - lists all the tags for a given GCR docker `image:tag` (use arg `<image>:latest` to see what version / build hashref / date tag has been tagged as `latest`)
@@ -506,7 +506,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
   - CI/CD on GCP - trigger Google Cloud Build and GKE Kubernetes deployments from orthogonal CI/CD systems like Jenkins / TeamCity:
     - `gcp_ci_build.sh` - script template for CI/CD to trigger Google Cloud Build to build docker container image with extra datetime and latest tagging
     - `gcp_ci_deploy_k8s.sh` - script template for CI/CD to deploy GCR docker image to GKE Kubernetes using Kustomize
-  - `gce_*.sh` - [Google Compute Engine](https://cloud.google.com/compute/) scripts:
+  - `gce_*.sh` - Google [Compute Engine](https://cloud.google.com/compute/) scripts:
     - `gce_foreach_vm.sh` - run a command for each GCP VM instance matching the given name/ip regex in the current GCP project
     - `gce_host_ips.sh` - prints the IPs and hostnames of all or a regex match of GCE VMs for use in /etc/hosts
     - `gce_ssh.sh` - Runs `gcloud compute ssh` to a VM while auto-determining its zone first to override any inherited zone config and make it easier to script iterating through VMs
