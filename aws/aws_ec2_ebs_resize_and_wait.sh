@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Resizes an EBS volume and waits for it to complete both modifying and optimizing with exponential backoff
 
+This can be done without interruption while the EC2 instance is online
+
 
 Use the adjacent script aws_ec2_ebs_volumes.sh to easily get the volume ID
 
