@@ -47,11 +47,7 @@ num_args 2 "$@"
 volume_id="$1"
 description="$2"
 
-if ! [[ "$volume_id" =~ ^vol-[[:alnum:]]{17}$ ]]; then
-    usage "
-Invalid volume ID given, expected format: vol-xxxxxxxxxxxxxxxxx,
-                               but given: $volume_id"
-fi
+aws_validate_volume_id "$volume_id"
 
 export MAX_WATCH_SLEEP_SECS=300
 
