@@ -76,7 +76,7 @@ echo
 get_aws_pending_snapshots(){
     # false positive
     # shellcheck disable=SC2016
-    aws ec2 describe-snapshots --snapshot-id "$snapshot_id" --query 'Snapshots[?State==`pending`].[SnapshotId,VolumeId,Description,State,Progress]' --output table
+    aws ec2 describe-snapshots --snapshot-id "$snapshot_id" --query 'Snapshots[?State==`pending`].[VolumeId,SnapshotId,Description,State,Progress]' --output table
 }
 
 # loop indefinitely until we explicitly break using time check
