@@ -88,12 +88,7 @@ while : ; do
         timestamp "Snapshot still in pending state, waiting $sleep_secs secs before checking again"
         sleep "$sleep_secs"
         # exponential backoff
-        if [ "$sleep_secs" -lt "$MAX_WATCH_SLEEP_SECS" ]; then
-            sleep_secs="$((sleep_secs * 2))"
-        fi
-        if [ "$sleep_secs" -gt "$MAX_WATCH_SLEEP_SECS" ]; then
-            sleep_secs="$MAX_WATCH_SLEEP_SECS"
-        fi
+        sleep_secs="$(exponential "$sleep_secs" "$MAX_WATCH_SLEEP_SECS")"
         continue
     fi
     break
