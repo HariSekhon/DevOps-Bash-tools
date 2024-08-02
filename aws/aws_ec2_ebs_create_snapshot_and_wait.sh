@@ -87,7 +87,9 @@ while : ; do
     if get_aws_pending_snapshots | tee /dev/stderr | grep -Fq "$description"; then
         echo
         sleep "$WATCH_SLEEP_SECS"
+        continue
     fi
+    break
 done
 
 echo
