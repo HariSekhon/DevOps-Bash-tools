@@ -50,10 +50,10 @@ while read -r instance_id instance_name; do
         --query 'Volumes[*].{VolumeID:VolumeId,Name:Tags[?Key==`Name`].Value|[0],Size:Size,Encrypted:Encrypted,Attachments:Attachments[*]}' --output json | jq -c '.[]')"
 
     while read -r volume; do
-        volume_id="$(jq -r '.VolumeID' <<< "$volume")"
-        volume_name="$(jq -r '.Name' <<< "$volume" | grep '.' || echo "N/A")"
-        volume_size="$(jq -r '.Size' <<< "$volume")"
-        encrypted="$(jq -r '.Encrypted' <<< "$volume")"
+        volume_id="$(jq   -r '.VolumeID'  <<< "$volume")"
+        volume_name="$(jq -r '.Name'      <<< "$volume" | grep '.' || echo "N/A")"
+        volume_size="$(jq -r '.Size'      <<< "$volume")"
+        encrypted="$(jq   -r '.Encrypted' <<< "$volume")"
 
         while read -r attachment; do
             device="$(jq -r '.Device' <<< "$attachment")"
