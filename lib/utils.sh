@@ -1170,6 +1170,12 @@ no_more_args(){
     fi
 }
 
+no_args(){
+    if [ -n "${1:-}" ]; then
+        usage "args given where none expected:  $*"
+    fi
+}
+
 check_env_defined(){
     local env="$1"
     if [ -z "${!env:-}" ]; then
