@@ -53,7 +53,7 @@ Invalid volume ID given, expected format: vol-xxxxxxxxxxxxxxxxx,
                                but given: $volume_id"
 fi
 
-export WATCH_SLEEP_SECS=300
+export MAX_WATCH_SLEEP_SECS=300
 
 export AWS_DEFAULT_OUTPUT=json
 
@@ -79,6 +79,9 @@ get_aws_pending_snapshots(){
     aws ec2 describe-snapshots --snapshot-id "$snapshot_id" --query 'Snapshots[?State==`pending`].[VolumeId,SnapshotId,Description,State,Progress]' --output table
 }
 
+# will double this for exponential backoff up to MAX_WATCH_SLEEP_SECS interval
+sleep_secs=5
+
 # loop indefinitely until we explicitly break using time check
 while : ; do
     if [ "$SECONDS" -gt 7200 ]; then
@@ -86,7 +89,15 @@ while : ; do
     fi
     if get_aws_pending_snapshots | tee /dev/stderr | grep -Fq "$description"; then
         echo
-        sleep "$WATCH_SLEEP_SECS"
+        timestamp "Snapshot still in pending state, waiting $sleep_secs secs before checking again"
+        sleep "$sleep_secs"
+        # exponential backoff
+        if [ "$sleep_secs" -lt "$MAX_WATCH_SLEEP_SECS" ]; then
+            sleep_secs="$((sleep_secs * 2))"
+        fi
+        if [ "$sleep_secs" -gt "$MAX_WATCH_SLEEP_SECS" ]; then
+            sleep_secs="$MAX_WATCH_SLEEP_SECS"
+        fi
         continue
     fi
     break
