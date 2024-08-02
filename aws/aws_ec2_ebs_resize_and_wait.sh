@@ -22,10 +22,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Resizes an EBS volume and waits for it to complete both modifying and optimizing with exponential backoff
+Resizes an EBS volume and waits for it to complete modifying and optionally optimizing with exponential backoff
 
 This can be done without interruption while the EC2 instance is online
 
+If you want to wait for the optimization as well as the modification set this environment variable
+
+    export EC2_EBS_WAIT_FOR_OPTIMIZE=true
 
 Use the adjacent script aws_ec2_ebs_volumes.sh to easily get the volume ID
 
@@ -57,11 +60,18 @@ ebs_modification="$(aws ec2 modify-volume --volume-id "$volume_id" --size 300 --
 modification_starttime="$(jq -r '.VolumeModification.StartTime' <<< "$ebs_modification")"
 echo
 
+optimize_filter=()
+if [ "${EC2_EBS_WAIT_FOR_OPTIMIZE:-}" = true ]; then
+    optimize_filter=(--filters "Name=modification-state,Values=optimizing")
+fi
+
 get_aws_pending_ebs_modifications(){
+    # cannot quote $optimize_filter because we need it to not create a blank arg if not present
+    # shellcheck disable=SC2086
     aws ec2 describe-volumes-modifications \
         --volume-ids "$volume_id" \
         --filters "Name=modification-state,Values=modifying" \
-        --filters "Name=modification-state,Values=optimizing" \
+        "${optimize_filter[@]}" \
         --output text
 }
 
