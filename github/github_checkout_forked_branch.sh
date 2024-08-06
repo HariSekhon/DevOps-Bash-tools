@@ -99,7 +99,7 @@ if git remote -v | awk '{print $2}' | grep -Eq "^$fork_remote_url(\\.git)?$"; th
         die "Failed to parse existing git remote for url: $fork_remote_url_escaped"
     fi
     timestamp "Using existing fork remote: $fork_remote"
-elif git remote -v | grep -q "^$fork_remote"; then
+elif git remote -v | grep -q "^$fork_remote[[:space:]]"; then
     timestamp "Git remote '$fork_remote' already exists, not creating"
 else
     timestamp "Adding git remote '$fork_remote' to be able to pull directly from forked repo"
