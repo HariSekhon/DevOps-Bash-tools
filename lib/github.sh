@@ -66,6 +66,7 @@ github_owner_repo(){
         echo "GitHub owner/repo '$owner_repo' does not match expected format returned in github_owner_repo()" >&2
         return 1
     fi
+    echo "$owner_repo"
 }
 
 check_github_origin(){
