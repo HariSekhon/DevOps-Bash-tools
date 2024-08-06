@@ -29,6 +29,8 @@ set -eu  #o pipefail
 # not using any of my libraries or path dependencies to allow the above self-contained curl to shell to work for calling from Dockerfiles
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# https://wiki.alpinelinux.org/wiki/Local_APK_cache
+
 # OS package management caches
 cache_list="
 /etc/apk/cache
