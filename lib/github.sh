@@ -50,6 +50,24 @@ is_github_origin(){
     grep -Eq "^origin[[:space:]].+github\.[[:alnum:].-]+[/:]"
 }
 
+is_github_fork(){
+    local is_fork
+    is_fork="$(gh repo view --json isFork -q '.isFork')"
+    if [ "$is_fork" = true ]; then
+        return 0
+    fi
+    return 1
+}
+
+github_owner_repo(){
+    local owner_repo
+    owner_repo="$(gh repo view --json owner,name -q '.owner.login + "/" + .name')"
+    if ! is_github_owner_repo "$owner_repo"; then
+        echo "GitHub owner/repo '$owner_repo' does not match expected format returned in github_owner_repo()" >&2
+        return 1
+    fi
+}
+
 check_github_origin(){
     if ! is_github_origin; then
         die 'GitHub is not set as remote origin in current repo!'
@@ -69,7 +87,7 @@ github_origin_owner_repo(){
         :
     )"
     if ! is_github_owner_repo "$owner_repo"; then
-        echo "GitHub owner/repo '$owner_repo' does not match expected format" >&2
+        echo "GitHub owner/repo '$owner_repo' does not match expected format returned in github_origin_owner_repo()" >&2
         return 1
     fi
     echo "$owner_repo"
