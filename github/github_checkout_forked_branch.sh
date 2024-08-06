@@ -89,11 +89,21 @@ github_url_base="$(
     sed 's|\(.*github.com[:/]\).*|\1|'
 )"
 
-if git remote -v | grep -q "^$fork_remote"; then
+fork_remote_url="${github_url_base}${fork_owner_repo}"
+fork_remote_url_escaped="${fork_remote_url//\//\\/}"
+
+if git remote -v | awk '{print $2}' | grep -Eq "^$fork_remote_url(\\.git)?$"; then
+    timestamp "Existing git remote found with fork url '$fork_remote_url', reusing that"
+    fork_remote="$(git remote -v | awk "/[[:space:]]${fork_remote_url_escaped}[[:space:].]/ {print \$1; exit}")"
+    if is_blank "$fork_remote"; then
+        die "Failed to parse existing git remote for url: $fork_remote_url_escaped"
+    fi
+    timestamp "Using existing fork remote: $fork_remote"
+elif git remote -v | grep -q "^$fork_remote"; then
     timestamp "Git remote '$fork_remote' already exists, not creating"
 else
     timestamp "Adding git remote '$fork_remote' to be able to pull directly from forked repo"
-    git remote add "$fork_remote" "${github_url_base}${fork_owner_repo}"
+    git remote add "$fork_remote" "$fork_remote_url"
 fi
 echo
 
