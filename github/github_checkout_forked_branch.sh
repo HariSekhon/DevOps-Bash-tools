@@ -64,6 +64,10 @@ fi
 timestamp "Retrieving forked repos for: $owner_repo"
 fork_list="$(gh api "repos/$owner_repo/forks" --paginate --jq '.[].full_name')"
 
+if is_blank "$fork_list"; then
+    die "No forks found for repo: '$owner_repo"
+fi
+
 fork_owner_repo="$(fzf --prompt="Select a Fork: " --height=40% --border --ansi <<< "$fork_list")"
 
 timestamp "Retrieving branches for chosen fork: $fork_owner_repo"
