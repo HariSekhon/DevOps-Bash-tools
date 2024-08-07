@@ -21,6 +21,7 @@ cpanminus
 direnv
 findutils
 gawk
+gh  # GitHub CLI
 git-secrets
 gnu-sed
 gnu-tar
