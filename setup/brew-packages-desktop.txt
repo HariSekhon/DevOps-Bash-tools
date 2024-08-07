@@ -103,7 +103,7 @@ fswatch
 fzf
 gcc
 gem-completion
-gh  # GitHub CLI
+#gh  # GitHub CLI - moved to core packages
 #git  # comes with macOS XCode
 git-credential-manager  # prompts for HTTPS creds in browser and caches them locally to HTTPS checkouts
 git-lfs
