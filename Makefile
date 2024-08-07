@@ -40,6 +40,14 @@ BASH_PROFILE_FILES := $(shell echo .bashrc .bash_profile .bash.d/*.sh)
 
 #.PHONY: *
 
+CURRENT_BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
+TRUNK_BRANCH := $(shell git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||')
+
+DEFAULT_TITLE := [GD-00] - merge $(CURRENT_BRANCH) to $(TRUNK_BRANCH)
+
+title ?= $(DEFAULT_TITLE)
+
+# ===================
 define MAKEFILE_USAGE
 
   Repo specific options:
@@ -380,3 +388,53 @@ pip-mapping: pipreqs-mapping
 .PHONY: status-page
 status-page:
 	./cicd/generate_status_page.sh; . .bash.d/git.sh; gitu STATUS.md
+
+.PHONY: dialog-install
+dialog-install:
+	install/install_packages.sh dialog
+
+# Raise Pull Requests from the command line like this:
+#
+#	You need GitHub CLI installed ('make' installs it for you) and authenticated eg.:
+#
+#		gh auth login
+#
+#		# https://cli.github.com/manual/gh_auth_login
+#
+#	Example:
+#
+#		make pr title="Hari code to avoid clicking"
+#
+.PHONY: pr
+pr: dialog-install
+	git push --set-upstream origin "$(CURRENT_BRANCH)"
+	if [ -z "$$GITHUB_PULL_REQUEST_TITLE" ]; then \
+		if [ "$(title)" = "$(DEFAULT_TITLE)" ]; then \
+			GITHUB_PULL_REQUEST_TITLE="$$(dialog --inputbox "Pull Request Title:" 8 40 "$(DEFAULT_TITLE)" 3>&1 1>&2 2>&3)"; \
+		else \
+			GITHUB_PULL_REQUEST_TITLE="$(title)"; \
+		fi; \
+	fi; \
+	export GITHUB_PULL_REQUEST_TITLE; \
+	github_pull_request_create.sh \
+		"$(REPO)" \
+		"$(CURRENT_BRANCH)" \
+		"$(TRUNK_BRANCH)"
+
+# raise a PR in one command with Auto-Merge enabled - use this for trivial PRs of low / no impact like MkDocs updates
+.PHONY: auto-pr
+auto-pr: update
+	@# - if GITHUB_PULL_REQUEST_AUTO_MERGE=true then marks the PR for auto-merge once it is approved and passes pre-requisite checks
+	@# - if GITHUB_PULL_REQUEST_SQUASH=true while GITHUB_PULL_REQUEST_AUTO_MERGE=true then it marks
+	@#   the PR's auto-merge to be done using a squash commit to avoid any CLI prompt for how to merge it
+	GITHUB_PULL_REQUEST_AUTO_MERGE=true \
+	GITHUB_PULL_REQUEST_SQUASH=true \
+	$(MAKE) pr
+
+# Example:
+#
+#	make autopr title="Documented something"
+#
+.PHONY: autopr
+autopr: auto-pr
+	@:
