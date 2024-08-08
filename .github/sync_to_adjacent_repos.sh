@@ -39,8 +39,12 @@ sync_file(){
     target="../../$dir/.github/$filename"
     targetdir="${target%/*}"
     mkdir -p -v "$targetdir"
-    echo "syncing $filename -> $target"
-    perl -p -e "s/(DevOps-)?Bash-tools/$repo/i" "$filename" > "$target"
+    if [ -f "$filename" ]; then
+        echo "syncing $filename -> $target"
+        perl -p -e "s/(DevOps-)?Bash-tools/$repo/i" "$filename" > "$target"
+    else
+        echo "file not found: $filename. Skipping..."
+    fi
 }
 
 sed 's/#.*//; s/:/ /' ../setup/repos.txt |
