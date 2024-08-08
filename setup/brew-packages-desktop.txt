@@ -207,6 +207,7 @@ pipx
 #pk11-kit
 pluto  # by FairwindsOps - detect outdated Kubernetes API objects
 postgresql
+pre-commit
 prestosql
 #protobuf
 pssh
