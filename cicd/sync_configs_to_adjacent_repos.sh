@@ -47,7 +47,11 @@ while read -r repo dir; do
             continue
         fi
         mkdir -pv "${target%/*}"
-        echo "syncing $filename -> $target"
-        perl -pe "s/(devops-)*bash-tools/$repo/i" "$filename" > "$target"
+        if [ -f "$filename" ]; then
+            echo "syncing $filename -> $target"
+            perl -pe "s/(devops-)*bash-tools/$repo/i" "$filename" > "$target"
+        else
+            echo "file not found: $filename. Skipping..."
+        fi
     done
 done
