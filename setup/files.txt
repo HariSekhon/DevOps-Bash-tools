@@ -20,6 +20,7 @@
 .gitconfig
 .gitignore
 .mdlrc
+.pre-commit-config.yaml
 .pylintrc
 configs/.ansible.cfg
 configs/.athenacli/athenaclirc
