@@ -16,6 +16,7 @@
 # Files to link to $HOME, one per line
 
 .envrc
+.envrc-python
 .gitconfig
 .gitignore
 .mdlrc
