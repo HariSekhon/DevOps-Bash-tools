@@ -496,11 +496,7 @@ readlink(){
 }
 
 abspath(){
-    if uname -s | grep -q Darwin; then
-        greadlink --canonicalize-missing "$1"
-    else
-        readlink --canonicalize-missing "$1"
-    fi
+    readlink --canonicalize-missing "$1"
 }
 #abspath(){
 #    if [ -z "$1" ]; then
