@@ -1263,6 +1263,7 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
       - `brew_install_packages.sh` / `brew_remove_packages.sh` - installs Mac Hombrew package lists from arguments, files or stdin. Accepts `NO_FAIL=1` env var to ignore unavailable / changed package names (useful for optional packages or attempts for different package names across versions)
       - `brew_install_packages_if_absent.sh` - installs Mac Homebrew packages only if not already installed, saving time and minimizing install logs / CI logs, plus all the features of `brew_install_packages.sh` above
       - `brew_filter_installed.sh` / `brew_filter_not_installed.sh` - pipe filter packages that are / are not installed for easy script piping
+      - `brew_package_owns.sh` - finds which brew package owns a given filename argument
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
 #### Builds, Languages & Linting
