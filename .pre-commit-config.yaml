@@ -1,0 +1,72 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2024-08-08 17:34:56 +0300 (Thu, 08 Aug 2024)
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https///github.com/HariSekhon/Templates
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#                              P r e - C o m m i t
+# ============================================================================ #
+
+---
+fail_fast: false
+#exclude: *.tmp$
+
+repos:
+
+    # will accept anything that 'git clone' understands
+    # this means you can set this to a local git repo to develop your own hook repos interactively
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-yaml
+      # Common errors
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      # Git style
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-vcs-permalinks
+      - id: forbid-new-submodules
+      # Cross platform
+      - id: check-case-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      # Security
+      - id: detect-aws-credentials
+        args: ['--allow-missing-credentials']
+
+  - repo: https://github.com/psf/black
+    rev: 24.8.0
+    hooks:
+      - id: black
+
+  # Git secrets Leaks
+  - repo: https://github.com/awslabs/git-secrets.git
+    # the release tags for 1.2.0, 1.2.1 and 1.3.0 are broken with this error:
+    #
+    #   /Users/hari/.cache/pre-commit/repo......./.pre-commit-hooks.yaml is not a file
+    #
+    rev: 5357e18
+    hooks:
+      - id: git-secrets
+
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.12.0
+    hooks:
+      - id: markdownlint
+        name: Markdownlint
+        description: Run markdownlint on your Markdown files
+        entry: mdl
+        language: ruby
+        files: \.(md|mdown|markdown)$
