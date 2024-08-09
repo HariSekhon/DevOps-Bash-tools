@@ -100,6 +100,12 @@ alias cons=contexts
 # contexts has this info and is more useful
 #alias clusters="k config get-clusters"
 
+# scripts in kubernetes/ directory that should be added to \$PATH (done automatically by sourcing this repo's .bashrc)
+alias kbusybox="kubectl_busybox.sh"
+alias kalpine="kubectl_alpine.sh"
+alias kcurl="kubectl_curl.sh"
+alias kdns="kubectl_dnsutils.sh"
+
 kube_config_isolate(){
     local tmpdir="/tmp/.kube"
 
