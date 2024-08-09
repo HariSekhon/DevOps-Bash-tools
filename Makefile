@@ -438,3 +438,7 @@ auto-pr: update
 .PHONY: autopr
 autopr: auto-pr
 	@:
+
+.PHONY: sync
+sync:
+	sync_configs_to_adjacent_repos.sh
