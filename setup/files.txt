@@ -15,6 +15,7 @@
 
 # Files to link to $HOME, one per line
 
+.editorconfig
 .envrc
 .envrc-python
 .gitconfig
