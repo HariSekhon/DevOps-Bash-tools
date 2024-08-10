@@ -35,6 +35,6 @@ usage_args=""
 
 help_usage "$@"
 
-min_args 1 "$@"
+no_args "$@"
 
 curl -sfL https://direnv.net/install.sh | bash
