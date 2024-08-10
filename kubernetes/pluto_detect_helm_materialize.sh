@@ -34,7 +34,7 @@ Pluto is run per directory as a workaround for this recursion issue:
 
 Parallelized for performance
 
-Requires 'helm' and 'pluto' binaries to be in the \$PATH
+Requires 'helm', 'pluto' and 'yq' binaries to be in the \$PATH - will attempt to install them if not found
 "
 
 # used by usage() in lib/utils.sh
