@@ -71,7 +71,8 @@ git_relative_dir(){
 }
 
 is_in_git_repo(){
-    git_root &>/dev/null
+    #git_root &>/dev/null
+    git rev-parse --is-inside-work-tree &>/dev/null
 }
 
 git_commit_short_sha(){
