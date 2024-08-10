@@ -48,8 +48,8 @@ dir="${1:-.}"
 
 pluto_detect_kustomize_materialize(){
     kustomization_path="$1"
-    echo "========================================"
-    echo "$kustomization_path"
+    echo "========================================" >&2
+    echo "$kustomization_path" >&2
     pushd "$(dirname "$kustomization_path")" >/dev/null
     #if [[ "$kustomization" =~ ^eks- ]]; then
     #    echo "Skipping $kustomization"
