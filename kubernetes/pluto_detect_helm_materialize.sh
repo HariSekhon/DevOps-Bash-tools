@@ -48,6 +48,12 @@ max_args 1 "$@"
 
 dir="${1:-.}"
 
+for x in helm pluto yq; do
+    if ! type -P &>/dev/null; then
+        "$srcdir/../install_$x.sh"
+    fi
+done
+
 pluto_detect_helm_materialize(){
     chart_path="$1"
     hr
@@ -59,7 +65,8 @@ pluto_detect_helm_materialize(){
     #    continue
     #fi
     helm dependency build
-    helm template pluto-test .> "chart.materialized.yaml"
+    name="$(yq .name Chart.yaml)"
+    helm template "$name" . > "chart.materialized.yaml"
     timestamp "Materialized Helm YAML -> $PWD/chart.materialized.yaml"
     pluto detect-files -d .
     popd >/dev/null
