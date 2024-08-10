@@ -48,8 +48,8 @@ dir="${1:-.}"
 
 pluto_detect_kustomize_materialize(){
     kustomization_path="$1"
-    echo "========================================" >&2
-    echo "$kustomization_path" >&2
+    hr
+    timestamp "$kustomization_path"
     pushd "$(dirname "$kustomization_path")" >/dev/null
     #if [[ "$kustomization" =~ ^eks- ]]; then
     #    echo "Skipping $kustomization"
@@ -57,7 +57,7 @@ pluto_detect_kustomize_materialize(){
     #    continue
     #fi
     kustomize build --enable-helm > "kustomization.materialized.yaml"
-    echo "Materialized Kustomize YAML -> $PWD/kustomization.materialized.yaml"
+    timestamp "Materialized Kustomize YAML -> $PWD/kustomization.materialized.yaml"
     pluto detect-files -d .
     popd >/dev/null
     echo >&2
