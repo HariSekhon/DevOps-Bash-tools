@@ -45,7 +45,10 @@ fi
 
 # clean PATH because the direnv installer will write the 'direnv' binary to the first available user writeable path
 # and we don't want it putting it somewhere like ~/github/bash-tools - mixed in with git repo and scripts
-PATH="$(tr ':' '\n' <<< "$PATH" | grep -e '^/bin' -e '^/usr' | tr '\n' ':' | sed 's/:$//')"
+PATH="$HOME/bin:$(tr ':' '\n' <<< "$PATH" | grep -e '^/bin' -e '^/usr' | tr '\n' ':' | sed 's/:$//')"
 export PATH
+
+# ensure we have at least one user writable directory
+mkdir -p -v ~/bin
 
 curl -sfL https://direnv.net/install.sh | bash
