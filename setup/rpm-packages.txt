@@ -28,6 +28,7 @@ jq
 libxml2  # needed for xmllint - usually already installed
 make
 openssh-clients
+parallel
 perl
 #perl-App-cpanminus  # not available on RHEL6, moved to rpm-packages-optional.txt
 #ShellCheck  # not available in RHEL8, moved to rpm-packages-optional.txt
