@@ -24,9 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Install Direnv using the online install
 
-This is just a stub to standardize because it's easier to remember to just install_<name>.sh
+The online install will install direnv to your local user writable \$PATH
+even if there is a direnv already in the \$PATH
 
-Even though this one unlike most of the adjacent install_*.sh scripts doesn't really require any additional logic
+This standardized install_<name>.sh script will check for direnv in \$PATH and skip the install if found
 "
 
 # used by usage() in lib/utils.sh
@@ -36,5 +37,10 @@ usage_args=""
 help_usage "$@"
 
 no_args "$@"
+
+if type -P direnv &>/dev/null; then
+    echo "direnv is already installed at '$(type -P direnv)', skipping install"
+    exit 0
+fi
 
 curl -sfL https://direnv.net/install.sh | bash
