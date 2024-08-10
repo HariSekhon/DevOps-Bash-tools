@@ -53,4 +53,7 @@ ssh_agent(){
 
 [ -n "${GOOGLE_CLOUD_SHELL:-}" ] && return
 
+# do not launch SSH Agent if we are inheriting an SSH_AUTH_SOCK from an 'ssh -A' agent forwarding connection
+[ -n "${SSH_AUTH_SOCK:-}" ] && return
+
 ssh_agent
