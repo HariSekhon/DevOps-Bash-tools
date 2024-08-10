@@ -66,6 +66,8 @@ pluto_detect_helm_materialize(){
     echo >&2
 }
 export -f pluto_detect_helm_materialize
+export -f hr
+export -f timestamp
 
 find "$dir" -name Chart.yaml |
 while read -r chart_path; do
