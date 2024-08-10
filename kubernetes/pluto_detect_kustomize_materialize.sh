@@ -57,7 +57,7 @@ pluto_detect_kustomize_materialize(){
     #    continue
     #fi
     kustomize build --enable-helm > "kustomization.materialized.yaml"
-    echo "Materialized YAML -> $PWD/kustomization.materialized.yaml"
+    echo "Materialized Kustomize YAML -> $PWD/kustomization.materialized.yaml"
     pluto detect-files -d .
     popd >/dev/null
     echo >&2
