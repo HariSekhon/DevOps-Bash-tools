@@ -46,6 +46,12 @@ max_args 1 "$@"
 
 dir="${1:-.}"
 
+for x in kustomize pluto; do
+    if ! type -P &>/dev/null; then
+        "$srcdir/../install_$x.sh"
+    fi
+done
+
 pluto_detect_kustomize_materialize(){
     kustomization_path="$1"
     hr
