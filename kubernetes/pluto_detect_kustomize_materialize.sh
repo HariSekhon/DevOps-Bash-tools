@@ -32,7 +32,7 @@ Pluto is run per directory as a workaround for this recursion issue:
 
 Parallelized for performance, with Helm support enabled.
 
-Requires 'kustomize' and 'pluto' binaries to be in the \$PATH
+Requires 'kustomize' and 'pluto' binaries to be in the \$PATH - will attempt to install them if not found
 "
 
 # used by usage() in lib/utils.sh
@@ -47,7 +47,7 @@ max_args 1 "$@"
 dir="${1:-.}"
 
 for x in kustomize pluto; do
-    if ! type -P &>/dev/null; then
+    if ! type -P "$x" &>/dev/null; then
         "$srcdir/../install_$x.sh"
     fi
 done
