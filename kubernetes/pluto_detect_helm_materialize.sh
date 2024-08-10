@@ -60,7 +60,7 @@ pluto_detect_helm_materialize(){
     #fi
     helm dependency build
     helm template pluto-test .> "chart.materialized.yaml"
-    echo "Materialized Helm YAML -> $PWD/chart.materialized.yaml"
+    timestamp "Materialized Helm YAML -> $PWD/chart.materialized.yaml"
     pluto detect-files -d .
     popd >/dev/null
     echo >&2
