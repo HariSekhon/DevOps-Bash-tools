@@ -49,7 +49,7 @@ max_args 1 "$@"
 dir="${1:-.}"
 
 for x in helm pluto yq; do
-    if ! type -P &>/dev/null; then
+    if ! type -P "$x" &>/dev/null; then
         "$srcdir/../install_$x.sh"
     fi
 done
