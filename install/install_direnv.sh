@@ -52,3 +52,8 @@ export PATH
 mkdir -p -v ~/bin
 
 curl -sfL https://direnv.net/install.sh | bash
+echo
+direnv version
+echo
+direnv_path="$(which direnv)"
+echo "Direnv is not installed at: $direnv_path"
