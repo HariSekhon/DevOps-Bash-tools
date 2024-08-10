@@ -63,6 +63,8 @@ pluto_detect_kustomize_materialize(){
     echo >&2
 }
 export -f pluto_detect_kustomize_materialize
+export -f hr
+export -f timestamp
 
 find "$dir" -name kustomization.yaml |
 while read -r kustomization_path; do
