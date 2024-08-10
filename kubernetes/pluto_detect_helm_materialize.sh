@@ -50,8 +50,8 @@ dir="${1:-.}"
 
 pluto_detect_helm_materialize(){
     chart_path="$1"
-    echo "========================================"
-    echo "$chart_path"
+    echo "========================================" >&2
+    echo "$chart_path" >&2
     pushd "$(dirname "$chart_path")" >/dev/null
     #if [[ "$chart" =~ ^eks- ]]; then
     #    echo "Skipping $chart"
