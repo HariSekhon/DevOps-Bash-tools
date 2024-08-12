@@ -68,6 +68,7 @@ fzf
 #games-misc/fortune-mod
 gdb
 geoip
+gimp
 #git # in rpm-packages.txt
 git-core
 gitk
