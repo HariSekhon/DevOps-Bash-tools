@@ -589,6 +589,7 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
 - `kubectl_create_namespaces.sh` - creates any namespaces in yaml files or stdin, a prerequisite for a diff on a blank install, used by adjacent scripts for safety
 - `kubernetes_check_objects_namespaced.sh` - checks Kubernetes yaml(s) for objects which aren't explicitly namespaced, which can easily result in deployments to the wrong namespace. Reads the API resources from your current Kubernetes cluster and if successful excludes cluster-wide objects
 - `kustomize_check_objects_namespaced.sh` - checks Kustomize build yaml output for objects which aren't explicitly namespaced (uses above script)
+- `kubectl_deployment_pods.sh` - gets the pod names with their unpredictable suffixes for a given deployment by querying the deployment's selector labels and then querying pods that match those labels
 - `kubectl_get_all.sh` - finds all namespaced Kubernetes objects and requests them for the current or given namespace. Useful because `kubectl get all` misses a lof of object types
 - `kubectl_get_annotation.sh` - find a type of object with a given annotation
 - `kubectl_restart.sh` - restarts all or filtered deployments/statefulsets in the current or given namespace. Useful when debugging or clearing application problems
@@ -650,7 +651,8 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
   - `argocd_apps_wait_sync.sh` - sync's all [ArgoCD](https://argo-cd.readthedocs.io/en/stable/) apps matching an optional ERE regex filter on their names using the ArgoCD CLI's while also checking their health and operation
   - `argocd_generate_resource_whitelist.sh` - generates a yaml cluster and namespace resource whitelist for ArgoCD project config. If given an existing yaml, will merge in its original whitelists, dedupe, and write them back into the file using an in-place edit. Useful because ArgoCD 2.2+ doesn't show resources that aren't explicitly allowed, such as ReplicaSets and Pods
 - Pluto:
-  - `pluto_detect_kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` as above and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
+  - `pluto_detect_helm_materialize.sh` - recursively materializes all helm `Chart.yaml` and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
+  - `pluto_detect_kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
   - `pluto_detect_kubectl_dump_objects.sh` - dumps all live Kubernetes objects to /tmp all can run [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects on the cluster from any source
 - Rancher:
   - `rancher_api.sh` - queries the Rancher API with authentication
@@ -963,7 +965,7 @@ See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-
     - `jenkins_cred_cli_set_ssh_key.sh` - creates or updates a Jenkins SSH key credential from a string or an SSH private key file
     - `jenkins_cred_cli_set_user_pass.sh` - creates or updates a Jenkins username/password credential
   - `jenkins_password.sh` - gets Jenkins admin password from local docker container. Used by `jenkins_cli.sh`
-  - `jenkins_plugins_latest_versions.sh` - finds the latest versions of given Jenkins plugins. Useful to programmatically upgrade your Jenkins on Kubernetes plugins defined in [values.yaml](https://github.com/HariSekhon/Kubernetes-configs/blob/master/jenkins/base/values.yaml#L150)
+  - `jenkins_plugins_latest_versions.sh` - finds the latest versions of given Jenkins plugins. Useful to programmatically upgrade your Jenkins on Kubernetes plugins defined in [values.yaml](https://github.com/HariSekhon/Kubernetes-configs/blob/6d9e34b74d3fa8f353b0fe56e74cea3af439e01a/jenkins/base/values.yaml#L145)
   - `check_jenkinsfiles.sh` - validates all `*Jenkinsfile*` files in the given directory trees using the online Jenkins validator
   - See also [Knowledge Base notes for Jenkins](https://github.com/HariSekhon/Knowledge-Base/blob/main/jenkins.md).
 - `teamcity/*.sh` - [TeamCity CI](https://www.jetbrains.com/teamcity/) scripts:
