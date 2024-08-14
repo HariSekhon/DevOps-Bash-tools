@@ -275,8 +275,18 @@ btest: bash-test
 bash-test:
 	$(BASH_TOOLS)/checks/check_all.sh
 
+.PHONY: test
+test: precommit
+	@:
+
+precommit: pre-commit
+	@:
+
+pre-commit:
+	pre-commit run --all-files
+
 .PHONY: push
-push:
+push: test
 	git push
 
 .PHONY: system-packages
