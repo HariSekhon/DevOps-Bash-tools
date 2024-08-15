@@ -54,4 +54,5 @@ while read -r repo dir; do
             echo "file not found: $filename. Skipping..."
         fi
     done
+    direnv allow "../$dir"
 done
