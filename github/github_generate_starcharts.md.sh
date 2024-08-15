@@ -119,6 +119,8 @@ for repo in $repolist; do
     echo "---"
     echo "---" >&2
     title="$(curl -sS --fail "https://raw.githubusercontent.com/$repo/master/README.md" | { head -n1 | sed 's/^#*//'; cat >/dev/null; } )"
+    title="${title## }"
+    title="${title%% }"
     printf '## %s\n' "$title"
     printf '
 [![Repo on GitHub](https://img.shields.io/badge/GitHub-repo-blue?logo=github)](https://github.com/%s)
