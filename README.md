@@ -731,7 +731,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
 `git/`, `github/`, `gitlab/`, `bitbucket/` and `azure_devops/` directories:
 
 - `git/*.sh` - [Git](https://git-scm.com/) scripts:
-  - `precommit_run_changed_files.sh` - runs pre-commit on all files changed on the current branch vs the default branch. Useful to reproduce `pre-commit` checks that will be failing in pull requests to get your PRs to pass
+  - `precommit_run_changed_files.sh` - runs pre-commit on all files changed on the current branch vs the default branch. Useful to reproduce `pre-commit` checks that are failing in pull requests to get your PRs to pass
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
   - `git_foreach_modified.sh` - executes a command against each file with git modified status
