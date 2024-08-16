@@ -44,4 +44,7 @@ while IFS= read -r filename; do
     changed_files+=("$filename")
 done < <(git diff --name-only "$default_branch"..)
 
+echo
+echo "pre-commit run --files ${changed_files[*]}"
+echo
 pre-commit run --files "${changed_files[@]}"
