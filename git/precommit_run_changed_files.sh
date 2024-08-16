@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Run pre-commit on all files changes on the current branch vs the default branch
+Runs pre-commit on all files changed on the current branch vs the default branch
 
-Useful to reproduce the checks that will be failing in Pre-Commit Pull Request checks to get your PRs to pass
+Useful to reproduce pre-commit checks that are failing in pull requests to get your PRs to pass
 
 Requires git and pre-commit to be installed and must be run on the feature branch in the git repo checkout
 "
