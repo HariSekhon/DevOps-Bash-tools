@@ -308,6 +308,7 @@ etc.
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_diff_settings.sh` - Takes snapshots of before and after clipboard changes and diffs them to show config changes
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
+- `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
 - `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
