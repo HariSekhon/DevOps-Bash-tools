@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Pull the origin or forks upstream repo's trunk branch and merges it into the local branch
+Pulls the origin or forks upstream repo's trunk branch and merges it into the local branch
 
 In a forked GitHub repo's checkout, determines the origin of the fork using GitHub CLI,
 configures a git remote to the upstream, pulls the default branch and if on a branch other than the default
