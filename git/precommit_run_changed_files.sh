@@ -39,6 +39,7 @@ num_args 0 "$@"
 
 git_root="$(git_root)"
 
+echo "cd $git_root"
 cd "$git_root"
 
 default_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||')"
