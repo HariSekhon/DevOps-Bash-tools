@@ -27,11 +27,23 @@ Base64 encodes a given icon file and prints the logo=... url parameter you need 
 If you pass a URL will download the URL and base64 the content
 
 Otherwise download the icon to your local disk eg. using SimpleIcons.org and pass that as a parameter
+
+This is only tested with svg files at this time
+
+Example:
+
+        wget https://raw.githubusercontent.com/simple-icons/simple-icons/e8de041b64586c0c532f9ea5508fd8e29d850937/icons/linkedin.svg
+
+        ${0##*/} linkedin.svg
+
+    or
+
+        ${0##*/} https://raw.githubusercontent.com/simple-icons/simple-icons/e8de041b64586c0c532f9ea5508fd8e29d850937/icons/linkedin.svg
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="filename.svg"
+usage_args="<filename_or_url>"
 
 help_usage "$@"
 
