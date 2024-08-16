@@ -32,7 +32,7 @@ This is only tested with svg files at this time
 
 Example:
 
-        wget https://raw.githubusercontent.com/simple-icons/simple-icons/e8de041b64586c0c532f9ea5508fd8e29d850937/icons/linkedin.svg
+        wget -nc https://raw.githubusercontent.com/simple-icons/simple-icons/e8de041b64586c0c532f9ea5508fd8e29d850937/icons/linkedin.svg
 
         ${0##*/} linkedin.svg
 
