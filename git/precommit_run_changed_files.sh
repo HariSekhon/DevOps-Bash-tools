@@ -37,7 +37,9 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-cd "$(git_root)"
+git_root="$(git_root)"
+
+cd "$git_root"
 
 default_branch="$(git symbolic-ref refs/remotes/origin/HEAD | sed 's|.*/||')"
 
