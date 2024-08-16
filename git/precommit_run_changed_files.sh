@@ -49,7 +49,7 @@ while IFS= read -r filename; do
     changed_files+=("$filename")
 done < <(git diff --name-only "$default_branch"..)
 
-opts=(--show-diff-on-failure --color=always --files)
+opts=(--show-diff-on-failure --color=auto --files)
 
 echo
 echo "pre-commit run ${opts[*]} ${changed_files[*]} $*"
