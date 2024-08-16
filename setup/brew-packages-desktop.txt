@@ -116,6 +116,7 @@ gnuplot
 gradle
 #gradle-completion  # forces bash-completion which slows down my shells
 graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
+gron  # flattens JSON to be greppable
 #groovy  # see near end
 #groovysdk  # see near end
 hadolint
