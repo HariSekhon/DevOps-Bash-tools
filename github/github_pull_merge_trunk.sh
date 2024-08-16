@@ -22,14 +22,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Pull the origin, specified or upstream repo's trunk branch and merges it into the local branch
+Pull the origin or forks upstream repo's trunk branch and merges it into the local branch
 
 In a forked GitHub repo's checkout, determines the origin of the fork using GitHub CLI,
 configures a git remote to the upstream, pulls the default branch and if on a branch other than the default
 then merges the default branch to the local current branch
 
-Simplifies and automates keeping your cloned or forked repo up to date with the original source repo to resolve merge
-conflicts locally and submit updated Pull Requests
+Simplifies and automates keeping your cloned or forked repo up to date with the original source repo to quickly resolve
+merge conflicts locally and submit updated Pull Requests
 
 Set environment variable GIT_REBASE=true if you want the pulls and merge to current branch to rebase instead of merge commit...
 if you really love violating VCS history integrity! Personally, not a fan. You can also end up in rebase hell for a series of
