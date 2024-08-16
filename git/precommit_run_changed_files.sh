@@ -31,11 +31,11 @@ Requires git and pre-commit to be installed and must be run on the feature branc
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<pre-commit args>]"
 
 help_usage "$@"
 
-num_args 0 "$@"
+#num_args 0 "$@"
 
 git_root="$(git_root)"
 
@@ -50,6 +50,6 @@ while IFS= read -r filename; do
 done < <(git diff --name-only "$default_branch"..)
 
 echo
-echo "pre-commit run --files ${changed_files[*]}"
+echo "pre-commit run --files ${changed_files[*]} $*"
 echo
-pre-commit run --files "${changed_files[@]}"
+pre-commit run --files "${changed_files[@]}" "$@"
