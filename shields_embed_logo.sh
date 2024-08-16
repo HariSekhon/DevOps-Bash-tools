@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Base64 encodes a given icon file and prints the logo=... url parameter you need to add the shields.io URL
+Base64 encodes a given icon file or url and prints the logo=... url parameter you need to add the shields.io badge url
 
 If you pass a URL will download the URL and base64 the content
 
