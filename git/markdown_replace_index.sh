@@ -76,8 +76,8 @@ sed -n "
     1,/INDEX_START/p
     /INDEX_START/,/INDEX_STOP/ {
         /INDEX_START/ {
-            d
             r $index_tmp
+            d
         }
         p
     }
