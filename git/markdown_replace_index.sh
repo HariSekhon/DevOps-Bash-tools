@@ -22,15 +22,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Replace the index block of a given markdown file
+Replaces the index block of a given markdown file
 
 Uses the adjacent script markdown_generate_index.sh
 
-Requires the markdown file to have files with
+Requires the markdown file to have lines with
 
 <!-- INDEX_START -->
 
-and
+    and
 
 <!-- INDEX_END -->
 
@@ -42,7 +42,7 @@ If no file is given but README.md is found in the \$PWD, then uses that
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<README.md>"
+usage_args="[<README.md>]"
 
 help_usage "$@"
 
@@ -72,15 +72,16 @@ echo
 
 timestamp "Replacing index in file '$markdown_file'"
 
-sed "1,/INDEX_START/p
-     /INDEX_START/,/INDEX_STOP/ {
-         /INDEX_START/ {
+sed "
+    1,/INDEX_START/p
+    /INDEX_START/,/INDEX_STOP/ {
+        /INDEX_START/ {
             d
             r $index_tmp
-         }
-         /INDEX_STOP/p
-     }
-     /INDEX_STOP/,$ p" "$markdown_file" > "$markdown_tmp"
+        }
+    }
+    /INDEX_STOP/,$ p
+" "$markdown_file" > "$markdown_tmp"
 
 mv -f "$markdown_tmp" "$markdown_file"
 
