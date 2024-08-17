@@ -29,7 +29,7 @@ If no file is given but one is found in the \$PWD, then uses that
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<README.md>"
+usage_args="[<README.md>]"
 
 help_usage "$@"
 
