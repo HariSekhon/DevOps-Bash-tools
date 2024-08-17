@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates a markdown index list from the headings in a given markdown file such as README.md
 
-If no file is given but one is found in the \$PWD, then uses that
+If no file is given but README.md is found in the \$PWD, then uses that
 "
 
 # used by usage() in lib/utils.sh
