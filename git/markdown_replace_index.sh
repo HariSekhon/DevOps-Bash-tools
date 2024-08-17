@@ -72,17 +72,21 @@ timestamp "Generating new index for file: $markdown_file"
 
 timestamp "Replacing index in file: $markdown_file"
 
+# necessary to split this into two pieces because this eats the INDEX_END
+# and the rest of the markdown isn't replaced otherwise
 sed -n "
     1,/INDEX_START/p
+
     /INDEX_START/,/INDEX_STOP/ {
         /INDEX_START/ {
             r $index_tmp
-            d
         }
-        p
     }
-    /INDEX_STOP/,$ p
 " "$markdown_file" > "$markdown_tmp"
+
+# retrieve the INDEX_END to the end of file from the original since INDEX_END
+# is no longer available in the processed stream above
+sed -n "/INDEX_END/,$ p" "$markdown_file" >> "$markdown_tmp"
 
 mv -f "$markdown_tmp" "$markdown_file"
 
