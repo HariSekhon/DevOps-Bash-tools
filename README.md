@@ -743,7 +743,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_remotes_set_https_creds_helpers.sh` - adds Git credential helpers configuration to the local git repo to use http API tokens dynamically from environment variables if they're set
   - `git_repos_pull.sh` - pull multiple repos based on a source file mapping list - useful for easily sync'ing lots of Git repos among computers
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
-  - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. https://github.com/argoproj/argo-cd/pull/8680)
+  - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts
@@ -751,7 +751,8 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout all my repos
   - `git_askpass.sh` - credential helper script to use environment variables for git authentication
-  - `readme_generate_index.sh` - generates a markdown list for all subtitles found in the given README.md. Useful to quickly regenerate the Index section of a README file
+  - `markdown_generate_index.sh` - generates a markdown index list from the headings in a given markdown file such as README.md
+  - `markdown_replace_index.sh` - replaces a markdown index section in a given markdown file using `markdown_generate_index.sh`
 - `github/*.sh` - [GitHub](https://github.com/) API / CLI scripts:
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_install_binary.sh` - installs a binary from GitHub releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
