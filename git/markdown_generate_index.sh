@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates a markdown index list from the headings in a given README.md file
+Generates a markdown index list from the headings in a given markdown file such as README.md
 
 If no file is given but one is found in the \$PWD, then uses that
 "
