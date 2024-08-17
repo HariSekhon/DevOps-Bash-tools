@@ -35,12 +35,12 @@ help_usage "$@"
 
 max_args 1 "$@"
 
-readme="${1:-README.md}"
+markdown_file="${1:-README.md}"
 
 indent_width=2
 
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
-grep '^#' "$readme" |
+grep '^#' "$markdown_file" |
 tail -n +2 |
 # don't include main headings
 #sed '/^#[[:space:]]/d' |
