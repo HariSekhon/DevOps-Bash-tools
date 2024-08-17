@@ -86,4 +86,6 @@ sed -n "
 
 mv -f "$markdown_tmp" "$markdown_file"
 
+rm -f "$index_tmp"
+
 timestamp "Replaced index in file: $markdown_file"
