@@ -43,8 +43,12 @@ if ! [ -f "$markdown_file" ]; then
     die "File not found: $markdown_file"
 fi
 
+# sed strip out ```code``` blocks to avoid # comments inside code blocks from going into the index
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
-grep -E '^#+[[:space:]]' "$markdown_file" |
+# false positive
+# shellcheck disable=SC2016
+sed '/```/,/```/d' "$markdown_file" |
+grep -E '^#+[[:space:]]' |
 tail -n +2 |
 # don't include main headings
 #sed '/^#[[:space:]]/d' |
