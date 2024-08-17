@@ -80,6 +80,7 @@ sed -n "
             r $index_tmp
         }
     }
+
     /INDEX_END/,$ p
 " "$markdown_file" > "$markdown_tmp"
 
