@@ -68,7 +68,6 @@ done
 timestamp "Generating new index for file: $markdown_file"
 
 "$srcdir/markdown_generate_index.sh" "$markdown_file" > "$index_tmp"
-#cat "$index_tmp"
 
 timestamp "Replacing index in file: $markdown_file"
 
