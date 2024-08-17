@@ -43,11 +43,18 @@ if ! [ -f "$markdown_file" ]; then
     die "File not found: $markdown_file"
 fi
 
+# since we now strip ```code``` blocks we must ensure that they match otherwise this code cannot
+# reliably run as it'll result in stripping out valid headings
+
+if [ "$(( $(grep -c '^```' "$markdown_filek) % 2))" != 0 ]; then
+    die "Error - uneven number of code blocks found in file: $markdown_file"
+fi
+
 # sed strip out ```code``` blocks to avoid # comments inside code blocks from going into the index
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
 # false positive
 # shellcheck disable=SC2016
-sed '/```/,/```/d' "$markdown_file" |
+sed '/^```/,/^```/d' "$markdown_file" |
 grep -E '^#+[[:space:]]' |
 tail -n +2 |
 # don't include main headings
