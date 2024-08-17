@@ -65,25 +65,24 @@ for x in INDEX_START INDEX_END; do
     fi
 done
 
-timestamp "Generating new index for file '$markdown_file'"
+timestamp "Generating new index for file: $markdown_file"
 
 "$srcdir/markdown_generate_index.sh" "$markdown_file" > "$index_tmp"
-echo
 
-timestamp "Replacing index in file '$markdown_file'"
+timestamp "Replacing index in file: $markdown_file"
 
-sed "
+sed -n "
     1,/INDEX_START/p
     /INDEX_START/,/INDEX_STOP/ {
         /INDEX_START/ {
             d
             r $index_tmp
         }
+        p
     }
     /INDEX_STOP/,$ p
 " "$markdown_file" > "$markdown_tmp"
 
 mv -f "$markdown_tmp" "$markdown_file"
 
-echo
-timestamp "Index replaced in file '$markdown_file'"
+timestamp "Replaced index in file: $markdown_file"
