@@ -44,7 +44,7 @@ if ! [ -f "$markdown_file" ]; then
 fi
 
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
-grep '^#' "$markdown_file" |
+grep -E '^#+[[:space:]]' "$markdown_file" |
 tail -n +2 |
 # don't include main headings
 #sed '/^#[[:space:]]/d' |
