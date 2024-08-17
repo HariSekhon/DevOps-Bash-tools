@@ -39,6 +39,10 @@ markdown_file="${1:-README.md}"
 
 indent_width=2
 
+if ! [ -f "$markdown_file" ]; then
+    die "File not found: $markdown_file"
+fi
+
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
 grep '^#' "$markdown_file" |
 tail -n +2 |
