@@ -82,6 +82,7 @@ hexedit
 hexyl  # hex viewer - https://github.com/sharkdp/hexyl
 honeyd
 hostapd
+ImageMagick
 incron
 iozone
 iotop
