@@ -141,6 +141,7 @@ ike-scan
 incron
 iotop
 iozone
+imagemagick
 ipcalc
 ipmitool
 iptables
