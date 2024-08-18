@@ -239,7 +239,8 @@ mc
 md5deep
 mdadm
 mdcrack
-media-gfx/exiftool
+media-gfx/exiftool  # view image metadata
+media-gfx/imagemagick
 memdump
 mercurial
 most
