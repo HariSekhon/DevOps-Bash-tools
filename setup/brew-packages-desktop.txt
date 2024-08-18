@@ -95,6 +95,7 @@ e2fsprogs
 eksctl
 expect
 etcd
+exiftool  # view image metadata
 #ext4fuse  # to read Linux partitions eg. on external hard drives
 ffmpeg
 fish
