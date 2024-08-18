@@ -94,6 +94,7 @@ ethstatus
 ethtool
 ettercap-gtk
 evince
+exiv2  # view image metadata
 fcrackzip
 figlet
 filelight
