@@ -138,10 +138,10 @@ hunt
 iceweasel
 ifstat
 ike-scan
+imagemagick
 incron
 iotop
 iozone
-imagemagick
 ipcalc
 ipmitool
 iptables
