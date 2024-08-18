@@ -164,6 +164,7 @@ ldap-utils
 ldapscripts
 ldapvi
 libc6-dev
+libimage-exiftool-perl
 liblist-allutils-perl
 liblist-moreutils-perl
 libnet-cidr-perl
