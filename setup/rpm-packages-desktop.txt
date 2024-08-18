@@ -145,6 +145,7 @@ pastebinit
 pdfgrep
 PEAR-PHP_Shell
 perl-doc
+perl-Image-ExifTool
 pidgin
 pidgin-sipe
 pigz  # parallel gzip
