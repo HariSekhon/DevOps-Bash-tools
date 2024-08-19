@@ -55,6 +55,8 @@ if [ -z "${CI:-}" ]; then
 
 fi
 
+# 'aws sts get-caller-identity --query Account' succeeds in returning the account id
+# from the ~/.aws/config even if 'aws sso login' has expired
 AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
 export AWS_ACCOUNT_ID
 AWS_DEFAULT_REGION="$(aws configure get region || :)"  # use region configured in profile by default
