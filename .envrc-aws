@@ -46,6 +46,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # XXX: Edit - crucial to set to the right environment, the rest of the inferred settings below depend on this
 if [ -z "${CI:-}" ]; then
     export AWS_PROFILE="default"
+
+    if ! aws sts get-caller-identity; then
+        if sed -n '/profile.*smbu/,/^[[:space:]]*$/p' ~/.aws/config | grep -q sso_start_url; then
+            aws sso login
+        fi
+    fi
+
 fi
 
 AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
