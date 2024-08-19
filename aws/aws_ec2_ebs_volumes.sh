@@ -40,9 +40,11 @@ help_usage "$@"
 
 no_args "$@"
 
+timestamp "Getting EC2 instance list"
 while read -r instance_id instance_name; do
     #echo "Instance Name: $instance_name, Instance ID: $instance_id"
 
+    timestamp "Getting volume list for EC2 instance: $instance_name"
     # false positive
     # shellcheck disable=SC2016
     #volume_ids="$(aws ec2 describe-volumes --filters "Name=attachment.instance-id,Values=$instance_id" --query 'Volumes[*].[VolumeId, Tags[?Key==`Name`].Value|[0]]' --output text)"
