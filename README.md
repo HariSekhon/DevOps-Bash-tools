@@ -622,6 +622,7 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
 - `kubectl_pods_important.sh` - lists important pods and their nodes to check on scheduling
 - `kubectl_pods_colocated.sh` - lists pods from deployments/statefulsets that are colocated on the same node
 - `kubectl_node_labels.sh` - lists nodes and their labels, one per line, easier to read visually or pipe in scripting
+- `kubectl_pods_running_with_labels.sh` - lists running pods with labels matching key=value pair arguments
 - `kubectl_node_taints.sh` - lists nodes and their taints
 - `kubectl_jobs_stuck.sh` - finds Kubernetes jobs stuck for hours or days with no completions
 - `kubectl_jobs_delete_stuck.sh` - prompts for confirmation to delete stuck Kubernetes jobs found by script above
