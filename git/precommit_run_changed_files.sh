@@ -26,6 +26,10 @@ Runs pre-commit on all files changed on the current branch vs the default branch
 
 Useful to reproduce pre-commit checks that are failing in pull requests to get your PRs to pass
 
+WARNING: \$HOME/.mdlrc appears to be cumulative and will hide errors in git checkouts with local .mdlrc
+         you will only realize this when your Pull Request checks fail on GitHub, so you may need to edit
+         or delete your \$HOME/.mdlrc to stop it masking your local pre-commit testing
+
 Requires git and pre-commit to be installed and must be run on the feature branch in the git repo checkout
 "
 
