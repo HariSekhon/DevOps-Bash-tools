@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists Kubernetes running pods that match key=value pair arguments, returning one pod name per line (convenient for shell piping)
+Lists Kubernetes running pods with labels matching key=value pair arguments, returning one pod name per line (convenient for shell piping)
 
 All arguments after the first dash prefixed argument are treated as options to kubectl. This is where you should specify -n <namespace> or --all-namespaces
 
