@@ -45,24 +45,27 @@ fi
 
 if is_blank "$java_version"; then
     timestamp "Java version not specified, attempting to find latest JDK version"
+    timestamp "Fetching downloads page"
     # super brittle to pass a web page that will change so just take the first JDK number which is likely to be the production release
-    java_version=$(curl -sS "https://jdk.java.net/" | grep -P -o -m 1 'JDK \K\d+')
+    download_page="$(curl -sS "https://jdk.java.net/")"
+    timestamp "Parsing downloads page"
+    java_version="$(grep -P -o -m 1 'JDK \K\d+' <<< "$download_page" || die "Failed to parse JDK version out of web page")"
     timestamp "Determined latest JDK version to be $java_version"
 fi
 
-url="https://jdk.java.net/java-se-ri/$java_version"
+java_version_url="https://jdk.java.net/java-se-ri/$java_version"
 
 if [ "$java_version" = 8 ]; then
-    url+="-MR6"
+    java_version_url+="-MR6"
 elif [ "$java_version" = 11 ]; then
-    url+="-MR3"
+    java_version_url+="-MR3"
 elif [ "$java_version" = 17 ]; then
-    url+="-MR1"
+    java_version_url+="-MR1"
 fi
 
-timestamp "Parsing download URL from: $url"
-download_url="$(curl -sS "$url" |
-                grep -Eom1 "https://download.java.net/openjdk/(open)?jdk$java_version.+linux-x64.tar.gz" ||
+timestamp "Parsing download URL from Java version URL: $java_version_url"
+download_page="$(curl -sS "$java_version_url")"
+download_url="$(grep -Eom1 "https://download.java.net/openjdk/(open)?jdk$java_version.+linux-x64.*.tar.gz" <<< "$download_page" ||
                 die "Failed to parse download URL")"
 
 timestamp "Downloading $download_url"
