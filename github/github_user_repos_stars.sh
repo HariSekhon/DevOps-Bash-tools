@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns the total number of stars for all non-forked public GitHub repos for a given username
+Returns the total number of stars for all original source public GitHub repos for a given username
 
 Output format:
 
