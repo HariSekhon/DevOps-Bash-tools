@@ -60,7 +60,8 @@ fi
 
 timestamp "Parsing download path from directory listing"
 # links are relative
-download_paths="$(grep -Eo "/zulu/bin/zulu[^>]+jdk${java_version}[._-][^>]+-linux_x64.tar.gz" <<< "$directory_listing" ||
+download_paths="$(grep -Eo "/zulu/bin/zulu[^>]+jdk${java_version}[._-][^>]+-linux_x64.tar.gz" <<< "$directory_listing" |
+                  grep -v beta ||
                   die "Failed to parse download URL")"
 download_path="$(tail -n1 <<< "$download_paths" | sed 's|/zulu/bin/||')"
 
