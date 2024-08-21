@@ -23,9 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the total number of stars for all public GitHub repos for a given username
-
-If no repo is given, infers from local repo's git remotes
+Lists the total number of stars for all non-forked public GitHub repos for a given username
 
 Output format:
 
@@ -46,5 +44,9 @@ min_args 1 "$@"
 username="${1:-}"
 
 gh repo list "$username" --limit 99999 \
-						 --json stargazerCount \
-						 --jq '[.[] | .stargazerCount] | add'
+                         --json stargazerCount,isFork \
+                         --jq '
+                            [.[] |
+                            select(.isFork | not) |
+                            .stargazerCount] |
+                            add'
