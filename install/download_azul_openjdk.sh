@@ -25,6 +25,10 @@ usage_description="
 Downloads Azul OpenJDK version for Linux x86_64
 
 If Java version is not specified, automatically determines latest version to download
+
+For Linux distributions, see also this doc to install native packages:
+
+    https://docs.azul.com/core/install/debian
 "
 
 # used by usage() in lib/utils.sh
