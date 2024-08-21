@@ -39,7 +39,7 @@ usage_args="<username>"
 
 help_usage "$@"
 
-min_args 1 "$@"
+num_args 1 "$@"
 
 username="${1:-}"
 
