@@ -816,8 +816,6 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `github_repo_latest_release_filter.sh` - returns the latest release tag matching a given regex filter for a given GitHub repo via the GitHub API. Useful for getting the latest version of things like Kustomize which has other releases for kyaml
   - `github_repo_stars.sh` - fetches the stars, forks and watcher counts for a given repo
   - `github_repo_teams.sh` - fetches the GitHub Enterprise teams and their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
-  - `github_user_repos_stars.sh` - fetches the total number of stars for all original source public repos for a given user
-  - `github_user_repos_forks.sh` - fetches the total number of forks for all original source public repos for a given user
   - `github_repo_collaborators.sh` - fetches a repo's granted users and outside invited collaborators as well as their role permisions for a given repo. Combine with `github_foreach_repo.sh` to audit your all your personal or GitHub organization's repos
   - `github_repo_protect_branches.sh` - enables branch protections on the given repo. Can specify one or more branches to protect, otherwise finds and applies to any of `master`, `main`, `develop`, `dev`, `staging`, `production`
   - `github_repos_find_files.sh` - finds files matching a regex across all repos in the current GitHub organization or user account
@@ -832,6 +830,8 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `github_teams_not_in_terraform.sh` - finds all teams for given organization which are not found in `$PWD/*.tf` Terraform code
   - `github_repos_sync_status.sh` - determines whether each GitHub repo's mirrors on GitLab / BitBucket / Azure DevOps are up to date with the latest commits, by querying all 3 APIs and comparing master branch hashrefs
   - `github_teams_not_idp_synced.sh` - finds GitHub teams that aren't sync'd from an IdP like Azure AD. These should usually be migrated or removed
+  - `github_user_repos_stars.sh` - fetches the total number of stars for all original source public repos for a given user
+  - `github_user_repos_forks.sh` - fetches the total number of forks for all original source public repos for a given user
 - `gitlab/*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_install_binary.sh` - installs a binary from GitLab releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
