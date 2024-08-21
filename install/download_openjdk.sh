@@ -52,9 +52,18 @@ fi
 
 url="https://jdk.java.net/java-se-ri/$java_version"
 
-timestamp "Parsing download URL from $url"
-download_url="$(curl -sS "$url" | grep -Eom1 "https://download.java.net/openjdk/jdk$java_version/ri/openjdk-$java_version\+[[:digit:]]+_linux-x64_bin.tar.gz")"
+if [ "$java_version" = 8 ]; then
+    url+="-MR6"
+elif [ "$java_version" = 11 ]; then
+    url+="-MR3"
+elif [ "$java_version" = 17 ]; then
+    url+="-MR1"
+fi
 
+timestamp "Parsing download URL from $url"
+download_url="$(curl -sS "$url" |
+                grep -Eom1 "https://download.java.net/openjdk/(open)?jdk$java_version.+linux-x64.tar.gz" ||
+                die "Failed to parse download URL")"
 
 timestamp "Downloading $download_url"
 wget -c "$download_url"
