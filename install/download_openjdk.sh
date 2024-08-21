@@ -60,7 +60,7 @@ elif [ "$java_version" = 17 ]; then
     url+="-MR1"
 fi
 
-timestamp "Parsing download URL from $url"
+timestamp "Parsing download URL from: $url"
 download_url="$(curl -sS "$url" |
                 grep -Eom1 "https://download.java.net/openjdk/(open)?jdk$java_version.+linux-x64.tar.gz" ||
                 die "Failed to parse download URL")"
