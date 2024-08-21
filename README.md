@@ -832,6 +832,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `github_teams_not_idp_synced.sh` - finds GitHub teams that aren't sync'd from an IdP like Azure AD. These should usually be migrated or removed
   - `github_user_repos_stars.sh` - fetches the total number of stars for all original source public repos for a given user
   - `github_user_repos_forks.sh` - fetches the total number of forks for all original source public repos for a given user
+  - `github_user_followers.sh` - fetches the number of followers for a given username
 - `gitlab/*.sh` - [GitLab](https://gitlab.com/) API scripts:
   - `gitlab_api.sh` - queries the GitLab [API](https://docs.gitlab.com/ee/api/api_resources.html). Can infer GitLab user, repo and authentication token from local checkout or environment (`$GITLAB_USER`, `$GITLAB_TOKEN`)
   - `gitlab_install_binary.sh` - installs a binary from GitLab releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
