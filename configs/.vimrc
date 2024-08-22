@@ -361,6 +361,7 @@ nmap          ;k :w<CR> :! check_kubernetes_yaml.sh "%" <CR>
 " done automatically on write now
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
 nmap <silent> ;' :w<CR> :!clear; git diff "%" <CR>
+nmap          ;m :w<CR> :call MarkdownIndex() <CR>
 nmap          ;n :w<CR> :n<CR>
 nmap          ;o :!cd "%:p:h" && git log -p "%:t" <CR>
 nmap          ;O :call ToggleGutter()<CR>
@@ -565,6 +566,10 @@ function! GitPush()
 endfunction
 
 " ============================================================================ "
+
+function! MarkdownIndex()
+    :! markdown_replace_index.sh "%"
+endfunction
 
 " superceded by anonymize.py from DevOps Python tools repo, called via hotkey ;a declared above
 ":function RemoveIPs()
