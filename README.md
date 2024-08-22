@@ -134,7 +134,7 @@ Fast, Advanced Systems Engineering, Automation, APIs, shorter CLIs, etc.
 
 Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aharisekhon+type%3Arepository&type=Repositories), dozens of [DockerHub builds](https://hub.docker.com/r/harisekhon) ([Dockerfiles](https://github.com/HariSekhon/Dockerfiles)) and 600+ [CI builds](https://harisekhon.github.io/CI-CD/).
 
-#### Summary
+## Summary
 
 - Scripts for many popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#inventory) below for more details
 - Advanced configs for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
@@ -143,21 +143,21 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 - API scripts auto-handling authentication, tokens and other details to quickly query popular APIs with a few keystrokes just supplying the `/path/endpoint`
 - Advanced Bash environment - `.bashrc` + `.bash.d/*.sh` - aliases, functions, colouring, dynamic Git & shell behaviour enhancements, automatic pathing for installations and major languages like Python, Perl, Ruby, NodeJS, Golang across Linux distributions and Mac. See [.bash.d/README.md](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md)
 - Installs the best systems packages -
-[AWS CLI](https://aws.amazon.com/cli/),
-[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
-[GCloud SDK](https://cloud.google.com/sdk),
-[Digital Ocean CLI](https://docs.digitalocean.com/reference/doctl/),
-[Terraform](https://www.terraform.io/),
-[Terragrunt](https://terragrunt.gruntwork.io/),
-[GitHub CLI](https://github.com/cli/cli),
-[Kubernetes](https://kubernetes.io/)
-[kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) &
-[kustomize](https://kustomize.io/),
-[Helm](https://helm.sh/),
-[eksctl](https://eksctl.io/),
-[Docker-Compose](https://docs.docker.com/compose/),
-[jq](https://stedolan.github.io/jq/)
-and many others... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
+  [AWS CLI](https://aws.amazon.com/cli/),
+  [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
+  [GCloud SDK](https://cloud.google.com/sdk),
+  [Digital Ocean CLI](https://docs.digitalocean.com/reference/doctl/),
+  [Terraform](https://www.terraform.io/),
+  [Terragrunt](https://terragrunt.gruntwork.io/),
+  [GitHub CLI](https://github.com/cli/cli),
+  [Kubernetes](https://kubernetes.io/)
+  [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) &
+  [kustomize](https://kustomize.io/),
+  [Helm](https://helm.sh/),
+  [eksctl](https://eksctl.io/),
+  [Docker-Compose](https://docs.docker.com/compose/),
+  [jq](https://stedolan.github.io/jq/)
+  and many others... extensive package lists for servers and desktops for most major Linux distributions package managers and Mac
   - `install/` - contains many installation scripts for popular open source software and direct binary downloads from GitHub releases
   - `configs/` - contains many dot configs for common technologies like ViM, top, Screen, Tmux, MySQL, PostgreSQL etc.
   - `setup/` - contains setup scripts, package lists, extra configs, Mac OS X settings etc.
@@ -177,13 +177,13 @@ Cloud & Big Data Contractor, United Kingdom
 (ex-Cloudera, former Hortonworks Consultant)
 
 [![My LinkedIn](https://img.shields.io/badge/LinkedIn%20Profile-HariSekhon-blue?logo=linkedin)](https://www.linkedin.com/in/HariSekhon/)
-###### (you're welcome to connect with me on LinkedIn)
+<br>**(you're welcome to connect with me on LinkedIn)**
 
 ### Quick Setup
 
 To bootstrap, install packages and link in to your shell profile to inherit all configs, do:
 
-```
+```bash
 curl -L https://git.io/bash-bootstrap | sh
 ```
 
@@ -195,7 +195,7 @@ curl -L https://git.io/bash-bootstrap | sh
 
 To only install package dependencies to run scripts, simply `cd` to the git clone directory and run `make`:
 
-```
+```shell
 git clone https://github.com/HariSekhon/DevOps-Bash-tools bash-tools
 cd bash-tools
 make
@@ -232,7 +232,7 @@ make
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
 - [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
-#### Linux & Mac
+### Linux & Mac
 
 Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 
@@ -259,32 +259,32 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
   - and lots more - see [.bash.d/README](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/.bash.d/README.md) for a more detailed list
   - run `make bash` to link `.bashrc`/`.bash_profile` and the `.*` dot config files to your `$HOME` directory to auto-inherit everything
 - `lib/*.sh` - Bash utility libraries full of functions for
-[Docker](https://www.docker.com/),
-environment,
-CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/) etc),
-port and HTTP url availability content checks etc.
-Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
+  [Docker](https://www.docker.com/),
+  environment,
+  CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/) etc),
+  port and HTTP url availability content checks etc.
+  Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
 - `install/install_*.sh` - various simple to use installation scripts for common technologies like
-[AWS CLI](https://aws.amazon.com/cli/),
-[Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
-[GCloud SDK](https://cloud.google.com/sdk),
-[Terraform](https://www.terraform.io/),
-[Ansible](https://www.ansible.com/),
-[MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/),
-[MiniShift](https://www.okd.io/minishift/)
-(Kubernetes / [Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) dev VMs),
-[Maven](https://maven.apache.org/),
-[Gradle](https://gradle.org/),
-[SBT](https://www.scala-sbt.org/),
-[EPEL](https://fedoraproject.org/wiki/EPEL),
-[RPMforge](http://repoforge.org/),
-[Homebrew](https://brew.sh/),
-[Travis CI](https://travis-ci.org/),
-[Circle CI](https://circleci.com/),
-[AppVeyor](https://www.appveyor.com/),
-[BuildKite](https://buildkite.com),
-[Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
-etc.
+  [AWS CLI](https://aws.amazon.com/cli/),
+  [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
+  [GCloud SDK](https://cloud.google.com/sdk),
+  [Terraform](https://www.terraform.io/),
+  [Ansible](https://www.ansible.com/),
+  [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/),
+  [MiniShift](https://www.okd.io/minishift/)
+  (Kubernetes / [Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) dev VMs),
+  [Maven](https://maven.apache.org/),
+  [Gradle](https://gradle.org/),
+  [SBT](https://www.scala-sbt.org/),
+  [EPEL](https://fedoraproject.org/wiki/EPEL),
+  [RPMforge](http://repoforge.org/),
+  [Homebrew](https://brew.sh/),
+  [Travis CI](https://travis-ci.org/),
+  [Circle CI](https://circleci.com/),
+  [AppVeyor](https://www.appveyor.com/),
+  [BuildKite](https://buildkite.com),
+  [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
+  etc.
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
 - `delete_duplicate_files.sh` - deletes duplicate files with (N) suffixes, commonly caused by web browser downloads,
@@ -323,7 +323,7 @@ etc.
 See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
 and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
 
-#### Databases
+### Databases
 
 `mysql/`, `postgres/`, `sql/` and `bin/` directories:
 
@@ -342,7 +342,7 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
   - `postgres_foreach_table.sh` - executes a SQL query against every table, replacing `{db}`, `{schema}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `postgres_*.sh` - various scripts using `psql.sh` for row counts, iterating each table, or outputting clean lists of databases, schemas and tables for quick scripting
 
-#### AWS - Amazon Web Services
+### AWS - Amazon Web Services
 
 `aws/` directory:
 
@@ -444,7 +444,7 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
 
 See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-Base/blob/main/aws.md).
 
-#### GCP - Google Cloud Platform
+### GCP - Google Cloud Platform
 
 `gcp/` directory:
 
@@ -567,7 +567,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
 
 See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-Base/blob/main/gcp.md).
 
-#### Kubernetes
+### Kubernetes
 
 `kubernetes/` directory:
 
@@ -665,7 +665,7 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
 
 See also [Knowledge Base notes for Kubernetes](https://github.com/HariSekhon/Knowledge-Base/blob/main/kubernetes.md).
 
-#### Docker
+### Docker
 
 `docker/` directory:
 
@@ -686,7 +686,7 @@ See also [Knowledge Base notes for Kubernetes](https://github.com/HariSekhon/Kno
 
 See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowledge-Base/blob/main/docker.md).
 
-#### Big Data & NoSQL
+### Big Data & NoSQL
 
 `bigdata/` and `kafka/` directories:
 
@@ -728,7 +728,7 @@ See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowled
 
 See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowledge-Base/blob/main/hadoop.md).
 
-#### Git - GitHub, GitLab, Bitbucket, Azure DevOps
+### Git - GitHub, GitLab, Bitbucket, Azure DevOps
 
 `git/`, `github/`, `gitlab/`, `bitbucket/` and `azure_devops/` directories:
 
@@ -869,7 +869,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
 
 See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md).
 
-#### CI/CD - Continuous Integration / Continuous Deployment
+### CI/CD - Continuous Integration / Continuous Deployment
 
 `jenkins/`, `terraform/`, `teamcity/`, `buildkite/`, `circlci/`, `travis/`, `azure_devops/`, ...,  `cicd/` directories:
 
@@ -893,10 +893,10 @@ See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-
 - `wercker_app_api.sh` - queries [Wercker](https://app.wercker.com/)'s Applications API with authentication
 - `gocd_api.sh` - queries [GoCD](https://www.gocd.org/)'s API
 - `gocd.sh` - one-touch [GoCD CI](https://www.gocd.org/):
-    - launches in Docker
-    - (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`)
-    - detects and enables agent(s) to start building
-    - call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
+  - launches in Docker
+  - (re)creates config repo (`$PWD/setup/gocd_config_repo.json`) from which to source pipeline(s) (`.gocd.yml`)
+  - detects and enables agent(s) to start building
+  - call from any repo top level directory with a `.gocd.yml` config (all mine have it), mimicking structure of fully managed CI systems
 - `concourse.sh` - one-touch [Concourse CI](https://concourse-ci.org/):
   - launches in Docker
   - configures pipeline from `$PWD/.concourse.yml`
@@ -1094,14 +1094,14 @@ See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-
 
 See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledge-Base/blob/main/ci-cd.md).
 
-#### AI & IPaaS
+### AI & IPaaS
 
 `ai/` and `ipaas/` directories:
 
 - `openai_api.sh` - queries the [OpenAI](https://openai.com/) (ChatGPT) API with authentication
 - `make_api.sh` - queries the [Make.com](https://www.make.com) API with authentication
 
-#### Internet Services
+### Internet Services
 
 `bin/`, `pingdom/`, `terraform/` directories:
 
@@ -1148,7 +1148,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 - `wordpress_api.sh` - queries the Wordpress API with authentication
 - `wordpress_posts_without_category_tags.sh` - checks posts (articles) for categories without corresponding tags and prints the posts and their missing tags
 
-#### Perl
+### Perl
 
 `perl/` directory:
 
@@ -1164,7 +1164,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 
 See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge-Base/blob/main/perl.md).
 
-#### Python
+### Python
 
 `python/` directory:
 
@@ -1185,7 +1185,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowledge-Base/blob/main/python.md).
 
-#### Golang
+### Golang
 
 `packages/` directory:
 
@@ -1193,7 +1193,7 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
 - `golang_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
 - `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete you `bin/` etc as these are often real deployed applications rather than development binaries
 
-#### Media
+### Media
 
 `media/` directory:
 
@@ -1204,7 +1204,7 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel URL
 
-#### Spotify
+### Spotify
 
 40+ [Spotify](https://www.spotify.com/) API scripts (used extensively to manage my [Spotify-Playlists](https://github.com/HariSekhon/Spotify-Playlists) repo).
 
@@ -1246,7 +1246,7 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
 - `spotify_api_token.sh` - gets a Spotify authentication token using either [Client Credentials](https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow) or [Authorization Code](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow) authentication flows, the latter being able to read/modify private user data, automatically used by `spotify_api.sh`
 - `spotify_api.sh` - query any Spotify [API](https://developer.spotify.com/documentation/web-api/reference/) endpoint with authentication, used by adjacent spotify scripts
 
-#### More Linux & Mac
+### More Linux & Mac
 
 `bin/`, `install/`, `packages/`, `setup/` directories:
 
@@ -1277,7 +1277,7 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
       - `brew_package_owns.sh` - finds which brew package owns a given filename argument
 - all builds across all my GitHub repos now `make system-packages` before `make pip` / `make cpan` to shorten how many packages need installing, reducing chances of build failures
 
-#### Builds, Languages & Linting
+### Builds, Languages & Linting
 
 `bin/`, `checks/`, `cicd/` or language specific directories:
 
@@ -1310,7 +1310,7 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
     - [Docker Compose](https://docs.docker.com/compose/)
     - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
 
-#### Data Format Conversion & Validation
+### Data Format Conversion & Validation
 
 `bin/` directory:
 
@@ -1367,67 +1367,67 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
 
 [Pre-built Docker images](https://hub.docker.com/u/harisekhon/) are available for those repos (which include this one as a submodule) and the ["docker available"](https://hub.docker.com/r/harisekhon/centos-github/)  icon above links to an [uber image](https://hub.docker.com/r/harisekhon/centos-github/) which contains all my github repos pre-built. There are [Centos](https://hub.docker.com/r/harisekhon/centos-github/), [Alpine](https://hub.docker.com/r/harisekhon/alpine-github/), [Debian](https://hub.docker.com/r/harisekhon/debian-github/) and [Ubuntu](https://hub.docker.com/r/harisekhon/ubuntu-github/) versions of this uber Docker image containing all repos.
 
-#### Individual Setup Parts
+## Individual Setup Parts
 
 Optional, only if you don't do the full `make install`.
 
 Install only OS system package dependencies and [AWS CLI](https://aws.amazon.com/cli/) via Python Pip (doesn't symlink anything to `$HOME`):
 
-```
+```shell
 make
 ```
 
 Adds sourcing to `.bashrc` and `.bash_profile` and symlinks dot config files to `$HOME` (doesn't install OS system package dependencies):
 
-```
+```shell
 make link
 ```
 
 undo via
 
-```
+```shell
 make unlink
 ```
 
 Install only OS system package dependencies (doesn't include [AWS CLI](https://aws.amazon.com/cli/) or Python packages):
 
-```
+```shell
 make system-packages
 ```
 
 Install [AWS CLI](https://aws.amazon.com/cli/):
 
-```
+```shell
 make aws
 ```
 
 Install [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/):
 
-```
+```shell
 make azure
 ```
 
 Install [GCP GCloud SDK](https://cloud.google.com/sdk) (includes CLI):
 
-```
+```shell
 make gcp
 ```
 
 Install [GCP GCloud Shell](https://cloud.google.com/shell) environment (sets up persistent OS packages and all home directory configs):
 
-```
+```shell
 make gcp-shell
 ```
 
 Install generically useful Python CLI tools and modules (includes [AWS CLI](https://aws.amazon.com/cli/), autopep8 etc):
 
-```
+```shell
 make python
 ```
 
 ### Full Help
 
-```
+```shell
 > make help
 
  Usage:
