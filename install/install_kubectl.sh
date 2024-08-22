@@ -25,6 +25,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Installs Kubernetes 'kubectl' CLI
+
+Installs kubectl binary to /usr/local/bin/ or \$HOME/bin/ depending on your permissions
+
+For systems with package managers it may be automatically installed using the packages for each
+package manager:
+
+    $srcdir/../setup/*packages*.txt
+
+Official documentation:
+
+    https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
 "
 
 # used by usage() in lib/utils.sh
