@@ -74,11 +74,15 @@ timestamp "Replacing index in file: $markdown_file"
 sed -n "
     1,/INDEX_START/p
 
+    /INDEX_START/ a
+
     /INDEX_START/,/INDEX_END/ {
         /INDEX_START/ {
             r $index_tmp
         }
     }
+
+    /INDEX_END/ i
 
     /INDEX_END/,$ p
 " "$markdown_file" > "$markdown_tmp"
