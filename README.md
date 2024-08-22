@@ -634,6 +634,8 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
 - `kubectl_pod_ips.sh` - lists Kubernetes pods and their pod IP addresses
 - `kubectl_container_count.sh` - lists Kubernetes containers total running count
 - `kubectl_container_counts.sh` - lists Kubernetes containers running counts by name sorted descending
+- `kubectl_pods_dump_stats.sh` - dumps stats from all pods matching a given regex and namespace to txt files for support debugging
+- `kubectl_pods_dump_logs.sh` - dumps logs from all pods matching a given regex and namespace to txt files for support debugging
 - `kubectl_empty_namespaces.sh` - finds namespaces without any of the usual objects using `kubectl get all`
 - `kubectl_delete_empty_namespaces.sh` - removes empty namespaces, uses `kubectl_empty_namespaces.sh`
 - `kubectl_<image>.sh` - quick launch one-off pods for interactive debuggging in Kubernetes
