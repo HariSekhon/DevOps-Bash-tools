@@ -63,7 +63,7 @@ grep -E "$regex" |
 while read -r pod; do
     echo
     timestamp "Dumping pod log: $pod"
-    output_file="kubectl-pod-log.$(date '+%F_%H%S').$pod.txt"
+    output_file="kubectl-pod-log.$(date '+%F_%H%M').$pod.txt"
     kubectl logs "$pod" > "$output_file"
     timestamp "Dumped pod log to file: $output_file"
 done
