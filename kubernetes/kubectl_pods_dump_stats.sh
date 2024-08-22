@@ -63,7 +63,7 @@ grep -E "$regex" |
 while read -r pod; do
     echo
     timestamp "Running commands on pod: $pod"
-    output_file="kubectl-pod-stats.$(date '+%F_%H%S').$pod.txt"
+    output_file="kubectl-pod-stats.$(date '+%F_%H%M').$pod.txt"
     echo
     kubectl exec "$pod" -- bash -c '
         echo "Disk Space:"
