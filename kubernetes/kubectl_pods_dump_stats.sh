@@ -54,14 +54,17 @@ kube_config_isolate
 if [ -n "$namespace" ]; then
     echo "Switching to namespace '$namespace'";
     kubectl config set-context "$(kubectl config current-context)" --namespace "$namespace"
+    echo
 fi
 
 kubectl get pods -o name |
 sed 's|pod/||' |
 grep -E "$regex" |
 while read -r pod; do
+    echo
     timestamp "Running commands on pod: $pod"
     output_file="kubectl-pod-dump-output.$(date '+%F_%H%S').$pod.txt"
+    echo
     kubectl exec "$pod" -- bash -c '
         echo "Disk Space:"
         echo
@@ -77,5 +80,8 @@ while read -r pod; do
         echo
         top -H -b -n 1
     ' | tee "$output_file"
+    echo
     timestamp "Dumped command outputs to file: $output_file"
+    echo
+    echo
 done
