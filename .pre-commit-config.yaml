@@ -68,5 +68,6 @@ repos:
         name: Markdownlint
         description: Run markdownlint on your Markdown files
         entry: mdl
+        args: [-s, .markdownlint.rb]
         language: ruby
         files: \.(md|mdown|markdown)$
