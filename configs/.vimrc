@@ -379,14 +379,13 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :call HgGitU()<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%" <CR>
-nmap          ;; :w<CR> :! bash -ic 'gitu "%"' <CR>
-nmap          ;/ :w<CR> :! bash -ic 'add "%"' <CR>
-nmap          ;g :w<CR> :! bash -ic 'cd "%:p:h" && st' <CR>
-nmap          ;G :w<CR> :! bash -ic 'cd "%:p:h" && git log -p "%:t"' <CR>
-"nmap          ;L :w<CR> :! bash -ic 'cd "%:p:h" && git log -p' <CR>
-nmap          ;L :w<CR> :! lint.sh %<CR>
-nmap          ;. :w<CR> :! bash -ic 'cd "%:p:h" && pull' <CR>
-nmap          ;[ :w<CR> :! bash -ic 'cd "%:p:h" && push' <CR>
+nmap          ;; :w<CR> :call GitUpdateCommit() <CR>
+nmap          ;/ :w<CR> :call GitAddCommit() <CR>
+nmap          ;g :w<CR> :call GitStatus() <CR>
+nmap          ;G :w<CR> :call GitLogP() <CR>
+nmap          ;L :w<CR> :! lint.sh % <CR>
+nmap          ;. :w<CR> :call GitPull() <CR>
+nmap          ;[ :w<CR> :call GitPush() <CR>
 " write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
 " this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
 nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
@@ -533,6 +532,39 @@ endfunction
 :command! JHr :normal a// <ESC>74a=<ESC>a //<ESC>
 
 :command! Done :normal 37a=<ESC>a DONE <ESC>37a=<ESC>
+
+" ============================================================================ "
+"                            G i t   F u n c t i o n s
+" ============================================================================ "
+
+" works better than a straight nmap which sometimes fails to execute and re-sourcing .vimrc doesn't solve it
+" without exiting vim - this is buggy behaviour that doesn't seem to happen when using functions instead
+
+function! GitUpdateCommit()
+    :! bash -ic 'cd "%:p:h" && gitu "%:t" '
+endfunction
+
+function! GitAddCommit()
+     ! bash -ic 'add "%"'
+endfunction
+
+function! GitStatus()
+    :! bash -ic 'cd "%:p:h" && st'
+endfunction
+
+function! GitLogP()
+    :! bash -ic 'cd "%:p:h" && git log -p "%:t"'
+endfunction
+
+function! GitPull()
+    :! bash -ic 'cd "%:p:h" && pull'
+endfunction
+
+function! GitPush()
+    :! bash -ic 'cd "%:p:h" && push'
+endfunction
+
+" ============================================================================ "
 
 " superceded by anonymize.py from DevOps Python tools repo, called via hotkey ;a declared above
 ":function RemoveIPs()
