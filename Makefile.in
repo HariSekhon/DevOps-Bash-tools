@@ -831,6 +831,11 @@ wc:
 	@printf 'of which vagrant/:\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep vagrant/ | wc -l | sed 's/[[:space:]]//g'
 
+mdl:
+	@echo "Checking Markdown for issues"
+	@echo
+	@mdl -s .markdownlint.rb *.md
+
 # finds .swp, would need to port out code lists
 #.PHONY: wcall
 #wcall:
