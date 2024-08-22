@@ -73,6 +73,7 @@ alias gitrc=gitconfig
 # shellcheck disable=SC2032
 #alias add=gitadd
 add(){ gitadd "$@"; }
+addf(){ git add -f "$@"; add "$@"; }
 alias gadd='git add'
 alias import=gitimport
 alias co=checkout
