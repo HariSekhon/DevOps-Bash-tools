@@ -75,7 +75,7 @@ while read -r pod; do
         echo
         echo "Top with Threads:"
         echo
-        top -Hb
+        top -H -b -n 1
     ' | tee "$output_file"
     timestamp "Dumped command outputs to file: $output_file"
 done
