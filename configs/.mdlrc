@@ -1,1 +1,1 @@
-rules "~MD007", "~MD013", "~MD033"
+style '.markdownlint.rb'
