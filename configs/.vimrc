@@ -274,6 +274,8 @@ if has("autocmd")
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     au FileType sh                        nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| more -R<CR>
 
+    au BufNewFile,BufRead .vimrc    nmap ;l :w<CR> :!clear<CR> :call LintVimrc() <CR>
+
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
     au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
@@ -387,6 +389,7 @@ nmap          ;G :w<CR> :call GitLogP() <CR>
 nmap          ;L :w<CR> :! lint.sh % <CR>
 nmap          ;. :w<CR> :call GitPull() <CR>
 nmap          ;[ :w<CR> :call GitPush() <CR>
+nmap          ;, :w<CR> :s/^/</ <CR> :s/$/>/ <CR>
 " write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
 " this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
 nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
@@ -451,6 +454,33 @@ if ! exists("*SourceVimrc")
         :set ts sts sw et filetype
     endfunction
 endif
+
+":! bash -c 'vim -c "source %" -c "q" && echo "ViM basic lint validation passed" || "ViM basic lint validation failed"'
+"":! if type -P vint &>/dev/null; then vint "%"; fi
+function! LintVimrc()
+  let l:vimrc_path = expand('~/.vimrc')
+
+  echo "Sourcing ~/.vimrc file..."
+  try
+    execute 'source' l:vimrc_path
+    echohl InfoMsg | echo "No syntax errors found in .vimrc." | echohl None
+  catch
+    echohl ErrorMsg | echo "Error found in .vimrc while sourcing." | echohl None
+    return
+  endtry
+
+  if executable('vint')
+    echo "Running vint..."
+    let l:vint_output = system('vint ' . l:vimrc_path)
+    if v:shell_error
+      echohl ErrorMsg | echo l:vint_output | echohl None
+    else
+      echohl InfoMsg | echo "No linting issues found by vint." | echohl None
+    endif
+  else
+    echohl WarningMsg | echo "vint is not installed or not found in PATH." | echohl None
+  endif
+endfunction
 
 function! ToggleSyntax()
     if exists("g:syntax_on")
