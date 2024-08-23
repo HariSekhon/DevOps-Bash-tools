@@ -47,7 +47,7 @@ help_usage "$@"
 max_args 2 "$@"
 
 namespace="${1:-}"
-regex="${2:-.}"
+pod_name_regex="${2:-.}"
 
 kube_config_isolate
 
@@ -59,7 +59,7 @@ fi
 
 kubectl get pods -o name |
 sed 's|pod/||' |
-grep -E "$regex" |
+grep -E "$pod_name_regex" |
 while read -r pod; do
     echo
     timestamp "Dumping pod log: $pod"
