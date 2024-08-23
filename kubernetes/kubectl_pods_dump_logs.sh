@@ -68,7 +68,7 @@ while read -r pod; do
     output_file="kubectl-pod-log.$(date '+%F_%H%M').$pod.txt" &&
     kubectl logs "$pod" > "$output_file" &&
     timestamp "Dumped pod log to file: $output_file" ||
-    warn "Failed to collect for pod '$pod'"
+    warn "Failed to collect log for pod '$pod'"
     # XXX: because race condition - pods can go away during execution and we still want to collect the rest of the pods
 done
 timestamp "Log dumps completed"
