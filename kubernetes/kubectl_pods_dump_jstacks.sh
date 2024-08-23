@@ -85,6 +85,8 @@ while read -r pod; do
             fi
             /tmp/jdk/bin/jstack "$java_pid" > /tmp/jstack-output.txt
         '
+    timestamp "Copying /tmp/jstack-output.txt to local machine"
     kubectl cp "$pod":/tmp/jstack-output.txt "$output_file"
     timestamp "Dumped pod jstack to file: $output_file"
 done
+timestamp "JStack dumps completed"
