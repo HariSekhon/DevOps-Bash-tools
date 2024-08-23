@@ -71,14 +71,14 @@ sed 's|pod/||' |
 grep -E "$pod_name_regex" |
 while read -r pod; do
     echo
-    timestamp "Dumping pod jstack: $pod"
-    output_file="kubectl-pod-jstack.$(date '+%F_%H%M').$pod.txt"
     #kubectl exec"$pod" -- "rm -fr /tmp/jdk"
-    timestamp "Copying jdk '$jdk' to pod /tmp"
-    kubectl cp "$jdk/" "$pod":/tmp/jdk
-    timestamp "Dumping JStack inside pod"
-    # want expansion in pod not local shell
-    # shellcheck disable=SC2016
+    # want expansion in pod not local shell, and ignore && && || it works
+    # shellcheck disable=SC2016,SC2015
+    timestamp "Dumping pod jstack: $pod" &&
+    output_file="kubectl-pod-jstack.$(date '+%F_%H%M').$pod.txt" &&
+    timestamp "Copying jdk '$jdk' to pod /tmp" &&
+    kubectl cp "$jdk/" "$pod":/tmp/jdk &&
+    timestamp "Dumping JStack inside pod" &&
     kubectl exec "$pod" -- \
         bash -c '
             java_pid="$(pgrep java | tee /dev/stderr)"
@@ -91,9 +91,11 @@ while read -r pod; do
                 exit 0
             fi
             /tmp/jdk/bin/jstack "$java_pid" > /tmp/jstack-output.txt
-        '
-    timestamp "Copying /tmp/jstack-output.txt to local machine"
-    kubectl cp "$pod":/tmp/jstack-output.txt "$output_file"
-    timestamp "Dumped pod jstack to file: $output_file"
+        ' &&
+    timestamp "Copying /tmp/jstack-output.txt to local machine" &&
+    kubectl cp "$pod":/tmp/jstack-output.txt "$output_file" &&
+    timestamp "Dumped pod jstack to file: $output_file" ||
+    warn "Failed to collect for pod '$pod'"
+    # XXX: because race condition - pods can go away during execution and we still want to collect the rest of the pods
 done
 timestamp "JStack dumps completed"
