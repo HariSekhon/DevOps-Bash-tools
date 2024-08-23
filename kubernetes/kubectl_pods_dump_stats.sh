@@ -64,7 +64,7 @@ while read -r pod; do
     echo
     # ignore && && || it works
     # shellcheck disable=SC2015
-    timestamp "Running commands on pod: $pod" &&
+    timestamp "Running stats commands on pod: $pod" &&
     output_file="kubectl-pod-stats.$(date '+%F_%H%M').$pod.txt" &&
     echo &&
     kubectl exec "$pod" -- bash -c '
@@ -80,12 +80,12 @@ while read -r pod; do
         echo "Top with Threads:"
         echo
         top -H -b -n 1
-    ' | tee "$output_file" &&
+    ' >"$output_file" &&
     echo &&
-    timestamp "Dumped command outputs to file: $output_file" &&
+    timestamp "Dumped stats commands outputs to file: $output_file" &&
     echo &&
     echo ||
-    warn "Failed to collect for pod '$pod'"
+    warn "Failed to collect stats for pod '$pod'"
     # XXX: because race condition - pods can go away during execution and we still want to collect the rest of the pods
 done
 timestamp "Stats dumps completed"
