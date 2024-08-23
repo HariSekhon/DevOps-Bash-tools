@@ -84,3 +84,4 @@ while read -r pod; do
     echo
     echo
 done
+timestamp "Stats dumps completed"
