@@ -107,6 +107,19 @@ else
                         ;;
                  *.md)  mdl "$basename"
                         ;;
+               .vimrc)  if vim -c "source $filename" -c "q"; then
+                            echo "ViM basic lint validation passed"
+                        else
+                            die "ViM basic lint validation failed"
+                        fi
+                        if type -P vint &>/dev/null; then
+                            if vint "$filename"; then
+                                echo "Vint vim script linting passed"
+                            else
+                                die "Vint vim script linting failed"
+                            fi
+                        fi
+                        ;;
                     *)  die "Cannot lint unrecognized file type for file: $filename"
                         ;;
     esac
