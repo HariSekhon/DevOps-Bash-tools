@@ -190,6 +190,8 @@ alias github="sti github; cd '$github'";
 export work="$github/work"
 alias work="sti work; cd '$work'"
 
+alias btup="bt; u; cd -"
+
 export bitbucket=~/bitbucket
 alias bitb='cd $bitbucket'
 # clashes with bitbucket-cli
