@@ -1,1 +1,5 @@
-style '.markdownlint.rb'
+mdlrc_dir = File.expand_path('..', __FILE__)
+
+style_file = File.join(mdlrc_dir, '.markdownlint.rb')
+
+style style_file
