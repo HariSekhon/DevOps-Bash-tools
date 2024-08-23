@@ -834,7 +834,7 @@ wc:
 mdl:
 	@echo "Checking Markdown for issues"
 	@echo
-	@mdl -s .markdownlint.rb *.md
+	@mdl -s .mdl.rb *.md
 
 # finds .swp, would need to port out code lists
 #.PHONY: wcall
