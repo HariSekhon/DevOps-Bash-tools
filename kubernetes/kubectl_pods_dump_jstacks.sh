@@ -49,7 +49,7 @@ max_args 3 "$@"
 
 jdk="$1"
 namespace="${2:-}"
-regex="${3:-.}"
+pod_name_regex="${3:-.}"
 
 if ! [ -f "$jdk/bin/jstack" ]; then
     die "Fifth arg - jdk - must be a directory containing a JDK with jstack!"
@@ -68,7 +68,7 @@ fi
 
 kubectl get pods -o name |
 sed 's|pod/||' |
-grep -E "$regex" |
+grep -E "$pod_name_regex" |
 while read -r pod; do
     echo
     timestamp "Dumping pod jstack: $pod"
