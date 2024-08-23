@@ -76,14 +76,14 @@ fi
 for ((i=1; i <= num_iterations; i++)); do
     timestamp "Running iteration $i of dump all:"
     echo
-    timestamp "Running: kubectl_pods_dump_jstacks.sh ${namespace:+"$namespace" "$pod_name_regex"}"
-    kubectl_pods_dump_jstacks.sh ${namespace:+"$namespace" "$pod_name_regex"}
+    timestamp "Running: $srcdir/kubectl_pods_dump_jstacks.sh ${namespace:+"$namespace" "$pod_name_regex"}"
+    "$srcdir/kubectl_pods_dump_jstacks.sh" ${namespace:+"$namespace" "$pod_name_regex"}
     echo
     timestamp "Running: kubectl_pods_dump_stats.sh ${namespace:+"$namespace" "$pod_name_regex"}"
-    kubectl_pods_dump_stats.sh ${namespace:+"$namespace" "$pod_name_regex"}
+    "$srcdir/kubectl_pods_dump_stats.sh" ${namespace:+"$namespace" "$pod_name_regex"}
     echo
     timestamp "Running: kubectl_pods_dump_logs.sh ${namespace:+"$namespace" "$pod_name_regex"}"
-    kubectl_pods_dump_logs.sh ${namespace:+"$namespace" "$pod_name_regex"}
+    "$srcdir/kubectl_pods_dump_logs.sh" ${namespace:+"$namespace" "$pod_name_regex"}
     echo
     timestamp "Finished iteration $i of dump all"
     if [ "$num_iterations" -gt "$i" ]; then
