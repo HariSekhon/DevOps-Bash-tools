@@ -51,6 +51,13 @@ jdk="$1"
 namespace="${2:-}"
 regex="${3:-.}"
 
+if ! [ -f "$jdk/bin/jstack" ]; then
+    die "Fifth arg - jdk - must be a directory containing a JDK with jstack!"
+fi
+if ! [ -x "$jdk/bin/jstack" ]; then
+    die "jstack within given jdk directory is not executable!"
+fi
+
 kube_config_isolate
 
 if [ -n "$namespace" ]; then
