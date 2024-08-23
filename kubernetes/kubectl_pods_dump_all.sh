@@ -74,7 +74,7 @@ if [ -n "$jdk" ]; then
 fi
 
 for ((i=1; i <= num_iterations; i++)); do
-    timestamp "Running iteration $i of dump all:"
+    timestamp "Running iteration $i/$num_iterations of dump all:"
     echo
     cmd=("$srcdir/kubectl_pods_dump_jstacks.sh" "$jdk" ${namespace:+"$namespace" "$pod_name_regex"})
     timestamp "Running: ${cmd[*]}"
