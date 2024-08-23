@@ -52,11 +52,11 @@ namespace="${3:-}"
 pod_name_regex="${4:-.}"
 jdk="${5:-}"
 
-if not is_digit "$num_iterations"; then
+if i! is_digit "$num_iterations"; then
     die "First arg - num_iterations - must be an integer!"
 fi
 
-if not is_digit "$interval_seconds"; then
+if ! is_digit "$interval_seconds"; then
     die "Second arg - interval_seconds - must be an integer!"
 fi
 
