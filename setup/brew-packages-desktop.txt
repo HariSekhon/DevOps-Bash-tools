@@ -277,6 +277,7 @@ vagrant-completion
 vault  # Hashicorp
 # old Mac vim not
 vim  # Mac's vim not syntax highlighting Bash properly on macOS Big Sur 11.7 https://github.com/vim/vim/issues/11937 - watch brew version pulls in a lot of dependencies though including Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+vint  # vim script linter (for me to lint my big .vimrc)
 #vscode
 watch
 #wget  # in brew-packages.txt
