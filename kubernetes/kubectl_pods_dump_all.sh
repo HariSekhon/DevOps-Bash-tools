@@ -52,7 +52,7 @@ namespace="${3:-}"
 pod_name_regex="${4:-.}"
 jdk="${5:-}"
 
-if  is_int "$num_iterations"; then
+if ! is_int "$num_iterations"; then
     die "First arg - num_iterations - must be an integer!"
 fi
 
