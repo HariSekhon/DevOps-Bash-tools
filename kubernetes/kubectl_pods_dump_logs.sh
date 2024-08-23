@@ -67,3 +67,4 @@ while read -r pod; do
     kubectl logs "$pod" > "$output_file"
     timestamp "Dumped pod log to file: $output_file"
 done
+timestamp "Log dumps completed"
