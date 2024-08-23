@@ -67,10 +67,12 @@ while read -r pod; do
     timestamp "Dumping pod jstack: $pod"
     output_file="kubectl-pod-jstack.$(date '+%F_%H%M').$pod.txt"
     #kubectl exec"$pod" -- "rm -fr /tmp/jdk"
+    timestamp "Copying jdk '$jdk' to pod /tmp"
     kubectl cp "$jdk/" "$pod":/tmp/jdk
+    timestamp "Dumping JStack inside pod"
     # want expansion in pod not local shell
     # shellcheck disable=SC2016
-    kubectl exec -ti "$pod" -- \
+    kubectl exec "$pod" -- \
         bash -c '
             java_pid="$(pgrep java | tee /dev/stderr)"
             java_pids=($java_pid)
@@ -83,6 +85,6 @@ while read -r pod; do
             fi
             /tmp/jdk/bin/jstack "$java_pid" > /tmp/jstack-output.txt
         '
-    kubectl cp "$SPARK_POD":/tmp/jstack-output.txt "$output_file"
+    kubectl cp "$pod":/tmp/jstack-output.txt "$output_file"
     timestamp "Dumped pod jstack to file: $output_file"
 done
