@@ -95,7 +95,7 @@ while read -r pod; do
     timestamp "Copying /tmp/jstack-output.txt to local machine" &&
     kubectl cp "$pod":/tmp/jstack-output.txt "$output_file" &&
     timestamp "Dumped pod jstack to file: $output_file" ||
-    warn "Failed to collect for pod '$pod'"
+    warn "Failed to collect jstack for pod '$pod'"
     # XXX: because race condition - pods can go away during execution and we still want to collect the rest of the pods
 done
 timestamp "JStack dumps completed"
