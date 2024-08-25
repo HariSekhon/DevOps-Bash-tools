@@ -460,7 +460,7 @@ endif
 function! LintVimrc()
   let l:vimrc_path = expand('~/.vimrc')
 
-  echo "Sourcing ~/.vimrc file..."
+  echo 'Sourcing ~/.vimrc file...'
   try
     execute 'source' l:vimrc_path
     echohl InfoMsg | echo "Basic Validation Passed: .vimrc" | echohl None
