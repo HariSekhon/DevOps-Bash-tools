@@ -44,7 +44,7 @@ set ls=1    " laststatus - Status line 0=off, 1=multi-windows, 2=on
 set listchars=tab:>-,eol:$,trail:.,extends:# " changes the list characters, makes tabs appear as >---
 set ml      " modeline - respect the vim: stuff at the stop of files, often off for root
 set mls=15  " modelines - Controls how many lines to check for modeline, systems often set this to 0
-set nocp    " nocompatible
+"set nocp    " nocompatible
 set nofen   " nofoldenable
 set nohls   " nohlsearch
 set nojs    " nojoinspaces - only use 1 space even when J joining lines even when line ends in a special char
@@ -86,7 +86,7 @@ set formatoptions+=or
 "behave mswin
 be xterm
 
-:if has("gui_running")
+:if has('gui_running')
     "colorscheme slate
     colo slate
 :endif
@@ -181,7 +181,7 @@ call vundle#end()
 
 nmap ;l :echo "No linting defined for this filetype:" &filetype<CR>
 
-if has("autocmd")
+if has('autocmd')
 
     " re-open at last cursor line and center screen on the cursor line
     "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -419,11 +419,11 @@ nmap          ;§ :call ToggleScrollLock()<CR>
 "noremap <Left>  <Left>
 "noremap <Right> <Right>
 
-if has("autocmd")
+if has('autocmd')
     au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
 endif
 
-if has("autocmd")
+if has('autocmd')
     "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%"<CR>
     au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; "%:p:h/run.sh" "%"<CR>
     au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w<CR>:!clear; DEBUG=1 "%:p:h/run.sh" "%"<CR>
@@ -440,10 +440,10 @@ endif
 "
 "function! SourceVimrc()
 " This function won't reload as a result, must exit and restart vim
-if ! exists("*SourceVimrc")
+if ! exists('*SourceVimrc')
     function SourceVimrc()
         :source ~/.vimrc
-        let vim_tags = system("grep vim: " + expand("%") + " | head -n1 | sed 's/^\"[[:space:]]*vim:/set /; s/:/ /g'")
+        let vim_tags = system('grep vim: ' + expand('%') + " | head -n1 | sed 's/^\"[[:space:]]*vim:/set /; s/:/ /g'")
         " this breaks
         "echo &vim_tags
         "execute "normal!" . &vim_tags
@@ -463,9 +463,9 @@ function! LintVimrc()
   echo "Sourcing ~/.vimrc file..."
   try
     execute 'source' l:vimrc_path
-    echohl InfoMsg | echo "No syntax errors found in .vimrc." | echohl None
+    echohl InfoMsg | echo "Basic Validation Passed: .vimrc" | echohl None
   catch
-    echohl ErrorMsg | echo "Error found in .vimrc while sourcing." | echohl None
+    echohl ErrorMsg | echo "Basic Validate Failed: errors found in .vimrc" | echohl None
     return
   endtry
 
@@ -474,11 +474,12 @@ function! LintVimrc()
     let l:vint_output = system('vint ' . l:vimrc_path)
     if v:shell_error
       echohl ErrorMsg | echo l:vint_output | echohl None
+      echohl ErrorMsg | echo "Vint Validation Failed: .vimrc" | echohl None
     else
-      echohl InfoMsg | echo "No linting issues found by vint." | echohl None
+      echohl InfoMsg | echo "Vint Validation Passed: .vimrc" | echohl None
     endif
   else
-    echohl WarningMsg | echo "vint is not installed or not found in PATH." | echohl None
+    echohl WarningMsg | echo "Vint not found in PATH, skipping validation" | echohl None
   endif
 endfunction
 
@@ -765,8 +766,8 @@ endfunction
 " ============================================================================ "
 
 " either works, requires expand()
-"let MYLOCALVIMRC = "~/.vimrc.local"
-"let MYLOCALVIMRC = "$HOME/.vimrc.local"
+"let MYLOCALVIMRC = '~/.vimrc.local'
+"let MYLOCALVIMRC = '$HOME/.vimrc.local'
 
 " source a config file only if it exists
 function! SourceIfExists(file)
@@ -775,9 +776,9 @@ function! SourceIfExists(file)
   endif
 endfunction
 
-call SourceIfExists("~/.vimrc.local")
-call SourceIfExists("~/.vim/colors.vim")
+call SourceIfExists('~/.vimrc.local')
+call SourceIfExists('~/.vim/colors.vim')
 
 if has('gui_running')
-  call SourceIfExists("~/.gvimrc.local")
+  call SourceIfExists('~/.gvimrc.local')
 endif
