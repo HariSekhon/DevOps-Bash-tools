@@ -47,9 +47,14 @@ min_args 1 "$@"
 
 # defer expansion
 # shellcheck disable=SC2016
-trap_cmd 'exitcode=$?; echo; echo "Exit Code: $exitcode"'
+trap_cmd 'exitcode=$?; echo; echo "Error - Exit Code: $exitcode"'
 
 filename="$1"
+
+if ! [ -f "$filename" ]; then
+    echo "File not found: $filename"
+    exit 1
+fi
 
 # examples:
 #
