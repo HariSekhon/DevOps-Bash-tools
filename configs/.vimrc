@@ -534,10 +534,10 @@ endfunction
 
 function! ToggleDebug()
     if $DEBUG
-        echo "DEBUG disabled"
+        echo 'DEBUG disabled'
         let $DEBUG=""
     else
-        echo "DEBUG enabled"
+        echo 'DEBUG enabled'
         let $DEBUG=1
     endif
 endfunction
