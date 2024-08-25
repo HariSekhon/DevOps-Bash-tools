@@ -112,9 +112,9 @@ else
                         ;;
                  *.md)  mdl "$basename"
                         ;;
-               .vimrc)  if vim -c "source $filename" -c "q"; then
-                            echo "ViM basic lint validation passed"
-                        else
+                        # unfortunately this command doesn't exit 1 if the file isn't found
+                        # so we're relying on the file test at the top but vint would catch it anyway
+               .vimrc)  if ! vim -c "source $filename" -c "q"; then
                             die "ViM basic lint validation failed"
                         fi
                         if type -P vint &>/dev/null; then
