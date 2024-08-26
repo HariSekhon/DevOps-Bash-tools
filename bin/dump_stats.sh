@@ -50,12 +50,12 @@ if [ "$EUID" -ne 0 ]; then
 fi
 
 mac=false
-if uname -m | grep Darwin; then
+if uname -s | grep Darwin; then
     mac=true
 fi
 
 timestamp(){
-    printf "%s" "$(date '+%F %T')  $*" >&2
+    printf "%s\n" "$(date '+%F %T')  $*" >&2
 }
 
 dump(){
@@ -66,7 +66,7 @@ dump(){
         cmd=("$@")
     fi
     cmd_name="${cmd[0]}"
-    if ! type -P "$cmd_name}" &>/dev/null; then
+    if ! type -P "$cmd_name" &>/dev/null; then
         timestamp "Command '$cmd_name' not found, skipping..."
         return
     fi
@@ -87,19 +87,13 @@ dump_common(){
 
     timestamp "Dumping common command outputs"
 
-    dump uname uname -a
-
-    dump uptime
-
-    dump dmesg
-
     dump df df -g
-
-    dump ps_ef ps -ef
-
-    dump netstat netstat -an
-
+    dump dmesg
     dump lsof lsof -n
+    dump netstat netstat -an
+    dump ps_ef ps -ef
+    dump uname uname -a
+    dump uptime
 
 }
 
@@ -111,19 +105,13 @@ dump_mac(){
 
     timestamp "Dumping Mac specific command outputs"
 
-    dump memory_pressure
-
-    dump top top -l 1
-
-    dump ps_auxf ps aux
-
-    dump vmstat
-
-    dump iostat iostat -c 5
-
-    dump top_mpstat top -l 1 -stats pid,command,cpu,th,pstate,time,cpu -ncols 16
-
     dump diskutil_list diskutil list
+    dump iostat iostat -c 5
+    dump memory_pressure
+    dump ps_auxf ps aux
+    dump top top -l 1
+    dump top_mpstat top -l 1 -stats pid,command,cpu,th,pstate,time,cpu -ncols 16
+    dump vmstat
 }
 
 # ============================================================================ #
@@ -134,23 +122,15 @@ dump_linux(){
 
     timestamp "Dumping Linux specific command outputs"
 
-    dump_stat free free -g
-
-    dump top top -H -b -n 1
-
-    dump vmstat vmstat 1 5
-
+    dump free free -g
     dump iostat iostat -x 1 5
-
-    dump ps_auxf ps auxf
-
-    dump sar_5 sar -u 1 5
-
-    dump sar_all sar -A
-
-    dump mpstat mpstat -P ALL 1 5
-
     dump lsblk
+    dump mpstat mpstat -P ALL 1 5
+    dump ps_auxf ps auxf
+    dump sar_5 sar -u 1 5
+    dump sar_all sar -A
+    dump top top -H -b -n 1
+    dump vmstat vmstat 1 5
 }
 
 # ============================================================================ #
@@ -166,15 +146,19 @@ fi
 timestamp "Finished collection"
 echo >&2
 
-timestamp "Creating compressed tarball for easier collection and space savings"
-echo >&2
+tarball="$stats_bundle_dir.tar.gz"
+
+timestamp "Creating compressed tarball '$tarball' for easier collection and space savings"
 
 cd ..
 
-timestamp "Tarring for easier collection"
-tar czvf "$stats_bundle_dir.tar.gz" "$stats_bundle_dir"
+tar czvf "$tarball" "$stats_bundle_dir"
+echo
 
 if [ -z "${NO_REMOVE_STATS_DIR:-}" ]; then
-    timestamp "Removing $stats_bundle_dir directory to minimize remnant space impact"
+    timestamp "Removing directory: $stats_bundle_dir"
     rm -fr -- "$stats_bundle_dir"
+    echo >&2
 fi
+
+timestamp "Collect tarball at: $PWD/$tarball"
