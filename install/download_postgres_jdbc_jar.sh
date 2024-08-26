@@ -25,6 +25,8 @@ usage_description="
 Quickly determines and downloads latest PostgreSQL JDBC jar or an explicitly given version
 
 Useful to get the jar to upload to data integration 3rd party directories or Docker images or Kubernetes
+
+Version defaults to 'latest' in which case it determines the latest version from GitHub releases
 "
 
 # used by usage() in lib/utils.sh
