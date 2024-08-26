@@ -45,7 +45,7 @@ fi
 
 tstamp="$(date '+%F_%H%M')"
 
-support_bundle_dir=~/"support-bundle-$tstamp"
+support_bundle_dir="support-bundle-$tstamp"
 
 mkdir -p -v "$support_bundle_dir"
 
@@ -56,22 +56,108 @@ if [ "$EUID" -ne 0 ]; then
     sudo=sudo
 fi
 
-dump_stat(){
+mac=false
+if uname -m | grep Darwin; then
+    mac=true
+fi
+
+dump(){
     local name="$1"
-    local cmd=("$@")
+    shift
+    local cmd=("$name")
+    if [ $# -gt 0 ]; then
+        cmd=("$@")
+    fi
+    cmd_name="${cmd[0]}"
+    if ! type -P "$cmd_name}" &>/dev/null; then
+        echo "Command '$cmd_name' not found, skipping..." >&2
+        return
+    fi
     log_file="$name-output.$tstamp.txt"
     # ignore && && || it works
     # shellcheck disable=SC2015
     echo "Collecting $name output" >&2
     $sudo "${cmd[@]}" > "$log_file"
-    timestamp "Collected $name output to file: $log_file" ||
-    warn "Failed to get $name output"
+    echo  "Collected $name output to file: $log_file" >&2
+    echo
 }
 
-dump_stat "df" df -g
+# ============================================================================ #
+#                    Commands that work on both Linux and Mac
+# ============================================================================ #
 
-dump_stat free free -g
+dump_common(){
 
-if type -P sar; then
-    dump_stat sar sar -A
+    dump uname uname -a
+
+    dump uptime
+
+    dump dmesg
+
+    dump df df -g
+
+    dump ps_ef ps -ef
+
+    dump netstat netstat -an
+
+    dump lsof lsof -n
+
+}
+
+# ============================================================================ #
+#                         Commands that only work on Mac
+# ============================================================================ #
+
+dump_mac(){
+
+    dump memory_pressure
+
+    dump top top -l 1
+
+    dump ps_auxf ps aux
+
+    dump vmstat
+
+    dump iostat iostat -c 5
+
+    dump top_mpstat top -l 1 -stats pid,command,cpu,th,pstate,time,cpu -ncols 16
+
+    dump diskutil_list diskutil list
+}
+
+# ============================================================================ #
+#                        Commands that only work on Linux
+# ============================================================================ #
+
+dump_linux(){
+
+    dump_stat free free -g
+
+    dump top top -H -b -n 1
+
+    dump vmstat vmstat 1 5
+
+    dump iostat iostat -x 1 5
+
+    dump ps_auxf ps auxf
+
+    dump sar_5 sar -u 1 5
+
+    dump sar_all sar -A
+
+    dump mpstat mpstat -P ALL 1 5
+
+    dump lsblk
+}
+
+# ============================================================================ #
+
+dump_common
+
+if [ "$mac" = true ]; then
+    dump_mac
+else # assume Linux as the default case
+    dump_linux
 fi
+
+echo "Finished collection, find outputs in: $PWD" >&2
