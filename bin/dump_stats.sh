@@ -28,6 +28,9 @@ Creates a tarball in this name format:
 
 stats-bundle.YYYY-MM-DD-HHSS.tar.gz
 
+
+If this script is not run as root then prefixes sudo to every command to ensure that it succeeds
+
 If NO_REMOVE_STATS_DIR environment variable is set to any value then does not remove the intermediate stats-bundle.YYYY-MM-DD-HHSS directory
 "
 
