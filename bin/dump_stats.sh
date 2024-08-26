@@ -20,7 +20,7 @@ set -euo pipefail
 usage_description="
 Dumps common command outputs to local text files
 
-Useful to collect support information
+Useful to collect support information for vendor support cases
 
 Scp'd by ssh_dump_stats.sh to collect from remote servers
 
