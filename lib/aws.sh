@@ -35,10 +35,15 @@ aws_region(){
         echo "$AWS_DEFAULT_REGION"
         return
     fi
-    if ! aws configure get region; then
+    region="$(aws configure get region || :)"
+    if [ -z "$region" ]; then
+        region="$(aws ec2 describe-availability-zones --query "AvailabilityZones[0].RegionName" --output text || :)"
+    fi
+    if [ -z "$region" ]; then
         echo "FAILED to get AWS region in aws_region() function in lib/aws.sh" >&2
         return 1
     fi
+    echo "$region"
 }
 
 aws_user_exists(){
