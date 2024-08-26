@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Uses SSH to dump common command outputs to local text files for servers given as arguments for uploading to vendor support cases
+Uses SSH to dump common command outputs from remote servers to a local tarball. Useful for vendor support cases
 
 Copies adjacent dump_stats.sh script to the remote server, executes it, and collects the resulting tarball back to the local machine
 
