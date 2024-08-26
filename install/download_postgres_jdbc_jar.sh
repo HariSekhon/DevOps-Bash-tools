@@ -63,4 +63,4 @@ else
     mv -fv "$tmpfile" "$jar"
 fi
 
-timestamp "Download complete"
+timestamp "Download complete: $jar"
