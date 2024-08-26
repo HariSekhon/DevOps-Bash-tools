@@ -89,12 +89,12 @@ dump(){
 dump_common(){
 
     timestamp "Dumping common command outputs"
-
+    echo >&2
     # -g for GB only works on Mac
     #dump df df -g
     dump df df -h
     dump dmesg
-    dump lsof lsof -n
+    dump lsof lsof -n -O
     dump netstat netstat -an
     dump ps_ef ps -ef
     dump uname uname -a
@@ -109,7 +109,7 @@ dump_common(){
 dump_mac(){
 
     timestamp "Dumping Mac specific command outputs"
-
+    echo >&2
     dump diskutil_list diskutil list
     dump iostat iostat -c 5
     dump memory_pressure
@@ -126,7 +126,7 @@ dump_mac(){
 dump_linux(){
 
     timestamp "Dumping Linux specific command outputs"
-
+    echo >&2
     dump free free -g
     dump iostat iostat -x 1 5
     dump lsblk
