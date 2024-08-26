@@ -98,6 +98,8 @@ alias paths=path
 
 alias tmp="cd /tmp"
 
+alias mksupportdir="mkdir -v support-bundle-$(date '+%F_%H%M')"
+
 # not as compatible, better to call pypy explicitly or in #! line
 #if type -P pypy &>/dev/null; then
 #    alias python=pypy
