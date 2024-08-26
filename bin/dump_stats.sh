@@ -90,7 +90,9 @@ dump_common(){
 
     timestamp "Dumping common command outputs"
 
-    dump df df -g
+    # -g for GB only works on Mac
+    #dump df df -g
+    dump df df -h
     dump dmesg
     dump lsof lsof -n
     dump netstat netstat -an
