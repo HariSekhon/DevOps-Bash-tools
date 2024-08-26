@@ -18,7 +18,7 @@ set -euo pipefail
 #srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage_description="
-Dumps common command outputs to local text files
+Dumps common command outputs to text files in a local tarball
 
 Useful to collect support information for vendor support cases
 
