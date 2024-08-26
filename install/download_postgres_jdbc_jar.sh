@@ -45,14 +45,14 @@ fi
 
 # avoid race condition between different sites updating at different times and pull from GitHub releases where we determined latest version to be from
 #download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
-download_url="https://github.com/pgjdbc/pgjdbc/releases/download/REL$version/postgresql-$version.jar"
+download_url="https://github.com/$github_owner_repo/releases/download/REL$version/postgresql-$version.jar"
 
 timestamp "Downloading PostgreSQL JDBC version '$version' from $download_url"
 echo >&2
 
 jar="postgresql-jdbc-$version.jar"
 
-if type -P wget; then
+if type -P wget &>/dev/null; then
     wget -cO "$jar" "$download_url"
 else
     tmpfile="$(mktemp)"
