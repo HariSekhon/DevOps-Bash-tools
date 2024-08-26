@@ -288,6 +288,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
 - `delete_duplicate_files.sh` - deletes duplicate files with (N) suffixes, commonly caused by web browser downloads,
+- `dump_stats.sh` - dumps common command outputs to text files in a local tarball. Useful to collect support information for vendor support cases
   in the given or current directory. Checks they're exact duplicates of a matching basename file without the (N) suffix with
   the exact same checksum for safety. Prompts to delete per file. To auto-accept deletions, do
   `yes | delete_duplicate_files.sh`. This is a fast way of cleaning up your `~/Downloads` directory and can be put your
@@ -313,6 +314,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
 - `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
+- `ssh_dump_stats.sh` - uses SSH and `dump_stats.sh` to dump common command outputs from remote servers to a local tarball. Useful for vendor support cases
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
 - `ssl_verify_cert_by_ip.sh` - verifies SSL certificates on specific IP addresses, useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also `curl_k8s_ingress.sh`)
