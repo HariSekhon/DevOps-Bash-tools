@@ -94,7 +94,8 @@ dump_common(){
     #dump df df -g
     dump df df -h
     dump dmesg
-    dump lsof lsof -n -O
+    # very expensive - takes 30 seconds and results in a 599MB output file on a production informatica secure agent server VM
+    #dump lsof lsof -n -O
     dump netstat netstat -an
     dump ps_ef ps -ef
     dump uname uname -a
