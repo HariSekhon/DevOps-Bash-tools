@@ -20,22 +20,15 @@ set -euo pipefail
 usage_description="
 Dumps common command outputs to local text files
 
-Use to collect for support information
+Useful to collect support information
 
-Used by ssh_dump_stats.sh
+Scp'd by ssh_dump_stats.sh to collect from remote servers
 
-Collects:
+Creates a tarball in this name format:
 
-df -g
+stats-bundle.YYYY-MM-DD-HHSS.tar.gz
 
-free -g
-
-sar -A  (if sar is found installed in \$PATH)
-
-
-Dumps logs to files in this name format:
-
-<name>-output.YYYY-MM-DD-HHSS.txt
+If NO_REMOVE_STATS_DIR is set to any value then does not remove the intermediate stats-bundle.YYYY-MM-DD-HHSS directory
 "
 
 if [ $# -gt 0 ]; then
@@ -61,6 +54,10 @@ if uname -m | grep Darwin; then
     mac=true
 fi
 
+timestamp(){
+    printf "%s" "$(date '+%F %T')  $*" >&2
+}
+
 dump(){
     local name="$1"
     shift
@@ -70,16 +67,16 @@ dump(){
     fi
     cmd_name="${cmd[0]}"
     if ! type -P "$cmd_name}" &>/dev/null; then
-        echo "Command '$cmd_name' not found, skipping..." >&2
+        timestamp "Command '$cmd_name' not found, skipping..."
         return
     fi
     log_file="$name-output.$tstamp.txt"
     # ignore && && || it works
     # shellcheck disable=SC2015
-    echo "Collecting $name output" >&2
+    timestamp "Collecting $name output" >&2
     $sudo "${cmd[@]}" > "$log_file"
-    echo  "Collected $name output to file: $log_file" >&2
-    echo
+    timestamp  "Collected $name output to file: $log_file"
+    echo >&2
 }
 
 # ============================================================================ #
@@ -87,6 +84,8 @@ dump(){
 # ============================================================================ #
 
 dump_common(){
+
+    timestamp "Dumping common command outputs"
 
     dump uname uname -a
 
@@ -110,6 +109,8 @@ dump_common(){
 
 dump_mac(){
 
+    timestamp "Dumping Mac specific command outputs"
+
     dump memory_pressure
 
     dump top top -l 1
@@ -130,6 +131,8 @@ dump_mac(){
 # ============================================================================ #
 
 dump_linux(){
+
+    timestamp "Dumping Linux specific command outputs"
 
     dump_stat free free -g
 
@@ -160,4 +163,18 @@ else # assume Linux as the default case
     dump_linux
 fi
 
-echo "Finished collection, find outputs in: $PWD" >&2
+timestamp "Finished collection"
+echo >&2
+
+timestamp "Creating compressed tarball for easier collection and space savings"
+echo >&2
+
+cd ..
+
+timestamp "Tarring for easier collection"
+tar czvf "$stats_bundle_dir.tar.gz" "$stats_bundle_dir"
+
+if [ -z "${NO_REMOVE_STATS_DIR:-}" ]; then
+    timestamp "Removing $stats_bundle_dir directory to minimize remnant space impact"
+    rm -fr -- "$stats_bundle_dir"
+fi
