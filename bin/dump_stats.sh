@@ -24,12 +24,17 @@ Useful to collect support information for vendor support cases
 
 Scp'd by ssh_dump_stats.sh to collect from remote servers
 
+
 Creates a tarball in this name format:
 
 stats-bundle.YYYY-MM-DD-HHSS.tar.gz
 
 
 If this script is not run as root then prefixes sudo to every command to ensure that it succeeds
+
+
+Export LSOF=true to dump the lsof output which is otherwise skipped by default because on a production VM it resulted in 599M of output which aside from taking 30 seconds was ballooning the even compressed tarball to 47MB instead of 108KB
+
 
 If NO_REMOVE_STATS_DIR environment variable is set to any value then does not remove the intermediate stats-bundle.YYYY-MM-DD-HHSS directory
 "
@@ -95,7 +100,9 @@ dump_common(){
     dump df df -h
     dump dmesg
     # very expensive - takes 30 seconds and results in a 599MB output file on a production informatica secure agent server VM
-    #dump lsof lsof -n -O
+    if [ "${LSOF:-}" = true ]; then
+        dump lsof lsof -n -O
+    fi
     dump netstat netstat -an
     dump ps_ef ps -ef
     dump uname uname -a
