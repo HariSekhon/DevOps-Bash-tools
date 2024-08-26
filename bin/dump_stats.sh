@@ -28,7 +28,7 @@ Creates a tarball in this name format:
 
 stats-bundle.YYYY-MM-DD-HHSS.tar.gz
 
-If NO_REMOVE_STATS_DIR is set to any value then does not remove the intermediate stats-bundle.YYYY-MM-DD-HHSS directory
+If NO_REMOVE_STATS_DIR environment variable is set to any value then does not remove the intermediate stats-bundle.YYYY-MM-DD-HHSS directory
 "
 
 if [ $# -gt 0 ]; then
