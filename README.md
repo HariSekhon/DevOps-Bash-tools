@@ -315,6 +315,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
 - `split.sh` - split large files into N parts (defaults to the number of your CPU cores) to parallelize operations on them
 - `ssh_dump_stats.sh` - uses SSH and `dump_stats.sh` to dump common command outputs from remote servers to a local tarball. Useful for vendor support cases
+- `ssh_dump_logs.sh` - Uses SSH to dump logs from server to local text files for uploading to vendor support cases
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
 - `ssl_verify_cert_by_ip.sh` - verifies SSL certificates on specific IP addresses, useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also `curl_k8s_ingress.sh`)
