@@ -45,11 +45,11 @@ fi
 
 tstamp="$(date '+%F_%H%M')"
 
-support_bundle_dir="support-bundle-$tstamp"
+stats_bundle_dir="stats-bundle-$tstamp"
 
-mkdir -p -v "$support_bundle_dir"
+mkdir -p -v "$stats_bundle_dir"
 
-cd "$support_bundle_dir"
+cd "$stats_bundle_dir"
 
 sudo=""
 if [ "$EUID" -ne 0 ]; then
