@@ -31,6 +31,9 @@ The collected tarball will in this name format:
 <server>.stats-bundle.YYYY-MM-DD-HHSS.tar.gz
 
 
+Lsof output is not included by default as it is very voluminous, see dump_stats.sh for details and to enable it
+
+
 Requires SSH client to be installed and configured to preferably passwordless ssh key access
 "
 
@@ -50,6 +53,7 @@ for server in "$@"; do
     # shellcheck disable=SC2029,SC2015
     ssh "$server" "
         export DEBUG=\"${DEBUG:-}\"
+        export LSOF=\"${LSOF:-}\"
         chmod +x dump_stats.sh &&
         ./dump_stats.sh
     " &&
