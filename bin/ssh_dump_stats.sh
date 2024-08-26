@@ -58,7 +58,7 @@ for server in "$@"; do
     scp "$server":"$latest_tarball" "$server.$latest_tarball" &&
     timestamp "Collected tarball" &&
     timestamp "Removing tarball on server to save space" &&
-    ssh "rm -fv -- $latest_tarball" ||
+    ssh "$server" "rm -fv -- ./$latest_tarball" ||
     warn "Failed to collect tarball from server '$server'"
     # XXX: because race condition - spot instances can go away during execution
     # and we still want to collect the rest of the servers
