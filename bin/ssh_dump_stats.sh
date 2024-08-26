@@ -47,7 +47,7 @@ for server in "$@"; do
     # doesn't work - might have to be allowed in sshd_config which is not portable by default
     #ssh -o SendEnv=DEBUG "$server" "
     # want client side expansion
-    # shellcheck disable=SC2029
+    # shellcheck disable=SC2029,SC2015
     ssh "$server" "
         export DEBUG=\"${DEBUG:-}\"
         chmod +x dump_stats.sh &&
@@ -56,7 +56,9 @@ for server in "$@"; do
     latest_tarball="$(ssh "$server" "ls -tr stats-bundle-*.tar.gz | tail -n 1")" &&
     timestamp "Collecting tarball '$latest_tarball'" &&
     scp "$server":"$latest_tarball" "$server.$latest_tarball" &&
-    timestamp "Collected tarball" ||
+    timestamp "Collected tarball" &&
+    timestamp "Removing tarball on server to save space" &&
+    ssh "rm -fv -- $latest_tarball" ||
     warn "Failed to collect tarball from server '$server'"
     # XXX: because race condition - spot instances can go away during execution
     # and we still want to collect the rest of the servers
