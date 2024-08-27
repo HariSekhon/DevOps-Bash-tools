@@ -372,6 +372,8 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
   - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `jenkins_cred_add*.sh`, `github_actions_repo*_set_secret.sh`, `gitlab_*_set_env_vars.sh`, `circleci_*_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`, `kubectl_kv_to_secret.sh`). Supports new user and new access key csv file formats.
   - `aws_codecommit_csv_creds.sh` - prints AWS [CodeCommit](https://aws.amazon.com/codecommit/) Git credentials from a CSV file as shell export statements. Similar use case and chaining as above
+  - `aws_ec2_list_instance_states.sh` - quickly list AWS EC2 instances and their states in an easy to read table output
+  - `aws_ec2_terminate_instance_by_name.sh` - terminate an AWS EC2 instance by name
   - `aws_ec2_ebs_*.sh` - AWS EC2 [EBS](https://aws.amazon.com/ebs/) scripts:
     - `aws_ec2_ebs_volumes.sh` - list EC2 instances and their EBS volumes in the current region
     - `aws_ec2_ebs_create_snapshot_and_wait.sh - creates a snapshot of a given EBS volume ID and waits for it to complete with exponential backoff
