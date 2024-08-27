@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Carefully detects if a Git branch you want to delete is merged to the default trunk branch and then removes it
+Carefully detects if a Git squash merged branch you want to delete has no changes vs the default trunk branch before deleting it
 
 Doing a branch force delete without these checks risks losing all unpushed code changes on a branch
 
