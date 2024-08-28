@@ -36,6 +36,8 @@ min_args 1 "$@"
 if ! [ -f "$srcdir/jd-gui-min.jar" ]; then
     pushd "$srcdir"
     ../install/download_jd_gui_jar.sh
+    timestamp
+    echo -n "Symlinking: " >&2
     ln -sv jd-gui-*-min.jar jd-gui-min.jar
     popd
 fi
