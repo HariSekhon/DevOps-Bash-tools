@@ -27,7 +27,7 @@ Wrapper to download and run Java Decompiler GUI
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<javafile.class>"
+usage_args="<java.class>"
 
 help_usage "$@"
 
