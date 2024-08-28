@@ -35,4 +35,4 @@ version="${1:-latest}"
 
 github_owner_repo="mstrobel/procyon"
 
-"$srcdir/download_github_jar.sh" "https://github.com/$github_owner_repo/releases/download/v{version}/procyon-decompiler-{version}.jar" "$version"
+"$srcdir/../github/github_download_release_jar.sh" "https://github.com/$github_owner_repo/releases/download/v{version}/procyon-decompiler-{version}.jar" "$version"
