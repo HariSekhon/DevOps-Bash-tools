@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: https://github.com/pgjdbc/pgjdbc/releases/download/REL{version}/postgresql-{version}.jar latest
 #
 #  Author: Hari Sekhon
 #  Date: 2024-08-28 23:01:46 +0200 (Wed, 28 Aug 2024)
@@ -69,4 +70,4 @@ if [[ "$url" =~ {version} ]]; then
     url="${url//\{version\}/$version}"
 fi
 
-"$srcdir/download_url_file.sh" "$url"
+"$srcdir/../bin/download_url_file.sh" "$url"
