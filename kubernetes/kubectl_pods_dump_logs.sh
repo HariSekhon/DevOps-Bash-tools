@@ -27,8 +27,6 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Dumps Kubernetes pod logs to text files for every pod that matches a given regex in the given namespace
 
-Collects the pod stdout logs as well as /var/log/messages and /var/log/dmesg if available
-
 Useful for debugging Spark jobs on Kubernetes
 
 
@@ -74,13 +72,13 @@ while read -r pod; do
     warn "Failed to collect stdout log for pod '$pod'"
     # XXX: because race condition - pods can go away during execution and we still want to collect the rest of the pods
 
-    for log in messages dmesg; do
-        log_file="kubectl-$log-log.$tstamp.$pod.txt"
-        timestamp "Dumping pod $log log: $pod" &&
-        kubectl cp "$pod" "/var/log/$log" "$log_file" &&
-        timestamp "Dumped pod $log log to file: $log_file" ||
-        warn "Failed to collect stdout log for pod '$pod'"
-    done
+    #for log in messages dmesg; do
+    #    log_file="kubectl-$log-log.$tstamp.$pod.txt"
+    #    timestamp "Dumping pod $log log: $pod" &&
+    #    kubectl cp "$pod" "/var/log/$log" "$log_file" &&
+    #    timestamp "Dumped pod $log log to file: $log_file" ||
+    #    warn "Failed to collect stdout log for pod '$pod'"
+    #done
 done
 echo
 timestamp "Log dumps completed"
