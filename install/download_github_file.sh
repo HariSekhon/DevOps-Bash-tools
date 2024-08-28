@@ -56,8 +56,6 @@ if ! [[ "$url" =~ ^$github_release_url_regex ]]; then
 fi
 shopt -u nocasematch
 
-download_url="$url"
-
 if [[ "$url" =~ {version} ]]; then
     github_owner_repo="$(sed 's|^https://github.com/||i; s|/releases/.*$||i' <<< "$url")"
     if [ "$version" = latest ]; then
@@ -68,7 +66,7 @@ if [[ "$url" =~ {version} ]]; then
         version="$(sed 's/^[[:alpha:]]*//' <<< "$version")"
         timestamp "Determined latest version of $github_owner_repo to be version '$version'"
     fi
-    download_url="${download_url//\{version\}/$version}"
+    url="${url//\{version\}/$version}"
 fi
 
-"$srcdir/download_url_file.sh" "$download_url"
+"$srcdir/download_url_file.sh" "$url"
