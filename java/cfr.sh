@@ -35,7 +35,8 @@ Examples:
 # shellcheck disable=SC2034
 usage_args="<jar_or_java.class>"
 
-help_usage "$@"
+# let see the help from tool instead
+#help_usage "$@"
 
 min_args 1 "$@"
 
