@@ -45,6 +45,8 @@ cfr_jar="$srcdir/cfr.jar"
 if ! [ -f "$cfr_jar" ]; then
     pushd "$srcdir"
     ../install/download_cfr_jar.sh
+    timestamp
+    echo -n "Symlinking: " >&2
     ln -sv cfr-*.jar cfr.jar
     popd
 fi
