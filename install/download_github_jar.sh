@@ -71,18 +71,4 @@ if [[ "$jar_url" =~ {version} ]]; then
     download_url="${download_url//\{version\}/$version}"
 fi
 
-timestamp "Downloading: $download_url"
-echo >&2
-
-jar="${download_url##*/}"
-
-if type -P wget &>/dev/null; then
-    wget -cO "$jar" "$download_url"
-else
-    tmpfile="$(mktemp)"
-    curl --fail "$download_url" > "$tmpfile"
-    unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "$jar"
-fi
-
-timestamp "Download complete: $jar"
+"$srcdir/download_url_file.sh" "$download_url"
