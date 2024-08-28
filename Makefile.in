@@ -816,6 +816,7 @@ wc:
 	@printf 'of which not the following:\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -Ev -e '\.bash' \
 												-e lib/ \
+												-e install/ \
 												-e setup/ \
 												-e 'tests?/' \
 												-e vagrant/ \
@@ -824,6 +825,8 @@ wc:
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep '\.bash' | wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which lib/:\t\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep lib/ | wc -l | sed 's/[[:space:]]//g'
+	@printf 'of which install/:\t\t'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep install/ | wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which setup/:\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep setup/ | wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which test(s)/:\t\t'
