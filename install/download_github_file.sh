@@ -22,44 +22,44 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Quickly determines and downloads the given or latest version of a Java JAR from GitHub releases
+Quickly determines and downloads the given or latest version of a GitHub release file
 
-If the JAR url template contains {version} placeholders but no explicit version then the placeholds will be replaced with the latest version which will be automatically determined from GitHub releases
+If the file url template contains {version} placeholders but no explicit version then the placeholds will be replaced with the latest version which will be automatically determined from GitHub releases
 
-If the JAR URL does not contain {version} placeholders then downloads the URL as given
+If the file URL does not contain {version} placeholders then downloads the URL as given
 
 Version defaults to 'latest' in which case it determines the latest version from GitHub releases
 
-Designed to be called from adjacent download_*_jar.sh scripts to deduplicate code
+Designed to be called from download_github_jar.sh and similar adjacent scripts to deduplicate code
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<jar_url> [<version>]"
+usage_args="<url> [<version>]"
 
 help_usage "$@"
 
 min_args 1 "$@"
 max_args 2 "$@"
 
-jar_url="$1"
+url="$1"
 version="${2:-latest}"
 
-jar_url="${jar_url## }"
-jar_url="${jar_url%% }"
+url="${url## }"
+url="${url%% }"
 
 shopt -s nocasematch
 # defined in lib/github.sh
 # shellcheck disable=SC2154
-if ! [[ "$jar_url" =~ ^$github_release_url_regex ]]; then
-    die "ERROR: Invalid URL given, not a GitHub release URL: $jar_url"
+if ! [[ "$url" =~ ^$github_release_url_regex ]]; then
+    die "ERROR: Invalid URL given, not a GitHub release URL: $url"
 fi
 shopt -u nocasematch
 
-download_url="$jar_url"
+download_url="$url"
 
-if [[ "$jar_url" =~ {version} ]]; then
-    github_owner_repo="$(sed 's|^https://github.com/||i; s|/releases/.*$||i' <<< "$jar_url")"
+if [[ "$url" =~ {version} ]]; then
+    github_owner_repo="$(sed 's|^https://github.com/||i; s|/releases/.*$||i' <<< "$url")"
     if [ "$version" = latest ]; then
         timestamp "Determining latest release of $github_owner_repo available"
         version="$(github_repo_latest_release.sh "$github_owner_repo")"
