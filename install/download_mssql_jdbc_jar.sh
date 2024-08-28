@@ -41,29 +41,4 @@ jre_version="${2:-8}"
 
 github_owner_repo="microsoft/mssql-jdbc"
 
-if [ "$version" = latest ]; then
-    timestamp "Determining latest version of Microsoft SQL Server JDBC driver available"
-    version="$(github_repo_latest_release.sh "$github_owner_repo")"
-    version="${version#v}"
-    timestamp "Determined latest version of Microsoft SQL Server JDBC driver to be version '$version'"
-fi
-
-# avoid race condition between different sites updating at different times and pull from GitHub releases where we determined latest version to be from
-#download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
-download_url="https://github.com/$github_owner_repo/releases/download/v$version/mssql-jdbc-$version.jre$jre_version.jar"
-
-timestamp "Downloading Microsoft SQL Server JDBC version '$version' from $download_url"
-echo >&2
-
-jar="mssql-jdbc-$version.jre$jre_version.jar"
-
-if type -P wget &>/dev/null; then
-    wget -cO "$jar" "$download_url"
-else
-    tmpfile="$(mktemp)"
-    curl --fail "$download_url" > "$tmpfile"
-    unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "$jar"
-fi
-
-timestamp "Download complete: $jar"
+"$srcdir/download_github_jar.sh" "https://github.com/$github_owner_repo/releases/download/v{version}/mssql-jdbc-{version}.jre$jre_version.jar"
