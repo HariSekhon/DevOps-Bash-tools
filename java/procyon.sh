@@ -39,6 +39,8 @@ procyon_jar="$srcdir/procyon.jar"
 if ! [ -f "$procyon_jar" ]; then
     pushd "$srcdir"
     ../install/download_procyon_jar.sh
+    timestamp
+    echo -n "Symlinking: " >&2
     ln -sv procyon-*.jar procyon.jar
     popd
 fi
