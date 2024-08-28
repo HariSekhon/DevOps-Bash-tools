@@ -39,11 +39,13 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-if ! [ -f "$srcdir/cfr.jar" ]; then
+cfr_jar="$srcdir/cfr.jar"
+
+if ! [ -f "$cfr_jar" ]; then
     pushd "$srcdir"
     ../install/download_cfr_jar.sh
     ln -sv cfr-*.jar cfr.jar
     popd
 fi
 
-java -jar "$srcdir/cfr.jar" "$@"
+java -jar "$cfr_jar" "$@"
