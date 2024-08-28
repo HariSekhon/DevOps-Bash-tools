@@ -52,7 +52,7 @@ if ! [[ "$url" =~ \.jar$ ]]; then
     die "ERROR: given URL is not for a JAR file: $url"
 fi
 
-"$srcdir/download_github_file.sh" "$url" "$version"
+"$srcdir/github_download_release_file.sh" "$url" "$version"
 echo >&2
 
 timestamp "Validating JAR content format"
