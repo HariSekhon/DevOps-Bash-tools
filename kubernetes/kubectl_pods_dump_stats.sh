@@ -74,6 +74,7 @@ while read -r pod; do
         echo
         echo
         echo "RAM in GB:"
+        echo
         free -g
         echo
         echo
