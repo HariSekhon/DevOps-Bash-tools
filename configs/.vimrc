@@ -176,6 +176,105 @@ call vundle#end()
 
 
 " ============================================================================ "
+"                           K e y b i n d i n g s
+" ============================================================================ "
+
+"nmap <silent> ;c :call Cformat() <CR>
+nmap <silent> ;a :,!anonymize.py -a <CR>
+nmap          ;A :,!hexanonymize.py --case --hex-only <CR>
+nmap <silent> ;b :!git blame "%"<CR>
+"nmap <silent> ;c :call ToggleComments()<CR>
+nmap <silent> ;c :,!center.py<CR>
+nmap <silent> ;e :,!center.py --space<CR>
+nmap <silent> ;C :,!center.py --unspace<CR>
+" parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
+" messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
+nmap <silent> ;E :call WriteRunLine()<CR> :!reset <CR><CR>
+nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
+"nmap <silent> ;D :Done<CR>
+nmap <silent> ;D :%!decomment.sh "%" <CR>
+nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
+"nmap <silent> ;h :call Hr()<CR>
+nmap <silent> ;h :Hr<CR>
+nmap          ;H :call WriteHelp()<CR>
+" this inserts Hr literally
+"imap <silent> <C-H> :Hr<CR>
+nmap <silent> ;I :PluginInstall<CR>
+nmap          ;i :'<,'>!readme_generate_index.sh "%" <CR>
+nmap <silent> ;j :JHr<CR>
+nmap          ;k :w<CR> :! check_kubernetes_yaml.sh "%" <CR>
+"nmap <silent> ;' :call Sq()<CR>
+" done automatically on write now
+"nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
+nmap <silent> ;' :w<CR> :!clear; git diff "%" <CR>
+nmap          ;m :w<CR> :call MarkdownIndex() <CR>
+nmap          ;n :w<CR> :n<CR>
+nmap          ;o :!cd "%:p:h" && git log -p "%:t" <CR>
+nmap          ;O :call ToggleGutter()<CR>
+nmap          ;p :prev<CR>
+"nmap          ;P :call TogglePaste()<CR>
+"should be the same thing according to :help pastetoggle but results in vim startup error 'Not an editor command'
+"pastetoggle P
+nmap          ;P :set paste!<CR>
+nmap          ;t :set list!<CR>
+nmap          ;q :q<CR>
+nmap          ;r :call WriteRun()<CR>
+nmap          ;R :call WriteRunDebug()<CR>
+"nmap          ;R :!run.sh %:p<CR>
+"nmap <silent> ;s :call ToggleSyntax()<CR>
+nmap <silent> ;s :,!sqlcase.pl<CR>
+"nmap          ;; :call HgGitU()<CR>
+" command not found
+"nmap          ;; :! . ~/.bashrc; gitu "%" <CR>
+nmap          ;; :w<CR> :call GitUpdateCommit() <CR>
+nmap          ;/ :w<CR> :call GitAddCommit() <CR>
+nmap          ;g :w<CR> :call GitStatus() <CR>
+nmap          ;G :w<CR> :call GitLogP() <CR>
+nmap          ;L :w<CR> :! lint.sh % <CR>
+nmap          ;. :w<CR> :call GitPull() <CR>
+nmap          ;[ :w<CR> :call GitPush() <CR>
+nmap          ;, :w<CR> :s/^/</ <CR> :s/$/>/ <CR>
+" write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
+" this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
+nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
+" pass current line as stdin to urlview to quickly go to this url
+" messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
+"nmap <silent> ;U :.w !urlview<CR><CR> :!reset<CR><CR>
+nmap <silent> ;U :.w !urlopen.sh<CR><CR>
+" breaks ;; nmap
+"nmap          ;\ :source ~/.vimrc<CR>
+"nmap          ;/ :source ~/.vimrc<CR>
+"nmap          ;v :source ~/.vimrc<CR>
+nmap          ;v :call SourceVimrc()<CR>
+nmap          ;V :call WriteRunVerbose()<CR>
+nmap          ;w :w<CR>
+"nmap          ;x :x<CR>
+nmap          ;y :w !pbcopy<CR><CR>
+nmap          ;z :call ToggleDebug()<CR>
+nmap          ;§ :call ToggleScrollLock()<CR>
+
+"noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_char,'\/')<CR>/<CR>:nohlsearch<CR>
+"noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_char,'\/')<CR>//e<CR>:nohlsearch<CR>
+
+" reloading with these didn't fix above pipe disabling arrow keys but
+" adding a terminal reset after the pipe command did fix it
+"noremap <Up>    <Up>
+"noremap <Down>  <Down>
+"noremap <Left>  <Left>
+"noremap <Right> <Right>
+
+if has('autocmd')
+    au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
+endif
+
+if has('autocmd')
+    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%"<CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; "%:p:h/run.sh" "%"<CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w<CR>:!clear; DEBUG=1 "%:p:h/run.sh" "%"<CR>
+endif
+
+
+" ============================================================================ "
 "                               A u t o c m d
 " ============================================================================ "
 
@@ -328,105 +427,6 @@ if has('autocmd')
     "if filereadable(expand("%:p")) && match(readfile(expand("%:p")),"lint:")
     "    au BufNew,BufRead *  nmap ;l :w<CR>:!clear; lint.sh "%" \| more -R<CR>
     "endif
-endif
-
-
-" ============================================================================ "
-"                           K e y b i n d i n g s
-" ============================================================================ "
-
-"nmap <silent> ;c :call Cformat() <CR>
-nmap <silent> ;a :,!anonymize.py -a <CR>
-nmap          ;A :,!hexanonymize.py --case --hex-only <CR>
-nmap <silent> ;b :!git blame "%"<CR>
-"nmap <silent> ;c :call ToggleComments()<CR>
-nmap <silent> ;c :,!center.py<CR>
-nmap <silent> ;e :,!center.py --space<CR>
-nmap <silent> ;C :,!center.py --unspace<CR>
-" parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
-" messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
-nmap <silent> ;E :call WriteRunLine()<CR> :!reset <CR><CR>
-nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
-"nmap <silent> ;D :Done<CR>
-nmap <silent> ;D :%!decomment.sh "%" <CR>
-"nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
-"nmap <silent> ;h :call Hr()<CR>
-nmap <silent> ;h :Hr<CR>
-nmap          ;H :call WriteHelp()<CR>
-" this inserts Hr literally
-"imap <silent> <C-H> :Hr<CR>
-nmap <silent> ;I :PluginInstall<CR>
-nmap          ;i :'<,'>!readme_generate_index.sh "%" <CR>
-nmap <silent> ;j :JHr<CR>
-nmap          ;k :w<CR> :! check_kubernetes_yaml.sh "%" <CR>
-"nmap <silent> ;' :call Sq()<CR>
-" done automatically on write now
-"nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
-nmap <silent> ;' :w<CR> :!clear; git diff "%" <CR>
-nmap          ;m :w<CR> :call MarkdownIndex() <CR>
-nmap          ;n :w<CR> :n<CR>
-nmap          ;o :!cd "%:p:h" && git log -p "%:t" <CR>
-nmap          ;O :call ToggleGutter()<CR>
-nmap          ;p :prev<CR>
-"nmap          ;P :call TogglePaste()<CR>
-"should be the same thing according to :help pastetoggle but results in vim startup error 'Not an editor command'
-"pastetoggle P
-nmap          ;P :set paste!<CR>
-nmap          ;t :set list!<CR>
-nmap          ;q :q<CR>
-nmap          ;r :call WriteRun()<CR>
-nmap          ;R :call WriteRunDebug()<CR>
-"nmap          ;R :!run.sh %:p<CR>
-"nmap <silent> ;s :call ToggleSyntax()<CR>
-nmap <silent> ;s :,!sqlcase.pl<CR>
-"nmap          ;; :call HgGitU()<CR>
-" command not found
-"nmap          ;; :! . ~/.bashrc; gitu "%" <CR>
-nmap          ;; :w<CR> :call GitUpdateCommit() <CR>
-nmap          ;/ :w<CR> :call GitAddCommit() <CR>
-nmap          ;g :w<CR> :call GitStatus() <CR>
-nmap          ;G :w<CR> :call GitLogP() <CR>
-nmap          ;L :w<CR> :! lint.sh % <CR>
-nmap          ;. :w<CR> :call GitPull() <CR>
-nmap          ;[ :w<CR> :call GitPush() <CR>
-nmap          ;, :w<CR> :s/^/</ <CR> :s/$/>/ <CR>
-" write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
-" this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
-nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
-" pass current line as stdin to urlview to quickly go to this url
-" messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
-"nmap <silent> ;U :.w !urlview<CR><CR> :!reset<CR><CR>
-nmap <silent> ;U :.w !urlopen.sh<CR><CR>
-" breaks ;; nmap
-"nmap          ;\ :source ~/.vimrc<CR>
-"nmap          ;/ :source ~/.vimrc<CR>
-"nmap          ;v :source ~/.vimrc<CR>
-nmap          ;v :call SourceVimrc()<CR>
-nmap          ;V :call WriteRunVerbose()<CR>
-nmap          ;w :w<CR>
-"nmap          ;x :x<CR>
-nmap          ;y :w !pbcopy<CR><CR>
-nmap          ;z :call ToggleDebug()<CR>
-nmap          ;§ :call ToggleScrollLock()<CR>
-
-"noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_char,'\/')<CR>/<CR>:nohlsearch<CR>
-"noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_char,'\/')<CR>//e<CR>:nohlsearch<CR>
-
-" reloading with these didn't fix above pipe disabling arrow keys but
-" adding a terminal reset after the pipe command did fix it
-"noremap <Up>    <Up>
-"noremap <Down>  <Down>
-"noremap <Left>  <Left>
-"noremap <Right> <Right>
-
-if has('autocmd')
-    au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
-endif
-
-if has('autocmd')
-    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%"<CR>
-    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; "%:p:h/run.sh" "%"<CR>
-    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w<CR>:!clear; DEBUG=1 "%:p:h/run.sh" "%"<CR>
 endif
 
 
