@@ -298,6 +298,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `find_broken_links.sh` - find broken links with delays to avoid tripping defenses
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
+- `image_join_stack.sh` - stack joins two images after matching their widths so they align correctly
 - `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
