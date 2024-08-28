@@ -207,6 +207,7 @@ make
 
 - [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
+- [Java](https://github.com/HariSekhon/DevOps-Bash-tools#java) - Java utilies to debug running Java programs or decompile Java JAR code for deeper debugging
 - [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
 - [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
 - [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
@@ -299,11 +300,6 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `image_join_stack.sh` - stack joins two images after matching their widths so they align correctly
-- `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
-- `java_decompile_jar.sh` - decompiles a Java JAR in /tmp, finds the main class and runs a Java decompiler on its main .class file using `jd_gui.sh`
-- `jd_gui.sh` - runs Java Decompiler JD GUI, downloading its jar the first time if it's not already present
-- `cfr.sh` - runs CFR command line Java decompiler, downloading its jar the first time if it's not already present
-- `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `log_timestamp_large_intervals.sh` - finds log lines whose timestamp intervals exceed the given number of seconds and outputs those log lines with the difference between the last and current timestamps. Useful to find actions that are taking a long time from log files such as CI/CD logs
@@ -329,6 +325,16 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 
 See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
 and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
+
+### Java
+
+`java/` directory:
+
+- `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
+- `java_decompile_jar.sh` - decompiles a Java JAR in /tmp, finds the main class and runs a Java decompiler on its main .class file using `jd_gui.sh`
+- `jd_gui.sh` - runs Java Decompiler JD GUI, downloading its jar the first time if it's not already present
+- `cfr.sh` - runs CFR command line Java decompiler, downloading its jar the first time if it's not already present
+- `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 
 ### Databases
 
