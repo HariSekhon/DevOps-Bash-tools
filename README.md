@@ -205,31 +205,31 @@ make
 
 ## Index
 
-- [Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
+- [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
-- [Java](https://github.com/HariSekhon/DevOps-Bash-tools#java) - Java utilies to debug running Java programs or decompile Java JAR code for deeper debugging
-- [AWS - Amazon Web Services](https://github.com/HariSekhon/DevOps-Bash-tools#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
-- [GCP - Google Cloud Platform](https://github.com/HariSekhon/DevOps-Bash-tools#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
-- [Kubernetes](https://github.com/HariSekhon/DevOps-Bash-tools#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
-- [Docker](https://github.com/HariSekhon/DevOps-Bash-tools#docker) - Docker API, Dockerhub API, Quay.io API scripts
-- [Databases](https://github.com/HariSekhon/DevOps-Bash-tools#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
-- [Big Data & NoSQL](https://github.com/HariSekhon/DevOps-Bash-tools#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager API & Cloudera Navigator API scripts
-- [Git - GitHub, GitLab, Bitbucket, Azure DevOps](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
-- [CI/CD - Continuous Integration / Continuous Delivery](https://github.com/HariSekhon/DevOps-Bash-tools#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for most major CI systems:
+- [AWS - Amazon Web Services](#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
+- [GCP - Google Cloud Platform](#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
+- [Kubernetes](#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
+- [Docker](#docker) - Docker API, Dockerhub API, Quay.io API scripts
+- [Databases](#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
+- [Big Data & NoSQL](#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager API & Cloudera Navigator API scripts
+- [Git - GitHub, GitLab, Bitbucket, Azure DevOps](#git---github-gitlab-bitbucket-azure-devops) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
+- [CI/CD - Continuous Integration / Continuous Delivery](#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for most major CI systems:
   - Jenkins, Concourse, GoCD, TeamCity - one-touch boot & build
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable ...
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
-- [AI & IPaaS](https://github.com/HariSekhon/DevOps-Bash-tools#ai--ipaas) - OpenAI (ChatGPT), Make.com
-- [Internet Services](https://github.com/HariSekhon/DevOps-Bash-tools#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress
-- [Perl](https://github.com/HariSekhon/DevOps-Bash-tools#perl) - Perl utilities & library management
-- [Python](https://github.com/HariSekhon/DevOps-Bash-tools#python) - Python utilities & library management
-- [Golang](https://github.com/HariSekhon/DevOps-Bash-tools#golang) - Golang utilities
-- [Media](https://github.com/HariSekhon/DevOps-Bash-tools#media) - MP3 metadata editing, grouping and ordering of albums and audiobooks, mkv/avi to mp4 converters, YouTube channel download
-- [Spotify](https://github.com/HariSekhon/DevOps-Bash-tools#spotify) - 40+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, followed artists, top artists, top tracks etc.
-- [More Linux & Mac](https://github.com/HariSekhon/DevOps-Bash-tools#more-linux--mac) - more systems administration scripts, package installation automation
-- [Builds, Languages & Linting](https://github.com/HariSekhon/DevOps-Bash-tools#builds-languages--linting) - programming language, build system & CI linting
-- [Data Format Conversion & Validation](https://github.com/HariSekhon/DevOps-Bash-tools#data-format-conversion--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
+- [AI & IPaaS](#ai--ipaas) - OpenAI (ChatGPT), Make.com
+- [Internet Services](#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress
+- [Java](#java) - Java utilies to debug running Java programs or decompile Java JAR code for deeper debugging
+- [Python](#python) - Python utilities & library management
+- [Perl](#perl) - Perl utilities & library management
+- [Golang](#golang) - Golang utilities
+- [Media](#media) - MP3 metadata editing, grouping and ordering of albums and audiobooks, mkv/avi to mp4 converters, YouTube channel download
+- [Spotify](#spotify) - 40+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, followed artists, top artists, top tracks etc.
+- [More Linux & Mac](#more-linux--mac) - more systems administration scripts, package installation automation
+- [Builds, Languages & Linting](#builds-languages--linting) - programming language, build system & CI linting
+- [Data Format Conversion & Validation](#data-format-conversion--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
 - [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
@@ -325,16 +325,6 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 
 See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
 and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
-
-### Java
-
-`java/` directory:
-
-- `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
-- `java_decompile_jar.sh` - decompiles a Java JAR in /tmp, finds the main class and runs a Java decompiler on its main .class file using `jd_gui.sh`
-- `jd_gui.sh` - runs Java Decompiler JD GUI, downloading its jar the first time if it's not already present
-- `cfr.sh` - runs CFR command line Java decompiler, downloading its jar the first time if it's not already present
-- `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 
 ### Databases
 
@@ -1171,21 +1161,18 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 - `wordpress_api.sh` - queries the Wordpress API with authentication
 - `wordpress_posts_without_category_tags.sh` - checks posts (articles) for categories without corresponding tags and prints the posts and their missing tags
 
-### Perl
+### Java
 
-`perl/` directory:
+`java/` directory:
 
-- `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
-- `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
-- `perl_cpanm_reinstall_all.sh` - re-installs all CPAN modules. Useful for trying to recompile XS modules on Macs after migration assistant from an Intel Mac to an ARM Silicon Mac leaves your home XS libraries broken as they're built for the wrong architecture
-- `perlpath.sh` - prints all Perl libary search paths, one per line
-- `perl_find_library_path.sh` - finds directory where a CPAN module is installed - without args finds the Perl library base
-- `perl_find_library_executable.sh` - finds directory where a CPAN module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
-- `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
-- `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
-- `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
+- `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
+- `java_decompile_jar.sh` - decompiles a Java JAR in /tmp, finds the main class and runs a Java decompiler on its main .class file using `jd_gui.sh`
+- `jd_gui.sh` - runs Java Decompiler JD GUI, downloading its jar the first time if it's not already present
+- `cfr.sh` - runs CFR command line Java decompiler, downloading its jar the first time if it's not already present
+- `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 
-See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge-Base/blob/main/perl.md).
+See also [Knowledge Base notes for Java](https://github.com/HariSekhon/Knowledge-Base/blob/main/java.md)
+and [JVM Performance Tuning](https://github.com/HariSekhon/Knowledge-Base/blob/main/java-jvm-performance-tuning.md).
 
 ### Python
 
@@ -1208,6 +1195,22 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowledge-Base/blob/main/python.md).
 
+### Perl
+
+`perl/` directory:
+
+- `perl_cpanm_install.sh` - bulk installs CPAN modules from mix of arguments / file lists / stdin, accounting for User vs System installs, root vs user sudo, [Perlbrew](https://perlbrew.pl/) / Google Cloud Shell environments, Mac vs Linux library paths, ignore failure option, auto finds and reads build failure log for quicker debugging showing root cause error in CI builds logs etc
+- `perl_cpanm_install_if_absent.sh` - installs CPAN modules not already in Perl libary path (OS or CPAN installed) for faster installations only where OS packages are already providing some of the modules, reducing time and failure rates in CI builds
+- `perl_cpanm_reinstall_all.sh` - re-installs all CPAN modules. Useful for trying to recompile XS modules on Macs after migration assistant from an Intel Mac to an ARM Silicon Mac leaves your home XS libraries broken as they're built for the wrong architecture
+- `perlpath.sh` - prints all Perl libary search paths, one per line
+- `perl_find_library_path.sh` - finds directory where a CPAN module is installed - without args finds the Perl library base
+- `perl_find_library_executable.sh` - finds directory where a CPAN module's CLI program is installed (system vs user, useful when it gets installed to a place that isn't in your `$PATH`, where `which` won't help)
+- `perl_find_unused_cpan_modules.sh` - finds CPAN modules that aren't used by any programs in the current directory tree
+- `perl_find_duplicate_cpan_requirements.sh` - finds duplicate CPAN modules listed for install more than once under the directory tree (useful for deduping module installs in a project and across submodules)
+- `perl_generate_fatpacks.sh` - creates [Fatpacks](https://metacpan.org/pod/App::FatPacker) - self-contained Perl programs with all CPAN modules built-in
+
+See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge-Base/blob/main/perl.md).
+
 ### Golang
 
 `packages/` directory:
@@ -1226,6 +1229,8 @@ See also [Knowledge Base notes for Python](https://github.com/HariSekhon/Knowled
 - `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel URL
+
+See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
 
 ### Spotify
 
