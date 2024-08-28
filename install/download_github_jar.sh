@@ -40,10 +40,29 @@ usage_args="<url> [<version>]"
 
 help_usage "$@"
 
+check_bin file
+
 min_args 1 "$@"
 max_args 2 "$@"
 
 url="$1"
 version="${2:-latest}"
 
+if ! [[ "$url" =~ \.jar$ ]]; then
+    die "ERROR: given URL is not for a JAR file: $url"
+fi
+
 "$srcdir/download_github_file.sh" "$url" "$version"
+echo >&2
+
+timestamp "Validating JAR content format"
+filename="${url##*/}"
+filename="${filename//\{version\}/*}"
+# have to risk splitting to get globbing to work on latest file
+# shellcheck disable=SC2086,SC2046
+output="$(file --brief $(ls -tr $filename))"
+expected_format="^Zip archive data"
+if ! [[ "$output" =~ $expected_format ]]; then
+    die "ERROR: JAR failed 'file' type matching, expected '$expected_format', got: '$output'"
+fi
+timestamp "JAR file format validation passed"
