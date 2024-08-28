@@ -300,6 +300,8 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `image_join_stack.sh` - stack joins two images after matching their widths so they align correctly
 - `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
+- `java_decompile_jar.sh` - decompiles a Java JAR in /tmp, finds the main class and runs a Java decompiler on its main .class file using `jd_gui.sh`
+- `jd_gui.sh` - runs Java Decompiler JD GUI, downloading the jar the first time if it's not already present
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
