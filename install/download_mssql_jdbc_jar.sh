@@ -41,4 +41,4 @@ jre_version="${2:-8}"
 
 github_owner_repo="microsoft/mssql-jdbc"
 
-"$srcdir/download_github_jar.sh" "https://github.com/$github_owner_repo/releases/download/v{version}/mssql-jdbc-{version}.jre$jre_version.jar"
+"$srcdir/../github/github_download_release_jar.sh" "https://github.com/$github_owner_repo/releases/download/v{version}/mssql-jdbc-{version}.jre$jre_version.jar"
