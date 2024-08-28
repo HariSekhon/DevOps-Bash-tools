@@ -28,7 +28,9 @@ srcdir_github_lib="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_github_cli_required="Requires GitHub CLI to be installed and configured, as well as jq"
 
 # ERE format regex
-github_pull_request_url_regex='https://github.com/[[:alnum:]/_-]+/pull/[[:digit:]]+'
+github_pull_request_url_regex='https://github.com/[[:alnum:]_-]+/[[:alnum:]_-]+/pull/[[:digit:]]+'
+# shellcheck disable=SC2034
+github_release_url_regex='https://github.com/[[:alnum:]_-]+/[[:alnum:]_-]+/releases/download/[^/]+/'
 
 get_github_repo(){
     git remote -v 2>/dev/null |
