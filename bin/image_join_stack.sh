@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Stack joins two images after matching their widths so they align correctly
+Stack joins two images vertically after matching their widths so they align correctly
 
 If the third arg is not given then outputs to joined_image.png
 
@@ -42,7 +42,8 @@ check_bin magick
 
 top_image="$1"
 bottom_image="$2"
-output_image="${3:-joined_image.png}"
+default_output_image="joined_image.png"
+output_image="${3:-$default_output_image}"
 
 top_image_width="$(magick identify -format "%w" "$top_image")"
 bottom_image_width="$(magick identify -format "%w" "$bottom_image")"
@@ -68,6 +69,11 @@ elif [ "$top_image_width" -eq "$bottom_image_width" ]; then
     echo >&2
 else
     die "ERROR: logic error, please check code"
+fi
+
+if [ "$output_image" != "$default_output_image" ] &&
+   [ -e "$output_image" ]; then
+    die "ERROR: output image '$output_image' already exists, not overwriting for safety"
 fi
 
 timestamp "Joining top image '$top_image' and bottom image '$bottom_image' into output image '$output_image'"
