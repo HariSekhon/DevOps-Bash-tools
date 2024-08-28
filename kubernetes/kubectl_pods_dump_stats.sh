@@ -67,10 +67,25 @@ while read -r pod; do
     timestamp "Running stats commands on pod: $pod" &&
     output_file="kubectl-pod-stats.$(date '+%F_%H%M').$pod.txt" &&
     echo &&
+    # Copied from ../bin/dump_stats.sh for servers
+    #
+    # Most of these won't be available inside a pod, but we can only try...
     kubectl exec "$pod" -- bash -c '
+        echo "Dumping common command outputs"
+        echo
         echo "Disk Space:"
         echo
         df -h
+        echo
+        echo
+        echo "Uname:"
+        echo
+        uname -a
+        echo
+        echo
+        echo "Uptime:"
+        echo
+        uptime
         echo
         echo
         echo "RAM in GB:"
@@ -78,9 +93,62 @@ while read -r pod; do
         free -g
         echo
         echo
-        echo "Top with Threads:"
+        echo "IOstat:"
         echo
+        iostat -x 1 5
+        echo
+        echo
+        echo "lsblk:"
+        echo
+        lsblk
+        echo
+        echo
+        echo "MPstat:"
+        echo
+        mpstat -P ALL 1 5
+        echo
+        echo
+        echo "SAR 1 sec intervals x 5:"
+        sar -u 1 5
+        echo
+        echo
+        echo "SAR -A:"
+        echo
+        sar -A
+        echo
+        echo
+        echo "Top snapshot with Threads:"
         top -H -b -n 1
+        echo
+        echo
+        echo "VMstat:"
+        echo
+        vmstat 1 5
+        echo
+        echo
+        echo "Process List:"
+        echo
+        ps -ef
+        echo
+        echo
+        echo "ps auxf:"
+        echo
+        ps auxf
+        echo
+        echo
+        echo "Netstat:"
+        echo
+        netstat -an
+        echo
+        echo
+        echo "LSOF:"
+        echo
+        lsof -n -O
+        echo
+        echo
+        echo "Dmesg:"
+        echo
+        dmesg
     ' >"$output_file" &&
     echo &&
     timestamp "Dumped stats commands outputs to file: $output_file" &&
