@@ -289,6 +289,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
 - `delete_duplicate_files.sh` - deletes duplicate files with (N) suffixes, commonly caused by web browser downloads,
+- `download_url_file.sh` - downloads a file from a URL using wget with no clobber and continue support, or curl with atomic replacement to avoid race conditions. Used by `github/github_download_release_file.sh`, `github_download_release_jar.sh`, and `install/download_*_jar.sh`
 - `dump_stats.sh` - dumps common command outputs to text files in a local tarball. Useful to collect support information for vendor support cases
   in the given or current directory. Checks they're exact duplicates of a matching basename file without the (N) suffix with
   the exact same checksum for safety. Prompts to delete per file. To auto-accept deletions, do
