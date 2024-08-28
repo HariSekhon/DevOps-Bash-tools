@@ -68,6 +68,4 @@ download_page="$(curl -sS "$java_version_url")"
 download_url="$(grep -Eom1 "https://download.java.net/openjdk/(open)?jdk$java_version.+linux-x64.*.tar.gz" <<< "$download_page" ||
                 die "Failed to parse download URL")"
 
-timestamp "Downloading $download_url"
-wget -c "$download_url"
-timestamp "Download complete"
+"$srcdir/../bin/download_url_file.sh" "$download_url"
