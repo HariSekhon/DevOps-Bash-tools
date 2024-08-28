@@ -24,7 +24,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Decompiles a Java jar
 
-Unpacks it in /tmp, finds the Main-Class from the META-INF/MANIFEST.MF and runs a decompiler on its .class file
+Unpacks it in /tmp, finds the Main-Class from the META-INF/MANIFEST.MF
+and runs the Java decompiler JD GUI on its main .class file
+
+Uses adjacent script ./jd_gui.sh
+which uses ../install/download_jd_gui_jar.sh if the JD GUI jar is not already available
+
+Require Java to already be installed and in the \$PATH
 "
 
 # used by usage() in lib/utils.sh
