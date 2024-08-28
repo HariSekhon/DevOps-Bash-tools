@@ -38,29 +38,4 @@ version="${1:-latest}"
 
 github_owner_repo="pgjdbc/pgjdbc"
 
-if [ "$version" = latest ]; then
-    timestamp "Determining latest version of PostgreSQL JDBC driver available"
-    version="$(github_repo_latest_release.sh "$github_owner_repo")"
-    version="${version#REL}"
-    timestamp "Determined latest version of PostgreSQL JDBC driver to be version '$version'"
-fi
-
-# avoid race condition between different sites updating at different times and pull from GitHub releases where we determined latest version to be from
-#download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
-download_url="https://github.com/$github_owner_repo/releases/download/REL$version/postgresql-$version.jar"
-
-timestamp "Downloading PostgreSQL JDBC version '$version' from $download_url"
-echo >&2
-
-jar="postgresql-jdbc-$version.jar"
-
-if type -P wget &>/dev/null; then
-    wget -cO "$jar" "$download_url"
-else
-    tmpfile="$(mktemp)"
-    curl --fail "$download_url" > "$tmpfile"
-    unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "$jar"
-fi
-
-timestamp "Download complete: $jar"
+"$srcdir/download_github_jar.sh" "https://github.com/$github_owner_repo/releases/download/REL{version}/postgresql-{version}.jar" "$version"
