@@ -35,27 +35,4 @@ version="${1:-latest}"
 
 github_owner_repo="leibnitz27/cfr"
 
-if [ "$version" = latest ]; then
-    timestamp "Determining latest version of CFR available"
-    version="$(github_repo_latest_release.sh "$github_owner_repo")"
-    version="${version#v}"
-    timestamp "Determined latest version of CFR to be version '$version'"
-fi
-
-download_url="https://github.com/$github_owner_repo/releases/download/$version/cfr-$version.jar"
-
-timestamp "Downloading Java Decompiler CFR version '$version' from: $download_url"
-echo >&2
-
-jar="cfr-$version.jar"
-
-if type -P wget &>/dev/null; then
-    wget -cO "$jar" "$download_url"
-else
-    tmpfile="$(mktemp)"
-    curl --fail "$download_url" > "$tmpfile"
-    unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "$jar"
-fi
-
-timestamp "Download complete: $jar"
+"$srcdir/download_github_jar.sh" "https://github.com/$github_owner_repo/releases/download/{version}/cfr-{version}.jar"
