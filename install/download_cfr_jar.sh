@@ -42,8 +42,6 @@ if [ "$version" = latest ]; then
     timestamp "Determined latest version of CFR to be version '$version'"
 fi
 
-# avoid race condition between different sites updating at different times and pull from GitHub releases where we determined latest version to be from
-#download_url="https://jdbc.postgresql.org/download/postgresql-$version.jar"
 download_url="https://github.com/$github_owner_repo/releases/download/$version/cfr-$version.jar"
 
 timestamp "Downloading Java Decompiler CFR version '$version' from: $download_url"
