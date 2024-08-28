@@ -84,18 +84,4 @@ else
     fi
 fi
 
-timestamp "Downloading Vertica JDBC version '$version' from $download_url"
-echo >&2
-
-jar="${download_url##*/}"
-
-if type -P wget; then
-    wget -cO "$jar" "$download_url"
-else
-    tmpfile="$(mktemp).tar.gz"
-    curl --fail "$download_url" > "$tmpfile"
-    unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "$jar"
-fi
-
-timestamp "Download complete"
+"$srcdir/../bin/download_url_file.sh" "$download_url"
