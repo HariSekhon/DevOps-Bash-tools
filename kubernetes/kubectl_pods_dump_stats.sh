@@ -145,7 +145,7 @@ while read -r pod; do
         ps -ef
         echo
         echo
-        echo "ps auxf:"
+        echo "Process List Alternative - ps auxf:"
         echo
         ps auxf
         echo
