@@ -66,7 +66,6 @@ while read -r pod; do
     # shellcheck disable=SC2015
     timestamp "Running stats commands on pod: $pod" &&
     output_file="kubectl-pod-stats.$(date '+%F_%H%M').$pod.txt" &&
-    echo &&
     # Copied from ../bin/dump_stats.sh for servers
     #
     # Most of these won't be available inside a pod, but we can only try...
