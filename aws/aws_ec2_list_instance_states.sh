@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-List AWS EC2 instances and their states in an easy to read table output
+List AWS EC2 instances, their DNS names and States in an easy to read table output
 
-Useful for quickly investigating running instances
+Useful for quickly investigating running instances and comparing to configured FQDN addresses in referencing software
 
 
 $usage_aws_cli_required
@@ -41,5 +41,11 @@ num_args 0 "$@"
 # false positive - want single quotes for * to be evaluated within AWS query not shell
 # shellcheck disable=SC2016
 aws ec2 describe-instances \
-    --query 'Reservations[*].Instances[*].[Tags[?Key==`Name`].Value | [0], InstanceId, State.Name]' \
+    --query 'Reservations[*].Instances[*].[
+                Tags[?Key==`Name`].Value | [0],
+                InstanceId,
+                State.Name,
+                publicDnsName,
+                PrivateDnsName
+            ]' \
     --output table
