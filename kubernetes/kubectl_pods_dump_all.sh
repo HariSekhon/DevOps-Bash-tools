@@ -43,7 +43,7 @@ usage_args="[<num_iterations> <interval_seconds> <namespace> <pod_name_regex> <j
 
 help_usage "$@"
 
-min_args 1 "$@"
+min_args 0 "$@"
 max_args 5 "$@"
 
 num_iterations="${1:-1}"
