@@ -121,6 +121,7 @@ while read -r pod; do
         echo
         echo
         echo "SAR 1 sec intervals x 5:"
+        echo
         sar -u 1 5
         echo
         echo
@@ -130,6 +131,7 @@ while read -r pod; do
         echo
         echo
         echo "Top snapshot with Threads:"
+        echo
         top -H -b -n 1
         echo
         echo
