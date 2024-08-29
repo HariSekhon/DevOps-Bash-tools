@@ -147,6 +147,8 @@ alias prune="removed_branches | xargs -r git branch -d"
 # don't use this unless you are a git pro and understand unwinding history and merge conflicts
 alias GRH="git reset HEAD^"
 
+alias gitnored='git status --ignored'
+
 alias master="switchbranch master"
 alias main="switchbranch main"
 alias prod="switchbranch prod"
