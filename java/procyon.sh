@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Wrapper to download and run the Procyon command line java decompiler
+
+Examples:
+
+    ${0##*/} Main.class > Main.java
+
+    ${0##*/} myapp.jar
 "
 
 # used by usage() in lib/utils.sh
