@@ -41,7 +41,7 @@ if ! [ -f "$procyon_jar" ]; then
     ../install/download_procyon_jar.sh
     timestamp
     echo -n "Symlinking: " >&2
-    ln -sv procyon-*.jar procyon.jar
+    ln -sv procyon-*.jar "${procyon_jar##*/}"
     popd
 fi
 
