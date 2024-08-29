@@ -72,6 +72,7 @@ cowsay
 #coreutils # in brew-packages.txt
 csshx
 #ctags
+#cyberduck  # GUI client for FTP, SFTP, WebDAV, Amazon S3, Google Drive etc.
 d2  # declarative diagram language
 dateutils  # strptime, dateadd, dateconv, datediff, dategrep, dateseq, datesort, datetest, datezone - https://www.fresse.org/dateutils/
 dhcping
@@ -99,6 +100,7 @@ exiftool  # view image metadata
 exiv2     # view image metadata
 #ext4fuse  # to read Linux partitions eg. on external hard drives
 ffmpeg
+#filezilla  # GUI ftp client - not found
 fish
 fortune
 fswatch
