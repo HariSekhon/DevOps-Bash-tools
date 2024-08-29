@@ -39,18 +39,18 @@ Requires kubectl to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_iterations> <interval_seconds> <namespace> <pod_name_regex> <jdk>]"
+usage_args="<jdk> [<num_iterations> <interval_seconds> <namespace> <pod_name_regex>]"
 
 help_usage "$@"
 
 min_args 0 "$@"
 max_args 5 "$@"
 
-num_iterations="${1:-1}"
-interval_seconds="${2:-300}"
-namespace="${3:-}"
-pod_name_regex="${4:-.}"
-jdk="${5:-}"
+jdk="$1"
+num_iterations="${2:-1}"
+interval_seconds="${3:-300}"
+namespace="${4:-}"
+pod_name_regex="${5:-.}"
 
 if ! is_int "$num_iterations"; then
     die "First arg - num_iterations - must be an integer!"
