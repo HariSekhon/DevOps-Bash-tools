@@ -44,19 +44,12 @@ else
     download_url="https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j-$version.tar.gz"
 fi
 
-timestamp "Downloading MySQL JDBC version '$version' from $download_url"
+"$srcdir/../bin/download_url_file.sh" "$download_url"
 echo >&2
 
-tarball="mysql-connector-j-$version.tar.gz"
-
-if type -P wget; then
-    wget -cO "$tarball" "$download_url"
-else
-    tmpfile="$(mktemp).tar.gz"
-    curl --fail "$download_url" > "$tmpfile"
-    unalias mv &>/dev/null || :
-    mv -fv "$tmpfile" "$tarball"
-fi
+timestamp "Untarring"
+tarball="${download_url##*/}"
 tar zxvf "$tarball" -C . --strip 1 "mysql-connector-j-$version/mysql-connector-j-$version.jar"
+echo >&2
 
-timestamp "Download complete"
+timestamp "Extracted mysql-connector-j-$version.jar"
