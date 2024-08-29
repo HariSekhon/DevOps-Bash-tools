@@ -1171,10 +1171,11 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 
 - `java_show_classpath.sh` - shows Java classpaths, one per line, of currently running Java programs
 - `java_decompile_jar.sh` - decompiles a Java JAR in /tmp, finds the main class and runs a Java decompiler on its main .class file using `jd_gui.sh`
-- `jd_gui.sh` - runs Java Decompiler JD GUI, downloading its jar the first time if it's not already present
-- `bytecode_viwer.sh` - runs Bytecode-Viewer GUI Java decompiler, downloading its jar the first time if it's not already present
-- `cfr.sh` - runs CFR command line Java decompiler, downloading its jar the first time if it's not already present
-- `procyon.sh` - runs Procyon command line Java decompiler, downloading its jar the first time if it's not already present
+- Java Decompilers:
+  - `jd_gui.sh` - runs Java Decompiler JD GUI, downloading its jar the first time if it's not already present
+  - `bytecode_viwer.sh` - runs Bytecode-Viewer GUI Java decompiler, downloading its jar the first time if it's not already present
+  - `cfr.sh` - runs CFR command line Java decompiler, downloading its jar the first time if it's not already present
+  - `procyon.sh` - runs Procyon command line Java decompiler, downloading its jar the first time if it's not already present
 - `jvm_heaps*.sh` - show all your Java heap sizes for all running Java processes, and their total MB (for performance tuning and sizing)
 
 See also [Knowledge Base notes for Java](https://github.com/HariSekhon/Knowledge-Base/blob/main/java.md)
