@@ -47,7 +47,7 @@ if ! [ -f "$cfr_jar" ]; then
     ../install/download_cfr_jar.sh
     timestamp
     echo -n "Symlinking: " >&2
-    ln -sv cfr-*.jar cfr.jar
+    ln -sv cfr-*.jar "${cfr_jar##*/}"
     popd
 fi
 
