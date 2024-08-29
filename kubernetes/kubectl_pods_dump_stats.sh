@@ -71,6 +71,17 @@ while read -r pod; do
     #
     # Most of these won't be available inside a pod, but we can only try...
     kubectl exec "$pod" -- bash -c '
+        # sent errors to stdout to be captured in the log sections of why the stats are not available eg.
+        #
+        #   bash: line 25: iostat: command not found
+        #   bash: line 35: mpstat: command not found
+        #   bash: line 39: sar: command not found
+        #   bash: line 44: sar: command not found
+        #   bash: line 68: netstat: command not found
+        #   bash: line 73: lsof: command not found
+        #
+        exec 2>&1
+
         echo "Dumping common command outputs"
         echo
         echo "Disk Space:"
