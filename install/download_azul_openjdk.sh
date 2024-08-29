@@ -73,6 +73,4 @@ download_path="$(tail -n1 <<< "$download_paths" | sed 's|/zulu/bin/||')"
 
 download_url="$url_base/$download_path"
 
-timestamp "Downloading $download_url"
-wget -c "$download_url"
-timestamp "Download complete"
+"$srcdir/../bin/download_url_file.sh" "$download_url"
