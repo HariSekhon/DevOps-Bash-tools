@@ -28,6 +28,8 @@ Examples:
 
     ${0##*/} Main.class > Main.java
 
+    ${0##*/} myapp.jar
+
     ${0##*/} myapp.jar --outputdir ./myapp-java-code/
 "
 
