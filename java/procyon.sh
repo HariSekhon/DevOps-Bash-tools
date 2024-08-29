@@ -34,7 +34,7 @@ usage_args="<jar_or_java.class>"
 
 min_args 1 "$@"
 
-procyon_jar="$srcdir/procyon.jar"
+procyon_jar="$srcdir/procyon-decompiler.jar"
 
 if ! [ -f "$procyon_jar" ]; then
     pushd "$srcdir"
