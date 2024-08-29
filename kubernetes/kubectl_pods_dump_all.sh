@@ -106,3 +106,9 @@ for ((i=1; i <= num_iterations; i++)); do
     echo
 done
 timestamp "All dump iterations completed"
+echo >&2
+timestamp "Tarring $support_bundle_dir"
+cd ..
+tarball="$support_bundle_dir.tar.gz"
+tar czvf "$tarball" "$support_bundle_dir"
+timestamp "Support bundle ready: $tarball"
