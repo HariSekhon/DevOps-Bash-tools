@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Wrapper to download and run Java Decompiler GUI
+
+Examples:
+
+    ${0##*/} myapp.jar
+
+    ${0##*/} Main.class
 "
 
 # used by usage() in lib/utils.sh
@@ -33,13 +39,15 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-if ! [ -f "$srcdir/jd-gui-min.jar" ]; then
+jd_gui_jar="$srcdir/jd-gui-min.jar"
+
+if ! [ -f "$jd_gui_jar" ]; then
     pushd "$srcdir"
     ../install/download_jd_gui_jar.sh
     timestamp
     echo -n "Symlinking: " >&2
-    ln -sv jd-gui-*-min.jar jd-gui-min.jar
+    ln -sv jd-gui-*-min.jar "${jd_gui_jar##*/}"
     popd
 fi
 
-java -jar "$srcdir/jd-gui-min.jar" "$@"
+java -jar "$jd_gui_jar" "$@"
