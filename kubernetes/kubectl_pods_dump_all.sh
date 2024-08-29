@@ -111,4 +111,5 @@ timestamp "Tarring $support_bundle_dir"
 cd ..
 tarball="$support_bundle_dir.tar.gz"
 tar czvf "$tarball" "$support_bundle_dir"
+echo >&2
 timestamp "Support bundle ready: $tarball"
