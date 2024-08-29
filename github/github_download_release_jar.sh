@@ -61,7 +61,7 @@ filename="${filename//\{version\}/*}"
 # have to risk splitting to get globbing to work on latest file
 # shellcheck disable=SC2086,SC2046
 output="$(file --brief $(ls -tr $filename))"
-expected_format="^Zip archive data"
+expected_format="^Zip archive data|^Java archive data \(JAR\)"
 if ! [[ "$output" =~ $expected_format ]]; then
     die "ERROR: JAR failed 'file' type matching, expected '$expected_format', got: '$output'"
 fi
