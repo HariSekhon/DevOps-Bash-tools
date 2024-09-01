@@ -114,9 +114,9 @@ if [ -z "${SSH_CONNECTION:-}" ]; then
     url="http://localhost:$local_port"
     timestamp "Port-forwarded UI is now available at: $url"
 
-    if [ -n "${OPEN_URL:-}" ] && is_mac; then
+    if [ -n "${OPEN_URL:-}" ]; then
         echo
         timestamp "Opening URL:  $url"
-        open "$url"
+        "$srcdir/../bin/urlopen.sh" "$url"
     fi
 fi
