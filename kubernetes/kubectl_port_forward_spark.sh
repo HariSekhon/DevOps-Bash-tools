@@ -96,7 +96,7 @@ if ! kill -0 "$pid" 2>/dev/null; then
     die "ERROR: kubectl port-forward exited"
 fi
 echo
-url="http://localhost:$spark_port"
+url="http://localhost:$local_port"
 timestamp "Spark UI is now available at: $url"
 
 if is_mac; then
