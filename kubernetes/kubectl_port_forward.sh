@@ -32,6 +32,8 @@ a more specific key=value kubernetes label (the latter is preferable)
 
 If more than one matching pod is found, prompts with an interactive dialogue to choose one
 
+If more than one pod port is found, you must specify the environment variable POD_PORT instead
+
 If OPEN_URL environment variable is set and this script is not run over SSH then automatically
 opens the UI on localhost URL in the default browser
 "
@@ -112,12 +114,31 @@ else
     die "ERROR: No matching pods found"
 fi
 
-pod_port="$(kubectl get pod  ${namespace:+-n "$namespace"} "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
+if [ -n "${POD_PORT:-}" ]; then
+    if ! is_port "$POD_PORT"; then
+        die "Environment variable POD_PORT must be a valid port number integer"
+    fi
+else
+    pod_port="$(kubectl get pod  ${namespace:+-n "$namespace"} "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
+fi
 
 if [ -z "$pod_port" ]; then
     die "Failed to determine port for pod '$pod'"
 fi
 
+if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
+    die "More than one port returned from pod '$pod', must specify FORWARD_PORT environment variable instead"
+fi
+
+if [ "$local_port" -lt 1024 ]; then
+    if [ "$local_port" = 80 ]; then
+        local_port=8080
+    elif [ "$local_port" = 443 ]; then
+        local_port=8443
+    else
+        local_port="$((local_port + 1000))"
+    fi
+fi
 local_port="$(next_available_port "$pod_port")"
 
 timestamp "Launching port forwarding to pod '$pod' port '$pod_port' to local port '$local_port'"
