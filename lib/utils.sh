@@ -1241,6 +1241,17 @@ is_regex(){
     [[ "$regex" =~ $regex ]]
 }
 
+is_port_number(){
+    local port="$1"
+    if ! is_int "$port"; then
+        return 1
+    elif [ "$port" -lt 1 ]; then
+        return 1
+    elif [ "$port" -gt 65535 ]; then
+        return 1
+    fi
+}
+
 exponential(){
     local int="$1"
     local max="${2:-}"
