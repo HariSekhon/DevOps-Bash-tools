@@ -83,7 +83,7 @@ timestamp "Launching port forwarding to pod '$spark_driver_pod' port '$spark_por
 kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$spark_driver_pod" "$spark_port":"$spark_port" &
 pid=$!
 sleep 2
-if ! kill -0 "$pid"; then
+if ! kill -0 "$pid" 2>/dev/null; then
     die "ERROR: kubectl port-forward exited"
 fi
 echo
