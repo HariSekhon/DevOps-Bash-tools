@@ -62,7 +62,11 @@ pods="$(
     kubectl get pods ${namespace:+-n "$namespace"} \
                      "${filter_label[@]}" \
                      --field-selector=status.phase=Running |
-    ${grep_filter:-grep -E "$grep_filter" | }
+    if [ -n "$grep_filter" ]; then
+        grep -E "$grep_filter"
+    else
+        cat
+    fi |
     tail -n +2
 )"
 
