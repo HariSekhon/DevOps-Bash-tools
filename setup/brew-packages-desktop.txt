@@ -128,6 +128,7 @@ haproxy
 helm
 hexyl  # hex command line viewer - https://github.com/sharkdp/hexyl
 htop
+http-toolkit  # HTTP intercepting debugger
 hub
 #hugo  # static website generator - https://gohugo.io/getting-started/quick-start/
 id3v2  # mp3 tag cli editor
