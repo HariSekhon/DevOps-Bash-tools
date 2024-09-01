@@ -37,7 +37,7 @@ If OPEN_URL environment variable is set and this script is not run over SSH then
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<namespace> <pod_name_ERE_regex_or_key=value_label>]"
+usage_args="[<namespace> <pod_line_ERE_regex_or_key=value_label>]"
 
 help_usage "$@"
 
