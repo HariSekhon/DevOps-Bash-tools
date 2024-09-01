@@ -81,7 +81,11 @@ fi
 
 timestamp "Launching port forwarding to pod '$spark_driver_pod' port '$spark_port'"
 kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$spark_driver_pod" "$spark_port":"$spark_port" &
+pid=$!
 sleep 2
+if ! kill -0 "$pid"; then
+    die "ERROR: kubectl port-forward exited"
+fi
 echo
 url="http://localhost:$spark_port"
 timestamp "Spark UI is now available at: $url"
