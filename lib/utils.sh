@@ -804,6 +804,20 @@ startupwait(){
 # shellcheck disable=SC2119
 startupwait
 
+next_available_port(){
+    local local_port="${1:-1024}"
+    local next_port
+    while netstat -lnt | grep -q ":$local_port "; do
+        next_port="$((local_port + 1))"
+        timestamp "Local port '$local_port' in use, trying next port '$next_port'"
+        local_port="$next_port"
+        if [ "$local_port" -gt 65535 ]; then
+            die "ERROR: No local port found available"
+        fi
+    done
+    echo "$local_port"
+}
+
 when_ports_available(){
     local max_secs="${1:-}"
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
