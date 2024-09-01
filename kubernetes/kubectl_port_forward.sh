@@ -57,6 +57,8 @@ elif [ -n "$filter" ]; then
     grep_filter="$filter"
 fi
 
+export filter_label
+
 timestamp "Getting pods that match filter '$filter'"
 pods="$(
     kubectl get pods ${namespace:+-n "$namespace"} \
