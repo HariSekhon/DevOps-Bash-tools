@@ -127,7 +127,7 @@ if [ -z "$pod_port" ]; then
 fi
 
 if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
-    die "More than one port returned from pod '$pod', must specify FORWARD_PORT environment variable instead"
+    die "More than one port returned from pod '$pod', must specify POD_PORT environment variable instead"
 fi
 
 local_port="$pod_port"
