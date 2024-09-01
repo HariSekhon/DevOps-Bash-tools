@@ -41,7 +41,7 @@ usage_args="[<namespace> <pod_line_ERE_regex_or_key=value_label>]"
 
 help_usage "$@"
 
-max_args 1 "$@"
+max_args 2 "$@"
 
 namespace="${1:-}"
 filter="${2:-}"
