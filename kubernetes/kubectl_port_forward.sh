@@ -60,7 +60,7 @@ kube_config_isolate
 timestamp "Getting pods that match filter '$filter'"
 pods="$(
     kubectl get pods ${namespace:+-n "$namespace"} \
-                     "${filter_label[@:-]}" \
+                     "${filter_label[@]}" \
                      --field-selector=status.phase=Running |
     if [ -n "$grep_filter" ]; then
         grep -E "$grep_filter"
