@@ -57,8 +57,6 @@ elif [ -n "$filter" ]; then
     grep_filter="$filter"
 fi
 
-export filter_label
-
 timestamp "Getting pods that match filter '$filter'"
 pods="$(
     kubectl get pods ${namespace:+-n "$namespace"} \
@@ -97,7 +95,7 @@ else
     die "ERROR: No matching pods found"
 fi
 
-pod_port="$(kubectl get pod "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
+pod_port="$(kubectl get pod  ${namespace:+-n "$namespace"} "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
 
 if [ -z "$pod_port" ]; then
     die "Failed to determine port for pod '$pod'"
