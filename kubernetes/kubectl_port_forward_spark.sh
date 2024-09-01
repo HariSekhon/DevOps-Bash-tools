@@ -80,7 +80,7 @@ else
 fi
 
 local_port="$spark_port"
-while netstat -lnt | grep ":$local_port "; do
+while netstat -lnt | grep -q ":$local_port "; do
     timestamp "Local port '$local_port' in use, trying next port"
     ((local_port += 1))
     if [ "$local_port" -gt 65535 ]; then
