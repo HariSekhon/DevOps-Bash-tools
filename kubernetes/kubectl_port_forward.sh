@@ -27,6 +27,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Launches kubectl port-forward to a pod
 
+Optional second argument may specify a grep ERE regex on the pod line or
+a more specific key=value kubernetes label (the latter is preferable)
+
 If more than one matching pod is found, prompts with an interactive dialogue to choose one
 
 If OPEN_URL environment variable is set and this script is not run over SSH then automatically opens the Spark UI on localhost URL in the default browser
@@ -34,7 +37,7 @@ If OPEN_URL environment variable is set and this script is not run over SSH then
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<namespace> <pod_name_regex_or_key=value_label>]"
+usage_args="[<namespace> <pod_name_ERE_regex_or_key=value_label>]"
 
 help_usage "$@"
 
