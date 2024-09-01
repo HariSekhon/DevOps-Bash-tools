@@ -32,7 +32,8 @@ a more specific key=value kubernetes label (the latter is preferable)
 
 If more than one matching pod is found, prompts with an interactive dialogue to choose one
 
-If OPEN_URL environment variable is set and this script is not run over SSH then automatically opens the Spark UI on localhost URL in the default browser
+If OPEN_URL environment variable is set and this script is not run over SSH then automatically
+opens the UI on localhost URL in the default browser
 "
 
 # used by usage() in lib/utils.sh
@@ -101,7 +102,7 @@ local_port="$(next_available_port "$pod_port")"
 timestamp "Launching port forwarding to pod '$pod' port '$pod_port' to local port '$local_port'"
 kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$pod" "$local_port":"$pod_port" &
 
-pid=$!
+pid="$!"
 
 sleep 2
 
