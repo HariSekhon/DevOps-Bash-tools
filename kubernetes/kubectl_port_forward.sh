@@ -49,13 +49,13 @@ filter="${2:-}"
 filter_label=()
 grep_filter=""
 
-kube_config_isolate
-
 if [[ "$filter" =~ = ]]; then
     filter_label=(-l "$filter")
 elif [ -n "$filter" ]; then
     grep_filter="$filter"
 fi
+
+kube_config_isolate
 
 timestamp "Getting pods that match filter '$filter'"
 pods="$(
