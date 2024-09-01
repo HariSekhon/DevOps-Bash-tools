@@ -48,10 +48,6 @@ filter="${2:-}"
 filter_label=()
 grep_filter=""
 
-if [ -z "$pod_port" ]; then
-    die "Failed to determine port for pod '$pod'"
-fi
-
 kube_config_isolate
 
 if [[ "$filter" =~ = ]]; then
@@ -95,6 +91,10 @@ else
 fi
 
 pod_port="$(kubectl get pod "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
+
+if [ -z "$pod_port" ]; then
+    die "Failed to determine port for pod '$pod'"
+fi
 
 local_port="$(next_available_port "$pod_port")"
 
