@@ -56,7 +56,8 @@ kube_current_context(){
 
 kube_current_namespace(){
     kubectl config get-contexts |
-    awk "/$(kube_current_context)/ {print \$NF}"
+    { grep -F "$(kube_current_context)" || die "Failed to get current context"; } |
+    awk '{print $NF}'
 }
 
 kube_namespace(){
