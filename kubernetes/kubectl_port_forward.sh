@@ -25,75 +25,95 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Launches kubectl port-forward to Spark driver pod for Spark UI
+Launches kubectl port-forward to a pod
 
-If more than one Spark driver pod is found, prompts with an interactive dialogue to choose one
+If more than one matching pod is found, prompts with an interactive dialogue to choose one
 
-On Mac automatically opens the Spark UI on localhost URL in the default browser
+If OPEN_URL environment variable is set and this script is not run over SSH then automatically opens the Spark UI on localhost URL in the default browser
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<namespace>]"
+usage_args="[<namespace> <pod_name_regex_or_key=value_label>]"
 
 help_usage "$@"
 
 max_args 1 "$@"
 
 namespace="${1:-}"
+filter="${2:-}"
+filter_label=()
+grep_filter=""
 
-spark_port=4040
+if [ -z "$pod_port" ]; then
+    die "Failed to determine port for pod '$pod'"
+fi
 
 kube_config_isolate
 
-timestamp "Getting Spark pods"
-spark_driver_pods="$(
+if [[ "$filter" =~ = ]]; then
+    filter_label=(-l "$filter")
+elif [ -n "$filter" ]; then
+    grep_filter="$filter"
+fi
+
+timestamp "Getting pods that match filter '$filter'"
+pods="$(
     kubectl get pods ${namespace:+-n "$namespace"} \
-                     -l spark-role=driver \
+                     "${filter_label[@]}" \
                      --field-selector=status.phase=Running |
+    ${grep_filter:-grep -E "$grep_filter" | }
     tail -n +2
 )"
 
-if [ -z "$spark_driver_pods" ]; then
-    die "No Spark driver pods found"
+if [ -z "$pods" ]; then
+    die "No matching pods found"
 fi
 
-num_lines="$(wc -l <<< "$spark_driver_pods")"
+num_lines="$(wc -l <<< "$pods")"
 
 if [ "$num_lines" -eq 1 ]; then
-    timestamp "Only one Spark driver pod found"
-    spark_driver_pod="$(awk '{print $1}' <<< "$spark_driver_pods")"
+    timestamp "Only one matching Kubernetes pod found"
+    pod="$(awk '{print $1}' <<< "$pods")"
 elif [ "$num_lines" -gt 1 ]; then
-    timestamp "Multiple Spark driver pods found, launching selection menu"
+    timestamp "Multiple Kubernetes pods found, launching selection menu"
     menu_items=()
     while read -r line; do
         menu_items+=("$line" "")
-    done <<< "$spark_driver_pods"
-    chosen_pod="$(dialog --menu "Choose which Spark pod to forward to:" "$LINES" "$COLUMNS" "$LINES" "${menu_items[@]}" 3>&1 1>&2 2>&3)"
+    done <<< "$pods"
+    chosen_pod="$(dialog --menu "Choose which Kubernetes pod to forward to:" "$LINES" "$COLUMNS" "$LINES" "${menu_items[@]}" 3>&1 1>&2 2>&3)"
     if [ -z "$chosen_pod" ]; then
         timestamp "Cancelled, aborting..."
         exit 1
     fi
-    spark_driver_pod="$(awk '{print $1}' <<< "$chosen_pod")"
+    pod="$(awk '{print $1}' <<< "$chosen_pod")"
 else
-    die "ERROR: No Spark driver pods found"
+    die "ERROR: No matching pods found"
 fi
 
-local_port="$(next_available_port "$spark_port")"
+pod_port="$(kubectl get pod "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
 
-timestamp "Launching port forwarding to pod '$spark_driver_pod' port '$spark_port' to local port '$local_port'"
-kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$spark_driver_pod" "$local_port":"$spark_port" &
+local_port="$(next_available_port "$pod_port")"
+
+timestamp "Launching port forwarding to pod '$pod' port '$pod_port' to local port '$local_port'"
+kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$pod" "$local_port":"$pod_port" &
+
 pid=$!
+
 sleep 2
+
 if ! kill -0 "$pid" 2>/dev/null; then
     die "ERROR: kubectl port-forward exited"
 fi
-echo
-url="http://localhost:$local_port"
-timestamp "Spark UI is now available at: $url"
 
-if is_mac; then
+if [ -z "${SSH_CONNECTION:-}" ]; then
     echo
-    timestamp "Opening URL:  $url"
-    open "$url"
+    url="http://localhost:$local_port"
+    timestamp "Port-forwarded UI is now available at: $url"
+
+    if [ -n "${OPEN_URL:-}" ] && is_mac; then
+        echo
+        timestamp "Opening URL:  $url"
+        open "$url"
+    fi
 fi
