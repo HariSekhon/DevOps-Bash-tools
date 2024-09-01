@@ -657,7 +657,8 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
   - `kubectl_dnsutils.sh`
   - `kubectl_gcloud_sdk.sh`
   - `kubectl_run_sa.sh` - launch a quick pod with the given service account to test private repo pull & other permissions
-- `kubectl_port_forward_spark.sh` - launches `kubectl port-forward` to Spark driver pod for Spark UI. If more than one Spark driver pod is found, prompts with an interactive dialogue to choose one. On Mac automatically opens the Spark UI on localhost URL in the default browser
+- `kubectl_port_forward.sh` - launches `kubectl port-forward` to a given pod's port with an optional label or name filter. If more than one pod is found, prompts with an interactive dialogue to choose one. Optionally automatically opens the forwarded localhost URL in the default browser
+  - `kubectl_port_forward_spark.sh` - does the above for Spark UI
 - `helm_template.sh` - templates a Helm chart for Kustomize deployments
 - `kustomize_parse_helm_charts.sh` - parses the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files into TSV format for further shell pipe processing
 - `kustomize_install_helm_charts.sh` - installs the [Helm](https://helm.sh/) charts from one or more `kustomization.yaml` files the old fashioned Helm CLI way so that tools like [Nova](https://github.com/FairwindsOps/nova) can be used to detect outdated charts (used in [Kubernetes-configs](https://github.com/HariSekhon/Kubernetes-configs) repo's [CI](https://github.com/HariSekhon/Kubernetes-configs/actions/workflows/nova.yaml))
