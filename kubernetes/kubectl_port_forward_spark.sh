@@ -79,14 +79,7 @@ else
     die "ERROR: No Spark driver pods found"
 fi
 
-local_port="$spark_port"
-while netstat -lnt | grep -q ":$local_port "; do
-    timestamp "Local port '$local_port' in use, trying next port"
-    ((local_port += 1))
-    if [ "$local_port" -gt 65535 ]; then
-        die "ERROR: No local port found available"
-    fi
-done
+local_port="$(next_available_port "$spark_port")"
 
 timestamp "Launching port forwarding to pod '$spark_driver_pod' port '$spark_port' to local port '$local_port'"
 kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$spark_driver_pod" "$local_port":"$spark_port" &
