@@ -46,11 +46,26 @@ max_args 2 "$@"
 
 namespace="${1:-}"
 filter="${2:-}"
-filter_label=()
+#filter_label=()
+filter_label=""
 grep_filter=""
 
 if [[ "$filter" =~ = ]]; then
-    filter_label=(-l "$filter")
+    #filter_label=(-l "$filter")
+    #
+    # this works on Bash 3 set -u but breaks on Bash 4
+    #
+    #   "${filter_label[@]}"
+    #
+    # the fix on Bash 4 is
+    #
+    #   "${filter_label[@:-]}"
+    #
+    # but that isn't recognized on Bash 3
+    #
+    # portable workaround, convert to string and don't quote
+    #
+    filter_label="-l $filter"
 elif [ -n "$filter" ]; then
     grep_filter="$filter"
 fi
@@ -58,9 +73,11 @@ fi
 kube_config_isolate
 
 timestamp "Getting pods that match filter '$filter'"
+# need splitting due to above behavioural difference between Bash 3 and Bash 4
+# shellcheck disable=SC2086
 pods="$(
     kubectl get pods ${namespace:+-n "$namespace"} \
-                     "${filter_label[@]}" \
+                     $filter_label \
                      --field-selector=status.phase=Running |
     if [ -n "$grep_filter" ]; then
         grep -E "$grep_filter"
