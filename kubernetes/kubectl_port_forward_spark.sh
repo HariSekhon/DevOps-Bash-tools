@@ -80,7 +80,7 @@ else
 fi
 
 timestamp "Launching port forwarding to pod '$spark_driver_pod' port '$spark_port'"
-echo kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$spark_driver_pod" "$spark_port":"$spark_port"
+kubectl port-forward --address 127.0.0.1 ${namespace:+-n "$namespace"} "$spark_driver_pod" "$spark_port":"$spark_port" &
 
 if is_mac; then
     echo
