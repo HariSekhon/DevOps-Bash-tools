@@ -119,6 +119,7 @@ if [ -n "${POD_PORT:-}" ]; then
     if ! is_port "$POD_PORT"; then
         die "Environment variable POD_PORT must be a valid port number integer"
     fi
+    pod_port="$POD_PORT"
 else
     pod_port="$(kubectl get pod  ${namespace:+-n "$namespace"} "$pod" -o jsonpath='{.spec.containers[*].ports[*].containerPort}')"
 fi
