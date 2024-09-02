@@ -105,6 +105,9 @@ elif [ "$num_lines" -gt 1 ]; then
     while read -r line; do
         menu_items+=("$line" "")
     done <<< "$pods"
+    if [ -z "${menu_items[*]}" ]; then
+        die "Pod menu generation failed: empty"
+    fi
     chosen_pod="$(dialog --menu "Choose which Kubernetes pod to forward to:" "$LINES" "$COLUMNS" "$LINES" "${menu_items[@]}" 3>&1 1>&2 2>&3)"
     if [ -z "$chosen_pod" ]; then
         timestamp "Cancelled, aborting..."
@@ -134,6 +137,9 @@ if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
     while read -r line; do
         menu_items+=("$line" "")
     done < <(tr ' ' '\n' <<< "$pod_port" | sed 's/^[[:space:]]*$/d')
+    if [ -z "${menu_items[*]}" ]; then
+        die "Port menu generation failed: empty"
+    fi
     chosen_port="$(dialog --menu "Choose which port to forward to:" "$LINES" "$COLUMNS" "$LINES" "${menu_items[@]}" 3>&1 1>&2 2>&3)"
     if [ -z "$chosen_port" ]; then
         timestamp "Cancelled, aborting..."
