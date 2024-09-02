@@ -128,6 +128,7 @@ if [ -z "$pod_port" ]; then
 fi
 
 if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
+    timestamp "More than one port found on the pod, prompting for selection"
     menu_items=()
     while read -r line; do
         menu_items+=("$line" "")
