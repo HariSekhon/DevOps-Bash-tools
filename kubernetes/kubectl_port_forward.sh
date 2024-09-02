@@ -32,7 +32,8 @@ a more specific key=value kubernetes label (the latter is preferable)
 
 If more than one matching pod is found, prompts with an interactive dialogue to choose one
 
-If more than one pod port is found, you must specify the environment variable POD_PORT instead
+If more than one pod port is found, you will be prompted with another interactive dialog
+unless you can define the environment variable POD_PORT instead
 
 If OPEN_URL environment variable is set and this script is not run over SSH then automatically
 opens the UI on localhost URL in the default browser
@@ -127,7 +128,15 @@ if [ -z "$pod_port" ]; then
 fi
 
 if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
-    die "More than one port returned from pod '$pod', must specify POD_PORT environment variable instead"
+    while read -r line; do
+        menu_items+=("$line" "")
+    done < <(tr ' ' '\n' <<< "$pods" | sed 's/^[[;space:]]*$/d')
+    chosen_port="$(dialog --menu "Choose which port to forward to:" "$LINES" "$COLUMNS" "$LINES" "${menu_items[@]}" 3>&1 1>&2 2>&3)"
+    if [ -z "$chosen_port" ]; then
+        timestamp "Cancelled, aborting..."
+        exit 1
+    fi
+    pod_port="$chosen_port"
 fi
 
 local_port="$pod_port"
