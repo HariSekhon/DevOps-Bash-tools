@@ -128,9 +128,10 @@ if [ -z "$pod_port" ]; then
 fi
 
 if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
+    menu_items=()
     while read -r line; do
         menu_items+=("$line" "")
-    done < <(tr ' ' '\n' <<< "$pods" | sed 's/^[[;space:]]*$/d')
+    done < <(tr ' ' '\n' <<< "$ports" | sed 's/^[[;space:]]*$/d')
     chosen_port="$(dialog --menu "Choose which port to forward to:" "$LINES" "$COLUMNS" "$LINES" "${menu_items[@]}" 3>&1 1>&2 2>&3)"
     if [ -z "$chosen_port" ]; then
         timestamp "Cancelled, aborting..."
