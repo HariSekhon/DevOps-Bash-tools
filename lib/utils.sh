@@ -1241,7 +1241,7 @@ is_regex(){
     [[ "$regex" =~ $regex ]]
 }
 
-is_port_number(){
+is_port(){
     local port="$1"
     if ! is_int "$port"; then
         return 1
