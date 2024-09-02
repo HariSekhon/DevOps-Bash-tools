@@ -44,4 +44,6 @@ namespace="$1"
 
 export OPEN_URL=1
 
+export POD_PORT=4040
+
 "$srcdir/kubectl_port_forward.sh" "$namespace" spark-role=driver
