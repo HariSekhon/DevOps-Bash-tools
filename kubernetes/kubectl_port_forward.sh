@@ -136,7 +136,7 @@ if [ "$(awk '{print NF}' <<< "$pod_port")" -gt 1 ]; then
     menu_items=()
     while read -r line; do
         menu_items+=("$line" "")
-    done < <(tr ' ' '\n' <<< "$pod_port" | sed 's/^[[:space:]]*$/d')
+    done < <(tr ' ' '\n' <<< "$pod_port" | sed '/^[[:space:]]*$/d')
     if [ "${#menu_items[@]}" -eq 0 ]; then
         die "Port menu generation failed: empty"
     fi
