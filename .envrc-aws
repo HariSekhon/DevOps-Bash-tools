@@ -47,7 +47,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -z "${CI:-}" ]; then
     export AWS_PROFILE="default"
 
-    if ! aws sts get-caller-identity; then
+    if ! aws sts get-caller-identity --output table; then
         if sed -n '/profile.*smbu/,/^[[:space:]]*$/p' ~/.aws/config | grep -q sso_start_url; then
             aws sso login
         fi
