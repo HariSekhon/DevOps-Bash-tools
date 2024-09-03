@@ -25,6 +25,10 @@ usage_description="
 Generates a markdown index list from the headings in a given markdown file such as README.md
 
 If no file is given but README.md is found in the \$PWD, then uses that
+
+Defaults to 2 space indentation, but if you want to override that to shut up mdl rule, you can:
+
+    export MARKDOWN_INDENTATION=3
 "
 
 # used by usage() in lib/utils.sh
@@ -37,7 +41,15 @@ max_args 1 "$@"
 
 markdown_file="${1:-README.md}"
 
-indent_width=2
+# prefer 2 but working around this annoying:
+#
+#   https://github.com/markdownlint/markdownlint/blob/main/docs/RULES.md#md007---unordered-list-indentation
+#
+indent_width="${MARKDOWN_INDENTATION:-2}"
+
+if ! is_int "$indent_width"; then
+    die "Indent width must be a valid integer, not: $indent_width"
+fi
 
 if ! [ -f "$markdown_file" ]; then
     die "File not found: $markdown_file"
@@ -64,9 +76,9 @@ sed '/^[#[:space:]]*Index$/d' |
 while read -r line; do
     level="$(grep -Eo '^#+' <<< "$line" | tr -d '[:space:]' | wc -c)"
     level="${level//[[:space:]]}"
-    if [ "$level" -gt 3 ]; then
-        continue
-    fi
+    #if [ "$level" -gt 3 ]; then
+    #    continue
+    #fi
     title="${line##*# }"
     # create relative links of just the anchor and not the repo URL prefix, it's more portable
     link="$(
