@@ -211,6 +211,7 @@ pigz  # parallel gzip
 pinentry
 pinentry-mac
 pip-completion
+pipenv
 pipx
 #pk11-kit
 pluto  # by FairwindsOps - detect outdated Kubernetes API objects
