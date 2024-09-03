@@ -52,6 +52,7 @@ if [ -z "${CI:-}" ]; then
 
     if ! aws sts get-caller-identity --output table; then
         if sed -n '/profile.*smbu/,/^[[:space:]]*$/p' ~/.aws/config | grep -q sso_start_url; then
+            echo
             aws sso login
         fi
     fi
