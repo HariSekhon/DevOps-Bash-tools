@@ -24,6 +24,7 @@ Jenkinsfile
 .gitlab-ci.yml
 .mdlrc
 .mdl.rb
+.pre-commit-config.yaml
 .pylintrc
 #.scrutinizer.yml
 .semaphore/semaphore.yml
