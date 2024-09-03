@@ -22,6 +22,8 @@ Jenkinsfile
 .cirrus.yml
 .drone.yml
 .gitlab-ci.yml
+.mdlrc
+.mdl.rb
 .pylintrc
 #.scrutinizer.yml
 .semaphore/semaphore.yml
