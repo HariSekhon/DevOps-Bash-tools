@@ -200,7 +200,7 @@ nmap          ;H :call WriteHelp()<CR>
 " this inserts Hr literally
 "imap <silent> <C-H> :Hr<CR>
 nmap <silent> ;I :PluginInstall<CR>
-nmap          ;i :'<,'>!readme_generate_index.sh "%" <CR>
+nmap          ;i :! idea % <CR> :wq <CR>
 nmap <silent> ;j :JHr<CR>
 nmap          ;k :w<CR> :! check_kubernetes_yaml.sh "%" <CR>
 "nmap <silent> ;' :call Sq()<CR>
