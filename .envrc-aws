@@ -56,6 +56,7 @@ if [ -z "${CI:-}" ]; then
             aws sso login
         fi
     fi
+    echo
 
 fi
 
