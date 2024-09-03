@@ -151,6 +151,7 @@ pidgin
 pidgin-sipe
 pigz  # parallel gzip
 piozone
+pipenv
 pound
 psh
 psmisc  # for pstree
