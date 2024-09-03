@@ -315,6 +315,7 @@ pigz  # parallel gzip
 pinentry
 piozone
 pipebench
+pipenv
 pipeworks
 pkcrack
 #portsentry
