@@ -247,6 +247,7 @@ pidgin-sipe
 pigz  # parallel gzip
 pinentry-gtk
 piozone
+#pipenv
 pound
 psh
 psmisc  # for pstree
