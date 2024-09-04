@@ -854,4 +854,10 @@ mdl:
 
 .PHONY: repos
 repos:
+	@if ! grep -q "OTHER_REPOS_START" README.md || \
+		! grep -q "OTHER_REPOS_END"   README.md || \
+		! grep -q "More Core Repos"   README.md; then \
+		echo "Adding More Core Repos section to README.md"; \
+		printf '\n## More Core Repos\n\n<!-- OTHER_REPOS_START -->\n\n<!-- OTHER_REPOS_END -->\n' >> README.md; \
+	fi; \
 	markdown_replace_repos.sh
