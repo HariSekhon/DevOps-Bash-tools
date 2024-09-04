@@ -99,7 +99,7 @@ tac |
 sed '/./,$!d' |
 tac > "$other_repos_tmp2"
 
-unalias mv &>/dev/null || :
+#unalias mv &>/dev/null || :
 mv -f "$other_repos_tmp2" "$other_repos_tmp"
 
 timestamp "Replacing other other repos section in file: $markdown_file"
@@ -122,7 +122,7 @@ sed -n "
 
 mv -f "$markdown_tmp" "$markdown_file"
 
-unalias rm &>/dev/null || :
+#unalias rm &>/dev/null || :
 rm -f "$other_repos_tmp"
 
 timestamp "Replaced other repos section in file: $markdown_file"
