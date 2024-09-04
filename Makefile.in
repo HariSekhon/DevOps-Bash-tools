@@ -851,3 +851,7 @@ mdl:
 #.PHONY: wcall
 #wcall:
 #	find . -type f -not -path '*.git*' -exec sed 's/#.*//;/^[[:space:]]*$$/d' {} \; | wc -l
+
+.PHONY: repos
+repos:
+	markdown_replace_repos.sh
