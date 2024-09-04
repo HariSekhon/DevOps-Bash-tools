@@ -87,6 +87,7 @@ sed -n "
     /INDEX_END/,$ p
 " "$markdown_file" > "$markdown_tmp"
 
+unalias mv &>/dev/null || :
 mv -f "$markdown_tmp" "$markdown_file"
 
 rm -f "$index_tmp"
