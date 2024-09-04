@@ -28,7 +28,7 @@ Replaces the repos block of a given markdown file
 
 Pulls from here by default if no url is specified:
 
-    $url
+    $default_url
 
 Requires the markdown file to have lines with
 
