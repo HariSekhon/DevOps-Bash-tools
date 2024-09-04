@@ -87,10 +87,10 @@ sed -n "
     /INDEX_END/,$ p
 " "$markdown_file" > "$markdown_tmp"
 
-unalias mv &>/dev/null || :
+#unalias mv &>/dev/null || :
 mv -f "$markdown_tmp" "$markdown_file"
 
-unalias rm &>/dev/null || :
+#unalias rm &>/dev/null || :
 rm -f "$index_tmp"
 
 timestamp "Replaced index in file: $markdown_file"
