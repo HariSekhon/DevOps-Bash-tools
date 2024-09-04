@@ -56,6 +56,7 @@ markdown_file="${1:-README.md}"
 url="${2:-$default_url}"
 
 other_repos_tmp="$(mktemp)"
+other_repos_tmp2="$(mktemp)"
 
 markdown_tmp="$(mktemp)"
 
@@ -84,7 +85,22 @@ for x in REPOS_START REPOS_END; do
     fi
 done
 
-sed -i -n '/REPOS_START/,/REPOS_END/ p' "$other_repos_tmp"
+# copy out content between REPOS_START and REPOS_END lines
+sed -n '/REPOS_START/,/REPOS_END/{
+    /REPOS_START/,/REPOS_END/{
+        /REPOS_START/b;
+        /REPOS_END/b;
+        p;
+    }
+}' "$other_repos_tmp" |
+# strip leading and trailing whitespace lines
+sed '/./,$!d' |
+tac |
+sed '/./,$!d' |
+tac > "$other_repos_tmp2"
+
+unalias mv &>/dev/null || :
+mv -f "$other_repos_tmp2" "$other_repos_tmp"
 
 timestamp "Replacing other other repos section in file: $markdown_file"
 
