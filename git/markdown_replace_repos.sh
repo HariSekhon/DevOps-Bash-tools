@@ -122,6 +122,7 @@ sed -n "
 
 mv -f "$markdown_tmp" "$markdown_file"
 
+unalias rm &>/dev/null || :
 rm -f "$other_repos_tmp"
 
 timestamp "Replaced other repos section in file: $markdown_file"
