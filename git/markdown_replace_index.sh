@@ -90,6 +90,7 @@ sed -n "
 unalias mv &>/dev/null || :
 mv -f "$markdown_tmp" "$markdown_file"
 
+unalias rm &>/dev/null || :
 rm -f "$index_tmp"
 
 timestamp "Replaced index in file: $markdown_file"
