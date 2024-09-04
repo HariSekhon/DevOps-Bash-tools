@@ -117,6 +117,7 @@ git-filter-repo  # recommended to use instead of 'git filter-branch' in its man 
 #gnupg
 gnupg2
 gnuplot
+gping  # graphs pings in terminal interactive ascii art
 gradle
 #gradle-completion  # forces bash-completion which slows down my shells
 graphviz  # for the 'dot' command (use with terraform graph), and also github.com/HariSekhon/Diagrams-as-Code
