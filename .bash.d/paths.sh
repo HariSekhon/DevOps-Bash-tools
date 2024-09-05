@@ -161,7 +161,8 @@ if [ -d "/Applications/IntelliJ IDEA CE.app/Contents/MacOS" ]; then
 fi
 
 if [ -d "/Applications/Visual Studio Code.app" ]; then
-    add_PATH "/Applications/Visual Studio Code.app/Contents/MacOS"  # Electron IDE is here
+    # don't need this one as you can just 'code /path/to/filename' to open the file in VS Code
+    #add_PATH "/Applications/Visual Studio Code.app/Contents/MacOS"  # Electron IDE is here
     add_PATH "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"  # code CLI is here
 fi
 
