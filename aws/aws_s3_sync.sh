@@ -108,3 +108,6 @@ for ((i=0; i < sources_len; i++)); do
     timestamp "Syncing AWS S3 '$src' to '$dest'"
     aws s3 sync "$src" "$dest" "$@"
 done
+
+echo
+timestamp "AWS S3 Sync completed"
