@@ -79,6 +79,7 @@ else
 fi
 sources_len="${#sources[@]}"
 timestamp "$sources_len sources loaded"
+echo
 
 if [ -f "$destination" ]; then
     timestamp "Loading destinations from file '$destination'"
@@ -91,6 +92,7 @@ else
 fi
 destinations_len="${#destinations[@]}"
 timestamp "$destinations_len destinations loaded"
+echo
 
 if [ "$sources_len" != "$destinations_len" ]; then
     die "ERROR: length of sources and destinations arrays of paths are not equal in length: sources ($sources_len) vs destinations ($destinations_len)"
