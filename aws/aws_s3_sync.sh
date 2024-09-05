@@ -37,6 +37,9 @@ You can populate the source and destination path files using native Bash like th
     echo s3://uat-landing-bucket/transactions/2023-06-{20..30} | tr ' ' '\n' > destinations.txt
 
 
+Consider adding the --dryrun option to the end of the script args when running it the first time
+
+
 $usage_aws_cli_required
 "
 
