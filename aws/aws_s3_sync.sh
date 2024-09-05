@@ -60,7 +60,12 @@ sources=()
 destinations=()
 
 decomment(){
-    sed 's/#.*$//; /^[[:space:]]*$/d' "$1"
+    sed '
+        s/#.*$//;
+        s/^[[:space:]]*//;
+        s/[[:space:]]*$//;
+        /^[[:space:]]*$/d
+    ' "$1"
 }
 
 validate_s3_url(){
