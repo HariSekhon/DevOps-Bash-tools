@@ -62,7 +62,7 @@ help_usage "$@"
 min_args 2 "$@"
 
 sources_file="$1"
-destination="$2"
+destinations_file="$2"
 shift || :
 shift || :
 
@@ -99,14 +99,14 @@ sources_len="${#sources[@]}"
 timestamp "$sources_len sources loaded"
 echo
 
-if ! [ -f "$destination" ]; then
-    die "File not found: $destination"
+if ! [ -f "$destinations_file" ]; then
+    die "File not found: $destinations_file"
 fi
-timestamp "Loading destinations from file '$destination'"
+timestamp "Loading destinations from file '$destinations_file'"
 while IFS= read -r line; do
     validate_s3_url "$line"
     destinations+=("$line")
-done < <(decomment "$destination")
+done < <(decomment "$destinations_file")
 destinations_len="${#destinations[@]}"
 timestamp "$destinations_len destinations loaded"
 echo
