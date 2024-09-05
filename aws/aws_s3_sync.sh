@@ -38,7 +38,7 @@ For convenience:
   - can disable this by 'export AWS_S3_SYNC_DIFFERENT_PATHS=true' before running this script if you really intend for
     the destination paths to be different to the source paths
 
-These two checks help prevent off-by-one human errors missing one path and spraying data to the wrong directories
+These last two checks help prevent off-by-one human errors missing one path and spraying data to the wrong directories
 
 If the arguments given are not files, assumes them to be single literal S3 paths
 
