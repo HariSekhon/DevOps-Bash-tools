@@ -60,7 +60,7 @@ decomment(){
     sed 's/#.*$//; /^[[:space:]]*$/d' "$1"
 }
 
-validate_s3_path(){
+validate_s3_url(){
     local url="$1"
     if ! is_s3_url "$url"; then
         die "Invalid S3 URL given: $url"
@@ -72,7 +72,7 @@ validate_s3_path(){
 if [ -f "$source" ]; then
     timestamp "Loading sources from file '$source'"
     while IFS= read -r line; do
-        validate_s3_path "$line"
+        validate_s3_url "$line"
         sources+=("$line")
     done < <(decomment "$source")
 else
@@ -84,7 +84,7 @@ timestamp "$sources_len sources loaded"
 if [ -f "$destination" ]; then
     timestamp "Loading destinations from file '$destination'"
     while IFS= read -r line; do
-        validate_s3_path "$line"
+        validate_s3_url "$line"
         destinations+=("$line")
     done < <(decomment "$destination")
     destinations=("$destination")
