@@ -761,6 +761,10 @@ warning(){
     warn "$@"
 }
 
+error(){
+    timestamp "ERROR: $*"
+}
+
 log(){
     if is_verbose; then
         timestamp "$@"
