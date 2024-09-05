@@ -123,6 +123,7 @@ if [ "${AWS_S3_SYNC_DIFFERENT_PATHS:-}" != true ]; then
             die "If this is really intentional, 'export AWS_S3_SYNC_DIFFERENT_PATHS=true' before running this script"
         fi
     done
+    echo
 fi
 
 for ((i=0; i < sources_len; i++)); do
