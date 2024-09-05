@@ -116,8 +116,10 @@ if [ "${AWS_S3_SYNC_DIFFERENT_PATHS:-}" != true ]; then
     for ((i=0; i < sources_len; i++)); do
         src="${sources[i]}"
         dest="${destinations[i]}"
-        src_path="${src##s3://[^/]*}"
-        dest_path="${dest##s3://[^/]*}"
+        src_path="${src#s3://}"
+        src_path="${src_path#*/}"
+        dest_path="${dest#s3://}"
+        dest_path="${dest_path#*/}"
         if [ "$src_path" != "$dest_path" ]; then
             warn "Source path suffix '$src' does not match destination path suffix '$dest'"
             die "If this is really intentional, 'export AWS_S3_SYNC_DIFFERENT_PATHS=true' before running this script"
