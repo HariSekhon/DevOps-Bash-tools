@@ -61,7 +61,7 @@ help_usage "$@"
 
 min_args 2 "$@"
 
-source="$1"
+sources_file="$1"
 destination="$2"
 shift || :
 shift || :
@@ -87,14 +87,14 @@ validate_s3_url(){
 
 # initially deduplicated this to a load_file() function but it turns out mapfile is only Bash 4+
 # and Bash 3 has no native array passing, requiring array pass-by-name string and ugly evals
-if ! [ -f "$source" ]; then
-    die "File not found: $source"
+if ! [ -f "$sources_file" ]; then
+    die "File not found: $sources_file"
 fi
-timestamp "Loading sources from file '$source'"
+timestamp "Loading sources from file '$sources_file'"
 while IFS= read -r line; do
     validate_s3_url "$line"
     sources+=("$line")
-done < <(decomment "$source")
+done < <(decomment "$sources_file")
 sources_len="${#sources[@]}"
 timestamp "$sources_len sources loaded"
 echo
