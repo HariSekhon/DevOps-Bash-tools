@@ -113,7 +113,7 @@ if [ "$sources_len" != "$destinations_len" ]; then
 fi
 
 if [ "${AWS_S3_SYNC_DIFFERENT_PATHS:-}" != true ]; then
-    timestamp "Sanity check: Verifying source and destination suffixes are the same"
+    timestamp "Sanity check: Verifying source and destination suffix paths are the same"
     for ((i=0; i < sources_len; i++)); do
         src="${sources[i]}"
         dest="${destinations[i]}"
