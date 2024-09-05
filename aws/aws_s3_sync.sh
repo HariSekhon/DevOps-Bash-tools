@@ -81,8 +81,9 @@ decomment(){
 }
 
 validate_s3_url(){
-    if ! is_s3_url "$1"; then
-        die "Invalid S3 URL given: $1"
+    local url="$1"
+    if ! is_s3_url "$url"; then
+        die "Invalid S3 URL given: $url"
     fi
 }
 
