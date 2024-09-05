@@ -121,6 +121,7 @@ if [ "${AWS_S3_SYNC_DIFFERENT_PATHS:-}" != true ]; then
         dest_path="${dest#s3://}"
         dest_path="${dest_path#*/}"
         if [ "$src_path" != "$dest_path" ]; then
+            echo
             error "Source path suffix '$src' does not match destination path suffix '$dest'"
             echo
             die "If this is really intentional, 'export AWS_S3_SYNC_DIFFERENT_PATHS=true' before running this script"
