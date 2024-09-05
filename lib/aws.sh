@@ -25,8 +25,6 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_aws_cli_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
 # S3 URL regex with s3:// prefix
-# used by client code
-# shellcheck disable=SC2034
 s3_regex='s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)$|^s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)'
 
 aws_account_id(){
@@ -146,4 +144,9 @@ aws_validate_volume_id(){
     Invalid volume ID given, expected format: vol-xxxxxxxxxxxxxxxxx,
                                    but given: $volume_id"
     fi
+}
+
+is_s3_url(){
+    local url="$1"
+    [[ "$url" =~ ^$s3_regex$ ]]
 }
