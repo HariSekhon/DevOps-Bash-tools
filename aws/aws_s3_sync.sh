@@ -26,8 +26,19 @@ Syncs multiple AWS S3 URLs from file lists
 
 Needed because clients often request copies of data ranges of multiple directories between environment buckets for test data
 
-For multiple source and destinations specify text files containing the paths, one line per path, with # comment lines ignored
-and leading and trailing whitespace also stripped for convenience
+For multiple source and destinations specify text files containing the paths, one line per path
+
+For convenience:
+
+- hash # comment lines are ignored
+- strips leading and trailing whitespaces
+- validates each S3 URL's format
+- validates the source and destination list lengths are the same
+- validates each source and destination path suffix is the same
+  - can disable this by 'export AWS_S3_SYNC_DIFFERENT_PATHS=true' before running this script if you really intend for
+    the destination paths to be different to the source paths
+
+These two checks help prevent off-by-one human errors missing one path and spraying data to the wrong directories
 
 If the arguments given are not files, assumes them to be single literal S3 paths
 
@@ -39,11 +50,6 @@ You can populate the source and destination path files using native Bash like th
 
 
 Consider adding the --dryrun option to the end of the script args when running it the first time
-
-As an added level of protection, script also checks that the source and destination paths are the same and errors out if not.
-If you source and destination paths really are intended to be different, then set this before running this script:
-
-    export AWS_S3_SYNC_DIFFERENT_PATHS=true
 
 
 $usage_aws_cli_required
