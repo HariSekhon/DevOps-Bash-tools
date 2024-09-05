@@ -40,8 +40,6 @@ For convenience:
 
 These last two checks help prevent off-by-one human errors missing one path and spraying data to the wrong directories
 
-If the arguments given are not files, assumes them to be single literal S3 paths
-
 You can populate the source and destination path files using native Bash like this:
 
     echo s3://prod-landing-bucket/transactions/2023-06-{20..30} | tr ' ' '\n' > sources.txt
@@ -89,28 +87,26 @@ validate_s3_url(){
 
 # initially deduplicated this to a load_file() function but it turns out mapfile is only Bash 4+
 # and Bash 3 has no native array passing, requiring array pass-by-name string and ugly evals
-if [ -f "$source" ]; then
-    timestamp "Loading sources from file '$source'"
-    while IFS= read -r line; do
-        validate_s3_url "$line"
-        sources+=("$line")
-    done < <(decomment "$source")
-else
-    sources=("$source")
+if ! [ -f "$source" ]; then
+    die "File not found: $source"
 fi
+timestamp "Loading sources from file '$source'"
+while IFS= read -r line; do
+    validate_s3_url "$line"
+    sources+=("$line")
+done < <(decomment "$source")
 sources_len="${#sources[@]}"
 timestamp "$sources_len sources loaded"
 echo
 
-if [ -f "$destination" ]; then
-    timestamp "Loading destinations from file '$destination'"
-    while IFS= read -r line; do
-        validate_s3_url "$line"
-        destinations+=("$line")
-    done < <(decomment "$destination")
-else
-    destinations=("$destination")
+if ! [ -f "$destination" ]; then
+    die "File not found: $destination"
 fi
+timestamp "Loading destinations from file '$destination'"
+while IFS= read -r line; do
+    validate_s3_url "$line"
+    destinations+=("$line")
+done < <(decomment "$destination")
 destinations_len="${#destinations[@]}"
 timestamp "$destinations_len destinations loaded"
 echo
