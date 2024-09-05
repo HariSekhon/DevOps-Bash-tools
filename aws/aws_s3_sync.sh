@@ -86,6 +86,7 @@ if [ -f "$destination" ]; then
         validate_s3_url "$line"
         destinations+=("$line")
     done < <(decomment "$destination")
+else
     destinations=("$destination")
 fi
 destinations_len="${#destinations[@]}"
