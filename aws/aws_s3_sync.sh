@@ -39,6 +39,11 @@ You can populate the source and destination path files using native Bash like th
 
 Consider adding the --dryrun option to the end of the script args when running it the first time
 
+As an added level of protection, script also checks that the source and destination paths are the same and errors out if not.
+If you source and destination paths really are intended to be different, then set this before running this script:
+
+    export AWS_S3_SYNC_DIFFERENT_PATHS=true
+
 
 $usage_aws_cli_required
 "
@@ -104,6 +109,19 @@ echo
 
 if [ "$sources_len" != "$destinations_len" ]; then
     die "ERROR: length of sources and destinations arrays of paths are not equal in length: sources ($sources_len) vs destinations ($destinations_len)"
+fi
+
+if [ "${AWS_S3_SYNC_DIFFERENT_PATHS:-}" != true ]; then
+    for ((i=0; i < sources_len; i++)); do
+        src="${sources[i]}"
+        dest="${destinations[i]}"
+        src_path="${src##s3://[^/]*}"
+        dest_path="${dest##s3://[^/]*}"
+        if [ "$src_path" != "$dest_path" ]; then
+            warn "Source path suffix '$src' does not match destination path suffix '$dest'"
+            die "If this is really intentional, 'export AWS_S3_SYNC_DIFFERENT_PATHS=true' before running this script"
+        fi
+    done
 fi
 
 for ((i=0; i < sources_len; i++)); do
