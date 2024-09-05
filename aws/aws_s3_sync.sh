@@ -140,4 +140,5 @@ for ((i=0; i < sources_len; i++)); do
 done
 
 echo
-timestamp "AWS S3 Sync completed"
+# we've already verified above that $sources_len and $destination_len are the same
+timestamp "AWS S3 Sync completed for $sources_len S3 URL paths"
