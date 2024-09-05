@@ -103,5 +103,5 @@ for ((i=0; i < sources_len; i++)); do
     dest="${destinations[i]}"
 
     timestamp "Syncing AWS S3 '$src' to '$dest'"
-    echo aws s3 sync "$src" "$dest" "$@"
+    aws s3 sync "$src" "$dest" "$@"
 done
