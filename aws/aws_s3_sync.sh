@@ -30,7 +30,7 @@ For multiple source and destinations specify text files containing the paths, on
 
 For convenience:
 
-- strips hash # comment lines
+- ignores hash # comment lines
 - strips leading and trailing whitespaces
 - validates each S3 URL's format
 - validates the source and destination list lengths are the same
