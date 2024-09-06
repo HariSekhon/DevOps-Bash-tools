@@ -286,6 +286,7 @@ vim  # Mac's vim not syntax highlighting Bash properly on macOS Big Sur 11.7 htt
 vint  # vim script linter (for me to lint my big .vimrc)
 #vscode
 watch
+watchexec  # run commands when files change
 #wget  # in brew-packages.txt
 #whois  # in brew-packages.txt
 wireshark  # only install tshark CLI, must --cask for Wireshark
