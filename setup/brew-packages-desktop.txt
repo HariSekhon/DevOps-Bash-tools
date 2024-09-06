@@ -94,6 +94,7 @@ drone-cli
 e2fsprogs
 #ec2-api-tools
 eksctl
+entr  # execute commands upon file changes
 expect
 etcd
 exiftool  # view image metadata
