@@ -38,6 +38,12 @@ github="${github:-$HOME/github}"
 
 # ============================================================================ #
 
+repaths(){
+    unset PATHS_SET
+    # shellcheck disable=SC1091
+    source "$bash_tools/.bash.d/paths.sh"
+}
+
 #export PATH="${PATH%%:~/github*}"
 add_PATH(){
     export PATH="$PATH:$1"
