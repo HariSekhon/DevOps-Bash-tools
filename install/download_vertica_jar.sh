@@ -31,10 +31,10 @@ Useful to get the jar to upload to data integration 3rd party directories or Doc
 # shellcheck disable=SC2034
 usage_args="[<version>]"
 
-version="24.2.0"
+#version="24.2.0"
 version="${1:-latest}"
 
-jar_downloads_url="https://www.vertica.com/download/vertica/client-drivers/"
+downloads_url="https://www.vertica.com/download/vertica/client-drivers/"
 
 # ERE format for grep -E
 jar_url_regex="https://www.vertica.com/client_drivers/[[:digit:].x-]+/[[:digit:].-]+/vertica-jdbc-[[:digit:].-]+.jar"
@@ -59,9 +59,9 @@ jar_url_regex="https://www.vertica.com/client_drivers/[[:digit:].x-]+/[[:digit:]
 # https://www.vertica.com/client_drivers/8.0.x/8.0.1/vertica-jdbc-8.0.1-0.jar
 # https://www.vertica.com/client_drivers/7.2.x/7.2.3-0/vertica-jdbc-7.2.3-0.jar
 
-timestamp "Fetching list of Vertica JDBC JAR download URLs from $jar_downloads_url"
+timestamp "Fetching list of Vertica JDBC JAR download URLs from $downloads_url"
 jar_urls="$(
-    curl -sS "$jar_downloads_url" |
+    curl -sS "$downloads_url" |
     grep -Eo "$jar_url_regex"
 )"
 
