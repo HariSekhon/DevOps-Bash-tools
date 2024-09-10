@@ -139,4 +139,4 @@ export RUN_VERSION_OPT=1
 echo
 echo "You may need to also set your locale, such as putting this in your \$HOME/.bashrc:"
 echo
-echo "  export LC_ALL=$LC_ALL"
+echo "    export LC_ALL=$LC_ALL"
