@@ -103,3 +103,8 @@ fi
 
 #timestamp "Downloading from: $download_url"
 "$srcdir/../packages/install_binary.sh" "$download_url" opt/vertica/bin/vsql
+
+echo
+echo "You may need to also set your locale, such as putting this in your \$HOME/.bashrc:"
+echo
+echo "  export LANG=end_US.UTF-8"
