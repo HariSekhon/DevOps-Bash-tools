@@ -27,10 +27,12 @@ Runs git diff and commit with a generic \"updated \$filename\" commit message
 
 Lazy but awesome for lots of daily quick intermediate commit saves
 
-Written to be called from IntelliJ as an External Tool because it's less keystrokes
-and no mouse movement than IntelliJ's own hot key git commit tooling
+Originally used in .bash.d/git.sh as a function git() and vimrc hotkey
 
-If no args are given, then git diffs and commits against the local directory
+Ported to external script be callable from IntelliJ as an External Tool because it's less keystrokes
+and no mouse movement compared to IntelliJ's own hot key git commit tooling
+
+If no args are given, then git diffs and commits against the current working directory
 "
 
 # used by usage() in lib/utils.sh
