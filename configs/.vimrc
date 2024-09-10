@@ -143,6 +143,8 @@ Plugin 'terrastruct/d2-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tmux-plugins/vim-tmux'
+" https://github.com/motus/pig.vim
+"Bundle "motus/pig.vim"
 
 " comment at start of line instead of code indentation level
 " doesn't work: https://github.com/preservim/nerdcommenter/issues/467
