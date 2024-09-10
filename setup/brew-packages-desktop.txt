@@ -191,6 +191,7 @@ mpssh
 mtr
 mycli
 mysql
+neovim
 netcat
 ngrep
 nmap
