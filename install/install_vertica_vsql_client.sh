@@ -50,6 +50,31 @@ help_usage "$@"
 #version="24.2.0"
 version="${1:-latest}"
 
+# Required by the vsql binary
+#
+# Invalid locale: run the "locale" command and check for warnings
+#export LANG="end_US.UTF-8"
+export LC_ALL="C.UTF-8"
+
+libxcrypt_package=""
+if type -P rpm &>/dev/null; then
+    libxcrypt_package="libxcrypt-compat"
+elif type -P apt-get &>/dev/null; then
+    libxcrypt_package="libxcrypt-compat"
+    # or
+    #libxcypt_package="libcrypt1"
+else
+    timestamp "WARNING: unknown package manager, not RPM or Apt based, not downloading the libxcrypt dependency"
+    echo
+fi
+
+if [ -n "$libxcrypt_package" ]; then
+    timestamp "Installing libxcrypt dependency"
+    echo
+    "$srcdir/../packages/install_packages.sh" "$libxcrypt_package"
+    echo
+fi
+
 downloads_url="https://www.vertica.com/download/vertica/client-drivers/"
 
 # ERE format for grep -E
@@ -99,12 +124,19 @@ else
     fi
 fi
 
-#export RUN_VERSION_ARG=1
+export RUN_VERSION_OPT=1
 
 #timestamp "Downloading from: $download_url"
 "$srcdir/../packages/install_binary.sh" "$download_url" opt/vertica/bin/vsql
 
+# automatically run by install_binary.sh when RUN_VERSION_OPT=1 is set above
+#if [ -w /usr/local/bin ]; then
+#    /usr/local/bin/vsql --version
+#else
+#    ~/bin/vsql --version
+#fi
+
 echo
 echo "You may need to also set your locale, such as putting this in your \$HOME/.bashrc:"
 echo
-echo "  export LANG=end_US.UTF-8"
+echo "  export LC_ALL=$LC_ALL"
