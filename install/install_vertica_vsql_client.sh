@@ -89,7 +89,7 @@ else
     download_url="$(grep "$version" <<< "$tar_urls" | head -n 1 || :)"
     if [ -z "$download_url" ]; then
         echo
-        echo "ERROR: Vertica JDBC tarball version '$version' not found" >&2
+        echo "ERROR: Vertica tarball version '$version' not found" >&2
         echo
         echo "Here are the list of available versions:"
         echo
