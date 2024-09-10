@@ -67,7 +67,7 @@ fi
 
 echo
 if [ -w /usr/local/bin ]; then
-    /usr/local/bin/kubectl version --client --short
+    /usr/local/bin/kubectl version --client
 else
-    ~/bin/kubectl version --client --short
+    ~/bin/kubectl version --client
 fi
