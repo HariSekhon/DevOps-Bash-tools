@@ -85,23 +85,7 @@ fi
 # ERE format for grep -E
 rpm_url_regex="https://www.vertica.com/client_drivers/[[:digit:].x-]+/[[:digit:].-]+/vertica-client$fips-[[:digit:].-]+.x86_64.rpm"
 
-# Should match these:
-#
-# https://www.vertica.com/client_drivers/24.2.x/24.2.0-1/vertica-client-fips-24.2.0-1.x86_64.rpm
-# https://www.vertica.com/client_drivers/24.1.x/24.1.0-0/vertica-client-fips-24.1.0-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/23.4.x/23.4.0-0/vertica-client-fips-23.4.0-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/23.3.x/23.3.0-0/vertica-client-fips-23.3.0-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/12.0.x/12.0.4-0/vertica-client-fips-12.0.4-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/11.1.x/11.1.1-0/vertica-client-fips-11.1.1-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/11.0.x/11.0.2-0/vertica-client-fips-11.0.2-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/10.1.x/10.1.1-0/vertica-client-fips-10.1.1-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/9.2.x/9.2.1-0/vertica-client-fips-9.2.1-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-client-fips-9.1.1-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/9.0.x/9.0.1-0/vertica-client-fips-9.0.1-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/8.1.x/8.1.1-0/vertica-client-fips-8.1.1-0.x86_64.rpm
-# https://www.vertica.com/client_drivers/8.0.x/8.0.1/vertica-client-fips-8.0.1-0.x86_64.rpm
-
-# Will not match the regular RPMs:
+# Should match either these regular RPMs:
 #
 # https://www.vertica.com/client_drivers/24.2.x/24.2.0-1/vertica-client-24.2.0-1.x86_64.rpm
 # https://www.vertica.com/client_drivers/24.1.x/24.1.0-0/vertica-client-24.1.0-0.x86_64.rpm
@@ -119,6 +103,22 @@ rpm_url_regex="https://www.vertica.com/client_drivers/[[:digit:].x-]+/[[:digit:]
 # https://www.vertica.com/client_drivers/8.1.x/8.1.1-0/vertica-client-8.1.1-0.x86_64.rpm
 # https://www.vertica.com/client_drivers/8.0.x/8.0.1/vertica-client-8.0.1-0.x86_64.rpm
 # https://www.vertica.com/client_drivers/7.2.x/7.2.3-0/vertica-client-7.2.3-0.x86_64.rpm
+#
+# or if FIPS=true is set these RPMs:
+#
+# https://www.vertica.com/client_drivers/24.2.x/24.2.0-1/vertica-client-fips-24.2.0-1.x86_64.rpm
+# https://www.vertica.com/client_drivers/24.1.x/24.1.0-0/vertica-client-fips-24.1.0-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/23.4.x/23.4.0-0/vertica-client-fips-23.4.0-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/23.3.x/23.3.0-0/vertica-client-fips-23.3.0-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/12.0.x/12.0.4-0/vertica-client-fips-12.0.4-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/11.1.x/11.1.1-0/vertica-client-fips-11.1.1-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/11.0.x/11.0.2-0/vertica-client-fips-11.0.2-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/10.1.x/10.1.1-0/vertica-client-fips-10.1.1-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/9.2.x/9.2.1-0/vertica-client-fips-9.2.1-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-client-fips-9.1.1-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/9.0.x/9.0.1-0/vertica-client-fips-9.0.1-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/8.1.x/8.1.1-0/vertica-client-fips-8.1.1-0.x86_64.rpm
+# https://www.vertica.com/client_drivers/8.0.x/8.0.1/vertica-client-fips-8.0.1-0.x86_64.rpm
 
 timestamp "Fetching list of Vertica RPM download URLs from $downloads_url"
 rpm_urls="$(
