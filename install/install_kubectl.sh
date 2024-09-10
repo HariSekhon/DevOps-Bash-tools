@@ -66,7 +66,7 @@ fi
 "$srcdir/../packages/install_binary.sh" "https://dl.k8s.io/release/v$version/bin/{os}/{arch}/kubectl"
 
 echo
-if am_root; then
+if [ -w /usr/local/bin ]; then
     /usr/local/bin/kubectl version --client --short
 else
     ~/bin/kubectl version --client --short
