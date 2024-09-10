@@ -93,7 +93,7 @@ else
         echo
         echo "Here are the list of available versions:"
         echo
-        sed 's/.*vertica-tar-//; s/-[[:digit:]]\+.x86_64.tar.gz$//' <<< "$tar_urls"
+        sed 's/.*vertica-client-//; s/-[[:digit:]]\+.x86_64.tar.gz$//' <<< "$tar_urls"
         echo
         exit 1
     fi
