@@ -67,7 +67,11 @@ fi
 
 echo
 if [ -w /usr/local/bin ]; then
+    echo "/usr/local/bin/kubectl version:"
+    echo
     /usr/local/bin/kubectl version --client
 else
+    echo "${HOME:-~}/bin/kubectl version:"
+    echo
     ~/bin/kubectl version --client
 fi
