@@ -24,7 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs Vertica VSQL Client FIPS RPM on Linux x86_64
+Installs Vertica VSQL Client RPM on Linux x86_64
+
+If FIPS=true then downloads and installs the FIPS compliant RPM instead
 
 Offical Documentation:
 
@@ -59,13 +61,8 @@ export LC_ALL="C.UTF-8"
 libxcrypt_package=""
 if type -P rpm &>/dev/null; then
     libxcrypt_package="libxcrypt-compat"
-elif type -P apt-get &>/dev/null; then
-    libxcrypt_package="libxcrypt-compat"
-    # or
-    #libxcypt_package="libcrypt1"
 else
-    timestamp "WARNING: unknown package manager, not RPM or Apt based, not downloading the libxcrypt dependency"
-    echo
+    die "ERROR: running on a non-RPM system"
 fi
 
 if [ -n "$libxcrypt_package" ]; then
@@ -77,8 +74,13 @@ fi
 
 downloads_url="https://www.vertica.com/download/vertica/client-drivers/"
 
+fips=""
+if [ "${FIPS:-}" = true ]; then
+    fips="-fips"
+fi
+
 # ERE format for grep -E
-rpm_url_regex="https://www.vertica.com/client_drivers/[[:digit:].x-]+/[[:digit:].-]+/vertica-client-fips-[[:digit:].-]+.x86_64.rpm"
+rpm_url_regex="https://www.vertica.com/client_drivers/[[:digit:].x-]+/[[:digit:].-]+/vertica-client$fips-[[:digit:].-]+.x86_64.rpm"
 
 # Should match these:
 #
