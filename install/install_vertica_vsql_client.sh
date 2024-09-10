@@ -140,3 +140,4 @@ echo
 echo "You may need to also set your locale, such as putting this in your \$HOME/.bashrc:"
 echo
 echo "    export LC_ALL=$LC_ALL"
+echo
