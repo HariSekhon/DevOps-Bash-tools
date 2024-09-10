@@ -573,7 +573,8 @@ endfunction
 " without exiting vim - this is buggy behaviour that doesn't seem to happen when using functions instead
 
 function! GitUpdateCommit()
-    :! bash -ic 'cd "%:p:h" && gitu "%:t" '
+    ":! bash -ic 'cd "%:p:h" && gitu "%:t" '
+    :! git_diff_commit.sh "%"
 endfunction
 
 function! GitAddCommit()
