@@ -24,9 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs Vertica VSQL Client RPM on Linux x86_64
+Installs Vertica VSQL Client RPM on a Redhat-based Linux x86_64
 
-If FIPS=true then downloads and installs the FIPS compliant RPM instead
+If FIPS=true environment variable is set then downloads and installs the FIPS compliant RPM instead
 
 Offical Documentation:
 
@@ -60,7 +60,10 @@ export LC_ALL="C.UTF-8"
 
 libxcrypt_package=""
 if type -P rpm &>/dev/null; then
-    libxcrypt_package="libxcrypt-compat"
+    # already available on older Rocky Linux 8 from this package
+    if ! rpm -q libxcrypt &>/dev/null; then
+        libxcrypt_package="libxcrypt-compat"
+    fi
 else
     die "ERROR: running on a non-RPM system"
 fi
