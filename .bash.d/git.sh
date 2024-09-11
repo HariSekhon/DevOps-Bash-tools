@@ -640,47 +640,8 @@ gitimport(){
 }
 
 
-# shellcheck disable=SC2086
 gitu(){
-    local basedir
-    local trap_codes="INT ERR"
-    # expand now
-    # shellcheck disable=SC2064
-    trap "popd &>/dev/null; trap - $trap_codes; return 1 2>/dev/null" $trap_codes
-    #targets=("$(strip_basedirs "$basedir" "$targets")")
-    for filename in "${@:-.}"; do
-        # follow symlinks to the actual files because diffing symlinks returns no changes
-        if [ "$filename" != . ]; then
-            filename="$(resolve_symlinks "$filename")"
-        fi
-        # go to the highest directory level to git diff inside the git repo boundary, otherwise git diff will return nothing
-        basedir="$(basedir "$filename")" || return 1
-        pushd "$basedir" >/dev/null || return 1
-        # XXX: needs -s to return the basename and not the full name
-        changed_files="$(
-            git status --porcelain -s "${filename##*/}" |
-            grep -e '^M' -e '^.M' |
-            sed 's/^...//'
-        )"
-        # while read line would auto-accepting the readline and commit without prompt :-/
-        for changed_filename in $changed_files; do
-            basename="${changed_filename##*/}"
-            diff="$(git diff --color=always -- "$changed_filename"; git diff --cached --color=always -- "$changed_filename")"
-            if [ -z "$diff" ]; then
-                continue
-            fi
-            echo "$diff" | more -FR
-            echo
-            read -r -p "Hit enter to commit '$changed_filename' or Control-C to cancel" _
-            echo
-            git add -- "$changed_filename" &&
-            echo "committing $changed_filename" &&
-            git commit -m "updated $basename" -- "$changed_filename" ||
-            return 1
-        done
-        popd &>/dev/null || :
-    done
-    trap - $trap_codes
+    git_diff_commit.sh "$@"
 }
 gituu(){
     # avoiding xargs due to function reference:
