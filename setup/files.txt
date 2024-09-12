@@ -24,7 +24,8 @@
 # instead use an .mdlrc and .mdl.rb in each repo individually
 #.mdlrc
 #.mdl.rb
-.pre-commit-config.yaml
+# home dir is too heavy for this right now
+#.pre-commit-config.yaml
 .pylintrc
 configs/.ansible.cfg
 configs/.athenacli/athenaclirc
