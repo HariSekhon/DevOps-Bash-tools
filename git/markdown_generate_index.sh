@@ -79,17 +79,23 @@ while read -r line; do
     #if [ "$level" -gt 3 ]; then
     #    continue
     #fi
-    title="${line##*# }"
+    #title="${line##*# }"
+    title="$(sed '
+        # strip anchor prefixes
+        s/^##* //;
+        # change text links like [ZooKeeper](zookeeper.md) to just ZooKeeper
+        s/\[\([[:alnum:]]*\)\]([[:alnum:]#.-]*)/\1/g;
+    ' <<< "$line")"
     # create relative links of just the anchor and not the repo URL prefix, it's more portable
     link="$(
         sed '
             s/^#*[[:space:]]*//;
-        ' <<< "$line" |
+        ' <<< "$title" |
         tr '[:upper:]' '[:lower:]' |
         sed '
             s/[^[:alnum:][:space:]-]//g;
             s/[[:space:]-]/-/g;
-            s/^/#/
+            s/^/#/;
         '
     )"
     indentation=$(( indent_width * ( level - 2 ) ))
