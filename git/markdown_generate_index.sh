@@ -93,7 +93,7 @@ while read -r line; do
         ' <<< "$title" |
         tr '[:upper:]' '[:lower:]' |
         sed '
-            s/[^[:alnum:][:space:]-]//g;
+            s/[^[:alnum:][:space:]_-]//g;
             s/[[:space:]-]/-/g;
             s/^/#/;
         '
