@@ -307,7 +307,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
-- `copy_to_clipboard.sh - copies stdin or string arg to system clipboard on Linux or Mac
+- `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_diff_settings.sh` - Takes snapshots of before and after clipboard changes and diffs them to show config changes
 - `pldd.sh` - parses `/proc` on Linux to show the runtime `.so` loaded dynamic shared libraries a program pid is using. Runtime equivalent of the classic static `ldd` command and because the system `pldd` command often fails to attach to a process
