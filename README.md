@@ -310,7 +310,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `copy_to_clipboard.sh - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_diff_settings.sh` - Takes snapshots of before and after clipboard changes and diffs them to show config changes
-- `pldd.sh` - parses `/proc` on Linux to show the runtime `.so` loaded dynamic shared libraries a program pid is using. Runtime equivalent of the classic static `ldd` command and because the in-built `pldd` command often fails to attach to a process
+- `pldd.sh` - parses `/proc` on Linux to show the runtime `.so` loaded dynamic shared libraries a program pid is using. Runtime equivalent of the classic static `ldd` command and because the system `pldd` command often fails to attach to a process
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
