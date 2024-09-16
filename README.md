@@ -212,6 +212,7 @@ make
 - [Kubernetes](#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
 - [Docker](#docker) - Docker API, Dockerhub API, Quay.io API scripts
 - [Databases](#databases) - fast CLI wrappers, instant Docker sandboxes (PostgreSQL, MySQL, MariaDB, SQLite), [SQL scripts](https://github.com/HariSekhon/SQL-scripts), SQL script testers against all versions of a DB, advanced `.psqlrc`
+- [Data](#data) - data tools, converters and format validators for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
 - [Big Data & NoSQL](#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager API & Cloudera Navigator API scripts
 - [Git - GitHub, GitLab, Bitbucket, Azure DevOps](#git---github-gitlab-bitbucket-azure-devops) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
 - [CI/CD - Continuous Integration / Continuous Delivery](#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for most major CI systems:
@@ -229,7 +230,6 @@ make
 - [Spotify](#spotify) - 40+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, followed artists, top artists, top tracks etc.
 - [More Linux & Mac](#more-linux--mac) - more systems administration scripts, package installation automation
 - [Builds, Languages & Linting](#builds-languages--linting) - programming language, build system & CI linting
-- [Data Format Conversion & Validation](#data-format-conversion--validation) - data validation scripts for CSV, JSON, Avro, Parquet, INI / Properties files (Java), LDAP LDIF, XML, YAML
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
 - [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
@@ -703,6 +703,30 @@ See also [Knowledge Base notes for Kubernetes](https://github.com/HariSekhon/Kno
 - `quay_api.sh` - queries the [Quay.io](https://quay.io/) API with OAuth2 authentication token `$QUAY_TOKEN`
 
 See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowledge-Base/blob/main/docker.md).
+
+### Data
+
+`data/` directory:
+
+- `avro_tools.sh` - runs Avro Tools jar, downloading it if not already present (determines latest version when
+  downloading)
+- `parquet_tools.sh` - runs Parquet Tools jar, downloading it if not already present (determines latest version
+  when downloading)
+- `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against
+  column positions
+- Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
+
+  - CSV
+  - JSON
+  - [Avro](https://avro.apache.org/)
+  - [Parquet](https://parquet.apache.org/)
+  - INI / Properties files (Java)
+  - LDAP LDIF
+  - XML
+  - YAML
+
+- `json2yaml.sh` - converts JSON to YAML
+- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) section above)
 
 ### Big Data & NoSQL
 
@@ -1350,30 +1374,6 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
     - [Dockerfiles](https://docs.docker.com/engine/reference/builder/)
     - [Docker Compose](https://docs.docker.com/compose/)
     - [Vagrantfiles](https://www.vagrantup.com/docs/vagrantfile)
-
-### Data Format Conversion & Validation
-
-`data/` directory:
-
-- `avro_tools.sh` - runs Avro Tools jar, downloading it if not already present (determines latest version when
-  downloading)
-- `parquet_tools.sh` - runs Parquet Tools jar, downloading it if not already present (determines latest version
-  when downloading)
-- `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against
-  column positions
-- Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
-
-  - CSV
-  - JSON
-  - [Avro](https://avro.apache.org/)
-  - [Parquet](https://parquet.apache.org/)
-  - INI / Properties files (Java)
-  - LDAP LDIF
-  - XML
-  - YAML
-
-- `json2yaml.sh` - converts JSON to YAML
-- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) section above)
 
 ## Individual Setup Parts
 
