@@ -49,16 +49,19 @@ echo
 git pull
 echo
 
-timestamp "Diffing HEAD vs FETCH_HEAD"
+timestamp "Comparing HEAD vs FETCH_HEAD"
 echo
+timestamp "Checking git log"
 commits="$(git log FETCH_HEAD..HEAD)"
-diff="$(git diff FETCH_HEAD..HEAD | tee /dev/stderr)"
 echo
 
 if is_blank "$commits"; then
     timestamp "No changes to push"
     exit 0
 fi
+
+timestamp "Getting diff"
+diff="$(git diff --color=always FETCH_HEAD..HEAD | tee /dev/stderr)"
 
 if is_blank "$diff"; then
     timestamp "No changes to push, but commit difference (empty commits?)"
@@ -68,11 +71,8 @@ fi
 read -r -p "Push to origin remote? (Y/n) " answer
 echo
 
-if check_yes "$answer"; then
-    git push
-else
-    timestamp "Aborting Push"
-    exit 0
-fi
+check_yes "$answer"
+
+git push
 
 timestamp "Git Diff Review Push completed"
