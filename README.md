@@ -1355,8 +1355,12 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 
 `data/` directory:
 
-- `avro_tools.sh` - runs Avro Tools, downloading the jar if not already present (determines latest version)
-- `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against column positions
+- `avro_tools.sh` - runs Avro Tools jar, downloading it if not already present (determines latest version when
+  downloading)
+- `parquet_tools.sh` - runs Parquet Tools jar, downloading it if not already present (determines latest version
+  when downloading)
+- `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against
+  column positions
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
 
   - CSV
