@@ -50,6 +50,7 @@ if [ -z "$avro_tools_jar" ] ||
     "$srcdir/../install/download_avro_tools.sh"
     popd &>/dev/null || die "Failed to return to original dir"
     avro_tools_jar="$(find "$srcdir" -maxdepth 1 -name 'avro-tools-*.jar' | sort -Vr | head -n 1)"
+    echo
 fi
 
 java -jar "$avro_tools_jar" "$@"
