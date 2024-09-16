@@ -48,7 +48,7 @@ if [ -z "$avro_tools_jar" ] ||
    ! jar tf "$avro_tools_jar" &>/dev/null; then
     pushd "$srcdir" 2>/dev/null || die "Failed to pushd to '$srcdir'"
     "$srcdir/../install/download_avro_tools.sh"
-    popd 2>/dev/null || die "Failed to return to original dir"
+    popd &>/dev/null || die "Failed to return to original dir"
     avro_tools_jar="$(find "$srcdir" -maxdepth 1 -name 'avro-tools-*.jar' | sort -Vr | head -n 1)"
 fi
 
