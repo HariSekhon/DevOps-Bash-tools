@@ -1353,7 +1353,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 
 ### Data Format Conversion & Validation
 
-`bin/` and `bigdata/` directories:
+`data/` directory:
 
 - `avro_tools.sh` - runs Avro Tools, downloading the jar if not already present (determines latest version)
 - `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against column positions
