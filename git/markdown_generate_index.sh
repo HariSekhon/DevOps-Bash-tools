@@ -67,6 +67,8 @@ fi
 # false positive
 # shellcheck disable=SC2016
 sed '/^```/,/^```/d' "$markdown_file" |
+# strip out <!-- commented out --> sections
+sed '/<!--/,/-->/d' |
 grep -E -e '^#+[[:space:]]' -e '<h[[:digit:]] id=' |
 tail -n +2 |
 # don't include main headings
