@@ -46,9 +46,9 @@ parquet_tools_jar="$(find "$srcdir" -maxdepth 1 -name 'parquet-tools-*.jar' | so
 if [ -z "$parquet_tools_jar" ] ||
    # incomplete download, call download again to resume it
    ! jar tf "$parquet_tools_jar" &>/dev/null; then
-    pushd "$srcdir" 2>/dev/null
+    pushd "$srcdir" 2>/dev/null || :
     "$srcdir/../install/download_parquet_tools.sh"
-    popd "$srcdir" 2>/dev/null
+    popd "$srcdir" 2>/dev/null || :
 fi
 
 java -jar "$parquet_tools_jar" "$@"
