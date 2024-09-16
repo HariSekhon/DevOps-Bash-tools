@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: $$
 #
 #  Author: Hari Sekhon
 #  Date: 2024-09-16 02:32:28 +0200 (Mon, 16 Sep 2024)
@@ -40,6 +41,10 @@ help_usage "$@"
 num_args 1 "$@"
 
 pid="$1"
+
+if ! is_linux; then
+    usage "ERROR: this script only runs on Linux"
+fi
 
 max_pid="$(cat /proc/sys/kernel/pid_max)"
 
