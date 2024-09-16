@@ -77,6 +77,8 @@ if [ -n "$lint_hint" ]; then
     fi
 else
     case "$basename" in
+                 *.sh)   shellcheck "$basename"
+                        ;;
              Makefile)  check_makefiles.sh "$basename"
                         ;;
            Dockerfile)  #hadolint "$basename"
