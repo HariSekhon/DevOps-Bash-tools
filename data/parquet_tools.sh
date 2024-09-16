@@ -50,6 +50,7 @@ if [ -z "$parquet_tools_jar" ] ||
     "$srcdir/../install/download_parquet_tools.sh"
     popd &>/dev/null || die "Failed to return to original dir"
     parquet_tools_jar="$(find "$srcdir" -maxdepth 1 -name 'parquet-tools-*.jar' | sort -Vr | head -n 1)"
+    echo
 fi
 
 java -jar "$parquet_tools_jar" "$@"
