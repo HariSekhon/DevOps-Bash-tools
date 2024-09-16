@@ -46,9 +46,9 @@ avro_tools_jar="$(find "$srcdir" -maxdepth 1 -name 'avro-tools-*.jar' | sort -Vr
 if [ -z "$avro_tools_jar" ] ||
    # incomplete download, call download again to resume it
    ! jar tf "$avro_tools_jar" &>/dev/null; then
-    pushd "$srcdir" 2>/dev/null
+    pushd "$srcdir" 2>/dev/null || :
     "$srcdir/../install/download_avro_tools.sh"
-    popd "$srcdir" 2>/dev/null
+    popd "$srcdir" 2>/dev/null || :
 fi
 
 java -jar "$avro_tools_jar" "$@"
