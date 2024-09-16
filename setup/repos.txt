@@ -37,7 +37,7 @@ SQL-scripts:sql
 SQL-keywords:sql-keywords
 Kubernetes-configs:k8s
 Terraform:terraform
-Packer-templates:pack
+Packer:pack
 Vagrant-templates:vag
 Templates:templates
 TeamCity-CI:teamcity
