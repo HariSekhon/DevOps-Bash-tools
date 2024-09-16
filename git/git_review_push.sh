@@ -45,15 +45,15 @@ help_usage "$@"
 num_args 0 "$@"
 
 timestamp "Pulling to ensure we have the latest remote contents"
-echo
+echo >&2
 git pull
-echo
+echo >&2
 
 timestamp "Comparing HEAD vs FETCH_HEAD"
-echo
+echo >&2
 timestamp "Checking git log"
 commits="$(git log FETCH_HEAD..HEAD)"
-echo
+echo >&2
 
 if is_blank "$commits"; then
     timestamp "No changes to push"
@@ -65,11 +65,11 @@ diff="$(git diff --color=always FETCH_HEAD..HEAD | tee /dev/stderr)"
 
 if is_blank "$diff"; then
     timestamp "No changes to push, but commit difference (empty commits?)"
-    echo
+    echo >&2
 fi
 
 read -r -p "Push to origin remote? (Y/n) " answer
-echo
+echo >&2
 
 check_yes "${answer:-Y}"
 
