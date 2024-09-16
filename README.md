@@ -1514,9 +1514,9 @@ make: *** [help] Error 3
 
 (`make help` exits with error code 3 like most of my programs to differentiate from build success to make sure a stray `help` argument doesn't cause silent build failure with exit code 0)
 
-### Stargazers over time
+## Star History
 
-[![Stargazers over time](https://starchart.cc/HariSekhon/DevOps-Bash-tools.svg)](https://starchart.cc/HariSekhon/DevOps-Bash-tools)
+[![Star History Chart](https://api.star-history.com/svg?repos=HariSekhon/DevOps-Bash-tools&type=Date)](https://star-history.com/#HariSekhon/DevOps-Bash-tools&Date)
 
 [git.io/bash-tools](https://git.io/bash-tools)
 
