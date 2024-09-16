@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs Avro Tools, downloading it if not already present
+Runs Avro Tools jar, downloading it if not already present
 
 Uses ../install/download_avro_tools.sh to download the latest version if no version is present
 
