@@ -71,7 +71,7 @@ fi
 read -r -p "Push to origin remote? (Y/n) " answer
 echo
 
-check_yes "$answer"
+check_yes "${answer:-Y}"
 
 git push
 
