@@ -67,39 +67,49 @@ fi
 # false positive
 # shellcheck disable=SC2016
 sed '/^```/,/^```/d' "$markdown_file" |
-grep -E '^#+[[:space:]]' |
+grep -E -e '^#+[[:space:]]' -e '<h[[:digit:]] id=' |
 tail -n +2 |
 # don't include main headings
 #sed '/^#[[:space:]]/d' |
 # don't include the Index title itself either
 sed '/^[#[:space:]]*Index$/d' |
 while read -r line; do
-    level="$(grep -Eo '^#+' <<< "$line" | tr -d '[:space:]' | wc -c)"
-    level="${level//[[:space:]]}"
-    #if [ "$level" -gt 3 ]; then
-    #    continue
-    #fi
-    #title="${line##*# }"
-    title="$(sed '
-        # strip anchor prefixes
-        s/^##* //;
-        # change text links like [ZooKeeper](zookeeper.md) to just ZooKeeper
-        s/\[\([[:alnum:]]*\)\]([[:alnum:]#.-]*)/\1/g;
-    ' <<< "$line")"
-    # create relative links of just the anchor and not the repo URL prefix, it's more portable
-    link="$(
-        sed '
-            s/^#*[[:space:]]*//;
-        ' <<< "$title" |
-        tr '[:upper:]' '[:lower:]' |
-        sed '
-            s/[^[:alnum:][:space:]_-]//g;
-            s/[[:space:]-]/-/g;
-            s/^/#/;
-        '
-    )"
+    # support HTML tags (currently only on same line)
+    if [[ "$line" =~ \<h[[:digit:]][[:space:]]+id= ]]; then
+        level=${line#<h}
+        level=${level%% *}
+        title=${line#*>}
+        title=${title%%</h*}
+        link=${line#*id=\"}
+        link=${link%%\"*}
+    else
+        level="$(grep -Eo '^#+' <<< "$line" | tr -d '[:space:]' | wc -c)"
+        level="${level//[[:space:]]}"
+        #if [ "$level" -gt 3 ]; then
+        #    continue
+        #fi
+        #title="${line##*# }"
+        title="$(sed '
+            # strip anchor prefixes
+            s/^##* //;
+            # change text links like [ZooKeeper](zookeeper.md) to just ZooKeeper
+            s/\[\([[:alnum:]]*\)\]([[:alnum:]#.-]*)/\1/g;
+        ' <<< "$line")"
+        # create relative links of just the anchor and not the repo URL prefix, it's more portable
+        link="$(
+            sed '
+                s/^#*[[:space:]]*//;
+            ' <<< "$title" |
+            tr '[:upper:]' '[:lower:]' |
+            sed '
+                s/[^[:alnum:][:space:]_-]//g;
+                s/[[:space:]-]/-/g;
+                s/^/#/;
+            '
+        )"
+    fi
     indentation=$(( indent_width * ( level - 2 ) ))
-    if [ $indentation -gt 0 ]; then
+    if [ "$indentation" -gt 0 ]; then
         printf "%${indentation}s" " "
     fi
     printf -- "- [%s](%s)\n" "$title" "$link"
