@@ -29,7 +29,7 @@ The runtime equivalent of the classic Linux ldd command
 
 Because sometimes the in-built pldd command gives results like this:
 
-    pldd: cannot attach to process 1: Operation not permitted
+    pldd: cannot attach to process 32781: Operation not permitted
 "
 
 # used by usage() in lib/utils.sh
