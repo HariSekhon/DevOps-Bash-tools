@@ -80,7 +80,7 @@ if [ "$version" = "latest" ]; then
         grep -Eo "$version_regex" |
         sed 's|</a>[[:space:]]*$||; s|^.*>||; s|/$||'
     )"
-    version="$(sort -n <<< "$versions" | head -n 1)"
+    version="$(sort -Vr <<< "$versions" | head -n 1)"
     timestamp "Determined latest Avro Tools version to be $version"
 fi
 
