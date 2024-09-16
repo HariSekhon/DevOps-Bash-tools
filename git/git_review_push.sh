@@ -75,4 +75,5 @@ check_yes "${answer:-Y}"
 
 git push
 
+echo >&2
 timestamp "Git Diff Review Push completed"
