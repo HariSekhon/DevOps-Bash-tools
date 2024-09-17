@@ -32,7 +32,7 @@ Originally written to document ArgoCD's environment variables for better adminis
 
     https://github.com/argoproj/argo-cd/pull/8680
 
-Files or extensions to exclude can optionally be specified as args, and must be valid ERE regex that match the file path suffix, filenames and file extention literals will usually be fine
+Files or extensions to exclude can optionally be specified as args, and must be valid ERE regex that match the file path suffix, filenames and file extension literals will usually be fine
 
 
 Examples:
