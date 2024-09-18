@@ -144,6 +144,7 @@ ipcalc
 iperf
 ipython
 #isc-dhcp  # the classic DHCP daemon, use for bootstrapping PXE installing Debian Linux or similar as per https://github.com/HariSekhon/Knowledge-Base/blob/main/dhcp.md
+#intellij-idea-ce
 jsonlint  # in brew-packages.txt
 jenkins-x/jx/jx
 jnv  # json interactive viewer (pipe kubectl into it)
