@@ -85,8 +85,10 @@ EOF
     yum install -y $yum_optional_packages
 # https://cloud.google.com/sdk/docs/downloads-apt-get
 elif type -P apt-get &>/dev/null; then
-    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | $sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-    $sudo apt-get install -y apt-transport-https ca-certificates
+    google_cloud_sdk_source="deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main"
+    grep -Fq "$google_cloud_sdk_source" /etc/apt/sources.list.d/google-cloud-sdk.list 2>/dev/null ||
+    $sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list <<< "$google_cloud_sdk_source"
+    $sudo apt-get install -y apt-transport-https ca-certificates gnupg
     curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg |
         $sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
     $sudo apt-get update
