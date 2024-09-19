@@ -276,7 +276,8 @@ bash-test:
 	$(BASH_TOOLS)/checks/check_all.sh
 
 .PHONY: test
-test: precommit
+#test: precommit
+test: bash-test
 	@:
 
 precommit: pre-commit
