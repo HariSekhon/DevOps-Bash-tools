@@ -157,6 +157,7 @@ alias staging="switchbranch staging"
 alias stage=staging
 alias dev="switchbranch dev"
 alias develop="switchbranch develop"
+alias grp="git_review_push.sh"
 
 # edit all GitHub READMEs
 alias readmes='$EDITOR $(git_foreach_repo.sh '"'"'echo $PWD/README.md'"')"
