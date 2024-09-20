@@ -61,7 +61,9 @@ if is_blank "$commits"; then
 fi
 
 timestamp "Getting diff"
-diff="$(git diff --color=always FETCH_HEAD..HEAD | tee /dev/stderr)"
+diff="$(git diff --color=always FETCH_HEAD..HEAD)"
+
+echo "$diff" | more -FR
 
 if is_blank "$diff"; then
     timestamp "No changes to push, but commit difference (empty commits?)"
