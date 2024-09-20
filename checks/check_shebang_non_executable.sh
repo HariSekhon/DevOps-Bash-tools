@@ -28,6 +28,7 @@ section "Finding Non Executable Scripts"
 exceptions='
 \.bash\.d
 /lib/
+/\..+
 env$
 \.env
 \.envrc
