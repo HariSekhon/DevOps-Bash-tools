@@ -67,6 +67,8 @@ fi
 # false positive
 # shellcheck disable=SC2016
 sed '/^```/,/^```/d' "$markdown_file" |
+# strip out oneline html comment because next sed will strip to end of file otherwise
+sed '/<!-- .* -->/d;' |
 # strip out <!-- commented out --> sections
 sed '/<!--/,/-->/d' |
 grep -E -e '^#+[[:space:]]' -e '<h[[:digit:]] id=' |
