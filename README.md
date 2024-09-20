@@ -1,5 +1,7 @@
 # Hari Sekhon - DevOps Bash Tools
 
+Contribuição do OG!
+
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/network)
 [![Lines of Code](https://img.shields.io/badge/lines%20of%20code-96k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
@@ -120,6 +122,7 @@ awkward URLs more nicely replaced with shields.io
 [![Python 3.9](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.9/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.9%22)
 [![Python 3.10](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.10/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.10%22)
 [![Python 3.11](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Python%203.11/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Python+3.11%22)
+
 <!--
 [![Self Hosted](https://github.com/HariSekhon/DevOps-Bash-tools/workflows/Self%20Hosted/badge.svg)](https://github.com/HariSekhon/DevOps-Bash-tools/actions?query=workflow%3A%22Self+Hosted%22)
 -->
@@ -177,7 +180,7 @@ Cloud & Big Data Contractor, United Kingdom
 (ex-Cloudera, former Hortonworks Consultant)
 
 [![My LinkedIn](https://img.shields.io/badge/LinkedIn%20Profile-HariSekhon-blue?logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIGZpbGw9IiNmZmZmZmYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPgo=)](https://www.linkedin.com/in/HariSekhon/)
-<br>*(you're welcome to connect with me on LinkedIn)*
+<br>_(you're welcome to connect with me on LinkedIn)_
 
 ### Quick Setup
 
@@ -534,7 +537,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
   - `gcp_sql_*.sh` - [Cloud SQL](https://cloud.google.com/sql) scripts:
     - `gcp_sql_backup.sh` - creates Cloud SQL backups
     - `gcp_sql_export.sh` - creates Cloud SQL exports to [GCS](https://cloud.google.com/storage)
-    - `gcp_sql_enable_automated_backups.sh` - enable automated daily Cloud SQL  backups
+    - `gcp_sql_enable_automated_backups.sh` - enable automated daily Cloud SQL backups
     - `gcp_sql_enable_point_in_time_recovery.sh` - enable point-in-time recovery with write-ahead logs
     - `gcp_sql_proxy.sh` - boots a [Cloud SQL Proxy](https://cloud.google.com/sql/docs/postgres/sql-proxy) to all Cloud SQL instances for fast convenient direct `psql` / `mysql` access via local sockets. Installs Cloud SQL Proxy if necessary
     - `gcp_sql_running_primaries.sh` - lists primary running Cloud SQL instances
@@ -594,7 +597,7 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
   - service accounts, resource quotas, network policies, pod security policies
   - container images running
   - container images running counts descending
-  - pods  (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
+  - pods (might be too much detail if you have high replica counts, so done last, comment if you're sure nobody has deployed pods outside deployments)
 - `kubectl.sh` - runs kubectl commands safely fixed to a given context using config isolation to avoid concurrency race conditions
 - `kubectl_diff_apply.sh` - generates a kubectl diff and prompts to apply
 - `kustomize_diff_apply.sh` - runs Kustomize build, precreates any namespaces, shows a kubectl diff of the proposed changes, and prompts to apply
@@ -779,7 +782,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_diff_commit.sh` - runs git diff and commit with a generic `"updated $filename"` commit message for each file in the files or directories given if they have changed, or all committed files under `$PWD` if no args are given. Super convenient for fast commits on the command line, and in vim and IDEs via hotkeys
   - `git_review_push.sh` - shows diff of what would be pushed upstream and prompts to push. Convenient for fast reviewed pushes via vim or IDEs hotkeys
   - `git_branch_delete_squash_merged.sh` - carefully detects if a squash merged branch you want to delete has no changes with the default trunk branch before deleting it.
-     See [Squash Merges](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#squash-merges-require-force-deleting-branches) in knowledge-base about why this is necessary.
+    See [Squash Merges](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#squash-merges-require-force-deleting-branches) in knowledge-base about why this is necessary.
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
   - `git_foreach_modified.sh` - executes a command against each file with git modified status
@@ -919,7 +922,7 @@ See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-
 
 ### CI/CD - Continuous Integration / Continuous Deployment
 
-`jenkins/`, `terraform/`, `teamcity/`, `buildkite/`, `circlci/`, `travis/`, `azure_devops/`, ...,  `cicd/` directories:
+`jenkins/`, `terraform/`, `teamcity/`, `buildkite/`, `circlci/`, `travis/`, `azure_devops/`, ..., `cicd/` directories:
 
 - `appveyor_api.sh` - queries [AppVeyor](https://www.appveyor.com/)'s API with authentication
 - `azure_devops/*.sh` - [Azure DevOps](https://dev.azure.com/) scripts:
@@ -1591,6 +1594,7 @@ The rest of my original source repos are
 Pre-built Docker images are available on my [DockerHub](https://hub.docker.com/u/harisekhon/).
 
 <!-- 1x1 pixel counter to record hits -->
+
 ![](https://hit.yhype.me/github/profile?user_id=2211051)
 
 <!-- OTHER_REPOS_END -->
