@@ -53,6 +53,11 @@ isExcluded(){
             return 0
         fi
     fi
+    if ! uname -s | grep -q Darwin; then
+        if [[ "$prog" =~ /applescript/ ]]; then
+            return 0
+        fi
+    fi
     # this external git check is expensive, skip it when in CI as using fresh git checkouts
     is_CI && return 1
     # shellcheck disable=SC2230
