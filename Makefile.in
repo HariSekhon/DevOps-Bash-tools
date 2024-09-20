@@ -276,7 +276,8 @@ bash-test:
 	$(BASH_TOOLS)/checks/check_all.sh
 
 .PHONY: test
-test: precommit
+#test: precommit
+test: bash-test
 	@:
 
 precommit: pre-commit
@@ -473,12 +474,12 @@ yum-packages-remove:
 
 .PHONY: cpan
 cpan::
-	find . -maxdepth 3 -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs $(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/cpan-requirements*.txt' | grep -v cpan-requirements-optional.txt | xargs --no-run-if-empty "$(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh"
 	@$(MAKE) cpan-optional
 
 .PHONY: cpan-optional
 cpan-optional::
-	find . -maxdepth 3 -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs $(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/cpan-requirements-optional.txt' | NO_FAIL=1 xargs --no-run-if-empty "$(BASH_TOOLS)/perl/perl_cpanm_install_if_absent.sh"
 
 .PHONY: gems
 gems:: gem
@@ -486,30 +487,30 @@ gems:: gem
 
 .PHONY: gem
 gem::
-	find . -maxdepth 3 -path '*/setup/gem-packages.txt' | xargs $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/gem-packages.txt' | xargs --no-run-if-empty "$(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh"
 	@$(MAKE) gem-optional
 
 .PHONY: gem-optional
 gem-optional::
-	find . -maxdepth 3 -path '*/setup/gem-packages-optional.txt' | NO_FAIL=1 PIP=$(PIP) xargs $(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/gem-packages-optional.txt' | NO_FAIL=1 PIP="$(PIP)" xargs --no-run-if-empty "$(BASH_TOOLS)/packages/ruby_gem_install_if_absent.sh"
 
 .PHONY: npm
 npm::
-	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' -o -path '*/setup/npm-packages.txt' | $(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/npm-requirements.txt' -o -path '*/setup/npm-packages.txt' | xargs --no-run-if-empty "$(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh"
 	@$(MAKE) npm-optional
 
 .PHONY: npm-optional
 npm-optional::
-	find . -maxdepth 3 -path '*/setup/npm-requirements-optional.txt' | NO_FAIL=1 $(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh
+	find . -maxdepth 3 -path '*/setup/npm-requirements-optional.txt' | NO_FAIL=1 xargs --no-run-if-empty "$(BASH_TOOLS)/packages/nodejs_npm_install_if_absent.sh"
 
 .PHONY: pip
 pip::
-	find . -maxdepth 3 -path '*/requirements.txt' | PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/requirements.txt' | PIP="$(PIP)" xargs --no-run-if-empty "$(BASH_TOOLS)/python/python_pip_install_if_absent.sh"
 	@$(MAKE) pip-optional
 
 .PHONY: pip-optional
 pip-optional::
-	find . -maxdepth 3 -path '*/requirements-optional.txt' | NO_FAIL=1 PIP=$(PIP) xargs $(BASH_TOOLS)/python/python_pip_install_if_absent.sh
+	find . -maxdepth 3 -path '*/requirements-optional.txt' | NO_FAIL=1 PIP="$(PIP)" xargs --no-run-if-empty "$(BASH_TOOLS)/python/python_pip_install_if_absent.sh"
 
 .PHONY: pip-user
 pip-user::
