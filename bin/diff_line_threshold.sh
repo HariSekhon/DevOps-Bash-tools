@@ -28,8 +28,14 @@ Used to avoid overwriting files which are not mere updates but completely differ
 
 The max_line_diff threshold is 100 is not specified
 
-Used by ../cicd/sync_configs_to_adjacent_repos.sh to avoid overwriting master templates in the Templates repo
-with CI/CD configs from this repo
+Used by the following scripts to avoid overwriting configs in adjacent repos:
+
+../cicd/sync_ci_to_adjacent_repos.sh
+../cicd/sync_configs_to_adjacent_repos.sh
+
+to avoid overwriting master templates in the Templates repo with CI/CD configs from this repo
+
+If QUIET environment variable is set to any value then doesn't print anything, to not pollute logs for usage in above scripts
 "
 
 # used by usage() in lib/utils.sh
@@ -44,6 +50,12 @@ file1="$1"
 file2="$2"
 
 line_threshold="${3:-100}"
+
+if [ -n "${QUIET:-}" ]; then
+    timestamp(){
+        :
+    }
+fi
 
 timestamp "Comparing File 1: $file1"
 timestamp "Comparing File 2: $file2"
