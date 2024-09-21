@@ -42,9 +42,9 @@ help_usage "$@"
 java_version="${1:-}"
 
 if is_mac; then
-	grep(){
-		command ggrep "$@"
-	}
+    grep(){
+        command ggrep "$@"
+    }
 fi
 
 url_base="https://cdn.azul.com/zulu/bin"
