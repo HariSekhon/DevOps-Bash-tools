@@ -61,8 +61,9 @@ google-cloud-sdk-cbt
 google-cloud-sdk-cloud-build-local
 google-cloud-sdk-gke-gcloud-auth-plugin
 google-cloud-sdk-pubsub-emulator
-kubectl
 "
+# conflicts with kubernetes-client package
+#kubectl
 
 sudo=sudo
 [ $EUID -eq 0 ] && sudo=""
