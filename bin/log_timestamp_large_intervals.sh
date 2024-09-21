@@ -68,19 +68,19 @@ while read -r line; do
     gap_secs="$((current_epoch - last_epoch))"
 
     if [[ "$gap_secs" -gt "$minimum_secs_gap" ]]; then
-		# redundant information, use for debugging only
+        # redundant information, use for debugging only
         #echo "$gap_secs secs = $(date -d "@$last_epoch" +"$format") => $(date -d "@$current_epoch" +"$format")"
         #echo "$gap_secs secs"
-		#if [ "$gap_secs" -gt 60 ]; then
-			mins="$((gap_secs / 60))"
-			secs="$((gap_secs % 60))"
-			echo "$mins mins $secs secs"
-		#fi
-		echo "$last_line"
-		echo "$line"
-		echo
+        #if [ "$gap_secs" -gt 60 ]; then
+            mins="$((gap_secs / 60))"
+            secs="$((gap_secs % 60))"
+            echo "$mins mins $secs secs"
+        #fi
+        echo "$last_line"
+        echo "$line"
+        echo
     fi
 
     last_epoch="$current_epoch"
-	last_line="$line"
+    last_line="$line"
 done < "$logfile"
