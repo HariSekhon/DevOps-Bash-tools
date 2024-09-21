@@ -49,13 +49,13 @@ fi
 max_pid="$(cat /proc/sys/kernel/pid_max)"
 
 if ! is_int "$max_pid"; then
-	die "ERROR: failed to determine max pid of the system, got: $max_pid"
+    die "ERROR: failed to determine max pid of the system, got: $max_pid"
 fi
 
 if ! is_int "$pid" ||
    ! [ "$pid" -ge 1 ] ||
    ! [ "$pid" -le "$max_pid" ]; then
-	die "Error: PID '$pid' is not in the valid range of 1 to $max_pid"
+    die "Error: PID '$pid' is not in the valid range of 1 to $max_pid"
 fi
 
 maps_file="/proc/$pid/maps"
@@ -69,7 +69,7 @@ while IFS= read -r line; do
     # last field contains the file path
     lib_path="$(awk '{print $NF}' <<< "$line")"
 
-	# if the path contains in '.so' its a shared library
+    # if the path contains in '.so' its a shared library
     if [[ "$lib_path" =~ \.so$ ]] ||
        [[ "$lib_path" =~ \.so\. ]]; then
         realpath=$(readlink -f "$lib_path" 2>/dev/null)
