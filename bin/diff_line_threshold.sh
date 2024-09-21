@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Compares two files and a given line count diff threshold to determine if they are radically different
+Compares two files vs a line count diff threshold to determine if they are radically different
 
 This is used to avoid overwriting files which are not mere updates but completely different files
 
