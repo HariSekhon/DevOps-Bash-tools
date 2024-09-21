@@ -31,6 +31,9 @@ pool:
 #container: ubuntu:22.04
 
 steps:
+  - script: cat /etc/*-release
+    displayName: OS Release
+
   # requires script as first key, otherwise parsing breaks with error message:  Unexpected value 'displayName'
   - script: env | sort
     displayName: env
