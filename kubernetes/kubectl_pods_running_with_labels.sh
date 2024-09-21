@@ -46,18 +46,18 @@ kube_config_isolate
 label_args=()
 
 validate_label(){
-	local arg="$1"
-	if ! [[ "$arg" =~ ^[[:alnum:]-]+=[[:alnum:]-]+$ ]]; then
-		die "Invalid label key=value pair given (does not match regex validation): $arg"
-	fi
+    local arg="$1"
+    if ! [[ "$arg" =~ ^[[:alnum:]-]+=[[:alnum:]-]+$ ]]; then
+        die "Invalid label key=value pair given (does not match regex validation): $arg"
+    fi
 }
 
 until [ $# -lt 1 ]; do
     case $1 in
-		-*)	break
-			;;
+        -*) break
+            ;;
          *) validate_label "$1"
-			label_argss+=(-l "$1")
+            label_argss+=(-l "$1")
             ;;
     esac
     shift || :
