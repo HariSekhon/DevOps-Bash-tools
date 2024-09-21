@@ -304,6 +304,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `log_timestamp_large_intervals.sh` - finds log lines whose timestamp intervals exceed the given number of seconds and outputs those log lines with the difference between the last and current timestamps. Useful to find actions that are taking a long time from log files such as CI/CD logs
+- `diff_line_threshold.sh` - compares two files vs a line count diff threshold to determine if they are radically different. Used to avoid overwriting files which are not mere updates but completely different files
 - `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
