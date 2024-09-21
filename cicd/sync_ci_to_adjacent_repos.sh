@@ -17,6 +17,26 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Syncs CI configs listed in ../setup/ci.txt to all adjacent repo checkouts listed in ../setup/repos.txt
+
+Quick way of updating CI/CD configs between repos
+
+and then using ../git/github_foreach_repo.sh to commit them
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<one_config_file_to_sync>]"
+
+help_usage "$@"
+
+max_args 1 "$@"
+
 cd "$srcdir/.."
 
 sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt" |
@@ -34,11 +54,11 @@ while read -r repo dir; do
     fi
     # filtered above
     #if ls -lLdi "$dir" "$srcdir" | awk '{print $1}' | uniq -d | grep -q .; then
-    #    echo "skipping $dir as it's our directory"
+    #    timestamp "skipping $dir as it's our directory"
     #    continue
     #fi
     if ! [ -d "../$dir" ]; then
-        echo "WARNING: repo dir $dir not found, skipping..."
+        timestamp "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
     if [ -n "$*" ]; then
@@ -55,8 +75,12 @@ while read -r repo dir; do
         else
             continue
         fi
+        if ! QUIET=1 "$srcdir/../bin/diff_line_threshold.sh" "$filename" "$target"; then
+            timestamp "Skipping CI/CD Config Sync for file due to large diff: $filename"
+            continue
+        fi
         mkdir -pv "${target%/*}"
-        echo "syncing $filename -> $target"
+        timestamp "Syncing $filename -> $target"
         perl -pe "s/(?<!- )(devops-)*bash-tools/$repo/i" "$filename" > "$target"
         #if [ "$repo" = "nagios-plugins" ]; then
         #    perl -pi -e 's/(^[[:space:]]+make ci$)/\1 ci zookeeper-retry/' "$target"
