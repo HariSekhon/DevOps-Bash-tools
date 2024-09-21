@@ -98,26 +98,26 @@ cidr="$public_ip/32"
 protocol="tcp"
 
 security_rule_exists=$(jq -r \
-	--arg protocol "$protocol" \
-	--arg port "$port" \
-	--arg cidr "$cidr" '
-  		.[] |
-		select(.IpProtocol == $protocol and
-			   .FromPort   == ($port | tonumber) and
+    --arg protocol "$protocol" \
+    --arg port "$port" \
+    --arg cidr "$cidr" '
+        .[] |
+        select(.IpProtocol == $protocol and
+               .FromPort   == ($port | tonumber) and
                .ToPort == ($port | tonumber) and
                .IpRanges[]?.CidrIp == $cidr) |
-		length > 0
+        length > 0
 ' <<< "$security_group_rules")
 
 if [ "$security_rule_exists" = "true" ]; then
   timestamp "Security rule already exists in security group '$security_group', skipping adding it"
 else
-	timestamp "Adding rule to security group '$security_group' opening port $port to your IP '$public_ip'"
-	aws ec2 authorize-security-group-ingress \
-				--group-id "$security_group_id" \
-				--protocol tcp \
-				--port "$port" \
-				--cidr "$cidr"
+    timestamp "Adding rule to security group '$security_group' opening port $port to your IP '$public_ip'"
+    aws ec2 authorize-security-group-ingress \
+                --group-id "$security_group_id" \
+                --protocol tcp \
+                --port "$port" \
+                --cidr "$cidr"
 fi
 
 timestamp "Adding security group '$security_group' to RDS instance '$db_instance'"
