@@ -44,7 +44,7 @@ ERROR: (gcloud.secrets.create) FAILED_PRECONDITION: Constraint constraints/gcp.r
 
 Then just append the following gcloud secrets args when calling this script to set a location (change --locations to your preferred):
 
-	--replication-policy user-managed --locations europe-west2
+    --replication-policy user-managed --locations europe-west2
 
 
 $usage_gcloud_sdk_required
