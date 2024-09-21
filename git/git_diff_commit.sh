@@ -46,7 +46,7 @@ help_usage "$@"
 resolve_symlinks(){
     local readlink=readlink
     if is_mac; then
-		readlink=greadlink
+        readlink=greadlink
         if ! type -P greadlink >&/dev/null; then
             "$srcdir/../packages/brew_install_package.sh" coreutils  # for greadlink
         fi
@@ -57,9 +57,10 @@ resolve_symlinks(){
 }
 
 git_diff_commit(){
-	local basedir
+    local basedir
     for filename in "${@:-.}"; do
         if [ "$filename" != . ]; then
+            # TODO: detect link changes and commit them too
             filename="$(resolve_symlinks "$filename")"
         fi
         basedir="$(dirname "$filename")"
@@ -72,25 +73,25 @@ git_diff_commit(){
         for changed_filename in $changed_files; do
             basename="${changed_filename##*/}"
             diff="$(git diff --color=always -- "$changed_filename"
-					git diff --cached --color=always -- "$changed_filename")"
+                    git diff --cached --color=always -- "$changed_filename")"
             if [ -z "$diff" ]; then
                 continue
             fi
             echo "$diff" | more -FR
             echo
-			# discard the save variable, call it _ to signify this
+            # discard the save variable, call it _ to signify this
             read -r -p "Hit enter to commit '$changed_filename' or Control-C to cancel" _
             echo
             git add -- "$changed_filename"
-			echo "committing $changed_filename"
-			git commit -m "updated $basename" -- "$changed_filename"
+            echo "committing $changed_filename"
+            git commit -m "updated $basename" -- "$changed_filename"
         done
         popd >&/dev/null || :
     done
 }
 
 for target in "${@:-.}"; do
-	git_diff_commit "$target"
+    git_diff_commit "$target"
 done
 
 timestamp "Git Diff Commit completed"
