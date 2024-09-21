@@ -29,7 +29,7 @@ pool:
   vmImage: 'ubuntu-22.04'
 
 # unprivileged container without sudo, cannot install dependencies
-#container: ubuntu:18.04
+container: ubuntu:22.04
 
 steps:
   # requires script as first key, otherwise parsing breaks with error message:  Unexpected value 'displayName'
