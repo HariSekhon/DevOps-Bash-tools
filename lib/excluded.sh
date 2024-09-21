@@ -53,7 +53,9 @@ isExcluded(){
             return 0
         fi
     fi
-    if ! uname -s | grep -q Darwin; then
+    # optimization to avoid fork
+    #if ! uname -s | grep -q Darwin; then
+    if ! [[ "${OSTYPE:-}" == darwin* ]]; then
         if [[ "$prog" =~ /applescript/ ]]; then
             return 0
         fi
