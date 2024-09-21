@@ -86,7 +86,7 @@ run(){
         done
         echo
         if [ -z "${NO_PUSH:-}" ]; then
-            if [ -z "${NO_REVIEW_PUSH:-}" ]; then
+            if [ -n "${REVIEW_PUSH:-}" ]; then
                 "$srcdir/git_review_push.sh"
             else
                 git push
