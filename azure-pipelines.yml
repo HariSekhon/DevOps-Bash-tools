@@ -41,7 +41,7 @@ steps:
 
   # requires script as first key, otherwise parsing breaks with error message:  Unexpected value 'displayName'
   - script: env | sort
-    displayName: env
+    displayName: Environment
 
   # doesn't work in container due to unprivileged execution and lack of sudo
   #- script: sudo apt-get update && sudo apt-get install -y git make
