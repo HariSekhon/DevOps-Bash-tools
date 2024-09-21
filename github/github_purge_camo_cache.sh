@@ -50,7 +50,7 @@ else
 fi
 
 if ! is_github_owner_repo "$owner_repo"; then
-	usage "Invalid owner/repo given: $owner_repo"
+    usage "Invalid owner/repo given: $owner_repo"
 fi
 
 url="https://github.com/$owner_repo"
