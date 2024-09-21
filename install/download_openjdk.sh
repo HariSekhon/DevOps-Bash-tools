@@ -38,9 +38,9 @@ help_usage "$@"
 java_version="${1:-}"
 
 if is_mac; then
-	grep(){
-		command ggrep "$@"
-	}
+    grep(){
+        command ggrep "$@"
+    }
 fi
 
 if is_blank "$java_version"; then
