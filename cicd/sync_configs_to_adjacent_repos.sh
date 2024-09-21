@@ -39,6 +39,8 @@ num_args 0 "$@"
 
 cd "$srcdir/.."
 
+tmpfile="$(mktemp)"
+
 if [ -n "$*" ]; then
     echo "$@"
 else
@@ -66,14 +68,21 @@ while read -r repo dir; do
         else
             continue
         fi
-        mkdir -pv "${target%/*}"
         if [ -f "$filename" ]; then
+            perl -pe "s/(devops-)*bash-tools/$repo/i" "$filename" > "$tmpfile"
+            tmpfile_checksum="$(cksum "$tmpfile" | awk '{print $1}')"
+            target_checksum="$(cksum "$target" | awk '{print $1}')"
+            if [ "$tmpfile_checksum" = "$target_checksum" ]; then
+                log "Skipping Config Sync for file due to same checksum: $filename"
+                continue
+            fi
             if ! QUIET=1 "$srcdir/../bin/diff_line_threshold.sh" "$filename" "$target"; then
                 timestamp "Skipping Config Sync for file due to large diff: $filename"
                 continue
             fi
+            mkdir -pv "${target%/*}"
             timestamp "Syncing $filename -> $target"
-            perl -pe "s/(devops-)*bash-tools/$repo/i" "$filename" > "$target"
+            mv "$tmpfile" "$target"
         else
             timestamp "File not found: $filename. Skipping..."
         fi
