@@ -39,6 +39,8 @@ max_args 1 "$@"
 
 cd "$srcdir/.."
 
+tmpfile="$(mktemp)"
+
 sed 's/#.*//; s/:/ /' "$srcdir/../setup/repos.txt" |
 grep -vi -e bash-tools \
          -e jenkins \
@@ -75,16 +77,20 @@ while read -r repo dir; do
         else
             continue
         fi
+        perl -pe "s/(?<!- )(devops-)*bash-tools/$repo/i" "$filename" > "$tmpfile"
+        tmpfile_checksum="$(cksum "$tmpfile" | awk '{print $1}')"
+        target_checksum="$(cksum "$target" | awk '{print $1}')"
+        if [ "$tmpfile_checksum" = "$target_checksum" ]; then
+            #timestamp "Skipping CI/CD Config Sync for file due to same checksum: $filename"
+            continue
+        fi
         if ! QUIET=1 "$srcdir/../bin/diff_line_threshold.sh" "$filename" "$target"; then
             timestamp "Skipping CI/CD Config Sync for file due to large diff: $filename"
             continue
         fi
         mkdir -pv "${target%/*}"
         timestamp "Syncing $filename -> $target"
-        perl -pe "s/(?<!- )(devops-)*bash-tools/$repo/i" "$filename" > "$target"
-        #if [ "$repo" = "nagios-plugins" ]; then
-        #    perl -pi -e 's/(^[[:space:]]+make ci$)/\1 ci zookeeper-retry/' "$target"
-        #fi
+        mv "$tmpfile" "$target"
     done
 done
 "$srcdir/../.github/workflows/sync_to_adjacent_repos.sh" "$@"
