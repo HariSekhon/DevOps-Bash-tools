@@ -93,4 +93,4 @@ while read -r repo dir; do
         mv "$tmpfile" "$target"
     done
 done
-"$srcdir/../.github/workflows/sync_to_adjacent_repos.sh" "$@"
+"$srcdir/sync_github_actions_workflows_to_adjacent_repos.sh" "$@"
