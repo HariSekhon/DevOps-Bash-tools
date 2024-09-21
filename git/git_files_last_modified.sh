@@ -56,7 +56,7 @@ for dir in "${@:-.}"; do
         # ai - 2020-07-17 21:52:55 +0100
         # escape % in filename to come out literally
         name="${filename//%/%%}"
-        git log --format="%ai	%H	$name" "$filename"
+        git log --format="%ai   %H  $name" "$filename"
     done
     if [ -n "${VERBOSE:-}" ]; then
         echo >&2
