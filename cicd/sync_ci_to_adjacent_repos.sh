@@ -81,7 +81,7 @@ while read -r repo dir; do
         tmpfile_checksum="$(cksum "$tmpfile" | awk '{print $1}')"
         target_checksum="$(cksum "$target" | awk '{print $1}')"
         if [ "$tmpfile_checksum" = "$target_checksum" ]; then
-            #timestamp "Skipping CI/CD Config Sync for file due to same checksum: $filename"
+            log "Skipping CI/CD Config Sync for file due to same checksum: $filename"
             continue
         fi
         if ! QUIET=1 "$srcdir/../bin/diff_line_threshold.sh" "$filename" "$target"; then
