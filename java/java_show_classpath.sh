@@ -56,7 +56,7 @@ fi
 #fi
 
 is_jps_output(){
-	# JPS output format
+    # JPS output format
     [[ "$1" =~ ^([[:digit:]]+)[[:space:]]+([[:alnum:]]*)$ ]]
 }
 
@@ -69,22 +69,22 @@ show_cli_classpath(){
     [[ "$cmd" =~ java ]] || return
     args="${cmd#*java }"
     #cmd="$(replace_classpath_with_token "$cmd")"
-	echo
+    echo
     echo "command:  $cmd"
     echo
     count=0
-	# XXX: will break upon directories in classpath containing a space, but this should be rare on unix systems
+    # XXX: will break upon directories in classpath containing a space, but this should be rare on unix systems
     classpaths="$(grep -Eo -- '-(cp|classpath)[=[:space:]]+(.+)[[:space:]]' <<< "$args" || die "Failed to find classpath in args '$args'")"
-	classpaths="${classpaths## }"
-	classpaths="${classpaths##-cp}"
-	classpaths="${classpaths##-classpath}"
-	classpaths="${classpaths##=}"
-	IFS=':' read -r -a classpaths <<< "$classpaths"
-	for classpath in "${classpaths[@]}"; do
-		[ -z "$classpath" ] && continue
-		echo "classpath:  $classpath"
-		count=$((count + 1))
-	done
+    classpaths="${classpaths## }"
+    classpaths="${classpaths##-cp}"
+    classpaths="${classpaths##-classpath}"
+    classpaths="${classpaths##=}"
+    IFS=':' read -r -a classpaths <<< "$classpaths"
+    for classpath in "${classpaths[@]}"; do
+        [ -z "$classpath" ] && continue
+        echo "classpath:  $classpath"
+        count=$((count + 1))
+    done
     [ $count -gt 0 ] && echo
     echo "$count classpath(s) found"
     echo
@@ -97,7 +97,7 @@ show_jinfo_classpath(){
         pid="${BASH_REMATCH[1]}"
         # skip Jps itself which may be lingering in the process list from our call before this function
         [ "${BASH_REMATCH[2]:-}" = Jps ] && return
-		if [ -z "${BASH_REMATCH[2]:-}" ]; then
+        if [ -z "${BASH_REMATCH[2]:-}" ]; then
             cmd+=" <embedded JVM no classname from JPS output>"
         fi
         echo "JPS:     $cmd"
@@ -160,14 +160,14 @@ show_jinfo_classpath(){
 }
 
 if ! process_list="$(jps 2>/dev/null)"; then
-	echo "WARNING: jps failed, perhaps not in \$PATH? (\$PATH = $PATH)" >&2
-	echo "WARNING: Falling back to ps command, may be less accurate" >&2
-	process_list="$(ps -e -o pid,user,command)"
+    echo "WARNING: jps failed, perhaps not in \$PATH? (\$PATH = $PATH)" >&2
+    echo "WARNING: Falling back to ps command, may be less accurate" >&2
+    process_list="$(ps -e -o pid,user,command)"
 fi
 
 while IFS= read -r line; do
     log "input: $line"
-	if is_jps_output "$line"; then
+    if is_jps_output "$line"; then
         if [ -n "$command_regex" ]; then
             if [[ "$line" =~ $command_regex ]]; then
                 show_jinfo_classpath "$line"
