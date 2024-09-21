@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Compares two files vs a line count diff threshold to determine if they are radically different
 
-This is used to avoid overwriting files which are not mere updates but completely different files
+Used to avoid overwriting files which are not mere updates but completely different files
 
 The max_line_diff threshold is 100 is not specified
 
