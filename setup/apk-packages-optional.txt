@@ -27,3 +27,6 @@ python3
 py-pip
 py2-pip
 py3-pip
+
+# available from Alpine 3.20 only
+pre-commit
