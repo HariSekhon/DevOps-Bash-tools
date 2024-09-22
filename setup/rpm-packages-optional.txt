@@ -39,7 +39,7 @@ hostname
 # not available in RHEL 6 repos
 parallel
 
-# not available on older CentOS
+# not available on CentOS due to being older
 pre-commit
 
 procps     # RHEL <= 7 (RHEL 7 maps procps to procps-ng)
