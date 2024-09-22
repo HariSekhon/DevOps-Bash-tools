@@ -26,8 +26,9 @@ usage_description="
 Runs package installs on all the major versions of a given docker image to check given packages
 are available before adding them and breaking builds across distro versions
 
-Uses adjacent script:
+Uses adjacent scripts:
 
+    ../bin/linux_distro_versions.sh
     ../packages/install_packages.sh
 
 to install the packages using whatever local package manager is detected
