@@ -39,7 +39,8 @@ hostname
 # not available in RHEL 6 repos
 parallel
 
-# not available on CentOS or Rocky Linux as of version 9
+# not available as of Rocky Linux 9 or any version of CentOS
+# available from Fedora 31 onwards
 pre-commit
 
 procps     # RHEL <= 7 (RHEL 7 maps procps to procps-ng)
