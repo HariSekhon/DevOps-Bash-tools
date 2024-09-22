@@ -23,8 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs package installs on all the major versions of a given docker image to check given packages
-are available before adding them and breaking builds across distro versions
+Runs package installs on the last 8 major versions of a given docker image to check given packages are available
+before adding them and breaking builds across distro versions
 
 Uses adjacent scripts:
 
@@ -33,6 +33,8 @@ Uses adjacent scripts:
     ../packages/install_packages.sh
 
 to install the packages using whatever local package manager is detected
+
+Set environment variable MAX_VERSIONS to change the number of distro versions to run against (default: 8)
 
 Currently only supports DockerHub images
 "
@@ -47,6 +49,12 @@ min_args 2 "$@"
 
 image="$1"
 shift || :
+
+max_versions="${MAX_VERSIONS:-8}"
+
+if ! is_int "$max_versions"; then
+    die "MAX_VERSIONS may only be set to an integer, not: $max_versions"
+fi
 
 check_bin docker
 
@@ -73,6 +81,8 @@ if grep -Eq '^[[:digit:]]+$' <<< "$major_versions"; then
     timestamp "Major version tags detected, using only those to save time"
     major_versions="$(grep -EO -e '^[[:digit:]]+$' -e 'latest' <<< "$major_versions" | sort -Vr)"
 fi
+
+major_versions="$(head -n "$max_versions" <<< "$major_versions")"
 
 echo
 timestamp "Running for major versions:"
