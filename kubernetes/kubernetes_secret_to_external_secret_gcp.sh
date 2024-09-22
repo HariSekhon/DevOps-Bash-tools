@@ -147,6 +147,8 @@ if gcloud secrets list --format='value(name)' | grep -Fxq "$secret"; then
     timestamp "Getting GCP secret '$secret' value"
     gcp_secret_value="$("$srcdir/../gcp/gcp_secret_get.sh" "$secret")"
     # if it's GCP service account key
+    # false positive - trivy:ignore:gcp-service-account doesn't work
+    # trivy:ignore:gcp-service-account
     if grep -Fq '"type": "service_account"' <<< "$gcp_secret_value"; then
         # doesn't work
         #if [ "$(jq -Mr <<< "$gcp_secret_value")" = "$(jq -Mr <<< "$k8s_secret_value")" ]; then
