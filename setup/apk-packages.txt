@@ -29,7 +29,6 @@ openssh-client
 parallel
 perl
 perl-app-cpanminus
-pre-commit
 ruby-dev # to build Travis CI gem
 wget
 which
