@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
@@ -13,12 +13,12 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-set -euo pipefail
+set -eu #o pipefail
 [ -n "${DEBUG:-}" ] && set -x
-srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir="$(dirname "$0")"
 
 check_bin(){
-    type -P "$@" &>/dev/null
+    command -v "$1" >/dev/null 2>/dev/null
 }
 
 if check_bin apk; then
