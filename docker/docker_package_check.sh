@@ -50,15 +50,16 @@ shift || :
 
 check_bin docker
 
-if [[ "$image" =~ debian ]]; then
-    timestamp "Debian detected, this has a huge DockerHub tag list which takes ages to iterate through the DockerHub API"
-    timestamp "Optimization, pull major release list from debian.org instead"
-    major_versions="latest
-$("$srcdir/../bin/linux_distro_versions.sh" debian)"
+if [[ "$image" =~ alpine ]]; then
+    major_versions="$("$srcdir/../bin/linux_distro_versions.sh" alpine)"
+elif [[ "$image" =~ debian ]]; then
+    major_versions="$("$srcdir/../bin/linux_distro_versions.sh" debian)"
 elif [[ "$image" =~ ubuntu ]]; then
-    timestamp "Ubuntu detected, pulling release list from releases.ubuntu.com for speed rather than DockerHub API"
-    major_versions="latest
-$("$srcdir/../bin/linux_distro_versions.sh" ubuntu)"
+    major_versions="$("$srcdir/../bin/linux_distro_versions.sh" ubuntu)"
+elif [[ "$image" =~ fedora ]]; then
+    major_versions="$("$srcdir/../bin/linux_distro_versions.sh" fedora)"
+elif [[ "$image" =~ centos ]]; then
+    major_versions="$("$srcdir/../bin/linux_distro_versions.sh" centos)"
 else
     timestamp "Querying DockerHub for major versions of image '$image'"
     major_versions="$(
