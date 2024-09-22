@@ -75,7 +75,8 @@ elif [ "$distro" = rocky ] || [ "$distro" = rockylinux ]; then
     grep -Eo 'Rocky Linux [[:digit:]]+' |
     sed 's/Rocky Linux //; s/[[:space:]]*$//'
 elif [ "$distro" = alpine ]; then
-    curl -sS https://alpinelinux.org/releases/ |
+    #curl -sS https://alpinelinux.org/releases/ |
+    curl -sS https://dl-cdn.alpinelinux.org/alpine/ |
     grep -Eo 'v[[:digit:]]+\.[[:digit:]]+' |
     sed 's/^v//; s/[[:space:]]*$//'
 else
