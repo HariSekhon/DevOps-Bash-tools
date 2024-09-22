@@ -693,7 +693,7 @@ See also [Knowledge Base notes for Kubernetes](https://github.com/HariSekhon/Kno
   - `dockerhub_api.sh` - queries DockerHub API v2 with or without authentication (`$DOCKERHUB_USER` & `$DOCKERHUB_PASSWORD` / `$DOCKERHUB_TOKEN`)
   - `docker_api.sh` - queries a Docker Registry with optional basic authentication if `$DOCKER_USER` & `$DOCKER_PASSWORD` are set
   - `docker_build_hashref.sh` - runs `docker build` and auto-generates docker image name and tag from relative Git path and commit short SHA hashref and a dirty sha suffix if git contents are modified. Useful to compare docker image sizes between your clean and modified versions of `Dockerfile` or contents
-  - `docker_package_check.sh` - runs package installs on all the major versions of a given docker image to check given packages are available before adding them and breaking builds across distro versions
+  - `docker_package_check.sh` - runs package installs on major versions of a docker image to check given packages are available before adding them and breaking builds across linux distro versions
   - `docker_registry_list_images.sh` - lists images in a given private Docker Registry
   - `docker_registry_list_tags.sh` - lists tags for a given image in a private Docker Registry
   - `docker_registry_get_image_manifest.sh` - gets a given image:tag manifest from a private Docker Registry
