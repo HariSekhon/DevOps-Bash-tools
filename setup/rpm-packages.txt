@@ -31,7 +31,6 @@ openssh-clients
 parallel
 perl
 #perl-App-cpanminus  # not available on RHEL6, moved to rpm-packages-optional.txt
-pre-commit
 #ShellCheck  # not available in RHEL8, moved to rpm-packages-optional.txt
 ruby-devel  # to build Travis CI gem
 wget
