@@ -48,12 +48,19 @@ shift || :
 
 check_bin docker
 
-timestamp "Querying DockerHub for major versions of image '$image'"
-major_versions="$(
-    "$srcdir/../docker/dockerhub_list_tags.sh" "$image" |
-    grep -Eo -e '^[[:digit:]]+(\.[[:digit:]]+)?$' \
-             -e '^latest$'
-)"
+if [[ "$image" =~ debian ]]; then
+    timestamp "Debian detected, this has a huge DockerHub tag list which takes ages to iterate through the DockerHub API"
+    timestamp "Optimization, pull major release list from debian.org instead"
+    major_versions="latest
+$(curl -sS https://www.debian.org/releases/ | grep -Eo 'Debian [[:digit:]]+' | sed 's/^Debian //')"
+else
+    timestamp "Querying DockerHub for major versions of image '$image'"
+    major_versions="$(
+        "$srcdir/../docker/dockerhub_list_tags.sh" "$image" |
+        grep -Eo -e '^[[:digit:]]+(\.[[:digit:]]+)?$' \
+                 -e '^latest$'
+    )"
+fi
 
 if grep -Eq '^[[:digit:]]+$' <<< "$major_versions"; then
     timestamp "Major version tags detected, using only those to save time"
