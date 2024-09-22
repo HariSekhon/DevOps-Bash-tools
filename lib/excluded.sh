@@ -60,6 +60,18 @@ isExcluded(){
             return 0
         fi
     fi
+    #if is_CI &&
+    #   git rev-parse --is-inside-work-tree &>/dev/null; then
+    #    echo "Running in CI and within Git repo checkout, skipping submodules"
+    #    # sufficient as long as no submodule dirs have spaces in them
+    #    #submodules="$(git submodule | awk '{print $2}')"
+    #    submodules="$(git submodule | cut -c 43- | cut -f 1 -d'(')"
+    #    for submodule_dir in $submodules; do
+    #        if [[ "$prog" =~ /$submodule_dir/ ]]; then
+    #            return 0
+    #        fi
+    #    done
+    #fi
     # this external git check is expensive, skip it when in CI as using fresh git checkouts
     #is_CI && return 1
     ## shellcheck disable=SC2230
