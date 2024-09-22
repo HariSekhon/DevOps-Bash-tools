@@ -71,9 +71,12 @@ elif [ "$distro" = redhat ]; then
     grep -Eo 'Red Hat Enterprise Linux [[:digit:]]+' |
     sed 's/Red Hat Enterprise Linux //; s/[[:space:]]*$//'
 elif [ "$distro" = rocky ] || [ "$distro" = rockylinux ]; then
-    curl -sS https://wiki.rockylinux.org/rocky/version/ |
-    grep -Eo 'Rocky Linux [[:digit:]]+' |
-    sed 's/Rocky Linux //; s/[[:space:]]*$//'
+    #curl -sS https://wiki.rockylinux.org/rocky/version/ |
+    #grep -Eo 'Rocky Linux [[:digit:]]+' |
+    #sed 's/Rocky Linux //; s/[[:space:]]*$//'
+    curl -sS https://dl.rockylinux.org/pub/rocky/ |
+    grep -Eo '>[[:digit:]]+/<' |
+    sed 's/^>//; s|/<$||'
 elif [ "$distro" = alpine ]; then
     #curl -sS https://alpinelinux.org/releases/ |
     curl -sS https://dl-cdn.alpinelinux.org/alpine/ |
