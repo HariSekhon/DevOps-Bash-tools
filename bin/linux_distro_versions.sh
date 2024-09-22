@@ -48,7 +48,12 @@ num_args 1 "$@"
 distro="$1"
 
 shopt -s nocasematch
-if [ "$distro" = debian ]; then
+if [ "$distro" = alpine ]; then
+    #curl -sS https://alpinelinux.org/releases/ |
+    curl -sS https://dl-cdn.alpinelinux.org/alpine/ |
+    grep -Eo 'v[[:digit:]]+\.[[:digit:]]+' |
+    sed 's/^v//; s/[[:space:]]*$//'
+elif [ "$distro" = debian ]; then
     curl -sS https://www.debian.org/releases/ |
     grep -Eo 'Debian [[:digit:]]+' |
     sed 's/^Debian //'
@@ -77,11 +82,6 @@ elif [ "$distro" = rocky ] || [ "$distro" = rockylinux ]; then
     curl -sS https://dl.rockylinux.org/pub/rocky/ |
     grep -Eo '>[[:digit:]]+/<' |
     sed 's/^>//; s|/<$||'
-elif [ "$distro" = alpine ]; then
-    #curl -sS https://alpinelinux.org/releases/ |
-    curl -sS https://dl-cdn.alpinelinux.org/alpine/ |
-    grep -Eo 'v[[:digit:]]+\.[[:digit:]]+' |
-    sed 's/^v//; s/[[:space:]]*$//'
 else
     usage "Unsupported Linux distro: $distro"
 fi |
