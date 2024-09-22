@@ -33,7 +33,6 @@ make
 openssh-client
 parallel
 perl
-pre-commit
 procps
 psmisc  # for fuser for apt_wait.sh
 ruby-dev  # to build Travis CI gem
