@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: ubuntu pre-commit
 #
 #  Author: Hari Sekhon
 #  Date: 2024-09-22 20:47:39 +0100 (Sun, 22 Sep 2024)
