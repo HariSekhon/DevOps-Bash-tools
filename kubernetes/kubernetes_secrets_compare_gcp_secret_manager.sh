@@ -141,7 +141,7 @@ check_key(){
     else
         gcp_secret_value="$("$srcdir/../gcp/gcp_secret_get.sh" "$gcp_secret")"
         # if it's GCP service account key
-        # doesn't work
+        # false positive - trivy:ignore:gcp-service-account doesn't work
         # trivy:ignore:gcp-service-account
         if grep -Fq '"type": "service_account"' <<< "$gcp_secret_value"; then
             if [ -n "$(diff -w <(echo "$gcp_secret_value") <(echo "$k8s_secret_value") )" ]; then
