@@ -65,12 +65,6 @@ elif [ "$distro" = fedora ]; then
     curl -sS https://dl.fedoraproject.org/pub/fedora/linux/releases/ |
     grep -Eo '>[[:digit:]]+/<' |
     sed 's/^>//; s|/<$||'
-elif [ "$distro" = centos ]; then
-    # EOL so just print the known versions
-    echo "5
-6
-7
-8"
 elif [ "$distro" = redhat ]; then
     curl -sS https://access.redhat.com/articles/3078 |
     grep -Eo 'Red Hat Enterprise Linux [[:digit:]]+' |
@@ -82,6 +76,12 @@ elif [ "$distro" = rocky ] || [ "$distro" = rockylinux ]; then
     curl -sS https://dl.rockylinux.org/pub/rocky/ |
     grep -Eo '>[[:digit:]]+/<' |
     sed 's/^>//; s|/<$||'
+elif [ "$distro" = centos ]; then
+    # EOL so just print the known versions
+    echo "5
+6
+7
+8"
 else
     usage "Unsupported Linux distro: $distro"
 fi |
