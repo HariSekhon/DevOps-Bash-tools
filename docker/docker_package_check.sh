@@ -27,7 +27,7 @@ are available before adding them and breaking builds across distro versions
 
 Uses adjacent script:
 
-    install_packages.sh
+    ../packages/install_packages.sh
 
 to install the packages using whatever local package manager is detected
 
