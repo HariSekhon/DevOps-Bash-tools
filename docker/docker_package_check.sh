@@ -52,7 +52,11 @@ if [[ "$image" =~ debian ]]; then
     timestamp "Debian detected, this has a huge DockerHub tag list which takes ages to iterate through the DockerHub API"
     timestamp "Optimization, pull major release list from debian.org instead"
     major_versions="latest
-$(curl -sS https://www.debian.org/releases/ | grep -Eo 'Debian [[:digit:]]+' | sed 's/^Debian //')"
+$(curl -sS https://www.debian.org/releases/ | grep -Eo 'Debian [[:digit:]]+' | sed 's/^Debian //' | sort -Vr)"
+elif [[ "$image" =~ ubuntu ]]; then
+    timestamp "Ubuntu detected, pulling release list from releases.ubuntu.com for speed rather than DockerHub API"
+    major_versions="latest
+$(curl -sS https://releases.ubuntu.com/ | grep -Eo 'Ubuntu [[:digit:]]+\.[[:digit:]]+' | sort -Vr)"
 else
     timestamp "Querying DockerHub for major versions of image '$image'"
     major_versions="$(
