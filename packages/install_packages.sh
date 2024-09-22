@@ -17,20 +17,18 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-packages=("$@")
-
 check_bin(){
     type -P "$@" &>/dev/null
 }
 
 if check_bin apk; then
-    "$srcdir/apk_install_packages.sh" "${packages[@]}"
+    "$srcdir/apk_install_packages.sh" "$@"
 elif check_bin apt-get; then
-    "$srcdir/apt_install_packages.sh" "${packages[@]}"
+    "$srcdir/apt_install_packages.sh" "$@"
 elif check_bin yum; then
-    "$srcdir/yum_install_packages.sh" "${packages[@]}"
+    "$srcdir/yum_install_packages.sh" "$@"
 elif check_bin brew; then
-    "$srcdir/brew_install_packages.sh" "${packages[@]}"
+    "$srcdir/brew_install_packages.sh" "$@"
 else
     echo "ERROR: No recognized package manager found to install packages with"
     exit 1
