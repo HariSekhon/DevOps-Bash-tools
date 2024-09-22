@@ -78,7 +78,6 @@ echo
 timestamp "Running for major versions:"
 echo
 echo "$major_versions"
-echo
 
 for version in $major_versions; do
     echo
