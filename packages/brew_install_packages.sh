@@ -111,6 +111,12 @@ if [ -n "${CASK:-}" ]; then
     opts="--cask"
 fi
 
+echo
+echo "Packages to be installed:"
+echo
+tr ' ' '\n' <<< "$packages"
+echo
+
 # Fails if any of the packages are already installed, so you'll probably want to ignore and continue and detect missing
 # package later in build system if it's a problem eg. resulting in missing headers later in build
 if [ -n "${NO_FAIL:-}" ]; then
