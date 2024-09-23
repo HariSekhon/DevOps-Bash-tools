@@ -150,6 +150,7 @@ jenkins-x/jx/jx
 jnv  # json interactive viewer (pipe kubectl into it)
 #jpeg
 #jq  # in brew-packages.txt
+jruby
 jython
 k3d  # wrapper for k3s
 k6
