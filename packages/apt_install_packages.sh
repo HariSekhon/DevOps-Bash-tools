@@ -113,6 +113,12 @@ fi
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
+echo
+echo "Packages to be installed:"
+echo
+echo "$packages" | tr ' ' '\n'
+echo
+
 # requires fuser which might not already be installed, catch-22 situation if wanting to use this for everything including bootstraps
 #"$srcdir/apt_wait.sh"
 
