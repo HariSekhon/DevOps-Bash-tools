@@ -77,6 +77,11 @@ fi
 # uniq
 packages="$(echo "$packages" | tr ' ' ' \n' | sort -u | tr '\n' ' ')"
 
+echo "Packages to be installed:"
+echo
+echo "$packages" | tr ' ' '\n'
+echo
+
 opts=""
 if is_CI; then
     #opts="--quiet"  # doesn't print packages installed but still has a progress bar
