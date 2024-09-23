@@ -98,6 +98,12 @@ if grep -qi 'NAME=.*CentOS' /etc/*release && grep -q '^VERSION="[68]"$' /etc/*re
     sed -i 's|^#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|' /etc/yum.repos.d/CentOS-*
 fi
 
+echo
+echo "Packages to be installed:"
+echo
+tr ' ' '\n' <<< "$packages"
+echo
+
 if [ -n "${NO_FAIL:-}" ]; then
     if type -P dnf &>/dev/null; then
         # dnf exits if any of the packages aren't found so do them individually and ignore failures
