@@ -104,6 +104,7 @@ exiv2     # view image metadata
 ffmpeg
 #filezilla  # GUI ftp client - not found
 fish
+flyscrape
 fortune
 fswatch
 fzf
