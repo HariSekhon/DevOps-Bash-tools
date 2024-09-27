@@ -80,7 +80,7 @@ git_diff_commit(){
             echo "$diff" | more -FR
             echo
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to add commit '$added_filename' or Control-C to cancel" _
+            read -r -p "Hit enter to commit added file '$added_filename' or Control-C to cancel" _
             echo
             echo "committing added file $added_filename"
             git commit -m "added $basename" -- "$added_filename"
@@ -99,7 +99,7 @@ git_diff_commit(){
             echo "$diff" | more -FR
             echo
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to update commit '$changed_filename' or Control-C to cancel" _
+            read -r -p "Hit enter to commit updated file '$changed_filename' or Control-C to cancel" _
             echo
             git add -- "$changed_filename"
             echo "committing updated file $changed_filename"
