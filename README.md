@@ -779,7 +779,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
 
 - `git/*.sh` - [Git](https://git-scm.com/) scripts:
   - `precommit_run_changed_files.sh` - runs pre-commit on all files changed on the current branch vs the default branch. Useful to reproduce `pre-commit` checks that are failing in pull requests to get your PRs to pass
-  - `git_diff_commit.sh` - runs git diff and commit with a generic `"updated $filename"` commit message for each file in the files or directories given if they have changed, or all committed files under `$PWD` if no args are given. Super convenient for fast commits on the command line, and in vim and IDEs via hotkeys
+  - `git_diff_commit.sh` - quickly commits added or updated files to Git, showing a diff and easy enter prompt for each file. Super convenient for fast commits on the command line, and in vim and IDEs via hotkeys
   - `git_review_push.sh` - shows diff of what would be pushed upstream and prompts to push. Convenient for fast reviewed pushes via vim or IDEs hotkeys
   - `git_branch_delete_squash_merged.sh` - carefully detects if a squash merged branch you want to delete has no changes with the default trunk branch before deleting it.
      See [Squash Merges](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#squash-merges-require-force-deleting-branches) in knowledge-base about why this is necessary.
