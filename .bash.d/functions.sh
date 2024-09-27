@@ -62,13 +62,6 @@ new(){
     title "$LAST_TITLE"
 }
 
-idea(){
-    nohup command idea "$@" &
-    # disowns the first backgrounded command instead of the latest command,
-    # so use $! to specify the pid of the latest command in this shell
-    disown $!
-}
-
 # generates bash autocompletion if not available
 # sources bash autocompletion from local standardized path
 autocomplete(){
