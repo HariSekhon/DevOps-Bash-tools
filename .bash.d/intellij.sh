@@ -38,3 +38,4 @@ touch_idea(){
     touch "$@"
     idea "$@"
 }
+alias tidea="touch_idea"
