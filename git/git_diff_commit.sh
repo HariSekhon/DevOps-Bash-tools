@@ -23,7 +23,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs git diff and commit with a generic \"updated \$filename\" commit message
+Quickly commits added or updated files to Git, showing a diff and easily enter prompt for each file
+
+Commits with a generic \"added \$filename\" or \"updated \$filename\" commit message
 
 Lazy but awesome for lots of daily quick intermediate commit saves
 
@@ -65,9 +67,26 @@ git_diff_commit(){
         fi
         basedir="$(dirname "$filename")"
         pushd "$basedir" > /dev/null
+        git_status_porcelain="$(git status --porcelain -s "${filename##*/}")"
+        added_files="$(
+            grep -e '^?' -e '^A' <<< "$git_status_porcelain" |
+            sed 's/^...//' || :
+        )"
+        for added_filename in $added_files; do
+            basename="${added_filename##*/}"
+            git add "$basename"
+            diff="$(git diff --color=always -- "$added_filename"
+                    git diff --cached --color=always -- "$added_filename")"
+            echo "$diff" | more -FR
+            echo
+            # discard the save variable, call it _ to signify this
+            read -r -p "Hit enter to add commit '$added_filename' or Control-C to cancel" _
+            echo
+            echo "committing added file $added_filename"
+            git commit -m "added $basename" -- "$added_filename"
+        done
         changed_files="$(
-            git status --porcelain -s "${filename##*/}" |
-            grep -e '^M' -e '^.M' |
+            grep -e '^M' -e '^.M' <<< "$git_status_porcelain" |
             sed 's/^...//' || :
         )"
         for changed_filename in $changed_files; do
@@ -80,10 +99,10 @@ git_diff_commit(){
             echo "$diff" | more -FR
             echo
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to commit '$changed_filename' or Control-C to cancel" _
+            read -r -p "Hit enter to update commit '$changed_filename' or Control-C to cancel" _
             echo
             git add -- "$changed_filename"
-            echo "committing $changed_filename"
+            echo "committing updated file $changed_filename"
             git commit -m "updated $basename" -- "$changed_filename"
         done
         popd >&/dev/null || :
