@@ -90,8 +90,10 @@ idea(){
         #
         # can't find any reliable method for this function, see comment just above function itself for more details
         #open_intellij_project_if_not_already "$arg"
-        # XXX: caveat here - in order to not eat CLI args, we open all args after this loop, which means multiple markdown files in one command will open in the last project
-        #      which would still result in broken markdown preview if the markdown files are from different projects
+        # XXX: caveat here - in order to not eat CLI args, we open all args after this loop,
+        #      which means multiple markdown files in one command will open in the last project
+        #      This will still result in broken markdown preview for any markdown files that are outside
+        #      the last project directory which will be ithe foreground window
         if [[ "$arg" =~ \.md$ ]]; then
             dir="$(git_root "$arg" || :)"
             if [ -n "$dir" ]; then
