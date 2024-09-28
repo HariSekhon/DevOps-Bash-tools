@@ -299,6 +299,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 - `find_duplicate_files*.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `find_broken_links.sh` - find broken links with delays to avoid tripping defenses
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
+- `find_lock.sh` - tries to find if a lockfile is used in the given or current working directory by taking snapshots of the file list before and after a prompt in which you should open/close an application
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
 - `image_join_stack.sh` - stack joins two images after matching their widths so they align correctly
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
