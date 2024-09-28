@@ -165,8 +165,12 @@ alias readmesi='idea $(git_foreach_repo.sh '"'"'echo $PWD/README.md'"')"
 alias ureadmes='git_foreach_repo.sh '"'"'gitu README.md || :'"'"
 
 # equivalent of hg root
+# shellcheck disable=SC2120
 git_root(){
+    local path="${1:-.}"
+    pushd "$path" &>/dev/null || return 1
     git rev-parse --show-toplevel
+    popd &>/dev/null || return 1
 }
 
 gitgc(){
