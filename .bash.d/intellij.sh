@@ -29,6 +29,8 @@ if [ -d "/Applications/IntelliJ IDEA CE.app/Contents/MacOS" ]; then
     add_PATH "/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
 fi
 
+alias i='idea'
+
 # wrote find_lock.sh to try to find if IntelliJ uses a lock file in the git project
 # whether it's open or not but it found not file existence changes at all
 #
