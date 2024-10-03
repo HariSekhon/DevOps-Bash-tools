@@ -22,7 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Fetches the GitHub commit times from all public GitHub repos for a given user
+Graphs the GitHub commit times from all public GitHub repos for a given user
+
+Fetches the commit data via the GitHub API
 
 Requires GitHub CLI and GNUplot to be installed and GH_TOKEN to be present
 "
