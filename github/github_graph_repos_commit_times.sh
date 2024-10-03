@@ -28,7 +28,7 @@ Fetches the commit data via the GitHub API
 
 A Golang version of this program can be found here:
 
-    https://github.com/HariSekhon/GitHub-Commit-Times-Graph
+    https://github.com/HariSekhon/GitHub-Graph-Commit-Times
 
 Requires GitHub CLI and GNUplot to be installed and GH_TOKEN to be present
 "
