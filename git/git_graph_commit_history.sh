@@ -105,7 +105,7 @@ timestamp "Generated bar chart image: $image_file_per_year"
 echo
 
 rm "$gnuplot_data_file_per_month"
-#rm "$gnuplot_data_file_per_year"
+rm "$gnuplot_data_file_per_year"
 
 if is_CI; then
     exit 0
