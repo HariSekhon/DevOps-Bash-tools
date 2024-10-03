@@ -30,6 +30,9 @@ A Golang version of this program can be found here:
 
     https://github.com/HariSekhon/GitHub-Graph-Commit-Times
 
+Fetching GitHub commits via the API is slow so if \$CACHE_GITHUB_COMMITS is set will cache the data locally and not
+re-fetch it on subsequent runs (useful for tweaking the graph and just re-running quickly)
+
 Requires GitHub CLI and GNUplot to be installed and GH_TOKEN to be present
 "
 
@@ -88,7 +91,9 @@ EOF
 timestamp "Generated bar chart image: $image"
 echo
 
-rm "$gnuplot_data"
+if [ -n "${CACHE_GITHUB_COMMITS:-}" ]; then
+    rm "$gnuplot_data"
+fi
 
 if is_CI; then
     exit 0
