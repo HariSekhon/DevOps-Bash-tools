@@ -784,6 +784,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_review_push.sh` - shows diff of what would be pushed upstream and prompts to push. Convenient for fast reviewed pushes via vim or IDEs hotkeys
   - `git_branch_delete_squash_merged.sh` - carefully detects if a squash merged branch you want to delete has no changes with the default trunk branch before deleting it.
      See [Squash Merges](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md#squash-merges-require-force-deleting-branches) in knowledge-base about why this is necessary.
+  - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `git_foreach_branch.sh` - executes a command on all branches (useful in heavily version branched repos like in my [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_foreach_repo.sh` - executes a command against all adjacent repos from a given repolist (used heavily by many adjacent scripts)
   - `git_foreach_modified.sh` - executes a command against each file with git modified status
@@ -797,10 +798,10 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
+  - `git_graph_commits_per_month.sh` - generates a graph of Git commits per month for the entire history of the local Git repo checkout using the git log
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts
   - `git_filter_repo_replace_text.sh` - rewrites Git history to replace a given text to scrub a credential or other sensitive token from history. Refuses to operate on tokens less than 8 chars for safety
-  - `git_tag_release.sh` - creates a Git tag, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
   - `git_submodules_update_repos.sh` - updates submodules (pulls and commits latest upstream github repo submodules) - used to cascade submodule updates throughout all my repos
   - `git_askpass.sh` - credential helper script to use environment variables for git authentication
   - `markdown_generate_index.sh` - generates a markdown index list from the headings in a given markdown file such as README.md
