@@ -88,7 +88,7 @@ EOF
 timestamp "Generated bar chart image: $image"
 echo
 
-#rm "$gnuplot_data"
+rm "$gnuplot_data"
 
 if is_CI; then
     exit 0
