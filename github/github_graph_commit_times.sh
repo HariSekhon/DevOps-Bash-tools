@@ -50,6 +50,7 @@ image="github_commit_times.png"
 gnuplot_data="github_commit_times.dat"
 
 trap_cmd "rm $gnuplot_data"
+
 if ! [ -f "$gnuplot_data" ]; then
     timestamp "Fetching list of GitHub repos"
     repos="$(get_github_repos "$username")"
