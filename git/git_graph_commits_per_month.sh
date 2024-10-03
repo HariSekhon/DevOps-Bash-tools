@@ -77,7 +77,9 @@ rm "$gnuplot_data_file"
 
 timestamp "Generated bar chart image file: $image_file"
 
-if is_mac; then
-	timestamp "Opening generated image"
-	open "$image_file"
+if is_CI; then
+    exit 0
 fi
+
+timestamp "Opening generated image"
+"$srcdir/../bin/imageopen.sh" "$image_file"
