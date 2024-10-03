@@ -24,7 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Opens the given image file using whatever available tool is found on Linux or Mac
 
-Used by ../git/git_graph_commits_per_month.sh to automatically open the generated bar chart
+Used by:
+
+    - ./image_join_stack.sh - to automatically open the stacked image
+    - ../git/git_graph_commits_per_month.sh - to automatically open the generated bar chart
 "
 
 # used by usage() in lib/utils.sh
