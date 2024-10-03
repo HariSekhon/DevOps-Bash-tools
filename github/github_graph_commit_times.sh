@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Graphs the GitHub commit times from all public GitHub repos for a given user
 
-Fetches the commit data via the GitHub API
+Fetches the commit data via the GitHub API and generates a bar chart using GNUplot
 
 A Golang version of this program can be found here:
 
