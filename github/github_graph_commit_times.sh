@@ -49,6 +49,7 @@ username="$1"
 image="github_commit_times.png"
 gnuplot_data="github_commit_times.dat"
 
+trap_cmd "rm $gnuplot_data"
 if ! [ -f "$gnuplot_data" ]; then
     timestamp "Fetching list of GitHub repos"
     repos="$(get_github_repos "$username")"
@@ -95,6 +96,7 @@ echo
 if [ -n "${CACHE_GITHUB_COMMITS:-}" ]; then
     rm "$gnuplot_data"
 fi
+untrap
 
 if is_CI; then
     exit 0
