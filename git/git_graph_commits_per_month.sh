@@ -73,7 +73,7 @@ set format x "%b %Y"
 plot "$gnuplot_data_file" using 1:2 with boxes title 'Commits'
 EOF
 
-#rm "$gnuplot_data_file"
+rm "$gnuplot_data_file"
 
 timestamp "Generated bar chart image file: $image_file"
 
