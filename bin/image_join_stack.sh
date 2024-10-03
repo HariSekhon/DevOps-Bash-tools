@@ -82,8 +82,7 @@ timestamp "Joining top image '$top_image' and bottom image '$bottom_image' into 
 magick "$top_image" "$bottom_image" -append "$output_image"
 echo >&2
 timestamp "Stacked image created: $output_image"
-if is_mac; then
-    echo >&2
-    timestamp "Opening image: $output_image"
-    open "$output_image"
-fi
+echo >&2
+
+timestamp "Opening image: $output_image"
+"$srcdir/imageopen.sh" "$output_image"
