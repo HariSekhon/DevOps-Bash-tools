@@ -26,6 +26,10 @@ Graphs the GitHub commit times from all public GitHub repos for a given user
 
 Fetches the commit data via the GitHub API
 
+A Golang version of this program can be found here:
+
+    https://github.com/HariSekhon/GitHub-Commit-Times-Graph
+
 Requires GitHub CLI and GNUplot to be installed and GH_TOKEN to be present
 "
 
