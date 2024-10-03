@@ -63,6 +63,7 @@ if ! [ -f "$gnuplot_data" ]; then
     sort |
     uniq -c |
     awk '{print $2" "$1}' > "$gnuplot_data"
+    echo
 fi
 
 timestamp "Generating GNUplot bar chart of times"
