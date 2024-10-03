@@ -22,64 +22,97 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates a graph of Git commits per month for the entire history of the local Git repo checkout using the git log
+Generates graphs of Git commits per year and per month for the entire history of the local Git repo checkout
 
-Requires Git and GNUPlot to be installed to generate the graph
+Requires Git and GNUplot to be installed to generate the graph
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<filename.png> <git_log_paths_to_check_only>]"
+usage_args="[<git_log_paths_to_check_only>]"
 
 help_usage "$@"
 
-image_file="${1:-git_commits_per_month.png}"
-shift || :
-# shif to leave remaining args as git log paths
-
-if ! [[ "$image_file" =~ \.png$ ]]; then
-	die "Error: Image filename must end in .png, given instead: $image_file"
-fi
+image_file_per_year="git_commits_per_year.png"
+image_file_per_month="git_commits_per_month.png"
 
 # Check if we're inside a Git repository
 if ! is_in_git_repo; then
     die "Error: Not inside a git repository!"
 fi
 
+# output git commits as simple YYYY-MM and then just sort and count them by month
 timestamp "Calculating commit counts per month from the Git log"
-# output git commits as simple YYYY-MM-01 and then just sort and count them by month
-# added the -01 day suffix to make GNUplot human readable date conversion possible
-month_counts="$(git log --date=format:'%Y-%m-01' --pretty=format:'%ad' "$@" | sort | uniq -c)"
+month_counts="$(git log --date=format:'%Y-%m' --pretty=format:'%ad' "$@" | sort | uniq -c)"
 
-timestamp "Preparing GNUplot data file"
-gnuplot_data_file="${image_file%.png}.dat"
-awk '{print $2, $1}' <<< "$month_counts" > "$gnuplot_data_file"
+timestamp "Calculating commit counts per year from the Git log"
+year_counts="$(git log --date=format:'%Y' --pretty=format:'%ad' "$@" | sort | uniq -c)"
+echo
 
-timestamp "Generating GNUplot bar chart"
-gnuplot <<EOF
-set terminal pngcairo size 1280,720 enhanced font 'Arial,14'
-set output "$image_file"
-set title "Git Commits per Month"
-set xlabel "Year-Month"
+timestamp "Preparing GNUplot data file per month"
+gnuplot_data_file_per_month="${image_file_per_month%.png}.dat"
+awk '{print $2, $1}' <<< "$month_counts" > "$gnuplot_data_file_per_month"
+
+timestamp "Preparing GNUplot data file per year"
+gnuplot_data_file_per_year="${image_file_per_year%.png}.dat"
+awk '{print $2, $1}' <<< "$year_counts" > "$gnuplot_data_file_per_year"
+echo
+
+gnuplot_common_settings='
+set terminal pngcairo size 1280,720 enhanced font "Arial,14"
 set ylabel "Number of Commits"
 set grid
 set xtics rotate by -45
 set boxwidth 0.5 relative
 set style fill solid
 set datafile separator " "
-set xdata time
-set timefmt "%Y-%m-%d"
+'
+#set xtics auto  # cannot find a way to make this show every year
+
+timestamp "Generating GNUplot bar chart per month"
+gnuplot <<EOF
+$gnuplot_common_settings
+set title "Git Commits per Month"
+set xlabel "Year-Month"
 set format x "%b %Y"
-plot "$gnuplot_data_file" using 1:2 with boxes title 'Commits'
+set xdata time
+set timefmt "%Y-%m"
+set output "$image_file_per_month"
+plot "$gnuplot_data_file_per_month" using 1:2 with boxes title 'Commits'
 EOF
 
-rm "$gnuplot_data_file"
+timestamp "Generated bar chart image: $image_file_per_month"
+echo
 
-timestamp "Generated bar chart image file: $image_file"
+timestamp "Generating GNUplot bar chart per year"
+gnuplot <<EOF
+$gnuplot_common_settings
+set title "Git Commits per Year"
+set xlabel "Year"
+# results in X axis labels every 2 years
+#set xdata time
+#set timefmt "%Y"
+#set format x "%Y"
+# trick to get X axis labels for every year
+stats "$gnuplot_data_file_per_year" using 1 nooutput
+set xrange [STATS_min:STATS_max]
+set xtics 1
+set output "$image_file_per_year"
+plot "$gnuplot_data_file_per_year" using 1:2 with boxes title 'Commits'
+EOF
+
+timestamp "Generated bar chart image: $image_file_per_year"
+echo
+
+rm "$gnuplot_data_file_per_month"
+#rm "$gnuplot_data_file_per_year"
 
 if is_CI; then
     exit 0
 fi
 
-timestamp "Opening generated image"
-"$srcdir/../bin/imageopen.sh" "$image_file"
+timestamp "Opening generated bar chart image file containing Git commits per month"
+"$srcdir/../bin/imageopen.sh" "$image_file_per_month"
+
+timestamp "Opening generated bar chart image file containing Git commits per year"
+"$srcdir/../bin/imageopen.sh" "$image_file_per_year"
