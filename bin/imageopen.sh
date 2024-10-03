@@ -41,7 +41,7 @@ num_args 1 "$@"
 image="${1:-}"
 
 # Linux commands - will be tried in this order
-tools=(xdg-open gnome-open eog feh display)
+tools=(xdg-open gnome-open eog feh display gthumb)
 
 if is_mac; then
     open "$image"
