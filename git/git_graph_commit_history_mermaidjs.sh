@@ -20,11 +20,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/git.sh"
 
-image_file_per_month="git_commits_per_month.svg"
-image_file_per_year="git_commits_per_year.svg"
+code_month="git_commits_per_month.mmd"
+code_year="git_commits_per_year.mmd"
 
-mermaid_code_per_month="git_commits_per_month.mmd"
-mermaid_code_per_year="git_commits_per_year.mmd"
+data_month="data/git_commits_per_month.dat"
+data_year="data/git_commits_per_year.dat"
+
+image_month="images/git_commits_per_month.svg"
+image_year="images/git_commits_per_year.svg"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -32,11 +35,14 @@ Generates MermaidJS graphs of Git commits per year and per month for the entire 
 
 Generates the MermaidJS code and then uses MermaidJS CLI to generate the images
 
-    $mermaid_code_per_month - Code
-    $mermaid_code_per_year  - Code
+    $code_month - Code
+    $code_year  - Code
 
-    $image_file_per_month - Image
-    $image_file_per_year  - Image
+    $data_month - Data
+    $data_year  - Data
+
+    $image_month - Image
+    $image_year  - Image
 
 A GNUplot version of this script is adjacent at:
 
@@ -57,52 +63,81 @@ if ! is_in_git_repo; then
     die "Error: Not inside a git repository!"
 fi
 
+for x in $code_month  \
+         $code_year   \
+         $data_month  \
+         $data_year   \
+         $image_month \
+         $image_year; do
+    mkdir -p -v "$(dirname "$x")"
+done
+
 # output git commits as simple YYYY-MM and then just sort and count them by month
 timestamp "Calculating commit counts per month from the Git log"
-month_counts="$(git log --date=format:'%Y-%m' --pretty=format:'%ad' "$@" | sort | uniq -c | awk '{print $2" "$1}')"
+git log --date=format:'%Y-%m' --pretty=format:'%ad' "$@" |
+sort |
+uniq -c |
+awk '{print $2" "$1}' > "$data_month"
+timestamp "Wrote data: $data_month"
+echo
 
 timestamp "Calculating commit counts per year from the Git log"
-year_counts="$(git log --date=format:'%Y' --pretty=format:'%ad' "$@" | sort | uniq -c | awk '{print $2" "$1}')"
+git log --date=format:'%Y' --pretty=format:'%ad' "$@" |
+sort |
+uniq -c |
+awk '{print $2" "$1}' > "$data_year"
+timestamp "Wrote data: $data_year"
 echo
 
-timestamp "Generating MermaidJS code for bar chart per month"
-cat > "$mermaid_code_per_month" <<EOF
+parse_data(){
+    local data_file="$1"
+    local field="$2"
+    awk "{print \$$field}" "$data_file" |
+    tr '\n' ',' |
+    sed 's/,/, /g; s/, $//'
+}
+export -f parse_data
+
+timestamp "Generating MermaidJS code for Commits per Month"
+cat > "$code_month" <<EOF
 xychart-beta
     title "Number of Commits"
-    x-axis [ $(awk '{print $1}' <<< "$month_counts" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
+    x-axis [ $(parse_data "$data_month" 1) ]
     y-axis "Commits"
-    bar    [ $(awk '{print $2}' <<< "$month_counts" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
-    %%line [ $(awk '{print $2}' <<< "$month_counts" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
+    bar    [ $(parse_data "$data_month" 2) ]
+    %%line [ $(parse_data "$data_month" 2) ]
 EOF
-timestamp "Generated MermaidJS code for bar chart per month"
+timestamp "Generated MermaidJS code: $code_month"
 echo
 
-timestamp "Generating MermaidJS code for bar chart per year"
-cat > "$mermaid_code_per_year" <<EOF
+timestamp "Generating MermaidJS code for Commits per Year"
+cat > "$code_year" <<EOF
 xychart-beta
     title "Number of Commits"
-    x-axis [ $(awk '{print $1}' <<< "$year_counts" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
+    x-axis [ $(parse_data "$data_year" 1) ]
     y-axis "Commits"
-    bar    [ $(awk '{print $2}' <<< "$year_counts" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
-    %%line [ $(awk '{print $2}' <<< "$year_counts" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
+    bar    [ $(parse_data "$data_year" 2) ]
+    %%line [ $(parse_data "$data_year" 2) ]
 EOF
-timestamp "Generated MermaidJS code for bar chart per year"
+timestamp "Generated MermaidJS code: $code_year"
 echo
 
-timestamp "Generating MermaidJS bar chart image: $image_file_per_month"
-mmdc -i "$mermaid_code_per_month" -o "$image_file_per_month" -t dark --quiet # -b transparent
-timestamp "Generated MermaidJS bar chart image: $image_file_per_month"
+timestamp "Generating bar chart for Commits per Month"
+mmdc -i "$code_month" -o "$image_month" -t dark --quiet # -b transparent
+timestamp "Generated bar chart image: $image_month"
+echo
 
-timestamp "Generating MermaidJS bar chart image: $image_file_per_year"
-mmdc -i "$mermaid_code_per_year" -o "$image_file_per_year" -t dark --quiet # -b transparent
-timestamp "Generated MermaidJS bar chart image: $image_file_per_year"
+timestamp "Generating bar chart for Commits per Year"
+mmdc -i "$code_year" -o "$image_year" -t dark --quiet # -b transparent
+timestamp "Generated bar chart image: $image_year"
+echo
 
 if is_CI; then
     exit 0
 fi
 
-timestamp "Opening: $image_file_per_month"
-"$srcdir/../bin/imageopen.sh" "$image_file_per_month"
+timestamp "Opening: $image_month"
+"$srcdir/../bin/imageopen.sh" "$image_month"
 
-timestamp "Opening: $image_file_per_month"
-"$srcdir/../bin/imageopen.sh" "$image_file_per_year"
+timestamp "Opening: $image_month"
+"$srcdir/../bin/imageopen.sh" "$image_year"
