@@ -58,7 +58,7 @@ trap_cmd "rm -f '$gnuplot_data'"
 if ! [ -f "$gnuplot_data" ]; then
     timestamp "Fetching list of GitHub repos"
     repos="$(get_github_repos "$username")"
-    timestamp "Found repos: $(wc -l <<< "$repos" | sed 's/[[:space:]]/g')"
+    timestamp "Found repos: $(wc -l <<< "$repos" | sed 's/[[:space:]]//g')"
     echo
 
     while read -r repo; do
