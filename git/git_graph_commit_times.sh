@@ -30,6 +30,10 @@ Graphs the Git commit times from all adjacent Git repos listed in:
 
 The adjacent script ../github/github_graph_commit_times.sh does a similar function but using GitHub API commit data
 
+A MermaidJS version of this program is adjacent in
+
+    github_graph_commit_times_mermaidjs.sh
+
 A Golang version of this program which uses the GitHub API can be found here:
 
     https://github.com/HariSekhon/GitHub-Graph-Commit-Times
