@@ -82,7 +82,7 @@ if ! [ -f "$data" ]; then
     sort |
     uniq -c |
     awk '{print $2" "$1}' > "$data"
-echo
+    echo
 fi
 
 timestamp "Generating MermaidJS code for bar chart of commit times"
