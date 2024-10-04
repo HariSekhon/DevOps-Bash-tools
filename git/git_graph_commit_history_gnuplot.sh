@@ -145,9 +145,6 @@ gnuplot "$code_year"
 timestamp "Generated bar chart image: $image_year"
 echo
 
-#rm "$data_month"
-#rm "$data_year"
-
 if is_CI; then
     exit 0
 fi
