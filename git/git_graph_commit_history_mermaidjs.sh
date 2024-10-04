@@ -94,7 +94,7 @@ export -f parse_file_col_to_csv
 timestamp "Generating MermaidJS code for Commits per Month"
 cat > "$code_month" <<EOF
 xychart-beta
-    title "Number of Commits"
+    title "Git Commits per Month"
     x-axis [ $(parse_file_col_to_csv "$data_month" 1) ]
     y-axis "Commits"
     bar    [ $(parse_file_col_to_csv "$data_month" 2) ]
@@ -106,7 +106,7 @@ echo
 timestamp "Generating MermaidJS code for Commits per Year"
 cat > "$code_year" <<EOF
 xychart-beta
-    title "Number of Commits"
+    title "Git Commits per Year"
     x-axis [ $(parse_file_col_to_csv "$data_year" 1) ]
     y-axis "Commits"
     bar    [ $(parse_file_col_to_csv "$data_year" 2) ]
