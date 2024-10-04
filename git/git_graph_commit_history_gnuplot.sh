@@ -74,12 +74,15 @@ git log --date=format:'%Y-%m' --pretty=format:'%ad' "$@" |
 sort |
 uniq -c |
 awk '{print $2, $1}' > "$data_month"
+timestamp "Wrote data: $data_month"
+echo
 
 timestamp "Calculating commit counts per year from the Git log"
 git log --date=format:'%Y' --pretty=format:'%ad' "$@" |
 sort |
 uniq -c |
 awk '{print $2, $1}' > "$data_year"
+timestamp "Wrote data: $data_year"
 echo
 
 gnuplot_common_settings="
@@ -98,7 +101,7 @@ set datafile separator ' '
 "
 #set xtics auto  # cannot find a way to make this show every year
 
-timestamp "Generating GNUplot code: $code_month"
+timestamp "Generating GNUplot code for Commits per Month"
 sed '/^[[:space:]]*$/d' > "$code_month" <<EOF
 $gnuplot_common_settings
 set title "Git Commits per Month"
@@ -109,8 +112,10 @@ set timefmt "%Y-%m"
 set output "$image_month"
 plot "$data_month" using 1:2 with boxes title 'Commits'
 EOF
+timestamp "Generated GNUplot code: $code_month"
+echo
 
-timestamp "Generating GNUplot code: $code_year"
+timestamp "Generating GNUplot code for Commits per Year"
 sed '/^[[:space:]]*$/d' > "$code_year" <<EOF
 $gnuplot_common_settings
 set title "Git Commits per Year"
@@ -126,13 +131,16 @@ set xtics 1
 set output "$image_year"
 plot "$data_year" using 1:2 with boxes title 'Commits'
 EOF
+timestamp "Generated GNUplot code: $code_year"
 
-timestamp "Generating bar chart image: $image_month"
+echo
+
+timestamp "Generating bar chart for Commits per Month"
 gnuplot "$code_month"
 timestamp "Generated bar chart image: $image_month"
 echo
 
-timestamp "Generating bar chart image: $image_year"
+timestamp "Generating bar chart for Commits per Year"
 gnuplot "$code_year"
 timestamp "Generated bar chart image: $image_year"
 echo
@@ -144,8 +152,8 @@ if is_CI; then
     exit 0
 fi
 
-timestamp "Opening generated bar chart image file containing Git commits per month"
+timestamp "Opening: $image_month"
 "$srcdir/../bin/imageopen.sh" "$image_month"
 
-timestamp "Opening generated bar chart image file containing Git commits per year"
+timestamp "Opening: $image_year"
 "$srcdir/../bin/imageopen.sh" "$image_year"
