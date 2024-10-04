@@ -51,7 +51,7 @@ gnuplot_data="git_commit_times.dat"
 trap_cmd "rm -f '$gnuplot_data'"
 
 if ! [ -f "$gnuplot_data" ]; then
-    timestamp "Fetting list of Git repo checkout directories from: $repolist"
+    timestamp "Getting list of Git repo checkout directories from: $repolist"
     repo_dirs="$(sed 's/#.*//; s/.*://; /^[[:space:]]*$/d' "$repolist")"
 
     timestamp "Found repos: $(wc -l <<< "$repo_dirs" | sed 's/[[:space:]]/g')"
