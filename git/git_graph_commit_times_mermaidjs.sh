@@ -22,11 +22,21 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 repolist="$(readlink -f "$srcdir/../setup/repos.txt")"
 
+image="git_commit_times.svg"
+data="git_commit_times.dat"
+code="git_commit_times.mmd"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Graphs the Git commit times from all adjacent Git repos listed in:
 
     $repolist
+
+Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
+
+    $code - Image
+
+    $image - Code
 
 The adjacent script ../github/github_graph_commit_times_mermaidjs.sh does a similar function but using GitHub API commit data
 
@@ -50,10 +60,6 @@ help_usage "$@"
 num_args 0 "$@"
 
 check_bin mmdc
-
-image="git_commit_times.svg"
-data="git_commit_times.dat"
-code="git_commit_times.mmd"
 
 trap_cmd "rm -f '$data'"
 
