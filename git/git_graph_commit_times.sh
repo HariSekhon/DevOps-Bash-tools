@@ -28,6 +28,10 @@ Graphs the Git commit times from all adjacent Git repos listed in:
 
     $repolist
 
+A MermaidJS version of this script is adjacent at:
+
+    git_graph_commit_times_mermaidjs.sh
+
 These adjacent scripts perform a similar function but using GitHub API commit data:
 
     ../github/github_graph_commit_times.sh
