@@ -34,6 +34,8 @@ Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
 
     $code - Code
 
+    $data - Data
+
     $image - Image
 
 A GNUplot version of this program is adjacent in:
