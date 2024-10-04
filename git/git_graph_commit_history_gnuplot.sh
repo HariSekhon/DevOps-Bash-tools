@@ -105,7 +105,7 @@ timestamp "Generating GNUplot code for Commits per Month"
 sed '/^[[:space:]]*$/d' > "$code_month" <<EOF
 $gnuplot_common_settings
 set title "Git Commits per Month"
-set xlabel "Year-Month"
+set xlabel "Month-Year"
 set format x "%b %Y"
 set xdata time
 set timefmt "%Y-%m"
