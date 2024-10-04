@@ -799,9 +799,9 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_repos_update.sh` - same as above but also runs the `make update` build to install the latest dependencies, leverages the above script
   - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
-  - `git_graph_commit_history.sh` - generates GNUplot graphs of Git commits per year and per month for the entire history of the local Git repo checkout
+  - `git_graph_commit_history_gnuplot.sh` - generates GNUplot graphs of Git commits per year and per month for the entire history of the local Git repo checkout
   - `git_graph_commit_history_mermaidjs.sh` - generates MermaidJS graphs of Git commits per year and per month for the entire history of the local Git repo checkout
-  - `git_graph_commit_times.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
+  - `git_graph_commit_times_gnuplot.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `git_graph_commit_times_mermaidjs.sh` - generates MermaidJS graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts
@@ -814,7 +814,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_install_binary.sh` - installs a binary from GitHub releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
   - `github_foreach_repo.sh` - executes a templated command for each non-fork GitHub repo, replacing the `{owner}`/`{name}` or `{repo}` placeholders in each iteration
-  - `github_graph_commit_times.sh` - generates GNUplot graph of GitHub commit times from all public GitHub repos for a given user. Fetches the commit data via the GitHub API
+  - `github_graph_commit_times_gnuplot.sh` - generates GNUplot graph of GitHub commit times from all public GitHub repos for a given user. Fetches the commit data via the GitHub API
   - `github_graph_commit_times_mermaidjs.sh` - generates MermaidJS graph of the GitHub commit times from all public GitHub repos for a given user. Fetches the commit data via the GitHub API
   - `github_clone_or_pull_all_repos.sh` - git clones or pulls all repos for a user or organization into directories of the same name under the current directory
   - `github_download_release_file.sh` - downloads a file from GitHub Releases, optionally determining the latest version, uses `bin/download_url_file.sh`
