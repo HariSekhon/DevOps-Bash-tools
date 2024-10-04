@@ -103,23 +103,16 @@ else
 fi
 echo
 
-parse_data(){
-    local data_file="$1"
-    local field="$2"
-    awk "{print \$$field}" "$data_file" |
-    tr '\n' ',' |
-    sed 's/,/, /g; s/, $//'
-}
-export -f parse_data
+export -f parse_file_col_to_csv
 
 timestamp "Generating MermaidJS code for bar chart of commit times"
 cat > "$code" <<EOF
 xychart-beta
     title "Git Commits by Hour"
-    x-axis [ $(parse_data "$data" 1) ]
+    x-axis [ $(parse_file_col_to_csv "$data" 1) ]
     y-axis "Commits"
-    bar    [ $(parse_data "$data" 2) ]
-    %%line [ $(parse_data "$data" 2) ]
+    bar    [ $(parse_file_col_to_csv "$data" 2) ]
+    %%line [ $(parse_file_col_to_csv "$data" 2) ]
 EOF
 timestamp "Generated MermaidJS code"
 echo
