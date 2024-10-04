@@ -26,6 +26,10 @@ Graphs the GitHub commit times from all public GitHub repos for a given user
 
 Fetches the commit data via the GitHub API and generates a bar chart using GNUplot
 
+A MermaidJS version of this program is adjacent in:
+
+    github_graph_commit_times_mermaidjs.sh
+
 A Golang version of this program can be found here:
 
     https://github.com/HariSekhon/GitHub-Graph-Commit-Times
