@@ -24,6 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates graphs of Git commits per year and per month for the entire history of the local Git repo checkout
 
+A MermaidJS version of this script is adjacent at:
+
+    git_graph_commit_history_mermaidjs.sh
+
 Requires Git and GNUplot to be installed to generate the graphs
 "
 
