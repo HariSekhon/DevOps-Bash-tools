@@ -33,6 +33,8 @@ usage_args="[<git_log_paths_to_check_only>]"
 
 help_usage "$@"
 
+check_bin mmdc
+
 image_file_per_month="git_commits_per_month.svg"
 image_file_per_year="git_commits_per_year.svg"
 
