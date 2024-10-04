@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 repolist="$(readlink -f "$srcdir/../setup/repos.txt")"
 
-image="git_commit_times.svg"
-data="git_commit_times.dat"
 code="git_commit_times.mmd"
+data="data/git_commit_times.dat"
+image="images/git_commit_times.svg"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -35,6 +35,8 @@ Generates a MermaidJS graph of Git commit times from all adjacent Git repos list
 Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
 
     $code - Code
+
+    $data - Data
 
     $image - Image
 
@@ -65,9 +67,21 @@ num_args 0 "$@"
 
 check_bin mmdc
 
-trap_cmd "rm -f '$data'"
+older_than(){
+    local file="$1"
+    local days="$2"
+    if ! [ -f "$file" ]; then
+        return 0
+    fi
+    if find "$file" -mtime +"$days" -print -quit | grep -q . ; then
+        return 0
+    fi
+    return 1
+}
 
-if ! [ -f "$data" ]; then
+if ! older_than "$data" 7; then
+    timestamp "Using cached data since it is less than 7 days old: $data"
+else
     timestamp "Getting list of Git repo checkout directories from: $repolist"
     repo_dirs="$(sed 's/#.*//; s/.*://; /^[[:space:]]*$/d' "$repolist")"
 
@@ -86,17 +100,26 @@ if ! [ -f "$data" ]; then
     sort |
     uniq -c |
     awk '{print $2" "$1}' > "$data"
-    echo
 fi
+echo
+
+parse_data(){
+    local data_file="$1"
+    local field="$2"
+    awk "{print \$$field}" "$data_file" |
+    tr '\n' ',' |
+    sed 's/,/, /g; s/, $//'
+}
+export -f parse_data
 
 timestamp "Generating MermaidJS code for bar chart of commit times"
 cat > "$code" <<EOF
 xychart-beta
     title "Git Commits by Hour"
-    x-axis [ $(awk '{print $1}' "$data" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
+    x-axis [ $(parse_data "$data" 1) ]
     y-axis "Commits"
-    bar    [ $(awk '{print $2}' "$data" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
-    %%line [ $(awk '{print $2}' "$data" | tr '\n' ',' | sed 's/,/, /g; s/, $//') ]
+    bar    [ $(parse_data "$data" 2) ]
+    %%line [ $(parse_data "$data" 2) ]
 EOF
 timestamp "Generated MermaidJS code"
 echo
@@ -104,9 +127,6 @@ echo
 timestamp "Generating MermaidJS bar chart image: $image"
 mmdc -i "$code" -o "$image" -t dark --quiet # -b transparent
 timestamp "Generated MermaidJS image: $image"
-
-rm "$data"
-untrap
 
 if is_CI; then
     exit 0
