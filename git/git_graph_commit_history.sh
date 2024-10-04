@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates graphs of Git commits per year and per month for the entire history of the local Git repo checkout
+Generates GNUplot graphs of Git commits per year and per month for the entire history of the local Git repo checkout
 
 A MermaidJS version of this script is adjacent at:
 
