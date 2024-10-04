@@ -108,7 +108,7 @@ cat > "$code_year" <<EOF
 xychart-beta
     title "Git Commits per Year"
     x-axis [ $(parse_file_col_to_csv "$data_year" 1) ]
-    y-axis "Commits"
+    y-axis "Number of Commits"
     bar    [ $(parse_file_col_to_csv "$data_year" 2) ]
     %%line [ $(parse_file_col_to_csv "$data_year" 2) ]
 EOF
