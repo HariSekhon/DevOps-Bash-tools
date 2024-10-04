@@ -94,7 +94,7 @@ cat > "$code" <<EOF
 xychart-beta
     title "Git Commits by Hour"
     x-axis [ $(parse_file_col_to_csv "$data" 1) ]
-    y-axis "Commits"
+    y-axis "Number of Commits"
     bar    [ $(parse_file_col_to_csv "$data" 2) ]
     %%line [ $(parse_file_col_to_csv "$data" 2) ]
 EOF
