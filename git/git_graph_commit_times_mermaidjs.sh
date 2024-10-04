@@ -34,9 +34,9 @@ Graphs the Git commit times from all adjacent Git repos listed in:
 
 Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
 
-    $code - Image
+    $code - Code
 
-    $image - Code
+    $image - Image
 
 The adjacent script ../github/github_graph_commit_times_mermaidjs.sh does a similar function but using GitHub API commit data
 
