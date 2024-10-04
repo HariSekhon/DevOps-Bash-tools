@@ -40,7 +40,7 @@ Generates the MermaidJS code and then uses MermaidJS CLI to generate the images
 
 A GNUplot version of this script is adjacent at:
 
-    git_graph_commit_history.sh
+    git_graph_commit_history_gnuplot.sh
 
 Requires Git and MermaidJS CLI (mmdc) to be installed to generate the graphs
 "
