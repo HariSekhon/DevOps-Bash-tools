@@ -67,7 +67,7 @@ if ! [ -f "$data" ]; then
     timestamp "Getting list of Git repo checkout directories from: $repolist"
     repo_dirs="$(sed 's/#.*//; s/.*://; /^[[:space:]]*$/d' "$repolist")"
 
-    timestamp "Found repos: $(wc -l <<< "$repo_dirs" | sed 's/[[:space:]]/g')"
+    timestamp "Found repos: $(wc -l <<< "$repo_dirs" | sed 's/[[:space:]]//g')"
     echo
 
     while read -r repo_dir; do
