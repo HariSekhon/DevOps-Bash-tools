@@ -34,7 +34,7 @@ A Golang version of this program which uses the GitHub API can be found here:
 
     https://github.com/HariSekhon/GitHub-Graph-Commit-Times
 
-Requires GNUplot to be installed to generate the graph
+Requires Git and GNUplot to be installed to generate the graph
 "
 
 # used by usage() in lib/utils.sh
