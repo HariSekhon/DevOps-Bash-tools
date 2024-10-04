@@ -34,7 +34,7 @@ A MermaidJS version of this script is adjacent at:
 
 These adjacent scripts perform a similar function but using GitHub API commit data:
 
-    ../github/github_graph_commit_times.sh
+    ../github/github_graph_commit_times_gnuplot.sh
 
     ../github/github_graph_commit_times_mermaidjs.sh
 
