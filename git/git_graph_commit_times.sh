@@ -24,7 +24,7 @@ repolist="$(readlink -f "$srcdir/../setup/repos.txt")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Graphs the Git commit times from all adjacent Git repos listed in:
+Generates a GNUplot graph of Git commit times from all adjacent Git repos listed in:
 
     $repolist
 
