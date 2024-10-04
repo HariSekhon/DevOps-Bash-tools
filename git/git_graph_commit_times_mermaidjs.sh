@@ -28,7 +28,7 @@ code="git_commit_times.mmd"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Graphs the Git commit times from all adjacent Git repos listed in:
+Generates a MermaidJS graph of Git commit times from all adjacent Git repos listed in:
 
     $repolist
 
