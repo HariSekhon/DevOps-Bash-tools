@@ -42,8 +42,8 @@ check_bin mmdc
 image_file_per_month="git_commits_per_month.svg"
 image_file_per_year="git_commits_per_year.svg"
 
-mermaid_code_per_month="${image_file_per_month%.svg}.mmd"
-mermaid_code_per_year="${image_file_per_year%.svg}.mmd"
+mermaid_code_per_month="git_commits_per_month.mmd"
+mermaid_code_per_year="git_commits_per_year.mmd"
 
 if ! is_in_git_repo; then
     die "Error: Not inside a git repository!"
