@@ -28,7 +28,7 @@ Graphs the Git commit times from all adjacent Git repos listed in:
 
     $repolist
 
-The adjacent scripts perform a similar function but using GitHub API commit data
+These adjacent scripts perform a similar function but using GitHub API commit data:
 
     ../github/github_graph_commit_times.sh
 
