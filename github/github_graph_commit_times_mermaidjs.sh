@@ -38,7 +38,7 @@ Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
 
 A GNUplot version of this program is adjacent in:
 
-    github_graph_commit_times.sh
+    github_graph_commit_times_gnuplot.sh
 
 A Golang version of this program can be found here:
 
