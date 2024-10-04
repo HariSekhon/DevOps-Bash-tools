@@ -20,9 +20,23 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/git.sh"
 
+image_file_per_month="git_commits_per_month.svg"
+image_file_per_year="git_commits_per_year.svg"
+
+mermaid_code_per_month="git_commits_per_month.mmd"
+mermaid_code_per_year="git_commits_per_year.mmd"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Generates MermaidJS graphs of Git commits per year and per month for the entire history of the local Git repo checkout
+
+Generates the MermaidJS code and then uses MermaidJS CLI to generate the images
+
+    $mermaid_code_per_month - Code
+    $mermaid_code_per_year  - Code
+
+    $image_file_per_month - Image
+    $image_file_per_year  - Image
 
 A GNUplot version of this script is adjacent at:
 
@@ -38,12 +52,6 @@ usage_args="[<git_log_paths_to_check_only>]"
 help_usage "$@"
 
 check_bin mmdc
-
-image_file_per_month="git_commits_per_month.svg"
-image_file_per_year="git_commits_per_year.svg"
-
-mermaid_code_per_month="git_commits_per_month.mmd"
-mermaid_code_per_year="git_commits_per_year.mmd"
 
 if ! is_in_git_repo; then
     die "Error: Not inside a git repository!"
