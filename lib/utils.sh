@@ -1396,3 +1396,17 @@ jq_is_empty_list(){
     jq -e 'length == 0' >/dev/null
 }
 # ==============================
+
+# parse a .dat file's column to CSV - used to generate data for embedding into MermaidJS mmd config in:
+#
+# git/git_graph_*_mermaidjs.sh
+#   and
+# github/github_graph_*_mermaidjs.sh
+#
+parse_file_col_to_csv(){
+    local data_file="$1"
+    local field="$2"
+    awk "{print \$$field}" "$data_file" |
+    tr '\n' ',' |
+    sed 's/,/, /g; s/, $//'
+}
