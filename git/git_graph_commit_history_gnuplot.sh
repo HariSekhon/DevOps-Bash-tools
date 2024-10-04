@@ -22,10 +22,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 code_month="git_commits_per_month.gnuplot"
 code_year="git_commits_per_year.gnuplot"
-data_month="git_commits_per_month.dat"
-data_year="git_commits_per_year.dat"
-image_year="git_commits_per_year.png"
-image_month="git_commits_per_month.png"
+data_month="data/git_commits_per_month.dat"
+data_year="data/git_commits_per_year.dat"
+image_year="images/git_commits_per_year.png"
+image_month="images/git_commits_per_month.png"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -36,11 +36,11 @@ Generates the following files:
     $code_month - Code
     $code_year  - Code
 
-    $data_month    - Data
-    $data_year     - Data
+    $data_month - Data
+    $data_year  - Data
 
-    $image_month    - Image
-    $image_year     - Image
+    $image_month - Image
+    $image_year  - Image
 
 A MermaidJS version of this script is adjacent at:
 
@@ -58,6 +58,15 @@ help_usage "$@"
 if ! is_in_git_repo; then
     die "Error: Not inside a git repository!"
 fi
+
+for x in $code_month  \
+         $code_year   \
+         $data_month  \
+         $data_year   \
+         $image_month \
+         $image_year; do
+    mkdir -p -v "$(dirname "$x")"
+done
 
 # output git commits as simple YYYY-MM and then just sort and count them by month
 timestamp "Calculating commit counts per month from the Git log"
@@ -128,8 +137,8 @@ gnuplot "$code_year"
 timestamp "Generated bar chart image: $image_year"
 echo
 
-rm "$data_month"
-rm "$data_year"
+#rm "$data_month"
+#rm "$data_year"
 
 if is_CI; then
     exit 0
