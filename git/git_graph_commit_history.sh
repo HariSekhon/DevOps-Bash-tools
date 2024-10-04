@@ -36,7 +36,6 @@ help_usage "$@"
 image_file_per_year="git_commits_per_year.png"
 image_file_per_month="git_commits_per_month.png"
 
-# Check if we're inside a Git repository
 if ! is_in_git_repo; then
     die "Error: Not inside a git repository!"
 fi
