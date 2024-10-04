@@ -66,7 +66,6 @@ for x in $code \
     mkdir -p -v "$(dirname "$x")"
 done
 
-
 if ! [ -f "$data" ]; then
     timestamp "Fetching list of GitHub repos"
     repos="$(get_github_repos "$username")"
