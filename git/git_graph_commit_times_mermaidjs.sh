@@ -38,11 +38,15 @@ Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
 
     $image - Image
 
-The adjacent script ../github/github_graph_commit_times_mermaidjs.sh does a similar function but using GitHub API commit data
-
 A GNUplot version of this script is adjacent at:
 
     git_graph_commit_times.sh
+
+These adjacent scripts perform a similar function but using GitHub API commit data:
+
+    ../github/github_graph_commit_times.sh
+
+    ../github/github_graph_commit_times_mermaidjs.sh
 
 A Golang version of this program which uses the GitHub API can be found here:
 
