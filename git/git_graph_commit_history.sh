@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates graphs of Git commits per year and per month for the entire history of the local Git repo checkout
 
-Requires Git and GNUplot to be installed to generate the graph
+Requires Git and GNUplot to be installed to generate the graphs
 "
 
 # used by usage() in lib/utils.sh
