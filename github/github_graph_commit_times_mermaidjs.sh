@@ -60,11 +60,15 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-username="$1"
-
 check_bin mmdc
 
-trap_cmd "rm -f '$data'"
+username="$1"
+
+for x in $code \
+         $data \
+         $image; do
+    mkdir -p -v "$(dirname "$x")"
+done
 
 if ! [ -f "$data" ]; then
     timestamp "Fetching list of GitHub repos"
@@ -98,11 +102,6 @@ echo
 timestamp "Generating MermaidJS bar chart image: $image"
 mmdc -i "$code" -o "$image" -t dark --quiet # -b transparent
 timestamp "Generated MermaidJS image: $image"
-
-if [ -n "${CACHE_GITHUB_COMMITS:-}" ]; then
-    rm "$data"
-fi
-untrap
 
 if is_CI; then
     exit 0
