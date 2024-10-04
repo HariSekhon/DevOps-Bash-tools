@@ -20,9 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/github.sh"
 
-image="github_commit_times.svg"
-data="github_commit_times.dat"
-code="github_commit_times.mmd"
+code="git_commit_times.mmd"
+data="data/git_commit_times.dat"
+image="images/git_commit_times.svg"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
