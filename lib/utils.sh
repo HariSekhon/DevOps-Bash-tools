@@ -1418,7 +1418,7 @@ file_modified_in_last_days(){
         die "Non-integer passed as second arg to file_modified_in_last_days()"
     fi
     if ! [ -f "$file" ]; then
-        return 0
+        return 1
     elif find "$file" -mtime -"$days" -print | grep -q .; then
         return 0
     elif [ "$(stat -c '%Y' "$file")" -ge "$(date -d "$days days ago" '+%s')" ]; then
