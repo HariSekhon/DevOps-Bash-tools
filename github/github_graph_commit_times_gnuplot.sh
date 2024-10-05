@@ -98,7 +98,7 @@ set boxwidth 0.8 relative
 set style fill solid
 set datafile separator " "
 set title "Git Commits by Hour"
-set xlabel "Hour of Day"
+set xlabel "Hour of Day (UTC)"
 # results in X axis labels every 2 years
 #set xdata time
 #set timefmt "%H"
