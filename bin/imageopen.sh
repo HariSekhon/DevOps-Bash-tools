@@ -47,8 +47,8 @@ num_args 1 "$@"
 
 image="${1:-}"
 
-# Linux commands - will be tried in this order
-tools=(
+# Will be tried in this order
+linux_commands=(
     xdg-open
     gnome-open
     eog
@@ -62,14 +62,14 @@ if is_mac; then
     open "$image"
 else  # assume Linux
     found=0
-    for tool in "${tools[@]}"; do
-        if type -P "$tool" &>/dev/null; then
+    for linux_command in "${linux_commands[@]}"; do
+        if type -P "$linux_command" &>/dev/null; then
             found=1
-            "$tool" "$image" &
+            "$linux_command" "$image" &
             break
         fi
     done
     if [ "$found" != 1 ]; then
-        die "ERROR: none of the following tools to open image found: ${tools[*]}"
+        die "ERROR: none of the following Linux commands to open image were found: ${linux_commands[*]}"
     fi
 fi
