@@ -86,8 +86,8 @@ else
     sort |
     uniq -c |
     awk '{print $2" "$1}' > "$data"
-    echo
 fi
+echo
 
 export -f parse_file_col_to_csv
 
