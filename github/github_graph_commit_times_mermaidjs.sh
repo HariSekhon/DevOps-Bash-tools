@@ -70,7 +70,9 @@ for x in $code \
     mkdir -p -v "$(dirname "$x")"
 done
 
-if ! file_modified_in_last_days "$data" 7; then
+if file_modified_in_last_days "$data" 7; then
+    timestamp "Using cached data: $data"
+else
     timestamp "Fetching list of GitHub repos"
     repos="$(get_github_repos "$username")"
     timestamp "Found repos: $(wc -l <<< "$repos" | sed 's/[[:space:]]//g')"
