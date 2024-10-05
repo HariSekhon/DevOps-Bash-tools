@@ -41,7 +41,7 @@ num_args 1 "$@"
 image="${1:-}"
 
 # Linux commands - will be tried in this order
-tools=(xdg-open gnome-open eog feh display gthumb)
+tools=(xdg-open gnome-open eog feh display gthumb sxiv)
 
 if is_mac; then
     open "$image"
@@ -50,7 +50,7 @@ else  # assume Linux
     for tool in "${tools[@]}"; do
         if type -P "$tool" &>/dev/null; then
             found=1
-            xdg-open "$image" &
+            "$tool" "$image" &
             break
         fi
     done
