@@ -32,6 +32,8 @@ Used by the following scripts:
     ../git/git_graph_commit_history_mermaidjs.sh
     ../git/git_graph_commit_times_gnuplot.sh
     ../git/git_graph_commit_times_mermaidjs.sh
+    ../github/github_graph_commit_times_gnuplot.sh
+    ../github/github_graph_commit_times_mermaidjs.sh
 
 "
 
