@@ -82,8 +82,8 @@ else
     sort |
     uniq -c |
     awk '{print $2" "$1}' > "$data"
-    echo
 fi
+echo
 
 timestamp "Generating GNUplot code for Commits per Hour"
 sed '/^[[:space:]]*$/d' > "$code" <<EOF
