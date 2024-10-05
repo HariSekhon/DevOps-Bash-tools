@@ -1410,3 +1410,19 @@ parse_file_col_to_csv(){
     tr '\n' ',' |
     sed 's/,/, /g; s/, $//'
 }
+
+file_modified_in_last_days(){
+    local file="$1"
+    local days="$2"
+    if ! is_int "$days"; then
+        die "Non-integer passed as second arg to file_modified_in_last_days()"
+    fi
+    if ! [ -f "$file" ]; then
+        return 0
+    elif find "$file" -mtime -"$days" -print | grep -q .; then
+        return 0
+    elif [ "$(stat -c '%Y' "$file")" -ge "$(date -d "$days days ago" '+%s')" ]; then
+        return 0
+    fi
+    return 1
+}
