@@ -50,13 +50,37 @@ if [ -f "$png" ]; then
     die "$png already exists, aborting..."
 fi
 
-if ! type -P dwebp &>/dev/null; then
-    timestamp "'dwebp' command not found, attempting to install it"
-    "$srcdir/../packages/install_packages.sh" dwebp
+converted=0
+
+convert(){
+    if [ -f "$png" ]; then
+        die "$png already exists, aborting..."
+    fi
+    if type -P magick &>/dev/null; then
+        timestamp "Converting '$webp' to '$png' using ImageMagik"
+        magick "$webp" "$png"
+        return 0
+    elif type -P dwebp &>/dev/null; then
+        timestamp "Converting '$webp' to '$png' using dwebp"
+        dwebp "webp" -o "$png"
+        return 0
+    fi
+    return 1
+}
+
+if convert; then
+    converted=1
+else
+    "$srcdir/../packages/install_packages.sh" imagemagik ||
+    "$srcdir/../packages/install_packages.sh" webp ||
+    die "Failed to install any of the usual tools to convert Webp to PNG"
+
+    if convert; then
+        converted=1
+    fi
 fi
 
-timestamp "Converting '$webp' to PNG format"
-if dwebp "$webp" -o "$png"; then
+if [ "$converted" = 1 ]; then
     if [ -f "$png" ]; then
         timestamp "Conversion complete, file available: $png"
     else
