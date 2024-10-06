@@ -54,7 +54,7 @@ convert(){
         die "$png already exists, aborting..."
     fi
     if type -P magick &>/dev/null; then
-        timestamp "Converting '$svg' to '$png' using ImageMagik"
+        timestamp "Converting '$svg' to '$png' using ImageMagick"
         magick "$svg" "$png"
         return 0
     elif rsvg-convert &>/dev/null; then
@@ -73,7 +73,7 @@ convert(){
 if convert; then
     converted=1
 else
-    "$srcdir/../packages/install_packages.sh" imagemagik ||
+    "$srcdir/../packages/install_packages.sh" imagemagick ||
     # package on Debian / Ubuntu
     "$srcdir/../packages/install_packages.sh" rsvg-convert ||
     "$srcdir/../packages/install_packages.sh" inkscape ||
