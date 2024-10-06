@@ -1278,6 +1278,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `avi_to_mp4.sh` - convert avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - convert mkv files to mp4 using ffmpeg. Same use case as above
 - `svg_to_png.sh` - convert an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
+- `webp_to_png.sh` - convert a Webp image to PNG to be usable on websites that don't support Webp images like Medium
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel URL
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
