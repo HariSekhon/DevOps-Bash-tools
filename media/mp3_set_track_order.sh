@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Adds / Modifies track number metadata across all MP3 files in the given directories to restructure audiobooks to be contiguous for Mac's Books.app
+Add / Modify track number metadata across all MP3 files in the given directories to restructure audiobooks to be contiguous for Mac's Books.app
 
 $mp3_usage_behaviour_msg
 
