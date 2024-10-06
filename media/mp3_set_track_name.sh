@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Adds / Modifies track name metadata to match MP3 filenames for all MP3s in the given directories to improve display appearance when playing
+Add / Modify track name metadata to match MP3 filenames for all MP3s in the given directories to improve display appearance when playing
 
 The track name metadata is taken to be the basename of the MP3 file without the extension
 
