@@ -1272,11 +1272,12 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 `media/` directory:
 
-- `mp3_set_artist.sh` / `mp3_set_album.sh` - sets the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
-- `mp3_set_track_name.sh` - sets the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
-- `mp3_set_track_order.sh` - sets the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
-- `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
-- `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
+- `mp3_set_artist.sh` / `mp3_set_album.sh` - set the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
+- `mp3_set_track_name.sh` - set the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
+- `mp3_set_track_order.sh` - set the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
+- `avi_to_mp4.sh` - convert avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
+- `mkv_to_mp4.sh` - convert mkv files to mp4 using ffmpeg. Same use case as above
+- `svg_to_png.sh` - convert an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel URL
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
