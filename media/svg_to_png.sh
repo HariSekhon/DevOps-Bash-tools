@@ -38,6 +38,7 @@ num_args 1 "$@"
 
 svg="$1"
 
+shopt -s nocasematch
 if ! [[ "$svg" =~ \.svg$ ]]; then
     die "ERROR: file passed does not have an .svg file extension: $svg"
 fi
