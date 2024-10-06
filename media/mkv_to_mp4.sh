@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Converts any MKV files given or found recursively under given paths or current directory to mp4 format using ffmpeg
+Convert any MKV files given or found recursively under given paths or current directory to mp4 format using ffmpeg
 
 Useful to be able to stream videos to devices like smart TVs that may otherwise not understand the codecs used in the original format
 
