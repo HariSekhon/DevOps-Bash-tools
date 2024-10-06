@@ -57,7 +57,7 @@ convert(){
         die "$png already exists, aborting..."
     fi
     if type -P magick &>/dev/null; then
-        timestamp "Converting '$webp' to '$png' using ImageMagik"
+        timestamp "Converting '$webp' to '$png' using ImageMagick"
         magick "$webp" "$png"
         return 0
     elif type -P dwebp &>/dev/null; then
