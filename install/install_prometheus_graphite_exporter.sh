@@ -33,7 +33,7 @@ export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
 
-#version="${1:-1.8.2}"
+#version="${1:-0.15.1}"
 version="${1:-latest}"
 
 "$srcdir/install_prometheus.sh" "$version" graphite_exporter
