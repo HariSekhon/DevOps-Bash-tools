@@ -27,7 +27,7 @@ Installs Prometheus
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<version>]"
+usage_args="[<version> <component_name>]"
 
 export PATH="$PATH:$HOME/bin"
 
@@ -35,9 +35,8 @@ help_usage "$@"
 
 #version="${1:-2.54.1}"
 version="${1:-latest}"
+name="${2:-prometheus}"
 
 export RUN_VERSION_OPT=1
-
-name="prometheus"
 
 "$srcdir/../github/github_install_binary.sh" prometheus/"$name" "$name-{version}.{os}-{arch}.tar.gz" "$version" "$name-{version}.{os}-{arch}/$name"
