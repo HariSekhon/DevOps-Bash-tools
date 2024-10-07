@@ -36,6 +36,4 @@ help_usage "$@"
 #version="${1:-0.3.0}"
 version="${1:-latest}"
 
-export RUN_VERSION_OPT=1
-
-"$srcdir/../github/github_install_binary.sh" prometheus/promlens 'promlens-{version}.{os}-{arch}.tar.gz' "$version" "promlens-{version}.{os}-{arch}/promlens"
+"$srcdir/install_prometheus.sh" "$version" promlens
