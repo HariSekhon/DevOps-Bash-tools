@@ -38,4 +38,6 @@ version="${1:-latest}"
 
 export RUN_VERSION_OPT=1
 
-"$srcdir/../github/github_install_binary.sh" prometheus/prometheus 'prometheus-{version}.{os}-{arch}.tar.gz' "$version" "prometheus-{version}.{os}-{arch}/prometheus"
+name="prometheus"
+
+"$srcdir/../github/github_install_binary.sh" prometheus/"$name" "$name-{version}.{os}-{arch}.tar.gz" "$version" "$name-{version}.{os}-{arch}/$name"
