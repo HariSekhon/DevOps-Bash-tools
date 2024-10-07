@@ -36,6 +36,4 @@ help_usage "$@"
 #version="${1:-1.8.2}"
 version="${1:-latest}"
 
-export RUN_VERSION_OPT=1
-
-"$srcdir/../github/github_install_binary.sh" prometheus/node_exporter 'node_exporter-{version}.{os}-{arch}.tar.gz' "$version" "node_exporter-{version}.{os}-{arch}/node_exporter"
+"$srcdir/install_prometheus.sh" "$version" node_exporter
