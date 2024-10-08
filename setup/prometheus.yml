@@ -1,29 +1,55 @@
-# my global config
-global:
-  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
+#
+#  Author: Hari Sekhon
+#  Date: Wed Jan 5 16:53:05 2022 +0000
+#
+#  vim:ts=2:sts=2:sw=2:et
+#
+#  https://github.com/HariSekhon/Templates
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
 
-# Alertmanager configuration
-alerting:
-  alertmanagers:
-    - static_configs:
-        - targets:
+# ============================================================================ #
+#                              P r o m e t h e u s
+# ============================================================================ #
+
+---
+global:
+  scrape_interval: 15s # default: 1 minute
+  evaluation_interval: 15s # evaluate rules every 15 sess (default: 1 minute)
+  #scrape_timeout: 10s
+
+#alerting:
+#  alertmanagers:
+#    - static_configs:
+#        - targets:
           # - alertmanager:9093
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-rule_files:
+#rule_files:
   # - "first_rules.yml"
   # - "second_rules.yml"
 
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: "prometheus"
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
+  # job_name adds label `job=<job_name>` to timeseries metrics
+  - job_name: prometheus
+    #metrics_path: /metrics
+    #scheme: http
+    #honor_timestamps: true
+    #enable_compression: true
+    #follow_redirects: true
+    #enable_http2: true
     static_configs:
-      - targets: ["localhost:9090"]
+      - targets:
+          - localhost:9090
+
+  - job_name: demo
+    static_configs:
+      - targets:
+          - demo.promlabs.com:10000
+          - demo.promlabs.com:10001
+          - demo.promlabs.com:10002
