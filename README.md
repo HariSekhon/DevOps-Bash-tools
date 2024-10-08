@@ -205,11 +205,10 @@ make
 
 ## Index
 
-- [Dot Configs](#dot-configs) - Git, ViM, Screen, Tmux...
+- [Dot Configs](#dot-configs) - `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
 - [Bash Environment & Libraries](#bash-environment--libraries) - `.bashrc`, `.bash.d/` interactive library, `lib/` scripting library
 - [Installation Scripts](#installation-scripts) for many popular open source technologies
-- [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
-  - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
+- [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant
 - [Monitoring](#monitoring) - Grafana, Prometheus, Node Exporter
 - [AWS - Amazon Web Services](#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
 - [GCP - Google Cloud Platform](#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
