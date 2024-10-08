@@ -270,6 +270,7 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
   [AWS CLI](https://aws.amazon.com/cli/),
   [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
   [GCloud SDK](https://cloud.google.com/sdk),
+  [GitHub CLI](https://cli.github.com/),
   [Terraform](https://www.terraform.io/),
   [Ansible](https://www.ansible.com/),
   [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/),
