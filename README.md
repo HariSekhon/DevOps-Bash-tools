@@ -207,6 +207,7 @@ make
 
 - [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
+- [Monitoring](#monitoring) - Grafana, Prometheus, Node Exporter
 - [AWS - Amazon Web Services](#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
 - [GCP - Google Cloud Platform](#gcp---google-cloud-platform) - massive GCP auto-inventory, scripts for GCE, GKE, GCR, Secret Manager, BigQuery, Cloud SQL, Cloud Scheduler, Terraform service account creation
 - [Kubernetes](#kubernetes) - massive Kubernetes auto-inventory, cluster management scripts & tricks
@@ -332,6 +333,18 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
 
 See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
 and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
+
+### Monitoring
+
+`monitoring/` directory:
+
+- `grafana_api.sh` - queries the Grafana API with authentication
+- `prometheus.sh` - starts Prometheus in Docker
+- `prometheus_node_exporter.sh` - starts Prometheus `node_exporter` locally,
+  downloading it to the `$PATH` it not already found
+
+See doc pages in [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base) on Grafana,
+Prometheus, OpenTSDB, InfluxDB etc.
 
 ### Databases
 
