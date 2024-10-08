@@ -336,11 +336,11 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
 
 - `dump_stats.sh` - dumps common command outputs to text files in a local tarball. Useful to collect support information
   for vendor support cases
-- `grafana_api.sh` - queries the Grafana API with authentication
+- `grafana_api.sh` - queries the [Grafana](https://grafana.com/) API with authentication
 - `log_timestamp_large_intervals.sh` - finds log lines whose timestamp intervals exceed the given number of seconds and
   outputs those log lines with the difference between the last and current timestamps. Useful to find actions that are
   taking a long time from log files such as CI/CD logs
-- `prometheus.sh` - starts Prometheus in Docker
+- `prometheus.sh` - starts [Prometheus](https://prometheus.io/) in Docker
 - `prometheus_node_exporter.sh` - starts Prometheus `node_exporter` locally,
   downloading it to the `$PATH` it not already found
 - `ssh_dump_stats.sh` - uses SSH and `dump_stats.sh` to dump common command outputs from remote servers to a local
