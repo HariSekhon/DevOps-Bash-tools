@@ -205,6 +205,9 @@ make
 
 ## Index
 
+- [Dot Configs](#dot-configs) - Git, ViM, Screen, Tmux...
+- [Bash Environment & Libraries](#bash-environment--libraries) - `.bashrc`, `.bash.d/` interactive library, `lib/` scripting library
+- [Installation Scripts](#installation-scripts) for many popular open source technologies
 - [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant, advanced configurations:
   - `.bashrc`, `.bash.d/*.sh`, `.gitconfig`, `.vimrc`, `.screenrc`, `.tmux.conf`, `.toprc`, `.gitignore`...
 - [Monitoring](#monitoring) - Grafana, Prometheus, Node Exporter
@@ -234,9 +237,9 @@ make
 - [Templates](https://github.com/HariSekhon/Templates) - Templates for AWS, GCP, Terraform, Docker, Jenkins, Cloud Build, Vagrant, Puppet, Python, Bash, Go, Perl, Java, Scala, Groovy, Maven, SBT, Gradle, Make, GitHub Actions, CircleCI, Jenkinsfile, Makefile, Dockerfile, docker-compose.yml etc.
 - [Kubernetes Configs](https://github.com/HariSekhon/Kubernetes-configs) - Kubernetes YAML configs for most common scenarios, including Production Best Practices, Tips & Tricks
 
-### Linux & Mac
+### Dot Configs
 
-Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
+Top-level dotfiles and `configs/` directory:
 
 - `.*` - dot conf files for lots of common software eg. advanced `.vimrc`, `.gitconfig`, massive `.gitignore`, `.editorconfig`, `.screenrc`, `.tmux.conf` etc.
   - `.vimrc` - contains many awesome [vim](https://www.vim.org/) tweaks, plus hotkeys for linting lots of different file types in place, including Python, Perl, Bash / Shell, Dockerfiles, JSON, YAML, XML, CSV, INI / Properties files, LDAP LDIF etc without leaving the editor!
@@ -247,6 +250,11 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
     - `.gitignore` - extensive Git ignore of trivial files you shouldn't commit
     - enhanced Git diffs
     - protections against committing AWS secret keys or merge conflict unresolved files
+
+### Bash Environment & Libraries
+
+Top-level `.bashrc` and `.bash.d/` directory:
+
 - `.bashrc` - shell tuning and sourcing of `.bash.d/*.sh`
 - `.bash.d/*.sh` - thousands of lines of advanced bashrc code, aliases, functions and environment variables for:
   - [Linux](https://en.wikipedia.org/wiki/Linux) & [Mac](https://en.wikipedia.org/wiki/MacOS)
@@ -266,34 +274,42 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
   CI detection ([Travis CI](https://travis-ci.org/), [Jenkins](https://jenkins.io/) etc),
   port and HTTP url availability content checks etc.
   Sourced from all my other [GitHub repos](https://github.com/harisekhon) to make setting up Dockerized tests easier.
-- `install/install_*.sh` - various simple to use installation scripts for common technologies like
-  [AWS CLI](https://aws.amazon.com/cli/),
-  [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest),
-  [GCloud SDK](https://cloud.google.com/sdk),
-  [GitHub CLI](https://cli.github.com/),
-  [Terraform](https://www.terraform.io/),
-  [Terragrunt](https://terragrunt.gruntwork.io/),
-  [Direnv](https://direnv.net/),
-  [Ansible](https://www.ansible.com/),
-  [K3s](https://k3s.io),
-  [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/),
-  [MiniShift](https://www.okd.io/minishift/)
-  (Kubernetes / [Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) dev VMs),
-  [Maven](https://maven.apache.org/),
-  [Gradle](https://gradle.org/),
-  [SBT](https://www.scala-sbt.org/),
-  [EPEL](https://fedoraproject.org/wiki/EPEL),
-  [RPMforge](http://repoforge.org/),
-  [Homebrew](https://brew.sh/),
-  [Travis CI](https://travis-ci.org/),
-  [Circle CI](https://circleci.com/),
-  [AppVeyor](https://www.appveyor.com/),
-  [BuildKite](https://buildkite.com),
-  [Avro Tools](https://avro.apache.org/),
-  [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools),
-  [Prometheus](https://prometheus.io/),
-  various JDKs and RDBMS JDBC connector jars
-  etc.
+
+### Installation Scripts
+
+- `install/install_*.sh` - various simple to use installation scripts for common technologies like:
+  - [AWS CLI](https://aws.amazon.com/cli/)
+  - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest)
+  - [GCloud SDK](https://cloud.google.com/sdk)
+  - [GitHub CLI](https://cli.github.com/)
+  - [Terraform](https://www.terraform.io/)
+  - [Terragrunt](https://terragrunt.gruntwork.io/)
+  - [Direnv](https://direnv.net/)
+  - [Ansible](https://www.ansible.com/)
+  - [K3s](https://k3s.io)
+  - [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/) (Kubernetes)
+  - [MiniShift](https://www.okd.io/minishift/)
+    ([Redhat OpenShift](https://www.openshift.com/) / [OKD](https://www.okd.io/) dev VMs)
+  - [Maven](https://maven.apache.org/)
+  - [Gradle](https://gradle.org/)
+  - [SBT](https://www.scala-sbt.org/)
+  - [EPEL](https://fedoraproject.org/wiki/EPEL)
+  - [RPMforge](http://repoforge.org/)
+  - [Homebrew](https://brew.sh/)
+  - [Travis CI](https://travis-ci.org/)
+  - [Circle CI](https://circleci.com/)
+  - [AppVeyor](https://www.appveyor.com/)
+  - [BuildKite](https://buildkite.com)
+  - [Avro Tools](https://avro.apache.org/)
+  - [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
+  - [Prometheus](https://prometheus.io/)
+  - various JDKs and RDBMS JDBC connector jars
+  - and many more...
+
+### Linux & Mac
+
+`bin/` directory:
+
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
 - `delete_duplicate_files.sh` - deletes duplicate files with (N) suffixes, commonly caused by web browser downloads,
