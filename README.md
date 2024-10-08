@@ -272,7 +272,10 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
   [GCloud SDK](https://cloud.google.com/sdk),
   [GitHub CLI](https://cli.github.com/),
   [Terraform](https://www.terraform.io/),
+  [Terragrunt](https://terragrunt.gruntwork.io/),
+  [Direnv](https://direnv.net/),
   [Ansible](https://www.ansible.com/),
+  [K3s](https://k3s.io),
   [MiniKube](https://kubernetes.io/docs/setup/learning-environment/minikube/),
   [MiniShift](https://www.okd.io/minishift/)
   (Kubernetes / [Redhat OpenShift](https://www.openshift.com/)/[OKD](https://www.okd.io/) dev VMs),
@@ -286,8 +289,10 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
   [Circle CI](https://circleci.com/),
   [AppVeyor](https://www.appveyor.com/),
   [BuildKite](https://buildkite.com),
+  [Avro Tools](https://avro.apache.org/),
   [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools),
-  [Prometheus](https://prometheus.io/)
+  [Prometheus](https://prometheus.io/),
+  various JDKs and RDBMS JDBC connector jars
   etc.
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
