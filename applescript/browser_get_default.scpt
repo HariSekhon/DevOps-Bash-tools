@@ -22,7 +22,7 @@ set defaultBrowser to do shell script "defaults read \\
 if defaultBrowser is "" or defaultBrowser contains "safari" then
     set defaultBrowser to "Safari"
 else if defaultBrowser contains "chrome" then
-    set defaultBrowser to "Google Crhome"
+    set defaultBrowser to "Google Chrome"
 else if defaultBrowser contains "firefox" then
     set defaultBrowser to "Firefox"
 else
