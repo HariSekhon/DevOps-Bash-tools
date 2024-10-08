@@ -353,7 +353,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
 
 See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
-and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md).
+and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md).
 
 ### AppleScript
 
