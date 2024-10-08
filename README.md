@@ -372,6 +372,9 @@ Mac automation scripts to automate the Mac UI, detect foreground windows, close 
 - `is_screensaver_running.scpt` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
 - `screensaver_activate.scpt` - activate screensaver
 
+See also [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md) page
+in [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base).
+
 ### Monitoring
 
 `monitoring/` directory:
