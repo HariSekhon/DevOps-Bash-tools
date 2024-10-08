@@ -332,8 +332,6 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
 - `diff_line_threshold.sh` - compares two files vs a line count diff threshold to determine if they are radically different. Used to avoid overwriting files which are not mere updates but completely different files
-- `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
-- `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
@@ -357,7 +355,15 @@ and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md).
 
 ### AppleScript
 
-Mac automation scripts to automate the Mac UI, detect foreground windows, close browser tabs etc.
+Mac automation scripts to automate the Mac UI and settings
+
+`bin/` directory:
+
+- `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
+- `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
+- `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
+- `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
+- `paste_diff_settings.sh` - Takes snapshots of before and after clipboard changes and diffs them to show config changes
 
 `applescript/` directory:
 
