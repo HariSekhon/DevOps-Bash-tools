@@ -209,8 +209,8 @@ make
 - [Bash Environment & Libraries](#bash-environment--libraries) - `.bashrc`, `.bash.d/` interactive library, `lib/` scripting library
 - [Installation Scripts](#installation-scripts) for many popular open source technologies
 - [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant
-- [AppleScript](#applescript) - Mac UI automation scripts, send keystrokes, mouse clicks, detect foreground app,
-  switch app, detect locked screen or screensaver, activate screensaver
+- [Mac & AppleScript](#mac--applescript) - Mac settings and UI automation scripts, send keystrokes, mouse clicks,
+  detect foreground app, switch app, detect locked screen or screensaver, activate screensaver
 - [Monitoring](#monitoring) - Grafana, Prometheus, Node Exporter, scripted collection of common Linux & Mac cli
   monitoring stats and log locations for quick generation of vendor support tarball bundles both locally and over SSH
 - [AWS - Amazon Web Services](#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
@@ -353,7 +353,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 See also [Knowledge Base notes for Linux](https://github.com/HariSekhon/Knowledge-Base/blob/main/linux.md)
 and [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md).
 
-### AppleScript
+### Mac & AppleScript
 
 Mac automation scripts to automate the Mac UI and settings
 
