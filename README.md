@@ -391,9 +391,9 @@ in [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base).
 - `log_timestamp_large_intervals.sh` - finds log lines whose timestamp intervals exceed the given number of seconds and
   outputs those log lines with the difference between the last and current timestamps. Useful to find actions that are
   taking a long time from log files such as CI/CD logs
-- `prometheus.sh` - starts [Prometheus](https://prometheus.io/) in Docker
-- `prometheus_node_exporter.sh` - starts Prometheus `node_exporter` locally,
-  downloading it to the `$PATH` it not already found
+- `prometheus.sh` - starts [Prometheus](https://prometheus.io/) locally, downloading it if not found in `$PATH`
+- `prometheus_docker.sh` - starts [Prometheus](https://prometheus.io/) in Docker using `docker-compose`
+- `prometheus_node_exporter.sh` - starts Prometheus `node_exporter` locally, downloading it if not found in `$PATH`
 - `ssh_dump_stats.sh` - uses SSH and `dump_stats.sh` to dump common command outputs from remote servers to a local
   tarball. Useful for vendor support cases
 - `ssh_dump_logs.sh` - Uses SSH to dump logs from server to local text files for uploading to vendor support cases
