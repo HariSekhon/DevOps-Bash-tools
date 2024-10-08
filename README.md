@@ -285,7 +285,8 @@ Top-level `.bashrc`, `bin/`, `.bash.d/` and `configs/` directories:
   [Circle CI](https://circleci.com/),
   [AppVeyor](https://www.appveyor.com/),
   [BuildKite](https://buildkite.com),
-  [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools)
+  [Parquet Tools](https://github.com/apache/parquet-mr/tree/master/parquet-tools),
+  [Prometheus](https://prometheus.io/)
   etc.
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
