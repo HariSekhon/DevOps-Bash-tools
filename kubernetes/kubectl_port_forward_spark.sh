@@ -38,9 +38,9 @@ usage_args="[<namespace>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+max_args 1 "$@"
 
-namespace="$1"
+namespace="${1:-}"
 
 export OPEN_URL=1
 
