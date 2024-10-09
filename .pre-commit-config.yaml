@@ -30,14 +30,14 @@ repos:
     hooks:
       - id: check-yaml
       # Common errors
-      - id: end-of-file-fixer
+      #- id: end-of-file-fixer  # ruins .gitignore Icon\r
       - id: trailing-whitespace
         args: [--markdown-linebreak-ext=md]
       # Git style
       - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-vcs-permalinks
-      - id: forbid-new-submodules
+      #- id: forbid-new-submodules
       # Cross platform
       - id: check-case-conflict
       - id: mixed-line-ending
