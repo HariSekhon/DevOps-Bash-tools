@@ -776,7 +776,7 @@ m4/lt~obsolete.m4
 *.apples
 
 # Initialized files
-*.ini
+#*.ini  # used by Ansible for inventory.ini
 *.basic
 
 ### BitTorrent ###
