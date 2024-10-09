@@ -183,6 +183,7 @@ maven-shell
 #md5sha1sum  # clashes with coreutils
 media-info  # read mp3 tags
 mercurial
+#mermaid-cli  # old version - see instead https://github.com/HariSekhon/Knowledge-Base/blob/main/mermaidjs.md
 ubuntu/microk8s/microk8s
 midnight-commander
 minio
