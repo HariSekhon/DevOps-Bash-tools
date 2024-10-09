@@ -16,3 +16,6 @@
 [submodule "kubernetes-configs"]
 	path = kubernetes-configs
 	url = https://github.com/HariSekhon/Kubernetes-configs
+[submodule "ansible"]
+	path = ansible
+	url = https://github.com/HariSekhon/Ansible
