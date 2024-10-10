@@ -7,4 +7,5 @@ pylint>=1.9.5
 # can only be installed on macOS - moved to setup/pip-packages-mac.txt
 #pyobjc-framework-Quartz>=9.0.1
 semgrep>=0.78.0
+sqlfluff==3.2.2
 yamllint>=1.15.0
