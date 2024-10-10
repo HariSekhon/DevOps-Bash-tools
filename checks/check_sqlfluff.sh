@@ -58,6 +58,10 @@ echo
 sqlfluff --version
 echo
 
+if is_CI; then
+    export VERBOSE=1
+fi
+
 while read -r path; do
     dialect="$(infer_sql_dialect_from_path "$path" || { echo "Falling back to ANSI dialect" >& 2; echo "ansi"; } )"
     opts=(--dialect "$dialect")
@@ -74,7 +78,7 @@ done < <(find "$dir" -iname '*.sql' -type f)
 
 msg="completed successfully"
 if [ "$exitcode" != 0 ]; then
-    msg+="found errors!"
+    msg="found errors!"
 fi
 timestamp "SQLFluffing $msg"
 echo
