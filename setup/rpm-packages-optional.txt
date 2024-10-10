@@ -45,3 +45,6 @@ pre-commit
 
 procps     # RHEL <= 7 (RHEL 7 maps procps to procps-ng)
 procps-ng  # RHEL 8
+
+# Not available in any RHEL based system as of Fedora 40
+#sqlfluff
