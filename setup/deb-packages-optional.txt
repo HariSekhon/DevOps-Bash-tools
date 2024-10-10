@@ -33,3 +33,6 @@ python-setuptools # needed by 'pip install awscli'
 
 # only available from Debian 12 and Ubuntu 22.04
 pre-commit
+
+# Debian 12+ and Ubuntu 24+
+sqlfluff
