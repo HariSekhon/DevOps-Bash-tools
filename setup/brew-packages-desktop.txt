@@ -265,6 +265,7 @@ snappy
 sonar-completion
 sonar-scanner
 sqlite
+sqlfluff  # linter
 sqlparse  # SQL reformatter
 ssllabs-scan
 sslscan
