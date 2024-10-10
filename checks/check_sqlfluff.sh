@@ -54,6 +54,13 @@ exitcode=0
 
 section "SQLFluff"
 
+if ! type -P sqlfluff &>/dev/null; then
+    timestamp "SQLFluff not installed, attempting to install it now..."
+    "$srcdir/../packages/install_package.sh" sqlfluff ||
+    pip install sqlfluff
+    echo
+fi
+
 echo
 sqlfluff --version
 echo
