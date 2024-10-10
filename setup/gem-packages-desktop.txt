@@ -8,6 +8,7 @@ gitlab
 gist
 jgrep
 lolcat
+sqlint
 
 # installed via homebrew now, can't find gem any more
 #rbenv
