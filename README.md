@@ -419,6 +419,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `psql.sh` - shortens `psql` command to connect to [PostreSQL](https://www.postgresql.org/) by auto-populating switches from environment variables, using both standard postgres supported environment variables like `$PG*` (see [doc](https://www.postgresql.org/docs/12/libpq-envars.html)) as well as other common environment variables like `$POSTGRESQL_HOST` / `$POSTGRES_HOST` / `$HOST`, `$POSTGRESQL_USER` / `$POSTGRES_USER` / `$USER`, `$POSTGRESQL_PASSWORD` / `$POSTGRES_PASSWORD` / `$PASSWORD`, `$POSTGRESQL_DATABASE` / `$POSTGRES_DATABASE` / `$DATABASE`
   - `postgres_foreach_table.sh` - executes a SQL query against every table, replacing `{db}`, `{schema}` and `{table}` in each iteration eg. `select count(*) from {table}`
   - `postgres_*.sh` - various scripts using `psql.sh` for row counts, iterating each table, or outputting clean lists of databases, schemas and tables for quick scripting
+  - `checks/check_sqlfluff.sh` - recursively iterates all SQL code files found in the given or current directory and runs SQLFluff linter against them, inferring the different SQL dialects from each path/filename/extension
 
 ### AWS - Amazon Web Services
 
