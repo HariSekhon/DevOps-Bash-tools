@@ -32,7 +32,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Recursively iterates all SQL code files found in the given or current directory and runs SQLFluff linter against them,
-inferring the different SQL dialects from each filename/path
+inferring the different SQL dialects from each path/filename/extension
 
 If you don't have a mixed SQL tree or repo to lint then you could just do this as a single call to SQLFluff like so
 
