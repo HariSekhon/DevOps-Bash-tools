@@ -120,6 +120,8 @@ alias ghw='github_workflows'
 alias wf='cd $(git_root)/.github/workflows/'
 alias ggrep="git grep"
 alias gfr='git_foreach_repo.sh'
+alias gfrur='git_foreach_repo_update_readme.sh'
+alias gfrrra='git_foreach_repo_replace_readme_actions.sh'
 alias remotes='git remote -v'
 alias remote='remotes'
 # much quicker to just 'cd $github; f <pattern>'
