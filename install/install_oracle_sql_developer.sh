@@ -60,7 +60,12 @@ elif is_mac; then
     fi
     timestamp "Moving $sql_developer to /Applications"
     echo
-    mv -iv "$sql_developer" /Applications
+    if [ -d "/Applications/$sql_developer" ]; then
+        timestamp "Removing old SQL Developer installation"
+        rm -fr "/Applications/$sql_developer"
+        echo
+    fi
+    mv -fv "$sql_developer" /Applications
     echo
     timestamp "Opening $sql_developer"
     open -a "$sql_developer"
