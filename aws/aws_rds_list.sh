@@ -29,11 +29,11 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<rds_name_or_ip>"
+usage_args=""
 
 help_usage "$@"
 
-min_args 1 "$@"
+num_args 0 "$@"
 
 aws rds describe-db-instances \
     --query "DBInstances[*].[DBInstanceIdentifier, DBInstanceStatus, Engine, AvailabilityZone, DBInstanceClass, AllocatedStorage]" \
