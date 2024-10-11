@@ -29,11 +29,15 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<region>]"
 
 help_usage "$@"
 
-num_args 0 "$@"
+max_args 1 "$@"
+
+if [ $# -gt 0 ]; then
+    export AWS_DEFAULT_REGION="$1"
+fi
 
 aws rds describe-db-instances \
     --query "DBInstances[*].[DBInstanceIdentifier, DBInstanceStatus, Engine, AvailabilityZone, DBInstanceClass, AllocatedStorage]" \
