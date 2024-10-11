@@ -502,6 +502,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_logs_ecs_tasks.sh` - lists AWS ECS task run requests, their callers and job definitions
   - `aws_meta.sh` - AWS [EC2 Metadata API](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html) query shortcut. See also the official [ec2-metadata](https://aws.amazon.com/code/ec2-instance-metadata-query-tool/) shell script with more features
   - `aws_nat_gateways_public_ips.sh` - lists the public IPs of all NAT gateways. Useful to give to clients to permit through firewalls for webhooks or similar calls
+  - `aws_rds_list.sh` - list RDS instances with select fields - Name, Status, Engine, AZ, Instance Type, Storage
   - `aws_rds_open_port_to_my_ip.sh` - adds a security group to an RDS DB instance to open its native database SQL port to your public IP address
   - `aws_rds_get_version.sh` - quickly retrieve the version of an RDS database to know which JDBC jar version to download using `install/download_*_jdbc.sh` when setting up connections
   - `aws_route53_check_ns_records.sh` - checks AWS [Route 53](https://aws.amazon.com/route53/) public hosted zones NS servers are delegated in the public DNS hierarchy and that there are no rogue NS servers delegated not matching the Route 53 zone configuration
