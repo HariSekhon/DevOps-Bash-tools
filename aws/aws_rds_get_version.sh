@@ -32,6 +32,8 @@ through the list or RDS instance URL endpoints doing DNS lookups until it finds 
 operation and can be expensive if you have a lot of instances, so you are recommended to supply the
 RDS instance name instead if you know it. This IP resolution functionality was because teams sometimes
 only gave me the IP address of a database when requesting JDBC setup to them
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
