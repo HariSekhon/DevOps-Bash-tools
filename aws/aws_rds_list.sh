@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Quickly list RDS instances with a few important fields - Name, Status, Engine, AZ, Instance Type, Storage
+List RDS instances with select fields - Name, Status, Engine, AZ, Instance Type, Storage
 
 $usage_aws_cli_required
 "
