@@ -41,5 +41,4 @@ fi
 
 aws rds describe-db-instances \
     --query "DBInstances[*].[DBInstanceIdentifier, DBInstanceStatus, Engine, AvailabilityZone, DBInstanceClass, AllocatedStorage, Endpoint.Address]" \
-    --output table \
-    --headers 'Instance' 'Status' 'Engine' 'Availability Zone' 'Instance Type' 'Allocated Storage' 'Endpoint DNS FQDN Address'
+    --output table
