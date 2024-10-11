@@ -42,17 +42,27 @@ os="$(get_os)"
 arch="$(get_arch)"
 
 if type -P yum &>/dev/null; then
+    timestamp "Installing SQL Developer on RHEL based system"
     yum install -y "https://download.oracle.com/otn_software/java/sqldeveloper/sqldeveloper-$version.noarch.rpm"
 elif is_mac; then
+    timestamp "Installing SQL Developer on Mac"
     url="https://download.oracle.com/otn_software/java/sqldeveloper/sqldeveloper-$version-$os-$arch.app.zip"
     zip="${url##*/}"
+    timestamp "Downloading: $url"
     wget -c "$url"
+    echo
+    timestamp "Unzipping: $zip"
     unzip -o "$zip"
+    echo
     sql_developer="SQLDeveloper.app"
     if ! [ -d "$sql_developer" ]; then
         die "Failed to find expected extracted directory: $sql_developer"
     fi
+    timestamp "Moving $sql_developer to /Applications"
+    echo
     mv -iv "$sql_developer" /Applications
+    echo
+    timestamp "Opening $sql_developer"
     open -a "$sql_developer"
 else
     die "Unsupport OS - not Mac or RHEL based"
