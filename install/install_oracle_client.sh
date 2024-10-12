@@ -60,6 +60,10 @@ version="${1:-latest}"
 timestamp "Installing Oracle InstantClient"
 echo
 
+if [ "$EUID" != 0 ]; then
+    die "You need to be root to run this script as it installs software"
+fi
+
 # xargs is needed by install_packages_if_absent.sh
 if ! type -P xargs &>/dev/null; then
     "$srcdir/../packages/install_packages.sh" findutils  # contains xargs for RHEL8
