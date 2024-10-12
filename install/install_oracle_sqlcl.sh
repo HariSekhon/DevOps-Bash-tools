@@ -37,7 +37,7 @@ timestamp "Installing Oracle SQLcl command line client"
 echo
 
 # sometimes on Mac /usr/local is writeable by the user, in which case don't enforce sudo
-if ! [ -w /usr/local ]; then
+if ! [ -w /usr/local ] || ! [ -w /usr/local/bin ]; then
 #if ! am_root; then
     die "ERROR: must be root to run this script as it will download and unpack to /usr/local"
 fi
@@ -53,12 +53,19 @@ timestamp "Unzipping to /usr/local/"
 unzip -n sqlcl-latest.zip -d /usr/local/
 echo
 
-if ! [ -e /usr/local/bin/sql ]; then
-    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
-    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
+# clashes with GNU parallel
+#if ! [ -e /usr/local/bin/sql ]; then
+#    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
+#    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
+#    echo
+#fi
+
+if ! [ -e /usr/local/bin/sqlcl ]; then
+    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/sqlcl for \$PATH convenience"
+    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/sqlcl
     echo
-fi
+#fi
 
 timestamp "Completed installation of SQLcl oracle client"
-echo
-timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other programs called 'sql' in your path (GNU Parallels puts one in /usr/local/bin/ for example)"
+#echo
+#timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other programs called 'sql' in your path (GNU Parallels puts one in /usr/local/bin/ for example)"
