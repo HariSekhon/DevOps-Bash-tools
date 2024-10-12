@@ -55,4 +55,7 @@ echo
 if ! [ -e /usr/local/bin/sql ]; then
     timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
     ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
+    echo
 fi
+
+timestamp "Completed installation of SQLcl oracle client"
