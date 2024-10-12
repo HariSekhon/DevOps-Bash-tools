@@ -60,6 +60,10 @@ version="${1:-latest}"
 timestamp "Installing Oracle InstantClient"
 echo
 
+# xargs is needed by install_packages_if_absent.sh
+if ! type -P xargs &>/dev/null; then
+    "$srcdir/../packages/install_packages.sh" findutils  # contains xargs for RHEL8
+fi
 "$srcdir/../packages/install_packages_if_absent.sh" curl ca-certificates
 
 timestamp "Fetching downloads page: $downloads_url"
