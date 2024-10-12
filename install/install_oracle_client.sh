@@ -26,7 +26,7 @@ opt_base="/opt/oracle"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs the Oracle InstantClient packages including SQLPlus
+Installs the Oracle InstantClient packages including SQLPlus, JDBC, ODDC, SDK and Tools
 
 If the first arg is 'list' then just lists discovered versions and exits so you can choose the version you want if not using latest
 
