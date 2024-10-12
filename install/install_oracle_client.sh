@@ -32,7 +32,7 @@ If the first arg is 'list' then just lists discovered versions and exits so you 
 
 Version can be a prefix major or major.minor number and it'll take whatever the first patch version of that release which is found
 
-Some RPM versions will not install on some versions of Redhat based systems, you are advised to try the latest version
+Some RPM versions will not install on some versions of Redhat based systems due to compatibility, you are advised to try the latest version
 
 You can also look here and fetch manually if you really want:
 
