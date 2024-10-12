@@ -35,7 +35,9 @@ num_args 0 "$@"
 
 timestamp "Installing Oracle SQLcl command line client"
 
-if ! am_root; then
+# sometimes on Mac /usr/local is writeable by the user, in which case don't enforce sudo
+if ! [ -w /usr/local ]; then
+#if ! am_root; then
     die "ERROR: must be root to run this script as it will download and unpack to /usr/local"
 fi
 
