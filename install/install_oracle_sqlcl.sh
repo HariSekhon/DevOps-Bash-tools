@@ -67,5 +67,6 @@ if ! [ -e /usr/local/bin/sqlcl ]; then
 fi
 
 timestamp "Completed installation of SQLcl oracle client"
-#echo
+echo
 #timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other programs called 'sql' in your path (GNU Parallels puts one in /usr/local/bin/ for example)"
+timestamp "Call SQLcl as 'sqlcl' which should be in your \$PATH now"
