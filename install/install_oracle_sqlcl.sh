@@ -34,6 +34,7 @@ help_usage "$@"
 num_args 0 "$@"
 
 timestamp "Installing Oracle SQLcl command line client"
+echo
 
 # sometimes on Mac /usr/local is writeable by the user, in which case don't enforce sudo
 if ! [ -w /usr/local ]; then
