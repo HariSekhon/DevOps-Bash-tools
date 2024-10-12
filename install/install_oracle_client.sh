@@ -106,8 +106,11 @@ parse_rpms_version(){
     rhel_version="$(awk -F= '/^VERSION=/{print $2}' /etc/*release | sed 's/"//g')"
     local rpms
     # Oracle for some reason doesn't prefix the hrefs with 'https:' must add it ourselves
+    # XXX: SECURITY: this regex must remain as tight as possible known chars as these packages are passed to the CLI yum install command further down
+    #      and this could open you to a Shell Injection attack if you mess with this
+    #      KNOWN GOOD CHARS WHITELISTING ONLY - NO '.' sloppiness can be allowed here !!
     rpms="$(
-        grep -Eo "//download.oracle.com/[^'\"]+/oracle-instantclient[^'\"]+${version}[^'\"]+\.rpm" <<< "$downloads_page" |
+        grep -Eo "//download.oracle.com/[[:alnum:]/._-]+/oracle-instantclient[[:alnum:]._-]+${version}[[:alnum:]._-]+\.rpm" <<< "$downloads_page" |
         # remove basiclite rpm since it clashes with basic rpm
         sed '/basiclite/d' |
         sed 's|^|https:|' ||
@@ -142,7 +145,10 @@ parse_rpms_version(){
 parse_zips_version(){
     local version="$1"
     # Oracle for some reason doesn't prefix the hrefs with 'https:' must add it ourselves
-    grep -Eo "//download.oracle.com/[^'\"]+${version}[^'\"]*\.zip" <<< "$downloads_page" |
+    # XXX: SECURITY: this regex must remain as tight as possible known chars as these zips are passed to the CLI unzip command further down
+    #      and this could open you to a Shell Injection attack if you mess with this
+    #      KNOWN GOOD CHARS WHITELISTING ONLY - NO '.' sloppiness can be allowed here !!
+    grep -Eo "//download.oracle.com/[[:alnum:]/._-]+${version}[[:alnum:]._-]*\.zip" <<< "$downloads_page" |
     # remove basiclite zip since it clashes with basic zip
     sed '/basiclite/d' |
     sed 's|^|https:|' ||
@@ -197,9 +203,15 @@ if type -P yum &>/dev/null; then
     # shellcheck disable=SC2086
     yum install -y $rpms
 else
-    # libaio1 on Debian is needed by sqlplus to be install for the shared library
-    # on RHEL is just called libaio but this code path shouldn't be hit on RHEL systems which should use RPMs
-    "$srcdir/../packages/install_packages_if_absent.sh" wget unzip libaio1
+    # libaio shared library is needed by sqlplus
+    "$srcdir/../packages/install_packages_if_absent.sh" wget unzip
+    if grep -q Ubuntu /etc/*-release; then
+        "$srcdir/../packages/install_packages_if_absent.sh" libaio-dev
+    elif grep -q Debian /etc/*-release; then
+        "$srcdir/../packages/install_packages_if_absent.sh" libaio1
+    elif grep -qi redhat /etc/*-release; then
+        "$srcdir/../packages/install_packages_if_absent.sh" libaio
+    fi
     if [ -z "${zips:-}" ]; then
         # we did not set the permalink zips because script wasn't passed latest
         timestamp "On non-RHEL-based system, falling back to using zips"
