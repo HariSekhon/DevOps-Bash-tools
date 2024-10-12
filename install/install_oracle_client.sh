@@ -41,6 +41,14 @@ You can also look here and fetch manually if you really want:
 On RHEL systems installs all RPMs
 
 On non-RHEL systems installs all Zips to $opt_base
+
+If you get this error (eg. on Amazon Linux 2 when trying to install Oracle Client version 23):
+
+    Error: Invalid version flag: or
+
+then install an older version by passing it an arg of a major version and letting the script figure out the rest, eg.
+
+    ${0##*/} 21
 "
 
 # used by usage() in lib/utils.sh
