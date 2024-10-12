@@ -116,10 +116,14 @@ parse_rpms_version(){
         sed 's|^|https:|' ||
         die "ERROR: failed to parse RPM packages for version '$version' from downloads page"
     )"
+    if grep -qi amazon /etc/*-release; then
+        timestamp "Detected Amazon Linux, ignoring version"
+        rhel_version=""
+    fi
     if is_int "$rhel_version"; then
         timestamp "Determined RHEL version to be: $rhel_version"
     else
-        timestamp "Failed to determine RHEL version, will attempt to use latest RHEL RPM version available (best effort for Fedora)"
+        timestamp "Failed to determine RHEL version, will attempt to use latest RHEL RPM version available (best effort for Fedora and Amazon Linux)"
         rhel_version="$(
             # -m 1 still outputs 2 matches from the first line :-/
             grep -Eom1 '\.el[[:digit:]]+\.x86_64.rpm' <<< "$rpms" |
