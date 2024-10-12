@@ -60,7 +60,7 @@ version="${1:-latest}"
 timestamp "Installing Oracle InstantClient"
 echo
 
-"$srcdir/../packages/install_packages_if_absent.sh" curl wget ca-certificates
+"$srcdir/../packages/install_packages_if_absent.sh" curl ca-certificates
 
 timestamp "Fetching downloads page: $downloads_url"
 downloads_page="$(curl "$downloads_url")"
@@ -191,7 +191,7 @@ if type -P yum &>/dev/null; then
 else
     # libaio1 on Debian is needed by sqlplus to be install for the shared library
     # on RHEL is just called libaio but this code path shouldn't be hit on RHEL systems which should use RPMs
-    "$srcdir/../packages/install_packages_if_absent.sh" unzip libaio1
+    "$srcdir/../packages/install_packages_if_absent.sh" wget unzip libaio1
     if [ -z "${zips:-}" ]; then
         # we did not set the permalink zips because script wasn't passed latest
         timestamp "On non-RHEL-based system, falling back to using zips"
