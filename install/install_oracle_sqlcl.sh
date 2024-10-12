@@ -52,4 +52,7 @@ timestamp "Unzipping to /usr/local/"
 unzip -n sqlcl-latest.zip -d /usr/local/
 echo
 
-ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
+if ! [ -e /usr/local/bin/sql ]; then
+    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
+    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
+fi
