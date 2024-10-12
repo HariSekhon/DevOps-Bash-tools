@@ -73,7 +73,7 @@ fi
 timestamp "Installing Oracle InstantClient"
 echo
 
-if is_linux && [ "$EUID" != 0 ]; then
+if is_linux && ! am_root; then
     die "You need to be root on Linux to run this script as it installs software"
 fi
 
