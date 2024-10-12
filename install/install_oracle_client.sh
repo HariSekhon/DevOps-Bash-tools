@@ -223,4 +223,4 @@ else
 fi
 
 echo
-timestamp "Install completed successfully"
+timestamp "Oracle Client installed successfully"
