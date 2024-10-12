@@ -61,4 +61,4 @@ fi
 
 timestamp "Completed installation of SQLcl oracle client"
 echo
-timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other sql programs in your path (GNU Parallels puts one for example)"
+timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other programs called 'sql' in your path (GNU Parallels puts one in /usr/local/bin/ for example)"
