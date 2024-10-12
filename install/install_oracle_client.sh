@@ -50,6 +50,7 @@ then install an older version by passing it an arg of a major version and lettin
 
     ${0##*/} 21
 "
+# On Mac it ignores the version arg and always installs the latest DMGs
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
@@ -61,52 +62,58 @@ max_args 1 "$@"
 
 version="${1:-latest}"
 
-#if ! is_linux; then
-#    die "ERROR: only Linux is supported at this time"
+#if ! is_linux && ! is_mac; then
+#    die "ERROR: only Linux and Mac are supported at this time"
 #fi
+
+if ! is_linux; then
+    die "ERROR: only Linux is supported at this time"
+fi
 
 timestamp "Installing Oracle InstantClient"
 echo
 
-if [ "$EUID" != 0 ]; then
-    die "You need to be root to run this script as it installs software"
+if is_linux && [ "$EUID" != 0 ]; then
+    die "You need to be root on Linux to run this script as it installs software"
 fi
 
-# xargs is needed by install_packages_if_absent.sh
-if ! type -P xargs &>/dev/null; then
-    "$srcdir/../packages/install_packages.sh" findutils  # contains xargs for RHEL8
+if is_linux; then
+    # xargs is needed by install_packages_if_absent.sh
+    if ! type -P xargs &>/dev/null; then
+        "$srcdir/../packages/install_packages.sh" findutils  # contains xargs for RHEL8
+    fi
+    "$srcdir/../packages/install_packages_if_absent.sh" curl ca-certificates
+
+    timestamp "Fetching downloads page: $downloads_url"
+    downloads_page="$(curl "$downloads_url")"
+    echo
+
+    timestamp "Parsing available versions"
+    versions="$(
+        grep -Eo "oracle-instantclient[^'\"]*basic[^'\"]*rpm" <<< "$downloads_page" |
+        sed '
+            s/^.*basic[[:alpha:]]*-//;
+            s/-.*$//; s/.rpm$//;
+            s/linuxx64//;
+            /^[[:space:]]*$/d
+        ' |
+        sort -Vur
+        #die "ERROR: No versions parsed from downloads url: $downloads_url"
+    )"
+    echo
+
+    versions_found="Versions found:
+
+    $versions
+    "
+
+    if [ "$version" = list ]; then
+        echo "$versions_found"
+        exit 1
+    fi
+
+    log "$versions_found"
 fi
-"$srcdir/../packages/install_packages_if_absent.sh" curl ca-certificates
-
-timestamp "Fetching downloads page: $downloads_url"
-downloads_page="$(curl "$downloads_url")"
-echo
-
-timestamp "Parsing available versions"
-versions="$(
-    grep -Eo "oracle-instantclient[^'\"]*basic[^'\"]*rpm" <<< "$downloads_page" |
-    sed '
-        s/^.*basic[[:alpha:]]*-//;
-        s/-.*$//; s/.rpm$//;
-        s/linuxx64//;
-        /^[[:space:]]*$/d
-    ' |
-    sort -Vur
-    #die "ERROR: No versions parsed from downloads url: $downloads_url"
-)"
-echo
-
-versions_found="Versions found:
-
-$versions
-"
-
-if [ "$version" = list ]; then
-    echo "$versions_found"
-    exit 1
-fi
-
-log "$versions_found"
 
 parse_rpms_version(){
     local version="$1"
@@ -167,7 +174,17 @@ parse_zips_version(){
     die "ERROR: failed to parse ZIP packages for version '$version' from downloads page"
 }
 
-if [ "$version" = latest ]; then
+if is_mac; then
+    arch="$(get_arch)"
+    dmgs="
+        https://download.oracle.com/otn_software/mac/instantclient/instantclient-basic-macos-$arch.dmg
+        https://download.oracle.com/otn_software/mac/instantclient/instantclient-sqlplus-macos-$arch.dmg
+        https://download.oracle.com/otn_software/mac/instantclient/instantclient-tools-macos-$arch.dmg
+        https://download.oracle.com/otn_software/mac/instantclient/instantclient-sdk-macos-$arch.dmg
+        https://download.oracle.com/otn_software/mac/instantclient/instantclient-jdbc-macos-$arch.dmg
+        https://download.oracle.com/otn_software/mac/instantclient/instantclient-odbc-macos-$arch.dmg
+    "
+elif [ "$version" = latest ]; then
     timestamp "Using version 'latest'"
     version="$(head -n1 <<< "$versions")"
     timestamp "Latest version determined to be: $version"
@@ -203,7 +220,15 @@ $versions
     timestamp "Requested version matched available version: $version"
 fi
 
-if type -P yum &>/dev/null; then
+if is_mac; then
+    timestamp "Installing DMGs on Mac"
+    cd ~/Downloads
+    for dmg in $dmgs; do
+        timestamp "Fetching DMG: $dmg"
+        wget -c "$dmg"
+        open "${dmg##*/}"
+    done
+elif type -P yum &>/dev/null; then
     if [ -z "${rpms:-}" ]; then
         # we did not set the permalink rpms because script wasn't passed latest
         timestamp "On RHEL-based system, determining RPM package to install"
