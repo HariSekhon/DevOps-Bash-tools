@@ -34,5 +34,8 @@ python-setuptools # needed by 'pip install awscli'
 # only available from Debian 12 and Ubuntu 22.04
 pre-commit
 
+# to give readline wrapping support to Oracle SQL*Plus
+rlwrap
+
 # Debian 12+ and Ubuntu 24+
 sqlfluff
