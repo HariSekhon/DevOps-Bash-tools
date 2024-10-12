@@ -53,7 +53,7 @@ timestamp "Unzipping to /usr/local/"
 unzip -n sqlcl-latest.zip -d /usr/local/
 echo
 
-# clashes with GNU parallel
+# clashes with GNU parallel which installs an 'sql' program in the path so link this to sqlcl to avoid path priority clashes
 #if ! [ -e /usr/local/bin/sql ]; then
 #    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
 #    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
