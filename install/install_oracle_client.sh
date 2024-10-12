@@ -233,6 +233,14 @@ else
     # shellcheck disable=SC2012
     ln -sfv "$(ls -dt instantclient_* | head -n1)" instantclient
     echo
+    if [ -f /usr/lib/x86_64-linux-gnu/libaio.so.1t64 ]; then
+        if ! [ -f /usr/lib/x86_64-linux-gnu/libaio.so.1 ]; then
+            timestamp "Linking /usr/lib/x86_64-linux-gnu/libaio.so.1t64 to /usr/lib/x86_64-linux-gnu/libaio.so.1 because sqlplus looks for libaio.so.1 and fails otherwise"
+            ln -sv /usr/lib/x86_64-linux-gnu/libaio.so.1t64 /usr/lib/x86_64-linux-gnu/libaio.so.1
+        fi
+        echo
+    fi
+    echo
     echo "IMPORTANT: you will need to set this in your environment for Oracle programs like sqlplus to know where to find its own shared libraries"
     echo
     echo "  export LD_LIBRARY_PATH=/opt/oracle/instantclient"
