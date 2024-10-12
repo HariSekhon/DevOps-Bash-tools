@@ -235,6 +235,7 @@ else
     echo
     if [ -f /usr/lib/x86_64-linux-gnu/libaio.so.1t64 ]; then
         if ! [ -f /usr/lib/x86_64-linux-gnu/libaio.so.1 ]; then
+            # Ubuntu doesn't work without this
             timestamp "Linking /usr/lib/x86_64-linux-gnu/libaio.so.1t64 to /usr/lib/x86_64-linux-gnu/libaio.so.1 because sqlplus looks for libaio.so.1 and fails otherwise"
             ln -sv /usr/lib/x86_64-linux-gnu/libaio.so.1t64 /usr/lib/x86_64-linux-gnu/libaio.so.1
         fi
