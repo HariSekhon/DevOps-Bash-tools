@@ -52,7 +52,7 @@ if [ "$top_image_width" -lt "$bottom_image_width" ]; then
     resized_image="${bottom_image%.*}.resized.${bottom_image##*.}"
     timestamp "Resizing bottom image '$bottom_image' which has width '$bottom_image_width' to match '$top_image' width of '$top_image_width' => $resized_image"
     # convert or magick convert is deprecated in ImageMagick version 7 (IMv7) - use just 'magick' instead now
-    #magick convert "$bottom_image" -resize "x$top_image_width!" "$resized_image"
+    #magick convert "$bottom_image" -resize "$top_image_width!" "$resized_image"
     magick "$bottom_image" -resize "$top_image_width" "$resized_image"
     bottom_image="$resized_image"
     echo >&2
@@ -60,7 +60,7 @@ elif [ "$top_image_width" -gt "$bottom_image_width" ]; then
     resized_image="${top_image%.*}.resized.${top_image##*.}"
     timestamp "Resizing top image '$top_image' which has width '$top_image_width' to match '$bottom_image' width of '$bottom_image_width' => $resized_image"
     # deprecated, see comment above
-    #magick convert "$top_image" -resize "x$bottom_image_width!" "$resized_image"
+    #magick convert "$top_image" -resize "$bottom_image_width!" "$resized_image"
     magick "$top_image" -resize "$bottom_image_width" "$resized_image"
     top_image="$resized_image"
     echo >&2
