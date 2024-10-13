@@ -327,8 +327,6 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
 - `find_lock.sh` - tries to find if a lockfile is used in the given or current working directory by taking snapshots of the file list before and after a prompt in which you should open/close an application
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
-- `image_join_stack.sh` - stack joins two images after matching their widths so they align correctly
-- `imageopen.sh` - opens the given image file using whatever available tool is found on Linux or Mac
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
@@ -1345,6 +1343,9 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 `media/` directory:
 
+- `image_join_vertical.sh` - joins two images top and bottom after matching their widths so they align correctly
+- `image_join_horizontal.sh` - joins two images left and right after matching their heights so they align correctly
+- `imageopen.sh` - opens the given image file using whatever available tool is found on Linux or Mac
 - `mp3_set_artist.sh` / `mp3_set_album.sh` - set the artist / album tag for all mp3 files under given directories. Useful for grouping artists/albums and audiobook author/books (eg. for correct importing into Mac's Books.app)
 - `mp3_set_track_name.sh` - set the track name metadata for mp3 files under given directories to follow their filenames. Useful for correctly displaying audiobook progress / chapters etc.
 - `mp3_set_track_order.sh` - set the track order metadata for mp3 files under given directories to follow the lexical file naming order. Useful for correctly ordering album songs and audiobook chapters (eg. for Mac's Books.app). Especially useful for enforcing global ordering on multi-CD audiobooks after grouping into a single audiobook using `mp3_set_album.sh` (otherwise default track numbers in each CD interleave in Mac's Books.app)
