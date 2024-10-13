@@ -44,25 +44,62 @@ fi
 
 # permalink to latest release
 download_url="https://download.oracle.com/otn_software/java/sqldeveloper/sqlcl-latest.zip"
+install_base="/usr/local"
 
 timestamp "Downloading: $download_url"
 wget -c "$download_url"
 echo
 
-timestamp "Unzipping to /usr/local/"
-unzip -n sqlcl-latest.zip -d /usr/local/
+# unsure the files are created as rwxr-xr-x octal permissions otherwise users will get this error trying to run the sql / sqlcl wrapper:
+#
+#   Error: Could not find or load main class oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+#   Caused by: java.lang.ClassNotFoundException: oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+#
+# no, it's not this, the stupid zip is unpacking the files with 0640 permissions
+#umask 0022
+
+timestamp "Unzipping to $install_base/"
+unzip -n sqlcl-latest.zip -d "$install_base/"
 echo
+
+timestamp "Fixing stupid default 0640 permissions on '$install_base/sqlcl/lib/*' to avoid this error:
+
+Error: Could not find or load main class oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+Caused by: java.lang.ClassNotFoundException: oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+"
+chmod -R o+r "$install_base/sqlcl/lib"
 
 # clashes with GNU parallel which installs an 'sql' program in the path so link this to sqlcl to avoid path priority clashes
 #if ! [ -e /usr/local/bin/sql ]; then
-#    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
-#    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/
+#    timestamp "Linking $install_base/sqlcl/bin/sql to /usr/local/bin/ for \$PATH convenience"
+#    ln -sv "$install_base/sqlcl/bin/sql" /usr/local/bin/
 #    echo
 #fi
 
-if ! [ -e /usr/local/bin/sqlcl ]; then
-    timestamp "Linking /usr/local/sqlcl/bin/sql to /usr/local/bin/sqlcl for \$PATH convenience"
-    ln -sv /usr/local/sqlcl/bin/sql /usr/local/bin/sqlcl
+# Symlinking sql to /usr/local/bin doesn't work as the script naively so not follow it's own symlink refernce
+# to find its adjacent libraries, resuling in this error:
+#
+#   Error: Could not find or load main class oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+#   Caused by: java.lang.ClassNotFoundException: oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+#
+#if ! [ -e /usr/local/bin/sqlcl ]; then
+#    timestamp "Linking $install_base/sqlcl/bin/sql to /usr/local/bin/sqlcl for \$PATH convenience"
+#    ln -sv "$install_base/sqlcl/bin/sql" /usr/local/bin/sqlcl
+#    echo
+#fi
+
+# Instead, create a stub script instead
+
+stub_script="/usr/local/bin/sqlcl"
+if ! [ -e "$stub_script" ]; then
+    timestamp "Creating stub script for \$PATH convenience: $stub_script"
+    cat > "$stub_script" <<EOF
+#!/usr/bin/env bash
+set -euo pipefail
+cd "$install_base/sqlcl/bin"
+./sql
+EOF
+    chmod +x "$stub_script"
     echo
 fi
 
@@ -70,3 +107,5 @@ timestamp "Completed installation of SQLcl oracle client"
 echo
 #timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other programs called 'sql' in your path (GNU Parallels puts one in /usr/local/bin/ for example)"
 timestamp "Call SQLcl as 'sqlcl' which should be in your \$PATH now"
+echo
+sqlcl --help
