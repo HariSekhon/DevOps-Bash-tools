@@ -189,7 +189,7 @@ get_github_repo_branches(){
     local repo="$1"
     local page=1
     while true; do
-        if ! output="$("$srcdir_github_lib/../github_api.sh" "/repos/$repo/branches?page=$page&per_page=100")"; then
+        if ! output="$("$srcdir_github_lib/../github/github_api.sh" "/repos/$repo/branches?page=$page&per_page=100")"; then
             echo "ERROR" >&2
             exit 1
         fi
