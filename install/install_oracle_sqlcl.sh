@@ -62,12 +62,15 @@ timestamp "Unzipping to $install_base/"
 unzip -n sqlcl-latest.zip -d "$install_base/"
 echo
 
-timestamp "Fixing stupid default 0640 permissions on '$install_base/sqlcl/lib/*' to avoid this error:
-
-Error: Could not find or load main class oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
-Caused by: java.lang.ClassNotFoundException: oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
-"
+timestamp "Fixing library permissions"
+# don't print this in case it scares users
+#timestamp "Fixing stupid default 0640 permissions on '$install_base/sqlcl/lib/*' to avoid this error:
+#
+#Error: Could not find or load main class oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+#Caused by: java.lang.ClassNotFoundException: oracle.dbtools.raptor.scriptrunner.cmdline.SqlCli
+#"
 chmod -R o+r "$install_base/sqlcl/lib"
+echo
 
 # clashes with GNU parallel which installs an 'sql' program in the path so link this to sqlcl to avoid path priority clashes
 #if ! [ -e /usr/local/bin/sql ]; then
