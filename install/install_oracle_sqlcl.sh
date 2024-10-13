@@ -96,8 +96,9 @@ if ! [ -e "$stub_script" ]; then
     cat > "$stub_script" <<EOF
 #!/usr/bin/env bash
 set -euo pipefail
-cd "$install_base/sqlcl/bin"
-./sql
+#cd "$install_base/sqlcl/bin"
+#./sql "\$@"
+"$install_base/sqlcl/bin/sql" "\$@"
 EOF
     chmod +x "$stub_script"
     echo
@@ -108,4 +109,5 @@ echo
 #timestamp "Don't forget to add /usr/local/sqlcl/bin to your \$PATH and check for clashes with other programs called 'sql' in your path (GNU Parallels puts one in /usr/local/bin/ for example)"
 timestamp "Call SQLcl as 'sqlcl' which should be in your \$PATH now"
 echo
-sqlcl --help
+echo "SQLcl version:"
+sqlcl -version
