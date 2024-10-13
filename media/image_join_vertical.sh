@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Stack joins two images vertically after matching their widths so they align correctly
+Joins two images vertically after matching their widths so they align correctly
 
 If the third arg is not given then outputs to joined_image.png
 
