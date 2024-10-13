@@ -89,6 +89,14 @@ pg(){
     grep -v grep
 }
 
+pstg(){
+    # want splitting of options
+    # shellcheck disable=SC2086
+    pstree |
+    grep -5 -i --color=always "$@" |
+    less $LESS
+}
+
 copy_to_clipboard(){
     if is_mac; then
         cat | pbcopy
