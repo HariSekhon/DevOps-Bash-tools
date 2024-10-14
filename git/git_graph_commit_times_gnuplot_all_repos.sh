@@ -36,9 +36,9 @@ Generates the following files:
 
     $code - Code
 
-    $data     - Data
+    $data  - Data
 
-    $image     - Image
+    $image - Image
 
 A MermaidJS version of this script is adjacent at:
 
