@@ -80,7 +80,7 @@ sed '/^[[:space:]]*$/d' > "$code" <<EOF
 #
 set terminal pngcairo size 1280,720 enhanced font "Arial,14"
 set title "$git_repo - Git Commits by Hour"
-set xlabel "Hour of Day"
+set xlabel "Hour of Day (author's local time)"
 set ylabel "Number of Commits"
 set grid
 #set xtics rotate by -45
