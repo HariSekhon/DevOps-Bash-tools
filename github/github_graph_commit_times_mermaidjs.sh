@@ -112,4 +112,4 @@ if is_CI; then
 fi
 
 timestamp "Opening: $image"
-"$srcdir/../bin/imageopen.sh" "$image"
+"$srcdir/../media/imageopen.sh" "$image"
