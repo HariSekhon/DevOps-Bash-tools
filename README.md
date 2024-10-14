@@ -872,8 +872,8 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
   - `git_graph_commit_history_gnuplot.sh` - generates GNUplot graphs of Git commits per year and per month for the entire history of the local Git repo checkout
   - `git_graph_commit_history_mermaidjs.sh` - generates MermaidJS graphs of Git commits per year and per month for the entire history of the local Git repo checkout
-  - `git_graph_commit_times_gnuplot.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
-  - `git_graph_commit_times_mermaidjs.sh` - generates MermaidJS graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
+  - `git_graph_commit_times_gnuplot_all_repos.sh` - generates GNUplot graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
+  - `git_graph_commit_times_mermaidjs_all_repos.sh` - generates MermaidJS graph of the GitHub commit times from all local adjacent Git repo checkouts listed in `setup/repos.txt` using Git log in each checkout
   - `git_files_in_history.sh` - finds all filename / file paths in the git log history, useful for prepping for `git filter-branch`
   - `git_filter_branch_fix_author.sh` - rewrites Git history to replace author/committer name & email references (useful to replace default account commits). Powerful, read `--help` and `man git-filter-branch` carefully. Should only be used by Git Experts
   - `git_filter_repo_replace_text.sh` - rewrites Git history to replace a given text to scrub a credential or other sensitive token from history. Refuses to operate on tokens less than 8 chars for safety
