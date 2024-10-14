@@ -31,11 +31,11 @@ git_repo(){
     local remotes
     remotes="$( git remote -v 2>/dev/null)"
     {
-        sed -n '/origin/I p' <<< "$remotes"
-        sed -n '/github/I p' <<< "$remotes"
-        sed -n '/gitlab/I p' <<< "$remotes"
-        sed -n '/bitbucket/I p' <<< "$remotes"
-        sed -n '/azure/I p' <<< "$remotes"
+        awk 'BEGIN {IGNORECASE=1} $1 ~ /origin/ {print}' <<< "$remotes"
+        awk 'BEGIN {IGNORECASE=1} $1 ~ /github/ {print}' <<< "$remotes"
+        awk 'BEGIN {IGNORECASE=1} $1 ~ /gitlab/ {print}' <<< "$remotes"
+        awk 'BEGIN {IGNORECASE=1} $1 ~ /bitbucket/ {print}' <<< "$remotes"
+        awk 'BEGIN {IGNORECASE=1} $1 ~ /azure/ {print}' <<< "$remotes"
         echo "$remotes"
     } |
     awk '{print $2}' |
