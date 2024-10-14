@@ -92,6 +92,7 @@ docker-compose-completion
 doctl  # Digital Ocean CLI
 dos2unix
 drone-cli
+duti  # displays or set the default application for a given file extension or URL
 e2fsprogs
 #ec2-api-tools
 eksctl
