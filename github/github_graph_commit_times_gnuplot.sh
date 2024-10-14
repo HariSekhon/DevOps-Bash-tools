@@ -20,9 +20,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/github.sh"
 
-code="git_commit_times.gnuplot"
-data="data/git_commit_times.dat"
-image="images/git_commit_times.png"
+code="git_commit_times_all_repos.gnuplot"
+data="data/git_commit_times_all_repos.dat"
+image="images/git_commit_times_all_repos.png"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -93,14 +93,14 @@ sed '/^[[:space:]]*$/d' > "$code" <<EOF
 # from https://github.com/HariSekhon/DevOps-Bash-tools
 #
 set terminal pngcairo size 1280,720 enhanced font "Arial,14"
+set title "Git Commits by Hour"
+set xlabel "Hour of Day (UTC)"
 set ylabel "Number of Commits"
 set grid
 #set xtics rotate by -45
 set boxwidth 0.8 relative
 set style fill solid
 set datafile separator " "
-set title "Git Commits by Hour"
-set xlabel "Hour of Day (UTC)"
 # results in X axis labels every 2 years
 #set xdata time
 #set timefmt "%H"
