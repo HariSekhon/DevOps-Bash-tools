@@ -42,7 +42,7 @@ Generates the following files:
 
 A MermaidJS version of this script is adjacent at:
 
-    git_graph_commit_times_mermaidjs.sh
+    git_graph_commit_times_mermaidjs_all_repos.sh
 
 These adjacent scripts perform a similar function but using GitHub API commit data:
 
