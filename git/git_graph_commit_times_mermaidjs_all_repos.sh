@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 repolist="$(readlink -f "$srcdir/../setup/repos.txt")"
 
-code="git_commit_times.mmd"
-data="data/git_commit_times.dat"
-image="images/git_commit_times.svg"
+code="git_commit_times_all_repos.mmd"
+data="data/git_commit_times_all_repos.dat"
+image="images/git_commit_times_all_repos.svg"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
