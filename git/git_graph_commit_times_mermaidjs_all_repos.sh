@@ -42,7 +42,7 @@ Generates the MermaidJS code and then uses MermaidJS CLI to generate the image
 
 A GNUplot version of this script is adjacent at:
 
-    git_graph_commit_times_gnuplot.sh
+    git_graph_commit_times_gnuplot_all_repos.sh
 
 These adjacent scripts perform a similar function but using GitHub API commit data:
 
