@@ -57,6 +57,9 @@ if ! is_in_git_repo; then
     die "ERROR: must be run from a git repo checkout as it relies on the 'git log' command"
 fi
 
+git_repo="$(git_repo)"
+
+timestamp "Running inside checkout of Git repo: $git_repo"
 timestamp "Fetching Hour of all commits from Git log"
 git log --date=format:'%H' --pretty=format:'%ad' |
 sort |
@@ -69,7 +72,7 @@ export -f parse_file_col_to_csv
 timestamp "Generating MermaidJS code for bar chart of commit times"
 cat > "$code" <<EOF
 xychart-beta
-    title "Git Commits by Hour"
+    title "$git_repo - Git Commits by Hour"
     x-axis [ $(parse_file_col_to_csv "$data" 1) ]
     y-axis "Number of Commits"
     bar    [ $(parse_file_col_to_csv "$data" 2) ]
