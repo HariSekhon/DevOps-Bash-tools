@@ -150,7 +150,7 @@ if is_CI; then
 fi
 
 timestamp "Opening: $image_month"
-"$srcdir/../bin/imageopen.sh" "$image_month"
+"$srcdir/../media/imageopen.sh" "$image_month"
 
 timestamp "Opening: $image_year"
-"$srcdir/../bin/imageopen.sh" "$image_year"
+"$srcdir/../media/imageopen.sh" "$image_year"
