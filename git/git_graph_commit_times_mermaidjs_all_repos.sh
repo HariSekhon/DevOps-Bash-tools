@@ -67,6 +67,12 @@ num_args 0 "$@"
 
 check_bin mmdc
 
+for x in $code \
+         $data \
+         $image; do
+    mkdir -p -v "$(dirname "$x")"
+done
+
 older_than(){
     local file="$1"
     local days="$2"
