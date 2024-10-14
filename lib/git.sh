@@ -27,7 +27,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/utils.sh"
 
 git_repo(){
-    git remote -v 2>/dev/null |
+    # give preference for GitHub, GitLab, Bitbucket, Azure DevOps in that order
+    local remotes
+    remotes="$( git remote -v 2>/dev/null)"
+    {
+        sed -n '/github/ p' <<< "$remotes"
+        sed -n '/gitlab/ p' <<< "$remotes"
+        sed -n '/bitbucket/ p' <<< "$remotes"
+        sed -n '/azure/ p' <<< "$remotes"
+        echo "$remotes"
+    } |
     awk '{print $2}' |
     head -n1 |
     sed '
