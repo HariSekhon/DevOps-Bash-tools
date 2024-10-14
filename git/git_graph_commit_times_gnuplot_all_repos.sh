@@ -71,7 +71,21 @@ for x in $code \
     mkdir -p -v "$(dirname "$x")"
 done
 
-if ! [ -f "$data" ]; then
+older_than(){
+    local file="$1"
+    local days="$2"
+    if ! [ -f "$file" ]; then
+        return 0
+    fi
+    if find "$file" -mtime +"$days" -print -quit | grep -q . ; then
+        return 0
+    fi
+    return 1
+}
+
+if ! older_than "$data" 7; then
+    timestamp "Using cached data since it is less than 7 days old: $data"
+else
     timestamp "Getting list of Git repo checkout directories from: $repolist"
     repo_dirs="$(sed 's/#.*//; s/.*://; /^[[:space:]]*$/d' "$repolist")"
 
