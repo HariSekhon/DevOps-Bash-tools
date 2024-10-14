@@ -78,15 +78,15 @@ sed '/^[[:space:]]*$/d' > "$code" <<EOF
 #
 # from https://github.com/HariSekhon/DevOps-Bash-tools
 #
-set title "$git_repo - Git Commits by Hour"
 set terminal pngcairo size 1280,720 enhanced font "Arial,14"
+set title "$git_repo - Git Commits by Hour"
+set xlabel "Hour of Day"
 set ylabel "Number of Commits"
 set grid
 #set xtics rotate by -45
 set boxwidth 0.8 relative
 set style fill solid
 set datafile separator " "
-set xlabel "Hour of Day"
 # results in X axis labels every 2 years
 #set xdata time
 #set timefmt "%H"
