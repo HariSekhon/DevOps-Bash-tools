@@ -77,5 +77,5 @@ echo
 SSH_USER="${SSH_USER:-ec2-user}"
 
 # want splitting
-# shellcheck disable=SC2046
-"$srcdir/../monitoring/ssh_dump_logs.sh" $(for node in $nodes; do echo "ec2-user@$node"; done)
+# shellcheck disable=SC2086
+"$srcdir/../monitoring/ssh_dump_logs.sh" $nodes
