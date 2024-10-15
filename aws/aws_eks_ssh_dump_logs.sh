@@ -37,6 +37,11 @@ SSH key - either set SSH_KEY to the EC2 pem key or add it to a local ssh-agent f
 See here for details:
 
     $srcdir/../monitoring/ssh_dump_logs.sh --help
+
+
+For the EKS Master logs, use the adjacent script:
+
+    aws_eks_cloudwatch_logs.sh
 "
 
 # used by usage() in lib/utils.sh
