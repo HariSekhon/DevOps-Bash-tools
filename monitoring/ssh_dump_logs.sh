@@ -78,19 +78,21 @@ for user_server in "$@"; do
     tstamp="$(date '+%F_%H%M')"
     #for log in messages secure dmesg; do
     for log in messages dmesg; do
-        log_file="log.$tstamp.$server.$log.txt"
+        log_file="log.$tstamp.$server.$log.txt.gz"
         # ignore && && || it works
         # shellcheck disable=SC2015
         timestamp "Dumping server '$server' log: $log" &&
-        # TODO: optimize by gzip compressing these logs on the server size
+        sudo=""
         if ! [[ "$server" =~ ^root@ ]]; then
-            # want client side expansion
-            # shellcheck disable=SC2029
-            ssh ${SSH_KEY:+-i "$SSH_KEY"} ${user:+"$user@"}"$server" "sudo cp -v /var/log/$log ~/$log_file && sudo chown -v \$USER ~/$log_file" &&
-            scp ${SSH_KEY:+-i "$SSH_KEY"} ${user:+"$user@"}"$server":"./$log_file" .
-        else
-            scp ${SSH_KEY:+-i "$SSH_KEY"} ${user:+"$user@"}"$server":"/var/log/$log" "$log_file"
-        fi &&
+            sudo=sudo
+        fi
+        # want client side expansion
+        # shellcheck disable=SC2029
+        ssh ${SSH_KEY:+-i "$SSH_KEY"} ${user:+"$user@"}"$server" "
+            $sudo gzip -c /var/log/$log > ~/$log_file &&
+            $sudo chown -v \$USER ~/$log_file
+        " &&
+        scp ${SSH_KEY:+-i "$SSH_KEY"} ${user:+"$user@"}"$server":"./$log_file" .
         timestamp "Dumped server '$server' log to file: $log_file" ||
         warn "Failed to get '$server' log: $log"
         # XXX: because race condition - spot instances can go away during execution
