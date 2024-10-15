@@ -80,7 +80,7 @@ for service in kube-apiserver; do
 
     timestamp "Getting log stream name for service: $service"
     echo
-    log_stream="$(aws logs describe-log-streams --log-group-name "/aws/eks/$eks_cluster/cluster/$service")"
+    log_stream="$(aws logs describe-log-streams --log-group-name "/aws/eks/$eks_cluster/cluster")"
     timestamp "Determined log stream to be: $log_stream"
     echo
 
