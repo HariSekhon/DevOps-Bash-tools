@@ -105,3 +105,5 @@ for log_group in $log_groups; do
     echo
 
 done
+
+timestamp "AWS EKS CloudWatch Logs download completed for cluster: $eks_cluster"
