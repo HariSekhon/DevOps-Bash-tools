@@ -69,4 +69,6 @@ for node in $nodes; do
 done
 echo
 
-"$srcdir/../monitoring/ssh_dump_logs.sh"
+# want splitting
+# shellcheck disable=SC2086
+"$srcdir/../monitoring/ssh_dump_logs.sh" $nodes
