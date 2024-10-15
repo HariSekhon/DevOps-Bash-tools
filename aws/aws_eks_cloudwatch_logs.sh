@@ -90,7 +90,6 @@ for log_group in $log_groups; do
         jq_debug_pipe_dump |
         jq -Mr '.logStreams[].logStreamName'
     )"
-    echo
 
     for log_stream in $log_streams; do
         timestamp "Getting logs for stream: $log_stream"
@@ -101,6 +100,7 @@ for log_group in $log_groups; do
         #jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv' > "$logfile"
         jq -Mr '.events[].message' > "$logfile"
         timestamp "Log stream dumped to file: $logfile"
+        echo
     done
     echo
 
