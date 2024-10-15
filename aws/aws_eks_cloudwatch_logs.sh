@@ -113,6 +113,7 @@ tarball="$eks_cluster.master.cloudwatch.logs.$tstamp.tar.gz"
 
 tar czvf "$tarball" "aws_eks_${eks_cluster}_"*".$tstamp.log"
 
+echo
 timestamp "Generated tarball: $tarball"
 echo
 
