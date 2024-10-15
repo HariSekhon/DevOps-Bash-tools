@@ -98,7 +98,8 @@ for log_group in $log_groups; do
         logfile="${logfile#_}"
         aws logs get-log-events --log-group-name "$log_group" --log-stream-name "$log_stream" --limit "$limit" |
         jq_debug_pipe_dump |
-        jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv' > "$logfile"
+        #jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv' > "$logfile"
+        jq -Mr '.events[].message' > "$logfile"
         timestamp "Log stream dumped to file: $logfile"
     done
     echo
