@@ -106,4 +106,14 @@ for log_group in $log_groups; do
 
 done
 
+timestamp "Logs fetched, creating compressed tarball"
+echo
+
+tarball="$eks_cluster.master.cloudwatch.logs.$tstamp.tar.gz"
+
+tar czvf "$tarball" "aws_eks_${eks_cluster}_"*".$tstamp.log"
+
+timestamp "Generated tarball: $tarball"
+echo
+
 timestamp "Completed download of AWS EKS CloudWatch Logs for cluster: $eks_cluster"
