@@ -26,7 +26,7 @@ Fetch logs from EKS EC2 VMs for support debug requests by vendors
 
 Uses the adjacent script:
 
-	$srcdir/../monitoring/ssh_dump_logs.sh
+    $srcdir/../monitoring/ssh_dump_logs.sh
 
 Requires Kubectl to be installed and configured to be on the right AWS cluster context as it uses this to determine the nodes
 
@@ -36,7 +36,7 @@ SSH key - either set SSH_KEY to the EC2 pem key or add it to a local ssh-agent f
 
 See here for details:
 
-	$srcdir/../monitoring/ssh_dump_logs.sh --help
+    $srcdir/../monitoring/ssh_dump_logs.sh --help
 "
 
 # used by usage() in lib/utils.sh
@@ -68,8 +68,8 @@ echo
 
 timestamp "SSH Keyscanning nodes to prevent getting stuck on host key pop-ups"
 for node in $nodes; do
-	timestamp "SSH keyscan '$node'"
-	ssh-keyscan "$node" >> ~/.ssh/known_hosts
+    timestamp "SSH keyscan '$node'"
+    ssh-keyscan "$node" >> ~/.ssh/known_hosts
 done
 echo
 
