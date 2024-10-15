@@ -72,20 +72,28 @@ echo
 
 timestamp "Log Groups:"
 echo
-aws logs describe-log-groups --log-group-name-prefix "/aws/eks/$eks_cluster/cluster"
+log_groups="$(aws logs describe-log-groups --log-group-name-prefix "/aws/eks/$eks_cluster/cluster" |
+    jq_debug_pipe_dump |
+    jq -Mr '.logGroups[].logGroupName')"
+echo "$log_groups"
 echo
 
-#for service in kube-apiserver kube-scheduler kube-controller-manager; do
-for service in kube-apiserver; do
+for log_group in $log_groups; do
 
-    timestamp "Getting log stream name for service: $service"
+    timestamp "Getting log stream names for log_group: $log_group"
     echo
-    log_stream="$(aws logs describe-log-streams --log-group-name "/aws/eks/$eks_cluster/cluster")"
-    timestamp "Determined log stream to be: $log_stream"
+    # usually this
+    #log_stream="$(aws logs describe-log-streams --log-group-name "/aws/eks/$eks_cluster/cluster")"
+    log_streams="$(aws logs describe-log-streams --log-group-name "$log_group" |
+        jq_debug_pipe_dump |
+        jq -Mr '.logStreams[].logStreamName'
+    )"
     echo
 
-    timestamp "Getting logs for: $service"
-    aws logs get-log-events --log-group-name "/aws/eks/$eks_cluster/cluster/kube-apiserver" --log-stream-name "$log_stream" --limit "$limit"
+    for log_stream in $log_streams; do
+        timestamp "Getting logs for stream: $log_stream"
+        aws logs get-log-events --log-group-name "$log_group" --log-stream-name "$log_stream" --limit "$limit"
+    done
     echo
 
 done
