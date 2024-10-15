@@ -94,8 +94,11 @@ for log_group in $log_groups; do
 
     for log_stream in $log_streams; do
         timestamp "Getting logs for stream: $log_stream"
+        logfile="${log_group//\//_}.${log_stream//\//_}.$tstamp.log"
+        logfile="${logfile#_}"
         aws logs get-log-events --log-group-name "$log_group" --log-stream-name "$log_stream" --limit "$limit" |
-        jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv' > "$log_group.$log_stream.$tstamp.log"
+        jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv' > "$logfile"
+        timestamp "Log stream dumped to file: $logfile"
     done
     echo
 
