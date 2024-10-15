@@ -30,7 +30,11 @@ Uses the adjacent script:
 
 Requires Kubectl to be installed and configured to be on the right AWS cluster context as it uses this to determine the nodes
 
-Must add the EC2 SSH key to a local ssh-agent for passwordless authentication to work - see here for details:
+User - set your SSH_USER environment variable
+
+SSH key - either set SSH_KEY to the EC2 pem key or add it to a local ssh-agent for passwordless authentication to work
+
+See here for details:
 
 	$srcdir/../monitoring/ssh_dump_logs.sh --help
 "
@@ -68,6 +72,9 @@ for node in $nodes; do
 	ssh-keyscan "$node" >> ~/.ssh/known_hosts
 done
 echo
+
+# set the default EC2 user if nothing is set
+SSH_USER="${SSH_USER:-ec2-user}"
 
 # want splitting
 # shellcheck disable=SC2046
