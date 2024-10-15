@@ -74,7 +74,7 @@ done
 echo
 
 # set the default EC2 user if nothing is set
-SSH_USER="${SSH_USER:-ec2-user}"
+export SSH_USER="${SSH_USER:-ec2-user}"
 
 # want splitting
 # shellcheck disable=SC2086
