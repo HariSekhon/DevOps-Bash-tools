@@ -68,6 +68,14 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+timestamp "SSH Keyscanning nodes to prevent getting stuck on host key prompts"
+for user_server in "$@"; do
+    server="${user_server##*@}"
+    timestamp "SSH keyscan '$server'"
+    ssh-keyscan "$server" >> ~/.ssh/known_hosts
+done
+echo
+
 for user_server in "$@"; do
     echo
     server="${user_server##*@}"
