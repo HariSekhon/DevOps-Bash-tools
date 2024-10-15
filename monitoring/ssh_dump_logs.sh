@@ -111,8 +111,8 @@ for user_server in "$@"; do
         scp ${SSH_KEY:+-i "$SSH_KEY"} ${user:+"$user@"}"$server":"./$log_file" .
         timestamp "Dumped server '$server' log to file: $log_file" ||
         warn "Failed to get '$server' log: $log"
-        # XXX: because race condition - spot instances can go away during execution
-        # and we still want to collect the rest of the servers
+        # XXX: because race condition - AWS EC2 Spot instances or GCP Preemptible instances can go away
+        # during execution and we still want to collect the rest of the servers without erroring out completely
     done
 done
 echo
