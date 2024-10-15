@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Fetch system logs from EKS EC2 VMs (eg. for support debug requests by vendors)
+Fetch system logs from AWS EKS Worker Nodes EC2 VMs (eg. for support debug requests by vendors)
 
 Uses the adjacent script:
 
