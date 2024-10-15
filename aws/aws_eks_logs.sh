@@ -30,7 +30,7 @@ Uses the adjacent script:
 
 Requires Kubectl to be installed and configured to be on the right AWS cluster context as it uses this to determine the nodes
 
-User - set your SSH_USER environment variable
+User - set your SSH_USER environment variable (defaults to 'ec2-user')
 
 SSH key - either set SSH_KEY to the EC2 pem key or add it to a local ssh-agent for passwordless authentication to work
 
