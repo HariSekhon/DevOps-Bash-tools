@@ -78,7 +78,7 @@ log_groups="$(aws logs describe-log-groups --log-group-name-prefix "/aws/eks/$ek
 echo "$log_groups"
 echo
 
-tstamp="$(date '+%F_%H%S')"
+tstamp="$(date '+%F_%H%M%S')"
 
 for log_group in $log_groups; do
 
