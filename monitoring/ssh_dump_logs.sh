@@ -71,6 +71,7 @@ min_args 1 "$@"
 ssh_known_hosts=~/.ssh/known_hosts
 
 timestamp "SSH Keyscanning nodes to prevent getting stuck on host key prompts"
+echo
 for user_server in "$@"; do
     server="${user_server##*@}"
     timestamp "SSH keyscan '$server'"
@@ -79,6 +80,7 @@ for user_server in "$@"; do
         grep -Fxq "$line" "$ssh_known_hosts" ||
         echo "$line" >> "$ssh_known_hosts"
     done
+    echo
 done
 echo
 
