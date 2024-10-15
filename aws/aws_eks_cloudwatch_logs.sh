@@ -78,6 +78,8 @@ log_groups="$(aws logs describe-log-groups --log-group-name-prefix "/aws/eks/$ek
 echo "$log_groups"
 echo
 
+tstamp="$(date '+%F_%H%S')"
+
 for log_group in $log_groups; do
 
     timestamp "Getting log stream names for log_group: $log_group"
@@ -93,7 +95,7 @@ for log_group in $log_groups; do
     for log_stream in $log_streams; do
         timestamp "Getting logs for stream: $log_stream"
         aws logs get-log-events --log-group-name "$log_group" --log-stream-name "$log_stream" --limit "$limit" |
-        jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv'
+        jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv' > "$log_group.$log_stream.$tstamp.log"
     done
     echo
 
