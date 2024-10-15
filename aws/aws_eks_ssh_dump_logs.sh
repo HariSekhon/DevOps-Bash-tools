@@ -28,7 +28,7 @@ Uses the adjacent script:
 
     $srcdir/../monitoring/ssh_dump_logs.sh
 
-Requires Kubectl to be installed and configured to be on the right AWS cluster context as it uses this to determine the nodes
+Requires Kubectl to be installed and configured to be on the right AWS EKS cluster context as it uses this to determine the nodes
 
 User - set your SSH_USER environment variable (defaults to 'ec2-user')
 
