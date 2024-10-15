@@ -34,6 +34,12 @@ Or this:
 
 Wait a while and then run it again
 
+
+For the EKS Node logs, use the adjacent script:
+
+    aws_eks_ssh_dump_logs.sh
+
+
 $usage_aws_cli_required
 "
 
