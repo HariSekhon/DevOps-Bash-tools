@@ -24,6 +24,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Enables and fetches AWS EKS Master logs via CloudWatch
 
+If CloudWatch logging hasn't been enabled already for this EKS cluser's master components, enabling it will take some time and the script will fail to get the log groups because they won't exist yet or you'll get an error like this:
+
+    An error occurred (ResourceNotFoundException) when calling the DescribeLogStreams operation: The specified log group does not exist.
+
+Or this:
+
+    An error occurred (ResourceInUseException) when calling the UpdateClusterConfig operation: Cannot LoggingUpdate because cluster EKS_CLUSTER_NAME currently has update be92dbc8-8406-3188-b1c8-afd40aa3c785 in progress
+
+Wait a while and then run it again
+
 $usage_aws_cli_required
 "
 
@@ -57,7 +67,7 @@ aws eks update-cluster-config --name "$eks_cluster" \
                     "enabled":true
                 }
             ]
-        }'
+        }' || :
 echo
 
 timestamp "Log Groups:"
