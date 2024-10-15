@@ -66,7 +66,7 @@ num_nodes="$(wc -l <<< "$nodes" | sed 's/[[:space:]]//g')"
 timestamp "Found $num_nodes nodes"
 echo
 
-timestamp "SSH Keyscanning nodes to prevent getting stuck on host key pop-ups"
+timestamp "SSH Keyscanning nodes to prevent getting stuck on host key prompts"
 for node in $nodes; do
     timestamp "SSH keyscan '$node'"
     ssh-keyscan "$node" >> ~/.ssh/known_hosts
