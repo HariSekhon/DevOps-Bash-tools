@@ -43,6 +43,24 @@ to work around root file permissions issues and chown it to the login user
 
 
 Requires SSH client to be installed and configured to preferably passwordless ssh key access
+
+
+To select a different SSH key - for example because you are iterating AWS EC2 servers, just add that SSH key to your
+ssh-agent
+
+Start an SSH agent if you haven't already
+
+    eval \"\$(ssh-agent -s\)\"
+
+Then add the key - replace 'ec2-key.pem' with whatever your key is called:
+
+    ssh-add ~/.ssh/ec2-key.pem
+
+Have a look that it's added correctly
+
+    ssh-add -l
+
+Then run this script as usual
 "
 
 # used by usage() in lib/utils.sh
@@ -61,7 +79,7 @@ for server in "$@"; do
         log_file="log.$tstamp.$server.$log.txt"
         # ignore && && || it works
         # shellcheck disable=SC2015
-        timestamp "Dumping server $log log: $server" &&
+        timestamp "Dumping server '$server' log: $log" &&
         if ! [[ "$server" =~ ^root@ ]]; then
             # want client side expansion
             # shellcheck disable=SC2029
@@ -70,8 +88,8 @@ for server in "$@"; do
         else
             scp "$server":"/var/log/$log" "$log_file"
         fi &&
-        timestamp "Dumped server $log log to file: $log_file" ||
-        warn "Failed to get $log log for server '$server'"
+        timestamp "Dumped server '$server' log to file: $log_file" ||
+        warn "Failed to get '$server' log: $log"
         # XXX: because race condition - spot instances can go away during execution
         # and we still want to collect the rest of the servers
     done
