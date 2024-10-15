@@ -26,7 +26,7 @@ Fetch system logs from EKS EC2 VMs (eg. for support debug requests by vendors)
 
 Uses the adjacent script:
 
-    $srcdir/../monitoring/ssh_dump_logs.sh
+    $srcdir/../kubernetes/kubernetes_nodes_ssh_dump_logs.sh
 
 Requires Kubectl to be installed and configured to be on the right AWS EKS cluster context as it uses this to determine the nodes
 
@@ -59,23 +59,8 @@ num_args 0 "$@"
 #                               --output text
 #done
 
-# simpler
-timestamp "Getting Kubernetes nodes via kubectl"
-nodes="$(kubectl top nodes --no-headers | awk '{print $1}')"
-num_nodes="$(wc -l <<< "$nodes" | sed 's/[[:space:]]//g')"
-timestamp "Found $num_nodes nodes"
-echo
-
-timestamp "SSH Keyscanning nodes to prevent getting stuck on host key prompts"
-for node in $nodes; do
-    timestamp "SSH keyscan '$node'"
-    ssh-keyscan "$node" >> ~/.ssh/known_hosts
-done
-echo
-
 # set the default EC2 user if nothing is set
 export SSH_USER="${SSH_USER:-ec2-user}"
 
-# want splitting
-# shellcheck disable=SC2086
-"$srcdir/../monitoring/ssh_dump_logs.sh" $nodes
+# simpler to just get it via kubectl than AWS Commands, reuse this script
+"$srcdir/../kubernetes/kubernetes_nodes_ssh_dump_logs.sh"
