@@ -71,7 +71,7 @@ min_args 1 "$@"
 for user_server in "$@"; do
     echo
     server="${user_server##*@}"
-    user="${user_server%%%@*}"
+    user="${user_server%%@*}"
     if [ "$user" = "$server" ]; then
         user="${SSH_USER:-}"
     fi
