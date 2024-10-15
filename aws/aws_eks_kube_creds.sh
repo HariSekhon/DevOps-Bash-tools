@@ -1,0 +1,1 @@
+aws_kube_creds.sh
