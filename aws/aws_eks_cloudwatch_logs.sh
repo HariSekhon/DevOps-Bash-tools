@@ -92,7 +92,8 @@ for log_group in $log_groups; do
 
     for log_stream in $log_streams; do
         timestamp "Getting logs for stream: $log_stream"
-        aws logs get-log-events --log-group-name "$log_group" --log-stream-name "$log_stream" --limit "$limit"
+        aws logs get-log-events --log-group-name "$log_group" --log-stream-name "$log_stream" --limit "$limit" |
+        jq -Mr '.events[] | [.timestamp + "  " .message] | @tsv'
     done
     echo
 
