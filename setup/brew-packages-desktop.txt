@@ -76,6 +76,7 @@ ctop  # container top
 #cyberduck  # GUI client for FTP, SFTP, WebDAV, Amazon S3, Google Drive etc.
 d2  # declarative diagram language
 dateutils  # strptime, dateadd, dateconv, datediff, dategrep, dateseq, datesort, datetest, datezone - https://www.fresse.org/dateutils/
+dbeaver-community
 dhcping
 dhcpdump
 dialog  # create a curses interactive menu
