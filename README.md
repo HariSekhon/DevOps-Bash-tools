@@ -2,7 +2,7 @@
 
 [![GitHub stars](https://img.shields.io/github/stars/harisekhon/devops-bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/harisekhon/devops-bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/network)
-[![Lines of Code](https://img.shields.io/badge/lines%20of%20code-96k-lightgrey?logo=codecademy)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+![Lines of Code](https://img.shields.io/badge/lines%20of%20code-96k-lightgrey?logo=codecademy)
 [![License](https://img.shields.io/badge/license-MIT-green)](https://github.com/HariSekhon/DevOps-Bash-tools/blob/master/LICENSE)
 [![My LinkedIn](https://img.shields.io/badge/LinkedIn%20Profile-HariSekhon-blue?logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIGZpbGw9IiNmZmZmZmYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+TGlua2VkSW48L3RpdGxlPjxwYXRoIGQ9Ik0yMC40NDcgMjAuNDUyaC0zLjU1NHYtNS41NjljMC0xLjMyOC0uMDI3LTMuMDM3LTEuODUyLTMuMDM3LTEuODUzIDAtMi4xMzYgMS40NDUtMi4xMzYgMi45Mzl2NS42NjdIOS4zNTFWOWgzLjQxNHYxLjU2MWguMDQ2Yy40NzctLjkgMS42MzctMS44NSAzLjM3LTEuODUgMy42MDEgMCA0LjI2NyAyLjM3IDQuMjY3IDUuNDU1djYuMjg2ek01LjMzNyA3LjQzM2MtMS4xNDQgMC0yLjA2My0uOTI2LTIuMDYzLTIuMDY1IDAtMS4xMzguOTItMi4wNjMgMi4wNjMtMi4wNjMgMS4xNCAwIDIuMDY0LjkyNSAyLjA2NCAyLjA2MyAwIDEuMTM5LS45MjUgMi4wNjUtMi4wNjQgMi4wNjV6bTEuNzgyIDEzLjAxOUgzLjU1NVY5aDMuNTY0djExLjQ1MnpNMjIuMjI1IDBIMS43NzFDLjc5MiAwIDAgLjc3NCAwIDEuNzI5djIwLjU0MkMwIDIzLjIyNy43OTIgMjQgMS43NzEgMjRoMjAuNDUxQzIzLjIgMjQgMjQgMjMuMjI3IDI0IDIyLjI3MVYxLjcyOUMyNCAuNzc0IDIzLjIgMCAyMi4yMjIgMGguMDAzeiIvPjwvc3ZnPgo=)](https://www.linkedin.com/in/HariSekhon/)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/HariSekhon/DevOps-Bash-tools?logo=github)](https://github.com/HariSekhon/DevOps-Bash-tools/commits/master)
@@ -21,8 +21,8 @@ doesn't detect shell code properly
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 -->
 
-[![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
-[![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)](https://github.com/HariSekhon/DevOps-Bash-tools#hari-sekhon---devops-bash-tools)
+![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)
+![Mac](https://img.shields.io/badge/OS-Mac-blue?logo=apple)
 [![Docker](https://img.shields.io/badge/container-Docker-blue?logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
 [![Dockerfile](https://img.shields.io/badge/repo-Dockerfiles-blue?logo=docker&logoColor=white)](https://github.com/HariSekhon/Dockerfiles)
 [![DockerHub Pulls](https://img.shields.io/docker/pulls/harisekhon/bash-tools?label=DockerHub%20pulls&logo=docker&logoColor=white)](https://hub.docker.com/r/harisekhon/bash-tools)
@@ -803,7 +803,8 @@ See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowled
   - YAML
 
 - `json2yaml.sh` - converts JSON to YAML
-- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting (see [Gitlab](https://github.com/HariSekhon/DevOps-Bash-tools#git---github-gitlab-bitbucket-azure-devops) section above)
+- `yaml2json.sh` - converts YAML to JSON - needed for some APIs like GitLab CI linting
+  (see [Gitlab](#git---github-gitlab-bitbucket-azure-devops) section above)
 
 ### Big Data & NoSQL
 
