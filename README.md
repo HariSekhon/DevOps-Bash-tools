@@ -1342,7 +1342,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 - `golang_install.sh` - bulk installs Golang modules from mix of arguments / file lists / stdin
 - `golang_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
-- `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete you `bin/` etc as these are often real deployed applications rather than development binaries
+- `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete your `bin/` etc as these are often real deployed applications rather than development binaries
 
 ### Media
 
