@@ -188,7 +188,7 @@ To bootstrap, install packages and link in to your shell profile to inherit all 
 curl -L https://git.io/bash-bootstrap | sh
 ```
 
-- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#Inventory) below)
+- Adds sourcing to `.bashrc`/`.bash_profile` to automatically inherit all `.bash.d/*.sh` environment enhancements for all technologies (see [Inventory](#index) below)
 - Symlinks `.*` config dotfiles to `$HOME` for [git](https://git-scm.com/), [vim](https://www.vim.org/), top, [htop](https://hisham.hm/htop/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [editorconfig](https://editorconfig.org/), [Ansible](https://www.ansible.com/), [PostgreSQL](https://www.postgresql.org/) `.psqlrc` etc. (only when they don't already exist so there is no conflict with your own configs)
 - Installs OS package dependencies for all scripts (detects the OS and installs the right RPMs, Debs, Apk or Mac HomeBrew packages)
 - Installs Python packages
@@ -202,7 +202,7 @@ cd bash-tools
 make
 ```
 
-`make install` sets your shell profile to source this repo. See [Individual Setup Parts](https://github.com/HariSekhon/DevOps-Bash-tools#Individual-Setup-Parts) below for more install/uninstall options.
+`make install` sets your shell profile to source this repo. See [Individual Setup Parts](#individual-setup-parts) below for more install/uninstall options.
 
 ## Index
 
