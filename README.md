@@ -137,7 +137,7 @@ Heavily used in many [GitHub repos](https://github.com/search?o=desc&q=user%3Aha
 
 ## Summary
 
-- Scripts for many popular DevOps technologies, see [Inventory](https://github.com/HariSekhon/DevOps-Bash-tools#inventory) below for more details
+- Scripts for many popular DevOps technologies, see [Index](#index) below for more details
 - Advanced configs for common tools like [Git](https://git-scm.com/), [vim](https://www.vim.org/), [screen](https://www.gnu.org/software/screen/), [tmux](https://github.com/tmux/tmux/wiki), [PostgreSQL psql](https://www.postgresql.org/) etc...
 - CI configs for most major Continuous Integration products (see [CI builds](https://harisekhon.github.io/CI-CD/) page)
 - CI scripts for a drop-in framework of standard checks to run in all [CI builds](https://harisekhon.github.io/CI-CD/), CI detection, accounting for installation differences across CI environments, root vs user, virtualenvs etc.
