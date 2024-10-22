@@ -269,6 +269,7 @@ sonar-scanner
 sqlite
 sqlfluff  # linter
 sqlparse  # SQL reformatter
+squirrelsql
 ssllabs-scan
 sslscan
 ssh-copy-id
