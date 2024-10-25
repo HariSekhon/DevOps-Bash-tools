@@ -39,8 +39,6 @@ help_usage "$@"
 
 max_args 1 "$@"
 
-arg="${1:-}"
-
 browse(){
     local url="$1"
     if is_mac; then
