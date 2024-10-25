@@ -41,7 +41,7 @@ help_usage "$@"
 
 max_args 1 "$@"
 
-url="$("$srcdir/urlextract.sh" "$@" | head -n1)"
+url="$("$srcdir/../bin/urlextract.sh" "$@" | head -n1)"
 
 if ! [[ "$url" =~ ^https://(github\.com|raw.githubusercontent.com)/ ]]; then
     usage "Non-GitHub URL passed as first argument, must start with https://github.com or https://raw.githubusercontent.com/"
@@ -49,17 +49,18 @@ fi
 
 if [[ "$url" =~ github\.com ]]; then
     url_orig="$url"
-    url="${url//github.com/raw.githubusercontent.com/}"
+    url="${url//github.com/raw.githubusercontent.com}"
     # need more advanced replace
     # shellcheck disable=SC2001
     #url="$(sed 's|/blob/[^/]*/||' <<< "$url")"
     url="${url//\/blob\//\/}"
-    timestamp "Converted '$url_orig' to '$url'"
+    log "Converted '$url_orig'
+                            to '$url'"
 fi
 
 curl -sSf "$url" |
 "$srcdir/../bin/copy_to_clipboard.sh"
 
-bytes="$("$srcdir/../bin/paste_from_clipboard.sh" | wc -c)"
+bytes="$("$srcdir/../bin/paste_from_clipboard.sh" | wc -c | sed 's/[[:space:]]//g')"
 
 timestamp "Copied '$url' to clipboard: $bytes bytes"
