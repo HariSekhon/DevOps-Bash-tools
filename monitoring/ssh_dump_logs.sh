@@ -125,10 +125,11 @@ timestamp "Gunzipping logs to achieve better overall compression"
 echo
 gunzip "log.$tstamp".*.txt.gz
 echo
-timestamp "Tarballing logs to: logs.$tstamp.tar.gz"
+tarball="logs.$tstamp.tar.gz"
+timestamp "Tarballing logs to: $tarball"
 echo
-tar czvf "logs.$tstamp.tar.gz" "log.$tstamp".*.txt
+tar czvf "$tarball" "log.$tstamp".*.txt
 echo
-timestamp "Tarball ready: logs.$tstamp.tar.gz"
+timestamp "Tarball ready: $tarball"
 echo
 timestamp "Log dumps completed"
