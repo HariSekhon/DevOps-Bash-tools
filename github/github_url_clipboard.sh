@@ -30,6 +30,8 @@ eg. for HariSekhon/SQL-scripts references to be easily copyable code blocks with
 
 GitHub URL can be passed as an arg or read from standard input
 
+Tip: add this to a hotkey in your editor or IDE
+
 Limitation: only tested on public GitHub repos
 "
 
