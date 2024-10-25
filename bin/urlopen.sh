@@ -56,18 +56,7 @@ browse(){
     fi
 }
 
-if [ $# -eq 0 ]; then
-    cat
-elif [ -f "$arg" ]; then
-    cat "$arg"
-else
-    echo "$arg"
-fi |
-{
-# [] break the regex match, even when escaped \[\]
-grep -Eom 1 'https?://[[:alnum:]./?&!$#%@*;:+~_=-]+' ||
-    die "No URLs found"
-} |
+"$srcdir/urlextract.sh" "$@" |
 # head -n1 because grep -m 1 can't be trusted and sometimes outputs more matches on subsequent lines
 head -n1 |
 while read -r url; do
