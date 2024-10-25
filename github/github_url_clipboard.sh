@@ -57,4 +57,7 @@ fi
 
 curl -sSf "$url" |
 "$srcdir/../bin/copy_to_clipboard.sh"
-timestamp "Copied '$url' to clipboard"
+
+bytes="$("$srcdir/../bin/paste_from_clipboard.sh" | wc -c)"
+
+timestamp "Copied '$url' to clipboard: $bytes bytes"
