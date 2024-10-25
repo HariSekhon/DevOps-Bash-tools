@@ -84,6 +84,8 @@ for user_server in "$@"; do
 done
 echo
 
+tstamp="$(date '+%F_%H%M')"
+
 for user_server in "$@"; do
     echo
     server="${user_server##*@}"
@@ -91,9 +93,9 @@ for user_server in "$@"; do
     if [ "$user" = "$server" ]; then
         user="${SSH_USER:-}"
     fi
-    tstamp="$(date '+%F_%H%M')"
     #for log in messages secure dmesg; do
     for log in messages dmesg; do
+        # do not change this format without also changing the format of the gunzip and tar operations further down
         log_file="log.$tstamp.$server.$log.txt.gz"
         # ignore && && || it works
         # shellcheck disable=SC2015
@@ -115,5 +117,18 @@ for user_server in "$@"; do
         # during execution and we still want to collect the rest of the servers without erroring out completely
     done
 done
+echo
+
+timestamp "Tarballing all logs into a support bundle for easy sharing with vendors"
+echo
+timestamp "Gunzipping logs to achieve better overall compression"
+echo
+gunzip "log.$tstamp".*.txt
+echo
+timestamp "Tarballing logs to  logs.$tstamp.tar.gz"
+echo
+tar zxvf "logs.$tstamp.tar.gz" "log.$tstamp".*.txt
+echo
+timestamp "Tarball ready: logs.$tstamp.tar.gz"
 echo
 timestamp "Log dumps completed"
