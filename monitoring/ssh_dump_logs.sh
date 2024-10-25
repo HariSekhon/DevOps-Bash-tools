@@ -127,7 +127,7 @@ gunzip "log.$tstamp".*.txt.gz
 echo
 timestamp "Tarballing logs to  logs.$tstamp.tar.gz"
 echo
-tar zxvf "logs.$tstamp.tar.gz" "log.$tstamp".*.txt
+tar czvf "logs.$tstamp.tar.gz" "log.$tstamp".*.txt
 echo
 timestamp "Tarball ready: logs.$tstamp.tar.gz"
 echo
