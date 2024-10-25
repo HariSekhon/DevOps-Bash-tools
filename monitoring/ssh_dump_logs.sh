@@ -123,7 +123,7 @@ timestamp "Tarballing all logs into a support bundle for easy sharing with vendo
 echo
 timestamp "Gunzipping logs to achieve better overall compression"
 echo
-gunzip "log.$tstamp".*.txt
+gunzip "log.$tstamp".*.txt.gz
 echo
 timestamp "Tarballing logs to  logs.$tstamp.tar.gz"
 echo
