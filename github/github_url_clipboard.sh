@@ -28,18 +28,20 @@ converting the URL to a raw GitHub content URL where necessary
 Designed to quickly and easily copy link content into HariSekhon/Knowledge-Base repo
 eg. for HariSekhon/SQL-scripts references to be easily copyable code blocks without having to follow links
 
+GitHub URL can be passed as an arg or read from standard input
+
 Limitation: only tested on public GitHub repos
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<url_to_repo_file>"
+usage_args="[<url_to_repo_file>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+max_args 1 "$@"
 
-url="$1"
+url="$("$srcdir/urlextract.sh" "$@" | head -n1)"
 
 if ! [[ "$url" =~ ^https://(github\.com|raw.githubusercontent.com)/ ]]; then
     usage "Non-GitHub URL passed as first argument, must start with https://github.com or https://raw.githubusercontent.com/"
