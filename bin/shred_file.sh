@@ -61,6 +61,7 @@ usage_args="<filename> [<passes>]"
 
 help_usage "$@"
 
+min_args 1 "$@"
 max_args 2 "$@"
 
 file="$1"
