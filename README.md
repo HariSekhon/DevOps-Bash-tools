@@ -1358,6 +1358,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `image_join_horizontal.sh` - joins two images left and right after matching their heights so they align correctly
 - `imageopen.sh` - opens the given image file using whatever available tool is found on Linux or Mac
 - `svg_to_png.sh` - convert an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
+- `avif_to_png.sh` - convert an Avif image to PNG to be usable on websites that don't support Webp images like LinkedIn
 - `webp_to_png.sh` - convert a Webp image to PNG to be usable on websites that don't support Webp images like Medium
 
 #### Audio
