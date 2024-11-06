@@ -72,7 +72,7 @@ convert(){
 if convert; then
     converted=1
 else
-    "$srcdir/../packages/install_packages.sh" imagemagik ||
+    "$srcdir/../packages/install_packages.sh" imagemagick ||
     "$srcdir/../packages/install_packages.sh" webp ||
     die "Failed to install any of the usual tools to convert Webp to PNG"
 
