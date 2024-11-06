@@ -1201,7 +1201,6 @@ check_env_defined(){
     fi
 }
 
-
 is_yes(){
     shopt -s nocasematch
     if [[ "$1" =~ ^(y|yes)$ ]]; then
