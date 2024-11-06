@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Convert a Webp image to PNG to be usable on websites that don't support Webp images like Medium
 
-Requires dwebp, attempts to install it if not found
+Requires either ImageMagick or dwebp to be installed, attempts to them in this order if not found
 "
 
 # used by usage() in lib/utils.sh
