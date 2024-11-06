@@ -65,6 +65,7 @@ convert(){
         dwebp "webp" -o "$png"
         return 0
     fi
+    timestamp "No tool found installed to convert webp to png"
     return 1
 }
 
