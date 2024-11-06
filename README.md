@@ -1242,7 +1242,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 
 ### Internet Services
 
-`bin/`, `pingdom/`, `terraform/` directories:
+`bin/`, `cloudflare/`, `pingdom/`, `terraform/` directories:
 
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
