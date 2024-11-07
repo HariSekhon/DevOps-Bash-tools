@@ -69,7 +69,7 @@ if ! [[ "$private" =~ ^(0|1|2)$ ]]; then
     usage "Invalid value for private arg, must be one of: 0, 1 or 2 for public, unlisted or private respectively"
 fi
 
-if ! [[ "$expiry" =~ ^[[:digit:]][[:alpha:]]$ ]]; then
+if ! [[ "$expiry" =~ ^[[:digit:]]+[[:alpha:]]$ ]]; then
     usage "Invalid value for expiry arg, must be in format: <integer><uppercase_unit_of_time_character>"
 fi
 expiry="$(tr '[:lower:]' '[:upper:]' <<< "$expiry")"
