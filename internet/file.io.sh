@@ -89,5 +89,5 @@ command curl -sSlf "$url" \
 jq_debug_pipe_dump |
 jq -r .link |
 tee /dev/stderr |
-"$srcdir/copy_to_clipboard.sh"
+"$srcdir/../bin/copy_to_clipboard.sh"
 echo
