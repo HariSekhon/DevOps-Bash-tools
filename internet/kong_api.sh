@@ -160,5 +160,5 @@ fi
 export CURL_AUTH_HEADER="Kong-Admin-Token:"
 export TOKEN="${KONG_TOKEN:-${TOKEN:-no_token_given}}"
 
-"$srcdir/curl_auth.sh" "$url" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
+"$srcdir/../bin/curl_auth.sh" "$url" ${CURL_OPTS:+"${CURL_OPTS[@]}"} "$@" |
 jq_debug_pipe_dump
