@@ -1246,8 +1246,8 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 
 - Pastebins - uploads files and copies the resulting URL to your clipboard:
   - code / text only - prompts to approve text / code before upload for safety:
-    - `pastebin.sh` - uploads a file to <https://pastebin.com>, auto-determines which syntax highlighting to add
-    - `dpaste.sh` - uploads a file to <https://dpaste.com>, auto-determines which syntax highlighting to add
+    - `pastebin.sh` - uploads a file to <https://pastebin.com>, script auto-determines which syntax highlighting to add since API doesn't auto infer
+    - `dpaste.sh` - uploads a file to <https://dpaste.com>, script auto-determines which syntax highlighting to add since API doesn't auto infer
     - `termbin.sh` - uploads a file to <https://termbin.com> (site has no syntax highlighting)
   - all files, multimedia or text / code - prompts to approve text / code before upload for safety:
     - `0x0.sh` - uploads a file to <https://0x0.st> (fast)
