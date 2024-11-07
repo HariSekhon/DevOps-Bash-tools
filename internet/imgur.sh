@@ -60,4 +60,4 @@ fi
 
 jq -r '.data.link' <<< "$result" |
 tee /dev/stderr |
-"$srcdir/copy_to_clipboard.sh"
+"$srcdir/../bin/copy_to_clipboard.sh"
