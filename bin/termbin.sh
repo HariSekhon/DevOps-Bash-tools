@@ -49,6 +49,10 @@ min_args 1 "$@"
 
 file="$1"
 
+if ! file "$file" | grep -q ASCII; then
+    die "This is only for text files like code. For non-text files use adjacent 0x0.sh"
+fi
+
 nc=nc
 
 if type -P nc &>/dev/null; then
