@@ -59,7 +59,7 @@ fi
 #    timestamp "reading from stdin"
     #file="/dev/stdin"
 #else
-    timestamp "reading from file: $file"
+#    timestamp "reading from file: $file"
 #fi
 
 if file "$file" | grep -q ASCII; then
