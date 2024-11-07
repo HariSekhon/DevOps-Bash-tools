@@ -44,6 +44,10 @@ See values for parameters here:
     https://pastebin.com/doc_api#4
 
 Knowledge Base page: https://github.com/HariSekhon/Knowledge-Base/blob/main/upload-sites.md
+
+If you use this a lot you will hit this error from the API:
+
+    Bad API request, Post limit, maximum pastes per 24h reached
 "
 
 # used by usage() in lib/utils.sh
