@@ -111,4 +111,4 @@ fi
 url_path="${url_path//$url_base}"
 url_path="${url_path##/}"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" "${CURL_OPTS[@]}" "$@"
