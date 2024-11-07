@@ -45,6 +45,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+url="https://0x0.st"
+
 file="$1"
 expiry="${2:-${OXO_EXPIRY:-24}}"
 
@@ -79,12 +81,12 @@ EOF
 fi
 
 {
-command curl -sSlf https://0x0.st \
+command curl -sSlf "$url" \
              -F "file=@$file" \
              -F "expires=$expiry" ||
     {
         timestamp "FAILED: repeating without the curl -f switch to get the error from the API:"
-        command curl -sSl https://0x0.st \
+        command curl -sSl "$url" \
                      -F "file=@$file" \
                      -F "expires=$expiry"
         echo
