@@ -57,7 +57,6 @@ format="${3:-text}"  # syntax highlighting
 if ! [[ "$expiry" =~ ^[[:digit:]]$ ]]; then
     usage "Invalid value for expiry arg, must be an integer of days"
 fi
-expiry="$(tr '[:lower:]' '[:upper:]' <<< "$expiry")"
 
 # Do not allow reading from stdin because it does not allow the prompt safety
 #if [ "$file" = '-' ]; then
