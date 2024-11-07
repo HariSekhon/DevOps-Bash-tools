@@ -25,7 +25,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Uploads a file to https://pastebin.com and copies the resulting URL to your clipboard
 
-Prompts to confirm the content before uploading for your safe review as this defaults to public but not listed
+Prompts to confirm the content before uploading for your safe review as this defaults to PUBLIC but not listed
 
 Expiry defaults to 1 day
 
