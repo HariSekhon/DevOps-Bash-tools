@@ -60,6 +60,10 @@ if ! [[ "$expiry" =~ ^[[:digit:]]+$ ]]; then
     usage "Invalid value for expiry arg, must be an integer of days"
 fi
 
+if ! file "$file" | grep -q ASCII; then
+    die "This is only for text files like code. For non-text files use adjacent 0x0.sh"
+fi
+
 # Do not allow reading from stdin because it does not allow the prompt safety
 #if [ "$file" = '-' ]; then
 #    timestamp "reading from stdin"
@@ -67,10 +71,6 @@ fi
 #else
     timestamp "reading from file: $file"
 #fi
-
-if ! file "$file" | grep -q ASCII; then
-    die "This is only for text files like code. For non-text files use adjacent 0x0.sh"
-fi
 
 content="$(cat "$file")"
 echo
