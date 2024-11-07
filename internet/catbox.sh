@@ -92,5 +92,5 @@ command curl -sSlf "$url" \
     }
 } |
 tee /dev/stderr |
-"$srcdir/copy_to_clipboard.sh"
+"$srcdir/../bin/copy_to_clipboard.sh"
 echo
