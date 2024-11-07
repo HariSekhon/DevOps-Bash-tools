@@ -228,7 +228,7 @@ make
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
 - [AI & IPaaS](#ai--ipaas) - OpenAI (ChatGPT), Make.com
-- [Internet Services](#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress
+- [Internet Services](#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress and various pastebins and file upload sites
 - [Java](#java) - Java utilies to debug running Java programs or decompile Java JAR code for deeper debugging
 - [Python](#python) - Python utilities & library management
 - [Perl](#perl) - Perl utilities & library management
