@@ -1246,15 +1246,15 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 
 - Pastebins - uploads files and copies the resulting URL to your clipboard:
   - code / text only - prompts to approve text / code before upload for safety:
-    - `pastebin.sh` - uploads a file to <https://pastebin.com>
-    - `dpaste.sh` - uploads a file to <https://dpaste.com>
-    - `termbin.sh` - uploads a file to <https://termbin.com>
+    - `pastebin.sh` - uploads a file to <https://pastebin.com>, auto-determines which syntax highlighting to add
+    - `dpaste.sh` - uploads a file to <https://dpaste.com>, auto-determines which syntax highlighting to add
+    - `termbin.sh` - uploads a file to <https://termbin.com> (site has no syntax highlighting)
   - all files, multimedia or text / code - prompts to approve text / code before upload for safety:
-    - `0x0.sh` - uploads a file to <https://0x0.st>
+    - `0x0.sh` - uploads a file to <https://0x0.st> (fast)
     - `imgur.sh` - uploads an image file to <https://imgur.com>
     - `file.io.sh` - uploads a file to <https://file.io> with 2 weeks, single download retention
-    - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention
-    - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention
+    - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention (slow)
+    - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention (slow)
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
