@@ -74,6 +74,10 @@ if ! [[ "$expiry" =~ ^[[:digit:]][[:alpha:]]$ ]]; then
 fi
 expiry="$(tr '[:lower:]' '[:upper:]' <<< "$expiry")"
 
+if ! file "$file" | grep -q ASCII; then
+    die "This is only for text files like code. For non-text files use adjacent 0x0.sh"
+fi
+
 # Do not allow reading from stdin because it does not allow the prompt safety
 #if [ "$file" = '-' ]; then
 #    timestamp "reading from stdin"
