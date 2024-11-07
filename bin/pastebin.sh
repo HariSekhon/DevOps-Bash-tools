@@ -60,6 +60,8 @@ min_args 1 "$@"
 
 check_env_defined PASTEBIN_API_KEY
 
+url="https://pastebin.com/api/api_post.php"
+
 file="$1"
 expiry="${2:-${PASTEBIN_EXPIRY:-1D}}"
 private="${3:-1}"  # 1=unlisted (default), 0=public, 2=private
@@ -169,7 +171,7 @@ filename_encoded="$("$srcdir/urlencode.sh" <<< "$file")"
 #
 #   Bad API request, invalid api_paste_format
 #
-command curl -X POST -sSLf https://pastebin.com/api/api_post.php \
+command curl -X POST -sSLf "$url" \
      -d "api_option=paste" \
      -d "api_dev_key=$PASTEBIN_API_KEY" \
      -d "api_paste_name=$filename_encoded" \
@@ -178,7 +180,7 @@ command curl -X POST -sSLf https://pastebin.com/api/api_post.php \
      -d "api_paste_private=$private" \
      -d "api_paste_format=$format" ||
 
-    command curl -X POST -sSLf https://pastebin.com/api/api_post.php \
+    command curl -X POST -sSLf "$url" \
          -d "api_option=paste" \
          -d "api_dev_key=$PASTEBIN_API_KEY" \
          -d "api_paste_name=$filename_encoded" \
@@ -188,7 +190,7 @@ command curl -X POST -sSLf https://pastebin.com/api/api_post.php \
 
         {
             timestamp "FAILED: repeating without the curl -f switch to get the error from the API:"
-            command curl -X POST -sSL https://pastebin.com/api/api_post.php \
+            command curl -X POST -sSL "$url" \
                  -d "api_option=paste" \
                  -d "api_dev_key=$PASTEBIN_API_KEY" \
                  -d "api_paste_name=$filename_encoded" \
