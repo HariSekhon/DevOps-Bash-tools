@@ -54,7 +54,7 @@ file="$1"
 expiry="${2:-${DPASTE_EXPIRY:-1}}"
 format="${3:-text}"  # syntax highlighting
 
-if ! [[ "$expiry" =~ ^[[:digit:]]$ ]]; then
+if ! [[ "$expiry" =~ ^[[:digit:]]+$ ]]; then
     usage "Invalid value for expiry arg, must be an integer of days"
 fi
 
