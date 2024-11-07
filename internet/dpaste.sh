@@ -150,9 +150,9 @@ if [ "$format" = text ]; then
     esac
 fi
 
-#filename_encoded="$("$srcdir/urlencode.sh" <<< "$file")"
+#filename_encoded="$("$srcdir/../bin/urlencode.sh" <<< "$file")"
 
-#content="$("$srcdir/urlencode.sh" <<< "$content" | tr -d '\n')"
+#content="$("$srcdir/../bin/urlencode.sh" <<< "$content" | tr -d '\n')"
 
 {
 # try twice, fall back to trying without the API syntax highlighting selection in case it is wrong as this can result in
@@ -176,5 +176,5 @@ command curl -sSLf "$url" \
         }
 } |
 tee /dev/stderr |
-"$srcdir/copy_to_clipboard.sh"
+"$srcdir/../bin/copy_to_clipboard.sh"
 echo
