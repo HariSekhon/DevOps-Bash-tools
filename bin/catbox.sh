@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Uploads a file to https://catbox.moe/ and copies the resulting URL to your clipboard
 
+Slow, use 0x0.sh instead
+
 If the content is ASCII then prompts to confirm the content before uploading for your safe review as this is PUBLIC
 
 Does not do this for non-ASCII files since we can't print media content to the terminal
