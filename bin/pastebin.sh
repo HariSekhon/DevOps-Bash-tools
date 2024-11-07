@@ -23,9 +23,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Uploads a file to https://pastebin.com
+Uploads a file to https://pastebin.com and copies the resulting URL to your clipboard
 
-Make sure to carefully review what you're about to upload publicly!!
+Prompts to confirm the content before uploading for your safe review as this defaults to public but not listed
+
+Expiry defaults to 1 day
 
 Required: an API key in environment variable PASTEBIN_API_KEY
 
@@ -33,9 +35,9 @@ Recommended: use anonymize.py or anonymize.pl from the adjacent DevOps-Python-to
 
 Optional: decomment.sh
 
-TODO: Auto-infers the format to tell the API based on the file extension
-
-Expiry defaults to 1 day
+Syntax Highlighting: the API doesn't infer syntax highlighting based on the filename extension,
+                     so we try to auto-infer it in this script for some common formats based on the file extension.
+                     You can override this as an argument
 
 See values for parameters here:
 
@@ -64,8 +66,9 @@ if ! [[ "$private" =~ ^(0|1|2)$ ]]; then
 fi
 
 if ! [[ "$expiry" =~ ^[[:digit:]][[:alpha:]]$ ]]; then
-    usage "Invalid value for expiry arg, must be in format: <num><unit>"
+    usage "Invalid value for expiry arg, must be in format: <integer><uppercase_unit_of_time_character>"
 fi
+expiry="$(tr '[:lower:]' '[:upper:]' <<< "$expiry")"
 
 # Do not allow reading from stdin because it does not allow the prompt safety
 #if [ "$file" = '-' ]; then
@@ -91,16 +94,103 @@ echo
 check_yes "$answer"
 echo
 
+if [ "$format" = text ]; then
+    ext="${file##*.}"
+
+    shopt -s nocasematch
+
+    # adapted from:
+    #
+    #   https://pastebin.com/doc_api#5
+
+    case "$ext" in
+        apache | log) format=apache ;;
+        apt) format=apt_sources ;;
+        as | actionscript) format=actionscript ;;
+        asm | s) format=asm ;;
+        bat | cmd) format=dos ;;
+        bib) format=bibtext ;;
+        clj | cljs | cljr | cljc | cljd | edn) format=clojure ;;
+        cpp | h | hpp) format=cpp ;;
+        cs) format=csharp ;;
+        el) format=emacs-lisp ;;
+        eml | email) format=email ;;
+        erl | hrl) format=erlang ;;
+        fs) format=fsharp ;;
+        groovy | gvy | gy | gsh) format=groovy ;;
+        hs | lhs) format=haskell ;;
+        java | jsh ) format=java ;;
+        js) format=javascript ;;
+        kt | kts | kexe | klib) format=kotlin ;;
+        lsp) format=lisp ;;
+        m) format=matlab ;;
+        md) format=markdown ;;
+        ml) format=ocaml ;;
+        pas) format=pascal ;;
+        php | php3 | php4) format=php ;;
+        pl | pm | t) format=perl ;;
+        plt | gnu | gpi | gih) format=gnuplot ;;
+        pp) format=puppet ;;
+        psql | postgres | postgresql) format=postgresql ;;
+        r) format=rsplus ;;
+        rb) format=ruby ;;
+        rs) format=rust ;;
+        sc | scala) format=scala ;;
+        scpti | scptd) format=applescript ;;
+        sh | bash) format='bash' ;;
+        spec) format=rpmspec ;;
+        ssh/config) format=sshconfig ;;
+        tex) format=latex ;;
+        ts) format=typescript ;;
+        v) format=verilog ;;
+        vb) format=vbnet ;;
+        vbs | vbscript) format=vbscript ;;
+        vim | vimscript) format=vim ;;
+        yml | yaml) format=yaml ;;
+        # the rest try for straight matches - some of these should probably be moved above with more file extension variations
+        abap|actionscript3|ada|aimms|algol68|applescript|arduino|arm|asp|asymptote|autoconf|autohotkey|autoit|avisynth|awk|bascomavr|basic4gl|bibtex|b3d|blitzbasic|bmx|bnf|boo|bf|c|c_winapi|cpp-winapi|cpp-qt|c_loadrunner|caddcl|cadlisp|ceylon|cfdg|c_mac|chaiscript|chapel|cil|klonec|klonecpp|cmake|cobol|coffeescript|cfm|css|cuesheet|d|dart|dcl|dcpu16|dcs|delphi|oxygene|diff|div|dot|e|ezt|ecmascript|eiffel|epc|euphoria|falcon|filemaker|fo|f1|fortran|freebasic|freeswitch|gambas|gml|gdb|gdscript|genero|genie|gettext|go|godot-glsl|gwbasic|haxe|hicest|hq9plus|html4strict|html5|icon|idl|ini|inno|intercal|io|ispfpanel|j|jcl|jquery|json|julia|Julia|kixtart|ksp|ldif|lb|lsl2|lisp|llvm|locobasic|logtalk|lolcode|lotusformulas|lotusscript|lscript|lua|m68k|magiksf|make|mapbasic|markdown|mercury|metapost|mirc|mmix|mk-61|modula2|modula3|68000devpac|mpasm|mxml|mysql|nagios|netrexx|newlisp|nginx|nim|nsis|oberon2|objeck|objc|ocaml|ocaml-brief|octave|pf|glsl|oorexx|oobas|oracle8|oracle11|oz|parasail|parigp|pascal|pawn|pcre|per|perl|perl6|phix|php-brief|pic16|pike|pixelbender|pli|plsql|postscript|povray|powerbuilder|powershell|proftpd|progress|prolog|properties|providex|purebasic|pycon|python|pys60|q|q/kdb+|qbasic|qml|racket|rails|rbs|rebol|reg|rexx|robots|roff|sas|scheme|scilab|scl|sdlbasic|smalltalk|smarty|spark|sparql|sqf|sql|standardml|StandardML|stonescript|sclang|swift|systemverilog|tsql|tcl|teraterm|texgraph|thinbasic|typoscript|unicon|uscript|upc|urbi|vala|vedit|verilog|vhdl|visualfoxpro|visualprolog|whitespace|whois|winbatch|xbasic|xml|xojo|xorg_conf|xpp|yara|z80|zxbasic) format="$ext" ;;
+    esac
+fi
+
 filename_encoded="$("$srcdir/urlencode.sh" <<< "$file")"
 
-curl -X POST -sSLf https://pastebin.com/api/api_post.php \
+#content="$("$srcdir/urlencode.sh" <<< "$content" | tr -d '\n')"
+
+{
+# try twice, fall back to trying without the API paste format in case it is wrong as this can result in
+#
+#   Bad API request, invalid api_paste_format
+#
+command curl -X POST -sSLf https://pastebin.com/api/api_post.php \
      -d "api_option=paste" \
      -d "api_dev_key=$PASTEBIN_API_KEY" \
      -d "api_paste_name=$filename_encoded" \
      -d "api_paste_code=$content" \
-     -d "api_paste_format=$format" \
      -d "api_paste_expire_date=$expiry" \
      -d "api_paste_private=$private" \
-     | tee /dev/stderr |
-     "$srcdir/copy_to_clipboard.sh"
+     -d "api_paste_format=$format" ||
+
+    command curl -X POST -sSLf https://pastebin.com/api/api_post.php \
+         -d "api_option=paste" \
+         -d "api_dev_key=$PASTEBIN_API_KEY" \
+         -d "api_paste_name=$filename_encoded" \
+         -d "api_paste_code=$content" \
+         -d "api_paste_expire_date=$expiry" \
+         -d "api_paste_private=$private" ||
+
+        {
+            timestamp "FAILED: repeating without the curl -f switch to get the error from the API:"
+            command curl -X POST -sSL https://pastebin.com/api/api_post.php \
+                 -d "api_option=paste" \
+                 -d "api_dev_key=$PASTEBIN_API_KEY" \
+                 -d "api_paste_name=$filename_encoded" \
+                 -d "api_paste_code=$content" \
+                 -d "api_paste_expire_date=$expiry" \
+                 -d "api_paste_private=$private"
+            echo
+            exit 1
+        }
+} |
+tee /dev/stderr |
+"$srcdir/copy_to_clipboard.sh"
 echo
