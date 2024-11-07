@@ -1242,7 +1242,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 
 ### Internet Services
 
-`bin/`, `cloudflare/`, `pingdom/`, `terraform/` directories:
+`internet/`, `cloudflare/`, `pingdom/`, `terraform/` directories:
 
 - Pastebins - uploads files and copies the resulting URL to your clipboard:
   - code / text only - prompts to approve text / code before upload for safety:
@@ -1279,6 +1279,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
+- `dnsjson.sh` - queries [DNSJson](https://dnsjson) for DNS records
 - `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `kong_api.sh` - queries the [Kong API Gateway](https://docs.konghq.com/gateway/latest/)'s Admin API, handling authentication if enabled
