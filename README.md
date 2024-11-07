@@ -1245,13 +1245,14 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 `bin/`, `cloudflare/`, `pingdom/`, `terraform/` directories:
 
 - Pastebins:
-  - for code / text only:
+  - for code / text only - prompts for confirmation before upload for safety:
     - `pastebin.sh` - uploads a file to <https://pastebin.com> and copies the resulting URL to your clipboard
     - `dpaste.sh` - uploads a file to <https://dpaste.com> and copies the resulting URL to your clipboard
     - `termbin.sh` - uploads a file to <https://termbin.com> and copies the resulting URL to your clipboard
-  - for all files, media or text/code:
+  - for all files, media or text/code - prompts for confirmation before upload of text/code for safety:
     - `0x0.sh` - uploads a file to <https://0x0.st> and copies the resulting URL to your clipboard
-    - `catbox.sh` - uploads a file to <https://catbox.moe/> and copies the resulting URL to your clipboard
+    - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention and copies the resulting URL to your clipboard
+    - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention and copies the resulting URL to your clipboard
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
