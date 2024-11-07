@@ -36,7 +36,7 @@ Recommended: use anonymize.py or anonymize.pl from the adjacent DevOps-Python-to
 Optional: decomment.sh
 
 Syntax Highlighting: the API doesn't infer syntax highlighting based on the filename extension,
-                     so we try to auto-infer it in this script for some common formats based on the file extension.
+                     so tries to auto-infer it in this script for some common formats based on the file extension.
                      You can override this as an argument
 
 See values for parameters here:
