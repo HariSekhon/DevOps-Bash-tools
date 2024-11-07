@@ -66,6 +66,10 @@ fi
     timestamp "reading from file: $file"
 #fi
 
+if ! file "$file" | grep -q ASCII; then
+    die "This is only for text files like code. For non-text files use adjacent 0x0.sh"
+fi
+
 content="$(cat "$file")"
 echo
 
