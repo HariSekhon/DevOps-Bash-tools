@@ -85,35 +85,28 @@ bigdata impala
 bigdata beeline
 bigdata zookeeper
 
-bin atlassian_ip_ranges.sh
 bin azure_info.sh
 bin center.sh
 bin clean_caches.sh
 bin crt_hash.sh
 bin csv_header_indices.sh
 bin curl_auth.sh
-bin datadog_api.sh
 bin decomment.sh
 bin delete_empty_dirs.sh
-bin digital_ocean_api.sh
 bin disable_swap.sh
-bin dnsjson.sh
 bin elasticsearch_decommission_node.sh
 bin exec_interactive.sh
 bin find
 bin grep_or_append.sh
 bin headtail.sh
-bin jira_api.sh
 bin json2yaml.sh
 bin jsondiff.sh
 bin jvm
 bin keycloak.sh
-bin kong_api.sh
 bin ldap
 bin ldapsearch.sh
 bin lint.sh
 bin login.sh
-bin ngrok_api.sh
 bin progress_dots.sh
 bin random
 bin retry.sh
@@ -124,12 +117,20 @@ bin shellcheck.sh
 bin split.sh
 bin sqlite.sh
 bin ssl
-bin traefik_api.sh
 bin uniq_chars.sh
 bin url
 bin vault
 bin word_frequency.sh
 bin yaml2json.sh
+
+internet atlassian_ip_ranges.sh
+internet datadog_api.sh
+internet digital_ocean_api.sh
+internet dnsjson.sh
+internet jira_api.sh
+internet kong_api.sh
+internet ngrok_api.sh
+internet traefik_api.sh
 
 configs .vimrc
 
