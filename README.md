@@ -1251,6 +1251,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
     - `termbin.sh` - uploads a file to <https://termbin.com> and copies the resulting URL to your clipboard
   - for all files, media or text/code - prompts for confirmation before upload of text/code for safety:
     - `0x0.sh` - uploads a file to <https://0x0.st> and copies the resulting URL to your clipboard
+    - `imgur.sh` - uploads an image file to <https://imgur.com> and copies the resulting URL to your clipboard
     - `file.io.sh` - uploads a file to <https://file.io> with 2 weeks, single download retention, and copies the resulting URL to your clipboard
     - `catbox.sh` - uploads a file to <https://catbox.moe/> with permanent retention and copies the resulting URL to your clipboard
     - `litterbox.sh` - uploads a file to <https://litterbox.catbox.moe/> with temporary retention and copies the resulting URL to your clipboard
