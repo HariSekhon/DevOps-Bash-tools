@@ -50,6 +50,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+url="https://dpaste.com/api/v2/"
+
 file="$1"
 expiry="${2:-${DPASTE_EXPIRY:-1}}"
 format="${3:-text}"  # syntax highlighting
@@ -155,18 +157,18 @@ fi
 {
 # try twice, fall back to trying without the API syntax highlighting selection in case it is wrong as this can result in
 #
-command curl -sSLf https://dpaste.com/api/v2/ \
+command curl -sSLf "$url" \
              -F "expiry_days=$expiry" \
              -F "syntax=$format" \
              -F "content=<-" <<< "$content" ||
 
-    command curl -sSLf https://dpaste.com/api/v2/ \
+    command curl -sSLf "$url" \
                  -F "expiry_days=$expiry" \
                  -F "content=<-" <<< "$content" ||
 
         {
             timestamp "FAILED: repeating without the curl -f switch to get the error from the API:"
-            command curl -sSL https://dpaste.com/api/v2/ \
+            command curl -sSL "$url" \
                          -F "expiry_days=$expiry" \
                          -F "content=<-" <<< "$content"
             echo
