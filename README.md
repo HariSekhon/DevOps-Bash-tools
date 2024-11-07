@@ -1251,6 +1251,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
     - `termbin.sh` - uploads a file to <https://termbin.com> and copies the resulting URL to your clipboard
   - for all files, media or text/code:
     - `0x0.sh` - uploads a file to <https://0x0.st> and copies the resulting URL to your clipboard
+    - `catbox.sh` - uploads a file to <https://catbox.moe/> and copies the resulting URL to your clipboard
 - `digital_ocean_api.sh` / `doapi.sh` - queries the [Digital Ocean](https://www.digitalocean.com/) API with authentication
   - see also the Digital Ocean CLI `doctl` (`install/install_doctl.sh`)
 - `atlassian_ip_ranges.sh` - lists [Atlassian](https://www.atlassian.com/)'s IPv4 and/or IPv6 cidr ranges via its API
