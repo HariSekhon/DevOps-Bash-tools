@@ -30,6 +30,8 @@ Recommended: use anonymize.py or anonymize.pl from the adjacent DevOps-Python-to
 
 Optional: decomment.sh
 
+There is no syntax highlighting on https://termbin.com
+
 Knowledge Base page: https://github.com/HariSekhon/Knowledge-Base/blob/main/upload-sites.md
 
 Requires nc or ncat or netcat to be installed
