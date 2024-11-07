@@ -85,5 +85,5 @@ shift || :
 url_path="${url_path//https:\/\/api.ngrok.com}"
 url_path="${url_path##/}"
 
-"$srcdir/curl_auth.sh" "$url_base/$url_path" -H "Ngrok-Version: 2" "${CURL_OPTS[@]}" "$@" |
+"$srcdir/../bin/curl_auth.sh" "$url_base/$url_path" -H "Ngrok-Version: 2" "${CURL_OPTS[@]}" "$@" |
 jq_debug_pipe_dump
