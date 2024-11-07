@@ -98,5 +98,5 @@ echo
 
 "$nc" termbin.com 9999 <<< "$content" |
 tee /dev/stderr |
-"$srcdir/copy_to_clipboard.sh"
+"$srcdir/../bin/copy_to_clipboard.sh"
 echo
