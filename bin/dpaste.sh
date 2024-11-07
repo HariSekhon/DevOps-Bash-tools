@@ -2,8 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2010-05-18 10:40:36 +0100 (Tue, 18 May 2010)
-#  (just discovered in private repo and ported here)
+#  Date: 2024-11-07 06:06:59 +0400 (Thu, 07 Nov 2024)
 #
 #  https///github.com/HariSekhon/DevOps-Bash-tools
 #
