@@ -22,24 +22,14 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Uploads a file to https://file.io/ and copies the resulting URL to your clipboard
-
-If the content is ASCII then prompts to confirm the content before uploading for your safe review as this is PUBLIC
-
-Does not do this for non-ASCII files since we can't print media content to the terminal
-
-Retention is a single download by design only and up to 2 weeks availability
-
-Recommended: for text use anonymize.py or anonymize.pl from the adjacent DevOps-Python-tools or DevOps-Perl-tools repos
-
-Optional: for code - decomment.sh
+Uploads an image file to https://imgur.com/ and copies the resulting URL to your clipboard
 
 Knowledge Base page: https://github.com/HariSekhon/Knowledge-Base/blob/main/upload-sites.md
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<filename>"
+usage_args="<image_file>"
 
 help_usage "$@"
 
@@ -49,14 +39,6 @@ IMGUR_CLIENT_ID="${IMGUR_CLIENT_ID:-DevOps-Bash-tools}"
 
 url="https://api.imgur.com/3/image"
 file="$1"
-
-# Do not allow reading from stdin because it does not allow the prompt safety
-#if [ "$file" = '-' ]; then
-#    timestamp "reading from stdin"
-    #file="/dev/stdin"
-#else
-#    timestamp "reading from file: $file"
-#fi
 
 if ! file "$file" | grep -qi image; then
     die "Only image files may be uploaded"
