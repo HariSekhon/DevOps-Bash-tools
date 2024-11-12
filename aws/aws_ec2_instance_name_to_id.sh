@@ -51,6 +51,12 @@ num_args 1 "$@"
 
 instance_name="$1"
 
+if [[ "$instance_name" =~ ^i-[0-9a-f]{8,17}$ ]]; then
+    log "Given instance name is already an AWS instance ID, outputs as is: $instance_name"
+    echo "$instance_name"
+    exit 0
+fi
+
 log "Determining EC2 instance ID for name '$instance_name'"
 
 instance_id="$(
