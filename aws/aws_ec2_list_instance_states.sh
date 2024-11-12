@@ -40,11 +40,14 @@ num_args 0 "$@"
 
 # false positive - want single quotes for * to be evaluated within AWS query not shell
 # shellcheck disable=SC2016
+#
+# prefixing the column headings with spaces forces them to come first so that we can get the State field
+# in the middle instead of end since AWS CLI seems to sort the columns lexically
 aws ec2 describe-instances \
     --query 'Reservations[*].Instances[*].{
-                Name: Tags[?Key==`Name`].Value | [0],
-                ID: InstanceId,
-                State: State.Name,
+                " Name": Tags[?Key==`Name`].Value | [0],
+                " ID": InstanceId,
+                " State": State.Name,
                 "Public DNS": publicDnsName,
                 "Private DNS": PrivateDnsName
             }' \
