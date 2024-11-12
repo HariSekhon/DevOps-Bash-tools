@@ -26,7 +26,7 @@ Returns an EC2 instance ID from name
 
 Adds additional safety checks:
 
-- verifies that not more than one instance ID is returned
+- verifies no more than one instance ID is returned
 - does a reverse lookup on the instance ID to verify the name
 - if an instance ID is passed, returns it as is for convenience
 
