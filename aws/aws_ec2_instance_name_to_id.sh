@@ -28,6 +28,7 @@ Adds additional safeties:
 
 - verifies that not more than one instance ID is returned
 - does a reverse lookup on the instance ID to verify the name
+- if an instance ID is passed, returns it as is for convenience
 
 Called by adjacent scripts like:
 
