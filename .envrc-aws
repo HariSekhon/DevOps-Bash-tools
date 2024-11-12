@@ -58,6 +58,14 @@ if [ -z "${CI:-}" ]; then
     fi
     echo
 
+    # might not have permissions to the Organizations in which case this will error instead of return
+    AWS_ACCOUNT="$(aws organizations describe-account --account-id "$AWS_ACCOUNT_ID" 2>/dev/null)"
+    if [ -n "$AWS_ACCOUNT" ]; then
+        echo "AWS Account:"
+        echo
+        echo "$AWS_ACCOUNT"
+        echo
+    fi
 fi
 
 # 'aws sts get-caller-identity --query Account' succeeds in returning the account id
