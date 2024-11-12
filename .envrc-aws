@@ -57,21 +57,23 @@ if [ -z "${CI:-}" ]; then
         fi
     fi
     echo
-
-    # might not have permissions to the Organizations in which case this will error instead of return
-    AWS_ACCOUNT="$(aws organizations describe-account --account-id "$AWS_ACCOUNT_ID" 2>/dev/null)"
-    if [ -n "$AWS_ACCOUNT" ]; then
-        echo "AWS Account:"
-        echo
-        echo "$AWS_ACCOUNT"
-        echo
-    fi
 fi
 
 # 'aws sts get-caller-identity --query Account' succeeds in returning the account id
 # from the ~/.aws/config even if 'aws sso login' has expired
 AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
+echo "AWS Account ID: $AWS_ACCOUNT_ID"
 export AWS_ACCOUNT_ID
+
+# might not have permissions to the Organizations in which case this will error instead of return
+AWS_ACCOUNT="$(aws organizations describe-account --account-id "$AWS_ACCOUNT_ID" 2>/dev/null)"
+if [ -n "$AWS_ACCOUNT" ]; then
+    echo "AWS Account:"
+    echo
+    echo "$AWS_ACCOUNT"
+    echo
+fi
+
 AWS_DEFAULT_REGION="$(aws configure get region || :)"  # use region configured in profile by default
 AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-eu-west-2}"  # XXX: Edit default fallback region
 export AWS_DEFAULT_REGION
