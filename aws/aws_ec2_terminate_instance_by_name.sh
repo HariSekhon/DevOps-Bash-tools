@@ -40,7 +40,8 @@ num_args 1 "$@"
 
 instance_name="$1"
 
-instance_id="$("$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
+instance_id="$(VERBOSE=1 "$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
+echo
 
 timestamp "Checking instance state"
 instance_state="$(
