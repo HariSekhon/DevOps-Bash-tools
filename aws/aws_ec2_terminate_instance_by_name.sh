@@ -47,13 +47,13 @@ instance_state="$(
     aws ec2 describe-instances --instance-ids "$instance_id" --query 'Reservations[*].Instances[*].State.Name' --output text
 )"
 if [ "$instance_state" = "terminated" ]; then
-    timestamp "Instance '$returned_name' with id '$instance_id' is already terminated"
+    timestamp "Instance '$instance_name' with id '$instance_id' is already terminated"
     exit 0
 elif [ "$instance_state" != "running" ]; then
     die "Instance state '$instance_state' was not expected - is not 'terminated' or 'running' - aborting for safety"
 fi
 echo >&2
 
-read -r -p "Do you want to terminate instance '$returned_name' with id '$instance_id'? (y/N) " answer
+read -r -p "Do you want to terminate instance '$instance_name' with id '$instance_id'? (y/N) " answer
 check_yes "$answer"
 aws ec2 terminate-instances --instance-ids "$instance_id"
