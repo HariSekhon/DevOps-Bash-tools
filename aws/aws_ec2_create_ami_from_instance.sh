@@ -36,6 +36,11 @@ See it in the list of AMIs afterwards using this command:
 
     aws ec2 describe-images --owners self --query 'Images[*].{ID:ImageId,Name:Name}' --output table
 
+Check the state of the AMI is finished:
+
+    aws ec2 describe-images --image-ids \"\$AMI_ID\" --output table
+
+
 Investigate instance names quickly using adjacent script aws_ec2_instance_states.sh
 
 
