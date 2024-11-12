@@ -448,6 +448,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_config_recording.sh` - lists [AWS Config](https://aws.amazon.com/config/) recorders, their recording status (should be true) and their last status (should be success)
   - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `jenkins_cred_add*.sh`, `github_actions_repo*_set_secret.sh`, `gitlab_*_set_env_vars.sh`, `circleci_*_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`, `kubectl_kv_to_secret.sh`). Supports new user and new access key csv file formats.
   - `aws_codecommit_csv_creds.sh` - prints AWS [CodeCommit](https://aws.amazon.com/codecommit/) Git credentials from a CSV file as shell export statements. Similar use case and chaining as above
+  - `aws_ec2_instance_name_to_id.sh` - looks up an EC2 instance ID from an instance name with extra safety checks against returning duplicates and a reverse lookup check too. Used by adjacent scripts
   - `aws_ec2_list_instance_states.sh` - quickly list AWS EC2 instances, their DNS names and States in an easy to read table output
   - `aws_ec2_terminate_instance_by_name.sh` - terminate an AWS EC2 instance by name
   - `aws_ec2_ebs_*.sh` - AWS EC2 [EBS](https://aws.amazon.com/ebs/) scripts:
@@ -1279,7 +1280,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_ssl_verified_all_zones.sh` - same as above for all zones
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
-- `dnsjson.sh` - queries [DNSJson](https://dnsjson) for DNS records
+- `dnsjson.sh` - queries dnsjson.com for DNS records
 - `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `kong_api.sh` - queries the [Kong API Gateway](https://docs.konghq.com/gateway/latest/)'s Admin API, handling authentication if enabled
