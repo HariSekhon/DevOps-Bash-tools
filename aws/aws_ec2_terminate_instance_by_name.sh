@@ -40,33 +40,8 @@ num_args 1 "$@"
 
 instance_name="$1"
 
-timestamp "Determining EC2 instance ID for name '$instance_name'"
-instance_id="$(aws ec2 describe-instances \
-    --filters "Name=tag:Name,Values=$instance_name" \
-    --query "Reservations[*].Instances[*].InstanceId" \
-    --output text)"
-if [ "$(awk '{print NF}' <<< "$instance_id")" -gt 1 ]; then
-    echo "More than 1 instance ID returned, aborting for safety!"
-    echo
-    echo "Instance ID found:"
-    echo
-    echo "$instance_id"
-    echo
-    exit 1
-fi
-timestamp "Determined EC2 instance ID for name '$instance_name' to be '$instance_id'"
-timestamp "Doing reverse lookup on instance ID for safety"
-# want * to remain in AWS query rather than evaluated in shell
-# shellcheck disable=SC2016
-returned_name="$(aws ec2 describe-instances \
-                    --instance-ids "$instance_id" \
-                    --query 'Reservations[*].Instances[*].Tags[?Key==`Name`].Value' \
-                    --output text)"
-if [ "$returned_name" != "$instance_name" ]; then
-    die "ERROR: reverse lookup of instance id '$instance_id' returned '$returned_name' instead of expected '$instance_name' - aborting for safety"
-fi
-timestamp "Reverse lookup on instance ID for safety correctly returned name '$returned_name'"
-timestamp "We definitely have the right instance ID"
+instance_id="$("$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
+
 timestamp "Checking instance state"
 instance_state="$(
     aws ec2 describe-instances --instance-ids "$instance_id" --query 'Reservations[*].Instances[*].State.Name' --output text
