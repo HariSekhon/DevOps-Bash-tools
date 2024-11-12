@@ -41,11 +41,11 @@ num_args 0 "$@"
 # false positive - want single quotes for * to be evaluated within AWS query not shell
 # shellcheck disable=SC2016
 aws ec2 describe-instances \
-    --query 'Reservations[*].Instances[*].[
-                Tags[?Key==`Name`].Value | [0],
-                InstanceId,
-                State.Name,
-                publicDnsName,
-                PrivateDnsName
-            ]' \
+    --query 'Reservations[*].Instances[*].{
+                Name: Tags[?Key==`Name`].Value | [0],
+                ID: InstanceId,
+                State: State.Name,
+                "Public DNS": publicDnsName,
+                "Private DNS": PrivateDnsName
+            }' \
     --output table
