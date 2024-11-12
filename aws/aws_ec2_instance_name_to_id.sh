@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns an EC2 instance ID from name
 
-Adds additional safeties:
+Adds additional safety checks:
 
 - verifies that not more than one instance ID is returned
 - does a reverse lookup on the instance ID to verify the name
