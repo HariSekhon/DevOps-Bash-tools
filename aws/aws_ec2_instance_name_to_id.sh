@@ -94,6 +94,6 @@ fi
 log "Reverse lookup on instance ID for safety correctly returned name '$returned_name'"
 
 
-log "We definitely have the right instance ID, outputting instance ID:"
+log "We definitely have the right instance ID, outputting instance ID: $instance_id"
 
 echo "$instance_id"
