@@ -87,7 +87,7 @@ if is_blank "$ami_id" || [ "$ami_id" = null ]; then
     die "Failed to get AMI ID"
 fi
 
-# starts a timer in this variable
+# special variable that increments - use as a built-in timer
 SECONDS=0
 
 timestamp "Checking for AMI '$ami_name' to become ready..."
