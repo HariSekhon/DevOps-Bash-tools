@@ -29,7 +29,7 @@ Useful to testing risky things on another EC2 vm cloned from that AMI
 Does not reboot the running EC2 instance for safety by default, which means a non-clean filesystem copy
 unless you shut it down first.
 
-To enforce a reboot of the EC2 instance (be careful in production!) you must set the environment variable
+To enforce a reboot of the EC2 instance (be careful in production!) you must set the environment variable:
 
     export AWS_EC2_REBOOT_INSTANCE=true
 
