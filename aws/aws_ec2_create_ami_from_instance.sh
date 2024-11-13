@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates an AWS EC2 AMI from an EC2 instance
+Creates an AWS EC2 AMI from an EC2 instance and waits for it to become available for use
 
 Useful to testing risky things on another EC2 vm cloned from that AMI
 
@@ -75,4 +75,28 @@ if [ "${AWS_EC2_REBOOT_INSTANCE:-}" = true ]; then
 fi
 
 timestamp "Creating AMI '$ami_name' from EC2 instance '$instance_name'"
-aws ec2 create-image --instance-id "$instance_id" --name "$ami_name" "$no_reboot"
+ami_id="$(
+    aws ec2 create-image --instance-id "$instance_id" --name "$ami_name" "$no_reboot" |
+    jq -r '.ImageId'
+)"
+echo
+
+if is_blank "$ami_id" || [ "$ami_id" = null ]; then
+    die "Failed to get AMI ID"
+fi
+
+# starts a timer in this variable
+SECONDS=0
+
+timestamp "Checking for AMI '$ami_name' to become ready..."
+while true; do
+    state="$(aws ec2 describe-images --image-ids "$ami_id" | jq -r '.Images[0].state')"
+    if [ "$state" = "available" ]; then
+        timestamp "AMI is now available"
+        break
+    elif [ "$SECONDS" -gt 3600 ]; then
+        die "Waited for 1 hour without AMI becoming available, something is wrong, aborting..."
+    fi
+    timestamp "Waiting for AMI '$ami_name' to become ready, State: $state"
+    sleep 1
+done
