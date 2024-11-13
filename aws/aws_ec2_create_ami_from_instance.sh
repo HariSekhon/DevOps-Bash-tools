@@ -100,5 +100,5 @@ while true; do
         die "Waited for 1 hour without AMI becoming available, something is wrong, aborting..."
     fi
     timestamp "Waiting for AMI '$ami_name' to become ready. State: $state"
-    sleep 5
+    sleep 10
 done
