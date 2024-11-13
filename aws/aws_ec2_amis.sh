@@ -44,4 +44,7 @@ num_args 0 "$@"
 
 # false positive - want single quotes for * to be evaluated within AWS query not shell
 # shellcheck disable=SC2016
-aws ec2 describe-images --owners self --query 'Images[*].{" ID":ImageId, " Name":Name, CreationDate:CreationDate}' --output table
+aws ec2 describe-images \
+    --owners self \
+    --query 'Images | sort_by(@, &Name)[].{" ID":ImageId, " Name":Name, "CreationDate":CreationDate}' \
+    --output table
