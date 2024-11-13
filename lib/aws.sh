@@ -24,6 +24,7 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_aws_cli_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
+ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
 # S3 URL regex with s3:// prefix
 s3_regex='s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)$|^s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)'
 
@@ -149,4 +150,9 @@ aws_validate_volume_id(){
 is_s3_url(){
     local url="$1"
     [[ "$url" =~ ^$s3_regex$ ]]
+}
+
+is_ami_id(){
+    local ami="$1"
+    [[ "$ami" =~ ^$ami_id_regex$ ]]
 }
