@@ -47,11 +47,11 @@ echo >&2
 aws ec2 describe-volumes \
     --filters 'Name=status,Values=available' \
     --query "Volumes[*].{
-        VolumeID: VolumeId,
-        Size: Size,
+        '  VolumeID': VolumeId,
+        '  VolumeType': VolumeType,
+        ' Size': Size,
+        ' State': State,
         AvailabilityZone: AvailabilityZone,
-        VolumeType: VolumeType,
-        State: State,
         Name: Tags[?Key=='Name'].Value | [0],
         Environment: Tags[?Key=='Environment'].Value | [0],
         CreateTime: CreateTime
