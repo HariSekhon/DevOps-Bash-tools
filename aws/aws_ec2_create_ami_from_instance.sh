@@ -26,7 +26,8 @@ Creates an AWS EC2 AMI from an EC2 instance
 
 Useful to testing risky things on another EC2 vm cloned from that AMI
 
-Does not reboot the running EC2 instance for safety by default, which means a non-clean filesystem copy.
+Does not reboot the running EC2 instance for safety by default, which means a non-clean filesystem copy
+unless you shut it down first.
 
 To enforce a reboot of the EC2 instance (be careful in production!) you must set the environment variable
 
