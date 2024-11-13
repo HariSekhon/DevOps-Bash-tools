@@ -97,6 +97,6 @@ while true; do
     elif [ "$SECONDS" -gt 3600 ]; then
         die "Waited for 1 hour without AMI becoming available, something is wrong, aborting..."
     fi
-    timestamp "Waiting for AMI '$ami_name' to become ready, State: $state"
+    timestamp "Waiting for AMI '$ami_name' to become ready. State: $state"
     sleep 1
 done
