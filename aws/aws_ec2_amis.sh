@@ -26,6 +26,10 @@ List AWS EC2 AMIs belonging to your account in an easy to read table output
 
 Useful for quickly investigating AMIs
 
+For full details do:
+
+    aws ec2 describe-images --image-ids \"\$AMI_ID\"
+
 
 $usage_aws_cli_required
 "
@@ -40,4 +44,4 @@ num_args 0 "$@"
 
 # false positive - want single quotes for * to be evaluated within AWS query not shell
 # shellcheck disable=SC2016
-aws ec2 describe-images --owners self --query 'Images[*].{ID:ImageId, Name:Name}' --output table
+aws ec2 describe-images --owners self --query 'Images[*].{" ID":ImageId, " Name":Name, CreationDate:CreationDate}' --output table
