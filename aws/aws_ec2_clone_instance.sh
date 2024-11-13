@@ -70,6 +70,9 @@ fi
 
 timestamp "Determining instance ID of original EC2 instance '$instance_name'"
 instance_id="$("$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
+if ! is_instance_id "$instance_id"; then
+    die "Invalid Instance ID returned, failed regex validation: $instance_id"
+fi
 timestamp "Determined instance ID to be: $instance_id"
 echo >&2
 
