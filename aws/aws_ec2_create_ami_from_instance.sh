@@ -94,7 +94,7 @@ echo
 while true; do
     state="$(aws ec2 describe-images --image-ids "$ami_id" | jq -r '.Images[0].State')"
     if [ "$state" = "available" ]; then
-        timestamp "AMI is now available after $SECONDS seconds"
+        timestamp "AMI '$ami_name' is now available after $SECONDS seconds"
         break
     elif [ "$SECONDS" -gt 3600 ]; then
         die "Waited for 1 hour without AMI becoming available, something is wrong, aborting..."
