@@ -72,12 +72,13 @@ if is_blank "$instance_id"; then
 fi
 
 if [ "$(awk '{print NF}' <<< "$instance_id")" -gt 1 ]; then
-    echo "More than 1 instance ID returned, aborting for safety!"
-    echo
-    echo "Instance ID found:"
-    echo
-    echo "$instance_id"
-    echo
+    cat <<-EOF >&2
+    More than 1 instance ID returned, aborting for safety!"
+
+    Instance ID found:
+
+    $instance_id
+EOF
     exit 1
 fi
 
