@@ -89,6 +89,8 @@ fi
 SECONDS=0
 
 timestamp "Checking for AMI '$ami_name' to become ready..."
+echo
+
 while true; do
     state="$(aws ec2 describe-images --image-ids "$ami_id" | jq -r '.Images[0].State')"
     if [ "$state" = "available" ]; then
