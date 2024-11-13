@@ -155,7 +155,7 @@ while true; do
     )"
 
     if [ "$state" = "running" ]; then
-        timestamp "New instace '$new_instance_name' is now running after $SECONDS seconds"
+        timestamp "New instance '$new_instance_name' is now running after $SECONDS seconds"
         break
     elif [ "$SECONDS" -gt 1200 ]; then
         die "Waited for 20 minutes but instance did not enter running state, something is wrong, aborting..."
