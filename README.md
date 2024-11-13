@@ -452,6 +452,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_ec2_instance_states.sh` - lists AWS EC2 instances, heir DNS names and States in an easy to read table output
   - `aws_ec2_terminate_instance_by_name.sh` - terminate an AWS EC2 instance by name
   - `aws_ec2_create_ami_from_instance.sh` - creates an AWS EC2 AMI from an EC2 instance and waits for it to become available for use
+  - `aws_ec2_clone_instance.sh` - clones an AWS EC2 instance by creating an AMI from the original and then booting a new instance from the AMI with the same settings as the original instance. Useful to testing risky things on a separate EC2 instance, such as Server Administrator recovery of Tableau
   - `aws_ec2_amis.sh` - list AWS EC2 AMIs belonging to your account in an easy to read table output
   - `aws_ec2_ebs_*.sh` - AWS EC2 [EBS](https://aws.amazon.com/ebs/) scripts:
     - `aws_ec2_ebs_volumes.sh` - list EC2 instances and their EBS volumes in the current region
