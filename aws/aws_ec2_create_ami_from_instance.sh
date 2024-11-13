@@ -98,8 +98,8 @@ while true; do
     if [ "$state" = "available" ]; then
         timestamp "AMI '$ami_name' is now available after $SECONDS seconds"
         break
-    elif [ "$SECONDS" -gt 3600 ]; then
-        die "Waited for 1 hour without AMI becoming available, something is wrong, aborting..."
+    elif [ "$SECONDS" -gt 1200 ]; then
+        die "Waited for 20 minutes without AMI becoming available, something is wrong, aborting..."
     fi
     timestamp "Waiting for AMI '$ami_name' to become ready. State: $state"
     sleep 10
