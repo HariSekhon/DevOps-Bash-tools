@@ -40,7 +40,7 @@ Uses adjacent scripts:
 
     aws_ec2_instance_name_to_id.sh
 
-Investigate instance names quickly using adjacent script aws_ec2_instance_states.sh
+Investigate instance names quickly using adjacent script aws_ec2_instances.sh
 
 
 $usage_aws_cli_required
