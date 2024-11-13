@@ -46,7 +46,7 @@ echo >&2
 # shellcheck disable=SC2016
 aws ec2 describe-volumes \
     --filters 'Name=status,Values=available' \
-    --query "Volumes[*].[
+    --query "Volumes[*].{
         VolumeID: VolumeId,
         Size: Size,
         AvailabilityZone: AvailabilityZone,
@@ -55,5 +55,5 @@ aws ec2 describe-volumes \
         Name: Tags[?Key=='Name'].Value | [0],
         Environment: Tags[?Key=='Environment'].Value | [0],
         CreateTime: CreateTime
-    ]" \
+    }" \
     --output table
