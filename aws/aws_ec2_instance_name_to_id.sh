@@ -36,7 +36,7 @@ Called by adjacent scripts like:
 
     aws_ec2_terminate_instance_by_name.sh
 
-Investigate instance names and IDs quickly using adjacent script aws_ec2_instance_states.sh
+Investigate instance names and IDs quickly using adjacent script aws_ec2_instances.sh
 
 
 $usage_aws_cli_required
