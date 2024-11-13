@@ -64,6 +64,10 @@ ami_name="instance-$instance_name-$(date '+%F_%H%M%S')"
 ami_id="$("$srcdir/aws_ec2_create_ami_from_instance.sh" "$instance_name" "$ami_name")"
 echo >&2
 
+if ! is_ami_id "$ami_id"; then
+    die "Invalid AMI ID returned, failed regex validation: $ami_id"
+fi
+
 timestamp "Determining instance ID of original EC2 instance '$instance_name'"
 instance_id="$("$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
 timestamp "Determined instance ID to be: $instance_id"
