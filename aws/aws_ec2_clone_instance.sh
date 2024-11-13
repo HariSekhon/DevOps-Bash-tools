@@ -136,7 +136,7 @@ new_instance_id="$(
 )"
 echo >&2
 
-timestamp "Waiting for new EC2 instance '$new_instance_name' ($new_instance_id) to become available"
+timestamp "Waiting for new EC2 instance '$new_instance_name' ($new_instance_id) to enter running state"
 echo >&2
 
 # special variable that increments - use as a built-in timer
@@ -154,7 +154,7 @@ while true; do
         timestamp "New instace '$new_instance_name' is now running after $SECONDS seconds"
         break
     elif [ "$SECONDS" -gt 1200 ]; then
-        die "Waited for 20 minutes without instance entering running state, something is wrong, aborting..."
+        die "Waited for 20 minutes but instance did not enter running state, something is wrong, aborting..."
     fi
     timestamp "Waiting for instance '$new_instance_name' to enter running state. State: $state"
     sleep 10
