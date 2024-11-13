@@ -82,6 +82,10 @@ EOF
     exit 1
 fi
 
+if ! is_instance_id "$instance_id"; then
+    die "Invalid Instance ID returned, failed regex validation: $instance_id"
+fi
+
 log "Determined EC2 instance ID for name '$instance_name' to be '$instance_id'"
 
 log "Doing reverse lookup on instance ID for safety"
