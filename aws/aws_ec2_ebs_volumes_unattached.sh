@@ -48,7 +48,7 @@ aws ec2 describe-volumes \
     --filters 'Name=status,Values=available' \
     --query 'Volumes[*].[
         VolumeID: VolumeId,
-        Sieze: Size,
+        Size: Size,
         AvailabilityZone: AvailabilityZone,
         VolumeType: VolumeType,
         State: State,
