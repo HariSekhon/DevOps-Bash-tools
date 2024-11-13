@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Creates an AWS EC2 AMI from an EC2 instance and waits for it to become available for use
 
+Outputs the AMI ID to stdout after it becomes available
+
 Useful to testing risky things on another EC2 vm cloned from that AMI
 
 Does not reboot the running EC2 instance for safety by default, which means a non-clean filesystem copy
@@ -102,3 +104,5 @@ while true; do
     timestamp "Waiting for AMI '$ami_name' to become ready. State: $state"
     sleep 10
 done
+
+echo "$ami_id"
