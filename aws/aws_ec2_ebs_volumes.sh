@@ -45,6 +45,11 @@ while read -r instance_id instance_name; do
     #echo "Instance Name: $instance_name, Instance ID: $instance_id"
 
     timestamp "Getting volume list for EC2 instance: $instance_name"
+
+    if ! is_instance_id "$instance_id"; then
+        die "Invalid Instance ID passed into loop with instance name '$instance_name', failed regex validation: $instance_id"
+    fi
+
     # false positive
     # shellcheck disable=SC2016
     #volume_ids="$(aws ec2 describe-volumes --filters "Name=attachment.instance-id,Values=$instance_id" --query 'Volumes[*].[VolumeId, Tags[?Key==`Name`].Value|[0]]' --output text)"
