@@ -85,6 +85,8 @@ echo >&2
 
 if is_blank "$ami_id" || [ "$ami_id" = null ]; then
     die "Failed to get AMI ID"
+elif ! is_ami_id "$ami_id"; then
+    die "Invalid AMI ID returned, failed regex validation: $ami_id"
 fi
 
 # special variable that increments - use as a built-in timer
