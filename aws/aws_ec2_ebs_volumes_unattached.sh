@@ -46,14 +46,14 @@ echo >&2
 # shellcheck disable=SC2016
 aws ec2 describe-volumes \
     --filters 'Name=status,Values=available' \
-    --query "Volumes[*].{
-        '  VolumeID': VolumeId,
-        '  VolumeType': VolumeType,
-        ' Size': Size,
-        ' State': State,
+    --query 'Volumes[*].{
+        "  VolumeID": VolumeId,
+        "  VolumeType": VolumeType,
+        " Size": Size,
+        " State": State,
         AvailabilityZone: AvailabilityZone,
-        Name: Tags[?Key=='Name'].Value | [0],
-        Environment: Tags[?Key=='Environment'].Value | [0],
+        Name: Tags[?Key=="Name"].Value | [0],
+        Environment: Tags[?Key=="Environment"].Value | [0],
         CreateTime: CreateTime
-    }" \
+    }' \
     --output table
