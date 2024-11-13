@@ -44,14 +44,16 @@ timestamp "Getting EC2 EBS volumes not attached to instances"
 echo >&2
 # Volumes[*] should not be shell interpreted
 # shellcheck disable=SC2016
-aws ec2 describe-volumes --filters 'Name=status,Values=available' \
-                         --query 'Volumes[*].[
-                            VolumeId,
-                            Size,
-                            AvailabilityZone,
-                            VolumeType,
-                            State,
-                            Tags[?Key==`Name`].Value | [0],
-                            Tags[?Key==`Environment`].Value | [0]
-                            ]' \
-                         --output table
+aws ec2 describe-volumes \
+    --filters 'Name=status,Values=available' \
+    --query 'Volumes[*].[
+        VolumeID: VolumeId,
+        Sieze: Size,
+        AvailabilityZone: AvailabilityZone,
+        VolumeType: VolumeType,
+        State: State,
+        Name: Tags[?Key==`Name`].Value | [0],
+        Environment: Tags[?Key==`Environment`].Value | [0],
+        CreateTime: CreateTime
+        ]' \
+    --output table
