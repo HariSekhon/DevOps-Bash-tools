@@ -62,12 +62,12 @@ ami_name="instance-$instance_name-$(date '+%F_%H%M%S')"
 
 # this script has been updated to wait for the AMI state to become available
 ami_id="$("$srcdir/aws_ec2_create_ami_from_instance.sh" "$instance_name" "$ami_name")"
-echo
+echo >&2
 
 timestamp "Determining instance ID of original EC2 instance '$instance_name'"
 instance_id="$("$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
 timestamp "Determined instance ID to be: $instance_id"
-echo
+echo >&2
 
 timestamp "Determining instance type of original instance"
 instance_type="$(
@@ -80,7 +80,7 @@ if is_blank "$instance_type"; then
     die "Failed to determine instance type"
 fi
 timestamp "Determined instance type to be: $instance_type"
-echo
+echo >&2
 
 timestamp "Determining subnet ID of original instance"
 subnet_id="$(
@@ -93,7 +93,7 @@ if is_blank "$subnet_id"; then
     die "Failed to determine subnet ID"
 fi
 timestamp "Determined subnet ID to be: $subnet_id"
-echo
+echo >&2
 
 timestamp "Determining key pair name of original instance"
 key_name="$(
@@ -106,7 +106,7 @@ if is_blank "$key_name"; then
     die "Failed to determine key name"
 fi
 timestamp "Determined key pair name to be: $key_name"
-echo
+echo >&2
 
 timestamp "Determining security group IDs of original instance"
 security_group_ids="$(
@@ -121,7 +121,7 @@ if is_blank "$security_group_ids"; then
     die "Failed to determine security group IDs"
 fi
 timestamp "Determined security group ID to be: $security_group_ids"
-echo
+echo >&2
 
 timestamp "Launching new EC2 instance from AMI '$ami_name'"
 new_instance_id="$(
@@ -134,10 +134,10 @@ new_instance_id="$(
         --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$new_instance_name}]" |
     jq -r '.Instances[0].InstanceId'
 )"
-echo
+echo >&2
 
 timestamp "Waiting for new EC2 instance '$new_instance_name' ($new_instance_id) to become available"
-echo
+echo >&2
 
 # special variable that increments - use as a built-in timer
 SECONDS=0
