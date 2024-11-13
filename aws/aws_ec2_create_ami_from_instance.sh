@@ -63,17 +63,17 @@ instance_name="$1"
 ami_name="$2"
 
 instance_id="$(VERBOSE=1 "$srcdir/aws_ec2_instance_name_to_id.sh" "$instance_name")"
-echo
+echo >&2
 
 no_reboot="--no-reboot"
 
 if [ "${AWS_EC2_REBOOT_INSTANCE:-}" = true ]; then
     timestamp "WARNING: AWS_EC2_REBOOT_INSTANCE environment variable is set to true"
-    echo
+    echo >&2
     read -r -p "Are you sure you want to take down this EC2 instance '$instance_name'? (y/N) " answer
     check_yes "$answer"
     no_reboot=""
-    echo
+    echo >&2
 fi
 
 timestamp "Creating AMI '$ami_name' from EC2 instance '$instance_name'"
@@ -81,7 +81,7 @@ ami_id="$(
     aws ec2 create-image --instance-id "$instance_id" --name "$ami_name" "$no_reboot" |
     jq -r '.ImageId'
 )"
-echo
+echo >&2
 
 if is_blank "$ami_id" || [ "$ami_id" = null ]; then
     die "Failed to get AMI ID"
@@ -91,7 +91,7 @@ fi
 SECONDS=0
 
 timestamp "Checking for AMI '$ami_name' to become ready..."
-echo
+echo >&2
 
 while true; do
     state="$(aws ec2 describe-images --image-ids "$ami_id" | jq -r '.Images[0].State')"
