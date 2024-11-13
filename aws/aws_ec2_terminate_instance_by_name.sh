@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Terminate an AWS EC2 instance by name
 
-Investigate instance names quickly using adjacent script aws_ec2_instance_states.sh
+Investigate instance names quickly using adjacent script aws_ec2_instances.sh
 
 
 $usage_aws_cli_required
