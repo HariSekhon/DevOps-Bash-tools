@@ -28,9 +28,10 @@ Sums the RAM usage of all processes matching a given regex in GB to one decimal 
 Writen to find out how much RAM Google Chrome and all its many helper processes were actually consuming
 since my fancy M3 Max was using 100/128GB RAM and the top few processes only accounted for roughly ~10GB of that
 
-It turned out Chrome was taking around 53GB for all the many tabs I had open while IntelliJ
-and its plugins were taking 17.8GB rather than the 5.8GB reported for the main process in Activity Monitor,
-jcef was taking another 5.6GB
+It turned out Chrome was taking around 52GB for all the many tabs I had open
+while IntelliJ and its plugins were taking 17.8GB rather than the 5.8GB reported
+for the main IntellJ process in Activity Monitor, which is misleading,
+while jcef processes were taking another 5.6GB
 
 Regex matches the entire process line return by 'ps aux' so this catches processes running out of installation
 directories that may have different names
