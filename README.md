@@ -345,6 +345,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
 - `ssl_verify_cert_by_ip.sh` - verifies SSL certificates on specific IP addresses, useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also `curl_k8s_ingress.sh`)
+- `ttygif.sh` - Creates a Gif from running terminal commands using `ttyrec` and `ttygif` and then opens the resulting gif
 - `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
 - `urlextract.sh` - extracts the URLs from a given file or standard input
 - `urlopen.sh` - opens the given URL from first arg or stdin, or first URL found in a given file. Uses the system's default browser
