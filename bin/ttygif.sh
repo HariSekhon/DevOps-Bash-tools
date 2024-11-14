@@ -83,7 +83,7 @@ if [ -d "$screenshot_dir" ]; then
     gif="$new_file"
 fi
 
-timestamp "Gif is now available as $gif"
+timestamp "Gif is now available as: $gif"
 
 if is_mac; then
     open -a "${BROWSER:-Google Chrome}" "$gif"
