@@ -32,6 +32,12 @@ instead of the running gif
 Also resizes the terminal to be a standard 80x25 characters before it begins. Set the environment variable
 NO_RESIZE_TERMINAL to any value to avoid this
 
+See also adjacent scripts:
+
+    asciinema.sh
+
+    terminalizer.sh
+
 
 Requires ttygif to be installed, attempts to install it via your package manager if not found in \$PATH
 "
