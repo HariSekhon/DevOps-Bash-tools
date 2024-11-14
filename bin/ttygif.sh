@@ -43,6 +43,8 @@ ttyrec_recording_file="/tmp/ttyrec.$$"
 
 resize -s 25 80
 
+clear
+
 # Makes the PS1 prompt too long which eats into the screen recording terminal space and makes it wrap
 # Instead of this, just move the tty.gif at the end
 #if [ -d ~/Desktop/Screenshots ]; then
