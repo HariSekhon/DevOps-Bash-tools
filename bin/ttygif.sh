@@ -27,6 +27,9 @@ Creates a Gif from running terminal commands using ttyrec and ttygif
 and then opens the resulting gif
 
 If on Mac uses your browser since Mac Preview shows the gif frames instead of the running gif
+
+
+Requires ttygif to be installed, attempts to install it via your package manager if not found in \$PATH
 "
 
 # used by usage() in lib/utils.sh
@@ -38,6 +41,10 @@ help_usage "$@"
 num_args 0 "$@"
 
 ttyrec_recording_file="/tmp/ttyrec.$$"
+
+if ! type -P ttygif &>/dev/null; then
+    "$srcdir/../packages/install_packages.sh" ttygif
+fi
 
 resize -s 25 80
 
