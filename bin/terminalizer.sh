@@ -79,7 +79,7 @@ clear
 
 timestamp "Now run your commands"
 
-# TODO: stop it prompts to upload
+# TODO: stop it prompting to upload
 terminalizer record "$recording_file"
 
 terminalizer render "$recording_file" -o "$gif"
