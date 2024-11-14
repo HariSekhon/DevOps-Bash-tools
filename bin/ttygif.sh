@@ -22,13 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs ttyrec and then ttygif to create a Gif of the current terminal commands
-and then opens the resulting gif image using your default image viewer
-(or if on Mac your browser since Mac Preview shows the gif frames instead of the running gif)
+Creates a Gif from running terminal commands using ttyrec and ttygif
 
-The resulting gif is called tty.gif in the current working directory
+and then opens the resulting gif
 
-Rename it something else afterwards
+(if on Mac uses your browser since Mac Preview shows the gif frames instead of the running gif)
 "
 
 # used by usage() in lib/utils.sh
@@ -71,6 +69,8 @@ if [ -d "$screenshot_dir" ]; then
     mv -iv "$gif" "$new_file"
     gif="$new_file"
 fi
+
+timestamp "Gif is now available as $gif"
 
 if is_mac; then
     open -a "${BROWSER:-Google Chrome}" "$gif"
