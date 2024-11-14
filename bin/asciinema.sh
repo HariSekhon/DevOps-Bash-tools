@@ -34,6 +34,12 @@ NO_RESIZE_TERMINAL to any value to avoid this
 
 The colours are more vibrant in ttygif.sh but it also records the Terminal title, which this doesn't
 
+See also adjacent scripts:
+
+    ttygif.sh
+
+    terminalizer.sh
+
 
 Requires asciinema and agg to be installed, attempts to install them via your package manager if not found in \$PATH
 "
