@@ -74,7 +74,9 @@ timestamp "Now run your commands"
 
 ttyrec "$ttyrec_recording_file"
 
-ttygif "$ttyrec_recording_file"
+#export TTYGIF_DEBUG=1
+
+ttygif "$ttyrec_recording_file" -f  # -f includes the terminal window border instead of leaving it half height cut off
 
 # the default filename created is tty.gif
 mv -iv tty.gif "$gif"
