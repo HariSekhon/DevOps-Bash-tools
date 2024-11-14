@@ -66,7 +66,6 @@ timestamp "Now run your commands"
 
 asciinema rec "$recording_file"
 
-# the default filename created is tty.gif
 gif="${recording_file%.cast}.gif"
 gif="${gif##*/}"
 
