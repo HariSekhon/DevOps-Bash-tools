@@ -38,11 +38,18 @@ Requires ttygif to be installed, attempts to install it via your package manager
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<output.gif>]"
 
 help_usage "$@"
 
-num_args 0 "$@"
+max_args 1 "$@"
+
+# tty-2024-11-14_19:49:39.gif displays as tty-2024-11-14_19/49/39.gif in Finder
+# so use dot separators instead like native Mac screenshots
+gif="${1:-tty-$(date '+%F_%H.%M.%S').gif}"
+if ! [[ "$gif" =~ \.gif$ ]]; then
+    gif="$gif.gif"
+fi
 
 ttyrec_recording_file="/tmp/ttyrec.$$"
 
@@ -70,17 +77,14 @@ ttyrec "$ttyrec_recording_file"
 ttygif "$ttyrec_recording_file"
 
 # the default filename created is tty.gif
-gif="tty.gif"
+mv -iv tty.gif "$gif"
 
 screenshot_dir=~/Desktop/Screenshots
 
 if [ -d "$screenshot_dir" ]; then
-    # tty-2024-11-14_19:49:39.gif displays as tty-2024-11-14_19/49/39.gif in Finder
-    # so use dot separators instead like native Mac screenshots
-    new_file="$screenshot_dir/tty-$(date '+%F_%H.%M.%S').gif"
-    timestamp "Moving $gif to $new_file"
-    mv -iv "$gif" "$new_file"
-    gif="$new_file"
+    timestamp "Moving $gif to $screenshot_dir"
+    mv -iv "$gif" "$screenshot_dir/"
+    gif="$screenshot_dir/$gif"
 fi
 
 timestamp "Gif is now available as: $gif"
