@@ -50,7 +50,7 @@ if ! type -P ttygif &>/dev/null; then
     "$srcdir/../packages/install_packages.sh" ttygif
 fi
 
-if [ -n "${NO_RESIZE_TERMINAL:-}" ]; then
+if [ -z "${NO_RESIZE_TERMINAL:-}" ]; then
     resize -s 25 80
 fi
 
