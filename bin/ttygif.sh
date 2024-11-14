@@ -64,7 +64,9 @@ gif="tty.gif"
 screenshot_dir=~/Desktop/Screenshots
 
 if [ -d "$screenshot_dir" ]; then
-    new_file="$screenshot_dir/tty-$(date '+%F_%T').gif"
+    # tty-2024-11-14_19:49:39.gif displays as tty-2024-11-14_19/49/39.gif in Finder
+    # so use dot separators instead like native Mac screenshots
+    new_file="$screenshot_dir/tty-$(date '+%F_%H.%M.%S').gif"
     timestamp "Moving $gif to $new_file"
     mv -iv "$gif" "$new_file"
     gif="$new_file"
