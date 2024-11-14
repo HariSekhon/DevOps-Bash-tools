@@ -37,13 +37,14 @@ https://raw.githubusercontent.com/jingweno/spotctl/master/Formula/spotctl.rb
 # Install HomeBrew Desktop packages - one per line
 ack
 act  # runs GitHub Actions locally
+agg  # converts asciicast terminal recording to gif
 amazon-ecs-cli
 #amazon-sam-cli  # no longer found
 ansible
 ansible-lint
 archey4  # displays system info in text
 argocd
-asciinema  # records terminal and creates gif
+asciinema  # records terminal to asciicast
 asdf
 #atomicparsley  # mp4 cli tool
 autoconf
