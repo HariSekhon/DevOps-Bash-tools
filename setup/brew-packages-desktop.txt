@@ -43,6 +43,7 @@ ansible
 ansible-lint
 archey4  # displays system info in text
 argocd
+asciinema  # records terminal and creates gif
 asdf
 #atomicparsley  # mp4 cli tool
 autoconf
