@@ -37,6 +37,12 @@ NO_RESIZE_TERMINAL to any value to avoid this
 
 The colours are more vibrant in ttygif.sh but it also records the Terminal title, which this doesn't
 
+See also faster adjacent scripts:
+
+    ttygif.sh
+
+    asciinema.sh
+
 
 Requires terminalizer to be installed, attempts to install it via NPM if not found in \$PATH
 "
