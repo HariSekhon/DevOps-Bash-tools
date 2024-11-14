@@ -36,6 +36,7 @@ configs/.Codefresh/cli-config/config.yaml
 configs/.config/flake8
 configs/.config/htop/htoprc
 configs/.config/pycodestyle
+configs/.config/terminalizer/config.yaml
 configs/.config/yamllint/config
 configs/.customize_environment
 configs/.editorconfig
