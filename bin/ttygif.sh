@@ -26,7 +26,7 @@ Creates a Gif from running terminal commands using ttyrec and ttygif
 
 and then opens the resulting gif
 
-(if on Mac uses your browser since Mac Preview shows the gif frames instead of the running gif)
+If on Mac uses your browser since Mac Preview shows the gif frames instead of the running gif
 "
 
 # used by usage() in lib/utils.sh
