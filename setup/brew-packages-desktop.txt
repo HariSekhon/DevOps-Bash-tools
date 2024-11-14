@@ -286,6 +286,7 @@ thrift
 tidy-html5
 tmux
 tree
+ttygif  # records terminal and creates gif
 ttyrec  # records terminal and creates gif
 urlview  # used by tmux plugin tmux-urlview, and also my advanced .vimrc
 unix2dos
