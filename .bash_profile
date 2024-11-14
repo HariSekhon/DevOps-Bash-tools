@@ -26,9 +26,9 @@ fi
 # prints a cool spinning welcome message which shows the time of last login
 # this is available in the Python / Perl and Golang Devops Tools repos,
 # as well as a function in .bash.d/welcome.sh in the DevOps Bash Tools repo
-if type welcome &>/dev/null; then
-    welcome
-fi
+#if type welcome &>/dev/null; then
+#    welcome
+#fi
 
 #eval "$(rbenv init -)"
 
