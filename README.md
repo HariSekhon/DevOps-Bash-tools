@@ -334,7 +334,8 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
-- `paste_diff_settings.sh` - Takes snapshots of before and after clipboard changes and diffs them to show config changes
+- `paste_diff_settings.sh` - takes snapshots of before and after clipboard changes and diffs them to show config changes
+- `processes_ram_sum.sh` - sums the RAM usage of all processes matching a given regex in GB to one decimal place
 - `pldd.sh` - parses `/proc` on Linux to show the runtime `.so` loaded dynamic shared libraries a program pid is using. Runtime equivalent of the classic static `ldd` command and because the system `pldd` command often fails to attach to a process
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
