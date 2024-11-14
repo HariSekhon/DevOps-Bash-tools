@@ -121,7 +121,7 @@
 .Codefresh/agent/
 .compiz
 .conda/
-.config
+#.config
 # contains repo_token / COVERALLS_REPO_TOKEN
 .coveralls.yml
 .cpan/build/
@@ -3403,7 +3403,7 @@ DerivedData/
 # General
 
 # Icon must end with two \r
-Icon
+Icon
 
 # Thumbnails
 
