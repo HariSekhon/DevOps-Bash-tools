@@ -80,6 +80,7 @@ if [ -d "$screenshot_dir" ]; then
     timestamp "Moving $gif to $screenshot_dir"
     mv -iv "$gif" "$screenshot_dir/"
     gif="$screenshot_dir/$gif"
+    echo
 fi
 
 timestamp "Gif is now available as: $gif"
