@@ -60,7 +60,7 @@ ttygif "$ttyrec_recording_file"
 gif="tty.gif"
 
 if [ -d ~/Desktop/Screenshots ]; then
-    new_file=~/Desktop/Screenshot/"tty-$(date '+%F_%H:%M:%S').gif"
+    new_file=~/Desktop/Screenshot/"tty-$(date '+%F_%T').gif"
     timestamp "Moving $gif to $new_file"
     mv -iv "$gif" "$new_file"
     gif="$new_file"
