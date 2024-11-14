@@ -284,8 +284,9 @@ tflint # Terraform linter
 tfsec  # Terraform static analysis by AquaSec
 thrift
 tidy-html5
-tree
 tmux
+tree
+ttyrec  # records terminal and creates gif
 urlview  # used by tmux plugin tmux-urlview, and also my advanced .vimrc
 unix2dos
 #unrar  # no longer available
