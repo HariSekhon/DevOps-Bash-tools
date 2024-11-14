@@ -28,6 +28,9 @@ and then opens the resulting gif
 
 If on Mac uses your browser since Mac Preview shows the gif frames instead of the running gif
 
+Also resizes the terminal to be a standard 80x25 characters before it begins. Set the environment variable
+NO_RESIZE_TERMINAL to any value to avoid this
+
 
 Requires ttygif to be installed, attempts to install it via your package manager if not found in \$PATH
 "
@@ -46,7 +49,9 @@ if ! type -P ttygif &>/dev/null; then
     "$srcdir/../packages/install_packages.sh" ttygif
 fi
 
-resize -s 25 80
+if [ -n "${NO_RESIZE_TERMINAL:-}" ]; then
+    resize -s 25 80
+fi
 
 clear
 
