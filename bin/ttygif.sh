@@ -60,6 +60,7 @@ ttygif "$ttyrec_recording_file"
 gif="tty.gif"
 
 if [ -d ~/Desktop/Screenshots ]; then
+    # trying to move to filename with HH:MM:SS screws up so separate time components with dots instead of colons
     new_file=~/Desktop/Screenshot/"tty-$(date '+%F_%H.%M.%S').gif"
     timestamp "Moving $gif to $new_file"
     mv -iv "$gif" "$new_file"
