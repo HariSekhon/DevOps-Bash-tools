@@ -52,7 +52,7 @@ gif="${1:-asciinema-$(date '+%F_%H.%M.%S').gif}"
 if ! [[ "$gif" =~ \.gif$ ]]; then
     gif="$gif.gif"
 fi
-recording_file="/tmp/asciinema.$$"
+recording_file="/tmp/asciinema.$$.cast"
 
 if ! type -P asciinema &>/dev/null; then
     "$srcdir/../packages/install_packages.sh" asciinema
