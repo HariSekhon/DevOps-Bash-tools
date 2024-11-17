@@ -353,6 +353,9 @@ export desk="$desktop"
 alias desktop='cd "$desktop"'
 alias desk=desktop
 
+export screenshots=~/Desktops/Screenshots
+alias screenshots='cd "$screenshots"'
+
 export bin=~/bin
 alias bin="cd $bin"
 
