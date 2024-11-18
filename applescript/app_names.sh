@@ -13,6 +13,9 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# Prints sorted list of Applications running in the name format that can be passed to
+# the adjacent script set_frontmost_process.scpt
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
