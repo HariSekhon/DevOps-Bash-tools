@@ -13,12 +13,17 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Prints sorted list of Applications running in the name format that can be passed to
-# the adjacent script set_frontmost_process.scpt
-
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [ $# -gt 0 ]; then
+    cat <<EOF
+Prints sorted list of Applications running in the name format that can be passed to
+the adjacent script set_frontmost_process.scpt
+EOF
+    exit 3
+fi
 
 "$srcdir/get_application_names.scpt" |
 sort -fu # money
