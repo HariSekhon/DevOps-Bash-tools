@@ -35,11 +35,15 @@ set output to text 1 thru -2 of output
 
 -- doesn't come out right due to carriage returns
 --do shell script "echo " & quoted form of output
+-- even this outputs carriage returns
+--do shell script "echo " & quoted form of output & " | tr '\r' '\n'"
 
 -- annoying pop-up
 --display dialog output as text
 
-log output
+-- outputs to stderr instead of stdout, use implicit print of last value instead
+--log output
+output
 
 -- output is unsorted and sorting in Applescript requires crude in-code sorting like Bubblescript to passing array out
 -- to shell sort and back which results in a string formatting output one character per line BS, just wrap this in quick
