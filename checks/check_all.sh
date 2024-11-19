@@ -186,6 +186,10 @@ if [ -z "${NO_PYTHON_PYLINT_CHECK:-}" ]; then
     "$srcdir/check_python_pylint.sh"
 fi
 
+if [ -z "${NO_JAVASCRIPT_ESLINT_CHECK:-}" ]; then
+    "$srcdir/check_javascript_eslint.sh"
+fi
+
 #"$srcdir/../python/python3.sh"
 
 # this is usually run after build, no point testing again
