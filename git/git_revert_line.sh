@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Reverts the first line that matches a given regex from the Git head commit's version of the same line number
 
-Useful to revert some changes caused by over zealous sed'ing scripts on where you want to cherry-pick revert a single line change
+Useful to revert some changes caused by over zealous sed'ing scripts, where you want to cherry-pick revert a single line change
 
 Only reverts the first matching line for safety in case you do something stupid like passing . and end up losing all uncommitted changes
 "
