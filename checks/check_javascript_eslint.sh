@@ -45,6 +45,11 @@ section "E s L i n t"
 
 start_time="$(start_timer)"
 
+if ! type -P eslint &>/dev/null &&
+    type -P npm; then
+    npm install eslint
+fi
+
 if type -P eslint &>/dev/null; then
     type -P eslint
     eslint --version
