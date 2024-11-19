@@ -38,7 +38,10 @@ shift ||:
 files="$(find_python_jython_files "$directory" -maxdepth 2)"
 
 if [ -z "$files" ]; then
+    # this trick allows importing or calling as script
+    # shellcheck disable=SC2317
     return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
     exit 0
 fi
 
