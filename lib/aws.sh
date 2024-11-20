@@ -53,6 +53,9 @@ aws_region(){
         echo "FAILED to get AWS region in aws_region() function in lib/aws.sh" >&2
         return 1
     fi
+    if ! is_aws_region "$region"; then
+        die "Invalid AWS Region returned, failed regex validation: $region"
+    fi
     echo "$region"
 }
 
@@ -171,6 +174,85 @@ aws_sso_token(){
     local sso_cache_file
     sso_cache_file="$(aws_sso_cache)"
     jq -r .accessToken < "$sso_cache_file"
+}
+
+aws_sso_role(){
+    role="${AWS_DEFAULT_ROLE:-${AWS_ROLE:-${ROLE:-}}}"
+    if ! is_blank "$role"; then
+        log "Using role from environment variable: $role"
+        echo "$role"
+    else
+        log "Determining role from currently authenticated AWS SSO role"
+        role="$(
+        aws sts get-caller-identity --query Arn --output text |
+        sed '
+            s|^arn:aws:sts::[:digit:]\{12\}:assumed-role/AWSReservedSSO_||;
+            s|_[:alnum:]\{16\}/.+$||;
+        '
+    )"
+        log "Determined role to be: $role"
+        echo "$role"
+    fi
+}
+
+aws_sso_start_url(){
+    local sso_start_url
+    log "Determining SSO Start URL"
+    sso_start_url="$(aws configure get sso_start_url || :)"
+    if is_blank "$sso_start_url"; then
+        # shouldn't fall through to this
+        log "Failed to determine SSO Start URL from 'aws configure', falling back to trying the highest occurence in sso cache file"
+        local sso_cache_file
+        sso_cache_file="$(aws_sso_cache)"
+        sso_start_url="$(
+            jq -Mr '.startUrl' "$sso_cache_file" |
+            sed '/^null$/d' |
+            sort |
+            uniq -c |
+            sort -nr |
+            awk '{print \$2; exit}'
+        )"
+    fi
+    if ! is_url "$sso_start_url"; then
+        die "Invalid AWS SSO Start URL returned, failed regex validation: $sso_start_url"
+    fi
+    log "Determined SSO Start URL: $sso_start_url"
+    echo "$sso_start_url"
+}
+
+aws_sso_start_region(){
+    log "Determining SSO Start Region from config"
+    local sso_cache_file
+    sso_cache_file="$(aws_sso_cache)"
+    local sso_start_region
+    sso_start_region="$(jq -Mr '.region' "$sso_cache_file")"
+    if ! is_aws_region "$sso_start_region"; then
+        die "Invalid AWS SSO Start Region returned, failed regex validation: $sso_start_region"
+    fi
+    log "Determined SSO Start Region: $sso_start_region"
+}
+
+aws_region_from_env(){
+    local region
+    region="${AWS_DEFAULT_REGION:-${AWS_REGION:-${REGION:-}}}"
+    if ! is_blank "$region"; then
+        log "Using region from environment variable: $region"
+    else
+        region="$(aws_region)"
+        if ! is_blank "$region"; then
+            log "Inferred region to be: $region"
+        elif ! is_blank "${aws_default_region:-}"; then
+            region="$aws_default_region"
+            log "Defaulting to using region: $region"
+        else
+            echo "AWS region not found from environment variables or AWS mechanism" >&2
+            return 1
+        fi
+    fi
+    if ! is_aws_region "$region"; then
+        die "Invalid AWS region, failed regex validation: $region"
+    fi
+    echo "$region"
 }
 
 is_aws_region(){
