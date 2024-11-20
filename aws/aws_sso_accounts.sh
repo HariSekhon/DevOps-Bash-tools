@@ -39,6 +39,10 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+if ! is_aws_sso_logged_in; then
+    aws sso login
+fi
+
 # find is not as good for finding the sorted latest cache file
 # shellcheck disable=SC2012
 latest_sso_cache_file="$(ls -t ~/.aws/sso/cache/*.json | head -n1)"
