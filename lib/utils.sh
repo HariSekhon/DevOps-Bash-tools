@@ -1255,6 +1255,11 @@ is_port(){
     fi
 }
 
+is_url(){
+    local arg="$1"
+    [[ "$arg" =~ ^$url_regex$ ]]
+}
+
 exponential(){
     local int="$1"
     local max="${2:-}"
