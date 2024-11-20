@@ -24,7 +24,8 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_aws_cli_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
-instance_id_regex='^i-[0-9a-fA-F]{17}$'
+aws_region_regex='([a-z]{2}-[a-z]+-\d{1})'
+instance_id_regex='i-[0-9a-fA-F]{17}'
 ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
 # S3 URL regex with s3:// prefix
 s3_regex='s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)$|^s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)'
@@ -150,6 +151,11 @@ aws_validate_volume_id(){
     Invalid volume ID given, expected format: vol-xxxxxxxxxxxxxxxxx,
                                    but given: $volume_id"
     fi
+}
+
+is_aws_region(){
+    local arg="$1"
+    [[ "$arg" =~ ^$aws_region$ ]]
 }
 
 is_s3_url(){
