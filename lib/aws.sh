@@ -153,6 +153,26 @@ aws_validate_volume_id(){
     fi
 }
 
+aws_sso_login_if_not_already(){
+    if ! is_aws_sso_logged_in; then
+        # output to stderr so that if we are collecting the output from this script,
+        # we do not collect any output from sso login
+        aws sso login 2>&1
+    fi
+}
+
+aws_sso_cache(){
+    # find is not as good for finding the sorted latest cache file
+    # shellcheck disable=SC2012
+    ls -t ~/.aws/sso/cache/*.json | head -n1
+}
+
+aws_sso_token(){
+    local sso_cache_file
+    sso_cache_file="$(aws_sso_cache)"
+    jq -r .accessToken < "$sso_cache_file"
+}
+
 is_aws_region(){
     local arg="$1"
     [[ "$arg" =~ ^$aws_region_regex$ ]]
