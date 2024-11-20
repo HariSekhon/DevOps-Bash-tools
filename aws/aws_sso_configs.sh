@@ -77,5 +77,6 @@ sso_region = $sso_start_region
 sso_account_id = $id
 sso_role_name = $role
 region = $region
+
 EOF
 done
