@@ -24,7 +24,7 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034
 usage_aws_cli_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
-aws_region_regex='[a-z]{2}-[a-z]+-\d{1}'
+aws_region_regex='[a-z]{2}-[a-z]+-[[:digit:]]'
 instance_id_regex='i-[0-9a-fA-F]{17}'
 ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
 # S3 URL regex with s3:// prefix
