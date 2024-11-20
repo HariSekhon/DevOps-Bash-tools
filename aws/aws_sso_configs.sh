@@ -28,7 +28,10 @@ Requires you to already be logged in to AWS SSO in order to use the access token
 
 If you are not currently authenticated, with prompt to log you in first
 
+
 Config contents:
+
+.   These assume you are using the same config for each SSO account. Edit the resulting config otherwise
 
     Start URL - infers from current config
 
@@ -36,9 +39,11 @@ Config contents:
 
     REGION - infers from current config. Set the standard AWS environment variable AWS_DEFAULT_REGION, or alternatively AWS_REGION or REGION in that order of precedence, otherwise it will default to eu-west-1 if all of the previous inferences fail
 
+
 Uses the adjacent script to get the AWS Account ID and Name for each SSO account:
 
     aws_sso_accounts.sh
+
 
 $usage_aws_cli_required
 "
