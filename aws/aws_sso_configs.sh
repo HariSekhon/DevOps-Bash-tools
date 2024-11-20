@@ -51,13 +51,15 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-aws_sso_login_if_not_already
+export aws_default_region="eu-west-1"
 
 # force functions to log with timestamps
 export VERBOSE=1
-role="$(aws_sso_role)"
 
-export aws_default_region="eu-west-1"
+aws_sso_login_if_not_already
+
+role="$(aws_sso_role)"
+echo >&2
 
 region="$(aws_region_from_env)"
 
