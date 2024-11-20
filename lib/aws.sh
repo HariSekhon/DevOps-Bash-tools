@@ -29,6 +29,10 @@ ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
 # S3 URL regex with s3:// prefix
 s3_regex='s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)$|^s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)'
 
+is_aws_sso_logged_in(){
+    aws sts get-caller-identity &>/dev/null
+}
+
 aws_account_id(){
     aws sts get-caller-identity --query Account --output text
 }
