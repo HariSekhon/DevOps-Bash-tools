@@ -46,17 +46,9 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-if ! is_aws_sso_logged_in; then
-    # output to stderr so that if we are collecting the output from this script,
-    # we do not collect any output from sso login
-    aws sso login 2>&1
-fi
+aws_sso_login_if_not_already
 
-# find is not as good for finding the sorted latest cache file
-# shellcheck disable=SC2012
-latest_sso_cache_file="$(ls -t ~/.aws/sso/cache/*.json | head -n1)"
-
-access_token="$(jq -r .accessToken < "$latest_sso_cache_file")"
+access_token="$(aws_sso_token)"
 
 # awk preprocessing trick to not split the third column name which can contain spaces as then it'd looks weird
 aws sso list-accounts --access-token "$access_token" |
