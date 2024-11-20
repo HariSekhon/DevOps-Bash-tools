@@ -28,9 +28,12 @@ Requires you to already be logged in to AWS SSO in order to use the access token
 
 If you are not currently authenticated, with prompt to log you in first
 
-Output:
+Output is tab-delimited:
 
-<account_id>    <account_name>    <root_email_address>
+<account_id>    <root_account_email>    <account_name>
+
+
+The account name is last because it may contain spaces and this is easier to
 
 $usage_aws_cli_required
 "
@@ -55,6 +58,9 @@ latest_sso_cache_file="$(ls -t ~/.aws/sso/cache/*.json | head -n1)"
 
 access_token="$(jq -r .accessToken < "$latest_sso_cache_file")"
 
+# awk preprocessing trick to not split the third column name which can contain spaces as then it'd looks weird
 aws sso list-accounts --access-token "$access_token" |
-jq -r '.accountList[] | [.accountId, .accountName, .emailAddress] | @tsv' |
-column -t
+jq -r '.accountList[] | [.accountId, .emailAddress, .accountName] | @tsv' |
+sort -fuk 3 |
+awk '{printf "%s\t%s\t", $1, $2; $1=""; $2=""; print}' |
+column -t -s $'\t'
