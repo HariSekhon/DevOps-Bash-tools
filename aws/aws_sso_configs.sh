@@ -79,11 +79,11 @@ while read -r id _email name; do
     name="$(tr '[:upper:]' '[:lower:]' <<< "$name" | sed 's/[^[:alnum:]]/-/g')"
     cat <<EOF
 [profile $name]
-sso_start_url = $sso_start_url
-sso_region = $sso_start_region
+sso_start_url  = $sso_start_url
+sso_region     = $sso_start_region
 sso_account_id = $id
-sso_role_name = $role
-region = $region
+sso_role_name  = $role
+region         = $region
 
 EOF
 done
