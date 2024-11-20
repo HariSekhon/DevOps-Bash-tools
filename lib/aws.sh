@@ -185,8 +185,8 @@ aws_sso_role(){
         role="$(
         aws sts get-caller-identity --query Arn --output text |
         sed '
-            s|^arn:aws:sts::[:digit:]\{12\}:assumed-role/AWSReservedSSO_||;
-            s|_[:alnum:]\{16\}/.+$||;
+            s|^arn:aws:sts:.*:assumed-role/AWSReservedSSO_||;
+            s|_[[:alnum:]]\{16\}/.*$||;
         '
     )"
         log "Determined role to be: $role"
