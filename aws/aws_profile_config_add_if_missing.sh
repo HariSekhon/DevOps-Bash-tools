@@ -23,6 +23,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Reads AWS profile config blocks from stdin and appends them to the ~/.aws/config file if the profile section is not found
+
+Uses adjacent script:
+
+    ../data/ini_config_add_if_missing.sh
 "
 
 # used by usage() in lib/utils.sh
