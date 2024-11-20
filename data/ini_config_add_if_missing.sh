@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Read INI config blocks from stdin and appends them to the specified file if the section is not found
+Reads INI config blocks from stdin and appends them to the specified file if the section is not found
 "
 
 # used by usage() in lib/utils.sh
