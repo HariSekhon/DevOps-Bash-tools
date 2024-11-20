@@ -40,7 +40,9 @@ help_usage "$@"
 num_args 0 "$@"
 
 if ! is_aws_sso_logged_in; then
-    aws sso login
+    # output to stderr so that if we are collecting the output from this script,
+    # we do not collect any output from sso login
+    aws sso login 2>&1
 fi
 
 # find is not as good for finding the sorted latest cache file
