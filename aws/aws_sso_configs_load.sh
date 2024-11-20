@@ -36,4 +36,4 @@ help_usage "$@"
 max_args 1 "$@"
 
 "$srcdir/aws_sso_configs.sh" |
-"$srcdir/../aws_profile_config_add_if_missing.sh" "$@"
+"$srcdir/aws_profile_config_add_if_missing.sh" "$@"
