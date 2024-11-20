@@ -517,6 +517,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_rds_get_version.sh` - quickly retrieve the version of an RDS database to know which JDBC jar version to download using `install/download_*_jdbc.sh` when setting up connections
   - `aws_route53_check_ns_records.sh` - checks AWS [Route 53](https://aws.amazon.com/route53/) public hosted zones NS servers are delegated in the public DNS hierarchy and that there are no rogue NS servers delegated not matching the Route 53 zone configuration
   - `aws_sso_accounts.sh` - lists all AWS SSO accounts the current SSO user has access to
+  - `aws_sso_configs.sh` - generates AWS SSO configs for all AWS SSO accounts the currently logged in SSO user has access to
   - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
   - `aws_s3_bucket.sh` - creates an S3 bucket, blocks public access, enables versioning, encryption, and optionally locks out any given user/group/role ARNs via a bucket policy for safety (eg. to stop Power Users accessing a sensitive bucket like Terraform state)
   - `aws_s3_buckets_block_public_access.sh` - blocks public access to one or more given S3 buckets or files containing bucket names, one per line
