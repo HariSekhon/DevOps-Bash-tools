@@ -28,6 +28,10 @@ Requires you to already be logged in to AWS SSO in order to use the access token
 
 If you are not currently authenticated, with prompt to log you in first
 
+Output:
+
+<account_id>    <account_name>    <root_email_address>
+
 $usage_aws_cli_required
 "
 
@@ -51,4 +55,5 @@ latest_sso_cache_file="$(ls -t ~/.aws/sso/cache/*.json | head -n1)"
 
 access_token="$(jq -r .accessToken < "$latest_sso_cache_file")"
 
-aws sso list-accounts --access-token "$access_token"
+aws sso list-accounts --access-token "$access_token" |
+jq -r '.accountList[] | [.accountId, accountName, emailAddress] | @tsv'
