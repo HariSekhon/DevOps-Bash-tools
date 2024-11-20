@@ -51,6 +51,8 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+aws_sso_login_if_not_already
+
 # force functions to log with timestamps
 export VERBOSE=1
 role="$(aws_sso_role)"
