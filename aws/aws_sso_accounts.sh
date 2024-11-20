@@ -56,4 +56,5 @@ latest_sso_cache_file="$(ls -t ~/.aws/sso/cache/*.json | head -n1)"
 access_token="$(jq -r .accessToken < "$latest_sso_cache_file")"
 
 aws sso list-accounts --access-token "$access_token" |
-jq -r '.accountList[] | [.accountId, .accountName, .emailAddress] | @tsv'
+jq -r '.accountList[] | [.accountId, .accountName, .emailAddress] | @tsv' |
+column -t
