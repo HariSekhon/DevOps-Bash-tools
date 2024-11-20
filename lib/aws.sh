@@ -50,11 +50,10 @@ aws_region(){
         region="$(aws ec2 describe-availability-zones --query "AvailabilityZones[0].RegionName" --output text || :)"
     fi
     if [ -z "$region" ]; then
-        echo "FAILED to get AWS region in aws_region() function in lib/aws.sh" >&2
-        return 1
+        die "FAILED to get AWS region in aws_region() function in lib/aws.sh"
     fi
     if ! is_aws_region "$region"; then
-        die "Invalid AWS Region returned, failed regex validation: $region"
+        die "Invalid AWS Region returned in lib/aws.sh, failed regex validation: $region"
     fi
     echo "$region"
 }
@@ -214,7 +213,7 @@ aws_sso_start_url(){
         )"
     fi
     if ! is_url "$sso_start_url"; then
-        die "Invalid AWS SSO Start URL returned, failed regex validation: $sso_start_url"
+        die "Invalid AWS SSO Start URL returned in lib/aws.sh, failed regex validation: $sso_start_url"
     fi
     log "Determined SSO Start URL: $sso_start_url"
     echo "$sso_start_url"
@@ -230,6 +229,7 @@ aws_sso_start_region(){
         die "Invalid AWS SSO Start Region returned, failed regex validation: $sso_start_region"
     fi
     log "Determined SSO Start Region: $sso_start_region"
+    echo "$sso_start_region"
 }
 
 aws_region_from_env(){
