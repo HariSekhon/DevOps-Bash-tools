@@ -155,7 +155,7 @@ aws_validate_volume_id(){
 
 is_aws_region(){
     local arg="$1"
-    [[ "$arg" =~ ^$aws_region$ ]]
+    [[ "$arg" =~ ^$aws_region_regex$ ]]
 }
 
 is_s3_url(){
