@@ -39,16 +39,18 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+        # don't do this, solved blank columns natively now so it's easier to spot end of line issues if they end in aa comma instead of ,""
+        # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
+        #s|,$|,\"\"|;
+
 aws_foreach_profile.sh "
     '$srcdir/aws_info_csv.sh' '{profile}' |
     sed '
         s|^|\"{profile}\",|;
         1s|^\"{profile}\"|\"AWS_Profile\"|;
     '
-"
-        # don't do this, solve it natively so it's easier to spot end of line issues
-        # see aws_info_ec2_csv.sh where empty fields are set to ""
-        #s|,$|,\"\"|;
+" |
+tee "aws_info_all_profiles-$(date '%F_%H.%M.%S').csv"
 
 echo >&2
 timestamp "Script Completed Successfully: ${0##*/}"
