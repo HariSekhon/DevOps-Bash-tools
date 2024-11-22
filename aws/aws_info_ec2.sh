@@ -58,12 +58,7 @@ EOF
 declare -A ami_map
 
 timestamp "Getting all unique AMI IDs in use"
-ami_ids="$(
-    aws ec2 describe-instances \
-        --query 'Reservations[*].Instances[*].ImageId' \
-        --output text |
-    sort -u
-)"
+ami_ids="$("$srcdir/aws_ec2_ami_ids.sh")"
 
 while read -r ami_id; do
     [[ -z "$ami_id" ]] && continue
