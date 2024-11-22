@@ -26,6 +26,9 @@ List AWS EC2 instances, their DNS names and States in an easy to read table outp
 
 Useful for quickly investigating running instances and comparing to configured FQDN addresses in referencing software
 
+See also:
+
+    aws_ec2_info.sh - gives similar info but also resolves AMI names and adds an architecture column
 
 $usage_aws_cli_required
 "
