@@ -45,8 +45,8 @@ fi
 
 # one of the few legit uses of cat - tr can't process a filename arg or stdin
 cat "$@" |
+tr '[:punct:]' ' ' |
 tr '[:space:]' '\n' |
-#tr -d '[:punct:]' |
 tr '[:upper:]' '[:lower:]' |
 sed "
     /^[[:space:]]*$/d;
