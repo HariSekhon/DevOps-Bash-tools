@@ -36,4 +36,4 @@ usage_args=""
 
 help_usage "$@"
 
-aws_foreach_profile.sh "'$srcdir/aws_info.sh' '{id}'"
+aws_foreach_profile.sh "'$srcdir/aws_info.sh' '{profile}'"
