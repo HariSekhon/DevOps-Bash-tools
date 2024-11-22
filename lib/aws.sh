@@ -38,6 +38,14 @@ aws_account_id(){
     aws sts get-caller-identity --query Account --output text
 }
 
+aws_account_name(){
+    # you may not have permission to the AWS Org in which case this will return an error:
+    #
+    #   An error occurred (AccessDeniedException) when calling the DescribeAccount operation: You don't have permissions to access this resource.
+    #
+    aws organizations describe-account --account-id "$AWS_ACCOUNT_ID" --query "Account.Name" --output text
+}
+
 aws_region(){
     # region actually used by the CLI, but some accounts running scripts may not have permissions to this
     # aws ec2 describe-availability-zones --output text --query 'AvailabilityZones[0].[RegionName]'
