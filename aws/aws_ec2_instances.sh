@@ -48,6 +48,7 @@ aws ec2 describe-instances \
                 " Name": Tags[?Key==`Name`].Value | [0],
                 " ID": InstanceId,
                 " State": State.Name,
+                " InstanceType": InstanceType,
                 "Public DNS": publicDnsName,
                 "Private DNS": PrivateDnsName
             }' \
