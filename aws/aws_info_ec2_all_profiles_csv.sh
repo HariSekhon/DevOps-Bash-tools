@@ -75,7 +75,8 @@ aws_foreach_profile.sh "
     sed '
         s|^|\"{profile}\",|;
         1s|^\"{profile}\"|\"AWS_Profile\"|;
-    ' | tail -n +2 >> '$csv_sorted'
+    ' | tee |
+    tail -n +2 >> '$csv_sorted'
 " |
 tee "$csv"
 
