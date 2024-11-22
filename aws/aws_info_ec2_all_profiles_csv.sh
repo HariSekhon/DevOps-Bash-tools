@@ -96,7 +96,7 @@ mv "$tmp" "$csv_sorted"
 
 echo >&2
 aws_foreach_profile.sh "
-    grep -q '\"{profile}\",' ||
+    grep -q '^\"{profile}\",' ||
     echo 'WARNING: no EC2 Instances found in AWS Profile \"{profile}\"' '$csv_sorted'
 " >&2
 
