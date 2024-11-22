@@ -74,7 +74,7 @@ tee "$csv"
 tmp="$(mktemp)"
 
 # this only makes sense when combining a single CSV output format which is why this is EC2 only
-sort -fu "$csv" > "$tmp"
+sort -u "$csv" > "$tmp"
 
 mv "$tmp" "$csv"
 
