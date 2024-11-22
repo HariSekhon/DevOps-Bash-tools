@@ -30,6 +30,8 @@ and automatically generated AWS SSO configs
 
 See also:
 
+    aws_sso_config_duplicate_profile_names.sh
+
     aws_sso_configs.sh - iterates and generates AWS SSO configs for all accounts your currently authenticated user has access to
 
     aws_sso_configs_save.sh - saves each the above generated configs to ~/.aws/config if they don't already exist by profile name
