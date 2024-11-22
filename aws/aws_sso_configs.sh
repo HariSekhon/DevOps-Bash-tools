@@ -74,15 +74,26 @@ echo >&2
 sso_start_region="$(aws_sso_start_region)"
 echo >&2
 
+timestamp "Getting AWS SSO accounts this account has access to"
 "$srcdir/aws_sso_accounts.sh" |
 while read -r id _email name; do
     name="$(tr '[:upper:]' '[:lower:]' <<< "$name" | sed 's/[^[:alnum:]]/-/g')"
+    timestamp "Looking up available roles for account '$name' ($id)"
+    roles="$(aws sso list-account-roles --account-id "$id")"
+    if grep -Fxq "$role" <<< "$roles"; then
+        sso_role="$role"
+    else
+        timestamp "Role '$role' not available on account '$name' ($id) - available roles:"
+        echo "$roles" >&2
+        sso_role="$(head -n1 <<< "$roles")"
+        timestamp "Using first available role '$sso_role' for account '$name' ($id) - edit to another role if necessary"
+    fi
     cat <<EOF
 [profile $name]
 sso_start_url  = $sso_start_url
 sso_region     = $sso_start_region
 sso_account_id = $id
-sso_role_name  = $role
+sso_role_name  = $sso_role
 region         = $region
 
 EOF
