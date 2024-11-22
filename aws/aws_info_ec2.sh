@@ -86,6 +86,7 @@ for ami_id in "${!ami_map[@]}"; do
     s/\"$ami_id\"/\"$ami_name\"/g;"
 done
 
+timestamp "Getting list of EC2 instances"
 # shellcheck disable=SC2016
 json="$(
     aws ec2 describe-instances \
@@ -103,6 +104,7 @@ json="$(
     jq_debug_pipe_dump
 )"
 
+timestamp "Generating CSV output with AMI images IDs resolved to names"
 jq -r '
     .[][] |
     [ .ID, .Name, .State, .InstanceType, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
