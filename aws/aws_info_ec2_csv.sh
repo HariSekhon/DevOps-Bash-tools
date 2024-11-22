@@ -115,4 +115,4 @@ jq -r '
     @csv
 ' <<< "$json" |
 sed "$sed_script" |
-tee "aws_info_ec2-$(date '%F_%H.%M.%S').csv"
+tee "aws_info_ec2-$aws_account_id-$(date '%F_%H.%M.%S').csv"
