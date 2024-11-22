@@ -104,6 +104,7 @@ add_PATH "/opt/homebrew/bin/"  # on new M1 Macs
 add_PATH "$bash_tools"
 add_PATH ~/bin
 add_PATH ~/.local/bin
+add_PATH ~/venv/bin
 while read -r x; do
     # much less noisy to just just find the right dirs instead of testing lots of files
     #[ -d "$x" ] || continue
