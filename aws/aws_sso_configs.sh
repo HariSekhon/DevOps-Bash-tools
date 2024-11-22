@@ -81,7 +81,14 @@ timestamp "Getting AWS SSO accounts this account has access to"
 while read -r id _email name; do
     name="$(tr '[:upper:]' '[:lower:]' <<< "$name" | sed 's/[^[:alnum:]]/-/g')"
     timestamp "Looking up available roles for account '$name' ($id)"
-    roles="$(aws sso list-account-roles --account-id "$id" --access-token "$access_token")"
+    roles="$(
+        aws sso list-account-roles \
+            --account-id "$id" \
+            --access-token "$access_token" \
+            --query 'roleList[*].roleName' \
+            --output text |
+        tr '[:space:]' '\n'
+    )"
     if grep -Fxq "$role" <<< "$roles"; then
         sso_role="$role"
     else
