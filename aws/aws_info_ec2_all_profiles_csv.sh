@@ -90,9 +90,7 @@ tmp="$(mktemp)"
 # we'd have to combine all the individual CSVs but they have different timestamps, hard to predict, and don't want to make them less granular
 head -n1 "$csv" > "$tmp"
 
-aws_foreach_profile.sh "
-    tail -q -n +2 aws_info_ec2-*-\"$LOG_TIMESTAMP.csv\"
-" |
+tail -q -n +2 aws_info_ec2-*-"$LOG_TIMESTAMP.csv" |
 sort -fu >> "$tmp"
 
 mv "$tmp" "$csv_sorted"
