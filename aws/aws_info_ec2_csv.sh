@@ -46,6 +46,9 @@ if [ $# -gt 0 ]; then
     export AWS_PROFILE="$aws_profile"
 fi
 
+aws_account_id="$(aws_account_id)"
+
+csv="aws_info_ec2-$aws_account_id-$(date '%F_%H.%M.%S').csv"
 
 # AWS Virtual Machines
 cat >&2 <<EOF
@@ -115,4 +118,4 @@ jq -r '
     @csv
 ' <<< "$json" |
 sed "$sed_script" |
-tee "aws_info_ec2-$aws_account_id-$(date '%F_%H.%M.%S').csv"
+tee "$csv"
