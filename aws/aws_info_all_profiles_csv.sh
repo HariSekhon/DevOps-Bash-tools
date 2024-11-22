@@ -50,4 +50,5 @@ aws_foreach_profile.sh "
         # see aws_info_ec2_csv.sh where empty fields are set to ""
         #s|,$|,\"\"|;
 
+echo >&2
 timestamp "Script Completed Successfully: ${0##*/}"
