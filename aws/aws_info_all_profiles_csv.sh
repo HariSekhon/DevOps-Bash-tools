@@ -27,6 +27,10 @@ Gathers AWS Info across all projects in CSV format
 
 Combines aws_foreach_profile.sh and aws_info_csv.sh
 
+Outputs to both stdout and a file called aws_info_all_profiles-YYYY-MM-DD_HH.MM.SS.csv
+
+So that you can diff subsequent runs to see the difference between EC2 VMs that come and go due to AutoScaling Groups
+
 
 $usage_aws_cli_required
 "
