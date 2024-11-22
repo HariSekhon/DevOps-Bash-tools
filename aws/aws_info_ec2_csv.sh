@@ -96,7 +96,7 @@ json="$(
                     "InstanceType": InstanceType,
                     "AMI": ImageId,
                     "Architecture": Architecture,
-                    " Platform": PlatformDetails,
+                    "Platform": PlatformDetails,
                     "PublicDNS": publicDnsName,
                     "PrivateDNS": PrivateDnsName
                 }' \
