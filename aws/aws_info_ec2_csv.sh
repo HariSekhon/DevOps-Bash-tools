@@ -52,7 +52,7 @@ fi
 
 aws_account_id="$(aws_account_id)"
 
-csv="aws_info_ec2-$aws_account_id-$(date '%F_%H.%M.%S').csv"
+csv="aws_info_ec2-$aws_account_id-$(date '+%F_%H.%M.%S').csv"
 
 # AWS Virtual Machines
 cat >&2 <<EOF
