@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 script_basename="${0##*/}"
 script_basename="${script_basename%%.sh}"
 
+log_timestamp="$(date '+%F_%H.%M.%S')"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists AWS EC2 Instances in quoted CSV format across all configured AWS profiles for their configured region
@@ -46,7 +48,8 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-csv="$script_basename-$(date '+%F_%H.%M.%S').csv"
+csv="$script_basename-$log_timestamp.csv"
+csv_sorted="$script_basename-$log_timestamp-sorted.csv"
 
 # AWS Virtual Machines
 cat >&2 <<EOF
@@ -62,21 +65,30 @@ EOF
         # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
         #s|,$|,\"\"|;
 
+# aws_info_ec2_csv.sh supports fixing the timestamp so we can combine this later
+export LOG_TIMESTAMP="$log_timestamp"
+
 aws_foreach_profile.sh "
     '$srcdir/aws_info_ec2_csv.sh' '{profile}' |
     sed '
         s|^|\"{profile}\",|;
         1s|^\"{profile}\"|\"AWS_Profile\"|;
-    '
+    ' | tail -n +2 >> '$csv_sorted'
 " |
 tee "$csv"
 
 tmp="$(mktemp)"
 
-# this only makes sense when combining a single CSV output format which is why this is EC2 only
-sort -u "$csv" > "$tmp"
+# sorting only makes sense when combining a single CSV output format which is why this is EC2 only
 
-mv "$tmp" "$csv"
+# we'd have to combine all the individual CSVs but they have different timestamps, hard to predict, and don't want to make them less granular
+head -n1 "$csv" > "$csv_sorted"
+
+aws_foreach_profile.sh "
+    tail -n +2 'aws_info_ec2-$LOG_TIMESTAMP.csv' >> '$tmp'
+"
+
+mv "$tmp" "$csv_sorted"
 
 echo >&2
 timestamp "Script Completed Successfully: ${0##*/}"
