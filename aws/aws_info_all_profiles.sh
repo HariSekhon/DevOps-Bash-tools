@@ -27,6 +27,7 @@ Gathers AWS Info across all projects
 
 Combines aws_foreach_profile.sh and aws_info.sh
 
+
 $usage_aws_cli_required
 "
 
