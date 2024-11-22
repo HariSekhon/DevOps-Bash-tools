@@ -86,6 +86,7 @@ for ami_id in "${!ami_map[@]}"; do
 done
 
 timestamp "Getting list of EC2 instances with translated AMI IDs to Names"
+timestamp "Putting AMI last as replacing the AMI IDs with Names will mess up the character width alignment of the last column"
 echo >&2
 # shellcheck disable=SC2016
 aws ec2 describe-instances \
