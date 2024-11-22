@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 script_basename="${0##*/}"
 script_basename="${script_basename%%.sh}"
 
+log_timestamp="${LOG_TIMESTAMP:-$(date '+%F_%H.%M.%S')}"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists AWS EC2 Instances in quoted CSV format in the current AWS account
@@ -55,7 +57,7 @@ fi
 
 aws_account_id="$(aws_account_id)"
 
-csv="$script_basename-$aws_account_id-$(date '+%F_%H.%M.%S').csv"
+csv="$script_basename-$aws_account_id-$log_timestamp.csv"
 
 # AWS Virtual Machines
 cat >&2 <<EOF
