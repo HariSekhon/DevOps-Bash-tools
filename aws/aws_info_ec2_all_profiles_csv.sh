@@ -26,7 +26,7 @@ script_basename="${script_basename%%.sh}"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Gathers AWS EC2 Instances across all projects for their config configured regions in CSV format
+Lists AWS EC2 Instances in quoted CSV format across all configured AWS profiles for their configured region
 
 Combines aws_foreach_profile.sh and aws_info_csv.sh
 
