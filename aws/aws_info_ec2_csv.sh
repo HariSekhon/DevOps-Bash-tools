@@ -114,4 +114,5 @@ jq -r '
     map(if . == null or . == "" then "" else . end) |
     @csv
 ' <<< "$json" |
-sed "$sed_script"
+sed "$sed_script" |
+tee "aws_info_ec2-$(date '%F_%H.%M.%S').csv"
