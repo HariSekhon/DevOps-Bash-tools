@@ -59,6 +59,8 @@ cat >&2 <<EOF
 
 Saving to: $PWD/$csv
 
+Sorted and header deduplicated: $PWD/$csv_sorted
+
 EOF
 
         # don't do this, solved blank columns natively now so it's easier to spot end of line issues if they end in aa comma instead of ,""
