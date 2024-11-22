@@ -50,4 +50,7 @@ fi
 aws_account_id="$(aws_account_id)"
 
 "$srcdir/aws_info_ec2_csv.sh" |
-sed "s|^|\"$aws_account_id\",|"
+sed "
+    1s|^|\"AWS_Account_ID\";
+    2,\$s|^|\"$aws_account_id\",|
+"
