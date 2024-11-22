@@ -129,4 +129,4 @@ jq -r '
     @csv
 ' <<< "$json" |
 sed "$sed_script" |
-tee "$csv"
+tee 2>"$csv"
