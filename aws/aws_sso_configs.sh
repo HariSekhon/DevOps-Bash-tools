@@ -81,7 +81,6 @@ timestamp "Getting AWS SSO accounts this account has access to"
 while read -r id _email name; do
     name="$(tr '[:upper:]' '[:lower:]' <<< "$name" | sed 's/[^[:alnum:]]/-/g')"
     timestamp "Looking up available roles for account '$name' ($id)"
-    echo >&2
     roles="$(
         aws sso list-account-roles \
             --account-id "$id" \
