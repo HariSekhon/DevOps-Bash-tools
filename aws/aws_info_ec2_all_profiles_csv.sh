@@ -51,6 +51,8 @@ num_args 0 "$@"
 csv="$script_basename-$log_timestamp.csv"
 csv_sorted="$script_basename-$log_timestamp-sorted.csv"
 
+SECONDS=0
+
 # AWS Virtual Machines
 cat >&2 <<EOF
 # ============================================================================ #
@@ -101,4 +103,4 @@ aws_foreach_profile.sh "
 " >&2
 
 echo >&2
-timestamp "Script Completed Successfully: ${0##*/}"
+timestamp "Script Completed Successfully in $SECONDS secs: ${0##*/}"
