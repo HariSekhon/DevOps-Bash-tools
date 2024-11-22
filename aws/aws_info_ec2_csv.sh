@@ -20,13 +20,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/aws.sh"
 
+script_basename="${0##*/}"
+script_basename="${script_basename%%.sh}"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists AWS EC2 Instances in quoted CSV format in the current AWS account
 
 Written to be combined with aws_foreach_project.sh
 
-Outputs to both stdout and a file called aws_info_ec2-<AWS_ACCOUNT_ID>-YYYY-MM-DD_HH.MM.SS.csv
+Outputs to both stdout and a file called $script_basename-<AWS_ACCOUNT_ID>-YYYY-MM-DD_HH.MM.SS.csv
 
 So that you can diff subsequent runs to see the difference between EC2 VMs that come and go due to AutoScaling Groups
 
@@ -52,7 +55,7 @@ fi
 
 aws_account_id="$(aws_account_id)"
 
-csv="aws_info_ec2-$aws_account_id-$(date '+%F_%H.%M.%S').csv"
+csv="$script_basename-$aws_account_id-$(date '+%F_%H.%M.%S').csv"
 
 # AWS Virtual Machines
 cat >&2 <<EOF
