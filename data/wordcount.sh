@@ -46,7 +46,7 @@ fi
 #output_file="$filename.word_frequency.txt"
 
 shopt -s nocasematch
-if [[ "$1" =~ \.pdf ]]; then
+if [[ "${1:-}" =~ \.pdf ]]; then
     pdftotext "$1" -
 else
     # one of the few legit uses of cat - tr can't process a filename arg or stdin
