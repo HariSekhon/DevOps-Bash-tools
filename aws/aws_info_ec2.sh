@@ -95,7 +95,8 @@ aws ec2 describe-instances \
                 "  State": State.Name,
                 " InstanceType": InstanceType,
                 "AMI": ImageId,
-                " Architecture": "Architecture",
+                " Architecture": Architecture,
+                " Platform": PlatformDetails,
                 " PublicDNS": publicDnsName,
                 " PrivateDNS": PrivateDnsName
             }' \
