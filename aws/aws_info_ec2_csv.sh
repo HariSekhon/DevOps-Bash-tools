@@ -108,7 +108,7 @@ timestamp "Generating CSV output with AMI images IDs resolved to names"
 echo >&2
 jq -r '
     .[][] |
-    [ .ID, .Name, .State, .InstanceType, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
+    [ .ID, .Name, .State, .InstanceType, .Platform, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
     @csv
 ' <<< "$json" |
 sed "$sed_script"
