@@ -23,9 +23,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints duplicate AWS SSO configs from the given \$AWS_CONFIG_FILE or given file argument
+Prints duplicate AWS SSO config profile names that are using the same sso_account_id
+from the given \$AWS_CONFIG_FILE or given file argument
 
-Useful to find and remove / comment out an ~/.aws/config with a mix of hand crafted and automatically generated AWS SSO configs
+Useful to find and remove / comment out an ~/.aws/config with a mix of hand crafted
+and automatically generated AWS SSO configs
 
 See also:
 
