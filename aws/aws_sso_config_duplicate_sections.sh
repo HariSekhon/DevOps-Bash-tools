@@ -57,6 +57,9 @@ duplicate_account_ids="$(
 section=""
 
 while read -r account_id; do
+    if is_blank "$account_id"; then
+        continue
+    fi
     if ! is_int "$account_id"; then
         die "ERROR: detected invalid AWS Account ID: $account_id"
     fi
