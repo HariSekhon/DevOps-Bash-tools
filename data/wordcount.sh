@@ -50,7 +50,7 @@ tr '[:space:]' '\n' |
 tr '[:upper:]' '[:lower:]' |
 sed "
     /^[[:space:]]*$/d;
-    /^$USER$/d;
+    #/^$USER$/d;
     # because sometimes you want to see the occurence of emojis in WhatsApp chats
     #/^[^[:alnum:]]*$/d;
 " |
