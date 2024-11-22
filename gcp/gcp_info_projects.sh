@@ -42,6 +42,8 @@ help_usage "$@"
 
 max_args 1 "$@"
 
+check_bin gcloud
+
 if [ $# -gt 0 ]; then
     project_id="$1"
     shift || :
