@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates a word freqency list ranked by most used words at the top
+Creates a word count list ranked by most used words at the top
 
 Works like a standard unix filter program - pass in stdin or give it a filename, and outputs to stdout, so you can continue to pipe or redirect to a file as usual
 "
@@ -43,14 +43,13 @@ fi
 
 #output_file="$filename.word_frequency.txt"
 
-# one of the few legit uses of cat - tr can't process a filename arg or stdin
-cat "$@" |
-tr ' ' '\n' |
 sed '
     /^[[:space:]]*$/d;
     # because sometimes you want to see the occurence of emojis in WhatsApp chats
     #/^[^[:alnum:]]*$/d;
-' |
+' "$@" |
+tr '[:space:]' '\n' |
+tr -d '[:punct:]' |
 tr '[:upper:]' '[:lower:]' |
 sort |
 uniq -c |
