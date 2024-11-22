@@ -58,4 +58,4 @@ aws ec2 describe-instances \
     --output text |
 tr '[:space:]' '\n' |
 sort -u |
-sed 's/^[[:space:]]*$/d'
+sed '/^[[:space:]]*$/d'
