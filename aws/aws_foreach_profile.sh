@@ -71,4 +71,4 @@ while read -r profile; do
     eval "${cmd[@]}"
     echo >&2
     echo >&2
-done <<< "$profile"
+done <<< "$profiles"
