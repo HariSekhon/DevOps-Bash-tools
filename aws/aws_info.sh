@@ -109,6 +109,6 @@ echo
 # Finished - silencing aws_account_name because you may not have the permissions to AWS Org to retrieve it
 cat <<EOF
 # ============================================================================ #
-# Finished listing resources for AWS account $(aws_account_id) $(aws_account_name 2>/dev/null)")
+# Finished listing resources for AWS account $(aws_account_id) $(aws_account_name 2>/dev/null)
 # ============================================================================ #
 EOF
