@@ -55,7 +55,7 @@ DevOps-Python-tools:pytools
 Spotify-tools:spotify-tools
 Spotify-Playlists:playlists
 #Spark-Apps:spark-apps
-Template-Repo:trepo
+Template-repo:trepo
 
 HAProxy-configs:haproxy-configs
 
