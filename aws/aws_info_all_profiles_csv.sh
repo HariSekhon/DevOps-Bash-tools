@@ -47,7 +47,7 @@ num_args 0 "$@"
         # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
         #s|,$|,\"\"|;
 
-csv="aws_info_all_profiles-$(date '%F_%H.%M.%S').csv"
+csv="aws_info_all_profiles-$(date '+%F_%H.%M.%S').csv"
 
 aws_foreach_profile.sh "
     '$srcdir/aws_info_csv.sh' '{profile}' |
