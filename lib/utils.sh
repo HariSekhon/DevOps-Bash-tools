@@ -1164,8 +1164,8 @@ num_args(){
 help_usage(){
     for arg; do
         case "$arg" in
-            -h|--help)  usage
-                        ;;
+            -h|-help|--help)  usage
+                              ;;
         esac
     done
 }
