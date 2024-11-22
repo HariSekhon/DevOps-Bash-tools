@@ -27,7 +27,7 @@ Gathers AWS Info across all projects
 
 Combines aws_foreach_profile.sh and aws_info.sh
 
-$gcp_info_formatting_help
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
