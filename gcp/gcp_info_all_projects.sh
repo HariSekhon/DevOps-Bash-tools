@@ -38,4 +38,6 @@ usage_args=""
 
 help_usage "$@"
 
+num_args 0 "$@"
+
 gcp_foreach_project.sh "'$srcdir/gcp_info.sh' '{id}'"
