@@ -50,19 +50,30 @@ duplicate_account_ids="$(
     uniq -d
 )"
 
+section=""
+
 while read -r account_id; do
     if ! is_int "$account_id"; then
         die "ERROR: detected invalid AWS Account ID: $account_id"
     fi
-    #grep -10 "^[[:space:]]*sso_account_id[[:space:]]*=[[:space:]]*$account_id" "$config" |
-    #sed 's
-    #awk "
-    #/^\\[/{in_section=0}
-    #/sso_account_id[[:space:]]*=[[:space:]]*$account_id/{in_section=1}
-    #in_section{print}" "$config"
-	awk "
-		/^\\[/{section=\$0; in_section=0}
-		\$0 ~ /sso_account_id = $account_id/ {in_section=1; print section}
-		in_section && \$0 !~ /^\\[/ {print}
-	" "$config"
+    found=0
+    while read -r line; do
+        if is_blank "$line"; then
+            if [ "$found" = 1 ]; then
+                echo "$section"
+                section=""
+                echo
+                found=0
+            fi
+            continue
+        elif [[ "$line" =~ ^[[:space:]]*\[.+\] ]]; then
+            section="$line"
+        else
+            section+="
+$line"
+            if [[ "$line" =~ ^[[:space:]]*sso_account_id[[:space:]]*=[[:space:]]*${account_id}[[:space:]]*$ ]]; then
+                found=1
+            fi
+        fi
+    done < "$config"
 done <<< "$duplicate_account_ids"
