@@ -26,6 +26,10 @@ Lists AWS EC2 Instances resources deployed in the current AWS account
 
 Written to be combined with aws_foreach_project.sh
 
+Outputs to both stdout and a file called aws_info_ec2-<AWS_ACCOUNT_ID>-YYYY-MM-DD_HH.MM.SS.csv
+
+So that you can diff subsequent runs to see the difference between EC2 VMs that come and go due to AutoScaling Groups
+
 
 $usage_aws_cli_required
 "
