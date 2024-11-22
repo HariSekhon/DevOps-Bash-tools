@@ -102,4 +102,8 @@ aws_foreach_profile.sh "
 " >&2
 
 echo >&2
+timestamp "Raw CSV: $csv" >&2
+echo >&2
+timestamp "Sorted and Header deduplicated CSV: $csv_sorted" >&2
+echo >&2
 timestamp "Script Completed Successfully in $SECONDS secs: ${0##*/}"
