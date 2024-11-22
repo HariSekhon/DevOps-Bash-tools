@@ -49,3 +49,5 @@ aws_foreach_profile.sh "
         # don't do this, solve it natively so it's easier to spot end of line issues
         # see aws_info_ec2_csv.sh where empty fields are set to ""
         #s|,$|,\"\"|;
+
+timestamp "Script Complete: ${0##*/}"
