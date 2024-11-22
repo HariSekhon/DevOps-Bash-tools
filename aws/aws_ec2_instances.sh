@@ -29,6 +29,7 @@ Useful for quickly investigating running instances and comparing to configured F
 See also:
 
     aws_ec2_info.sh - gives similar info but also resolves AMI names and adds an architecture column
+    aws_ec2_info_csv.sh - same as above but in quoted CSV format
 
 $usage_aws_cli_required
 "
