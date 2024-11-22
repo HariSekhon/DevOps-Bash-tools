@@ -43,6 +43,8 @@ num_args 0 "$@"
         # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
         #s|,$|,\"\"|;
 
+csv="aws_info_all_profiles-$(date '%F_%H.%M.%S').csv"
+
 aws_foreach_profile.sh "
     '$srcdir/aws_info_csv.sh' '{profile}' |
     sed '
@@ -50,7 +52,13 @@ aws_foreach_profile.sh "
         1s|^\"{profile}\"|\"AWS_Profile\"|;
     '
 " |
-tee "aws_info_all_profiles-$(date '%F_%H.%M.%S').csv"
+tee "$csv"
+
+tmp="$(mktemp)"
+
+sort -fu "$csv" > "$tmp"
+
+mv "$tmp" "$csv"
 
 echo >&2
 timestamp "Script Completed Successfully: ${0##*/}"
