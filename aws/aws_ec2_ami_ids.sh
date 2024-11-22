@@ -38,11 +38,18 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<aws_profile>]"
 
 help_usage "$@"
 
 num_args 0 "$@"
+
+if [ $# -gt 0 ]; then
+    aws_profile="$1"
+    shift || :
+    export AWS_PROFILE="$aws_profile"
+fi
+
 
 # false positive - want single quotes for * to be evaluated within AWS query not shell
 # shellcheck disable=SC2016
