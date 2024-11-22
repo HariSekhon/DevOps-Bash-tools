@@ -40,6 +40,8 @@ usage_args="[<project_id>]"
 
 help_usage "$@"
 
+max_args 1 "$@"
+
 if [ $# -gt 0 ]; then
     project_id="$1"
     shift || :
