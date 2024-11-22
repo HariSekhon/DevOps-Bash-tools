@@ -60,6 +60,8 @@ cat >&2 <<EOF
 #                   E C 2   V i r t u a l   M a c h i n e s
 # ============================================================================ #
 
+Saving to: $PWD/$csv
+
 EOF
 
 declare -A ami_map
