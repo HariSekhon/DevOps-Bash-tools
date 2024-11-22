@@ -57,7 +57,7 @@ csv="aws_info_ec2-$aws_account_id-$(date '+%F_%H.%M.%S').csv"
 # AWS Virtual Machines
 cat >&2 <<EOF
 # ============================================================================ #
-#                   E C 2   V i r t u a l   M a c h i n e s
+#                       A W S   E C 2   I n s t a n c e s
 # ============================================================================ #
 
 Saving to: $PWD/$csv
