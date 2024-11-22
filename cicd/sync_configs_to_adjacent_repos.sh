@@ -60,7 +60,7 @@ while read -r repo dir; do
     if [ $# -gt 0 ]; then
         echo "$@" | tr '[:space:]' '\n'
     else
-        sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt" |
+        sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt"
     fi |
     while read -r filename; do
         if [ "$filename" = .gitignore ]; then
