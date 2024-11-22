@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-List AWS EC2 AMI IDs in use in the current AWS account, one per line for processing in other scripts
+List AWS EC2 AMI IDs in use in the current or given AWS account, one per line for processing in other scripts
 
 Used by:
 
