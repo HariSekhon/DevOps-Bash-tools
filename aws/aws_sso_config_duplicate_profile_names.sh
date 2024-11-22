@@ -52,7 +52,8 @@ duplicate_account_ids="$(
     grep '^[[:space:]]*sso_account_id' "$config" |
     sed 's/.*=[[:space:]]*//' |
     sort |
-    uniq -d
+    uniq -d |
+    sed '^/[[:space:]]*$/d'
 )"
 
 while read -r account_id; do
