@@ -25,6 +25,8 @@ usage_description="
 Creates a word count list ranked by most used words at the top
 
 Works like a standard unix filter program - pass in stdin or give it a filename, and outputs to stdout, so you can continue to pipe or redirect to a file as usual
+
+If the filename arg is a .pdf file then uses pdftotext to dump out the words
 "
 
 # used by usage() in lib/utils.sh
