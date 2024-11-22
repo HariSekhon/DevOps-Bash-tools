@@ -47,4 +47,7 @@ if [ $# -gt 0 ]; then
     export AWS_PROFILE="$aws_profile"
 fi
 
-. "$srcdir/aws_info_ec2_csv.sh"
+aws_account_id="$(aws_account_id)"
+
+"$srcdir/aws_info_ec2_csv.sh" |
+sed "s|^|\"$aws_account_id\",|"
