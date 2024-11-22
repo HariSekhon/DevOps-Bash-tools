@@ -93,6 +93,7 @@ aws ec2 describe-instances \
     --query 'Reservations[*].Instances[*].{
                 "  Name": Tags[?Key==`Name`].Value | [0],
                 "  ID": InstanceId,
+                "  PrivateIP": PrivateIpAddress,
                 "  State": State.Name,
                 " InstanceType": InstanceType,
                 "AMI": ImageId,
