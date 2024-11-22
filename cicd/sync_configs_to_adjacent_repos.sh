@@ -31,7 +31,7 @@ and then using ../git/github_foreach_repo.sh to commit them
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<files_to_sync>]"
 
 help_usage "$@"
 
@@ -57,7 +57,11 @@ while read -r repo dir; do
         timestamp "WARNING: repo dir $dir not found, skipping..."
         continue
     fi
-    sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt" |
+    if [ $# -gt 0 ]; then
+        echo "$@" | tr '[:space:]' '\n'
+    else
+        sed 's/#.*//; /^[[:space:]]*$/d' "$srcdir/../setup/files.txt" |
+    fi |
     while read -r filename; do
         if [ "$filename" = .gitignore ]; then
             continue
