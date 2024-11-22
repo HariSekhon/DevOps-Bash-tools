@@ -52,10 +52,16 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-aws configure list-profiles --output text |
+profiles="$(aws configure list-profiles --output text)"
+
+total_profiles="$(wc -l <<< "$profiles" | sed 's/[[:space:]]/g')"
+
+i=0
+
 while read -r profile; do
+    (( i += 1 ))
     echo "# ============================================================================ #" >&2
-    echo "# AWS profile = $profile" >&2
+    echo "# ($i/$total_profiles) AWS profile = $profile" >&2
     echo "# ============================================================================ #" >&2
     export AWS_PROFILE="$profile"
     cmd=("$@")
@@ -65,4 +71,4 @@ while read -r profile; do
     eval "${cmd[@]}"
     echo >&2
     echo >&2
-done
+done <<< "$profile"
