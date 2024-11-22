@@ -26,7 +26,7 @@ script_basename="${script_basename%%.sh}"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Gathers AWS Info across all projects in CSV format
+Gathers AWS EC2 Instances across all projects for their config configured regions in CSV format
 
 Combines aws_foreach_profile.sh and aws_info_csv.sh
 
@@ -46,10 +46,6 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-        # don't do this, solved blank columns natively now so it's easier to spot end of line issues if they end in aa comma instead of ,""
-        # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
-        #s|,$|,\"\"|;
-
 csv="$script_basename-$(date '+%F_%H.%M.%S').csv"
 
 # AWS Virtual Machines
@@ -61,6 +57,10 @@ cat >&2 <<EOF
 Saving to: $PWD/$csv
 
 EOF
+
+        # don't do this, solved blank columns natively now so it's easier to spot end of line issues if they end in aa comma instead of ,""
+        # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
+        #s|,$|,\"\"|;
 
 aws_foreach_profile.sh "
     '$srcdir/aws_info_ec2_csv.sh' '{profile}' |
