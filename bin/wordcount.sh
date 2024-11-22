@@ -46,13 +46,14 @@ fi
 # one of the few legit uses of cat - tr can't process a filename arg or stdin
 cat "$@" |
 tr '[:space:]' '\n' |
-tr -d '[:punct:]' |
+#tr -d '[:punct:]' |
 tr '[:upper:]' '[:lower:]' |
-sed '
+sed "
     /^[[:space:]]*$/d;
+    /^$USER$/d;
     # because sometimes you want to see the occurence of emojis in WhatsApp chats
     #/^[^[:alnum:]]*$/d;
-' |
+" |
 sort |
 uniq -c |
 sort -k1nr  # > "$output_file"
