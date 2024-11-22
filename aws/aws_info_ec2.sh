@@ -25,6 +25,9 @@ usage_description="
 Lists AWS EC2 Instances resources deployed in the current AWS account
 
 Written to be combined with aws_foreach_project.sh
+
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
