@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists AWS EC2 Instances resources deployed in the current AWS account
+Lists AWS EC2 Instances in quoted CSV format in the current AWS account
 
 Written to be combined with aws_foreach_project.sh
 
