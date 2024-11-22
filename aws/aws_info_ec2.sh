@@ -82,7 +82,7 @@ sed_script=''
 for ami_id in "${!ami_map[@]}"; do
     ami_name="${ami_map[$ami_id]}"
     sed_script+="
-    s/[[:space:]]${ami_id}[[:space:]]/$ami_name/g;"
+    s|[[:space:]]${ami_id}[[:space:]]|$ami_name|g;"
 done
 
 timestamp "Getting list of EC2 instances with translated AMI IDs to Names"
