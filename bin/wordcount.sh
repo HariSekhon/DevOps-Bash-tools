@@ -43,14 +43,16 @@ fi
 
 #output_file="$filename.word_frequency.txt"
 
+# one of the few legit uses of cat - tr can't process a filename arg or stdin
+cat "$@" |
+tr '[:space:]' '\n' |
+tr -d '[:punct:]' |
+tr '[:upper:]' '[:lower:]' |
 sed '
     /^[[:space:]]*$/d;
     # because sometimes you want to see the occurence of emojis in WhatsApp chats
     #/^[^[:alnum:]]*$/d;
-' "$@" |
-tr '[:space:]' '\n' |
-tr -d '[:punct:]' |
-tr '[:upper:]' '[:lower:]' |
+' |
 sort |
 uniq -c |
 sort -k1nr  # > "$output_file"
