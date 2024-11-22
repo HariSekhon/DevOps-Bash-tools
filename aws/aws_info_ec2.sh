@@ -83,7 +83,7 @@ sed_script=''
 for ami_id in "${!ami_map[@]}"; do
     ami_name="${ami_map[$ami_id]}"
     sed_script+="
-    s/\"$ami_id\"/\"$ami_name\"/g;"
+    s/[[:space:]]${ami_id}[[:space:]]/$ami_name/g;"
 done
 
 timestamp "Getting list of EC2 instances with translated AMI IDs to Names"
@@ -91,14 +91,14 @@ echo >&2
 # shellcheck disable=SC2016
 aws ec2 describe-instances \
     --query 'Reservations[*].Instances[*].{
-                "Name": Tags[?Key==`Name`].Value | [0],
-                "ID": InstanceId,
-                "State": State.Name,
-                "InstanceType": InstanceType,
+                "  Name": Tags[?Key==`Name`].Value | [0],
+                "  ID": InstanceId,
+                "  State": State.Name,
+                " InstanceType": InstanceType,
                 "AMI": ImageId,
-                "Architecture": "Architecture",
-                "PublicDNS": publicDnsName,
-                "PrivateDNS": PrivateDnsName
+                " Architecture": "Architecture",
+                " PublicDNS": publicDnsName,
+                " PrivateDNS": PrivateDnsName
             }' \
     --output table |
 sed "$sed_script"
