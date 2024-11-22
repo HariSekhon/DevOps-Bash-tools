@@ -21,13 +21,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/aws.sh"
 
+script_basename="${0##*/}"
+script_basename="${script_basename%%.sh}"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Gathers AWS Info across all projects in CSV format
 
 Combines aws_foreach_profile.sh and aws_info_csv.sh
 
-Outputs to both stdout and a file called aws_info_all_profiles-YYYY-MM-DD_HH.MM.SS.csv
+Outputs to both stdout and a file called $script_basename-YYYY-MM-DD_HH.MM.SS.csv
 
 So that you can diff subsequent runs to see the difference between EC2 VMs that come and go due to AutoScaling Groups
 
@@ -47,12 +50,12 @@ num_args 0 "$@"
         # see aws_info_ec2_csv.sh where empty fields are now explicitly set to ""
         #s|,$|,\"\"|;
 
-csv="aws_info_all_profiles-$(date '+%F_%H.%M.%S').csv"
+csv="$script_basename-$(date '+%F_%H.%M.%S').csv"
 
 # AWS Virtual Machines
 cat >&2 <<EOF
 # ============================================================================ #
-#                      A W S   I n f o   I n v e n t o r y
+#          A W S   E C 2   I n v e n t o r y   A l l   A c c o u n t s
 # ============================================================================ #
 
 Saving to: $PWD/$csv
@@ -60,7 +63,7 @@ Saving to: $PWD/$csv
 EOF
 
 aws_foreach_profile.sh "
-    '$srcdir/aws_info_csv.sh' '{profile}' |
+    '$srcdir/aws_info_ec2_csv.sh' '{profile}' |
     sed '
         s|^|\"{profile}\",|;
         1s|^\"{profile}\"|\"AWS_Profile\"|;
