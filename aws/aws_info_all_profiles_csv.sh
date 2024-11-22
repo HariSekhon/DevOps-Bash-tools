@@ -49,6 +49,16 @@ num_args 0 "$@"
 
 csv="aws_info_all_profiles-$(date '+%F_%H.%M.%S').csv"
 
+# AWS Virtual Machines
+cat >&2 <<EOF
+# ============================================================================ #
+#                      A W S   I n f o   I n v e n t o r y
+# ============================================================================ #
+
+Saving to: $PWD/$csv
+
+EOF
+
 aws_foreach_profile.sh "
     '$srcdir/aws_info_csv.sh' '{profile}' |
     sed '
