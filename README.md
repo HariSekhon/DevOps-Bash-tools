@@ -501,6 +501,12 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_iam_users_mfa_serials.sh` - lists AWS users [MFA](https://aws.amazon.com/iam/features/mfa/) serial numbers (differentiates Virtual vs Hardware MFAs)
     - `aws_iam_users_pw_last_used.sh` - lists AWS users and their password last used date
   - `aws_ip_ranges.sh` - get all AWS IP ranges for a given Region and/or Service using the IP range API
+  - `aws_info*.sh`:
+    - `aws_info_all_profiles.sh` - calls `aws_info.sh` for all AWS profiles using `aws_foreach_profile.sh`
+      - `aws_info.sh` - lists AWS deployed resources in the current or specified AWS account profile
+        - `aws_info_ec2.sh` - lists AWS EC2 Instances resources deployed in the current AWS account
+    - `aws_info_ec2_csv.sh` - lists AWS EC2 Instances in quoted CSV format in the current AWS account
+    - `aws_info_ec2_all_profiles_csv.sh` - lists AWS EC2 Instances in quoted CSV format across all configured AWS profiles for their configured region
   - `aws_eks_cloudwatch_logs.sh` - enables and fetches AWS EKS Master logs via CloudWatch
   - `aws_eks_ssh_dump_logs.sh` - fetch system logs from EKS Worker Nodes EC2 VMs (eg. for support debug requests by vendors)
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
