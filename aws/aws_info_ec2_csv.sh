@@ -22,6 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 script_basename="${0##*/}"
 script_basename="${script_basename%%.sh}"
+script_basename="${script_basename%%_csv}"
 
 log_timestamp="${LOG_TIMESTAMP:-$(date '+%F_%H.%M.%S')}"
 
