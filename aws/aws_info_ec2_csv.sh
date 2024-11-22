@@ -112,7 +112,6 @@ jq -r '
     .[][] |
     [ .ID, .Name, .IP, .State, .InstanceType, .Platform, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
     map(if . == null or . == "" then "" else . end) |
-    map("\"" + . + "\"") |
     @csv
 ' <<< "$json" |
 sed "$sed_script"
