@@ -35,14 +35,17 @@ max_args 1 "$@"
 
 png="${1:-wordcloud.png}"
 
-wordcounts="$(mktemp)"
+#wordcounts="$(mktemp)"
 
-timestamp "Running wordcount.sh"
-"$srcdir/wordcount.sh" "$@" |
-awk '$2 !~ /^[^[:alnum:]]+$/' > "$wordcounts"
+#timestamp "Running wordcount.sh"
+#"$srcdir/wordcount.sh" "$@" |
+#awk '$2 !~ /^[^[:alnum:]]+$/' |
+#awk '$2 !~ /^[[:digit:]]+$/' \
+#> "$wordcounts"
 
 timestamp "Running wordcloud_cli"
-wordcloud_cli --text "$wordcounts" --imagefile "$png"
+#wordcloud_cli --text "$wordcounts" --imagefile "$png"
+wordcloud_cli --imagefile "$png"
 
 #expanded_words="$(mktemp)"
 #
