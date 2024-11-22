@@ -105,6 +105,7 @@ json="$(
 )"
 
 timestamp "Generating CSV output with AMI images IDs resolved to names"
+echo >&2
 jq -r '
     .[][] |
     [ .ID, .Name, .State, .InstanceType, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
