@@ -90,7 +90,7 @@ while read -r id _email name; do
         tr '[:space:]' '\n'
     )"
     if grep -Fxq "$role" <<< "$roles"; then
-        timestamp "Role '$role' is available on account '$name' ($id), using that for config"
+        timestamp "Role '$role' is available on account '$name' ($id), using it for config"
         sso_role="$role"
     else
         timestamp "Role '$role' not available on account '$name' ($id) - available roles:"
