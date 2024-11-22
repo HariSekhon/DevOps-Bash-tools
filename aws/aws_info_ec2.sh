@@ -41,10 +41,11 @@ max_args 1 "$@"
 check_bin aws
 
 if [ $# -gt 0 ]; then
-    project_id="$1"
+    aws_profile="$1"
     shift || :
-    export CLOUDSDK_CORE_PROJECT="$project_id"
+    export AWS_PROFILE="$aws_profile"
 fi
+
 
 # AWS Virtual Machines
 cat >&2 <<EOF
