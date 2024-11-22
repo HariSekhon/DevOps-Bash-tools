@@ -85,8 +85,9 @@ tmp="$(mktemp)"
 head -n1 "$csv" > "$csv_sorted"
 
 aws_foreach_profile.sh "
-    tail -n +2 'aws_info_ec2-$LOG_TIMESTAMP.csv' >> '$tmp'
-"
+    tail -n +2 'aws_info_ec2-$LOG_TIMESTAMP.csv'
+" |
+sort -fu >> "$tmp"
 
 mv "$tmp" "$csv_sorted"
 
