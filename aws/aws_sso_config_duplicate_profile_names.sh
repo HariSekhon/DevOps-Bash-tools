@@ -53,7 +53,7 @@ duplicate_account_ids="$(
     sed 's/.*=[[:space:]]*//' |
     sort |
     uniq -d |
-    sed '^/[[:space:]]*$/d'
+    sed '/^[[:space:]]*$/d'
 )"
 
 while read -r account_id; do
