@@ -92,6 +92,7 @@ json="$(
         --query 'Reservations[*].Instances[*].{
                     "Name": Tags[?Key==`Name`].Value | [0],
                     "ID": InstanceId,
+                    "IP": PrivateIpAddress,
                     "State": State.Name,
                     "InstanceType": InstanceType,
                     "AMI": ImageId,
@@ -106,10 +107,10 @@ json="$(
 
 timestamp "Generating CSV output with AMI images IDs resolved to names"
 echo >&2
-echo '"Instance_ID","Instance_Name","State","Instance_Type","Platform","AMI","Architecture","PrivateDNS","PublicDNS"'
+echo '"Instance_ID","Instance_Name","IP_Address","State","Instance_Type","Platform","AMI","Architecture","PrivateDNS","PublicDNS"'
 jq -r '
     .[][] |
-    [ .ID, .Name, .State, .InstanceType, .Platform, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
+    [ .ID, .Name, .IP, .State, .InstanceType, .Platform, .AMI, .Architecture, .PrivateDNS, .PublicDNS ] |
     @csv
 ' <<< "$json" |
 sed "$sed_script"
