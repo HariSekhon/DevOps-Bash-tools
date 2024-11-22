@@ -85,7 +85,7 @@ tmp="$(mktemp)"
 # sorting only makes sense when combining a single CSV output format which is why this is EC2 only
 
 # we'd have to combine all the individual CSVs but they have different timestamps, hard to predict, and don't want to make them less granular
-head -n1 "$csv" > "$csv_sorted"
+head -n1 "$csv" > "$tmp"
 
 aws_foreach_profile.sh "
     tail -n +2 'aws_info_ec2-$LOG_TIMESTAMP.csv'
