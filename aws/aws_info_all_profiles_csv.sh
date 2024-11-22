@@ -44,6 +44,8 @@ aws_foreach_profile.sh "
     sed '
         s|^|\"{profile}\",|;
         1s|^\"{profile}\"|\"AWS_Profile\"|;
-        s|,$|,\"\"|;
     '
 "
+        # don't do this, solve it natively so it's easier to spot end of line issues
+        # see aws_info_ec2_csv.sh where empty fields are set to ""
+        #s|,$|,\"\"|;
