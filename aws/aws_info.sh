@@ -26,6 +26,9 @@ usage_description="
 Lists AWS deployed resources in the current or specified AWS account profile
 
 Written to be combined with aws_foreach_profile.sh
+
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
