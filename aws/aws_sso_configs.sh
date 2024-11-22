@@ -63,6 +63,8 @@ export VERBOSE=1
 
 aws_sso_login_if_not_already
 
+access_token="$(aws_sso_token)"
+
 role="$(aws_sso_role)"
 echo >&2
 
@@ -79,7 +81,7 @@ timestamp "Getting AWS SSO accounts this account has access to"
 while read -r id _email name; do
     name="$(tr '[:upper:]' '[:lower:]' <<< "$name" | sed 's/[^[:alnum:]]/-/g')"
     timestamp "Looking up available roles for account '$name' ($id)"
-    roles="$(aws sso list-account-roles --account-id "$id")"
+    roles="$(aws sso list-account-roles --account-id "$id" --access-token "$access_token")"
     if grep -Fxq "$role" <<< "$roles"; then
         sso_role="$role"
     else
