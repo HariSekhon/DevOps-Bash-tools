@@ -41,4 +41,5 @@ num_args 0 "$@"
 
 aws_foreach_profile.sh "'$srcdir/aws_info.sh' '{profile}'"
 
+echo >&2
 timestamp "Script Completed Successfully: ${0##*/}"
