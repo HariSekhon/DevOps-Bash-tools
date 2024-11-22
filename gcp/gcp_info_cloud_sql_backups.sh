@@ -38,6 +38,8 @@ usage_args="[<project_id>]"
 
 help_usage "$@"
 
+max_args 1 "$@"
+
 check_bin gcloud
 
 if [ $# -gt 0 ]; then
