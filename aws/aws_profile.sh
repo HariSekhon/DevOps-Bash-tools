@@ -29,6 +29,8 @@ If no profile name is given then Parses \$AWS_CONFIG_FILE or \$HOME/.aws/config 
 and prompts the user with a dialog menu
 
 Then sets the AWS_PROFILE and exec's to \$SHELL to inherit it
+
+Convenient when you have lots of work AWS profiles
 "
 
 # used by usage() in lib/utils.sh
