@@ -25,7 +25,7 @@ usage_description="
 Switches to an AWS Profile given as an arg or prompts the user with a convenient interactive menu
 list of AWS profiles to choose from
 
-If not profile name is given then Parses \$AWS_CONFIG_FILE or \$HOME/.aws/config for the profile list
+If no profile name is given then Parses \$AWS_CONFIG_FILE or \$HOME/.aws/config for the profile list
 and prompts the user with a dialog menu
 
 Then sets the AWS_PROFILE and exec's to \$SHELL to inherit it
