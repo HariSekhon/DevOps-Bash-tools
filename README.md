@@ -814,6 +814,7 @@ See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowled
 - `csv_header_indices.sh` - list CSV headers with their zero indexed numbers, useful reference when coding against
   column positions
 - `ini_config_add_if_missing.sh` - reads INI config blocks from stdin and appends them to the specified file if the section is not found. Used by `aws_profile_config_add_if_missing.sh`
+- `ini_config_duplicate_sections.sh` - Lists duplicate INI config sections that are using the same value for a given key in the given .ini file
 - `wordcount.sh` - counts and ranks words by their frequency in file(s) or stdin
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
 
