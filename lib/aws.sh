@@ -281,3 +281,25 @@ is_ami_id(){
     local arg="$1"
     [[ "$arg" =~ ^$ami_id_regex$ ]]
 }
+
+#aws_get_cred_path(){
+#    # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+#    [ -n "${HOME:-}" ] || HOME=~
+#    local aws_credentials="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
+#    local aws_config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+#    local boto="${BOTO_CONFIG:-$HOME/.boto}"
+#    local credentials_file
+#    if [ -f "$aws_credentials" ]; then
+#        credentials_file="$aws_credentials"
+#    # older boto creds
+#    elif [ -f "$boto" ]; then
+#        credentials_file="$boto"
+#    elif [ -f "$aws_config" ]; then
+#        credentials_file="$aws_config"
+#    else
+#        echo "no credentials found - didn't find $aws_credentials or $boto or $aws_config" 2>/dev/null
+#        return 1
+#    fi
+#    echo "$credentials_file"
+#}
+#aws_credentials_file="$(aws_get_cred_path)"
