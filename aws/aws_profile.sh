@@ -83,10 +83,10 @@ aws_profile(){
             return 1
         fi
         #aws_clean_env
-        timestamp "Setting aws profile to '$profile'"
+        timestamp "Setting AWS_PROFILE='$profile'"
         export AWS_PROFILE="$profile"
     elif [ -n "$AWS_PROFILE" ]; then
-        timestamp "Was already set: AWS_PROFILE=$AWS_PROFILE"
+        timestamp "AWS_PROFILE='$AWS_PROFILE' was already set"
     else
         die "ERROR: not setting AWS Profile (not found)"
     fi
