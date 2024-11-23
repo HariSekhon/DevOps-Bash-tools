@@ -45,7 +45,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -z "${CI:-}" ]; then
     export AWS_PROFILE="default"
 
-    aws configure list || :
+    aws configure list 2>/dev/null || :
     echo
 
     # If not logged in:
