@@ -48,6 +48,10 @@ max_args 1 "$@"
 
 config="${1:-${AWS_CONFIG_FILE:-$HOME/.aws/config}}"
 
+if ! [ -f "$config" ]; then
+    die "ERROR: file does not exist: $config"
+fi
+
 duplicate_account_ids="$(
     grep '^[[:space:]]*sso_account_id' "$config" |
     sed 's/.*=[[:space:]]*//' |
