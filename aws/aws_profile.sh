@@ -42,6 +42,7 @@ help_usage "$@"
 max_args 1 "$@"
 
 [ -n "${HOME:-}" ] || HOME=~
+
 config="${1:-${AWS_CONFIG_FILE:-$HOME/.aws/config}}"
 
 aws_profile(){
@@ -76,11 +77,15 @@ aws_get_profile_data(){
 }
 
 profiles="$(sed -n 's/^[[:space:]]*\[\(profile[[:space:]][[:space:]]*\)*\(.*\)\]/\2/p' "$config" | sort -fu)"
+
 profile_menu_items=()
+
 while read -r line; do
     profile_menu_items+=("$line" " ")
 done <<< "$profiles"
+
 profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_items[@]}" 3>&1 1>&2 2>&3)"
+
 aws_profile "$profile"
 
 exec "$SHELL"
