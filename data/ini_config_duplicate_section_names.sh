@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists duplicate INI config section names that are using the same value for a given key
-from the given .ini file
+in the given .ini file
 "
 
 # used by usage() in lib/utils.sh
