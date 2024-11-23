@@ -42,7 +42,7 @@ help_usage "$@"
 max_args 1 "$@"
 
 [ -n "${HOME:-}" ] || HOME=~
-config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+config="${1:-AWS_CONFIG_FILE:-$HOME/.aws/config}}"
 
 #aws_get_cred_path(){
 #    # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
