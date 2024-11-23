@@ -74,7 +74,7 @@ export AWS_ACCOUNT_ID
 # might not have permissions to the Organizations in which case this will error instead of return
 AWS_ACCOUNT="$(aws organizations describe-account --account-id "$AWS_ACCOUNT_ID" 2>/dev/null)"
 if [ -n "$AWS_ACCOUNT" ]; then
-    echo "AWS Account:$AWS_ACCOUNT"
+    echo "AWS Account: $AWS_ACCOUNT"
     export AWS_ACCOUNT
 fi
 
