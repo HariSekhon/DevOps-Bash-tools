@@ -53,7 +53,7 @@ if ! [ -f "$config" ]; then
 fi
 
 duplicate_account_ids="$(
-    grep '^[[:space:]]*sso_account_id' "$config" |
+    grep '^[[:space:]]*sso_account_id[[:space:]]*=' "$config" |
     sed 's/.*=[[:space:]]*//' |
     sort |
     uniq -d |
