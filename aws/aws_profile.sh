@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  Author: Hari Sekhon
+#  Date: 2024-09-17 03:24:18 +0200 (Tue, 17 Sep 2024)
+#
+#  https///github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Switches to an AWS Profile by prompting the user with a menu of the list of AWS profiles
+
+Parses \$HOME/.aws/config for the profile list and promts the user with a dialog menu
+
+Then sets the AWS_PROFILE
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<profile>]"
+
+help_usage "$@"
+
+max_args 1 "$@"
+
+[ -n "${HOME:-}" ] || HOME=~
+config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+
+#aws_get_cred_path(){
+#    # unreliable that HOME is set, ensure shell evaluates to the right thing before we use it
+#    [ -n "${HOME:-}" ] || HOME=~
+#    local aws_credentials="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
+#    local aws_config="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+#    local boto="${BOTO_CONFIG:-$HOME/.boto}"
+#    local credentials_file
+#    if [ -f "$aws_credentials" ]; then
+#        credentials_file="$aws_credentials"
+#    # older boto creds
+#    elif [ -f "$boto" ]; then
+#        credentials_file="$boto"
+#    elif [ -f "$aws_config" ]; then
+#        credentials_file="$aws_config"
+#    else
+#        echo "no credentials found - didn't find $aws_credentials or $boto or $aws_config" 2>/dev/null
+#        return 1
+#    fi
+#    echo "$credentials_file"
+#}
+
+#aws_credentials_file="$(aws_get_cred_path)"
+
+aws_profile(){
+    local profile="${1// }"
+    if [ -n "$profile" ]; then
+        if ! [[ "$profile" =~ ^[[:alnum:]_-]+$ ]]; then
+            echo "invalid profile name given, must be alphanumeric, dashes and underscores allowed"
+            return 1
+        fi
+        local profile_data
+        profile_data="$(aws_get_profile_data "$profile")"
+        [ -n "$profile_data" ] ||
+        profile_data="$(aws_get_profile_data "$profile" "$config")"
+        if [ -z "$profile_data" ]; then
+            echo "profile [$profile] not found in $config!"
+            return 1
+        fi
+        #aws_clean_env
+        timestamp "Setting aws profile to '$profile'"
+        export AWS_PROFILE="$profile"
+    elif [ -n "$AWS_PROFILE" ]; then
+        timestamp "Was already set: AWS_PROFILE=$AWS_PROFILE"
+    else
+        die "ERROR: not setting AWS Profile (not found)"
+    fi
+}
+
+aws_get_profile_data(){
+    local profile="$1"
+    local filename="${2:-$config}"
+    sed -n "/^[[:space:]]*\\[\\(profile[[:space:]]*\\)*$profile\\]/,/^[[:space:]]*\\[/p" "$filename"
+}
+
+profiles="$(sed -n 's/^[[:space:]]*\[\(profile[[:space:]][[:space:]]*\)*\(.*\)\]/\2/p' "$config" | sort -fu)"
+profile_menu_items=()
+while read -r line; do
+    profile_menu_items+=("$line" " ")
+done <<< "$profiles"
+profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_items[@]}" 3>&1 1>&2 2>&3)"
+aws_profile "$profile"
+
+exec "$SHELL"
