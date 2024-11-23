@@ -49,7 +49,10 @@ if [ -z "${CI:-}" ]; then
     echo
 
     if ! aws sts get-caller-identity --output table; then
-        if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*$/p" ~/.aws/config | grep -q sso_start_url; then
+        # assumes you're not putting a blank line until the next section block
+        #if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*$/p" ~/.aws/config | grep -q sso_start_url; then
+        # goes until the next [profile ...] section instead, should be more reliable
+        if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*\[.+\]/p" ~/.aws/config | grep -q sso_start_url; then
             echo
             aws sso login
         fi
