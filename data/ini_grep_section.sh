@@ -59,3 +59,11 @@ while read -r line; do
 $line"
     fi
 done < "$file"
+
+# print if we hit end of file
+if [ "$found" = 1 ]; then
+    echo "$section"
+    section=""
+    echo
+    found=0
+fi
