@@ -136,8 +136,8 @@ hgu(){
 #        { hg mydiff "$target"
 #          hg mydiff "spotify/$target"
 #        })"
-#        local removals="$(grep "^-[^-]" <<< "$diffs" | wc -l)"
-#        local additions="$(grep "^+[^+]" <<< "$diffs" | wc -l)"
+#        local removals="$(grep -c "^-[^-]" <<< "$diffs")"
+#        local additions="$(grep -c "^+[^+]" <<< "$diffs")"
 #        diffs="$(echo "$diffs" |
 #        egrep "^[+-]" |
 #        spotify/normalize_tracknames.pl |
