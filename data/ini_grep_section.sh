@@ -27,14 +27,14 @@ Prints the named section from a given .ini file to stdout
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<file> <section>"
+usage_args="<section> <file>"
 
 help_usage "$@"
 
 num_args 2 "$@"
 
-file="$1"
-section="$2"
+section="$1"
+file="$2"
 
 if ! [ -f "$file" ]; then
     die "ERROR: file does not exist: $file"
