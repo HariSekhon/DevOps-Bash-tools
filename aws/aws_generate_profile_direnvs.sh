@@ -64,6 +64,7 @@ while read -r profile; do
 # generated using ${0##*/} from:
 #
 #   https://github.com/HariSekhon/DevOps-Bash-tools
+
 EOF
         "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" >> "$subconfig"
         if ! [ -s "$subconfig" ]; then
