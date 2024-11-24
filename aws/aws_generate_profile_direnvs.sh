@@ -60,7 +60,12 @@ while read -r profile; do
     subconfig="$profile/config.ini"
     if ! [ -f "$subconfig" ]; then
         timestamp "Generating $subconfig"
-        "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" > "$subconfig"
+        cat > "$subconfig" <<EOF
+# generated using ${0##*/} from:
+#
+#   https://github.com/HariSekhon/DevOps-Bash-tools
+EOF
+        "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" >> "$subconfig"
         if ! [ -s "$subconfig" ]; then
             die "Failed to generate $subconfig"
         fi
@@ -75,6 +80,10 @@ while read -r profile; do
         #echo "export AWS_ACCOUNT_ID=$aws_account_id" >> "$envrc"
         timestamp "Generating $envrc" # with AWS_PROFILE=$profile"
         cat >> "$envrc" <<EOF
+# generated using ${0##*/} from:
+#
+#   https://github.com/HariSekhon/DevOps-Bash-tools
+
 export AWS_PROFILE=$profile
 
 #export EKS_CLUSTER=
