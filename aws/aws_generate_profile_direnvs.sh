@@ -78,6 +78,7 @@ while read -r profile; do
 export AWS_PROFILE=$profile
 
 #export EKS_CLUSTER=
+#export EKS_NAMESPACE=
 
 . ../.envrc
 EOF
