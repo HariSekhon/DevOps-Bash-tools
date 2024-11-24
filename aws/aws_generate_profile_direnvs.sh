@@ -58,7 +58,7 @@ while read -r profile; do
     mkdir -p "$profile"
     dest="$profile/config.ini"
     timestamp "Generating $dest"
-    "$srcdir/../data/ini_grep_section.sh" "$config" "profile $profile" > "$dest"
+    "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" > "$dest"
     if ! [ -s "$dest" ]; then
         die "Failed to generate $dest"
     fi
