@@ -57,6 +57,7 @@ Spotify-tools:spotify-tools
 Spotify-Playlists:playlists
 #Spark-Apps:spark-apps
 Template-repo:trepo
+TamperMonkey:tampermonkey
 
 HAProxy-configs:haproxy-configs
 
