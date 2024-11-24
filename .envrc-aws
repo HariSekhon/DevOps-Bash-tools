@@ -67,7 +67,11 @@ fi
 
 # 'aws sts get-caller-identity --query Account' succeeds in returning the account id
 # from the ~/.aws/config even if 'aws sso login' has expired
-AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text || aws configure get sso_account_id || :)"
+AWS_ACCOUNT_ID="$(
+    aws sts get-caller-identity --query Account --output text ||
+    aws configure get sso_account_id ||
+    :
+)"
 echo "AWS Account ID: $AWS_ACCOUNT_ID"
 export AWS_ACCOUNT_ID
 
