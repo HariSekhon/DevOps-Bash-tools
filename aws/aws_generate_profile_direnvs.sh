@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates subdirectories containing the config.ini For every AWS profile found
+Generates subdirectories containing the config.ini for every AWS profile found
 in the given file or \$AWS_CONFIG_FILE
 
 Useful to take a large generated AWS config.ini from script:
