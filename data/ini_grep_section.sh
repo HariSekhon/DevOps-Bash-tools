@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints the named section from a given .ini file
+Prints the named section from a given .ini file to stdout
 "
 
 # used by usage() in lib/utils.sh
