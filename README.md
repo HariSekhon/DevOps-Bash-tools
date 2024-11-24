@@ -817,6 +817,7 @@ See also [Knowledge Base notes for Docker](https://github.com/HariSekhon/Knowled
 - `ini_config_add_if_missing.sh` - reads INI config blocks from stdin and appends them to the specified file if the section is not found. Used by `aws_profile_config_add_if_missing.sh`
 - `ini_config_duplicate_sections.sh` - lists duplicate INI config sections that are using the same value for a given key in the given .ini file
 - `ini_config_duplicate_section_names.sh` - lists duplicate INI config section names that are using the same value for a given key in the given .ini file
+- `ini_grep_section.sh` - prints the named section from a given .ini file to stdout
 - `wordcount.sh` - counts and ranks words by their frequency in file(s) or stdin
 - Data format validation `validate_*.py` from [DevOps Python Tools repo](https://github.com/HariSekhon/DevOps-Python-tools):
 
