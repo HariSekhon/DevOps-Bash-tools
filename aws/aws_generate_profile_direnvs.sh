@@ -74,6 +74,12 @@ while read -r profile; do
         #fi
         #echo "export AWS_ACCOUNT_ID=$aws_account_id" >> "$envrc"
         timestamp "Generating $envrc" # with AWS_PROFILE=$profile"
-        echo "export AWS_PROFILE=$profile" >> "$envrc"
+        cat >> "$envrc" <<EOF
+export AWS_PROFILE=$profile
+
+#export EKS_CLUSTER=
+
+. ../.envrc
+EOF
     fi
 done
