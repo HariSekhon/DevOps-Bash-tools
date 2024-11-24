@@ -531,7 +531,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_sso_config_duplicate_profile_names.sh` - lists duplicate AWS SSO config profile names that are using the same sso_account_id
   - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
   - `aws_profile_config_add_if_missing.sh` - reads AWS profile config blocks from stdin and appends them to the `~/.aws/config` file if the profile section is not found
-  - `aws_generate_profile_direnvs.sh` - generates subdirectories containing the `config.ini` For every AWS profile found in the given file or `$AWS_CONFIG_FILE`. Useful to take a large generated AWS `config.ini` from `aws_sso_configs.sh` and then split it into subdirectories for direnvs
+  - `aws_generate_profile_direnvs.sh` - generates subdirectories containing the `config.ini` for every AWS profile found in the given file or `$AWS_CONFIG_FILE`. Useful to take a large generated AWS `config.ini` from `aws_sso_configs.sh` and then split it into subdirectories for direnvs
   - `aws_s3_bucket.sh` - creates an S3 bucket, blocks public access, enables versioning, encryption, and optionally locks out any given user/group/role ARNs via a bucket policy for safety (eg. to stop Power Users accessing a sensitive bucket like Terraform state)
   - `aws_s3_buckets_block_public_access.sh` - blocks public access to one or more given S3 buckets or files containing bucket names, one per line
   - `aws_s3_account_block_public_access.sh` - blocks S3 public access at the AWS account level
