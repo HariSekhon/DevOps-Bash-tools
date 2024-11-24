@@ -823,17 +823,17 @@ wc:
 												-e vagrant/ \
 												| wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which .bash*:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep '\.bash' | wc -l | sed 's/[[:space:]]//g'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c '\.bash'
 	@printf 'of which lib/:\t\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep lib/ | wc -l | sed 's/[[:space:]]//g'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c lib/
 	@printf 'of which install/:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep install/ | wc -l | sed 's/[[:space:]]//g'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c install/
 	@printf 'of which setup/:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep setup/ | wc -l | sed 's/[[:space:]]//g'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c setup/
 	@printf 'of which test(s)/:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -Ee 'tests?/' | wc -l | sed 's/[[:space:]]//g'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -Eec 'tests?/'
 	@printf 'of which vagrant/:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep vagrant/ | wc -l | sed 's/[[:space:]]//g'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c vagrant/
 
 mdl:
 	@echo "Checking Markdown for issues"
