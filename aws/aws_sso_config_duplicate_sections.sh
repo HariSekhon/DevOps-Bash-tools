@@ -88,4 +88,10 @@ $line"
             fi
         fi
     done < "$config"
+    if [ "$found" = 1 ]; then
+        echo "$section"
+        section=""
+        echo
+        found=0
+    fi
 done <<< "$duplicate_account_ids"
