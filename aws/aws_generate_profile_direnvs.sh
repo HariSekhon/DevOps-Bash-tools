@@ -57,10 +57,23 @@ while read -r profile; do
         continue
     fi
     mkdir -p "$profile"
-    dest="$profile/config.ini"
-    timestamp "Generating $dest"
-    "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" > "$dest"
-    if ! [ -s "$dest" ]; then
-        die "Failed to generate $dest"
+    subconfig="$profile/config.ini"
+    if ! [ -f "$subconfig" ]; then
+        timestamp "Generating $subconfig"
+        "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" > "$subconfig"
+        if ! [ -s "$subconfig" ]; then
+            die "Failed to generate $subconfig"
+        fi
+    fi
+    envrc="$profile/.envrc"
+    if ! [ -f "$envrc" ]; then
+        # AWS_ACCOUNT_ID is automatically inferred by envrc code from AWS_PROFILE which is all we need
+        #account_id="$(grep -Eo '^[[:space:]]*[[:alnum:]_]*account_id[[:space:]]*=[[:space:]][[:digit:]]+' "$subconfig" || :)"
+        #if [ -z "$account_id" ]; then
+        #    die "Failed to determine AWS Account ID from $subconfig"
+        #fi
+        #echo "export AWS_ACCOUNT_ID=$aws_account_id" >> "$envrc"
+        timestamp "Generating $envrc" # with AWS_PROFILE=$profile"
+        echo "export AWS_PROFILE=$profile" >> "$envrc"
     fi
 done
