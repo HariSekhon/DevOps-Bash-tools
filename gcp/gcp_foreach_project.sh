@@ -66,10 +66,16 @@ min_args 1 "$@"
 #    trap "gcloud config unset project" EXIT
 #fi
 
-gcloud projects list --format="value(project_id,name)" |
+projects="$(gcloud projects list --format="value(project_id,name)")"
+
+total_projects="$(grep -c . <<< "$projects")"
+
+i=0
+
 while read -r project_id project_name; do
+    (( i += 1 ))
     echo "# ============================================================================ #" >&2
-    echo "# GCP Project ID = $project_id -- Name = $project_name" >&2
+    echo "# ($i/$total_projects) GCP Project ID = $project_id -- Name = $project_name" >&2
     echo "# ============================================================================ #" >&2
     # XXX: this would cause a concurrency race condition bug between other scripts and sessions that could be dangerous
     #gcloud config set project "$project_id"
@@ -85,4 +91,4 @@ while read -r project_id project_name; do
     eval "${cmd[@]}"
     echo >&2
     echo >&2
-done
+done <<< "$projects"
