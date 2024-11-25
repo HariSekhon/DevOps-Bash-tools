@@ -94,7 +94,9 @@ while read -r id _email name; do
         sso_role="$role"
     else
         timestamp "Role '$role' not available on account '$name' ($id) - available roles:"
+        echo >&2
         echo "$roles" >&2
+        echo >&2
         sso_role="$(head -n1 <<< "$roles")"
         timestamp "Using first available role '$sso_role' for account '$name' ($id) - edit to another role if necessary"
     fi
