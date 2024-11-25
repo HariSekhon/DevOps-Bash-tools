@@ -54,7 +54,7 @@ min_args 1 "$@"
 
 profiles="$(aws configure list-profiles --output text)"
 
-total_profiles="$(wc -l <<< "$profiles" | sed 's/[[:space:]]//g')"
+total_profiles="$(grep -c . <<< "$profiles")"
 
 i=0
 
