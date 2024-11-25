@@ -78,10 +78,13 @@ aws_foreach_profile.sh "
     sed '
         s|^|\"{profile}\",|;
         1s|^\"{profile}\"|\"AWS_Profile\"|;
-    ' |
-    tee <(tail -n +2 >> '$csv_sorted')
+    ' # |
+    # this only works on Linux, can't do this fd trick on Mac
+    #tee <(tail -n +2 >> '$csv_sorted')
 " |
-tee "$csv"
+tee "$csv" |
+tail -n +2 |
+tee "$csv_sorted"
 
 tmp="$(mktemp)"
 
