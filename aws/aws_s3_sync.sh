@@ -90,6 +90,10 @@ validate_s3_url(){
 if ! [ -f "$sources_file" ]; then
     die "File not found: $sources_file"
 fi
+
+# capture run to log file using braces to tee
+#{
+
 timestamp "Loading sources from file '$sources_file'"
 while IFS= read -r line; do
     validate_s3_url "$line"
@@ -142,7 +146,9 @@ for ((i=0; i < sources_len; i++)); do
     timestamp "Syncing AWS S3 '$src' to '$dest'"
     aws s3 sync "$src" "$dest" "$@"
 done
-
 echo
 # we've already verified above that $sources_len and $destination_len are the same
 timestamp "AWS S3 Sync completed for $sources_len S3 URL paths"
+
+#} 2>&1 |
+#tee -a "aws_s3_sync-$(date '+%F_%H.%M.%S').log"
