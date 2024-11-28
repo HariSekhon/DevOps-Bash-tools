@@ -29,7 +29,7 @@ Then scp's the latest resultant ~/.aws/sso/cache/ file to the remote server
 And SSH's there so that you can use AWS CLI remotely on that server easily,
 without having to copy paste token to your browser from remote aws sso login
 
-Useful in enviroments where only a bastion server can access EKS clusters
+Useful in enviroments where only a bastion server can access EKS clusters or other AWS services
 
 Best used when combined with automatically configuring your environment variables for the AWS_PROFILE etc.
 using direnv or similar
