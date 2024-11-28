@@ -68,8 +68,10 @@ fi
 
 # AWS SSO uses ~/.aws/sso/cache/ not old credentials file
 #creds="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
+
 # shellcheck disable=SC2012
 creds="$(ls -t ~/.aws/sso/cache/* | head -n1)"
+
 timestamp "Latest AWS SSO cache file found is: $creds"
 
 if is_mac; then
