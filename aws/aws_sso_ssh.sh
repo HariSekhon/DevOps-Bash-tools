@@ -91,7 +91,11 @@ if [ "$seconds_ago" -gt 86400 ]; then
     exit 1
 fi
 
-scp "$creds" "$server":"$creds"
+# shellcheck disable=SC2295
+creds_without_home="${creds#$HOME}"
+creds_without_home="${creds_without_home##/}"
+
+scp "$creds" "$server":"$creds_without_home"
 
 echo >&2
 
