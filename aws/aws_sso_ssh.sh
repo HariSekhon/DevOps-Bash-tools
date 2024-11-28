@@ -27,7 +27,7 @@ Launches local AWS SSO authentication pop-up (if not already authenticated)
 Then scp's the latest resultant ~/.aws/sso/cache/ file to the remote server
 
 And SSH's there so that you can use AWS CLI or kubectl to EKS remotely on that server easily,
-without having to copy paste token to your browser from remote aws sso login
+without having to copy and paste the token from remote aws sso login to your local web browser
 
 Useful in enviroments where only a bastion server can access EKS clusters or other AWS services
 
