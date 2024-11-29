@@ -61,6 +61,8 @@ help_usage "$@"
 
 min_args 2 "$@"
 
+log="aws_s3_sync-$(date '+%F_%H.%M.%S').log"
+
 sources_file="$1"
 destinations_file="$2"
 shift || :
@@ -91,8 +93,8 @@ if ! [ -f "$sources_file" ]; then
     die "File not found: $sources_file"
 fi
 
-# capture run to log file using braces to tee
-#{
+timestamp "Capturing log to: $log"
+{
 
 timestamp "Loading sources from file '$sources_file'"
 while IFS= read -r line; do
@@ -150,5 +152,5 @@ echo
 # we've already verified above that $sources_len and $destination_len are the same
 timestamp "AWS S3 Sync completed for $sources_len S3 URL paths"
 
-#} 2>&1 |
-#tee -a "aws_s3_sync-$(date '+%F_%H.%M.%S').log"
+} 2>&1 |
+tee -a "$log"
