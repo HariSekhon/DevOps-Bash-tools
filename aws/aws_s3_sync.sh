@@ -153,4 +153,6 @@ echo
 timestamp "AWS S3 Sync completed for $sources_len S3 URL paths"
 
 } 2>&1 |
+# aws s3 sync seems to output \r messing up the log lines
+tr '\r' '\n' |
 tee -a "$log"
