@@ -170,7 +170,7 @@ halfopen(){
 
 get_gw(){
     local gw
-    gw="$(netstat -rn | awk '/^default/ {print $2;exit}')"
+    gw="$(netstat -rn | awk '/^default.*\./ {print $2;exit}')"
     if [ -z "$gw" ]; then
         echo "Could not find gateway, no default route! " >&2
         return 1
