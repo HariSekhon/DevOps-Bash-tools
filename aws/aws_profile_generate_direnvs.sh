@@ -92,8 +92,10 @@ export AWS_PROFILE=$profile
 #export EKS_CLUSTER=
 #export EKS_NAMESPACE=
 
+# if copying this .envrc to terraform / terragrunt directories in a different part of the repo:
+#
 #git_root="$(git rev-parse --show-toplevel)"
-
+#
 # shellcheck disable=SC1091
 #. "\$git_root/aws/.envrc"
 
