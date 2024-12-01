@@ -92,6 +92,11 @@ export AWS_PROFILE=$profile
 #export EKS_CLUSTER=
 #export EKS_NAMESPACE=
 
+#git_root="$(git rev-parse --show-toplevel)"
+
+# shellcheck disable=SC1091
+#. "\$git_root/aws/.envrc"
+
 . ../.envrc
 EOF
     fi
