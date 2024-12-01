@@ -30,7 +30,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<suffix>]"
+usage_args="[<atlantis_role_suffix> <atlantis_aws_account_id>]"
 
 help_usage "$@"
 
@@ -38,13 +38,21 @@ max_args 1 "$@"
 
 suffix="${1:-}"
 
+aws_account_id="${2:-}"
+
 role_name="atlantis"
 
 if [ -n "$suffix" ]; then
 	role_name="$role_name-$suffix"
 fi
 
-aws_account_id="$(aws_account_id)"
+if [ -n "$aws_account_id" ]; then
+    if ! is_aws_account_id "$aws_account_id"; then
+        usage "Invalid AWS account ID given for where Atlantis is running, failed reged validation: $aws_account_id"
+    fi
+else
+    aws_account_id="$(aws_account_id)"
+fi
 
 trust_policy=$(cat <<EOF
 {
