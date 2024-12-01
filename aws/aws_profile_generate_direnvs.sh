@@ -61,7 +61,9 @@ while read -r profile; do
     if ! [ -f "$subconfig" ]; then
         timestamp "Generating $subconfig"
         cat > "$subconfig" <<EOF
-# generated using ${0##*/} from:
+#!/usr/bin/env bash
+#
+# Generated using ${0##*/} from:
 #
 #   https://github.com/HariSekhon/DevOps-Bash-tools
 
