@@ -69,7 +69,7 @@ while read -r profile; do
 
 EOF
         "$srcdir/../data/ini_grep_section.sh" "profile $profile" "$config" >> "$subconfig"
-        sed -i '' -e '${/^$/d}' "$subconfig"
+        sed -i -e '${/^$/d}' "$subconfig"
         if ! [ -s "$subconfig" ]; then
             die "Failed to generate $subconfig"
         fi
