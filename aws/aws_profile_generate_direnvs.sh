@@ -83,7 +83,7 @@ EOF
         #echo "export AWS_ACCOUNT_ID=$aws_account_id" >> "$envrc"
         timestamp "Generating $envrc" # with AWS_PROFILE=$profile"
         cat >> "$envrc" <<EOF
-# generated using ${0##*/} from:
+# Generated using ${0##*/} from:
 #
 #   https://github.com/HariSekhon/DevOps-Bash-tools
 
