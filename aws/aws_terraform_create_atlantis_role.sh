@@ -64,7 +64,7 @@ EOF
 
 if aws iam get-role --role-name "$role_name" >/dev/null 2>&1; then
     timestamp "Role '$role_name' already exists, skipping creation"
-	echo >&2
+	exit 0
 fi
 
 timestamp "Creating IAM role '$role_name'..."
