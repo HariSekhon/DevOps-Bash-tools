@@ -79,6 +79,7 @@ AWS_ACCOUNT_ID="$(
 )"
 echo "AWS Account ID: $AWS_ACCOUNT_ID"
 export AWS_ACCOUNT_ID
+echo
 
 # might not have permissions to the Organizations in which case this will error instead of return
 AWS_ACCOUNT="$(aws organizations describe-account --account-id "$AWS_ACCOUNT_ID" 2>/dev/null)"
