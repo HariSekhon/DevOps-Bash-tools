@@ -85,6 +85,7 @@ AWS_ACCOUNT="$(aws organizations describe-account --account-id "$AWS_ACCOUNT_ID"
 if [ -n "$AWS_ACCOUNT" ]; then
     echo "AWS Account: $AWS_ACCOUNT"
     export AWS_ACCOUNT
+    echo
 fi
 
 AWS_DEFAULT_REGION="$(aws configure get region || :)"  # use region configured in profile by default
