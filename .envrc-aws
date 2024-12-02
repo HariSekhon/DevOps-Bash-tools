@@ -92,6 +92,8 @@ fi
 AWS_DEFAULT_REGION="$(aws configure get region || :)"  # use region configured in profile by default
 AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-eu-west-1}"  # XXX: Edit default fallback region
 export AWS_DEFAULT_REGION
+echo "AWS Region: $AWS_DEFAULT_REGION"
+echo
 
 export AWS_DEFAULT_OUTPUT=json
 
