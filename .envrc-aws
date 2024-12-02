@@ -42,28 +42,28 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # XXX: Edit - crucial to set to the right environment, the rest of the inferred settings below depend on this
-if [ -z "${CI:-}" ]; then
-    export AWS_PROFILE="default"
-
-    aws configure list 2>/dev/null || :
-    echo
-
-    # If not logged in:
-    #
-    # - check for SSO key in config section for this profile
-    # - if found then do an automatic 'aws sso login'
-    #
-    if ! aws sts get-caller-identity --output table; then
-        # assumes you're not putting a blank line until the next section block
-        #if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*$/p" ~/.aws/config | grep -q sso_start_url; then
-        # goes until the next [profile ...] section instead, should be more reliable
-        if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*\[.+\]/p" ~/.aws/config | grep -q sso_start_url; then
-            echo
-            aws sso login
-        fi
-    fi
-    echo
+if [ -z "${AWS_PROFILE:-}" ]; then
+    exit 0
 fi
+
+aws configure list 2>/dev/null || :
+echo
+
+# If not logged in:
+#
+# - check for SSO key in config section for this profile
+# - if found then do an automatic 'aws sso login'
+#
+if ! aws sts get-caller-identity --output table; then
+    # assumes you're not putting a blank line until the next section block
+    #if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*$/p" ~/.aws/config | grep -q sso_start_url; then
+    # goes until the next [profile ...] section instead, should be more reliable
+    if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*\[.+\]/p" ~/.aws/config | grep -q sso_start_url; then
+        echo
+        aws sso login
+    fi
+fi
+echo
 
 # 'aws sts get-caller-identity --query Account' succeeds in returning the account id
 # from the ~/.aws/config even if 'aws sso login' has expired
