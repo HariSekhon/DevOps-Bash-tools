@@ -41,6 +41,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+if [ -n "${CI:-}" ]; then
+    exit 0
+fi
+
 # https://cloud.google.com/sdk/gcloud/reference/config
 
 # If using other services, infer the environment variables to put below by reading:
