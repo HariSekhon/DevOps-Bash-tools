@@ -78,8 +78,14 @@ gcloud_config(){
 # XXX: Edit
 export CLOUDSDK_CORE_PROJECT=myproject
 
+echo "CLOUDSDK_CORE_PROJECT=$CLOUDSDK_CORE_PROJECT"
+echo
+
 # XXX: Edit
 export CLOUDSDK_COMPUTE_REGION="${CLOUDSDK_COMPUTE_REGION:-eu-west-2}"
+
+echo "CLOUDSDK_COMPUTE_REGION=$CLOUDSDK_COMPUTE_REGION"
+echo
 
 REGION="$CLOUDSDK_COMPUTE_REGION"
 
@@ -134,6 +140,8 @@ fi
 # alternatively call gke_kube_context() function in .envrc-kubernetes which will do this
 # and comment out auto-running kube_context() on sourcing .envrc-kubernetes
 if [ -n "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
+    echo "CLOUDSDK_CONTAINER_CLUSTER=$CLOUDSDK_CONTAINER_CLUSTER"
+    echo
     # kubectl context is easily created by running adjacent aws_kube_creds.sh script first
 
     export GKE_CONTEXT="gke_${CLOUDSDK_CORE_PROJECT}_${CLOUDSDK_COMPUTE_REGION}_${CLOUDSDK_CONTAINER_CLUSTER}"
