@@ -91,15 +91,29 @@ export AWS_DEFAULT_OUTPUT=json
 # XXX: Edit, or remove if only have 1 cluster in account, will auto-determine below
 export EKS_CLUSTER="mycluster"
 
-# If EKS_CLUSTER isn't set and there is only one EKS cluster in this account and region, then use it - smart, but slower, prefer setting it explicitly for speed
-if [ -z "${EKS_CLUSTER:-}" ]; then
-    eks_clusters=()
-    while IFS='' read -r line; do
-        eks_clusters+=("$line")
-    #done < <(aws eks list-clusters --output=json | jq -r '.clusters[]')
-    done < <(aws eks list-clusters --query 'clusters[]' --output text)
-    if [ "${#eks_clusters[@]}" -eq 1 ]; then
-        export EKS_CLUSTER="${eks_clusters[*]}"
+# safer but slower
+#eks_clusters=()
+#while IFS='' read -r line; do
+#    eks_clusters+=("$line")
+##done < <(aws eks list-clusters --output=json | jq -r '.clusters[]')
+#done < <(aws eks list-clusters --query 'clusters[]' --output text)
+#if [ "${#eks_clusters[@]}" -eq 1 ]; then
+#    export EKS_CLUSTER="${eks_clusters[*]}"
+#fi
+
+eks_clusters="$(aws eks list-clusters --query 'clusters' --output text | tr '[:space:]' '\n')"
+
+if [ -n "$eks_clusters" ]; then
+    num_eks_clusters="$(grep -c . <<< "$eks_clusters")"
+    echo "EKS Clusters ($num_eks_clusters):"
+    echo
+    echo "$eks_clusters"
+    echo
+    # If EKS_CLUSTER isn't set and there is only one EKS cluster in this account and region, then use it
+    if [ -z "${EKS_CLUSTER:-}" ]; then
+        if [ "$num_eks_clusters" = 1 ]; then
+            EKS_CLUSTER="$eks_clusters"
+        fi
     fi
 fi
 
