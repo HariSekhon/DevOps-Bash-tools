@@ -75,9 +75,9 @@ gcloud_config(){
 export CLOUDSDK_CORE_PROJECT=myproject
 
 # XXX: Edit
-export REGION=europe-west2
+export CLOUDSDK_COMPUTE_REGION="${CLOUDSDK_COMPUTE_REGION:-eu-west-2}"
 
-export CLOUDSDK_COMPUTE_REGION="$REGION"
+REGION="$CLOUDSDK_COMPUTE_REGION"
 
 # you should probably not set CLOUDSDK_COMPUTE_ZONE
 #
