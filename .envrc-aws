@@ -131,6 +131,23 @@ if [ -n "${EKS_CLUSTER:-}" ]; then
     . "$srcdir/.envrc-kubernetes" "$EKS_CONTEXT"
 fi
 
+if [ "$num_eks_clusters" = 1 ]; then
+    if grep -q '^[[:space:]]*export[[:space:]]*EKS_CLUSTER' .envrc &&
+     ! grep -q "^export EKS_CLUSTER=$eks_clusters$" .envrc; then
+        echo
+        echo "Updating EKS_CLUSTER in .envrc from:"
+        echo
+        grep '^[[:space:]]*export[[:space:]]*EKS_CLUSTER' .envrc
+        echo
+        echo "to"
+        echo
+        echo "export EKS_CLUSTER=$eks_clusters"
+        echo
+        perl -pi -e "s/^\\s*export\s+EKS_CLUSTER=.*/export EKS_CLUSTER=$eks_clusters/" .envrc
+        echo
+    fi
+fi
+
 # better to load this dynamically from credentials, using functions in .bash.d/aws.sh
 #export AWS_ACCESS_KEY_ID=...
 #export AWS_SECRET_ACCESS_KEY=...
