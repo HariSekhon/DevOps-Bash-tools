@@ -41,6 +41,10 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+if [ -n "${CI:-}" ]; then
+    exit 0
+fi
+
 # XXX: Edit - crucial to set to the right environment, the rest of the inferred settings below depend on this
 if [ -z "${AWS_PROFILE:-}" ]; then
     exit 0
