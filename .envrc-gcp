@@ -126,14 +126,28 @@ export CLOUDSDK_GCLOUDIGNORE_ENABLED=True
 # XXX: Edit, or remove if only have 1 cluster in project, will auto-determine below
 export CLOUDSDK_CONTAINER_CLUSTER=mycluster  # GKE cluster name
 
-# If CLOUDSDK_CONTAINNER_CLUSTER isn't set and there is only one EKS cluster in this account and region, then use it - smart, but slower, prefer setting it explicitly for speed
-if [ -z "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
-    gke_clusters=()
-    while IFS='' read -r line; do
-        gke_clusters+=("$line")
-    done < <(gcloud container clusters list --format='get(name)')
-    if [ "${#gke_clusters[@]}" -eq 1 ]; then
-        export CLOUDSDK_CONTAINER_CLUSTER="${gke_clusters[*]}"
+# safer but slower
+#gke_clusters=()
+#while IFS='' read -r line; do
+#    gke_clusters+=("$line")
+#done < <(gcloud container clusters list --format='get(name)')
+#if [ "${#gke_clusters[@]}" -eq 1 ]; then
+#    export CLOUDSDK_CONTAINER_CLUSTER="${gke_clusters[*]}"
+#fi
+
+gke_clusters="$(gcloud container clusters list --format='get(name)')"
+
+if [ -n "$gke_clusters" ]; then
+    num_gke_clusters="$(grep -c . <<< "$gke_clusters")"
+    echo "GKE Clusters ($num_gke_clusters):"
+    echo
+    echo "$gke_clusters"
+    echo
+    # If GKE_CLUSTER isn't set and there is only one GKE cluster in this account and region, then use it
+    if [ -z "${GKE_CLUSTER:-}" ]; then
+        if [ "$num_gke_clusters" = 1 ]; then
+            GKE_CLUSTER="$gke_clusters"
+        fi
     fi
 fi
 
