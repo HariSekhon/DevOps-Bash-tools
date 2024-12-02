@@ -132,7 +132,7 @@ if [ -n "${EKS_CLUSTER:-}" ]; then
 
     # XXX: safer to inline .envrc-kubernetes if you're worried about changes to it bypassing 'direnv allow' authorization
     # shellcheck disable=SC1090,SC1091
-    . "$srcdir/.envrc-kubernetes" "$EKS_CONTEXT"
+    . "$srcdir/.envrc-kubernetes" "$EKS_CONTEXT" ${EKS_NAMESPACE:+"$EKS_NAMESPACE"}
 fi
 
 if [ "$num_eks_clusters" = 1 ]; then
