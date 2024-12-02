@@ -57,12 +57,15 @@ echo
 # - if found then do an automatic 'aws sso login'
 #
 if ! aws sts get-caller-identity --output table; then
-    # assumes you're not putting a blank line until the next section block
-    #if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*$/p" ~/.aws/config | grep -q sso_start_url; then
-    # goes until the next [profile ...] section instead, should be more reliable
-    if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*\[.+\]/p" ~/.aws/config | grep -q sso_start_url; then
-        echo
-        aws sso login
+    if [ -n "${AWS_PROFILE:-}" ] &&
+       [ -z "${AWS_NO_AUTOLOGIN:-}" ]; then
+        # assumes you're not putting a blank line until the next section block
+        #if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*$/p" ~/.aws/config | grep -q sso_start_url; then
+        # goes until the next [profile ...] section instead, should be more reliable
+        if sed -n "/profile.*$AWS_PROFILE/,/^[[:space:]]*\[.+\]/p" ~/.aws/config | grep -q sso_start_url; then
+            echo
+            aws sso login
+        fi
     fi
 fi
 echo
