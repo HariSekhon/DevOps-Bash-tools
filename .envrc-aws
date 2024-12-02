@@ -51,6 +51,8 @@ echo
 
 # If not logged in:
 #
+# - and we know the AWS_PROFILE
+# - and AWS_NO_AUTOLOGIN is not set
 # - check for SSO key in config section for this profile
 # - if found then do an automatic 'aws sso login'
 #
