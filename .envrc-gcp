@@ -136,7 +136,7 @@ if [ -n "${CLOUDSDK_CONTAINER_CLUSTER:-}" ]; then
 
     # XXX: safer to inline .envrc-kubernetes if you're worried about changes to it bypassing 'direnv allow' authorization
     # shellcheck disable=SC1090,SC1091
-    . "$srcdir/.envrc-kubernetes" "$GKE_CONTEXT"
+    . "$srcdir/.envrc-kubernetes" "$GKE_CONTEXT" ${GKE_NAMESPACE:+"$GKE_NAMESPACE"}
 fi
 
 # pull the secret using this command whenever you need it:
