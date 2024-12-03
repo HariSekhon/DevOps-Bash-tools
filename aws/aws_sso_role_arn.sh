@@ -51,6 +51,7 @@ aws sts get-caller-identity --query Arn --output text |
 # strip the /hari@domain.com user suffix which we don't use when referencing the role in all IAM policies
 # since it can be used by many users
 sed '
+    s|^arn:aws:sts::|arn:aws:iam::|;
     s|:assumed-role/|:role/|;
     s|/[^/]*$||
 '
