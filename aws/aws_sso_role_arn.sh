@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints the currently authenticated user's role ARN in IAM policy usable format
+Prints the currently authenticated AWS SSO user's role ARN in IAM policy usable format
 
 Requires AWS CLI to be installed and configured
 "
