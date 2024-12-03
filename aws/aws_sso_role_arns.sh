@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints all AWS SSO ARNS in IAM policy usable format
+Prints all AWS SSO ARNs in IAM policy usable format
 
 Requires AWS CLI to be installed and configured
 "
