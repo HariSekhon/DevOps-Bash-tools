@@ -47,6 +47,10 @@ help_usage "$@"
 #fi
 
 aws sts get-caller-identity --query Arn --output text |
+# replace assumed-role with just role
 # strip the /hari@domain.com user suffix which we don't use when referencing the role in all IAM policies
 # since it can be used by many users
-sed 's|/[^/]*$||'
+sed '
+    s|:assumed-role/|:role/|;
+    s|/[^/]*$||
+'
