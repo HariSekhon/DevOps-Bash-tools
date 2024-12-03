@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prints the currently authenticated user's role ARN for putting into IAM policies
+Prints the currently authenticated user's role ARN in IAM policy usable format
 
 Requires AWS CLI to be installed and configured
 "
@@ -47,7 +47,6 @@ help_usage "$@"
 #fi
 
 aws sts get-caller-identity --query Arn --output text |
-sed '
-    s/aws-reserved\/sso.amazonaws.com\/[^\/]*\///;
-    s|/[^/]*$||
-'
+# strip the /hari@domain.com user suffix which we don't use when referencing the role in all IAM policies
+# since it can be used by many users
+sed 's|/[^/]*$||'
