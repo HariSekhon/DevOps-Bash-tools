@@ -249,6 +249,7 @@ quick:
 
 .PHONY: git
 git:
+	@# not using install_packages_if_absent.sh as we don't need a package on Mac, it comes with XCode
 	type git 2>/dev/null || $(BASH_TOOLS)/packages/install_packages.sh git
 
 .PHONY: submodules
