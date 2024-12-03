@@ -29,7 +29,8 @@ Requires AWS CLI to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<aws_sso_args>]"
+#usage_args="[<aws_sso_args>]"
+usage_args=""
 
 help_usage "$@"
 
