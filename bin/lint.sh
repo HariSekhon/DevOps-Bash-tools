@@ -108,6 +108,9 @@ else
                  *.tf)  terraform fmt -diff
                         terraform validate
                         ;;
+       terragrunt.hcl)  terragrunt fmt -diff
+                        terragrunt validate
+                        ;;
  *.pkr.hcl|*.pkr.json)  packer init "$filename" &&
                         packer validate "$filename" &&
                         packer fmt -diff "$filename"
