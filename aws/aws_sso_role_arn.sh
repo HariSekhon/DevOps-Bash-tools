@@ -47,4 +47,7 @@ help_usage "$@"
 #fi
 
 aws sts get-caller-identity --query Arn --output text |
-sed 's/aws-reserved\/sso.amazonaws.com\/[^\/]*\///; s|/[^/]*$||'
+sed '
+    s/aws-reserved\/sso.amazonaws.com\/[^\/]*\///;
+    s|/[^/]*$||
+'
