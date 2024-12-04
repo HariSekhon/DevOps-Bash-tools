@@ -1257,7 +1257,7 @@ See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-
   - `terraform_import_github_team_repos.sh` - finds all `github_team_repository` in Terraform plan that would be added, then queries the GitHub API for the repos and team IDs and if they both exist then imports them to Terraform state
   - `terraform_resources.sh` - external program to get all resource ids and attribute for a given resource type to work around Terraform splat expression limitation ([#19931](https://github.com/hashicorp/terraform/issues/19931))
   - `terraform_managed_resource_types.sh` - quick parse of what Terraform resource types are found in `*.tf` files under the current or given directory tree. Useful to give you a quick glance of what services you are managing
-  - `terraform_registry_url_extract.sh` - extracts the Terraform Registry URL from a given file or standard input. Useful to fast load Terraform Module documentation via editor/IDE hotkeys. Based on `urlextract.sh` above.
+  - `terraform_registry_url_extract.sh` - extracts the Terraform Registry URL in either `tfr://` or `https://registry.terraform.io/` format from a given file or standard input. Useful to fast load Terraform Module documentation via editor/IDE hotkeys. Based on `urlextract.sh` above.
   - See also [Knowledge Base notes for Terraform](https://github.com/HariSekhon/Knowledge-Base/blob/main/terraform.md).
 - `checkov_resource_*.sh` - [Checkov](https://www.checkov.io/) resource counts - useful to estimate [Bridgecrew Cloud](https://www.bridgecrew.cloud/) costs which are charged per resource:
   - `checkov_resource_count.sh` - counts the number of resources Checkov is scanning in the current or given directory
