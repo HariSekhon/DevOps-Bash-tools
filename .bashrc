@@ -105,7 +105,8 @@ histrmlast(){ history -d "$(history | tail -n 2 | head -n 1 | awk '{print $1}')"
 export HISTTIMEFORMAT="%F %T  "
 
 # stop logging duplicate successive commands to history
-HISTCONTROL=ignoredups:ignorespace
+#HISTCONTROL=ignoredups:ignorespace
+HISTCONTROL=ignoredups
 
 # Neat trick "[ \t]*" to exclude any command by just prefixing it with a space. Fast way of going stealth for pw entering on cli
 # & here means any duplicate patterns, others are simple things like built-ins and ls and stuff you don't need history for
