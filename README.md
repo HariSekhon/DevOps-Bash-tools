@@ -16,7 +16,7 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=HariSekhon_DevOps-Bash-tools)
 
 <!--
-BitBucket exposes HTML comments - open issue - works propterrerly on GitHub/GitLab
+BitBucket exposes HTML comments - open issue - works properly on GitHub/GitLab
 doesn't detect shell code properly
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=HariSekhon_DevOps-Bash-tools&metric=ncloc)](https://sonarcloud.io/dashboard?id=HariSekhon_DevOps-Bash-tools)
 -->
