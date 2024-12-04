@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Opens the Terraform Registry URL in either tfr:// or https://registry.terraform.io/ format given as an argument or standard input
+Opens the Terraform Registry URL given as an arg or standard input in either tfr:// or https://registry.terraform.io/ format
 
 If the given arg is a file, then opens the first Terraform URL found in the file
 
