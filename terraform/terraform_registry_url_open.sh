@@ -28,7 +28,7 @@ If the given arg is a file, then opens the first Terraform URL found in the file
 
 Used by .vimrc to instantly open a URL on the given line in the editor
 
-Very useful for quickly referencing inline documentation links found throughout my GitHub repos
+Very useful for quickly referencing Terraform documentation for modules defined in Terraform code
 "
 
 # used by usage() in lib/utils.sh
