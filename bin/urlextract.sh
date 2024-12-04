@@ -43,5 +43,5 @@ else
     echo "$arg"
 fi |
 # [] break the regex match, even when escaped \[\]
-grep -Eom 1 'https?://[[:alnum:]./?&!$#%@*;:+~_=-]+' ||
+grep -Eo 'https?://[[:alnum:]./?&!$#%@*;:+~_=-]+' ||
 die "No URLs found"
