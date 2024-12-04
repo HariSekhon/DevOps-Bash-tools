@@ -22,9 +22,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Extracts the Terraform Registry URL in either tfr:// or https://registry.terraform.io/ format from a given file or standard input
+Extracts the Terraform Registry URLs in either tfr:// or https://registry.terraform.io/ format
+from a given string, file or standard input
 
 Useful to fast load Terraform Module documentation via editor/IDE hotkeys
+
+See advanced .vimc in this repo
 
 Based on ../bin/urlextract.sh
 "
