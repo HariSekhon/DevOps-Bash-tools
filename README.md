@@ -349,7 +349,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `asciinema.sh` - creates a Gif from running terminal commands using `asciinema` and `agg` and then opens the resulting gif
 - `terminalizer.sh` - creates a Gif from running terminal commands using Terminalizer and then opens the resulting gif
 - `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
-- `urlextract.sh` - extracts the URLs from a given arg, file or standard input
+- `urlextract.sh` - extracts the URLs from a given string arg, file or standard input
 - `urlopen.sh` - opens the URL given as an arg, or first URL found from stdin or a given file.
   Uses the system's default browser
 - `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
