@@ -39,13 +39,16 @@ help_usage "$@"
 
 max_args 1 "$@"
 
-if "$srcdir/terraform_registry_url_extract.sh" "$@" |
-    sed 's|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|; s|$|/latest|g'
-    then
-    timestamp "Found Terraform Registry URL(s)"
-elif "$srcdir/../bin/urlextract.sh" "$@"; then
-    timestamp "Found URL(s)"
-fi |
+#if "$srcdir/terraform_registry_url_extract.sh" "$@" |
+#    sed 's|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|; s|$|/latest|g'
+#    then
+#    timestamp "Found Terraform Registry URL(s)"
+#elif "$srcdir/../bin/urlextract.sh" "$@"; then
+#    timestamp "Found URL(s)"
+#fi |
+
+"$srcdir/terraform_registry_url_extract.sh" "$@" |
+sed 's|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|; s|$|/latest|g'
 # head -n1 because grep -m 1 can't be trusted and sometimes outputs more matches on subsequent lines
 head -n1 |
 "$srcdir/../bin/urlopen.sh"
