@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Extracts the Terraform Registry URL from a given file or standard input
 
+Useful to fast load Terraform Module documentation via editor/IDE hotkeys
+
 Based on ../bin/urlextract.sh
 "
 
