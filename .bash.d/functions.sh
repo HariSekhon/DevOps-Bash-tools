@@ -186,6 +186,7 @@ findup(){
 		fi
 		current_dir="${current_dir%/*}"
 	done
+    echo "Not found in above path: $arg" >&2
 	return 1
 }
 
