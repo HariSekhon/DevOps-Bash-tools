@@ -350,7 +350,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `terminalizer.sh` - creates a Gif from running terminal commands using Terminalizer and then opens the resulting gif
 - `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
 - `urlextract.sh` - extracts the URLs from a given arg, file or standard input
-- `urlopen.sh` - opens the given URL from a given arg, stdin, or first URL found in a given file.
+- `urlopen.sh` - opens the URL given as an arg, or first URL found from stdin or a given file.
   Uses the system's default browser
 - `vagrant_hosts.sh` - generate `/etc/hosts` output from a `Vagrantfile`
 - `vagrant_total_mb.sh` - calculate the RAM committed to VMs in a `Vagrantfile`
