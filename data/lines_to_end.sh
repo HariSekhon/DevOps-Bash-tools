@@ -43,9 +43,11 @@ max_args 2 "$@"
 regex="$1"
 arg="${2:-}"
 
-ignorecase=1
+ignorecase=1  # true
+
+# testing expected value instead of passing to awk for safety
 if [ "${IGNORECASE:-}" = 0 ]; then
-    ignorecase=0
+    ignorecase=0  # false
 fi
 
 if [ $# -eq 1 ]; then
