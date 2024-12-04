@@ -55,14 +55,6 @@ alias dockerecr='aws ecr get-login-password | docker login -u AWS --password-std
 alias awscon='aws_consoler -o'
 alias awsc='awscon'
 
-# easily set a profile env var
-aws_profile(){
-    # false positive
-    # shellcheck disable=SC2317
-    export AWS_PROFILE="$*"
-}
-alias awsp=awsprofile
-
 alias aws_whoami="aws sts get-caller-identity"
 alias awhoami=aws_whoami
 
@@ -166,37 +158,21 @@ aws_clean_env(){
     done < <(env | sed -n '/^AWS_/ s/=.*// p')
 }
 
+# easily set a profile env var
+#aws_profile(){
+#    # false positive
+#    # shellcheck disable=SC2317
+#    export AWS_PROFILE="$*"
+#}
+
+alias awsprofile=aws_profile.sh
+alias awsp=aws_profile.sh
+
 aws_get_profile_data(){
     local profile="$1"
     local filename="${2:-$aws_credentials_file}"
     sed -n "/[[:space:]]*\\[\\(profile[[:space:]]*\\)*$profile\\]/,/^[[:space:]]*\\[/p" "$filename"
 }
-
-aws_profile(){
-    local profile="${1// }"
-    if [ -n "$profile" ]; then
-        if ! [[ "$profile" =~ ^[[:alnum:]_-]+$ ]]; then
-            echo "invalid profile name given, must be alphanumeric, dashes and underscores allowed"
-            return 1
-        fi
-        local profile_data
-        profile_data="$(aws_get_profile_data "$profile")"
-        [ -n "$profile_data" ] ||
-        profile_data="$(aws_get_profile_data "$profile" "${AWS_CONFIG_FILE:-$HOME/.aws/config}")"
-        if [ -z "$profile_data" ]; then
-            echo "profile [$profile] not found in $aws_credentials_file!"
-            return 1
-        fi
-        aws_clean_env
-        echo "setting aws profile to '$profile'"
-        export AWS_PROFILE="$profile"
-    elif [ -n "$AWS_PROFILE" ]; then
-        echo "$AWS_PROFILE"
-    else
-        echo "default (keys not loaded to env)"
-    fi
-}
-alias awsprofile=aws_profile
 
 # Storing creds in one place in Boto creds file, pull them straight from there
 # if only using new creds, might want to just export AWS_PROFILE instead using aws_profile which provides validation
