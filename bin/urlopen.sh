@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Opens the URL given as an argument or standard input.
+Opens the URL given as an argument or standard input
 
 If the given arg is a file, then opens the first URL found in the file
 
