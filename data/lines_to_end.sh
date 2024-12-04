@@ -25,6 +25,10 @@ usage_description="
 Filters lines matching the given regex in a given file or stdin and outputs them at the end of stdout
 
 Used by my .vimrc to push my header links and similar down to the bottom for URL view pop-up to prioritize 3rd party docuementation links
+
+To enforce the regex matching with case sensitivity:
+
+    export IGNORECASE=0
 "
 
 # used by usage() in lib/utils.sh
@@ -48,7 +52,7 @@ else
 fi |
 # IGNORECASE requires gawk, not BSD awk, is mapped in lib/utils.sh
 awk -v regex="$regex" \
-    -v IGNORECASE=1 \
+    -v IGNORECASE="${IGNORECASE:-1}" \
 '
     $0 ~ regex {
         matches[++m] = $0
