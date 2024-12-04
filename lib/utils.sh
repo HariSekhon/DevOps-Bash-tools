@@ -568,6 +568,10 @@ read_secret(){
 }
 
 if is_mac; then
+    awk(){
+        # needed for awk -v IGNORECASE=1 to work for case insensitive regex
+        command gawk "$@"
+    }
     readlink(){
         command greadlink "$@"
     }
