@@ -35,17 +35,30 @@ Requires GitHub CLI to be installed and configured
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<username>"
+usage_args="[<username> <public_only_flag>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+max_args 2 "$@"
 
 username="${1:-}"
 
-gh repo list "$username" --limit 99999 \
-                         --json isFork \
-                         --jq '
-                            [.[] |
-                            select(.isFork | not)] |
-                            length'
+is_public="${2:-}"
+
+select_private="select(.)"
+if [ -n "${is_public:-}" ]; then
+    select_private="select(.isPrivate | not)"
+fi
+
+gh repo list \
+    ${username:+"$username"} \
+    --limit 99999 \
+    --json isFork,isPrivate \
+    --jq "
+        [
+            .[] |
+            select(.isFork | not) |
+            $select_private
+        ] |
+        length
+    "
