@@ -34,7 +34,7 @@ Based on ../bin/urlextract.sh
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<url_or_file_with_url>]"
+usage_args="[<string_or_file_with_url>]"
 
 help_usage "$@"
 
