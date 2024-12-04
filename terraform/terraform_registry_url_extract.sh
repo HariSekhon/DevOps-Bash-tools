@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Extracts the Terraform Registry URL from a given file or standard input
+Extracts the Terraform Registry URL in either tfr:// or https://registry.terraform.io/ format from a given file or standard input
 
 Useful to fast load Terraform Module documentation via editor/IDE hotkeys
 
@@ -47,5 +47,7 @@ else
     echo "$arg"
 fi |
 # [] break the regex match, even when escaped \[\]
-grep -Eom 1 'tfr://[[:alnum:]./?&!$#%@*;:+~_=-]+' ||
+grep -Eom 1 \
+     -e 'tfr://[[:alnum:]./?&!$#%@*;:+~_=-]+' \
+     -e 'https://registry.terraform.io/[[:alnum:]./?&!$#%@*;:+~_=-]*' ||
 die "No Terraform Registry URLs found"
