@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Converts one or more Terraform Registry URLs given as an argument or standard input from tfr:// to https://registry.terraform.io/ format
 
-If the given arg is a file, then reads all tfr:// urls from the file
+If the given arg is a file, then reads all tfr:// URLs from the file
 
 Used by .vimrc to convert tfr:// URLs found in a file to HTTPS format to present in a menu
 
