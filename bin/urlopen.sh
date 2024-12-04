@@ -28,7 +28,7 @@ If the given arg is a file, then opens the first URL found in the file
 
 Used by .vimrc to instantly open a URL on the given line in the editor
 
-Very useful for quickly referencing inline documentation links in config files and templates such as those found at https://github.com/HariSekhon/Templates
+Very useful for quickly referencing inline documentation links found throughout my GitHub repos
 "
 
 # used by usage() in lib/utils.sh
