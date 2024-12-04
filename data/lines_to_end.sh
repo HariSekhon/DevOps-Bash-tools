@@ -43,6 +43,11 @@ max_args 2 "$@"
 regex="$1"
 arg="${2:-}"
 
+ignorecase=1
+if [ "${IGNORECASE:-}" = 0 ]; then
+    ignorecase=0
+fi
+
 if [ $# -eq 1 ]; then
     cat
 elif [ -f "$arg" ]; then
@@ -52,7 +57,7 @@ else
 fi |
 # IGNORECASE requires gawk, not BSD awk, is mapped in lib/utils.sh
 awk -v regex="$regex" \
-    -v IGNORECASE="${IGNORECASE:-1}" \
+    -v IGNORECASE="$ignorecase" \
 '
     $0 ~ regex {
         matches[++m] = $0
