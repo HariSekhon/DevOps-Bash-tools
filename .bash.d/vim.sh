@@ -106,3 +106,10 @@ vihosts(){
     $sudo vim /etc/hosts
     $sudo pkill -1 dnsmasq
 }
+
+vimup(){
+    local arg="$1"
+    up_target="$(findup "$arg")"
+    [ -n "$up_target" ] || return 1
+    vim "$(findup "$1")"
+}
