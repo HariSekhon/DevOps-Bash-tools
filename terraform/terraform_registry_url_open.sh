@@ -40,7 +40,7 @@ help_usage "$@"
 max_args 1 "$@"
 
 if "$srcdir/terraform_registry_url_extract.sh" "$@" |
-    sed 's|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|; s|$|/latest|'
+    sed 's|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|; s|$|/latest|g'
     then
     timestamp "Found Terraform Registry URL(s)"
 elif "$srcdir/../bin/urlextract.sh" "$@"; then
