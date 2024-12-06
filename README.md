@@ -375,6 +375,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `keystrokes.sh` - send N keystroke combinations
 - `mouse_clicks.sh` - send N mouse click combinations to sequence of screen coordinates
   - `get_mouse_coordinates.sh` - print the current mouse coordinates - to know what to pass to above script
+- `mouse_random_movements.sh` - randomly moves the mouse randomly around the screen to prevent a screensaver kicking in on a Remote Desktop connection which has Active Directory Group Policies applied that doesn't let you disable the screensaver
 - `get_frontmost_process_title.scpt` - detect the frontmost window
   - to detect if you should send keystrokes / mouse clicks)
 - `set_frontmost_process.scpt` - switch to bring the given app to the foreground to send keystrokes / mouse clicks to it
