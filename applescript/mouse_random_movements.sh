@@ -70,8 +70,6 @@ for ((i=1; ; i++)); do
     x="$((RANDOM % screen_width))"
     y="$((RANDOM % screen_height))"
     timestamp "Mouse movement $i/$num at $x , $y"
-    # tool no longer available online
-    #MouseTools -leftClick -x "$x" -y "$y"
     cliclick "m:$x,$y"
     sleep "$sleep_secs"
 done
