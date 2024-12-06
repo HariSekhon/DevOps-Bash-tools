@@ -114,7 +114,11 @@ export EKS_CLUSTER="mycluster"
 #    export EKS_CLUSTER="${eks_clusters[*]}"
 #fi
 
-eks_clusters="$(aws eks list-clusters --query 'clusters' --output text | tr '[:space:]' '\n')"
+eks_clusters="$(
+    aws eks list-clusters --query 'clusters' --output text |
+    tr '[:space:]' '\n' |
+    sed '/^[[:space:]]*$/d'
+)"
 
 if [ -n "$eks_clusters" ]; then
     num_eks_clusters="$(grep -c . <<< "$eks_clusters")"
