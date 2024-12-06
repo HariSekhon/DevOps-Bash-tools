@@ -29,7 +29,12 @@ applied that doesn't let you disable the screensaver
 
 Sleeps for 10 seconds between mouse movements
 
-UPDATE: it turns out this doesn't stop Windows Virtual Desktop from going to screensaver
+UPDATE: it turns out this doesn't stop Windows Virtual Desktop from going to screensaver.
+
+WORKAROUND: find a safe area in your WVD session to click without any effect
+            and then run this command and Cmd-Tab to switch back to it:
+
+    SLEEP_SECS=10 mouse_clicks.sh -1
 "
 
 # used by usage() in lib/utils.sh
