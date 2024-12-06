@@ -97,7 +97,7 @@ for ((i=1; ; i++)); do
     else
         timestamp "Mouse click $i/$num at current mouse location"
         #MouseTools -leftClick
-        cliclick -m verbose "c:."
+        cliclick "c:."
         sleep "$sleep_secs.$RANDOM"  # add $RANDOM up to 1 second jitter to make it harder to spot that this is perfectly automated clicking
     fi
 done
