@@ -132,6 +132,8 @@ if [ -n "$eks_clusters" ]; then
             EKS_CLUSTER="$eks_clusters"
         fi
     fi
+else
+    num_eks_clusters=0
 fi
 
 if [ -n "${EKS_CLUSTER:-}" ]; then
