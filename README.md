@@ -375,7 +375,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `keystrokes.sh` - send N keystroke combinations
 - `mouse_clicks.sh` - send N mouse click combinations to sequence of screen coordinates
   - `get_mouse_coordinates.sh` - print the current mouse coordinates - to know what to pass to above script
-- `mouse_click_remote_desktop.sh` - switches to Microsoft Remote Desktop, waits 10 seconds and then clicks the mouse once a minute to prevent the screensaver from coming on. Workaround to Active Directory Group Policies that don't let you disable the screensaver
+- `mouse_clicks_remote_desktop.sh` - switches to Microsoft Remote Desktop, waits 10 seconds and then clicks the mouse once a minute to prevent the screensaver from coming on. Workaround to Active Directory Group Policies that don't let you disable the screensaver. Point your mouse to an area that will have no mouse click effect, the Cmd-Tab to Terminal and run this
 - `get_frontmost_process_title.scpt` - detect the frontmost window
   - to detect if you should send keystrokes / mouse clicks)
 - `set_frontmost_process.scpt` - switch to bring the given app to the foreground to send keystrokes / mouse clicks to it
