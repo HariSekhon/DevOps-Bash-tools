@@ -75,7 +75,7 @@ fi
 
 timestamp "Waiting for $start_delay secs before starting"
 sleep "$start_delay"
-timestamp "Starting $num mouse clicks"
+timestamp "Starting $num mouse clicks every $sleep_secs"
 echo
 
 for ((i=1; ; i++)); do
