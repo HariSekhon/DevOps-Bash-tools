@@ -91,7 +91,7 @@ for ((i=1; ; i++)); do
             timestamp "Mouse click $i/$num at $x , $y"
             # tool no longer available online
             #MouseTools -leftClick -x "$x" -y "$y"
-            cliclick -m verbose "c:$x,$y"
+            cliclick "c:$x,$y"
             sleep "$sleep_secs.$RANDOM"
         done
     else
