@@ -22,13 +22,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Switches to Remote Desktop, waits 10 seconds and then clicks the mouse every 1 minute on the current mouse location
+Switches to Microsoft Remote Desktop, waits 10 seconds and then clicks the mouse once a minute to prevent the screensaver from coming on
 
-Used to stop Microsoft Remote Desktop session going into screensaver
+Workaround to Active Directory Group Policies that don't let you disable the screensaver
 
 Point the mouse to a safe location with no mouse click effect
 
-Then Cmd-Tab to Terminal, run this and let it switch back to Remote Desktop and run the click once a
+Then Cmd-Tab to Terminal, run this and let it switch back to Remote Desktop to keep the session open
 minute to prevent the screensaver from coming on
 "
 
