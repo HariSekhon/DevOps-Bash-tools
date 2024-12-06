@@ -22,9 +22,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Randomly moves the mouse around the screen to prevent a screensaver kicking in on a Remote Desktop connection which has Active Directory Group Policies applied that doesn't let you disable the screensaver
+Randomly moves the mouse around the screen
 
-Sleeps for \$SLEEP_SECS (default: 10) between clicks to allow UIs to update and perform the next click
+Useful to prevent a screensaver kicking in on a Remote Desktop connection which has Active Directory Group Policies
+applied that doesn't let you disable the screensaver
+
+Sleeps for 10 seconds between mouse movements
 "
 
 # used by usage() in lib/utils.sh
