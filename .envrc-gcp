@@ -135,7 +135,10 @@ export CLOUDSDK_CONTAINER_CLUSTER=mycluster  # GKE cluster name
 #    export CLOUDSDK_CONTAINER_CLUSTER="${gke_clusters[*]}"
 #fi
 
-gke_clusters="$(gcloud container clusters list --format='get(name)')"
+gke_clusters="$(
+    gcloud container clusters list --format='get(name)' |
+    sed '/^[[:space:]]*$/d'
+)"
 
 if [ -n "$gke_clusters" ]; then
     num_gke_clusters="$(grep -c . <<< "$gke_clusters")"
@@ -149,6 +152,8 @@ if [ -n "$gke_clusters" ]; then
             GKE_CLUSTER="$gke_clusters"
         fi
     fi
+else
+    num_gke_clusters=0
 fi
 
 # alternatively call gke_kube_context() function in .envrc-kubernetes which will do this
