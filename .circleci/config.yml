@@ -37,7 +37,7 @@ workflows:
 jobs:
   build:
     docker:
-      - image: cimg/base:2021.04
+      - image: cimg/base:2024.12
     resource_class: small
     steps:
       - checkout
