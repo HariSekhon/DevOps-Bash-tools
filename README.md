@@ -544,6 +544,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_s3_check_account_public_blocked.sh` - checks S3 public access is blocked at the AWS account level
   - `aws_s3_sync.sh` - syncs multiple AWS S3 URLs from file lists. Validates S3 URLs, source and destination list lengths matches, and optionally that path suffixes match, to prevent off-by-one human errors spraying data all over the wrong destination paths
   - `aws_s3_access_logging.sh` - lists [AWS S3](https://aws.amazon.com/s3/) buckets and their [access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) status
+  - `aws_s3_delete_bucket_with_versions.sh` - deletes a bucket including all versions. Use with caution!
   - `aws_spot_when_terminated.sh` - executes commands when the [AWS EC2](https://aws.amazon.com/ec2/) instance running this script is notified of [Spot Termination](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html), acts as a latch mechanism that can be set any time after boot
   - `aws_sqs_check.sh` - sends a test message to an [AWS SQS](https://aws.amazon.com/sqs/) queue, retrieves it to check and then deletes it via the receipt handle id
   - `aws_sqs_delete_message.sh` - deletes 1-10 messages from a given [AWS SQS](https://aws.amazon.com/sqs/) queue (to help clear out test messages)
