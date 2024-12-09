@@ -64,6 +64,8 @@ alias tgaa='tga -auto-approve'
 alias tgip='tg init && tgp'
 alias tgia='tg init && tga'
 
+alias tgfu='tg force-unlock -force'
+
 if [ -n "${github:-}" ]; then
     for x in terraform-templates terraform tf; do
         if [ -d "$github/$x" ]; then
