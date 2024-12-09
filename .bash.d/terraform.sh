@@ -60,6 +60,7 @@ tffuu(){
 alias tg=terragrunt
 alias tgp='tg plan'
 alias tga='tg apply'
+alias tgaa='tga -auto-approve'
 alias tgip='tg init && tgp'
 alias tgia='tg init && tga'
 
