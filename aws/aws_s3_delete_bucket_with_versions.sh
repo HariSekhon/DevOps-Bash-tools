@@ -49,11 +49,13 @@ object_versions="$(
         --output text
 )"
 
-while read -r key versionId; do
-    timestamp "Deleting object '$key' version '$versionId'"
-    aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$versionId"
-done <<< "$object_versions"
-echo >&2
+if [ "$object_versions" != "None" ]; then
+    while read -r key versionId; do
+        timestamp "Deleting object '$key' version '$versionId'"
+        aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$versionId"
+    done <<< "$object_versions"
+    echo >&2
+fi
 
 timestamp "Getting object deletion markers for bucket: $bucket"
 object_deletion_markers="$(
@@ -63,11 +65,13 @@ object_deletion_markers="$(
         --output text
 )"
 
-while read -r key versionId; do
-    timestamp "Deleting object deletion marker '$key' version '$versionId'"
-    aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$versionId"
-done <<< "$object_deletion_markers"
-echo >&2
+if [ "$object_deletion_markers" != "None" ]; then
+    while read -r key versionId; do
+        timestamp "Deleting object deletion marker '$key' version '$versionId'"
+        aws s3api delete-object --bucket "$bucket" --key "$key" --version-id "$versionId"
+    done <<< "$object_deletion_markers"
+    echo >&2
+fi
 
 timestamp "Deleting bucket: $bucket"
 #aws s3api delete-bucket --bucket "$bucket"
