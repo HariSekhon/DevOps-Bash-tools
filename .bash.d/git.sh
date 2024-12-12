@@ -183,6 +183,8 @@ git_root(){
     git rev-parse --show-toplevel
     popd &>/dev/null || return 1
 }
+alias gitroot=git_root
+alias cdgitroot="cd $(git_root)"
 
 gitgc(){
     cd "$(git_root)" || :
