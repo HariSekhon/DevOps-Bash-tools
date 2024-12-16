@@ -24,6 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Quickly lists the Kinesis stream names
 
+
 $usage_aws_cli_required
 "
 
