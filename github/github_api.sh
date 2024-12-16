@@ -73,6 +73,11 @@ Examples:
     ${0##*/} /orgs/MyOrg/repos
 
 
+# Check this specific PAT token can access a specific repo (eg. for testing integration from ArgoCD):
+
+    GH_TOKEN=... ${0##*/} /repos/<owner>/<repo>
+
+
 # Get the GitHub Actions workflows for a given repo:
 
     ${0##*/} /repos/HariSekhon/DevOps-Bash-tools/actions/workflows
