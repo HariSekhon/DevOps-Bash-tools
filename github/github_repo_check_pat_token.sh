@@ -62,7 +62,7 @@ if is_blank "$token"; then
     die "GH_TOKEN is blank and no second arg given for token"
 fi
 
-echo "TOKEN: $token"
+echo "TOKEN: ...$token"
 echo
 echo -n "Login: "
 "$srcdir/github_api.sh" /user | jq -r '.login'
