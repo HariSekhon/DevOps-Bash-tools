@@ -30,7 +30,6 @@ The token can be given as a second arg or it infers it from one of the environme
 
     \$GH_TOKEN
     \$GITHUB_TOKEN
-    \$GITHUB_PASSWORD
 
 
 Requires GitHub CLI to be installed
@@ -51,21 +50,18 @@ if ! is_github_owner_repo "$owner_repo"; then
     die "Invalid GitHub <owner>/<repo> given, failed regex match: $owner_repo"
 fi
 
-if [ $# -gt 1 ]; then
-    export GH_TOKEN="$2"
-fi
+export GH_TOKEN="${2:-${GH_TOKEN:-${GITHUB_TOKEN:-}}}"
 
-# follows what github_api.sh infers to use as the token
-token="${GH_TOKEN:-${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}}"
-token="${token:(-4)}"
-# or with a preceding space but this is not obvious and someone might remove the space, exposing the token to the screen
-#token="${token: -4}"
-
-if is_blank "$token"; then
+if is_blank "$GH_TOKEN"; then
     die "GH_TOKEN is blank and no second arg given for token"
 fi
 
-echo "TOKEN: ...$token"
+# follows what github_api.sh infers to use as the token
+token_ending="${GH_TOKEN:(-4)}"
+# or with a preceding space but this is not obvious and someone might remove the space, exposing the token to the screen
+#token_ending="${GH_TOKEN: -4}"
+
+echo "TOKEN: ...$token_ending"
 echo
 echo -n "Login: "
 # error message is:
