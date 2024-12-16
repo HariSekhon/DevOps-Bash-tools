@@ -983,7 +983,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `github_ip_ranges.sh` - returns GitHub's IP ranges, either all by default or for a select given service such as hooks or actions
   - `github_sync_repo_descriptions.sh` - syncs GitHub repo descriptions to GitLab & BitBucket repos
   - `github_release.sh` - creates a GitHub Release, auto-incrementing a `.N` suffix on the year/month/day date format if no exact version given
-  - `github_repo_check_pat_token.sh` - checks the given PAT token can access the given GitHub repo
+  - `github_repo_check_pat_token.sh` - checks the given PAT token can access the given GitHub repo. Useful to test a PAT token used for integrations like ArgoCD
   - `github_repo_description.sh` - fetches the given repo's description (used by `github_sync_repo_descriptions.sh`)
   - `github_repo_find_files.sh` - finds files matching a regex in the current or given GitHub repo via the GitHub API
   - `github_repo_latest_release.sh` - returns the latest release tag for a given GitHub repo via the GitHub API
