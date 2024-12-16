@@ -47,9 +47,10 @@ num_args 2 "$@"
 ECR="$1"
 REPO="$2"
 
-if ! [[ "$ECR" =~ ^[[:digit:]]+.dkr.ecr.[[:alnum:]-]+.amazonaws.com$ ]]; then
+if ! is_aws_ecr_registry "$ECR"; then
     usage "Invalid ECR address given:  $ECR"
 fi
+
 if ! [[ "$REPO" =~ ^[[:alnum:]/-]+$ ]]; then
     usage "Invalid Repo name given:  $REPO"
 fi
@@ -61,7 +62,7 @@ fi
 
 echo "* AWS ECR -> Docker login"
 # $AWS_DEFAULT_REGION should be set in env or profile
-aws ecr get-login-password | docker login --username AWS --password-stdin "$ECR"
+"$srcdir/aws_ecr_docker_login.sh" "$ECR"
 echo
 
 echo "* Determining tags"
