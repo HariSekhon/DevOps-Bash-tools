@@ -54,7 +54,9 @@ fi
 
 # follows what github_api.sh infers to use as the token
 token="${GH_TOKEN:-${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}}"
-token="${token:-4}"
+token="${token:(-4)}"
+# or with a preceding space but this is not obvious and someone might remove the space, exposing the token to the screen
+#token="${token: -4}"
 
 if is_blank "$token"; then
     die "GH_TOKEN is blank and no second arg given for token"
@@ -65,5 +67,11 @@ echo
 echo -n "Login: "
 "$srcdir/github_api.sh" /user | jq -r '.login'
 echo
-echo -n "REPO: "
-"$srcdir/github_api.sh" "/repos/$owner_repo" | jq -r '.full_name'
+timestamp "Checking PAT token can access repo '$owner_repo'"
+echo
+result="$("$srcdir/github_api.sh" "/repos/$owner_repo" | jq -r '.full_name')"
+if [ "$result" = null ] || is_blank "$result"; then
+    die "ERROR: PAT token failed to access repo '$owner_repo'"
+else
+    timestamp "Successfull accessed GitHub repo: $result"
+fi
