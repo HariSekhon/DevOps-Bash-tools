@@ -26,7 +26,7 @@ Quick table of AWS ElastiCache useful fields:
 
 Name, Engine, Status, Endpoint Address & Port, Description
 
-Requires AWS CLI to be installed and configured
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
