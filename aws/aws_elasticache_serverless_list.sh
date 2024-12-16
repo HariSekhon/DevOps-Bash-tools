@@ -26,6 +26,7 @@ Quick table of AWS ElastiCache useful fields:
 
 Name, Engine, Status, Endpoint Address & Port, Description
 
+
 $usage_aws_cli_required
 "
 
