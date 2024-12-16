@@ -26,7 +26,7 @@ usage_aws_cli_required="Requires AWS CLI to be installed and configured (run 'ma
 # shellcheck disable=SC2034
 usage_aws_cli_jq_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
-aws_ecr_regex='[[:digit:]]{12}.dkr.ecr.[[:alnum:]-]{4,}.amazonaws.com'
+aws_ecr_regex='[[:digit:]]{12}.dkr.ecr.[[:alnum:]-]{6,}.amazonaws.com'
 aws_region_regex='[a-z]{2}-[a-z]+-[[:digit:]]'
 instance_id_regex='i-[0-9a-fA-F]{17}'
 ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
