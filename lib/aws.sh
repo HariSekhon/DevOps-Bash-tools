@@ -22,7 +22,8 @@ libdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # used in client scripts
 # shellcheck disable=SC2034
-usage_aws_cli_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
+usage_aws_cli_required="Requires AWS CLI to be installed and configured (run 'make aws && aws configure')"
+usage_aws_cli_jq_required="Requires AWS CLI to be installed and configured, as well as jq  (run 'make aws && aws configure')"
 
 aws_region_regex='[a-z]{2}-[a-z]+-[[:digit:]]'
 instance_id_regex='i-[0-9a-fA-F]{17}'
