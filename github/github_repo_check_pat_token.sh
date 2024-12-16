@@ -61,7 +61,7 @@ token_ending="${GH_TOKEN:(-4)}"
 # or with a preceding space but this is not obvious and someone might remove the space, exposing the token to the screen
 #token_ending="${GH_TOKEN: -4}"
 
-echo "TOKEN: ...$token_ending"
+echo "Token ending: ...$token_ending"
 echo
 echo -n "Login: "
 # error message is:
