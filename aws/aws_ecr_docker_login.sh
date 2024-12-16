@@ -22,9 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Authenticate Docker to AWS ECR
+Authenticates Docker to AWS ECR, inferring the ECR registry from the current AWS Account ID and Region
 
-If \$AWS_ACCOUNT_ID and \$AWS_DEFAULT_REGION are not set in the environment, tries to infer them from the current AWS config
+If \$AWS_ACCOUNT_ID and \$AWS_DEFAULT_REGION are not set in the environment,
+tries to infer them from the current AWS config
+
 
 $usage_aws_cli_required, and also Docker must be installed
 "
