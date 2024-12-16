@@ -36,7 +36,7 @@ YYYY-MM-DDTHHMMSSZ  (standard ISO UTC time without semi-colons which are invalid
 The timestamp will be normalized to UTC
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

@@ -46,7 +46,7 @@ eg.
 2021-12-22T20:22:17Z    123ab4cd-e5f6-789a-b012-34c5d67e8f90    MyBatchRole/1ab2c34567890123d45e678f901a2b34  my_report_postprocess
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

@@ -35,7 +35,7 @@ See Also:
     awless list users --format tsv | awk '{if(\$4 == \"months\" || \$4 == \"years\") print}'
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

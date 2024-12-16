@@ -27,7 +27,7 @@ Finds and prints all policies directly attached to users instead of groups
 Policies directly attached to users is against best practice as it is harder to maintain
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

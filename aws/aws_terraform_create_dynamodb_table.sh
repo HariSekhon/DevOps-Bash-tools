@@ -31,7 +31,7 @@ This is useful when creating a Read Only account for GitHub Actions environment 
 Idempotent - skips creation of table and policy if they already exist
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

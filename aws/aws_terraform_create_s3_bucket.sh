@@ -38,7 +38,7 @@ Idempotent: skips bucket creation if already exists, applies versioning, encrypt
 Region: will create the bucket in your configured region, to override locally set \$AWS_DEFAULT_REGION
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

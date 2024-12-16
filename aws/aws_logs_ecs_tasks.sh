@@ -45,7 +45,7 @@ eg.
 2021-12-23T02:05:34Z    aws-batch       MyJob:11
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

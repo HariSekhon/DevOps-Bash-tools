@@ -31,7 +31,7 @@ OK/WARNING Status is output to stderr
 Exits with error code 1 if S3 public access is set and exit code 2 if not fully blocked via policy at the account level
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

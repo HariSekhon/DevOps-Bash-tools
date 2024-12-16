@@ -37,7 +37,7 @@ Outputs to both stdout and a file called $script_basename-<AWS_ACCOUNT_ID>-YYYY-
 So that you can diff subsequent runs to see the difference between EC2 VMs that come and go due to AutoScaling Groups
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

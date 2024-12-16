@@ -33,7 +33,7 @@ Queue URL argument can be copied from SQS queue page and should look similar to:
     https://sqs.\$AWS_DEFAULT_REGION.amazonaws.com/\$AWS_ACCOUNT_ID/myname.fifo
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

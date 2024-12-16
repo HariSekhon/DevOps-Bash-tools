@@ -39,7 +39,7 @@ See similar tools in DevOps Python Tools repo:
     https://github.com/HariSekhon/DevOps-Python-tools
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

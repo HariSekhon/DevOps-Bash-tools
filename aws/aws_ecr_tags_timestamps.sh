@@ -32,7 +32,7 @@ Output Format:
 Each timestamp and tag for the given image is output tab separated on a separate line for easy further piping and filtering
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 If you want to remove an extra tag from an existing image:

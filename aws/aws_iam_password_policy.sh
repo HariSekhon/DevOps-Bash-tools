@@ -30,7 +30,7 @@ See Also:
                                         that script calls this one before and after changing the password policy
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

@@ -29,7 +29,7 @@ eg.
 awsconfig  true  SUCCESS
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

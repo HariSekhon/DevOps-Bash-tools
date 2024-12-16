@@ -47,7 +47,7 @@ Check the state of the AMI is finished:
 Investigate instance names quickly using adjacent script aws_ec2_instances.sh
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

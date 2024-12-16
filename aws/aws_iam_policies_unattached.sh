@@ -27,7 +27,7 @@ Lists all unattached policies
 These unattached should probably be cleaned up (removed)
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

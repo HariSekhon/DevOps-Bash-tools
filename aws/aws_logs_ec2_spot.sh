@@ -45,7 +45,7 @@ eg.
 2021-12-22T22:37:28Z    AutoScaling     AWSBatch-<name>-asg-12a3b4c5-67d8-9efa-b012-34cde56789f0
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

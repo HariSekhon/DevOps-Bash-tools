@@ -32,7 +32,7 @@ Necessary for limited privilege CI/CD accounts such as GitHub Actions pull reque
 Idempotent, skips creation of the policies if they already exist
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

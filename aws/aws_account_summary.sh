@@ -51,7 +51,7 @@ See Also:
     check_aws_root_account.py   -   in The Advanced Nagios Plugins collection (https://github.com/HariSekhon/Nagios-Plugins)
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

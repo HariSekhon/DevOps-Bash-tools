@@ -33,7 +33,7 @@ If no tag is given, assumes 'latest'
 
 If the image isn't found in GCR, will return nothing and no error code since this is the default GCloud SDK behaviour
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

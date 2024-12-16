@@ -39,7 +39,7 @@ This can also be used as a backup credential - this way if something accidentall
 Idempotent - safe to re-run, will skip creating a user that already exists or CSV export that already exists
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

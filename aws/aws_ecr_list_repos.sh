@@ -29,7 +29,7 @@ Output:
 <repo_name>    <mutable_tags>    <scanning_enabled>
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

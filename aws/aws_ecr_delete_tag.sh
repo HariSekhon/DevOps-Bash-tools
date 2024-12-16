@@ -26,7 +26,7 @@ usage_description="
 Deletes a tag for the given AWS ECR docker image
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

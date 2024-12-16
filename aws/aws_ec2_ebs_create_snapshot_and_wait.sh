@@ -32,7 +32,7 @@ Automatically determines the EC2 instance name and prefixes it to the snapshot d
 Use the adjacent script aws_ec2_ebs_volumes.sh to easily get the volume ID
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

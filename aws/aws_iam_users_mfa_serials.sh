@@ -29,7 +29,7 @@ Virtual MFAs have a SerialNumber in the format:
 arn:aws:iam::<account_id>:mfa/<mfa>
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

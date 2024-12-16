@@ -30,7 +30,7 @@ Lists the tags for the given AWS ECR docker image with the newest creation date
 When a docker image has multiple tags (eg. v1, latest) then outputs each tag on a separate line for easy further piping and filtering
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

@@ -30,7 +30,7 @@ Tags an AWS ECR image with another tag without pulling + pushing the image
 If :<tag> isn't given, assumes 'latest'
 If the environment variable FORCE is set, will remove the new tag reference to ensure the new tagging takes effect
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

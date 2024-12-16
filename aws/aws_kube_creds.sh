@@ -35,7 +35,7 @@ Can supply arguments to be passed to AWS CLI to set things like region eg.
     ${0##*/} --region eu-west-2
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 See also:

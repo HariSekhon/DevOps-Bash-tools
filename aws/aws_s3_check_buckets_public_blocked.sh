@@ -33,7 +33,7 @@ Parallelized to get through bucket list more quickly, set NOPARALLEL env var to 
 For 64 buckets parallelization took the runtime from 166-168 seconds down to 21-40 seconds
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

@@ -29,7 +29,7 @@ Ouptut:
 <instance_id>  <instance_name>  <volume_id>  <volume_name>  <volume_size_GB>  <device>  <encrypted>  <delete_on_termination>  <attached/detached>  <attached_time>
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

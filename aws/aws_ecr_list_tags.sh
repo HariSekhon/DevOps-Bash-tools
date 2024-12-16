@@ -28,7 +28,7 @@ Lists all tags for the given AWS ECR docker image
 Each tag for the given image is output on a separate line for easy further piping and filtering
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

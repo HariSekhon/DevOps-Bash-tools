@@ -29,7 +29,7 @@ Output Format:
 CloudTrail_Name      S3_KMS_secured (boolean)     KMS_Key_Id
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

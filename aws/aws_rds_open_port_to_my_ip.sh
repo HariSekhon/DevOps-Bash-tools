@@ -31,7 +31,7 @@ Adds a security group to an RDS DB instance to open its native database SQL port
 - adds the security group to the RDS DB instance
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

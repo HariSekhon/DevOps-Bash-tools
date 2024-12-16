@@ -27,7 +27,7 @@ Lists AWS Secrets Manager secrets, one per line
 Any args are passed directly to 'aws secretsmanager'
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

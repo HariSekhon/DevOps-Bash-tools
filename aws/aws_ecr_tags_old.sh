@@ -34,7 +34,7 @@ You can grep and pipe this output to
 to clean out old CI image builds to save S3 storage costs on old CI images you no longer use
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 See Also:

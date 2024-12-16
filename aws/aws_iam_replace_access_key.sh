@@ -37,7 +37,7 @@ If there is only 1 access key, a 2nd key is created but no key is deleted for sa
 If the first argument given starts with a dash it is inferred to be an AWS CLI option instead of an access key ID to replace and the above heuristic is used to figure out which key to replace
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh

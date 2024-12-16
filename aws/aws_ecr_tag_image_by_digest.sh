@@ -31,7 +31,7 @@ Useful to recover an <untagged> image and apply a new tag to it or if you want t
 
 If the environment variable FORCE is set, will remove the new tag reference to ensure the new tagging takes effect
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 
 
 Similar scripts:

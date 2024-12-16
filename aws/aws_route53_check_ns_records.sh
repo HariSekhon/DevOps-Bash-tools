@@ -29,7 +29,7 @@ Can specify one or more hosted zones space separated, otherwise will find and it
 Helps test your AWS Route 53 setup and debug any imperfections in your NS delegation
 
 
-$usage_aws_cli_required
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh
