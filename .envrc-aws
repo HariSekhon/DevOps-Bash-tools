@@ -140,6 +140,14 @@ if [ -n "${EKS_CLUSTER:-}" ]; then
     # kubectl context is easily created by running adjacent aws_kube_creds.sh script first
     export EKS_CONTEXT="arn:aws:eks:$AWS_DEFAULT_REGION:$AWS_ACCOUNT_ID:cluster/$EKS_CLUSTER"
 
+    if command -v kubectl &>/dev/null; then
+        if ! kubectl config get-clusters | grep -Fxq "$EKS_CONTEXT"; then
+            echo "EKS Cluster '$EKS_CLUSTER' not configured, configuring now"
+            aws eks update-kubeconfig --name "$EKS_CLUSTER"
+            echo
+        fi
+    fi
+
     # XXX: safer to inline .envrc-kubernetes if you're worried about changes to it bypassing 'direnv allow' authorization
     # shellcheck disable=SC1090,SC1091
     . "$srcdir/.envrc-kubernetes" "$EKS_CONTEXT" ${EKS_NAMESPACE:+"$EKS_NAMESPACE"}
