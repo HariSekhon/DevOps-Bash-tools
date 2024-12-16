@@ -56,6 +56,10 @@ fi
 token="${GH_TOKEN:-${GITHUB_TOKEN:-${GITHUB_PASSWORD:-}}}"
 token="${token:-4}"
 
+if is_blank "$token"; then
+    die "GH_TOKEN is blank and no second arg given for token"
+fi
+
 echo "TOKEN: $token"
 echo
 echo -n "Login: "
