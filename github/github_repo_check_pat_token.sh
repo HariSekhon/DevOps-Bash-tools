@@ -65,11 +65,13 @@ fi
 echo "TOKEN: ...$token"
 echo
 echo -n "Login: "
-"$srcdir/github_api.sh" /user | jq -r '.login'
+#"$srcdir/github_api.sh" /user | jq -r '.login'
+gh api /user | jq -r '.login'
 echo
 timestamp "Checking PAT token can access repo '$owner_repo'"
 echo
-result="$("$srcdir/github_api.sh" "/repos/$owner_repo" | jq -r '.full_name')"
+#result="$("$srcdir/github_api.sh" "/repos/$owner_repo" | jq -r '.full_name')"
+result="$(gh api "/repos/$owner_repo" | jq -r '.full_name')"
 if [ "$result" = null ] || is_blank "$result"; then
     die "ERROR: PAT token failed to access repo '$owner_repo'"
 else
