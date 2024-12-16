@@ -118,9 +118,11 @@ kube_context(){
         #if kubectl config get-contexts -o name 2>/dev/null | grep -Fxq "$context"; then
         if [ "$context_found" = 1 ]; then
             kubectl config use-context "$CONTEXT"
+            echo
 
             if [ -n "${namespace:-}" ]; then
                 kubectl config set-context "$context" --namespace "$namespace"
+                echo
             fi
         fi
     fi
