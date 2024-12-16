@@ -31,6 +31,9 @@ The token can be given as a second arg or it infers it from one of the environme
     \$GH_TOKEN
     \$GITHUB_TOKEN
     \$GITHUB_PASSWORD
+
+
+Requires GitHub CLI to be installed
 "
 
 # used by usage() in lib/utils.sh
@@ -65,12 +68,30 @@ fi
 echo "TOKEN: ...$token"
 echo
 echo -n "Login: "
+# error message is:
+#
+#   curl: (22) The requested URL returned error: 401
+#
 #"$srcdir/github_api.sh" /user | jq -r '.login'
+#
+# this error message is better:
+#
+#   gh: Bad credentials (HTTP 401)
+#
 gh api /user | jq -r '.login'
 echo
 timestamp "Checking PAT token can access repo '$owner_repo'"
 echo
+# error message:
+#
+#   curl: (22) The requested URL returned error: 404
+#
 #result="$("$srcdir/github_api.sh" "/repos/$owner_repo" | jq -r '.full_name')"
+#
+# error message:
+#
+#   gh: Not Found (HTTP 404)
+#
 result="$(gh api "/repos/$owner_repo" | jq -r '.full_name')"
 if [ "$result" = null ] || is_blank "$result"; then
     die "ERROR: PAT token failed to access repo '$owner_repo'"
