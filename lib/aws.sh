@@ -70,7 +70,10 @@ aws_region(){
 }
 
 aws_ecr_registry(){
-    echo "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+    local ecr_registry="$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com"
+    if ! is_aws_ecr_registry "$ecr_registry"; then
+        die "Failed to generated AWS ECR registry correctly, failed regex: $ecr_registry"
+    fi
 }
 
 is_aws_ecr_registry(){
