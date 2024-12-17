@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates a random number between the first and second arguments inclusive
+Prints a random integer between two integer arguments (inclusive)
 "
 
 # used by usage() in lib/utils.sh
@@ -35,6 +35,12 @@ num_args 2 "$@"
 
 min="$1"
 max="$2"
+
+if ! is_int "$min"; then
+    usage "First arg is not an integer: $min"
+elif ! is_int "$max"; then
+    usage "Second arg is not an integer: $max"
+fi
 
 #random_number="$(shuf -i "$min-$max" -n 1)"
 
