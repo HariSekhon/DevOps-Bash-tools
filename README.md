@@ -338,7 +338,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `processes_ram_sum.sh` - sums the RAM usage of all processes matching a given regex in GB to one decimal place
 - `pldd.sh` - parses `/proc` on Linux to show the runtime `.so` loaded dynamic shared libraries a program pid is using. Runtime equivalent of the classic static `ldd` command and because the system `pldd` command often fails to attach to a process
 - `random_select.sh` - selects one of given args at random. Useful for sampling, running randomized subsets of large test suites etc.
-- `random_number.sh` - prints a random number between the two arguments inclusive
+- `random_number.sh` - prints a random integer between two integer arguments (inclusive)
 - `shields_embed_logo.sh` - base64 encodes a given icon file or url and prints the `logo=...` url parameter you need to add the [shields.io](https://shields.io/) badge url
 - `shred_file.sh` - overwrites a file 7 times to DoD standards before deleting it to prevent recovery of sensitive information
 - `shred_free_space.sh` - overwrites free space to prevent recovery of sensitive information for files that have already been deleted
