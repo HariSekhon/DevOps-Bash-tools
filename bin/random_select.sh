@@ -40,7 +40,7 @@ declare -a arg_array
 
 for arg in "$@"; do
     log "Saving arg' $arg' at index '$index'"
-    arg_array[$index]="$arg"
+    arg_array[index]="$arg"
     ((index += 1))
 done
 
