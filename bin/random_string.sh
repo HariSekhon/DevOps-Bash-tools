@@ -19,17 +19,34 @@
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
-#srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Prints a random string of the given character length
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="<chars>"
+
+help_usage "$@"
+
+max_args 1 "$@"
 
 len="${1:-32}"
 
-if ! [[ "$len" =~ ^[[:digit:]]+$ ]]; then
-    echo "invalid string len given as first argument to ${0##*/}" >&2
-    exit 1
+if ! is_int "$len"; then
+    usage "Invalid non-integer string length given as first argument"
 fi
 
 # fixes illegal byte error in tr / sed etc
 export LC_ALL=C
 
-#tr -duc 'A-Za-z0-9' < /dev/urandom | fold -w "$len" | head -n1
-tr -duc '[:alnum:]' < /dev/urandom | head -c "$len" || :  # head returns error code 141 but succeeds
+#tr -duc 'A-Za-z0-9' < /dev/urandom |
+tr -duc '[:alnum:]' < /dev/urandom |
+#fold -w "$len" | head -n1
+head -c "$len" || :  # head returns error code 141 but succeeds
