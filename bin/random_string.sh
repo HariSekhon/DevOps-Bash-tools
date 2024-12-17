@@ -31,7 +31,7 @@ Prints a random alphanumeric string of the given character length
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<chars>"
+usage_args="<num_chars>"
 
 help_usage "$@"
 
