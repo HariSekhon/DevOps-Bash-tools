@@ -171,9 +171,8 @@ dockerrmall(){
 dockerrmigrep(){
     for x in "$@"; do
         docker images |
-        grep "$x" |
-        grep -v "<none>" |
-        awk '{print $1":"$2}' |
+        awk "/$x/{print \$1\":\"\$2}" |
+        sed '/<none>/d' |
         xargs -r docker rmi --
     done
 }
