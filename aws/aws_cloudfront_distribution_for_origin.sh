@@ -46,4 +46,4 @@ json="$(
         --output json
 )"
 
-jq -r ".[] | select(.DomainNames | map(ascii_downcase | contains(\"$domain_substring\")) | any) | .ARN" <<< "$json"
+jq -r ".[] | select(.DomainNames | map(ascii_downcase | contains(\"$domain_substring\"))) | .ARN" <<< "$json"
