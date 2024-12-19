@@ -449,6 +449,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_budget_alarm.sh` - creates an [AWS Budgets](https://aws.amazon.com/cloudwatch/) billing alarm and [SNS](https://aws.amazon.com/sns/) topic with subscription to email you when both when you start incurring forecasted charges of over 80% of your budget, and 90% actual usage. This is often the first thing you want to do on an account
   - `aws_batch_stale_jobs.sh` - lists [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
   - `aws_batch_kill_stale_jobs.sh` - finds and kills [AWS Batch](https://aws.amazon.com/batch/) jobs that are older than N hours in a given queue
+  - `aws_cloudfront_distribution_for_origin.sh` - returns the AWS CloudFront ID of the distribution which serves origins containing a given substring. Useful for quickly finding the CloudFront ID needed to give permissions to a private S3 bucket exposed via CloudFront
   - `aws_cloudtrails_cloudwatch.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their last delivery to [CloudWatch](https://aws.amazon.com/cloudwatch/features/) Logs (should be recent)
   - `aws_cloudtrails_event_selectors.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) and their event selectors to check each one has at least one event selector
   - `aws_cloudtrails_s3_accesslogging.sh` - lists [Cloud Trails](https://aws.amazon.com/cloudtrail/) buckets and their Access Logging prefix and target bucket. Checks [S3 access logging](https://docs.aws.amazon.com/AmazonS3/latest/dev/ServerLogs.html) is enabled
