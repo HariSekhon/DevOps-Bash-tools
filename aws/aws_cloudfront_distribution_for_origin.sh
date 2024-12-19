@@ -46,4 +46,9 @@ json="$(
         --output json
 )"
 
+if [ "$json" = null ]; then
+    echo "No CloudFront distributions found. Have you selected the right AWS profile / account?" >&2
+    exit 1
+fi
+
 jq -r ".[] | select(.DomainNames | map(ascii_downcase | contains(\"$domain_substring\")) | any) | .ARN" <<< "$json"
