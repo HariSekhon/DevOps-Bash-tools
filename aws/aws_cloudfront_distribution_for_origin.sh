@@ -47,7 +47,7 @@ json="$(
 )"
 
 if [ "$json" = null ]; then
-    echo "No CloudFront distributions found. Have you selected the right AWS profile / account?" >&2
+    echo "No CloudFront distributions found. Have you set the right \$AWS_PROFILE environment variable to the correct account?" >&2
     exit 1
 fi
 
