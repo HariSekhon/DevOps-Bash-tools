@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns the AWS CloudFront ID of the distribution which serves origins containing a given substring
+Returns the AWS CloudFront ARN of the distribution which serves origins containing a given substring
 
-Useful for quickly finding the CloudFront ID needed to give permissions to a private S3 bucket exposed via CloudFront
+Useful for quickly finding the CloudFront ARN needed to give permissions to a private S3 bucket exposed via CloudFront
 
 
 $usage_aws_cli_jq_required
@@ -42,8 +42,8 @@ domain_substring="$1"
 
 json="$(
     aws cloudfront list-distributions \
-        --query "DistributionList.Items[*].{Id:Id, DomainNames:Origins.Items[*].DomainName}" \
+        --query "DistributionList.Items[*].{ARN:ARN, DomainNames:Origins.Items[*].DomainName}" \
         --output json
 )"
 
-jq -r ".[] | select(.DomainNames | map(ascii_downcase | contains(\"$domain_substring\")) | any) | .Id" <<< "$json"
+jq -r ".[] | select(.DomainNames | map(ascii_downcase | contains(\"$domain_substring\")) | any) | .ARN" <<< "$json"
