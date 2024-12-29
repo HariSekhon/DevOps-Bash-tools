@@ -784,7 +784,7 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
 - Pluto:
   - `pluto_detect_helm_materialize.sh` - recursively materializes all helm `Chart.yaml` and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
   - `pluto_detect_kustomize_materialize.sh` - recursively materializes all `kustomization.yaml` and runs [Pluto](https://github.com/FairwindsOps/pluto) on each directory to work around [this issue](https://github.com/FairwindsOps/pluto/issues/444)
-  - `pluto_detect_kubectl_dump_objects.sh` - dumps all live Kubernetes objects to /tmp all can run [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects on the cluster from any source
+  - `pluto_detect_kubectl_dump_objects.sh` - dumps all live Kubernetes objects to /tmp and runs [Pluto](https://github.com/FairwindsOps/pluto) to detect deprecated API objects on the cluster from any source
 - Rancher:
   - `rancher_api.sh` - queries the Rancher API with authentication
   - `rancher_kube_creds.sh` - downloads all Rancher clusters credentials into subdirectories matching cluster names, with `.envrc` in each, so a quick `cd` into one and your kubectl is ready to rock
