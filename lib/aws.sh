@@ -175,6 +175,22 @@ aws_access_keys_exports_to_credentials(){
     done
 }
 
+# returns one cluster name per line
+aws_eks_clusters(){
+    aws eks list-clusters --query 'clusters' --output text |
+    tr '[:space:]' '\n' |
+    sed '/^[[:space:]]*$/d'
+}
+
+aws_eks_cluster_if_only_one(){
+    local eks_clusters
+    eks_clusters="$(aws_eks_clusters)"
+    num_eks_clusters="$(grep -c . <<< "$eks_clusters")"
+    if [ "$num_eks_clusters" = 1 ]; then
+        echo "$eks_clusters"
+    fi
+}
+
 aws_validate_volume_id(){
     local volume_id="$1"
     if ! [[ "$volume_id" =~ ^vol-[[:alnum:]]{17}$ ]]; then
