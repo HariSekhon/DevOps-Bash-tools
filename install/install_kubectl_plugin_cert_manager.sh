@@ -31,6 +31,8 @@ Installs Kubernetes 'kubectl' plugin for cert-manager
 # shellcheck disable=SC2034
 usage_args="[<version>]"
 
+export HOME="${HOME:-$(cd ; pwd)}"
+
 export PATH="$PATH:$HOME/bin"
 
 help_usage "$@"
@@ -39,6 +41,11 @@ help_usage "$@"
 version="${1:-latest}"
 
 binary="kubectl-cert_manager"
+
+if ! type -P kubectl &>/dev/null; then
+    "$srcdir/install_kubectl.sh"
+    echo
+fi
 
 # can rusult in error trying to contact k8s cluster
 #export RUN_VERSION_ARG=1
