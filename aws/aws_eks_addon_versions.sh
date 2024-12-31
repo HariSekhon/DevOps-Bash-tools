@@ -22,9 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the EKS addon versions available for the given cluster
-
-Determines the cluster version
+Lists the EKS addon versions available for the given cluster by checking its version before checking addons
 
 Requires either first arg of the EKS cluster name, or the environment variable \$EKS_CLUSTER
 
