@@ -518,6 +518,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_info_ec2_all_profiles_csv.sh` - lists AWS EC2 Instances in quoted CSV format across all configured AWS profiles for their configured region
   - `aws_eks_cloudwatch_logs.sh` - enables and fetches AWS EKS Master logs via CloudWatch
   - `aws_eks_ssh_dump_logs.sh` - fetch system logs from EKS Worker Nodes EC2 VMs (eg. for support debug requests by vendors)
+  - `aws_eks_addon_versions.sh` - Lists the EKS addon versions available for the given cluster by checking its version before checking addons
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
   - `aws_kube_creds.sh` - auto-loads all [AWS EKS](https://aws.amazon.com/eks/) clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
   - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given [AWS EKS](https://aws.amazon.com/eks/) cluster using config isolation to avoid concurrency race conditions
