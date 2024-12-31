@@ -31,7 +31,7 @@ Installs Kubernetes 'kubectl' plugin for cert-manager
 # shellcheck disable=SC2034
 usage_args="[<version>]"
 
-export HOME="${HOME:-$(cd ; pwd)}"
+export HOME="${HOME:-$(cd && pwd)}"
 
 export PATH="$PATH:$HOME/bin"
 
