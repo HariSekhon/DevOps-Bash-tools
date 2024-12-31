@@ -43,14 +43,8 @@ max_args 1 "$@"
 cluster="${1:-${EKS_CLUSTER:-}}"
 
 if is_blank "$cluster"; then
-    eks_clusters="$(
-        aws eks list-clusters --query 'clusters' --output text |
-        tr '[:space:]' '\n' |
-        sed '/^[[:space:]]*$/d'
-    )"
-    num_eks_clusters="$(grep -c . <<< "$eks_clusters")"
-    if [ "$num_eks_clusters" = 1 ]; then
-        cluster="$eks_clusters"
+    cluster="$(aws_eks_cluster_if_only_one)"
+    if ! is_blank "$cluster"; then
         timestamp "No cluster specified but only one found in this account, using that: $cluster"
     else
         usage "Need to define cluster name"
