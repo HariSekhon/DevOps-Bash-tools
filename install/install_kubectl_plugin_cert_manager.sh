@@ -43,6 +43,8 @@ version="${1:-latest}"
 binary="kubectl-cert_manager"
 
 if ! type -P kubectl &>/dev/null; then
+    timestamp "Kubectl not installed, pre-installing..."
+    echo
     "$srcdir/install_kubectl.sh"
     echo
 fi
