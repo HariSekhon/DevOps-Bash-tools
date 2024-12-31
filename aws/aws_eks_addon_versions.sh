@@ -18,7 +18,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090,SC1091
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -27,6 +27,9 @@ Lists the EKS addon versions available for the given cluster by checking its ver
 Requires either first arg of the EKS cluster name, or the environment variable \$EKS_CLUSTER
 
 If neither are given, checks clusters and if only one is found in account, uses that
+
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
