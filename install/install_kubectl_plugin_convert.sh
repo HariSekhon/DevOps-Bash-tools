@@ -35,7 +35,7 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-export HOME="${HOME:-$(cd; pwd)}"
+export HOME="${HOME:-$(cd && pwd)}"
 
 export PATH="$PATH:$HOME/bin"
 
