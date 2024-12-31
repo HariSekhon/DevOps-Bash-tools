@@ -44,3 +44,4 @@ export OS_DARWIN=darwin
 export RUN_VERSION_OPT=1
 
 "$srcdir/../github/github_install_binary.sh" doitintl/kube-no-trouble "kubent-{version}-{os}-{arch}.tar.gz" "$version" "kubent"
+echo
