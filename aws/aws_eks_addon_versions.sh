@@ -49,15 +49,15 @@ if is_blank "$cluster"; then
     )"
     num_eks_clusters="$(grep -c . <<< "$eks_clusters")"
     if [ "$num_eks_clusters" = 1 ]; then
-        EKS_CLUSTER="$eks_clusters"
-        timestamp "No cluster specified but only one found in this account, using that: $EKS_CLUSTER"
+        cluster="$eks_clusters"
+        timestamp "No cluster specified but only one found in this account, using that: $cluster"
     else
         usage "Need to define cluster name"
     fi
 fi
 
 timestamp "Getting cluster version for: $cluster"
-cluster_version="$(aws eks describe-cluster --name "$EKS_CLUSTER" --query "cluster.version" --output text)"
+cluster_version="$(aws eks describe-cluster --name "$cluster" --query "cluster.version" --output text)"
 timestamp "Cluster version: $cluster_version"
 
 aws eks describe-addon-versions \
