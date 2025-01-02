@@ -36,6 +36,12 @@ help_usage "$@"
 
 max_args 1 "$@"
 
+num_steps="${1:-5}"
+
+if ! is_int "$num_steps"; then
+    usage "Number of steps argument must be an integer"
+fi
+
 timestamp "Fetching list of EMR clusters"
 cluster_ids=$(aws emr list-clusters --query 'Clusters[*].Id' --output text)
 
@@ -43,7 +49,7 @@ if is_blank "$cluster_ids"; then
     die "No EMR clusters found"
 fi
 
-timestamp "Fetching the last 5 steps for each EMR cluster..."
+timestamp "Fetching the last $num_steps steps for each EMR cluster..."
 echo
 
 for cluster_id in $cluster_ids; do
@@ -64,15 +70,15 @@ for cluster_id in $cluster_ids; do
         aws emr list-steps --cluster-id "$cluster_id" \
             --query 'Steps[?Status.Timeline.EndDateTime != `null`]|[].{Name:Name,EndTime:Status.Timeline.EndDateTime}' \
             --output json |
-        jq -r '
+        jq -r "
             . |
             sort_by(.EndTime) |
             reverse |
-            .[:5] |
+            .[:$num_steps] |
             .[] |
             [.Name, .EndTime] |
             @tsv
-        '
+        "
     )"
 
 
