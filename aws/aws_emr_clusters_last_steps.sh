@@ -27,6 +27,8 @@ Shows the last N steps executed on each EMR cluster and their EndTime to find id
 You will also need to check for directly submitted jobs such as Spark, Hive, Glue or Athena
 which won't show up in this steps list
 
+The easier way to check this overall is via the Monitoring tab graphs for the cluster
+
 
 $usage_aws_cli_required
 "
