@@ -22,7 +22,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Trims N pixels off one of the sides of an image and then automatically opens it to check the result
+Trims N pixels off one of the sides of an image
+
+Useful to tweak screenshots before sharing them
+
+Automatically opens the new image to check the result
 
 First arg is the image file to edit
 
