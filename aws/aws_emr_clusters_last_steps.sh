@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Show the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed
+Shows the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed
 
 
 $usage_aws_cli_required
