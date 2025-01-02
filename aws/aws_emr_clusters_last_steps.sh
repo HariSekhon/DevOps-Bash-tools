@@ -24,10 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Shows the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed
 
-You will also need to check for directly submitted jobs such as Spark, Hive, Glue or Athena
-which won't show up in this steps list
+Also checks CloudWatch for steps submitted to catch directly submitted jobs such as Spark, Hive, Glue or Athena
+which won't show up in the native steps list
 
-The easier way to check this overall is via the Monitoring tab graphs for the cluster
+You can also check this via the Monitoring tab graphs for the cluster by setting the date range further back
 
 
 $usage_aws_cli_required
@@ -61,10 +61,14 @@ fi
 timestamp "Fetching the last $num_steps steps for each EMR cluster..."
 echo
 
+start_date=$(date -u --date="1 year ago" +"%Y-%m-%dT%H:%M:%SZ")
+end_date=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
 for cluster_id in $cluster_ids; do
     aws emr describe-cluster \
         --cluster-id "$cluster_id" \
         --query 'Cluster.{
+            "ID": Id,
             "Name": Name,
             "Status": Status.State
         }' \
@@ -102,6 +106,24 @@ for cluster_id in $cluster_ids; do
             printf "    %-50s %s\n" "$step_name" "$end_time"
         done <<< "$steps"
     fi
+    echo >&2
+
+    # Get list of metrics to query like this:
+    #
+    #   aws cloudwatch list-metrics --namespace "AWS/ElasticMapReduce" --dimensions Name=JobFlowId,Value="$cluster_id"
+    #
+    timestamp "Apps Running within last $num_steps x 30 day periods"
+    aws cloudwatch get-metric-statistics \
+        --namespace "AWS/ElasticMapReduce" \
+        --metric-name "AppsRunning" \
+        --dimensions Name=JobFlowId,Value="$cluster_id" \
+        --start-time "$start_date" \
+        --end-time "$end_date" \
+        --period $((86400 * 30)) \
+        --statistics Sum \
+        --query 'Datapoints[*].[Timestamp,Sum]' \
+        --output json |
+    jq -r "sort_by(.[0]) | reverse | .[:$num_steps][] | @tsv"
 
     echo >&2
     echo >&2
