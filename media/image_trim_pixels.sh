@@ -26,7 +26,7 @@ Trims N pixels off one of the sides of an image
 
 Useful to tweak screenshots before sharing them
 
-Automatically opens the new image to check the result
+Creates a new file and automatically opens the new image to check the result
 
 First arg is the image file to edit
 
@@ -38,6 +38,9 @@ Second arg picks a side - options are one of:
     - right
 
 Third arg is the number of pixels to trim off (default: 1)
+
+
+Requires ImageMagick to be installed, attempts to install it if not already installed
 "
 
 # used by usage() in lib/utils.sh
@@ -64,8 +67,13 @@ if ! is_int "$pixels"; then
     usage "Pixels must be an integer"
 fi
 
+if ! type -P magick &>/dev/null; then
+    "$srcdir/../packages/install_packages.sh" imagemagick
+fi
+
 timestamp "Input image: $image"
 timestamp "Output image: $output_image"
+
 if [ "$side" = top ]; then
     timestamp "Trimming $pixels pixels off the top"
     # '-crop +0+2' tells ImageMagick to leave the width (0), but shift the image down by 2 pixels (+2),
