@@ -42,6 +42,10 @@ if ! is_int "$num_steps"; then
     usage "Number of steps argument must be an integer"
 fi
 
+if [ "$num_steps" = 0 ]; then
+    usage "Number of steps cannot be zero"
+fi
+
 timestamp "Fetching list of EMR clusters"
 cluster_ids=$(aws emr list-clusters --query 'Clusters[*].Id' --output text)
 
