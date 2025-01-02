@@ -59,6 +59,15 @@ fi
 #export TERM=linux
 #ulimit -u 512
 
+dhcprenew(){
+    sudo scutil <<< "add State:/Network/Interface/en0/RefreshConfiguration temporary"
+}
+
+dhcpdiscover(){
+    sudo ipconfig set en0 BOOTP
+    sudo ipconfig set en0 DHCP
+}
+
 macsleep(){
     sudo pmset sleepnow
 }
