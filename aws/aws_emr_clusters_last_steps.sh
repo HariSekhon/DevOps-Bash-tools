@@ -24,6 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Shows the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed
 
+You will also need to check for directly submitted jobs such as Spark, Hive, Glue of Athena
+which won't show up in this steps list
+
 
 $usage_aws_cli_required
 "
