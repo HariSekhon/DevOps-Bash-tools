@@ -1411,7 +1411,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 #### Images
 
-- `image_trim_pixels.sh` - trims N pixels off one of the sides of an image. Useful to tweaking screenshots before sharing
+- `image_trim_pixels.sh` - trims N pixels off one of the sides of an image. Useful to tweak screenshots before sharing them
 - `image_join_vertical.sh` - joins two images top and bottom after matching their widths so they align correctly
 - `image_join_horizontal.sh` - joins two images left and right after matching their heights so they align correctly
 - `imageopen.sh` - opens the given image file using whatever available tool is found on Linux or Mac
