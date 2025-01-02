@@ -47,9 +47,15 @@ timestamp "Fetching the last 5 steps for each EMR cluster..."
 echo
 
 for cluster_id in $cluster_ids; do
-    aws emr describe-cluster --cluster-id "$cluster_id" --query 'Cluster.[Name,Status.State]' --output table || {
-        warn "Failed to describe cluster $cluster_id, skkipping..."
-        continue
+    aws emr describe-cluster \
+        --cluster-id "$cluster_id" \
+        --query 'Cluster.{
+            "Name": Name,
+            "Status": Status.State
+        }' \
+        --output table || {
+            warn "Failed to describe cluster $cluster_id, skipping..."
+            continue
     }
 
     # don't want backtick shell expansion inside AWS --query
@@ -62,7 +68,10 @@ for cluster_id in $cluster_ids; do
             . |
             sort_by(.EndTime) |
             reverse |
-            .[:5]
+            .[:5] |
+            .[] |
+            [.Name, .EndTime] |
+            @tsv
         '
     )"
 
@@ -71,12 +80,14 @@ for cluster_id in $cluster_ids; do
         timestamp "No steps found for this cluster"
     else
         timestamp "Last 5 steps for cluster:"
+        echo >&2
         printf "    %-50s %s\n" "Step Name" "End Time"
-        echo "    --------------------------------------------------- -------------------"
+        echo "    -------------------------------------------------- --------------------------------"
         while IFS=$'\t' read -r step_name end_time; do
             printf "    %-50s %s\n" "$step_name" "$end_time"
         done <<< "$steps"
     fi
 
-    echo "-----------------------"
+    echo >&2
+    echo >&2
 done
