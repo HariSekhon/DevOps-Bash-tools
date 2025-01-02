@@ -65,8 +65,16 @@ timestamp "Output image: $output_image"
 if [ "$side" = top ]; then
     timestamp "Trimming $pixels pixels off the top"
     magick "$image" -crop +0+"$pixels" +repage "$output_image"
+elif [ "$side" = bottom ]; then
+    timestamp "Trimming $pixels pixels off the bottom"
+    magick "$image" -crop +0+"$pixels" +repage "$output_image"
+    magick "$image" -gravity South -chop 0x"$pixels" "$output_image"
 elif [ "$side" = right ]; then
+    timestamp "Trimming $pixels pixels off the right"
     magick "$image" -gravity East -chop "$pixels"x0 "$output_image"
+elif [ "$side" = left ]; then
+    timestamp "Trimming $pixels pixels off the left"
+    magick "$image" -gravity West -chop "$pixels"x0 "$output_image"
 else
     usage "Invalid side selected, must be one of: top, bottom, left, right"
 fi
