@@ -28,17 +28,17 @@ First arg is the image file to edit
 
 Second arg picks a side - options are one of:
 
-top
-bottom
-left
-right
+    - top
+    - bottom
+    - left
+    - right
 
 Third arg is the number of pixels to trim off (default: 1)
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<image> <side> <number_of_pixels>"
+usage_args="<image> <side> [<number_of_pixels>]"
 
 help_usage "$@"
 
