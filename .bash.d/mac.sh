@@ -60,12 +60,18 @@ fi
 #ulimit -u 512
 
 dhcprenew(){
-    sudo scutil <<< "add State:/Network/Interface/en0/RefreshConfiguration temporary"
+    local interface="${1:-en0}"
+    watch -q 1 ifconfig "$interface"
+    sudo scutil <<< "add State:/Network/Interface/$interface/RefreshConfiguration temporary"
+    watch ifconfig "$interface"
 }
 
 dhcpdiscover(){
-    sudo ipconfig set en0 BOOTP
-    sudo ipconfig set en0 DHCP
+    local interface="${1:-en0}"
+    watch -q 1 ifconfig "$interface"
+    sudo ipconfig set "$interface" BOOTP
+    sudo ipconfig set "$interface" DHCP
+    watch ifconfig "$interface"
 }
 
 macsleep(){
