@@ -24,8 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Shows the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed
 
-Also checks CloudWatch for steps submitted to catch directly submitted jobs such as Spark, Hive, Glue or Athena
-which won't show up in the native steps list
+Also checks CloudWatch for number of steps running within the last few months to catch directly submitted jobs such as
+Spark, Hive, Glue or Athena which won't show up in the native steps list
 
 You can also check this via the Monitoring tab graphs for the cluster by setting the date range further back
 
