@@ -487,7 +487,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_ecr_tags_timestamps.sh` - lists all the tags and their timestamps for a given ECR docker image
     - `aws_ecr_tags_old.sh` - lists tags older than N days for a given ECR docker image
     - `aws_ecr_delete_old_tags.sh` - deletes tags older than N days for a given ECR docker image. Lists the image:tags to be deleted and prompts for confirmation safety
-  - `aws_emr_clusters_last_steps.sh` - shows the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed
+  - `aws_emr_clusters_last_steps.sh` - shows the last N steps executed on each EMR cluster and their EndTime to find idle clusters that should be removed. You will also need to check for directly submitted jobs such as Spark, Hive, Glue or Athena which won't show up in this steps list
   - `aws_foreach_profile.sh` - executes a templated command across all AWS named profiles configured in AWS CLIv2, replacing `{profile}` in each iteration. Combine with other scripts for powerful functionality, auditing, setup etc. eg. `aws_kube_creds.sh` to configure `kubectl` config to all EKS clusters in all environments
   - `aws_foreach_region.sh` - executes a templated command against each AWS region enabled for the current account, replacing `{region}` in each iteration. Combine with AWS CLI or scripts to find resources across regions
   - `aws_iam_*.sh` - AWS [IAM](https://aws.amazon.com/iam/) scripts:
