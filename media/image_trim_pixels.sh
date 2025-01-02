@@ -68,6 +68,8 @@ timestamp "Input image: $image"
 timestamp "Output image: $output_image"
 if [ "$side" = top ]; then
     timestamp "Trimming $pixels pixels off the top"
+    # '-crop +0+2' tells ImageMagick to leave the width (0), but shift the image down by 2 pixels (+2),
+    # effectively trimming 2 pixels from the top
     magick "$image" -crop +0+"$pixels" +repage "$output_image"
 elif [ "$side" = bottom ]; then
     timestamp "Trimming $pixels pixels off the bottom"
