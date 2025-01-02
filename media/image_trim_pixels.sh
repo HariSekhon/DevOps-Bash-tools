@@ -75,6 +75,7 @@ elif [ "$side" = bottom ]; then
     magick "$image" -gravity South -chop 0x"$pixels" "$output_image"
 elif [ "$side" = right ]; then
     timestamp "Trimming $pixels pixels off the right"
+    # '-gravity East' tells it to keep to the left - like driving in the UK!
     magick "$image" -gravity East -chop "$pixels"x0 "$output_image"
 elif [ "$side" = left ]; then
     timestamp "Trimming $pixels pixels off the left"
