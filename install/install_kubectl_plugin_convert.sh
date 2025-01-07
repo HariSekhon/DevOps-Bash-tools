@@ -39,7 +39,7 @@ export HOME="${HOME:-$(cd && pwd)}"
 
 export PATH="$PATH:$HOME/bin"
 
-if ! type -P &>/dev/null; then
+if ! type -P kubectl-convert &>/dev/null; then
     timestamp "Kubectl not installed, pre-installing..."
     echo
     "$srcdir/install_kubectl.sh"
