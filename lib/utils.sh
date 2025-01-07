@@ -290,6 +290,9 @@ get_arch(){
     if [ "$arch" = x86_64 ]; then
         arch=amd64  # files are conventionally usually named amd64 not x86_64
     fi
+    #if [ "$arch" = aarch64 ]; then
+    #    arch=arm64
+    #fi
     if [ -n "${ARCH_X86_64:-}" ]; then
         if [ "$arch" = amd64 ] || [ "$arch" = x86_64 ]; then
             arch="$ARCH_X86_64"
