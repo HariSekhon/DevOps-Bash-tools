@@ -31,7 +31,7 @@ usage_args=""
 
 help_usage "$@"
 
-num_args 1 "$@"
+num_args 0 "$@"
 
 if is_mac; then
     brew install warrensbox/tap/tgswitch
