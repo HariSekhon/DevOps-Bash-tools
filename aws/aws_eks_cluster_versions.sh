@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Lists the cluster name and version for each AWS EKS cluster in the current account
+Iterates EKS clusters to list each AWS EKS cluster name and version in the current account
 
 Output format:
 
