@@ -53,6 +53,8 @@ while read -r binary; do
     echo "# $binary" >&2
     echo "# ============================================================================ #" >&2
     echo >&2
+    ls -l "$binary"
+    echo >&2
     "$binary" "$@"
     echo >&2
     echo >&2
