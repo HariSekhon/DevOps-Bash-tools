@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Runs each binary of the given name found in \$PATH with the args given
+
+Useful to find all the installed versions of a program in different paths eg. ~/bin/ vs /usr/local/bin/
+
+Eg.
+
+    ${0##*/} terraform --version
 "
 
 # used by usage() in lib/utils.sh
