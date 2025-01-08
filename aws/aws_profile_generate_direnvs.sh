@@ -86,7 +86,9 @@ EOF
         #fi
         #echo "export AWS_ACCOUNT_ID=$aws_account_id" >> "$envrc"
         timestamp "Generating $envrc" # with AWS_PROFILE=$profile"
-        cat >> "$envrc" <<EOF
+        cat > "$envrc" <<EOF
+#!/usr/bin/env bash
+#
 # Generated using ${0##*/} from:
 #
 #   https://github.com/HariSekhon/DevOps-Bash-tools
@@ -96,14 +98,10 @@ export AWS_PROFILE=$profile
 #export EKS_CLUSTER=
 #export EKS_NAMESPACE=
 
-# if copying this .envrc to terraform / terragrunt directories in a different part of the repo:
-#
-#git_root="$(git rev-parse --show-toplevel)"
-#
-# shellcheck disable=SC1091
-#. "\$git_root/aws/.envrc"
+git_root="\$(git rev-parse --show-toplevel)"
 
-. ../.envrc
+# shellcheck disable=SC1091
+. "\$git_root/aws/.envrc"
 EOF
     else
         timestamp "Direnv configuration already exists, skipping: $envrc"
