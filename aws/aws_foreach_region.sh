@@ -19,7 +19,7 @@ set -euo pipefail
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090,SC1091
-. "$srcdir/lib/utils.sh"
+. "$srcdir/lib/aws.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
@@ -53,6 +53,9 @@ Find EC2 instances across regions:
     ${0##*/} aws ec2 describe-instances
 
     ${0##*/} 'aws ec2 describe-instances | jq -r \".Reservations | length\"'
+
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
