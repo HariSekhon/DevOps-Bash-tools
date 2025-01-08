@@ -46,3 +46,6 @@ golangci/tap            golangci-lint
 
 # don't install this, see install_d2.sh for details why
 #terrastruct/tap         tala
+
+# analyzes an AWS EKS cluster for upgrade requirements
+clowdhaus/taps          eksup
