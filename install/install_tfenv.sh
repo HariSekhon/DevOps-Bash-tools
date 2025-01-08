@@ -33,9 +33,17 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-timestamp "Git cloning the tfenv github repo to ~/.tfenv"
-echo >&2
-git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+if [ -d ~/.tfenv ]; then
+    cd ~/.tfenv
+    timestamp "Git pulling in existing ~/.tfenv dir"
+    echo >&2
+    git pull
+    echo >&2
+else
+    timestamp "Git cloning the tfenv github repo to ~/.tfenv"
+    echo >&2
+    git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+fi
 echo >&2
 
 echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
