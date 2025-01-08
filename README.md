@@ -517,9 +517,9 @@ Prometheus, OpenTSDB, InfluxDB etc.
         - `aws_info_ec2.sh` - lists AWS EC2 Instances resources deployed in the current AWS account
     - `aws_info_ec2_csv.sh` - lists AWS EC2 Instances in quoted CSV format in the current AWS account
     - `aws_info_ec2_all_profiles_csv.sh` - lists AWS EC2 Instances in quoted CSV format across all configured AWS profiles for their configured region
-  - `aws_eks_cluster_versions.sh` - iterates EKS clusters to list each AWS EKS cluster name and version in the current account. Combine with `aws_foreach_profile.sh` and `aws_foreach_region.sh` to audit your EKS cluster versions across accounts and regions
   - `aws_eks_cloudwatch_logs.sh` - enables and fetches AWS EKS Master logs via CloudWatch
   - `aws_eks_ssh_dump_logs.sh` - fetch system logs from EKS Worker Nodes EC2 VMs (eg. for support debug requests by vendors)
+  - `aws_eks_cluster_versions.sh` - iterates EKS clusters to list each AWS EKS cluster name and version in the current account. Combine with `aws_foreach_profile.sh` and `aws_foreach_region.sh` to audit your EKS cluster versions across accounts and regions
   - `aws_eks_addon_versions.sh` - lists the EKS addon versions available for the given cluster by checking its version before checking addons
   - `aws_eks_available_ips.sh` - lists the number of available IP addresses in the EKS subnets for the given cluster (5 required for an EKS upgrade)
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
