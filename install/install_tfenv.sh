@@ -38,4 +38,6 @@ echo >&2
 git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
 echo >&2
 
-echo "Don't forget to add ~/.tfenv to your \$PATH in your ~/.bashrc or similar"
+echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
+echo
+echo "(already done if sourcing DevOps-Bash-tools repo's .bashrc using .bash.d/terraform.sh)"
