@@ -33,6 +33,10 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+export HOME="${HOME:-$(cd && pwd)}"
+
+export PATH="$HOME/.tfenv/bin:$PATH"
+
 if [ -d ~/.tfenv ]; then
     cd ~/.tfenv
     timestamp "Git pulling in existing ~/.tfenv dir"
@@ -45,6 +49,9 @@ else
     git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
 fi
 echo >&2
+
+echo -n "tfenv version: "
+tfenv version-name
 
 echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
 echo
