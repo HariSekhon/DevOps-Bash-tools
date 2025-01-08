@@ -33,6 +33,10 @@ help_usage "$@"
 
 min_args 1 "$@"
 
-find "$1" -type l -exec ls -l {} \; |
+if [ -L "$1" ]; then
+    ls -l "$1"
+else
+    find "$1" -type l -exec ls -l {} \;
+fi |
 grep -E -- '[[:space:]]->[[:space:]]+.*/' |
 awk '{$1=$2=$3=$4=$5=$6=$7=$8=""; print}'
