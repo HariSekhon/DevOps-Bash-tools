@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Installs tfenv the manual way via git clone to ~/.tfenv
+Installs tfenv for managing Terraform versions
 "
 
 # used by usage() in lib/utils.sh
@@ -37,24 +37,28 @@ export HOME="${HOME:-$(cd && pwd)}"
 
 export PATH="$HOME/.tfenv/bin:$PATH"
 
-if [ -d ~/.tfenv ]; then
-    cd ~/.tfenv
-    timestamp "Git pulling in existing ~/.tfenv dir"
-    echo >&2
-    git pull
-    echo >&2
+if is_mac; then
+    brew install tfenv
 else
-    timestamp "Git cloning the tfenv github repo to ~/.tfenv"
-    echo >&2
-    git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+    if [ -d ~/.tfenv ]; then
+        cd ~/.tfenv
+        timestamp "Git pulling in existing ~/.tfenv dir"
+        echo
+        git pull
+        echo
+    else
+        timestamp "Git cloning the tfenv github repo to ~/.tfenv"
+        echo >&2
+        git clone --depth=1 https://github.com/tfutils/tfenv.git ~/.tfenv
+    fi
+    echo
+    echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
+    echo
+    echo "(already done if sourcing DevOps-Bash-tools repo's .bashrc using .bash.d/terraform.sh)"
+    echo
 fi
-echo >&2
+echo
 
 echo -n "tfenv version: "
 tfenv version-name
-echo
-
-echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
-echo
-echo "(already done if sourcing DevOps-Bash-tools repo's .bashrc using .bash.d/terraform.sh)"
 echo
