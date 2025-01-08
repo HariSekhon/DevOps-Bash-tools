@@ -27,17 +27,26 @@ Installs tgswitch for managing Terragrunt versions
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<version>]"
 
 help_usage "$@"
 
-num_args 0 "$@"
+max_args 1 "$@"
 
-if is_mac; then
-    brew install warrensbox/tap/tgswitch
-else
-    curl -L https://raw.githubusercontent.com/warrensbox/tgswitch/release/install.sh | bash
-fi
+#version="${1:-2.4.0}"
+version="${1:-latest}"
+
+export HOME="${HOME:-$(cd && pwd)}"
+
+export PATH="$HOME/bin:$PATH"
+
+#if is_mac; then
+#    brew install warrensbox/tap/tgswitch
+#else
+    # Tries to install to /usr/local/bin/ and gets permission denied
+    #curl -L https://raw.githubusercontent.com/warrensbox/tgswitch/release/install.sh | bash
+    "$srcdir/../github/github_install_binary.sh" warrensbox/tgswitch "tgswitch_{version}_{os}_{arch}.tar.gz" "$version" "tgswitch"
+#fi
 
 echo
 echo -n "Terragrunt "
