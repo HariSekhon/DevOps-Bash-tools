@@ -57,3 +57,4 @@ echo
 echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
 echo
 echo "(already done if sourcing DevOps-Bash-tools repo's .bashrc using .bash.d/terraform.sh)"
+echo
