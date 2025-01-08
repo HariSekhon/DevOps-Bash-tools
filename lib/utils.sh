@@ -575,6 +575,9 @@ if is_mac; then
         # needed for awk -v IGNORECASE=1 to work for case insensitive regex
         command gawk "$@"
     }
+    grep(){
+        command ggrep "$@"
+    }
     readlink(){
         command greadlink "$@"
     }
