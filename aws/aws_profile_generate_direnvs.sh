@@ -95,7 +95,7 @@ EOF
 
 export AWS_PROFILE=$profile
 
-#export EKS_CLUSTER=
+export EKS_CLUSTER="\$(aws eks list-clusters --output json 2>/dev/null | jq -r '.clusters[0]')"
 #export EKS_NAMESPACE=
 
 #. ../.envrc
