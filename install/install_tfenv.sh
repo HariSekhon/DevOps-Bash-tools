@@ -52,6 +52,7 @@ echo >&2
 
 echo -n "tfenv version: "
 tfenv version-name
+echo
 
 echo "Don't forget to add ~/.tfenv/bin to your \$PATH in your ~/.bashrc or similar"
 echo
