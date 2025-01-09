@@ -77,7 +77,7 @@ git_diff_commit(){
             git add "$basename"
             diff="$(git diff --color=always -- "$added_filename"
                     git diff --cached --color=always -- "$added_filename")"
-            echo "$diff" | more -FR
+            echo "$diff" | less -FR
             echo
             # discard the save variable, call it _ to signify this
             read -r -p "Hit enter to commit added file '$added_filename' or Control-C to cancel" _
@@ -96,7 +96,7 @@ git_diff_commit(){
             if [ -z "$diff" ]; then
                 continue
             fi
-            echo "$diff" | more -FR
+            echo "$diff" | less -FR
             echo
             # discard the save variable, call it _ to signify this
             read -r -p "Hit enter to commit updated file '$changed_filename' or Control-C to cancel" _
