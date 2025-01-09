@@ -472,6 +472,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_ec2_ebs_create_snapshot_and_wait.sh - creates a snapshot of a given EBS volume ID and waits for it to complete with exponential backoff
     - `aws_ec2_ebs_resize_and_wait.sh - resizes an EBS volume and waits for it to complete modifying and optionally optimizing with exponential backoff
     - `aws_ec2_ebs_volumes_unattached.sh` - list an unattached EBS volumes in a table format
+  - `aws_ec2_launch_templates_ami_id.sh` - for each Launch Template lists the AMI ID of the latest version. Useful to check EKS upgrades of node groups via Terragrunt have taken effect
   - `aws_ecr_*.sh` - AWS [ECR](https://aws.amazon.com/ecr/) docker image management scripts:
     - `aws_ecr_docker_login.sh` - authenticates Docker to AWS ECR, inferring the ECR registry from the current AWS Account ID and Region
     - `aws_ecr_docker_build_push.sh` - builds a docker image and pushes it to ECR with not just the `latest` docker tag but also the current Git hashref and Git tags
