@@ -24,6 +24,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Extracts the URLs from a given string arg, file or standard input,
 queries each one and outputs the redirected urls instead to stdout
+
+Uses adjacent script:
+
+    urlextract.sh
 "
 
 # used by usage() in lib/utils.sh
