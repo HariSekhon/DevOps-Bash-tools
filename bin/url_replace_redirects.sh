@@ -23,7 +23,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Extracts the URLs from a given string arg, file or standard input,
-queries each one and outputs the redirected urls instead to stdout
+queries each one and outputs the entire contents to stdout with the urls replaced by the redirected urls
+
+Uses adjacent scripts:
+
+    urlextract.sh
+
+    url_extract_redirects.sh
 "
 
 # used by usage() in lib/utils.sh
