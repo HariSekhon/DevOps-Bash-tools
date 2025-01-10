@@ -207,9 +207,13 @@
 #                   C r e d e n t i a l s   H e l p e r s
 # ============================================================================ #
 
-#[credential]
-#    helper = store
+# more specific credential addresses below take priority, so if you want to paste in a GitHub token
+# you will need to comment out the GitHub credential help sections below
+[credential]
+    helper = store
 
+# When prompted, enter your username and PAT token, not password, otherwise you'll get this error:
+#
 # remote: Support for password authentication was removed on August 13, 2021.
 # remote: Please see https://docs.github.com/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls for information on currently recommended modes of authentication.
 
