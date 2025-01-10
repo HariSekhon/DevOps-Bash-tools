@@ -2,7 +2,7 @@
 #  vim:ts=4:sts=4:sw=4:et
 #
 #  Author: Hari Sekhon
-#  Date: 2020-10-06 18:59:32 +0100 (Tue, 06 Oct 2020)
+#  Date: 2025-01-11 01:56:41 +0700 (Sat, 11 Jan 2025)
 #
 #  https://github.com/HariSekhon/DevOps-Bash-tools
 #
@@ -37,8 +37,11 @@ max_args 1 "$@"
 "$srcdir/urlextract.sh" "$@" |
 while read -r url; do
     log "Resolving final redirect for URL: $url" >&2
-    # follow redirects and print only the final URL
-    final_url="$(curl -Ls -o /dev/null -w '%{url_effective}' "$url" || :)"
+    # curl follow redirects and print only the final URL
+    # the -I header flag is a bit risky in case the server doesn't give redirects in the headers
+    # but we don't want to waste time downloading large ISO file URLs such as in Packer templates
+    # when trying to find outdated redirected URLs to replace
+    final_url="$(command curl -sSLfI -o /dev/null -w '%{url_effective}' "$url" || :)"
     if [ -n "$final_url" ]; then
         echo "$final_url"
     else
