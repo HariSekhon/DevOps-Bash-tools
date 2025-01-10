@@ -35,7 +35,7 @@ Requires curl and jq to be installed
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<owner>/<repo>"
+usage_args="<owner>/<repo> <regex>"
 
 help_usage "$@"
 
