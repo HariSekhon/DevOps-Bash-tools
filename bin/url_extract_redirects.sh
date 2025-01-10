@@ -41,8 +41,10 @@ while read -r url; do
     # the -I header flag is a bit risky in case the server doesn't give redirects in the headers
     # but we don't want to waste time downloading large ISO file URLs such as in Packer templates
     # when trying to find outdated redirected URLs to replace
-    final_url="$(command curl -sSLfI -o /dev/null -w '%{url_effective}' "$url" || :)"
-    if [ -n "$final_url" ]; then
+    result="$(command curl -sSLfI -o /dev/null -w '%{http_code} %{url_effective}' "$url" || :)"
+    http_code="$(awk '{print $1}' <<< "$result")"
+    final_url=$(cut -d' ' -f2- <<< "$result")
+    if [ "$http_code" == 200 ]; then
         echo "$final_url"
     else
         warn "failed to resolve URL, outputting original only: $url"
