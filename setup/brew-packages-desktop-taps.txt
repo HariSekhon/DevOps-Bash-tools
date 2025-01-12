@@ -49,3 +49,5 @@ golangci/tap            golangci-lint
 
 # analyzes an AWS EKS cluster for upgrade requirements
 clowdhaus/taps          eksup
+
+teamookla/speedtest     speedtest  # https://www.speedtest.net/
