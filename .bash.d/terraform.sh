@@ -49,11 +49,12 @@ alias tfaa='tfa -auto-approve'
 alias tfiaa='tfia -auto-approve'
 #complete -C /Users/hari/bin/terraform terraform
 
-alias tffu='tf force-unlock -force'
-# self-determine the lock
-tffuu(){
-    local lock_id
-    lock_id="$(terraform plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+tffu(){
+    local lock_id="${1:-}"
+    # self-determine the lock if not provided
+    if [ -z "$lock_id" ]; then
+        lock_id="$(terraform plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+    fi
     terraform force-unlock -force "$lock_id"
 }
 
@@ -64,7 +65,14 @@ alias tgaa='tga -auto-approve'
 alias tgip='tg init && tgp'
 alias tgia='tg init && tga'
 
-alias tgfu='tg force-unlock -force'
+tgfu(){
+    local lock_id="${1:-}"
+    # self-determine the lock if not provided
+    if [ -z "$lock_id" ]; then
+        lock_id="$(terragrunt plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+    fi
+    terragrunt force-unlock -force "$lock_id"
+}
 
 if [ -n "${github:-}" ]; then
     for x in terraform-templates terraform tf; do
