@@ -23,7 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Checks out all public original source GitHub repos for the current or given user
-and then counts all lines of code for them
+and then counts all lines of code for them with breakdowns of languages, files,
+code, comments and blanks
 
 Uses GitHub CLI and cloc - attempts to install them if not found
 "
