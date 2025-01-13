@@ -67,6 +67,7 @@ clamav
 #clair  # container vulnerability scanner by quay.io - this is the server, not clairctl
 cliclick
 cmatrix
+cloc  # count lines of code - code / comment / blank
 colordiff
 colima  # CLI Docker container runtime (use 'docker' client after 'colima start')
 cosign
