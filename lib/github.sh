@@ -155,6 +155,16 @@ github_result_has_more_pages(){
     return 0
 }
 
+get_github_repo_urls(){
+    local owner="${1:-}"
+    gh repo list ${owner:+"$owner"} \
+        --limit 9999999 \
+        --visibility public \
+        --source \
+        --json url \
+        --jq '.[].url'
+}
+
 get_github_repos(){
     local owner="${1:-}"
     if [ -z "$owner" ]; then
