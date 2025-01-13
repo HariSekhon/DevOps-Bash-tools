@@ -268,7 +268,6 @@ smartmontools
 snappy
 sonar-completion
 sonar-scanner
-speedtest-cli  # for https://www.speedtest.net/
 sqlite
 sqlfluff  # linter
 sqlparse  # SQL reformatter
