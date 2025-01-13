@@ -155,14 +155,16 @@ github_result_has_more_pages(){
     return 0
 }
 
+# pass owner as first arg and then any other --options
 get_github_repo_urls(){
     local owner="${1:-}"
-    gh repo list ${owner:+"$owner"} \
+    gh repo list "$@" \
         --limit 9999999 \
-        --visibility public \
-        --source \
         --json url \
         --jq '.[].url'
+        # pass these from the client to retain flexibility
+        #--visibility public \
+        #--source \
 }
 
 get_github_repos(){
