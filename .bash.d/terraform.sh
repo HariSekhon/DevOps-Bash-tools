@@ -73,12 +73,13 @@ unalias tgfu &>/dev/null || :
 tgfu(){
     local lock_id="${1:-}"
     # self-determine the lock if not provided
-    if [ -z "$lock_id" ]; then
-        lock_id="$(terragrunt state pull | jq -r '.lock_info.ID // ""')"
+    #if [ -z "$lock_id" ]; then
+    #    # terraform only
+    #    lock_id="$(terragrunt state pull | jq -r '.lock_info.ID // ""')"
         if [ -z "$lock_id" ]; then
             lock_id="$(terragrunt plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
         fi
-    fi
+    #fi
     terragrunt force-unlock -force "$lock_id"
 }
 
