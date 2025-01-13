@@ -49,11 +49,15 @@ alias tfaa='tfa -auto-approve'
 alias tfiaa='tfia -auto-approve'
 #complete -C /Users/hari/bin/terraform terraform
 
+unalias tffu &>/dev/null || :
 tffu(){
     local lock_id="${1:-}"
     # self-determine the lock if not provided
     if [ -z "$lock_id" ]; then
-        lock_id="$(terraform plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+        lock_id="$(terraform state pull | jq -r '.lock_info.ID // ""')"
+        if [ -z "$lock_id" ]; then
+            lock_id="$(terraform plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+        fi
     fi
     terraform force-unlock -force "$lock_id"
 }
@@ -65,11 +69,15 @@ alias tgaa='tga -auto-approve'
 alias tgip='tg init && tgp'
 alias tgia='tg init && tga'
 
+unalias tgfu &>/dev/null || :
 tgfu(){
     local lock_id="${1:-}"
     # self-determine the lock if not provided
     if [ -z "$lock_id" ]; then
-        lock_id="$(terragrunt plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+        lock_id="$(terragrunt state pull | jq -r '.lock_info.ID // ""')"
+        if [ -z "$lock_id" ]; then
+            lock_id="$(terragrunt plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $2}')"
+        fi
     fi
     terragrunt force-unlock -force "$lock_id"
 }
