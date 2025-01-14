@@ -92,11 +92,13 @@ if [ "$seconds_ago" -gt 86400 ]; then
 fi
 
 # shellcheck disable=SC2295
-creds_without_home="${creds#$HOME}"
-creds_without_home="${creds_without_home##/}"
+creds_homepath="${creds#$HOME}"
+creds_homepath="${creds_homepath##/}"
 
-scp "$creds" "$server":"$creds_without_home"
+timestamp "Copying AWS SSO credential cache to $server"
+scp "$creds" "$server":"$creds_homepath"
 
 echo >&2
 
+timestamp "SSH'ing to $server"
 exec ssh "$server"
