@@ -44,7 +44,9 @@ num_commits="$("$srcdir/git_origin_commits_to_push.sh")"
 # delete the last line of diff only if it's blank,
 # so that when there is nothing to push we get 0 instead of 1 line as the result
 num_diff_lines="$(
-    "$srcdir/git_origin_diff_to_push.sh" |
+    "$srcdir/git_origin_diff_to_push.sh" --unified=0 |
+    grep -E '^[+-]' |
+    grep -vE '^(\+\+\+|---)' |
     sed '$ { /^[[:space:]]*$/d }' |
     wc -l |
     sed 's/[[:space:]]*//g'
