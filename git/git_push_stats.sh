@@ -43,7 +43,6 @@ num_commits="$("$srcdir/git_origin_commits_to_push.sh")"
 
 num_diff_lines="$(
     "$srcdir/git_origin_diff_to_push.sh" |
-    sed '/^[[:space:]]*$/d' |
     wc -l |
     sed 's/[[:space:]]*//g'
 )"
