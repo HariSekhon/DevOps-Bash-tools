@@ -33,6 +33,6 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-"$srcdir/git_origin_log_to_head.sh" --oneline |
+"$srcdir/git_origin_log_to_push.sh" --oneline |
 wc -l |
 sed 's/[[:space:]]*//g'
