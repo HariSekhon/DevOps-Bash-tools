@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Shows the number of Git commits between the origin remote of the same branch to the current branch head
+Shows the number of Git commits in local branch that would be pushed to remote origin
 "
 
 # used by usage() in lib/utils.sh
