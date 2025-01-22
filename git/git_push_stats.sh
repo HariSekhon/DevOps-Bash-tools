@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Shows the Git push stats to the remote origin for the current branch - number of commits and lines of diff
+
+Utilizes adjacent scripts:
+
+    git_origin_log_to_head.sh
+
+    git_origin_diff_to_head.sh
 "
 
 # used by usage() in lib/utils.sh
