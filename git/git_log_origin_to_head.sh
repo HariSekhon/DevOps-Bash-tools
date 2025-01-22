@@ -23,11 +23,17 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Shows the Git log between the origin remote of the same branch to the current branch head
+
+You can give git log options like --oneline
+
+Example:
+
+    ${0##*/} --oneline | wc -l
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="<git_log_options>"
 
 help_usage "$@"
 
@@ -42,5 +48,6 @@ git remote get-url origin >/dev/null
 echo
 
 #git log "origin/$current_branch.."
+
 # works even if you haven't pushed this branch yet
 git log "$@" "origin.."
