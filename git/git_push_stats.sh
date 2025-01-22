@@ -45,8 +45,7 @@ num_commits="$("$srcdir/git_origin_commits_to_push.sh")"
 # so that when there is nothing to push we get 0 instead of 1 line as the result
 num_diff_lines="$(
     "$srcdir/git_origin_diff_to_push.sh" --unified=0 |
-    grep -E '^[+-]' |
-    grep -vE '^(\+\+\+|---)' |
+    sed -n '/^[+-]/ {/^\(---\|+++\)/!p}' |
     sed '$ { /^[[:space:]]*$/d }' |
     wc -l |
     sed 's/[[:space:]]*//g'
@@ -57,6 +56,6 @@ Stats for Push to Origin
 
 Number of Commits: $num_commits
 
-Number of Diff Lines: $num_diff_lines
+Number of Line Changes (without context lines): $num_diff_lines
 
 EOF
