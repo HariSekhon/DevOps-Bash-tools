@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Shows the Git diff between the origin remote of the same branch to the current branch head
 
-You can give git log options like --oneline
+You can give git diff options
 
 Example:
 
