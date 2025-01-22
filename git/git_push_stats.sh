@@ -41,7 +41,12 @@ help_usage "$@"
 
 num_commits="$("$srcdir/git_origin_commits_to_push.sh")"
 
-num_diff_lines="$("$srcdir/git_origin_diff_to_push.sh" | wc -l | sed 's/[[:space:]]*//')"
+num_diff_lines="$(
+    "$srcdir/git_origin_diff_to_push.sh" |
+    sed '/^[[:space:]]*$/d' |
+    wc -l |
+    sed '/[[:space:]]*//d'
+)"
 
 cat <<EOF
 Stats for Push to Origin
