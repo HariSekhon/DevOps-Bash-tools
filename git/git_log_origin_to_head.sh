@@ -49,5 +49,6 @@ echo
 
 #git log "origin/$current_branch.."
 
-# works even if you haven't pushed this branch yet
+# these next two work even if you haven't pushed this branch yet
+#git log "$@" "FETCH_HEAD..HEAD"
 git log "$@" "origin.."
