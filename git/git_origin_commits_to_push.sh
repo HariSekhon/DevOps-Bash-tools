@@ -34,6 +34,5 @@ help_usage "$@"
 num_args 0 "$@"
 
 "$srcdir/git_origin_log_to_push.sh" --oneline |
-sed '/^[[:space:]]*$/d' |
 wc -l |
 sed 's/[[:space:]]*//g'
