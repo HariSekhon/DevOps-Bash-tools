@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Shows the Git log between the origin remote of the same branch to the current branch head
+Shows the Git log in local branch that would be pushed to remote origin
 
 You can give git log options like --oneline
 
