@@ -45,7 +45,6 @@ log "Current branch: $current_branch"
 
 log "Checking we have an origin"
 git remote get-url origin >/dev/null
-echo
 
 #git diff "origin/$current_branch.."
 
