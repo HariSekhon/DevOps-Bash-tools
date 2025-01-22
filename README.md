@@ -912,9 +912,9 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_foreach_repo_replace_readme_actions.sh` - updates the `README.md` badges for GitHub Actions to match the local repo name. Useful to bulk fix copied badges quickly and easily
   - `git_foreach_repo_update_readme.sh` - git-diff-commits the `README.md` for each Git repo checkout using adjacent `git_foreach_repo.sh` and `git_diff_commit.sh` scripts. Useful to quickly bulk update `README.md` in all your projects, such as when references need updating
   - `git_push_stats.sh` - shows the Git push stats to the remote origin for the current branch - number of commits and lines of diff, using the next two scripts:
-  - `git_origin_commits_to_head.sh` - shows the number of Git commits from the origin remote of the same branch to the current branch head
-  - `git_origin_diff_to_head.sh` - shows the Git diff between the origin remote of the same branch to the current branch head
-  - `git_origin_log_to_head.sh` - shows the Git log between the origin remote of the same branch to the current branch head. Can use the standard git log arg `--oneline` to pipe to `wc` count commits
+  - `git_origin_commits_to_head.sh` - shows the number of Git commits in local branch that would be pushed to remote origin
+  - `git_origin_diff_to_head.sh` - shows the Git diff of lines in local branch that would be pushed to remote origin
+  - `git_origin_log_to_head.sh` - shows the Git log in local branch that would be pushed to remote origin
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
   - `git_remotes_add_origin_providers.sh` - auto-creates remotes for the 4 major public repositories ([GitHub](https://github.com/)/[GitLab](https://gitlab.com/)/[Bitbucket](https://bitbucket.org)/[Azure DevOps](https://dev.azure.com/)), useful for `git pull -all` to fetch and merge updates from all providers in one command
   - `git_remotes_set_multi_origin.sh` - sets up multi-remote origin for unified push to automatically keep the 4 major public repositories in sync (especially useful for [Bitbucket](https://bitbucket.org) and [Azure DevOps](https://dev.azure.com/) which don't have [GitLab](https://gitlab.com/)'s auto-mirroring from [GitHub](https://github.com/) feature)
