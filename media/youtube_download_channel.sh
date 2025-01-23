@@ -38,12 +38,14 @@ min_args 1 "$@"
 #"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
 # in case installed manually but not in package manager
-if ! type -P yt-dlp &>/dev/null; then
-    timestamp "yt-dlp not found in \$PATH, attempting to install..."
-    echo
-    "$srcdir/../packages/install_packages.sh" yt-dlp
-    echo
-fi
+for cmd in yt-dlp ffmpeg; do
+    if ! type -P "$cmd" &>/dev/null; then
+        timestamp "$cmd not found in \$PATH, attempting to install..."
+        echo
+        "$srcdir/../packages/install_packages.sh" "$cmd"
+        echo
+    fi
+done
 
 # https://github.com/yt-dlp/yt-dlp#output-template
 
