@@ -42,5 +42,15 @@ fi
 
 # https://github.com/yt-dlp/yt-dlp#output-template
 
-#yt-dlp -f mp4 -cw -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
-yt-dlp -f mp4 -cw -o "%(autonumber)s - %(title)s.%(ext)s" -v "$1"
+# -c --continue
+# -w --no-overwrite
+# -o --output format file name
+# -v --verbose
+#yt-dlp -f mp4 -c -w -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
+yt-dlp \
+    --format mp4 \
+    --continue \
+    --no-overwrite \
+    --output "%(autonumber)s - %(title)s.%(ext)s" \
+    --verbose \
+    "$1"
