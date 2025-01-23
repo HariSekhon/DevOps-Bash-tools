@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Downloads all videos from an entire YouTube channel using yt-dlp
+
+Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 "
 
 # used by usage() in lib/utils.sh
@@ -45,13 +47,27 @@ fi
 
 # https://github.com/yt-dlp/yt-dlp#output-template
 
+#yt-dlp -f mp4 -c -w -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
+
 # -c --continue
 # -w --no-overwrite
 # -o --output format file name
 # -v --verbose (debug output)
-#yt-dlp -f mp4 -c -w -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
+#
+# --format mp4 \
+#
+# --format best - results in poor quality video in testing due to video only and audio only combinations
+#
+# --format "bestvideo+bestaudio/best" - unfortunately this results in a file that macOS QuickTime can't open natively
+#                                       (although VLC can but then VLC was always the best)
+#
+#       bestvideo+bestaudio: downloads the best video and audio streams separately and merges them (requires ffmpeg or avconv)
+#       /best: falls back to the best single file if the video+audio combination isn't available
+#
+# for maximum compatibility specify compatible formats
 yt-dlp \
-    --format mp4 \
+    --format "bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]" \
+    --merge-output-format mp4 \
     --continue \
     --no-overwrite \
     --output "%(autonumber)s - %(title)s.%(ext)s" \
