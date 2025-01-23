@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Converts one or more video files given on the command line to 720p mp4 format using ffmpeg
+Converts one or more video files to 720p mp4 format using ffmpeg
 
 Useful to make good trade-off of quality vs size for social media sharing
 
