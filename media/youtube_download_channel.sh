@@ -45,12 +45,12 @@ fi
 # -c --continue
 # -w --no-overwrite
 # -o --output format file name
-# -v --verbose
+# -v --verbose (debug output)
 #yt-dlp -f mp4 -c -w -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
 yt-dlp \
     --format mp4 \
     --continue \
     --no-overwrite \
     --output "%(autonumber)s - %(title)s.%(ext)s" \
-    --verbose \
+    ${DEBUG:+--verbose} \
     "$1"
