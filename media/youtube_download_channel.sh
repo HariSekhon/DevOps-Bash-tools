@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Uses yt-dlp to download an entire YouTube channel of videos
+Downloads all videos from an entire YouTube channel using yt-dlp
 "
 
 # used by usage() in lib/utils.sh
