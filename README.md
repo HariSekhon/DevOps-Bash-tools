@@ -913,6 +913,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_foreach_repo_update_readme.sh` - git-diff-commits the `README.md` for each Git repo checkout using adjacent `git_foreach_repo.sh` and `git_diff_commit.sh` scripts. Useful to quickly bulk update `README.md` in all your projects, such as when references need updating
   - `git_push_stats.sh` - shows the Git push stats to the remote origin for the current branch - number of commits and lines of diff, using the next two scripts:
   - `git_origin_commits_to_push.sh` - shows the number of Git commits in local branch that would be pushed to remote origin
+  - `git_origin_lines_changed_to_push.sh` - shows the Git number of lines changed in local branch that would be pushed to remote origin. These are lines actually added / changed / removed without surrounding context lines
   - `git_origin_diff_to_push.sh` - shows the Git diff of lines in local branch that would be pushed to remote origin
   - `git_origin_log_to_push.sh` - shows the Git log in local branch that would be pushed to remote origin
   - `git_merge_all.sh` / `git_merge_master.sh` / `git_merge_master_pull.sh` - merges updates from master branch to all other branches to avoid drift on longer lived feature branches / version branches (eg. [Dockerfiles](https://github.com/HariSekhon/Dockerfiles) repo)
