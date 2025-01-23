@@ -1443,7 +1443,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
 - `youtube_download_video.sh` - downloads a YouTube video to mp4 with maximum quality and compatibility usng yt-dlp
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel using yt-dlp
-- `video_to_720p_mp4` - converts one or more video files given on the command line to 720p mp4 format using ffmpeg. Useful to make good trade-off of quality vs size for social media sharing
+- `video_to_720p_mp4` - converts one or more video files to 720p mp4 format using ffmpeg. Useful to make good trade-off of quality vs size for social media sharing
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
 
