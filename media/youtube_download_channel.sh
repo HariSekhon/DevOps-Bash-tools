@@ -33,6 +33,13 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+if ! type -P yt-dlp &>/dev/null; then
+    timestamp "yt-dlp not found in \$PATH, attempting to install..."
+    echo
+    "$srcdir/../packages/install_packages.sh" yt-dlp
+    echo
+fi
+
 # https://github.com/yt-dlp/yt-dlp#output-template
 
 #yt-dlp -f mp4 -cw -o "%(upload_date)s - %(title)s.%(ext)s" -v "$1"
