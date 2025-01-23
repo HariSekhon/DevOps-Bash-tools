@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Convert an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
+Converts an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
 
 Requires one of Inkscape, ImageMagik or rsvg-convert - will attempt to use whichever is already installed
 or install one of them if none are found
