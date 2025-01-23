@@ -37,7 +37,7 @@ Installs ffmpeg using OS package manager if not already installed
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<video_files>]"
+usage_args="<video_files>"
 
 help_usage "$@"
 
