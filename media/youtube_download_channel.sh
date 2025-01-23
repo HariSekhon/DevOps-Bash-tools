@@ -33,6 +33,9 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+#"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
+
+# in case installed manually but not in package manager
 if ! type -P yt-dlp &>/dev/null; then
     timestamp "yt-dlp not found in \$PATH, attempting to install..."
     echo
