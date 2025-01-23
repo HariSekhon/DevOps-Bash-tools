@@ -31,6 +31,8 @@ Names the generated files the same except with the file extension replaced with 
 Skips files which already have a corresponding adjacent '.720.mp4' file for safety
 
 Removes partially complete files for consistency using bash trapping
+
+Installs ffmpeg using OS package manager if not already installed
 "
 
 # used by usage() in lib/utils.sh
