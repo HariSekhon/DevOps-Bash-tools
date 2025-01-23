@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Shows the Git number of lines changed in local branch that would be pushed to remote origin
+
+These are lines actually added / changed / removed without surrounding context lines
 "
 
 # used by usage() in lib/utils.sh
