@@ -56,6 +56,8 @@ Stats for Push to Origin
 
 Number of Commits: $num_commits
 
-Number of Line Changes (without context lines): $num_diff_lines
+Number of Line Changed: $num_diff_lines
+
+(lines actually added / changed / removed without surrounding context lines)
 
 EOF
