@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Uses yt-dlp to download a YouTube video to mp4 with maximum quality and compatibility
 
-Attempts to install yt-dlp via OS package manager if not already installed
+Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 "
 
 # used by usage() in lib/utils.sh
