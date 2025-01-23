@@ -45,6 +45,7 @@ for cmd in yt-dlp ffmpeg; do
         "$srcdir/../packages/install_packages.sh" "$cmd"
         echo
     fi
+    check_bin "$cmd"
 done
 
 # https://github.com/yt-dlp/yt-dlp#output-template
