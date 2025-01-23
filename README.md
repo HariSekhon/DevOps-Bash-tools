@@ -1441,8 +1441,8 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 - `avi_to_mp4.sh` - convert avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - convert mkv files to mp4 using ffmpeg. Same use case as above
-- `youtube_download_video.sh` - downloads a YouTube video to mp4 with maximum quality and compatibility
-- `youtube_download_channel.sh` - downloads all videos from a given YouTube channel URL
+- `youtube_download_video.sh` - downloads a YouTube video to mp4 with maximum quality and compatibility usng yt-dlp
+- `youtube_download_channel.sh` - downloads all videos from a given YouTube channel using yt-dlp
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
 
