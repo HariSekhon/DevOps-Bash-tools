@@ -64,6 +64,7 @@ timestamp "Getting diff"
 diff="$(git diff --color=always FETCH_HEAD..HEAD)"
 
 {
+    echo
     "$srcdir/git_push_stats.sh"
     echo "$diff"
 } | less -FR
