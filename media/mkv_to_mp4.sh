@@ -40,7 +40,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-check_bin ffmpeg
+check_bin ffmpeg ||
+"$srcdir/../packages/install_packages.sh" ffmpeg
 
 SECONDS=0
 
