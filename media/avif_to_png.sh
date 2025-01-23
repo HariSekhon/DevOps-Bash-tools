@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Convert a Avif image to PNG to be usable on websites that don't support Avif images like LinkedIn
+Converts a Avif image to PNG to be usable on websites that don't support Avif images like LinkedIn
 
 Requires ImageMagick to be installed, attempts to install it if not found
 "
