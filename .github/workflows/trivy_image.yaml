@@ -43,7 +43,9 @@ on:
     - cron: '0 0 * * 1'
 
 permissions:
+  #actions: read
   contents: read
+  security-events: write
 
 concurrency:
   group: ${{ github.ref }}-${{ github.workflow }}
