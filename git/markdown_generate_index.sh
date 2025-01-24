@@ -66,7 +66,7 @@ fi
 # tail -n +2 takes off the first line which is the header we definitely don't want in the index
 # false positive
 # shellcheck disable=SC2016
-sed '/^```/,/^```/d' "$markdown_file" |
+sed '/^[[:space:]]*```/,/^[[:space:]]*```/d' "$markdown_file" |
 # strip out oneline html comment because next sed will strip to end of file otherwise
 sed '/<!--.*-->/d;' |
 # strip out <!-- commented out --> sections
