@@ -43,7 +43,7 @@ on:
     - cron: '0 0 * * 1'
 
 permissions:
-  #actions: read
+  actions: read
   contents: read
   security-events: write
 
