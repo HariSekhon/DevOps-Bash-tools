@@ -55,7 +55,7 @@ jobs:
     #if: github.event.repository.fork == false
     if: github.repository_owner == 'HariSekhon'
     name: Trivy Docker Image Scan
-    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy.yaml@master
+    uses: HariSekhon/GitHub-Actions/.github/workflows/trivy_image.yaml@master
     with:
       docker_image: harisekhon/bash-tools
       severity: ''
