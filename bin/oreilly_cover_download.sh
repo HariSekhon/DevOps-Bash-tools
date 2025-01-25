@@ -26,7 +26,10 @@ Downloads an O'Reilly book cover
 
 Gives a nice interactive menu or Book Titles and Animal names to scroll through
 
-Give an ERE regex argument to filter this list to be shorter. If the regex only matches a single item then skips the interactive menu and downloads it directly
+Use an ERE regex argument to filter this list to be shorter
+
+If the regex only matches a single item then skips the interactive menu and downloads it directly
+
 
 Requires dialogue menu CLI tool to be installed - attempts to install it via OS package manager if not already found
 "
