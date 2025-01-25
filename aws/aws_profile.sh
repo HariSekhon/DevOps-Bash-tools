@@ -91,7 +91,8 @@ profiles="$(sed -n 's/^[[:space:]]*\[\(profile[[:space:]][[:space:]]*\)*\(.*\)\]
 profile_menu_items=()
 
 while read -r line; do
-    profile_menu_items+=("$line" " ")
+    profile_menu_items+=("$line")
+    profile_menu_tag_items+=("$line" " ")
 done <<< "$profiles"
 
 if [ "${#profile_menu_items[@]}" -eq 0 ];then
@@ -99,7 +100,7 @@ if [ "${#profile_menu_items[@]}" -eq 0 ];then
 elif [ "${#profile_menu_items[@]}" -eq 1 ];then
     profile="${profile_menu_items[*]}"
 else
-    profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_items[@]}" 3>&1 1>&2 2>&3)"
+    profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_tag_items[@]}" 3>&1 1>&2 2>&3)"
 fi
 
 aws_profile "$profile"
