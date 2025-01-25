@@ -28,7 +28,6 @@ Parses \$AWS_CONFIG_FILE or \$HOME/.aws/config for the menu list
 
 Skips the menu if there is only 1 AWS profile found in the config
 
-
 Then sets the AWS_PROFILE and exec's to \$SHELL to inherit it
 
 Convenient when you have lots of work AWS profiles
