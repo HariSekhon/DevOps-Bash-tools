@@ -100,3 +100,7 @@ timestamp "Downloading to file: $download_file"
 wget -nc -O "$selected.${url##*.}" "$url"
 
 timestamp "Download complete"
+
+echo >&2
+
+"$srcdir/../media/imageopen.sh" "$download_file"
