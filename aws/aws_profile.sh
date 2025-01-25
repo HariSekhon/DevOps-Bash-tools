@@ -22,11 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Switches to an AWS Profile given as an arg or prompts the user with a convenient interactive menu
-list of AWS profiles to choose from
+Switches to an AWS Profile selected from a convenient interactive menu list of AWS profiles to choose from
 
-If no profile name is given then Parses \$AWS_CONFIG_FILE or \$HOME/.aws/config for the profile list
-and prompts the user with a dialog menu
+Parses \$AWS_CONFIG_FILE or \$HOME/.aws/config for the menu list
 
 Then sets the AWS_PROFILE and exec's to \$SHELL to inherit it
 
@@ -38,7 +36,7 @@ Requires dialogue menu CLI tool to be installed - attempts to install it via OS 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<profile>]"
+usage_args="[<aws_config_path>]"
 
 help_usage "$@"
 
