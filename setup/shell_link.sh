@@ -58,13 +58,18 @@ fi
 for filename in $conf_files; do
     if [[ "$filename" =~ / ]]; then
         dirname="${filename%/*}"
-        dirname2="${dirname#configs}"
-        dirname2="${dirname2#/}"
+        dirname="${dirname#configs}"
+        dirname="${dirname##/}"
+        dirname="${dirname%%/}"
         filename="${filename##*/}"
-        mkdir -pv ~/"$dirname2"
+        sourcepath="$PWD${dirname+/$dirname}/$filename"  # if dirname, insert /dirname in middle
+        destpath=~${dirname+/"$dirname"/}                # if dirname, append /dirname to dest
+        sourcepath="${sourcepath/\/\//\/}"
+        destpath="${destpath/\/\//\/}"
+        mkdir -pv "$destpath"
         # want opt expansion
         # shellcheck disable=SC2086
-        ln -sv $opts -- "$PWD/$dirname/$filename" ~/"$dirname2"/ || :
+        ln -sv $opts -- "$sourcepath" "$destpath" || :
     else
         # want opt expansion
         # shellcheck disable=SC2086
