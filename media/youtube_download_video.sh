@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Downloads a YouTube video to mp4 with maximum quality and compatibility using yt-dlp
+Downloads a YouTube or Twitter / X video to mp4 with maximum quality and compatibility using yt-dlp
 
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 "
