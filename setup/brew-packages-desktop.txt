@@ -259,6 +259,7 @@ ruby-completion
 screen  # get newer version for -Q switch, will use different sockets directory
 s3cmd
 scalastyle
+scc  # Succinct Code Counter - lines and Cocomo man effort estimate
 semgrep
 siege
 #six  # Python 2 to 3 conversion
