@@ -47,7 +47,7 @@ max_args 1 "$@"
 if ! type -P diaglog &>/dev/null; then
     timestamp "Diaglog not found in \$PATH, attempting to install via OS package manager"
     echo
-    "$srcdir/packages/install_packages.sh" dialog
+    "$srcdir/../packages/install_packages.sh" dialog
     echo
 fi
 
