@@ -94,6 +94,10 @@ while read -r line; do
     profile_menu_items+=("$line" " ")
 done <<< "$profiles"
 
+if [ "${#profile_menu_items}" -eq 0 ];then
+    die 'No AWS Profiles found!'
+fi
+
 profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_items[@]}" 3>&1 1>&2 2>&3)"
 
 aws_profile "$profile"
