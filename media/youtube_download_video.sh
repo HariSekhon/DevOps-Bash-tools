@@ -29,11 +29,15 @@ Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package ma
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<youtube_video_url>"
+usage_args="<youtube_or_twitter_video_url> [<filename>.mp4]"
 
 help_usage "$@"
 
 min_args 1 "$@"
+max_args 2 "$@"
+
+url="$1"
+filename="${2:-%(titls)s}.%(ext)s"
 
 #"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
@@ -66,11 +70,14 @@ done
 #       /best: falls back to the best single file if the video+audio combination isn't available
 #
 # for maximum compatibility specify compatible formats
+#
+#    --output "%(title)s.%(ext)s" \
+#
 yt-dlp \
     --format "bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]" \
     --merge-output-format mp4 \
     --continue \
     --no-overwrite \
-    --output "%(title)s.%(ext)s" \
+    --output "$filename" \
     ${DEBUG:+--verbose} \
-    "$1"
+    "$url"
