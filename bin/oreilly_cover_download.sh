@@ -36,7 +36,7 @@ Requires dialogue menu CLI tool to be installed - attempts to install it via OS 
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<book_name_regex_filter_case_insensitive>]"
+usage_args="[<regex_filter>]"
 
 help_usage "$@"
 
