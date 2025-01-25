@@ -27,7 +27,6 @@
 # home dir is too heavy for this right now
 #.pre-commit-config.yaml
 .pylintrc
-.tfdocs.d/.terraform-docs.yml
 configs/.ansible.cfg
 configs/.athenacli/athenaclirc
 #.aws/config
@@ -54,6 +53,7 @@ configs/.sawsrc
 configs/.screenrc
 configs/.sdkman/etc/config
 configs/.sqliterc
+configs/.tfdocs.d/.terraform-docs.yml
 configs/.tmux.conf
 configs/.toprc
 configs/.vimrc
