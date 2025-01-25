@@ -91,8 +91,17 @@ profiles="$(sed -n 's/^[[:space:]]*\[\(profile[[:space:]][[:space:]]*\)*\(.*\)\]
 profile_menu_items=()
 
 while read -r line; do
+
+    # used for counting and string conversion if only a single item
+
     profile_menu_items+=("$line")
+
+    # passed to dialog because it requires args: tag1 visibletext tag2 visibletext
+    # - by making the second one blank it uses the item as both the tag to be returned
+    # to script as well as the visible text
+
     profile_menu_tag_items+=("$line" " ")
+
 done <<< "$profiles"
 
 if [ "${#profile_menu_items[@]}" -eq 0 ];then
