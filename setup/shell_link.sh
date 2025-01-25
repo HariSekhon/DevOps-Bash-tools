@@ -55,15 +55,17 @@ if [ -n "${FORCE:-}" ]; then
     opts="-f"
 fi
 
+HOME="${HOME:-$(cd && pwd)}"
+
 for filename in $conf_files; do
     if [[ "$filename" =~ / ]]; then
-        dirname="${filename%/*}"
-        dirname="${dirname#configs}"
-        dirname="${dirname##/}"
-        dirname="${dirname%%/}"
+        srcdir="${filename%/*}"
+        destdir="${srcdir#configs}"
+        destdir="${destdir##/}"
+        destdir="${destdir%%/}"
         filename="${filename##*/}"
-        sourcepath="$PWD${dirname+/$dirname}/$filename"  # if dirname, insert /dirname in middle
-        destpath=~${dirname+/"$dirname"/}                # if dirname, append /dirname to dest
+        sourcepath="$PWD${srcdir+/$srcdir}/$filename"  # if dirname, insert /dirname in middle
+        destpath="$HOME${destdir+/"$destdir"/}"        # if dirname, append /dirname to dest
         sourcepath="${sourcepath/\/\//\/}"
         destpath="${destpath/\/\//\/}"
         mkdir -pv "$destpath"
