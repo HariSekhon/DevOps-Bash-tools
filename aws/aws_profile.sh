@@ -31,6 +31,9 @@ and prompts the user with a dialog menu
 Then sets the AWS_PROFILE and exec's to \$SHELL to inherit it
 
 Convenient when you have lots of work AWS profiles
+
+
+Requires dialogue menu CLI tool to be installed - attempts to install it via OS package manager if not already found
 "
 
 # used by usage() in lib/utils.sh
@@ -40,6 +43,13 @@ usage_args="[<profile>]"
 help_usage "$@"
 
 max_args 1 "$@"
+
+if ! type -P diaglog &>/dev/null; then
+    timestamp "Diaglog not found in \$PATH, attempting to install via OS package manager"
+    echo
+    "$srcdir/packages/install_packages.sh" dialog
+    echo
+fi
 
 [ -n "${HOME:-}" ] || HOME=~
 
