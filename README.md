@@ -437,7 +437,8 @@ Prometheus, OpenTSDB, InfluxDB etc.
 `aws/` directory:
 
 - [AWS](https://aws.amazon.com/) scripts - `aws_*.sh`:
-  - `aws_profile.sh` - switches to an AWS Profile given as an arg or prompts the user with a convenient interactive menu list of AWS profiles to choose from - useful when you have lots of AWS work profiles
+  - `aws_profile.sh` - switches to an AWS Profile selected from a convenient interactive menu list of AWS profiles from `$AWS_CONFIG_FILE` - useful when you have lots of AWS work profiles
+    - see also [HariSekhon/Environments](https://github.com/HariSekhon/Environments) for automated switching using direnv when `cd`ing into relevant directories
   - `aws_cli_create_credential.sh` - creates an AWS service account user for CI/CD or CLI with Admin permissions (or other group or policy), creates an AWS Access Key, saves a credentials CSV and even prints the shell export commands and aws credentials file config to configure your environment to start using it. Useful trick to avoid CLI reauth to `aws sso login` every day.
   - `aws_terraform_create_credential.sh` - creates a AWS terraform service account with Administrator permissions for Terraform Cloud or other CI/CD systems to run Terraform plan and apply, since no CI/CD systems can work with AWS SSO workflows. Stores the access key as both CSV and prints shell export commands and credentials file config as above
   - `.envrc-aws` - copy to `.envrc` for [direnv](https://direnv.net/) to auto-load AWS configuration settings such as AWS Profile, Compute Region, EKS cluster kubectl context etc.
@@ -1442,6 +1443,8 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
 - `youtube_download_video.sh` - downloads a YouTube video to mp4 with maximum quality and compatibility usng yt-dlp
+  - `twitter_download_video.sh` - same as above for Twitter / X
+  - `x_download_video.sh` - same as above for X / Twitter
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel using yt-dlp
 - `video_to_720p_mp4` - converts one or more video files to 720p mp4 format using ffmpeg. Useful to make good trade-off of quality vs size for social media sharing
 
