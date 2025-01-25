@@ -96,9 +96,11 @@ done <<< "$profiles"
 
 if [ "${#profile_menu_items}" -eq 0 ];then
     die 'No AWS Profiles found!'
+elif [ "${#profile_menu_items}" -eq 1 ];then
+    profile="${profile_menu_items[*]}"
+else
+    profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_items[@]}" 3>&1 1>&2 2>&3)"
 fi
-
-profile="$(dialog --menu "Choose which AWS profile to switch to:" "$LINES" "$COLUMNS" "$LINES" "${profile_menu_items[@]}" 3>&1 1>&2 2>&3)"
 
 aws_profile "$profile"
 
