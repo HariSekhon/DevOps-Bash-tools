@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Downloads an O'Reilly Animal pic for a specific book so I can parody it using an ORLY book cover
+Downloads an O'Reilly book cover
 
 Gives a nice interactive menu or Book Titles and Animal names to scroll through
 
