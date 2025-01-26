@@ -81,3 +81,7 @@ yt-dlp \
     --output "$filename" \
     ${DEBUG:+--verbose} \
     "$url"
+
+if [ "${2:-}" ]; then
+    "$srcdir/vidopen.sh" "$2.mp4"
+fi
