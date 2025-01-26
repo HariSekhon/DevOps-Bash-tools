@@ -87,5 +87,6 @@ if [ "${2:-}" ]; then
 else
     # if the filename isn't specified, we can infer it since no filename specified means no path specified so
     # we can infer it to be the most recent file with an mp4 extension in $PWD
+    # shellcheck disable=SC2012
     "$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
 fi
