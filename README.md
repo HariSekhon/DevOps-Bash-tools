@@ -1442,12 +1442,12 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 - `avi_to_mp4.sh` - converts avi files to mp4 using ffmpeg. Useful to be able to play videos on devices like smart TVs that may not recognize newer codecs otherwise
 - `mkv_to_mp4.sh` - converts mkv files to mp4 using ffmpeg. Same use case as above
-- `vidopen.sh` - opens the given video file using whatever available tool is found on Linux or Mac
 - `youtube_download_video.sh` - downloads a YouTube video to mp4 with maximum quality and compatibility usng yt-dlp
   - `twitter_download_video.sh` - same as above for Twitter / X
   - `x_download_video.sh` - same as above for X / Twitter
 - `youtube_download_channel.sh` - downloads all videos from a given YouTube channel using yt-dlp
 - `video_to_720p_mp4` - converts one or more video files to 720p mp4 format using ffmpeg. Useful to make good trade-off of quality vs size for social media sharing
+- `vidopen.sh` - opens the given video file using whatever available tool is found on Linux or Mac
 
 See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Knowledge-Base/blob/main/multimedia.md).
 
