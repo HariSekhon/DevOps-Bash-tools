@@ -29,6 +29,7 @@ Used by the following scripts:
     youtube_download_video.sh
     twitter_download_video.sh
     x_download_video.sh
+    video_to_720p.mp4
 "
 
 # used by usage() in lib/utils.sh
