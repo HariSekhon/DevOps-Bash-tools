@@ -50,8 +50,8 @@ linux_commands=(
     ffplay
     totem
     xine
-    smplayer
 )
+    #smplayer  # requires args unlike the others: smplayer -send-action play_current_file
 
 if is_mac; then
     open "$video"
