@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads a YouTube or Twitter / X video to mp4 with maximum quality and compatibility using yt-dlp
 
+Opens the video automatically for you to check the download
+
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 "
 
