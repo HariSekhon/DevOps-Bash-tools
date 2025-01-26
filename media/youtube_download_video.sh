@@ -84,4 +84,6 @@ yt-dlp \
 
 if [ "${2:-}" ]; then
     "$srcdir/vidopen.sh" "$2.mp4"
+else
+    "$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
 fi
