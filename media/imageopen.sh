@@ -45,7 +45,7 @@ help_usage "$@"
 
 num_args 1 "$@"
 
-image="${1:-}"
+image="$1"
 
 # Will be tried in this order
 linux_commands=(
