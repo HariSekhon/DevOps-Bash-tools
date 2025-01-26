@@ -66,6 +66,7 @@ for filepath in "$@"; do
         time nice ffmpeg -i "$filepath" -vf "scale=-1:720" -c:v libx264 -crf 23 -preset medium -c:a copy -movflags +faststart "$mp4_filepath"
         echo >&2
     fi
+    "$srcdir/vidopen.sh" "$mp4_filepath"
 done
 
 echo >&2
