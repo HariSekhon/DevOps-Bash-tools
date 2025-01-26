@@ -37,7 +37,7 @@ min_args 1 "$@"
 max_args 2 "$@"
 
 url="$1"
-filename="${2:-%(titls)s}.%(ext)s"
+filename="${2:-%(title)s}.%(ext)s"
 
 #"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
