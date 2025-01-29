@@ -736,6 +736,7 @@ See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-
 - `kubectl_secrets_annotate_to_be_sealed.sh` - annotates secrets in current or given namespace to allow being overwritten by Sealed Secrets (useful to sync ArgoCD health)
 - `kubectl_secrets_not_sealed.sh` - finds secrets with no SealedSecret ownerReferences
 - `kubectl_secrets_to_be_sealed.sh` - finds secrets pending overwrite by Sealed Secrets with the managed annotation
+- `kubernetes_yaml_strip_live_fields.sh` - strips live fields from Kubernetes yaml object dumps. Useful so you can do `kubectl diff` or `kubectl apply` without hitting annoying errors about immutable fields left in exports from `kubectl get ... -o yaml`
 - `kubernetes_foreach_context.sh` - executes a command across all kubectl contexts, replacing `{context}` in each iteration (skips lab contexts `docker` / `minikube` / `minishift` to avoid hangs since they're often offline)
 - `kubernetes_foreach_namespace.sh` - executes a command across all kubernetes namespaces in the current cluster context, replacing `{namespace}` in each iteration
   - Can be chained with `kubernetes_foreach_context.sh` and useful when combined with `gcp_secrets_to_kubernetes.sh` to load all secrets from GCP to Kubernetes for the current cluster, or combined with `gke_kube_creds.sh` and `kubernetes_foreach_context.sh` for all clusters!
