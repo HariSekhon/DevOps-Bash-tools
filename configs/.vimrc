@@ -31,6 +31,7 @@ syn on
 highlight StatusLine ctermfg=yellow ctermbg=darkgray
 highlight StatusLineNC ctermfg=darkgrey ctermbg=yellow
 highlight VertSplit ctermfg=darkgrey ctermbg=yellow
+"set statusline=%f\ %h%w%m%r\ %=%-14.(%l,%c%V%)\ %P
 
 set visualbell
 
