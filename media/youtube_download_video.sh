@@ -85,10 +85,16 @@ yt-dlp \
     "$url"
 
 if [ "${2:-}" ]; then
-    "$srcdir/vidopen.sh" "$2.mp4"
+    filename="$2.mp4"
 else
     # if the filename isn't specified, we can infer it since no filename specified means no path specified so
     # we can infer it to be the most recent file with an mp4 extension in $PWD
     # shellcheck disable=SC2012
-    "$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
+    # this doesn't work reliably, the timestamp of a newer downloaded video file can be older, resulting in opening
+    # the wrong video
+    #"$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
+    timestamp "Determining download filename"
+    filename="$(yt-dlp --get-filename --output "%(title)s.mp4" "$url")"
 fi
+timestamp "Opening video file: $filename"
+"$srcdir/vidopen.sh" "$filename"
