@@ -176,7 +176,7 @@ fi
 echo
 
 timestamp "Copying script to instance: $script"
-scp -i ~/.ssh/"$ssh_key_name.pem" "$script" ec2-user@"$ip":/tmp/
+scp -i ~/.ssh/"$ssh_key_name.pem" -o StrictHostKeyChecking=no "$script" ec2-user@"$ip":/tmp/
 echo
 
 instance_script="/tmp/${script##*/}"
