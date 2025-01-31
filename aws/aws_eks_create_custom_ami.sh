@@ -92,6 +92,7 @@ instance_state="$(
         --output text
 )"
 if [ "$instance_state" = "terminated" ]; then
+    # will trigger launching a new instance with the same name
     instance_id=''
 fi
 
