@@ -74,13 +74,34 @@ fi
 timestamp "Base EKS AMI is: $base_ami"
 echo
 
+instance_name="EKS-$eks_version-Instance-for-Custom-AMI"
+
 timestamp "Checking if EC2 instance of EKS Base AMI already exists"
 instance_id="$(
     aws ec2 describe-instances \
-        --filters "Name=tag:Name,Values=EKS-$eks_version-Instance-for-Custom-AMI" \
+        --filters "Name=tag:Name,Values=$instance_name" \
         --query "Reservations[0].Instances[0].InstanceId" \
         --output text
 )"
+
+timestamp "Checking the instance state isn't terminated"
+instance_state="$(
+    aws ec2 describe-instances \
+        --instance-ids "$instance_id" \
+        --query "Reservations[0].Instances[0].State.Name" \
+        --output text
+)"
+if [ "$instance_state" = "terminated" ]; then
+    last_token="${instance_name##*-}"
+    if is_int "$last_token"; then
+        num="$((last_token + 1))"
+        instance_name="${instance_name%-*}"
+    else
+        num=2
+    fi
+    instance_name+="-$num"
+    instance_id=''
+fi
 
 if [ "$instance_id" = "None" ]; then
     timestamp "Launching EC2 instance of EKS Base AMI"
@@ -92,7 +113,7 @@ if [ "$instance_id" = "None" ]; then
             --key-name "$ssh_key_name" \
             --security-group-ids "$security_group" \
             --subnet-id "$subnet_id" \
-            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=EKS-$eks_version-Instance-for-Custom-AMI}]" \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance_name}]" \
             --query "Instances[0].InstanceId" \
             --output text
     )"
