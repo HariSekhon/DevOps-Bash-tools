@@ -92,14 +92,6 @@ instance_state="$(
         --output text
 )"
 if [ "$instance_state" = "terminated" ]; then
-    last_token="${instance_name##*-}"
-    if is_int "$last_token"; then
-        num="$((last_token + 1))"
-        instance_name="${instance_name%-*}"
-    else
-        num=2
-    fi
-    instance_name+="-$num"
     instance_id=''
 fi
 
