@@ -168,7 +168,7 @@ echo
 instance_script="/tmp/${script##*/}"
 
 timestamp "Executing script on instance: $instance_script"
-ssh -i ~/.ssh/"$ssh_key_name.pem" ec2-user@"$ip" "$instance_script"
+ssh -i ~/.ssh/"$ssh_key_name.pem" ec2-user@"$ip" "chmod +x $instance_script && $instance_script"
 
 echo
 
