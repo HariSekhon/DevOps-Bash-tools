@@ -37,6 +37,8 @@ instance_id_regex='i-[0-9a-fA-F]{17}'
 ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
 # S3 URL regex with s3:// prefix
 s3_regex='s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)$|^s3:\/\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/([a-z0-9][a-z0-9.-]{1,61}[a-z0-9])\/(.+)'
+aws_sg_regex="sg-[0-9a-f]{8,17}"
+aws_subnet_regex="subnet-[0-9a-f]{8,17}"
 
 is_aws_sso_logged_in(){
     aws sts get-caller-identity &>/dev/null
@@ -317,6 +319,30 @@ is_instance_id(){
 is_ami_id(){
     local arg="$1"
     [[ "$arg" =~ ^$ami_id_regex$ ]]
+}
+
+aws_validate_security_group_id() {
+    local sg_id="$1"
+    if ! is_aws_security_group_id "$sg_id"; then
+        die "Invalid Security Group ID: $sg_id"
+    fi
+}
+
+is_aws_security_group_id() {
+    local arg="$1"
+    [[ "$arg" =~ ^$aws_sg_regex$ ]]
+}
+
+aws_validate_subnet_id() {
+    local subnet_id="$1"
+    if ! is_aws_subnet_id "$subnet_id"; then
+        die "Invalid Subnet ID: $subnet_id"
+    fi
+}
+
+is_aws_subnet_id() {
+    local arg="$1"
+    [[ "$arg" =~ ^$aws_subnet_regex$ ]]
 }
 
 #aws_get_cred_path(){
