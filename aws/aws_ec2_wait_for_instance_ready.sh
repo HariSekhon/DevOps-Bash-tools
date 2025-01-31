@@ -67,9 +67,9 @@ if [ "$check_interval_secs" -lt 1 ]; then
 	die "Invalid Check Interval Secs cannot be less than 1: $check_interval_secs"
 fi
 
-timestamp "Timeout max: $timeout_secs secs"
-timestamp "Check interval: $check_interval_secs secs"
 timestamp "Waiting for AWS EC2 instance to become ready: $instance_id"
+timestamp "Check interval: $check_interval_secs secs"
+timestamp "Timeout max: $timeout_secs secs"
 
 SECONDS=0
 
