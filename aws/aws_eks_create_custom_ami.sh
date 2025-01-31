@@ -94,7 +94,8 @@ for((i=1; i <= 100 ; i++)); do
             --query "Reservations[0].Instances[0].State.Name" \
             --output text
     )"
-    if [ "$instance_state" = "terminated" ]; then
+    if [ "$instance_id" != "None" ] &&
+       [ "$instance_state" = "terminated" ]; then
         timestamp "This instance is already terminated, will try a new instance name"
         continue
     fi
