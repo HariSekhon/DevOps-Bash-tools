@@ -146,7 +146,8 @@ get_instance_profile(){
     aws ec2 describe-instances \
         --instance-ids "$instance_id" \
         --query "Reservations[0].Instances[0].IamInstanceProfile.Arn" \
-        --output text
+        --output text |
+    sed 's|.*/||'
 }
 
 if ! is_blank "$instance_profile"; then
