@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Prints all AWS SSO ARNs in IAM policy usable format
 
-Requires AWS CLI to be installed and configured
+
+$usage_aws_cli_required
 "
 
 # used by usage() in lib/utils.sh
