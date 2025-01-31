@@ -103,7 +103,7 @@ if [ "$instance_state" = "terminated" ]; then
     instance_id=''
 fi
 
-if [ "$instance_id" = "None" ]; then
+if is_blank "$instance_id" || [ "$instance_id" = "None" ]; then
     timestamp "Launching EC2 instance of EKS Base AMI"
     instance_id="$(
         aws ec2 run-instances \
