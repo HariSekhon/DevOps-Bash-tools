@@ -100,12 +100,14 @@ creds_homepath="${creds#$HOME}"
 creds_homepath="${creds_homepath##/}"
 creds_homepath="${creds_homepath%/*}"
 
-timestamp "Copying AWS SSO credential cache to $server"
+timestamp "Ensuring path exists: $creds_homepath"
 
 # the first time on a new EC2 VM this will fail without pre-creating the directories
 # want splitting and evaluation on client side
 # shellcheck disable=SC2086,SC2029
 ssh ${SSH_OPTIONS:-} "$server" "mkdir -pv $creds_homepath/"
+
+timestamp "Copying AWS SSO credential cache to $server"
 
 # want splitting
 # shellcheck disable=SC2086
