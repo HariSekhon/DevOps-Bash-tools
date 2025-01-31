@@ -147,6 +147,34 @@ if ! is_blank "$instance_profile"; then
             --instance-id "$instance_id" \
             --iam-instance-profile Name="$instance_profile"
     echo >&2
+    timestamp "Waiting for profile to fully attach..."
+
+    instance_profile_attached=0
+
+    for((i=1; i <= 100 ; i++)); do
+        actual_instance_profile="$(
+            aws ec2 describe-instances \
+                --instance-ids "$instance_id" \
+                --query "Reservations[0].Instances[0].IamInstanceProfile.Arn" \
+                --output text
+        )"
+
+    if [ "$actual_instance_profile" = "None" ]; then
+        timestamp "No instance profile associated yet..."
+    elif [ "$actual_instance_profile" = "$instance_profile" ]; then
+        timestamp "Instance profile attached"
+        instance_profile_attached=1
+        break
+    else
+        timestamp "Waiting for instance profile to attach..."
+    fi
+
+    sleep 3
+    done
+fi
+
+if [ "$instance_profile_attached" != 1 ]; then
+    die "Instance profile failed to attach, gave up waiting"
 fi
 
 "$srcdir/aws_ec2_wait_for_instance_ready.sh" "$instance_id"
