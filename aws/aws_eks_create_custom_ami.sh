@@ -141,36 +141,42 @@ timestamp "Instance is running"
 
 echo >&2
 
+get_instance_profile(){
+    local instance_id="$1"
+    aws ec2 describe-instances \
+        --instance-ids "$instance_id" \
+        --query "Reservations[0].Instances[0].IamInstanceProfile.Arn" \
+        --output text
+}
+
 if ! is_blank "$instance_profile"; then
-    timestamp "Attaching instance profile: $instance_profile"
-    aws ec2 associate-iam-instance-profile \
-            --instance-id "$instance_id" \
-            --iam-instance-profile Name="$instance_profile"
-    echo >&2
-    timestamp "Waiting for profile to fully attach..."
-
-    instance_profile_attached=0
-
-    for((i=1; i <= 100 ; i++)); do
-        actual_instance_profile="$(
-            aws ec2 describe-instances \
-                --instance-ids "$instance_id" \
-                --query "Reservations[0].Instances[0].IamInstanceProfile.Arn" \
-                --output text
-        )"
-
-    if [ "$actual_instance_profile" = "None" ]; then
-        timestamp "No instance profile associated yet..."
-    elif [ "$actual_instance_profile" = "$instance_profile" ]; then
-        timestamp "Instance profile attached"
+    if [ "$(get_instance_profile "$instance_id")" = "$instance_profile" ]; then
         instance_profile_attached=1
-        break
     else
-        timestamp "Waiting for instance profile to attach..."
-    fi
+        timestamp "Attaching instance profile: $instance_profile"
+        aws ec2 associate-iam-instance-profile \
+                --instance-id "$instance_id" \
+                --iam-instance-profile Name="$instance_profile"
+        echo >&2
+        timestamp "Waiting for profile to fully attach..."
 
-    sleep 3
-    done
+        instance_profile_attached=0
+
+        for((i=1; i <= 100 ; i++)); do
+            current_instance_profile="$(get_instance_profile "$instance_id")"
+            if [ "$current_instance_profile" = "None" ]; then
+                timestamp "No instance profile associated yet..."
+            elif [ "$current_instance_profile" = "$instance_profile" ]; then
+                timestamp "Instance profile attached"
+                instance_profile_attached=1
+                break
+            else
+                timestamp "Waiting for instance profile to attach..."
+            fi
+
+            sleep 3
+        done
+    fi
 fi
 
 if [ "$instance_profile_attached" != 1 ]; then
