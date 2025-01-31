@@ -43,7 +43,7 @@ For code on how to do that, see:
     https://github.com/HariSekhon/Environments
 
 
-Requires AWS CLI to be installed and configured
+$usage_aws_cli_jq_required
 "
 
 # used by usage() in lib/utils.sh
