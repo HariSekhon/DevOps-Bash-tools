@@ -172,17 +172,18 @@ ssh -i ~/.ssh/"$ssh_key_name.pem" ec2-user@"$ip" "$instance_script"
 
 echo
 
-timestamp "Creating Custom AMI from running EC2 instance"
-custom_ami_id="$(
-    aws ec2 create-image \
-        --instance-id "$instance_id" \
-        --name "$custom_ami_name" \
-        --no-reboot \
-        --query "ImageId" \
-        --output text
-)"
+"$srcdir/aws_ec2_create_ami_from_instance.sh" "$instance_id" "$custom_ami_name"
 
-timestamp "Custom AMI creation initiated: $custom_ami_id"
+#timestamp "Creating Custom AMI from running EC2 instance"
+#custom_ami_id="$(
+#    aws ec2 create-image \
+#        --instance-id "$instance_id" \
+#        --name "$custom_ami_name" \
+#        --no-reboot \
+#        --query "ImageId" \
+#        --output text
+#)"
+#timestamp "Custom AMI creation initiated: $custom_ami_id"
 
 echo
 
