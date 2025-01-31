@@ -62,6 +62,11 @@ aws_validate_security_group_id "$security_group"
 
 aws_validate_subnet_id "$subnet_id"
 
+if ! is_blank "$instance_profile"; then
+    if ! [[ "$instance_profile" =~ ^[A-Za-z0-9+=,.@_-]+$ ]]; then
+        die "Invalid Instance Profile name: $instance_profile"
+    fi
+fi
 
 timestamp "Getting the latest EKS optimized AMI for $eks_version"
 base_ami="$(
