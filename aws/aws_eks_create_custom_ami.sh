@@ -42,11 +42,12 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<custom_ami_name> <eks_version> <instance_type> <security_group> <subnet_id> <ssh-key-name> <script>"
+usage_args="<custom_ami_name> <eks_version> <instance_type> <security_group> <subnet_id> <ssh-key-name> <script> [<instance_profile>]"
 
 help_usage "$@"
 
-num_args 7 "$@"
+min_args 7 "$@"
+max_args 8 "$@"
 
 custom_ami_name="$1"
 eks_version="$2"
@@ -55,6 +56,7 @@ security_group="$4"
 subnet_id="$5"
 ssh_key_name="$6"
 script="$7"  # on local filesystem because its private
+instance_profile="${8:-}"
 
 aws_validate_security_group_id "$security_group"
 
@@ -72,7 +74,7 @@ if is_blank "$base_ami"; then
     die "Failed to determine EKS AMI for version $eks_version"
 fi
 timestamp "Base EKS AMI is: $base_ami"
-echo
+echo >&2
 
 instance_launched=0
 
@@ -97,7 +99,7 @@ for((i=1; i <= 100 ; i++)); do
         )"
         if grep -qi -e terminated -e shutting-down <<< "$instance_state"; then
             timestamp "This instance is already terminated / shutting down, will try a new instance name"
-            echo
+            echo >&2
             continue
         fi
     fi
@@ -126,17 +128,25 @@ if [ "$instance_launched" != 1 ]; then
     die "ERROR: Failed to launch instance"
 fi
 
-echo
+echo >&2
 
 timestamp "Waiting for instance to be running..."
 aws ec2 wait instance-running --instance-ids "$instance_id"
 timestamp "Instance is running"
 
-echo
+echo >&2
+
+if ! is_blank "$instance_profile"; then
+    timestamp "Attaching instance profile: $instance_profile"
+    aws ec2 associate-iam-instance-profile \
+            --instance-id "$instance_id" \
+            --iam-instance-profile Name="$instance_profile"
+    echo >&2
+fi
 
 "$srcdir/aws_ec2_wait_for_instance_ready.sh" "$instance_id"
 
-echo
+echo >&2
 
 # EC2 instance isn't SSM integrated at this point to send commands
 #
@@ -186,7 +196,7 @@ else
     timestamp "Using instance private IP: $ip"
 fi
 
-echo
+echo >&2
 
 timestamp "Copying script to instance: $script"
 
@@ -195,14 +205,14 @@ scp -i ~/.ssh/"$ssh_key_name.pem" \
     -o StrictHostKeyChecking=no \
     "$script" \
     ec2-user@"$ip":/tmp/
-echo
+echo >&2
 
 instance_script="/tmp/${script##*/}"
 
 timestamp "Executing script on instance: $instance_script"
 ssh -i ~/.ssh/"$ssh_key_name.pem" ec2-user@"$ip" "chmod +x $instance_script && $instance_script"
 
-echo
+echo >&2
 
 "$srcdir/aws_ec2_create_ami_from_instance.sh" "$instance_id" "$custom_ami_name"
 
@@ -217,7 +227,7 @@ echo
 #)"
 #timestamp "Custom AMI creation initiated: $custom_ami_id"
 
-echo
+echo >&2
 
 timestamp "Terminating temporary EC2 instance: $instance_id"
 aws ec2 terminate-instances --instance-ids "$instance_id"
