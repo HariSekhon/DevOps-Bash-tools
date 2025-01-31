@@ -63,5 +63,19 @@ log "Checking if AWS SSO is already logged in"
 if ! is_aws_sso_logged_in; then
     echo "AWS SSO cache expired"
 else
-    jq -r '.expiresAt' "$creds"
+    #jq -r '.expiresAt' "$creds"
+    #
+    # There is a weird situation where the newest file cache is expired earlier today
+    #
+    # but I have another older one with a timestamp far in the future (more than the usual 1 day of AWS CLI)
+    #
+    # and the AWS CLI is still working, so this is more accurate than the above which shows the
+    #
+    # expired cache from earlier today which is clearly not taking precedence
+    #
+    #   2025-01-31T16:53:34Z
+    #   2025-04-09T10:08:04Z
+    #
+    # this is more accurate in this weird situation
+    jq -r '.expiresAt' ~/.aws/sso/cache/*.json | sort -r | head -n1
 fi
