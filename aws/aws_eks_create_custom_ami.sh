@@ -88,14 +88,14 @@ for((i=1; i <= 100 ; i++)); do
     )"
 
     if [ "$instance_id" != "None" ]; then
-        timestamp "Checking the instance state isn't terminated"
+        timestamp "Checking the instance state isn't terminated or shutting down"
         instance_state="$(
             aws ec2 describe-instances \
                 --instance-ids "$instance_id" \
                 --query "Reservations[0].Instances[0].State.Name" \
                 --output text
         )"
-        if [ "$instance_state" = "terminated" ]; then
+        if grep -i -e terminated -e shutting-down <<< "$instance_state"; then
             timestamp "This instance is already terminated, will try a new instance name"
             continue
         fi
