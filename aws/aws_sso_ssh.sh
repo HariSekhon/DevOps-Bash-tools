@@ -98,17 +98,18 @@ fi
 # shellcheck disable=SC2295
 creds_homepath="${creds#$HOME}"
 creds_homepath="${creds_homepath##/}"
+creds_homepath="${creds_homepath%/*}"
 
 timestamp "Copying AWS SSO credential cache to $server"
 
 # the first time on a new EC2 VM this will fail without pre-creating the directories
 # want splitting and evaluation on client side
 # shellcheck disable=SC2086,SC2029
-ssh ${SSH_OPTIONS:-} "$server" "mkdir -pv $creds_homepath"
+ssh ${SSH_OPTIONS:-} "$server" "mkdir -pv $creds_homepath/"
 
 # want splitting
 # shellcheck disable=SC2086
-scp ${SSH_OPTIONS:-} "$creds" "$server":"$creds_homepath"
+scp ${SSH_OPTIONS:-} "$creds" "$server":"$creds_homepath/"
 
 echo >&2
 
