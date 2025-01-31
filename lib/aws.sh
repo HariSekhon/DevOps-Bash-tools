@@ -321,6 +321,13 @@ is_ami_id(){
     [[ "$arg" =~ ^$ami_id_regex$ ]]
 }
 
+aws_validate_instance_id() {
+    local instance_id="$1"
+    if ! is_instance_id "$instance_id"; then
+        die "Invalid EC2 Instance ID: $instance_id"
+    fi
+}
+
 aws_validate_security_group_id() {
     local sg_id="$1"
     if ! is_aws_security_group_id "$sg_id"; then
