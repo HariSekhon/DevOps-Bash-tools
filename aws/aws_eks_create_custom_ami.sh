@@ -87,17 +87,18 @@ for((i=1; i <= 100 ; i++)); do
             --output text
     )"
 
-    timestamp "Checking the instance state isn't terminated"
-    instance_state="$(
-        aws ec2 describe-instances \
-            --instance-ids "$instance_id" \
-            --query "Reservations[0].Instances[0].State.Name" \
-            --output text
-    )"
-    if [ "$instance_id" != "None" ] &&
-       [ "$instance_state" = "terminated" ]; then
-        timestamp "This instance is already terminated, will try a new instance name"
-        continue
+    if [ "$instance_id" != "None" ]; then
+        timestamp "Checking the instance state isn't terminated"
+        instance_state="$(
+            aws ec2 describe-instances \
+                --instance-ids "$instance_id" \
+                --query "Reservations[0].Instances[0].State.Name" \
+                --output text
+        )"
+        if [ "$instance_state" = "terminated" ]; then
+            timestamp "This instance is already terminated, will try a new instance name"
+            continue
+        fi
     fi
 
     if is_blank "$instance_id" || [ "$instance_id" = "None" ]; then
