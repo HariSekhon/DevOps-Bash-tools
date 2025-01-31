@@ -73,11 +73,11 @@ timestamp "Waiting for AWS EC2 instance to become ready: $instance_id"
 
 SECONDS=0
 
+timestamp "Checking EC2 instance status..."
 while true; do
     if [ "$SECONDS" -gt "$timeout_secs" ]; then
         die "ERROR: Timed out waiting $timeout_secs for instance to become ready"
     fi
-    timestamp "Checking EC2 Instance status"
     instance_checks="$(
         aws ec2 describe-instance-status \
             --instance-ids "$instance_id" \
@@ -94,10 +94,10 @@ while true; do
 
         if [ "$instance_checks" = "ok" ] &&
            [ "$system_checks" = "ok" ]; then
-            timestamp "EC2 Instance $instance_id is ready"
+            timestamp "EC2 instance $instance_id is ready"
             break
         fi
     fi
-    timestamp "AWS EC2 Instance still initializing..."
+    timestamp "AWS EC2 instance still initializing..."
     sleep "$check_interval_secs"
 done
