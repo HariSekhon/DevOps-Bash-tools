@@ -74,43 +74,53 @@ fi
 timestamp "Base EKS AMI is: $base_ami"
 echo
 
-instance_name="EKS-$eks_version-Instance-for-Custom-AMI"
+instance_launched=0
 
-timestamp "Checking if EC2 instance of EKS Base AMI already exists"
-instance_id="$(
-    aws ec2 describe-instances \
-        --filters "Name=tag:Name,Values=$instance_name" \
-        --query "Reservations[0].Instances[0].InstanceId" \
-        --output text
-)"
+for((i=1; i <= 100 ; i++)); do
+    instance_name="EKS-$eks_version-Instance-for-Custom-AMI-$i"
 
-timestamp "Checking the instance state isn't terminated"
-instance_state="$(
-    aws ec2 describe-instances \
-        --instance-ids "$instance_id" \
-        --query "Reservations[0].Instances[0].State.Name" \
-        --output text
-)"
-if [ "$instance_state" = "terminated" ]; then
-    # will trigger launching a new instance with the same name
-    instance_id=''
-fi
-
-if is_blank "$instance_id" || [ "$instance_id" = "None" ]; then
-    timestamp "Launching EC2 instance of EKS Base AMI: $instance_name"
+    timestamp "Checking if EC2 instance of EKS Base AMI already exists: $instance_name"
     instance_id="$(
-        aws ec2 run-instances \
-            --image-id "$base_ami" \
-            --count 1 \
-            --instance-type "$instance_type" \
-            --key-name "$ssh_key_name" \
-            --security-group-ids "$security_group" \
-            --subnet-id "$subnet_id" \
-            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance_name}]" \
-            --query "Instances[0].InstanceId" \
+        aws ec2 describe-instances \
+            --filters "Name=tag:Name,Values=$instance_name" \
+            --query "Reservations[0].Instances[0].InstanceId" \
             --output text
     )"
-    timestamp "Launched instance: $instance_id"
+
+    timestamp "Checking the instance state isn't terminated"
+    instance_state="$(
+        aws ec2 describe-instances \
+            --instance-ids "$instance_id" \
+            --query "Reservations[0].Instances[0].State.Name" \
+            --output text
+    )"
+    if [ "$instance_state" = "terminated" ]; then
+        timestamp "This instance is already terminated, will try a new instance name"
+        continue
+    fi
+
+    if is_blank "$instance_id" || [ "$instance_id" = "None" ]; then
+        timestamp "Launching EC2 instance of EKS Base AMI: $instance_name"
+        instance_id="$(
+            aws ec2 run-instances \
+                --image-id "$base_ami" \
+                --count 1 \
+                --instance-type "$instance_type" \
+                --key-name "$ssh_key_name" \
+                --security-group-ids "$security_group" \
+                --subnet-id "$subnet_id" \
+                --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$instance_name}]" \
+                --query "Instances[0].InstanceId" \
+                --output text
+        )"
+        timestamp "Launched instance: $instance_id"
+    fi
+    instance_launched=1
+    break
+done
+
+if [ "$instance_launched" != 1 ]; then
+    die "ERROR: Failed to launch instance"
 fi
 
 echo
