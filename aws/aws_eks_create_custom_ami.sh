@@ -95,8 +95,9 @@ for((i=1; i <= 100 ; i++)); do
                 --query "Reservations[0].Instances[0].State.Name" \
                 --output text
         )"
-        if grep -i -e terminated -e shutting-down <<< "$instance_state"; then
-            timestamp "This instance is already terminated, will try a new instance name"
+        if grep -qi -e terminated -e shutting-down <<< "$instance_state"; then
+            timestamp "This instance is already terminated / shutting down, will try a new instance name"
+            echo
             continue
         fi
     fi
