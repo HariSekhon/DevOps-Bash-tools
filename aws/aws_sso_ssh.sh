@@ -31,6 +31,10 @@ without having to copy and paste the token from remote aws sso login to your loc
 
 Useful in enviroments where only a bastion server can access EKS clusters or other AWS services
 
+Since all args go to AWS CLI, if you need to pass SSH options use the environment variable SSH_OPTIONS eg:
+
+    export SSH_OPTIONS=\"-i $HOME/.ssh/aws.pem -o StrictHostKeyChecking=no\"
+
 Best used when combined with automatically configuring your environment variables for the AWS_PROFILE etc.
 using direnv or similar
 
@@ -96,9 +100,20 @@ creds_homepath="${creds#$HOME}"
 creds_homepath="${creds_homepath##/}"
 
 timestamp "Copying AWS SSO credential cache to $server"
-scp "$creds" "$server":"$creds_homepath"
+
+# the first time on a new EC2 VM this will fail without pre-creating the directories
+# want splitting and evaluation on client side
+# shellcheck disable=SC2086,SC2029
+ssh $SSH_OPTIONS "$server" "mkdir -pv $creds_homepath"
+
+# want splitting
+# shellcheck disable=SC2086
+scp $SSH_OPTIONS "$creds" "$server":"$creds_homepath"
 
 echo >&2
 
 timestamp "SSH'ing to $server"
-exec ssh "$server"
+
+# want splitting
+# shellcheck disable=SC2086
+exec ssh $SSH_OPTIONS "$server"
