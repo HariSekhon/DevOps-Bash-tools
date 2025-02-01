@@ -26,6 +26,33 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090
 . "$srcdir/utils.sh"
 
+is_git_repo(){
+    local target=${1:-.};
+    if [ -d "$target/.git" ]; then
+        return 0;
+    else
+        if [ -f "$target" ] && [ -d "${target%/*}/.git" ]; then
+            return 0;
+        else
+            if [ -d "$target" ]; then
+                pushd "$target" > /dev/null || return 1;
+                if git status >&/dev/null; then
+                    popd >&/dev/null;
+                    return 0;
+                fi;
+            else
+                pushd "$(dirname "$target")" > /dev/null || return 1;
+                if git status >&/dev/null; then
+                    popd >&/dev/null;
+                    return 0;
+                fi;
+            fi;
+            popd >&/dev/null;
+            return 2;
+        fi;
+    fi
+}
+
 git_repo(){
     # give preference for origin, then GitHub, GitLab, Bitbucket, Azure DevOps in that order
     local remotes
@@ -143,6 +170,7 @@ foreachbranch(){
             continue
         fi
         echo "$branch:"
+        # shellcheck disable=SC2294
         if git branch | grep -Fq --color=auto "$branch"; then
             git checkout "$branch"
         else
