@@ -48,6 +48,12 @@ git remote get-url origin >/dev/null
 
 #git diff "origin/$current_branch.."
 
-# these next two work even if you haven't pushed this branch yet
-#git diff "$@" "FETCH_HEAD..HEAD"
-git diff "$@" "origin.."
+# these next two work even if you haven't pushed this branch yet, but the first one can result in the following error
+#
+#git diff "$@" "origin.."
+#
+#    fatal: ambiguous argument 'origin..': unknown revision or path not in the working tree.
+#    Use '--' to separate paths from revisions, like this:
+#    'git <command> [<revision>...] -- [<file>...]'
+
+git diff "$@" "FETCH_HEAD..HEAD"
