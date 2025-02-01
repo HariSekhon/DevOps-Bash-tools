@@ -20,15 +20,54 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/git.sh"
 
+repofile="$srcdir/../setup/repos.txt"
+repofile="$(readlink -f "$repofile")"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Updates all Git repos given as args or found in file:
+
+    $repofile
+
+Using adjacent script:
+
+    git_submodules_update.sh
+
+Assumptions:
+
+    Your git repos base dir where your repos are kept is \$HOME/github/ eg.
+
+        $HOME/github/
+
+        If it isn't then specify GIT_BASE_DIR environment variable
+
+        Checks out the repos to this location if they are not already present
+
+
+    Your git repo URL is https://github.com. If it isn't then specify GIT_URL environment variable
+
+    To ommit the owner/ prefix to owner/repo is omitted, you must set GIT_OWNER environment variable
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args=""
+
+help_usage "$@"
+
+#num_args 0 "$@"
+
 git_url="${GIT_URL:-https://github.com}"
 
-git_base_dir=~/github
+HOME="${HOME:-$(cd && pwd)}"
+
+git_base_dir="${GIT_BASE_DIR:-$HOME/github}"
+
+git_owner="${GIT_OWNER:-HariSekhon}"
 
 mkdir -pv "$git_base_dir"
 
 cd "$git_base_dir"
-
-repofile="$srcdir/../setup/repos.txt"
 
 if [ $# -gt 0 ]; then
     repolist="$*"
@@ -47,43 +86,44 @@ fi
 
 run(){
     local repolist="$*"
-    echo "Updating Git submodules"
-    echo
+    timestamp "Updating Git submodules for all repos: $repolist"
+    echo >&2
     for repo in $repolist; do
         repo_dir="${repo##*/}"
         repo_dir="${repo_dir##*:}"
         repo="${repo%%:*}"
         if ! echo "$repo" | grep -q "/"; then
-            repo="HariSekhon/$repo"
+            repo="$git_owner/$repo"
         fi
         echo "========================================"
-        echo "Updating $repo"
+        timestamp "Updating $repo"
         echo "========================================"
         if ! [ -d "$repo_dir" ]; then
             git clone "$git_url/$repo" "$repo_dir"
         fi
         pushd "$repo_dir"
+        "$srcdir/git_submodules_update.sh"
         # make update does git pull but if that mechanism is broken then this first git pull will allow the repo to self-fix itself
-        git pull --no-edit
-        git submodule update --init --remote --recursive --force ||
-        for submodule in $(git submodule | awk '{print $2}'); do
-            if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
-                pushd "$submodule" || continue
-                git stash
-                default_branch="$(default_branch)"
-                git checkout "$default_branch"
-                git pull --no-edit ||
-                git reset --hard origin/"$default_branch"
-                git submodule update
-                popd
-            fi
-            echo
-        done
-        for submodule in $(git submodule | awk '{print $2}'); do
-            echo "committing latest hashref for submodule $submodule"
-            git ci -m "updated submodule $submodule" "$submodule" || :
-            echo
-        done
+        #git pull --no-edit
+        #git submodule update --init --remote --recursive --force ||
+        #for submodule in $(git submodule | awk '{print $2}'); do
+        #    if [ -d "$submodule" ] && ! [ -L "$submodule" ]; then
+        #        pushd "$submodule" || continue
+        #        git stash
+        #        default_branch="$(default_branch)"
+        #        git checkout "$default_branch"
+        #        git pull --no-edit ||
+        #        git reset --hard origin/"$default_branch"
+        #        git submodule update
+        #        popd
+        #    fi
+        #    echo
+        #done
+        #for submodule in $(git submodule | awk '{print $2}'); do
+        #    echo "committing latest hashref for submodule $submodule"
+        #    git ci -m "updated submodule $submodule" "$submodule" || :
+        #    echo
+        #done
         echo
         if [ -z "${NO_PUSH:-}" ]; then
             if [ -n "${REVIEW_PUSH:-}" ]; then
