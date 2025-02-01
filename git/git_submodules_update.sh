@@ -29,7 +29,7 @@ This is also useful for simpler use cases:
     git submodule foreach --recursive 'git checkout master && git pull'
 
 But this script will figure out a mix or repos on master vs main vs develop branches as trunk
-and has better error handling
+and has better output and error handling
 "
 
 # used by usage() in lib/utils.sh
@@ -46,29 +46,43 @@ fi
 
 git pull --no-edit
 
+submodules="$(
+    git submodule |
+    awk '{print $2}'
+)"
+
+timestamp "Git submodules detected:"
+echo >&2
+echo "$submodules" >&2
+echo >&2
+
 for submodule in $(git submodule | awk '{print $2}'); do
 	[ -d "$submodule" ] || continue
 	[ -L "$submodule" ] && continue
+    timestamp "Updating submodule: $submodule"
+    echo >&2
 	pushd "$submodule" ||
-	die "ERROR: Failed to pushd to submodule directory: $submodule"
+        die "ERROR: Failed to pushd to submodule directory: $submodule"
 	git stash
 	git checkout "$(default_branch)"
 	git pull --no-edit
 	git submodule update --init --remote
 	git submodule update --recursive
 	popd
+    echo >&2
 done
-
-echo
 
 for submodule in $(git submodule | awk '{print $2}'); do
 	[ -d "$submodule" ] || continue
 	[ -L "$submodule" ] && continue
+    timestamp "Committing submodule: $submodule"
+    echo >&2
 	if ! git status "$submodule" |
 		 grep -q nothing; then
 		git commit -m "updated $submodule" "$submodule" ||
 		die "ERROR: Failed to commit submodule update"
 	fi
+    echo >&2
 done
 
 echo
@@ -76,7 +90,11 @@ echo
 for submodule in $(git submodule | awk '{print $2}'); do
 	[ -d "$submodule" ] || continue
 	[ -L "$submodule" ] && continue
-	pushd "$submodule" || continue
+    timestamp "Committing submodule: $submodule"
+    echo >&2
+	pushd "$submodule" ||
+        die "ERROR: Failed to pushd to submodule directory: $submodule"
 	git stash pop
 	popd
+    echo >&2
 done
