@@ -20,9 +20,16 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
+config="$srcdir/../setup/squirrelsql-install-options.xml"
+config="$(readlink -f "$config")"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Install SQuirreL SQL Client
+
+Allows you to install with a custom config:
+
+    $config
 "
 
 # used by usage() in lib/utils.sh
@@ -63,8 +70,7 @@ download_url="https://github.com/squirrel-sql-client/squirrel-sql-stable-release
 
 install_jar="${download_url##*/}"
 
-                                           # file with settings or where to install from the homebrew
-java -jar "./$install_jar" -options-system "$srcdir/../setup/squirrelsql-install-options.xml"
+java -jar "./$install_jar" -options-system "$config"  # file with settings or where to install from the homebrew
 
 if is_mac; then
     timestamp "Launching SQuirreL"
