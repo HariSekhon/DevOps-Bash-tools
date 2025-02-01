@@ -55,6 +55,11 @@ submodules="$(
     awk '{print $2}'
 )"
 
+if is_blank "$submodules"; then
+    echo "No Git Submodules detected"
+    exit 0
+fi
+
 timestamp "Git submodules detected:"
 echo >&2
 echo "$submodules" >&2
