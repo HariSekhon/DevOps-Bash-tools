@@ -47,7 +47,8 @@ for submodule in $(git submodule | awk '{print $2}'); do
 	git stash
 	git checkout "$(default_branch)"
 	git pull --no-edit
-	git submodule update --init --remote --recursive
+	git submodule update --init --remote
+	git submodule update --recursive
 	popd
 done
 
