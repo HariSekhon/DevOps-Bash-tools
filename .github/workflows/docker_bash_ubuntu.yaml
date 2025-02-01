@@ -14,7 +14,7 @@
 ---
 name: Docker Build (Ubuntu)
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master

@@ -14,7 +14,7 @@
 ---
 name: GitHub Actions Ubuntu
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master

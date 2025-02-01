@@ -14,7 +14,7 @@
 ---
 name: Alpine
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master

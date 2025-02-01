@@ -14,7 +14,7 @@
 ---
 name: Python 3.11
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master

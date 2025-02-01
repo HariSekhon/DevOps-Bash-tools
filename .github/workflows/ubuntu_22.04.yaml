@@ -14,7 +14,7 @@
 ---
 name: Ubuntu 22.04
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master

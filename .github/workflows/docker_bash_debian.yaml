@@ -14,7 +14,7 @@
 ---
 name: Docker Build (Debian)
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master

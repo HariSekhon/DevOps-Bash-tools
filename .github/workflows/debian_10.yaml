@@ -14,7 +14,7 @@
 ---
 name: Debian 10
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master
