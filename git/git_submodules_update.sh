@@ -44,6 +44,10 @@ if ! is_git_repo .; then
 	die 'ERROR: Not in a Git repository!'
 fi
 
+git_root="$(git_root)"
+
+cd "$git_root"
+
 git pull --no-edit
 
 submodules="$(
