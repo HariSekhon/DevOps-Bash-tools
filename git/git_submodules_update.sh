@@ -23,6 +23,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Updates all Git submodules in the current Git repo to the latest default branch commit and commits them
+
+This is also useful for simpler use cases:
+
+    git submodule foreach --recursive 'git checkout master && git pull'
+
+But this script will figure out a mix or repos on master vs main vs develop branches as trunk
+and has better error handling
 "
 
 # used by usage() in lib/utils.sh
