@@ -25,28 +25,23 @@ repofile="$(readlink -f "$repofile")"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Updates all Git repos given as args or found in file:
+Updates all Git repos given as args or listed in file:
 
     $repofile
 
-Using adjacent script:
+
+Uses adjacent script:
 
     git_submodules_update.sh
 
-Assumptions:
 
-    Your git repos base dir where your repos are kept is \$HOME/github/ eg.
+Environment Variables:
 
-        $HOME/github/
+    GIT_BASE_DIR - default: $HOME/github - checks out the repos to this location if they are not already present
 
-        If it isn't then specify GIT_BASE_DIR environment variable
+    GIT_URL - default: https://github.com
 
-        Checks out the repos to this location if they are not already present
-
-
-    Your git repo URL is https://github.com. If it isn't then specify GIT_URL environment variable
-
-    To ommit the owner/ prefix to owner/repo is omitted, you must set GIT_OWNER environment variable
+    GIT_OWNER - default: HariSekhon - used only when omitting the owner/ prefix of owner/repo
 "
 
 # used by usage() in lib/utils.sh
