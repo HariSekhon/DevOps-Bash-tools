@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Boots an EC2 instance from a given AMI and drops you into a shell
+Boots an EC2 instance from a given AMI, determines the public or private IP, and drops you into an SSH shell
 
 Useful for interactive debugging when creating AMIs
 
