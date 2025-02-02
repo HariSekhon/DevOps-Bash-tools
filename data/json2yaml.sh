@@ -45,7 +45,7 @@ json2yaml(){
     #
     #   ssh_pty: !!perl/scalar:JSON::PP::Boolean 1
     #
-    # so don't use this any more
+    # whereas the ruby below comes out properly, so don't use Perl JSON::XS for this any more
     #
     #if type -P perl &>/dev/null &&
     #   perl -MYAML::XS=Load -MJSON::XS=encode_json -e '' &>/dev/null; then
