@@ -158,6 +158,7 @@ get_instance_profile(){
 }
 
 if ! is_blank "$instance_profile"; then
+    instance_profile_attached=0
     if [ "$(get_instance_profile "$instance_id")" = "$instance_profile" ]; then
         instance_profile_attached=1
     else
@@ -185,10 +186,9 @@ if ! is_blank "$instance_profile"; then
             sleep 3
         done
     fi
-fi
-
-if [ "$instance_profile_attached" != 1 ]; then
-    die "Instance profile failed to attach, gave up waiting"
+    if [ "$instance_profile_attached" != 1 ]; then
+        die "Instance profile failed to attach, gave up waiting"
+    fi
 fi
 
 "$srcdir/aws_ec2_wait_for_instance_ready.sh" "$instance_id"
