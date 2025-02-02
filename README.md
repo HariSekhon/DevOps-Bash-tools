@@ -531,6 +531,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_eks_cluster_versions.sh` - iterates EKS clusters to list each AWS EKS cluster name and version in the current account. Combine with `aws_foreach_profile.sh` and `aws_foreach_region.sh` to audit your EKS cluster versions across accounts and regions
   - `aws_eks_addon_versions.sh` - lists the EKS addon versions available for the given cluster by checking its version before checking addons
   - `aws_eks_available_ips.sh` - lists the number of available IP addresses in the EKS subnets for the given cluster (5 required for an EKS upgrade)
+  - `aws_eks_ami_create.sh` - creates a custom EKS AMI quickly off the base EKS template and then running a shell script in it before saving it to a new AMI. See also [HariSekhon/Packer](https://github.com/HariSekhon/Packer) for more advanced build
   - `aws_kms_key_rotation_enabled.sh` - lists [AWS KMS](https://aws.amazon.com/kms/) keys and whether they have key rotation enabled
   - `aws_kube_creds.sh` - auto-loads all [AWS EKS](https://aws.amazon.com/eks/) clusters credentials in the current --profile and --region so your kubectl is ready to rock on AWS
   - `aws_kubectl.sh` - runs kubectl commands safely fixed to a given [AWS EKS](https://aws.amazon.com/eks/) cluster using config isolation to avoid concurrency race conditions
