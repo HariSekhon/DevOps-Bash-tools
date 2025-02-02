@@ -187,35 +187,5 @@ fi
 
 "$srcdir/aws_ec2_wait_for_instance_ready.sh" "$instance_id"
 
-echo >&2
-
 timestamp "EC2 instance running: $instance_name"
-
-timestamp "Getting instance public IP"
-public_ip="$(
-    aws ec2 describe-instances \
-        --instance-ids "$instance_id" \
-        --query "Reservations[0].Instances[0].PublicIpAddress" \
-        --output text
-)"
-
-if ! is_blank "$public_ip" &&
-   [ "$public_ip" != "None" ]; then
-    ip="$public_ip"
-    timestamp "Using instance public IP: $ip"
-else
-    timestamp "No public IP found, getting instance private IP"
-    private_ip="$(
-        aws ec2 describe-instances \
-            --instance-ids "$instance_id" \
-            --query "Reservations[0].Instances[0].PrivateIpAddress" \
-            --output text
-    )"
-    ip="$private_ip"
-    timestamp "Using instance private IP: $ip"
-fi
-
-echo >&2
-
-timestamp "IP address is: $ip"
 echo "$instance_id"
