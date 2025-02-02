@@ -40,7 +40,7 @@ before saving it to a new AMI
 
 Uses adjacent script:
 
-    aws_ec2_boot_ami.sh
+    aws_ec2_ami_boot.sh
 
 
 You should really use Packer instead, see
@@ -94,7 +94,7 @@ fi
 timestamp "Base EKS AMI is: $base_ami"
 echo >&2
 
-instance_id="$("$srcdir/aws_ec2_boot_ami.sh" "$base_ami" "$instance_type" "$security_group" "$subnet_id" "$ssh_key_name" ${instance_profile:+"$instance_profile"})"
+instance_id="$("$srcdir/aws_ec2_ami_boot.sh" "$base_ami" "$instance_type" "$security_group" "$subnet_id" "$ssh_key_name" ${instance_profile:+"$instance_profile"})"
 
 ip="$("$srcdir/aws_ec2_instance_ip.sh" "$instance_id")"
 
