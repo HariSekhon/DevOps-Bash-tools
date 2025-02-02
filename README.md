@@ -464,14 +464,14 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_csv_creds.sh` - prints AWS credentials from a CSV file as shell export statements. Useful to quickly switch your shell to some exported credentials from a service account for testing permissions or pipe to upload to a CI/CD system via an API (eg. `jenkins_cred_add*.sh`, `github_actions_repo*_set_secret.sh`, `gitlab_*_set_env_vars.sh`, `circleci_*_set_env_vars.sh`, `bitbucket_*_set_env_vars.sh`, `terraform_cloud_*_set_vars.sh`, `kubectl_kv_to_secret.sh`). Supports new user and new access key csv file formats.
   - `aws_codecommit_csv_creds.sh` - prints AWS [CodeCommit](https://aws.amazon.com/codecommit/) Git credentials from a CSV file as shell export statements. Similar use case and chaining as above
   - `aws_ec2_*.sh` - AWS [EC2](https://aws.amazon.com/ec2/) scripts:
-    - `aws_ec2_instance_*.sh` - AWS EC2 instance scripts:
+    - `aws_ec2_instance_*.sh` - AWS EC2 [Instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Instances.html) scripts:
       - `aws_ec2_instance_name_to_id.sh` - looks up an EC2 instance ID from an instance name with extra safety checks that only a single instance ID is returned and a reverse lookup on that instance ID to re-verify it matches the name. This level of safety is important when wanting to terminate an EC2 instance by name. If an instance ID is passed, returns it as is for convenience. Used by adjacent scripts
       - `aws_ec2_instances.sh` - lists AWS EC2 instances, their DNS names and States in an easy to read table output
       - `aws_ec2_instance_ip.sh` - determines an EC2 instance IP address, trying first for a public IP, or failing that a private IP
       - `aws_ec2_instance_clone.sh` - clones an AWS EC2 instance by creating an AMI from the original and then booting a new instance from the AMI with the same settings as the original instance. Useful to testing risky things on a separate EC2 instance, such as Server Administrator recovery of Tableau
       - `aws_ec2_instance_wait_for_ready.sh` - polls an AWS EC2 instance and waits for it to finish initializing to a ready state. Used by adjacent scripts
       - `aws_ec2_instance_terminate_by_name.sh` - terminate an AWS EC2 instance by name for convenience, resolves its instance ID, verifies unique and then terminates by ID
-    - `aws_ec2_ami*.sh` - AWS EC2 AMI scripts:
+    - `aws_ec2_ami*.sh` - AWS EC2 [AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html) scripts:
       - `aws_ec2_amis.sh` - list AWS EC2 AMIs belonging to your account in an easy to read table output
       - `aws_ec2_ami_ids.sh` - lists AWS EC2 AMI IDs only, one per line, to be used in adjacent scripts that creating mapping tables and translate AMI IDs to names in inventory scripts `aws_info_ec2*.sh`
       - `aws_ec2_ami_name_to_id.sh` - looks up an EC2 AMI ID from a name with extra safety checks that only a single AMI ID is returned and a reverse lookup on that AMI ID to re-verify it matches the name
