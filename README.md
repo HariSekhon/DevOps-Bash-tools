@@ -467,6 +467,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_ec2_instance_name_to_id.sh` - looks up an EC2 instance ID from an instance name with extra safety checks that only a single instance ID is returned and a reverse lookup on that instance ID to re-verify it matches the name. This level of safety is important when wanting to terminate an EC2 instance by name. If an instance ID is passed, returns it as is for convenience. Used by adjacent scripts
     - `aws_ec2_instances.sh` - lists AWS EC2 instances, their DNS names and States in an easy to read table output
     - `aws_ec2_instance_ip.sh` - determines an EC2 instance IP address, trying first for a public IP, or failing that a private IP
+    - `aws_ec2_instance_wait_for_ready.sh` - polls an AWS EC2 instance and waits for it to finish initializing to a ready state. Used by adjacent scripts
     - `aws_ec2_amis.sh` - list AWS EC2 AMIs belonging to your account in an easy to read table output
     - `aws_ec2_ami_ids.sh` - lists AWS EC2 AMI IDs only, one per line, to be used in adjacent scripts that creating mapping tables and translate AMI IDs to names in inventory scripts `aws_info_ec2*.sh`
     - `aws_ec2_boot_ami.sh` - boots a personal EC2 instance of a given AMI for testing
