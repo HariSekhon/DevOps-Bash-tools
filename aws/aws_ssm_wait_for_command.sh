@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Polls an AWS SSM Command invocation and waits for it to finish before returning
 
-Used by adjacent script aws_eks_create_custom_ami.sh
+Used by adjacent script aws_eks_ami_create.sh
 
 Get the AWS SSM Command ID from the output of the 'aws ssm send-command' - see above script
 
