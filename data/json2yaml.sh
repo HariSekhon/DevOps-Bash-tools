@@ -36,14 +36,25 @@ help_usage "$@"
 
 json2yaml(){
     # needs 3rd party modules installed (YAML::XS, JSON::XS), so check we have both modules first
-    if type -P perl &>/dev/null &&
-       perl -MYAML::XS=Load -MJSON::XS=encode_json -e '' &>/dev/null; then
-        #perl -MYAML::XS=LoadFile -MJSON::XS=encode_json -e 'for (@ARGV) { for (LoadFile($_)) { print encode_json($_),"\n" } }'
-        perl -MYAML::XS=Dump -MJSON::XS=decode_json -e '$/ = undef; print Dump(decode_json(<STDIN>)) . "\n"'
+    #
+    # Perl module results in json
+    #
+    #   "ssh_pty":true
+    #
+    # being translated as
+    #
+    #   ssh_pty: !!perl/scalar:JSON::PP::Boolean 1
+    #
+    # so don't use this any more
+    #
+    #if type -P perl &>/dev/null &&
+    #   perl -MYAML::XS=Load -MJSON::XS=encode_json -e '' &>/dev/null; then
+    #    #perl -MYAML::XS=LoadFile -MJSON::XS=encode_json -e 'for (@ARGV) { for (LoadFile($_)) { print encode_json($_),"\n" } }'
+    #    perl -MYAML::XS=Dump -MJSON::XS=decode_json -e '$/ = undef; print Dump(decode_json(<STDIN>)) . "\n"'
     # untested, so many transitive dependencies, a couple fail to build
     #elif type -P catmandu &>/dev/null; then
     #    catmandu convert JSON to YAML
-    elif type -P ruby &>/dev/null &&
+    if type -P ruby &>/dev/null &&
          ruby -r yaml -r json -e '' &>/dev/null; then
         # don't want variable expansion
         # shellcheck disable=SC2016
