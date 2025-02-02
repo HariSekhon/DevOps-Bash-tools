@@ -37,6 +37,13 @@ before saving it to a new AMI
 - Creates the AMI
 - Terminates the EC2 instance
 
+You should really use Packer instead, see
+
+    https://github.com/HariSekhon/Packer
+
+But this script is an alternative and allowed me to debug something in a pinch
+
+
 $usage_aws_cli_required
 "
 
