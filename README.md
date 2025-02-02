@@ -471,7 +471,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_ec2_amis.sh` - list AWS EC2 AMIs belonging to your account in an easy to read table output
     - `aws_ec2_ami_ids.sh` - lists AWS EC2 AMI IDs only, one per line, to be used in adjacent scripts that creating mapping tables and translate AMI IDs to names in inventory scripts `aws_info_ec2*.sh`
     - `aws_ec2_ami_boot.sh` - boots a personal EC2 instance of a given AMI for testing
-    - `aws_ec2_boot_ami_ssh.sh` - boots a personal EC2 instance of a given AMI, determines the public or private IP, and drops you into an SSH shell
+    - `aws_ec2_ami_boot_ssh.sh` - boots a personal EC2 instance of a given AMI, determines the public or private IP, and drops you into an SSH shell
     - `aws_ec2_ami_create_from_instance.sh` - creates an AWS EC2 AMI from an EC2 instance and waits for it to become available for use
     - `aws_ec2_instance_terminate_by_name.sh` - terminate an AWS EC2 instance by name for convenience, resolves its instance ID, verifies unique and then terminates by ID
     - `aws_ec2_instance_clone.sh` - clones an AWS EC2 instance by creating an AMI from the original and then booting a new instance from the AMI with the same settings as the original instance. Useful to testing risky things on a separate EC2 instance, such as Server Administrator recovery of Tableau
