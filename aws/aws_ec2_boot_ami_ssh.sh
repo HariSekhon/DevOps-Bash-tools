@@ -58,7 +58,7 @@ max_args 6 "$@"
 
 ssh_key_name="$5"
 
-instance_id="$("$srcdir/aws_ec2_boot_ami.sh" "$@")"
+instance_id="$("$srcdir/aws_ec2_ami_boot.sh" "$@")"
 
 ip="$("$srcdir/aws_ec2_instance_ip.sh" "$instance_id")"
 
