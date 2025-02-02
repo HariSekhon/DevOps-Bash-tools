@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Polls an AWS EC2 instance and waits for it to finish initializing to a ready state
 
-Used by adjacent script aws_eks_create_custom_ami.sh
+Used by adjacent script aws_eks_ami_create.sh
 
 Get the AWS EC2 Instance ID from the output of the 'aws ec2 run-instances' command - see above script
 
