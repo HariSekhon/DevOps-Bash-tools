@@ -465,6 +465,8 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_codecommit_csv_creds.sh` - prints AWS [CodeCommit](https://aws.amazon.com/codecommit/) Git credentials from a CSV file as shell export statements. Similar use case and chaining as above
   - `aws_ec2_instance_name_to_id.sh` - looks up an EC2 instance ID from an instance name with extra safety checks that only a single instance ID is returned and a reverse lookup on that instance ID to re-verify it matches the name. If an instance ID is passed, returns it as is for convenience. Used by adjacent scripts
   - `aws_ec2_instances.sh` - lists AWS EC2 instances, their DNS names and States in an easy to read table output
+  - `aws_ec2_instance_id.sh` - determines an EC2 instance ID from an instance name
+  - `aws_ec2_instance_ip.sh` - determines an EC2 instance IP address, trying first for a public IP, or failing that a private IP
   - `aws_ec2_terminate_instance_by_name.sh` - terminate an AWS EC2 instance by name
   - `aws_ec2_boot_ami.sh` - boots a personal EC2 instance of a given AMI for testing
   - `aws_ec2_boot_ami_ssh.sh` - boots a personal EC2 instance of a given AMI, determines the public or private IP, and drops you into an SSH shell
