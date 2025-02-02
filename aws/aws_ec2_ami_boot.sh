@@ -39,7 +39,7 @@ It's up to you to Terminate the instance as you may want to leave it running and
 
 You may want to run this adjacent wrapper script to drop you straight into an SSH prompt:
 
-    aws_ec2_boot_ami_ssh.sh
+    aws_ec2_ami_boot_ssh.sh
 
 
 See Also:
