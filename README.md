@@ -466,6 +466,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_ec2_instance_name_to_id.sh` - looks up an EC2 instance ID from an instance name with extra safety checks that only a single instance ID is returned and a reverse lookup on that instance ID to re-verify it matches the name. If an instance ID is passed, returns it as is for convenience. Used by adjacent scripts
   - `aws_ec2_instances.sh` - lists AWS EC2 instances, their DNS names and States in an easy to read table output
   - `aws_ec2_terminate_instance_by_name.sh` - terminate an AWS EC2 instance by name
+  - `aws_ec2_boot_ami.sh` - boots a personal EC2 instance of an AMI for testing
   - `aws_ec2_create_ami_from_instance.sh` - creates an AWS EC2 AMI from an EC2 instance and waits for it to become available for use
   - `aws_ec2_clone_instance.sh` - clones an AWS EC2 instance by creating an AMI from the original and then booting a new instance from the AMI with the same settings as the original instance. Useful to testing risky things on a separate EC2 instance, such as Server Administrator recovery of Tableau
   - `aws_ec2_amis.sh` - list AWS EC2 AMIs belonging to your account in an easy to read table output
