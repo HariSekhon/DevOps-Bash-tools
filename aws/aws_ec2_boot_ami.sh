@@ -22,13 +22,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Boots a given AMI and drops you into a shell
+Boots an EC2 instance from a given AMI for manual debugging
 
 Useful for interactive debugging when creating AMIs
 
-- finds the standard EKS AMI for the given version
-- checks if there is already an EC2 running instance tagged with your name
-- boots an EC2 instance from the above AMI with the given security group, subnet id and SSH key-name given so you can SSH to its ec2-user
+- checks if there is already an EC2 running instance tagged with your name and AMI ID
+  - if not boots an EC2 instance from the AMI with the given security group, subnet id and SSH key-name given so you can SSH to its ec2-user
 - waits for the EC2 instance to boot
 - waits for the EC2 instance to pass its instance and system checks
 - determines the public or private IP address and outputs it to stdout for use in other scripts
