@@ -58,7 +58,9 @@ max_args 6 "$@"
 
 ssh_key_name="$5"
 
-ip="$("$srcdir/aws_ec2_boot_ami.sh" "$@")"
+instance_id="$("$srcdir/aws_ec2_boot_ami.sh" "$@")"
+
+ip="$("$srcdir/aws_ec2_instance_ip.sh" "$instance_id")"
 
 timestamp "SSH'ing to EC2 instance"
 echo >&2
