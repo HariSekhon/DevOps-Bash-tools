@@ -48,7 +48,7 @@ num_args 1 "$@"
 
 ami_name="$1"
 
-if [[ "$ami_name" =~ ^ami-[a-zA-Z0-9-_]+$ ]]; then
+if is_ami_id "$ami_name"; then
     log "Given AMI name is already an AWS AMI ID, outputs as is: $ami_name"
     echo "$ami_name"
     exit 0
