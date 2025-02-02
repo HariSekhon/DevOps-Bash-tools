@@ -36,7 +36,7 @@ To enforce a reboot of the EC2 instance (be careful in production!) you must set
 
 Uses adjacent scripts:
 
-    aws_ec2_create_ami_from_instance.sh
+    aws_ec2_ami_create_from_instance.sh
 
     aws_ec2_instance_name_to_id.sh
 
@@ -61,7 +61,7 @@ new_instance_name="$2"
 ami_name="instance-$instance_name-$(date '+%F_%H%M%S')"
 
 # this script has been updated to wait for the AMI state to become available
-ami_id="$("$srcdir/aws_ec2_create_ami_from_instance.sh" "$instance_name" "$ami_name")"
+ami_id="$("$srcdir/aws_ec2_ami_create_from_instance.sh" "$instance_name" "$ami_name")"
 echo >&2
 
 if ! is_ami_id "$ami_id"; then
