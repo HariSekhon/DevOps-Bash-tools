@@ -218,4 +218,4 @@ fi
 echo >&2
 
 timestamp "IP address is: $ip"
-echo "$ip"
+echo "$instance_id"
