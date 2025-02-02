@@ -471,7 +471,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
       - `aws_ec2_instance_clone.sh` - clones an AWS EC2 instance by creating an AMI from the original and then booting a new instance from the AMI with the same settings as the original instance. Useful to testing risky things on a separate EC2 instance, such as Server Administrator recovery of Tableau
       - `aws_ec2_instance_wait_for_ready.sh` - polls an AWS EC2 instance and waits for it to finish initializing to a ready state. Used by adjacent scripts
       - `aws_ec2_instance_terminate_by_name.sh` - terminate an AWS EC2 instance by name for convenience, resolves its instance ID, verifies unique and then terminates by ID
-    - `aws_ec2_ami*.sh` - AWS AMI scripts:
+    - `aws_ec2_ami*.sh` - AWS EC2 AMI scripts:
       - `aws_ec2_amis.sh` - list AWS EC2 AMIs belonging to your account in an easy to read table output
       - `aws_ec2_ami_ids.sh` - lists AWS EC2 AMI IDs only, one per line, to be used in adjacent scripts that creating mapping tables and translate AMI IDs to names in inventory scripts `aws_info_ec2*.sh`
       - `aws_ec2_ami_name_to_id.sh` - looks up an EC2 AMI ID from a name with extra safety checks that only a single AMI ID is returned and a reverse lookup on that AMI ID to re-verify it matches the name
