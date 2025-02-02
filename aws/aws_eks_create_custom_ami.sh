@@ -37,6 +37,12 @@ before saving it to a new AMI
 - Creates the AMI
 - Terminates the EC2 instance
 
+
+Uses adjacent script:
+
+    aws_ec2_boot_ami.sh
+
+
 You should really use Packer instead, see
 
     https://github.com/HariSekhon/Packer
