@@ -32,7 +32,7 @@ Adds additional safety checks:
 
 Called by adjacent scripts like:
 
-    aws_ec2_create_ami_from_instance.sh
+    aws_ec2_ami_create_from_instance.sh
 
     aws_ec2_terminate_instance_by_name.sh
 
