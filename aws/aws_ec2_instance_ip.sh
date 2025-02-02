@@ -26,7 +26,7 @@ Returns the IP address, public or private, or a given EC2 instance by name or in
 
 Used by:
 
-    aws_ec2_boot_ami_ssh.sh
+    aws_ec2_ami_boot_ssh.sh
 
 
 $usage_aws_cli_required
