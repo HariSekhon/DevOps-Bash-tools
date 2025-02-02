@@ -85,7 +85,7 @@ if is_blank "$user"; then
 fi
 
 for((i=1; i <= 100 ; i++)); do
-    instance_name="$user-AMI-$ami_id"
+    instance_name="$user-$ami_id"
 
     timestamp "Checking if EC2 instance of AMI already exists: $instance_name"
     instance_id="$(
