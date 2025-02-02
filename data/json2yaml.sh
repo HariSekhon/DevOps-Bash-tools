@@ -46,6 +46,7 @@ json2yaml(){
     #   ssh_pty: !!perl/scalar:JSON::PP::Boolean 1
     #
     # whereas the ruby below comes out properly, so don't use Perl JSON::XS for this any more
+    # They ruby version below also maintains key ordering so it's a more true comparison
     #
     #if type -P perl &>/dev/null &&
     #   perl -MYAML::XS=Load -MJSON::XS=encode_json -e '' &>/dev/null; then
