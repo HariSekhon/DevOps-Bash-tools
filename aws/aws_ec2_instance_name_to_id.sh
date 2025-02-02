@@ -77,7 +77,7 @@ if [ "$(awk '{print NF}' <<< "$instance_id")" -gt 1 ]; then
     cat >&2 <<EOF
 More than 1 instance ID returned, aborting for safety!"
 
-Instance ID found:
+Instance IDs found:
 
 $instance_id
 EOF
