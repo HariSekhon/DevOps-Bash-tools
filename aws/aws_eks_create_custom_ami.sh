@@ -138,7 +138,7 @@ ssh -i ~/.ssh/"$ssh_key_name.pem" ec2-user@"$ip" "chmod +x $instance_script && $
 
 echo >&2
 
-"$srcdir/aws_ec2_create_ami_from_instance.sh" "$instance_id" "$custom_ami_name"
+"$srcdir/aws_ec2_ami_create_from_instance.sh" "$instance_id" "$custom_ami_name"
 
 #timestamp "Creating Custom AMI from running EC2 instance"
 #custom_ami_id="$(
