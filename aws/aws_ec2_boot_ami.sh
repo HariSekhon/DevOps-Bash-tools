@@ -78,7 +78,7 @@ fi
 
 instance_launched=0
 
-user="${USERNAME:$(whoami)}"
+user="${USER:-$(whoami)}"
 
 if is_blank "$user"; then
     die "Failed to determine username to tag the EC2 instance with"
