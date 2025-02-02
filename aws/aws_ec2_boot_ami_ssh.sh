@@ -37,7 +37,7 @@ Useful for interactive debugging when creating AMIs
 
 It's up to you to Terminate the instance as you may want to leave it running and then create an AMI from it when you've finished testing using this script:
 
-    aws_ec2_create_ami_from_instance.sh
+    aws_ec2_ami_create_from_instance.sh
 
 See Also:
 
