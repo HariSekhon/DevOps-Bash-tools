@@ -476,6 +476,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
     - `aws_ec2_ami_boot.sh` - boots a personal EC2 instance of a given AMI for testing
     - `aws_ec2_ami_boot_ssh.sh` - boots a personal EC2 instance of a given AMI, determines the public or private IP, and drops you into an SSH shell
     - `aws_ec2_ami_create_from_instance.sh` - creates an AWS EC2 AMI from an EC2 instance and waits for it to become available for use
+    - `aws_ec2_ami_share_to_account.sh` - shares an AMI with another AWS account. Can specify AMI by name or id
     - `aws_ec2_ebs_*.sh` - AWS EC2 [EBS](https://aws.amazon.com/ebs/) scripts:
       - `aws_ec2_ebs_volumes.sh` - list EC2 instances and their EBS volumes in the current region
       - `aws_ec2_ebs_create_snapshot_and_wait.sh - creates a snapshot of a given EBS volume ID and waits for it to complete with exponential backoff
