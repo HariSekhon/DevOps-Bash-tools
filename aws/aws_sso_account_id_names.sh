@@ -70,4 +70,5 @@ awk '
     gsub(/^[[:space:]]*sso_account_id = /, "", $0)
     print $0, profile
   }
-' "$aws_config" | column -t
+' "$aws_config" |
+column -t
