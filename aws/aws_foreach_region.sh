@@ -88,6 +88,7 @@ while read -r region; do
     echo "# ($i/$total_regions) AWS region = $region" >&2
     echo "# ============================================================================ #" >&2
     export AWS_DEFAULT_REGION="$region"
+    export AWS_REGION="$region"
     cmd=("$@")
     cmd=("${cmd[@]//\{region\}/$region}")
     # need eval'ing to able to inline quoted script
