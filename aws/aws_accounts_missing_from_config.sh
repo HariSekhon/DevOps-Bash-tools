@@ -23,7 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-For a list of AWS Account IDs in stdin or file args (one per line), finds those missing from AWS config
+For a list of AWS Account IDs in stdin or files (containing one account id per line),
+finds those missing from AWS config
 
 
 $usage_aws_cli_required
