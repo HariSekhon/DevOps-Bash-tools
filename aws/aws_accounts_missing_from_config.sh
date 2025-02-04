@@ -26,6 +26,8 @@ usage_description="
 For a list of AWS Account IDs in stdin or files (containing one account id per line),
 finds those missing from AWS config
 
+You can override the config file location by setting environment variable AWS_CONFIG_FILE
+
 
 $usage_aws_cli_required
 "
