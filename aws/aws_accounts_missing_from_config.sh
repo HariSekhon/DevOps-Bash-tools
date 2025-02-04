@@ -31,7 +31,7 @@ $usage_aws_cli_required
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<file>]"
+usage_args="[<files>]"
 
 help_usage "$@"
 
