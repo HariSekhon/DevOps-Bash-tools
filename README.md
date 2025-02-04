@@ -1446,9 +1446,11 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 #### Terminal Gif Capture
 
-- `ttygif.sh` - creates a Gif from running terminal commands using `ttyrec` and `ttygif` and then opens the resulting gif
-- `asciinema.sh` - creates a Gif from running terminal commands using `asciinema` and `agg` and then opens the resulting gif
-- `terminalizer.sh` - creates a Gif from running terminal commands using Terminalizer and then opens the resulting gif
+Each of these three scripts creates an animated Git from running terminal commands and then opens the resulting gif
+
+- `ttygif.sh` - uses `ttyrec` and `ttygif`
+- `asciinema.sh` - uses  `asciinema` and `agg`
+- `terminalizer.sh` - uses Terminalizer
 
 #### Audio
 
