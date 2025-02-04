@@ -47,6 +47,10 @@ help_usage "$@"
 
 ARCH="${1:-amd64}"
 
+if ! is_mac; then
+    die "This is only supported on Mac at this time"
+fi
+
 dir="/private/tftpboot"
 
 sudo mkdir -p -v "$dir"
