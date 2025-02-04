@@ -1446,7 +1446,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 
 #### Terminal Gif Capture
 
-Each of these three scripts creates an animated Git from running terminal commands and then opens the resulting gif
+Each of these three scripts creates an animated Git from running terminal commands and then opens the resulting gif.
 
 - `ttygif.sh` - uses `ttyrec` and `ttygif`
 - `asciinema.sh` - uses  `asciinema` and `agg`
