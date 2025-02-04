@@ -45,7 +45,7 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-ARCH="${1:-amd64}"
+arch="${1:-amd64}"
 
 if ! is_mac; then
     die "This is only supported on Mac at this time"
@@ -59,25 +59,26 @@ sudo chown -v "$USER" "$dir"
 
 cd "$dir"
 
-# From here:
+# Adapted from here:
 #
 #   https://wiki.debian.org/PXEBootInstall
 
-export YOURMIRROR=deb.debian.org # A CDN backed by cloudflare and fastly currently
-#export ARCH=amd64
-#export ARCH=i386
-export DIST=stable
+mirror=deb.debian.org # A CDN backed by cloudflare and fastly currently
+#arch=amd64
+#arch=i386
+#arch="$(get_arch)"  # we are booting in an x86_64 VM, let it be $1 arg to script to override
+dist=stable
 
-wget http://"$YOURMIRROR"/debian/dists/$DIST/main/installer-"$ARCH"/current/images/netboot/netboot.tar.gz
-wget http://"$YOURMIRROR"/debian/dists/$DIST/main/installer-"$ARCH"/current/images/SHA256SUMS
-wget http://"$YOURMIRROR"/debian/dists/$DIST/Release
-wget http://"$YOURMIRROR"/debian/dists/$DIST/Release.gpg
+wget "http://$mirror/debian/dists/$dist/main/installer-$arch/current/images/netboot/netboot.tar.gz"
+wget "http://$mirror/debian/dists/$dist/main/installer-$arch/current/images/SHA256SUMS"
+wget "http://$mirror/debian/dists/$dist/Release"
+wget "http://$mirror/debian/dists/$dist/Release.gpg"
 
 sha256sum -c <(awk '/netboot\/netboot.tar.gz/{print $1 " netboot.tar.gz"}' SHA256SUMS)
 # netboot.tar.gz: OK
 
 
-sha256sum -c <(awk '/[a-f0-9]{64}[[:space:]].*main\/installer-'"$ARCH"'\/current\/images\/SHA256SUMS/{print $1 " SHA256SUMS"}' Release)
+sha256sum -c <(awk '/[a-f0-9]{64}[[:space:]].*main\/installer-'"$arch"'\/current\/images\/SHA256SUMS/{print $1 " SHA256SUMS"}' Release)
 # SHA256SUMS: OK
 
 #gpg --verify Release.gpg Release
