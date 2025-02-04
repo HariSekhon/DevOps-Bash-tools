@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads and sets up the Debian Netboot Install PXE to /private/tftpboot on Mac
 
+Arch arg defaults to amd64 is not specified
+
 Complete TFP Solution:
 
 1. Run this script
@@ -31,6 +33,7 @@ Complete TFP Solution:
 2. download TftpServer to easily GUI start the macOS built-in tftpd server and you're good to go
 
 3. start ISC DHCP server pointing to this machine
+
 
 See this page for more info:
 
