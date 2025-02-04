@@ -24,10 +24,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Lists duplicate AWS SSO config profile names that are using the same sso_account_id
-from the given file or \$AWS_CONFIG_FILE
 
 Useful to find and remove / comment out an ~/.aws/config with a mix of hand crafted
 and automatically generated AWS SSO configs
+
+You can override the config file location by setting environment variable AWS_CONFIG_FILE
 
 See also:
 
