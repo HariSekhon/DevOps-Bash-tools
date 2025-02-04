@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Reads AWS profile config blocks from stdin and appends them to the ~/.aws/config file if the profile section is not found
 
+You can override the config file location by setting environment variable AWS_CONFIG_FILE
+
 Uses adjacent script:
 
     ../data/ini_config_add_if_missing.sh
