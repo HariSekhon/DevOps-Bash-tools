@@ -32,6 +32,7 @@ usage_aws_cli_jq_required="Requires AWS CLI to be installed and configured, as w
 #   awk '{ if (length < min || NR == 1) min = length } END { print min }'
 #
 aws_ecr_regex='[[:digit:]]{12}.dkr.ecr.[[:alnum:]-]{9,}.amazonaws.com'
+aws_account_id_regex='[[:digit:]]{12}'
 aws_region_regex='[a-z]{2}-[a-z]+-[[:digit:]]'
 instance_id_regex='i-[0-9a-fA-F]{17}'
 ami_id_regex='ami-[0-9a-fA-F]{8}([0-9a-fA-F]{9})?'
@@ -302,6 +303,11 @@ aws_region_from_env(){
     echo "$region"
 }
 
+is_aws_account_id(){
+    local arg="$1"
+    [[ "$arg" =~ ^$aws_account_id_regex$ ]]
+}
+
 is_aws_region(){
     local arg="$1"
     [[ "$arg" =~ ^$aws_region_regex$ ]]
@@ -321,17 +327,24 @@ is_ami_id(){
     [[ "$arg" =~ ^$ami_id_regex$ ]]
 }
 
+aws_validate_ami_id() {
+    local arg="$1"
+    if ! is_instance_id "$arg"; then
+        die "Invalid EC2 AMI ID: $arg"
+    fi
+}
+
 aws_validate_instance_id() {
-    local instance_id="$1"
-    if ! is_instance_id "$instance_id"; then
-        die "Invalid EC2 Instance ID: $instance_id"
+    local arg="$1"
+    if ! is_instance_id "$arg"; then
+        die "Invalid EC2 Instance ID: $arg"
     fi
 }
 
 aws_validate_security_group_id() {
-    local sg_id="$1"
-    if ! is_aws_security_group_id "$sg_id"; then
-        die "Invalid Security Group ID: $sg_id"
+    local arg="$1"
+    if ! is_aws_security_group_id "$arg"; then
+        die "Invalid Security Group ID: $arg"
     fi
 }
 
@@ -341,9 +354,9 @@ is_aws_security_group_id() {
 }
 
 aws_validate_subnet_id() {
-    local subnet_id="$1"
-    if ! is_aws_subnet_id "$subnet_id"; then
-        die "Invalid Subnet ID: $subnet_id"
+    local arg="$1"
+    if ! is_aws_subnet_id "$arg"; then
+        die "Invalid Subnet ID: $arg"
     fi
 }
 
