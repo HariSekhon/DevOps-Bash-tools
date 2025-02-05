@@ -1440,10 +1440,10 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `image_join_vertical.sh` - joins two images top and bottom after matching their widths so they align correctly
 - `image_join_horizontal.sh` - joins two images left and right after matching their heights so they align correctly
 - `imageopen.sh` - opens the given image file using whatever available tool is found on Linux or Mac
+- `d2.sh` - generates D2lang diagram and then opens the resulting image
 - `svg_to_png.sh` - converts an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
 - `avif_to_png.sh` - converts an Avif image to PNG to be usable on websites that don't support Webp images like LinkedIn
 - `webp_to_png.sh` - converts a Webp image to PNG to be usable on websites that don't support Webp images like Medium
-- `d2.sh` - generates D2lang diagram and then opens the resulting image
 
 #### Terminal Gif Capture
 
