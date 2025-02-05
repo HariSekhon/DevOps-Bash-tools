@@ -66,6 +66,9 @@ for arg in "$@"; do
     fi
     file_basename="${filename%.*}"
     # shellcheck disable=SC2012
-    generated_image="$(ls -t "$file_basename".png "$file_basename".svg | head -n1)"
+    generated_image="$(ls -t "$file_basename".png "$file_basename".svg 2>/dev/null | head -n1)"
+    if is_blank "$generated_image"; then
+        die "Failed to find generated image for: $filename"
+    fi
     "$srcdir/imageopen.sh" "$generated_image"
 done
