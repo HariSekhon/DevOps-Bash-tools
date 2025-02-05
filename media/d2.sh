@@ -37,6 +37,12 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+if ! type -P d2 &>/dev/null; then
+    timestamp "D2lang binary 'd2' not found in \$PATH, attempting to install via package manager"
+    "$srcdir/../packages/install_packages.sh" d2
+    echo >&2
+fi
+
 for arg in "$@"; do
     if ! [ -f "$arg" ]; then
         warn "not a file, skipping: $arg"
