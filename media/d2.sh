@@ -76,5 +76,6 @@ for arg in "$@"; do
     if is_blank "$generated_image"; then
         die "Failed to find generated image for: $filename"
     fi
+    timestamp "Opening: $generated_image"
     "$srcdir/imageopen.sh" "$generated_image"
 done
