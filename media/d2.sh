@@ -58,7 +58,8 @@ for arg in "$@"; do
         continue
     fi
     header_line="$(head -n1 "$filename")"
-    if [ "${header_line:0:2}" = '#!' ]; then
+    #if [ "${header_line:0:2}" = '#!' ]; then
+    if [[ "$header_line" = ^#!.+d2 ]]; then
         if ! [ -x "$filename" ]; then
             timestamp "Shebang detected but not executable, setting executable bit on: $filename"
             chmod +x "$filename"
