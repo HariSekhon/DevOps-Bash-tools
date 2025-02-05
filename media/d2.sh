@@ -72,7 +72,8 @@ for arg in "$@"; do
     fi
     file_basename="${filename%.*}"
     # shellcheck disable=SC2012
-    generated_image="$(ls -t "$file_basename".png "$file_basename".svg 2>/dev/null | head -n1)"
+    # ls returns exit 1 when one of the paths isn't found, so ignore its exit code and look for blank
+    generated_image="$(ls -t "$file_basename".png "$file_basename".svg 2>/dev/null | head -n1 || :)"
     if is_blank "$generated_image"; then
         die "Failed to find generated image for: $filename"
     fi
