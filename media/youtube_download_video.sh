@@ -99,4 +99,8 @@ fi
 timestamp "Touching file timestamp to make it easier to find when browsing"
 touch "$filename"
 timestamp "Opening video file: $filename"
+#if is_mac; then
+#    timestamp "Showing in Finder"
+#    open -R "$filename"
+#fi
 "$srcdir/vidopen.sh" "$filename"
