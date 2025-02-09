@@ -96,5 +96,7 @@ else
     timestamp "Determining download filename"
     filename="$(yt-dlp --get-filename --output "%(title)s.mp4" "$url")"
 fi
+timestamp "Touching file timestamp to make it easier to find when browsing"
+touch "$filename"
 timestamp "Opening video file: $filename"
 "$srcdir/vidopen.sh" "$filename"
