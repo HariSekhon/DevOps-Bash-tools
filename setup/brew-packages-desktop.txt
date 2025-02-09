@@ -112,6 +112,7 @@ ffmpeg
 fish
 flyscrape
 fortune
+fping  # scriptable fast ping for multiple hosts
 fswatch
 fzf
 gcc
@@ -139,6 +140,7 @@ haproxy
 helm
 hexyl  # hex command line viewer - https://github.com/sharkdp/hexyl
 htop
+httping  # ping-like tool for HTTP requests
 http-toolkit  # HTTP intercepting debugger
 hub
 hugo  # static website generator - https://gohugo.io/getting-started/quick-start/
@@ -149,6 +151,7 @@ imagemagick
 #inetutils  # GNU telnet, ftp, tftp, inetd, syslog, ping, traceroute, whois - prefixed with g
 infracost  # Cloud cost estimator for Terraform code
 ipcalc
+ioping  # monitor I/O latency in real-time
 iperf
 ipython
 #isc-dhcp  # the classic DHCP daemon, use for bootstrapping PXE installing Debian Linux or similar as per https://github.com/HariSekhon/Knowledge-Base/blob/main/dhcp.md
@@ -281,6 +284,7 @@ ssh-copy-id
 stats  # fancier Activity Monitor
 #steghide  # looks like it's been removed
 #subversion  # pulls in brew version of Perl which breaks library installations due to this horror - https://github.com/toddr/IO-Tty/issues/25
+tcpping  # ping-like tool for TCP requests
 #terraform  # use tfenv with direnv to match your company's version and avoid accidentally upgrading the tfstate
 #terragrunt  # old, use install/install_terragrunt.sh to grab latest version to ~/bin instead
 #terraformer  # large, install only if actively using
