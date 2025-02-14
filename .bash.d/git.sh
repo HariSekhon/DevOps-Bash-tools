@@ -78,6 +78,7 @@ addf(){
     git ci -m "added $*"
 }
 alias gadd='git add'
+# beware covers up ImageMagick 'import' screenshot command (see HariSekhon/Knowledge-Base mac.md page)
 alias import=gitimport
 alias co=checkout
 alias commit="git commit"
