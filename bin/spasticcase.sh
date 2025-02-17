@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Change input to SpAsTiCcAsE for replying to people who don't understand economics
+Change input to sPaStIcCaSe for replying to people who don't understand economics
 
 Accepts a string, file or standard input
 "
@@ -48,11 +48,11 @@ capitalize_alternate(){
 }
 
 if [ $# -eq 0 ]; then
-    timestamp "Reading from standard input"
+    log "Reading from standard input"
     cat "$@"
 else
     if [[ "$1" =~ ^.?/ ]] || [ -f "$1" ]; then
-        timestamp "Reading from files: $*"
+        log "Reading from files: $*"
         cat "$@"
     else
         echo "$*"
