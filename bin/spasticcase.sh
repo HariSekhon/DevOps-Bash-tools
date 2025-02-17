@@ -25,6 +25,8 @@ usage_description="
 Change input to sPaStIcCaSe for replying to people who don't understand economics
 
 Accepts a string, file or standard input
+
+Outputs to stderr and copies to clipboard for convenience
 "
 
 # used by usage() in lib/utils.sh
@@ -34,17 +36,7 @@ usage_args="[<string_or_file>]"
 help_usage "$@"
 
 capitalize_alternate(){
-    awk '{
-        for (i = 1; i <= length($0); i++) {
-            c = substr($0, i, 1);
-            if (i % 2 == 0) {
-                printf toupper(c);
-            } else {
-                printf tolower(c);
-            }
-        }
-        print "";
-    }'
+    sed -E 's/(.)/\L\1/g; s/(.)(.)/\1\U\2/g'
 }
 
 if [ $# -eq 0 ]; then
@@ -58,4 +50,6 @@ else
         echo "$*"
     fi
 fi |
-capitalize_alternate
+capitalize_alternate |
+tee /dev/stderr |
+"$srcdir/copy_to_clipboard.sh"
