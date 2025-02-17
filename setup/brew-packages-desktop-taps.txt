@@ -51,3 +51,6 @@ golangci/tap            golangci-lint
 clowdhaus/taps          eksup
 
 teamookla/speedtest     speedtest  # https://www.speedtest.net/
+
+# to download different versions of XCode from the command line
+xcodesorg/made          xcodes
