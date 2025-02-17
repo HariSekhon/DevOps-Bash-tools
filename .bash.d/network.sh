@@ -41,6 +41,8 @@ alias watchu="watch_url.pl"
 # https because http often gets intercepted by routers + proxies giving false 200 OKs where there is an internet issue
 alias wg="watch_url.pl https://google.com"
 
+alias speedtesturl="browser https://speedtest.net"
+
 # ============================================================================ #
 #                         Y o u r   I P   A d d r e s s
 # ============================================================================ #
