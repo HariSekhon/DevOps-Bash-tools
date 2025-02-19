@@ -30,7 +30,7 @@ Performs N keyboard key code presses
 
 Sleeps for \$SLEEP_SECS (default: 1) between clicks to allow UIs to update and perform the next keystroke
 
-Starts each keystroke after \$START_DELAYS seconds (default: 5) to give time to alt-tab back to your UI application and position the cursor
+Starts each keystroke after \$START_DELAY seconds (default: 5) to give time to alt-tab back to your UI application and position the cursor
 
 If given num is negative, will run indefinitely until Control-C'd
 "
