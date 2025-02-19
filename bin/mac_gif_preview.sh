@@ -24,7 +24,11 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Opens Gif in the Mac Finder file viewer preview because the Preview app doesn't show the animation
 
-(you can also open it in a web browser to render the animation)
+You can also open it in a web browser to render the animation if you prefer:
+
+    open -a Safari \"\$file\"
+
+    open -a 'Google Chrome' \"\$file\"
 "
 
 # used by usage() in lib/utils.sh
