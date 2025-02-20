@@ -25,7 +25,7 @@ usage_description="
 Shows only commits in the Git log done by you
 
 Useful to remind yourself what parts the current Git repo you've been working on
-for periodic reviews, reports or or even updating your CV!
+for periodic reviews, reports or even updating your CV!
 
 Filters the Git log for your Git configured username and email address
 
