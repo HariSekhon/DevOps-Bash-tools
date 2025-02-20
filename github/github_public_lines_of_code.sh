@@ -93,3 +93,4 @@ echo
 timestamp "Counting lines of code:"
 echo
 cloc .
+scc .
