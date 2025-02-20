@@ -36,7 +36,7 @@ before you overrode your Git email in work repo or if using Squash Merges in Git
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<git_log_options>]"
 
 help_usage "$@"
 
@@ -50,4 +50,4 @@ while read -r author; do
     author_opts+=(--author "$author")
 done <<< "$authors"
 
-git log "${author_opts[@]}"
+git log "${author_opts[@]}" "$@"
