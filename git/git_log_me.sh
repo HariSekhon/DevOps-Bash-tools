@@ -36,6 +36,10 @@ before you overrode your Git email in work repo or if using Squash Merges in Git
 Passes all args through to git log so you can add additional filters eg. to show everything added by me:
 
     ${0##*/} --all --diff-filter=A
+
+or for compact output:
+
+    ${0##*/} --oneline
 "
 
 # used by usage() in lib/utils.sh
