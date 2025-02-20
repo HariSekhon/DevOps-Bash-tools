@@ -48,6 +48,8 @@ usage_args="[<git_log_options>]"
 
 help_usage "$@"
 
+# git config --list outputs both global and local repo overrides,
+# resulting in multiple user.email outputs for a work repo using local override
 authors="$(git config -l | awk -F= '/^user.(name|email)/ {print $2}' | sort -u)"
 
 author_opts=()
