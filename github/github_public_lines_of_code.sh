@@ -64,6 +64,8 @@ num_github_repo_urls="$(wc -l <<< "$github_repo_urls" | sed 's/[[:space:]]*//g')
 timestamp "Found $num_github_repo_urls GitHub repos"
 echo
 
+# not using /tmp and mktemp because want to cache long term for performance
+# and clean checkouts are useful for all sorts of things and will be reused by other scripts
 basedir="$HOME/github/clean_checkouts"
 
 mkdir -p -v "$basedir"
