@@ -34,6 +34,8 @@ Filters the Git log for your Git configured username and email address using adj
 Passes all args through to git log so you can add additional filters eg.
 
     ${0##*/} --all
+
+    ${0##*/} --oneline
 "
 
 # used by usage() in lib/utils.sh
