@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Converts an image to PNG to be usable on websites that don't support the original image format,
-such as LinkedIn or Medium
+such as LinkedIn, Medium to Reddit
 
 Opens the converted PNG image to verify it
 
