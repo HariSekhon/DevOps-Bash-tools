@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Converts an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
 
+Opens the converted PNG image to verify it
+
 Requires one of Inkscape, ImageMagik or rsvg-convert - will attempt to use whichever is already installed
 or install one of them if none are found
 "
