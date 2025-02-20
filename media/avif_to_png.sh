@@ -76,6 +76,10 @@ else
     #"$srcdir/../packages/install_packages.sh" anothertool ||
     die "Failed to install ImageMagick to convert Avif to PNG"
 
+    if is_mac; then
+        "$srcdir/../packages/install_package_if_absent.sh" libheif
+    fi
+
     if convert; then
         converted=1
     fi
