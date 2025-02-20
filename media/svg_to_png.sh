@@ -93,3 +93,6 @@ if [ "$converted" = 1 ]; then
 else
     die "Conversion failed"
 fi
+
+timestamp "Opening image: $png"
+"$srcdir/imageopen.sh" "$png"
