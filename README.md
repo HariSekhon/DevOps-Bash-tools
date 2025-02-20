@@ -1446,7 +1446,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `d2.sh` - generates [D2lang diagram](https://github.com/HariSekhon/Diagrams-as-Code) and then opens the resulting image
 - `svg_to_png.sh` - converts an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
 - `avif_to_png.sh` - converts an Avif image to PNG to be usable on websites that don't support Webp images like LinkedIn
-- `webp_to_png.sh` - converts a Webp image to PNG to be usable on websites that don't support Webp images like Medium
+- `webp_to_png.sh` - converts a Webp image to PNG to be usable on websites that don't support Webp images like Medium. Tries 2 different tools for webp unlike the next generic converter
 - `image_to_png.sh` - try to convert any image to PNG to be usable on fussy websites like LinkedIn or Medium
 
 #### Terminal Gif Capture
