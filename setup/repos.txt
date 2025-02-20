@@ -28,7 +28,7 @@
 #
 
 HariSekhon:harisekhon
-#Knowledge-Base:knowledge
+Knowledge-Base:knowledge
 Environments:environments
 TamperMonkey:tampermonkey
 # order repos by dependent submodule repos first
