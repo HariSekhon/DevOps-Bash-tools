@@ -40,7 +40,7 @@ usage_args="[<git_log_options>]"
 
 help_usage "$@"
 
-num_args 0 "$@"
+#num_args 0 "$@"
 
 authors="$(git config -l | awk -F= '/^user.(name|email)/ {print $2}' | sort -u)"
 
