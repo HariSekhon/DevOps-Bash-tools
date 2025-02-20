@@ -940,6 +940,7 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_grep_env_vars.sh` - find environment variables in the current git repo's code base in the format `SOME_VAR` (useful to find undocumented environment variables in internal or open source projects such as ArgoCD eg. [argoproj/argocd-cd #8680](https://github.com/argoproj/argo-cd/pull/8680))
   - `git_log_empty_commits.sh` - find empty commits in git history (eg. if a `git filter-branch` was run but `--prune-empty` was forgotten, leaking metadata like subjects containing file names or other sensitive info)
   - `git_log_me.sh` - shows only commits in the Git log done by you. Useful to remind yourself what parts the current Git repo you've been working on for periodic reviews, reports or even updating your CV!
+  - `git_log_me_added.sh` - same as above but only file addition commits
   - `git_graph_commit_history_gnuplot.sh` - generates GNUplot graphs of Git commits per year and per month for the entire history of the local Git repo checkout
   - `git_graph_commit_history_mermaidjs.sh` - generates MermaidJS graphs of Git commits per year and per month for the entire history of the local Git repo checkout
   - `git_graph_commit_times_gnuplot.sh` - generates a GNUplot graph of Git commit times from the current Git repo checkout's `git log`
