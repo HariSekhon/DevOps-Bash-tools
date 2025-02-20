@@ -25,6 +25,8 @@ usage_description="
 Converts an image to PNG to be usable on websites that don't support the original image format,
 such as LinkedIn or Medium
 
+Opens the converted PNG image to verify it
+
 Requires ImageMagick to be installed, attempts to install it if not found
 "
 
