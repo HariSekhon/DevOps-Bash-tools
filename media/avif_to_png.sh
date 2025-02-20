@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Converts a Avif image to PNG to be usable on websites that don't support Avif images like LinkedIn
 
+Opens the converted PNG image to verify it
+
 Requires ImageMagick to be installed, attempts to install it if not found
 "
 
