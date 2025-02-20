@@ -32,6 +32,10 @@ Filters the Git log for your Git configured username and email address
 If you have a global Git config using your personal email address but work repo specific overrides using your work email
 this script will include to filter for both which will also catch commits that may have been accidentally committed
 before you overrode your Git email in work repo or if using Squash Merges in GitHub UI that defaulted to the wrong email
+
+Passes all args through to git log so you can add additional filters eg. to show everything added by me:
+
+    ${0##*/} --all --diff-filter=A
 "
 
 # used by usage() in lib/utils.sh
