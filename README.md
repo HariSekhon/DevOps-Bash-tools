@@ -1447,6 +1447,7 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `svg_to_png.sh` - converts an SVG image to PNG to be usable on websites that don't support SVG images like LinkedIn, Medium or Reddit
 - `avif_to_png.sh` - converts an Avif image to PNG to be usable on websites that don't support Webp images like LinkedIn
 - `webp_to_png.sh` - converts a Webp image to PNG to be usable on websites that don't support Webp images like Medium
+- `image_to_png.sh` - try to convert any image to PNG to be usable on fussy websites like LinkedIn or Medium
 
 #### Terminal Gif Capture
 
