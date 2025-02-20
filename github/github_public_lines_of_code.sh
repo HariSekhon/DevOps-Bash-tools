@@ -64,12 +64,12 @@ num_github_repo_urls="$(wc -l <<< "$github_repo_urls" | sed 's/[[:space:]]*//g')
 timestamp "Found $num_github_repo_urls GitHub repos"
 echo
 
-tmp="/tmp/github-checkouts"
+basedir="$HOME/github/clean_checkouts"
 
-mkdir -p -v "$tmp"
+mkdir -p -v "$basedir"
 
-timestamp "Switching to dir: $tmp"
-cd "$tmp"
+timestamp "Switching to dir: $basedir"
+cd "$basedir"
 echo
 
 timestamp "Checking out all public original GitHub repos"
