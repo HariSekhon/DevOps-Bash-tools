@@ -89,8 +89,15 @@ while read -r github_repo_url; do
 done <<< "$github_repo_urls"
 timestamp "Cloning done"
 echo
-
+echo
 timestamp "Counting lines of code:"
 echo
+echo
+timestamp "Cloc:"
+echo
 cloc .
+echo
+echo
+timestamp "Scc:"
+echo
 scc .
