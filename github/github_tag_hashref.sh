@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns the GitHub commit hashref for a given GitHub Actions owner/repo@tag or https://github.com/owner/repo@tag
 
-Useful for pinning 3rd party GitHub Actionst to hashref instead of tag to follow GitHub Actions Best Practices:
+Useful for pinning 3rd party GitHub Actions to hashref instead of tag to follow GitHub Actions Best Practices:
 
     https://github.com/HariSekhon/Knowledge-Base/blob/main/github-actions.md#github-actions-best-practices
 "
