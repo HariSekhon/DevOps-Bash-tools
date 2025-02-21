@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Generates D2lang diagram and then opens the resulting image
+Generates a D2lang diagram, using its shebang if present for themes etc, and then opens the resulting image
 
 If the .d2 file is set executable, runs it as is,
 otherwise checks for shebang, sets executable if present and runs it,
