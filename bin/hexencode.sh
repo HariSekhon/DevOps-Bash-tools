@@ -13,7 +13,10 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
-# Quick command line URL encoding
+# Quick command line Hex encoding
+#
+# Different to URL encoding in that urlencoding will leave dashes,
+# but for Shield.io badges I need to encode the dashes to fit within each badge token
 
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
