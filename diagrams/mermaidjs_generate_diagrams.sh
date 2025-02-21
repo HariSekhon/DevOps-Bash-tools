@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates all MermaidJS .mmd diagrams found under the current or given directory
 
-Set SKIP_FILENAME_REGEX environment variable to exclude trying to generate your base templates and things like that which are likely to fail for having a superset of example code in them
+Set SKIP_FILENAME_REGEX environment variable to exclude trying to generate your base templates
+or similar that which are likely to fail for having a superset of example code in them
 
     export SKIP_FILENAME_REGEX='template.mmd|diagram.mmd'
 
