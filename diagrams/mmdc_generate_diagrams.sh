@@ -1,0 +1,1 @@
+mermaidjs_generate_diagrams.sh
