@@ -234,7 +234,7 @@ make
 - [Python](#python) - Python utilities & library management
 - [Perl](#perl) - Perl utilities & library management
 - [Golang](#golang) - Golang utilities
-- [Diagrams](#diagrams) - Diagrams-as-Code scripts
+- [Diagrams](#diagrams) - scripts to generate D2lang, MermaidJS and Python Mingrammer used in my [HariSekhon/Diagrams-as-Code](https://github.com/HariSekhon/Diagrams-as-Code) repo
 - [Media](#media) - video downloaders & converts, MP3 metadata editing, grouping and ordering of albums and audiobooks, mkv/avi to mp4 converters, 720p video downscaler for posting to social media, download YouTube videos or even entire channels and videos from other social media sites like Twitter / X or Facebook, terminal gif capture
 - [Spotify](#spotify) - 40+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, followed artists, top artists, top tracks etc.
 - [More Linux & Mac](#more-linux--mac) - more systems administration scripts, package installation automation
