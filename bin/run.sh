@@ -52,6 +52,7 @@ min_args 1 "$@"
 trap_cmd 'exitcode=$?; echo; echo "Exit Code: $exitcode"'
 
 filename="$1"
+shift || :
 
 # examples:
 #
@@ -93,6 +94,11 @@ else
 *docker-compose*.y*ml)  docker_compose_up
                         ;;
               Gemfile)  bundle install
+                        ;;
+              Fastfile) if [[ "$filename" =~ /fastlane/Fastfile ]]; then
+                            cd "$(dirname "$filename")/.."
+                            fastlane "$@"
+                        fi
                         ;;
      cloudbuild*.y*ml)  gcloud builds submit --config "$basename" .
                         ;;
