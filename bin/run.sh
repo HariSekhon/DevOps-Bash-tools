@@ -95,8 +95,8 @@ else
                         ;;
               Gemfile)  bundle install
                         ;;
-              Fastfile) if [[ "$filename" =~ fastlane/Fastfile ]]; then
-                            cd "$(dirname "$filename")/.."
+                    Fastfile) if [[ "$(readlink -f "$basename")" =~ /fastlane/Fastfile ]]; then
+                            cd ".."
                             fastlane "$@"
                         fi
                         ;;
@@ -118,39 +118,39 @@ else
                         fi
                         open "$latest_image"
                         ;;
-                 *.go)  eval go run "'$filename'" "$("$srcdir/lib/args_extract.sh" "$filename")"
+                 *.go)  eval go run "'$basename'" "$("$srcdir/lib/args_extract.sh" "$basename")"
                         ;;
                  *.tf)  #terraform plan
                         terraform apply
                         ;;
        terragrunt.hcl)  terragrunt apply
                         ;;
- *.pkr.hcl|*.pkr.json)  packer init "$filename" &&
-                        packer build "$filename"
+ *.pkr.hcl|*.pkr.json)  packer init "$basename" &&
+                        packer build "$basename"
                         ;;
                  *.md)  bash -ic "cd '$dirname'; gitbrowse"
                         ;;
-                 *.gv)  file_png="${filename%.gv}.png"
-                        dot -T png "$filename" -o "$file_png" >/dev/null && open "$file_png"
+                 *.gv)  file_png="${basename%.gv}.png"
+                        dot -T png "$basename" -o "$file_png" >/dev/null && open "$file_png"
                         ;;
             .pylintrc)  pylint ./*.py
                         ;;
-                    *)  if [[ "$filename" =~ /docker-compose/.+\.ya?ml$ ]]; then
+                    *)  if [[ "$basename" =~ /docker-compose/.+\.ya?ml$ ]]; then
                             docker_compose_up
-                        elif [[ "$filename" =~ \.ya?ml$ ]] &&
-                           grep -q '^apiVersion:' "$filename" &&
-                           grep -q '^kind:'       "$filename"; then
+                        elif [[ "$basename" =~ \.ya?ml$ ]] &&
+                           grep -q '^apiVersion:' "$basename" &&
+                           grep -q '^kind:'       "$basename"; then
                             # a yaml with these apiVersion and kind fields is almost certainly a kubernetes manifest
-                            kubectl apply -f "$filename"
+                            kubectl apply -f "$basename"
                             exit 0
                         fi
-                        if ! [ -x "$filename" ]; then
+                        if ! [ -x "$basename" ]; then
                             echo "ERROR: file '$filename' is not set executable!" >&2
                             exit 1
                         fi
-                        args="$("$srcdir/lib/args_extract.sh" "$filename")"
-                        echo "'$filename'" "$args" >&2
-                        eval "'$filename'" "$args"
+                        args="$("$srcdir/lib/args_extract.sh" "$basename")"
+                        echo "'$basename'" "$args" >&2
+                        eval "'$basename'" "$args"
                         ;;
     esac
 fi
