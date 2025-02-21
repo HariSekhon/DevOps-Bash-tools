@@ -37,7 +37,7 @@ usage_args="[<source_dir> <target_dir> <png|svg>]"
 
 help_usage "$@"
 
-max_args 2 "$@"
+max_args 3 "$@"
 
 src_dir="${1:-.}"
 target_dir="${2:-.}"
