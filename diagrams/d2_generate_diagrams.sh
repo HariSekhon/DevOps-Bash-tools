@@ -43,6 +43,8 @@ src_dir="${1:-.}"
 target_dir="${2:-.}"
 ext="${3:-svg}"
 
+target_dir="${target_dir%%/}"
+
 if ! [[ "$ext" =~ ^(png|svg)$ ]]; then
     die "Invalid extension specified: must be 'png' or 'svg'"
 fi
