@@ -95,7 +95,7 @@ else
                         ;;
               Gemfile)  bundle install
                         ;;
-              Fastfile) if [[ "$filename" =~ /fastlane/Fastfile ]]; then
+              Fastfile) if [[ "$filename" =~ fastlane/Fastfile ]]; then
                             cd "$(dirname "$filename")/.."
                             fastlane "$@"
                         fi
