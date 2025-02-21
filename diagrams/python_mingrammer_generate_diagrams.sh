@@ -33,6 +33,11 @@ or
 from diagrams import ...
 
 
+Set SKIP_FILENAME_REGEX environment variable to exclude trying to generate your base templates
+or similar that which are likely to fail for having a superset of example code in them
+
+    export SKIP_FILENAME_REGEX='template.py|diagram.py'
+
 Ported from Makefile in:
 
     https://github.com/HariSekhon/Diagrams-as-Code
