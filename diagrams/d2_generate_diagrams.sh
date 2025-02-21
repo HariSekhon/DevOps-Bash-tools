@@ -95,7 +95,7 @@ while read -r filename; do
         #shebang="d2 --theme 200"
         shebang="d2"
     fi
-    timestamp "Generating $filename -> $img"
+    timestamp "Generating: $filename -> $img"
     if ! $shebang "$filename" "$img"; then
         timestamp "Failed to generate: $img"
         git checkout "$img" 2>/dev/null ||
