@@ -82,10 +82,10 @@ while read -r filename; do
         fi
     fi
     if [ "$target_dir" = . ]; then
-        img="${filename%.d2}.svg"
+        img="${filename%.d2}.$ext"
     else
         basename="${filename##*/}"
-        img="$target_dir/${basename%.d2}.svg"
+        img="$target_dir/${basename%.d2}.$ext"
     fi
     shebang="$(
         head -n 1 "$filename" |
