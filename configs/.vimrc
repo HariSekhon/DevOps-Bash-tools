@@ -265,8 +265,8 @@ nmap          ;y :w !pbcopy<CR><CR>
 nmap          ;z :call ToggleDebug()<CR>
 nmap          ;§ :call ToggleScrollLock()<CR>
 
-"noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_char,'\/')<CR>/<CR>:nohlsearch<CR>
-"noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_char,'\/')<CR>//e<CR>:nohlsearch<CR>
+"noremap <silent> ,cc :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_char,'\/')<CR>/<CR> :nohlsearch<CR>
+"noremap <silent> ,cu :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_char,'\/')<CR>//e<CR> :nohlsearch<CR>
 
 " reloading with these didn't fix above pipe disabling arrow keys but
 " adding a terminal reset after the pipe command did fix it
@@ -276,13 +276,13 @@ nmap          ;§ :call ToggleScrollLock()<CR>
 "noremap <Right> <Right>
 
 if has('autocmd')
-    au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR>:!clear; docker-compose -f "%" up<CR>
+    au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w<CR> :!clear; docker-compose -f "%" up<CR>
 endif
 
 if has('autocmd')
-    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%"<CR>
-    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR>:!clear; "%:p:h/run.sh" "%"<CR>
-    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w<CR>:!clear; DEBUG=1 "%:p:h/run.sh" "%"<CR>
+    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR> :!clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%"<CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w<CR> :!clear; "%:p:h/run.sh" "%"<CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w<CR> :!clear; DEBUG=1 "%:p:h/run.sh" "%"<CR>
 endif
 
 
@@ -361,9 +361,9 @@ if has('autocmd')
 
     " headtail.py is useful to see the top things to fix and the score on each run and can be found in the
     " https://github.com/HariSekhon/Python-DevOps-Tools repo which should be downloaded, run 'make' and add to $PATH
-    au BufNew,BufRead *.py   nmap ;l :w<CR>:!clear; pylint "%" \| headtail.py<CR>
-    au BufNew,BufRead *.pl   nmap ;l :w<CR>:!clear; perl -I . -tc "%"<CR>
-    au BufNew,BufRead *.rb   nmap ;l :w<CR>:!clear; ruby -c "%"<CR>
+    au BufNew,BufRead *.py   nmap ;l :w<CR> :!clear; pylint "%" \| headtail.py<CR>
+    au BufNew,BufRead *.pl   nmap ;l :w<CR> :!clear; perl -I . -tc "%"<CR>
+    au BufNew,BufRead *.rb   nmap ;l :w<CR> :!clear; ruby -c "%"<CR>
     " :e reloads the file because autoread isn't working after gofmt in this case
     au BufNew,BufRead *.go   nmap ;l :w<CR> :!gofmt -w "%" && go build "%"<CR>
     " breaks waiting to see go build error
@@ -376,68 +376,68 @@ if has('autocmd')
     "au FocusGained,BufEnter * :checktime
 
     " TODO: any better groovy/java CLI linters
-    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR>:!groovyc "%"; rm -f -- "%:p:h"/*.class <CR>
+    au BufNew,BufRead *.groovy,*.gvy,*.gy,*.gsh  nmap ;l :w<CR> :!groovyc "%"; rm -f -- "%:p:h"/*.class <CR>
 
     " TODO: often these don't trigger on window switching between different file types
 
     " %:t = basename of file
-    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR<CR>
+    au BufNew,BufRead .bash*,*.sh,*.ksh   nmap ;l :w<CR> :!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR<CR>
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
-    au FileType sh                        nmap ;l :w<CR>:!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR<CR>
+    au FileType sh                        nmap ;l :w<CR> :!clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR<CR>
 
     au BufNewFile,BufRead .vimrc    nmap ;l :w<CR> :!clear<CR> :call LintVimrc() <CR>
 
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
-    au BufNew,BufRead *.csv        nmap ;l :w<CR>:!clear; validate_csv.py "%"<CR>
-    au BufNew,BufRead *.cson       nmap ;l :w<CR>:!clear; validate_cson.py "%"<CR>
-    au BufNew,BufRead *.d2         nmap ;l :w<CR>:!clear; d2 fmt "%" <CR> :edit <CR> :1s/^# \!\//#\!\// <CR>
-    au BufNew,BufRead *.json       nmap ;l :w<CR>:!clear; validate_json.py "%"; echo; check_json.sh "%" \| less -FR<CR>
-    au BufNew,BufRead *.ini        nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
+    au BufNew,BufRead *.csv        nmap ;l :w<CR> :!clear; validate_csv.py "%"<CR>
+    au BufNew,BufRead *.cson       nmap ;l :w<CR> :!clear; validate_cson.py "%"<CR>
+    au BufNew,BufRead *.d2         nmap ;l :w<CR> :!clear; d2 fmt "%" <CR> :edit <CR> :1s/^# \!\//#\!\// <CR>
+    au BufNew,BufRead *.json       nmap ;l :w<CR> :!clear; validate_json.py "%"; echo; check_json.sh "%" \| less -FR<CR>
+    au BufNew,BufRead *.ini        nmap ;l :w<CR> :!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
     " doesn't work on ansible inventory anyway
-    "au FileType       ini          nmap ;l :w<CR>:!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
-    au BufNew,BufRead *.php        nmap ;l :w<CR>:!clear; php5 -l "%"<CR>
+    "au FileType       ini          nmap ;l :w<CR> :!clear; validate_ini.py "%"; validate_ini2.py "%"<CR>
+    au BufNew,BufRead *.php        nmap ;l :w<CR> :!clear; php5 -l "%"<CR>
     " this acts as both a validation as well as a fast way of being able to edit the plist
     " trying to convert to json results in an error "invalid object in plist for destination format"
-    au BufNew,BufRead *.plist      nmap ;l :w<CR>:!clear; plutil -convert xml1 "%" && echo PList OK<CR>
-    au BufNew,BufRead *.properties nmap ;l :w<CR>:!clear; validate_properties.py "%"<CR>
-    au BufNew,BufRead *.ldif       nmap ;l :w<CR>:!clear; validate_ldap_ldif.py "%"<CR>
-    au BufNew,BufRead *.md         nmap ;l :w<CR>:!clear; mdl "%" \| less -FR<CR>
-    "au BufNew,BufRead *.sql        nmap ;l :w<CR>:!clear; TODO "%" \| less -FR<CR>
-    au BufNew,BufRead *.scala      nmap ;l :w<CR>:!clear; scalastyle -c "$bash_tools/scalastyle_config.xml" "%" \| less -FR<CR>
-    au BufNew,BufRead *.toml       nmap ;l :w<CR>:!clear; validate_toml.py "%"<CR>
-    au BufNew,BufRead *.xml        nmap ;l :w<CR>:!clear; validate_xml.py "%"<CR>
+    au BufNew,BufRead *.plist      nmap ;l :w<CR> :!clear; plutil -convert xml1 "%" && echo PList OK<CR>
+    au BufNew,BufRead *.properties nmap ;l :w<CR> :!clear; validate_properties.py "%"<CR>
+    au BufNew,BufRead *.ldif       nmap ;l :w<CR> :!clear; validate_ldap_ldif.py "%"<CR>
+    au BufNew,BufRead *.md         nmap ;l :w<CR> :!clear; mdl "%" \| less -FR<CR>
+    "au BufNew,BufRead *.sql        nmap ;l :w<CR> :!clear; TODO "%" \| less -FR<CR>
+    au BufNew,BufRead *.scala      nmap ;l :w<CR> :!clear; scalastyle -c "$bash_tools/scalastyle_config.xml" "%" \| less -FR<CR>
+    au BufNew,BufRead *.toml       nmap ;l :w<CR> :!clear; validate_toml.py "%"<CR>
+    au BufNew,BufRead *.xml        nmap ;l :w<CR> :!clear; validate_xml.py "%"<CR>
     " TODO: needs fix to allow multiple inline yaml docs in 1 file
-    "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; validate_yaml.py "%"<CR>
-    "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR>:!clear; js-yaml "%" >/dev/null && echo YAML OK<CR>
-    au BufNew,BufRead *.yml,*.yaml,autoinstall-user-data nmap ;l :w<CR>:!clear; yamllint "%" && echo YAML OK<CR>
-    au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR>:call TerraformValidate()<CR>
-    au BufNew,BufRead *.hcl                                 nmap ;l :w<CR>:call TerragruntValidate()<CR>
-    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;l :w<CR>:!packer init "%" && packer validate "%" && packer fmt -diff "%" <CR>
-    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;f :w<CR>:!packer fmt -diff "%" <CR>
+    "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR> :!clear; validate_yaml.py "%"<CR>
+    "au BufNew,BufRead *.yml,*.yaml nmap ;l :w<CR> :!clear; js-yaml "%" >/dev/null && echo YAML OK<CR>
+    au BufNew,BufRead *.yml,*.yaml,autoinstall-user-data nmap ;l :w<CR> :!clear; yamllint "%" && echo YAML OK<CR>
+    au BufNew,BufRead *.tf,*.tf.json,*.tfvars,*.tfvars.json nmap ;l :w<CR> :call TerraformValidate()<CR>
+    au BufNew,BufRead *.hcl                                 nmap ;l :w<CR> :call TerragruntValidate()<CR>
+    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;l :w<CR> :!packer init "%" && packer validate "%" && packer fmt -diff "%" <CR>
+    au BufNew,BufRead *.pkr.hcl,*.pkr.json nmap ;f :w<CR> :!packer fmt -diff "%" <CR>
 
     " more specific matches like pom.xml need to come after less specific matches like *.xml as last statement wins
-    au BufNew,BufRead *pom.xml*      nmap ;l :w<CR>:!clear; mvn validate -f "%" \| less -FR<CR>
+    au BufNew,BufRead *pom.xml*      nmap ;l :w<CR> :!clear; mvn validate -f "%" \| less -FR<CR>
     " check_makefiles.sh is in this repo which should be added to $PATH
-    au BufNew,BufRead *Makefile*     nmap ;l :w<CR>:!clear; check_makefiles.sh "%" \| less -FR<CR>
-    au BufNew,BufRead *build.gradle* nmap ;l :w<CR>:!clear; gradle -b "%" -m clean build \| less -FR<CR> | nmap ;r :!gradle -b "%" clean build<CR>
-    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR>:!clear; cd "%:p:h" && echo q \| sbt reload "%" \| less -FR<CR>
-    au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR>:!clear; travis lint "%" \| less -FR<CR>
-    au BufNew,BufRead serverless.yml nmap ;l :w<CR>:!clear; cd "%:p:h" && serverless print<CR>
-    au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR>:!clear; hadolint "%" \| less -FR<CR>
-    au BufNew,BufRead *docker-compose*.y*ml nmap ;l :w<CR>:!clear; docker-compose -f "%" config \| less -FR<CR>
-    au BufNew,BufRead *Jenkinsfile*  nmap ;l :w<CR>:!clear; check_jenkinsfiles.sh "%" \| less -FR<CR>
+    au BufNew,BufRead *Makefile*     nmap ;l :w<CR> :!clear; check_makefiles.sh "%" \| less -FR<CR>
+    au BufNew,BufRead *build.gradle* nmap ;l :w<CR> :!clear; gradle -b "%" -m clean build \| less -FR<CR> | nmap ;r :!gradle -b "%" clean build<CR>
+    au BufNew,BufRead *build.sbt*    nmap ;l :w<CR> :!clear; cd "%:p:h" && echo q \| sbt reload "%" \| less -FR<CR>
+    au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR> :!clear; travis lint "%" \| less -FR<CR>
+    au BufNew,BufRead serverless.yml nmap ;l :w<CR> :!clear; cd "%:p:h" && serverless print<CR>
+    au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR> :!clear; hadolint "%" \| less -FR<CR>
+    au BufNew,BufRead *docker-compose*.y*ml nmap ;l :w<CR> :!clear; docker-compose -f "%" config \| less -FR<CR>
+    au BufNew,BufRead *Jenkinsfile*  nmap ;l :w<CR> :!clear; check_jenkinsfiles.sh "%" \| less -FR<CR>
     " vagrant validate doesn't take an -f argument so it must be an exact match in order to validate the right thing
     " otherwise you will get an error or false positive
-    au BufNew,BufRead Vagrantfile    nmap ;l :w<CR>:!clear; cd "%:p:h" && vagrant validate<CR>
-    au BufNew,BufRead *.circleci/config.yml*  nmap ;l :w<CR>:!clear; check_circleci_config.sh \| less -FR<CR>
-    au BufNew,BufRead *circleci_config.yml*   nmap ;l :w<CR>:!clear; check_circleci_config.sh \| less -FR<CR>
-    au BufNew,BufRead .pylintrc      nmap ;l :w<CR>:!clear; pylint ./*.py<CR>
+    au BufNew,BufRead Vagrantfile    nmap ;l :w<CR> :!clear; cd "%:p:h" && vagrant validate<CR>
+    au BufNew,BufRead *.circleci/config.yml*  nmap ;l :w<CR> :!clear; check_circleci_config.sh \| less -FR<CR>
+    au BufNew,BufRead *circleci_config.yml*   nmap ;l :w<CR> :!clear; check_circleci_config.sh \| less -FR<CR>
+    au BufNew,BufRead .pylintrc      nmap ;l :w<CR> :!clear; pylint ./*.py<CR>
 
     " if a "lint:" header is found then run lint.sh - this allows for more complex file types like Kubernetes yaml
     " which can then be linted for yaml as well as k8s schema
     " XXX: this is overriding all linting regardless of this expansion - instead use a different hotkey L for fast vs full linting
     "if filereadable(expand("%:p")) && match(readfile(expand("%:p")),"lint:")
-    "    au BufNew,BufRead *  nmap ;l :w<CR>:!clear; lint.sh "%" \| less -FR<CR>
+    "    au BufNew,BufRead *  nmap ;l :w<CR> :!clear; lint.sh "%" \| less -FR<CR>
     "endif
 endif
 
