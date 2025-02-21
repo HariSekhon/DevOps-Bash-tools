@@ -69,10 +69,10 @@ while read -r filename; do
         fi
     fi
     if [ "$target_dir" = . ]; then
-        img="${filename%.mmd}.svg"
+        img="${filename%.mmd}.$ext"
     else
         basename="${filename##*/}"
-        img="$target_dir/${basename%.mmd}.svg"
+        img="$target_dir/${basename%.mmd}.$ext"
     fi
     timestamp "Generating: $filename -> $img"
     if ! mmdc -i "$filename" -o "$img"; then
