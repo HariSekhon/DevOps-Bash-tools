@@ -28,7 +28,8 @@ Ported from Makefile in:
 
     https://github.com/HariSekhon/Diagrams-as-Code
 
-because started getting more complicated with error handling and revertion on incorrectly generated diagrams, for which a Makefile is not the best to do long multi-line code blocks
+because started getting more complicated with error handling and revertion on incorrectly generated diagrams,
+for which a Makefile is not the best to do long multi-line code blocks
 "
 
 # used by usage() in lib/utils.sh
