@@ -117,6 +117,10 @@ else
                         ;;
                  *.md)  mdl "$basename"
                         ;;
+              Fastfile) if [[ "$filename" =~ /fastlane/Fastfile ]]; then
+                            ruby -c "$filename"
+                        fi
+                        ;;
                # this command doesn't exit 1 if the file isn't found
                #.vimrc)  if ! vim -c "source $filename" -c "q"; then
                .vimrc)  if vim -c "
