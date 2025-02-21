@@ -234,6 +234,7 @@ make
 - [Python](#python) - Python utilities & library management
 - [Perl](#perl) - Perl utilities & library management
 - [Golang](#golang) - Golang utilities
+- [Diagrams](#diagrams) - Diagrams-as-Code scripts
 - [Media](#media) - video downloaders & converts, MP3 metadata editing, grouping and ordering of albums and audiobooks, mkv/avi to mp4 converters, 720p video downscaler for posting to social media, download YouTube videos or even entire channels and videos from other social media sites like Twitter / X or Facebook, terminal gif capture
 - [Spotify](#spotify) - 40+ Spotify API scripts for backups, managing playlists, track deduplication, URI conversion, search, add/delete, liked tracks, followed artists, top artists, top tracks etc.
 - [More Linux & Mac](#more-linux--mac) - more systems administration scripts, package installation automation
@@ -1432,6 +1433,17 @@ See also [Knowledge Base notes for Perl](https://github.com/HariSekhon/Knowledge
 - `golang_install.sh` - bulk installs Golang modules from mix of arguments / file lists / stdin
 - `golang_install_if_absent.sh` - same as above but only if the package binary isn't already available in `$PATH`
 - `golang_rm_binaries.sh` - deletes binaries of the same name adjacent to `.go` files. Doesn't delete your `bin/` etc as these are often real deployed applications rather than development binaries
+
+### Diagrams
+
+Used in [HariSekhon/Diagrams-as-Code](https://github.com/HariSekhon/Diagrams-as-Code)
+
+`diagrams/` directory:
+
+- `d2.sh` - generates a D2lang diagram, using its shebang if present for themes etc, and then opens the resulting image
+- `d2_generate_diagrams.sh` - generates all D2lang `.d2` diagrams found under the current or given directory, git reverting or deleting those that didn't generate properly (to work around [d2lang issue #2367](https://github.com/terrastruct/d2/issues/2367))
+- `mermaidjs_generate_diagrams.sh` - generates all MermaidJS `.mmd` diagrams found under the current or given directory, git reverting or deleting those that didn't generate properly
+- `python_mingrammer_generate_diagrams.sh` - generates all Python Mingrammer `.py` diagrams found under the current or given directory
 
 ### Media
 
