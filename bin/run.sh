@@ -35,6 +35,8 @@ usage_description="
 Runs one or more files
 
 Auto-determines the file types, any run or arg headers and executes each file using the appropriate script or CLI tool
+
+Useful to call from vim or IDEs via hotkeys to portably standardize quick build testing while editing
 "
 
 # used by usage() in lib/utils.sh
