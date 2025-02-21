@@ -41,7 +41,11 @@ help_usage "$@"
 #
 #   curl -fsSL https://d2lang.com/install.sh | sh -s -- --dry-run
 
-curl -fsSL https://d2lang.com/install.sh | sh -s --
+if is_mac; then
+    brew install d2
+else
+    curl -fsSL https://d2lang.com/install.sh | sh -s --
+fi
 
 # ==========================================
 # Install proprietary Tala layout engine too
