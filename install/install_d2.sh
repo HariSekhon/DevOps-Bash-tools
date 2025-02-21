@@ -44,8 +44,14 @@ help_usage "$@"
 #if is_mac; then
 #    brew install d2
 #else
-    "$srcdir/../packages/packages_install.sh" d2 ||
-    curl -fsSL https://d2lang.com/install.sh | sh -s --
+    if ! "$srcdir/../packages/install_packages.sh" d2; then
+
+        if ! type -P curl &>/dev/null; then
+            "$srcdir/../packages/install_packages.sh" curl
+        fi
+
+        curl -fsSL https://d2lang.com/install.sh | sh -s --
+    fi
 #fi
 
 # ==========================================
