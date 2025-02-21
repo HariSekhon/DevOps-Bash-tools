@@ -7,8 +7,9 @@
 gitlab
 gist
 jgrep
-lolcat
+lolcat  # colourizes ascii text
 sqlint
+rubocop  # ruby linter
 
 # installed via homebrew now, can't find gem any more
 #rbenv
