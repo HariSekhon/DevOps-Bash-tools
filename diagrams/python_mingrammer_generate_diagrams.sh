@@ -24,6 +24,15 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Generates all Python Mingrammer .py diagrams found under the current or given directory
 
+Checks the python files contain either:
+
+import diagrams
+
+or
+
+from diagrams import ...
+
+
 Ported from Makefile in:
 
     https://github.com/HariSekhon/Diagrams-as-Code
