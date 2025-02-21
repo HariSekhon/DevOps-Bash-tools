@@ -73,7 +73,7 @@ if [ -n "$lint_hint" ]; then
         check_kubernetes_yaml.sh "$basename"
     else
         # assume it's a commmand
-        eval "$lint_hint" "$filename"
+        eval "$lint_hint" "$basename"
     fi
 else
     case "$basename" in
@@ -96,7 +96,7 @@ else
   #kustomization.yaml)  yamllint "$basename"
   #                     ;;
 *.y*ml|autoinstall-user-data)
-                        #yamllint "$filename"
+                        #yamllint "$basename"
                         check_yaml.sh "$basename"
                         ;;
               #.envrc)  cd "$dirname" && direnv allow .
@@ -111,24 +111,24 @@ else
        terragrunt.hcl)  terragrunt fmt -diff
                         terragrunt validate
                         ;;
- *.pkr.hcl|*.pkr.json)  packer init "$filename" &&
-                        packer validate "$filename" &&
-                        packer fmt -diff "$filename"
+ *.pkr.hcl|*.pkr.json)  packer init "$basename" &&
+                        packer validate "$basename" &&
+                        packer fmt -diff "$basename"
                         ;;
                  *.md)  mdl "$basename"
                         ;;
-              Fastfile) if [[ "$filename" =~ /fastlane/Fastfile ]]; then
-                            ruby -c "$filename"
+             Fastfile) if [[ "$(readlink -f "$basename")" =~ /fastlane/Fastfile ]]; then
+                            ruby -c "$basename"
                         fi
                         ;;
                # this command doesn't exit 1 if the file isn't found
-               #.vimrc)  if ! vim -c "source $filename" -c "q"; then
+               #.vimrc)  if ! vim -c "source $basename" -c "q"; then
                .vimrc)  if vim -c "
-                            if !filereadable('$filename') |
+                            if !filereadable('$basename') |
                                 echoerr 'Error: File not found'
                                 cquit 1
                             else
-                                source $filename
+                                source $basename
                             endif
                             " -c "q"; then
                             echo "ViM basic lint validation passed"
@@ -136,7 +136,7 @@ else
                             die "ViM basic lint validation failed"
                         fi
                         if type -P vint &>/dev/null; then
-                            if vint "$filename"; then
+                            if vint "$basename"; then
                                 echo "Vint vim script linting passed"
                             else
                                 die "Vint vim script linting failed"
