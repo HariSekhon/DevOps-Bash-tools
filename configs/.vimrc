@@ -433,6 +433,8 @@ if has('autocmd')
     au BufNew,BufRead *circleci_config.yml*   nmap ;l :w<CR> :!clear; check_circleci_config.sh \| less -FR<CR>
     au BufNew,BufRead .pylintrc      nmap ;l :w<CR> :!clear; pylint ./*.py<CR>
 
+    "au BufNew,BufRead fastlane/Fastfile nmap ;r :w<CR> :!clear; cd "%:p:h/.." && fastlane <CR>
+
     " if a "lint:" header is found then run lint.sh - this allows for more complex file types like Kubernetes yaml
     " which can then be linted for yaml as well as k8s schema
     " XXX: this is overriding all linting regardless of this expansion - instead use a different hotkey L for fast vs full linting
