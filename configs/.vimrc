@@ -425,7 +425,7 @@ if has('autocmd')
     au BufNew,BufRead *build.sbt*    nmap ;l :w<CR> :!clear; cd "%:p:h" && echo q \| sbt reload "%" \| less -FR <CR>
     au BufNew,BufRead *.travis.yml*  nmap ;l :w<CR> :!clear; travis lint "%" \| less -FR <CR>
     au BufNew,BufRead serverless.yml nmap ;l :w<CR> :!clear; cd "%:p:h" && serverless print<CR>
-    au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR> :!clear; hadolint "%" \| less -FR <CR>
+    au BufNew,BufRead Dockerfile*   nmap ;l :w<CR> :!clear; hadolint "%" \| less -FR <CR>
     au BufNew,BufRead *docker-compose*.y*ml nmap ;l :w<CR> :!clear; docker-compose -f "%" config \| less -FR <CR>
     au BufNew,BufRead Jenkinsfile*  nmap ;l :w<CR> :!clear; check_jenkinsfiles.sh "%" \| less -FR <CR>
     " vagrant validate doesn't take an -f argument so it must be an exact match in order to validate the right thing
