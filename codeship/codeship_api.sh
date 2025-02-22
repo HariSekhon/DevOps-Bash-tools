@@ -99,7 +99,7 @@ url_path="$1"
 shift || :
 
 #url_path="${url_path//https:\/\/api.codeship.com/v2}"
-url_path="${url_path##$url_base}"
+url_path="${url_path##"$url_base"}"
 url_path="${url_path##/}"
 
 # for convenience of straight copying and pasting out of documentation pages
