@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 yamls="$(find "${1:-.}" -name .gitlab-ci.yml)"
 
 if [ -z "$yamls" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
