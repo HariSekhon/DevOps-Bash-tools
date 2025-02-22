@@ -23,6 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 filelist="$(find "${1:-.}" -type f -name '*.cson' | sort)"
 
 if [ -z "$filelist" ]; then
+    # shellcheck disable=SC2317
     return 0 &>/dev/null ||
     exit 0
 fi
@@ -40,7 +41,9 @@ elif [ -n "${QUICK:-}" ]; then
 else
     if ! command -v python-cson &>/dev/null; then
         echo "python-cson not found in \$PATH, not running CSON syntax checks"
-        return 0 &>/dev/null || exit 0
+        # shellcheck disable=SC2317
+        return 0 &>/dev/null ||
+        exit 0
     fi
     max_len=0
     for x in $filelist; do
@@ -66,7 +69,9 @@ else
                 echo
             fi
             if [ -z "${NOEXIT:-}" ]; then
-                return 1 &>/dev/null || exit 1
+                # shellcheck disable=SC2317
+                return 1 &>/dev/null ||
+                exit 1
             fi
         fi
         set -eo pipefail
