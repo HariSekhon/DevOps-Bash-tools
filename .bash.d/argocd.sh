@@ -18,7 +18,7 @@
 # ============================================================================ #
 
 # gets default admin pw and copies it to clipboard for quick pasting to UI
-alias argopass="argocd_password.sh | copy_to_clipboard"
+alias argopass="argocd_password.sh | copy_to_clipboard.sh"
 
 # XXX: set the following in your local environment:
 #
