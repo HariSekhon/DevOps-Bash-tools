@@ -48,4 +48,9 @@ elif [ -f "$arg" ]; then
 else
     echo "$arg"
 fi |
-sed 's|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|; s|$|/latest|g'
+sed '
+    /tfr/{
+        s|tfr://registry.terraform.io/|https://registry.terraform.io/modules/|;
+        s|$|/latest|g;
+    }
+'
