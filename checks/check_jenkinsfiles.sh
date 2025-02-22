@@ -18,7 +18,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck source=lib/utils.sh
+# shellcheck source=lib/utils.sh disable=SC1091
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -62,8 +62,9 @@ for arg in "${@:-.}"; do
     fi
 done
 
-if [ -z "$jenkinsfiles" ]; then
-    return 0 &>/dev/null || :
+if [ -z "${jenkinsfiles[*]}" ]; then
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
