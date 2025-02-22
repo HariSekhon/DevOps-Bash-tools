@@ -27,7 +27,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #return 0 &>/dev/null || :
 #exit 0
 
-section "Circle CI Yaml Lint Check"
+section "Circle CI Config Validate"
 
 start_time="$(start_timer)"
 
