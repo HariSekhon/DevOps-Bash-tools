@@ -50,7 +50,8 @@ elif is_inside_docker; then
 fi
 
 if [ $skip_checks = 1 ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
