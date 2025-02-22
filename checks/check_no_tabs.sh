@@ -47,7 +47,8 @@ done
 echo
 if [ $files_with_tabs -gt 0 ]; then
     echo "$files_with_tabs files with tabs detected!"
-    return 1 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 1 &>/dev/null ||
     exit 1
 fi
 
