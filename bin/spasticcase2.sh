@@ -60,6 +60,6 @@ else
         echo "$*"
     fi
 fi |
-capitalize_alternate |
-tee /dev/stderr |
-"$srcdir/copy_to_clipboard.sh"
+capitalize_alternate #|
+#tee /dev/stderr |
+#"$srcdir/copy_to_clipboard.sh"
