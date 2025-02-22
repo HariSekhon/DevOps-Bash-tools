@@ -40,6 +40,11 @@ jobs:
       - image: cimg/base:2024.12
     resource_class: small
     steps:
+      # CLI is too old - config validate breaks in test - install new version to fix
+      # doesn't work - existing version is too old to update
+      #- run: circleci update
+      - run: |
+          curl -sSLf https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/main/install.sh | sudo bash
       - checkout
       #- setup_remote_docker:
       #    version: 20.10.11
