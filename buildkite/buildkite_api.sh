@@ -75,7 +75,7 @@ url_base="https://api.buildkite.com/v2"
 url_path="$1"
 shift || :
 
-url_path="${url_path#$url_base}"
+url_path="${url_path#"$url_base"}"
 url_path="${url_path##/}"
 
 export TOKEN="$BUILDKITE_TOKEN"
