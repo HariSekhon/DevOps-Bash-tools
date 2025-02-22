@@ -30,6 +30,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 #fi
 
 if [ -z "$filelist" ]; then
+    # shellcheck disable=SC2317
     return 0 &>/dev/null ||
     exit 0
 fi
@@ -81,6 +82,7 @@ check_xml(){
         echo "FAILED" >&2
         if [ -z "${QUIET:-}" ]; then
             echo >&2
+            # shellcheck disable=SC2001
             sed "s|^|$filename: |" <<< "$output" >&2
             echo >&2
         fi
