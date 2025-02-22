@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 poms="$(find "${1:-.}" -name "pom.xml")"
 
 if [ -z "$poms" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
