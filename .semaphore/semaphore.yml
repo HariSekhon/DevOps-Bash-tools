@@ -24,7 +24,7 @@ name: DevOps-Bash-tools
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2204
 execution_time_limit:
   hours: 3
 blocks:
