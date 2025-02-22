@@ -97,25 +97,26 @@ pstg(){
     less $LESS
 }
 
-copy_to_clipboard(){
-    if is_mac; then
-        cat | pbcopy
-    elif is_linux; then
-        cat | xclip
-    else
-        echo "ERROR: OS is not Darwin/Linux"
-        return 1
-    fi
-}
+# externalized to copy_to_clipboard.sh script
+#copy_to_clipboard(){
+#    if is_mac; then
+#        cat | pbcopy
+#    elif is_linux; then
+#        cat | xclip
+#    else
+#        echo "ERROR: OS is not Darwin/Linux"
+#        return 1
+#    fi
+#}
 
 unalias clip &>/dev/null || :
 # args are optional
 # shellcheck disable=SC2120
 clip(){
     if [ $# -gt 0 ]; then
-        copy_to_clipboard < "$1"
+        copy_to_clipboard.sh < "$1"
     else
-        copy_to_clipboard
+        copy_to_clipboard.sh
     fi
 }
 
