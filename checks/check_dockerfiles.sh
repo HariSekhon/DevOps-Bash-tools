@@ -26,6 +26,7 @@ export XDG_CONFIG_HOME="$srcdir"
 filelist="$(find "${1:-.}" -type f -name '*Dockerfile*' | sort)"
 
 if [ -z "$filelist" ]; then
+    # shellcheck disable=SC2317
     return 0 &>/dev/null ||
     exit 0
 fi
@@ -43,7 +44,9 @@ elif [ -n "${QUICK:-}" ]; then
 else
     if ! command -v hadolint &>/dev/null; then
         echo "hadolint not found in \$PATH, not running Dockerfile syntax checks"
-        return 0 &>/dev/null || exit 0
+        # shellcheck disable=SC2317
+        return 0 &>/dev/null ||
+        exit 0
     fi
     hadolint --version
     echo
@@ -71,7 +74,9 @@ else
                 echo
             fi
             if [ -z "${NOEXIT:-}" ]; then
-                return 1 &>/dev/null || exit 1
+                # shellcheck disable=SC2317
+                return 1 &>/dev/null ||
+                exit 1
             fi
         fi
         set -eo pipefail
