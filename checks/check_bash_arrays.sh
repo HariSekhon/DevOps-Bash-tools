@@ -26,7 +26,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [ $# -eq 0 ]; then
     if [ -z "$(find "${1:-.}" -type f -iname '*.sh')" ]; then
-        return 0 &>/dev/null || :
+        # shellcheck disable=SC2317
+        return 0 &>/dev/null ||
         exit 0
     fi
 fi
