@@ -22,6 +22,7 @@
 version: v1.0
 name: DevOps-Bash-tools
 agent:
+  # https://docs.semaphoreci.com/reference/machine-types
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
