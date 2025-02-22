@@ -74,7 +74,8 @@ fi
 if [ $whitespace_only_files_found -gt 0 ] ||
    [ $trailing_whitespace_files_found -gt 0 ] ||
    [ $trailing_whitespace_bar_files_found -gt 0 ]; then
-    return 1 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 1 &>/dev/null ||
     exit 1
 fi
 
