@@ -46,7 +46,7 @@ blocks:
           - cache restore
           - export DEBIAN_FRONTEND=noninteractive
           - sudo apt-get update
-          - sudo apt-get upgrade -y --force-confdef --force-confold
+          - sudo apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
       # each job is separate and could be run on a separate machine so all steps must be together
       jobs:
         - name: build
