@@ -44,6 +44,7 @@ until [ $# -lt 1 ]; do
             *)  usage "unknown argument: $1"
                 ;;
     esac
+    # shellcheck disable=SC2317
     shift || :
 done
 
