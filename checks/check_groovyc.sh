@@ -33,7 +33,8 @@ help_usage "$@"
 echo "Checking for Groovy files"
 filelist="$(for directory in "${@:-.}"; do find "$directory" -type f -iname '*.groovy'; done | sort -u)"
 if [ -z "$filelist" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
