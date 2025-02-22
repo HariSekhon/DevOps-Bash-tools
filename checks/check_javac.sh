@@ -35,7 +35,8 @@ shift ||:
 
 filelist="$(find "$directory" -type f -iname '*.java' | sort)"
 if [ -z "$filelist" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
