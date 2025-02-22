@@ -320,7 +320,7 @@ if has('autocmd')
 
     au BufNewFile,BufRead Makefile set noet
     au BufNewFile,BufRead *.md set ts=2 sw=2 sts=2 et
-    au BufNewFile,BufRead *Jenkinsfile* set filetype=groovy ts=2 sw=2 sts=2 et
+    au BufNewFile,BufRead Jenkinsfile* set filetype=groovy ts=2 sw=2 sts=2 et
 
     au BufNewFile,BufRead LICENSE set tw=80
 
@@ -427,7 +427,7 @@ if has('autocmd')
     au BufNew,BufRead serverless.yml nmap ;l :w<CR> :!clear; cd "%:p:h" && serverless print<CR>
     au BufNew,BufRead *Dockerfile*   nmap ;l :w<CR> :!clear; hadolint "%" \| less -FR <CR>
     au BufNew,BufRead *docker-compose*.y*ml nmap ;l :w<CR> :!clear; docker-compose -f "%" config \| less -FR <CR>
-    au BufNew,BufRead *Jenkinsfile*  nmap ;l :w<CR> :!clear; check_jenkinsfiles.sh "%" \| less -FR <CR>
+    au BufNew,BufRead Jenkinsfile*  nmap ;l :w<CR> :!clear; check_jenkinsfiles.sh "%" \| less -FR <CR>
     " vagrant validate doesn't take an -f argument so it must be an exact match in order to validate the right thing
     " otherwise you will get an error or false positive
     au BufNew,BufRead Vagrantfile    nmap ;l :w<CR> :!clear; cd "%:p:h" && vagrant validate<CR>
