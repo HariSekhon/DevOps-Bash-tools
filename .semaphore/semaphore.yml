@@ -44,6 +44,7 @@ blocks:
       prologue:
         commands:
           - cache restore
+          # prevents it getting stuck on config merge prompt on installing openssh-client pulling in openssh-server
           - sudo rm -f /etc/ssh/sshd_config
           #- export DEBIAN_FRONTEND=noninteractive
           #- sudo apt-get update
