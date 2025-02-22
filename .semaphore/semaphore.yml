@@ -45,13 +45,20 @@ blocks:
         commands:
           - cache restore
           # prevents it getting stuck on config merge prompt on installing openssh-client pulling in openssh-server
-          - sudo rm -f /etc/ssh/sshd_config
-          #- export DEBIAN_FRONTEND=noninteractive
-          #- sudo apt-get update
+          #
+          # causes error:
+          #
+          #   Not replacing deleted config file /etc/ssh/sshd_config
+          #
+          #- sudo rm -f /etc/ssh/sshd_config
+          - export DEBIAN_FRONTEND=noninteractive
+          - sudo -E apt-get update
+          - sudo -E apt-get upgrade -y -o Dpkg::Options::="--force-confmiss" -o Dpkg::Options::="--force-confnew"
+          - sudo dpkg --configure -a --force-confmiss --force-confnew
           #- echo "openssh-server openssh-server/conffile-diff select keep" | sudo debconf-set-selections
           #- sudo dpkg --configure -a --force-confdef --force-confold
-          #- sudo apt-get install -y openssh-server -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
           #- sudo apt-get upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+          - sudo apt-get install -y openssh-server
       # each job is separate and could be run on a separate machine so all steps must be together
       jobs:
         - name: build
