@@ -118,7 +118,7 @@ alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 
 # clear paste buffer
 clpb(){
-    copy_to_clipboard < /dev/null
+    copy_to_clipboard.sh < /dev/null
 }
 
 macmac(){
