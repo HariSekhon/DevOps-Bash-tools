@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 vagrantfiles="$(find "${1:-.}" -maxdepth 3 -name Vagrantfile)"
 
 if [ -z "$vagrantfiles" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
