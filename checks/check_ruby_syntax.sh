@@ -22,7 +22,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 . "$srcdir/lib/utils.sh"
 
 if [ -z "$(find "${1:-.}" -maxdepth 2 -type f -iname '*.pl' -o -iname '*.pm' -o -iname '*.t')" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
