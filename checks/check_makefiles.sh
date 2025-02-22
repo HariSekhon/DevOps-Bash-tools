@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 makefiles="$(find "${1:-.}" -maxdepth 2 -name Makefile -o -name Makefile.in)"
 
 if [ -z "$makefiles" ]; then
-    return 0 &>/dev/null || :
+    # shellcheck disable=SC2317
+    return 0 &>/dev/null ||
     exit 0
 fi
 
