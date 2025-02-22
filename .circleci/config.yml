@@ -41,8 +41,8 @@ jobs:
     resource_class: small
     steps:
       - checkout
-      - setup_remote_docker:
-          version: 20.10.11
+      #- setup_remote_docker:
+      #    version: 20.10.11
       - run: setup/ci_bootstrap.sh
       - run: make init
       - run: make
