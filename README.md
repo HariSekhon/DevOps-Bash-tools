@@ -223,6 +223,7 @@ make
 - [Data](#data) - data tools, converters and format validators for Avro, Parquet, CSV, JSON, INI / Properties files (Java), LDAP LDIF, XML, YAML
 - [Big Data & NoSQL](#big-data--nosql) - Kafka, Hadoop, HDFS, Hive, Impala, ZooKeeper, Cloudera Manager API & Cloudera Navigator API scripts
 - [Git - GitHub, GitLab, Bitbucket, Azure DevOps](#git---github-gitlab-bitbucket-azure-devops) - scripts for Git local & mirror management, GitHub, GitLab & BitBucket APIs
+- [Markdown](#markdown) - generate Markdown indexes and debug `mdl` issues like MD005 inconsistent list indentation in large `README.md` files
 - [CI/CD - Continuous Integration / Continuous Delivery](#cicd---continuous-integration--continuous-deployment) - API scripts & build pipeline configs for most major CI systems:
   - Jenkins, Concourse, GoCD, TeamCity - one-touch boot & build
   - Azure DevOps Pipelines, GitHub Actions Workflows, GitLab CI, BitBucket Pipelines, AppVeyor, BuildKite, Travis CI, Circle CI, Codefresh, CodeShip, Drone.io, Semaphore CI, Shippable ...
@@ -956,8 +957,6 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `git_submodules_update.sh` - updates all submodules in the local git repo to the latest commit of their detected default trunk branch
   - `git_submodules_update_repos.sh` - updates submodules for all repos given as args or saved in the `setup/repos.txt` file
   - `git_askpass.sh` - credential helper script to use environment variables for git authentication
-  - `markdown_generate_index.sh` - generates a markdown index list from the headings in a given markdown file such as README.md
-  - `markdown_replace_index.sh` - replaces a markdown index section in a given markdown file using `markdown_generate_index.sh`
 - `github/*.sh` - [GitHub](https://github.com/) API / CLI scripts:
   - `github_api.sh` - queries the GitHub [API](https://docs.github.com/en/rest/reference). Can infer GitHub user, repo and authentication token from local checkout or environment (`$GITHUB_USER`, `$GITHUB_TOKEN`)
   - `github_install_binary.sh` - installs a binary from GitHub releases into $HOME/bin or /usr/local/bin. Auto-determines the latest release if no version specified, detects and unpacks any tarball or zip files
@@ -1078,6 +1077,17 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `bitbucket_ssh_delete_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated BitBucket account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
 
 See also [Knowledge Base notes for Git](https://github.com/HariSekhon/Knowledge-Base/blob/main/git.md).
+
+### Markdown
+
+Maintain your Git `README.md` and similar Markdown documentation well.
+
+- `markdown/*`:
+  - `markdown_generate_index.sh` - generates a markdown index list from the headings in a given markdown file such as `README.md`
+  - `markdown_replace_index.sh` - replaces a markdown index section in a given markdown file using `markdown_generate_index.sh`
+  - `markdown_replace_repos.sh` - replaces the repos block of a given markdown file. Used to keep my GitHub repos Other Repos sections updated
+  - `mdl_list_indentations.sh`- runs Markdownlint `mdl` command and prefixes the spaces count to each offending line of MD005 (inconsistent list indentations). Workaround for [Markdownlint issue #1514](https://github.com/DavidAnson/markdownlint/issues/1514)
+  - `markdown_list_indentations.sh` - prefixes number of spaces before each list item for comparison to MarkdownLint MD005 inconsistent list indentation error
 
 ### CI/CD - Continuous Integration / Continuous Deployment
 
