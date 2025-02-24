@@ -48,7 +48,7 @@ usage_args="<domains_or_files_containing_domains>"
 
 help_usage "$@"
 
-#min_args 1 "$@"
+min_args 1 "$@"
 
 subdomain="${SUBDOMAIN:-ads}"
 
