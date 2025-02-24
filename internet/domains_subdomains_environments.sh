@@ -24,12 +24,20 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 For a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod
 
+Set environment variable SUBDOMAIN to alter the subdomain prefix:
+
+    export SUBDOMAIN='ads'
+
+Set environment variable ENVIRONMENTS to alter the subdomain suffixes:
+
+    export ENVIRONMENTS='dev staging'
+
 Output:
 
-    dev.<domain>     <staging>.<domain>     <domain>
-    dev.<domain2>    <staging>.<domain2>    <domain2>
-    dev.<domain3>    <staging>.<domain3>    <domain3>
-    dev.<domain4>    <staging>.<domain4>    <domain4>
+    ads-dev.<domain>     ads-staging.<domain>     ads.<domain>
+    ads-dev.<domain2>    ads-staging.<domain2>    ads.<domain2>
+    ads-dev.<domain3>    ads-staging.<domain3>    ads.<domain3>
+    ads-dev.<domain4>    ads-staging.<domain4>    ads.<domain4>
 
 Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project
 "
@@ -42,10 +50,12 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-environments="
+subdomain="${SUBDOMAIN:-ads}"
+
+environments="${ENVIRONMENTS:-
 dev
 staging
-"
+}"
 
 if [ $# -eq 0 ]; then
     cat
@@ -64,8 +74,8 @@ while read -r domain; do
         die "Failed domain regex validation: $domain"
     fi
     for environment in $environments; do
-        echo -n "$environment.$domain "
+        echo -n "$subdomain-$environment.$domain "
     done
-    echo "$domain"
+    echo "$subdomain.$domain"
 done |
 column -t
