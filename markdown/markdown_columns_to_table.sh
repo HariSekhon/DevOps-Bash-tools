@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Takes a list of text columns separated by whitespace from file or stdin and outputs them as a Markdown table
+Converts text columns separated by whitespace to a Markdown table with vertically aligned column bars
 
-Useful for piping from ../internet/domains_subdomains_environments.sh
+Reads from a file or standard input
 
 If you don't want the first line to be used as the table header and instead generate placeholder 'Column N' headers:
 
@@ -33,6 +33,16 @@ If you don't want the first line to be used as the table header and instead gene
 Eg.
 
     SUBDOMAIN='myproject' domains_subdomains_environments.sh | NO_HEADER_ROW=1 ${0##*/}
+
+OR with a manual input (I've spaced them just for clarity here,
+   the script will align columns even if the spacing is different regardless)
+
+    ${0##*/} <<< EOF
+        Dev             Staging             Production
+        dev.domain.com  staging.domain.com  prod.domain.com
+        dev.domain2.com staging.domain2.com prod.domain2.com
+        dev.domain3.com staging.domain3.com prod.domain3.com
+    EOF
 "
 
 # used by usage() in lib/utils.sh
