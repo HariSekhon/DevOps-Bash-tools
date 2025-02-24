@@ -24,6 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 For a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod
 
+Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project
+
 Set environment variable SUBDOMAIN to alter the subdomain prefix:
 
     export SUBDOMAIN='ads'
@@ -38,8 +40,6 @@ Output:
     ads-dev.<domain2>    ads-staging.<domain2>    ads.<domain2>
     ads-dev.<domain3>    ads-staging.<domain3>    ads.<domain3>
     ads-dev.<domain4>    ads-staging.<domain4>    ads.<domain4>
-
-Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project
 "
 
 # used by usage() in lib/utils.sh
