@@ -58,10 +58,12 @@ staging
 }"
 
 if [ $# -eq 0 ]; then
+    timestamp "Reading from stdin"
     cat
 else
     for arg; do
         if [ -f "$arg" ]; then
+            timestamp "Reading from file: $arg"
             cat "$arg"
         else
             echo "$arg"
