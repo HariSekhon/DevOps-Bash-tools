@@ -22,8 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prefixes a column of number of spaces before each list item for comparison to
-MarkdownLint MD005 inconsistent list indentation errors
+Prefixes number of spaces before each list item for comparison to MarkdownLint MD005 inconsistent list indentation error
 "
 
 # used by usage() in lib/utils.sh
