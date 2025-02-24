@@ -27,7 +27,7 @@ Prefixes the number of spaces on each offending line of MD005 space indentations
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<markdownlint_args>"
+usage_args="<markdownlint_args_such_as_filenames>"
 
 help_usage "$@"
 
