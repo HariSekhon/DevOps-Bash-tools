@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Prefixes the number of spaces on each offending line of MD005 space indentations for Markdownlint
+Runs Markdownlint and prefixes the spaces count to each offending line of MD005 (inconsistent list indentations)
 
 Workaround for:
 
