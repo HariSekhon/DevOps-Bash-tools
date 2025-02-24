@@ -23,6 +23,12 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Prefixes the number of spaces on each offending line of MD005 space indentations for Markdownlint
+
+Workaround for:
+
+    https://github.com/DavidAnson/markdownlint/issues/1514
+
+Tested on MarkdownLint 0.13.0
 "
 
 # used by usage() in lib/utils.sh
