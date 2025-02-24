@@ -37,8 +37,6 @@ usage_args="<markdownlint_args_such_as_filenames>"
 
 help_usage "$@"
 
-#min_args 1 "$@"
-
 mdl "$@" |
 awk '/: MD005/{print $1}' |
 sed 's/:/ /g' |
