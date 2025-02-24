@@ -58,12 +58,12 @@ staging
 }"
 
 if [ $# -eq 0 ]; then
-    timestamp "Reading from stdin"
+    log "${0##*/}: Reading from stdin"
     cat
 else
     for arg; do
         if [ -f "$arg" ]; then
-            timestamp "Reading from file: $arg"
+            log "${0##*/}: Reading from file: $arg"
             cat "$arg"
         else
             echo "$arg"
@@ -72,6 +72,8 @@ else
 fi |
 sort -u |
 while read -r domain; do
+    # $domain_regex is defined in lib/util.sh
+    # shellcheck disable=SC2154
     if ! [[ "$domain" =~ ^$domain_regex$ ]]; then
         die "Failed domain regex validation: $domain"
     fi
