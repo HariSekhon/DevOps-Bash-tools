@@ -1088,6 +1088,7 @@ Maintain your Git `README.md` and similar Markdown documentation well.
   - `markdown_replace_repos.sh` - replaces the repos block of a given markdown file. Used to keep my GitHub repos Other Repos sections updated
   - `mdl_list_indentations.sh`- runs Markdownlint `mdl` command and prefixes the spaces count to each offending line of MD005 (inconsistent list indentations). Workaround for [Markdownlint issue #1514](https://github.com/DavidAnson/markdownlint/issues/1514)
   - `markdown_list_indentations.sh` - prefixes number of spaces before each list item for comparison to MarkdownLint MD005 inconsistent list indentation error
+  - `markdown_columns_to_table.sh` - converts text columns separated by whitespace to a Markdown table with vertically aligned column pipe chars. Combine with scripts like `domains_subdomains_environments.sh` to generate the markdown documentation of your domains and subdomains per project and environment
 
 ### CI/CD - Continuous Integration / Continuous Deployment
 
@@ -1364,6 +1365,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
   - `cloudflare_zones.sh` - lists Cloudflare zone names and IDs (needed for writing Terraform Cloudflare code)
 - `datadog_api.sh` - queries the [DataDog](https://www.datadoghq.com/) API with authentication
 - `dnsjson.sh` - queries dnsjson.com for DNS records
+- `domains_subdomains_environments.sh` - for a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod. Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project. Combine with `markdown_columns_to_table.sh` to generate the markdown documentation for your domains and subomains per project and environment
 - `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `kong_api.sh` - queries the [Kong API Gateway](https://docs.konghq.com/gateway/latest/)'s Admin API, handling authentication if enabled
