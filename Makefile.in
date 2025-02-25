@@ -820,7 +820,7 @@ wc:
 												-e lib/ \
 												-e install/ \
 												-e setup/ \
-												-e 'tests?/' \
+												-e 'tests*/' \
 												-e vagrant/ \
 												| wc -l | sed 's/[[:space:]]//g'
 	@printf 'of which .bash*:\t\t'
@@ -832,7 +832,7 @@ wc:
 	@printf 'of which setup/:\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c setup/
 	@printf 'of which test(s)/:\t\t'
-	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -Eec 'tests?/'
+	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -Ec 'tests*/'
 	@printf 'of which vagrant/:\t\t'
 	@tr ' ' '\n' <<< "$(CODE_FILES)" | grep -c vagrant/
 
