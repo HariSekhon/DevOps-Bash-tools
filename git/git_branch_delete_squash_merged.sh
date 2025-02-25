@@ -66,7 +66,7 @@ timestamp "Checking out default trunk branch '$default_trunk_branch'"
 git checkout "$default_trunk_branch"
 echo
 
-timestamp "Pulling latest changes"
+timestamp "Pulling latest changes to default trun branch '$default_trunk_branch'"
 git pull
 echo
 
