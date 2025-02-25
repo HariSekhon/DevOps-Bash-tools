@@ -40,8 +40,9 @@ git_root="$(git_root)"
 
 timestamp "Switching to Git root: $git_root"
 echo
+cd "$git_root"
 
-timestamp "Parsing $sonar_project_properties"
+timestamp "Parsing $PWD/$sonar_project_properties"
 org="$(awk -F= '/^[[:space:]]*sonar.organization/{print $2}' "$sonar_project_properties" | sed 's/[[:space:]]//g')"
 project_key="$(awk -F= '/^[[:space:]]*sonar.projectKey/{print $2}' "$sonar_project_properties" | sed 's/[[:space:]]//g')"
 
