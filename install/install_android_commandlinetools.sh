@@ -62,7 +62,7 @@ echo
 #mv -fv ~/Android/Sdk/cmdline-tools/* ~/Android/Sdk/cmdline-tools/latest/ || :
 
 timestamp "Moving ~/Android/Sdk/cmdline-tools/ to ~/Android/Sdk/cmdline-tools/latest/"
-rsync -a --remove-source-files ~/Android/Sdk/cmdline-tools/ ~/Android/Sdk/cmdline-tools/latest/
+rsync -a --remove-source-files ~/Android/Sdk/cmdline-tools/ ~/Android/Sdk/cmdline-tools/latest/ --exclude latest
 echo
 
 timestamp "Removing empty directories under ~/Android/Sdk/cmdline-tools/"
