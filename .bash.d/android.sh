@@ -15,6 +15,10 @@
 
 export ANDROID_HOME="$HOME/Android/Sdk"
 
+# Doesn't work
+#export ANDROID_SDK_ROOT="$ANDROID_HOME"
+
 add_PATH "$ANDROID_HOME/platform-tools"
 
+add_PATH "$ANDROID_HOME/cmdline-tools/latest/bin"
 add_PATH "$ANDROID_HOME/cmdline-tools/bin"
