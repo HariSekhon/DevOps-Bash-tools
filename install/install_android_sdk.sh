@@ -44,7 +44,7 @@ wget -Nc "https://dl.google.com/android/repository/platform-tools-latest-$os.zip
 
 mkdir -p -v ~/Android/Sdk
 
-timestamp "Unzipping Android SDK platform tools to $HOME/Android/Sdk (no overwrite)"
+timestamp "Unzipping Android SDK platform tools to $HOME/Android/Sdk (overwrite)"
 echo
 unzip -o "platform-tools-latest-$os.zip" -d ~/Android/Sdk
 
