@@ -706,6 +706,7 @@ See also [Knowledge Base notes for AWS](https://github.com/HariSekhon/Knowledge-
       - `gcp_iam_users_granted_directly.sh` - lists GCP IAM users which have been granted roles directly in violation of best-practice group-based management
   - `gcs_bucket_project.sh` - finds the GCP project that a given bucket belongs to using the GCP Storage API
   - `gcs_curl_file.sh` - retrieves a GCS file's contents from a given bucket and path using the GCP Storage API. Useful for starting shell pipelines or being called from other scripts
+  - `firebase_foreach_project.sh` - executes a templated command across all Firebase projects, replacing `{project_id}`, `{project_number}` and `{project_name}` in each iteration
 
 See also [Knowledge Base notes for GCP](https://github.com/HariSekhon/Knowledge-Base/blob/main/gcp.md).
 
