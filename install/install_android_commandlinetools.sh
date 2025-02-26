@@ -52,11 +52,16 @@ mkdir -p -v ~/Android/Sdk
 timestamp "Unzipping Android SDK platform tools to $HOME/Android/Sdk (overwrite)"
 echo
 unzip -o "$zip" -d ~/Android/Sdk
+echo
+rm -fr ~/Android/Sdk/cmdline-tools/latest
+mkdir -p -v ~/Android/Sdk/cmdline-tools/latest
+echo
+mv -fv ~/Android/Sdk/cmdline-tools/* ~/Android/Sdk/cmdline-tools/latest/ || :
 
 cat <<EOF
 
 Now set these environment variables in your shell:
 
     export ANDROID_HOME="\$HOME/Android/Sdk"
-    export PATH="\$PATH:\$ANDROID_HOME/cmdline-tools/bin"
+    export PATH="\$PATH:\$ANDROID_HOME/cmdline-tools/latest/bin"
 EOF
