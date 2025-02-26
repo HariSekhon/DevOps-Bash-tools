@@ -39,14 +39,16 @@ timestamp "Determining OS"
 os="$(uname | tr '[:upper:]' '[:lower:]')"
 timestamp "OS is: $os"
 
+zip="platform-tools-latest-$os.zip"
+
 timestamp "Downloading Android platform tools for OS '$os'"
-wget -Nc "https://dl.google.com/android/repository/platform-tools-latest-$os.zip"
+wget -Nc "https://dl.google.com/android/repository/$zip"
 
 mkdir -p -v ~/Android/Sdk
 
 timestamp "Unzipping Android SDK platform tools to $HOME/Android/Sdk (overwrite)"
 echo
-unzip -o "platform-tools-latest-$os.zip" -d ~/Android/Sdk
+unzip -o "$zip" -d ~/Android/Sdk
 
 cat <<EOF
 
