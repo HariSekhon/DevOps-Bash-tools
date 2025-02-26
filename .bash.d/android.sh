@@ -16,4 +16,4 @@
 export ANDROID_HOME="$HOME/Android/Sdk"
 
 add_PATH "$ANDROID_HOME/platform-tools"
-add_PATH "$ANDROID_HOME/commandlinetools/bin"
+add_PATH "$ANDROID_HOME/cmdline-tools/bin"
