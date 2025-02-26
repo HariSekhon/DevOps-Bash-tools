@@ -53,10 +53,12 @@ timestamp "Unzipping Android SDK platform tools to $HOME/Android/Sdk (overwrite)
 echo
 unzip -o "$zip" -d ~/Android/Sdk
 echo
-rm -fr ~/Android/Sdk/cmdline-tools/latest
+#rm -fr ~/Android/Sdk/cmdline-tools/latest
 mkdir -p -v ~/Android/Sdk/cmdline-tools/latest
 echo
-mv -fv ~/Android/Sdk/cmdline-tools/* ~/Android/Sdk/cmdline-tools/latest/ || :
+#mv -fv ~/Android/Sdk/cmdline-tools/* ~/Android/Sdk/cmdline-tools/latest/ || :
+rsync -a --remove-source-files ~/Android/Sdk/cmdline-tools/ ~/Android/Sdk/cmdline-tools/latest/
+find /Users/hari/Android/Sdk/cmdline-tools/ -type d -empty -delete
 
 cat <<EOF
 
