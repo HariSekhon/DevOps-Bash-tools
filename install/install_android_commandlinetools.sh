@@ -61,6 +61,7 @@ echo
 
 #mv -fv ~/Android/Sdk/cmdline-tools/* ~/Android/Sdk/cmdline-tools/latest/ || :
 
+# unpacks to ~/Android/Sdk/cmdline-tools/{bin,lib} but the sdkmanager insists on finding ~/Android/Sdk/cmdline-tools/latest/bin
 timestamp "Moving ~/Android/Sdk/cmdline-tools/ to ~/Android/Sdk/cmdline-tools/latest/"
 rsync -a --remove-source-files ~/Android/Sdk/cmdline-tools/ ~/Android/Sdk/cmdline-tools/latest/ --exclude latest
 echo
