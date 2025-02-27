@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Restores a file from the latest online Mac Timemachine backup where it exists
 
-Prints the backup disks and then checks the
+Prints the backup disks and then checks the variations of the backup paths mount point paths to find
+the newest version
 "
 
 # used by usage() in lib/utils.sh
