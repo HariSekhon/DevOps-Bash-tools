@@ -104,4 +104,4 @@ fi
 
 timestamp "Restoring $filename"
 echo
-echo tmutil restore "$backupfile" "$filename"
+tmutil restore "$backupfile" "$filename"
