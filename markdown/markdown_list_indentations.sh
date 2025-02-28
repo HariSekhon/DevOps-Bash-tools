@@ -46,7 +46,7 @@ for filename; do
     # match any line in format:
     #
     #   <filename_non_space> <line_number> - list item
-    awk '/^[^[:space:]]+[[:space:]][[:digit:]]+[[:space:]][[:space:]]*-/ {print}' |
+    awk '/^[^[:space:]]+[[:space:]][[:digit:]]+[[:space:]][[:space:]]*(-|[[:digit:]]+\.)/ {print}' |
     while read -r line; do
         sed "s/^${filename}[[:space:]]\+[[:digit:]]\+[[:space:]]//" <<< "$line" |
         # print the number of spaces before list items
