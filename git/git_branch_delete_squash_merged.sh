@@ -57,7 +57,8 @@ git checkout "$branch"
 echo
 
 timestamp "Pulling latest changes to branch '$branch'"
-git pull
+git pull ||
+timestamp "Pull failed but that may be ok because the upstream branch may have been auto-deleted upon merge, continuing..."
 echo
 
 timestamp "Checking out default trunk branch '$default_trunk_branch'"
