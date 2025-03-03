@@ -39,15 +39,15 @@ jobs:
     - uses: actions/cache@v4
       with:
         path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-bash-tools  # ${{ hashFiles('**/requirements.txt') }}
+        key: pip-${{ runner.os }}-${{ runner.arch }}  # -${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-pip-bash-tools
+          pip-${{ runner.os }}-${{ runner.arch }}
     - uses: actions/cache@v4
       with:
         path: ~/.cpanm
-        key: ${{ runner.os }}-cpanm-bash-tools-${{ hashFiles('**/cpan-requirements.txt') }}
+        key: cpanm-${{ runner.os }}-${{ runner.arch }}  # -${{ hashFiles('**/cpan-requirements.txt') }}
         restore-keys: |
-          ${{ runner.os }}-cpanm-bash-tools
+          cpanm-${{ runner.os }}-${{ runner.arch }}
     - name: init
       run: make init
     - name: build
