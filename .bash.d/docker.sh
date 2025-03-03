@@ -138,7 +138,7 @@ function dockerrunrm(){
     #    echo "warning: using alpine:2.* with args but alpine:2.* doesn't have a default CMD so adding 'sh' arg" >&2
     #    args="$args sh"
     #fi
-    basedir="${PWD##*/}"
+    local basedir="${PWD##*/}"
     docker run --rm -ti -v "$PWD":"/$basedir" -w "/$basedir" "${args[@]}"
 }
 alias drun='docker run --rm -ti -v "${PWD}":/app'
