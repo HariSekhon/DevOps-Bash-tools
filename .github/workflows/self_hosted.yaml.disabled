@@ -42,7 +42,7 @@ jobs:
         key: ${{ runner.os }}-pip-bash-tools  # ${{ hashFiles('**/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-bash-tools
-    - uses: actions/cache@v1
+    - uses: actions/cache@v4
       with:
         path: ~/.cpanm
         key: ${{ runner.os }}-cpanm-bash-tools-${{ hashFiles('**/cpan-requirements.txt') }}
