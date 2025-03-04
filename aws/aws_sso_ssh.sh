@@ -124,4 +124,4 @@ timestamp "SSH'ing to $server"
 # want splitting
 # shellcheck disable=SC2086
 # the -q option suppressed the Motd from messing up my terminal
-exec ssh -q ${SSH_OPTIONS:-} "$server"
+exec ssh ${SSH_OPTIONS:-} "$server"
