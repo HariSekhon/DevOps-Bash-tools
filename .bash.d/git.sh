@@ -246,9 +246,7 @@ gitbrowse(){
         return 1
     fi
     if [[ "$url_base" =~ github.com ]]; then
-        if [ -n "$path" ]; then
-            path="blob/master/$path"
-        else
+        if [ -z "$path" ]; then
             path+="#readme"
         fi
     else
