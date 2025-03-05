@@ -297,6 +297,7 @@ tfsec  # Terraform static analysis by AquaSec
 thrift
 tidy-html5
 tmux
+tokei  # lines of code counter
 tree
 ttygif  # records terminal and creates gif
 #ttyrec  # pulled as dependency of ttygif
