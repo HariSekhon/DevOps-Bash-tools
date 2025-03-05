@@ -122,7 +122,7 @@ alias rr='newshell'
 
 alias record=script
 
-alias dl="youtube_download_video.sh --retries 50"
+alias dl="youtube_download_video.sh"
 dle(){ dl "$@" && exit; }
 
 alias l33tmode='welcome; retmode=on; echo l33tm0de on'
