@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Downloads and runs the Keeper CLI installer on Mac
 
-There is no release for Linux at time of writing
+If not on Mac, tries to install Keeper CLI via Python pip
 "
 
 # used by usage() in lib/utils.sh
@@ -41,7 +41,8 @@ max_args 1 "$@"
 version="${1:-latest}"
 
 if ! is_mac; then
-    usage "Only tested on Mac at this time"
+    pip3 install keepercommander
+    exit 0
 fi
 
 export OS_DARWIN=mac
