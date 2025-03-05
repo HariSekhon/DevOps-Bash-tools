@@ -16,3 +16,4 @@
 netcat-openbsd
 skopeo
 steghide
+tokei  # lines of code counter
