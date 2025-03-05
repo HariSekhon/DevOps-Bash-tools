@@ -312,6 +312,7 @@ tftp
 tftpd
 tilda
 toilet
+tokei  # lines of code counter
 tomboy
 traceroute
 tshark
