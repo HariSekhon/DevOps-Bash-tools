@@ -123,7 +123,6 @@ alias rr='newshell'
 alias record=script
 
 alias dl="youtube_download_video.sh"
-dle(){ cd ~/Downloads && dl "$@" && exit; }
 
 alias l33tmode='welcome; retmode=on; echo l33tm0de on'
 alias leetmode=l33tmode
