@@ -120,6 +120,13 @@ clip(){
     fi
 }
 
+dle(){
+    cd ~/Downloads &&
+    dl "$@" &&
+    osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
+    exit
+}
+
 deccp(){
     # shellcheck disable=SC2119
     decomment.sh "$@" |
