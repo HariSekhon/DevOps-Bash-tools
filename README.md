@@ -561,6 +561,7 @@ Prometheus, OpenTSDB, InfluxDB etc.
   - `aws_sso_accounts_missing_from_list.sh` - for a list of AWS Account IDs in stdin or files, finds AWS SSO accounts in AWS config missing from the provided list
   - `aws_sso_env_creds.sh` - retrieves AWS SSO session credentials in the format of environment export commands for copying to other systems like Terraform Cloud
   - `aws_sso_role_arn.sh` - prints the currently authenticated AWS SSO user's role ARN in IAM policy usable format
+  - `aws_sso_role_arn_full.sh` - prints the currently authenticated AWS SSO user's role ARN in an S3 IAM policy usable format
   - `aws_sso_role_arns.sh` - prints all AWS SSO role ARNs in IAM policy usable format
   - `aws_profile_config_add_if_missing.sh` - reads AWS profile config blocks from stdin and appends them to the `~/.aws/config` file if the profile section is not found
   - `aws_profile_generate_direnvs.sh` - generates subdirectories containing the `config.ini` and `.envrc` for every AWS profile found in the given file or `$AWS_CONFIG_FILE` or `~/.aws/config`. Useful to take a large generated AWS `config.ini` from `aws_sso_configs.sh` and then split it into subdirectories for direnvs
