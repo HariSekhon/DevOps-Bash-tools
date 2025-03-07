@@ -121,7 +121,9 @@ clip(){
 }
 
 dle(){
-    cd ~/Downloads &&
+    if [ "$PWD" = "$HOME" ]; then
+        cd ~/Downloads
+    fi
     dl "$@" &&
     osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
     exit
