@@ -125,7 +125,8 @@ dle(){
         cd ~/Downloads
     fi
     dl "$@" &&
-    osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
+    # doesn't persist past a pause/unpause
+    #osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
     exit
 }
 
