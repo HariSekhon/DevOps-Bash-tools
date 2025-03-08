@@ -123,6 +123,8 @@ alias rr='newshell'
 alias record=script
 
 alias dl="BACKGROUND_VIDEO=1 youtube_download_video.sh"
+#alias vidopen="vidopen.sh"
+#alias vidopenplay="PLAY_VIDEO=1 vidopen.sh"
 
 alias l33tmode='welcome; retmode=on; echo l33tm0de on'
 alias leetmode=l33tmode
