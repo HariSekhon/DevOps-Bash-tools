@@ -24,6 +24,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Opens the given video file using whatever available tool is found on Linux or Mac
 
+On Mac, the following environment variable can alter behaviour:
+
+    DEFAULT_VIDEO_PLAYER - the name of the video player to use eg. 'QuickTime Player'
+    BACKGROUND_VIDEO     - open in the background (does not play), used in scripts like those below
+                           to prevent them popping up long-running downloads into the foreground
+                           interrupting your workflow and having to Cmd-Tab back every time
+
 Used by the following scripts:
 
     youtube_download_video.sh
@@ -57,6 +64,9 @@ if is_mac; then
     opts=()
     if [ -n "${BACKGROUND_VIDEO:-}" ]; then
         opts+=(-g)
+    fi
+    if [ -n "${DEFAULT_VIDEO_PLAYER:-}" ]; then
+        opts+=(-a "$DEFAULT_VIDEO_PLAYER")
     fi
     open "${opts[@]}" "$video"
 else  # assume Linux
