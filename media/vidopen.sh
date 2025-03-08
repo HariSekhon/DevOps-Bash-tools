@@ -27,9 +27,10 @@ Opens the given video file using whatever available tool is found on Linux or Ma
 On Mac, the following environment variable can alter behaviour:
 
     DEFAULT_VIDEO_PLAYER - the name of the video player to use eg. 'QuickTime Player'
-    BACKGROUND_VIDEO     - open in the background (does not play), used in scripts like those below
-                           to prevent them popping up long-running downloads into the foreground
-                           interrupting your workflow and having to Cmd-Tab back every time
+    BACKGROUND_VIDEO     - if set to any value, opens in the background (does not automatically play),
+                           used in scripts like those below to prevent long-running downloads from popping into the
+                           foreground interrupting your workflow and having to Cmd-Tab back every time
+    PLAY_VIDEO           - if set to any value, starts playing the video (currently only tested on 'QuickTime Player')
 
 Used by the following scripts:
 
@@ -69,6 +70,9 @@ if is_mac; then
         opts+=(-a "$DEFAULT_VIDEO_PLAYER")
     fi
     open "${opts[@]}" "$video"
+    if [ -n "${PLAY_VIDEO:-}" ]; then
+        osascript -e "tell application \"${DEFAULT_VIDEO_PLAYER:-QuickTime Player}\" to play document 1"
+    fi
 else  # assume Linux
     found=0
     for linux_command in "${linux_commands[@]}"; do
