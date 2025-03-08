@@ -54,7 +54,11 @@ linux_commands=(
     #smplayer  # requires args unlike the others: smplayer -send-action play_current_file
 
 if is_mac; then
-    open "$video"
+    opts=()
+    if [ -n "${BACKGROUND_VIDEO:-}" ]; then
+        opts+=(-g)
+    fi
+    open "${opts[@]}" "$video"
 else  # assume Linux
     found=0
     for linux_command in "${linux_commands[@]}"; do
