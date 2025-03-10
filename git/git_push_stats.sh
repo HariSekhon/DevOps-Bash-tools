@@ -39,13 +39,13 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
-num_commits="$("$srcdir/git_origin_commits_to_push.sh")"
+num_commits="$("$srcdir/git_origin_commit_count_to_push.sh")"
 
 num_lines_diff="$("$srcdir/git_origin_diff_to_push.sh" | wc -l | sed 's/[[:space:]]*//g')"
 
 # delete the last line of diff only if it's blank,
 # so that when there is nothing to push we get 0 instead of 1 line as the result
-num_lines_changed="$("$srcdir/git_origin_linecount_to_push.sh")"
+num_lines_changed="$("$srcdir/git_origin_line_count_to_push.sh")"
 
 cat <<EOF
 Stats for Push to Origin
