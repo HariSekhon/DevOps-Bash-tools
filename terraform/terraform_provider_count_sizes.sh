@@ -50,25 +50,32 @@ help_usage "$@"
 
 dir="${1:-.}"
 
-timestamp "Finding Terraform providers and hashing them"
+#timestamp "Finding Terraform providers"
 # slow way of finding duplicates
-providers="$(find "$dir" -type f -name 'terraform-provider-*' -exec md5sum {} \;)"
-#providers="$(find "$dir" -type f -name 'terraform-provider-*' -exec du -m {} \;)"
+#providers="$(find "$dir" -type f -name 'terraform-provider-*' -exec md5sum {} \;)"
+providers="$(find "$dir" -type f -name 'terraform-provider-*')"
+#echo
 
-timestamp "Finding duplicate providers by hash"
-echo
-awk '{print $1}' <<< "$providers" |
+#timestamp "Ranking providers by duplication level"
+#echo
+
+strip_prefix(){
+    sed '
+        s|.*\.terraform/providers/||;
+        s|registry.terraform.io/||;
+    '
+}
+
+strip_prefix <<< "$providers" |
 sort |
 uniq -c |
 sort -k1nr |
-while read -r count hash; do
+while read -r count filepath; do
     echo -n "$count "
     # head -n 1 is more reliable than grep -m 1 on some platforms (macOS BSD)
-    filename="$(grep "$hash" <<< "$providers" | head -n1 | awk '{print $2}')"
+    filename="$(grep "$filepath" <<< "$providers" | head -n 1)"
     du -h "$filename" |
     awk '{printf $1" "}'
-    filename_short="${filename##*.terraform/providers/}"
-    filename_short="${filename_short#registry.terraform.io/}"
-    echo "$filename_short"
+    strip_prefix <<< "$filename"
 done |
 column -t
