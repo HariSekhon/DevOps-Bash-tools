@@ -49,4 +49,4 @@ help_usage "$@"
 
 aws iam list-roles --query 'Roles[*].Arn' --output text |
 tr '[:space:]' '\n' |
-grep 'aws-reserved/sso.amazonaws.com'
+grep '/aws-reserved/sso.amazonaws.com/'
