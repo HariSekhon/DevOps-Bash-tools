@@ -28,6 +28,12 @@ Useful to find space wastage caused by using Terragrunt without configuring a un
 
     https://developer.hashicorp.com/terraform/cli/config/config-file#provider-plugin-cache
 
+    https://terragrunt.gruntwork.io/docs/features/provider-cache-server/
+
+    https://github.com/gruntwork-io/terragrunt/issues/561
+
+    https://github.com/gruntwork-io/terragrunt/issues/2920
+
 For example, in a repo checkout for a single project, I had 30 x 600MB AWS provider
 
     30  597M  hashicorp/aws/5.80.0/darwin_arm64/terraform-provider-aws_v5.80.0_x5
