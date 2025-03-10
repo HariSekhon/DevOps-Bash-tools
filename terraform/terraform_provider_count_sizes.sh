@@ -22,9 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Finds duplicate Terraform providers, often caused by using the default mode in Terragrunt without using Plugin Cache
+Finds duplicate Terraform providers
 
-This will show you why if you're using Terragrunt to split the code base you need to configure a unified Terraform Plugin Cache
+Useful to find wastage caused by using Terragrunt without configuring a unified Terraform Plugin Cache:
 
     https://developer.hashicorp.com/terraform/cli/config/config-file#provider-plugin-cache
 
