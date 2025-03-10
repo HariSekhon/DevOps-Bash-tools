@@ -47,12 +47,21 @@ help_usage "$@"
 #    echo >&2
 #fi
 
-aws sts get-caller-identity --query Arn --output text |
+role_sts="$(aws sts get-caller-identity --query Arn --output text)"
+
 # replace assumed-role with just role
 # strip the /hari@domain.com user suffix which we don't use when referencing the role in all IAM policies
 # since it can be used by many users
-sed '
-    s|^arn:aws:sts::|arn:aws:iam::|;
-    s|:assumed-role/|:role/|;
-    s|/[^/]*$||
-'
+#role_sts_without_user="$(
+#    sed '
+#        s|^arn:aws:sts::|arn:aws:iam::|;
+#        s|:assumed-role/|:role/|;
+#        s|/[^/]*$||
+#    ' <<< "$role_sts"
+#)"
+role_sts_without_user="${role_sts%/*}"
+
+role_name="${role_sts_without_user##*/}"
+
+aws iam list-roles --query 'Roles[*].Arn' --output text | tr '[:space:]' '\n' |
+grep "/$role_name$"
