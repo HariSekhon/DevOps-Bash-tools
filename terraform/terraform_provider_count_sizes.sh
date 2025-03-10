@@ -31,9 +31,10 @@ This will show you why if you're using Terragrunt to split the code base you nee
 For example, in a repo checkout for a single project, I had 30 x 600MB AWS provider
 
     30  597M  hashicorp/aws/5.80.0/darwin_arm64/terraform-provider-aws_v5.80.0_x5
-    7   631M  ashicorp/aws/5.90.1/darwin_arm64/terraform-provider-aws_v5.90.1_x5
+    7   637M  hashicorp/aws/5.90.1/darwin_arm64/terraform-provider-aws_v5.90.1_x5
     4   637M  hashicorp/aws/5.90.0/darwin_arm64/terraform-provider-aws_v5.90.0_x5
     3   599M  hashicorp/aws/5.81.0/darwin_arm64/terraform-provider-aws_v5.81.0_x5
+    2   593M  hashicorp/aws/5.79.0/darwin_arm64/terraform-provider-aws_v5.79.0_x5
 
 Output format:
 
