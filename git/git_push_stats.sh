@@ -48,7 +48,9 @@ num_lines_diff="$("$srcdir/git_origin_diff_to_push.sh" | wc -l | sed 's/[[:space
 num_lines_changed="$("$srcdir/git_origin_line_count_to_push.sh")"
 
 cat <<EOF
-Stats for Push to Origin
+Stats for Push to Origin:
+
+    $(git remote -v | awk '/^origin[[:space:]]/{print $2; exit}')
 
 Number of Commits: $num_commits
 
