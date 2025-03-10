@@ -187,7 +187,7 @@ git_root(){
     popd &>/dev/null || return 1
 }
 alias gitroot=git_root
-alias cdgitroot="cd $(git_root)"
+alias cdgitroot='cd "$(git_root)"'
 
 gitgc(){
     cd "$(git_root)" || :
