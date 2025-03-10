@@ -66,6 +66,12 @@ alias tgaa='tga -auto-approve'
 alias tgip='tg init && tgp'
 alias tgia='tg init && tga'
 
+# the fix for .terraform.lock.hcl:
+#
+#   the cached package for registry.terraform.io/hashicorp/aws 5.80.0 (in .terraform/providers) does not match any of the checksums recorded in the dependency lock file
+#
+alias tgprov='terragrunt providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=linux_amd64'
+
 unalias tgfu &>/dev/null || :
 tgfu(){
     local lock_id="${1:-}"
