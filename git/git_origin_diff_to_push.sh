@@ -33,7 +33,7 @@ Example:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<git_diff_options>"
+usage_args="[<git_diff_options>]"
 
 help_usage "$@"
 
