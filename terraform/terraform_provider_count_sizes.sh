@@ -57,6 +57,10 @@ dir="${1:-.}"
 providers="$(find "$dir" -type f -name 'terraform-provider-*')"
 #echo
 
+if [ -z "$providers" ]; then
+    die "ERROR: no Terraform providers found. Did you run this from a Terraform / Terragrunt working directory that has been used?"
+fi
+
 #timestamp "Ranking providers by duplication level"
 #echo
 
