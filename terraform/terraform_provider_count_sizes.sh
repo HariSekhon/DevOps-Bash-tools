@@ -38,7 +38,7 @@ For example, in a repo checkout for a single project, I had 30 x 600MB AWS provi
 
 Output format:
 
-    <count>    <size_provider_MB>    <provider>
+    <count>    <provider_size>    <provider>
 "
 
 # used by usage() in lib/utils.sh
