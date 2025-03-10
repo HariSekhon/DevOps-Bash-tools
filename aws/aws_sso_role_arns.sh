@@ -49,7 +49,4 @@ help_usage "$@"
 
 aws iam list-roles --query 'Roles[*].Arn' --output text |
 tr '[:space:]' '\n' |
-grep 'aws-reserved/sso.amazonaws.com' |
-# strip the middle bit which isn't in the IAM policy format
-#sed ' s|aws-reserved/sso.amazonaws.com/[^/]*/||'
-#warn "Don't use these for S3 bucket policies - they need the '/aws-reserved/sso.amazonaws.com/eu-west1/' middle part we strip out"
+grep 'aws-reserved/sso.amazonaws.com'
