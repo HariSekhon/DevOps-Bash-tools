@@ -53,6 +53,7 @@ configs/.sawsrc
 configs/.screenrc
 configs/.sdkman/etc/config
 configs/.sqliterc
+configs/.terraformrc
 configs/.tfdocs.d/.terraform-docs.yml
 configs/.tmux.conf
 configs/.toprc
