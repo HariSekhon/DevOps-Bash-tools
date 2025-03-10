@@ -24,7 +24,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Finds duplicate Terraform providers and their sizes
 
-Useful to find wastage caused by using Terragrunt without configuring a unified Terraform Plugin Cache:
+Useful to find space wastage caused by using Terragrunt without configuring a unified Terraform Plugin Cache:
 
     https://developer.hashicorp.com/terraform/cli/config/config-file#provider-plugin-cache
 
