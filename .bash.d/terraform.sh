@@ -70,6 +70,7 @@ alias tgia='tg init && tga'
 #
 #   the cached package for registry.terraform.io/hashicorp/aws 5.80.0 (in .terraform/providers) does not match any of the checksums recorded in the dependency lock file
 #
+alias tfprov='terraform  providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=linux_amd64'
 alias tgprov='terragrunt providers lock -platform=windows_amd64 -platform=darwin_amd64 -platform=linux_amd64'
 
 unalias tgfu &>/dev/null || :
