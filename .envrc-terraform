@@ -21,6 +21,12 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 #srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
+# set this to the local repo's config instead of $HOME/.terraformrc
+#export TF_CLI_CONFIG_FILE="$PWD/.terraformrc"
+
+# if not already set in $HOME/.terraformrc
+#export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+
 # XXX: beware that tfenv and tgswitch replace the terraform / terragrunt in the path and this is a race condition between different shells
 #	   it is not as good as the KUBECONFIG trick done in the .envrc-kubernetes
 
