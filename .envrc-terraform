@@ -41,6 +41,17 @@ export TFENV_AUTO_INSTALL=true
 # Terragrunt
 export TG_VERSION=0.39.2
 
+# Terragrunt Provide Cache prevents wasting tonnes of space &time re-downloading duplicate 600MB
+# Provider plugins for every Terragrunt module resulting in massive duplication see:
+#
+#   https://terragrunt.gruntwork.io/docs/features/provider-cache-server/
+#
+# Stores plugins in:
+#
+#   $HOME/.cache/terragrunt/providers
+#
+export TG_PROVIDER_CACHE=1
+
 # if tgswitch is installed, trigger it to use the above TF_VERSION environment variable and switch to the correct version of Terragrunt
 # better than adding the ugly shell hook from the docs - https://github.com/warrensbox/tgswitch?tab=readme-ov-file#get-the-version-from-a-subdirectory
 if type -P tgswitch &>/dev/null; then
