@@ -22,7 +22,7 @@ set -euo pipefail
 #srcdir="$(dirname "${BASH_SOURCE[0]}")"
 
 # set this to the local repo's config instead of $HOME/.terraformrc
-#export TF_CLI_CONFIG_FILE="$PWD/.terraformrc"
+#export TF_CLI_CONFIG_FILE="$PWD/configs/.terraformrc"
 
 # if not already set in $HOME/.terraformrc
 #export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
