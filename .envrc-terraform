@@ -49,6 +49,8 @@ export TG_VERSION=0.39.2
 # Stores plugins in:
 #
 #   $HOME/.cache/terragrunt/providers
+#       or on Mac
+#   $HOME/Library/Caches/terragrunt/providers
 #
 export TG_PROVIDER_CACHE=1
 #export TG_PROVIDER_CACHE_DIR=/new/path/to/cache/dir
