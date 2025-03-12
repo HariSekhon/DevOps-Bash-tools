@@ -40,6 +40,8 @@ elif ! [ -x "$TERRAGRUNT_TFPATH" ]; then
     unset TERRAGRUNT_TFPATH
 fi
 
+export TG_PROVIDER_CACHE=1
+
 alias tf=terraform
 alias tfp='tf plan'
 alias tfa='tf apply'
