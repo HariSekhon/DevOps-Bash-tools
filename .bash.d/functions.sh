@@ -201,6 +201,11 @@ findup(){
     return 1
 }
 
+cdup(){
+    local arg="$1"
+    cd "$(findup "$arg")"
+}
+
 lld(){
     {
         local target="$1"
