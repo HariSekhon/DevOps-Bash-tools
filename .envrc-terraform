@@ -51,6 +51,7 @@ export TG_VERSION=0.39.2
 #   $HOME/.cache/terragrunt/providers
 #
 export TG_PROVIDER_CACHE=1
+#export TG_PROVIDER_CACHE_DIR=/new/path/to/cache/dir
 
 # if tgswitch is installed, trigger it to use the above TF_VERSION environment variable and switch to the correct version of Terragrunt
 # better than adding the ugly shell hook from the docs - https://github.com/warrensbox/tgswitch?tab=readme-ov-file#get-the-version-from-a-subdirectory
