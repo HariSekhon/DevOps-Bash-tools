@@ -31,6 +31,9 @@ export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 #export HOMEBREW_DEBUG=1
 #export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30  # default: 120
 
+# Stops Mac calling update_terminal_cwd() which causes a tonne of noise during set -x tracing
+export INSIDE_EMACS=1
+
 alias osash="osascript -i"
 alias osashell=osash
 
