@@ -80,6 +80,7 @@ yt-dlp \
     --merge-output-format mp4 \
     --continue \
     --no-overwrite \
+    --retries 50 \
     --output "$filename" \
     ${DEBUG:+--verbose} \
     "$url"
@@ -103,4 +104,6 @@ timestamp "Opening video file: $filename"
 #    timestamp "Showing in Finder"
 #    open -R "$filename"
 #fi
-"$srcdir/vidopen.sh" "$filename"
+if [ -z "${NO_VIDEO_OPEN:-}" ]; then
+    "$srcdir/vidopen.sh" "$filename"
+fi
