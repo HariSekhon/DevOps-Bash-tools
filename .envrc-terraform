@@ -53,7 +53,10 @@ export TG_VERSION=0.39.2
 #   $HOME/Library/Caches/terragrunt/providers
 #
 export TG_PROVIDER_CACHE=1
+export TG_PROVIDER_CACHE_HOST=127.0.0.1
+#
 #export TG_PROVIDER_CACHE_DIR="/new/path/to/cache/dir"
+#
 # to cache from registries other than registry.terraform.io, registry.opentofu.org
 # eg. if you have your own private registry
 #export TG_PROVIDER_CACHE_REGISTRY_NAMES="example1.com,example2.com"
