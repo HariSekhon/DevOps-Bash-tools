@@ -58,6 +58,10 @@ tffu(){
     if [ -z "$lock_id" ]; then
         lock_id="$(terraform plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $NF}')"
     fi
+    if [ -z "$lock_id" ]; then
+        echo "Failed to determine lock ID" >&2
+        return 1
+    fi
     terraform force-unlock -force "$lock_id"
 }
 
@@ -81,6 +85,10 @@ tgfu(){
     # self-determine the lock if not provided
     if [ -z "$lock_id" ]; then
         lock_id="$(terragrunt plan -input=false -no-color 2>&1 | grep -A 1 'Lock Info:' | awk '/ID:/{print $NF}')"
+    fi
+    if [ -z "$lock_id" ]; then
+        echo "Failed to determine lock ID" >&2
+        return 1
     fi
     terragrunt force-unlock -force "$lock_id"
 }
