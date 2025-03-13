@@ -41,6 +41,7 @@ elif ! [ -x "$TERRAGRUNT_TFPATH" ]; then
 fi
 
 export TG_PROVIDER_CACHE=1
+export TG_PROVIDER_CACHE_HOST=172.0.0.1
 
 alias tf=terraform
 alias tfp='tf plan'
