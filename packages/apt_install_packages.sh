@@ -136,5 +136,5 @@ if [ -n "${NO_FAIL:-}" ]; then
 else
     #"$srcdir/apt_wait.sh"
     # shellcheck disable=SC2086
-    $sudo "$apt" install -y $opts $packages
+    $sudo "$apt" -o DPkg::Lock::Timeout=600 install -y $opts $packages
 fi
