@@ -63,11 +63,11 @@ fi
 opts=""
 if [ -f /.dockerenv ]; then
     echo "running inside docker, not installing recommended extra packages unless specified to save space"
-    opts+=" --no-install-recommends"
+    opts="$opts --no-install-recommends"
 fi
 if is_CI; then
     echo "running in CI quiet mode"
-    opts+=" -q"
+    opts="$opts -q"
     echo
     echo "/etc/apt/sources.list:"
     cat /etc/apt/sources.list || :
