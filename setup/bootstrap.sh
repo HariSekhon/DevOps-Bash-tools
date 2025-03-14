@@ -47,7 +47,7 @@ elif [ "$(uname -s)" = Linux ]; then
         fi
         opts="-o DPkg::Lock::Timeout=1200"
         if [ -z "${PS1:-}" ]; then
-            opts+=" -qq"
+            opts="$opts -qq"
         fi
         $sudo apt-get update  $opts
         $sudo apt-get install $opts -y git make curl wget --no-install-recommends
