@@ -60,11 +60,12 @@ elif [ "$os" = "Linux" ]; then
     elif type -P apt &>/dev/null; then
         echo "Installing via APT"
         if grep -q Ubuntu /etc/*release; then
-            $sudo apt update
-            $sudo apt install -y software-properties-common
+            opts="-o DPkg::Lock::Timeout=1200"
+            $sudo apt update $opts
+            $sudo apt install -y $opts software-properties-common
             $sudo apt-add-repository -y --update ppa:ansible/ansible
-            $sudo apt update
-            $sudo apt install -y ansible
+            $sudo apt update $opts
+            $sudo apt install -y $opts ansible
         else
             # assume Debian
             line='deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main'
