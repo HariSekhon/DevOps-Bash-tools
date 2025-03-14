@@ -207,7 +207,7 @@ HashiCorp Packer templates to build portable virtual machines in OVA format for 
 [![GitHub stars](https://img.shields.io/github/stars/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/HariSekhon/Spotify-Playlists?logo=github)](https://github.com/HariSekhon/Spotify-Playlists/network)
 
-240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: https://open.spotify.com/user/harisekhon. Spotify API tools are submodules of this repo.
+240+ playlists, 36,000+ tracks - in both Spotify URI and human-readable formats. Spotify Profile: <https://open.spotify.com/user/harisekhon>. Spotify API tools are submodules of this repo.
 
 [![Stargazers over time](https://starchart.cc/HariSekhon/Spotify-Playlists.svg)](https://starchart.cc/HariSekhon/Spotify-Playlists)
 
