@@ -60,7 +60,7 @@ if ! type "$apt" >/dev/null 2>&1; then
     exit 1
 fi
 
-opts=""
+opts="-o DPkg::Lock::Timeout=1200"
 if [ -f /.dockerenv ]; then
     echo "running inside docker, not installing recommended extra packages unless specified to save space"
     opts="$opts --no-install-recommends"
