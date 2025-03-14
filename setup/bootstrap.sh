@@ -45,11 +45,11 @@ elif [ "$(uname -s)" = Linux ]; then
         if [ -n "${CI:-}" ]; then
             export DEBIAN_FRONTEND=noninteractive
         fi
-        opts="-o DPkg::Lock::Timeout=600"
+        opts="-o DPkg::Lock::Timeout=1200"
         if [ -z "${PS1:-}" ]; then
             opts+=" -qq"
         fi
-        $sudo apt-get update $opts
+        $sudo apt-get update  $opts
         $sudo apt-get install $opts -y git make curl wget --no-install-recommends
     elif type yum >/dev/null 2>&1; then
         if grep -qi 'NAME=.*CentOS' /etc/*release; then
