@@ -72,8 +72,8 @@ elif [ "$(uname -s)" = Linux ]; then
         retry $sudo apk update
         retry $sudo apk add --no-progress bash git make
     elif type apt-get >/dev/null 2>&1; then
-        retry $sudo apt-get update -q
-        retry $sudo apt-get install -qy git make
+        retry $sudo apt-get -o DPkg::Lock::Timeout=600 update -q
+        retry $sudo apt-get -o DPkg::Lock::Timeout=600 install -qy git make
     elif type yum >/dev/null 2>&1; then
         #retry $sudo yum makecache
         retry $sudo yum install -qy git make
