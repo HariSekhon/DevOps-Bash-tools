@@ -41,10 +41,11 @@ if grep -E '^DISTRIB_RELEASE=(19|18\.10)' /etc/*release; then
     $sudo snap install powershell --classic
 else
     version="$(awk -F= '/^DISTRIB_RELEASE=/{print $2}' /etc/*release)"
-    $sudo apt-get update
-    $sudo apt-get install -y wget apt-transport-https
+    opts="-o DPkg::Lock::Timeout=1200"
+    $sudo apt-get update $opts
+    $sudo apt-get install -y $opts wget apt-transport-https
     wget -q "https://packages.microsoft.com/config/ubuntu/$version/packages-microsoft-prod.deb"
     $sudo dpkg -i packages-microsoft-prod.deb
-    $sudo apt-get update
-    $sudo apt-get install -y powershell
+    $sudo apt-get update $opts
+    $sudo apt-get install -y $opts powershell
 fi
