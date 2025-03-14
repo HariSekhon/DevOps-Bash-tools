@@ -1,5 +1,4 @@
-Setup
-=====
+# Setup
 
 - Package lists used by the `make` build at the top level
   - OS packages - Mac OS X / macOS and Linux distributions (RHEL/CentOS, Debian/Ubuntu, Alpine)
@@ -14,6 +13,6 @@ Setup
 
 Almost nothing should need to be done manually, a single `make desktop` command and you should be up and running.
 
-### Mac XCode for Developers
+## Mac XCode for Developers
 
 Run `git` - it will automatically prompt to install XCode if needed. If git runs, XCode is likely already installed.
