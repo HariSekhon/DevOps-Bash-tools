@@ -45,9 +45,9 @@ elif [ "$(uname -s)" = Linux ]; then
         if [ -n "${CI:-}" ]; then
             export DEBIAN_FRONTEND=noninteractive
         fi
-        opts=""
+        opts="-o DPkg::Lock::Timeout=600"
         if [ -z "${PS1:-}" ]; then
-            opts="-qq"
+            opts+=" -qq"
         fi
         $sudo apt-get update $opts
         $sudo apt-get install $opts -y git make curl wget --no-install-recommends
