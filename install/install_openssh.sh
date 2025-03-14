@@ -33,8 +33,9 @@ sudo=""
 
 if ! command -v sshd &>/dev/null; then
     if command -v apt-get &>/dev/null; then
-        $sudo apt-get update
-        $sudo apt-get install -y openssh-server
+        opts="-o DPkg::Lock::Timeout=1200"
+        $sudo apt-get update $opts
+        $sudo apt-get install -y $opts openssh-server
     elif command -v yum &>/dev/null; then
         $sudo yum install -y openssh-server
     elif command -v apk &>/dev/null; then
