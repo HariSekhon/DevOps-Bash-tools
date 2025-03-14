@@ -45,19 +45,20 @@ if command -v yum 2>/dev/null; then
     $sudo yum install -y java-sdk
     $sudo yum install -y --nogpgcheck sbt
 elif command -v apt-get 2>/dev/null; then
-    $sudo apt-get update
+    opts="-o DPkg::Lock::Timeout=1200"
+    $sudo apt-get update $opts
     openjdk="$(apt-cache search openjdk | grep -Eo 'openjdk-[[:digit:]]+-jdk' | head -n1)"
-    $sudo apt-get install -y "$openjdk" scala gnupg2
+    $sudo apt-get install -y $opts "$openjdk" scala gnupg2
     echo "deb https://repo.scala-sbt.org/scalasbt/debian all main" |
         $sudo tee /etc/apt/sources.list.d/sbt.list
     echo "deb https://repo.scala-sbt.org/scalasbt/debian /" |
         $sudo tee /etc/apt/sources.list.d/sbt_old.list
-    $sudo apt-get install -y apt-transport-https curl gnupg
+    $sudo apt-get install -y $opts apt-transport-https curl gnupg
     curl -sL "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2EE0EA64E40A89B84B2DF73499E82A75642AC823" |
         ${sudo:+$sudo -H} gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/scalasbt-release.gpg --import
     $sudo chmod 644 /etc/apt/trusted.gpg.d/scalasbt-release.gpg
-    $sudo apt-get update
-    $sudo apt-get install -y sbt
+    $sudo apt-get update $opts
+    $sudo apt-get install -y $opts sbt
 else
     echo "No mainstream package managers detected, doing tarball install"
     if ! [ -e "$BASE/sbt" ]; then
