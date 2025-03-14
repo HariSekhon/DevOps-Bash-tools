@@ -78,6 +78,12 @@ while read -r repo dir; do
             continue
         fi
         perl -pe "s/(?<!- )(devops-)*bash-tools/$repo/i" "$filename" > "$tmpfile"
+        if is_mac; then
+            octal_perms="$(stat -f "%A" "$filename")"
+        else
+            octal_perms="$(stat -c "%a" "$filename")"
+        fi
+        chmod "$octal_perms" "$tmpfile"
         tmpfile_checksum="$(cksum "$tmpfile" | awk '{print $1}')"
         target_checksum="$(cksum "$target" | awk '{print $1}')"
         if [ "$tmpfile_checksum" = "$target_checksum" ]; then
