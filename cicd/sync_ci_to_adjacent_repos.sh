@@ -78,6 +78,7 @@ while read -r repo dir; do
             continue
         fi
         perl -pe "s/(?<!- )(devops-)*bash-tools/$repo/i" "$filename" > "$tmpfile"
+        sed -i "s/directory=\"$repo\"/directory=\"$dir\"/g" "$tmpfile"
         if is_mac; then
             octal_perms="$(stat -f "%A" "$filename")"
         else
