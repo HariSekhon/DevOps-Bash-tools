@@ -3518,7 +3518,7 @@ project/plugins/project/
 
 # http://www.sonarlint.org/commandline/
 # SonarLint working directories, configuration files (including credentials)
-.sonarlint/
+#.sonarlint/
 
 ### Spark ###
 *#*#
