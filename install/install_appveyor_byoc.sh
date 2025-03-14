@@ -42,8 +42,9 @@ fi
 # AppVeyor host dependencies
 # sysvinit-tools on RHEL, but appveyor byoc looks for dpkg so is probably only compatible with debian based distributions
 if grep -Eiq 'debian|ubuntu' /etc/*release; then
-    apt-get update
-    apt-get install -y libcap2-bin libterm-ui-perl sudo sysvinit-utils
+    opts="-o DPkg::Lock::Timeout=1200"
+    apt-get update $opts
+    apt-get install -y $opts libcap2-bin libterm-ui-perl sudo sysvinit-utils
 fi
 
 # leading whitespace break PowerShell commands
