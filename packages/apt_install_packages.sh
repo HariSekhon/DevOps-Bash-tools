@@ -63,11 +63,11 @@ fi
 opts=""
 if [ -f /.dockerenv ]; then
     echo "running inside docker, not installing recommended extra packages unless specified to save space"
-    opts="--no-install-recommends"
+    opts+=" --no-install-recommends"
 fi
 if is_CI; then
     echo "running in CI quiet mode"
-    opts="$opts -q"
+    opts+=" -q"
     echo
     echo "/etc/apt/sources.list:"
     cat /etc/apt/sources.list || :
@@ -125,7 +125,7 @@ echo
 # sudo set in lib/utils-bourne.sh
 # want splitting of $opts
 # shellcheck disable=SC2154,SC2086
-[ -n "${NO_UPDATE:-}" ] || $sudo "$apt" $opts update
+[ -n "${NO_UPDATE:-}" ] || $sudo "$apt" update $opts
 
 if [ -n "${NO_FAIL:-}" ]; then
     # shellcheck disable=SC2086
@@ -136,5 +136,5 @@ if [ -n "${NO_FAIL:-}" ]; then
 else
     #"$srcdir/apt_wait.sh"
     # shellcheck disable=SC2086
-    $sudo "$apt" -o DPkg::Lock::Timeout=600 install -y $opts $packages
+    $sudo "$apt" install -y $opts $packages
 fi
