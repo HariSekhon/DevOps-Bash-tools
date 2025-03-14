@@ -43,7 +43,8 @@ python3="$(type -P python3)"
 
 if is_linux; then
     if type -P apt-get; then
-        apt-get install -y \
+        opts="-o DPkg::Lock::Timeout=1200"
+        apt-get install -y $opts \
             build-essential \
             zlib1g-dev \
             libssl-dev \
