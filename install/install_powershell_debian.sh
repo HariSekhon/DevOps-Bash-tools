@@ -39,9 +39,10 @@ fi
 # works in Stretch but not in Jessie
 #codename="$(awk -F= '/^VERSION_CODENAME=/{print $2}' /etc/*release)"
 codename="$(grep -Eo '^VERSION="[[:digit:]]* \(.+\)"' /etc/*release | sed 's/.*(//; s/)//; s/"//g')"
-$sudo apt-get update
-$sudo apt-get install -y curl gnupg apt-transport-https
+opts="-o DPkg::Lock::Timeout=1200"
+$sudo apt-get update $opts
+$sudo apt-get install -y $opts curl gnupg apt-transport-https
 curl https://packages.microsoft.com/keys/microsoft.asc | $sudo apt-key add -
 $sudo sh -c "echo 'deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-$codename-prod $codename main' > /etc/apt/sources.list.d/microsoft.list"
-$sudo apt-get update
-$sudo apt-get install -y powershell
+$sudo apt-get update $opts
+$sudo apt-get install -y $opts powershell
