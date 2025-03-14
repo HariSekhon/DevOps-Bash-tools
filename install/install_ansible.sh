@@ -73,8 +73,8 @@ elif [ "$os" = "Linux" ]; then
                 echo "$line" >> /etc/apt/sources.list
             fi
             $sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-            $sudo apt update
-            $sudo apt install -y ansible
+            $sudo apt update $opts
+            $sudo apt install -y $opts ansible
         fi
     elif type -P apk &>/dev/null; then
         echo "Installing via Apk"
