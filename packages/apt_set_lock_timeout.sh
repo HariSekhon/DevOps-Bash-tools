@@ -41,9 +41,14 @@ max_args 1 "$@"
 
 seconds="${1:-1200}"
 
-setting="DPkg::Lock::Timeout \"$seconds\";"
+setting="DPkg::Lock::Timeout"
+
+line="$setting \"$seconds\";"
 
 file="/etc/apt/apt.conf.d/99timeout"
 
-grep -q "$setting" "$file" ||
-echo "$setting" >> "$file"
+if grep -q "^[[:space:]]*${setting}[[:space:]]" "$file" 2>/dev/null; then
+    sed -i "s/[[:space:]]*$setting.*/$line/" "$file"
+else
+    echo "$line" >> "$file"
+fi
