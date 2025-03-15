@@ -26,9 +26,13 @@ Shows the Git push stats to the remote origin for the current branch - number of
 
 Utilizes adjacent scripts:
 
-    git_origin_log_to_head.sh
+    git_origin_commit_count_to_push.sh
 
-    git_origin_diff_to_head.sh
+    git_origin_line_count_to_push.sh
+
+    git_origin_diff_to_push.sh
+
+    git_origin_files_to_push.sh
 "
 
 # used by usage() in lib/utils.sh
@@ -41,11 +45,9 @@ help_usage "$@"
 
 num_commits="$("$srcdir/git_origin_commit_count_to_push.sh")"
 
-num_lines_diff="$("$srcdir/git_origin_diff_to_push.sh" | wc -l | sed 's/[[:space:]]*//g')"
-
-# delete the last line of diff only if it's blank,
-# so that when there is nothing to push we get 0 instead of 1 line as the result
 num_lines_changed="$("$srcdir/git_origin_line_count_to_push.sh")"
+
+num_lines_diff="$("$srcdir/git_origin_diff_to_push.sh" | wc -l | sed 's/[[:space:]]*//g')"
 
 files="$("$srcdir/git_origin_files_to_push.sh")"
 
