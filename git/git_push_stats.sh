@@ -83,7 +83,7 @@ Files Total:    $files_total
 
 EOF
 
-if [ "$files_total" != $((files_added + files_modified + files_renamed + files_other)) ]; then
+if [ "$files_total" != "$((files_added + files_modified + files_deleted + files_renamed))" ]; then
     echo
     warn "Total Files != ( Added + Modified + Deleted + Renamed )
 
