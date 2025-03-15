@@ -52,7 +52,7 @@ echo >&2
 timestamp "Comparing HEAD vs FETCH_HEAD"
 echo >&2
 timestamp "Checking git log"
-commits="$(git log FETCH_HEAD..HEAD)"
+commits="$(git log --oneline FETCH_HEAD..HEAD)"
 echo >&2
 
 if is_blank "$commits"; then
