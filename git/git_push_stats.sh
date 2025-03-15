@@ -47,6 +47,20 @@ num_lines_diff="$("$srcdir/git_origin_diff_to_push.sh" | wc -l | sed 's/[[:space
 # so that when there is nothing to push we get 0 instead of 1 line as the result
 num_lines_changed="$("$srcdir/git_origin_line_count_to_push.sh")"
 
+files="$("$srcdir/git_origin_files_to_push.sh")"
+
+files_added="$(grep -c '^A' <<< "$files" || :)"
+
+files_modified="$(grep -c '^M' <<< "$files" || :)"
+
+files_deleted="$(grep -c '^D' <<< "$files" || :)"
+
+files_renamed="$(grep -c '^R' <<< "$files" || :)"
+
+files_other="$(grep -c -v '^[AMDR]' <<< "$files" || :)"
+
+files_total="$(grep -c '.' <<< "$files" || :)"
+
 cat <<EOF
 Stats for Push to Origin:
 
@@ -57,5 +71,12 @@ Number of Commits: $num_commits
 Number of Lines Changed: $num_lines_changed
 
 Number of Lines Diff: $num_lines_diff
+
+Files Added:    $files_added
+Files Modified: $files_modified
+Files Deleted:  $files_deleted
+Files Renamed:  $files_renamed
+Files Other:    $files_other
+Files Total:    $files_total
 
 EOF
