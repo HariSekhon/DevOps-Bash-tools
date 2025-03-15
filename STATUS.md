@@ -1,3 +1,3 @@
 # CI/CD Status Page
 
-Moved to https://harisekhon.github.io/CI-CD/
+Moved to <https://harisekhon.github.io/CI-CD/>
