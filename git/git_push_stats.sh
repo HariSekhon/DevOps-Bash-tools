@@ -82,3 +82,11 @@ Files Other:    $files_other
 Files Total:    $files_total
 
 EOF
+
+if [ "$files_total" != $((files_added + files_modified + files_renamed + files_other)) ]; then
+    echo
+    warn "Total Files != ( Added + Modified + Deleted + Renamed )
+
+Check what the 'Other Files' are
+"
+fi
