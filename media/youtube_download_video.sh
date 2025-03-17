@@ -99,11 +99,12 @@ else
 fi
 timestamp "Touching file timestamp to make it easier to find when browsing"
 touch "$filename"
-timestamp "Opening video file: $filename"
 #if is_mac; then
 #    timestamp "Showing in Finder"
 #    open -R "$filename"
 #fi
 if [ -z "${NO_VIDEO_OPEN:-}" ]; then
+    timestamp "Opening video file: $filename"
     "$srcdir/vidopen.sh" "$filename"
 fi
+timestamp "Download Complete: $filename"
