@@ -48,14 +48,14 @@ fi
 internal_mic="$(SwitchAudioSource -a | grep Microphone | grep -v -i -e iPhone -e AirPods || :)"
 
 if [[ $(wc -l <<< "$internal_mic") -ge 2 ]]; then
-    die "More than 1 Microphone returned, please check results:
+    die "ERROR: more than one microphone returned:
 
 $internal_mic
 "
 fi
 
 if [ -z "$internal_mic" ]; then
-    die "Failed to determine internal mic"
+    die "ERROR: failed to determine internal mic"
 fi
 
 #SwitchAudioSource -t input -s "MacBook Pro Microphone"
