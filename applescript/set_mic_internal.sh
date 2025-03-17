@@ -45,4 +45,18 @@ if ! type SwitchAudioSource &>/dev/null; then
     brew install switchaudio-osx
 fi
 
-SwitchAudioSource -t input -s "MacBook Pro Microphone"
+internal_mic="$(SwitchAudioSource -a | grep Microphone | grep -v -i -e iPhone -e AirPods || :)"
+
+if [[ $(wc -l <<< "$internal_mic") -ge 2 ]]; then
+    die "More than 1 Microphone returned, please check results:
+
+$internal_mic
+"
+fi
+
+if [ -z "$internal_mic" ]; then
+    die "Failed to determine internal mic"
+fi
+
+#SwitchAudioSource -t input -s "MacBook Pro Microphone"
+SwitchAudioSource -t input -s "$internal_mic"
