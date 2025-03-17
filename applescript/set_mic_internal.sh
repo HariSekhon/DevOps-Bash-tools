@@ -59,4 +59,5 @@ if [ -z "$internal_mic" ]; then
 fi
 
 #SwitchAudioSource -t input -s "MacBook Pro Microphone"
+#timestamp "Switching to microphone: $internal_mic"
 SwitchAudioSource -t input -s "$internal_mic"
