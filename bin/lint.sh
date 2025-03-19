@@ -100,7 +100,8 @@ else
                         check_yaml.sh "$basename"
                         ;;
               #.envrc)  cd "$dirname" && direnv allow .
-              #         ;;
+              .envrc)   shellcheck "$basename"
+                        ;;
                  *.d2)  d2 fmt "$basename"
                         ;;
                  *.go)  go fmt -w "$basename"
