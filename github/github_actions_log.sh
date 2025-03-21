@@ -24,7 +24,7 @@ default_num_workflow_runs=10
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Downloads the log to the terminal for a given GitHub Actions workflow run
+Outputs the text log for a given GitHub Actions workflow run to the terminal
 
 Fetches the last $default_num_workflow_runs runs and drops you into an interactive menu to hit enter on the one you want
 
