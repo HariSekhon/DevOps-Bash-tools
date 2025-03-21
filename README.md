@@ -1010,6 +1010,8 @@ See also [Knowledge Base notes for Hadoop](https://github.com/HariSekhon/Knowled
   - `github_actions_workflows_trigger_all.sh` - triggers all workflows for the given repo
   - `github_actions_workflows_cancel_all_runs.sh` - cancels all workflow runs for the given repo
   - `github_actions_workflows_cancel_waiting_runs.sh` - cancels workflow runs that are in waiting state, eg. waiting for old deployment approvals
+  - `github_actions_log.sh` - outputs the text log for a given GitHub Actions workflow run to the terminal. Fetches the last 10 runs and drops you into an interactive menu to hit enter on the one you want. Useful when the logs are too big for the UI and you have to open it in another tab which is very slow in browser
+  - `github_actions_latest_log.sh` - same as above, but just fetches the latest workflow run log without any prompting
   - `github_ssh_get_user_public_keys.sh` - fetches a given GitHub user's public SSH keys via the API for piping to `~/.ssh/authorized_keys` or adjacent tools
   - `github_ssh_get_public_keys.sh` - fetches the currently authenticated GitHub user's public SSH keys via the API, similar to above but authenticated to get identifying key comments
   - `github_ssh_add_public_keys.sh` - uploads SSH keys from local files or standard input to the currently authenticated GitHub account. Specify pubkey files (default: `~/.ssh/id_rsa.pub`) or read from standard input for piping from adjacent tools
