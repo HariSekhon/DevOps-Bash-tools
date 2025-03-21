@@ -51,7 +51,10 @@ if [ -n "$owner_repo" ]; then
 fi
 
 if ! is_int "$num_workflow_runs"; then
-    usage "Second arg for workflow runs has to be an integer, got: $num_workflow_runs"
+    usage "Second arg for number of workflow runs to fetch has to be an integer, got: $num_workflow_runs"
+fi
+if [ "$num_workflow_runs" -lt 1 ]; then
+    usage "Second arg for number of workflow runs to fetch cannot be less than 1, got: $num_workflow_runs"
 fi
 
 if ! type -P dialog &>/dev/null; then
