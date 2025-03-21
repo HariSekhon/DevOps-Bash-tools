@@ -22,3 +22,9 @@ add_PATH "$ANDROID_HOME/platform-tools"
 
 add_PATH "$ANDROID_HOME/cmdline-tools/latest/bin"
 add_PATH "$ANDROID_HOME/cmdline-tools/bin"
+
+for x in "$ANDROID_HOME/build-tools/"*; do
+    if [ -d "$x" ]; then
+        add_PATH "$x"
+    fi
+done
