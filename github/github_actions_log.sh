@@ -26,9 +26,9 @@ default_num_workflow_runs=10
 usage_description="
 Downloads the log to the terminal for a given GitHub Actions workflow run
 
-Fetches the last $default_num_workflow_runs  runs and drops you into an interactive menu to hit enter on the one you want
+Fetches the last $default_num_workflow_runs runs and drops you into an interactive menu to hit enter on the one you want
 
-Useful when the logs are too big for the UI and you have to open it in another tab killing your browser
+Useful when the logs are too big for the UI and you have to open it in another tab which is very slow in browser
 
 Requires GitHub CLI to be installed and configured
 "
