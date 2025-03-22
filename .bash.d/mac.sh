@@ -85,6 +85,10 @@ macsleep(){
     sudo pmset sleepnow
 }
 
+nosleep(){
+    caffeinate -i
+}
+
 silence_startup(){
     sudo nvram SystemAudioVolume=%80
 }
