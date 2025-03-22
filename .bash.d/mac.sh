@@ -86,6 +86,8 @@ macsleep(){
 }
 
 nosleep(){
+    echo "Running: caffeinate -i"
+    echo "(will prevent sleep even on battery)"
     caffeinate -i
 }
 
