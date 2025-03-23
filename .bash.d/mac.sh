@@ -86,9 +86,9 @@ macsleep(){
 }
 
 nosleep(){
-    echo "Running: caffeinate -s"
+    echo "Running: caffeinate -s $*"
     echo "(will still sleep on battery)"
-    caffeinate -s
+    caffeinate -s "$@"
 }
 
 silence_startup(){
