@@ -165,6 +165,7 @@ rancid
 rancid-cgi
 rancid-core
 rancid-utils
+rbenv
 rdesktop
 router-audit-tool
 rpm-build
