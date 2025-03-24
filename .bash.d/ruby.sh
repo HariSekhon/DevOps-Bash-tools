@@ -37,10 +37,14 @@ type add_PATH &>/dev/null || . "$bash_tools/.bash.d/paths.sh"
 if [ -n "${rvm_bin_path:-}" ];then
     add_PATH "$rvm_bin_path"
 fi
+
 if [ -d /usr/local/rvm/bin ]; then
     add_PATH /usr/local/rvm/bin
 fi
 
+if [ -d ~/.rvm/bin ]; then
+    add_PATH ~/.rvm/bin
+fi
 
 # ============================================================================ #
 #                                   R b E n v
@@ -51,6 +55,7 @@ if [ -f ~/.rbenv/bin ]; then
     add_PATH ~/.rbenv/bin
 fi
 
+#eval "$(rbenv init - --no-rehash bash)"
 
 # ============================================================================ #
 #                          R u b y   U s e r   D i r s
