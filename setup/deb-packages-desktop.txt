@@ -267,6 +267,7 @@ rancid-cgi
 rancid-core
 rancid-utils
 rats
+rbenv
 rdesktop
 root-tail
 router-audit-tool
