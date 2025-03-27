@@ -33,6 +33,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+# these are supposed to be unquoted quotes
+# shellcheck disable=SC1111
 sed "
     s/“/\"/g;
     s/”/\"/g;
