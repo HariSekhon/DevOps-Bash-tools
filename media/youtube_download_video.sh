@@ -27,6 +27,12 @@ Downloads a YouTube, Facebook or Twitter / X video to mp4 with maximum quality a
 Opens the video automatically for you to check the download
 
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
+
+If you run into a error determining a video format to download such as this:
+
+    WARNING: [youtube] RVVDi1PHgw4: nsig extraction failed: Some formats may be missing
+
+Try to upgrade yt-dlp first as sites like YouTube update their site breaking this and requiring a yt-dlp update
 "
 
 # used by usage() in lib/utils.sh
