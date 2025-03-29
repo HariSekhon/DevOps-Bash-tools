@@ -25,6 +25,7 @@ multipass  # instant Ubuntu VMs
 podman
 postman
 powershell
+protonvpn
 spotify
 vagrant
 virtualbox
