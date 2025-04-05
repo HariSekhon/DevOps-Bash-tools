@@ -45,7 +45,7 @@ min_args 1 "$@"
 max_args 2 "$@"
 
 url="$1"
-filename="${2:-%(title)s}.%(ext)s"
+output_filename="${2:-%(title)s}.%(ext)s"
 
 #"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
@@ -87,11 +87,12 @@ yt-dlp \
     --continue \
     --no-overwrite \
     --retries 50 \
-    --output "$filename" \
+    --output "$output_filename" \
     ${DEBUG:+--verbose} \
     "$url"
 
 if [ "${2:-}" ]; then
+    # quicker and should always be the arg and .mp4 due to the --format options above
     filename="$2.mp4"
 else
     # if the filename isn't specified, we can infer it since no filename specified means no path specified so
@@ -101,7 +102,7 @@ else
     # the wrong video
     #"$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
     timestamp "Determining download filename"
-    filename="$(yt-dlp --get-filename --output "$filename" "$url")"
+    filename="$(yt-dlp --get-filename --output "$output_filename" "$url")"
 fi
 timestamp "Touching file timestamp to make it easier to find when browsing"
 touch "$filename"
