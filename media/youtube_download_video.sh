@@ -104,6 +104,9 @@ else
     timestamp "Determining download filename"
     filename="$(yt-dlp --get-filename --output "$output_filename" "$url")"
 fi
+if ! [ -f "$filename" ]; then
+    die "Failed to find expected output file: $filename"
+fi
 timestamp "Touching file timestamp to make it easier to find when browsing"
 touch "$filename"
 #if is_mac; then
