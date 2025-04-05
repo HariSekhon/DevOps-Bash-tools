@@ -101,7 +101,7 @@ else
     # the wrong video
     #"$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
     timestamp "Determining download filename"
-    filename="$(yt-dlp --get-filename --output "%(title)s.mp4" "$url")"
+    filename="$(yt-dlp --get-filename --output "$filename" "$url")"
 fi
 timestamp "Touching file timestamp to make it easier to find when browsing"
 touch "$filename"
