@@ -47,6 +47,8 @@ max_args 2 "$@"
 url="$1"
 output_filename="${2:-%(title)s}.%(ext)s"
 
+format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]"
+
 #"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
 # in case installed manually but not in package manager
@@ -82,7 +84,7 @@ done
 #    --output "%(title)s.%(ext)s" \
 #
 yt-dlp \
-    --format "bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]" \
+    --format "$format" \
     --merge-output-format mp4 \
     --continue \
     --no-overwrite \
@@ -102,7 +104,9 @@ else
     # the wrong video
     #"$srcdir/vidopen.sh" "$(ls -t ./*.mp4 | head -n1)"
     timestamp "Determining download filename"
-    filename="$(yt-dlp --get-filename --output "$output_filename" "$url")"
+    # "$format" is only needed here for it to return the right file extension
+    # in the "$output_filename" format eg. '.mp4' instead of '.webm'
+    filename="$(yt-dlp --get-filename --format "$format" --output "$output_filename" "$url")"
 fi
 if ! [ -f "$filename" ]; then
     die "Failed to find expected output file: $filename"
