@@ -50,11 +50,13 @@ help_usage "$@"
 
 # replace <https://github.com/owner/repo> with [:octocat: owner/repo](https://github.com/owner/repo)
 #
-# ignore GitHub links that shouldn't be changed like https://github.com/settings/... in my Knowledge-Base repo
-# ignores #readme or similar anchor suffixes in the capture for the link text, but retains it for the link target
+# ignores GitHub links that shouldn't be changed like https://github.com/settings/... in my Knowledge-Base repo
+#
+# ignores #readme or similar anchor suffixes and ?tab= parameters in the capture for the link text,
+# but retains them for the link target
 regex_script='
     /github\.com\/settings\// n;
-    s|<\(https://github.com/\([^/]*/[^/>#]*\)[^>]*\)>|[:octocat: \2](\1)|g
+    s|<\(https://github.com/\([^/]*/[^/?>#]*\)[^>]*\)>|[:octocat: \2](\1)|g
 '
 
 if [ $# -gt 0 ]; then
