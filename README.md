@@ -1092,7 +1092,7 @@ Maintain your Git `README.md` and similar Markdown documentation well.
   - `markdown_generate_index.sh` - generates a markdown index list from the headings in a given markdown file such as `README.md`
   - `markdown_replace_index.sh` - replaces a markdown index section in a given markdown file using `markdown_generate_index.sh`
   - `markdown_replace_repos.sh` - replaces the repos block of a given markdown file. Used to keep my GitHub repos Other Repos sections updated
-  - `mdl_list_indentations.sh`- runs Markdownlint `mdl` command and prefixes the spaces count to each offending line of MD005 (inconsistent list indentations). Workaround for [Markdownlint issue #1514](https://github.com/DavidAnson/markdownlint/issues/1514)
+  - `mdl_list_indentations.sh`- runs Markdownlint `mdl` command and prefixes the spaces count to each offending line of MD005 (inconsistent list indentations). Workaround for [Markdownlint issue #520](https://github.com/markdownlint/markdownlint/issues/520)
   - `markdown_list_indentations.sh` - prefixes number of spaces before each list item for comparison to MarkdownLint MD005 inconsistent list indentation error
   - `markdown_columns_to_table.sh` - converts text columns separated by whitespace to a Markdown table with vertically aligned column pipe chars. Combine with scripts like `domains_subdomains_environments.sh` to generate the markdown documentation of your domains and subdomains per project and environment
   - `markdown_octocat_github_links.sh` - converts GitHub links links like
