@@ -39,6 +39,7 @@ help_usage "$@"
 #min_args 1 "$@"
 
 regex_script='
+    /github\.com\/settings\// n;
     s|<\(https://github.com/\([^/]*/[^/>]*\)\)>|[:octocat: \2](\1)|g
 '
 
