@@ -24,8 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns zero if given file(s) don't have uncommitted changes to Git, either staged or unstaged
 
-Useful to be able to iterate over git files with in-place edits only if safe to do so that there are not other
-uncommitted changes
+Useful to be able to iterate over git files with in-place edits only if safe to do so
+without other uncommitted changes that would be at risk of being lost
 "
 
 # used by usage() in lib/utils.sh
