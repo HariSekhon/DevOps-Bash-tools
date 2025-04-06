@@ -32,7 +32,7 @@ If passed as string or stdin it will print to stdout
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<file_or_string>]"
+usage_args="[<file_or_string> <file2_or_string2> ...]"
 
 help_usage "$@"
 
