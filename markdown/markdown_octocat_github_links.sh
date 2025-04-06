@@ -25,6 +25,16 @@ usage_description="
 Converts <https://github.com/...> links in Markdown to shorthand links with an OctoCat emoji
 and without the redundant https://github.com/ prefix
 
+eg.
+
+    <https://github.com/HariSekhon/Knowledge-Base>
+
+        would become
+
+    [:octocat: HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base)
+
+This looks nicer and is shorter when rendered
+
 If given a markdown file it will in-place edit the file to replace the references
 
 If passed as string or stdin it will print to stdout
@@ -38,6 +48,9 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+# replace <https://github.com/owner/repo> with [:octocat: owner/repo](https://github.com/owner/repo)
+#
+# ignore GitHub links that shouldn't be changed like https://github.com/settings/... in my Knowledge-Base repo
 regex_script='
     /github\.com\/settings\// n;
     s|<\(https://github.com/\([^/]*/[^/>]*\)\)>|[:octocat: \2](\1)|g
