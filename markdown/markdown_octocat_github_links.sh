@@ -53,7 +53,7 @@ help_usage "$@"
 # ignore GitHub links that shouldn't be changed like https://github.com/settings/... in my Knowledge-Base repo
 regex_script='
     /github\.com\/settings\// n;
-    s|<\(https://github.com/\([^/]*/[^/>]*\)\)>|[:octocat: \2](\1)|g
+    s|<\(https://github.com/\([^/]*/[^/>#]*\)[^>]*\)>|[:octocat: \2](\1)|g
 '
 
 if [ $# -gt 0 ]; then
