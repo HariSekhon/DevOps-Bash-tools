@@ -1096,8 +1096,8 @@ Maintain your Git `README.md` and similar Markdown documentation well.
   - `markdown_list_indentations.sh` - prefixes number of spaces before each list item for comparison to MarkdownLint MD005 inconsistent list indentation error
   - `markdown_columns_to_table.sh` - converts text columns separated by whitespace to a Markdown table with vertically aligned column pipe chars. Combine with scripts like `domains_subdomains_environments.sh` to generate the markdown documentation of your domains and subdomains per project and environment
   - `markdown_octocat_github_links.sh` - converts GitHub links like
-     `<https://github.com/HariSekhon/Knowledge-Base>` to shorthand links with an OctoCat emoji and without the redundant `https://github.com/` prefix such as
-     [:octocat: HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base)
+    `<https://github.com/HariSekhon/Knowledge-Base>` to shorthand links with an OctoCat emoji and without the redundant `https://github.com/` prefix such as
+    [:octocat: HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base)
 
 ### CI/CD - Continuous Integration / Continuous Deployment
 
