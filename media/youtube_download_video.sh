@@ -45,8 +45,8 @@ min_args 1 "$@"
 #max_args 2 "$@"
 
 url="$1"
-shift || :
 file_basename_without_ext="${2:-%(title)s}"
+shift || :
 shift || :
 
 output_filename="$file_basename_without_ext.%(ext)s"
