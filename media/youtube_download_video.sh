@@ -46,8 +46,10 @@ min_args 1 "$@"
 
 url="$1"
 shift || :
-output_filename="${2:-%(title)s}.%(ext)s"
+file_basename_without_ext="${2:-%(title)s}"
 shift || :
+
+output_filename="$file_basename_without_ext.%(ext)s"
 
 format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]"
 
@@ -98,7 +100,7 @@ yt-dlp \
 
 if [ "${2:-}" ]; then
     # quicker and should always be the arg and .mp4 due to the --format options above
-    filename="$2.mp4"
+    filename="$file_basename_without_ext.mp4"
 else
     # if the filename isn't specified, we can infer it since no filename specified means no path specified so
     # we can infer it to be the most recent file with an mp4 extension in $PWD
