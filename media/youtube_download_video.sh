@@ -37,15 +37,17 @@ Try to upgrade yt-dlp first as sites like YouTube update their site breaking thi
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<video_url> [<filename>.mp4]"
+usage_args="<video_url> [<filename>.mp4 <yt-dlp-args>]"
 
 help_usage "$@"
 
 min_args 1 "$@"
-max_args 2 "$@"
+#max_args 2 "$@"
 
 url="$1"
+shift || :
 output_filename="${2:-%(title)s}.%(ext)s"
+shift || :
 
 format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]"
 
@@ -91,6 +93,7 @@ yt-dlp \
     --retries 50 \
     --output "$output_filename" \
     ${DEBUG:+--verbose} \
+    "$@" \
     "$url"
 
 if [ "${2:-}" ]; then
