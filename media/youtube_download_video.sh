@@ -26,6 +26,8 @@ Downloads a YouTube, Facebook or Twitter / X video to mp4 with maximum quality a
 
 Opens the video automatically for you to check the download
 
+Even resumes downloads after network interruptions or Control-C and restart it later
+
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 
 If you run into a error determining a video format to download such as this:
