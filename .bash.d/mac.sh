@@ -87,7 +87,7 @@ macsleep(){
 
 nosleep(){
     echo "Running: caffeinate -s $*"
-    echo "(will still sleep on battery)"
+    echo "(works even if you close the Macbook lid but will still sleep on battery power)"
     caffeinate -s "$@"
 }
 
