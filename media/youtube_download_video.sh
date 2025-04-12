@@ -34,6 +34,14 @@ If you run into a error determining a video format to download such as this:
 
     WARNING: [youtube] RVVDi1PHgw4: nsig extraction failed: Some formats may be missing
 
+If you run into this error:
+
+    ERROR: [youtube] ...: Sign in to confirm you’re not a bot.
+
+Then you should provide a filename and then after it args to pass to yt-dlp such as
+
+    --cookies-from-browser chrome
+
 Try to upgrade yt-dlp first as sites like YouTube update their site breaking this and requiring a yt-dlp update
 "
 
@@ -113,7 +121,13 @@ else
     timestamp "Determining download filename"
     # "$format" is only needed here for it to return the right file extension
     # in the "$output_filename" format eg. '.mp4' instead of '.webm'
-    filename="$(yt-dlp --get-filename --format "$format" --output "$output_filename" "$url")"
+    filename="$(
+        yt-dlp --get-filename \
+               --format "$format" \
+               --output "$output_filename" \
+               "$@" \
+               "$url"
+    )"
 fi
 if ! [ -f "$filename" ]; then
     die "Failed to find expected output file: $filename"
