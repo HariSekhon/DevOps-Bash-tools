@@ -38,9 +38,9 @@ If you run into this error:
 
     ERROR: [youtube] ...: Sign in to confirm you’re not a bot.
 
-Then you should provide a filename and then after it args to pass to yt-dlp such as
+Then set this in your shell first with the name of your browser:
 
-    --cookies-from-browser chrome
+    export YT_DLP_COOKIES_FROM_BROWSER=chrome
 
 Try to upgrade yt-dlp first as sites like YouTube update their site breaking this and requiring a yt-dlp update
 "
@@ -105,6 +105,7 @@ yt-dlp \
     --retries 50 \
     --output "$output_filename" \
     ${DEBUG:+--verbose} \
+    ${YT_DLP_COOKIES_FROM_BROWSER:+--cookies-from-browser "$YT_DLP_COOKIES_FROM_BROWSER"} \
     "$@" \
     "$url"
 
@@ -125,6 +126,7 @@ else
         yt-dlp --get-filename \
                --format "$format" \
                --output "$output_filename" \
+               ${YT_DLP_COOKIES_FROM_BROWSER:+--cookies-from-browser "$YT_DLP_COOKIES_FROM_BROWSER"} \
                "$@" \
                "$url"
     )"
