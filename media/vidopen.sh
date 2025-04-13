@@ -78,7 +78,7 @@ else  # assume Linux
     for linux_command in "${linux_commands[@]}"; do
         if type -P "$linux_command" &>/dev/null; then
             found=1
-            "$linux_command" "$video" &
+            "$linux_command" -- "$video" &
             break
         fi
     done
