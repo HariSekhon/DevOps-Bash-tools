@@ -866,5 +866,5 @@ repos:
 
 mac-exclude-backups:
 	for path in $(MAC_TIME_MACHINE_BACKUP_EXCLUDE_PATHS); do \
-		sudo tmutil addexclusion -p "$path"
+		sudo tmutil addexclusion -p "$$path"; \
 	done
