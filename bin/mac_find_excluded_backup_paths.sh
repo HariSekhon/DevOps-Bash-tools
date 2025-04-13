@@ -76,7 +76,7 @@ sed '
 sort
 echo >&2
 
-timestamp "Doing deep search for xattr excluded paths on each inode (this will take a very long time)"
+timestamp "Doing deep search for xattr excluded paths on each file / directory (this will take a very long time)"
 sudo find "$path" |
 while read -r path; do
     if sudo xattr -p com.apple.metadata:com_apple_backup_excludeItem "$path" &>/dev/null; then
