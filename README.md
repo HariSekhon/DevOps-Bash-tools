@@ -371,6 +371,7 @@ Mac automation scripts to automate the Mac UI and settings
 
 - `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
 - `mac_restore_file.sh` - checks all the backup mount points for the latest backup that has a given file and then restores it
+- `mac_find_excluded_backup_paths.sh` - does a deep search for excluded backup paths on file/folder attributes. See [HariSekhon/Knowledge-Base Mac page](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#time-machine) for why
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
