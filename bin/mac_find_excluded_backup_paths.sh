@@ -50,12 +50,30 @@ echo >&2
 
 timestamp "defaults read /Library/Preferences/com.apple.TimeMachine.plist ExcludeByPath"
 echo >&2
-defaults read /Library/Preferences/com.apple.TimeMachine.plist ExcludeByPath
+defaults read /Library/Preferences/com.apple.TimeMachine.plist ExcludeByPath |
+sed '
+    s/^(//;
+    s/)$//;
+    s/^[[:space:]]*//;
+    s/^"//;
+    s/",*$//;
+    /^[[:space:]]*$/d;
+' |
+sort
 echo >&2
 
 timestamp "defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths"
 echo >&2
-defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths
+defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths |
+sed '
+    s/^(//;
+    s/)$//;
+    s/^[[:space:]]*//;
+    s/^"//;
+    s/",*$//;
+    /^[[:space:]]*$/d;
+' |
+sort
 echo >&2
 
 timestamp "Doing deep search for xattr excluded paths on each inode (this will take a very loong time)"
