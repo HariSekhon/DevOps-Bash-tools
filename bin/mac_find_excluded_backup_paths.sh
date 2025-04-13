@@ -48,9 +48,14 @@ sudo mdfind "com_apple_backup_excludeItem = 'com.apple.backupd'" |
 sort
 echo >&2
 
-timestamp "Reading ExcludeByPath from /Library/Preferences/com.apple.TimeMachine.plist"
+timestamp "defaults read /Library/Preferences/com.apple.TimeMachine.plist ExcludeByPath"
 echo >&2
 defaults read /Library/Preferences/com.apple.TimeMachine.plist ExcludeByPath
+echo >&2
+
+timestamp "defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths"
+echo >&2
+defaults read /Library/Preferences/com.apple.TimeMachine SkipPaths
 echo >&2
 
 timestamp "Doing deep search for xattr excluded paths on each inode (this will take a very loong time)"
