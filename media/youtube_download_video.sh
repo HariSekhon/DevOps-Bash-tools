@@ -135,7 +135,7 @@ if ! [ -f "$filename" ]; then
     die "Failed to find expected output file: $filename"
 fi
 timestamp "Touching file timestamp to make it easier to find when browsing"
-touch "$filename"
+touch -- "$filename"
 #if is_mac; then
 #    timestamp "Showing in Finder"
 #    open -R "$filename"
