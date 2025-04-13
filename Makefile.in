@@ -865,14 +865,15 @@ repos:
 	markdown_replace_repos.sh
 
 mac-exclude-backups:
-	for path in $(MAC_TIME_MACHINE_BACKUP_EXCLUDE_PATHS); do \
+	@for path in $(MAC_TIME_MACHINE_BACKUP_EXCLUDE_PATHS); do \
 		if [[ "$${path:0:1}" != / ]]; then \
 			path="$$PWD/$path"; \
 		fi; \
+		echo "Excluding: $$path"; \
 		sudo tmutil addexclusion -p "$$path"; \
 	done
 
 nobackup:
-	if uname | grep Darwin; then \
+	if uname | grep -q Darwin; then \
 		$(MAKE) mac-exclude-backups; \
 	fi
