@@ -97,6 +97,8 @@ done
 #
 #    --output "%(title)s.%(ext)s" \
 #
+# Increased retries to 50 because hotel wifi sucks around the world, which is why you want to download the videos
+# for reliable offline play in the first place (or watching on the plane)
 yt-dlp \
     --format "$format" \
     --merge-output-format mp4 \
