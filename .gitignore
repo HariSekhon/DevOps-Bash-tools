@@ -501,6 +501,8 @@ fastlane/.env.default
 
 iOSInjectionProject/
 
+ixguard-license.txt
+
 # ============================================================================ #
 #
 # Regenerate all sections below in to a single arg for API call via:
