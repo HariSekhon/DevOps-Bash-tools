@@ -501,7 +501,9 @@ fastlane/.env.default
 
 iOSInjectionProject/
 
+# ixGuard
 ixguard-license.txt
+statistics.yml
 
 # ============================================================================ #
 #
