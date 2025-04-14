@@ -503,6 +503,7 @@ iOSInjectionProject/
 
 # ixGuard
 ixguard-license.txt
+mapping.yml
 protectionreport.html
 statistics.yml
 telemetry_dump.json
