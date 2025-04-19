@@ -218,6 +218,7 @@ nmap
 #octave
 #openjpeg
 #oniguruma  # regex library
+openai-whisper
 #osxfuse  # required to be installed before 'ext4fuse' package
 p7zip
 packer-completion
