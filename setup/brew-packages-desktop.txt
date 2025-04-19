@@ -216,8 +216,8 @@ nmap
 #node  # NodeJS
 #ntfstool  # for accessing NTFS volumes - unsigned requires Security approval and installing kernel driver
 #octave
-#openjpeg
 #oniguruma  # regex library
+#openjpeg
 openai-whisper
 #osxfuse  # required to be installed before 'ext4fuse' package
 p7zip
