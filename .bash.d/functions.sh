@@ -122,12 +122,18 @@ clip(){
 
 dle(){
     if [ "$PWD" = "$HOME" ]; then
-        cd ~/Downloads
+        cd ~/Downloads || return 1
     fi
-    dl "$@" &&
-    # doesn't persist past a pause/unpause
-    #osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
-    exit
+    while true; do
+        if dl "$@"; then
+            # doesn't persist past a pause/unpause
+            #osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
+            exit
+        fi
+        local sleep_secs="$((RANDOM % 300))"
+        echo "Sleeping for $sleep_secs secs before retrying..."
+        sleep "$sleep_secs"
+    done
 }
 
 deccp(){
