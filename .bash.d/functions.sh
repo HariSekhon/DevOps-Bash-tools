@@ -125,7 +125,7 @@ dle(){
         cd ~/Downloads || return 1
     fi
     while true; do
-        if dl "$@"; then
+        if BACKGROUND_VIDEO=1 youtube_download_video.sh "$@"; then
             # doesn't persist past a pause/unpause
             #osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
             exit
