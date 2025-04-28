@@ -126,7 +126,8 @@ dle(){
     fi
     while true; do
         if BACKGROUND_VIDEO=1 youtube_download_video.sh "$@"; then
-            # doesn't persist past a pause/unpause
+            # doesn't persist past a pause/unpause,
+            # and this starts playing which we don't want which is why it's backgrounded
             #osascript -e 'tell application "QuickTime Player" to set rate of document 1 to 2' &&
             exit
         fi
