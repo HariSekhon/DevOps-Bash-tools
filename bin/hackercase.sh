@@ -53,11 +53,12 @@ sed '
     s/a/4/gi;
     s/b/8/gi;
     s/e/3/gi;
-    #s/g/6/gi;  # reduces readability
     s/i/1/gi;
     s/o/0/gi;
-    s/s/5/gi;
-    #s/t/7/gi;  # reduces readability
+    # these reduce readability
+    #s/g/6/gi;
+    #s/s/5/gi;
+    #s/t/7/gi;
 ' |
-tee >("$srcdir/copy_to_clipboard.sh") /dev/stdout
+tee >("$srcdir/copy_to_clipboard.sh")
 # copies to clipboard and also sends to stdout to allow further pipeline processing
