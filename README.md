@@ -351,6 +351,8 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
 - `ssl_verify_cert_by_ip.sh` - verifies SSL certificates on specific IP addresses, useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also `curl_k8s_ingress.sh`)
+- `tmux_vertical.sh` - launches tmux and runs the commands given as args in equally balanced vertical panes. Fast way to launch a bunch of commands in an easily reviewable way
+- `tmux_horizontal.sh` - same as above but horizontally
 - `urlencode.sh` / `urldecode.sh` - URL encode/decode quickly on the command line, in pipes etc.
 - `urlextract.sh` - extracts the URLs from a given string arg, file or standard input
 - `url_extract_redirects.sh` - extracts the URLs from a given string arg, file or standard input, queries each one and outputs the redirected urls instead to stdout
