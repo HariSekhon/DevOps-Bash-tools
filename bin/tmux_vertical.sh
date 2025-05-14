@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Launches tmux and runs the commands given as args in vertical panes
+Launches tmux and runs the commands given as args in horizontally balanced panes
 "
 
 # used by usage() in lib/utils.sh
