@@ -30,21 +30,27 @@ Fast way to launch a bunch of commands in an easily reviewable way
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args='<session_name> "<command_1>" ["<command_2>" "<command_3>" ...]'
+usage_args='"<command_1>" ["<command_2>" "<command_3>" ...]'
 
 help_usage "$@"
 
-min_args 2 "$@"
+min_args 1 "$@"
 
-session="$1"
+pwd="${PWD:-$(pwd)}"
+epoch="$(date +%s)"
 
-cmd1="$2"
+session="$pwd.$epoch"
 
-shift || :
+cmd1="$1"
+
 shift || :
 
 timestamp "Starting new tmux session in detached mode called '$session' with command: $cmd1"
 tmux new-session -d -s "$session" "$cmd1"
+
+if ! tmux has-session -t "$session" 2>/dev/null; then
+    die "ERROR: tmux session exited too soon from first command: $cmd1"
+fi
 
 for cmd; do
     timestamp "Splitting the tmux pane horizontally and launching command: $cmd"
