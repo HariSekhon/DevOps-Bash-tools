@@ -61,10 +61,12 @@ epoch="$(date +%s)"
 #
 session="$pwd-$epoch"
 
-cmd1="${1:-bash}"
-cmd2="${2:-bash}"
-cmd3="${3:-bash}"
-cmd4="${4:-bash}"
+shell="${SHELL:-bash}"
+
+cmd1="${1:-$shell}"
+cmd2="${2:-$shell}"
+cmd3="${3:-$shell}"
+cmd4="${4:-$shell}"
 
 shift || :
 
