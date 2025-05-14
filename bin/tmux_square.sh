@@ -27,7 +27,7 @@ Launches tmux and runs the commands given as args in a square tiled view
 
 Fast way to launch a bunch of commands in an easily reviewable way
 
-If args aren't given, launches a Bash shell in each pane
+If args aren't given, launches a \$SHELL in each pane, defaulting to bash if \$SHELL is not set
 
 Autogenerates a new session name in the form of \$PWD-\$epoch for uniqueness
 
