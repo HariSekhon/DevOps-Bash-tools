@@ -43,7 +43,7 @@ epoch="$(date +%s)"
 #
 #   tmux has-session -t "$session"
 #
-# this:
+# this command:
 #
 #   tmux has-session -t /Users/hari/mydir.1747191485
 #
