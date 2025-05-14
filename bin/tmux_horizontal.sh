@@ -49,7 +49,7 @@ for cmd; do
     tmux split-window -v -t "$session":0 "$cmd"
 done
 
-timestamp "Balancing the tmux pane layout for tmux session: $session"
+timestamp "Balancing the tmux pane layout horizontally for tmux session: $session"
 tmux select-layout -t "$session":0 even-vertical
 
 timestamp "Attaching to tmux session: $session"
