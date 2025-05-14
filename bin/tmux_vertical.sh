@@ -31,7 +31,7 @@ Autogenerates a new session name in the form of \$PWD-\$epoch for uniqueness
 
 Example:
 
-    ${0##*/} top 'iostat 1' 'ping google.com'
+    ${0##*/} htop 'iostat 1'
 "
 
 # used by usage() in lib/utils.sh
