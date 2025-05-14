@@ -28,15 +28,19 @@ Launches tmux and runs the commands given as args in equally balanced horizontal
 Fast way to launch a bunch of commands in an easily reviewable way
 
 Autogenerates a new session name in the form of \$PWD-\$epoch for uniqueness
+
+Example:
+
+    ${0##*/} top 'iostat -w 1' 'ping google.com'
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args='"<command_1>" ["<command_2>" "<command_3>" ...]'
+usage_args='"<command_1>" "<command_2>" ["<command_3>" ...]'
 
 help_usage "$@"
 
-min_args 1 "$@"
+min_args 2 "$@"
 
 pwd="${PWD:-$(pwd)}"
 epoch="$(date +%s)"
