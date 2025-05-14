@@ -127,7 +127,7 @@ dump_mac(){
     dump ps_auxf ps aux
     dump top top -l 1
     dump top_mpstat top -l 1 -stats pid,command,cpu,th,pstate,time,cpu -ncols 16
-    dump vmstat
+    #dump vmstat  # not available on my macOS 14
 }
 
 # ============================================================================ #
