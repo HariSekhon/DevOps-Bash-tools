@@ -27,11 +27,17 @@ Launches tmux and runs the commands given as args in equally balanced horizontal
 
 Fast way to launch a bunch of commands in an easily reviewable way
 
+If there is only one arg which is a single digit integer, then launches that many \$SHELL panes
+
 Autogenerates a new session name in the form of \$PWD-\$epoch for uniqueness
 
 Example:
 
     ${0##*/} htop 'iostat 1' bash
+
+    ${0##*/} bash bash bash
+
+    ${0##*/} 3
 "
 
 # used by usage() in lib/utils.sh
@@ -40,7 +46,7 @@ usage_args='"<command_1>" "<command_2>" ["<command_3>" ...]'
 
 help_usage "$@"
 
-min_args 2 "$@"
+min_args 1 "$@"
 
 pwd="${PWD:-$(pwd)}"
 epoch="$(date +%s)"
@@ -62,6 +68,18 @@ session="$pwd-$epoch"
 cmd1="$1"
 
 shift || :
+
+if [ $# -eq 0 ] &&
+   [[ "$cmd1" =~ ^[[:digit:]]$ ]]; then
+    shell="${SHELL:-bash}"
+    count="$cmd1"
+    cmd1="$shell"
+    args=()
+    for ((i = 1; i < count; i++)); do
+        args+=("$shell")
+    done
+    set -- "${args[@]}"
+fi
 
 timestamp "Starting new tmux session in detached mode called '$session' with command: $cmd1"
 tmux new-session -d -s "$session" "$cmd1"
