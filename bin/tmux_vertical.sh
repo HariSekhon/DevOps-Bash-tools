@@ -26,6 +26,8 @@ usage_description="
 Launches tmux and runs the commands given as args in horizontally balanced panes
 
 Fast way to launch a bunch of commands in an easily reviewable way
+
+Autogenerates a new session name in the form of \$PWD-\$epoch for uniqueness
 "
 
 # used by usage() in lib/utils.sh
