@@ -69,16 +69,19 @@ cmd1="$1"
 
 shift || :
 
-if [ $# -eq 0 ] &&
-   [[ "$cmd1" =~ ^[[:digit:]]$ ]]; then
-    shell="${SHELL:-bash}"
-    count="$cmd1"
-    cmd1="$shell"
-    args=()
-    for ((i = 1; i < count; i++)); do
-        args+=("$shell")
-    done
-    set -- "${args[@]}"
+if [ $# -eq 0 ]; then
+   if [[ "$cmd1" =~ ^[[:digit:]]$ ]]; then
+        shell="${SHELL:-bash}"
+        count="$cmd1"
+        cmd1="$shell"
+        args=()
+        for ((i = 1; i < count; i++)); do
+            args+=("$shell")
+        done
+        set -- "${args[@]}"
+    else
+        usage "Error: two or more args required unless you are specifying a count of shell panes to launch, otherwise there would be no panes to split"
+    fi
 fi
 
 timestamp "Starting new tmux session in detached mode called '$session' with command: $cmd1"
