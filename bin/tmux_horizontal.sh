@@ -39,7 +39,19 @@ min_args 1 "$@"
 pwd="${PWD:-$(pwd)}"
 epoch="$(date +%s)"
 
-session="$pwd.$epoch"
+# cannot separate the session name with a dot as this breaks:
+#
+#   tmux has-session -t "$session"
+#
+# this:
+#
+#   tmux has-session -t /Users/hari/mydir.1747191485
+#
+# results in this:
+#
+#   can't find window: /Users/hari/mydir
+#
+session="$pwd-$epoch"
 
 cmd1="$1"
 
@@ -48,7 +60,7 @@ shift || :
 timestamp "Starting new tmux session in detached mode called '$session' with command: $cmd1"
 tmux new-session -d -s "$session" "$cmd1"
 
-if ! tmux has-session -t "$session" 2>/dev/null; then
+if ! tmux has-session -t "$session"; then
     die "ERROR: tmux session exited too soon from first command: $cmd1"
 fi
 
