@@ -45,11 +45,11 @@ timestamp "Starting new tmux session in detached mode called '$session' with com
 tmux new-session -d -s "$session" "$cmd1"
 
 for cmd; do
-    timestamp "Splitting the window vertically and launching command: $cmd"
+    timestamp "Splitting the tmux window vertically and launching command: $cmd"
     tmux split-window -h -t "$session":0 "$cmd"
 done
 
-timestamp "Balancing the pane layout for tmux session: $session"
+timestamp "Balancing the tmux pane layout for tmux session: $session"
 tmux select-layout -t "$session":0 even-horizontal
 
 timestamp "Attaching to tmux session: $session"
