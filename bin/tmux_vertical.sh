@@ -28,7 +28,7 @@ Launches tmux and runs the commands given as args in vertical panes
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args='<session_name> "<command_1>" ["<command_2>" "<command_3>"]'
+usage_args='<session_name> "<command_1>" ["<command_2>" "<command_3>" ...]'
 
 help_usage "$@"
 
