@@ -245,6 +245,9 @@ gitbrowse(){
         fi
         return 1
     fi
+    if [ -n "$path" ]; then
+        path="$(git ls-files --full-name "$path")"
+    fi
     if [[ "$url_base" =~ github.com ]]; then
         if [ -z "$path" ]; then
             path+="#readme"
@@ -273,6 +276,11 @@ gitbrowse(){
     fi
     url="$url_base"
     if [ -n "$path" ]; then
+        if [[ "$url_base" =~ github.com ]]; then
+            local default_branch
+            default_branch="$(git_default_branch)"
+            url+="/blob/$default_branch"
+        fi
         url+="/$path"
     fi
     browser "$url"
