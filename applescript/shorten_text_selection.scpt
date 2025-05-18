@@ -17,8 +17,10 @@
 #           Shortens the selected text in the prior window
 # ============================================================================ #
 
-# Currently only replaces "and" with "&"
-# as I do this a lot for LinkedIn comments due to the short 1250 character limit
+# - Replaces "and" with "&"
+# - Removes multiple blank lines between paragraphs (which result from the pbpaste/pbcopy pipeline otherwise)
+#
+# I use this a lot for LinkedIn comments due to the short 1250 character limit
 
 # switch to previous window
 tell application "System Events"
