@@ -37,7 +37,9 @@ end tell
 delay 0.1
 
 # replace occurrences of the word "and" with "&" using sed with word boundaries
-do shell script "pbpaste | gsed -E 's/\\band\\b/\\&/g' | pbcopy"
+#
+# results in blank lines between paragraphs becoming 3 blank lines
+do shell script "pbpaste | gsed -E 's/\\band\\b/\\&/g' | cat -s | pbcopy"
 
 delay 0.1
 
