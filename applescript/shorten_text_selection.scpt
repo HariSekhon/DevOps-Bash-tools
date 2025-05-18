@@ -38,9 +38,9 @@ end tell
 
 delay 0.1
 
-# replace occurrences of the word "and" with "&" using sed with word boundaries
-#
-# results in blank lines between paragraphs becoming 3 blank lines
+# - replace occurrences of the word "and" with "&" using sed with word boundaries
+# - crush out multiple blank lines to a single blank line between paragraphs
+#   - this is correct the pbpaste | pbcopy copying back multiplying the blank lines
 do shell script "pbpaste | gsed -E 's/\\band\\b/\\&/g' | cat -s | pbcopy"
 
 delay 0.1
