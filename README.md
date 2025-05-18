@@ -393,7 +393,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `is_screen_locked.py` - detect if the screen is locked to stop sending keystrokes or mouse clicks
 - `is_screensaver_running.scpt` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
 - `screensaver_activate.scpt` - activate screensaver
-- `shorten_text_selection.scpt` - shortens the selected text in the prior window. Currently only replaces `and` with `&` as I do this a lot for LinkedIn comments due to the short 1250 character limit
+- `shorten_text_selection.scpt` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
 
 See also [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md) page
 in [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base).
