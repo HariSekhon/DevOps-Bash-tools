@@ -27,6 +27,7 @@ postman
 powershell
 protonvpn
 spotify
+tor-browser
 vagrant
 virtualbox
 vnc-viewer
