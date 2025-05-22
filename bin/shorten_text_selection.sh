@@ -32,6 +32,8 @@ Shortens the selected text in the prior window
 I use this a lot for LinkedIn comments in browser due to the short 1250 character limit
 
 Tested on macOS 14 and Debian 11 with Xfce
+
+Does not work on Debian 12 Gnome due to wayland lack of virtual keyboard support and even on Xorg does not work properly
 "
 
 # used by usage() in lib/utils.sh
