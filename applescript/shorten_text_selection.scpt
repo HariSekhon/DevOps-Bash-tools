@@ -17,10 +17,14 @@
 #           Shortens the selected text in the prior window
 # ============================================================================ #
 
+# - Copies the selected text to the clipboard
 # - Replaces "and" with "&"
-# - Removes multiple blank lines between paragraphs (which result from the pbpaste/pbcopy pipeline otherwise)
+# - Removes multiple blank lines between paragraphs (which result from the pbcopy/pbpaste pipeline otherwise)
+# - Pastes the clipboard text back over the selected text
 #
-# I use this a lot for LinkedIn comments due to the short 1250 character limit
+# I use this a lot for LinkedIn comments in browser due to the short 1250 character limit
+
+# Tested on macOS 14
 
 # switch to previous window
 tell application "System Events"
