@@ -89,7 +89,7 @@ if [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
     #   Compositor does not support the virtual keyboard protocol
     #
     # This is because Gnome intentionally disables it for security - you must switch to an X11 session
-    die "ERROR: this does not currently work on wayland based UI due to lack of virtual keyboard protocol support (intentional by the developers)"
+    die "ERROR: wayland based UI is not supported at this time due to lack of virtual keyboard protocol support (intentional by the developers)"
 else
     xdotool keydown alt
     #xdotool keydown Tab
