@@ -33,7 +33,8 @@ I use this a lot for LinkedIn comments in browser due to the short 1250 characte
 
 Tested on macOS 14 and Debian 11 with Xfce
 
-Does not work on Debian 12 Gnome due to wayland lack of virtual keyboard support and even on Xorg does not work properly
+Does not work on Debian 12 Gnome due to wayland lack of virtual keyboard support and even on Debian 12 Gnome on Xorg
+the keystrokes do not come out properly, not sure why yet, ping me if you have time to figure out why
 "
 
 # used by usage() in lib/utils.sh
