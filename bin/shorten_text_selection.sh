@@ -73,12 +73,19 @@ if [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
     #sleep 0.05
     #sudo ydotool key 56:0    # release Alt
 
-    timestamp "Detected wayland rather than Xorg, attempting to use wtype instead"
-    if ! type -P wtype &>/dev/null; then
-        timestamp "Command 'wtype' not found in \$PATH, attempting to install..."
-        "$srcdir/../packages/install_packages.sh" wtype
-    fi
-    wtype -M alt -k tab -m alt
+    #timestamp "Detected wayland rather than Xorg, attempting to use wtype instead"
+    #if ! type -P wtype &>/dev/null; then
+    #    timestamp "Command 'wtype' not found in \$PATH, attempting to install..."
+    #    "$srcdir/../packages/install_packages.sh" wtype
+    #fi
+    #wtype -M alt -k tab -m alt
+    #
+    # Results in error:
+    #
+    #   Compositor does not support the virtual keyboard protocol
+    #
+    # This is because Gnome intentionally disables it for security - you must switch to an X11 session
+    die "ERROR: this does not currently work on wayland based UI due to lack of virtual keyboard protocol support (intentional by the developers)"
 else
     xdotool keydown alt
     #xdotool keydown Tab
