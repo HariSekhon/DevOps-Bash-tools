@@ -28,6 +28,8 @@ Shortens the selected text in the prior window
 - Removes multiple blank lines between paragraphs (which result from the pbpaste/pbcopy pipeline otherwise)
 
 I use this a lot for LinkedIn comments due to the short 1250 character limit
+
+Tested on macOS 14 and Debian 11 with Xfce
 "
 
 # used by usage() in lib/utils.sh
@@ -43,7 +45,7 @@ if is_mac; then
 fi
 
 for bin in xdotool xclip; do
-    if ! type -P "$bin"; then
+    if ! type -P "$bin" &>/dev/null; then
         timestamp "Command '$bin' not found in \$PATH, attempting to install..."
         "$srcdir/../packages/install_packages.sh" "$bin"
     fi
