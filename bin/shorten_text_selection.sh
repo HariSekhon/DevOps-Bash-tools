@@ -26,7 +26,7 @@ Shortens the selected text in the prior window
 
 - Copies the selected text to the clipboard
 - Replaces \"and\" with \"&\"
-- Removes multiple blank lines between paragraphs (which result from the pbpaste/pbcopy pipeline otherwise)
+- Removes multiple blank lines between paragraphs (which can result from the copy/paste pipeline otherwise)
 - Pastes the clipboard text back over the selected text
 
 I use this a lot for LinkedIn comments in browser due to the short 1250 character limit
