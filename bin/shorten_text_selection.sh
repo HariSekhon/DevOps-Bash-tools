@@ -59,19 +59,26 @@ check_bin xclip
 timestamp "Switching back to previous application"
 # for Debian 12 Gnome
 if [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
-    timestamp "Detected wayland rather than Xorg, attempting to use ydotool instead"
-    if ! type -P ydotool &>/dev/null; then
-        timestamp "Command 'ydotool' not found in \$PATH, attempting to install..."
-        "$srcdir/../packages/install_packages.sh" "ydotool"
+    #timestamp "Detected wayland rather than Xorg, attempting to use ydotool instead"
+    #if ! type -P ydotool &>/dev/null; then
+    #    timestamp "Command 'ydotool' not found in \$PATH, attempting to install..."
+    #    "$srcdir/../packages/install_packages.sh" ydotool
+    #fi
+    ##sudo ydotool key 56:1 15:1 15:0 56:0
+    #sudo ydotool key 56:1    # press Alt
+    #sleep 0.05
+    #sudo ydotool key 15:1    # press Tab
+    #sleep 0.05
+    #sudo ydotool key 15:0    # release Tab
+    #sleep 0.05
+    #sudo ydotool key 56:0    # release Alt
+
+    timestamp "Detected wayland rather than Xorg, attempting to use wtype instead"
+    if ! type -P wtype &>/dev/null; then
+        timestamp "Command 'wtype' not found in \$PATH, attempting to install..."
+        "$srcdir/../packages/install_packages.sh" wtype
     fi
-    #sudo ydotool key 56:1 15:1 15:0 56:0
-    sudo ydotool key 56:1    # press Alt
-    sleep 0.05
-    sudo ydotool key 15:1    # press Tab
-    sleep 0.05
-    sudo ydotool key 15:0    # release Tab
-    sleep 0.05
-    sudo ydotool key 56:0    # release Alt
+    wtype -M alt -k tab -m alt
 else
     xdotool keydown alt
     #xdotool keydown Tab
