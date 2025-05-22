@@ -64,7 +64,14 @@ if [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
         timestamp "Command 'ydotool' not found in \$PATH, attempting to install..."
         "$srcdir/../packages/install_packages.sh" "ydotool"
     fi
-    sudo ydotool key 56:1 15:1 15:0 56:0
+    #sudo ydotool key 56:1 15:1 15:0 56:0
+    sudo ydotool key 56:1    # press Alt
+    sleep 0.05
+    sudo ydotool key 15:1    # press Tab
+    sleep 0.05
+    sudo ydotool key 15:0    # release Tab
+    sleep 0.05
+    sudo ydotool key 56:0    # release Alt
 else
     xdotool keydown alt
     #xdotool keydown Tab
