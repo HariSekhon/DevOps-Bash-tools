@@ -42,6 +42,13 @@ if is_mac; then
     exec "$srcdir/../applescript/shorten_text_selection.scpt"
 fi
 
+for bin in xdotool xclip; do
+    if ! type -P "$bin"; then
+        timestamp "Command '$bin' not found in \$PATH, attempting to install..."
+        "$srcdir/../packages/install_packages.sh" "$bin"
+    fi
+done
+
 check_bin xdotool
 check_bin xclip
 
