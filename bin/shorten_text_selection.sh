@@ -58,7 +58,8 @@ check_bin xclip
 
 timestamp "Switching back to previous application"
 xdotool keydown alt
-xdotool key Tab
+xdotool keydown Tab
+xdotool keyup Tab
 xdotool keyup alt
 sleep 0.3
 echo
