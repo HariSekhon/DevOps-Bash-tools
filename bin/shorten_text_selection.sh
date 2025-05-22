@@ -31,7 +31,7 @@ Shortens the selected text in the prior window
 
 I use this a lot for LinkedIn comments in browser due to the short 1250 character limit
 
-Tested on macOS 14 and Debian 11 with Xfce
+Tested on macOS 14, and Debian 11 with Xfce and LDXE desktop environments
 
 Does not work on Debian 12 Gnome due to wayland lack of virtual keyboard support and even on Debian 12 Gnome on Xorg
 the keystrokes do not come out properly, not sure why yet, ping me if you have time to figure out why as that's not
