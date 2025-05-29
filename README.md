@@ -338,6 +338,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `organize_downloads.sh` - moves files of well-known extensions in the `$HOME/Downloads` directory older than 1 week to capitalized subdirectories of their type to keep the `$HOME/Downloads/` directory tidy
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
+- `paste_from_clipboard_upon_changes.sh` - pastes from system clipboard to stdout on Linux or Mac whenever the clipboard changes
 - `paste_diff_settings.sh` - takes snapshots of before and after clipboard changes and diffs them to show config changes
 - `processes_ram_sum.sh` - sums the RAM usage of all processes matching a given regex in GB to one decimal place
 - `pldd.sh` - parses `/proc` on Linux to show the runtime `.so` loaded dynamic shared libraries a program pid is using. Runtime equivalent of the classic static `ldd` command and because the system `pldd` command often fails to attach to a process
@@ -379,6 +380,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
+- `paste_from_clipboard_upon_changes.sh` - pastes from system clipboard to stdout on Linux or Mac whenever the clipboard changes
 - `paste_diff_settings.sh` - Takes snapshots of before and after clipboard changes and diffs them to show config changes
 
 `applescript/` directory:
