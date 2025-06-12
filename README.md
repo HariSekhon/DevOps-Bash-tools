@@ -318,6 +318,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 
 - `login.sh` - logs to major Cloud platforms if their credentials are found in the environment, CLIs such as AWS, GCP, Azure, GitHub... Docker registries: DockerHub, GHCR, ECR, GCR, GAR, ACR, Gitlab, Quay...
 - `clean_caches.sh` - cleans out OS package and programming language caches - useful to save space or reduce Docker image size
+- `crypto_dice_rolls.sh` - generates 100 random dice rolls to test a new crypto hardware wallet's fidelity (do not use this for your real crypto seed as your machine could be infected with malware which steals your seed phrase)
 - `delete_duplicate_files.sh` - deletes duplicate files with (N) suffixes, commonly caused by web browser downloads,
   in the given or current directory. Checks they're exact duplicates of a matching basename file without the (N) suffix with
   the exact same checksum for safety. Prompts to delete per file. To auto-accept deletions, do
