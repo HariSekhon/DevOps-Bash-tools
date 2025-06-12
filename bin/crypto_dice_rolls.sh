@@ -52,6 +52,7 @@ export LC_ALL=C
 
 tr -dc 1-6 < /dev/urandom |
 head -c "$num" |
-fold -w5 #|
+fold -w5 || :
 #paste -sd ' ' -
+
 echo
