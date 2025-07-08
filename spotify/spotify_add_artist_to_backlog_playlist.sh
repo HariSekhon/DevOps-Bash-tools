@@ -50,4 +50,5 @@ artist="$1"
 export SPOTIFY_SEARCH_LIMIT="${SPOTIFY_SEARCH_LIMIT:-100}"
 
 "$srcdir/spotify_search_uri.sh" artist:"$artist" |
+tee >("$srcdir/spotify_uri_to_name.sh") |
 "$srcdir/spotify_add_to_playlist.sh" "Discover Backlog"
