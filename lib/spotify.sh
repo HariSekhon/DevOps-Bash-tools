@@ -40,7 +40,7 @@ spotify_token(){
     # shellcheck disable=SC2166
     if [ -z "${SPOTIFY_ACCESS_TOKEN:-}" ] ||
        [ -n "${SPOTIFY_PRIVATE:-}" -a "${#SPOTIFY_ACCESS_TOKEN}" -lt 280 ]; then
-        SPOTIFY_ACCESS_TOKEN="$("$libdir/../spotify_api_token.sh")"
+        SPOTIFY_ACCESS_TOKEN="$("$libdir/../spotify/spotify_api_token.sh")"
     fi
     export SPOTIFY_ACCESS_TOKEN
 }
