@@ -20,15 +20,21 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
+playlist="Discover Backlog"
+
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Searches for the top 100 tracks for a given artist and adds them to the \"Discover Backlog\" playlist
+Searches for the tracks of a given artist and adds them to the \"$playlist\" playlist
 
 Because Spotify's UI is horrible to try to get all the tracks from the discographies and add them to a playlist manually
 
-To increase the number of tracks:
+By defaults limits to 1000 tracks, which should cover all of the artist's work
 
-    export SPOTIFY_SEARCH_LIMIT=200
+If you need to change this limit, set:
+
+    export SPOTIFY_SEARCH_LIMIT=5000
+
+Expects the \"$playlist\" playlist to already exist
 
 Uses adjacent scripts:
 
@@ -47,8 +53,8 @@ num_args 1 "$@"
 
 artist="$1"
 
-export SPOTIFY_SEARCH_LIMIT="${SPOTIFY_SEARCH_LIMIT:-100}"
+export SPOTIFY_SEARCH_LIMIT="${SPOTIFY_SEARCH_LIMIT:-1000}"
 
 "$srcdir/spotify_search_uri.sh" artist:"$artist" |
 tee >("$srcdir/spotify_uri_to_name.sh") |
-"$srcdir/spotify_add_to_playlist.sh" "Discover Backlog"
+"$srcdir/spotify_add_to_playlist.sh" "$playlist"
