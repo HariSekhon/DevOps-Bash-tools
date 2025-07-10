@@ -237,7 +237,7 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :call HgGitU()<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%" <CR>
-nmap          ;; :w<CR> :call GitUpdateCommit() <CR>
+nmap          ;; :w!<CR> :call GitUpdateCommit() <CR>
 nmap          ;/ :w<CR> :call GitAddCommit() <CR>
 nmap          ;g :w<CR> :call GitStatus() <CR>
 nmap          ;G :w<CR> :call GitLogP() <CR>
