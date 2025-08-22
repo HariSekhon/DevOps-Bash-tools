@@ -179,6 +179,8 @@ EOF
     echo "$output"
 }
 
+applescript="$srcdir/../applescript"
+
 # Authorization Code Flow
 if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # clean up subprocesses to prevent netcat from being left behind as an orphan and blocking future runs
@@ -195,10 +197,10 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
     if is_mac; then
-        frontmost_process="$("$srcdir/applescript/get_frontmost_process.scpt")"
+        frontmost_process="$("$applescript/get_frontmost_process.scpt")"
         open "$url"
-        "$srcdir/applescript/browser_close_tab.scpt"
-        "$srcdir/applescript/set_frontmost_process.scpt" "$frontmost_process"
+        "$applescript/browser_close_tab.scpt"
+        "$applescript/set_frontmost_process.scpt" "$frontmost_process"
     else
         echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
         echo
