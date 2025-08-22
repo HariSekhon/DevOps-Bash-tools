@@ -88,7 +88,7 @@ is_spotify_playlist_id(){
 
 validate_spotify_uri(){
     local uri="$1"
-    if ! [[ "$uri" =~ ^(spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/)?[[:alnum:]]+(\?.+)?$ ]]; then
+    if ! [[ "$uri" =~ ^(spotify:(track|album|artist|episode):|^https?://open.spotify.com/(track|album|artist)/)?[[:alnum:]]+(\?.+)?$ ]]; then
         echo "Invalid URI provided: $uri" >&2
         return 1
     fi
