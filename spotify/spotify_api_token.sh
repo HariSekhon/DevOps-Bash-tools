@@ -146,7 +146,7 @@ callback(){
         netcat_switches="-l -p $callback_port --close"
     fi
     # TODO: add a mutex wait lock here
-    pkill -f "^nc $netcat_switches$"
+    pkill -f "^nc $netcat_switches$" || :
     sleep 1
     #local response
     # need opt splitting
