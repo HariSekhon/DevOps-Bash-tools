@@ -145,6 +145,9 @@ callback(){
     if nc --version 2>&1 | grep -q GNU; then
         netcat_switches="-l -p $callback_port --close"
     fi
+    # TODO: add a mutex wait lock here
+    pkill -f "^nc $netcat_switches$"
+    sleep 1
     #local response
     # need opt splitting
     # shellcheck disable=SC2086
