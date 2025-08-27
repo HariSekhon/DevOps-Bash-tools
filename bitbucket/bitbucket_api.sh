@@ -154,8 +154,9 @@ curl_api_opts "$@"
 
 user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
 # for old App Passwords
-#PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
-export TOKEN="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
+PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
+# for API Tokens, but doesn't work yet, gives 401
+#export TOKEN="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
 
 if [ -z "$user" ]; then
     echo "WARNING: \$BITBUCKET_USERNAME / \$BITBUCKET_USER not specified, attempting to determine from local remote url" >&2
@@ -166,11 +167,11 @@ if [ -z "$user" ]; then
     #fi
 fi
 
-if [ -z "${TOKEN:-}" ]; then
+if [ -z "${PASSWORD:-}${TOKEN:-}" ]; then
     # if this is still blank then curl_auth.sh will detect and prompt for a password (non echo'd)
     PASSWORD="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@bitbucket\.org/{print $2; exit}' | sed 's|https://||;s/@.*//;s/.*://' || :)"
-    export PASSWORD
 fi
+export PASSWORD
 
 if [ -n "$user" ]; then
     export USERNAME="$user"
