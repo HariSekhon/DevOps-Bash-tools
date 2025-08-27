@@ -153,7 +153,9 @@ min_args 1 "$@"
 curl_api_opts "$@"
 
 user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
-PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
+# for old App Passwords
+#PASSWORD="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
+export TOKEN="${BITBUCKET_PASSWORD:-${BITBUCKET_TOKEN:-}}"
 
 if [ -z "$user" ]; then
     echo "WARNING: \$BITBUCKET_USERNAME / \$BITBUCKET_USER not specified, attempting to determine from local remote url" >&2
@@ -164,9 +166,10 @@ if [ -z "$user" ]; then
     #fi
 fi
 
-if [ -z "${PASSWORD:-}" ]; then
+if [ -z "${TOKEN:-}" ]; then
     # if this is still blank then curl_auth.sh will detect and prompt for a password (non echo'd)
     PASSWORD="$(git remote -v 2>/dev/null | awk '/https:\/\/.+@bitbucket\.org/{print $2; exit}' | sed 's|https://||;s/@.*//;s/.*://' || :)"
+    export PASSWORD
 fi
 
 if [ -n "$user" ]; then
@@ -174,7 +177,6 @@ if [ -n "$user" ]; then
 else
     echo "WARNING: \$BITBUCKET_USERNAME / \$BITBUCKET_USER not specified, and failed to determine from local remote url, will end up using your environment's default \$USERNAME / \$USER which may not be the right BitBucket username and can lead to authentication failures - recommend you set \$BITBUCKET_USERNAME explicitly" >&2
 fi
-export PASSWORD
 
 url_path="$1"
 url_path="${url_path##*:\/\/bitbucket.org\/}"
