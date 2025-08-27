@@ -10,6 +10,12 @@
 #    email = harisekhon@gmail.com
 
 [include]
+  # XXX: put your [user] section in $HOME/.gitconfig.local eg.
+  #
+  #  [user]
+  #    name = Hari Sekhon
+  #    email = harisekhon@gmail.com
+  #
   path = .gitconfig.local
 
 [core]
