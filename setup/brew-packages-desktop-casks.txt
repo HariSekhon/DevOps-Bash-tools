@@ -27,6 +27,7 @@ postman
 powershell
 protonvpn
 spotify
+transmission
 tor-browser
 vagrant
 virtualbox
