@@ -91,6 +91,7 @@ alias grep='grep --color=auto'
 #alias envg="env | grep -i"
 alias dec="decomment.sh"
 
+alias dns='cat /etc/resolv.conf'
 alias hosts='sudo $EDITOR /etc/hosts'
 alias repos='$EDITOR $bash_tools/setup/repos.txt'
 
