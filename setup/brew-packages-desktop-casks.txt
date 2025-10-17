@@ -8,6 +8,7 @@
 anaconda
 atom
 barrier
+blackhole-2ch  # to create multi-output sound device to shazam songs from shows while using headphones
 ccmenu
 codeship/taps/jet
 docker
