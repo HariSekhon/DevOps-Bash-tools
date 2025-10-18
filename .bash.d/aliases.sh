@@ -187,6 +187,12 @@ alias ht='headtail.py'
 
 alias run='run.sh'
 
+# used for Shazaming while on headphones - see:
+#
+#   https://github.com/HariSekhon/Knowledge-Base/blob/master/audio.md#shazam-songs-while-using-headphones-on-mac
+#
+# Switches to Multi-Output Device which should already be configured as above and contain your headphones and BlackHole 2ch
+#
 alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -s Shazam'
 
 # ============================================================================ #
