@@ -193,7 +193,7 @@ alias run='run.sh'
 #
 # Switches to Multi-Output Device which should already be configured as above and contain your headphones and BlackHole 2ch
 #
-alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -s Shazam'
+alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -a Shazam'
 
 # ============================================================================ #
 #           GitHub / GitLab / BitBucket / Azure DevOps repo checkouts
