@@ -187,6 +187,8 @@ alias ht='headtail.py'
 
 alias run='run.sh'
 
+alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -s Shazam'
+
 # ============================================================================ #
 #           GitHub / GitLab / BitBucket / Azure DevOps repo checkouts
 # ============================================================================ #
