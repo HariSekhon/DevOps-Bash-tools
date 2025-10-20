@@ -66,6 +66,10 @@ fi
 alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -a Shazam'
 
 vol(){
+    if [ $# -ne 1 ]; then
+        echo "usage: vol <num>"
+        return 1
+    fi
     osascript -e "set volume output volume $1"
 }
 
