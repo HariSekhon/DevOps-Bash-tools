@@ -63,7 +63,28 @@ fi
 #
 # Switches to Multi-Output Device which should already be configured as above and contain your headphones and BlackHole 2ch
 #
-alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -a Shazam'
+#alias mshazam='SwitchAudioSource -s "Multi-Output Device"; open -a Shazam'
+#alias msound='SwitchAudioSource -s "Multi-Output Device"'
+unalias msound 2>/dev/null || :
+msound(){
+    # because if you have 2 multi-output devices eg.
+    #
+    # - one using AirPods + Blackhole
+    # - another using Speakers + Blackhole
+    #
+    # then Mac automatically renames "Multi-Output Device" to "Multi-Output Device 1",
+    # even if the other multi-output device has already been differentiated, it refuses to let you set
+    # it back to the default name, so just determine what the first one is called and use that
+    #
+    local multi_output_device
+    multi_output_device="$(SwitchAudioSource -a | grep -m1 '^Multi-Output Device')"
+    #echo "Found first multi-output device: $multi_output_device"
+    echo "Using first found multi-output device"
+    SwitchAudioSource -s "$multi_output_device"
+}
+
+
+alias mshazam='msound; open -a Shazam'
 
 vol(){
     if [ $# -ne 1 ]; then
