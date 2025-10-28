@@ -43,6 +43,7 @@ configs/.editorconfig
 configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
 configs/.grype.yaml
+configs/.hammerspoon
 configs/.inputrc
 configs/.luacheckrc
 configs/.my.cnf
