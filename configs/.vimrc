@@ -403,6 +403,7 @@ if has('autocmd')
     au BufNew,BufRead *.plist      nmap ;l :w<CR> :!clear; plutil -convert xml1 "%" && echo PList OK <CR>
     au BufNew,BufRead *.properties nmap ;l :w<CR> :!clear; validate_properties.py "%" <CR>
     au BufNew,BufRead *.ldif       nmap ;l :w<CR> :!clear; validate_ldap_ldif.py "%" <CR>
+    au BufNew,BufRead *.lua        nmap ;l :w<CR> :!clear; luacheck "%" <CR>
     au BufNew,BufRead *.md         nmap ;l :w<CR> :!clear; mdl "%" \| less -FR <CR>
     "au BufNew,BufRead *.sql        nmap ;l :w<CR> :!clear; TODO "%" \| less -FR <CR>
     au BufNew,BufRead *.scala      nmap ;l :w<CR> :!clear; scalastyle -c "$bash_tools/scalastyle_config.xml" "%" \| less -FR <CR>
