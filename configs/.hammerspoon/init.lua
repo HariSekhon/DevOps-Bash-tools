@@ -27,7 +27,10 @@
 -- 'hs' is a Hammerspoon global
 -- luacheck: globals hs
 
-local function getFirstMultiOutputDevice()
+--local function getFirstMultiOutputDevice()
+--
+-- global so we can check it from Hammerspoon Console for debugging
+function getFirstMultiOutputDevice()
     local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a | grep -m1 '^Multi-Output Device'")
     if not handle then return nil end
     local result = handle:read("*l")
@@ -35,7 +38,10 @@ local function getFirstMultiOutputDevice()
     return result
 end
 
-local function switchToMultiOutput()
+--local function switchToMultiOutput()
+--
+-- global so we can check it from Hammerspoon Console for debugging
+function switchToMultiOutput()
     local target = getFirstMultiOutputDevice()
     if target and #target > 0 then
         hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -s "%s"', target))
