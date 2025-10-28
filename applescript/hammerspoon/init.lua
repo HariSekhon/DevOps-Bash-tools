@@ -18,11 +18,13 @@
 --             H a m m e r s p o o n   L U A   i n i t   s c r i p t
 -- ========================================================================== --
 
+-- luacheck: ignore 631
+
 -- Defines Mac system event handlers such as:
 --
 --      https://github.com/HariSekhon/Knowledge-Base/blob/main/audio.md#automatically-switch-to-using-multi-output-device-when-connecting-headphones
 
-
+-- 'hs' is a Hammerspoon global
 -- luacheck: globals hs
 
 local function getFirstMultiOutputDevice()
@@ -49,15 +51,16 @@ local function switchToMultiOutput()
     end
 end
 
-local prevOutput = hs.audiodevice.defaultOutputDevice():name()
+--local prevOutput = hs.audiodevice.defaultOutputDevice():name()
 
-hs.audiodevice.watcher.setCallback(function(uid, eventName)
+--hs.audiodevice.watcher.setCallback(function(uid, eventName)
+hs.audiodevice.watcher.setCallback(function(_, eventName)
     if eventName == "dOut " then
         local current = hs.audiodevice.defaultOutputDevice():name()
         if current:match("AirPods") then
             switchToMultiOutput()
         end
-        prevOutput = current
+        --prevOutput = current
     end
 end)
 
