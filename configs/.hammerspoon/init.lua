@@ -61,6 +61,7 @@ end
 
 --hs.audiodevice.watcher.setCallback(function(uid, eventName)
 hs.audiodevice.watcher.setCallback(function(_, eventName)
+    print("Audio event:", eventName, hs.audiodevice.defaultOutputDevice():name())
     if eventName == "dOut " then
         local current = hs.audiodevice.defaultOutputDevice():name()
         if current:match("AirPods") then
