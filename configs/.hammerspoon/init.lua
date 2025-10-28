@@ -49,7 +49,7 @@ function switchToMultiOutput()
     if target and #target > 0 then
         hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -s "%s"', target))
         hs.notify.new({title="Audio Output Switched", informativeText="Now using: " .. target}):send()
-        -- duplicates timestamp in the console
+        -- duplicates timestamp in the console and doesn't even prefix info level
         --log.i("Audio Output Switched to " .. target)
         print("Audio Output Switched to " .. target)
     else
@@ -60,7 +60,7 @@ function switchToMultiOutput()
 							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
 			}
 		):send()
-        -- duplicates timestamp in the console
+        -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
         print("Audio Output Switch Failed")
     end
