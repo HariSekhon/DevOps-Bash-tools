@@ -13,13 +13,31 @@
 --  https://www.linkedin.com/in/HariSekhon
 --
 
+local function getFirstMultiOutputDevice()
+    local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a | grep -m1 '^Multi-Output Device'")
+    if not handle then return nil end
+    local result = handle:read("*l")
+    handle:close()
+    return result
+end
+
+local function switchToMultiOutput()
+    local target = getFirstMultiOutputDevice()
+    if target and #target > 0 then
+        hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -s "%s"', target))
+        hs.notify.new({title="Audio Output Switched", informativeText="Now using: " .. target}):send()
+    else
+        hs.notify.new({title="Audio Switch Failed", informativeText="No Multi-Output Device found"}):send()
+    end
+end
+
 local prevOutput = hs.audiodevice.defaultOutputDevice():name()
 
 hs.audiodevice.watcher.setCallback(function(uid, eventName)
     if eventName == "dOut " then
         local current = hs.audiodevice.defaultOutputDevice():name()
         if current:match("AirPods") then
-            hs.execute('/opt/homebrew/bin/SwitchAudioSource -s "Multi-Output Device 1"')
+            switchToMultiOutput()
         end
         prevOutput = current
     end
