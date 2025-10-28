@@ -25,7 +25,7 @@
 --      https://github.com/HariSekhon/Knowledge-Base/blob/main/audio.md#automatically-switch-to-using-multi-output-device-when-connecting-headphones
 
 -- 'hs' is a Hammerspoon global
--- luacheck: globals hs
+-- luacheck: globals hs getFirstMultiOutputDevice switchToMultiOutput
 
 --local function getFirstMultiOutputDevice()
 --
