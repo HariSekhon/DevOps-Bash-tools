@@ -184,6 +184,7 @@ launchctl-completion
 #libtiff
 #libusb
 lolcat
+luacheck  # lua script linting
 lynx
 #lzo
 #lz4
