@@ -28,7 +28,7 @@
 -- luacheck: globals hs getFirstMultiOutputDevice switchToMultiOutput
 
 --local audioSwitchLog = hs.logger.new('audioSwitch', 'info')
---local log = hs.logger.new('audioSwitch', 'info')
+local log = hs.logger.new('audioSwitch', 'info')
 
 local lastSwitch = 0
 local debounceTime = 1  -- seconds
@@ -82,10 +82,10 @@ hs.audiodevice.watcher.setCallback(function(_, eventName)
             local now = hs.timer.secondsSinceEpoch()
             if now - lastSwitch > debounceTime then
                 lastSwitch = now
-                print("Debounce OK, switching output")
+                log.d("Debounce OK, switching output")
                 hs.timer.doAfter(0.5, switchToMultiOutput)  -- small delay for macOS to settle
             else
-                print("Debounced, skipping switch")
+                log.d("Debounced, skipping switch")
             end
         end
         --prevOutput = current
