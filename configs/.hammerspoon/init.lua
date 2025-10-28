@@ -28,7 +28,7 @@
 -- luacheck: globals hs getFirstMultiOutputDevice switchToMultiOutput
 
 --local audioSwitchLog = hs.logger.new('audioSwitch', 'info')
-local log = hs.logger.new('audioSwitch', 'debug')
+local log = hs.logger.new('audioSwitch', 'info')
 
 local lastSwitch = 0
 local debounceTime = 1  -- seconds
