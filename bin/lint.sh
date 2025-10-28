@@ -66,6 +66,9 @@ basename="${filename##*/}"
 
 cd "$dirname"
 
+#echo "Running lint.sh on: $*"
+#echo
+
 if [ -n "$lint_hint" ]; then
     if [[ "$lint_hint" =~ k8s|kubernetes ]]; then
         #check_yaml.sh "$basename"
