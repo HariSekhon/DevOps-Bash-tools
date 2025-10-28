@@ -8,10 +8,22 @@
 --
 --  License: see accompanying Hari Sekhon LICENSE file
 --
---  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+--  If you're using my code you're welcome to connect with me on LinkedIn
+--  and optionally send me feedback to help steer this or other code I publish
 --
 --  https://www.linkedin.com/in/HariSekhon
 --
+
+-- ========================================================================== --
+--             H a m m e r s p o o n   L U A   i n i t   s c r i p t
+-- ========================================================================== --
+
+-- Defines Mac system event handlers such as:
+--
+--      https://github.com/HariSekhon/Knowledge-Base/blob/main/audio.md#automatically-switch-to-using-multi-output-device-when-connecting-headphones
+
+
+-- luacheck: globals hs
 
 local function getFirstMultiOutputDevice()
     local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a | grep -m1 '^Multi-Output Device'")
