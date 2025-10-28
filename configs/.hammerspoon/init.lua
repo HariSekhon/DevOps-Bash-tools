@@ -50,7 +50,7 @@ function switchToMultiOutput()
         hs.notify.new(
 			{
 				title="Audio Switch Failed",
-				informativeText="No Multi-Output Device found - you must first configure one" +
+				informativeText="No Multi-Output Device found - you must first configure one" ..
 							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
 			}
 		):send()
