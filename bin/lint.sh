@@ -106,6 +106,8 @@ else
                         ;;
                  *.go)  go fmt -w "$basename"
                         ;;
+                *.lua)  luacheck "$basename"
+                        ;;
                  *.tf)  terraform fmt -diff
                         terraform validate
                         ;;
