@@ -17,6 +17,7 @@ docker
 #firefox-developer-edition
 google-chrome
 google-cloud-sdk
+hammerspoon  # system event handler
 #intellij-idea-ce  # in main packages now
 keepassxc
 keka
