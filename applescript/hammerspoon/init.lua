@@ -27,7 +27,13 @@ local function switchToMultiOutput()
         hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -s "%s"', target))
         hs.notify.new({title="Audio Output Switched", informativeText="Now using: " .. target}):send()
     else
-        hs.notify.new({title="Audio Switch Failed", informativeText="No Multi-Output Device found"}):send()
+        hs.notify.new(
+			{
+				title="Audio Switch Failed",
+				informativeText="No Multi-Output Device found - you must first configure one" +
+							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
+			}
+		):send()
     end
 end
 
