@@ -30,6 +30,9 @@
 --local audioSwitchLog = hs.logger.new('audioSwitch', 'info')
 --local log = hs.logger.new('audioSwitch', 'info')
 
+local lastSwitch = 0
+local debounceTime = 1  -- seconds
+
 --local function getFirstMultiOutputDevice()
 --
 -- global so we can check it from Hammerspoon Console for debugging
@@ -75,7 +78,15 @@ hs.audiodevice.watcher.setCallback(function(_, eventName)
     --if eventName == "dOut " then
         local current = hs.audiodevice.defaultOutputDevice():name()
         if current:match("AirPods") then
-            switchToMultiOutput()
+            --switchToMultiOutput()
+            local now = hs.timer.secondsSinceEpoch()
+            if now - lastSwitch > debounceTime then
+                lastSwitch = now
+                print("Debounce OK, switching output")
+                hs.timer.doAfter(0.5, switchToMultiOutput)  -- small delay for macOS to settle
+            else
+                print("Debounced, skipping switch")
+            end
         end
         --prevOutput = current
     --end
