@@ -27,7 +27,8 @@
 -- 'hs' is a Hammerspoon global
 -- luacheck: globals hs getFirstMultiOutputDevice switchToMultiOutput
 
-local audioSwitchLog = hs.logger.new('audioSwitch', 'info')
+--local audioSwitchLog = hs.logger.new('audioSwitch', 'info')
+local log = hs.logger.new('audioSwitch', 'info')
 
 --local function getFirstMultiOutputDevice()
 --
@@ -48,7 +49,7 @@ function switchToMultiOutput()
     if target and #target > 0 then
         hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -s "%s"', target))
         hs.notify.new({title="Audio Output Switched", informativeText="Now using: " .. target}):send()
-        audioSwitchLog.i("Audio Output Switched to " .. target)
+        log.i("Audio Output Switched to " .. target)
     else
         hs.notify.new(
 			{
@@ -57,7 +58,7 @@ function switchToMultiOutput()
 							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
 			}
 		):send()
-        audioSwitchLog.i("Audio Output Switch Failed")
+        log.i("Audio Output Switch Failed")
     end
 end
 
