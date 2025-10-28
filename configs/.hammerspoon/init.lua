@@ -61,7 +61,7 @@ function switchToMultiOutput()
 			}
 		):send()
         -- duplicates timestamp in the console
-        --log.i("Audio Output Switch Failed")
+        --log.w("Audio Output Switch Failed")
         print("Audio Output Switch Failed")
     end
 end
