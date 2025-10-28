@@ -62,13 +62,14 @@ end
 --hs.audiodevice.watcher.setCallback(function(uid, eventName)
 hs.audiodevice.watcher.setCallback(function(_, eventName)
     print("Audio event:", eventName, hs.audiodevice.defaultOutputDevice():name())
-    if eventName == "dOut " then
+    -- eventName turns out to be 'nil'
+    --if eventName == "dOut " then
         local current = hs.audiodevice.defaultOutputDevice():name()
         if current:match("AirPods") then
             switchToMultiOutput()
         end
         --prevOutput = current
-    end
+    --end
 end)
 
 hs.audiodevice.watcher.start()
