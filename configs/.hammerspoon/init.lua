@@ -37,7 +37,7 @@ local debounceTime = 1  -- seconds
 --
 -- global so we can check it from Hammerspoon Console for debugging
 function getFirstMultiOutputDevice()
-    local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a -t output | grep -m1 '^Multi-Output Device'")
+    local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a -t output | grep -i -m1 '^Multi-Output Device'")
     if not handle then return nil end
     local result = handle:read("*l")
     handle:close()
@@ -45,7 +45,7 @@ function getFirstMultiOutputDevice()
 end
 
 function getFirstBlackholeInputDevice()
-    local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a -t input | grep -m1 '^Blackhole'")
+    local handle = io.popen("/opt/homebrew/bin/SwitchAudioSource -a -t input | grep -i -m1 '^BlackHole'")
     if not handle then return nil end
     local result = handle:read("*l")
     handle:close()
