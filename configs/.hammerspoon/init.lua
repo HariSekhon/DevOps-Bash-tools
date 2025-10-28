@@ -28,7 +28,7 @@
 -- luacheck: globals hs getFirstMultiOutputDevice switchToMultiOutput
 
 --local audioSwitchLog = hs.logger.new('audioSwitch', 'info')
-local log = hs.logger.new('audioSwitch', 'info')
+--local log = hs.logger.new('audioSwitch', 'info')
 
 --local function getFirstMultiOutputDevice()
 --
@@ -49,7 +49,9 @@ function switchToMultiOutput()
     if target and #target > 0 then
         hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -s "%s"', target))
         hs.notify.new({title="Audio Output Switched", informativeText="Now using: " .. target}):send()
-        log.i("Audio Output Switched to " .. target)
+        -- duplicates timestamp in the console
+        --log.i("Audio Output Switched to " .. target)
+        print("Audio Output Switched to " .. target)
     else
         hs.notify.new(
 			{
@@ -58,7 +60,9 @@ function switchToMultiOutput()
 							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
 			}
 		):send()
-        log.i("Audio Output Switch Failed")
+        -- duplicates timestamp in the console
+        #log.i("Audio Output Switch Failed")
+        print("Audio Output Switch Failed")
     end
 end
 
