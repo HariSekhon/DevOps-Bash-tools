@@ -72,16 +72,17 @@ function switchToBlackholeInput()
         local msg="Audio Input Switched to: " .. target
         notify(msg)
     else
+        local info_msg="No Blackhole Input Device found - you must first install Blackhole" ..
+					   ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
         hs.notify.new(
 			{
-				title="Audio Switch Failed",
-				informativeText="No Blackhole Input Device found - you must first install Blackhole" ..
-							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
+				title="Audio Input Switch Failed",
+				informativeText=info_msg
 			}
 		):send()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
-        local msg="Audio Input Switch Failed"
+        local msg="Audio Input Switch Failed - " .. info_msg
         notify(msg)
     end
 end
@@ -94,19 +95,20 @@ function switchToMultiOutput()
         hs.notify.new({title="Audio Output Switched", informativeText="Now using: " .. target}):send()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.i("Audio Output Switched to " .. target)
-        local msg="Audio Output Switched to " .. target
+        local msg="Audio Output Switched to: " .. target
         notify(msg)
     else
+        local info_msg="No Multi-Output Device found - you must first configure one" ..
+					   ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
         hs.notify.new(
 			{
-				title="Audio Switch Failed",
-				informativeText="No Multi-Output Device found - you must first configure one" ..
-							    ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
+				title="Audio Output Switch Failed",
+				informativeText=info_msg
 			}
 		):send()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
-        local msg="Audio Output Switch Failed"
+        local msg="Audio Output Switch Failed - " .. info_msg
         notify(msg)
     end
 end
