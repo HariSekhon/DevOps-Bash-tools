@@ -34,6 +34,8 @@ local lastSwitch = 0
 local debounceTime = 1  -- seconds
 
 function notify(msg)
+    -- print to Console log for debugging
+    print(msg)
     -- treats everything between [[ ]] as a literal string
     --hs.osascript.applescript([[ display notification msg with title "Hammerspoon" ]])
     local script = string.format('display notification "%s" with title "Hammerspoon"', msg)
@@ -68,7 +70,6 @@ function switchToBlackholeInput()
         hs.execute(string.format('/opt/homebrew/bin/SwitchAudioSource -t input -s "%s"', target))
         --hs.notify.new({title="Audio Input Switched", informativeText="Now using: " .. target}):send()
         local msg="Audio Input Switched to: " .. target
-        print(msg)
         notify(msg)
     else
         hs.notify.new(
@@ -81,7 +82,6 @@ function switchToBlackholeInput()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
         local msg="Audio Input Switch Failed"
-        print(msg)
         notify(msg)
     end
 end
@@ -95,7 +95,6 @@ function switchToMultiOutput()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.i("Audio Output Switched to " .. target)
         local msg="Audio Output Switched to " .. target
-        print(msg)
         notify(msg)
     else
         hs.notify.new(
@@ -108,7 +107,6 @@ function switchToMultiOutput()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
         local msg="Audio Output Switch Failed"
-        print(msg)
         notify(msg)
     end
 end
@@ -117,6 +115,7 @@ end
 
 --hs.audiodevice.watcher.setCallback(function(uid, eventName)
 hs.audiodevice.watcher.setCallback(function(_, eventName)
+    -- print to Console log for debugging
     print("Audio event:", eventName, hs.audiodevice.defaultOutputDevice():name())
     -- eventName turns out to be 'nil'
     --if eventName == "dOut " then
