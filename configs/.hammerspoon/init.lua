@@ -72,17 +72,18 @@ function switchToBlackholeInput()
         local msg="Audio Input Switched to: " .. target
         notify(msg)
     else
-        local info_msg="No Blackhole Input Device found - you must first install Blackhole" ..
-					   ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
-        hs.notify.new(
-			{
-				title="Audio Input Switch Failed",
-				informativeText=info_msg
-			}
-		):send()
+        local msg_device_not_found="No Blackhole Input Device found - you must first install Blackhole" ..
+					               ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
+        -- Deprecated API - doesn't work, use notify function workaround
+        --hs.notify.new(
+		--    {
+		--        title="Audio Input Switch Failed",
+		--        informativeText=msg_device_not_found
+		--    }
+		--):send()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
-        local msg="Audio Input Switch Failed - " .. info_msg
+        local msg="Audio Input Switch Failed - " .. msg_device_not_found
         notify(msg)
     end
 end
@@ -98,17 +99,18 @@ function switchToMultiOutput()
         local msg="Audio Output Switched to: " .. target
         notify(msg)
     else
-        local info_msg="No Multi-Output Device found - you must first configure one" ..
-					   ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
-        hs.notify.new(
-			{
-				title="Audio Output Switch Failed",
-				informativeText=info_msg
-			}
-		):send()
+        local msg_device_not_found="No Multi-Output Device found - you must first configure one" ..
+					               ", see HariSekhon/Knowledge-Base Mac and Audio pages for details"
+        -- Deprecated API - doesn't work, use notify function workaround
+        --hs.notify.new(
+		--    {
+		--        title="Audio Output Switch Failed",
+		--        informativeText=msg_device_not_found
+		--    }
+		--):send()
         -- duplicates timestamp in the console and doesn't even prefix info level
         --log.w("Audio Output Switch Failed")
-        local msg="Audio Output Switch Failed - " .. info_msg
+        local msg="Audio Output Switch Failed - " .. msg_device_not_found
         notify(msg)
     end
 end
