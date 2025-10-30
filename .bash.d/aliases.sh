@@ -282,6 +282,7 @@ for x in ~/docs/* "$github"/docs/* "$bitbucket"/docs/*; do
     doc_alias "$x" || :
 done
 
+alias know="knowledge"
 for x in ~/knowledge/* "$github"/knowledge/* "$bitbucket"/knowledge/*; do
     doc_alias "$x" k || :
 done
