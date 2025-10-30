@@ -94,7 +94,8 @@ add_PATH(){
 #}
 
 # need newer Homebrew curl for --cookies-from-browser functionality
-# Homebrew build wasn't compiled with it anyway
+# Homebrew build wasn't compiled with it anyway - see curl_with_cookies.sh script for a more generic workaround
+# that works with any version of curl
 #if [ -d /opt/homebrew/opt/curl/bin ]; then
 #    PATH="/opt/homebrew/opt/curl/bin:$PATH"
 #fi
