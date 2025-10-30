@@ -148,7 +148,7 @@ else
                             echo "ERROR: file '$filename' is not set executable!" >&2
                             exit 1
                         fi
-                        if [ "$(type -P "$basename" 2>&/dev/null)" != "$PWD/$basename" ]; then
+                        if [ "$(type -P "$basename" 2>/dev/null)" != "$PWD/$basename" ]; then
                             basename="./$basename"
                         fi
                         args="$("$srcdir/lib/args_extract.sh" "$basename")"
