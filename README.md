@@ -326,6 +326,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
   user crontab
 - `download_url_file.sh` - downloads a file from a URL using wget with no clobber and continue support, or curl with atomic replacement to avoid race conditions. Used by `github/github_download_release_file.sh`, `github_download_release_jar.sh`, and `install/download_*_jar.sh`
 - `curl_auth.sh` - shortens `curl` command by auto-loading your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
+- `curl_with_cookies.sh` - extracts cookies for a given URL from your `\$BROWSER`'s cookie jar and passes them to the `curl` command along with the rest of the args (workaround for older curl builds and Homebrew builds that don't have the newer `--cookies-from-browser functionality)
 - `find_duplicate_files*.sh` - finds duplicate files by size and/or checksum in given directory trees. Checksums are only done on files that already have matching byte counts for efficiency
 - `find_broken_links.sh` - find broken links with delays to avoid tripping defenses
 - `find_broken_symlinks.sh` - find broken symlinks pointing to non-existent files/directories
