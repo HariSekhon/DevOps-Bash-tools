@@ -93,6 +93,12 @@ add_PATH(){
 #    done
 #}
 
+# need newer Homebrew curl for --cookies-from-browser functionality
+# Homebrew build wasn't compiled with it anyway
+#if [ -d /opt/homebrew/opt/curl/bin ]; then
+#    PATH="/opt/homebrew/opt/curl/bin:$PATH"
+#fi
+
 add_PATH "/bin"
 add_PATH "/usr/bin"
 add_PATH "/sbin"
