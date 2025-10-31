@@ -212,7 +212,7 @@ make
 - [Installation Scripts](#installation-scripts) for many popular open source technologies
 - [Linux & Mac](#linux--mac) - curl OAuth / JWT, LDAP, find duplicate files, SSL certificate get/validate, URL encoding/decoding, Vagrant
 - [Mac & AppleScript](#mac--applescript) - Mac settings and UI automation scripts, send keystrokes, mouse clicks,
-  detect foreground app, switch app, detect locked screen or screensaver, activate screensaver
+  detect foreground app, switch app, detect locked screen or screensaver, activate screensaver, Hammerspoon system event handlers such as automatically switching audio to be able to Shazam while watching on AirPods
 - [Monitoring](#monitoring) - Grafana, Prometheus, Node Exporter, scripted collection of common Linux & Mac cli
   monitoring stats and log locations for quick generation of vendor support tarball bundles both locally and over SSH
 - [AWS - Amazon Web Services](#aws---amazon-web-services) - AWS account summary, lots of IAM reports, CIS Benchmark config hardening, EC2, ECR, EKS, Spot termination, S3 access logging, KMS key rotation info, SSM, CloudTrail, CloudWatch billing alarm with SNS notification topic and subscription for email alerts
@@ -399,6 +399,8 @@ Mac automation scripts to automate the Mac UI and settings
 - `is_screensaver_running.scpt` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
 - `screensaver_activate.scpt` - activate screensaver
 - `shorten_text_selection.scpt` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
+
+`configs/hammerspoon/init.lua` - event handlers to automatically switch from AirPods connecting to multi-output audio to be able to Shazam songs while watching movies or TV shows on AirPods.
 
 See also [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md) page
 in [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base).
