@@ -44,6 +44,8 @@ help_usage "$@"
 
 max_args 2 "$@"
 
+mac_only
+
 sleep_secs="${1:-10}"
 
 num="${2:--1}"
