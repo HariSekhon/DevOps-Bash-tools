@@ -39,6 +39,8 @@ help_usage "$@"
 
 num_args 1 "$@"
 
+mac_only
+
 file="$1"
 
 open -R "$file"
