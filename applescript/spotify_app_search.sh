@@ -34,6 +34,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+mac_only
+
 query="$*"
 
   osascript -e 'tell application "Spotify" to activate' \
