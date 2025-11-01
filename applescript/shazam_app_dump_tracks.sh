@@ -63,9 +63,9 @@ cols="$(
     awk -F'|' '{print $2}'
 )"
 
-artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols")"
-title_column="$(grep -m1 -E 'TITLE' <<< "$cols")"
-date_column="$(grep -m1 -E 'DATE' <<< "$cols")"
+artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols" || :)"
+title_column="$(grep -m1 -E 'TITLE' <<< "$cols" || :)"
+date_column="$(grep -m1 -E 'DATE' <<< "$cols" || :)"
 
 if [ -z "$artist_column" ] ||
    [ -z "$title_column" ] ||
@@ -78,7 +78,7 @@ $cols
 "
 fi
 
-echo "Found columns:
+timestamp "Found columns:
 
 $artist_column
 $title_column
