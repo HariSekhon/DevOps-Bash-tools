@@ -401,6 +401,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `is_screen_locked.py` - detect if the screen is locked to stop sending keystrokes or mouse clicks
 - `is_screensaver_running.scpt` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
 - `reopen_app.sh` - relaunch a given app (used to reload Shazam to detect DB changes after removing tracks programmatically from its DB)
+- `spotify_app_search.sh` - runs a search in the Spotify App on Mac using Applescript
 - `shazam_app_dump_tracks.sh` - dumps `artist - track` one per line from the Shazam local sqlite DB
 - `shazam_app_delete_track.sh` - deletes a given `"artist" "track"` from the Shazam local sqlite DB
 - `shazam_search_spotify_then_delete_track.sh` - searches for each Shazam'd track in the local Spotify app,
