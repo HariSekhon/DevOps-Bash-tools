@@ -23,6 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Uses Applescript to quit and re-open a given application
+
+Written to relaunch Shazam after deleting tracks from its DB using adjacent script to reflect the changes
 "
 
 # used by usage() in lib/utils.sh
