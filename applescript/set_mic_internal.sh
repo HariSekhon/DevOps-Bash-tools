@@ -33,9 +33,7 @@ help_usage "$@"
 
 num_args 0 "$@"
 
-if ! is_mac; then
-    die "Only supported on Mac"
-fi
+mac_only
 
 if ! type -P brew &>/dev/null; then
     "$srcdir/../install/install_homebrew.sh"
