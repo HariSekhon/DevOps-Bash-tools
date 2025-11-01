@@ -94,5 +94,5 @@ while IFS=$'\t' read -r artist title; do
     # trim leading/trailing whitespace and replace newlines
     artist="$(tr -d '\r' <<< "$artist" | sed 's/^ *//;s/ *$//')"
     title="$(tr -d '\r' <<< "$title" | sed 's/^ *//;s/ *$//')"
-    echo "$artist - $title"
+    printf "%s\t-\t%s\n" "$artist" "$title"
 done
