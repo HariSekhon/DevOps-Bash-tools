@@ -1,0 +1,1 @@
+../applescript/shazam_app_delete_track.sh
