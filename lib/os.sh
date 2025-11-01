@@ -29,3 +29,15 @@ is_mac(){
     fi
     return 1
 }
+
+linux_only(){
+    if ! is_linux; then
+        die "Only Linux is supported"
+    fi
+}
+
+mac_only(){
+    if ! is_mac; then
+        die "Only macOS is supported"
+    fi
+}
