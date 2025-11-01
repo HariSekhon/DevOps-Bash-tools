@@ -36,6 +36,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+mac_only
+
 filename="$1"
 if ! [[ "$filename" =~ ^/ ]]; then
     filename="$PWD/$filename"
