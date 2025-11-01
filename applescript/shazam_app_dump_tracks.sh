@@ -60,11 +60,11 @@ table="ZSHTAGRESULTMO"
 # detect columns dynamically
 cols="$(
     sqlite3 "$dbpath" "PRAGMA table_info($table);" |
-    awk -F'|' '{print $2}'
+    awk '{print $2}'
 )"
 
 artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols" || :)"
-title_column="$(grep -m1 -E 'TITLE' <<< "$cols" || :)"
+track_column="$(grep -m1 -E 'TRACK' <<< "$cols" || :)"
 date_column="$(grep -m1 -E 'DATE' <<< "$cols" || :)"
 
 if [ -z "$artist_column" ] ||
