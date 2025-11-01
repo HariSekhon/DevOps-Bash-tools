@@ -40,6 +40,8 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+mac_only
+
 export START_DELAY="${START_DELAY:-10}"
 export SLEEP_SECS="${SLEEP_SECS:-60}"
 
