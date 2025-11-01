@@ -1,0 +1,1 @@
+../applescript/shazam_app_dump_tracks.sh
