@@ -36,14 +36,20 @@ help_usage "$@"
 
 no_args "$@"
 
-while read -r track; do
-    "$srcdir/spotify_app_search.sh" "$track"
-    timestamp "Press enter to delete this track from the Shazam DB: $track"
+relaunch_shazam(){
+    timestamp "Relaunching Shazam app to reflect removed tracks"
+    "$srcdir/reopen_app.sh" Shazam
+    exit
+}
+export -f relaunch_shazam
+
+trap_cmd 'relaunch_shazam'
+
+while IFS=$'\t' read -r artist _ track; do
+    "$srcdir/spotify_app_search.sh" "$artist $track"
+    timestamp "Press enter to delete this track from the Shazam DB: $artist - $track"
     read -r < /dev/tty
-    "$srcdir/shazam_app_delete_track.sh"
+    "$srcdir/shazam_app_delete_track.sh" "$artist" "$track"
 done < <(
     "$srcdir/shazam_app_dump_tracks.sh"
 )
-
-timestamp "Relaunching Shazam app to reflect removed tracks"
-"$srcdir/reopen_app.sh" Shazam
