@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: Shazam
 #
 #  Author: Hari Sekhon
 #  Date: 2025-11-02 00:44:40 +0300 (Sun, 02 Nov 2025)
@@ -38,6 +39,8 @@ num_args 1 "$@"
 app="$1"
 
 mac_only
+
+timestamp "Quitting and re-opening app: $app"
 
 osascript <<EOF
     tell application "$app" to quit
