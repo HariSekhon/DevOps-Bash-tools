@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-RUns a search in the Spotify App on Mac using Applescript
+Runs a search in the Spotify App on Mac using Applescript
 "
 
 # used by usage() in lib/utils.sh
