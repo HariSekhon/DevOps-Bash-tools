@@ -45,5 +45,5 @@ done < <(
     "$srcdir/shazam_app_dump_tracks.sh"
 )
 
-timestamp "Quitting and re-opening Shazam app to reflect removed tracks"
+timestamp "Relaunching Shazam app to reflect removed tracks"
 "$srcdir/reopen_app.sh" Shazam
