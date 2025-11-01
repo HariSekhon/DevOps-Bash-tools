@@ -35,6 +35,8 @@ help_usage "$@"
 
 num_args 2 "$@"
 
+mac_only
+
 artist="$1"
 track="$2"
 
