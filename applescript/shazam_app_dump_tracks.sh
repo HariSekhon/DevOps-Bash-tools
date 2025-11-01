@@ -80,6 +80,7 @@ timestamp "Found Shazam App DB: $dbpath"
 #$date_column
 #"
 
+# my ~/.sqliterc forces pretty printing breaking the separator we need so -init /dev/null to ignore it
 sqlite3 "$dbpath" -init /dev/null -noheader -separator $'\t' \
 "
     SELECT a.ZNAME AS artist, r.ZTRACKNAME AS track
