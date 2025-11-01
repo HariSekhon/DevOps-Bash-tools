@@ -1,0 +1,1 @@
+../applescript/shazam_search_spotify_then_delete_track.sh
