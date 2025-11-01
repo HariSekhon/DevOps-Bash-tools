@@ -1,0 +1,1 @@
+../applescript/spotify_app_search.sh
