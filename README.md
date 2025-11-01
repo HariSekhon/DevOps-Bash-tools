@@ -401,6 +401,10 @@ Mac automation scripts to automate the Mac UI and settings
 - `is_screen_locked.py` - detect if the screen is locked to stop sending keystrokes or mouse clicks
 - `is_screensaver_running.scpt` - detect if the screensaver is running to stop sending keystrokes or mouse clicks
 - `reopen_app.sh` - relaunch a given app (used to reload Shazam to detect DB changes after removing tracks programmatically from its DB)
+- `shazam_app_dump_tracks.sh` - dumps `artist - track` one per line from the Shazam local sqlite DB
+- `shazam_app_delete_track.sh` - deletes a given `"artist" "track"` from the Shazam local sqlite DB
+- `shazam_search_spotify_then_delete_track.sh` - searches for each Shazam'd track in the local Spotify app,
+  then prompts to delete the track from the Shazam DB. Useful to migrate Shazam'd tracks to Spotify after Apple removed the integration
 - `screensaver_activate.scpt` - activate screensaver
 - `shorten_text_selection.scpt` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes
   out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
