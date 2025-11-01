@@ -39,10 +39,12 @@ help_usage "$@"
 
 no_args "$@"
 
+mac_only
+
 dbpath="$(
     find ~/Library/Group\ Containers \
         -type f \
-        -path '*/group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite' \
+        -path '*/*.group.com.shazam/com.shazam.mac.Shazam/ShazamDataModel.sqlite' \
         2>/dev/null |
     head -n 1
 )"
@@ -51,8 +53,40 @@ if [ -z "$dbpath" ]; then
     die "Error: Could not locate ShazamDataModel.sqlite"
 fi
 
+timestamp "Found Shazam App DB: $dbpath"
+
+table="ZSHTAGRESULTMO"
+
+# detect columns dynamically
+cols="$(
+    sqlite3 "$dbpath" "PRAGMA table_info($table);" |
+    awk -F'|' '{print $2}'
+)"
+
+artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols")"
+title_column="$(grep -m1 -E 'TITLE' <<< "$cols")"
+date_column="$(grep -m1 -E 'DATE' <<< "$cols")"
+
+if [ -z "$artist_column" ] ||
+   [ -z "$title_column" ] ||
+   [ -z "$date_column" ]; then
+    die "Error: Could not identify artist/title/date columns in table $table
+
+Columns found:
+
+$cols
+"
+fi
+
+echo "Found columns:
+
+$artist_column
+$title_column
+$date_column
+"
+
 sqlite3 "$dbpath" -noheader -separator $'\t' \
-    "SELECT ZARTIST, ZTITLE FROM ZSHTAGRESULTMO ORDER BY ZDATE DESC;" |
+    "SELECT $artist_column, $title_column FROM $table ORDER BY $date_column DESC;" |
 while IFS=$'\t' read -r artist title; do
     # trim leading/trailing whitespace and replace newlines
     artist="$(tr -d '\r' <<< "$artist" | sed 's/^ *//;s/ *$//')"
