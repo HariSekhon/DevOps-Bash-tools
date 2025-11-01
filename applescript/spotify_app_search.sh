@@ -38,7 +38,10 @@ mac_only
 
 query="$*"
 
-  osascript -e 'tell application "Spotify" to activate' \
-            -e 'tell application "System Events" to keystroke "l" using {command down}' \
-            -e 'delay 0.2' \
-            -e "tell application \"System Events\" to keystroke \"$query\" & return"
+timestamp "Telling Spotify app to search for: $query"
+
+osascript \
+        -e 'tell application "Spotify" to activate' \
+        -e 'tell application "System Events" to keystroke "l" using {command down}' \
+        -e 'delay 0.2' \
+        -e "tell application \"System Events\" to keystroke \"$query\" & return"
