@@ -40,6 +40,8 @@ help_usage "$@"
 
 #min_args 1 "$@"
 
+mac_only
+
 path="${1:-/}"
 
 timestamp "sudo mdfind \"com_apple_backup_excludeItem = 'com.apple.backupd'\""
