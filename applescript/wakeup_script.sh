@@ -40,6 +40,8 @@ help_usage "$@"
 
 num_args 0 "$@"
 
+mac_only
+
 {
 
 timestamp "Running Mac wake up script: $0"
