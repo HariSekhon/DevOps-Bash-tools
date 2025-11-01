@@ -68,4 +68,5 @@ WHERE Z_PK IN (
 );
 EOF
 
-timestamp "Deleted track: '$artist - $track'"
+timestamp "Deleting track from DB: '$artist - $track'"
+timestamp "You must now quit and re-open the Shazam app to pick up this change"
