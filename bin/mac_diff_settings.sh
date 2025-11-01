@@ -39,9 +39,7 @@ usage_args=""
 
 help_usage "$@"
 
-if ! is_mac; then
-    die "Only macOS is supported"
-fi
+mac_only
 
 before_snapshot_txt="/tmp/macos_defaults_before.txt.$$"
 after_snapshot_txt="/tmp/macos_defaults_after.txt.$$"
