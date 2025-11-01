@@ -39,6 +39,7 @@ no_args "$@"
 relaunch_shazam(){
     timestamp "Relaunching Shazam app to reflect removed tracks"
     "$srcdir/reopen_app.sh" Shazam
+    untrap
     exit
 }
 export -f relaunch_shazam
