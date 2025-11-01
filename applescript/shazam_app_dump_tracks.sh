@@ -29,6 +29,8 @@ Artist - Track
 
 Useful for using in conjunction with the adjacent spotify_app_search.sh script
 since Apple removed Shazam's Spotify integration
+
+Tested on Shazam app version 2.11.0 - may need to be modified for other versions as the Shazam DB schema changes
 "
 
 # used by usage() in lib/utils.sh
@@ -55,38 +57,37 @@ fi
 
 timestamp "Found Shazam App DB: $dbpath"
 
-table="ZSHTAGRESULTMO"
+#table="ZSHTAGRESULTMO"
 
 # detect columns dynamically
-cols="$(
-    sqlite3 "$dbpath" "PRAGMA table_info($table);" |
-    awk '{print $2}'
-)"
+#cols="$(
+#    sqlite3 "$dbpath" "PRAGMA table_info($table);" |
+#    awk '{print $2}'
+#)"
 
-artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols" || :)"
-track_column="$(grep -m1 -E 'TRACK' <<< "$cols" || :)"
-date_column="$(grep -m1 -E 'DATE' <<< "$cols" || :)"
+#artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols" || :)"
+#track_column="$(grep -m1 -E 'TRACK' <<< "$cols" || :)"
+#date_column="$(grep -m1 -E 'DATE' <<< "$cols" || :)"
 
-if [ -z "$artist_column" ] ||
-   [ -z "$title_column" ] ||
-   [ -z "$date_column" ]; then
-    die "Error: Could not identify artist/title/date columns in table $table
+#[ -n "$artist_column" ] || die "Error: Failed to find artist column"
+#[ -n "$track_column" ] || die "Error: Failed to find track column"
+#[ -n "$date_column" ] || die "Error: Failed to find date column"
 
-Columns found:
+#timestamp "Found columns:
+#
+#$artist_column
+#$track_column
+#$date_column
+#"
 
-$cols
+sqlite3 "$dbpath" -init /dev/null -noheader -separator $'\t' \
 "
-fi
-
-timestamp "Found columns:
-
-$artist_column
-$title_column
-$date_column
-"
-
-sqlite3 "$dbpath" -noheader -separator $'\t' \
-    "SELECT $artist_column, $title_column FROM $table ORDER BY $date_column DESC;" |
+    SELECT a.ZNAME AS artist, r.ZTRACKNAME AS track
+        FROM ZSHTAGRESULTMO r
+        LEFT JOIN ZSHARTISTMO a ON a.ZTAGRESULT = r.Z_PK
+        ORDER BY r.ZDATE DESC;
+" |
+sed '/^[[:space:]]*$/d' |
 while IFS=$'\t' read -r artist title; do
     # trim leading/trailing whitespace and replace newlines
     artist="$(tr -d '\r' <<< "$artist" | sed 's/^ *//;s/ *$//')"
