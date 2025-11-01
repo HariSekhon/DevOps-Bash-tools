@@ -41,6 +41,8 @@ help_usage "$@"
 
 min_args 1 "$@"
 
+mac_only
+
 num="$1"
 start_delay="${START_DELAY:-5}"
 sleep_secs="${SLEEP_SECS:-1}"
