@@ -61,7 +61,7 @@ shift || :
 
 output_filename="$file_basename_without_ext.%(ext)s"
 
-format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio[ext=m4a]/best[ext=mp4]"
+format="bestvideo[ext=mp4][vcodec^=avc1]+bestaudio/best[ext=mp4]"
 
 #"$srcdir/../packages/install_packages_if_absent.sh" yt-dlp ffmpeg
 
