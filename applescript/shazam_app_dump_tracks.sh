@@ -95,4 +95,6 @@ while IFS=$'\t' read -r artist title; do
     artist="$(tr -d '\r' <<< "$artist" | sed 's/^ *//;s/ *$//')"
     title="$(tr -d '\r' <<< "$title" | sed 's/^ *//;s/ *$//')"
     printf "%s\t-\t%s\n" "$artist" "$title"
-done
+done |
+# from https://github.com/HariSekhon/DevOps-Perl-tools repo - comment this if it's not in your \$PATH
+uniq_order_preserved.pl
