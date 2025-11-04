@@ -96,7 +96,7 @@ while IFS=$'\t' read -r artist title; do
     title="$(tr -d '\r' <<< "$title" | sed 's/^ *//;s/ *$//')"
     printf "%s\t-\t%s\n" "$artist" "$title"
 done |
-# from https://github.com/HariSekhon/DevOps-Perl-tools repo
+# from https://github.com/HariSekhon/DevOps-Perl-tools repo - use it if present in $PATH
 if type -P uniq_order_preserved.pl &>/dev/null; then
     uniq_order_preserved.pl
 else
