@@ -97,7 +97,7 @@ while IFS=$'\t' read -r artist title; do
     printf "%s\t-\t%s\n" "$artist" "$title"
 done |
 if type -P uniq_order_preserved.pl &>/dev/null; then
-    # from https://github.com/HariSekhon/DevOps-Perl-tools repo - comment this if it's not in your \$PATH
+    # from https://github.com/HariSekhon/DevOps-Perl-tools repo
     uniq_order_preserved.pl
 else
     cat
