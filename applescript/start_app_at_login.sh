@@ -23,6 +23,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Adds an App to auto-start at Login
+
+Checks the /Applications and \$HOME/Applications for the given app name
+
+(auto-tries both with and without .app extension so you can provide it either way)
 "
 
 # used by usage() in lib/utils.sh
