@@ -413,8 +413,9 @@ Mac automation scripts to automate the Mac UI and settings
   out multiple blank lines. I use this for LinkedIn comments due to the short 1250 character limit
 - `start_app_at_login.sh` - adds an app to the Login items to auto-start
 
-`configs/.hammerspoon/init.lua` - event handlers to automatically switch from connecting AirPods to multi-output audio
-to be able to Shazam songs while watching movies or TV shows on AirPods
+Hammerspoon code has been moved to its own repo:
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Hammerspoon&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Hammerspoon)
 
 See also [Mac](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md) page
 in [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base).
