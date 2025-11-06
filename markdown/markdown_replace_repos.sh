@@ -73,7 +73,11 @@ done
 
 timestamp "Fetching other repos section for file '$markdown_file' from $url"
 
-curl -sS "$url" > "$other_repos_tmp"
+if [ -f "$url" ]; then
+    cp "$url" "$other_repos_tmp"
+else
+    curl -sS "$url" > "$other_repos_tmp"
+fi
 
 if [ -z "$other_repos_tmp" ]; then
     die "URL returned empty content: $url"
