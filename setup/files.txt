@@ -43,7 +43,7 @@ configs/.editorconfig
 configs/.gemrc
 configs/.git-templates/git-secrets/hooks/*
 configs/.grype.yaml
-configs/.hammerspoon
+#configs/.hammerspoon  # moved to its own repo
 configs/.inputrc
 configs/.luacheckrc
 configs/.my.cnf
