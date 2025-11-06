@@ -28,9 +28,10 @@
 #
 
 HariSekhon:harisekhon
-Knowledge-Base:knowledge
+#Knowledge-Base:knowledge
 Environments:environments
 TamperMonkey:tampermonkey
+Hammerspoon:hammerspoon
 # order repos by dependent submodule repos first
 GitHub-Actions-Contexts:contexts
 SQL-keywords:sql-keywords
