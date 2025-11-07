@@ -29,6 +29,7 @@ podman
 postman
 powershell
 protonvpn
+raycast
 spotify
 transmission
 tor-browser
