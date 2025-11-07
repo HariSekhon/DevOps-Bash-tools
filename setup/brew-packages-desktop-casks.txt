@@ -5,6 +5,7 @@
 
 # run: CASK=1 ../packages/brew_install_packages.sh brew-packages-desktop-casks.txt
 
+alfred
 anaconda
 atom
 barrier
