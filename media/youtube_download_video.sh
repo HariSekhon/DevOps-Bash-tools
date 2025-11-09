@@ -127,6 +127,7 @@ else
     filename="$(
         yt-dlp --get-filename \
                --format "$format" \
+               --merge-output-format mp4 \
                --output "$output_filename" \
                ${COOKIES_FROM_BROWSER:+--cookies-from-browser "$COOKIES_FROM_BROWSER"} \
                "$@" \
