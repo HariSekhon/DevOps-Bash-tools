@@ -103,8 +103,7 @@ exclude_path(){
         return
     fi
     timestamp "Adding path to macOS Time Machine exclusions: $path"
-    #"$sudo" tmutil addexclusion -p "$path"
-    tmutil addexclusion -p "$path"
+    "$sudo" tmutil addexclusion -p "$path"
 }
 
 for path in "$@"; do
