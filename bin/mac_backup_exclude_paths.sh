@@ -41,8 +41,7 @@ $HOME/Downloads/Transmission
 $HOME/Downloads/YouTube
 $HOME/Library/Application Support/Spotify/PersistentCache
 $HOME/Library/Application Support/multipass/
-$HOME/Library/Caches/Homebrew
-$HOME/Library/Caches/pip
+$HOME/Library/Caches
 $HOME/Library/Containers/com.docker.docker
 $HOME/Library/Developer/Xcode/DerivedData
 $HOME/Library/Logs/rancher-desktop
