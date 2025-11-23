@@ -34,6 +34,9 @@ export HOMEBREW_DISPLAY_INSTALL_TIMES=1
 # Stops Mac calling update_terminal_cwd() which causes a tonne of noise during set -x tracing
 export INSIDE_EMACS=1
 
+export icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias icloud="cd '$icloud'"
+
 alias osash="osascript -i"
 alias osashell=osash
 
