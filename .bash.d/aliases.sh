@@ -200,6 +200,9 @@ alias work="sti work; cd '$work'"
 
 alias btup="bt; u; cd -"
 
+export icloud="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
+alias icloud="cd '$icloud'"
+
 export bitbucket=~/bitbucket
 alias bitb='cd $bitbucket'
 # clashes with bitbucket-cli
