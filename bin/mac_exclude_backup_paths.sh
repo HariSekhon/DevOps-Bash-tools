@@ -103,6 +103,8 @@ exclude_path(){
         return
     fi
     timestamp "Adding path to macOS Time Machine exclusions: $path"
+    # defined in lib/utils-bourne.sh
+    # shellcheck disable=SC2154
     "$sudo" tmutil addexclusion -p "$path"
 }
 
