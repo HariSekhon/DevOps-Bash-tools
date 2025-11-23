@@ -378,7 +378,8 @@ Mac automation scripts to automate the Mac UI and settings
 
 - `mac_diff_settings.sh` - takes before and after snapshots of UI setting changes and diffs them to make it easy to find `defaults` keys to add to `setup/mac_settings.sh` to save settings
 - `mac_restore_file.sh` - checks all the backup mount points for the latest backup that has a given file and then restores it
-- `mac_find_excluded_backup_paths.sh` - does a deep search for excluded backup paths on file/folder attributes. See [HariSekhon/Knowledge-Base Mac page](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#time-machine) for why
+- `mac_backup_exclude_paths.sh` - excludes many common large caches, docker and VM paths from macOS Time Machine backups
+- `mac_backup_find_excluded_paths.sh` - does a deep search for macOS Time Machine excluded backup paths on file/folder attributes. See [HariSekhon/Knowledge-Base Mac page](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#time-machine) for why
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
@@ -1832,24 +1833,35 @@ Does nothing:
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=GitHub-Actions&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/GitHub-Actions)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Jenkins&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Jenkins)
 
-### DBA - SQL
+### Databases - DBA - SQL
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=SQL-scripts&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/SQL-scripts)
 
 ### DevOps Reloaded
 
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Nagios-Plugins&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Nagios-Plugins)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=HAProxy-configs&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/HAProxy-configs)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Terraform&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Terraform)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Packer&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Packer)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Ansible&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Ansible)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Environments&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Environments)
+
+### Monitoring
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Nagios-Plugins&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Nagios-Plugins)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Nagios-Plugin-Kafka&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Nagios-Plugin-Kafka)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Prometheus&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Prometheus)
 
 ### Templates
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Templates&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Templates)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Template-repo&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Template-repo)
 
-### Misc
+### Desktop
+
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=TamperMonkey&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/TamperMonkey)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Hammerspoon&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Hammerspoon)
+
+### Spotify
 
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Spotify-tools&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Spotify-tools)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=HariSekhon&repo=Spotify-playlists&theme=ambient_gradient&description_lines_count=3)](https://github.com/HariSekhon/Spotify-playlists)
@@ -1858,8 +1870,5 @@ The rest of my original source repos are
 [here](https://github.com/HariSekhon?tab=repositories&q=&type=source&language=&sort=stargazers).
 
 Pre-built Docker images are available on my [DockerHub](https://hub.docker.com/u/harisekhon/).
-
-<!-- 1x1 pixel counter to record hits -->
-![](https://hit.yhype.me/github/profile?user_id=2211051)
 
 <!-- OTHER_REPOS_END -->
