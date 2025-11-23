@@ -66,7 +66,7 @@ excluded_paths="$(sort -u <<< "$excluded_paths" | sed '/^[[:space:]]*$/d')"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Excludes some common large but useless paths from macOS Time Machine backups
+Excludes many common large caches, docker and VM paths from macOS Time Machine backups
 
 Must be either run as root or will attempt to use sudo to add each path
 
