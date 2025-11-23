@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Does a recursive deep search for Mac Time Machine excluded paths on individual file/folder attributes
+Does a recursive deep search for macOS Time Machine excluded paths on individual file/folder attributes
 to find items excluded from backups that don't appear in the Time Machine UI
 
 If a path argument is given, does the deep scan on only that tree
