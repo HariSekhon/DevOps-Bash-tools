@@ -43,6 +43,7 @@ $HOME/Library/Application Support/Spotify/PersistentCache
 $HOME/Library/Application Support/multipass/
 $HOME/Library/Caches
 $HOME/Library/Containers/com.docker.docker
+$HOME/Library/Containers/com.utmapp.UTM/Data
 $HOME/Library/Developer/Xcode/DerivedData
 $HOME/Library/Logs/rancher-desktop
 $HOME/Library/State/rancher-desktop
