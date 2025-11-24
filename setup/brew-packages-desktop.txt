@@ -261,6 +261,7 @@ rdesktop
 #readline  # in brew-packages.txt
 #restic  # backup program, tracks versions, backups to a local repo dir / SFTP / Restic server http(s) / S3 / GCS / MinIO / Rclone
 rlwrap  # gives readline wrapping support (commonly used with Oracle SQL*Plus)
+rsync  # newer rsync 3 than macOS rsync 2 - has new/different switches
 #rtmpdump
 ruby  # Mac ruby is too old to install Travis CI
 ruby-completion
