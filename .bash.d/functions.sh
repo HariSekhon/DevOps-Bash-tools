@@ -122,7 +122,8 @@ clip(){
 
 dle(){
     if [ "$PWD" = "$HOME" ]; then
-        cd ~/Downloads || return 1
+        mkdir -p -v ~/Downloads/YouTube
+        cd ~/Downloads/YouTube || return 1
     fi
     while true; do
         if BACKGROUND_VIDEO=1 youtube_download_video.sh "$@"; then
