@@ -22,7 +22,10 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Move files from one volume to another atomically with partial continuation and removing the souce files when done
+Move files from one volume to another atomically with partial resume support for large files and
+removes the source files once they're copied
+
+Useful to migrate data from one disk to another to reformat the first disk
 
 If the CHECKSUM environment variable is set to any non-blank value
 then also checksums the files on both ends (very slow)
