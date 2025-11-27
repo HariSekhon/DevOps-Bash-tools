@@ -29,7 +29,9 @@ Useful to migrate data from one disk to another
 If the CHECKSUM environment variable is set to any non-blank value
 then also checksums the files on both ends (very slow)
 
-To see the volume transfer progress, in another terminal you can run:
+Shows the overall % of files transferred and the MB/s data transfer rate
+
+To see the overall volume size transfer progress, in another terminal you can run:
 
     watch df -m /Volumes/One /Volumes/Two
 "
