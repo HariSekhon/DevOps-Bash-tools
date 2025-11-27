@@ -41,6 +41,11 @@ prematurely
 
 Removes the test file upon completion or Control-C (don't multiple Control-C or it'll abort the file cleanup and
 then you'll need to remove it manually as this program will not overwrite an existing file for safety)
+
+Set environment variable NODELETE to any value if you want to retain the file in the case of successful completion
+for use with the adjacent script:
+
+    disk_read_speed_sequential_dd.sh
 "
 
 # used by usage() in lib/utils.sh
@@ -72,4 +77,9 @@ dd if=/dev/zero of="$file" bs=64m count=64 oflag=direct
 
 echo >&2
 timestamp "Write test completed"
-timestamp "Removing test file: $file"
+if [ -n "${NODELETE:-}" ]; then
+    timestamp "Retaining test file: $file"
+    untrap
+else
+    timestamp "Removing test file: $file"
+fi
