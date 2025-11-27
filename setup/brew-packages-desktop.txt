@@ -110,6 +110,7 @@ exiv2     # view image metadata
 fastlane  # for Mobile CI/CD development
 ffmpeg
 #filezilla  # GUI ftp client - not found
+fio  # disk I/O speed test
 firebase-cli
 fish
 flyscrape
