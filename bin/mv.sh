@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Move files from one volume to another atomically and removes the source files once they're copied
+Moves directory trees resumably and removes the source directories as they're copied over
 
 Useful to migrate data from one disk to another
 
