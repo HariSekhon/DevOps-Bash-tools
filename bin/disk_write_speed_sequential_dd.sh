@@ -56,7 +56,7 @@ help_usage "$@"
 max_args 1 "$@"
 
 dir="${1:-${PWD:-$(pwd)}}"
-file="$dir/disk_write_speed_sequential_test_dd.bin"
+file="$dir/disk_speed_test_sequential_dd.bin"
 file="${file//\/\//\/}"
 
 #if [ -e "$file" ]; then
