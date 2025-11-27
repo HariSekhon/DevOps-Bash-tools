@@ -28,6 +28,10 @@ Useful to migrate data from one disk to another
 
 If the CHECKSUM environment variable is set to any non-blank value
 then also checksums the files on both ends (very slow)
+
+To see the volume transfer progress, in another terminal you can run:
+
+    watch df -m /Volumes/One /Volumes/Two
 "
 
 # used by usage() in lib/utils.sh
