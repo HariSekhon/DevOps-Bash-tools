@@ -36,7 +36,8 @@ Useful for testing:
 I wrote this because I discovered a huge performance and estimated time to restore speed difference using
 macOS Time Machine recovery while using USB 2 vs USB 3 cables with the same SanDisk Extreme Pro SSD external backup disk
 
-Don't re-run this on SSDs frequently as they have a limited number of writes and you'll wear the disk out prematurely)
+WARNING: Don't re-run this on SSDs frequently as they have a limited number of writes and you'll wear the disk out
+prematurely
 
 Removes the test file upon completion or Control-C (don't multiple Control-C or it'll abort the file cleanup and
 then you'll need to remove it manually as this program will not overwrite an existing file for safety)
