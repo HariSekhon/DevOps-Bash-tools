@@ -24,7 +24,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Move files from one volume to another atomically with partial continuation and removing the souce files when done
 
-If CHECKSUM is set to any value also checksums the files on both ends (very slow)
+If the CHECKSUM environment variable is set to any non-blank value
+then also checksums the files on both ends (very slow)
 "
 
 # used by usage() in lib/utils.sh
