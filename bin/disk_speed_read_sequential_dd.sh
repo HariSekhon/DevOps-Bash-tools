@@ -59,10 +59,10 @@ if [ -d "$file" ]; then
 fi
 file="${file//\/\//\/}"
 
-timestamp "Read test from: $file"
+timestamp "Sequential read test from: $file"
 echo >&2
 
 dd if="$file" of=/dev/null bs=64m iflag=direct
 
 echo >&2
-timestamp "Read test completed"
+timestamp "Sequential read test completed"
