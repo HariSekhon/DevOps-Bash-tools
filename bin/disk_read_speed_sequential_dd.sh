@@ -38,7 +38,7 @@ macOS Time Machine recovery while using USB 2 vs USB 3 cables with the same SanD
 
 Generate a file to read using the adjacent script:
 
-    disk_write_speed_sequential_dd.sh
+    NODELETE=1 disk_write_speed_sequential_dd.sh
 "
 
 # used by usage() in lib/utils.sh
