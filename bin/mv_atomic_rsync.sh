@@ -25,7 +25,7 @@ usage_description="
 Move files from one volume to another atomically with partial resume support for large files and
 removes the source files once they're copied
 
-Useful to migrate data from one disk to another to reformat the first disk
+Useful to migrate data from one disk to another
 
 If the CHECKSUM environment variable is set to any non-blank value
 then also checksums the files on both ends (very slow)
