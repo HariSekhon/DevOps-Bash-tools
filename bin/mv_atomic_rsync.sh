@@ -47,6 +47,8 @@ rsync -avh \
       --progress \
       --info=progress2,stats \
       --remove-source-files "$src/" "$dest/" \
+      --exclude=.Spotlight-V100 \
+      --exclude=.fseventsd \
       ${CHECKSUM:+--checksum}
       # no point in partial resume if you need to --apend-verify checksum
       #--partial \
