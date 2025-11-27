@@ -31,6 +31,9 @@ then also checksums the files on both ends (very slow)
 
 Shows the overall % of files transferred and the MB/s data transfer rate
 
+Uses rsync so the source and destination directories follows the same principle, do not suffix a slash
+unless you want the contents to be copied without the top level directory name
+
 To see the overall volume size transfer progress, in another terminal you can run:
 
     watch df -m /Volumes/One /Volumes/Two
