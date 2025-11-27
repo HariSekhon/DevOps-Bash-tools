@@ -39,8 +39,7 @@ macOS Time Machine recovery while using USB 2 vs USB 3 cables with the same SanD
 WARNING: Don't re-run this on SSDs frequently as they have a limited number of writes and you'll wear the disk out
 prematurely
 
-Removes the test file upon completion or Control-C (don't multiple Control-C or it'll abort the file cleanup and
-then you'll need to remove it manually as this program will not overwrite an existing file for safety)
+Removes the test file upon completion or Control-C (don't Control-C multiple times or it may not remove file)
 
 Set environment variable NODELETE to any value if you want to retain the file in the case of successful completion
 for use with the adjacent script:
