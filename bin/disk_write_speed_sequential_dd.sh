@@ -33,7 +33,7 @@ Useful for testing:
 - different cables with the same disk
 - different ports on Macs (right ports may be slower)
 
-I wrote this because i discovered a huge performance and estimated time to restore speed difference using
+I wrote this because I discovered a huge performance and estimated time to restore speed difference using
 macOS Time Machine recovery while using USB 2 vs USB 3 cables with the same SanDisk Extreme Pro SSD external backup disk
 
 Don't re-run this on SSDs frequently as they have a limited number of writes and you'll wear the disk out prematurely)
