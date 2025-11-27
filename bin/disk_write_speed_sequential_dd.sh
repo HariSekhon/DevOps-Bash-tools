@@ -29,9 +29,9 @@ Uses dd and bypasses filesystem cache for a more accurate test
 
 Useful for testing:
 
-- different disks
-- different cables with the same disk
-- different ports on Macs (right ports may be slower)
+- different disks' speeds
+- different cables' speed with the same disk
+- different ports' speeds on Macs (right ports may be slower)
 
 I wrote this because I discovered a huge performance and estimated time to restore speed difference using
 macOS Time Machine recovery while using USB 2 vs USB 3 cables with the same SanDisk Extreme Pro SSD external backup disk
