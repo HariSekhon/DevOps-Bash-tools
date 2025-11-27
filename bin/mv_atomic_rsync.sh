@@ -22,8 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Move files from one volume to another atomically with partial resume support for large files and
-removes the source files once they're copied
+Move files from one volume to another atomically and removes the source files once they're copied
 
 Useful to migrate data from one disk to another
 
@@ -47,9 +46,12 @@ echo >&2
 rsync -avh \
       --progress \
       --info=progress2,stats \
-      --partial \
       --remove-source-files "$src/" "$dest/" \
       ${CHECKSUM:+--checksum}
+      # no point in partial resume if you need to --apend-verify checksum
+      #--partial \
+      #--no-whole-file \
+      #--append-verify \
 echo >&2
 
 timestamp "Move complete, deleting empty directories from '$src'"
