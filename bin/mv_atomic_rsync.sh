@@ -48,7 +48,6 @@ dest="$2"
 timestamp "Starting resumable rsync to move files from '$src' to '$dest'"
 echo >&2
 rsync -avh \
-      --progress \
       --info=progress2,stats \
       --remove-source-files "$src/" "$dest/" \
       --exclude=.Spotlight-V100 \
