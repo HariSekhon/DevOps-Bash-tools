@@ -85,6 +85,8 @@ set fileencoding=utf-8  " The encoding written to file.
 " add comment to next line when using Insert mode
 set formatoptions+=or
 
+" double forward slash means put backup files directly under this directory instead of trying to recreate the directory structure which might fail
+"set backupdir=.,~//
 
 " ============================================================================ "
 "                                   G U I
