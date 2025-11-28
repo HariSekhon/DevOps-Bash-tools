@@ -330,7 +330,7 @@ alias etc='cd $etc'
 
 alias distro='cat /etc/*release /etc/*version 2>/dev/null'
 alias trace=traceroute
-alias t='$EDITOR ~/tmp'
+alias t='$EDITOR ~/temp-notes.txt'
 # causes more problems than it solves on a slow machine missing the prompt
 #alias y=yes
 alias t2='$EDITOR ~/tmp2'
