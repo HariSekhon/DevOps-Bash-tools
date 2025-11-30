@@ -13,6 +13,7 @@ blackhole-2ch  # to create multi-output sound device to shazam songs from shows 
 ccmenu
 codeship/taps/jet
 docker
+flux-app
 #insomnia  # Kong Rest API testing client desktop app
 #iterm2
 #firefox-developer-edition
