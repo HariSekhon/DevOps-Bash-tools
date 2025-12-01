@@ -23,11 +23,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Safely delete a directory on Mac only if it is empty
-
-Written because rmdir doesn't work due to macOS desktop hidden files and dirs
-
-Deletes the following safe-to-delete directories and files first:
+Safely delete a directory on Mac only if it is empty of actual data,
+by first removing macOS hidden metadata files and dirs such as:
 
 - .fseventsd/
 - .Spotlight-V100/
