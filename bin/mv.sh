@@ -66,6 +66,9 @@ echo >&2
 
 timestamp "Move complete, deleting empty directories from '$src'"
 echo >&2
+if is_mac; then
+    find "$src" -type d -exec "$srcdir/mac_rmdir.sh" {} \;
+fi
 find "$src" -type d -empty -delete
 echo >&2
 
