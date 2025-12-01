@@ -50,8 +50,8 @@ for subdir in .fseventsd .Spotlight-V100; do
     fi
 done
 if [ -f "$dir/.DS_Store" ]; then
-    timestamp "rm -v \"${dir:?}/.DS_Store\""
-    rm -v "${dir:?}/.DS_Store"
+    timestamp "rm -fv \"${dir:?}/.DS_Store\""
+    rm -fv "${dir:?}/.DS_Store"
 fi
 timestamp "rmdir -v \"$dir\""
 rmdir -v "$dir"
