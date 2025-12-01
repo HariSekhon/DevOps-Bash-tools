@@ -29,6 +29,12 @@ by first removing macOS hidden metadata files and dirs such as:
 - .fseventsd/
 - .Spotlight-V100/
 - .DS_Store
+
+You can combine with the find command to clean out an empty directory tree:
+
+    find . -type d -exec "$srcdir/mac_rmdir.sh" {} \;
+
+Used by adjacent mv.sh script
 "
 
 # used by usage() in lib/utils.sh
@@ -41,17 +47,27 @@ num_args 1 "$@"
 
 dir="$1"
 
-for subdir in .fseventsd .Spotlight-V100; do
+metadata_dirs="
+.fseventsd
+.Spotlight-V100
+"
+
+while read -r subdir; do
+    if is_blank "$subdir"; then
+        continue
+    fi
     if [ -d "$dir" ]; then
         timestamp "rm -rfv \"${dir:?}/${subdir:?}\""
         # defensive coding - returns an error if the variables are unset for extra safety
         # to prevent rm -rf / upon blank variables
         rm -rfv "${dir:?}/${subdir:?}"
     fi
-done
+done <<< "$metadata_dirs"
+
 if [ -f "$dir/.DS_Store" ]; then
     timestamp "rm -fv \"${dir:?}/.DS_Store\""
     rm -fv "${dir:?}/.DS_Store"
 fi
+
 timestamp "rmdir -v \"$dir\""
 rmdir -v "$dir"
