@@ -43,12 +43,15 @@ dir="$1"
 
 for subdir in .fseventsd .Spotlight-V100; do
     if [ -d "$dir" ]; then
+        timestamp "rm -rfv \"${dir:?}/${subdir:?}\""
         # defensive coding - returns an error if the variables are unset for extra safety
         # to prevent rm -rf / upon blank variables
         rm -rfv "${dir:?}/${subdir:?}"
     fi
 done
 if [ -f "$dir/.DS_Store" ]; then
+    timestamp "rm -v \"${dir:?}/.DS_Store\""
     rm -v "${dir:?}/.DS_Store"
 fi
+timestamp "rmdir -v \"$dir\""
 rmdir -v "$dir"
