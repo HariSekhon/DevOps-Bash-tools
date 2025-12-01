@@ -72,4 +72,4 @@ fi
 find "$src" -type d -empty -delete
 echo >&2
 
-timestamp "Atomic move completed"
+timestamp "Directory tree move completed"
