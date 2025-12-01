@@ -53,5 +53,5 @@ if [ -f "$dir/.DS_Store" ]; then
     timestamp "rm -fv \"${dir:?}/.DS_Store\""
     rm -fv "${dir:?}/.DS_Store"
 fi
-timestamp "rmdir -vp \"$dir\""
-rmdir -vp "$dir"
+timestamp "rmdir -v \"$dir\""
+rmdir -v "$dir"
