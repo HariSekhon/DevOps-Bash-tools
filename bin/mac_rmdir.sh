@@ -14,6 +14,15 @@
 #  https://www.linkedin.com/in/HariSekhon
 #
 
+# Test:
+#
+#   mkdir -v /tmp/testdir
+#   mkdir -v /tmp/testdir/.fseventsd
+#   mkdir -v /tmp/testdir/.Spotlight-V100
+#   touch -v /tmp/testdir/.DS_Store
+#
+#   mac_rmdir.sh /tmp/testdir
+
 set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
