@@ -121,7 +121,7 @@ clip(){
 }
 
 dle(){
-    if [ "$PWD" = "$HOME" ]; then
+    if [[ "$PWD" =~ $HOME(/Downloads(/Transmission)?)?$ ]]; then
         echo "Switching to $HOME/Downloads/YouTube"
         mkdir -p -v ~/Downloads/YouTube
         cd ~/Downloads/YouTube || return 1
