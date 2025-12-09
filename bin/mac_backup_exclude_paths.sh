@@ -54,6 +54,7 @@ $HOME/go/bin
 $HOME/go/pkg
 $HOME/go/src/github.com
 $HOME/go/src/golang.org
+/System/Library/AssetsV2/com_apple_MobileAsset_MacSoftwareUpdate
 "
 
 if [ -n "${GOPATH:-}" ]; then
