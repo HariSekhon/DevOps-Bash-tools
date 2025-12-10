@@ -71,6 +71,6 @@ timestamp "Created: $disk"
 echo
 diskutil list
 echo
-timestamp "Double check the disk and then run format to mount the Ramdisk with HFS+: $disk"
+timestamp "SAFETY: double check the disk and then run format to mount the Ramdisk with HFS+: $disk"
 echo
 echo diskutil erasevolume HFS+ "Ramdisk" "$disk"
