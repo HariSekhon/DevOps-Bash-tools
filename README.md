@@ -386,7 +386,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `mac_backup_find_excluded_paths.sh` - does a deep search for macOS Time Machine excluded backup paths on file/folder attributes. See [HariSekhon/Knowledge-Base Mac page](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#time-machine) for why
 - `mac_rmdir.sh` - safely delete a directory on Mac only if it is empty of actual data, by first removing macOS hidden metadata files and dirs such as `.fseventsd/`, `.Spotlight-V100/` and `.DS_Store` - straight `rmdir` fails otherwise
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
-- `mac_ramdisk.sh` - creates a mac ramdisk of given MB size
+- `mac_ramdisk.sh` - creates a mac ramdisk of given MB size. Useful for performance, or even testing disk write scripts such as `disk_speed_write_*.sh` without wearing out your SSD
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_from_clipboard_upon_changes.sh` - pastes from system clipboard to stdout on Linux or Mac whenever the clipboard changes
