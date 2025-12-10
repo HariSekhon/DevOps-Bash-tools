@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Creates and mounts a macOS ramdisk of the given size in GB
+Creates and mounts a macOS ramdisk of the given size in MB
 
 To remove the ramdisk, just run:
 
@@ -31,19 +31,19 @@ To remove the ramdisk, just run:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<GB_size>]"
+usage_args="[<MB_size>]"
 
 help_usage "$@"
 
 num_args 1 "$@"
 
-gb="$1"
+MB="$1"
 
-if ! is_int "$gb"; then
-    die "Invalid argument given, GB must be an integer"
+if ! is_int "$MB"; then
+    die "Invalid argument given, MB must be an integer"
 fi
 
-blocks="$(("$gb" * 1024 * 1024 * 1024 / 512))"
+blocks="$(("$MB" * 1024 * 1024 / 512))"
 
 list_ramdisks() {
     diskutil list | \
@@ -65,7 +65,7 @@ if [ -n "$existing" ]; then
     die "Refusing to create a new RAM disk; please reuse or eject the existing one(s) to avoid leaking ramdisks from repeated runs"
 fi
 
-timestamp "Creating ramdisk of size '$gb' GB => '$blocks' blocks"
+timestamp "Creating ramdisk of size '$MB' MB => '$blocks' blocks"
 disk="$(hdiutil attach -nomount ram://$blocks)"
 timestamp "Created: $disk"
 echo
