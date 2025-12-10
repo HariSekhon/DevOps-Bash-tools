@@ -1,55 +1,76 @@
 #!/usr/bin/env bash
+#  vim:ts=4:sts=4:sw=4:et
 #
-#   Author: Hari Sekhon
-#   Date: 2012-07-10 15:36:54 +0100 (Tue, 10 Jul 2012)
-#  $LastChangedBy$
-#  $LastChangedDate$
-#  $Revision$
-#  $URL$
-#  $Id$
+#  Author: Hari Sekhon
+#  Date: 2012-07-10 15:36:54 +0100 (Tue, 10 Jul 2012)
 #
-#  vim:ts=4:sw=4:et
+#  https///github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
 
-set -e
-set -u
+set -euo pipefail
+[ -n "${DEBUG:-}" ] && set -x
+srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-die(){
-    echo "$@"
-    exit 1
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/utils.sh"
+
+# shellcheck disable=SC2034,SC2154
+usage_description="
+Creates and mounts a macOS ramdisk of the given size in GB
+
+To remove the ramdisk, just run:
+
+    diskutil eject /Volumes/Ramdisk
+"
+
+# used by usage() in lib/utils.sh
+# shellcheck disable=SC2034
+usage_args="[<GB_size>]"
+
+help_usage "$@"
+
+num_args 1 "$@"
+
+gb="$1"
+
+if ! is_int "$gb"; then
+    die "Invalid argument given, GB must be an integer"
+fi
+
+blocks="$(("$gb" * 1024 * 1024 * 1024 / 512))"
+
+list_ramdisks() {
+    diskutil list | \
+    awk '
+        /^\// {disk=$1}
+        /RAM Disk/ {print disk}
+    ' | \
+    while read -r d; do
+        mp=$(mount | awk -v d="$d" '$1==d {print $3}')
+        printf "%s %s\n" "$d" "$mp"
+    done
 }
 
-usage(){
-    die "usage: $0 -p /mount/point -s size_MB"
-}
+existing="$(list_ramdisks)"
 
-mount_point=""
-size=""
-until [ $# -lt 1 ]; do
-    case $1 in
-        -p) mount_point=$2
-            shift
-            ;;
-        -s) size=$2
-            shift
-            ;;
-         *) usage
-            ;;
-    esac
-    shift
-done
+if [ -n "$existing" ]; then
+    timestamp "Existing RAM disks found:"
+    echo "$existing"
+    die "Refusing to create a new RAM disk; please reuse or eject the existing one(s) to avoid leaking ramdisks from repeated runs"
+fi
 
-[ -n "$mount_point" ] || usage
-[ -n "$size" ] || usage
-
-mkdir -p "$mount_point" || die "The mount point didn't available."
-
-sector=$(expr $size \* 1024 \* 1024 / 512)
-device_name=$(hdid -nomount "ram://${sector}" | awk '{print $1}')
-[[ "$device_name" =~ /dev/disk* ]] || die "Failed to create/get ramdisk "
-[[ "$device_name" =~ /dev/disk[123] ]] && die "ERROR: returned $device_name, one of first 3 disks, aborting for safety"
-newfs_hfs -U hari "$device_name" || die "failed to create hfs filesystem"
-mount -t hfs "$device_name" "$mount_point" || die "Failed to mount $device_name at $mount_point"
-echo "Mounted $device_name at $mount_point"
-# To get rid of this ramdisk
-# umount "$mount_point"
-# hdiutil detach -quiet "$device_name"
+timestamp "Creating ramdisk of size '$gb' GB => '$blocks' blocks"
+disk="$(hdiutil attach -nomount ram://$blocks)"
+timestamp "Created: $disk"
+echo
+diskutil list
+echo
+timestamp "Double check the disk and then run format to mount the Ramdisk with HFS+: $disk"
+echo
+echo diskutil erasevolume HFS+ "Ramdisk" "$disk"
