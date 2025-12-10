@@ -324,6 +324,9 @@ Top-level `.bashrc` and `.bash.d/` directory:
   the exact same checksum for safety. Prompts to delete per file. To auto-accept deletions, do
   `yes | delete_duplicate_files.sh`. This is a fast way of cleaning up your `~/Downloads` directory and can be put your
   user crontab
+- `disk_speed_read_sequential_dd.sh` - runs a sequential read test from the given file in order to test the sequential read speed. Uses dd and bypasses filesystem cache for a more accurate test
+- `disk_speed_read_random_dd.sh` - runs a random I/O read test from the given file in order to test the random read speed. Uses dd and bypasses filesystem cache for a more accurate test
+- `disk_speed_write_sequential_dd.sh` - runs a sequential write test to a file in the given or current directory in order to test the sequential write speed. Uses dd and bypasses filesystem cache for a more accurate test
 - `download_url_file.sh` - downloads a file from a URL using wget with no clobber and continue support, or curl with atomic replacement to avoid race conditions. Used by `github/github_download_release_file.sh`, `github_download_release_jar.sh`, and `install/download_*_jar.sh`
 - `curl_auth.sh` - shortens `curl` command by auto-loading your OAuth2 / JWT API token or username & password from environment variables or interactive starred password prompt through a ram file descriptor to avoid placing them on the command line (which would expose your credentials in the process list or OS audit log files). Used by many other adjacent API querying scripts
 - `curl_with_cookies.sh` - extracts cookies for a given URL from your `\$BROWSER`'s cookie jar and passes them to the `curl` command along with the rest of the args (workaround for older curl builds and Homebrew builds that don't have the newer `--cookies-from-browser functionality)
@@ -383,6 +386,7 @@ Mac automation scripts to automate the Mac UI and settings
 - `mac_backup_find_excluded_paths.sh` - does a deep search for macOS Time Machine excluded backup paths on file/folder attributes. See [HariSekhon/Knowledge-Base Mac page](https://github.com/HariSekhon/Knowledge-Base/blob/main/mac.md#time-machine) for why
 - `mac_rmdir.sh` - safely delete a directory on Mac only if it is empty of actual data, by first removing macOS hidden metadata files and dirs such as `.fseventsd/`, `.Spotlight-V100/` and `.DS_Store` - straight `rmdir` fails otherwise
 - `mac_iso_to_usb.sh` - converts a given ISO file to a USB bootable image and burns it onto a given or detected inserted USB drive
+- `mac_ramdisk.sh` - creates a mac ramdisk of given GB size
 - `copy_to_clipboard.sh` - copies stdin or string arg to system clipboard on Linux or Mac
 - `paste_from_clipboard.sh` - pastes from system clipboard to stdout on Linux or Mac
 - `paste_from_clipboard_upon_changes.sh` - pastes from system clipboard to stdout on Linux or Mac whenever the clipboard changes
