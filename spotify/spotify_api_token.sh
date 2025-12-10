@@ -264,9 +264,9 @@ EOF
         https://accounts.spotify.com/api/token \
         -sSL \
         -d grant_type=authorization_code \
-        -d redirect_uri="$redirect_uri"
-        #-d code="$code" \
-        #-d code_verifier="$code_verifier" \
+        -d redirect_uri="$redirect_uri" \
+        -d code="$code" \
+        -d code_verifier="$code_verifier"
     )"
 
     # output everything that isn't the token to stderr as it's almost certainly user information or errors and we don't want that to be captured by client scripts
@@ -293,31 +293,28 @@ EOF
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
 
-#code_verifier="$(
-#    head -c 64 /dev/urandom |
-#    base64 |
-#    tr '+/' '-_' |
-#    tr -d '='
-#)"
-#
-#code_challenge=$(
-#    printf '%s' "$code_verifier" |
-#    openssl dgst -sha256 -binary |
-#    base64 |
-#    tr '+/' '-_' |
-#    tr -d '=' |
-#    tr -d '\n' |
-#    tr -d '[:space:]'
-#)
-#
-#if [ "$(uname -s)" = Darwin ]; then
-#    sha1sum(){
-#        command shasum "$@"
-#    }
-#fi
+code_verifier="$(
+    head -c 64 /dev/urandom |
+    base64 |
+    tr '+/' '-_' |
+    tr -d '='
+)"
 
-# ============================================================================ #
-# Using Authorization Code Flow
+code_challenge=$(
+    printf '%s' "$code_verifier" |
+    openssl dgst -sha256 -binary |
+    base64 |
+    tr '+/' '-_' |
+    tr -d '=' |
+    tr -d '\n' |
+    tr -d '[:space:]'
+)
+
+if [ "$(uname -s)" = Darwin ]; then
+    sha1sum(){
+        command shasum "$@"
+    }
+fi
 
 applescript="$srcdir/../applescript"
 
@@ -333,16 +330,16 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     fi
     trap -- EXIT
     {
+    #url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code"
     # authorization code flow with PKCE
-    #url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge"
-    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code"
+    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
     if is_mac; then
         log "URL: $url"
-        frontmost_process="$("$applescript/get_frontmost_process.scpt")"
+        #frontmost_process="$("$applescript/get_frontmost_process.scpt")"
         "$srcdir/../bin/urlopen.sh" "$url"
-        "$applescript/browser_close_tab.scpt"
-        "$applescript/set_frontmost_process.scpt" "$frontmost_process"
+        #"$applescript/browser_close_tab.scpt"
+        #"$applescript/set_frontmost_process.scpt" "$frontmost_process"
     else
         echo
         echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
