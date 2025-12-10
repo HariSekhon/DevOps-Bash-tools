@@ -65,7 +65,7 @@ file="${file//\/\//\/}"
 
 trap_cmd "rm -f '$file'"
 
-timestamp "Write test to: $file"
+timestamp "Sequential write test to: $file"
 echo >&2
 
 # conv=sync - pads blocks to the full amount, not needed with /dev/zero which will fully pad
