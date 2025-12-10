@@ -338,6 +338,8 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
         log "URL: $url"
         #frontmost_process="$("$applescript/get_frontmost_process.scpt")"
         "$srcdir/../bin/urlopen.sh" "$url"
+        # send Tab, Tab, Tab, Space to accept the new prompt page
+        START_DELAY=1 SLEEP_SECS=1 "$srcdir/../applescript/keystrokes.sh" 1 48 48 48 49
         #"$applescript/browser_close_tab.scpt"
         #"$applescript/set_frontmost_process.scpt" "$frontmost_process"
     else
