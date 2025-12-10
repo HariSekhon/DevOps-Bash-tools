@@ -1,0 +1,31 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2025-12-10 00:37:58 -0600 (Wed, 10 Dec 2025)
+#
+#  vim:ts=4:sts=4:sw=4:et
+#
+#  https///github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+[global]
+directory=./
+size=2G
+direct=1
+iodepth=32
+ioengine=libaio
+time_based=0
+numjobs=1
+group_reporting=1
+
+[seq-write]
+rw=write
+bs=1M
+filename=seq_write_testfile
+unlink=1
