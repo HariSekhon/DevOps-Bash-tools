@@ -46,7 +46,7 @@ Generate an App client ID and secret for SPOTIFY_ID and SPOTIFY_SECRET environme
 
 https://developer.spotify.com/dashboard/applications
 
-Make sure to add a callback URL of exactly 'http://localhost:12345/callback' without the quotes to be able to generate private tokens
+Make sure to add a callback URL of exactly 'http://127.0.0.1:12345/callback' without the quotes to be able to generate private tokens
 "
 
 # used by usage() in lib/utils.sh
@@ -96,70 +96,149 @@ scope="$(tr '\n' '+' <<< "$scope" | sed 's/^+//; s/+*$//')"
 #
 #   https://developer.spotify.com/documentation/general/guides/authorization-guide/#client-credentials-flow
 #
+
+# If we only need a public access token we do this simpler workflow call and exit after printing the token
+
 if is_blank "${SPOTIFY_PRIVATE:-}"; then
-    output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/../bin/curl_auth.sh" -sSL -X 'POST' -d 'grant_type=client_credentials' -d "scope=$scope" https://accounts.spotify.com/api/token "$@")"
+    output="$(
+        NO_TOKEN_AUTH=1 \
+        USERNAME="$SPOTIFY_ID" \
+        PASSWORD="$SPOTIFY_SECRET" \
+        "$srcdir/../bin/curl_auth.sh" \
+        -sSL \
+        -X 'POST' \
+        -d 'grant_type=client_credentials' \
+        -d "scope=$scope" \
+        https://accounts.spotify.com/api/token \
+        "$@"
+    )"
+    #die_if_error_field "$output"
+    jq -r '.access_token' <<< "$output"
+    exit "$?"
 fi
 
 # ============================================================================ #
-
-redirect_uri='http://localhost:12345/callback'
-
-# ============================================================================ #
-# Implicit Grant Method
-#
-#   https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow
-#
-#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=token")"
-
-# ============================================================================ #
-# Authorization Code Flow with Proof Key for Code Exchange (PKCE)
-#
-#   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
-#
-#if [ "$(uname -s)" = Darwin ]; then
-#    sha1sum(){
-#        command shasum "$@"
-#    }
-#fi
-#code_challenge="$("$srcdir/../bin/random_string.sh" 128 | sha1sum -a 256 | base64)"
-#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge")"
-
-# ============================================================================ #
-# Authorization Code Flow
-#
-#   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
-#
-#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
+# Callback for Private authz catch
 
 callback_port=12345
 
+redirect_uri="http://127.0.0.1:$callback_port/callback"
+redirect_uri_encoded="$(printf '%s' "$redirect_uri" | jq -s -R -r @uri)"
+
+# Spotify not respecting the localhost cert anyway since it doesn't get that far on the redirect with the following error:
+#
+#   INVALID_CLIENT: Insecure redirect URI
+#
+# Must use loopback with http anyway
+
+#callback_key="$(mktemp /tmp/spotify_callback.key.XXXXXXXXXX)"
+#callback_crt="$(mktemp /tmp/spotify_callback.crt.XXXXXXXXXX)"
+
+##callback_key="$srcdir/spotify_callback.key"
+#callback_key="$srcdir/localhost-key.pem"
+##callback_crt="$srcdir/spotify_callback.crt"
+#callback_crt="$srcdir/localhost.pem"
+#callback_p12="$srcdir/localhost.p12"
+##callback_cnf="$srcdir/spotify_callback_openssl.cnf"
+#callback_p12_password="spotify"
+#
+## generate self-signed certificate if it doesn't already exist
+#if ! [ -f "$callback_key" ] ||
+#   ! [ -f "$callback_crt" ]; then
+#    timestamp "Creating a spotify callback OpenSSL certificate"
+##    openssl=openssl
+#    if is_mac; then
+#        MAC=1
+#        openssl="$(brew --prefix openssl)/bin/openssl"
+#    fi
+##    openssl version -a
+##    #"$openssl" req -newkey rsa:2048 -nodes \
+##    #               -keyout "$callback_key" \
+##    #               -x509 -days 3650 \
+##    #               -out "$callback_crt" \
+##    #               -subj "/CN=localhost" 2>/dev/null
+##    "$openssl" req -x509 -nodes -days 3650 \
+##                   -newkey rsa:2048 \
+##                   -keyout "$callback_key" \
+##                   -out "$callback_crt" \
+##                   -config "$callback_cnf" \
+##                   2>/dev/null
+#    mkcert -install
+#    mkcert localhost  # this overwrites existing localhost.pem and localhost-key.pem
+#    timestamp "Creating a p12 certificate bundle to import into keychain"
+#    "$openssl" pkcs12 -export \
+#                      -name spotify_callback \
+#                      ${MAC:+-legacy -keypbe PBE-SHA1-3DES -certpbe PBE-SHA1-3DES -macalg sha1} \
+#                      -inkey "$callback_key" \
+#                      -in "$callback_crt" \
+#                      -out "$callback_p12" \
+#                      -passout pass:"$callback_p12_password"
+#                      # do not use these switches - tried with libressl but macOS keychain refuses to import
+#                      #-nomac \
+#                      #-keypbe NONE \
+#                      #-certpbe NONE
+#    #timestamp "Checking the p12 isn't encrypted" # actually needed to be encrypted to be accepted into the keychain
+#    # Expected lines: "MAC: sha256, ..." and "Key bag" (NOT "Shrouded Keybag" and NOT "Warning: MAC is absent!")
+#    #"$openssl" pkcs12 -in "$callback_p12" -noout -info -passin pass:"$callback_p12_password"
+#    if is_mac; then
+#        # macOS won't trust the local root cert without the key, so must generate and import the p12
+#        timestamp "Importing p12 into keychain: $callback_p12"
+#        sudo security import "$callback_p12" \
+#                             -k /Library/Keychains/System.keychain \
+#                             -P "$callback_p12_password" \
+#                             -A
+#        timestamp "Importing cert into keychain: $callback_crt"
+#        sudo security add-trusted-cert \
+#                        -d \
+#                        -r trustRoot \
+#                        -k /Library/Keychains/System.keychain \
+#                        "$callback_crt"
+#        timestamp "Verifying cert is trusted: $callback_crt"
+#        security verify-cert -c "$callback_crt"
+#    else
+#        warn "you must import this certificate to be trusted by your browser: $callback_crt"
+#    fi
+#fi
+
 callback(){
     {
-    log "waiting to catch callback"
+    log "Waiting to catch callback"
     local timestamp
     timestamp="$(date '+%F %T')"
     local netcat_switches
-    netcat_switches="-l localhost 12345"
+    netcat_switches="-l localhost $callback_port"
     # GNU netcat has different switches :-/
     # also errors out so we have to ignore its error code
     if nc --version 2>&1 | grep -q GNU; then
         netcat_switches="-l -p $callback_port --close"
     fi
-    # TODO: add a mutex wait lock here
-    pkill -f "^nc $netcat_switches$" || :
+    # TODO: add a mutex wait lock here, UPDATE: can't remember why I wrote this now, there is a wait at the end for this
+    pkill -9 -f "^nc $netcat_switches$" || :
+    trap_cmd "pkill -9 -f '^nc $netcat_switches$'"
+    #trap_cmd "pkill -9 -f '^openssl s_server .* -accept $callback_port'"
+    #log "Killing any existing openssl listener if there is already one running on port: $callback_port"
+    #pkill -9 -f "^openssl s_server .* -accept $callback_port" || :
     sleep 1
     #local response
     # need opt splitting
     # shellcheck disable=SC2086
+    #response="$(openssl s_server \
+    #                -quiet \
+    #                -key "$callback_key" \
+    #                -cert "$callback_crt" \
+    #                -accept 12345 \
+    #                -www 2>/dev/null <<EOF || :
     response="$(nc $netcat_switches <<EOF || :
 HTTP/1.1 200 OK
 
 $timestamp  Spotify token accepted, now return to command line to use Spotify API tools
 EOF
     )"
-    log "callback caught"
+    log "Callback Caught"
 
     local code
+    log "Response: $response"
+    log
     code="$(grep -Eo "GET.*code=([^?]+)" <<< "$response" | sed 's/.*code=//; s/[&[:space:]].*$//' || :)"
     if is_blank "$code"; then
         echo "failed to parse code, authentication failure or authorization denied?"
@@ -175,16 +254,74 @@ EOF
     #curl -H "Authorization: Basic $basic_auth_token" -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri" https://accounts.spotify.com/api/token
     # curl_auth.sh prevents auth token appearing in process list
     local output
-    output="$(NO_TOKEN_AUTH=1 USERNAME="$SPOTIFY_ID" PASSWORD="$SPOTIFY_SECRET" "$srcdir/../bin/curl_auth.sh" https://accounts.spotify.com/api/token -sSL -d grant_type=authorization_code -d code="$code" -d redirect_uri="$redirect_uri")"
+    # debugging
+    #printf 'DEBUG raw redirect_uri=<%s>\n' "$redirect_uri" >&2
+    output="$(
+        NO_TOKEN_AUTH=1 \
+        USERNAME="$SPOTIFY_ID" \
+        PASSWORD="$SPOTIFY_SECRET" \
+        "$srcdir/../bin/curl_auth.sh" \
+        https://accounts.spotify.com/api/token \
+        -sSL \
+        -d grant_type=authorization_code \
+        -d redirect_uri="$redirect_uri"
+        #-d code="$code" \
+        #-d code_verifier="$code_verifier" \
+    )"
 
     # output everything that isn't the token to stderr as it's almost certainly user information or errors and we don't want that to be captured by client scripts
     } >&2
     echo "$output"
 }
 
+# ============================================================================ #
+# Implicit Grant Method
+#
+#   https://developer.spotify.com/documentation/general/guides/authorization-guide/#implicit-grant-flow
+#
+#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=token")"
+
+# ============================================================================ #
+# Authorization Code Flow
+#
+#   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow
+#
+#output="$(curl -sSL -X GET "https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code")"
+
+# ============================================================================ #
+# Authorization Code Flow with Proof Key for Code Exchange (PKCE)
+#
+#   https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow-with-proof-key-for-code-exchange-pkce
+
+#code_verifier="$(
+#    head -c 64 /dev/urandom |
+#    base64 |
+#    tr '+/' '-_' |
+#    tr -d '='
+#)"
+#
+#code_challenge=$(
+#    printf '%s' "$code_verifier" |
+#    openssl dgst -sha256 -binary |
+#    base64 |
+#    tr '+/' '-_' |
+#    tr -d '=' |
+#    tr -d '\n' |
+#    tr -d '[:space:]'
+#)
+#
+#if [ "$(uname -s)" = Darwin ]; then
+#    sha1sum(){
+#        command shasum "$@"
+#    }
+#fi
+
+# ============================================================================ #
+# Using Authorization Code Flow
+
 applescript="$srcdir/../applescript"
 
-# Authorization Code Flow
+# Authorization Code Flow with PKCE
 if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # clean up subprocesses to prevent netcat from being left behind as an orphan and blocking future runs
     # shellcheck disable=SC2064
@@ -196,23 +333,26 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     fi
     trap -- EXIT
     {
-    # authorization code flow
-    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri&scope=$scope&response_type=code"
+    # authorization code flow with PKCE
+    #url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge"
+    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
-    if is_mac; then
+    #if is_mac; then
+    if false; then  # TODO: remove this debugging
+        log "URL: $url"
         frontmost_process="$("$applescript/get_frontmost_process.scpt")"
-        open "$url"
+        "$srcdir/../bin/urlopen.sh" "$url"
         "$applescript/browser_close_tab.scpt"
         "$applescript/set_frontmost_process.scpt" "$frontmost_process"
     else
+        echo
         echo "Go to the following URL in your browser, authorize and then the token will be output on the command line:"
         echo
         echo "$url"
         echo
+        "$srcdir/../bin/urlopen.sh" "$url"
+        echo
     fi
     } >&2
     wait
-else
-    #die_if_error_field "$output"
-    jq -r '.access_token' <<< "$output"
 fi
