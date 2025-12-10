@@ -202,7 +202,7 @@ ubuntu/microk8s/microk8s
 midnight-commander
 minio
 #mitmproxy
-mkcert
+mkcert  # simple tool to make locally trusted development certificates - used by spotify_api_token.sh for https localhost callback
 mosh
 # nagios-plugins clashes
 monitoring-plugins
