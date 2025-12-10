@@ -27,6 +27,8 @@ Opens the URL given as an arg, or first URL from standard input or a given file
 Used by .vimrc to instantly open a URL on the given line in the editor
 
 Very useful for quickly referencing inline documentation links found throughout my GitHub repos
+
+Respects \$BROWER environment variable if set, otherwise tries to infer the mechanism on macOS or Linux
 "
 
 # used by usage() in lib/utils.sh
@@ -39,7 +41,9 @@ max_args 1 "$@"
 
 browse(){
     local url="$1"
-    if is_mac; then
+    if [ -n "${BROWSER:-}" ]; then
+        "$BROWSER" "$url"
+    elif is_mac; then
         open "$url"
     else  # assume Linux
         if type -P xdg-open &>/dev/null; then
