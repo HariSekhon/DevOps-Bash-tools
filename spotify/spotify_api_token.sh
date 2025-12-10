@@ -337,8 +337,7 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     #url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge"
     url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
-    #if is_mac; then
-    if false; then  # TODO: remove this debugging
+    if is_mac; then
         log "URL: $url"
         frontmost_process="$("$applescript/get_frontmost_process.scpt")"
         "$srcdir/../bin/urlopen.sh" "$url"
