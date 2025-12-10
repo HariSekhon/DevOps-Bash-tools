@@ -202,6 +202,7 @@ ubuntu/microk8s/microk8s
 midnight-commander
 minio
 #mitmproxy
+mkcert
 mosh
 # nagios-plugins clashes
 monitoring-plugins
@@ -216,6 +217,7 @@ netcat
 ngrep
 nmap
 #node  # NodeJS
+nss
 #ntfstool  # for accessing NTFS volumes - unsigned requires Security approval and installing kernel driver
 #octave
 #oniguruma  # regex library
