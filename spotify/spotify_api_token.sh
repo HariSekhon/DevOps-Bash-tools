@@ -327,7 +327,7 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # shellcheck disable=SC2064
     trap "kill -- -$$" EXIT
     callback |
-    tee /dev/stderr |
+    jq_debug_pipe_dump |
     jq -r '.access_token' &
     sleep 1
     if ! pgrep -q -P $$; then
