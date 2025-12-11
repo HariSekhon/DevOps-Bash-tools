@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -30,14 +31,19 @@ Output Format:
 
 <playlist_id>   <playlist_name>
 
-By default returns only public playlists owned by given Spotify user
+\$SPOTIFY_USER must be defined in environment or given as first arg unless \$SPOTIFY_PRIVATE=1 is set,
+in which case it's inferred from the auth token
 
-\$SPOTIFY_USER must be defined in environment or given as first arg unless \$SPOTIFY_PRIVATE=1 is set, in which case it's inferred from the auth token
+By default the Spotify API returns only public playlists owned by given Spotify user and that have been explicitly
+added to their profile
 
-Gets public playlists by default
-To also get private playlists - export SPOTIFY_PRIVATE=1
-To get only private playlists - export SPOTIFY_PRIVATE_ONLY=1
-To get only public playlists  - export SPOTIFY_PUBLIC_ONLY=1
+This is counter-intuitive
+
+To get the public playlists not explicitly added to a user's profile you need to use private API access mode (SPOTIFY_PRIVATE=1)
+
+To get all playlists including private playlists - export SPOTIFY_PRIVATE=1
+To get only private playlists                    - export SPOTIFY_PRIVATE_ONLY=1
+To get all public playlists                      - export SPOTIFY_PUBLIC_ONLY=1 (implicly uses SPOTIFY_PRIVATE mode)
 
 To also get followed playlists - export SPOTIFY_PLAYLISTS_FOLLOWED=1
 To get only followed playlists - export SPOTIFY_PLAYLISTS_FOLLOWED_ONLY=1
@@ -56,6 +62,11 @@ if [ -n "${SPOTIFY_PLAYLISTS_FOLLOWED_ONLY:-}" ]; then
 fi
 
 if [ -n "${SPOTIFY_PRIVATE_ONLY:-}" ]; then
+    export SPOTIFY_PRIVATE=1
+fi
+
+# because otherwise the Spotify API only returns the public playlists that have been explicitly added to the profile
+if [ -n "${SPOTIFY_PUBLIC_ONLY:-}" ]; then
     export SPOTIFY_PRIVATE=1
 fi
 
