@@ -60,20 +60,20 @@ commit_playlist(){
         return
     fi
     timestamp "Checking playlist: $playlist"
-    if git status -s "$playlist" "spotify/$playlist" | grep -q '^[?A]'; then
+    if git status -s -- "$playlist" "spotify/$playlist" | grep -q '^[?A]'; then
         git add "$playlist" "spotify/$playlist"
         git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
         return
     fi
-    if ! git status -s "$playlist" "spotify/$playlist" | grep -q '^.M'; then
+    if ! git status -s -- "$playlist" "spotify/$playlist" | grep -q '^.M'; then
         return
     fi
     net_removals="$(find_net_removals "$playlist")"
     if [ -z "$net_removals" ]; then
         echo "Auto-committing playlist '$playlist' as no net removals"
         echo
-        git add "$playlist" "spotify/$playlist"
-        git ci -m "updated $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
+        git add -- "$playlist" "spotify/$playlist"
+        git ci -m "updated $playlist spotify/$playlist" -- "$playlist" "spotify/$playlist"
         echo
         return
     fi
