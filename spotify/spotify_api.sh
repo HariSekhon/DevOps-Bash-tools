@@ -72,3 +72,12 @@ export TOKEN="$SPOTIFY_ACCESS_TOKEN"
 # the Spotify API is very unreliable and often gets 502 errors
 # seen 20 x HTTP 500 errors from the API in a row :-/
 MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"
+
+
+# No point in adding this - the Spotify backoff period specified in the Retry-After header is 14 hours when I hit this enumerating playlists :-/
+#
+#output="$(MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@")"
+#
+# TODO: added 429 parsing of Retry-After and backoff timing logic here
+#
+#echo "$output"
