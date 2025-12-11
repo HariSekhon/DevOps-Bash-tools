@@ -70,9 +70,10 @@ git_diff_commit(){
         git_status_porcelain="$(git status --porcelain -s "${filename##*/}")"
         added_files="$(
             grep -e '^?' -e '^A' <<< "$git_status_porcelain" |
-            sed 's/^...//' || :
+            sed 's/^...// s/^"//; s/"$//' || :
         )"
-        for added_filename in $added_files; do
+        while read -r added_filename; do
+            is_blank "$added_filename" && continue
             basename="${added_filename##*/}"
             git add "$basename"
             diff="$(git diff --color=always -- "$added_filename"
@@ -80,16 +81,17 @@ git_diff_commit(){
             echo "$diff" | less -FR
             echo
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to commit added file '$added_filename' or Control-C to cancel" _
+            read -r -p "Hit enter to commit added file '$added_filename' or Control-C to cancel" _ < /dev/tty
             echo
             echo "committing added file $added_filename"
             git commit -m "added $basename" -- "$added_filename"
-        done
+        done <<< "$added_files"
         changed_files="$(
             grep -e '^M' -e '^.M' <<< "$git_status_porcelain" |
-            sed 's/^...//' || :
+            sed 's/^...//; s/^"//; s/"$//' || :
         )"
-        for changed_filename in $changed_files; do
+        while read -r changed_filename; do
+            is_blank "$changed_filename" && continue
             basename="${changed_filename##*/}"
             diff="$(git diff --color=always -- "$changed_filename"
                     git diff --cached --color=always -- "$changed_filename")"
@@ -99,12 +101,12 @@ git_diff_commit(){
             echo "$diff" | less -FR
             echo
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to commit updated file '$changed_filename' or Control-C to cancel" _
+            read -r -p "Hit enter to commit updated file '$changed_filename' or Control-C to cancel" _ < /dev/tty
             echo
             git add -- "$changed_filename"
             echo "committing updated file $changed_filename"
             git commit -m "updated $basename" -- "$changed_filename"
-        done
+        done <<< "$changed_files"
         popd >&/dev/null || :
     done
 }
