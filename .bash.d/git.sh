@@ -839,8 +839,15 @@ gitrename(){
         echo "usage: gitrename <original_filename> <new_filename>"
         return 1
     fi
+    if [ -f "$2" ]; then
+        local file_already_exists=1
+        mv -iv -- "$2" "$2.tmp"
+    fi
     git mv -- "$1" "$2" &&
     git commit -m "renamed $1 to $2" "$1" "$2"
+    if [ "${file_already_exists:-}" = 1 ]; then
+        mv -fv -- "$2.tmp" "$2"
+    fi
 }
 
 gitmv(){
@@ -848,8 +855,15 @@ gitmv(){
         echo "usage: gitmv <original_filename> <new_filename>"
         return 1
     fi
+    if [ -f "$2" ]; then
+        local file_already_exists=1
+        mv -iv -- "$2" "$2.tmp"
+    fi
     git mv -- "$1" "$2" &&
     git commit -m "moved $1 to $2" "$1" "$2"
+    if [ "${file_already_exists:-}" = 1 ]; then
+        mv -fv -- "$2.tmp" "$2"
+    fi
 }
 
 gitd(){
