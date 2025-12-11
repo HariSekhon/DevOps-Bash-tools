@@ -71,6 +71,9 @@ git_diff_commit(){
         added_files="$(
             grep -e '^?' -e '^A' <<< "$git_status_porcelain" |
             sed 's/^...// s/^"//; s/"$//' || :
+            # stripping leading and trailing quotes because git adds them when the filename contains spaces,
+            # but we do line handling on the filename so don't need this and it breaks later processing
+            # as the quotes become taken literally
         )"
         while read -r added_filename; do
             is_blank "$added_filename" && continue
@@ -89,6 +92,9 @@ git_diff_commit(){
         changed_files="$(
             grep -e '^M' -e '^.M' <<< "$git_status_porcelain" |
             sed 's/^...//; s/^"//; s/"$//' || :
+            # stripping leading and trailing quotes because git adds them when the filename contains spaces,
+            # but we do line handling on the filename so don't need this and it breaks later processing
+            # as the quotes become taken literally
         )"
         while read -r changed_filename; do
             is_blank "$changed_filename" && continue
