@@ -55,7 +55,8 @@ help_usage "$@"
 commit_playlist(){
     playlist="$1"
     if ! [ -f "$playlist" ] ||
-       ! [ -f "spotify/$playlist" ]; then
+       ! [ -f "spotify/$playlist" ] ||
+       [[ "$playlist" =~ \.txt$ ]]; then
         return
     fi
     timestamp "Checking playlist: $playlist"
