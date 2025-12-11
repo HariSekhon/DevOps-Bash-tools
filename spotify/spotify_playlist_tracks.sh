@@ -70,7 +70,7 @@ playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 # shellcheck disable=SC2154
 url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
 
-output(){
+print_output(){
     # If you set \$SPOTIFY_PLAYLIST_TRACKS_UNAVAILABLE=1 then will only output tracks that are unavailable (greyed out on Spotify)
     # Can feed this in to spotify_delete_from_playlist.sh to crop them from TODO / Discover Backlog type playlists
     #if [ -n "${SPOTIFY_PLAYLIST_TRACKS_UNAVAILABLE:-}" ]; then
@@ -95,5 +95,5 @@ while not_null "$url_path"; do
     output="$("$srcdir/spotify_api.sh" "$url_path" "$@")"
     #die_if_error_field "$output"
     url_path="$(get_next "$output")"
-    output
+    print_output
 done
