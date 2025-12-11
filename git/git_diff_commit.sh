@@ -58,6 +58,11 @@ resolve_symlinks(){
     done
 }
 
+# duplicate original /dev/stdin file description 0 into file descriptor 3
+# before using while read line loops (for safe filename processing)
+# because those looks consume the /dev/stdin
+exec 3<&0
+
 git_diff_commit(){
     local basedir
     for filename in "${@:-.}"; do
@@ -83,8 +88,11 @@ git_diff_commit(){
                     git diff --cached --color=always -- "$added_filename")"
             echo "$diff" | less -FR
             echo
+            # read doesn't print when using a redirect so have to print ourself
+            printf "Hit enter to commit added file '%s' or Control-C to cancel: " "$added_filename"
+            #read -r -p "Hit enter to commit added file '$added_filename' or Control-C to cancel" _ <&3  # read from dup’d stdin, not eaten by the loop
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to commit added file '$added_filename' or Control-C to cancel" _ < /dev/tty
+            read -r _ <&3  # read from dup’d stdin, not eaten by the loop
             echo
             echo "committing added file $added_filename"
             git commit -m "added $basename" -- "$added_filename"
@@ -106,8 +114,12 @@ git_diff_commit(){
             fi
             echo "$diff" | less -FR
             echo
+            # read doesn't print when using a redirect so have to print ourself
+            printf "Hit enter to commit updated file '%s' or Control-C to cancel: " "$changed_filename"
+            # read doesn't print when using a redirect
+            #read -r -p "Hit enter to commit updated file '$changed_filename' or Control-C to cancel" _ <&3  # read from dup’d stdin, not eaten by the loop
             # discard the save variable, call it _ to signify this
-            read -r -p "Hit enter to commit updated file '$changed_filename' or Control-C to cancel" _ < /dev/tty
+            read -r _ <&3  # read from dup’d stdin, not eaten by the loop
             echo
             git add -- "$changed_filename"
             echo "committing updated file $changed_filename"
