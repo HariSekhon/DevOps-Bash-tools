@@ -74,7 +74,8 @@ export TOKEN="$SPOTIFY_ACCESS_TOKEN"
 MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"
 
 
-# No point in adding this - the Spotify backoff period specified in the Retry-After header is 14 hours when I hit this enumerating playlists :-/
+# No point in adding this - the Spotify backoff period specified in the Retry-After header is 14 hours
+# which then applies to all endpoints :-/
 #
 #output="$(MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@")"
 #
