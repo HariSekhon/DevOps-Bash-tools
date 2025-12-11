@@ -42,8 +42,9 @@ This is counter-intuitive
 To get the public playlists not explicitly added to a user's profile you need to use private API access mode (SPOTIFY_PRIVATE=1)
 
 To get all playlists including private playlists - export SPOTIFY_PRIVATE=1
-To get only private playlists                    - export SPOTIFY_PRIVATE_ONLY=1
-To get all public playlists                      - export SPOTIFY_PUBLIC_ONLY=1 (implicly uses SPOTIFY_PRIVATE mode)
+To get only private playlists                    - export SPOTIFY_PRIVATE_ONLY=1 (implicitly adds SPOTIFY_PRIVATE=1)
+To get only public playlists                     - export SPOTIFY_PUBLIC_ONLY=1
+To get all public playlists including those not added to profile - export SPOTIFY_PRIVATE=1 SPOTIFY_PUBLIC_ONLY=1
 
 To also get followed playlists - export SPOTIFY_PLAYLISTS_FOLLOWED=1
 To get only followed playlists - export SPOTIFY_PLAYLISTS_FOLLOWED_ONLY=1
@@ -66,9 +67,9 @@ if [ -n "${SPOTIFY_PRIVATE_ONLY:-}" ]; then
 fi
 
 # because otherwise the Spotify API only returns the public playlists that have been explicitly added to the profile
-if [ -n "${SPOTIFY_PUBLIC_ONLY:-}" ]; then
-    export SPOTIFY_PRIVATE=1
-fi
+#if [ -n "${SPOTIFY_PUBLIC_ONLY:-}" ]; then
+#    export SPOTIFY_PRIVATE=1
+#fi
 
 spotify_user="${1:-${SPOTIFY_USER:-}}"
 
