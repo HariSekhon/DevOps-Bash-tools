@@ -70,7 +70,7 @@ git_diff_commit(){
         git_status_porcelain="$(git status --porcelain -s "${filename##*/}")"
         added_files="$(
             grep -e '^?' -e '^A' <<< "$git_status_porcelain" |
-            sed 's/^...// s/^"//; s/"$//' || :
+            sed 's/^...//; s/^"//; s/"$//' || :
             # stripping leading and trailing quotes because git adds them when the filename contains spaces,
             # but we do line handling on the filename so don't need this and it breaks later processing
             # as the quotes become taken literally
