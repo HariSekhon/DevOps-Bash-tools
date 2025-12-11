@@ -58,6 +58,9 @@ resolve_symlinks(){
     done
 }
 
+# Using this trick to be able to call this script from an IntelliJ hotkey which doesn't allocate /dev/tty
+# which prevents using my simpler trick of reading from /dev/tty to avoid the while loops from eating /dev/stdin
+#
 # duplicate original /dev/stdin file description 0 into file descriptor 3
 # before using while read line loops (for safe filename processing)
 # because those looks consume the /dev/stdin
