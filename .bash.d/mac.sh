@@ -86,6 +86,7 @@ msound(){
     SwitchAudioSource -s "$multi_output_device"
 }
 
+alias restartsound='sudo killall coreaudiod'
 
 alias mshazam='msound; open -a Shazam'
 
