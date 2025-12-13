@@ -69,7 +69,7 @@ export SPOTIFY_BACKUP_DIR="$backup_dir"
 export SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME=1
 export SPOTIFY_FOREACH_NO_NEWLINE=1
 
-"$srcdir"/spotify_foreach_playlist.sh "$srcdir/spotify_backup_playlist.sh '{playlist_id}'" "$spotify_user" "$@"
+"$srcdir"/spotify_foreach_playlist.sh "printf '%s  ' \"\$(date '+%F %T')\"; \"$srcdir/spotify_backup_playlist.sh\" '{playlist_id}'" "$spotify_user" "$@"
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
     "$srcdir/spotify_backup_playlist.sh" liked "$@"
 fi
