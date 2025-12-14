@@ -60,10 +60,16 @@ shift || :
 
 spotify_token
 
-"$srcdir/spotify_playlists.sh" "$@" |
+playlists="$("$srcdir/spotify_playlists.sh" "$@")"
+
+total_playlists="$(grep -c . <<< "$playlists")"
+
+i=0
+
 while read -r playlist_id playlist; do
+    (( i += 1 ))
     if is_blank "${SPOTIFY_FOREACH_NO_PRINT_PLAYLIST_NAME:-}"; then
-        printf '%s\t' "$playlist"
+        printf '%s/%s  %s\t' "$i" "$total_playlists" "$playlist"
     fi
     # handle danger - done at playlist level not command level because we need late command evaluation in spotify_backup_playlists.sh
     # this works, tested on Ke$ha playlist and `echo injected`
@@ -75,4 +81,4 @@ while read -r playlist_id playlist; do
     if is_blank "${SPOTIFY_FOREACH_NO_NEWLINE:-}"; then
         printf '\n'
     fi
-done
+done <<< "$playlists"
