@@ -831,7 +831,7 @@ switchbranch(){
 
 gitrm(){
     git rm -- "$@" &&
-    git commit -m "removed $*" "$@"
+    git commit -m "removed $*" -- "$@"
 }
 
 gitrename(){
