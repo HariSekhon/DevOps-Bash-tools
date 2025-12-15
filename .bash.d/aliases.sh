@@ -254,6 +254,9 @@ doc_alias(){
     local docpath="$1"
     local prefix="${2:-d}"
     [ -f "$docpath" ] || return 1
+    if ! [[ "$docpath" =~ \.(txt|md)$ ]]; then
+        continue
+    fi
     docfile="${docpath##*/}"
     # slows down shell creation, will drain battery
 #    if [ -L "$docpath" ]; then
