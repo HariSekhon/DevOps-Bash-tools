@@ -28,6 +28,8 @@ Generates a Markdown list of Wordpress plugins for documentation purposes
 You must run this from inside the Wordpress installation root
 
 Runs PHP to get the PluginURI which is not exposed by the 'wp plugin list' command
+
+Tested on Wordpress 6
 "
 
 # used by usage() in lib/utils.sh
