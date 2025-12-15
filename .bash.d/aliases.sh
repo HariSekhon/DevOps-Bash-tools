@@ -257,7 +257,7 @@ doc_alias(){
     docfile="${docpath##*/}"
     if ! [[ "$docfile" =~ \.(txt|md)$ ]]; then
         if [[ "$docfile" =~ \. ]]; then
-            continue
+            return 1
         fi
     fi
     # slows down shell creation, will drain battery
