@@ -48,7 +48,7 @@ $plugins = get_plugins();
 foreach ($plugins as $plugin) {
   $name = $plugin["Name"];
   $url  = $plugin["PluginURI"] ?: "https://wordpress.org/plugins/" . sanitize_title($name) . "/";
-  $desc = $plugin["Description"];
+  $desc = rtrim($plugin["Description"], ".");
 
   echo "- [$name]($url) - $desc\n";
 }
