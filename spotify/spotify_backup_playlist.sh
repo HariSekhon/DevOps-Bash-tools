@@ -96,7 +96,7 @@ else
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
     # XXX: bugfix for 'illegal byte sequence error' for weird unicode chars in the filename
-    filename="$(sed 's/[^[:alnum:][:space:]!"$&'"'"'()+,.\/:<_|–\∕-]/-/g' <<< "$filename")"
+    #filename="$(sed 's/[^[:alnum:][:space:]!"$&'"'"'()+,.\/:<_|–\∕-]/-/g' <<< "$filename")"
     #echo "Saving to filename: $filename"
 
     echo -n "=> Description "
