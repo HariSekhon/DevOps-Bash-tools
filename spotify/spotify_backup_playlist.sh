@@ -109,11 +109,16 @@ else
         fi
     fi
 
+    # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
+    trap_cmd "git checkout \"$backup_dir_spotify/$filename\" &>/dev/null"
     echo -n "OK => URIs "
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
 
+    # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
+    trap_cmd "git checkout \"$backup_dir/$filename\" &>/dev/null"
     echo -n 'OK => Tracks '
     "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
 fi
 
+untrap
 echo 'OK'
