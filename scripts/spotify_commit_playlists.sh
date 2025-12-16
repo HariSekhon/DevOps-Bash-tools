@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -70,6 +71,17 @@ commit_playlist(){
     fi
     net_removals="$(find_net_removals "$playlist")"
     if [ -z "$net_removals" ]; then
+        # XXX: double safety check on the top level Artist-Tracks file which might have been partially modified
+        #      even if the spotify/playlist file has no net removals
+        local stats
+        local added_num
+        local removed_num
+        stats="$(git diff --numstat "$playlist")"
+        added_num="$(awk '{print $1}' <<< "$stats")"
+        removed_num="$(awk '{print $2}' <<< "$stats")"
+        if [ "$removed_num" -gt "$added_num" ]; then
+            die "ERROR: tracks have been removed from playlist '$playlist' top level file which were not removed from 'spotify/$playlist' - partial interrupted playlist download?"
+        fi
         echo "Auto-committing playlist '$playlist' as no net removals"
         echo
         git add -- "$playlist" "spotify/$playlist"
