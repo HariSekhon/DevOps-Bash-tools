@@ -230,7 +230,7 @@ make
   - Terraform Cloud, Octopus Deploy
   - Checkov / Bridgecrew Cloud
 - [AI & IPaaS](#ai--ipaas) - OpenAI (ChatGPT), Make.com
-- [Internet Services](#internet-services) - Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress and various pastebins and file upload sites
+- [Internet Services](#internet-services) - Google Maps, Cloudflare, DataDog, Digital Ocean, Kong API Gateway, GitGuardian, Jira, NGrok, Traefik, Pingdom, Wordpress and various pastebins and file upload sites
 - [Java](#java) - Java utilies to debug running Java programs or decompile Java JAR code for deeper debugging
 - [Python](#python) - Python utilities & library management
 - [Perl](#perl) - Perl utilities & library management
@@ -1416,6 +1416,7 @@ See also [Knowledge Base notes for CI/CD](https://github.com/HariSekhon/Knowledg
 - `dnsjson.sh` - queries dnsjson.com for DNS records
 - `domains_subdomains_environments.sh` - for a given list of domains, deduplicate and print dev / staging subdomains as well as root domain for prod. Used to generate a whole bunch of Ad Tech domains and pixel tracker subdomains for a project. Combine with `markdown_columns_to_table.sh` to generate the markdown documentation for your domains and subomains per project and environment
 - `gitguardian_api.sh` - queries the [GitGuardian](https://www.gitguardian.com/) API with authentication
+- `google_maps_link.sh` - queries for a search string, returns the first hit and then generates a stable fixed place ID url to the result. Useful for sharing in documentation links to places like [HariSekhon/Knowledge-Base](https://github.com/HariSekhon/Knowledge-Base) Travel pages
 - `jira_api.sh` - queries [Jira](https://www.atlassian.com/software/jira) API with authentication
 - `kong_api.sh` - queries the [Kong API Gateway](https://docs.konghq.com/gateway/latest/)'s Admin API, handling authentication if enabled
 - `traefik_api.sh` - queries the [Traefik](https://traefik.io/) API, handling authentication if enabled
