@@ -35,7 +35,7 @@ A Google Maps API Key is required otherwise you will get an error like this:
 	   \"status\" : \"REQUEST_DENIED\"
 	}
 
-or this if you haven't enabled billing:
+or this if you haven't enabled billing or your payment method has expired, causing the billing account to be disabled:
 
 	{
 	  \"error_message\": \"You must enable Billing on the Google Cloud Project at https://console.cloud.google.com/project/_/billing/enable Learn more at https://developers.google.com/maps/gmp-get-started\",
