@@ -59,5 +59,6 @@ for playlist in "$@"; do
     timestamp "Getting track URIs from playlist for exact matching: $playlist"
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist"
 done |
+sort -u |
 grep -Fxf <("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from") |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
