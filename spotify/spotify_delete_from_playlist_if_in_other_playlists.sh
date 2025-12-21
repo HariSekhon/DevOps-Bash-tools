@@ -42,6 +42,8 @@ min_args 2 "$@"
 playlist_to_delete_from="$1"
 shift || :
 
+timestamp "Preparing to delete from playlist: $playlist_to_delete_from"
+
 export SPOTIFY_PRIVATE=1
 
 spotify_token
@@ -54,6 +56,7 @@ if is_mac; then
 fi
 
 for playlist in "$@"; do
+    timestamp "Getting track URIs from playlist for exact matching: $playlist"
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist"
 done |
 grep -Fxf <("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from") |
