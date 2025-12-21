@@ -53,6 +53,8 @@ usage_args="[<playlist>]"
 
 help_usage "$@"
 
+exec 3<&0
+
 commit_playlist(){
     playlist="$1"
     if ! [ -f "$playlist" ] ||
@@ -93,11 +95,14 @@ commit_playlist(){
     echo
     echo "$net_removals"
     echo
-    read -r -p "Hit enter to see full human and spotify diffs or Control-C to exit"
+    #read -r -p "Hit enter to see full human and spotify diffs or Control-C to exit"
+    echo "Hit enter to see full human and spotify diffs or Control-C to exit"
+    read -r <&3
     echo
     git diff "$playlist" "spotify/$playlist"
     echo
-    read -r -p "Hit enter to commit playlist '$playlist' or Control-C to exit"
+    echo "Hit enter to commit playlist '$playlist' or Control-C to exit"
+    read -r <&3
     echo
     git add "$playlist" "spotify/$playlist"
     git ci -m "updated $playlist"
