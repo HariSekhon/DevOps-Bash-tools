@@ -192,9 +192,7 @@ delete_URIs_from_playlist(){
 }
 
 delete_URIs_from_playlist < <(
-    for filename in "${@:-/dev/stdin}"; do
-        delete_URIs_from_playlist < "$filename"
-    done |
+    cat "${@:-/dev/stdin}" |
     sort -u
 )
 
