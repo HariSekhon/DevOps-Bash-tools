@@ -118,6 +118,8 @@ else
     trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
     untrap
+    # try to avoid hitting HTTP 429 rate limiting
+    sleep 0.1
     num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
 
     # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
@@ -125,6 +127,8 @@ else
     trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
     "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
     untrap
+    # try to avoid hitting HTTP 429 rate limiting
+    sleep 0.1
 fi
 
 echo 'OK'
