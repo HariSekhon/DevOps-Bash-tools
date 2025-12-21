@@ -56,9 +56,12 @@ if is_mac; then
 fi
 
 for playlist in "$@"; do
-    timestamp "Getting track URIs from playlist for exact matching: $playlist"
+    timestamp "Getting track URIs from other playlist for exact matching: $playlist"
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist"
 done |
 sort -u |
-grep -Fxf <("$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from") |
+grep -Fxf <(
+    timestamp "Getting track URIs from playlist to delete from: $playlist_to_delete_from"
+    "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from"
+) |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
