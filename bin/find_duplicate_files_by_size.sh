@@ -44,6 +44,12 @@ usage_args="[<dir1> <dir2> ...]"
 
 help_usage "$@"
 
+#You can set enviroment variable EXCLUDE_REGEX to a grep ERE regex to exclude files - dy default it excludes:
+#
+#   .DS_Store
+#
+#exclude_regex="${EXCLUDE_REGEX:-.DS_Store}"
+
 last_size=""
 last_filename=""
 last_printed=0
@@ -71,4 +77,12 @@ while read -r size filename; do
     fi
     last_size="$size"
     last_filename="$filename"
-done < <(for dir in "${@:-$PWD}"; do find "$dir" -type f -print0; done | xargs -0 bash -c 'du_files "$@"' | sort -k1n)
+done < <(
+    for dir in "${@:-$PWD}"; do
+        find "$dir" -type f -print0
+    done |
+    # doesn't work due to -print0 and removing that breaks on files with spaces in names
+    #{ grep -Evai -e "$exclude_regex" || : ; } |
+    xargs -0 bash -c 'du_files "$@"' |
+    sort -k1n
+)
