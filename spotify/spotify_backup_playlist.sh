@@ -108,7 +108,7 @@ else
     playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
     snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
     if [ -f "$id_file" ] && [ "$snapshot_id" = "$(cat "$id_file")" ]; then
-        echo " => Snapshot ID unchanged"
+        echo "=> Snapshot ID unchanged"
     else
         echo -n "=> Description "
         description_file="$backup_dir/$filename.description"
