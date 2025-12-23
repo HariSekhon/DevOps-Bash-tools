@@ -17,6 +17,8 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+default_exclude_regex='.DS_Store$|\.nfo$|\.part$'
+
 # shellcheck disable=SC2034
 usage_description="
 Finds duplicate files by file size in bytes
@@ -24,6 +26,12 @@ Finds duplicate files by file size in bytes
 Output format:
 
 <size_in_bytes>     <filename>
+
+Default exclusion list ERE regex is:
+
+    $default_exclude_regex
+
+You can override this by setting environment variable \$EXCLUDE_REGEX
 
 For a much more sophisticated duplicate file finder utilizing size, checksums, basenames and
 even partial basenames via regex match see
@@ -44,11 +52,7 @@ usage_args="[<dir1> <dir2> ...]"
 
 help_usage "$@"
 
-#You can set enviroment variable EXCLUDE_REGEX to a grep ERE regex to exclude files - dy default it excludes:
-#
-#   .DS_Store
-#
-#exclude_regex="${EXCLUDE_REGEX:-.DS_Store}"
+exclude_regex="${EXCLUDE_REGEX:-$default_exclude_regex}"
 
 last_size=""
 last_filename=""
@@ -76,10 +80,10 @@ while read -r size filename; do
     last_filename="$filename"
 done < <(
     for dir in "${@:-$PWD}"; do
-        find "$dir" -type f -print0
+        find "$dir" -type f
     done |
-    # doesn't work due to -print0 and removing that breaks on files with spaces in names
-    #{ grep -Evai -e "$exclude_regex" || : ; } |
+    { grep -Evai -e "$exclude_regex" || : ; } |
+    tr '\n' '\0' |
     xargs -0 bash -c 'du -ab "$@"' |
     sort -k1n
 )
