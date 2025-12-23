@@ -105,23 +105,26 @@ else
 
     playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
 
+    echo -n "=> Description "
+    description_file="$backup_dir/$filename.description"
+    jq -r '.description' <<< "$playlist_json" | tr -d '\n' > "$description_file"
+    if [ -f "$description_file" ]; then
+        # if file is blank then no description is set, remove the useless file
+        if ! [ -s "$description_file" ]; then
+            rm -f -- "$description_file"
+            echo -n "N/A"
+        else
+            echo -n "OK"
+        fi
+    fi
+
     mkdir -p "$backup_dir/id"
     id_file="$backup_dir/id/$filename.id.txt"
     snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
 
     if [ -f "$id_file" ] && [ "$snapshot_id" = "$(cat "$id_file")" ]; then
-        echo "=> Snapshot ID unchanged"
+        echo " => Snapshot ID unchanged"
     else
-        echo -n "=> Description "
-        description_file="$backup_dir/$filename.description"
-        jq -r '.description' <<< "$playlist_json" | tr -d '\n' > "$description_file"
-        if [ -f "$description_file" ]; then
-            # if file is blank then no description is set, remove the useless file
-            if ! [ -s "$description_file" ]; then
-                rm -f -- "$description_file"
-            fi
-        fi
-        echo -n "OK"
         # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         echo -n " => URIs "
         trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
