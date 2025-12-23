@@ -82,6 +82,7 @@ done < <(
     for dir in "${@:-$PWD}"; do
         find "$dir" -type f
     done |
+    # find -print0 breaks this so do it afterwards using tr before passing to xargs -0
     { grep -Evai -e "$exclude_regex" || : ; } |
     tr '\n' '\0' |
     xargs -0 bash -c 'du -ab "$@"' |
