@@ -105,30 +105,39 @@ else
 
     echo -n "=> Description "
     description_file="$backup_dir/$filename.description"
-    "$srcdir/spotify_playlist_json.sh" "$playlist_id" | jq -r '.description' | tr -d '\n' > "$description_file"
+    id_file="$backup_dir/id/$filename.id.txt"
+    mkdir -p "$backup_dir/id"
+    playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
+    jq -r '.description' <<< "$playlist_json" | tr -d '\n' > "$description_file"
     if [ -f "$description_file" ]; then
         # if file is blank then no description is set, remove the useless file
         if ! [ -s "$description_file" ]; then
             rm -f -- "$description_file"
         fi
     fi
+    echo -n "OK"
+    snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
+    if [ -f "$id_file" ] && [ "$snapshot_id" = "$(cat "$id_file")" ]; then
+        echo " => Snapshot ID unchanged, skipping tracks download"
+    else
+        # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
+        echo -n " => URIs "
+        trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
+        "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
+        untrap
+        # try to avoid hitting HTTP 429 rate limiting
+        sleep 0.1
+        num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
 
-    # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
-    echo -n "OK => URIs "
-    trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
-    "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
-    untrap
-    # try to avoid hitting HTTP 429 rate limiting
-    sleep 0.1
-    num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
-
-    # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
-    echo -n "OK ($num_track_uris) => Tracks "
-    trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
-    "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
-    untrap
-    # try to avoid hitting HTTP 429 rate limiting
-    sleep 0.1
+        # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
+        echo -n "OK ($num_track_uris) => Tracks "
+        trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
+        "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
+        untrap
+        echo "$snapshot_id" > "$id_file"
+        echo 'OK'
+    fi
 fi
 
-echo 'OK'
+# try to avoid hitting HTTP 429 rate limiting
+sleep 0.1
