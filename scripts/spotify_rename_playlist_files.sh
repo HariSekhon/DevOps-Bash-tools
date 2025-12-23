@@ -45,6 +45,10 @@ rename(){
     gitrename "$from" "$to"
 
     gitrename "spotify/$from" "spotify/$to"
+
+    if [ -f "id/$from" ]; then
+        mv -v "id/$from" "id/$to"
+    fi
 }
 
 rename "$1" "$2"
