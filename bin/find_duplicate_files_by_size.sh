@@ -80,6 +80,6 @@ done < <(
     done |
     # doesn't work due to -print0 and removing that breaks on files with spaces in names
     #{ grep -Evai -e "$exclude_regex" || : ; } |
-    xargs -0 du -ab |
+    xargs -0 bash -c 'du -ab "$@"' |
     sort -k1n
 )
