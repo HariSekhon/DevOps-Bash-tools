@@ -998,8 +998,8 @@ git_rm_untracked(){
             # you must set 'git config --global core.quotePath false' for this to work properly
             #
             # this doesn't help because you are still stuck with \xxx chars throughout
-            #filename="${filename#\"}"
-            #filename="${filename%\"}"
+            filename="${filename#\"}"
+            filename="${filename%\"}"
             rm -v -- "$filename" || break
         done
     done
