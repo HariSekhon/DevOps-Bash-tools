@@ -56,14 +56,11 @@ last_printed=0
 
 # GNU coreutils du has bytes, whereas Mac's du only goes to the less granular blocks which is less accurate
 if is_mac; then
-    du_files(){
-        gdu -ab "$@"
+    du(){
+        gdu "$@"
     }
-else
-    du_files(){ du -ab "$@"; }
+    export -f du
 fi
-# export function to be used in subshell with xargs, intentionally name it differently than du to make debugging easier
-export -f du_files
 
 while read -r size filename; do
     if [ "$size" = "$last_size" ]; then
@@ -83,6 +80,6 @@ done < <(
     done |
     # doesn't work due to -print0 and removing that breaks on files with spaces in names
     #{ grep -Evai -e "$exclude_regex" || : ; } |
-    xargs -0 bash -c 'du_files "$@"' |
+    xargs -0 du -ab |
     sort -k1n
 )
