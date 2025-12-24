@@ -55,6 +55,7 @@ if [ $# -gt 0 ]; then
     echo "Backing up selected playlist(s):"
     echo
     for playlist in "$@"; do
+        printf '%s  ' "$(date '+%F %T')"
         "$srcdir/spotify_backup_playlist.sh" "$playlist"
     done
     exit 0
