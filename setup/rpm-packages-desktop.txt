@@ -146,6 +146,7 @@ pastebinit
 pdfgrep
 PEAR-PHP_Shell
 perl-doc
+perl-HTML-Parser
 perl-Image-ExifTool
 pidgin
 pidgin-sipe
