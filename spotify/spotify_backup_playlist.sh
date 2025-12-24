@@ -112,6 +112,8 @@ else
     #echo "Saving to filename: $filename"
 
     playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
+    # optimization to pull only the fields we need without the first 100 tracks
+    #playlist_json="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id?fields=snapshot_id,description")"
     #if [ -n "${SPOTIFY_DUMP_HEADERS:-}" ]; then
     #    "$srcdir/../bin/curl_auth.sh" -i "$url_base/$url_path" "$@" | sed '/^[[:space:]]*$/,$d' >&2
     #    exit 1
