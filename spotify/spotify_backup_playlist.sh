@@ -87,10 +87,12 @@ if liked; then
     echo -n "=> URIs "
     #trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
     #"$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
+    #untrap
+    # better to just use atomic moves so we can ./commit.sh even while this is running
+    # without being prompted with net removals by partially completed downloads
     tmp="$(mktemp)"
     "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$tmp"
     mv -f -- "$tmp" "$backup_dir_spotify/$filename"
-    #untrap
 
     echo -n 'OK => Tracks '
     #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
@@ -152,14 +154,16 @@ else
         sleep 0.1
         num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
 
-        # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         echo -n "OK ($num_track_uris) => Tracks "
+        # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
         #"$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
+        #untrap
+        # better to just use atomic moves so we can ./commit.sh even while this is running
+        # without being prompted with net removals by partially completed downloads
         tmp="$(mktemp)"
         "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$tmp"
         mv -f "$tmp" "$backup_dir/$filename"
-        #untrap
         echo "$snapshot_id" > "$id_file"
         echo -n 'OK'
     fi
