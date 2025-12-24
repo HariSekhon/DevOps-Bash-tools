@@ -102,10 +102,33 @@ if liked; then
     mv -f -- "$tmp" "$backup_dir/$filename"
     #untrap
 else
-    playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
+    playlist_name="$playlist"
+    playlists_cache="spotify/playlists.txt"
+    if [ -f "$playlists_cache" ]; then
+        playlist_id="$(
+            awk -v name="$playlist_name" '
+                {
+                    id = $1
+                    $1 = ""
+                    sub(/^[[:space:]]+/, "")
+                    if ($0 == name) {
+                        print id
+                        exit
+                    }
+                }
+            ' "$playlists_cache"
+        )"
+
+        if [[ -n $playlist_id ]]; then
+            #timestamp "cache hit: $playlist_id"
+            :
+        else
+            #timestamp "cache miss: need api lookup"
+            playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
+        fi
+    fi
     # redundant since it is not the right name if it doesn't find the playlist id
     #playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
-    playlist_name="$playlist"
 
     echo -n "$playlist_name "
 
