@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Shrinks an image (default to 50%) to be able to upload it against limits on some websites
+Shrinks an image by resizing it (default to 50%) to be able to upload it against limits on some websites
 
 Quickly written to be able to upload a 4.2MB passport pic to the Copa airline flight to Panama as its limit was 4MB
 "
