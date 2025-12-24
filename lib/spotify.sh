@@ -83,7 +83,7 @@ is_spotify_playlist_id(){
     #if [ -z "$playlist_id" ]; then
     #    die "no playlist id passed to function is_spotify_playlist_id()"
     #fi
-    [[ "$1" =~ [[:alnum:]]{22} ]]
+    [[ "$1" =~ ^[A-Za-z0-9]{22}$ ]]
 }
 
 validate_spotify_uri(){
