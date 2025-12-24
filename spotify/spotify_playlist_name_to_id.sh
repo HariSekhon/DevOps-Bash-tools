@@ -90,6 +90,9 @@ playlist_name_to_id(){
             echo "Error: failed to find playlist ID matching given playlist name '$playlist_name'" >&2
             exit 1
         fi
+        if ! is_spotify_playlist_id "$playlist_id"; then
+            die "ERROR: playlist id '$playlist_id' does not match expected regex"
+        fi
         echo "$playlist_id"
     fi
 }
