@@ -103,7 +103,7 @@ playlist_name_to_id(){
         fi
     fi
     #timestamp "cache miss: need api lookup"
-    SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist"
+    SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist_name"
 }
 export -f playlist_name_to_id
 
@@ -134,8 +134,8 @@ if liked; then
 else
     playlist_name="$playlist"
     playlist_id="$(playlist_name_to_id "$playlist_name")"
-    # redundant since it is not the right name if it doesn't find the playlist id
-    #playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
+    # not redundant since spotify_backup.sh passes in a playlist ID instead for efficiency
+    playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
 
     echo -n "$playlist_name "
 
