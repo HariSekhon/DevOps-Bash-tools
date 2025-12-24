@@ -340,6 +340,7 @@ xdotool
 xfce4-artwork
 xine-ui
 xkbset
+xmlstartlet
 xosd-bin
 xosview
 xpdf
