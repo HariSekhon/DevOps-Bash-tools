@@ -71,7 +71,6 @@ debootstrap
 debsecan
 denyhosts
 dev-libs/geoip
-dev-perl/HTML-Parser
 dev-perl/net-ssh-perl
 dev-perl/perltidy
 dhcping
@@ -174,6 +173,7 @@ liblist-moreutils-perl
 libnet-cidr-perl
 libnet-netmask-perl
 libperl-critic-perl
+libhtml-parser-perl
 libssl-dev
 links
 linux-gazette-all
