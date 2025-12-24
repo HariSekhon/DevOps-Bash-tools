@@ -103,7 +103,9 @@ if liked; then
     #untrap
 else
     playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
-    playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
+    # redundant since it is not the right name if it doesn't find the playlist id
+    #playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
+    playlist_name="$playlist"
 
     echo -n "$playlist_name "
 
