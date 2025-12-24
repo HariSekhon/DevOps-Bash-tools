@@ -52,7 +52,19 @@ fi
 output_image="${input_image%.*}.size.$percentage%.${input_image##*.}"
 
 timestamp "Shrinking image '$input_image' to $percentage% => '$output_image'"
+echo >&2
 
-magick "$input_image" -resize "$percentage" "$output_image"
+magick "$input_image" -resize "$percentage"% "$output_image"
+
+timestamp "Before:"
+echo >&2
+
+magick identify "$input_image"
+
+echo >&2
+timestamp "After:"
+echo >&2
+
+magick identify "$output_image"
 
 "$srcdir/imageopen.sh" "$output_image"
