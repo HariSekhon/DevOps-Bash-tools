@@ -85,14 +85,20 @@ if liked; then
     # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
     #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
     echo -n "=> URIs "
-    trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
-    "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
-    untrap
+    #trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
+    #"$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
+    tmp="$(mktemp)"
+    "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$tmp"
+    mv -f -- "$tmp" "$backup_dir_spotify/$filename"
+    #untrap
 
     echo -n 'OK => Tracks '
-    trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
-    "$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$backup_dir/$filename"
-    untrap
+    #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
+    #"$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$backup_dir/$filename"
+    tmp="$(mktemp)"
+    "$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$tmp"
+    mv -f -- "$tmp" "$backup_dir/$filename"
+    #untrap
 else
     playlist_id="$(SPOTIFY_PLAYLIST_EXACT_MATCH=1 "$srcdir/spotify_playlist_name_to_id.sh" "$playlist" "$@")"
     playlist_name="$("$srcdir/spotify_playlist_id_to_name.sh" "$playlist_id" "$@")"
@@ -134,18 +140,24 @@ else
     else
         # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         echo -n " => URIs "
-        trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
-        "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
-        untrap
+        #trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
+        #"$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$backup_dir_spotify/$filename"
+        tmp="$(mktemp)"
+        "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_id" "$@" > "$tmp"
+        mv -f "$tmp" "$backup_dir_spotify/$filename"
+        #untrap
         # try to avoid hitting HTTP 429 rate limiting
         sleep 0.1
         num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
 
         # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         echo -n "OK ($num_track_uris) => Tracks "
-        trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
-        "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
-        untrap
+        #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
+        #"$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
+        tmp="$(mktemp)"
+        "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$tmp"
+        mv -f "$tmp" "$backup_dir/$filename"
+        #untrap
         echo "$snapshot_id" > "$id_file"
         echo -n 'OK'
     fi
