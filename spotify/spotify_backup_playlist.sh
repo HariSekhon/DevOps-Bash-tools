@@ -119,7 +119,7 @@ else
         # if file is blank then no description is set, remove the useless file
         if ! [ -s "$description_file" ]; then
             rm -f -- "$description_file"
-            echo -n "N/A"
+            echo -n "None"
         else
             echo -n "OK"
         fi
