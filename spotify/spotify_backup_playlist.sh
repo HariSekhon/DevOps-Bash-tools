@@ -119,7 +119,7 @@ else
             ' "$playlists_cache"
         )"
 
-        if [[ -n $playlist_id ]]; then
+        if [ -n "$playlist_id" ] && [[ "$playlist_id" =~ ^[A-Za-z0-9]{22}$ ]]; then
             #timestamp "cache hit: $playlist_id"
             :
         else
