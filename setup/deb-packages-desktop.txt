@@ -70,9 +70,6 @@ debconf-utils  # for debconf-get-selections --installer
 debootstrap
 debsecan
 denyhosts
-dev-libs/geoip
-dev-perl/net-ssh-perl
-dev-perl/perltidy
 dhcping
 dia
 dialog
@@ -167,13 +164,15 @@ ldap-utils
 ldapscripts
 ldapvi
 libc6-dev
+libgeoip1
+libhtml-parser-perl
 libimage-exiftool-perl
 liblist-allutils-perl
 liblist-moreutils-perl
 libnet-cidr-perl
 libnet-netmask-perl
+libnet-ssh-perl
 libperl-critic-perl
-libhtml-parser-perl
 libssl-dev
 links
 linux-gazette-all
@@ -241,6 +240,7 @@ pasco
 pastebinit
 pciutils
 perl-doc
+perltidy
 pgcli
 php5-cli
 phrack-all
