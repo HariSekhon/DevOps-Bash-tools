@@ -106,6 +106,7 @@ dev-perl/net-ssh-perl
 dev-perl/Perl-Critic
 dev-perl/perltidy
 dev-util/git
+dev-xml/xmlstarlet
 dhcpd-syntax
 dhcping
 dia
@@ -436,7 +437,6 @@ xfe
 xine-ui
 xkbset
 xlsclients
-xmlstartlet
 xorg-x11
 xosd
 xosview
