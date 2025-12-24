@@ -71,6 +71,7 @@ export SPOTIFY_FOREACH_NO_NEWLINE=1
 
 "$srcdir"/spotify_foreach_playlist.sh "printf '%s  ' \"\$(date '+%F %T')\"; \"$srcdir/spotify_backup_playlist.sh\" '{playlist_id}'" "$spotify_user" "$@"
 if [ -n "${SPOTIFY_PRIVATE:-}" ]; then
+    printf '%s  ' "$(date '+%F %T')"
     "$srcdir/spotify_backup_playlist.sh" liked "$@"
 fi
 echo >&2
