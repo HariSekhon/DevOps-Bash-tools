@@ -193,7 +193,7 @@ else
         mv -f "$tmp" "$backup_dir_spotify/$filename"
         #untrap
         # try to avoid hitting HTTP 429 rate limiting
-        sleep 0.1
+        #sleep 0.1
         num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
 
         echo -n "OK ($num_track_uris) => Tracks "
@@ -213,4 +213,4 @@ fi
 echo " => $SECONDS secs"
 
 # try to avoid hitting HTTP 429 rate limiting
-sleep 0.1
+#sleep 0.1
