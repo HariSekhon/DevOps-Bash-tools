@@ -23,23 +23,34 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Shrinks an image by 50% to be able to upload it against limits on some websites
+Shrinks an image (default to 50%) to be able to upload it against limits on some websites
 
 Quickly written to be able to upload a 4.2MB passport pic to the Copa airline flight to Panama as its limit was 4MB
 "
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<iamge_file>"
+usage_args="<iamge_file> [<percentage_to_shrink_to>]"
 
 help_usage "$@"
 
-num_args 1 "$@"
+min_args 1 "$@"
+max_args 2 "$@"
 
 input_image="$1"
+percentage="${2:-50%}"
+percentage="${percentage%%%}"
 
-output_image="${input_image%.*}.50%.${input_image##*.}"
+if ! is_int "$percentage"; then
+    die "Second arg for percentage must be an integer"
+fi
 
-timestamp "Shrinking image '$input_image' by 50% to '$output_image'"
+if [ "$percentage" -lt 2 ] || [ "$percentage" -gt 98 ]; then
+    die "Percentage must be between 2 and 98 %"
+fi
 
-magick "$input_image" -quality 80 "$output_image"
+output_image="${input_image%.*}.$percentage%.${input_image##*.}"
+
+timestamp "Shrinking image '$input_image' to $percentage% => '$output_image'"
+
+magick "$input_image" -resize "$percentage" "$output_image"
