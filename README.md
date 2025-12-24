@@ -1513,7 +1513,10 @@ Used in [HariSekhon/Diagrams-as-Code](https://github.com/HariSekhon/Diagrams-as-
 
 #### Images
 
-- `image_shrink.sh` - shrinks an image by resizing it (default 50%) to be able to upload it against limits on some websites
+- `image_shrink.sh` - shrinks an image by resizing it (default 50%) to be able to upload it against limits on some websites.
+   Shows the before and after stats and automatically opens the image to check it
+- `image_reduce_quality.sh` - shrinks an image size by reducing its quality (default to 80%) to be able to upload it against limits on some websites.
+   Shows the before and after stats and automatically opens the image to check it
 - `image_trim_pixels.sh` - trims N pixels off one of the sides of an image. Useful to tweak screenshots before sharing them
 - `image_join_vertical.sh` - joins two images top and bottom after matching their widths so they align correctly
 - `image_join_horizontal.sh` - joins two images left and right after matching their heights so they align correctly
