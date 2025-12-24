@@ -49,8 +49,10 @@ if [ "$percentage" -lt 2 ] || [ "$percentage" -gt 98 ]; then
     die "Percentage must be between 2 and 98 %"
 fi
 
-output_image="${input_image%.*}.$percentage%.${input_image##*.}"
+output_image="${input_image%.*}.quality.$percentage%.${input_image##*.}"
 
 timestamp "Reducing image quality of '$input_image' to $percentage% => '$output_image'"
 
 magick "$input_image" -quality "$percentage" "$output_image"
+
+"$srcdir/imageopen.sh" "$output_image"
