@@ -52,7 +52,16 @@ fi
 output_image="${input_image%.*}.quality.$percentage%.${input_image##*.}"
 
 timestamp "Reducing image quality of '$input_image' to $percentage% => '$output_image'"
+echo >&2
 
 magick "$input_image" -quality "$percentage" "$output_image"
+
+timestamp "Before vs After:"
+echo >&2
+
+{
+magick identify "$input_image"
+magick identify "$output_image"
+} | column -t
 
 "$srcdir/imageopen.sh" "$output_image"
