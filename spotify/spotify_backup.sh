@@ -51,6 +51,8 @@ section "Running Spotify Playlists Backup"
 
 spotify_token
 
+SECONDS=0
+
 if [ $# -gt 0 ]; then
     echo "Backing up selected playlist(s):"
     echo
@@ -72,3 +74,6 @@ sed 's/^[^[:space:]]*[[:space:]]*//' "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 echo >&2
 
 "$srcdir/spotify_backup_playlists.sh"
+
+echo >&2
+timestamp "Spotify Backup completed in $SECONDS seconds"
