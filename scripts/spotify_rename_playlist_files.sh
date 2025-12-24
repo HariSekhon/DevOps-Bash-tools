@@ -50,8 +50,8 @@ rename(){
         gitrename "$from.description" "$to.description"
     fi
 
-    if [ -f "id/$from" ]; then
-        mv -v "id/$from" "id/$to"
+    if [ -f "id/$from.txt" ]; then
+        mv -v "id/$from.txt" "id/$to.txt"
     fi
 }
 
