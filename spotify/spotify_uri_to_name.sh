@@ -79,7 +79,7 @@ spotify_token
 
 uri_type="${SPOTIFY_URI_TYPE:-track}"
 
-if ! [[ "$uri_type" =~ ^(track|album|artist|episodde)$ ]]; then
+if ! [[ "$uri_type" =~ ^(track|album|artist|episode)$ ]]; then
     usage "invalid \$SPOTIFY_URI_TYPE '$uri_type' - must be one of: track, album, artist, episode"
 fi
 
