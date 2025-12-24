@@ -326,10 +326,11 @@ watchexec  # run commands when files change
 #windows-app  # replaces microsoft-remote-desktop
 wireshark  # only install tshark CLI, must --cask for Wireshark
 #webp
-xclip
-xcodesorg/made/xcodes
 #x264
 #x265
+xclip
+xcodesorg/made/xcodes
+xmlstarlet  # XML command line utilities such as html decoding, used by htmldecode.sh
 #xvid
 xz
 yamllint  # in brew-packages.txt
