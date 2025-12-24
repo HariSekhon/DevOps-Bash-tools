@@ -436,6 +436,7 @@ xfe
 xine-ui
 xkbset
 xlsclients
+xmlstartlet
 xorg-x11
 xosd
 xosview
