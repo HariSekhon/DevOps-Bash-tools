@@ -14,7 +14,7 @@
 # ============================================================================ #
 
 netcat-openbsd
-perl-HTML-Parser
+perl-html-parser
 skopeo
 steghide
 tokei  # lines of code counter
