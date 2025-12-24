@@ -71,6 +71,7 @@ debootstrap
 debsecan
 denyhosts
 dev-libs/geoip
+dev-perl/HTML-Parser
 dev-perl/net-ssh-perl
 dev-perl/perltidy
 dhcping
