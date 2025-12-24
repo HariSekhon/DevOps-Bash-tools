@@ -64,6 +64,7 @@ fi
 spotify_token
 
 url_base="https://api.spotify.com"
+# shellcheck disable=SC2295
 url_path="${url_path##$url_base}"
 url_path="${url_path##/}"
 
