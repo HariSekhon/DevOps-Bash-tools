@@ -181,6 +181,8 @@ else
     id_file="$backup_dir/id/$filename.id.txt"
     snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
 
+    # renaming a playlist or changing its description also changes the snapshot ID,
+    # not just adding/removing/reordering tracks, triggering a full re-download
     if [ -f "$id_file" ] && [ "$snapshot_id" = "$(cat "$id_file")" ]; then
         echo -n ' => Snapshot ID unchanged'
     else
