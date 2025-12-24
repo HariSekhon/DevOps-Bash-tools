@@ -104,10 +104,15 @@ else
     #echo "Saving to filename: $filename"
 
     playlist_json="$("$srcdir/spotify_playlist_json.sh" "$playlist_id")"
+    #if [ -n "${SPOTIFY_DUMP_HEADERS:-}" ]; then
+    #    "$srcdir/../bin/curl_auth.sh" -i "$url_base/$url_path" "$@" | sed '/^[[:space:]]*$/,$d' >&2
+    #    exit 1
+    #fi
 
     echo -n "=> Description "
     description_file="$backup_dir/$filename.description"
-    jq -r '.description' <<< "$playlist_json" | tr -d '\n' > "$description_file"
+    # playlist descriptions are HTML encoded
+    jq -r '.description' <<< "$playlist_json" | tr -d '\n' | sed 's/\&amp;/\&/g' > "$description_file"
     if [ -f "$description_file" ]; then
         # if file is blank then no description is set, remove the useless file
         if ! [ -s "$description_file" ]; then
