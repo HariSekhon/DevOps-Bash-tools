@@ -75,6 +75,8 @@ if liked; then
 fi
 spotify_token
 
+SECONDS=0
+
 if liked; then
     echo -n "$playlist_name "
 
@@ -128,7 +130,7 @@ else
     snapshot_id="$(jq -r '.snapshot_id' <<< "$playlist_json" | tr -d '\n')"
 
     if [ -f "$id_file" ] && [ "$snapshot_id" = "$(cat "$id_file")" ]; then
-        echo " => Snapshot ID unchanged"
+        echo -n ' => Snapshot ID unchanged'
     else
         # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
         echo -n " => URIs "
@@ -145,9 +147,10 @@ else
         "$srcdir/spotify_playlist_tracks.sh" "$playlist_id" "$@" > "$backup_dir/$filename"
         untrap
         echo "$snapshot_id" > "$id_file"
-        echo 'OK'
+        echo -n 'OK'
     fi
 fi
+echo " => $SECONDS secs"
 
 # try to avoid hitting HTTP 429 rate limiting
 sleep 0.1
