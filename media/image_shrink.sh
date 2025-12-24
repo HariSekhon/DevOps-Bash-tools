@@ -56,15 +56,12 @@ echo >&2
 
 magick "$input_image" -resize "$percentage"% "$output_image"
 
-timestamp "Before:"
+timestamp "Before vs After:"
 echo >&2
 
+{
 magick identify "$input_image"
-
-echo >&2
-timestamp "After:"
-echo >&2
-
 magick identify "$output_image"
+} | column -t
 
 "$srcdir/imageopen.sh" "$output_image"
