@@ -112,25 +112,35 @@ if liked; then
 
     filename="$("$srcdir/spotify_playlist_to_filename.sh" <<< "$playlist_name")"
 
-    # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
-    #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
-    echo -n "=> URIs "
-    #trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
-    #"$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
-    #untrap
-    # better to just use atomic moves so we can ./commit.sh even while this is running
-    # without being prompted with net removals by partially completed downloads
-    tmp="$(mktemp)"
-    "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$tmp"
-    mv -f -- "$tmp" "$backup_dir_spotify/$filename"
+    # Caching behaviour
+    liked_added_at="$("$srcdir/spotify_api.sh" "/v1/me/tracks?limit=1" | jq -r '.items[0].added_at')"
+    liked_timestamp_cache="id/Liked.added_at.txt"
+    if [ -f "$liked_timestamp_cache" ] &&
+       [ "$liked_added_at" = "$(cat "$liked_timestamp_cache")" ]; then
+        echo -n ' => Latest Added Timestamp Unchanged'
+    else
+        # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
+        #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
+        echo -n "=> URIs "
+        #trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
+        #"$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
+        #untrap
+        # better to just use atomic moves so we can ./commit.sh even while this is running
+        # without being prompted with net removals by partially completed downloads
+        tmp="$(mktemp)"
+        "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$tmp"
+        mv -f -- "$tmp" "$backup_dir_spotify/$filename"
 
-    echo -n 'OK => Tracks '
-    #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
-    #"$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$backup_dir/$filename"
-    tmp="$(mktemp)"
-    "$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$tmp"
-    mv -f -- "$tmp" "$backup_dir/$filename"
-    #untrap
+        echo -n 'OK => Tracks '
+        #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
+        #"$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$backup_dir/$filename"
+        tmp="$(mktemp)"
+        "$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$tmp"
+        mv -f -- "$tmp" "$backup_dir/$filename"
+        #untrap
+        echo "$liked_added_at" > "$liked_timestamp_cache"
+        echo -n 'OK'
+    fi
 else
     playlist_id="$(playlist_name_to_id "$playlist")"
     # not redundant since spotify_backup.sh passes in a playlist ID instead of name for efficiency
