@@ -79,8 +79,8 @@ spotify_token
 
 uri_type="${SPOTIFY_URI_TYPE:-track}"
 
-if ! [[ "$uri_type" =~ ^(track|album|artist)$ ]]; then
-    usage "invalid \$SPOTIFY_URI_TYPE '$uri_type' - must be track, album or artist"
+if ! [[ "$uri_type" =~ ^(track|album|artist|episodde)$ ]]; then
+    usage "invalid \$SPOTIFY_URI_TYPE '$uri_type' - must be one of: track, album, artist, episode"
 fi
 
 url_base="/v1/${uri_type}s"
@@ -89,7 +89,7 @@ uri_inferred=0
 infer_uri_type(){
     local uri="$1"
     if [ $uri_inferred = 0 ] && is_blank "${SPOTIFY_URI_TYPE:-}"; then
-        if [[ "$uri" =~ ^spotify:(track|album|artist):|^https?://open.spotify.com/(track|album|artist)/ ]]; then
+        if [[ "$uri" =~ ^spotify:(track|album|artist|episode):|^https?://open.spotify.com/(track|album|artist|episode)/ ]]; then
             for x in "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}"; do
                 if not_blank "$x"; then
                     uri_type="$x"
@@ -172,7 +172,7 @@ output_local_uri(){
 }
 
 output(){
-    if [[ "$output" =~ \"(tracks|albums|artists)\"[[:space:]]*:[[:space:]]+\[[[:space:]]*null[[:space:]]*\] ]]; then
+    if [[ "$output" =~ \"(tracks|albums|artists|episodes)\"[[:space:]]*:[[:space:]]+\[[[:space:]]*null[[:space:]]*\] ]]; then
         echo "no matching $uri_type URI found - did you specify an incorrect URI or wrong \$SPOTIFY_URI_TYPE for that URI?" >&2
         return
     fi
