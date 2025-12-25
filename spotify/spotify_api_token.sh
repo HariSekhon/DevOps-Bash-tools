@@ -339,7 +339,10 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     # authorization code flow with PKCE
     #url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge"
     # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
-    if is_mac; then
+    if type -P pycookiecheat &>/dev/null; then
+        # this calls the Spotify url using your cookies, and automatically redirects to the local callback handler to collect and request the token without having to fire up the browser pop-up
+        "$srcdir/../bin/curl_with_cookies.sh" "$url"
+    elif is_mac; then
         log "URL: $url"
         frontmost_process="$("$applescript/get_frontmost_process.scpt")"
         "$srcdir/../bin/urlopen.sh" "$url"
