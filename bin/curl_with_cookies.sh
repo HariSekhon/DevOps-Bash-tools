@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Runs curl using a local cookie jar extracted from Google Chrome
+Runs curl using a local cookie jar extracted from Google Chrome of Firefox
 
 First extracts the cookies for the given URL, then passes this directly to curl along with the rest of the args
 "
