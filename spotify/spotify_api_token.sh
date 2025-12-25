@@ -32,7 +32,10 @@ To get a token to access the private user data API endpoints:
 
 export SPOTIFY_PRIVATE=1
 
-This will then require an interactive browser pop-up prompt to authorize, at which point this script will capture and output the resulting token
+Since this requires a Spotify login cookie for the authentication workflow to request a token, it will either:
+
+1. Check pycookiecheat is availabe, then extract the cookie and use it to trigger the Spotify API authentication workflow to retrieve a token
+2. Launch an interactive browser pop-up, at which point this script will capture and output the resulting token. On macOS this will auto close the new tab and return you to the previously active window using Applescript automation
 
 Many scripts utilize this code and will automatically generate the authentication tokens for you if you have \$SPOTIFY_ID and \$SPOTIFY_SECRET environment variables set so you usually don't need to call this yourself
 
