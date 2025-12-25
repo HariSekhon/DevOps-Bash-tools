@@ -22,7 +22,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Returns a Spotify access token from the Spotify API, using app credentials. This token is needed to access the rest of the Spotify API endpoints
+Returns a Spotify access token from the Spotify API, using app credentials and a Spotify cookie
+
+This token is needed to access the rest of the Spotify API endpoints
 
 Requires \$SPOTIFY_ID and \$SPOTIFY_SECRET to be defined in the environment
 
@@ -34,13 +36,22 @@ export SPOTIFY_PRIVATE=1
 
 Since this requires a Spotify login cookie for the authentication workflow to request a token, it will either:
 
-1. Check pycookiecheat is availabe, then extract the cookie and use it to trigger the Spotify API authentication workflow to retrieve a token
-2. Launch an interactive browser pop-up, at which point this script will capture and output the resulting token. On macOS this will auto close the new tab and return you to the previously active window using Applescript automation
+1. Check pycookiecheat is available in the \$PATH, and if so:
+   - use it extract your \$BROWSER\s Spotify cookie
+   - use the cookie to query the Spotify API authentication workflow endpoint
+   OR if pychookie is not available...
+2. Launch an interactive browser pop-up to use your browser's Spotify cookie
+   - on macOS it'll auto close the new tab and return you to the previously active window using Applescript automation
 
-Many scripts utilize this code and will automatically generate the authentication tokens for you if you have \$SPOTIFY_ID and \$SPOTIFY_SECRET environment variables set so you usually don't need to call this yourself
+This script will capture the authentication workflow output using a redirect to a local loopback callback and then use
+that to further request an actual Spotify API token that can be used by other programs
+
+Many scripts utilize this code and will automatically generate the authentication tokens for you if you have
+\$SPOTIFY_ID and \$SPOTIFY_SECRET environment variables set so you usually don't need to call this yourself
 
 
-For private tokens which require authorization pop-ups, if you want to avoid these on every run of these spotify scripts, you can preload a private authorized token in to your shell for an hour like so:
+For private tokens which require authorization pop-ups, if you want to avoid these on every run of these spotify
+scripts, you can preload a private authorized token in to your shell for an hour like so:
 
 export SPOTIFY_ACCESS_TOKEN=\"\$(SPOTIFY_PRIVATE=1 '$srcdir/../spotify/spotify_api_token.sh')
 
@@ -49,7 +60,8 @@ Generate an App client ID and secret for SPOTIFY_ID and SPOTIFY_SECRET environme
 
 https://developer.spotify.com/dashboard/applications
 
-Make sure to add a callback URL of exactly 'http://127.0.0.1:12345/callback' without the quotes to be able to generate private tokens
+Make sure to add a callback URL of exactly 'http://127.0.0.1:12345/callback'
+without the quotes to be able to generate private tokens
 "
 
 # used by usage() in lib/utils.sh
