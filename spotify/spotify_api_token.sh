@@ -39,12 +39,12 @@ Since this requires a Spotify login cookie for the authentication workflow to re
 1. Check pycookiecheat is available in the \$PATH, and if so:
    - use it extract your \$BROWSER's Spotify cookie
    - use the cookie to query the Spotify API authentication workflow endpoint
-   OR if pychookie is not available...
+   OR if pychookiecheat is not available...
 2. Launch an interactive browser pop-up to use your browser's Spotify cookie
    - on macOS it'll auto close the new tab and return you to the previously active window using Applescript automation
 
 This script will capture the authentication workflow output using a redirect to a local loopback callback and then use
-that to further request an actual Spotify API token that can be used by other programs
+that to further request an actual Spotify API token that can be used by other programs and print that to stdout
 
 Many scripts utilize this code and will automatically generate the authentication tokens for you if you have
 \$SPOTIFY_ID and \$SPOTIFY_SECRET environment variables set so you usually don't need to call this yourself
