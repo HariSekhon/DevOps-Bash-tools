@@ -82,7 +82,7 @@ commit_playlist(){
         added_num="$(awk '{print $1}' <<< "$stats")"
         removed_num="$(awk '{print $2}' <<< "$stats")"
         if [ "$removed_num" -gt "$added_num" ]; then
-            die "ERROR: tracks have been removed from playlist '$playlist' top level file which were not removed from 'spotify/$playlist' - partial interrupted playlist download?"
+            die "ERROR: tracks have been removed from playlist '$playlist' top level file which were not removed from 'spotify/$playlist' - partial interrupted playlist download or files committed separately?"
         fi
         echo "Auto-committing playlist '$playlist' as no net removals"
         echo
