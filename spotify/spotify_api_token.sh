@@ -37,7 +37,7 @@ export SPOTIFY_PRIVATE=1
 Since this requires a Spotify login cookie for the authentication workflow to request a token, it will either:
 
 1. Check pycookiecheat is available in the \$PATH, and if so:
-   - use it extract your \$BROWSER\s Spotify cookie
+   - use it extract your \$BROWSER's Spotify cookie
    - use the cookie to query the Spotify API authentication workflow endpoint
    OR if pychookie is not available...
 2. Launch an interactive browser pop-up to use your browser's Spotify cookie
