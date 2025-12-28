@@ -39,7 +39,7 @@ Since this requires a Spotify login cookie for the authentication workflow to re
 1. Check pycookiecheat is available in the \$PATH, and if so:
    - use it extract your \$BROWSER's Spotify cookie
    - use the cookie to query the Spotify API authentication workflow endpoint
-   OR if pychookiecheat is not available...
+   OR if pycookiecheat is not available...
 2. Launch an interactive browser pop-up to use your browser's Spotify cookie
    - on macOS it'll auto close the new tab and return you to the previously active window using Applescript automation
 
@@ -350,12 +350,15 @@ if not_blank "${SPOTIFY_PRIVATE:-}"; then
     fi
     trap -- EXIT
     {
-    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code"
     # authorization code flow with PKCE
     #url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code&code_challenge_method=S256&code_challenge=$code_challenge"
-    # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI and would complicate things with localhost SSL server certificate management
+    # without PKCE
+    url="https://accounts.spotify.com/authorize?client_id=$SPOTIFY_ID&redirect_uri=$redirect_uri_encoded&scope=$scope&response_type=code"
+    # implicit grant flow would use response_type=token, but this requires an SSL connection in the redirect URI
+    # and would complicate things with localhost SSL server certificate management
     if type -P pycookiecheat &>/dev/null; then
-        # this calls the Spotify url using your cookies, and automatically redirects to the local callback handler to collect and request the token without having to fire up the browser pop-up
+        # this calls the Spotify url using your browser cookies, and automatically redirects to the local callback handler
+        # to collect and request the token without having to fire up the browser pop-up
         "$srcdir/../bin/curl_with_cookies.sh" "$url"
     elif is_mac; then
         log "URL: $url"
