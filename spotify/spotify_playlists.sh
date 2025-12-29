@@ -66,6 +66,11 @@ if [ -n "${SPOTIFY_PRIVATE_ONLY:-}" ]; then
     export SPOTIFY_PRIVATE=1
 fi
 
+if not_blank "${SPOTIFY_PUBLIC_ONLY:-}" &&
+   not_blank "${SPOTIFY_PRIVATE_ONLY:-}"; then
+    die 'ERROR: Cannot set both SPOTIFY_PUBLIC_ONLY and SPOTIFY_PRIVATE_ONLY environment variables - they are mutually exclusive!'
+fi
+
 # because otherwise the Spotify API only returns the public playlists that have been explicitly added to the profile
 #if [ -n "${SPOTIFY_PUBLIC_ONLY:-}" ]; then
 #    export SPOTIFY_PRIVATE=1
