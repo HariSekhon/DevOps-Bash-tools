@@ -66,11 +66,15 @@ fi
 mkdir -pv "$SPOTIFY_BACKUP_DIR/spotify"
 
 timestamp "Dumping list of Spotify playlists to $SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
-"$srcdir/spotify_playlists.sh" > "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
+tmp="$(mktemp)"
+"$srcdir/spotify_playlists.sh" > "$tmp"
+mv -f "$tmp" "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt"
 echo >&2
 
 timestamp "Stripping spotify playlist IDs from $SPOTIFY_BACKUP_DIR/spotify/playlists.txt => $SPOTIFY_BACKUP_DIR/playlists.txt"
-sed 's/^[^[:space:]]*[[:space:]]*//' "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt" > "$SPOTIFY_BACKUP_DIR/playlists.txt"
+tmp="$(mktemp)"
+sed 's/^[^[:space:]]*[[:space:]]*//' "$SPOTIFY_BACKUP_DIR/spotify/playlists.txt" > "$tmp"
+mv -f "$tmp" "$SPOTIFY_BACKUP_DIR/playlists.txt"
 echo >&2
 
 "$srcdir/spotify_backup_playlists.sh"
