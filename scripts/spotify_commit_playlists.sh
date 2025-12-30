@@ -66,10 +66,13 @@ commit_playlist(){
     line_count_human_playlist="$(wc -l < "$playlist" | sed 's/[[:space:]]//g')"
     line_count_spotify_playlist="$(wc -l < "spotify/$playlist" | sed 's/[[:space:]]//g')"
     if [ "$line_count_human_playlist" != "$line_count_spotify_playlist" ]; then
-        die "ERROR: line counts between '$playlist' and 'spotify/$playlist' do not match! Partially interrupted download?"
+        warn "ERROR: line counts between '$playlist' and 'spotify/$playlist' do not match! Partially interrupted download?"
     fi
     if git status -s -- "$playlist" "spotify/$playlist" | grep -q '^[?A]'; then
         git add "$playlist" "spotify/$playlist"
+        if [ -f "$playlist.description" ]; then
+            git add "$playlist.description"
+        fi
         git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
         return
     fi
