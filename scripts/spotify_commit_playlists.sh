@@ -72,8 +72,10 @@ commit_playlist(){
         git add "$playlist" "spotify/$playlist"
         if [ -f "$playlist.description" ]; then
             git add "$playlist.description"
+            git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist" "$playlist.description"
+        else
+            git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
         fi
-        git ci -m "added $playlist spotify/$playlist" "$playlist" "spotify/$playlist"
         return
     fi
     if ! git status -s -- "$playlist" "spotify/$playlist" | grep -q '^.M'; then
