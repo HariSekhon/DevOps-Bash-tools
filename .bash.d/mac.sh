@@ -163,6 +163,7 @@ showhiddenfiles(){
 
 alias reloadprefs='killall -u $USER cfprefsd'
 alias strace="dtruss -f"
+alias usbinfo='system_profiler SPUSBDataType'
 alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 
 
