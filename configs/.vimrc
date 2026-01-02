@@ -239,7 +239,11 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 "nmap          ;; :call HgGitU()<CR>
 " command not found
 "nmap          ;; :! . ~/.bashrc; gitu "%" <CR>
-nmap          ;; :w!<CR> :call GitUpdateCommit() <CR>
+" sometimes doesn't trigger, see if removing the space helps
+"nmap          ;; :w!<CR>:call GitUpdateCommit() <CR>
+" technically more accurate to not leave command mode
+nmap          ;; :w! \| call GitUpdateCommit() <CR>
+"nnoremap <nowait> ;; :w!<CR> :call GitUpdateCommit() <CR>
 nmap          ;/ :w<CR> :call GitAddCommit() <CR>
 nmap          ;g :w<CR> :call GitStatus() <CR>
 nmap          ;G :w<CR> :call GitLogP() <CR>
