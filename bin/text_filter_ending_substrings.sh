@@ -55,7 +55,7 @@ min_args 2 "$@"
 
 for arg; do
     if ! [ -a "$arg" ]; then
-        die "ERROR: non-file / file descriptor passed as arg: $arg"
+        die "ERROR: not found: $arg"
     fi
 done
 
