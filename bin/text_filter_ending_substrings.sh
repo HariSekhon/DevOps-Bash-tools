@@ -28,7 +28,12 @@ For a given patterns file of substring endings, print all lines that match in th
 Highly optimized using awk and bucketing to avoid all unrecognized characters but also buckets for
 performance improvements
 
-You can pass subshell content outputs for one of both 'files' using bash file descriptor replacement syntax:
+By default matching is case sensitive for accuracy, but if you want case insensitive matching, you can set
+environment variable TEXT_MATCH_CASE_INSENSITIVE to 1
+
+    export TEXT_MATCH_CASE_INSENSITIVE=1
+
+You can also pass subshell content outputs for one of both 'files' using bash file descriptor replacement syntax:
 
     ${0##*/} <(somecommand) <(somecommand2)
 
@@ -49,19 +54,25 @@ patterns_file="$1"
 shift || :
 
 awk '
+    BEGIN {
+        ci = (ENVIRON["TEXT_MATCH_CASE_INSENSITIVE"] == "1")
+    }
+
     # block only executes for 1st file to build up the patterns hash
     NR==FNR {
-        len = length($0)
+        pattern = ci ? tolower($0) : $0
+        len = length(pattern)
         # length bucketing optimization to not attempt to match lines that are shorter than length
-        patterns[len][$0] = 1
+        patterns[len][pattern] = 1
         #if (len > max) max = len
         next
     }
     {
-        line = $0
+        line = ci ? tolower($0) : $0
+        len_line = length(line)
         for (pattern in patterns) {
-            if (length(line) >= pattern) {
-                suffix = substr(line, length(line) - pattern + 1)
+            if (len_line >= pattern) {
+                suffix = substr(line, len_line - pattern + 1)
                 if (suffix in patterns[pattern]) {
                     print
                     break
