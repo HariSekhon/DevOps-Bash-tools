@@ -52,6 +52,7 @@ spotify_token
 # BSD grep has a bug in grep -f, rely on GNU grep instead
 if is_mac; then
     grep(){
+        # handles grep -f properly
         command ggrep "$@"
     }
 fi
