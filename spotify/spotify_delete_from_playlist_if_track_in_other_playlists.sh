@@ -52,19 +52,27 @@ spotify_token
 # BSD grep has a bug in grep -f, rely on GNU grep instead
 if is_mac; then
     grep(){
+        # handles grep -f properly
         command ggrep "$@"
+    }
+    sed(){
+        # handles + matching properly
+        command gsed "$@"
     }
 fi
 
-# URI \t Artist - Track format
-timestamp "Getting list of URI + Artist - Track names from target playlist '$playlist_to_delete_from'"
+# Returns a list one per line in the format:
+#
+#   URI \t Artist - Track
+#
+timestamp "Getting list of URI + Artist - Track names from target playlist: $playlist_to_delete_from"
 playlist_uri_artist_tracks="$("$srcdir/spotify_playlist_tracks_uri_artist_track.sh" "$playlist_to_delete_from")"
 
 for playlist in "$@"; do
-    timestamp "Getting list of tracks from source playlist '$playlist'"
-    "$srcdir/spotify_playlist_tracks.sh" "$playlist"
+    timestamp "Getting list of URI + Artist - Track names from source playlist: $playlist"
+    "$srcdir/spotify_playlist_tracks_uri_artist_track.sh" "$playlist"
 done |
-grep -f <(sed $'s/^/spotify:track:[[:alnum:]]\+\t/' <<< "$playlist_uri_artist_tracks") |
+grep -f <(sed $'s/^spotify:track:[[:alnum:]]\+\t//; s/$/\$/' <<< "$playlist_uri_artist_tracks") |
 # get just the URIs of matching tracks
 sed $'s/\t.*$//' |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
