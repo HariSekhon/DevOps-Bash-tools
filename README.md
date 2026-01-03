@@ -363,6 +363,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `ssl_get_cert.sh` - gets a remote `host:port` server's SSL cert in a format you can pipe, save and use locally, for example in Java truststores
 - `ssl_verify_cert.sh` - verifies a remote SSL certificate (battle tested more feature-rich version `check_ssl_cert.pl` exists in the [Advanced Nagios Plugins](https://github.com/HariSekhon/Nagios-Plugins) repo)
 - `ssl_verify_cert_by_ip.sh` - verifies SSL certificates on specific IP addresses, useful to test SSL source addresses for CDNs, such as Cloudflare Proxied sources before enabling SSL Full-Strict Mode for end-to-end, or Kubernetes ingresses (see also `curl_k8s_ingress.sh`)
+- `text_filter_ending_substrings.sh` - for a given patterns file of substring endings, print all lines that match in the following files. Uses awk to safely handle all characters as literals, unlike grep, while also maintaining end anchoring which you cannot do using `grep -F`. Optimized awk code uses a bucketing hash for performance to not attempt matching lines which are shorter than patterns, reducing the number of match attempts
 - `tmux_vertical.sh` - launches tmux with N-way vertical shell split or commands given as args in equally balanced vertical panes. Fast way to launch a bunch of shell or commands in an easily reviewable side-by-side way
 - `tmux_horizontal.sh` - same as above but split horizontally
 - `tmux_square.sh` - same as above but with 4 panes in a square tiled view
