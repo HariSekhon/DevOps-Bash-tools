@@ -53,7 +53,7 @@ playlists (eg. TODO playlists dumped by spotify_backup*.sh / spotify_playlist_tr
 
 Caveat: won't check the tracks are already in the playlist, will simply fire batch delete API calls and count the number of tracks requested to be removed, so repeated runs of the same URIs fed in will give the same results, which might mislead you to thinking they weren't remove the first time around, when they've already been removed
 
-If you set environment variable SPOTIFY_RESOLVE_TRACKS_DELETED will resolve and print the names of the tracks its deleting as it goes along for debugging purposes (this is more expensive as it requires one extra API call per 50 tracks, tripling the number of API calls required)
+If you set environment variable SPOTIFY_RESOLVE_TRACKS_DELETED it'll resolve and print the names of the tracks its deleting as it goes along for debugging purposes (this is more expensive as it requires one extra API call per 50 tracks, tripling the number of API calls required)
 
 
 $usage_playlist_help
