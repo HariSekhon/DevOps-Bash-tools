@@ -53,6 +53,12 @@ help_usage "$@"
 
 min_args 2 "$@"
 
+for arg; do
+    if ! [ -f "$arg" ]; then
+        die "ERROR: non-file passed as arg: $arg"
+    fi
+done
+
 patterns_file="$1"
 shift || :
 
