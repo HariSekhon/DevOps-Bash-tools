@@ -92,12 +92,16 @@ validate_spotify_uri(){
         echo "Invalid URI provided: $uri" >&2
         return 1
     fi
-    if [[ "$uri" =~ open.spotify.com/|^spotify: ]]; then
-        if ! [[ "$uri" =~ open.spotify.com/${uri_type:-track}|^spotify:${uri_type:-track} ]]; then
-            echo "Invalid URI type '${uri_type:-track}' vs URI '$uri'" >&2
-            return 1
-        fi
-    fi
+    # My Love Island playlist has a mix of tracks and episodes so this breaks
+    #
+    #   Invalid URI type 'track' vs URI 'spotify:episode:4Dl83m4Ibate3jn0hJFMzX'
+    #
+    #if [[ "$uri" =~ open.spotify.com/|^spotify: ]]; then
+    #    if ! [[ "$uri" =~ open.spotify.com/${uri_type:-track}|^spotify:${uri_type:-track} ]]; then
+    #        echo "Invalid URI type '${uri_type:-track}' vs URI '$uri'" >&2
+    #        return 1
+    #    fi
+    #fi
     uri="${uri##*[:/]}"
     uri="${uri%%\?*}"
     echo "$uri"
