@@ -54,7 +54,7 @@ help_usage "$@"
 min_args 2 "$@"
 
 for arg; do
-    if ! [ -a "$arg" ]; then
+    if ! [ -e "$arg" ]; then
         die "ERROR: not found: $arg"
     fi
 done
