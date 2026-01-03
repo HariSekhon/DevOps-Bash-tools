@@ -74,6 +74,10 @@ grep -f <(
         "$srcdir/spotify_playlist_tracks.sh" "$playlist"
     done |
     sort -u |
+    # XXX: anchor the track name as as suffix regex to prevent it accidentally removing '... (Remix)' or similar alternate versions of tracks
+    #      this is a trade off vs using -F for regex safety - I am betting the fringe conditional of a track name having some character that
+    #      breaks when used as a regex, possibly resulting in missing an odd track, is far less common than the other failure scenario of
+    #      matching substings of track names. If this becomes a problem we can add escaping to special characters interpreted by regex
     sed 's/$/$/'
 ) <<< "$playlist_uri_artist_tracks" |
 # get just the URIs of matching tracks
