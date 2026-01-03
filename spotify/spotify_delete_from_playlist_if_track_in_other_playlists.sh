@@ -68,11 +68,13 @@ fi
 timestamp "Getting list of URI + Artist - Track names from target playlist: $playlist_to_delete_from"
 playlist_uri_artist_tracks="$("$srcdir/spotify_playlist_tracks_uri_artist_track.sh" "$playlist_to_delete_from")"
 
-for playlist in "$@"; do
-    timestamp "Getting list of URI + Artist - Track names from source playlist: $playlist"
-    "$srcdir/spotify_playlist_tracks_uri_artist_track.sh" "$playlist"
-done |
-grep -f <(sed $'s/^spotify:track:[[:alnum:]]\+\t//; s/$/\$/' <<< "$playlist_uri_artist_tracks") |
+grep -Ff <(
+    for playlist in "$@"; do
+        timestamp "Getting list of Artist - Track names from source playlist: $playlist"
+        "$srcdir/spotify_playlist_tracks.sh" "$playlist"
+    done |
+    sort -u
+) <<< "$playlist_uri_artist_tracks" |
 # get just the URIs of matching tracks
 sed $'s/\t.*$//' |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
