@@ -23,10 +23,13 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-For a given patterns file of substring endings, print all lines that match in the following file
+For a given patterns file of substring endings, print all lines that match in the following files
 
-Highly optimized using awk and bucketing to avoid all unrecognized characters but also buckets for
-performance improvements
+Uses awk to safely handle all characters as literals, unlike grep, while also maintaining end anchoring
+which you cannot do using grep -F.
+
+Optimized awk code uses a bucketing hash for performance to not attempt matching lines which are shorter
+than patterns, reducing the number of match attempts
 
 By default matching is case sensitive for accuracy, but if you want case insensitive matching, you can set
 environment variable TEXT_MATCH_CASE_INSENSITIVE to 1
