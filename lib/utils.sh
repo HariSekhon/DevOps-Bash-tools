@@ -753,9 +753,12 @@ stat_bytes(){
 }
 
 timestamp(){
-    printf "%s  %s" "$(date '+%F %T')" "$*" >&2
+    local ts
+    ts="$(date '+%F %T')"
     if [ $# -gt 0 ]; then
-        printf '\n' >&2
+        printf "%s  %s\n" "$ts" "$*" >&2
+    else
+        printf "%s  " "$ts" >&2
     fi
 }
 tstamp(){ timestamp "$@"; }
