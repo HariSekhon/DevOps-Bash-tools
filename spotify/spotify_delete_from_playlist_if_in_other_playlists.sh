@@ -8,7 +8,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -61,7 +62,7 @@ for playlist in "$@"; do
 done |
 sort -u |
 grep -Fxf <(
-    timestamp "Getting track URIs from playlist to delete from: $playlist_to_delete_from"
+    timestamp "Getting track URIs from target playlist to delete from: $playlist_to_delete_from"
     "$srcdir/spotify_playlist_tracks_uri.sh" "$playlist_to_delete_from"
 ) |
 "$srcdir/spotify_delete_from_playlist.sh" "$playlist_to_delete_from"
