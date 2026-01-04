@@ -51,7 +51,7 @@ usage_args="<patterns.txt> <data.txt> [<data2.txt> ...]"
 
 help_usage "$@"
 
-min_args 2 "$@"
+min_args 1 "$@"
 
 for arg; do
     if ! [ -e "$arg" ]; then
