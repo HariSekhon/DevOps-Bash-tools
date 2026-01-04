@@ -23,7 +23,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-For a given patterns file of substring endings, print all lines that match in the following files
+For a given patterns file of substring endings, print all lines that match in the following files or stdin
 
 Uses awk to safely handle all characters as literals, unlike grep, while also maintaining end anchoring
 which you cannot do using grep -F.
@@ -89,4 +89,4 @@ awk '
             }
         }
     }
-' "$patterns_file" "$@"
+' "$patterns_file" "${@:-/dev/stdin}"
