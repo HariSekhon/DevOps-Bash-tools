@@ -47,7 +47,7 @@ Used by script:
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<patterns.txt> <data.txt> [<data2.txt> ...]"
+usage_args="<patterns.txt> [<data.txt> <data2.txt> ...]"
 
 help_usage "$@"
 
