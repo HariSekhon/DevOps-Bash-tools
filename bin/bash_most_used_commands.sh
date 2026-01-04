@@ -45,7 +45,7 @@ help_usage "$@"
 
 no_more_args "$@"
 
-timestamped_history=0
+#timestamped_history=0
 
 #if history | grep -P '^\d+\s+\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s'; then
 #    timestamped_history=1
