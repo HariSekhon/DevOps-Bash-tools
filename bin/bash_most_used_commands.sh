@@ -35,6 +35,16 @@ and
 
 Because shell scripts do not have access to the interactive history, this uses ~/.bash_history file
 and parses out timestamps
+
+Caveat: this will not include current shell's commands which are usually only written upon shell exit
+
+To include the current shell, do a one liner like this:
+
+    history | awk '{ a[\$2]++ } END { for(i in a) { print a[i] \" \" i } }' | sort -rn | head -n 100
+
+Or if you're using timestamped shell history:
+
+    history | awk '{ a[\$4]++ } END { for(i in a) { print a[i] \" \" i } }' | sort -rn | head -n 100
 "
 
 # used by usage() in lib/utils.sh
