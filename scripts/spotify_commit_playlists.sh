@@ -49,6 +49,9 @@ usage_args="[<playlist>]"
 . "$srcdir/lib/utils.sh"
 
 # shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/spotify.sh"
+
+# shellcheck disable=SC1090,SC1091
 #. "$srcdir/.bash.d/git.sh"
 
 help_usage "$@"
@@ -121,6 +124,7 @@ commit_playlist(){
 find_net_removals(){
     local playlist="$1"
     # stop grep breaking everything when no removals
+    spotify_token
     git diff "spotify/$playlist" |
     diffnet.pl |
     { grep ^- || :; } |
