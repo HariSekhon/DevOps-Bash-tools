@@ -4,7 +4,7 @@
 --
 --  vim:ts=4:sts=4:sw=4:et
 --
---  https///github.com/HariSekhon/Templates
+--  https///github.com/HariSekhon/DevOps-Bash-tools
 --
 --  License: see accompanying Hari Sekhon LICENSE file
 --
