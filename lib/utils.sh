@@ -836,6 +836,11 @@ next_available_port(){
     echo "$local_port"
 }
 
+when_pingable(){
+    local host="$1"
+    ping -o "$host"
+}
+
 when_ports_available(){
     local max_secs="${1:-}"
     if ! [[ "$max_secs" =~ ^[[:digit:]]+$ ]]; then
