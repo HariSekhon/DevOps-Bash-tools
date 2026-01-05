@@ -49,3 +49,9 @@ mac_only(){
         die "Only macOS is supported"
     fi
 }
+
+windows_only(){
+    if ! is_windows; then
+        die "Only Windows is supported"
+    fi
+}
