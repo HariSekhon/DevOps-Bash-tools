@@ -23,6 +23,9 @@
 -- only resume for videos longer than 10 minutes
 local min_length = 600
 
+-- only resume if more than 5 minutes in
+local min_watch_time = 300
+
 -- only resume for videos with these file extensions
 local allowed_ext = {
     avi  = true,
@@ -30,6 +33,11 @@ local allowed_ext = {
     mp4  = true,
     part = true, -- for incomplete files
 }
+
+-- disable mpv's automatic resume saving globally
+mp.set_property("save-position-on-quit", "no")
+
+local should_resume = false
 
 -- used just to capture home dir for automatic pathing if $HOME is somehow not set
 local function shell(cmd)
@@ -67,9 +75,25 @@ mp.register_event("file-loaded", function()
     -- only resume for videos with these path prefixes
     for _, dir in ipairs(allowed_dirs) do
         if path:sub(1, #dir) == dir then
+            should_resume = true
             return
         end
     end
 
     mp.set_property("save-position-on-quit", "no")
+end)
+
+mp.register_event("shutdown", function()
+    if not should_resume then
+        mp.commandv("delete-watch-later-config")
+        return
+    end
+
+    local pos = mp.get_property_number("time-pos", 0)
+    if pos < min_watch_time then
+        mp.commandv("delete-watch-later-config")
+        return
+    end
+
+    mp.commandv("write-watch-later-config")
 end)
