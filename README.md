@@ -417,8 +417,8 @@ Mac automation scripts to automate the Mac UI and settings
 - `spotify_app_search.sh` - runs a search in the Spotify App on Mac using Applescript
 - `shazam_app_dump_tracks.sh` - dumps `artist - track` one per line from the Shazam local sqlite DB
 - `shazam_app_delete_track.sh` - deletes a given `"artist" "track"` from the Shazam local sqlite DB
-- `shazam_search_spotify_then_delete_track.sh` - searches for each Shazam'd track in the local Spotify app,
-  then prompts to delete the track from the Shazam DB.
+- `shazam_search_spotify_then_delete_track.sh` - searches for each Shazam'd track in the local Spotify desktop app,
+  then prompts to delete each track from the local Shazam DB once you've saved it in Spotify.
   Useful to migrate Shazam'd tracks to Spotify after Apple removed the integration
 - `screensaver_activate.scpt` - activate screensaver
 - `shorten_text_selection.scpt` - shortens the selected text in the prior window. Replaces `and` with `&` and crushes
