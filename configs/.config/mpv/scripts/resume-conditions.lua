@@ -25,9 +25,10 @@ local min_length = 600
 
 -- only resume for videos with these file extensions
 local allowed_ext = {
-    avi = true,
-    mkv = true,
-    mp4 = true,
+    avi  = true,
+    mkv  = true,
+    mp4  = true,
+    part = true, -- for incomplete files
 }
 
 -- used just to capture home dir for automatic pathing if $HOME is somehow not set
