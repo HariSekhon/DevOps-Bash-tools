@@ -76,6 +76,8 @@ mp.register_event("file-loaded", function()
     for _, dir in ipairs(allowed_dirs) do
         if path:sub(1, #dir) == dir then
             should_resume = true
+            -- clashes with shutdown event handler logic now
+            --mp.set_property("save-position-on-quit", "yes")
             return
         end
     end
