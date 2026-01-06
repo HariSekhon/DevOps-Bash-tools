@@ -41,8 +41,6 @@ num_args 2 "$@"
 old="$1"
 new="$2"
 
-local old="$1"
-local new="$2"
 mv -vf -- "$new" "$old"
 cd spotify
 mv -vf -- "$new" "$old"
