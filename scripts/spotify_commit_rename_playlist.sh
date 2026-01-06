@@ -38,24 +38,24 @@ help_usage "$@"
 
 num_args 2 "$@"
 
-old_name="$1"
-new_name="$2"
+old="$1"
+new="$2"
 
 commit_rename(){
-    local old_name="$1"
-    local new_name="$2"
-    mv -vf -- "$new_name" "$old_name"
+    local old="$1"
+    local new="$2"
+    mv -vf -- "$new" "$old"
     cd spotify
-    mv -vf -- "$new_name" "$old_name"
+    mv -vf -- "$new" "$old"
     cd ..
 
-    "$srcdir/spotify_commit_playlists.sh" "$old_name"
+    "$srcdir/spotify_commit_playlists.sh" "$old"
 
-    "$srcdir/spotify_rename_playlist_files.sh" "$old_name" "$new_name"
+    "$srcdir/spotify_rename_playlist_files.sh" "$old" "$new"
 }
 
 if [ $# -gt 0 ]; then
-    commit_rename "$old_name" "$new_name"
+    commit_rename "$old" "$new"
 else
     git st --porcelain |
     grep '^??' |
