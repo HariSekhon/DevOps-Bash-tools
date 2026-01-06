@@ -41,6 +41,9 @@ num_args 2 "$@"
 old="$1"
 new="$2"
 
+# Copy the newly downloaded playlist files over the old git committed ones
+# so that we can then commit them under the old name before renaming the safely
+# committed playlist to the new name
 mv -vf -- "$new" "$old"
 mv -vf -- "spotify/$new" "spotify/$old"
 
