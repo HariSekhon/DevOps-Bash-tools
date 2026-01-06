@@ -29,26 +29,33 @@ playlist file to the new playlist file to align with the spotify_backup*.sh expo
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist_new_name> <playlist_existing_name>"
+usage_args="<old_playlist_name> <new_playlist_name>"
 
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
+num_args 2 "$@"
+
+old_name="$1"
+new_name="$2"
+
 commit_rename(){
-    mv -vf -- "$1" "$2"
+    local old_name="$1"
+    local new_name="$2"
+    mv -vf -- "$new_name" "$old_name"
     cd spotify
-    mv -vf -- "$1" "$2"
+    mv -vf -- "$new_name" "$old_name"
     cd ..
 
-    "$srcdir/spotify_commit_playlists.sh" "$2"
+    "$srcdir/spotify_commit_playlists.sh" "$old_name"
 
-    "$srcdir/spotify_rename_playlist_files.sh" "$2" "$1"
+    "$srcdir/spotify_rename_playlist_files.sh" "$old_name" "$new_name"
 }
 
 if [ $# -gt 0 ]; then
-    commit_rename "$1" "$2"
+    commit_rename "$old_name" "$new_name"
 else
     git st --porcelain |
     grep '^??' |
