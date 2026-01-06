@@ -56,6 +56,8 @@ usage_args="[<playlist>]"
 
 help_usage "$@"
 
+spotify_token || :
+
 exec 3<&0
 
 commit_playlist(){
@@ -124,7 +126,6 @@ commit_playlist(){
 find_net_removals(){
     local playlist="$1"
     # stop grep breaking everything when no removals
-    spotify_token
     git diff "spotify/$playlist" |
     diffnet.pl |
     { grep ^- || :; } |
