@@ -22,7 +22,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC2034
 usage_description="
-Commits and Renames a Spotify playlist
+Commits and then Renames a Spotify playlist
 
 When Spotify playlist names change and you want to commit the updates which were downloaded to a new non-committed playlist file,
 this script will copy the new playlist file given as the first argument over the old playlist filen given as the second argument,
