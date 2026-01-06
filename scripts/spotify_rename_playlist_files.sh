@@ -25,7 +25,7 @@ to keep the Spotify backups in sync
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="<playlist_old_name> <playlist_new_name>"
+usage_args="<old_playlist_name> <new_playlist_name>"
 
 # shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/utils.sh"
