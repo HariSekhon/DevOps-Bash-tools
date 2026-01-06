@@ -17,6 +17,9 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090,SC1091
+. "$srcdir/lib/utils.sh"
+
 # shellcheck disable=SC2034
 usage_description="
 Commits and Renames a Spotify playlist
@@ -30,9 +33,6 @@ playlist file to the new playlist file to align with the spotify_backup*.sh expo
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
 usage_args="<old_playlist_name> <new_playlist_name>"
-
-# shellcheck disable=SC1090,SC1091
-. "$srcdir/lib/utils.sh"
 
 help_usage "$@"
 
