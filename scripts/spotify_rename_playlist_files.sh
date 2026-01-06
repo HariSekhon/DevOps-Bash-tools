@@ -43,6 +43,8 @@ new="$2"
 old="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$old")"
 new="$("$srcdir/../spotify/spotify_playlist_to_filename.sh" "$new")"
 
+# the gitrename function in lib/git.sh has been updated to preserve the new file
+# and restore it after the move to then git diff and commit any updates
 gitrename "$old" "$new"
 
 gitrename "spotify/$old" "spotify/$new"
