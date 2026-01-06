@@ -42,9 +42,7 @@ old="$1"
 new="$2"
 
 mv -vf -- "$new" "$old"
-cd spotify
-mv -vf -- "$new" "$old"
-cd ..
+mv -vf -- "spotify/$new" "spotify/$old"
 
 "$srcdir/spotify_commit_playlists.sh" "$old"
 
