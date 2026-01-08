@@ -212,6 +212,7 @@ mpv
 mtr
 mycli
 mysql
+ncdu  # ncurse disk usage - interactive disk space analysis
 neovim
 netcat
 ngrep
