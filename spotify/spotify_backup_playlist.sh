@@ -138,7 +138,7 @@ if liked; then
     liked_added_cache="$liked_metadata_dir/added_at"
     if [ -f "$liked_added_cache" ] &&
        [ "$liked_added_at" = "$(cat "$liked_added_cache")" ]; then
-        echo -n ' => Latest Added Timestamp Unchanged'
+        echo -n '=> Latest Added Timestamp Unchanged'
     else
         # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
         #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
