@@ -259,14 +259,16 @@ else
 
         if not_blank "$old_filename" &&
            [ "$backup_dir/$filename" != "$backup_dir/$old_filename" ]; then
-            echo -n " => playlist RENAMED, updating files... "
+            echo -n " => playlist RENAMED"
             cd "$backup_dir"
             if is_in_git_repo &&
-               is_file_tracked_in_git "$filename"; then
+               is_file_tracked_in_git "$old_filename"; then
+                echo -n " => updating files... "
                 #"$srcdir/../scripts/spotify_rename_playlist_files.sh" "$old_filename" "$filename"
                 ./rename.sh "$old_filename" "$filename"
             fi
             if [ -f "core_playlists.txt" ]; then
+                #echo -n " => updating core_playlists.txt"
                 tmp="$(mktemp)"
                 awk -v id="$playlist_id" -v name="$playlist_name" '
                     # replace the rest of line (the playlist name) if the first column (the playlist ID) matches
