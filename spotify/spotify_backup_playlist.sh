@@ -295,6 +295,7 @@ else
 
             cd -
         fi
+        # save all the metadata for comparison in the next run
         echo "$playlist_name" > "$playlist_metadata_name_file"
         echo "$filename"      > "$playlist_metadata_filename_file"
         echo "$snapshot_id"   > "$playlist_metadata_snapshot_id_file"
