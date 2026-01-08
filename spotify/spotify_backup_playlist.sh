@@ -133,7 +133,9 @@ if liked; then
 
     # Caching behaviour
     liked_added_at="$("$srcdir/spotify_api.sh" "/v1/me/tracks?limit=1" | jq -r '.items[0].added_at')"
-    liked_added_cache="$backup_dir_metadata/liked/added_at"
+    liked_metadata_dir="$backup_dir_metadata/liked"
+    mkdir -pv "$liked_metadata_dir"
+    liked_added_cache="$liked_metadata_dir/added_at"
     if [ -f "$liked_added_cache" ] &&
        [ "$liked_added_at" = "$(cat "$liked_added_cache")" ]; then
         echo -n ' => Latest Added Timestamp Unchanged'
