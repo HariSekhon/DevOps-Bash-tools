@@ -63,6 +63,8 @@ shift || :
 run_cmd="$(parse_run_args "$filename")"
 run_stdin="$(parse_run_stdin "$filename")"
 
+# if stdin: is defined in the file, replace the stdin to this script with it
+# so whichever program is called inherits this stdin
 if not_blank "$run_stdin"; then
     exec <<< "$run_stdin"
 fi
