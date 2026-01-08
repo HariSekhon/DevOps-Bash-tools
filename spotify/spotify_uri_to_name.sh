@@ -217,7 +217,7 @@ output(){
     fi
 
     jq -r '
-    # Playlist items (tracks + episodes)
+    # 1) Playlist items
     (
       .tracks?
       | select(type == "object")
@@ -226,18 +226,21 @@ output(){
       | select(. != null)
     ),
 
-    # Bulk tracks endpoint
+    # 2) Bulk tracks
     (
       .tracks?
       | select(type == "array")
       | .[]?
-      | select(.type == "track")
     ),
 
-    # Bulk episodes endpoint
+    # 3) Bulk episodes
     (
       .episodes[]?
-      | select(.type == "episode")
+    ),
+
+    # 4) Single track / episode object
+    (
+      select(type == "object" and (.type == "track" or .type == "episode"))
     )
 
     | if .type == "track" then
