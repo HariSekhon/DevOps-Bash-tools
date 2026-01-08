@@ -156,6 +156,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'tmux-plugins/vim-tmux'
 " https://github.com/motus/pig.vim
 "Bundle "motus/pig.vim"
+Plug 'wakatime/vim-wakatime'
 
 " comment at start of line instead of code indentation level
 " doesn't work: https://github.com/preservim/nerdcommenter/issues/467
@@ -202,7 +203,7 @@ nmap <silent> ;e :,!center.py --space<CR>
 nmap <silent> ;C :,!center.py --unspace<CR>
 " parses current example line and passes as stdin to bash to quickly execute examples from code - see WriteRunLine() further down for example
 " messes up interactive vim (disables vim's arrow keys) - calling a terminal reset fixes it
-nmap <silent> ;E :call WriteRunLine()<CR> :!reset <CR><CR>
+nmap <silent> ;E :call WriteRunLine() \| !reset <CR><CR>
 nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 "nmap <silent> ;D :Done<CR>
 nmap <silent> ;D :%!decomment.sh "%" <CR>
@@ -215,13 +216,13 @@ nmap          ;H :call WriteHelp()<CR>
 nmap <silent> ;I :PluginInstall<CR>
 nmap          ;i :! idea % <CR> :wq <CR>
 nmap <silent> ;j :JHr<CR>
-nmap          ;k :w<CR> :! check_kubernetes_yaml.sh "%" <CR>
+nmap          ;k :w \| ! check_kubernetes_yaml.sh "%" <CR>
 "nmap <silent> ;' :call Sq()<CR>
 " done automatically on write now
 "nmap <silent> ;' :call StripTrailingWhiteSpace()<CR>
-nmap <silent> ;' :w<CR> :!clear; git diff "%" <CR>
-nmap          ;m :w<CR> :call MarkdownIndex() <CR>
-nmap          ;n :w<CR> :n<CR>
+nmap <silent> ;' :w \| !clear; git diff "%" <CR>
+nmap          ;m :w \| call MarkdownIndex() <CR>
+nmap          ;n :w \| n<CR>
 nmap          ;o :!cd "%:p:h" && git log -p "%:t" <CR>
 nmap          ;O :call ToggleGutter()<CR>
 nmap          ;p :prev<CR>
@@ -244,13 +245,13 @@ nmap <silent> ;s :,!sqlcase.pl<CR>
 " technically more accurate to not leave command mode
 nmap          ;; :w! \| call GitUpdateCommit() <CR>
 "nnoremap <nowait> ;; :w!<CR> :call GitUpdateCommit() <CR>
-nmap          ;/ :w<CR> :call GitAddCommit() <CR>
-nmap          ;g :w<CR> :call GitStatus() <CR>
-nmap          ;G :w<CR> :call GitLogP() <CR>
-nmap          ;L :w<CR> :! lint.sh % <CR>
-nmap          ;. :w<CR> :call GitPull() <CR>
-nmap          ;[ :w<CR> :call GitPush() <CR>
-nmap          ;, :w<CR> :s/^/</ <CR> :s/$/>/ <CR>
+nmap          ;/ :w \| call GitAddCommit() <CR>
+nmap          ;g :w \| call GitStatus() <CR>
+nmap          ;G :w \| call GitLogP() <CR>
+nmap          ;L :w \| ! lint.sh % <CR>
+nmap          ;. :w \| call GitPull() <CR>
+nmap          ;[ :w \| call GitPush() <CR>
+nmap          ;, :w \| s/^/</ <CR> :s/$/>/ <CR>
 " write then grep all URLs that are not mine, followed by all URLs that are mine in reverse order to urlview
 " this is so that 3rd party URLs followed by my URLs from within the body of files get higher priority than my header links
 "nmap <silent> ;u :w<CR> :! bash -c 'grep -vi harisekhon "%" ; grep -i harisekhon "%" \| tail -r' \| urlview <CR> :<CR>
