@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Decodes HTML encoding
 
-Tries to detect available tools such as Perl or xmlstarlet and use what's available
+Tries to detect available tools such as Perl or xmlstarlet and use whatever is available
 
 Works like a standard filter program, takes file arguments for contents or reads from standard input
 
