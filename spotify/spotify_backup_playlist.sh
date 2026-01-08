@@ -254,7 +254,7 @@ else
 
         if not_blank "$old_filename" &&
            [ "$backup_dir/$filename" != "$backup_dir/$old_filename" ]; then
-            echo -n " => playlist renamed, updating files... "
+            echo -n " => playlist RENAMED, updating files... "
             cd "$backup_dir"
             if is_in_git_repo &&
                is_file_tracked_in_git "$filename"; then
