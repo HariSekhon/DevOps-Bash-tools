@@ -61,6 +61,7 @@ configs/.tfdocs.d/.terraform-docs.yml
 configs/.tmux.conf
 configs/.toprc
 configs/.vimrc
+configs/.wakatime.cfg
 configs/.Xdefaults
 configs/.Xmodmap
 scalastyle_config.xml
