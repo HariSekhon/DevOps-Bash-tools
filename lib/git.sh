@@ -117,7 +117,7 @@ is_in_git_repo(){
 
 is_file_tracked_in_git(){
     local filename="$1"
-    git ls-files --error-unmatch -- "$filename" >/dev/null 2>&1
+    git ls-files --error-unmatch -- "$filename" &>/dev/null
 }
 
 git_commit_short_sha(){
