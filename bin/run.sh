@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  stdin: Driving &amp; road trips
 #
 #  Author: Hari Sekhon
 #  Date: 2019-12-20 16:01:28 +0000 (Fri, 20 Dec 2019)
@@ -60,6 +61,11 @@ shift || :
 # // run: go run file.go
 # -- run: psql -f file.sql
 run_cmd="$(parse_run_args "$filename")"
+run_stdin="$(parse_run_stdin "$filename")"
+
+if not_blank "$run_stdin"; then
+    exec <<< "$run_stdin"
+fi
 
 filename="$(readlink -f "$filename")"
 dirname="$(dirname "$filename")"
@@ -77,7 +83,7 @@ docker_compose_up(){
 }
 
 if [ -n "$run_cmd" ]; then
-    eval "$run_cmd"
+    eval "$run_cmd" ${run_stdin:+<<< "$run_stdin"}
 # fails to do the open for d2 diagrams
 #elif test -x "$basename"; then
 #    ./"$basename"
