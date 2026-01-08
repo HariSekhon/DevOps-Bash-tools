@@ -9,5 +9,6 @@ pylint>=1.9.5
 #pyobjc-framework-Quartz>=9.0.1
 semgrep>=0.78.0
 speedtest-cli>=2.1.3
-sqlfluff==3.2.2
+sqlfluff>=3.2.2
+wakatime>=14.0.1
 yamllint>=1.15.0
