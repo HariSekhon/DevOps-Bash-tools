@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
 #
-#  args: ../playlists/spotify/Rocky
-#  args: ../playlists/spotify/Starred
+#  args: ../../playlists/spotify/Rocky
 #
 #  Author: Hari Sekhon
 #  Date: 2020-06-25 22:28:51 +0100 (Thu, 25 Jun 2020)
@@ -171,39 +170,94 @@ output_local_uri(){
     "$srcdir/../bin/urldecode.sh" <<< "$track"
 }
 
+# This breaks on playlists with mixed URI types such as track + episode in my Love Island playlist so
+# push this logic out of bash and to jq where it can be handled in a better unified way
+#
+#output(){
+#    if [[ "$output" =~ \"(tracks|albums|artists|episodes)\"[[:space:]]*:[[:space:]]+\[[[:space:]]*null[[:space:]]*\] ]]; then
+#        echo "no matching $uri_type URI found - did you specify an incorrect URI or wrong \$SPOTIFY_URI_TYPE for that URI?" >&2
+#        return
+#    fi
+#    local conversion="@tsv"
+#    if not_blank "${SPOTIFY_CSV:-}"; then
+#        conversion="@csv"
+#    fi
+#    if [ "$uri_type" = track ]; then
+#        output_artist_item
+#    elif [ "$uri_type" = artist ]; then
+#        jq -r ".${uri_type}s[] | [([.name] | join(\", \"))] | $conversion"
+#    elif [ "$uri_type" = album ]; then
+#        output_artist_item
+#    else
+#        echo "URI type '$uri' parsing not implemented" >&2
+#        exit 1
+#    fi <<< "$output" |
+#    clean_output
+#}
+
+# Handled in unified output() function now depending on if fields are detected in jq
+#
+#output_artist_item(){
+#    if not_blank "${SPOTIFY_CSV:-}"; then
+#        # some tracks come out with blank artists and track name, skip these using select(name != "") filter to avoid blank lines
+#        # unfortunately some tracks actually do come out with blank artist and track name, this must be a bug inside Spotify, but
+#        # filtering it like this throws off the line counts verification and also the track might be blank but the artist might not be
+#        #jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), .name] | $conversion"
+#        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), .name] | $conversion"
+#    else
+#        #jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
+#        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
+#    fi
+#}
+
 output(){
-    if [[ "$output" =~ \"(tracks|albums|artists|episodes)\"[[:space:]]*:[[:space:]]+\[[[:space:]]*null[[:space:]]*\] ]]; then
-        echo "no matching $uri_type URI found - did you specify an incorrect URI or wrong \$SPOTIFY_URI_TYPE for that URI?" >&2
-        return
-    fi
     local conversion="@tsv"
     if not_blank "${SPOTIFY_CSV:-}"; then
         conversion="@csv"
     fi
-    if [ "$uri_type" = track ]; then
-        output_artist_item
-    elif [ "$uri_type" = artist ]; then
-        jq -r ".${uri_type}s[] | [([.name] | join(\", \"))] | $conversion"
-    elif [ "$uri_type" = album ]; then
-        output_artist_item
-    else
-        echo "URI type '$uri' parsing not implemented" >&2
-        exit 1
-    fi <<< "$output" |
-    clean_output
-}
 
-output_artist_item(){
-    if not_blank "${SPOTIFY_CSV:-}"; then
-        # some tracks come out with blank artists and track name, skip these using select(name != "") filter to avoid blank lines
-        # unfortunately some tracks actually do come out with blank artist and track name, this must be a bug inside Spotify, but
-        # filtering it like this throws off the line counts verification and also the track might be blank but the artist might not be
-        #jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), .name] | $conversion"
-        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), .name] | $conversion"
-    else
-        #jq -r ".${uri_type}s[] | select(.name != \"\") | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
-        jq -r ".${uri_type}s[] | [([.artists[].name] | join(\", \")), \"-\", .name] | $conversion"
-    fi
+    jq -r '
+    # Playlist items (tracks + episodes)
+    (
+      .tracks?
+      | select(type == "object")
+      | .items[]?
+      | (.track // .episode)
+      | select(. != null)
+    ),
+
+    # Bulk tracks endpoint
+    (
+      .tracks?
+      | select(type == "array")
+      | .[]?
+      | select(.type == "track")
+    ),
+
+    # Bulk episodes endpoint
+    (
+      .episodes[]?
+      | select(.type == "episode")
+    )
+
+    | if .type == "track" then
+        [
+          (.artists | map(.name) | join(", ")),
+          "-",
+          .name
+        ]
+      elif .type == "episode" then
+        [
+          .show.name,
+          "-",
+          .name
+        ]
+      else
+        empty
+      end
+    | '"$conversion"'
+    ' <<< "$output" |
+    clean_output
 }
 
 clean_output(){
