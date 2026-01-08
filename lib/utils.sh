@@ -735,6 +735,13 @@ parse_run_args(){
     perl -ne 'if(/^\s*(#|\/\/|--)\s*run:/){s/^\s*(#|\/\/)\s*run:\s*//; print $_; exit}' "$@"
 }
 
+# examples:
+#
+# #  stdin: Driving & road trip playlist
+parse_run_stdin(){
+    perl -ne 'if(/^\s*(#|\/\/|--)\s*stdin:/){s/^\s*(#|\/\/)\s*stdin:\s*//; print $_; exit}' "$@"
+}
+
 # example:
 #
 # lint: k8s
