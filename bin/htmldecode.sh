@@ -54,8 +54,9 @@ if type -P perl &>/dev/null &&
    perl -MHTML::Entities -e '' &>/dev/null; then
     log "Decoding HTML using Perl"
     perl -MHTML::Entities -pe 'decode_entities($_)'
-elif type -p python3 &&
-    python3 -c 'import html' >/dev/null 2>&1; then
+elif type -p python3 &>/dev/null &&
+    log "Decoding HTML using Python"
+    python3 -c 'import html' &>/dev/null; then
     python3 -c 'import sys, html; sys.stdout.write(html.unescape(sys.stdin.read()))'
 elif type -p xmlstarlet; then
     log "Decoding HTML using xmlstarlet"
