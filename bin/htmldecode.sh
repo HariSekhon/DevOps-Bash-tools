@@ -26,7 +26,7 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Decodes HTML encoding
 
-Detects available tools such as Perl or xmlstarlet and uses whatever is available
+Detects available tools such as Perl, Python or xmlstarlet and uses whatever is available
 
 Works like a standard filter program, takes file arguments for contents or reads from standard input
 
@@ -54,6 +54,9 @@ if type -P perl &>/dev/null &&
    perl -MHTML::Entities -e '' &>/dev/null; then
     log "Decoding HTML using Perl"
     perl -MHTML::Entities -pe 'decode_entities($_)'
+elif type -p python3 &&
+    python3 -c 'import html' >/dev/null 2>&1; then
+    python3 -c 'import sys, html; sys.stdout.write(html.unescape(sys.stdin.read()))'
 elif type -p xmlstarlet; then
     log "Decoding HTML using xmlstarlet"
     xmlstarlet unesc
