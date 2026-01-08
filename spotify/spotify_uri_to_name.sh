@@ -68,8 +68,7 @@ usage_args="[<files>] [<curl_options>]"
 
 help_usage "$@"
 
-#sleep_secs="0.1"
-sleep_secs="0"
+# try to avoid hitting HTTP 429 Too Many Requests as this leads to long ban periods of ~14 hours                                                                                                                       # throttle by this many seconds between bulk query requests                                                                                                                                                            sleep_secs="0.5"
 
 declare -a curl_options
 curl_options=()
