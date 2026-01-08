@@ -41,11 +41,52 @@ help_usage "$@"
 
 max_args 1 "$@"
 
-path="${1:-/}"
+export path="${1:-/}"
+
+if ! [ -d "$path" ]; then
+    die "ERROR: invalid directory given: $path"
+fi
+
+show_disk_space(){
+    #timestamp "Disk Space Finder Sees:
+    #"
+    #
+    #diskutil info "$path" | grep 'Free Space'
+    #echo
+
+    timestamp "Disk Space:"
+    echo
+    df -h "$path"
+    echo
+}
+
+show_disk_space
+
+snapshots="$(
+    tmutil listlocalsnapshots "$path" |
+    tail -n +2 |
+    awk -F. '{print $4}' |
+    sed '/^[[:space:]]*$/d'
+)"
+
+# because wc -l returns 1 on an empty line due to a \n newline
+num_snapshots="$(grep -c . <<< "$snapshots" || :)"
+
+timestamp "Snapshots to Delete: $num_snapshots"
+echo
+
+if [ "$num_snapshots" -lt 1 ]; then
+    timestamp "No snapshots to delete, exiting."
+    exit 0
+fi
+
+timestamp "Deleting Time Machine Snapshots"
+echo
 
 while read -r snapshot_timestamp; do
+    timestamp "Deleting local snapshot: $snapshot_timestamp"
     sudo tmutil deletelocalsnapshots "$snapshot_timestamp"
-done < <(
-    tmutil listlocalsnapshots "$path" |
-    awk -F. '{print $4}'
-)
+    echo
+done <<< "$snapshots"
+
+show_disk_space
