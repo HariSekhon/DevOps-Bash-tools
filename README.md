@@ -340,7 +340,7 @@ Top-level `.bashrc` and `.bash.d/` directory:
 - `find_lock.sh` - tries to find if a lockfile is used in the given or current working directory by taking snapshots of the file list before and after a prompt in which you should open/close an application
 - `foreach_path_bin.sh` - runs each binary of the given name found in `$PATH` with the args given. Useful to find all the installed versions of a program in different paths eg. `~/bin/` vs `/usr/local/bin/` eg. `foreach_path_bin.sh terraform --version`
 - `http_duplicate_urls.sh` - find duplicate URLs in a given web page
-- `htmldecode.sh` - decodes HTML encoding. Detects available tools such as Perl or xmlstarlet and uses whatever is available
+- `htmldecode.sh` - decodes HTML encoding. Detects available tools such as Perl, Python or xmlstarlet and uses whatever is available
 - `ldapsearch.sh` - shortens `ldapsearch` command by inferring switches from environment variables
 - `ldap_user_recurse.sh` / `ldap_group_recurse.sh` - recurse Active Directory LDAP users upwards to find all parent groups, or groups downwards to find all nested users (useful for debugging LDAP integration and group-based permissions)
 - `linux_distro_versions.sh` - quickly returns the list of major versions for a given Linux distro
