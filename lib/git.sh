@@ -213,7 +213,7 @@ git_provider_env(){
     elif [ "$name" = "bitbucket" ]; then
         domain=bitbucket.org
         user="${BITBUCKET_USERNAME:-${BITBUCKET_USER:-}}"
-        token="${BITBUCKET_TOKEN:-${BITBUCKET_PASSWORD:-}}"
+        token="${BITBUCKET_APP_PASSWORD:-${BITBUCKET_TOKEN:-${BITBUCKET_PASSWORD:-}}}"
     elif [ "$name" = "azure" ]; then
         domain=dev.azure.com
         user="${AZURE_DEVOPS_USERNAME:-${AZURE_DEVOPS_USER:-}}"
