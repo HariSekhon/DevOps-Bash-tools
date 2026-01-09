@@ -61,6 +61,7 @@ $HOME/go/src/golang.org
 /macOS Install Data
 /Data/macOS Install Data
 /Volumes/Data/macOS Install Data
+/System//Volumes/Data/macOS Install Data
 "
 
 if [ -n "${GOPATH:-}" ]; then
