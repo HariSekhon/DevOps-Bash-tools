@@ -49,7 +49,6 @@ $HOME/Library/Developer/Xcode/DerivedData
 $HOME/Library/Logs/rancher-desktop
 $HOME/Library/Mobile Documents/com~apple~CloudDocs
 $HOME/Library/State/rancher-desktop
-$HOME/Library/State/rancher-desktop
 $HOME/VirtualBox VMs
 $HOME/go/bin
 $HOME/go/pkg
