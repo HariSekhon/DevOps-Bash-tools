@@ -52,6 +52,7 @@ pylib
 lib-java:libj
 Nagios-Plugin-Kafka:nagios-plugin-kafka
 
+Ansible:ansible
 Diagrams-as-Code:diagrams
 DevOps-Golang-tools:go-tools
 DevOps-Perl-tools:perl-tools
