@@ -28,6 +28,7 @@ keka
 minikube
 minishift
 multipass  # instant Ubuntu VMs
+#omnidisksweeper  # GUI disk space analysis
 podman
 postman
 powershell
