@@ -24,7 +24,9 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # shellcheck disable=SC2034,SC2154
 usage_description="
 Find large files in the currently in-progress Time Machine backup to find out what is taking so long
-and files that you might want to exclude using the adjacent script:
+and racking up so many more GB of changes than you expect
+
+This helps discover large but unnecessary files that you might want to exclude using the adjacent script:
 
     mac_backup_exclude_paths.sh
 "
