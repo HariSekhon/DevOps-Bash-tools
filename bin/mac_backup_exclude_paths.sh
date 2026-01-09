@@ -89,9 +89,14 @@ By default excludes the following common paths:
 
 $excluded_paths
 
-Find more paths to add as args using this command:
+Find more paths to add to the exclusion list using this command:
 
     du -max ~ | sort -k1n | tail -n 1000
+
+See also this next script to find out what is taking so long to populate the currently in-progress backup
+and racking up more GB of changes than you expected to find more things to exclude:
+
+    mac_backup_exclude_paths.sh
 "
 
 # used by usage() in lib/utils.sh
