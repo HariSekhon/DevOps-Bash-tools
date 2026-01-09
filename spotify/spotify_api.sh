@@ -90,8 +90,9 @@ if not_blank "${DEBUG:-}"; then
                     command gdate "$@"
                 }
             fi
-            echo -n "Retry-After header says you can retry after $retry_after seconds - "
-            date -u -d "@$retry_after" '+%H hours %M minutes %S seconds'
+            echo "Retry-After header says you can retry after $retry_after seconds" >&2
+            date -u -d "@$retry_after" '+Retry %H hours %M minutes %S seconds from now' >&2
+            date -d "+$retry_after seconds" '+Retry at: %Y-%m-%d %H:%M:%S' >&2
 
         fi
         exit 1
