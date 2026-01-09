@@ -56,6 +56,7 @@ $HOME/go/src/github.com
 $HOME/go/src/golang.org
 /Library/Application Support/GarageBand
 /Library/AssetsV2/com_apple_MobileAsset_MacSoftwareUpdate
+/System//Library/AssetsV2/com_apple_MobileAsset_MacSoftwareUpdate
 /Volumes/Data/macOS Install Data
 "
 
