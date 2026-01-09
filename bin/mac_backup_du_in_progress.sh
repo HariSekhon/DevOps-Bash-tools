@@ -57,7 +57,7 @@ if [ "${#matches[@]}" -eq 0 ]; then
     matches=(/Volumes/*/"$yesterday"-*.inprogress)
     if [ "${#matches[@]}" -eq 0 ]; then
         echo >&2
-        die "ERROR: No currently in-progress Time Machine backup directories found for today or yesterday"
+        die "ERROR: No currently in-progress Time Machine backup directories found for today or yesterday - this must be run during an active Time Machine backup"
     fi
 fi
 
