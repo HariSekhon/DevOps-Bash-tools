@@ -37,6 +37,7 @@ $HOME/.ivy2
 $HOME/.m2
 $HOME/.minikube
 $HOME/.sbt
+$HOME/Downloads/TV
 $HOME/Downloads/Transmission
 $HOME/Downloads/YouTube
 $HOME/Library/Application Support/Spotify/PersistentCache
