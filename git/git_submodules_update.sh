@@ -103,7 +103,7 @@ for submodule in $(git submodule | awk '{print $2}'); do
     echo >&2
 	pushd "$submodule" ||
         die "ERROR: Failed to pushd to submodule directory: $submodule"
-	git stash pop
+	git stash pop || :
 	popd
     echo >&2
 done
