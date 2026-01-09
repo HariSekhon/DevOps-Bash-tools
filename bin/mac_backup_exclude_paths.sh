@@ -57,6 +57,8 @@ $HOME/go/src/golang.org
 /Library/Application Support/GarageBand
 /Library/AssetsV2/com_apple_MobileAsset_MacSoftwareUpdate
 /System//Library/AssetsV2/com_apple_MobileAsset_MacSoftwareUpdate
+/macOS Install Data
+/Data/macOS Install Data
 /Volumes/Data/macOS Install Data
 "
 
