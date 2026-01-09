@@ -70,16 +70,37 @@ url_path="${url_path##/}"
 
 export TOKEN="$SPOTIFY_ACCESS_TOKEN"
 
-# the Spotify API is very unreliable and often gets 502 errors
-# seen 20 x HTTP 500 errors from the API in a row :-/
-MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"
+if not_blank "${DEBUG:-}"; then
+    # No point retrying during HTTP 429 Too Many Requests as the Spotify backoff period specified in the
+    # Retry-After header is 14 hours, although it seem to not apply to all endpoints consistently,
+    # some other lookups still work
+    # Here we just want to see how long is left in the retry-after header by enabling DEBUG mode
+    #
+    if ! "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"; then
+        #
+        # TODO: added 429 parsing of Retry-After and backoff timing logic here
+        #
+        "$srcdir/../bin/curl_auth.sh" -i -s "$url_base/$url_path" "$@" >&2
+        output="$("$srcdir/../bin/curl_auth.sh" -i "$url_base/$url_path" "$@")"
+        if [[ "$output" =~ HTTP/2[[:space:]]+429|retry-after: ]]; then
+            retry_after="$(awk '/^retry-after: /{print $2}' <<< "$output" | tr -d '\r')"
+            if ! is_int "$retry_after"; then
+                die "ERROR: expected an integer for the retry-after header, got: $retry_after"
+            fi
+            if is_mac; then
+                date(){
+                    command gdate "$@"
+                }
+            fi
+            echo -n "Retry-After header says you can retry after '$retry_after' seconds - "
+            date -u -d "@$retry_after" '+%H hours +%M minutes +%S seconds'
 
-
-# No point in adding this - the Spotify backoff period specified in the Retry-After header is 14 hours
-# which then applies to all endpoints :-/
-#
-#output="$(MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@")"
-#
-# TODO: added 429 parsing of Retry-After and backoff timing logic here
-#
-#echo "$output"
+        fi
+        exit 1
+    fi
+else
+    # the Spotify API is very unreliable and often gets 502 errors
+    # seen 20 x HTTP 500 errors from the API in a row :-/
+    # so give it many tries before giving up
+    MAX_RETRIES="30" retry 300 "$srcdir/../bin/curl_auth.sh" -sSL --fail "$url_base/$url_path" "$@"
+fi
