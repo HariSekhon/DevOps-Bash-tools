@@ -127,4 +127,6 @@ while not_null "$url_path"; do
     #die_if_error_field "$output"
     url_path="$(get_next "$output")"
     output
-done
+done |
+# dedupe by playlist ID in the first column as there are occasional duplicates returned by Spotify API
+awk '!seen[$1]++'
