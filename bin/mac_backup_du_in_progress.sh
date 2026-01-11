@@ -61,7 +61,11 @@ if [ "${#matches[@]}" -eq 0 ]; then
     fi
 fi
 
-timestamp "Found in-progress dir(s): ${matches[*]}"
+timestamp "Found in-progress dir(s):"
+echo >&2
+for dir in "${matches[@]}"; do
+    printf '\t%s\n' "$dir"
+done
 echo >&2
 
 sudo du -max "${matches[@]}" |
