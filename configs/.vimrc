@@ -393,7 +393,13 @@ if has('autocmd')
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     au FileType sh                        nmap ;l :w \| !clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR <CR>
 
-    au BufNewFile,BufRead .vimrc nnoremap ;l :w \| redraw! \| call LintVimrc()<CR>
+    " this is replaced by the global fallback mapping after first call
+    "au BufNewFile,BufRead .vimrc nnoremap ;l :w \| redraw! \| call LintVimrc()<CR>
+    augroup vimrc_lint
+      autocmd!
+      autocmd BufRead,BufNewFile .vimrc
+            \ nnoremap <buffer> ;l :w \| redraw! \| call LintVimrc()<CR>
+    augroup END
 
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w \| !clear; validate_csv.py "%" <CR>
