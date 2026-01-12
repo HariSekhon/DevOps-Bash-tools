@@ -197,7 +197,7 @@ else
     description_file="$backup_dir/$filename.description"
 
     # playlist descriptions are HTML encoded
-    jq -r '.description' <<< "$playlist_json" | tr -d '\n' | sed 's/\&amp;/\&/g' > "$description_file"
+    jq -r '.description' <<< "$playlist_json" | tr -d '\n' | "$srcdir/../bin/htmldecode.sh" > "$description_file"
 
     if [ -f "$description_file" ]; then
         # if file is blank then no description is set, remove the useless file
