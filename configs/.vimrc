@@ -716,9 +716,9 @@ endfunction
 
 function! WriteHelp()
     :w
-    if &filetype == 'go'
+    if &filetype ==# 'go'
         :! go run "%:p" --help 2>&1 | less
-    elseif expand('%:t') == 'Makefile'
+    elseif expand('%:t') ==# 'Makefile'
         :call Make('help')
     else
         :! "%:p" --help 2>&1 | less
@@ -727,36 +727,36 @@ endfunction
 
 function! WriteRun()
     :w
-    if &filetype == 'go'
+    if &filetype ==# 'go'
         " TODO: consider switching this to go build and then run the binary as
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
         :! eval go run "%:p" `$bash_tools/lib/args_extract.sh "%:p"` 2>&1 | less
     " doesn't work, probably due to no first class support so just get file extension
-    "elseif &filetype == 'tf'
-    elseif expand('%:e') == 'tf'
+    "elseif &filetype ==# 'tf'
+    elseif expand('%:e') ==# 'tf'
         ":call TerraformPlan()
         :call TerraformApply()
     elseif expand('%:t') =~ '\.pkr\.\(hcl\|json\)'
         :! packer init "%:p" && packer build "%:p"
-    elseif expand('%:t') == 'Makefile'
+    elseif expand('%:t') ==# 'Makefile'
         :call Make()
-    elseif expand('%:t') == 'Dockerfile'
+    elseif expand('%:t') ==# 'Dockerfile'
         " "%:p:h" is dirname
         if filereadable(join([expand('%:p:h'), 'Makefile'], '/'))
             :call Make()
         else
             :! docker build '%:p:h'
         endif
-    elseif expand('%:t') == 'Gemfile'
+    elseif expand('%:t') ==# 'Gemfile'
         " '%:p:h' is dirname
         :! cd '%:p:h' && bundle install
     "elseif ! empty(matchstr(expand('%:t'), 'cloudbuild.*.yaml'))
     elseif expand('%:t') =~ 'cloudbuild.*\.ya\?ml'
         :call CloudBuild()
-    elseif expand('%:t') == 'kustomization.yaml'
+    elseif expand('%:t') ==# 'kustomization.yaml'
         :! bash -c 'cd "%:p:h" && kustomize build --enable-helm' 2>&1 | less
-    elseif expand('%:t') == '.envrc'
+    elseif expand('%:t') ==# '.envrc'
         :! bash -c 'cd "%:p:h" && direnv allow .' 2>&1 | less
     elseif executable('run.sh')
         " this only works for scripts
@@ -783,12 +783,12 @@ endfunction
 
 function! WriteRunLine()
     :w
-    if &filetype == 'go'
+    if &filetype ==# 'go'
         " TODO: consider switching this to go build and then run the binary as
         " this gets stdout only at the end so things like welcome.go don't get
         " the transition effects when run like this
         :.w ! sed 's/^[[:space:]]*\#// ; s|\$0|%:p| ; s|\${0\#\#\*\/}|%:p|' | xargs go run 2>&1 | less
-    elseif expand('%:t') == 'Makefile' " || expand('%:t') == 'Makefile.in'
+    elseif expand('%:t') ==# 'Makefile' " || expand('%:t') ==# 'Makefile.in'
         let target = split(getline('.'), ':')[0]
         call Make(target)
     else
