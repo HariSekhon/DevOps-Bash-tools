@@ -208,8 +208,7 @@ nmap <silent> ;d :r !date '+\%F \%T \%z (\%a, \%d \%b \%Y)'<CR>kJ
 "nmap <silent> ;D :Done<CR>
 nmap <silent> ;D :%!decomment.sh "%" <CR>
 nmap          ;f :,!fold -s -w 120 \| sed 's/[[:space:]]*$//'<CR>
-"nmap <silent> ;h :call Hr()<CR>
-nmap <silent> ;h :Hr<CR>
+nmap <silent> ;h :call Hr()<CR>
 nmap          ;H :call WriteHelp()<CR>
 " this inserts Hr literally
 "imap <silent> <C-H> :Hr<CR>
@@ -394,7 +393,7 @@ if has('autocmd')
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     au FileType sh                        nmap ;l :w \| !clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR <CR>
 
-    au BufNewFile,BufRead .vimrc    nmap ;l :w \| !clear \| call LintVimrc() <CR>
+    "au BufNewFile,BufRead .vimrc nnoremap ;l :w \| redraw! \| call LintVimrc()<CR>
 
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w \| !clear; validate_csv.py "%" <CR>
@@ -566,15 +565,58 @@ function! ToggleDebug()
     endif
 endfunction
 
-:command! Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
-":function Hr()
-    ":s/^/# ============================================================================ #/
-    "if b:current_syntax eq "sql"
-    "    ::normal a-- <ESC>74a=<ESC>a --<ESC>
-    "else
-        ":normal a# <ESC>76a=<ESC>a #<ESC>
-    "endif
+":command! Hr  :normal a# <ESC>76a=<ESC>a #<ESC>
+":function! Hr()
+"    if b:current_syntax eq "sql"
+"        ::normal a-- <ESC>74a=<ESC>a --<ESC>
+"    else
+"        :normal a# <ESC>76a=<ESC>a #<ESC>
+"    endif
 ":endfunction
+function! Hr()
+    let width = 80
+
+    let dash_filetypes = [
+                \ 'sql', 'mysql', 'plsql',
+                \ 'lua',
+                \ 'haskell',
+                \ 'ada'
+                \ ]
+
+    let hash_filetypes = [
+                \ 'sh', 'bash', 'zsh',
+                \ 'python',
+                \ 'ruby',
+                \ 'perl',
+                \ 'make',
+                \ 'yaml', 'yml',
+                \ 'toml',
+                \ 'conf', 'cfg',
+                \ 'dockerfile'
+                \ ]
+
+    let ft = &filetype
+
+    if index(dash_filetypes, ft) >= 0
+        let start = '-- '
+        let end   = ' --'
+    elseif index(hash_filetypes, ft) >= 0
+        let start = '# '
+        let end   = ' #'
+    else
+        let start = '# '
+        let end   = ' #'
+    endif
+
+    let fill_len = width - strlen(start) - strlen(end)
+    if fill_len < 0
+        return
+    endif
+
+    let line = start . repeat('=', fill_len) . end
+
+    call append(line('.') - 1, line)
+endfunction
 
 ":function Br()
 ":call Hr()
