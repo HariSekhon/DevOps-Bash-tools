@@ -470,7 +470,7 @@ if ! exists('*SourceVimrc')
         "execute "normal!" . &vim_tags
         ":! grep vim: expand("%") | sed 's/\#//'
         :echo "\n"
-        :echo "Currently set options:"
+        :echo 'Currently set options:'
         :echo "\n"
         :set ts sts sw et filetype
     endfunction
@@ -487,34 +487,40 @@ if !exists('g:__lintvimrc_defined')
       try
         execute 'source' l:vimrc_path
         echohl InfoMsg
-        echo "Basic Validation Passed: .vimrc"
+        echo 'Basic Validation Passed: .vimrc'
         echohl None
       catch
         echohl ErrorMsg
-        echo "Basic Validate Failed while sourcing .vimrc"
+        echo 'Basic Validate Failed while sourcing .vimrc'
         echo v:exception
-        echo "At: " . v:throwpoint
+        echo 'At: ' . v:throwpoint
         echohl None
         return
       endtry
 
       if executable('vint')
-        echo "Running vint..."
+        echo 'Running vint...'
         let l:vint_output = system('vint ' . l:vimrc_path)
         if v:shell_error
-          echohl ErrorMsg | echo l:vint_output | echohl None
-          echohl ErrorMsg | echo "Vint Validation Failed: .vimrc" | echohl None
+          echohl ErrorMsg
+          echo l:vint_output
+          echo 'Vint Validation Failed: .vimrc'
+          echohl None
         else
-          echohl InfoMsg | echo "Vint Validation Passed: .vimrc" | echohl None
+          echohl InfoMsg
+          echo 'Vint Validation Passed: .vimrc'
+          echohl None
         endif
       else
-        echohl WarningMsg | echo "Vint not found in PATH, skipping validation" | echohl None
+        echohl WarningMsg
+        echo 'Vint not found in PATH, skipping validation'
+        echohl None
       endif
     endfunction
 endif
 
 function! ToggleSyntax()
-    if exists("g:syntax_on")
+    if exists('g:syntax_on')
         syntax off
     else
         syntax enable
