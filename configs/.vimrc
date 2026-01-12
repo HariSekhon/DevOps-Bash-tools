@@ -531,7 +531,7 @@ function! ToggleComments()
     :let comment_char = '#'
     :let comment_prefix = '^' . comment_char
     echo comment_prefix
-    if getline('.') =~ comment_prefix
+    if getline('.') =~# comment_prefix
         :s/^\=:comment_char//
     else
         :s/^/\=:comment_char/
@@ -737,7 +737,7 @@ function! WriteRun()
     elseif expand('%:e') ==# 'tf'
         ":call TerraformPlan()
         :call TerraformApply()
-    elseif expand('%:t') =~ '\.pkr\.\(hcl\|json\)'
+    elseif expand('%:t') =~# '\.pkr\.\(hcl\|json\)'
         :! packer init "%:p" && packer build "%:p"
     elseif expand('%:t') ==# 'Makefile'
         :call Make()
@@ -752,7 +752,7 @@ function! WriteRun()
         " '%:p:h' is dirname
         :! cd '%:p:h' && bundle install
     "elseif ! empty(matchstr(expand('%:t'), 'cloudbuild.*.yaml'))
-    elseif expand('%:t') =~ 'cloudbuild.*\.ya\?ml'
+    elseif expand('%:t') =~# 'cloudbuild.*\.ya\?ml'
         :call CloudBuild()
     elseif expand('%:t') ==# 'kustomization.yaml'
         :! bash -c 'cd "%:p:h" && kustomize build --enable-helm' 2>&1 | less
