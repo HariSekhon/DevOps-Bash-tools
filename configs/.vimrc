@@ -571,7 +571,7 @@ endfunction
 function! ToggleDebug()
     if $DEBUG
         echo 'DEBUG disabled'
-        let $DEBUG=""
+        let $DEBUG=''
     else
         echo 'DEBUG enabled'
         let $DEBUG=1
@@ -743,14 +743,14 @@ function! WriteRun()
         :call Make()
     elseif expand('%:t') == 'Dockerfile'
         " "%:p:h" is dirname
-        if filereadable(join([expand("%:p:h"), "Makefile"], "/"))
+        if filereadable(join([expand('%:p:h'), 'Makefile'], '/'))
             :call Make()
         else
-            :! docker build "%:p:h"
+            :! docker build '%:p:h'
         endif
     elseif expand('%:t') == 'Gemfile'
-        " "%:p:h" is dirname
-        :! cd "%:p:h" && bundle install
+        " '%:p:h' is dirname
+        :! cd '%:p:h' && bundle install
     "elseif ! empty(matchstr(expand('%:t'), 'cloudbuild.*.yaml'))
     elseif expand('%:t') =~ 'cloudbuild.*\.ya\?ml'
         :call CloudBuild()
@@ -765,20 +765,20 @@ function! WriteRun()
         " instead of args headers
         :! "run.sh" "%:p" 2>&1 | less
     else
-        echo "unsupported file type and run.sh not found in PATH"
+        echo 'unsupported file type and run.sh not found in PATH'
     endif
 endfunction
 
 function! WriteRunVerbose()
     :let $VERBOSE=1
     :call WriteRun()
-    :let $VERBOSE=""
+    :let $VERBOSE=''
 endfunction
 
 function! WriteRunDebug()
     :let $DEBUG=1
     :call WriteRun()
-    :let $DEBUG=""
+    :let $DEBUG=''
 endfunction
 
 function! WriteRunLine()
