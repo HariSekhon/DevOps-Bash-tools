@@ -283,17 +283,6 @@ nmap          ;§ :call ToggleScrollLock()<CR>
 "noremap <Left>  <Left>
 "noremap <Right> <Right>
 
-if has('autocmd')
-    au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w \| !clear; docker-compose -f "%" up<CR>
-endif
-
-if has('autocmd')
-    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w \| !clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%" <CR>
-    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w \| !clear; "%:p:h/run.sh" "%" <CR>
-    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w \| !clear; DEBUG=1 "%:p:h/run.sh" "%" <CR>
-endif
-
-
 " ============================================================================ "
 "                               A u t o c m d
 " ============================================================================ "
@@ -301,6 +290,7 @@ endif
 nmap ;l :echo "No linting defined for this filetype:" &filetype<CR>
 
 if has('autocmd')
+  augroup filetype_settings
 
     " re-open at last cursor line and center screen on the cursor line
     "au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -354,9 +344,7 @@ if has('autocmd')
     "au BufNew,BufRead *.txt set ft=
     au BufNew,BufRead *.txt hi def link confString  NONE
 
-    augroup filetypedetect
-        au! BufRead,BufNewFile *.hta setfiletype html
-    augroup end
+    au BufRead,BufNewFile *.hta setfiletype html
 
 "    autocmd FileType c,cpp,java,scala let b:comment_char = '//'
 "    autocmd FileType sh,perl,python   let b:comment_char = '#'
@@ -397,11 +385,7 @@ if has('autocmd')
 
     " this is replaced by the global fallback mapping after first call
     "au BufNewFile,BufRead .vimrc nnoremap ;l :w \| redraw! \| call LintVimrc()<CR>
-    augroup vimrc_lint
-      autocmd!
-      autocmd BufRead,BufNewFile .vimrc
-            \ nnoremap <buffer> ;l :w \| redraw! \| call LintVimrc()<CR>
-    augroup END
+    au BufRead,BufNewFile .vimrc nnoremap <buffer> ;l :w \| redraw! \| call LintVimrc()<CR>
 
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w \| !clear; validate_csv.py "%" <CR>
@@ -441,6 +425,7 @@ if has('autocmd')
     au BufNew,BufRead *.travis.yml*  nmap ;l :w \| !clear; travis lint "%" \| less -FR <CR>
     au BufNew,BufRead serverless.yml nmap ;l :w \| !clear; cd "%:p:h" && serverless print<CR>
     au BufNew,BufRead Dockerfile*   nmap ;l :w \| !clear; hadolint "%" \| less -FR <CR>
+    "au BufNew,BufRead *docker-compose.y*ml   nmap ;r :w \| !clear; docker-compose -f "%" up<CR>
     au BufNew,BufRead *docker-compose*.y*ml nmap ;l :w \| !clear; docker-compose -f "%" config \| less -FR <CR>
     au BufNew,BufRead Jenkinsfile*  nmap ;l :w \| !clear; check_jenkinsfiles.sh "%" \| less -FR <CR>
     " vagrant validate doesn't take an -f argument so it must be an exact match in order to validate the right thing
@@ -450,6 +435,10 @@ if has('autocmd')
     au BufNew,BufRead *circleci_config.yml*   nmap ;l :w \| !clear; check_circleci_config.sh \| less -FR <CR>
     au BufNew,BufRead .pylintrc      nmap ;l :w \| !clear; pylint ./*.py<CR>
 
+    "au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w \| !clear; haproxy -f "%:p:h/10-global.cfg" -f "%:p:h/20-stats.cfg" -f "%" <CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;r :w \| !clear; "%:p:h/run.sh" "%" <CR>
+    au BufNew,BufRead **/haproxy-configs/*.cfg   nmap ;R :w \| !clear; DEBUG=1 "%:p:h/run.sh" "%" <CR>
+
     "au BufNew,BufRead fastlane/Fastfile nmap ;r :w \| !clear; cd "%:p:h/.." && fastlane <CR>
 
     " if a "lint:" header is found then run lint.sh - this allows for more complex file types like Kubernetes yaml
@@ -458,6 +447,7 @@ if has('autocmd')
     "if filereadable(expand("%:p")) && match(readfile(expand("%:p")),"lint:")
     "    au BufNew,BufRead *  nmap ;l :w \| !clear; lint.sh "%" \| less -FR <CR>
     "endif
+  augroup END
 endif
 
 
