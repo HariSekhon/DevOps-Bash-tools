@@ -21,6 +21,11 @@
 "
 " :source ~/.vimrc
 
+set encoding=utf-8      " The encoding displayed
+set fileencoding=utf-8  " The encoding written to file
+
+scriptencoding utf-8
+
 " if you cursor location and copy/paste register buffers are not saving
 " then ensure that your ~/.viminfo file is owned by your user:
 "
@@ -77,9 +82,6 @@ set autoread
 
 " write buffer on next / prev etc
 set autowrite
-
-set encoding=utf-8      " The encoding displayed.
-set fileencoding=utf-8  " The encoding written to file.
 
 " add comment to next line when using 'o' in command mode
 " add comment to next line when using Insert mode
