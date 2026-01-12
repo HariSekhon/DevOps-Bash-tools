@@ -393,7 +393,7 @@ if has('autocmd')
     " for scripts that don't end in .sh like Google Cloud Shell's .customize_environment
     au FileType sh                        nmap ;l :w \| !clear; cd "%:p:h" && shellcheck -x -Calways "%:t" \| less -FR <CR>
 
-    "au BufNewFile,BufRead .vimrc nnoremap ;l :w \| redraw! \| call LintVimrc()<CR>
+    au BufNewFile,BufRead .vimrc nnoremap ;l :w \| redraw! \| call LintVimrc()<CR>
 
     " these tools are in the https://github.com/HariSekhon/DevOps-Python-tools & DevOps-Bash-tools repos which should be downloaded, run 'make' and add to $PATH
     au BufNew,BufRead *.csv        nmap ;l :w \| !clear; validate_csv.py "%" <CR>
@@ -480,31 +480,40 @@ endif
 
 ":! bash -c 'vim -c "source %" -c "q" && echo "ViM basic lint validation passed" || "ViM basic lint validation failed"'
 "":! if type -P vint &>/dev/null; then vint "%"; fi
-function! LintVimrc()
-  let l:vimrc_path = expand('~/.vimrc')
+if !exists('g:__lintvimrc_defined')
+    let g:__lintvimrc_defined = 1
+    function! LintVimrc()
+      let l:vimrc_path = expand('~/.vimrc')
 
-  echo 'Sourcing ~/.vimrc file...'
-  try
-    execute 'source' l:vimrc_path
-    echohl InfoMsg | echo "Basic Validation Passed: .vimrc" | echohl None
-  catch
-    echohl ErrorMsg | echo "Basic Validate Failed: errors found in .vimrc" | echohl None
-    return
-  endtry
+      echo 'Sourcing ~/.vimrc file...'
+      try
+        execute 'source' l:vimrc_path
+        echohl InfoMsg
+        echo "Basic Validation Passed: .vimrc"
+        echohl None
+      catch
+        echohl ErrorMsg
+        echo "Basic Validate Failed while sourcing .vimrc"
+        echo v:exception
+        echo "At: " . v:throwpoint
+        echohl None
+        return
+      endtry
 
-  if executable('vint')
-    echo "Running vint..."
-    let l:vint_output = system('vint ' . l:vimrc_path)
-    if v:shell_error
-      echohl ErrorMsg | echo l:vint_output | echohl None
-      echohl ErrorMsg | echo "Vint Validation Failed: .vimrc" | echohl None
-    else
-      echohl InfoMsg | echo "Vint Validation Passed: .vimrc" | echohl None
-    endif
-  else
-    echohl WarningMsg | echo "Vint not found in PATH, skipping validation" | echohl None
-  endif
-endfunction
+      if executable('vint')
+        echo "Running vint..."
+        let l:vint_output = system('vint ' . l:vimrc_path)
+        if v:shell_error
+          echohl ErrorMsg | echo l:vint_output | echohl None
+          echohl ErrorMsg | echo "Vint Validation Failed: .vimrc" | echohl None
+        else
+          echohl InfoMsg | echo "Vint Validation Passed: .vimrc" | echohl None
+        endif
+      else
+        echohl WarningMsg | echo "Vint not found in PATH, skipping validation" | echohl None
+      endif
+    endfunction
+endif
 
 function! ToggleSyntax()
     if exists("g:syntax_on")
