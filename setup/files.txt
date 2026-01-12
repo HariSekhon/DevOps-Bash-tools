@@ -61,7 +61,7 @@ configs/.tfdocs.d/.terraform-docs.yml
 configs/.tmux.conf
 configs/.toprc
 configs/.vimrc
-configs/.wakatime.cfg
+#configs/.wakatime.cfg  # copied because Wakatime IntelliJ plugin doesn't accept env var and insists on writing to this file and don't want to accidentally commit it
 configs/.Xdefaults
 configs/.Xmodmap
 scalastyle_config.xml
