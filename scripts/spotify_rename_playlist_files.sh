@@ -50,7 +50,7 @@ gitrename "$old" "$new"
 gitrename "spotify/$old" "spotify/$new"
 
 if [ -f "agregations/$old" ]; then
-    gitrename "aggregations/$old" "aggregatios/$new"
+    gitrename "aggregations/$old" "aggregations/$new"
 fi
 
 if [ -f "$old.description" ]; then
