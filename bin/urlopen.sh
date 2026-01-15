@@ -40,21 +40,34 @@ help_usage "$@"
 max_args 1 "$@"
 
 browse(){
+    # some likely catchall browsers on Linux
+    local browsers=(
+        xdg-open
+        sensible-browser
+        x-www-browser
+        gnome-open
+    )
     local url="$1"
     if [ -n "${BROWSER:-}" ]; then
         "$BROWSER" "$url"
     elif is_mac; then
         open "$url"
     else  # assume Linux
-        if type -P xdg-open &>/dev/null; then
-            xdg-open "$url" &
-        elif type -P gnome-open &>/dev/null; then
-            gnome-open "$url" &
-        else
-            die "ERROR: xdg-open and gnome-open not found"
-        fi
+        for browser in "${browser[@]}"; do
+            if type -P "$browser" &>/dev/null; then
+                "$browser" "$url" &
+                return 0
+            fi
+        done
+        die "ERROR: none of the following browsers were found in the \$PATH:
+
+$(for browser in ${BROWSER:+"$BROWSER"} "${browsers[@]}"; do echo "$browser"; done)
+
+Could not open the URL: $url
+"
     fi
 }
+export -f browse
 
 "$srcdir/urlextract.sh" "$@" |
 # head -n1 because grep -m 1 can't be trusted and sometimes outputs more matches on subsequent lines
