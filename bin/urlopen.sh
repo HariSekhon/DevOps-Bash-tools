@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #  vim:ts=4:sts=4:sw=4:et
+#  args: google.com
 #
 #  Author: Hari Sekhon
 #  Date: 2020-10-06 18:59:32 +0100 (Tue, 06 Oct 2020)
