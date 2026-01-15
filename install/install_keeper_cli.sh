@@ -68,4 +68,4 @@ file="${download_url##*/}"
 
 "$srcdir/../bin/download_url_file.sh" "$download_url"
 
-open "$file"
+"$srcdir/../bin/open.sh" "$file"
