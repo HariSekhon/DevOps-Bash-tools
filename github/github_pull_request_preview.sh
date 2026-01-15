@@ -65,7 +65,7 @@ printf '\t%s\n' "$url"
 
 echo
 echo "Opening Pull Request"
-open "$url"
+"$srcdir/../bin/urlopen.sh" "$url"
 #elif [ -n "${BROWSER:-}" ]; then
 #    echo
 #    echo "Opening Pull Request using \$BROWSER"
