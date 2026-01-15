@@ -54,7 +54,7 @@ browse(){
     elif is_mac; then
         open "$url"
     else  # assume Linux
-        for browser in "${browser[@]}"; do
+        for browser in "${browsers[@]}"; do
             if type -P "$browser" &>/dev/null; then
                 "$browser" "$url" &
                 return 0
