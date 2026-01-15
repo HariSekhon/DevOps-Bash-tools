@@ -84,7 +84,7 @@ elif [ "$action" = restart ]; then
     exec "${BASH_SOURCE[0]}" up
 elif [ "$action" = ui ]; then
     echo "GoCD Server URL:  $GOCD_URL"
-    open "$GOCD_URL"
+    "$srcdir/../urlopen.sh" "$GOCD_URL"
     exit 0
 else
     docker-compose "$action" "$@"
