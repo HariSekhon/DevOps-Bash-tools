@@ -179,7 +179,7 @@ get_gw(){
             /^default.*\./ { print $2; exit }
             $1 == "Internet:" { inet = 1; next }
             $1 == "Internet6:" { inet = 0 }
-            inet && ($1 == "default" || $1 == "0.0.0.0") {
+            inet && ($1 == "default" || $1 == "0.0.0.0") && $2 ~ /^[0-9.]+$/ {
                 print $2
                 exit
             }
