@@ -172,20 +172,19 @@ halfopen(){
 
 get_gw(){
     local gw
-    gw="$(netstat -rn | awk '/^default.*\./ {print $2;exit}')"
-    if [ -z "$gw" ]; then
-        gw="$(
-            netstat -rn |
-            awk '
-                $1 == "Internet:" { inet = 1; next }
-                $1 == "Internet6:" { inet = 0 }
-                inet && ($1 == "default" || $1 == "0.0.0.0") {
-                    print $2
-                    exit
-                }
-            '
-        )"
-    fi
+    #gw="$(netstat -rn | awk '/^default.*\./ {print $2;exit}')"
+    gw="$(
+        netstat -rn |
+        awk '
+            /^default.*\./ { print $2; exit }
+            $1 == "Internet:" { inet = 1; next }
+            $1 == "Internet6:" { inet = 0 }
+            inet && ($1 == "default" || $1 == "0.0.0.0") {
+                print $2
+                exit
+            }
+        '
+    )"
     if [ -z "$gw" ]; then
         echo "Could not find gateway, no default route! " >&2
         return 1
