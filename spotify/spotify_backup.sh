@@ -54,7 +54,7 @@ spotify_token
 SECONDS=0
 
 if [ $# -gt 0 ]; then
-    echo "Backing up selected playlist(s):"
+    timestamp "Backing up selected playlist(s):"
     echo
     for playlist in "$@"; do
         printf '%s  ' "$(date '+%F %T')"
