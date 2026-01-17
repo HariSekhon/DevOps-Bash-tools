@@ -74,8 +74,11 @@ set_to_liked(){
     if [ -z "$ids" ]; then
         return
     fi
-    "$srcdir/spotify_api.sh" "$url_path${ids}" -X PUT
+    timestamp "Liking tracks in batch:"
+    echo >&2
     tr ',' '\n' <<< "$ids"
+    echo >&2
+    "$srcdir/spotify_api.sh" "$url_path${ids}" -X PUT
 }
 
 if [ $# -gt 0 ]; then
