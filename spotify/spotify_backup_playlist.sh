@@ -155,7 +155,9 @@ if liked; then
         "$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$tmp"
         mv -f -- "$tmp" "$backup_dir_spotify/$filename"
 
-        echo -n 'OK => Tracks '
+        num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
+
+        echo -n "OK ($num_track_uris) => Tracks "
         #trap_cmd "cd \"$backup_dir\" && git checkout \"$filename\" &>/dev/null"
         #"$srcdir/spotify_liked_tracks.sh" "$@" | sort -f > "$backup_dir/$filename"
         tmp="$(mktemp)"
