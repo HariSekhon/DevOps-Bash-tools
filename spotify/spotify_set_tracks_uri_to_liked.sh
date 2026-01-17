@@ -76,7 +76,9 @@ set_to_liked(){
     fi
     timestamp "Liking tracks in batch:"
     echo >&2
-    tr ',' '\n' <<< "$ids"
+    tr ',' '\n' <<< "$ids" |
+    sed 's/^/spotify:track:/' |
+    "$srcdir/spotify_uri_to_name.sh"
     echo >&2
     "$srcdir/spotify_api.sh" "$url_path${ids}" -X PUT
 }
