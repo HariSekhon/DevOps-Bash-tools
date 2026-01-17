@@ -101,6 +101,7 @@ while read -r track_uri; do
     if is_local_uri "$track_uri"; then
         continue
     fi
+    #echo "$track_uri"
     id="$(validate_spotify_uri "$track_uri")"
 
     ids+=("$id")
