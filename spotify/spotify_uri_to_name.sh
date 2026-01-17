@@ -94,7 +94,7 @@ convert(){
     declare -A batch_ids
     declare -A batch_counts
 
-    while read -r -s uri || [ -n "$uri" ]; do
+    while read -r uri || [ -n "$uri" ]; do
         [ -z "$uri" ] && continue
 
         # skip local URIs first
