@@ -53,5 +53,5 @@ elif type -P netstat &>/dev/null; then
         }
     '
 else
-    exit 1
+    die "Failed to get network gateway"
 fi
