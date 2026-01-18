@@ -61,12 +61,20 @@ echo >&2
 
 # Delete from ZSHTAGRESULTMO using JOIN with ZSHARTISTMO
 sqlite3 -batch "$dbpath" <<EOF
+
+.parameter init
+.parameter set :artist "$artist"
+.parameter set :track "$track"
+
+
+
 DELETE FROM ZSHTAGRESULTMO
 WHERE Z_PK IN (
     SELECT r.Z_PK
     FROM ZSHTAGRESULTMO r
     JOIN ZSHARTISTMO a ON a.ZTAGRESULT = r.Z_PK
-    WHERE a.ZNAME = '$artist' AND r.ZTRACKNAME = '$track'
+    WHERE a.ZNAME = :artist
+    AND r.ZTRACKNAME = :track
 );
 EOF
 
