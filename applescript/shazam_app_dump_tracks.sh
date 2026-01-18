@@ -36,13 +36,19 @@ Tested on Shazam app version 2.11.0 - may need to be modified for other versions
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args=""
+usage_args="[<num_tracks>]"
 
 help_usage "$@"
 
-no_args "$@"
+max_args 1 "$@"
 
 mac_only
+
+num="${1:--1}"
+
+if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
+    die "Invalid argument given, must be an integer: $num"
+fi
 
 dbpath="$(
     find ~/Library/Group\ Containers \
@@ -99,6 +105,11 @@ done |
 # from https://github.com/HariSekhon/DevOps-Perl-tools repo - use it if present in $PATH
 if type -P uniq_order_preserved.pl &>/dev/null; then
     uniq_order_preserved.pl
+else
+    cat
+fi |
+if [ "$num" -gt 0 ]; then
+    head -n "$num"
 else
     cat
 fi
