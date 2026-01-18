@@ -31,6 +31,8 @@ Artist - Track
 Useful for using in conjunction with the adjacent spotify_app_search.sh script
 since Apple removed Shazam's Spotify integration
 
+Can optionally specify a number of tracks to stop after as an arg or environment variable \$SHAZAM_APP_DUMP_NUM_TRACKS
+
 Tested on Shazam app version 2.11.0 - may need to be modified for other versions as the Shazam DB schema changes
 "
 
@@ -44,7 +46,7 @@ max_args 1 "$@"
 
 mac_only
 
-num="${1:--1}"
+num="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
 
 if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
     die "Invalid argument given, must be an integer: $num"
