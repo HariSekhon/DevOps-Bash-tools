@@ -60,7 +60,7 @@ timestamp "Backup created at $backup"
 echo >&2
 
 # Delete from ZSHTAGRESULTMO using JOIN with ZSHARTISTMO
-sqlite3 -batch "$dbpath" <<EOF
+sqlite3 -batch -bail "$dbpath" <<EOF
 
 .parameter init
 .parameter set :artist "$artist"
