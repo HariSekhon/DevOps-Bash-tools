@@ -50,6 +50,9 @@ fi
 relaunch_shazam(){
     timestamp "Relaunching Shazam app to reflect removed tracks"
     "$srcdir/reopen_app.sh" Shazam
+    sleep 1
+    # hit Escape key to to minimize Shazam back to the menu bar
+    osascript -e "tell application \"System Events\" to key code 53"
     untrap
     exit
 }
