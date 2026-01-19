@@ -66,8 +66,6 @@ sqlite3 -batch -bail "$dbpath" <<EOF
 .parameter set :artist "$artist"
 .parameter set :track "$track"
 
-
-
 DELETE FROM ZSHTAGRESULTMO
 WHERE Z_PK IN (
     SELECT r.Z_PK
