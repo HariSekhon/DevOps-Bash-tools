@@ -59,22 +59,33 @@ cp -v "$dbpath" "$backup"
 timestamp "Backup created at $backup"
 echo >&2
 
+timestamp "Deleting track from DB: '$artist - $track'"
+echo >&2
+
 # Delete from ZSHTAGRESULTMO using JOIN with ZSHARTISTMO
+#
+# sqlite3 `.parameter` is fragile and unsafe for arbitrary text,
+# and we end up with all kinds of shell injection and
+# quoting and newline issues with arbitrary data, so pre-generate
+# the variables with escaping using SQLite's own enginer
+
+artist_sql=$(sqlite3 ':memory:' "SELECT quote($(
+    printf "'%s'" "$(printf '%s' "$artist" | sed "s/'/''/g")"
+));")
+
+track_sql=$(sqlite3 ':memory:' "SELECT quote($(
+    printf "'%s'" "$(printf '%s' "$track" | sed "s/'/''/g")"
+));")
+
 sqlite3 -batch -bail "$dbpath" <<EOF
-
-.parameter init
-.parameter set :artist "$artist"
-.parameter set :track "$track"
-
-DELETE FROM ZSHTAGRESULTMO
-WHERE Z_PK IN (
-    SELECT r.Z_PK
-    FROM ZSHTAGRESULTMO r
-    JOIN ZSHARTISTMO a ON a.ZTAGRESULT = r.Z_PK
-    WHERE a.ZNAME = :artist
-    AND r.ZTRACKNAME = :track
-);
+    DELETE FROM ZSHTAGRESULTMO
+    WHERE Z_PK IN (
+        SELECT r.Z_PK
+        FROM ZSHTAGRESULTMO r
+        JOIN ZSHARTISTMO a ON a.ZTAGRESULT = r.Z_PK
+        WHERE a.ZNAME = $artist_sql
+          AND r.ZTRACKNAME = $track_sql
+    );
 EOF
 
-timestamp "Deleting track from DB: '$artist - $track'"
 timestamp "You must now quit and re-open the Shazam app to pick up this change"
