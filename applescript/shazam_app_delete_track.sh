@@ -67,7 +67,7 @@ echo >&2
 # sqlite3 `.parameter` is fragile and unsafe for arbitrary text,
 # and we end up with all kinds of shell injection and
 # quoting and newline issues with arbitrary data, so pre-generate
-# the variables with escaping using SQLite's own enginer
+# the variables with escaping using SQLite's own quoting engine
 
 artist_sql=$(sqlite3 ':memory:' "SELECT quote($(
     printf "'%s'" "$(printf '%s' "$artist" | sed "s/'/''/g")"
