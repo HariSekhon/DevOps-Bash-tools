@@ -11,7 +11,8 @@
 #
 #  License: see accompanying Hari Sekhon LICENSE file
 #
-#  If you're using my code you're welcome to connect with me on LinkedIn and optionally send me feedback to help steer this or other code I publish
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback to help steer this or other code I publish
 #
 #  https://www.linkedin.com/in/HariSekhon
 #
@@ -22,7 +23,7 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090,SC2154
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034,SC2154
@@ -44,6 +45,12 @@ This is useful for piping to 'sort | uniq -c' to:
 Example:
 
     SPOTIFY_PRIVATE=1 spotify_playlist_artists.sh Blacklist | sort | uniq -c | sort -k1nr
+
+
+In these use cases though, this newer script is better as it normalizes track names and outputs the ranked order:
+
+    spotify_playlist_top_artists.sh
+
 
 $usage_playlist_help
 
