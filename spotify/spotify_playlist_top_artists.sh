@@ -29,8 +29,8 @@ srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 usage_description="
 Returns the top artists for a given Spotify playlist by counting unique track names for each artist
 
-If Spotify-tools is in the \$PATH normalizes the track names for greater accuracy to combine multiple versions
-such as Radio Edit and Album Version to only count that same song once
+If HariSekhon/Spotify-tools is in the \$PATH it uses normalize_tracknames.pl for greater accuracy to
+collapse multiple versions such as Radio Edit and Album Version to only count that same song once
 
 Playlist argument can be a playlist name or a playlist ID (get this from spotify_playlists.sh)
 
