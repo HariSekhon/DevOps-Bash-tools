@@ -1590,6 +1590,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_playlist_uri_offset.sh` - finds the offset of a given track URI in a given playlist, useful to find positions to resume processing a large playlist
 - `spotify_top_artists*.sh` - lists your top artists in URI or human readable format
 - `spotify_top_tracks*.sh` - lists top tracks in URI or human readable format
+- `spotify_playlist_top_artists.sh` - returns the top artists for a given Spotify playlist by counting unique track names for each artist. If HariSekhon/Spotify-tools is in the $PATH it uses normalize_tracknames.pl for greater accuracy to collapse multiple versions such as Radio Edit and Album Version to only count that same song once
 - `spotify_liked_tracks*.sh` - lists your `Liked Songs` in URI or human readable formats
 - `spotify_liked_artists*.sh` - list artists from `Liked Songs` in URI or human readable formats
 - `spotify_artists_followed*.sh` - lists all followed artists in URI or human readable formats
