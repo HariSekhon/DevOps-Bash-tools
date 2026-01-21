@@ -97,5 +97,5 @@ while not_null "$url_path"; do
     url_path="$(get_next "$output")"
     print_output
     # slow down a bit to try to reduce hitting Spotify API rate limits and getting HTTP 429 Too Many Requests on large playlists
-    sleep 0.1
+    #sleep 0.1
 done
