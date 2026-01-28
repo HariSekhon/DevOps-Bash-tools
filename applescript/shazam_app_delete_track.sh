@@ -78,14 +78,23 @@ track_sql=$(sqlite3 ':memory:' "SELECT quote($(
 ));")
 
 sqlite3 -batch -bail "$dbpath" <<EOF
-    DELETE FROM ZSHTAGRESULTMO
-    WHERE Z_PK IN (
-        SELECT r.Z_PK
-        FROM ZSHTAGRESULTMO r
-        JOIN ZSHARTISTMO a ON a.ZTAGRESULT = r.Z_PK
-        WHERE a.ZNAME = $artist_sql
-          AND r.ZTRACKNAME = $track_sql
-    );
+    DELETE FROM
+        ZSHTAGRESULTMO
+    WHERE
+        Z_PK IN (
+            SELECT
+                r.Z_PK
+            FROM
+                ZSHTAGRESULTMO r
+            JOIN
+                ZSHARTISTMO a
+                    ON
+                a.ZTAGRESULT = r.Z_PK
+            WHERE
+                a.ZNAME = $artist_sql
+              AND
+                r.ZTRACKNAME = $track_sql
+        );
 EOF
 
 timestamp "You must now quit and re-open the Shazam app to pick up this change"
