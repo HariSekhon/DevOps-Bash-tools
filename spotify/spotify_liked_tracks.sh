@@ -65,7 +65,8 @@ output(){
     sed '
         s/^[[:space:]]*-//;
         s/^[[:space:]]*//;
-        s/[[:space:]]*$//
+        s/[[:space:]]*$//;
+        /^[[:space:]]*$/d'
     '
 }
 
