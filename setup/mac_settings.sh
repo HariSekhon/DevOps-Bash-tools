@@ -293,6 +293,7 @@ defaults write com.apple.dock show-process-indicators -bool true
 # disable bouncing icons
 defaults write com.apple.dock no-bouncing -bool true
 
+#defaults write com.apple.dock minimize-to-application -bool true
 # don't minimize to applications, it's more obvious when they're on the far right
 defaults write com.apple.dock minimize-to-application -bool false
 
