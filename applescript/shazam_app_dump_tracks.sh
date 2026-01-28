@@ -38,7 +38,7 @@ Tested on Shazam app version 2.11.0 - may need to be modified for other versions
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_tracks>]"
+usage_args="[<num_tracks|today|yesterday>]"
 
 help_usage "$@"
 
@@ -46,11 +46,7 @@ max_args 1 "$@"
 
 mac_only
 
-num="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
-
-if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
-    die "Invalid argument given, must be an integer: $num"
-fi
+arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-today}}"
 
 dbpath="$(
     find ~/Library/Group\ Containers \
@@ -66,29 +62,45 @@ fi
 
 timestamp "Found Shazam App DB: $dbpath"
 
-#table="ZSHTAGRESULTMO"
+where_clause=""
+order_clause="ORDER BY r.ZDATE DESC"
+limit_clause=""
 
-# detect columns dynamically
-#cols="$(
-#    sqlite3 "$dbpath" "PRAGMA table_info($table);" |
-#    awk '{print $2}'
-#)"
+case "$arg" in
+    today)
+        where_clause="
+            WHERE
+                r.ZDATE >= (
+                    strftime('%s', 'now', 'start of day', 'localtime') - 978307200
+                )
+        "
+        order_clause="ORDER BY r.ZDATE ASC"
+        ;;
+    yesterday)
+        where_clause="
+            WHERE
+                r.ZDATE >= (
+                    strftime('%s', 'now', 'start of day', '-1 day', 'localtime') - 978307200
+                )
+            AND
+                r.ZDATE < (
+                    strftime('%s', 'now', 'start of day', 'localtime') - 978307200
+                )
+        "
+        order_clause="ORDER BY r.ZDATE ASC"
+        ;;
+    *)
+        num="$arg"
 
-#artist_column="$(grep -m1 -E 'ARTIST' <<< "$cols" || :)"
-#track_column="$(grep -m1 -E 'TRACK' <<< "$cols" || :)"
-#date_column="$(grep -m1 -E 'DATE' <<< "$cols" || :)"
+        if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
+            die "Invalid argument given, must be an integer, 'today', or 'yesterday': $arg"
+        fi
 
-#[ -n "$artist_column" ] || die "Error: Failed to find artist column"
-#[ -n "$track_column" ] || die "Error: Failed to find track column"
-#[ -n "$date_column" ] || die "Error: Failed to find date column"
-
-#timestamp "Found columns:
-#
-#$artist_column
-#$track_column
-#$date_column
-#"
-
+        if [ "$num" -gt 0 ]; then
+            limit_clause="LIMIT $num"
+        fi
+        ;;
+esac
 # my ~/.sqliterc forces pretty printing breaking the separator we need so -init /dev/null to ignore it
 sqlite3 "$dbpath" -init /dev/null -noheader -separator $'\t' \
 "
@@ -101,8 +113,9 @@ sqlite3 "$dbpath" -init /dev/null -noheader -separator $'\t' \
         ZSHARTISTMO a
             ON
         a.ZTAGRESULT = r.Z_PK
-    ORDER BY
-        r.ZDATE DESC;
+    $where_clause
+    $order_clause
+    $limit_clause;
 " |
 sed '/^[[:space:]]*$/d' |
 while IFS=$'\t' read -r artist title; do
@@ -114,11 +127,6 @@ done |
 # from https://github.com/HariSekhon/DevOps-Perl-tools repo - use it if present in $PATH
 if type -P uniq_order_preserved.pl &>/dev/null; then
     uniq_order_preserved.pl
-else
-    cat
-fi |
-if [ "$num" -gt 0 ]; then
-    head -n "$num"
 else
     cat
 fi
