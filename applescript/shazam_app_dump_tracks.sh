@@ -66,6 +66,7 @@ where_clause=""
 order_clause="ORDER BY r.ZDATE DESC"
 limit_clause=""
 
+# macOS Core Data framework stores dates as seconds 2001-01-01 00:00:00 UTC, not unix epoch of 1970
 coredata_epoch_offset=978307200
 
 # XXX: localtime strftime() may give off comparisons vs UTC stored date timestamps, so avoided for YYYY-MM-DD
