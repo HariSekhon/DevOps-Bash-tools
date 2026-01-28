@@ -38,7 +38,7 @@ Tested on Shazam app version 2.11.0 - may need to be modified for other versions
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_tracks|today|yesterday>]"
+usage_args="[<num_tracks|today|yesterday|week|last:num_days>]"
 
 help_usage "$@"
 
@@ -96,6 +96,22 @@ case "$arg" in
             WHERE
                 r.ZDATE >= (
                     strftime('%s', 'now', 'start of day', '-6 days', 'localtime')
+                    - $coredata_epoch_offset
+                )
+        "
+        order_clause="ORDER BY r.ZDATE ASC"
+        ;;
+    last:*)
+        days="${arg#last:}"
+
+        if ! [[ "$days" =~ ^[[:digit:]]+$ ]]; then
+            die "Invalid argument for last:N, must be a positive integer: $arg"
+        fi
+
+        where_clause="
+            WHERE
+                r.ZDATE >= (
+                    strftime('%s', 'now', '-$days days', 'localtime')
                     - $coredata_epoch_offset
                 )
         "
