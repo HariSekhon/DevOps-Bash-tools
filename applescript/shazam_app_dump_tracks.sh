@@ -93,7 +93,8 @@ timestamp "Found Shazam App DB: $dbpath"
 sqlite3 "$dbpath" -init /dev/null -noheader -separator $'\t' \
 "
     SELECT
-        a.ZNAME AS artist, r.ZTRACKNAME AS track
+        a.ZNAME AS artist,
+        r.ZTRACKNAME AS track
     FROM
         ZSHTAGRESULTMO r
     LEFT JOIN
