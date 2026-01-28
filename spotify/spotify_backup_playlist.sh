@@ -155,7 +155,8 @@ if liked; then
         #mv -f -- "$tmp" "$backup_dir_spotify/$filename"
         "$srcdir/spotify_liked_uri_artist_track.sh" |
         while read -r uri track; do
-            if ! validate_spotify_uri "$uri"; then
+            if ! validate_spotify_uri "$uri" &>/dev/null &&
+               ! is_local_uri "$uri" ; then
                 die "Invalid Spotify URI returned: '$uri', for track: $track"
             fi
             echo "$track" >> "$track_tmp"
@@ -261,7 +262,8 @@ else
         "$srcdir/spotify_playlist_tracks_uri_artist_track.sh" "$playlist_id" "$@" |
         # TODO: consider replacing this with a tee to two streaming commands to avoid so many executions
         while read -r uri track; do
-            if ! validate_spotify_uri "$uri" &>/dev/null; then
+            if ! validate_spotify_uri "$uri" &>/dev/null &&
+               ! is_local_uri "$uri" ; then
                 die "Invalid Spotify URI returned: '$uri', for track: $track"
             fi
             echo "$track" >> "$track_tmp"
