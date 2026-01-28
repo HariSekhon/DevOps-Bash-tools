@@ -64,7 +64,7 @@ while IFS=$'\t' read -r artist _ track; do
     "$srcdir/spotify_app_search.sh" "$artist $track"
     timestamp "Press enter to delete this track from the Shazam DB: $artist - $track"
     read -r < /dev/tty
-    "$srcdir/shazam_app_delete_track.sh" "$artist" "$track"
+    QUIET=1 "$srcdir/shazam_app_delete_track.sh" "$artist" "$track"
 done < <(
     "$srcdir/shazam_app_dump_tracks.sh" "$num"
 )
