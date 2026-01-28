@@ -143,8 +143,6 @@ if liked; then
        [ "$liked_added_at" = "$(cat "$liked_added_cache")" ]; then
         echo -n '=> Latest Added Timestamp Unchanged'
     else
-        # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
-        #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
         echo -n "=> URIs "
         #trap_cmd "cd \"$backup_dir_spotify\" && git checkout \"$filename\" &>/dev/null"
         #"$srcdir/spotify_liked_tracks_uri.sh" "$@" | sort -f > "$backup_dir_spotify/$filename"
@@ -163,8 +161,14 @@ if liked; then
             echo "$track" >> "$track_tmp"
             echo "$uri" >> "$uri_tmp"
         done
-        mv -f "$track_tmp" "$backup_dir/$filename"
-        mv -f "$uri_tmp" "$backup_dir_spotify/$filename"
+        #mv -f "$track_tmp" "$backup_dir/$filename"
+        #mv -f "$uri_tmp" "$backup_dir_spotify/$filename"
+        # XXX: sort the Liked URI and track orderings - although this breaks the fidelity between the playlist <=> spotify/playlist formats,
+        #      it's necessary to avoid recurring large diffs as Spotify seems to change the output ordering of this
+        sort -f "$track_tmp" > "$backup_dir/$filename"
+        sort -f "$uri_tmp" > "$backup_dir_spotify/$filename"
+        rm -f "$track_tmp"
+        rm -f "$uri_tmp"
         # try to avoid hitting HTTP 429 rate limiting
         sleep 0.1
         num_track_uris="$(wc -l < "$backup_dir_spotify/$filename" | sed 's/[[:space:]]*//')"
