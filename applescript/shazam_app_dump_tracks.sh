@@ -92,10 +92,16 @@ timestamp "Found Shazam App DB: $dbpath"
 # my ~/.sqliterc forces pretty printing breaking the separator we need so -init /dev/null to ignore it
 sqlite3 "$dbpath" -init /dev/null -noheader -separator $'\t' \
 "
-    SELECT a.ZNAME AS artist, r.ZTRACKNAME AS track
-        FROM ZSHTAGRESULTMO r
-        LEFT JOIN ZSHARTISTMO a ON a.ZTAGRESULT = r.Z_PK
-        ORDER BY r.ZDATE DESC;
+    SELECT
+        a.ZNAME AS artist, r.ZTRACKNAME AS track
+    FROM
+        ZSHTAGRESULTMO r
+    LEFT JOIN
+        ZSHARTISTMO a
+            ON
+        a.ZTAGRESULT = r.Z_PK
+    ORDER BY
+        r.ZDATE DESC;
 " |
 sed '/^[[:space:]]*$/d' |
 while IFS=$'\t' read -r artist title; do
