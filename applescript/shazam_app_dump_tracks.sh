@@ -68,6 +68,8 @@ limit_clause=""
 
 coredata_epoch_offset=978307200
 
+# XXX: localtime strftime() may give off comparisons vs UTC stored date timestamps, so avoided for YYYY-MM-DD
+#      keeping local day for today/yesterday/week or last:N though
 case "$arg" in
     today)
         where_clause="
