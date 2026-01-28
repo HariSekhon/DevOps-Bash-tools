@@ -22,12 +22,12 @@ set -euo pipefail
 [ -n "${DEBUG:-}" ] && set -x
 srcdir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# shellcheck disable=SC1090,SC2154
+# shellcheck disable=SC1090,SC1091
 . "$srcdir/lib/spotify.sh"
 
 # shellcheck disable=SC2034,SC2154
 usage_description="
-Returns track names in a given Spotify playlist
+Returns track URIs and 'Artist - Track' names in a given Spotify playlist
 
 Playlist argument can be a playlist name or a playlist ID (get this from spotify_playlists.sh)
 
@@ -40,6 +40,12 @@ URI \\t Artist - Track
 
 
 $usage_playlist_help
+
+
+Used by spotify_backup_playlist.sh instead of spotify_playlist_tracks.sh and spotify_playlist_tracks_uri.sh separately
+because this halves tbe number of API calls to postprocess rather than fetch separate lists - this is a big
+optimization given I have nearly 100,000 tracks under management which requires a lot of paging
+
 
 $usage_auth_help
 "
