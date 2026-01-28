@@ -97,4 +97,6 @@ sqlite3 -batch -bail "$dbpath" <<EOF
         );
 EOF
 
-timestamp "You must now quit and re-open the Shazam app to pick up this change"
+if [ -z "${QUIET:-}" ]; then
+    timestamp "You must now quit and re-open the Shazam app to pick up this change"
+fi
