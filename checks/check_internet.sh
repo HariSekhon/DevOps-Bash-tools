@@ -97,7 +97,9 @@ check_domain_ping() {
 timestamp "Detecting Default Gateway IP..."
 while :; do
     gateway_ip=$(get_gateway)
-    if is_blank "$gateway_ip"; then
+    if ! is_blank "$gateway_ip"; then
+        break
+    else
         timestamp "FAIL: no Gateway IP available yet..."
     fi
     sleep "$sleep_seconds"
