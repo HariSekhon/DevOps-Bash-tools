@@ -32,6 +32,11 @@ Output format:
 URI \\t Artist - Track
 
 
+Used by spotify_backup_playlist.sh instead of spotify_liked_tracks.sh and spotify_liked_tracks_uri.sh separately
+because this halves tbe number of API calls to postprocess rather than fetch separate lists - this is a big
+optimization given I have nearly 100,000 tracks under management which requires a lot of paging
+
+
 $usage_auth_help
 "
 
