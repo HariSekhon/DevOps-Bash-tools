@@ -66,12 +66,14 @@ where_clause=""
 order_clause="ORDER BY r.ZDATE DESC"
 limit_clause=""
 
+coredata_epoch_offset=978307200
+
 case "$arg" in
     today)
         where_clause="
             WHERE
                 r.ZDATE >= (
-                    strftime('%s', 'now', 'start of day', 'localtime') - 978307200
+                    strftime('%s', 'now', 'start of day', 'localtime') - $coredata_epoch_offset
                 )
         "
         order_clause="ORDER BY r.ZDATE ASC"
@@ -80,11 +82,21 @@ case "$arg" in
         where_clause="
             WHERE
                 r.ZDATE >= (
-                    strftime('%s', 'now', 'start of day', '-1 day', 'localtime') - 978307200
+                    strftime('%s', 'now', 'start of day', '-1 day', 'localtime') - $coredata_epoch_offset
                 )
             AND
                 r.ZDATE < (
-                    strftime('%s', 'now', 'start of day', 'localtime') - 978307200
+                    strftime('%s', 'now', 'start of day', 'localtime') - $coredata_epoch_offset
+                )
+        "
+        order_clause="ORDER BY r.ZDATE ASC"
+        ;;
+    week)
+        where_clause="
+            WHERE
+                r.ZDATE >= (
+                    strftime('%s', 'now', 'start of day', '-6 days', 'localtime')
+                    - $coredata_epoch_offset
                 )
         "
         order_clause="ORDER BY r.ZDATE ASC"
