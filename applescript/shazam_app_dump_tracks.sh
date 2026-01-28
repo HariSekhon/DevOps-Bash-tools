@@ -38,7 +38,7 @@ Tested on Shazam app version 2.11.0 - may need to be modified for other versions
 
 # used by usage() in lib/utils.sh
 # shellcheck disable=SC2034
-usage_args="[<num_tracks|today|yesterday|week|last:num_days>]"
+usage_args="[<num_tracks|today|yesterday|week|last:num_days|YYYY-MM-DD>]"
 
 help_usage "$@"
 
@@ -112,6 +112,21 @@ case "$arg" in
             WHERE
                 r.ZDATE >= (
                     strftime('%s', 'now', '-$days days', 'localtime')
+                    - $coredata_epoch_offset
+                )
+        "
+        order_clause="ORDER BY r.ZDATE ASC"
+        ;;
+    ????-??-??)
+        where_clause="
+            WHERE
+                r.ZDATE >= (
+                    strftime('%s', '$arg', 'start of day', 'localtime')
+                    - $coredata_epoch_offset
+                )
+            AND
+                r.ZDATE < (
+                    strftime('%s', '$arg', 'start of day', '+1 day', 'localtime')
                     - $coredata_epoch_offset
                 )
         "
