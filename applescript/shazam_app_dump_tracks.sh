@@ -121,12 +121,12 @@ case "$arg" in
         where_clause="
             WHERE
                 r.ZDATE >= (
-                    strftime('%s', '$arg', 'start of day', 'localtime')
+                    strftime('%s', '$arg', 'start of day')
                     - $coredata_epoch_offset
                 )
             AND
                 r.ZDATE < (
-                    strftime('%s', '$arg', 'start of day', '+1 day', 'localtime')
+                    strftime('%s', '$arg', 'start of day', '+1 day')
                     - $coredata_epoch_offset
                 )
         "
