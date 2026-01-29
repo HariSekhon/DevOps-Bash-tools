@@ -1,0 +1,53 @@
+#
+#  Author: Hari Sekhon
+#  Date: 2026-01-29 17:32:16 -0400 (Thu, 29 Jan 2026)
+#
+#  vim:ts=4:sts=4:sw=4:et:filetype=conf
+#
+#  https///github.com/HariSekhon/DevOps-Bash-tools
+#
+#  License: see accompanying Hari Sekhon LICENSE file
+#
+#  If you're using my code you're welcome to connect with me on LinkedIn
+#  and optionally send me feedback
+#
+#  https://www.linkedin.com/in/HariSekhon
+#
+
+# ============================================================================ #
+#              M a s   A p p   S t o r e   P a c k a g e   L i s t
+# ============================================================================ #
+
+# App Store packages to install with Mas on a new Mac
+
+# Generated using this command to strip out the version numbers:
+#
+#   mas list | cut -c-40
+
+# Install using command:
+#
+#   awk '{print $1}' mas-packages.txt | xargs mas install
+
+ 490461369  Bandwidth+
+ 500154009  Bitdefender Virus Scanner
+ 425264550  Blackmagic Disk Speed Test
+1376878040  BlueWallet
+6740840706  Braver Search
+1457309557  Converter
+ 663592361  DuckDuckGo
+ 935235287  Encrypto
+ 406056744  Evernote
+ 408981434  iMovie
+ 408981381  iPhoto
+ 409183694  Keynote
+1295203466  Microsoft Remote Desktop
+ 409203825  Numbers
+1579499874  OpenSpeedTest-Server
+ 409201541  Pages
+ 897118787  Shazam
+ 803453959  Slack
+1153157709  Speedtest
+ 747648890  Telegram
+ 310633997  WhatsApp
+1455463454  WiFi Speed Test
+ 497799835  Xcode
