@@ -46,7 +46,7 @@ max_args 1 "$@"
 
 mac_only
 
-arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-today}}"
+arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:--1}}"
 
 dbpath="$(
     find ~/Library/Group\ Containers \
