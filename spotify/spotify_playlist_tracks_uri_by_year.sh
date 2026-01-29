@@ -90,14 +90,15 @@ url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
 
 print_output(){
     #jq -r '.items[] | select(.track.uri) | .track.uri' <<< "$output"
-    # Filter tracks by release year
+    # filter tracks by release year, works for singles, EPs, albums
     jq -r --arg start "$year_start" --arg end "$year_end" '
         .items[]
         | select(.track.uri)
         | select(.track.album.release_date | test("^[0-9]{4}"))
-        | select((.track.album.release_date[0:4] | tonumber) >= ($start | tonumber) and
-                 (.track.album.release_date[0:4] | tonumber) <= ($end | tonumber))
-        | .track.uri
+        | .track as $t
+        | ($t.album.release_date[0:4] | tonumber) as $year
+        | select($year >= ($start | tonumber) and $year <= ($end | tonumber))
+        | $t.uri
     ' <<< "$output"
 }
 
