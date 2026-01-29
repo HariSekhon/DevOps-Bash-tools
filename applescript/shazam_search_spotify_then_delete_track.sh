@@ -28,7 +28,10 @@ and then deletes it from the Shazam local sqlite DB upon an Enter key press to p
 
 Shazam to Spotify apps workaround to Apple removing Spotify integration from Shazam
 
-Can optionally specify a number of tracks to stop after as an arg or environment variable \$SHAZAM_APP_DUMP_NUM_TRACKS
+Can optionally specify a number of tracks to stop after as an arg,
+or a timeframe today/yesterday/week/YYYY-MM-DD,
+
+You can set this args as an environment variable \$SHAZAM_APP_DUMP_NUM_TRACKS - the arg takes precedence though
 "
 
 # used by usage() in lib/utils.sh
@@ -41,11 +44,17 @@ max_args 1 "$@"
 
 mac_only
 
-num="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
+arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
 
-if ! [[ "$num" =~ ^-?[[:digit:]]+$ ]]; then
-    die "Invalid argument given, must be an integer: $num"
-fi
+case "$arg" in
+    # allow only these args to be passed to shazam_app_dump_tracks.sh
+    today|yesterday|week|YYYY-MM-DD) : ;;
+    *)
+        if ! [[ "$arg" =~ ^-?[[:digit:]]+$ ]]; then
+            die "Invalid argument given, must be an integer or one of today/yesterday/week/YYYY-MM-DD: $arg"
+        fi
+        ;;
+esac
 
 relaunch_shazam(){
     timestamp "Relaunching Shazam app to reflect removed tracks"
@@ -66,5 +75,5 @@ while IFS=$'\t' read -r artist _ track; do
     read -r < /dev/tty
     QUIET=1 "$srcdir/shazam_app_delete_track.sh" "$artist" "$track"
 done < <(
-    "$srcdir/shazam_app_dump_tracks.sh" "$num"
+    "$srcdir/shazam_app_dump_tracks.sh" "$arg"
 )
