@@ -34,8 +34,12 @@ Useful for filtering tracks to add to my best of each decade playlists
 
 Playlist argument can be a playlist name or ID (see spotify_playlists.sh)
 
-The year can be an integer or a year range in the format '<start>-<end>' eg. '2000-2009'
-or an entire decade such as '1980s', '1990s', '2000s', '2010s', '2020s' etc.
+The year can be one of:
+
+- an integer
+- a year range in the format '<start>-<end>' eg. '2000-2009'
+- an entire decade such as '1980s', '1990s', '2000s', '2010s', '2020s'
+- a decade range such as '1990s-2000s'
 
 \$SPOTIFY_PLAYLIST can be used from environment if no first argument is given
 
@@ -63,7 +67,12 @@ if is_blank "$year_arg"; then
     usage "year or range not defined"
 fi
 
-# Convert decade shorthand to a range, or validate a year/range
+decade_to_range() {
+    local decade="$1"
+    local start="${decade%s}"   # remove trailing 's'
+    echo "$start $((start + 9))"
+}
+
 if [[ "$year_arg" =~ ^([0-9]{4})$ ]]; then
     # Single year
     year_start="$year_arg"
@@ -73,9 +82,12 @@ elif [[ "$year_arg" =~ ^([0-9]{4})-([0-9]{4})$ ]]; then
     year_start="${BASH_REMATCH[1]}"
     year_end="${BASH_REMATCH[2]}"
 elif [[ "$year_arg" =~ ^([0-9]{4})s$ ]]; then
-    # Decade shorthand, e.g., 1990s
-    year_start="${BASH_REMATCH[1]}"
-    year_end=$((year_start + 9))
+    # Single decade
+    read -r year_start year_end < <(decade_to_range "$year_arg")
+elif [[ "$year_arg" =~ ^([0-9]{4}s)-([0-9]{4}s)$ ]]; then
+    # Decade range
+    read -r year_start _ < <(decade_to_range "${BASH_REMATCH[1]}")
+    read -r _ year_end < <(decade_to_range "${BASH_REMATCH[2]}")
 else
     usage "invalid year or range: '$year_arg'"
 fi
