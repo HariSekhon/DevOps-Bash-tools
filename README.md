@@ -1587,6 +1587,7 @@ See also [Knowledge Base notes for MultiMedia](https://github.com/HariSekhon/Kno
 - `spotify_delete_duplicate_tracks_in_playlist.sh` - deletes duplicate Spotify tracks (name matched) in a given playlist using `spotify_duplicate_tracks_in_playlist.sh` and `spotify_delete_from_playlist.sh`
 - `spotify_delete_any_duplicates_in_playlist.sh` - calls both of the above scripts to first get rid of duplicate URIs and then remove any other duplicates by track name matches
 - `spotify_playlist_tracks_uri_in_year.sh` - finds track URIs in a playlist where their original release date is in a given year or decade (by regex match)
+- `spotify_playlist_tracks_uri_by_year.sh` -  returns track URIs from the given Spotify playlist for a specific year or range of years. Useful for filtering tracks to add to my best of each decade playlists. More efficient than the above code, but the above code is more likely to find the original year, not the year of the track version
 - `spotify_playlist_uri_offset.sh` - finds the offset of a given track URI in a given playlist, useful to find positions to resume processing a large playlist
 - `spotify_top_artists*.sh` - lists your top artists in URI or human readable format
 - `spotify_top_tracks*.sh` - lists top tracks in URI or human readable format
