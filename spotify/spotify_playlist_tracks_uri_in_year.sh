@@ -101,7 +101,8 @@ while not_null "$url_path"; do
         artist="$("$srcdir/../bin/urlencode.sh" <<< "$artist")"
         # strip single quotes as raw single quotes qork but url encoding single quotes breaks the API
         track="${track//\'/}"
-        track="$("$srcdir/../spotify-tools/normalize_tracknames.pl" <<< "$track" | "$srcdir/../bin/urlencode.sh")"
+        # requires HariSekhon/Spotify-tools to be in the \$PATH
+        track="$(normalize_tracknames.pl <<< "$track" | "$srcdir/../bin/urlencode.sh")"
         # XXX: this track isn't found with but is if you leave off the artist: and track: prefixes then you find the other versions of it which are found in the API - this is a better trade off than finding nothing
         #
         #      artist:Nadia track:Call My Name
