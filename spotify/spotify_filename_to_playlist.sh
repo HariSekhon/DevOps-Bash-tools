@@ -37,7 +37,7 @@ help_usage "$@"
 
 normalize(){
     # strip folder name
-    sed 's,.*/,,' |
+    sed 's|.*/||' |
     # replace unicode forward slash needed for storing as filename with the original ascii version in the real playlist name
     tr '∕' '/'
 }
