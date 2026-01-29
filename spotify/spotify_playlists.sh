@@ -117,7 +117,8 @@ output(){
     else
         jq "select(.owner.id == \"$spotify_user\")"
     fi |
-    jq -r "[.id, .name] | @tsv"
+    jq -r "[.id, .name] | @tsv" |
+    sed 's/[[:space:]]*$//'
 }
 
 spotify_token
