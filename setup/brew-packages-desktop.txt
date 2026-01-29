@@ -191,6 +191,7 @@ lynx
 #lz4
 m4  # classic macro processor
 #makedepend  # Makefile dependencies for C
+mas  # command line interface to the App Store to install/upgrade apps
 #maven
 maven-completion
 maven-shell
