@@ -26,7 +26,7 @@
 
 # Install using command:
 #
-#   awk '{print $1}' mas-packages.txt | xargs mas install
+#   sed 's/#.*//' mas-packages.txt | awk '{print $1}' | xargs mas install
 
  490461369  Bandwidth+
  500154009  Bitdefender Virus Scanner
