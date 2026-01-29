@@ -18,11 +18,13 @@
 #              M a s   A p p   S t o r e   P a c k a g e   L i s t
 # ============================================================================ #
 
+# App Store packages to install on a new Mac using Mas
+#
+# Mas is the open source command line interface to the App Store
+
 # For more details on Mas, see HariSekhon/Knowledge-Base page on Mas:
 #
 #   https://github.com/HariSekhon/Knowledge-Base/blob/main/mas.md
-
-# App Store packages to install with Mas on a new Mac
 
 # Generated using this command to strip out the version numbers:
 #
