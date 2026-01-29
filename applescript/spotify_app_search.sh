@@ -38,6 +38,8 @@ mac_only
 
 query="$*"
 
+query="${query//\"/\\\"}"
+
 timestamp "Telling Spotify app to search for: $query"
 
 osascript \
