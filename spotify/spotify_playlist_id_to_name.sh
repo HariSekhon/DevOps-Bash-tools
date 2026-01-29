@@ -51,8 +51,11 @@ playlist_id_to_name(){
     shift || :
     # if it's not a playlist id, scan all playlists and take the ID of the first matching playlist name
     if is_spotify_playlist_id "$playlist_id"; then
-        playlist_name="$("$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id" "$@" |
-                    jq -r '.name' || :)"
+        playlist_name="$(
+            "$srcdir/spotify_api.sh" "/v1/playlists/$playlist_id" "$@" |
+            jq -r '.name' |
+            sed 's/[[:space:]]*$//' || :
+        )"
         # it turns out a playlist name can be blank :-/
         #if is_blank "$playlist_name" || [ "$playlist_name" = null ]; then
         if is_blank "$playlist_name"; then
