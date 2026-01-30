@@ -48,7 +48,7 @@ arg="${1:-${SHAZAM_APP_DUMP_NUM_TRACKS:-1}}"
 
 case "$arg" in
     # allow only these args to be passed to shazam_app_dump_tracks.sh
-    today|yesterday|week|YYYY-MM-DD) : ;;
+    today|yesterday|week|????-??-??) : ;;
     *)
         if ! [[ "$arg" =~ ^-?[[:digit:]]+$ ]]; then
             die "Invalid argument given, must be an integer or one of today/yesterday/week/YYYY-MM-DD: $arg"
