@@ -35,7 +35,7 @@ local mp = require("mp")
 local utils = require("mp.utils")
 
 mp.register_event("end-file", function(event)
-    if event.reason ~= "eof" then
+    if not event.reason ~= "eof" then
         return
     end
 
