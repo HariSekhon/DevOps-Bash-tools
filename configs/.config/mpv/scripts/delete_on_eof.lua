@@ -25,27 +25,61 @@
 --
 --      MPV_DELETE_ON_EOF=1 mpv file.mp4
 
+local msg = require("mp.msg")
+
 local enable = os.getenv("MPV_DELETE_ON_EOF")
 if not enable then
+    msg.info("MPV_DELETE_ON_EOF environment variable not set, script disabled")
     return
 end
 
 local mp = require("mp")
-
 local utils = require("mp.utils")
 
+local script_name = mp.get_script_name()
+msg.info(script_name .. " loaded")
+
+-- have to store the path at file-loaded time because it is cleared by the time we hit end-file
+local path = nil
+
+mp.register_event("file-loaded", function()
+    path = mp.get_property("stream-open-filename")
+    msg.info("file-loaded path: " .. tostring(path))
+end)
+
+-- checked timing of when the stream-open-filename was available, it was cleared later by end-file
+--mp.add_timeout(0.01, function()
+--    local path = mp.get_property("stream-open-filename")
+--    msg.info("delayed path=" .. tostring(path))
+--end)
+
 mp.register_event("end-file", function(event)
-    if not event.reason ~= "eof" then
+    msg.info("end-file event fired, reason: " .. tostring(event.reason))
+    if event.reason ~= "eof" then
+        msg.info("end-file event is not an EOF, doing nothing")
         return
     end
 
-    local path = mp.get_property("path")
+    msg.info("path=" .. tostring(path))
     if not path then
+        msg.error("Failed to get path, aborting")
         return
     end
+    if path:match("^[%w+.-]+://") then
+        msg.warn("Not a local file, skipping")
+        return
+    end
+    --if path then
+    --    path = utils.join_path(utils.getcwd(), path)
+    --end
 
-    utils.subprocess({
+    msg.warn("Deleting video file due to MPV_DELETE_ON_EOF environment variable being set: " .. tostring(path))
+    local result = utils.subprocess({
         args = { "rm", "-vf", path },
         cancellable = false,
     })
+    msg.info("rm exit status=" .. tostring(result.status))
+    if result.status == 0 then
+        mp.osd_message("Deleted file: " .. tostring(path))
+    end
 end)
