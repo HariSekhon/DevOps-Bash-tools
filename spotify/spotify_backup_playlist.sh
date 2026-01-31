@@ -150,7 +150,8 @@ if liked; then
     mkdir -pv "$liked_metadata_dir"
     liked_added_cache="$liked_metadata_dir/added_at"
     if [ -f "$liked_added_cache" ] &&
-       [ "$liked_added_at" = "$(cat "$liked_added_cache")" ]; then
+       [ "$liked_added_at" = "$(cat "$liked_added_cache")" ] &&
+       is_blank "${SPOTIFY_PLAYLIST_FORCE_DOWNLOAD:-}"; then
         echo -n '=> Latest Added Timestamp Unchanged'
     else
         echo -n "=> URIs "
@@ -257,7 +258,8 @@ else
     if [ -f "$playlist_metadata_snapshot_id_file" ] &&
        [ "$snapshot_id" = "$(cat "$playlist_metadata_snapshot_id_file")" ] &&
        [ -f "$backup_dir/$filename" ] &&
-       [ -f "$backup_dir_spotify/$filename" ]; then
+       [ -f "$backup_dir_spotify/$filename" ] &&
+       is_blank "${SPOTIFY_PLAYLIST_FORCE_DOWNLOAD:-}"; then
         echo -n ' => Snapshot ID unchanged'
     else
         # reset to the last good version to avoid having partial files which will offer bad commits of removed tracks
