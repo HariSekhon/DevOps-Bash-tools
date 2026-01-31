@@ -407,4 +407,4 @@ alias mymenu=fluxmenu
 alias menu=mymenu
 
 # trigger script in ~/.config/mpv/scripts/delete-on-eof.lua to delete a video once it has been completely watched
-alias mpvd="MPV_DELETE_ON_EOF=1 mpv"
+alias mpvd="MPV_DELETE_ON_EOF=1 mpv --speed=2"
