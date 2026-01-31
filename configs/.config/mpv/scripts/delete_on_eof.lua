@@ -16,8 +16,14 @@
 --
 
 -- ========================================================================== --
---
+--           M P V   D e l e t e   o n   P l a y   C o m p l e t i o n
 -- ========================================================================== --
+
+-- I use this to automatically delete videos I only ever intend to watch once
+--
+-- Usage:
+--
+--      MPV_DELETE_ON_EOF=1 mpv file.mp4
 
 local enable = os.getenv("MPV_DELETE_ON_EOF")
 if not enable then
