@@ -45,7 +45,7 @@ mp.register_event("end-file", function(event)
     end
 
     utils.subprocess({
-        args = { "rm", "-f", path },
+        args = { "rm", "-vf", path },
         cancellable = false,
     })
 end)
