@@ -79,9 +79,17 @@ print_output(){
     #    jq -r '.items[] | select(.track.uri) | select((.track.available_markets | length) == 0) | select((.track.album.available_markets | length) == 0)' <<< "$output"
     #else
     if not_blank "${SPOTIFY_CSV:-}"; then
-        jq -r '.items[].track | [([.artists[]?.name] | join(", ")), .name] | @csv'
+        jq -r '
+            .items[].track |
+            [ ( [ .artists[]?.name ] | join(", ") ), .name ] |
+            @csv
+        '
     else
-        jq -r '.items[].track | [([.artists[]?.name] | join(", ")), "-", .name] | @tsv'
+        jq -r '
+            .items[].track |
+            [ ( [ .artists[]?.name ] | join(", ") ), "-", .name ] |
+            @tsv
+        '
     fi <<< "$output" |
     tr '\t' ' ' |
     sed '
