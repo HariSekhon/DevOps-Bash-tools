@@ -129,6 +129,15 @@ playlist_name_to_id(){
 }
 export -f playlist_name_to_id
 
+clean_trackname(){
+    local artist_track="$1"
+    sed '
+        s/^[[:space:]]*-//;
+        s/^[[:space:]]*//;
+        s/[[:space:]]*$//
+    ' <<< "$artist_track"
+}
+
 if liked; then
     echo -n "$playlist_name "
 
@@ -159,8 +168,8 @@ if liked; then
                ! is_local_uri "$uri" ; then
                 die "Invalid Spotify URI returned: '$uri', for track: $track"
             fi
-            echo "$track" >> "$track_tmp"
             echo "$uri" >> "$uri_tmp"
+            clean_trackname "$track" >> "$track_tmp"
         done
         #mv -f "$track_tmp" "$backup_dir/$filename"
         #mv -f "$uri_tmp" "$backup_dir_spotify/$filename"
@@ -266,8 +275,8 @@ else
                ! is_local_uri "$uri" ; then
                 die "Invalid Spotify URI returned: '$uri', for track: $track"
             fi
-            echo "$track" >> "$track_tmp"
             echo "$uri" >> "$uri_tmp"
+            clean_trackname "$track" >> "$track_tmp"
         done
         mv -f "$track_tmp" "$backup_dir/$filename"
         mv -f "$uri_tmp" "$backup_dir_spotify/$filename"
