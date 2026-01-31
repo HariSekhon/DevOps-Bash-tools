@@ -73,7 +73,11 @@ playlist_id="$("$srcdir/spotify_playlist_name_to_id.sh" "$playlist_id" "$@")"
 url_path="/v1/playlists/$playlist_id/tracks?limit=100&offset=$offset"
 
 output(){
-    jq -r '.items[].track | [.uri, ([.artists[]?.name] | join(", ")), "-", .name] | @tsv' <<< "$output" |
+    jq -r '
+        .items[].track |
+        [ .uri, ( [.artists[]?.name] | join(", ") ), "-", .name ] |
+        @tsv
+    ' <<< "$output" |
     sed $'s/\t/|/' |
     tr '\t' ' ' |
     tr '|' '\t' |
