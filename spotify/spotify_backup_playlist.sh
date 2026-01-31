@@ -137,6 +137,7 @@ clean_trackname(){
         s/[[:space:]]*$//
     ' <<< "$artist_track"
 }
+export -f clean_trackname
 
 if liked; then
     echo -n "$playlist_name "
