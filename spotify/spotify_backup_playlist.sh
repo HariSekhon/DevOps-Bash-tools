@@ -37,6 +37,9 @@ Caches metadata locally in .spotify_metadata/ directory. Tracks playlist name to
 and playlist snapshot ID to avoid re-downloading playlists which haven't changed, reducing the number of Spotify API
 calls and therefore the likelihood of hitting HTTP 429 Too Many Requests throttling errors
 
+The environment variable SPOTIFY_PLAYLIST_FORCE_DOWNLOAD can be set to any value to force a playlist to redownload
+and ignore the last downloaded snapshot ID optimization above
+
 If the playlist name has changed Detects the playlist file is committed to Git, then calls:
 
     spotify_rename_playlist_files.sh
