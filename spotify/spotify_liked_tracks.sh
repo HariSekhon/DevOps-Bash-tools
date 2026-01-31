@@ -66,7 +66,7 @@ output(){
         s/^[[:space:]]*-//;
         s/^[[:space:]]*//;
         s/[[:space:]]*$//;
-        /^[[:space:]]*$/d'
+        /^[[:space:]]*$/d;
     '
 }
 
