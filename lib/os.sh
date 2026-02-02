@@ -59,7 +59,6 @@ windows_only(){
 get_os(){
     # shellcheck disable=SC3043
     local os >/dev/null 2>&1 || :
-    os="$(uname -s | tr '[:upper:]' '[:lower:]')"
     if [ -n "${OS_DARWIN:-}" ]; then
         if is_mac; then
             os="$OS_DARWIN"
@@ -68,6 +67,8 @@ get_os(){
         if is_linux; then
             os="$OS_LINUX"
         fi
+    else
+        os="$(uname -s | tr '[:upper:]' '[:lower:]')"
     fi
     echo "$os"
 }
