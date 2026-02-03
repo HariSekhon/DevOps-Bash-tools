@@ -370,8 +370,8 @@ else
         echo "$playlist_name" > "$playlist_metadata_name_file"
         echo "$filename"      > "$playlist_metadata_filename_file"
         echo "$snapshot_id"   > "$playlist_metadata_snapshot_id_file"
+        # try to avoid hitting HTTP 429 rate limiting
+        sleep 0.1
     fi
-    # try to avoid hitting HTTP 429 rate limiting
-    sleep 0.1
 fi
 echo " => $SECONDS secs"
