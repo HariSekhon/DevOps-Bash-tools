@@ -31,8 +31,8 @@ Even resumes downloads after network interruptions or a Control-C and re-run the
 Installs yt-dlp (for downloading) and ffmpeg (for conversions) via OS package manager if not already installed
 
 Automatically tries to upgrade the yt-dlp and ffmpeg packages first as sites like YouTube update their site
-regularly breaking this and requiring a yt-dlp update - you should only install yt-dlp using your OS package manager
-for this to work, otherwise you'll be having to upgrade yt-dlp often yourself manually
+regularly breaking this and requiring a yt-dlp update - you should only install yt-dlp and ffmpeg using your OS
+package manager for this to work, otherwise you'll be having to upgrade yt-dlp often yourself manually
 
 If you run into a error determining a video format to download such as this:
 
