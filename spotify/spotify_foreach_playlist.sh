@@ -83,6 +83,8 @@ while read -r playlist_id snapshot_id playlist; do
     playlist="${playlist//$/\\$}"
     playlist="${playlist//\`/}"
     playlist="${playlist//\\"/\\\\"}"
+    # shellcheck disable=SC1003
+    playlist="${playlist//'/\\'}"
     cmd="${command_template//\{playlist_id\}/$playlist_id}"
     cmd="${cmd//\{playlist\}/$playlist}"
     cmd="${cmd//\{snapshot_id\}/$snapshot_id}"
