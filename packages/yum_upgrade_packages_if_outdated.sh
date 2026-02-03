@@ -44,12 +44,21 @@ help_usage "$@"
 rpm -q findutils &>/dev/null ||
 yum install -y findutils
 
-upgradeable_packages="$(yum check-update)"
+# quicker and simpler to just let yum/dnf determine that it's not already installed
+#
+# dnf outputs something like:
+#
+#   No match for argument: wget
+#   No match for argument: nonexistentpackage
+#
+# regardless of whether there is a potential package upsteam like wget, or not like nonexistentpackage
+#
+#upgradeable_packages="$(yum check-update)"
 
 process_package_args "$@" |
-while read -r package; do
-    if echo "$upgradeable_packages" | grep -Eq "^$package(.|[[:space:]])"; then
-        echo "$package"
-    fi
-done |
+#while read -r package; do
+#    if echo "$upgradeable_packages" | grep -Eq "^$package(.|[[:space:]])"; then
+#        echo "$package"
+#    fi
+#done |
 xargs --no-run-if-empty yum upgrade -y
