@@ -125,6 +125,9 @@ dle(){
         echo "Switching to $HOME/Downloads/YouTube"
         mkdir -p -v ~/Downloads/YouTube
         cd ~/Downloads/YouTube || return 1
+        if [ -f .envrc ]; then
+            eval "$(direnv export bash)"
+        fi
     fi
     while true; do
         if BACKGROUND_VIDEO=1 youtube_download_video.sh "$@"; then
