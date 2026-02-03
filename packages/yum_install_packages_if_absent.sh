@@ -39,6 +39,8 @@ usage_args="<packages>"
 
 help_usage "$@"
 
+yum install -y xargs
+
 process_package_args "$@" |
 "$srcdir/rpms_filter_not_installed.sh" |
 rpms_filter_not_provided |
