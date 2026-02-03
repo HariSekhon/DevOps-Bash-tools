@@ -4382,4 +4382,4 @@ iOSInjectionProject/
 # for DevOps-Bash-tools packages/*.sh scripts
 ## needed to unmask directory ignore above otherwise !packages/*packages*.sh isn't respected
 !packages/
-!packages/*packages*.sh
+!packages/*.sh
