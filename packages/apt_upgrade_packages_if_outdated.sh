@@ -45,6 +45,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt update
 
+# unlike other distros, it's faster and easier to just run the upgrade on the packages and let apt figure it out
 #upgradeable_packages="$(apt list --upgradable)"
 
 process_package_args "$@" |
